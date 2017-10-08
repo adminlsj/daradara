@@ -1,0 +1,200 @@
+
+// Fonts
+@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
+
+// Variables
+@import "variables";
+
+// Dropdown
+@import "dropdown";
+
+// Vertical Tab
+@import "vertical_tab";
+
+// Horizontal Tab
+@import "horizontal_tab";
+
+// Register
+@import "register";
+
+// Footer
+@import "footer";
+
+// Order Form
+@import "order_form";
+
+// Bootstrap
+@import "~bootstrap-sass/assets/stylesheets/bootstrap";
+
+body {
+    background-color: white; 
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+input[type=file] {
+    display:none;    
+}
+
+.btn-info {
+    background-color: #d84b6b !important;
+    border-color: #d84b6b !important;
+    border-radius: 200px !important;
+    font-weight: 300;
+    transition: 0.3s;
+}
+
+.btn-primary {
+    font-weight: 300;
+    transition: 0.3s;
+}
+
+.btn-info:hover, .btn-info:focus, .btn-info:active, .btn-info.active, .open>.dropdown-toggle.btn-info {
+    background-color: #db5d79 !important;
+    border-color: #db5d79 !important;
+    box-shadow: 0 2px 6px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+}
+
+.carousel-control.left, .carousel-control.right {
+    background-image: none
+}
+
+.owl-carousel {
+	margin: 0;
+}
+
+.owl-carousel .owl-nav [class*=owl-] {
+	background: rgba(0, 0, 0, 0.5);
+	color: rgba(255, 255, 255, 0.9);
+	background-color: transparent;
+	line-height: 30px;
+	text-align: center;
+	border-radius: 20px;
+}
+
+.owl-carousel .owl-nav [class*=owl-]:hover {
+	background-color: transparent;
+	color: white;
+}
+
+.owl-carousel .owl-prev,
+.owl-carousel .owl-next {
+	position: absolute;
+	top: 40%;
+	height: 30px;
+}
+
+.owl-carousel .owl-prev {
+	left: 0px;
+}
+
+.owl-carousel .owl-next {
+	right: 0px;
+}
+
+.card-order {
+    background-color: white;
+    border-radius: 3px;
+}
+
+.card-panel {
+    margin-top: 25px;
+    background-color: white;
+    border: 1px solid #E6E6E6;
+    width: 100%;
+}
+
+.card-panel h5 {
+    font-weight: 300;
+}
+
+.card-panel-title {
+    font-size: 15px;
+    font-weight: 300;
+}
+
+.card-custom {
+    margin-top: 25px;
+    background-color: white;
+    width: 100%;
+    padding: 5px 15px 5px 15px;
+    box-shadow: 0 2px 6px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+}
+
+.card-custom h5 {
+    font-weight: 300;
+}
+
+.order-summary-content h4 {
+    font-size: 15px;
+    font-weight: 300;
+}
+
+.order-product-section .col-md-1 h4 {
+    text-align: right;
+}
+
+#left {
+    width: 225px;
+    height: 100%;
+    position: fixed;
+    border-right: 1px solid #E6E6E6;
+}
+
+#right {
+    width: calc(100% - 225px);
+    height: auto;
+    position: absolute;
+    right: 0;
+}
+
+.sidenav > div > a {
+    color: grey;
+}
+
+.sidenav > div, .sidenav > div > a:hover, .sidenav > div > a:focus {
+    color: black;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: .1rem;
+    text-decoration: none;
+    line-height: 35px;
+}
+
+a > i {
+    margin-top: 4px;
+}
+
+.sidenav div.active {
+    background-color: #E6E6E6;
+}
+
+.sidenav div.active > a {
+    color: black;
+}
+
+.category-tab > button {
+    padding: 0;
+}
+
+#order-img
+{    
+    width:100%;
+    height: 100%;
+    position:relative;
+}
+
+#img-text
+{
+    z-index:1000;
+    position:absolute;    
+    color:#d84b6b;
+    font-size:24px;
+    font-weight:bold;
+    right:0px;
+    bottom:37px;
+}
