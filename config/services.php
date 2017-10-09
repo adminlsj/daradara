@@ -38,6 +38,6 @@ return [
     'facebook' => [
         'client_id' => '1931467720459909',
         'client_secret' => 'a0e31dde7768bd4cb76ac7502e1dc55e',
-        'redirect' => 'www.freeriderhk.com/auth/facebook/callback',
+        'redirect' => 'http://www.freeriderhk.com/auth/facebook/callback',
     ],
 ];
