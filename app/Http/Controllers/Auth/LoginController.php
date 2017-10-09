@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\User;
+use App\Avatar;
 use Auth;
 use Socialite;
 
@@ -81,7 +82,7 @@ class LoginController extends Controller
             return $authUser;
         }
 
-        return User::create([
+        $localUser = User::create([
             'name'     => $user->name,
             'email'    => $user->email,
             'provider' => $provider,
@@ -90,10 +91,12 @@ class LoginController extends Controller
         ]);
         
         Avatar::create([
-            'user_id' => $user->id,
+            'user_id' => $localUser->id,
             'filename' => 'default_freerider_profile_pic',
             'mime' => 'image',
             'original_filename' => 'default',
         ]);
+
+        return $localUser;
     }
 }
