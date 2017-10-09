@@ -77,7 +77,8 @@ class LoginController extends Controller
      */
     public function findOrCreateUser($user, $provider)
     {
-        $authUser = User::where('provider_id', (string) $user->id)->first();
+        $fb_id = (string) $user->id;
+        $authUser = User::where('provider_id', $fb_id)->first();
         if ($authUser) {
             return $authUser;
         }
@@ -86,7 +87,7 @@ class LoginController extends Controller
             'name'     => $user->name,
             'email'    => $user->email,
             'provider' => $provider,
-            'provider_id' => (string) $user->id,
+            'provider_id' => $fb_id,
             'password' => bcrypt(uniqid())
         ]);
         
