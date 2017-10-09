@@ -17,6 +17,8 @@ Route::get('/contact', 'HomeController@contact');
 Route::post('/sendMail/{status}', 'HomeController@sendMail');
 
 Auth::routes();
+Route::get('auth/{provider}', 'Auth\LoginController@redirectToProvider');
+Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
 
 Route::resource('user', 'UserController');
 Route::post('users/{user}/storeAvatar', 'UserController@storeAvatar');
