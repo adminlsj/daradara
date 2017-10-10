@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div id="myCarousel" class="carousel slide" data-ride="carousel" style="margin-top: -25px; margin-bottom: 25px">
+<div id="myCarousel" class="carousel slide" data-ride="carousel" style="margin-top: -25px; margin-bottom: 25px; width: 100%">
 	<!-- Indicators -->
 	<ol class="carousel-indicators">
 		<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -12,11 +12,11 @@
 	<!-- Wrapper for slides -->
 	<div class="carousel-inner">
 		<div class="item active">
-			<img src="https://s3-us-west-2.amazonaws.com/freerider/system/intro/2.jpg" alt="Los Angeles">
+			<img style="width:100%" src="https://s3-us-west-2.amazonaws.com/freerider/system/intro/2.jpg" alt="Los Angeles">
 		</div>
 
 		<div class="item">
-			<img src="https://s3-us-west-2.amazonaws.com/freerider/system/intro/1.jpg" alt="Chicago">
+			<img style="width:100%" src="https://s3-us-west-2.amazonaws.com/freerider/system/intro/1.jpg" alt="Chicago">
 		</div>
 	</div>
 
