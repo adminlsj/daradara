@@ -45,9 +45,9 @@
 
                     <div class="register-right">
                         <span class="loginwith">Sign in with<br />social network</span>
-                        <button class="social-signin facebook"><a style="color: white" href="{{ url('/auth/facebook') }}">Log in with facebook</a></button>
-                        <button class="social-signin twitter">Log in with Twitter</button>
-                        <button class="social-signin google">Log in with Google+</button>
+                        <a class="btn social-signin facebook" href="{{ url('/auth/facebook') }}">Log in with facebook</a>
+                        <a class="btn social-signin twitter">Log in with Twitter</a>
+                        <a class="btn social-signin google">Log in with Google+</a>
                     </div>
 
                     <div class="or">
