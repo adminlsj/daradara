@@ -35,7 +35,7 @@
 						</select>
 					</div>
 					<div class="col-md-4">
-					    <input type="date" value="{{ Carbon\Carbon::tomorrow()->format('Y-m-d') }}" id="endDate" name="endDate" required>
+					    <input placeholder="此日期前交收" id="endDate" name="endDate" class="textbox-n" type="text" onfocus="(this.type='date')" required> 
 					</div>
 				</div>
 

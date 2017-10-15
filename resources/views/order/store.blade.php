@@ -17,7 +17,7 @@
         @include('layouts.nav')
 
         <div class="container" style="margin-top: 70px">
-            <div class="card-panel" style="margin-bottom: -10px; height: 625px">
+            <div class="card-panel" style="margin-bottom: -10px; height: 665px; border-width: 0px">
                 <div>
                     <div class="col-md-12">
                         <h3>訂單詳情</h3>
@@ -64,7 +64,7 @@
                     <h4 style="line-height: 25px; margin-left: 50px">商品訂購</h4>
                 </div>
 
-                <div class="order-summary-content" style="margin-top: 60px;">
+                <div class="order-summary-content container" style="margin-top: 60px; width: 90%">
                     <div class="card-panel container order-product-section" style="margin-top: 15px; padding-top:5px; padding-bottom: 5px; border-radius: 2px;">
                         <div class="col-md-1">
                             <h4 style="text-align: center">#</h4>
@@ -106,25 +106,23 @@
                     </div>
                 </div>
 
-                <div class="col-md-12" style="margin-top: 7.5px">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <form style="text-align: left" action="{{ route('order.edit', ['order' => $order]) }}" method="GET">
-                                <button style="width: 150px; border-radius: 200px; line-height: 30px" type="submit" class="btn btn-primary">更改訂單</button>
-                                <br><br>
-                            </form>
-                        </div>
-                        <div class="col-md-6">
-                            <form style="text-align: right" id="purchaseForm" action="{{ route('order.checkout', ['order' => $order]) }}" method="POST">
-                                {{ csrf_field() }}
-                                <input type="hidden" name="stripeToken" id="stripeToken">
-                                <input type="hidden" name="stripeEmail" id="stripeEmail">
-                                <input type="hidden" name="quantity" value="1" id="quantity">
-                                <button style="width: 150px; border-radius: 0; line-height: 30px" id="purchaseBtn" type="submit" class="btn btn-info">確認購買</button>
-                                <br><br>
-                            </form>
-                        </div> 
+                <div class="row" style="padding-top: 20px">
+                    <div class="col-md-6">
+                        <form style="text-align: right" action="{{ route('order.edit', ['order' => $order]) }}" method="GET">
+                            <button style="width: 150px; border-radius: 200px; line-height: 30px" type="submit" class="btn btn-primary">修改訂單</button>
+                            <br><br>
+                        </form>
                     </div>
+                    <div class="col-md-6">
+                        <form style="text-align: left" id="purchaseForm" action="{{ route('order.checkout', ['order' => $order]) }}" method="POST">
+                            {{ csrf_field() }}
+                            <input type="hidden" name="stripeToken" id="stripeToken">
+                            <input type="hidden" name="stripeEmail" id="stripeEmail">
+                            <input type="hidden" name="quantity" value="1" id="quantity">
+                            <button style="width: 150px; border-radius: 0; line-height: 30px" id="purchaseBtn" type="submit" class="btn btn-info">確認購買</button>
+                            <br><br>
+                        </form>
+                    </div> 
                 </div>
             </div>
             <br><br><br>

@@ -216,8 +216,8 @@ class OrderController extends Controller
         $orders = Order::where('is_payed', true);
 
         if (request('name') != null) {
-            $sName = request('name');
-            $orders = $orders->where('name', 'like', '%'.$sName.'%');
+            $sName = strtolower(request('name'));
+            $orders = $orders->where('name', 'ILIKE', '%'.$sName.'%');
         }
 
         if (request('category') != null) {

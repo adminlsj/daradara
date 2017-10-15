@@ -44,7 +44,7 @@
 						<input type="hidden" name="endDate" id="endDate" value="{{ Carbon\Carbon::today()->addDays(10)->format('Y-m-d') }}">
 						<input type="hidden" name="copyOrderId" id="copyOrderId" value="{{ $order->id }}">
 
-						<button type="submit" style="border-radius: 0px !important; font-size:15px" class="btn btn-info btn-lg btn-block">我也想要</button>
+						<button type="submit" style="border-radius: 2px 2px 0 0 !important; font-size:15px" class="btn btn-info btn-lg btn-block">我也想要</button>
 					</form>
 
 					<form action="{{ route('tran.store') }}" method="POST" enctype="multipart/form-data">
@@ -53,7 +53,7 @@
 						@if (!$order->is_payed || $order->trans || $order->end_date < Carbon\Carbon::today())
 							<button type="submit" style="border-radius: 0; font-size:15px" class="btn btn-primary btn-outline btn-lg btn-block" disabled='true'>接單</button>
 						@else
-				            <button type="submit" style="border-radius: 0; font-size:15px" class="btn btn-primary btn-outline btn-lg btn-block">接單</button>
+				            <button type="submit" style="border-radius: 0 0 2px 2px; font-size:15px" class="btn btn-primary btn-outline btn-lg btn-block">接單</button>
 						@endif
 					</form>
 				</div>

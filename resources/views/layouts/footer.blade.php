@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-3">
-                <h2 class="logo"><a href="#"> LOGO </a></h2>
+                <h2 class="logo"><a href="#">FreeRider </a></h2>
             </div>
             <div class="col-sm-2">
                 <h5>Get started</h5>
