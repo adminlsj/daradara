@@ -33,6 +33,6 @@ class OrderAccepted extends Mailable
      */
     public function build()
     {
-        return $this->markdown('mail.orderAccepted');
+        return $this->subject('我們正在光速採購您的訂單！')->markdown('mail.orderAccepted');
     }
 }

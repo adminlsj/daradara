@@ -33,6 +33,6 @@ class OrderNew extends Mailable
      */
     public function build()
     {
-        return $this->markdown('mail.orderNew');
+        return $this->subject('我們已收到您的訂單和款項')->markdown('mail.orderNew');
     }
 }

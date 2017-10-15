@@ -33,6 +33,6 @@ class OrderCancelled extends Mailable
      */
     public function build()
     {
-        return $this->markdown('mail.orderCancelled');
+        return $this->subject('您的訂單已被取消')->markdown('mail.orderCancelled');
     }
 }

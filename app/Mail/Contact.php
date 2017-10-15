@@ -34,6 +34,6 @@ class Contact extends Mailable
      */
     public function build()
     {
-        return $this->view('mail.contact');
+        return $this->subject('我們已收到您查詢')->view('mail.contact');
     }
 }
