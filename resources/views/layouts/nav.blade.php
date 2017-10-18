@@ -9,22 +9,26 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-
-            <!-- Branding Image -->
-            <a class="navbar-brand" href="{{ url('/') }}">
-                {{ config('app.name', 'Laravel') }}
-            </a>
         </div>
 
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav">
-                <form class="navbar-form" action="{{ route('order.search') }}" method="GET">
-                    <div class="form-group">
-                        <input style="box-shadow: none; border-radius: 2px; font-weight: 300" name="name" type="text" class="form-control" placeholder="搜索">
-                    </div>
-                    <button style="box-shadow: none; border-radius: 2px;" type="submit" class="btn btn-default form-control"><i class="glyphicon glyphicon-search"></i></button>
-                </form>
+                <li>
+                    <a href="{{ url('/') }}" style="margin-right: -20px">
+                        <img src="https://s3-us-west-2.amazonaws.com/freerider/avatars/thumbnails/default_freerider_profile_pic.jpg" style="border-radius: 2px; margin-top: -10px; margin-bottom: -8px" width="35px" height="35px">
+                    </a>
+                </li>
+                <li>
+                    <a style="font-size: 25px; font-weight: 300" href="{{ url('/') }}">{{ config('app.name', 'Laravel') }}</a>
+                <li>
+                    <form class="navbar-form" action="{{ route('order.search') }}" method="GET">
+                        <div class="form-group">
+                            <input style="box-shadow: none; border-radius: 2px; font-weight: 300" name="name" type="text" class="form-control" placeholder="搜索">
+                        </div>
+                        <button style="box-shadow: none; border-radius: 2px;" type="submit" class="btn btn-default form-control"><i class="glyphicon glyphicon-search"></i></button>
+                    </form>
+                </li>
             </ul>
 
             <!-- Right Side Of Navbar -->
