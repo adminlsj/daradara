@@ -119,7 +119,7 @@
 			dots: false,
 			lazyLoad: true,
 			autoplay: false,
-			navText : ['<i class="material-icons" style="font-size:36px">keyboard_arrow_left</i>','<i class="material-icons" style="font-size:36px">keyboard_arrow_right</i>']
+			navText : ['<i class="material-icons" style="font-size:36px;color:#AAA;">keyboard_arrow_left</i>','<i class="material-icons" style="font-size:36px;color:#AAA;">keyboard_arrow_right</i>']
 		});
 	});
 </script>
