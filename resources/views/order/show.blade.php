@@ -51,9 +51,31 @@
 						{{ csrf_field() }}
 						<input name="order_id" type="hidden" value="{{ $order->id }}">
 						@if (!$order->is_payed || $order->trans || $order->end_date < Carbon\Carbon::today())
-							<button type="submit" style="border-radius: 0; font-size:15px" class="btn btn-primary btn-outline btn-lg btn-block" disabled='true'>接單</button>
+							<button type="button" style="border-radius: 0; font-size:15px" class="btn btn-primary btn-outline btn-lg btn-block" disabled='true'>接單</button>
 						@else
-				            <button type="submit" style="border-radius: 0 0 2px 2px; font-size:15px" class="btn btn-primary btn-outline btn-lg btn-block">接單</button>
+				            <!-- Trigger the modal with a button -->
+				            <button type="button" style="border-radius: 0 0 2px 2px; font-size:15px" class="btn btn-primary btn-outline btn-lg btn-block" data-toggle="modal" data-target="#acceptModal">接單</button>
+							<!-- Modal -->
+							<div id="acceptModal" class="modal fade" role="dialog">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal">&times;</button>
+											<h4 class="modal-title">接單說明</h4>
+										</div>
+										<div class="modal-body">
+											<p>1. 買家已預先支付訂單款項，並會在交易完成後由我們轉帳至您的帳戶，以此保障雙方利益</p>
+											<p>2. 請確保您可在訂單要求的收貨日期內交收，之後再接單。</p>
+											<p>3. 接單後，此訂單將不能被取消。</p>
+											<br>
+										</div>
+										<div class="modal-footer">
+											<button type="button" style="border-radius: 2px;" class="btn btn-default" data-dismiss="modal">返回</button>
+											<button type="submit" style="border-radius: 2px !important" class="btn btn-info">確認接單</button>
+										</div>
+									</div>
+								</div>
+							</div>
 						@endif
 					</form>
 				</div>

@@ -119,7 +119,30 @@
                             <input type="hidden" name="stripeToken" id="stripeToken">
                             <input type="hidden" name="stripeEmail" id="stripeEmail">
                             <input type="hidden" name="quantity" value="1" id="quantity">
-                            <button style="width: 150px; border-radius: 0; line-height: 30px" id="purchaseBtn" type="submit" class="btn btn-info">確認購買</button>
+                            <!-- Trigger the modal with a button -->
+                            <button style="width: 150px; border-radius: 0; line-height: 30px" type="button" class="btn btn-info" data-toggle="modal" data-target="#payModal">確認購買</button>
+                            <!-- Modal -->
+                            <div id="payModal" class="modal fade" role="dialog">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title">落單說明</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>1. 確認購買後，將跳轉至付款界面。</p>
+                                            <p>2. 您所支付的金額只會在交易完成後，轉帳至賣家，以此保障雙方利益。</p>
+                                            <p>3. 付款完成後，我們將會發送訂單的收據至您的電郵地址。</p>
+                                            <p>4. 您可隨時取消訂單，並獲得全額退款。</p>
+                                            <br>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" style="border-radius: 2px;" class="btn btn-default" data-dismiss="modal">返回</button>
+                                            <button id="purchaseBtn" type="submit" style="border-radius: 2px !important" class="btn btn-info">立即付款</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <br><br>
                         </form>
                     </div> 
@@ -142,6 +165,7 @@
             });
 
             document.getElementById('purchaseBtn').addEventListener('click', function(e) {
+                $('#payModal').modal('hide');
                 // Open Checkout with further options:
                 var quantity = 1;
                 handler.open({
