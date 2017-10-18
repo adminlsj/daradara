@@ -8955,6 +8955,7 @@ input[type=file] {
   font-weight: 300;
   -webkit-transition: 0.3s;
   transition: 0.3s;
+  border-width: 0 !important;
 }
 
 .btn-info:hover,
