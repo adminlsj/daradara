@@ -46,9 +46,9 @@
 					</div>
 				</div>
 
-				<div class="row">
+				<div class="row" style="margin-top: 5px">
 					<div class="col-md-12">
-					    <input type="text" value="{{ old ('description', $order->description) }}" id="description" name="description" placeholder="詳細描述" required>
+					    <textarea style="width: 100%; padding: 10px; border-color: #AAA" type="text" id="description" name="description" placeholder="詳細描述" rows="5" required>{{ old ('description', $order->description) }}</textarea>
 					</div>
 				</div>
 				<br>

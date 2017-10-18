@@ -45,9 +45,9 @@
 					</div>
 				</div>
 
-				<div class="row">
+				<div class="row" style="margin-top: 5px">
 					<div class="col-md-12">
-					    <input type="text" value="" id="description" name="description" placeholder="詳細描述" required>
+					    <textarea style="width: 100%; padding: 10px; border-color: #AAA" type="text" value="" id="description" name="description" placeholder="詳細描述" rows="5" required></textarea>
 					</div>
 				</div>
 				<br>
