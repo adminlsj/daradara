@@ -17,14 +17,16 @@ class HomeController extends Controller
     public function index()
     {
         //auth()->loginUsingId(1);
-        $orders = Order::where('is_payed', 1);
         $makeups = Order::where(['is_payed' => 1, 'category' => 'makeup'])->get();
         $foods = Order::where(['is_payed' => 1, 'category' => 'food'])->get();
-        $fashions = Order::where(['is_payed' => 1, 'category' => 'fashion'])->get();
-        $electronics = Order::where(['is_payed' => 1, 'category' => 'electronic'])->get();
-        $entertainments = Order::where(['is_payed' => 1, 'category' => 'entertainment'])->get();
+        $bags = Order::where(['is_payed' => 1, 'category' => 'bag'])->get();
+        $accessories = Order::where(['is_payed' => 1, 'category' => 'accessories'])->get();
+        $watches = Order::where(['is_payed' => 1, 'category' => 'watch'])->get();
         $others = Order::where(['is_payed' => 1, 'category' => 'others'])->get();
-        return view('layouts.home', compact('orders', 'makeups', 'foods', 'fashions', 'electronics', 'entertainments', 'others'));
+
+        $loopOrders = ['makeup' => $makeups, 'food' => $foods, 'bag' => $bags, 'accessories' => $accessories, 'watch' => $watches, 'others' => $others];
+
+        return view('layouts.home', compact('orders', 'loopOrders'));
     }
 
     public function contact()

@@ -19,61 +19,20 @@
     <div class="row" style="margin-top: 70px;">
     	<div class="col-md-12">
 			<div class="tab" style="border-width: 0px; margin-bottom: -10px">
-				<button style="text-align: center;" class="tablinks" onclick="openStatus(event, 'makeup')" id="defaultOpen">{{ App\Order::$category['makeup'] }}</button>
-				<button style="text-align: center;" class="tablinks" onclick="openStatus(event, 'food')">{{ App\Order::$category['food'] }}</button>
-				<button style="text-align: center;" class="tablinks" onclick="openStatus(event, 'fashion')">{{ App\Order::$category['fashion'] }}</button>
-				<button style="text-align: center;" class="tablinks" onclick="openStatus(event, 'electronic')">{{ App\Order::$category['electronic'] }}</button>
-				<button style="text-align: center;" class="tablinks" onclick="openStatus(event, 'entertainment')">{{ App\Order::$category['entertainment'] }}</button>
-				<button style="text-align: center;" class="tablinks" onclick="openStatus(event, 'others')">{{ App\Order::$category['others'] }}</button>
+				@foreach (App\Order::$category as $key => $element)
+					<button style="text-align: center;" class="tablinks" onclick="openStatus(event, '{{ $key }}')" {{ $key == 'makeup' ? "id=defaultOpen" : '' }}>{{ App\Order::$category[$key] }}</button>
+				@endforeach
 			</div>
 
-			<div id="makeup" class="tabcontent" style="padding-top: 10px; border-width: 0px">
-				<div class="owl-carousel owl-theme">
-					@foreach ($makeups as $order)
-			            @include('order.single-order', ['radius' => 'border-bottom-left-radius: 2px; border-bottom-right-radius: 2px;'])
-			        @endforeach
-			    </div>
-			</div>
-
-			<div id="food" class="tabcontent" style="padding-top: 10px; border-width: 0px">
-				<div class="owl-carousel owl-theme">
-					@foreach ($foods as $order)
-			            @include('order.single-order', ['radius' => 'border-bottom-left-radius: 2px; border-bottom-right-radius: 2px;'])
-			        @endforeach
-			    </div>
-			</div>
-
-			<div id="fashion" class="tabcontent" style="padding-top: 10px; border-width: 0px">
-				<div class="owl-carousel owl-theme">
-					@foreach ($fashions as $order)
-			            @include('order.single-order', ['radius' => 'border-bottom-left-radius: 2px; border-bottom-right-radius: 2px;'])
-			        @endforeach
-			    </div>
-			</div>
-
-			<div id="electronic" class="tabcontent" style="padding-top: 10px; border-width: 0px">
-				<div class="owl-carousel owl-theme">
-					@foreach ($electronics as $order)
-			            @include('order.single-order', ['radius' => 'border-bottom-left-radius: 2px; border-bottom-right-radius: 2px;'])
-			        @endforeach
-			    </div>
-			</div>
-
-			<div id="entertainment" class="tabcontent" style="padding-top: 10px; border-width: 0px">
-				<div class="owl-carousel owl-theme">
-					@foreach ($entertainments as $order)
-			            @include('order.single-order', ['radius' => 'border-bottom-left-radius: 2px; border-bottom-right-radius: 2px;'])
-			        @endforeach
-			    </div>
-			</div>
-
-			<div id="others" class="tabcontent" style="padding-top: 10px; border-width: 0px">
-				<div class="owl-carousel owl-theme">
-					@foreach ($others as $order)
-			            @include('order.single-order', ['radius' => 'border-bottom-left-radius: 2px; border-bottom-right-radius: 2px;'])
-			        @endforeach
-			    </div>
-			</div>
+			@foreach (App\Order::$category as $key => $element)
+				<div id="{{ $key }}" class="tabcontent" style="padding-top: 10px; border-width: 0px">
+					<div class="owl-carousel owl-theme">
+						@foreach ($loopOrders[$key] as $order)
+				            @include('order.single-order', ['radius' => 'border-bottom-left-radius: 2px; border-bottom-right-radius: 2px;'])
+				        @endforeach
+				    </div>
+				</div>
+			@endforeach
 		</div>
 	</div>
 

@@ -11,7 +11,7 @@ class Order extends Model
         'user_id', 'name', 'price', 'description', 'category', 'country', 'link', 'end_date', 'is_payed', 'is_cancelled'
     ];
 
-    public static $category = ['makeup' => '美容', 'food' => '食物', 'fashion' => '潮流', 'electronic' => '電器', 'entertainment' => '娛樂', 'others' => '其他'];
+    public static $category = ['makeup' => '美容彩妝', 'food' => '環球小食', 'bag' => '手袋銀包', 'accessories' => '潮流配飾', 'watch' => '手錶眼鏡', 'others' => '其他'];
 
     public static $country = ['japan' => '日本', 'korea' => '韓國', 'taiwan' => '台灣', 'usa' => '美國', 'singapore' => '新加坡', 'france' => '法國'];
 
