@@ -36,7 +36,7 @@
 		</div>
 	</div>
 
-	<div class="row" style="margin-top: 10px">
+	<div class="row" style="margin-top: 15px">
 		<div class="col-md-4 col-md-offset-4">
 		    <form action="{{ route('order.search') }}" method="GET">
 		        <button type="submit" class="btn btn-info btn-outline btn-lg btn-block" style="border-radius: 0; font-size: 15px;">查看所有分類</button>
