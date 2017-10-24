@@ -9,7 +9,7 @@
 					<div class="order-tab">
 						@foreach ($order->orderImgs as $image)
 							<button class="tablinks" onclick="openCity(event, '{{ $image->filename }}')" {{ $image->filename == $order->orderImgs->first()->filename ? "id=defaultOpen" : '' }}>
-								<img class="img-responsive" src="https://s3-us-west-2.amazonaws.com/freerider/orderImgs/originals/{{ $image->order_id }}/{{ $image->filename }}.jpg" alt="First slide">
+								<img class="img-responsive" src="https://s3-us-west-2.amazonaws.com/freerider/orderImgs/thumbnails/{{ $image->order_id }}/{{ $image->filename }}.jpg" alt="First slide">
 							</button>
 						@endforeach
 					</div>

@@ -129,6 +129,7 @@ div.order-tab button.active {
   height: 100%;
   border-radius: 2px;
   border-top-left-radius: 0px;
+  padding-left: 10px;
 }
 
 .nav-tabs {
