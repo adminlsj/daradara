@@ -4,7 +4,7 @@
 <div class="container" style="width: 90%">
 	<div class="row">
 		<div class="col-md-8">
-			<div class="row">
+			<div class="row" style="margin-top: 20px">
 				<div class="col-md-12">
 					<div class="order-tab">
 						@foreach ($order->orderImgs as $image)
@@ -15,14 +15,12 @@
 					</div>
 
 					@foreach ($order->orderImgs as $image)
-						<div id="{{ $image->filename }}" class="tabcontent">
+						<div id="{{ $image->filename }}" class="order-tabcontent">
 							<img style="border-radius: 2px; border-top-left-radius: 0px" class="img-responsive" src="https://s3-us-west-2.amazonaws.com/freerider/orderImgs/originals/{{ $image->order_id }}/{{ $image->filename }}.jpg" alt="First slide">
 						</div>
 					@endforeach
 				</div>
 			</div>
-
-			<br>
 
 			<div class="row">
 				<div class="col-md-12">
@@ -136,7 +134,7 @@
 	    var i, tabcontent, tablinks;
 
 	    // Get all elements with class="tabcontent" and hide them
-	    tabcontent = document.getElementsByClassName("tabcontent");
+	    tabcontent = document.getElementsByClassName("order-tabcontent");
 	    for (i = 0; i < tabcontent.length; i++) {
 	        tabcontent[i].style.display = "none";
 	    }
