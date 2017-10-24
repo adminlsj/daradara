@@ -4,7 +4,7 @@
 <div class="container" style="width: 90%">
 	<div class="row">
     	<div class="col-md-8">
-			<h3 style="color: grey; font-weight: 300">等待中的訂單</h3>
+			<h3 style="color: grey; font-weight: 300">填寫訂單詳情</h3>
 			<hr>
 			<form class="order-form" action="{{ route('order.store') }}" method="POST" enctype="multipart/form-data">
 				{{ csrf_field() }}
