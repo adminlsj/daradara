@@ -1,0 +1,37 @@
+/* Style the tab */
+div.order-tab {
+    float: left;
+    background-color: white;
+    width: 10%;
+    height: 100%;
+    z-index: 99999;
+}
+
+/* Style the buttons inside the tab */
+div.order-tab button {
+    display: block;
+    background-color: inherit;
+    color: black;
+    width: 100%;
+    border: solid #e0e0e0 1px;
+    outline: none;
+    text-align: left;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-bottom: 10px;
+}
+
+div.order-tab button:hover {
+    border-color: #b7b7b7;
+}
+
+div.order-tab button.active {
+    border-color: #b7b7b7;
+}
+
+.tabcontent {
+    float: left;
+    border: 1px solid #e0e0e0;
+    width: 90%;
+    height: 100%;
+}

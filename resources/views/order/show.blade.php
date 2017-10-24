@@ -6,15 +6,23 @@
 		<div class="col-md-8">
 			<div class="row">
 				<div class="col-md-12">
-					<div class="owl-carousel owl-theme">
+					<div class="order-tab">
 						@foreach ($order->orderImgs as $image)
-							<div>
-						        <img style="border-radius: 2px" class="img-responsive" src="https://s3-us-west-2.amazonaws.com/freerider/orderImgs/originals/{{ $image->order_id }}/{{ $image->filename }}.jpg" alt="First slide">
-					        </div>
-					    @endforeach
+							<button class="tablinks" onclick="openCity(event, '{{ $image->filename }}')" {{ $image->filename == $order->orderImgs->first()->filename ? "id=defaultOpen" : '' }}>
+								<img style="border-radius: 2px" class="img-responsive" src="https://s3-us-west-2.amazonaws.com/freerider/orderImgs/originals/{{ $image->order_id }}/{{ $image->filename }}.jpg" alt="First slide">
+							</button>
+						@endforeach
 					</div>
+
+					@foreach ($order->orderImgs as $image)
+						<div id="{{ $image->filename }}" class="tabcontent">
+							<img style="border-radius: 2px" class="img-responsive" src="https://s3-us-west-2.amazonaws.com/freerider/orderImgs/originals/{{ $image->order_id }}/{{ $image->filename }}.jpg" alt="First slide">
+						</div>
+					@endforeach
 				</div>
 			</div>
+
+			<br>
 
 			<div class="row">
 				<div class="col-md-12">
@@ -122,6 +130,29 @@
 			navText : ['<i class="material-icons" style="font-size:36px;color:#AAA;">keyboard_arrow_left</i>','<i class="material-icons" style="font-size:36px;color:#AAA;">keyboard_arrow_right</i>']
 		});
 	});
+
+	function openCity(evt, cityName) {
+	    // Declare all variables
+	    var i, tabcontent, tablinks;
+
+	    // Get all elements with class="tabcontent" and hide them
+	    tabcontent = document.getElementsByClassName("tabcontent");
+	    for (i = 0; i < tabcontent.length; i++) {
+	        tabcontent[i].style.display = "none";
+	    }
+
+	    // Get all elements with class="tablinks" and remove the class "active"
+	    tablinks = document.getElementsByClassName("tablinks");
+	    for (i = 0; i < tablinks.length; i++) {
+	        tablinks[i].className = tablinks[i].className.replace(" active", "");
+	    }
+
+	    // Show the current tab, and add an "active" class to the link that opened the tab
+	    document.getElementById(cityName).style.display = "block";
+	    evt.currentTarget.className += " active";
+	}
+
+	document.getElementById("defaultOpen").click();
 </script>
 
 @endsection
