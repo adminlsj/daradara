@@ -60,18 +60,1258 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 9);
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
 /******/ })
 /************************************************************************/
-/******/ ([
-/* 0 */
+/******/ ({
+
+/***/ "./node_modules/axios/index.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__("./node_modules/axios/lib/axios.js");
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/adapters/xhr.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var bind = __webpack_require__(4);
-var isBuffer = __webpack_require__(17);
+var utils = __webpack_require__("./node_modules/axios/lib/utils.js");
+var settle = __webpack_require__("./node_modules/axios/lib/core/settle.js");
+var buildURL = __webpack_require__("./node_modules/axios/lib/helpers/buildURL.js");
+var parseHeaders = __webpack_require__("./node_modules/axios/lib/helpers/parseHeaders.js");
+var isURLSameOrigin = __webpack_require__("./node_modules/axios/lib/helpers/isURLSameOrigin.js");
+var createError = __webpack_require__("./node_modules/axios/lib/core/createError.js");
+var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__("./node_modules/axios/lib/helpers/btoa.js");
+
+module.exports = function xhrAdapter(config) {
+  return new Promise(function dispatchXhrRequest(resolve, reject) {
+    var requestData = config.data;
+    var requestHeaders = config.headers;
+
+    if (utils.isFormData(requestData)) {
+      delete requestHeaders['Content-Type']; // Let the browser set it
+    }
+
+    var request = new XMLHttpRequest();
+    var loadEvent = 'onreadystatechange';
+    var xDomain = false;
+
+    // For IE 8/9 CORS support
+    // Only supports POST and GET calls and doesn't returns the response headers.
+    // DON'T do this for testing b/c XMLHttpRequest is mocked, not XDomainRequest.
+    if ("development" !== 'test' &&
+        typeof window !== 'undefined' &&
+        window.XDomainRequest && !('withCredentials' in request) &&
+        !isURLSameOrigin(config.url)) {
+      request = new window.XDomainRequest();
+      loadEvent = 'onload';
+      xDomain = true;
+      request.onprogress = function handleProgress() {};
+      request.ontimeout = function handleTimeout() {};
+    }
+
+    // HTTP basic authentication
+    if (config.auth) {
+      var username = config.auth.username || '';
+      var password = config.auth.password || '';
+      requestHeaders.Authorization = 'Basic ' + btoa(username + ':' + password);
+    }
+
+    request.open(config.method.toUpperCase(), buildURL(config.url, config.params, config.paramsSerializer), true);
+
+    // Set the request timeout in MS
+    request.timeout = config.timeout;
+
+    // Listen for ready state
+    request[loadEvent] = function handleLoad() {
+      if (!request || (request.readyState !== 4 && !xDomain)) {
+        return;
+      }
+
+      // The request errored out and we didn't get a response, this will be
+      // handled by onerror instead
+      // With one exception: request that using file: protocol, most browsers
+      // will return status as 0 even though it's a successful request
+      if (request.status === 0 && !(request.responseURL && request.responseURL.indexOf('file:') === 0)) {
+        return;
+      }
+
+      // Prepare the response
+      var responseHeaders = 'getAllResponseHeaders' in request ? parseHeaders(request.getAllResponseHeaders()) : null;
+      var responseData = !config.responseType || config.responseType === 'text' ? request.responseText : request.response;
+      var response = {
+        data: responseData,
+        // IE sends 1223 instead of 204 (https://github.com/mzabriskie/axios/issues/201)
+        status: request.status === 1223 ? 204 : request.status,
+        statusText: request.status === 1223 ? 'No Content' : request.statusText,
+        headers: responseHeaders,
+        config: config,
+        request: request
+      };
+
+      settle(resolve, reject, response);
+
+      // Clean up request
+      request = null;
+    };
+
+    // Handle low level network errors
+    request.onerror = function handleError() {
+      // Real errors are hidden from us by the browser
+      // onerror should only fire if it's a network error
+      reject(createError('Network Error', config, null, request));
+
+      // Clean up request
+      request = null;
+    };
+
+    // Handle timeout
+    request.ontimeout = function handleTimeout() {
+      reject(createError('timeout of ' + config.timeout + 'ms exceeded', config, 'ECONNABORTED',
+        request));
+
+      // Clean up request
+      request = null;
+    };
+
+    // Add xsrf header
+    // This is only done if running in a standard browser environment.
+    // Specifically not if we're in a web worker, or react-native.
+    if (utils.isStandardBrowserEnv()) {
+      var cookies = __webpack_require__("./node_modules/axios/lib/helpers/cookies.js");
+
+      // Add xsrf header
+      var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
+          cookies.read(config.xsrfCookieName) :
+          undefined;
+
+      if (xsrfValue) {
+        requestHeaders[config.xsrfHeaderName] = xsrfValue;
+      }
+    }
+
+    // Add headers to the request
+    if ('setRequestHeader' in request) {
+      utils.forEach(requestHeaders, function setRequestHeader(val, key) {
+        if (typeof requestData === 'undefined' && key.toLowerCase() === 'content-type') {
+          // Remove Content-Type if data is undefined
+          delete requestHeaders[key];
+        } else {
+          // Otherwise add header to the request
+          request.setRequestHeader(key, val);
+        }
+      });
+    }
+
+    // Add withCredentials to request if needed
+    if (config.withCredentials) {
+      request.withCredentials = true;
+    }
+
+    // Add responseType to request if needed
+    if (config.responseType) {
+      try {
+        request.responseType = config.responseType;
+      } catch (e) {
+        // Expected DOMException thrown by browsers not compatible XMLHttpRequest Level 2.
+        // But, this can be suppressed for 'json' type as it can be parsed by default 'transformResponse' function.
+        if (config.responseType !== 'json') {
+          throw e;
+        }
+      }
+    }
+
+    // Handle progress if needed
+    if (typeof config.onDownloadProgress === 'function') {
+      request.addEventListener('progress', config.onDownloadProgress);
+    }
+
+    // Not all browsers support upload events
+    if (typeof config.onUploadProgress === 'function' && request.upload) {
+      request.upload.addEventListener('progress', config.onUploadProgress);
+    }
+
+    if (config.cancelToken) {
+      // Handle cancellation
+      config.cancelToken.promise.then(function onCanceled(cancel) {
+        if (!request) {
+          return;
+        }
+
+        request.abort();
+        reject(cancel);
+        // Clean up request
+        request = null;
+      });
+    }
+
+    if (requestData === undefined) {
+      requestData = null;
+    }
+
+    // Send the request
+    request.send(requestData);
+  });
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/axios.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var utils = __webpack_require__("./node_modules/axios/lib/utils.js");
+var bind = __webpack_require__("./node_modules/axios/lib/helpers/bind.js");
+var Axios = __webpack_require__("./node_modules/axios/lib/core/Axios.js");
+var defaults = __webpack_require__("./node_modules/axios/lib/defaults.js");
+
+/**
+ * Create an instance of Axios
+ *
+ * @param {Object} defaultConfig The default config for the instance
+ * @return {Axios} A new instance of Axios
+ */
+function createInstance(defaultConfig) {
+  var context = new Axios(defaultConfig);
+  var instance = bind(Axios.prototype.request, context);
+
+  // Copy axios.prototype to instance
+  utils.extend(instance, Axios.prototype, context);
+
+  // Copy context to instance
+  utils.extend(instance, context);
+
+  return instance;
+}
+
+// Create the default instance to be exported
+var axios = createInstance(defaults);
+
+// Expose Axios class to allow class inheritance
+axios.Axios = Axios;
+
+// Factory for creating new instances
+axios.create = function create(instanceConfig) {
+  return createInstance(utils.merge(defaults, instanceConfig));
+};
+
+// Expose Cancel & CancelToken
+axios.Cancel = __webpack_require__("./node_modules/axios/lib/cancel/Cancel.js");
+axios.CancelToken = __webpack_require__("./node_modules/axios/lib/cancel/CancelToken.js");
+axios.isCancel = __webpack_require__("./node_modules/axios/lib/cancel/isCancel.js");
+
+// Expose all/spread
+axios.all = function all(promises) {
+  return Promise.all(promises);
+};
+axios.spread = __webpack_require__("./node_modules/axios/lib/helpers/spread.js");
+
+module.exports = axios;
+
+// Allow use of default import syntax in TypeScript
+module.exports.default = axios;
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/cancel/Cancel.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/**
+ * A `Cancel` is an object that is thrown when an operation is canceled.
+ *
+ * @class
+ * @param {string=} message The message.
+ */
+function Cancel(message) {
+  this.message = message;
+}
+
+Cancel.prototype.toString = function toString() {
+  return 'Cancel' + (this.message ? ': ' + this.message : '');
+};
+
+Cancel.prototype.__CANCEL__ = true;
+
+module.exports = Cancel;
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/cancel/CancelToken.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var Cancel = __webpack_require__("./node_modules/axios/lib/cancel/Cancel.js");
+
+/**
+ * A `CancelToken` is an object that can be used to request cancellation of an operation.
+ *
+ * @class
+ * @param {Function} executor The executor function.
+ */
+function CancelToken(executor) {
+  if (typeof executor !== 'function') {
+    throw new TypeError('executor must be a function.');
+  }
+
+  var resolvePromise;
+  this.promise = new Promise(function promiseExecutor(resolve) {
+    resolvePromise = resolve;
+  });
+
+  var token = this;
+  executor(function cancel(message) {
+    if (token.reason) {
+      // Cancellation has already been requested
+      return;
+    }
+
+    token.reason = new Cancel(message);
+    resolvePromise(token.reason);
+  });
+}
+
+/**
+ * Throws a `Cancel` if cancellation has been requested.
+ */
+CancelToken.prototype.throwIfRequested = function throwIfRequested() {
+  if (this.reason) {
+    throw this.reason;
+  }
+};
+
+/**
+ * Returns an object that contains a new `CancelToken` and a function that, when called,
+ * cancels the `CancelToken`.
+ */
+CancelToken.source = function source() {
+  var cancel;
+  var token = new CancelToken(function executor(c) {
+    cancel = c;
+  });
+  return {
+    token: token,
+    cancel: cancel
+  };
+};
+
+module.exports = CancelToken;
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/cancel/isCancel.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = function isCancel(value) {
+  return !!(value && value.__CANCEL__);
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/core/Axios.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var defaults = __webpack_require__("./node_modules/axios/lib/defaults.js");
+var utils = __webpack_require__("./node_modules/axios/lib/utils.js");
+var InterceptorManager = __webpack_require__("./node_modules/axios/lib/core/InterceptorManager.js");
+var dispatchRequest = __webpack_require__("./node_modules/axios/lib/core/dispatchRequest.js");
+var isAbsoluteURL = __webpack_require__("./node_modules/axios/lib/helpers/isAbsoluteURL.js");
+var combineURLs = __webpack_require__("./node_modules/axios/lib/helpers/combineURLs.js");
+
+/**
+ * Create a new instance of Axios
+ *
+ * @param {Object} instanceConfig The default config for the instance
+ */
+function Axios(instanceConfig) {
+  this.defaults = instanceConfig;
+  this.interceptors = {
+    request: new InterceptorManager(),
+    response: new InterceptorManager()
+  };
+}
+
+/**
+ * Dispatch a request
+ *
+ * @param {Object} config The config specific for this request (merged with this.defaults)
+ */
+Axios.prototype.request = function request(config) {
+  /*eslint no-param-reassign:0*/
+  // Allow for axios('example/url'[, config]) a la fetch API
+  if (typeof config === 'string') {
+    config = utils.merge({
+      url: arguments[0]
+    }, arguments[1]);
+  }
+
+  config = utils.merge(defaults, this.defaults, { method: 'get' }, config);
+  config.method = config.method.toLowerCase();
+
+  // Support baseURL config
+  if (config.baseURL && !isAbsoluteURL(config.url)) {
+    config.url = combineURLs(config.baseURL, config.url);
+  }
+
+  // Hook up interceptors middleware
+  var chain = [dispatchRequest, undefined];
+  var promise = Promise.resolve(config);
+
+  this.interceptors.request.forEach(function unshiftRequestInterceptors(interceptor) {
+    chain.unshift(interceptor.fulfilled, interceptor.rejected);
+  });
+
+  this.interceptors.response.forEach(function pushResponseInterceptors(interceptor) {
+    chain.push(interceptor.fulfilled, interceptor.rejected);
+  });
+
+  while (chain.length) {
+    promise = promise.then(chain.shift(), chain.shift());
+  }
+
+  return promise;
+};
+
+// Provide aliases for supported request methods
+utils.forEach(['delete', 'get', 'head', 'options'], function forEachMethodNoData(method) {
+  /*eslint func-names:0*/
+  Axios.prototype[method] = function(url, config) {
+    return this.request(utils.merge(config || {}, {
+      method: method,
+      url: url
+    }));
+  };
+});
+
+utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
+  /*eslint func-names:0*/
+  Axios.prototype[method] = function(url, data, config) {
+    return this.request(utils.merge(config || {}, {
+      method: method,
+      url: url,
+      data: data
+    }));
+  };
+});
+
+module.exports = Axios;
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/core/InterceptorManager.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var utils = __webpack_require__("./node_modules/axios/lib/utils.js");
+
+function InterceptorManager() {
+  this.handlers = [];
+}
+
+/**
+ * Add a new interceptor to the stack
+ *
+ * @param {Function} fulfilled The function to handle `then` for a `Promise`
+ * @param {Function} rejected The function to handle `reject` for a `Promise`
+ *
+ * @return {Number} An ID used to remove interceptor later
+ */
+InterceptorManager.prototype.use = function use(fulfilled, rejected) {
+  this.handlers.push({
+    fulfilled: fulfilled,
+    rejected: rejected
+  });
+  return this.handlers.length - 1;
+};
+
+/**
+ * Remove an interceptor from the stack
+ *
+ * @param {Number} id The ID that was returned by `use`
+ */
+InterceptorManager.prototype.eject = function eject(id) {
+  if (this.handlers[id]) {
+    this.handlers[id] = null;
+  }
+};
+
+/**
+ * Iterate over all the registered interceptors
+ *
+ * This method is particularly useful for skipping over any
+ * interceptors that may have become `null` calling `eject`.
+ *
+ * @param {Function} fn The function to call for each interceptor
+ */
+InterceptorManager.prototype.forEach = function forEach(fn) {
+  utils.forEach(this.handlers, function forEachHandler(h) {
+    if (h !== null) {
+      fn(h);
+    }
+  });
+};
+
+module.exports = InterceptorManager;
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/core/createError.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var enhanceError = __webpack_require__("./node_modules/axios/lib/core/enhanceError.js");
+
+/**
+ * Create an Error with the specified message, config, error code, request and response.
+ *
+ * @param {string} message The error message.
+ * @param {Object} config The config.
+ * @param {string} [code] The error code (for example, 'ECONNABORTED').
+ * @param {Object} [request] The request.
+ * @param {Object} [response] The response.
+ * @returns {Error} The created error.
+ */
+module.exports = function createError(message, config, code, request, response) {
+  var error = new Error(message);
+  return enhanceError(error, config, code, request, response);
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/core/dispatchRequest.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var utils = __webpack_require__("./node_modules/axios/lib/utils.js");
+var transformData = __webpack_require__("./node_modules/axios/lib/core/transformData.js");
+var isCancel = __webpack_require__("./node_modules/axios/lib/cancel/isCancel.js");
+var defaults = __webpack_require__("./node_modules/axios/lib/defaults.js");
+
+/**
+ * Throws a `Cancel` if cancellation has been requested.
+ */
+function throwIfCancellationRequested(config) {
+  if (config.cancelToken) {
+    config.cancelToken.throwIfRequested();
+  }
+}
+
+/**
+ * Dispatch a request to the server using the configured adapter.
+ *
+ * @param {object} config The config that is to be used for the request
+ * @returns {Promise} The Promise to be fulfilled
+ */
+module.exports = function dispatchRequest(config) {
+  throwIfCancellationRequested(config);
+
+  // Ensure headers exist
+  config.headers = config.headers || {};
+
+  // Transform request data
+  config.data = transformData(
+    config.data,
+    config.headers,
+    config.transformRequest
+  );
+
+  // Flatten headers
+  config.headers = utils.merge(
+    config.headers.common || {},
+    config.headers[config.method] || {},
+    config.headers || {}
+  );
+
+  utils.forEach(
+    ['delete', 'get', 'head', 'post', 'put', 'patch', 'common'],
+    function cleanHeaderConfig(method) {
+      delete config.headers[method];
+    }
+  );
+
+  var adapter = config.adapter || defaults.adapter;
+
+  return adapter(config).then(function onAdapterResolution(response) {
+    throwIfCancellationRequested(config);
+
+    // Transform response data
+    response.data = transformData(
+      response.data,
+      response.headers,
+      config.transformResponse
+    );
+
+    return response;
+  }, function onAdapterRejection(reason) {
+    if (!isCancel(reason)) {
+      throwIfCancellationRequested(config);
+
+      // Transform response data
+      if (reason && reason.response) {
+        reason.response.data = transformData(
+          reason.response.data,
+          reason.response.headers,
+          config.transformResponse
+        );
+      }
+    }
+
+    return Promise.reject(reason);
+  });
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/core/enhanceError.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/**
+ * Update an Error with the specified config, error code, and response.
+ *
+ * @param {Error} error The error to update.
+ * @param {Object} config The config.
+ * @param {string} [code] The error code (for example, 'ECONNABORTED').
+ * @param {Object} [request] The request.
+ * @param {Object} [response] The response.
+ * @returns {Error} The error.
+ */
+module.exports = function enhanceError(error, config, code, request, response) {
+  error.config = config;
+  if (code) {
+    error.code = code;
+  }
+  error.request = request;
+  error.response = response;
+  return error;
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/core/settle.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var createError = __webpack_require__("./node_modules/axios/lib/core/createError.js");
+
+/**
+ * Resolve or reject a Promise based on response status.
+ *
+ * @param {Function} resolve A function that resolves the promise.
+ * @param {Function} reject A function that rejects the promise.
+ * @param {object} response The response.
+ */
+module.exports = function settle(resolve, reject, response) {
+  var validateStatus = response.config.validateStatus;
+  // Note: status is not exposed by XDomainRequest
+  if (!response.status || !validateStatus || validateStatus(response.status)) {
+    resolve(response);
+  } else {
+    reject(createError(
+      'Request failed with status code ' + response.status,
+      response.config,
+      null,
+      response.request,
+      response
+    ));
+  }
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/core/transformData.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var utils = __webpack_require__("./node_modules/axios/lib/utils.js");
+
+/**
+ * Transform the data for a request or a response
+ *
+ * @param {Object|String} data The data to be transformed
+ * @param {Array} headers The headers for the request or response
+ * @param {Array|Function} fns A single function or Array of functions
+ * @returns {*} The resulting transformed data
+ */
+module.exports = function transformData(data, headers, fns) {
+  /*eslint no-param-reassign:0*/
+  utils.forEach(fns, function transform(fn) {
+    data = fn(data, headers);
+  });
+
+  return data;
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/defaults.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
+
+var utils = __webpack_require__("./node_modules/axios/lib/utils.js");
+var normalizeHeaderName = __webpack_require__("./node_modules/axios/lib/helpers/normalizeHeaderName.js");
+
+var DEFAULT_CONTENT_TYPE = {
+  'Content-Type': 'application/x-www-form-urlencoded'
+};
+
+function setContentTypeIfUnset(headers, value) {
+  if (!utils.isUndefined(headers) && utils.isUndefined(headers['Content-Type'])) {
+    headers['Content-Type'] = value;
+  }
+}
+
+function getDefaultAdapter() {
+  var adapter;
+  if (typeof XMLHttpRequest !== 'undefined') {
+    // For browsers use XHR adapter
+    adapter = __webpack_require__("./node_modules/axios/lib/adapters/xhr.js");
+  } else if (typeof process !== 'undefined') {
+    // For node use HTTP adapter
+    adapter = __webpack_require__("./node_modules/axios/lib/adapters/xhr.js");
+  }
+  return adapter;
+}
+
+var defaults = {
+  adapter: getDefaultAdapter(),
+
+  transformRequest: [function transformRequest(data, headers) {
+    normalizeHeaderName(headers, 'Content-Type');
+    if (utils.isFormData(data) ||
+      utils.isArrayBuffer(data) ||
+      utils.isBuffer(data) ||
+      utils.isStream(data) ||
+      utils.isFile(data) ||
+      utils.isBlob(data)
+    ) {
+      return data;
+    }
+    if (utils.isArrayBufferView(data)) {
+      return data.buffer;
+    }
+    if (utils.isURLSearchParams(data)) {
+      setContentTypeIfUnset(headers, 'application/x-www-form-urlencoded;charset=utf-8');
+      return data.toString();
+    }
+    if (utils.isObject(data)) {
+      setContentTypeIfUnset(headers, 'application/json;charset=utf-8');
+      return JSON.stringify(data);
+    }
+    return data;
+  }],
+
+  transformResponse: [function transformResponse(data) {
+    /*eslint no-param-reassign:0*/
+    if (typeof data === 'string') {
+      try {
+        data = JSON.parse(data);
+      } catch (e) { /* Ignore */ }
+    }
+    return data;
+  }],
+
+  timeout: 0,
+
+  xsrfCookieName: 'XSRF-TOKEN',
+  xsrfHeaderName: 'X-XSRF-TOKEN',
+
+  maxContentLength: -1,
+
+  validateStatus: function validateStatus(status) {
+    return status >= 200 && status < 300;
+  }
+};
+
+defaults.headers = {
+  common: {
+    'Accept': 'application/json, text/plain, */*'
+  }
+};
+
+utils.forEach(['delete', 'get', 'head'], function forEachMethodNoData(method) {
+  defaults.headers[method] = {};
+});
+
+utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
+  defaults.headers[method] = utils.merge(DEFAULT_CONTENT_TYPE);
+});
+
+module.exports = defaults;
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__("./node_modules/process/browser.js")))
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/helpers/bind.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = function bind(fn, thisArg) {
+  return function wrap() {
+    var args = new Array(arguments.length);
+    for (var i = 0; i < args.length; i++) {
+      args[i] = arguments[i];
+    }
+    return fn.apply(thisArg, args);
+  };
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/helpers/btoa.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+// btoa polyfill for IE<10 courtesy https://github.com/davidchambers/Base64.js
+
+var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
+
+function E() {
+  this.message = 'String contains an invalid character';
+}
+E.prototype = new Error;
+E.prototype.code = 5;
+E.prototype.name = 'InvalidCharacterError';
+
+function btoa(input) {
+  var str = String(input);
+  var output = '';
+  for (
+    // initialize result and counter
+    var block, charCode, idx = 0, map = chars;
+    // if the next str index does not exist:
+    //   change the mapping table to "="
+    //   check if d has no fractional digits
+    str.charAt(idx | 0) || (map = '=', idx % 1);
+    // "8 - idx % 1 * 8" generates the sequence 2, 4, 6, 8
+    output += map.charAt(63 & block >> 8 - idx % 1 * 8)
+  ) {
+    charCode = str.charCodeAt(idx += 3 / 4);
+    if (charCode > 0xFF) {
+      throw new E();
+    }
+    block = block << 8 | charCode;
+  }
+  return output;
+}
+
+module.exports = btoa;
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/helpers/buildURL.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var utils = __webpack_require__("./node_modules/axios/lib/utils.js");
+
+function encode(val) {
+  return encodeURIComponent(val).
+    replace(/%40/gi, '@').
+    replace(/%3A/gi, ':').
+    replace(/%24/g, '$').
+    replace(/%2C/gi, ',').
+    replace(/%20/g, '+').
+    replace(/%5B/gi, '[').
+    replace(/%5D/gi, ']');
+}
+
+/**
+ * Build a URL by appending params to the end
+ *
+ * @param {string} url The base of the url (e.g., http://www.google.com)
+ * @param {object} [params] The params to be appended
+ * @returns {string} The formatted url
+ */
+module.exports = function buildURL(url, params, paramsSerializer) {
+  /*eslint no-param-reassign:0*/
+  if (!params) {
+    return url;
+  }
+
+  var serializedParams;
+  if (paramsSerializer) {
+    serializedParams = paramsSerializer(params);
+  } else if (utils.isURLSearchParams(params)) {
+    serializedParams = params.toString();
+  } else {
+    var parts = [];
+
+    utils.forEach(params, function serialize(val, key) {
+      if (val === null || typeof val === 'undefined') {
+        return;
+      }
+
+      if (utils.isArray(val)) {
+        key = key + '[]';
+      }
+
+      if (!utils.isArray(val)) {
+        val = [val];
+      }
+
+      utils.forEach(val, function parseValue(v) {
+        if (utils.isDate(v)) {
+          v = v.toISOString();
+        } else if (utils.isObject(v)) {
+          v = JSON.stringify(v);
+        }
+        parts.push(encode(key) + '=' + encode(v));
+      });
+    });
+
+    serializedParams = parts.join('&');
+  }
+
+  if (serializedParams) {
+    url += (url.indexOf('?') === -1 ? '?' : '&') + serializedParams;
+  }
+
+  return url;
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/helpers/combineURLs.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/**
+ * Creates a new URL by combining the specified URLs
+ *
+ * @param {string} baseURL The base URL
+ * @param {string} relativeURL The relative URL
+ * @returns {string} The combined URL
+ */
+module.exports = function combineURLs(baseURL, relativeURL) {
+  return relativeURL
+    ? baseURL.replace(/\/+$/, '') + '/' + relativeURL.replace(/^\/+/, '')
+    : baseURL;
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/helpers/cookies.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var utils = __webpack_require__("./node_modules/axios/lib/utils.js");
+
+module.exports = (
+  utils.isStandardBrowserEnv() ?
+
+  // Standard browser envs support document.cookie
+  (function standardBrowserEnv() {
+    return {
+      write: function write(name, value, expires, path, domain, secure) {
+        var cookie = [];
+        cookie.push(name + '=' + encodeURIComponent(value));
+
+        if (utils.isNumber(expires)) {
+          cookie.push('expires=' + new Date(expires).toGMTString());
+        }
+
+        if (utils.isString(path)) {
+          cookie.push('path=' + path);
+        }
+
+        if (utils.isString(domain)) {
+          cookie.push('domain=' + domain);
+        }
+
+        if (secure === true) {
+          cookie.push('secure');
+        }
+
+        document.cookie = cookie.join('; ');
+      },
+
+      read: function read(name) {
+        var match = document.cookie.match(new RegExp('(^|;\\s*)(' + name + ')=([^;]*)'));
+        return (match ? decodeURIComponent(match[3]) : null);
+      },
+
+      remove: function remove(name) {
+        this.write(name, '', Date.now() - 86400000);
+      }
+    };
+  })() :
+
+  // Non standard browser env (web workers, react-native) lack needed support.
+  (function nonStandardBrowserEnv() {
+    return {
+      write: function write() {},
+      read: function read() { return null; },
+      remove: function remove() {}
+    };
+  })()
+);
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/helpers/isAbsoluteURL.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/**
+ * Determines whether the specified URL is absolute
+ *
+ * @param {string} url The URL to test
+ * @returns {boolean} True if the specified URL is absolute, otherwise false
+ */
+module.exports = function isAbsoluteURL(url) {
+  // A URL is considered absolute if it begins with "<scheme>://" or "//" (protocol-relative URL).
+  // RFC 3986 defines scheme name as a sequence of characters beginning with a letter and followed
+  // by any combination of letters, digits, plus, period, or hyphen.
+  return /^([a-z][a-z\d\+\-\.]*:)?\/\//i.test(url);
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/helpers/isURLSameOrigin.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var utils = __webpack_require__("./node_modules/axios/lib/utils.js");
+
+module.exports = (
+  utils.isStandardBrowserEnv() ?
+
+  // Standard browser envs have full support of the APIs needed to test
+  // whether the request URL is of the same origin as current location.
+  (function standardBrowserEnv() {
+    var msie = /(msie|trident)/i.test(navigator.userAgent);
+    var urlParsingNode = document.createElement('a');
+    var originURL;
+
+    /**
+    * Parse a URL to discover it's components
+    *
+    * @param {String} url The URL to be parsed
+    * @returns {Object}
+    */
+    function resolveURL(url) {
+      var href = url;
+
+      if (msie) {
+        // IE needs attribute set twice to normalize properties
+        urlParsingNode.setAttribute('href', href);
+        href = urlParsingNode.href;
+      }
+
+      urlParsingNode.setAttribute('href', href);
+
+      // urlParsingNode provides the UrlUtils interface - http://url.spec.whatwg.org/#urlutils
+      return {
+        href: urlParsingNode.href,
+        protocol: urlParsingNode.protocol ? urlParsingNode.protocol.replace(/:$/, '') : '',
+        host: urlParsingNode.host,
+        search: urlParsingNode.search ? urlParsingNode.search.replace(/^\?/, '') : '',
+        hash: urlParsingNode.hash ? urlParsingNode.hash.replace(/^#/, '') : '',
+        hostname: urlParsingNode.hostname,
+        port: urlParsingNode.port,
+        pathname: (urlParsingNode.pathname.charAt(0) === '/') ?
+                  urlParsingNode.pathname :
+                  '/' + urlParsingNode.pathname
+      };
+    }
+
+    originURL = resolveURL(window.location.href);
+
+    /**
+    * Determine if a URL shares the same origin as the current location
+    *
+    * @param {String} requestURL The URL to test
+    * @returns {boolean} True if URL shares the same origin, otherwise false
+    */
+    return function isURLSameOrigin(requestURL) {
+      var parsed = (utils.isString(requestURL)) ? resolveURL(requestURL) : requestURL;
+      return (parsed.protocol === originURL.protocol &&
+            parsed.host === originURL.host);
+    };
+  })() :
+
+  // Non standard browser envs (web workers, react-native) lack needed support.
+  (function nonStandardBrowserEnv() {
+    return function isURLSameOrigin() {
+      return true;
+    };
+  })()
+);
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/helpers/normalizeHeaderName.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var utils = __webpack_require__("./node_modules/axios/lib/utils.js");
+
+module.exports = function normalizeHeaderName(headers, normalizedName) {
+  utils.forEach(headers, function processHeader(value, name) {
+    if (name !== normalizedName && name.toUpperCase() === normalizedName.toUpperCase()) {
+      headers[normalizedName] = value;
+      delete headers[name];
+    }
+  });
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/helpers/parseHeaders.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var utils = __webpack_require__("./node_modules/axios/lib/utils.js");
+
+/**
+ * Parse headers into an object
+ *
+ * ```
+ * Date: Wed, 27 Aug 2014 08:58:49 GMT
+ * Content-Type: application/json
+ * Connection: keep-alive
+ * Transfer-Encoding: chunked
+ * ```
+ *
+ * @param {String} headers Headers needing to be parsed
+ * @returns {Object} Headers parsed into an object
+ */
+module.exports = function parseHeaders(headers) {
+  var parsed = {};
+  var key;
+  var val;
+  var i;
+
+  if (!headers) { return parsed; }
+
+  utils.forEach(headers.split('\n'), function parser(line) {
+    i = line.indexOf(':');
+    key = utils.trim(line.substr(0, i)).toLowerCase();
+    val = utils.trim(line.substr(i + 1));
+
+    if (key) {
+      parsed[key] = parsed[key] ? parsed[key] + ', ' + val : val;
+    }
+  });
+
+  return parsed;
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/helpers/spread.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/**
+ * Syntactic sugar for invoking a function and expanding an array for arguments.
+ *
+ * Common use case would be to use `Function.prototype.apply`.
+ *
+ *  ```js
+ *  function f(x, y, z) {}
+ *  var args = [1, 2, 3];
+ *  f.apply(null, args);
+ *  ```
+ *
+ * With `spread` this example can be re-written.
+ *
+ *  ```js
+ *  spread(function(x, y, z) {})([1, 2, 3]);
+ *  ```
+ *
+ * @param {Function} callback
+ * @returns {Function}
+ */
+module.exports = function spread(callback) {
+  return function wrap(arr) {
+    return callback.apply(null, arr);
+  };
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/utils.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var bind = __webpack_require__("./node_modules/axios/lib/helpers/bind.js");
+var isBuffer = __webpack_require__("./node_modules/is-buffer/index.js");
 
 /*global toString:true*/
 
@@ -374,134 +1614,2450 @@ module.exports = {
 
 
 /***/ }),
-/* 1 */
-/***/ (function(module, exports, __webpack_require__) {
+
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/Example.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(process) {
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
-var utils = __webpack_require__(0);
-var normalizeHeaderName = __webpack_require__(20);
-
-var DEFAULT_CONTENT_TYPE = {
-  'Content-Type': 'application/x-www-form-urlencoded'
-};
-
-function setContentTypeIfUnset(headers, value) {
-  if (!utils.isUndefined(headers) && utils.isUndefined(headers['Content-Type'])) {
-    headers['Content-Type'] = value;
-  }
-}
-
-function getDefaultAdapter() {
-  var adapter;
-  if (typeof XMLHttpRequest !== 'undefined') {
-    // For browsers use XHR adapter
-    adapter = __webpack_require__(5);
-  } else if (typeof process !== 'undefined') {
-    // For node use HTTP adapter
-    adapter = __webpack_require__(5);
-  }
-  return adapter;
-}
-
-var defaults = {
-  adapter: getDefaultAdapter(),
-
-  transformRequest: [function transformRequest(data, headers) {
-    normalizeHeaderName(headers, 'Content-Type');
-    if (utils.isFormData(data) ||
-      utils.isArrayBuffer(data) ||
-      utils.isBuffer(data) ||
-      utils.isStream(data) ||
-      utils.isFile(data) ||
-      utils.isBlob(data)
-    ) {
-      return data;
+/* harmony default export */ __webpack_exports__["default"] = ({
+    mounted: function mounted() {
+        console.log('Component mounted.');
     }
-    if (utils.isArrayBufferView(data)) {
-      return data.buffer;
-    }
-    if (utils.isURLSearchParams(data)) {
-      setContentTypeIfUnset(headers, 'application/x-www-form-urlencoded;charset=utf-8');
-      return data.toString();
-    }
-    if (utils.isObject(data)) {
-      setContentTypeIfUnset(headers, 'application/json;charset=utf-8');
-      return JSON.stringify(data);
-    }
-    return data;
-  }],
-
-  transformResponse: [function transformResponse(data) {
-    /*eslint no-param-reassign:0*/
-    if (typeof data === 'string') {
-      try {
-        data = JSON.parse(data);
-      } catch (e) { /* Ignore */ }
-    }
-    return data;
-  }],
-
-  timeout: 0,
-
-  xsrfCookieName: 'XSRF-TOKEN',
-  xsrfHeaderName: 'X-XSRF-TOKEN',
-
-  maxContentLength: -1,
-
-  validateStatus: function validateStatus(status) {
-    return status >= 200 && status < 300;
-  }
-};
-
-defaults.headers = {
-  common: {
-    'Accept': 'application/json, text/plain, */*'
-  }
-};
-
-utils.forEach(['delete', 'get', 'head'], function forEachMethodNoData(method) {
-  defaults.headers[method] = {};
 });
-
-utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
-  defaults.headers[method] = utils.merge(DEFAULT_CONTENT_TYPE);
-});
-
-module.exports = defaults;
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(19)))
 
 /***/ }),
-/* 2 */
+
+/***/ "./node_modules/bootstrap-sass/assets/javascripts/bootstrap.js":
 /***/ (function(module, exports) {
 
-var g;
+/*!
+ * Bootstrap v3.3.7 (http://getbootstrap.com)
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under the MIT license
+ */
 
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || Function("return this")() || (1,eval)("this");
-} catch(e) {
-	// This works if the window reference is available
-	if(typeof window === "object")
-		g = window;
+if (typeof jQuery === 'undefined') {
+  throw new Error('Bootstrap\'s JavaScript requires jQuery')
 }
 
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
++function ($) {
+  'use strict';
+  var version = $.fn.jquery.split(' ')[0].split('.')
+  if ((version[0] < 2 && version[1] < 9) || (version[0] == 1 && version[1] == 9 && version[2] < 1) || (version[0] > 3)) {
+    throw new Error('Bootstrap\'s JavaScript requires jQuery version 1.9.1 or higher, but lower than version 4')
+  }
+}(jQuery);
 
-module.exports = g;
+/* ========================================================================
+ * Bootstrap: transition.js v3.3.7
+ * http://getbootstrap.com/javascript/#transitions
+ * ========================================================================
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * ======================================================================== */
+
+
++function ($) {
+  'use strict';
+
+  // CSS TRANSITION SUPPORT (Shoutout: http://www.modernizr.com/)
+  // ============================================================
+
+  function transitionEnd() {
+    var el = document.createElement('bootstrap')
+
+    var transEndEventNames = {
+      WebkitTransition : 'webkitTransitionEnd',
+      MozTransition    : 'transitionend',
+      OTransition      : 'oTransitionEnd otransitionend',
+      transition       : 'transitionend'
+    }
+
+    for (var name in transEndEventNames) {
+      if (el.style[name] !== undefined) {
+        return { end: transEndEventNames[name] }
+      }
+    }
+
+    return false // explicit for ie8 (  ._.)
+  }
+
+  // http://blog.alexmaccaw.com/css-transitions
+  $.fn.emulateTransitionEnd = function (duration) {
+    var called = false
+    var $el = this
+    $(this).one('bsTransitionEnd', function () { called = true })
+    var callback = function () { if (!called) $($el).trigger($.support.transition.end) }
+    setTimeout(callback, duration)
+    return this
+  }
+
+  $(function () {
+    $.support.transition = transitionEnd()
+
+    if (!$.support.transition) return
+
+    $.event.special.bsTransitionEnd = {
+      bindType: $.support.transition.end,
+      delegateType: $.support.transition.end,
+      handle: function (e) {
+        if ($(e.target).is(this)) return e.handleObj.handler.apply(this, arguments)
+      }
+    }
+  })
+
+}(jQuery);
+
+/* ========================================================================
+ * Bootstrap: alert.js v3.3.7
+ * http://getbootstrap.com/javascript/#alerts
+ * ========================================================================
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * ======================================================================== */
+
+
++function ($) {
+  'use strict';
+
+  // ALERT CLASS DEFINITION
+  // ======================
+
+  var dismiss = '[data-dismiss="alert"]'
+  var Alert   = function (el) {
+    $(el).on('click', dismiss, this.close)
+  }
+
+  Alert.VERSION = '3.3.7'
+
+  Alert.TRANSITION_DURATION = 150
+
+  Alert.prototype.close = function (e) {
+    var $this    = $(this)
+    var selector = $this.attr('data-target')
+
+    if (!selector) {
+      selector = $this.attr('href')
+      selector = selector && selector.replace(/.*(?=#[^\s]*$)/, '') // strip for ie7
+    }
+
+    var $parent = $(selector === '#' ? [] : selector)
+
+    if (e) e.preventDefault()
+
+    if (!$parent.length) {
+      $parent = $this.closest('.alert')
+    }
+
+    $parent.trigger(e = $.Event('close.bs.alert'))
+
+    if (e.isDefaultPrevented()) return
+
+    $parent.removeClass('in')
+
+    function removeElement() {
+      // detach from parent, fire event then clean up data
+      $parent.detach().trigger('closed.bs.alert').remove()
+    }
+
+    $.support.transition && $parent.hasClass('fade') ?
+      $parent
+        .one('bsTransitionEnd', removeElement)
+        .emulateTransitionEnd(Alert.TRANSITION_DURATION) :
+      removeElement()
+  }
+
+
+  // ALERT PLUGIN DEFINITION
+  // =======================
+
+  function Plugin(option) {
+    return this.each(function () {
+      var $this = $(this)
+      var data  = $this.data('bs.alert')
+
+      if (!data) $this.data('bs.alert', (data = new Alert(this)))
+      if (typeof option == 'string') data[option].call($this)
+    })
+  }
+
+  var old = $.fn.alert
+
+  $.fn.alert             = Plugin
+  $.fn.alert.Constructor = Alert
+
+
+  // ALERT NO CONFLICT
+  // =================
+
+  $.fn.alert.noConflict = function () {
+    $.fn.alert = old
+    return this
+  }
+
+
+  // ALERT DATA-API
+  // ==============
+
+  $(document).on('click.bs.alert.data-api', dismiss, Alert.prototype.close)
+
+}(jQuery);
+
+/* ========================================================================
+ * Bootstrap: button.js v3.3.7
+ * http://getbootstrap.com/javascript/#buttons
+ * ========================================================================
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * ======================================================================== */
+
+
++function ($) {
+  'use strict';
+
+  // BUTTON PUBLIC CLASS DEFINITION
+  // ==============================
+
+  var Button = function (element, options) {
+    this.$element  = $(element)
+    this.options   = $.extend({}, Button.DEFAULTS, options)
+    this.isLoading = false
+  }
+
+  Button.VERSION  = '3.3.7'
+
+  Button.DEFAULTS = {
+    loadingText: 'loading...'
+  }
+
+  Button.prototype.setState = function (state) {
+    var d    = 'disabled'
+    var $el  = this.$element
+    var val  = $el.is('input') ? 'val' : 'html'
+    var data = $el.data()
+
+    state += 'Text'
+
+    if (data.resetText == null) $el.data('resetText', $el[val]())
+
+    // push to event loop to allow forms to submit
+    setTimeout($.proxy(function () {
+      $el[val](data[state] == null ? this.options[state] : data[state])
+
+      if (state == 'loadingText') {
+        this.isLoading = true
+        $el.addClass(d).attr(d, d).prop(d, true)
+      } else if (this.isLoading) {
+        this.isLoading = false
+        $el.removeClass(d).removeAttr(d).prop(d, false)
+      }
+    }, this), 0)
+  }
+
+  Button.prototype.toggle = function () {
+    var changed = true
+    var $parent = this.$element.closest('[data-toggle="buttons"]')
+
+    if ($parent.length) {
+      var $input = this.$element.find('input')
+      if ($input.prop('type') == 'radio') {
+        if ($input.prop('checked')) changed = false
+        $parent.find('.active').removeClass('active')
+        this.$element.addClass('active')
+      } else if ($input.prop('type') == 'checkbox') {
+        if (($input.prop('checked')) !== this.$element.hasClass('active')) changed = false
+        this.$element.toggleClass('active')
+      }
+      $input.prop('checked', this.$element.hasClass('active'))
+      if (changed) $input.trigger('change')
+    } else {
+      this.$element.attr('aria-pressed', !this.$element.hasClass('active'))
+      this.$element.toggleClass('active')
+    }
+  }
+
+
+  // BUTTON PLUGIN DEFINITION
+  // ========================
+
+  function Plugin(option) {
+    return this.each(function () {
+      var $this   = $(this)
+      var data    = $this.data('bs.button')
+      var options = typeof option == 'object' && option
+
+      if (!data) $this.data('bs.button', (data = new Button(this, options)))
+
+      if (option == 'toggle') data.toggle()
+      else if (option) data.setState(option)
+    })
+  }
+
+  var old = $.fn.button
+
+  $.fn.button             = Plugin
+  $.fn.button.Constructor = Button
+
+
+  // BUTTON NO CONFLICT
+  // ==================
+
+  $.fn.button.noConflict = function () {
+    $.fn.button = old
+    return this
+  }
+
+
+  // BUTTON DATA-API
+  // ===============
+
+  $(document)
+    .on('click.bs.button.data-api', '[data-toggle^="button"]', function (e) {
+      var $btn = $(e.target).closest('.btn')
+      Plugin.call($btn, 'toggle')
+      if (!($(e.target).is('input[type="radio"], input[type="checkbox"]'))) {
+        // Prevent double click on radios, and the double selections (so cancellation) on checkboxes
+        e.preventDefault()
+        // The target component still receive the focus
+        if ($btn.is('input,button')) $btn.trigger('focus')
+        else $btn.find('input:visible,button:visible').first().trigger('focus')
+      }
+    })
+    .on('focus.bs.button.data-api blur.bs.button.data-api', '[data-toggle^="button"]', function (e) {
+      $(e.target).closest('.btn').toggleClass('focus', /^focus(in)?$/.test(e.type))
+    })
+
+}(jQuery);
+
+/* ========================================================================
+ * Bootstrap: carousel.js v3.3.7
+ * http://getbootstrap.com/javascript/#carousel
+ * ========================================================================
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * ======================================================================== */
+
+
++function ($) {
+  'use strict';
+
+  // CAROUSEL CLASS DEFINITION
+  // =========================
+
+  var Carousel = function (element, options) {
+    this.$element    = $(element)
+    this.$indicators = this.$element.find('.carousel-indicators')
+    this.options     = options
+    this.paused      = null
+    this.sliding     = null
+    this.interval    = null
+    this.$active     = null
+    this.$items      = null
+
+    this.options.keyboard && this.$element.on('keydown.bs.carousel', $.proxy(this.keydown, this))
+
+    this.options.pause == 'hover' && !('ontouchstart' in document.documentElement) && this.$element
+      .on('mouseenter.bs.carousel', $.proxy(this.pause, this))
+      .on('mouseleave.bs.carousel', $.proxy(this.cycle, this))
+  }
+
+  Carousel.VERSION  = '3.3.7'
+
+  Carousel.TRANSITION_DURATION = 600
+
+  Carousel.DEFAULTS = {
+    interval: 5000,
+    pause: 'hover',
+    wrap: true,
+    keyboard: true
+  }
+
+  Carousel.prototype.keydown = function (e) {
+    if (/input|textarea/i.test(e.target.tagName)) return
+    switch (e.which) {
+      case 37: this.prev(); break
+      case 39: this.next(); break
+      default: return
+    }
+
+    e.preventDefault()
+  }
+
+  Carousel.prototype.cycle = function (e) {
+    e || (this.paused = false)
+
+    this.interval && clearInterval(this.interval)
+
+    this.options.interval
+      && !this.paused
+      && (this.interval = setInterval($.proxy(this.next, this), this.options.interval))
+
+    return this
+  }
+
+  Carousel.prototype.getItemIndex = function (item) {
+    this.$items = item.parent().children('.item')
+    return this.$items.index(item || this.$active)
+  }
+
+  Carousel.prototype.getItemForDirection = function (direction, active) {
+    var activeIndex = this.getItemIndex(active)
+    var willWrap = (direction == 'prev' && activeIndex === 0)
+                || (direction == 'next' && activeIndex == (this.$items.length - 1))
+    if (willWrap && !this.options.wrap) return active
+    var delta = direction == 'prev' ? -1 : 1
+    var itemIndex = (activeIndex + delta) % this.$items.length
+    return this.$items.eq(itemIndex)
+  }
+
+  Carousel.prototype.to = function (pos) {
+    var that        = this
+    var activeIndex = this.getItemIndex(this.$active = this.$element.find('.item.active'))
+
+    if (pos > (this.$items.length - 1) || pos < 0) return
+
+    if (this.sliding)       return this.$element.one('slid.bs.carousel', function () { that.to(pos) }) // yes, "slid"
+    if (activeIndex == pos) return this.pause().cycle()
+
+    return this.slide(pos > activeIndex ? 'next' : 'prev', this.$items.eq(pos))
+  }
+
+  Carousel.prototype.pause = function (e) {
+    e || (this.paused = true)
+
+    if (this.$element.find('.next, .prev').length && $.support.transition) {
+      this.$element.trigger($.support.transition.end)
+      this.cycle(true)
+    }
+
+    this.interval = clearInterval(this.interval)
+
+    return this
+  }
+
+  Carousel.prototype.next = function () {
+    if (this.sliding) return
+    return this.slide('next')
+  }
+
+  Carousel.prototype.prev = function () {
+    if (this.sliding) return
+    return this.slide('prev')
+  }
+
+  Carousel.prototype.slide = function (type, next) {
+    var $active   = this.$element.find('.item.active')
+    var $next     = next || this.getItemForDirection(type, $active)
+    var isCycling = this.interval
+    var direction = type == 'next' ? 'left' : 'right'
+    var that      = this
+
+    if ($next.hasClass('active')) return (this.sliding = false)
+
+    var relatedTarget = $next[0]
+    var slideEvent = $.Event('slide.bs.carousel', {
+      relatedTarget: relatedTarget,
+      direction: direction
+    })
+    this.$element.trigger(slideEvent)
+    if (slideEvent.isDefaultPrevented()) return
+
+    this.sliding = true
+
+    isCycling && this.pause()
+
+    if (this.$indicators.length) {
+      this.$indicators.find('.active').removeClass('active')
+      var $nextIndicator = $(this.$indicators.children()[this.getItemIndex($next)])
+      $nextIndicator && $nextIndicator.addClass('active')
+    }
+
+    var slidEvent = $.Event('slid.bs.carousel', { relatedTarget: relatedTarget, direction: direction }) // yes, "slid"
+    if ($.support.transition && this.$element.hasClass('slide')) {
+      $next.addClass(type)
+      $next[0].offsetWidth // force reflow
+      $active.addClass(direction)
+      $next.addClass(direction)
+      $active
+        .one('bsTransitionEnd', function () {
+          $next.removeClass([type, direction].join(' ')).addClass('active')
+          $active.removeClass(['active', direction].join(' '))
+          that.sliding = false
+          setTimeout(function () {
+            that.$element.trigger(slidEvent)
+          }, 0)
+        })
+        .emulateTransitionEnd(Carousel.TRANSITION_DURATION)
+    } else {
+      $active.removeClass('active')
+      $next.addClass('active')
+      this.sliding = false
+      this.$element.trigger(slidEvent)
+    }
+
+    isCycling && this.cycle()
+
+    return this
+  }
+
+
+  // CAROUSEL PLUGIN DEFINITION
+  // ==========================
+
+  function Plugin(option) {
+    return this.each(function () {
+      var $this   = $(this)
+      var data    = $this.data('bs.carousel')
+      var options = $.extend({}, Carousel.DEFAULTS, $this.data(), typeof option == 'object' && option)
+      var action  = typeof option == 'string' ? option : options.slide
+
+      if (!data) $this.data('bs.carousel', (data = new Carousel(this, options)))
+      if (typeof option == 'number') data.to(option)
+      else if (action) data[action]()
+      else if (options.interval) data.pause().cycle()
+    })
+  }
+
+  var old = $.fn.carousel
+
+  $.fn.carousel             = Plugin
+  $.fn.carousel.Constructor = Carousel
+
+
+  // CAROUSEL NO CONFLICT
+  // ====================
+
+  $.fn.carousel.noConflict = function () {
+    $.fn.carousel = old
+    return this
+  }
+
+
+  // CAROUSEL DATA-API
+  // =================
+
+  var clickHandler = function (e) {
+    var href
+    var $this   = $(this)
+    var $target = $($this.attr('data-target') || (href = $this.attr('href')) && href.replace(/.*(?=#[^\s]+$)/, '')) // strip for ie7
+    if (!$target.hasClass('carousel')) return
+    var options = $.extend({}, $target.data(), $this.data())
+    var slideIndex = $this.attr('data-slide-to')
+    if (slideIndex) options.interval = false
+
+    Plugin.call($target, options)
+
+    if (slideIndex) {
+      $target.data('bs.carousel').to(slideIndex)
+    }
+
+    e.preventDefault()
+  }
+
+  $(document)
+    .on('click.bs.carousel.data-api', '[data-slide]', clickHandler)
+    .on('click.bs.carousel.data-api', '[data-slide-to]', clickHandler)
+
+  $(window).on('load', function () {
+    $('[data-ride="carousel"]').each(function () {
+      var $carousel = $(this)
+      Plugin.call($carousel, $carousel.data())
+    })
+  })
+
+}(jQuery);
+
+/* ========================================================================
+ * Bootstrap: collapse.js v3.3.7
+ * http://getbootstrap.com/javascript/#collapse
+ * ========================================================================
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * ======================================================================== */
+
+/* jshint latedef: false */
+
++function ($) {
+  'use strict';
+
+  // COLLAPSE PUBLIC CLASS DEFINITION
+  // ================================
+
+  var Collapse = function (element, options) {
+    this.$element      = $(element)
+    this.options       = $.extend({}, Collapse.DEFAULTS, options)
+    this.$trigger      = $('[data-toggle="collapse"][href="#' + element.id + '"],' +
+                           '[data-toggle="collapse"][data-target="#' + element.id + '"]')
+    this.transitioning = null
+
+    if (this.options.parent) {
+      this.$parent = this.getParent()
+    } else {
+      this.addAriaAndCollapsedClass(this.$element, this.$trigger)
+    }
+
+    if (this.options.toggle) this.toggle()
+  }
+
+  Collapse.VERSION  = '3.3.7'
+
+  Collapse.TRANSITION_DURATION = 350
+
+  Collapse.DEFAULTS = {
+    toggle: true
+  }
+
+  Collapse.prototype.dimension = function () {
+    var hasWidth = this.$element.hasClass('width')
+    return hasWidth ? 'width' : 'height'
+  }
+
+  Collapse.prototype.show = function () {
+    if (this.transitioning || this.$element.hasClass('in')) return
+
+    var activesData
+    var actives = this.$parent && this.$parent.children('.panel').children('.in, .collapsing')
+
+    if (actives && actives.length) {
+      activesData = actives.data('bs.collapse')
+      if (activesData && activesData.transitioning) return
+    }
+
+    var startEvent = $.Event('show.bs.collapse')
+    this.$element.trigger(startEvent)
+    if (startEvent.isDefaultPrevented()) return
+
+    if (actives && actives.length) {
+      Plugin.call(actives, 'hide')
+      activesData || actives.data('bs.collapse', null)
+    }
+
+    var dimension = this.dimension()
+
+    this.$element
+      .removeClass('collapse')
+      .addClass('collapsing')[dimension](0)
+      .attr('aria-expanded', true)
+
+    this.$trigger
+      .removeClass('collapsed')
+      .attr('aria-expanded', true)
+
+    this.transitioning = 1
+
+    var complete = function () {
+      this.$element
+        .removeClass('collapsing')
+        .addClass('collapse in')[dimension]('')
+      this.transitioning = 0
+      this.$element
+        .trigger('shown.bs.collapse')
+    }
+
+    if (!$.support.transition) return complete.call(this)
+
+    var scrollSize = $.camelCase(['scroll', dimension].join('-'))
+
+    this.$element
+      .one('bsTransitionEnd', $.proxy(complete, this))
+      .emulateTransitionEnd(Collapse.TRANSITION_DURATION)[dimension](this.$element[0][scrollSize])
+  }
+
+  Collapse.prototype.hide = function () {
+    if (this.transitioning || !this.$element.hasClass('in')) return
+
+    var startEvent = $.Event('hide.bs.collapse')
+    this.$element.trigger(startEvent)
+    if (startEvent.isDefaultPrevented()) return
+
+    var dimension = this.dimension()
+
+    this.$element[dimension](this.$element[dimension]())[0].offsetHeight
+
+    this.$element
+      .addClass('collapsing')
+      .removeClass('collapse in')
+      .attr('aria-expanded', false)
+
+    this.$trigger
+      .addClass('collapsed')
+      .attr('aria-expanded', false)
+
+    this.transitioning = 1
+
+    var complete = function () {
+      this.transitioning = 0
+      this.$element
+        .removeClass('collapsing')
+        .addClass('collapse')
+        .trigger('hidden.bs.collapse')
+    }
+
+    if (!$.support.transition) return complete.call(this)
+
+    this.$element
+      [dimension](0)
+      .one('bsTransitionEnd', $.proxy(complete, this))
+      .emulateTransitionEnd(Collapse.TRANSITION_DURATION)
+  }
+
+  Collapse.prototype.toggle = function () {
+    this[this.$element.hasClass('in') ? 'hide' : 'show']()
+  }
+
+  Collapse.prototype.getParent = function () {
+    return $(this.options.parent)
+      .find('[data-toggle="collapse"][data-parent="' + this.options.parent + '"]')
+      .each($.proxy(function (i, element) {
+        var $element = $(element)
+        this.addAriaAndCollapsedClass(getTargetFromTrigger($element), $element)
+      }, this))
+      .end()
+  }
+
+  Collapse.prototype.addAriaAndCollapsedClass = function ($element, $trigger) {
+    var isOpen = $element.hasClass('in')
+
+    $element.attr('aria-expanded', isOpen)
+    $trigger
+      .toggleClass('collapsed', !isOpen)
+      .attr('aria-expanded', isOpen)
+  }
+
+  function getTargetFromTrigger($trigger) {
+    var href
+    var target = $trigger.attr('data-target')
+      || (href = $trigger.attr('href')) && href.replace(/.*(?=#[^\s]+$)/, '') // strip for ie7
+
+    return $(target)
+  }
+
+
+  // COLLAPSE PLUGIN DEFINITION
+  // ==========================
+
+  function Plugin(option) {
+    return this.each(function () {
+      var $this   = $(this)
+      var data    = $this.data('bs.collapse')
+      var options = $.extend({}, Collapse.DEFAULTS, $this.data(), typeof option == 'object' && option)
+
+      if (!data && options.toggle && /show|hide/.test(option)) options.toggle = false
+      if (!data) $this.data('bs.collapse', (data = new Collapse(this, options)))
+      if (typeof option == 'string') data[option]()
+    })
+  }
+
+  var old = $.fn.collapse
+
+  $.fn.collapse             = Plugin
+  $.fn.collapse.Constructor = Collapse
+
+
+  // COLLAPSE NO CONFLICT
+  // ====================
+
+  $.fn.collapse.noConflict = function () {
+    $.fn.collapse = old
+    return this
+  }
+
+
+  // COLLAPSE DATA-API
+  // =================
+
+  $(document).on('click.bs.collapse.data-api', '[data-toggle="collapse"]', function (e) {
+    var $this   = $(this)
+
+    if (!$this.attr('data-target')) e.preventDefault()
+
+    var $target = getTargetFromTrigger($this)
+    var data    = $target.data('bs.collapse')
+    var option  = data ? 'toggle' : $this.data()
+
+    Plugin.call($target, option)
+  })
+
+}(jQuery);
+
+/* ========================================================================
+ * Bootstrap: dropdown.js v3.3.7
+ * http://getbootstrap.com/javascript/#dropdowns
+ * ========================================================================
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * ======================================================================== */
+
+
++function ($) {
+  'use strict';
+
+  // DROPDOWN CLASS DEFINITION
+  // =========================
+
+  var backdrop = '.dropdown-backdrop'
+  var toggle   = '[data-toggle="dropdown"]'
+  var Dropdown = function (element) {
+    $(element).on('click.bs.dropdown', this.toggle)
+  }
+
+  Dropdown.VERSION = '3.3.7'
+
+  function getParent($this) {
+    var selector = $this.attr('data-target')
+
+    if (!selector) {
+      selector = $this.attr('href')
+      selector = selector && /#[A-Za-z]/.test(selector) && selector.replace(/.*(?=#[^\s]*$)/, '') // strip for ie7
+    }
+
+    var $parent = selector && $(selector)
+
+    return $parent && $parent.length ? $parent : $this.parent()
+  }
+
+  function clearMenus(e) {
+    if (e && e.which === 3) return
+    $(backdrop).remove()
+    $(toggle).each(function () {
+      var $this         = $(this)
+      var $parent       = getParent($this)
+      var relatedTarget = { relatedTarget: this }
+
+      if (!$parent.hasClass('open')) return
+
+      if (e && e.type == 'click' && /input|textarea/i.test(e.target.tagName) && $.contains($parent[0], e.target)) return
+
+      $parent.trigger(e = $.Event('hide.bs.dropdown', relatedTarget))
+
+      if (e.isDefaultPrevented()) return
+
+      $this.attr('aria-expanded', 'false')
+      $parent.removeClass('open').trigger($.Event('hidden.bs.dropdown', relatedTarget))
+    })
+  }
+
+  Dropdown.prototype.toggle = function (e) {
+    var $this = $(this)
+
+    if ($this.is('.disabled, :disabled')) return
+
+    var $parent  = getParent($this)
+    var isActive = $parent.hasClass('open')
+
+    clearMenus()
+
+    if (!isActive) {
+      if ('ontouchstart' in document.documentElement && !$parent.closest('.navbar-nav').length) {
+        // if mobile we use a backdrop because click events don't delegate
+        $(document.createElement('div'))
+          .addClass('dropdown-backdrop')
+          .insertAfter($(this))
+          .on('click', clearMenus)
+      }
+
+      var relatedTarget = { relatedTarget: this }
+      $parent.trigger(e = $.Event('show.bs.dropdown', relatedTarget))
+
+      if (e.isDefaultPrevented()) return
+
+      $this
+        .trigger('focus')
+        .attr('aria-expanded', 'true')
+
+      $parent
+        .toggleClass('open')
+        .trigger($.Event('shown.bs.dropdown', relatedTarget))
+    }
+
+    return false
+  }
+
+  Dropdown.prototype.keydown = function (e) {
+    if (!/(38|40|27|32)/.test(e.which) || /input|textarea/i.test(e.target.tagName)) return
+
+    var $this = $(this)
+
+    e.preventDefault()
+    e.stopPropagation()
+
+    if ($this.is('.disabled, :disabled')) return
+
+    var $parent  = getParent($this)
+    var isActive = $parent.hasClass('open')
+
+    if (!isActive && e.which != 27 || isActive && e.which == 27) {
+      if (e.which == 27) $parent.find(toggle).trigger('focus')
+      return $this.trigger('click')
+    }
+
+    var desc = ' li:not(.disabled):visible a'
+    var $items = $parent.find('.dropdown-menu' + desc)
+
+    if (!$items.length) return
+
+    var index = $items.index(e.target)
+
+    if (e.which == 38 && index > 0)                 index--         // up
+    if (e.which == 40 && index < $items.length - 1) index++         // down
+    if (!~index)                                    index = 0
+
+    $items.eq(index).trigger('focus')
+  }
+
+
+  // DROPDOWN PLUGIN DEFINITION
+  // ==========================
+
+  function Plugin(option) {
+    return this.each(function () {
+      var $this = $(this)
+      var data  = $this.data('bs.dropdown')
+
+      if (!data) $this.data('bs.dropdown', (data = new Dropdown(this)))
+      if (typeof option == 'string') data[option].call($this)
+    })
+  }
+
+  var old = $.fn.dropdown
+
+  $.fn.dropdown             = Plugin
+  $.fn.dropdown.Constructor = Dropdown
+
+
+  // DROPDOWN NO CONFLICT
+  // ====================
+
+  $.fn.dropdown.noConflict = function () {
+    $.fn.dropdown = old
+    return this
+  }
+
+
+  // APPLY TO STANDARD DROPDOWN ELEMENTS
+  // ===================================
+
+  $(document)
+    .on('click.bs.dropdown.data-api', clearMenus)
+    .on('click.bs.dropdown.data-api', '.dropdown form', function (e) { e.stopPropagation() })
+    .on('click.bs.dropdown.data-api', toggle, Dropdown.prototype.toggle)
+    .on('keydown.bs.dropdown.data-api', toggle, Dropdown.prototype.keydown)
+    .on('keydown.bs.dropdown.data-api', '.dropdown-menu', Dropdown.prototype.keydown)
+
+}(jQuery);
+
+/* ========================================================================
+ * Bootstrap: modal.js v3.3.7
+ * http://getbootstrap.com/javascript/#modals
+ * ========================================================================
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * ======================================================================== */
+
+
++function ($) {
+  'use strict';
+
+  // MODAL CLASS DEFINITION
+  // ======================
+
+  var Modal = function (element, options) {
+    this.options             = options
+    this.$body               = $(document.body)
+    this.$element            = $(element)
+    this.$dialog             = this.$element.find('.modal-dialog')
+    this.$backdrop           = null
+    this.isShown             = null
+    this.originalBodyPad     = null
+    this.scrollbarWidth      = 0
+    this.ignoreBackdropClick = false
+
+    if (this.options.remote) {
+      this.$element
+        .find('.modal-content')
+        .load(this.options.remote, $.proxy(function () {
+          this.$element.trigger('loaded.bs.modal')
+        }, this))
+    }
+  }
+
+  Modal.VERSION  = '3.3.7'
+
+  Modal.TRANSITION_DURATION = 300
+  Modal.BACKDROP_TRANSITION_DURATION = 150
+
+  Modal.DEFAULTS = {
+    backdrop: true,
+    keyboard: true,
+    show: true
+  }
+
+  Modal.prototype.toggle = function (_relatedTarget) {
+    return this.isShown ? this.hide() : this.show(_relatedTarget)
+  }
+
+  Modal.prototype.show = function (_relatedTarget) {
+    var that = this
+    var e    = $.Event('show.bs.modal', { relatedTarget: _relatedTarget })
+
+    this.$element.trigger(e)
+
+    if (this.isShown || e.isDefaultPrevented()) return
+
+    this.isShown = true
+
+    this.checkScrollbar()
+    this.setScrollbar()
+    this.$body.addClass('modal-open')
+
+    this.escape()
+    this.resize()
+
+    this.$element.on('click.dismiss.bs.modal', '[data-dismiss="modal"]', $.proxy(this.hide, this))
+
+    this.$dialog.on('mousedown.dismiss.bs.modal', function () {
+      that.$element.one('mouseup.dismiss.bs.modal', function (e) {
+        if ($(e.target).is(that.$element)) that.ignoreBackdropClick = true
+      })
+    })
+
+    this.backdrop(function () {
+      var transition = $.support.transition && that.$element.hasClass('fade')
+
+      if (!that.$element.parent().length) {
+        that.$element.appendTo(that.$body) // don't move modals dom position
+      }
+
+      that.$element
+        .show()
+        .scrollTop(0)
+
+      that.adjustDialog()
+
+      if (transition) {
+        that.$element[0].offsetWidth // force reflow
+      }
+
+      that.$element.addClass('in')
+
+      that.enforceFocus()
+
+      var e = $.Event('shown.bs.modal', { relatedTarget: _relatedTarget })
+
+      transition ?
+        that.$dialog // wait for modal to slide in
+          .one('bsTransitionEnd', function () {
+            that.$element.trigger('focus').trigger(e)
+          })
+          .emulateTransitionEnd(Modal.TRANSITION_DURATION) :
+        that.$element.trigger('focus').trigger(e)
+    })
+  }
+
+  Modal.prototype.hide = function (e) {
+    if (e) e.preventDefault()
+
+    e = $.Event('hide.bs.modal')
+
+    this.$element.trigger(e)
+
+    if (!this.isShown || e.isDefaultPrevented()) return
+
+    this.isShown = false
+
+    this.escape()
+    this.resize()
+
+    $(document).off('focusin.bs.modal')
+
+    this.$element
+      .removeClass('in')
+      .off('click.dismiss.bs.modal')
+      .off('mouseup.dismiss.bs.modal')
+
+    this.$dialog.off('mousedown.dismiss.bs.modal')
+
+    $.support.transition && this.$element.hasClass('fade') ?
+      this.$element
+        .one('bsTransitionEnd', $.proxy(this.hideModal, this))
+        .emulateTransitionEnd(Modal.TRANSITION_DURATION) :
+      this.hideModal()
+  }
+
+  Modal.prototype.enforceFocus = function () {
+    $(document)
+      .off('focusin.bs.modal') // guard against infinite focus loop
+      .on('focusin.bs.modal', $.proxy(function (e) {
+        if (document !== e.target &&
+            this.$element[0] !== e.target &&
+            !this.$element.has(e.target).length) {
+          this.$element.trigger('focus')
+        }
+      }, this))
+  }
+
+  Modal.prototype.escape = function () {
+    if (this.isShown && this.options.keyboard) {
+      this.$element.on('keydown.dismiss.bs.modal', $.proxy(function (e) {
+        e.which == 27 && this.hide()
+      }, this))
+    } else if (!this.isShown) {
+      this.$element.off('keydown.dismiss.bs.modal')
+    }
+  }
+
+  Modal.prototype.resize = function () {
+    if (this.isShown) {
+      $(window).on('resize.bs.modal', $.proxy(this.handleUpdate, this))
+    } else {
+      $(window).off('resize.bs.modal')
+    }
+  }
+
+  Modal.prototype.hideModal = function () {
+    var that = this
+    this.$element.hide()
+    this.backdrop(function () {
+      that.$body.removeClass('modal-open')
+      that.resetAdjustments()
+      that.resetScrollbar()
+      that.$element.trigger('hidden.bs.modal')
+    })
+  }
+
+  Modal.prototype.removeBackdrop = function () {
+    this.$backdrop && this.$backdrop.remove()
+    this.$backdrop = null
+  }
+
+  Modal.prototype.backdrop = function (callback) {
+    var that = this
+    var animate = this.$element.hasClass('fade') ? 'fade' : ''
+
+    if (this.isShown && this.options.backdrop) {
+      var doAnimate = $.support.transition && animate
+
+      this.$backdrop = $(document.createElement('div'))
+        .addClass('modal-backdrop ' + animate)
+        .appendTo(this.$body)
+
+      this.$element.on('click.dismiss.bs.modal', $.proxy(function (e) {
+        if (this.ignoreBackdropClick) {
+          this.ignoreBackdropClick = false
+          return
+        }
+        if (e.target !== e.currentTarget) return
+        this.options.backdrop == 'static'
+          ? this.$element[0].focus()
+          : this.hide()
+      }, this))
+
+      if (doAnimate) this.$backdrop[0].offsetWidth // force reflow
+
+      this.$backdrop.addClass('in')
+
+      if (!callback) return
+
+      doAnimate ?
+        this.$backdrop
+          .one('bsTransitionEnd', callback)
+          .emulateTransitionEnd(Modal.BACKDROP_TRANSITION_DURATION) :
+        callback()
+
+    } else if (!this.isShown && this.$backdrop) {
+      this.$backdrop.removeClass('in')
+
+      var callbackRemove = function () {
+        that.removeBackdrop()
+        callback && callback()
+      }
+      $.support.transition && this.$element.hasClass('fade') ?
+        this.$backdrop
+          .one('bsTransitionEnd', callbackRemove)
+          .emulateTransitionEnd(Modal.BACKDROP_TRANSITION_DURATION) :
+        callbackRemove()
+
+    } else if (callback) {
+      callback()
+    }
+  }
+
+  // these following methods are used to handle overflowing modals
+
+  Modal.prototype.handleUpdate = function () {
+    this.adjustDialog()
+  }
+
+  Modal.prototype.adjustDialog = function () {
+    var modalIsOverflowing = this.$element[0].scrollHeight > document.documentElement.clientHeight
+
+    this.$element.css({
+      paddingLeft:  !this.bodyIsOverflowing && modalIsOverflowing ? this.scrollbarWidth : '',
+      paddingRight: this.bodyIsOverflowing && !modalIsOverflowing ? this.scrollbarWidth : ''
+    })
+  }
+
+  Modal.prototype.resetAdjustments = function () {
+    this.$element.css({
+      paddingLeft: '',
+      paddingRight: ''
+    })
+  }
+
+  Modal.prototype.checkScrollbar = function () {
+    var fullWindowWidth = window.innerWidth
+    if (!fullWindowWidth) { // workaround for missing window.innerWidth in IE8
+      var documentElementRect = document.documentElement.getBoundingClientRect()
+      fullWindowWidth = documentElementRect.right - Math.abs(documentElementRect.left)
+    }
+    this.bodyIsOverflowing = document.body.clientWidth < fullWindowWidth
+    this.scrollbarWidth = this.measureScrollbar()
+  }
+
+  Modal.prototype.setScrollbar = function () {
+    var bodyPad = parseInt((this.$body.css('padding-right') || 0), 10)
+    this.originalBodyPad = document.body.style.paddingRight || ''
+    if (this.bodyIsOverflowing) this.$body.css('padding-right', bodyPad + this.scrollbarWidth)
+  }
+
+  Modal.prototype.resetScrollbar = function () {
+    this.$body.css('padding-right', this.originalBodyPad)
+  }
+
+  Modal.prototype.measureScrollbar = function () { // thx walsh
+    var scrollDiv = document.createElement('div')
+    scrollDiv.className = 'modal-scrollbar-measure'
+    this.$body.append(scrollDiv)
+    var scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth
+    this.$body[0].removeChild(scrollDiv)
+    return scrollbarWidth
+  }
+
+
+  // MODAL PLUGIN DEFINITION
+  // =======================
+
+  function Plugin(option, _relatedTarget) {
+    return this.each(function () {
+      var $this   = $(this)
+      var data    = $this.data('bs.modal')
+      var options = $.extend({}, Modal.DEFAULTS, $this.data(), typeof option == 'object' && option)
+
+      if (!data) $this.data('bs.modal', (data = new Modal(this, options)))
+      if (typeof option == 'string') data[option](_relatedTarget)
+      else if (options.show) data.show(_relatedTarget)
+    })
+  }
+
+  var old = $.fn.modal
+
+  $.fn.modal             = Plugin
+  $.fn.modal.Constructor = Modal
+
+
+  // MODAL NO CONFLICT
+  // =================
+
+  $.fn.modal.noConflict = function () {
+    $.fn.modal = old
+    return this
+  }
+
+
+  // MODAL DATA-API
+  // ==============
+
+  $(document).on('click.bs.modal.data-api', '[data-toggle="modal"]', function (e) {
+    var $this   = $(this)
+    var href    = $this.attr('href')
+    var $target = $($this.attr('data-target') || (href && href.replace(/.*(?=#[^\s]+$)/, ''))) // strip for ie7
+    var option  = $target.data('bs.modal') ? 'toggle' : $.extend({ remote: !/#/.test(href) && href }, $target.data(), $this.data())
+
+    if ($this.is('a')) e.preventDefault()
+
+    $target.one('show.bs.modal', function (showEvent) {
+      if (showEvent.isDefaultPrevented()) return // only register focus restorer if modal will actually get shown
+      $target.one('hidden.bs.modal', function () {
+        $this.is(':visible') && $this.trigger('focus')
+      })
+    })
+    Plugin.call($target, option, this)
+  })
+
+}(jQuery);
+
+/* ========================================================================
+ * Bootstrap: tooltip.js v3.3.7
+ * http://getbootstrap.com/javascript/#tooltip
+ * Inspired by the original jQuery.tipsy by Jason Frame
+ * ========================================================================
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * ======================================================================== */
+
+
++function ($) {
+  'use strict';
+
+  // TOOLTIP PUBLIC CLASS DEFINITION
+  // ===============================
+
+  var Tooltip = function (element, options) {
+    this.type       = null
+    this.options    = null
+    this.enabled    = null
+    this.timeout    = null
+    this.hoverState = null
+    this.$element   = null
+    this.inState    = null
+
+    this.init('tooltip', element, options)
+  }
+
+  Tooltip.VERSION  = '3.3.7'
+
+  Tooltip.TRANSITION_DURATION = 150
+
+  Tooltip.DEFAULTS = {
+    animation: true,
+    placement: 'top',
+    selector: false,
+    template: '<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>',
+    trigger: 'hover focus',
+    title: '',
+    delay: 0,
+    html: false,
+    container: false,
+    viewport: {
+      selector: 'body',
+      padding: 0
+    }
+  }
+
+  Tooltip.prototype.init = function (type, element, options) {
+    this.enabled   = true
+    this.type      = type
+    this.$element  = $(element)
+    this.options   = this.getOptions(options)
+    this.$viewport = this.options.viewport && $($.isFunction(this.options.viewport) ? this.options.viewport.call(this, this.$element) : (this.options.viewport.selector || this.options.viewport))
+    this.inState   = { click: false, hover: false, focus: false }
+
+    if (this.$element[0] instanceof document.constructor && !this.options.selector) {
+      throw new Error('`selector` option must be specified when initializing ' + this.type + ' on the window.document object!')
+    }
+
+    var triggers = this.options.trigger.split(' ')
+
+    for (var i = triggers.length; i--;) {
+      var trigger = triggers[i]
+
+      if (trigger == 'click') {
+        this.$element.on('click.' + this.type, this.options.selector, $.proxy(this.toggle, this))
+      } else if (trigger != 'manual') {
+        var eventIn  = trigger == 'hover' ? 'mouseenter' : 'focusin'
+        var eventOut = trigger == 'hover' ? 'mouseleave' : 'focusout'
+
+        this.$element.on(eventIn  + '.' + this.type, this.options.selector, $.proxy(this.enter, this))
+        this.$element.on(eventOut + '.' + this.type, this.options.selector, $.proxy(this.leave, this))
+      }
+    }
+
+    this.options.selector ?
+      (this._options = $.extend({}, this.options, { trigger: 'manual', selector: '' })) :
+      this.fixTitle()
+  }
+
+  Tooltip.prototype.getDefaults = function () {
+    return Tooltip.DEFAULTS
+  }
+
+  Tooltip.prototype.getOptions = function (options) {
+    options = $.extend({}, this.getDefaults(), this.$element.data(), options)
+
+    if (options.delay && typeof options.delay == 'number') {
+      options.delay = {
+        show: options.delay,
+        hide: options.delay
+      }
+    }
+
+    return options
+  }
+
+  Tooltip.prototype.getDelegateOptions = function () {
+    var options  = {}
+    var defaults = this.getDefaults()
+
+    this._options && $.each(this._options, function (key, value) {
+      if (defaults[key] != value) options[key] = value
+    })
+
+    return options
+  }
+
+  Tooltip.prototype.enter = function (obj) {
+    var self = obj instanceof this.constructor ?
+      obj : $(obj.currentTarget).data('bs.' + this.type)
+
+    if (!self) {
+      self = new this.constructor(obj.currentTarget, this.getDelegateOptions())
+      $(obj.currentTarget).data('bs.' + this.type, self)
+    }
+
+    if (obj instanceof $.Event) {
+      self.inState[obj.type == 'focusin' ? 'focus' : 'hover'] = true
+    }
+
+    if (self.tip().hasClass('in') || self.hoverState == 'in') {
+      self.hoverState = 'in'
+      return
+    }
+
+    clearTimeout(self.timeout)
+
+    self.hoverState = 'in'
+
+    if (!self.options.delay || !self.options.delay.show) return self.show()
+
+    self.timeout = setTimeout(function () {
+      if (self.hoverState == 'in') self.show()
+    }, self.options.delay.show)
+  }
+
+  Tooltip.prototype.isInStateTrue = function () {
+    for (var key in this.inState) {
+      if (this.inState[key]) return true
+    }
+
+    return false
+  }
+
+  Tooltip.prototype.leave = function (obj) {
+    var self = obj instanceof this.constructor ?
+      obj : $(obj.currentTarget).data('bs.' + this.type)
+
+    if (!self) {
+      self = new this.constructor(obj.currentTarget, this.getDelegateOptions())
+      $(obj.currentTarget).data('bs.' + this.type, self)
+    }
+
+    if (obj instanceof $.Event) {
+      self.inState[obj.type == 'focusout' ? 'focus' : 'hover'] = false
+    }
+
+    if (self.isInStateTrue()) return
+
+    clearTimeout(self.timeout)
+
+    self.hoverState = 'out'
+
+    if (!self.options.delay || !self.options.delay.hide) return self.hide()
+
+    self.timeout = setTimeout(function () {
+      if (self.hoverState == 'out') self.hide()
+    }, self.options.delay.hide)
+  }
+
+  Tooltip.prototype.show = function () {
+    var e = $.Event('show.bs.' + this.type)
+
+    if (this.hasContent() && this.enabled) {
+      this.$element.trigger(e)
+
+      var inDom = $.contains(this.$element[0].ownerDocument.documentElement, this.$element[0])
+      if (e.isDefaultPrevented() || !inDom) return
+      var that = this
+
+      var $tip = this.tip()
+
+      var tipId = this.getUID(this.type)
+
+      this.setContent()
+      $tip.attr('id', tipId)
+      this.$element.attr('aria-describedby', tipId)
+
+      if (this.options.animation) $tip.addClass('fade')
+
+      var placement = typeof this.options.placement == 'function' ?
+        this.options.placement.call(this, $tip[0], this.$element[0]) :
+        this.options.placement
+
+      var autoToken = /\s?auto?\s?/i
+      var autoPlace = autoToken.test(placement)
+      if (autoPlace) placement = placement.replace(autoToken, '') || 'top'
+
+      $tip
+        .detach()
+        .css({ top: 0, left: 0, display: 'block' })
+        .addClass(placement)
+        .data('bs.' + this.type, this)
+
+      this.options.container ? $tip.appendTo(this.options.container) : $tip.insertAfter(this.$element)
+      this.$element.trigger('inserted.bs.' + this.type)
+
+      var pos          = this.getPosition()
+      var actualWidth  = $tip[0].offsetWidth
+      var actualHeight = $tip[0].offsetHeight
+
+      if (autoPlace) {
+        var orgPlacement = placement
+        var viewportDim = this.getPosition(this.$viewport)
+
+        placement = placement == 'bottom' && pos.bottom + actualHeight > viewportDim.bottom ? 'top'    :
+                    placement == 'top'    && pos.top    - actualHeight < viewportDim.top    ? 'bottom' :
+                    placement == 'right'  && pos.right  + actualWidth  > viewportDim.width  ? 'left'   :
+                    placement == 'left'   && pos.left   - actualWidth  < viewportDim.left   ? 'right'  :
+                    placement
+
+        $tip
+          .removeClass(orgPlacement)
+          .addClass(placement)
+      }
+
+      var calculatedOffset = this.getCalculatedOffset(placement, pos, actualWidth, actualHeight)
+
+      this.applyPlacement(calculatedOffset, placement)
+
+      var complete = function () {
+        var prevHoverState = that.hoverState
+        that.$element.trigger('shown.bs.' + that.type)
+        that.hoverState = null
+
+        if (prevHoverState == 'out') that.leave(that)
+      }
+
+      $.support.transition && this.$tip.hasClass('fade') ?
+        $tip
+          .one('bsTransitionEnd', complete)
+          .emulateTransitionEnd(Tooltip.TRANSITION_DURATION) :
+        complete()
+    }
+  }
+
+  Tooltip.prototype.applyPlacement = function (offset, placement) {
+    var $tip   = this.tip()
+    var width  = $tip[0].offsetWidth
+    var height = $tip[0].offsetHeight
+
+    // manually read margins because getBoundingClientRect includes difference
+    var marginTop = parseInt($tip.css('margin-top'), 10)
+    var marginLeft = parseInt($tip.css('margin-left'), 10)
+
+    // we must check for NaN for ie 8/9
+    if (isNaN(marginTop))  marginTop  = 0
+    if (isNaN(marginLeft)) marginLeft = 0
+
+    offset.top  += marginTop
+    offset.left += marginLeft
+
+    // $.fn.offset doesn't round pixel values
+    // so we use setOffset directly with our own function B-0
+    $.offset.setOffset($tip[0], $.extend({
+      using: function (props) {
+        $tip.css({
+          top: Math.round(props.top),
+          left: Math.round(props.left)
+        })
+      }
+    }, offset), 0)
+
+    $tip.addClass('in')
+
+    // check to see if placing tip in new offset caused the tip to resize itself
+    var actualWidth  = $tip[0].offsetWidth
+    var actualHeight = $tip[0].offsetHeight
+
+    if (placement == 'top' && actualHeight != height) {
+      offset.top = offset.top + height - actualHeight
+    }
+
+    var delta = this.getViewportAdjustedDelta(placement, offset, actualWidth, actualHeight)
+
+    if (delta.left) offset.left += delta.left
+    else offset.top += delta.top
+
+    var isVertical          = /top|bottom/.test(placement)
+    var arrowDelta          = isVertical ? delta.left * 2 - width + actualWidth : delta.top * 2 - height + actualHeight
+    var arrowOffsetPosition = isVertical ? 'offsetWidth' : 'offsetHeight'
+
+    $tip.offset(offset)
+    this.replaceArrow(arrowDelta, $tip[0][arrowOffsetPosition], isVertical)
+  }
+
+  Tooltip.prototype.replaceArrow = function (delta, dimension, isVertical) {
+    this.arrow()
+      .css(isVertical ? 'left' : 'top', 50 * (1 - delta / dimension) + '%')
+      .css(isVertical ? 'top' : 'left', '')
+  }
+
+  Tooltip.prototype.setContent = function () {
+    var $tip  = this.tip()
+    var title = this.getTitle()
+
+    $tip.find('.tooltip-inner')[this.options.html ? 'html' : 'text'](title)
+    $tip.removeClass('fade in top bottom left right')
+  }
+
+  Tooltip.prototype.hide = function (callback) {
+    var that = this
+    var $tip = $(this.$tip)
+    var e    = $.Event('hide.bs.' + this.type)
+
+    function complete() {
+      if (that.hoverState != 'in') $tip.detach()
+      if (that.$element) { // TODO: Check whether guarding this code with this `if` is really necessary.
+        that.$element
+          .removeAttr('aria-describedby')
+          .trigger('hidden.bs.' + that.type)
+      }
+      callback && callback()
+    }
+
+    this.$element.trigger(e)
+
+    if (e.isDefaultPrevented()) return
+
+    $tip.removeClass('in')
+
+    $.support.transition && $tip.hasClass('fade') ?
+      $tip
+        .one('bsTransitionEnd', complete)
+        .emulateTransitionEnd(Tooltip.TRANSITION_DURATION) :
+      complete()
+
+    this.hoverState = null
+
+    return this
+  }
+
+  Tooltip.prototype.fixTitle = function () {
+    var $e = this.$element
+    if ($e.attr('title') || typeof $e.attr('data-original-title') != 'string') {
+      $e.attr('data-original-title', $e.attr('title') || '').attr('title', '')
+    }
+  }
+
+  Tooltip.prototype.hasContent = function () {
+    return this.getTitle()
+  }
+
+  Tooltip.prototype.getPosition = function ($element) {
+    $element   = $element || this.$element
+
+    var el     = $element[0]
+    var isBody = el.tagName == 'BODY'
+
+    var elRect    = el.getBoundingClientRect()
+    if (elRect.width == null) {
+      // width and height are missing in IE8, so compute them manually; see https://github.com/twbs/bootstrap/issues/14093
+      elRect = $.extend({}, elRect, { width: elRect.right - elRect.left, height: elRect.bottom - elRect.top })
+    }
+    var isSvg = window.SVGElement && el instanceof window.SVGElement
+    // Avoid using $.offset() on SVGs since it gives incorrect results in jQuery 3.
+    // See https://github.com/twbs/bootstrap/issues/20280
+    var elOffset  = isBody ? { top: 0, left: 0 } : (isSvg ? null : $element.offset())
+    var scroll    = { scroll: isBody ? document.documentElement.scrollTop || document.body.scrollTop : $element.scrollTop() }
+    var outerDims = isBody ? { width: $(window).width(), height: $(window).height() } : null
+
+    return $.extend({}, elRect, scroll, outerDims, elOffset)
+  }
+
+  Tooltip.prototype.getCalculatedOffset = function (placement, pos, actualWidth, actualHeight) {
+    return placement == 'bottom' ? { top: pos.top + pos.height,   left: pos.left + pos.width / 2 - actualWidth / 2 } :
+           placement == 'top'    ? { top: pos.top - actualHeight, left: pos.left + pos.width / 2 - actualWidth / 2 } :
+           placement == 'left'   ? { top: pos.top + pos.height / 2 - actualHeight / 2, left: pos.left - actualWidth } :
+        /* placement == 'right' */ { top: pos.top + pos.height / 2 - actualHeight / 2, left: pos.left + pos.width }
+
+  }
+
+  Tooltip.prototype.getViewportAdjustedDelta = function (placement, pos, actualWidth, actualHeight) {
+    var delta = { top: 0, left: 0 }
+    if (!this.$viewport) return delta
+
+    var viewportPadding = this.options.viewport && this.options.viewport.padding || 0
+    var viewportDimensions = this.getPosition(this.$viewport)
+
+    if (/right|left/.test(placement)) {
+      var topEdgeOffset    = pos.top - viewportPadding - viewportDimensions.scroll
+      var bottomEdgeOffset = pos.top + viewportPadding - viewportDimensions.scroll + actualHeight
+      if (topEdgeOffset < viewportDimensions.top) { // top overflow
+        delta.top = viewportDimensions.top - topEdgeOffset
+      } else if (bottomEdgeOffset > viewportDimensions.top + viewportDimensions.height) { // bottom overflow
+        delta.top = viewportDimensions.top + viewportDimensions.height - bottomEdgeOffset
+      }
+    } else {
+      var leftEdgeOffset  = pos.left - viewportPadding
+      var rightEdgeOffset = pos.left + viewportPadding + actualWidth
+      if (leftEdgeOffset < viewportDimensions.left) { // left overflow
+        delta.left = viewportDimensions.left - leftEdgeOffset
+      } else if (rightEdgeOffset > viewportDimensions.right) { // right overflow
+        delta.left = viewportDimensions.left + viewportDimensions.width - rightEdgeOffset
+      }
+    }
+
+    return delta
+  }
+
+  Tooltip.prototype.getTitle = function () {
+    var title
+    var $e = this.$element
+    var o  = this.options
+
+    title = $e.attr('data-original-title')
+      || (typeof o.title == 'function' ? o.title.call($e[0]) :  o.title)
+
+    return title
+  }
+
+  Tooltip.prototype.getUID = function (prefix) {
+    do prefix += ~~(Math.random() * 1000000)
+    while (document.getElementById(prefix))
+    return prefix
+  }
+
+  Tooltip.prototype.tip = function () {
+    if (!this.$tip) {
+      this.$tip = $(this.options.template)
+      if (this.$tip.length != 1) {
+        throw new Error(this.type + ' `template` option must consist of exactly 1 top-level element!')
+      }
+    }
+    return this.$tip
+  }
+
+  Tooltip.prototype.arrow = function () {
+    return (this.$arrow = this.$arrow || this.tip().find('.tooltip-arrow'))
+  }
+
+  Tooltip.prototype.enable = function () {
+    this.enabled = true
+  }
+
+  Tooltip.prototype.disable = function () {
+    this.enabled = false
+  }
+
+  Tooltip.prototype.toggleEnabled = function () {
+    this.enabled = !this.enabled
+  }
+
+  Tooltip.prototype.toggle = function (e) {
+    var self = this
+    if (e) {
+      self = $(e.currentTarget).data('bs.' + this.type)
+      if (!self) {
+        self = new this.constructor(e.currentTarget, this.getDelegateOptions())
+        $(e.currentTarget).data('bs.' + this.type, self)
+      }
+    }
+
+    if (e) {
+      self.inState.click = !self.inState.click
+      if (self.isInStateTrue()) self.enter(self)
+      else self.leave(self)
+    } else {
+      self.tip().hasClass('in') ? self.leave(self) : self.enter(self)
+    }
+  }
+
+  Tooltip.prototype.destroy = function () {
+    var that = this
+    clearTimeout(this.timeout)
+    this.hide(function () {
+      that.$element.off('.' + that.type).removeData('bs.' + that.type)
+      if (that.$tip) {
+        that.$tip.detach()
+      }
+      that.$tip = null
+      that.$arrow = null
+      that.$viewport = null
+      that.$element = null
+    })
+  }
+
+
+  // TOOLTIP PLUGIN DEFINITION
+  // =========================
+
+  function Plugin(option) {
+    return this.each(function () {
+      var $this   = $(this)
+      var data    = $this.data('bs.tooltip')
+      var options = typeof option == 'object' && option
+
+      if (!data && /destroy|hide/.test(option)) return
+      if (!data) $this.data('bs.tooltip', (data = new Tooltip(this, options)))
+      if (typeof option == 'string') data[option]()
+    })
+  }
+
+  var old = $.fn.tooltip
+
+  $.fn.tooltip             = Plugin
+  $.fn.tooltip.Constructor = Tooltip
+
+
+  // TOOLTIP NO CONFLICT
+  // ===================
+
+  $.fn.tooltip.noConflict = function () {
+    $.fn.tooltip = old
+    return this
+  }
+
+}(jQuery);
+
+/* ========================================================================
+ * Bootstrap: popover.js v3.3.7
+ * http://getbootstrap.com/javascript/#popovers
+ * ========================================================================
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * ======================================================================== */
+
+
++function ($) {
+  'use strict';
+
+  // POPOVER PUBLIC CLASS DEFINITION
+  // ===============================
+
+  var Popover = function (element, options) {
+    this.init('popover', element, options)
+  }
+
+  if (!$.fn.tooltip) throw new Error('Popover requires tooltip.js')
+
+  Popover.VERSION  = '3.3.7'
+
+  Popover.DEFAULTS = $.extend({}, $.fn.tooltip.Constructor.DEFAULTS, {
+    placement: 'right',
+    trigger: 'click',
+    content: '',
+    template: '<div class="popover" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>'
+  })
+
+
+  // NOTE: POPOVER EXTENDS tooltip.js
+  // ================================
+
+  Popover.prototype = $.extend({}, $.fn.tooltip.Constructor.prototype)
+
+  Popover.prototype.constructor = Popover
+
+  Popover.prototype.getDefaults = function () {
+    return Popover.DEFAULTS
+  }
+
+  Popover.prototype.setContent = function () {
+    var $tip    = this.tip()
+    var title   = this.getTitle()
+    var content = this.getContent()
+
+    $tip.find('.popover-title')[this.options.html ? 'html' : 'text'](title)
+    $tip.find('.popover-content').children().detach().end()[ // we use append for html objects to maintain js events
+      this.options.html ? (typeof content == 'string' ? 'html' : 'append') : 'text'
+    ](content)
+
+    $tip.removeClass('fade top bottom left right in')
+
+    // IE8 doesn't accept hiding via the `:empty` pseudo selector, we have to do
+    // this manually by checking the contents.
+    if (!$tip.find('.popover-title').html()) $tip.find('.popover-title').hide()
+  }
+
+  Popover.prototype.hasContent = function () {
+    return this.getTitle() || this.getContent()
+  }
+
+  Popover.prototype.getContent = function () {
+    var $e = this.$element
+    var o  = this.options
+
+    return $e.attr('data-content')
+      || (typeof o.content == 'function' ?
+            o.content.call($e[0]) :
+            o.content)
+  }
+
+  Popover.prototype.arrow = function () {
+    return (this.$arrow = this.$arrow || this.tip().find('.arrow'))
+  }
+
+
+  // POPOVER PLUGIN DEFINITION
+  // =========================
+
+  function Plugin(option) {
+    return this.each(function () {
+      var $this   = $(this)
+      var data    = $this.data('bs.popover')
+      var options = typeof option == 'object' && option
+
+      if (!data && /destroy|hide/.test(option)) return
+      if (!data) $this.data('bs.popover', (data = new Popover(this, options)))
+      if (typeof option == 'string') data[option]()
+    })
+  }
+
+  var old = $.fn.popover
+
+  $.fn.popover             = Plugin
+  $.fn.popover.Constructor = Popover
+
+
+  // POPOVER NO CONFLICT
+  // ===================
+
+  $.fn.popover.noConflict = function () {
+    $.fn.popover = old
+    return this
+  }
+
+}(jQuery);
+
+/* ========================================================================
+ * Bootstrap: scrollspy.js v3.3.7
+ * http://getbootstrap.com/javascript/#scrollspy
+ * ========================================================================
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * ======================================================================== */
+
+
++function ($) {
+  'use strict';
+
+  // SCROLLSPY CLASS DEFINITION
+  // ==========================
+
+  function ScrollSpy(element, options) {
+    this.$body          = $(document.body)
+    this.$scrollElement = $(element).is(document.body) ? $(window) : $(element)
+    this.options        = $.extend({}, ScrollSpy.DEFAULTS, options)
+    this.selector       = (this.options.target || '') + ' .nav li > a'
+    this.offsets        = []
+    this.targets        = []
+    this.activeTarget   = null
+    this.scrollHeight   = 0
+
+    this.$scrollElement.on('scroll.bs.scrollspy', $.proxy(this.process, this))
+    this.refresh()
+    this.process()
+  }
+
+  ScrollSpy.VERSION  = '3.3.7'
+
+  ScrollSpy.DEFAULTS = {
+    offset: 10
+  }
+
+  ScrollSpy.prototype.getScrollHeight = function () {
+    return this.$scrollElement[0].scrollHeight || Math.max(this.$body[0].scrollHeight, document.documentElement.scrollHeight)
+  }
+
+  ScrollSpy.prototype.refresh = function () {
+    var that          = this
+    var offsetMethod  = 'offset'
+    var offsetBase    = 0
+
+    this.offsets      = []
+    this.targets      = []
+    this.scrollHeight = this.getScrollHeight()
+
+    if (!$.isWindow(this.$scrollElement[0])) {
+      offsetMethod = 'position'
+      offsetBase   = this.$scrollElement.scrollTop()
+    }
+
+    this.$body
+      .find(this.selector)
+      .map(function () {
+        var $el   = $(this)
+        var href  = $el.data('target') || $el.attr('href')
+        var $href = /^#./.test(href) && $(href)
+
+        return ($href
+          && $href.length
+          && $href.is(':visible')
+          && [[$href[offsetMethod]().top + offsetBase, href]]) || null
+      })
+      .sort(function (a, b) { return a[0] - b[0] })
+      .each(function () {
+        that.offsets.push(this[0])
+        that.targets.push(this[1])
+      })
+  }
+
+  ScrollSpy.prototype.process = function () {
+    var scrollTop    = this.$scrollElement.scrollTop() + this.options.offset
+    var scrollHeight = this.getScrollHeight()
+    var maxScroll    = this.options.offset + scrollHeight - this.$scrollElement.height()
+    var offsets      = this.offsets
+    var targets      = this.targets
+    var activeTarget = this.activeTarget
+    var i
+
+    if (this.scrollHeight != scrollHeight) {
+      this.refresh()
+    }
+
+    if (scrollTop >= maxScroll) {
+      return activeTarget != (i = targets[targets.length - 1]) && this.activate(i)
+    }
+
+    if (activeTarget && scrollTop < offsets[0]) {
+      this.activeTarget = null
+      return this.clear()
+    }
+
+    for (i = offsets.length; i--;) {
+      activeTarget != targets[i]
+        && scrollTop >= offsets[i]
+        && (offsets[i + 1] === undefined || scrollTop < offsets[i + 1])
+        && this.activate(targets[i])
+    }
+  }
+
+  ScrollSpy.prototype.activate = function (target) {
+    this.activeTarget = target
+
+    this.clear()
+
+    var selector = this.selector +
+      '[data-target="' + target + '"],' +
+      this.selector + '[href="' + target + '"]'
+
+    var active = $(selector)
+      .parents('li')
+      .addClass('active')
+
+    if (active.parent('.dropdown-menu').length) {
+      active = active
+        .closest('li.dropdown')
+        .addClass('active')
+    }
+
+    active.trigger('activate.bs.scrollspy')
+  }
+
+  ScrollSpy.prototype.clear = function () {
+    $(this.selector)
+      .parentsUntil(this.options.target, '.active')
+      .removeClass('active')
+  }
+
+
+  // SCROLLSPY PLUGIN DEFINITION
+  // ===========================
+
+  function Plugin(option) {
+    return this.each(function () {
+      var $this   = $(this)
+      var data    = $this.data('bs.scrollspy')
+      var options = typeof option == 'object' && option
+
+      if (!data) $this.data('bs.scrollspy', (data = new ScrollSpy(this, options)))
+      if (typeof option == 'string') data[option]()
+    })
+  }
+
+  var old = $.fn.scrollspy
+
+  $.fn.scrollspy             = Plugin
+  $.fn.scrollspy.Constructor = ScrollSpy
+
+
+  // SCROLLSPY NO CONFLICT
+  // =====================
+
+  $.fn.scrollspy.noConflict = function () {
+    $.fn.scrollspy = old
+    return this
+  }
+
+
+  // SCROLLSPY DATA-API
+  // ==================
+
+  $(window).on('load.bs.scrollspy.data-api', function () {
+    $('[data-spy="scroll"]').each(function () {
+      var $spy = $(this)
+      Plugin.call($spy, $spy.data())
+    })
+  })
+
+}(jQuery);
+
+/* ========================================================================
+ * Bootstrap: tab.js v3.3.7
+ * http://getbootstrap.com/javascript/#tabs
+ * ========================================================================
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * ======================================================================== */
+
+
++function ($) {
+  'use strict';
+
+  // TAB CLASS DEFINITION
+  // ====================
+
+  var Tab = function (element) {
+    // jscs:disable requireDollarBeforejQueryAssignment
+    this.element = $(element)
+    // jscs:enable requireDollarBeforejQueryAssignment
+  }
+
+  Tab.VERSION = '3.3.7'
+
+  Tab.TRANSITION_DURATION = 150
+
+  Tab.prototype.show = function () {
+    var $this    = this.element
+    var $ul      = $this.closest('ul:not(.dropdown-menu)')
+    var selector = $this.data('target')
+
+    if (!selector) {
+      selector = $this.attr('href')
+      selector = selector && selector.replace(/.*(?=#[^\s]*$)/, '') // strip for ie7
+    }
+
+    if ($this.parent('li').hasClass('active')) return
+
+    var $previous = $ul.find('.active:last a')
+    var hideEvent = $.Event('hide.bs.tab', {
+      relatedTarget: $this[0]
+    })
+    var showEvent = $.Event('show.bs.tab', {
+      relatedTarget: $previous[0]
+    })
+
+    $previous.trigger(hideEvent)
+    $this.trigger(showEvent)
+
+    if (showEvent.isDefaultPrevented() || hideEvent.isDefaultPrevented()) return
+
+    var $target = $(selector)
+
+    this.activate($this.closest('li'), $ul)
+    this.activate($target, $target.parent(), function () {
+      $previous.trigger({
+        type: 'hidden.bs.tab',
+        relatedTarget: $this[0]
+      })
+      $this.trigger({
+        type: 'shown.bs.tab',
+        relatedTarget: $previous[0]
+      })
+    })
+  }
+
+  Tab.prototype.activate = function (element, container, callback) {
+    var $active    = container.find('> .active')
+    var transition = callback
+      && $.support.transition
+      && ($active.length && $active.hasClass('fade') || !!container.find('> .fade').length)
+
+    function next() {
+      $active
+        .removeClass('active')
+        .find('> .dropdown-menu > .active')
+          .removeClass('active')
+        .end()
+        .find('[data-toggle="tab"]')
+          .attr('aria-expanded', false)
+
+      element
+        .addClass('active')
+        .find('[data-toggle="tab"]')
+          .attr('aria-expanded', true)
+
+      if (transition) {
+        element[0].offsetWidth // reflow for transition
+        element.addClass('in')
+      } else {
+        element.removeClass('fade')
+      }
+
+      if (element.parent('.dropdown-menu').length) {
+        element
+          .closest('li.dropdown')
+            .addClass('active')
+          .end()
+          .find('[data-toggle="tab"]')
+            .attr('aria-expanded', true)
+      }
+
+      callback && callback()
+    }
+
+    $active.length && transition ?
+      $active
+        .one('bsTransitionEnd', next)
+        .emulateTransitionEnd(Tab.TRANSITION_DURATION) :
+      next()
+
+    $active.removeClass('in')
+  }
+
+
+  // TAB PLUGIN DEFINITION
+  // =====================
+
+  function Plugin(option) {
+    return this.each(function () {
+      var $this = $(this)
+      var data  = $this.data('bs.tab')
+
+      if (!data) $this.data('bs.tab', (data = new Tab(this)))
+      if (typeof option == 'string') data[option]()
+    })
+  }
+
+  var old = $.fn.tab
+
+  $.fn.tab             = Plugin
+  $.fn.tab.Constructor = Tab
+
+
+  // TAB NO CONFLICT
+  // ===============
+
+  $.fn.tab.noConflict = function () {
+    $.fn.tab = old
+    return this
+  }
+
+
+  // TAB DATA-API
+  // ============
+
+  var clickHandler = function (e) {
+    e.preventDefault()
+    Plugin.call($(this), 'show')
+  }
+
+  $(document)
+    .on('click.bs.tab.data-api', '[data-toggle="tab"]', clickHandler)
+    .on('click.bs.tab.data-api', '[data-toggle="pill"]', clickHandler)
+
+}(jQuery);
+
+/* ========================================================================
+ * Bootstrap: affix.js v3.3.7
+ * http://getbootstrap.com/javascript/#affix
+ * ========================================================================
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * ======================================================================== */
+
+
++function ($) {
+  'use strict';
+
+  // AFFIX CLASS DEFINITION
+  // ======================
+
+  var Affix = function (element, options) {
+    this.options = $.extend({}, Affix.DEFAULTS, options)
+
+    this.$target = $(this.options.target)
+      .on('scroll.bs.affix.data-api', $.proxy(this.checkPosition, this))
+      .on('click.bs.affix.data-api',  $.proxy(this.checkPositionWithEventLoop, this))
+
+    this.$element     = $(element)
+    this.affixed      = null
+    this.unpin        = null
+    this.pinnedOffset = null
+
+    this.checkPosition()
+  }
+
+  Affix.VERSION  = '3.3.7'
+
+  Affix.RESET    = 'affix affix-top affix-bottom'
+
+  Affix.DEFAULTS = {
+    offset: 0,
+    target: window
+  }
+
+  Affix.prototype.getState = function (scrollHeight, height, offsetTop, offsetBottom) {
+    var scrollTop    = this.$target.scrollTop()
+    var position     = this.$element.offset()
+    var targetHeight = this.$target.height()
+
+    if (offsetTop != null && this.affixed == 'top') return scrollTop < offsetTop ? 'top' : false
+
+    if (this.affixed == 'bottom') {
+      if (offsetTop != null) return (scrollTop + this.unpin <= position.top) ? false : 'bottom'
+      return (scrollTop + targetHeight <= scrollHeight - offsetBottom) ? false : 'bottom'
+    }
+
+    var initializing   = this.affixed == null
+    var colliderTop    = initializing ? scrollTop : position.top
+    var colliderHeight = initializing ? targetHeight : height
+
+    if (offsetTop != null && scrollTop <= offsetTop) return 'top'
+    if (offsetBottom != null && (colliderTop + colliderHeight >= scrollHeight - offsetBottom)) return 'bottom'
+
+    return false
+  }
+
+  Affix.prototype.getPinnedOffset = function () {
+    if (this.pinnedOffset) return this.pinnedOffset
+    this.$element.removeClass(Affix.RESET).addClass('affix')
+    var scrollTop = this.$target.scrollTop()
+    var position  = this.$element.offset()
+    return (this.pinnedOffset = position.top - scrollTop)
+  }
+
+  Affix.prototype.checkPositionWithEventLoop = function () {
+    setTimeout($.proxy(this.checkPosition, this), 1)
+  }
+
+  Affix.prototype.checkPosition = function () {
+    if (!this.$element.is(':visible')) return
+
+    var height       = this.$element.height()
+    var offset       = this.options.offset
+    var offsetTop    = offset.top
+    var offsetBottom = offset.bottom
+    var scrollHeight = Math.max($(document).height(), $(document.body).height())
+
+    if (typeof offset != 'object')         offsetBottom = offsetTop = offset
+    if (typeof offsetTop == 'function')    offsetTop    = offset.top(this.$element)
+    if (typeof offsetBottom == 'function') offsetBottom = offset.bottom(this.$element)
+
+    var affix = this.getState(scrollHeight, height, offsetTop, offsetBottom)
+
+    if (this.affixed != affix) {
+      if (this.unpin != null) this.$element.css('top', '')
+
+      var affixType = 'affix' + (affix ? '-' + affix : '')
+      var e         = $.Event(affixType + '.bs.affix')
+
+      this.$element.trigger(e)
+
+      if (e.isDefaultPrevented()) return
+
+      this.affixed = affix
+      this.unpin = affix == 'bottom' ? this.getPinnedOffset() : null
+
+      this.$element
+        .removeClass(Affix.RESET)
+        .addClass(affixType)
+        .trigger(affixType.replace('affix', 'affixed') + '.bs.affix')
+    }
+
+    if (affix == 'bottom') {
+      this.$element.offset({
+        top: scrollHeight - height - offsetBottom
+      })
+    }
+  }
+
+
+  // AFFIX PLUGIN DEFINITION
+  // =======================
+
+  function Plugin(option) {
+    return this.each(function () {
+      var $this   = $(this)
+      var data    = $this.data('bs.affix')
+      var options = typeof option == 'object' && option
+
+      if (!data) $this.data('bs.affix', (data = new Affix(this, options)))
+      if (typeof option == 'string') data[option]()
+    })
+  }
+
+  var old = $.fn.affix
+
+  $.fn.affix             = Plugin
+  $.fn.affix.Constructor = Affix
+
+
+  // AFFIX NO CONFLICT
+  // =================
+
+  $.fn.affix.noConflict = function () {
+    $.fn.affix = old
+    return this
+  }
+
+
+  // AFFIX DATA-API
+  // ==============
+
+  $(window).on('load', function () {
+    $('[data-spy="affix"]').each(function () {
+      var $spy = $(this)
+      var data = $spy.data()
+
+      data.offset = data.offset || {}
+
+      if (data.offsetBottom != null) data.offset.bottom = data.offsetBottom
+      if (data.offsetTop    != null) data.offset.top    = data.offsetTop
+
+      Plugin.call($spy, data)
+    })
+  })
+
+}(jQuery);
 
 
 /***/ }),
-/* 3 */
+
+/***/ "./node_modules/is-buffer/index.js":
+/***/ (function(module, exports) {
+
+/*!
+ * Determine if an object is a Buffer
+ *
+ * @author   Feross Aboukhadijeh <feross@feross.org> <http://feross.org>
+ * @license  MIT
+ */
+
+// The _isBuffer check is for Safari 5-7 support, because it's missing
+// Object.prototype.constructor. Remove this eventually
+module.exports = function (obj) {
+  return obj != null && (isBuffer(obj) || isSlowBuffer(obj) || !!obj._isBuffer)
+}
+
+function isBuffer (obj) {
+  return !!obj.constructor && typeof obj.constructor.isBuffer === 'function' && obj.constructor.isBuffer(obj)
+}
+
+// For Node v0.10 support. Remove this eventually.
+function isSlowBuffer (obj) {
+  return typeof obj.readFloatLE === 'function' && typeof obj.slice === 'function' && isBuffer(obj.slice(0, 0))
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/jquery/dist/jquery.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -10761,377 +14317,8 @@ return jQuery;
 
 
 /***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-
-
-module.exports = function bind(fn, thisArg) {
-  return function wrap() {
-    var args = new Array(arguments.length);
-    for (var i = 0; i < args.length; i++) {
-      args[i] = arguments[i];
-    }
-    return fn.apply(thisArg, args);
-  };
-};
-
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var utils = __webpack_require__(0);
-var settle = __webpack_require__(21);
-var buildURL = __webpack_require__(23);
-var parseHeaders = __webpack_require__(24);
-var isURLSameOrigin = __webpack_require__(25);
-var createError = __webpack_require__(6);
-var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(26);
-
-module.exports = function xhrAdapter(config) {
-  return new Promise(function dispatchXhrRequest(resolve, reject) {
-    var requestData = config.data;
-    var requestHeaders = config.headers;
-
-    if (utils.isFormData(requestData)) {
-      delete requestHeaders['Content-Type']; // Let the browser set it
-    }
-
-    var request = new XMLHttpRequest();
-    var loadEvent = 'onreadystatechange';
-    var xDomain = false;
-
-    // For IE 8/9 CORS support
-    // Only supports POST and GET calls and doesn't returns the response headers.
-    // DON'T do this for testing b/c XMLHttpRequest is mocked, not XDomainRequest.
-    if ("development" !== 'test' &&
-        typeof window !== 'undefined' &&
-        window.XDomainRequest && !('withCredentials' in request) &&
-        !isURLSameOrigin(config.url)) {
-      request = new window.XDomainRequest();
-      loadEvent = 'onload';
-      xDomain = true;
-      request.onprogress = function handleProgress() {};
-      request.ontimeout = function handleTimeout() {};
-    }
-
-    // HTTP basic authentication
-    if (config.auth) {
-      var username = config.auth.username || '';
-      var password = config.auth.password || '';
-      requestHeaders.Authorization = 'Basic ' + btoa(username + ':' + password);
-    }
-
-    request.open(config.method.toUpperCase(), buildURL(config.url, config.params, config.paramsSerializer), true);
-
-    // Set the request timeout in MS
-    request.timeout = config.timeout;
-
-    // Listen for ready state
-    request[loadEvent] = function handleLoad() {
-      if (!request || (request.readyState !== 4 && !xDomain)) {
-        return;
-      }
-
-      // The request errored out and we didn't get a response, this will be
-      // handled by onerror instead
-      // With one exception: request that using file: protocol, most browsers
-      // will return status as 0 even though it's a successful request
-      if (request.status === 0 && !(request.responseURL && request.responseURL.indexOf('file:') === 0)) {
-        return;
-      }
-
-      // Prepare the response
-      var responseHeaders = 'getAllResponseHeaders' in request ? parseHeaders(request.getAllResponseHeaders()) : null;
-      var responseData = !config.responseType || config.responseType === 'text' ? request.responseText : request.response;
-      var response = {
-        data: responseData,
-        // IE sends 1223 instead of 204 (https://github.com/mzabriskie/axios/issues/201)
-        status: request.status === 1223 ? 204 : request.status,
-        statusText: request.status === 1223 ? 'No Content' : request.statusText,
-        headers: responseHeaders,
-        config: config,
-        request: request
-      };
-
-      settle(resolve, reject, response);
-
-      // Clean up request
-      request = null;
-    };
-
-    // Handle low level network errors
-    request.onerror = function handleError() {
-      // Real errors are hidden from us by the browser
-      // onerror should only fire if it's a network error
-      reject(createError('Network Error', config, null, request));
-
-      // Clean up request
-      request = null;
-    };
-
-    // Handle timeout
-    request.ontimeout = function handleTimeout() {
-      reject(createError('timeout of ' + config.timeout + 'ms exceeded', config, 'ECONNABORTED',
-        request));
-
-      // Clean up request
-      request = null;
-    };
-
-    // Add xsrf header
-    // This is only done if running in a standard browser environment.
-    // Specifically not if we're in a web worker, or react-native.
-    if (utils.isStandardBrowserEnv()) {
-      var cookies = __webpack_require__(27);
-
-      // Add xsrf header
-      var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
-          cookies.read(config.xsrfCookieName) :
-          undefined;
-
-      if (xsrfValue) {
-        requestHeaders[config.xsrfHeaderName] = xsrfValue;
-      }
-    }
-
-    // Add headers to the request
-    if ('setRequestHeader' in request) {
-      utils.forEach(requestHeaders, function setRequestHeader(val, key) {
-        if (typeof requestData === 'undefined' && key.toLowerCase() === 'content-type') {
-          // Remove Content-Type if data is undefined
-          delete requestHeaders[key];
-        } else {
-          // Otherwise add header to the request
-          request.setRequestHeader(key, val);
-        }
-      });
-    }
-
-    // Add withCredentials to request if needed
-    if (config.withCredentials) {
-      request.withCredentials = true;
-    }
-
-    // Add responseType to request if needed
-    if (config.responseType) {
-      try {
-        request.responseType = config.responseType;
-      } catch (e) {
-        // Expected DOMException thrown by browsers not compatible XMLHttpRequest Level 2.
-        // But, this can be suppressed for 'json' type as it can be parsed by default 'transformResponse' function.
-        if (config.responseType !== 'json') {
-          throw e;
-        }
-      }
-    }
-
-    // Handle progress if needed
-    if (typeof config.onDownloadProgress === 'function') {
-      request.addEventListener('progress', config.onDownloadProgress);
-    }
-
-    // Not all browsers support upload events
-    if (typeof config.onUploadProgress === 'function' && request.upload) {
-      request.upload.addEventListener('progress', config.onUploadProgress);
-    }
-
-    if (config.cancelToken) {
-      // Handle cancellation
-      config.cancelToken.promise.then(function onCanceled(cancel) {
-        if (!request) {
-          return;
-        }
-
-        request.abort();
-        reject(cancel);
-        // Clean up request
-        request = null;
-      });
-    }
-
-    if (requestData === undefined) {
-      requestData = null;
-    }
-
-    // Send the request
-    request.send(requestData);
-  });
-};
-
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var enhanceError = __webpack_require__(22);
-
-/**
- * Create an Error with the specified message, config, error code, request and response.
- *
- * @param {string} message The error message.
- * @param {Object} config The config.
- * @param {string} [code] The error code (for example, 'ECONNABORTED').
- * @param {Object} [request] The request.
- * @param {Object} [response] The response.
- * @returns {Error} The created error.
- */
-module.exports = function createError(message, config, code, request, response) {
-  var error = new Error(message);
-  return enhanceError(error, config, code, request, response);
-};
-
-
-/***/ }),
-/* 7 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-module.exports = function isCancel(value) {
-  return !!(value && value.__CANCEL__);
-};
-
-
-/***/ }),
-/* 8 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * A `Cancel` is an object that is thrown when an operation is canceled.
- *
- * @class
- * @param {string=} message The message.
- */
-function Cancel(message) {
-  this.message = message;
-}
-
-Cancel.prototype.toString = function toString() {
-  return 'Cancel' + (this.message ? ': ' + this.message : '');
-};
-
-Cancel.prototype.__CANCEL__ = true;
-
-module.exports = Cancel;
-
-
-/***/ }),
-/* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__(10);
-module.exports = __webpack_require__(42);
-
-
-/***/ }),
-/* 10 */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
-
-__webpack_require__(11);
-__webpack_require__(35);
-
-window.Vue = __webpack_require__(36);
-
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-
-Vue.component('example', __webpack_require__(37));
-
-var app = new Vue({
-  el: '#app'
-});
-
-__webpack_require__(41);
-
-$('#avatar-upload').on("change", function (e) {
-  $("#avatar-form").submit();
-});
-
-$("#orderImgs").fileinput({ 'browseLabel': '選擇圖片', 'removeLabel': "刪除圖片" });
-
-/***/ }),
-/* 11 */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-window._ = __webpack_require__(12);
-
-/**
- * We'll load jQuery and the Bootstrap jQuery plugin which provides support
- * for JavaScript based Bootstrap features such as modals and tabs. This
- * code may be modified to fit the specific needs of your application.
- */
-
-try {
-  window.$ = window.jQuery = __webpack_require__(3);
-
-  __webpack_require__(14);
-} catch (e) {}
-
-/**
- * We'll load the axios HTTP library which allows us to easily issue requests
- * to our Laravel back-end. This library automatically handles sending the
- * CSRF token as a header based on the value of the "XSRF" token cookie.
- */
-
-window.axios = __webpack_require__(15);
-
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-
-/**
- * Next we will register the CSRF Token as a common header with Axios so that
- * all outgoing HTTP requests automatically have it attached. This is just
- * a simple convenience so we don't have to attach every token manually.
- */
-
-var token = document.head.querySelector('meta[name="csrf-token"]');
-
-if (token) {
-  window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
-} else {
-  console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
-}
-
-/**
- * Echo exposes an expressive API for subscribing to channels and listening
- * for events that are broadcast by Laravel. Echo and event broadcasting
- * allows your team to easily build robust real-time web applications.
- */
-
-// import Echo from 'laravel-echo'
-
-// window.Pusher = require('pusher-js');
-
-// window.Echo = new Echo({
-//     broadcaster: 'pusher',
-//     key: 'your-pusher-key'
-// });
-
-/***/ }),
-/* 12 */
+/***/ "./node_modules/lodash/lodash.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -28220,2606 +31407,11 @@ if (token) {
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(13)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__("./node_modules/webpack/buildin/global.js"), __webpack_require__("./node_modules/webpack/buildin/module.js")(module)))
 
 /***/ }),
-/* 13 */
-/***/ (function(module, exports) {
 
-module.exports = function(module) {
-	if(!module.webpackPolyfill) {
-		module.deprecate = function() {};
-		module.paths = [];
-		// module.parent = undefined by default
-		if(!module.children) module.children = [];
-		Object.defineProperty(module, "loaded", {
-			enumerable: true,
-			get: function() {
-				return module.l;
-			}
-		});
-		Object.defineProperty(module, "id", {
-			enumerable: true,
-			get: function() {
-				return module.i;
-			}
-		});
-		module.webpackPolyfill = 1;
-	}
-	return module;
-};
-
-
-/***/ }),
-/* 14 */
-/***/ (function(module, exports) {
-
-/*!
- * Bootstrap v3.3.7 (http://getbootstrap.com)
- * Copyright 2011-2016 Twitter, Inc.
- * Licensed under the MIT license
- */
-
-if (typeof jQuery === 'undefined') {
-  throw new Error('Bootstrap\'s JavaScript requires jQuery')
-}
-
-+function ($) {
-  'use strict';
-  var version = $.fn.jquery.split(' ')[0].split('.')
-  if ((version[0] < 2 && version[1] < 9) || (version[0] == 1 && version[1] == 9 && version[2] < 1) || (version[0] > 3)) {
-    throw new Error('Bootstrap\'s JavaScript requires jQuery version 1.9.1 or higher, but lower than version 4')
-  }
-}(jQuery);
-
-/* ========================================================================
- * Bootstrap: transition.js v3.3.7
- * http://getbootstrap.com/javascript/#transitions
- * ========================================================================
- * Copyright 2011-2016 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
- * ======================================================================== */
-
-
-+function ($) {
-  'use strict';
-
-  // CSS TRANSITION SUPPORT (Shoutout: http://www.modernizr.com/)
-  // ============================================================
-
-  function transitionEnd() {
-    var el = document.createElement('bootstrap')
-
-    var transEndEventNames = {
-      WebkitTransition : 'webkitTransitionEnd',
-      MozTransition    : 'transitionend',
-      OTransition      : 'oTransitionEnd otransitionend',
-      transition       : 'transitionend'
-    }
-
-    for (var name in transEndEventNames) {
-      if (el.style[name] !== undefined) {
-        return { end: transEndEventNames[name] }
-      }
-    }
-
-    return false // explicit for ie8 (  ._.)
-  }
-
-  // http://blog.alexmaccaw.com/css-transitions
-  $.fn.emulateTransitionEnd = function (duration) {
-    var called = false
-    var $el = this
-    $(this).one('bsTransitionEnd', function () { called = true })
-    var callback = function () { if (!called) $($el).trigger($.support.transition.end) }
-    setTimeout(callback, duration)
-    return this
-  }
-
-  $(function () {
-    $.support.transition = transitionEnd()
-
-    if (!$.support.transition) return
-
-    $.event.special.bsTransitionEnd = {
-      bindType: $.support.transition.end,
-      delegateType: $.support.transition.end,
-      handle: function (e) {
-        if ($(e.target).is(this)) return e.handleObj.handler.apply(this, arguments)
-      }
-    }
-  })
-
-}(jQuery);
-
-/* ========================================================================
- * Bootstrap: alert.js v3.3.7
- * http://getbootstrap.com/javascript/#alerts
- * ========================================================================
- * Copyright 2011-2016 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
- * ======================================================================== */
-
-
-+function ($) {
-  'use strict';
-
-  // ALERT CLASS DEFINITION
-  // ======================
-
-  var dismiss = '[data-dismiss="alert"]'
-  var Alert   = function (el) {
-    $(el).on('click', dismiss, this.close)
-  }
-
-  Alert.VERSION = '3.3.7'
-
-  Alert.TRANSITION_DURATION = 150
-
-  Alert.prototype.close = function (e) {
-    var $this    = $(this)
-    var selector = $this.attr('data-target')
-
-    if (!selector) {
-      selector = $this.attr('href')
-      selector = selector && selector.replace(/.*(?=#[^\s]*$)/, '') // strip for ie7
-    }
-
-    var $parent = $(selector === '#' ? [] : selector)
-
-    if (e) e.preventDefault()
-
-    if (!$parent.length) {
-      $parent = $this.closest('.alert')
-    }
-
-    $parent.trigger(e = $.Event('close.bs.alert'))
-
-    if (e.isDefaultPrevented()) return
-
-    $parent.removeClass('in')
-
-    function removeElement() {
-      // detach from parent, fire event then clean up data
-      $parent.detach().trigger('closed.bs.alert').remove()
-    }
-
-    $.support.transition && $parent.hasClass('fade') ?
-      $parent
-        .one('bsTransitionEnd', removeElement)
-        .emulateTransitionEnd(Alert.TRANSITION_DURATION) :
-      removeElement()
-  }
-
-
-  // ALERT PLUGIN DEFINITION
-  // =======================
-
-  function Plugin(option) {
-    return this.each(function () {
-      var $this = $(this)
-      var data  = $this.data('bs.alert')
-
-      if (!data) $this.data('bs.alert', (data = new Alert(this)))
-      if (typeof option == 'string') data[option].call($this)
-    })
-  }
-
-  var old = $.fn.alert
-
-  $.fn.alert             = Plugin
-  $.fn.alert.Constructor = Alert
-
-
-  // ALERT NO CONFLICT
-  // =================
-
-  $.fn.alert.noConflict = function () {
-    $.fn.alert = old
-    return this
-  }
-
-
-  // ALERT DATA-API
-  // ==============
-
-  $(document).on('click.bs.alert.data-api', dismiss, Alert.prototype.close)
-
-}(jQuery);
-
-/* ========================================================================
- * Bootstrap: button.js v3.3.7
- * http://getbootstrap.com/javascript/#buttons
- * ========================================================================
- * Copyright 2011-2016 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
- * ======================================================================== */
-
-
-+function ($) {
-  'use strict';
-
-  // BUTTON PUBLIC CLASS DEFINITION
-  // ==============================
-
-  var Button = function (element, options) {
-    this.$element  = $(element)
-    this.options   = $.extend({}, Button.DEFAULTS, options)
-    this.isLoading = false
-  }
-
-  Button.VERSION  = '3.3.7'
-
-  Button.DEFAULTS = {
-    loadingText: 'loading...'
-  }
-
-  Button.prototype.setState = function (state) {
-    var d    = 'disabled'
-    var $el  = this.$element
-    var val  = $el.is('input') ? 'val' : 'html'
-    var data = $el.data()
-
-    state += 'Text'
-
-    if (data.resetText == null) $el.data('resetText', $el[val]())
-
-    // push to event loop to allow forms to submit
-    setTimeout($.proxy(function () {
-      $el[val](data[state] == null ? this.options[state] : data[state])
-
-      if (state == 'loadingText') {
-        this.isLoading = true
-        $el.addClass(d).attr(d, d).prop(d, true)
-      } else if (this.isLoading) {
-        this.isLoading = false
-        $el.removeClass(d).removeAttr(d).prop(d, false)
-      }
-    }, this), 0)
-  }
-
-  Button.prototype.toggle = function () {
-    var changed = true
-    var $parent = this.$element.closest('[data-toggle="buttons"]')
-
-    if ($parent.length) {
-      var $input = this.$element.find('input')
-      if ($input.prop('type') == 'radio') {
-        if ($input.prop('checked')) changed = false
-        $parent.find('.active').removeClass('active')
-        this.$element.addClass('active')
-      } else if ($input.prop('type') == 'checkbox') {
-        if (($input.prop('checked')) !== this.$element.hasClass('active')) changed = false
-        this.$element.toggleClass('active')
-      }
-      $input.prop('checked', this.$element.hasClass('active'))
-      if (changed) $input.trigger('change')
-    } else {
-      this.$element.attr('aria-pressed', !this.$element.hasClass('active'))
-      this.$element.toggleClass('active')
-    }
-  }
-
-
-  // BUTTON PLUGIN DEFINITION
-  // ========================
-
-  function Plugin(option) {
-    return this.each(function () {
-      var $this   = $(this)
-      var data    = $this.data('bs.button')
-      var options = typeof option == 'object' && option
-
-      if (!data) $this.data('bs.button', (data = new Button(this, options)))
-
-      if (option == 'toggle') data.toggle()
-      else if (option) data.setState(option)
-    })
-  }
-
-  var old = $.fn.button
-
-  $.fn.button             = Plugin
-  $.fn.button.Constructor = Button
-
-
-  // BUTTON NO CONFLICT
-  // ==================
-
-  $.fn.button.noConflict = function () {
-    $.fn.button = old
-    return this
-  }
-
-
-  // BUTTON DATA-API
-  // ===============
-
-  $(document)
-    .on('click.bs.button.data-api', '[data-toggle^="button"]', function (e) {
-      var $btn = $(e.target).closest('.btn')
-      Plugin.call($btn, 'toggle')
-      if (!($(e.target).is('input[type="radio"], input[type="checkbox"]'))) {
-        // Prevent double click on radios, and the double selections (so cancellation) on checkboxes
-        e.preventDefault()
-        // The target component still receive the focus
-        if ($btn.is('input,button')) $btn.trigger('focus')
-        else $btn.find('input:visible,button:visible').first().trigger('focus')
-      }
-    })
-    .on('focus.bs.button.data-api blur.bs.button.data-api', '[data-toggle^="button"]', function (e) {
-      $(e.target).closest('.btn').toggleClass('focus', /^focus(in)?$/.test(e.type))
-    })
-
-}(jQuery);
-
-/* ========================================================================
- * Bootstrap: carousel.js v3.3.7
- * http://getbootstrap.com/javascript/#carousel
- * ========================================================================
- * Copyright 2011-2016 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
- * ======================================================================== */
-
-
-+function ($) {
-  'use strict';
-
-  // CAROUSEL CLASS DEFINITION
-  // =========================
-
-  var Carousel = function (element, options) {
-    this.$element    = $(element)
-    this.$indicators = this.$element.find('.carousel-indicators')
-    this.options     = options
-    this.paused      = null
-    this.sliding     = null
-    this.interval    = null
-    this.$active     = null
-    this.$items      = null
-
-    this.options.keyboard && this.$element.on('keydown.bs.carousel', $.proxy(this.keydown, this))
-
-    this.options.pause == 'hover' && !('ontouchstart' in document.documentElement) && this.$element
-      .on('mouseenter.bs.carousel', $.proxy(this.pause, this))
-      .on('mouseleave.bs.carousel', $.proxy(this.cycle, this))
-  }
-
-  Carousel.VERSION  = '3.3.7'
-
-  Carousel.TRANSITION_DURATION = 600
-
-  Carousel.DEFAULTS = {
-    interval: 5000,
-    pause: 'hover',
-    wrap: true,
-    keyboard: true
-  }
-
-  Carousel.prototype.keydown = function (e) {
-    if (/input|textarea/i.test(e.target.tagName)) return
-    switch (e.which) {
-      case 37: this.prev(); break
-      case 39: this.next(); break
-      default: return
-    }
-
-    e.preventDefault()
-  }
-
-  Carousel.prototype.cycle = function (e) {
-    e || (this.paused = false)
-
-    this.interval && clearInterval(this.interval)
-
-    this.options.interval
-      && !this.paused
-      && (this.interval = setInterval($.proxy(this.next, this), this.options.interval))
-
-    return this
-  }
-
-  Carousel.prototype.getItemIndex = function (item) {
-    this.$items = item.parent().children('.item')
-    return this.$items.index(item || this.$active)
-  }
-
-  Carousel.prototype.getItemForDirection = function (direction, active) {
-    var activeIndex = this.getItemIndex(active)
-    var willWrap = (direction == 'prev' && activeIndex === 0)
-                || (direction == 'next' && activeIndex == (this.$items.length - 1))
-    if (willWrap && !this.options.wrap) return active
-    var delta = direction == 'prev' ? -1 : 1
-    var itemIndex = (activeIndex + delta) % this.$items.length
-    return this.$items.eq(itemIndex)
-  }
-
-  Carousel.prototype.to = function (pos) {
-    var that        = this
-    var activeIndex = this.getItemIndex(this.$active = this.$element.find('.item.active'))
-
-    if (pos > (this.$items.length - 1) || pos < 0) return
-
-    if (this.sliding)       return this.$element.one('slid.bs.carousel', function () { that.to(pos) }) // yes, "slid"
-    if (activeIndex == pos) return this.pause().cycle()
-
-    return this.slide(pos > activeIndex ? 'next' : 'prev', this.$items.eq(pos))
-  }
-
-  Carousel.prototype.pause = function (e) {
-    e || (this.paused = true)
-
-    if (this.$element.find('.next, .prev').length && $.support.transition) {
-      this.$element.trigger($.support.transition.end)
-      this.cycle(true)
-    }
-
-    this.interval = clearInterval(this.interval)
-
-    return this
-  }
-
-  Carousel.prototype.next = function () {
-    if (this.sliding) return
-    return this.slide('next')
-  }
-
-  Carousel.prototype.prev = function () {
-    if (this.sliding) return
-    return this.slide('prev')
-  }
-
-  Carousel.prototype.slide = function (type, next) {
-    var $active   = this.$element.find('.item.active')
-    var $next     = next || this.getItemForDirection(type, $active)
-    var isCycling = this.interval
-    var direction = type == 'next' ? 'left' : 'right'
-    var that      = this
-
-    if ($next.hasClass('active')) return (this.sliding = false)
-
-    var relatedTarget = $next[0]
-    var slideEvent = $.Event('slide.bs.carousel', {
-      relatedTarget: relatedTarget,
-      direction: direction
-    })
-    this.$element.trigger(slideEvent)
-    if (slideEvent.isDefaultPrevented()) return
-
-    this.sliding = true
-
-    isCycling && this.pause()
-
-    if (this.$indicators.length) {
-      this.$indicators.find('.active').removeClass('active')
-      var $nextIndicator = $(this.$indicators.children()[this.getItemIndex($next)])
-      $nextIndicator && $nextIndicator.addClass('active')
-    }
-
-    var slidEvent = $.Event('slid.bs.carousel', { relatedTarget: relatedTarget, direction: direction }) // yes, "slid"
-    if ($.support.transition && this.$element.hasClass('slide')) {
-      $next.addClass(type)
-      $next[0].offsetWidth // force reflow
-      $active.addClass(direction)
-      $next.addClass(direction)
-      $active
-        .one('bsTransitionEnd', function () {
-          $next.removeClass([type, direction].join(' ')).addClass('active')
-          $active.removeClass(['active', direction].join(' '))
-          that.sliding = false
-          setTimeout(function () {
-            that.$element.trigger(slidEvent)
-          }, 0)
-        })
-        .emulateTransitionEnd(Carousel.TRANSITION_DURATION)
-    } else {
-      $active.removeClass('active')
-      $next.addClass('active')
-      this.sliding = false
-      this.$element.trigger(slidEvent)
-    }
-
-    isCycling && this.cycle()
-
-    return this
-  }
-
-
-  // CAROUSEL PLUGIN DEFINITION
-  // ==========================
-
-  function Plugin(option) {
-    return this.each(function () {
-      var $this   = $(this)
-      var data    = $this.data('bs.carousel')
-      var options = $.extend({}, Carousel.DEFAULTS, $this.data(), typeof option == 'object' && option)
-      var action  = typeof option == 'string' ? option : options.slide
-
-      if (!data) $this.data('bs.carousel', (data = new Carousel(this, options)))
-      if (typeof option == 'number') data.to(option)
-      else if (action) data[action]()
-      else if (options.interval) data.pause().cycle()
-    })
-  }
-
-  var old = $.fn.carousel
-
-  $.fn.carousel             = Plugin
-  $.fn.carousel.Constructor = Carousel
-
-
-  // CAROUSEL NO CONFLICT
-  // ====================
-
-  $.fn.carousel.noConflict = function () {
-    $.fn.carousel = old
-    return this
-  }
-
-
-  // CAROUSEL DATA-API
-  // =================
-
-  var clickHandler = function (e) {
-    var href
-    var $this   = $(this)
-    var $target = $($this.attr('data-target') || (href = $this.attr('href')) && href.replace(/.*(?=#[^\s]+$)/, '')) // strip for ie7
-    if (!$target.hasClass('carousel')) return
-    var options = $.extend({}, $target.data(), $this.data())
-    var slideIndex = $this.attr('data-slide-to')
-    if (slideIndex) options.interval = false
-
-    Plugin.call($target, options)
-
-    if (slideIndex) {
-      $target.data('bs.carousel').to(slideIndex)
-    }
-
-    e.preventDefault()
-  }
-
-  $(document)
-    .on('click.bs.carousel.data-api', '[data-slide]', clickHandler)
-    .on('click.bs.carousel.data-api', '[data-slide-to]', clickHandler)
-
-  $(window).on('load', function () {
-    $('[data-ride="carousel"]').each(function () {
-      var $carousel = $(this)
-      Plugin.call($carousel, $carousel.data())
-    })
-  })
-
-}(jQuery);
-
-/* ========================================================================
- * Bootstrap: collapse.js v3.3.7
- * http://getbootstrap.com/javascript/#collapse
- * ========================================================================
- * Copyright 2011-2016 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
- * ======================================================================== */
-
-/* jshint latedef: false */
-
-+function ($) {
-  'use strict';
-
-  // COLLAPSE PUBLIC CLASS DEFINITION
-  // ================================
-
-  var Collapse = function (element, options) {
-    this.$element      = $(element)
-    this.options       = $.extend({}, Collapse.DEFAULTS, options)
-    this.$trigger      = $('[data-toggle="collapse"][href="#' + element.id + '"],' +
-                           '[data-toggle="collapse"][data-target="#' + element.id + '"]')
-    this.transitioning = null
-
-    if (this.options.parent) {
-      this.$parent = this.getParent()
-    } else {
-      this.addAriaAndCollapsedClass(this.$element, this.$trigger)
-    }
-
-    if (this.options.toggle) this.toggle()
-  }
-
-  Collapse.VERSION  = '3.3.7'
-
-  Collapse.TRANSITION_DURATION = 350
-
-  Collapse.DEFAULTS = {
-    toggle: true
-  }
-
-  Collapse.prototype.dimension = function () {
-    var hasWidth = this.$element.hasClass('width')
-    return hasWidth ? 'width' : 'height'
-  }
-
-  Collapse.prototype.show = function () {
-    if (this.transitioning || this.$element.hasClass('in')) return
-
-    var activesData
-    var actives = this.$parent && this.$parent.children('.panel').children('.in, .collapsing')
-
-    if (actives && actives.length) {
-      activesData = actives.data('bs.collapse')
-      if (activesData && activesData.transitioning) return
-    }
-
-    var startEvent = $.Event('show.bs.collapse')
-    this.$element.trigger(startEvent)
-    if (startEvent.isDefaultPrevented()) return
-
-    if (actives && actives.length) {
-      Plugin.call(actives, 'hide')
-      activesData || actives.data('bs.collapse', null)
-    }
-
-    var dimension = this.dimension()
-
-    this.$element
-      .removeClass('collapse')
-      .addClass('collapsing')[dimension](0)
-      .attr('aria-expanded', true)
-
-    this.$trigger
-      .removeClass('collapsed')
-      .attr('aria-expanded', true)
-
-    this.transitioning = 1
-
-    var complete = function () {
-      this.$element
-        .removeClass('collapsing')
-        .addClass('collapse in')[dimension]('')
-      this.transitioning = 0
-      this.$element
-        .trigger('shown.bs.collapse')
-    }
-
-    if (!$.support.transition) return complete.call(this)
-
-    var scrollSize = $.camelCase(['scroll', dimension].join('-'))
-
-    this.$element
-      .one('bsTransitionEnd', $.proxy(complete, this))
-      .emulateTransitionEnd(Collapse.TRANSITION_DURATION)[dimension](this.$element[0][scrollSize])
-  }
-
-  Collapse.prototype.hide = function () {
-    if (this.transitioning || !this.$element.hasClass('in')) return
-
-    var startEvent = $.Event('hide.bs.collapse')
-    this.$element.trigger(startEvent)
-    if (startEvent.isDefaultPrevented()) return
-
-    var dimension = this.dimension()
-
-    this.$element[dimension](this.$element[dimension]())[0].offsetHeight
-
-    this.$element
-      .addClass('collapsing')
-      .removeClass('collapse in')
-      .attr('aria-expanded', false)
-
-    this.$trigger
-      .addClass('collapsed')
-      .attr('aria-expanded', false)
-
-    this.transitioning = 1
-
-    var complete = function () {
-      this.transitioning = 0
-      this.$element
-        .removeClass('collapsing')
-        .addClass('collapse')
-        .trigger('hidden.bs.collapse')
-    }
-
-    if (!$.support.transition) return complete.call(this)
-
-    this.$element
-      [dimension](0)
-      .one('bsTransitionEnd', $.proxy(complete, this))
-      .emulateTransitionEnd(Collapse.TRANSITION_DURATION)
-  }
-
-  Collapse.prototype.toggle = function () {
-    this[this.$element.hasClass('in') ? 'hide' : 'show']()
-  }
-
-  Collapse.prototype.getParent = function () {
-    return $(this.options.parent)
-      .find('[data-toggle="collapse"][data-parent="' + this.options.parent + '"]')
-      .each($.proxy(function (i, element) {
-        var $element = $(element)
-        this.addAriaAndCollapsedClass(getTargetFromTrigger($element), $element)
-      }, this))
-      .end()
-  }
-
-  Collapse.prototype.addAriaAndCollapsedClass = function ($element, $trigger) {
-    var isOpen = $element.hasClass('in')
-
-    $element.attr('aria-expanded', isOpen)
-    $trigger
-      .toggleClass('collapsed', !isOpen)
-      .attr('aria-expanded', isOpen)
-  }
-
-  function getTargetFromTrigger($trigger) {
-    var href
-    var target = $trigger.attr('data-target')
-      || (href = $trigger.attr('href')) && href.replace(/.*(?=#[^\s]+$)/, '') // strip for ie7
-
-    return $(target)
-  }
-
-
-  // COLLAPSE PLUGIN DEFINITION
-  // ==========================
-
-  function Plugin(option) {
-    return this.each(function () {
-      var $this   = $(this)
-      var data    = $this.data('bs.collapse')
-      var options = $.extend({}, Collapse.DEFAULTS, $this.data(), typeof option == 'object' && option)
-
-      if (!data && options.toggle && /show|hide/.test(option)) options.toggle = false
-      if (!data) $this.data('bs.collapse', (data = new Collapse(this, options)))
-      if (typeof option == 'string') data[option]()
-    })
-  }
-
-  var old = $.fn.collapse
-
-  $.fn.collapse             = Plugin
-  $.fn.collapse.Constructor = Collapse
-
-
-  // COLLAPSE NO CONFLICT
-  // ====================
-
-  $.fn.collapse.noConflict = function () {
-    $.fn.collapse = old
-    return this
-  }
-
-
-  // COLLAPSE DATA-API
-  // =================
-
-  $(document).on('click.bs.collapse.data-api', '[data-toggle="collapse"]', function (e) {
-    var $this   = $(this)
-
-    if (!$this.attr('data-target')) e.preventDefault()
-
-    var $target = getTargetFromTrigger($this)
-    var data    = $target.data('bs.collapse')
-    var option  = data ? 'toggle' : $this.data()
-
-    Plugin.call($target, option)
-  })
-
-}(jQuery);
-
-/* ========================================================================
- * Bootstrap: dropdown.js v3.3.7
- * http://getbootstrap.com/javascript/#dropdowns
- * ========================================================================
- * Copyright 2011-2016 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
- * ======================================================================== */
-
-
-+function ($) {
-  'use strict';
-
-  // DROPDOWN CLASS DEFINITION
-  // =========================
-
-  var backdrop = '.dropdown-backdrop'
-  var toggle   = '[data-toggle="dropdown"]'
-  var Dropdown = function (element) {
-    $(element).on('click.bs.dropdown', this.toggle)
-  }
-
-  Dropdown.VERSION = '3.3.7'
-
-  function getParent($this) {
-    var selector = $this.attr('data-target')
-
-    if (!selector) {
-      selector = $this.attr('href')
-      selector = selector && /#[A-Za-z]/.test(selector) && selector.replace(/.*(?=#[^\s]*$)/, '') // strip for ie7
-    }
-
-    var $parent = selector && $(selector)
-
-    return $parent && $parent.length ? $parent : $this.parent()
-  }
-
-  function clearMenus(e) {
-    if (e && e.which === 3) return
-    $(backdrop).remove()
-    $(toggle).each(function () {
-      var $this         = $(this)
-      var $parent       = getParent($this)
-      var relatedTarget = { relatedTarget: this }
-
-      if (!$parent.hasClass('open')) return
-
-      if (e && e.type == 'click' && /input|textarea/i.test(e.target.tagName) && $.contains($parent[0], e.target)) return
-
-      $parent.trigger(e = $.Event('hide.bs.dropdown', relatedTarget))
-
-      if (e.isDefaultPrevented()) return
-
-      $this.attr('aria-expanded', 'false')
-      $parent.removeClass('open').trigger($.Event('hidden.bs.dropdown', relatedTarget))
-    })
-  }
-
-  Dropdown.prototype.toggle = function (e) {
-    var $this = $(this)
-
-    if ($this.is('.disabled, :disabled')) return
-
-    var $parent  = getParent($this)
-    var isActive = $parent.hasClass('open')
-
-    clearMenus()
-
-    if (!isActive) {
-      if ('ontouchstart' in document.documentElement && !$parent.closest('.navbar-nav').length) {
-        // if mobile we use a backdrop because click events don't delegate
-        $(document.createElement('div'))
-          .addClass('dropdown-backdrop')
-          .insertAfter($(this))
-          .on('click', clearMenus)
-      }
-
-      var relatedTarget = { relatedTarget: this }
-      $parent.trigger(e = $.Event('show.bs.dropdown', relatedTarget))
-
-      if (e.isDefaultPrevented()) return
-
-      $this
-        .trigger('focus')
-        .attr('aria-expanded', 'true')
-
-      $parent
-        .toggleClass('open')
-        .trigger($.Event('shown.bs.dropdown', relatedTarget))
-    }
-
-    return false
-  }
-
-  Dropdown.prototype.keydown = function (e) {
-    if (!/(38|40|27|32)/.test(e.which) || /input|textarea/i.test(e.target.tagName)) return
-
-    var $this = $(this)
-
-    e.preventDefault()
-    e.stopPropagation()
-
-    if ($this.is('.disabled, :disabled')) return
-
-    var $parent  = getParent($this)
-    var isActive = $parent.hasClass('open')
-
-    if (!isActive && e.which != 27 || isActive && e.which == 27) {
-      if (e.which == 27) $parent.find(toggle).trigger('focus')
-      return $this.trigger('click')
-    }
-
-    var desc = ' li:not(.disabled):visible a'
-    var $items = $parent.find('.dropdown-menu' + desc)
-
-    if (!$items.length) return
-
-    var index = $items.index(e.target)
-
-    if (e.which == 38 && index > 0)                 index--         // up
-    if (e.which == 40 && index < $items.length - 1) index++         // down
-    if (!~index)                                    index = 0
-
-    $items.eq(index).trigger('focus')
-  }
-
-
-  // DROPDOWN PLUGIN DEFINITION
-  // ==========================
-
-  function Plugin(option) {
-    return this.each(function () {
-      var $this = $(this)
-      var data  = $this.data('bs.dropdown')
-
-      if (!data) $this.data('bs.dropdown', (data = new Dropdown(this)))
-      if (typeof option == 'string') data[option].call($this)
-    })
-  }
-
-  var old = $.fn.dropdown
-
-  $.fn.dropdown             = Plugin
-  $.fn.dropdown.Constructor = Dropdown
-
-
-  // DROPDOWN NO CONFLICT
-  // ====================
-
-  $.fn.dropdown.noConflict = function () {
-    $.fn.dropdown = old
-    return this
-  }
-
-
-  // APPLY TO STANDARD DROPDOWN ELEMENTS
-  // ===================================
-
-  $(document)
-    .on('click.bs.dropdown.data-api', clearMenus)
-    .on('click.bs.dropdown.data-api', '.dropdown form', function (e) { e.stopPropagation() })
-    .on('click.bs.dropdown.data-api', toggle, Dropdown.prototype.toggle)
-    .on('keydown.bs.dropdown.data-api', toggle, Dropdown.prototype.keydown)
-    .on('keydown.bs.dropdown.data-api', '.dropdown-menu', Dropdown.prototype.keydown)
-
-}(jQuery);
-
-/* ========================================================================
- * Bootstrap: modal.js v3.3.7
- * http://getbootstrap.com/javascript/#modals
- * ========================================================================
- * Copyright 2011-2016 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
- * ======================================================================== */
-
-
-+function ($) {
-  'use strict';
-
-  // MODAL CLASS DEFINITION
-  // ======================
-
-  var Modal = function (element, options) {
-    this.options             = options
-    this.$body               = $(document.body)
-    this.$element            = $(element)
-    this.$dialog             = this.$element.find('.modal-dialog')
-    this.$backdrop           = null
-    this.isShown             = null
-    this.originalBodyPad     = null
-    this.scrollbarWidth      = 0
-    this.ignoreBackdropClick = false
-
-    if (this.options.remote) {
-      this.$element
-        .find('.modal-content')
-        .load(this.options.remote, $.proxy(function () {
-          this.$element.trigger('loaded.bs.modal')
-        }, this))
-    }
-  }
-
-  Modal.VERSION  = '3.3.7'
-
-  Modal.TRANSITION_DURATION = 300
-  Modal.BACKDROP_TRANSITION_DURATION = 150
-
-  Modal.DEFAULTS = {
-    backdrop: true,
-    keyboard: true,
-    show: true
-  }
-
-  Modal.prototype.toggle = function (_relatedTarget) {
-    return this.isShown ? this.hide() : this.show(_relatedTarget)
-  }
-
-  Modal.prototype.show = function (_relatedTarget) {
-    var that = this
-    var e    = $.Event('show.bs.modal', { relatedTarget: _relatedTarget })
-
-    this.$element.trigger(e)
-
-    if (this.isShown || e.isDefaultPrevented()) return
-
-    this.isShown = true
-
-    this.checkScrollbar()
-    this.setScrollbar()
-    this.$body.addClass('modal-open')
-
-    this.escape()
-    this.resize()
-
-    this.$element.on('click.dismiss.bs.modal', '[data-dismiss="modal"]', $.proxy(this.hide, this))
-
-    this.$dialog.on('mousedown.dismiss.bs.modal', function () {
-      that.$element.one('mouseup.dismiss.bs.modal', function (e) {
-        if ($(e.target).is(that.$element)) that.ignoreBackdropClick = true
-      })
-    })
-
-    this.backdrop(function () {
-      var transition = $.support.transition && that.$element.hasClass('fade')
-
-      if (!that.$element.parent().length) {
-        that.$element.appendTo(that.$body) // don't move modals dom position
-      }
-
-      that.$element
-        .show()
-        .scrollTop(0)
-
-      that.adjustDialog()
-
-      if (transition) {
-        that.$element[0].offsetWidth // force reflow
-      }
-
-      that.$element.addClass('in')
-
-      that.enforceFocus()
-
-      var e = $.Event('shown.bs.modal', { relatedTarget: _relatedTarget })
-
-      transition ?
-        that.$dialog // wait for modal to slide in
-          .one('bsTransitionEnd', function () {
-            that.$element.trigger('focus').trigger(e)
-          })
-          .emulateTransitionEnd(Modal.TRANSITION_DURATION) :
-        that.$element.trigger('focus').trigger(e)
-    })
-  }
-
-  Modal.prototype.hide = function (e) {
-    if (e) e.preventDefault()
-
-    e = $.Event('hide.bs.modal')
-
-    this.$element.trigger(e)
-
-    if (!this.isShown || e.isDefaultPrevented()) return
-
-    this.isShown = false
-
-    this.escape()
-    this.resize()
-
-    $(document).off('focusin.bs.modal')
-
-    this.$element
-      .removeClass('in')
-      .off('click.dismiss.bs.modal')
-      .off('mouseup.dismiss.bs.modal')
-
-    this.$dialog.off('mousedown.dismiss.bs.modal')
-
-    $.support.transition && this.$element.hasClass('fade') ?
-      this.$element
-        .one('bsTransitionEnd', $.proxy(this.hideModal, this))
-        .emulateTransitionEnd(Modal.TRANSITION_DURATION) :
-      this.hideModal()
-  }
-
-  Modal.prototype.enforceFocus = function () {
-    $(document)
-      .off('focusin.bs.modal') // guard against infinite focus loop
-      .on('focusin.bs.modal', $.proxy(function (e) {
-        if (document !== e.target &&
-            this.$element[0] !== e.target &&
-            !this.$element.has(e.target).length) {
-          this.$element.trigger('focus')
-        }
-      }, this))
-  }
-
-  Modal.prototype.escape = function () {
-    if (this.isShown && this.options.keyboard) {
-      this.$element.on('keydown.dismiss.bs.modal', $.proxy(function (e) {
-        e.which == 27 && this.hide()
-      }, this))
-    } else if (!this.isShown) {
-      this.$element.off('keydown.dismiss.bs.modal')
-    }
-  }
-
-  Modal.prototype.resize = function () {
-    if (this.isShown) {
-      $(window).on('resize.bs.modal', $.proxy(this.handleUpdate, this))
-    } else {
-      $(window).off('resize.bs.modal')
-    }
-  }
-
-  Modal.prototype.hideModal = function () {
-    var that = this
-    this.$element.hide()
-    this.backdrop(function () {
-      that.$body.removeClass('modal-open')
-      that.resetAdjustments()
-      that.resetScrollbar()
-      that.$element.trigger('hidden.bs.modal')
-    })
-  }
-
-  Modal.prototype.removeBackdrop = function () {
-    this.$backdrop && this.$backdrop.remove()
-    this.$backdrop = null
-  }
-
-  Modal.prototype.backdrop = function (callback) {
-    var that = this
-    var animate = this.$element.hasClass('fade') ? 'fade' : ''
-
-    if (this.isShown && this.options.backdrop) {
-      var doAnimate = $.support.transition && animate
-
-      this.$backdrop = $(document.createElement('div'))
-        .addClass('modal-backdrop ' + animate)
-        .appendTo(this.$body)
-
-      this.$element.on('click.dismiss.bs.modal', $.proxy(function (e) {
-        if (this.ignoreBackdropClick) {
-          this.ignoreBackdropClick = false
-          return
-        }
-        if (e.target !== e.currentTarget) return
-        this.options.backdrop == 'static'
-          ? this.$element[0].focus()
-          : this.hide()
-      }, this))
-
-      if (doAnimate) this.$backdrop[0].offsetWidth // force reflow
-
-      this.$backdrop.addClass('in')
-
-      if (!callback) return
-
-      doAnimate ?
-        this.$backdrop
-          .one('bsTransitionEnd', callback)
-          .emulateTransitionEnd(Modal.BACKDROP_TRANSITION_DURATION) :
-        callback()
-
-    } else if (!this.isShown && this.$backdrop) {
-      this.$backdrop.removeClass('in')
-
-      var callbackRemove = function () {
-        that.removeBackdrop()
-        callback && callback()
-      }
-      $.support.transition && this.$element.hasClass('fade') ?
-        this.$backdrop
-          .one('bsTransitionEnd', callbackRemove)
-          .emulateTransitionEnd(Modal.BACKDROP_TRANSITION_DURATION) :
-        callbackRemove()
-
-    } else if (callback) {
-      callback()
-    }
-  }
-
-  // these following methods are used to handle overflowing modals
-
-  Modal.prototype.handleUpdate = function () {
-    this.adjustDialog()
-  }
-
-  Modal.prototype.adjustDialog = function () {
-    var modalIsOverflowing = this.$element[0].scrollHeight > document.documentElement.clientHeight
-
-    this.$element.css({
-      paddingLeft:  !this.bodyIsOverflowing && modalIsOverflowing ? this.scrollbarWidth : '',
-      paddingRight: this.bodyIsOverflowing && !modalIsOverflowing ? this.scrollbarWidth : ''
-    })
-  }
-
-  Modal.prototype.resetAdjustments = function () {
-    this.$element.css({
-      paddingLeft: '',
-      paddingRight: ''
-    })
-  }
-
-  Modal.prototype.checkScrollbar = function () {
-    var fullWindowWidth = window.innerWidth
-    if (!fullWindowWidth) { // workaround for missing window.innerWidth in IE8
-      var documentElementRect = document.documentElement.getBoundingClientRect()
-      fullWindowWidth = documentElementRect.right - Math.abs(documentElementRect.left)
-    }
-    this.bodyIsOverflowing = document.body.clientWidth < fullWindowWidth
-    this.scrollbarWidth = this.measureScrollbar()
-  }
-
-  Modal.prototype.setScrollbar = function () {
-    var bodyPad = parseInt((this.$body.css('padding-right') || 0), 10)
-    this.originalBodyPad = document.body.style.paddingRight || ''
-    if (this.bodyIsOverflowing) this.$body.css('padding-right', bodyPad + this.scrollbarWidth)
-  }
-
-  Modal.prototype.resetScrollbar = function () {
-    this.$body.css('padding-right', this.originalBodyPad)
-  }
-
-  Modal.prototype.measureScrollbar = function () { // thx walsh
-    var scrollDiv = document.createElement('div')
-    scrollDiv.className = 'modal-scrollbar-measure'
-    this.$body.append(scrollDiv)
-    var scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth
-    this.$body[0].removeChild(scrollDiv)
-    return scrollbarWidth
-  }
-
-
-  // MODAL PLUGIN DEFINITION
-  // =======================
-
-  function Plugin(option, _relatedTarget) {
-    return this.each(function () {
-      var $this   = $(this)
-      var data    = $this.data('bs.modal')
-      var options = $.extend({}, Modal.DEFAULTS, $this.data(), typeof option == 'object' && option)
-
-      if (!data) $this.data('bs.modal', (data = new Modal(this, options)))
-      if (typeof option == 'string') data[option](_relatedTarget)
-      else if (options.show) data.show(_relatedTarget)
-    })
-  }
-
-  var old = $.fn.modal
-
-  $.fn.modal             = Plugin
-  $.fn.modal.Constructor = Modal
-
-
-  // MODAL NO CONFLICT
-  // =================
-
-  $.fn.modal.noConflict = function () {
-    $.fn.modal = old
-    return this
-  }
-
-
-  // MODAL DATA-API
-  // ==============
-
-  $(document).on('click.bs.modal.data-api', '[data-toggle="modal"]', function (e) {
-    var $this   = $(this)
-    var href    = $this.attr('href')
-    var $target = $($this.attr('data-target') || (href && href.replace(/.*(?=#[^\s]+$)/, ''))) // strip for ie7
-    var option  = $target.data('bs.modal') ? 'toggle' : $.extend({ remote: !/#/.test(href) && href }, $target.data(), $this.data())
-
-    if ($this.is('a')) e.preventDefault()
-
-    $target.one('show.bs.modal', function (showEvent) {
-      if (showEvent.isDefaultPrevented()) return // only register focus restorer if modal will actually get shown
-      $target.one('hidden.bs.modal', function () {
-        $this.is(':visible') && $this.trigger('focus')
-      })
-    })
-    Plugin.call($target, option, this)
-  })
-
-}(jQuery);
-
-/* ========================================================================
- * Bootstrap: tooltip.js v3.3.7
- * http://getbootstrap.com/javascript/#tooltip
- * Inspired by the original jQuery.tipsy by Jason Frame
- * ========================================================================
- * Copyright 2011-2016 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
- * ======================================================================== */
-
-
-+function ($) {
-  'use strict';
-
-  // TOOLTIP PUBLIC CLASS DEFINITION
-  // ===============================
-
-  var Tooltip = function (element, options) {
-    this.type       = null
-    this.options    = null
-    this.enabled    = null
-    this.timeout    = null
-    this.hoverState = null
-    this.$element   = null
-    this.inState    = null
-
-    this.init('tooltip', element, options)
-  }
-
-  Tooltip.VERSION  = '3.3.7'
-
-  Tooltip.TRANSITION_DURATION = 150
-
-  Tooltip.DEFAULTS = {
-    animation: true,
-    placement: 'top',
-    selector: false,
-    template: '<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>',
-    trigger: 'hover focus',
-    title: '',
-    delay: 0,
-    html: false,
-    container: false,
-    viewport: {
-      selector: 'body',
-      padding: 0
-    }
-  }
-
-  Tooltip.prototype.init = function (type, element, options) {
-    this.enabled   = true
-    this.type      = type
-    this.$element  = $(element)
-    this.options   = this.getOptions(options)
-    this.$viewport = this.options.viewport && $($.isFunction(this.options.viewport) ? this.options.viewport.call(this, this.$element) : (this.options.viewport.selector || this.options.viewport))
-    this.inState   = { click: false, hover: false, focus: false }
-
-    if (this.$element[0] instanceof document.constructor && !this.options.selector) {
-      throw new Error('`selector` option must be specified when initializing ' + this.type + ' on the window.document object!')
-    }
-
-    var triggers = this.options.trigger.split(' ')
-
-    for (var i = triggers.length; i--;) {
-      var trigger = triggers[i]
-
-      if (trigger == 'click') {
-        this.$element.on('click.' + this.type, this.options.selector, $.proxy(this.toggle, this))
-      } else if (trigger != 'manual') {
-        var eventIn  = trigger == 'hover' ? 'mouseenter' : 'focusin'
-        var eventOut = trigger == 'hover' ? 'mouseleave' : 'focusout'
-
-        this.$element.on(eventIn  + '.' + this.type, this.options.selector, $.proxy(this.enter, this))
-        this.$element.on(eventOut + '.' + this.type, this.options.selector, $.proxy(this.leave, this))
-      }
-    }
-
-    this.options.selector ?
-      (this._options = $.extend({}, this.options, { trigger: 'manual', selector: '' })) :
-      this.fixTitle()
-  }
-
-  Tooltip.prototype.getDefaults = function () {
-    return Tooltip.DEFAULTS
-  }
-
-  Tooltip.prototype.getOptions = function (options) {
-    options = $.extend({}, this.getDefaults(), this.$element.data(), options)
-
-    if (options.delay && typeof options.delay == 'number') {
-      options.delay = {
-        show: options.delay,
-        hide: options.delay
-      }
-    }
-
-    return options
-  }
-
-  Tooltip.prototype.getDelegateOptions = function () {
-    var options  = {}
-    var defaults = this.getDefaults()
-
-    this._options && $.each(this._options, function (key, value) {
-      if (defaults[key] != value) options[key] = value
-    })
-
-    return options
-  }
-
-  Tooltip.prototype.enter = function (obj) {
-    var self = obj instanceof this.constructor ?
-      obj : $(obj.currentTarget).data('bs.' + this.type)
-
-    if (!self) {
-      self = new this.constructor(obj.currentTarget, this.getDelegateOptions())
-      $(obj.currentTarget).data('bs.' + this.type, self)
-    }
-
-    if (obj instanceof $.Event) {
-      self.inState[obj.type == 'focusin' ? 'focus' : 'hover'] = true
-    }
-
-    if (self.tip().hasClass('in') || self.hoverState == 'in') {
-      self.hoverState = 'in'
-      return
-    }
-
-    clearTimeout(self.timeout)
-
-    self.hoverState = 'in'
-
-    if (!self.options.delay || !self.options.delay.show) return self.show()
-
-    self.timeout = setTimeout(function () {
-      if (self.hoverState == 'in') self.show()
-    }, self.options.delay.show)
-  }
-
-  Tooltip.prototype.isInStateTrue = function () {
-    for (var key in this.inState) {
-      if (this.inState[key]) return true
-    }
-
-    return false
-  }
-
-  Tooltip.prototype.leave = function (obj) {
-    var self = obj instanceof this.constructor ?
-      obj : $(obj.currentTarget).data('bs.' + this.type)
-
-    if (!self) {
-      self = new this.constructor(obj.currentTarget, this.getDelegateOptions())
-      $(obj.currentTarget).data('bs.' + this.type, self)
-    }
-
-    if (obj instanceof $.Event) {
-      self.inState[obj.type == 'focusout' ? 'focus' : 'hover'] = false
-    }
-
-    if (self.isInStateTrue()) return
-
-    clearTimeout(self.timeout)
-
-    self.hoverState = 'out'
-
-    if (!self.options.delay || !self.options.delay.hide) return self.hide()
-
-    self.timeout = setTimeout(function () {
-      if (self.hoverState == 'out') self.hide()
-    }, self.options.delay.hide)
-  }
-
-  Tooltip.prototype.show = function () {
-    var e = $.Event('show.bs.' + this.type)
-
-    if (this.hasContent() && this.enabled) {
-      this.$element.trigger(e)
-
-      var inDom = $.contains(this.$element[0].ownerDocument.documentElement, this.$element[0])
-      if (e.isDefaultPrevented() || !inDom) return
-      var that = this
-
-      var $tip = this.tip()
-
-      var tipId = this.getUID(this.type)
-
-      this.setContent()
-      $tip.attr('id', tipId)
-      this.$element.attr('aria-describedby', tipId)
-
-      if (this.options.animation) $tip.addClass('fade')
-
-      var placement = typeof this.options.placement == 'function' ?
-        this.options.placement.call(this, $tip[0], this.$element[0]) :
-        this.options.placement
-
-      var autoToken = /\s?auto?\s?/i
-      var autoPlace = autoToken.test(placement)
-      if (autoPlace) placement = placement.replace(autoToken, '') || 'top'
-
-      $tip
-        .detach()
-        .css({ top: 0, left: 0, display: 'block' })
-        .addClass(placement)
-        .data('bs.' + this.type, this)
-
-      this.options.container ? $tip.appendTo(this.options.container) : $tip.insertAfter(this.$element)
-      this.$element.trigger('inserted.bs.' + this.type)
-
-      var pos          = this.getPosition()
-      var actualWidth  = $tip[0].offsetWidth
-      var actualHeight = $tip[0].offsetHeight
-
-      if (autoPlace) {
-        var orgPlacement = placement
-        var viewportDim = this.getPosition(this.$viewport)
-
-        placement = placement == 'bottom' && pos.bottom + actualHeight > viewportDim.bottom ? 'top'    :
-                    placement == 'top'    && pos.top    - actualHeight < viewportDim.top    ? 'bottom' :
-                    placement == 'right'  && pos.right  + actualWidth  > viewportDim.width  ? 'left'   :
-                    placement == 'left'   && pos.left   - actualWidth  < viewportDim.left   ? 'right'  :
-                    placement
-
-        $tip
-          .removeClass(orgPlacement)
-          .addClass(placement)
-      }
-
-      var calculatedOffset = this.getCalculatedOffset(placement, pos, actualWidth, actualHeight)
-
-      this.applyPlacement(calculatedOffset, placement)
-
-      var complete = function () {
-        var prevHoverState = that.hoverState
-        that.$element.trigger('shown.bs.' + that.type)
-        that.hoverState = null
-
-        if (prevHoverState == 'out') that.leave(that)
-      }
-
-      $.support.transition && this.$tip.hasClass('fade') ?
-        $tip
-          .one('bsTransitionEnd', complete)
-          .emulateTransitionEnd(Tooltip.TRANSITION_DURATION) :
-        complete()
-    }
-  }
-
-  Tooltip.prototype.applyPlacement = function (offset, placement) {
-    var $tip   = this.tip()
-    var width  = $tip[0].offsetWidth
-    var height = $tip[0].offsetHeight
-
-    // manually read margins because getBoundingClientRect includes difference
-    var marginTop = parseInt($tip.css('margin-top'), 10)
-    var marginLeft = parseInt($tip.css('margin-left'), 10)
-
-    // we must check for NaN for ie 8/9
-    if (isNaN(marginTop))  marginTop  = 0
-    if (isNaN(marginLeft)) marginLeft = 0
-
-    offset.top  += marginTop
-    offset.left += marginLeft
-
-    // $.fn.offset doesn't round pixel values
-    // so we use setOffset directly with our own function B-0
-    $.offset.setOffset($tip[0], $.extend({
-      using: function (props) {
-        $tip.css({
-          top: Math.round(props.top),
-          left: Math.round(props.left)
-        })
-      }
-    }, offset), 0)
-
-    $tip.addClass('in')
-
-    // check to see if placing tip in new offset caused the tip to resize itself
-    var actualWidth  = $tip[0].offsetWidth
-    var actualHeight = $tip[0].offsetHeight
-
-    if (placement == 'top' && actualHeight != height) {
-      offset.top = offset.top + height - actualHeight
-    }
-
-    var delta = this.getViewportAdjustedDelta(placement, offset, actualWidth, actualHeight)
-
-    if (delta.left) offset.left += delta.left
-    else offset.top += delta.top
-
-    var isVertical          = /top|bottom/.test(placement)
-    var arrowDelta          = isVertical ? delta.left * 2 - width + actualWidth : delta.top * 2 - height + actualHeight
-    var arrowOffsetPosition = isVertical ? 'offsetWidth' : 'offsetHeight'
-
-    $tip.offset(offset)
-    this.replaceArrow(arrowDelta, $tip[0][arrowOffsetPosition], isVertical)
-  }
-
-  Tooltip.prototype.replaceArrow = function (delta, dimension, isVertical) {
-    this.arrow()
-      .css(isVertical ? 'left' : 'top', 50 * (1 - delta / dimension) + '%')
-      .css(isVertical ? 'top' : 'left', '')
-  }
-
-  Tooltip.prototype.setContent = function () {
-    var $tip  = this.tip()
-    var title = this.getTitle()
-
-    $tip.find('.tooltip-inner')[this.options.html ? 'html' : 'text'](title)
-    $tip.removeClass('fade in top bottom left right')
-  }
-
-  Tooltip.prototype.hide = function (callback) {
-    var that = this
-    var $tip = $(this.$tip)
-    var e    = $.Event('hide.bs.' + this.type)
-
-    function complete() {
-      if (that.hoverState != 'in') $tip.detach()
-      if (that.$element) { // TODO: Check whether guarding this code with this `if` is really necessary.
-        that.$element
-          .removeAttr('aria-describedby')
-          .trigger('hidden.bs.' + that.type)
-      }
-      callback && callback()
-    }
-
-    this.$element.trigger(e)
-
-    if (e.isDefaultPrevented()) return
-
-    $tip.removeClass('in')
-
-    $.support.transition && $tip.hasClass('fade') ?
-      $tip
-        .one('bsTransitionEnd', complete)
-        .emulateTransitionEnd(Tooltip.TRANSITION_DURATION) :
-      complete()
-
-    this.hoverState = null
-
-    return this
-  }
-
-  Tooltip.prototype.fixTitle = function () {
-    var $e = this.$element
-    if ($e.attr('title') || typeof $e.attr('data-original-title') != 'string') {
-      $e.attr('data-original-title', $e.attr('title') || '').attr('title', '')
-    }
-  }
-
-  Tooltip.prototype.hasContent = function () {
-    return this.getTitle()
-  }
-
-  Tooltip.prototype.getPosition = function ($element) {
-    $element   = $element || this.$element
-
-    var el     = $element[0]
-    var isBody = el.tagName == 'BODY'
-
-    var elRect    = el.getBoundingClientRect()
-    if (elRect.width == null) {
-      // width and height are missing in IE8, so compute them manually; see https://github.com/twbs/bootstrap/issues/14093
-      elRect = $.extend({}, elRect, { width: elRect.right - elRect.left, height: elRect.bottom - elRect.top })
-    }
-    var isSvg = window.SVGElement && el instanceof window.SVGElement
-    // Avoid using $.offset() on SVGs since it gives incorrect results in jQuery 3.
-    // See https://github.com/twbs/bootstrap/issues/20280
-    var elOffset  = isBody ? { top: 0, left: 0 } : (isSvg ? null : $element.offset())
-    var scroll    = { scroll: isBody ? document.documentElement.scrollTop || document.body.scrollTop : $element.scrollTop() }
-    var outerDims = isBody ? { width: $(window).width(), height: $(window).height() } : null
-
-    return $.extend({}, elRect, scroll, outerDims, elOffset)
-  }
-
-  Tooltip.prototype.getCalculatedOffset = function (placement, pos, actualWidth, actualHeight) {
-    return placement == 'bottom' ? { top: pos.top + pos.height,   left: pos.left + pos.width / 2 - actualWidth / 2 } :
-           placement == 'top'    ? { top: pos.top - actualHeight, left: pos.left + pos.width / 2 - actualWidth / 2 } :
-           placement == 'left'   ? { top: pos.top + pos.height / 2 - actualHeight / 2, left: pos.left - actualWidth } :
-        /* placement == 'right' */ { top: pos.top + pos.height / 2 - actualHeight / 2, left: pos.left + pos.width }
-
-  }
-
-  Tooltip.prototype.getViewportAdjustedDelta = function (placement, pos, actualWidth, actualHeight) {
-    var delta = { top: 0, left: 0 }
-    if (!this.$viewport) return delta
-
-    var viewportPadding = this.options.viewport && this.options.viewport.padding || 0
-    var viewportDimensions = this.getPosition(this.$viewport)
-
-    if (/right|left/.test(placement)) {
-      var topEdgeOffset    = pos.top - viewportPadding - viewportDimensions.scroll
-      var bottomEdgeOffset = pos.top + viewportPadding - viewportDimensions.scroll + actualHeight
-      if (topEdgeOffset < viewportDimensions.top) { // top overflow
-        delta.top = viewportDimensions.top - topEdgeOffset
-      } else if (bottomEdgeOffset > viewportDimensions.top + viewportDimensions.height) { // bottom overflow
-        delta.top = viewportDimensions.top + viewportDimensions.height - bottomEdgeOffset
-      }
-    } else {
-      var leftEdgeOffset  = pos.left - viewportPadding
-      var rightEdgeOffset = pos.left + viewportPadding + actualWidth
-      if (leftEdgeOffset < viewportDimensions.left) { // left overflow
-        delta.left = viewportDimensions.left - leftEdgeOffset
-      } else if (rightEdgeOffset > viewportDimensions.right) { // right overflow
-        delta.left = viewportDimensions.left + viewportDimensions.width - rightEdgeOffset
-      }
-    }
-
-    return delta
-  }
-
-  Tooltip.prototype.getTitle = function () {
-    var title
-    var $e = this.$element
-    var o  = this.options
-
-    title = $e.attr('data-original-title')
-      || (typeof o.title == 'function' ? o.title.call($e[0]) :  o.title)
-
-    return title
-  }
-
-  Tooltip.prototype.getUID = function (prefix) {
-    do prefix += ~~(Math.random() * 1000000)
-    while (document.getElementById(prefix))
-    return prefix
-  }
-
-  Tooltip.prototype.tip = function () {
-    if (!this.$tip) {
-      this.$tip = $(this.options.template)
-      if (this.$tip.length != 1) {
-        throw new Error(this.type + ' `template` option must consist of exactly 1 top-level element!')
-      }
-    }
-    return this.$tip
-  }
-
-  Tooltip.prototype.arrow = function () {
-    return (this.$arrow = this.$arrow || this.tip().find('.tooltip-arrow'))
-  }
-
-  Tooltip.prototype.enable = function () {
-    this.enabled = true
-  }
-
-  Tooltip.prototype.disable = function () {
-    this.enabled = false
-  }
-
-  Tooltip.prototype.toggleEnabled = function () {
-    this.enabled = !this.enabled
-  }
-
-  Tooltip.prototype.toggle = function (e) {
-    var self = this
-    if (e) {
-      self = $(e.currentTarget).data('bs.' + this.type)
-      if (!self) {
-        self = new this.constructor(e.currentTarget, this.getDelegateOptions())
-        $(e.currentTarget).data('bs.' + this.type, self)
-      }
-    }
-
-    if (e) {
-      self.inState.click = !self.inState.click
-      if (self.isInStateTrue()) self.enter(self)
-      else self.leave(self)
-    } else {
-      self.tip().hasClass('in') ? self.leave(self) : self.enter(self)
-    }
-  }
-
-  Tooltip.prototype.destroy = function () {
-    var that = this
-    clearTimeout(this.timeout)
-    this.hide(function () {
-      that.$element.off('.' + that.type).removeData('bs.' + that.type)
-      if (that.$tip) {
-        that.$tip.detach()
-      }
-      that.$tip = null
-      that.$arrow = null
-      that.$viewport = null
-      that.$element = null
-    })
-  }
-
-
-  // TOOLTIP PLUGIN DEFINITION
-  // =========================
-
-  function Plugin(option) {
-    return this.each(function () {
-      var $this   = $(this)
-      var data    = $this.data('bs.tooltip')
-      var options = typeof option == 'object' && option
-
-      if (!data && /destroy|hide/.test(option)) return
-      if (!data) $this.data('bs.tooltip', (data = new Tooltip(this, options)))
-      if (typeof option == 'string') data[option]()
-    })
-  }
-
-  var old = $.fn.tooltip
-
-  $.fn.tooltip             = Plugin
-  $.fn.tooltip.Constructor = Tooltip
-
-
-  // TOOLTIP NO CONFLICT
-  // ===================
-
-  $.fn.tooltip.noConflict = function () {
-    $.fn.tooltip = old
-    return this
-  }
-
-}(jQuery);
-
-/* ========================================================================
- * Bootstrap: popover.js v3.3.7
- * http://getbootstrap.com/javascript/#popovers
- * ========================================================================
- * Copyright 2011-2016 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
- * ======================================================================== */
-
-
-+function ($) {
-  'use strict';
-
-  // POPOVER PUBLIC CLASS DEFINITION
-  // ===============================
-
-  var Popover = function (element, options) {
-    this.init('popover', element, options)
-  }
-
-  if (!$.fn.tooltip) throw new Error('Popover requires tooltip.js')
-
-  Popover.VERSION  = '3.3.7'
-
-  Popover.DEFAULTS = $.extend({}, $.fn.tooltip.Constructor.DEFAULTS, {
-    placement: 'right',
-    trigger: 'click',
-    content: '',
-    template: '<div class="popover" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>'
-  })
-
-
-  // NOTE: POPOVER EXTENDS tooltip.js
-  // ================================
-
-  Popover.prototype = $.extend({}, $.fn.tooltip.Constructor.prototype)
-
-  Popover.prototype.constructor = Popover
-
-  Popover.prototype.getDefaults = function () {
-    return Popover.DEFAULTS
-  }
-
-  Popover.prototype.setContent = function () {
-    var $tip    = this.tip()
-    var title   = this.getTitle()
-    var content = this.getContent()
-
-    $tip.find('.popover-title')[this.options.html ? 'html' : 'text'](title)
-    $tip.find('.popover-content').children().detach().end()[ // we use append for html objects to maintain js events
-      this.options.html ? (typeof content == 'string' ? 'html' : 'append') : 'text'
-    ](content)
-
-    $tip.removeClass('fade top bottom left right in')
-
-    // IE8 doesn't accept hiding via the `:empty` pseudo selector, we have to do
-    // this manually by checking the contents.
-    if (!$tip.find('.popover-title').html()) $tip.find('.popover-title').hide()
-  }
-
-  Popover.prototype.hasContent = function () {
-    return this.getTitle() || this.getContent()
-  }
-
-  Popover.prototype.getContent = function () {
-    var $e = this.$element
-    var o  = this.options
-
-    return $e.attr('data-content')
-      || (typeof o.content == 'function' ?
-            o.content.call($e[0]) :
-            o.content)
-  }
-
-  Popover.prototype.arrow = function () {
-    return (this.$arrow = this.$arrow || this.tip().find('.arrow'))
-  }
-
-
-  // POPOVER PLUGIN DEFINITION
-  // =========================
-
-  function Plugin(option) {
-    return this.each(function () {
-      var $this   = $(this)
-      var data    = $this.data('bs.popover')
-      var options = typeof option == 'object' && option
-
-      if (!data && /destroy|hide/.test(option)) return
-      if (!data) $this.data('bs.popover', (data = new Popover(this, options)))
-      if (typeof option == 'string') data[option]()
-    })
-  }
-
-  var old = $.fn.popover
-
-  $.fn.popover             = Plugin
-  $.fn.popover.Constructor = Popover
-
-
-  // POPOVER NO CONFLICT
-  // ===================
-
-  $.fn.popover.noConflict = function () {
-    $.fn.popover = old
-    return this
-  }
-
-}(jQuery);
-
-/* ========================================================================
- * Bootstrap: scrollspy.js v3.3.7
- * http://getbootstrap.com/javascript/#scrollspy
- * ========================================================================
- * Copyright 2011-2016 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
- * ======================================================================== */
-
-
-+function ($) {
-  'use strict';
-
-  // SCROLLSPY CLASS DEFINITION
-  // ==========================
-
-  function ScrollSpy(element, options) {
-    this.$body          = $(document.body)
-    this.$scrollElement = $(element).is(document.body) ? $(window) : $(element)
-    this.options        = $.extend({}, ScrollSpy.DEFAULTS, options)
-    this.selector       = (this.options.target || '') + ' .nav li > a'
-    this.offsets        = []
-    this.targets        = []
-    this.activeTarget   = null
-    this.scrollHeight   = 0
-
-    this.$scrollElement.on('scroll.bs.scrollspy', $.proxy(this.process, this))
-    this.refresh()
-    this.process()
-  }
-
-  ScrollSpy.VERSION  = '3.3.7'
-
-  ScrollSpy.DEFAULTS = {
-    offset: 10
-  }
-
-  ScrollSpy.prototype.getScrollHeight = function () {
-    return this.$scrollElement[0].scrollHeight || Math.max(this.$body[0].scrollHeight, document.documentElement.scrollHeight)
-  }
-
-  ScrollSpy.prototype.refresh = function () {
-    var that          = this
-    var offsetMethod  = 'offset'
-    var offsetBase    = 0
-
-    this.offsets      = []
-    this.targets      = []
-    this.scrollHeight = this.getScrollHeight()
-
-    if (!$.isWindow(this.$scrollElement[0])) {
-      offsetMethod = 'position'
-      offsetBase   = this.$scrollElement.scrollTop()
-    }
-
-    this.$body
-      .find(this.selector)
-      .map(function () {
-        var $el   = $(this)
-        var href  = $el.data('target') || $el.attr('href')
-        var $href = /^#./.test(href) && $(href)
-
-        return ($href
-          && $href.length
-          && $href.is(':visible')
-          && [[$href[offsetMethod]().top + offsetBase, href]]) || null
-      })
-      .sort(function (a, b) { return a[0] - b[0] })
-      .each(function () {
-        that.offsets.push(this[0])
-        that.targets.push(this[1])
-      })
-  }
-
-  ScrollSpy.prototype.process = function () {
-    var scrollTop    = this.$scrollElement.scrollTop() + this.options.offset
-    var scrollHeight = this.getScrollHeight()
-    var maxScroll    = this.options.offset + scrollHeight - this.$scrollElement.height()
-    var offsets      = this.offsets
-    var targets      = this.targets
-    var activeTarget = this.activeTarget
-    var i
-
-    if (this.scrollHeight != scrollHeight) {
-      this.refresh()
-    }
-
-    if (scrollTop >= maxScroll) {
-      return activeTarget != (i = targets[targets.length - 1]) && this.activate(i)
-    }
-
-    if (activeTarget && scrollTop < offsets[0]) {
-      this.activeTarget = null
-      return this.clear()
-    }
-
-    for (i = offsets.length; i--;) {
-      activeTarget != targets[i]
-        && scrollTop >= offsets[i]
-        && (offsets[i + 1] === undefined || scrollTop < offsets[i + 1])
-        && this.activate(targets[i])
-    }
-  }
-
-  ScrollSpy.prototype.activate = function (target) {
-    this.activeTarget = target
-
-    this.clear()
-
-    var selector = this.selector +
-      '[data-target="' + target + '"],' +
-      this.selector + '[href="' + target + '"]'
-
-    var active = $(selector)
-      .parents('li')
-      .addClass('active')
-
-    if (active.parent('.dropdown-menu').length) {
-      active = active
-        .closest('li.dropdown')
-        .addClass('active')
-    }
-
-    active.trigger('activate.bs.scrollspy')
-  }
-
-  ScrollSpy.prototype.clear = function () {
-    $(this.selector)
-      .parentsUntil(this.options.target, '.active')
-      .removeClass('active')
-  }
-
-
-  // SCROLLSPY PLUGIN DEFINITION
-  // ===========================
-
-  function Plugin(option) {
-    return this.each(function () {
-      var $this   = $(this)
-      var data    = $this.data('bs.scrollspy')
-      var options = typeof option == 'object' && option
-
-      if (!data) $this.data('bs.scrollspy', (data = new ScrollSpy(this, options)))
-      if (typeof option == 'string') data[option]()
-    })
-  }
-
-  var old = $.fn.scrollspy
-
-  $.fn.scrollspy             = Plugin
-  $.fn.scrollspy.Constructor = ScrollSpy
-
-
-  // SCROLLSPY NO CONFLICT
-  // =====================
-
-  $.fn.scrollspy.noConflict = function () {
-    $.fn.scrollspy = old
-    return this
-  }
-
-
-  // SCROLLSPY DATA-API
-  // ==================
-
-  $(window).on('load.bs.scrollspy.data-api', function () {
-    $('[data-spy="scroll"]').each(function () {
-      var $spy = $(this)
-      Plugin.call($spy, $spy.data())
-    })
-  })
-
-}(jQuery);
-
-/* ========================================================================
- * Bootstrap: tab.js v3.3.7
- * http://getbootstrap.com/javascript/#tabs
- * ========================================================================
- * Copyright 2011-2016 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
- * ======================================================================== */
-
-
-+function ($) {
-  'use strict';
-
-  // TAB CLASS DEFINITION
-  // ====================
-
-  var Tab = function (element) {
-    // jscs:disable requireDollarBeforejQueryAssignment
-    this.element = $(element)
-    // jscs:enable requireDollarBeforejQueryAssignment
-  }
-
-  Tab.VERSION = '3.3.7'
-
-  Tab.TRANSITION_DURATION = 150
-
-  Tab.prototype.show = function () {
-    var $this    = this.element
-    var $ul      = $this.closest('ul:not(.dropdown-menu)')
-    var selector = $this.data('target')
-
-    if (!selector) {
-      selector = $this.attr('href')
-      selector = selector && selector.replace(/.*(?=#[^\s]*$)/, '') // strip for ie7
-    }
-
-    if ($this.parent('li').hasClass('active')) return
-
-    var $previous = $ul.find('.active:last a')
-    var hideEvent = $.Event('hide.bs.tab', {
-      relatedTarget: $this[0]
-    })
-    var showEvent = $.Event('show.bs.tab', {
-      relatedTarget: $previous[0]
-    })
-
-    $previous.trigger(hideEvent)
-    $this.trigger(showEvent)
-
-    if (showEvent.isDefaultPrevented() || hideEvent.isDefaultPrevented()) return
-
-    var $target = $(selector)
-
-    this.activate($this.closest('li'), $ul)
-    this.activate($target, $target.parent(), function () {
-      $previous.trigger({
-        type: 'hidden.bs.tab',
-        relatedTarget: $this[0]
-      })
-      $this.trigger({
-        type: 'shown.bs.tab',
-        relatedTarget: $previous[0]
-      })
-    })
-  }
-
-  Tab.prototype.activate = function (element, container, callback) {
-    var $active    = container.find('> .active')
-    var transition = callback
-      && $.support.transition
-      && ($active.length && $active.hasClass('fade') || !!container.find('> .fade').length)
-
-    function next() {
-      $active
-        .removeClass('active')
-        .find('> .dropdown-menu > .active')
-          .removeClass('active')
-        .end()
-        .find('[data-toggle="tab"]')
-          .attr('aria-expanded', false)
-
-      element
-        .addClass('active')
-        .find('[data-toggle="tab"]')
-          .attr('aria-expanded', true)
-
-      if (transition) {
-        element[0].offsetWidth // reflow for transition
-        element.addClass('in')
-      } else {
-        element.removeClass('fade')
-      }
-
-      if (element.parent('.dropdown-menu').length) {
-        element
-          .closest('li.dropdown')
-            .addClass('active')
-          .end()
-          .find('[data-toggle="tab"]')
-            .attr('aria-expanded', true)
-      }
-
-      callback && callback()
-    }
-
-    $active.length && transition ?
-      $active
-        .one('bsTransitionEnd', next)
-        .emulateTransitionEnd(Tab.TRANSITION_DURATION) :
-      next()
-
-    $active.removeClass('in')
-  }
-
-
-  // TAB PLUGIN DEFINITION
-  // =====================
-
-  function Plugin(option) {
-    return this.each(function () {
-      var $this = $(this)
-      var data  = $this.data('bs.tab')
-
-      if (!data) $this.data('bs.tab', (data = new Tab(this)))
-      if (typeof option == 'string') data[option]()
-    })
-  }
-
-  var old = $.fn.tab
-
-  $.fn.tab             = Plugin
-  $.fn.tab.Constructor = Tab
-
-
-  // TAB NO CONFLICT
-  // ===============
-
-  $.fn.tab.noConflict = function () {
-    $.fn.tab = old
-    return this
-  }
-
-
-  // TAB DATA-API
-  // ============
-
-  var clickHandler = function (e) {
-    e.preventDefault()
-    Plugin.call($(this), 'show')
-  }
-
-  $(document)
-    .on('click.bs.tab.data-api', '[data-toggle="tab"]', clickHandler)
-    .on('click.bs.tab.data-api', '[data-toggle="pill"]', clickHandler)
-
-}(jQuery);
-
-/* ========================================================================
- * Bootstrap: affix.js v3.3.7
- * http://getbootstrap.com/javascript/#affix
- * ========================================================================
- * Copyright 2011-2016 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
- * ======================================================================== */
-
-
-+function ($) {
-  'use strict';
-
-  // AFFIX CLASS DEFINITION
-  // ======================
-
-  var Affix = function (element, options) {
-    this.options = $.extend({}, Affix.DEFAULTS, options)
-
-    this.$target = $(this.options.target)
-      .on('scroll.bs.affix.data-api', $.proxy(this.checkPosition, this))
-      .on('click.bs.affix.data-api',  $.proxy(this.checkPositionWithEventLoop, this))
-
-    this.$element     = $(element)
-    this.affixed      = null
-    this.unpin        = null
-    this.pinnedOffset = null
-
-    this.checkPosition()
-  }
-
-  Affix.VERSION  = '3.3.7'
-
-  Affix.RESET    = 'affix affix-top affix-bottom'
-
-  Affix.DEFAULTS = {
-    offset: 0,
-    target: window
-  }
-
-  Affix.prototype.getState = function (scrollHeight, height, offsetTop, offsetBottom) {
-    var scrollTop    = this.$target.scrollTop()
-    var position     = this.$element.offset()
-    var targetHeight = this.$target.height()
-
-    if (offsetTop != null && this.affixed == 'top') return scrollTop < offsetTop ? 'top' : false
-
-    if (this.affixed == 'bottom') {
-      if (offsetTop != null) return (scrollTop + this.unpin <= position.top) ? false : 'bottom'
-      return (scrollTop + targetHeight <= scrollHeight - offsetBottom) ? false : 'bottom'
-    }
-
-    var initializing   = this.affixed == null
-    var colliderTop    = initializing ? scrollTop : position.top
-    var colliderHeight = initializing ? targetHeight : height
-
-    if (offsetTop != null && scrollTop <= offsetTop) return 'top'
-    if (offsetBottom != null && (colliderTop + colliderHeight >= scrollHeight - offsetBottom)) return 'bottom'
-
-    return false
-  }
-
-  Affix.prototype.getPinnedOffset = function () {
-    if (this.pinnedOffset) return this.pinnedOffset
-    this.$element.removeClass(Affix.RESET).addClass('affix')
-    var scrollTop = this.$target.scrollTop()
-    var position  = this.$element.offset()
-    return (this.pinnedOffset = position.top - scrollTop)
-  }
-
-  Affix.prototype.checkPositionWithEventLoop = function () {
-    setTimeout($.proxy(this.checkPosition, this), 1)
-  }
-
-  Affix.prototype.checkPosition = function () {
-    if (!this.$element.is(':visible')) return
-
-    var height       = this.$element.height()
-    var offset       = this.options.offset
-    var offsetTop    = offset.top
-    var offsetBottom = offset.bottom
-    var scrollHeight = Math.max($(document).height(), $(document.body).height())
-
-    if (typeof offset != 'object')         offsetBottom = offsetTop = offset
-    if (typeof offsetTop == 'function')    offsetTop    = offset.top(this.$element)
-    if (typeof offsetBottom == 'function') offsetBottom = offset.bottom(this.$element)
-
-    var affix = this.getState(scrollHeight, height, offsetTop, offsetBottom)
-
-    if (this.affixed != affix) {
-      if (this.unpin != null) this.$element.css('top', '')
-
-      var affixType = 'affix' + (affix ? '-' + affix : '')
-      var e         = $.Event(affixType + '.bs.affix')
-
-      this.$element.trigger(e)
-
-      if (e.isDefaultPrevented()) return
-
-      this.affixed = affix
-      this.unpin = affix == 'bottom' ? this.getPinnedOffset() : null
-
-      this.$element
-        .removeClass(Affix.RESET)
-        .addClass(affixType)
-        .trigger(affixType.replace('affix', 'affixed') + '.bs.affix')
-    }
-
-    if (affix == 'bottom') {
-      this.$element.offset({
-        top: scrollHeight - height - offsetBottom
-      })
-    }
-  }
-
-
-  // AFFIX PLUGIN DEFINITION
-  // =======================
-
-  function Plugin(option) {
-    return this.each(function () {
-      var $this   = $(this)
-      var data    = $this.data('bs.affix')
-      var options = typeof option == 'object' && option
-
-      if (!data) $this.data('bs.affix', (data = new Affix(this, options)))
-      if (typeof option == 'string') data[option]()
-    })
-  }
-
-  var old = $.fn.affix
-
-  $.fn.affix             = Plugin
-  $.fn.affix.Constructor = Affix
-
-
-  // AFFIX NO CONFLICT
-  // =================
-
-  $.fn.affix.noConflict = function () {
-    $.fn.affix = old
-    return this
-  }
-
-
-  // AFFIX DATA-API
-  // ==============
-
-  $(window).on('load', function () {
-    $('[data-spy="affix"]').each(function () {
-      var $spy = $(this)
-      var data = $spy.data()
-
-      data.offset = data.offset || {}
-
-      if (data.offsetBottom != null) data.offset.bottom = data.offsetBottom
-      if (data.offsetTop    != null) data.offset.top    = data.offsetTop
-
-      Plugin.call($spy, data)
-    })
-  })
-
-}(jQuery);
-
-
-/***/ }),
-/* 15 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(16);
-
-/***/ }),
-/* 16 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var utils = __webpack_require__(0);
-var bind = __webpack_require__(4);
-var Axios = __webpack_require__(18);
-var defaults = __webpack_require__(1);
-
-/**
- * Create an instance of Axios
- *
- * @param {Object} defaultConfig The default config for the instance
- * @return {Axios} A new instance of Axios
- */
-function createInstance(defaultConfig) {
-  var context = new Axios(defaultConfig);
-  var instance = bind(Axios.prototype.request, context);
-
-  // Copy axios.prototype to instance
-  utils.extend(instance, Axios.prototype, context);
-
-  // Copy context to instance
-  utils.extend(instance, context);
-
-  return instance;
-}
-
-// Create the default instance to be exported
-var axios = createInstance(defaults);
-
-// Expose Axios class to allow class inheritance
-axios.Axios = Axios;
-
-// Factory for creating new instances
-axios.create = function create(instanceConfig) {
-  return createInstance(utils.merge(defaults, instanceConfig));
-};
-
-// Expose Cancel & CancelToken
-axios.Cancel = __webpack_require__(8);
-axios.CancelToken = __webpack_require__(33);
-axios.isCancel = __webpack_require__(7);
-
-// Expose all/spread
-axios.all = function all(promises) {
-  return Promise.all(promises);
-};
-axios.spread = __webpack_require__(34);
-
-module.exports = axios;
-
-// Allow use of default import syntax in TypeScript
-module.exports.default = axios;
-
-
-/***/ }),
-/* 17 */
-/***/ (function(module, exports) {
-
-/*!
- * Determine if an object is a Buffer
- *
- * @author   Feross Aboukhadijeh <feross@feross.org> <http://feross.org>
- * @license  MIT
- */
-
-// The _isBuffer check is for Safari 5-7 support, because it's missing
-// Object.prototype.constructor. Remove this eventually
-module.exports = function (obj) {
-  return obj != null && (isBuffer(obj) || isSlowBuffer(obj) || !!obj._isBuffer)
-}
-
-function isBuffer (obj) {
-  return !!obj.constructor && typeof obj.constructor.isBuffer === 'function' && obj.constructor.isBuffer(obj)
-}
-
-// For Node v0.10 support. Remove this eventually.
-function isSlowBuffer (obj) {
-  return typeof obj.readFloatLE === 'function' && typeof obj.slice === 'function' && isBuffer(obj.slice(0, 0))
-}
-
-
-/***/ }),
-/* 18 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var defaults = __webpack_require__(1);
-var utils = __webpack_require__(0);
-var InterceptorManager = __webpack_require__(28);
-var dispatchRequest = __webpack_require__(29);
-var isAbsoluteURL = __webpack_require__(31);
-var combineURLs = __webpack_require__(32);
-
-/**
- * Create a new instance of Axios
- *
- * @param {Object} instanceConfig The default config for the instance
- */
-function Axios(instanceConfig) {
-  this.defaults = instanceConfig;
-  this.interceptors = {
-    request: new InterceptorManager(),
-    response: new InterceptorManager()
-  };
-}
-
-/**
- * Dispatch a request
- *
- * @param {Object} config The config specific for this request (merged with this.defaults)
- */
-Axios.prototype.request = function request(config) {
-  /*eslint no-param-reassign:0*/
-  // Allow for axios('example/url'[, config]) a la fetch API
-  if (typeof config === 'string') {
-    config = utils.merge({
-      url: arguments[0]
-    }, arguments[1]);
-  }
-
-  config = utils.merge(defaults, this.defaults, { method: 'get' }, config);
-  config.method = config.method.toLowerCase();
-
-  // Support baseURL config
-  if (config.baseURL && !isAbsoluteURL(config.url)) {
-    config.url = combineURLs(config.baseURL, config.url);
-  }
-
-  // Hook up interceptors middleware
-  var chain = [dispatchRequest, undefined];
-  var promise = Promise.resolve(config);
-
-  this.interceptors.request.forEach(function unshiftRequestInterceptors(interceptor) {
-    chain.unshift(interceptor.fulfilled, interceptor.rejected);
-  });
-
-  this.interceptors.response.forEach(function pushResponseInterceptors(interceptor) {
-    chain.push(interceptor.fulfilled, interceptor.rejected);
-  });
-
-  while (chain.length) {
-    promise = promise.then(chain.shift(), chain.shift());
-  }
-
-  return promise;
-};
-
-// Provide aliases for supported request methods
-utils.forEach(['delete', 'get', 'head', 'options'], function forEachMethodNoData(method) {
-  /*eslint func-names:0*/
-  Axios.prototype[method] = function(url, config) {
-    return this.request(utils.merge(config || {}, {
-      method: method,
-      url: url
-    }));
-  };
-});
-
-utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
-  /*eslint func-names:0*/
-  Axios.prototype[method] = function(url, data, config) {
-    return this.request(utils.merge(config || {}, {
-      method: method,
-      url: url,
-      data: data
-    }));
-  };
-});
-
-module.exports = Axios;
-
-
-/***/ }),
-/* 19 */
+/***/ "./node_modules/process/browser.js":
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -31009,1889 +31601,150 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 20 */
-/***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
+/***/ "./node_modules/vue-loader/lib/component-normalizer.js":
+/***/ (function(module, exports) {
 
+/* globals __VUE_SSR_CONTEXT__ */
 
-var utils = __webpack_require__(0);
+// this module is a runtime utility for cleaner component module output and will
+// be included in the final webpack user bundle
 
-module.exports = function normalizeHeaderName(headers, normalizedName) {
-  utils.forEach(headers, function processHeader(value, name) {
-    if (name !== normalizedName && name.toUpperCase() === normalizedName.toUpperCase()) {
-      headers[normalizedName] = value;
-      delete headers[name];
-    }
-  });
-};
+module.exports = function normalizeComponent (
+  rawScriptExports,
+  compiledTemplate,
+  injectStyles,
+  scopeId,
+  moduleIdentifier /* server only */
+) {
+  var esModule
+  var scriptExports = rawScriptExports = rawScriptExports || {}
 
-
-/***/ }),
-/* 21 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var createError = __webpack_require__(6);
-
-/**
- * Resolve or reject a Promise based on response status.
- *
- * @param {Function} resolve A function that resolves the promise.
- * @param {Function} reject A function that rejects the promise.
- * @param {object} response The response.
- */
-module.exports = function settle(resolve, reject, response) {
-  var validateStatus = response.config.validateStatus;
-  // Note: status is not exposed by XDomainRequest
-  if (!response.status || !validateStatus || validateStatus(response.status)) {
-    resolve(response);
-  } else {
-    reject(createError(
-      'Request failed with status code ' + response.status,
-      response.config,
-      null,
-      response.request,
-      response
-    ));
-  }
-};
-
-
-/***/ }),
-/* 22 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * Update an Error with the specified config, error code, and response.
- *
- * @param {Error} error The error to update.
- * @param {Object} config The config.
- * @param {string} [code] The error code (for example, 'ECONNABORTED').
- * @param {Object} [request] The request.
- * @param {Object} [response] The response.
- * @returns {Error} The error.
- */
-module.exports = function enhanceError(error, config, code, request, response) {
-  error.config = config;
-  if (code) {
-    error.code = code;
-  }
-  error.request = request;
-  error.response = response;
-  return error;
-};
-
-
-/***/ }),
-/* 23 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var utils = __webpack_require__(0);
-
-function encode(val) {
-  return encodeURIComponent(val).
-    replace(/%40/gi, '@').
-    replace(/%3A/gi, ':').
-    replace(/%24/g, '$').
-    replace(/%2C/gi, ',').
-    replace(/%20/g, '+').
-    replace(/%5B/gi, '[').
-    replace(/%5D/gi, ']');
-}
-
-/**
- * Build a URL by appending params to the end
- *
- * @param {string} url The base of the url (e.g., http://www.google.com)
- * @param {object} [params] The params to be appended
- * @returns {string} The formatted url
- */
-module.exports = function buildURL(url, params, paramsSerializer) {
-  /*eslint no-param-reassign:0*/
-  if (!params) {
-    return url;
+  // ES6 modules interop
+  var type = typeof rawScriptExports.default
+  if (type === 'object' || type === 'function') {
+    esModule = rawScriptExports
+    scriptExports = rawScriptExports.default
   }
 
-  var serializedParams;
-  if (paramsSerializer) {
-    serializedParams = paramsSerializer(params);
-  } else if (utils.isURLSearchParams(params)) {
-    serializedParams = params.toString();
-  } else {
-    var parts = [];
+  // Vue.extend constructor export interop
+  var options = typeof scriptExports === 'function'
+    ? scriptExports.options
+    : scriptExports
 
-    utils.forEach(params, function serialize(val, key) {
-      if (val === null || typeof val === 'undefined') {
-        return;
+  // render functions
+  if (compiledTemplate) {
+    options.render = compiledTemplate.render
+    options.staticRenderFns = compiledTemplate.staticRenderFns
+  }
+
+  // scopedId
+  if (scopeId) {
+    options._scopeId = scopeId
+  }
+
+  var hook
+  if (moduleIdentifier) { // server build
+    hook = function (context) {
+      // 2.3 injection
+      context =
+        context || // cached call
+        (this.$vnode && this.$vnode.ssrContext) || // stateful
+        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
+      // 2.2 with runInNewContext: true
+      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
+        context = __VUE_SSR_CONTEXT__
       }
-
-      if (utils.isArray(val)) {
-        key = key + '[]';
+      // inject component styles
+      if (injectStyles) {
+        injectStyles.call(this, context)
       }
-
-      if (!utils.isArray(val)) {
-        val = [val];
-      }
-
-      utils.forEach(val, function parseValue(v) {
-        if (utils.isDate(v)) {
-          v = v.toISOString();
-        } else if (utils.isObject(v)) {
-          v = JSON.stringify(v);
-        }
-        parts.push(encode(key) + '=' + encode(v));
-      });
-    });
-
-    serializedParams = parts.join('&');
-  }
-
-  if (serializedParams) {
-    url += (url.indexOf('?') === -1 ? '?' : '&') + serializedParams;
-  }
-
-  return url;
-};
-
-
-/***/ }),
-/* 24 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var utils = __webpack_require__(0);
-
-/**
- * Parse headers into an object
- *
- * ```
- * Date: Wed, 27 Aug 2014 08:58:49 GMT
- * Content-Type: application/json
- * Connection: keep-alive
- * Transfer-Encoding: chunked
- * ```
- *
- * @param {String} headers Headers needing to be parsed
- * @returns {Object} Headers parsed into an object
- */
-module.exports = function parseHeaders(headers) {
-  var parsed = {};
-  var key;
-  var val;
-  var i;
-
-  if (!headers) { return parsed; }
-
-  utils.forEach(headers.split('\n'), function parser(line) {
-    i = line.indexOf(':');
-    key = utils.trim(line.substr(0, i)).toLowerCase();
-    val = utils.trim(line.substr(i + 1));
-
-    if (key) {
-      parsed[key] = parsed[key] ? parsed[key] + ', ' + val : val;
-    }
-  });
-
-  return parsed;
-};
-
-
-/***/ }),
-/* 25 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var utils = __webpack_require__(0);
-
-module.exports = (
-  utils.isStandardBrowserEnv() ?
-
-  // Standard browser envs have full support of the APIs needed to test
-  // whether the request URL is of the same origin as current location.
-  (function standardBrowserEnv() {
-    var msie = /(msie|trident)/i.test(navigator.userAgent);
-    var urlParsingNode = document.createElement('a');
-    var originURL;
-
-    /**
-    * Parse a URL to discover it's components
-    *
-    * @param {String} url The URL to be parsed
-    * @returns {Object}
-    */
-    function resolveURL(url) {
-      var href = url;
-
-      if (msie) {
-        // IE needs attribute set twice to normalize properties
-        urlParsingNode.setAttribute('href', href);
-        href = urlParsingNode.href;
-      }
-
-      urlParsingNode.setAttribute('href', href);
-
-      // urlParsingNode provides the UrlUtils interface - http://url.spec.whatwg.org/#urlutils
-      return {
-        href: urlParsingNode.href,
-        protocol: urlParsingNode.protocol ? urlParsingNode.protocol.replace(/:$/, '') : '',
-        host: urlParsingNode.host,
-        search: urlParsingNode.search ? urlParsingNode.search.replace(/^\?/, '') : '',
-        hash: urlParsingNode.hash ? urlParsingNode.hash.replace(/^#/, '') : '',
-        hostname: urlParsingNode.hostname,
-        port: urlParsingNode.port,
-        pathname: (urlParsingNode.pathname.charAt(0) === '/') ?
-                  urlParsingNode.pathname :
-                  '/' + urlParsingNode.pathname
-      };
-    }
-
-    originURL = resolveURL(window.location.href);
-
-    /**
-    * Determine if a URL shares the same origin as the current location
-    *
-    * @param {String} requestURL The URL to test
-    * @returns {boolean} True if URL shares the same origin, otherwise false
-    */
-    return function isURLSameOrigin(requestURL) {
-      var parsed = (utils.isString(requestURL)) ? resolveURL(requestURL) : requestURL;
-      return (parsed.protocol === originURL.protocol &&
-            parsed.host === originURL.host);
-    };
-  })() :
-
-  // Non standard browser envs (web workers, react-native) lack needed support.
-  (function nonStandardBrowserEnv() {
-    return function isURLSameOrigin() {
-      return true;
-    };
-  })()
-);
-
-
-/***/ }),
-/* 26 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-// btoa polyfill for IE<10 courtesy https://github.com/davidchambers/Base64.js
-
-var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
-
-function E() {
-  this.message = 'String contains an invalid character';
-}
-E.prototype = new Error;
-E.prototype.code = 5;
-E.prototype.name = 'InvalidCharacterError';
-
-function btoa(input) {
-  var str = String(input);
-  var output = '';
-  for (
-    // initialize result and counter
-    var block, charCode, idx = 0, map = chars;
-    // if the next str index does not exist:
-    //   change the mapping table to "="
-    //   check if d has no fractional digits
-    str.charAt(idx | 0) || (map = '=', idx % 1);
-    // "8 - idx % 1 * 8" generates the sequence 2, 4, 6, 8
-    output += map.charAt(63 & block >> 8 - idx % 1 * 8)
-  ) {
-    charCode = str.charCodeAt(idx += 3 / 4);
-    if (charCode > 0xFF) {
-      throw new E();
-    }
-    block = block << 8 | charCode;
-  }
-  return output;
-}
-
-module.exports = btoa;
-
-
-/***/ }),
-/* 27 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var utils = __webpack_require__(0);
-
-module.exports = (
-  utils.isStandardBrowserEnv() ?
-
-  // Standard browser envs support document.cookie
-  (function standardBrowserEnv() {
-    return {
-      write: function write(name, value, expires, path, domain, secure) {
-        var cookie = [];
-        cookie.push(name + '=' + encodeURIComponent(value));
-
-        if (utils.isNumber(expires)) {
-          cookie.push('expires=' + new Date(expires).toGMTString());
-        }
-
-        if (utils.isString(path)) {
-          cookie.push('path=' + path);
-        }
-
-        if (utils.isString(domain)) {
-          cookie.push('domain=' + domain);
-        }
-
-        if (secure === true) {
-          cookie.push('secure');
-        }
-
-        document.cookie = cookie.join('; ');
-      },
-
-      read: function read(name) {
-        var match = document.cookie.match(new RegExp('(^|;\\s*)(' + name + ')=([^;]*)'));
-        return (match ? decodeURIComponent(match[3]) : null);
-      },
-
-      remove: function remove(name) {
-        this.write(name, '', Date.now() - 86400000);
-      }
-    };
-  })() :
-
-  // Non standard browser env (web workers, react-native) lack needed support.
-  (function nonStandardBrowserEnv() {
-    return {
-      write: function write() {},
-      read: function read() { return null; },
-      remove: function remove() {}
-    };
-  })()
-);
-
-
-/***/ }),
-/* 28 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var utils = __webpack_require__(0);
-
-function InterceptorManager() {
-  this.handlers = [];
-}
-
-/**
- * Add a new interceptor to the stack
- *
- * @param {Function} fulfilled The function to handle `then` for a `Promise`
- * @param {Function} rejected The function to handle `reject` for a `Promise`
- *
- * @return {Number} An ID used to remove interceptor later
- */
-InterceptorManager.prototype.use = function use(fulfilled, rejected) {
-  this.handlers.push({
-    fulfilled: fulfilled,
-    rejected: rejected
-  });
-  return this.handlers.length - 1;
-};
-
-/**
- * Remove an interceptor from the stack
- *
- * @param {Number} id The ID that was returned by `use`
- */
-InterceptorManager.prototype.eject = function eject(id) {
-  if (this.handlers[id]) {
-    this.handlers[id] = null;
-  }
-};
-
-/**
- * Iterate over all the registered interceptors
- *
- * This method is particularly useful for skipping over any
- * interceptors that may have become `null` calling `eject`.
- *
- * @param {Function} fn The function to call for each interceptor
- */
-InterceptorManager.prototype.forEach = function forEach(fn) {
-  utils.forEach(this.handlers, function forEachHandler(h) {
-    if (h !== null) {
-      fn(h);
-    }
-  });
-};
-
-module.exports = InterceptorManager;
-
-
-/***/ }),
-/* 29 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var utils = __webpack_require__(0);
-var transformData = __webpack_require__(30);
-var isCancel = __webpack_require__(7);
-var defaults = __webpack_require__(1);
-
-/**
- * Throws a `Cancel` if cancellation has been requested.
- */
-function throwIfCancellationRequested(config) {
-  if (config.cancelToken) {
-    config.cancelToken.throwIfRequested();
-  }
-}
-
-/**
- * Dispatch a request to the server using the configured adapter.
- *
- * @param {object} config The config that is to be used for the request
- * @returns {Promise} The Promise to be fulfilled
- */
-module.exports = function dispatchRequest(config) {
-  throwIfCancellationRequested(config);
-
-  // Ensure headers exist
-  config.headers = config.headers || {};
-
-  // Transform request data
-  config.data = transformData(
-    config.data,
-    config.headers,
-    config.transformRequest
-  );
-
-  // Flatten headers
-  config.headers = utils.merge(
-    config.headers.common || {},
-    config.headers[config.method] || {},
-    config.headers || {}
-  );
-
-  utils.forEach(
-    ['delete', 'get', 'head', 'post', 'put', 'patch', 'common'],
-    function cleanHeaderConfig(method) {
-      delete config.headers[method];
-    }
-  );
-
-  var adapter = config.adapter || defaults.adapter;
-
-  return adapter(config).then(function onAdapterResolution(response) {
-    throwIfCancellationRequested(config);
-
-    // Transform response data
-    response.data = transformData(
-      response.data,
-      response.headers,
-      config.transformResponse
-    );
-
-    return response;
-  }, function onAdapterRejection(reason) {
-    if (!isCancel(reason)) {
-      throwIfCancellationRequested(config);
-
-      // Transform response data
-      if (reason && reason.response) {
-        reason.response.data = transformData(
-          reason.response.data,
-          reason.response.headers,
-          config.transformResponse
-        );
+      // register component module identifier for async chunk inferrence
+      if (context && context._registeredComponents) {
+        context._registeredComponents.add(moduleIdentifier)
       }
     }
-
-    return Promise.reject(reason);
-  });
-};
-
-
-/***/ }),
-/* 30 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var utils = __webpack_require__(0);
-
-/**
- * Transform the data for a request or a response
- *
- * @param {Object|String} data The data to be transformed
- * @param {Array} headers The headers for the request or response
- * @param {Array|Function} fns A single function or Array of functions
- * @returns {*} The resulting transformed data
- */
-module.exports = function transformData(data, headers, fns) {
-  /*eslint no-param-reassign:0*/
-  utils.forEach(fns, function transform(fn) {
-    data = fn(data, headers);
-  });
-
-  return data;
-};
-
-
-/***/ }),
-/* 31 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * Determines whether the specified URL is absolute
- *
- * @param {string} url The URL to test
- * @returns {boolean} True if the specified URL is absolute, otherwise false
- */
-module.exports = function isAbsoluteURL(url) {
-  // A URL is considered absolute if it begins with "<scheme>://" or "//" (protocol-relative URL).
-  // RFC 3986 defines scheme name as a sequence of characters beginning with a letter and followed
-  // by any combination of letters, digits, plus, period, or hyphen.
-  return /^([a-z][a-z\d\+\-\.]*:)?\/\//i.test(url);
-};
-
-
-/***/ }),
-/* 32 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * Creates a new URL by combining the specified URLs
- *
- * @param {string} baseURL The base URL
- * @param {string} relativeURL The relative URL
- * @returns {string} The combined URL
- */
-module.exports = function combineURLs(baseURL, relativeURL) {
-  return relativeURL
-    ? baseURL.replace(/\/+$/, '') + '/' + relativeURL.replace(/^\/+/, '')
-    : baseURL;
-};
-
-
-/***/ }),
-/* 33 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var Cancel = __webpack_require__(8);
-
-/**
- * A `CancelToken` is an object that can be used to request cancellation of an operation.
- *
- * @class
- * @param {Function} executor The executor function.
- */
-function CancelToken(executor) {
-  if (typeof executor !== 'function') {
-    throw new TypeError('executor must be a function.');
+    // used by ssr in case component is cached and beforeCreate
+    // never gets called
+    options._ssrRegister = hook
+  } else if (injectStyles) {
+    hook = injectStyles
   }
 
-  var resolvePromise;
-  this.promise = new Promise(function promiseExecutor(resolve) {
-    resolvePromise = resolve;
-  });
-
-  var token = this;
-  executor(function cancel(message) {
-    if (token.reason) {
-      // Cancellation has already been requested
-      return;
+  if (hook) {
+    var functional = options.functional
+    var existing = functional
+      ? options.render
+      : options.beforeCreate
+    if (!functional) {
+      // inject component registration as beforeCreate hook
+      options.beforeCreate = existing
+        ? [].concat(existing, hook)
+        : [hook]
+    } else {
+      // register for functioal component in vue file
+      options.render = function renderWithStyleInjection (h, context) {
+        hook.call(context)
+        return existing(h, context)
+      }
     }
-
-    token.reason = new Cancel(message);
-    resolvePromise(token.reason);
-  });
-}
-
-/**
- * Throws a `Cancel` if cancellation has been requested.
- */
-CancelToken.prototype.throwIfRequested = function throwIfRequested() {
-  if (this.reason) {
-    throw this.reason;
   }
-};
 
-/**
- * Returns an object that contains a new `CancelToken` and a function that, when called,
- * cancels the `CancelToken`.
- */
-CancelToken.source = function source() {
-  var cancel;
-  var token = new CancelToken(function executor(c) {
-    cancel = c;
-  });
   return {
-    token: token,
-    cancel: cancel
-  };
-};
-
-module.exports = CancelToken;
+    esModule: esModule,
+    exports: scriptExports,
+    options: options
+  }
+}
 
 
 /***/ }),
-/* 34 */
+
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-48141bb8\",\"hasScoped\":false}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/Example.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-
-
-/**
- * Syntactic sugar for invoking a function and expanding an array for arguments.
- *
- * Common use case would be to use `Function.prototype.apply`.
- *
- *  ```js
- *  function f(x, y, z) {}
- *  var args = [1, 2, 3];
- *  f.apply(null, args);
- *  ```
- *
- * With `spread` this example can be re-written.
- *
- *  ```js
- *  spread(function(x, y, z) {})([1, 2, 3]);
- *  ```
- *
- * @param {Function} callback
- * @returns {Function}
- */
-module.exports = function spread(callback) {
-  return function wrap(arr) {
-    return callback.apply(null, arr);
-  };
-};
-
-
-/***/ }),
-/* 35 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-/*!
- * bootstrap-fileinput v4.3.9
- * http://plugins.krajee.com/file-input
- *
- * Author: Kartik Visweswaran
- * Copyright: 2014 - 2017, Kartik Visweswaran, Krajee.com
- *
- * Licensed under the BSD 3-Clause
- * https://github.com/kartik-v/bootstrap-fileinput/blob/master/LICENSE.md
- */!function (e) {
-  "use strict";
-   true ? !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(3)], __WEBPACK_AMD_DEFINE_FACTORY__ = (e),
-				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
-				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)) : "object" == (typeof module === "undefined" ? "undefined" : _typeof(module)) && module.exports ? module.exports = e(require("jquery")) : e(window.jQuery);
-}(function (e) {
-  "use strict";
-  e.fn.fileinputLocales = {}, e.fn.fileinputThemes = {};var i, t;i = { FRAMES: ".kv-preview-thumb", SORT_CSS: "file-sortable", STYLE_SETTING: 'style="width:{width};height:{height};"', OBJECT_PARAMS: '<param name="controller" value="true" />\n<param name="allowFullScreen" value="true" />\n<param name="allowScriptAccess" value="always" />\n<param name="autoPlay" value="false" />\n<param name="autoStart" value="false" />\n<param name="quality" value="high" />\n', DEFAULT_PREVIEW: '<div class="file-preview-other">\n<span class="{previewFileIconClass}">{previewFileIcon}</span>\n</div>', MODAL_ID: "kvFileinputModal", MODAL_EVENTS: ["show", "shown", "hide", "hidden", "loaded"], objUrl: window.URL || window.webkitURL, compare: function compare(e, i, t) {
-      return void 0 !== e && (t ? e === i : e.match(i));
-    }, isIE: function isIE(e) {
-      if ("Microsoft Internet Explorer" !== navigator.appName) return !1;if (10 === e) return new RegExp("msie\\s" + e, "i").test(navigator.userAgent);var i,
-          t = document.createElement("div");return t.innerHTML = "<!--[if IE " + e + "]> <i></i> <![endif]-->", i = t.getElementsByTagName("i").length, document.body.appendChild(t), t.parentNode.removeChild(t), i;
-    }, initModal: function initModal(i) {
-      var t = e("body");t.length && i.appendTo(t);
-    }, isEmpty: function isEmpty(i, t) {
-      return void 0 === i || null === i || 0 === i.length || t && "" === e.trim(i);
-    }, isArray: function isArray(e) {
-      return Array.isArray(e) || "[object Array]" === Object.prototype.toString.call(e);
-    }, ifSet: function ifSet(e, i, t) {
-      return t = t || "", i && "object" == (typeof i === "undefined" ? "undefined" : _typeof(i)) && e in i ? i[e] : t;
-    }, cleanArray: function cleanArray(e) {
-      return e instanceof Array || (e = []), e.filter(function (e) {
-        return void 0 !== e && null !== e;
-      });
-    }, spliceArray: function spliceArray(e, i) {
-      var t,
-          a = 0,
-          r = [];if (!(e instanceof Array)) return [];for (t = 0; t < e.length; t++) {
-        t !== i && (r[a] = e[t], a++);
-      }return r;
-    }, getNum: function getNum(e, i) {
-      return i = i || 0, "number" == typeof e ? e : ("string" == typeof e && (e = parseFloat(e)), isNaN(e) ? i : e);
-    }, hasFileAPISupport: function hasFileAPISupport() {
-      return !(!window.File || !window.FileReader);
-    }, hasDragDropSupport: function hasDragDropSupport() {
-      var e = document.createElement("div");return !i.isIE(9) && (void 0 !== e.draggable || void 0 !== e.ondragstart && void 0 !== e.ondrop);
-    }, hasFileUploadSupport: function hasFileUploadSupport() {
-      return i.hasFileAPISupport() && window.FormData;
-    }, addCss: function addCss(e, i) {
-      e.removeClass(i).addClass(i);
-    }, getElement: function getElement(t, a, r) {
-      return i.isEmpty(t) || i.isEmpty(t[a]) ? r : e(t[a]);
-    }, uniqId: function uniqId() {
-      return Math.round(new Date().getTime() + 100 * Math.random());
-    }, htmlEncode: function htmlEncode(e) {
-      return e.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&apos;");
-    }, replaceTags: function replaceTags(i, t) {
-      var a = i;return t ? (e.each(t, function (e, i) {
-        "function" == typeof i && (i = i()), a = a.split(e).join(i);
-      }), a) : a;
-    }, cleanMemory: function cleanMemory(e) {
-      var t = e.is("img") ? e.attr("src") : e.find("source").attr("src");i.objUrl.revokeObjectURL(t);
-    }, findFileName: function findFileName(e) {
-      var i = e.lastIndexOf("/");return -1 === i && (i = e.lastIndexOf("\\")), e.split(e.substring(i, i + 1)).pop();
-    }, checkFullScreen: function checkFullScreen() {
-      return document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement || document.msFullscreenElement;
-    }, toggleFullScreen: function toggleFullScreen(e) {
-      var t = document,
-          a = t.documentElement;a && e && !i.checkFullScreen() ? a.requestFullscreen ? a.requestFullscreen() : a.msRequestFullscreen ? a.msRequestFullscreen() : a.mozRequestFullScreen ? a.mozRequestFullScreen() : a.webkitRequestFullscreen && a.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT) : t.exitFullscreen ? t.exitFullscreen() : t.msExitFullscreen ? t.msExitFullscreen() : t.mozCancelFullScreen ? t.mozCancelFullScreen() : t.webkitExitFullscreen && t.webkitExitFullscreen();
-    }, moveArray: function moveArray(e, i, t) {
-      if (t >= e.length) for (var a = t - e.length; a-- + 1;) {
-        e.push(void 0);
-      }return e.splice(t, 0, e.splice(i, 1)[0]), e;
-    }, cleanZoomCache: function cleanZoomCache(e) {
-      var i = e.closest(".kv-zoom-cache-theme");i.length || (i = e.closest(".kv-zoom-cache")), i.remove();
-    } }, t = function t(_t, a) {
-    var r = this;r.$element = e(_t), r._validate() && (r.isPreviewable = i.hasFileAPISupport(), r.isIE9 = i.isIE(9), r.isIE10 = i.isIE(10), r.isPreviewable || r.isIE9 ? (r._init(a), r._listen()) : r.$element.removeClass("file-loading"));
-  }, t.prototype = { constructor: t, _init: function _init(t) {
-      var a,
-          r,
-          n = this,
-          o = n.$element;n.options = t, e.each(t, function (e, t) {
-        switch (e) {case "minFileCount":case "maxFileCount":case "maxFileSize":
-            n[e] = i.getNum(t);break;default:
-            n[e] = t;}
-      }), n.$form = o.closest("form"), n._initTemplateDefaults(), n.fileInputCleared = !1, n.fileBatchCompleted = !0, n.isPreviewable || (n.showPreview = !1), n.uploadFileAttr = i.isEmpty(o.attr("name")) ? "file_data" : o.attr("name"), n.reader = null, n.formdata = {}, n.clearStack(), n.uploadCount = 0, n.uploadStatus = {}, n.uploadLog = [], n.uploadAsyncCount = 0, n.loadedImages = [], n.totalImagesCount = 0, n.ajaxRequests = [], n.isError = !1, n.ajaxAborted = !1, n.cancelling = !1, r = n._getLayoutTemplate("progress"), n.progressTemplate = r.replace("{class}", n.progressClass), n.progressCompleteTemplate = r.replace("{class}", n.progressCompleteClass), n.progressErrorTemplate = r.replace("{class}", n.progressErrorClass), n.dropZoneEnabled = i.hasDragDropSupport() && n.dropZoneEnabled, n.isDisabled = o.attr("disabled") || o.attr("readonly"), n.isUploadable = i.hasFileUploadSupport() && !i.isEmpty(n.uploadUrl), n.isClickable = n.browseOnZoneClick && n.showPreview && (n.isUploadable && n.dropZoneEnabled || !i.isEmpty(n.defaultPreviewContent)), n.slug = "function" == typeof t.slugCallback ? t.slugCallback : n._slugDefault, n.mainTemplate = n.showCaption ? n._getLayoutTemplate("main1") : n._getLayoutTemplate("main2"), n.captionTemplate = n._getLayoutTemplate("caption"), n.previewGenericTemplate = n._getPreviewTemplate("generic"), n.resizeImage && (n.maxImageWidth || n.maxImageHeight) && (n.imageCanvas = document.createElement("canvas"), n.imageCanvasContext = n.imageCanvas.getContext("2d")), i.isEmpty(o.attr("id")) && o.attr("id", i.uniqId()), n.namespace = ".fileinput_" + o.attr("id").replace(/-/g, "_"), void 0 === n.$container ? n.$container = n._createContainer() : n._refreshContainer(), a = n.$container, n.$dropZone = a.find(".file-drop-zone"), n.$progress = a.find(".kv-upload-progress"), n.$btnUpload = a.find(".fileinput-upload"), n.$captionContainer = i.getElement(t, "elCaptionContainer", a.find(".file-caption")), n.$caption = i.getElement(t, "elCaptionText", a.find(".file-caption-name")), n.$previewContainer = i.getElement(t, "elPreviewContainer", a.find(".file-preview")), n.$preview = i.getElement(t, "elPreviewImage", a.find(".file-preview-thumbnails")), n.$previewStatus = i.getElement(t, "elPreviewStatus", a.find(".file-preview-status")), n.$errorContainer = i.getElement(t, "elErrorContainer", n.$previewContainer.find(".kv-fileinput-error")), i.isEmpty(n.msgErrorClass) || i.addCss(n.$errorContainer, n.msgErrorClass), n.$errorContainer.hide(), n.previewInitId = "preview-" + i.uniqId(), n._initPreviewCache(), n._initPreview(!0), n._initPreviewActions(), n._setFileDropZoneTitle(), o.removeClass("file-loading"), o.attr("disabled") && n.disable(), n._initZoom();
-    }, _initTemplateDefaults: function _initTemplateDefaults() {
-      var t,
-          a,
-          r,
-          n,
-          o,
-          l,
-          s,
-          d,
-          c,
-          p,
-          u,
-          f,
-          m,
-          g,
-          v,
-          h,
-          w,
-          _,
-          b,
-          C,
-          y,
-          E,
-          x,
-          T,
-          S,
-          F,
-          P,
-          I,
-          k,
-          A,
-          $,
-          z,
-          D,
-          U,
-          j = this;t = '{preview}\n<div class="kv-upload-progress hide"></div>\n<div class="input-group {class}">\n   {caption}\n   <div class="input-group-btn">\n       {remove}\n       {cancel}\n       {upload}\n       {browse}\n   </div>\n</div>', a = '{preview}\n<div class="kv-upload-progress hide"></div>\n{remove}\n{cancel}\n{upload}\n{browse}\n', r = '<div class="file-preview {class}">\n    {close}    <div class="{dropClass}">\n    <div class="file-preview-thumbnails">\n    </div>\n    <div class="clearfix"></div>    <div class="file-preview-status text-center text-success"></div>\n    <div class="kv-fileinput-error"></div>\n    </div>\n</div>', o = '<div class="close fileinput-remove">&times;</div>\n', n = '<i class="glyphicon glyphicon-file kv-caption-icon"></i>', l = '<div tabindex="500" class="form-control file-caption {class}">\n   <div class="file-caption-name"></div>\n</div>\n', s = '<button type="{type}" tabindex="500" title="{title}" class="{css}" {status}>{icon} {label}</button>', d = '<a href="{href}" tabindex="500" title="{title}" class="{css}" {status}>{icon} {label}</a>', c = '<div tabindex="500" class="{css}" {status}>{icon} {label}</div>', p = '<div id="' + i.MODAL_ID + '" class="file-zoom-dialog modal fade" tabindex="-1" aria-labelledby="' + i.MODAL_ID + 'Label"></div>', u = '<div class="modal-dialog modal-lg" role="document">\n  <div class="modal-content">\n    <div class="modal-header">\n      <div class="kv-zoom-actions pull-right">{toggleheader}{fullscreen}{borderless}{close}</div>\n      <h3 class="modal-title">{heading} <small><span class="kv-zoom-title"></span></small></h3>\n    </div>\n    <div class="modal-body">\n      <div class="floating-buttons"></div>\n      <div class="kv-zoom-body file-zoom-content"></div>\n{prev} {next}\n    </div>\n  </div>\n</div>\n', f = '<div class="progress">\n    <div class="{class}" role="progressbar" aria-valuenow="{percent}" aria-valuemin="0" aria-valuemax="100" style="width:{percent}%;">\n        {status}\n     </div>\n</div>', m = " <samp>({sizeText})</samp>", g = '<div class="file-thumbnail-footer">\n    <div class="file-footer-caption" title="{caption}">{caption}<br>{size}</div>\n    {progress} {actions}\n</div>', v = '<div class="file-upload-indicator" title="{indicatorTitle}">{indicator}</div>\n{drag}\n<div class="file-actions">\n    <div class="file-footer-buttons">\n        {upload} {delete} {zoom} {other}    </div>\n    <div class="clearfix"></div>\n</div>', h = '<button type="button" class="kv-file-remove {removeClass}" title="{removeTitle}" {dataUrl}{dataKey}>{removeIcon}</button>\n', w = '<button type="button" class="kv-file-upload {uploadClass}" title="{uploadTitle}">{uploadIcon}</button>', _ = '<button type="button" class="kv-file-zoom {zoomClass}" title="{zoomTitle}">{zoomIcon}</button>', b = '<span class="file-drag-handle {dragClass}" title="{dragTitle}">{dragIcon}</span>', C = '<div class="file-preview-frame {frameClass}" id="{previewId}" data-fileindex="{fileindex}" data-template="{template}"', y = C + '><div class="kv-file-content">\n', E = C + ' title="{caption}"><div class="kv-file-content">\n', x = "</div>{footer}\n</div>\n", T = "{content}\n", S = '<div class="kv-preview-data file-preview-html" title="{caption}" ' + i.STYLE_SETTING + ">{data}</div>\n", F = '<img src="{data}" class="file-preview-image kv-preview-data" title="{caption}" alt="{caption}" ' + i.STYLE_SETTING + ">\n", P = '<textarea class="kv-preview-data file-preview-text" title="{caption}" readonly ' + i.STYLE_SETTING + ">{data}</textarea>\n", I = '<video class="kv-preview-data file-preview-video" width="{width}" height="{height}" controls>\n<source src="{data}" type="{type}">\n' + i.DEFAULT_PREVIEW + "\n</video>\n", k = '<div class="file-preview-audio"><audio class="kv-preview-data" controls>\n<source src="{data}" type="{type}">\n' + i.DEFAULT_PREVIEW + "\n</audio></div>\n", A = '<object class="kv-preview-data file-object" type="application/x-shockwave-flash" width="{width}" height="{height}" data="{data}">\n' + i.OBJECT_PARAMS + " " + i.DEFAULT_PREVIEW + "\n</object>\n", $ = '<object class="kv-preview-data file-object" data="{data}" type="{type}" width="{width}" height="{height}">\n<param name="movie" value="{caption}" />\n' + i.OBJECT_PARAMS + " " + i.DEFAULT_PREVIEW + "\n</object>\n", z = '<embed class="kv-preview-data" src="{data}" width="{width}" height="{height}" type="application/pdf">\n', D = '<div class="kv-preview-data file-preview-other-frame">\n' + i.DEFAULT_PREVIEW + "\n</div>\n", U = '<div class="kv-zoom-cache" style="display:none">{zoomContent}</div>', j.defaults = { layoutTemplates: { main1: t, main2: a, preview: r, close: o, fileIcon: n, caption: l, modalMain: p, modal: u, progress: f, size: m, footer: g, actions: v, actionDelete: h, actionUpload: w, actionZoom: _, actionDrag: b, btnDefault: s, btnLink: d, btnBrowse: c, zoomCache: U }, previewMarkupTags: { tagBefore1: y, tagBefore2: E, tagAfter: x }, previewContentTemplates: { generic: T, html: S, image: F, text: P, video: I, audio: k, flash: A, object: $, pdf: z, other: D }, allowedPreviewTypes: ["image", "html", "text", "video", "audio", "flash", "pdf", "object"], previewTemplates: {}, previewSettings: { image: { width: "auto", height: "160px" }, html: { width: "213px", height: "160px" }, text: { width: "213px", height: "160px" }, video: { width: "213px", height: "160px" }, audio: { width: "213px", height: "80px" }, flash: { width: "213px", height: "160px" }, object: { width: "160px", height: "auto" }, pdf: { width: "160px", height: "160px" }, other: { width: "160px", height: "160px" } }, previewZoomSettings: { image: { width: "auto", height: "auto", "max-width": "100%", "max-height": "100%" }, html: { width: "100%", height: "100%", "min-height": "480px" }, text: { width: "100%", height: "100%", "min-height": "480px" }, video: { width: "auto", height: "100%", "max-width": "100%" }, audio: { width: "100%", height: "30px" }, flash: { width: "auto", height: "480px" }, object: { width: "auto", height: "100%", "min-height": "480px" }, pdf: { width: "100%", height: "100%", "min-height": "480px" }, other: { width: "auto", height: "100%", "min-height": "480px" } }, fileTypeSettings: { image: function image(e, t) {
-            return i.compare(e, "image.*") || i.compare(t, /\.(gif|png|jpe?g)$/i);
-          }, html: function html(e, t) {
-            return i.compare(e, "text/html") || i.compare(t, /\.(htm|html)$/i);
-          }, text: function text(e, t) {
-            return i.compare(e, "text.*") || i.compare(t, /\.(xml|javascript)$/i) || i.compare(t, /\.(txt|md|csv|nfo|ini|json|php|js|css)$/i);
-          }, video: function video(e, t) {
-            return i.compare(e, "video.*") && (i.compare(e, /(ogg|mp4|mp?g|mov|webm|3gp)$/i) || i.compare(t, /\.(og?|mp4|webm|mp?g|mov|3gp)$/i));
-          }, audio: function audio(e, t) {
-            return i.compare(e, "audio.*") && (i.compare(t, /(ogg|mp3|mp?g|wav)$/i) || i.compare(t, /\.(og?|mp3|mp?g|wav)$/i));
-          }, flash: function flash(e, t) {
-            return i.compare(e, "application/x-shockwave-flash", !0) || i.compare(t, /\.(swf)$/i);
-          }, pdf: function pdf(e, t) {
-            return i.compare(e, "application/pdf", !0) || i.compare(t, /\.(pdf)$/i);
-          }, object: function object() {
-            return !0;
-          }, other: function other() {
-            return !0;
-          } }, fileActionSettings: { showRemove: !0, showUpload: !0, showZoom: !0, showDrag: !0, removeIcon: '<i class="glyphicon glyphicon-trash text-danger"></i>', removeClass: "btn btn-xs btn-default", removeTitle: "Remove file", uploadIcon: '<i class="glyphicon glyphicon-upload text-info"></i>', uploadClass: "btn btn-xs btn-default", uploadTitle: "Upload file", zoomIcon: '<i class="glyphicon glyphicon-zoom-in"></i>', zoomClass: "btn btn-xs btn-default", zoomTitle: "View Details", dragIcon: '<i class="glyphicon glyphicon-menu-hamburger"></i>', dragClass: "text-info", dragTitle: "Move / Rearrange", dragSettings: {}, indicatorNew: '<i class="glyphicon glyphicon-hand-down text-warning"></i>', indicatorSuccess: '<i class="glyphicon glyphicon-ok-sign text-success"></i>', indicatorError: '<i class="glyphicon glyphicon-exclamation-sign text-danger"></i>', indicatorLoading: '<i class="glyphicon glyphicon-hand-up text-muted"></i>', indicatorNewTitle: "Not uploaded yet", indicatorSuccessTitle: "Uploaded", indicatorErrorTitle: "Upload Error", indicatorLoadingTitle: "Uploading ..." } }, e.each(j.defaults, function (i, t) {
-        return "allowedPreviewTypes" === i ? void (void 0 === j.allowedPreviewTypes && (j.allowedPreviewTypes = t)) : void (j[i] = e.extend(!0, {}, t, j[i]));
-      }), j._initPreviewTemplates();
-    }, _initPreviewTemplates: function _initPreviewTemplates() {
-      var t,
-          a = this,
-          r = a.defaults,
-          n = a.previewMarkupTags,
-          o = n.tagAfter;e.each(r.previewContentTemplates, function (e, r) {
-        i.isEmpty(a.previewTemplates[e]) && (t = n.tagBefore2, "generic" !== e && "image" !== e && "html" !== e && "text" !== e || (t = n.tagBefore1), a.previewTemplates[e] = t + r + o);
-      });
-    }, _initPreviewCache: function _initPreviewCache() {
-      var t = this;t.previewCache = { data: {}, init: function init() {
-          var e = t.initialPreview;e.length > 0 && !i.isArray(e) && (e = e.split(t.initialPreviewDelimiter)), t.previewCache.data = { content: e, config: t.initialPreviewConfig, tags: t.initialPreviewThumbTags };
-        }, fetch: function fetch() {
-          return t.previewCache.data.content.filter(function (e) {
-            return null !== e;
-          });
-        }, count: function count(e) {
-          return t.previewCache.data && t.previewCache.data.content ? e ? t.previewCache.data.content.length : t.previewCache.fetch().length : 0;
-        }, get: function get(a, r) {
-          var n,
-              o,
-              l,
-              s,
-              d,
-              c,
-              p,
-              u = "init_" + a,
-              f = t.previewCache.data,
-              m = f.config[a],
-              g = f.content[a],
-              v = t.previewInitId + "-" + u,
-              h = i.ifSet("previewAsData", m, t.initialPreviewAsData),
-              w = function w(e, a, r, n, o, l, s, d, c) {
-            return d = " file-preview-initial " + i.SORT_CSS + (d ? " " + d : ""), t._generatePreviewTemplate(e, a, r, n, o, !1, null, d, l, s, c);
-          };return g ? (r = void 0 === r ? !0 : r, l = i.ifSet("type", m, t.initialPreviewFileType || "generic"), d = i.ifSet("filename", m, i.ifSet("caption", m)), c = i.ifSet("filetype", m, l), s = t.previewCache.footer(a, r, m && m.size || null), p = i.ifSet("frameClass", m), n = h ? w(l, g, d, c, v, s, u, p) : w("generic", g, d, c, v, s, u, p, l).replace(/\{content}/g, f.content[a]), f.tags.length && f.tags[a] && (n = i.replaceTags(n, f.tags[a])), i.isEmpty(m) || i.isEmpty(m.frameAttr) || (o = e(document.createElement("div")).html(n), o.find(".file-preview-initial").attr(m.frameAttr), n = o.html(), o.remove()), n) : "";
-        }, add: function add(e, a, r, n) {
-          var o,
-              l = t.previewCache.data;return i.isArray(e) || (e = e.split(t.initialPreviewDelimiter)), n ? (o = l.content.push(e) - 1, l.config[o] = a, l.tags[o] = r) : (o = e.length - 1, l.content = e, l.config = a, l.tags = r), t.previewCache.data = l, o;
-        }, set: function set(e, a, r, n) {
-          var o,
-              l,
-              s = t.previewCache.data;if (e && e.length && (i.isArray(e) || (e = e.split(t.initialPreviewDelimiter)), l = e.filter(function (e) {
-            return null !== e;
-          }), l.length)) {
-            if (void 0 === s.content && (s.content = []), void 0 === s.config && (s.config = []), void 0 === s.tags && (s.tags = []), n) {
-              for (o = 0; o < e.length; o++) {
-                e[o] && s.content.push(e[o]);
-              }for (o = 0; o < a.length; o++) {
-                a[o] && s.config.push(a[o]);
-              }for (o = 0; o < r.length; o++) {
-                r[o] && s.tags.push(r[o]);
-              }
-            } else s.content = e, s.config = a, s.tags = r;t.previewCache.data = s;
-          }
-        }, unset: function unset(e) {
-          var i = t.previewCache.count();if (i) {
-            if (1 === i) return t.previewCache.data.content = [], t.previewCache.data.config = [], t.previewCache.data.tags = [], t.initialPreview = [], t.initialPreviewConfig = [], void (t.initialPreviewThumbTags = []);t.previewCache.data.content[e] = null, t.previewCache.data.config[e] = null, t.previewCache.data.tags[e] = null;
-          }
-        }, out: function out() {
-          var e,
-              i,
-              a = "",
-              r = t.previewCache.count(!0);if (0 === r) return { content: "", caption: "" };for (i = 0; r > i; i++) {
-            a += t.previewCache.get(i);
-          }return e = t._getMsgSelected(t.previewCache.count()), { content: a, caption: e };
-        }, footer: function footer(e, a, r) {
-          var n = t.previewCache.data;if (!n || !n.config || 0 === n.config.length || i.isEmpty(n.config[e])) return "";a = void 0 === a ? !0 : a;var o = n.config[e],
-              l = i.ifSet("caption", o),
-              s = "",
-              d = i.ifSet("width", o, "auto"),
-              c = i.ifSet("url", o, !1),
-              p = i.ifSet("key", o, null),
-              u = t.fileActionSettings,
-              f = i.ifSet("showDelete", o, !0),
-              m = i.ifSet("showZoom", o, u.showZoom),
-              g = i.ifSet("showDrag", o, u.showDrag),
-              v = c === !1 && a;return t.initialPreviewShowDelete && (s = t._renderFileActions(!1, f, m, g, v, c, p, !0)), t._getLayoutTemplate("footer").replace(/\{progress}/g, t._renderThumbProgress()).replace(/\{actions}/g, s).replace(/\{caption}/g, l).replace(/\{size}/g, t._getSize(r)).replace(/\{width}/g, d).replace(/\{indicator}/g, "").replace(/\{indicatorTitle}/g, "");
-        } }, t.previewCache.init();
-    }, _handler: function _handler(e, i, t) {
-      var a = this,
-          r = a.namespace,
-          n = i.split(" ").join(r + " ") + r;e && e.length && e.off(n).on(n, t);
-    }, _log: function _log(e) {
-      var i = this,
-          t = i.$element.attr("id");t && (e = '"' + t + '": ' + e), "undefined" != typeof window.console.log ? window.console.log(e) : window.alert(e);
-    }, _validate: function _validate() {
-      var e = this,
-          i = "file" === e.$element.attr("type");return i || e._log('The input "type" must be set to "file" for initializing the "bootstrap-fileinput" plugin.'), i;
-    }, _errorsExist: function _errorsExist() {
-      var i,
-          t = this;return t.$errorContainer.find("li").length ? !0 : (i = e(document.createElement("div")).html(t.$errorContainer.html()), i.find("span.kv-error-close").remove(), i.find("ul").remove(), !!e.trim(i.text()).length);
-    }, _errorHandler: function _errorHandler(e, i) {
-      var t = this,
-          a = e.target.error;a.code === a.NOT_FOUND_ERR ? t._showError(t.msgFileNotFound.replace("{name}", i)) : a.code === a.SECURITY_ERR ? t._showError(t.msgFileSecured.replace("{name}", i)) : a.code === a.NOT_READABLE_ERR ? t._showError(t.msgFileNotReadable.replace("{name}", i)) : a.code === a.ABORT_ERR ? t._showError(t.msgFilePreviewAborted.replace("{name}", i)) : t._showError(t.msgFilePreviewError.replace("{name}", i));
-    }, _addError: function _addError(e) {
-      var i = this,
-          t = i.$errorContainer;e && t.length && (t.html(i.errorCloseButton + e), i._handler(t.find(".kv-error-close"), "click", function () {
-        t.fadeOut("slow");
-      }));
-    }, _resetErrors: function _resetErrors(e) {
-      var i = this,
-          t = i.$errorContainer;i.isError = !1, i.$container.removeClass("has-error"), t.html(""), e ? t.fadeOut("slow") : t.hide();
-    }, _showFolderError: function _showFolderError(e) {
-      var t,
-          a = this,
-          r = a.$errorContainer;e && (t = a.msgFoldersNotAllowed.replace(/\{n}/g, e), a._addError(t), i.addCss(a.$container, "has-error"), r.fadeIn(800), a._raise("filefoldererror", [e, t]));
-    }, _showUploadError: function _showUploadError(e, t, a) {
-      var r = this,
-          n = r.$errorContainer,
-          o = a || "fileuploaderror",
-          l = t && t.id ? '<li data-file-id="' + t.id + '">' + e + "</li>" : "<li>" + e + "</li>";return 0 === n.find("ul").length ? r._addError("<ul>" + l + "</ul>") : n.find("ul").append(l), n.fadeIn(800), r._raise(o, [t, e]), r.$container.removeClass("file-input-new"), i.addCss(r.$container, "has-error"), !0;
-    }, _showError: function _showError(e, t, a) {
-      var r = this,
-          n = r.$errorContainer,
-          o = a || "fileerror";return t = t || {}, t.reader = r.reader, r._addError(e), n.fadeIn(800), r._raise(o, [t, e]), r.isUploadable || r._clearFileInput(), r.$container.removeClass("file-input-new"), i.addCss(r.$container, "has-error"), r.$btnUpload.attr("disabled", !0), !0;
-    }, _noFilesError: function _noFilesError(e) {
-      var t = this,
-          a = t.minFileCount > 1 ? t.filePlural : t.fileSingle,
-          r = t.msgFilesTooLess.replace("{n}", t.minFileCount).replace("{files}", a),
-          n = t.$errorContainer;t._addError(r), t.isError = !0, t._updateFileDetails(0), n.fadeIn(800), t._raise("fileerror", [e, r]), t._clearFileInput(), i.addCss(t.$container, "has-error");
-    }, _parseError: function _parseError(i, t, a, r) {
-      var n = this,
-          o = e.trim(a + ""),
-          l = "." === o.slice(-1) ? "" : ".",
-          s = void 0 !== t.responseJSON && void 0 !== t.responseJSON.error ? t.responseJSON.error : t.responseText;return n.cancelling && n.msgUploadAborted && (o = n.msgUploadAborted), n.showAjaxErrorDetails && s ? (s = e.trim(s.replace(/\n\s*\n/g, "\n")), s = s.length > 0 ? "<pre>" + s + "</pre>" : "", o += l + s) : o += l, o === l && (o = n.msgAjaxError.replace("{operation}", i)), n.cancelling = !1, r ? "<b>" + r + ": </b>" + o : o;
-    }, _parseFileType: function _parseFileType(e) {
-      var t,
-          a,
-          r,
-          n,
-          o = this,
-          l = o.allowedPreviewTypes;for (n = 0; n < l.length; n++) {
-        if (r = l[n], t = o.fileTypeSettings[r], a = t(e.type, e.name) ? r : "", !i.isEmpty(a)) return a;
-      }return "other";
-    }, _getPreviewIcon: function _getPreviewIcon(i) {
-      var t,
-          a = this,
-          r = null;return i && i.indexOf(".") > -1 && (t = i.split(".").pop(), a.previewFileIconSettings && a.previewFileIconSettings[t] && (r = a.previewFileIconSettings[t]), a.previewFileExtSettings && e.each(a.previewFileExtSettings, function (e, i) {
-        return a.previewFileIconSettings[e] && i(t) ? void (r = a.previewFileIconSettings[e]) : void 0;
-      })), r;
-    }, _parseFilePreviewIcon: function _parseFilePreviewIcon(e, i) {
-      var t = this,
-          a = t._getPreviewIcon(i) || t.previewFileIcon;return e.indexOf("{previewFileIcon}") > -1 && (e = e.replace(/\{previewFileIconClass}/g, t.previewFileIconClass).replace(/\{previewFileIcon}/g, a)), e;
-    }, _raise: function _raise(i, t) {
-      var a = this,
-          r = e.Event(i);if (void 0 !== t ? a.$element.trigger(r, t) : a.$element.trigger(r), r.isDefaultPrevented() || r.result === !1) return !1;switch (i) {case "filebatchuploadcomplete":case "filebatchuploadsuccess":case "fileuploaded":case "fileclear":case "filecleared":case "filereset":case "fileerror":case "filefoldererror":case "fileuploaderror":case "filebatchuploaderror":case "filedeleteerror":case "filecustomerror":case "filesuccessremove":
-          break;default:
-          a.ajaxAborted = r.result;}return !0;
-    }, _listenFullScreen: function _listenFullScreen(e) {
-      var i,
-          t,
-          a = this,
-          r = a.$modal;r && r.length && (i = r && r.find(".btn-fullscreen"), t = r && r.find(".btn-borderless"), i.length && t.length && (i.removeClass("active").attr("aria-pressed", "false"), t.removeClass("active").attr("aria-pressed", "false"), e ? i.addClass("active").attr("aria-pressed", "true") : t.addClass("active").attr("aria-pressed", "true"), r.hasClass("file-zoom-fullscreen") ? a._maximizeZoomDialog() : e ? a._maximizeZoomDialog() : t.removeClass("active").attr("aria-pressed", "false")));
-    }, _listen: function _listen() {
-      var t,
-          a = this,
-          r = a.$element,
-          n = a.$form,
-          o = a.$container;a._handler(r, "change", e.proxy(a._change, a)), a.showBrowse && a._handler(a.$btnFile, "click", e.proxy(a._browse, a)), a._handler(o.find(".fileinput-remove:not([disabled])"), "click", e.proxy(a.clear, a)), a._handler(o.find(".fileinput-cancel"), "click", e.proxy(a.cancel, a)), a._initDragDrop(), a._handler(n, "reset", e.proxy(a.reset, a)), a.isUploadable || a._handler(n, "submit", e.proxy(a._submitForm, a)), a._handler(a.$container.find(".fileinput-upload"), "click", e.proxy(a._uploadClick, a)), a._handler(e(window), "resize", function () {
-        a._listenFullScreen(screen.width === window.innerWidth && screen.height === window.innerHeight);
-      }), t = "webkitfullscreenchange mozfullscreenchange fullscreenchange MSFullscreenChange", a._handler(e(document), t, function () {
-        a._listenFullScreen(i.checkFullScreen());
-      }), a._initClickable();
-    }, _initClickable: function _initClickable() {
-      var t,
-          a = this;a.isClickable && (t = a.isUploadable ? a.$dropZone : a.$preview.find(".file-default-preview"), i.addCss(t, "clickable"), t.attr("tabindex", -1), a._handler(t, "click", function (i) {
-        var r = e(i.target);r.parents(".file-preview-thumbnails").length && !r.parents(".file-default-preview").length || (a.$element.trigger("click"), t.blur());
-      }));
-    }, _initDragDrop: function _initDragDrop() {
-      var i = this,
-          t = i.$dropZone;i.isUploadable && i.dropZoneEnabled && i.showPreview && (i._handler(t, "dragenter dragover", e.proxy(i._zoneDragEnter, i)), i._handler(t, "dragleave", e.proxy(i._zoneDragLeave, i)), i._handler(t, "drop", e.proxy(i._zoneDrop, i)), i._handler(e(document), "dragenter dragover drop", i._zoneDragDropInit));
-    }, _zoneDragDropInit: function _zoneDragDropInit(e) {
-      e.stopPropagation(), e.preventDefault();
-    }, _zoneDragEnter: function _zoneDragEnter(t) {
-      var a = this,
-          r = e.inArray("Files", t.originalEvent.dataTransfer.types) > -1;return a._zoneDragDropInit(t), a.isDisabled || !r ? (t.originalEvent.dataTransfer.effectAllowed = "none", void (t.originalEvent.dataTransfer.dropEffect = "none")) : void i.addCss(a.$dropZone, "file-highlighted");
-    }, _zoneDragLeave: function _zoneDragLeave(e) {
-      var i = this;i._zoneDragDropInit(e), i.isDisabled || i.$dropZone.removeClass("file-highlighted");
-    }, _zoneDrop: function _zoneDrop(e) {
-      var t = this;e.preventDefault(), t.isDisabled || i.isEmpty(e.originalEvent.dataTransfer.files) || (t._change(e, "dragdrop"), t.$dropZone.removeClass("file-highlighted"));
-    }, _uploadClick: function _uploadClick(e) {
-      var t,
-          a = this,
-          r = a.$container.find(".fileinput-upload"),
-          n = !r.hasClass("disabled") && i.isEmpty(r.attr("disabled"));if (!e || !e.isDefaultPrevented()) {
-        if (!a.isUploadable) return void (n && "submit" !== r.attr("type") && (t = r.closest("form"), t.length && t.trigger("submit"), e.preventDefault()));e.preventDefault(), n && a.upload();
-      }
-    }, _submitForm: function _submitForm() {
-      var e = this,
-          i = e.$element,
-          t = i.get(0).files;return t && e.minFileCount > 0 && e._getFileCount(t.length) < e.minFileCount ? (e._noFilesError({}), !1) : !e._abort({});
-    }, _clearPreview: function _clearPreview() {
-      var t = this,
-          a = t.$preview,
-          r = t.showUploadedThumbs ? a.find(i.FRAMES + ":not(.file-preview-success)") : a.find(i.FRAMES);r.each(function () {
-        var t = e(this);t.remove(), i.cleanZoomCache(a.find("#zoom-" + t.attr("id")));
-      }), t.$preview.find(i.FRAMES).length && t.showPreview || t._resetUpload(), t._validateDefaultPreview();
-    }, _initSortable: function _initSortable() {
-      var t,
-          a = this,
-          r = a.$preview,
-          n = "." + i.SORT_CSS;window.KvSortable && 0 !== r.find(n).length && (t = { handle: ".drag-handle-init", dataIdAttr: "data-preview-id", draggable: n, onSort: function onSort(t) {
-          var r,
-              n,
-              o = t.oldIndex,
-              l = t.newIndex;a.initialPreview = i.moveArray(a.initialPreview, o, l), a.initialPreviewConfig = i.moveArray(a.initialPreviewConfig, o, l), a.previewCache.init();for (var s = 0; s < a.initialPreviewConfig.length; s++) {
-            null !== a.initialPreviewConfig[s] && (r = a.initialPreviewConfig[s].key, n = e(".kv-file-remove[data-key='" + r + "']").closest(i.FRAMES), n.attr("data-fileindex", "init_" + s).data("fileindex", "init_" + s));
-          }a._raise("filesorted", { previewId: e(t.item).attr("id"), oldIndex: o, newIndex: l, stack: a.initialPreviewConfig });
-        } }, r.data("kvsortable") && r.kvsortable("destroy"), e.extend(!0, t, a.fileActionSettings.dragSettings), r.kvsortable(t));
-    }, _initPreview: function _initPreview(e) {
-      var t,
-          a = this,
-          r = a.initialCaption || "";return a.previewCache.count() ? (t = a.previewCache.out(), r = e && a.initialCaption ? a.initialCaption : t.caption, a.$preview.html(t.content), a._setInitThumbAttr(), a._setCaption(r), a._initSortable(), void (i.isEmpty(t.content) || a.$container.removeClass("file-input-new"))) : (a._clearPreview(), void (e ? a._setCaption(r) : a._initCaption()));
-    }, _getZoomButton: function _getZoomButton(e) {
-      var i = this,
-          t = i.previewZoomButtonIcons[e],
-          a = i.previewZoomButtonClasses[e],
-          r = ' title="' + (i.previewZoomButtonTitles[e] || "") + '" ',
-          n = r + ("close" === e ? ' data-dismiss="modal" aria-hidden="true"' : "");return "fullscreen" !== e && "borderless" !== e && "toggleheader" !== e || (n += ' data-toggle="button" aria-pressed="false" autocomplete="off"'), '<button type="button" class="' + a + " btn-" + e + '"' + n + ">" + t + "</button>";
-    }, _getModalContent: function _getModalContent() {
-      var e = this;return e._getLayoutTemplate("modal").replace(/\{heading}/g, e.msgZoomModalHeading).replace(/\{prev}/g, e._getZoomButton("prev")).replace(/\{next}/g, e._getZoomButton("next")).replace(/\{toggleheader}/g, e._getZoomButton("toggleheader")).replace(/\{fullscreen}/g, e._getZoomButton("fullscreen")).replace(/\{borderless}/g, e._getZoomButton("borderless")).replace(/\{close}/g, e._getZoomButton("close"));
-    }, _listenModalEvent: function _listenModalEvent(e) {
-      var t = this,
-          a = t.$modal,
-          r = function r(e) {
-        return { sourceEvent: e, previewId: a.data("previewId"), modal: a };
-      };a.on(e + ".bs.modal", function (n) {
-        var o = a.find(".btn-fullscreen"),
-            l = a.find(".btn-borderless");t._raise("filezoom" + e, r(n)), "shown" === e && (l.removeClass("active").attr("aria-pressed", "false"), o.removeClass("active").attr("aria-pressed", "false"), a.hasClass("file-zoom-fullscreen") && (t._maximizeZoomDialog(), i.checkFullScreen() ? o.addClass("active").attr("aria-pressed", "true") : l.addClass("active").attr("aria-pressed", "true")));
-      });
-    }, _initZoom: function _initZoom() {
-      var t,
-          a = this,
-          r = a._getLayoutTemplate("modalMain"),
-          n = "#" + i.MODAL_ID;a.showPreview && (a.$modal = e(n), a.$modal && a.$modal.length || (t = e(document.createElement("div")).html(r).insertAfter(a.$container), a.$modal = e("#" + i.MODAL_ID).insertBefore(t), t.remove()), i.initModal(a.$modal), a.$modal.html(a._getModalContent()), e.each(i.MODAL_EVENTS, function (e, i) {
-        a._listenModalEvent(i);
-      }));
-    }, _initZoomButtons: function _initZoomButtons() {
-      var t,
-          a,
-          r = this,
-          n = r.$modal.data("previewId") || "",
-          o = r.$preview,
-          l = o.find(i.FRAMES).toArray(),
-          s = l.length,
-          d = r.$modal.find(".btn-prev"),
-          c = r.$modal.find(".btn-next");return l.length < 2 ? (d.hide(), void c.hide()) : (d.show(), c.show(), void (s && (t = e(l[0]), a = e(l[s - 1]), d.removeAttr("disabled"), c.removeAttr("disabled"), t.length && t.attr("id") === n && d.attr("disabled", !0), a.length && a.attr("id") === n && c.attr("disabled", !0))));
-    }, _maximizeZoomDialog: function _maximizeZoomDialog() {
-      var i = this,
-          t = i.$modal,
-          a = t.find(".modal-header:visible"),
-          r = t.find(".modal-footer:visible"),
-          n = t.find(".modal-body"),
-          o = e(window).height(),
-          l = 0;t.addClass("file-zoom-fullscreen"), a && a.length && (o -= a.outerHeight(!0)), r && r.length && (o -= r.outerHeight(!0)), n && n.length && (l = n.outerHeight(!0) - n.height(), o -= l), t.find(".kv-zoom-body").height(o);
-    }, _resizeZoomDialog: function _resizeZoomDialog(e) {
-      var t = this,
-          a = t.$modal,
-          r = a.find(".btn-fullscreen"),
-          n = a.find(".btn-borderless");if (a.hasClass("file-zoom-fullscreen")) i.toggleFullScreen(!1), e ? r.hasClass("active") || (a.removeClass("file-zoom-fullscreen"), t._resizeZoomDialog(!0), n.hasClass("active") && n.removeClass("active").attr("aria-pressed", "false")) : r.hasClass("active") ? r.removeClass("active").attr("aria-pressed", "false") : (a.removeClass("file-zoom-fullscreen"), t.$modal.find(".kv-zoom-body").css("height", t.zoomModalHeight));else {
-        if (!e) return void t._maximizeZoomDialog();i.toggleFullScreen(!0);
-      }a.focus();
-    }, _setZoomContent: function _setZoomContent(t, a) {
-      var r,
-          n,
-          o,
-          l,
-          s,
-          d,
-          c,
-          p,
-          u,
-          f,
-          m = this,
-          g = t.attr("id"),
-          v = m.$modal,
-          h = v.find(".btn-prev"),
-          w = v.find(".btn-next"),
-          _ = v.find(".btn-fullscreen"),
-          b = v.find(".btn-borderless"),
-          C = v.find(".btn-toggleheader"),
-          y = m.$preview.find("#zoom-" + g);n = y.attr("data-template") || "generic", r = y.find(".kv-file-content"), o = r.length ? r.html() : "", u = t.data("caption") || "", f = t.data("size") || "", l = u + " " + f, v.find(".kv-zoom-title").html(l), s = v.find(".kv-zoom-body"), v.removeClass("kv-single-content"), a ? (p = s.clone().insertAfter(s), s.html(o).hide(), p.fadeOut("fast", function () {
-        s.fadeIn("fast"), p.remove();
-      })) : s.html(o), c = m.previewZoomSettings[n], c && (d = s.find(".kv-preview-data"), i.addCss(d, "file-zoom-detail"), e.each(c, function (e, i) {
-        d.css(e, i), (d.attr("width") && "width" === e || d.attr("height") && "height" === e) && d.removeAttr(e);
-      })), v.data("previewId", g), m._handler(h, "click", function () {
-        m._zoomSlideShow("prev", g);
-      }), m._handler(w, "click", function () {
-        m._zoomSlideShow("next", g);
-      }), m._handler(_, "click", function () {
-        m._resizeZoomDialog(!0);
-      }), m._handler(b, "click", function () {
-        m._resizeZoomDialog(!1);
-      }), m._handler(C, "click", function () {
-        var e,
-            i = v.find(".modal-header"),
-            t = v.find(".modal-body .floating-buttons"),
-            a = i.find(".kv-zoom-actions"),
-            r = function r(e) {
-          var t = m.$modal.find(".kv-zoom-body"),
-              a = m.zoomModalHeight;v.hasClass("file-zoom-fullscreen") && (a = t.outerHeight(!0), e || (a -= i.outerHeight(!0))), t.css("height", e ? a + e : a);
-        };i.is(":visible") ? (e = i.outerHeight(!0), i.slideUp("slow", function () {
-          a.find(".btn").appendTo(t), r(e);
-        })) : (t.find(".btn").appendTo(a), i.slideDown("slow", function () {
-          r();
-        })), v.focus();
-      }), m._handler(v, "keydown", function (e) {
-        var i = e.which || e.keyCode;37 !== i || h.attr("disabled") || m._zoomSlideShow("prev", g), 39 !== i || w.attr("disabled") || m._zoomSlideShow("next", g);
-      });
-    }, _zoomPreview: function _zoomPreview(e) {
-      var t,
-          a = this,
-          r = a.$modal;if (!e.length) throw "Cannot zoom to detailed preview!";i.initModal(r), r.html(a._getModalContent()), t = e.closest(i.FRAMES), a._setZoomContent(t), r.modal("show"), a._initZoomButtons();
-    }, _zoomSlideShow: function _zoomSlideShow(t, a) {
-      var r,
-          n,
-          o,
-          l = this,
-          s = l.$modal.find(".kv-zoom-actions .btn-" + t),
-          d = l.$preview.find(i.FRAMES).toArray(),
-          c = d.length;if (!s.attr("disabled")) {
-        for (n = 0; c > n; n++) {
-          if (e(d[n]).attr("id") === a) {
-            o = "prev" === t ? n - 1 : n + 1;break;
-          }
-        }0 > o || o >= c || !d[o] || (r = e(d[o]), r.length && l._setZoomContent(r, !0), l._initZoomButtons(), l._raise("filezoom" + t, { previewId: a, modal: l.$modal }));
-      }
-    }, _initZoomButton: function _initZoomButton() {
-      var i = this;i.$preview.find(".kv-file-zoom").each(function () {
-        var t = e(this);i._handler(t, "click", function () {
-          i._zoomPreview(t);
-        });
-      });
-    }, _clearObjects: function _clearObjects(i) {
-      i.find("video audio").each(function () {
-        this.pause(), e(this).remove();
-      }), i.find("img object div").each(function () {
-        e(this).remove();
-      });
-    }, _clearFileInput: function _clearFileInput() {
-      var t,
-          a,
-          r,
-          n = this,
-          o = n.$element;n.fileInputCleared = !0, i.isEmpty(o.val()) || (n.isIE9 || n.isIE10 ? (t = o.closest("form"), a = e(document.createElement("form")), r = e(document.createElement("div")), o.before(r), t.length ? t.after(a) : r.after(a), a.append(o).trigger("reset"), r.before(o).remove(), a.remove()) : o.val(""));
-    }, _resetUpload: function _resetUpload() {
-      var e = this;e.uploadCache = { content: [], config: [], tags: [], append: !0 }, e.uploadCount = 0, e.uploadStatus = {}, e.uploadLog = [], e.uploadAsyncCount = 0, e.loadedImages = [], e.totalImagesCount = 0, e.$btnUpload.removeAttr("disabled"), e._setProgress(0), i.addCss(e.$progress, "hide"), e._resetErrors(!1), e.ajaxAborted = !1, e.ajaxRequests = [], e._resetCanvas(), e.cacheInitialPreview = {}, e.overwriteInitial && (e.initialPreview = [], e.initialPreviewConfig = [], e.initialPreviewThumbTags = [], e.previewCache.data = { content: [], config: [], tags: [] });
-    }, _resetCanvas: function _resetCanvas() {
-      var e = this;e.canvas && e.imageCanvasContext && e.imageCanvasContext.clearRect(0, 0, e.canvas.width, e.canvas.height);
-    }, _hasInitialPreview: function _hasInitialPreview() {
-      var e = this;return !e.overwriteInitial && e.previewCache.count();
-    }, _resetPreview: function _resetPreview() {
-      var e,
-          i,
-          t = this;t.previewCache.count() ? (e = t.previewCache.out(), t.$preview.html(e.content), t._setInitThumbAttr(), i = t.initialCaption ? t.initialCaption : e.caption, t._setCaption(i)) : (t._clearPreview(), t._initCaption()), t.showPreview && (t._initZoom(), t._initSortable());
-    }, _clearDefaultPreview: function _clearDefaultPreview() {
-      var e = this;e.$preview.find(".file-default-preview").remove();
-    }, _validateDefaultPreview: function _validateDefaultPreview() {
-      var e = this;e.showPreview && !i.isEmpty(e.defaultPreviewContent) && (e.$preview.html('<div class="file-default-preview">' + e.defaultPreviewContent + "</div>"), e.$container.removeClass("file-input-new"), e._initClickable());
-    }, _resetPreviewThumbs: function _resetPreviewThumbs(e) {
-      var i,
-          t = this;return e ? (t._clearPreview(), void t.clearStack()) : void (t._hasInitialPreview() ? (i = t.previewCache.out(), t.$preview.html(i.content), t._setInitThumbAttr(), t._setCaption(i.caption), t._initPreviewActions()) : t._clearPreview());
-    }, _getLayoutTemplate: function _getLayoutTemplate(e) {
-      var t = this,
-          a = t.layoutTemplates[e];return i.isEmpty(t.customLayoutTags) ? a : i.replaceTags(a, t.customLayoutTags);
-    }, _getPreviewTemplate: function _getPreviewTemplate(e) {
-      var t = this,
-          a = t.previewTemplates[e];return i.isEmpty(t.customPreviewTags) ? a : i.replaceTags(a, t.customPreviewTags);
-    }, _getOutData: function _getOutData(e, i, t) {
-      var a = this;return e = e || {}, i = i || {}, t = t || a.filestack.slice(0) || {}, { form: a.formdata, files: t, filenames: a.filenames, filescount: a.getFilesCount(), extra: a._getExtraData(), response: i, reader: a.reader, jqXHR: e };
-    }, _getMsgSelected: function _getMsgSelected(e) {
-      var i = this,
-          t = 1 === e ? i.fileSingle : i.filePlural;return e > 0 ? i.msgSelected.replace("{n}", e).replace("{files}", t) : i.msgNoFilesSelected;
-    }, _getThumbs: function _getThumbs(e) {
-      return e = e || "", this.$preview.find(i.FRAMES + ":not(.file-preview-initial)" + e);
-    }, _getExtraData: function _getExtraData(e, i) {
-      var t = this,
-          a = t.uploadExtraData;return "function" == typeof t.uploadExtraData && (a = t.uploadExtraData(e, i)), a;
-    }, _initXhr: function _initXhr(e, i, t) {
-      var a = this;return e.upload && e.upload.addEventListener("progress", function (e) {
-        var r = 0,
-            n = e.total,
-            o = e.loaded || e.position;e.lengthComputable && (r = Math.floor(o / n * 100)), i ? a._setAsyncUploadStatus(i, r, t) : a._setProgress(r);
-      }, !1), e;
-    }, _ajaxSubmit: function _ajaxSubmit(i, t, a, r, n, o) {
-      var l,
-          s = this;s._raise("filepreajax", [n, o]) && (s._uploadExtra(n, o), l = e.extend(!0, {}, { xhr: function xhr() {
-          var i = e.ajaxSettings.xhr();return s._initXhr(i, n, s.getFileStack().length);
-        }, url: s.uploadUrl, type: "POST", dataType: "json", data: s.formdata, cache: !1, processData: !1, contentType: !1, beforeSend: i, success: t, complete: a, error: r }, s.ajaxSettings), s.ajaxRequests.push(e.ajax(l)));
-    }, _mergeArray: function _mergeArray(e, t) {
-      var a = this,
-          r = i.cleanArray(a[e]),
-          n = i.cleanArray(t);a[e] = r.concat(n);
-    }, _initUploadSuccess: function _initUploadSuccess(t, a, r) {
-      var n,
-          o,
-          l,
-          s,
-          d,
-          c,
-          p,
-          u,
-          f,
-          m = this;m.showPreview && "object" == (typeof t === "undefined" ? "undefined" : _typeof(t)) && !e.isEmptyObject(t) && void 0 !== t.initialPreview && t.initialPreview.length > 0 && (m.hasInitData = !0, c = t.initialPreview || [], p = t.initialPreviewConfig || [], u = t.initialPreviewThumbTags || [], n = !(void 0 !== t.append && !t.append), c.length > 0 && !i.isArray(c) && (c = c.split(m.initialPreviewDelimiter)), m._mergeArray("initialPreview", c), m._mergeArray("initialPreviewConfig", p), m._mergeArray("initialPreviewThumbTags", u), void 0 !== a ? r ? (f = a.attr("data-fileindex"), m.uploadCache.content[f] = c[0], m.uploadCache.config[f] = p[0] || [], m.uploadCache.tags[f] = u[0] || [], m.uploadCache.append = n) : (l = m.previewCache.add(c, p[0], u[0], n), o = m.previewCache.get(l, !1), s = e(document.createElement("div")).html(o).hide().insertAfter(a), d = s.find(".kv-zoom-cache"), d && d.length && d.insertAfter(a), a.fadeOut("slow", function () {
-        var e = s.find(".file-preview-frame");e && e.length && e.insertBefore(a).fadeIn("slow").css("display:inline-block"), m._initPreviewActions(), m._clearFileInput(), i.cleanZoomCache(m.$preview.find("#zoom-" + a.attr("id"))), a.remove(), s.remove(), m._initSortable();
-      })) : (m.previewCache.set(c, p, u, n), m._initPreview(), m._initPreviewActions()));
-    }, _initSuccessThumbs: function _initSuccessThumbs() {
-      var t = this;t.showPreview && t._getThumbs(i.FRAMES + ".file-preview-success").each(function () {
-        var a = e(this),
-            r = t.$preview,
-            n = a.find(".kv-file-remove");n.removeAttr("disabled"), t._handler(n, "click", function () {
-          var e = a.attr("id"),
-              n = t._raise("filesuccessremove", [e, a.data("fileindex")]);i.cleanMemory(a), n !== !1 && a.fadeOut("slow", function () {
-            i.cleanZoomCache(r.find("#zoom-" + e)), a.remove(), r.find(i.FRAMES).length || t.reset();
-          });
-        });
-      });
-    }, _checkAsyncComplete: function _checkAsyncComplete() {
-      var i,
-          t,
-          a = this;for (t = 0; t < a.filestack.length; t++) {
-        if (a.filestack[t] && (i = a.previewInitId + "-" + t, -1 === e.inArray(i, a.uploadLog))) return !1;
-      }return a.uploadAsyncCount === a.uploadLog.length;
-    }, _uploadExtra: function _uploadExtra(i, t) {
-      var a = this,
-          r = a._getExtraData(i, t);0 !== r.length && e.each(r, function (e, i) {
-        a.formdata.append(e, i);
-      });
-    }, _uploadSingle: function _uploadSingle(t, a, r) {
-      var n,
-          o,
-          l,
-          s,
-          d,
-          c,
-          p,
-          u,
-          f,
-          m,
-          g = this,
-          v = g.getFileStack().length,
-          h = new FormData(),
-          w = g.previewInitId + "-" + t,
-          _ = g.filestack.length > 0 || !e.isEmptyObject(g.uploadExtraData),
-          b = e("#" + w).find(".file-thumb-progress"),
-          C = { id: w, index: t };g.formdata = h, g.showPreview && (o = e("#" + w + ":not(.file-preview-initial)"), s = o.find(".kv-file-upload"), d = o.find(".kv-file-remove"), b.removeClass("hide")), 0 === v || !_ || s && s.hasClass("disabled") || g._abort(C) || (m = function m(e, i) {
-        g.updateStack(e, void 0), g.uploadLog.push(i), g._checkAsyncComplete() && (g.fileBatchCompleted = !0);
-      }, l = function l() {
-        var e,
-            t,
-            a,
-            r = g.uploadCache,
-            n = 0,
-            o = g.cacheInitialPreview;g.fileBatchCompleted && (o && o.content && (n = o.content.length), setTimeout(function () {
-          if (g.showPreview) {
-            if (g.previewCache.set(r.content, r.config, r.tags, r.append), n) {
-              for (t = 0; t < r.content.length; t++) {
-                a = t + n, o.content[a] = r.content[t], o.config.length && (o.config[a] = r.config[t]), o.tags.length && (o.tags[a] = r.tags[t]);
-              }g.initialPreview = i.cleanArray(o.content), g.initialPreviewConfig = i.cleanArray(o.config), g.initialPreviewThumbTags = i.cleanArray(o.tags);
-            } else g.initialPreview = r.content, g.initialPreviewConfig = r.config, g.initialPreviewThumbTags = r.tags;g.cacheInitialPreview = {}, g.hasInitData && (g._initPreview(), g._initPreviewActions());
-          }g.unlock(), g._clearFileInput(), e = g.$preview.find(".file-preview-initial"), g.uploadAsync && e.length && (i.addCss(e, i.SORT_CSS), g._initSortable()), g._raise("filebatchuploadcomplete", [g.filestack, g._getExtraData()]), g.uploadCount = 0, g.uploadStatus = {}, g.uploadLog = [], g._setProgress(101);
-        }, 100));
-      }, c = function c(a) {
-        n = g._getOutData(a), g.fileBatchCompleted = !1, g.showPreview && (o.hasClass("file-preview-success") || (g._setThumbStatus(o, "Loading"), i.addCss(o, "file-uploading")), s.attr("disabled", !0), d.attr("disabled", !0)), r || g.lock(), g._raise("filepreupload", [n, w, t]), e.extend(!0, C, n), g._abort(C) && (a.abort(), g._setProgressCancelled());
-      }, p = function p(a, l, d) {
-        var c = g.showPreview && o.attr("id") ? o.attr("id") : w;n = g._getOutData(d, a), e.extend(!0, C, n), setTimeout(function () {
-          i.isEmpty(a) || i.isEmpty(a.error) ? (g.showPreview && (g._setThumbStatus(o, "Success"), s.hide(), g._initUploadSuccess(a, o, r), g._setProgress(101, b)), g._raise("fileuploaded", [n, c, t]), r ? m(t, c) : g.updateStack(t, void 0)) : (g._showUploadError(a.error, C), g._setPreviewError(o, t), r && m(t, c));
-        }, 100);
-      }, u = function u() {
-        setTimeout(function () {
-          g.showPreview && (s.removeAttr("disabled"), d.removeAttr("disabled"), o.removeClass("file-uploading")), r ? l() : (g.unlock(!1), g._clearFileInput()), g._initSuccessThumbs();
-        }, 100);
-      }, f = function f(i, n, l) {
-        var s = g.ajaxOperations.uploadThumb,
-            d = g._parseError(s, i, l, r ? a[t].name : null);setTimeout(function () {
-          r && m(t, w), g.uploadStatus[w] = 100, g._setPreviewError(o, t), e.extend(!0, C, g._getOutData(i)), g._setProgress(101, b, g.msgAjaxProgressError.replace("{operation}", s)), g._showUploadError(d, C);
-        }, 100);
-      }, h.append(g.uploadFileAttr, a[t], g.filenames[t]), h.append("file_id", t), g._ajaxSubmit(c, p, u, f, w, t));
-    }, _uploadBatch: function _uploadBatch() {
-      var t,
-          a,
-          r,
-          n,
-          o,
-          l = this,
-          s = l.filestack,
-          d = s.length,
-          c = {},
-          p = l.filestack.length > 0 || !e.isEmptyObject(l.uploadExtraData);l.formdata = new FormData(), 0 !== d && p && !l._abort(c) && (o = function o() {
-        e.each(s, function (e) {
-          l.updateStack(e, void 0);
-        }), l._clearFileInput();
-      }, t = function t(_t2) {
-        l.lock();var a = l._getOutData(_t2);l.showPreview && l._getThumbs().each(function () {
-          var t = e(this),
-              a = t.find(".kv-file-upload"),
-              r = t.find(".kv-file-remove");t.hasClass("file-preview-success") || (l._setThumbStatus(t, "Loading"), i.addCss(t, "file-uploading")), a.attr("disabled", !0), r.attr("disabled", !0);
-        }), l._raise("filebatchpreupload", [a]), l._abort(a) && (_t2.abort(), l._setProgressCancelled());
-      }, a = function a(t, _a, r) {
-        var n = l._getOutData(r, t),
-            s = l._getThumbs(":not(.file-preview-error)"),
-            d = 0,
-            c = i.isEmpty(t) || i.isEmpty(t.errorkeys) ? [] : t.errorkeys;i.isEmpty(t) || i.isEmpty(t.error) ? (l._raise("filebatchuploadsuccess", [n]), o(), l.showPreview ? (s.each(function () {
-          var i = e(this),
-              t = i.find(".kv-file-upload");i.find(".kv-file-upload").hide(), l._setThumbStatus(i, "Success"), i.removeClass("file-uploading"), t.removeAttr("disabled");
-        }), l._initUploadSuccess(t)) : l.reset(), l._setProgress(101)) : (l.showPreview && (s.each(function () {
-          var i = e(this),
-              t = i.find(".kv-file-remove"),
-              a = i.find(".kv-file-upload");return i.removeClass("file-uploading"), a.removeAttr("disabled"), t.removeAttr("disabled"), 0 === c.length ? void l._setPreviewError(i) : (-1 !== e.inArray(d, c) ? l._setPreviewError(i) : (i.find(".kv-file-upload").hide(), l._setThumbStatus(i, "Success"), l.updateStack(d, void 0)), void d++);
-        }), l._initUploadSuccess(t)), l._showUploadError(t.error, n, "filebatchuploaderror"));
-      }, n = function n() {
-        l.unlock(), l._initSuccessThumbs(), l._clearFileInput(), l._raise("filebatchuploadcomplete", [l.filestack, l._getExtraData()]);
-      }, r = function r(i, t, a) {
-        var r = l._getOutData(i),
-            n = l.ajaxOperations.uploadBatch,
-            o = l._parseError(n, i, a);l._showUploadError(o, r, "filebatchuploaderror"), l.uploadFileCount = d - 1, l.showPreview && (l._getThumbs().each(function () {
-          var i = e(this),
-              t = i.attr("data-fileindex");i.removeClass("file-uploading"), void 0 !== l.filestack[t] && l._setPreviewError(i);
-        }), l._getThumbs().removeClass("file-uploading"), l._getThumbs(" .kv-file-upload").removeAttr("disabled"), l._getThumbs(" .kv-file-delete").removeAttr("disabled"), l._setProgress(101, l.$progress, l.msgAjaxProgressError.replace("{operation}", n)));
-      }, e.each(s, function (e, t) {
-        i.isEmpty(s[e]) || l.formdata.append(l.uploadFileAttr, t, l.filenames[e]);
-      }), l._ajaxSubmit(t, a, n, r));
-    }, _uploadExtraOnly: function _uploadExtraOnly() {
-      var e,
-          t,
-          a,
-          r,
-          n = this,
-          o = {};n.formdata = new FormData(), n._abort(o) || (e = function e(_e) {
-        n.lock();var i = n._getOutData(_e);n._raise("filebatchpreupload", [i]), n._setProgress(50), o.data = i, o.xhr = _e, n._abort(o) && (_e.abort(), n._setProgressCancelled());
-      }, t = function t(e, _t3, a) {
-        var r = n._getOutData(a, e);i.isEmpty(e) || i.isEmpty(e.error) ? (n._raise("filebatchuploadsuccess", [r]), n._clearFileInput(), n._initUploadSuccess(e), n._setProgress(101)) : n._showUploadError(e.error, r, "filebatchuploaderror");
-      }, a = function a() {
-        n.unlock(), n._clearFileInput(), n._raise("filebatchuploadcomplete", [n.filestack, n._getExtraData()]);
-      }, r = function r(e, i, t) {
-        var a = n._getOutData(e),
-            r = n.ajaxOperations.uploadExtra,
-            l = n._parseError(r, e, t);o.data = a, n._showUploadError(l, a, "filebatchuploaderror"), n._setProgress(101, n.$progress, n.msgAjaxProgressError.replace("{operation}", r));
-      }, n._ajaxSubmit(e, t, a, r));
-    }, _deleteFileIndex: function _deleteFileIndex(t) {
-      var a = this,
-          r = t.attr("data-fileindex");"init_" === r.substring(0, 5) && (r = parseInt(r.replace("init_", "")), a.initialPreview = i.spliceArray(a.initialPreview, r), a.initialPreviewConfig = i.spliceArray(a.initialPreviewConfig, r), a.initialPreviewThumbTags = i.spliceArray(a.initialPreviewThumbTags, r), a.$preview.find(i.FRAMES).each(function () {
-        var i = e(this),
-            t = i.attr("data-fileindex");"init_" === t.substring(0, 5) && (t = parseInt(t.replace("init_", "")), t > r && (t--, i.attr("data-fileindex", "init_" + t)));
-      }), a.uploadAsync && (a.cacheInitialPreview = a.getPreview()));
-    }, _initFileActions: function _initFileActions() {
-      var t = this,
-          a = t.$preview;t.showPreview && (t._initZoomButton(), a.find(i.FRAMES + " .kv-file-remove").each(function () {
-        var r,
-            n,
-            o,
-            l,
-            s = e(this),
-            d = s.closest(i.FRAMES),
-            c = d.attr("id"),
-            p = d.attr("data-fileindex");t._handler(s, "click", function () {
-          return l = t._raise("filepreremove", [c, p]), l !== !1 && t._validateMinCount() ? (r = d.hasClass("file-preview-error"), i.cleanMemory(d), void d.fadeOut("slow", function () {
-            i.cleanZoomCache(a.find("#zoom-" + c)), t.updateStack(p, void 0), t._clearObjects(d), d.remove(), c && r && t.$errorContainer.find('li[data-file-id="' + c + '"]').fadeOut("fast", function () {
-              e(this).remove(), t._errorsExist() || t._resetErrors();
-            }), t._clearFileInput();var l = t.getFileStack(!0),
-                s = t.previewCache.count(),
-                u = l.length,
-                f = t.showPreview && a.find(i.FRAMES).length;0 !== u || 0 !== s || f ? (n = s + u, o = n > 1 ? t._getMsgSelected(n) : l[0] ? t._getFileNames()[0] : "", t._setCaption(o)) : t.reset(), t._raise("fileremoved", [c, p]);
-          })) : !1;
-        });
-      }), t.$preview.find(i.FRAMES + " .kv-file-upload").each(function () {
-        var a = e(this);t._handler(a, "click", function () {
-          var e = a.closest(i.FRAMES),
-              r = e.attr("data-fileindex");e.hasClass("file-preview-error") || t._uploadSingle(r, t.filestack, !1);
-        });
-      }));
-    }, _initPreviewActions: function _initPreviewActions() {
-      var t = this,
-          a = t.$preview,
-          r = t.deleteExtraData || {},
-          n = i.FRAMES + " .kv-file-remove",
-          o = function o() {
-        var e = t.isUploadable ? t.previewCache.count() : t.$element.get(0).files.length;0 !== a.find(n).length || e || (t.reset(), t.initialCaption = "");
-      };t._initZoomButton(), a.find(n).each(function () {
-        var n = e(this),
-            l = n.data("url") || t.deleteUrl,
-            s = n.data("key");if (!i.isEmpty(l) && void 0 !== s) {
-          var d,
-              c,
-              p,
-              u,
-              f = n.closest(i.FRAMES),
-              m = t.previewCache.data,
-              g = f.data("fileindex");g = parseInt(g.replace("init_", "")), p = i.isEmpty(m.config) && i.isEmpty(m.config[g]) ? null : m.config[g], u = i.isEmpty(p) || i.isEmpty(p.extra) ? r : p.extra, "function" == typeof u && (u = u()), c = { id: n.attr("id"), key: s, extra: u }, d = e.extend(!0, {}, { url: l, type: "POST", dataType: "json", data: e.extend(!0, {}, { key: s }, u), beforeSend: function beforeSend(e) {
-              t.ajaxAborted = !1, t._raise("filepredelete", [s, e, u]), t.ajaxAborted ? e.abort() : (i.addCss(f, "file-uploading"), i.addCss(n, "disabled"));
-            }, success: function success(e, r, l) {
-              var d, p;return i.isEmpty(e) || i.isEmpty(e.error) ? (t.previewCache.init(), g = parseInt(f.data("fileindex").replace("init_", "")), t.previewCache.unset(g), d = t.previewCache.count(), p = d > 0 ? t._getMsgSelected(d) : "", t._deleteFileIndex(f), t._setCaption(p), t._raise("filedeleted", [s, l, u]), f.removeClass("file-uploading").addClass("file-deleted"), void f.fadeOut("slow", function () {
-                i.cleanZoomCache(a.find("#zoom-" + f.attr("id"))), t._clearObjects(f), f.remove(), o(), d || 0 !== t.getFileStack().length || (t._setCaption(""), t.reset());
-              })) : (c.jqXHR = l, c.response = e, t._showError(e.error, c, "filedeleteerror"), f.removeClass("file-uploading"), n.removeClass("disabled"), void o());
-            }, error: function error(e, i, a) {
-              var r = t.ajaxOperations.deleteThumb,
-                  n = t._parseError(r, e, a);c.jqXHR = e, c.response = {}, t._showError(n, c, "filedeleteerror"), f.removeClass("file-uploading"), o();
-            } }, t.ajaxDeleteSettings), t._handler(n, "click", function () {
-            return t._validateMinCount() ? void e.ajax(d) : !1;
-          });
-        }
-      });
-    }, _hideFileIcon: function _hideFileIcon() {
-      this.overwriteInitial && this.$captionContainer.find(".kv-caption-icon").hide();
-    }, _showFileIcon: function _showFileIcon() {
-      this.$captionContainer.find(".kv-caption-icon").show();
-    }, _getSize: function _getSize(i) {
-      var t,
-          a,
-          r,
-          n = this,
-          o = parseFloat(i),
-          l = n.fileSizeGetter;return e.isNumeric(i) && e.isNumeric(o) ? ("function" == typeof l ? r = l(o) : 0 === o ? r = "0.00 B" : (t = Math.floor(Math.log(o) / Math.log(1024)), a = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"], r = 1 * (o / Math.pow(1024, t)).toFixed(2) + " " + a[t]), n._getLayoutTemplate("size").replace("{sizeText}", r)) : "";
-    }, _generatePreviewTemplate: function _generatePreviewTemplate(e, t, a, r, n, o, l, s, d, c, p) {
-      var u,
-          f = this,
-          m = f.slug(a),
-          g = "",
-          v = f.previewSettings[e] || f.defaults.previewSettings[e],
-          h = v && v.width ? v.width : "",
-          w = v && v.height ? v.height : "",
-          _ = d || f._renderFileFooter(m, l, i.isEmpty(h) ? "auto" : h, o),
-          b = f._getPreviewIcon(a),
-          C = b && f.preferIconicPreview,
-          y = b && f.preferIconicZoomPreview,
-          E = function E(t, o, l, d) {
-        var u = l ? "zoom-" + n : n,
-            g = f._getPreviewTemplate(t),
-            v = (s || "") + " " + d;return f.frameClass && (v = f.frameClass + " " + v), l && (v = v.replace(" " + i.SORT_CSS, "")), g = f._parseFilePreviewIcon(g, a), "text" === t && (o = i.htmlEncode(o)), g.replace(/\{previewId}/g, u).replace(/\{caption}/g, m).replace(/\{frameClass}/g, v).replace(/\{type}/g, r).replace(/\{fileindex}/g, c).replace(/\{width}/g, h).replace(/\{height}/g, w).replace(/\{footer}/g, _).replace(/\{data}/g, o).replace(/\{template}/g, p || e);
-      };return c = c || n.slice(n.lastIndexOf("-") + 1), f.fileActionSettings.showZoom && (g = E(y ? "other" : e, t, !0, "kv-zoom-thumb")), g = "\n" + f._getLayoutTemplate("zoomCache").replace("{zoomContent}", g), u = E(C ? "other" : e, t, !1, "kv-preview-thumb"), u + g;
-    }, _previewDefault: function _previewDefault(t, a, r) {
-      var n = this,
-          o = n.$preview;if (n.showPreview) {
-        var l,
-            s = t ? t.name : "",
-            d = t ? t.type : "",
-            c = t.size || 0,
-            p = n.slug(s),
-            u = r === !0 && !n.isUploadable,
-            f = i.objUrl.createObjectURL(t);n._clearDefaultPreview(), l = n._generatePreviewTemplate("other", f, s, d, a, u, c), o.append("\n" + l), n._setThumbAttr(a, p, c), r === !0 && n.isUploadable && n._setThumbStatus(e("#" + a), "Error");
-      }
-    }, _previewFile: function _previewFile(e, i, t, a, r) {
-      if (this.showPreview) {
-        var n,
-            o = this,
-            l = o._parseFileType(i),
-            s = i ? i.name : "",
-            d = o.slug(s),
-            c = o.allowedPreviewTypes,
-            p = o.allowedPreviewMimeTypes,
-            u = o.$preview,
-            f = c && c.indexOf(l) >= 0,
-            m = i.size || 0,
-            g = "text" === l || "html" === l || "image" === l ? t.target.result : r,
-            v = p && -1 !== p.indexOf(i.type);"html" === l && o.purifyHtml && window.DOMPurify && (g = window.DOMPurify.sanitize(g)), f || v ? (n = o._generatePreviewTemplate(l, g, s, i.type, a, !1, m), o._clearDefaultPreview(), u.append("\n" + n), o._validateImage(a, d, i.type)) : o._previewDefault(i, a), o._setThumbAttr(a, d, m), o._initSortable();
-      }
-    }, _setThumbAttr: function _setThumbAttr(i, t, a) {
-      var r = this,
-          n = e("#" + i);n.length && (a = a && a > 0 ? r._getSize(a) : "", n.data({ caption: t, size: a }));
-    }, _setInitThumbAttr: function _setInitThumbAttr() {
-      var e,
-          t,
-          a,
-          r,
-          n = this,
-          o = n.previewCache.data,
-          l = n.previewCache.count(!0);if (0 !== l) for (var s = 0; l > s; s++) {
-        e = o.config[s], r = n.previewInitId + "-init_" + s, t = i.ifSet("caption", e, i.ifSet("filename", e)), a = i.ifSet("size", e), n._setThumbAttr(r, t, a);
-      }
-    }, _slugDefault: function _slugDefault(e) {
-      return i.isEmpty(e) ? "" : String(e).replace(/[\-\[\]\/\{}:;#%=\(\)\*\+\?\\\^\$\|<>&"']/g, "_");
-    }, _readFiles: function _readFiles(t) {
-      this.reader = new FileReader();var _a2,
-          r = this,
-          n = r.$element,
-          o = r.$preview,
-          l = r.reader,
-          s = r.$previewContainer,
-          d = r.$previewStatus,
-          c = r.msgLoading,
-          p = r.msgProgress,
-          u = r.previewInitId,
-          f = t.length,
-          m = r.fileTypeSettings,
-          g = r.filestack.length,
-          v = r.allowedFileTypes,
-          h = v ? v.length : 0,
-          w = r.allowedFileExtensions,
-          _ = i.isEmpty(w) ? "" : w.join(", "),
-          b = r.maxFilePreviewSize && parseFloat(r.maxFilePreviewSize),
-          C = o.length && (!b || isNaN(b)),
-          y = function y(i, n, o, l) {
-        var s = e.extend(!0, {}, r._getOutData({}, {}, t), { id: o, index: l }),
-            d = { id: o, index: l, file: n, files: t };return r._previewDefault(n, o, !0), r.isUploadable && (r.addToStack(void 0), setTimeout(function () {
-          _a2(l + 1);
-        }, 100)), r._initFileActions(), r.removeFromPreviewOnError && e("#" + o).remove(), r.isUploadable ? r._showUploadError(i, s) : r._showError(i, d);
-      };r.loadedImages = [], r.totalImagesCount = 0, e.each(t, function (e, i) {
-        var t = r.fileTypeSettings.image;t && t(i.type) && r.totalImagesCount++;
-      }), _a2 = function a(e) {
-        if (i.isEmpty(n.attr("multiple")) && (f = 1), e >= f) return r.isUploadable && r.filestack.length > 0 ? r._raise("filebatchselected", [r.getFileStack()]) : r._raise("filebatchselected", [t]), s.removeClass("file-thumb-loading"), void d.html("");var E,
-            x,
-            T,
-            S,
-            F,
-            P,
-            I,
-            k,
-            A,
-            $,
-            z = g + e,
-            D = u + "-" + z,
-            U = t[e],
-            j = U.name ? r.slug(U.name) : "",
-            L = (U.size || 0) / 1e3,
-            R = "",
-            M = i.objUrl.createObjectURL(U),
-            O = 0,
-            Z = "";if (h > 0) for (S = 0; h > S; S++) {
-          k = v[S], A = r.msgFileTypes[k] || k, Z += 0 === S ? A : ", " + A;
-        }if (j === !1) return void _a2(e + 1);if (0 === j.length) return F = r.msgInvalidFileName.replace("{name}", i.htmlEncode(U.name)), void (r.isError = y(F, U, D, e));if (i.isEmpty(w) || (R = new RegExp("\\.(" + w.join("|") + ")$", "i")), T = L.toFixed(2), r.maxFileSize > 0 && L > r.maxFileSize) return F = r.msgSizeTooLarge.replace("{name}", j).replace("{size}", T).replace("{maxSize}", r.maxFileSize), void (r.isError = y(F, U, D, e));if (null !== r.minFileSize && L <= i.getNum(r.minFileSize)) return F = r.msgSizeTooSmall.replace("{name}", j).replace("{size}", T).replace("{minSize}", r.minFileSize), void (r.isError = y(F, U, D, e));if (!i.isEmpty(v) && i.isArray(v)) {
-          for (S = 0; S < v.length; S += 1) {
-            P = v[S], $ = m[P], O += $ && "function" == typeof $ && $(U.type, U.name) ? 1 : 0;
-          }if (0 === O) return F = r.msgInvalidFileType.replace("{name}", j).replace("{types}", Z), void (r.isError = y(F, U, D, e));
-        }return 0 !== O || i.isEmpty(w) || !i.isArray(w) || i.isEmpty(R) || (I = i.compare(j, R), O += i.isEmpty(I) ? 0 : I.length, 0 !== O) ? r.showPreview ? !C && L > b ? (r.addToStack(U), s.addClass("file-thumb-loading"), r._previewDefault(U, D), r._initFileActions(), r._updateFileDetails(f), void _a2(e + 1)) : (o.length && void 0 !== FileReader ? (d.html(c.replace("{index}", e + 1).replace("{files}", f)), s.addClass("file-thumb-loading"), l.onerror = function (e) {
-          r._errorHandler(e, j);
-        }, l.onload = function (i) {
-          r._previewFile(e, U, i, D, M), r._initFileActions();
-        }, l.onloadend = function () {
-          F = p.replace("{index}", e + 1).replace("{files}", f).replace("{percent}", 50).replace("{name}", j), setTimeout(function () {
-            d.html(F), r._updateFileDetails(f), _a2(e + 1);
-          }, 100), r._raise("fileloaded", [U, D, e, l]);
-        }, l.onprogress = function (i) {
-          if (i.lengthComputable) {
-            var t = i.loaded / i.total * 100,
-                a = Math.ceil(t);F = p.replace("{index}", e + 1).replace("{files}", f).replace("{percent}", a).replace("{name}", j), setTimeout(function () {
-              d.html(F);
-            }, 100);
-          }
-        }, E = m.text, x = m.image, E(U.type, j) ? l.readAsText(U, r.textEncoding) : x(U.type, j) ? l.readAsDataURL(U) : l.readAsArrayBuffer(U)) : (r._previewDefault(U, D), setTimeout(function () {
-          _a2(e + 1), r._updateFileDetails(f);
-        }, 100), r._raise("fileloaded", [U, D, e, l])), void r.addToStack(U)) : (r.addToStack(U), setTimeout(function () {
-          _a2(e + 1);
-        }, 100), void r._raise("fileloaded", [U, D, e, l])) : (F = r.msgInvalidFileExtension.replace("{name}", j).replace("{extensions}", _), void (r.isError = y(F, U, D, e)));
-      }, _a2(0), r._updateFileDetails(f, !1);
-    }, _updateFileDetails: function _updateFileDetails(e) {
-      var t = this,
-          a = t.$element,
-          r = t.getFileStack(),
-          n = i.isIE(9) && i.findFileName(a.val()) || a[0].files[0] && a[0].files[0].name || r.length && r[0].name || "",
-          o = t.slug(n),
-          l = t.isUploadable ? r.length : e,
-          s = t.previewCache.count() + l,
-          d = l > 1 ? t._getMsgSelected(s) : o;t.isError ? (t.$previewContainer.removeClass("file-thumb-loading"), t.$previewStatus.html(""), t.$captionContainer.find(".kv-caption-icon").hide()) : t._showFileIcon(), t._setCaption(d, t.isError), t.$container.removeClass("file-input-new file-input-ajax-new"), 1 === arguments.length && t._raise("fileselect", [e, o]), t.previewCache.count() && t._initPreviewActions();
-    }, _setThumbStatus: function _setThumbStatus(e, i) {
-      var t = this;if (t.showPreview) {
-        var a = "indicator" + i,
-            r = a + "Title",
-            n = "file-preview-" + i.toLowerCase(),
-            o = e.find(".file-upload-indicator"),
-            l = t.fileActionSettings;e.removeClass("file-preview-success file-preview-error file-preview-loading"), "Error" === i && e.find(".kv-file-upload").attr("disabled", !0), "Success" === i && (e.find(".file-drag-handle").remove(), o.css("margin-left", 0)), o.html(l[a]), o.attr("title", l[r]), e.addClass(n);
-      }
-    }, _setProgressCancelled: function _setProgressCancelled() {
-      var e = this;e._setProgress(101, e.$progress, e.msgCancelled);
-    }, _setProgress: function _setProgress(e, t, a) {
-      var r,
-          n,
-          o = this,
-          l = Math.min(e, 100),
-          s = o.progressUploadThreshold,
-          d = 100 >= e ? o.progressTemplate : o.progressCompleteTemplate,
-          c = 100 > l ? o.progressTemplate : a ? o.progressErrorTemplate : d;t = t || o.$progress, i.isEmpty(c) || (s && l > s && 100 >= e ? r = c.replace(/\{percent}/g, s).replace(/\{status}/g, o.msgUploadThreshold) : (n = e > 100 ? o.msgUploadEnd : l + "%", r = c.replace(/\{percent}/g, l).replace(/\{status}/g, n)), t.html(r), a && t.find('[role="progressbar"]').html(a));
-    }, _setFileDropZoneTitle: function _setFileDropZoneTitle() {
-      var e,
-          t = this,
-          a = t.$container.find(".file-drop-zone"),
-          r = t.dropZoneTitle;t.isClickable && (e = i.isEmpty(t.$element.attr("multiple")) ? t.fileSingle : t.filePlural, r += t.dropZoneClickTitle.replace("{files}", e)), a.find("." + t.dropZoneTitleClass).remove(), t.isUploadable && t.showPreview && 0 !== a.length && !(t.getFileStack().length > 0) && t.dropZoneEnabled && (0 === a.find(i.FRAMES).length && i.isEmpty(t.defaultPreviewContent) && a.prepend('<div class="' + t.dropZoneTitleClass + '">' + r + "</div>"), t.$container.removeClass("file-input-new"), i.addCss(t.$container, "file-input-ajax-new"));
-    }, _setAsyncUploadStatus: function _setAsyncUploadStatus(i, t, a) {
-      var r = this,
-          n = 0;r._setProgress(t, e("#" + i).find(".file-thumb-progress")), r.uploadStatus[i] = t, e.each(r.uploadStatus, function (e, i) {
-        n += i;
-      }), r._setProgress(Math.floor(n / a));
-    }, _validateMinCount: function _validateMinCount() {
-      var e = this,
-          i = e.isUploadable ? e.getFileStack().length : e.$element.get(0).files.length;return e.validateInitialCount && e.minFileCount > 0 && e._getFileCount(i - 1) < e.minFileCount ? (e._noFilesError({}), !1) : !0;
-    }, _getFileCount: function _getFileCount(e) {
-      var i = this,
-          t = 0;return i.validateInitialCount && !i.overwriteInitial && (t = i.previewCache.count(), e += t), e;
-    }, _getFileName: function _getFileName(e) {
-      return e && e.name ? this.slug(e.name) : void 0;
-    }, _getFileNames: function _getFileNames(e) {
-      var i = this;return i.filenames.filter(function (i) {
-        return e ? void 0 !== i : void 0 !== i && null !== i;
-      });
-    }, _setPreviewError: function _setPreviewError(e, i, t) {
-      var a = this;void 0 !== i && a.updateStack(i, t), a.removeFromPreviewOnError ? e.remove() : a._setThumbStatus(e, "Error");
-    }, _checkDimensions: function _checkDimensions(e, t, a, r, n, o, l) {
-      var s,
-          d,
-          c,
-          p,
-          u = this,
-          f = "Small" === t ? "min" : "max",
-          m = u[f + "Image" + o];!i.isEmpty(m) && a.length && (c = a[0], d = "Width" === o ? c.naturalWidth || c.width : c.naturalHeight || c.height, p = "Small" === t ? d >= m : m >= d, p || (s = u["msgImage" + o + t].replace("{name}", n).replace("{size}", m), u._showUploadError(s, l), u._setPreviewError(r, e, null)));
-    }, _validateImage: function _validateImage(e, i, t) {
-      var a,
-          r,
-          n,
-          o = this,
-          l = o.$preview,
-          s = l.find("#" + e),
-          d = s.attr("data-fileindex"),
-          c = s.find("img");i = i || "Untitled", c.length && o._handler(c, "load", function () {
-        r = s.width(), n = l.width(), r > n && (c.css("width", "100%"), s.css("width", "97%")), a = { ind: d, id: e }, o._checkDimensions(d, "Small", c, s, i, "Width", a), o._checkDimensions(d, "Small", c, s, i, "Height", a), o.resizeImage || (o._checkDimensions(d, "Large", c, s, i, "Width", a), o._checkDimensions(d, "Large", c, s, i, "Height", a)), o._raise("fileimageloaded", [e]), o.loadedImages.push({ ind: d, img: c, thumb: s, pid: e, typ: t }), o._validateAllImages();
-      });
-    }, _validateAllImages: function _validateAllImages() {
-      var e,
-          i = this,
-          t = { val: 0 },
-          a = i.loadedImages.length;if (a === i.totalImagesCount && (i._raise("fileimagesloaded"), i.resizeImage)) for (e = 0; e < i.loadedImages.length; e++) {
-        i._getResizedImage(i.loadedImages[e], t, a);
-      }
-    }, _getResizedImage: function _getResizedImage(i, t, a) {
-      var r,
-          n,
-          o,
-          l,
-          s = this,
-          d = e(i.img)[0],
-          c = d.naturalWidth,
-          p = d.naturalHeight,
-          u = 1,
-          f = s.maxImageWidth || c,
-          m = s.maxImageHeight || p,
-          g = !(!c || !p),
-          v = s.imageCanvas,
-          h = s.imageCanvasContext,
-          w = i.typ,
-          _ = i.pid,
-          b = i.ind,
-          C = i.thumb;if (o = function o(e, i, t) {
-        s.isUploadable ? s._showUploadError(e, i, t) : s._showError(e, i, t), s._setPreviewError(C, b);
-      }, (!s.filestack[b] || !g || f >= c && m >= p) && (g && s.filestack[b] && s._raise("fileimageresized", [_, b]), t.val++, t.val === a && s._raise("fileimagesresized"), !g)) return void o(s.msgImageResizeError, { id: _, index: b }, "fileimageresizeerror");w = w || s.resizeDefaultImageType, r = c > f, n = p > m, u = "width" === s.resizePreference ? r ? f / c : n ? m / p : 1 : n ? m / p : r ? f / c : 1, s._resetCanvas(), c *= u, p *= u, v.width = c, v.height = p;try {
-        h.drawImage(d, 0, 0, c, p), v.toBlob(function (e) {
-          s.filestack[b] = e, s._raise("fileimageresized", [_, b]), t.val++, t.val === a && s._raise("fileimagesresized", [void 0, void 0]), e instanceof Blob || o(s.msgImageResizeError, { id: _, index: b }, "fileimageresizeerror");
-        }, w, s.resizeQuality);
-      } catch (y) {
-        t.val++, t.val === a && s._raise("fileimagesresized", [void 0, void 0]), l = s.msgImageResizeException.replace("{errors}", y.message), o(l, { id: _, index: b }, "fileimageresizeexception");
-      }
-    }, _initBrowse: function _initBrowse(e) {
-      var i = this;i.showBrowse ? (i.$btnFile = e.find(".btn-file"), i.$btnFile.append(i.$element)) : i.$element.hide();
-    }, _initCaption: function _initCaption() {
-      var e = this,
-          t = e.initialCaption || "";return e.overwriteInitial || i.isEmpty(t) ? (e.$caption.html(""), !1) : (e._setCaption(t), !0);
-    }, _setCaption: function _setCaption(t, a) {
-      var r,
-          n,
-          o,
-          l,
-          s = this,
-          d = s.getFileStack();if (s.$caption.length) {
-        if (a) r = e("<div>" + s.msgValidationError + "</div>").text(), o = d.length, l = o ? 1 === o && d[0] ? s._getFileNames()[0] : s._getMsgSelected(o) : s._getMsgSelected(s.msgNo), n = '<span class="' + s.msgValidationErrorClass + '">' + s.msgValidationErrorIcon + (i.isEmpty(t) ? l : t) + "</span>";else {
-          if (i.isEmpty(t)) return;r = e("<div>" + t + "</div>").text(), n = s._getLayoutTemplate("fileIcon") + r;
-        }s.$caption.html(n), s.$caption.attr("title", r), s.$captionContainer.find(".file-caption-ellipsis").attr("title", r);
-      }
-    }, _createContainer: function _createContainer() {
-      var i = this,
-          t = e(document.createElement("div")).attr({ "class": "file-input file-input-new" }).html(i._renderMain());return i.$element.before(t), i._initBrowse(t), i.theme && t.addClass("theme-" + i.theme), t;
-    }, _refreshContainer: function _refreshContainer() {
-      var e = this,
-          i = e.$container;i.before(e.$element), i.html(e._renderMain()), e._initBrowse(i);
-    }, _renderMain: function _renderMain() {
-      var e = this,
-          i = e.isUploadable && e.dropZoneEnabled ? " file-drop-zone" : "file-drop-disabled",
-          t = e.showClose ? e._getLayoutTemplate("close") : "",
-          a = e.showPreview ? e._getLayoutTemplate("preview").replace(/\{class}/g, e.previewClass).replace(/\{dropClass}/g, i) : "",
-          r = e.isDisabled ? e.captionClass + " file-caption-disabled" : e.captionClass,
-          n = e.captionTemplate.replace(/\{class}/g, r + " kv-fileinput-caption");return e.mainTemplate.replace(/\{class}/g, e.mainClass + (!e.showBrowse && e.showCaption ? " no-browse" : "")).replace(/\{preview}/g, a).replace(/\{close}/g, t).replace(/\{caption}/g, n).replace(/\{upload}/g, e._renderButton("upload")).replace(/\{remove}/g, e._renderButton("remove")).replace(/\{cancel}/g, e._renderButton("cancel")).replace(/\{browse}/g, e._renderButton("browse"));
-    }, _renderButton: function _renderButton(e) {
-      var t = this,
-          a = t._getLayoutTemplate("btnDefault"),
-          r = t[e + "Class"],
-          n = t[e + "Title"],
-          o = t[e + "Icon"],
-          l = t[e + "Label"],
-          s = t.isDisabled ? " disabled" : "",
-          d = "button";switch (e) {case "remove":
-          if (!t.showRemove) return "";break;case "cancel":
-          if (!t.showCancel) return "";r += " hide";break;case "upload":
-          if (!t.showUpload) return "";t.isUploadable && !t.isDisabled ? a = t._getLayoutTemplate("btnLink").replace("{href}", t.uploadUrl) : d = "submit";break;case "browse":
-          if (!t.showBrowse) return "";a = t._getLayoutTemplate("btnBrowse");break;default:
-          return "";}return r += "browse" === e ? " btn-file" : " fileinput-" + e + " fileinput-" + e + "-button", i.isEmpty(l) || (l = ' <span class="' + t.buttonLabelClass + '">' + l + "</span>"), a.replace("{type}", d).replace("{css}", r).replace("{title}", n).replace("{status}", s).replace("{icon}", o).replace("{label}", l);
-    }, _renderThumbProgress: function _renderThumbProgress() {
-      var e = this;return '<div class="file-thumb-progress hide">' + e.progressTemplate.replace(/\{percent}/g, "0").replace(/\{status}/g, e.msgUploadBegin) + "</div>";
-    }, _renderFileFooter: function _renderFileFooter(e, t, a, r) {
-      var n,
-          o = this,
-          l = o.fileActionSettings,
-          s = l.showRemove,
-          d = l.showDrag,
-          c = l.showUpload,
-          p = l.showZoom,
-          u = o._getLayoutTemplate("footer"),
-          f = r ? l.indicatorError : l.indicatorNew,
-          m = r ? l.indicatorErrorTitle : l.indicatorNewTitle;return t = o._getSize(t), n = o.isUploadable ? u.replace(/\{actions}/g, o._renderFileActions(c, s, p, d, !1, !1, !1)).replace(/\{caption}/g, e).replace(/\{size}/g, t).replace(/\{width}/g, a).replace(/\{progress}/g, o._renderThumbProgress()).replace(/\{indicator}/g, f).replace(/\{indicatorTitle}/g, m) : u.replace(/\{actions}/g, o._renderFileActions(!1, !1, p, d, !1, !1, !1)).replace(/\{caption}/g, e).replace(/\{size}/g, t).replace(/\{width}/g, a).replace(/\{progress}/g, "").replace(/\{indicator}/g, f).replace(/\{indicatorTitle}/g, m), n = i.replaceTags(n, o.previewThumbTags);
-    }, _renderFileActions: function _renderFileActions(e, i, t, a, r, n, o, l) {
-      if (!(e || i || t || a)) return "";var s,
-          d = this,
-          c = n === !1 ? "" : ' data-url="' + n + '"',
-          p = o === !1 ? "" : ' data-key="' + o + '"',
-          u = "",
-          f = "",
-          m = "",
-          g = "",
-          v = d._getLayoutTemplate("actions"),
-          h = d.fileActionSettings,
-          w = d.otherActionButtons.replace(/\{dataKey}/g, p),
-          _ = r ? h.removeClass + " disabled" : h.removeClass;return i && (u = d._getLayoutTemplate("actionDelete").replace(/\{removeClass}/g, _).replace(/\{removeIcon}/g, h.removeIcon).replace(/\{removeTitle}/g, h.removeTitle).replace(/\{dataUrl}/g, c).replace(/\{dataKey}/g, p)), e && (f = d._getLayoutTemplate("actionUpload").replace(/\{uploadClass}/g, h.uploadClass).replace(/\{uploadIcon}/g, h.uploadIcon).replace(/\{uploadTitle}/g, h.uploadTitle)), t && (m = d._getLayoutTemplate("actionZoom").replace(/\{zoomClass}/g, h.zoomClass).replace(/\{zoomIcon}/g, h.zoomIcon).replace(/\{zoomTitle}/g, h.zoomTitle)), a && l && (s = "drag-handle-init " + h.dragClass, g = d._getLayoutTemplate("actionDrag").replace(/\{dragClass}/g, s).replace(/\{dragTitle}/g, h.dragTitle).replace(/\{dragIcon}/g, h.dragIcon)), v.replace(/\{delete}/g, u).replace(/\{upload}/g, f).replace(/\{zoom}/g, m).replace(/\{drag}/g, g).replace(/\{other}/g, w);
-    }, _browse: function _browse(e) {
-      var i = this;i._raise("filebrowse"), e && e.isDefaultPrevented() || (i.isError && !i.isUploadable && i.clear(), i.$captionContainer.focus());
-    }, _change: function _change(t) {
-      var a = this,
-          r = a.$element;if (!a.isUploadable && i.isEmpty(r.val()) && a.fileInputCleared) return void (a.fileInputCleared = !1);a.fileInputCleared = !1;var n,
-          o,
-          l,
-          s,
-          d,
-          c,
-          p = arguments.length > 1,
-          u = a.isUploadable,
-          f = 0,
-          m = p ? t.originalEvent.dataTransfer.files : r.get(0).files,
-          g = a.filestack.length,
-          v = i.isEmpty(r.attr("multiple")),
-          h = v && g > 0,
-          w = 0,
-          _ = function _(i, t, r, n) {
-        var o = e.extend(!0, {}, a._getOutData({}, {}, m), { id: r, index: n }),
-            l = { id: r, index: n, file: t, files: m };return a.isUploadable ? a._showUploadError(i, o) : a._showError(i, l);
-      };if (a.reader = null, a._resetUpload(), a._hideFileIcon(), a.isUploadable && a.$container.find(".file-drop-zone ." + a.dropZoneTitleClass).remove(), p) for (n = []; m[f];) {
-        s = m[f], s.type || s.size % 4096 !== 0 ? n.push(s) : w++, f++;
-      } else n = void 0 === t.target.files ? t.target && t.target.value ? [{ name: t.target.value.replace(/^.+\\/, "") }] : [] : t.target.files;if (i.isEmpty(n) || 0 === n.length) return u || a.clear(), a._showFolderError(w), void a._raise("fileselectnone");if (a._resetErrors(), c = n.length, l = a._getFileCount(a.isUploadable ? a.getFileStack().length + c : c), a.maxFileCount > 0 && l > a.maxFileCount) {
-        if (!a.autoReplace || c > a.maxFileCount) return d = a.autoReplace && c > a.maxFileCount ? c : l, o = a.msgFilesTooMany.replace("{m}", a.maxFileCount).replace("{n}", d), a.isError = _(o, null, null, null), a.$captionContainer.find(".kv-caption-icon").hide(), a._setCaption("", !0), void a.$container.removeClass("file-input-new file-input-ajax-new");l > a.maxFileCount && a._resetPreviewThumbs(u);
-      } else !u || h ? (a._resetPreviewThumbs(!1), h && a.clearStack()) : !u || 0 !== g || a.previewCache.count() && !a.overwriteInitial || a._resetPreviewThumbs(!0);a.isPreviewable ? a._readFiles(n) : a._updateFileDetails(1), a._showFolderError(w);
-    }, _abort: function _abort(i) {
-      var t,
-          a = this;return a.ajaxAborted && "object" == _typeof(a.ajaxAborted) && void 0 !== a.ajaxAborted.message ? (t = e.extend(!0, {}, a._getOutData(), i), t.abortData = a.ajaxAborted.data || {}, t.abortMessage = a.ajaxAborted.message, a.cancel(), a._setProgress(101, a.$progress, a.msgCancelled), a._showUploadError(a.ajaxAborted.message, t, "filecustomerror"), !0) : !1;
-    }, _resetFileStack: function _resetFileStack() {
-      var i = this,
-          t = 0,
-          a = [],
-          r = [];i._getThumbs().each(function () {
-        var n = e(this),
-            o = n.attr("data-fileindex"),
-            l = i.filestack[o];-1 !== o && (void 0 !== l ? (a[t] = l, r[t] = i._getFileName(l), n.attr({ id: i.previewInitId + "-" + t, "data-fileindex": t }), t++) : n.attr({ "data-fileindex": "-1" }));
-      }), i.filestack = a, i.filenames = r;
-    }, clearStack: function clearStack() {
-      var e = this;return e.filestack = [], e.filenames = [], e.$element;
-    }, updateStack: function updateStack(e, i) {
-      var t = this;return t.filestack[e] = i, t.filenames[e] = t._getFileName(i), t.$element;
-    }, addToStack: function addToStack(e) {
-      var i = this;return i.filestack.push(e), i.filenames.push(i._getFileName(e)), i.$element;
-    }, getFileStack: function getFileStack(e) {
-      var i = this;return i.filestack.filter(function (i) {
-        return e ? void 0 !== i : void 0 !== i && null !== i;
-      });
-    }, getFilesCount: function getFilesCount() {
-      var e = this,
-          i = e.isUploadable ? e.getFileStack().length : e.$element.get(0).files.length;return e._getFileCount(i);
-    }, lock: function lock() {
-      var e = this;return e._resetErrors(), e.disable(), e.showRemove && i.addCss(e.$container.find(".fileinput-remove"), "hide"), e.showCancel && e.$container.find(".fileinput-cancel").removeClass("hide"), e._raise("filelock", [e.filestack, e._getExtraData()]), e.$element;
-    }, unlock: function unlock(e) {
-      var t = this;return void 0 === e && (e = !0), t.enable(), t.showCancel && i.addCss(t.$container.find(".fileinput-cancel"), "hide"), t.showRemove && t.$container.find(".fileinput-remove").removeClass("hide"), e && t._resetFileStack(), t._raise("fileunlock", [t.filestack, t._getExtraData()]), t.$element;
-    }, cancel: function cancel() {
-      var i,
-          t = this,
-          a = t.ajaxRequests,
-          r = a.length;if (r > 0) for (i = 0; r > i; i += 1) {
-        t.cancelling = !0, a[i].abort();
-      }return t._setProgressCancelled(), t._getThumbs().each(function () {
-        var i = e(this),
-            a = i.attr("data-fileindex");i.removeClass("file-uploading"), void 0 !== t.filestack[a] && (i.find(".kv-file-upload").removeClass("disabled").removeAttr("disabled"), i.find(".kv-file-remove").removeClass("disabled").removeAttr("disabled")), t.unlock();
-      }), t.$element;
-    }, clear: function clear() {
-      var t,
-          a = this;if (a._raise("fileclear")) return a.$btnUpload.removeAttr("disabled"), a._getThumbs().find("video,audio,img").each(function () {
-        i.cleanMemory(e(this));
-      }), a._resetUpload(), a.clearStack(), a._clearFileInput(), a._resetErrors(!0), a._hasInitialPreview() ? (a._showFileIcon(), a._resetPreview(), a._initPreviewActions(), a.$container.removeClass("file-input-new")) : (a._getThumbs().each(function () {
-        a._clearObjects(e(this));
-      }), a.isUploadable && (a.previewCache.data = {}), a.$preview.html(""), t = !a.overwriteInitial && a.initialCaption.length > 0 ? a.initialCaption : "", a.$caption.html(t), a.$caption.attr("title", ""), i.addCss(a.$container, "file-input-new"), a._validateDefaultPreview()), 0 === a.$container.find(i.FRAMES).length && (a._initCaption() || a.$captionContainer.find(".kv-caption-icon").hide()), a._hideFileIcon(), a._raise("filecleared"), a.$captionContainer.focus(), a._setFileDropZoneTitle(), a.$element;
-    }, reset: function reset() {
-      var e = this;if (e._raise("filereset")) return e._resetPreview(), e.$container.find(".fileinput-filename").text(""), i.addCss(e.$container, "file-input-new"), (e.$preview.find(i.FRAMES).length || e.isUploadable && e.dropZoneEnabled) && e.$container.removeClass("file-input-new"), e._setFileDropZoneTitle(), e.clearStack(), e.formdata = {}, e.$element;
-    }, disable: function disable() {
-      var e = this;return e.isDisabled = !0, e._raise("filedisabled"), e.$element.attr("disabled", "disabled"), e.$container.find(".kv-fileinput-caption").addClass("file-caption-disabled"), e.$container.find(".btn-file, .fileinput-remove, .fileinput-upload, .file-preview-frame button").attr("disabled", !0), e._initDragDrop(), e.$element;
-    }, enable: function enable() {
-      var e = this;return e.isDisabled = !1, e._raise("fileenabled"), e.$element.removeAttr("disabled"), e.$container.find(".kv-fileinput-caption").removeClass("file-caption-disabled"), e.$container.find(".btn-file, .fileinput-remove, .fileinput-upload, .file-preview-frame button").removeAttr("disabled"), e._initDragDrop(), e.$element;
-    }, upload: function upload() {
-      var t,
-          a,
-          r,
-          n = this,
-          o = n.getFileStack().length,
-          l = {},
-          s = !e.isEmptyObject(n._getExtraData());if (n.isUploadable && !n.isDisabled) {
-        if (n.minFileCount > 0 && n._getFileCount(o) < n.minFileCount) return void n._noFilesError(l);if (n._resetUpload(), 0 === o && !s) return void n._showUploadError(n.msgUploadEmpty);if (n.$progress.removeClass("hide"), n.uploadCount = 0, n.uploadStatus = {}, n.uploadLog = [], n.lock(), n._setProgress(2), 0 === o && s) return void n._uploadExtraOnly();if (r = n.filestack.length, n.hasInitData = !1, !n.uploadAsync) return n._uploadBatch(), n.$element;for (a = n._getOutData(), n._raise("filebatchpreupload", [a]), n.fileBatchCompleted = !1, n.uploadCache = { content: [], config: [], tags: [], append: !0 }, n.uploadAsyncCount = n.getFileStack().length, t = 0; r > t; t++) {
-          n.uploadCache.content[t] = null, n.uploadCache.config[t] = null, n.uploadCache.tags[t] = null;
-        }for (n.$preview.find(".file-preview-initial").removeClass(i.SORT_CSS), n._initSortable(), n.cacheInitialPreview = n.getPreview(), t = 0; r > t; t++) {
-          void 0 !== n.filestack[t] && n._uploadSingle(t, n.filestack, !0);
-        }
-      }
-    }, destroy: function destroy() {
-      var i = this,
-          t = i.$form,
-          a = i.$container,
-          r = i.$element,
-          n = i.namespace;return e(document).off(n), e(window).off(n), t && t.length && t.off(n), r.insertBefore(a).off(n).removeData(), a.off().remove(), r;
-    }, refresh: function refresh(i) {
-      var t = this,
-          a = t.$element;return i = i ? e.extend(!0, {}, t.options, i) : t.options, t.destroy(), a.fileinput(i), a.val() && a.trigger("change.fileinput"), a;
-    }, zoom: function zoom(t) {
-      var a = this,
-          r = e("#" + t),
-          n = a.$modal;return r.length ? (i.initModal(n), n.html(a._getModalContent()), a._setZoomContent(r), n.modal("show"), void a._initZoomButtons()) : void a._log('Cannot zoom to detailed preview! Invalid frame with id: "' + t + '".');
-    }, getPreview: function getPreview() {
-      var e = this;return { content: e.initialPreview, config: e.initialPreviewConfig, tags: e.initialPreviewThumbTags };
-    } }, e.fn.fileinput = function (a) {
-    if (i.hasFileAPISupport() || i.isIE(9)) {
-      var r = Array.apply(null, arguments),
-          n = [];switch (r.shift(), this.each(function () {
-        var o,
-            l = e(this),
-            s = l.data("fileinput"),
-            d = "object" == (typeof a === "undefined" ? "undefined" : _typeof(a)) && a,
-            c = d.theme || l.data("theme"),
-            p = {},
-            u = {},
-            f = d.language || l.data("language") || e.fn.fileinput.defaults.language || "en";s || (c && (u = e.fn.fileinputThemes[c] || {}), "en" === f || i.isEmpty(e.fn.fileinputLocales[f]) || (p = e.fn.fileinputLocales[f] || {}), o = e.extend(!0, {}, e.fn.fileinput.defaults, u, e.fn.fileinputLocales.en, p, d, l.data()), s = new t(this, o), l.data("fileinput", s)), "string" == typeof a && n.push(s[a].apply(s, r));
-      }), n.length) {case 0:
-          return this;case 1:
-          return n[0];default:
-          return n;}
-    }
-  }, e.fn.fileinput.defaults = { language: "en", showCaption: !0, showBrowse: !0, showPreview: !0, showRemove: !0, showUpload: !0, showCancel: !0, showClose: !0, showUploadedThumbs: !0, browseOnZoneClick: !1, autoReplace: !1, previewClass: "", captionClass: "", frameClass: "krajee-default", mainClass: "file-caption-main", mainTemplate: null, purifyHtml: !0, fileSizeGetter: null, initialCaption: "", initialPreview: [], initialPreviewDelimiter: "*$$*", initialPreviewAsData: !1, initialPreviewFileType: "image", initialPreviewConfig: [], initialPreviewThumbTags: [], previewThumbTags: {}, initialPreviewShowDelete: !0, removeFromPreviewOnError: !1, deleteUrl: "", deleteExtraData: {}, overwriteInitial: !0, previewZoomButtonIcons: { prev: '<i class="glyphicon glyphicon-triangle-left"></i>', next: '<i class="glyphicon glyphicon-triangle-right"></i>', toggleheader: '<i class="glyphicon glyphicon-resize-vertical"></i>', fullscreen: '<i class="glyphicon glyphicon-fullscreen"></i>', borderless: '<i class="glyphicon glyphicon-resize-full"></i>', close: '<i class="glyphicon glyphicon-remove"></i>' }, previewZoomButtonClasses: { prev: "btn btn-navigate", next: "btn btn-navigate", toggleheader: "btn btn-default btn-header-toggle", fullscreen: "btn btn-default", borderless: "btn btn-default", close: "btn btn-default" }, preferIconicPreview: !1, preferIconicZoomPreview: !1, allowedPreviewTypes: void 0, allowedPreviewMimeTypes: null, allowedFileTypes: null, allowedFileExtensions: null, defaultPreviewContent: null, customLayoutTags: {}, customPreviewTags: {}, previewFileIcon: '<i class="glyphicon glyphicon-file"></i>', previewFileIconClass: "file-other-icon", previewFileIconSettings: {}, previewFileExtSettings: {}, buttonLabelClass: "hidden-xs", browseIcon: '<i class="glyphicon glyphicon-folder-open"></i>&nbsp;', browseClass: "btn btn-primary", removeIcon: '<i class="glyphicon glyphicon-trash"></i>', removeClass: "btn btn-default", cancelIcon: '<i class="glyphicon glyphicon-ban-circle"></i>', cancelClass: "btn btn-default", uploadIcon: '<i class="glyphicon glyphicon-upload"></i>', uploadClass: "btn btn-default", uploadUrl: null, uploadAsync: !0, uploadExtraData: {}, zoomModalHeight: 480, minImageWidth: null, minImageHeight: null, maxImageWidth: null, maxImageHeight: null, resizeImage: !1, resizePreference: "width", resizeQuality: .92, resizeDefaultImageType: "image/jpeg", minFileSize: 0, maxFileSize: 0, maxFilePreviewSize: 25600, minFileCount: 0, maxFileCount: 0, validateInitialCount: !1, msgValidationErrorClass: "text-danger", msgValidationErrorIcon: '<i class="glyphicon glyphicon-exclamation-sign"></i> ', msgErrorClass: "file-error-message", progressThumbClass: "progress-bar progress-bar-success progress-bar-striped active", progressClass: "progress-bar progress-bar-success progress-bar-striped active", progressCompleteClass: "progress-bar progress-bar-success", progressErrorClass: "progress-bar progress-bar-danger", progressUploadThreshold: 99, previewFileType: "image", elCaptionContainer: null, elCaptionText: null, elPreviewContainer: null, elPreviewImage: null, elPreviewStatus: null, elErrorContainer: null, errorCloseButton: '<span class="close kv-error-close">&times;</span>', slugCallback: null, dropZoneEnabled: !0, dropZoneTitleClass: "file-drop-zone-title", fileActionSettings: {}, otherActionButtons: "", textEncoding: "UTF-8", ajaxSettings: {}, ajaxDeleteSettings: {}, showAjaxErrorDetails: !0 }, e.fn.fileinputLocales.en = { fileSingle: "file", filePlural: "files", browseLabel: "Browse &hellip;", removeLabel: "Remove", removeTitle: "Clear selected files", cancelLabel: "Cancel", cancelTitle: "Abort ongoing upload", uploadLabel: "Upload", uploadTitle: "Upload selected files", msgNo: "No", msgNoFilesSelected: "No files selected", msgCancelled: "Cancelled", msgZoomModalHeading: "Detailed Preview", msgSizeTooSmall: 'File "{name}" (<b>{size} KB</b>) is too small and must be larger than <b>{minSize} KB</b>.', msgSizeTooLarge: 'File "{name}" (<b>{size} KB</b>) exceeds maximum allowed upload size of <b>{maxSize} KB</b>.', msgFilesTooLess: "You must select at least <b>{n}</b> {files} to upload.", msgFilesTooMany: "Number of files selected for upload <b>({n})</b> exceeds maximum allowed limit of <b>{m}</b>.", msgFileNotFound: 'File "{name}" not found!', msgFileSecured: 'Security restrictions prevent reading the file "{name}".', msgFileNotReadable: 'File "{name}" is not readable.', msgFilePreviewAborted: 'File preview aborted for "{name}".', msgFilePreviewError: 'An error occurred while reading the file "{name}".', msgInvalidFileName: 'Invalid or unsupported characters in file name "{name}".', msgInvalidFileType: 'Invalid type for file "{name}". Only "{types}" files are supported.', msgInvalidFileExtension: 'Invalid extension for file "{name}". Only "{extensions}" files are supported.', msgFileTypes: { image: "image", html: "HTML", text: "text", video: "video", audio: "audio", flash: "flash", pdf: "PDF", object: "object" }, msgUploadAborted: "The file upload was aborted", msgUploadThreshold: "Processing...", msgUploadBegin: "Initializing...", msgUploadEnd: "Done", msgUploadEmpty: "No valid data available for upload.", msgValidationError: "Validation Error", msgLoading: "Loading file {index} of {files} &hellip;", msgProgress: "Loading file {index} of {files} - {name} - {percent}% completed.", msgSelected: "{n} {files} selected", msgFoldersNotAllowed: "Drag & drop files only! {n} folder(s) dropped were skipped.", msgImageWidthSmall: 'Width of image file "{name}" must be at least {size} px.', msgImageHeightSmall: 'Height of image file "{name}" must be at least {size} px.', msgImageWidthLarge: 'Width of image file "{name}" cannot exceed {size} px.', msgImageHeightLarge: 'Height of image file "{name}" cannot exceed {size} px.', msgImageResizeError: "Could not get the image dimensions to resize.", msgImageResizeException: "Error while resizing the image.<pre>{errors}</pre>", msgAjaxError: "Something went wrong with the {operation} operation. Please try again later!", msgAjaxProgressError: "{operation} failed", ajaxOperations: { deleteThumb: "file delete", uploadThumb: "file upload", uploadBatch: "batch file upload", uploadExtra: "form data upload" }, dropZoneTitle: "Drag & drop files here &hellip;", dropZoneClickTitle: "<br>(or click to select {files})", previewZoomButtonTitles: { prev: "View previous file", next: "View next file", toggleheader: "Toggle header", fullscreen: "Toggle full screen", borderless: "Toggle borderless mode", close: "Close detailed preview" } }, e.fn.fileinput.Constructor = t, e(document).ready(function () {
-    var i = e("input.file[type=file]");i.length && i.fileinput();
-  });
-});
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "container" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-md-8 col-md-offset-2" }, [
+          _c("div", { staticClass: "panel panel-default" }, [
+            _c("div", { staticClass: "panel-heading" }, [
+              _vm._v("Example Component")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "panel-body" }, [
+              _vm._v(
+                "\n                    I'm an example component!\n                "
+              )
+            ])
+          ])
+        ])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-48141bb8", module.exports)
+  }
+}
 
 /***/ }),
-/* 36 */
+
+/***/ "./node_modules/vue/dist/vue.common.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43088,225 +41941,164 @@ Vue$3.compile = compileToFunctions;
 
 module.exports = Vue$3;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__("./node_modules/webpack/buildin/global.js")))
 
 /***/ }),
-/* 37 */
-/***/ (function(module, exports, __webpack_require__) {
 
-var disposed = false
-var normalizeComponent = __webpack_require__(38)
-/* script */
-var __vue_script__ = __webpack_require__(39)
-/* template */
-var __vue_template__ = __webpack_require__(40)
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/Example.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] Example.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-48141bb8", Component.options)
-  } else {
-    hotAPI.reload("data-v-48141bb8", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 38 */
+/***/ "./node_modules/webpack/buildin/global.js":
 /***/ (function(module, exports) {
 
-/* globals __VUE_SSR_CONTEXT__ */
+var g;
 
-// this module is a runtime utility for cleaner component module output and will
-// be included in the final webpack user bundle
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
 
-module.exports = function normalizeComponent (
-  rawScriptExports,
-  compiledTemplate,
-  injectStyles,
-  scopeId,
-  moduleIdentifier /* server only */
-) {
-  var esModule
-  var scriptExports = rawScriptExports = rawScriptExports || {}
-
-  // ES6 modules interop
-  var type = typeof rawScriptExports.default
-  if (type === 'object' || type === 'function') {
-    esModule = rawScriptExports
-    scriptExports = rawScriptExports.default
-  }
-
-  // Vue.extend constructor export interop
-  var options = typeof scriptExports === 'function'
-    ? scriptExports.options
-    : scriptExports
-
-  // render functions
-  if (compiledTemplate) {
-    options.render = compiledTemplate.render
-    options.staticRenderFns = compiledTemplate.staticRenderFns
-  }
-
-  // scopedId
-  if (scopeId) {
-    options._scopeId = scopeId
-  }
-
-  var hook
-  if (moduleIdentifier) { // server build
-    hook = function (context) {
-      // 2.3 injection
-      context =
-        context || // cached call
-        (this.$vnode && this.$vnode.ssrContext) || // stateful
-        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
-      // 2.2 with runInNewContext: true
-      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
-        context = __VUE_SSR_CONTEXT__
-      }
-      // inject component styles
-      if (injectStyles) {
-        injectStyles.call(this, context)
-      }
-      // register component module identifier for async chunk inferrence
-      if (context && context._registeredComponents) {
-        context._registeredComponents.add(moduleIdentifier)
-      }
-    }
-    // used by ssr in case component is cached and beforeCreate
-    // never gets called
-    options._ssrRegister = hook
-  } else if (injectStyles) {
-    hook = injectStyles
-  }
-
-  if (hook) {
-    var functional = options.functional
-    var existing = functional
-      ? options.render
-      : options.beforeCreate
-    if (!functional) {
-      // inject component registration as beforeCreate hook
-      options.beforeCreate = existing
-        ? [].concat(existing, hook)
-        : [hook]
-    } else {
-      // register for functioal component in vue file
-      options.render = function renderWithStyleInjection (h, context) {
-        hook.call(context)
-        return existing(h, context)
-      }
-    }
-  }
-
-  return {
-    esModule: esModule,
-    exports: scriptExports,
-    options: options
-  }
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1,eval)("this");
+} catch(e) {
+	// This works if the window reference is available
+	if(typeof window === "object")
+		g = window;
 }
 
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
 
 /***/ }),
-/* 39 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+/***/ "./node_modules/webpack/buildin/module.js":
+/***/ (function(module, exports) {
 
-/* harmony default export */ __webpack_exports__["default"] = ({
-    mounted: function mounted() {
-        console.log('Component mounted.');
-    }
-});
+module.exports = function(module) {
+	if(!module.webpackPolyfill) {
+		module.deprecate = function() {};
+		module.paths = [];
+		// module.parent = undefined by default
+		if(!module.children) module.children = [];
+		Object.defineProperty(module, "loaded", {
+			enumerable: true,
+			get: function() {
+				return module.l;
+			}
+		});
+		Object.defineProperty(module, "id", {
+			enumerable: true,
+			get: function() {
+				return module.i;
+			}
+		});
+		module.webpackPolyfill = 1;
+	}
+	return module;
+};
+
 
 /***/ }),
-/* 40 */
+
+/***/ "./resources/assets/js/app.js":
 /***/ (function(module, exports, __webpack_require__) {
 
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-8 col-md-offset-2" }, [
-          _c("div", { staticClass: "panel panel-default" }, [
-            _c("div", { staticClass: "panel-heading" }, [
-              _vm._v("Example Component")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "panel-body" }, [
-              _vm._v(
-                "\n                    I'm an example component!\n                "
-              )
-            ])
-          ])
-        ])
-      ])
-    ])
-  }
-]
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-48141bb8", module.exports)
-  }
-}
+
+/**
+ * First we will load all of this project's JavaScript dependencies which
+ * includes Vue and other libraries. It is a great starting point when
+ * building robust, powerful web applications using Vue and Laravel.
+ */
+
+__webpack_require__("./resources/assets/js/bootstrap.js");
+__webpack_require__("./resources/assets/js/fileinput.min.js");
+
+window.Vue = __webpack_require__("./node_modules/vue/dist/vue.common.js");
+
+/**
+ * Next, we will create a fresh Vue application instance and attach it to
+ * the page. Then, you may begin adding components to this application
+ * or customize the JavaScript scaffolding to fit your unique needs.
+ */
+
+Vue.component('example', __webpack_require__("./resources/assets/js/components/Example.vue"));
+
+var app = new Vue({
+  el: '#app'
+});
+
+__webpack_require__("./resources/assets/js/comment.js");
+
+$('#avatar-upload').on("change", function (e) {
+  $("#avatar-form").submit();
+});
+
+$("#orderImgs").fileinput({ 'browseLabel': '選擇圖片', 'removeLabel': "刪除圖片" });
 
 /***/ }),
-/* 41 */
+
+/***/ "./resources/assets/js/bootstrap.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+
+window._ = __webpack_require__("./node_modules/lodash/lodash.js");
+
+/**
+ * We'll load jQuery and the Bootstrap jQuery plugin which provides support
+ * for JavaScript based Bootstrap features such as modals and tabs. This
+ * code may be modified to fit the specific needs of your application.
+ */
+
+try {
+  window.$ = window.jQuery = __webpack_require__("./node_modules/jquery/dist/jquery.js");
+
+  __webpack_require__("./node_modules/bootstrap-sass/assets/javascripts/bootstrap.js");
+} catch (e) {}
+
+/**
+ * We'll load the axios HTTP library which allows us to easily issue requests
+ * to our Laravel back-end. This library automatically handles sending the
+ * CSRF token as a header based on the value of the "XSRF" token cookie.
+ */
+
+window.axios = __webpack_require__("./node_modules/axios/index.js");
+
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
+/**
+ * Next we will register the CSRF Token as a common header with Axios so that
+ * all outgoing HTTP requests automatically have it attached. This is just
+ * a simple convenience so we don't have to attach every token manually.
+ */
+
+var token = document.head.querySelector('meta[name="csrf-token"]');
+
+if (token) {
+  window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+} else {
+  console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
+}
+
+/**
+ * Echo exposes an expressive API for subscribing to channels and listening
+ * for events that are broadcast by Laravel. Echo and event broadcasting
+ * allows your team to easily build robust real-time web applications.
+ */
+
+// import Echo from 'laravel-echo'
+
+// window.Pusher = require('pusher-js');
+
+// window.Echo = new Echo({
+//     broadcaster: 'pusher',
+//     key: 'your-pusher-key'
+// });
+
+/***/ }),
+
+/***/ "./resources/assets/js/comment.js":
 /***/ (function(module, exports) {
 
 $('#storeComment').on('submit', function (e) {
@@ -43358,10 +42150,1262 @@ $('#comment-start').on("submit", "form[id^='deleteComment']", function (e) {
 });
 
 /***/ }),
-/* 42 */
+
+/***/ "./resources/assets/js/components/Example.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")
+/* script */
+var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/Example.vue")
+/* template */
+var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-48141bb8\",\"hasScoped\":false}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/Example.vue")
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/Example.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] Example.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-48141bb8", Component.options)
+  } else {
+    hotAPI.reload("data-v-48141bb8", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ "./resources/assets/js/fileinput.min.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+/*!
+ * bootstrap-fileinput v4.3.9
+ * http://plugins.krajee.com/file-input
+ *
+ * Author: Kartik Visweswaran
+ * Copyright: 2014 - 2017, Kartik Visweswaran, Krajee.com
+ *
+ * Licensed under the BSD 3-Clause
+ * https://github.com/kartik-v/bootstrap-fileinput/blob/master/LICENSE.md
+ */!function (e) {
+  "use strict";
+   true ? !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/jquery/dist/jquery.js")], __WEBPACK_AMD_DEFINE_FACTORY__ = (e),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)) : "object" == (typeof module === "undefined" ? "undefined" : _typeof(module)) && module.exports ? module.exports = e(require("jquery")) : e(window.jQuery);
+}(function (e) {
+  "use strict";
+  e.fn.fileinputLocales = {}, e.fn.fileinputThemes = {};var i, t;i = { FRAMES: ".kv-preview-thumb", SORT_CSS: "file-sortable", STYLE_SETTING: 'style="width:{width};height:{height};"', OBJECT_PARAMS: '<param name="controller" value="true" />\n<param name="allowFullScreen" value="true" />\n<param name="allowScriptAccess" value="always" />\n<param name="autoPlay" value="false" />\n<param name="autoStart" value="false" />\n<param name="quality" value="high" />\n', DEFAULT_PREVIEW: '<div class="file-preview-other">\n<span class="{previewFileIconClass}">{previewFileIcon}</span>\n</div>', MODAL_ID: "kvFileinputModal", MODAL_EVENTS: ["show", "shown", "hide", "hidden", "loaded"], objUrl: window.URL || window.webkitURL, compare: function compare(e, i, t) {
+      return void 0 !== e && (t ? e === i : e.match(i));
+    }, isIE: function isIE(e) {
+      if ("Microsoft Internet Explorer" !== navigator.appName) return !1;if (10 === e) return new RegExp("msie\\s" + e, "i").test(navigator.userAgent);var i,
+          t = document.createElement("div");return t.innerHTML = "<!--[if IE " + e + "]> <i></i> <![endif]-->", i = t.getElementsByTagName("i").length, document.body.appendChild(t), t.parentNode.removeChild(t), i;
+    }, initModal: function initModal(i) {
+      var t = e("body");t.length && i.appendTo(t);
+    }, isEmpty: function isEmpty(i, t) {
+      return void 0 === i || null === i || 0 === i.length || t && "" === e.trim(i);
+    }, isArray: function isArray(e) {
+      return Array.isArray(e) || "[object Array]" === Object.prototype.toString.call(e);
+    }, ifSet: function ifSet(e, i, t) {
+      return t = t || "", i && "object" == (typeof i === "undefined" ? "undefined" : _typeof(i)) && e in i ? i[e] : t;
+    }, cleanArray: function cleanArray(e) {
+      return e instanceof Array || (e = []), e.filter(function (e) {
+        return void 0 !== e && null !== e;
+      });
+    }, spliceArray: function spliceArray(e, i) {
+      var t,
+          a = 0,
+          r = [];if (!(e instanceof Array)) return [];for (t = 0; t < e.length; t++) {
+        t !== i && (r[a] = e[t], a++);
+      }return r;
+    }, getNum: function getNum(e, i) {
+      return i = i || 0, "number" == typeof e ? e : ("string" == typeof e && (e = parseFloat(e)), isNaN(e) ? i : e);
+    }, hasFileAPISupport: function hasFileAPISupport() {
+      return !(!window.File || !window.FileReader);
+    }, hasDragDropSupport: function hasDragDropSupport() {
+      var e = document.createElement("div");return !i.isIE(9) && (void 0 !== e.draggable || void 0 !== e.ondragstart && void 0 !== e.ondrop);
+    }, hasFileUploadSupport: function hasFileUploadSupport() {
+      return i.hasFileAPISupport() && window.FormData;
+    }, addCss: function addCss(e, i) {
+      e.removeClass(i).addClass(i);
+    }, getElement: function getElement(t, a, r) {
+      return i.isEmpty(t) || i.isEmpty(t[a]) ? r : e(t[a]);
+    }, uniqId: function uniqId() {
+      return Math.round(new Date().getTime() + 100 * Math.random());
+    }, htmlEncode: function htmlEncode(e) {
+      return e.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&apos;");
+    }, replaceTags: function replaceTags(i, t) {
+      var a = i;return t ? (e.each(t, function (e, i) {
+        "function" == typeof i && (i = i()), a = a.split(e).join(i);
+      }), a) : a;
+    }, cleanMemory: function cleanMemory(e) {
+      var t = e.is("img") ? e.attr("src") : e.find("source").attr("src");i.objUrl.revokeObjectURL(t);
+    }, findFileName: function findFileName(e) {
+      var i = e.lastIndexOf("/");return -1 === i && (i = e.lastIndexOf("\\")), e.split(e.substring(i, i + 1)).pop();
+    }, checkFullScreen: function checkFullScreen() {
+      return document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement || document.msFullscreenElement;
+    }, toggleFullScreen: function toggleFullScreen(e) {
+      var t = document,
+          a = t.documentElement;a && e && !i.checkFullScreen() ? a.requestFullscreen ? a.requestFullscreen() : a.msRequestFullscreen ? a.msRequestFullscreen() : a.mozRequestFullScreen ? a.mozRequestFullScreen() : a.webkitRequestFullscreen && a.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT) : t.exitFullscreen ? t.exitFullscreen() : t.msExitFullscreen ? t.msExitFullscreen() : t.mozCancelFullScreen ? t.mozCancelFullScreen() : t.webkitExitFullscreen && t.webkitExitFullscreen();
+    }, moveArray: function moveArray(e, i, t) {
+      if (t >= e.length) for (var a = t - e.length; a-- + 1;) {
+        e.push(void 0);
+      }return e.splice(t, 0, e.splice(i, 1)[0]), e;
+    }, cleanZoomCache: function cleanZoomCache(e) {
+      var i = e.closest(".kv-zoom-cache-theme");i.length || (i = e.closest(".kv-zoom-cache")), i.remove();
+    } }, t = function t(_t, a) {
+    var r = this;r.$element = e(_t), r._validate() && (r.isPreviewable = i.hasFileAPISupport(), r.isIE9 = i.isIE(9), r.isIE10 = i.isIE(10), r.isPreviewable || r.isIE9 ? (r._init(a), r._listen()) : r.$element.removeClass("file-loading"));
+  }, t.prototype = { constructor: t, _init: function _init(t) {
+      var a,
+          r,
+          n = this,
+          o = n.$element;n.options = t, e.each(t, function (e, t) {
+        switch (e) {case "minFileCount":case "maxFileCount":case "maxFileSize":
+            n[e] = i.getNum(t);break;default:
+            n[e] = t;}
+      }), n.$form = o.closest("form"), n._initTemplateDefaults(), n.fileInputCleared = !1, n.fileBatchCompleted = !0, n.isPreviewable || (n.showPreview = !1), n.uploadFileAttr = i.isEmpty(o.attr("name")) ? "file_data" : o.attr("name"), n.reader = null, n.formdata = {}, n.clearStack(), n.uploadCount = 0, n.uploadStatus = {}, n.uploadLog = [], n.uploadAsyncCount = 0, n.loadedImages = [], n.totalImagesCount = 0, n.ajaxRequests = [], n.isError = !1, n.ajaxAborted = !1, n.cancelling = !1, r = n._getLayoutTemplate("progress"), n.progressTemplate = r.replace("{class}", n.progressClass), n.progressCompleteTemplate = r.replace("{class}", n.progressCompleteClass), n.progressErrorTemplate = r.replace("{class}", n.progressErrorClass), n.dropZoneEnabled = i.hasDragDropSupport() && n.dropZoneEnabled, n.isDisabled = o.attr("disabled") || o.attr("readonly"), n.isUploadable = i.hasFileUploadSupport() && !i.isEmpty(n.uploadUrl), n.isClickable = n.browseOnZoneClick && n.showPreview && (n.isUploadable && n.dropZoneEnabled || !i.isEmpty(n.defaultPreviewContent)), n.slug = "function" == typeof t.slugCallback ? t.slugCallback : n._slugDefault, n.mainTemplate = n.showCaption ? n._getLayoutTemplate("main1") : n._getLayoutTemplate("main2"), n.captionTemplate = n._getLayoutTemplate("caption"), n.previewGenericTemplate = n._getPreviewTemplate("generic"), n.resizeImage && (n.maxImageWidth || n.maxImageHeight) && (n.imageCanvas = document.createElement("canvas"), n.imageCanvasContext = n.imageCanvas.getContext("2d")), i.isEmpty(o.attr("id")) && o.attr("id", i.uniqId()), n.namespace = ".fileinput_" + o.attr("id").replace(/-/g, "_"), void 0 === n.$container ? n.$container = n._createContainer() : n._refreshContainer(), a = n.$container, n.$dropZone = a.find(".file-drop-zone"), n.$progress = a.find(".kv-upload-progress"), n.$btnUpload = a.find(".fileinput-upload"), n.$captionContainer = i.getElement(t, "elCaptionContainer", a.find(".file-caption")), n.$caption = i.getElement(t, "elCaptionText", a.find(".file-caption-name")), n.$previewContainer = i.getElement(t, "elPreviewContainer", a.find(".file-preview")), n.$preview = i.getElement(t, "elPreviewImage", a.find(".file-preview-thumbnails")), n.$previewStatus = i.getElement(t, "elPreviewStatus", a.find(".file-preview-status")), n.$errorContainer = i.getElement(t, "elErrorContainer", n.$previewContainer.find(".kv-fileinput-error")), i.isEmpty(n.msgErrorClass) || i.addCss(n.$errorContainer, n.msgErrorClass), n.$errorContainer.hide(), n.previewInitId = "preview-" + i.uniqId(), n._initPreviewCache(), n._initPreview(!0), n._initPreviewActions(), n._setFileDropZoneTitle(), o.removeClass("file-loading"), o.attr("disabled") && n.disable(), n._initZoom();
+    }, _initTemplateDefaults: function _initTemplateDefaults() {
+      var t,
+          a,
+          r,
+          n,
+          o,
+          l,
+          s,
+          d,
+          c,
+          p,
+          u,
+          f,
+          m,
+          g,
+          v,
+          h,
+          w,
+          _,
+          b,
+          C,
+          y,
+          E,
+          x,
+          T,
+          S,
+          F,
+          P,
+          I,
+          k,
+          A,
+          $,
+          z,
+          D,
+          U,
+          j = this;t = '{preview}\n<div class="kv-upload-progress hide"></div>\n<div class="input-group {class}">\n   {caption}\n   <div class="input-group-btn">\n       {remove}\n       {cancel}\n       {upload}\n       {browse}\n   </div>\n</div>', a = '{preview}\n<div class="kv-upload-progress hide"></div>\n{remove}\n{cancel}\n{upload}\n{browse}\n', r = '<div class="file-preview {class}">\n    {close}    <div class="{dropClass}">\n    <div class="file-preview-thumbnails">\n    </div>\n    <div class="clearfix"></div>    <div class="file-preview-status text-center text-success"></div>\n    <div class="kv-fileinput-error"></div>\n    </div>\n</div>', o = '<div class="close fileinput-remove">&times;</div>\n', n = '<i class="glyphicon glyphicon-file kv-caption-icon"></i>', l = '<div tabindex="500" class="form-control file-caption {class}">\n   <div class="file-caption-name"></div>\n</div>\n', s = '<button type="{type}" tabindex="500" title="{title}" class="{css}" {status}>{icon} {label}</button>', d = '<a href="{href}" tabindex="500" title="{title}" class="{css}" {status}>{icon} {label}</a>', c = '<div tabindex="500" class="{css}" {status}>{icon} {label}</div>', p = '<div id="' + i.MODAL_ID + '" class="file-zoom-dialog modal fade" tabindex="-1" aria-labelledby="' + i.MODAL_ID + 'Label"></div>', u = '<div class="modal-dialog modal-lg" role="document">\n  <div class="modal-content">\n    <div class="modal-header">\n      <div class="kv-zoom-actions pull-right">{toggleheader}{fullscreen}{borderless}{close}</div>\n      <h3 class="modal-title">{heading} <small><span class="kv-zoom-title"></span></small></h3>\n    </div>\n    <div class="modal-body">\n      <div class="floating-buttons"></div>\n      <div class="kv-zoom-body file-zoom-content"></div>\n{prev} {next}\n    </div>\n  </div>\n</div>\n', f = '<div class="progress">\n    <div class="{class}" role="progressbar" aria-valuenow="{percent}" aria-valuemin="0" aria-valuemax="100" style="width:{percent}%;">\n        {status}\n     </div>\n</div>', m = " <samp>({sizeText})</samp>", g = '<div class="file-thumbnail-footer">\n    <div class="file-footer-caption" title="{caption}">{caption}<br>{size}</div>\n    {progress} {actions}\n</div>', v = '<div class="file-upload-indicator" title="{indicatorTitle}">{indicator}</div>\n{drag}\n<div class="file-actions">\n    <div class="file-footer-buttons">\n        {upload} {delete} {zoom} {other}    </div>\n    <div class="clearfix"></div>\n</div>', h = '<button type="button" class="kv-file-remove {removeClass}" title="{removeTitle}" {dataUrl}{dataKey}>{removeIcon}</button>\n', w = '<button type="button" class="kv-file-upload {uploadClass}" title="{uploadTitle}">{uploadIcon}</button>', _ = '<button type="button" class="kv-file-zoom {zoomClass}" title="{zoomTitle}">{zoomIcon}</button>', b = '<span class="file-drag-handle {dragClass}" title="{dragTitle}">{dragIcon}</span>', C = '<div class="file-preview-frame {frameClass}" id="{previewId}" data-fileindex="{fileindex}" data-template="{template}"', y = C + '><div class="kv-file-content">\n', E = C + ' title="{caption}"><div class="kv-file-content">\n', x = "</div>{footer}\n</div>\n", T = "{content}\n", S = '<div class="kv-preview-data file-preview-html" title="{caption}" ' + i.STYLE_SETTING + ">{data}</div>\n", F = '<img src="{data}" class="file-preview-image kv-preview-data" title="{caption}" alt="{caption}" ' + i.STYLE_SETTING + ">\n", P = '<textarea class="kv-preview-data file-preview-text" title="{caption}" readonly ' + i.STYLE_SETTING + ">{data}</textarea>\n", I = '<video class="kv-preview-data file-preview-video" width="{width}" height="{height}" controls>\n<source src="{data}" type="{type}">\n' + i.DEFAULT_PREVIEW + "\n</video>\n", k = '<div class="file-preview-audio"><audio class="kv-preview-data" controls>\n<source src="{data}" type="{type}">\n' + i.DEFAULT_PREVIEW + "\n</audio></div>\n", A = '<object class="kv-preview-data file-object" type="application/x-shockwave-flash" width="{width}" height="{height}" data="{data}">\n' + i.OBJECT_PARAMS + " " + i.DEFAULT_PREVIEW + "\n</object>\n", $ = '<object class="kv-preview-data file-object" data="{data}" type="{type}" width="{width}" height="{height}">\n<param name="movie" value="{caption}" />\n' + i.OBJECT_PARAMS + " " + i.DEFAULT_PREVIEW + "\n</object>\n", z = '<embed class="kv-preview-data" src="{data}" width="{width}" height="{height}" type="application/pdf">\n', D = '<div class="kv-preview-data file-preview-other-frame">\n' + i.DEFAULT_PREVIEW + "\n</div>\n", U = '<div class="kv-zoom-cache" style="display:none">{zoomContent}</div>', j.defaults = { layoutTemplates: { main1: t, main2: a, preview: r, close: o, fileIcon: n, caption: l, modalMain: p, modal: u, progress: f, size: m, footer: g, actions: v, actionDelete: h, actionUpload: w, actionZoom: _, actionDrag: b, btnDefault: s, btnLink: d, btnBrowse: c, zoomCache: U }, previewMarkupTags: { tagBefore1: y, tagBefore2: E, tagAfter: x }, previewContentTemplates: { generic: T, html: S, image: F, text: P, video: I, audio: k, flash: A, object: $, pdf: z, other: D }, allowedPreviewTypes: ["image", "html", "text", "video", "audio", "flash", "pdf", "object"], previewTemplates: {}, previewSettings: { image: { width: "auto", height: "160px" }, html: { width: "213px", height: "160px" }, text: { width: "213px", height: "160px" }, video: { width: "213px", height: "160px" }, audio: { width: "213px", height: "80px" }, flash: { width: "213px", height: "160px" }, object: { width: "160px", height: "auto" }, pdf: { width: "160px", height: "160px" }, other: { width: "160px", height: "160px" } }, previewZoomSettings: { image: { width: "auto", height: "auto", "max-width": "100%", "max-height": "100%" }, html: { width: "100%", height: "100%", "min-height": "480px" }, text: { width: "100%", height: "100%", "min-height": "480px" }, video: { width: "auto", height: "100%", "max-width": "100%" }, audio: { width: "100%", height: "30px" }, flash: { width: "auto", height: "480px" }, object: { width: "auto", height: "100%", "min-height": "480px" }, pdf: { width: "100%", height: "100%", "min-height": "480px" }, other: { width: "auto", height: "100%", "min-height": "480px" } }, fileTypeSettings: { image: function image(e, t) {
+            return i.compare(e, "image.*") || i.compare(t, /\.(gif|png|jpe?g)$/i);
+          }, html: function html(e, t) {
+            return i.compare(e, "text/html") || i.compare(t, /\.(htm|html)$/i);
+          }, text: function text(e, t) {
+            return i.compare(e, "text.*") || i.compare(t, /\.(xml|javascript)$/i) || i.compare(t, /\.(txt|md|csv|nfo|ini|json|php|js|css)$/i);
+          }, video: function video(e, t) {
+            return i.compare(e, "video.*") && (i.compare(e, /(ogg|mp4|mp?g|mov|webm|3gp)$/i) || i.compare(t, /\.(og?|mp4|webm|mp?g|mov|3gp)$/i));
+          }, audio: function audio(e, t) {
+            return i.compare(e, "audio.*") && (i.compare(t, /(ogg|mp3|mp?g|wav)$/i) || i.compare(t, /\.(og?|mp3|mp?g|wav)$/i));
+          }, flash: function flash(e, t) {
+            return i.compare(e, "application/x-shockwave-flash", !0) || i.compare(t, /\.(swf)$/i);
+          }, pdf: function pdf(e, t) {
+            return i.compare(e, "application/pdf", !0) || i.compare(t, /\.(pdf)$/i);
+          }, object: function object() {
+            return !0;
+          }, other: function other() {
+            return !0;
+          } }, fileActionSettings: { showRemove: !0, showUpload: !0, showZoom: !0, showDrag: !0, removeIcon: '<i class="glyphicon glyphicon-trash text-danger"></i>', removeClass: "btn btn-xs btn-default", removeTitle: "Remove file", uploadIcon: '<i class="glyphicon glyphicon-upload text-info"></i>', uploadClass: "btn btn-xs btn-default", uploadTitle: "Upload file", zoomIcon: '<i class="glyphicon glyphicon-zoom-in"></i>', zoomClass: "btn btn-xs btn-default", zoomTitle: "View Details", dragIcon: '<i class="glyphicon glyphicon-menu-hamburger"></i>', dragClass: "text-info", dragTitle: "Move / Rearrange", dragSettings: {}, indicatorNew: '<i class="glyphicon glyphicon-hand-down text-warning"></i>', indicatorSuccess: '<i class="glyphicon glyphicon-ok-sign text-success"></i>', indicatorError: '<i class="glyphicon glyphicon-exclamation-sign text-danger"></i>', indicatorLoading: '<i class="glyphicon glyphicon-hand-up text-muted"></i>', indicatorNewTitle: "Not uploaded yet", indicatorSuccessTitle: "Uploaded", indicatorErrorTitle: "Upload Error", indicatorLoadingTitle: "Uploading ..." } }, e.each(j.defaults, function (i, t) {
+        return "allowedPreviewTypes" === i ? void (void 0 === j.allowedPreviewTypes && (j.allowedPreviewTypes = t)) : void (j[i] = e.extend(!0, {}, t, j[i]));
+      }), j._initPreviewTemplates();
+    }, _initPreviewTemplates: function _initPreviewTemplates() {
+      var t,
+          a = this,
+          r = a.defaults,
+          n = a.previewMarkupTags,
+          o = n.tagAfter;e.each(r.previewContentTemplates, function (e, r) {
+        i.isEmpty(a.previewTemplates[e]) && (t = n.tagBefore2, "generic" !== e && "image" !== e && "html" !== e && "text" !== e || (t = n.tagBefore1), a.previewTemplates[e] = t + r + o);
+      });
+    }, _initPreviewCache: function _initPreviewCache() {
+      var t = this;t.previewCache = { data: {}, init: function init() {
+          var e = t.initialPreview;e.length > 0 && !i.isArray(e) && (e = e.split(t.initialPreviewDelimiter)), t.previewCache.data = { content: e, config: t.initialPreviewConfig, tags: t.initialPreviewThumbTags };
+        }, fetch: function fetch() {
+          return t.previewCache.data.content.filter(function (e) {
+            return null !== e;
+          });
+        }, count: function count(e) {
+          return t.previewCache.data && t.previewCache.data.content ? e ? t.previewCache.data.content.length : t.previewCache.fetch().length : 0;
+        }, get: function get(a, r) {
+          var n,
+              o,
+              l,
+              s,
+              d,
+              c,
+              p,
+              u = "init_" + a,
+              f = t.previewCache.data,
+              m = f.config[a],
+              g = f.content[a],
+              v = t.previewInitId + "-" + u,
+              h = i.ifSet("previewAsData", m, t.initialPreviewAsData),
+              w = function w(e, a, r, n, o, l, s, d, c) {
+            return d = " file-preview-initial " + i.SORT_CSS + (d ? " " + d : ""), t._generatePreviewTemplate(e, a, r, n, o, !1, null, d, l, s, c);
+          };return g ? (r = void 0 === r ? !0 : r, l = i.ifSet("type", m, t.initialPreviewFileType || "generic"), d = i.ifSet("filename", m, i.ifSet("caption", m)), c = i.ifSet("filetype", m, l), s = t.previewCache.footer(a, r, m && m.size || null), p = i.ifSet("frameClass", m), n = h ? w(l, g, d, c, v, s, u, p) : w("generic", g, d, c, v, s, u, p, l).replace(/\{content}/g, f.content[a]), f.tags.length && f.tags[a] && (n = i.replaceTags(n, f.tags[a])), i.isEmpty(m) || i.isEmpty(m.frameAttr) || (o = e(document.createElement("div")).html(n), o.find(".file-preview-initial").attr(m.frameAttr), n = o.html(), o.remove()), n) : "";
+        }, add: function add(e, a, r, n) {
+          var o,
+              l = t.previewCache.data;return i.isArray(e) || (e = e.split(t.initialPreviewDelimiter)), n ? (o = l.content.push(e) - 1, l.config[o] = a, l.tags[o] = r) : (o = e.length - 1, l.content = e, l.config = a, l.tags = r), t.previewCache.data = l, o;
+        }, set: function set(e, a, r, n) {
+          var o,
+              l,
+              s = t.previewCache.data;if (e && e.length && (i.isArray(e) || (e = e.split(t.initialPreviewDelimiter)), l = e.filter(function (e) {
+            return null !== e;
+          }), l.length)) {
+            if (void 0 === s.content && (s.content = []), void 0 === s.config && (s.config = []), void 0 === s.tags && (s.tags = []), n) {
+              for (o = 0; o < e.length; o++) {
+                e[o] && s.content.push(e[o]);
+              }for (o = 0; o < a.length; o++) {
+                a[o] && s.config.push(a[o]);
+              }for (o = 0; o < r.length; o++) {
+                r[o] && s.tags.push(r[o]);
+              }
+            } else s.content = e, s.config = a, s.tags = r;t.previewCache.data = s;
+          }
+        }, unset: function unset(e) {
+          var i = t.previewCache.count();if (i) {
+            if (1 === i) return t.previewCache.data.content = [], t.previewCache.data.config = [], t.previewCache.data.tags = [], t.initialPreview = [], t.initialPreviewConfig = [], void (t.initialPreviewThumbTags = []);t.previewCache.data.content[e] = null, t.previewCache.data.config[e] = null, t.previewCache.data.tags[e] = null;
+          }
+        }, out: function out() {
+          var e,
+              i,
+              a = "",
+              r = t.previewCache.count(!0);if (0 === r) return { content: "", caption: "" };for (i = 0; r > i; i++) {
+            a += t.previewCache.get(i);
+          }return e = t._getMsgSelected(t.previewCache.count()), { content: a, caption: e };
+        }, footer: function footer(e, a, r) {
+          var n = t.previewCache.data;if (!n || !n.config || 0 === n.config.length || i.isEmpty(n.config[e])) return "";a = void 0 === a ? !0 : a;var o = n.config[e],
+              l = i.ifSet("caption", o),
+              s = "",
+              d = i.ifSet("width", o, "auto"),
+              c = i.ifSet("url", o, !1),
+              p = i.ifSet("key", o, null),
+              u = t.fileActionSettings,
+              f = i.ifSet("showDelete", o, !0),
+              m = i.ifSet("showZoom", o, u.showZoom),
+              g = i.ifSet("showDrag", o, u.showDrag),
+              v = c === !1 && a;return t.initialPreviewShowDelete && (s = t._renderFileActions(!1, f, m, g, v, c, p, !0)), t._getLayoutTemplate("footer").replace(/\{progress}/g, t._renderThumbProgress()).replace(/\{actions}/g, s).replace(/\{caption}/g, l).replace(/\{size}/g, t._getSize(r)).replace(/\{width}/g, d).replace(/\{indicator}/g, "").replace(/\{indicatorTitle}/g, "");
+        } }, t.previewCache.init();
+    }, _handler: function _handler(e, i, t) {
+      var a = this,
+          r = a.namespace,
+          n = i.split(" ").join(r + " ") + r;e && e.length && e.off(n).on(n, t);
+    }, _log: function _log(e) {
+      var i = this,
+          t = i.$element.attr("id");t && (e = '"' + t + '": ' + e), "undefined" != typeof window.console.log ? window.console.log(e) : window.alert(e);
+    }, _validate: function _validate() {
+      var e = this,
+          i = "file" === e.$element.attr("type");return i || e._log('The input "type" must be set to "file" for initializing the "bootstrap-fileinput" plugin.'), i;
+    }, _errorsExist: function _errorsExist() {
+      var i,
+          t = this;return t.$errorContainer.find("li").length ? !0 : (i = e(document.createElement("div")).html(t.$errorContainer.html()), i.find("span.kv-error-close").remove(), i.find("ul").remove(), !!e.trim(i.text()).length);
+    }, _errorHandler: function _errorHandler(e, i) {
+      var t = this,
+          a = e.target.error;a.code === a.NOT_FOUND_ERR ? t._showError(t.msgFileNotFound.replace("{name}", i)) : a.code === a.SECURITY_ERR ? t._showError(t.msgFileSecured.replace("{name}", i)) : a.code === a.NOT_READABLE_ERR ? t._showError(t.msgFileNotReadable.replace("{name}", i)) : a.code === a.ABORT_ERR ? t._showError(t.msgFilePreviewAborted.replace("{name}", i)) : t._showError(t.msgFilePreviewError.replace("{name}", i));
+    }, _addError: function _addError(e) {
+      var i = this,
+          t = i.$errorContainer;e && t.length && (t.html(i.errorCloseButton + e), i._handler(t.find(".kv-error-close"), "click", function () {
+        t.fadeOut("slow");
+      }));
+    }, _resetErrors: function _resetErrors(e) {
+      var i = this,
+          t = i.$errorContainer;i.isError = !1, i.$container.removeClass("has-error"), t.html(""), e ? t.fadeOut("slow") : t.hide();
+    }, _showFolderError: function _showFolderError(e) {
+      var t,
+          a = this,
+          r = a.$errorContainer;e && (t = a.msgFoldersNotAllowed.replace(/\{n}/g, e), a._addError(t), i.addCss(a.$container, "has-error"), r.fadeIn(800), a._raise("filefoldererror", [e, t]));
+    }, _showUploadError: function _showUploadError(e, t, a) {
+      var r = this,
+          n = r.$errorContainer,
+          o = a || "fileuploaderror",
+          l = t && t.id ? '<li data-file-id="' + t.id + '">' + e + "</li>" : "<li>" + e + "</li>";return 0 === n.find("ul").length ? r._addError("<ul>" + l + "</ul>") : n.find("ul").append(l), n.fadeIn(800), r._raise(o, [t, e]), r.$container.removeClass("file-input-new"), i.addCss(r.$container, "has-error"), !0;
+    }, _showError: function _showError(e, t, a) {
+      var r = this,
+          n = r.$errorContainer,
+          o = a || "fileerror";return t = t || {}, t.reader = r.reader, r._addError(e), n.fadeIn(800), r._raise(o, [t, e]), r.isUploadable || r._clearFileInput(), r.$container.removeClass("file-input-new"), i.addCss(r.$container, "has-error"), r.$btnUpload.attr("disabled", !0), !0;
+    }, _noFilesError: function _noFilesError(e) {
+      var t = this,
+          a = t.minFileCount > 1 ? t.filePlural : t.fileSingle,
+          r = t.msgFilesTooLess.replace("{n}", t.minFileCount).replace("{files}", a),
+          n = t.$errorContainer;t._addError(r), t.isError = !0, t._updateFileDetails(0), n.fadeIn(800), t._raise("fileerror", [e, r]), t._clearFileInput(), i.addCss(t.$container, "has-error");
+    }, _parseError: function _parseError(i, t, a, r) {
+      var n = this,
+          o = e.trim(a + ""),
+          l = "." === o.slice(-1) ? "" : ".",
+          s = void 0 !== t.responseJSON && void 0 !== t.responseJSON.error ? t.responseJSON.error : t.responseText;return n.cancelling && n.msgUploadAborted && (o = n.msgUploadAborted), n.showAjaxErrorDetails && s ? (s = e.trim(s.replace(/\n\s*\n/g, "\n")), s = s.length > 0 ? "<pre>" + s + "</pre>" : "", o += l + s) : o += l, o === l && (o = n.msgAjaxError.replace("{operation}", i)), n.cancelling = !1, r ? "<b>" + r + ": </b>" + o : o;
+    }, _parseFileType: function _parseFileType(e) {
+      var t,
+          a,
+          r,
+          n,
+          o = this,
+          l = o.allowedPreviewTypes;for (n = 0; n < l.length; n++) {
+        if (r = l[n], t = o.fileTypeSettings[r], a = t(e.type, e.name) ? r : "", !i.isEmpty(a)) return a;
+      }return "other";
+    }, _getPreviewIcon: function _getPreviewIcon(i) {
+      var t,
+          a = this,
+          r = null;return i && i.indexOf(".") > -1 && (t = i.split(".").pop(), a.previewFileIconSettings && a.previewFileIconSettings[t] && (r = a.previewFileIconSettings[t]), a.previewFileExtSettings && e.each(a.previewFileExtSettings, function (e, i) {
+        return a.previewFileIconSettings[e] && i(t) ? void (r = a.previewFileIconSettings[e]) : void 0;
+      })), r;
+    }, _parseFilePreviewIcon: function _parseFilePreviewIcon(e, i) {
+      var t = this,
+          a = t._getPreviewIcon(i) || t.previewFileIcon;return e.indexOf("{previewFileIcon}") > -1 && (e = e.replace(/\{previewFileIconClass}/g, t.previewFileIconClass).replace(/\{previewFileIcon}/g, a)), e;
+    }, _raise: function _raise(i, t) {
+      var a = this,
+          r = e.Event(i);if (void 0 !== t ? a.$element.trigger(r, t) : a.$element.trigger(r), r.isDefaultPrevented() || r.result === !1) return !1;switch (i) {case "filebatchuploadcomplete":case "filebatchuploadsuccess":case "fileuploaded":case "fileclear":case "filecleared":case "filereset":case "fileerror":case "filefoldererror":case "fileuploaderror":case "filebatchuploaderror":case "filedeleteerror":case "filecustomerror":case "filesuccessremove":
+          break;default:
+          a.ajaxAborted = r.result;}return !0;
+    }, _listenFullScreen: function _listenFullScreen(e) {
+      var i,
+          t,
+          a = this,
+          r = a.$modal;r && r.length && (i = r && r.find(".btn-fullscreen"), t = r && r.find(".btn-borderless"), i.length && t.length && (i.removeClass("active").attr("aria-pressed", "false"), t.removeClass("active").attr("aria-pressed", "false"), e ? i.addClass("active").attr("aria-pressed", "true") : t.addClass("active").attr("aria-pressed", "true"), r.hasClass("file-zoom-fullscreen") ? a._maximizeZoomDialog() : e ? a._maximizeZoomDialog() : t.removeClass("active").attr("aria-pressed", "false")));
+    }, _listen: function _listen() {
+      var t,
+          a = this,
+          r = a.$element,
+          n = a.$form,
+          o = a.$container;a._handler(r, "change", e.proxy(a._change, a)), a.showBrowse && a._handler(a.$btnFile, "click", e.proxy(a._browse, a)), a._handler(o.find(".fileinput-remove:not([disabled])"), "click", e.proxy(a.clear, a)), a._handler(o.find(".fileinput-cancel"), "click", e.proxy(a.cancel, a)), a._initDragDrop(), a._handler(n, "reset", e.proxy(a.reset, a)), a.isUploadable || a._handler(n, "submit", e.proxy(a._submitForm, a)), a._handler(a.$container.find(".fileinput-upload"), "click", e.proxy(a._uploadClick, a)), a._handler(e(window), "resize", function () {
+        a._listenFullScreen(screen.width === window.innerWidth && screen.height === window.innerHeight);
+      }), t = "webkitfullscreenchange mozfullscreenchange fullscreenchange MSFullscreenChange", a._handler(e(document), t, function () {
+        a._listenFullScreen(i.checkFullScreen());
+      }), a._initClickable();
+    }, _initClickable: function _initClickable() {
+      var t,
+          a = this;a.isClickable && (t = a.isUploadable ? a.$dropZone : a.$preview.find(".file-default-preview"), i.addCss(t, "clickable"), t.attr("tabindex", -1), a._handler(t, "click", function (i) {
+        var r = e(i.target);r.parents(".file-preview-thumbnails").length && !r.parents(".file-default-preview").length || (a.$element.trigger("click"), t.blur());
+      }));
+    }, _initDragDrop: function _initDragDrop() {
+      var i = this,
+          t = i.$dropZone;i.isUploadable && i.dropZoneEnabled && i.showPreview && (i._handler(t, "dragenter dragover", e.proxy(i._zoneDragEnter, i)), i._handler(t, "dragleave", e.proxy(i._zoneDragLeave, i)), i._handler(t, "drop", e.proxy(i._zoneDrop, i)), i._handler(e(document), "dragenter dragover drop", i._zoneDragDropInit));
+    }, _zoneDragDropInit: function _zoneDragDropInit(e) {
+      e.stopPropagation(), e.preventDefault();
+    }, _zoneDragEnter: function _zoneDragEnter(t) {
+      var a = this,
+          r = e.inArray("Files", t.originalEvent.dataTransfer.types) > -1;return a._zoneDragDropInit(t), a.isDisabled || !r ? (t.originalEvent.dataTransfer.effectAllowed = "none", void (t.originalEvent.dataTransfer.dropEffect = "none")) : void i.addCss(a.$dropZone, "file-highlighted");
+    }, _zoneDragLeave: function _zoneDragLeave(e) {
+      var i = this;i._zoneDragDropInit(e), i.isDisabled || i.$dropZone.removeClass("file-highlighted");
+    }, _zoneDrop: function _zoneDrop(e) {
+      var t = this;e.preventDefault(), t.isDisabled || i.isEmpty(e.originalEvent.dataTransfer.files) || (t._change(e, "dragdrop"), t.$dropZone.removeClass("file-highlighted"));
+    }, _uploadClick: function _uploadClick(e) {
+      var t,
+          a = this,
+          r = a.$container.find(".fileinput-upload"),
+          n = !r.hasClass("disabled") && i.isEmpty(r.attr("disabled"));if (!e || !e.isDefaultPrevented()) {
+        if (!a.isUploadable) return void (n && "submit" !== r.attr("type") && (t = r.closest("form"), t.length && t.trigger("submit"), e.preventDefault()));e.preventDefault(), n && a.upload();
+      }
+    }, _submitForm: function _submitForm() {
+      var e = this,
+          i = e.$element,
+          t = i.get(0).files;return t && e.minFileCount > 0 && e._getFileCount(t.length) < e.minFileCount ? (e._noFilesError({}), !1) : !e._abort({});
+    }, _clearPreview: function _clearPreview() {
+      var t = this,
+          a = t.$preview,
+          r = t.showUploadedThumbs ? a.find(i.FRAMES + ":not(.file-preview-success)") : a.find(i.FRAMES);r.each(function () {
+        var t = e(this);t.remove(), i.cleanZoomCache(a.find("#zoom-" + t.attr("id")));
+      }), t.$preview.find(i.FRAMES).length && t.showPreview || t._resetUpload(), t._validateDefaultPreview();
+    }, _initSortable: function _initSortable() {
+      var t,
+          a = this,
+          r = a.$preview,
+          n = "." + i.SORT_CSS;window.KvSortable && 0 !== r.find(n).length && (t = { handle: ".drag-handle-init", dataIdAttr: "data-preview-id", draggable: n, onSort: function onSort(t) {
+          var r,
+              n,
+              o = t.oldIndex,
+              l = t.newIndex;a.initialPreview = i.moveArray(a.initialPreview, o, l), a.initialPreviewConfig = i.moveArray(a.initialPreviewConfig, o, l), a.previewCache.init();for (var s = 0; s < a.initialPreviewConfig.length; s++) {
+            null !== a.initialPreviewConfig[s] && (r = a.initialPreviewConfig[s].key, n = e(".kv-file-remove[data-key='" + r + "']").closest(i.FRAMES), n.attr("data-fileindex", "init_" + s).data("fileindex", "init_" + s));
+          }a._raise("filesorted", { previewId: e(t.item).attr("id"), oldIndex: o, newIndex: l, stack: a.initialPreviewConfig });
+        } }, r.data("kvsortable") && r.kvsortable("destroy"), e.extend(!0, t, a.fileActionSettings.dragSettings), r.kvsortable(t));
+    }, _initPreview: function _initPreview(e) {
+      var t,
+          a = this,
+          r = a.initialCaption || "";return a.previewCache.count() ? (t = a.previewCache.out(), r = e && a.initialCaption ? a.initialCaption : t.caption, a.$preview.html(t.content), a._setInitThumbAttr(), a._setCaption(r), a._initSortable(), void (i.isEmpty(t.content) || a.$container.removeClass("file-input-new"))) : (a._clearPreview(), void (e ? a._setCaption(r) : a._initCaption()));
+    }, _getZoomButton: function _getZoomButton(e) {
+      var i = this,
+          t = i.previewZoomButtonIcons[e],
+          a = i.previewZoomButtonClasses[e],
+          r = ' title="' + (i.previewZoomButtonTitles[e] || "") + '" ',
+          n = r + ("close" === e ? ' data-dismiss="modal" aria-hidden="true"' : "");return "fullscreen" !== e && "borderless" !== e && "toggleheader" !== e || (n += ' data-toggle="button" aria-pressed="false" autocomplete="off"'), '<button type="button" class="' + a + " btn-" + e + '"' + n + ">" + t + "</button>";
+    }, _getModalContent: function _getModalContent() {
+      var e = this;return e._getLayoutTemplate("modal").replace(/\{heading}/g, e.msgZoomModalHeading).replace(/\{prev}/g, e._getZoomButton("prev")).replace(/\{next}/g, e._getZoomButton("next")).replace(/\{toggleheader}/g, e._getZoomButton("toggleheader")).replace(/\{fullscreen}/g, e._getZoomButton("fullscreen")).replace(/\{borderless}/g, e._getZoomButton("borderless")).replace(/\{close}/g, e._getZoomButton("close"));
+    }, _listenModalEvent: function _listenModalEvent(e) {
+      var t = this,
+          a = t.$modal,
+          r = function r(e) {
+        return { sourceEvent: e, previewId: a.data("previewId"), modal: a };
+      };a.on(e + ".bs.modal", function (n) {
+        var o = a.find(".btn-fullscreen"),
+            l = a.find(".btn-borderless");t._raise("filezoom" + e, r(n)), "shown" === e && (l.removeClass("active").attr("aria-pressed", "false"), o.removeClass("active").attr("aria-pressed", "false"), a.hasClass("file-zoom-fullscreen") && (t._maximizeZoomDialog(), i.checkFullScreen() ? o.addClass("active").attr("aria-pressed", "true") : l.addClass("active").attr("aria-pressed", "true")));
+      });
+    }, _initZoom: function _initZoom() {
+      var t,
+          a = this,
+          r = a._getLayoutTemplate("modalMain"),
+          n = "#" + i.MODAL_ID;a.showPreview && (a.$modal = e(n), a.$modal && a.$modal.length || (t = e(document.createElement("div")).html(r).insertAfter(a.$container), a.$modal = e("#" + i.MODAL_ID).insertBefore(t), t.remove()), i.initModal(a.$modal), a.$modal.html(a._getModalContent()), e.each(i.MODAL_EVENTS, function (e, i) {
+        a._listenModalEvent(i);
+      }));
+    }, _initZoomButtons: function _initZoomButtons() {
+      var t,
+          a,
+          r = this,
+          n = r.$modal.data("previewId") || "",
+          o = r.$preview,
+          l = o.find(i.FRAMES).toArray(),
+          s = l.length,
+          d = r.$modal.find(".btn-prev"),
+          c = r.$modal.find(".btn-next");return l.length < 2 ? (d.hide(), void c.hide()) : (d.show(), c.show(), void (s && (t = e(l[0]), a = e(l[s - 1]), d.removeAttr("disabled"), c.removeAttr("disabled"), t.length && t.attr("id") === n && d.attr("disabled", !0), a.length && a.attr("id") === n && c.attr("disabled", !0))));
+    }, _maximizeZoomDialog: function _maximizeZoomDialog() {
+      var i = this,
+          t = i.$modal,
+          a = t.find(".modal-header:visible"),
+          r = t.find(".modal-footer:visible"),
+          n = t.find(".modal-body"),
+          o = e(window).height(),
+          l = 0;t.addClass("file-zoom-fullscreen"), a && a.length && (o -= a.outerHeight(!0)), r && r.length && (o -= r.outerHeight(!0)), n && n.length && (l = n.outerHeight(!0) - n.height(), o -= l), t.find(".kv-zoom-body").height(o);
+    }, _resizeZoomDialog: function _resizeZoomDialog(e) {
+      var t = this,
+          a = t.$modal,
+          r = a.find(".btn-fullscreen"),
+          n = a.find(".btn-borderless");if (a.hasClass("file-zoom-fullscreen")) i.toggleFullScreen(!1), e ? r.hasClass("active") || (a.removeClass("file-zoom-fullscreen"), t._resizeZoomDialog(!0), n.hasClass("active") && n.removeClass("active").attr("aria-pressed", "false")) : r.hasClass("active") ? r.removeClass("active").attr("aria-pressed", "false") : (a.removeClass("file-zoom-fullscreen"), t.$modal.find(".kv-zoom-body").css("height", t.zoomModalHeight));else {
+        if (!e) return void t._maximizeZoomDialog();i.toggleFullScreen(!0);
+      }a.focus();
+    }, _setZoomContent: function _setZoomContent(t, a) {
+      var r,
+          n,
+          o,
+          l,
+          s,
+          d,
+          c,
+          p,
+          u,
+          f,
+          m = this,
+          g = t.attr("id"),
+          v = m.$modal,
+          h = v.find(".btn-prev"),
+          w = v.find(".btn-next"),
+          _ = v.find(".btn-fullscreen"),
+          b = v.find(".btn-borderless"),
+          C = v.find(".btn-toggleheader"),
+          y = m.$preview.find("#zoom-" + g);n = y.attr("data-template") || "generic", r = y.find(".kv-file-content"), o = r.length ? r.html() : "", u = t.data("caption") || "", f = t.data("size") || "", l = u + " " + f, v.find(".kv-zoom-title").html(l), s = v.find(".kv-zoom-body"), v.removeClass("kv-single-content"), a ? (p = s.clone().insertAfter(s), s.html(o).hide(), p.fadeOut("fast", function () {
+        s.fadeIn("fast"), p.remove();
+      })) : s.html(o), c = m.previewZoomSettings[n], c && (d = s.find(".kv-preview-data"), i.addCss(d, "file-zoom-detail"), e.each(c, function (e, i) {
+        d.css(e, i), (d.attr("width") && "width" === e || d.attr("height") && "height" === e) && d.removeAttr(e);
+      })), v.data("previewId", g), m._handler(h, "click", function () {
+        m._zoomSlideShow("prev", g);
+      }), m._handler(w, "click", function () {
+        m._zoomSlideShow("next", g);
+      }), m._handler(_, "click", function () {
+        m._resizeZoomDialog(!0);
+      }), m._handler(b, "click", function () {
+        m._resizeZoomDialog(!1);
+      }), m._handler(C, "click", function () {
+        var e,
+            i = v.find(".modal-header"),
+            t = v.find(".modal-body .floating-buttons"),
+            a = i.find(".kv-zoom-actions"),
+            r = function r(e) {
+          var t = m.$modal.find(".kv-zoom-body"),
+              a = m.zoomModalHeight;v.hasClass("file-zoom-fullscreen") && (a = t.outerHeight(!0), e || (a -= i.outerHeight(!0))), t.css("height", e ? a + e : a);
+        };i.is(":visible") ? (e = i.outerHeight(!0), i.slideUp("slow", function () {
+          a.find(".btn").appendTo(t), r(e);
+        })) : (t.find(".btn").appendTo(a), i.slideDown("slow", function () {
+          r();
+        })), v.focus();
+      }), m._handler(v, "keydown", function (e) {
+        var i = e.which || e.keyCode;37 !== i || h.attr("disabled") || m._zoomSlideShow("prev", g), 39 !== i || w.attr("disabled") || m._zoomSlideShow("next", g);
+      });
+    }, _zoomPreview: function _zoomPreview(e) {
+      var t,
+          a = this,
+          r = a.$modal;if (!e.length) throw "Cannot zoom to detailed preview!";i.initModal(r), r.html(a._getModalContent()), t = e.closest(i.FRAMES), a._setZoomContent(t), r.modal("show"), a._initZoomButtons();
+    }, _zoomSlideShow: function _zoomSlideShow(t, a) {
+      var r,
+          n,
+          o,
+          l = this,
+          s = l.$modal.find(".kv-zoom-actions .btn-" + t),
+          d = l.$preview.find(i.FRAMES).toArray(),
+          c = d.length;if (!s.attr("disabled")) {
+        for (n = 0; c > n; n++) {
+          if (e(d[n]).attr("id") === a) {
+            o = "prev" === t ? n - 1 : n + 1;break;
+          }
+        }0 > o || o >= c || !d[o] || (r = e(d[o]), r.length && l._setZoomContent(r, !0), l._initZoomButtons(), l._raise("filezoom" + t, { previewId: a, modal: l.$modal }));
+      }
+    }, _initZoomButton: function _initZoomButton() {
+      var i = this;i.$preview.find(".kv-file-zoom").each(function () {
+        var t = e(this);i._handler(t, "click", function () {
+          i._zoomPreview(t);
+        });
+      });
+    }, _clearObjects: function _clearObjects(i) {
+      i.find("video audio").each(function () {
+        this.pause(), e(this).remove();
+      }), i.find("img object div").each(function () {
+        e(this).remove();
+      });
+    }, _clearFileInput: function _clearFileInput() {
+      var t,
+          a,
+          r,
+          n = this,
+          o = n.$element;n.fileInputCleared = !0, i.isEmpty(o.val()) || (n.isIE9 || n.isIE10 ? (t = o.closest("form"), a = e(document.createElement("form")), r = e(document.createElement("div")), o.before(r), t.length ? t.after(a) : r.after(a), a.append(o).trigger("reset"), r.before(o).remove(), a.remove()) : o.val(""));
+    }, _resetUpload: function _resetUpload() {
+      var e = this;e.uploadCache = { content: [], config: [], tags: [], append: !0 }, e.uploadCount = 0, e.uploadStatus = {}, e.uploadLog = [], e.uploadAsyncCount = 0, e.loadedImages = [], e.totalImagesCount = 0, e.$btnUpload.removeAttr("disabled"), e._setProgress(0), i.addCss(e.$progress, "hide"), e._resetErrors(!1), e.ajaxAborted = !1, e.ajaxRequests = [], e._resetCanvas(), e.cacheInitialPreview = {}, e.overwriteInitial && (e.initialPreview = [], e.initialPreviewConfig = [], e.initialPreviewThumbTags = [], e.previewCache.data = { content: [], config: [], tags: [] });
+    }, _resetCanvas: function _resetCanvas() {
+      var e = this;e.canvas && e.imageCanvasContext && e.imageCanvasContext.clearRect(0, 0, e.canvas.width, e.canvas.height);
+    }, _hasInitialPreview: function _hasInitialPreview() {
+      var e = this;return !e.overwriteInitial && e.previewCache.count();
+    }, _resetPreview: function _resetPreview() {
+      var e,
+          i,
+          t = this;t.previewCache.count() ? (e = t.previewCache.out(), t.$preview.html(e.content), t._setInitThumbAttr(), i = t.initialCaption ? t.initialCaption : e.caption, t._setCaption(i)) : (t._clearPreview(), t._initCaption()), t.showPreview && (t._initZoom(), t._initSortable());
+    }, _clearDefaultPreview: function _clearDefaultPreview() {
+      var e = this;e.$preview.find(".file-default-preview").remove();
+    }, _validateDefaultPreview: function _validateDefaultPreview() {
+      var e = this;e.showPreview && !i.isEmpty(e.defaultPreviewContent) && (e.$preview.html('<div class="file-default-preview">' + e.defaultPreviewContent + "</div>"), e.$container.removeClass("file-input-new"), e._initClickable());
+    }, _resetPreviewThumbs: function _resetPreviewThumbs(e) {
+      var i,
+          t = this;return e ? (t._clearPreview(), void t.clearStack()) : void (t._hasInitialPreview() ? (i = t.previewCache.out(), t.$preview.html(i.content), t._setInitThumbAttr(), t._setCaption(i.caption), t._initPreviewActions()) : t._clearPreview());
+    }, _getLayoutTemplate: function _getLayoutTemplate(e) {
+      var t = this,
+          a = t.layoutTemplates[e];return i.isEmpty(t.customLayoutTags) ? a : i.replaceTags(a, t.customLayoutTags);
+    }, _getPreviewTemplate: function _getPreviewTemplate(e) {
+      var t = this,
+          a = t.previewTemplates[e];return i.isEmpty(t.customPreviewTags) ? a : i.replaceTags(a, t.customPreviewTags);
+    }, _getOutData: function _getOutData(e, i, t) {
+      var a = this;return e = e || {}, i = i || {}, t = t || a.filestack.slice(0) || {}, { form: a.formdata, files: t, filenames: a.filenames, filescount: a.getFilesCount(), extra: a._getExtraData(), response: i, reader: a.reader, jqXHR: e };
+    }, _getMsgSelected: function _getMsgSelected(e) {
+      var i = this,
+          t = 1 === e ? i.fileSingle : i.filePlural;return e > 0 ? i.msgSelected.replace("{n}", e).replace("{files}", t) : i.msgNoFilesSelected;
+    }, _getThumbs: function _getThumbs(e) {
+      return e = e || "", this.$preview.find(i.FRAMES + ":not(.file-preview-initial)" + e);
+    }, _getExtraData: function _getExtraData(e, i) {
+      var t = this,
+          a = t.uploadExtraData;return "function" == typeof t.uploadExtraData && (a = t.uploadExtraData(e, i)), a;
+    }, _initXhr: function _initXhr(e, i, t) {
+      var a = this;return e.upload && e.upload.addEventListener("progress", function (e) {
+        var r = 0,
+            n = e.total,
+            o = e.loaded || e.position;e.lengthComputable && (r = Math.floor(o / n * 100)), i ? a._setAsyncUploadStatus(i, r, t) : a._setProgress(r);
+      }, !1), e;
+    }, _ajaxSubmit: function _ajaxSubmit(i, t, a, r, n, o) {
+      var l,
+          s = this;s._raise("filepreajax", [n, o]) && (s._uploadExtra(n, o), l = e.extend(!0, {}, { xhr: function xhr() {
+          var i = e.ajaxSettings.xhr();return s._initXhr(i, n, s.getFileStack().length);
+        }, url: s.uploadUrl, type: "POST", dataType: "json", data: s.formdata, cache: !1, processData: !1, contentType: !1, beforeSend: i, success: t, complete: a, error: r }, s.ajaxSettings), s.ajaxRequests.push(e.ajax(l)));
+    }, _mergeArray: function _mergeArray(e, t) {
+      var a = this,
+          r = i.cleanArray(a[e]),
+          n = i.cleanArray(t);a[e] = r.concat(n);
+    }, _initUploadSuccess: function _initUploadSuccess(t, a, r) {
+      var n,
+          o,
+          l,
+          s,
+          d,
+          c,
+          p,
+          u,
+          f,
+          m = this;m.showPreview && "object" == (typeof t === "undefined" ? "undefined" : _typeof(t)) && !e.isEmptyObject(t) && void 0 !== t.initialPreview && t.initialPreview.length > 0 && (m.hasInitData = !0, c = t.initialPreview || [], p = t.initialPreviewConfig || [], u = t.initialPreviewThumbTags || [], n = !(void 0 !== t.append && !t.append), c.length > 0 && !i.isArray(c) && (c = c.split(m.initialPreviewDelimiter)), m._mergeArray("initialPreview", c), m._mergeArray("initialPreviewConfig", p), m._mergeArray("initialPreviewThumbTags", u), void 0 !== a ? r ? (f = a.attr("data-fileindex"), m.uploadCache.content[f] = c[0], m.uploadCache.config[f] = p[0] || [], m.uploadCache.tags[f] = u[0] || [], m.uploadCache.append = n) : (l = m.previewCache.add(c, p[0], u[0], n), o = m.previewCache.get(l, !1), s = e(document.createElement("div")).html(o).hide().insertAfter(a), d = s.find(".kv-zoom-cache"), d && d.length && d.insertAfter(a), a.fadeOut("slow", function () {
+        var e = s.find(".file-preview-frame");e && e.length && e.insertBefore(a).fadeIn("slow").css("display:inline-block"), m._initPreviewActions(), m._clearFileInput(), i.cleanZoomCache(m.$preview.find("#zoom-" + a.attr("id"))), a.remove(), s.remove(), m._initSortable();
+      })) : (m.previewCache.set(c, p, u, n), m._initPreview(), m._initPreviewActions()));
+    }, _initSuccessThumbs: function _initSuccessThumbs() {
+      var t = this;t.showPreview && t._getThumbs(i.FRAMES + ".file-preview-success").each(function () {
+        var a = e(this),
+            r = t.$preview,
+            n = a.find(".kv-file-remove");n.removeAttr("disabled"), t._handler(n, "click", function () {
+          var e = a.attr("id"),
+              n = t._raise("filesuccessremove", [e, a.data("fileindex")]);i.cleanMemory(a), n !== !1 && a.fadeOut("slow", function () {
+            i.cleanZoomCache(r.find("#zoom-" + e)), a.remove(), r.find(i.FRAMES).length || t.reset();
+          });
+        });
+      });
+    }, _checkAsyncComplete: function _checkAsyncComplete() {
+      var i,
+          t,
+          a = this;for (t = 0; t < a.filestack.length; t++) {
+        if (a.filestack[t] && (i = a.previewInitId + "-" + t, -1 === e.inArray(i, a.uploadLog))) return !1;
+      }return a.uploadAsyncCount === a.uploadLog.length;
+    }, _uploadExtra: function _uploadExtra(i, t) {
+      var a = this,
+          r = a._getExtraData(i, t);0 !== r.length && e.each(r, function (e, i) {
+        a.formdata.append(e, i);
+      });
+    }, _uploadSingle: function _uploadSingle(t, a, r) {
+      var n,
+          o,
+          l,
+          s,
+          d,
+          c,
+          p,
+          u,
+          f,
+          m,
+          g = this,
+          v = g.getFileStack().length,
+          h = new FormData(),
+          w = g.previewInitId + "-" + t,
+          _ = g.filestack.length > 0 || !e.isEmptyObject(g.uploadExtraData),
+          b = e("#" + w).find(".file-thumb-progress"),
+          C = { id: w, index: t };g.formdata = h, g.showPreview && (o = e("#" + w + ":not(.file-preview-initial)"), s = o.find(".kv-file-upload"), d = o.find(".kv-file-remove"), b.removeClass("hide")), 0 === v || !_ || s && s.hasClass("disabled") || g._abort(C) || (m = function m(e, i) {
+        g.updateStack(e, void 0), g.uploadLog.push(i), g._checkAsyncComplete() && (g.fileBatchCompleted = !0);
+      }, l = function l() {
+        var e,
+            t,
+            a,
+            r = g.uploadCache,
+            n = 0,
+            o = g.cacheInitialPreview;g.fileBatchCompleted && (o && o.content && (n = o.content.length), setTimeout(function () {
+          if (g.showPreview) {
+            if (g.previewCache.set(r.content, r.config, r.tags, r.append), n) {
+              for (t = 0; t < r.content.length; t++) {
+                a = t + n, o.content[a] = r.content[t], o.config.length && (o.config[a] = r.config[t]), o.tags.length && (o.tags[a] = r.tags[t]);
+              }g.initialPreview = i.cleanArray(o.content), g.initialPreviewConfig = i.cleanArray(o.config), g.initialPreviewThumbTags = i.cleanArray(o.tags);
+            } else g.initialPreview = r.content, g.initialPreviewConfig = r.config, g.initialPreviewThumbTags = r.tags;g.cacheInitialPreview = {}, g.hasInitData && (g._initPreview(), g._initPreviewActions());
+          }g.unlock(), g._clearFileInput(), e = g.$preview.find(".file-preview-initial"), g.uploadAsync && e.length && (i.addCss(e, i.SORT_CSS), g._initSortable()), g._raise("filebatchuploadcomplete", [g.filestack, g._getExtraData()]), g.uploadCount = 0, g.uploadStatus = {}, g.uploadLog = [], g._setProgress(101);
+        }, 100));
+      }, c = function c(a) {
+        n = g._getOutData(a), g.fileBatchCompleted = !1, g.showPreview && (o.hasClass("file-preview-success") || (g._setThumbStatus(o, "Loading"), i.addCss(o, "file-uploading")), s.attr("disabled", !0), d.attr("disabled", !0)), r || g.lock(), g._raise("filepreupload", [n, w, t]), e.extend(!0, C, n), g._abort(C) && (a.abort(), g._setProgressCancelled());
+      }, p = function p(a, l, d) {
+        var c = g.showPreview && o.attr("id") ? o.attr("id") : w;n = g._getOutData(d, a), e.extend(!0, C, n), setTimeout(function () {
+          i.isEmpty(a) || i.isEmpty(a.error) ? (g.showPreview && (g._setThumbStatus(o, "Success"), s.hide(), g._initUploadSuccess(a, o, r), g._setProgress(101, b)), g._raise("fileuploaded", [n, c, t]), r ? m(t, c) : g.updateStack(t, void 0)) : (g._showUploadError(a.error, C), g._setPreviewError(o, t), r && m(t, c));
+        }, 100);
+      }, u = function u() {
+        setTimeout(function () {
+          g.showPreview && (s.removeAttr("disabled"), d.removeAttr("disabled"), o.removeClass("file-uploading")), r ? l() : (g.unlock(!1), g._clearFileInput()), g._initSuccessThumbs();
+        }, 100);
+      }, f = function f(i, n, l) {
+        var s = g.ajaxOperations.uploadThumb,
+            d = g._parseError(s, i, l, r ? a[t].name : null);setTimeout(function () {
+          r && m(t, w), g.uploadStatus[w] = 100, g._setPreviewError(o, t), e.extend(!0, C, g._getOutData(i)), g._setProgress(101, b, g.msgAjaxProgressError.replace("{operation}", s)), g._showUploadError(d, C);
+        }, 100);
+      }, h.append(g.uploadFileAttr, a[t], g.filenames[t]), h.append("file_id", t), g._ajaxSubmit(c, p, u, f, w, t));
+    }, _uploadBatch: function _uploadBatch() {
+      var t,
+          a,
+          r,
+          n,
+          o,
+          l = this,
+          s = l.filestack,
+          d = s.length,
+          c = {},
+          p = l.filestack.length > 0 || !e.isEmptyObject(l.uploadExtraData);l.formdata = new FormData(), 0 !== d && p && !l._abort(c) && (o = function o() {
+        e.each(s, function (e) {
+          l.updateStack(e, void 0);
+        }), l._clearFileInput();
+      }, t = function t(_t2) {
+        l.lock();var a = l._getOutData(_t2);l.showPreview && l._getThumbs().each(function () {
+          var t = e(this),
+              a = t.find(".kv-file-upload"),
+              r = t.find(".kv-file-remove");t.hasClass("file-preview-success") || (l._setThumbStatus(t, "Loading"), i.addCss(t, "file-uploading")), a.attr("disabled", !0), r.attr("disabled", !0);
+        }), l._raise("filebatchpreupload", [a]), l._abort(a) && (_t2.abort(), l._setProgressCancelled());
+      }, a = function a(t, _a, r) {
+        var n = l._getOutData(r, t),
+            s = l._getThumbs(":not(.file-preview-error)"),
+            d = 0,
+            c = i.isEmpty(t) || i.isEmpty(t.errorkeys) ? [] : t.errorkeys;i.isEmpty(t) || i.isEmpty(t.error) ? (l._raise("filebatchuploadsuccess", [n]), o(), l.showPreview ? (s.each(function () {
+          var i = e(this),
+              t = i.find(".kv-file-upload");i.find(".kv-file-upload").hide(), l._setThumbStatus(i, "Success"), i.removeClass("file-uploading"), t.removeAttr("disabled");
+        }), l._initUploadSuccess(t)) : l.reset(), l._setProgress(101)) : (l.showPreview && (s.each(function () {
+          var i = e(this),
+              t = i.find(".kv-file-remove"),
+              a = i.find(".kv-file-upload");return i.removeClass("file-uploading"), a.removeAttr("disabled"), t.removeAttr("disabled"), 0 === c.length ? void l._setPreviewError(i) : (-1 !== e.inArray(d, c) ? l._setPreviewError(i) : (i.find(".kv-file-upload").hide(), l._setThumbStatus(i, "Success"), l.updateStack(d, void 0)), void d++);
+        }), l._initUploadSuccess(t)), l._showUploadError(t.error, n, "filebatchuploaderror"));
+      }, n = function n() {
+        l.unlock(), l._initSuccessThumbs(), l._clearFileInput(), l._raise("filebatchuploadcomplete", [l.filestack, l._getExtraData()]);
+      }, r = function r(i, t, a) {
+        var r = l._getOutData(i),
+            n = l.ajaxOperations.uploadBatch,
+            o = l._parseError(n, i, a);l._showUploadError(o, r, "filebatchuploaderror"), l.uploadFileCount = d - 1, l.showPreview && (l._getThumbs().each(function () {
+          var i = e(this),
+              t = i.attr("data-fileindex");i.removeClass("file-uploading"), void 0 !== l.filestack[t] && l._setPreviewError(i);
+        }), l._getThumbs().removeClass("file-uploading"), l._getThumbs(" .kv-file-upload").removeAttr("disabled"), l._getThumbs(" .kv-file-delete").removeAttr("disabled"), l._setProgress(101, l.$progress, l.msgAjaxProgressError.replace("{operation}", n)));
+      }, e.each(s, function (e, t) {
+        i.isEmpty(s[e]) || l.formdata.append(l.uploadFileAttr, t, l.filenames[e]);
+      }), l._ajaxSubmit(t, a, n, r));
+    }, _uploadExtraOnly: function _uploadExtraOnly() {
+      var e,
+          t,
+          a,
+          r,
+          n = this,
+          o = {};n.formdata = new FormData(), n._abort(o) || (e = function e(_e) {
+        n.lock();var i = n._getOutData(_e);n._raise("filebatchpreupload", [i]), n._setProgress(50), o.data = i, o.xhr = _e, n._abort(o) && (_e.abort(), n._setProgressCancelled());
+      }, t = function t(e, _t3, a) {
+        var r = n._getOutData(a, e);i.isEmpty(e) || i.isEmpty(e.error) ? (n._raise("filebatchuploadsuccess", [r]), n._clearFileInput(), n._initUploadSuccess(e), n._setProgress(101)) : n._showUploadError(e.error, r, "filebatchuploaderror");
+      }, a = function a() {
+        n.unlock(), n._clearFileInput(), n._raise("filebatchuploadcomplete", [n.filestack, n._getExtraData()]);
+      }, r = function r(e, i, t) {
+        var a = n._getOutData(e),
+            r = n.ajaxOperations.uploadExtra,
+            l = n._parseError(r, e, t);o.data = a, n._showUploadError(l, a, "filebatchuploaderror"), n._setProgress(101, n.$progress, n.msgAjaxProgressError.replace("{operation}", r));
+      }, n._ajaxSubmit(e, t, a, r));
+    }, _deleteFileIndex: function _deleteFileIndex(t) {
+      var a = this,
+          r = t.attr("data-fileindex");"init_" === r.substring(0, 5) && (r = parseInt(r.replace("init_", "")), a.initialPreview = i.spliceArray(a.initialPreview, r), a.initialPreviewConfig = i.spliceArray(a.initialPreviewConfig, r), a.initialPreviewThumbTags = i.spliceArray(a.initialPreviewThumbTags, r), a.$preview.find(i.FRAMES).each(function () {
+        var i = e(this),
+            t = i.attr("data-fileindex");"init_" === t.substring(0, 5) && (t = parseInt(t.replace("init_", "")), t > r && (t--, i.attr("data-fileindex", "init_" + t)));
+      }), a.uploadAsync && (a.cacheInitialPreview = a.getPreview()));
+    }, _initFileActions: function _initFileActions() {
+      var t = this,
+          a = t.$preview;t.showPreview && (t._initZoomButton(), a.find(i.FRAMES + " .kv-file-remove").each(function () {
+        var r,
+            n,
+            o,
+            l,
+            s = e(this),
+            d = s.closest(i.FRAMES),
+            c = d.attr("id"),
+            p = d.attr("data-fileindex");t._handler(s, "click", function () {
+          return l = t._raise("filepreremove", [c, p]), l !== !1 && t._validateMinCount() ? (r = d.hasClass("file-preview-error"), i.cleanMemory(d), void d.fadeOut("slow", function () {
+            i.cleanZoomCache(a.find("#zoom-" + c)), t.updateStack(p, void 0), t._clearObjects(d), d.remove(), c && r && t.$errorContainer.find('li[data-file-id="' + c + '"]').fadeOut("fast", function () {
+              e(this).remove(), t._errorsExist() || t._resetErrors();
+            }), t._clearFileInput();var l = t.getFileStack(!0),
+                s = t.previewCache.count(),
+                u = l.length,
+                f = t.showPreview && a.find(i.FRAMES).length;0 !== u || 0 !== s || f ? (n = s + u, o = n > 1 ? t._getMsgSelected(n) : l[0] ? t._getFileNames()[0] : "", t._setCaption(o)) : t.reset(), t._raise("fileremoved", [c, p]);
+          })) : !1;
+        });
+      }), t.$preview.find(i.FRAMES + " .kv-file-upload").each(function () {
+        var a = e(this);t._handler(a, "click", function () {
+          var e = a.closest(i.FRAMES),
+              r = e.attr("data-fileindex");e.hasClass("file-preview-error") || t._uploadSingle(r, t.filestack, !1);
+        });
+      }));
+    }, _initPreviewActions: function _initPreviewActions() {
+      var t = this,
+          a = t.$preview,
+          r = t.deleteExtraData || {},
+          n = i.FRAMES + " .kv-file-remove",
+          o = function o() {
+        var e = t.isUploadable ? t.previewCache.count() : t.$element.get(0).files.length;0 !== a.find(n).length || e || (t.reset(), t.initialCaption = "");
+      };t._initZoomButton(), a.find(n).each(function () {
+        var n = e(this),
+            l = n.data("url") || t.deleteUrl,
+            s = n.data("key");if (!i.isEmpty(l) && void 0 !== s) {
+          var d,
+              c,
+              p,
+              u,
+              f = n.closest(i.FRAMES),
+              m = t.previewCache.data,
+              g = f.data("fileindex");g = parseInt(g.replace("init_", "")), p = i.isEmpty(m.config) && i.isEmpty(m.config[g]) ? null : m.config[g], u = i.isEmpty(p) || i.isEmpty(p.extra) ? r : p.extra, "function" == typeof u && (u = u()), c = { id: n.attr("id"), key: s, extra: u }, d = e.extend(!0, {}, { url: l, type: "POST", dataType: "json", data: e.extend(!0, {}, { key: s }, u), beforeSend: function beforeSend(e) {
+              t.ajaxAborted = !1, t._raise("filepredelete", [s, e, u]), t.ajaxAborted ? e.abort() : (i.addCss(f, "file-uploading"), i.addCss(n, "disabled"));
+            }, success: function success(e, r, l) {
+              var d, p;return i.isEmpty(e) || i.isEmpty(e.error) ? (t.previewCache.init(), g = parseInt(f.data("fileindex").replace("init_", "")), t.previewCache.unset(g), d = t.previewCache.count(), p = d > 0 ? t._getMsgSelected(d) : "", t._deleteFileIndex(f), t._setCaption(p), t._raise("filedeleted", [s, l, u]), f.removeClass("file-uploading").addClass("file-deleted"), void f.fadeOut("slow", function () {
+                i.cleanZoomCache(a.find("#zoom-" + f.attr("id"))), t._clearObjects(f), f.remove(), o(), d || 0 !== t.getFileStack().length || (t._setCaption(""), t.reset());
+              })) : (c.jqXHR = l, c.response = e, t._showError(e.error, c, "filedeleteerror"), f.removeClass("file-uploading"), n.removeClass("disabled"), void o());
+            }, error: function error(e, i, a) {
+              var r = t.ajaxOperations.deleteThumb,
+                  n = t._parseError(r, e, a);c.jqXHR = e, c.response = {}, t._showError(n, c, "filedeleteerror"), f.removeClass("file-uploading"), o();
+            } }, t.ajaxDeleteSettings), t._handler(n, "click", function () {
+            return t._validateMinCount() ? void e.ajax(d) : !1;
+          });
+        }
+      });
+    }, _hideFileIcon: function _hideFileIcon() {
+      this.overwriteInitial && this.$captionContainer.find(".kv-caption-icon").hide();
+    }, _showFileIcon: function _showFileIcon() {
+      this.$captionContainer.find(".kv-caption-icon").show();
+    }, _getSize: function _getSize(i) {
+      var t,
+          a,
+          r,
+          n = this,
+          o = parseFloat(i),
+          l = n.fileSizeGetter;return e.isNumeric(i) && e.isNumeric(o) ? ("function" == typeof l ? r = l(o) : 0 === o ? r = "0.00 B" : (t = Math.floor(Math.log(o) / Math.log(1024)), a = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"], r = 1 * (o / Math.pow(1024, t)).toFixed(2) + " " + a[t]), n._getLayoutTemplate("size").replace("{sizeText}", r)) : "";
+    }, _generatePreviewTemplate: function _generatePreviewTemplate(e, t, a, r, n, o, l, s, d, c, p) {
+      var u,
+          f = this,
+          m = f.slug(a),
+          g = "",
+          v = f.previewSettings[e] || f.defaults.previewSettings[e],
+          h = v && v.width ? v.width : "",
+          w = v && v.height ? v.height : "",
+          _ = d || f._renderFileFooter(m, l, i.isEmpty(h) ? "auto" : h, o),
+          b = f._getPreviewIcon(a),
+          C = b && f.preferIconicPreview,
+          y = b && f.preferIconicZoomPreview,
+          E = function E(t, o, l, d) {
+        var u = l ? "zoom-" + n : n,
+            g = f._getPreviewTemplate(t),
+            v = (s || "") + " " + d;return f.frameClass && (v = f.frameClass + " " + v), l && (v = v.replace(" " + i.SORT_CSS, "")), g = f._parseFilePreviewIcon(g, a), "text" === t && (o = i.htmlEncode(o)), g.replace(/\{previewId}/g, u).replace(/\{caption}/g, m).replace(/\{frameClass}/g, v).replace(/\{type}/g, r).replace(/\{fileindex}/g, c).replace(/\{width}/g, h).replace(/\{height}/g, w).replace(/\{footer}/g, _).replace(/\{data}/g, o).replace(/\{template}/g, p || e);
+      };return c = c || n.slice(n.lastIndexOf("-") + 1), f.fileActionSettings.showZoom && (g = E(y ? "other" : e, t, !0, "kv-zoom-thumb")), g = "\n" + f._getLayoutTemplate("zoomCache").replace("{zoomContent}", g), u = E(C ? "other" : e, t, !1, "kv-preview-thumb"), u + g;
+    }, _previewDefault: function _previewDefault(t, a, r) {
+      var n = this,
+          o = n.$preview;if (n.showPreview) {
+        var l,
+            s = t ? t.name : "",
+            d = t ? t.type : "",
+            c = t.size || 0,
+            p = n.slug(s),
+            u = r === !0 && !n.isUploadable,
+            f = i.objUrl.createObjectURL(t);n._clearDefaultPreview(), l = n._generatePreviewTemplate("other", f, s, d, a, u, c), o.append("\n" + l), n._setThumbAttr(a, p, c), r === !0 && n.isUploadable && n._setThumbStatus(e("#" + a), "Error");
+      }
+    }, _previewFile: function _previewFile(e, i, t, a, r) {
+      if (this.showPreview) {
+        var n,
+            o = this,
+            l = o._parseFileType(i),
+            s = i ? i.name : "",
+            d = o.slug(s),
+            c = o.allowedPreviewTypes,
+            p = o.allowedPreviewMimeTypes,
+            u = o.$preview,
+            f = c && c.indexOf(l) >= 0,
+            m = i.size || 0,
+            g = "text" === l || "html" === l || "image" === l ? t.target.result : r,
+            v = p && -1 !== p.indexOf(i.type);"html" === l && o.purifyHtml && window.DOMPurify && (g = window.DOMPurify.sanitize(g)), f || v ? (n = o._generatePreviewTemplate(l, g, s, i.type, a, !1, m), o._clearDefaultPreview(), u.append("\n" + n), o._validateImage(a, d, i.type)) : o._previewDefault(i, a), o._setThumbAttr(a, d, m), o._initSortable();
+      }
+    }, _setThumbAttr: function _setThumbAttr(i, t, a) {
+      var r = this,
+          n = e("#" + i);n.length && (a = a && a > 0 ? r._getSize(a) : "", n.data({ caption: t, size: a }));
+    }, _setInitThumbAttr: function _setInitThumbAttr() {
+      var e,
+          t,
+          a,
+          r,
+          n = this,
+          o = n.previewCache.data,
+          l = n.previewCache.count(!0);if (0 !== l) for (var s = 0; l > s; s++) {
+        e = o.config[s], r = n.previewInitId + "-init_" + s, t = i.ifSet("caption", e, i.ifSet("filename", e)), a = i.ifSet("size", e), n._setThumbAttr(r, t, a);
+      }
+    }, _slugDefault: function _slugDefault(e) {
+      return i.isEmpty(e) ? "" : String(e).replace(/[\-\[\]\/\{}:;#%=\(\)\*\+\?\\\^\$\|<>&"']/g, "_");
+    }, _readFiles: function _readFiles(t) {
+      this.reader = new FileReader();var _a2,
+          r = this,
+          n = r.$element,
+          o = r.$preview,
+          l = r.reader,
+          s = r.$previewContainer,
+          d = r.$previewStatus,
+          c = r.msgLoading,
+          p = r.msgProgress,
+          u = r.previewInitId,
+          f = t.length,
+          m = r.fileTypeSettings,
+          g = r.filestack.length,
+          v = r.allowedFileTypes,
+          h = v ? v.length : 0,
+          w = r.allowedFileExtensions,
+          _ = i.isEmpty(w) ? "" : w.join(", "),
+          b = r.maxFilePreviewSize && parseFloat(r.maxFilePreviewSize),
+          C = o.length && (!b || isNaN(b)),
+          y = function y(i, n, o, l) {
+        var s = e.extend(!0, {}, r._getOutData({}, {}, t), { id: o, index: l }),
+            d = { id: o, index: l, file: n, files: t };return r._previewDefault(n, o, !0), r.isUploadable && (r.addToStack(void 0), setTimeout(function () {
+          _a2(l + 1);
+        }, 100)), r._initFileActions(), r.removeFromPreviewOnError && e("#" + o).remove(), r.isUploadable ? r._showUploadError(i, s) : r._showError(i, d);
+      };r.loadedImages = [], r.totalImagesCount = 0, e.each(t, function (e, i) {
+        var t = r.fileTypeSettings.image;t && t(i.type) && r.totalImagesCount++;
+      }), _a2 = function a(e) {
+        if (i.isEmpty(n.attr("multiple")) && (f = 1), e >= f) return r.isUploadable && r.filestack.length > 0 ? r._raise("filebatchselected", [r.getFileStack()]) : r._raise("filebatchselected", [t]), s.removeClass("file-thumb-loading"), void d.html("");var E,
+            x,
+            T,
+            S,
+            F,
+            P,
+            I,
+            k,
+            A,
+            $,
+            z = g + e,
+            D = u + "-" + z,
+            U = t[e],
+            j = U.name ? r.slug(U.name) : "",
+            L = (U.size || 0) / 1e3,
+            R = "",
+            M = i.objUrl.createObjectURL(U),
+            O = 0,
+            Z = "";if (h > 0) for (S = 0; h > S; S++) {
+          k = v[S], A = r.msgFileTypes[k] || k, Z += 0 === S ? A : ", " + A;
+        }if (j === !1) return void _a2(e + 1);if (0 === j.length) return F = r.msgInvalidFileName.replace("{name}", i.htmlEncode(U.name)), void (r.isError = y(F, U, D, e));if (i.isEmpty(w) || (R = new RegExp("\\.(" + w.join("|") + ")$", "i")), T = L.toFixed(2), r.maxFileSize > 0 && L > r.maxFileSize) return F = r.msgSizeTooLarge.replace("{name}", j).replace("{size}", T).replace("{maxSize}", r.maxFileSize), void (r.isError = y(F, U, D, e));if (null !== r.minFileSize && L <= i.getNum(r.minFileSize)) return F = r.msgSizeTooSmall.replace("{name}", j).replace("{size}", T).replace("{minSize}", r.minFileSize), void (r.isError = y(F, U, D, e));if (!i.isEmpty(v) && i.isArray(v)) {
+          for (S = 0; S < v.length; S += 1) {
+            P = v[S], $ = m[P], O += $ && "function" == typeof $ && $(U.type, U.name) ? 1 : 0;
+          }if (0 === O) return F = r.msgInvalidFileType.replace("{name}", j).replace("{types}", Z), void (r.isError = y(F, U, D, e));
+        }return 0 !== O || i.isEmpty(w) || !i.isArray(w) || i.isEmpty(R) || (I = i.compare(j, R), O += i.isEmpty(I) ? 0 : I.length, 0 !== O) ? r.showPreview ? !C && L > b ? (r.addToStack(U), s.addClass("file-thumb-loading"), r._previewDefault(U, D), r._initFileActions(), r._updateFileDetails(f), void _a2(e + 1)) : (o.length && void 0 !== FileReader ? (d.html(c.replace("{index}", e + 1).replace("{files}", f)), s.addClass("file-thumb-loading"), l.onerror = function (e) {
+          r._errorHandler(e, j);
+        }, l.onload = function (i) {
+          r._previewFile(e, U, i, D, M), r._initFileActions();
+        }, l.onloadend = function () {
+          F = p.replace("{index}", e + 1).replace("{files}", f).replace("{percent}", 50).replace("{name}", j), setTimeout(function () {
+            d.html(F), r._updateFileDetails(f), _a2(e + 1);
+          }, 100), r._raise("fileloaded", [U, D, e, l]);
+        }, l.onprogress = function (i) {
+          if (i.lengthComputable) {
+            var t = i.loaded / i.total * 100,
+                a = Math.ceil(t);F = p.replace("{index}", e + 1).replace("{files}", f).replace("{percent}", a).replace("{name}", j), setTimeout(function () {
+              d.html(F);
+            }, 100);
+          }
+        }, E = m.text, x = m.image, E(U.type, j) ? l.readAsText(U, r.textEncoding) : x(U.type, j) ? l.readAsDataURL(U) : l.readAsArrayBuffer(U)) : (r._previewDefault(U, D), setTimeout(function () {
+          _a2(e + 1), r._updateFileDetails(f);
+        }, 100), r._raise("fileloaded", [U, D, e, l])), void r.addToStack(U)) : (r.addToStack(U), setTimeout(function () {
+          _a2(e + 1);
+        }, 100), void r._raise("fileloaded", [U, D, e, l])) : (F = r.msgInvalidFileExtension.replace("{name}", j).replace("{extensions}", _), void (r.isError = y(F, U, D, e)));
+      }, _a2(0), r._updateFileDetails(f, !1);
+    }, _updateFileDetails: function _updateFileDetails(e) {
+      var t = this,
+          a = t.$element,
+          r = t.getFileStack(),
+          n = i.isIE(9) && i.findFileName(a.val()) || a[0].files[0] && a[0].files[0].name || r.length && r[0].name || "",
+          o = t.slug(n),
+          l = t.isUploadable ? r.length : e,
+          s = t.previewCache.count() + l,
+          d = l > 1 ? t._getMsgSelected(s) : o;t.isError ? (t.$previewContainer.removeClass("file-thumb-loading"), t.$previewStatus.html(""), t.$captionContainer.find(".kv-caption-icon").hide()) : t._showFileIcon(), t._setCaption(d, t.isError), t.$container.removeClass("file-input-new file-input-ajax-new"), 1 === arguments.length && t._raise("fileselect", [e, o]), t.previewCache.count() && t._initPreviewActions();
+    }, _setThumbStatus: function _setThumbStatus(e, i) {
+      var t = this;if (t.showPreview) {
+        var a = "indicator" + i,
+            r = a + "Title",
+            n = "file-preview-" + i.toLowerCase(),
+            o = e.find(".file-upload-indicator"),
+            l = t.fileActionSettings;e.removeClass("file-preview-success file-preview-error file-preview-loading"), "Error" === i && e.find(".kv-file-upload").attr("disabled", !0), "Success" === i && (e.find(".file-drag-handle").remove(), o.css("margin-left", 0)), o.html(l[a]), o.attr("title", l[r]), e.addClass(n);
+      }
+    }, _setProgressCancelled: function _setProgressCancelled() {
+      var e = this;e._setProgress(101, e.$progress, e.msgCancelled);
+    }, _setProgress: function _setProgress(e, t, a) {
+      var r,
+          n,
+          o = this,
+          l = Math.min(e, 100),
+          s = o.progressUploadThreshold,
+          d = 100 >= e ? o.progressTemplate : o.progressCompleteTemplate,
+          c = 100 > l ? o.progressTemplate : a ? o.progressErrorTemplate : d;t = t || o.$progress, i.isEmpty(c) || (s && l > s && 100 >= e ? r = c.replace(/\{percent}/g, s).replace(/\{status}/g, o.msgUploadThreshold) : (n = e > 100 ? o.msgUploadEnd : l + "%", r = c.replace(/\{percent}/g, l).replace(/\{status}/g, n)), t.html(r), a && t.find('[role="progressbar"]').html(a));
+    }, _setFileDropZoneTitle: function _setFileDropZoneTitle() {
+      var e,
+          t = this,
+          a = t.$container.find(".file-drop-zone"),
+          r = t.dropZoneTitle;t.isClickable && (e = i.isEmpty(t.$element.attr("multiple")) ? t.fileSingle : t.filePlural, r += t.dropZoneClickTitle.replace("{files}", e)), a.find("." + t.dropZoneTitleClass).remove(), t.isUploadable && t.showPreview && 0 !== a.length && !(t.getFileStack().length > 0) && t.dropZoneEnabled && (0 === a.find(i.FRAMES).length && i.isEmpty(t.defaultPreviewContent) && a.prepend('<div class="' + t.dropZoneTitleClass + '">' + r + "</div>"), t.$container.removeClass("file-input-new"), i.addCss(t.$container, "file-input-ajax-new"));
+    }, _setAsyncUploadStatus: function _setAsyncUploadStatus(i, t, a) {
+      var r = this,
+          n = 0;r._setProgress(t, e("#" + i).find(".file-thumb-progress")), r.uploadStatus[i] = t, e.each(r.uploadStatus, function (e, i) {
+        n += i;
+      }), r._setProgress(Math.floor(n / a));
+    }, _validateMinCount: function _validateMinCount() {
+      var e = this,
+          i = e.isUploadable ? e.getFileStack().length : e.$element.get(0).files.length;return e.validateInitialCount && e.minFileCount > 0 && e._getFileCount(i - 1) < e.minFileCount ? (e._noFilesError({}), !1) : !0;
+    }, _getFileCount: function _getFileCount(e) {
+      var i = this,
+          t = 0;return i.validateInitialCount && !i.overwriteInitial && (t = i.previewCache.count(), e += t), e;
+    }, _getFileName: function _getFileName(e) {
+      return e && e.name ? this.slug(e.name) : void 0;
+    }, _getFileNames: function _getFileNames(e) {
+      var i = this;return i.filenames.filter(function (i) {
+        return e ? void 0 !== i : void 0 !== i && null !== i;
+      });
+    }, _setPreviewError: function _setPreviewError(e, i, t) {
+      var a = this;void 0 !== i && a.updateStack(i, t), a.removeFromPreviewOnError ? e.remove() : a._setThumbStatus(e, "Error");
+    }, _checkDimensions: function _checkDimensions(e, t, a, r, n, o, l) {
+      var s,
+          d,
+          c,
+          p,
+          u = this,
+          f = "Small" === t ? "min" : "max",
+          m = u[f + "Image" + o];!i.isEmpty(m) && a.length && (c = a[0], d = "Width" === o ? c.naturalWidth || c.width : c.naturalHeight || c.height, p = "Small" === t ? d >= m : m >= d, p || (s = u["msgImage" + o + t].replace("{name}", n).replace("{size}", m), u._showUploadError(s, l), u._setPreviewError(r, e, null)));
+    }, _validateImage: function _validateImage(e, i, t) {
+      var a,
+          r,
+          n,
+          o = this,
+          l = o.$preview,
+          s = l.find("#" + e),
+          d = s.attr("data-fileindex"),
+          c = s.find("img");i = i || "Untitled", c.length && o._handler(c, "load", function () {
+        r = s.width(), n = l.width(), r > n && (c.css("width", "100%"), s.css("width", "97%")), a = { ind: d, id: e }, o._checkDimensions(d, "Small", c, s, i, "Width", a), o._checkDimensions(d, "Small", c, s, i, "Height", a), o.resizeImage || (o._checkDimensions(d, "Large", c, s, i, "Width", a), o._checkDimensions(d, "Large", c, s, i, "Height", a)), o._raise("fileimageloaded", [e]), o.loadedImages.push({ ind: d, img: c, thumb: s, pid: e, typ: t }), o._validateAllImages();
+      });
+    }, _validateAllImages: function _validateAllImages() {
+      var e,
+          i = this,
+          t = { val: 0 },
+          a = i.loadedImages.length;if (a === i.totalImagesCount && (i._raise("fileimagesloaded"), i.resizeImage)) for (e = 0; e < i.loadedImages.length; e++) {
+        i._getResizedImage(i.loadedImages[e], t, a);
+      }
+    }, _getResizedImage: function _getResizedImage(i, t, a) {
+      var r,
+          n,
+          o,
+          l,
+          s = this,
+          d = e(i.img)[0],
+          c = d.naturalWidth,
+          p = d.naturalHeight,
+          u = 1,
+          f = s.maxImageWidth || c,
+          m = s.maxImageHeight || p,
+          g = !(!c || !p),
+          v = s.imageCanvas,
+          h = s.imageCanvasContext,
+          w = i.typ,
+          _ = i.pid,
+          b = i.ind,
+          C = i.thumb;if (o = function o(e, i, t) {
+        s.isUploadable ? s._showUploadError(e, i, t) : s._showError(e, i, t), s._setPreviewError(C, b);
+      }, (!s.filestack[b] || !g || f >= c && m >= p) && (g && s.filestack[b] && s._raise("fileimageresized", [_, b]), t.val++, t.val === a && s._raise("fileimagesresized"), !g)) return void o(s.msgImageResizeError, { id: _, index: b }, "fileimageresizeerror");w = w || s.resizeDefaultImageType, r = c > f, n = p > m, u = "width" === s.resizePreference ? r ? f / c : n ? m / p : 1 : n ? m / p : r ? f / c : 1, s._resetCanvas(), c *= u, p *= u, v.width = c, v.height = p;try {
+        h.drawImage(d, 0, 0, c, p), v.toBlob(function (e) {
+          s.filestack[b] = e, s._raise("fileimageresized", [_, b]), t.val++, t.val === a && s._raise("fileimagesresized", [void 0, void 0]), e instanceof Blob || o(s.msgImageResizeError, { id: _, index: b }, "fileimageresizeerror");
+        }, w, s.resizeQuality);
+      } catch (y) {
+        t.val++, t.val === a && s._raise("fileimagesresized", [void 0, void 0]), l = s.msgImageResizeException.replace("{errors}", y.message), o(l, { id: _, index: b }, "fileimageresizeexception");
+      }
+    }, _initBrowse: function _initBrowse(e) {
+      var i = this;i.showBrowse ? (i.$btnFile = e.find(".btn-file"), i.$btnFile.append(i.$element)) : i.$element.hide();
+    }, _initCaption: function _initCaption() {
+      var e = this,
+          t = e.initialCaption || "";return e.overwriteInitial || i.isEmpty(t) ? (e.$caption.html(""), !1) : (e._setCaption(t), !0);
+    }, _setCaption: function _setCaption(t, a) {
+      var r,
+          n,
+          o,
+          l,
+          s = this,
+          d = s.getFileStack();if (s.$caption.length) {
+        if (a) r = e("<div>" + s.msgValidationError + "</div>").text(), o = d.length, l = o ? 1 === o && d[0] ? s._getFileNames()[0] : s._getMsgSelected(o) : s._getMsgSelected(s.msgNo), n = '<span class="' + s.msgValidationErrorClass + '">' + s.msgValidationErrorIcon + (i.isEmpty(t) ? l : t) + "</span>";else {
+          if (i.isEmpty(t)) return;r = e("<div>" + t + "</div>").text(), n = s._getLayoutTemplate("fileIcon") + r;
+        }s.$caption.html(n), s.$caption.attr("title", r), s.$captionContainer.find(".file-caption-ellipsis").attr("title", r);
+      }
+    }, _createContainer: function _createContainer() {
+      var i = this,
+          t = e(document.createElement("div")).attr({ "class": "file-input file-input-new" }).html(i._renderMain());return i.$element.before(t), i._initBrowse(t), i.theme && t.addClass("theme-" + i.theme), t;
+    }, _refreshContainer: function _refreshContainer() {
+      var e = this,
+          i = e.$container;i.before(e.$element), i.html(e._renderMain()), e._initBrowse(i);
+    }, _renderMain: function _renderMain() {
+      var e = this,
+          i = e.isUploadable && e.dropZoneEnabled ? " file-drop-zone" : "file-drop-disabled",
+          t = e.showClose ? e._getLayoutTemplate("close") : "",
+          a = e.showPreview ? e._getLayoutTemplate("preview").replace(/\{class}/g, e.previewClass).replace(/\{dropClass}/g, i) : "",
+          r = e.isDisabled ? e.captionClass + " file-caption-disabled" : e.captionClass,
+          n = e.captionTemplate.replace(/\{class}/g, r + " kv-fileinput-caption");return e.mainTemplate.replace(/\{class}/g, e.mainClass + (!e.showBrowse && e.showCaption ? " no-browse" : "")).replace(/\{preview}/g, a).replace(/\{close}/g, t).replace(/\{caption}/g, n).replace(/\{upload}/g, e._renderButton("upload")).replace(/\{remove}/g, e._renderButton("remove")).replace(/\{cancel}/g, e._renderButton("cancel")).replace(/\{browse}/g, e._renderButton("browse"));
+    }, _renderButton: function _renderButton(e) {
+      var t = this,
+          a = t._getLayoutTemplate("btnDefault"),
+          r = t[e + "Class"],
+          n = t[e + "Title"],
+          o = t[e + "Icon"],
+          l = t[e + "Label"],
+          s = t.isDisabled ? " disabled" : "",
+          d = "button";switch (e) {case "remove":
+          if (!t.showRemove) return "";break;case "cancel":
+          if (!t.showCancel) return "";r += " hide";break;case "upload":
+          if (!t.showUpload) return "";t.isUploadable && !t.isDisabled ? a = t._getLayoutTemplate("btnLink").replace("{href}", t.uploadUrl) : d = "submit";break;case "browse":
+          if (!t.showBrowse) return "";a = t._getLayoutTemplate("btnBrowse");break;default:
+          return "";}return r += "browse" === e ? " btn-file" : " fileinput-" + e + " fileinput-" + e + "-button", i.isEmpty(l) || (l = ' <span class="' + t.buttonLabelClass + '">' + l + "</span>"), a.replace("{type}", d).replace("{css}", r).replace("{title}", n).replace("{status}", s).replace("{icon}", o).replace("{label}", l);
+    }, _renderThumbProgress: function _renderThumbProgress() {
+      var e = this;return '<div class="file-thumb-progress hide">' + e.progressTemplate.replace(/\{percent}/g, "0").replace(/\{status}/g, e.msgUploadBegin) + "</div>";
+    }, _renderFileFooter: function _renderFileFooter(e, t, a, r) {
+      var n,
+          o = this,
+          l = o.fileActionSettings,
+          s = l.showRemove,
+          d = l.showDrag,
+          c = l.showUpload,
+          p = l.showZoom,
+          u = o._getLayoutTemplate("footer"),
+          f = r ? l.indicatorError : l.indicatorNew,
+          m = r ? l.indicatorErrorTitle : l.indicatorNewTitle;return t = o._getSize(t), n = o.isUploadable ? u.replace(/\{actions}/g, o._renderFileActions(c, s, p, d, !1, !1, !1)).replace(/\{caption}/g, e).replace(/\{size}/g, t).replace(/\{width}/g, a).replace(/\{progress}/g, o._renderThumbProgress()).replace(/\{indicator}/g, f).replace(/\{indicatorTitle}/g, m) : u.replace(/\{actions}/g, o._renderFileActions(!1, !1, p, d, !1, !1, !1)).replace(/\{caption}/g, e).replace(/\{size}/g, t).replace(/\{width}/g, a).replace(/\{progress}/g, "").replace(/\{indicator}/g, f).replace(/\{indicatorTitle}/g, m), n = i.replaceTags(n, o.previewThumbTags);
+    }, _renderFileActions: function _renderFileActions(e, i, t, a, r, n, o, l) {
+      if (!(e || i || t || a)) return "";var s,
+          d = this,
+          c = n === !1 ? "" : ' data-url="' + n + '"',
+          p = o === !1 ? "" : ' data-key="' + o + '"',
+          u = "",
+          f = "",
+          m = "",
+          g = "",
+          v = d._getLayoutTemplate("actions"),
+          h = d.fileActionSettings,
+          w = d.otherActionButtons.replace(/\{dataKey}/g, p),
+          _ = r ? h.removeClass + " disabled" : h.removeClass;return i && (u = d._getLayoutTemplate("actionDelete").replace(/\{removeClass}/g, _).replace(/\{removeIcon}/g, h.removeIcon).replace(/\{removeTitle}/g, h.removeTitle).replace(/\{dataUrl}/g, c).replace(/\{dataKey}/g, p)), e && (f = d._getLayoutTemplate("actionUpload").replace(/\{uploadClass}/g, h.uploadClass).replace(/\{uploadIcon}/g, h.uploadIcon).replace(/\{uploadTitle}/g, h.uploadTitle)), t && (m = d._getLayoutTemplate("actionZoom").replace(/\{zoomClass}/g, h.zoomClass).replace(/\{zoomIcon}/g, h.zoomIcon).replace(/\{zoomTitle}/g, h.zoomTitle)), a && l && (s = "drag-handle-init " + h.dragClass, g = d._getLayoutTemplate("actionDrag").replace(/\{dragClass}/g, s).replace(/\{dragTitle}/g, h.dragTitle).replace(/\{dragIcon}/g, h.dragIcon)), v.replace(/\{delete}/g, u).replace(/\{upload}/g, f).replace(/\{zoom}/g, m).replace(/\{drag}/g, g).replace(/\{other}/g, w);
+    }, _browse: function _browse(e) {
+      var i = this;i._raise("filebrowse"), e && e.isDefaultPrevented() || (i.isError && !i.isUploadable && i.clear(), i.$captionContainer.focus());
+    }, _change: function _change(t) {
+      var a = this,
+          r = a.$element;if (!a.isUploadable && i.isEmpty(r.val()) && a.fileInputCleared) return void (a.fileInputCleared = !1);a.fileInputCleared = !1;var n,
+          o,
+          l,
+          s,
+          d,
+          c,
+          p = arguments.length > 1,
+          u = a.isUploadable,
+          f = 0,
+          m = p ? t.originalEvent.dataTransfer.files : r.get(0).files,
+          g = a.filestack.length,
+          v = i.isEmpty(r.attr("multiple")),
+          h = v && g > 0,
+          w = 0,
+          _ = function _(i, t, r, n) {
+        var o = e.extend(!0, {}, a._getOutData({}, {}, m), { id: r, index: n }),
+            l = { id: r, index: n, file: t, files: m };return a.isUploadable ? a._showUploadError(i, o) : a._showError(i, l);
+      };if (a.reader = null, a._resetUpload(), a._hideFileIcon(), a.isUploadable && a.$container.find(".file-drop-zone ." + a.dropZoneTitleClass).remove(), p) for (n = []; m[f];) {
+        s = m[f], s.type || s.size % 4096 !== 0 ? n.push(s) : w++, f++;
+      } else n = void 0 === t.target.files ? t.target && t.target.value ? [{ name: t.target.value.replace(/^.+\\/, "") }] : [] : t.target.files;if (i.isEmpty(n) || 0 === n.length) return u || a.clear(), a._showFolderError(w), void a._raise("fileselectnone");if (a._resetErrors(), c = n.length, l = a._getFileCount(a.isUploadable ? a.getFileStack().length + c : c), a.maxFileCount > 0 && l > a.maxFileCount) {
+        if (!a.autoReplace || c > a.maxFileCount) return d = a.autoReplace && c > a.maxFileCount ? c : l, o = a.msgFilesTooMany.replace("{m}", a.maxFileCount).replace("{n}", d), a.isError = _(o, null, null, null), a.$captionContainer.find(".kv-caption-icon").hide(), a._setCaption("", !0), void a.$container.removeClass("file-input-new file-input-ajax-new");l > a.maxFileCount && a._resetPreviewThumbs(u);
+      } else !u || h ? (a._resetPreviewThumbs(!1), h && a.clearStack()) : !u || 0 !== g || a.previewCache.count() && !a.overwriteInitial || a._resetPreviewThumbs(!0);a.isPreviewable ? a._readFiles(n) : a._updateFileDetails(1), a._showFolderError(w);
+    }, _abort: function _abort(i) {
+      var t,
+          a = this;return a.ajaxAborted && "object" == _typeof(a.ajaxAborted) && void 0 !== a.ajaxAborted.message ? (t = e.extend(!0, {}, a._getOutData(), i), t.abortData = a.ajaxAborted.data || {}, t.abortMessage = a.ajaxAborted.message, a.cancel(), a._setProgress(101, a.$progress, a.msgCancelled), a._showUploadError(a.ajaxAborted.message, t, "filecustomerror"), !0) : !1;
+    }, _resetFileStack: function _resetFileStack() {
+      var i = this,
+          t = 0,
+          a = [],
+          r = [];i._getThumbs().each(function () {
+        var n = e(this),
+            o = n.attr("data-fileindex"),
+            l = i.filestack[o];-1 !== o && (void 0 !== l ? (a[t] = l, r[t] = i._getFileName(l), n.attr({ id: i.previewInitId + "-" + t, "data-fileindex": t }), t++) : n.attr({ "data-fileindex": "-1" }));
+      }), i.filestack = a, i.filenames = r;
+    }, clearStack: function clearStack() {
+      var e = this;return e.filestack = [], e.filenames = [], e.$element;
+    }, updateStack: function updateStack(e, i) {
+      var t = this;return t.filestack[e] = i, t.filenames[e] = t._getFileName(i), t.$element;
+    }, addToStack: function addToStack(e) {
+      var i = this;return i.filestack.push(e), i.filenames.push(i._getFileName(e)), i.$element;
+    }, getFileStack: function getFileStack(e) {
+      var i = this;return i.filestack.filter(function (i) {
+        return e ? void 0 !== i : void 0 !== i && null !== i;
+      });
+    }, getFilesCount: function getFilesCount() {
+      var e = this,
+          i = e.isUploadable ? e.getFileStack().length : e.$element.get(0).files.length;return e._getFileCount(i);
+    }, lock: function lock() {
+      var e = this;return e._resetErrors(), e.disable(), e.showRemove && i.addCss(e.$container.find(".fileinput-remove"), "hide"), e.showCancel && e.$container.find(".fileinput-cancel").removeClass("hide"), e._raise("filelock", [e.filestack, e._getExtraData()]), e.$element;
+    }, unlock: function unlock(e) {
+      var t = this;return void 0 === e && (e = !0), t.enable(), t.showCancel && i.addCss(t.$container.find(".fileinput-cancel"), "hide"), t.showRemove && t.$container.find(".fileinput-remove").removeClass("hide"), e && t._resetFileStack(), t._raise("fileunlock", [t.filestack, t._getExtraData()]), t.$element;
+    }, cancel: function cancel() {
+      var i,
+          t = this,
+          a = t.ajaxRequests,
+          r = a.length;if (r > 0) for (i = 0; r > i; i += 1) {
+        t.cancelling = !0, a[i].abort();
+      }return t._setProgressCancelled(), t._getThumbs().each(function () {
+        var i = e(this),
+            a = i.attr("data-fileindex");i.removeClass("file-uploading"), void 0 !== t.filestack[a] && (i.find(".kv-file-upload").removeClass("disabled").removeAttr("disabled"), i.find(".kv-file-remove").removeClass("disabled").removeAttr("disabled")), t.unlock();
+      }), t.$element;
+    }, clear: function clear() {
+      var t,
+          a = this;if (a._raise("fileclear")) return a.$btnUpload.removeAttr("disabled"), a._getThumbs().find("video,audio,img").each(function () {
+        i.cleanMemory(e(this));
+      }), a._resetUpload(), a.clearStack(), a._clearFileInput(), a._resetErrors(!0), a._hasInitialPreview() ? (a._showFileIcon(), a._resetPreview(), a._initPreviewActions(), a.$container.removeClass("file-input-new")) : (a._getThumbs().each(function () {
+        a._clearObjects(e(this));
+      }), a.isUploadable && (a.previewCache.data = {}), a.$preview.html(""), t = !a.overwriteInitial && a.initialCaption.length > 0 ? a.initialCaption : "", a.$caption.html(t), a.$caption.attr("title", ""), i.addCss(a.$container, "file-input-new"), a._validateDefaultPreview()), 0 === a.$container.find(i.FRAMES).length && (a._initCaption() || a.$captionContainer.find(".kv-caption-icon").hide()), a._hideFileIcon(), a._raise("filecleared"), a.$captionContainer.focus(), a._setFileDropZoneTitle(), a.$element;
+    }, reset: function reset() {
+      var e = this;if (e._raise("filereset")) return e._resetPreview(), e.$container.find(".fileinput-filename").text(""), i.addCss(e.$container, "file-input-new"), (e.$preview.find(i.FRAMES).length || e.isUploadable && e.dropZoneEnabled) && e.$container.removeClass("file-input-new"), e._setFileDropZoneTitle(), e.clearStack(), e.formdata = {}, e.$element;
+    }, disable: function disable() {
+      var e = this;return e.isDisabled = !0, e._raise("filedisabled"), e.$element.attr("disabled", "disabled"), e.$container.find(".kv-fileinput-caption").addClass("file-caption-disabled"), e.$container.find(".btn-file, .fileinput-remove, .fileinput-upload, .file-preview-frame button").attr("disabled", !0), e._initDragDrop(), e.$element;
+    }, enable: function enable() {
+      var e = this;return e.isDisabled = !1, e._raise("fileenabled"), e.$element.removeAttr("disabled"), e.$container.find(".kv-fileinput-caption").removeClass("file-caption-disabled"), e.$container.find(".btn-file, .fileinput-remove, .fileinput-upload, .file-preview-frame button").removeAttr("disabled"), e._initDragDrop(), e.$element;
+    }, upload: function upload() {
+      var t,
+          a,
+          r,
+          n = this,
+          o = n.getFileStack().length,
+          l = {},
+          s = !e.isEmptyObject(n._getExtraData());if (n.isUploadable && !n.isDisabled) {
+        if (n.minFileCount > 0 && n._getFileCount(o) < n.minFileCount) return void n._noFilesError(l);if (n._resetUpload(), 0 === o && !s) return void n._showUploadError(n.msgUploadEmpty);if (n.$progress.removeClass("hide"), n.uploadCount = 0, n.uploadStatus = {}, n.uploadLog = [], n.lock(), n._setProgress(2), 0 === o && s) return void n._uploadExtraOnly();if (r = n.filestack.length, n.hasInitData = !1, !n.uploadAsync) return n._uploadBatch(), n.$element;for (a = n._getOutData(), n._raise("filebatchpreupload", [a]), n.fileBatchCompleted = !1, n.uploadCache = { content: [], config: [], tags: [], append: !0 }, n.uploadAsyncCount = n.getFileStack().length, t = 0; r > t; t++) {
+          n.uploadCache.content[t] = null, n.uploadCache.config[t] = null, n.uploadCache.tags[t] = null;
+        }for (n.$preview.find(".file-preview-initial").removeClass(i.SORT_CSS), n._initSortable(), n.cacheInitialPreview = n.getPreview(), t = 0; r > t; t++) {
+          void 0 !== n.filestack[t] && n._uploadSingle(t, n.filestack, !0);
+        }
+      }
+    }, destroy: function destroy() {
+      var i = this,
+          t = i.$form,
+          a = i.$container,
+          r = i.$element,
+          n = i.namespace;return e(document).off(n), e(window).off(n), t && t.length && t.off(n), r.insertBefore(a).off(n).removeData(), a.off().remove(), r;
+    }, refresh: function refresh(i) {
+      var t = this,
+          a = t.$element;return i = i ? e.extend(!0, {}, t.options, i) : t.options, t.destroy(), a.fileinput(i), a.val() && a.trigger("change.fileinput"), a;
+    }, zoom: function zoom(t) {
+      var a = this,
+          r = e("#" + t),
+          n = a.$modal;return r.length ? (i.initModal(n), n.html(a._getModalContent()), a._setZoomContent(r), n.modal("show"), void a._initZoomButtons()) : void a._log('Cannot zoom to detailed preview! Invalid frame with id: "' + t + '".');
+    }, getPreview: function getPreview() {
+      var e = this;return { content: e.initialPreview, config: e.initialPreviewConfig, tags: e.initialPreviewThumbTags };
+    } }, e.fn.fileinput = function (a) {
+    if (i.hasFileAPISupport() || i.isIE(9)) {
+      var r = Array.apply(null, arguments),
+          n = [];switch (r.shift(), this.each(function () {
+        var o,
+            l = e(this),
+            s = l.data("fileinput"),
+            d = "object" == (typeof a === "undefined" ? "undefined" : _typeof(a)) && a,
+            c = d.theme || l.data("theme"),
+            p = {},
+            u = {},
+            f = d.language || l.data("language") || e.fn.fileinput.defaults.language || "en";s || (c && (u = e.fn.fileinputThemes[c] || {}), "en" === f || i.isEmpty(e.fn.fileinputLocales[f]) || (p = e.fn.fileinputLocales[f] || {}), o = e.extend(!0, {}, e.fn.fileinput.defaults, u, e.fn.fileinputLocales.en, p, d, l.data()), s = new t(this, o), l.data("fileinput", s)), "string" == typeof a && n.push(s[a].apply(s, r));
+      }), n.length) {case 0:
+          return this;case 1:
+          return n[0];default:
+          return n;}
+    }
+  }, e.fn.fileinput.defaults = { language: "en", showCaption: !0, showBrowse: !0, showPreview: !0, showRemove: !0, showUpload: !0, showCancel: !0, showClose: !0, showUploadedThumbs: !0, browseOnZoneClick: !1, autoReplace: !1, previewClass: "", captionClass: "", frameClass: "krajee-default", mainClass: "file-caption-main", mainTemplate: null, purifyHtml: !0, fileSizeGetter: null, initialCaption: "", initialPreview: [], initialPreviewDelimiter: "*$$*", initialPreviewAsData: !1, initialPreviewFileType: "image", initialPreviewConfig: [], initialPreviewThumbTags: [], previewThumbTags: {}, initialPreviewShowDelete: !0, removeFromPreviewOnError: !1, deleteUrl: "", deleteExtraData: {}, overwriteInitial: !0, previewZoomButtonIcons: { prev: '<i class="glyphicon glyphicon-triangle-left"></i>', next: '<i class="glyphicon glyphicon-triangle-right"></i>', toggleheader: '<i class="glyphicon glyphicon-resize-vertical"></i>', fullscreen: '<i class="glyphicon glyphicon-fullscreen"></i>', borderless: '<i class="glyphicon glyphicon-resize-full"></i>', close: '<i class="glyphicon glyphicon-remove"></i>' }, previewZoomButtonClasses: { prev: "btn btn-navigate", next: "btn btn-navigate", toggleheader: "btn btn-default btn-header-toggle", fullscreen: "btn btn-default", borderless: "btn btn-default", close: "btn btn-default" }, preferIconicPreview: !1, preferIconicZoomPreview: !1, allowedPreviewTypes: void 0, allowedPreviewMimeTypes: null, allowedFileTypes: null, allowedFileExtensions: null, defaultPreviewContent: null, customLayoutTags: {}, customPreviewTags: {}, previewFileIcon: '<i class="glyphicon glyphicon-file"></i>', previewFileIconClass: "file-other-icon", previewFileIconSettings: {}, previewFileExtSettings: {}, buttonLabelClass: "hidden-xs", browseIcon: '<i class="glyphicon glyphicon-folder-open"></i>&nbsp;', browseClass: "btn btn-primary", removeIcon: '<i class="glyphicon glyphicon-trash"></i>', removeClass: "btn btn-default", cancelIcon: '<i class="glyphicon glyphicon-ban-circle"></i>', cancelClass: "btn btn-default", uploadIcon: '<i class="glyphicon glyphicon-upload"></i>', uploadClass: "btn btn-default", uploadUrl: null, uploadAsync: !0, uploadExtraData: {}, zoomModalHeight: 480, minImageWidth: null, minImageHeight: null, maxImageWidth: null, maxImageHeight: null, resizeImage: !1, resizePreference: "width", resizeQuality: .92, resizeDefaultImageType: "image/jpeg", minFileSize: 0, maxFileSize: 0, maxFilePreviewSize: 25600, minFileCount: 0, maxFileCount: 0, validateInitialCount: !1, msgValidationErrorClass: "text-danger", msgValidationErrorIcon: '<i class="glyphicon glyphicon-exclamation-sign"></i> ', msgErrorClass: "file-error-message", progressThumbClass: "progress-bar progress-bar-success progress-bar-striped active", progressClass: "progress-bar progress-bar-success progress-bar-striped active", progressCompleteClass: "progress-bar progress-bar-success", progressErrorClass: "progress-bar progress-bar-danger", progressUploadThreshold: 99, previewFileType: "image", elCaptionContainer: null, elCaptionText: null, elPreviewContainer: null, elPreviewImage: null, elPreviewStatus: null, elErrorContainer: null, errorCloseButton: '<span class="close kv-error-close">&times;</span>', slugCallback: null, dropZoneEnabled: !0, dropZoneTitleClass: "file-drop-zone-title", fileActionSettings: {}, otherActionButtons: "", textEncoding: "UTF-8", ajaxSettings: {}, ajaxDeleteSettings: {}, showAjaxErrorDetails: !0 }, e.fn.fileinputLocales.en = { fileSingle: "file", filePlural: "files", browseLabel: "Browse &hellip;", removeLabel: "Remove", removeTitle: "Clear selected files", cancelLabel: "Cancel", cancelTitle: "Abort ongoing upload", uploadLabel: "Upload", uploadTitle: "Upload selected files", msgNo: "No", msgNoFilesSelected: "No files selected", msgCancelled: "Cancelled", msgZoomModalHeading: "Detailed Preview", msgSizeTooSmall: 'File "{name}" (<b>{size} KB</b>) is too small and must be larger than <b>{minSize} KB</b>.', msgSizeTooLarge: 'File "{name}" (<b>{size} KB</b>) exceeds maximum allowed upload size of <b>{maxSize} KB</b>.', msgFilesTooLess: "You must select at least <b>{n}</b> {files} to upload.", msgFilesTooMany: "Number of files selected for upload <b>({n})</b> exceeds maximum allowed limit of <b>{m}</b>.", msgFileNotFound: 'File "{name}" not found!', msgFileSecured: 'Security restrictions prevent reading the file "{name}".', msgFileNotReadable: 'File "{name}" is not readable.', msgFilePreviewAborted: 'File preview aborted for "{name}".', msgFilePreviewError: 'An error occurred while reading the file "{name}".', msgInvalidFileName: 'Invalid or unsupported characters in file name "{name}".', msgInvalidFileType: 'Invalid type for file "{name}". Only "{types}" files are supported.', msgInvalidFileExtension: 'Invalid extension for file "{name}". Only "{extensions}" files are supported.', msgFileTypes: { image: "image", html: "HTML", text: "text", video: "video", audio: "audio", flash: "flash", pdf: "PDF", object: "object" }, msgUploadAborted: "The file upload was aborted", msgUploadThreshold: "Processing...", msgUploadBegin: "Initializing...", msgUploadEnd: "Done", msgUploadEmpty: "No valid data available for upload.", msgValidationError: "Validation Error", msgLoading: "Loading file {index} of {files} &hellip;", msgProgress: "Loading file {index} of {files} - {name} - {percent}% completed.", msgSelected: "{n} {files} selected", msgFoldersNotAllowed: "Drag & drop files only! {n} folder(s) dropped were skipped.", msgImageWidthSmall: 'Width of image file "{name}" must be at least {size} px.', msgImageHeightSmall: 'Height of image file "{name}" must be at least {size} px.', msgImageWidthLarge: 'Width of image file "{name}" cannot exceed {size} px.', msgImageHeightLarge: 'Height of image file "{name}" cannot exceed {size} px.', msgImageResizeError: "Could not get the image dimensions to resize.", msgImageResizeException: "Error while resizing the image.<pre>{errors}</pre>", msgAjaxError: "Something went wrong with the {operation} operation. Please try again later!", msgAjaxProgressError: "{operation} failed", ajaxOperations: { deleteThumb: "file delete", uploadThumb: "file upload", uploadBatch: "batch file upload", uploadExtra: "form data upload" }, dropZoneTitle: "Drag & drop files here &hellip;", dropZoneClickTitle: "<br>(or click to select {files})", previewZoomButtonTitles: { prev: "View previous file", next: "View next file", toggleheader: "Toggle header", fullscreen: "Toggle full screen", borderless: "Toggle borderless mode", close: "Close detailed preview" } }, e.fn.fileinput.Constructor = t, e(document).ready(function () {
+    var i = e("input.file[type=file]");i.length && i.fileinput();
+  });
+});
+
+/***/ }),
+
+/***/ "./resources/assets/sass/app.scss":
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
+/***/ }),
+
+/***/ 0:
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__("./resources/assets/js/app.js");
+module.exports = __webpack_require__("./resources/assets/sass/app.scss");
+
+
 /***/ })
-/******/ ]);
+
+/******/ });
