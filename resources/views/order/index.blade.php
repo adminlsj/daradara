@@ -19,8 +19,8 @@
 							<div><span style="font-weight: 400; font-size: 13px;">${{ $order->price }} + $0 服務費</span></div>
 						</div>
 						<div class="col-md-2">
-							<div><a href="/orders/{{ $order->id }}/cancel" style="border-radius: 2px 2px 0 0 !important; padding: 15px 25px 15px 25px" class="btn btn-info">取消訂單</a></div>
-							<div><a href="/contact" style="border-radius: 0 0 2px 2px !important; padding: 15px 25px 15px 25px" class="btn btn-primary">聯絡我們</a></div>
+							<div><a href="/orders/{{ $order->id }}/cancel" style="border-radius: 2px 2px 0 0 !important; padding: 15px 25px 15px 25px;" class="btn btn-info">取消訂單</a></div>
+							<div><a href="/contact" style="border-radius: 0 0 2px 2px !important; padding: 15px 25px 15px 25px;" class="btn btn-primary">聯絡我們</a></div>
 						</div>
 					</div>
 					<hr>
