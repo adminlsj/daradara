@@ -57,7 +57,7 @@
 						{{ csrf_field() }}
 						<input name="order_id" type="hidden" value="{{ $order->id }}">
 						@if (!$order->is_payed || $order->trans || $order->end_date < Carbon\Carbon::today())
-							<button type="button" style="border-radius: 0; font-size:15px" class="btn btn-primary btn-outline btn-lg btn-block" disabled='true'>接單</button>
+							<button type="button" style="border-radius: 0; font-size:15px" class="btn btn-primary btn-outline btn-lg btn-block" disabled='true'>已被接單</button>
 						@else
 				            <!-- Trigger the modal with a button -->
 				            <div class="order-show"><button type="button" style="border-radius: 2px; font-size:15px" class="btn btn-primary btn-outline btn-lg btn-block" data-toggle="modal" data-target="#acceptModal">接單</button></div>
