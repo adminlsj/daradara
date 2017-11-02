@@ -22,7 +22,11 @@ class BlogController extends Controller
         $blogs = Blog::all()->sortByDesc('created_at');
         $caro_blogs = Blog::inRandomOrder()->limit(5)->get();
 
-        return view('blog.index', compact('blogs', 'caro_blogs'));
+        $orders = Order::where('is_payed', true);
+        $relatedOrders = Order::where('price', '<=', 50)->inRandomOrder()->limit(20)->get();
+        $relatedBlogs = Blog::inRandomOrder()->limit(5)->get();
+
+        return view('blog.index', compact('blogs', 'caro_blogs', 'relatedOrders', 'relatedBlogs'));
     }
 
     /**
