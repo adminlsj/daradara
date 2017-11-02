@@ -131,6 +131,13 @@
 			        </div>
 			    </div>
 			@endforeach
+			<div class="row" style="margin-top: 25px">
+				<div class="col-md-6 col-md-offset-3">
+				    <form action="{{ route('blog.index') }}" method="GET">
+				        <button type="submit" class="btn btn-info btn-outline btn-lg btn-block" style="border-radius: 0; font-size: 15px;">查看所有貼文</button>
+				    </form>
+				</div>
+			</div>
 		</div>
 	</div>
 	<br><br><br><br><br>
