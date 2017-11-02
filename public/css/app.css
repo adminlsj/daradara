@@ -9001,8 +9001,8 @@ input[type=file] {
   font-weight: 300;
   -webkit-transition: 0.3s;
   transition: 0.3s;
-  border-width: 0 !important;
   width: 100%;
+  border-color: #428bca !important;
 }
 
 .btn-info:hover,
@@ -9016,6 +9016,44 @@ input[type=file] {
           box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
   -webkit-transition: 0.3s;
   transition: 0.3s;
+}
+
+.order-show .btn-info {
+  background-color: white !important;
+  color: #d84b6b;
+}
+
+.order-show .btn-info:hover,
+.order-show .btn-info:focus,
+.order-show .btn-info:active,
+.order-show .btn-info.active,
+.order-show .open > .dropdown-toggle.btn-info {
+  background-color: #db5d79 !important;
+  border-color: #db5d79 !important;
+  -webkit-box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
+          box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
+  color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.order-show .btn-primary {
+  background-color: white !important;
+  color: #428bca;
+}
+
+.order-show .btn-primary:hover,
+.order-show .btn-primary:focus,
+.order-show .btn-primary:active,
+.order-show .btn-primary.active,
+.order-show .open > .dropdown-toggle.btn-primary {
+  background-color: #428bca !important;
+  border-color: #428bca !important;
+  -webkit-box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
+          box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
+  color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
 }
 
 .carousel-control.left,
@@ -9054,6 +9092,16 @@ input[type=file] {
 
 .owl-carousel .owl-next {
   right: 0px;
+}
+
+.blog-carousel .owl-controls .owl-buttons .owl-prev {
+  left: -2%;
+  top: 170px;
+}
+
+.blog-carousel .owl-controls .owl-buttons .owl-next {
+  right: -1.5%;
+  top: 170px;
 }
 
 .card-order {
@@ -9160,5 +9208,22 @@ a > i {
   font-weight: bold;
   right: 0px;
   bottom: 37px;
+}
+
+.border-radius-2 {
+  border-radius: 2px !important;
+}
+
+.blog-content {
+  font-size: 15px;
+  line-height: 30px;
+  letter-spacing: .7px;
+}
+
+.blog-content h4 {
+  font-size: 30px;
+  font-weight: 300;
+  line-height: 40px;
+  letter-spacing: .8px;
 }
 

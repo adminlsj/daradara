@@ -32,8 +32,9 @@ Route::group(['prefix' => '/orders/{order}/'], function () {
     Route::get('cancel', 'OrderController@cancel');
 });
 
-
 Route::resource('tran', 'TranController');
+
+Route::resource('blog', 'BlogController');
 
 Route::group(['prefix' => '{folder}/{filename}/'], function () {
 	Route::get('getImg', function ($folder, $filename)

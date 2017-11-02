@@ -33,12 +33,12 @@
 				<div class="col-md-2">
 					<a href="{{ route('user.show', ['user' => $order->user]) }}"><img src="https://s3-us-west-2.amazonaws.com/freerider/avatars/thumbnails/{{ $order->user->avatar->filename }}.jpg" class="img-responsive img-circle"></a>
 				</div>
-				<div class="col-md-6">
+				<div class="col-md-7">
 					<div><h3 style="color: black; font-weight: 400; margin-top: 15px">${{ $order->price }} + $0 服務費</h3></div>
 					<div>產地：{{ App\Order::$country[$order->country] }}</div>
 					<div>收貨日期：{{ $order->end_date }} 前</div>
 				</div>
-				<div class="col-md-4">
+				<div class="col-md-3">
 					<form style="margin-top: 5%" action="{{ route('order.store') }}" method="POST" enctype="multipart/form-data">
 						{{ csrf_field() }}
 						<input type="hidden" name="name" id="name" value="{{ $order->name }}">
@@ -50,17 +50,17 @@
 						<input type="hidden" name="endDate" id="endDate" value="{{ Carbon\Carbon::today()->addDays(10)->format('Y-m-d') }}">
 						<input type="hidden" name="copyOrderId" id="copyOrderId" value="{{ $order->id }}">
 
-						<button type="submit" style="border-radius: 2px 2px 0 0 !important; font-size:15px" class="btn btn-info btn-lg btn-block">我也想要</button>
+						<div class="order-show"><button type="submit" style="border-radius: 2px !important; font-size: 15px;" class="btn btn-info btn-lg btn-block">我也想要</button></div>
 					</form>
 
-					<form action="{{ route('tran.store') }}" method="POST" enctype="multipart/form-data">
+					<form action="{{ route('tran.store') }}" method="POST" enctype="multipart/form-data" style="margin-top: 7px">
 						{{ csrf_field() }}
 						<input name="order_id" type="hidden" value="{{ $order->id }}">
 						@if (!$order->is_payed || $order->trans || $order->end_date < Carbon\Carbon::today())
 							<button type="button" style="border-radius: 0; font-size:15px" class="btn btn-primary btn-outline btn-lg btn-block" disabled='true'>接單</button>
 						@else
 				            <!-- Trigger the modal with a button -->
-				            <button type="button" style="border-radius: 0 0 2px 2px; font-size:15px" class="btn btn-primary btn-outline btn-lg btn-block" data-toggle="modal" data-target="#acceptModal">接單</button>
+				            <div class="order-show"><button type="button" style="border-radius: 2px; font-size:15px" class="btn btn-primary btn-outline btn-lg btn-block" data-toggle="modal" data-target="#acceptModal">接單</button></div>
 							<!-- Modal -->
 							<div id="acceptModal" class="modal fade" role="dialog">
 								<div class="modal-dialog">
@@ -77,7 +77,7 @@
 										</div>
 										<div class="modal-footer">
 											<button type="button" style="border-radius: 2px;" class="btn btn-default" data-dismiss="modal">返回</button>
-											<button type="submit" style="border-radius: 2px !important" class="btn btn-info">確認接單</button>
+											<button type="submit" style="border-radius: 2px !important; width: auto;" class="btn btn-info">確認接單</button>
 										</div>
 									</div>
 								</div>

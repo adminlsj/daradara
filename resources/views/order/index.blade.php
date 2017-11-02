@@ -18,9 +18,9 @@
 							<div style="margin-bottom: 3px; font-size: 13px;">收貨日期：{{ $order->end_date }} 前</div>
 							<div><span style="font-weight: 400; font-size: 13px;">${{ $order->price }} + $0 服務費</span></div>
 						</div>
-						<div class="col-md-2">
-							<div><a href="/orders/{{ $order->id }}/cancel" style="border-radius: 2px 2px 0 0 !important; padding: 15px 25px 15px 25px;" class="btn btn-info">取消訂單</a></div>
-							<div><a href="/contact" style="border-radius: 0 0 2px 2px !important; padding: 15px 25px 15px 25px;" class="btn btn-primary">聯絡我們</a></div>
+						<div class="col-md-2 order-show">
+							<div><a href="/orders/{{ $order->id }}/cancel" style="border-radius: 2px !important; padding: 10px 20px 10px 20px;" class="btn btn-info">取消訂單</a></div>
+							<div><a href="/contact" style="border-radius: 2px !important; padding: 10px 20px 10px 20px; margin-top: 7px" class="btn btn-primary">聯絡我們</a></div>
 						</div>
 					</div>
 					<hr>
@@ -43,7 +43,9 @@
 						</div>
 						<div class="col-md-2">
 							<!-- Trigger the modal with a button -->
-							<button type="button" style="border-radius: 2px 2px 0px 0px !important; padding: 15px 25px 15px 25px" class="btn btn-info" data-toggle="modal" data-target="#myModal">馬上交收</button>
+							<div class="order-show">
+								<button type="button" style="border-radius: 2px !important; padding: 10px 20px 10px 20px;" class="btn btn-info" data-toggle="modal" data-target="#myModal">馬上交收</button>
+							</div>
 
 							<!-- Modal -->
 							<form action="/sendMail/meetup" method="POST">
@@ -85,7 +87,9 @@
 									</div>
 								</div>
 							</form>
-							<a href="/contact" style="border-radius: 0 0 2px 2px !important; padding: 15px 25px 15px 25px" class="btn btn-primary">聯絡我們</a>
+							<div class="order-show" style="margin-top: 7px">
+								<a href="/contact" style="border-radius: 2px !important; padding: 10px 20px 10px 20px;" class="btn btn-primary">聯絡我們</a>
+							</div>
 						</div>
 					</div>
 					<hr>
@@ -107,7 +111,7 @@
 							<div><span style="font-weight: 400; font-size: 13px;">${{ $order->price }} + $0 服務費</span></div>
 						</div>
 						<div class="col-md-2">
-							<form action="{{ route('order.store') }}" method="POST" enctype="multipart/form-data">
+							<form class="order-show" action="{{ route('order.store') }}" method="POST" enctype="multipart/form-data">
 								{{ csrf_field() }}
 								<input type="hidden" name="name" id="name" value="{{ $order->name }}">
 								<input type="hidden" name="price" id="price" value="{{ $order->price }}">
@@ -118,9 +122,9 @@
 								<input type="hidden" name="endDate" id="endDate" value="{{ $order->end_date }}">
 								<input type="hidden" name="copyOrderId" id="copyOrderId" value="{{ $order->id }}">
 
-								<button type="submit" style="border-radius: 2px 2px 0 0 !important; padding: 15px 25px 15px 25px" class="btn btn-info">重新下單</button>
+								<button type="submit" style="border-radius: 2px !important; padding: 10px 20px 10px 20px" class="btn btn-info">重新下單</button>
 							</form>
-							<div><a href="/contact" style="border-radius: 0 0 2px 2px !important; padding: 15px 25px 15px 25px" class="btn btn-primary">聯絡我們</a></div>
+							<div class="order-show" style="margin-top: 7px"><a href="/contact" style="border-radius: 2px !important; padding: 10px 20px 10px 20px" class="btn btn-primary">聯絡我們</a></div>
 						</div>
 					</div>
 					<hr>

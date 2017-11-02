@@ -1,5 +1,5 @@
 @if(Auth::check())
-	<form id="storeComment" action="{{route('order.comment.store', ['order' => $order->id])}}" method="POST">
+	<form id="storeComment" class="order-form" action="{{route('order.comment.store', ['order' => $order->id])}}" method="POST">
 		{{ csrf_field() }}
 		<div class="row bottom-btn-row">
 			<div class="col-md-1">
@@ -7,11 +7,11 @@
 			</div>
 			<div class="form-group col-md-9">
 				<div class="row">
-				    <textarea class="form-control" id="commentBox" name='text' style="line-height: 25px" rows="2" placeholder="Add a comment"></textarea>
+				    <input style="margin-top: 4px; padding: 3px" type="text" value="" id="commentBox" name="text" placeholder="留下您的足跡..." required>
 				</div>
 			</div>
 			<div class="form-group col-md-2 bottom-align-text">
-				<button id="commentBtn" type="submit" class="btn btn-info btn-outline btn-block">評論</button>
+				<button id="commentBtn" type="submit" class="btn btn-info btn-block" style="border-radius: 2px !important">評論</button>
 			</div>
 		</div>
 	</form>
