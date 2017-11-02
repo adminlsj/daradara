@@ -9,7 +9,7 @@
         </div>
         <div class="col-md-7">
             <div><a href="{{ route('blog.show', ['blog' => $blog->id]) }}"><h3 style="color: black; font-weight: 400; font-size: 15px">{{ str_limit($blog->title, 50) }}</h3></a></div>
-            <div style="font-size: 12.5px">{{ $blog->created_at }} 前</div>
+            <div style="font-size: 12.5px">{{ Carbon\Carbon::parse($blog->created_at)->format('Y年m月d日') }}</div>
         </div>
     </div>
 @endforeach
