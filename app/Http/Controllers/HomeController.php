@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Order;
+use App\Blog;
 use App\Mail\Contact;
 use App\Mail\Meetup;
 use Illuminate\Http\Request;
@@ -24,9 +25,13 @@ class HomeController extends Controller
         $watches = Order::where(['is_payed' => 1, 'category' => 'watch'])->get();
         $others = Order::where(['is_payed' => 1, 'category' => 'others'])->get();
 
+        $blogs = Blog::all()->sortByDesc('created_at');
+        $caro_blogs = Blog::inRandomOrder()->limit(4)->get();
+        $relatedBlogs = Blog::inRandomOrder()->limit(3)->get();
+
         $loopOrders = ['makeup' => $makeups, 'food' => $foods, 'bag' => $bags, 'accessories' => $accessories, 'watch' => $watches, 'others' => $others];
 
-        return view('layouts.home', compact('orders', 'loopOrders'));
+        return view('layouts.home', compact('orders', 'loopOrders', 'caro_blogs', 'relatedBlogs'));
     }
 
     public function contact()

@@ -26,7 +26,7 @@
 
 			@foreach (App\Order::$category as $key => $element)
 				<div id="{{ $key }}" class="tabcontent" style="padding-top: 10px; border-width: 0px">
-					<div class="owl-carousel owl-theme">
+					<div class="order-carousel owl-carousel owl-theme">
 						@foreach ($loopOrders[$key] as $order)
 				            @include('order.single-order', ['radius' => 'border-bottom-left-radius: 2px; border-bottom-right-radius: 2px;'])
 				        @endforeach
@@ -103,7 +103,37 @@
 		    </form>
 		</div>
 	</div>
-	<br><br><br>
+
+	<div class="row" style="margin-top: 100px">
+		<div class="col-md-8 col-ms-12">
+			<div class="blog-carousel owl-carousel owl-theme">
+				@foreach ($caro_blogs as $blog)
+					<a href="{{ route('blog.show', ['blog' => $blog->id]) }}">
+						<img class="img-responsive border-radius-2" src="https://s3-us-west-2.amazonaws.com/freerider/blogImgs/originals/{{ $blog->id }}/{{ $blog->blogImgs->first()->filename }}" alt="First slide">
+						<div class="center-align white-text" style="position:absolute;bottom:0;left:0;right:0;font-size:17px;color:white;background-color: rgba(0, 0, 0, 0.5);height:70px;padding-left:15px;padding-right:15px; border-radius: 0 0 2px 2px;">
+							<span style="line-height: 70px; font-weight: 300; letter-spacing: 1px">{{ $blog->title }}</span>
+						</div>
+					</a>
+				@endforeach
+			</div>
+		</div>
+		<div class="col-md-4" style="padding-left: 25px">
+			@foreach($relatedBlogs as $blog)
+			    <div class="row" style="margin-bottom: 15px;">
+			        <div class="col-md-5">
+			            <a href="{{ route('blog.show', ['blog' => $blog->id]) }}">
+			                <img src="https://s3-us-west-2.amazonaws.com/freerider/blogImgs/squares/{{ $blog->id }}/{{ $blog->blogImgs->first()->filename }}" class="img-responsive img-circle">
+			            </a>
+			        </div>
+			        <div class="col-md-7">
+			            <div><a href="{{ route('blog.show', ['blog' => $blog->id]) }}"><h3 style="color: black; font-weight: 400; font-size: 15px">{{ str_limit($blog->title, 50) }}</h3></a></div>
+			            <div style="font-size: 12.5px">{{ Carbon\Carbon::parse($blog->created_at)->format('Y年m月d日') }}</div>
+			        </div>
+			    </div>
+			@endforeach
+		</div>
+	</div>
+	<br><br><br><br><br>
 </div>
 
 <script>
@@ -125,7 +155,7 @@
 	document.getElementById("defaultOpen").click();
 
 	$(document).ready(function(){
-		$('.owl-carousel').owlCarousel({
+		$('.order-carousel').owlCarousel({
 			items: 4,
 			loop: true,
 			margin: 5,
@@ -134,6 +164,18 @@
 			lazyLoad: true,
 			autoplay: false,
 			navText : ['<i class="material-icons" style="font-size:36px; margin-left:-91px; color:#666666">keyboard_arrow_left</i>','<i class="material-icons" style="font-size:36px; margin-right:-90px; color:#666666">keyboard_arrow_right</i>']
+		});
+	});
+
+	$(document).ready(function(){
+		$('.blog-carousel').owlCarousel({
+			items: 1,
+			loop: true,
+			margin: 5,
+			nav: false,
+			dots: true,
+			lazyLoad: true,
+			autoplay: true,
 		});
 	});
 </script>
