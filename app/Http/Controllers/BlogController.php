@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Blog;
 use App\BlogImg;
+use App\Order;
 use Illuminate\Http\Request;
 use Storage;
 use File;
@@ -55,14 +56,7 @@ class BlogController extends Controller
 
         if (request('blogImgs')) {
             foreach (request('blogImgs') as $image) {
-
-                $image_thumb = Image::make($image);
-                $image_thumb = $image_thumb->crop(600, 330)->resize(600, 330);
-                $image_thumb = $image_thumb->stream();
-
                 Storage::disk('s3')->put('blogImgs/originals/'.$blog->id.'/'.$image->getClientOriginalName(), File::get($image));
-                Storage::disk('s3')->put('blogImgs/thumbnails/'.$blog->id.'/'.$image->getClientOriginalName(), $image_thumb->__toString());
-
                 BlogImg::create([
                     'blog_id' => $blog->id,
                     'filename' => $image->getClientOriginalName(),
@@ -70,6 +64,17 @@ class BlogController extends Controller
                     'original_filename' => $image->getClientOriginalName(),
                 ]);
             }
+
+            $image_thumb = Image::make(request('blogImgs')[0]);
+            $image_thumb = $image_thumb->resize(600, 330);
+            $image_thumb = $image_thumb->stream();
+            Storage::disk('s3')->put('blogImgs/thumbnails/'.$blog->id.'/'.request('blogImgs')[0]->getClientOriginalName(), $image_thumb->__toString());
+
+            $image_square = Image::make(request('blogImgs')[0]);
+            $image_square = $image_square->resize(400, 400);
+            $image_square = $image_square->stream();
+            Storage::disk('s3')->put('blogImgs/squares/'.$blog->id.'/'.request('blogImgs')[0]->getClientOriginalName(), $image_square->__toString());
+
         }
 
         return redirect()->action('BlogController@show', ['blog' => $blog]);
@@ -98,7 +103,11 @@ class BlogController extends Controller
 
         $similar_blogs = Blog::inRandomOrder()->limit(10)->get();
 
-        return view('blog.show', compact('blog', 'content', 'similar_blogs'));
+        $orders = Order::where('is_payed', true);
+        $relatedOrders = Order::where('price', '<=', 50)->inRandomOrder()->limit(5)->get();
+        $relatedBlogs = Blog::inRandomOrder()->limit(5)->get();
+
+        return view('blog.show', compact('blog', 'content', 'similar_blogs', 'relatedOrders', 'relatedBlogs'));
     }
 
     /**

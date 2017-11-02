@@ -46,7 +46,9 @@
 			@endforeach
 		</div>
 			
-		<div class="hide-on-small-only">@include('blog.sidebar')</div>
+		<div class="col-md-4" style="padding-left: 25px">
+			@include('blog.sidebar')
+		</div>
 	</div>
 </div>
 @endsection
