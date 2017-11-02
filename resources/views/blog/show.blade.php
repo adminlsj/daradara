@@ -10,7 +10,7 @@
 				<h4 style="padding-top: 10px">
 					{{ $blog->title }}
 					<span class="pull-right" style="font-size:15px;font-weight:300">
-						<div style="margin-bottom:-25px">{{ Carbon\Carbon::parse($blog->created_at)->format('Y年m月d日')}}</div>
+						<div style="margin-bottom:-25px">{{ Carbon\Carbon::parse($blog->created_at)->format('Y年m月d日') }}</div>
 						<div style="display: inline !important; margin:2px">
 							<div class="fb-like" data-href="https://www.facebook.com/freeriderhk/" data-layout="button" data-action="like" data-show-faces="false" data-share="false"></div>
 

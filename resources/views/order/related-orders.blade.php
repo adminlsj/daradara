@@ -2,7 +2,7 @@
     <div class="row" style="margin-bottom: 15px;">
         <div class="col-md-5">
             <a href="{{ route('order.show', ['order' => $order->id]) }}">
-                    <img src="https://s3-us-west-2.amazonaws.com/freerider/orderImgs/thumbnails/{{ $order->id }}/{{ $order->orderImgs->first()->filename }}.jpg" class="img-responsive img-circle">
+                    <img style="border: solid 1px #f2f2f2" src="https://s3-us-west-2.amazonaws.com/freerider/orderImgs/thumbnails/{{ $order->id }}/{{ $order->orderImgs->first()->filename }}.jpg" class="img-responsive img-circle">
             </a>
         </div>
         <div class="col-md-7">

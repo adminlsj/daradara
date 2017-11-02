@@ -104,7 +104,7 @@ class BlogController extends Controller
         $similar_blogs = Blog::inRandomOrder()->limit(10)->get();
 
         $orders = Order::where('is_payed', true);
-        $relatedOrders = Order::where('price', '<=', 50)->inRandomOrder()->limit(5)->get();
+        $relatedOrders = Order::where('price', '<=', 50)->inRandomOrder()->limit(20)->get();
         $relatedBlogs = Blog::inRandomOrder()->limit(5)->get();
 
         return view('blog.show', compact('blog', 'content', 'similar_blogs', 'relatedOrders', 'relatedBlogs'));
