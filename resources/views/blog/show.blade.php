@@ -1,6 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
+<head>
+<meta property="og:title" content="{{ $blog->title }}" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="{{ route('blog.show', ['blog' => $blog->id]) }}" />
+<meta property="og:image" content="https://s3-us-west-2.amazonaws.com/freerider/blogImgs/originals/{{ $blog->id }}/{{ $blog->blogImgs->first()->filename }}" />
+</head>
 <div class="container" style="width:90%;">
 	<div class="row">
 		<div class="col-md-8 col-ms-12 blog-content">
