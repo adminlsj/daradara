@@ -10,19 +10,16 @@
 
       gtag('config', 'UA-78314014-1');
     </script>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Social Warfare v2.2.10 https://warfareplugins.com -->
+    <meta property="og:url" content="{{ route('blog.show', ['blog' => $blog->id]) }}" />
 	<meta property="og:type" content="article" />
 	<meta property="og:title" content="{{ $blog->title }}" />
 	<meta property="og:description" content="{{ str_limit($blog->content, 30) }}" />
 	<meta property="og:image" content="https://s3-us-west-2.amazonaws.com/freerider/blogImgs/originals/{{ $blog->id }}/{{ $blog->blogImgs->first()->filename }}" />
-	<meta property="og:image:width" content="1200" />
-	<meta property="og:image:height" content="630" />
-	<meta property="og:url" content="{{ route('blog.show', ['blog' => $blog->id]) }}" />
-	<meta property="og:site_name" content="FreeRiderhk" />
+	
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">	
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
