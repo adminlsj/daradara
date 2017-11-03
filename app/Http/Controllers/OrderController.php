@@ -49,7 +49,7 @@ class OrderController extends Controller
             }
         }
 
-        $relatedOrders = Order::where('is_payed', true)->inRandomOrder()->limit(10)->get();
+        $relatedOrders = Order::where('is_payed', true)->inRandomOrder()->limit(15)->get();
         
         return view('order.index', compact('pre', 'current', 'past', 'relatedOrders'));
     }
@@ -137,7 +137,7 @@ class OrderController extends Controller
     public function show(Order $order)
     {
         $comments = $order->comments()->orderBy('created_at', 'desc')->get();
-        $relatedOrders = Order::where('category', '=', $order->category)->orWhere('country', '=', $order->country)->inRandomOrder()->limit(10)->get();
+        $relatedOrders = Order::where('category', '=', $order->category)->orWhere('country', '=', $order->country)->inRandomOrder()->limit(20)->get();
         return view('order.show', compact('order', 'comments', 'relatedOrders'));
     }
 
@@ -149,7 +149,7 @@ class OrderController extends Controller
      */
     public function edit(Order $order)
     {
-        $relatedOrders = Order::where('is_payed', true)->inRandomOrder()->limit(10)->get();
+        $relatedOrders = Order::where('is_payed', true)->inRandomOrder()->limit(15)->get();
         return view('order.edit', compact('order', 'relatedOrders'));
     }
 
