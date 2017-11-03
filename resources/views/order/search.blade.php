@@ -22,9 +22,8 @@
         	            @include('order.single-order', ['order' => $order, 'radius' => 'border-radius: 2px'])
                     </div>
     	        @endforeach
-
-    			<div class="text-center">{{ $orders->appends(['name' => request('name'), 'category' => request('category'), 'country' => request('country'), 'price' => request('price'), 'endDate' => request('endDate')])->links() }}</div>
             </div>
+            <div class="text-center">{{ $orders->appends(['name' => request('name'), 'category' => request('category'), 'country' => request('country'), 'price' => request('price'), 'endDate' => request('endDate')])->links() }}</div>
 		</div>
     </div>
 
