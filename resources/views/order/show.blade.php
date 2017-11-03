@@ -89,7 +89,7 @@
 			<div class="row">
 				<div class="col-md-10 col-md-offset-2">
 					<h5 style="font-weight: 400; line-height: 20px; white-space: pre-line;">{{ $order->description }}</h5>
-					<h5 style="margin-top: 20px; line-height: 20px">相關網址：<a href="{{ url($order->link) }}" target="_blank">{{ $order->link }}</a></h5>
+					<h5 style="margin-top: 20px; line-height: 20px">相關網址：<a style="word-wrap: break-word;" href="{{ url($order->link) }}" target="_blank">{{ $order->link }}</a></h5>
 				</div>
 			</div>
 			<hr>
