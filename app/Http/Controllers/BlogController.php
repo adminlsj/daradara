@@ -111,7 +111,16 @@ class BlogController extends Controller
         $relatedOrders = Order::where('price', '<=', 50)->inRandomOrder()->limit(20)->get();
         $relatedBlogs = Blog::inRandomOrder()->limit(5)->get();
 
-        return view('blog.show', compact('blog', 'content', 'similar_blogs', 'relatedOrders', 'relatedBlogs'));
+        $fb_title = $blog->content;
+        $fb_title = str_replace('(SUB)', '', $fb_title);
+        $fb_title = str_replace('(/SUB)', '', $fb_title);
+        $fb_title = str_replace('(CONT)', '', $fb_title);
+        $fb_title = str_replace('(/CONT)', '', $fb_title);
+        $fb_title = str_replace('(IMG)', '', $fb_title);
+        $fb_title = str_replace('(/IMG)', '', $fb_title);
+        $fb_title = str_replace('(BLANK)', '', $fb_title);
+
+        return view('blog.show', compact('blog', 'content', 'similar_blogs', 'relatedOrders', 'relatedBlogs', 'fb_title'));
     }
 
     /**
