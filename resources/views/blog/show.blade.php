@@ -14,7 +14,7 @@
     <meta property="og:url" content="{{ route('blog.show', ['blog' => $blog->id]) }}" />
 	<meta property="og:type" content="article" />
 	<meta property="og:title" content="{{ $blog->title }}" />
-	<meta property="og:description" content="{{ str_limit($fb_title, 30) }}" />
+	<meta property="og:description" content="{{ str_limit($fb_title, 40) }}" />
 	<meta property="og:image" content="https://s3-us-west-2.amazonaws.com/freerider/blogImgs/originals/{{ $blog->id }}/{{ $blog->blogImgs->first()->filename }}" />
 
     <meta charset="utf-8">
