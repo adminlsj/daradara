@@ -7,7 +7,7 @@
 			<img class="img-responsive border-radius-2" style="width:100%;height:100%" src="https://s3-us-west-2.amazonaws.com/freerider/blogImgs/originals/{{ $blog->id }}/{{ $blog->blogImgs->sortby('created_at')->first()->filename }}" alt="First slide">
 			
 			<div class="">
-				<h4 style="padding-top: 10px">
+				<h4 style="padding-top: 5px">
 					{{ $blog->title }}
 					<span class="pull-right" style="font-size:15px;font-weight:300">
 						<div style="margin-bottom:-25px">{{ Carbon\Carbon::parse($blog->created_at)->format('Y年m月d日') }}</div>
