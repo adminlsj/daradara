@@ -70,12 +70,12 @@ class BlogController extends Controller
             }
 
             $image_thumb = Image::make(request('blogImgs')[0]);
-            $image_thumb = $image_thumb->resize(600, 330);
+            $image_thumb = $image_thumb->resize(600, 360);
             $image_thumb = $image_thumb->stream();
             Storage::disk('s3')->put('blogImgs/thumbnails/'.$blog->id.'/'.request('blogImgs')[0]->getClientOriginalName(), $image_thumb->__toString());
 
             $image_square = Image::make(request('blogImgs')[0]);
-            $image_square = $image_square->resize(400, 400);
+            $image_square = $image_square->crop(400, 400);
             $image_square = $image_square->stream();
             Storage::disk('s3')->put('blogImgs/squares/'.$blog->id.'/'.request('blogImgs')[0]->getClientOriginalName(), $image_square->__toString());
 

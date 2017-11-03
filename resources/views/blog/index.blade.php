@@ -27,7 +27,7 @@
 		                <a href="{{ route('blog.show', ['blog' => $blog->id]) }}"><img class="img-responsive" src="https://s3-us-west-2.amazonaws.com/freerider/blogImgs/thumbnails/{{ $blog->id }}/{{ $blog->blogImgs->sortby('created_at')->first()->filename }}" alt="First slide"></a>
 
 					    <div class="card-content">
-					        <a style="line-height: 45px; padding: 13px; font-weight: 300; color: grey" href="{{ route('blog.show', ['blog' => $blog->id]) }}">
+					        <a style="line-height: 25px; padding: 13px; font-weight: 300; color: grey; display:block; white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" href="{{ route('blog.show', ['blog' => $blog->id]) }}">
 								{{ $blog->title }}
 							</a>
 						</div>
