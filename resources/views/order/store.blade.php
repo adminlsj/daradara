@@ -147,7 +147,7 @@
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" style="border-radius: 2px;" class="btn btn-default" data-dismiss="modal">返回</button>
-                                            <button id="purchaseBtn" type="submit" style="border-radius: 2px !important" class="btn btn-info">立即付款</button>
+                                            <button id="purchaseBtn" type="submit" style="border-radius: 2px !important;width: auto;" class="btn btn-info">立即付款</button>
                                         </div>
                                     </div>
                                 </div>
