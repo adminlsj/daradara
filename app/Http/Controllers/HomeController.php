@@ -18,12 +18,12 @@ class HomeController extends Controller
     public function index()
     {
         //auth()->loginUsingId(1);
-        $makeups = Order::where(['is_payed' => 1, 'category' => 'makeup'])->get();
-        $foods = Order::where(['is_payed' => 1, 'category' => 'food'])->get();
-        $bags = Order::where(['is_payed' => 1, 'category' => 'bag'])->get();
-        $accessories = Order::where(['is_payed' => 1, 'category' => 'accessories'])->get();
-        $watches = Order::where(['is_payed' => 1, 'category' => 'watch'])->get();
-        $others = Order::where(['is_payed' => 1, 'category' => 'others'])->get();
+        $makeups = Order::where(['is_payed' => 1, 'category' => 'makeup'])->inRandomOrder()->limit(20)->get();
+        $foods = Order::where(['is_payed' => 1, 'category' => 'food'])->inRandomOrder()->limit(20)->get();
+        $bags = Order::where(['is_payed' => 1, 'category' => 'bag'])->inRandomOrder()->limit(20)->get();
+        $accessories = Order::where(['is_payed' => 1, 'category' => 'accessories'])->inRandomOrder()->limit(20)->get();
+        $watches = Order::where(['is_payed' => 1, 'category' => 'watch'])->inRandomOrder()->limit(20)->get();
+        $others = Order::where(['is_payed' => 1, 'category' => 'others'])->inRandomOrder()->limit(20)->get();
 
         $blogs = Blog::all()->sortByDesc('created_at');
         $caro_blogs = Blog::inRandomOrder()->limit(4)->get();
