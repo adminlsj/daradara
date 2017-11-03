@@ -29,7 +29,7 @@ class HomeController extends Controller
         $caro_blogs = Blog::inRandomOrder()->limit(4)->get();
         $relatedBlogs = Blog::inRandomOrder()->limit(3)->get();
 
-        $loopOrders = ['makeup' => $makeups, 'food' => $foods, 'bag' => $bags, 'accessories' => $accessories, 'watch' => $watches, 'others' => $others];
+        $loopOrders = ['food' => $foods, 'makeup' => $makeups, 'bag' => $bags, 'accessories' => $accessories, 'watch' => $watches, 'others' => $others];
 
         return view('layouts.home', compact('orders', 'loopOrders', 'caro_blogs', 'relatedBlogs'));
     }
