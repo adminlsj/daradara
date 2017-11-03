@@ -20,7 +20,7 @@
     	<div class="col-md-12">
 			<div class="tab" style="border-width: 0px; margin-bottom: -10px">
 				@foreach (App\Order::$category as $key => $element)
-					<button style="text-align: center;" class="tablinks" onclick="openStatus(event, '{{ $key }}')" {{ $key == 'makeup' ? "id=defaultOpen" : '' }}>{{ App\Order::$category[$key] }}</button>
+					<button style="text-align: center;" class="tablinks" onclick="openStatus(event, '{{ $key }}')" {{ $key == 'food' ? "id=defaultOpen" : '' }}>{{ App\Order::$category[$key] }}</button>
 				@endforeach
 			</div>
 
