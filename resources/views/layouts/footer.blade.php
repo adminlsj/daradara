@@ -9,37 +9,37 @@
                 <h5>Get started</h5>
                 <ul>
                     <li><a href="#">Home</a></li>
-                    <li><a href="#">Sign up</a></li>
-                    <li><a href="#">Downloads</a></li>
+                    <li><a href="/orders/search?name=">Explore</a></li>
+                    <li><a href="{{ route('blog.index') }}">Blog</a></li>
                 </ul>
             </div>
             <div class="col-sm-2">
                 <h5>About us</h5>
                 <ul>
-                    <li><a href="#">Company Information</a></li>
-                    <li><a href="#">Contact us</a></li>
-                    <li><a href="#">Reviews</a></li>
+                    <li><a href="https://www.facebook.com/freeriderhk/">Company Information</a></li>
+                    <li><a href="/contact">Contact us</a></li>
+                    <li><a href="https://www.facebook.com/freeriderhk/">Reviews</a></li>
                 </ul>
             </div>
             <div class="col-sm-2">
                 <h5>Support</h5>
                 <ul>
-                    <li><a href="#">FAQ</a></li>
-                    <li><a href="#">Help desk</a></li>
-                    <li><a href="#">Forums</a></li>
+                    <li><a href="/contact">FAQ</a></li>
+                    <li><a href="/contact">Help desk</a></li>
+                    <li><a href="{{ route('blog.index') }}">Forums</a></li>
                 </ul>
             </div>
             <div class="col-sm-3">
                 <div class="social-networks">
-                    <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
-                    <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
-                    <a href="#" class="google"><i class="fa fa-google-plus"></i></a>
+                    <a href="https://www.facebook.com/freeriderhk/" class="twitter"><i class="fa fa-twitter"></i></a>
+                    <a href="https://www.facebook.com/freeriderhk/" class="facebook"><i class="fa fa-facebook"></i></a>
+                    <a href="https://www.facebook.com/freeriderhk/" class="google"><i class="fa fa-google-plus"></i></a>
                 </div>
                 <a href="/contact" class="btn btn-info" class="btn btn-info">聯絡我們</a>
             </div>
         </div>
     </div>
     <div class="footer-copyright">
-        <p>© 2016 Copyright Text </p>
+        <p>© 2016 Copyright by FreeRider </p>
     </div>
 </footer>
