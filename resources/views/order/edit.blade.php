@@ -88,11 +88,10 @@
 		$('.owl-carousel').owlCarousel({
 			items: 1,
 			loop: true,
-			nav: true,
-			dots: false,
+			nav: false,
+			dots: true,
 			lazyLoad: true,
-			autoplay: false,
-			navText : ['<i class="material-icons" style="font-size:36px">keyboard_arrow_left</i>','<i class="material-icons" style="font-size:36px">keyboard_arrow_right</i>']
+			autoplay: true,
 		});
 	});
 </script>
