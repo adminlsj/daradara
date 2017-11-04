@@ -9113,6 +9113,17 @@ input[type=file] {
   transition: 0.4s;
 }
 
+.order-show .order-index-btn {
+  border-radius: 2px !important;
+  padding: 10px 20px 10px 20px;
+}
+
+@media (max-width: 992px) {
+  .order-show .order-index-btn {
+    margin-top: 7px;
+  }
+}
+
 .carousel-control.left,
 .carousel-control.right {
   background-image: none;

@@ -60,6 +60,10 @@
 					</div>
 				</form>
 	        </div>
+
+	        <br class="visible-xs-block">
+	        <br class="visible-xs-block">
+	        
 	        <div class="col-md-4" style="padding-left: 30px">
 			    <form id="avatar-form" method="POST" action="{{ url('users/'.Auth::user()->id.'/storeAvatar') }}" enctype="multipart/form-data">
 			    	{{ csrf_field() }}

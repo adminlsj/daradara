@@ -18,9 +18,12 @@
 							<div style="margin-bottom: 3px; font-size: 13px;">收貨日期：{{ $order->end_date }} 前</div>
 							<div><span style="font-weight: 400; font-size: 13px;">${{ $order->price }} + $0 服務費</span></div>
 						</div>
+						<div class="visible-xs-block" style="margin-top: 7px;"></div>
 						<div class="col-md-2 order-show">
-							<div><a href="/orders/{{ $order->id }}/cancel" style="border-radius: 2px !important; padding: 10px 20px 10px 20px;" class="btn btn-info">取消訂單</a></div>
-							<div><a href="/contact" style="border-radius: 2px !important; padding: 10px 20px 10px 20px; margin-top: 7px" class="btn btn-primary">聯絡我們</a></div>
+							<div class="row">
+								<div class="col-md-12 col-xs-6"><a href="/orders/{{ $order->id }}/cancel"  class="btn btn-info order-index-btn">取消訂單</a></div>
+								<div class="col-md-12 col-xs-6"><a href="/contact" style="margin-top: 7px" class="btn btn-primary order-index-btn">聯絡我們</a></div>
+							</div>
 						</div>
 					</div>
 					<hr>
@@ -41,54 +44,57 @@
 							<div style="margin-bottom: 3px; font-size: 13px;">收貨日期：{{ $order->end_date }} 前</div>
 							<div><span style="font-weight: 400; font-size: 13px;">${{ $order->price }} + $0 服務費</span></div>
 						</div>
+						<div class="visible-xs-block" style="margin-top: 7px;"></div>
 						<div class="col-md-2">
-							<!-- Trigger the modal with a button -->
-							<div class="order-show">
-								<button type="button" style="border-radius: 2px !important; padding: 10px 20px 10px 20px;" class="btn btn-info" data-toggle="modal" data-target="#myModal">馬上交收</button>
-							</div>
+							<div class="row">
+								<!-- Trigger the modal with a button -->
+								<div class="order-show">
+									<div class="col-md-12 col-xs-6"><button type="button" class="btn btn-info order-index-btn" data-toggle="modal" data-target="#myModal">馬上交收</button></div>
+								</div>
 
-							<!-- Modal -->
-							<form action="/sendMail/meetup" method="POST">
-								{{ csrf_field() }}
-								<div id="myModal" class="modal fade" role="dialog">
-									<div class="modal-dialog">
-										<div class="modal-content">
-											<div class="modal-header">
-												<button type="button" class="close" data-dismiss="modal">&times;</button>
-												<h4 class="modal-title">交收詳情</h4>
-											</div>
-											<div class="modal-body">
-												<p>請選擇交收的地點與時段：</p>
-												<br>
-												<div class="form-group row margin-0">
-													<label for="email" class="col-md-2 text-center"><h5>Email</h5></label>
-												    <div class="col-md-10">
-													    <input class="form-control" type="text" value="" id="email" name="email" required>
-												    </div>
+								<!-- Modal -->
+								<form action="/sendMail/meetup" method="POST">
+									{{ csrf_field() }}
+									<div id="myModal" class="modal fade" role="dialog">
+										<div class="modal-dialog">
+											<div class="modal-content">
+												<div class="modal-header">
+													<button type="button" class="close" data-dismiss="modal">&times;</button>
+													<h4 class="modal-title">交收詳情</h4>
 												</div>
-												<div class="form-group row margin-0">
-													<label for="location" class="col-md-2 text-center"><h5>地點</h5></label>
-												    <div class="col-md-10">
-													    <input class="form-control" type="text" value="" id="location" name="location" required>
-												    </div>
+												<div class="modal-body">
+													<p>請選擇交收的地點與時段：</p>
+													<br>
+													<div class="form-group row margin-0">
+														<label for="email" class="col-md-2 text-center"><h5>Email</h5></label>
+													    <div class="col-md-10">
+														    <input class="form-control" type="text" value="" id="email" name="email" required>
+													    </div>
+													</div>
+													<div class="form-group row margin-0">
+														<label for="location" class="col-md-2 text-center"><h5>地點</h5></label>
+													    <div class="col-md-10">
+														    <input class="form-control" type="text" value="" id="location" name="location" required>
+													    </div>
+													</div>
+													<div class="form-group row margin-0">
+														<label for="time" class="col-md-2 text-center"><h5>時間</h5></label>
+													    <div class="col-md-10">
+														    <input class="form-control" type="text" value="" id="time" name="time" required>
+													    </div>
+													</div>
 												</div>
-												<div class="form-group row margin-0">
-													<label for="time" class="col-md-2 text-center"><h5>時間</h5></label>
-												    <div class="col-md-10">
-													    <input class="form-control" type="text" value="" id="time" name="time" required>
-												    </div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+													<button type="submit" class="btn btn-info">Send</button>
 												</div>
-											</div>
-											<div class="modal-footer">
-												<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-												<button type="submit" class="btn btn-info">Send</button>
 											</div>
 										</div>
 									</div>
+								</form>
+								<div class="order-show">
+									<div class="col-md-12 col-xs-6"><a href="/contact" class="btn btn-primary order-index-btn" style="margin-top: 7px">聯絡我們</a></div>
 								</div>
-							</form>
-							<div class="order-show" style="margin-top: 7px">
-								<a href="/contact" style="border-radius: 2px !important; padding: 10px 20px 10px 20px;" class="btn btn-primary">聯絡我們</a>
 							</div>
 						</div>
 					</div>
@@ -110,21 +116,30 @@
 							<div style="margin-bottom: 3px; font-size: 13px;">收貨日期：{{ $order->end_date }} 前</div>
 							<div><span style="font-weight: 400; font-size: 13px;">${{ $order->price }} + $0 服務費</span></div>
 						</div>
+						<div class="visible-xs-block" style="margin-top: 7px;"></div>
 						<div class="col-md-2">
-							<form class="order-show" action="{{ route('order.store') }}" method="POST" enctype="multipart/form-data">
-								{{ csrf_field() }}
-								<input type="hidden" name="name" id="name" value="{{ $order->name }}">
-								<input type="hidden" name="price" id="price" value="{{ $order->price }}">
-								<input type="hidden" name="category" id="category" value="{{ $order->category }}">
-								<input type="hidden" name="country" id="country" value="{{ $order->country }}">
-								<input type="hidden" name="description" id="description" value="{{ $order->description }}">
-								<input type="hidden" name="link" id="link" value="{{ $order->link }}">
-								<input type="hidden" name="endDate" id="endDate" value="{{ $order->end_date }}">
-								<input type="hidden" name="copyOrderId" id="copyOrderId" value="{{ $order->id }}">
+							<div class="row">
+								<form class="order-show" action="{{ route('order.store') }}" method="POST" enctype="multipart/form-data">
+									{{ csrf_field() }}
+									<input type="hidden" name="name" id="name" value="{{ $order->name }}">
+									<input type="hidden" name="price" id="price" value="{{ $order->price }}">
+									<input type="hidden" name="category" id="category" value="{{ $order->category }}">
+									<input type="hidden" name="country" id="country" value="{{ $order->country }}">
+									<input type="hidden" name="description" id="description" value="{{ $order->description }}">
+									<input type="hidden" name="link" id="link" value="{{ $order->link }}">
+									<input type="hidden" name="endDate" id="endDate" value="{{ $order->end_date }}">
+									<input type="hidden" name="copyOrderId" id="copyOrderId" value="{{ $order->id }}">
 
-								<button type="submit" style="border-radius: 2px !important; padding: 10px 20px 10px 20px" class="btn btn-info">重新下單</button>
-							</form>
-							<div class="order-show" style="margin-top: 7px"><a href="/contact" style="border-radius: 2px !important; padding: 10px 20px 10px 20px" class="btn btn-primary">聯絡我們</a></div>
+									<div class="col-md-12 col-xs-6">
+										<button type="submit" class="btn btn-info order-index-btn">重新下單</button>
+									</div>
+								</form>
+								<div class="order-show">
+									<div class="col-md-12 col-xs-6">
+										<a href="/contact" style="margin-top: 7px" class="btn btn-primary order-index-btn">聯絡我們</a>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 					<hr>

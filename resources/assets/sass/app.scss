@@ -93,6 +93,14 @@ input[type=file] {
     transition: 0.4s;
 }
 
+.order-show .order-index-btn {
+    @media (max-width: 992px) {
+        margin-top: 7px;
+    }
+    border-radius: 2px !important;
+    padding: 10px 20px 10px 20px;
+}
+
 .carousel-control.left, .carousel-control.right {
     background-image: none
 }
