@@ -9213,11 +9213,24 @@ input[type=file] {
   border-right: 1px solid #E6E6E6;
 }
 
+@media (max-width: 768px) {
+  #left {
+    padding: 10px;
+    width: 150px;
+  }
+}
+
 #right {
   width: calc(100% - 225px);
   height: auto;
   position: absolute;
   right: 0;
+}
+
+@media (max-width: 768px) {
+  #right {
+    width: calc(100% - 150px);
+  }
 }
 
 .sidenav > div > a {

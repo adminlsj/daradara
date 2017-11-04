@@ -184,6 +184,10 @@ input[type=file] {
 }
 
 #left {
+    @media (max-width: 768px) {
+        padding: 10px;
+        width: 150px;
+    }
     width: 225px;
     height: 100%;
     position: fixed;
@@ -191,6 +195,9 @@ input[type=file] {
 }
 
 #right {
+    @media (max-width: 768px) {
+        width: calc(100% - 150px);
+    }
     width: calc(100% - 225px);
     height: auto;
     position: absolute;
