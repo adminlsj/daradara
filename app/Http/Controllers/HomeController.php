@@ -29,9 +29,13 @@ class HomeController extends Controller
         $caro_blogs = Blog::inRandomOrder()->limit(4)->get();
         $relatedBlogs = Blog::inRandomOrder()->limit(3)->get();
 
+        $orders = Order::where('is_payed', true);
+        $relatedOrders = Order::where('price', '<=', 50)->inRandomOrder()->limit(20)->get();
+        $similar_blogs = Blog::inRandomOrder()->limit(5)->get();
+
         $loopOrders = ['food' => $foods, 'makeup' => $makeups, 'bag' => $bags, 'accessories' => $accessories, 'watch' => $watches, 'others' => $others];
 
-        return view('layouts.home', compact('orders', 'loopOrders', 'caro_blogs', 'relatedBlogs'));
+        return view('layouts.home', compact('orders', 'loopOrders', 'caro_blogs', 'relatedBlogs', 'similar_blogs'));
     }
 
     public function contact()

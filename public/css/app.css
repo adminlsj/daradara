@@ -67,6 +67,12 @@ div.tab button {
   border-top-right-radius: 2px;
 }
 
+@media (max-width: 768px) {
+  div.tab button {
+    width: 25%;
+  }
+}
+
 /* Change background color of buttons on hover */
 
 div.tab button:hover {

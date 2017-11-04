@@ -2,16 +2,21 @@
 
 @section('content')
 
-<div style="margin-top: -25px; margin-bottom: 25px; width: 100%">
+<div class="hidden-xs" style="margin-top: -20px; margin-bottom: 25px; width: 100%">
 	<img style="width:100%" src="https://s3-us-west-2.amazonaws.com/freerider/system/intro/2.jpg" alt="Los Angeles">
+</div>
+
+<div class="visible-xs-block" style="margin-top: -15px; margin-bottom: 25px; width: 100%">
+	<img style="width:100%" src="https://s3-us-west-2.amazonaws.com/freerider/system/intro/8.jpg" alt="Los Angeles">
 </div>
 
 <div class="container" style="width: 90%">
 	<div class="row">
-		<div class="col-md-6">
+		<div class="col-md-6 col-xs-12">
 			<img style="border-radius: 2px" class="d-block img-responsive" src="https://s3-us-west-2.amazonaws.com/freerider/system/intro/3.jpg" alt="Chicago">
 		</div>
-		<div class="col-md-6">
+		<div class="col-md-6 col-xs-12">
+			<br class="visible-xs-block">
 			<img style="border-radius: 2px" class="d-block img-responsive" src="https://s3-us-west-2.amazonaws.com/freerider/system/intro/4.jpg" alt="Chicago">
 		</div>
 	</div>
@@ -20,7 +25,7 @@
     	<div class="col-md-12">
 			<div class="tab" style="border-width: 0px; margin-bottom: -10px">
 				@foreach (App\Order::$category as $key => $element)
-					<button style="text-align: center;" class="tablinks" onclick="openStatus(event, '{{ $key }}')" {{ $key == 'food' ? "id=defaultOpen" : '' }}>{{ App\Order::$category[$key] }}</button>
+					<button style="text-align: center;" class="tablinks {{ ($key == 'others' || $key == 'watch') ? "hidden-xs" : '' }}" onclick="openStatus(event, '{{ $key }}')" {{ $key == 'food' ? "id=defaultOpen" : '' }}>{{ App\Order::$category[$key] }}</button>
 				@endforeach
 			</div>
 
@@ -37,14 +42,14 @@
 	</div>
 
 	<div class="row" style="margin-top: 15px">
-		<div class="col-md-4 col-md-offset-4">
+		<div class="col-md-4 col-md-offset-4 col-xs-8 col-xs-offset-2">
 		    <form action="{{ route('order.search') }}" method="GET">
 		        <button type="submit" class="btn btn-info btn-outline btn-lg btn-block" style="border-radius: 0; font-size: 15px;">查看所有分類</button>
 		    </form>
 	    </div>
 	</div>
 
-	<div class="row" style="padding-top: 90px;">
+	<div class="row hidden-xs" style="padding-top: 90px;">
 		<div class="col-md-8">
 		    <form action="{{ route('order.search') }}" method="GET">
 		    	<input type="hidden" name="country" id="country" value="japan">
@@ -59,7 +64,7 @@
 		</div>
 	</div>
 
-	<div class="row" style="margin-top: 15px">
+	<div class="row hidden-xs" style="margin-top: 15px">
 		<div class="col-md-7">
 			<div class="row">
 				<div class="col-md-12">
@@ -96,15 +101,31 @@
 		</div>
 	</div>
 
+	<div class="row visible-xs-block" style="padding-top: 90px">
+		<div class="row">
+			<div class="col-xs-12">
+				<img style="border-radius: 2px" class="d-block img-responsive" src="https://s3-us-west-2.amazonaws.com/freerider/system/countrySquare/japan.jpg" alt="Chicago">
+			</div>
+		</div>
+		<div class="row" style="margin-top: 10px">
+			<div class="col-xs-6" style="padding-right: 5px">
+				<img style="border-radius: 2px" class="d-block img-responsive" src="https://s3-us-west-2.amazonaws.com/freerider/system/countrySquare/korea.jpg" alt="Chicago">
+			</div>
+			<div class="col-xs-6" style="padding-left: 5px">
+				<img style="border-radius: 2px" class="d-block img-responsive" src="https://s3-us-west-2.amazonaws.com/freerider/system/countrySquare/usa.jpg" alt="Chicago">
+			</div>
+		</div>
+	</div>
+
 	<div class="row" style="margin-top: 20px">
-		<div class="col-md-4 col-md-offset-4">
+		<div class="col-md-4 col-md-offset-4 col-xs-8 col-xs-offset-2">
 		    <form action="{{ route('order.search') }}" method="GET">
 		        <button type="submit" class="btn btn-info btn-outline btn-lg btn-block" style="border-radius: 0; font-size: 15px;">查看所有產品</button>
 		    </form>
 		</div>
 	</div>
 
-	<div class="row" style="margin-top: 100px">
+	<div class="hidden-xs row" style="margin-top: 100px">
 		<div class="col-md-8 col-ms-12">
 			<div class="blog-carousel owl-carousel owl-theme">
 				@foreach ($caro_blogs as $blog)
@@ -140,6 +161,25 @@
 			</div>
 		</div>
 	</div>
+
+	<div class="visible-xs-block" style="padding-top: 70px">
+		<h3 style="color: grey; font-weight: 300">FreeRider部落格</h3>
+		<hr>
+		@foreach ($similar_blogs as $blog)
+			<div class="col-xs-12">
+				<div class="card">
+	                <a href="{{ route('blog.show', ['blog' => $blog->id]) }}"><img class="img-responsive" src="https://s3-us-west-2.amazonaws.com/freerider/blogImgs/thumbnails/{{ $blog->id }}/{{ $blog->blogImgs->sortby('created_at')->first()->filename }}" alt="First slide"></a>
+
+				    <div class="card-content">
+				        <a style="line-height: 25px; padding: 13px; font-weight: 300; color: grey; display:block; white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" href="{{ route('blog.show', ['blog' => $blog->id]) }}">
+							{{ $blog->title }}
+						</a>
+					</div>
+				</div>
+			</div>
+		@endforeach
+	</div>
+
 	<br><br><br><br><br>
 </div>
 
@@ -163,14 +203,27 @@
 
 	$(document).ready(function(){
 		$('.order-carousel').owlCarousel({
-			items: 4,
-			loop: true,
-			margin: 5,
-			nav: true,
-			dots: false,
-			lazyLoad: true,
-			autoplay: false,
-			navText : ['<i class="material-icons" style="font-size:36px; margin-left:-91px; color:#666666">keyboard_arrow_left</i>','<i class="material-icons" style="font-size:36px; margin-right:-90px; color:#666666">keyboard_arrow_right</i>']
+			responsiveClass:true,
+		    responsive:{
+				0 : {
+					items: 1,
+					loop: true,
+					nav: false,
+					dots: true,
+					lazyLoad: true,
+					autoplay: false,
+				},
+				768 : {
+					items: 4,
+					loop: true,
+					margin: 5,
+					nav: true,
+					dots: false,
+					lazyLoad: true,
+					autoplay: false,
+					navText : ['<i class="material-icons" style="font-size:36px; margin-left:-91px; color:#666666">keyboard_arrow_left</i>','<i class="material-icons" style="font-size:36px; margin-right:-90px; color:#666666">keyboard_arrow_right</i>']
+				}
+			}
 		});
 	});
 
