@@ -1,3 +1,4 @@
+<div class="hidden-xs hidden-sm">
 <h3 style="color: grey; font-weight: 300">為您推薦的貼文</h3>
 <hr>
 @foreach($relatedBlogs as $blog)
@@ -14,6 +15,7 @@
     </div>
 @endforeach
 <br>
+</div>
 
 <a href="/"><img style="width:100%; border: solid 1px #f2f2f2" src="https://s3-us-west-2.amazonaws.com/freerider/system/intro/7.jpg" alt="Los Angeles"></a>
 

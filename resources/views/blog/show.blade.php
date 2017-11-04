@@ -58,7 +58,13 @@
 								<div style="margin-bottom:-25px">{{ Carbon\Carbon::parse($blog->created_at)->format('Y年m月d日') }}</div>
 							</span>
 						</h4>
+
 						{!! $content !!}
+
+						<a class="visible-xs-block" href="/"><img style="width:100%; border: solid 1px #f2f2f2; margin-top: 25px;" src="https://s3-us-west-2.amazonaws.com/freerider/system/intro/7.jpg" alt="Los Angeles"></a>
+
+						<br>
+						
 						<div class="right"><iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2Ffreeriderhk%2F&width=450&layout=standard&action=like&show_faces=true&share=true&height=80&appId" width="260" height="80" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe></div>
 					</div>
 
