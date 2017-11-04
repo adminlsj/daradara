@@ -625,6 +625,63 @@ body {
   transition: 0.1s ease;
 }
 
+.arrows {
+  white-space: nowrap;
+}
+
+.arrows li {
+  display: inline-block;
+  line-height: 26px;
+  margin: 0 9px 0 -10px;
+  padding: 0 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.arrows li::before,
+.arrows li::after {
+  border-right: 1px solid #666666;
+  content: '';
+  display: block;
+  height: 50%;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: -1;
+  -webkit-transform: skewX(45deg);
+          transform: skewX(45deg);
+}
+
+.arrows li::after {
+  bottom: 0;
+  top: auto;
+  -webkit-transform: skewX(-45deg);
+          transform: skewX(-45deg);
+}
+
+.arrows li:last-of-type::before,
+.arrows li:last-of-type::after {
+  display: none;
+}
+
+.arrows li a {
+  letter-spacing: 0px;
+  text-decoration: none;
+}
+
+.arrows li:nth-of-type(1) a {
+  color: #a6a6a6;
+}
+
+.arrows li:nth-of-type(2) a {
+  color: #807f7f;
+}
+
+.arrows li:nth-of-type(3) a {
+  color: #666666;
+}
+
 /*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)
  * Copyright 2011-2016 Twitter, Inc.

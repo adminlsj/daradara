@@ -2,6 +2,11 @@
 
 @section('content')
 <div class="container" style="width: 90%">
+	<ol class="arrows" style="padding:10px 0px 10px 0px; margin:0; background-color: white">
+	    <li><a href="/orders/search?name=&category=&country={{$order->country}}&price=">{{ App\Order::$country[$order->country] }}</a></li>
+	    <li><a href="/orders/search?name=&category={{$order->category}}&country=&price=">{{ App\Order::$category[$order->category] }}</a></li>
+	    <li><a href="/orders/search?name=&category={{$order->category}}&country=&price=">{{$order->name}}</a></li>
+	</ol>
 	<div class="row">
 		<div class="col-md-8">
 			<div class="row" style="margin-top: 20px">
@@ -34,8 +39,8 @@
 					<a href="{{ route('user.show', ['user' => $order->user]) }}"><img src="https://s3-us-west-2.amazonaws.com/freerider/avatars/thumbnails/{{ $order->user->avatar->filename }}.jpg" class="img-responsive img-circle"></a>
 				</div>
 				<div class="col-md-7">
-					<div><h3 style="color: black; font-weight: 400; margin-top: 15px">${{ $order->price }} + $0 服務費</h3></div>
-					<div>產地：{{ App\Order::$country[$order->country] }}</div>
+					<div><h3 style="color: black; font-weight: 400; margin-top: 15px"><span style="font-weight: 800 !important">${{ $order->price }}</span> + $0 服務費</h3></div>
+					<div>產地：<a href="/orders/search?name=&category=&country={{$order->country}}&price=">{{ App\Order::$country[$order->country] }}</a> | <a href="/orders/search?name=&category={{$order->category}}&country=&price=">{{ App\Order::$category[$order->category] }}</a></div>
 					<div>收貨日期：{{ $order->end_date }} 前</div>
 				</div>
 				<div class="col-md-3">
