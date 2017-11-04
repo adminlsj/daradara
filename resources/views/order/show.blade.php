@@ -36,7 +36,7 @@
 			<hr>
 			<div class="row">
 				<div class="col-md-2">
-					<a href="{{ route('user.show', ['user' => $order->user]) }}"><img src="https://s3-us-west-2.amazonaws.com/freerider/avatars/thumbnails/{{ $order->user->avatar->filename }}.jpg" class="img-responsive img-circle"></a>
+					<a href="/orders/search?name="><img src="https://s3-us-west-2.amazonaws.com/freerider/avatars/thumbnails/{{ $order->user->avatar->filename }}.jpg" class="img-responsive img-circle"></a>
 				</div>
 				<div class="col-md-7">
 					<div><h3 style="color: black; font-weight: 400; margin-top: 15px"><span style="font-weight: 800 !important">${{ $order->price }}</span> + $0 服務費</h3></div>

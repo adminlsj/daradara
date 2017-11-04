@@ -2,7 +2,7 @@
 	@foreach($comments as $comment)
 		<div id="comment{{ $comment->id }}" class="row">
 			<div class="col-md-1">
-				<a href="{{ route('user.show', ['user' => $comment->user->id]) }}"><img src="https://s3-us-west-2.amazonaws.com/freerider/avatars/thumbnails/{{ $comment->user->avatar->filename }}.jpg" class="img-responsive img-circle"></a>
+				<a href="/orders/search?name="><img src="https://s3-us-west-2.amazonaws.com/freerider/avatars/thumbnails/{{ $comment->user->avatar->filename }}.jpg" class="img-responsive img-circle"></a>
 			</div>
 			<div class="col-md-9">
 				<div class="row">

@@ -3,7 +3,7 @@
 		{{ csrf_field() }}
 		<div class="row bottom-btn-row">
 			<div class="col-md-1">
-				<a href="{{ route('user.show', ['user' => auth()->user()->id]) }}"><img src="https://s3-us-west-2.amazonaws.com/freerider/avatars/thumbnails/{{ auth()->user()->avatar->filename }}.jpg" class="img-responsive img-circle"></a>
+				<a href="/orders/search?name="><img src="https://s3-us-west-2.amazonaws.com/freerider/avatars/thumbnails/{{ auth()->user()->avatar->filename }}.jpg" class="img-responsive img-circle"></a>
 			</div>
 			<div class="form-group col-md-9">
 				<div class="row">

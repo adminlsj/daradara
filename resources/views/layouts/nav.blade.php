@@ -41,7 +41,9 @@
                     <li><a href="/manual">指南</a></li>
                 @else
                     <li><a href="{{ route('order.index') }}">我的訂單</a></li>
-                    <li><a href="{{ route('tran.index') }}">我的接單</a></li>
+                    @if (auth()->user()->trans != '[]')
+                        <li><a href="{{ route('tran.index') }}">我的接單</a></li>
+                    @endif
                     <li>
                         <a href="{{ route('user.edit', ['user' => auth()->user()]) }}" style="padding-left: 13px; padding-right: 15px">
                             <img src="https://s3-us-west-2.amazonaws.com/freerider/avatars/thumbnails/{{ Auth::user()->avatar->filename }}.jpg" class="img-circle" style="margin-top: -10px; margin-bottom: -8px" width="35px" height="35px">&nbsp;
