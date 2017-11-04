@@ -51,7 +51,7 @@
 					    <textarea style="width: 100%; padding: 10px; border-color: #AAA" type="text" id="description" name="description" placeholder="詳細描述" rows="5" required>{{ old ('description', $order->description) }}</textarea>
 					</div>
 				</div>
-				<br>
+				<br class="hidden-xs">
 				<div class="row">
 					<div class="col-md-12">
 						<div class="owl-carousel owl-theme">
@@ -71,6 +71,10 @@
 				</div>
 			</form>
 		</div>
+
+		<br class="visible-xs-block visible-sm-block">
+		<br class="visible-xs-block visible-sm-block">
+		<br class="visible-xs-block visible-sm-block">
 
 		<div class="col-md-4" style="padding-left: 25px">
 			<h3 style="color: grey; font-weight: 300">為您推薦的商品</h3>
