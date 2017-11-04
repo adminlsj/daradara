@@ -22,10 +22,10 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 }
 
-.register-left {
+.register-right {
   position: absolute;
   top: 0;
-  left: 0;
+  right: 0;
   box-sizing: border-box;
   padding: 40px;
   width: 300px;
@@ -102,10 +102,10 @@ h1 {
   text-align: center;
 }
 
-.register-right {
+.register-left {
   position: absolute;
   top: 0;
-  right: 0;
+  left: 0;
   box-sizing: border-box;
   padding: 40px;
   width: 300px;
@@ -116,7 +116,7 @@ h1 {
   border-radius: 0 2px 2px 0;
 }
 
-.register-right .loginwith {
+.register-left .loginwith {
   display: block;
   margin-bottom: 40px;
   font-size: 28px;
@@ -124,7 +124,7 @@ h1 {
   text-align: center;
 }
 
-.register-right a.social-signin {
+.register-left a.social-signin {
   margin-bottom: 20px;
   width: 220px;
   height: 36px;
@@ -137,25 +137,25 @@ h1 {
   cursor: pointer;
 }
 
-.register-right a.social-signin:hover,
+.register-left a.social-signin:hover,
 .register-right a.social-signin:focus {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
   transition: 0.2s ease;
 }
 
-.register-right a.social-signin:active {
+.register-left a.social-signin:active {
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
   transition: 0.2s ease;
 }
 
-.register-right a.social-signin.facebook {
+.register-left a.social-signin.facebook {
   background: #32508E;
 }
 
-.register-right a.social-signin.twitter {
+.register-left a.social-signin.twitter {
   background: #55ACEE;
 }
 
-.register-right a.social-signin.google {
+.register-left a.social-signin.google {
   background: #DD4B39;
 }

@@ -7,7 +7,7 @@
             {{ csrf_field() }}
             <div class="register col-md-8 col-md-offset-2">
                 <div id="login-box">
-                    <div class="register-left">
+                    <div class="register-right">
                         <h3 class="text-center" style="font-weight: 400; margin-bottom: 50px">Login</h3>
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}" style="margin: 0">
                             <input id="email" type="text" name="email" value="{{ old('email') }}" required placeholder="E-mail">
@@ -42,7 +42,7 @@
                         </a>
                     </div>
 
-                    <div class="register-right">
+                    <div class="register-left">
                         <span class="loginwith">Sign in with<br />social network</span>
                         <a class="btn social-signin facebook" href="{{ url('/auth/facebook') }}">Log in with facebook</a>
                         <a class="btn social-signin twitter">Log in with Twitter</a>
