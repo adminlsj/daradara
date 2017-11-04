@@ -137,7 +137,8 @@ class OrderController extends Controller
     public function show(Order $order)
     {
         $comments = $order->comments()->orderBy('created_at', 'desc')->get();
-        $relatedOrders = Order::where('category', '=', $order->category)->orWhere('country', '=', $order->country)->inRandomOrder()->limit(20)->get();
+        $orders = Order::where('is_payed', true);
+        $relatedOrders = $orders->where('category', '=', $order->category)->orWhere('country', '=', $order->country)->inRandomOrder()->limit(20)->get();
         return view('order.show', compact('order', 'comments', 'relatedOrders'));
     }
 
@@ -241,7 +242,7 @@ class OrderController extends Controller
         }
 
         $orders = $orders->inRandomOrder()->paginate(20);
-        
+
         return view('order.search', compact('orders'));
     }
 
