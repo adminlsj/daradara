@@ -7,7 +7,7 @@
             {{ csrf_field() }}
             <div class="register col-md-8 col-md-offset-2">
                 <div id="login-box">
-                    <div class="register-left">
+                    <div class="register-right">
                         <h3 class="text-center" style="font-weight: 400; margin-bottom: 50px">Sign up</h3>
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}" style="margin: 0">
                             <input id="name" type="text" name="name" value="{{ old('name') }}" required autofocus placeholder="Name">
@@ -43,7 +43,7 @@
                         <button style="margin-top: 40px; font-size: 15px; width: 80%; margin-left: 10%" type="submit" class="btn btn-info btn-lg btn-block">註冊</button>
                     </div>
 
-                    <div class="register-right">
+                    <div class="register-left">
                         <span class="loginwith">Sign in with<br />social network</span>
                         <a class="btn social-signin facebook" href="{{ url('/auth/facebook') }}">Log in with facebook</a>
                         <a class="btn social-signin twitter">Log in with Twitter</a>
