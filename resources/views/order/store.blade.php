@@ -25,19 +25,19 @@
     <div id="app">
         @include('layouts.nav')
 
-        <div class="container" style="margin-top: 70px">
+        <div class="container" style="margin-top: 35px">
             <div class="card-panel" style="margin-bottom: -10px; height: 665px; border-width: 0px">
                 <div>
-                    <div class="col-md-12">
+                    <div class="col-md-12 col-xs-12">
                         <h3>訂單詳情</h3>
                     </div>
                 </div>
 
-                <div class="col-md-12" style="background-color: #E6E6E6;">
+                <div class="col-md-12 col-xs-12" style="background-color: #E6E6E6;">
                     <h4 style="line-height: 25px; margin-left: 50px">商品 #{{ $order->id }}</h4>
                 </div>
 
-                <div class="container order-summary-content">
+                <div class="hidden-xs container order-summary-content">
                     <div class="col-md-2" style="text-align: right;">
                         <h4>名稱：</h4>
                         <h4>產地：</h4>
@@ -54,26 +54,41 @@
                     </div>
                 </div>
 
-                <div class="col-md-12" style="background-color: #E6E6E6;">
+                <div class="visible-xs-block container order-summary-content">
+                    <div class="col-xs-3" style="text-align: right;">
+                        <h4>產地：</h4>
+                        <h4>收貨：</h4>
+                        <h4>價格：</h4>
+                        <h4>名稱：</h4>
+                    </div>
+                    <div class="col-xs-9">
+                        <h4>{{ App\Order::$country[$order->country] }}</h4>
+                        <h4>{{ $order->end_date }} 前</h4>
+                        <h4>${{ $order->price }}</h4>
+                        <h4>{{ $order->name }}</h4>
+                    </div>
+                </div>
+
+                <div class="col-md-12 col-xs-12" style="background-color: #E6E6E6;">
                     <h4 style="line-height: 25px; margin-left: 50px">買家資料</h4>
                 </div>
 
                 <div class="container order-summary-content">
-                    <div class="col-md-2" style="text-align: right;">
+                    <div class="col-md-2 col-xs-3" style="text-align: right;">
                         <h4>買家：</h4>
-                        <h4>買家聯絡：</h4>
+                        <h4>聯絡：</h4>
                     </div>
-                    <div class="col-md-10">
+                    <div class="col-md-10 col-xs-9">
                         <h4>{{ Auth::user()->name }}</h4>
                         <h4>{{ Auth::user()->email }}</h4>
                     </div>
                 </div>
 
-                <div class="col-md-12" style="background-color: #E6E6E6;">
+                <div class="hidden-xs col-md-12" style="background-color: #E6E6E6;">
                     <h4 style="line-height: 25px; margin-left: 50px">商品訂購</h4>
                 </div>
 
-                <div class="order-summary-content container" style="margin-top: 60px; width: 90%">
+                <div class="hidden-xs order-summary-content container" style="margin-top: 60px; width: 90%">
                     <div class="card-panel container order-product-section" style="margin-top: 15px; padding-top:5px; padding-bottom: 5px; border-radius: 2px;">
                         <div class="col-md-1">
                             <h4 style="text-align: center">#</h4>
@@ -115,14 +130,18 @@
                     </div>
                 </div>
 
+                <div class="col-md-12 visible-xs-block" style="text-align: right; border: solid 1px #f2f2f2">
+                    <h4 style="font-weight: bold">支付總額：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ${{ $total }}</h4>
+                </div>
+
                 <div class="row" style="padding-top: 20px">
-                    <div class="col-md-6">
+                    <div class="col-md-6 col-xs-6">
                         <form style="text-align: right" action="{{ route('order.edit', ['order' => $order]) }}" method="GET">
                             <button style="width: 150px; border-radius: 200px; line-height: 30px" type="submit" class="btn btn-primary">修改訂單</button>
                             <br><br>
                         </form>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-6 col-xs-6">
                         <form style="text-align: left" id="purchaseForm" action="{{ route('order.checkout', ['order' => $order]) }}" method="POST">
                             {{ csrf_field() }}
                             <input type="hidden" name="stripeToken" id="stripeToken">
@@ -152,19 +171,26 @@
                                     </div>
                                 </div>
                             </div>
-                            <br><br>
+                            <br class="hidden-xs">
+                            <br class="hidden-xs">
                         </form>
                     </div> 
                 </div>
             </div>
-            <br><br><br>
+
+            <br class="hidden-xs">
+            <br class="hidden-xs">
+            <br class="hidden-xs">
+
         </div>
+
+        @include('layouts.footer')
 
         <script src="https://checkout.stripe.com/checkout.js"></script>
         <script>
             var handler = StripeCheckout.configure({
                 key: "{{ config('services.stripe.key') }}",
-                image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
+                image: 'https://s3-us-west-2.amazonaws.com/freerider/avatars/originals/default_freerider_profile_pic.jpg',
                 locale: 'en',
                 token: function(token) {
                     document.querySelector('#stripeToken').value = token.id;
