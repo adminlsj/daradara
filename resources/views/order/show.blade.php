@@ -1,15 +1,20 @@
 @extends('layouts.app')
 
 @section('content')
+<ol class="text-center arrows visible-xs-block" style="padding:10px 0px 10px 0px; margin:0; background-color: white">
+    <li><a href="/orders/search?name=&category=&country={{$order->country}}&price=">{{ App\Order::$country[$order->country] }}</a></li>
+    <li><a href="/orders/search?name=&category={{$order->category}}&country=&price=">{{ App\Order::$category[$order->category] }}</a></li>
+    <li><a href="/orders/search?name=&category={{$order->category}}&country=&price=">{{str_limit($order->name, 25)}}</a></li>
+</ol>
 <div class="container" style="width: 90%">
-	<ol class="arrows" style="padding:10px 0px 10px 0px; margin:0; background-color: white">
+	<ol class="arrows hidden-xs" style="padding:10px 0px 10px 0px; margin:0; background-color: white">
 	    <li><a href="/orders/search?name=&category=&country={{$order->country}}&price=">{{ App\Order::$country[$order->country] }}</a></li>
 	    <li><a href="/orders/search?name=&category={{$order->category}}&country=&price=">{{ App\Order::$category[$order->category] }}</a></li>
 	    <li><a href="/orders/search?name=&category={{$order->category}}&country=&price=">{{$order->name}}</a></li>
 	</ol>
 	<div class="row">
 		<div class="col-md-8">
-			<div class="row" style="margin-top: 20px">
+			<div class="row hidden-xs" style="margin-top: 20px">
 				<div class="col-md-12">
 					<div class="order-tab">
 						@foreach ($order->orderImgs as $image)
@@ -27,6 +32,14 @@
 				</div>
 			</div>
 
+			<div class="col-md-8 visible-xs-block">
+				<div class="order-mobile-carousel owl-carousel owl-theme">
+					@foreach ($order->orderImgs as $image)
+						<img style="border-radius: 2px;" class="img-responsive" src="https://s3-us-west-2.amazonaws.com/freerider/orderImgs/originals/{{ $image->order_id }}/{{ $image->filename }}.jpg" alt="First slide">
+					@endforeach
+				</div>
+			</div>
+
 			<div class="row">
 				<div class="col-md-12">
 					<h3 style="color: black; font-weight: 400">{{ $order->name }}</h3>
@@ -35,16 +48,17 @@
 			</div>
 			<hr>
 			<div class="row">
-				<div class="col-md-2">
+				<div class="col-md-2 col-xs-4">
 					<a href="/orders/search?name="><img src="https://s3-us-west-2.amazonaws.com/freerider/avatars/thumbnails/{{ $order->user->avatar->filename }}.jpg" class="img-responsive img-circle"></a>
 				</div>
-				<div class="col-md-7">
+				<div class="col-md-7 col-xs-8">
 					<div><h3 style="color: black; font-weight: 400; margin-top: 15px"><span style="font-weight: 800 !important">${{ $order->price }}</span> + $0 服務費</h3></div>
 					<div>產地：<a href="/orders/search?name=&category=&country={{$order->country}}&price=">{{ App\Order::$country[$order->country] }}</a> | <a href="/orders/search?name=&category={{$order->category}}&country=&price=">{{ App\Order::$category[$order->category] }}</a></div>
 					<div>收貨日期：{{ $order->end_date }} 前</div>
 				</div>
-				<div class="col-md-3">
-					<form style="margin-top: 5%" action="{{ route('order.store') }}" method="POST" enctype="multipart/form-data">
+				<div class="col-md-3 col-xs-12">
+					<div class="visible-xs-block visible-sm-block" style="padding-top: 15px"></div>
+					<form class="col-md-12 col-xs-6" style="margin-top: 7px" action="{{ route('order.store') }}" method="POST" enctype="multipart/form-data">
 						{{ csrf_field() }}
 						<input type="hidden" name="name" id="name" value="{{ $order->name }}">
 						<input type="hidden" name="price" id="price" value="{{ $order->price }}">
@@ -58,7 +72,7 @@
 						<div class="order-show"><button type="submit" style="border-radius: 2px !important; font-size: 15px;" class="btn btn-info btn-lg btn-block">我也想要</button></div>
 					</form>
 
-					<form action="{{ route('tran.store') }}" method="POST" enctype="multipart/form-data" style="margin-top: 7px">
+					<form class="col-md-12 col-xs-6" action="{{ route('tran.store') }}" method="POST" enctype="multipart/form-data" style="margin-top: 7px">
 						{{ csrf_field() }}
 						<input name="order_id" type="hidden" value="{{ $order->id }}">
 						@if (!$order->is_payed || $order->trans || $order->end_date < Carbon\Carbon::today())
@@ -88,6 +102,7 @@
 								</div>
 							</div>
 						@endif
+						<div class="visible-xs-block visible-sm-block" style="padding-top: 10px"></div>
 					</form>
 				</div>
 			</div>
@@ -123,14 +138,13 @@
 
 <script>
 	$(document).ready(function(){
-		$('.owl-carousel').owlCarousel({
+		$('.order-mobile-carousel').owlCarousel({
 			items: 1,
 			loop: true,
-			nav: true,
-			dots: false,
+			nav: false,
+			dots: true,
 			lazyLoad: true,
 			autoplay: false,
-			navText : ['<i class="material-icons" style="font-size:36px;color:#AAA;">keyboard_arrow_left</i>','<i class="material-icons" style="font-size:36px;color:#AAA;">keyboard_arrow_right</i>']
 		});
 	});
 
