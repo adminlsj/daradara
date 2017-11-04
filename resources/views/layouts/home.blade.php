@@ -21,7 +21,7 @@
 		</div>
 	</div>
     
-    <div class="row" style="margin-top: 70px;">
+    <div class="hidden-xs row" style="margin-top: 70px;">
     	<div class="col-md-12">
 			<div class="tab" style="border-width: 0px; margin-bottom: -10px">
 				@foreach (App\Order::$category as $key => $element)
@@ -39,6 +39,12 @@
 				</div>
 			@endforeach
 		</div>
+	</div>
+
+	<div class="visible-xs-block row" style="margin-top: 50px;">
+		<h3 style="color: grey; font-weight: 300">為您精選的產品</h3>
+		<hr>
+		@include('order.related-orders')
 	</div>
 
 	<div class="row" style="margin-top: 15px">
@@ -104,15 +110,24 @@
 	<div class="row visible-xs-block" style="padding-top: 90px">
 		<div class="row">
 			<div class="col-xs-12">
-				<img style="border-radius: 2px" class="d-block img-responsive" src="https://s3-us-west-2.amazonaws.com/freerider/system/countrySquare/japan.jpg" alt="Chicago">
+				<form action="{{ route('order.search') }}" method="GET">
+			    	<input type="hidden" name="country" id="country" value="japan">
+					<input class="img-responsive" type="image" src="https://s3-us-west-2.amazonaws.com/freerider/system/countrySquare/japan.jpg">
+				</form>
 			</div>
 		</div>
 		<div class="row" style="margin-top: 10px">
 			<div class="col-xs-6" style="padding-right: 5px">
-				<img style="border-radius: 2px" class="d-block img-responsive" src="https://s3-us-west-2.amazonaws.com/freerider/system/countrySquare/korea.jpg" alt="Chicago">
+				<form action="{{ route('order.search') }}" method="GET">
+			    	<input type="hidden" name="country" id="country" value="korea">
+					<input class="img-responsive" type="image" src="https://s3-us-west-2.amazonaws.com/freerider/system/countrySquare/korea.jpg">
+				</form>
 			</div>
 			<div class="col-xs-6" style="padding-left: 5px">
-				<img style="border-radius: 2px" class="d-block img-responsive" src="https://s3-us-west-2.amazonaws.com/freerider/system/countrySquare/usa.jpg" alt="Chicago">
+				<form action="{{ route('order.search') }}" method="GET">
+			    	<input type="hidden" name="country" id="country" value="usa">
+					<input class="img-responsive" type="image" src="https://s3-us-west-2.amazonaws.com/freerider/system/countrySquare/usa.jpg">
+				</form>
 			</div>
 		</div>
 	</div>
@@ -178,6 +193,13 @@
 				</div>
 			</div>
 		@endforeach
+		<div class="row" style="margin-top: 20px">
+			<div class="col-xs-8 col-xs-offset-2">
+			    <form action="{{ route('blog.index') }}" method="GET">
+			        <button type="submit" class="btn btn-info btn-outline btn-lg btn-block" style="border-radius: 0; font-size: 15px;">查看所有貼文</button>
+			    </form>
+			</div>
+		</div>
 	</div>
 
 	<br><br><br><br><br>
@@ -203,27 +225,14 @@
 
 	$(document).ready(function(){
 		$('.order-carousel').owlCarousel({
-			responsiveClass:true,
-		    responsive:{
-				0 : {
-					items: 1,
-					loop: true,
-					nav: false,
-					dots: true,
-					lazyLoad: true,
-					autoplay: false,
-				},
-				768 : {
-					items: 4,
-					loop: true,
-					margin: 5,
-					nav: true,
-					dots: false,
-					lazyLoad: true,
-					autoplay: false,
-					navText : ['<i class="material-icons" style="font-size:36px; margin-left:-91px; color:#666666">keyboard_arrow_left</i>','<i class="material-icons" style="font-size:36px; margin-right:-90px; color:#666666">keyboard_arrow_right</i>']
-				}
-			}
+			items: 4,
+			loop: true,
+			margin: 5,
+			nav: true,
+			dots: false,
+			lazyLoad: true,
+			autoplay: false,
+			navText : ['<i class="material-icons" style="font-size:36px; margin-left:-91px; color:#666666">keyboard_arrow_left</i>','<i class="material-icons" style="font-size:36px; margin-right:-90px; color:#666666">keyboard_arrow_right</i>']
 		});
 	});
 

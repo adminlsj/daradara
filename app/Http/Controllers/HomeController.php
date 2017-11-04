@@ -35,7 +35,7 @@ class HomeController extends Controller
 
         $loopOrders = ['food' => $foods, 'makeup' => $makeups, 'bag' => $bags, 'accessories' => $accessories, 'watch' => $watches, 'others' => $others];
 
-        return view('layouts.home', compact('orders', 'loopOrders', 'caro_blogs', 'relatedBlogs', 'similar_blogs'));
+        return view('layouts.home', compact('orders', 'loopOrders', 'caro_blogs', 'relatedBlogs', 'relatedOrders', 'similar_blogs'));
     }
 
     public function contact()
