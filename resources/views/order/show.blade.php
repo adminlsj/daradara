@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container" style="width: 90%">
-	<ol class="text-center arrows" style="padding:10px 0px 10px 0px; margin:0; background-color: white; display:block; white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">
+	<ol class="arrows" style="padding:10px 0px 10px 0px; margin:0; background-color: white; display:block; white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">
 	    <li><a href="/orders/search?name=&category=&country={{$order->country}}&price=">{{ App\Order::$country[$order->country] }}</a></li>
 	    <li><a href="/orders/search?name=&category={{$order->category}}&country=&price=">{{ App\Order::$category[$order->category] }}</a></li>
 	    <li><a href="/orders/search?name=&category={{$order->category}}&country=&price=">{{$order->name}}</a></li>
