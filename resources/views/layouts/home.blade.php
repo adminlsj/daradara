@@ -10,14 +10,10 @@
 	<img style="width:100%" src="https://s3-us-west-2.amazonaws.com/freerider/system/intro/8.jpg" alt="Los Angeles">
 </div>
 
-<div class="visible-xs-block row">
-	<div class="col-md-12">
-		<img class="d-block img-responsive" src="https://s3-us-west-2.amazonaws.com/freerider/system/intro/3.jpg" alt="Chicago">
-	</div>
-	<div class="col-md-12" style="margin-top: -20px; padding-bottom: 15px; border-bottom: solid 1px #f2f2f2">
+<div class="visible-xs-block">
+		<img style="width: auto" class="d-block img-responsive" src="https://s3-us-west-2.amazonaws.com/freerider/system/intro/3.jpg" alt="Chicago">
 		<br class="visible-xs-block">
-		<img class="d-block img-responsive" src="https://s3-us-west-2.amazonaws.com/freerider/system/intro/4.jpg" alt="Chicago">
-	</div>
+		<img style="margin-top: -20px; padding-bottom: 10px; border-bottom: solid 1px #f2f2f2" class="d-block img-responsive" src="https://s3-us-west-2.amazonaws.com/freerider/system/intro/4.jpg" alt="Chicago">
 </div>
 
 <div class="container" style="width: 90%">
