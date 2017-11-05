@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default navbar-fixed-top" style="border-bottom-width: 0px; height: 50px; padding-top: 5px; padding-bottom: 55px;">
+<nav class="navbar navbar-default navbar-fixed-top" style="border-bottom-width: 0px; height: 50px; padding-top: 5px; padding-bottom: 55px; z-index: 9999">
     <div class="container" style="width: 95%">
         <div class="navbar-header visible-xs-block">
             <div class="row">
