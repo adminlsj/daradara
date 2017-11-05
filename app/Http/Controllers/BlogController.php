@@ -105,6 +105,8 @@ class BlogController extends Controller
 
         $content = str_replace('(BLANK)', '<p style="margin:35px"></p>', $content);
 
+        $content = str_replace('(LOGO)', '<a class="visible-xs-block" href="/"><img style="margin-top:5px;margin-bottom:15px;width:100%; height:100%; border: solid 1px #f2f2f2;" src="https://s3-us-west-2.amazonaws.com/freerider/system/intro/7.jpg" alt="Los Angeles"></a>', $content);
+
         $similar_blogs = Blog::inRandomOrder()->limit(10)->get();
 
         $orders = Order::where('is_payed', true);
