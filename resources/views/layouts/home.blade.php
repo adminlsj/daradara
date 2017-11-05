@@ -6,16 +6,26 @@
 	<img style="width:100%" src="https://s3-us-west-2.amazonaws.com/freerider/system/intro/2.jpg" alt="Los Angeles">
 </div>
 
-<div class="visible-xs-block" style="margin-top: -15px; margin-bottom: 25px; width: 100%">
+<div class="visible-xs-block" style="margin-top: -15px; width: 100%">
 	<img style="width:100%" src="https://s3-us-west-2.amazonaws.com/freerider/system/intro/8.jpg" alt="Los Angeles">
 </div>
 
+<div class="visible-xs-block row">
+	<div class="col-md-12">
+		<img class="d-block img-responsive" src="https://s3-us-west-2.amazonaws.com/freerider/system/intro/3.jpg" alt="Chicago">
+	</div>
+	<div class="col-md-12" style="margin-top: -20px; padding-bottom: 15px; border-bottom: solid 1px #f2f2f2">
+		<br class="visible-xs-block">
+		<img class="d-block img-responsive" src="https://s3-us-west-2.amazonaws.com/freerider/system/intro/4.jpg" alt="Chicago">
+	</div>
+</div>
+
 <div class="container" style="width: 90%">
-	<div class="row">
-		<div class="col-md-6 col-xs-12">
+	<div class="row hidden-xs">
+		<div class="col-md-6">
 			<img style="border-radius: 2px" class="d-block img-responsive" src="https://s3-us-west-2.amazonaws.com/freerider/system/intro/3.jpg" alt="Chicago">
 		</div>
-		<div class="col-md-6 col-xs-12">
+		<div class="col-md-6">
 			<br class="visible-xs-block">
 			<img style="border-radius: 2px" class="d-block img-responsive" src="https://s3-us-west-2.amazonaws.com/freerider/system/intro/4.jpg" alt="Chicago">
 		</div>
