@@ -13,17 +13,17 @@
 <div class="visible-xs-block">
 		<img style="width: auto" class="d-block img-responsive" src="https://s3-us-west-2.amazonaws.com/freerider/system/intro/3.jpg" alt="Chicago">
 		<br class="visible-xs-block">
-		<img style="margin-top: -20px; padding-bottom: 10px; border-bottom: solid 1px #f2f2f2" class="d-block img-responsive" src="https://s3-us-west-2.amazonaws.com/freerider/system/intro/4.jpg" alt="Chicago">
+		<img style="margin-top: -17px; padding-bottom: 13px; border-bottom: solid 1px #f2f2f2" class="d-block img-responsive" src="https://s3-us-west-2.amazonaws.com/freerider/system/intro/4.jpg" alt="Chicago">
 </div>
 
 <div class="container" style="width: 90%">
 	<div class="row hidden-xs">
 		<div class="col-md-6">
-			<img style="border-radius: 2px" class="d-block img-responsive" src="https://s3-us-west-2.amazonaws.com/freerider/system/intro/3.jpg" alt="Chicago">
+			<img style="border-radius: 2px; border: solid 1px #f2f2f2" class="d-block img-responsive" src="https://s3-us-west-2.amazonaws.com/freerider/system/intro/3.jpg" alt="Chicago">
 		</div>
 		<div class="col-md-6">
 			<br class="visible-xs-block">
-			<img style="border-radius: 2px" class="d-block img-responsive" src="https://s3-us-west-2.amazonaws.com/freerider/system/intro/4.jpg" alt="Chicago">
+			<img style="border-radius: 2px; border: solid 1px #f2f2f2" class="d-block img-responsive" src="https://s3-us-west-2.amazonaws.com/freerider/system/intro/4.jpg" alt="Chicago">
 		</div>
 	</div>
     
