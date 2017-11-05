@@ -21,13 +21,17 @@
     <div id="app">
         <div style="margin-bottom: 73px;">@include('layouts.nav')</div>
         
-        <div id="left" style="margin-top: -12px; background-color: white; border-top: solid 1px #E6E6E6">
+        <div class="hidden-xs" id="left" style="margin-top: -12px; background-color: white; border-top: solid 1px #E6E6E6">
 		    @include('order.search-left')
 		</div>
 		<div id="right" style="margin-top: -12px; border-top: solid 1px #E6E6E6; padding-top: 20px;">
+            <nav class="visible-xs-block navbar navbar-default navbar-fixed-top" style="border-top: solid 1px #E6E6E6; border-bottom: solid 1px #E6E6E6; height: 30px; margin-top: 60px;">
+                @include('order.search-left-mobile')
+            </nav>
             <div class="container" style="width: 100%">
+                <div class="visible-xs-block" style="margin-top: 30px"></div>
     		    @foreach ($orders as $order)
-                    <div class="col-md-3" style="padding: 0; padding-left: 5px; margin-bottom: 18px;">
+                    <div class="col-md-3 col-sm-6" style="padding: 0; padding-left: 5px; margin-bottom: 18px;">
         	            @include('order.single-order', ['order' => $order, 'radius' => 'border-radius: 2px'])
                     </div>
     	        @endforeach

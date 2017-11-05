@@ -9230,10 +9230,9 @@ input[type=file] {
   border-right: 1px solid #E6E6E6;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 992px) {
   #left {
     padding: 10px;
-    width: 150px;
   }
 }
 
@@ -9246,7 +9245,7 @@ input[type=file] {
 
 @media (max-width: 768px) {
   #right {
-    width: calc(100% - 150px);
+    width: 100%;
   }
 }
 
