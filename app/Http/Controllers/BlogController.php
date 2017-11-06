@@ -105,7 +105,7 @@ class BlogController extends Controller
 
         $content = str_replace('(BLANK)', '<p style="margin:35px"></p>', $content);
 
-        $content = str_replace('(LOGO)', '<a class="visible-xs-block" href="/"><img style="margin-top:5px;margin-bottom:15px;width:100%; height:100%; border: solid 1px #f2f2f2;" src="https://s3-us-west-2.amazonaws.com/freerider/system/intro/7.jpg" alt="Los Angeles"></a>', $content);
+        $content = explode('(LOGO)', $content, 2);
 
         $similar_blogs = Blog::inRandomOrder()->limit(10)->get();
 
@@ -122,7 +122,9 @@ class BlogController extends Controller
         $fb_title = str_replace('(/IMG)', '', $fb_title);
         $fb_title = str_replace('(BLANK)', '', $fb_title);
 
-        return view('blog.show', compact('blog', 'content', 'similar_blogs', 'relatedOrders', 'relatedBlogs', 'fb_title'));
+        $displayOrders = Order::find([69, 14, 82, 38]);
+
+        return view('blog.show', compact('blog', 'content', 'similar_blogs', 'relatedOrders', 'relatedBlogs', 'fb_title', 'displayOrders'));
     }
 
     /**

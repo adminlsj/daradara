@@ -59,10 +59,25 @@
 							</span>
 						</h4>
 
-						{!! $content !!}
-
+						@foreach ($content as $cont)
+							{!! $cont !!}
+							<div class="visible-xs-block visible-sm-block" style="padding-bottom: 335px">
+								@if (!$loop->last)
+									@foreach ($displayOrders as $order)
+										<div class="col-sm-6 col-xs-6" style="padding:0;{{ $loop->index % 2 == 0 ? 'padding-right: 5px' : 'padding-left: 5px' }}">
+											<div class="card-order" style="margin-bottom: 10px">
+											    <a href="{{ route('order.show', ['order' => $order->id]) }}">
+											        <img style="border-radius: 2px; border: solid 1px #f2f2f2" id="order-img" class="d-block img-responsive single-order-outer" src="https://s3-us-west-2.amazonaws.com/freerider/orderImgs/thumbnails/{{ $order->orderImgs->first()->order_id }}/{{ $order->orderImgs->first()->filename }}.jpg">
+											        <div id="img-text-mobile" style="background-color: rgba(45,45,45,0.7) ; padding: 5px 12px 5px 12px; border-radius: 2px;">${{ $order->price }}</div>
+											    </a>
+											</div>
+										</div>
+									@endforeach
+								@endif
+							</div>
+							<div class="visible-xs-block visible-sm-block" style="margin-bottom: -335px"></div>
+						@endforeach
 						<br>
-						
 						<div class="right"><iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2Ffreeriderhk%2F&width=450&layout=standard&action=like&show_faces=true&share=true&height=80&appId" width="260" height="80" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe></div>
 					</div>
 

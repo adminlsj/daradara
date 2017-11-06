@@ -9296,6 +9296,16 @@ a > i {
   bottom: 37px;
 }
 
+#img-text-mobile {
+  z-index: 1000;
+  position: absolute;
+  color: #d84b6b;
+  font-size: 20px;
+  font-weight: bold;
+  right: 5px;
+  bottom: 10px;
+}
+
 .border-radius-2 {
   border-radius: 2px !important;
 }
