@@ -66,7 +66,7 @@
 									@foreach ($displayOrders as $order)
 										<div class="col-sm-6 col-xs-6" style="padding:0;{{ $loop->index % 2 == 0 ? 'padding-right: 5px' : 'padding-left: 5px' }}">
 											<div class="card-order" style="margin-bottom: 10px">
-											    <a href="{{ route('order.show', ['order' => $order->id]) }}">
+											    <a href="{{ route('order.show', ['order' => $order->id]) }}" target="_blank">
 											        <img style="border-radius: 2px; border: solid 1px #f2f2f2" id="order-img" class="d-block img-responsive single-order-outer" src="https://s3-us-west-2.amazonaws.com/freerider/orderImgs/thumbnails/{{ $order->orderImgs->first()->order_id }}/{{ $order->orderImgs->first()->filename }}.jpg">
 											        <div id="{{ $loop->index % 2 == 0 ? 'img-text-left' : 'img-text-right' }}" style="background-color: rgba(45,45,45,0.7) ; padding: 5px 12px 5px 12px; border-top-left-radius: 2px;">${{ $order->price }}</div>
 											    </a>
