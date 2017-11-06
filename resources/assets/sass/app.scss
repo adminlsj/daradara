@@ -258,7 +258,7 @@ a > i {
     bottom:37px;
 }
 
-#img-text-mobile
+#img-text-left
 {
     z-index:1000;
     position:absolute;    
@@ -266,7 +266,18 @@ a > i {
     font-size:20px;
     font-weight:bold;
     right:5px;
-    bottom:15px;
+    bottom:10px;
+}
+
+#img-text-right
+{
+    z-index:1000;
+    position:absolute;    
+    color:#d84b6b;
+    font-size:20px;
+    font-weight:bold;
+    right:0px;
+    bottom:10px;
 }
 
 .border-radius-2 {
