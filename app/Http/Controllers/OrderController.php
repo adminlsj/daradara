@@ -82,6 +82,7 @@ class OrderController extends Controller
             'description' => request('description'),
             'link' => request('link'),
             'end_date' => request('endDate'),
+            'quantity' => request('quantity'),
         ]);
 
         if (request('copyOrderId')) {
@@ -189,25 +190,14 @@ class OrderController extends Controller
 
     public function checkout(Order $order)
     {
-        Stripe::setApiKey(config('services.stripe.secret'));
+        auth()->user()->phone = request('phone');
+        auth()->user()->address = request('address');
+        auth()->user()->save();
+        
+        $order->is_payed = true;
+        $order->save();
 
-        $customer = Customer::create([
-            'email' => request('stripeEmail'),
-            'source'  => request('stripeToken')
-        ]);
-
-        $charge = Charge::create([
-            'customer' => $customer->id,
-            'amount'   => $order->price * 100,
-            'currency' => 'hkd'
-        ]);
-
-        if ($charge) {
-            $order->is_payed = true;
-            $order->save();
-        }
-
-        \Mail::to($order->user)->send(new OrderNew($order->user, $order));
+        \Mail::to(auth()->user())->send(new OrderNew($order->user, $order));
 
         return redirect()->action('OrderController@index');
     }

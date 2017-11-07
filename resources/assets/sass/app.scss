@@ -29,6 +29,9 @@
 // Breadcrumbs
 @import "breadcrumbs";
 
+// Quantity
+@import "quantity_btn";
+
 // Bootstrap
 @import "~bootstrap-sass/assets/stylesheets/bootstrap";
 
@@ -182,7 +185,17 @@ input[type=file] {
     font-weight: 300;
 }
 
+.order-summary-content {
+    @media (max-width: 992px) {
+        width: 100%;
+    }
+    width: 90%;
+}
+
 .order-summary-content h4 {
+    @media (max-width: 992px) {
+        font-size: 10px;
+    }
     font-size: 15px;
     font-weight: 300;
 }

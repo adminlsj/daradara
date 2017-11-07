@@ -8,6 +8,7 @@
 			<hr>
 			<form class="order-form" action="{{ route('order.store') }}" method="POST" enctype="multipart/form-data">
 				{{ csrf_field() }}
+				<input type="hidden" name="quantity" id="quantity" value="1">
 				<div class="row">
 					<div class="col-md-8">
 					    <input type="text" value="" id="name" name="name" placeholder="訂單名稱" required>

@@ -22,6 +22,8 @@ const app = new Vue({
     el: '#app'
 });
 
+require('./quantityBtn');
+
 require('./comment');
 
 $('#avatar-upload').on("change", function(e) {

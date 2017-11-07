@@ -7,7 +7,7 @@
         </div>
         <div class="col-md-7 col-sm-9 col-xs-7">
             <div><a href="{{ route('order.show', ['order' => $order->id]) }}"><h3 style="color: black; font-weight: 400; font-size: 15px">{{ str_limit($order->name, 50) }}</h3></a></div>
-            <div style="font-size: 12.5px;"><span style="font-weight: 600;">${{ $order->price }}</span> + $0 服務費</div>
+            <div style="font-size: 12.5px;"><span style="font-weight: 600;">${{ $order->price }}</span> + $0 限時免運費</div>
             <div class="hidden-xs" style="font-size: 12.5px">{{ $order->end_date }} 前</div>
         </div>
     </div>

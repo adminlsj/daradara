@@ -1,13 +1,13 @@
 @component('mail::message')
-# 我們已受到您的訂單 {{ $order->name }} 的付款
+# 我們已受到您的訂單 {{ $order->name }}
 
 @component('mail::table')
-| 商品名稱                | 單價                  | 數量   | 已支付                |
-| :--------------------: | :------------------: | :---: | :------------------: |
-| {{ $order->name }}     | ${{ $order->price }} | 1     | ${{ $order->price }} |
+| 商品名稱                | 單價                  | 數量                 |
+| :--------------------: | :------------------: | :-----------------: |
+| {{ $order->name }}     | ${{ $order->price }} | {{ $order->quantity }} |
 @endcomponent
 
-此訂單正在等待 Freerider 接單。您可隨時取消訂單並全額退款。
+FreeRider正在光速採購您的訂單！我們承諾會在7日內送貨上門。
 
 @component('mail::button', ['url' => route('order.index')])
 我的訂單

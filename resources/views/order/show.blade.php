@@ -47,13 +47,11 @@
 					<a href="/orders/search?name="><img src="https://s3-us-west-2.amazonaws.com/freerider/avatars/thumbnails/{{ $order->user->avatar->filename }}.jpg" class="img-responsive img-circle"></a>
 				</div>
 				<div class="col-md-7 col-xs-8">
-					<div><h3 style="color: black; font-weight: 400; margin-top: 15px"><span style="font-weight: 800 !important">${{ $order->price }}</span> + $0 服務費</h3></div>
-					<div>產地：<a href="/orders/search?name=&category=&country={{$order->country}}&price=">{{ App\Order::$country[$order->country] }}</a> | <a href="/orders/search?name=&category={{$order->category}}&country=&price=">{{ App\Order::$category[$order->category] }}</a></div>
-					<div>收貨日期：{{ $order->end_date }} 前</div>
-				</div>
-				<div class="col-md-3 col-xs-12">
-					<div class="visible-xs-block visible-sm-block" style="padding-top: 15px"></div>
-					<form class="col-md-12 col-xs-6" style="margin-top: 7px" action="{{ route('order.store') }}" method="POST" enctype="multipart/form-data">
+					<div><h3 style="color: black; font-weight: 400; margin-top: 15px"><span style="font-weight: 800 !important">${{ $order->price }}</span>&nbsp;<small> + $0 限時免運費</small></h3></div>
+					<div>分類：<a href="/orders/search?name=&category=&country={{$order->country}}&price=">{{ App\Order::$country[$order->country] }}</a> | <a href="/orders/search?name=&category={{$order->category}}&country=&price=">{{ App\Order::$category[$order->category] }}</a></div>
+					<div>送貨：九龍 | 新界 | 香港島</div>
+
+					<form class="" style="margin-top: 7px" action="{{ route('order.store') }}" method="POST" enctype="multipart/form-data">
 						{{ csrf_field() }}
 						<input type="hidden" name="name" id="name" value="{{ $order->name }}">
 						<input type="hidden" name="price" id="price" value="{{ $order->price }}">
@@ -61,44 +59,26 @@
 						<input type="hidden" name="country" id="country" value="{{ $order->country }}">
 						<input type="hidden" name="description" id="description" value="{{ $order->description }}">
 						<input type="hidden" name="link" id="link" value="{{ $order->link }}">
-						<input type="hidden" name="endDate" id="endDate" value="{{ Carbon\Carbon::today()->addDays(10)->format('Y-m-d') }}">
+						<input type="hidden" name="endDate" id="endDate" value="{{ Carbon\Carbon::today()->addDays(7)->format('Y-m-d') }}">
 						<input type="hidden" name="copyOrderId" id="copyOrderId" value="{{ $order->id }}">
+						
+						<br>
 
-						<div class="order-show"><button type="submit" style="border-radius: 2px !important; font-size: 15px;" class="btn btn-info btn-lg btn-block">我也想要</button></div>
-					</form>
-
-					<form class="col-md-12 col-xs-6" action="{{ route('tran.store') }}" method="POST" enctype="multipart/form-data" style="margin-top: 7px">
-						{{ csrf_field() }}
-						<input name="order_id" type="hidden" value="{{ $order->id }}">
-						@if (!$order->is_payed || $order->trans || $order->end_date < Carbon\Carbon::today())
-							<button type="button" style="border-radius: 0; font-size:15px" class="btn btn-primary btn-outline btn-lg btn-block" disabled='true'>已被接單</button>
-						@else
-				            <!-- Trigger the modal with a button -->
-				            <div class="order-show"><button type="button" style="border-radius: 2px; font-size:15px" class="btn btn-primary btn-outline btn-lg btn-block" data-toggle="modal" data-target="#acceptModal">接單</button></div>
-							<!-- Modal -->
-							<div id="acceptModal" class="modal fade" role="dialog">
-								<div class="modal-dialog">
-									<div class="modal-content">
-										<div class="modal-header">
-											<button type="button" class="close" data-dismiss="modal">&times;</button>
-											<h4 class="modal-title">接單說明</h4>
-										</div>
-										<div class="modal-body">
-											<p>1. 買家已預先支付訂單款項，並會在交易完成後由我們轉帳至您的帳戶，以此保障雙方利益</p>
-											<p>2. 請確保您可在訂單要求的收貨日期內交收，之後再接單。</p>
-											<p>3. 接單後，此訂單將不能被取消。</p>
-											<br>
-										</div>
-										<div class="modal-footer">
-											<button type="button" style="border-radius: 2px;" class="btn btn-default" data-dismiss="modal">返回</button>
-											<button type="submit" style="border-radius: 2px !important; width: auto;" class="btn btn-info">確認接單</button>
-										</div>
-									</div>
+						<div class="row">
+							<div class="col-md-2">
+								<div class="quantity" style="display: inline-block;">
+									<input type="number" name="quantity" id="quantity" min="1" max="9" step="1" value="1">
 								</div>
 							</div>
-						@endif
-						<div class="visible-xs-block visible-sm-block" style="padding-top: 10px"></div>
+
+							<div class="col-md-10" style="padding-top:0.9px; padding-left: 25px; max-width: 200px">
+								<div><button type="submit" style="border-radius: 2px !important; font-size: 15px;" class="btn btn-info btn-lg btn-block">立即購買</button></div>
+							</div>
+						</div>
 					</form>
+				</div>
+				<div class="col-md-3 col-xs-12">
+					<img class="img-responsive" src="https://s3-us-west-2.amazonaws.com/freerider/system/intro/delivery.jpg" alt="First slide">
 				</div>
 			</div>
 			<div class="row">

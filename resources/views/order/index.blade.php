@@ -16,12 +16,33 @@
 							<div style="padding-top:2px; margin-bottom: 7px"><a style="color: black; font-weight: 400; font-size: 18px;" href="{{ route('order.show', ['order' => $order->id]) }}">{{ $order->name }}</a>
 							&nbsp;&nbsp;<small>(已付款)</small></div>
 							<div style="margin-bottom: 3px; font-size: 13px;">收貨日期：{{ $order->end_date }} 前</div>
-							<div><span style="font-weight: 400; font-size: 13px;">${{ $order->price }} + $0 服務費</span></div>
+							<div><span style="font-weight: 400; font-size: 13px;">${{ $order->price }} + $0 限時免運費</span></div>
 						</div>
 						<div class="visible-xs-block" style="margin-top: 7px;"></div>
 						<div class="col-md-2 order-show">
 							<div class="row">
-								<div class="col-md-12 col-xs-6"><a href="/orders/{{ $order->id }}/cancel"  class="btn btn-info order-index-btn">取消訂單</a></div>
+								<!-- Trigger the modal with a button -->
+								<div class="col-md-12 col-xs-6"><a class="btn btn-info order-index-btn" data-toggle="modal" data-target="#cancelModal{{$order->id}}">取消訂單</a></div>
+								<!-- Modal -->
+								<div id="cancelModal{{$order->id}}" style="z-index: 10000" class="modal fade" role="dialog">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal">&times;</button>
+												<h4 class="modal-title">取消訂單</h4>
+											</div>
+											<div class="modal-body">
+												<p>確認取消訂單嗎？</p>
+												<p>我們承諾能在7天內送貨上門。</p>
+											</div>
+											<div class="modal-footer">
+												<button type="button" style="border-radius: 2px;" class="btn btn-default" data-dismiss="modal">返回</button>
+												<a href="/orders/{{ $order->id }}/cancel" type="submit" style="border-radius: 2px !important; width: auto;" class="btn btn-info">取消訂單</a>
+											</div>
+										</div>
+									</div>
+								</div>
+
 								<div class="col-md-12 col-xs-6"><a href="/contact" style="margin-top: 7px" class="btn btn-primary order-index-btn">聯絡我們</a></div>
 							</div>
 						</div>
@@ -42,7 +63,7 @@
 							<div style="padding-top:2px;"><a style="color: black; font-weight: 400; font-size: 18px;" href="{{ route('order.show', ['order' => $order->id]) }}">{{ $order->name }}</a></div>
 							<div style="margin-bottom: 7px"><small>{{ $order->trans->is_arrived ? '(已入庫存等待交收中)' : '(Freerider '.$order->trans->user->name.' 火速採購中)' }}</small></div>
 							<div style="margin-bottom: 3px; font-size: 13px;">收貨日期：{{ $order->end_date }} 前</div>
-							<div><span style="font-weight: 400; font-size: 13px;">${{ $order->price }} + $0 服務費</span></div>
+							<div><span style="font-weight: 400; font-size: 13px;">${{ $order->price }} + $0 限時免運費</span></div>
 						</div>
 						<div class="visible-xs-block" style="margin-top: 7px;"></div>
 						<div class="col-md-2">
@@ -114,7 +135,7 @@
 							<div style="padding-top:2px; margin-bottom: 7px"><a style="color: black; font-weight: 400; font-size: 18px;" href="{{ route('order.show', ['order' => $order->id]) }}">{{ $order->name }}</a>
 							&nbsp;&nbsp;<small>(已付款)</small></div>
 							<div style="margin-bottom: 3px; font-size: 13px;">收貨日期：{{ $order->end_date }} 前</div>
-							<div><span style="font-weight: 400; font-size: 13px;">${{ $order->price }} + $0 服務費</span></div>
+							<div><span style="font-weight: 400; font-size: 13px;">${{ $order->price }} + $0 限時免運費</span></div>
 						</div>
 						<div class="visible-xs-block" style="margin-top: 7px;"></div>
 						<div class="col-md-2">
@@ -127,8 +148,9 @@
 									<input type="hidden" name="country" id="country" value="{{ $order->country }}">
 									<input type="hidden" name="description" id="description" value="{{ $order->description }}">
 									<input type="hidden" name="link" id="link" value="{{ $order->link }}">
-									<input type="hidden" name="endDate" id="endDate" value="{{ $order->end_date }}">
+									<input type="hidden" name="endDate" id="endDate" value="{{ Carbon\Carbon::today()->addDays(7)->format('Y-m-d') }}">
 									<input type="hidden" name="copyOrderId" id="copyOrderId" value="{{ $order->id }}">
+									<input type="hidden" name="quantity" id="quantity" value="{{ $order->quantity }}">
 
 									<div class="col-md-12 col-xs-6">
 										<button type="submit" class="btn btn-info order-index-btn">重新下單</button>

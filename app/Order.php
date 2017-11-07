@@ -8,7 +8,7 @@ use Carbon\Carbon;
 class Order extends Model
 {
 	protected $fillable = [
-        'user_id', 'name', 'price', 'description', 'category', 'country', 'link', 'end_date', 'is_payed', 'is_cancelled'
+        'user_id', 'name', 'price', 'description', 'category', 'country', 'link', 'end_date', 'is_payed', 'is_cancelled', 'quantity'
     ];
 
     public static $category = ['food' => '環球小食', 'makeup' => '美容彩妝', 'bag' => '手袋銀包', 'accessories' => '潮流配飾', 'watch' => '手錶眼鏡', 'others' => '其他'];
