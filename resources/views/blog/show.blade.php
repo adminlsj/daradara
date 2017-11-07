@@ -61,7 +61,7 @@
 
 						@foreach ($content as $cont)
 							{!! $cont !!}
-							<div class="visible-xs-block visible-sm-block" style="padding-bottom: 665px">
+							<div class="visible-xs-block visible-sm-block" style="height: 665px">
 								@if (!$loop->last)
 									@foreach ($displayOrders as $order)
 										<div class="col-sm-6 col-xs-6" style="padding:0;{{ $loop->index % 2 == 0 ? 'padding-right: 5px' : 'padding-left: 5px' }}">

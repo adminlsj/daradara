@@ -122,7 +122,8 @@ class BlogController extends Controller
         $fb_title = str_replace('(/IMG)', '', $fb_title);
         $fb_title = str_replace('(BLANK)', '', $fb_title);
 
-        $displayOrders = Order::find([69, 14, 82, 38]);
+        // $displayOrders = Order::find([69, 14, 82, 38]);
+        $displayOrders = Order::find([1, 28, 29, 30]);
 
         return view('blog.show', compact('blog', 'content', 'similar_blogs', 'relatedOrders', 'relatedBlogs', 'fb_title', 'displayOrders'));
     }
