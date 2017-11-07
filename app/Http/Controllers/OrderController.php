@@ -231,7 +231,7 @@ class OrderController extends Controller
             $orders = $orders->where('end_date', '<=', $sDate);
         }
 
-        $orders = $orders->inRandomOrder()->paginate(20);
+        $orders = $orders->orderBy('price')->paginate(20);
 
         return view('order.search', compact('orders'));
     }
