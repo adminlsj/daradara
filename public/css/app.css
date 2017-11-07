@@ -9417,3 +9417,14 @@ a > i {
   letter-spacing: .8px;
 }
 
+#order-purchase-btn {
+  max-width: 200px;
+}
+
+@media (max-width: 768px) {
+  #order-purchase-btn {
+    max-width: 150px;
+    margin-left: 25px;
+  }
+}
+

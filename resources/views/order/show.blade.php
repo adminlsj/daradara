@@ -45,6 +45,7 @@
 			<div class="row">
 				<div class="col-md-2 col-xs-4">
 					<a href="/orders/search?name="><img src="https://s3-us-west-2.amazonaws.com/freerider/avatars/thumbnails/{{ $order->user->avatar->filename }}.jpg" class="img-responsive img-circle"></a>
+					<img style="margin-top: 20px" class="visible-xs-block img-responsive" src="https://s3-us-west-2.amazonaws.com/freerider/system/intro/delivery.jpg" alt="First slide">
 				</div>
 				<div class="col-md-7 col-xs-8">
 					<div><h3 style="color: black; font-weight: 400; margin-top: 15px"><span style="font-weight: 800 !important">${{ $order->price }}</span>&nbsp;<small> + $0 限時免運費</small></h3></div>
@@ -65,19 +66,19 @@
 						<br>
 
 						<div class="row">
-							<div class="col-md-2">
+							<div class="col-md-2 col-xs-2">
 								<div class="quantity" style="display: inline-block;">
 									<input type="number" name="quantity" id="quantity" min="1" max="9" step="1" value="1">
 								</div>
 							</div>
 
-							<div class="col-md-10" style="padding-top:0.9px; padding-left: 25px; max-width: 200px">
+							<div id="order-purchase-btn" class="col-md-10 col-xs-10" style="padding-top:0.9px; padding-left: 25px;">
 								<div><button type="submit" style="border-radius: 2px !important; font-size: 15px;" class="btn btn-info btn-lg btn-block">立即購買</button></div>
 							</div>
 						</div>
 					</form>
 				</div>
-				<div class="col-md-3 col-xs-12">
+				<div class="col-md-3 col-xs-12 hidden-xs">
 					<img class="img-responsive" src="https://s3-us-west-2.amazonaws.com/freerider/system/intro/delivery.jpg" alt="First slide">
 				</div>
 			</div>

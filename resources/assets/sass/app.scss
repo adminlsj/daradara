@@ -309,3 +309,11 @@ a > i {
   line-height: 40px;
   letter-spacing: .8px;
 }
+
+#order-purchase-btn {
+    @media (max-width: 768px) {
+        max-width: 150px;
+        margin-left: 25px;
+    }
+    max-width: 200px;
+}
