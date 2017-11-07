@@ -105,7 +105,7 @@ class BlogController extends Controller
 
         $content = str_replace('(BLANK)', '<p style="margin:35px"></p>', $content);
 
-        $content = explode('(LOGO)', $content, 2);
+        $content = explode('(LOGO)', $content);
 
         $similar_blogs = Blog::inRandomOrder()->limit(10)->get();
 
