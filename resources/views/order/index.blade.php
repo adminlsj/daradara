@@ -132,8 +132,7 @@
 							<a href="{{ route('order.show', ['order' => $order->id]) }}"><img class="img-responsive img-rounded" src="https://s3-us-west-2.amazonaws.com/freerider/orderImgs/thumbnails/{{ $order->id }}/{{ $order->orderImgs->first()->filename }}.jpg" alt="First slide"></a>
 						</div>
 						<div class="col-md-8">
-							<div style="padding-top:2px; margin-bottom: 7px"><a style="color: black; font-weight: 400; font-size: 18px;" href="{{ route('order.show', ['order' => $order->id]) }}">{{ $order->name }}</a>
-							&nbsp;&nbsp;<small>(已付款)</small></div>
+							<div style="padding-top:2px; margin-bottom: 7px"><a style="color: black; font-weight: 400; font-size: 18px;" href="{{ route('order.show', ['order' => $order->id]) }}">{{ $order->name }}</a></div>
 							<div style="margin-bottom: 3px; font-size: 13px;">收貨日期：{{ $order->end_date }} 前</div>
 							<div><span style="font-weight: 400; font-size: 13px;">${{ $order->price }} + $0 限時免運費</span></div>
 						</div>
