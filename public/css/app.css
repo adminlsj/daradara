@@ -9428,3 +9428,13 @@ a > i {
   }
 }
 
+#order-show-sidebar {
+  padding-left: 25px;
+}
+
+@media (max-width: 768px) {
+  #order-show-sidebar {
+    padding-left: 0;
+  }
+}
+
