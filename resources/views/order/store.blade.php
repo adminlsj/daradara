@@ -42,7 +42,7 @@
                         <div class="col-md-10 col-xs-9">
                             <h4>{{ Auth::user()->name }}</h4>
                             <h4>{{ Auth::user()->email }}</h4>
-                            <h4><input style="margin-bottom: 0px;" type="text" value="{{ Auth::user()->phone }}" id="phone" name="phone" placeholder="您的聯絡資料不會透露給任何第三方" required></h4>
+                            <h4><input style="margin-bottom: 0px;" type="text" value="{{ Auth::user()->phone }}" id="phone" name="phone" required></h4>
                             <select id="delivery" name="delivery" required>
                                 <option value="">選擇交收方式...</option>
                                 <option value="mtr">地鐵站交收</option>
