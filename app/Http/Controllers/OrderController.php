@@ -191,9 +191,9 @@ class OrderController extends Controller
     public function checkout(Order $order)
     {
         auth()->user()->phone = request('phone');
-        auth()->user()->address = request('address');
         auth()->user()->save();
-        
+
+        $order->delivery = request('delivery');
         $order->is_payed = true;
         $order->save();
 

@@ -15,7 +15,7 @@
 						<div class="col-md-8">
 							<div style="padding-top:2px; margin-bottom: 7px"><a style="color: black; font-weight: 400; font-size: 18px;" href="{{ route('order.show', ['order' => $order->id]) }}">{{ $order->name }}</a>
 							&nbsp;&nbsp;<small>(採購中)</small></div>
-							<div style="margin-bottom: 3px; font-size: 13px;">收貨日期：{{ $order->end_date }} 前</div>
+							<div style="margin-bottom: 3px; font-size: 13px;">交收方式：{{ Carbon\Carbon::parse($order->end_date)->format('m月d日') }}前 {{App\Order::$delivery[$order->delivery]}}</div>
 							<div style="margin-bottom: 3px; font-size: 13px;">支付總額：${{ $order->price * $order->quantity }}&nbsp;&nbsp;<small>(${{$order->price}} x {{$order->quantity}}件)</small></div>
 						</div>
 						<div class="visible-xs-block" style="margin-top: 7px;"></div>

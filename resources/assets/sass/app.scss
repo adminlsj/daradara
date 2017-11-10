@@ -200,6 +200,12 @@ input[type=file] {
     font-weight: 300;
 }
 
+.order-summary-content input, .order-summary-content select {
+    @media (max-width: 992px) {
+        font-size: 10px !important;
+    }
+}
+
 .order-product-section .col-md-1 h4 {
     text-align: right;
 }

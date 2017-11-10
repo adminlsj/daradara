@@ -9303,6 +9303,13 @@ input[type=file] {
   }
 }
 
+@media (max-width: 992px) {
+  .order-summary-content input,
+  .order-summary-content select {
+    font-size: 10px !important;
+  }
+}
+
 .order-product-section .col-md-1 h4 {
   text-align: right;
 }

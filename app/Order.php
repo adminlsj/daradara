@@ -15,6 +15,8 @@ class Order extends Model
 
     public static $country = ['japan' => '日本', 'korea' => '韓國', 'taiwan' => '台灣', 'usa' => '美國', 'england' => '英國', 'france' => '法國', 'italy' => '意大利', 'australia' => '澳洲', 'singapore' => '新加坡'];
 
+    public static $delivery = ['mtr' => '地鐵站交收', 'home' => '送貨上門'];
+
     public function user()
     {
         return $this->belongsTo('App\User');

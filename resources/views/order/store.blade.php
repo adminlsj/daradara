@@ -36,14 +36,18 @@
                         <div class="col-md-2 col-xs-3" style="text-align: right;">
                             <h4>收件人：</h4>
                             <h4>聯絡電郵：</h4>
-                            <h4 style="padding-top: 14px">聯絡電話：</h4>
-                            <h4 style="padding-top: 18px">收貨地址：</h4>
+                            <h4 style="padding-top: 12px">聯絡電話：</h4>
+                            <h4 style="padding-top: 14px">交收方式：</h4>
                         </div>
                         <div class="col-md-10 col-xs-9">
                             <h4>{{ Auth::user()->name }}</h4>
                             <h4>{{ Auth::user()->email }}</h4>
-                            <h4><input style="margin-bottom: 0px" type="text" value="{{ Auth::user()->phone }}" id="phone" name="phone" placeholder="" required></h4>
-                            <h4><input style="margin-bottom: 0px" type="text" value="{{ Auth::user()->address }}" id="address" name="address" placeholder="" required></h4>
+                            <h4><input style="margin-bottom: 0px;" type="text" value="{{ Auth::user()->phone }}" id="phone" name="phone" placeholder="您的聯絡資料不會透露給任何第三方" required></h4>
+                            <select id="delivery" name="delivery" required>
+                                <option value="">選擇交收方式...</option>
+                                <option value="mtr">地鐵站交收</option>
+                                <option value="home">送貨上門 ($0 限時免運費)</option>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -59,17 +63,15 @@
                             <h4>名稱：</h4>
                             <h4>價格：</h4>
                             <h4>數量：</h4>
-                            <h4>交收方式：</h4>
-                            <h4>付款方式：</h4>
                             <h4>收貨日期：</h4>
+                            <h4>付款方式：</h4>
                         </div>
                         <div class="col-md-10 col-xs-9">
                             <h4>{{ $order->name }}</h4>
                             <h4>${{ $order->price }}</h4>
                             <h4>{{ $order->quantity }}</h4>
-                            <h4>送貨上門 ($0 限時免運費)</h4>
-                            <h4>貨到支付</h4>
                             <h4>{{ $order->end_date }} 前</h4>
+                            <h4>貨到支付</h4>
                         </div>
                     </div>
                 </div>
