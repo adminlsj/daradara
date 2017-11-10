@@ -7,7 +7,7 @@
 | {{ $order->name }}     | ${{ $order->price }} | {{ $order->quantity }} | ${{ $order->price * $order->quantity }} |
 @endcomponent
 
-FreeRider正在光速採購您的訂單！我們承諾會在7日內送貨上門，並只在貨到時收取相關款項。
+FreeRider正在光速採購您的訂單！我們承諾會在7日內交收，並只在貨到時收取相關款項。確實的交易時間與地點將在採購完成後，馬上通知您落實。感謝您使用 FreeRider！
 
 @component('mail::button', ['url' => route('order.index')])
 我的訂單
