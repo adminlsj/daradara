@@ -36,8 +36,8 @@
                         <div class="col-md-2 col-xs-3" style="text-align: right;">
                             <h4>收件人：</h4>
                             <h4>聯絡電郵：</h4>
-                            <h4 style="padding-top: 12px">聯絡電話：</h4>
-                            <h4 style="padding-top: 14px">交收方式：</h4>
+                            <h4 style="padding-top: 10px">聯絡電話：</h4>
+                            <h4 style="padding-top: 12px">交收方式：</h4>
                         </div>
                         <div class="col-md-10 col-xs-9">
                             <h4>{{ Auth::user()->name }}</h4>
