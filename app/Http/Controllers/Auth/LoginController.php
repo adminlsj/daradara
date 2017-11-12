@@ -83,9 +83,17 @@ class LoginController extends Controller
             return $authUser;
         }
 
+        $email = '';
+        if ($user->email) {
+            $email = $user->email;
+        } else {
+            $email = $fb_id.'@facebook.com';
+        }
+
+
         $localUser = User::create([
             'name'     => $user->name,
-            'email'    => $user->email,
+            'email'    => $email,
             'provider' => $provider,
             'provider_id' => $fb_id,
             'password' => bcrypt(uniqid())
