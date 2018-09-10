@@ -4,9 +4,9 @@ use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-	protected $toTruncate_array = ['comments', 'company_imgs', 'companies', 'jobs'];
+	protected $toTruncate_array = ['comments', 'company_imgs', 'companies', 'saved_jobs', 'jobs'];
 
-    protected $toTruncate_string = 'comments, company_imgs, companies, jobs';
+    protected $toTruncate_string = 'comments, company_imgs, companies, saved_jobs, jobs';
 
     /**
      * Run the database seeds.
