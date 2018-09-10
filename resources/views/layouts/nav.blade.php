@@ -2,7 +2,7 @@
     @guest
         <a href="{{ route('login') }}">登入</a>
         <a href="{{ route('register') }}">註冊</a>
-        <a href="/manual">指南</a>
+        <a href="{{ route('blog.index') }}">指南</a>
     @else
         <a href="{{ route('user.savedJobsIndex', ['user' => auth()->user()]) }}">Saved Jobs</a>
         <a href="{{ route('app.index') }}">My Applications</a></li>
