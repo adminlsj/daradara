@@ -1,6 +1,8 @@
 <div class="hidden-xs hidden-sm">
-    <h3 style="color: grey; font-weight: 300">為您推薦的貼文</h3>
-    <hr>
+    <div style="margin-top: 40px;">
+        <h3 style="color: grey; font-weight: 300">為您推薦的貼文</h3>
+        <hr>
+    </div>
     @foreach($relatedBlogs as $blog)
         <div class="row" style="margin-bottom: 15px;">
             <div class="col-md-5">
@@ -21,6 +23,7 @@
 
 <h3 style="color: grey; font-weight: 300; margin-top: 35px">為您推薦的商品</h3>
 <hr>
-@include('order.related-orders')
+@include('blog.related-jobs')
 <br>
 <a href="/"><img style="width:100%; border: solid 1px #f2f2f2" src="https://s3-us-west-2.amazonaws.com/freerider/system/intro/7.jpg" alt="Los Angeles"></a>
+<br><br><br><br><br>

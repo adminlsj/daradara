@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Order;
+use App\Company;
+use App\Job;
 use App\Blog;
 use App\Mail\Contact;
 use App\Mail\Meetup;
@@ -18,24 +19,17 @@ class HomeController extends Controller
     public function index()
     {
         //auth()->loginUsingId(1);
-        $makeups = Order::where(['is_payed' => 1, 'category' => 'makeup'])->inRandomOrder()->limit(20)->get();
-        $foods = Order::where(['is_payed' => 1, 'category' => 'food'])->inRandomOrder()->limit(20)->get();
-        $bags = Order::where(['is_payed' => 1, 'category' => 'bag'])->inRandomOrder()->limit(20)->get();
-        $accessories = Order::where(['is_payed' => 1, 'category' => 'accessories'])->inRandomOrder()->limit(20)->get();
-        $watches = Order::where(['is_payed' => 1, 'category' => 'watch'])->inRandomOrder()->limit(20)->get();
-        $others = Order::where(['is_payed' => 1, 'category' => 'others'])->inRandomOrder()->limit(20)->get();
+        $companies = Company::all();
 
         $blogs = Blog::all()->sortByDesc('created_at');
         $caro_blogs = Blog::inRandomOrder()->limit(4)->get();
         $relatedBlogs = Blog::inRandomOrder()->limit(3)->get();
-
-        $orders = Order::where('is_payed', true);
-        $relatedOrders = Order::where('price', '<=', 50)->inRandomOrder()->limit(20)->get();
         $similar_blogs = Blog::inRandomOrder()->limit(5)->get();
 
-        $loopOrders = ['food' => $foods, 'makeup' => $makeups, 'bag' => $bags, 'accessories' => $accessories, 'watch' => $watches, 'others' => $others];
+        $featuredCompanies = ['騰訊', '阿里巴巴', '小米', '百度', '華為', '滴滴'];
+        $featuredAgencies = ['exmil', 'ern', 'freerider'];
 
-        return view('layouts.home', compact('orders', 'loopOrders', 'caro_blogs', 'relatedBlogs', 'relatedOrders', 'similar_blogs'));
+        return view('layouts.home', compact('companies', 'blogs', 'caro_blogs', 'relatedBlogs', 'similar_blogs', 'featuredCompanies', 'featuredAgencies'));
     }
 
     public function contact()

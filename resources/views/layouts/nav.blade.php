@@ -1,4 +1,20 @@
-<nav class="navbar navbar-default navbar-fixed-top" style="border-bottom-width: 0px; height: 50px; padding-top: 5px; padding-bottom: 55px; z-index: 9999">
+<div style="position:absolute; top: 6%; right: 10%;z-index: 999; display:{{ Request::is('/') ? '' : 'none' }}" class="home-nav hidden-xs">
+    @guest
+        <a href="{{ route('login') }}">登入</a>
+        <a href="{{ route('register') }}">註冊</a>
+        <a href="/manual">指南</a>
+    @else
+        <a href="{{ route('user.savedJobsIndex', ['user' => auth()->user()]) }}">Saved Jobs</a>
+        <a href="{{ route('app.index') }}">My Applications</a></li>
+        <a href="{{ route('resume.edit', ['resume' => auth()->user()->resume->id]) }}">My Resume</a>
+        <a href="{{ route('user.edit', ['user' => auth()->user()]) }}" style="padding-left: 8px; padding-right: 7px">
+            <img src="https://s3.amazonaws.com/twobayjobs/avatars/thumbnails/{{ Auth::user()->avatar->filename }}.jpg" class="img-circle" style="margin-top: -10px; margin-bottom: -8px" width="35px" height="35px">&nbsp;
+            {{ Auth::user()->name }}
+        </a>
+        <a href="{{ route('blog.index') }}">Resources</a>
+    @endguest
+</div>
+<nav class="{{ Request::is('/') ? 'home-nav-scroll-show' : '' }} navbar navbar-default navbar-fixed-top">
     <div class="container" style="width: 95%">
         <div class="navbar-header visible-xs-block">
             <div class="row">
@@ -8,11 +24,11 @@
                     </a>
                 </div>
                 <div class="col-xs-8" style="display: inline; margin-top: 7px; margin-left: -10px; margin-right: 10px">
-                    <form action="{{ route('order.search') }}" method="GET">
+                    <form action="{{ route('job.search') }}" method="GET">
                         <div class="row">
                             <div class="col-xs-7" style="width: 80%">
                                 <div class="form-group">
-                                    <input style="box-shadow: none; border-radius: 2px; font-weight: 300" name="name" type="text" class="form-control" placeholder="搜索">
+                                    <input style="box-shadow: none; border-radius: 2px; font-weight: 300" name="title" type="text" class="form-control" placeholder="Search Job or Company">
                                 </div>
                             </div>
                             <div class="col-xs-5" style="width: 70px; margin-left: -25px">
@@ -45,9 +61,9 @@
                     <a style="font-size: 25px; font-weight: 300" href="{{ url('/') }}">{{ config('app.name', 'Laravel') }}</a>
                 </li>
                 <li>
-                    <form class="navbar-form" action="{{ route('order.search') }}" method="GET">
+                    <form class="navbar-form" action="{{ route('job.search') }}" method="GET">
                         <div class="form-group">
-                            <input style="box-shadow: none; border-radius: 2px; font-weight: 300" name="name" type="text" class="form-control" placeholder="搜索">
+                            <input style="box-shadow: none; border-radius: 2px; font-weight: 300" name="title" type="text" class="form-control" placeholder="搵翻份兩岸筍工 . . .">
                         </div>
                         <button style="box-shadow: none; border-radius: 2px;" type="submit" class="btn btn-default form-control"><i class="glyphicon glyphicon-search"></i></button>
                     </form>
@@ -56,29 +72,27 @@
 
             <!-- Right Side Of Navbar -->
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="{{ route('order.create') }}">落單</a></li>
                 <!-- Authentication Links -->
                 @guest
                     <li><a href="{{ route('login') }}">登入</a></li>
                     <li><a href="{{ route('register') }}">註冊</a></li>
                     <li><a href="/manual">指南</a></li>
                 @else
-                    <li><a href="{{ route('order.index') }}">我的訂單</a></li>
-                    @if (auth()->user()->trans != '[]')
-                        <li><a href="{{ route('tran.index') }}">我的接單</a></li>
-                    @endif
+                    <li><a href="{{ route('user.savedJobsIndex', ['user' => auth()->user()]) }}">Saved Jobs</a></li>
+                    <li><a href="{{ route('app.index') }}">My Applications</a></li>
+                    <li><a href="{{ route('resume.edit', ['resume' => auth()->user()->resume->id]) }}">My Resume</a></li>
                     <li>
                         <a href="{{ route('user.edit', ['user' => auth()->user()]) }}" style="padding-left: 13px; padding-right: 15px">
-                            <img src="https://s3-us-west-2.amazonaws.com/freerider/avatars/thumbnails/{{ Auth::user()->avatar->filename }}.jpg" class="img-circle" style="margin-top: -10px; margin-bottom: -8px" width="35px" height="35px">&nbsp;
+                            <img src="https://s3.amazonaws.com/twobayjobs/avatars/thumbnails/{{ Auth::user()->avatar->filename }}.jpg" class="img-circle" style="margin-top: -10px; margin-bottom: -8px" width="35px" height="35px">&nbsp;
                             {{ Auth::user()->name }}
                         </a>
                     </li>
-                    <li><a href="/manual">指南</a></li>
+                    <li><a href="{{ route('blog.index') }}">Resources</a></li>
                     <li>
                         <a href="{{ route('logout') }}"
                             onclick="event.preventDefault();
                                      document.getElementById('logout-form').submit();">
-                            登出
+                            Logout
                         </a>
 
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

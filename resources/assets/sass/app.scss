@@ -24,7 +24,10 @@
 @import "footer";
 
 // Order Form
-@import "order_form";
+@import "job_form";
+
+// Search Home Form
+@import "search_home_form";
 
 // Breadcrumbs
 @import "breadcrumbs";
@@ -39,8 +42,93 @@ body {
     background-color: white; 
 }
 
-a:hover {
+a, a:visited {
+    color: #d84b6b;
+}
+
+a:hover, a:link {
+    color: #97344a;
+}
+
+#browse-job-search button {
+    border:0px;
+    color:#ffffff;
+    font-weight:600;
+    background-color:#54565c
+}
+
+nav {
+    border-bottom-width: 0px !important;
+    height: 50px;
+    padding-top: 5px;
+    padding-bottom: 55px;
+    z-index: 99
+}
+
+.home-nav a {
+    color:#ffffff;
+    font-weight: 600;
+    margin-right: 20px;
+    font-size: 15px;
+}
+
+.nav-search nav {
+    border-bottom: 1px solid #E6E6E6 !important;
+}
+
+.search-pagination .pagination>li>a,
+.search-pagination .pagination>li>span {
+  color: #636b6f;
+}
+.pagination>li.active>span {
+  background-color: rgb(216, 75, 107);
+  color: #fff !important;
+  border-color: rgb(216, 75, 107);
+}
+.pagination>li.active>span:hover {
+  background-color: rgb(216, 75, 107);
+  border-color: rgb(216, 75, 107);
+}
+
+.card-shadow {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2) !important;
+}
+
+.hover-box-shadow {
+    transition: 0.3s;
+}
+
+.hover-box-shadow:hover {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.navbar-right {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.application-list {
+    font-size: 15px;
+    padding-bottom: 10px;
+}
+
+.selectJobContainer a {
     text-decoration: none;
+    cursor: pointer;
+}
+
+.selectJobContainer a:hover {
+    color:blue;
+}
+
+.featured-category {
+    border-radius: 5px;
+    border: solid 1px #f2f2f2;
+    width:100%
+}
+
+#browse-job-search button:hover{
+    color: black;
 }
 
 input[type=file] {
@@ -50,10 +138,24 @@ input[type=file] {
 .btn-info {
     background-color: #d84b6b !important;
     border-color: #d84b6b !important;
-    border-radius: 200px !important;
-    font-weight: 300;
+    border-radius: 2px !important;
+    font-weight: 600;
     transition: 0.3s;
     width: 100%;
+    line-height: 26px;
+}
+
+.btn-browse {
+    color: white;
+    background-color: #d84b6b !important;
+    border-color: #d84b6b !important;
+    font-weight: 600;
+    transition: 0.3s;
+    width: auto;
+}
+
+.btn-browse:hover{
+    color: black;
 }
 
 .btn-primary {
@@ -214,17 +316,18 @@ input[type=file] {
     @media (max-width: 992px) {
         padding: 10px;
     }
-    width: 225px;
+    width: 400px;
     height: 100%;
     position: fixed;
     border-right: 1px solid #E6E6E6;
+    overflow-y: scroll;
 }
 
 #right {
     @media (max-width: 768px) {
         width: 100%;
     }
-    width: calc(100% - 225px);
+    width: calc(100% - 400px);
     height: auto;
     position: absolute;
     right: 0;

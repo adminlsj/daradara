@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Blog;
 use App\BlogImg;
-use App\Order;
+use App\Job;
 use Illuminate\Http\Request;
 use Storage;
 use File;
@@ -22,11 +22,10 @@ class BlogController extends Controller
         $blogs = Blog::all()->sortByDesc('created_at');
         $caro_blogs = Blog::inRandomOrder()->limit(5)->get();
 
-        $orders = Order::where('is_payed', true);
-        $relatedOrders = Order::where('price', '<=', 50)->inRandomOrder()->limit(20)->get();
+        $relatedJobs = Job::inRandomOrder()->limit(20)->get();
         $relatedBlogs = Blog::inRandomOrder()->limit(5)->get();
 
-        return view('blog.index', compact('blogs', 'caro_blogs', 'relatedOrders', 'relatedBlogs'));
+        return view('blog.index', compact('blogs', 'caro_blogs', 'relatedJobs', 'relatedBlogs'));
     }
 
     /**
@@ -109,8 +108,7 @@ class BlogController extends Controller
 
         $similar_blogs = Blog::inRandomOrder()->limit(10)->get();
 
-        $orders = Order::where('is_payed', true);
-        $relatedOrders = Order::where('price', '<=', 50)->inRandomOrder()->limit(20)->get();
+        $relatedJobs = Job::inRandomOrder()->limit(20)->get();
         $relatedBlogs = Blog::inRandomOrder()->limit(5)->get();
 
         $fb_title = $blog->content;
@@ -122,9 +120,7 @@ class BlogController extends Controller
         $fb_title = str_replace('(/IMG)', '', $fb_title);
         $fb_title = str_replace('(BLANK)', '', $fb_title);
 
-        $displayOrders = Order::find([69, 14, 82, 38]);
-
-        return view('blog.show', compact('blog', 'content', 'similar_blogs', 'relatedOrders', 'relatedBlogs', 'fb_title', 'displayOrders'));
+        return view('blog.show', compact('blog', 'content', 'similar_blogs', 'relatedJobs', 'relatedBlogs', 'fb_title', 'displayJobs'));
     }
 
     /**

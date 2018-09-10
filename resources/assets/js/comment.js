@@ -1,4 +1,4 @@
-$('#storeComment').on('submit',function(e){
+$('#storeComment').on('submit', function(e) {
     $.ajaxSetup({
         header:$('meta[name="_token"]').attr('content')
     })

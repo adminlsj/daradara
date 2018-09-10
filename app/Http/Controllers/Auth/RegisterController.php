@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use App\Avatar;
+use App\Resume;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -74,6 +75,12 @@ class RegisterController extends Controller
             'filename' => 'default_freerider_profile_pic',
             'mime' => 'image',
             'original_filename' => 'default',
+        ]);
+
+        Resume::create([
+            'user_id' => $user->id,
+            'name' => $user->name,
+            'email' => $user->email,
         ]);
 
         return $user;

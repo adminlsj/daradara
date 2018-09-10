@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Comment extends Model
 {
     protected $fillable = [
-        'user_id', 'order_id', 'text'
+        'user_id', 'company_id', 'text'
     ];
 
     public function user()
@@ -15,8 +15,8 @@ class Comment extends Model
         return $this->belongsTo('App\User');
     }
 
-    public function order()
+    public function company()
     {
-        return $this->belongsTo('App\Order');
+        return $this->belongsTo('App\Company');
     }
 }

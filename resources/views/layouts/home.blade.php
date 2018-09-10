@@ -1,258 +1,186 @@
 @extends('layouts.app')
 
 @section('content')
-
-<div class="hidden-xs" style="margin-top: -20px; margin-bottom: 25px; width: 100%">
-	<img style="width:100%" src="https://s3-us-west-2.amazonaws.com/freerider/system/intro/2.jpg" alt="Los Angeles">
-</div>
-
-<div class="visible-xs-block" style="margin-top: -15px; width: 100%">
-	<img style="width:100%" src="https://s3-us-west-2.amazonaws.com/freerider/system/intro/8.jpg" alt="Los Angeles">
-</div>
-
-<div class="visible-xs-block">
-		<img style="width: auto" class="d-block img-responsive" src="https://s3-us-west-2.amazonaws.com/freerider/system/intro/3.jpg" alt="Chicago">
-		<br class="visible-xs-block">
-		<img style="margin-top: -17px; padding-bottom: 13px; border-bottom: solid 1px #f2f2f2" class="d-block img-responsive" src="https://s3-us-west-2.amazonaws.com/freerider/system/intro/4.jpg" alt="Chicago">
-</div>
-
-<div class="container" style="width: 90%">
-	<div class="row hidden-xs">
-		<div class="col-md-6">
-			<img style="border-radius: 2px; border: solid 1px #f2f2f2" class="d-block img-responsive" src="https://s3-us-west-2.amazonaws.com/freerider/system/intro/3.jpg" alt="Chicago">
-		</div>
-		<div class="col-md-6">
-			<br class="visible-xs-block">
-			<img style="border-radius: 2px; border: solid 1px #f2f2f2" class="d-block img-responsive" src="https://s3-us-west-2.amazonaws.com/freerider/system/intro/4.jpg" alt="Chicago">
-		</div>
-	</div>
-    
-    <div class="hidden-xs row" style="margin-top: 70px;">
-    	<div class="col-md-12">
-			<div class="tab" style="border-width: 0px; margin-bottom: -10px">
-				@foreach (App\Order::$category as $key => $element)
-					<button style="text-align: center;" class="tablinks {{ ($key == 'others' || $key == 'watch') ? "hidden-xs" : '' }}" onclick="openStatus(event, '{{ $key }}')" {{ $key == 'food' ? "id=defaultOpen" : '' }}>{{ App\Order::$category[$key] }}</button>
-				@endforeach
-			</div>
-
-			@foreach (App\Order::$category as $key => $element)
-				<div id="{{ $key }}" class="tabcontent" style="padding-top: 10px; border-width: 0px">
-					<div class="order-carousel owl-carousel owl-theme">
-						@foreach ($loopOrders[$key] as $order)
-				            @include('order.single-order', ['radius' => 'border-bottom-left-radius: 2px; border-bottom-right-radius: 2px;'])
-				        @endforeach
-				    </div>
-				</div>
-			@endforeach
-		</div>
+	<div style="position: relative;" class="hidden-xs" style="width: 100%">
+		<img style="margin-top: 0px; margin-bottom: 25px; width:100%" src="https://s3.amazonaws.com/twobayjobs/system/intro/poster-12.png" alt="Los Angeles">
+		@include('job.search-home')
 	</div>
 
-	<div class="visible-xs-block row" style="margin-top: 50px;">
-		<h3 style="color: grey; font-weight: 300">為您精選的產品</h3>
-		<hr>
-		@include('order.related-orders')
-	</div>
-
-	<div class="row" style="margin-top: 15px">
-		<div class="col-md-4 col-md-offset-4 col-xs-8 col-xs-offset-2">
-		    <form action="{{ route('order.search') }}" method="GET">
-		        <button type="submit" class="btn btn-info btn-outline btn-lg btn-block" style="border-radius: 0; font-size: 15px;">查看所有分類</button>
-		    </form>
-	    </div>
-	</div>
-
-	<div class="row hidden-xs" style="padding-top: 90px;">
-		<div class="col-md-8">
-		    <form action="{{ route('order.search') }}" method="GET">
-		    	<input type="hidden" name="country" id="country" value="japan">
-				<input class="img-responsive" type="image" src="https://s3-us-west-2.amazonaws.com/freerider/system/country/japan.jpg">
-			</form>
-		</div>
-		<div class="col-md-4">
-			<form action="{{ route('order.search') }}" method="GET">
-		    	<input type="hidden" name="country" id="country" value="korea">
-				<input class="img-responsive" type="image" src="https://s3-us-west-2.amazonaws.com/freerider/system/country/korea.jpg">
-			</form>
-		</div>
-	</div>
-
-	<div class="row hidden-xs" style="margin-top: 15px">
-		<div class="col-md-7">
-			<div class="row">
-				<div class="col-md-12">
-				    <form action="{{ route('order.search') }}" method="GET">
-				    	<input type="hidden" name="country" id="country" value="taiwan">
-						<input class="img-responsive" type="image" src="https://s3-us-west-2.amazonaws.com/freerider/system/country/taiwan.jpg">
-					</form>
-				</div>
-			</div>
-			<div class="row" style="margin-top: 15px">
-				<div class="col-md-12">
-				    <form action="{{ route('order.search') }}" method="GET">
-				    	<input type="hidden" name="country" id="country" value="singapore">
-						<input class="img-responsive" type="image" src="https://s3-us-west-2.amazonaws.com/freerider/system/country/singapore.jpg">
-					</form>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-5">
-			<div class="row">
-				<div class="col-md-6">
-					<form action="{{ route('order.search') }}" method="GET">
-				    	<input type="hidden" name="country" id="country" value="usa">
-						<input class="img-responsive" type="image" src="https://s3-us-west-2.amazonaws.com/freerider/system/country/usa.jpg">
-					</form>
-				</div>
-				<div class="col-md-6" style="text-align: left">
-					<form action="{{ route('order.search') }}" method="GET">
-				    	<input type="hidden" name="country" id="country" value="france">
-						<input class="img-responsive" type="image" src="https://s3-us-west-2.amazonaws.com/freerider/system/country/paris.jpg">
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<div class="row visible-xs-block" style="padding-top: 90px">
+	<div class="container" style="width: 85%">
 		<div class="row">
-			<div class="col-xs-12">
-				<form action="{{ route('order.search') }}" method="GET">
-			    	<input type="hidden" name="country" id="country" value="japan">
-					<input class="img-responsive" type="image" src="https://s3-us-west-2.amazonaws.com/freerider/system/countrySquare/japan.jpg">
-				</form>
-			</div>
-		</div>
-		<div class="row" style="margin-top: 10px">
-			<div class="col-xs-6" style="padding-right: 5px">
-				<form action="{{ route('order.search') }}" method="GET">
-			    	<input type="hidden" name="country" id="country" value="korea">
-					<input class="img-responsive" type="image" src="https://s3-us-west-2.amazonaws.com/freerider/system/countrySquare/korea.jpg">
-				</form>
-			</div>
-			<div class="col-xs-6" style="padding-left: 5px">
-				<form action="{{ route('order.search') }}" method="GET">
-			    	<input type="hidden" name="country" id="country" value="usa">
-					<input class="img-responsive" type="image" src="https://s3-us-west-2.amazonaws.com/freerider/system/countrySquare/usa.jpg">
-				</form>
-			</div>
-		</div>
-	</div>
+			<div class="col-md-8">
+				<div style="margin-top: 40px;">
+					<h3 style="color: grey; font-weight: 300">Featured Industries</h3>
+					<hr>
+				</div>
+				<div class="row">
+					<div class="col-md-3">
+						<form action="{{ route('job.search') }}" method="GET">
+							<input name="category" value="Engineering" type="hidden">
+							<button style="width:100%; padding:0px; border:0px;" type="submit"><img class="featured-category d-block img-responsive" src="https://s3.amazonaws.com/twobayjobs/system/intro/featured-category-01.png" alt="Chicago"></button>
+						</form>
+					</div>
+					<div class="col-md-3">
+						<form action="{{ route('job.search') }}" method="GET">
+							<input name="category" value="Public / Civil" type="hidden">
+							<button style="width:100%; padding:0px; border:0px;" type="submit"><img class="featured-category d-block img-responsive" src="https://s3.amazonaws.com/twobayjobs/system/intro/featured-category-02.png" alt="Chicago"></button>
+						</form>
+					</div>
+					<div class="col-md-3">
+						<form action="{{ route('job.search') }}" method="GET">
+							<input name="category" value="Hospitality / F & B" type="hidden">
+							<button style="width:100%; padding:0px; border:0px;" type="submit"><img class="featured-category d-block img-responsive" src="https://s3.amazonaws.com/twobayjobs/system/intro/featured-category-03.png" alt="Chicago"></button>
+						</form>
+					</div>
+					<div class="col-md-3">
+						<form action="{{ route('job.search') }}" method="GET">
+							<input name="category" value="Sales, CS & Business Devpt" type="hidden">
+							<button style="width:100%; padding:0px; border:0px;" type="submit"><img class="featured-category d-block img-responsive" src="https://s3.amazonaws.com/twobayjobs/system/intro/featured-category-04.png" alt="Chicago"></button>
+						</form>
+					</div>
+				</div>
 
-	<div class="row" style="margin-top: 20px">
-		<div class="col-md-4 col-md-offset-4 col-xs-8 col-xs-offset-2">
-		    <form action="{{ route('order.search') }}" method="GET">
-		        <button type="submit" class="btn btn-info btn-outline btn-lg btn-block" style="border-radius: 0; font-size: 15px;">查看所有產品</button>
-		    </form>
-		</div>
-	</div>
+				<div style="margin-top: 40px;">
+					<h3 style="color: grey; font-weight: 300">Browse Jobs</h3>
+					<hr>
+				</div>
+				<div style="padding-top:10px; padding-bottom:10px; margin-left:0px; margin-right: 0px; background-color:#54565c; font-size: 15px; border-radius: 4px" class="row">
+					@foreach (App\Job::$category as $key => $element)
+						<form id="browse-job-search" action="{{ route('job.search') }}" method="GET">
+							<div style="padding-top: 10px;padding-bottom: 10px;" class="col-md-4">
+								<input name="category" value="{{ $element }}" type="hidden">
+								<button class="browse-job-btn" type="submit">{{ $element }} ({{ App\Job::where('category', $element)->count() }})</button>
+							</div>
+						</form>
+					@endforeach
+				</div>
 
-	<div class="hidden-xs hidden-sm row" style="margin-top: 100px">
-		<div class="col-md-8 col-ms-12">
-			<div class="blog-carousel owl-carousel owl-theme">
-				@foreach ($caro_blogs as $blog)
-					<a href="{{ route('blog.show', ['blog' => $blog->id]) }}">
-						<img class="img-responsive border-radius-2" src="https://s3-us-west-2.amazonaws.com/freerider/blogImgs/originals/{{ $blog->id }}/{{ $blog->blogImgs->first()->filename }}" alt="First slide">
-						<div class="center-align white-text" style="position:absolute;bottom:0;left:0;right:0;font-size:17px;color:white;background-color: rgba(0, 0, 0, 0.5);height:70px;padding-left:15px;padding-right:15px; border-radius: 0 0 2px 2px;">
-							<span style="line-height: 70px; font-weight: 300; letter-spacing: 1px">{{ $blog->title }}</span>
+				<div style="margin-top: 40px;">
+					<h3 style="color: grey; font-weight: 300">Featured Companies</h3>
+					<hr>
+				</div>
+				<div class="row hidden-xs">
+					@foreach ($featuredCompanies as $company)
+						<div class="col-md-2">
+							<form action="{{ route('job.search') }}" method="GET">
+								<input name="title" value="{{ $company }}" type="hidden">
+								<button style="width:100%; padding:0px; border:0px;" type="submit"><img class="featured-category hover-box-shadow d-block img-responsive" src="https://s3.amazonaws.com/twobayjobs/system/intro/featured-company-{{ $company }}.png" alt="Chicago"></button>
+							</form>
 						</div>
-					</a>
-				@endforeach
+					@endforeach
+				</div>
+
+				<div style="margin-top: 40px;">
+					<h3 style="color: grey; font-weight: 300">Featured Agencies</h3>
+					<hr>
+				</div>
+				<div class="row hidden-xs">
+					@foreach ($featuredAgencies as $agency)
+						<div class="col-md-2">
+							<form action="{{ route('job.search') }}" method="GET">
+								<input name="title" value="{{ $agency }}" type="hidden">
+								<button style="width:100%; padding:0px; border:0px;" type="submit"><img class="featured-category hover-box-shadow d-block img-responsive" src="https://s3.amazonaws.com/twobayjobs/system/intro/featured-company-{{ $agency }}.png" alt="Chicago"></button>
+							</form>
+						</div>
+					@endforeach
+				</div>
+			</div>
+
+			<div class="col-md-4">
+				<div style="margin-top: 40px;">
+					<h3 style="color: grey; font-weight: 300">You may be interested in</h3>
+					<hr>
+				</div>
+				<div class="row hidden-xs">
+					<div class="col-md-12">
+						<img class="featured-category d-block img-responsive" src="https://s3.amazonaws.com/twobayjobs/system/intro/commercial-01.jpg" alt="Chicago">
+					</div>
+				</div>
+				<div style="margin-top: 40px;">
+					<h3 style="color: grey; font-weight: 300">Let’s explore jobsDB</h3>
+					<hr>
+				</div>
+				<div class="row hidden-xs">
+					<div class="col-md-12">
+						<img class="featured-category d-block img-responsive" src="https://s3.amazonaws.com/twobayjobs/system/intro/commercial-02.png" alt="Chicago">
+					</div>
+				</div>
+				<br>
+				<div class="row hidden-xs">
+					<div class="col-md-12">
+						<img class="featured-category d-block img-responsive" src="https://s3.amazonaws.com/twobayjobs/system/intro/commercial-03.png" alt="Chicago">
+					</div>
+				</div>
 			</div>
 		</div>
-		<div class="col-md-4" style="padding-left: 25px">
-			@foreach($relatedBlogs as $blog)
-			    <div class="row" style="margin-bottom: 15px;">
-			        <div class="col-md-5">
+
+		<div style="margin-top: 40px;">
+			<h3 style="color: grey; font-weight: 300">Featured Blogs</h3>
+			<hr>
+		</div>
+		<div class="hidden-xs hidden-sm row">
+			<div class="col-md-8 col-ms-12">
+				<div class="blog-carousel owl-carousel owl-theme">
+					@foreach ($caro_blogs as $blog)
+						<a href="{{ route('blog.show', ['blog' => $blog->id]) }}">
+							<img class="img-responsive border-radius-2" src="https://s3-us-west-2.amazonaws.com/freerider/blogImgs/originals/{{ $blog->id }}/{{ $blog->blogImgs->first()->filename }}" alt="First slide">
+							<div class="center-align white-text" style="position:absolute;bottom:0;left:0;right:0;font-size:17px;color:white;background-color: rgba(0, 0, 0, 0.5);height:70px;padding-left:15px;padding-right:15px; border-radius: 0 0 2px 2px;">
+								<span style="line-height: 70px; font-weight: 300; letter-spacing: 1px">{{ $blog->title }}</span>
+							</div>
+						</a>
+					@endforeach
+				</div>
+			</div>
+			<div class="col-md-4" style="padding-left: 25px">
+				@foreach($relatedBlogs as $blog)
+				    <div class="row" style="margin-bottom: 15px;">
+				        <div class="col-md-5">
+				            <a href="{{ route('blog.show', ['blog' => $blog->id]) }}">
+				                <img src="https://s3-us-west-2.amazonaws.com/freerider/blogImgs/squares/{{ $blog->id }}/{{ $blog->blogImgs->first()->filename }}" class="img-responsive img-circle">
+				            </a>
+				        </div>
+				        <div class="col-md-7">
+				            <div><a href="{{ route('blog.show', ['blog' => $blog->id]) }}"><h3 style="color: black; font-weight: 400; font-size: 15px">{{ str_limit($blog->title, 50) }}</h3></a></div>
+				            <div style="font-size: 12.5px">{{ Carbon\Carbon::parse($blog->created_at)->format('Y年m月d日') }}</div>
+				        </div>
+				    </div>
+				@endforeach
+				<div class="row" style="margin-top: 25px">
+					<div class="col-md-6 col-md-offset-3">
+					    <form action="{{ route('blog.index') }}" method="GET">
+					        <button type="submit" class="btn btn-info btn-outline btn-lg btn-block" style="border-radius: 0; font-size: 15px;">查看所有貼文</button>
+					    </form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="visible-xs-block visible-sm-block" style="padding-top: 70px">
+			<h3 style="color: grey; font-weight: 300">FreeRider部落格</h3>
+			<hr>
+			@foreach ($similar_blogs as $blog)
+				<div class="row" style="margin-bottom: 15px;">
+			        <div class="col-md-5 col-xs-5 col-sm-4">
 			            <a href="{{ route('blog.show', ['blog' => $blog->id]) }}">
 			                <img src="https://s3-us-west-2.amazonaws.com/freerider/blogImgs/squares/{{ $blog->id }}/{{ $blog->blogImgs->first()->filename }}" class="img-responsive img-circle">
 			            </a>
 			        </div>
-			        <div class="col-md-7">
+			        <div class="col-md-7 col-xs-7 col-sm-8">
 			            <div><a href="{{ route('blog.show', ['blog' => $blog->id]) }}"><h3 style="color: black; font-weight: 400; font-size: 15px">{{ str_limit($blog->title, 50) }}</h3></a></div>
 			            <div style="font-size: 12.5px">{{ Carbon\Carbon::parse($blog->created_at)->format('Y年m月d日') }}</div>
 			        </div>
 			    </div>
 			@endforeach
-			<div class="row" style="margin-top: 25px">
-				<div class="col-md-6 col-md-offset-3">
+			<div class="row" style="margin-top: 20px">
+				<div class="col-xs-8 col-xs-offset-2">
 				    <form action="{{ route('blog.index') }}" method="GET">
 				        <button type="submit" class="btn btn-info btn-outline btn-lg btn-block" style="border-radius: 0; font-size: 15px;">查看所有貼文</button>
 				    </form>
 				</div>
 			</div>
 		</div>
+
+		<br><br><br><br><br>
 	</div>
-
-	<div class="visible-xs-block visible-sm-block" style="padding-top: 70px">
-		<h3 style="color: grey; font-weight: 300">FreeRider部落格</h3>
-		<hr>
-		@foreach ($similar_blogs as $blog)
-			<div class="row" style="margin-bottom: 15px;">
-		        <div class="col-md-5 col-xs-5 col-sm-4">
-		            <a href="{{ route('blog.show', ['blog' => $blog->id]) }}">
-		                <img src="https://s3-us-west-2.amazonaws.com/freerider/blogImgs/squares/{{ $blog->id }}/{{ $blog->blogImgs->first()->filename }}" class="img-responsive img-circle">
-		            </a>
-		        </div>
-		        <div class="col-md-7 col-xs-7 col-sm-8">
-		            <div><a href="{{ route('blog.show', ['blog' => $blog->id]) }}"><h3 style="color: black; font-weight: 400; font-size: 15px">{{ str_limit($blog->title, 50) }}</h3></a></div>
-		            <div style="font-size: 12.5px">{{ Carbon\Carbon::parse($blog->created_at)->format('Y年m月d日') }}</div>
-		        </div>
-		    </div>
-		@endforeach
-		<div class="row" style="margin-top: 20px">
-			<div class="col-xs-8 col-xs-offset-2">
-			    <form action="{{ route('blog.index') }}" method="GET">
-			        <button type="submit" class="btn btn-info btn-outline btn-lg btn-block" style="border-radius: 0; font-size: 15px;">查看所有貼文</button>
-			    </form>
-			</div>
-		</div>
-	</div>
-
-	<br><br><br><br><br>
-</div>
-
-<script>
-	function openStatus(evt, cityName) {
-	    var i, tabcontent, tablinks;
-	    tabcontent = document.getElementsByClassName("tabcontent");
-	    for (i = 0; i < tabcontent.length; i++) {
-	        tabcontent[i].style.display = "none";
-	    }
-	    tablinks = document.getElementsByClassName("tablinks");
-	    for (i = 0; i < tablinks.length; i++) {
-	        tablinks[i].className = tablinks[i].className.replace(" active", "");
-	    }
-	    document.getElementById(cityName).style.display = "block";
-	    evt.currentTarget.className += " active";
-	}
-
-	// Get the element with id="defaultOpen" and click on it
-	document.getElementById("defaultOpen").click();
-
-	$(document).ready(function(){
-		$('.order-carousel').owlCarousel({
-			items: 4,
-			loop: true,
-			margin: 5,
-			nav: true,
-			dots: false,
-			lazyLoad: true,
-			autoplay: false,
-			navText : ['<i class="material-icons" style="font-size:36px; margin-left:-91px; color:#666666">keyboard_arrow_left</i>','<i class="material-icons" style="font-size:36px; margin-right:-90px; color:#666666">keyboard_arrow_right</i>']
-		});
-	});
-
-	$(document).ready(function(){
-		$('.blog-carousel').owlCarousel({
-			items: 1,
-			loop: true,
-			margin: 5,
-			nav: false,
-			dots: true,
-			lazyLoad: true,
-			autoplay: true,
-		});
-	});
-</script>
-
 @endsection
+        

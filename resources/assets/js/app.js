@@ -25,6 +25,10 @@ const app = new Vue({
 require('./quantityBtn');
 
 require('./comment');
+require('./selectJob');
+require('./saveJob');
+
+require('./twbsPagination');
 
 $('#avatar-upload').on("change", function(e) {
     $("#avatar-form").submit();
@@ -32,4 +36,36 @@ $('#avatar-upload').on("change", function(e) {
 
 $("#orderImgs").fileinput({ 'browseLabel' : '選擇圖片', 'removeLabel' : "刪除圖片" });
 
+$(document).ready(function(){
+	$('.blog-carousel').owlCarousel({
+		items: 1,
+		loop: true,
+		margin: 5,
+		nav: false,
+		dots: true,
+		lazyLoad: true,
+		autoplay: true,
+	});
+});
+
+$(document).ready(function(){
+    
+	// hide .navbar first
+	$(".home-nav-scroll-show").hide();
+	
+	// fade in .navbar
+	$(function () {
+		$(window).scroll(function () {
+            // set distance user needs to scroll before we fadeIn navbar
+			if ($(this).scrollTop() > 200) {
+				$('.home-nav-scroll-show').fadeIn();
+			} else {
+				$('.home-nav-scroll-show').fadeOut();
+			}
+		});
+
+	
+	});
+
+});
 

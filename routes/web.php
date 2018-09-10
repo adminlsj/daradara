@@ -22,17 +22,22 @@ Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallb
 
 Route::resource('user', 'UserController');
 Route::post('users/{user}/storeAvatar', 'UserController@storeAvatar');
+Route::get('users/{user}/savedJobsIndex', ['as' => 'user.savedJobsIndex', 'uses' => 'UserController@savedJobsIndex']);
 
-Route::resource('order', 'OrderController');
-Route::post('/orders/{order}/checkout', ['as' => 'order.checkout', 'uses' => 'OrderController@checkout']);
-Route::get('/orders/search', ['as' => 'order.search', 'uses' => 'OrderController@search']);
-Route::resource('order.comment', 'CommentController', ['only' => ['store', 'destroy']]);
+Route::resource('job', 'JobController');
+Route::post('/jobs/{job}/checkout', ['as' => 'job.checkout', 'uses' => 'JobController@checkout']);
+Route::get('/jobs/search', ['as' => 'job.search', 'uses' => 'JobController@search']);
+Route::post('/jobs/{job}/select', ['as' => 'job.select', 'uses' => 'JobController@select']);
+Route::post('/jobs/{job}/save', ['as' => 'job.save', 'uses' => 'JobController@save']);
+Route::resource('job.comment', 'CommentController', ['only' => ['store', 'destroy']]);
 
-Route::group(['prefix' => '/orders/{order}/'], function () {
-    Route::get('cancel', 'OrderController@cancel');
+Route::group(['prefix' => '/jobs/{job}/'], function () {
+    Route::get('cancel', 'JobController@cancel');
 });
 
-Route::resource('tran', 'TranController');
+Route::resource('app', 'AppController');
+
+Route::resource('resume', 'ResumeController');
 
 Route::resource('blog', 'BlogController');
 

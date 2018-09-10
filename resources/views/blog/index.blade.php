@@ -4,6 +4,10 @@
 <div class="container" style="width: 90%">
 	<div class="row">
 		<div class="col-md-8 col-ms-12">
+			<div style="margin-top: 40px;">
+				<h3 style="color: grey; font-weight: 300">精選貼文</h3>
+				<hr>
+			</div>
 			<div class="blog-carousel owl-carousel owl-theme">
 				@foreach ($caro_blogs as $blog)
 					<a href="{{ route('blog.show', ['blog' => $blog->id]) }}">
@@ -36,7 +40,7 @@
 			@endforeach
 		</div>
 		
-		<div class="col-md-4" style="padding-left: 25px">
+		<div class="col-md-4" style="padding-left: 25px;">
 			@include('blog.sidebar')
 		</div>
 	</div>

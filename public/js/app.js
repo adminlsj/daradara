@@ -31700,7 +31700,7 @@ module.exports = function normalizeComponent (
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-48141bb8\",\"hasScoped\":false}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/Example.vue":
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-cf93c5bc\",\"hasScoped\":false}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/Example.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -31738,7 +31738,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-48141bb8", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-cf93c5bc", module.exports)
   }
 }
 
@@ -42026,18 +42026,52 @@ window.Vue = __webpack_require__("./node_modules/vue/dist/vue.common.js");
 Vue.component('example', __webpack_require__("./resources/assets/js/components/Example.vue"));
 
 var app = new Vue({
-  el: '#app'
+	el: '#app'
 });
 
 __webpack_require__("./resources/assets/js/quantityBtn.js");
 
 __webpack_require__("./resources/assets/js/comment.js");
+__webpack_require__("./resources/assets/js/selectJob.js");
+__webpack_require__("./resources/assets/js/saveJob.js");
+
+__webpack_require__("./resources/assets/js/twbsPagination.js");
 
 $('#avatar-upload').on("change", function (e) {
-  $("#avatar-form").submit();
+	$("#avatar-form").submit();
 });
 
 $("#orderImgs").fileinput({ 'browseLabel': '選擇圖片', 'removeLabel': "刪除圖片" });
+
+$(document).ready(function () {
+	$('.blog-carousel').owlCarousel({
+		items: 1,
+		loop: true,
+		margin: 5,
+		nav: false,
+		dots: true,
+		lazyLoad: true,
+		autoplay: true
+	});
+});
+
+$(document).ready(function () {
+
+	// hide .navbar first
+	$(".home-nav-scroll-show").hide();
+
+	// fade in .navbar
+	$(function () {
+		$(window).scroll(function () {
+			// set distance user needs to scroll before we fadeIn navbar
+			if ($(this).scrollTop() > 200) {
+				$('.home-nav-scroll-show').fadeIn();
+			} else {
+				$('.home-nav-scroll-show').fadeOut();
+			}
+		});
+	});
+});
 
 /***/ }),
 
@@ -42161,7 +42195,7 @@ var normalizeComponent = __webpack_require__("./node_modules/vue-loader/lib/comp
 /* script */
 var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/Example.vue")
 /* template */
-var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-48141bb8\",\"hasScoped\":false}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/Example.vue")
+var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-cf93c5bc\",\"hasScoped\":false}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/Example.vue")
 /* styles */
 var __vue_styles__ = null
 /* scopeId */
@@ -42186,9 +42220,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-48141bb8", Component.options)
+    hotAPI.createRecord("data-v-cf93c5bc", Component.options)
   } else {
-    hotAPI.reload("data-v-48141bb8", Component.options)
+    hotAPI.reload("data-v-cf93c5bc", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -43387,7 +43421,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
           return n[0];default:
           return n;}
     }
-  }, e.fn.fileinput.defaults = { language: "en", showCaption: !0, showBrowse: !0, showPreview: !0, showRemove: !0, showUpload: !0, showCancel: !0, showClose: !0, showUploadedThumbs: !0, browseOnZoneClick: !1, autoReplace: !1, previewClass: "", captionClass: "", frameClass: "krajee-default", mainClass: "file-caption-main", mainTemplate: null, purifyHtml: !0, fileSizeGetter: null, initialCaption: "", initialPreview: [], initialPreviewDelimiter: "*$$*", initialPreviewAsData: !1, initialPreviewFileType: "image", initialPreviewConfig: [], initialPreviewThumbTags: [], previewThumbTags: {}, initialPreviewShowDelete: !0, removeFromPreviewOnError: !1, deleteUrl: "", deleteExtraData: {}, overwriteInitial: !0, previewZoomButtonIcons: { prev: '<i class="glyphicon glyphicon-triangle-left"></i>', next: '<i class="glyphicon glyphicon-triangle-right"></i>', toggleheader: '<i class="glyphicon glyphicon-resize-vertical"></i>', fullscreen: '<i class="glyphicon glyphicon-fullscreen"></i>', borderless: '<i class="glyphicon glyphicon-resize-full"></i>', close: '<i class="glyphicon glyphicon-remove"></i>' }, previewZoomButtonClasses: { prev: "btn btn-navigate", next: "btn btn-navigate", toggleheader: "btn btn-default btn-header-toggle", fullscreen: "btn btn-default", borderless: "btn btn-default", close: "btn btn-default" }, preferIconicPreview: !1, preferIconicZoomPreview: !1, allowedPreviewTypes: void 0, allowedPreviewMimeTypes: null, allowedFileTypes: null, allowedFileExtensions: null, defaultPreviewContent: null, customLayoutTags: {}, customPreviewTags: {}, previewFileIcon: '<i class="glyphicon glyphicon-file"></i>', previewFileIconClass: "file-other-icon", previewFileIconSettings: {}, previewFileExtSettings: {}, buttonLabelClass: "hidden-xs", browseIcon: '<i class="glyphicon glyphicon-folder-open"></i>&nbsp;', browseClass: "btn btn-primary", removeIcon: '<i class="glyphicon glyphicon-trash"></i>', removeClass: "btn btn-default", cancelIcon: '<i class="glyphicon glyphicon-ban-circle"></i>', cancelClass: "btn btn-default", uploadIcon: '<i class="glyphicon glyphicon-upload"></i>', uploadClass: "btn btn-default", uploadUrl: null, uploadAsync: !0, uploadExtraData: {}, zoomModalHeight: 480, minImageWidth: null, minImageHeight: null, maxImageWidth: null, maxImageHeight: null, resizeImage: !1, resizePreference: "width", resizeQuality: .92, resizeDefaultImageType: "image/jpeg", minFileSize: 0, maxFileSize: 0, maxFilePreviewSize: 25600, minFileCount: 0, maxFileCount: 0, validateInitialCount: !1, msgValidationErrorClass: "text-danger", msgValidationErrorIcon: '<i class="glyphicon glyphicon-exclamation-sign"></i> ', msgErrorClass: "file-error-message", progressThumbClass: "progress-bar progress-bar-success progress-bar-striped active", progressClass: "progress-bar progress-bar-success progress-bar-striped active", progressCompleteClass: "progress-bar progress-bar-success", progressErrorClass: "progress-bar progress-bar-danger", progressUploadThreshold: 99, previewFileType: "image", elCaptionContainer: null, elCaptionText: null, elPreviewContainer: null, elPreviewImage: null, elPreviewStatus: null, elErrorContainer: null, errorCloseButton: '<span class="close kv-error-close">&times;</span>', slugCallback: null, dropZoneEnabled: !0, dropZoneTitleClass: "file-drop-zone-title", fileActionSettings: {}, otherActionButtons: "", textEncoding: "UTF-8", ajaxSettings: {}, ajaxDeleteSettings: {}, showAjaxErrorDetails: !0 }, e.fn.fileinputLocales.en = { fileSingle: "file", filePlural: "files", browseLabel: "Browse &hellip;", removeLabel: "Remove", removeTitle: "Clear selected files", cancelLabel: "Cancel", cancelTitle: "Abort ongoing upload", uploadLabel: "Upload", uploadTitle: "Upload selected files", msgNo: "No", msgNoFilesSelected: "No files selected", msgCancelled: "Cancelled", msgZoomModalHeading: "Detailed Preview", msgSizeTooSmall: 'File "{name}" (<b>{size} KB</b>) is too small and must be larger than <b>{minSize} KB</b>.', msgSizeTooLarge: 'File "{name}" (<b>{size} KB</b>) exceeds maximum allowed upload size of <b>{maxSize} KB</b>.', msgFilesTooLess: "You must select at least <b>{n}</b> {files} to upload.", msgFilesTooMany: "Number of files selected for upload <b>({n})</b> exceeds maximum allowed limit of <b>{m}</b>.", msgFileNotFound: 'File "{name}" not found!', msgFileSecured: 'Security restrictions prevent reading the file "{name}".', msgFileNotReadable: 'File "{name}" is not readable.', msgFilePreviewAborted: 'File preview aborted for "{name}".', msgFilePreviewError: 'An error occurred while reading the file "{name}".', msgInvalidFileName: 'Invalid or unsupported characters in file name "{name}".', msgInvalidFileType: 'Invalid type for file "{name}". Only "{types}" files are supported.', msgInvalidFileExtension: 'Invalid extension for file "{name}". Only "{extensions}" files are supported.', msgFileTypes: { image: "image", html: "HTML", text: "text", video: "video", audio: "audio", flash: "flash", pdf: "PDF", object: "object" }, msgUploadAborted: "The file upload was aborted", msgUploadThreshold: "Processing...", msgUploadBegin: "Initializing...", msgUploadEnd: "Done", msgUploadEmpty: "No valid data available for upload.", msgValidationError: "Validation Error", msgLoading: "Loading file {index} of {files} &hellip;", msgProgress: "Loading file {index} of {files} - {name} - {percent}% completed.", msgSelected: "{n} {files} selected", msgFoldersNotAllowed: "Drag & drop files only! {n} folder(s) dropped were skipped.", msgImageWidthSmall: 'Width of image file "{name}" must be at least {size} px.', msgImageHeightSmall: 'Height of image file "{name}" must be at least {size} px.', msgImageWidthLarge: 'Width of image file "{name}" cannot exceed {size} px.', msgImageHeightLarge: 'Height of image file "{name}" cannot exceed {size} px.', msgImageResizeError: "Could not get the image dimensions to resize.", msgImageResizeException: "Error while resizing the image.<pre>{errors}</pre>", msgAjaxError: "Something went wrong with the {operation} operation. Please try again later!", msgAjaxProgressError: "{operation} failed", ajaxOperations: { deleteThumb: "file delete", uploadThumb: "file upload", uploadBatch: "batch file upload", uploadExtra: "form data upload" }, dropZoneTitle: "Drag & drop files here &hellip;", dropZoneClickTitle: "<br>(or click to select {files})", previewZoomButtonTitles: { prev: "View previous file", next: "View next file", toggleheader: "Toggle header", fullscreen: "Toggle full screen", borderless: "Toggle borderless mode", close: "Close detailed preview" } }, e.fn.fileinput.Constructor = t, e(document).ready(function () {
+  }, e.fn.fileinput.defaults = { language: "en", showCaption: !0, showBrowse: !0, showPreview: !0, showRemove: !0, showUpload: !0, showCancel: !0, showClose: !0, showUploadedThumbs: !0, browseOnZoneClick: !1, autoReplace: !1, previewClass: "", captionClass: "", frameClass: "krajee-default", mainClass: "file-caption-main", mainTemplate: null, purifyHtml: !0, fileSizeGetter: null, initialCaption: "", initialPreview: [], initialPreviewDelimiter: "*$$*", initialPreviewAsData: !1, initialPreviewFileType: "image", initialPreviewConfig: [], initialPreviewThumbTags: [], previewThumbTags: {}, initialPreviewShowDelete: !0, removeFromPreviewOnError: !1, deleteUrl: "", deleteExtraData: {}, overwriteInitial: !0, previewZoomButtonIcons: { prev: '<i class="glyphicon glyphicon-triangle-left"></i>', next: '<i class="glyphicon glyphicon-triangle-right"></i>', toggleheader: '<i class="glyphicon glyphicon-resize-vertical"></i>', fullscreen: '<i class="glyphicon glyphicon-fullscreen"></i>', borderless: '<i class="glyphicon glyphicon-resize-full"></i>', close: '<i class="glyphicon glyphicon-remove"></i>' }, previewZoomButtonClasses: { prev: "btn btn-navigate", next: "btn btn-navigate", toggleheader: "btn btn-default btn-header-toggle", fullscreen: "btn btn-default", borderless: "btn btn-default", close: "btn btn-default" }, preferIconicPreview: !1, preferIconicZoomPreview: !1, allowedPreviewTypes: void 0, allowedPreviewMimeTypes: null, allowedFileTypes: null, allowedFileExtensions: null, defaultPreviewContent: null, customLayoutTags: {}, customPreviewTags: {}, previewFileIcon: '<i class="glyphicon glyphicon-file"></i>', previewFileIconClass: "file-other-icon", previewFileIconSettings: {}, previewFileExtSettings: {}, buttonLabelClass: "hidden-xs", browseIcon: '<i class="glyphicon glyphicon-folder-open"></i>&nbsp;', browseClass: "btn btn-browse", removeIcon: '<i class="glyphicon glyphicon-trash"></i>', removeClass: "btn btn-default", cancelIcon: '<i class="glyphicon glyphicon-ban-circle"></i>', cancelClass: "btn btn-default", uploadIcon: '<i class="glyphicon glyphicon-upload"></i>', uploadClass: "btn btn-default", uploadUrl: null, uploadAsync: !0, uploadExtraData: {}, zoomModalHeight: 480, minImageWidth: null, minImageHeight: null, maxImageWidth: null, maxImageHeight: null, resizeImage: !1, resizePreference: "width", resizeQuality: .92, resizeDefaultImageType: "image/jpeg", minFileSize: 0, maxFileSize: 0, maxFilePreviewSize: 25600, minFileCount: 0, maxFileCount: 0, validateInitialCount: !1, msgValidationErrorClass: "text-danger", msgValidationErrorIcon: '<i class="glyphicon glyphicon-exclamation-sign"></i> ', msgErrorClass: "file-error-message", progressThumbClass: "progress-bar progress-bar-success progress-bar-striped active", progressClass: "progress-bar progress-bar-success progress-bar-striped active", progressCompleteClass: "progress-bar progress-bar-success", progressErrorClass: "progress-bar progress-bar-danger", progressUploadThreshold: 99, previewFileType: "image", elCaptionContainer: null, elCaptionText: null, elPreviewContainer: null, elPreviewImage: null, elPreviewStatus: null, elErrorContainer: null, errorCloseButton: '<span class="close kv-error-close">&times;</span>', slugCallback: null, dropZoneEnabled: !0, dropZoneTitleClass: "file-drop-zone-title", fileActionSettings: {}, otherActionButtons: "", textEncoding: "UTF-8", ajaxSettings: {}, ajaxDeleteSettings: {}, showAjaxErrorDetails: !0 }, e.fn.fileinputLocales.en = { fileSingle: "file", filePlural: "files", browseLabel: "Upload New", removeLabel: "Remove", removeTitle: "Clear selected files", cancelLabel: "Cancel", cancelTitle: "Abort ongoing upload", uploadLabel: "Upload", uploadTitle: "Upload selected files", msgNo: "No", msgNoFilesSelected: "No files selected", msgCancelled: "Cancelled", msgZoomModalHeading: "Detailed Preview", msgSizeTooSmall: 'File "{name}" (<b>{size} KB</b>) is too small and must be larger than <b>{minSize} KB</b>.', msgSizeTooLarge: 'File "{name}" (<b>{size} KB</b>) exceeds maximum allowed upload size of <b>{maxSize} KB</b>.', msgFilesTooLess: "You must select at least <b>{n}</b> {files} to upload.", msgFilesTooMany: "Number of files selected for upload <b>({n})</b> exceeds maximum allowed limit of <b>{m}</b>.", msgFileNotFound: 'File "{name}" not found!', msgFileSecured: 'Security restrictions prevent reading the file "{name}".', msgFileNotReadable: 'File "{name}" is not readable.', msgFilePreviewAborted: 'File preview aborted for "{name}".', msgFilePreviewError: 'An error occurred while reading the file "{name}".', msgInvalidFileName: 'Invalid or unsupported characters in file name "{name}".', msgInvalidFileType: 'Invalid type for file "{name}". Only "{types}" files are supported.', msgInvalidFileExtension: 'Invalid extension for file "{name}". Only "{extensions}" files are supported.', msgFileTypes: { image: "image", html: "HTML", text: "text", video: "video", audio: "audio", flash: "flash", pdf: "PDF", object: "object" }, msgUploadAborted: "The file upload was aborted", msgUploadThreshold: "Processing...", msgUploadBegin: "Initializing...", msgUploadEnd: "Done", msgUploadEmpty: "No valid data available for upload.", msgValidationError: "Validation Error", msgLoading: "Loading file {index} of {files} &hellip;", msgProgress: "Loading file {index} of {files} - {name} - {percent}% completed.", msgSelected: "{n} {files} selected", msgFoldersNotAllowed: "Drag & drop files only! {n} folder(s) dropped were skipped.", msgImageWidthSmall: 'Width of image file "{name}" must be at least {size} px.', msgImageHeightSmall: 'Height of image file "{name}" must be at least {size} px.', msgImageWidthLarge: 'Width of image file "{name}" cannot exceed {size} px.', msgImageHeightLarge: 'Height of image file "{name}" cannot exceed {size} px.', msgImageResizeError: "Could not get the image dimensions to resize.", msgImageResizeException: "Error while resizing the image.<pre>{errors}</pre>", msgAjaxError: "Something went wrong with the {operation} operation. Please try again later!", msgAjaxProgressError: "{operation} failed", ajaxOperations: { deleteThumb: "file delete", uploadThumb: "file upload", uploadBatch: "batch file upload", uploadExtra: "form data upload" }, dropZoneTitle: "Drag & drop files here &hellip;", dropZoneClickTitle: "<br>(or click to select {files})", previewZoomButtonTitles: { prev: "View previous file", next: "View next file", toggleheader: "Toggle header", fullscreen: "Toggle full screen", borderless: "Toggle borderless mode", close: "Close detailed preview" } }, e.fn.fileinput.Constructor = t, e(document).ready(function () {
     var i = e("input.file[type=file]");i.length && i.fileinput();
   });
 });
@@ -43428,6 +43462,491 @@ jQuery('.quantity').each(function () {
     spinner.find("input").trigger("change");
   });
 });
+
+/***/ }),
+
+/***/ "./resources/assets/js/saveJob.js":
+/***/ (function(module, exports) {
+
+$("[id^='saveJob']").on('submit', function (e) {
+    $.ajaxSetup({
+        header: $('meta[name="_token"]').attr('content')
+    });
+    e.preventDefault(e);
+    $.ajax({
+        type: "POST",
+        url: $(this).attr("action"),
+        data: $(this).serialize(),
+        dataType: 'json',
+        success: function success(data) {
+            console.log(data);
+            if (data.create_save_job) {
+                $("#saveJob" + data.job_id).css('display', 'initial');
+                $("#saveJobIcon" + data.job_id).css('color', 'rgb(248, 210, 58)');
+            } else {
+                if ($('#selectJobBtn' + data.job_id).css("background-color") == 'rgb(216, 75, 107)') {
+                    $("#saveJob" + data.job_id).css('display', 'initial');
+                    $("#saveJobIcon" + data.job_id).css('color', 'white');
+                } else {
+                    $("#saveJob" + data.job_id).css('display', 'none');
+                    $("#saveJobIcon" + data.job_id).css('color', 'white');
+                }
+            }
+        },
+        error: function error(jqXHR, textStatus, errorThrown) {
+            alert(textStatus);
+        }
+    });
+});
+
+/***/ }),
+
+/***/ "./resources/assets/js/selectJob.js":
+/***/ (function(module, exports) {
+
+$("[id^='selectJobTitle']").click(function (e) {
+    e.preventDefault();
+    $(this).parent().click();
+});
+
+$("[id^='selectJobTitle']").on({
+    mouseenter: function mouseenter() {
+        if ($(this).closest("button").css("background-color") == 'rgb(216, 75, 107)') {
+            $(this).css('color', 'rgb(20, 20, 21)');
+        } else {
+            $(this).css('color', '#97344a');
+        }
+    },
+    mouseleave: function mouseleave() {
+        if ($(this).closest("button").css("background-color") == 'rgb(216, 75, 107)') {
+            $(this).css('color', 'white');
+        } else {
+            $(this).css('color', '#d84b6b');
+        }
+    }
+});
+
+$("[id^='selectJobBtn']").on({
+    mouseenter: function mouseenter() {
+        if ($(this).css('background-color') != 'rgb(216, 75, 107)') {
+            $(this).css('background-color', 'pink');
+        }
+    },
+    mouseleave: function mouseleave() {
+        if ($(this).css('background-color') != 'rgb(216, 75, 107)') {
+            $(this).css('background-color', 'white');
+        }
+    }
+});
+
+$("[id^='selectJob']").on('submit', function (e) {
+    $.ajaxSetup({
+        header: $('meta[name="_token"]').attr('content')
+    });
+    e.preventDefault(e);
+    $.ajax({
+        type: "POST",
+        url: $(this).attr("action"),
+        data: $(this).serialize(),
+        dataType: 'json',
+        success: function success(data) {
+            console.log(data);
+            $("#job-company-name").text(data.company_name);
+            $("#job-company-description").text(data.company_description);
+            $("#job-title").text(data.job_title);
+            $("#job-responsibility").text(data.job_responsibility);
+            $("#job-requirement").text(data.job_requirement);
+
+            $("#selectJobBtn" + data.current_id).css("background-color", "white");
+            $("#selectJobBtn" + data.current_id).css("color", "#636b6f");
+            $("#selectJobTitle" + data.current_id).css("color", "#d84b6b");
+
+            $("#selectJobBtn" + data.job_id).css("background-color", "#d84b6b");
+            $("#selectJobBtn" + data.job_id).css("color", "white");
+            $("#selectJobTitle" + data.job_id).css("color", "white");
+            $("[id^='currentId']").val(data.job_id);
+            $("#job_id").val(data.job_id);
+
+            $("#applyBtn").html(data.btn_text);
+            $("#applyBtn").prop('disabled', data.disabled);
+
+            if ($("#saveJobIcon" + data.current_id).css('color') != 'rgb(248, 210, 58)') {
+                $("#saveJob" + data.current_id).css("display", "none");
+            }
+            $("#saveJob" + data.job_id).css("display", "initial");
+        },
+        error: function error(jqXHR, textStatus, errorThrown) {
+            alert(textStatus);
+        }
+    });
+});
+
+/***/ }),
+
+/***/ "./resources/assets/js/twbsPagination.js":
+/***/ (function(module, exports) {
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+/*!
+ * jQuery pagination plugin v1.4.2
+ * http://josecebe.github.io/twbs-pagination/
+ *
+ * Copyright 2014-2018, Eugene Simakin
+ * Released under Apache 2.0 license
+ * http://apache.org/licenses/LICENSE-2.0.html
+ */
+(function ($, window, document, undefined) {
+
+    'use strict';
+
+    var old = $.fn.twbsPagination;
+
+    // PROTOTYPE AND CONSTRUCTOR
+
+    var TwbsPagination = function TwbsPagination(element, options) {
+        this.$element = $(element);
+        this.options = $.extend({}, $.fn.twbsPagination.defaults, options);
+
+        if (this.options.startPage < 1 || this.options.startPage > this.options.totalPages) {
+            throw new Error('Start page option is incorrect');
+        }
+
+        this.options.totalPages = parseInt(this.options.totalPages);
+        if (isNaN(this.options.totalPages)) {
+            throw new Error('Total pages option is not correct!');
+        }
+
+        this.options.visiblePages = parseInt(this.options.visiblePages);
+        if (isNaN(this.options.visiblePages)) {
+            throw new Error('Visible pages option is not correct!');
+        }
+
+        if (this.options.beforePageClick instanceof Function) {
+            this.$element.first().on('beforePage', this.options.beforePageClick);
+        }
+
+        if (this.options.onPageClick instanceof Function) {
+            this.$element.first().on('page', this.options.onPageClick);
+        }
+
+        // hide if only one page exists
+        if (this.options.hideOnlyOnePage && this.options.totalPages == 1) {
+            if (this.options.initiateStartPageClick) {
+                this.$element.trigger('page', 1);
+            }
+            return this;
+        }
+
+        if (this.options.href) {
+            this.options.startPage = this.getPageFromQueryString();
+            if (!this.options.startPage) {
+                this.options.startPage = 1;
+            }
+        }
+
+        var tagName = typeof this.$element.prop === 'function' ? this.$element.prop('tagName') : this.$element.attr('tagName');
+
+        if (tagName === 'UL') {
+            this.$listContainer = this.$element;
+        } else {
+            var elements = this.$element;
+            var $newListContainer = $([]);
+            elements.each(function (index) {
+                var $newElem = $("<ul></ul>");
+                $(this).append($newElem);
+                $newListContainer.push($newElem[0]);
+            });
+            this.$listContainer = $newListContainer;
+            this.$element = $newListContainer;
+        }
+
+        this.$listContainer.addClass(this.options.paginationClass);
+
+        if (this.options.initiateStartPageClick) {
+            this.show(this.options.startPage);
+        } else {
+            this.currentPage = this.options.startPage;
+            this.render(this.getPages(this.options.startPage));
+            this.setupEvents();
+        }
+
+        return this;
+    };
+
+    TwbsPagination.prototype = {
+
+        constructor: TwbsPagination,
+
+        destroy: function destroy() {
+            this.$element.empty();
+            this.$element.removeData('twbs-pagination');
+            this.$element.off('page');
+
+            return this;
+        },
+
+        show: function show(page) {
+            if (page < 1 || page > this.options.totalPages) {
+                throw new Error('Page is incorrect.');
+            }
+            this.currentPage = page;
+
+            this.$element.trigger('beforePage', page);
+
+            var pages = this.getPages(page);
+            this.render(pages);
+            this.setupEvents();
+
+            this.$element.trigger('page', page);
+
+            return pages;
+        },
+
+        enable: function enable() {
+            this.show(this.currentPage);
+        },
+
+        disable: function disable() {
+            var _this = this;
+            this.$listContainer.off('click').on('click', 'li', function (evt) {
+                evt.preventDefault();
+            });
+            this.$listContainer.children().each(function () {
+                var $this = $(this);
+                if (!$this.hasClass(_this.options.activeClass)) {
+                    $(this).addClass(_this.options.disabledClass);
+                }
+            });
+        },
+
+        buildListItems: function buildListItems(pages) {
+            var listItems = [];
+
+            if (this.options.first) {
+                listItems.push(this.buildItem('first', 1));
+            }
+
+            if (this.options.prev) {
+                var prev = pages.currentPage > 1 ? pages.currentPage - 1 : this.options.loop ? this.options.totalPages : 1;
+                listItems.push(this.buildItem('prev', prev));
+            }
+
+            for (var i = 0; i < pages.numeric.length; i++) {
+                listItems.push(this.buildItem('page', pages.numeric[i]));
+            }
+
+            if (this.options.next) {
+                var next = pages.currentPage < this.options.totalPages ? pages.currentPage + 1 : this.options.loop ? 1 : this.options.totalPages;
+                listItems.push(this.buildItem('next', next));
+            }
+
+            if (this.options.last) {
+                listItems.push(this.buildItem('last', this.options.totalPages));
+            }
+
+            return listItems;
+        },
+
+        buildItem: function buildItem(type, page) {
+            var $itemContainer = $('<li></li>'),
+                $itemContent = $('<a></a>'),
+                itemText = this.options[type] ? this.makeText(this.options[type], page) : page;
+
+            $itemContainer.addClass(this.options[type + 'Class']);
+            $itemContainer.data('page', page);
+            $itemContainer.data('page-type', type);
+            $itemContainer.append($itemContent.attr('href', this.makeHref(page)).addClass(this.options.anchorClass).html(itemText));
+
+            return $itemContainer;
+        },
+
+        getPages: function getPages(currentPage) {
+            var pages = [];
+
+            var half = Math.floor(this.options.visiblePages / 2);
+            var start = currentPage - half + 1 - this.options.visiblePages % 2;
+            var end = currentPage + half;
+
+            var visiblePages = this.options.visiblePages;
+            if (visiblePages > this.options.totalPages) {
+                visiblePages = this.options.totalPages;
+            }
+
+            // handle boundary case
+            if (start <= 0) {
+                start = 1;
+                end = visiblePages;
+            }
+            if (end > this.options.totalPages) {
+                start = this.options.totalPages - visiblePages + 1;
+                end = this.options.totalPages;
+            }
+
+            var itPage = start;
+            while (itPage <= end) {
+                pages.push(itPage);
+                itPage++;
+            }
+
+            return { "currentPage": currentPage, "numeric": pages };
+        },
+
+        render: function render(pages) {
+            var _this = this;
+            this.$listContainer.children().remove();
+            var items = this.buildListItems(pages);
+            $.each(items, function (key, item) {
+                _this.$listContainer.append(item);
+            });
+
+            this.$listContainer.children().each(function () {
+                var $this = $(this),
+                    pageType = $this.data('page-type');
+
+                switch (pageType) {
+                    case 'page':
+                        if ($this.data('page') === pages.currentPage) {
+                            $this.addClass(_this.options.activeClass);
+                        }
+                        break;
+                    case 'first':
+                        $this.toggleClass(_this.options.disabledClass, pages.currentPage === 1);
+                        break;
+                    case 'last':
+                        $this.toggleClass(_this.options.disabledClass, pages.currentPage === _this.options.totalPages);
+                        break;
+                    case 'prev':
+                        $this.toggleClass(_this.options.disabledClass, !_this.options.loop && pages.currentPage === 1);
+                        break;
+                    case 'next':
+                        $this.toggleClass(_this.options.disabledClass, !_this.options.loop && pages.currentPage === _this.options.totalPages);
+                        break;
+                    default:
+                        break;
+                }
+            });
+        },
+
+        setupEvents: function setupEvents() {
+            var _this = this;
+            this.$listContainer.off('click').on('click', 'li', function (evt) {
+                var $this = $(this);
+                if ($this.hasClass(_this.options.disabledClass) || $this.hasClass(_this.options.activeClass)) {
+                    return false;
+                }
+                // Prevent click event if href is not set.
+                !_this.options.href && evt.preventDefault();
+                _this.show(parseInt($this.data('page')));
+            });
+        },
+
+        changeTotalPages: function changeTotalPages(totalPages, currentPage) {
+            this.options.totalPages = totalPages;
+            return this.show(currentPage);
+        },
+
+        makeHref: function makeHref(page) {
+            return this.options.href ? this.generateQueryString(page) : "#";
+        },
+
+        makeText: function makeText(text, page) {
+            return text.replace(this.options.pageVariable, page).replace(this.options.totalPagesVariable, this.options.totalPages);
+        },
+
+        getPageFromQueryString: function getPageFromQueryString(searchStr) {
+            var search = this.getSearchString(searchStr),
+                regex = new RegExp(this.options.pageVariable + '(=([^&#]*)|&|#|$)'),
+                page = regex.exec(search);
+            if (!page || !page[2]) {
+                return null;
+            }
+            page = decodeURIComponent(page[2]);
+            page = parseInt(page);
+            if (isNaN(page)) {
+                return null;
+            }
+            return page;
+        },
+
+        generateQueryString: function generateQueryString(pageNumber, searchStr) {
+            var search = this.getSearchString(searchStr),
+                regex = new RegExp(this.options.pageVariable + '=*[^&#]*');
+            if (!search) return '';
+            return '?' + search.replace(regex, this.options.pageVariable + '=' + pageNumber);
+        },
+
+        getSearchString: function getSearchString(searchStr) {
+            var search = searchStr || window.location.search;
+            if (search === '') {
+                return null;
+            }
+            if (search.indexOf('?') === 0) search = search.substr(1);
+            return search;
+        },
+
+        getCurrentPage: function getCurrentPage() {
+            return this.currentPage;
+        },
+
+        getTotalPages: function getTotalPages() {
+            return this.options.totalPages;
+        }
+    };
+
+    // PLUGIN DEFINITION
+
+    $.fn.twbsPagination = function (option) {
+        var args = Array.prototype.slice.call(arguments, 1);
+        var methodReturn;
+
+        var $this = $(this);
+        var data = $this.data('twbs-pagination');
+        var options = (typeof option === 'undefined' ? 'undefined' : _typeof(option)) === 'object' ? option : {};
+
+        if (!data) $this.data('twbs-pagination', data = new TwbsPagination(this, options));
+        if (typeof option === 'string') methodReturn = data[option].apply(data, args);
+
+        return methodReturn === undefined ? $this : methodReturn;
+    };
+
+    $.fn.twbsPagination.defaults = {
+        totalPages: 1,
+        startPage: 1,
+        visiblePages: 5,
+        initiateStartPageClick: true,
+        hideOnlyOnePage: false,
+        href: false,
+        pageVariable: '{{page}}',
+        totalPagesVariable: '{{total_pages}}',
+        page: null,
+        first: 'First',
+        prev: 'Previous',
+        next: 'Next',
+        last: 'Last',
+        loop: false,
+        beforePageClick: null,
+        onPageClick: null,
+        paginationClass: 'pagination',
+        nextClass: 'page-item next',
+        prevClass: 'page-item prev',
+        lastClass: 'page-item last',
+        firstClass: 'page-item first',
+        pageClass: 'page-item',
+        activeClass: 'active',
+        disabledClass: 'disabled',
+        anchorClass: 'page-link'
+    };
+
+    $.fn.twbsPagination.Constructor = TwbsPagination;
+
+    $.fn.twbsPagination.noConflict = function () {
+        $.fn.twbsPagination = old;
+        return this;
+    };
+
+    $.fn.twbsPagination.version = "1.4.2";
+})(window.jQuery, window, document);
 
 /***/ }),
 

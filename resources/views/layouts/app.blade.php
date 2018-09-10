@@ -38,7 +38,7 @@
 </head>
 <body>
     <div id="app">
-        <div style="margin-bottom: 73px">@include('layouts.nav')</div>
+        <div style="{{ Request::is('/') ? '' : 'margin-bottom:60px' }}">@include('layouts.nav')</div>
         @yield('content')
         @include('layouts.footer')
     </div>

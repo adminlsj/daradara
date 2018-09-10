@@ -4,9 +4,9 @@ use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-	protected $toTruncate_array = ['avatars', 'comments', 'order_imgs', 'trans', 'orders', 'users'];
+	protected $toTruncate_array = ['comments', 'company_imgs', 'companies', 'jobs'];
 
-    protected $toTruncate_string = 'avatars, comments, order_imgs, trans, orders, users';
+    protected $toTruncate_string = 'comments, company_imgs, companies, jobs';
 
     /**
      * Run the database seeds.
@@ -20,9 +20,7 @@ class DatabaseSeeder extends Seeder
             DB::statement('ALTER SEQUENCE '.$table.'_id_seq RESTART WITH 1;');
         }
     	
-        $this->call(UsersTableSeeder::class);
-        $this->call(OrdersTableSeeder::class);
-        $this->call(OrderImgsTableSeeder::class);
-        $this->call(CommentsTableSeeder::class);
+        $this->call(CompaniesTableSeeder::class);
+        $this->call(JobsTableSeeder::class);
     }
 }

@@ -79,8 +79,6 @@ class UserController extends Controller
 
         $user->name = request('name');
         $user->email = request('email');
-        $user->description = request('description');
-        $user->bank_account = request('bank_account');
         if ($user->password != request('password')) {
             $user->password = Hash::make(request('password'));
         }
@@ -106,8 +104,13 @@ class UserController extends Controller
         ]);
 
         if ($user->avatar != null) {
+            if ($user->avatar->filename != "default_freerider_profile_pic") {
+                Storage::disk('s3')->delete('avatars/originals/'.$user->avatar->filename.'.jpg');
+                Storage::disk('s3')->delete('avatars/thumbnails/'.$user->avatar->filename.'.jpg');
+            }
             $user->avatar->delete();
         }
+
         $avatar = request()->file('avatar');
         $extension = $avatar->getClientOriginalExtension();
 
@@ -130,5 +133,19 @@ class UserController extends Controller
         ]);
 
         return back();
+    }
+
+    public function savedJobsIndex(User $user, Request $request)
+    {
+        $savedJobs = $user->savedJobs->sortByDesc('created_at');
+
+        $resume = $user->resume;
+
+        $haveResumeImg = false;
+        if ($resume->resumeImg != null) {
+            $haveResumeImg = true;
+        }
+
+        return view('user.saved-jobs-index', compact('savedJobs', 'resume', 'haveResumeImg'));
     }
 }
