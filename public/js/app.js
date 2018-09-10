@@ -42056,20 +42056,13 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
-
-	// hide .navbar first
-	$(".home-nav-scroll-show").hide();
-
-	// fade in .navbar
-	$(function () {
-		$(window).scroll(function () {
-			// set distance user needs to scroll before we fadeIn navbar
-			if ($(this).scrollTop() > 200) {
-				$('.home-nav-scroll-show').fadeIn();
-			} else {
-				$('.home-nav-scroll-show').fadeOut();
-			}
-		});
+	$(window).scroll(function () {
+		// set distance user needs to scroll before we fadeIn navbar
+		if ($(this).scrollTop() > 200) {
+			$('.home-nav-scroll-show').fadeIn();
+		} else {
+			$('.home-nav-scroll-show').fadeOut();
+		}
 	});
 });
 

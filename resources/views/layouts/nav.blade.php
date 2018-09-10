@@ -14,7 +14,7 @@
         <a href="{{ route('blog.index') }}">Resources</a>
     @endguest
 </div>
-<nav class="{{ Request::is('/') ? 'home-nav-scroll-show' : '' }} navbar navbar-default navbar-fixed-top">
+<nav style="display:{{ Request::is('/') ? 'none' : '' }}" class="{{ Request::is('/') ? 'home-nav-scroll-show' : '' }} navbar navbar-default navbar-fixed-top">
     <div class="container" style="width: 95%">
         <div class="navbar-header visible-xs-block">
             <div class="row">

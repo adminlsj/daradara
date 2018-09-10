@@ -131,19 +131,21 @@
 					@endforeach
 				</div>
 			</div>
-			<div class="col-md-4" style="padding-left: 25px">
+			<div class="col-md-4 related-blogs" style="padding-left: 25px; padding-right: 30px">
 				@foreach($relatedBlogs as $blog)
-				    <div class="row" style="margin-bottom: 15px;">
-				        <div class="col-md-5">
-				            <a href="{{ route('blog.show', ['blog' => $blog->id]) }}">
-				                <img src="https://s3-us-west-2.amazonaws.com/freerider/blogImgs/squares/{{ $blog->id }}/{{ $blog->blogImgs->first()->filename }}" class="img-responsive img-circle">
-				            </a>
-				        </div>
-				        <div class="col-md-7">
-				            <div><a href="{{ route('blog.show', ['blog' => $blog->id]) }}"><h3 style="color: black; font-weight: 400; font-size: 15px">{{ str_limit($blog->title, 50) }}</h3></a></div>
-				            <div style="font-size: 12.5px">{{ Carbon\Carbon::parse($blog->created_at)->format('Y年m月d日') }}</div>
-				        </div>
-				    </div>
+					<a href="{{ route('blog.show', ['blog' => $blog->id]) }}">
+					    <div class="row hover-box-shadow" style="border-radius: 5px; border: solid 1px #f2f2f2; margin-bottom: 15px; background-color:white;">
+					        <div class="col-md-5" style="padding-left: 0px; padding-right: 2px">
+					        	<div class="embed-responsive embed-responsive-4by3">
+					                <img style="width:100%;" src="https://s3-us-west-2.amazonaws.com/freerider/blogImgs/originals/{{ $blog->id }}/{{ $blog->blogImgs->first()->filename }}" class="embed-responsive-item">
+					            </div>
+					        </div>
+					        <div class="col-md-7">
+					            <div><h3 style="font-weight: 400; font-size: 15px">{{ str_limit($blog->title, 60) }}</h3></div>
+					            <div class="related-blogs-date" style="font-size: 12.5px">{{ Carbon\Carbon::parse($blog->created_at)->format('Y年m月d日') }}</div>
+					        </div>
+					    </div>
+					</a>
 				@endforeach
 				<div class="row" style="margin-top: 25px">
 					<div class="col-md-6 col-md-offset-3">
@@ -151,31 +153,6 @@
 					        <button type="submit" class="btn btn-info btn-outline btn-lg btn-block" style="border-radius: 0; font-size: 15px;">查看所有貼文</button>
 					    </form>
 					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="visible-xs-block visible-sm-block" style="padding-top: 70px">
-			<h3 style="color: grey; font-weight: 300">FreeRider部落格</h3>
-			<hr>
-			@foreach ($similar_blogs as $blog)
-				<div class="row" style="margin-bottom: 15px;">
-			        <div class="col-md-5 col-xs-5 col-sm-4">
-			            <a href="{{ route('blog.show', ['blog' => $blog->id]) }}">
-			                <img src="https://s3-us-west-2.amazonaws.com/freerider/blogImgs/squares/{{ $blog->id }}/{{ $blog->blogImgs->first()->filename }}" class="img-responsive img-circle">
-			            </a>
-			        </div>
-			        <div class="col-md-7 col-xs-7 col-sm-8">
-			            <div><a href="{{ route('blog.show', ['blog' => $blog->id]) }}"><h3 style="color: black; font-weight: 400; font-size: 15px">{{ str_limit($blog->title, 50) }}</h3></a></div>
-			            <div style="font-size: 12.5px">{{ Carbon\Carbon::parse($blog->created_at)->format('Y年m月d日') }}</div>
-			        </div>
-			    </div>
-			@endforeach
-			<div class="row" style="margin-top: 20px">
-				<div class="col-xs-8 col-xs-offset-2">
-				    <form action="{{ route('blog.index') }}" method="GET">
-				        <button type="submit" class="btn btn-info btn-outline btn-lg btn-block" style="border-radius: 0; font-size: 15px;">查看所有貼文</button>
-				    </form>
 				</div>
 			</div>
 		</div>
