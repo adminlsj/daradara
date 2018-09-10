@@ -43574,6 +43574,9 @@ $("[id^='selectJob']").on('submit', function (e) {
                 $("#saveJob" + data.current_id).css("display", "none");
             }
             $("#saveJob" + data.job_id).css("display", "initial");
+
+            $("#redirectToRegister" + data.current_id).css("display", "none");
+            $("#redirectToRegister" + data.job_id).css("display", "initial");
         },
         error: function error(jqXHR, textStatus, errorThrown) {
             alert(textStatus);

@@ -122,7 +122,7 @@ class JobController extends Controller
 
         $btn_text = 'Apply';
         $disabled = '';
-        if (App::where('user_id', auth()->user()->id)->where('job_id', $job->id)->count() != 0) {
+        if (auth()->check() && App::where('user_id', auth()->user()->id)->where('job_id', $job->id)->count() != 0) {
             $btn_text = 'Applied';
             $disabled = 'disabled';
         }
