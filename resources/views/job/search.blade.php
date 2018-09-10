@@ -20,9 +20,9 @@
 </head>
 <body>
     <div id="app">
-        <div class="nav-search" style="margin-bottom: 73px;">@include('layouts.nav')</div>
+        <div style="margin-bottom: 73px;">@include('layouts.nav-search')</div>
 
-        <div class="hidden-xs" id="left" style="margin-top: -12px; padding-bottom: 60px; background-color: white;">
+        <div class="hidden-xs" id="left" style="margin-top: -13px; padding-bottom: 60px; background-color: white;">
             <div class="container" style="width: 100%">
                 <div class="visible-xs-block" style="margin-top: 30px"></div>
                 @if ($currentJob != null)
@@ -109,9 +109,9 @@
             </div>
 		</div>
 
-		<div id="right" style="margin-top: -12px; padding-top: 15px;">
-            @include('job.search-top')
-            <div style="padding-top:30px; background-color:#E6E6E6;">
+		<div id="right" style="margin-top: -13px;">
+            <div id="slide-out-blank" style="margin-bottom: 50px; display: {{ $slideOutSearch ? '' : 'none' }};"></div>
+            <div style="padding-top:30px; background-color:#edeeee;">
                 <div id="showJob" class="container card-shadow" style="background-color:white; width:80%;padding-left: 80px; padding-right: 80px; padding-top: 50px; padding-bottom: 90px;">
                     @if ($currentJob != null)
                         <div style="font-size: 25px" id="job-company-name"> {{ $currentJob->company->name }} </div>

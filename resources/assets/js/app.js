@@ -37,6 +37,21 @@ $('#avatar-upload').on("change", function(e) {
 $("#orderImgs").fileinput({ 'browseLabel' : '選擇圖片', 'removeLabel' : "刪除圖片" });
 
 $(document).ready(function(){
+	$('#slide-out-arrow').click(function() {
+		var x = document.getElementById("slide-in-content");
+	    if (x.style.display === "none") {
+	        $('#slide-in-content').slideDown();
+	        $(this).html('keyboard_arrow_up');
+	        $('#slide-out-blank').slideDown();
+	    } else {
+	        $('#slide-in-content').slideUp();
+	        $(this).html('keyboard_arrow_down');
+	        $('#slide-out-blank').slideUp();
+	    }
+	});
+});
+
+$(document).ready(function(){
 	$('.blog-carousel').owlCarousel({
 		items: 1,
 		loop: true,
@@ -46,12 +61,10 @@ $(document).ready(function(){
 		lazyLoad: true,
 		autoplay: true,
 	});
-});
 
-$(document).ready(function(){
 	$(window).scroll(function () {
         // set distance user needs to scroll before we fadeIn navbar
-		if ($(this).scrollTop() > 200) {
+		if ($(this).scrollTop() > 100) {
 			$('.home-nav-scroll-show').fadeIn();
 		} else {
 			$('.home-nav-scroll-show').fadeOut();

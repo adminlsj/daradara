@@ -1,7 +1,7 @@
-<form id="search-form" class="job-form" action="{{ route('job.search') }}" method="GET">
+<form id="search-form" class="search-top-form right-search-top" action="{{ route('job.search') }}" method="GET">
 	<div class="row">
 		<div class="col-md-3">
-			<input style="padding: 4px;" type="text" value="{{ request('title') }}" id="title" name="title" placeholder="Job or Company">
+			<input type="text" value="{{ request('title') }}" id="title" name="title" placeholder="Job or Company">
 		</div>
 		<div class="col-md-3">
 			<select id="location" name="location">
@@ -19,12 +19,18 @@
 				@endforeach
 			</select>
 		</div>
-		<div class="col-md-3">
-			<input style="padding: 4px;" type="integer" value="{{ request('salary') }}" id="salary" name="salary" placeholder="Above this Salary...">
+		<div class="col-md-2">
+			<button type="submit" style="border-radius:2px !important; width:100%" class="container btn btn-info btn-block">Search</button>
+		</div>
+		<div class="col-md-1" style="text-align: left; margin-top: 5px">
+			<i id="slide-out-arrow" style="cursor:pointer; color: white; font-size: 30px;" class="noselect material-icons">keyboard_arrow_{{ $slideOutSearch ? 'up' : 'down' }}</i>
 		</div>
 	</div>
 
-	<div class="row">
+	<div id="slide-in-content" style="display: {{ $slideOutSearch ? '' : 'none'}};" class="row">
+		<div class="col-md-3">
+			<input type="integer" value="{{ request('salary') }}" id="salary" name="salary" placeholder="Above this Salary...">
+		</div>
 		<div class="col-md-3">
 			<select id="experience" name="experience">
 				<option value="">Years of Experience...</option>
@@ -48,9 +54,6 @@
 					<option value="{{ $key }}" {{ request('education') == $key ? 'selected' : ''}}>{{ $element }}</option>
 				@endforeach
 			</select>
-		</div>
-		<div class="col-md-3">
-			<button type="submit" style="border-radius:2px !important; width:100%" class="container btn btn-info btn-block">Search</button>
 		</div>
 	</div>
 </form>

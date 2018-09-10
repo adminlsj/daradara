@@ -1,20 +1,4 @@
-<div style="position:absolute; top: 6%; right: 10%;z-index: 999; display:{{ Request::is('/') ? '' : 'none' }}" class="home-nav hidden-xs">
-    @guest
-        <a href="{{ route('login') }}">登入</a>
-        <a href="{{ route('register') }}">註冊</a>
-        <a href="{{ route('blog.index') }}">指南</a>
-    @else
-        <a href="{{ route('user.savedJobsIndex', ['user' => auth()->user()]) }}">Saved Jobs</a>
-        <a href="{{ route('app.index') }}">My Applications</a></li>
-        <a href="{{ route('resume.edit', ['resume' => auth()->user()->resume->id]) }}">My Resume</a>
-        <a href="{{ route('user.edit', ['user' => auth()->user()]) }}" style="padding-left: 8px; padding-right: 7px">
-            <img src="https://s3.amazonaws.com/twobayjobs/avatars/thumbnails/{{ Auth::user()->avatar->filename }}.jpg" class="img-circle" style="margin-top: -10px; margin-bottom: -8px" width="35px" height="35px">&nbsp;
-            {{ Auth::user()->name }}
-        </a>
-        <a href="{{ route('blog.index') }}">Resources</a>
-    @endguest
-</div>
-<nav style="display:{{ Request::is('/') ? 'none' : '' }}" class="{{ Request::is('/') ? 'home-nav-scroll-show' : '' }} navbar navbar-default navbar-fixed-top">
+<nav class="navbar navbar-default navbar-fixed-top">
     <div class="container" style="width: 95%">
         <div class="navbar-header visible-xs-block">
             <div class="row">
@@ -103,4 +87,6 @@
             </ul>
         </div>
     </div>
+
+    <div>@include('job.search-top')</div>
 </nav>

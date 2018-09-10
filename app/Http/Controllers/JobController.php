@@ -190,8 +190,9 @@ class JobController extends Controller
     }
 
     public function search()
-    {        
+    {      
         $jobs = Job::where('created_at', '>=', Carbon::now()->subDays(31));
+        $slideOutSearch = false;
 
         if (request('title') != null) {
             $jobs = $jobs->where(function ($query) {
@@ -219,10 +220,12 @@ class JobController extends Controller
         if (request('salary') != null) {
             $sSalary = request('salary');
             $jobs = $jobs->where('salary', '>=', $sSalary);
+            $slideOutSearch = true;
         }
 
         if (request('experience') != null) {
             $sExp = request('experience');
+            $slideOutSearch = true;
             switch ($sExp) {
                 case 'No Experience':
                     $jobs = $jobs->where('experience', '=', 0);
@@ -253,16 +256,13 @@ class JobController extends Controller
         if (request('type') != null) {
             $sType = request('type');
             $jobs = $jobs->where('type', $sType);
+            $slideOutSearch = true;
         }
 
         if (request('education') != null) {
             $sEdu = request('education');
             $jobs = $jobs->where('education', $sEdu);
-        }
-
-        if (request('endDate') != null) {
-            $sDate = request('endDate');
-            $jobs = $jobs->where('end_date', '<=', $sDate);
+            $slideOutSearch = true;
         }
 
         $jobs = $jobs->orderBy('created_at', 'desc')->paginate(20);
@@ -277,7 +277,7 @@ class JobController extends Controller
             }
         }
 
-        return view('job.search', compact('jobs', 'currentJob', 'btn_text', 'disabled'));
+        return view('job.search', compact('jobs', 'currentJob', 'btn_text', 'disabled', 'slideOutSearch'));
     }
 
     public function select(Job $job, Request $request)

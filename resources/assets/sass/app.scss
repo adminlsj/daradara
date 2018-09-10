@@ -28,6 +28,7 @@
 
 // Search Home Form
 @import "search_home_form";
+@import "search_top_form";
 
 // Breadcrumbs
 @import "breadcrumbs";
@@ -66,7 +67,15 @@ nav {
     height: 50px;
     padding-top: 5px;
     padding-bottom: 55px;
-    z-index: 99
+    z-index: 99;
+}
+
+nav, nav div {
+    background-color: #42464A !important;
+}
+
+nav a {
+    color: #f1f1f1 !important;
 }
 
 .home-nav a {
@@ -318,23 +327,35 @@ input[type=file] {
 
 #left {
     @media (max-width: 992px) {
-        padding: 10px;
     }
     width: 400px;
     height: 100%;
     position: fixed;
+    left:0;
     border-right: 1px solid #E6E6E6;
     overflow-y: scroll;
 }
 
 #right {
-    @media (max-width: 768px) {
-        width: 100%;
-    }
     width: calc(100% - 400px);
-    height: auto;
-    position: absolute;
+    height: calc(100% - 120px);
+    position: fixed;
+    top: 132px;
     right: 0;
+    overflow-y: scroll;
+}
+
+.right-search-top {
+    margin-top: 5px;
+    padding-top: 9px;
+    width: calc(100% - 400px);
+    position: fixed;
+    right: 0;
+    background-color: #65666c;
+}
+
+.right-search-top div, .right-search-top form {
+    background-color: #65666c !important;
 }
 
 .sidenav > div > a {
@@ -436,4 +457,14 @@ a > i {
         padding-left: 15px;
     }
     padding-left: 25px;
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
 }
