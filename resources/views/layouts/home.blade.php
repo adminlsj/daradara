@@ -97,20 +97,22 @@
 					</div>
 				</div>
 				<div style="margin-top: 40px;">
-					<h3 style="color: grey; font-weight: 300">Let’s explore jobsDB</h3>
+					<h3 style="color: grey; font-weight: 300">Industry Average Salaries</h3>
 					<hr>
 				</div>
-				<div class="row hidden-xs">
+				@foreach (App\Job::$category as $key => $element)
 					<div class="col-md-12">
-						<img class="featured-category d-block img-responsive" src="https://s3.amazonaws.com/twobayjobs/system/intro/commercial-02.png" alt="Chicago">
+						<a href="/jobs/search?category={{ $element }}">
+							<div style="padding:10px; border-radius: 5px; border: solid 1px #f2f2f2; margin-bottom: 15px;" class="row hover-box-shadow">
+								<div style="font-weight:600; text-align: center" class="col-md-12">
+									<span class="pull-left">{{ $loop->index + 1 }}.</span>
+									<span class="pull-center">{{ $element }}</span>
+									<span class="pull-right">RMB ¥{{ round(App\Job::where('category', $element)->avg('salary')) }}</span>
+								</div>
+							</div>
+						</a>
 					</div>
-				</div>
-				<br>
-				<div class="row hidden-xs">
-					<div class="col-md-12">
-						<img class="featured-category d-block img-responsive" src="https://s3.amazonaws.com/twobayjobs/system/intro/commercial-03.png" alt="Chicago">
-					</div>
-				</div>
+				@endforeach
 			</div>
 		</div>
 

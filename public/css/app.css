@@ -9340,12 +9340,12 @@ body {
 }
 
 a,
-a:visited {
+a:link {
   color: #d84b6b;
 }
 
 a:hover,
-a:link {
+a:visited {
   color: #97344a;
 }
 
