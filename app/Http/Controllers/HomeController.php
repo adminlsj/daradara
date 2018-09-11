@@ -44,14 +44,14 @@ class HomeController extends Controller
                 $user_email = request('email');
                 $title = request('title');
                 $text = request('text');
-                \Mail::to('freeriderhk852@gmail.com')->send(new Contact($user_email, $title, $text));
+                \Mail::to('u3514481@connect.hku.hk')->send(new Contact($user_email, $title, $text));
                 break;
 
             case 'meetup':
                 $user_email = request('email');
                 $location = request('location');
                 $time = request('time');
-                \Mail::to('freeriderhk852@gmail.com')->send(new Meetup($user_email, $location, $time));
+                \Mail::to('u3514481@connect.hku.hk')->send(new Meetup($user_email, $location, $time));
                 break;
             
             default:

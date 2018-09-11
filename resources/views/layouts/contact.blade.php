@@ -2,9 +2,11 @@
 
 @section('content')
 <div class="container">
-	<h3 style="color: grey; font-weight: 300">聯絡我們</h3>
-	<hr>
-	<form class="order-form" action="/sendMail/contact" method="POST">
+	<div style="margin-top: 40px;">
+		<h3 style="color: grey; font-weight: 300">聯絡我們</h3>
+		<hr>
+	</div>
+	<form class="job-form" action="/sendMail/contact" method="POST">
 		{{ csrf_field() }}
 		<div class="row">
 		    <div class="col-md-12">
@@ -32,5 +34,5 @@
 		</div>
 	</form>
 </div>
-<br><br><br>
+<br><br><br><br><br>
 @endsection
