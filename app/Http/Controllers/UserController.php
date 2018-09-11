@@ -14,29 +14,8 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->only('edit', 'update', 'destroy');
-        $this->middleware('sameUser')->only('edit', 'update', 'destroy');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+        $this->middleware('auth')->only('edit', 'update', 'destroy', 'savedJobsIndex', 'storeAvatar');
+        $this->middleware('sameUser')->only('edit', 'update', 'destroy', 'savedJobsIndex', 'storeAvatar');
     }
 
     /**
