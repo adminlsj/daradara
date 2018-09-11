@@ -4,7 +4,7 @@
 <div style="padding-top:40px; background-color:#E6E6E6;">
 	<form action="{{ route('app.store') }}" method="POST" enctype="multipart/form-data">
 		{{ csrf_field() }}
-		<div class="container card-shadow" style="background-color:white; width:75%; padding-left: 70px; padding-right: 70px; padding-top: 40px; padding-bottom: 90px;">
+		<div class="container card-shadow resume-form-container">
 		    <div style="font-size: 25px">APPLICATION for <span style="font-weight: 600">{{ $job->title }}</span> at <span style="font-weight: 600">{{ $job->company->name }}</span></div>
 		    <br>
 

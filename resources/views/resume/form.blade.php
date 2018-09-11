@@ -3,34 +3,32 @@
 		<img src="https://s3.amazonaws.com/twobayjobs/avatars/originals/{{ Auth::user()->avatar->filename }}.jpg" style="width:100%; border-radius: 2px;">
 	</div>
 	<div class="col-md-10">
-		<div class="form-group">
-			<input value="{{ old('name', $resume->name) }}" type="text" class="form-control" id="name" name="name" placeholder="Name">
-		</div>
-		<div class="form-group">
-			<input value="{{ old('title', $resume->title) }}" type="text" class="form-control" id="title" name="title" placeholder="Title">
-		</div>
 		<div class="row">
-	    	<div class="col-md-4">
-	    		<div class="form-group">
+	    	<div class="col-md-6">
+				<div class="form-group">
+					<input value="{{ old('name', $resume->name) }}" type="text" class="form-control" id="name" name="name" placeholder="Name">
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group">
 	    			<input value="{{ old('title', $resume->email) }}" type="email" class="form-control" id="email" name="email" placeholder="Email">
 	    		</div>
-	    	</div>
-	    	<div class="col-md-2">
-	    		<div class="form-group">
-	    			<input value="{{ old('title', $resume->phone) }}" type="text" class="form-control" id="phone" name="phone" placeholder="Phone">
+			</div>
+		</div>
+
+		<div class="row">
+	    	<div class="col-md-4">
+	    		<div class="input-group mb-2 mr-sm-2 mb-sm-0">
+					<div class="input-group-addon">+852</div>
+	    			<input value="{{ old('title', $resume->phone) }}" type="text" class="form-control" id="phone" name="phone" placeholder="WhatsApp">
 	    		</div>
 	    	</div>
-	    	<div class="col-md-2">
-	    		<div class="form-group">
-	    			<input value="{{ old('title', $resume->location) }}" type="text" class="form-control" id="location" name="location" placeholder="Location">
-	    		</div>
-	    	</div>
-	    	<div class="col-md-2">
+	    	<div class="col-md-4">
 	    		<div class="form-group">
 	    			<input value="{{ old('title', $resume->wechat) }}" type="text" class="form-control" id="wechat" name="wechat" placeholder="WeChat">
 	    		</div>
 	    	</div>
-	    	<div class="col-md-2">
+	    	<div class="col-md-4">
 	    		<div class="form-group">
 	    			<input value="{{ old('title', $resume->qq) }}" type="text" class="form-control" id="qq" name="qq" placeholder="QQ">
 	    		</div>
@@ -48,7 +46,8 @@
 		</div>
 	</div>
 	<div class="col-md-3">
-		<div class="form-group">
+		<div class="input-group mb-2 mr-sm-2 mb-sm-0">
+			<div class="input-group-addon">GPA</div>
 			<input value="{{ old('title', $resume->edu_gpa) }}" type="text" class="form-control" id="edu_gpa" name="edu_gpa" placeholder="GPA / CGPA">
 		</div>
 	</div>
@@ -105,62 +104,12 @@
 	</div>
 </div>
 <br>
-<div style="font-size: 25px">LANGUAGE</div>
-<br>
-<div class="row">
-	<div class="col-md-2">
-		<div class="form-group">
-			<input value="{{ old('title', $resume->language_one) }}" type="text" class="form-control" id="language_one" name="language_one" placeholder="Language">
-		</div>
-	</div>
-	<div class="col-md-2">
-		<div class="form-group">
-			<select class="form-control" id="language_one_level">
-				<option>Level...</option>
-			    <option>Native</option>
-			    <option>Fluent</option>
-			    <option>Basic</option>
-		    </select>
-		</div>
-	</div>
-	<div class="col-md-2">
-		<div class="form-group">
-			<input value="{{ old('title', $resume->language_two) }}" type="text" class="form-control" id="language_two" name="language_two" placeholder="Language">
-		</div>
-	</div>
-	<div class="col-md-2">
-		<div class="form-group">
-			<select class="form-control" id="language_two_level">
-				<option>Level...</option>
-			    <option>Native</option>
-			    <option>Fluent</option>
-			    <option>Basic</option>
-		    </select>
-		</div>
-	</div>
-	<div class="col-md-2">
-		<div class="form-group">
-			<input value="{{ old('title', $resume->language_three) }}" type="text" class="form-control" id="language_three" name="language_three" placeholder="Language">
-		</div>
-	</div>
-	<div class="col-md-2">
-		<div class="form-group">
-			<select class="form-control" id="language_three_level">
-				<option>Level...</option>
-			    <option>Native</option>
-			    <option>Fluent</option>
-			    <option>Basic</option>
-		    </select>
-		</div>
-	</div>
-</div>
-<br>
 <div style="font-size: 25px">SKILLS & ACHIEVEMENTS</div>
 <br>
 <div class="row">
 	<div class="col-md-12">
 		<div class="form-group">
-		    <textarea value="{{ old('title', $resume->other_description) }}" class="form-control" id="other_description" name="other_description" placeholder="Tell the employer more about yourself for bonus points!" rows="5"></textarea>
+		    <textarea value="{{ old('title', $resume->other_description) }}" class="form-control" id="other_description" name="other_description" placeholder="Tell the employer more about yourself for bonus points!" rows="4"></textarea>
 		</div>
 	</div>
 </div>

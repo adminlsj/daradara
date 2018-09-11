@@ -6,7 +6,7 @@
 		{{ csrf_field() }}
 		{{ method_field('PUT') }}
 
-		<div class="container card-shadow" style="background-color:white; width:75%; padding-left: 70px; padding-right: 70px; padding-top: 40px; padding-bottom: 90px;">
+		<div class="container card-shadow resume-form-container">
 		    <div style="font-size: 25px">RESUME &nbsp;<small>(Last Updated On: {{ $resume->updated_at->toDateString() }})</small></div>
 		    <br>
 		    @include('resume.form')

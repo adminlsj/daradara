@@ -42041,8 +42041,6 @@ $('#avatar-upload').on("change", function (e) {
 	$("#avatar-form").submit();
 });
 
-$("#orderImgs").fileinput({ 'browseLabel': '選擇圖片', 'removeLabel': "刪除圖片" });
-
 $(document).ready(function () {
 	$('#slide-out-arrow').click(function () {
 		var x = document.getElementById("slide-in-content");
