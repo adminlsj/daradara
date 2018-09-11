@@ -13,7 +13,7 @@ class JobAppliedUser extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $user, $job;
+    public $user, $job, $resume, $haveResumeImg = false;
 
     /**
      * Create a new message instance.
@@ -24,6 +24,10 @@ class JobAppliedUser extends Mailable
     {
         $this->user = $user;
         $this->job = $job;
+        $this->resume = $user->resume;
+        if ($this->resume->resumeImg != null) {
+            $haveResumeImg = true;
+        }
     }
 
     /**

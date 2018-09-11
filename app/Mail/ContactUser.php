@@ -7,7 +7,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class Contact extends Mailable
+class ContactUser extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -34,6 +34,6 @@ class Contact extends Mailable
      */
     public function build()
     {
-        return $this->subject('User Contacted You')->view('mail.contact');
+        return $this->subject('我們已收到您查詢')->markdown('mail.contactUser');
     }
 }

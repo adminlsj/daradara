@@ -1,5 +1,5 @@
 @foreach($relatedJobs as $job)
-    <a href="{{ route('job.show', ['job' => $job->id]) }}" target="_blank">
+    <a href="/jobs/search?title={{ $job->title }}" target="_blank">
         <div class="row hover-box-shadow" style="border-radius: 3px; border: solid 1px #f2f2f2; margin-bottom: 15px; background-color:white; padding: 15px 10px">
             <div class="col-md-12">
                 <div style="color:#d84b6b; font-size: 18px;" href="{{ route('job.show', ['job' => $job->id]) }}" target="_blank">{{ str_limit($job->title, 60) }}</div>

@@ -6,6 +6,7 @@ use App\Company;
 use App\Job;
 use App\Blog;
 use App\Mail\Contact;
+use App\Mail\ContactUser;
 use App\Mail\Meetup;
 use Illuminate\Http\Request;
 
@@ -45,6 +46,7 @@ class HomeController extends Controller
                 $title = request('title');
                 $text = request('text');
                 \Mail::to('u3514481@connect.hku.hk')->send(new Contact($user_email, $title, $text));
+                \Mail::to(request('email'))->send(new ContactUser($user_email, $title, $text));
                 break;
 
             case 'meetup':

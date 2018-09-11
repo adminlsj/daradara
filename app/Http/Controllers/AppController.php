@@ -147,17 +147,6 @@ class AppController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\App  $app
-     * @return \Illuminate\Http\Response
-     */
-    public function show(App $app)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\App  $app
