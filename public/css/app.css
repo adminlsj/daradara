@@ -9377,6 +9377,14 @@ nav a {
   color: #f1f1f1 !important;
 }
 
+button {
+  background-color: white;
+}
+
+button.btn-undecorate {
+  border-radius: 5px;
+}
+
 .home-nav a {
   color: #ffffff;
   font-weight: 600;

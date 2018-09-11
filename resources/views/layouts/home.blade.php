@@ -17,25 +17,25 @@
 					<div class="col-md-3">
 						<form action="{{ route('job.search') }}" method="GET">
 							<input name="category" value="Engineering" type="hidden">
-							<button style="width:100%; padding:0px; border:0px;" type="submit"><img class="featured-category d-block img-responsive" src="https://s3.amazonaws.com/twobayjobs/system/intro/featured-category-01.png" alt="Chicago"></button>
+							<button class="btn-undecorate hover-box-shadow" style="width:100%; padding:0px; border:0px;" type="submit"><img class="featured-category d-block img-responsive" src="https://s3.amazonaws.com/twobayjobs/system/intro/featured-category-01.png" alt="Chicago"></button>
 						</form>
 					</div>
 					<div class="col-md-3">
 						<form action="{{ route('job.search') }}" method="GET">
 							<input name="category" value="Public / Civil" type="hidden">
-							<button style="width:100%; padding:0px; border:0px;" type="submit"><img class="featured-category d-block img-responsive" src="https://s3.amazonaws.com/twobayjobs/system/intro/featured-category-02.png" alt="Chicago"></button>
+							<button class="btn-undecorate hover-box-shadow" style="width:100%; padding:0px; border:0px;" type="submit"><img class="featured-category d-block img-responsive" src="https://s3.amazonaws.com/twobayjobs/system/intro/featured-category-02.png" alt="Chicago"></button>
 						</form>
 					</div>
 					<div class="col-md-3">
 						<form action="{{ route('job.search') }}" method="GET">
 							<input name="category" value="Hospitality / F & B" type="hidden">
-							<button style="width:100%; padding:0px; border:0px;" type="submit"><img class="featured-category d-block img-responsive" src="https://s3.amazonaws.com/twobayjobs/system/intro/featured-category-03.png" alt="Chicago"></button>
+							<button class="btn-undecorate hover-box-shadow" style="width:100%; padding:0px; border:0px;" type="submit"><img class="featured-category d-block img-responsive" src="https://s3.amazonaws.com/twobayjobs/system/intro/featured-category-03.png" alt="Chicago"></button>
 						</form>
 					</div>
 					<div class="col-md-3">
 						<form action="{{ route('job.search') }}" method="GET">
 							<input name="category" value="Sales, CS & Business Devpt" type="hidden">
-							<button style="width:100%; padding:0px; border:0px;" type="submit"><img class="featured-category d-block img-responsive" src="https://s3.amazonaws.com/twobayjobs/system/intro/featured-category-04.png" alt="Chicago"></button>
+							<button class="btn-undecorate hover-box-shadow" style="width:100%; padding:0px; border:0px;" type="submit"><img class="featured-category d-block img-responsive" src="https://s3.amazonaws.com/twobayjobs/system/intro/featured-category-04.png" alt="Chicago"></button>
 						</form>
 					</div>
 				</div>
@@ -64,7 +64,7 @@
 						<div class="col-md-2">
 							<form action="{{ route('job.search') }}" method="GET">
 								<input name="title" value="{{ $company }}" type="hidden">
-								<button style="width:100%; padding:0px; border:0px;" type="submit"><img class="featured-category hover-box-shadow d-block img-responsive" src="https://s3.amazonaws.com/twobayjobs/system/intro/featured-company-{{ $company }}.png" alt="Chicago"></button>
+								<button class="btn-undecorate hover-box-shadow" style="width:100%; padding:0px; border:0px;" type="submit"><img class="featured-category d-block img-responsive" src="https://s3.amazonaws.com/twobayjobs/system/intro/featured-company-{{ $company }}.png" alt="Chicago"></button>
 							</form>
 						</div>
 					@endforeach
@@ -79,7 +79,7 @@
 						<div class="col-md-2">
 							<form action="{{ route('job.search') }}" method="GET">
 								<input name="title" value="{{ $agency }}" type="hidden">
-								<button style="width:100%; padding:0px; border:0px;" type="submit"><img class="featured-category hover-box-shadow d-block img-responsive" src="https://s3.amazonaws.com/twobayjobs/system/intro/featured-company-{{ $agency }}.png" alt="Chicago"></button>
+								<button class="btn-undecorate hover-box-shadow" style="width:100%; padding:0px; border:0px;" type="submit"><img class="featured-category d-block img-responsive" src="https://s3.amazonaws.com/twobayjobs/system/intro/featured-company-{{ $agency }}.png" alt="Chicago"></button>
 							</form>
 						</div>
 					@endforeach
