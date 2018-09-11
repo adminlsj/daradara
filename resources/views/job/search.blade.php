@@ -103,6 +103,7 @@
 		<div id="right" style="margin-top: -13px;">
             <div id="slide-out-blank" style="margin-bottom: 50px; display: {{ $slideOutSearch ? '' : 'none' }};"></div>
             <div style="padding-top:30px; background-color:#edeeee;">
+                @include('layouts.error')
                 <div id="showJob" class="container card-shadow" style="background-color:white; width:80%;padding-left: 80px; padding-right: 80px; padding-top: 50px; padding-bottom: 90px;">
                     @if ($currentJob != null)
                         <div style="font-size: 25px" id="job-company-name"> {{ $currentJob->company->name }} </div>

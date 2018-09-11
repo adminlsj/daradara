@@ -57,32 +57,45 @@ class ResumeController extends Controller
      */
     public function update(Request $request, Resume $resume)
     {
-        $resume->name = request('name');
-        $resume->title = request('title');
-        $resume->email = request('email');
-        $resume->phone = request('phone');
-        $resume->location = request('location');
-        $resume->wechat = request('wechat');
-        $resume->qq = request('qq');
-        $resume->edu_title = request('edu_title');
-        $resume->edu_gpa = request('edu_gpa');
-        $resume->edu_university = request('edu_university');
-        $resume->edu_start = request('edu_start');
-        $resume->edu_end = request('edu_end');
-        $resume->work_title = request('work_title');
-        $resume->work_company = request('work_company');
-        $resume->work_start = request('work_start');
-        $resume->work_end = request('work_end');
-        $resume->work_description = request('work_description');
-        $resume->language_one = request('language_one');
-        $resume->language_one_level = request('language_one_level');
-        $resume->language_two = request('language_two');
-        $resume->language_two_level = request('language_two_level');
-        $resume->language_three = request('language_three');
-        $resume->language_three_level = request('language_three_level');
-        $resume->other_description = request('other_description');
+        $request->validate([
+            'name' => 'nullable|max:255',
+            'title' => 'nullable|max:255',
+            'email' => 'nullable|max:255',
+            'phone' => 'nullable|max:255',
+            'location' => 'nullable|max:255',
+            'wechat' => 'nullable|max:255',
+            'qq' => 'nullable|max:255',
+            'edu_title' => 'nullable|max:255',
+            'edu_gpa' => 'nullable|max:255',
+            'edu_university' => 'nullable|max:255',
+            'edu_start' => 'nullable|max:255',
+            'edu_end' => 'nullable|max:255',
+            'work_title' => 'nullable|max:255',
+            'work_company' => 'nullable|max:255',
+            'work_start' => 'nullable|max:255',
+            'work_end' => 'nullable|max:255',
+        ]);
 
-        $resume->save();
+        $resume->update([
+            'name' => request('name'),
+            'title' => request('title'),
+            'email' => request('email'),
+            'phone' => request('phone'),
+            'location' => request('location'),
+            'wechat' => request('wechat'),
+            'qq' => request('qq'),
+            'edu_title' => request('edu_title'),
+            'edu_gpa' => request('edu_gpa'),
+            'edu_university' => request('edu_university'),
+            'edu_start' => request('edu_start'),
+            'edu_end' => request('edu_end'),
+            'work_title' => request('work_title'),
+            'work_company' => request('work_company'),
+            'work_start' => request('work_start'),
+            'work_end' => request('work_end'),
+            'work_description' => request('work_description'),
+            'other_description' => request('other_description'),
+        ]);
 
         $file = request('resumeImgs')[0];
 

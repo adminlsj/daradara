@@ -189,8 +189,13 @@ class JobController extends Controller
         return redirect()->action('JobController@index');
     }
 
-    public function search()
-    {      
+    public function search(Request $request)
+    {
+        $request->validate([
+            'title' => 'nullable|max:255',
+            'salary' => 'nullable|integer',
+        ]);
+
         $jobs = Job::where('created_at', '>=', Carbon::now()->subDays(31));
         $slideOutSearch = false;
 
