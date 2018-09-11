@@ -19,6 +19,15 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
+    <!-- Google Ads -->
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-4485968980278243",
+        enable_page_level_ads: true
+      });
+    </script>
+
     <!-- Styles -->
     <link href="{{ asset('css/owl.carousel.css') }}" rel="stylesheet">
     <link href="{{ asset('css/owl.theme.default.css') }}" rel="stylesheet">

@@ -133,19 +133,7 @@
 			</div>
 			<div class="col-md-4 related-blogs" style="padding-left: 25px; padding-right: 30px">
 				@foreach($relatedBlogs as $blog)
-					<a href="{{ route('blog.show', ['blog' => $blog->id]) }}">
-					    <div class="row hover-box-shadow" style="border-radius: 5px; border: solid 1px #f2f2f2; margin-bottom: 15px; background-color:white;">
-					        <div class="col-md-5" style="padding-left: 0px; padding-right: 2px">
-					        	<div class="embed-responsive embed-responsive-4by3">
-					                <img style="width:100%;" src="https://s3-us-west-2.amazonaws.com/freerider/blogImgs/originals/{{ $blog->id }}/{{ $blog->blogImgs->first()->filename }}" class="embed-responsive-item">
-					            </div>
-					        </div>
-					        <div class="col-md-7">
-					            <div><h3 style="font-weight: 400; font-size: 15px">{{ str_limit($blog->title, 60) }}</h3></div>
-					            <div class="related-blogs-date" style="font-size: 12.5px">{{ Carbon\Carbon::parse($blog->created_at)->format('Y年m月d日') }}</div>
-					        </div>
-					    </div>
-					</a>
+					@include('blog.related-blogs')
 				@endforeach
 				<div class="row" style="margin-top: 25px">
 					<div class="col-md-6 col-md-offset-3">

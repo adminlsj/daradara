@@ -5,7 +5,7 @@
 	<div class="row">
 		<div class="col-md-8 col-ms-12">
 			<div style="margin-top: 40px;">
-				<h3 style="color: grey; font-weight: 300">精選貼文</h3>
+				<h3 style="color: grey; font-weight: 300">Most Popular Blogs</h3>
 				<hr>
 			</div>
 			<div class="blog-carousel owl-carousel owl-theme">
@@ -21,23 +21,25 @@
 
 			<div class="row">
 				<div class="col-md-12 col-ms-12">
-				    <h3 style="color: grey; font-weight: 300">精選貼文</h3>
+				    <h3 style="color: grey; font-weight: 300">Featured Blogs</h3>
 					<hr>
 				</div>
 			</div>
-			@foreach ($blogs as $blog)
-				<div class="col-md-6 col-ms-12">
-					<div class="card">
-		                <a href="{{ route('blog.show', ['blog' => $blog->id]) }}"><img class="img-responsive" src="https://s3-us-west-2.amazonaws.com/freerider/blogImgs/thumbnails/{{ $blog->id }}/{{ $blog->blogImgs->sortby('created_at')->first()->filename }}" alt="First slide"></a>
+			<div class="row">
+				@foreach ($blogs as $blog)
+					<div class="col-md-6 col-ms-12">
+						<div class="card">
+			                <a href="{{ route('blog.show', ['blog' => $blog->id]) }}"><img class="img-responsive" src="https://s3-us-west-2.amazonaws.com/freerider/blogImgs/thumbnails/{{ $blog->id }}/{{ $blog->blogImgs->sortby('created_at')->first()->filename }}" alt="First slide"></a>
 
-					    <div class="card-content">
-					        <a style="line-height: 25px; padding: 13px; font-weight: 300; color: grey; display:block; white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" href="{{ route('blog.show', ['blog' => $blog->id]) }}">
-								{{ $blog->title }}
-							</a>
+						    <div class="card-content">
+						        <a style="line-height: 25px; padding: 13px; font-weight: 300; color: grey; display:block; white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" href="{{ route('blog.show', ['blog' => $blog->id]) }}">
+									{{ $blog->title }}
+								</a>
+							</div>
 						</div>
 					</div>
-				</div>
-			@endforeach
+				@endforeach
+			</div>
 		</div>
 		
 		<div class="col-md-4" style="padding-left: 25px;">

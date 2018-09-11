@@ -45,10 +45,10 @@
 </head>
 <body>
     <div id="app">
-        <div style="margin-bottom: 73px">@include('layouts.nav')</div>
+        <div style="margin-bottom: 60px">@include('layouts.nav')</div>
 		<div class="container" style="width:90%;">
 			<div class="row">
-				<div class="col-md-8 col-ms-12 blog-content">
+				<div style="margin-top:40px; " class="col-md-8 col-ms-12 blog-content">
 					<img class="img-responsive border-radius-2" style="width:100%;height:100%" src="https://s3-us-west-2.amazonaws.com/freerider/blogImgs/originals/{{ $blog->id }}/{{ $blog->blogImgs->sortby('created_at')->first()->filename }}" alt="First slide">
 					
 					<div class="">
@@ -74,36 +74,39 @@
 							<hr>
 						</div>
 					</div>
-					<div class="hidden-xs">
-						@foreach ($similar_blogs as $blog)
-							<div class="col-md-6 col-ms-12">
-								<div class="card">
-					                <a href="{{ route('blog.show', ['blog' => $blog->id]) }}"><img class="img-responsive" src="https://s3-us-west-2.amazonaws.com/freerider/blogImgs/thumbnails/{{ $blog->id }}/{{ $blog->blogImgs->sortby('created_at')->first()->filename }}" alt="First slide"></a>
+					<div class="row">
+						<div class="hidden-xs">
+							@foreach ($similar_blogs as $blog)
+								<div class="col-md-6 col-ms-12">
+									<div class="card">
+						                <a href="{{ route('blog.show', ['blog' => $blog->id]) }}"><img class="img-responsive" src="https://s3-us-west-2.amazonaws.com/freerider/blogImgs/thumbnails/{{ $blog->id }}/{{ $blog->blogImgs->sortby('created_at')->first()->filename }}" alt="First slide"></a>
 
-								    <div class="card-content">
-								        <a style="line-height: 25px; padding: 13px; font-weight: 300; color: grey; display:block; white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" href="{{ route('blog.show', ['blog' => $blog->id]) }}">
-											{{ $blog->title }}
-										</a>
+									    <div class="card-content">
+									        <a style="line-height: 25px; padding: 13px; font-weight: 300; color: grey; display:block; white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" href="{{ route('blog.show', ['blog' => $blog->id]) }}">
+												{{ $blog->title }}
+											</a>
+										</div>
 									</div>
 								</div>
-							</div>
-						@endforeach
+							@endforeach
+						</div>
+						<div class="visible-xs-block" style="padding-bottom: 10px">
+							@foreach ($similar_blogs as $blog)
+								<div class="row" style="margin-bottom: 15px;">
+							        <div class="col-md-5 col-xs-5 col-sm-4">
+							            <a href="{{ route('blog.show', ['blog' => $blog->id]) }}">
+							                <img src="https://s3-us-west-2.amazonaws.com/freerider/blogImgs/squares/{{ $blog->id }}/{{ $blog->blogImgs->first()->filename }}" class="img-responsive img-circle">
+							            </a>
+							        </div>
+							        <div class="col-md-7 col-xs-7 col-sm-8">
+							            <div><a href="{{ route('blog.show', ['blog' => $blog->id]) }}"><h3 style="color: black; font-weight: 400; font-size: 15px">{{ str_limit($blog->title, 50) }}</h3></a></div>
+							            <div style="font-size: 12.5px">{{ Carbon\Carbon::parse($blog->created_at)->format('Y年m月d日') }}</div>
+							        </div>
+							    </div>
+							@endforeach
+						</div>
 					</div>
-					<div class="visible-xs-block" style="padding-bottom: 10px">
-						@foreach ($similar_blogs as $blog)
-							<div class="row" style="margin-bottom: 15px;">
-						        <div class="col-md-5 col-xs-5 col-sm-4">
-						            <a href="{{ route('blog.show', ['blog' => $blog->id]) }}">
-						                <img src="https://s3-us-west-2.amazonaws.com/freerider/blogImgs/squares/{{ $blog->id }}/{{ $blog->blogImgs->first()->filename }}" class="img-responsive img-circle">
-						            </a>
-						        </div>
-						        <div class="col-md-7 col-xs-7 col-sm-8">
-						            <div><a href="{{ route('blog.show', ['blog' => $blog->id]) }}"><h3 style="color: black; font-weight: 400; font-size: 15px">{{ str_limit($blog->title, 50) }}</h3></a></div>
-						            <div style="font-size: 12.5px">{{ Carbon\Carbon::parse($blog->created_at)->format('Y年m月d日') }}</div>
-						        </div>
-						    </div>
-						@endforeach
-					</div>
+					<br><br><br>
 				</div>
 					
 				<div class="col-md-4" style="padding-left: 25px">
