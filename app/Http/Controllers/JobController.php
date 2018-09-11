@@ -297,6 +297,8 @@ class JobController extends Controller
             'job_title' => $job->title,
             'job_responsibility' => $job->responsibility,
             'job_requirement' => $job->requirement,
+            'job_location' => $job->location,
+            'job_salary' => $job->salary,
             'btn_text' => $btn_text,
             'disabled' => $disabled,
             'csrf_token' => csrf_token(),

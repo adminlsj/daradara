@@ -3,7 +3,7 @@
 @section('content')
     @include('layouts.error')
 	<div class="container">
-        <div class="row">
+        <div style="margin-top: 40px;" class="row">
 	        <div class="col-md-12">
 	            <h3 style="color: grey; font-weight: 300">Account Settings</h3>
 	            <hr>
@@ -12,7 +12,7 @@
 	    <br>
 	    <div class="row">
 	        <div class="col-md-8">
-			    <form class="job-form" action="{{ route('user.update', ['user' => Auth::user()->id]) }}" method="POST">
+			    <form style="padding-left: 0px" class="job-form" action="{{ route('user.update', ['user' => Auth::user()->id]) }}" method="POST">
 					{{ csrf_field() }}
 					{{ method_field('PUT') }}
 
@@ -27,7 +27,7 @@
 
 					<div class="row">
 					    <div class="col-md-12">
-						    <input type="text" id="description" name="description" rows="4" placeholder="Tell the employer more about you" value="{{ old( 'description', $user->description) }}">
+						    <input type="text" placeholder="Tell the employer more about you">
 					    </div>
 					</div>
 
@@ -46,11 +46,11 @@
 					    <input name="password_confirmation" type="password" value="{{ old( 'password', $user->password) }}" id="password_confirmation">
 					  </div>
 					</div>
-
+					<br>
 					<div class="col-md-8 col-md-offset-2">
 						<button type="submit" class="btn btn-info btn-outline btn-lg btn-block">Update Settings</button>
-						<br>
 					</div>
+					<br><br><br><br>
 				</form>
 	        </div>
 

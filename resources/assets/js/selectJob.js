@@ -52,6 +52,8 @@ $("[id^='selectJob']").on('submit', function(e) {
             $("#job-title").text(data.job_title);
             $("#job-responsibility").text(data.job_responsibility);
             $("#job-requirement").text(data.job_requirement);
+            $("#job-location").text(data.job_location);
+            $("#job-salary").text(data.job_salary);
 
             $("#selectJobBtn" + data.current_id).css("background-color","white");
             $("#selectJobBtn" + data.current_id).css("color","#636b6f");

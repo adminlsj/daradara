@@ -99,7 +99,7 @@
 <div class="row">
 	<div class="col-md-12">
 		<div class="form-group">
-		    <textarea value="{{ old('title', $resume->work_description) }}" class="form-control" id="work_description" name="work_description" placeholder="In a few sentences, let the employer know you are right for this job!" rows="3"></textarea>
+		    <textarea value="{{ old('title', $resume->work_description) }}" class="form-control" id="work_description" name="work_description" placeholder="(OPTIONAL)  In a few sentences, let the employer know you are right for this job!" rows="3"></textarea>
 		</div>
 	</div>
 </div>
@@ -109,7 +109,7 @@
 <div class="row">
 	<div class="col-md-12">
 		<div class="form-group">
-		    <textarea value="{{ old('title', $resume->other_description) }}" class="form-control" id="other_description" name="other_description" placeholder="Tell the employer more about yourself for bonus points!" rows="4"></textarea>
+		    <textarea value="{{ old('title', $resume->other_description) }}" class="form-control" id="other_description" name="other_description" placeholder="(OPTIONAL)  Tell the employer more about yourself for bonus points!" rows="4"></textarea>
 		</div>
 	</div>
 </div>

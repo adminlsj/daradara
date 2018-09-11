@@ -29,6 +29,7 @@ Route::post('/jobs/{job}/checkout', ['as' => 'job.checkout', 'uses' => 'JobContr
 Route::get('/jobs/search', ['as' => 'job.search', 'uses' => 'JobController@search']);
 Route::post('/jobs/{job}/select', ['as' => 'job.select', 'uses' => 'JobController@select']);
 Route::post('/jobs/{job}/save', ['as' => 'job.save', 'uses' => 'JobController@save']);
+Route::post('/jobs/{job}/saveRight', ['as' => 'job.saveRight', 'uses' => 'JobController@saveRight']);
 Route::resource('job.comment', 'CommentController', ['only' => ['store', 'destroy']]);
 
 Route::group(['prefix' => '/jobs/{job}/'], function () {

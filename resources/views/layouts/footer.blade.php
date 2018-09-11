@@ -1,10 +1,10 @@
 <footer id="myFooter" class="footer">
-    <div class="container">
+    <div style="width: 90%" class="container">
         <div class="row">
             <div class="col-sm-3">
-                <h2 class="logo"><a href="#">FreeRider </a></h2>
+                <h2 class="logo"><a href="#">TwoBayJobs</a></h2>
             </div>
-            <div class="col-sm-2">
+            <div style="text-align: right" class="col-sm-2">
                 <h5>Get started</h5>
                 <ul>
                     <li><a href="#">Home</a></li>
@@ -12,7 +12,7 @@
                     <li><a href="{{ route('blog.index') }}">Blog</a></li>
                 </ul>
             </div>
-            <div class="col-sm-2">
+            <div style="text-align: right" class="col-sm-2">
                 <h5>About us</h5>
                 <ul>
                     <li><a href="https://www.facebook.com/freeriderhk/">Company Information</a></li>
@@ -20,7 +20,7 @@
                     <li><a href="https://www.facebook.com/freeriderhk/">Reviews</a></li>
                 </ul>
             </div>
-            <div class="col-sm-2">
+            <div style="text-align: right" class="col-sm-2">
                 <h5>Support</h5>
                 <ul>
                     <li><a href="/contact">FAQ</a></li>

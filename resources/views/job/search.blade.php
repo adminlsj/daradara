@@ -38,16 +38,7 @@
                                     <input type="hidden" id="currentId" name="currentId" value="{{$currentJob->id}}">
                                 </button>
                             </form>
-                            @if (auth()->check())
-                                <form id="saveJob{{ $job->id }}" style="display:{{ $currentJob->id != $job->id && App\SavedJob::where('user_id', auth()->user()->id)->where('job_id', $job->id)->count() == 0 ? 'none':'initial' }}" action="{{route('job.save', ['job' => $job->id])}}" method="POST">
-                                    {{ csrf_field() }}
-                                    <button style="position:absolute; top:17px; right:20px; cursor:pointer; background-color:transparent; padding: 0px; border:0px" type="submit"><i id="saveJobIcon{{ $job->id }}" style="color:{{ App\SavedJob::where('user_id', auth()->user()->id)->where('job_id', $job->id)->count() != 0 ? '#f8d23a':'white' }};" class="material-icons saveJobIcon">favorite</i></button>
-                                </form>
-                            @else
-                                <form id="redirectToRegister{{ $job->id }}" style="display:{{ $currentJob->id != $job->id ? 'none':'initial' }}" action="{{ route('register') }}">
-                                    <button style="position:absolute; top:17px; right:20px; cursor:pointer; background-color:transparent; padding: 0px; border:0px" type="submit"><i style="color:white;" class="material-icons saveJobIcon">favorite</i></button>
-                                </form>
-                            @endif
+                            @include('job.save-job-form-left')
                         </div>
                     @endforeach
                 @endif
@@ -116,7 +107,14 @@
                     @if ($currentJob != null)
                         <div style="font-size: 25px" id="job-company-name"> {{ $currentJob->company->name }} </div>
                         <div style="font-size: 15px" id="job-company-description"> {{ $currentJob->company->description }} </div>
-                        <hr>
+                        <hr style="margin-bottom: 12px">
+                        <div style="font-weight: 600; text-align: center">
+                            <span style="margin-top: -2px" class="pull-left"><i style="vertical-align: bottom" class="material-icons">place</i> <span id="job-location">{{ $currentJob->location }}</span></span>
+                            <span style="padding-right: 90px;">RMB ¥<span id="job-salary">{{ $currentJob->salary }}</span> / Month</span>
+                            <span class="pull-right">
+                            </span>
+                        </div>
+                        <hr style="margin-top: 12px">
                         <div style="font-size: 25px; text-align: center" id="job-title"> {{ $currentJob->title }} </div>
                         <hr>
                         <div style="font-size: 15px; font-weight: 600">Responsibilities:</div>
