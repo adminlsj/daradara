@@ -34,7 +34,7 @@
                                     <div><a id="selectJobTitle{{ $job->id }}" style="{{ $currentJob->id == $job->id ? 'color:white;':'color:#d84b6b;' }}font-size: 18px;" href="{{ route('job.show', ['job' => $job->id]) }}" target="_blank">{{ str_limit($job->title, 32) }}</a></div>
                                     <div> {{ $job->company->name }}</div>
                                     <div> {{ $job->location }} </div>
-                                    <div> {{ $job->created_at->diffForHumans() }} </div>
+                                    <div> {{ $job->created_at->diffForHumans() }}<span style="font-weight: 600" class="pull-right">${{ $job->salary }} / 月</span></div>
                                     <input type="hidden" id="currentId" name="currentId" value="{{$currentJob->id}}">
                                 </button>
                             </form>

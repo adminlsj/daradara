@@ -16,7 +16,7 @@
 					Company
 				</div>
 				<div class="col-md-2">
-					Date Saved
+					Job Posted
 				</div>
 				<div class="col-md-1">
 					Resume
@@ -37,7 +37,7 @@
 					</form>
 					</div>
 					<div class="col-md-2">
-						{{ $savedJob->created_at->toDateString() }}
+						{{ $savedJob->job->created_at->toDateString() }}
 					</div>
 					<div class="col-md-1">
 						<a href="{{ route('resume.edit', ['resume' => $resume]) }}" target="_blank">View</a>
