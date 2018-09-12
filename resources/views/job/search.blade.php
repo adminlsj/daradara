@@ -38,19 +38,7 @@
                 <div class="visible-xs-block" style="margin-top: 30px"></div>
                 @if ($currentJob != null)
                     @foreach ($jobs as $job)
-                        <div style="position: relative;" class="row selectJobContainer">
-                            <form id="selectJob{{ $job->id }}" action="{{route('job.select', ['job' => $job->id])}}" method="POST">
-                                {{ csrf_field() }}
-                                <button id="selectJobBtn{{ $job->id }}" type="submit" style="cursor:pointer; width:100%; padding:15px 30px; text-align:left; border:none; border-bottom: 1px solid #E6E6E6; {{ $currentJob->id == $job->id ? 'background-color:#d84b6b; color:white':'' }}">
-                                    <div><a id="selectJobTitle{{ $job->id }}" style="{{ $currentJob->id == $job->id ? 'color:white;':'color:#d84b6b;' }}font-size: 18px;" href="{{ route('job.show', ['job' => $job->id]) }}" target="_blank">{{ str_limit($job->title, 32) }}</a></div>
-                                    <div> {{ $job->company->name }}</div>
-                                    <div> {{ $job->location }} </div>
-                                    <div> {{ $job->created_at->diffForHumans() }}<span style="font-weight: 600" class="pull-right">${{ $job->salary }} / 月</span></div>
-                                    <input type="hidden" id="currentId" name="currentId" value="{{$currentJob->id}}">
-                                </button>
-                            </form>
-                            @include('job.save-job-form-left')
-                        </div>
+                        @include('job.search-left-content')
                     @endforeach
                 @endif
             </div>
