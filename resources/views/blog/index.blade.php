@@ -19,13 +19,13 @@
 				@endforeach
 			</div>
 
-			<div class="row">
+			<div class="row hidden-xs hidden-sm">
 				<div class="col-md-12 col-ms-12">
 				    <h3 style="color: grey; font-weight: 300">Featured Blogs</h3>
 					<hr>
 				</div>
 			</div>
-			<div class="row">
+			<div class="row hidden-xs hidden-sm">
 				@foreach ($blogs as $blog)
 					<div class="col-md-6 col-ms-12">
 						<div class="card">
@@ -42,7 +42,11 @@
 			</div>
 		</div>
 		
-		<div class="col-md-4" style="padding-left: 25px;">
+		<div class="hidden-xs hidden-sm col-md-4" style="padding-left: 25px;">
+			@include('blog.sidebar')
+		</div>
+
+		<div class="hidden-md hidden-lg col-md-4">
 			@include('blog.sidebar')
 		</div>
 	</div>

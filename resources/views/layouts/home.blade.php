@@ -11,7 +11,7 @@
 		@include('job.mobile.search-home')
 	</div>
 
-	<div class="container" style="width: 85%">
+	<div class="container" style="width: 90%">
 		<div class="row">
 			<div class="col-sm-12 col-md-8">
 				<div style="margin-top: 40px;">
@@ -66,7 +66,7 @@
 				</div>
 				<div class="row">
 					@foreach ($featuredCompanies as $company)
-						<div class="col-xs-4 col-sm-4 col-md-2">
+						<div class="col-xs-6 col-sm-6 col-md-2">
 							<form action="{{ route('job.search') }}" method="GET">
 								<input name="title" value="{{ $company }}" type="hidden">
 								<button class="btn-undecorate hover-box-shadow" style="width:100%; padding:0px; border:0px;" type="submit"><img class="featured-category d-block img-responsive" src="https://s3.amazonaws.com/twobayjobs/system/intro/featured-company-{{ $company }}.png" alt="Chicago"></button>
@@ -91,14 +91,14 @@
 				</div>
 			</div>
 
-			<div class="col-sm-12 col-md-4">
+			<div class="hidden-xs hidden-sm col-sm-12 col-md-4">
 				<div style="margin-top: 40px;">
 					<h3 style="color: grey; font-weight: 300">You may be interested in</h3>
 					<hr>
 				</div>
 				<div class="row">
 					<div class="col-sm-12 col-md-12">
-						<img class="featured-category d-block img-responsive" src="https://s3.amazonaws.com/twobayjobs/system/intro/commercial-01.jpg" alt="Chicago">
+						<img class="featured-category d-block img-responsive" src="https://s3.amazonaws.com/twobayjobs/system/intro/poster-side.png" alt="Chicago">
 					</div>
 				</div>
 				<div style="margin-top: 40px;">

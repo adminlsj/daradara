@@ -9680,31 +9680,71 @@ input[type=file] {
   text-align: right;
 }
 
-#left {
-  width: 400px;
-  height: 100%;
-  position: fixed;
-  left: 0;
-  border-right: 1px solid #E6E6E6;
-  overflow-y: scroll;
+@media (max-width: 768px) {
+  #left {
+    padding-top: 29px !important;
+  }
 }
 
-#right {
-  width: calc(100% - 400px);
-  height: calc(100% - 120px);
-  position: fixed;
-  top: 132px;
-  right: 0;
-  overflow-y: scroll;
+@media (max-width: 992px) {
+  #left {
+    width: 100%;
+    padding-top: 59px;
+  }
+}
+
+@media (min-width: 992px) {
+  #left {
+    width: 400px;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    border-right: 1px solid #E6E6E6;
+    overflow-y: scroll;
+  }
+}
+
+@media (max-width: 992px) {
+  #right {
+    display: none;
+  }
+}
+
+@media (min-width: 992px) {
+  #right {
+    width: calc(100% - 400px);
+    height: calc(100% - 120px);
+    position: fixed;
+    top: 132px;
+    right: 0;
+    overflow-y: scroll;
+  }
 }
 
 .right-search-top {
   margin-top: 5px;
   padding-top: 9px;
-  width: calc(100% - 400px);
   position: fixed;
   right: 0;
   background-color: #65666c;
+}
+
+@media (max-width: 768px) {
+  .right-search-top {
+    margin-top: -3px;
+  }
+}
+
+@media (max-width: 992px) {
+  .right-search-top {
+    width: 100%;
+  }
+}
+
+@media (min-width: 992px) {
+  .right-search-top {
+    width: calc(100% - 400px);
+  }
 }
 
 .right-search-top div,

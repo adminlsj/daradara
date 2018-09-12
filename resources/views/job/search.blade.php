@@ -30,9 +30,10 @@
 </head>
 <body>
     <div id="app">
-        <div style="margin-bottom: 73px;">@include('layouts.nav-search')</div>
+        <div style="margin-bottom: 73px;">@include('layouts.nav')</div>
 
-        <div class="hidden-xs" id="left" style="margin-top: -13px; padding-bottom: 60px; background-color: white;">
+        <div id="left" style="margin-top: -13px; padding-bottom: 60px; background-color: white;">
+            <div id="slide-out-blank" class="hidden-md hidden-lg" style="margin-bottom: 50px; display: {{ $slideOutSearch ? '' : 'none' }};"></div>
             <div class="container" style="width: 100%">
                 <div class="visible-xs-block" style="margin-top: 30px"></div>
                 @if ($currentJob != null)

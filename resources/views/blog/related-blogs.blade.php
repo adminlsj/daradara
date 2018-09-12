@@ -6,7 +6,7 @@
             </div>
         </div>
         <div class="col-xs-7 col-sm-7 col-md-7">
-            <div><h3 style="font-weight: 400; font-size: 15px">{{ str_limit($blog->title, 55) }}</h3></div>
+            <div><h3 style="font-weight: 400; font-size: 15px">{{ str_limit($blog->title, 60) }}</h3></div>
             <div class="related-blogs-date" style="font-size: 12.5px; color: #42464A">{{ Carbon\Carbon::parse($blog->created_at)->format('Y年m月d日') }}</div>
         </div>
     </div>

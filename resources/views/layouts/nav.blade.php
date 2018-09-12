@@ -14,21 +14,21 @@
         <a href="{{ route('blog.index') }}">Resources</a>
     @endguest
 </div>
-<nav style="display:{{ Request::is('/') ? 'none' : '' }}" class="{{ Request::is('/') ? 'home-nav-scroll-show' : '' }} navbar navbar-default navbar-fixed-top">
+<nav style="display:{{ Request::is('/') ? 'none' : '' }};" class="{{ Request::is('/') ? 'home-nav-scroll-show' : '' }} navbar navbar-default navbar-fixed-top">
     <div class="container" style="width: 95%">
-        <div class="navbar-header visible-xs-block">
+        <div class="navbar-header">
             <div class="row">
-                <div class="col-xs-2" style="margin: 0">
+                <div class="col-xs-2 visible-xs-block visible-sm-block" style="margin: 0">
                     <a href="{{ url('/') }}">
                         <img src="https://s3-us-west-2.amazonaws.com/freerider/avatars/thumbnails/default_freerider_profile_pic.jpg" style="border-radius: 2px; margin-top: 7px" width="35px" height="35px">
                     </a>
                 </div>
-                <div class="col-xs-8" style="display: inline; margin-top: 7px; margin-left: -10px; margin-right: 10px">
+                <div class="col-xs-8 visible-xs-block" style="display: inline; margin-top: 7px; margin-left: -10px; margin-right: 10px">
                     <form action="{{ route('job.search') }}" method="GET">
                         <div class="row">
                             <div class="col-xs-7" style="width: 80%">
                                 <div class="form-group">
-                                    <input style="box-shadow: none; border-radius: 2px; font-weight: 300" name="title" type="text" class="form-control" placeholder="Search Job or Company">
+                                    <input style="box-shadow: none; border-radius: 2px; font-weight: 300" name="title" type="text" class="form-control" placeholder="搵翻份兩岸筍工 . . .">
                                 </div>
                             </div>
                             <div class="col-xs-5" style="width: 70px; margin-left: -25px">
@@ -51,7 +51,7 @@
 
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
             <!-- Left Side Of Navbar -->
-            <ul class="nav navbar-nav hidden-xs" >
+            <ul class="nav navbar-nav hidden-xs hidden-sm" >
                 <li>
                     <a href="{{ url('/') }}" style="margin-right: -20px;">
                         <img src="https://s3-us-west-2.amazonaws.com/freerider/avatars/thumbnails/default_freerider_profile_pic.jpg" style="border-radius: 2px; margin-top: -10px; margin-bottom: -8px" width="35px" height="35px">
@@ -88,7 +88,7 @@
                         </a>
                     </li>
                     <li><a href="{{ route('blog.index') }}">Resources</a></li>
-                    <li>
+                    <li class="hidden-xs hidden-sm">
                         <a href="{{ route('logout') }}"
                             onclick="event.preventDefault();
                                      document.getElementById('logout-form').submit();">
@@ -103,4 +103,7 @@
             </ul>
         </div>
     </div>
+    @if (URL::current() == route('job.search'))
+        <div>@include('job.search-top')</div>
+    @endif
 </nav>

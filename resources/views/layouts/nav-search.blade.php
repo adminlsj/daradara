@@ -1,27 +1,27 @@
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container" style="width: 95%">
-        <div class="navbar-header visible-xs-block">
+        <div style="display: block !important" class="navbar-header visible-xs-block visible-sm-block">
             <div class="row">
-                <div class="col-xs-2" style="margin: 0">
+                <div class="col-xs-2 col-sm-2" style="margin: 0">
                     <a href="{{ url('/') }}">
                         <img src="https://s3-us-west-2.amazonaws.com/freerider/avatars/thumbnails/default_freerider_profile_pic.jpg" style="border-radius: 2px; margin-top: 7px" width="35px" height="35px">
                     </a>
                 </div>
-                <div class="col-xs-8" style="display: inline; margin-top: 7px; margin-left: -10px; margin-right: 10px">
+                <div class="col-xs-8 col-sm-8" style="display: inline; margin-top: 7px; margin-left: -10px; margin-right: 10px">
                     <form action="{{ route('job.search') }}" method="GET">
                         <div class="row">
-                            <div class="col-xs-7" style="width: 80%">
+                            <div class="col-xs-7 col-sm-7" style="width: 80%">
                                 <div class="form-group">
                                     <input style="box-shadow: none; border-radius: 2px; font-weight: 300" name="title" type="text" class="form-control" placeholder="Search Job or Company">
                                 </div>
                             </div>
-                            <div class="col-xs-5" style="width: 70px; margin-left: -25px">
+                            <div class="col-xs-5 col-sm-5" style="width: 70px; margin-left: -25px">
                                 <button style="box-shadow: none; border-radius: 2px;" type="submit" class="btn btn-default form-control"><i class="glyphicon glyphicon-search"></i></button>
                             </div>
                         </div>
                     </form>
                 </div>
-                <div class="col-xs-2">
+                <div class="col-xs-2 col-sm-2">
                     <!-- Collapsed Hamburger -->
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
                         <span class="sr-only">Toggle Navigation</span>
@@ -35,7 +35,7 @@
 
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
             <!-- Left Side Of Navbar -->
-            <ul class="nav navbar-nav hidden-xs" >
+            <ul class="nav navbar-nav hidden-xs hidden-sm" >
                 <li>
                     <a href="{{ url('/') }}" style="margin-right: -20px;">
                         <img src="https://s3-us-west-2.amazonaws.com/freerider/avatars/thumbnails/default_freerider_profile_pic.jpg" style="border-radius: 2px; margin-top: -10px; margin-bottom: -8px" width="35px" height="35px">
@@ -87,6 +87,4 @@
             </ul>
         </div>
     </div>
-
-    <div>@include('job.search-top')</div>
 </nav>
