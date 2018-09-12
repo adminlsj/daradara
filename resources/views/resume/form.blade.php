@@ -53,17 +53,17 @@
 	</div>
 </div>
 <div class="row">
-	<div class="col-sm-6">
+	<div class="col-xs-12 col-sm-6">
 		<div class="form-group">
 			<input value="{{ old('title', $resume->edu_university) }}" type="text" class="form-control" id="edu_university" name="edu_university" placeholder="University">
 		</div>
 	</div>
-	<div class="col-sm-3">
+	<div class="col-xs-6 col-sm-3">
 		<div class="form-group">
 			<input value="{{ old('title', $resume->edu_start) }}" type="month" class="form-control" id="edu_start" name="edu_start" placeholder="Start Date">
 		</div>
 	</div>
-	<div class="col-sm-3">
+	<div class="col-xs-6 col-sm-3">
 		<div class="form-group">
 			<input value="{{ old('title', $resume->edu_end) }}" type="month" class="form-control" id="edu_end" name="edu_end" placeholder="End Date">
 		</div>
@@ -80,17 +80,17 @@
 	</div>
 </div>
 <div class="row">
-	<div class="col-sm-6">
+	<div class="col-xs-12 col-sm-6">
 		<div class="form-group">
 			<input value="{{ old('title', $resume->work_company) }}" type="text" class="form-control" id="work_company" name="work_company" placeholder="Company">
 		</div>
 	</div>
-	<div class="col-sm-3">
+	<div class="col-xs-6 col-sm-3">
 		<div class="form-group">
 			<input value="{{ old('title', $resume->work_start) }}" type="month" class="form-control" id="work_start" name="work_start" placeholder="Start Date">
 		</div>
 	</div>
-	<div class="col-sm-3">
+	<div class="col-xs-6 col-sm-3">
 		<div class="form-group">
 			<input value="{{ old('title', $resume->work_end) }}" type="month" class="form-control" id="work_end" name="work_end" placeholder="End Date">
 		</div>
