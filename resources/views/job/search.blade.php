@@ -40,6 +40,19 @@
                     @foreach ($jobs as $job)
                         @include('job.search-left-content')
                     @endforeach
+                @else
+                    <br><br>
+                    <div class="container card-shadow">
+                        <div style="font-size: 20px; line-height: 40px;">
+                            <h2>No jobs matching your keyword: <span style="font-weight: 600">{{ request('title') }}</span></h2>
+                            <br>
+                            <div style="font-weight: 600">Suggestions:</div>
+                            <div>- Make sure all words are spelled correctly</div>
+                            <div>- Try more general keywords</div>
+                            <div>- Try different keywords</div>
+                        </div>
+                        <br><br><br><br><br><br>
+                    </div>
                 @endif
             </div>
             <div class="search-pagination container" style="width: 90%; text-align: center">
