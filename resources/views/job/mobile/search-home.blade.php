@@ -40,7 +40,7 @@
 	<div class="row">
 		<div class="col-xs-6">
 			<select id="type" name="type">
-				<option value="">Type</option>
+				<option value="">Type...</option>
 				@foreach (App\Job::$type as $key => $element)
 					<option value="{{ $key }}" {{ request('type') == $key ? 'selected' : ''}}>{{ $element }}</option>
 				@endforeach
@@ -48,7 +48,7 @@
 		</div>
 		<div class="col-xs-6">
 			<select id="education" name="education">
-				<option value="">Education</option>
+				<option value="">Education...</option>
 				@foreach (App\Job::$education as $key => $element)
 					<option value="{{ $key }}" {{ request('education') == $key ? 'selected' : ''}}>{{ $element }}</option>
 				@endforeach
