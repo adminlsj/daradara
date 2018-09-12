@@ -98,16 +98,68 @@ button.btn-undecorate{
 }
 
 .resume-form-container {
+    @media (max-width: 992px) {
+        width:90%;
+        padding: 25px;
+        padding-bottom: 50px;
+    }
+    @media (min-width: 992px) {
+        width: 70%;
+        padding-left: 70px;
+        padding-right: 70px;
+        padding-top: 40px;
+        padding-bottom: 90px;
+    }
     background-color:white;
-    width: 70%;
-    padding-left: 70px;
-    padding-right: 70px;
-    padding-top: 40px;
-    padding-bottom: 90px;
+}
+
+.resume-input-margin-bottom {
+    @media (max-width: 768px) {
+        margin-bottom: 15px;
+    }
 }
 
 #mobileSelectJobBtn:hover {
     background-color: pink;
+}
+
+#job-show-outer {
+    padding-top:40px;
+    background-color:#E6E6E6;
+}
+
+#job-show-inner {
+    @media (max-width: 992px) {
+        width:100%;
+    }
+    @media (min-width: 992px) {
+        width:80%;
+    }
+}
+
+#showJob {
+    @media (max-width: 992px) {
+        width:100%;
+        padding: 25px;
+        padding-bottom: 50px;
+    }
+    @media (min-width: 992px) {
+        width:80%;
+        padding-left: 80px;
+        padding-right: 80px;
+        padding-top: 50px;
+        padding-bottom: 90px;
+    }
+    background-color:white;
+}
+
+#showJobSalary {
+    @media (max-width: 992px) {
+        margin-right: -80px !important;
+    }
+    @media (min-width: 992px) {
+        padding-right: 90px;
+    }
 }
 
 .search-pagination .pagination>li>a,
