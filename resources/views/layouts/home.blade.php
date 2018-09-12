@@ -64,9 +64,9 @@
 					<h3 style="color: grey; font-weight: 300">Featured Companies</h3>
 					<hr>
 				</div>
-				<div class="row hidden-xs">
+				<div class="row">
 					@foreach ($featuredCompanies as $company)
-						<div class="col-md-2">
+						<div class="col-xs-4 col-sm-4 col-md-2">
 							<form action="{{ route('job.search') }}" method="GET">
 								<input name="title" value="{{ $company }}" type="hidden">
 								<button class="btn-undecorate hover-box-shadow" style="width:100%; padding:0px; border:0px;" type="submit"><img class="featured-category d-block img-responsive" src="https://s3.amazonaws.com/twobayjobs/system/intro/featured-company-{{ $company }}.png" alt="Chicago"></button>
@@ -79,9 +79,9 @@
 					<h3 style="color: grey; font-weight: 300">Featured Agencies</h3>
 					<hr>
 				</div>
-				<div class="row hidden-xs">
+				<div class="row">
 					@foreach ($featuredAgencies as $agency)
-						<div class="col-md-2">
+						<div class="col-xs-4 col-sm-4 col-md-2">
 							<form action="{{ route('job.search') }}" method="GET">
 								<input name="title" value="{{ $agency }}" type="hidden">
 								<button class="btn-undecorate hover-box-shadow" style="width:100%; padding:0px; border:0px;" type="submit"><img class="featured-category d-block img-responsive" src="https://s3.amazonaws.com/twobayjobs/system/intro/featured-company-{{ $agency }}.png" alt="Chicago"></button>
@@ -91,13 +91,13 @@
 				</div>
 			</div>
 
-			<div class="col-md-4">
+			<div class="col-sm-12 col-md-4">
 				<div style="margin-top: 40px;">
 					<h3 style="color: grey; font-weight: 300">You may be interested in</h3>
 					<hr>
 				</div>
-				<div class="row hidden-xs">
-					<div class="col-md-12">
+				<div class="row">
+					<div class="col-sm-12 col-md-12">
 						<img class="featured-category d-block img-responsive" src="https://s3.amazonaws.com/twobayjobs/system/intro/commercial-01.jpg" alt="Chicago">
 					</div>
 				</div>
@@ -125,8 +125,8 @@
 			<h3 style="color: grey; font-weight: 300">Featured Blogs</h3>
 			<hr>
 		</div>
-		<div class="hidden-xs hidden-sm row">
-			<div class="col-md-8 col-ms-12">
+		<div class="row">
+			<div class="col-sm-12 col-md-8">
 				<div class="blog-carousel owl-carousel owl-theme">
 					@foreach ($caro_blogs as $blog)
 						<a href="{{ route('blog.show', ['blog' => $blog->id]) }}">
@@ -138,12 +138,12 @@
 					@endforeach
 				</div>
 			</div>
-			<div class="col-md-4 related-blogs" style="padding-left: 25px; padding-right: 30px">
+			<div class="col-sm-12 col-md-4 related-blogs" style="padding-left: 25px; padding-right: 30px">
 				@foreach($relatedBlogs as $blog)
 					@include('blog.related-blogs')
 				@endforeach
 				<div class="row" style="margin-top: 25px">
-					<div class="col-md-6 col-md-offset-3">
+					<div class="col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3">
 					    <form action="{{ route('blog.index') }}" method="GET">
 					        <button type="submit" class="btn btn-info btn-outline btn-lg btn-block" style="border-radius: 0; font-size: 15px;">查看所有貼文</button>
 					    </form>
