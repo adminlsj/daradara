@@ -9752,6 +9752,18 @@ input[type=file] {
   background-color: #65666c !important;
 }
 
+@media (max-width: 768px) {
+  #slide-out-blank-left {
+    margin-bottom: 100px;
+  }
+}
+
+@media (min-width: 768px) {
+  #slide-out-blank-left {
+    margin-bottom: 50px;
+  }
+}
+
 .sidenav > div > a {
   color: grey;
 }

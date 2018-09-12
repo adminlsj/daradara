@@ -28,7 +28,7 @@
                         <div class="row">
                             <div class="col-xs-7" style="width: 80%">
                                 <div class="form-group">
-                                    <input style="box-shadow: none; border-radius: 2px; font-weight: 300" name="title" type="text" class="form-control" placeholder="搵翻份兩岸筍工 . . .">
+                                    <input style="box-shadow: none; border-radius: 2px; font-weight: 300" name="title" type="text" value="{{ request('title') }}" class="form-control" placeholder="搵翻份兩岸筍工 . . .">
                                 </div>
                             </div>
                             <div class="col-xs-5" style="width: 70px; margin-left: -25px">

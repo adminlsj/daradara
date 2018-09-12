@@ -40,11 +40,13 @@ $(document).ready(function(){
 	    if (x.style.display === "none") {
 	        $('#slide-in-content').slideDown();
 	        $(this).html('keyboard_arrow_up');
-	        $('#slide-out-blank').slideDown();
+	        $('#slide-out-blank-left').slideDown();
+	        $('#slide-out-blank-right').slideDown();
 	    } else {
 	        $('#slide-in-content').slideUp();
 	        $(this).html('keyboard_arrow_down');
-	        $('#slide-out-blank').slideUp();
+	        $('#slide-out-blank-left').slideUp();
+	        $('#slide-out-blank-right').slideUp();
 	    }
 	});
 });
