@@ -126,7 +126,7 @@
 			<hr>
 		</div>
 		<div class="row">
-			<div class="col-sm-12 col-md-8">
+			<div class="hidden-xs hidden-sm col-md-8">
 				<div class="blog-carousel owl-carousel owl-theme">
 					@foreach ($caro_blogs as $blog)
 						<a href="{{ route('blog.show', ['blog' => $blog->id]) }}">
@@ -138,12 +138,12 @@
 					@endforeach
 				</div>
 			</div>
-			<div class="col-sm-12 col-md-4 related-blogs" style="padding-left: 25px; padding-right: 30px">
+			<div class="col-xs-12 col-sm-12 col-md-4 related-blogs" style="padding-left: 25px; padding-right: 30px">
 				@foreach($relatedBlogs as $blog)
 					@include('blog.related-blogs')
 				@endforeach
 				<div class="row" style="margin-top: 25px">
-					<div class="col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3">
+					<div class="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3">
 					    <form action="{{ route('blog.index') }}" method="GET">
 					        <button type="submit" class="btn btn-info btn-outline btn-lg btn-block" style="border-radius: 0; font-size: 15px;">查看所有貼文</button>
 					    </form>
