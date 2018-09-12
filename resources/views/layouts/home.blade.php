@@ -1,9 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-	<div style="position: relative;" class="hidden-xs" style="width: 100%">
+	<div class="hidden-xs" style="position: relative;" style="width: 100%">
 		<img style="margin-top: 0px; margin-bottom: 25px; width:100%" src="https://s3.amazonaws.com/twobayjobs/system/intro/poster-12.png" alt="Los Angeles">
 		@include('job.search-home')
+	</div>
+
+	<div class="visible-xs-block" style="position: relative;" style="width: 100%">
+		<img style="margin-top: 0px; margin-bottom: 25px; width:100%" src="https://s3.amazonaws.com/twobayjobs/system/intro/mobile-poster.png" alt="Los Angeles">
+		@include('job.mobile.search-home')
 	</div>
 
 	<div class="container" style="width: 85%">
@@ -14,28 +19,28 @@
 					<hr>
 				</div>
 				<div class="row">
-					<div class="col-md-3">
+					<div class="col-sm-6 col-md-3">
 						<form action="{{ route('job.search') }}" method="GET">
-							<input name="category" value="Engineering" type="hidden">
-							<button class="btn-undecorate hover-box-shadow" style="width:100%; padding:0px; border:0px;" type="submit"><img class="featured-category d-block img-responsive" src="https://s3.amazonaws.com/twobayjobs/system/intro/featured-category-01.png" alt="Chicago"></button>
+							<input name="category" value="E-commerce" type="hidden">
+							<button class="btn-undecorate hover-box-shadow" style="width:100%; padding:0px; border:0px;" type="submit"><img class="featured-category d-block img-responsive" src="https://s3.amazonaws.com/twobayjobs/system/intro/poster-e-commerce-01.png" alt="Chicago"></button>
 						</form>
 					</div>
-					<div class="col-md-3">
+					<div class="col-sm-6 col-md-3">
 						<form action="{{ route('job.search') }}" method="GET">
-							<input name="category" value="Public / Civil" type="hidden">
-							<button class="btn-undecorate hover-box-shadow" style="width:100%; padding:0px; border:0px;" type="submit"><img class="featured-category d-block img-responsive" src="https://s3.amazonaws.com/twobayjobs/system/intro/featured-category-02.png" alt="Chicago"></button>
+							<input name="category" value="Information Technology" type="hidden">
+							<button class="btn-undecorate hover-box-shadow" style="width:100%; padding:0px; border:0px;" type="submit"><img class="featured-category d-block img-responsive" src="https://s3.amazonaws.com/twobayjobs/system/intro/poster-information-technology-03.png" alt="Chicago"></button>
 						</form>
 					</div>
-					<div class="col-md-3">
+					<div class="col-sm-6 col-md-3">
 						<form action="{{ route('job.search') }}" method="GET">
-							<input name="category" value="Hospitality / F & B" type="hidden">
-							<button class="btn-undecorate hover-box-shadow" style="width:100%; padding:0px; border:0px;" type="submit"><img class="featured-category d-block img-responsive" src="https://s3.amazonaws.com/twobayjobs/system/intro/featured-category-03.png" alt="Chicago"></button>
+							<input name="category" value="Marketing / Media" type="hidden">
+							<button class="btn-undecorate hover-box-shadow" style="width:100%; padding:0px; border:0px;" type="submit"><img class="featured-category d-block img-responsive" src="https://s3.amazonaws.com/twobayjobs/system/intro/poster-marketing-media-02.png" alt="Chicago"></button>
 						</form>
 					</div>
-					<div class="col-md-3">
+					<div class="col-sm-6 col-md-3">
 						<form action="{{ route('job.search') }}" method="GET">
-							<input name="category" value="Sales, CS & Business Devpt" type="hidden">
-							<button class="btn-undecorate hover-box-shadow" style="width:100%; padding:0px; border:0px;" type="submit"><img class="featured-category d-block img-responsive" src="https://s3.amazonaws.com/twobayjobs/system/intro/featured-category-04.png" alt="Chicago"></button>
+							<input name="category" value="Merchandising / Logistics" type="hidden">
+							<button class="btn-undecorate hover-box-shadow" style="width:100%; padding:0px; border:0px;" type="submit"><img class="featured-category d-block img-responsive" src="https://s3.amazonaws.com/twobayjobs/system/intro/poster-merchandising-logistics-01.png" alt="Chicago"></button>
 						</form>
 					</div>
 				</div>
