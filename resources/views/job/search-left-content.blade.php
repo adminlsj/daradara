@@ -14,7 +14,7 @@
 
 <div style="position: relative;" class="visible-xs-block visible-sm-block row selectJobContainer">
     <form action="{{route('job.show', ['job' => $job->id])}}">
-        <button id="mobileSelectJobBtn" type="submit" style="cursor:pointer; width:100%; padding:15px 30px; text-align:left; border:none; border-bottom: 1px solid #E6E6E6;">
+        <button class="mobileSelectJobBtn" type="submit" style="cursor:pointer; width:100%; padding:15px 30px; text-align:left; border:none; border-bottom: 1px solid #E6E6E6;">
             <div><a style="color:#d84b6b;font-size: 18px;" href="{{ route('job.show', ['job' => $job->id]) }}" target="_blank">{{ str_limit($job->title, 32) }}</a></div>
             <div> {{ $job->company->name }}</div>
             <div> {{ $job->location }} </div>
