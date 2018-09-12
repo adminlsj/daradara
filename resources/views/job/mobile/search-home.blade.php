@@ -8,7 +8,7 @@
 	<div class="row">
 		<div class="col-xs-6">
 			<select id="location" name="location">
-				<option value="">Choose Location...</option>
+				<option value="">Location...</option>
 				@foreach (App\Job::$country as $key => $element)
 					<option value="{{ $key }}" {{ request('location') == $key ? 'selected' : ''}}>{{ $element }}</option>
 				@endforeach
@@ -16,7 +16,7 @@
 		</div>
 		<div class="col-xs-6">
 			<select id="category" name="category">
-				<option value="">Choose Industry...</option>
+				<option value="">Industry...</option>
 				@foreach (App\Job::$category as $key => $element)
 					<option value="{{ $key }}" {{ request('category') == $key ? 'selected' : ''}}>{{ $element }}</option>
 				@endforeach
@@ -26,11 +26,11 @@
 
 	<div class="row">
 		<div class="col-xs-6">
-			<input type="integer" value="{{ request('salary') }}" id="salary" name="salary" placeholder="Above this Salary...">
+			<input type="integer" value="{{ request('salary') }}" id="salary" name="salary" placeholder="Salary...">
 		</div>
 		<div class="col-xs-6">
 			<select id="experience" name="experience">
-				<option value="">Years of Experience...</option>
+				<option value="">Experience...</option>
 				@foreach (App\Job::$experience as $key => $element)
 					<option value="{{ $key }}" {{ request('experience') == $key ? 'selected' : ''}}>{{ $element }}</option>
 				@endforeach
@@ -40,7 +40,7 @@
 	<div class="row">
 		<div class="col-xs-6">
 			<select id="type" name="type">
-				<option value="">All Employment Type</option>
+				<option value="">Type</option>
 				@foreach (App\Job::$type as $key => $element)
 					<option value="{{ $key }}" {{ request('type') == $key ? 'selected' : ''}}>{{ $element }}</option>
 				@endforeach
@@ -48,7 +48,7 @@
 		</div>
 		<div class="col-xs-6">
 			<select id="education" name="education">
-				<option value="">All Education Level</option>
+				<option value="">Education</option>
 				@foreach (App\Job::$education as $key => $element)
 					<option value="{{ $key }}" {{ request('education') == $key ? 'selected' : ''}}>{{ $element }}</option>
 				@endforeach
