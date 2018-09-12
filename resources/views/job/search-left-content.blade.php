@@ -21,5 +21,4 @@
             <div> {{ $job->created_at->diffForHumans() }}<span style="font-weight: 600" class="pull-right">${{ $job->salary }} / 月</span></div>
         </button>
     </form>
-    @include('job.save-job-form-left')
 </div>
