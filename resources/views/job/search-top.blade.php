@@ -29,7 +29,7 @@
 
 	<div id="slide-in-content" style="display: {{ $slideOutSearch ? '' : 'none'}};" class="row">
 		<div class="col-xs-5 col-sm-3 col-md-3">
-			<input type="integer" value="{{ request('salary') }}" id="salary" name="salary" placeholder="Above this Salary...">
+			<input type="integer" value="{{ request('salary') }}" id="salary" name="salary" placeholder="Min Salary...">
 		</div>
 		<div class="col-xs-5 col-sm-3 col-md-3">
 			<select onchange="this.form.submit()" id="experience" name="experience">
