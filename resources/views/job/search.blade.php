@@ -41,7 +41,7 @@
                         @include('job.search-left-content')
                     @endforeach
                 @else
-                    <br><br>
+                    <br>
                     <div class="container card-shadow">
                         <div style="font-size: 20px; line-height: 40px;">
                             <h2>No jobs matching your keyword: <span style="font-weight: 600">{{ request('title') }}</span></h2>
