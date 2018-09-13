@@ -7,7 +7,7 @@
 	</div>
 
 	<div class="visible-xs-block" style="position: relative;" style="width: 100%">
-		<img style="margin-top: 0px; margin-bottom: 25px; width:100%" src="https://s3.amazonaws.com/twobayjobs/system/intro/mobile-poster.png" alt="Los Angeles">
+		<img style="margin-top: 0px; margin-bottom: 25px; width:100%" src="https://s3.amazonaws.com/twobayjobs/system/intro/poster-banner-mobile.png" alt="Los Angeles">
 		@include('job.mobile.search-home')
 	</div>
 
