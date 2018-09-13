@@ -20,17 +20,6 @@ class ResumeController extends Controller
     {
         $this->middleware('auth');
     }
-    
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -62,7 +51,6 @@ class ResumeController extends Controller
             'title' => 'nullable|max:255',
             'email' => 'nullable|max:255',
             'phone' => 'nullable|max:255',
-            'location' => 'nullable|max:255',
             'wechat' => 'nullable|max:255',
             'qq' => 'nullable|max:255',
             'edu_title' => 'nullable|max:255',
@@ -81,7 +69,6 @@ class ResumeController extends Controller
             'title' => request('title'),
             'email' => request('email'),
             'phone' => request('phone'),
-            'location' => request('location'),
             'wechat' => request('wechat'),
             'qq' => request('qq'),
             'edu_title' => request('edu_title'),

@@ -15,7 +15,7 @@ class Job extends Model
 
     public static $country = ['深圳' => '深圳', '廣州' => '廣州', '上海' => '上海', '北京' => '北京'];
 
-    public static $experience = ['No Experience' => 'No Experience', 'Less than 1 year' => 'Less than 1 year', '1 to 3 years' => '1 to 3 years', '3 to 5 years' => '3 to 5 years', '5 years or above' => '5 years or above'];
+    public static $experience = ['無需經驗' => '無需經驗', '少於 1 年' => '少於 1 年', '1 至 3 年' => '1 至 3 年', '3 至 5 年' => '3 至 5 年', '5 年或以上' => '5 年或以上'];
 
     public static $level = ['Entry Level' => 'Entry Level', 'Middle' => 'Middle', 'Senior' => 'Senior', 'Top' => 'Top'];
 

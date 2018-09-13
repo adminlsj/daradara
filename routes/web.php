@@ -12,7 +12,6 @@
 */
 
 Route::get('/', 'HomeController@index');
-Route::get('/manual', 'HomeController@manual');
 Route::get('/contact', 'HomeController@contact');
 Route::post('/sendMail/{status}', 'HomeController@sendMail');
 

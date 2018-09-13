@@ -9,7 +9,6 @@ use App\Resume;
 use App\ResumeImg;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
-use App\Mail\OrderAccepted;
 use Storage;
 use File;
 use Image;
@@ -78,7 +77,6 @@ class AppController extends Controller
             'title' => 'nullable|max:255',
             'email' => 'nullable|max:255',
             'phone' => 'nullable|max:255',
-            'location' => 'nullable|max:255',
             'wechat' => 'nullable|max:255',
             'qq' => 'nullable|max:255',
             'edu_title' => 'nullable|max:255',
@@ -98,7 +96,6 @@ class AppController extends Controller
             'title' => request('title'),
             'email' => request('email'),
             'phone' => request('phone'),
-            'location' => request('location'),
             'wechat' => request('wechat'),
             'qq' => request('qq'),
             'edu_title' => request('edu_title'),
@@ -144,29 +141,6 @@ class AppController extends Controller
         }
 
         return redirect()->action('AppController@index');
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\App  $app
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(App $app)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\App  $app
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, App $app)
-    {
-        //
     }
 
     /**
