@@ -106,6 +106,12 @@ class LoginController extends Controller
             'original_filename' => 'default',
         ]);
 
+        Resume::create([
+            'user_id' => $localUser->id,
+            'name' => $localUser->name,
+            'email' => $localUser->email,
+        ]);
+
         return $localUser;
     }
 }
