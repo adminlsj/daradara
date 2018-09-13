@@ -21,25 +21,25 @@
 				<div class="row">
 					<div class="col-xs-6 col-sm-6 col-md-3">
 						<form action="{{ route('job.search') }}" method="GET">
-							<input name="category" value="E-commerce" type="hidden">
+							<input name="category" value="電子商務" type="hidden">
 							<button class="btn-undecorate hover-box-shadow" style="width:100%; padding:0px; border:0px;" type="submit"><img class="featured-category d-block img-responsive" src="https://s3.amazonaws.com/twobayjobs/system/intro/featured-industry-電子商務.png" alt="Chicago"></button>
 						</form>
 					</div>
 					<div class="col-xs-6 col-sm-6 col-md-3">
 						<form action="{{ route('job.search') }}" method="GET">
-							<input name="category" value="Information Technology" type="hidden">
+							<input name="category" value="互聯網 (IT)" type="hidden">
 							<button class="btn-undecorate hover-box-shadow" style="width:100%; padding:0px; border:0px;" type="submit"><img class="featured-category d-block img-responsive" src="https://s3.amazonaws.com/twobayjobs/system/intro/featured-industry-互聯網.png" alt="Chicago"></button>
 						</form>
 					</div>
 					<div class="col-xs-6 col-sm-6 col-md-3">
 						<form action="{{ route('job.search') }}" method="GET">
-							<input name="category" value="Marketing / Media" type="hidden">
+							<input name="category" value="市場 / 商務拓展" type="hidden">
 							<button class="btn-undecorate hover-box-shadow" style="width:100%; padding:0px; border:0px;" type="submit"><img class="featured-category d-block img-responsive" src="https://s3.amazonaws.com/twobayjobs/system/intro/featured-industry-市場.png" alt="Chicago"></button>
 						</form>
 					</div>
 					<div class="col-xs-6 col-sm-6 col-md-3">
 						<form action="{{ route('job.search') }}" method="GET">
-							<input name="category" value="Merchandising / Logistics" type="hidden">
+							<input name="category" value="物流 / 採購" type="hidden">
 							<button class="btn-undecorate hover-box-shadow" style="width:100%; padding:0px; border:0px;" type="submit"><img class="featured-category d-block img-responsive" src="https://s3.amazonaws.com/twobayjobs/system/intro/featured-industry-物流.png" alt="Chicago"></button>
 						</form>
 					</div>
