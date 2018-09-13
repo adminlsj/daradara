@@ -66,11 +66,14 @@
 				</div>
 				<div class="row">
 					@foreach ($featuredCompanies as $company)
-						<div class="col-xs-6 col-sm-6 col-md-2">
+						<div class="col-xs-4 col-sm-4 col-md-2">
 							<form action="{{ route('job.search') }}" method="GET">
 								<input name="title" value="{{ $company }}" type="hidden">
 								<button class="btn-undecorate hover-box-shadow" style="width:100%; padding:0px; border:0px;" type="submit"><img class="featured-category d-block img-responsive" src="https://s3.amazonaws.com/twobayjobs/system/intro/featured-company-{{ $company }}.png" alt="Chicago"></button>
 							</form>
+							@if ($loop->index == 0 || $loop->index == 1 || $loop->index == 2)
+								<div class="visible-xs-block visible-sm-block" style="margin-bottom: 10px;"></div>
+							@endif
 						</div>
 					@endforeach
 				</div>
