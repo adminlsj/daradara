@@ -9469,13 +9469,19 @@ button.btn-undecorate {
 
 @media (max-width: 992px) {
   #showJobSalary {
-    margin-right: -80px !important;
+    margin-right: -130px !important;
   }
 }
 
 @media (min-width: 992px) {
   #showJobSalary {
-    padding-right: 90px;
+    padding-right: 60px;
+  }
+}
+
+@media (min-width: 992px) {
+  .blog-sidebar {
+    padding-left: 25px;
   }
 }
 

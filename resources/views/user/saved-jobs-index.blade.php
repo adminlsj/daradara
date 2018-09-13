@@ -5,25 +5,25 @@
     <div class="row">
     	<div class="col-xs-12">
     		<div style="margin-top: 40px;">
-				<h3 style="color: grey; font-weight: 300">Saved Jobs in 30 days</h3>
+				<h3 style="color: grey; font-weight: 300">儲存的職位 (30天內)</h3>
 				<hr>
 			</div>
 			<div class="content-scroll-x">
 				<div style="font-weight:600" class="row application-list">
 					<div class="col-xs-5">
-						Position
+						職位
 					</div>
 					<div class="col-xs-3">
-						Company
+						公司
 					</div>
 					<div class="col-xs-2">
-						Job Posted
+						發布日期
 					</div>
 					<div class="col-xs-1">
-						Resume
+						簡歷
 					</div>
 					<div class="col-xs-1">
-						Status
+						狀態
 					</div>
 				</div>
 				@foreach ($savedJobs as $savedJob)
@@ -41,10 +41,10 @@
 							{{ $savedJob->job->created_at->toDateString() }}
 						</div>
 						<div class="col-xs-1">
-							<a href="{{ route('resume.edit', ['resume' => $resume]) }}" target="_blank">View</a>
+							<a href="{{ route('resume.edit', ['resume' => $resume]) }}" target="_blank">查看</a>
 						</div>
 						<div class="col-xs-1">
-							Active
+							在線
 						</div>
 					</div>
 				@endforeach

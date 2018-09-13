@@ -4,14 +4,14 @@
         <a href="{{ route('register') }}">註冊</a>
         <a href="{{ route('blog.index') }}">指南</a>
     @else
-        <a href="{{ route('user.savedJobsIndex', ['user' => auth()->user()]) }}">Saved Jobs</a>
-        <a href="{{ route('app.index') }}">My Applications</a></li>
-        <a href="{{ route('resume.edit', ['resume' => auth()->user()->resume->id]) }}">My Resume</a>
+        <a href="{{ route('user.savedJobsIndex', ['user' => auth()->user()]) }}">儲存職位</a>
+        <a href="{{ route('app.index') }}">我的應聘</a></li>
+        <a href="{{ route('resume.edit', ['resume' => auth()->user()->resume->id]) }}">我的簡歷</a>
         <a href="{{ route('user.edit', ['user' => auth()->user()]) }}" style="padding-left: 8px; padding-right: 7px">
             <img src="https://s3.amazonaws.com/twobayjobs/avatars/thumbnails/{{ Auth::user()->avatar->filename }}.jpg" class="img-circle" style="margin-top: -10px; margin-bottom: -8px" width="35px" height="35px">&nbsp;
             {{ Auth::user()->name }}
         </a>
-        <a href="{{ route('blog.index') }}">Resources</a>
+        <a href="{{ route('blog.index') }}">部落格</a>
     @endguest
 </div>
 <nav style="display:{{ Request::is('/') ? 'none' : '' }};" class="{{ Request::is('/') ? 'home-nav-scroll-show' : '' }} navbar navbar-default navbar-fixed-top">
@@ -76,23 +76,23 @@
                 @guest
                     <li><a href="{{ route('login') }}">登入</a></li>
                     <li><a href="{{ route('register') }}">註冊</a></li>
-                    <li><a href="/manual">指南</a></li>
+                    <li><a href="{{ route('blog.index') }}">指南</a></li>
                 @else
-                    <li><a href="{{ route('user.savedJobsIndex', ['user' => auth()->user()]) }}">Saved Jobs</a></li>
-                    <li><a href="{{ route('app.index') }}">My Applications</a></li>
-                    <li><a href="{{ route('resume.edit', ['resume' => auth()->user()->resume->id]) }}">My Resume</a></li>
+                    <li><a href="{{ route('user.savedJobsIndex', ['user' => auth()->user()]) }}">儲存職位</a></li>
+                    <li><a href="{{ route('app.index') }}">我的應聘</a></li>
+                    <li><a href="{{ route('resume.edit', ['resume' => auth()->user()->resume->id]) }}">我的簡歷</a></li>
                     <li>
                         <a href="{{ route('user.edit', ['user' => auth()->user()]) }}" style="padding-left: 13px; padding-right: 15px">
                             <img src="https://s3.amazonaws.com/twobayjobs/avatars/thumbnails/{{ Auth::user()->avatar->filename }}.jpg" class="img-circle" style="margin-top: -10px; margin-bottom: -8px" width="35px" height="35px">&nbsp;
                             {{ Auth::user()->name }}
                         </a>
                     </li>
-                    <li><a href="{{ route('blog.index') }}">Resources</a></li>
+                    <li><a href="{{ route('blog.index') }}">部落格</a></li>
                     <li class="hidden-xs hidden-sm">
                         <a href="{{ route('logout') }}"
                             onclick="event.preventDefault();
                                      document.getElementById('logout-form').submit();">
-                            Logout
+                            登出
                         </a>
 
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

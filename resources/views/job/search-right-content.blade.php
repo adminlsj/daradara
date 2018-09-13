@@ -5,7 +5,7 @@
         <hr style="margin-bottom: 12px">
         <div style="font-weight: 600; text-align: center">
             <span style="margin-top: -2px" class="pull-left"><i style="vertical-align: bottom" class="material-icons">place</i> <span id="job-location">{{ $currentJob->location }}</span></span>
-            <span id="showJobSalary">RMB ¥<span id="job-salary">{{ $currentJob->salary }}</span> / Month</span>
+            <span id="showJobSalary">RMB ¥<span id="job-salary">{{ $currentJob->salary }}</span> / 月</span>
             <span class="pull-right">
             </span>
         </div>

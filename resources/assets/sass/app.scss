@@ -155,10 +155,16 @@ button.btn-undecorate{
 
 #showJobSalary {
     @media (max-width: 992px) {
-        margin-right: -80px !important;
+        margin-right: -130px !important;
     }
     @media (min-width: 992px) {
-        padding-right: 90px;
+        padding-right: 60px;
+    }
+}
+
+.blog-sidebar {
+    @media (min-width: 992px) {
+        padding-left: 25px;
     }
 }
 

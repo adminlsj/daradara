@@ -7,25 +7,25 @@
             <div style="text-align: center" class="col-md-2">
                 <h5>Get started</h5>
                 <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="/jobs/search?title=">Explore</a></li>
-                    <li><a href="{{ route('blog.index') }}" target="_blank">Blog</a></li>
+                    <li><a href="/">主頁</a></li>
+                    <li><a href="/jobs/search?title=">探索</a></li>
+                    <li><a href="{{ route('blog.index') }}" target="_blank">部落格</a></li>
                 </ul>
             </div>
             <div style="text-align: center" class="col-md-2">
                 <h5>About us</h5>
                 <ul>
-                    <li><a href="https://www.facebook.com/mainlandjobs/" target="_blank">Company Information</a></li>
-                    <li><a href="/contact" target="_blank">Contact us</a></li>
-                    <li><a href="https://www.facebook.com/mainlandjobs/" target="_blank">Reviews</a></li>
+                    <li><a href="https://www.facebook.com/mainlandjobs/" target="_blank">關於我們</a></li>
+                    <li><a href="/contact" target="_blank">加入我們</a></li>
+                    <li><a href="https://www.facebook.com/mainlandjobs/" target="_blank">評論</a></li>
                 </ul>
             </div>
             <div style="text-align: center" class="col-md-2">
                 <h5>Support</h5>
                 <ul>
-                    <li><a href="/contact" target="_blank">FAQ</a></li>
-                    <li><a href="/contact" target="_blank">Help desk</a></li>
-                    <li><a href="{{ route('blog.index') }}" target="_blank">Forums</a></li>
+                    <li><a href="/contact" target="_blank">客服</a></li>
+                    <li><a href="/contact" target="_blank">諮詢</a></li>
+                    <li><a href="{{ route('blog.index') }}" target="_blank">兩岸生活</a></li>
                 </ul>
             </div>
             <div class="col-md-3">

@@ -11,19 +11,17 @@ class Job extends Model
         'company_id', 'title', 'location', 'category', 'salary', 'level', 'type', 'education', 'responsibility', 'requirement', 'experience'
     ];
 
-    public static $category = ['Accounting' => 'Accounting', 'HR / Admin' => 'HR / Admin', 'Banking / Finance' => 'Banking / Finance', 'Beauty Care / Health' => 'Beauty Care / Health', 'Building / Construction' => 'Building / Construction', 'Design' => 'Design', 'E-commerce' => 'E-commerce', 'Education' => 'Education', 'Engineering' => 'Engineering', 'Hospitality' => 'Hospitality', 'Information Technology' => 'Information Technology', 'Insurance' => 'Insurance', 'Management' => 'Management', 'Manufacturing' => 'Manufacturing', 'Marketing / Media' => 'Marketing / Media', 'Public Relations' => 'Public Relations', 'Medical Services' => 'Medical Services', 'Merchandising / Logistics' => 'Merchandising / Logistics', 'Property / Real Estate' => 'Property / Real Estate', 'Public / Civil' => 'Public / Civil', 'Sales / Business Devpt' => 'Sales / Business Devpt', 'Sciences, Lab, RD' => 'Sciences, Lab, RD'];
+    public static $category = ['互聯網 (IT)' => '互聯網 (IT)', '電子商務' => '電子商務', '銀行 / 金融' => '銀行 / 金融', '市場 / 商務拓展' => '市場 / 商務拓展', '美術 / 設計' => '美術 / 設計', '物流 / 採購' => '物流 / 採購', '人事 / 行政' => '人事 / 行政', '海外市場' => '海外市場', '管理培訓生' => '管理培訓生', '機械製造' => '機械製造', '教育 / 諮詢' => '教育 / 諮詢', '電子電器' => '電子電器', '生物醫療' => '生物醫療', '建築 / 房產' => '建築 / 房產', '外語翻譯' => '外語翻譯', '廣告 / 媒體' => '廣告 / 媒體'];
 
-    public static $country = ['Shenzhen' => 'Shenzhen', 'Guangzhou' => 'Guangzhou', 'Shanghai' => 'Shanghai', 'Beijing' => 'Beijing'];
+    public static $country = ['深圳' => '深圳', '廣州' => '廣州', '上海' => '上海', '北京' => '北京'];
 
     public static $experience = ['No Experience' => 'No Experience', 'Less than 1 year' => 'Less than 1 year', '1 to 3 years' => '1 to 3 years', '3 to 5 years' => '3 to 5 years', '5 years or above' => '5 years or above'];
 
     public static $level = ['Entry Level' => 'Entry Level', 'Middle' => 'Middle', 'Senior' => 'Senior', 'Top' => 'Top'];
 
-    public static $type = ['Full Time' => 'Full Time', 'Part Time' => 'Part Time', 'Internship' => 'Internship'];
+    public static $type = ['全職' => '全職', '兼職' => '兼職', '實習' => '實習'];
 
-    public static $education = ['Matriculated' => 'Matriculated', 'Degree' => 'Degree', 'Non-Degree Tertiary' => 'Non-Degree Tertiary', 'Postgraduate' => 'Postgraduate'];
-
-    public static $delivery = ['mtr' => '地鐵站交收', 'home' => '送貨上門'];
+    public static $education = ['中學畢業' => '中學畢業', '副學士學位' => '副學士學位', '學士學位' => '學士學位', '碩士學位' => '碩士學位'];
 
     public function company()
     {

@@ -29,7 +29,7 @@
 		<div class="row">
 			<div class="col-xs-6 col-xs-offset-3">
 				<br>
-				<button type="submit" class="btn btn-info btn-outline btn-lg btn-block">Send</button>
+				<button type="submit" class="btn btn-info btn-outline btn-lg btn-block">發送訊息</button>
 			</div>
 		</div>
 	</form>

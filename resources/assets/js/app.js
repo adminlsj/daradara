@@ -52,14 +52,21 @@ $(document).ready(function(){
 });
 
 $(document).ready(function(){
-	$('.blog-carousel').owlCarousel({
+	$(".blog-carousel").owlCarousel({
 		items: 1,
-		loop: true,
-		margin: 5,
-		nav: false,
-		dots: true,
-		lazyLoad: true,
-		autoplay: true,
+		autoplay:true,
+		autoPlayTimeout: 5000,
+		itemsDesktop : [1199,1],
+	    itemsDesktopSmall : [979,1],
+	    itemsTablet : [768,1],
+	    itemsMobile: [479,1],
+	    loop: true,
+		dots: false,
+	    nav: true,
+	    navText: [
+	      '<i class="material-icons" style="font-size:36px; color:#666666">keyboard_arrow_left</i>',
+	      '<i class="material-icons" style="font-size:36px; color:#666666">chevron_right</i>'
+	      ]
 	});
 
 	$(window).scroll(function () {

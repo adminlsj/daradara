@@ -17,7 +17,7 @@ class CreateAppsTable extends Migration
             $table->increments('id');
             $table->integer('user_id');
             $table->integer('job_id');
-            $table->string('status')->default('Received');
+            $table->string('status')->default('已送達');
             $table->timestamps();
         });
     }
