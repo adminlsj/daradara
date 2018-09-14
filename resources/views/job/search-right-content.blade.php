@@ -1,7 +1,7 @@
 <div id="showJob" class="container card-shadow">
     @if ($currentJob != null)
         <div style="font-size: 25px" id="job-company-name"> {{ $currentJob->company->name }} </div>
-        <div style="font-size: 14px" id="job-company-description"> {{ $currentJob->company->description }} </div>
+        <div style="font-size: 14px; line-height: 25px; margin-top: 5px;" id="job-company-description"> {{ $currentJob->company->description }} </div>
         <hr style="margin-bottom: 12px">
         <div style="font-weight: 600; text-align: center">
             <span style="margin-top: -2px" class="pull-left"><i style="vertical-align: bottom" class="material-icons">place</i> <span id="job-location">{{ $currentJob->location }}</span></span>
