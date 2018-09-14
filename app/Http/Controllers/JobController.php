@@ -86,7 +86,7 @@ class JobController extends Controller
             $sExp = request('experience');
             $slideOutSearch = true;
             switch ($sExp) {
-                case '無需經驗':
+                case '不限經驗':
                     $jobs = $jobs->where('experience', '=', 0);
                     break;
                 case '少於 1 年':
