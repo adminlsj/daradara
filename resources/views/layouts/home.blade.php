@@ -54,7 +54,7 @@
 						<form id="browse-job-search" action="{{ route('job.search') }}" method="GET">
 							<div style="padding-top: 10px;padding-bottom: 10px;" class="col-md-4">
 								<input name="category" value="{{ $element }}" type="hidden">
-								<button class="browse-job-btn" type="submit">{{ $element }} ({{ App\Job::where('category', $element)->count() }})</button>
+								<button class="browse-job-btn" type="submit">{{ $element }} ({{ App\Job::where('category', 'ILIKE', '%'.$element.'%')->count() }})</button>
 							</div>
 						</form>
 					@endforeach
