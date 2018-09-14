@@ -68,7 +68,7 @@ class JobController extends Controller
 
         if (request('category') != null) {
             $sCategory = request('category');
-            $jobs = $jobs->where('category', $sCategory);
+            $jobs = $jobs->where('category', 'ILIKE', '%'.$sCategory.'%');
         }
 
         if (request('location') != null) {
