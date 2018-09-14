@@ -116,7 +116,7 @@
 									<div style="font-weight:600; text-align: center" class="col-md-12">
 										<span class="pull-left">{{ $loop->index + 1 }}.</span>
 										<span class="pull-center">{{ $element }}</span>
-										<span class="pull-right">RMB ¥{{ round(App\Job::where('category', $element)->avg('salary')) }}</span>
+										<span class="pull-right">RMB ¥{{ round(App\Job::where('category', 'ILIKE', '%'.$element.'%')->avg('salary')) }}</span>
 									</div>
 								</div>
 							</a>
