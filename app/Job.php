@@ -17,8 +17,6 @@ class Job extends Model
 
     public static $experience = ['無需經驗' => '無需經驗', '少於 1 年' => '少於 1 年', '1 至 3 年' => '1 至 3 年', '3 至 5 年' => '3 至 5 年', '5 年或以上' => '5 年或以上'];
 
-    public static $level = ['Entry Level' => 'Entry Level', 'Middle' => 'Middle', 'Senior' => 'Senior', 'Top' => 'Top'];
-
     public static $type = ['全職' => '全職', '兼職' => '兼職', '實習' => '實習'];
 
     public static $education = ['中學畢業' => '中學畢業', '副學士學位' => '副學士學位', '學士學位' => '學士學位', '碩士學位' => '碩士學位'];

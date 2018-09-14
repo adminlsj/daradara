@@ -20,7 +20,6 @@ class CreateJobsTable extends Migration
             $table->string('location');
             $table->string('category');
             $table->integer('salary');
-            $table->string('level');
             $table->string('type');
             $table->string('education');
             $table->text('responsibility');
