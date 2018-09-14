@@ -13,10 +13,10 @@
         <div style="font-size: 25px; text-align: center" id="job-title"> {{ $currentJob->title }} </div>
         <hr>
         <div style="font-size: 15px; font-weight: 600">Responsibilities:</div>
-        <pre id="job-responsibility"> {{ $currentJob->responsibility }} </pre>
+        <pre id="job-responsibility" style="width:100%; height:100%; padding: 0px; border: 0px; background-color: white; line-height: 25px; margin-top: 5px;">{{ $currentJob->responsibility }}</pre>
         <br>
         <div style="font-size: 15px; font-weight: 600">Requirements:</div>
-        <pre id="job-requirement"> {{ $currentJob->requirement }} </pre>
+        <pre id="job-requirement" style="width:100%; height:100%; padding: 0px; border: 0px; background-color: white; line-height: 25px; margin-top: 5px">{{ $currentJob->requirement }}</pre>
         <br>
         <div style="font-size: 15px; font-weight: 600">All Personal data collected will be used for recruitment purpose only. </div>
         <br>
