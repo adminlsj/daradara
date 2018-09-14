@@ -32,7 +32,7 @@
     <div id="app">
         <div style="margin-bottom: 73px;">@include('layouts.nav')</div>
 
-        <div id="left" style="margin-top: -13px; padding-bottom: 60px; background-color: white;">
+        <div id="left" style="margin-top: -13px; background-color: white;">
             <div id="slide-out-blank-left" class="hidden-md hidden-lg" style="display: {{ $slideOutSearch ? '' : 'none' }};"></div>
             <div class="container" style="width: 100%">
                 <div class="visible-xs-block" style="margin-top: 30px"></div>
@@ -110,6 +110,7 @@
                     </ul>
                 @endif
             </div>
+            <br><br><br>
 		</div>
 
 		<div id="right" style="margin-top: -13px;">
