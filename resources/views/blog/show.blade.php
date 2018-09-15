@@ -2,14 +2,15 @@
 <html lang="{{ app()->getLocale() }}">
 <head>
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-78314014-1"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-125786247-1"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
 
-      gtag('config', 'UA-78314014-1');
-    </script>
+	  gtag('config', 'UA-125786247-1');
+	</script>
+
 
     <!-- Google Adsense -->
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
