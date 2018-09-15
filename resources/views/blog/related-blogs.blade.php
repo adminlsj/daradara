@@ -2,7 +2,7 @@
     <div class="row hover-box-shadow" style="border-radius: 5px; border: solid 1px #f2f2f2; margin-bottom: 15px; background-color:white;">
         <div class="col-xs-5 col-sm-5 col-md-5" style="padding-left: 0px; padding-right: 2px">
             <div class="embed-responsive embed-responsive-4by3">
-                <img style="width:100%;" src="https://s3.amazonaws.com/twobayjobs/blogImgs/thumbnails/{{ $blog->id }}/{{ $blog->blogImgs->first()->filename }}.jpg" class="embed-responsive-item">
+                <img style="width:100%;" src="https://s3.amazonaws.com/twobayjobs/blogImgs/thumbnails/{{ $blog->id }}/{{ $blog->blogImgs->sortby('created_at')->first()->filename }}.jpg" class="embed-responsive-item">
             </div>
         </div>
         <div class="col-xs-7 col-sm-7 col-md-7">
