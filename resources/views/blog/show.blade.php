@@ -58,7 +58,7 @@
 		<div class="container" style="width:90%;">
 			<div class="row">
 				<div style="margin-top:40px; " class="col-md-8 col-ms-12 blog-content">
-					<img class="img-responsive border-radius-2" style="width:100%;height:100%" src="https://s3.amazonaws.com/twobayjobs/blogImgs/originals/{{ $blog->id }}/{{ $blog->blogImgs->sortby('created_at')->first()->filename }}.jpg" alt="First slide">
+					<img class="img-responsive border-radius-2" style="width:100%;height:100%" src="https://s3.amazonaws.com/twobayjobs/blogImgs/originals/{{ $blog->id }}/{{ $blog->blogImgs->sortby('created_at')->first()->filename }}" alt="First slide">
 					
 					<div class="">
 						<h4 style="padding-top: 10px; padding-bottom: 20px">
@@ -86,7 +86,7 @@
 						@foreach ($similar_blogs as $blog)
 							<div class="col-md-6 col-ms-12">
 								<div class="card">
-					                <a href="{{ route('blog.show', ['blog' => $blog->id]) }}"><img class="img-responsive" src="https://s3.amazonaws.com/twobayjobs/blogImgs/thumbnails/{{ $blog->id }}/{{ $blog->blogImgs->sortby('created_at')->first()->filename }}.jpg" alt="First slide"></a>
+					                <a href="{{ route('blog.show', ['blog' => $blog->id]) }}"><img class="img-responsive" src="https://s3.amazonaws.com/twobayjobs/blogImgs/thumbnails/{{ $blog->id }}/{{ $blog->blogImgs->sortby('created_at')->first()->filename }}" alt="First slide"></a>
 
 								    <div class="card-content">
 								        <a style="line-height: 25px; padding: 13px; font-weight: 300; color: grey; display:block; white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" href="{{ route('blog.show', ['blog' => $blog->id]) }}">
