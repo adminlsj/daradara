@@ -104,7 +104,7 @@ class BlogController extends Controller
         $content = str_replace('(CONT)', '<div style="white-space: pre-line;">', $content);
         $content = str_replace('(/CONT)', '</div>', $content);
 
-        $content = str_replace('(IMG)', '<img class="img-responsive border-radius-2" style="padding-top:15px;padding-bottom:15px;width:100%; height:100%" src="https://s3-us-west-2.amazonaws.com/freerider/blogImgs/originals/'.$blog->id.'/', $content);
+        $content = str_replace('(IMG)', '<img class="img-responsive border-radius-2" style="padding-top:15px;padding-bottom:15px;width:100%; height:100%" src="https://s3.amazonaws.com/twobayjobs/blogImgs/originals/'.$blog->id.'/', $content);
         $content = str_replace('(/IMG)', '.jpg" alt="First slide">', $content);
 
         $content = str_replace('(BLANK)', '<p style="margin:35px"></p>', $content);
