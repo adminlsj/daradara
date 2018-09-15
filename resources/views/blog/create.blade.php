@@ -6,7 +6,7 @@
     	<div class="col-md-12">
 			<h3 style="color: grey; font-weight: 300">新增貼文</h3>
 			<hr>
-			<form class="order-form" action="{{ route('blog.store') }}" method="POST" enctype="multipart/form-data">
+			<form class="job-form" action="{{ route('blog.store') }}" method="POST" enctype="multipart/form-data">
 				{{ csrf_field() }}
 				<div class="row">
 					<div class="col-md-12">
