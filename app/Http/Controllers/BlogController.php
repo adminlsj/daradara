@@ -64,25 +64,19 @@ class BlogController extends Controller
 
         if (request('blogImgs')) {
             foreach (request('blogImgs') as $image) {
-                Storage::disk('s3')->put('blogImgs/originals/'.$blog->id.'/'.$image->getClientOriginalName(), File::get($image));
+                Storage::disk('s3')->put('blogImgs/originals/'.$blog->id.'/'.$image->getFilename().'jpg', File::get($image));
                 BlogImg::create([
                     'blog_id' => $blog->id,
-                    'filename' => $image->getClientOriginalName(),
+                    'filename' => $image->getFilename(),
                     'mime' => $image->getClientMimeType(),
                     'original_filename' => $image->getClientOriginalName(),
                 ]);
             }
 
             $image_thumb = Image::make(request('blogImgs')[0]);
-            $image_thumb = $image_thumb->resize(400, 300);
+            $image_thumb = $image_thumb->resize(480, 360);
             $image_thumb = $image_thumb->stream();
-            Storage::disk('s3')->put('blogImgs/thumbnails/'.$blog->id.'/'.request('blogImgs')[0]->getClientOriginalName(), $image_thumb->__toString());
-
-            $image_square = Image::make(request('blogImgs')[0]);
-            $image_square = $image_square->crop(400, 400);
-            $image_square = $image_square->stream();
-            Storage::disk('s3')->put('blogImgs/squares/'.$blog->id.'/'.request('blogImgs')[0]->getClientOriginalName(), $image_square->__toString());
-
+            Storage::disk('s3')->put('blogImgs/thumbnails/'.$blog->id.'/'.request('blogImgs')[0]->getFilename().'jpg', $image_thumb->__toString());
         }
 
         return redirect()->action('BlogController@show', ['blog' => $blog]);
