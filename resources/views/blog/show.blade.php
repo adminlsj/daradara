@@ -24,7 +24,7 @@
 	<meta property="og:type" content="article" />
 	<meta property="og:title" content="{{ $blog->title }}" />
 	<meta property="og:description" content="{{ str_limit($fb_title, 50) }}" />
-	<meta property="og:image" content="https://s3-us-west-2.amazonaws.com/freerider/blogImgs/originals/{{ $blog->id }}/{{ $blog->blogImgs->first()->filename }}" />
+	<meta property="og:image" content="https://s3.amazonaws.com/twobayjobs/blogImgs/originals/{{ $blog->id }}/{{ $blog->blogImgs->sortby('created_at')->first()->filename }}" />
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
