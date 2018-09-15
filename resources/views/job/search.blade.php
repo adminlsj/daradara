@@ -20,6 +20,12 @@
       });
     </script>
 
+    <meta property="og:url" content="{{ route('job.search')}}" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="遊戲產品海外產品經理" />
+    <meta property="og:description" content="負責海外引進產品與開發商長期交流與溝通，推動本地運營需求；負責提升開發商對本地需求的重視度與支持度；負責開發商技術團隊的合作關係拓展與維護；" />
+    <meta property="og:image" content="https://s3.amazonaws.com/twobayjobs/system/intro/temp-pic.jpg" />
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
