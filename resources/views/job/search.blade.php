@@ -22,9 +22,9 @@
 
     <meta property="og:url" content="{{ route('job.search')}}" />
     <meta property="og:type" content="article" />
-    <meta property="og:title" content="遊戲產品海外產品經理" />
-    <meta property="og:description" content="負責海外引進產品與開發商長期交流與溝通，推動本地運營需求；負責提升開發商對本地需求的重視度與支持度；負責開發商技術團隊的合作關係拓展與維護；" />
-    <meta property="og:image" content="https://s3.amazonaws.com/twobayjobs/system/intro/temp-pic.jpg" />
+    <meta property="og:title" content="支付寶香港 - 前沿部門 - Java開發工程師" />
+    <meta property="og:description" content="1、負責支付寶香港後台金融核心與支付系統的開發，為700萬用戶、20萬商家帶去更便捷的金融服務，未來業務覆蓋東南亞甚至全球。2、負責支付寶香港後台金融核心與支付系統的架構優化與升級，使系統更加高可用、高並發、高擴展。3、負責設計和開發創新金融系統以滿足香港金融業務以及全球金融業務的發展需要。" />
+    <meta property="og:image" content="https://s3.amazonaws.com/twobayjobs/system/intro/temp-pic-alibaba.jpg" />
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
