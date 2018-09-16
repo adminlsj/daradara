@@ -28,7 +28,7 @@ class BlogController extends Controller
         $caro_blogs = Blog::inRandomOrder()->limit(5)->get();
 
         $relatedJobs = Job::inRandomOrder()->limit(20)->get();
-        $relatedBlogs = Blog::inRandomOrder()->limit(5)->get();
+        $relatedBlogs = Blog::inRandomOrder()->limit(15)->get();
 
         return view('blog.index', compact('blogs', 'caro_blogs', 'relatedJobs', 'relatedBlogs'));
     }
