@@ -54,6 +54,15 @@
 
 </head>
 <body>
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+	  var js, fjs = d.getElementsByTagName(s)[0];
+	  if (d.getElementById(id)) return;
+	  js = d.createElement(s); js.id = id;
+	  js.src = 'https://connect.facebook.net/zh_HK/sdk.js#xfbml=1&version=v3.1';
+	  fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));</script>
+
     <div id="app">
         <div style="margin-bottom: 60px">@include('layouts.nav')</div>
 		<div class="container" style="width:90%;">
@@ -73,7 +82,7 @@
 							{!! $cont !!}
 						@endforeach
 						<br>
-						<div class="right"><iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2Ffreeriderhk%2F&width=450&layout=standard&action=like&show_faces=true&share=true&height=80&appId" width="260" height="80" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe></div>
+						<div class="fb-like" data-href="https://www.facebook.com/twobayjobs/" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
 					</div>
 
 					<br>
