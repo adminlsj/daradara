@@ -42,7 +42,7 @@
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     <link href="/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
 
     <!-- File Uploads -->
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
