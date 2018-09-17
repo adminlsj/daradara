@@ -7,6 +7,7 @@
 
 require('./bootstrap');
 require('./fileinput.min');
+require('./owl.carousel');
 
 window.Vue = require('vue');
 
