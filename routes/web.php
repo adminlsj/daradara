@@ -11,10 +11,6 @@
 |
 */
 
-if (env('APP_ENV') === 'production') {
-    URL::forceSchema('https');
-}
-
 Route::get('/', 'HomeController@index');
 Route::get('/contact', 'HomeController@contact');
 Route::post('/sendMail/{status}', 'HomeController@sendMail');
