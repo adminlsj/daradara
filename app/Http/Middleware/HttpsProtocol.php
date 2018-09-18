@@ -16,6 +16,7 @@ class HttpsProtocol
      */
     public function handle($request, Closure $next)
     {
+        $request->setTrustedProxies( [ $request->getClientIp() ] ); 
         if ($request->server('HTTP_X_FORWARDED_PROTO') != 'https' && App::environment() === 'production') {
             return redirect()->secure($request->getRequestUri());
         }
