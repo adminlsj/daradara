@@ -19,15 +19,6 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Google Ads -->
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <script>
-      (adsbygoogle = window.adsbygoogle || []).push({
-        google_ad_client: "ca-pub-4485968980278243",
-        enable_page_level_ads: true
-      });
-    </script>
-
     <!-- Styles -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     <link href="/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
