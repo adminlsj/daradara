@@ -86,6 +86,11 @@
 
 					<br>
 
+					<div class="visible-xs-block visible-sm-block">
+						<a href="/"><img style="width:100%; border: solid 1px #f2f2f2; border-radius: 3px" src="https://s3.amazonaws.com/twobayjobs/system/intro/poster-side.png" alt="Los Angeles"></a>
+						<br><br>
+					</div>
+
 					<div class="row hidden-xs hidden-sm">
 						<div class=" hidden-xs hidden-sm col-md-12">
 						    <h3 style="color: grey; font-weight: 300">為您推薦的貼文</h3>
