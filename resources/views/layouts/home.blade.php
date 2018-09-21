@@ -3,6 +3,9 @@
 @section('content')
 	<div class="hidden-xs" style="position: relative;" style="width: 100%">
 		<img style="margin-top: 0px; margin-bottom: 25px; width:100%" src="https://s3.amazonaws.com/twobayjobs/system/intro/poster-banner.png" alt="Los Angeles">
+		<img style="position:absolute; top: 3.5%; left: 120px; width: 50px; border: 1px solid white" src="https://s3.amazonaws.com/twobayjobs/system/intro/featured-company-freerider.png" alt="TKO">
+		<h1 style="font-family: 'Comic Sans MS'; letter-spacing:5px; font-size: 25px; color:white; font-weight: 600; position:absolute; top: 1.5%; left: 195px;">TWOBAYJOBS.COM</h1>
+		<h1 style="font-family: 'Comic Sans MS'; letter-spacing:5px; font-size: 25px; color:white; font-weight: 600; position:absolute; top: 8.5%; left: 274px;">BAY您一份兩岸筍工</h1>
 		@include('job.search-home')
 	</div>
 
