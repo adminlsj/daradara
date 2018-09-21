@@ -9636,6 +9636,20 @@ pre {
   margin-top: 5px;
 }
 
+.policy p {
+  line-height: 35px;
+  font-size: 17px;
+}
+
+.policy h3 {
+  margin-top: 40px;
+  font-weight: 600;
+}
+
+.policy .margin-top {
+  margin-top: 40px;
+}
+
 .home-nav a {
   color: #ffffff;
   font-weight: 600;

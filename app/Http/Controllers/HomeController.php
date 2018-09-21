@@ -34,6 +34,11 @@ class HomeController extends Controller
         return view('layouts.contact');
     }
 
+    public function policy()
+    {
+        return view('layouts.policy');
+    }
+
     public function sendMail(String $status)
     {
         switch ($status) {
