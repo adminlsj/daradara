@@ -11,7 +11,7 @@
     <br>
 </div>
 
-<a href="/"><img style="width:100%; border: solid 1px #f2f2f2; border-radius: 3px" src="https://s3.amazonaws.com/twobayjobs/system/intro/poster-side.png" alt="Los Angeles"></a>
+<a href="/jobs/search?location=深圳"><img style="width:100%; border: solid 1px #f2f2f2; border-radius: 3px" src="https://s3.amazonaws.com/twobayjobs/system/intro/poster-side.png" alt="Los Angeles"></a>
 
 <h3 style="color: grey; font-weight: 300; margin-top: 35px">為您推薦的工作</h3>
 <hr>
@@ -19,5 +19,5 @@
     @include('blog.related-jobs')
 </div>
 <br>
-<a href="/"><img style="width:100%; border: solid 1px #f2f2f2; border-radius: 3px" src="https://s3.amazonaws.com/twobayjobs/system/intro/poster-side.png" alt="Los Angeles"></a>
+<a href="/jobs/search?location=深圳"><img style="width:100%; border: solid 1px #f2f2f2; border-radius: 3px" src="https://s3.amazonaws.com/twobayjobs/system/intro/poster-side.png" alt="Los Angeles"></a>
 <br><br><br><br><br>
