@@ -23,7 +23,7 @@ class HomeController extends Controller
         $caro_blogs = Blog::inRandomOrder()->limit(4)->get();
         $blogs = Blog::all()->sortByDesc('created_at');
 
-        $featuredCompanies = ['騰訊', '阿里巴巴', '小米', '百度', '鏈家', '滴滴'];
+        $featuredCompanies = ['騰訊', '阿里巴巴', '小米', '百度', '鏈家', '順豐'];
         $featuredAgencies = ['exmil', 'ern', 'freerider'];
 
         return view('layouts.home', compact('blogs', 'caro_blogs', 'relatedBlogs', 'featuredCompanies', 'featuredAgencies'));
