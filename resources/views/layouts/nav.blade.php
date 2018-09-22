@@ -28,7 +28,7 @@
                         <div class="row">
                             <div class="col-xs-7" style="width: 80%">
                                 <div class="form-group">
-                                    <input style="box-shadow: none; border-radius: 2px; font-weight: 300" name="title" type="text" value="{{ request('title') }}" class="form-control" placeholder="搵翻份兩岸筍工 . . .">
+                                    <input style="box-shadow: none; border-radius: 2px; font-weight: 300" name="title" type="text" value="{{ request('title') }}" class="form-control" placeholder="幫您挑選兩岸好工作 . . .">
                                 </div>
                             </div>
                             <div class="col-xs-5" style="width: 70px; margin-left: -25px">
@@ -63,7 +63,7 @@
                 <li>
                     <form class="navbar-form" action="{{ route('job.search') }}" method="GET">
                         <div class="form-group">
-                            <input style="box-shadow: none; border-radius: 2px; font-weight: 300" name="title" type="text" class="form-control" placeholder="搵翻份兩岸筍工 . . .">
+                            <input style="box-shadow: none; border-radius: 2px; font-weight: 300" name="title" type="text" class="form-control" placeholder="幫您挑選兩岸好工作 . . .">
                         </div>
                         <button style="box-shadow: none; border-radius: 2px;" type="submit" class="btn btn-default form-control"><i class="glyphicon glyphicon-search"></i></button>
                     </form>
