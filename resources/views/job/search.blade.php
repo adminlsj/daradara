@@ -11,11 +11,11 @@
       gtag('config', 'UA-125786247-1');
     </script>
 
-    <meta property="og:url" content="/jobs/search?title=企劃宣傳專員" />
+    <meta property="og:url" content="/jobs/search?title=市場推廣" />
     <meta property="og:type" content="article" />
-    <meta property="og:title" content="企劃宣傳專員" />
-    <meta property="og:description" content="1、負責公司企業文化的落地執行及宣傳。2、負責公司激勵活動策劃與執行及落實跟進3、負責公司內部公眾號運營及維護。4、公司互助金理事會運營及維護。5、公司年會、季度會議、體育類賽事等其他活動的協助。6、能熟練使用PS、視頻剪輯者優先。" />
-    <meta property="og:image" content="https://s3.amazonaws.com/twobayjobs/system/intro/temp-pic-lianjia.jpg" />
+    <meta property="og:title" content="市場推廣專員 (海外市場)" />
+    <meta property="og:description" content="1.制定海外推廣市場規劃，有效推廣方案落地。2.線上推廣文案的撰寫，包括自媒體軟/硬文、廣告語、網站文案等。3.組織策劃能力，具有線上線下活動統籌能力。4有效制定規劃，按計劃有序開展工作。5.善於溝通、協調跨部門事宜" />
+    <meta property="og:image" content="https://s3.amazonaws.com/twobayjobs/system/intro/temp-pic-shunfeng.jpg" />
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
