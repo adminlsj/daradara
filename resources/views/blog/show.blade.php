@@ -11,16 +11,6 @@
 	  gtag('config', 'UA-125786247-1');
 	</script>
 
-
-    <!-- Google Adsense -->
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-	<script>
-	  (adsbygoogle = window.adsbygoogle || []).push({
-	    google_ad_client: "ca-pub-4485968980278243",
-	    enable_page_level_ads: true
-	  });
-	</script>
-
     <meta property="og:url" content="{{ route('blog.show', ['blog' => $blog->id]) }}" />
 	<meta property="og:type" content="article" />
 	<meta property="og:title" content="{{ $blog->title }}" />
