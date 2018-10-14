@@ -109,7 +109,6 @@
 				</div>
 				<div class="hidden-xs hidden-sm row">
 					<div class="col-sm-12 col-md-12">
-						<img class="featured-category d-block img-responsive" src="https://s3.amazonaws.com/twobayjobs/system/intro/poster-side.png" alt="Chicago">
 					    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 					    <!-- Home Page Ads -->
 					    <ins class="adsbygoogle"
