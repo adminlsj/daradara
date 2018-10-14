@@ -35,8 +35,6 @@ $('#avatar-upload').on("change", function(e) {
     $("#avatar-form").submit();
 });
 
-document.getElementById('location-home').focus()
-
 $(document).ready(function(){
 	$('#slide-out-arrow').click(function() {
 		var x = document.getElementById("slide-in-content");
@@ -80,5 +78,9 @@ $(document).ready(function(){
 			$('.home-nav-scroll-show').fadeOut();
 		}
 	});
+});
+
+$(document).ready(function(){
+	document.getElementById('location-home').focus()
 });
 
