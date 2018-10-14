@@ -5,7 +5,6 @@
 		</div>
 		<div class="col-xs-5 col-sm-3 col-md-3">
 			<select onchange="this.form.submit()" id="location" name="location">
-				<option value="">選擇地點 . . .</option>
 				@foreach (App\Job::$country as $key => $element)
 					<option value="{{ $key }}" {{ request('location') == $key ? 'selected' : ''}}>{{ $element }}</option>
 				@endforeach
