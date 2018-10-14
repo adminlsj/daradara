@@ -109,7 +109,17 @@
 				</div>
 				<div class="hidden-xs hidden-sm row">
 					<div class="col-sm-12 col-md-12">
-						<img class="featured-category d-block img-responsive" src="https://s3.amazonaws.com/twobayjobs/system/intro/poster-side.png" alt="Chicago">
+						<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+						<!-- Home Page Ads -->
+						<ins class="adsbygoogle"
+						     style="display:block"
+						     data-ad-client="ca-pub-4485968980278243"
+						     data-ad-slot="9914751067"
+						     data-ad-format="auto"
+						     data-full-width-responsive="true"></ins>
+						<script>
+						(adsbygoogle = window.adsbygoogle || []).push({});
+						</script>
 					</div>
 				</div>
 				<div class="hidden-xs hidden-sm" style="margin-top: 40px;">
