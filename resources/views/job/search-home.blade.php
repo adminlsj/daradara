@@ -4,10 +4,11 @@
 			<input type="text" value="{{ request('title') }}" id="title" name="title" placeholder="職位 / 公司名稱 . . .">
 		</div>
 		<div class="col-sm-6">
-			<select id="location" name="location">
-				@foreach (App\Job::$country as $key => $element)
-					<option value="{{ $key }}" {{ request('location') == $key ? 'selected' : ''}}>{{ $element }}</option>
-				@endforeach
+			<select id="location-home" name="location">
+				<option value="深圳" {{ request('location') == '深圳' ? 'selected' : ''}}>深圳</option>
+				<option disabled value="北京" {{ request('location') == '北京' ? 'selected' : ''}}>北京</option>
+				<option disabled value="上海" {{ request('location') == '上海' ? 'selected' : ''}}>上海</option>
+				<option disabled value="廣州" {{ request('location') == '廣州' ? 'selected' : ''}}>廣州</option>
 			</select>
 		</div>
 	</div>
