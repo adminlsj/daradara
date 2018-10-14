@@ -11,6 +11,8 @@
       gtag('config', 'UA-125786247-1');
     </script>
 
+    <title>{{ config('app.name', 'Laravel') }} | 幫您挑選兩岸好工作</title>
+
     <meta property="og:url" content="/jobs/search?title=市場推廣" />
     <meta property="og:type" content="article" />
     <meta property="og:title" content="市場推廣專員 (海外市場)" />
