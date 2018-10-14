@@ -13,18 +13,6 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <!-- Home Page Ads -->
-    <ins class="adsbygoogle"
-         style="display:block"
-         data-ad-client="ca-pub-4485968980278243"
-         data-ad-slot="9914751067"
-         data-ad-format="auto"
-         data-full-width-responsive="true"></ins>
-    <script>
-    (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
