@@ -81,7 +81,7 @@ $("[id^='selectJob']").on('submit', function(e) {
             $("#redirectToRegister" + data.job_id).css("display","initial");
         },
         error: function(jqXHR, textStatus, errorThrown){
-            alert(textStatus);
+            alert('Please Refresh the Page');
         }
     })
 });
