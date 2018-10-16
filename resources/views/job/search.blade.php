@@ -13,10 +13,10 @@
 
     <title>{{ config('app.name', 'Laravel') }} | 兩岸好工作</title>
 
-    <meta property="og:url" content="/jobs/search?title=行政&location=深圳" />
+    <meta property="og:url" content="/jobs/search?title=產品&location=深圳" />
     <meta property="og:type" content="article" />
-    <meta property="og:title" content="行政助理" />
-    <meta property="og:description" content="1、負責全面推動部門文化宣傳建設工作；2、負責部門活動方案的製訂與組織實施；3、負責部門團隊建設與活動創新；4、負責部門助理崗位工作（考勤、報銷、會議等）。" />
+    <meta property="og:title" content="產品運營" />
+    <meta property="og:description" content="1. 負責產品市場推廣，包括製作產品數據表、手冊、網站、Flash演示、媒體專題以及展會演示等；2. 負責用戶調研、需求收集以及分析，推動產品優化；3. 負責用戶溝通；" />
     <meta property="og:image" content="https://s3.amazonaws.com/twobayjobs/system/intro/temp-pic-shunfeng.jpg" />
 
     <meta charset="utf-8">
