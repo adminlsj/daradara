@@ -53,11 +53,7 @@ $("[id^='selectJob']").on('submit', function(e) {
             $("#job-responsibility").text(data.job_responsibility);
             $("#job-requirement").text(data.job_requirement);
             $("#job-location").text(data.job_location);
-            if (data.job_salary == 1) {
-                $("#job-salary").text('薪資面議');
-            } else {
-                $("#job-salary").text('RMB ¥' + data.job_salary + ' / 月');
-            }
+            $("#job-salary").text('RMB ¥' + (data.job_salary / 1000 - 2) + '-' + (data.job_salary / 1000 + 2) + 'k / 月');
 
             $("#selectJobBtn" + data.current_id).css("background-color","white");
             $("#selectJobBtn" + data.current_id).css("color","#636b6f");
