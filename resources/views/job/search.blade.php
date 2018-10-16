@@ -13,10 +13,10 @@
 
     <title>{{ config('app.name', 'Laravel') }} | 兩岸好工作</title>
 
-    <meta property="og:url" content="/jobs/search?title=市場推廣" />
+    <meta property="og:url" content="/jobs/search?title=平面設計&location=深圳" />
     <meta property="og:type" content="article" />
-    <meta property="og:title" content="市場推廣專員 (海外市場)" />
-    <meta property="og:description" content="1.制定海外推廣市場規劃，有效推廣方案落地。2.線上推廣文案的撰寫，包括自媒體軟/硬文、廣告語、網站文案等。3.組織策劃能力，具有線上線下活動統籌能力。4有效制定規劃，按計劃有序開展工作。5.善於溝通、協調跨部門事宜" />
+    <meta property="og:title" content="平面設計師" />
+    <meta property="og:description" content="1、負責新媒體平台和公司內部宣傳的頁面設計和整體視覺輸出。2、負責核心活動的整體視覺風格定義，在過程中構建和優化設計頁面。3、洞察設計流行趨勢，理解主題性活動意義，設計出符合公司層級的創新頁面設計方案。4、配合完成領導佈置的各項工作任務" />
     <meta property="og:image" content="https://s3.amazonaws.com/twobayjobs/system/intro/temp-pic-shunfeng.jpg" />
 
     <meta charset="utf-8">
