@@ -13,10 +13,10 @@
 
     <title>{{ config('app.name', 'Laravel') }} | 兩岸好工作</title>
 
-    <meta property="og:url" content="/jobs/search?title=平面設計&location=深圳" />
+    <meta property="og:url" content="/jobs/search?title=行政&location=深圳" />
     <meta property="og:type" content="article" />
-    <meta property="og:title" content="平面設計師" />
-    <meta property="og:description" content="1、負責新媒體平台和公司內部宣傳的頁面設計和整體視覺輸出。2、負責核心活動的整體視覺風格定義，在過程中構建和優化設計頁面。3、洞察設計流行趨勢，理解主題性活動意義，設計出符合公司層級的創新頁面設計方案。4、配合完成領導佈置的各項工作任務" />
+    <meta property="og:title" content="行政助理" />
+    <meta property="og:description" content="1、負責全面推動部門文化宣傳建設工作；2、負責部門活動方案的製訂與組織實施；3、負責部門團隊建設與活動創新；4、負責部門助理崗位工作（考勤、報銷、會議等）。" />
     <meta property="og:image" content="https://s3.amazonaws.com/twobayjobs/system/intro/temp-pic-shunfeng.jpg" />
 
     <meta charset="utf-8">
