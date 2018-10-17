@@ -128,10 +128,10 @@ class JobController extends Controller
         $currentJob = $jobs->first();
 
         if ($currentJob != null) {
-            $btn_text = 'Apply';
+            $btn_text = '投遞簡歷';
             $disabled = '';
             if (auth()->check() && App::where('user_id', auth()->user()->id)->where('job_id', $currentJob->id)->count() != 0) {
-                $btn_text = 'Applied';
+                $btn_text = '已應徵';
                 $disabled = 'disabled';
             }
         }
