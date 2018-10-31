@@ -72,7 +72,7 @@
 							{!! $cont !!}
 						@endforeach
 						<br>
-						<div style="word-wrap: break-word" class="fb-like" data-href="https://www.facebook.com/twobayjobs/" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+						<div style="word-wrap: break-word !important" class="fb-like" data-href="https://www.facebook.com/twobayjobs/" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
 					</div>
 
 					<br>
