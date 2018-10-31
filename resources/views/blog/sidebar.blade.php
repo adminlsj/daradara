@@ -24,8 +24,8 @@
         <script>
         (adsbygoogle = window.adsbygoogle || []).push({});
         </script>
+        <br>
     </div>
-    <br>
 </div>
 
 <div class="visible-xs-block visible-sm-block">
