@@ -111,7 +111,7 @@ class BlogController extends Controller
         $similar_blogs = Blog::inRandomOrder()->limit(10)->get();
 
         $relatedJobs = Job::inRandomOrder()->limit(20)->get();
-        $relatedBlogs = Blog::inRandomOrder()->limit(15)->get();
+        $relatedBlogs = Blog::inRandomOrder()->limit(20)->get();
 
         $fb_title = $blog->content;
         $fb_title = str_replace('(SUB)', '', $fb_title);
