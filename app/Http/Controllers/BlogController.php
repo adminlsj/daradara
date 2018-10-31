@@ -108,7 +108,7 @@ class BlogController extends Controller
 
         $content = explode('(LOGO)', $content);
 
-        $similar_blogs = Blog::inRandomOrder()->limit(10)->get();
+        $similar_blogs = Blog::inRandomOrder()->limit(20)->get();
 
         $relatedJobs = Job::inRandomOrder()->limit(20)->get();
         $relatedBlogs = Blog::inRandomOrder()->limit(20)->get();
