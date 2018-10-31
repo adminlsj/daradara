@@ -8,7 +8,7 @@
             @include('blog.related-blogs')
         </div>
         @if ($loop->iteration % 10 == 0)
-            <div class="hidden-xs hidden-sm row">
+            <div class="hidden-xs hidden-sm">
                 <div class="col-sm-12 col-md-12">
                     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                     <!-- Home Page Ads -->
@@ -21,6 +21,7 @@
                     <script>
                     (adsbygoogle = window.adsbygoogle || []).push({});
                     </script>
+                    <br>
                 </div>
             </div>
 
@@ -37,6 +38,7 @@
                     <script>
                     (adsbygoogle = window.adsbygoogle || []).push({});
                     </script>
+                    <br>
                 </div>
             </div>
         @endif
