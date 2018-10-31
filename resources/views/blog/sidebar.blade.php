@@ -11,22 +11,6 @@
     <br>
 </div>
 
-<div class="hidden-xs hidden-sm row">
-    <div class="col-sm-12 col-md-12">
-        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <!-- Blog Ads -->
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-4485968980278243"
-             data-ad-slot="6157737790"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-        <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-    </div>
-</div>
-
 <div class="visible-xs-block visible-sm-block row">
     <div class="col-sm-12 col-md-12">
         <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
