@@ -77,7 +77,7 @@
 
 					<br>
 
-					<div class="visible-xs-block visible-sm-block">
+					<div class="container visible-xs-block visible-sm-block">
 						<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 				        <!-- Home Page Ads -->
 				        <ins class="adsbygoogle"
@@ -90,6 +90,7 @@
 				        (adsbygoogle = window.adsbygoogle || []).push({});
 				        </script>
 					</div>
+					<br>
 
 					<div class="row hidden-xs hidden-sm">
 						<div class=" hidden-xs hidden-sm col-md-12">
