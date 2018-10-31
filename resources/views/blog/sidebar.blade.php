@@ -46,7 +46,7 @@
     <br>
 </div>
 
-<h3 style="color: grey; font-weight: 300; margin-top: 10px">為您推薦的工作</h3>
+<h3 style="color: grey; font-weight: 300;">為您推薦的工作</h3>
 <hr>
 <div class="col-md-12">
     @include('blog.related-jobs')
