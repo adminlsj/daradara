@@ -11,7 +11,7 @@
     <br>
 </div>
 
-<div class="hidden-xs hidden-sm row">
+<div class="row">
     <div class="col-sm-12 col-md-12">
         <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
         <!-- Home Page Ads -->
