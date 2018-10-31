@@ -77,7 +77,7 @@
 
 					<br>
 
-					<div class="container visible-xs-block visible-sm-block" style="padding: 0px 20px !important">
+					<div class="container visible-xs-block visible-sm-block">
 						<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 				        <!-- Home Page Ads -->
 				        <ins class="adsbygoogle"
