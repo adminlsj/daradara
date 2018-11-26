@@ -107,7 +107,7 @@ class BlogController extends Controller
         $content = str_replace('(BLANK)', '<p style="margin:35px"></p>', $content);
 
         $content = str_replace('(Adsense)',
-            '<div class="col-sm-12 col-md-12 col-md-12" style="margin-top:10px;">
+            '<div class="col-sm-12 col-md-12 col-md-12" style="margin-top:20px;">
                 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                 <!-- Home Page Ads -->
                 <ins class="adsbygoogle"
