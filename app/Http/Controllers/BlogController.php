@@ -107,7 +107,7 @@ class BlogController extends Controller
         $content = str_replace('(BLANK)', '<p style="margin:35px"></p>', $content);
 
         $content = str_replace('(Adsense)',
-            '<div class="col-sm-12 col-md-12 col-md-12" style="margin-top:20px;">
+            '<div class="col-sm-12 col-md-12 col-md-12" style="margin-top:25px;">
                 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                 <!-- Home Page Ads -->
                 <ins class="adsbygoogle"
@@ -138,6 +138,7 @@ class BlogController extends Controller
         $fb_title = str_replace('(IMG)', '', $fb_title);
         $fb_title = str_replace('(/IMG)', '', $fb_title);
         $fb_title = str_replace('(BLANK)', '', $fb_title);
+        $fb_title = str_replace('(Adsense)', '', $fb_title);
 
         return view('blog.show', compact('blog', 'content', 'similar_blogs', 'relatedJobs', 'relatedBlogs', 'fb_title', 'displayJobs'));
     }
