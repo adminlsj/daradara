@@ -106,6 +106,23 @@ class BlogController extends Controller
 
         $content = str_replace('(BLANK)', '<p style="margin:35px"></p>', $content);
 
+        $content = str_replace('(Adsense)',
+            '<div class="col-sm-12 col-md-12 col-md-12">
+                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <!-- Home Page Ads -->
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-4485968980278243"
+                     data-ad-slot="9914751067"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+                <br>
+            </div>'
+        , $content);
+
         $content = explode('(LOGO)', $content);
 
         $similar_blogs = Blog::inRandomOrder()->limit(20)->get();
