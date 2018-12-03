@@ -28,7 +28,7 @@ class BlogController extends Controller
         $blogs = Blog::all()->sortByDesc('created_at');
         $caro_blogs = Blog::inRandomOrder()->limit(5)->get();
 
-        $relatedBlogs = Blog::inRandomOrder()->limit(20)->get();
+        $relatedBlogs = Blog::inRandomOrder()->get();
 
         return view('blog.index', compact('blogs', 'caro_blogs', 'relatedJobs', 'relatedBlogs'));
     }
@@ -125,9 +125,9 @@ class BlogController extends Controller
 
         $content = explode('(LOGO)', $content);
 
-        $similar_blogs = Blog::inRandomOrder()->limit(20)->get();
+        $similar_blogs = Blog::inRandomOrder()->get();
 
-        $relatedBlogs = Blog::inRandomOrder()->limit(20)->get();
+        $relatedBlogs = Blog::inRandomOrder()->get();
 
         $fb_title = $blog->content;
         $fb_title = str_replace('(SUB)', '', $fb_title);
@@ -139,7 +139,7 @@ class BlogController extends Controller
         $fb_title = str_replace('(BLANK)', '', $fb_title);
         $fb_title = str_replace('(Adsense)', '', $fb_title);
 
-        return view('blog.show', compact('blog', 'content', 'similar_blogs', 'relatedJobs', 'relatedBlogs', 'fb_title', 'displayJobs'));
+        return view('blog.show', compact('blog', 'content', 'similar_blogs', 'relatedBlogs', 'fb_title', 'displayJobs'));
     }
 
     /**
