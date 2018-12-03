@@ -8,8 +8,8 @@
             @include('blog.related-blogs')
         </div>
         @if ($loop->iteration % 10 == 0)
-            <div class="hidden-xs hidden-sm row">
-                <div class="col-sm-12 col-md-12">
+            <div class="row">
+                <div style="background-color: #f0f0f0; margin: 10px 0px 25px 0px;" class="col-xs-12 col-sm-12 col-md-12">
                     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                     <!-- Sidebar -->
                     <ins class="adsbygoogle"
@@ -21,24 +21,6 @@
                     <script>
                     (adsbygoogle = window.adsbygoogle || []).push({});
                     </script>
-                    <br>
-                </div>
-            </div>
-
-            <div class="visible-xs-block visible-sm-block">
-                <div class="col-sm-12 col-md-12">
-                    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                    <!-- Sidebar -->
-                    <ins class="adsbygoogle"
-                         style="display:block"
-                         data-ad-client="ca-pub-4485968980278243"
-                         data-ad-slot="4060710969"
-                         data-ad-format="auto"
-                         data-full-width-responsive="true"></ins>
-                    <script>
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                    </script>
-                    <br>
                 </div>
             </div>
         @endif

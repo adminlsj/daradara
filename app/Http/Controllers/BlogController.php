@@ -104,10 +104,10 @@ class BlogController extends Controller
         $content = str_replace('(IMG)', '<img class="img-responsive border-radius-2" style="padding-top:15px;padding-bottom:15px;width:100%; height:100%" src="https://s3.amazonaws.com/twobayjobs/blogImgs/originals/'.$blog->id.'/', $content);
         $content = str_replace('(/IMG)', '.jpg" alt="First slide">', $content);
 
-        $content = str_replace('(BLANK)', '<p style="margin:35px"></p>', $content);
+        $content = str_replace('(BLANK)', '<p style="margin:30px"></p>', $content);
 
         $content = str_replace('(Adsense)',
-            '<div class="col-sm-12 col-md-12 col-md-12" style="margin-top:25px;">
+            '<div class="col-sm-12 col-md-12 col-md-12" style="margin:25px 0px; background-color:#f0f0f0;">
                 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                 <!-- Content -->
                 <ins class="adsbygoogle"
@@ -119,7 +119,6 @@ class BlogController extends Controller
                 <script>
                 (adsbygoogle = window.adsbygoogle || []).push({});
                 </script>
-                <br>
             </div>'
         , $content);
 

@@ -8,7 +8,10 @@
                     </a>
                 </li>
                 <li class="hidden-xs hidden-sm">
-                    <a style="font-size: 50px; font-weight: 400;" href="{{ url('/') }}">{{ config('app.name', 'FreeRider') }}</a>
+                    <a style="font-weight: 400;" href="{{ url('/') }}">
+                        <div style="font-size: 50px; margin-top:10px; margin-bottom: 15px">{{ config('app.name', 'FreeRider') }}</div>
+                        <div style="font-size: 20px; text-align: center; color: #dbdbdb">自由旅行人</div>
+                    </a>
                 </li>
             </ul>
 
