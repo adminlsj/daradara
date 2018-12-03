@@ -13,7 +13,7 @@
             </ul>
 
             <!-- Right Side Of Navbar -->
-            <ul class="nav navbar-nav navbar-right">
+            <ul style="z-index: 100; background-color: gray" class="nav navbar-nav navbar-right">
                 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                 <!-- Navbar Ads -->
                 <ins class="adsbygoogle"
