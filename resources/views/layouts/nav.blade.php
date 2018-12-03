@@ -13,7 +13,7 @@
             </ul>
 
             <!-- Right Side Of Navbar -->
-            <ul style="background-color: gray; margin-left:0px; margin-right: 0px; margin-top: 5px" class="nav navbar-nav navbar-right">
+            <ul style="background-color: gray; margin-left:0px; margin-right: 0px;" class="nav navbar-nav navbar-right">
                 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                 <!-- Navbar -->
                 <ins class="adsbygoogle hidden-xs hidden-sm"
@@ -43,6 +43,12 @@
                 <li>
                     <a href="{{ url('/') }}">
                         旅行
+                    </a>
+                </li>
+                </li>
+                <li>
+                    <a href="{{ url('/') }}">
+                        日本
                     </a>
                 </li>
             </ul>
