@@ -15,13 +15,9 @@
             <!-- Right Side Of Navbar -->
             <ul style="background-color: gray; margin-left:0px; margin-right: 0px; margin-top: 5px" class="nav navbar-nav navbar-right">
                 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                <!-- Navbar Desktop -->
-                <ins class="adsbygoogle hidden-xs hidden-sm"
+                <!-- Navbar -->
+                <ins class="adsbygoogle"
                      style="display:inline-block;width:50vw;height:90px"
-                     data-ad-client="ca-pub-4485968980278243"
-                     data-ad-slot="1745786231"></ins>
-                <ins class="adsbygoogle visible-xs-block visible-sm-block"
-                     style="display:inline-block;width:100%;height:100px;"
                      data-ad-client="ca-pub-4485968980278243"
                      data-ad-slot="1745786231"></ins>
                 <script>

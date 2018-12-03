@@ -109,7 +109,7 @@ class BlogController extends Controller
         $content = str_replace('(Adsense)',
             '<div class="col-sm-12 col-md-12 col-md-12" style="margin-top:25px;">
                 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                <!-- Home Page Ads -->
+                <!-- Content -->
                 <ins class="adsbygoogle"
                      style="display:block"
                      data-ad-client="ca-pub-4485968980278243"
