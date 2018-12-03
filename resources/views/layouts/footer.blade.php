@@ -2,7 +2,7 @@
     <div style="width: 90%" class="container">
         <div class="row">
             <div style="text-align: center" class="col-md-3">
-                <h2 class="logo"><a href="#">TwoBayJobs</a></h2>
+                <h2 class="logo"><a href="#">FreeRider</a></h2>
             </div>
             <div style="text-align: center" class="col-md-2">
                 <h5>Get started</h5>

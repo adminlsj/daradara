@@ -1,8 +1,4 @@
 <div class="hidden-xs hidden-sm">
-	<div style="margin-top: 40px;">
-		<h3 style="color: grey; font-weight: 300">最熱門的貼文</h3>
-		<hr>
-	</div>
 	<div class="row">
 		<div class="col-md-12">
 			<div class="blog-carousel owl-carousel owl-theme">

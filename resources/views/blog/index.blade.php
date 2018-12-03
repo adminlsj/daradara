@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container" style="width: 90%">
+<div class="container mobile-container">
 	<div class="row">
 		<div class="col-md-8 col-ms-12">
 			@include('blog.index-main')

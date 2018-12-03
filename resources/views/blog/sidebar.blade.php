@@ -1,5 +1,5 @@
 <div>
-    <div style="margin-top: 40px;">
+    <div>
         <h3 style="color: grey; font-weight: 300">為您推薦的貼文</h3>
         <hr>
     </div>

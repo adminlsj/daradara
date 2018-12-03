@@ -6,7 +6,6 @@
  */
 
 require('./bootstrap');
-require('./fileinput.min');
 require('./owl.carousel');
 
 window.Vue = require('vue');
@@ -23,33 +22,10 @@ const app = new Vue({
     el: '#app'
 });
 
-require('./quantityBtn');
-
 require('./comment');
-require('./selectJob');
-require('./saveJob');
-
-require('./twbsPagination');
 
 $('#avatar-upload').on("change", function(e) {
     $("#avatar-form").submit();
-});
-
-$(document).ready(function(){
-	$('#slide-out-arrow').click(function() {
-		var x = document.getElementById("slide-in-content");
-	    if (x.style.display === "none") {
-	        $('#slide-in-content').slideDown();
-	        $(this).html('keyboard_arrow_up');
-	        $('#slide-out-blank-left').slideDown();
-	        $('#slide-out-blank-right').slideDown();
-	    } else {
-	        $('#slide-in-content').slideUp();
-	        $(this).html('keyboard_arrow_down');
-	        $('#slide-out-blank-left').slideUp();
-	        $('#slide-out-blank-right').slideUp();
-	    }
-	});
 });
 
 $(document).ready(function(){
@@ -65,8 +41,8 @@ $(document).ready(function(){
 		dots: false,
 	    nav: true,
 	    navText: [
-	      '<i class="material-icons" style="font-size:36px; color:#666666">keyboard_arrow_left</i>',
-	      '<i class="material-icons" style="font-size:36px; color:#666666">chevron_right</i>'
+	      '<i class="material-icons" style="font-size:50px; color:white">keyboard_arrow_left</i>',
+	      '<i class="material-icons" style="font-size:50px; color:white">chevron_right</i>'
 	      ]
 	});
 

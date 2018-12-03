@@ -13,9 +13,9 @@
 
 Route::resource('blog', 'BlogController');
 Route::get('/', 'BlogController@index');
-Route::get('/contact', 'HomeController@contact');
-Route::get('/policy', 'HomeController@policy');
-Route::post('/sendMail/{status}', 'HomeController@sendMail');
+Route::get('/contact', 'BlogController@index@contact');
+Route::get('/policy', 'BlogController@policy');
+Route::post('/sendMail/{status}', 'BlogController@sendMail');
 
 Auth::routes();
 Route::get('auth/{provider}', 'Auth\LoginController@redirectToProvider');

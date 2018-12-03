@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container" style="width:90%;">
+<div class="container mobile-container">
 	<div class="row">
-		<div style="margin-top:40px; " class="col-md-8 col-ms-12 blog-content">
+		<div class="col-md-8 col-ms-12 blog-content">
 			<img class="img-responsive border-radius-2" style="width:100%;height:100%" src="https://s3.amazonaws.com/twobayjobs/blogImgs/originals/{{ $blog->id }}/{{ $blog->blogImgs->sortby('created_at')->first()->filename }}" alt="First slide">
 			
 			<div class="">
@@ -18,7 +18,7 @@
 					{!! $cont !!}
 				@endforeach
 				<br>
-				<div style="word-wrap: break-word !important" class="fb-like" data-href="https://www.facebook.com/twobayjobs/" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+				<div style="word-wrap: break-word !important" class="fb-like" data-href="https://www.facebook.com/freeriderhk/" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
 			</div>
 
 			<br>

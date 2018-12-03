@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Storage;
 use File;
 use Image;
+use App\Mail\Contact;
+use App\Mail\ContactUser;
 
 class BlogController extends Controller
 {
@@ -172,5 +174,32 @@ class BlogController extends Controller
     public function destroy(Blog $blog)
     {
         //
+    }
+
+    public function contact()
+    {
+        return view('layouts.contact');
+    }
+
+    public function policy()
+    {
+        return view('layouts.policy');
+    }
+
+    public function sendMail(String $status)
+    {
+        switch ($status) {
+            case 'contact':
+                $user_email = request('email');
+                $title = request('title');
+                $text = request('text');
+                \Mail::to('u3514481@connect.hku.hk')->send(new Contact($user_email, $title, $text));
+                \Mail::to(request('email'))->send(new ContactUser($user_email, $title, $text));
+                break;
+            
+            default:
+                break;
+        }
+        return redirect('/');
     }
 }
