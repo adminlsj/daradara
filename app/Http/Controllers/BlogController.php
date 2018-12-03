@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Blog;
 use App\BlogImg;
-use App\Job;
 use Illuminate\Http\Request;
 use Storage;
 use File;
@@ -27,7 +26,6 @@ class BlogController extends Controller
         $blogs = Blog::all()->sortByDesc('created_at');
         $caro_blogs = Blog::inRandomOrder()->limit(5)->get();
 
-        $relatedJobs = Job::inRandomOrder()->limit(20)->get();
         $relatedBlogs = Blog::inRandomOrder()->limit(20)->get();
 
         return view('blog.index', compact('blogs', 'caro_blogs', 'relatedJobs', 'relatedBlogs'));
@@ -127,7 +125,6 @@ class BlogController extends Controller
 
         $similar_blogs = Blog::inRandomOrder()->limit(20)->get();
 
-        $relatedJobs = Job::inRandomOrder()->limit(20)->get();
         $relatedBlogs = Blog::inRandomOrder()->limit(20)->get();
 
         $fb_title = $blog->content;

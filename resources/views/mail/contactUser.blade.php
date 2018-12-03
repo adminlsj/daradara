@@ -12,9 +12,9 @@ Thank you for reaching us. Your query has been received, and we will be in conta
 <div><span style="font-weight: 600">Content: </span>{{ $text }}</div>
 
 @component('mail::button', ['url' => '/'])
-<span style="font-size: 15px">TwoBayJobs</span>
+<span style="font-size: 15px">FreeRider</span>
 @endcomponent
 
-Thanks for using TwoBayJobs,<br>
+Thanks for using FreeRider,<br>
 {{ config('app.name') }}
 @endcomponent

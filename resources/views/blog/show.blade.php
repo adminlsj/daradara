@@ -1,134 +1,74 @@
-<!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}">
-<head>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-125786247-1"></script>
-	<script>
-	  window.dataLayer = window.dataLayer || [];
-	  function gtag(){dataLayer.push(arguments);}
-	  gtag('js', new Date());
+@extends('layouts.app')
 
-	  gtag('config', 'UA-125786247-1');
-	</script>
+@section('content')
+<div class="container" style="width:90%;">
+	<div class="row">
+		<div style="margin-top:40px; " class="col-md-8 col-ms-12 blog-content">
+			<img class="img-responsive border-radius-2" style="width:100%;height:100%" src="https://s3.amazonaws.com/twobayjobs/blogImgs/originals/{{ $blog->id }}/{{ $blog->blogImgs->sortby('created_at')->first()->filename }}" alt="First slide">
+			
+			<div class="">
+				<h4 style="padding-top: 10px; padding-bottom: 20px">
+					{{ $blog->title }}
+					<span class="pull-right" style="font-size:15px;font-weight:300">
+						<div style="margin-bottom:-25px">{{ Carbon\Carbon::parse($blog->created_at)->format('Y年m月d日') }}</div>
+					</span>
+				</h4>
 
-    <meta property="og:url" content="{{ route('blog.show', ['blog' => $blog->id]) }}" />
-	<meta property="og:type" content="article" />
-	<meta property="og:title" content="{{ $blog->title }}" />
-	<meta property="og:description" content="{{ str_limit($fb_title, 50) }}" />
-	<meta property="og:image" content="https://s3.amazonaws.com/twobayjobs/blogImgs/originals/{{ $blog->id }}/{{ $blog->blogImgs->sortby('created_at')->first()->filename }}" />
+				@foreach ($content as $cont)
+					{!! $cont !!}
+				@endforeach
+				<br>
+				<div style="word-wrap: break-word !important" class="fb-like" data-href="https://www.facebook.com/twobayjobs/" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+			</div>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">	
+			<br>
 
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+			<div class="container visible-xs-block visible-sm-block">
+				<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+		        <!-- Home Page Ads -->
+		        <ins class="adsbygoogle"
+		             style="display:block"
+		             data-ad-client="ca-pub-4485968980278243"
+		             data-ad-slot="9914751067"
+		             data-ad-format="auto"
+		             data-full-width-responsive="true"></ins>
+		        <script>
+		        (adsbygoogle = window.adsbygoogle || []).push({});
+		        </script>
+		        <br>
+			</div>
 
-    <title>{{ config('app.name', 'Laravel') }} | 兩岸好工作</title>
+			<div class="row hidden-xs hidden-sm">
+				<div class=" hidden-xs hidden-sm col-md-12">
+				    <h3 style="color: grey; font-weight: 300">為您推薦的貼文</h3>
+					<hr>
+				</div>
 
-    <!-- Styles -->
-    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
-    <link href="/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+				@foreach ($similar_blogs as $blog)
+					<div class="col-md-6 col-ms-12">
+						<div class="card">
+			                <a href="{{ route('blog.show', ['blog' => $blog->id]) }}"><img class="img-responsive" src="https://s3.amazonaws.com/twobayjobs/blogImgs/thumbnails/{{ $blog->id }}/{{ $blog->blogImgs->sortby('created_at')->first()->filename }}" alt="First slide"></a>
 
-    <!-- File Uploads -->
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.4/js/plugins/piexif.min.js" type="text/javascript"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.4/js/plugins/sortable.min.js" type="text/javascript"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.4/js/plugins/purify.min.js" type="text/javascript"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.4/js/locales/LANG.js"></script>
-
-    <link rel="shortcut icon" type="image/x-icon" href="https://s3.amazonaws.com/twobayjobs/system/intro/browser-icon.ico"/>
-</head>
-<body>
-	<div id="fb-root"></div>
-	<script>(function(d, s, id) {
-	  var js, fjs = d.getElementsByTagName(s)[0];
-	  if (d.getElementById(id)) return;
-	  js = d.createElement(s); js.id = id;
-	  js.src = 'https://connect.facebook.net/zh_HK/sdk.js#xfbml=1&version=v3.1';
-	  fjs.parentNode.insertBefore(js, fjs);
-	}(document, 'script', 'facebook-jssdk'));</script>
-
-    <div id="app">
-        <div style="margin-bottom: 60px">@include('layouts.nav')</div>
-		<div class="container" style="width:90%;">
-			<div class="row">
-				<div style="margin-top:40px; " class="col-md-8 col-ms-12 blog-content">
-					<img class="img-responsive border-radius-2" style="width:100%;height:100%" src="https://s3.amazonaws.com/twobayjobs/blogImgs/originals/{{ $blog->id }}/{{ $blog->blogImgs->sortby('created_at')->first()->filename }}" alt="First slide">
-					
-					<div class="">
-						<h4 style="padding-top: 10px; padding-bottom: 20px">
-							{{ $blog->title }}
-							<span class="pull-right" style="font-size:15px;font-weight:300">
-								<div style="margin-bottom:-25px">{{ Carbon\Carbon::parse($blog->created_at)->format('Y年m月d日') }}</div>
-							</span>
-						</h4>
-
-						@foreach ($content as $cont)
-							{!! $cont !!}
-						@endforeach
-						<br>
-						<div style="word-wrap: break-word !important" class="fb-like" data-href="https://www.facebook.com/twobayjobs/" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
-					</div>
-
-					<br>
-
-					<div class="container visible-xs-block visible-sm-block">
-						<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-				        <!-- Home Page Ads -->
-				        <ins class="adsbygoogle"
-				             style="display:block"
-				             data-ad-client="ca-pub-4485968980278243"
-				             data-ad-slot="9914751067"
-				             data-ad-format="auto"
-				             data-full-width-responsive="true"></ins>
-				        <script>
-				        (adsbygoogle = window.adsbygoogle || []).push({});
-				        </script>
-				        <br>
-					</div>
-
-					<div class="row hidden-xs hidden-sm">
-						<div class=" hidden-xs hidden-sm col-md-12">
-						    <h3 style="color: grey; font-weight: 300">為您推薦的貼文</h3>
-							<hr>
-						</div>
-
-						@foreach ($similar_blogs as $blog)
-							<div class="col-md-6 col-ms-12">
-								<div class="card">
-					                <a href="{{ route('blog.show', ['blog' => $blog->id]) }}"><img class="img-responsive" src="https://s3.amazonaws.com/twobayjobs/blogImgs/thumbnails/{{ $blog->id }}/{{ $blog->blogImgs->sortby('created_at')->first()->filename }}" alt="First slide"></a>
-
-								    <div class="card-content">
-								        <a style="line-height: 25px; padding: 13px; font-weight: 300; color: grey; display:block; white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" href="{{ route('blog.show', ['blog' => $blog->id]) }}">
-											{{ $blog->title }}
-										</a>
-									</div>
-								</div>
+						    <div class="card-content">
+						        <a style="line-height: 25px; padding: 13px; font-weight: 300; color: grey; display:block; white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" href="{{ route('blog.show', ['blog' => $blog->id]) }}">
+									{{ $blog->title }}
+								</a>
 							</div>
-						@endforeach
-						<br><br><br>
+						</div>
 					</div>
-				</div>
-					
-				<div class="hidden-xs hidden-sm col-md-4" style="padding-left: 25px">
-					@include('blog.sidebar')
-				</div>
-
-				<div style="margin-top: -30px" class="visible-xs-block visible-sm-block col-sm-12">
-					@include('blog.sidebar')
-				</div>
-
+				@endforeach
+				<br><br><br>
 			</div>
 		</div>
-		@include('layouts.footer')
-    </div>
+			
+		<div class="hidden-xs hidden-sm col-md-4" style="padding-left: 25px">
+			@include('blog.sidebar')
+		</div>
 
-    <!-- Scripts -->
-    <script src="{{ mix('js/app.js') }}"></script>
-</body>
-</html>
+		<div style="margin-top: -30px" class="visible-xs-block visible-sm-block col-sm-12">
+			@include('blog.sidebar')
+		</div>
+
+	</div>
+</div>
+@endsection
