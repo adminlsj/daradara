@@ -330,51 +330,6 @@ div.tab button.active {
   margin-left: -1px;
 }
 
-/* Style the tab */
-
-div.order-tab {
-  float: left;
-  background-color: white;
-  width: 10%;
-  height: 100%;
-  z-index: 99999;
-}
-
-/* Style the buttons inside the tab */
-
-div.order-tab button {
-  display: block;
-  background-color: inherit;
-  color: black;
-  width: 100%;
-  border: solid #e0e0e0 1px;
-  border-top-left-radius: 2px;
-  border-bottom-left-radius: 2px;
-  outline: none;
-  text-align: left;
-  cursor: pointer;
-  -webkit-transition: 0.3s;
-  transition: 0.3s;
-  margin-bottom: 10px;
-}
-
-div.order-tab button:hover {
-  border-color: #b7b7b7;
-}
-
-div.order-tab button.active {
-  border-color: #b7b7b7;
-}
-
-.order-tabcontent {
-  float: left;
-  width: 90%;
-  height: 100%;
-  border-radius: 2px;
-  border-top-left-radius: 0px;
-  padding-left: 10px;
-}
-
 .nav-tabs {
   border-bottom: 2px solid #DDD;
   width: 100%;
@@ -9392,6 +9347,12 @@ button.close {
   }
 }
 
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 body {
   background-color: white;
 }
@@ -9418,8 +9379,8 @@ a:visited {
 }
 
 .nav-main {
+  padding: 6px 0px;
   height: 120px;
-  padding-top: 6px;
   z-index: 99;
   border: none;
   border-radius: 0px;

@@ -11,9 +11,6 @@
 // Vertical Tab
 @import "vertical_tab";
 
-// Order Show Vertical Tab
-@import "order_vertical_tab";
-
 // Horizontal Tab
 @import "horizontal_tab";
 
@@ -36,6 +33,11 @@
 
 // Bootstrap
 @import "~bootstrap-sass/assets/stylesheets/bootstrap";
+
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
 
 body {
     background-color: white; 
@@ -61,8 +63,8 @@ a:hover, a:visited {
 }
 
 .nav-main {
+    padding: 6px 0px;
     height: 120px;
-    padding-top: 6px;
     z-index: 99;
     border: none;
     border-radius: 0px;
