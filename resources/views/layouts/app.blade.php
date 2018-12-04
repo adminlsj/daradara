@@ -11,7 +11,7 @@
       gtag('config', 'UA-125786247-1');
     </script>
 
-    @if (Request::is('/blog/*'))
+    @if (Request::is('blog/*'))
         <meta property="og:url" content="{{ route('blog.show', ['blog' => $blog->id]) }}" />
         <meta property="og:type" content="article" />
         <meta property="og:title" content="{{ $blog->title }}" />
