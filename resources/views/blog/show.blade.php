@@ -4,7 +4,7 @@
 <div class="container mobile-container">
 	<div class="row">
 		<div class="col-md-8 col-ms-12 blog-content">
-			<div style="margin-bottom: 15px">
+			<div style="margin-bottom: 10px">
 				<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 				<!-- Content -->
 				<ins class="adsbygoogle"
