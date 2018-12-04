@@ -138,7 +138,9 @@ class BlogController extends Controller
         $fb_title = str_replace('(BLANK)', '', $fb_title);
         $fb_title = str_replace('(Adsense)', '', $fb_title);
 
-        return view('blog.show', compact('blog', 'content', 'similar_blogs', 'relatedBlogs', 'fb_title', 'displayJobs'));
+        $current_blog = $blog;
+
+        return view('blog.show', compact('blog', 'content', 'similar_blogs', 'relatedBlogs', 'fb_title', 'current_blog'));
     }
 
     /**
