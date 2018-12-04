@@ -6,11 +6,11 @@
 		<div class="col-md-8 col-ms-12 blog-content">
 			<div style="background-color: #f0f0f0; margin-bottom: 20px">
 				<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-				<!-- Navbottom -->
+				<!-- Content -->
 				<ins class="adsbygoogle"
-				     style="display:inline-block;width:320px;height:100px"
+				     style="display:inline-block;width:100%;height:100px"
 				     data-ad-client="ca-pub-4485968980278243"
-				     data-ad-slot="9847298229"></ins>
+				     data-ad-slot="9914751067"></ins>
 				<script>
 				(adsbygoogle = window.adsbygoogle || []).push({});
 				</script>
