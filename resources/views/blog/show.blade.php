@@ -8,9 +8,10 @@
 				<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 				<!-- Content -->
 				<ins class="adsbygoogle"
-				     style="display:inline-block;width:100%;height:100px"
+				     style="display:inline-block;height:100px"
 				     data-ad-client="ca-pub-4485968980278243"
-				     data-ad-slot="9914751067"></ins>
+				     data-ad-slot="9914751067"
+				     data-full-width-responsive="true"></ins>
 				<script>
 				(adsbygoogle = window.adsbygoogle || []).push({});
 				</script>
