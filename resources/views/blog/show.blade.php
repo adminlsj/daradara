@@ -6,16 +6,14 @@
 		<div class="col-md-8 col-ms-12 blog-content">
 			<div style="background-color: #f0f0f0; margin-bottom: 20px">
 				<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                <!-- Content -->
-                <ins class="adsbygoogle"
-                     style="display:block"
-                     data-ad-client="ca-pub-4485968980278243"
-                     data-ad-slot="9914751067"
-                     data-ad-format="auto"
-                     data-full-width-responsive="true"></ins>
-                <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
+				<!-- Navbottom -->
+				<ins class="adsbygoogle"
+				     style="display:inline-block;width:100%;height:100px"
+				     data-ad-client="ca-pub-4485968980278243"
+				     data-ad-slot="9847298229"></ins>
+				<script>
+				(adsbygoogle = window.adsbygoogle || []).push({});
+				</script>
 			</div>
 
 			<img class="img-responsive border-radius-2" style="width:100%;height:100%" src="https://s3.amazonaws.com/twobayjobs/blogImgs/originals/{{ $blog->id }}/{{ $blog->blogImgs->sortby('created_at')->first()->filename }}" alt="日本旅行推薦">
