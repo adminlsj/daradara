@@ -8878,7 +8878,7 @@ a:visited {
 }
 
 .nav-main {
-  height: 120px;
+  height: 100px;
   z-index: 99;
   border: none;
   border-radius: 0px;
@@ -9246,6 +9246,13 @@ a > i {
   }
 }
 
+@media (max-width: 767.98px) {
+  .nav-main-content {
+    margin-top: 5px;
+    margin-bottom: 0px;
+  }
+}
+
 @media (max-width: 991.98px) {
   .mobile-container {
     width: 100% !important;
@@ -9259,35 +9266,17 @@ a > i {
     -webkit-box-shadow: none !important;
             box-shadow: none !important;
   }
-
-  .nav-main,
-  .nav-main-slogan {
-    padding-top: 2px;
-  }
 }
 
 @media (min-width: 767.98px) and (max-width: 1199.98px) {
   .mobile-container {
     width: 100% !important;
   }
-
-  .nav-main,
-  .nav-main-slogan {
-    padding: 5px 0px;
-  }
-
-  .nav-right-ads {
-    display: none;
-  }
 }
 
 @media (min-width: 1200px) {
   .mobile-container {
     width: 1200px;
-  }
-
-  .nav-main {
-    padding: 5px 0px;
   }
 }
 

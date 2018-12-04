@@ -33,22 +33,8 @@
 				<div style="word-wrap: break-word !important; margin-top: 15px;" class="fb-like" data-href="https://www.facebook.com/freeriderhk/" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
 			</div>
 
-			<div style="background-color: #f0f0f0; margin: 25px 0px 70px 0px;" class="container visible-xs-block visible-sm-block">
-				<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                <!-- Content -->
-                <ins class="adsbygoogle"
-                     style="display:block"
-                     data-ad-client="ca-pub-4485968980278243"
-                     data-ad-slot="9914751067"
-                     data-ad-format="auto"
-                     data-full-width-responsive="true"></ins>
-                <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
-			</div>
-
-			<div class="row hidden-xs hidden-sm">
-				<div class=" hidden-xs hidden-sm col-md-12">
+			<div style="margin-top: 20px;" class="row hidden-xs hidden-sm">
+				<div class="col-md-12">
 				    <h3 style="color: grey; font-weight: 300">為您推薦的貼文</h3>
 					<hr>
 				</div>
@@ -74,7 +60,7 @@
 			@include('blog.sidebar')
 		</div>
 
-		<div style="margin-top: -40px" class="visible-xs-block visible-sm-block col-sm-12">
+		<div style="margin-top: 30px" class="visible-xs-block visible-sm-block col-sm-12">
 			@include('blog.sidebar')
 		</div>
 

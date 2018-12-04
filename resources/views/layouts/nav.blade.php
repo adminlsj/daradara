@@ -1,31 +1,18 @@
 <nav class="navbar navbar-default nav-main">
     <div class="container mobile-container">
         <!-- Left Side Of Navbar -->
-        <ul style="margin-left: -15px" class="nav navbar-nav vertical-align" >
+        <ul style="margin-left: -15px" class="nav navbar-nav vertical-align nav-main-content" >
             <li>
                 <a href="{{ url('/') }}" style="margin-right: -10px;">
-                    <img src="https://s3-us-west-2.amazonaws.com/freerider/avatars/originals/default_freerider_profile_pic.jpg" style="border: 2px solid white; border-radius: 2px; margin-top: -10px; margin-bottom: -8px" width="100px" height="100px">
+                    <img src="https://s3-us-west-2.amazonaws.com/freerider/avatars/originals/default_freerider_profile_pic.jpg" style="border: 2px solid white; border-radius: 2px;" width="70px" height="70px">
                 </a>
             </li>
             <li class="nav-main-slogan">
                 <a style="font-weight: 400;" href="{{ url('/') }}">
-                    <div style="font-size: 50px; margin-top:10px; margin-bottom: 15px">{{ config('app.name', 'FreeRider') }}</div>
-                    <div style="font-size: 20px; text-align: center; color: #dbdbdb">自由旅行人</div>
+                    <div style="font-size: 40px; margin-top:10px; margin-bottom: 10px">{{ config('app.name', 'FreeRider') }}</div>
+                    <div style="font-size: 15px; text-align: center; color: #dbdbdb">自由旅行人</div>
                 </a>
             </li>
-        </ul>
-
-        <!-- Right Side Of Navbar -->
-        <ul style="background-color: gray; margin-left:0px; margin-right: 0px;" class="nav navbar-nav navbar-right nav-right-ads hidden-xs hidden-sm">
-            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <!-- Navbar -->
-            <ins class="adsbygoogle"
-                 style="display:inline-block;width:50vw;height:90px"
-                 data-ad-client="ca-pub-4485968980278243"
-                 data-ad-slot="1745786231"></ins>
-            <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
         </ul>
     </div>
 </nav>
