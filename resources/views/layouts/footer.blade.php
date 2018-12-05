@@ -25,7 +25,7 @@
                 <ul>
                     <li><a href="/contact" target="_blank">客服</a></li>
                     <li><a href="/contact" target="_blank">諮詢</a></li>
-                    <li><a href="{{ route('blog.index') }}" target="_blank">兩岸生活</a></li>
+                    <li><a href="{{ route('blog.index') }}" target="_blank">日本文化</a></li>
                 </ul>
             </div>
             <div class="col-md-3">
@@ -39,6 +39,6 @@
         </div>
     </div>
     <div class="footer-copyright">
-        <p>© 2016 Copyright by TwoBayJobs </p>
+        <p>© 2016 Copyright by FreeRider </p>
     </div>
 </footer>
