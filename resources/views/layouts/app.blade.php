@@ -17,6 +17,14 @@
         <meta property="og:title" content="{{ $current_blog->title }}" />
         <meta property="og:description" content="{{ str_limit($fb_title, 50) }}" />
         <meta property="og:image" content="https://s3.amazonaws.com/twobayjobs/blogImgs/originals/{{ $current_blog->id }}/{{ $current_blog->blogImgs->sortby('created_at')->first()->filename }}" />
+
+        <meta name="title" content="{{ $current_blog->title }} | 日本文化">
+        <title>{{ $current_blog->title }} | 日本文化</title>
+        <meta name="description" content="{{ str_limit($fb_title, 100) }}">
+    @else
+        <meta name="title" content="FreeRider | 日本文化 | 自由旅行人">
+        <title>{{ config('app.name', 'FreeRider') }} | 日本文化 | 自由旅行人</title>
+        <meta name="description" content="FreeRider自由旅行人，撰寫相關日本文化的趣味性和探討性專題，並且分享最新的日本文化資訊。專屬喜愛日本文化群眾的頭條新聞。">
     @endif
 
     <meta charset="utf-8">
@@ -27,9 +35,6 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <meta name="title" content ="FreeRider自由旅行人，撰寫相關日本文化的趣味性和探討性專題，並且分享最新的日本文化資訊。專屬喜愛日本文化群眾的頭條新聞。">
-    <title>{{ config('app.name', 'FreeRider') }} | 日本文化 | 自由旅行人</title>
 
     <!-- Styles -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
