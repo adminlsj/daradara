@@ -47,17 +47,17 @@ $(document).ready(function(){
 	      ]
 	});
 
-	$(window).scroll(function () {
-        // set distance user needs to scroll before we fadeIn navbar
-		if ($(this).scrollTop() > 100) {
-			$('.home-nav-scroll-show').fadeIn();
-		} else {
-			$('.home-nav-scroll-show').fadeOut();
-		}
+	$(".blog-sm-carousel").owlCarousel({
+		items: 1,
+		autoplay:true,
+		autoPlayTimeout: 5000,
+		itemsDesktop : [1199,1],
+	    itemsDesktopSmall : [979,1],
+	    itemsTablet : [768,1],
+	    itemsMobile: [479,1],
+	    loop: true,
+		dots: true,
+	    nav: false
 	});
-});
-
-$(document).ready(function(){
-	document.getElementById('location-home').focus()
 });
 
