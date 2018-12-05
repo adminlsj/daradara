@@ -28,6 +28,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <meta name="title" content ="FreeRider自由旅行人，撰寫相關日本文化的趣味性和探討性專題，並且分享最新的日本文化資訊。專屬喜愛日本文化群眾的頭條新聞。">
     <title>{{ config('app.name', 'FreeRider') }} | 日本文化 | 自由旅行人</title>
 
     <!-- Styles -->
