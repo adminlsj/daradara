@@ -3,7 +3,7 @@
 @section('content')
 <div class="container mobile-container">
 	<div class="row">
-		<div class="col-md-8 col-ms-12 blog-content">
+		<div style="margin-bottom: 15px" class="col-xs-12 col-sm-12 col-md-8 blog-content">
 			<div style="margin-bottom: 10px">
 				<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 				<!-- Content -->
@@ -55,12 +55,8 @@
 				<br><br><br>
 			</div>
 		</div>
-			
-		<div class="hidden-xs hidden-sm col-md-4" style="padding-left: 25px">
-			@include('blog.sidebar')
-		</div>
 
-		<div style="margin-top: 30px" class="visible-xs-block visible-sm-block col-sm-12">
+		<div class="col-xs-12 col-sm-12 col-md-4 sidebar-sm">
 			@include('blog.sidebar')
 		</div>
 

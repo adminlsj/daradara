@@ -9278,5 +9278,9 @@ a > i {
   .mobile-container {
     width: 1200px;
   }
+
+  .sidebar-sm {
+    padding-left: 25px;
+  }
 }
 
