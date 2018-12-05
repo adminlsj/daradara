@@ -16,28 +16,3 @@
         </ul>
     </div>
 </nav>
-
-<nav style="display: none" class="navbar navbar-default nav-category hidden-xs hidden-sm">
-    <div class="container mobile-container">
-        <div class="collapse navbar-collapse" id="app-navbar-collapse">
-            <ul style="margin-left: -30px" class="nav navbar-nav" >
-                <li>
-                    <a href="{{ url('/') }}">
-                        主頁
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ url('/') }}">
-                        旅行
-                    </a>
-                </li>
-                </li>
-                <li>
-                    <a href="{{ url('/') }}">
-                        日本
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>

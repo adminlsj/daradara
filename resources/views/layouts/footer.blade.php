@@ -8,7 +8,7 @@
                 <h5>Get started</h5>
                 <ul>
                     <li><a href="/">主頁</a></li>
-                    <li><a href="/jobs/search?title=">探索</a></li>
+                    <li><a href="/">探索</a></li>
                     <li><a href="{{ route('blog.index') }}" target="_blank">部落格</a></li>
                 </ul>
             </div>
