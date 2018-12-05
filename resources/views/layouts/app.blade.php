@@ -22,9 +22,10 @@
         <title>{{ $current_blog->title }} | 日本文化</title>
         <meta name="description" content="{{ str_limit($fb_title, 100) }}">
     @else
-        <meta name="title" content="FreeRider | 日本文化 | 自由旅行人">
+        <meta name="title" content="FreeRider | 日本文化 | 自由旅行人 | 專屬於日本文化的頭條新聞">
         <title>{{ config('app.name', 'FreeRider') }} | 日本文化 | 自由旅行人</title>
-        <meta name="description" content="FreeRider自由旅行人，撰寫相關日本文化的趣味性和探討性專題，並且分享最新的日本文化資訊。專屬喜愛日本文化群眾的頭條新聞。">
+        <meta name="description" 
+              content="FreeRider自由旅行人，撰寫相關日本文化的趣味性和探討性專題，並且分享最新的日本文化資訊。從日本歷史的古蹟與文化，到現代的科技與藝術，從庶民的生活與百態，到天皇的皇居與城府，FreeRider是專屬於喜愛日本文化群眾的頭條新聞。">
     @endif
 
     <meta charset="utf-8">
