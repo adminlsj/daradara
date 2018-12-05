@@ -28,7 +28,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }} | 自由旅行人</title>
+    <title>{{ config('app.name', 'FreeRider') }} | 日本文化 | 自由旅行人</title>
 
     <!-- Styles -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
