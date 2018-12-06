@@ -16,11 +16,11 @@
 		<div style="margin-bottom: 15px" class="col-xs-12 col-sm-12 col-md-8 blog-content">
 			<div style="margin-bottom: 10px">
 				<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-				<!-- Content -->
+				<!-- Content-Top -->
 				<ins class="adsbygoogle"
 				     style="display:inline-block;width:100%;height:100px"
 				     data-ad-client="ca-pub-4485968980278243"
-				     data-ad-slot="9914751067"></ins>
+				     data-ad-slot="4060710969"></ins>
 				<script>
 				(adsbygoogle = window.adsbygoogle || []).push({});
 				</script>
