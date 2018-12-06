@@ -14,4 +14,9 @@ class Blog extends Model
     {
         return $this->hasMany('App\BlogImg');
     }
+
+    /* public function getRouteKeyName()
+	{
+	    return 'title';
+	} */
 }

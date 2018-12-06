@@ -1,6 +1,6 @@
 <div>
     <div>
-        <h3 style="color: grey; font-weight: 300">為您推薦的貼文</h3>
+        <h3 style="color: grey; font-weight: 300">日本文化與專題</h3>
         <hr>
     </div>
     @foreach($relatedBlogs as $blog)

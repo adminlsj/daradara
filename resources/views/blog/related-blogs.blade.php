@@ -1,4 +1,4 @@
-<a href="{{ route('blog.show', ['blog' => $blog->id]) }}">
+<a href="{{ route('blog.show', ['blog' => $blog]) }}">
     <div class="row hover-box-shadow" style="border-radius: 5px; border: solid 1px #f2f2f2; margin-bottom: 15px; background-color:white;">
         <div class="col-xs-5 col-sm-5 col-md-5" style="padding-left: 0px; padding-right: 2px">
             <div class="embed-responsive embed-responsive-4by3">

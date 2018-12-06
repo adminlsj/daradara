@@ -12,7 +12,7 @@
     </script>
 
     @if (Request::is('blog/*'))
-        <meta property="og:url" content="{{ route('blog.show', ['blog' => $current_blog->id]) }}" />
+        <meta property="og:url" content="{{ route('blog.show', ['blog' => $current_blog]) }}" />
         <meta property="og:type" content="article" />
         <meta property="og:title" content="{{ $current_blog->title }}" />
         <meta property="og:description" content="{{ str_limit($fb_title, 50) }}" />
@@ -20,10 +20,10 @@
 
         <meta name="title" content="{{ $current_blog->title }} | 日本文化">
         <title>{{ $current_blog->title }} | 日本文化</title>
-        <meta name="description" content="{{ str_limit($fb_title, 100) }}">
+        <meta name="description" content="{{ str_limit($fb_title, 150) }}">
     @else
-        <meta name="title" content="FreeRider | 日本文化 | 自由旅行人 | 專屬於日本文化的頭條新聞">
-        <title>{{ config('app.name', 'FreeRider') }} | 日本文化 | 自由旅行人 | 專屬於日本文化的頭條新聞</title>
+        <meta name="title" content="日本文化 | 專屬於日本文化的頭條新聞 | 自由旅行人 | FreeRider">
+        <title>日本文化 | 專屬於日本文化的頭條新聞 | 自由旅行人 | FreeRider</title>
         <meta name="description" 
               content="FreeRider自由旅行人，撰寫相關日本文化的趣味性和探討性專題，並且分享最新的日本文化資訊。從日本歷史的古蹟與文化，到現代的科技與藝術，從庶民的生活與百態，到天皇的皇居與城府，FreeRider是專屬於喜愛日本文化群眾的頭條新聞。">
     @endif
@@ -32,6 +32,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="google-site-verification" content="gNa13GHr2gcHfxADuqMpBcL2XwEVTF1INmpmxir2fxY" />
+    <link rel="canonical" href="https://www.freeriderhk.com" />
     <link rel="shortcut icon" type="image/x-icon" href="https://s3.amazonaws.com/twobayjobs/system/intro/browser-icon.ico"/>
 
     <!-- CSRF Token -->
@@ -52,14 +53,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.4/js/locales/LANG.js"></script>
 </head>
 <body>
-    <div id="fb-root"></div>
-    <script>(function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = 'https://connect.facebook.net/zh_HK/sdk.js#xfbml=1&version=v3.1';
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
     <div id="app">
         <div style="margin-bottom: 10px">@include('layouts.nav')</div>
         @yield('content')
