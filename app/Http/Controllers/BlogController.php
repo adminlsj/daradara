@@ -92,7 +92,7 @@ class BlogController extends Controller
     {
         $content = $blog->content;
 
-        $content = str_replace('(SUB)', '<h5 style="font-size:20px;font-weight:300">', $content);
+        $content = str_replace('(SUB)', '<h5 style="font-size:20px;font-weight:bold; line-height:30px;">', $content);
         $content = str_replace('(/SUB)', '</h5>', $content);
 
         $content = str_replace('(CONT)', '<div style="white-space: pre-line;">', $content);
