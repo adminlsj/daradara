@@ -104,8 +104,22 @@ class BlogController extends Controller
         $content = str_replace('(IMG)', '<img class="img-responsive border-radius-2" style="padding-top:15px;padding-bottom:15px;width:100%; height:100%" src="https://s3.amazonaws.com/twobayjobs/blogImgs/originals/'.$blog->id.'/', $content);
         $content = str_replace('(/IMG)', '.jpg" alt="日本旅行推薦">', $content);
 
-        $content = str_replace('(BLANK)', '<p style="margin:30px"></p>', $content);
+        $content = str_replace('(BLANK)', '<p style="margin:15px"></p>', $content);
 
+        $content = str_replace('(AdsenseTop)',
+            '<div style="margin:25px 0px;">
+                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <!-- Content-Top -->
+                <ins class="adsbygoogle"
+                     style="display:inline-block;width:100%;height:100px"
+                     data-ad-client="ca-pub-4485968980278243"
+                     data-ad-slot="4060710969"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>'
+        , $content);
+        
         $content = str_replace('(Adsense)',
             '<div style="margin:25px 0px;">
                 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>

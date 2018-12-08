@@ -14,22 +14,10 @@
 <div class="container mobile-container">
 	<div class="row">
 		<div style="margin-bottom: 15px" class="col-xs-12 col-sm-12 col-md-8 blog-content">
-			<div style="margin-bottom: 10px">
-				<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-				<!-- Content-Top -->
-				<ins class="adsbygoogle"
-				     style="display:inline-block;width:100%;height:100px"
-				     data-ad-client="ca-pub-4485968980278243"
-				     data-ad-slot="4060710969"></ins>
-				<script>
-				(adsbygoogle = window.adsbygoogle || []).push({});
-				</script>
-			</div>
-
 			<img class="img-responsive border-radius-2" style="width:100%;height:100%" src="https://s3.amazonaws.com/twobayjobs/blogImgs/originals/{{ $blog->id }}/{{ $blog->blogImgs->sortby('created_at')->first()->filename }}" alt="日本文化">
 			
 			<div>
-				<h4 style="padding-top: 10px; padding-bottom: 10px; font-weight: 400;">
+				<h4 style="padding-top: 10px; font-weight: 400;">
 					<div>{{ $blog->title }}</div>
 					<div style="padding-left: 3px" class="vertical-align">
 						<div style="font-size:14px;font-weight:300;">
