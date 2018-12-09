@@ -111,9 +111,11 @@ class BlogController extends Controller
                 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                 <!-- Content-Top -->
                 <ins class="adsbygoogle"
-                     style="display:inline-block;width:100%;height:100px"
+                     style="display:block"
                      data-ad-client="ca-pub-4485968980278243"
-                     data-ad-slot="4060710969"></ins>
+                     data-ad-slot="4060710969"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
                 <script>
                 (adsbygoogle = window.adsbygoogle || []).push({});
                 </script>
