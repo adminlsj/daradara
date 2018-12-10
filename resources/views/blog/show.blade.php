@@ -2,15 +2,6 @@
 
 @section('content')
 
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-	var js, fjs = d.getElementsByTagName(s)[0];
-	if (d.getElementById(id)) return;
-	js = d.createElement(s); js.id = id;
-	js.src = 'https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v3.2&appId=204935246651575&autoLogAppEvents=1';
-	fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-
 <div class="container mobile-container">
 	<div class="row">
 		<div style="margin-bottom: 15px" class="col-xs-12 col-sm-12 col-md-8 blog-content">
@@ -25,7 +16,7 @@
 						</div>
 						&nbsp;
 						<div style="margin-top: -20px;">
-							<div class="fb-like" data-href="https://www.facebook.com/freeriderhk" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+							<div class="fb-like" data-href="{{ route('blog.show', ['blog' => $blog]) }}" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
 						</div>
 					</div>
 				</h4>
@@ -33,6 +24,11 @@
 				@foreach ($content as $cont)
 					{!! $cont !!}
 				@endforeach
+
+				<div style="margin-top:20px; padding: 10px 5px; width: 100%; background-color: #f0f0f0; text-align: center; color: #3b5998">
+					<div style="line-height: 15px">更多日本旅遊資訊及文化，讚好FreeRider專頁</div>
+					<div class="fb-like" data-href="https://www.facebook.com/freeriderhk" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+				</div>
 			</div>
 
 			<div style="margin-top: 20px;" class="row hidden-xs hidden-sm">
