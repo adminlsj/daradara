@@ -61,7 +61,7 @@
 		    </div>
 			<div class="sidebar-wrapper col-xs-12">
 			    <div id="sidebar-results"><!-- results appear here --></div>
-			    <div class="ajax-loading"><img src="{{ asset('images/loading.gif') }}" /></div>
+			    <div style="text-align: center" class="ajax-loading"><img src="https://s3.amazonaws.com/twobayjobs/system/loading.gif" /></div>
 			</div>
 		</div>
 
