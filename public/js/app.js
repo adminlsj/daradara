@@ -42026,43 +42026,90 @@ window.Vue = __webpack_require__("./node_modules/vue/dist/vue.common.js");
 Vue.component('example', __webpack_require__("./resources/assets/js/components/Example.vue"));
 
 var app = new Vue({
-	el: '#app'
+    el: '#app'
 });
 
 __webpack_require__("./resources/assets/js/comment.js");
 
 $('#avatar-upload').on("change", function (e) {
-	$("#avatar-form").submit();
+    $("#avatar-form").submit();
 });
 
 $(document).ready(function () {
-	$(".blog-carousel").owlCarousel({
-		items: 1,
-		autoplay: true,
-		autoPlayTimeout: 5000,
-		itemsDesktop: [1199, 1],
-		itemsDesktopSmall: [979, 1],
-		itemsTablet: [768, 1],
-		itemsMobile: [479, 1],
-		loop: true,
-		dots: false,
-		nav: true,
-		navText: ['<i class="material-icons" style="font-size:50px; color:white">keyboard_arrow_left</i>', '<i class="material-icons" style="font-size:50px; color:white">chevron_right</i>']
-	});
+    $(".blog-carousel").owlCarousel({
+        items: 1,
+        autoplay: true,
+        autoPlayTimeout: 5000,
+        itemsDesktop: [1199, 1],
+        itemsDesktopSmall: [979, 1],
+        itemsTablet: [768, 1],
+        itemsMobile: [479, 1],
+        loop: true,
+        dots: false,
+        nav: true,
+        navText: ['<i class="material-icons" style="font-size:50px; color:white">keyboard_arrow_left</i>', '<i class="material-icons" style="font-size:50px; color:white">chevron_right</i>']
+    });
 
-	$(".blog-sm-carousel").owlCarousel({
-		items: 1,
-		autoplay: true,
-		autoPlayTimeout: 5000,
-		itemsDesktop: [1199, 1],
-		itemsDesktopSmall: [979, 1],
-		itemsTablet: [768, 1],
-		itemsMobile: [479, 1],
-		loop: true,
-		dots: true,
-		nav: false
-	});
+    $(".blog-sm-carousel").owlCarousel({
+        items: 1,
+        autoplay: true,
+        autoPlayTimeout: 5000,
+        itemsDesktop: [1199, 1],
+        itemsDesktopSmall: [979, 1],
+        itemsTablet: [768, 1],
+        itemsMobile: [479, 1],
+        loop: true,
+        dots: true,
+        nav: false
+    });
 });
+
+var _throttleTimer = null;
+var _throttleDelay = 100;
+var $window = $(window);
+var $document = $(document);
+$document.ready(function () {
+    $window.off('scroll', ScrollHandler).on('scroll', ScrollHandler);
+});
+
+var page = 1; //track user scroll as page number, right now page number is 1
+load_more(page); //initial content load
+
+function ScrollHandler(e) {
+    //throttle event:
+    clearTimeout(_throttleTimer);
+    _throttleTimer = setTimeout(function () {
+        if ($(window).scrollTop() + $(window).height() + 600 >= getDocHeight()) {
+            page++; //page number increment
+            load_more(page); //load content   
+        }
+    }, _throttleDelay);
+}
+
+function getDocHeight() {
+    var D = document;
+    return Math.max(D.body.scrollHeight, D.documentElement.scrollHeight, D.body.offsetHeight, D.documentElement.offsetHeight, D.body.clientHeight, D.documentElement.clientHeight);
+}
+
+function load_more(page) {
+    $.ajax({
+        url: '?page=' + page,
+        type: "get",
+        datatype: "html",
+        beforeSend: function beforeSend() {
+            $('.ajax-loading').show();
+        }
+    }).done(function (data) {
+        if (data.length == 0) {
+            console.log(data.length);
+            //notify user if nothing to load
+            $('.ajax-loading').html("No more records!");
+            return;
+        }
+        $('.ajax-loading').hide(); //hide loading animation once data is received
+        $("#sidebar-results").append(data); //append data into #results element          
+    }).fail(function (jqXHR, ajaxOptions, thrownError) {});
+}
 
 /***/ }),
 

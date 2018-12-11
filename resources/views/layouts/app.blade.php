@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html lang="{{ app()->getLocale() }}">
 <head>
     <!-- Global site tag (gtag.js) - Google Analytics -->

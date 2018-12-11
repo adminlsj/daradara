@@ -10,6 +10,8 @@ use File;
 use Image;
 use App\Mail\Contact;
 use App\Mail\ContactUser;
+use Carbon\Carbon;
+
 
 class BlogController extends Controller
 {
@@ -23,14 +25,25 @@ class BlogController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    /*public function index()
     {
         $blogs = Blog::all()->sortByDesc('created_at');
         $caro_blogs = Blog::inRandomOrder()->limit(5)->get();
 
-        $relatedBlogs = Blog::inRandomOrder()->get();
+        return view('blog.index', compact('blogs', 'caro_blogs'));
+    }*/
 
-        return view('blog.index', compact('blogs', 'caro_blogs', 'relatedJobs', 'relatedBlogs'));
+    public function index(Request $request){
+        $sideBlogsMobile = Blog::orderBy('created_at', 'desc')->paginate(5);
+        $html = $this->sidebarHTML($sideBlogsMobile);
+        if ($request->ajax()) {
+            return $html;
+        }
+
+        $blogs = Blog::all()->sortByDesc('created_at');
+        $caro_blogs = Blog::inRandomOrder()->limit(5)->get();
+        $sideBlogsDesktop = Blog::inRandomOrder()->get();
+        return view('blog.index', compact('blogs', 'caro_blogs', 'sideBlogsDesktop', 'sideBlogsMobile'));
     }
 
     /**
@@ -88,8 +101,15 @@ class BlogController extends Controller
      * @param  \App\Blog  $blog
      * @return \Illuminate\Http\Response
      */
-    public function show(Blog $blog)
+    public function show(Request $request, Blog $blog)
     {
+        $sideBlogsDesktop = Blog::inRandomOrder()->get();
+        $sideBlogsMobile = Blog::orderBy('created_at', 'desc')->paginate(5);
+        $html = $this->sidebarHTML($sideBlogsMobile);
+        if ($request->ajax()) {
+            return $html;
+        }
+
         $content = $blog->content;
 
         $content = str_replace('(SUB)', '<h5 style="font-size:20px;font-weight:bold; line-height:30px;">', $content);
@@ -140,10 +160,6 @@ class BlogController extends Controller
 
         $content = explode('(LOGO)', $content);
 
-        $similar_blogs = Blog::inRandomOrder()->get();
-
-        $relatedBlogs = Blog::inRandomOrder()->get();
-
         $fb_title = $blog->content;
         $fb_title = str_replace('(SUB)', '', $fb_title);
         $fb_title = str_replace('(/SUB)', '', $fb_title);
@@ -155,9 +171,32 @@ class BlogController extends Controller
         $fb_title = str_replace('(Adsense)', '', $fb_title);
 
         $current_blog = $blog;
+        $similar_blogs = Blog::inRandomOrder()->get();
 
-        return view('blog.show', compact('blog', 'content', 'similar_blogs', 'relatedBlogs', 'fb_title', 'current_blog'));
+        return view('blog.show', compact('blog', 'content', 'similar_blogs', 'relatedBlogs', 'fb_title', 'current_blog', 'sideBlogsDesktop', 'sideBlogsMobile'));
     }
+
+    public function sidebarHTML($sideBlogsMobile)
+    {
+        $html = '';
+        foreach ($sideBlogsMobile as $blog) {
+            $html .='<a href="'.env("APP_URL", "https://www.freeriderhk.com").'/blog/'.$blog->id.'">'.
+                        '<div class="row hover-box-shadow" style="border-radius: 5px; border: solid 1px #f2f2f2; margin-bottom: 15px; background-color:white;">
+                            <div class="col-xs-5 col-sm-5 col-md-5" style="padding-left: 0px; padding-right: 2px">
+                                <div class="embed-responsive embed-responsive-4by3">
+                                    <img style="width:100%;" src="https://s3.amazonaws.com/twobayjobs/blogImgs/thumbnails/'.$blog->id.'/'.$blog->blogImgs->sortby("created_at")->first()->filename.'" class="embed-responsive-item" alt="日本文化">
+                                </div>
+                            </div>
+                            <div class="col-xs-7 col-sm-7 col-md-7">
+                                <div><h3 style="font-weight: 400; font-size: 15px">'.str_limit($blog->title, 60).'</h3></div>
+                                <div class="related-blogs-date" style="font-size: 12.5px; color: #42464A">'.Carbon::parse($blog->created_at)->format("Y年m月d日").'</div>
+                            </div>
+                        </div>
+                    </a>';
+        }
+        return $html;
+    }
+
 
     /**
      * Show the form for editing the specified resource.
