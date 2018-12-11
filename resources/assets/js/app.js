@@ -77,7 +77,7 @@ function ScrollHandler(e) {
     //throttle event:
     clearTimeout(_throttleTimer);
     _throttleTimer = setTimeout(function () {
-        if ($(window).scrollTop() + $(window).height() + 600 >= getDocHeight()) {
+        if ($(window).scrollTop() + $(window).height() + 900 >= getDocHeight()) {
 	        page++; //page number increment
 			load_more(page); //load content   
 	   }
@@ -108,7 +108,7 @@ function load_more(page){
         if (data.length == 0){
 	        console.log(data.length);
             //notify user if nothing to load
-            $('.ajax-loading').html("No more records!");
+            $('.ajax-loading').html("End of Records");
             return;
         }
         $('.ajax-loading').hide(); //hide loading animation once data is received
