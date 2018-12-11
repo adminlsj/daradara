@@ -10,7 +10,7 @@
             <li class="nav-main-slogan">
                 <a style="font-weight: 400;" href="{{ url('/') }}">
                     <div style="font-size: 40px; margin-top:9px; margin-bottom: 11px">{{ config('app.name', 'FreeRider') }}</div>
-                    <h1 style="font-size: 15px; text-align: center; color: #dbdbdb; margin: 0px">日本文化 | 自由旅行人</h1>
+                    <h1 style="font-size: 15px; text-align: center; color: #dbdbdb; margin: 0px">日本文化 | 旅行資訊</h1>
                 </a>
             </li>
         </ul>
