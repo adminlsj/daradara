@@ -107,8 +107,7 @@ function load_more(page){
     .done(function(data){
         if (data.length == 0){
 	        console.log(data.length);
-            //notify user if nothing to load
-            $('.ajax-loading').html("End of Records");
+            $('.ajax-loading').html(" ");
             return;
         }
         $('.ajax-loading').hide(); //hide loading animation once data is received
