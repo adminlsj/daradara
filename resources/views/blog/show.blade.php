@@ -54,12 +54,12 @@
 			</div>
 		</div>
 
-		<div class="col-xs-12 col-sm-12 col-md-4 sidebar-sm">
+		<div class="col-xs-12 col-sm-12 col-md-4">
 			<div>
 		        <h3 style="color: grey; font-weight: 300">日本文化與專題</h3>
 		        <hr>
 		    </div>
-			<div class="sidebar-wrapper col-xs-12">
+			<div class="sidebar-wrapper">
 			    <div id="sidebar-results"><!-- results appear here --></div>
 			    <div style="text-align: center" class="ajax-loading"><img src="https://s3.amazonaws.com/twobayjobs/system/loading.gif" /></div>
 			</div>
