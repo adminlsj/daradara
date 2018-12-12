@@ -112,10 +112,10 @@ class BlogController extends Controller
 
         $content = $blog->content;
 
-        $content = str_replace('(SUB)', '<h5 style="font-size:2rem;font-weight:bold; line-height:30px;">', $content);
+        $content = str_replace('(SUB)', '<h5 style="font-size:2.1rem;font-weight:bold; line-height:30px;">', $content);
         $content = str_replace('(/SUB)', '</h5>', $content);
 
-        $content = str_replace('(CONT)', '<div style="font-size:1.5rem;white-space: pre-line;">', $content);
+        $content = str_replace('(CONT)', '<div style="font-size:1.6rem;white-space: pre-line;">', $content);
         $content = str_replace('(/CONT)', '</div>', $content);
 
         $content = str_replace('(LINK)', '<a target="_blank" href=', $content);
