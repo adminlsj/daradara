@@ -2,14 +2,8 @@
 // Fonts
 @import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
 
-// Horizontal Tab
-@import "horizontal_tab";
-
 // Footer
 @import "footer";
-
-// Breadcrumbs
-@import "breadcrumbs";
 
 // Owl Carousel
 @import "owl.carousel.css";
@@ -397,12 +391,6 @@ a > i {
 
     .no-box-shadow {
         box-shadow: none !important;
-    }
-}
-
-@media (min-width: 767.98px) and (max-width: 1199.98px) {
-    .mobile-container {
-        width: 100% !important;
     }
 }
 
