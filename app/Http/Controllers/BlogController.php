@@ -173,7 +173,7 @@ class BlogController extends Controller
         $current_blog = $blog;
         $similar_blogs = Blog::inRandomOrder()->get();
 
-        return view('blog.show', compact('blog', 'content', 'similar_blogs', 'relatedBlogs', 'fb_title', 'current_blog', 'sideBlogsDesktop', 'sideBlogsMobile'));
+        return view('blog.show', compact('blog', 'content', 'similar_blogs', 'fb_title', 'current_blog', 'sideBlogsDesktop', 'sideBlogsMobile'));
     }
 
     public function sidebarHTML($sideBlogsMobile)
