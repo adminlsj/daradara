@@ -3,7 +3,7 @@
 @section('content')
 <div style="margin-top: -20px" class="container mobile-container">
 	<div class="row">
-		<div class="blog-carousel owl-carousel owl-theme">
+		<div style="overflow: hidden" class="blog-carousel owl-carousel owl-theme">
 			@foreach ($caro_blogs as $blog)
 				<a style="text-decoration: none" href="{{ route('blog.show', ['blog' => $blog]) }}">
 					<img src="https://s3.amazonaws.com/twobayjobs/blogImgs/originals/{{ $blog->id }}/{{ $blog->blogImgs->first()->filename }}" alt="日本文化">

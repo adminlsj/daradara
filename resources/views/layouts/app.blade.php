@@ -18,8 +18,8 @@
         <meta property="og:description" content="{{ str_limit($fb_title, 50) }}" />
         <meta property="og:image" content="https://s3.amazonaws.com/twobayjobs/blogImgs/originals/{{ $current_blog->id }}/{{ $current_blog->blogImgs->sortby('created_at')->first()->filename }}" />
 
-        <meta name="title" content="日本文化 | {{ $current_blog->title }} | FreeRider">
-        <title>日本文化 | {{ $current_blog->title }} | FreeRider</title>
+        <meta name="title" content="{{ $current_blog->title }} | 日本文化 FreeRider">
+        <title>{{ $current_blog->title }} | 日本文化 FreeRider</title>
         <meta name="description" content="{{ str_limit($fb_title, 150) }}">
     @else
         <meta name="title" content="日本文化 | 專屬於日本文化的頭條新聞 | 自由旅行人 | FreeRider">

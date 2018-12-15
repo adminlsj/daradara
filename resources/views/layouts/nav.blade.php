@@ -16,3 +16,24 @@
         </ul>
     </div>
 </nav>
+
+<nav class="navbar-bottom navbar-default">
+    <div class="container mobile-container">
+        <ul class="nav navbar-nav text-center" >
+            <li style="width:50%; float: left; margin-top: -10px">
+                <a>
+                    <div class="fb-like" data-href="https://www.facebook.com/freeriderhk" data-layout="button_count" data-action="like" data-size="large" data-show-faces="false" data-share="false"></div>
+                </a>
+            </li>
+            <li style="width:50%; float: right; margin-top: -15px">
+                <a>
+                    @if (Request::is('blog/*'))
+                        <div class="fb-share-button" data-href="{{ route('blog.show', ['blog' => $current_blog]) }}" data-layout="button_count" data-size="small" data-mobile-iframe="true"><a class="nav-bottom-share-btn" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ route('blog.show', ['blog' => $current_blog]) }}%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">分享貼文</a></div>
+                    @else
+                        <div class="fb-share-button" data-href="https://www.freeriderhk.com" data-layout="button_count" data-size="large" data-mobile-iframe="true"><a class="nav-bottom-share-btn" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.freeriderhk.com/&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">分享</a></div>
+                    @endif
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>

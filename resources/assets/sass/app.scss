@@ -40,12 +40,46 @@ a:hover, a:visited {
     border-radius: 0px;
 }
 
-nav, nav div {
+.navbar, .navbar div {
     background-color: #3c3d41 !important;
 }
 
-nav a {
+.navbar a {
     color: #f1f1f1 !important;
+}
+
+/* Place the navbar at the bottom of the page, and make it stick */
+.navbar-bottom {
+  background-color: white;
+  overflow: hidden;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 99;
+  border-top: 1px solid #f0f0f0;
+  height: 45px;
+}
+
+/* Change the color of links on hover */
+.navbar-bottom a:hover {
+    background-color: #3b5998;
+    color: white;
+    text-decoration: none
+}
+
+/* Add a color to the active/current link */
+.navbar-bottom a.active {
+  background-color: #3b5998;
+  color: white;
+}
+
+.nav-bottom-share-btn {
+    background-color: #4264aa;
+    border-radius:4px;
+    padding: 6px 11px;
+    color: white !important;
+    font-weight: bold;
+    text-decoration: none
 }
 
 .vertical-align {
