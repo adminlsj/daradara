@@ -8793,15 +8793,26 @@ a:visited {
 .navbar-bottom a.active {
   background-color: #3b5998;
   color: white;
+  text-decoration: none;
 }
 
 .nav-bottom-share-btn {
   background-color: #4264aa;
   border-radius: 4px;
-  padding: 6px 11px;
+  padding: 5px 11px 6px 11px;
   color: white !important;
   font-weight: bold;
   text-decoration: none;
+}
+
+.nav-bottom-like-left {
+  width: 50%;
+  float: left;
+}
+
+.nav-bottom-share-right {
+  width: 50%;
+  float: right;
 }
 
 .vertical-align {
@@ -9156,15 +9167,31 @@ a > i {
 }
 
 @media (max-width: 767.98px) {
+  .mobile-container {
+    width: 100% !important;
+  }
+
   .nav-main-content {
     margin-top: 5px;
     margin-bottom: 0px;
   }
+
+  .nav-bottom-like-left {
+    margin-top: -10px;
+  }
+
+  .nav-bottom-share-right {
+    margin-top: -16px;
+  }
 }
 
-@media (max-width: 991.98px) {
+@media (min-width: 768px) {
   .mobile-container {
-    width: 100% !important;
+    width: 1000px;
+  }
+
+  .navbar-bottom ul {
+    width: 100%;
   }
 
   .mobile-home-container {
@@ -9175,11 +9202,13 @@ a > i {
     -webkit-box-shadow: none !important;
             box-shadow: none !important;
   }
-}
 
-@media (min-width: 1000px) {
-  .mobile-container {
-    width: 1000px;
+  .nav-bottom-like-left {
+    margin-top: -7px;
+  }
+
+  .nav-bottom-share-right {
+    margin-top: -18px;
   }
 }
 
