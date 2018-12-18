@@ -8730,7 +8730,6 @@ button.close {
 html,
 body {
   max-width: 100%;
-  -webkit-overflow-scrolling: touch;
 }
 
 body {

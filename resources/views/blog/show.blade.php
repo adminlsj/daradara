@@ -16,7 +16,7 @@
 						</div>
 						&nbsp;
 						<div style="margin-top: -20px;">
-							<div class="fb-like" data-href="{{ route('blog.show', ['blog' => $blog]) }}" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+							<div class="fb-like" data-href="{{ route('blog.category.show', ['blog' => $blog, 'category' => $blog->category]) }}" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
 						</div>
 					</div>
 				</h4>

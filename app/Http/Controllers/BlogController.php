@@ -250,7 +250,7 @@ class BlogController extends Controller
         $html = '';
         foreach ($sideBlogsMobile as $blog) {
             $html .='<div class="col-xs-12 col-sm-6 col-md-6" style="padding: 0px 25px; margin-bottom:15px;">
-                        <div class="hover-box-shadow"><a href="'.env("APP_URL", "https://www.freeriderhk.com").'/blog/'.$blog->category.'/'.$blog->id.'">
+                        <div class="hover-box-shadow"><a href="'.env("APP_URL", "https://www.freeriderhk.com").'/travel/'.$blog->category.'/'.$blog->id.'">
                             <div class="row">
                                 <img style="width:100%;" src="https://s3.amazonaws.com/twobayjobs/blogImgs/thumbnails/'.$blog->id.'/'.$blog->blogImgs->sortby("created_at")->first()->filename.'" alt="日本文化">
                             </div>
