@@ -16,7 +16,7 @@
         <meta property="og:type" content="article" />
         <meta property="og:title" content="{{ $current_blog->title }}" />
         <meta property="og:description" content="{{ str_limit($fb_title, 50) }}" />
-        <meta property="og:image" content="https://s3.amazonaws.com/twobayjobs/blogImgs/originals/{{ $current_blog->id }}/04.jpg" />
+        <meta property="og:image" content="https://s3.amazonaws.com/twobayjobs/blogImgs/originals/{{ $current_blog->id }}/{{ $current_blog->blogImgs->sortby('created_at')->first()->filename }}" />
 
         <meta name="title" content="{{ $current_blog->title }} | 日本文化 FreeRider">
         <title>{{ $current_blog->title }} | 日本文化 FreeRider</title>
