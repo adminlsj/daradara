@@ -11,9 +11,12 @@
 |
 */
 
-Route::resource('blog', 'BlogController');
 Route::get('/', 'BlogController@index');
-Route::get('/contact', 'BlogController@index@contact');
+Route::resource('blog', 'BlogController');
+Route::get('blog/{blog}', 'BlogController@showOnly')->name('blog.show');
+Route::get('blog/{category?}/{blog}', 'BlogController@show')->name('blog.category.show');
+
+Route::get('/contact', 'BlogController@contact');
 Route::get('/policy', 'BlogController@policy');
 Route::post('/sendMail/{status}', 'BlogController@sendMail');
 
@@ -23,4 +26,3 @@ Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallb
 
 Route::resource('user', 'UserController');
 Route::post('users/{user}/storeAvatar', 'UserController@storeAvatar');
-Route::get('users/{user}/savedJobsIndex', ['as' => 'user.savedJobsIndex', 'uses' => 'UserController@savedJobsIndex']);

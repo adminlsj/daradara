@@ -25,13 +25,6 @@ class BlogController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    /*public function index()
-    {
-        $blogs = Blog::all()->sortByDesc('created_at');
-        $caro_blogs = Blog::inRandomOrder()->limit(5)->get();
-
-        return view('blog.index', compact('blogs', 'caro_blogs'));
-    }*/
 
     public function index(Request $request){
         $sideBlogsMobile = Blog::orderBy('created_at', 'desc')->paginate(5);
@@ -67,6 +60,7 @@ class BlogController extends Controller
         $blog = Blog::create([
             'title' => request('title'),
             'content' => request('content'),
+            'category' => request('category'),
             'is_travel' => request('is_travel'),
             'is_japan' => request('is_japan'),
             'is_korea' => request('is_korea'),
@@ -87,7 +81,7 @@ class BlogController extends Controller
             }
 
             $image_thumb = Image::make(request('blogImgs')[0]);
-            $image_thumb = $image_thumb->resize(480, 360);
+            $image_thumb = $image_thumb->resize(600, 315);
             $image_thumb = $image_thumb->stream();
             Storage::disk('s3')->put('blogImgs/thumbnails/'.$blog->id.'/'.request('blogImgs')[0]->getClientOriginalName(), $image_thumb->__toString());
         }
@@ -101,7 +95,82 @@ class BlogController extends Controller
      * @param  \App\Blog  $blog
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, Blog $blog)
+    public function show(Request $request, String $category = 'japan', Blog $blog)
+    {
+        $sideBlogsDesktop = Blog::inRandomOrder()->get();
+        $sideBlogsMobile = Blog::orderBy('created_at', 'desc')->paginate(5);
+        $html = $this->sidebarHTML($sideBlogsMobile);
+        if ($request->ajax()) {
+            return $html;
+        }
+
+        $content = $blog->content;
+
+        $content = str_replace('(SUB)', '<h5 style="font-size:2.1rem;font-weight:bold; line-height:30px;">', $content);
+        $content = str_replace('(/SUB)', '</h5>', $content);
+
+        $content = str_replace('(CONT)', '<div style="font-size:1.6rem;white-space: pre-line;">', $content);
+        $content = str_replace('(/CONT)', '</div>', $content);
+
+        $content = str_replace('(LINK)', '<a target="_blank" href=', $content);
+        $content = str_replace('(/LINK)', '</a>', $content);
+
+        $content = str_replace('(IMG)', '<img class="img-responsive border-radius-2" style="padding-top:15px;padding-bottom:15px;width:100%; height:100%" src="https://s3.amazonaws.com/twobayjobs/blogImgs/originals/'.$blog->id.'/', $content);
+        $content = str_replace('(/IMG)', '.jpg" alt="日本旅行推薦">', $content);
+
+        $content = str_replace('(BLANK)', '<p style="margin:15px"></p>', $content);
+
+        $content = str_replace('(AdsenseTop)',
+            '<div style="margin:25px 0px;">
+                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <!-- Content-Top -->
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-4485968980278243"
+                     data-ad-slot="4060710969"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>'
+        , $content);
+        
+        $content = str_replace('(Adsense)',
+            '<div style="margin:25px 0px;">
+                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <!-- Content -->
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-4485968980278243"
+                     data-ad-slot="9914751067"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>'
+        , $content);
+
+        $content = explode('(LOGO)', $content);
+
+        $fb_title = $blog->content;
+        $fb_title = str_replace('(SUB)', '', $fb_title);
+        $fb_title = str_replace('(/SUB)', '', $fb_title);
+        $fb_title = str_replace('(CONT)', '', $fb_title);
+        $fb_title = str_replace('(/CONT)', '', $fb_title);
+        $fb_title = str_replace('(IMG)', '', $fb_title);
+        $fb_title = str_replace('(/IMG)', '', $fb_title);
+        $fb_title = str_replace('(BLANK)', '', $fb_title);
+        $fb_title = str_replace('(Adsense)', '', $fb_title);
+
+        $current_blog = $blog;
+        $similar_blogs = Blog::inRandomOrder()->get();
+
+        return view('blog.show', compact('blog', 'content', 'similar_blogs', 'fb_title', 'current_blog', 'sideBlogsDesktop', 'sideBlogsMobile'));
+    }
+
+    public function showOnly(Request $request, Blog $blog)
     {
         $sideBlogsDesktop = Blog::inRandomOrder()->get();
         $sideBlogsMobile = Blog::orderBy('created_at', 'desc')->paginate(5);
@@ -181,7 +250,7 @@ class BlogController extends Controller
         $html = '';
         foreach ($sideBlogsMobile as $blog) {
             $html .='<div class="col-xs-12 col-sm-6 col-md-6" style="padding: 0px 25px; margin-bottom:15px;">
-                        <div class="hover-box-shadow"><a href="'.env("APP_URL", "https://www.freeriderhk.com").'/blog/'.$blog->id.'">
+                        <div class="hover-box-shadow"><a href="'.env("APP_URL", "https://www.freeriderhk.com").'/blog/'.$blog->category.'/'.$blog->id.'">
                             <div class="row">
                                 <img style="width:100%;" src="https://s3.amazonaws.com/twobayjobs/blogImgs/thumbnails/'.$blog->id.'/'.$blog->blogImgs->sortby("created_at")->first()->filename.'" alt="日本文化">
                             </div>
