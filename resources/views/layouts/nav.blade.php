@@ -28,7 +28,7 @@
             <li class="nav-bottom-share-right">
                 <a>
                     @if (!Request::is('/'))
-                        <div class="fb-share-button" data-href="{{ route('blog.category.show', ['blog' => $current_blog, 'category' => $current_blog->category]) }}" data-layout="button_count" data-size="small" data-mobile-iframe="true"><a class="nav-bottom-share-btn" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ route('blog.show', ['blog' => $current_blog, 'category' => $current_blog->category]) }}%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">分享貼文</a></div>
+                        <div class="fb-share-button" data-href="{{ route('blog.category.show', ['blog' => $current_blog, 'category' => $current_blog->category]) }}" data-layout="button_count" data-size="small" data-mobile-iframe="true"><a class="nav-bottom-share-btn" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ route('blog.category.show', ['blog' => $current_blog, 'category' => $current_blog->category]) }}%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">分享貼文</a></div>
                     @else
                         <div class="fb-share-button" data-href="https://www.freeriderhk.com" data-layout="button_count" data-size="large" data-mobile-iframe="true"><a class="nav-bottom-share-btn" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.freeriderhk.com/&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">分享</a></div>
                     @endif
