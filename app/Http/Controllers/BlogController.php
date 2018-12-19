@@ -238,7 +238,8 @@ class BlogController extends Controller
         $current_blog = $blog;
         $similar_blogs = Blog::inRandomOrder()->get();
 
-        return view('blog.show', compact('blog', 'content', 'similar_blogs', 'fb_title', 'current_blog', 'sideBlogsDesktop', 'sideBlogsMobile'));
+        $category = 'japan';
+        return view('blog.show', compact('blog', 'content', 'similar_blogs', 'fb_title', 'current_blog', 'sideBlogsDesktop', 'sideBlogsMobile', 'category'));
     }
 
     public function sidebarHTML($sideBlogsMobile)
