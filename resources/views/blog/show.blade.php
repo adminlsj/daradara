@@ -16,7 +16,7 @@
 						</div>
 						&nbsp;
 						<div style="margin-top: -20px;">
-							<div class="fb-like" data-href="{{ route('blog.category.show', ['blog' => $blog, 'category' => $blog->category]) }}" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+							<div class="fb-like" data-href="{{ route('blog.category.show', ['blog' => $blog, 'genre' => App\Blog::$genre[$blog->category], 'category' => $blog->category]) }}" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
 						</div>
 					</div>
 				</h4>
@@ -36,7 +36,7 @@
 	<div class="row">
 		<div class="col-xs-12 col-sm-12 col-md-12">
 			<div>
-		        <h3 style="color: grey; font-weight: 300">日本文化 | 旅遊資訊</h3>
+		        <h3 style="color: grey; font-weight: 300">{{ App\Blog::$category[$category] }}文化 | 旅遊資訊</h3>
 		        <hr>
 		    </div>
 			<div class="sidebar-wrapper">

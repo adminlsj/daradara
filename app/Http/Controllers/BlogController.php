@@ -26,17 +26,15 @@ class BlogController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function index(Request $request){
-        $sideBlogsMobile = Blog::orderBy('created_at', 'desc')->paginate(5);
+    public function index(Request $request, String $genre = 'travel', String $category = 'japan'){
+        $sideBlogsMobile = Blog::where('category', $category)->orderBy('created_at', 'desc')->paginate(5);
         $html = $this->sidebarHTML($sideBlogsMobile);
         if ($request->ajax()) {
             return $html;
         }
 
-        $blogs = Blog::all()->sortByDesc('created_at');
-        $caro_blogs = Blog::inRandomOrder()->limit(5)->get();
-        $sideBlogsDesktop = Blog::inRandomOrder()->get();
-        return view('blog.index', compact('blogs', 'caro_blogs', 'sideBlogsDesktop', 'sideBlogsMobile'));
+        $caro_blogs = Blog::where('category', $category)->inRandomOrder()->limit(5)->get();
+        return view('blog.index', compact('caro_blogs', 'sideBlogsMobile', 'category'));
     }
 
     /**
@@ -95,10 +93,9 @@ class BlogController extends Controller
      * @param  \App\Blog  $blog
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, String $category = 'japan', Blog $blog)
+    public function show(Request $request, String $genre, String $category, Blog $blog)
     {
-        $sideBlogsDesktop = Blog::inRandomOrder()->get();
-        $sideBlogsMobile = Blog::orderBy('created_at', 'desc')->paginate(5);
+        $sideBlogsMobile = Blog::where('category', $category)->orderBy('created_at', 'desc')->paginate(5);
         $html = $this->sidebarHTML($sideBlogsMobile);
         if ($request->ajax()) {
             return $html;
@@ -165,9 +162,8 @@ class BlogController extends Controller
         $fb_title = str_replace('(Adsense)', '', $fb_title);
 
         $current_blog = $blog;
-        $similar_blogs = Blog::inRandomOrder()->get();
 
-        return view('blog.show', compact('blog', 'content', 'similar_blogs', 'fb_title', 'current_blog', 'sideBlogsDesktop', 'sideBlogsMobile'));
+        return view('blog.show', compact('blog', 'content', 'fb_title', 'current_blog', 'sideBlogsMobile', 'category'));
     }
 
     public function showOnly(Request $request, Blog $blog)
@@ -250,7 +246,7 @@ class BlogController extends Controller
         $html = '';
         foreach ($sideBlogsMobile as $blog) {
             $html .='<div class="col-xs-12 col-sm-6 col-md-6" style="padding: 0px 25px; margin-bottom:15px;">
-                        <div class="hover-box-shadow"><a href="'.env("APP_URL", "https://www.freeriderhk.com").'/travel/'.$blog->category.'/'.$blog->id.'">
+                        <div class="hover-box-shadow"><a href="'.env("APP_URL", "https://www.freeriderhk.com").'/'.Blog::$genre[$blog->category].'/'.$blog->category.'/'.$blog->id.'">
                             <div class="row">
                                 <img style="width:100%;" src="https://s3.amazonaws.com/twobayjobs/blogImgs/thumbnails/'.$blog->id.'/'.$blog->blogImgs->sortby("created_at")->first()->filename.'" alt="日本文化">
                             </div>

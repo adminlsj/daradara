@@ -14,7 +14,9 @@
 Route::get('/', 'BlogController@index');
 Route::resource('blog', 'BlogController');
 Route::get('blog/{blog}', 'BlogController@showOnly')->name('blog.show');
-Route::get('travel/{category?}/{blog}', 'BlogController@show')->name('blog.category.show');
+
+Route::get('{genre}/{category}', 'BlogController@index')->name('blog.genre.show');
+Route::get('{genre}/{category}/{blog}', 'BlogController@show')->name('blog.category.show');
 
 Route::get('/contact', 'BlogController@contact');
 Route::get('/policy', 'BlogController@policy');

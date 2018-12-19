@@ -5,7 +5,7 @@
 	<div class="row">
 		<div style="overflow: hidden" class="blog-carousel owl-carousel owl-theme">
 			@foreach ($caro_blogs as $blog)
-				<a style="text-decoration: none" href="{{ route('blog.category.show', ['blog' => $blog, 'category' => $blog->category]) }}">
+				<a style="text-decoration: none" href="{{ route('blog.category.show', ['blog' => $blog, 'genre' => App\Blog::$genre[$blog->category], 'category' => $blog->category ]) }}">
 					<img src="https://s3.amazonaws.com/twobayjobs/blogImgs/originals/{{ $blog->id }}/{{ $blog->blogImgs->first()->filename }}" alt="日本文化">
 					<div style="font-size:17px;color:white;background-color: #333333; padding: 10px; margin: 0px 15px;">
 						{{ $blog->title }}
@@ -16,7 +16,7 @@
 		
 		<div class="col-xs-12 col-sm-12">
 			<div>
-		        <h3 style="color: grey; font-weight: 300">日本文化 | 旅遊資訊</h3>
+		        <h3 style="color: grey; font-weight: 300">{{ App\Blog::$category[$category] }}文化 | 旅遊資訊</h3>
 		        <hr>
 		    </div>
 			<div class="sidebar-wrapper">

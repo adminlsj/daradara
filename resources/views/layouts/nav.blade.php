@@ -1,21 +1,41 @@
 <nav class="navbar navbar-default nav-main">
     <div class="container mobile-container">
-        <!-- Left Side Of Navbar -->
         <ul style="margin-left: -15px" class="nav navbar-nav vertical-align nav-main-content" >
             <li>
-                <a href="{{ url('/') }}" style="margin-right: -10px;">
+                <a href="{{ route('blog.genre.show', ['genre' => 'travel', 'category' => $category]) }}" style="margin-right: -10px;">
                     <img src="https://s3-us-west-2.amazonaws.com/freerider/avatars/originals/default_freerider_profile_pic.jpg" style="border: 2px solid white; border-radius: 2px;" width="70px" height="70px">
                 </a>
             </li>
             <li class="nav-main-slogan">
-                <a style="font-weight: 400;" href="{{ url('/') }}">
+                <a style="font-weight: 400;" href="{{ route('blog.genre.show', ['genre' => 'travel', 'category' => $category]) }}">
                     <div style="font-size: 40px; margin-top:9px; margin-bottom: 11px">{{ config('app.name', 'FreeRider') }}</div>
-                    <h1 style="font-size: 15px; text-align: center; color: #dbdbdb; margin: 0px">日本文化 | 旅行資訊</h1>
+                    <h1 style="font-size: 15px; text-align: center; color: #dbdbdb; margin: 0px">{{ App\Blog::$category[$category] }}文化 | 旅行資訊</h1>
                 </a>
+            </li>
+        </ul>
+        <ul class="text-right sidenav-btn">
+            <li>
+                <span style="color:white; font-size:30px;cursor:pointer;" onclick="openNav()">&#9776;</span>
             </li>
         </ul>
     </div>
 </nav>
+
+<div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="{{ route('blog.genre.show', ['genre' => 'travel', 'category' => 'japan']) }}">日本</a>
+    <a href="{{ route('blog.genre.show', ['genre' => 'travel', 'category' => 'korea']) }}">韓國</a>
+</div>
+
+<script>
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+    }
+
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+    }
+</script>
 
 <nav class="navbar-bottom navbar-default">
     <div class="container mobile-container">
@@ -27,8 +47,8 @@
             </li>
             <li class="nav-bottom-share-right">
                 <a>
-                    @if (!Request::is('/'))
-                        <div class="fb-share-button" data-href="{{ route('blog.category.show', ['blog' => $current_blog, 'category' => $current_blog->category]) }}" data-layout="button_count" data-size="small" data-mobile-iframe="true"><a class="nav-bottom-share-btn" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ route('blog.category.show', ['blog' => $current_blog, 'category' => $current_blog->category]) }}%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">分享貼文</a></div>
+                    @if (Request::is('*/*/*'))
+                        <div class="fb-share-button" data-href="{{ route('blog.category.show', ['blog' => $current_blog, 'genre' => App\Blog::$genre[$current_blog->category], 'category' => $current_blog->category]) }}" data-layout="button_count" data-size="small" data-mobile-iframe="true"><a class="nav-bottom-share-btn" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ route('blog.category.show', ['blog' => $current_blog, 'genre' => App\Blog::$genre[$current_blog->category], 'category' => $current_blog->category]) }}%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">分享貼文</a></div>
                     @else
                         <div class="fb-share-button" data-href="https://www.freeriderhk.com" data-layout="button_count" data-size="large" data-mobile-iframe="true"><a class="nav-bottom-share-btn" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.freeriderhk.com/&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">分享</a></div>
                     @endif

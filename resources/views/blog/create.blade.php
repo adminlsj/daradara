@@ -7,32 +7,17 @@
 				{{ csrf_field() }}
 				<div class="row">
 					<div class="col-md-12">
-					    <input type="text" value="" id="title" name="title" placeholder="標題" required>
+					    <input style="width: 100%" type="text" value="" id="title" name="title" placeholder="標題" required>
 					</div>
 				</div>
 
 				<div class="row" style="margin-top: 10px">
-					<div class="col-md-2">
-					    <input class="form-check-input" type="checkbox" id="is_travel" name="is_travel" value="1"> 旅遊
-					</div>
-					<div class="col-md-2">
-					    <input class="form-check-input" type="checkbox" id="is_japan" name="is_japan" value="1"> 日本
-					</div>
-					<div class="col-md-2">
-					    <input class="form-check-input" type="checkbox" id="is_korea" name="is_korea" value="1"> 韓國
-					</div>
-					<div class="col-md-2">
-					    <input class="form-check-input" type="checkbox" id="is_taiwan" name="is_taiwan" value="1"> 台灣
-					</div>
-					<div class="col-md-2">
-					    <input class="form-check-input" type="checkbox" id="is_food" name="is_food" value="1"> 美食
-					</div>
-					<div class="col-md-2">
-					    <input class="form-check-input" type="checkbox" id="is_fashion" name="is_fashion" value="1"> 潮流
+					<div class="col-md-12">
+					    <input style="width: 100%" type="text" value="" id="category" name="category" placeholder="分類" required>
 					</div>
 				</div>
 
-				<div class="row" style="margin-top: 35px">
+				<div class="row" style="margin-top: 10px">
 					<div class="col-md-12">
 					    <textarea style="width: 100%; padding: 10px; border-color: #AAA" type="text" value="" id="content" name="content" placeholder="內容" rows="20" required></textarea>
 					</div>
