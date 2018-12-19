@@ -93,7 +93,7 @@ class BlogController extends Controller
      * @param  \App\Blog  $blog
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, String $genre, String $category, Blog $blog)
+    public function show(Request $request, String $genre = 'travel', String $category = 'japan', Blog $blog)
     {
         $sideBlogsMobile = Blog::where('category', $category)->orderBy('created_at', 'desc')->paginate(5);
         $html = $this->sidebarHTML($sideBlogsMobile);
