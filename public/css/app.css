@@ -8730,6 +8730,8 @@ button.close {
 html,
 body {
   max-width: 100%;
+  -ms-touch-action: manipulation;
+      touch-action: manipulation;
 }
 
 body {
