@@ -12,6 +12,8 @@ class Blog extends Model
 
     public static $genre = ['japan' => '旅遊', 'korea' => '旅遊', 'thai' => '旅遊', 'hk' => '旅遊', 'japan_en' => 'Travel', 'news' => '科技', 'startup' => '科技'];
 
+    public static $genre_url = ['japan' => 'travel', 'korea' => 'travel', 'thai' => 'travel', 'hk' => 'travel', 'japan_en' => 'travel', 'news' => 'tech', 'startup' => 'tech'];
+
     public static $category = ['japan' => '日本文化', 'korea' => '韓國文化', 'japan_en' => 'Japan', 'news' => '時事', 'startup' => '初創'];
 
     public function blogImgs()

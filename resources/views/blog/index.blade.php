@@ -5,7 +5,7 @@
 	<div class="row">
 		<div style="overflow: hidden" class="blog-carousel owl-carousel owl-theme">
 			@foreach ($caro_blogs as $blog)
-				<a style="text-decoration: none" href="{{ route('blog.category.show', ['blog' => $blog, 'genre' => App\Blog::$genre[$blog->category], 'category' => $blog->category ]) }}">
+				<a style="text-decoration: none" href="{{ route('blog.category.show', ['blog' => $blog, 'genre' => App\Blog::$genre_url[$blog->category], 'category' => $blog->category ]) }}">
 					<img src="https://s3.amazonaws.com/twobayjobs/blogImgs/originals/{{ $blog->id }}/{{ $blog->blogImgs->sortBy('created_at')->first()->filename }}" alt="日本文化">
 					<div style="font-size:17px;color:white;background-color: #333333; padding: 10px; margin: 0px 15px;">
 						{{ $blog->title }}
