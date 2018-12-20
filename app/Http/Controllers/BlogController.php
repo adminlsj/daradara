@@ -117,6 +117,22 @@ class BlogController extends Controller
 
         $content = str_replace('(BLANK)', '<p style="margin:15px"></p>', $content);
 
+        $contentTopData = "";
+        $contentData = "";
+        switch ($genre) {
+            case 'travel':
+                $contentTopData = '4060710969';
+                $contentData = '9914751067';
+                break;
+            case 'tech':
+                $contentTopData = '2660986465';
+                $contentData = '7254837598';
+                break;
+            default:
+                $contentTopData = '4060710969';
+                $contentData = '9914751067';
+                break;
+        }
         $content = str_replace('(AdsenseTop)',
             '<div style="margin:25px 0px;">
                 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -124,7 +140,7 @@ class BlogController extends Controller
                 <ins class="adsbygoogle"
                      style="display:block"
                      data-ad-client="ca-pub-4485968980278243"
-                     data-ad-slot="4060710969"
+                     data-ad-slot="'.$contentTopData.'"
                      data-ad-format="auto"
                      data-full-width-responsive="true"></ins>
                 <script>
@@ -140,7 +156,7 @@ class BlogController extends Controller
                 <ins class="adsbygoogle"
                      style="display:block"
                      data-ad-client="ca-pub-4485968980278243"
-                     data-ad-slot="9914751067"
+                     data-ad-slot="'.$contentData.'"
                      data-ad-format="auto"
                      data-full-width-responsive="true"></ins>
                 <script>

@@ -9,7 +9,7 @@
             <li class="nav-main-slogan">
                 <a style="font-weight: 400;" href="{{ route('blog.genre.show', ['genre' => 'travel', 'category' => $category]) }}">
                     <div style="font-size: 40px; margin-top:9px; margin-bottom: 11px">{{ config('app.name', 'FreeRider') }}</div>
-                    <h1 style="font-size: 15px; text-align: center; color: #dbdbdb; margin: 0px">{{ App\Blog::$category[$category] }}文化 | 旅行資訊</h1>
+                    <h1 style="font-size: 15px; text-align: center; color: #dbdbdb; margin: 0px">{{ App\Blog::$category[$category] }} | {{ App\Blog::$genre[$category] }}資訊</h1>
                 </a>
             </li>
         </ul>
@@ -23,8 +23,12 @@
 
 <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <a href="{{ route('blog.genre.show', ['genre' => 'travel', 'category' => 'japan']) }}">日本</a>
-    <a href="{{ route('blog.genre.show', ['genre' => 'travel', 'category' => 'korea']) }}">韓國</a>
+    <a style="color: white" href="#">旅遊</a>
+    <a class="text-center" href="{{ route('blog.genre.show', ['genre' => 'travel', 'category' => 'japan']) }}">日本</a>
+    <a class="text-center" href="{{ route('blog.genre.show', ['genre' => 'travel', 'category' => 'korea']) }}">韓國</a>
+    <a style="color: white" href="#">科技</a>
+    <a class="text-center" href="{{ route('blog.genre.show', ['genre' => 'tech', 'category' => 'news']) }}">時事</a>
+    <a class="text-center" href="{{ route('blog.genre.show', ['genre' => 'tech', 'category' => 'startup']) }}">初創</a>
 </div>
 
 <script>

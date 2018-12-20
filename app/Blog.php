@@ -10,9 +10,9 @@ class Blog extends Model
         'title', 'content', 'content', 'is_travel', 'is_japan', 'is_korea', 'is_taiwan', 'is_food', 'is_fashion',
     ];
 
-    public static $genre = ['japan' => 'travel', 'korea' => 'travel', 'thai' => 'travel', 'hk' => 'travel', 'japan_en' => 'travel'];
+    public static $genre = ['japan' => '旅遊', 'korea' => '旅遊', 'thai' => '旅遊', 'hk' => '旅遊', 'japan_en' => 'Travel', 'news' => '科技', 'startup' => '科技'];
 
-    public static $category = ['japan' => '日本', 'korea' => '韓國', 'japan_en' => 'Japan'];
+    public static $category = ['japan' => '日本文化', 'korea' => '韓國文化', 'japan_en' => 'Japan', 'news' => '時事', 'startup' => '初創'];
 
     public function blogImgs()
     {

@@ -36,7 +36,7 @@
 	<div class="row">
 		<div class="col-xs-12 col-sm-12 col-md-12">
 			<div>
-		        <h3 style="color: grey; font-weight: 300">{{ App\Blog::$category[$category] }}文化 | 旅遊資訊</h3>
+		        <h3 style="color: grey; font-weight: 300">{{ App\Blog::$category[$category] }} | {{ App\Blog::$genre[$category] }}資訊</h3>
 		        <hr>
 		    </div>
 			<div class="sidebar-wrapper">
