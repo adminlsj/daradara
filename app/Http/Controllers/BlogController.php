@@ -314,7 +314,8 @@ class BlogController extends Controller
 
     public function contact()
     {
-        return view('layouts.contact');
+        $category = 'japan';
+        return view('layouts.contact', compact('category'));
     }
 
     public function policy()

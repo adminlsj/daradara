@@ -46,7 +46,7 @@
         <ul class="nav navbar-nav text-center" >
             <li class="nav-bottom-like-left">
                 <a>
-                    <div class="fb-like" data-href="https://www.facebook.com/freeriderhk" data-layout="button_count" data-action="like" data-size="large" data-show-faces="false" data-share="false"></div>
+                    <div class="fb-like" data-href="https://www.facebook.com/freeriderjapan" data-layout="button_count" data-action="like" data-size="large" data-show-faces="false" data-share="false"></div>
                 </a>
             </li>
             <li class="nav-bottom-share-right">

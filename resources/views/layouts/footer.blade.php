@@ -15,7 +15,7 @@
             <div style="text-align: center" class="col-md-2">
                 <h5>About us</h5>
                 <ul>
-                    <li><a href="https://www.facebook.com/twobayjobs/" target="_blank">關於我們</a></li>
+                    <li><a href="https://www.facebook.com/freeriderhk/" target="_blank">關於我們</a></li>
                     <li><a href="/contact" target="_blank">加入我們</a></li>
                     <li><a href="/policy" target="_blank">隱私政策</a></li>
                 </ul>
