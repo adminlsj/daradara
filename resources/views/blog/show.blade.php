@@ -16,7 +16,7 @@
 						</div>
 						&nbsp;
 						<div style="margin-top: -20px;">
-							<div class="fb-like" data-href="{{ route('blog.category.show', ['blog' => $blog, 'genre' => App\Blog::$genre_url[$blog->category], 'category' => $blog->category]) }}" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+							<div class="fb-like" data-href="https://www.freeriderhk.com/{{ App\Blog::$genre_url[$blog->category] }}/{{ $blog->category }}/{{ $blog->id }}/" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
 						</div>
 					</div>
 				</h4>
@@ -27,7 +27,7 @@
 
 				<div style="margin-top:20px; padding: 10px 5px; width: 100%; background-color: #f0f0f0; text-align: center; color: #3b5998">
 					<div style="line-height: 15px">更多日本旅遊資訊及文化，讚好FreeRider專頁</div>
-					<div class="fb-like" data-href="https://www.facebook.com/freeriderhk" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+					<div class="fb-like" data-href="https://www.facebook.com/freeriderjapan" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
 				</div>
 			</div>
 		</div>
