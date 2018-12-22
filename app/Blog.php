@@ -16,6 +16,8 @@ class Blog extends Model
 
     public static $category = ['japan' => '日本文化', 'korea' => '韓國文化', 'japan_en' => 'Japan', 'news' => '時事', 'startup' => '初創'];
 
+    public static $fb_page = ['japan' => 'japan', 'korea' => 'korea', 'news' => 'tech', 'startup' => 'tech'];
+
     public function blogImgs()
     {
         return $this->hasMany('App\BlogImg');
