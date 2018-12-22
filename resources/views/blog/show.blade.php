@@ -26,8 +26,8 @@
 				@endforeach
 
 				<div style="margin-top:20px; padding: 10px 5px; width: 100%; background-color: #f0f0f0; text-align: center; color: #3b5998">
-					<div style="line-height: 15px">更多日本旅遊資訊及文化，讚好FreeRider專頁</div>
-					<div class="fb-like" data-href="https://www.facebook.com/freeriderjapan" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="false"></div>
+					<div style="line-height: 15px">{{ App\Blog::$fb_recommend[$category] }}，讚好FreeRider專頁</div>
+					<div class="fb-like" data-href="https://www.facebook.com/freerider{{ App\Blog::$fb_page[$category] }}" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="false"></div>
 				</div>
 			</div>
 		</div>

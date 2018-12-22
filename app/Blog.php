@@ -18,6 +18,8 @@ class Blog extends Model
 
     public static $fb_page = ['japan' => 'japan', 'korea' => 'korea', 'news' => 'tech', 'startup' => 'tech'];
 
+    public static $fb_recommend = ['japan' => '更多日本旅遊資訊及文化', 'korea' => '更多韓國旅遊資訊及文化', 'news' => '更多科技與特斯拉資訊', 'startup' => '更多科技與特斯拉資訊'];
+
     public function blogImgs()
     {
         return $this->hasMany('App\BlogImg');
