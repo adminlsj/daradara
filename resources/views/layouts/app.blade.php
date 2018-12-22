@@ -12,7 +12,7 @@
     </script>
 
     @if (Request::is('*/*/*'))
-        <meta property="og:url" content="{{ route('blog.category.show', ['blog' => $current_blog, 'genre' => App\Blog::$genre[$current_blog->category], 'category' => $current_blog->category]) }}" />
+        <meta property="og:url" content="{{ route('blog.category.show', ['blog' => $current_blog, 'genre' => App\Blog::$genre_url[$current_blog->category], 'category' => $current_blog->category]) }}" />
         <meta property="og:type" content="article" />
         <meta property="og:title" content="{{ $current_blog->title }}" />
         <meta property="og:description" content="{{ str_limit($fb_title, 50) }}" />
