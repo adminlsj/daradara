@@ -54,7 +54,7 @@
                     @if (Request::is('*/*/*') || Request::is('blog/*'))
                         <div class="fb-share-button" data-href="https://www.freeriderhk.com/{{App\Blog::$genre_url[$current_blog->category]}}/{{ $current_blog->category }}/{{ $current_blog->id }}/" data-layout="button_count" data-size="small" data-mobile-iframe="true"><a class="nav-bottom-share-btn" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.freeriderhk.com/{{App\Blog::$genre_url[$current_blog->category]}}/{{ $current_blog->category }}/{{ $current_blog->id }}/&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">{{ $category == 'japanews' ? 'Share Post' : '分享貼文' }}</a></div>
                     @else
-                        <div class="fb-share-button" data-href="https://www.freeriderhk.com" data-layout="button_count" data-size="large" data-mobile-iframe="true"><a class="nav-bottom-share-btn" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.freeriderhk.com/&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">分享</a></div>
+                        <div class="fb-share-button" data-href="https://www.freeriderhk.com" data-layout="button_count" data-size="large" data-mobile-iframe="true"><a class="nav-bottom-share-btn" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.freeriderhk.com/&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">{{ $category == 'japanews' ? 'Share' : '分享' }}</a></div>
                     @endif
                 </a>
             </li>
