@@ -26,7 +26,7 @@
 				@endforeach
 
 				<div style="margin-top:20px; padding: 10px 5px; width: 100%; background-color: #f0f0f0; text-align: center; color: #3b5998">
-					<div style="line-height: 15px">{{ App\Blog::$fb_recommend[$category] }}，讚好FreeRider專頁</div>
+					<div style="line-height: 15px">{{ App\Blog::$fb_recommend[$category] }}</div>
 					<div class="fb-like" data-href="https://www.facebook.com/freerider{{ App\Blog::$fb_page[$category] }}" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="false"></div>
 				</div>
 			</div>
@@ -36,7 +36,7 @@
 	<div class="row">
 		<div class="col-xs-12 col-sm-12 col-md-12">
 			<div>
-		        <h3 style="color: grey; font-weight: 300">{{ App\Blog::$category[$category] }} | {{ App\Blog::$genre[$category] }}資訊</h3>
+		        <h3 style="color: grey; font-weight: 300">{{ App\Blog::$category[$category] }} | {{ App\Blog::$genre[$category] }}</h3>
 		        <hr>
 		    </div>
 			<div class="sidebar-wrapper">

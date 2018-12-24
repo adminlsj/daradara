@@ -121,9 +121,15 @@ class BlogController extends Controller
         $contentData = "";
         switch ($genre) {
             case 'travel':
-                $contentTopData = '4060710969';
-                $contentData = '9914751067';
-                break;
+                if ($category == 'japan' || $category == 'korea') {
+                    $contentTopData = '4060710969';
+                    $contentData = '9914751067';
+                    break;
+                } elseif ($category == 'japanews') {
+                    $contentTopData = '8818645799';
+                    $contentData = '1365206344';
+                    break;
+                }
             case 'tech':
                 $contentTopData = '2660986465';
                 $contentData = '7254837598';

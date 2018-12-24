@@ -4,7 +4,7 @@
 <div style="margin-top: -20px" class="container mobile-container">
 	<div class="row">
 		<div style="overflow: hidden" class="text-center">
-			<div class="fb-page" data-href="https://www.facebook.com/freerider{{ App\Blog::$fb_page[$category] }}" data-tabs="timeline" data-width="500" data-height="70" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/freeriderjapan" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/freeriderjapan">FreeRider 日本</a></blockquote></div>
+			<div class="fb-page" data-href="https://www.facebook.com/freerider{{ App\Blog::$fb_page[$category] }}" data-tabs="timeline" data-width="500" data-height="70" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/freeriderjapan" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/freerider{{ App\Blog::$fb_page[$category] }}">FreeRider {{ App\Blog::$fb_page[$category] }}</a></blockquote></div>
 		</div>
 
 		<div style="overflow: hidden" class="blog-carousel owl-carousel owl-theme">
@@ -20,7 +20,7 @@
 		
 		<div class="col-xs-12 col-sm-12">
 			<div>
-		        <h3 style="color: grey; font-weight: 300">{{ App\Blog::$category[$category] }} | {{ App\Blog::$genre[$category] }}資訊</h3>
+		        <h3 style="color: grey; font-weight: 300">{{ App\Blog::$category[$category] }} | {{ App\Blog::$genre[$category] }}</h3>
 		        <hr>
 		    </div>
 			<div class="sidebar-wrapper">
