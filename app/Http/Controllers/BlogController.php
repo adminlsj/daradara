@@ -327,7 +327,7 @@ class BlogController extends Controller
     public function policy()
     {
         $category = 'japan';
-        return view('layouts.policy');
+        return view('layouts.policy', compact('category'));
     }
 
     public function sendMail(String $status)
