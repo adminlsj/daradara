@@ -42,7 +42,7 @@
 
 <nav class="navbar-bottom navbar-default">
     <div class="fb-share-container">
-        <div style="margin-top: -1px;" class="fb-page" data-href="https://www.facebook.com/freerider{{ App\Blog::$pages[$category]['name'] }}" data-tabs="timeline" data-width="500" data-height="72" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/freeriderjapan" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/freerider{{ App\Blog::$pages[$category]['name'] }}">FreeRider {{ App\Blog::$pages[$category]['name'] }}</a></blockquote></div>
+        <div style="margin-top: -1px;" class="fb-page" data-href="https://www.facebook.com/freerider{{ App\Blog::$pages[$category]['name'] }}" data-tabs="timeline" data-width="500" data-height="72" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/freerider{{ App\Blog::$pages[$category]['name'] }}" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/freerider{{ App\Blog::$pages[$category]['name'] }}">FreeRider {{ App\Blog::$pages[$category]['name'] }}</a></blockquote></div>
 
         <div style="position: absolute; top: 38px; right: 2rem">
             @if (Request::is('*/*/*') || Request::is('blog/*'))

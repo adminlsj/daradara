@@ -326,11 +326,13 @@ class BlogController extends Controller
 
     public function policy()
     {
+        $category = 'japan';
         return view('layouts.policy');
     }
 
     public function sendMail(String $status)
     {
+        $category = 'japan';
         switch ($status) {
             case 'contact':
                 $user_email = request('email');
