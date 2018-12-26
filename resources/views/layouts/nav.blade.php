@@ -9,7 +9,7 @@
             <li class="nav-main-slogan">
                 <a style="font-weight: 400;" href="{{ route('blog.genre.show', ['genre' => 'travel', 'category' => $category]) }}">
                     <div style="font-size: 40px; margin-top:9px; margin-bottom: 11px">{{ config('app.name', 'FreeRider') }}</div>
-                    <h1 style="font-size: 15px; text-align: center; color: #dbdbdb; margin: 0px">{{ App\Blog::$category[$category] }} | {{ App\Blog::$genre[$category] }}</h1>
+                    <h1 style="font-size: 15px; text-align: center; color: #dbdbdb; margin: 0px">{{ App\Blog::$pages[$category]['nav'] }}</h1>
                 </a>
             </li>
         </ul>
@@ -28,7 +28,6 @@
     <a class="text-center" href="{{ route('blog.genre.show', ['genre' => 'travel', 'category' => 'korea']) }}">韓國</a>
     <a style="color: white" href="#">科技</a>
     <a class="text-center" href="{{ route('blog.genre.show', ['genre' => 'tech', 'category' => 'news']) }}">時事</a>
-    <a class="text-center" href="{{ route('blog.genre.show', ['genre' => 'tech', 'category' => 'startup']) }}">初創</a>
 </div>
 
 <script>
@@ -42,22 +41,15 @@
 </script>
 
 <nav class="navbar-bottom navbar-default">
-    <div class="container mobile-container">
-        <ul class="nav navbar-nav text-center" >
-            <li class="nav-bottom-like-left">
-                <a>
-                    <div class="fb-like" data-href="https://www.facebook.com/freerider{{ App\Blog::$fb_page[$category] }}" data-layout="button_count" data-action="like" data-size="large" data-show-faces="false" data-share="false"></div>
-                </a>
-            </li>
-            <li class="nav-bottom-share-right">
-                <a>
-                    @if (Request::is('*/*/*') || Request::is('blog/*'))
-                        <div class="fb-share-button" data-href="https://www.freeriderhk.com/{{App\Blog::$genre_url[$current_blog->category]}}/{{ $current_blog->category }}/{{ $current_blog->id }}/" data-layout="button_count" data-size="small" data-mobile-iframe="true"><a class="nav-bottom-share-btn" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.freeriderhk.com/{{App\Blog::$genre_url[$current_blog->category]}}/{{ $current_blog->category }}/{{ $current_blog->id }}/&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">{{ $category == 'japanews' ? 'Share Post' : '分享貼文' }}</a></div>
-                    @else
-                        <div class="fb-share-button" data-href="https://www.freeriderhk.com" data-layout="button_count" data-size="large" data-mobile-iframe="true"><a class="nav-bottom-share-btn" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.freeriderhk.com/&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">{{ $category == 'japanews' ? 'Share' : '分享' }}</a></div>
-                    @endif
-                </a>
-            </li>
-        </ul>
+    <div class="fb-share-container">
+        <div style="margin-top: -1px;" class="fb-page" data-href="https://www.facebook.com/freerider{{ App\Blog::$pages[$category]['name'] }}" data-tabs="timeline" data-width="500" data-height="72" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/freeriderjapan" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/freerider{{ App\Blog::$pages[$category]['name'] }}">FreeRider {{ App\Blog::$pages[$category]['name'] }}</a></blockquote></div>
+
+        <div style="position: absolute; top: 38px; right: 2rem">
+            @if (Request::is('*/*/*') || Request::is('blog/*'))
+                <div data-href="https://www.freeriderhk.com/{{ App\Blog::$pages[$current_blog->category]['genre'] }}/{{ $current_blog->category }}/{{ $current_blog->id }}/" data-layout="button_count" data-size="small" data-mobile-iframe="true"><a class="nav-bottom-share-btn" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.freeriderhk.com/{{ App\Blog::$pages[$current_blog->category]['genre'] }}/{{ $current_blog->category }}/{{ $current_blog->id }}/&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">{{ $category == 'japanews' ? 'Share Post' : '分享貼文' }}</a></div>
+            @else
+                <div data-href="https://www.freeriderhk.com" data-layout="button_count" data-size="large" data-mobile-iframe="true"><a class="nav-bottom-share-btn" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.freeriderhk.com/&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">{{ $category == 'japanews' ? 'Share' : '分享' }}</a></div>
+            @endif
+        </div>
     </div>
 </nav>

@@ -10,15 +10,35 @@ class Blog extends Model
         'title', 'content', 'content', 'is_travel', 'is_japan', 'is_korea', 'is_taiwan', 'is_food', 'is_fashion',
     ];
 
-    public static $genre = ['japan' => '旅遊', 'korea' => '旅遊', 'thai' => '旅遊', 'hk' => '旅遊', 'japanews' => 'Travel', 'news' => '科技', 'startup' => '科技'];
+    public static $pages = [
+        'japan' => [
+            'nav' => '日本旅遊與文化',
+            'genre' => 'travel',
+            'name' => 'japan',
+            'recommend' => '更多日本旅遊資訊及文化，讚好FreeRider專頁'
+        ],
 
-    public static $genre_url = ['japan' => 'travel', 'korea' => 'travel', 'japanews' => 'travel', 'thai' => 'travel', 'hk' => 'travel', 'news' => 'tech', 'startup' => 'tech'];
+        'korea' => [
+            'nav' => '韓國旅遊與文化',
+            'genre' => 'travel',
+            'name' => 'korea',
+            'recommend' => '更多韓國旅遊資訊及文化，讚好FreeRider專頁'
+        ],
 
-    public static $category = ['japan' => '日本文化', 'korea' => '韓國文化', 'japanews' => 'Japan Culture', 'news' => '時事', 'startup' => '初創'];
+        'news' => [
+            'nav' => '科技資訊與初創',
+            'genre' => 'tech',
+            'name' => 'tech',
+            'recommend' => '更多科技與特斯拉資訊，讚好FreeRider專頁'
+        ],
 
-    public static $fb_page = ['japan' => 'japan', 'korea' => 'korea', 'japanews' => 'japanews', 'news' => 'tech', 'startup' => 'tech'];
-
-    public static $fb_recommend = ['japan' => '更多日本旅遊資訊及文化，讚好FreeRider專頁', 'korea' => '更多韓國旅遊資訊及文化，讚好FreeRider專頁', 'japanews' => 'Like our page for more Interesting Japan!', 'news' => '更多科技與特斯拉資訊，讚好FreeRider專頁', 'startup' => '更多科技與特斯拉資訊，讚好FreeRider專頁'];
+        'japanews' => [
+            'nav' => 'Japan Travel & Culture',
+            'genre' => 'travel',
+            'name' => 'japanews',
+            'recommend' => 'Like our page for more Interesting Japan!'
+        ]
+    ];
 
     public function blogImgs()
     {

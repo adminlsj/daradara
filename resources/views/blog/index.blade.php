@@ -3,13 +3,9 @@
 @section('content')
 <div style="margin-top: -20px" class="container mobile-container">
 	<div class="row">
-		<div style="overflow: hidden" class="text-center">
-			<div class="fb-page" data-href="https://www.facebook.com/freerider{{ App\Blog::$fb_page[$category] }}" data-tabs="timeline" data-width="500" data-height="70" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/freeriderjapan" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/freerider{{ App\Blog::$fb_page[$category] }}">FreeRider {{ App\Blog::$fb_page[$category] }}</a></blockquote></div>
-		</div>
-
 		<div style="overflow: hidden" class="blog-carousel owl-carousel owl-theme">
 			@foreach ($caro_blogs as $blog)
-				<a style="text-decoration: none" href="{{ route('blog.category.show', ['blog' => $blog, 'genre' => App\Blog::$genre_url[$blog->category], 'category' => $blog->category ]) }}">
+				<a style="text-decoration: none" href="{{ route('blog.category.show', ['blog' => $blog, 'genre' => App\Blog::$pages[$blog->category]['genre'], 'category' => $blog->category ]) }}">
 					<img src="https://s3.amazonaws.com/twobayjobs/blogImgs/thumbnails/{{ $blog->id }}/{{ $blog->blogImgs->sortBy('created_at')->first()->filename }}" alt="日本文化">
 					<div style="font-size:17px;color:white;background-color: #333333; padding: 10px; margin: 0px 15px;">
 						{{ $blog->title }}
@@ -20,7 +16,7 @@
 		
 		<div class="col-xs-12 col-sm-12">
 			<div>
-		        <h3 style="color: grey; font-weight: 300">{{ App\Blog::$category[$category] }} | {{ App\Blog::$genre[$category] }}</h3>
+		        <h3 style="color: grey; font-weight: 300">{{ App\Blog::$pages[$category]['nav'] }}</h3>
 		        <hr>
 		    </div>
 			<div class="sidebar-wrapper">

@@ -12,11 +12,11 @@
 					<div style="font-size:3rem;">{{ $blog->title }}</div>
 					<div style="padding-left: 3px" class="vertical-align">
 						<div style="font-size:14px;font-weight:300;">
-							{{ Carbon\Carbon::parse($blog->created_at)->format('Y年m月d日') }}
+							{{ Carbon\Carbon::parse($blog->created_at)->format('d / m / Y') }}
 						</div>
 						&nbsp;
 						<div style="margin-top: -20px;">
-							<div class="fb-like" data-href="https://www.freeriderhk.com/{{ App\Blog::$genre_url[$blog->category] }}/{{ $blog->category }}/{{ $blog->id }}/" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="false"></div>
+							<div class="fb-like" data-href="https://www.freeriderhk.com/{{ App\Blog::$pages[$blog->category]['name'] }}/{{ $blog->category }}/{{ $blog->id }}/" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="false"></div>
 						</div>
 					</div>
 				</h4>
@@ -26,8 +26,8 @@
 				@endforeach
 
 				<div style="margin-top:20px; padding: 10px 5px; width: 100%; background-color: #f0f0f0; text-align: center; color: #3b5998">
-					<div style="line-height: 15px">{{ App\Blog::$fb_recommend[$category] }}</div>
-					<div class="fb-like" data-href="https://www.facebook.com/freerider{{ App\Blog::$fb_page[$category] }}" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="false"></div>
+					<div style="line-height: 15px">{{ App\Blog::$pages[$category]['recommend'] }}</div>
+					<div class="fb-like" data-href="https://www.facebook.com/freerider{{ App\Blog::$pages[$category]['name'] }}" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="false"></div>
 				</div>
 			</div>
 		</div>
@@ -36,7 +36,7 @@
 	<div class="row">
 		<div class="col-xs-12 col-sm-12 col-md-12">
 			<div>
-		        <h3 style="color: grey; font-weight: 300">{{ App\Blog::$category[$category] }} | {{ App\Blog::$genre[$category] }}</h3>
+		        <h3 style="color: grey; font-weight: 300">{{ App\Blog::$pages[$category]['nav'] }}</h3>
 		        <hr>
 		    </div>
 			<div class="sidebar-wrapper">
