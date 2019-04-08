@@ -171,6 +171,14 @@ class BlogController extends Controller
             </div>'
         , $content);
 
+        $content = str_replace('(TwitterIMG)',
+            '<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">
+                <a href="'.$blog->twitterimg.'"></a>
+            </blockquote>
+            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8">
+            </script>'
+        , $content);
+
         $content = explode('(LOGO)', $content);
 
         $fb_title = $blog->content;
