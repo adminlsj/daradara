@@ -2,7 +2,7 @@
     <div style="width: 90%" class="container">
         <div class="row">
             <div style="text-align: center" class="col-sm-12 col-md-3">
-                <h2 class="logo"><a href="#">FreeRider</a></h2>
+                <h2 class="logo"><a href="#">{{ $category == 'lollipop' ? 'Lollipop' : 'FreeRider' }}</a></h2>
             </div>
             <div class="col-sm-12 col-md-2 col-md-offset-4 text-center">
                 <h5>Get started</h5>
@@ -23,6 +23,6 @@
         </div>
     </div>
     <div class="footer-copyright">
-        <p>© 2016 Copyright by FreeRider </p>
+        <p>© 2016 Copyright by {{ $category == 'lollipop' ? 'Lollipop' : 'FreeRider' }}</p>
     </div>
 </footer>

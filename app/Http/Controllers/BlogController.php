@@ -115,6 +115,12 @@ class BlogController extends Controller
         $content = str_replace('(IMG)', '<img class="img-responsive border-radius-2" style="padding-top:15px;padding-bottom:15px;width:100%; height:100%" src="https://s3.amazonaws.com/twobayjobs/blogImgs/originals/'.$blog->id.'/', $content);
         $content = str_replace('(/IMG)', '.jpg" alt="日本旅行推薦">', $content);
 
+        $content = str_replace('(TwitterIMG)', '<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">
+                <a href="', $content);
+        $content = str_replace('(/TwitterIMG)', '"></a></blockquote>
+            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8">
+            </script>', $content);
+
         $content = str_replace('(BLANK)', '<p style="margin:15px"></p>', $content);
 
         $contentTopData = "";
@@ -169,14 +175,6 @@ class BlogController extends Controller
                 (adsbygoogle = window.adsbygoogle || []).push({});
                 </script>
             </div>'
-        , $content);
-
-        $content = str_replace('(TwitterIMG)',
-            '<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">
-                <a href="'.$blog->twitterimg.'"></a>
-            </blockquote>
-            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8">
-            </script>'
         , $content);
 
         $content = explode('(LOGO)', $content);

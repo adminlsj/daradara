@@ -14,28 +14,28 @@ class Blog extends Model
         'japan' => [
             'nav' => '日本旅遊與文化',
             'genre' => 'travel',
-            'name' => 'japan',
+            'name' => 'freeriderjapan',
             'recommend' => '更多日本旅遊資訊及文化，讚好FreeRider專頁'
         ],
 
-        'korea' => [
-            'nav' => '韓國旅遊與文化',
-            'genre' => 'travel',
-            'name' => 'korea',
-            'recommend' => '更多韓國旅遊資訊及文化，讚好FreeRider專頁'
+        'lollipop' => [
+            'nav' => '最新有趣潮流與資訊',
+            'genre' => 'daily',
+            'name' => 'lollipopdaily',
+            'recommend' => '更多最新有趣潮流與資訊，讚好Lollipop Daily專頁'
         ],
 
         'news' => [
             'nav' => '科技資訊與初創',
             'genre' => 'tech',
-            'name' => 'tech',
+            'name' => 'freeridertech',
             'recommend' => '更多科技與特斯拉資訊，讚好FreeRider專頁'
         ],
 
         'japanews' => [
             'nav' => 'Japan Travel & Culture',
             'genre' => 'travel',
-            'name' => 'japanews',
+            'name' => 'freeriderjapanews',
             'recommend' => 'Like our page for more Interesting Japan!'
         ]
     ];
