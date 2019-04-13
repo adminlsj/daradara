@@ -8,7 +8,7 @@
             </li>
             <li class="nav-main-slogan">
                 <a style="font-weight: 400;" href="{{ route('blog.genre.show', ['genre' => 'travel', 'category' => $category]) }}">
-                    <div style="font-size: 40px; margin-top:9px; margin-bottom: 11px">{{ $category == 'lollipop' ? 'Lollipop' : config('app.name', 'FreeRider') }}</div>
+                    <div style="font-size: 40px; margin-top:9px; margin-bottom: 11px">{{ $category == 'lollipop' ? 'NipponDaily' : config('app.name', 'FreeRider') }}</div>
                     <h1 style="font-size: 15px; text-align: center; color: #dbdbdb; margin: 0px">{{ App\Blog::$pages[$category]['nav'] }}</h1>
                 </a>
             </li>

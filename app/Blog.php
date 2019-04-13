@@ -19,10 +19,10 @@ class Blog extends Model
         ],
 
         'lollipop' => [
-            'nav' => '最新有趣潮流與資訊',
+            'nav' => '日本最新潮流與資訊',
             'genre' => 'daily',
-            'name' => 'lollipopdaily',
-            'recommend' => '更多最新有趣潮流與資訊，讚好Lollipop Daily專頁'
+            'name' => 'nippondaily',
+            'recommend' => '更多最新有趣潮流與資訊，讚好Nippon Daily專頁'
         ],
 
         'news' => [
