@@ -29,6 +29,12 @@ a:hover, a:visited {
     color: #97344a;
 }
 
+.blog-title {
+  font-weight: 600;
+  font-size: 19px;
+  color: black;  
+}
+
 div.sticky {
   position: -webkit-sticky;
   position: sticky;
@@ -529,6 +535,10 @@ a > i {
 
     .container-fluid {
       width: 100% !important;
+    }
+
+    .blog-title {
+      font-size: 15px;
     }
 }
 
