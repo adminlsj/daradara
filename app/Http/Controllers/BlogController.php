@@ -285,14 +285,14 @@ class BlogController extends Controller
         foreach ($sideBlogsMobile as $blog) {
             $html .='<div class="row hover-box-shadow" style="margin:0px -5px; padding: 15px 15px;">
                         <a href="'.env("APP_URL", "https://www.freeriderhk.com").'/'.$blog->genre.'/'.$blog->category.'/'.$blog->id.'">
-                            <div class="col-xs-3" style="position:relative">
+                            <div class="col-xs-3" style="position:relative; padding-right:0">
                                 <div class="row">
                                     <img style="width:100%; border-radius:2px" src="https://s3.amazonaws.com/twobayjobs/blogImgs/thumbnails/'.$blog->id.'/'.$blog->blogImgs->sortby("created_at")->first()->filename.'" alt="日本文化">
-                                    <div class="related-blogs-date" style="font-size: 12.5px; color: gray; position:absolute; bottom:2px; right:-110px; font-weight:400;">'.Carbon::parse($blog->created_at)->format("Y年m月d日").'</div>
+                                    <div class="related-blogs-date" style="font-size: 12.5px; color: gray; position:absolute; bottom:1px; right:-123px; font-weight:400;">'.Carbon::parse($blog->created_at)->format("Y年m月d日").'</div>
                                 </div>
                             </div>
 
-                            <div style="padding: 0px 30px" class="col-xs-9">
+                            <div style="padding: 0px 30px 0px 45px" class="col-xs-9">
                                 <div class="row">
                                     <div class="blog-title">'.str_limit($blog->title, 95).'</div>
                                     <div class="hidden-xs" style="font-weight: 400; font-size: 13.5px; color: #696969; margin-top:10px">'.str_limit($blog->caption, 300).'</div>
