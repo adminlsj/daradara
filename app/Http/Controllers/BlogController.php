@@ -37,7 +37,7 @@ class BlogController extends Controller
         $textBlogs = Blog::where('genre', $genre)->inRandomOrder()->limit(2)->get();
 
         $sideBlogsDesktop = Blog::where('genre', $genre)->inRandomOrder()->limit(3)->get();
-        return view('blog.genreIndex', compact('caro_blogs', 'textBlogs', 'sideBlogsMobile', 'sideBlogsDesktop', 'category', 'genre'));
+        return view('blog.genreIndex', compact('caro_blogs', 'textBlogs', 'sideBlogsMobile', 'sideBlogsDesktop', 'genre'));
     }
 
     public function categoryIndex(Request $request, String $genre = 'travel', String $category = 'japan'){

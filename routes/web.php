@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', 'BlogController@index');
+Route::get('/', 'BlogController@genreIndex');
 
 Route::get('{genre}', 'BlogController@genreIndex')->name('blog.genre.index');
 Route::get('{genre}/{category}', 'BlogController@categoryIndex')->name('blog.category.index');
