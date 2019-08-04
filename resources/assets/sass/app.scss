@@ -18,6 +18,7 @@ html, body {
 
 body {
     background-color: white; 
+    overflow-x: hidden;
 }
 
 a, a:link {
@@ -28,12 +29,63 @@ a:hover, a:visited {
     color: #97344a;
 }
 
+div.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+}
+
+.row.no-gutter {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.row.no-gutter [class*='col-']:not(:first-child),
+.row.no-gutter [class*='col-']:not(:last-child) {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.img-container {
+  position: relative;
+}
+
+.img-caption {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  font-size: 15px;
+  padding: 5px 15px;
+  margin: 0px 15px;
+  color: white;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.div-on-img {
+   width: 100%;
+   height: auto;
+   position: relative;
+   z-index: -1;
+}
+
+.img-on-img {
+  width: 70%;
+  height: auto;
+  float: left;
+  position: absolute;
+  left: 50%;
+  margin-left: -35%;
+  top: 20%;
+  z-index: 1000;
+  border-radius: 3px;
+}
+
 .related-blogs-date {
     color: gray;
 }
 
 .nav-main {
-    height: 100px;
+    height: 50px;
     z-index: 99;
     border: none;
     border-radius: 0px;
@@ -463,11 +515,6 @@ a > i {
         width: 100% !important;
     }
 
-    .nav-main-content {
-        margin-top: 5px;
-        margin-bottom: 0px;
-    }
-
     .nav-bottom-like-left {
         margin-top: -10px;
     }
@@ -478,6 +525,10 @@ a > i {
 
     .sidenav-btn {
         margin-top: -67px;
+    }
+
+    .container-fluid {
+      width: 100% !important;
     }
 }
 
@@ -515,6 +566,10 @@ a > i {
     .mobile-container {
         width: 100% !important;
     }
+
+    .container-fluid {
+      width: 100% !important;
+    }
 }
 
 @media (min-width: 500px) {
@@ -522,4 +577,3 @@ a > i {
       margin-left: calc(50% - 250px);
     }
 }
-

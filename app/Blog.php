@@ -10,33 +10,54 @@ class Blog extends Model
         'title', 'content', 'content', 'is_travel', 'is_japan', 'is_korea', 'is_taiwan', 'is_food', 'is_fashion',
     ];
 
-    public static $pages = [
-        'japan' => [
-            'nav' => '日本旅遊與文化',
-            'genre' => 'travel',
-            'name' => 'freeriderjapan',
-            'recommend' => '更多日本旅遊資訊及文化，讚好FreeRider專頁'
-        ],
-
-        'lollipop' => [
-            'nav' => '日本最新潮流與資訊',
-            'genre' => 'daily',
-            'name' => 'nippondaily',
-            'recommend' => '更多最新有趣潮流與資訊，讚好Nippon Daily專頁'
+    public static $genres = [
+        'travel' => [
+            'navTitle' => '旅日塾',
+            'listTitle' => '日本旅行與文化',
+            'categories' => ['新聞' => 'news', '旅行' => 'japan'],
+            'name' => 'freeriderjapan'
         ],
 
         'news' => [
-            'nav' => '科技資訊與初創',
-            'genre' => 'tech',
-            'name' => 'freeridertech',
-            'recommend' => '更多科技與特斯拉資訊，讚好FreeRider專頁'
+            'navTitle' => '微新聞',
+            'listTitle' => '最新新聞資訊',
+            'categories' => ['國際' => 'world', '香港' => 'hk', '台灣' => 'tw'],
+            'name' => 'freeriderjapan'
         ],
 
-        'japanews' => [
-            'nav' => 'Japan Travel & Culture',
-            'genre' => 'travel',
-            'name' => 'freeriderjapanews',
-            'recommend' => 'Like our page for more Interesting Japan!'
+        'finance' => [
+            'navTitle' => '融易',
+            'listTitle' => '金融與投資',
+            'categories' => ['政治' => 'politics', '經濟' => 'economics', '投資' => 'investment'],
+            'name' => 'freeriderjapan'
+        ],
+
+        'tech' => [
+            'navTitle' => '科學園',
+            'listTitle' => '科技與創新',
+            'categories' => ['初創' => 'startups', '研報' => 'analytics', '快訊' => 'news'],
+            'name' => 'freeriderjapan'
+        ],
+
+        'forum' => [
+            'navTitle' => '亦語',
+            'listTitle' => '最專業的問答論壇',
+            'categories' => ['生活' => 'life', '教學' => 'tutorial', '知識' => 'knowledge'],
+            'name' => 'freeriderjapan'
+        ],
+
+        'press' => [
+            'navTitle' => '簡讀',
+            'listTitle' => '知識與幽默並重',
+            'categories' => ['生活' => 'life', '教學' => 'tutorial', '知識' => 'knowledge'],
+            'name' => 'freeriderjapan'
+        ],
+
+        'ranking' => [
+            'navTitle' => '排行百科',
+            'listTitle' => '最齊全的排行榜',
+            'categories' => ['比賽' => 'competition', '學術' => 'acedamics', '娛樂' => 'entertainment'],
+            'name' => 'freeriderjapan'
         ]
     ];
 

@@ -32,9 +32,9 @@ class User extends Authenticatable
         return $this->hasOne('App\Avatar');
     }
 
-    public function apps()
+    public function shops()
     {
-        return $this->hasMany('App\App');
+        return $this->hasMany('App\Shop');
     }
 
     public function resume()

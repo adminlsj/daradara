@@ -12,18 +12,16 @@
     </script>
 
     @if (Request::is('*/*/*'))
-        <meta property="og:url" content="{{ route('blog.category.show', ['blog' => $current_blog, 'genre' => App\Blog::$pages[$current_blog->category]['genre'], 'category' => $current_blog->category]) }}" />
+        <meta property="og:url" content="{{ route('blog.show', ['blog' => $current_blog, 'genre' => $current_blog->genre, 'category' => $current_blog->category]) }}" />
         <meta property="og:type" content="article" />
         <meta property="og:title" content="{{ $current_blog->title }}" />
         <meta property="og:description" content="{{ str_limit($fb_title, 50) }}" />
         <meta property="og:image" content="https://s3.amazonaws.com/twobayjobs/blogImgs/originals/{{ $current_blog->id }}/{{ $current_blog->blogImgs->sortby('created_at')->first()->filename }}" />
 
-        <meta name="title" content="{{ $current_blog->title }} | {{ App\Blog::$pages[$current_blog->category]['nav'] }} | FreeRider">
-        <title>{{ $current_blog->title }} | {{ App\Blog::$pages[$current_blog->category]['nav'] }} | FreeRider</title>
+        <meta name="title" content="{{ $current_blog->title }} | {{ App\Blog::$genres[$current_blog->genre]['navTitle'] }} | FreeRider">
+        <title>{{ $current_blog->title }} | {{ App\Blog::$genres[$current_blog->genre]['navTitle'] }} | FreeRider</title>
         <meta name="description" content="{{ str_limit($fb_title, 150) }}">
     @else
-        <meta name="title" content="{{ App\Blog::$pages[$category]['nav'] }} | FreeRider">
-        <title>{{ App\Blog::$pages[$category]['nav'] }} | FreeRider</title>
         <meta name="description" 
               content="FreeRider自由旅行人，撰寫相關日本文化的趣味性和探討性專題，並且分享最新的日本文化資訊。從日本歷史的古蹟與文化，到現代的科技與藝術，從庶民的生活與百態，到天皇的皇居與城府，FreeRider是專屬於喜愛日本文化群眾的頭條新聞。">
     @endif
@@ -49,7 +47,7 @@
         var js, fjs = d.getElementsByTagName(s)[0];
         if (d.getElementById(id)) return;
         js = d.createElement(s); js.id = id;
-        js.src = 'https://connect.facebook.net/{{ $category == 'japanews' ? 'en_US' : 'zh_TW' }}/sdk.js#xfbml=1&version=v3.2&appId=204935246651575&autoLogAppEvents=1';
+        js.src = 'https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v3.2&appId=204935246651575&autoLogAppEvents=1';
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));</script>
     

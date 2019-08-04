@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddTwitterimgToBlogs extends Migration
+class AddGenreToBlogs extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class AddTwitterimgToBlogs extends Migration
     public function up()
     {
         Schema::table('blogs', function($table) {
-            $table->text('twitterimg')->nullable();
+            $table->string('genre')->nullable();
         });
     }
 
@@ -26,7 +26,7 @@ class AddTwitterimgToBlogs extends Migration
     public function down()
     {
         Schema::table('blogs', function($table) {
-            $table->dropColumn('twitterimg');
+            $table->string('genre')->nullable();
         });
     }
 }

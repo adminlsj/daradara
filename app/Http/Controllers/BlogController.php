@@ -26,15 +26,29 @@ class BlogController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function index(Request $request, String $genre = 'travel', String $category = 'japan'){
-        $sideBlogsMobile = Blog::where('category', $category)->orderBy('created_at', 'desc')->paginate(5);
+    public function genreIndex(Request $request, String $genre = 'travel'){
+        $sideBlogsMobile = Blog::where('genre', $genre)->orderBy('created_at', 'desc')->paginate(5);
         $html = $this->sidebarHTML($sideBlogsMobile);
         if ($request->ajax()) {
             return $html;
         }
 
-        $caro_blogs = Blog::where('category', $category)->inRandomOrder()->limit(5)->get();
-        return view('blog.index', compact('caro_blogs', 'sideBlogsMobile', 'category'));
+        $caro_blogs = Blog::where('genre', $genre)->inRandomOrder()->limit(5)->get();
+        $textBlogs = Blog::where('genre', $genre)->inRandomOrder()->limit(2)->get();
+
+        $sideBlogsDesktop = Blog::where('genre', $genre)->inRandomOrder()->limit(3)->get();
+        return view('blog.genreIndex', compact('caro_blogs', 'textBlogs', 'sideBlogsMobile', 'sideBlogsDesktop', 'category', 'genre'));
+    }
+
+    public function categoryIndex(Request $request, String $genre = 'travel', String $category = 'japan'){
+        $sideBlogsMobile = Blog::where('genre', $genre)->where('category', $category)->orderBy('created_at', 'desc')->paginate(5);
+        $html = $this->sidebarHTML($sideBlogsMobile);
+        if ($request->ajax()) {
+            return $html;
+        }
+
+        $sideBlogsDesktop = Blog::where('genre', $genre)->inRandomOrder()->limit(3)->get();
+        return view('blog.categoryIndex', compact('sideBlogsMobile', 'sideBlogsDesktop', 'category', 'genre'));
     }
 
     /**
@@ -59,12 +73,6 @@ class BlogController extends Controller
             'title' => request('title'),
             'content' => request('content'),
             'category' => request('category'),
-            'is_travel' => request('is_travel'),
-            'is_japan' => request('is_japan'),
-            'is_korea' => request('is_korea'),
-            'is_taiwan' => request('is_taiwan'),
-            'is_food' => request('is_food'),
-            'is_fashion' => request('is_fashion'),
         ]);
 
         if (request('blogImgs')) {
@@ -79,7 +87,7 @@ class BlogController extends Controller
             }
 
             $image_thumb = Image::make(request('blogImgs')[0]);
-            $image_thumb = $image_thumb->resize(600, 315);
+            $image_thumb = $image_thumb->crop(350, 350);
             $image_thumb = $image_thumb->stream();
             Storage::disk('s3')->put('blogImgs/thumbnails/'.$blog->id.'/'.request('blogImgs')[0]->getClientOriginalName(), $image_thumb->__toString());
         }
@@ -95,11 +103,12 @@ class BlogController extends Controller
      */
     public function show(Request $request, String $genre = 'travel', String $category = 'japan', Blog $blog)
     {
-        $sideBlogsMobile = Blog::where('category', $category)->orderBy('created_at', 'desc')->paginate(5);
+        $sideBlogsMobile = Blog::where('genre', $genre)->where('category', $category)->orderBy('created_at', 'desc')->paginate(5);
         $html = $this->sidebarHTML($sideBlogsMobile);
         if ($request->ajax()) {
             return $html;
         }
+        $sideBlogsDesktop = Blog::where('genre', $genre)->inRandomOrder()->limit(3)->get();
 
         $content = $blog->content;
 
@@ -191,7 +200,7 @@ class BlogController extends Controller
 
         $current_blog = $blog;
 
-        return view('blog.show', compact('blog', 'content', 'fb_title', 'current_blog', 'sideBlogsMobile', 'category'));
+        return view('blog.show', compact('blog', 'content', 'fb_title', 'current_blog', 'sideBlogsMobile', 'sideBlogsDesktop', 'category', 'genre'));
     }
 
     public function showOnly(Request $request, Blog $blog)
@@ -267,23 +276,29 @@ class BlogController extends Controller
         $similar_blogs = Blog::inRandomOrder()->get();
 
         $category = 'japan';
-        return view('blog.show', compact('blog', 'content', 'similar_blogs', 'fb_title', 'current_blog', 'sideBlogsDesktop', 'sideBlogsMobile', 'category'));
+        return view('blog.show', compact('blog', 'content', 'similar_blogs', 'fb_title', 'current_blog', 'sideBlogsDesktop', 'sideBlogsMobile', 'category', 'genre'));
     }
 
     public function sidebarHTML($sideBlogsMobile)
     {
         $html = '';
         foreach ($sideBlogsMobile as $blog) {
-            $html .='<div class="col-xs-12 col-sm-6 col-md-6" style="padding: 0px 25px; margin-bottom:15px;">
-                        <div class="hover-box-shadow"><a href="'.env("APP_URL", "https://www.freeriderhk.com").'/'.Blog::$pages[$blog->category]['genre'].'/'.$blog->category.'/'.$blog->id.'">
-                            <div class="row">
-                                <img style="width:100%;" src="https://s3.amazonaws.com/twobayjobs/blogImgs/thumbnails/'.$blog->id.'/'.$blog->blogImgs->sortby("created_at")->first()->filename.'" alt="日本文化">
+            $html .='<div class="row hover-box-shadow" style="margin:0px -5px; padding: 15px 15px;">
+                        <a href="'.env("APP_URL", "https://www.freeriderhk.com").'/'.$blog->genre.'/'.$blog->category.'/'.$blog->id.'">
+                            <div class="col-xs-3" style="position:relative">
+                                <div class="row">
+                                    <img style="width:100%; border-radius:2px" src="https://s3.amazonaws.com/twobayjobs/blogImgs/thumbnails/'.$blog->id.'/'.$blog->blogImgs->sortby("created_at")->first()->filename.'" alt="日本文化">
+                                    <div class="related-blogs-date" style="font-size: 12.5px; color: #42464A; position:absolute; bottom:2px; right:-108px;">'.Carbon::parse($blog->created_at)->format("Y年m月d日").'</div>
+                                </div>
                             </div>
-                            <div class="row" style="background-color: #f3f3f3; padding:10px;">
-                                <div class="related-blogs-date" style="font-size: 12.5px; color: #42464A; padding-left: 3px; padding-bottom: 3px">'.Carbon::parse($blog->created_at)->format("Y年m月d日").'</div>
-                                <div style="font-weight: 600; font-size: 16px; color: black">'.str_limit($blog->title, 75).'</div>
+
+                            <div style="padding: 0px 30px" class="col-xs-9">
+                                <div class="row">
+                                    <div style="font-weight: 400; font-size: 19px; color: black">'.str_limit($blog->title, 95).'</div>
+                                    <div class="hidden-xs" style="font-weight: 400; font-size: 13px; color: gray; margin-top:10px">'.str_limit($blog->caption, 300).'</div>
+                                </div>
                             </div>
-                        </a></div>
+                        </a>
                     </div>';
         }
         return $html;

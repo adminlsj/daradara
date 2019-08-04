@@ -2,14 +2,28 @@
     <div style="width: 90%" class="container">
         <div class="row">
             <div style="text-align: center" class="col-sm-12 col-md-3">
-                <h2 class="logo"><a href="#">{{ $category == 'lollipop' ? 'Lollipop' : 'FreeRider' }}</a></h2>
+                <h2 class="logo"><a href="#">FreeRider</a></h2>
             </div>
-            <div class="col-sm-12 col-md-2 col-md-offset-4 text-center">
-                <h5>Get started</h5>
+            <div class="col-sm-12 col-md-2 text-center">
+                <h5>資訊</h5>
                 <ul>
-                    <li><a href="https://www.facebook.com/freeriderhk/" target="_blank">About Us</a></li>
-                    <li><a href="/contact" target="_blank">Join Us</a></li>
-                    <li><a href="/policy" target="_blank">Policy</a></li>
+                    <li><a href="{{ route('blog.genre.index', ['genre' => 'travel']) }}">旅日塾</a></li>
+                    <li><a href="{{ route('blog.genre.index', ['genre' => 'news']) }}">微新聞</a></li>
+                    <li><a href="{{ route('blog.genre.index', ['genre' => 'press']) }}">簡讀</a></li>
+                </ul>
+            </div>
+            <div class="col-sm-12 col-md-2 text-center">
+                <h5>知識</h5>
+                <ul>
+                    <li><a href="{{ route('blog.genre.index', ['genre' => 'tech']) }}">科學園</a></li>
+                    <li><a href="{{ route('blog.genre.index', ['genre' => 'finance']) }}">融易</a></li>
+                </ul>
+            </div>
+            <div class="col-sm-12 col-md-2 text-center">
+                <h5>社群</h5>
+                <ul>
+                    <li><a href="{{ route('blog.genre.index', ['genre' => 'forum']) }}">亦語</a></li>
+                    <li><a href="{{ route('blog.genre.index', ['genre' => 'ranking']) }}">排行百科</a></li>
                 </ul>
             </div>
             <div class="col-sm-12 col-md-3">
@@ -23,6 +37,6 @@
         </div>
     </div>
     <div class="footer-copyright">
-        <p>© 2016 Copyright by {{ $category == 'lollipop' ? 'Lollipop' : 'FreeRider' }}</p>
+        <p>© 2016 Copyright by FreeRider</p>
     </div>
 </footer>
