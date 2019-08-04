@@ -288,7 +288,7 @@ class BlogController extends Controller
                             <div class="col-xs-3" style="position:relative">
                                 <div class="row">
                                     <img style="width:100%; border-radius:2px" src="https://s3.amazonaws.com/twobayjobs/blogImgs/thumbnails/'.$blog->id.'/'.$blog->blogImgs->sortby("created_at")->first()->filename.'" alt="日本文化">
-                                    <div class="related-blogs-date" style="font-size: 12.5px; color: gray; position:absolute; bottom:2px; right:-108px; font-weight:400;">'.Carbon::parse($blog->created_at)->format("Y年m月d日").'</div>
+                                    <div class="related-blogs-date" style="font-size: 12.5px; color: gray; position:absolute; bottom:2px; right:-110px; font-weight:400;">'.Carbon::parse($blog->created_at)->format("Y年m月d日").'</div>
                                 </div>
                             </div>
 
