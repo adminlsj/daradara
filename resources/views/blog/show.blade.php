@@ -10,7 +10,7 @@
 				
 				<div>
 					<h4 style="padding-top: 10px; font-weight: 400;">
-						<div style="font-size:3rem;">{{ $blog->title }}</div>
+						<div class="blog-show-title">{{ $blog->title }}</div>
 						<div style="padding-left: 3px" class="vertical-align">
 							<div style="font-size:14px;font-weight:300;">
 								{{ Carbon\Carbon::parse($blog->created_at)->format('d / m / Y') }}

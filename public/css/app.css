@@ -8753,6 +8753,12 @@ a:visited {
   color: black;
 }
 
+.blog-show-title {
+  font-weight: 500;
+  font-size: 3rem;
+  color: #191919;
+}
+
 div.sticky {
   position: -webkit-sticky;
   position: sticky;
@@ -9296,6 +9302,13 @@ a > i {
 
   .blog-title {
     font-size: 15.5px;
+  }
+
+  .blog-show-title {
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 35px;
+    color: #191919;
   }
 }
 
