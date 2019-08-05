@@ -595,6 +595,13 @@ a > i {
     }
 }
 
+@media (min-width: 1500px) {
+    .responsive-frame {
+        width: 1500px;
+        margin: 0 auto;
+    }
+}
+
 @media (min-width: 500px) {
     .fb-share-container {
       margin-left: calc(50% - 250px);

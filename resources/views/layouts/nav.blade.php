@@ -1,7 +1,7 @@
-<nav style="background-color: white !important; border: none !important; box-shadow: 0 2px 2px -2px rgba(0,0,0,.2);">
+<nav style="background-color: white !important; border: none !important;" class="responsive-frame">
   <div style="width: 80%; background-color: white !important;" class="container-fluid">
     <div style="background-color: white !important;">
-        <a href="{{ route('blog.genre.index', ['genre' => $genre]) }}">
+      <a href="{{ route('blog.genre.index', ['genre' => $genre]) }}">
 	        <img src="https://s3-us-west-2.amazonaws.com/freerider/avatars/originals/default_freerider_profile_pic.jpg" style="border-radius: 20px; margin-top: -15px;" width="40px" height="40px">
 	    </a>
 
