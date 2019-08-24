@@ -6,6 +6,12 @@
 		<div class="col-md-8" style="margin-top: 15px;">
 			<div class="video-sidebar-wrapper">
 			    <div id="sidebar-results">
+			    	<div class="fb-video"
+				      data-href="{{ $video->content }}"
+				      data-width="auto"
+				      data-allowfullscreen="false"
+				      data-autoplay="false"
+				      data-show-captions="false"></div>
 			    	<!-- results appear here -->
 			    </div>
 			    <div style="text-align: center" class="ajax-loading"><img src="https://s3.amazonaws.com/twobayjobs/system/loading.gif"/></div>

@@ -129,13 +129,9 @@ class BlogController extends Controller
         if ($genre == 'laughseejapan') {
             $video = $blog;
 
-            $videos = Blog::where('genre', $genre)->where('id', '!=', $video->id)->orderBy('created_at', 'desc')->paginate(3);
+            $videos = Blog::where('genre', $genre)->where('id', '!=', $video->id)->orderBy('created_at', 'desc')->orWhere('id', $video->id)->paginate(3);
             $html = $this->videoLoadHTML($videos);
             if ($request->ajax()) {
-                $html = view('video.singleVideoPost', compact('video'));
-                foreach ($videos as $video) {
-                    $html .= view('video.singleVideoPost', compact('video'));
-                }
                 return $html;
             }
 
