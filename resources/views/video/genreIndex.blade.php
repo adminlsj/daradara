@@ -3,7 +3,7 @@
 @section('content')
 <div>
 	<div class="row">
-		<div class="col-md-8" style="margin-top: 15px;">
+		<div class="col-md-8">
 			<div class="video-sidebar-wrapper">
 			    <div id="sidebar-results"><!-- results appear here --></div>
 			    <div style="text-align: center" class="ajax-loading"><img src="https://s3.amazonaws.com/twobayjobs/system/loading.gif"/></div>
