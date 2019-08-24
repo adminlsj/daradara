@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-<div style="width:100%;" class="container">
+<div style="width:78%; margin: auto;" class="mobile-container">
 	<div class="row">
-		<div class="col-md-8" style="margin-top: 15px;padding:0;">
+		<div class="col-md-8" style="margin-top: 15px;">
 			<div class="sidebar-wrapper">
 			    <div id="sidebar-results"><!-- results appear here --></div>
 			    <div style="text-align: center" class="ajax-loading"><img src="https://s3.amazonaws.com/twobayjobs/system/loading.gif"/></div>
