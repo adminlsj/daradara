@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="mobile-container">
 	<div class="row">
 		<div class="col-xs-12 col-sm-12 col-md-8" style="margin-top: 15px;">
 
@@ -37,5 +36,4 @@
 	        </div>
 		</div>
 	</div>
-</div>
 @endsection
