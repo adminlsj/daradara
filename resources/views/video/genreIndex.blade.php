@@ -1,13 +1,34 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="fb-video"
+              data-href="https://www.facebook.com/laughseejapan/videos/647389892359730/"
+              data-width="auto"
+              data-allowfullscreen="false"
+              data-autoplay="false"
+              data-show-captions="false"></div>
 <div style="width:100%">
+	<div class="fb-video"
+              data-href="https://www.facebook.com/laughseejapan/videos/647389892359730/"
+              data-width="auto"
+              data-allowfullscreen="false"
+              data-autoplay="false"
+              data-show-captions="false"></div>
 	<div class="row">
+		<div class="fb-video"
+              data-href="https://www.facebook.com/laughseejapan/videos/647389892359730/"
+              data-width="auto"
+              data-allowfullscreen="false"
+              data-autoplay="false"
+              data-show-captions="false"></div>
 		<div class="col-md-8" style="margin-top: 15px;">
-			<div class="video-sidebar-wrapper">
-			    <div id="sidebar-results"><!-- results appear here --></div>
-			    <div style="text-align: center" class="ajax-loading"><img src="https://s3.amazonaws.com/twobayjobs/system/loading.gif"/></div>
-			</div>
+			<div class="fb-video"
+              data-href="https://www.facebook.com/laughseejapan/videos/647389892359730/"
+              data-width="auto"
+              data-allowfullscreen="false"
+              data-autoplay="false"
+              data-show-captions="false"></div>
+
 		</div>
 
 		<div class="hidden-xs hidden-sm col-md-4 sticky">
