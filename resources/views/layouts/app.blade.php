@@ -53,7 +53,7 @@
     
     <div id="app">
         <div style="margin-bottom: 10px; box-shadow: 0 2px 2px -2px rgba(0,0,0,.2);">@include('layouts.nav')</div>
-        <div style="overflow-x:hidden" class="responsive-frame">
+        <div class="responsive-frame">
             @yield('content')
         </div>
         @include('layouts.footer')
