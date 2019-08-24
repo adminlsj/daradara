@@ -34,8 +34,6 @@ class BlogController extends Controller
                 return $html;
             }
 
-            $textBlogs = Blog::where('genre', $genre)->inRandomOrder()->limit(3)->get();
-
             $sideBlogsDesktop = Blog::where('genre', $genre)->inRandomOrder()->limit(3)->get();
 
             return view('video.genreIndex', compact('videos', 'textBlogs', 'sideBlogsDesktop', 'genre'));
@@ -54,15 +52,26 @@ class BlogController extends Controller
         }
     }
 
-    public function categoryIndex(Request $request, String $genre = 'travel', String $category = 'japan'){
-        $sideBlogsMobile = Blog::where('genre', $genre)->where('category', $category)->orderBy('created_at', 'desc')->paginate(5);
-        $html = $this->sidebarHTML($sideBlogsMobile);
-        if ($request->ajax()) {
-            return $html;
-        }
+    public function categoryIndex(Request $request, String $genre = 'laughseejapan', String $category = 'laugh'){
+        if ($genre == 'laughseejapan') {
+            $videos = Blog::where('genre', $genre)->where('category', $category)->orderBy('created_at', 'desc')->paginate(3);
+            $html = $this->videoLoadHTML($videos);
+            if ($request->ajax()) {
+                return $html;
+            }
 
-        $sideBlogsDesktop = Blog::where('genre', $genre)->inRandomOrder()->limit(3)->get();
-        return view('blog.categoryIndex', compact('sideBlogsMobile', 'sideBlogsDesktop', 'category', 'genre'));
+            $sideBlogsDesktop = Blog::where('genre', $genre)->inRandomOrder()->limit(3)->get();
+            return view('video.categoryIndex', compact('videos', 'sideBlogsDesktop', 'category', 'genre'));
+        } else {
+            $sideBlogsMobile = Blog::where('genre', $genre)->where('category', $category)->orderBy('created_at', 'desc')->paginate(5);
+            $html = $this->sidebarHTML($sideBlogsMobile);
+            if ($request->ajax()) {
+                return $html;
+            }
+
+            $sideBlogsDesktop = Blog::where('genre', $genre)->inRandomOrder()->limit(3)->get();
+            return view('blog.categoryIndex', compact('sideBlogsMobile', 'sideBlogsDesktop', 'category', 'genre'));
+        }
     }
 
     /**
@@ -115,106 +124,123 @@ class BlogController extends Controller
      * @param  \App\Blog  $blog
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, String $genre = 'travel', String $category = 'japan', Blog $blog)
+    public function show(Request $request, String $genre = 'laughseejapan', String $category = 'laugh', Blog $blog)
     {
-        $sideBlogsMobile = Blog::where('genre', $genre)->where('category', $category)->orderBy('created_at', 'desc')->paginate(5);
-        $html = $this->sidebarHTML($sideBlogsMobile);
-        if ($request->ajax()) {
-            return $html;
-        }
-        $sideBlogsDesktop = Blog::where('genre', $genre)->inRandomOrder()->limit(3)->get();
+        if ($genre == 'laughseejapan') {
+            $video = $blog;
 
-        $content = $blog->content;
+            $videos = Blog::where('genre', $genre)->where('id', '!=', $video->id)->inRandomOrder()->paginate(3);
+            $html = $this->videoLoadHTML($videos);
+            if ($request->ajax()) {
+                return $html;
+            }
 
-        $content = str_replace('(SUB)', '<h5 style="font-size:2.1rem;font-weight:bold; line-height:30px;">', $content);
-        $content = str_replace('(/SUB)', '</h5>', $content);
+            $sideBlogsDesktop = Blog::where('genre', $genre)->inRandomOrder()->limit(3)->get();
+            $current_blog = $video;
+            $fb_title = $video->title;
 
-        $content = str_replace('(CONT)', '<div style="font-size:1.6rem;white-space: pre-line;">', $content);
-        $content = str_replace('(/CONT)', '</div>', $content);
+            return view('video.show', compact('video', 'videos', 'sideBlogsDesktop', 'current_blog', 'fb_title', 'category', 'genre'));
 
-        $content = str_replace('(LINK)', '<a target="_blank" href=', $content);
-        $content = str_replace('(/LINK)', '</a>', $content);
+        } else {
+            $sideBlogsMobile = Blog::where('genre', $genre)->where('category', $category)->orderBy('created_at', 'desc')->paginate(5);
+            $html = $this->sidebarHTML($sideBlogsMobile);
+            if ($request->ajax()) {
+                return $html;
+            }
+            $sideBlogsDesktop = Blog::where('genre', $genre)->inRandomOrder()->limit(3)->get();
 
-        $content = str_replace('(IMG)', '<img class="img-responsive border-radius-2" style="padding-top:15px;padding-bottom:15px;width:100%; height:100%" src="https://s3.amazonaws.com/twobayjobs/blogImgs/originals/'.$blog->id.'/', $content);
-        $content = str_replace('(/IMG)', '.jpg" alt="日本旅行推薦">', $content);
+            $content = $blog->content;
 
-        $content = str_replace('(TwitterIMG)', '<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">
-                <a href="', $content);
-        $content = str_replace('(/TwitterIMG)', '"></a></blockquote>
-            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8">
-            </script>', $content);
+            $content = str_replace('(SUB)', '<h5 style="font-size:2.1rem;font-weight:bold; line-height:30px;">', $content);
+            $content = str_replace('(/SUB)', '</h5>', $content);
 
-        $content = str_replace('(BLANK)', '<p style="margin:15px"></p>', $content);
+            $content = str_replace('(CONT)', '<div style="font-size:1.6rem;white-space: pre-line;">', $content);
+            $content = str_replace('(/CONT)', '</div>', $content);
 
-        $contentTopData = "";
-        $contentData = "";
-        switch ($genre) {
-            case 'travel':
-                if ($category == 'japan' || $category == 'korea') {
+            $content = str_replace('(LINK)', '<a target="_blank" href=', $content);
+            $content = str_replace('(/LINK)', '</a>', $content);
+
+            $content = str_replace('(IMG)', '<img class="img-responsive border-radius-2" style="padding-top:15px;padding-bottom:15px;width:100%; height:100%" src="https://s3.amazonaws.com/twobayjobs/blogImgs/originals/'.$blog->id.'/', $content);
+            $content = str_replace('(/IMG)', '.jpg" alt="日本旅行推薦">', $content);
+
+            $content = str_replace('(TwitterIMG)', '<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">
+                    <a href="', $content);
+            $content = str_replace('(/TwitterIMG)', '"></a></blockquote>
+                <script async src="https://platform.twitter.com/widgets.js" charset="utf-8">
+                </script>', $content);
+
+            $content = str_replace('(BLANK)', '<p style="margin:15px"></p>', $content);
+
+            $contentTopData = "";
+            $contentData = "";
+            switch ($genre) {
+                case 'travel':
+                    if ($category == 'japan' || $category == 'korea') {
+                        $contentTopData = '4060710969';
+                        $contentData = '9914751067';
+                        break;
+                    } elseif ($category == 'japanews') {
+                        $contentTopData = '8818645799';
+                        $contentData = '1365206344';
+                        break;
+                    }
+                case 'tech':
+                    $contentTopData = '2660986465';
+                    $contentData = '7254837598';
+                    break;
+                default:
                     $contentTopData = '4060710969';
                     $contentData = '9914751067';
                     break;
-                } elseif ($category == 'japanews') {
-                    $contentTopData = '8818645799';
-                    $contentData = '1365206344';
-                    break;
-                }
-            case 'tech':
-                $contentTopData = '2660986465';
-                $contentData = '7254837598';
-                break;
-            default:
-                $contentTopData = '4060710969';
-                $contentData = '9914751067';
-                break;
+            }
+            $content = str_replace('(AdsenseTop)',
+                '<div style="margin:25px 0px;">
+                    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                    <!-- Content-Top -->
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-4485968980278243"
+                         data-ad-slot="'.$contentTopData.'"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                    <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>'
+            , $content);
+            
+            $content = str_replace('(Adsense)',
+                '<div style="margin:25px 0px;">
+                    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                    <!-- Content -->
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-4485968980278243"
+                         data-ad-slot="'.$contentData.'"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                    <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>'
+            , $content);
+
+            $content = explode('(LOGO)', $content);
+
+            $fb_title = $blog->content;
+            $fb_title = str_replace('(SUB)', '', $fb_title);
+            $fb_title = str_replace('(/SUB)', '', $fb_title);
+            $fb_title = str_replace('(CONT)', '', $fb_title);
+            $fb_title = str_replace('(/CONT)', '', $fb_title);
+            $fb_title = str_replace('(IMG)', '', $fb_title);
+            $fb_title = str_replace('(/IMG)', '', $fb_title);
+            $fb_title = str_replace('(BLANK)', '', $fb_title);
+            $fb_title = str_replace('(Adsense)', '', $fb_title);
+
+            $current_blog = $blog;
+
+            return view('blog.show', compact('blog', 'content', 'fb_title', 'current_blog', 'sideBlogsMobile', 'sideBlogsDesktop', 'category', 'genre'));
         }
-        $content = str_replace('(AdsenseTop)',
-            '<div style="margin:25px 0px;">
-                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                <!-- Content-Top -->
-                <ins class="adsbygoogle"
-                     style="display:block"
-                     data-ad-client="ca-pub-4485968980278243"
-                     data-ad-slot="'.$contentTopData.'"
-                     data-ad-format="auto"
-                     data-full-width-responsive="true"></ins>
-                <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
-            </div>'
-        , $content);
-        
-        $content = str_replace('(Adsense)',
-            '<div style="margin:25px 0px;">
-                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                <!-- Content -->
-                <ins class="adsbygoogle"
-                     style="display:block"
-                     data-ad-client="ca-pub-4485968980278243"
-                     data-ad-slot="'.$contentData.'"
-                     data-ad-format="auto"
-                     data-full-width-responsive="true"></ins>
-                <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
-            </div>'
-        , $content);
-
-        $content = explode('(LOGO)', $content);
-
-        $fb_title = $blog->content;
-        $fb_title = str_replace('(SUB)', '', $fb_title);
-        $fb_title = str_replace('(/SUB)', '', $fb_title);
-        $fb_title = str_replace('(CONT)', '', $fb_title);
-        $fb_title = str_replace('(/CONT)', '', $fb_title);
-        $fb_title = str_replace('(IMG)', '', $fb_title);
-        $fb_title = str_replace('(/IMG)', '', $fb_title);
-        $fb_title = str_replace('(BLANK)', '', $fb_title);
-        $fb_title = str_replace('(Adsense)', '', $fb_title);
-
-        $current_blog = $blog;
-
-        return view('blog.show', compact('blog', 'content', 'fb_title', 'current_blog', 'sideBlogsMobile', 'sideBlogsDesktop', 'category', 'genre'));
     }
 
     public function showOnly(Request $request, Blog $blog)
@@ -322,27 +348,7 @@ class BlogController extends Controller
     {
         $html = '';
         foreach ($videos as $video) {
-            $html .='<div class="fb-video"
-                          data-href="'.$video->content.'"
-                          data-width="auto"
-                          data-allowfullscreen="false"
-                          data-autoplay="false"
-                          data-show-captions="false"></div>
-
-                    <div class="video-title-container">
-                        <div>
-                            <a href="https://www.facebook.com/laughseejapan/" target="_blank">
-                                <img src="https://twobayjobs.s3.amazonaws.com/avatars/originals/default_laughseejapan_profile_pic.jpg" class="video-profile-pic" width="40px" height="40px">
-                            </a>
-                        </div>
-                        <div>
-                            <a href="'.env("APP_URL", "https://www.freeriderhk.com").'/'.$video->genre.'/'.$video->category.'/'.$video->id.'" target="_blank">
-                                <h4 class="video-title">'.$video->title.'</h4>
-                            </a>
-                            <p class="video-caption">'.$video->caption.'</p>
-                            <p class="video-tags">娛見日本@laughseejapan | <a href="'.env("APP_URL", "https://www.freeriderhk.com").'/laughseejapan/'.$video->category.'">'.array_search($video->category, Blog::$genres[$video->genre]['categories']).'</a> | '.Carbon::parse($video->created_at)->format('Y-m-d').'</span></p>
-                        </div>
-                    </div>​<br>';
+            $html .= view('video.singleVideoPost', compact('video'));
         }
         return $html;
     }
