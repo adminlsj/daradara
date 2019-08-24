@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div style="width:80%;" class="container">
+<div style="width:80%;" class="container mobile-container">
 	<div class="row no-gutter">
 		<div class="col-md-8" style="margin-top: 15px;">
 			<div style="overflow: hidden;" class="video-sidebar-wrapper">
