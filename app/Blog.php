@@ -10,6 +10,8 @@ class Blog extends Model
         'title', 'content', 'content', 'is_travel', 'is_japan', 'is_korea', 'is_taiwan', 'is_food', 'is_fashion',
     ];
 
+    public static $randomVideos = []; 
+
     public static $genres = [
         'laughseejapan' => [
             'navTitle' => '娛見日本',
