@@ -8730,12 +8730,11 @@ button.close {
 html,
 body {
   max-width: 100%;
-  overflow-x: hidden !important;
 }
 
 body {
   background-color: white;
-  overflow-x: hidden;
+  overflow-x: hidden !important;
 }
 
 a,
