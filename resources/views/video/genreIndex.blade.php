@@ -2,9 +2,6 @@
 
 @section('content')
 	<div class="row">
-		<div class="col-xs-12 col-sm-12 col-md-8" style="margin-top: 15px;">
-
-		</div>
 
 		<div class="hidden-xs hidden-sm col-md-4 sticky">
 			<div>
