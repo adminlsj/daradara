@@ -6,7 +6,6 @@
 		<div class="col-md-8" style="margin-top: 15px;">
 			<div class="video-sidebar-wrapper">
 			    <div id="sidebar-results">
-			    	@include('video.singleVideoPost')
 			    	<!-- results appear here -->
 			    </div>
 			    <div style="text-align: center" class="ajax-loading"><img src="https://s3.amazonaws.com/twobayjobs/system/loading.gif"/></div>
