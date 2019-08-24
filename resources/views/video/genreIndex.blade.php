@@ -1,12 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="fb-video"
-              data-href="https://www.facebook.com/laughseejapan/videos/647389892359730/"
-              data-width="auto"
-              data-allowfullscreen="false"
-              data-autoplay="false"
-              data-show-captions="false"></div>
 <div style="width:100%">
 	<div class="fb-video"
               data-href="https://www.facebook.com/laughseejapan/videos/647389892359730/"
@@ -21,15 +15,7 @@
               data-allowfullscreen="false"
               data-autoplay="false"
               data-show-captions="false"></div>
-		<div class="col-md-8" style="margin-top: 15px;">
-			<div class="fb-video"
-              data-href="https://www.facebook.com/laughseejapan/videos/647389892359730/"
-              data-width="auto"
-              data-allowfullscreen="false"
-              data-autoplay="false"
-              data-show-captions="false"></div>
 
-		</div>
 
 		<div class="hidden-xs hidden-sm col-md-4 sticky">
 			<div>
