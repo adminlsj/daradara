@@ -4,7 +4,6 @@
 <div>
 	<div class="row">
 		<div class="col-md-8">
-			    <div style="text-align: center" class="ajax-loading"><img src="https://s3.amazonaws.com/twobayjobs/system/loading.gif"/></div>
 		</div>
 
 		<div class="hidden-xs hidden-sm col-md-4 sticky">
