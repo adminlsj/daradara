@@ -1,7 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+<div style="width:80%" class="container mobile-container">
 	<div class="row">
+
 
 		<div class="hidden-xs hidden-sm col-md-4 sticky">
 			<div>
@@ -33,4 +35,5 @@
 	        </div>
 		</div>
 	</div>
+</div>
 @endsection
