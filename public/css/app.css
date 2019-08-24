@@ -9209,6 +9209,7 @@ a > i {
 
 .sidebar-wrapper {
   margin: 0px -10px;
+  overflow-x: hidden !important;
 }
 
 .video-profile-pic {
