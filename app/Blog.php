@@ -14,7 +14,7 @@ class Blog extends Model
         'laughseejapan' => [
             'navTitle' => '娛見日本',
             'listTitle' => '日本熱門綜藝',
-            'categories' => ['感人' => 'touch', '搞笑' => 'laugh'],
+            'categories' => ['溫馨' => 'touch', '搞笑' => 'laugh'],
             'name' => 'laughseejapan'
         ],
 
