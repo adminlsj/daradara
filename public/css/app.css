@@ -9342,10 +9342,6 @@ a > i {
 }
 
 @media (min-width: 768px) {
-  .mobile-container {
-    width: 1000px;
-  }
-
   .navbar-bottom ul {
     width: 100%;
   }
@@ -9372,7 +9368,7 @@ a > i {
   }
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 999.98px) {
   .mobile-container {
     width: 100% !important;
     margin-top: -25px !important;
@@ -9385,6 +9381,12 @@ a > i {
 
   .container-fluid {
     width: 100% !important;
+  }
+}
+
+@media (min-width: 1000px) {
+  .mobile-container {
+    width: 1000px;
   }
 }
 
