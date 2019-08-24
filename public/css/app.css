@@ -9379,8 +9379,25 @@ a > i {
     margin: auto;
   }
 
+  .container {
+    width: 100% !important;
+    margin-top: -25px !important;
+    padding: 0px;
+  }
+
   .container-fluid {
     width: 100% !important;
+  }
+
+  .row.video-no-gutter {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .row.video-no-gutter [class*='col-']:not(:first-child),
+  .row.video-no-gutter [class*='col-']:not(:last-child) {
+    padding-right: 0;
+    padding-left: 0;
   }
 }
 
