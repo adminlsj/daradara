@@ -3,8 +3,8 @@
 @section('content')
 <div style="width:78%; margin: 0 auto;" class="mobile-container">
 	<div class="row">
-		<div class="col-md-8" style="margin-top: 15px;">
-			<div class="sidebar-wrapper">
+		<div class="col-md-8" style="margin-top: 15px; overflow-x: hidden;">
+			<div style="overflow-x: hidden" class="sidebar-wrapper">
 			    <div id="sidebar-results"><!-- results appear here --></div>
 			    <div style="text-align: center" class="ajax-loading"><img src="https://s3.amazonaws.com/twobayjobs/system/loading.gif"/></div>
 			</div>
