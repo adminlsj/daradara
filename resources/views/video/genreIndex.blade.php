@@ -3,7 +3,12 @@
 @section('content')
 <div style="width:80%" class="container mobile-container">
 	<div class="row">
-
+		<div class="col-xs-12 col-sm-12 col-md-8" style="margin-top: 15px;">
+			<div class="video-sidebar-wrapper">
+			    <div id="sidebar-results"><!-- results appear here --></div>
+			    <div style="text-align: center" class="ajax-loading"><img src="https://s3.amazonaws.com/twobayjobs/system/loading.gif"/></div>
+			</div>
+		</div>
 
 		<div class="hidden-xs hidden-sm col-md-4 sticky">
 			<div>
