@@ -464,6 +464,34 @@ a > i {
     margin: 0px -10px;
 }
 
+.video-profile-pic {
+  border-radius: 20px;
+  border: 1px solid #A9A9A9;
+  margin-top: 10px;
+}
+
+.video-title {
+  margin-left: 50px;
+  margin-top: -40px;
+  font-weight: 600;
+  line-height: 23px;
+}
+
+.video-caption {
+  margin-left: 50px;
+  margin-top: -6px;
+  color: gray;
+  margin-bottom: 0px;
+}
+
+.video-tags {
+  margin-left: 50px;
+  margin-top: 5px;
+  color: #A9A9A9;
+  margin-bottom: 0px;
+  font-size: 5px;
+}
+
 .noselect {
   -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
@@ -523,10 +551,6 @@ a > i {
 }
 
 @media (max-width: 767.98px) {
-    .mobile-container {
-        width: 100% !important;
-    }
-
     .nav-bottom-like-left {
         margin-top: -10px;
     }
@@ -588,6 +612,12 @@ a > i {
 @media (max-width: 1000px) {
     .mobile-container {
         width: 100% !important;
+        margin-top: -25px !important;
+    }
+
+    .video-title-container {
+      width: 90% !important;
+      margin: auto;
     }
 
     .container-fluid {

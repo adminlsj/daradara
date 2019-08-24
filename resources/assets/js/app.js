@@ -98,7 +98,8 @@ function load_more(page){
             return;
         }
         $('.ajax-loading').hide(); //hide loading animation once data is received
-        $("#sidebar-results").append(data); //append data into #results element          
+        $("#sidebar-results").append(data); //append data into #results element
+        FB.XFBML.parse();       
     })
 
     .fail(function(jqXHR, ajaxOptions, thrownError){

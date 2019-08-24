@@ -26,18 +26,32 @@ class BlogController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function genreIndex(Request $request, String $genre = 'travel'){
-        $sideBlogsMobile = Blog::where('genre', $genre)->orderBy('created_at', 'desc')->paginate(5);
-        $html = $this->sidebarHTML($sideBlogsMobile);
-        if ($request->ajax()) {
-            return $html;
+    public function genreIndex(Request $request, String $genre = 'laughseejapan'){
+        if ($genre == 'laughseejapan') {
+            $videos = Blog::where('genre', $genre)->orderBy('created_at', 'desc')->paginate(3);
+            $html = $this->videoLoadHTML($videos);
+            if ($request->ajax()) {
+                return $html;
+            }
+
+            $textBlogs = Blog::where('genre', $genre)->inRandomOrder()->limit(3)->get();
+
+            $sideBlogsDesktop = Blog::where('genre', $genre)->inRandomOrder()->limit(3)->get();
+
+            return view('video.genreIndex', compact('videos', 'textBlogs', 'sideBlogsMobile', 'sideBlogsDesktop', 'genre'));
+        } else {
+            $sideBlogsMobile = Blog::where('genre', $genre)->orderBy('created_at', 'desc')->paginate(5);
+            $html = $this->sidebarHTML($sideBlogsMobile);
+            if ($request->ajax()) {
+                return $html;
+            }
+
+            $caro_blogs = Blog::where('genre', $genre)->inRandomOrder()->limit(5)->get();
+            $textBlogs = Blog::where('genre', $genre)->inRandomOrder()->limit(2)->get();
+
+            $sideBlogsDesktop = Blog::where('genre', $genre)->inRandomOrder()->limit(3)->get();
+            return view('blog.genreIndex', compact('caro_blogs', 'textBlogs', 'sideBlogsMobile', 'sideBlogsDesktop', 'genre'));
         }
-
-        $caro_blogs = Blog::where('genre', $genre)->inRandomOrder()->limit(5)->get();
-        $textBlogs = Blog::where('genre', $genre)->inRandomOrder()->limit(2)->get();
-
-        $sideBlogsDesktop = Blog::where('genre', $genre)->inRandomOrder()->limit(3)->get();
-        return view('blog.genreIndex', compact('caro_blogs', 'textBlogs', 'sideBlogsMobile', 'sideBlogsDesktop', 'genre'));
     }
 
     public function categoryIndex(Request $request, String $genre = 'travel', String $category = 'japan'){
@@ -300,6 +314,35 @@ class BlogController extends Controller
                             </div>
                         </a>
                     </div>';
+        }
+        return $html;
+    }
+
+    public function videoLoadHTML($videos)
+    {
+        $html = '';
+        foreach ($videos as $video) {
+            $html .='<div class="fb-video"
+                      data-href="'.$video->content.'"
+                      data-width="auto"
+                      data-allowfullscreen="true"
+                      data-autoplay="false"
+                      data-show-captions="false"></div>
+
+                    <div class="video-title-container">
+                        <div>
+                            <a href="https://www.facebook.com/laughseejapan/" target="_blank">
+                                <img src="https://twobayjobs.s3.amazonaws.com/avatars/originals/default_laughseejapan_profile_pic.jpg" class="video-profile-pic" width="40px" height="40px">
+                            </a>
+                        </div>
+                        <div>
+                            <a href="'.env("APP_URL", "https://www.freeriderhk.com").'/'.$video->genre.'/'.$video->category.'/'.$video->id.'" target="_blank">
+                                <h4 class="video-title">'.$video->title.'</h4>
+                            </a>
+                            <p class="video-caption">'.$video->caption.'</p>
+                            <p class="video-tags">娛見日本@laughseejapan | <a href="'.env("APP_URL", "https://www.freeriderhk.com").'/laughseejapan/'.$video->category.'">'.array_search($video->category, Blog::$genres[$video->genre]['categories']).'</a> | '.Carbon::parse($video->created_at)->format('Y-m-d').'</span></p>
+                        </div>
+                    </div>​<br>';
         }
         return $html;
     }

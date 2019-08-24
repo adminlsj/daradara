@@ -11,6 +11,13 @@ class Blog extends Model
     ];
 
     public static $genres = [
+        'laughseejapan' => [
+            'navTitle' => '娛見日本',
+            'listTitle' => '日本熱門綜藝',
+            'categories' => ['感人' => 'touch', '搞笑' => 'laugh'],
+            'name' => 'laughseejapan'
+        ],
+
         'travel' => [
             'navTitle' => '旅日塾',
             'listTitle' => '日本旅行與文化',
