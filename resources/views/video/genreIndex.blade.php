@@ -2,7 +2,7 @@
 
 @section('content')
 <div style="width:80%;" class="container">
-	<div class="row video-no-gutter">
+	<div class="row no-gutter">
 		<div class="col-md-8" style="margin-top: 15px;">
 			<div style="overflow: hidden;" class="video-sidebar-wrapper">
 			    <div id="sidebar-results"><!-- results appear here --></div>
