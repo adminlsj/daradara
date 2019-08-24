@@ -9375,8 +9375,7 @@ a > i {
   }
 
   .video-title-container {
-    width: 94% !important;
-    margin: auto;
+    padding: 0px 15px;
   }
 
   .container-fluid {
