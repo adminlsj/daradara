@@ -9370,7 +9370,7 @@ a > i {
 
 @media (max-width: 1000px) {
   .mobile-container {
-    width: 100% !important;
+    width: 98% !important;
     margin-top: -25px !important;
   }
 
