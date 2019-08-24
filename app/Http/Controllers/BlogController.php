@@ -36,7 +36,7 @@ class BlogController extends Controller
 
             $sideBlogsDesktop = Blog::where('genre', $genre)->inRandomOrder()->limit(3)->get();
 
-            return view('video.genreIndex', compact('videos', 'textBlogs', 'sideBlogsDesktop', 'genre'));
+            return view('video.genreIndex', compact('videos', 'sideBlogsDesktop', 'genre'));
         } else {
             $sideBlogsMobile = Blog::where('genre', $genre)->orderBy('created_at', 'desc')->paginate(5);
             $html = $this->sidebarHTML($sideBlogsMobile);
