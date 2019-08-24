@@ -9379,12 +9379,6 @@ a > i {
     margin: auto;
   }
 
-  .container {
-    width: 100% !important;
-    margin-top: -25px !important;
-    padding: 0px;
-  }
-
   .container-fluid {
     width: 100% !important;
   }
