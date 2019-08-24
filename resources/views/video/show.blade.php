@@ -5,7 +5,7 @@
 	<div class="row video-no-gutter">
 		<div class="col-md-8" style="margin-top: 15px;">
 			<div class="video-sidebar-wrapper">
-			    <div id="sidebar-results">
+			    <div style="width: 100%" id="sidebar-results">
 			    	<div class="fb-video"
 				      data-href="{{ $video->content }}"
 				      data-width="auto"
