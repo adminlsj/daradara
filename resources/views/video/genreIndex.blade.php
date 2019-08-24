@@ -2,12 +2,6 @@
 
 @section('content')
 <div style="width:100%">
-	<div class="fb-video"
-              data-href="https://www.facebook.com/laughseejapan/videos/647389892359730/"
-              data-width="auto"
-              data-allowfullscreen="false"
-              data-autoplay="false"
-              data-show-captions="false"></div>
 	<div class="row">
 		<div class="fb-video"
               data-href="https://www.facebook.com/laughseejapan/videos/647389892359730/"
