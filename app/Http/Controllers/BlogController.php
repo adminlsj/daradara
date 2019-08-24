@@ -322,12 +322,7 @@ class BlogController extends Controller
     {
         $html = '';
         foreach ($videos as $video) {
-            $html .='<div class="fb-video"
-                      data-href="'.$video->content.'"
-                      data-width="auto"
-                      data-allowfullscreen="false"
-                      data-autoplay="false"
-                      data-show-captions="false"></div>
+            $html .='
 
                     <div class="video-title-container">
                         <div>
