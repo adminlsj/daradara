@@ -1,4 +1,4 @@
-<div class="fb-video"
+<div style="overflow-x: hidden;" class="fb-video"
       data-href="{{ $video->content }}"
       data-width="auto"
       data-allowfullscreen="false"
