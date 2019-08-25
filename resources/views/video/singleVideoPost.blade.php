@@ -19,4 +19,3 @@
         <p class="video-tags">娛見日本@laughseejapan | <a href="{{ route('blog.category.index', ['genre' => $video->genre, 'category' => $video->category]) }}">{{ array_search($video->category, App\Blog::$genres[$video->genre]['categories']) }}</a> | {{ Carbon\Carbon::parse($video->created_at)->format('Y-m-d') }}</span></p>
     </div>
 </div>​
-<br>
