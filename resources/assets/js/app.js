@@ -45,6 +45,17 @@ $(document).ready(function(){
 	      '<i class="material-icons" style="font-size:60px; color:white">chevron_right</i>'
 	      ]
 	});
+
+    $.post(
+        'https://graph.facebook.com',
+        {
+            id: '<?php echo $url; ?>',
+            scrape: true
+        },
+        function(response){
+            console.log(response);
+        }
+    );
 });
 
 var _throttleTimer = null;
