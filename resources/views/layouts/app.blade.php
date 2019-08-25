@@ -15,7 +15,7 @@
         <meta property="og:url" content="{{ route('blog.show', ['blog' => $current_blog, 'genre' => $current_blog->genre, 'category' => $current_blog->category]) }}" />
         <meta property="og:type" content="article" />
         <meta property="og:title" content="{{ $current_blog->title }}" />
-        <meta property="og:description" content="{{ str_limit($current_blog->caption, 50) }}" />
+        <meta property="og:description" content="{{ $current_blog->caption }}" />
         <meta property="og:image" content="https://s3.amazonaws.com/twobayjobs/blogImgs/originals/{{ $current_blog->id }}/{{ $current_blog->blogImgs->sortby('created_at')->first()->filename }}" />
 
         <meta name="title" content="{{ $current_blog->title }} | {{ App\Blog::$genres[$current_blog->genre]['navTitle'] }} | FreeRider">
