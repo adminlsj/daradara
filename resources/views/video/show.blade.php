@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-<div style="width:100% !important; margin: 0 auto;" class="mobile-container">
+<div style="width:78%; margin: 0 auto;" class="mobile-container">
 	<div class="row video-no-gutter">
 		<div class="col-md-8" style="margin-top: 15px;">
 			<div class="video-sidebar-wrapper">
 		    	@include('video.singleVideoPost')
 		    	<div style="background-color: #fafafa; margin-top: -9px; width: 100% !important;">
-			    	<div class="fb-comments" data-href="{{ $video->content }}" data-width="100%" data-numposts="5" data-colorscheme="light" data-order-by="social"></div>
+			    	<div style="min-width: 100%" class="fb-comments" data-href="{{ $video->content }}" data-width="auto" data-numposts="5" data-colorscheme="light" data-order-by="social"></div>
 		    	</div>
 			    <div id="sidebar-results">
 			    	<!-- results appear here -->
