@@ -28,7 +28,7 @@ class BlogController extends Controller
 
     public function genreIndex(Request $request, String $genre = 'laughseejapan'){
         if ($genre == 'laughseejapan') {
-            $videos = Blog::where('genre', $genre)->orderBy('created_at', 'desc')->paginate(3);
+            $videos = Blog::where('genre', $genre)->orderBy('created_at', 'desc')->paginate(5);
             $html = $this->videoLoadHTML($videos);
             if ($request->ajax()) {
                 return $html;
@@ -54,7 +54,7 @@ class BlogController extends Controller
 
     public function categoryIndex(Request $request, String $genre = 'laughseejapan', String $category = 'laugh'){
         if ($genre == 'laughseejapan') {
-            $videos = Blog::where('genre', $genre)->where('category', $category)->orderBy('created_at', 'desc')->paginate(3);
+            $videos = Blog::where('genre', $genre)->where('category', $category)->orderBy('created_at', 'desc')->paginate(5);
             $html = $this->videoLoadHTML($videos);
             if ($request->ajax()) {
                 return $html;
@@ -129,7 +129,7 @@ class BlogController extends Controller
         if ($genre == 'laughseejapan') {
             $video = $blog;
 
-            $videos = Blog::where('genre', $genre)->where('id', '!=', $video->id)->orderBy('created_at', 'desc')->paginate(3);
+            $videos = Blog::where('genre', $genre)->where('id', '!=', $video->id)->orderBy('created_at', 'desc')->paginate(5);
             $html = $this->videoLoadHTML($videos);
             if ($request->ajax()) {
                 return $html;
