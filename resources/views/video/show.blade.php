@@ -4,15 +4,13 @@
 	<div class="row">
 		<div class="col-md-8" style="margin-top: 15px;">
 			@foreach ($videos as $video)
-				{{-- expr --}}
+				<div class="fb-video"
+			      data-href="{{ $video->content }}"
+			      data-width="auto"
+			      data-allowfullscreen="false"
+			      data-autoplay="false"
+			      data-show-captions="false"></div>
 			@endforeach
-			<div class="fb-video"
-		      data-href="{{ $video->content }}"
-		      data-width="auto"
-		      data-allowfullscreen="false"
-		      data-autoplay="false"
-		      data-show-captions="false"></div>
-
 		</div>
 
 		<div class="hidden-xs hidden-sm col-md-4 sticky">
