@@ -4,13 +4,12 @@
 <div style="width:78%; margin: 0 auto;" class="mobile-container">
 	<div class="row video-no-gutter">
 		<div class="col-md-8" style="margin-top: 15px;">
-			<div style="overflow-x: hidden !important" class="fb-video"
-			      data-href="{{ $video->content }}"
-			      data-width="auto"
-			      data-allowfullscreen="false"
-			      data-autoplay="false"
-			      data-show-captions="false"></div>
-
+			<div style="overflow-x: hidden !important;" class="fb-video"
+		      data-href="{{ $video->content }}"
+		      data-width="auto"
+		      data-allowfullscreen="false"
+		      data-autoplay="false"
+		      data-show-captions="false"></div>
 
 			<div class="video-sidebar-wrapper">
 			    <div id="sidebar-results">
