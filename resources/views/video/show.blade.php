@@ -2,8 +2,8 @@
 
 @section('content')
 <div style="width:78%; margin: 0 auto;" class="mobile-container">
-	<div class="row video-no-gutter">
-		<div class="col-md-8" style="margin-top: 15px; overflow-x: hidden !important;">
+	<div class="row">
+		<div class="col-md-8" style="margin-top: 15px;">
 			<div class="fb-video"
 		      data-href="{{ $video->content }}"
 		      data-width="auto"
