@@ -10,12 +10,13 @@
 				<ins class="adsbygoogle"
 				     style="display:block"
 				     data-ad-format="fluid"
-				     data-ad-layout-key="-73+ed+2i-1n-4w"
+				     data-ad-layout-key="-72+ef+1v-2l-f"
 				     data-ad-client="ca-pub-4485968980278243"
 				     data-ad-slot="7870160701"></ins>
 				<script>
 				     (adsbygoogle = window.adsbygoogle || []).push({});
 				</script>
+				<br>
 			    <div id="sidebar-results">
 			    	<!-- results appear here -->
 			    </div>
