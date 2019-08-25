@@ -17,8 +17,6 @@
         <meta property="og:title" content="{{ $current_blog->title }}" />
         <meta property="og:description" content="{{ $current_blog->caption }}" />
         <meta property="og:image" content="https://twobayjobs.s3.amazonaws.com/blogImgs/originals/{{ $current_blog->id }}/{{ $current_blog->blogImgs->sortby('created_at')->first()->filename }}" />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
 
         <meta name="title" content="{{ $current_blog->title }} | {{ App\Blog::$genres[$current_blog->genre]['navTitle'] }} | FreeRider">
         <title>{{ $current_blog->title }} | {{ App\Blog::$genres[$current_blog->genre]['navTitle'] }} | {{ array_search($video->category, App\Blog::$genres[$video->genre]['categories']) }})</title>
