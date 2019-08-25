@@ -99,7 +99,6 @@ function load_more(page){
         }
         $('.ajax-loading').hide(); //hide loading animation once data is received
         $("#sidebar-results").append(data); //append data into #results element
-        FB.XFBML.parse();       
     })
 
     .fail(function(jqXHR, ajaxOptions, thrownError){
