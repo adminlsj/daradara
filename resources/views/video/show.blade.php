@@ -2,7 +2,7 @@
 
 @section('content')
 <div style="width:78%; margin: 0 auto;" class="mobile-container">
-	<div class="row">
+	<div class="row video-no-gutter">
 		<div class="col-md-8" style="margin-top: 15px;">
 			<div class="fb-video"
 		      data-href="{{ $video->content }}"
@@ -11,12 +11,6 @@
 		      data-autoplay="false"
 		      data-show-captions="false"></div>
 
-			<div class="video-sidebar-wrapper">
-			    <div id="sidebar-results">
-			    	<!-- results appear here -->
-			    </div>
-			    <div style="text-align: center" class="ajax-loading"><img src="https://s3.amazonaws.com/twobayjobs/system/loading.gif"/></div>
-			</div>
 		</div>
 
 		<div class="hidden-xs hidden-sm col-md-4 sticky">
