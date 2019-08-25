@@ -6,7 +6,7 @@
 		<div class="col-md-8" style="margin-top: 15px;">
 			<div class="video-sidebar-wrapper">
 		    	@include('video.singleVideoPost')
-		    	<div style="background-color: #fafafa" class="fb-comments" data-href="{{ $video->content }}" data-width="100%" data-numposts="5" data-colorscheme="light" data-order-by="social"></div>
+		    	<div class="fb-comments" data-href="{{ $video->content }}" data-width="100%" data-numposts="5" data-colorscheme="light" data-order-by="social"></div>
 			    <div id="sidebar-results">
 			    	<!-- results appear here -->
 			    </div>
