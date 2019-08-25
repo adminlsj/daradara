@@ -96,11 +96,10 @@ function load_more(page){
 	        console.log(data.length);
             $('.ajax-loading').html(" ");
             return;
-        } else {
-            FB.XFBML.parse();
         }
         $('.ajax-loading').hide(); //hide loading animation once data is received
-        $("#sidebar-results").append(data); //append data into #results element       
+        $("#sidebar-results").append(data); //append data into #results element
+        FB.XFBML.parse(document.getElementById('sidebar-results'));    
     })
 
     .fail(function(jqXHR, ajaxOptions, thrownError){
