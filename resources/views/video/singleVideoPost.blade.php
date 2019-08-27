@@ -1,4 +1,4 @@
-<div id="{{ $video->id }}" class="fb-video"
+<div class="fb-video"
       data-href="{{ $video->content }}"
       data-width="auto"
       data-allowfullscreen="false"

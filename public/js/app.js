@@ -42111,8 +42111,11 @@ function load_more(page) {
             return;
         }
         $('.ajax-loading').hide(); //hide loading animation once data is received
-        $("#sidebar-results").append(data); //append data into #results element
-        FB.XFBML.parse(document.getElementById('sidebar-results'));
+
+        newDivName = "d" + String(new Date().valueOf());
+        var $newhtml = $("<div id='" + newDivName + "'>" + data + "</div>");
+        $('#sidebar-results').append($newhtml);
+        FB.XFBML.parse($newhtml[0]);
     }).fail(function (jqXHR, ajaxOptions, thrownError) {});
 }
 
