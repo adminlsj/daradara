@@ -8815,7 +8815,6 @@ div.sticky {
 }
 
 nav {
-  background-color: white;
   position: fixed;
   /* Make it stick/fixed */
   top: 0;
