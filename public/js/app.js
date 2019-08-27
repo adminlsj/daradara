@@ -42064,7 +42064,7 @@ window.onscroll = function () {
     if (prevScrollpos > currentScrollPos) {
         document.getElementById("scroll-hide-nav").style.top = "0";
     } else {
-        document.getElementById("scroll-hide-nav").style.top = "-60px";
+        document.getElementById("scroll-hide-nav").style.top = "-50px";
     }
     prevScrollpos = currentScrollPos;
 };

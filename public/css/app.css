@@ -8815,6 +8815,7 @@ div.sticky {
 }
 
 nav {
+  background-color: white;
   position: fixed;
   /* Make it stick/fixed */
   top: 0;
@@ -8824,8 +8825,6 @@ nav {
   -webkit-transition: top 0.3s;
   transition: top 0.3s;
   /* Transition effect when sliding down (and up) */
-  height: 50px;
-  background-color: white;
   z-index: 99;
 }
 
