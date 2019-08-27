@@ -10,13 +10,13 @@ class Blog extends Model
         'title', 'content', 'content', 'is_travel', 'is_japan', 'is_korea', 'is_taiwan', 'is_food', 'is_fashion',
     ];
 
-    public static $randomVideos = []; 
+    public static $navIcons = ['explore', 'pets', 'public']; 
 
     public static $genres = [
         'laughseejapan' => [
             'navTitle' => '娛見日本',
             'listTitle' => '日本熱門綜藝',
-            'categories' => ['溫馨' => 'touch', '搞笑' => 'laugh'],
+            'categories' => ['溫馨' => 'touch', '搞笑' => 'laugh', '熱門' => 'laugh'],
             'name' => 'laughseejapan'
         ],
 

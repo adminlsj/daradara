@@ -7,9 +7,9 @@
 
 	    <a style="font-size: 30px; color: black !important; font-weight: 600; line-height: 50px; text-decoration: none;" href="{{ route('blog.genre.index', ['genre' => $genre]) }}">{{ App\Blog::$genres[$genre]['navTitle'] }}</a>
 
-	    @foreach (App\Blog::$genres[$genre]['categories'] as $text => $value)
-            <a class="pull-right" style="font-size: 18px; color: white !important; background-color: gray; padding: 5px 7px; margin-left: 2px; line-height: 40px; text-decoration: none;" href="{{ route('blog.category.index', ['genre' => $genre, 'category' => $value]) }}">{{ $text }}</a>
-	    @endforeach
+      @foreach (App\Blog::$genres[$genre]['categories'] as $text => $value)
+        <a class="pull-right" style="color: black !important; padding: 0px 8px; line-height: 40px;" href="{{ route('blog.category.index', ['genre' => $genre, 'category' => $value]) }}"><i style="font-size: 30px; vertical-align:top; margin-top: 10px" class="material-icons">{{ App\Blog::$navIcons[$loop->index] }}</i></a>
+      @endforeach
     </div>
   </div>
 </nav>
