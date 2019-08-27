@@ -1,4 +1,4 @@
-<nav style="background-color: white !important; border: none !important;" class="responsive-frame">
+<nav id="scroll-hide-nav" class="responsive-frame">
   <div style="width: 80%; background-color: white !important;" class="container-fluid">
     <div style="background-color: white !important;">
       <a href="{{ route('blog.genre.index', ['genre' => $genre]) }}">

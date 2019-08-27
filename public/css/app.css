@@ -8814,20 +8814,19 @@ div.sticky {
   color: gray;
 }
 
-.nav-main {
+#scroll-hide-nav {
+  position: fixed;
+  /* Make it stick/fixed */
+  top: 0;
+  /* Stay on top */
+  width: 100%;
+  /* Full width */
+  -webkit-transition: top 0.3s;
+  transition: top 0.3s;
+  /* Transition effect when sliding down (and up) */
   height: 50px;
+  background-color: white;
   z-index: 99;
-  border: none;
-  border-radius: 0px;
-}
-
-.navbar,
-.navbar div {
-  background-color: #3c3d41 !important;
-}
-
-.navbar a {
-  color: #f1f1f1 !important;
 }
 
 /* Place the navbar at the bottom of the page, and make it stick */
