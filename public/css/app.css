@@ -8814,7 +8814,7 @@ div.sticky {
   color: gray;
 }
 
-#scroll-hide-nav {
+nav {
   position: fixed;
   /* Make it stick/fixed */
   top: 0;
