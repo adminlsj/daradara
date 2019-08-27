@@ -46,8 +46,8 @@
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v4.0"></script>
     
     <div id="app">
-        <div style="margin-bottom: 10px; box-shadow: 0 2px 2px -2px rgba(0,0,0,.2);">@include('layouts.nav')</div>
-        <div style="margin-top: 50px;" class="responsive-frame">
+        <div>@include('layouts.nav')</div>
+        <div style="margin-top: 60px;" class="responsive-frame">
             @yield('content')
         </div>
         @include('layouts.footer')

@@ -61,10 +61,10 @@ $(document).ready(function(){
 var prevScrollpos = window.pageYOffset;
 window.onscroll = function() {
   var currentScrollPos = window.pageYOffset;
-  if (prevScrollpos > currentScrollPos) {
+  if (prevScrollpos > currentScrollPos || currentScrollPos < 60) {
     document.getElementById("scroll-hide-nav").style.top = "0";
   } else {
-    document.getElementById("scroll-hide-nav").style.top = "-50px";
+    document.getElementById("scroll-hide-nav").style.top = "-60px";
   }
   prevScrollpos = currentScrollPos;
 }
