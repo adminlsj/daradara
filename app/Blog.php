@@ -16,7 +16,7 @@ class Blog extends Model
         'laughseejapan' => [
             'navTitle' => '娛見日本',
             'listTitle' => '日本熱門綜藝',
-            'categories' => ['溫馨' => 'touch', '搞笑' => 'laugh', '熱門' => 'laugh'],
+            'categories' => ['溫馨' => '搞笑', '搞笑' => '寵物', '熱門' => '感動'],
             'name' => 'laughseejapan'
         ],
 
@@ -69,6 +69,11 @@ class Blog extends Model
             'name' => 'freeriderjapan'
         ]
     ];
+
+    public function tags()
+    {
+        return explode(" ", $this->tags);
+    }
 
     public function blogImgs()
     {

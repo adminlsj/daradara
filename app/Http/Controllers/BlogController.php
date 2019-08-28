@@ -52,9 +52,9 @@ class BlogController extends Controller
         }
     }
 
-    public function categoryIndex(Request $request, String $genre = 'laughseejapan', String $category = 'laugh'){
+    public function categoryIndex(Request $request, String $genre = 'laughseejapan', String $category = 'video'){
         if ($genre == 'laughseejapan') {
-            $videos = Blog::where('genre', $genre)->where('category', $category)->orderBy('created_at', 'desc')->paginate(5);
+            $videos = Blog::where('genre', $genre)->where('category', $category)->orWhere('genre', $genre)->where('tags', 'like', '%'.$category.'%')->orderBy('created_at', 'desc')->paginate(5);
             $html = $this->videoLoadHTML($videos);
             if ($request->ajax()) {
                 return $html;
