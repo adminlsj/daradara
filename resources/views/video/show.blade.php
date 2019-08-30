@@ -53,5 +53,6 @@
 </div>
 <script>
 	(adsbygoogle = window.adsbygoogle || []).push({});
+	FB.XFBML.parse(document.getElementById('sidebar-results'));
 </script>
 @endsection
