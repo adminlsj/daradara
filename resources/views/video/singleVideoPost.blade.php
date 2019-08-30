@@ -13,7 +13,7 @@
     </div>
     <div>
         <a href="{{ route('blog.show', ['blog' => $video, 'genre' => $video->genre, 'category' => $video->category ]) }}">
-            <h4 class="video-title">{{ $video->title }}</h4>
+          <h4 class="video-title">{{ $video->title }}</h4>
         </a>
         <p class="video-caption">{{ $video->caption }}</p>
 

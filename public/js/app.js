@@ -42079,6 +42079,7 @@ $document.ready(function () {
 
 var page = 1; //track user scroll as page number, right now page number is 1
 load_more(page); //initial content load
+(adsbygoogle = window.adsbygoogle || []).push({});
 
 function ScrollHandler(e) {
     //throttle event:
