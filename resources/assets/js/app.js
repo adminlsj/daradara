@@ -56,6 +56,8 @@ $(document).ready(function(){
             console.log(response);
         }
     );
+
+    load_more(page); //load initial content   
 });
 
 var prevScrollpos = window.pageYOffset;

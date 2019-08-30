@@ -42056,6 +42056,8 @@ $(document).ready(function () {
     }, function (response) {
         console.log(response);
     });
+
+    load_more(page); //load initial content   
 });
 
 var prevScrollpos = window.pageYOffset;
