@@ -59,7 +59,6 @@
     <!-- Scripts -->
     <script src="{{ mix('js/app.js') }}"></script>
     <script>
-         (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
 </body>
 </html>

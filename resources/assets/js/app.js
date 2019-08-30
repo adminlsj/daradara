@@ -56,8 +56,6 @@ $(document).ready(function(){
             console.log(response);
         }
     );
-
-    load_more(page); //load initial content   
 });
 
 var prevScrollpos = window.pageYOffset;
@@ -82,6 +80,7 @@ $document.ready(function () {
 });
 
 var page = 1; //track user scroll as page number, right now page number is 1
+load_more(page); //initial content load
 
 function ScrollHandler(e) {
     //throttle event:
