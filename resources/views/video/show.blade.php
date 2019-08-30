@@ -12,9 +12,6 @@
 				     data-ad-layout-key="-7c+ef+1v-2l-f"
 				     data-ad-client="ca-pub-4485968980278243"
 				     data-ad-slot="7870160701"></ins>
-				<script>
-				     (adsbygoogle = window.adsbygoogle || []).push({});
-				</script>
 				<br>
 			    <div id="sidebar-results">
 			    	<!-- results appear here -->
@@ -54,4 +51,7 @@
 		</div>
 	</div>
 </div>
+<script>
+	(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
 @endsection
