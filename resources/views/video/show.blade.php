@@ -36,7 +36,6 @@
 		        <br>
 		    @endforeach
 		    <div style="margin:5px 0px 25px 0px; border: 1px black solid">
-	            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 	            <!-- Content-Top -->
 	            <ins class="adsbygoogle"
 	                 style="display:block"
@@ -44,15 +43,8 @@
 	                 data-ad-slot="4060710969"
 	                 data-ad-format="auto"
 	                 data-full-width-responsive="true"></ins>
-	            <script>
-	            (adsbygoogle = window.adsbygoogle || []).push({});
-	            </script>
 	        </div>
 		</div>
 	</div>
 </div>
-<script>
-	(adsbygoogle = window.adsbygoogle || []).push({});
-	FB.XFBML.parse(document.getElementById('sidebar-results'));
-</script>
 @endsection
