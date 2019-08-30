@@ -79,7 +79,6 @@ $document.ready(function () {
         .on('scroll', ScrollHandler);
 });
 
-(adsbygoogle = window.adsbygoogle || []).push({});
 var page = 1; //track user scroll as page number, right now page number is 1
 load_more(page); //initial content load
 
@@ -125,6 +124,10 @@ function load_more(page){
         newDivName = "d" + String(new Date().valueOf());
         var $newhtml = $("<div id='" + newDivName + "'>" + data + "</div>");
         $('#sidebar-results').append($newhtml);
+        FB.XFBML.parse($newhtml[0]);
+        if (page == 1) {
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        }
     })
 
     .fail(function(jqXHR, ajaxOptions, thrownError){
