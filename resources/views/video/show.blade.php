@@ -4,19 +4,21 @@
 <div style="width:78%; margin: 0 auto;" class="mobile-container">
 	<div class="row video-no-gutter">
 		<div class="col-md-8" style="margin-top: 15px;">
-			@include('video.singleVideoPost')
-	    	<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-			<ins class="adsbygoogle"
-			     style="display:block"
-			     data-ad-format="fluid"
-			     data-ad-layout-key="-7c+ef+1v-2l-f"
-			     data-ad-client="ca-pub-4485968980278243"
-			     data-ad-slot="7870160701"></ins>
-			<script>
-			     (adsbygoogle = window.adsbygoogle || []).push({});
-			</script>
-			<br>
 			<div class="video-sidebar-wrapper">
+				@include('video.singleVideoPost')
+				<div>
+			    	<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+					<ins class="adsbygoogle"
+					     style="display:block"
+					     data-ad-format="fluid"
+					     data-ad-layout-key="-7c+ef+1v-2l-f"
+					     data-ad-client="ca-pub-4485968980278243"
+					     data-ad-slot="7870160701"></ins>
+					<script>
+					     (adsbygoogle = window.adsbygoogle || []).push({});
+					</script>
+				</div>
+				<br>
 			    <div id="sidebar-results">
 			    	<!-- results appear here -->
 			    </div>
