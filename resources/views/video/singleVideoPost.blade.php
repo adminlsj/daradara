@@ -7,7 +7,7 @@
 
 <div class="video-title-container">
     <div>
-        <a href="https://www.facebook.com/laughseejapan/" target="_blank">
+        <a href="https://www.instagram.com/laughseejapan/" target="_blank">
             <img src="https://twobayjobs.s3.amazonaws.com/avatars/originals/default_laughseejapan_profile_pic.jpg" class="video-profile-pic" width="40px" height="40px">
         </a>
     </div>

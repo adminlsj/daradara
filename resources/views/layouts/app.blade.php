@@ -22,8 +22,10 @@
         <title>{{ $current_blog->title }} | {{ App\Blog::$genres[$current_blog->genre]['navTitle'] }} | {{ array_search($video->category, App\Blog::$genres[$video->genre]['categories']) }})</title>
         <meta name="description" content="{{ str_limit($fb_title, 150) }}">
     @else
+        <meta name="title" content="日娛王道 | 日本最強娛樂 | 日本最新綜藝">
+        <title>日娛王道 | 日本最強娛樂 | 日本最新綜藝</title>
         <meta name="description" 
-              content="FreeRider自由旅行人，撰寫相關日本文化的趣味性和探討性專題，並且分享最新的日本文化資訊。從日本歷史的古蹟與文化，到現代的科技與藝術，從庶民的生活與百態，到天皇的皇居與城府，FreeRider是專屬於喜愛日本文化群眾的頭條新聞。">
+              content="日本最強娛樂，最新綜藝！從娛樂圈到綜藝圈，娛見日本包攬最新最全的日娛王道！從搞笑到感動，從笑梗到溫情，從寵物到家庭，這裡可以找到讓你大笑，讓你痛哭，讓你重拾失去的情感，讓你回歸最原始的自己！這裡是日本，最強娛樂，最新綜藝，以及人文與文化！">
     @endif
 
     <meta charset="utf-8">
