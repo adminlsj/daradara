@@ -42115,7 +42115,9 @@ function load_more(page) {
         newDivName = "d" + String(new Date().valueOf());
         var $newhtml = $("<div id='" + newDivName + "'>" + data + "</div>");
         $('#sidebar-results').append($newhtml);
-        FB.XFBML.parse($newhtml[0]);
+        if (page != 1) {
+            FB.XFBML.parse($newhtml[0]);
+        }
     }).fail(function (jqXHR, ajaxOptions, thrownError) {});
 }
 
