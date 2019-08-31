@@ -114,6 +114,9 @@ function load_more(page){
     })
 
     .done(function(data){
+        if (page == 1) {
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        }
         if (data.length == 0){
 	        console.log(data.length);
             $('.ajax-loading').html(" ");
@@ -125,9 +128,6 @@ function load_more(page){
         var $newhtml = $("<div id='" + newDivName + "'>" + data + "</div>");
         $('#sidebar-results').append($newhtml);
         FB.XFBML.parse($newhtml[0]);
-        if (page == 1) {
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        }
     })
 
     .fail(function(jqXHR, ajaxOptions, thrownError){
