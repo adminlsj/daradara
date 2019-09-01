@@ -86,7 +86,7 @@ function ScrollHandler(e) {
     //throttle event:
     clearTimeout(_throttleTimer);
     _throttleTimer = setTimeout(function () {
-        if ($(window).scrollTop() + $(window).height() + 900 >= getDocHeight()) {
+        if ($(window).scrollTop() + $(window).height() + 1200 >= getDocHeight()) {
 	        page++; //page number increment
 			load_more(page); //load content   
 	   }
