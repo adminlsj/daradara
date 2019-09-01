@@ -42112,14 +42112,14 @@ function load_more(page) {
         }
         $('.ajax-loading').hide(); //hide loading animation once data is received
 
+        var $newAds = $('<ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-7c+ef+1v-2l-f" data-ad-client="ca-pub-4485968980278243" data-ad-slot="7870160701"></ins><br>');
         newDivName = "d" + String(new Date().valueOf());
         var $newhtml = $("<div id='" + newDivName + "'>" + data + "</div>");
         $('#sidebar-results').append($newhtml);
         FB.XFBML.parse($newhtml[0]);
 
-        if (page == 1) {
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        }
+        $('#sidebar-results').append($newAds);
+        (adsbygoogle = window.adsbygoogle || []).push({});
     }).fail(function (jqXHR, ajaxOptions, thrownError) {});
 }
 
