@@ -130,17 +130,32 @@ class BlogController extends Controller
             $video = $blog;
 
             $loop = 0;
-            $videos = [];
+            $preVideos = [];
             foreach ($video->tags() as $tag) {
                 if ($loop == 0) {
-                    $videos = Blog::where('genre', $genre)->where('tags', 'like', '%'.$tag.'%')->where('id', '!=', $video->id);
+                    $preVideos = Blog::where('genre', $genre)->where('tags', 'like', '%'.$tag.'%')->where('created_at', '<', $video->created_at);
                 } else {
-                    $videos = $videos->orWhere('genre', $genre)->where('tags', 'like', '%'.$tag.'%')->where('id', '!=', $video->id);
+                    $preVideos = $preVideos->orWhere('genre', $genre)->where('tags', 'like', '%'.$tag.'%')->where('created_at', '<', $video->created_at);
                 }
                 $loop++;
             }
-            $videos = $videos->distinct()->orderBy('created_at', 'desc')->paginate(5);
-            $html = $this->videoLoadHTML($videos);
+            $preVideos = $preVideos->distinct()->orderBy('created_at', 'desc')->get();
+            $preHTML = $this->videoLoadHTML($preVideos);
+
+            $loop = 0;
+            $postVideos = [];
+            foreach ($video->tags() as $tag) {
+                if ($loop == 0) {
+                    $postVideos = Blog::where('genre', $genre)->where('tags', 'like', '%'.$tag.'%')->where('created_at', '>', $video->created_at);
+                } else {
+                    $postVideos = $postVideos->orWhere('genre', $genre)->where('tags', 'like', '%'.$tag.'%')->where('created_at', '>', $video->created_at);
+                }
+                $loop++;
+            }
+            $postVideos = $postVideos->distinct()->orderBy('created_at', 'desc')->get();
+            $postHTML = $this->videoLoadHTML($postVideos);
+
+            $html = $preHTML.''.$postHTML;
             if ($request->ajax()) {
                 return $html;
             }
