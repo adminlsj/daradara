@@ -1,7 +1,7 @@
 <nav style="background-color: #414143 !important;" id="scroll-hide-nav" class="responsive-frame">
   <div style="width: 80%; background-color: #414143 !important;" class="container-fluid">
     <div style="background-color: #414143 !important;">
-      <a href="{{ route('blog.genre.index', ['genre' => $genre]) }}">
+      <a href="{{ route('blog.genre.index', ['genre' => 'laughseejapan']) }}">
 	        <img src="https://twobayjobs.s3.amazonaws.com/avatars/originals/square_freerider_profile_pic.jpg" style="border-radius: 20px; margin-top: -14px;" width="40px" height="40px">
 	    </a>
 

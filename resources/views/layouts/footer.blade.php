@@ -38,7 +38,7 @@
         </div>
     </div>
     <div class="footer-copyright">
-        <p style="white-space: pre-wrap;">本網站之伺服器不保存任何影音內容，
+        <p style="white-space: pre-wrap; padding-bottom: 50px;">本網站之伺服器不保存任何影音內容，
 所有資源皆來自其他網站。</p>
     </div>
 </footer>
