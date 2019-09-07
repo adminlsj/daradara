@@ -1,9 +1,6 @@
-<div class="fb-video"
-      data-href="{{ $video->content }}"
-      data-width="auto"
-      data-allowfullscreen="false"
-      data-autoplay="false"
-      data-show-captions="false"></div>
+<div class="aspect-ratio">
+    <iframe src="{{ $video->content }}" border="0" frameborder="0" framespacing="0" allow="autoplay; fullscreen"></iframe>
+</div>
 
 <div class="video-title-container">
     <div>
@@ -15,11 +12,11 @@
         <a href="{{ route('blog.show', ['blog' => $video, 'genre' => $video->genre, 'category' => $video->category ]) }}">
           <h4 class="video-title">{{ $video->title }}</h4>
         </a>
-        <p class="video-caption">{{ $video->caption }}</p>
+        <p style="white-space: pre-wrap;" class="video-caption">{{ $video->caption }}</p>
 
         <p style="margin-top: 1px;" class="video-caption">
           @foreach ($video->tags() as $tag)
-            <a href="{{ route('blog.category.index', ['genre' => $video->genre, 'category' => $tag]) }}">#{{ $tag }}</a>
+            <a href="{{ route('blog.category.index', ['genre' => 'laughseejapan', 'category' => $tag]) }}">#{{ $tag }}</a>
           @endforeach
         </p>
 

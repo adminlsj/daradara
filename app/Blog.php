@@ -75,6 +75,15 @@ class Blog extends Model
         return explode(" ", $this->tags);
     }
 
+    public function views()
+    {
+        if ($this->views >= 10000) {
+            return ceil($this->views / 10000).'萬';
+        } else {
+            return $this->views;
+        }
+    }
+
     public function blogImgs()
     {
         return $this->hasMany('App\BlogImg');

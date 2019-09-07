@@ -8747,6 +8747,70 @@ a:visited {
   color: #97344a;
 }
 
+/* Place the navbar at the bottom of the page, and make it stick */
+
+.navbar {
+  background-color: #f9f9f9;
+  overflow: hidden;
+  position: fixed;
+  display: inline-block;
+  bottom: 0;
+  width: 100%;
+  height: 50px;
+  z-index: 999;
+  margin-bottom: 0;
+  border-top: 1px solid #dedede;
+}
+
+/* Style the links inside the navigation bar */
+
+.navbar a {
+  float: left;
+  display: block;
+  color: gray;
+  text-align: center;
+  text-decoration: none;
+  width: 33.33%;
+  height: 100%;
+}
+
+.navbar span {
+  float: left;
+  display: block;
+  color: gray;
+  text-align: center;
+  text-decoration: none;
+  width: 33.33%;
+}
+
+/* Change the color of links on hover */
+
+.navbar a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Add a color to the active/current link */
+
+.navbar a.active {
+  color: red;
+}
+
+.aspect-ratio {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 56.25%;
+}
+
+.aspect-ratio iframe {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+}
+
 .blog-title {
   font-weight: 600;
   font-size: 19px;
