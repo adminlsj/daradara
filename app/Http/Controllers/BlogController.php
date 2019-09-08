@@ -40,13 +40,14 @@ class BlogController extends Controller
 
         } elseif ($genre == 'watch') {
             $videos = Blog::where('genre', $genre)->orderBy('created_at', 'desc')->paginate(5);
-            $html = $this->watchLoadHTML($videos);
+            $html = $this->relatedLoadHTML($videos);
             if ($request->ajax()) {
                 return $html;
             }
 
+            $video = $videos->first();
             $sideBlogsDesktop = Blog::where('genre', $genre)->inRandomOrder()->limit(3)->get();
-            return view('video.watchIndex', compact('videos', 'sideBlogsDesktop', 'genre'));
+            return view('video.watchIndex', compact('videos', 'video', 'sideBlogsDesktop', 'genre'));
 
         } else {
             $sideBlogsMobile = Blog::where('genre', $genre)->orderBy('created_at', 'desc')->paginate(5);
@@ -148,7 +149,7 @@ class BlogController extends Controller
      * @param  \App\Blog  $blog
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, String $genre = 'laughseejapan', String $category = 'laugh', Blog $blog)
+    public function show(Request $request, String $genre = 'laughseejapan', String $category = 'video', Blog $blog)
     {
         if ($genre == 'laughseejapan') {
             $video = $blog;
@@ -177,6 +178,23 @@ class BlogController extends Controller
             $video->save();
 
             return view('video.show', compact('video', 'videos', 'sideBlogsDesktop', 'current_blog', 'fb_title', 'category', 'genre'));
+
+        } elseif ($genre == 'watch') {
+            $video = $blog;
+            $videos = Blog::where('genre', $genre)->where('category', $category)->where('id', '!=', $video->id)->orderBy('created_at', 'desc')->paginate(5);
+            $html = $this->relatedLoadHTML($videos);
+            if ($request->ajax()) {
+                return $html;
+            }
+
+            $sideBlogsDesktop = Blog::where('genre', $genre)->inRandomOrder()->limit(3)->get();
+            $current_blog = $video;
+            $fb_title = $video->title;
+
+            $video->views++;
+            $video->save();
+
+            return view('video.watchShow', compact('video', 'videos', 'sideBlogsDesktop', 'current_blog', 'fb_title', 'category', 'genre'));
 
         } else {
             $sideBlogsMobile = Blog::where('genre', $genre)->where('category', $category)->orderBy('created_at', 'desc')->paginate(5);
@@ -390,11 +408,11 @@ class BlogController extends Controller
         return $html;
     }
 
-    public function watchLoadHTML($videos)
+    public function relatedLoadHTML($videos)
     {
         $html = '';
         foreach ($videos as $video) {
-            $html .= view('video.singleWatchPost', compact('video'));
+            $html .= view('video.singleRelatedPost', compact('video'));
         }
         return $html;
     }

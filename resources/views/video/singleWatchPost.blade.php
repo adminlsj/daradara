@@ -1,26 +1,32 @@
 <div class="aspect-ratio">
-    <iframe src="{{ $video->content }}" border="0" frameborder="0" framespacing="0" allow="autoplay; fullscreen"></iframe>
+    <iframe src="{{ $video->content }}?autoplay=1" border="0" frameborder="0" framespacing="0" allow="autoplay; fullscreen"></iframe>
 </div>
 
-<div class="video-title-container">
+<div style="padding: 0px 15px;" class="video-title-container">
     <div>
-        <a href="https://www.instagram.com/laughseejapan/" target="_blank">
-            <img src="https://twobayjobs.s3.amazonaws.com/avatars/originals/default_laughseejapan_profile_pic.jpg" class="video-profile-pic" width="40px" height="40px">
-        </a>
-    </div>
-    <div>
-        <a href="{{ route('blog.show', ['blog' => $video, 'genre' => $video->genre, 'category' => $video->category ]) }}">
-          <h4 class="video-title">{{ $video->title }}</h4>
-        </a>
-        <p style="white-space: pre-wrap;" class="video-caption">{{ $video->caption }}</p>
-
-        <p style="margin-top: 1px;" class="video-caption">
+        <p style="margin: 5px 0px; font-size: 0.9em">
           @foreach ($video->tags() as $tag)
-            <a href="{{ route('blog.category.index', ['genre' => 'laughseejapan', 'category' => $tag]) }}">#{{ $tag }}</a>
+            <a style="color: #97344a" href="{{ route('blog.category.index', ['genre' => 'laughseejapan', 'category' => $tag]) }}">#{{ $tag }}</a>
           @endforeach
         </p>
-
-        <p class="video-tags">觀看次數：{{ $video->views() }}次 | <span class="fb-share-button" data-href="{{ route('blog.show', ['blog' => $video, 'genre' => $video->genre, 'category' => $video->category ]) }}" data-layout="button" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">分享</a></span> | {{ Carbon\Carbon::parse($video->created_at)->format('Y-m-d') }}</p>
+        <a href="{{ route('blog.show', ['blog' => $video, 'genre' => $video->genre, 'category' => $video->category ]) }}">
+          <h4 style="font-weight: 600; margin-top:0px; margin-bottom: 0px; {{ $video->genre == 'watch' ? 'margin-left: -10px;' : '' }}">{{ $video->title }}</h4>
+        </a>
+        <p style="color: gray; margin-top: 5px; margin-bottom: 0px; font-size: 0.9em;">觀看次數：{{ $video->views() }}次 | {{ Carbon\Carbon::parse($video->created_at)->format('Y-m-d') }} | <a href="{{ route('blog.show', ['blog' => $video, 'genre' => $video->genre, 'category' => $video->category ]) }}" data-image="https://twobayjobs.s3.amazonaws.com/blogImgs/originals/{{ $video->id }}/{{ $video->blogImgs->sortby('created_at')->first()->filename }}" data-title="{{ $video->title }}" data-desc="{{ $video->caption }}" class="btnShare">分享</a></p>
     </div>
+    <hr style="border-color: #d9d9d9; background-color: #d9d9d9; color: #d9d9d9; padding:0px; margin: 10px -15px 0px -15px;">
+      <div>
+          <a href="https://www.instagram.com/laughseejapan/" target="_blank">
+              <img src="https://twobayjobs.s3.amazonaws.com/avatars/originals/default_laughseejapan_profile_pic.jpg" class="video-profile-pic" width="40px" height="40px">
+          </a>
+      </div>
+      <div>
+          <a href="https://www.instagram.com/laughseejapan/">
+            <h4 style="color: black; font-weight: 400;" class="video-title">Laughseejapan</h4>
+          </a>
+          <p style="white-space: pre-wrap; margin-left: 50px; margin-top: -12px; color: gray; margin-bottom: 0px;" class="video-caption">@Instagram</p>
+      </div>
+    <hr style="border-color: #d9d9d9; background-color: #d9d9d9; color: #d9d9d9; padding:0px; margin: 10px -15px 10px -15px;">
+      <p style="white-space: pre-wrap; color: gray; margin-bottom: 0px;">{{ $video->caption }}</p>
+    <hr style="border-color: #d9d9d9; background-color: #d9d9d9; color: #d9d9d9; padding:0px; margin: 10px -15px 0px -15px;">
 </div>​
-<br>

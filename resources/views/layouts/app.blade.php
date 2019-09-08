@@ -19,7 +19,7 @@
         <meta property="og:image" content="https://twobayjobs.s3.amazonaws.com/blogImgs/originals/{{ $current_blog->id }}/{{ $current_blog->blogImgs->sortby('created_at')->first()->filename }}" />
 
         <meta name="title" content="{{ $current_blog->title }} | {{ App\Blog::$genres[$current_blog->genre]['navTitle'] }} | FreeRider">
-        <title>{{ $current_blog->title }} | {{ App\Blog::$genres[$current_blog->genre]['navTitle'] }} | {{ array_search($video->category, App\Blog::$genres[$video->genre]['categories']) }})</title>
+        <title>{{ $current_blog->title }} | {{ App\Blog::$genres[$current_blog->genre]['navTitle'] }} | {{ array_search($current_blog->category, App\Blog::$genres[$current_blog->genre]['categories']) }})</title>
         <meta name="description" content="{{ str_limit($fb_title, 150) }}">
     @else
         <meta name="title" content="日娛王道 | 日本最強娛樂 | 日本最新綜藝">

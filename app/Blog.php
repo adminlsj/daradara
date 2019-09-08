@@ -20,6 +20,13 @@ class Blog extends Model
             'name' => 'laughseejapan'
         ],
 
+        'watch' => [
+            'navTitle' => '娛見日本',
+            'listTitle' => '日本熱門綜藝',
+            'categories' => ['溫馨' => '搞笑', '搞笑' => '寵物', '熱門' => '感動'],
+            'name' => 'laughseejapan'
+        ],
+
         'travel' => [
             'navTitle' => '旅日塾',
             'listTitle' => '日本旅行與文化',
