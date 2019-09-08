@@ -7,6 +7,12 @@
 			<div class="video-sidebar-wrapper">
 				@include('video.singleWatchPost')
 				<div style="padding: 0px 15px; font-weight: 400; margin-top:-9px; margin-bottom: 10px; font-size: 1.2em;">相關影片</div>
+				<ins class="adsbygoogle"
+					style="display:block"
+					data-ad-format="fluid"
+					data-ad-layout-key="-e8+7o+2d-fd+jb"
+					data-ad-client="ca-pub-4485968980278243"
+					data-ad-slot="6019076303"></ins>
 			    <div id="sidebar-results"><!-- results appear here --></div>
 			    <div style="text-align: center" class="ajax-loading"><img src="https://s3.amazonaws.com/twobayjobs/system/loading.gif"/></div>
 			</div>
