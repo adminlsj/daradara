@@ -8811,6 +8811,18 @@ a:visited {
   top: 0;
 }
 
+.circle {
+  width: 60px;
+  height: 60px;
+  border-radius: 30px;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  line-height: 60px;
+  text-align: center;
+  background: #d84b6b;
+}
+
 .blog-title {
   font-weight: 600;
   font-size: 19px;
@@ -9441,6 +9453,11 @@ a > i {
   .mobile-margin-top {
     margin-top: 30px !important;
     margin-left: 17px;
+  }
+
+  .trending-circles {
+    margin-top: 85px;
+    margin-left: 15px;
   }
 
   .video-title-container {
