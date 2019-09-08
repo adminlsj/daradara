@@ -5,10 +5,7 @@
 	<div class="row video-no-gutter">
 		<div class="col-md-8" style="margin-top: 15px;">
 			<div class="video-sidebar-wrapper">
-				<!-- <div class="aspect-ratio">
-				    <iframe src="//player.bilibili.com/player.html?aid=8554615&cid=14085196&page=1" scrolling="yes" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
-				</div> -->
-				@include('video.singleVideoPost')
+				@include('video.singleFBVideoPost')
 				<ins class="adsbygoogle"
 				     style="display:block"
 				     data-ad-format="fluid"
