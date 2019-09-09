@@ -1,5 +1,5 @@
 <div class="aspect-ratio">
-    <iframe src="{{ $video->content }}?autoplay=1&byline=0&portrait=0&title=0" border="0" frameborder="0" framespacing="0" allow="autoplay; fullscreen"></iframe>
+    <iframe src="{{ $video->content }}?autoplay-mute=true&queue-enable=false&quality=480" border="0" frameborder="0" framespacing="0" allowfullscreen allow="autoplay"></iframe>
 </div>
 
 <div style="padding: 0px 15px;" class="video-title-container">
