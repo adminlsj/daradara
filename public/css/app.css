@@ -9308,15 +9308,15 @@ a > i {
 .video-caption {
   margin-left: 50px;
   margin-top: -6px;
-  color: #C0C0C0;
+  color: gray;
   margin-bottom: 0px;
   font-size: 0.8em;
 }
 
 .video-tags {
   margin-left: 50px;
-  margin-top: -8px;
-  color: #C0C0C0;
+  margin-top: -7px;
+  color: gray;
   margin-bottom: 0px;
   font-size: 0.8em;
 }
