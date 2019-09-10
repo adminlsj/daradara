@@ -9301,22 +9301,24 @@ a > i {
   margin-left: 50px;
   margin-top: -40px;
   font-weight: 600;
-  line-height: 23px;
+  line-height: 18.5px;
+  font-size: 1em;
 }
 
 .video-caption {
   margin-left: 50px;
   margin-top: -6px;
-  color: gray;
+  color: #C0C0C0;
   margin-bottom: 0px;
+  font-size: 0.8em;
 }
 
 .video-tags {
   margin-left: 50px;
-  margin-top: 2px;
-  color: #d3d3d3;
+  margin-top: -8px;
+  color: #C0C0C0;
   margin-bottom: 0px;
-  font-size: 1em;
+  font-size: 0.8em;
 }
 
 .noselect {

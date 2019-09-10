@@ -15,15 +15,8 @@
         <a href="{{ route('blog.show', ['blog' => $video, 'genre' => $video->genre, 'category' => $video->category ]) }}">
           <h4 class="video-title">{{ $video->title }}</h4>
         </a>
-        <p class="video-caption">{{ $video->caption }}</p>
 
-        <p style="margin-top: 1px;" class="video-caption">
-          @foreach ($video->tags() as $tag)
-            <a href="{{ route('blog.category.index', ['genre' => $video->genre, 'category' => $tag]) }}">#{{ $tag }}</a>
-          @endforeach
-        </p>
-
-        <p class="video-tags">觀看次數：{{ $video->views() }}次 | <span class="fb-share-button" data-href="{{ route('blog.show', ['blog' => $video, 'genre' => $video->genre, 'category' => $video->category ]) }}" data-layout="button" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">分享</a></span> | {{ Carbon\Carbon::parse($video->created_at)->format('Y-m-d') }}</p>
+        <p class="video-tags">觀看次數：{{ $video->views() }}次 • {{ Carbon\Carbon::parse($video->created_at)->format('Y-m-d') }} • <a href="{{ route('blog.show', ['blog' => $video, 'genre' => $video->genre, 'category' => $video->category ]) }}" data-image="https://twobayjobs.s3.amazonaws.com/blogImgs/originals/{{ $video->id }}/{{ $video->blogImgs->sortby('created_at')->first()->filename }}" data-title="{{ $video->title }}" data-desc="{{ $video->caption }}" class="btnShare">分享</a></p>
     </div>
 </div>​
 <br>
