@@ -24,7 +24,7 @@
           <a href="https://www.instagram.com/laughseejapan/">
             <h4 style="color: black; font-weight: 400;" class="video-title">Laughseejapan</h4>
           </a>
-          <p style="white-space: pre-wrap; margin-left: 50px; margin-top: -12px; color: gray; margin-bottom: 0px;" class="video-caption">@Instagram</p>
+          <p style="white-space: pre-wrap; margin-left: 50px; margin-top: -10px; color: gray; margin-bottom: 0px;" class="video-caption">@Instagram</p>
       </div>
     <hr style="border-color: #d9d9d9; background-color: #d9d9d9; color: #d9d9d9; padding:0px; margin: 10px -15px 10px -15px;">
       <p style="white-space: pre-wrap; color: gray; margin-bottom: 0px;">{{ $video->caption }}</p>
