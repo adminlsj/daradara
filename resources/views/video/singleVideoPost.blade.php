@@ -1,9 +1,6 @@
-<div class="fb-video"
-      data-href="{{ $video->content }}"
-      data-width="auto"
-      data-allowfullscreen="false"
-      data-autoplay="false"
-      data-show-captions="false"></div>
+<a href="{{ route('blog.show', ['blog' => $video, 'genre' => $video->genre, 'category' => $video->category ]) }}">
+  <img src="{{ $video->blogImgs[0]->original }}" width="100%" height="100%">
+</a>
 
 <div class="video-title-container">
     <div>
