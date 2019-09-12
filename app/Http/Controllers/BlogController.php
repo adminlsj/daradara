@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Storage;
 use File;
 use Image;
+use DB;
 use App\Mail\Contact;
 use App\Mail\ContactUser;
 use Carbon\Carbon;
@@ -164,7 +165,7 @@ class BlogController extends Controller
                 }
                 $loop++;
             }
-            $videos = $videos->inRandomOrder()->paginate(5);
+            $videos = $videos->inRandomOrder('1234')->paginate(5);
             $html = $this->videoLoadHTML($videos);
             if ($request->ajax()) {
                 return $html;
