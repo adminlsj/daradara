@@ -164,7 +164,7 @@ class BlogController extends Controller
                 }
                 $loop++;
             }
-            $videos = $videos->distinct()->orderBy('created_at', 'desc')->paginate(5);
+            $videos = $videos->inRandomOrder()->paginate(5);
             $html = $this->videoLoadHTML($videos);
             if ($request->ajax()) {
                 return $html;
