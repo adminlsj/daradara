@@ -18,7 +18,7 @@
     <i style="font-size: 25px;" class="material-icons">home</i>
     <span style="font-size: 12px; position: fixed; bottom: 0; padding-bottom: 4px; color: inherit;">主頁</span>
   </a>
-  <a href="{{ route('blog.category.index', ['genre' => 'laughseejapan', 'category' => 'trending']) }}" class="{{ Request::is('*trending') ? 'active' : ''}}">
+  <a href="{{ route('blog.category.index', ['genre' => 'laughseejapan', 'category' => 'trending']) }}" class="{{ Request::is('laughseejapan/trending') || Request::is('laughseejapan/video/*') ? 'active' : ''}}">
     <i style="font-size: 25px;" class="material-icons">whatshot</i>
     <span style="font-size: 12px; position: fixed; bottom: 0; padding-bottom: 4px; color: inherit;">發燒影片</span>
   </a>
