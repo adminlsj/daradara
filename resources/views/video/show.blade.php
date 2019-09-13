@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
 <div style="width:78%; margin: 0 auto;" class="mobile-container">
 	<div class="row video-no-gutter">
 		<div class="col-md-8" style="margin-top: 15px;">

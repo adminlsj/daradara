@@ -153,6 +153,11 @@ class BlogController extends Controller
     public function show(Request $request, String $genre = 'laughseejapan', String $category = 'video', Blog $blog)
     {
         if ($genre == 'laughseejapan') {
+
+            if (!($request->ajax())) {
+                $request->session()->forget('seed');
+            }
+
             $video = $blog;
 
             $loop = 0;
@@ -165,7 +170,16 @@ class BlogController extends Controller
                 }
                 $loop++;
             }
-            $videos = $videos->inRandomOrder('1234')->paginate(5);
+
+            if (!$request->session()->has('seed')) {
+                $seed = mt_rand(-1*10000000, 1*10000000) / 10000000;
+                $request->session()->put('seed', $seed);
+            }
+
+            $seed = $request->session()->pull('seed');
+            $request->session()->put('seed', $seed);
+            DB::select('SELECT setseed('.$seed.')');
+            $videos = $videos->inRandomOrder()->paginate(5);
             $html = $this->videoLoadHTML($videos);
             if ($request->ajax()) {
                 return $html;
