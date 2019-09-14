@@ -74,6 +74,10 @@ class Blog extends Model
             'listTitle' => '最齊全的排行榜',
             'categories' => ['比賽' => 'competition', '學術' => 'acedamics', '娛樂' => 'entertainment'],
             'name' => 'freeriderjapan'
+        ],
+
+        'contact' => [
+            'listTitle' => '聯絡我們',
         ]
     ];
 

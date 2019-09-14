@@ -60,7 +60,7 @@ $(document).ready(function(){
 
 window.fbAsyncInit = function(){
 FB.init({
-    appId: 'xxxxx', status: true, cookie: true, xfbml: true }); 
+    appId: '1931467720459909', status: true, cookie: true, xfbml: true }); 
 };
 (function(d, debug){var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
     if(d.getElementById(id)) {return;}

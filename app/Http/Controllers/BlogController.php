@@ -50,6 +50,9 @@ class BlogController extends Controller
             $sideBlogsDesktop = Blog::where('genre', $genre)->inRandomOrder()->limit(3)->get();
             return view('video.watchIndex', compact('videos', 'video', 'sideBlogsDesktop', 'genre'));
 
+        } elseif ($genre == 'contact') {
+            return view('layouts.contact');
+
         } else {
             $sideBlogsMobile = Blog::where('genre', $genre)->orderBy('created_at', 'desc')->paginate(5);
             $html = $this->sidebarHTML($sideBlogsMobile);
@@ -209,7 +212,7 @@ class BlogController extends Controller
             $video->views++;
             $video->save();
 
-            return view('video.watchShow', compact('video', 'videos', 'sideBlogsDesktop', 'current_blog', 'fb_title', 'category', 'genre'));
+            return view('video.show', compact('video', 'videos', 'sideBlogsDesktop', 'current_blog', 'fb_title', 'category', 'genre'));
 
         } else {
             $sideBlogsMobile = Blog::where('genre', $genre)->where('category', $category)->orderBy('created_at', 'desc')->paginate(5);
@@ -469,8 +472,9 @@ class BlogController extends Controller
 
     public function contact()
     {
-        $category = 'japan';
-        return view('layouts.contact', compact('category'));
+        $genre = 'laughseejapan';
+        $category = 'video';
+        return view('layouts.contact', compact('genre', 'category'));
     }
 
     public function policy()
