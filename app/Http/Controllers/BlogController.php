@@ -40,7 +40,7 @@ class BlogController extends Controller
             return view('video.genreIndex', compact('videos', 'sideBlogsDesktop', 'genre'));
 
         } elseif ($genre == 'watch') {
-            $videos = Blog::where('genre', $genre)->orderBy('created_at', 'desc')->paginate(5);
+            $videos = Blog::where('genre', $genre)->orderBy('created_at', 'desc')->paginate(10);
             $html = $this->relatedLoadHTML($videos);
             if ($request->ajax()) {
                 return $html;
@@ -49,9 +49,6 @@ class BlogController extends Controller
             $video = $videos->first();
             $sideBlogsDesktop = Blog::where('genre', $genre)->inRandomOrder()->limit(3)->get();
             return view('video.watchIndex', compact('videos', 'video', 'sideBlogsDesktop', 'genre'));
-
-        } elseif ($genre == 'contact') {
-            return view('layouts.contact');
 
         } else {
             $sideBlogsMobile = Blog::where('genre', $genre)->orderBy('created_at', 'desc')->paginate(5);
@@ -199,7 +196,7 @@ class BlogController extends Controller
 
         } elseif ($genre == 'watch') {
             $video = $blog;
-            $videos = Blog::where('genre', $genre)->where('category', $category)->where('id', '!=', $video->id)->orderBy('created_at', 'desc')->paginate(5);
+            $videos = Blog::where('genre', $genre)->where('category', $category)->where('id', '!=', $video->id)->orderBy('created_at', 'desc')->paginate(10);
             $html = $this->relatedLoadHTML($videos);
             if ($request->ajax()) {
                 return $html;
@@ -468,6 +465,19 @@ class BlogController extends Controller
     public function destroy(Blog $blog)
     {
         //
+    }
+
+    public function search(Request $request)
+    {
+        $query = request('query');          
+        $videos = Blog::where('genre', 'laughseejapan')->where('title', 'ILIKE', '%'.$query.'%')->orWhere('genre', 'watch')->where('title', 'ILIKE', '%'.$query.'%')->orderBy('created_at', 'desc')->paginate(5);
+        $html = $this->videoLoadHTML($videos);
+        if ($request->ajax()) {
+            return $html;
+        }
+
+        $sideBlogsDesktop = Blog::where('genre', 'laughseejapan')->inRandomOrder()->limit(3)->get();
+        return view('video.search', compact('videos', 'sideBlogsDesktop', 'query'));
     }
 
     public function contact()

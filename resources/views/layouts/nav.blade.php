@@ -8,8 +8,20 @@
 	    <a style="font-size: 25px; color: white !important; font-weight: 300; line-height: 50px; text-decoration: none; margin-left: -5px;" href="{{ route('blog.genre.index', ['genre' => 'laughseejapan']) }}">FreeRider</a>
 
       <a class="pull-right" style="color: #f2f2f2 !important; padding: 0px 0px 0px 15px;" href="{{ route('blog.genre.index', ['genre' => 'laughseejapan']) }}"><i style="font-size: 25px; vertical-align:middle; margin-bottom: -22.5px" class="material-icons">account_circle</i></a>
-      <a class="pull-right" style="color: #f2f2f2 !important; padding: 0px 0px 15px 15px;" href="{{ route('blog.genre.index', ['genre' => 'laughseejapan']) }}"><i style="font-size: 25px; vertical-align:middle; margin-bottom: -22.5px" class="material-icons">search</i></a>
+      <a id="toggleSearchBar" class="pull-right" style="color: #f2f2f2 !important; padding: 0px 0px 15px 15px; cursor: pointer;"><i style="font-size: 25px; vertical-align:middle; margin-bottom: -22.5px" class="material-icons">search</i></a>
     </div>
+  </div>
+</nav>
+
+<nav style="background-color: #e0e0e0 !important; height: 50px; display: none;" id="searchBar" class="responsive-frame">
+  <div style="width: 80%; background-color: #e0e0e0 !important;" class="container-fluid">
+    <form id="search-form" style="background-color: #e0e0e0 !important;" action="{{ route('blog.video.search') }}" method="GET">
+      <a id="toggleSearchBar" style="color: #646464 !important; padding: 0px 15px 0px 0px; cursor: pointer;"><i style="font-size: 25px; vertical-align:middle; margin-bottom: -22.5px" class="material-icons">arrow_back</i></a>
+
+      <input id="query" name="query" style="vertical-align:middle; margin-bottom: -27px" type="text" placeholder="Search FreeRider">
+
+      <a id="search-submit-btn" type="submit" style="color: #646464 !important; padding: 0px 0px 15px 15px; cursor: pointer;"><i style="font-size: 25px; vertical-align:middle; margin-bottom: -22.5px" class="material-icons">search</i></a>
+    </form>
   </div>
 </nav>
 

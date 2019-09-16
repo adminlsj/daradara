@@ -29,6 +29,20 @@ a:hover, a:visited {
     color: #97344a;
 }
 
+input[type=text] {
+  height: 30px;
+  background-color: #e0e0e0;
+  border: 0;
+  width: calc(100% - 88px);
+  padding-left: 5px;
+  box-shadow: -8px 10px 0px -8px #ebebeb, 8px 10px 0px -8px #ebebeb;
+}
+
+input[type=text]:focus {
+  outline: none;
+  box-shadow: -8px 10px 0px -8px #d84b6b, 8px 10px 0px -8px #d84b6b;
+}
+
 /* Place the navbar at the bottom of the page, and make it stick */
 .navbar {
   background-color: #f9f9f9;

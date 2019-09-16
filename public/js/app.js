@@ -42035,6 +42035,20 @@ $('#avatar-upload').on("change", function (e) {
     $("#avatar-form").submit();
 });
 
+$('[id=toggleSearchBar]').click(function (e) {
+    var x = document.getElementById("searchBar");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+        document.getElementById("query").focus();
+    } else {
+        x.style.display = "none";
+    }
+});
+
+$('#search-submit-btn').click(function (e) {
+    $("#search-form").submit();
+});
+
 $(document).ready(function () {
     $(".blog-carousel").owlCarousel({
         items: 1,
@@ -42106,6 +42120,8 @@ $document.ready(function () {
 });
 
 var page = 1; //track user scroll as page number, right now page number is 1
+var urlParams = new URLSearchParams(window.location.search);
+var query = urlParams.get('query');
 load_more(page); //initial content load
 
 function ScrollHandler(e) {
@@ -42126,7 +42142,7 @@ function getDocHeight() {
 
 function load_more(page) {
     $.ajax({
-        url: '?page=' + page,
+        url: '?page=' + page + '&query=' + query,
         type: "get",
         datatype: "html",
         beforeSend: function beforeSend() {
