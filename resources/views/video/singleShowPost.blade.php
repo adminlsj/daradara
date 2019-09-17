@@ -10,7 +10,7 @@
           @endforeach
         </p>
         <a href="{{ route('blog.show', ['blog' => $video, 'genre' => $video->genre, 'category' => $video->category ]) }}">
-          <h4 style="line-height: 23px; font-weight: 600; margin-top:0px; margin-bottom: 0px; {{ $video->genre == 'watch' ? 'margin-left: -10px;' : '' }}">{{ $video->title }}</h4>
+          <h4 style="line-height: 23px; font-weight: 600; margin-top:0px; margin-bottom: 0px;">{{ $video->title }}</h4>
         </a>
         <p style="color: gray; margin-top: 4px; margin-bottom: 0px; font-size: 0.9em;">觀看次數：{{ $video->views() }}次 • {{ Carbon\Carbon::parse($video->created_at)->format('Y-m-d') }} • <a href="{{ route('blog.show', ['blog' => $video, 'genre' => $video->genre, 'category' => $video->category ]) }}" data-image="https://twobayjobs.s3.amazonaws.com/blogImgs/originals/{{ $video->id }}/{{ $video->blogImgs->sortby('created_at')->first()->filename }}" data-title="{{ $video->title }}" data-desc="{{ $video->caption }}" class="btnShare">分享</a></p>
     </div>
