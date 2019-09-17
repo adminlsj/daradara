@@ -4,18 +4,29 @@
 <div style="width:78%; margin: 0 auto;" class="mobile-container">
 	<div class="row video-no-gutter">
 		<div class="col-md-8" style="margin-top: 15px;">
+			<div>
+		        <h3 class="mobile-margin-top" style="color: black; font-weight: 500; margin-top:15px; margin-bottom: 17px;">日娛節目</h3>
+		    </div>
 			<div class="video-sidebar-wrapper">
-				@include('video.singleShowPost')
-				<div style="padding: 0px 15px; font-weight: 400; margin-top:-9px; margin-bottom: 10px; font-size: 1.2em;">相關影片</div>
-				<ins class="adsbygoogle"
-				     style="display:block;"
-				     data-ad-client="ca-pub-4485968980278243"
-				     data-ad-slot="8455082664"
-				     data-ad-format="auto"
-				     data-full-width-responsive="true"></ins>
-				<br>
-			    <div id="sidebar-results"><!-- results appear here --></div>
-			    <div style="text-align: center" class="ajax-loading"><img src="https://s3.amazonaws.com/twobayjobs/system/loading.gif"/></div>
+				@foreach ($videos as $video)
+					<div style="margin-bottom: 15px;">
+					  <a href="{{ route('blog.show', ['blog' => $video, 'genre' => $video->genre, 'category' => $video->category ]) }}" class="row no-gutter">
+					    <div style="padding-left: 15px; padding-right: 3px; position: relative;" class="col-xs-6 col-sm-6 col-md-6">
+					      <img src="{{ $video->blogImgs[0]->thumbnail }}" width="100%" height="100%">
+					      <div style="position: absolute; right:3px; bottom: 0; height: 100%; width: 25%; background-color: rgba(0,0,0,.7); text-align: center; color: white;">
+					      	<div style="margin: 0;position: absolute;top: 50%; left: 50%; transform: translate(-50%, -50%);">
+						      	<div style="font-size: 1em;">{{ $counts[$video->category] }}</div>
+						      	<div><i style="font-size: 2em;" class="material-icons">playlist_play</i></div>
+					      	</div>
+					      </div>
+					    </div>
+					    <div style="padding-top: 2px; padding-right: 15px; padding-left: 4px;" class="col-xs-6 col-sm-6 col-md-6">
+					      <h4 style="font-weight: 600; margin-top:0px; margin-bottom: 0px; font-size: 1.2em;">{{ $titles[$video->category] }}</h4>
+					      <p style="color: gray; margin-top:3px; margin-bottom: 0px; font-size: 0.9em;">{{ $counts[$video->category] }}部影片</p>
+					    </div>
+					  </a>
+					</div>
+				@endforeach
 			</div>
 		</div>
 

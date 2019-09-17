@@ -29,7 +29,7 @@ class BlogController extends Controller
 
     public function genreIndex(Request $request, String $genre = 'laughseejapan'){
         if ($genre == 'laughseejapan') {
-            $videos = Blog::where('genre', $genre)->orderBy('created_at', 'desc')->paginate(5);
+            $videos = Blog::where('genre', $genre)->orWhere('genre', 'watch')->orderBy('created_at', 'desc')->paginate(5);
             $html = $this->videoLoadHTML($videos);
             if ($request->ajax()) {
                 return $html;
@@ -40,15 +40,15 @@ class BlogController extends Controller
             return view('video.genreIndex', compact('videos', 'sideBlogsDesktop', 'genre'));
 
         } elseif ($genre == 'watch') {
-            $videos = Blog::where('genre', $genre)->orderBy('created_at', 'desc')->paginate(10);
-            $html = $this->relatedLoadHTML($videos);
-            if ($request->ajax()) {
-                return $html;
-            }
+            $monday = Blog::where('category', 'monday')->orderBy('created_at', 'desc');
+            $home = Blog::where('category', 'home')->orderBy('created_at', 'desc');
 
-            $video = $videos->first();
+            $videos = [$monday->first(), $home->first()];
+            $counts = ['monday' => $monday->count(), 'home' => $home->count()];
+            $titles = ['monday' => '《月曜夜未央》2019年', 'home' => '《跟你回家可以嗎？》2019年'];
+
             $sideBlogsDesktop = Blog::where('genre', $genre)->inRandomOrder()->limit(3)->get();
-            return view('video.watchIndex', compact('videos', 'video', 'sideBlogsDesktop', 'genre'));
+            return view('video.watchIndex', compact('videos', 'counts', 'titles', 'sideBlogsDesktop', 'genre'));
 
         } else {
             $sideBlogsMobile = Blog::where('genre', $genre)->orderBy('created_at', 'desc')->paginate(5);
@@ -164,9 +164,9 @@ class BlogController extends Controller
             $videos = [];
             foreach ($video->tags() as $tag) {
                 if ($loop == 0) {
-                    $videos = Blog::where('genre', $genre)->where('tags', 'like', '%'.$tag.'%')->where('id', '!=', $video->id);
+                    $videos = Blog::where('tags', 'like', '%'.$tag.'%')->where('id', '!=', $video->id);
                 } else {
-                    $videos = $videos->orWhere('genre', $genre)->where('tags', 'like', '%'.$tag.'%')->where('id', '!=', $video->id);
+                    $videos = $videos->orWhere('tags', 'like', '%'.$tag.'%')->where('id', '!=', $video->id);
                 }
                 $loop++;
             }
