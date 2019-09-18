@@ -42,10 +42,11 @@ class BlogController extends Controller
         } elseif ($genre == 'watch') {
             $monday = Blog::where('category', 'monday')->orderBy('created_at', 'desc');
             $home = Blog::where('category', 'home')->orderBy('created_at', 'desc');
+            $talk = Blog::where('category', 'talk')->orderBy('created_at', 'desc');
 
-            $videos = [$monday->first(), $home->first()];
-            $counts = ['monday' => $monday->count(), 'home' => $home->count()];
-            $titles = ['monday' => '《月曜夜未央》2019年', 'home' => '《跟你回家可以嗎？》2019年'];
+            $videos = [$monday->first(), $home->first(), $talk->first()];
+            $counts = ['monday' => $monday->count(), 'home' => $home->count(), 'talk' => $talk->count()];
+            $titles = ['monday' => '《月曜夜未央》2019年', 'home' => '《跟你回家可以嗎？》2019年', 'talk' => '《閒聊007》2019年'];
 
             $sideBlogsDesktop = Blog::where('genre', $genre)->inRandomOrder()->limit(3)->get();
             return view('video.watchIndex', compact('videos', 'counts', 'titles', 'sideBlogsDesktop', 'genre'));
@@ -78,7 +79,12 @@ class BlogController extends Controller
                 $sideBlogsDesktop = Blog::where('genre', $genre)->inRandomOrder()->limit(3)->get();
                 return view('video.trendingIndex', compact('videos', 'sideBlogsDesktop', 'category', 'genre'));
             } else {
-                $videos = Blog::where('genre', $genre)->where('tags', 'like', '%'.$category.'%')->orderBy('created_at', 'desc')->paginate(5);
+
+                $videos = Blog::where('genre', 'laughseejapan')->where('title', 'ILIKE', '%'.$category.'%')
+                      ->orWhere('genre', 'laughseejapan')->where('tags', 'ILIKE', '%'.$category.'%')
+                      ->orWhere('genre', 'watch')->where('title', 'ILIKE', '%'.$category.'%')
+                      ->orWhere('genre', 'watch')->where('tags', 'ILIKE', '%'.$category.'%')
+                      ->distinct()->orderBy('created_at', 'desc')->paginate(5);
                 $html = $this->videoLoadHTML($videos);
                 if ($request->ajax()) {
                     return $html;
@@ -470,7 +476,11 @@ class BlogController extends Controller
     public function search(Request $request)
     {
         $query = request('query');          
-        $videos = Blog::where('genre', 'laughseejapan')->where('title', 'ILIKE', '%'.$query.'%')->orWhere('genre', 'watch')->where('title', 'ILIKE', '%'.$query.'%')->orderBy('created_at', 'desc')->paginate(5);
+        $videos = Blog::where('genre', 'laughseejapan')->where('title', 'ILIKE', '%'.$query.'%')
+                      ->orWhere('genre', 'laughseejapan')->where('tags', 'ILIKE', '%'.$query.'%')
+                      ->orWhere('genre', 'watch')->where('title', 'ILIKE', '%'.$query.'%')
+                      ->orWhere('genre', 'watch')->where('tags', 'ILIKE', '%'.$query.'%')
+                      ->distinct()->orderBy('created_at', 'desc')->paginate(5);
         $html = $this->videoLoadHTML($videos);
         if ($request->ajax()) {
             return $html;
