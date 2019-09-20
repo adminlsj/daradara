@@ -16,7 +16,7 @@
         <meta property="og:type" content="article" />
         <meta property="og:title" content="{{ $current_blog->title }}" />
         <meta property="og:description" content="{{ $current_blog->caption }}" />
-        <meta property="og:image" content="https://twobayjobs.s3.amazonaws.com/blogImgs/originals/{{ $current_blog->id }}/{{ $current_blog->blogImgs->sortby('created_at')->first()->filename }}" />
+        <meta property="og:image" content="{{ $current_blog->blogImgs[0]->original }}" />
 
         <meta name="title" content="{{ $current_blog->title }} | {{ App\Blog::$genres[$current_blog->genre]['navTitle'] }} | FreeRider">
         <title>{{ $current_blog->title }} | {{ App\Blog::$genres[$current_blog->genre]['navTitle'] }} | {{ array_search($current_blog->category, App\Blog::$genres[$current_blog->genre]['categories']) }})</title>

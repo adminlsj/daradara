@@ -9,8 +9,8 @@
             <a style="color: #97344a" href="{{ route('blog.category.index', ['genre' => 'laughseejapan', 'category' => $tag]) }}">#{{ $tag }}</a>
           @endforeach
         </p>
-        <a href="{{ route('blog.show', ['blog' => $video, 'genre' => $video->genre, 'category' => $video->category ]) }}">
-          <h4 style="line-height: 23px; font-weight: 600; margin-top:0px; margin-bottom: 0px;">{{ $video->title }}</h4>
+        <a id="shareBtn-link" href="{{ route('blog.show', ['blog' => $video, 'genre' => $video->genre, 'category' => $video->category ]) }}">
+          <h4 id="shareBtn-title" style="line-height: 23px; font-weight: 600; margin-top:0px; margin-bottom: 0px;">{{ $video->title }}</h4>
         </a>
         <p style="color: gray; margin-top: 4px; margin-bottom: 0px; font-size: 0.9em;">觀看次數：{{ $video->views() }}次 • {{ Carbon\Carbon::parse($video->created_at)->format('Y-m-d') }} • <a href="{{ route('blog.show', ['blog' => $video, 'genre' => $video->genre, 'category' => $video->category ]) }}" data-image="https://twobayjobs.s3.amazonaws.com/blogImgs/originals/{{ $video->id }}/{{ $video->blogImgs->sortby('created_at')->first()->filename }}" data-title="{{ $video->title }}" data-desc="{{ $video->caption }}" class="btnShare">分享</a></p>
     </div>
@@ -26,6 +26,10 @@
           </a>
           <p style="white-space: pre-wrap; margin-left: 50px; margin-top: -10px; color: gray; margin-bottom: 0px;" class="video-caption">@Instagram</p>
       </div>
+      <a id="shareBtn" style="margin-top: -42px; margin-right: 8px; cursor: pointer; text-decoration: none;" class="pull-right">
+        <i style="color: gray;-moz-transform: scale(-1, 1);-webkit-transform: scale(-1, 1);-o-transform: scale(-1, 1);-ms-transform: scale(-1, 1);transform: scale(-1, 1);" class="material-icons pull-right">reply</i>
+        <p style="white-space: pre-wrap; color: gray; margin-bottom: 0px; margin-top: 15px; font-size: 0.85em" class="video-caption">分享</p>
+      </a>
     <hr style="border-color: #d9d9d9; background-color: #d9d9d9; color: #d9d9d9; padding:0px; margin: 10px -15px 10px -15px;">
       <p style="white-space: pre-wrap; color: gray; margin-bottom: 0px;">{{ $video->caption }}</p>
     <hr style="border-color: #d9d9d9; background-color: #d9d9d9; color: #d9d9d9; padding:0px; margin: 10px -15px 0px -15px;">
