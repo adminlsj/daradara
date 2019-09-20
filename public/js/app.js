@@ -42049,20 +42049,6 @@ $('#search-submit-btn').click(function (e) {
     $("#search-form").submit();
 });
 
-var shareButton = document.querySelector('#shareBtn');
-shareButton.addEventListener('click', function (event) {
-    if (navigator.share) {
-        navigator.share({
-            title: document.getElementById("shareBtn-title").innerHTML,
-            url: document.getElementById("shareBtn-link").href
-        }).then(function () {
-            console.log('Thanks for sharing!');
-        }).catch(console.error);
-    } else {
-        // fallback
-    }
-});
-
 $(document).ready(function () {
     $(".blog-carousel").owlCarousel({
         items: 1,
@@ -42180,6 +42166,20 @@ function load_more(page) {
         (adsbygoogle = window.adsbygoogle || []).push({});
     }).fail(function (jqXHR, ajaxOptions, thrownError) {});
 }
+
+var shareButton = document.querySelector('#shareBtn');
+shareButton.addEventListener('click', function (event) {
+    if (navigator.share) {
+        navigator.share({
+            title: document.getElementById("shareBtn-title").innerHTML,
+            url: document.getElementById("shareBtn-link").href
+        }).then(function () {
+            console.log('Thanks for sharing!');
+        }).catch(console.error);
+    } else {
+        // fallback
+    }
+});
 
 /***/ }),
 
