@@ -44,6 +44,16 @@ input[type=text]:focus {
   box-shadow: -8px 10px 0px -8px #d84b6b, 8px 10px 0px -8px #d84b6b;
 }
 
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
 /* Place the navbar at the bottom of the page, and make it stick */
 .navbar {
   background-color: #f9f9f9;
