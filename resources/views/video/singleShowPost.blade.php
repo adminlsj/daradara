@@ -26,8 +26,8 @@
           </a>
           <p style="white-space: pre-wrap; margin-left: 50px; margin-top: -10px; color: gray; margin-bottom: 0px;" class="video-caption">@Instagram</p>
       </div>
-      <div id="toggleVideoDescription" style="margin-top: -30px; cursor: pointer; color: gray" class="pull-right"><i id="toggleVideoDescriptionIcon" class="material-icons">expand_more</i></div>
-      <a id="shareBtn" style="margin-top: -42px; margin-right: 30px; padding-right:5px; cursor: pointer; text-decoration: none;" class="pull-right">
+      <div id="toggleVideoDescription" style="margin-top: -30px; padding-right:2px;cursor: pointer; color: gray" class="pull-right"><i id="toggleVideoDescriptionIcon" class="material-icons">expand_more</i></div>
+      <a id="shareBtn" style="margin-top: -42px; margin-right: 30px; padding-right:10px; cursor: pointer; text-decoration: none;" class="pull-right">
         <i style="color: gray;-moz-transform: scale(-1, 1);-webkit-transform: scale(-1, 1);-o-transform: scale(-1, 1);-ms-transform: scale(-1, 1);transform: scale(-1, 1);" class="material-icons pull-right">reply</i>
         <p style="white-space: pre-wrap; color: gray; margin-bottom: 0px; margin-top: 15px; font-size: 0.85em" class="video-caption">分享</p>
       </a>
