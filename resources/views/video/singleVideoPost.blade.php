@@ -3,7 +3,7 @@
 </a>
 
 <div style="position: relative;" class="video-title-container">
-    <span style="position: absolute; top:-25px; right: 8px; background-color: black; color: white; padding: 0px 5px 0 5px; opacity: 0.7; font-size: 0.85em; border-radius: 2px;">{{ $video->duration() }}</span>
+    <span style="position: absolute; top:-25px; right: 8px; background-color: rgba(0,0,0,0.7); color: white; padding: 0px 5px 0 5px; font-size: 0.85em; border-radius: 2px; opacity: 0.9">{{ $video->duration() }}</span>
     <div>
         <a href="https://www.instagram.com/laughseejapan/" target="_blank">
             <img src="https://twobayjobs.s3.amazonaws.com/avatars/originals/default_laughseejapan_profile_pic.jpg" class="video-profile-pic" width="40px" height="40px">
