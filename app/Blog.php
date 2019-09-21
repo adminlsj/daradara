@@ -95,6 +95,18 @@ class Blog extends Model
         }
     }
 
+    public function duration()
+    {
+        $min = (int) floor($this->duration / 60);
+        $sec = (int) round($this->duration % 60);
+        if ($sec == 0) {
+            $sec = '00';
+        } elseif ($sec < 10) {
+            $sec = '0'.$sec;
+        }
+        return $min.':'.$sec;
+    }
+
     public function blogImgs()
     {
         return $this->hasMany('App\BlogImg');
