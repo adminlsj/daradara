@@ -1,6 +1,6 @@
 <nav style="background-color: #414143 !important;" id="scroll-hide-nav" >
-  <div style="width: 80%; background-color: #414143 !important;" class="container-fluid">
-    <div style="background-color: #414143 !important;" class="responsive-frame">
+  <div style="width: 80%; max-width: 1200px; background-color: #414143 !important;" class="container-fluid responsive-frame">
+    <div style="background-color: #414143 !important;">
       <a href="{{ route('blog.genre.index', ['genre' => 'laughseejapan']) }}">
 	        <img src="https://twobayjobs.s3.amazonaws.com/avatars/originals/square_freerider_profile_pic.jpg" style="border-radius: 20px; margin-top: -14px;" width="40px" height="40px">
 	    </a>
@@ -13,8 +13,8 @@
   </div>
 </nav>
 
-<nav style="background-color: #e0e0e0 !important; height: 50px; display: none;" id="searchBar" class="responsive-frame">
-  <div style="width: 80%; background-color: #e0e0e0 !important;" class="container-fluid">
+<nav style="background-color: #e0e0e0 !important; height: 50px; display: none;" id="searchBar" class="">
+  <div style="width: 80%; max-width: 1200px; background-color: #e0e0e0 !important;" class="container-fluid responsive-frame">
     <form id="search-form" style="background-color: #e0e0e0 !important;" action="{{ route('blog.video.search') }}" method="GET">
       <a id="toggleSearchBar" style="color: #646464 !important; padding: 0px 15px 0px 0px; cursor: pointer;"><i style="font-size: 25px; vertical-align:middle; margin-bottom: -22.5px" class="material-icons">arrow_back</i></a>
 

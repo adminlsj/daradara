@@ -734,6 +734,12 @@ a > i {
 @media (min-width: 1500px) {
     .mobile-container {
         width: 1500px;
+        margin: 0 auto;
+    }
+
+    .responsive-frame {
+      width: 1500px;
+      margin: 0 auto;
     }
 }
 

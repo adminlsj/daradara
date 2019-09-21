@@ -50,7 +50,7 @@
     
     <div id="app">
         <div>@include('layouts.nav')</div>
-        <div style="margin-top: 60px;">
+        <div style="margin-top: 60px;" class="responsive-frame">
             @yield('content')
         </div>
         @include('layouts.footer')
