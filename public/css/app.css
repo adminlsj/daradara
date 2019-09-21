@@ -9498,16 +9498,13 @@ a > i {
   }
 }
 
-@media (min-width: 1000px) {
-  .mobile-container {
-    width: 1000px;
-  }
-}
-
 @media (min-width: 1500px) {
+  .mobile-container {
+    width: 1500px;
+  }
+
   .responsive-frame {
     width: 1500px;
-    margin: 0 auto;
   }
 }
 
