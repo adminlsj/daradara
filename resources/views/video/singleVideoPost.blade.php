@@ -1,5 +1,5 @@
 <a href="{{ route('video.trending') }}?v={{ $video->id }}">
-  <img src="{{ $video->blogImgs[0]->original }}" width="100%" height="100%">
+  <img src="{{ $video->blogImgs[0]->thumbnail }}" width="100%" height="100%">
 </a>
 
 <div style="position: relative;" class="video-title-container">

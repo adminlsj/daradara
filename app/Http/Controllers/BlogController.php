@@ -43,7 +43,7 @@ class BlogController extends Controller
             $video->views++;
             $video->save();
 
-            return view('video.show', compact('video', 'videos', 'sideBlogsDesktop', 'current_blog', 'fb_title', 'category', 'genre'));
+            return view('video.show', compact('video', 'videos', 'sideBlogsDesktop', 'current_blog', 'fb_title'));
         } else {
             $monday = Blog::where('category', 'monday')->orderBy('created_at', 'desc');
             $home = Blog::where('category', 'home')->orderBy('created_at', 'desc');
