@@ -54,7 +54,7 @@ class BlogController extends Controller
             $titles = ['monday' => '月曜夜未央 2019年完整版', 'home' => '跟你回家可以嗎？2019年完整版', 'talk' => '閒聊007 2019年完整版'];
 
             $sideBlogsDesktop = Blog::where('genre', 'video')->inRandomOrder()->limit(3)->get();
-            return view('video.watchIndex', compact('videos', 'counts', 'titles', 'sideBlogsDesktop', 'genre'));
+            return view('video.watchIndex', compact('videos', 'counts', 'titles', 'sideBlogsDesktop'));
         }
     }
 
@@ -98,7 +98,7 @@ class BlogController extends Controller
             $video->views++;
             $video->save();
 
-            return view('video.show', compact('video', 'videos', 'sideBlogsDesktop', 'current_blog', 'fb_title', 'category', 'genre'));
+            return view('video.show', compact('video', 'videos', 'sideBlogsDesktop', 'current_blog', 'fb_title'));
         } else {
             $videos = Blog::orderBy('views', 'desc')->paginate(5);
             $html = $this->videoLoadHTML($videos);
