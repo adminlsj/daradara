@@ -107,7 +107,7 @@ class BlogController extends Controller
             }
 
             $sideBlogsDesktop = Blog::where('category', 'video')->inRandomOrder()->limit(3)->get();
-            return view('video.trendingIndex', compact('videos', 'sideBlogsDesktop', 'category', 'genre'));
+            return view('video.trendingIndex', compact('videos', 'sideBlogsDesktop'));
         }
     }
 
