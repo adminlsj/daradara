@@ -30,11 +30,11 @@
     <i style="font-size: 25px;" class="material-icons">home</i>
     <span style="font-size: 12px; position: fixed; bottom: 0; padding-bottom: 4px; color: inherit;">主頁</span>
   </a>
-  <a href="{{ route('blog.category.index', ['genre' => 'laughseejapan', 'category' => 'trending']) }}" class="{{ Request::is('laughseejapan/trending') || Request::is('laughseejapan/video/*') ? 'active' : ''}}">
+  <a href="{{ route('video.trending') }}" class="{{ Request::is('*trending*') ? 'active' : ''}}">
     <i style="font-size: 25px;" class="material-icons">whatshot</i>
     <span style="font-size: 12px; position: fixed; bottom: 0; padding-bottom: 4px; color: inherit;">發燒影片</span>
   </a>
-  <a href="{{ route('blog.genre.index', ['genre' => 'watch']) }}" class="{{ Request::is('*watch*') ? 'active' : ''}}">
+  <a href="{{ route('video.watch') }}" class="{{ Request::is('*watch*') ? 'active' : ''}}">
     <i style="font-size: 25px;" class="material-icons">nights_stay</i>
     <span style="font-size: 12px; position: fixed; bottom: 0; padding-bottom: 4px; color: inherit;">月曜合集</span>
   </a>

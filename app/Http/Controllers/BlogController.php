@@ -27,6 +27,90 @@ class BlogController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+    public function watch(Request $request){
+        if ($request->has('v') && $request->v != 'null') {
+            $video = Blog::find($request->v);
+            $videos = Blog::where('category', $video->category)->where('id', '!=', $video->id)->orderBy('created_at', 'desc')->paginate(10);
+            $html = $this->relatedLoadHTML($videos);
+            if ($request->ajax()) {
+                return $html;
+            }
+
+            $sideBlogsDesktop = Blog::where('category', 'video')->inRandomOrder()->limit(3)->get();
+            $current_blog = $video;
+            $fb_title = $video->title;
+
+            $video->views++;
+            $video->save();
+
+            return view('video.show', compact('video', 'videos', 'sideBlogsDesktop', 'current_blog', 'fb_title', 'category', 'genre'));
+        } else {
+            $monday = Blog::where('category', 'monday')->orderBy('created_at', 'desc');
+            $home = Blog::where('category', 'home')->orderBy('created_at', 'desc');
+            $talk = Blog::where('category', 'talk')->orderBy('created_at', 'desc');
+
+            $videos = [$monday->first(), $home->first(), $talk->first()];
+            $counts = ['monday' => $monday->count(), 'home' => $home->count(), 'talk' => $talk->count()];
+            $titles = ['monday' => '月曜夜未央 2019年完整版', 'home' => '跟你回家可以嗎？2019年完整版', 'talk' => '閒聊007 2019年完整版'];
+
+            $sideBlogsDesktop = Blog::where('genre', 'video')->inRandomOrder()->limit(3)->get();
+            return view('video.watchIndex', compact('videos', 'counts', 'titles', 'sideBlogsDesktop', 'genre'));
+        }
+    }
+
+    public function trending(Request $request){
+        if ($request->has('v') && $request->v != 'null') {
+            if (!($request->ajax())) {
+                $request->session()->forget('seed');
+            }
+
+            $video = Blog::find($request->v);
+
+            $loop = 0;
+            $videos = [];
+            foreach ($video->tags() as $tag) {
+                if ($loop == 0) {
+                    $videos = Blog::where('tags', 'like', '%'.$tag.'%')->where('id', '!=', $video->id);
+                } else {
+                    $videos = $videos->orWhere('tags', 'like', '%'.$tag.'%')->where('id', '!=', $video->id);
+                }
+                $loop++;
+            }
+
+            if (!$request->session()->has('seed')) {
+                $seed = mt_rand(-1*10000000, 1*10000000) / 10000000;
+                $request->session()->put('seed', $seed);
+            }
+
+            $seed = $request->session()->pull('seed');
+            $request->session()->put('seed', $seed);
+            DB::select('SELECT setseed('.$seed.')');
+            $videos = $videos->inRandomOrder()->paginate(5);
+            $html = $this->videoLoadHTML($videos);
+            if ($request->ajax()) {
+                return $html;
+            }
+
+            $sideBlogsDesktop = Blog::where('category', 'video')->inRandomOrder()->limit(3)->get();
+            $current_blog = $video;
+            $fb_title = $video->title;
+
+            $video->views++;
+            $video->save();
+
+            return view('video.show', compact('video', 'videos', 'sideBlogsDesktop', 'current_blog', 'fb_title', 'category', 'genre'));
+        } else {
+            $videos = Blog::orderBy('views', 'desc')->paginate(5);
+            $html = $this->videoLoadHTML($videos);
+            if ($request->ajax()) {
+                return $html;
+            }
+
+            $sideBlogsDesktop = Blog::where('category', 'video')->inRandomOrder()->limit(3)->get();
+            return view('video.trendingIndex', compact('videos', 'sideBlogsDesktop', 'category', 'genre'));
+        }
+    }
+
     public function genreIndex(Request $request, String $genre = 'laughseejapan'){
         if ($genre == 'laughseejapan') {
             $videos = Blog::where('genre', $genre)->orWhere('genre', 'watch')->orderBy('created_at', 'desc')->paginate(5);

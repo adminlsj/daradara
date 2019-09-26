@@ -1,4 +1,4 @@
-<a href="{{ route('blog.show', ['blog' => $video, 'genre' => $video->genre, 'category' => $video->category ]) }}">
+<a href="{{ route('video.trending') }}?v={{ $video->id }}">
   <img src="{{ $video->blogImgs[0]->original }}" width="100%" height="100%">
 </a>
 
@@ -10,7 +10,7 @@
         </a>
     </div>
     <div>
-        <a href="{{ route('blog.show', ['blog' => $video, 'genre' => $video->genre, 'category' => $video->category ]) }}">
+        <a href="{{ route('video.trending') }}?v={{ $video->id }}">
           <h4 class="video-title">{{ $video->title }}</h4>
         </a>
 

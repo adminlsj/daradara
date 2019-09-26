@@ -42134,6 +42134,7 @@ $document.ready(function () {
 var page = 1; //track user scroll as page number, right now page number is 1
 var urlParams = new URLSearchParams(window.location.search);
 var query = urlParams.get('query');
+var video = urlParams.get('v');
 load_more(page); //initial content load
 
 function ScrollHandler(e) {
@@ -42154,7 +42155,7 @@ function getDocHeight() {
 
 function load_more(page) {
     $.ajax({
-        url: '?page=' + page + '&query=' + query,
+        url: '?v=' + video + '&page=' + page + '&query=' + query,
         type: "get",
         datatype: "html",
         beforeSend: function beforeSend() {

@@ -10,7 +10,7 @@
 			<div class="video-sidebar-wrapper">
 				@foreach ($videos as $video)
 					<div style="margin-bottom: 15px;">
-					  <a href="{{ route('blog.show', ['blog' => $video, 'genre' => $video->genre, 'category' => $video->category ]) }}" class="row no-gutter">
+					  <a href="{{ route('video.watch') }}?v={{ $video->id }}" class="row no-gutter">
 					    <div style="padding-left: 15px; padding-right: 3px; position: relative;" class="col-xs-6 col-sm-6 col-md-6">
 					      <img src="{{ $video->blogImgs[0]->thumbnail }}" width="100%" height="100%">
 					      <div style="position: absolute; right:3px; bottom: 0; height: 100%; width: 25%; background-color: rgba(0,0,0,.7); text-align: center; color: white;">
