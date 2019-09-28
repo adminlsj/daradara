@@ -11,16 +11,16 @@
       gtag('config', 'UA-125786247-1');
     </script>
 
-    @if (Request::is('*/*/*'))
-        <meta property="og:url" content="{{ route('blog.show', ['blog' => $current_blog, 'genre' => $current_blog->genre, 'category' => $current_blog->category]) }}" />
+    @if (Request::has('v') && Request::get('v') != 'null')
+        <meta property="og:url" content="{{ route('video.trending') }}?v={{ Request::get('v') }}" />
         <meta property="og:type" content="article" />
         <meta property="og:title" content="{{ $current_blog->title }}" />
         <meta property="og:description" content="{{ $current_blog->caption }}" />
         <meta property="og:image" content="{{ $current_blog->blogImgs[0]->original }}" />
 
-        <meta name="title" content="{{ $current_blog->title }} | {{ App\Blog::$genres[$current_blog->genre]['navTitle'] }} | FreeRider">
-        <title>{{ $current_blog->title }} | {{ App\Blog::$genres[$current_blog->genre]['navTitle'] }} | {{ array_search($current_blog->category, App\Blog::$genres[$current_blog->genre]['categories']) }})</title>
-        <meta name="description" content="{{ str_limit($fb_title, 150) }}">
+        <meta name="title" content="{{ $current_blog->title }} | 娛見日本">
+        <title>{{ $current_blog->title }} | 娛見日本</title>
+        <meta name="description" content="{{ $current_blog->caption }}">
     @else
         <meta name="title" content="日娛王道 | 日本最強娛樂 | 日本最新綜藝">
         <title>日娛王道 | 日本最強娛樂 | 日本最新綜藝</title>

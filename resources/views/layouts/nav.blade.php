@@ -1,11 +1,11 @@
 <nav style="background-color: #414143 !important;" id="scroll-hide-nav" >
   <div style="width: 80%; max-width: 1200px; background-color: #414143 !important;" class="container-fluid responsive-frame">
     <div style="background-color: #414143 !important;">
-      <a href="{{ route('blog.genre.index', ['genre' => 'laughseejapan']) }}">
+      <a href="/">
 	        <img src="https://twobayjobs.s3.amazonaws.com/avatars/originals/square_freerider_profile_pic.jpg" style="border-radius: 20px; margin-top: -14px;" width="40px" height="40px">
 	    </a>
 
-	    <a style="font-size: 25px; color: white !important; font-weight: 300; line-height: 50px; text-decoration: none; margin-left: -5px;" href="{{ route('blog.genre.index', ['genre' => 'laughseejapan']) }}">FreeRider</a>
+	    <a style="font-size: 25px; color: white !important; font-weight: 300; line-height: 50px; text-decoration: none; margin-left: -5px;" href="/">FreeRider</a>
 
       <a class="pull-right" style="color: #f2f2f2 !important; padding: 0px 0px 0px 15px;" href="{{ route('blog.genre.index', ['genre' => 'laughseejapan']) }}"><i style="font-size: 25px; vertical-align:middle; margin-bottom: -22.5px" class="material-icons">account_circle</i></a>
       <a id="toggleSearchBar" class="pull-right" style="color: #f2f2f2 !important; padding: 0px 0px 15px 15px; cursor: pointer;"><i style="font-size: 25px; vertical-align:middle; margin-bottom: -22.5px" class="material-icons">search</i></a>
@@ -26,7 +26,7 @@
 </nav>
 
 <div class="navbar">
-  <a href="{{ route('blog.genre.index', ['genre' => 'laughseejapan']) }}" class="{{ Request::is('laughseejapan') ? 'active' : ''}}">
+  <a href="/" class="{{ Request::is('/') ? 'active' : ''}}">
     <i style="font-size: 25px;" class="material-icons">home</i>
     <span style="font-size: 12px; position: fixed; bottom: 0; padding-bottom: 4px; color: inherit;">主頁</span>
   </a>

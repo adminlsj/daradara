@@ -23,7 +23,7 @@
                 <h5>社群</h5>
                 <ul>
                     <li><a href="{{ route('blog.genre.index', ['genre' => 'forum']) }}">亦語</a></li>
-                    <li><a href="{{ route('blog.genre.index', ['genre' => 'laughseejapan']) }}">娛見日本</a></li>
+                    <li><a href="/">娛見日本</a></li>
                     <li><a href="{{ route('blog.genre.index', ['genre' => 'ranking']) }}">排行百科</a></li>
                 </ul>
             </div>
