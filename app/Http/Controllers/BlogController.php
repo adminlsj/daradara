@@ -560,11 +560,8 @@ class BlogController extends Controller
     public function search(Request $request)
     {
         $query = request('query');          
-        $videos = Blog::where('genre', 'laughseejapan')->where('title', 'ILIKE', '%'.$query.'%')
-                      ->orWhere('genre', 'laughseejapan')->where('tags', 'ILIKE', '%'.$query.'%')
-                      ->orWhere('genre', 'watch')->where('title', 'ILIKE', '%'.$query.'%')
-                      ->orWhere('genre', 'watch')->where('tags', 'ILIKE', '%'.$query.'%')
-                      ->distinct()->orderBy('created_at', 'desc')->paginate(5);
+        $videos = Blog::where('title', 'ILIKE', '%'.$query.'%')->orWhere('tags', 'ILIKE', '%'.$query.'%')
+                        ->distinct()->orderBy('created_at', 'desc')->paginate(5);
         $html = $this->videoLoadHTML($videos);
         if ($request->ajax()) {
             return $html;

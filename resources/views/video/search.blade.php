@@ -5,7 +5,7 @@
 	<div class="row video-no-gutter">
 		<div class="col-md-8">
 			<div>
-		        <h3 class="mobile-margin-top" style="color: black; font-weight: 500; margin-top:15px; margin-bottom: 17px;"><a href="{{ route('blog.video.search')}}?query={{ $query }}">#{{ $query }}</a> 標籤的影片</h3>
+		        <h3 class="mobile-margin-top" style="color: black; font-weight: 500; margin-top:15px; margin-bottom: 17px;"><a href="{{ route('blog.search')}}?query={{ $query }}">#{{ $query }}</a> 標籤的影片</h3>
 		    </div>
 			<div class="video-sidebar-wrapper">
 			    <div id="sidebar-results"><!-- results appear here --></div>

@@ -9,7 +9,7 @@
             <a style="color: #97344a" href="{{ route('blog.category.index', ['genre' => 'laughseejapan', 'category' => $tag]) }}">#{{ $tag }}</a>
           @endforeach
         </p>
-        <a id="shareBtn-link" href="{{ route('blog.show', ['blog' => $video, 'genre' => $video->genre, 'category' => $video->category ]) }}">
+        <a id="shareBtn-link" href="{{ route('video.trending') }}?v={{ $video->id }}">
           <h4 id="shareBtn-title" style="line-height: 23px; font-weight: 600; margin-top:0px; margin-bottom: 0px;">{{ $video->title }}</h4>
         </a>
         <p style="color: gray; margin-top: 4px; margin-bottom: 0px; font-size: 0.9em;">觀看次數：{{ $video->views() }}次 • {{ Carbon\Carbon::parse($video->created_at)->format('Y-m-d') }}</p>
@@ -22,7 +22,7 @@
       </div>
       <div>
           <a href="https://www.instagram.com/laughseejapan/">
-            <h4 style="color: black; font-weight: 400;" class="video-title">Laughseejapan</h4>
+            <h4 style="color: black; font-weight: 400;" class="video-title">Laughseejapan.com</h4>
           </a>
           <p style="white-space: pre-wrap; margin-left: 50px; margin-top: -10px; color: gray; margin-bottom: 0px;" class="video-caption">@Instagram</p>
       </div>

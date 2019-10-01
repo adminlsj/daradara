@@ -15,7 +15,7 @@
 
 <nav style="background-color: #e0e0e0 !important; height: 50px; display: none;" id="searchBar" class="">
   <div style="width: 80%; max-width: 1200px; background-color: #e0e0e0 !important;" class="container-fluid responsive-frame">
-    <form id="search-form" style="background-color: #e0e0e0 !important;" action="{{ route('blog.video.search') }}" method="GET">
+    <form id="search-form" style="background-color: #e0e0e0 !important;" action="{{ route('blog.search') }}" method="GET">
       <a id="toggleSearchBar" style="color: #646464 !important; padding: 0px 15px 0px 0px; cursor: pointer;"><i style="font-size: 25px; vertical-align:middle; margin-bottom: -22.5px" class="material-icons">arrow_back</i></a>
 
       <input id="query" name="query" style="vertical-align:middle; margin-bottom: -27px" type="text" placeholder="Search FreeRider">
@@ -35,7 +35,7 @@
     <span style="font-size: 12px; position: fixed; bottom: 0; padding-bottom: 4px; color: inherit;">發燒影片</span>
   </a>
   <a href="{{ route('video.watch') }}" class="{{ Request::is('*watch*') ? 'active' : ''}}">
-    <i style="font-size: 25px;" class="material-icons">nights_stay</i>
-    <span style="font-size: 12px; position: fixed; bottom: 0; padding-bottom: 4px; color: inherit;">月曜合集</span>
+    <i style="font-size: 25px;" class="material-icons">subscriptions</i>
+    <span style="font-size: 12px; position: fixed; bottom: 0; padding-bottom: 4px; color: inherit;">節目列表</span>
   </a>
 </div>
