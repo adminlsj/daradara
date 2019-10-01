@@ -7,7 +7,7 @@
 
 	    <a style="font-size: 25px; color: white !important; font-weight: 300; line-height: 50px; text-decoration: none; margin-left: -5px;" href="/">FreeRider</a>
 
-      <a class="pull-right" style="color: #f2f2f2 !important; padding: 0px 0px 0px 15px;" href="{{ route('blog.genre.index', ['genre' => 'laughseejapan']) }}"><i style="font-size: 25px; vertical-align:middle; margin-bottom: -22.5px" class="material-icons">account_circle</i></a>
+      <a class="pull-right" style="color: #f2f2f2 !important; padding: 0px 0px 0px 15px;" href="/"><i style="font-size: 25px; vertical-align:middle; margin-bottom: -22.5px" class="material-icons">account_circle</i></a>
       <a id="toggleSearchBar" class="pull-right" style="color: #f2f2f2 !important; padding: 0px 0px 15px 15px; cursor: pointer;"><i style="font-size: 25px; vertical-align:middle; margin-bottom: -22.5px" class="material-icons">search</i></a>
     </div>
   </div>
