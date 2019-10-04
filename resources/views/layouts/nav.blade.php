@@ -1,14 +1,14 @@
-<nav style="background-color: #414143 !important;" id="scroll-hide-nav" >
-  <div style="width: 80%; max-width: 1200px; background-color: #414143 !important;" class="container-fluid responsive-frame">
-    <div style="background-color: #414143 !important;">
+<nav style="background-color: {{ Request::is('*watch*') ? '#333333' : 'white' }}" id="scroll-hide-nav" >
+  <div style="width: 80%; max-width: 1200px; background-color: {{ Request::is('*watch*') ? '#333333' : 'white' }}" class="container-fluid responsive-frame">
+    <div style="background-color: {{ Request::is('*watch*') ? '#333333' : 'white' }}">
       <a href="/">
-	        <img src="https://i.imgur.com/xSMGFWh.png" style="margin-top: -6px;" height="30px">
+	        <img src="{{ Request::is('*watch*') ? 'https://i.imgur.com/xSMGFWh.png' : 'https://i.imgur.com/M8tqx5K.png' }}" style="margin-top: -6px;" height="30px">
 	    </a>
 
 	    <a style="font-size: 25px; line-height: 50px;" href="/"> </a>
 
-      <a class="pull-right" style="color: #f2f2f2 !important; padding: 0px 0px 0px 15px;" href="/"><i style="font-size: 25px; vertical-align:middle; margin-bottom: -22.5px" class="material-icons">account_circle</i></a>
-      <a id="toggleSearchBar" class="pull-right" style="color: #f2f2f2 !important; padding: 0px 0px 15px 15px; cursor: pointer;"><i style="font-size: 25px; vertical-align:middle; margin-bottom: -22.5px" class="material-icons">search</i></a>
+      <a class="pull-right" style="color: {{ Request::is('*watch*') ? 'white' : 'gray' }}; padding: 0px 0px 0px 15px;" href="/"><i style="font-size: 25px; vertical-align:middle; margin-bottom: -22.5px" class="material-icons">account_circle</i></a>
+      <a id="toggleSearchBar" class="pull-right" style="color: {{ Request::is('*watch*') ? 'white' : 'gray' }}; padding: 0px 0px 15px 15px; cursor: pointer;"><i style="font-size: 25px; vertical-align:middle; margin-bottom: -22.5px" class="material-icons">search</i></a>
     </div>
   </div>
 </nav>
