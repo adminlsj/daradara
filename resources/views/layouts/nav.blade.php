@@ -2,7 +2,7 @@
   <div style="width: 80%; max-width: 1200px; background-color: #414143 !important;" class="container-fluid responsive-frame">
     <div style="background-color: #414143 !important;">
       <a href="/">
-	        <img src="https://i.imgur.com/MPKpyvA.png" style="margin-top: -6px;" height="30px">
+	        <img src="https://i.imgur.com/xSMGFWh.png" style="margin-top: -6px;" height="30px">
 	    </a>
 
 	    <a style="font-size: 25px; line-height: 50px;" href="/"> </a>
