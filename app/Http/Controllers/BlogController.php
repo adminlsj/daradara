@@ -51,7 +51,9 @@ class BlogController extends Controller
 
             $videos = [$monday->first(), $home->first(), $talk->first()];
             $counts = ['monday' => $monday->count(), 'home' => $home->count(), 'talk' => $talk->count()];
-            $titles = ['monday' => '月曜夜未央 2019年完整版', 'home' => '跟你回家可以嗎？2019年完整版', 'talk' => '閒聊007 2019年完整版'];
+            $titles = ['monday' => '月曜夜未央 2019年完整版【持續更新 '.Carbon::parse($monday->first()->created_at)->format('Y.m.d').'】', 
+                       'home' => '跟你回家可以嗎？2019年完整版【持續更新 '.Carbon::parse($home->first()->created_at)->format('Y.m.d').'】',
+                       'talk' => '閒聊007 2019年完整版【持續更新 '.Carbon::parse($talk->first()->created_at)->format('Y.m.d').'】'];
 
             $sideBlogsDesktop = Blog::where('genre', 'video')->inRandomOrder()->limit(3)->get();
             return view('video.watchIndex', compact('videos', 'counts', 'titles', 'sideBlogsDesktop'));
