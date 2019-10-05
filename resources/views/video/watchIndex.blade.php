@@ -12,7 +12,7 @@
 					<div style="margin-bottom: 15px;">
 					  <a href="{{ route('video.watch') }}?v={{ $video->id }}" class="row no-gutter">
 					    <div style="padding-left: 15px; padding-right: 3px; position: relative;" class="col-xs-6 col-sm-6 col-md-6">
-					      <img src="{{ $video->blogImgs[0]->thumbnail }}" width="100%" height="100%">
+					      <img src="https://i.imgur.com/{{ $video->blogImgs[0]->imgur }}m.png" width="100%" height="100%">
 					      <div style="position: absolute; right:3px; bottom: 0; height: 100%; width: 25%; background-color: rgba(0,0,0,.7); text-align: center; color: white;">
 					      	<div style="margin: 0;position: absolute;top: 50%; left: 50%; transform: translate(-50%, -50%);">
 						      	<div style="font-size: 1em;">{{ $counts[$video->category] }}</div>
