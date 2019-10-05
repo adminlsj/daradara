@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Blog;
 use App\BlogImg;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Storage;
 use File;
 use Image;
@@ -65,29 +67,48 @@ class BlogController extends Controller
             if (!($request->ajax())) {
                 $request->session()->forget('seed');
             }
-
-            $video = Blog::find($request->v);
-
-            $loop = 0;
-            $videos = [];
-            foreach ($video->tags() as $tag) {
-                if ($loop == 0) {
-                    $videos = Blog::where('tags', 'like', '%'.$tag.'%')->where('id', '!=', $video->id);
-                } else {
-                    $videos = $videos->orWhere('tags', 'like', '%'.$tag.'%')->where('id', '!=', $video->id);
-                }
-                $loop++;
-            }
-
             if (!$request->session()->has('seed')) {
                 $seed = mt_rand(-1*10000000, 1*10000000) / 10000000;
                 $request->session()->put('seed', $seed);
             }
-
             $seed = $request->session()->pull('seed');
             $request->session()->put('seed', $seed);
             DB::select('SELECT setseed('.$seed.')');
-            $videos = $videos->inRandomOrder()->paginate(5);
+
+            $video = Blog::find($request->v);
+
+            $videosSelect = Blog::where('id', '!=', $video->id)->inRandomOrder()->select('id', 'tags')->get()->toArray();
+            $rankings = [];
+            foreach ($videosSelect as $videoSelect) {
+                $score = 0;
+                foreach ($video->tags() as $tag) {
+                    if (strpos($videoSelect['tags'], $tag) !== false) {
+                        $score++;
+                    }
+                }
+                array_push($rankings, ['score' => $score, 'id' => $videoSelect['id']]);
+            }
+            usort($rankings, function ($a, $b) {
+                return $b['score'] <=> $a['score'];
+            });
+
+            $videosArray = [];
+            foreach ($rankings as $rank) {
+                array_push($videosArray, Blog::find($rank['id']));
+            }
+
+            $page = Input::get('page', 1); // Get the ?page=1 from the url
+            $perPage = 10; // Number of items per page
+            $offset = ($page * $perPage) - $perPage;
+
+            $videos = new LengthAwarePaginator(
+                array_slice($videosArray, $offset, $perPage, true), // Only grab the items we need
+                count($videosArray), // Total items
+                $perPage, // Items per page
+                $page, // Current page
+                ['path' => $request->url(), 'query' => $request->query()] // We need this so we can keep all old query parameters from the url
+            );
+
             $html = $this->videoLoadHTML($videos);
             if ($request->ajax()) {
                 return $html;
