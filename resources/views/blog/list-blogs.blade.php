@@ -15,7 +15,7 @@
 	    </div>
 	    @foreach ($sideBlogsDesktop as $blog)
 			<div style="border-left: black 3px solid; margin-left: 0px" class="row">
-	            <a href="{{ route('blog.show', ['blog' => $blog, 'genre' => $blog->genre, 'category' => $blog->category ]) }}">
+	            <a href="https://www.laughseejapan.com/{{$blog->genre}}/{{$blog->category}}/{{$blog->id}}">
 	                <div class="col-md-12">
 	                    <div style="font-weight: 400; font-size: 15px; color: black">{{str_limit($blog->title, 80)}}</div>
 	                    <div style="font-size: 12.5px; color: #D3D3D3; margin-top: 10px;">{{ Carbon\Carbon::parse($blog->created_at)->format("Y年m月d日") }}</div>
