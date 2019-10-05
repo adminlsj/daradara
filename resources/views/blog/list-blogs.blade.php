@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col-xs-12 col-sm-12 col-md-8">
 		<div>
-	        <h3 style="color: black; font-weight: 500">{{ App\Blog::$genres[$genre]['listTitle'] }}</h3>
+	        <h3 style="color: black; font-weight: 500">日本流行速報</h3>
 	    </div>
 		<div style="margin-top: -8px" class="sidebar-wrapper">
 		    <div id="sidebar-results"><!-- results appear here --></div>

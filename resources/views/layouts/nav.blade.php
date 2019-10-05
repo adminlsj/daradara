@@ -1,11 +1,11 @@
 <nav style="background-color: {{ Request::is('*watch*') ? '#333333' : 'white' }}" id="scroll-hide-nav" >
   <div style="width: 80%; max-width: 1200px; background-color: {{ Request::is('*watch*') ? '#333333' : 'white' }}" class="container-fluid responsive-frame">
     <div style="background-color: {{ Request::is('*watch*') ? '#333333' : 'white' }}">
-      <a href="/">
+      <a href="/home">
 	        <img src="{{ Request::is('*watch*') ? 'https://i.imgur.com/xSMGFWh.png' : 'https://i.imgur.com/M8tqx5K.png' }}" style="margin-top: -6px;" height="30px">
 	    </a>
 
-	    <a style="font-size: 25px; line-height: 50px;" href="/"> </a>
+	    <a style="font-size: 25px; line-height: 50px;" href="/home"> </a>
 
       <a class="pull-right" style="color: {{ Request::is('*watch*') ? 'white' : 'gray' }}; padding: 0px 0px 0px 15px;" href="/"><i style="font-size: 25px; vertical-align:middle; margin-bottom: -22.5px" class="material-icons">account_circle</i></a>
       <a id="toggleSearchBar" class="pull-right" style="color: {{ Request::is('*watch*') ? 'white' : 'gray' }}; padding: 0px 0px 15px 15px; cursor: pointer;"><i style="font-size: 25px; vertical-align:middle; margin-bottom: -22.5px" class="material-icons">search</i></a>
@@ -26,7 +26,7 @@
 </nav>
 
 <div class="navbar">
-  <a href="/" class="{{ Request::is('/') ? 'active' : ''}}">
+  <a href="/home" class="{{ Request::is('/') ? 'active' : ''}}">
     <i style="font-size: 25px;" class="material-icons">home</i>
     <span style="font-size: 12px; position: fixed; bottom: 0; padding-bottom: 4px; color: inherit;">主頁</span>
   </a>
