@@ -40,7 +40,7 @@ class BlogController extends Controller
         $textBlogs = Blog::where('genre', 'blog')->inRandomOrder()->limit(2)->get();
 
         $sideBlogsDesktop = Blog::where('genre', 'blog')->inRandomOrder()->limit(3)->get();
-        return view('blog.genreIndex', compact('caro_blogs', 'textBlogs', 'sideBlogsMobile', 'sideBlogsDesktop', 'genre'));
+        return view('blog.genreIndex', compact('caro_blogs', 'textBlogs', 'sideBlogsMobile', 'sideBlogsDesktop'));
     }
 
     public function watch(Request $request){
