@@ -3,7 +3,7 @@
 @section('content')
 <div style="width:78%; margin: 0 auto;" class="mobile-container">
 	<div class="trending-circles">
-		<a href="{{ route('blog.search') }}?query=搞笑"><div style="display: inline-block; margin-right: 8px; background-color: #db5d79" class="circle">#搞笑</div></a>
+		<a href="{{ route('blog.search') }}?query=搞笑"><div style="display: inline-block;margin-right: 8px; background-color: #db5d79" class="circle">#搞笑</div></a>
 		<a href="{{ route('blog.search') }}?query=感動"><div style="display: inline-block;margin-right: 8px; background-color: #d84b6b" class="circle">#感動</div></a>
 		<a href="{{ route('blog.search') }}?query=月曜"><div style="display: inline-block;margin-right: 8px; background-color: #c24360" class="circle">#月曜</div></a>
 		<a href="{{ route('blog.search') }}?query=街訪"><div style="display: inline-block;margin-right: 8px; background-color: #ac3c55" class="circle">#街訪</div></a>

@@ -109,7 +109,7 @@ class BlogController extends Controller
                 ['path' => $request->url(), 'query' => $request->query()] // We need this so we can keep all old query parameters from the url
             );
 
-            $html = $this->videoLoadHTML($videos);
+            $html = $this->relatedLoadHTML($videos);
             if ($request->ajax()) {
                 return $html;
             }

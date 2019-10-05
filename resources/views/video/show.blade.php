@@ -6,14 +6,13 @@
 		<div class="col-md-8" style="margin-top: 15px;">
 			<div class="video-sidebar-wrapper">
 				@include('video.singleShowPost')
-				<div style="padding: 0px 15px; font-weight: 400; margin-top:-9px; margin-bottom: 10px; font-size: 1.2em;">相關影片</div>
-				<ins class="adsbygoogle"
-				     style="display:block;"
-				     data-ad-client="ca-pub-4485968980278243"
-				     data-ad-slot="8455082664"
-				     data-ad-format="auto"
-				     data-full-width-responsive="true"></ins>
-				<br>
+				<div style="padding: 0px 12px; font-weight: 400; margin-top:-9px; margin-bottom: 10px; font-size: 1.2em;">相關影片</div>
+				<div style="width: 100%; text-align: center; margin-bottom: 15px;">
+					<ins class="adsbygoogle"
+					    style="display:inline-block;width:320px;height:100px;"
+					    data-ad-client="ca-pub-4485968980278243"
+				    data-ad-slot="5764379687"></ins>
+			    </div>
 			    <div id="sidebar-results"><!-- results appear here --></div>
 			    <div style="text-align: center" class="ajax-loading"><img src="https://s3.amazonaws.com/twobayjobs/system/loading.gif"/></div>
 			</div>
