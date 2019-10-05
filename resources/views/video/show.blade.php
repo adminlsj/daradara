@@ -7,7 +7,7 @@
 			<div class="video-sidebar-wrapper">
 				@include('video.singleShowPost')
 				<div class="padding-setup" style="font-weight: 400; margin-top:-9px; margin-bottom: 10px; font-size: 1.2em;">相關影片</div>
-				<div style="width: 100%; text-align: center; margin-bottom: 15px;">
+				<div style="width: 100%; text-align: center; margin-bottom: 10px;">
 					<ins class="adsbygoogle"
 					    style="display:inline-block;width:320px;height:100px;"
 					    data-ad-client="ca-pub-4485968980278243"
