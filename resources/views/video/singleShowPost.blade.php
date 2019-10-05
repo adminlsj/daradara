@@ -2,7 +2,7 @@
     <iframe src="{{ $video->content }}?autoplay-mute=true&queue-enable=false&quality=480&byline=false&portrait=false&title=false" border="0" frameborder="0" framespacing="0" allowfullscreen allow="autoplay" autostart="true"></iframe>
 </div>
 
-<div style="padding: 0px 12px;" class="video-title-container">
+<div class="padding-setup" class="video-title-container">
     <div>
         <p style="margin: 7px 0px 2px 0px; font-size: 0.9em">
           @foreach ($video->tags() as $tag)

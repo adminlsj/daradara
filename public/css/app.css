@@ -8779,6 +8779,10 @@ input[type=text]:focus {
                                   supported by Chrome and Opera */
 }
 
+.padding-setup {
+  padding: 0px 12px;
+}
+
 /* Place the navbar at the bottom of the page, and make it stick */
 
 .navbar {

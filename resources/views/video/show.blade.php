@@ -6,7 +6,7 @@
 		<div class="col-md-8" style="margin-top: 15px;">
 			<div class="video-sidebar-wrapper">
 				@include('video.singleShowPost')
-				<div style="padding: 0px 12px; font-weight: 400; margin-top:-9px; margin-bottom: 10px; font-size: 1.2em;">相關影片</div>
+				<div class="padding-setup" style="font-weight: 400; margin-top:-9px; margin-bottom: 10px; font-size: 1.2em;">相關影片</div>
 				<div style="width: 100%; text-align: center; margin-bottom: 15px;">
 					<ins class="adsbygoogle"
 					    style="display:inline-block;width:320px;height:100px;"
