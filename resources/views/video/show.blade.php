@@ -11,7 +11,7 @@
 					<ins class="adsbygoogle"
 					    style="display:inline-block;width:320px;height:100px;"
 					    data-ad-client="ca-pub-4485968980278243"
-				    data-ad-slot="5764379687"></ins>
+					    data-ad-slot="5764379687"></ins>
 			    </div>
 			    <div id="sidebar-results"><!-- results appear here --></div>
 			    <div style="text-align: center" class="ajax-loading"><img src="https://s3.amazonaws.com/twobayjobs/system/loading.gif"/></div>
