@@ -42169,7 +42169,7 @@ function load_more(page) {
         }
         $('.ajax-loading').hide(); //hide loading animation once data is received
 
-        var $newAds = $('<div style="width: 100%; text-align: center; margin-bottom: 10px;"><ins class="adsbygoogle" style="display:inline-block;width:320px;height:100px;border:black solid 1px;" data-ad-client="ca-pub-4485968980278243" data-ad-slot="5764379687"></ins></div>');
+        var $newAds = $('<div style="width: 100%; text-align: center; margin-bottom: 10px;"><ins class="adsbygoogle" style="display:inline-block;width:320px;height:100px;" data-ad-client="ca-pub-4485968980278243" data-ad-slot="5764379687"></ins></div>');
         newDivName = "d" + String(new Date().valueOf());
         var $newhtml = $("<div id='" + newDivName + "'>" + data + "</div>");
         $('#sidebar-results').append($newhtml);
