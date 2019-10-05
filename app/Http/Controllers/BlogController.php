@@ -91,7 +91,7 @@ class BlogController extends Controller
 
             $video = Blog::find($request->v);
 
-            $videosSelect = Blog::where('id', '!=', $video->id)->inRandomOrder()->select('id', 'tags')->get()->toArray();
+            $videosSelect = Blog::where('genre', '!=', 'blog')->where('id', '!=', $video->id)->inRandomOrder()->select('id', 'tags')->get()->toArray();
             $rankings = [];
             foreach ($videosSelect as $videoSelect) {
                 $score = 0;
