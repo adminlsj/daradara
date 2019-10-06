@@ -5,7 +5,7 @@
 	<div class="row">
 		<div class="col-xs-12 col-sm-12 col-md-12" style="margin-top: 15px;">
 			<div>
-		        <h3 class="mobile-margin-top" style="color: white; font-weight: 500; margin-top:5px; margin-bottom: 15px;">節目列表</h3>
+		        <h3 class="mobile-margin-top" style="color: white; font-weight: 500; margin-top:5px; margin-bottom: 25px;">節目列表</h3>
 		    </div>
 			<div class="video-sidebar-wrapper">
 				@foreach ($videos as $video)
