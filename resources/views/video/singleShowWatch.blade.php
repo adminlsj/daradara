@@ -18,8 +18,8 @@
         </a>
     </div>
     <div style="margin-left: -4px;">
-        <a style="text-decoration: none; color: white;" href="{{ route('video.watch') }}?v=125"><i class="material-icons noselect">skip_previous</i></a>
-        <a style="text-decoration: none; color: white;" href="{{ route('video.watch') }}?v=125"><i class="material-icons noselect">skip_next</i></a>
+        <a style="text-decoration: none; {{ $prev != false ? 'color: white;' : 'pointer-events: none; color: #414141;' }}" href="{{ route('video.watch') }}?v={{ $prev }}"><i class="material-icons noselect">skip_previous</i></a>
+        <a style="text-decoration: none; margin-left: 8px; {{ $next != false ? 'color: white;' : 'pointer-events: none; color: #414141;' }}" href="{{ route('video.watch') }}?v={{ $next }}"><i class="material-icons noselect">skip_next</i></a>
     </div>
     <div id="toggleVideoDescription" style="margin-top: -40px; padding-top:10px; padding-right:2px;cursor: pointer; color: white" class="pull-right"><i id="toggleVideoDescriptionIcon" class="material-icons noselect">expand_more</i></div>
     <a id="shareBtn" style="margin-top: -35px; margin-right: 30px; padding-right:10px; cursor: pointer; text-decoration: none;" class="pull-right">

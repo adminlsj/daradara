@@ -48,6 +48,23 @@ class BlogController extends Controller
             $video = Blog::find($request->v);
             $videos = Blog::where('category', $video->category)->orderBy('created_at', 'desc')->get();
 
+            $query = Blog::where('category', $video->category)->orderBy('created_at', 'desc')->pluck('id')->toArray();
+            $current = array_search($video->id, $query);
+            while(key($query) !== null && key($query) !== $current) next($query);
+
+            $prev = 0; $next = 0;
+            if ($this->has_prev($query)) {
+                $prev = prev($query);
+                next($query);
+            } else {
+                $prev = false;
+            }
+            if ($this->has_next($query)) {
+                $next = next($query);
+            } else {
+                $next = false;
+            }
+
             $current_blog = $video;
             $fb_title = $video->title;
 
@@ -55,7 +72,7 @@ class BlogController extends Controller
             $video->save();
             $current_id = $video->id;
 
-            return view('video.showWatch', compact('video', 'videos', 'current_blog', 'fb_title', 'current_id'));
+            return view('video.showWatch', compact('video', 'videos', 'current_blog', 'fb_title', 'current_id', 'prev', 'next'));
         } else {
             $monday = Blog::where('category', 'monday')->orderBy('created_at', 'desc');
             $home = Blog::where('category', 'home')->orderBy('created_at', 'desc');
@@ -654,15 +671,6 @@ class BlogController extends Controller
             return $html;
         }
 
-
-        /* $query = request('query');          
-        $videos = Blog::where('title', 'ILIKE', '%'.$query.'%')->orWhere('tags', 'ILIKE', '%'.$query.'%')
-                        ->distinct()->orderBy('created_at', 'desc')->paginate(5);
-        $html = $this->videoLoadHTML($videos);
-        if ($request->ajax()) {
-            return $html;
-        } */
-
         $sideBlogsDesktop = Blog::where('genre', 'laughseejapan')->inRandomOrder()->limit(3)->get();
         return view('video.search', compact('videos', 'sideBlogsDesktop', 'query'));
     }
@@ -696,5 +704,15 @@ class BlogController extends Controller
                 break;
         }
         return redirect('/');
+    }
+
+    public function has_prev(array $_array)
+    {
+      return prev($_array) !== false ?: key($_array) !== null;
+    }
+
+    public function has_next(array $_array)
+    {
+      return next($_array) !== false ?: key($_array) !== null;
     }
 }
