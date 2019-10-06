@@ -717,6 +717,7 @@ a > i {
     .mobile-container {
         width: 100% !important;
         margin-top: -15px !important;
+        overflow-x: hidden;
     }
 
     .mobile-margin-top {
@@ -753,6 +754,7 @@ a > i {
     .mobile-container {
         width: 1500px;
         margin: 0 auto;
+        overflow-x: hidden;
     }
 
     .responsive-frame {
