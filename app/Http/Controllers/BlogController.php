@@ -596,13 +596,70 @@ class BlogController extends Controller
 
     public function search(Request $request)
     {
-        $query = request('query');          
+        $query = request('query');
+        $queryArray = [];
+        preg_match_all('/./u', $query, $queryArray);
+        $queryArray = $queryArray[0];
+        if (($key = array_search(' ', $queryArray)) !== false) {
+            unset($queryArray[$key]);
+        }
+
+        $videosSelect = Blog::where('genre', '!=', 'blog')->orderBy('created_at', 'desc')->select('id', 'title', 'tags')->get()->toArray();
+        $rankings = [];
+        foreach ($videosSelect as $videoSelect) {
+            $score = 0;
+            foreach ($queryArray as $q) {
+                if (is_numeric($q)) {
+                    if (strpos($videoSelect['title'], $q) !== false) {
+                        $score++;
+                    }
+                } else {
+                    if (strpos($videoSelect['title'], $q) !== false) {
+                        $score++;
+                    }
+                    if (strpos($videoSelect['tags'], $q) !== false) {
+                        $score++;
+                    }
+                }
+            }
+            if ($score > 0) {
+                array_push($rankings, ['score' => $score, 'id' => $videoSelect['id']]);
+            }
+        }
+        usort($rankings, function ($a, $b) {
+            return $b['score'] <=> $a['score'];
+        });
+
+        $videosArray = [];
+        foreach ($rankings as $rank) {
+            array_push($videosArray, Blog::find($rank['id']));
+        }
+
+        $page = Input::get('page', 1); // Get the ?page=1 from the url
+        $perPage = 10; // Number of items per page
+        $offset = ($page * $perPage) - $perPage;
+
+        $videos = new LengthAwarePaginator(
+            array_slice($videosArray, $offset, $perPage, true), // Only grab the items we need
+            count($videosArray), // Total items
+            $perPage, // Items per page
+            $page, // Current page
+            ['path' => $request->url(), 'query' => $request->query()] // We need this so we can keep all old query parameters from the url
+        );
+
+        $html = $this->relatedLoadHTML($videos);
+        if ($request->ajax()) {
+            return $html;
+        }
+
+
+        /* $query = request('query');          
         $videos = Blog::where('title', 'ILIKE', '%'.$query.'%')->orWhere('tags', 'ILIKE', '%'.$query.'%')
                         ->distinct()->orderBy('created_at', 'desc')->paginate(5);
         $html = $this->videoLoadHTML($videos);
         if ($request->ajax()) {
             return $html;
-        }
+        } */
 
         $sideBlogsDesktop = Blog::where('genre', 'laughseejapan')->inRandomOrder()->limit(3)->get();
         return view('video.search', compact('videos', 'sideBlogsDesktop', 'query'));

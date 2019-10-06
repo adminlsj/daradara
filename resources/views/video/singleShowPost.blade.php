@@ -6,7 +6,11 @@
     <div>
         <p style="margin: 7px 0px 2px 0px; font-size: 0.9em">
           @foreach ($video->tags() as $tag)
-            <a style="color: #97344a" href="{{ route('blog.search') }}?query={{ $tag }}">#{{ $tag }}</a>
+            @if (strpos($tag, '完整版') !== false)
+              <a style="color: #97344a" href="{{ route('video.watch') }}?v={{ App\Blog::where('category', $video->category)->orderBy('created_at', 'desc')->first()->id }}">#{{ $tag }}</a>
+            @else
+              <a style="color: #97344a" href="{{ route('blog.search') }}?query={{ $tag }}">#{{ $tag }}</a>
+            @endif
           @endforeach
         </p>
         <a id="shareBtn-link" href="{{ route('video.trending') }}?v={{ $video->id }}">

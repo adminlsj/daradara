@@ -1,5 +1,5 @@
 <div style="margin-bottom: 15px;">
-  <a href="{{ Request::is('*trending*') ? route('video.trending') : route('video.watch') }}?v={{ $video->id }}" class="row no-gutter">
+  <a href="{{ Request::is('*watch*') ? route('video.watch') : route('video.trending') }}?v={{ $video->id }}" class="row no-gutter">
     <div style="padding-left: 12px; padding-right: 3px; position: relative;" class="col-xs-6 col-sm-6 col-md-6">
       <img src="https://i.imgur.com/{{ $video->blogImgs[0]->imgur }}m.png" width="100%" height="100%">
       <span style="position: absolute; bottom:6px; right: 9px; background-color: rgba(0,0,0,0.8); color: white; padding: 1px 5px 1px 5px; opacity: 0.9; font-size: 0.85em; border-radius: 2px;">{{ $video->duration() }}</span>
