@@ -6,7 +6,7 @@
         <meta property="og:type" content="article" />
         <meta property="og:title" content="{{ $current_blog->title }}" />
         <meta property="og:description" content="{{ $current_blog->caption }}" />
-        <meta property="og:image" content="{{ $current_blog->blogImgs[0]->original }}" />
+        <meta property="og:image" content="https://i.imgur.com/{{ $current_blog->blogImgs[0]->imgur }}h.png" />
 
         <meta name="title" content="{{ $current_blog->title }} | 娛見日本">
         <title>{{ $current_blog->title }} | 娛見日本</title>
