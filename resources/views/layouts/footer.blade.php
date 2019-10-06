@@ -2,7 +2,7 @@
     <div style="width: 90%" class="container">
         <div class="row">
             <div style="text-align: center" class="col-sm-12 col-md-3">
-                <h2 class="logo"><a href="#">FreeRider</a></h2>
+                <h2 class="logo"><a style="font-size: 1em" href="#">LaughSeeJapan</a></h2>
             </div>
             <div class="col-sm-12 col-md-2 text-center">
                 <h5>資訊</h5>

@@ -46,20 +46,16 @@ class BlogController extends Controller
     public function watch(Request $request){
         if ($request->has('v') && $request->v != 'null') {
             $video = Blog::find($request->v);
-            $videos = Blog::where('category', $video->category)->where('id', '!=', $video->id)->orderBy('created_at', 'desc')->paginate(10);
-            $html = $this->relatedLoadHTML($videos);
-            if ($request->ajax()) {
-                return $html;
-            }
+            $videos = Blog::where('category', $video->category)->orderBy('created_at', 'desc')->get();
 
-            $sideBlogsDesktop = Blog::where('category', 'video')->inRandomOrder()->limit(3)->get();
             $current_blog = $video;
             $fb_title = $video->title;
 
             $video->views++;
             $video->save();
+            $current_id = $video->id;
 
-            return view('video.show', compact('video', 'videos', 'sideBlogsDesktop', 'current_blog', 'fb_title'));
+            return view('video.showWatch', compact('video', 'videos', 'current_blog', 'fb_title', 'current_id'));
         } else {
             $monday = Blog::where('category', 'monday')->orderBy('created_at', 'desc');
             $home = Blog::where('category', 'home')->orderBy('created_at', 'desc');
@@ -67,12 +63,18 @@ class BlogController extends Controller
 
             $videos = [$monday->first(), $home->first(), $talk->first()];
             $counts = ['monday' => $monday->count(), 'home' => $home->count(), 'talk' => $talk->count()];
-            $titles = ['monday' => '月曜夜未央 2019年完整版【持續更新 '.Carbon::parse($monday->first()->created_at)->format('Y.m.d').'】', 
-                       'home' => '跟你回家可以嗎？2019年完整版【持續更新 '.Carbon::parse($home->first()->created_at)->format('Y.m.d').'】',
-                       'talk' => '閒聊007 2019年完整版【持續更新 '.Carbon::parse($talk->first()->created_at)->format('Y.m.d').'】'];
+            $titles = ['monday' => '月曜夜未央 2019年完整版', 
+                       'home' => '跟你回家可以嗎？2019年完整版',
+                       'talk' => '閒聊007 2019年完整版'];
+            $updates = ['monday' => '更新至 '.Carbon::parse($monday->first()->created_at)->format('Y.m.d').'】', 
+                       'home' => '更新至 '.Carbon::parse($home->first()->created_at)->format('Y.m.d').'】',
+                       'talk' => '更新至 '.Carbon::parse($talk->first()->created_at)->format('Y.m.d').'】'];
+            $banners = ['monday' => 'https://i.imgur.com/iXyOfUsh.png', 
+                       'home' => 'https://i.imgur.com/NF0Gqewh.png',
+                       'talk' => 'https://i.imgur.com/BqVcMd9h.png'];
 
             $sideBlogsDesktop = Blog::where('genre', 'video')->inRandomOrder()->limit(3)->get();
-            return view('video.watchIndex', compact('videos', 'counts', 'titles', 'sideBlogsDesktop'));
+            return view('video.watchIndex', compact('videos', 'counts', 'titles', 'banners', 'sideBlogsDesktop'));
         }
     }
 

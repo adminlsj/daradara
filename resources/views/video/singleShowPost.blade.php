@@ -2,19 +2,19 @@
     <iframe src="{{ $video->content }}?autoplay-mute=true&queue-enable=false&quality=480&byline=false&portrait=false&title=false" border="0" frameborder="0" framespacing="0" allowfullscreen allow="autoplay" autostart="true"></iframe>
 </div>
 
-<div class="padding-setup" class="video-title-container">
+<div class="padding-setup">
     <div>
-        <p style="margin: 7px 0px 2px 0px; font-size: 0.9em">
+        <p style="padding: 7px 0px 2px 0px; font-size: 0.9em;">
           @foreach ($video->tags() as $tag)
             @if (strpos($tag, '完整版') !== false)
-              <a style="color: #97344a" href="{{ route('video.watch') }}?v={{ App\Blog::where('category', $video->category)->orderBy('created_at', 'desc')->first()->id }}">#{{ $tag }}</a>
+              <a style="color:#97344a" href="{{ route('video.watch') }}?v={{ App\Blog::where('category', $video->category)->orderBy('created_at', 'desc')->first()->id }}">#{{ $tag }}</a>
             @else
-              <a style="color: #97344a" href="{{ route('blog.search') }}?query={{ $tag }}">#{{ $tag }}</a>
+              <a style="color:#97344a" href="{{ route('blog.search') }}?query={{ $tag }}">#{{ $tag }}</a>
             @endif
           @endforeach
         </p>
-        <a id="shareBtn-link" href="{{ route('video.trending') }}?v={{ $video->id }}">
-          <h4 id="shareBtn-title" style="line-height: 23px; font-weight: 600; margin-top:0px; margin-bottom: 0px;">{{ $video->title }}</h4>
+        <a id="shareBtn-link" href="{{ route('video.trending') }}?v={{ $video->id }}" style="text-decoration: none;">
+          <h4 id="shareBtn-title" style="line-height: 23px; font-weight: 600; margin-top:-10px; margin-bottom: 0px;">{{ $video->title }}</h4>
         </a>
         <p style="color: gray; margin-top: 4px; margin-bottom: 0px; font-size: 0.9em;">觀看次數：{{ $video->views() }}次 • {{ Carbon\Carbon::parse($video->created_at)->format('Y-m-d') }}</p>
     </div>

@@ -1,6 +1,6 @@
-<nav style="background-color: {{ Request::is('*watch*') ? '#333333' : 'white' }}" id="scroll-hide-nav" >
-  <div style="width: 80%; max-width: 1200px; background-color: {{ Request::is('*watch*') ? '#333333' : 'white' }}" class="container-fluid responsive-frame">
-    <div style="background-color: {{ Request::is('*watch*') ? '#333333' : 'white' }}">
+<nav style="background-color: {{ Request::is('*watch*') ? '#222222' : 'white' }}" id="scroll-hide-nav" >
+  <div style="width: 80%; max-width: 1200px; background-color: {{ Request::is('*watch*') ? '#222222' : 'white' }}" class="container-fluid responsive-frame">
+    <div style="background-color: {{ Request::is('*watch*') ? '#222222' : 'white' }}">
       <a href="{{ Request::is('/') || Request::is('*blog*') ? '/' : '/home'}}">
 	        <img src="{{ Request::is('*watch*') ? 'https://i.imgur.com/xSMGFWh.png' : 'https://i.imgur.com/M8tqx5K.png' }}" style="margin-top: -6px;" height="30px">
 	    </a>
