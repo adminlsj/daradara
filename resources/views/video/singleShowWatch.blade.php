@@ -1,6 +1,4 @@
-<div class="aspect-ratio">
-    <iframe src="{{ $video->content }}?autoplay-mute=true&queue-enable=false&quality=480&byline=false&portrait=false&title=false" border="0" frameborder="0" framespacing="0" allowfullscreen allow="autoplay" autostart="true"></iframe>
-</div>
+@include('video.player')
 
 <div style="background-color:#222222; padding-bottom: 5px" class="padding-setup">
     <div style="margin-bottom: 5px;">

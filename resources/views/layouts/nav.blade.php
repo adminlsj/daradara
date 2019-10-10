@@ -1,11 +1,11 @@
 <nav style="background-color: {{ Request::is('*watch*') ? '#222222' : 'white' }}" id="scroll-hide-nav" >
   <div style="width: 80%; max-width: 1200px; background-color: {{ Request::is('*watch*') ? '#222222' : 'white' }}" class="container-fluid responsive-frame">
     <div style="background-color: {{ Request::is('*watch*') ? '#222222' : 'white' }}">
-      <a href="{{ Request::is('/') || Request::is('*blog*') ? '/' : '/home'}}">
+      <a href="/">
 	        <img src="{{ Request::is('*watch*') ? 'https://i.imgur.com/xSMGFWh.png' : 'https://i.imgur.com/M8tqx5K.png' }}" style="margin-top: -6px;" height="30px">
 	    </a>
 
-	    <a style="font-size: 25px; line-height: 50px;" href="{{ Request::is('/') || Request::is('*blog*') ? '/' : '/home'}}"> </a>
+	    <a style="font-size: 25px; line-height: 50px;" href="/"> </a>
 
       <a class="pull-right" style="color: {{ Request::is('*watch*') ? 'white' : 'gray' }}; padding: 0px 0px 0px 15px;" href="/"><i style="font-size: 25px; vertical-align:middle; margin-bottom: -22.5px" class="material-icons">account_circle</i></a>
       <a id="toggleSearchBar" class="pull-right" style="color: {{ Request::is('*watch*') ? 'white' : 'gray' }}; padding: 0px 0px 15px 15px; cursor: pointer;"><i style="font-size: 25px; vertical-align:middle; margin-bottom: -22.5px" class="material-icons">search</i></a>
@@ -25,19 +25,17 @@
   </div>
 </nav>
 
-@if (!Request::is('/') && !Request::is('*blog*'))
-  <div class="navbar">
-    <a href="/home" class="{{ Request::is('/') ? 'active' : ''}}">
-      <i style="font-size: 25px;" class="material-icons">home</i>
-      <span style="font-size: 12px; position: fixed; bottom: 0; padding-bottom: 4px; color: inherit;">主頁</span>
-    </a>
-    <a href="{{ route('video.trending') }}" class="{{ Request::is('*trending*') ? 'active' : ''}}">
-      <i style="font-size: 25px;" class="material-icons">whatshot</i>
-      <span style="font-size: 12px; position: fixed; bottom: 0; padding-bottom: 4px; color: inherit;">發燒影片</span>
-    </a>
-    <a href="{{ route('video.watch') }}" class="{{ Request::is('*watch*') ? 'active' : ''}}">
-      <i style="font-size: 25px;" class="material-icons">subscriptions</i>
-      <span style="font-size: 12px; position: fixed; bottom: 0; padding-bottom: 4px; color: inherit;">節目列表</span>
-    </a>
-  </div>
-@endif
+<div class="navbar">
+  <a href="/" class="{{ Request::is('/') ? 'active' : ''}}">
+    <i style="font-size: 25px;" class="material-icons">home</i>
+    <span style="font-size: 12px; position: fixed; bottom: 0; padding-bottom: 4px; color: inherit;">主頁</span>
+  </a>
+  <a href="{{ route('video.trending') }}" class="{{ Request::is('*trending*') ? 'active' : ''}}">
+    <i style="font-size: 25px;" class="material-icons">whatshot</i>
+    <span style="font-size: 12px; position: fixed; bottom: 0; padding-bottom: 4px; color: inherit;">發燒影片</span>
+  </a>
+  <a href="{{ route('video.watch') }}" class="{{ Request::is('*watch*') ? 'active' : ''}}">
+    <i style="font-size: 25px;" class="material-icons">subscriptions</i>
+    <span style="font-size: 12px; position: fixed; bottom: 0; padding-bottom: 4px; color: inherit;">節目列表</span>
+  </a>
+</div>

@@ -7,6 +7,7 @@
 
 require('./bootstrap');
 require('./owl.carousel');
+require('./video');
 
 window.Vue = require('vue');
 

@@ -29,20 +29,6 @@ class BlogController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function home(Request $request){
-        $sideBlogsMobile = Blog::where('genre', 'blog')->orderBy('created_at', 'desc')->paginate(5);
-        $html = $this->sidebarHTML($sideBlogsMobile);
-        if ($request->ajax()) {
-            return $html;
-        }
-
-        $caro_blogs = Blog::where('genre', 'blog')->inRandomOrder()->limit(5)->get();
-        $textBlogs = Blog::where('genre', 'blog')->inRandomOrder()->limit(2)->get();
-
-        $sideBlogsDesktop = Blog::where('genre', 'blog')->inRandomOrder()->limit(3)->get();
-        return view('blog.genreIndex', compact('caro_blogs', 'textBlogs', 'sideBlogsMobile', 'sideBlogsDesktop'));
-    }
-
     public function watch(Request $request){
         if ($request->has('v') && $request->v != 'null') {
             $video = Blog::find($request->v);

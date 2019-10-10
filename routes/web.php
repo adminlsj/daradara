@@ -11,8 +11,7 @@
 |
 */
 
-Route::get('/', 'BlogController@home');
-Route::get('/home', 'BlogController@genreIndex');
+Route::get('/', 'BlogController@genreIndex');
 
 Route::get('/contact', 'BlogController@contact');
 Route::get('/trending', 'BlogController@trending')->name('video.trending');

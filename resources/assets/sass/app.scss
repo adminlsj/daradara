@@ -12,6 +12,9 @@
 // Bootstrap
 @import "~bootstrap-sass/assets/stylesheets/bootstrap";
 
+// Owl Carousel
+@import "video-js.css";
+
 html, body {
     max-width: 100%;
 }
@@ -42,6 +45,13 @@ input[type=text] {
 input[type=text]:focus {
   outline: none;
   box-shadow: -8px 10px 0px -8px #d84b6b, 8px 10px 0px -8px #d84b6b;
+}
+
+.video-js .vjs-control-bar { 
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .noselect {
