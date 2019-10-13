@@ -8,10 +8,15 @@
 				@include('video.singleShowWatch')
 				<div class="padding-setup" style="font-weight: 400; margin-top:-9px; margin-bottom: 10px; font-size: 1.2em;">即將播放</div>
 				<div style="width: 100%; text-align: center; margin-bottom: 10px;">
+					<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+					<!-- Mobile Horizontal Ads -->
 					<ins class="adsbygoogle"
-					    style="display:inline-block;width:320px;height:100px;"
-					    data-ad-client="ca-pub-4485968980278243"
-					    data-ad-slot="5764379687"></ins>
+					     style="display:inline-block;width:320px;height:100px"
+					     data-ad-client="ca-pub-4485968980278243"
+					     data-ad-slot="5764379687"></ins>
+					<script>
+					     (adsbygoogle = window.adsbygoogle || []).push({});
+					</script>
 			    </div>
 			    @foreach ($videos as $video)
 				    <div style="{{ $video->id == $current_id ? 'background-color: #7A7A7A' : '' }}">
