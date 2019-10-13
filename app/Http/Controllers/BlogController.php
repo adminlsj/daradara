@@ -64,21 +64,20 @@ class BlogController extends Controller
             $home = Blog::where('category', 'home')->orderBy('created_at', 'desc');
             $talk = Blog::where('category', 'talk')->orderBy('created_at', 'desc');
             $monitoring = Blog::where('category', 'monitoring')->orderBy('created_at', 'desc');
+            $todai = Blog::where('category', 'todai')->orderBy('created_at', 'desc');
 
-            $videos = [$monday->first(), $home->first(), $talk->first(), $monitoring->first()];
-            $counts = ['monday' => $monday->count(), 'home' => $home->count(), 'talk' => $talk->count(), 'monitoring' => $monitoring->count()];
-            $titles = ['monday' => '月曜夜未央 2019年完整版', 
-                       'home' => '跟你回家可以嗎？2019年完整版',
-                       'talk' => '閒聊007 2019年完整版',
-                       'monitoring' => '人類觀察 2019年完整版'];
-            $updates = ['monday' => '更新至 '.Carbon::parse($monday->first()->created_at)->format('Y.m.d').'】', 
-                       'home' => '更新至 '.Carbon::parse($home->first()->created_at)->format('Y.m.d').'】',
-                       'talk' => '更新至 '.Carbon::parse($talk->first()->created_at)->format('Y.m.d').'】',
-                       'monitoring' => '更新至 '.Carbon::parse($monitoring->first()->created_at)->format('Y.m.d').'】'];
+            $videos = [$monday->first(), $home->first(), $talk->first(), $monitoring->first(), $todai->first()];
+            $counts = ['monday' => $monday->count(), 'home' => $home->count(), 'talk' => $talk->count(), 'monitoring' => $monitoring->count(), 'todai' => $todai->count()];
+            $titles = ['monday' => '月曜夜未央 2019年完整版【更新至 '.Carbon::parse($monday->first()->created_at)->format('Y.m.d').'】', 
+                       'home' => '跟你回家可以嗎？2019年完整版【更新至 '.Carbon::parse($home->first()->created_at)->format('Y.m.d').'】',
+                       'talk' => '閒聊007 2019年完整版【更新至 '.Carbon::parse($talk->first()->created_at)->format('Y.m.d').'】',
+                       'monitoring' => '人類觀察 2019年完整版【更新至 '.Carbon::parse($todai->first()->created_at)->format('Y.m.d').'】',
+                       'todai' => '東大方程式完整版【更新至'.Carbon::parse($todai->first()->created_at)->format('Y.m.d').'】'];
             $banners = ['monday' => 'https://i.imgur.com/iXyOfUsh.png', 
                        'home' => 'https://i.imgur.com/NF0Gqewh.png',
                        'talk' => 'https://i.imgur.com/BqVcMd9h.png',
-                       'monitoring' => 'https://i.imgur.com/wLpWH5hh.png'];
+                       'monitoring' => 'https://i.imgur.com/wLpWH5hh.png',
+                       'todai' => 'https://i.imgur.com/2rZSHfbh.png'];
 
             $sideBlogsDesktop = Blog::where('genre', 'video')->inRandomOrder()->limit(3)->get();
             return view('video.watchIndex', compact('videos', 'counts', 'titles', 'banners', 'sideBlogsDesktop'));
