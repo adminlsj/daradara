@@ -71,7 +71,7 @@ class BlogController extends Controller
             $titles = ['monday' => '月曜夜未央 2019年完整版【更新至 '.Carbon::parse($monday->first()->created_at)->format('Y.m.d').'】', 
                        'home' => '跟你回家可以嗎？2019年完整版【更新至 '.Carbon::parse($home->first()->created_at)->format('Y.m.d').'】',
                        'talk' => '閒聊007 2019年完整版【更新至 '.Carbon::parse($talk->first()->created_at)->format('Y.m.d').'】',
-                       'monitoring' => '人類觀察 2019年完整版【更新至 '.Carbon::parse($todai->first()->created_at)->format('Y.m.d').'】',
+                       'monitoring' => '人類觀察 2019年完整版【更新至 '.Carbon::parse($monitoring->first()->created_at)->format('Y.m.d').'】',
                        'todai' => '東大方程式完整版【更新至'.Carbon::parse($todai->first()->created_at)->format('Y.m.d').'】'];
             $banners = ['monday' => 'https://i.imgur.com/iXyOfUsh.png', 
                        'home' => 'https://i.imgur.com/NF0Gqewh.png',
