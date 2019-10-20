@@ -23,6 +23,9 @@ class Blog extends Model
         'anime' => [
             'sao3B' => ['value' => 'sao3B', 'title' => '刀劍神域 Alicization Underworld 大戰篇 第三季 後半', 'imgur' => 'https://i.imgur.com/YQY7IsRh.png'],
         ],
+        'drama' => [
+            'demo' => ['value' => 'demo', 'title' => '該區塊仍在更新中！！...請明天再來！！謝謝您🙏', 'imgur' => 'https://i.imgur.com/YQY7IsRh.png'],
+        ],
     ];
 
     public function tags()
