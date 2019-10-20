@@ -60,5 +60,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'sameUser' => \App\Http\Middleware\CheckSameUser::class,
         'notPayed' => \App\Http\Middleware\CheckNotPayed::class,
+        'setGenre' => \App\Http\Middleware\SetGenre::class,
     ];
 }

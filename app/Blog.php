@@ -12,73 +12,17 @@ class Blog extends Model
 
     public static $navIcons = ['explore', 'pets', 'public']; 
 
-    public static $genres = [
-        'laughseejapan' => [
-            'navTitle' => '娛見日本',
-            'listTitle' => '日本熱門綜藝',
-            'categories' => ['溫馨' => '搞笑', '搞笑' => '寵物', '熱門' => '感動'],
-            'name' => 'laughseejapan'
+    public static $structure = [
+        'variety' => [
+            'monday' => ['value' => 'monday', 'title' => '月曜夜未央 2019年完整版', 'imgur' => 'https://i.imgur.com/iXyOfUsh.png'],
+            'monitoring' => ['value' => 'monitoring', 'title' => '人類觀察 2019年完整版', 'imgur' => 'https://i.imgur.com/wLpWH5hh.png'],
+            'talk' => ['value' => 'talk', 'title' => '閒聊007 2019年完整版', 'imgur' => 'https://i.imgur.com/BqVcMd9h.png'],
+            'home' => ['value' => 'home', 'title' => '跟你回家可以嗎？2019年完整版', 'imgur' => 'https://i.imgur.com/NF0Gqewh.png'],
+            'todai' => ['value' => 'todai', 'title' => '東大方程式完整版', 'imgur' => 'https://i.imgur.com/2rZSHfbh.png']
         ],
-
-        'watch' => [
-            'navTitle' => '娛見日本',
-            'listTitle' => '日本熱門綜藝',
-            'categories' => ['溫馨' => '搞笑', '搞笑' => '寵物', '熱門' => '感動'],
-            'name' => 'laughseejapan'
+        'anime' => [
+            'sao3B' => ['value' => 'sao3B', 'title' => '刀劍神域 Alicization Underworld 大戰篇 第三季 後半', 'imgur' => 'https://i.imgur.com/YQY7IsRh.png'],
         ],
-
-        'travel' => [
-            'navTitle' => '旅日塾',
-            'listTitle' => '日本旅行與文化',
-            'categories' => ['新聞' => 'news', '旅行' => 'japan'],
-            'name' => 'freeriderjapan'
-        ],
-
-        'news' => [
-            'navTitle' => '微新聞',
-            'listTitle' => '最新新聞資訊',
-            'categories' => ['國際' => 'world', '香港' => 'hk', '台灣' => 'tw'],
-            'name' => 'freeriderjapan'
-        ],
-
-        'finance' => [
-            'navTitle' => '融易',
-            'listTitle' => '金融與投資',
-            'categories' => ['政治' => 'politics', '經濟' => 'economics', '投資' => 'investment'],
-            'name' => 'freeriderjapan'
-        ],
-
-        'tech' => [
-            'navTitle' => '科學園',
-            'listTitle' => '科技與創新',
-            'categories' => ['初創' => 'startups', '研報' => 'analytics', '快訊' => 'news'],
-            'name' => 'freeriderjapan'
-        ],
-
-        'forum' => [
-            'navTitle' => '亦語',
-            'listTitle' => '最專業的問答論壇',
-            'categories' => ['生活' => 'life', '教學' => 'tutorial', '知識' => 'knowledge'],
-            'name' => 'freeriderjapan'
-        ],
-
-        'press' => [
-            'navTitle' => '簡讀',
-            'listTitle' => '知識與幽默並重',
-            'categories' => ['生活' => 'life', '教學' => 'tutorial', '知識' => 'knowledge'],
-            'name' => 'freeriderjapan'
-        ],
-
-        'ranking' => [
-            'navTitle' => '排行百科',
-            'listTitle' => '最齊全的排行榜',
-            'categories' => ['比賽' => 'competition', '學術' => 'acedamics', '娛樂' => 'entertainment'],
-            'name' => 'freeriderjapan'
-        ],
-
-        'contact' => [
-            'listTitle' => '聯絡我們',
-        ]
     ];
 
     public function tags()

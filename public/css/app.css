@@ -9279,7 +9279,7 @@ input[type=text]:focus {
   color: gray;
   text-align: center;
   text-decoration: none;
-  width: 33.33%;
+  width: 20%;
   height: 100%;
 }
 
@@ -9289,7 +9289,7 @@ input[type=text]:focus {
   color: gray;
   text-align: center;
   text-decoration: none;
-  width: 33.33%;
+  width: 20%;
 }
 
 /* Change the color of links on hover */

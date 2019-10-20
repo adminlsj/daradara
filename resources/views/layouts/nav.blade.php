@@ -32,10 +32,18 @@
   </a>
   <a href="{{ route('video.trending') }}" class="{{ Request::is('*trending*') ? 'active' : ''}}">
     <i style="font-size: 25px;" class="material-icons">whatshot</i>
-    <span style="font-size: 12px; position: fixed; bottom: 0; padding-bottom: 4px; color: inherit;">發燒影片</span>
+    <span style="font-size: 12px; position: fixed; bottom: 0; padding-bottom: 4px; color: inherit;">熱門</span>
   </a>
-  <a href="{{ route('video.watch') }}" class="{{ Request::is('*watch*') ? 'active' : ''}}">
-    <i style="font-size: 25px;" class="material-icons">subscriptions</i>
-    <span style="font-size: 12px; position: fixed; bottom: 0; padding-bottom: 4px; color: inherit;">節目列表</span>
+  <a href="{{ route('video.watch') }}?g=variety" class="{{ isset($genre) && $genre == 'variety' ? 'active' : ''}}">
+    <i style="font-size: 25px;" class="material-icons">live_tv</i>
+    <span style="font-size: 12px; position: fixed; bottom: 0; padding-bottom: 4px; color: inherit;">綜藝</span>
+  </a>
+  <a href="{{ route('video.watch') }}?g=drama" class="{{ isset($genre) && $genre == 'drama' ? 'active' : ''}}">
+    <i style="font-size: 25px;" class="material-icons">movie_filter</i>
+    <span style="font-size: 12px; position: fixed; bottom: 0; padding-bottom: 4px; color: inherit;">日劇</span>
+  </a>
+  <a href="{{ route('video.watch') }}?g=anime" class="{{ isset($genre) && $genre == 'anime' ? 'active' : ''}}">
+    <i style="font-size: 25px;" class="material-icons">palette</i>
+    <span style="font-size: 12px; position: fixed; bottom: 0; padding-bottom: 4px; color: inherit;">動漫</span>
   </a>
 </div>
