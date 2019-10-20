@@ -31,7 +31,7 @@ class BlogController extends Controller
 
         $sideBlogsDesktop = Blog::where('genre', 'variety')->inRandomOrder()->limit(3)->get();
 
-        return view('video.genreIndex', compact('videos', 'sideBlogsDesktop', 'genre'));
+        return view('video.genreIndex', compact('videos', 'sideBlogsDesktop'));
     }
 
     public function watch(Request $request){
