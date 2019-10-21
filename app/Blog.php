@@ -21,10 +21,10 @@ class Blog extends Model
             'todai' => ['value' => 'todai', 'title' => '東大方程式完整版', 'imgur' => 'https://i.imgur.com/2rZSHfbh.png']
         ],
         'anime' => [
-            'sao3B' => ['value' => 'sao3B', 'title' => '刀劍神域 Alicization 愛麗絲篇異界戰爭 第三季後半', 'imgur' => 'https://i.imgur.com/YQY7IsRh.png'],
+            'sao3B' => ['value' => 'sao3B', 'title' => '刀劍神域 Alicization 愛麗絲篇異界戰爭 第三季後半', 'imgur' => 'https://i.imgur.com/1wPd8E8h.png'],
         ],
         'drama' => [
-            'tbskc' => ['value' => 'tbskc', 'title' => '逃避雖可恥但有用', 'imgur' => 'https://i.imgur.com/fwmphNdh.png'],
+            'tbskc' => ['value' => 'tbskc', 'title' => '逃避雖可恥但有用', 'imgur' => 'https://i.gimy.tv/izp/uploads/vod/2018-10-11/5bbf1ebb3fac4.jpg'],
         ],
     ];
 

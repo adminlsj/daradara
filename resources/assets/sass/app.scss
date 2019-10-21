@@ -625,6 +625,20 @@ a > i {
   max-width: 500px;
 }
 
+.watch-index {
+  width:80%;
+  margin: 0 auto;
+  background-color: #414141;
+  margin-top: 0px !important;
+}
+
+.watch-single {
+  padding: 0px 5px;
+  width: 33.33%;
+  float: left;
+  margin-bottom: 15px;
+}
+
 @-webkit-keyframes slide {
     100% { right: 0; }
 }
@@ -757,6 +771,10 @@ a > i {
     .row.video-no-gutter [class*='col-']:not(:last-child) {
       padding-right: 0;
       padding-left: 0;
+    }
+
+    .watch-index {
+      width: 100%;
     }
 }
 
