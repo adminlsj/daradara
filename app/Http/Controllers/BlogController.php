@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Blog;
 use App\BlogImg;
+use App\Watch;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -68,10 +69,11 @@ class BlogController extends Controller
             return view('video.showWatch', compact('genre', 'video', 'videos', 'current_blog', 'fb_title', 'current_id', 'prev', 'next'));
         } else {
             $genre = $request->has('g') && $request->g != 'null' ? $request->g : 'variety';
+            $watches = Watch::where('genre', $genre)->get();
             $videos = [];
-            foreach (Blog::$structure[$genre] as $category) {
-                $categoryVideos = Blog::where('genre', $genre)->where('category', $category['value'])->orderBy('created_at', 'desc')->get();
-                $videos[$category['value']] = $categoryVideos;
+            foreach ($watches as $watch) {
+                $firstVideo = Blog::where('category', $watch->category)->orderBy('created_at', 'desc')->get();
+                $videos[$watch->id] = $firstVideo;
             }
 
             $sideBlogsDesktop = Blog::where('genre', 'variety')->inRandomOrder()->limit(3)->get();
