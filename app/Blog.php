@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Blog extends Model
 {
 	protected $fillable = [
-        'title', 'content', 'content', 'is_travel', 'is_japan', 'is_korea', 'is_taiwan', 'is_food', 'is_fashion',
+        'id', 'title', 'caption', 'genre', 'category', 'tags', 'hd', 'sd', 'imgur', 'views', 'duration',
     ];
 
     public function tags()

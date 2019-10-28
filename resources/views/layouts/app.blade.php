@@ -32,6 +32,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <link href="https://vjs.zencdn.net/7.6.5/video-js.css" rel="stylesheet">
+    <link href="node_modules/videojs-resolution-switcher/lib/videojs-resolution-switcher.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
     <!-- Google Analytics -->

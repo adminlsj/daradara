@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "owl.carousel": "^2.2.0",
-    "video.js": "^7.6.5"
+    "video.js": "^7.6.5",
+    "videojs-resolution-switcher": "^0.4.2"
   }
 }

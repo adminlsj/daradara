@@ -36,6 +36,24 @@ class BlogController extends Controller
     }
 
     public function watch(Request $request){
+        /*$id = 461;
+        for ($i = 1; $i <= 10; $i++) { 
+            $video = Blog::create([
+                'id' => $id,
+                'title' =>  'Innocence 冤罪律師【第'.$i.'話】',
+                'caption' => 'Innocence 冤罪律師【第'.$i.'話】',
+                'genre' => 'drama',
+                'category' => 'yzls',
+                'tags' => 'Innocence冤罪律師',
+                'hd' => 'https://archive.org/download/yzls_10/YZLS0'.$i.'.mp4',
+                'sd' => 'https://archive.org/download/yzls_10/YZLS0'.$i.'.mp4',
+                'imgur' => 'uhSn765',
+                'views' => 500000,
+                'duration' => 0,
+            ]);
+            $id++;
+        }*/
+
         if ($request->has('v') && $request->v != 'null') {
             $video = Blog::find($request->v);
             $videos = Blog::where('category', $video->category)->orderBy('created_at', 'desc')->get();

@@ -12,8 +12,11 @@
 // Bootstrap
 @import "~bootstrap-sass/assets/stylesheets/bootstrap";
 
-// Owl Carousel
+// Video JS
 @import "video-js.css";
+
+// Resolution Switcher
+@import "videojs-resolution-switcher.css";
 
 html, body {
     max-width: 100%;
@@ -634,7 +637,8 @@ a > i {
 
 .watch-single {
   padding: 0px 5px;
-  width: 33.33%;
+  width: 20%;
+  height: 100%;
   float: left;
   margin-bottom: 15px;
 }
@@ -775,6 +779,10 @@ a > i {
 
     .watch-index {
       width: 100%;
+    }
+
+    .watch-single {
+      width: 33.33%;
     }
 }
 
