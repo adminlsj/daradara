@@ -23,7 +23,7 @@ jwplayer('single-player').setup({
     "width": "auto",
     "height": $('#player-div').width() * (9/16),
     "autostart": "true",
-    "mute": "true",
+    "muted": "true",
 });
 
 $(window).on('resize', function(){
