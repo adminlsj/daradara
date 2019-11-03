@@ -59,9 +59,9 @@
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v4.0"></script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     
-    <div id="app">
+    <div id="app" style="{{ Request::is('*watch*') ? 'background-color:#414141;' : '' }}">
         <div>@include('layouts.nav')</div>
-        <div style="margin-top: 50px; {{ Request::is('*watch*') ? 'background-color:#414141;' : '' }}" class="responsive-frame">
+        <div style="margin-top: 50px;" class="responsive-frame">
             @yield('content')
         </div>
         @include('layouts.footer')
