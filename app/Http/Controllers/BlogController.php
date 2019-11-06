@@ -36,18 +36,18 @@ class BlogController extends Controller
     }
 
     public function watch(Request $request){
-        /*$id = 513;
-        for ($i = 1; $i <= 10; $i++) { 
+        /*$id = 523;
+        for ($i = 1; $i <= 11; $i++) { 
             $video = Blog::create([
                 'id' => $id,
-                'title' =>  '我要準時下班【第'.$i.'話】',
-                'caption' => '我要準時下班【第'.$i.'話】',
+                'title' =>  'IN HAND 破案神手 / 勝券在握【第'.$i.'話】',
+                'caption' => 'IN HAND 破案神手 / 勝券在握【第'.$i.'話】',
                 'genre' => 'drama',
-                'category' => 'wyzsxb',
-                'tags' => '我要準時下班',
-                'hd' => 'https://archive.org/download/wyzsxb/WYZSXB0'.$i.'.mp4',
-                'sd' => 'https://archive.org/download/wyzsxb/WYZSXB0'.$i.'.mp4',
-                'imgur' => 'nh7l27p',
+                'category' => 'sqzw',
+                'tags' => '破案神手 勝券在握',
+                'hd' => 'https://archive.org/download/sqzw_11/SQZW0'.$i.'.mp4',
+                'sd' => 'https://archive.org/download/sqzw_11/SQZW0'.$i.'.mp4',
+                'imgur' => 'j8ZSvmt',
                 'views' => 500000,
                 'duration' => 0,
             ]);
