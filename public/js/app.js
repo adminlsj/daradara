@@ -45099,7 +45099,15 @@ function load_more(page) {
     newDivName = "d" + String(new Date().valueOf());
     var $newhtml = $("<div id='" + newDivName + "'>" + data + "</div>");
     $('#sidebar-results').append($newhtml);
-    FB.XFBML.parse($newhtml[0]);
+    $('#' + newDivName + ' span').each(function (index) {
+      rank = index + 1 + (page - 1) * 10;
+
+      if (rank < 10) {
+        $(this).html('<span style="color:white; background-color:pink; padding: 3px 10px;">' + rank + '</span>');
+      } else {
+        $(this).html('<span style="color:white; background-color:pink; padding: 3px 6px;">' + rank + '</span>');
+      }
+    });
   }).fail(function (jqXHR, ajaxOptions, thrownError) {});
 }
 

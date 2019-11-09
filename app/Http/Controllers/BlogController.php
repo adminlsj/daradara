@@ -159,14 +159,13 @@ class BlogController extends Controller
 
             return view('video.show', compact('video', 'videos', 'sideBlogsDesktop', 'current_blog', 'fb_title'));
         } else {
-            $videos = Blog::orderBy('views', 'desc')->paginate(5);
-            $html = $this->videoLoadHTML($videos);
+            $videos = Blog::orderBy('views', 'desc')->paginate(10);
+            $html = $this->trendingLoadHTML($videos);
             if ($request->ajax()) {
                 return $html;
             }
 
-            $sideBlogsDesktop = Blog::where('category', 'video')->inRandomOrder()->limit(3)->get();
-            return view('video.trendingIndex', compact('videos', 'sideBlogsDesktop'));
+            return view('video.trendingIndex', compact('videos'));
         }
     }
 
@@ -581,6 +580,14 @@ class BlogController extends Controller
         return $html;
     }
 
+    public function trendingLoadHTML($videos)
+    {
+        $html = '';
+        foreach ($videos as $video) {
+            $html .= view('video.trendingVideoPost', compact('video'));
+        }
+        return $html;
+    }
 
     /**
      * Show the form for editing the specified resource.
