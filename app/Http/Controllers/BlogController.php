@@ -24,15 +24,14 @@ class BlogController extends Controller
     }
 
     public function home(Request $request){
-        $videos = Blog::orderBy('created_at', 'desc')->paginate(5);
-        $html = $this->videoLoadHTML($videos);
-        if ($request->ajax()) {
-            return $html;
-        }
+        $videos = Blog::orderBy('created_at', 'desc')->limit(10)->get();
+        $variety = Blog::where('genre', 'variety')->orderBy('created_at', 'desc')->limit(10)->get();
+        $drama = Blog::where('genre', 'drama')->orderBy('created_at', 'desc')->limit(10)->get();
+        $anime = Blog::where('genre', 'anime')->orderBy('created_at', 'desc')->limit(10)->get();
 
         $sideBlogsDesktop = Blog::where('genre', 'variety')->inRandomOrder()->limit(3)->get();
 
-        return view('video.genreIndex', compact('videos', 'sideBlogsDesktop'));
+        return view('video.home', compact('videos', 'variety', 'drama', 'anime', 'sideBlogsDesktop'));
     }
 
     public function watch(Request $request){
