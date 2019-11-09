@@ -643,6 +643,16 @@ a > i {
   margin-bottom: 15px;
 }
 
+.home-padding-container {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.home-image-container {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
 @-webkit-keyframes slide {
     100% { right: 0; }
 }
@@ -783,6 +793,16 @@ a > i {
 
     .watch-single {
       width: 33.33%;
+    }
+
+    .home-padding-container {
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+
+    .home-image-container {
+      padding-left: 30px;
+      padding-right: 30px;
     }
 }
 
