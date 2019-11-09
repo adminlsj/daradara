@@ -4,7 +4,7 @@
             <img style="border-radius: 5px;" src="https://i.imgur.com/{{ $video->imgur }}m.png" width="100%" height="100%">
         </div>
         <div class="col-xs-5 col-sm-5 col-md-5" style="padding-left: 0px; padding-right: 0px;">
-            <h4 style="margin-top: 0px; font-weight: 500; line-height: 19px; font-size: 1em;">{{ $video->title }}</h4>
+            <h4 style="margin-top: 0px; font-weight: 500; line-height: 19px; font-size: 1em; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;">{{ $video->title }}</h4>
             <p style="color: gray; margin-top: -7px; margin-bottom: 0px; font-size: 0.85em;">
                 <i style="vertical-align:middle; font-size: 1.2em; margin-top: -2.5px;" class="material-icons">remove_red_eye</i>
                 {{ $video->views() }}次 • {{ Carbon\Carbon::parse($video->created_at)->format('Y-m-d') }}
