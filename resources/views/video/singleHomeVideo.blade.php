@@ -1,6 +1,6 @@
 <div class="hidden-xs hidden-sm col-md-6">
 	<a href="{{ route('video.trending') }}?v={{ $video->id }}">
-	  <img style="border-radius: 5px;" src="https://i.imgur.com/{{ $video->imgur }}l.png" width="100%" height="100%">
+	  <img style="border-radius: 5px;" src="https://i.imgur.com/{{ $video->imgur }}m.png" width="100%" height="100%">
 	</a>
 
 	<div style="position: relative; height: 50px">
@@ -20,7 +20,7 @@
 
 <div class="visible-xs visible-sm col-xs-6 col-sm-6" style="{{ $loop->iteration % 2 == 0 ? 'padding-right: 30px; padding-left:7.5px;' : 'padding-left: 30px; padding-right:7.5px;' }}">
 	<a href="{{ route('video.trending') }}?v={{ $video->id }}">
-	  <img style="border-radius: 5px;" src="https://i.imgur.com/{{ $video->imgur }}l.png" width="100%" height="100%">
+	  <img style="border-radius: 5px;" src="https://i.imgur.com/{{ $video->imgur }}m.png" width="100%" height="100%">
 	</a>
 
 	<div style="position: relative; height: 50px;">
