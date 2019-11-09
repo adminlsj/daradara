@@ -177,7 +177,7 @@ function load_more(page){
         var $newhtml = $("<div id='" + newDivName + "'>" + data + "</div>");
         $('#sidebar-results').append($newhtml);
 
-        $('#' + newDivName + ' span').each(function (index) {
+        $('#' + newDivName + ' h5').each(function (index) {
             rank = index + 1 + (page - 1) * 10;
             if (rank < 10) {
                 $(this).html('<span style="color:white; background-color:pink; padding: 3px 10px;">' + rank + '</span>');

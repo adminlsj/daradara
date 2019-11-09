@@ -45099,7 +45099,7 @@ function load_more(page) {
     newDivName = "d" + String(new Date().valueOf());
     var $newhtml = $("<div id='" + newDivName + "'>" + data + "</div>");
     $('#sidebar-results').append($newhtml);
-    $('#' + newDivName + ' span').each(function (index) {
+    $('#' + newDivName + ' h5').each(function (index) {
       rank = index + 1 + (page - 1) * 10;
 
       if (rank < 10) {

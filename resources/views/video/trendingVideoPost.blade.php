@@ -11,7 +11,7 @@
             </p>
         </div>
         <div class="col-xs-2 col-sm-2 col-md-2" style="text-align: right">
-            <span>no.</span>
+            <h5 style="margin-top: 8px;">no.</h5>
         </div>
     </div>
 </a>
