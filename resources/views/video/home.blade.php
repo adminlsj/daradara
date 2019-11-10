@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<div style="width:78%; margin: 0 auto;" class="mobile-container">
-	<div class="row home-padding-container" style="padding-top: 24px;padding-bottom: 4px;">
+<div class="padding-setup mobile-container">
+	<div class="row" style="padding-top: 5px; padding-bottom: 4px">
 		<div class="col-md-12">
 			<h4>
 				熱門推薦
@@ -20,7 +20,7 @@
 		@endforeach
 	</div>
 
-	<div class="row home-padding-container" style="padding-top:4px; padding-bottom: 4px;">
+	<div class="row" style="padding-top:4px; padding-bottom: 4px;">
 		<div class="col-md-12">
 			<h4>
 				綜藝推薦
@@ -38,7 +38,7 @@
 		@endforeach
 	</div>
 
-	<div class="row home-padding-container" style="padding-top:4px; padding-bottom: 4px;">
+	<div class="row" style="padding-top:4px; padding-bottom: 4px;">
 		<div class="col-md-12">
 			<h4>
 				日劇推薦
@@ -56,7 +56,7 @@
 		@endforeach
 	</div>
 
-	<div class="row home-padding-container" style="padding-top:4px; padding-bottom: 4px;">
+	<div class="row" style="padding-top:4px; padding-bottom: 4px;">
 		<div class="col-md-12">
 			<h4>
 				動漫推薦

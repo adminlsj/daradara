@@ -12,7 +12,7 @@
           @endforeach
         </p>
         <a id="shareBtn-link" href="{{ route('video.trending') }}?v={{ $video->id }}" style="text-decoration: none;">
-          <h4 id="shareBtn-title" style="line-height: 23px; font-weight: 600; margin-top:-10px; margin-bottom: 0px; color:white">{{ $video->title }}</h4>
+          <h4 id="shareBtn-title" style="line-height: 23px; font-weight: 500; margin-top:-10px; margin-bottom: 0px; color:white; font-size: 1.25em">{{ $video->title }}</h4>
         </a>
     </div>
     <div style="margin-left: -4px;">

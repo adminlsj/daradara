@@ -1,5 +1,5 @@
 <a href="{{ route('video.trending') }}?v={{ $video->id }}">
-    <div class="row home-padding-container">
+    <div class="row">
         <div class="col-xs-5 col-sm-5 col-md-5">
             <img style="border-radius: 5px;" src="https://i.imgur.com/{{ $video->imgur }}m.png" width="100%" height="100%">
         </div>

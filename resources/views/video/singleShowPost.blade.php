@@ -1,41 +1,29 @@
 @include('video.player')
 
-<div class="padding-setup">
-    <div>
-        <p style="padding: 7px 0px 2px 0px; font-size: 0.9em;">
-          @foreach ($video->tags() as $tag)
-            @if (strpos($tag, '完整版') !== false)
-              <a style="color:#97344a" href="{{ route('video.watch') }}?v={{ App\Blog::where('category', $video->category)->orderBy('created_at', 'desc')->first()->id }}">#{{ $tag }}</a>
-            @else
-              <a style="color:#97344a" href="{{ route('blog.search') }}?query={{ $tag }}">#{{ $tag }}</a>
-            @endif
-          @endforeach
-        </p>
-        <a id="shareBtn-link" href="{{ route('video.trending') }}?v={{ $video->id }}" style="text-decoration: none;">
-          <h4 id="shareBtn-title" style="line-height: 23px; font-weight: 600; margin-top:-10px; margin-bottom: 0px;">{{ $video->title }}</h4>
-        </a>
-        <p style="color: gray; margin-top: 4px; margin-bottom: 0px; font-size: 0.9em;">觀看次數：{{ $video->views() }}次 • {{ Carbon\Carbon::parse($video->created_at)->format('Y-m-d') }}</p>
-    </div>
-    <hr style="border-color: #d9d9d9; background-color: #d9d9d9; color: #d9d9d9; padding:0px; margin: 10px -15px 0px -15px;">
-      <div>
-          <a href="https://www.instagram.com/laughseejapan/" target="_blank">
-              <img src="https://twobayjobs.s3.amazonaws.com/avatars/originals/default_laughseejapan_profile_pic.jpg" class="video-profile-pic" width="40px" height="40px">
-          </a>
-      </div>
-      <div>
-          <a href="https://www.instagram.com/laughseejapan/">
-            <h4 style="color: black; font-weight: 400;" class="video-title">Laughseejapan.com</h4>
-          </a>
-          <p style="white-space: pre-wrap; margin-left: 50px; margin-top: -10px; color: gray; margin-bottom: 0px;" class="video-caption">@Instagram</p>
-      </div>
-      <div id="toggleVideoDescription" style="margin-top: -40px; padding-top:10px; padding-right:2px;cursor: pointer; color: gray" class="pull-right"><i id="toggleVideoDescriptionIcon" class="material-icons noselect">expand_more</i></div>
-      <a id="shareBtn" style="margin-top: -42px; margin-right: 30px; padding-right:10px; cursor: pointer; text-decoration: none;" class="pull-right">
-        <i style="color: gray;-moz-transform: scale(-1, 1);-webkit-transform: scale(-1, 1);-o-transform: scale(-1, 1);-ms-transform: scale(-1, 1);transform: scale(-1, 1);" class="material-icons pull-right noselect">reply</i>
-        <p style="white-space: pre-wrap; color: gray; margin-bottom: 0px; margin-top: 15px; font-size: 0.85em" class="video-caption noselect">分享</p>
-      </a>
-    <hr style="border-color: #d9d9d9; background-color: #d9d9d9; color: #d9d9d9; padding:0px; margin: 10px -15px 0px -15px;">
-    <div id="videoDescription" style="display: none; margin-top: 10px;">
-      <p style="white-space: pre-wrap; color: gray; margin-bottom: 0px;">{{ $video->caption }}</p>
-      <hr style="border-color: #d9d9d9; background-color: #d9d9d9; color: #d9d9d9; padding:0px; margin: 10px -15px 0px -15px;">
+<div style="background-color: #f9f9f9; padding-top: 7px; padding-bottom: 7px;" class="padding-setup">
+    <p style="font-size: 0.9em; padding-bottom: 2px;">
+      @foreach ($video->tags() as $tag)
+        @if (strpos($tag, '完整版') !== false)
+          <a style="color:#a9a9a9" href="{{ route('video.watch') }}?v={{ App\Blog::where('category', $video->category)->orderBy('created_at', 'desc')->first()->id }}">#{{ $tag }}</a>
+        @else
+          <a style="color:#a9a9a9" href="{{ route('blog.search') }}?query={{ $tag }}">#{{ $tag }}</a>
+        @endif
+      @endforeach
+    </p>
+
+    <a id="shareBtn-link" href="{{ route('video.trending') }}?v={{ $video->id }}" style="text-decoration: none; pointer-events: none;">
+      <h4 id="shareBtn-title" style="line-height: 23px; font-weight: 500; margin-top:-10px; margin-bottom: 0px; color: #323232; font-size: 1.25em">{{ $video->title }}</h4>
+    </a>
+
+    <p style="color: #a9a9a9; margin-top: 4px; margin-bottom: 0px; font-size: 0.8em;"><i style="vertical-align:middle; font-size: 1.3em; margin-top: -2px; margin-right: 4px;" class="material-icons">remove_red_eye</i>{{ $video->views() }}次 • {{ Carbon\Carbon::parse($video->created_at)->format('Y-m-d') }}</p>
+
+    <div id="toggleVideoDescription" style="margin-top: -31px; padding-top:10px; padding-right:2px;cursor: pointer; color: gray;" class="pull-right"><i id="toggleVideoDescriptionIcon" class="material-icons noselect">expand_more</i></div>
+
+    <a id="shareBtn" style="margin-top: -26px; padding-right:10px; cursor: pointer; text-decoration: none;" class="pull-right">
+      <i style="color: gray;-moz-transform: scale(-1, 1);-webkit-transform: scale(-1, 1);-o-transform: scale(-1, 1);-ms-transform: scale(-1, 1);transform: scale(-1, 1);" class="material-icons pull-right noselect">reply</i>
+    </a>
+
+    <div id="videoDescription" style="display: none; margin-top: 5px;">
+      <p style="white-space: pre-wrap; color: gray; margin-bottom: 5px;">{{ $video->caption }}</p>
     </div>
 </div>​
