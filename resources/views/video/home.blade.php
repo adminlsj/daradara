@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="padding-setup mobile-container">
-	<div class="row" style="padding-top: 5px; padding-bottom: 4px">
+	<div class="row" style="padding-top: 6px; padding-bottom: 4px">
 		<div class="col-md-12">
 			<h4>
 				熱門推薦
