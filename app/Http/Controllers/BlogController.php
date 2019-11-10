@@ -159,13 +159,24 @@ class BlogController extends Controller
 
             return view('video.show', compact('video', 'videos', 'sideBlogsDesktop', 'current_blog', 'fb_title'));
         } else {
-            $videos = Blog::orderBy('views', 'desc')->paginate(10);
-            $html = $this->trendingLoadHTML($videos);
-            if ($request->ajax()) {
-                return $html;
-            }
+            if ($request->has('g') && $request->g != 'null') {
+                $genre = $request->g;
+                $videos = Blog::where('genre', $genre)->orderBy('views', 'desc')->paginate(10);
+                $html = $this->trendingLoadHTML($videos);
+                if ($request->ajax()) {
+                    return $html;
+                }
 
-            return view('video.trendingIndex', compact('videos'));
+                return view('video.trendingIndex', compact('videos'));
+            } else {
+                $videos = Blog::orderBy('views', 'desc')->paginate(10);
+                $html = $this->trendingLoadHTML($videos);
+                if ($request->ajax()) {
+                    return $html;
+                }
+
+                return view('video.trendingIndex', compact('videos'));
+            }
         }
     }
 

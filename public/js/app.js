@@ -45041,8 +45041,10 @@ window.onscroll = function () {
 
   if (prevScrollpos > currentScrollPos || currentScrollPos < 60) {
     document.getElementById("scroll-hide-nav").style.top = "0";
+    document.getElementById("scroll-hide-nav2").style.top = "0";
   } else {
-    document.getElementById("scroll-hide-nav").style.top = "-60px";
+    document.getElementById("scroll-hide-nav").style.top = "-50px";
+    document.getElementById("scroll-hide-nav2").style.top = "-100px";
   }
 
   prevScrollpos = currentScrollPos;
@@ -45060,6 +45062,7 @@ var page = 1; //track user scroll as page number, right now page number is 1
 var urlParams = new URLSearchParams(window.location.search);
 var query = urlParams.get('query');
 var video = urlParams.get('v');
+var genre = urlParams.get('g');
 load_more(page); //initial content load
 
 function ScrollHandler(e) {
@@ -45081,7 +45084,7 @@ function getDocHeight() {
 
 function load_more(page) {
   $.ajax({
-    url: '?v=' + video + '&page=' + page + '&query=' + query,
+    url: '?v=' + video + '&g=' + genre + '&page=' + page + '&query=' + query,
     type: "get",
     datatype: "html",
     beforeSend: function beforeSend() {
@@ -45103,9 +45106,9 @@ function load_more(page) {
       rank = index + 1 + (page - 1) * 10;
 
       if (rank < 10) {
-        $(this).html('<span style="color:white; background-color:pink; padding: 3px 10px;">' + rank + '</span>');
+        $(this).html('<span style="color:white; background-color:pink; padding: 3px 10px; border-radius:3px;">' + rank + '</span>');
       } else {
-        $(this).html('<span style="color:white; background-color:pink; padding: 3px 6px;">' + rank + '</span>');
+        $(this).html('<span style="color:white; background-color:pink; padding: 3px 6px; border-radius:3px;">' + rank + '</span>');
       }
     });
   }).fail(function (jqXHR, ajaxOptions, thrownError) {});

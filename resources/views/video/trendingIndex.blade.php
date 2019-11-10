@@ -3,7 +3,7 @@
 @section('content')
 <div style="width:78%; margin: 0 auto;" class="mobile-container">
 	<div class="row">
-		<div class="col-md-12" style="margin-top: 10px;">
+		<div class="col-md-12" style="margin-top: 46px;">
 			<br>
 			<div class="video-sidebar-wrapper">
 			    <div id="sidebar-results"><!-- results appear here --></div>

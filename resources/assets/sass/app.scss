@@ -116,6 +116,23 @@ input[type=text]:focus {
   color: red;
 }
 
+.nav-tab-container h4{
+  font-size:1em;
+  font-weight: 400;
+  color: gray;
+}
+
+.nav-tab-active span {
+  font-weight: 500 !important;
+  color: #d84b6b !important;
+  border-bottom: 2px solid #d84b6b;
+  padding-bottom: 5px;
+}
+
+.nav-tab-active {
+  margin-top: 9px;
+}
+
 .aspect-ratio {
   position: relative;
   width: 100%;

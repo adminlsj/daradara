@@ -25,6 +25,25 @@
   </div>
 </nav>
 
+<nav style="background-color: white; margin-top: 50px; {{ Request::is('*trending*') && !Request::has('v') ? '' : 'display:none;' }}" id="scroll-hide-nav2" >
+  <div style="width: 80%; max-width: 1200px; background-color: {{ Request::is('*watch*') ? '#222222' : 'white' }}" class="container-fluid responsive-frame">
+    <div class="nav-tab-container" style="background-color: white;">
+      <a href="{{ route('video.trending') }}" style="width: 25%; float:left; text-align: center; text-decoration: none;">
+        <h4 class="{{ Request::is('*trending*') && !Request::has('g') ? 'nav-tab-active' : '' }}"><span>&nbsp;全部&nbsp;</span></h4>
+      </a>
+      <a href="{{ route('video.trending') }}?g=variety" style="width: 25%; float:left; text-align: center; text-decoration: none;">
+        <h4 class="{{ Request::has('g') && Request::get('g') == 'variety' ? 'nav-tab-active' : '' }}"><span>&nbsp;綜藝&nbsp;</span></h4>
+      </a>
+      <a href="{{ route('video.trending') }}?g=drama" style="width: 25%; float:left; text-align: center; text-decoration: none;">
+        <h4 class="{{ Request::has('g') && Request::get('g') == 'drama' ? 'nav-tab-active' : '' }}"><span>&nbsp;日劇&nbsp;</span></h4>
+      </a>
+      <a href="{{ route('video.trending') }}?g=anime" style="width: 25%; float:left; text-align: center; text-decoration: none;">
+        <h4 class="{{ Request::has('g') && Request::get('g') == 'anime' ? 'nav-tab-active' : '' }}"><span>&nbsp;動漫&nbsp;</span></h4>
+      </a>
+    </div>
+  </div>
+</nav>
+
 <div class="navbar">
   <a href="/" class="{{ Request::is('/') ? 'active' : ''}}">
     <i style="font-size: 25px;" class="material-icons">home</i>
