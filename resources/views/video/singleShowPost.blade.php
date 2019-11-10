@@ -15,7 +15,7 @@
       <h4 id="shareBtn-title" style="line-height: 23px; font-weight: 500; margin-top:-10px; margin-bottom: 0px; color: #323232; font-size: 1.25em">{{ $video->title }}</h4>
     </a>
 
-    <p style="color: #a9a9a9; margin-top: 4px; margin-bottom: 0px; font-size: 0.85em;"><i style="vertical-align:middle; font-size: 1.2em; margin-top: -2px; margin-right: 4px;" class="material-icons">remove_red_eye</i>{{ $video->views() }}次 • {{ Carbon\Carbon::parse($video->created_at)->format('Y-m-d') }}</p>
+    <p style="color: #a9a9a9; margin-top: 4px; margin-bottom: 0px; font-size: 0.85em;"><i style="vertical-align:middle; font-size: 1.2em; margin-top: -2px; margin-right: 3px;" class="material-icons">remove_red_eye</i>{{ $video->views() }}次 • {{ Carbon\Carbon::parse($video->created_at)->format('Y-m-d') }}</p>
 
     <div id="toggleVideoDescription" style="margin-top: -32px; padding-top:10px; padding-right:2px;cursor: pointer; color: gray;" class="pull-right"><i id="toggleVideoDescriptionIcon" class="material-icons noselect">expand_more</i></div>
 
