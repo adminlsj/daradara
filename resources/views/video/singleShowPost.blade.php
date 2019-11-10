@@ -1,6 +1,6 @@
 @include('video.player')
 
-<div style="background-color: #f9f9f9; padding-top: 7px; padding-bottom: 8px;" class="padding-setup">
+<div style="background-color: #f9f9f9; padding-top: 7px; padding-bottom: 9px;" class="padding-setup">
     <p style="font-size: 0.9em; padding-bottom: 2px;">
       @foreach ($video->tags() as $tag)
         @if (strpos($tag, '完整版') !== false)
