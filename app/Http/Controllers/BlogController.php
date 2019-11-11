@@ -166,7 +166,22 @@ class BlogController extends Controller
         } else {
             if ($request->has('g') && $request->g != 'null') {
                 $genre = $request->g;
-                $videos = Blog::where('genre', $genre)->whereDate('created_at', '>=', Carbon::now()->subMonths(3))->orderBy('views', 'desc')->paginate(10);
+                $months = 3;
+                switch ($genre) {
+                    case 'variety':
+                        $months = 3;
+                        break;
+                    case 'drama':
+                        $months = 12;
+                        break;
+                    case 'anime':
+                        $months = 12;
+                        break;
+                    default:
+                        $months = 3;
+                        break;
+                }
+                $videos = Blog::where('genre', $genre)->whereDate('created_at', '>=', Carbon::now()->subMonths($months))->orderBy('views', 'desc')->paginate(10);
                 $html = $this->trendingLoadHTML($videos);
                 if ($request->ajax()) {
                     return $html;

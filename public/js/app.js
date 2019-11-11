@@ -45044,7 +45044,7 @@ window.onscroll = function () {
     document.getElementById("scroll-hide-nav2").style.top = "0";
   } else {
     document.getElementById("scroll-hide-nav").style.top = "-50px";
-    document.getElementById("scroll-hide-nav2").style.top = "-100px";
+    document.getElementById("scroll-hide-nav2").style.top = "-50px";
   }
 
   prevScrollpos = currentScrollPos;
