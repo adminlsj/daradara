@@ -40,15 +40,15 @@ class BlogController extends Controller
     }
 
     public function watch(Request $request){
-        /*$id = 523;
-        for ($i = 1; $i <= 11; $i++) { 
+        /*$id = 586;
+        for ($i = 1; $i <= 10; $i++) { 
             $video = Blog::create([
                 'id' => $id,
-                'title' =>  'IN HAND 破案神手 / 勝券在握【第'.$i.'話】',
-                'caption' => 'IN HAND 破案神手 / 勝券在握【第'.$i.'話】',
+                'title' =>  '刑警ZERO【第'.$i.'話】',
+                'caption' => '刑警ZERO【第'.$i.'話】',
                 'genre' => 'drama',
-                'category' => 'sqzw',
-                'tags' => '破案神手 勝券在握',
+                'category' => 'xjzero',
+                'tags' => '刑警ZERO',
                 'hd' => 'https://archive.org/download/sqzw_11/SQZW0'.$i.'.mp4',
                 'sd' => 'https://archive.org/download/sqzw_11/SQZW0'.$i.'.mp4',
                 'imgur' => 'j8ZSvmt',
