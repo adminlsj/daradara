@@ -24,14 +24,19 @@ class BlogController extends Controller
     }
 
     public function home(Request $request){
-        $videos = Blog::orderBy('created_at', 'desc')->limit(10)->get();
-        $variety = Blog::where('genre', 'variety')->orderBy('created_at', 'desc')->limit(10)->get();
-        $drama = Blog::where('genre', 'drama')->orderBy('created_at', 'desc')->limit(10)->get();
-        $anime = Blog::where('genre', 'anime')->orderBy('created_at', 'desc')->limit(10)->get();
+        $videos = Blog::whereDate('created_at', '>=', Carbon::now()->subMonths(6))
+                      ->where('views', '>=', '500000')->inRandomOrder()->limit(10)->get();
+        $variety = Blog::where('genre', 'variety')
+                       ->whereDate('created_at', '>=', Carbon::now()->subMonths(6))
+                       ->where('views', '>=', '500000')->inRandomOrder()->limit(10)->get();
+        $drama = Blog::where('genre', 'drama')
+                     ->whereDate('created_at', '>=', Carbon::now()->subMonths(12))
+                     ->where('views', '>=', '200000')->inRandomOrder()->limit(10)->get();
+        $anime = Blog::where('genre', 'anime')
+                     ->whereDate('created_at', '>=', Carbon::now()->subMonths(12))
+                     ->where('views', '>=', '200000')->inRandomOrder()->limit(10)->get();
 
-        $sideBlogsDesktop = Blog::where('genre', 'variety')->inRandomOrder()->limit(3)->get();
-
-        return view('video.home', compact('videos', 'variety', 'drama', 'anime', 'sideBlogsDesktop'));
+        return view('video.home', compact('videos', 'variety', 'drama', 'anime'));
     }
 
     public function watch(Request $request){
@@ -161,7 +166,7 @@ class BlogController extends Controller
         } else {
             if ($request->has('g') && $request->g != 'null') {
                 $genre = $request->g;
-                $videos = Blog::where('genre', $genre)->orderBy('views', 'desc')->paginate(10);
+                $videos = Blog::where('genre', $genre)->whereDate('created_at', '>=', Carbon::now()->subMonths(3))->orderBy('views', 'desc')->paginate(10);
                 $html = $this->trendingLoadHTML($videos);
                 if ($request->ajax()) {
                     return $html;
@@ -169,7 +174,7 @@ class BlogController extends Controller
 
                 return view('video.trendingIndex', compact('videos'));
             } else {
-                $videos = Blog::orderBy('views', 'desc')->paginate(10);
+                $videos = Blog::whereDate('created_at', '>=', Carbon::now()->subMonths(3))->orderBy('views', 'desc')->paginate(10);
                 $html = $this->trendingLoadHTML($videos);
                 if ($request->ajax()) {
                     return $html;
