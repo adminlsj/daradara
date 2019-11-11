@@ -4,7 +4,7 @@
 <div class="watch-index">
 	<div style="margin: 0px 10px; padding-top: 10px;" class="row">
 		@foreach ($videos as $watch => $video)
-			<div class="watch-single">
+			<div class="{{ $genre == 'variety' ? 'watch-variety' : 'watch-single' }}">
 			    <a style="text-decoration: none;" href="{{ route('video.watch') }}?v={{ $video->first()->id }}">
 				    <img src="{{ App\Watch::find($watch)->imgur }}" width="100%" height="100%">
 				    <div style="height: 50px">

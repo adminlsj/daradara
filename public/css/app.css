@@ -9909,7 +9909,8 @@ a > i {
   margin-top: 0px !important;
 }
 
-.watch-single {
+.watch-single,
+.watch-variety {
   padding: 0px 5px;
   width: 20%;
   height: 100%;
@@ -10084,6 +10085,10 @@ a > i {
 
   .watch-single {
     width: 33.33%;
+  }
+
+  .watch-variety {
+    width: 50%;
   }
 
   .home-padding-container {
