@@ -24,6 +24,7 @@
       <i style="color: white;-moz-transform: scale(-1, 1);-webkit-transform: scale(-1, 1);-o-transform: scale(-1, 1);-ms-transform: scale(-1, 1);transform: scale(-1, 1);" class="material-icons pull-right noselect">reply</i>
     </a>
     <div id="videoDescription" style="display: none; margin-top: 5px; padding-bottom: 10px;">
-      <p style="white-space: pre-wrap; color: white; margin-bottom: 0px;">{{ $video->caption }}</p>
+      <p style="white-space: pre-wrap; color: white; margin-bottom: 20px;">{{ $video->caption }}</p>
+      <p style="white-space: pre-wrap; color: white; margin-bottom: 0px;">{{ $watch != false ? $watch->description : ''}}</p>
     </div>
 </div>​

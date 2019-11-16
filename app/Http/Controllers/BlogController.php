@@ -40,15 +40,15 @@ class BlogController extends Controller
     }
 
     public function watch(Request $request){
-        /*$id = 586;
+        /*$id = 606;
         for ($i = 1; $i <= 10; $i++) { 
             $video = Blog::create([
                 'id' => $id,
-                'title' =>  '刑警ZERO【第'.$i.'話】',
-                'caption' => '刑警ZERO【第'.$i.'話】',
+                'title' =>  '派遣占卜師·中ATARU【第'.$i.'話】',
+                'caption' => '派遣占卜師·中ATARU【第'.$i.'話】',
                 'genre' => 'drama',
-                'category' => 'xjzero',
-                'tags' => '刑警ZERO',
+                'category' => 'pqzbsz',
+                'tags' => '派遣占卜師',
                 'hd' => 'https://archive.org/download/sqzw_11/SQZW0'.$i.'.mp4',
                 'sd' => 'https://archive.org/download/sqzw_11/SQZW0'.$i.'.mp4',
                 'imgur' => 'j8ZSvmt',
@@ -88,7 +88,12 @@ class BlogController extends Controller
 
             $genre = $video->genre;
 
-            return view('video.showWatch', compact('genre', 'video', 'videos', 'current_blog', 'fb_title', 'current_id', 'prev', 'next'));
+            $watch = false;
+            if ($video->category != 'video') {
+                $watch = Watch::where('category', $video->category)->first();
+            }
+
+            return view('video.showWatch', compact('genre', 'video', 'videos', 'current_blog', 'fb_title', 'current_id', 'prev', 'next', 'watch'));
         } else {
             $genre = $request->has('g') && $request->g != 'null' ? $request->g : 'variety';
             $watches = Watch::where('genre', $genre)->get();
