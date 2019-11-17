@@ -40,19 +40,19 @@ class BlogController extends Controller
     }
 
     public function watch(Request $request){
-        /*$id = 606;
-        for ($i = 1; $i <= 10; $i++) { 
+        /*$id = 676;
+        for ($i = 1; $i <= 21; $i++) { 
             $video = Blog::create([
                 'id' => $id,
-                'title' =>  '派遣占卜師·中ATARU【第'.$i.'話】',
-                'caption' => '派遣占卜師·中ATARU【第'.$i.'話】',
+                'title' =>  '特搜9【第'.$i.'話】',
+                'caption' => '特搜9【第'.$i.'話】',
                 'genre' => 'drama',
-                'category' => 'pqzbsz',
-                'tags' => '派遣占卜師',
+                'category' => 'ts9',
+                'tags' => '特搜9',
                 'hd' => 'https://archive.org/download/sqzw_11/SQZW0'.$i.'.mp4',
                 'sd' => 'https://archive.org/download/sqzw_11/SQZW0'.$i.'.mp4',
                 'imgur' => 'j8ZSvmt',
-                'views' => 500000,
+                'views' => 100000,
                 'duration' => 0,
             ]);
             $id++;

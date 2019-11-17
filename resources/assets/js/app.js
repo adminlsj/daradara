@@ -7,7 +7,6 @@
 
 require('./bootstrap');
 require('./owl.carousel');
-require('./video');
 
 window.Vue = require('vue');
 
@@ -24,6 +23,14 @@ const app = new Vue({
 });
 
 require('./comment');
+
+$(document).ready(function(){
+    videojs('video-demo', {
+      controls: true,
+      autoplay: true,
+      preload: 'auto'
+    });
+});
 
 $('#avatar-upload').on("change", function(e) {
     $("#avatar-form").submit();
@@ -208,4 +215,3 @@ shareButton.addEventListener('click', event => {
     // fallback
   }
 });
-
