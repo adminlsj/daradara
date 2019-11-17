@@ -1990,7 +1990,7 @@ video::-webkit-media-text-track-display {
 }
 
 .video-js .vjs-time-control.vjs-current-time {
-    margin-left: 0.5em
+    margin-left: 0;
 }
 
 .video-js .vjs-time-control .vjs-current-time-display,.video-js .vjs-time-control .vjs-duration-display {
