@@ -40,15 +40,15 @@ class BlogController extends Controller
     }
 
     public function watch(Request $request){
-        /*$id = 676;
-        for ($i = 1; $i <= 21; $i++) { 
+        /*$id = 697;
+        for ($i = 1; $i <= 12; $i++) { 
             $video = Blog::create([
                 'id' => $id,
-                'title' =>  '特搜9【第'.$i.'話】',
-                'caption' => '特搜9【第'.$i.'話】',
-                'genre' => 'drama',
-                'category' => 'ts9',
-                'tags' => '特搜9',
+                'title' =>  '約定的夢幻島【第'.$i.'話】',
+                'caption' => '約定的夢幻島【第'.$i.'話】',
+                'genre' => 'anime',
+                'category' => 'yddmhd',
+                'tags' => '約定的夢幻島',
                 'hd' => 'https://archive.org/download/sqzw_11/SQZW0'.$i.'.mp4',
                 'sd' => 'https://archive.org/download/sqzw_11/SQZW0'.$i.'.mp4',
                 'imgur' => 'j8ZSvmt',
@@ -99,12 +99,11 @@ class BlogController extends Controller
             $watches = Watch::where('genre', $genre)->get();
             $videos = [];
             foreach ($watches as $watch) {
-                $firstVideo = Blog::where('category', $watch->category)->orderBy('created_at', 'desc')->get();
+                $firstVideo = Blog::where('category', $watch->category)->orderBy('created_at', 'asc')->get();
                 $videos[$watch->id] = $firstVideo;
             }
 
-            $sideBlogsDesktop = Blog::where('genre', 'variety')->inRandomOrder()->limit(3)->get();
-            return view('video.watchIndex', compact('genre', 'videos', 'sideBlogsDesktop'));
+            return view('video.watchIndex', compact('genre', 'videos'));
         }
     }
 
