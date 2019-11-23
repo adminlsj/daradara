@@ -24,6 +24,10 @@ body {
     overflow-x:hidden;
 }
 
+.no-hover{
+    pointer-events: none;
+}
+
 #left {
   width:20%;
   float: left;

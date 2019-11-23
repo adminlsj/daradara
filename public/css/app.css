@@ -1188,6 +1188,7 @@ body.vjs-full-window {
   user-select: none;
   background-color: #73859f;
   background-color: rgba(115, 133, 159, 0.5);
+  pointer-events: none;
 }
 
 .video-js .vjs-slider.disabled {
@@ -2037,7 +2038,7 @@ video::-webkit-media-text-track-display {
 }
 
 .video-js .vjs-control-bar {
-    transition: transform .1s ease 0s
+    transition: transform .1s ease 0s;
 }
 
 .video-js.not-hover.vjs-has-started.vjs-paused.vjs-user-active .vjs-control-bar,.video-js.not-hover.vjs-has-started.vjs-paused.vjs-user-inactive .vjs-control-bar,.video-js.not-hover.vjs-has-started.vjs-playing.vjs-user-active .vjs-control-bar,.video-js.not-hover.vjs-has-started.vjs-playing.vjs-user-inactive .vjs-control-bar,.video-js.vjs-has-started.vjs-playing.vjs-user-inactive .vjs-control-bar {
@@ -9445,6 +9446,10 @@ body {
 body {
   background-color: white;
   overflow-x: hidden;
+}
+
+.no-hover {
+  pointer-events: none;
 }
 
 #left {
