@@ -1,5 +1,5 @@
 <a href="{{ route('video.trending') }}?v={{ $video->id }}">
-  <img src="https://i.imgur.com/{{ $video->imgur }}l.png" width="100%" height="100%">
+  <img src="https://i.imgur.com/{{ $video->imgur }}l.png" style="width:100%; height:100%;" alt="{{ $video->title }}">
 </a>
 
 <div style="position: relative;" class="video-title-container">

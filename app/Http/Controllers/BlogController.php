@@ -40,18 +40,18 @@ class BlogController extends Controller
     }
 
     public function watch(Request $request){
-        /*$id = 697;
+        /*$id = 750;
         for ($i = 1; $i <= 12; $i++) { 
             $video = Blog::create([
                 'id' => $id,
-                'title' =>  '約定的夢幻島【第'.$i.'話】',
-                'caption' => '約定的夢幻島【第'.$i.'話】',
+                'title' =>  '滿腦都是○○的我沒辦法談戀愛 / 淫亂的小青無法學習【第'.$i.'話】',
+                'caption' => '滿腦都是○○的我沒辦法談戀愛 / 淫亂的小青無法學習【第'.$i.'話】',
                 'genre' => 'anime',
-                'category' => 'yddmhd',
-                'tags' => '約定的夢幻島',
+                'category' => 'mnzdsoo',
+                'tags' => '滿腦都是○○的我沒辦法談戀愛 淫亂的小青無法學習',
                 'hd' => 'https://archive.org/download/sqzw_11/SQZW0'.$i.'.mp4',
                 'sd' => 'https://archive.org/download/sqzw_11/SQZW0'.$i.'.mp4',
-                'imgur' => 'j8ZSvmt',
+                'imgur' => '0aFSu68',
                 'views' => 100000,
                 'duration' => 0,
             ]);

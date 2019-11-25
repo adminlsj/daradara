@@ -1,6 +1,6 @@
 <div class="col-xs-6 col-sm-6 col-md-6" style="{{ $loop->iteration % 2 == 0 ? 'padding-right: 15px; padding-left:7.5px;' : 'padding-left: 15px; padding-right:7.5px;' }}">
 	<a href="{{ route('video.trending') }}?v={{ $video->id }}">
-	  <img style="border-radius: 5px;" src="https://i.imgur.com/{{ $video->imgur }}m.png" width="100%" height="100%">
+	  <img style="border-radius: 5px; width: 100%; height: 100%;" src="https://i.imgur.com/{{ $video->imgur }}m.png" alt="{{ $video->title }}">
 	</a>
 
 	<div style="position: relative; height: 50px;">

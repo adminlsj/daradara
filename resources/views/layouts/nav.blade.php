@@ -2,7 +2,7 @@
   <div style="width: 80%; max-width: 1200px; background-color: {{ Request::is('*watch*') ? '#222222' : 'white' }}" class="container-fluid responsive-frame">
     <div style="background-color: {{ Request::is('*watch*') ? '#222222' : 'white' }}">
       <a href="/">
-	        <img src="{{ Request::is('*watch*') ? 'https://i.imgur.com/xSMGFWh.png' : 'https://i.imgur.com/M8tqx5K.png' }}" style="margin-top: -6px;" height="30px">
+	        <img src="{{ Request::is('*watch*') ? 'https://i.imgur.com/xSMGFWh.png' : 'https://i.imgur.com/M8tqx5K.png' }}" style="margin-top: -6px;" height="30" alt="LaughSeeJapan 娛見日本">
 	    </a>
 
 	    <a style="font-size: 25px; line-height: 50px;" href="/"> </a>
