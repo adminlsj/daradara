@@ -6,7 +6,7 @@
     <span style="position: absolute; top:-26px; right: 7px; background-color: rgba(0,0,0,0.8); color: white; padding: 1px 5px 1px 5px; font-size: 0.85em; border-radius: 2px; opacity: 0.9">{{ $video->duration() }}</span>
     <div>
         <a href="https://www.instagram.com/laughseejapan/" target="_blank">
-            <img src="https://twobayjobs.s3.amazonaws.com/avatars/originals/default_laughseejapan_profile_pic.jpg" class="video-profile-pic" width="40px" height="40px">
+            <img src="https://twobayjobs.s3.amazonaws.com/avatars/originals/default_laughseejapan_profile_pic.jpg" class="video-profile-pic" width="40" height="40">
         </a>
     </div>
     <div>
