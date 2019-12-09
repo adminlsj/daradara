@@ -44882,13 +44882,6 @@ var app = new Vue({
 
 __webpack_require__(/*! ./comment */ "./resources/assets/js/comment.js");
 
-$(document).ready(function () {
-  videojs('video-demo', {
-    controls: true,
-    autoplay: true,
-    preload: 'auto'
-  });
-});
 $('#avatar-upload').on("change", function (e) {
   $("#avatar-form").submit();
 });
@@ -44931,59 +44924,6 @@ $(document).ready(function () {
     nav: true,
     navText: ['<i class="material-icons" style="font-size:60px; color:white">keyboard_arrow_left</i>', '<i class="material-icons" style="font-size:60px; color:white">chevron_right</i>']
   });
-  $.post('https://graph.facebook.com', {
-    id: '<?php echo $url; ?>',
-    scrape: true
-  }, function (response) {
-    console.log(response);
-  });
-});
-
-window.fbAsyncInit = function () {
-  FB.init({
-    appId: '1931467720459909',
-    status: true,
-    cookie: true,
-    xfbml: true
-  });
-};
-
-(function (d, debug) {
-  var js,
-      id = 'facebook-jssdk',
-      ref = d.getElementsByTagName('script')[0];
-
-  if (d.getElementById(id)) {
-    return;
-  }
-
-  js = d.createElement('script');
-  js.id = id;
-  js.async = true;
-  js.src = "//connect.facebook.net/en_US/all" + (debug ? "/debug" : "") + ".js";
-  ref.parentNode.insertBefore(js, ref);
-})(document,
-/*debug*/
-false);
-
-function postToFeed(title, desc, url, image) {
-  var obj = {
-    method: 'feed',
-    link: url,
-    picture: image,
-    name: title,
-    description: desc
-  };
-
-  function callback(response) {}
-
-  FB.ui(obj, callback);
-}
-
-$('.btnShare').click(function () {
-  elem = $(this);
-  postToFeed(elem.data('title'), elem.data('desc'), elem.prop('href'), elem.data('image'));
-  return false;
 });
 var prevScrollpos = window.pageYOffset;
 

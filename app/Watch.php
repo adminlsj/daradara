@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Watch extends Model
 {
 	protected $fillable = [
-        'genre', 'category', 'title', 'imgur',
+        'id', 'genre', 'category', 'title', 'description', 'imgur',
     ];
 }

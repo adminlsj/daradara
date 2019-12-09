@@ -40,21 +40,43 @@ class BlogController extends Controller
     }
 
     public function watch(Request $request){
-        /*$id = 810;
+        /*$id = 1226;
+        $genre = 'anime';
+        $category = 'zdxcxqxg';
+        $title = '在地下城尋求邂逅是否搞錯了什麼 第二季';
+        $created_at = new Carbon('2019-07-13 23:32:22');
         for ($i = 1; $i <= 12; $i++) { 
             $video = Blog::create([
                 'id' => $id,
-                'title' =>  '魔王大人、RETRY！【第'.$i.'話】',
-                'caption' => '魔王大人、RETRY！【第'.$i.'話】',
-                'genre' => 'anime',
-                'category' => 'mwdrretry',
-                'tags' => '魔王大人、RETRY！',
+                'title' =>  $title.'【第'.$i.'話】',
+                'caption' => $title.'【第'.$i.'話】',
+                'genre' => $genre,
+                'category' => $category,
+                'tags' => $title,
                 'hd' => 'https://archive.org/download/sqzw_11/SQZW0'.$i.'.mp4',
                 'sd' => 'https://archive.org/download/sqzw_11/SQZW0'.$i.'.mp4',
-                'imgur' => '0aFSu68',
+                'imgur' => 'pending',
                 'views' => 100000,
                 'duration' => 0,
+                'created_at' => $created_at,
             ]);
+            $created_at = $created_at->addDays(7);
+            $id++;
+        }
+        $watch = Watch::create([
+            'id' => 71,
+            'genre' => $genre,
+            'category' => $category,
+            'title' => $title,
+            'description' => '',
+            'imgur' => '',
+        ]);*/
+
+        /*$id = 1183;
+        $modify = Blog::where('id', '>=', 1189)->get();
+        foreach ($modify as $video) {
+            $video->id = $id;
+            $video->save();
             $id++;
         }*/
 

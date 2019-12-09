@@ -10115,6 +10115,11 @@ a > i {
   max-width: 500px;
 }
 
+.mobile-container {
+  width: 80%;
+  margin: 0 auto;
+}
+
 .watch-index {
   width: 80%;
   margin: 0 auto;
@@ -10244,11 +10249,6 @@ a > i {
   margin-top: 60px;
 }
 
-.mobile-container {
-  width: 80%;
-  margin: 0 auto;
-}
-
 .video-mobile-container {
   padding: 0px 15px;
 }
@@ -10324,12 +10324,6 @@ a > i {
 }
 
 @media (min-width: 1500px) {
-  .mobile-container {
-    width: 1500px;
-    margin: 0 auto;
-    overflow-x: hidden;
-  }
-
   .responsive-frame {
     width: 1500px;
     margin: 0 auto;
