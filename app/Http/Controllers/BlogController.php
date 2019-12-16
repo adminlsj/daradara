@@ -40,11 +40,11 @@ class BlogController extends Controller
     }
 
     public function watch(Request $request){
-        /*$id = 1226;
-        $genre = 'anime';
-        $category = 'zdxcxqxg';
-        $title = '在地下城尋求邂逅是否搞錯了什麼 第二季';
-        $created_at = new Carbon('2019-07-13 23:32:22');
+        /*$id = 1261;
+        $genre = 'variety';
+        $category = 'produce101';
+        $title = 'PRODUCE 101 JAPAN日版';
+        $created_at = new Carbon('2019-09-26 19:10:42');
         for ($i = 1; $i <= 12; $i++) { 
             $video = Blog::create([
                 'id' => $id,
@@ -58,13 +58,14 @@ class BlogController extends Controller
                 'imgur' => 'pending',
                 'views' => 100000,
                 'duration' => 0,
+                'outsource' => false,
                 'created_at' => $created_at,
             ]);
             $created_at = $created_at->addDays(7);
             $id++;
         }
         $watch = Watch::create([
-            'id' => 71,
+            'id' => 73,
             'genre' => $genre,
             'category' => $category,
             'title' => $title,
