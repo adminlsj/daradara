@@ -63,13 +63,5 @@
               enable_page_level_ads: true
          });
     </script>
-
-    <!-- Start Alexa Certify Javascript -->
-    <script type="text/javascript">
-    _atrk_opts = { atrk_acct:"4w4+t1FYxz20cv", domain:"laughseejapan.com",dynamic: true};
-    (function() { var as = document.createElement('script'); as.type = 'text/javascript'; as.async = true; as.src = "https://certify-js.alexametrics.com/atrk.js"; var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(as, s); })();
-    </script>
-    <noscript><img src="https://certify.alexametrics.com/atrk.gif?account=4w4+t1FYxz20cv" style="display:none" height="1" width="1" alt="" /></noscript>
-    <!-- End Alexa Certify Javascript -->  
 </body>
 </html>
