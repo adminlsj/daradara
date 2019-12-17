@@ -40,12 +40,12 @@ class BlogController extends Controller
     }
 
     public function watch(Request $request){
-        /*$id = 1261;
-        $genre = 'variety';
-        $category = 'produce101';
-        $title = 'PRODUCE 101 JAPAN日版';
-        $created_at = new Carbon('2019-09-26 19:10:42');
-        for ($i = 1; $i <= 12; $i++) { 
+        /*$id = 1290;
+        $genre = 'anime';
+        $category = 'hdzj';
+        $title = '海盜戰記 Vinland Saga';
+        $created_at = new Carbon('2019-07-07 19:54:10');
+        for ($i = 1; $i <= 22; $i++) { 
             $video = Blog::create([
                 'id' => $id,
                 'title' =>  $title.'【第'.$i.'話】',
@@ -58,14 +58,14 @@ class BlogController extends Controller
                 'imgur' => 'pending',
                 'views' => 100000,
                 'duration' => 0,
-                'outsource' => false,
+                'outsource' => true,
                 'created_at' => $created_at,
             ]);
             $created_at = $created_at->addDays(7);
             $id++;
         }
         $watch = Watch::create([
-            'id' => 73,
+            'id' => 74,
             'genre' => $genre,
             'category' => $category,
             'title' => $title,
@@ -752,8 +752,7 @@ class BlogController extends Controller
 
     public function policy()
     {
-        $category = 'japan';
-        return view('layouts.policy', compact('category'));
+        return view('layouts.policy');
     }
 
     public function sendMail(String $status)

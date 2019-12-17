@@ -1,5 +1,5 @@
 @if ($video->outsource)
-  <div class="aspect-ratio">
+  <div class="aspect-ratio" style="background-color: black">
       <iframe src="{{ $video->sd }}?autoplay-mute=true&queue-enable=false&quality=480&byline=false&portrait=false&title=false" border="0" frameborder="0" framespacing="0" allowfullscreen allow="autoplay" autostart="true"></iframe>
   </div>
 @else
