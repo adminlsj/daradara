@@ -1,6 +1,6 @@
 @if ($video->outsource)
   <div class="aspect-ratio" style="background-color: black">
-      <iframe src="{{ $video->sd }}?autoplay-mute=true&queue-enable=false&quality=480&byline=false&portrait=false&title=false" border="0" frameborder="0" framespacing="0" allowfullscreen allow="autoplay" autostart="true"></iframe>
+      <iframe src="{{ $video->sd }}" border="0" frameborder="0" framespacing="0" allowfullscreen allow="autoplay" autostart="true"></iframe>
   </div>
 @else
   <script src="https://vjs.zencdn.net/7.5.5/video.js"></script>

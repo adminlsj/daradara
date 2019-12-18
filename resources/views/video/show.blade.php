@@ -19,8 +19,11 @@
 			     (adsbygoogle = window.adsbygoogle || []).push({});
 			</script>
 	    </div>
-	    <div id="sidebar-results"><!-- results appear here --></div>
-	    <div style="text-align: center" class="ajax-loading"><img src="https://s3.amazonaws.com/twobayjobs/system/loading.gif"/></div>
+	    @foreach ($videos as $video)
+		    <div>
+		    	@include('video.singleRelatedPost')
+	    	</div>
+	    @endforeach
 	</div>
 </div>
 @endsection

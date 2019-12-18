@@ -40,6 +40,30 @@ class BlogController extends Controller
     }
 
     public function watch(Request $request){
+        /*$id = 1360;
+        $genre = 'variety';
+        $category = 'lddtz';
+        $created_at = new Carbon('2019-01-12 14:47:15');
+        for ($i = 1; $i <= 50; $i++) { 
+            $video = Blog::create([
+                'id' => $id,
+                'title' =>  $created_at->format('Y.m.d').' 嵐的大挑戰 / 交給嵐吧',
+                'caption' => $created_at->format('Y.m.d').' 嵐的大挑戰 / 交給嵐吧',
+                'genre' => $genre,
+                'category' => $category,
+                'tags' => '嵐的大挑戰 交給嵐吧',
+                'hd' => 'https://archive.org/download/sqzw_11/SQZW0'.$i.'.mp4',
+                'sd' => 'https://archive.org/download/sqzw_11/SQZW0'.$i.'.mp4',
+                'imgur' => 'pending',
+                'views' => 100000,
+                'duration' => 0,
+                'outsource' => false,
+                'created_at' => $created_at,
+            ]);
+            $created_at = $created_at->addDays(7);
+            $id++;
+        }*/
+
         /*$id = 1290;
         $genre = 'anime';
         $category = 'hdzj';
@@ -132,17 +156,6 @@ class BlogController extends Controller
 
     public function trending(Request $request){
         if ($request->has('v') && $request->v != 'null') {
-            if (!($request->ajax())) {
-                $request->session()->forget('seed');
-            }
-            if (!$request->session()->has('seed')) {
-                $seed = mt_rand(-1*10000000, 1*10000000) / 10000000;
-                $request->session()->put('seed', $seed);
-            }
-            $seed = $request->session()->pull('seed');
-            $request->session()->put('seed', $seed);
-            DB::select('SELECT setseed('.$seed.')');
-
             $video = Blog::find($request->v);
 
             $videosSelect = Blog::where('genre', '!=', 'blog')->where('id', '!=', $video->id)->inRandomOrder()->select('id', 'tags')->get()->toArray();
@@ -160,36 +173,18 @@ class BlogController extends Controller
                 return $b['score'] <=> $a['score'];
             });
 
-            $videosArray = [];
-            foreach ($rankings as $rank) {
-                array_push($videosArray, Blog::find($rank['id']));
+            $videos = [];
+            for ($i = 0; $i < 30; $i++) { 
+                array_push($videos, Blog::find($rankings[$i]['id']));
             }
 
-            $page = Input::get('page', 1); // Get the ?page=1 from the url
-            $perPage = 10; // Number of items per page
-            $offset = ($page * $perPage) - $perPage;
-
-            $videos = new LengthAwarePaginator(
-                array_slice($videosArray, $offset, $perPage, true), // Only grab the items we need
-                count($videosArray), // Total items
-                $perPage, // Items per page
-                $page, // Current page
-                ['path' => $request->url(), 'query' => $request->query()] // We need this so we can keep all old query parameters from the url
-            );
-
-            $html = $this->relatedLoadHTML($videos);
-            if ($request->ajax()) {
-                return $html;
-            }
-
-            $sideBlogsDesktop = Blog::where('category', 'video')->inRandomOrder()->limit(3)->get();
             $current_blog = $video;
             $fb_title = $video->title;
 
             $video->views++;
             $video->save();
 
-            return view('video.show', compact('video', 'videos', 'sideBlogsDesktop', 'current_blog', 'fb_title'));
+            return view('video.show', compact('video', 'videos', 'current_blog', 'fb_title'));
         } else {
             if ($request->has('g') && $request->g != 'null') {
                 $genre = $request->g;
