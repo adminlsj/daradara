@@ -737,6 +737,7 @@ a > i {
   color: #ffffff;
   cursor: pointer;
   user-select: none;
+  margin-left: -15px;
 }
 
 .select-items div {
@@ -945,11 +946,11 @@ a > i {
     }
 
     .watch-year-nav {
-      width: 24%;
+      width: 33.33%;
     }
 
     .watch-month-nav {
-      width: 19%;
+      width: 16.66%;
     }
 }
 
