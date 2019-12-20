@@ -9573,6 +9573,12 @@ input[type=text]:focus {
   color: gray;
 }
 
+.nav-tab-container-watch h4 {
+  font-size: 1em;
+  font-weight: 400;
+  color: white;
+}
+
 .nav-tab-active span {
   font-weight: 500 !important;
   color: #d84b6b !important;
@@ -10144,6 +10150,86 @@ a > i {
 .home-image-container {
   padding-left: 15px;
   padding-right: 15px;
+}
+
+/*the container must be positioned relative:*/
+
+.custom-select {
+  position: relative;
+  font-family: Arial;
+}
+
+.custom-select select {
+  display: none;
+  /*hide original SELECT element:*/
+}
+
+.select-selected {
+  background-color: #222222;
+}
+
+/*style the arrow inside the select element:*/
+
+.select-selected:after {
+  position: absolute;
+  content: "";
+  top: 4px;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-color: #fff transparent transparent transparent;
+}
+
+/*point the arrow upwards when the select box is open (active):*/
+
+.select-selected.select-arrow-active:after {
+  border-color: transparent transparent #fff transparent;
+  top: -2px;
+}
+
+/*style the items (options), including the selected item:*/
+
+.select-selected {
+  color: #ffffff;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.select-items div {
+  color: #ffffff;
+  border: 1px solid transparent;
+  padding: 10px 0px;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+/*style items (options):*/
+
+.select-items {
+  position: absolute;
+  background-color: #222222;
+  top: calc(100% + 10px);
+  left: 0;
+  right: 0;
+  z-index: 99;
+}
+
+/*hide the items when the select box is closed:*/
+
+.select-hide {
+  display: none;
+}
+
+.select-items div:hover,
+.same-as-selected {
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 @-webkit-keyframes slide {

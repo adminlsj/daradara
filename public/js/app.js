@@ -44910,21 +44910,6 @@ $('[id=toggleVideoDescription]').click(function (e) {
 $('#search-submit-btn').click(function (e) {
   $("#search-form").submit();
 });
-$(document).ready(function () {
-  $(".blog-carousel").owlCarousel({
-    items: 1,
-    autoplay: true,
-    autoPlayTimeout: 5000,
-    itemsDesktop: [1199, 1],
-    itemsDesktopSmall: [979, 1],
-    itemsTablet: [768, 1],
-    itemsMobile: [479, 1],
-    loop: true,
-    dots: false,
-    nav: true,
-    navText: ['<i class="material-icons" style="font-size:60px; color:white">keyboard_arrow_left</i>', '<i class="material-icons" style="font-size:60px; color:white">chevron_right</i>']
-  });
-});
 var prevScrollpos = window.pageYOffset;
 
 window.onscroll = function () {

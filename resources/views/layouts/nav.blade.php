@@ -1,14 +1,14 @@
-<nav style="background-color: {{ Request::is('*watch*') ? '#222222' : 'white' }}" id="scroll-hide-nav" >
-  <div style="width: 80%; max-width: 1200px; background-color: {{ Request::is('*watch*') ? '#222222' : 'white' }}" class="container-fluid responsive-frame">
-    <div style="background-color: {{ Request::is('*watch*') ? '#222222' : 'white' }}">
+<nav style="background-color: {{ Request::is('*watch*') && $is_program ? '#222222' : 'white' }}" id="scroll-hide-nav" >
+  <div style="width: 80%; max-width: 1200px; background-color: {{ Request::is('*watch*') && $is_program ? '#222222' : 'white' }}" class="container-fluid responsive-frame">
+    <div style="background-color: {{ Request::is('*watch*') && $is_program ? '#222222' : 'white' }}">
       <a href="/">
-	        <img src="{{ Request::is('*watch*') ? 'https://i.imgur.com/xSMGFWh.png' : 'https://i.imgur.com/M8tqx5K.png' }}" style="margin-top: -6px;" height="30" alt="LaughSeeJapan 娛見日本">
+	        <img src="{{ Request::is('*watch*') && $is_program ? 'https://i.imgur.com/xSMGFWh.png' : 'https://i.imgur.com/M8tqx5K.png' }}" style="margin-top: -6px;" height="30" alt="娛見日本 LaughSeeJapan">
 	    </a>
 
 	    <a style="font-size: 25px; line-height: 50px;" href="/"> </a>
 
-      <a class="pull-right" style="color: {{ Request::is('*watch*') ? 'white' : 'gray' }}; padding: 0px 0px 0px 15px;" href="/"><i style="font-size: 25px; vertical-align:middle; margin-bottom: -22.5px" class="material-icons">account_circle</i></a>
-      <a id="toggleSearchBar" class="pull-right" style="color: {{ Request::is('*watch*') ? 'white' : 'gray' }}; padding: 0px 0px 15px 15px; cursor: pointer;"><i style="font-size: 25px; vertical-align:middle; margin-bottom: -22.5px" class="material-icons">search</i></a>
+      <a class="pull-right" style="color: {{ Request::is('*watch*') && $is_program ? 'white' : 'gray' }}; padding: 0px 0px 0px 15px;" href="/"><i style="font-size: 25px; vertical-align:middle; margin-bottom: -22.5px" class="material-icons">account_circle</i></a>
+      <a id="toggleSearchBar" class="pull-right" style="color: {{ Request::is('*watch*') && $is_program ? 'white' : 'gray' }}; padding: 0px 0px 15px 15px; cursor: pointer;"><i style="font-size: 25px; vertical-align:middle; margin-bottom: -22.5px" class="material-icons">search</i></a>
     </div>
   </div>
 </nav>
@@ -25,31 +25,12 @@
   </div>
 </nav>
 
-<nav style="background-color: white; margin-top: 50px; {{ Request::is('*trending*') && !Request::has('v') ? '' : 'display:none;' }}" id="scroll-hide-nav2" >
-  <div style="width: 80%; max-width: 1200px; background-color: {{ Request::is('*watch*') ? '#222222' : 'white' }}" class="container-fluid responsive-frame">
-    <div class="nav-tab-container" style="background-color: white;">
-      <a href="{{ route('video.trending') }}" style="width: 25%; float:left; text-align: center; text-decoration: none;">
-        <h4 class="{{ Request::is('*trending*') && !Request::has('g') ? 'nav-tab-active' : '' }}"><span>&nbsp;全部&nbsp;</span></h4>
-      </a>
-      <a href="{{ route('video.trending') }}?g=variety" style="width: 25%; float:left; text-align: center; text-decoration: none;">
-        <h4 class="{{ Request::has('g') && Request::get('g') == 'variety' ? 'nav-tab-active' : '' }}"><span>&nbsp;綜藝&nbsp;</span></h4>
-      </a>
-      <a href="{{ route('video.trending') }}?g=drama" style="width: 25%; float:left; text-align: center; text-decoration: none;">
-        <h4 class="{{ Request::has('g') && Request::get('g') == 'drama' ? 'nav-tab-active' : '' }}"><span>&nbsp;日劇&nbsp;</span></h4>
-      </a>
-      <a href="{{ route('video.trending') }}?g=anime" style="width: 25%; float:left; text-align: center; text-decoration: none;">
-        <h4 class="{{ Request::has('g') && Request::get('g') == 'anime' ? 'nav-tab-active' : '' }}"><span>&nbsp;動漫&nbsp;</span></h4>
-      </a>
-    </div>
-  </div>
-</nav>
-
 <div class="navbar">
   <a href="/" class="{{ Request::is('/') ? 'active' : ''}}">
     <i style="font-size: 25px;" class="material-icons">home</i>
     <span style="font-size: 12px; position: fixed; bottom: 0; padding-bottom: 4px; color: inherit;">主頁</span>
   </a>
-  <a href="{{ route('video.trending') }}" class="{{ Request::is('*trending*') ? 'active' : ''}}">
+  <a href="{{ route('video.rank') }}" class="{{ Request::is('*rank*') ? 'active' : ''}}">
     <i style="font-size: 25px;" class="material-icons">whatshot</i>
     <span style="font-size: 12px; position: fixed; bottom: 0; padding-bottom: 4px; color: inherit;">熱門</span>
   </a>
@@ -57,11 +38,11 @@
     <i style="font-size: 25px;" class="material-icons">live_tv</i>
     <span style="font-size: 12px; position: fixed; bottom: 0; padding-bottom: 4px; color: inherit;">綜藝</span>
   </a>
-  <a href="{{ route('video.watch') }}?g=drama" class="{{ isset($genre) && $genre == 'drama' ? 'active' : ''}}">
+  <a href="{{ route('video.watch') }}?g=drama&y=2019" class="{{ isset($genre) && $genre == 'drama' ? 'active' : ''}}">
     <i style="font-size: 25px;" class="material-icons">movie_filter</i>
     <span style="font-size: 12px; position: fixed; bottom: 0; padding-bottom: 4px; color: inherit;">日劇</span>
   </a>
-  <a href="{{ route('video.watch') }}?g=anime" class="{{ isset($genre) && $genre == 'anime' ? 'active' : ''}}">
+  <a href="{{ route('video.watch') }}?g=anime&y=2019" class="{{ isset($genre) && $genre == 'anime' ? 'active' : ''}}">
     <i style="font-size: 25px;" class="material-icons">palette</i>
     <span style="font-size: 12px; position: fixed; bottom: 0; padding-bottom: 4px; color: inherit;">動漫</span>
   </a>

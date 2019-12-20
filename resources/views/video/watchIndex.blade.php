@@ -1,8 +1,42 @@
 @extends('layouts.app')
 
 @section('content')
+
+<nav style="background-color: #222222; margin-top: 50px; {{ Request::has('g') && !(Request::get('g') == 'variety') ? '' : 'display:none;' }}" id="scroll-hide-nav2" >
+  <div style="width: 80%; max-width: 1200px; background-color: #222222" class="container-fluid responsive-frame">
+    <div class="nav-tab-container-watch" style="background-color: white;">
+      <a style="width: 20%; float:left; text-align: center; text-decoration: none;">
+        <h4>
+          <div class="custom-select">
+            <select id="watch-year-select">
+              <option {{ Request::has('y') && Request::get('y') == '2019' ? 'selected' : '' }} value="2019">2019年</option>
+              <option {{ Request::has('y') && Request::get('y') == '2019' ? 'selected' : '' }} value="2019">2019年</option>
+              <option {{ Request::has('y') && Request::get('y') == '2018' ? 'selected' : '' }} value="2018">2018年</option>
+              <option {{ Request::has('y') && Request::get('y') == '2017' ? 'selected' : '' }} value="2017">2017年</option>
+              <option {{ Request::has('y') && Request::get('y') == '2016' ? 'selected' : '' }} value="2016">2016年</option>
+              <option {{ Request::has('y') && Request::get('y') == '2015' ? 'selected' : '' }} value="2015">2015年</option>
+            </select>
+          </div>
+        </h4>
+      </a>
+      <a href="{{ route('video.watch') }}?g={{ Request::get('g') }}&y={{ Request::get('y') }}&m=1" style="width: 20%; float:left; text-align: center; text-decoration: none;">
+        <h4 class="{{ Request::has('m') && Request::get('m') == '1' ? 'nav-tab-active' : '' }}"><span>&nbsp;1月&nbsp;</span></h4>
+      </a>
+      <a href="{{ route('video.watch') }}?g={{ Request::get('g') }}&y={{ Request::get('y') }}&m=4" style="width: 20%; float:left; text-align: center; text-decoration: none;">
+        <h4 class="{{ Request::has('m') && Request::get('m') == '4' ? 'nav-tab-active' : '' }}"><span>&nbsp;4月&nbsp;</span></h4>
+      </a>
+      <a href="{{ route('video.watch') }}?g={{ Request::get('g') }}&y={{ Request::get('y') }}&m=7" style="width: 20%; float:left; text-align: center; text-decoration: none;">
+        <h4 class="{{ Request::has('m') && Request::get('m') == '7' ? 'nav-tab-active' : '' }}"><span>&nbsp;7月&nbsp;</span></h4>
+      </a>
+      <a href="{{ route('video.watch') }}?g={{ Request::get('g') }}&y={{ Request::get('y') }}&m=10" style="width: 20%; float:left; text-align: center; text-decoration: none;">
+        <h4 class="{{ Request::has('m') && Request::get('m') == '10' ? 'nav-tab-active' : '' }}"><span>&nbsp;10月&nbsp;</span></h4>
+      </a>
+    </div>
+  </div>
+</nav>
+
 <div class="watch-index">
-	<div style="margin: 0px 10px; padding-top: 10px;" class="row">
+	<div style="margin: 0px 10px; padding-top: {{ Request::is('*watch*') && Request::has('g') && (Request::get('g') == 'drama' || Request::get('g') == 'anime') ? '45px' : '10px' }}" class="row">
 		@foreach ($videos as $watch => $video)
 			<div class="{{ $genre == 'variety' ? 'watch-variety' : 'watch-single' }}">
 			    <a style="text-decoration: none;" href="{{ route('video.watch') }}?v={{ $genre == 'variety' ? $video->last()->id : $video->first()->id }}">
@@ -17,4 +51,80 @@
 		@endforeach
 	</div>
 </div>
+
+<script>
+  var x, i, j, selElmnt, a, b, c;
+  /*look for any elements with the class "custom-select":*/
+  x = document.getElementsByClassName("custom-select");
+  for (i = 0; i < x.length; i++) {
+    selElmnt = x[i].getElementsByTagName("select")[0];
+    /*for each element, create a new DIV that will act as the selected item:*/
+    a = document.createElement("DIV");
+    a.setAttribute("class", "select-selected");
+    a.innerHTML = selElmnt.options[selElmnt.selectedIndex].innerHTML;
+    x[i].appendChild(a);
+    /*for each element, create a new DIV that will contain the option list:*/
+    b = document.createElement("DIV");
+    b.setAttribute("class", "select-items select-hide");
+    for (j = 1; j < selElmnt.length; j++) {
+      /*for each option in the original select element,
+      create a new DIV that will act as an option item:*/
+      c = document.createElement("DIV");
+      c.innerHTML = selElmnt.options[j].innerHTML;
+      c.addEventListener("click", function(e) {
+          /*when an item is clicked, update the original select box,
+          and the selected item:*/
+          var y, i, k, s, h;
+          s = this.parentNode.parentNode.getElementsByTagName("select")[0];
+          h = this.parentNode.previousSibling;
+          for (i = 0; i < s.length; i++) {
+            if (s.options[i].innerHTML == this.innerHTML) {
+              s.selectedIndex = i;
+              h.innerHTML = this.innerHTML;
+              y = this.parentNode.getElementsByClassName("same-as-selected");
+              for (k = 0; k < y.length; k++) {
+                y[k].removeAttribute("class");
+              }
+              this.setAttribute("class", "same-as-selected");
+              break;
+            }
+          }
+          h.click();
+          window.location.href = "{{ route('video.watch') }}?g={{ Request::get('g') }}&y=" + s.options[i].value;
+      });
+      b.appendChild(c);
+    }
+    x[i].appendChild(b);
+    a.addEventListener("click", function(e) {
+      /*when the select box is clicked, close any other select boxes,
+      and open/close the current select box:*/
+      e.stopPropagation();
+      closeAllSelect(this);
+      this.nextSibling.classList.toggle("select-hide");
+      this.classList.toggle("select-arrow-active");
+    });
+  }
+  function closeAllSelect(elmnt) {
+    /*a function that will close all select boxes in the document,
+    except the current select box:*/
+    var x, y, i, arrNo = [];
+    x = document.getElementsByClassName("select-items");
+    y = document.getElementsByClassName("select-selected");
+    for (i = 0; i < y.length; i++) {
+      if (elmnt == y[i]) {
+        arrNo.push(i)
+      } else {
+        y[i].classList.remove("select-arrow-active");
+      }
+    }
+    for (i = 0; i < x.length; i++) {
+      if (arrNo.indexOf(i)) {
+        x[i].classList.add("select-hide");
+      }
+    }
+  }
+  /*if the user clicks anywhere outside the select box,
+  then close all select boxes:*/
+  document.addEventListener("click", closeAllSelect);
+</script>
 @endsection

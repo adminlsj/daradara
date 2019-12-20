@@ -36,10 +36,19 @@ class BlogController extends Controller
                      ->whereDate('created_at', '>=', Carbon::now()->subMonths(12))
                      ->where('views', '>=', '200000')->inRandomOrder()->limit(10)->get();
 
-        return view('video.home', compact('videos', 'variety', 'drama', 'anime'));
+        $current_blog['category'] = 'video';
+
+        return view('video.home', compact('videos', 'variety', 'drama', 'anime', 'current_blog'));
     }
 
     public function watch(Request $request){
+        /*$watches = Watch::all();
+        foreach ($watches as $watch) {
+            $video = Blog::where('category', $watch->category)->orderBy('created_at', 'asc')->first();
+            $watch->created_at = $video->created_at;
+            $watch->save();
+        }*/
+
         /*$id = 1360;
         $genre = 'variety';
         $category = 'lddtz';
@@ -64,19 +73,19 @@ class BlogController extends Controller
             $id++;
         }*/
 
-        /*$id = 1290;
+        /*$id = 1682;
         $genre = 'anime';
-        $category = 'hdzj';
-        $title = '海盜戰記 Vinland Saga';
-        $created_at = new Carbon('2019-07-07 19:54:10');
-        for ($i = 1; $i <= 22; $i++) { 
+        $category = 'gfsn';
+        $title = '高分少女 第二季';
+        $created_at = new Carbon('2019-10-05 17:21:35');
+        for ($i = 1; $i <= 8; $i++) { 
             $video = Blog::create([
                 'id' => $id,
                 'title' =>  $title.'【第'.$i.'話】',
                 'caption' => $title.'【第'.$i.'話】',
                 'genre' => $genre,
                 'category' => $category,
-                'tags' => $title,
+                'tags' => '高分少女',
                 'hd' => 'https://archive.org/download/sqzw_11/SQZW0'.$i.'.mp4',
                 'sd' => 'https://archive.org/download/sqzw_11/SQZW0'.$i.'.mp4',
                 'imgur' => 'pending',
@@ -89,13 +98,13 @@ class BlogController extends Controller
             $id++;
         }
         $watch = Watch::create([
-            'id' => 74,
+            'id' => 97,
             'genre' => $genre,
             'category' => $category,
             'title' => $title,
             'description' => '',
             'imgur' => '',
-        ]);*/
+        ]);
 
         /*$id = 1183;
         $modify = Blog::where('id', '>=', 1189)->get();
@@ -107,118 +116,134 @@ class BlogController extends Controller
 
         if ($request->has('v') && $request->v != 'null') {
             $video = Blog::find($request->v);
-            $videos = Blog::where('category', $video->category)->orderBy('created_at', 'desc')->get();
 
-            $query = Blog::where('category', $video->category)->orderBy('created_at', 'asc')->pluck('id')->toArray();
-            $current = array_search($video->id, $query);
-            while(key($query) !== null && key($query) !== $current) next($query);
+            if ($video->category == 'video') {
+                $videosSelect = Blog::where('genre', '!=', 'blog')->where('id', '!=', $video->id)->inRandomOrder()->select('id', 'tags')->get()->toArray();
+                $rankings = [];
+                foreach ($videosSelect as $videoSelect) {
+                    $score = 0;
+                    foreach ($video->tags() as $tag) {
+                        if (strpos($videoSelect['tags'], $tag) !== false) {
+                            $score++;
+                        }
+                    }
+                    array_push($rankings, ['score' => $score, 'id' => $videoSelect['id']]);
+                }
+                usort($rankings, function ($a, $b) {
+                    return $b['score'] <=> $a['score'];
+                });
 
-            $prev = 0; $next = 0;
-            if ($this->has_prev($query)) {
-                $prev = prev($query);
-                next($query);
+                $videos = [];
+                for ($i = 0; $i < 30; $i++) { 
+                    array_push($videos, Blog::find($rankings[$i]['id']));
+                }
+
+                $current_blog = $video;
+                $fb_title = $video->title;
+
+                $video->views++;
+                $video->save();
+
+                $is_program = false;
+
+                return view('video.show', compact('video', 'videos', 'current_blog', 'fb_title', 'is_program'));
+
             } else {
-                $prev = false;
+                $videos = Blog::where('category', $video->category)->orderBy('created_at', 'desc')->get();
+
+                $query = Blog::where('category', $video->category)->orderBy('created_at', 'asc')->pluck('id')->toArray();
+                $current = array_search($video->id, $query);
+                while(key($query) !== null && key($query) !== $current) next($query);
+
+                $prev = 0; $next = 0;
+                if ($this->has_prev($query)) {
+                    $prev = prev($query);
+                    next($query);
+                } else {
+                    $prev = false;
+                }
+                if ($this->has_next($query)) {
+                    $next = next($query);
+                } else {
+                    $next = false;
+                }
+
+                $current_blog = $video;
+                $fb_title = $video->title;
+
+                $video->views++;
+                $video->save();
+                $current_id = $video->id;
+
+                $genre = $video->genre;
+
+                $watch = false;
+                if ($video->category != 'video') {
+                    $watch = Watch::where('category', $video->category)->first();
+                }
+
+                $is_program = true;
+
+                return view('video.showWatch', compact('genre', 'video', 'videos', 'current_blog', 'fb_title', 'current_id', 'prev', 'next', 'watch', 'is_program'));
             }
-            if ($this->has_next($query)) {
-                $next = next($query);
-            } else {
-                $next = false;
-            }
-
-            $current_blog = $video;
-            $fb_title = $video->title;
-
-            $video->views++;
-            $video->save();
-            $current_id = $video->id;
-
-            $genre = $video->genre;
-
-            $watch = false;
-            if ($video->category != 'video') {
-                $watch = Watch::where('category', $video->category)->first();
-            }
-
-            return view('video.showWatch', compact('genre', 'video', 'videos', 'current_blog', 'fb_title', 'current_id', 'prev', 'next', 'watch'));
         } else {
             $genre = $request->has('g') && $request->g != 'null' ? $request->g : 'variety';
-            $watches = Watch::where('genre', $genre)->get();
+            if ($genre == 'variety') {
+                $watches = Watch::where('genre', $genre)->get();
+            } else {
+                $year = $request->has('y') && $request->y != 'null' ? $request->y : '2019';
+                if ($request->has('m') && $request->m != 'null') {
+                    $watches = Watch::where('genre', $genre)->whereYear('created_at', $year)->whereMonth('created_at', $request->m)->get();
+                } else {
+                    $watches = Watch::where('genre', $genre)->whereYear('created_at', $year)->get();
+                }
+            }
+            
             $videos = [];
             foreach ($watches as $watch) {
                 $firstVideo = Blog::where('category', $watch->category)->orderBy('created_at', 'asc')->get();
                 $videos[$watch->id] = $firstVideo;
             }
 
-            return view('video.watchIndex', compact('genre', 'videos'));
+            $is_program = true;
+
+            return view('video.watchIndex', compact('genre', 'videos', 'is_program'));
         }
     }
 
-    public function trending(Request $request){
-        if ($request->has('v') && $request->v != 'null') {
-            $video = Blog::find($request->v);
-
-            $videosSelect = Blog::where('genre', '!=', 'blog')->where('id', '!=', $video->id)->inRandomOrder()->select('id', 'tags')->get()->toArray();
-            $rankings = [];
-            foreach ($videosSelect as $videoSelect) {
-                $score = 0;
-                foreach ($video->tags() as $tag) {
-                    if (strpos($videoSelect['tags'], $tag) !== false) {
-                        $score++;
-                    }
-                }
-                array_push($rankings, ['score' => $score, 'id' => $videoSelect['id']]);
+    public function rank(Request $request){
+        if ($request->has('g') && $request->g != 'null') {
+            $genre = $request->g;
+            $months = 3;
+            switch ($genre) {
+                case 'variety':
+                    $months = 3;
+                    break;
+                case 'drama':
+                    $months = 12;
+                    break;
+                case 'anime':
+                    $months = 12;
+                    break;
+                default:
+                    $months = 3;
+                    break;
             }
-            usort($rankings, function ($a, $b) {
-                return $b['score'] <=> $a['score'];
-            });
-
-            $videos = [];
-            for ($i = 0; $i < 30; $i++) { 
-                array_push($videos, Blog::find($rankings[$i]['id']));
+            $videos = Blog::where('genre', $genre)->whereDate('created_at', '>=', Carbon::now()->subMonths($months))->orderBy('views', 'desc')->paginate(10);
+            $html = $this->rankLoadHTML($videos);
+            if ($request->ajax()) {
+                return $html;
             }
 
-            $current_blog = $video;
-            $fb_title = $video->title;
-
-            $video->views++;
-            $video->save();
-
-            return view('video.show', compact('video', 'videos', 'current_blog', 'fb_title'));
+            return view('video.rankIndex', compact('videos'));
         } else {
-            if ($request->has('g') && $request->g != 'null') {
-                $genre = $request->g;
-                $months = 3;
-                switch ($genre) {
-                    case 'variety':
-                        $months = 3;
-                        break;
-                    case 'drama':
-                        $months = 12;
-                        break;
-                    case 'anime':
-                        $months = 12;
-                        break;
-                    default:
-                        $months = 3;
-                        break;
-                }
-                $videos = Blog::where('genre', $genre)->whereDate('created_at', '>=', Carbon::now()->subMonths($months))->orderBy('views', 'desc')->paginate(10);
-                $html = $this->trendingLoadHTML($videos);
-                if ($request->ajax()) {
-                    return $html;
-                }
-
-                return view('video.trendingIndex', compact('videos'));
-            } else {
-                $videos = Blog::whereDate('created_at', '>=', Carbon::now()->subMonths(3))->orderBy('views', 'desc')->paginate(10);
-                $html = $this->trendingLoadHTML($videos);
-                if ($request->ajax()) {
-                    return $html;
-                }
-
-                return view('video.trendingIndex', compact('videos'));
+            $videos = Blog::whereDate('created_at', '>=', Carbon::now()->subMonths(3))->orderBy('views', 'desc')->paginate(10);
+            $html = $this->rankLoadHTML($videos);
+            if ($request->ajax()) {
+                return $html;
             }
+
+            return view('video.rankIndex', compact('videos'));
         }
     }
 
@@ -633,11 +658,11 @@ class BlogController extends Controller
         return $html;
     }
 
-    public function trendingLoadHTML($videos)
+    public function rankLoadHTML($videos)
     {
         $html = '';
         foreach ($videos as $video) {
-            $html .= view('video.trendingVideoPost', compact('video'));
+            $html .= view('video.rankVideoPost', compact('video'));
         }
         return $html;
     }

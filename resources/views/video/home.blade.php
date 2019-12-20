@@ -6,7 +6,7 @@
 		<div class="col-md-12">
 			<h4>
 				熱門推薦
-				<a href="{{ route('video.trending') }}" style="text-decoration: none; color: #323232;" class="pull-right">
+				<a href="{{ route('video.rank') }}" style="text-decoration: none; color: #323232;" class="pull-right">
 					<i style="color:#323232; vertical-align:middle; font-size: 1.4em; margin-top: -3px; margin-right: -3px;" class="material-icons">bar_chart</i>
 					排行榜
 					<i style="color:darkgray; vertical-align:middle; font-size: 1em; margin-top: -3px;" class="material-icons">arrow_forward_ios</i>
@@ -24,7 +24,7 @@
 		<div class="col-md-12">
 			<h4>
 				綜藝推薦
-				<a href="{{ route('video.trending') }}?g=variety" style="text-decoration: none; color: #323232;" class="pull-right">
+				<a href="{{ route('video.rank') }}?g=variety" style="text-decoration: none; color: #323232;" class="pull-right">
 					<i style="color:#323232; vertical-align:middle; font-size: 1.4em; margin-top: -3px; margin-right: -3px;" class="material-icons">bar_chart</i>
 					排行榜
 					<i style="color:darkgray; vertical-align:middle; font-size: 1em; margin-top: -3px;" class="material-icons">arrow_forward_ios</i>
@@ -42,7 +42,7 @@
 		<div class="col-md-12">
 			<h4>
 				日劇推薦
-				<a href="{{ route('video.trending') }}?g=drama" style="text-decoration: none; color: #323232;" class="pull-right">
+				<a href="{{ route('video.rank') }}?g=drama" style="text-decoration: none; color: #323232;" class="pull-right">
 					<i style="color:#323232; vertical-align:middle; font-size: 1.4em; margin-top: -3px; margin-right: -3px;" class="material-icons">bar_chart</i>
 					排行榜
 					<i style="color:darkgray; vertical-align:middle; font-size: 1em; margin-top: -3px;" class="material-icons">arrow_forward_ios</i>
@@ -60,7 +60,7 @@
 		<div class="col-md-12">
 			<h4>
 				動漫推薦
-				<a href="{{ route('video.trending') }}?g=anime" style="text-decoration: none; color: #323232;" class="pull-right">
+				<a href="{{ route('video.rank') }}?g=anime" style="text-decoration: none; color: #323232;" class="pull-right">
 					<i style="color:#323232; vertical-align:middle; font-size: 1.4em; margin-top: -3px; margin-right: -3px;" class="material-icons">bar_chart</i>
 					排行榜
 					<i style="color:darkgray; vertical-align:middle; font-size: 1em; margin-top: -3px;" class="material-icons">arrow_forward_ios</i>
