@@ -10232,13 +10232,7 @@ a > i {
   background-color: rgba(0, 0, 0, 0.1);
 }
 
-.watch-year-nav {
-  width: 20%;
-  float: left;
-  text-align: center;
-  text-decoration: none !important;
-}
-
+.watch-year-nav,
 .watch-month-nav {
   width: 20%;
   float: left;
