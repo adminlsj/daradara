@@ -25,6 +25,58 @@
   </div>
 </nav>
 
+<nav style="background-color: white; margin-top: 49px; {{ Request::is('*rank*') ? '' : 'display:none;' }}" id="scroll-hide-nav2" >
+  <div style="width: 80%; max-width: 1200px; background-color: {{ Request::is('*watch*') ? '#222222' : 'white' }}" class="container-fluid responsive-frame">
+    <div class="nav-tab-container" style="background-color: white;">
+      <a href="{{ route('video.rank') }}" style="width: 25%; float:left; text-align: center; text-decoration: none;">
+        <h4 class="{{ !Request::has('g') ? 'nav-tab-active' : '' }}"><span>&nbsp;全部&nbsp;</span></h4>
+      </a>
+      <a href="{{ route('video.rank') }}?g=variety" style="width: 25%; float:left; text-align: center; text-decoration: none;">
+        <h4 class="{{ Request::has('g') && Request::get('g') == 'variety' ? 'nav-tab-active' : '' }}"><span>&nbsp;綜藝&nbsp;</span></h4>
+      </a>
+      <a href="{{ route('video.rank') }}?g=drama" style="width: 25%; float:left; text-align: center; text-decoration: none;">
+        <h4 class="{{ Request::has('g') && Request::get('g') == 'drama' ? 'nav-tab-active' : '' }}"><span>&nbsp;日劇&nbsp;</span></h4>
+      </a>
+      <a href="{{ route('video.rank') }}?g=anime" style="width: 25%; float:left; text-align: center; text-decoration: none;">
+        <h4 class="{{ Request::has('g') && Request::get('g') == 'anime' ? 'nav-tab-active' : '' }}"><span>&nbsp;動漫&nbsp;</span></h4>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<nav style="background-color: #222222; margin-top: 49px; {{ Request::is('*watch*') && Request::has('g') && !(Request::get('g') == 'variety') ? '' : 'display:none;' }}" id="scroll-hide-nav3" >
+  <div style="width: 80%; max-width: 1200px; background-color: #222222" class="container-fluid responsive-frame">
+    <div class="nav-tab-container-watch" style="background-color: white;">
+      <a style="width: 20%; float:left; text-align: center; text-decoration: none;">
+        <h4>
+          <div class="custom-select">
+            <select id="watch-year-select">
+              <option {{ Request::has('y') && Request::get('y') == '2019' ? 'selected' : '' }} value="2019">2019年</option>
+              <option {{ Request::has('y') && Request::get('y') == '2019' ? 'selected' : '' }} value="2019">2019年</option>
+              <option {{ Request::has('y') && Request::get('y') == '2018' ? 'selected' : '' }} value="2018">2018年</option>
+              <option {{ Request::has('y') && Request::get('y') == '2017' ? 'selected' : '' }} value="2017">2017年</option>
+              <option {{ Request::has('y') && Request::get('y') == '2016' ? 'selected' : '' }} value="2016">2016年</option>
+              <option {{ Request::has('y') && Request::get('y') == '2015' ? 'selected' : '' }} value="2015">2015年</option>
+            </select>
+          </div>
+        </h4>
+      </a>
+      <a href="{{ route('video.watch') }}?g={{ Request::get('g') }}&y={{ Request::get('y') }}&m=1" style="width: 20%; float:left; text-align: center; text-decoration: none;">
+        <h4 class="{{ Request::has('m') && Request::get('m') == '1' ? 'nav-tab-active' : '' }}"><span>&nbsp;1月&nbsp;</span></h4>
+      </a>
+      <a href="{{ route('video.watch') }}?g={{ Request::get('g') }}&y={{ Request::get('y') }}&m=4" style="width: 20%; float:left; text-align: center; text-decoration: none;">
+        <h4 class="{{ Request::has('m') && Request::get('m') == '4' ? 'nav-tab-active' : '' }}"><span>&nbsp;4月&nbsp;</span></h4>
+      </a>
+      <a href="{{ route('video.watch') }}?g={{ Request::get('g') }}&y={{ Request::get('y') }}&m=7" style="width: 20%; float:left; text-align: center; text-decoration: none;">
+        <h4 class="{{ Request::has('m') && Request::get('m') == '7' ? 'nav-tab-active' : '' }}"><span>&nbsp;7月&nbsp;</span></h4>
+      </a>
+      <a href="{{ route('video.watch') }}?g={{ Request::get('g') }}&y={{ Request::get('y') }}&m=10" style="width: 20%; float:left; text-align: center; text-decoration: none;">
+        <h4 class="{{ Request::has('m') && Request::get('m') == '10' ? 'nav-tab-active' : '' }}"><span>&nbsp;10月&nbsp;</span></h4>
+      </a>
+    </div>
+  </div>
+</nav>
+
 <div class="navbar">
   <a href="/" class="{{ Request::is('/') ? 'active' : ''}}">
     <i style="font-size: 25px;" class="material-icons">home</i>

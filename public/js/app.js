@@ -44918,9 +44918,11 @@ window.onscroll = function () {
   if (prevScrollpos > currentScrollPos || currentScrollPos < 60) {
     document.getElementById("scroll-hide-nav").style.top = "0";
     document.getElementById("scroll-hide-nav2").style.top = "0";
+    document.getElementById("scroll-hide-nav3").style.top = "0";
   } else {
     document.getElementById("scroll-hide-nav").style.top = "-50px";
     document.getElementById("scroll-hide-nav2").style.top = "-50px";
+    document.getElementById("scroll-hide-nav3").style.top = "-50px";
   }
 
   prevScrollpos = currentScrollPos;
