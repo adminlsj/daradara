@@ -47,7 +47,7 @@
 <nav style="background-color: #222222; margin-top: 49px; {{ Request::is('*watch*') && Request::has('g') && !(Request::get('g') == 'variety') ? '' : 'display:none;' }}" id="scroll-hide-nav3" >
   <div style="width: 80%; max-width: 1200px; background-color: #222222" class="container-fluid responsive-frame">
     <div class="nav-tab-container-watch" style="background-color: white;">
-      <a style="width: 20%; float:left; text-align: center; text-decoration: none;">
+      <a class="watch-year-nav">
         <h4>
           <div class="custom-select">
             <select id="watch-year-select">
@@ -61,16 +61,16 @@
           </div>
         </h4>
       </a>
-      <a href="{{ route('video.watch') }}?g={{ Request::get('g') }}&y={{ Request::get('y') }}&m=1" style="width: 20%; float:left; text-align: center; text-decoration: none;">
+      <a class="watch-month-nav" href="{{ route('video.watch') }}?g={{ Request::get('g') }}&y={{ Request::get('y') }}&m=1">
         <h4 class="{{ Request::has('m') && Request::get('m') == '1' ? 'nav-tab-active' : '' }}"><span>&nbsp;1月&nbsp;</span></h4>
       </a>
-      <a href="{{ route('video.watch') }}?g={{ Request::get('g') }}&y={{ Request::get('y') }}&m=4" style="width: 20%; float:left; text-align: center; text-decoration: none;">
+      <a class="watch-month-nav" href="{{ route('video.watch') }}?g={{ Request::get('g') }}&y={{ Request::get('y') }}&m=4">
         <h4 class="{{ Request::has('m') && Request::get('m') == '4' ? 'nav-tab-active' : '' }}"><span>&nbsp;4月&nbsp;</span></h4>
       </a>
-      <a href="{{ route('video.watch') }}?g={{ Request::get('g') }}&y={{ Request::get('y') }}&m=7" style="width: 20%; float:left; text-align: center; text-decoration: none;">
+      <a class="watch-month-nav" href="{{ route('video.watch') }}?g={{ Request::get('g') }}&y={{ Request::get('y') }}&m=7">
         <h4 class="{{ Request::has('m') && Request::get('m') == '7' ? 'nav-tab-active' : '' }}"><span>&nbsp;7月&nbsp;</span></h4>
       </a>
-      <a href="{{ route('video.watch') }}?g={{ Request::get('g') }}&y={{ Request::get('y') }}&m=10" style="width: 20%; float:left; text-align: center; text-decoration: none;">
+      <a class="watch-month-nav" href="{{ route('video.watch') }}?g={{ Request::get('g') }}&y={{ Request::get('y') }}&m=10">
         <h4 class="{{ Request::has('m') && Request::get('m') == '10' ? 'nav-tab-active' : '' }}"><span>&nbsp;10月&nbsp;</span></h4>
       </a>
     </div>
