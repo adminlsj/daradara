@@ -10173,11 +10173,11 @@ a > i {
 .select-selected:after {
   position: absolute;
   content: "";
-  top: 4px;
-  right: 10px;
+  top: 5px;
   width: 0;
   height: 0;
-  border: 6px solid transparent;
+  margin-left: 3px;
+  border: 5px solid transparent;
   border-color: #fff transparent transparent transparent;
 }
 
@@ -10185,7 +10185,7 @@ a > i {
 
 .select-selected.select-arrow-active:after {
   border-color: transparent transparent #fff transparent;
-  top: -2px;
+  top: -1px;
 }
 
 /*style the items (options), including the selected item:*/
