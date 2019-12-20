@@ -198,7 +198,7 @@ class BlogController extends Controller
                     $watches = Watch::where('genre', $genre)->whereYear('created_at', $year)->get();
                 }
             }
-            
+
             $videos = [];
             foreach ($watches as $watch) {
                 $firstVideo = Blog::where('category', $watch->category)->orderBy('created_at', 'asc')->get();
@@ -649,11 +649,12 @@ class BlogController extends Controller
         return $html;
     }
 
-    public function relatedLoadHTML($videos)
+    public function searchLoadHTML($videos)
     {
         $html = '';
+        $is_program = false;
         foreach ($videos as $video) {
-            $html .= view('video.singleRelatedPost', compact('video'));
+            $html .= view('video.singleRelatedPost', compact('video', 'is_program'));
         }
         return $html;
     }
@@ -754,13 +755,12 @@ class BlogController extends Controller
             ['path' => $request->url(), 'query' => $request->query()] // We need this so we can keep all old query parameters from the url
         );
 
-        $html = $this->relatedLoadHTML($videos);
+        $html = $this->searchLoadHTML($videos);
         if ($request->ajax()) {
             return $html;
         }
 
-        $sideBlogsDesktop = Blog::where('genre', 'laughseejapan')->inRandomOrder()->limit(3)->get();
-        return view('video.search', compact('videos', 'sideBlogsDesktop', 'query'));
+        return view('video.search', compact('videos', 'query'));
     }
 
     public function contact()

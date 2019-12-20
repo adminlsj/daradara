@@ -8,14 +8,14 @@
         <meta property="og:description" content="{{ $current_blog->caption }}" />
         <meta property="og:image" content="https://i.imgur.com/{{ $current_blog->imgur }}h.png" />
 
-        <meta name="title" content="{{ $current_blog->title }} | 娛見日本">
+        <meta name="title" content="{{ $current_blog->title }} | 娛見日本 LaughSeeJapan">
         <title>{{ $current_blog->title }} | 娛見日本</title>
         <meta name="description" content="{{ $current_blog->caption }}">
     @else
-        <meta name="title" content="娛見日本 | 日本最強娛樂 | 日本最新綜藝">
-        <title>娛見日本 | 日本最強娛樂 | 日本最新綜藝</title>
+        <meta name="title" content="娛見日本 LaughSeeJapan | 日本最強娛樂 | 綜藝 | 日劇 | 動漫">
+        <title>娛見日本 LaughSeeJapan | 日本最強娛樂 | 綜藝 | 日劇 | 動漫</title>
         <meta name="description" 
-              content="日本最強娛樂，最新綜藝！從娛樂圈到綜藝圈，娛見日本包攬最新最全的日娛王道！從搞笑到感動，從笑梗到溫情，從寵物到家庭，這裡可以找到讓你大笑，讓你痛哭，讓你重拾失去的情感，讓你回歸最原始的自己！這裡是日本，最強娛樂，最新綜藝，以及人文與文化！">
+              content="日本最強娛樂，最新綜藝！從綜藝到日劇和動漫，娛見日本 LaughSeeJapan 包攬最新最全的日娛王道！從搞笑到感動，從笑梗到溫情，從寵物到家庭，這裡可以找到讓你大笑，讓你痛哭，讓你重拾失去的情感，讓你回歸最原始的自己！這裡是日本，最強娛樂，最新綜藝，以及人文與文化！">
     @endif
 
     <meta charset="utf-8">
@@ -23,6 +23,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="google-site-verification" content="gNa13GHr2gcHfxADuqMpBcL2XwEVTF1INmpmxir2fxY" />
     <link rel="shortcut icon" type="image/x-icon" href="https://s3.amazonaws.com/twobayjobs/system/intro/browser-icon.ico"/>
+    <link rel="canonical" href="https://www.laughseejapan.com/" />
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
