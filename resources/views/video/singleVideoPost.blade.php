@@ -1,4 +1,4 @@
-<a href="{{ route('video.trending') }}?v={{ $video->id }}">
+<a href="{{ route('video.watch') }}?v={{ $video->id }}">
   <img src="https://i.imgur.com/{{ $video->imgur }}l.png" style="width:100%; height:100%;" alt="{{ $video->title }}">
 </a>
 
@@ -10,7 +10,7 @@
         </a>
     </div>
     <div>
-        <a href="{{ route('video.trending') }}?v={{ $video->id }}">
+        <a href="{{ route('video.watch') }}?v={{ $video->id }}">
           <h4 class="video-title">{{ $video->title }}</h4>
         </a>
 
