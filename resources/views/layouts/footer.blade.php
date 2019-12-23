@@ -29,9 +29,9 @@
             </div>
             <div class="col-sm-12 col-md-3">
                 <div class="social-networks">
-                    <a href="https://www.facebook.com/twobayjobs/" target="_blank" class="twitter"><i class="fab fa-twitter"></i></a>
-                    <a href="https://www.facebook.com/twobayjobs/" target="_blank" class="facebook"><i class="fab fa-facebook"></i></a>
-                    <a href="https://www.facebook.com/twobayjobs/" target="_blank" class="google"><i class="fab fa-google-plus"></i></a>
+                    <a href="https://www.facebook.com/laughseejapan/" target="_blank" class="twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.facebook.com/laughseejapan/" target="_blank" class="facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="https://www.facebook.com/laughseejapan/" target="_blank" class="google"><i class="fab fa-google-plus"></i></a>
                 </div>
                 <a href="/contact" class="btn btn-info" target="_blank">Contact Us</a>
             </div>

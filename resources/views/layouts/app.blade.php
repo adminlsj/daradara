@@ -23,6 +23,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="google-site-verification" content="gNa13GHr2gcHfxADuqMpBcL2XwEVTF1INmpmxir2fxY" />
     <link rel="shortcut icon" type="image/x-icon" href="https://s3.amazonaws.com/twobayjobs/system/intro/browser-icon.ico"/>
+    <link rel="apple-touch-icon" href="https://i.imgur.com/r3Aq57F.png"/>
     <link rel="canonical" href="https://www.laughseejapan.com/" />
 
     <!-- CSRF Token -->
