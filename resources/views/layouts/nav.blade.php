@@ -1,14 +1,14 @@
-<nav style="background-color: {{ Request::is('*watch*') && $is_program ? '#222222' : 'white' }}" id="scroll-hide-nav" >
-  <div style="width: 80%; max-width: 1200px; background-color: {{ Request::is('*watch*') && $is_program ? '#222222' : 'white' }}" class="container-fluid responsive-frame">
-    <div style="background-color: {{ Request::is('*watch*') && $is_program ? '#222222' : 'white' }}">
+<nav style="background-color: {{ !Request::is('/') && !Request::is('*rank*') && !Request::is('*search*') && $is_program ? '#222222' : 'white' }}" id="scroll-hide-nav" >
+  <div style="width: 80%; max-width: 1200px; background-color: {{ !Request::is('/') && !Request::is('*rank*') && !Request::is('*search*') && $is_program ? '#222222' : 'white' }}" class="container-fluid responsive-frame">
+    <div style="background-color: {{ !Request::is('/') && !Request::is('*rank*') && !Request::is('*search*') && $is_program ? '#222222' : 'white' }}">
       <a href="/">
-	        <img src="{{ Request::is('*watch*') && $is_program ? 'https://i.imgur.com/xSMGFWh.png' : 'https://i.imgur.com/M8tqx5K.png' }}" style="margin-top: -6px;" height="30" alt="娛見日本 LaughSeeJapan">
+	        <img src="{{ !Request::is('/') && !Request::is('*rank*') && !Request::is('*search*') && $is_program ? 'https://i.imgur.com/xSMGFWh.png' : 'https://i.imgur.com/M8tqx5K.png' }}" style="margin-top: -6px;" height="30" alt="娛見日本 LaughSeeJapan">
 	    </a>
 
 	    <a style="font-size: 25px; line-height: 50px;" href="/"> </a>
 
-      <a class="pull-right" style="color: {{ Request::is('*watch*') && $is_program ? 'white' : 'gray' }}; padding: 0px 0px 0px 15px;" href="/"><i style="font-size: 25px; vertical-align:middle; margin-bottom: -22.5px" class="material-icons">account_circle</i></a>
-      <a id="toggleSearchBar" class="pull-right" style="color: {{ Request::is('*watch*') && $is_program ? 'white' : 'gray' }}; padding: 0px 0px 15px 15px; cursor: pointer;"><i style="font-size: 25px; vertical-align:middle; margin-bottom: -22.5px" class="material-icons">search</i></a>
+      <a class="pull-right" style="color: {{ !Request::is('/') && !Request::is('*rank*') && !Request::is('*search*') && $is_program ? 'white' : 'gray' }}; padding: 0px 0px 0px 15px;" href="/"><i style="font-size: 25px; vertical-align:middle; margin-bottom: -22.5px" class="material-icons">account_circle</i></a>
+      <a id="toggleSearchBar" class="pull-right" style="color: {{ !Request::is('/') && !Request::is('*rank*') && !Request::is('*search*') && $is_program ? 'white' : 'gray' }}; padding: 0px 0px 15px 15px; cursor: pointer;"><i style="font-size: 25px; vertical-align:middle; margin-bottom: -22.5px" class="material-icons">search</i></a>
     </div>
   </div>
 </nav>
@@ -44,7 +44,7 @@
   </div>
 </nav>
 
-<nav style="background-color: #222222; margin-top: 49px; {{ Request::is('*watch*') && Request::has('g') && !(Request::get('g') == 'variety') ? '' : 'display:none;' }}" id="scroll-hide-nav3" >
+<nav style="background-color: #222222; margin-top: 49px; {{ Request::is('*drama*') || Request::is('*anime*') ? '' : 'display:none;' }}" id="scroll-hide-nav3" >
   <div style="width: 80%; max-width: 1200px; background-color: #222222" class="container-fluid responsive-frame">
     <div class="nav-tab-container-watch" style="background-color: white;">
       <a class="watch-year-nav">
@@ -61,16 +61,16 @@
           </div>
         </h4>
       </a>
-      <a class="watch-month-nav" href="{{ route('video.watch') }}?g={{ Request::get('g') }}&y={{ Request::get('y') }}&m=1">
+      <a class="watch-month-nav" href="{{ Request::path() }}?y={{ Request::get('y') }}&m=1">
         <h4 class="{{ Request::has('m') && Request::get('m') == '1' ? 'nav-tab-active' : '' }}"><span>&nbsp;1月&nbsp;</span></h4>
       </a>
-      <a class="watch-month-nav" href="{{ route('video.watch') }}?g={{ Request::get('g') }}&y={{ Request::get('y') }}&m=4">
+      <a class="watch-month-nav" href="{{ Request::path() }}?y={{ Request::get('y') }}&m=4">
         <h4 class="{{ Request::has('m') && Request::get('m') == '4' ? 'nav-tab-active' : '' }}"><span>&nbsp;4月&nbsp;</span></h4>
       </a>
-      <a class="watch-month-nav" href="{{ route('video.watch') }}?g={{ Request::get('g') }}&y={{ Request::get('y') }}&m=7">
+      <a class="watch-month-nav" href="{{ Request::path() }}?y={{ Request::get('y') }}&m=7">
         <h4 class="{{ Request::has('m') && Request::get('m') == '7' ? 'nav-tab-active' : '' }}"><span>&nbsp;7月&nbsp;</span></h4>
       </a>
-      <a class="watch-month-nav" href="{{ route('video.watch') }}?g={{ Request::get('g') }}&y={{ Request::get('y') }}&m=10">
+      <a class="watch-month-nav" href="{{ Request::path() }}?y={{ Request::get('y') }}&m=10">
         <h4 class="{{ Request::has('m') && Request::get('m') == '10' ? 'nav-tab-active' : '' }}"><span>&nbsp;10月&nbsp;</span></h4>
       </a>
     </div>
@@ -86,15 +86,15 @@
     <i style="font-size: 25px;" class="material-icons">whatshot</i>
     <span style="font-size: 12px; position: fixed; bottom: 0; padding-bottom: 4px; color: inherit;">熱門</span>
   </a>
-  <a href="{{ route('video.watch') }}?g=variety" class="{{ isset($genre) && $genre == 'variety' ? 'active' : ''}}">
+  <a href="{{ route('video.variety') }}" class="{{ Request::path() == 'variety' ? 'active' : ''}}">
     <i style="font-size: 25px;" class="material-icons">live_tv</i>
     <span style="font-size: 12px; position: fixed; bottom: 0; padding-bottom: 4px; color: inherit;">綜藝</span>
   </a>
-  <a href="{{ route('video.watch') }}?g=drama&y=2019" class="{{ isset($genre) && $genre == 'drama' ? 'active' : ''}}">
+  <a href="{{ route('video.drama') }}" class="{{ Request::path() == 'drama' ? 'active' : ''}}">
     <i style="font-size: 25px;" class="material-icons">movie_filter</i>
     <span style="font-size: 12px; position: fixed; bottom: 0; padding-bottom: 4px; color: inherit;">日劇</span>
   </a>
-  <a href="{{ route('video.watch') }}?g=anime&y=2019" class="{{ isset($genre) && $genre == 'anime' ? 'active' : ''}}">
+  <a href="{{ route('video.anime') }}" class="{{ Request::path() == 'anime' ? 'active' : ''}}">
     <i style="font-size: 25px;" class="material-icons">palette</i>
     <span style="font-size: 12px; position: fixed; bottom: 0; padding-bottom: 4px; color: inherit;">動漫</span>
   </a>

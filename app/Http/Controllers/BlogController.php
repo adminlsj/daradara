@@ -41,6 +41,30 @@ class BlogController extends Controller
         return view('video.home', compact('videos', 'variety', 'drama', 'anime', 'current_blog'));
     }
 
+    public function genre(Request $request){
+        $genre = $request->path();
+        if ($genre == 'variety') {
+            $watches = Watch::where('genre', $genre)->get();
+        } else {
+            $year = $request->has('y') && $request->y != null ? $request->y : '2019';
+            if ($request->has('m') && $request->m != null) {
+                $watches = Watch::where('genre', $genre)->whereYear('created_at', $year)->whereMonth('created_at', $request->m)->get();
+            } else {
+                $watches = Watch::where('genre', $genre)->whereYear('created_at', $year)->get();
+            }
+        }
+
+        $videos = [];
+        foreach ($watches as $watch) {
+            $firstVideo = Blog::where('category', $watch->category)->orderBy('created_at', 'asc')->get();
+            $videos[$watch->id] = $firstVideo;
+        }
+
+        $is_program = true;
+
+        return view('video.watchIndex', compact('genre', 'videos', 'is_program'));
+    }
+
     public function watch(Request $request){
         /*$watches = Watch::all();
         foreach ($watches as $watch) {
@@ -104,15 +128,7 @@ class BlogController extends Controller
             'title' => $title,
             'description' => '',
             'imgur' => '',
-        ]);
-
-        /*$id = 1183;
-        $modify = Blog::where('id', '>=', 1189)->get();
-        foreach ($modify as $video) {
-            $video->id = $id;
-            $video->save();
-            $id++;
-        }*/
+        ]);*/
 
         if ($request->has('v') && $request->v != 'null') {
             $video = Blog::find($request->v);
@@ -186,28 +202,6 @@ class BlogController extends Controller
 
                 return view('video.showWatch', compact('genre', 'video', 'videos', 'current_blog', 'fb_title', 'current_id', 'prev', 'next', 'watch', 'is_program'));
             }
-        } else {
-            $genre = $request->has('g') && $request->g != 'null' ? $request->g : 'variety';
-            if ($genre == 'variety') {
-                $watches = Watch::where('genre', $genre)->get();
-            } else {
-                $year = $request->has('y') && $request->y != 'null' ? $request->y : '2019';
-                if ($request->has('m') && $request->m != 'null') {
-                    $watches = Watch::where('genre', $genre)->whereYear('created_at', $year)->whereMonth('created_at', $request->m)->get();
-                } else {
-                    $watches = Watch::where('genre', $genre)->whereYear('created_at', $year)->get();
-                }
-            }
-
-            $videos = [];
-            foreach ($watches as $watch) {
-                $firstVideo = Blog::where('category', $watch->category)->orderBy('created_at', 'asc')->get();
-                $videos[$watch->id] = $firstVideo;
-            }
-
-            $is_program = true;
-
-            return view('video.watchIndex', compact('genre', 'videos', 'is_program'));
         }
     }
 

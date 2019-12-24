@@ -16,7 +16,12 @@ Route::get('/', 'BlogController@home');
 Route::get('/contact', 'BlogController@contact');
 Route::get('/policy', 'BlogController@policy');
 Route::get('/trending', 'BlogController@watch')->name('video.trending');
+
 Route::get('/rank', 'BlogController@rank')->name('video.rank');
+Route::get('/variety', 'BlogController@genre')->name('video.variety');
+Route::get('/drama', 'BlogController@genre')->name('video.drama');
+Route::get('/anime', 'BlogController@genre')->name('video.anime');
+
 Route::get('/watch', 'BlogController@watch')->name('video.watch');
 Route::get('/search', ['as' => 'blog.search', 'uses' => 'BlogController@search']);
 
