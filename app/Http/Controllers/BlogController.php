@@ -15,6 +15,7 @@ use DB;
 use App\Mail\Contact;
 use App\Mail\ContactUser;
 use Carbon\Carbon;
+use Response;
 
 class BlogController extends Controller
 {
@@ -24,7 +25,6 @@ class BlogController extends Controller
     }
 
     public function home(Request $request){
-        // return $this->getWatchSitemap();
         $videos = Blog::whereDate('created_at', '>=', Carbon::now()->subMonths(6))
                       ->where('views', '>=', '500000')->inRandomOrder()->limit(10)->get();
         $variety = Blog::where('genre', 'variety')
@@ -40,36 +40,6 @@ class BlogController extends Controller
         $current_blog['category'] = 'video';
 
         return view('video.home', compact('videos', 'variety', 'drama', 'anime', 'current_blog'));
-    }
-
-    public function getVideoSitemap()
-    {
-        $videos = Blog::orderBy('created_at', 'desc')->get();
-        $text = '';
-        foreach ($videos as $video) {
-            $text = $text.'&lt;url&gt;<br>
-  &nbsp;&nbsp;&lt;loc&gt;https://www.laughseejapan.com/watch?v='.$video->id.'&lt;/loc&gt;<br>
-  &nbsp;&nbsp;&lt;lastmod&gt;2019-12-24T03:01:35+00:00&lt;/lastmod&gt;<br>
-  &nbsp;&nbsp;&lt;priority&gt;0.80&lt;/priority&gt;<br>
-&lt;/url&gt;<br>';
-        }
-
-        return $text;
-    }
-
-    public function getWatchSitemap()
-    {
-        $watches = Watch::orderBy('created_at', 'desc')->get();
-        $text = '';
-        foreach ($watches as $watch) {
-            $text = $text.'&lt;url&gt;<br>
-  &nbsp;&nbsp;&lt;loc&gt;https://www.laughseejapan.com/'.$watch->genre.'/'.$watch->titleToURL().'&lt;/loc&gt;<br>
-  &nbsp;&nbsp;&lt;lastmod&gt;2019-12-24T03:01:35+00:00&lt;/lastmod&gt;<br>
-  &nbsp;&nbsp;&lt;priority&gt;0.90&lt;/priority&gt;<br>
-&lt;/url&gt;<br>';
-        }
-
-        return $text;
     }
 
     public function genre(Request $request){
@@ -837,5 +807,43 @@ class BlogController extends Controller
     public function has_next(array $_array)
     {
       return next($_array) !== false ?: key($_array) !== null;
+    }
+
+    public function sitemap()
+    {
+        $videos = Blog::orderBy('created_at', 'desc')->get();
+        $watches = Watch::orderBy('created_at', 'desc')->get();
+        $time = Carbon::now()->format('Y-m-d\Th:i:s').'+00:00';
+        return Response::view('layouts.sitemap', compact('videos', 'watches', 'time'))->header('Content-Type', 'application/xml');
+    }
+
+    public function getVideoSitemap()
+    {
+        $videos = Blog::orderBy('created_at', 'desc')->get();
+        $text = '';
+        foreach ($videos as $video) {
+            $text = $text.'&lt;url&gt;<br>
+  &nbsp;&nbsp;&lt;loc&gt;https://www.laughseejapan.com/watch?v='.$video->id.'&lt;/loc&gt;<br>
+  &nbsp;&nbsp;&lt;lastmod&gt;2019-12-24T03:01:35+00:00&lt;/lastmod&gt;<br>
+  &nbsp;&nbsp;&lt;priority&gt;0.80&lt;/priority&gt;<br>
+&lt;/url&gt;<br>';
+        }
+
+        return $text;
+    }
+
+    public function getWatchSitemap()
+    {
+        $watches = Watch::orderBy('created_at', 'desc')->get();
+        $text = '';
+        foreach ($watches as $watch) {
+            $text = $text.'&lt;url&gt;<br>
+  &nbsp;&nbsp;&lt;loc&gt;https://www.laughseejapan.com/'.$watch->genre.'/'.$watch->titleToURL().'&lt;/loc&gt;<br>
+  &nbsp;&nbsp;&lt;lastmod&gt;2019-12-24T03:01:35+00:00&lt;/lastmod&gt;<br>
+  &nbsp;&nbsp;&lt;priority&gt;0.90&lt;/priority&gt;<br>
+&lt;/url&gt;<br>';
+        }
+
+        return $text;
     }
 }

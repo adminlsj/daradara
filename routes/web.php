@@ -16,6 +16,7 @@ Route::get('/', 'BlogController@home');
 Route::get('/contact', 'BlogController@contact');
 Route::get('/policy', 'BlogController@policy');
 Route::get('/trending', 'BlogController@watch')->name('video.trending');
+Route::get('/sitemap.xml', 'BlogController@sitemap');
 
 Route::get('/rank', 'BlogController@rank')->name('video.rank');
 Route::get('/variety', 'BlogController@genre')->name('video.variety');
