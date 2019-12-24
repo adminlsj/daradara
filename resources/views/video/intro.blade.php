@@ -50,7 +50,7 @@
 	</div>
 </div>
 
-<hr style="border:solid 1.5px black; margin-top: 0px">
+<hr style="border:solid 1.5px #222222; margin-top: 0px">
 
 <div class="padding-setup mobile-container">
 	<div class="row">

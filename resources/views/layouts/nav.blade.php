@@ -86,7 +86,7 @@
     <i style="font-size: 25px;" class="material-icons">whatshot</i>
     <span style="font-size: 12px; position: fixed; bottom: 0; padding-bottom: 4px; color: inherit;">熱門</span>
   </a>
-  <a href="{{ route('video.variety') }}" class="{{ Request::path() == 'variety' || (Request::has('v') && $video->genre == 'variety') ? 'active' : ''}}">
+  <a href="{{ route('video.variety') }}" class="{{ strpos(Request::path(), 'variety' ) !== false || (Request::has('v') && $video->genre == 'variety') ? 'active' : ''}}">
     <i style="font-size: 25px;" class="material-icons">live_tv</i>
     <span style="font-size: 12px; position: fixed; bottom: 0; padding-bottom: 4px; color: inherit;">綜藝</span>
   </a>
