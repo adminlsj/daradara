@@ -24,7 +24,7 @@ class BlogController extends Controller
     }
 
     public function home(Request $request){
-        return $this->getWatchSitemap();
+        // return $this->getWatchSitemap();
         $videos = Blog::whereDate('created_at', '>=', Carbon::now()->subMonths(6))
                       ->where('views', '>=', '500000')->inRandomOrder()->limit(10)->get();
         $variety = Blog::where('genre', 'variety')
