@@ -44,7 +44,7 @@
   </div>
 </nav>
 
-<nav style="background-color: #222222; margin-top: 49px; {{ Request::is('*drama*') || Request::is('*anime*') ? '' : 'display:none;' }}" id="scroll-hide-nav3" >
+<nav style="background-color: #222222; margin-top: 49px; {{ Request::is('drama') || Request::is('anime') ? '' : 'display:none;' }}" id="scroll-hide-nav3" >
   <div style="width: 80%; max-width: 1200px; background-color: #222222" class="container-fluid responsive-frame">
     <div class="nav-tab-container-watch" style="background-color: white;">
       <a class="watch-year-nav">
@@ -86,15 +86,15 @@
     <i style="font-size: 25px;" class="material-icons">whatshot</i>
     <span style="font-size: 12px; position: fixed; bottom: 0; padding-bottom: 4px; color: inherit;">熱門</span>
   </a>
-  <a href="{{ route('video.variety') }}" class="{{ Request::path() == 'variety' ? 'active' : ''}}">
+  <a href="{{ route('video.variety') }}" class="{{ Request::path() == 'variety' || (Request::has('v') && $video->genre == 'variety') ? 'active' : ''}}">
     <i style="font-size: 25px;" class="material-icons">live_tv</i>
     <span style="font-size: 12px; position: fixed; bottom: 0; padding-bottom: 4px; color: inherit;">綜藝</span>
   </a>
-  <a href="{{ route('video.drama') }}" class="{{ Request::path() == 'drama' ? 'active' : ''}}">
+  <a href="{{ route('video.drama') }}" class="{{ Request::path() == 'drama' || (Request::has('v') && $video->genre == 'drama') ? 'active' : ''}}">
     <i style="font-size: 25px;" class="material-icons">movie_filter</i>
     <span style="font-size: 12px; position: fixed; bottom: 0; padding-bottom: 4px; color: inherit;">日劇</span>
   </a>
-  <a href="{{ route('video.anime') }}" class="{{ Request::path() == 'anime' ? 'active' : ''}}">
+  <a href="{{ route('video.anime') }}" class="{{ Request::path() == 'anime' || (Request::has('v') && $video->genre == 'anime') ? 'active' : ''}}">
     <i style="font-size: 25px;" class="material-icons">palette</i>
     <span style="font-size: 12px; position: fixed; bottom: 0; padding-bottom: 4px; color: inherit;">動漫</span>
   </a>

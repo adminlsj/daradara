@@ -3,12 +3,18 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Watch;
 
 class Blog extends Model
 {
 	protected $fillable = [
         'id', 'title', 'caption', 'genre', 'category', 'tags', 'hd', 'sd', 'imgur', 'views', 'duration', 'outsource', 'created_at',
     ];
+
+    public function watch()
+    {
+        return Watch::where('category', $this->category)->first();
+    }
 
     public function tags()
     {

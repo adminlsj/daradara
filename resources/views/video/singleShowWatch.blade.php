@@ -25,6 +25,10 @@
     </a>
     <div id="videoDescription" style="display: none; margin-top: 5px; padding-bottom: 10px;">
       <p style="white-space: pre-wrap; color: white; margin-bottom: 20px;">{{ $video->caption }}</p>
-      <p style="white-space: pre-wrap; color: white; margin-bottom: 0px;">{{ $watch != false ? $watch->description : ''}}</p>
+      <p style="white-space: pre-wrap; color: white; margin-bottom: 20px;">劇情大綱</p>
+      <p style="white-space: pre-wrap; color: white; margin-bottom: 20px;">{{ $watch != false ? $watch->description : ''}}</p>
+      <p style="white-space: pre-wrap; color: white; margin-bottom: 20px;">角色聲優</p>
+      <p style="white-space: pre-wrap; color: white; margin-bottom: 20px;">{{ $watch != false ? $watch->cast : ''}}</p>
+      <p><a href="{{ route('video.intro', [$video->genre, $watch->titleToUrl()]) }}">更多詳情 ></a></p>
     </div>
 </div>​
