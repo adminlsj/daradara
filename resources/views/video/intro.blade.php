@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div style="background-image: url({{ $watch->imgur}}); background-size: 100%; background-repeat: no-repeat; background-position: 50%; filter: blur(40px); z-index: 0; opacity: 0.6">
+<div style="background-image: url({{ $watch->imgur}}); background-size: 100%; background-repeat: no-repeat; background-position: 50%; filter: blur(30px); z-index: 0; opacity: 0.5">
 	<div class="padding-setup mobile-container">
 		<div style="padding: 10px 0px;" class="row">
 			<div class="col-xs-6 col-xs-offset-3 col-sm-6 col-sm-offset-3 col-md-3 col-md-offset-0">
