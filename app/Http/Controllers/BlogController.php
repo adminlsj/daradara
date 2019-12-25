@@ -37,9 +37,7 @@ class BlogController extends Controller
                      ->whereDate('created_at', '>=', Carbon::now()->subMonths(12))
                      ->where('views', '>=', '200000')->inRandomOrder()->limit(10)->get();
 
-        $current_blog['category'] = 'video';
-
-        return view('video.home', compact('videos', 'variety', 'drama', 'anime', 'current_blog'));
+        return view('video.home', compact('videos', 'variety', 'drama', 'anime'));
     }
 
     public function genre(Request $request){
@@ -67,7 +65,8 @@ class BlogController extends Controller
     }
 
     public function intro(String $genre, String $title, Request $request){
-        $title = str_replace("_", "/", $title);
+        $title = str_replace("_", " / ", $title);
+        $title = str_replace("-", " ", $title);
         $watch = Watch::where('genre', $genre)->where('title', $title)->first();
         $videos = Blog::where('category', $watch->category)->orderBy('created_at', 'asc')->get();
 
@@ -194,9 +193,6 @@ class BlogController extends Controller
                     $next = false;
                 }
 
-                $current_blog = $video;
-                $fb_title = $video->title;
-
                 $video->views++;
                 $video->save();
                 $current_id = $video->id;
@@ -210,7 +206,7 @@ class BlogController extends Controller
 
                 $is_program = true;
 
-                return view('video.showWatch', compact('genre', 'video', 'videos', 'current_blog', 'fb_title', 'current_id', 'prev', 'next', 'watch', 'is_program'));
+                return view('video.showWatch', compact('genre', 'video', 'videos', 'current_id', 'prev', 'next', 'watch', 'is_program'));
             }
         }
     }

@@ -12,6 +12,8 @@ class Watch extends Model
 
     public function titleToURL()
     {
-    	return str_replace("/", "_", $this->title);
+    	$title = str_replace(" / ", "_", $this->title);
+    	$title = str_replace(" ", "-", $title);
+    	return $title;
     }
 }

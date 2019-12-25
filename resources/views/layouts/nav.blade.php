@@ -90,11 +90,11 @@
     <i style="font-size: 25px;" class="material-icons">live_tv</i>
     <span style="font-size: 12px; position: fixed; bottom: 0; padding-bottom: 4px; color: inherit;">綜藝</span>
   </a>
-  <a href="{{ route('video.drama') }}" class="{{ Request::path() == 'drama' || (Request::has('v') && $video->genre == 'drama') ? 'active' : ''}}">
+  <a href="{{ route('video.drama') }}" class="{{ strpos(Request::path(), 'drama' ) !== false || (Request::has('v') && $video->genre == 'drama') ? 'active' : ''}}">
     <i style="font-size: 25px;" class="material-icons">movie_filter</i>
     <span style="font-size: 12px; position: fixed; bottom: 0; padding-bottom: 4px; color: inherit;">日劇</span>
   </a>
-  <a href="{{ route('video.anime') }}" class="{{ Request::path() == 'anime' || (Request::has('v') && $video->genre == 'anime') ? 'active' : ''}}">
+  <a href="{{ route('video.anime') }}" class="{{ strpos(Request::path(), 'anime' ) !== false || (Request::has('v') && $video->genre == 'anime') ? 'active' : ''}}">
     <i style="font-size: 25px;" class="material-icons">palette</i>
     <span style="font-size: 12px; position: fixed; bottom: 0; padding-bottom: 4px; color: inherit;">動漫</span>
   </a>
