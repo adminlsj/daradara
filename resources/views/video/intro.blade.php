@@ -39,7 +39,7 @@
 			<h4 class="hidden-xs hidden-sm" style="margin-top:5px; white-space: pre-wrap;color:#d3d3d3; line-height: 15px; font-size: 0.95em; text-align: center; font-weight: 300;">{{ Carbon\Carbon::parse($watch->created_at )->format('Y年m月d日首播') }}  |  更新至第{{ $videos->count() }}集</h4>
 			<h4 class="visible-xs visible-sm" style="margin-top:5px; white-space: pre-wrap;color:#d3d3d3; line-height: 15px; font-size: 0.95em; text-align: center; font-weight: 300;">{{ Carbon\Carbon::parse($watch->created_at )->format('Y年m月d日首播') }}  |  更新至第{{ $videos->count() }}集</h4>
 
-			<a style="color: white; margin: 3px 0px;" href="{{ route('video.watch') }}?v={{ $videos->first()->id }}" class="btn btn-info" target="_blank">
+			<a style="color: white; margin-top: 1px; margin-bottom: 0px;" href="{{ route('video.watch') }}?v={{ $videos->first()->id }}" class="btn btn-info" target="_blank">
 				<i style="vertical-align:middle; font-size: 1.4em; margin-top: -3px; margin-right: -3px;" class="material-icons">play_arrow</i>&nbsp;&nbsp;立即播放
 			</a>
 
