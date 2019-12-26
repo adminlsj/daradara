@@ -42,6 +42,30 @@ class Blog extends Model
         return $min.':'.$sec;
     }
 
+    public function durationData()
+    {
+        $hour = (int) floor(($this->duration / 60) / 60);
+        $min = (int) floor($this->duration / 60);
+        $sec = (int) round($this->duration % 60);
+
+        if ($hour == 0) {
+            $hour = '00';
+        }
+
+        if ($min >= 60) {
+            $min = (int) round($min % 60);
+        }
+        if ($min == 0) {
+            $min = '00';
+        }
+
+        if ($sec == 0) {
+            $sec = '00';
+        }
+
+        return 'T'.$hour.'H'.$min.'M'.$sec.'S';
+    }
+
     public function blogImgs()
     {
         return $this->hasMany('App\BlogImg');

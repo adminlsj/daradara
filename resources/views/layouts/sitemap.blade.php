@@ -4,7 +4,8 @@
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd"
-      xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+      xmlns:video="http://www.google.com/schemas/sitemap-video/1.1"
+      xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 
 <!-- Home -->
 <url>
@@ -80,6 +81,11 @@
        @endforeach
        <video:category>{{ $video->genre }}</video:category>
      </video:video>
+     <image:image>
+       <image:loc>https://i.imgur.com/{{ $video->imgur }}l.png</image:loc>
+       <image:title>{{ $video->title }}</image:title>
+       <image:caption>{{ $video->caption }}</image:caption>
+     </image:image>
   </url>
 @endforeach
 

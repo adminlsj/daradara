@@ -163,15 +163,13 @@ class BlogController extends Controller
                     array_push($videos, Blog::find($rankings[$i]['id']));
                 }
 
-                $current_blog = $video;
-                $fb_title = $video->title;
-
                 $video->views++;
                 $video->save();
 
+                $current = $video;
                 $is_program = false;
 
-                return view('video.show', compact('video', 'videos', 'current_blog', 'fb_title', 'is_program'));
+                return view('video.show', compact('video', 'videos', 'current', 'is_program'));
 
             } else {
                 $videos = Blog::where('category', $video->category)->orderBy('created_at', 'desc')->get();
@@ -204,9 +202,10 @@ class BlogController extends Controller
                     $watch = Watch::where('category', $video->category)->first();
                 }
 
+                $current = $video;
                 $is_program = true;
 
-                return view('video.showWatch', compact('genre', 'video', 'videos', 'current_id', 'prev', 'next', 'watch', 'is_program'));
+                return view('video.showWatch', compact('genre', 'video', 'videos', 'current_id', 'prev', 'next', 'watch', 'current', 'is_program'));
             }
         }
     }
