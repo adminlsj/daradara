@@ -75,13 +75,6 @@ class BlogController extends Controller
     }
 
     public function watch(Request $request){
-        /*$watches = Watch::all();
-        foreach ($watches as $watch) {
-            $video = Blog::where('category', $watch->category)->orderBy('created_at', 'asc')->first();
-            $watch->created_at = $video->created_at;
-            $watch->save();
-        }*/
-
         /*$id = 1360;
         $genre = 'variety';
         $category = 'lddtz';
@@ -172,7 +165,11 @@ class BlogController extends Controller
                 return view('video.show', compact('video', 'videos', 'current', 'is_program'));
 
             } else {
-                $videos = Blog::where('category', $video->category)->orderBy('created_at', 'desc')->get();
+                if ($video->genre == 'drama' || $video->genre == 'anime') {
+                    $videos = Blog::where('category', $video->category)->orderBy('created_at', 'asc')->get();
+                } else {
+                    $videos = Blog::where('category', $video->category)->orderBy('created_at', 'desc')->get();
+                }
 
                 $query = Blog::where('category', $video->category)->orderBy('created_at', 'asc')->pluck('id')->toArray();
                 $current = array_search($video->id, $query);
@@ -197,10 +194,7 @@ class BlogController extends Controller
 
                 $genre = $video->genre;
 
-                $watch = false;
-                if ($video->category != 'video') {
-                    $watch = Watch::where('category', $video->category)->first();
-                }
+                $watch = Watch::where('category', $video->category)->first();
 
                 $current = $video;
                 $is_program = true;

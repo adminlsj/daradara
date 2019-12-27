@@ -21,6 +21,18 @@ class Blog extends Model
         return explode(" ", $this->tags);
     }
 
+    public function title()
+    {
+        $title = $this->title;
+        if ($this->genre == 'drama' || $this->genre == 'anime') {
+            $start = strpos($title, "【");
+            $end = strpos($title, "】") - $start;
+            return str_replace("【", "", substr($title, $start, $end));
+        } else {
+            return $title;
+        }
+    }
+
     public function views()
     {
         if ($this->views >= 10000) {
@@ -69,6 +81,16 @@ class Blog extends Model
     public function blogImgs()
     {
         return $this->hasMany('App\BlogImg');
+    }
+
+    public function imgurM()
+    {
+        return "https://i.imgur.com/".$this->imgur."m.jpg";
+    }
+
+    public function imgurH()
+    {
+        return "https://i.imgur.com/".$this->imgur."h.jpg";
     }
 
     /* public function getRouteKeyName()

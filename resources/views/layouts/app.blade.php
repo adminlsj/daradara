@@ -9,6 +9,10 @@
     <link rel="apple-touch-icon" href="https://i.imgur.com/OCEaQMK.png"/>
     <link rel="canonical" href="https://www.laughseejapan.com{{ Request::getRequestUri() }}" />
 
+    @if (Request::is('*trending*'))
+        <meta name="robots" content="noindex, follow" />
+    @endif
+
     @if (Request::has('v') && Request::get('v') != 'null')
         <meta property="og:url" content="{{ route('video.watch') }}?v={{ $current->id }}" />
         <meta property="og:type" content="article" />
@@ -43,6 +47,15 @@
           }
         }
         </script>
+
+    @elseif (Request::has('query') && Request::get('query') != 'null')
+        <meta name="title" content="{{ Request::get('query') }} | 娛見日本 LaughSeeJapan | 日本最強娛樂 | 綜藝 | 日劇 | 動漫">
+        <title>{{ Request::get('query') }} | 娛見日本 LaughSeeJapan</title>
+
+    @elseif (Request::is('*anime/*'))
+        <meta name="title" content="{{ $watch->title }} | 娛見日本 LaughSeeJapan | 日本最強娛樂 | 綜藝 | 日劇 | 動漫">
+        <title>{{ $watch->title }} | 娛見日本 LaughSeeJapan</title>
+
     @else
         <meta name="title" content="娛見日本 LaughSeeJapan | 日本最強娛樂 | 綜藝 | 日劇 | 動漫">
         <title>娛見日本 LaughSeeJapan | 日本最強娛樂 | 綜藝 | 日劇 | 動漫</title>
@@ -89,5 +102,12 @@
               enable_page_level_ads: true
          });
     </script>
+
+    <!-- Alexa Certify Javascript -->
+    <script type="text/javascript">
+    _atrk_opts = { atrk_acct:"4w4+t1FYxz20cv", domain:"laughseejapan.com",dynamic: true};
+    (function() { var as = document.createElement('script'); as.type = 'text/javascript'; as.async = true; as.src = "https://certify-js.alexametrics.com/atrk.js"; var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(as, s); })();
+    </script>
+    <noscript><img src="https://certify.alexametrics.com/atrk.gif?account=4w4+t1FYxz20cv" style="display:none" height="1" width="1" alt="" /></noscript>
 </body>
 </html>

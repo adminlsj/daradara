@@ -79,23 +79,23 @@
 
 <div class="navbar">
   <a href="/" class="{{ Request::is('/') ? 'active' : ''}}">
-    <i style="font-size: 25px;" class="material-icons">home</i>
-    <span style="font-size: 12px; position: fixed; bottom: 0; padding-bottom: 4px; color: inherit;">主頁</span>
+    <i class="material-icons">home</i>
+    <span>主頁</span>
   </a>
   <a href="{{ route('video.rank') }}" class="{{ Request::is('*rank*') ? 'active' : ''}}">
-    <i style="font-size: 25px;" class="material-icons">whatshot</i>
-    <span style="font-size: 12px; position: fixed; bottom: 0; padding-bottom: 4px; color: inherit;">熱門</span>
+    <i class="material-icons">whatshot</i>
+    <span>熱門</span>
   </a>
-  <a href="{{ route('video.variety') }}" class="{{ strpos(Request::path(), 'variety' ) !== false || (Request::has('v') && $video->genre == 'variety') ? 'active' : ''}}">
-    <i style="font-size: 25px;" class="material-icons">live_tv</i>
-    <span style="font-size: 12px; position: fixed; bottom: 0; padding-bottom: 4px; color: inherit;">綜藝</span>
+  <a href="{{ route('video.variety') }}" class="{{ strpos(Request::path(), 'variety' ) !== false || (Request::has('v') && $current->genre == 'variety') ? 'active' : ''}}">
+    <i class="material-icons">live_tv</i>
+    <span>綜藝</span>
   </a>
-  <a href="{{ route('video.drama') }}" class="{{ strpos(Request::path(), 'drama' ) !== false || (Request::has('v') && $video->genre == 'drama') ? 'active' : ''}}">
-    <i style="font-size: 25px;" class="material-icons">movie_filter</i>
-    <span style="font-size: 12px; position: fixed; bottom: 0; padding-bottom: 4px; color: inherit;">日劇</span>
+  <a href="{{ route('video.drama') }}" class="{{ strpos(Request::path(), 'drama' ) !== false || (Request::has('v') && $current->genre == 'drama') ? 'active' : ''}}">
+    <i style="padding-left: 2px;" class="material-icons">movie_filter</i>
+    <span>日劇</span>
   </a>
-  <a href="{{ route('video.anime') }}" class="{{ strpos(Request::path(), 'anime' ) !== false || (Request::has('v') && $video->genre == 'anime') ? 'active' : ''}}">
-    <i style="font-size: 25px;" class="material-icons">palette</i>
-    <span style="font-size: 12px; position: fixed; bottom: 0; padding-bottom: 4px; color: inherit;">動漫</span>
+  <a href="{{ route('video.anime') }}" class="{{ strpos(Request::path(), 'anime' ) !== false || (Request::has('v') && $current->genre == 'anime') ? 'active' : ''}}">
+    <i class="material-icons">palette</i>
+    <span>動漫</span>
   </a>
 </div>

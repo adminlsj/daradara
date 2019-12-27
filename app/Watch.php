@@ -16,4 +16,14 @@ class Watch extends Model
     	$title = str_replace(" ", "-", $title);
     	return $title;
     }
+
+    public function imgurM()
+    {
+    	return "https://i.imgur.com/".$this->imgur."m.jpg";
+    }
+
+    public function imgurH()
+    {
+    	return "https://i.imgur.com/".$this->imgur."h.jpg";
+    }
 }

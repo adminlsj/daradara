@@ -21,7 +21,7 @@
 	    </div>
 	    @foreach ($videos as $video)
 		    <div style="{{ $video->id == $current_id ? 'background-color: #7A7A7A' : '' }}">
-		    	@include('video.singleRelatedPost')
+		    	@include('video.singleRelatedWatch')
 	    	</div>
 	    @endforeach
 	</div>
