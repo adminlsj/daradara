@@ -44920,6 +44920,8 @@ document.addEventListener("DOMContentLoaded", function () {
           lazyImageObserver.unobserve(lazyImage);
         }
       });
+    }, {
+      rootMargin: "0px 0px 256px 0px"
     });
     lazyImages.forEach(function (lazyImage) {
       lazyImageObserver.observe(lazyImage);
