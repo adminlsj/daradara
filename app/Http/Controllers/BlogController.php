@@ -502,7 +502,7 @@ class BlogController extends Controller
         $html = '';
         $is_program = false;
         foreach ($videos as $video) {
-            $html .= view('video.singleRelatedPost', compact('video', 'is_program'));
+            $html .= view('video.singleSearchVideo', compact('video', 'is_program'));
         }
         return $html;
     }
