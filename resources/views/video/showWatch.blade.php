@@ -36,9 +36,3 @@
 	</div>
 </div>
 @endsection
-
-@section('script')
-	@parent
-	<script type="text/javascript" src="{{ asset('js/toggleVideoDescription.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('js/shareVideo.js') }}"></script>
-@endsection

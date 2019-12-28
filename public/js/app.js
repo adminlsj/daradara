@@ -44866,12 +44866,6 @@ module.exports = function(module) {
  */
 __webpack_require__(/*! ./bootstrap */ "./resources/assets/js/bootstrap.js");
 
-__webpack_require__(/*! ./loadMore */ "./resources/assets/js/loadMore.js");
-
-__webpack_require__(/*! ./shareVideo */ "./resources/assets/js/shareVideo.js");
-
-__webpack_require__(/*! ./toggleVideoDescription */ "./resources/assets/js/toggleVideoDescription.js");
-
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -44911,6 +44905,12 @@ window.onscroll = function () {
 
   prevScrollpos = currentScrollPos;
 };
+
+__webpack_require__(/*! ./loadMore */ "./resources/assets/js/loadMore.js");
+
+__webpack_require__(/*! ./shareVideo */ "./resources/assets/js/shareVideo.js");
+
+__webpack_require__(/*! ./toggleVideoDescription */ "./resources/assets/js/toggleVideoDescription.js");
 
 /***/ }),
 

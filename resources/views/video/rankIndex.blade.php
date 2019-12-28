@@ -18,8 +18,3 @@
 		</div>
 	</div>
 @endsection
-
-@section('script')
-	@parent
-	<script type="text/javascript" src="{{ asset('js/loadMore.js') }}"></script>
-@endsection

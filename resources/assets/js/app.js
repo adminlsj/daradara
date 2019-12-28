@@ -6,9 +6,6 @@
  */
 
 require('./bootstrap');
-require('./loadMore');
-require('./shareVideo');
-require('./toggleVideoDescription');
 
 window.Vue = require('vue');
 
@@ -50,3 +47,7 @@ window.onscroll = function() {
   }
   prevScrollpos = currentScrollPos;
 }
+
+require('./loadMore');
+require('./shareVideo');
+require('./toggleVideoDescription');
