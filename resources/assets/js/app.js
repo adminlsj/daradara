@@ -67,8 +67,6 @@ document.addEventListener("DOMContentLoaded", function() {
           lazyVideoObserver.unobserve(video.target);
         }
       });
-    }, {
-      rootMargin: "0px 0px 256px 0px"
     });
 
     lazyVideos.forEach(function(lazyVideo) {
