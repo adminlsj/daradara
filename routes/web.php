@@ -27,10 +27,6 @@ Route::get('/{genre}/{title}', 'BlogController@intro')->name('video.intro');
 Route::get('/watch', 'BlogController@watch')->name('video.watch');
 Route::get('/search', ['as' => 'blog.search', 'uses' => 'BlogController@search']);
 
-Route::get('{genre}', 'BlogController@genreIndex')->name('blog.genre.index');
-Route::get('{genre}/{category}', 'BlogController@categoryIndex')->name('blog.category.index');
-Route::get('{genre}/{category}/{blog}', 'BlogController@show')->name('blog.show');
-
 Route::post('/sendMail/{status}', 'BlogController@sendMail');
 
 Auth::routes();

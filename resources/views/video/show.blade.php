@@ -1,5 +1,14 @@
 @extends('layouts.app')
 
+@section('head')
+    @parent
+    @include('video.videoHead')
+@endsection
+
+@section('nav')
+	@include('layouts.nav-main', ['logoImage' => 'https://i.imgur.com/M8tqx5K.png', 'backgroundColor' => 'white', 'itemsColor' => "gray"])
+@endsection
+
 @section('content')
 <div class="row mobile-container video-mobile-container">
 	<div class="hidden-xs hidden-sm" style="margin-top: 15px;"></div>
@@ -26,4 +35,10 @@
 	    @endforeach
 	</div>
 </div>
+@endsection
+
+@section('script')
+	@parent
+	<script type="text/javascript" src="{{ asset('js/toggleVideoDescription.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('js/shareVideo.js') }}"></script>
 @endsection

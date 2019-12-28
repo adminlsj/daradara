@@ -190,7 +190,6 @@ class BlogController extends Controller
 
                 $video->views++;
                 $video->save();
-                $current_id = $video->id;
 
                 $genre = $video->genre;
 
@@ -199,7 +198,7 @@ class BlogController extends Controller
                 $current = $video;
                 $is_program = true;
 
-                return view('video.showWatch', compact('genre', 'video', 'videos', 'current_id', 'prev', 'next', 'watch', 'current', 'is_program'));
+                return view('video.showWatch', compact('genre', 'video', 'videos', 'prev', 'next', 'watch', 'current', 'is_program'));
             }
         }
     }
@@ -237,85 +236,6 @@ class BlogController extends Controller
             }
 
             return view('video.rankIndex', compact('videos'));
-        }
-    }
-
-    public function genreIndex(Request $request, String $genre = 'laughseejapan'){
-        if ($genre == 'laughseejapan') {
-            $videos = Blog::where('genre', $genre)->orWhere('genre', 'watch')->orderBy('created_at', 'desc')->paginate(5);
-            $html = $this->videoLoadHTML($videos);
-            if ($request->ajax()) {
-                return $html;
-            }
-
-            $sideBlogsDesktop = Blog::where('genre', $genre)->inRandomOrder()->limit(3)->get();
-
-            return view('video.genreIndex', compact('videos', 'sideBlogsDesktop', 'genre'));
-
-        } elseif ($genre == 'watch') {
-            $monday = Blog::where('category', 'monday')->orderBy('created_at', 'desc');
-            $home = Blog::where('category', 'home')->orderBy('created_at', 'desc');
-            $talk = Blog::where('category', 'talk')->orderBy('created_at', 'desc');
-
-            $videos = [$monday->first(), $home->first(), $talk->first()];
-            $counts = ['monday' => $monday->count(), 'home' => $home->count(), 'talk' => $talk->count()];
-            $titles = ['monday' => '月曜夜未央 2019年完整版', 'home' => '跟你回家可以嗎？2019年完整版', 'talk' => '閒聊007 2019年完整版'];
-
-            $sideBlogsDesktop = Blog::where('genre', $genre)->inRandomOrder()->limit(3)->get();
-            return view('video.watchIndex', compact('videos', 'counts', 'titles', 'sideBlogsDesktop', 'genre'));
-
-        } else {
-            $sideBlogsMobile = Blog::where('genre', $genre)->orderBy('created_at', 'desc')->paginate(5);
-            $html = $this->sidebarHTML($sideBlogsMobile);
-            if ($request->ajax()) {
-                return $html;
-            }
-
-            $caro_blogs = Blog::where('genre', $genre)->inRandomOrder()->limit(5)->get();
-            $textBlogs = Blog::where('genre', $genre)->inRandomOrder()->limit(2)->get();
-
-            $sideBlogsDesktop = Blog::where('genre', $genre)->inRandomOrder()->limit(3)->get();
-            return view('blog.genreIndex', compact('caro_blogs', 'textBlogs', 'sideBlogsMobile', 'sideBlogsDesktop', 'genre'));
-        }
-    }
-
-    public function categoryIndex(Request $request, String $genre = 'laughseejapan', String $category = 'video'){
-        if ($genre == 'laughseejapan') {
-
-            if ($category == 'trending') {
-                $videos = Blog::where('genre', $genre)->orderBy('views', 'desc')->paginate(5);
-                $html = $this->videoLoadHTML($videos);
-                if ($request->ajax()) {
-                    return $html;
-                }
-
-                $sideBlogsDesktop = Blog::where('genre', $genre)->inRandomOrder()->limit(3)->get();
-                return view('video.trendingIndex', compact('videos', 'sideBlogsDesktop', 'category', 'genre'));
-            } else {
-
-                $videos = Blog::where('genre', 'laughseejapan')->where('title', 'ILIKE', '%'.$category.'%')
-                      ->orWhere('genre', 'laughseejapan')->where('tags', 'ILIKE', '%'.$category.'%')
-                      ->orWhere('genre', 'watch')->where('title', 'ILIKE', '%'.$category.'%')
-                      ->orWhere('genre', 'watch')->where('tags', 'ILIKE', '%'.$category.'%')
-                      ->distinct()->orderBy('created_at', 'desc')->paginate(5);
-                $html = $this->videoLoadHTML($videos);
-                if ($request->ajax()) {
-                    return $html;
-                }
-
-                $sideBlogsDesktop = Blog::where('genre', $genre)->inRandomOrder()->limit(3)->get();
-                return view('video.categoryIndex', compact('videos', 'sideBlogsDesktop', 'category', 'genre'));
-            }
-
-        } else {
-            $sideBlogsMobile = Blog::where('genre', $genre)->where('category', $category)->orderBy('created_at', 'desc')->paginate(5);
-            $html = $this->sidebarHTML($sideBlogsMobile);
-            if ($request->ajax()) {
-                return $html;
-            }
-
-            $sideBlogsDesktop = Blog::where('genre', $genre)->inRandomOrder()->limit(3)->get();
-            return view('blog.categoryIndex', compact('sideBlogsMobile', 'sideBlogsDesktop', 'category', 'genre'));
         }
     }
 
@@ -371,66 +291,7 @@ class BlogController extends Controller
      */
     public function show(Request $request, String $genre = 'laughseejapan', String $category = 'video', Blog $blog)
     {
-        if ($genre == 'laughseejapan') {
-
-            if (!($request->ajax())) {
-                $request->session()->forget('seed');
-            }
-
-            $video = $blog;
-
-            $loop = 0;
-            $videos = [];
-            foreach ($video->tags() as $tag) {
-                if ($loop == 0) {
-                    $videos = Blog::where('tags', 'like', '%'.$tag.'%')->where('id', '!=', $video->id);
-                } else {
-                    $videos = $videos->orWhere('tags', 'like', '%'.$tag.'%')->where('id', '!=', $video->id);
-                }
-                $loop++;
-            }
-
-            if (!$request->session()->has('seed')) {
-                $seed = mt_rand(-1*10000000, 1*10000000) / 10000000;
-                $request->session()->put('seed', $seed);
-            }
-
-            $seed = $request->session()->pull('seed');
-            $request->session()->put('seed', $seed);
-            DB::select('SELECT setseed('.$seed.')');
-            $videos = $videos->inRandomOrder()->paginate(5);
-            $html = $this->videoLoadHTML($videos);
-            if ($request->ajax()) {
-                return $html;
-            }
-
-            $sideBlogsDesktop = Blog::where('genre', $genre)->inRandomOrder()->limit(3)->get();
-            $current_blog = $video;
-            $fb_title = $video->title;
-
-            $video->views++;
-            $video->save();
-
-            return view('video.show', compact('video', 'videos', 'sideBlogsDesktop', 'current_blog', 'fb_title', 'category', 'genre'));
-
-        } elseif ($genre == 'watch') {
-            $video = $blog;
-            $videos = Blog::where('genre', $genre)->where('category', $category)->where('id', '!=', $video->id)->orderBy('created_at', 'desc')->paginate(10);
-            $html = $this->relatedLoadHTML($videos);
-            if ($request->ajax()) {
-                return $html;
-            }
-
-            $sideBlogsDesktop = Blog::where('genre', $genre)->inRandomOrder()->limit(3)->get();
-            $current_blog = $video;
-            $fb_title = $video->title;
-
-            $video->views++;
-            $video->save();
-
-            return view('video.show', compact('video', 'videos', 'sideBlogsDesktop', 'current_blog', 'fb_title', 'category', 'genre'));
-
-        } else {
+        if ($genre == 'blog') {
             $sideBlogsMobile = Blog::where('genre', $genre)->where('category', $category)->orderBy('created_at', 'desc')->paginate(5);
             $html = $this->sidebarHTML($sideBlogsMobile);
             if ($request->ajax()) {
@@ -804,35 +665,5 @@ class BlogController extends Controller
         $watches = Watch::orderBy('created_at', 'desc')->get();
         $time = Carbon::now()->format('Y-m-d\Th:i:s').'+00:00';
         return Response::view('layouts.sitemap', compact('videos', 'watches', 'time'))->header('Content-Type', 'application/xml');
-    }
-
-    public function getVideoSitemap()
-    {
-        $videos = Blog::orderBy('created_at', 'desc')->get();
-        $text = '';
-        foreach ($videos as $video) {
-            $text = $text.'&lt;url&gt;<br>
-  &nbsp;&nbsp;&lt;loc&gt;https://www.laughseejapan.com/watch?v='.$video->id.'&lt;/loc&gt;<br>
-  &nbsp;&nbsp;&lt;lastmod&gt;2019-12-24T03:01:35+00:00&lt;/lastmod&gt;<br>
-  &nbsp;&nbsp;&lt;priority&gt;0.80&lt;/priority&gt;<br>
-&lt;/url&gt;<br>';
-        }
-
-        return $text;
-    }
-
-    public function getWatchSitemap()
-    {
-        $watches = Watch::orderBy('created_at', 'desc')->get();
-        $text = '';
-        foreach ($watches as $watch) {
-            $text = $text.'&lt;url&gt;<br>
-  &nbsp;&nbsp;&lt;loc&gt;https://www.laughseejapan.com/'.$watch->genre.'/'.$watch->titleToURL().'&lt;/loc&gt;<br>
-  &nbsp;&nbsp;&lt;lastmod&gt;2019-12-24T03:01:35+00:00&lt;/lastmod&gt;<br>
-  &nbsp;&nbsp;&lt;priority&gt;0.90&lt;/priority&gt;<br>
-&lt;/url&gt;<br>';
-        }
-
-        return $text;
     }
 }

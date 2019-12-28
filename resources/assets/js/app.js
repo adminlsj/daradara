@@ -6,7 +6,6 @@
  */
 
 require('./bootstrap');
-require('./owl.carousel');
 
 window.Vue = require('vue');
 
@@ -22,12 +21,6 @@ const app = new Vue({
     el: '#app'
 });
 
-require('./comment');
-
-$('#avatar-upload').on("change", function(e) {
-    $("#avatar-form").submit();
-});
-
 $('[id=toggleSearchBar]').click(function(e) {
     var x = document.getElementById("searchBar");
     if (x.style.display === "none") {
@@ -35,18 +28,6 @@ $('[id=toggleSearchBar]').click(function(e) {
         document.getElementById("query").focus();
     } else {
         x.style.display = "none";
-    }
-});
-
-$('[id=toggleVideoDescription]').click(function(e) {
-    var description = document.getElementById("videoDescription");
-    var icon = document.getElementById("toggleVideoDescriptionIcon");
-    if (description.style.display === "none") {
-        description.style.display = "block";
-        icon.innerHTML = 'expand_less';
-    } else {
-        description.style.display = "none";
-        icon.innerHTML = 'expand_more';
     }
 });
 
@@ -60,100 +41,9 @@ window.onscroll = function() {
   if (prevScrollpos > currentScrollPos || currentScrollPos < 60) {
     document.getElementById("scroll-hide-nav").style.top = "0";
     document.getElementById("scroll-hide-nav2").style.top = "0";
-    document.getElementById("scroll-hide-nav3").style.top = "0";
   } else {
     document.getElementById("scroll-hide-nav").style.top = "-50px";
     document.getElementById("scroll-hide-nav2").style.top = "-50px";
-    document.getElementById("scroll-hide-nav3").style.top = "-50px";
   }
   prevScrollpos = currentScrollPos;
 }
-
-var _throttleTimer = null;
-var _throttleDelay = 100;
-var $window = $(window);
-var $document = $(document);
-$document.ready(function () {
-    $window
-        .off('scroll', ScrollHandler)
-        .on('scroll', ScrollHandler);
-});
-
-var page = 1; //track user scroll as page number, right now page number is 1
-var urlParams = new URLSearchParams(window.location.search);
-var query = urlParams.get('query');
-var video = urlParams.get('v');
-var genre = urlParams.get('g');
-load_more(page); //initial content load
-
-function ScrollHandler(e) {
-    //throttle event:
-    clearTimeout(_throttleTimer);
-    _throttleTimer = setTimeout(function () {
-        if ($(window).scrollTop() + $(window).height() + 1200 >= getDocHeight()) {
-	        page++; //page number increment
-			load_more(page); //load content   
-	   }
-    }, _throttleDelay);
-}
-
-function getDocHeight() {
-    var D = document;
-    return Math.max(
-        D.body.scrollHeight, D.documentElement.scrollHeight,
-        D.body.offsetHeight, D.documentElement.offsetHeight,
-        D.body.clientHeight, D.documentElement.clientHeight
-    );
-}
-
-function load_more(page){
-    $.ajax({
-        url: '?v=' + video + '&g=' + genre + '&page=' + page + '&query=' + query,
-        type: "get",
-        datatype: "html",
-        beforeSend: function()
-        {
-            $('.ajax-loading').show();
-        }
-    })
-
-    .done(function(data){
-        if (data.length == 0){
-	        console.log(data.length);
-            $('.ajax-loading').html(" ");
-            return;
-        }
-        $('.ajax-loading').hide(); //hide loading animation once data is received
-
-        newDivName = "d" + String(new Date().valueOf());
-        var $newhtml = $("<div id='" + newDivName + "'>" + data + "</div>");
-        $('#sidebar-results').append($newhtml);
-
-        $('#' + newDivName + ' h5').each(function (index) {
-            rank = index + 1 + (page - 1) * 10;
-            if (rank < 10) {
-                $(this).html('<span style="color:white; background-color:pink; padding: 3px 10px; border-radius:3px;">' + rank + '</span>');
-            } else {
-                $(this).html('<span style="color:white; background-color:pink; padding: 3px 6px; border-radius:3px;">' + rank + '</span>');
-            }
-        });
-    })
-
-    .fail(function(jqXHR, ajaxOptions, thrownError){
-    });
-}
-
-const shareButton = document.querySelector('#shareBtn');
-shareButton.addEventListener('click', event => {
-  if (navigator.share) {
-    navigator.share({
-      title: document.getElementById("shareBtn-title").innerHTML,
-      url: document.getElementById("shareBtn-link").href
-    }).then(() => {
-      console.log('Thanks for sharing!');
-    })
-    .catch(console.error);
-  } else {
-    // fallback
-  }
-});

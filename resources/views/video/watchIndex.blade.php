@@ -1,5 +1,10 @@
 @extends('layouts.app')
 
+@section('nav')
+  @include('layouts.nav-main', ['logoImage' => 'https://i.imgur.com/xSMGFWh.png', 'backgroundColor' => '#222222', 'itemsColor' => "white"])
+  @include('layouts.nav-index')
+@endsection
+
 @section('content')
 
 <div class="watch-index">

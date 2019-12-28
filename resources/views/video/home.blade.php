@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('nav')
+	@include('layouts.nav-main', ['logoImage' => 'https://i.imgur.com/M8tqx5K.png', 'backgroundColor' => 'white', 'itemsColor' => "gray"])
+@endsection
+
 @section('content')
 <div class="padding-setup mobile-container">
 	<div class="row" style="padding-top: 6px; padding-bottom: 4px">

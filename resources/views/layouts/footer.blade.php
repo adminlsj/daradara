@@ -5,26 +5,27 @@
                 <h2 class="logo"><a style="font-size: 1em" href="#">LaughSeeJapan</a></h2>
             </div>
             <div class="col-sm-12 col-md-2 text-center">
-                <h5>資訊</h5>
+                <h5>探索</h5>
                 <ul>
-                    <li><a href="{{ route('blog.genre.index', ['genre' => 'travel']) }}">旅日塾</a></li>
-                    <li><a href="{{ route('blog.genre.index', ['genre' => 'news']) }}">微新聞</a></li>
-                    <li><a href="{{ route('blog.genre.index', ['genre' => 'press']) }}">簡讀</a></li>
-                </ul>
-            </div>
-            <div class="col-sm-12 col-md-2 text-center">
-                <h5>知識</h5>
-                <ul>
-                    <li><a href="{{ route('blog.genre.index', ['genre' => 'tech']) }}">科學園</a></li>
-                    <li><a href="{{ route('blog.genre.index', ['genre' => 'finance']) }}">融易</a></li>
+                    <li><a href="/">娛見日本</a></li>
+                    <li><a href="/">旅日塾</a></li>
+                    <li><a href="https://www.facebook.com/laughseejapan/">臉書專頁</a></li>
                 </ul>
             </div>
             <div class="col-sm-12 col-md-2 text-center">
                 <h5>社群</h5>
                 <ul>
-                    <li><a href="{{ route('blog.genre.index', ['genre' => 'forum']) }}">亦語</a></li>
-                    <li><a href="/">娛見日本</a></li>
-                    <li><a href="{{ route('blog.genre.index', ['genre' => 'ranking']) }}">排行百科</a></li>
+                    <li><a href="https://www.facebook.com/laughseejapan/" target="_blank">娛見日本</a></li>
+                    <li><a href="https://www.facebook.com/%E6%97%A5%E5%A8%9B%E7%8E%8B%E9%81%93-117672486306487/" target="_blank">日娛王道</a></li>
+                    <li><a href="https://www.facebook.com/freeriderjapan/" target="_blank">這裡是日本</a></li>
+                </ul>
+            </div>
+            <div class="col-sm-12 col-md-2 text-center">
+                <h5>娛見日本</h5>
+                <ul>
+                    <li><a href="/policy">關於我們</a></li>
+                    <li><a href="/policy">免責聲明</a></li>
+                    <li><a href="/policy">私隱條例</a></li>
                 </ul>
             </div>
             <div class="col-sm-12 col-md-3">
