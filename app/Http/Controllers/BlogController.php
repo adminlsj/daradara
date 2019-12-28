@@ -53,15 +53,9 @@ class BlogController extends Controller
             }
         }
 
-        $videos = [];
-        foreach ($watches as $watch) {
-            $firstVideo = Blog::where('category', $watch->category)->orderBy('created_at', 'asc')->get();
-            $videos[$watch->id] = $firstVideo;
-        }
-
         $is_program = true;
 
-        return view('video.watchIndex', compact('genre', 'videos', 'is_program'));
+        return view('video.watchIndex', compact('genre', 'watches', 'is_program'));
     }
 
     public function intro(String $genre, String $title, Request $request){

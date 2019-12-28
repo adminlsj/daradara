@@ -3,12 +3,18 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Blog;
 
 class Watch extends Model
 {
 	protected $fillable = [
         'id', 'genre', 'category', 'title', 'description', 'imgur',
     ];
+
+    public function videos()
+    {
+        return Blog::where('category', $this->category);
+    }
 
     public function titleToURL()
     {

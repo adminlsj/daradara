@@ -9,19 +9,19 @@
 
 <div class="watch-index">
 	<div style="margin: 0px 10px; padding-top: {{ Request::is('*drama*') || Request::is('*anime*') ? '45px' : '10px' }}" class="row">
-		@foreach ($videos as $watch => $video)
+		@foreach ($watches as $watch)
 			<div class="{{ $genre == 'variety' ? 'watch-variety' : 'watch-single' }}">
-		    <a style="text-decoration: none;" href="{{ route('video.watch') }}?v={{ $genre == 'variety' ? $video->last()->id : $video->first()->id }}">
+		    <a style="text-decoration: none;" href="{{ route('video.watch') }}?v={{ $genre == 'variety' ? $watch->videos()->last()->id : $watch->videos()->first()->id }}">
 
           @if ($loop->iteration > 10)
-            <img class="lazy" style="width: 100%; height: 100%;" src="{{ App\Watch::find($watch)->imgurDefault() }}" data-src="{{ App\Watch::find($watch)->imgurM() }}" data-srcset="{{ App\Watch::find($watch)->imgurH() }} 4x, {{ App\Watch::find($watch)->imgurL() }} 3x, {{ App\Watch::find($watch)->imgurM() }} 2x, {{ App\Watch::find($watch)->imgurT() }} 1x" alt="{{ App\Watch::find($watch)->title }}">
+            <img class="lazy" style="width: 100%; height: 100%;" src="{{ $watch->imgurDefault() }}" data-src="{{ $watch->imgurM() }}" alt="{{ $watch->title }}">
           @else
-            <img src="{{ App\Watch::find($watch)->imgurM() }}" style="width: 100%; height: 100%; border-radius: 3px;" alt="{{ App\Watch::find($watch)->title }}">
+            <img src="{{ $watch->imgurM() }}" style="width: 100%; height: 100%; border-radius: 3px;" alt="{{ $watch->title }}">
           @endif
 
 			    <div style="height: 34px">
-				    <div style="margin-top: -26px;float: right; margin-right: 3px"><span style="background-color: rgba(0,0,0,0.8); color: white; padding: 1px 5px 1px 5px; opacity: 0.9; font-size: 0.85em; border-radius: 2px; font-weight: 300">更新至第{{ $video->count() }}集</span></div>
-						<h4 style="color:white; margin-top:4px; margin-bottom: 0px; line-height: 19px; font-size: 1em;overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; font-weight: 500;">{{ App\Watch::find($watch)->title }}</h4>
+				    <div style="margin-top: -26px;float: right; margin-right: 3px"><span style="background-color: rgba(0,0,0,0.8); color: white; padding: 1px 5px 1px 5px; opacity: 0.9; font-size: 0.85em; border-radius: 2px; font-weight: 300">更新至第{{ $watch->videos()->count() }}集</span></div>
+						<h4 style="color:white; margin-top:4px; margin-bottom: 0px; line-height: 19px; font-size: 1em;overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; font-weight: 500;">{{ $watch->title }}</h4>
 					</div>
 				</a>
 			</div>
