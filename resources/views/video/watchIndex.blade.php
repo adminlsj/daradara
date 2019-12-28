@@ -13,11 +13,7 @@
 			<div class="{{ $genre == 'variety' ? 'watch-variety' : 'watch-single' }}">
 		    <a style="text-decoration: none;" href="{{ route('video.watch') }}?v={{ $genre == 'variety' ? $watch->videos()->last()->id : $watch->videos()->first()->id }}">
 
-          @if ($loop->iteration > 10)
-            <img class="lazy" style="width: 100%; height: 100%;" src="{{ $watch->imgurDefault() }}" data-src="{{ $watch->imgurM() }}" data-srcset="{{ $watch->imgurM() }} 2x, {{ $watch->imgurT() }} 1x" alt="{{ $watch->title }}">
-          @else
-            <img src="{{ $watch->imgurM() }}" style="width: 100%; height: 100%; border-radius: 3px;" alt="{{ $watch->title }}">
-          @endif
+          <img class="lazy" style="width: 100%; height: 100%; border-radius: 3px;" src="{{ $watch->imgurDefault() }}" data-src="{{ $watch->imgurM() }}" data-srcset="{{ $watch->imgurM() }} 2x, {{ $watch->imgurT() }} 1x" alt="{{ $watch->title }}">
 
 			    <div style="height: 34px">
 				    <div style="margin-top: -26px;float: right; margin-right: 3px"><span style="background-color: rgba(0,0,0,0.8); color: white; padding: 1px 5px 1px 5px; opacity: 0.9; font-size: 0.85em; border-radius: 2px; font-weight: 300">更新至第{{ $watch->videos()->count() }}集</span></div>
