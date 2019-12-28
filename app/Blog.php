@@ -85,7 +85,7 @@ class Blog extends Model
 
     public function imgur16by9()
     {
-        return "https://i.imgur.com/7Q8E9C3t.jpg";
+        return "https://i.imgur.com/7Q8E9C3m.jpg";
     }
 
     public function imgurT()
@@ -100,7 +100,7 @@ class Blog extends Model
 
     public function imgurL()
     {
-        return "https://i.imgur.com/".$this->imgur."m.jpg";
+        return "https://i.imgur.com/".$this->imgur."l.jpg";
     }
 
     public function imgurH()

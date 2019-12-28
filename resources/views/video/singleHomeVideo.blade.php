@@ -1,4 +1,4 @@
-<div class="col-xs-6 col-sm-6 col-md-6" style="{{ $loop->iteration % 2 == 0 ? 'padding-right: 15px; padding-left:7.5px;' : 'padding-left: 15px; padding-right:7.5px;' }}">
+<div class="col-xs-6 col-sm-6 col-md-3" style="padding-left:7.5px; padding-right:7.5px;">
 	<a href="{{ route('video.watch') }}?v={{ $video->id }}">
 	  <img style="border-radius: 5px; width: 100%; height: 100%;" src="{{ $video->imgurM() }}" alt="{{ $video->title }}">
 	</a>

@@ -44907,37 +44907,32 @@ window.onscroll = function () {
 };
 
 document.addEventListener("DOMContentLoaded", function () {
-  var lazyImages = [].slice.call(document.querySelectorAll("img.lazy"));
-  var active = false;
+  var lazyVideos = [].slice.call(document.querySelectorAll("video.lazy"));
 
-  var lazyLoad = function lazyLoad() {
-    if (active === false) {
-      active = true;
-      setTimeout(function () {
-        lazyImages.forEach(function (lazyImage) {
-          if (lazyImage.getBoundingClientRect().top <= window.innerHeight && lazyImage.getBoundingClientRect().bottom >= 0 && getComputedStyle(lazyImage).display !== "none") {
-            lazyImage.src = lazyImage.dataset.src;
-            lazyImage.srcset = lazyImage.dataset.srcset;
-            lazyImage.classList.remove("lazy");
-            lazyImages = lazyImages.filter(function (image) {
-              return image !== lazyImage;
-            });
+  if ("IntersectionObserver" in window) {
+    var lazyVideoObserver = new IntersectionObserver(function (entries, observer) {
+      entries.forEach(function (video) {
+        if (video.isIntersecting) {
+          for (var source in video.target.children) {
+            var videoSource = video.target.children[source];
 
-            if (lazyImages.length === 0) {
-              document.removeEventListener("scroll", lazyLoad);
-              window.removeEventListener("resize", lazyLoad);
-              window.removeEventListener("orientationchange", lazyLoad);
+            if (typeof videoSource.tagName === "string" && videoSource.tagName === "SOURCE") {
+              videoSource.src = videoSource.dataset.src;
             }
           }
-        });
-        active = false;
-      }, 200);
-    }
-  };
 
-  document.addEventListener("scroll", lazyLoad);
-  window.addEventListener("resize", lazyLoad);
-  window.addEventListener("orientationchange", lazyLoad);
+          video.target.load();
+          video.target.classList.remove("lazy");
+          lazyVideoObserver.unobserve(video.target);
+        }
+      });
+    }, {
+      rootMargin: "0px 0px 256px 0px"
+    });
+    lazyVideos.forEach(function (lazyVideo) {
+      lazyVideoObserver.observe(lazyVideo);
+    });
+  }
 });
 
 __webpack_require__(/*! ./loadMore */ "./resources/assets/js/loadMore.js");

@@ -18,7 +18,7 @@
 			</h4>
 		</div>
 	</div>
-	<div class="row">
+	<div style="padding-left: 7.5px; padding-right: 7.5px;" class="row">
 		@foreach ($videos as $video)
 			@include('video.singleHomeVideo')
 		@endforeach
@@ -36,7 +36,7 @@
 			</h4>
 		</div>
 	</div>
-	<div class="row">
+	<div style="padding-left: 7.5px; padding-right: 7.5px;" class="row">
 		@foreach ($variety as $video)
 			@include('video.singleHomeVideo')
 		@endforeach
@@ -54,7 +54,7 @@
 			</h4>
 		</div>
 	</div>
-	<div class="row">
+	<div style="padding-left: 7.5px; padding-right: 7.5px;" class="row">
 		@foreach ($drama as $video)
 			@include('video.singleHomeVideo')
 		@endforeach
@@ -72,7 +72,7 @@
 			</h4>
 		</div>
 	</div>
-	<div class="row">
+	<div style="padding-left: 7.5px; padding-right: 7.5px;" class="row">
 		@foreach ($anime as $video)
 			@include('video.singleHomeVideo')
 		@endforeach

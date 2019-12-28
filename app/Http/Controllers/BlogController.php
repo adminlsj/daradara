@@ -26,16 +26,16 @@ class BlogController extends Controller
 
     public function home(Request $request){
         $videos = Blog::whereDate('created_at', '>=', Carbon::now()->subMonths(6))
-                      ->where('views', '>=', '500000')->inRandomOrder()->limit(10)->get();
+                      ->where('views', '>=', '500000')->inRandomOrder()->limit(8)->get();
         $variety = Blog::where('genre', 'variety')
                        ->whereDate('created_at', '>=', Carbon::now()->subMonths(6))
-                       ->where('views', '>=', '500000')->inRandomOrder()->limit(10)->get();
+                       ->where('views', '>=', '500000')->inRandomOrder()->limit(8)->get();
         $drama = Blog::where('genre', 'drama')
                      ->whereDate('created_at', '>=', Carbon::now()->subMonths(12))
-                     ->where('views', '>=', '200000')->inRandomOrder()->limit(10)->get();
+                     ->where('views', '>=', '200000')->inRandomOrder()->limit(8)->get();
         $anime = Blog::where('genre', 'anime')
                      ->whereDate('created_at', '>=', Carbon::now()->subMonths(12))
-                     ->where('views', '>=', '200000')->inRandomOrder()->limit(10)->get();
+                     ->where('views', '>=', '200000')->inRandomOrder()->limit(8)->get();
 
         return view('video.home', compact('videos', 'variety', 'drama', 'anime'));
     }
