@@ -11,7 +11,7 @@
             @endif
           @endforeach
         </p>
-        <a id="shareBtn-link" href="{{ route('video.intro', [$video->genre, $watch->titleToUrl()]) }}" style="text-decoration: none;">
+        <a id="shareBtn-link" href="{{ route('video.watch') }}?v={{ $video->id }}" style="text-decoration: none; pointer-events: none;">
           <h4 id="shareBtn-title" style="line-height: 23px; font-weight: 500; margin-top:-10px; margin-bottom: 0px; color:white; font-size: 1.25em">{{ $video->title }}</h4>
         </a>
     </div>
