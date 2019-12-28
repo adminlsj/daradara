@@ -44866,6 +44866,12 @@ module.exports = function(module) {
  */
 __webpack_require__(/*! ./bootstrap */ "./resources/assets/js/bootstrap.js");
 
+__webpack_require__(/*! ./loadMore */ "./resources/assets/js/loadMore.js");
+
+__webpack_require__(/*! ./shareVideo */ "./resources/assets/js/shareVideo.js");
+
+__webpack_require__(/*! ./toggleVideoDescription */ "./resources/assets/js/toggleVideoDescription.js");
+
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -45029,6 +45035,123 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Example_vue_vue_type_template_id_650f2efa___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
+
+/***/ }),
+
+/***/ "./resources/assets/js/loadMore.js":
+/*!*****************************************!*\
+  !*** ./resources/assets/js/loadMore.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var _throttleTimer = null;
+var _throttleDelay = 100;
+var $window = $(window);
+var $document = $(document);
+$document.ready(function () {
+  $window.off('scroll', ScrollHandler).on('scroll', ScrollHandler);
+});
+var page = 1; //track user scroll as page number, right now page number is 1
+
+var urlParams = new URLSearchParams(window.location.search);
+var query = urlParams.get('query');
+var video = urlParams.get('v');
+var genre = urlParams.get('g');
+load_more(page); //initial content load
+
+function ScrollHandler(e) {
+  //throttle event:
+  clearTimeout(_throttleTimer);
+  _throttleTimer = setTimeout(function () {
+    if ($(window).scrollTop() + $(window).height() + 1200 >= getDocHeight()) {
+      page++; //page number increment
+
+      load_more(page); //load content   
+    }
+  }, _throttleDelay);
+}
+
+function getDocHeight() {
+  var D = document;
+  return Math.max(D.body.scrollHeight, D.documentElement.scrollHeight, D.body.offsetHeight, D.documentElement.offsetHeight, D.body.clientHeight, D.documentElement.clientHeight);
+}
+
+function load_more(page) {
+  $.ajax({
+    url: '?v=' + video + '&g=' + genre + '&page=' + page + '&query=' + query,
+    type: "get",
+    datatype: "html",
+    beforeSend: function beforeSend() {
+      $('.ajax-loading').show();
+    }
+  }).done(function (data) {
+    if (data.length == 0) {
+      console.log(data.length);
+      $('.ajax-loading').html(" ");
+      return;
+    }
+
+    $('.ajax-loading').hide(); //hide loading animation once data is received
+
+    newDivName = "d" + String(new Date().valueOf());
+    var $newhtml = $("<div id='" + newDivName + "'>" + data + "</div>");
+    $('#sidebar-results').append($newhtml);
+    $('#' + newDivName + ' h5').each(function (index) {
+      rank = index + 1 + (page - 1) * 10;
+
+      if (rank < 10) {
+        $(this).html('<span style="color:white; background-color:pink; padding: 3px 10px; border-radius:3px;">' + rank + '</span>');
+      } else {
+        $(this).html('<span style="color:white; background-color:pink; padding: 3px 6px; border-radius:3px;">' + rank + '</span>');
+      }
+    });
+  }).fail(function (jqXHR, ajaxOptions, thrownError) {});
+}
+
+/***/ }),
+
+/***/ "./resources/assets/js/shareVideo.js":
+/*!*******************************************!*\
+  !*** ./resources/assets/js/shareVideo.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var shareButton = document.querySelector('#shareBtn');
+shareButton.addEventListener('click', function (event) {
+  if (navigator.share) {
+    navigator.share({
+      title: document.getElementById("shareBtn-title").innerHTML,
+      url: document.getElementById("shareBtn-link").href
+    }).then(function () {
+      console.log('Thanks for sharing!');
+    })["catch"](console.error);
+  } else {// fallback
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/assets/js/toggleVideoDescription.js":
+/*!*******************************************************!*\
+  !*** ./resources/assets/js/toggleVideoDescription.js ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$('[id=toggleVideoDescription]').click(function (e) {
+  var description = document.getElementById("videoDescription");
+  var icon = document.getElementById("toggleVideoDescriptionIcon");
+
+  if (description.style.display === "none") {
+    description.style.display = "block";
+    icon.innerHTML = 'expand_less';
+  } else {
+    description.style.display = "none";
+    icon.innerHTML = 'expand_more';
+  }
+});
 
 /***/ }),
 

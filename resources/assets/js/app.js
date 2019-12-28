@@ -6,6 +6,9 @@
  */
 
 require('./bootstrap');
+require('./loadMore');
+require('./shareVideo');
+require('./toggleVideoDescription');
 
 window.Vue = require('vue');
 
