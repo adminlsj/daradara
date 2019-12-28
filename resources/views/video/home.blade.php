@@ -20,7 +20,7 @@
 	</div>
 	<div style="padding-left: 7.5px; padding-right: 7.5px;" class="row">
 		@foreach ($videos as $video)
-			@include('video.singleHomeVideo')
+			@include('video.singleHomeVideo', ['lazy' => false])
 		@endforeach
 	</div>
 
@@ -38,7 +38,7 @@
 	</div>
 	<div style="padding-left: 7.5px; padding-right: 7.5px;" class="row">
 		@foreach ($variety as $video)
-			@include('video.singleHomeVideo')
+			@include('video.singleHomeVideo', ['lazy' => true])
 		@endforeach
 	</div>
 
@@ -56,7 +56,7 @@
 	</div>
 	<div style="padding-left: 7.5px; padding-right: 7.5px;" class="row">
 		@foreach ($drama as $video)
-			@include('video.singleHomeVideo')
+			@include('video.singleHomeVideo', ['lazy' => true])
 		@endforeach
 	</div>
 
@@ -74,7 +74,7 @@
 	</div>
 	<div style="padding-left: 7.5px; padding-right: 7.5px;" class="row">
 		@foreach ($anime as $video)
-			@include('video.singleHomeVideo')
+			@include('video.singleHomeVideo', ['lazy' => true])
 		@endforeach
 	</div>
 
