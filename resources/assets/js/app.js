@@ -49,30 +49,40 @@ window.onscroll = function() {
 }
 
 document.addEventListener("DOMContentLoaded", function() {
-  var lazyVideos = [].slice.call(document.querySelectorAll("video.lazy"));
+  let lazyImages = [].slice.call(document.querySelectorAll("img.lazy"));
+  let active = false;
 
-  if ("IntersectionObserver" in window) {
-    var lazyVideoObserver = new IntersectionObserver(function(entries, observer) {
-      entries.forEach(function(video) {
-        if (video.isIntersecting) {
-          for (var source in video.target.children) {
-            var videoSource = video.target.children[source];
-            if (typeof videoSource.tagName === "string" && videoSource.tagName === "SOURCE") {
-              videoSource.src = videoSource.dataset.src;
+  const lazyLoad = function() {
+    if (active === false) {
+      active = true;
+
+      setTimeout(function() {
+        lazyImages.forEach(function(lazyImage) {
+          if ((lazyImage.getBoundingClientRect().top <= window.innerHeight && lazyImage.getBoundingClientRect().bottom >= 0) && getComputedStyle(lazyImage).display !== "none") {
+            lazyImage.src = lazyImage.dataset.src;
+            lazyImage.srcset = lazyImage.dataset.srcset;
+            lazyImage.classList.remove("lazy");
+
+            lazyImages = lazyImages.filter(function(image) {
+              return image !== lazyImage;
+            });
+
+            if (lazyImages.length === 0) {
+              document.removeEventListener("scroll", lazyLoad);
+              window.removeEventListener("resize", lazyLoad);
+              window.removeEventListener("orientationchange", lazyLoad);
             }
           }
+        });
 
-          video.target.load();
-          video.target.classList.remove("lazy");
-          lazyVideoObserver.unobserve(video.target);
-        }
-      });
-    });
+        active = false;
+      }, 200);
+    }
+  };
 
-    lazyVideos.forEach(function(lazyVideo) {
-      lazyVideoObserver.observe(lazyVideo);
-    });
-  }
+  document.addEventListener("scroll", lazyLoad);
+  window.addEventListener("resize", lazyLoad);
+  window.addEventListener("orientationchange", lazyLoad);
 });
 
 require('./loadMore');
