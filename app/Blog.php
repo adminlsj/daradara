@@ -83,7 +83,17 @@ class Blog extends Model
         return $this->hasMany('App\BlogImg');
     }
 
+    public function imgurT()
+    {
+        return "https://i.imgur.com/".$this->imgur."t.jpg";
+    }
+
     public function imgurM()
+    {
+        return "https://i.imgur.com/".$this->imgur."m.jpg";
+    }
+
+    public function imgurL()
     {
         return "https://i.imgur.com/".$this->imgur."m.jpg";
     }
