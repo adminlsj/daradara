@@ -85,7 +85,7 @@ class Blog extends Model
 
     public function imgur16by9()
     {
-        return "https://i.imgur.com/7Q8E9C3m.jpg";
+        return "https://i.imgur.com/33Nw3ojm.jpg";
     }
 
     public function imgurT()

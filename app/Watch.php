@@ -17,13 +17,44 @@ class Watch extends Model
     	return $title;
     }
 
+    public function imgurDefault()
+    {
+        switch ($this->genre) {
+            case 'variety':
+                return "https://i.imgur.com/QuMcr82m.jpg";
+                break;
+
+            case 'drama':
+                return "https://i.imgur.com/42XjVCLm.jpg";
+                break;
+
+            case 'anime':
+                return "https://i.imgur.com/35mrvKim.jpg";
+                break;
+            
+            default:
+                return "https://i.imgur.com/33Nw3ojb.jpg";
+                break;
+        }
+    }
+
+    public function imgurT()
+    {
+        return "https://i.imgur.com/".$this->imgur."t.jpg";
+    }
+
     public function imgurM()
     {
-    	return "https://i.imgur.com/".$this->imgur."m.jpg";
+        return "https://i.imgur.com/".$this->imgur."m.jpg";
+    }
+
+    public function imgurL()
+    {
+        return "https://i.imgur.com/".$this->imgur."l.jpg";
     }
 
     public function imgurH()
     {
-    	return "https://i.imgur.com/".$this->imgur."h.jpg";
+        return "https://i.imgur.com/".$this->imgur."h.jpg";
     }
 }
