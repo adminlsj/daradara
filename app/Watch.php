@@ -13,7 +13,7 @@ class Watch extends Model
 
     public function videos()
     {
-        return Blog::where('category', $this->category);
+        return Blog::where('category', $this->category)->get();
     }
 
     public function titleToURL()
