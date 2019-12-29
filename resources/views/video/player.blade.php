@@ -1,6 +1,6 @@
 @if ($video->outsource)
   <div class="aspect-ratio" style="background-color: black">
-      <iframe src="{{ $video->sd }}" style="border: 0; overflow: hidden;" allow="autoplay"></iframe>
+      <iframe src="{{ $video->sd }}" style="border: 0; overflow: hidden;" allow="autoplay" allowfullscreen></iframe>
   </div>
 @else
   <div class="aspect-ratio">
