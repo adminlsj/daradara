@@ -1,6 +1,6 @@
 <div class="col-xs-6 col-sm-6 col-md-3" style="padding-left:7.5px; padding-right:7.5px;">
 	<a href="{{ route('video.watch') }}?v={{ $video->id }}">
-		<img class="lazy" style="border-radius: 5px; width: 100%; height: 100%;" src="{{ $video->imgur16by9() }}" data-src="{{ $video->imgurM() }}" data-srcset="{{ $video->imgurM() }} 2x, {{ $video->imgurT() }} 1x" alt="{{ $video->title }}">
+		<img class="lazy" style="border-radius: 5px; width: 100%; height: 100%;" src="{{ $video->imgur16by9() }}" data-src="{{ $video->imgurM() }}" data-srcset="{{ $video->imgurM() }}" alt="{{ $video->title }}">
 	</a>
 
 	<div style="position: relative; height: 50px;">
