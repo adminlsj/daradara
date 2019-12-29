@@ -62,7 +62,13 @@ class BlogController extends Controller
         $title = str_replace("_", " / ", $title);
         $title = str_replace("-", " ", $title);
         $watch = Watch::where('genre', $genre)->where('title', $title)->first();
-        $videos = Blog::where('category', $watch->category)->orderBy('created_at', 'asc')->get();
+
+        $videos = Blog::where('category', $watch->category);
+        if ($genre == 'drama' || $genre == 'anime') {
+            $videos = $videos->orderBy('created_at', 'asc')->get();
+        } else {
+            $videos = $videos->orderBy('created_at', 'desc')->get();
+        }
 
         $is_program = true;
         return view('video.intro', compact('watch', 'videos', 'is_program'));

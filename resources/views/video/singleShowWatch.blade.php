@@ -29,6 +29,6 @@
       <p style="white-space: pre-wrap; color: white; margin-bottom: 20px;">{{ $watch != false ? $watch->description : ''}}</p>
       <p style="white-space: pre-wrap; color: white; margin-bottom: 20px;">角色聲優</p>
       <p style="white-space: pre-wrap; color: white; margin-bottom: 20px;">{{ $watch != false ? $watch->cast : ''}}</p>
-      <p><a href="{{ route('video.intro', [$video->genre, $watch->titleToUrl()]) }}">更多詳情 ></a></p>
+      <p><a style="color:white; text-decoration: none;" href="{{ route('video.intro', [$video->genre, $watch->titleToUrl()]) }}"><strong>完整介紹 ></strong></a></p>
     </div>
 </div>​

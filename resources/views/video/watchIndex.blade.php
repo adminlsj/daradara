@@ -10,7 +10,7 @@
   	<div style="margin: 0px 10px; padding-top: {{ Request::is('*drama*') || Request::is('*anime*') ? '45px' : '10px' }}" class="row">
   		@foreach ($watches as $watch)
   			<div class="{{ $genre == 'variety' ? 'watch-variety' : 'watch-single' }}">
-  		    <a style="text-decoration: none;" href="{{ route('video.watch') }}?v={{ $genre == 'variety' ? $watch->videos()->last()->id : $watch->videos()->first()->id }}">
+  		    <a style="text-decoration: none;" href="{{ route('video.intro', [$watch->genre, $watch->titleToUrl()]) }}">
 
             <img class="lazy" style="width: 100%; height: 100%; border-radius: 3px;" src="{{ $watch->imgurDefault() }}" data-src="{{ $watch->imgurM() }}" data-srcset="{{ $watch->imgurM() }} 2x, {{ $watch->imgurT() }} 1x" alt="{{ $watch->title }}">
 
