@@ -38,11 +38,11 @@
 
 <!-- Search -->
 <url>
-  <loc>https://www.laughseejapan.com/search?query=郡司</loc>
+  <loc>https://www.laughseejapan.com/search?query={{ rawurlencode('郡司') }}</loc>
   <lastmod>{{$time}}</lastmod>
   <priority>0.80</priority>
 
-  <loc>https://www.laughseejapan.com/search?query=郡司桑</loc>
+  <loc>https://www.laughseejapan.com/search?query={{ rawurlencode('郡司桑') }}</loc>
   <lastmod>{{$time}}</lastmod>
   <priority>0.80</priority>
 </url>
@@ -50,7 +50,7 @@
 <!-- Watches -->
 @foreach ($watches as $watch)
   <url>
-    <loc>https://www.laughseejapan.com/{{$watch->genre}}/{{$watch->titleToURL()}}</loc>
+    <loc>https://www.laughseejapan.com/{{$watch->genre}}/{{ rawurlencode($watch->titleToURL()) }}</loc>
     <lastmod>{{$time}}</lastmod>
     <priority>0.90</priority>
   </url>
