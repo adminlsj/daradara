@@ -3,7 +3,7 @@
       <iframe src="{{ $video->sd }}" style="border: 0; overflow: hidden;" allow="autoplay"></iframe>
   </div>
 @else
-  <script src="https://vjs.zencdn.net/7.5.5/video.js"></script>
+  <script src="{{ mix('js/video.js') }}"></script>
   <div class="aspect-ratio">
     <video id="video-js-player" style="min-width: 100%; min-height: 100%;" class="video-js vjs-waiting"
         poster='https://i.imgur.com/{{ $video->imgur }}l.png'
