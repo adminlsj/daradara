@@ -1,4 +1,4 @@
-<nav style="background-color: {{ $backgroundColor }}" id="scroll-hide-nav" >
+<nav style="background-color: {{ $backgroundColor }}" class="scroll-hide-nav" >
   <div style="width: 80%; max-width: 1200px; background-color: {{ $backgroundColor }}" class="container-fluid responsive-frame">
     <div style="background-color: {{ $backgroundColor }}">
       <a href="/">

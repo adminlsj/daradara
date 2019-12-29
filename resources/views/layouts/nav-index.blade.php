@@ -1,4 +1,4 @@
-<nav style="background-color: #222222; margin-top: 49px; {{ Request::is('drama') || Request::is('anime') ? '' : 'display:none;' }}" id="scroll-hide-nav2" >
+<nav style="background-color: #222222; margin-top: 49px; {{ Request::is('drama') || Request::is('anime') ? '' : 'display:none;' }}" class="scroll-hide-nav" >
   <div style="width: 80%; max-width: 1200px; background-color: #222222" class="container-fluid responsive-frame">
     <div class="nav-tab-container-watch" style="background-color: white;">
       <a class="watch-year-nav">
@@ -30,3 +30,8 @@
     </div>
   </div>
 </nav>
+
+@section('script')
+  @parent
+  <script src="{{ mix('js/customSelect.js') }}"></script>
+@endsection

@@ -18,3 +18,8 @@
 		</div>
 	</div>
 @endsection
+
+@section('script')
+	@parent
+	<script src="{{ mix('js/loadMore.js') }}"></script>
+@endsection
