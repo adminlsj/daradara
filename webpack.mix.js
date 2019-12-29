@@ -13,8 +13,8 @@ const CompressionPlugin = require('compression-webpack-plugin');
  */
 
 mix.js('resources/assets/js/app.js', 'public/js')
-   .js('resources/assets/js/video.js', 'public/js')
    .sass('resources/assets/sass/app.scss', 'public/css')
+   .js('resources/assets/js/video.js', 'public/js')
    .webpackConfig({
 	    plugins: [
 	      new CompressionPlugin({
