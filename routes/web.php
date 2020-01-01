@@ -13,7 +13,7 @@
 
 Route::get('/', 'BlogController@home');
 
-Route::get('/contact', 'BlogController@contact');
+Route::get('/about-us', 'BlogController@aboutUs');
 Route::get('/policy', 'BlogController@policy');
 Route::get('/trending', 'BlogController@watch')->name('video.trending');
 Route::get('/sitemap.xml', 'BlogController@sitemap');

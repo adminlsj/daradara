@@ -687,9 +687,17 @@ a > i {
   margin-top: 0px !important;
 }
 
-.watch-single, .watch-variety{
+.watch-single {
   padding: 0px 5px;
   width: 20%;
+  height: 100%;
+  float: left;
+  margin-bottom: 15px;
+}
+
+.watch-variety{
+  padding: 0px 5px;
+  width: 25%;
   height: 100%;
   float: left;
   margin-bottom: 15px;

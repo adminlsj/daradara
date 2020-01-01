@@ -32,6 +32,26 @@
 		<h2 style="font-weight: 600">下載表單</a></h2>
 		<p>按此下載：<a href="https://pipitv.cc/common/copyright.docx">侵權通知書</a></p>
 	</div>
+	<div style="margin-top:7%; text-align: center; font-size: 50px; font-weight: 600">娛見日本 LaughSeeJapan</div>
+	<div class="policy" style="margin-top:40px;">
+		<h2 style="font-weight: 600">聯絡我們</a></h2>
+		<p>電郵地址：laughseejapan@gmail.com</p>
+		<p>官方網站：<a href="https://www.laughseejapan.com">https://www.laughseejapan.com</a></p>
+	</div>
 	<br><br><br><br><br><br><br>
 </div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "url": "http://www.laughseejapan.com",
+  "name": "娛見日本 LaughSeeJapan",
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "email": "laughseejapan@gmail.com",
+    "contactType": "Customer service"
+  }
+}
+</script>
 @endsection

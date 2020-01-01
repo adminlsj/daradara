@@ -41,6 +41,39 @@ class BlogController extends Controller
     }
 
     public function genre(Request $request){
+        /*$id = 1727;
+        $genre = 'anime';
+        $category = 'sao3B';
+        $title = '刀劍神域 Alicization 愛麗絲篇異界戰爭 第三季後半';
+        $created_at = new Carbon('2019-10-27 10:55:30');
+        for ($i = 3; $i <= 12; $i++) { 
+            $video = Blog::create([
+                'id' => $id,
+                'title' =>  $title.'【第'.$i.'話】',
+                'caption' => $title.'【第'.$i.'話】',
+                'genre' => $genre,
+                'category' => $category,
+                'tags' => '刀劍神域 Alicization 桐人 亞絲娜 愛麗絲 松岡禎丞 戶松遙 茅野愛衣',
+                'hd' => 'https://archive.org/download/sqzw_11/SQZW0'.$i.'.mp4',
+                'sd' => 'https://archive.org/download/sqzw_11/SQZW0'.$i.'.mp4',
+                'imgur' => 'pending',
+                'views' => 100000,
+                'duration' => 0,
+                'outsource' => true,
+                'created_at' => $created_at,
+            ]);
+            $created_at = $created_at->addDays(7);
+            $id++;
+        }
+        /*$watch = Watch::create([
+            'id' => 97,
+            'genre' => $genre,
+            'category' => $category,
+            'title' => $title,
+            'description' => '',
+            'imgur' => '',
+        ]);*/
+
         $genre = $request->path();
         if ($genre == 'variety') {
             $watches = Watch::where('genre', $genre)->get();
@@ -98,39 +131,6 @@ class BlogController extends Controller
             $created_at = $created_at->addDays(7);
             $id++;
         }*/
-
-        /*$id = 1682;
-        $genre = 'anime';
-        $category = 'gfsn';
-        $title = '高分少女 第二季';
-        $created_at = new Carbon('2019-10-05 17:21:35');
-        for ($i = 1; $i <= 8; $i++) { 
-            $video = Blog::create([
-                'id' => $id,
-                'title' =>  $title.'【第'.$i.'話】',
-                'caption' => $title.'【第'.$i.'話】',
-                'genre' => $genre,
-                'category' => $category,
-                'tags' => '高分少女',
-                'hd' => 'https://archive.org/download/sqzw_11/SQZW0'.$i.'.mp4',
-                'sd' => 'https://archive.org/download/sqzw_11/SQZW0'.$i.'.mp4',
-                'imgur' => 'pending',
-                'views' => 100000,
-                'duration' => 0,
-                'outsource' => true,
-                'created_at' => $created_at,
-            ]);
-            $created_at = $created_at->addDays(7);
-            $id++;
-        }
-        $watch = Watch::create([
-            'id' => 97,
-            'genre' => $genre,
-            'category' => $category,
-            'title' => $title,
-            'description' => '',
-            'imgur' => '',
-        ]);*/
 
         if ($request->has('v') && $request->v != 'null') {
             $video = Blog::find($request->v);
@@ -617,12 +617,10 @@ class BlogController extends Controller
         return view('video.search', compact('videos', 'query'));
     }
 
-    public function contact()
+    public function aboutUs()
     {
-        $genre = 'laughseejapan';
-        $category = 'video';
         $is_program = false;
-        return view('layouts.contact', compact('genre', 'category', 'is_program'));
+        return view('layouts.about-us', compact('is_program'));
     }
 
     public function policy()

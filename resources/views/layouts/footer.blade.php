@@ -7,9 +7,9 @@
             <div class="col-sm-12 col-md-2 text-center">
                 <h5>探索</h5>
                 <ul>
-                    <li><a href="/">娛見日本</a></li>
-                    <li><a href="/">旅日塾</a></li>
-                    <li><a href="https://www.facebook.com/laughseejapan/">臉書專頁</a></li>
+                    <li><a href="{{ route('video.variety') }}">綜藝</a></li>
+                    <li><a href="{{ route('video.drama') }}">日劇</a></li>
+                    <li><a href="{{ route('video.anime') }}">動漫</a></li>
                 </ul>
             </div>
             <div class="col-sm-12 col-md-2 text-center">
@@ -23,7 +23,7 @@
             <div class="col-sm-12 col-md-2 text-center">
                 <h5>娛見日本</h5>
                 <ul>
-                    <li><a href="/policy">關於我們</a></li>
+                    <li><a href="/about-us">關於我們</a></li>
                     <li><a href="/policy">免責聲明</a></li>
                     <li><a href="/policy">私隱條例</a></li>
                 </ul>
@@ -32,9 +32,9 @@
                 <div class="social-networks">
                     <a href="https://www.facebook.com/laughseejapan/" target="_blank" class="twitter"><i class="fab fa-twitter"></i></a>
                     <a href="https://www.facebook.com/laughseejapan/" target="_blank" class="facebook"><i class="fab fa-facebook"></i></a>
-                    <a href="https://www.facebook.com/laughseejapan/" target="_blank" class="google"><i class="fab fa-google-plus"></i></a>
+                    <a href="https://www.instagram.com/laughseejapan/" target="_blank" class="google"><i class="fab fa-instagram"></i></a>
                 </div>
-                <a href="/contact" class="btn btn-info" target="_blank">Contact Us</a>
+                <a href="/about-us" class="btn btn-info" target="_blank">聯絡我們</a>
             </div>
         </div>
     </div>
