@@ -78,7 +78,7 @@ class BlogController extends Controller
         if ($genre == 'variety') {
             $watches = Watch::where('genre', $genre)->get();
         } else {
-            $year = $request->has('y') && $request->y != null ? $request->y : '2019';
+            $year = $request->has('y') && $request->y != null ? $request->y : '2020';
             if ($request->has('m') && $request->m != null) {
                 $watches = Watch::where('genre', $genre)->whereYear('created_at', $year)->whereMonth('created_at', $request->m)->get();
             } else {
