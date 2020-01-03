@@ -16,7 +16,7 @@ class BlogController extends Controller
     {
         $blogs = Blog::all();
         $is_program = false;
-        return view('blog.index', compact('blogs', 'caro_blogs', 'textBlogs', 'sideBlogsDesktop', 'is_program'));
+        return view('blog.index', compact('blogs', 'is_program'));
     }
 
     /**

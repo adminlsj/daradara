@@ -5,7 +5,7 @@
 <meta property="og:image" content="https://i.imgur.com/{{ $current->imgur }}h.png" />
 
 <meta name="title" content="{{ $current->title }} | 娛見日本 LaughSeeJapan">
-<title>{{ $current->title }} | 娛見日本</title>
+<title>{{ $current->title }} | 娛見日本 LaughSeeJapan</title>
 <meta name="description" content="{{ $current->caption }}">
 
 <script type="application/ld+json">

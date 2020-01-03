@@ -1,5 +1,18 @@
 @extends('layouts.app')
 
+@section('head')
+    @parent
+    <meta property="og:url" content="{{ route('blog.show', ['blog' => $current]) }}" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="{{ $current->title }}" />
+	<meta property="og:description" content="{{ $current->caption }}" />
+	<meta property="og:image" content="https://i.imgur.com/{{ $current->imgur }}.jpg" />
+
+	<meta name="title" content="{{ $current->title }} | 娛見日本 LaughSeeJapan">
+	<title>{{ $current->title }} | 娛見日本 LaughSeeJapan</title>
+	<meta name="description" content="{{ $current->caption }}">
+@endsection
+
 @section('nav')
 	@include('layouts.nav-blog', ['logoImage' => 'https://i.imgur.com/M8tqx5K.png', 'backgroundColor' => 'white', 'itemsColor' => "gray"])
 @endsection
