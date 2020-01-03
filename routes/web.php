@@ -13,10 +13,13 @@
 
 Route::get('/', 'VideoController@home');
 
-Route::get('/about-us', 'VideoController@aboutUs');
-Route::get('/policy', 'VideoController@policy');
+Route::resource('blog', 'BlogController');
+
+Route::get('/about-us', 'HomeController@aboutUs');
+Route::get('/policy', 'HomeController@policy');
+Route::get('/sitemap.xml', 'HomeController@sitemap');
+
 Route::get('/trending', 'VideoController@watch')->name('video.trending');
-Route::get('/sitemap.xml', 'VideoController@sitemap');
 
 Route::get('/rank', 'VideoController@rank')->name('video.rank');
 Route::get('/variety', 'VideoController@genre')->name('video.variety');
@@ -26,8 +29,6 @@ Route::get('/{genre}/{title}', 'VideoController@intro')->name('video.intro');
 
 Route::get('/watch', 'VideoController@watch')->name('video.watch');
 Route::get('/search', ['as' => 'video.search', 'uses' => 'VideoController@search']);
-
-Route::post('/sendMail/{status}', 'VideoController@sendMail');
 
 Auth::routes();
 Route::get('auth/{provider}', 'Auth\LoginController@redirectToProvider');

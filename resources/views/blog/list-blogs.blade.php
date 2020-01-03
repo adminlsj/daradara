@@ -4,8 +4,27 @@
 	        <h3 style="color: black; font-weight: 500">日本流行速報</h3>
 	    </div>
 		<div style="margin-top: -8px" class="sidebar-wrapper">
-		    <div id="sidebar-results"><!-- results appear here --></div>
-		    <div style="text-align: center" class="ajax-loading"><img src="https://s3.amazonaws.com/twobayjobs/system/loading.gif"/></div>
+		    <div id="sidebar-results">
+		    	@foreach ($sideBlogsMobile as $blog)
+		            <div class="row hover-box-shadow" style="margin:0px -5px; padding: 15px 15px;">
+                        <a href="{{ route('blog.show', ['blog' => $blog]) }}">
+                            <div class="col-xs-4" style="position:relative; padding-right:5px">
+                                <div class="row">
+                                    <img style="width:100%; border-radius:2px" src="{{ $blog->imgur() }}" alt="日本文化">
+                                    <div class="related-blogs-date" style="font-size: 12.5px; color: gray; position:absolute; bottom:1px; right:-93px; font-weight:400;">{{ Carbon\Carbon::parse($blog->created_at)->format("Y-m-d") }}</div>
+                                </div>
+                            </div>
+
+                            <div style="padding: 0px 30px 0px 40px" class="col-xs-8">
+                                <div class="row">
+                                    <div class="blog-title">{{ str_limit($blog->title, 95) }}</div>
+                                    <div class="hidden-xs" style="font-weight: 400; font-size: 13.5px; color: #696969; margin-top:10px">{{ str_limit($blog->caption, 300) }}</div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+		        @endforeach
+		    </div>
 		</div>
 	</div>
 
@@ -25,16 +44,16 @@
 	        <br>
 	    @endforeach
 	    <div style="margin:5px 0px 25px 0px; border: 1px black solid">
-            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <!-- Content-Top -->
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <!-- Blog Show Ads -->
             <ins class="adsbygoogle"
                  style="display:block"
                  data-ad-client="ca-pub-4485968980278243"
-                 data-ad-slot="4060710969"
+                 data-ad-slot="6532428575"
                  data-ad-format="auto"
                  data-full-width-responsive="true"></ins>
             <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
+                 (adsbygoogle = window.adsbygoogle || []).push({});
             </script>
         </div>
 	</div>
