@@ -3,7 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Blog;
+use App\Video;
 
 class Watch extends Model
 {
@@ -13,7 +13,7 @@ class Watch extends Model
 
     public function videos()
     {
-        return Blog::where('category', $this->category)->orderBy('created_at', 'asc')->get();
+        return Video::where('category', $this->category)->orderBy('created_at', 'asc')->get();
     }
 
     public function titleToURL()

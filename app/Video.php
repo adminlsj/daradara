@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\Watch;
 
-class Blog extends Model
+class Video extends Model
 {
 	protected $fillable = [
         'id', 'title', 'caption', 'genre', 'category', 'tags', 'hd', 'sd', 'imgur', 'views', 'duration', 'outsource', 'created_at',
@@ -76,11 +76,6 @@ class Blog extends Model
         }
 
         return 'T'.$hour.'H'.$min.'M'.$sec.'S';
-    }
-
-    public function blogImgs()
-    {
-        return $this->hasMany('App\BlogImg');
     }
 
     public function imgur16by9()

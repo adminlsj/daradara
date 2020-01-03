@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Blog;
-use App\BlogImg;
+use App\Video;
 use App\Watch;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
@@ -17,7 +16,7 @@ use App\Mail\ContactUser;
 use Carbon\Carbon;
 use Response;
 
-class BlogController extends Controller
+class VideoController extends Controller
 {
     public function __construct()
     {
@@ -25,15 +24,15 @@ class BlogController extends Controller
     }
 
     public function home(Request $request){
-        $videos = Blog::whereDate('created_at', '>=', Carbon::now()->subMonths(6))
+        $videos = Video::whereDate('created_at', '>=', Carbon::now()->subMonths(6))
                       ->where('views', '>=', '500000')->inRandomOrder()->limit(12)->get();
-        $variety = Blog::where('genre', 'variety')
+        $variety = Video::where('genre', 'variety')
                        ->whereDate('created_at', '>=', Carbon::now()->subMonths(6))
                        ->where('views', '>=', '500000')->inRandomOrder()->limit(12)->get();
-        $drama = Blog::where('genre', 'drama')
+        $drama = Video::where('genre', 'drama')
                      ->whereDate('created_at', '>=', Carbon::now()->subMonths(12))
                      ->where('views', '>=', '200000')->inRandomOrder()->limit(12)->get();
-        $anime = Blog::where('genre', 'anime')
+        $anime = Video::where('genre', 'anime')
                      ->whereDate('created_at', '>=', Carbon::now()->subMonths(12))
                      ->where('views', '>=', '200000')->inRandomOrder()->limit(12)->get();
 
@@ -47,7 +46,7 @@ class BlogController extends Controller
         $title = '刀劍神域 Alicization 愛麗絲篇異界戰爭 第三季後半';
         $created_at = new Carbon('2019-10-27 10:55:30');
         for ($i = 3; $i <= 12; $i++) { 
-            $video = Blog::create([
+            $video = Video::create([
                 'id' => $id,
                 'title' =>  $title.'【第'.$i.'話】',
                 'caption' => $title.'【第'.$i.'話】',
@@ -96,7 +95,7 @@ class BlogController extends Controller
         $title = str_replace("-", " ", $title);
         $watch = Watch::where('genre', $genre)->where('title', $title)->first();
 
-        $videos = Blog::where('category', $watch->category);
+        $videos = Video::where('category', $watch->category);
         if ($genre == 'drama' || $genre == 'anime') {
             $videos = $videos->orderBy('created_at', 'asc')->get();
         } else {
@@ -113,7 +112,7 @@ class BlogController extends Controller
         $category = 'lddtz';
         $created_at = new Carbon('2019-01-12 14:47:15');
         for ($i = 1; $i <= 50; $i++) { 
-            $video = Blog::create([
+            $video = Video::create([
                 'id' => $id,
                 'title' =>  $created_at->format('Y.m.d').' 嵐的大挑戰 / 交給嵐吧',
                 'caption' => $created_at->format('Y.m.d').' 嵐的大挑戰 / 交給嵐吧',
@@ -133,10 +132,10 @@ class BlogController extends Controller
         }*/
 
         if ($request->has('v') && $request->v != 'null') {
-            $video = Blog::find($request->v);
+            $video = Video::find($request->v);
 
             if ($video->category == 'video') {
-                $videosSelect = Blog::where('genre', '!=', 'blog')->where('id', '!=', $video->id)->inRandomOrder()->select('id', 'tags')->get()->toArray();
+                $videosSelect = Video::where('genre', '!=', 'blog')->where('id', '!=', $video->id)->inRandomOrder()->select('id', 'tags')->get()->toArray();
                 $rankings = [];
                 foreach ($videosSelect as $videoSelect) {
                     $score = 0;
@@ -153,7 +152,7 @@ class BlogController extends Controller
 
                 $videos = [];
                 for ($i = 0; $i < 30; $i++) { 
-                    array_push($videos, Blog::find($rankings[$i]['id']));
+                    array_push($videos, Video::find($rankings[$i]['id']));
                 }
 
                 $video->views++;
@@ -166,12 +165,12 @@ class BlogController extends Controller
 
             } else {
                 if ($video->genre == 'drama' || $video->genre == 'anime') {
-                    $videos = Blog::where('category', $video->category)->orderBy('created_at', 'asc')->get();
+                    $videos = Video::where('category', $video->category)->orderBy('created_at', 'asc')->get();
                 } else {
-                    $videos = Blog::where('category', $video->category)->orderBy('created_at', 'desc')->get();
+                    $videos = Video::where('category', $video->category)->orderBy('created_at', 'desc')->get();
                 }
 
-                $query = Blog::where('category', $video->category)->orderBy('created_at', 'asc')->pluck('id')->toArray();
+                $query = Video::where('category', $video->category)->orderBy('created_at', 'asc')->pluck('id')->toArray();
                 $current = array_search($video->id, $query);
                 while(key($query) !== null && key($query) !== $current) next($query);
 
@@ -221,7 +220,7 @@ class BlogController extends Controller
                     $months = 3;
                     break;
             }
-            $videos = Blog::where('genre', $genre)->whereDate('created_at', '>=', Carbon::now()->subMonths($months))->orderBy('views', 'desc')->paginate(10);
+            $videos = Video::where('genre', $genre)->whereDate('created_at', '>=', Carbon::now()->subMonths($months))->orderBy('views', 'desc')->paginate(10);
             $html = $this->rankLoadHTML($videos);
             if ($request->ajax()) {
                 return $html;
@@ -229,7 +228,7 @@ class BlogController extends Controller
 
             return view('video.rankIndex', compact('videos'));
         } else {
-            $videos = Blog::whereDate('created_at', '>=', Carbon::now()->subMonths(3))->orderBy('views', 'desc')->paginate(10);
+            $videos = Video::whereDate('created_at', '>=', Carbon::now()->subMonths(3))->orderBy('views', 'desc')->paginate(10);
             $html = $this->rankLoadHTML($videos);
             if ($request->ajax()) {
                 return $html;
@@ -257,7 +256,7 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
-        $blog = Blog::create([
+        $blog = Video::create([
             'title' => request('title'),
             'content' => request('content'),
             'category' => request('category'),
@@ -266,7 +265,7 @@ class BlogController extends Controller
         if (request('blogImgs')) {
             foreach (request('blogImgs') as $image) {
                 Storage::disk('s3')->put('blogImgs/originals/'.$blog->id.'/'.$image->getClientOriginalName(), File::get($image));
-                BlogImg::create([
+                VideoImg::create([
                     'blog_id' => $blog->id,
                     'filename' => $image->getClientOriginalName(),
                     'mime' => $image->getClientMimeType(),
@@ -280,24 +279,24 @@ class BlogController extends Controller
             Storage::disk('s3')->put('blogImgs/thumbnails/'.$blog->id.'/'.request('blogImgs')[0]->getClientOriginalName(), $image_thumb->__toString());
         }
 
-        return redirect()->action('BlogController@show', ['blog' => $blog]);
+        return redirect()->action('VideoController@show', ['blog' => $blog]);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Blog  $blog
+     * @param  \App\Video  $blog
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, String $genre = 'laughseejapan', String $category = 'video', Blog $blog)
+    public function show(Request $request, String $genre = 'laughseejapan', String $category = 'video', Video $blog)
     {
         if ($genre == 'blog') {
-            $sideBlogsMobile = Blog::where('genre', $genre)->where('category', $category)->orderBy('created_at', 'desc')->paginate(5);
-            $html = $this->sidebarHTML($sideBlogsMobile);
+            $sideVideosMobile = Video::where('genre', $genre)->where('category', $category)->orderBy('created_at', 'desc')->paginate(5);
+            $html = $this->sidebarHTML($sideVideosMobile);
             if ($request->ajax()) {
                 return $html;
             }
-            $sideBlogsDesktop = Blog::where('genre', $genre)->inRandomOrder()->limit(3)->get();
+            $sideVideosDesktop = Video::where('genre', $genre)->inRandomOrder()->limit(3)->get();
 
             $content = $blog->content;
 
@@ -389,15 +388,15 @@ class BlogController extends Controller
 
             $current_blog = $blog;
 
-            return view('blog.show', compact('blog', 'content', 'fb_title', 'current_blog', 'sideBlogsMobile', 'sideBlogsDesktop', 'category', 'genre'));
+            return view('blog.show', compact('blog', 'content', 'fb_title', 'current_blog', 'sideVideosMobile', 'sideVideosDesktop', 'category', 'genre'));
         }
     }
 
-    public function showOnly(Request $request, Blog $blog)
+    public function showOnly(Request $request, Video $blog)
     {
-        $sideBlogsDesktop = Blog::inRandomOrder()->get();
-        $sideBlogsMobile = Blog::orderBy('created_at', 'desc')->paginate(5);
-        $html = $this->sidebarHTML($sideBlogsMobile);
+        $sideVideosDesktop = Video::inRandomOrder()->get();
+        $sideVideosMobile = Video::orderBy('created_at', 'desc')->paginate(5);
+        $html = $this->sidebarHTML($sideVideosMobile);
         if ($request->ajax()) {
             return $html;
         }
@@ -463,16 +462,16 @@ class BlogController extends Controller
         $fb_title = str_replace('(Adsense)', '', $fb_title);
 
         $current_blog = $blog;
-        $similar_blogs = Blog::inRandomOrder()->get();
+        $similar_blogs = Video::inRandomOrder()->get();
 
         $category = 'japan';
-        return view('blog.show', compact('blog', 'content', 'similar_blogs', 'fb_title', 'current_blog', 'sideBlogsDesktop', 'sideBlogsMobile', 'category', 'genre'));
+        return view('blog.show', compact('blog', 'content', 'similar_blogs', 'fb_title', 'current_blog', 'sideVideosDesktop', 'sideVideosMobile', 'category', 'genre'));
     }
 
-    public function sidebarHTML($sideBlogsMobile)
+    public function sidebarHTML($sideVideosMobile)
     {
         $html = '';
-        foreach ($sideBlogsMobile as $blog) {
+        foreach ($sideVideosMobile as $blog) {
             $html .='<div class="row hover-box-shadow" style="margin:0px -5px; padding: 15px 15px;">
                         <a href="https://www.laughseejapan.com'.'/'.$blog->genre.'/'.$blog->category.'/'.$blog->id.'">
                             <div class="col-xs-3" style="position:relative; padding-right:5px">
@@ -525,10 +524,10 @@ class BlogController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Blog  $blog
+     * @param  \App\Video  $blog
      * @return \Illuminate\Http\Response
      */
-    public function edit(Blog $blog)
+    public function edit(Video $blog)
     {
         
     }
@@ -537,10 +536,10 @@ class BlogController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Blog  $blog
+     * @param  \App\Video  $blog
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Blog $blog)
+    public function update(Request $request, Video $blog)
     {
         //
     }
@@ -548,10 +547,10 @@ class BlogController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Blog  $blog
+     * @param  \App\Video  $blog
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Blog $blog)
+    public function destroy(Video $blog)
     {
         //
     }
@@ -566,7 +565,7 @@ class BlogController extends Controller
             unset($queryArray[$key]);
         }
 
-        $videosSelect = Blog::where('genre', '!=', 'blog')->orderBy('created_at', 'desc')->select('id', 'title', 'tags')->get()->toArray();
+        $videosSelect = Video::where('genre', '!=', 'blog')->orderBy('created_at', 'desc')->select('id', 'title', 'tags')->get()->toArray();
         $rankings = [];
         foreach ($videosSelect as $videoSelect) {
             $score = 0;
@@ -594,7 +593,7 @@ class BlogController extends Controller
 
         $videosArray = [];
         foreach ($rankings as $rank) {
-            array_push($videosArray, Blog::find($rank['id']));
+            array_push($videosArray, Video::find($rank['id']));
         }
 
         $page = Input::get('page', 1); // Get the ?page=1 from the url
@@ -659,7 +658,7 @@ class BlogController extends Controller
 
     public function sitemap()
     {
-        $videos = Blog::orderBy('created_at', 'desc')->get();
+        $videos = Video::orderBy('created_at', 'desc')->get();
         $watches = Watch::orderBy('created_at', 'desc')->get();
         $time = Carbon::now()->format('Y-m-d\Th:i:s').'+00:00';
         return Response::view('layouts.sitemap', compact('videos', 'watches', 'time'))->header('Content-Type', 'application/xml');

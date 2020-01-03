@@ -4,9 +4,9 @@
     <p style="font-size: 0.9em; padding-bottom: 2px;">
       @foreach ($video->tags() as $tag)
         @if (strpos($tag, '完整版') !== false)
-          <a style="color:#a9a9a9" href="{{ route('video.watch') }}?v={{ App\Blog::where('category', $video->category)->orderBy('created_at', 'desc')->first()->id }}">#{{ $tag }}</a>
+          <a style="color:#a9a9a9" href="{{ route('video.watch') }}?v={{ App\Video::where('category', $video->category)->orderBy('created_at', 'desc')->first()->id }}">#{{ $tag }}</a>
         @else
-          <a style="color:#a9a9a9" href="{{ route('blog.search') }}?query={{ $tag }}">#{{ $tag }}</a>
+          <a style="color:#a9a9a9" href="{{ route('video.search') }}?query={{ $tag }}">#{{ $tag }}</a>
         @endif
       @endforeach
     </p>
