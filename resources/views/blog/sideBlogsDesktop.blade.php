@@ -13,7 +13,7 @@
         </div>
         <br>
     @endforeach
-    <div style="margin:5px 0px 25px 0px; border: 1px black solid">
+    <div style="margin:5px 0px 25px 0px;">
         <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
         <!-- Content-Top -->
         <ins class="adsbygoogle"

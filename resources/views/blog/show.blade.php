@@ -20,15 +20,15 @@
 @section('content')
 
 <div class="padding-setup mobile-container">
-	<div class="row no-gutter">
+	<div class="row no-gutter" style="padding-top: 15px;">
 		<div class="col-md-8">
-			<div style="margin-bottom: 15px" class="blog-content">
+			<div style="margin-bottom: 5px" class="blog-content">
 				<img class="img-responsive border-radius-2" style="width:100%;height:100%" src="{{ $blog->imgur() }}" alt="日本文化">
 				
 				<div>
-					<h4 style="padding-top: 10px; font-weight: 400;">
+					<h4 style="padding-top: 3px; font-weight: 400; margin-bottom:0px">
 						<div class="blog-show-title">{{ $blog->title }}</div>
-						<div style="padding-left: 3px" class="vertical-align">
+						<div style="padding-left: 3px; margin-top: -8px;" class="vertical-align">
 							<div style="font-size:14px;font-weight:300;">
 								{{ Carbon\Carbon::parse($blog->created_at)->format('d / m / Y') }}
 							</div>
