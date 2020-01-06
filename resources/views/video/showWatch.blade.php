@@ -21,19 +21,18 @@
 			  <button class="tablinks" onclick="openList(event, 'Related')">相關影片</button>
 			</div>
 
-			<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-			<ins class="adsbygoogle"
-			     style="display:block"
-			     data-ad-format="fluid"
-			     data-ad-layout-key="-e2+97-3z-b8+zi"
-			     data-ad-client="ca-pub-4485968980278243"
-			     data-ad-slot="1056756521"></ins>
-			<script>
-			     (adsbygoogle = window.adsbygoogle || []).push({});
-			</script>
-
 			<!-- Tab content -->
 			<div id="Watch" class="tabcontent">
+				<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+				<ins class="adsbygoogle"
+				     style="display:block"
+				     data-ad-format="fluid"
+				     data-ad-layout-key="-dt+97-3z-b8+zi"
+				     data-ad-client="ca-pub-4485968980278243"
+				     data-ad-slot="1056756521"></ins>
+				<script>
+				     (adsbygoogle = window.adsbygoogle || []).push({});
+				</script>
 			    @foreach ($videos as $video)
 				    <div style="{{ $video->id == $current->id ? 'background-color: #7A7A7A' : '' }}">
 				    	@include('video.singleRelatedWatch')
