@@ -42,7 +42,7 @@
 
 			<div id="Related" class="tabcontent">
 				@foreach ($related as $video)
-			    	@include('video.singleRelatedWatch')
+			    	@include('video.singleRelatedPost')
 			    @endforeach
 			</div>
 		</div>

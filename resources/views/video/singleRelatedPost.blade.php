@@ -5,8 +5,8 @@
       <span style="position: absolute; bottom:6px; right: 9px; background-color: rgba(0,0,0,0.8); color: white; padding: 1px 5px 1px 5px; opacity: 0.9; font-size: 0.85em; border-radius: 2px;">{{ $video->duration() }}</span>
     </div>
     <div style="padding-top: 1px; padding-right: 12px; padding-left: 4px;" class="col-xs-6 col-sm-6 col-md-6">
-      <h4 style="margin-top:0px; margin-bottom: 0px; line-height: 19px; font-size: 1.05em; color:#323232">{{ $video->title }}</h4>
-      <p style="color: gray; margin-top: 1px; margin-bottom: 0px; font-size: 0.85em;">觀看次數：{{ $video->views() }}次</p>
+      <h4 style="margin-top:0px; margin-bottom: 0px; line-height: 19px; font-size: 1.05em; {{ $is_program ? "color:white;" : "color:#323232;" }}">{{ $video->title }}</h4>
+      <p style="color: gray; margin-top: 1px; margin-bottom: 0px; font-size: 0.85em;{{ $is_program ? "color:#e5e5e5;" : "" }}">觀看次數：{{ $video->views() }}次</p>
     </div>
   </a>
 </div>
