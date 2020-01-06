@@ -15,17 +15,19 @@
 	<div class="video-sidebar-wrapper">
 		@include('video.singleShowWatch')
 		<div class="padding-setup" style="font-weight: 400; margin-top:-9px; margin-bottom: 10px; font-size: 1.2em;">即將播放</div>
-		
-		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-		<ins class="adsbygoogle"
-		     style="display:block"
-		     data-ad-format="fluid"
-		     data-ad-layout-key="-ej+7w+2t-jk+og"
-		     data-ad-client="ca-pub-4485968980278243"
-		     data-ad-slot="1056756521"></ins>
-		<script>
-		     (adsbygoogle = window.adsbygoogle || []).push({});
-		</script>
+
+		<div style="padding:7px 0px;">
+			<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+			<ins class="adsbygoogle"
+			     style="display:block;"
+			     data-ad-format="fluid"
+			     data-ad-layout-key="-ew+88-16-i1+10j"
+			     data-ad-client="ca-pub-4485968980278243"
+			     data-ad-slot="1056756521"></ins>
+			<script>
+			     (adsbygoogle = window.adsbygoogle || []).push({});
+			</script>
+		</div>
 
 	    @foreach ($videos as $video)
 		    <div style="{{ $video->id == $current->id ? 'background-color: #7A7A7A' : '' }}">
