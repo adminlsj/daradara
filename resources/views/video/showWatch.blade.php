@@ -27,7 +27,7 @@
 				<ins class="adsbygoogle"
 				     style="display:block"
 				     data-ad-format="fluid"
-				     data-ad-layout-key="-dt+97-3z-b8+zi"
+				     data-ad-layout-key="-dr+97-3z-b8+zi"
 				     data-ad-client="ca-pub-4485968980278243"
 				     data-ad-slot="1056756521"></ins>
 				<script>
