@@ -24,10 +24,11 @@
       <i style="color: white;-moz-transform: scale(-1, 1);-webkit-transform: scale(-1, 1);-o-transform: scale(-1, 1);-ms-transform: scale(-1, 1);transform: scale(-1, 1);" class="material-icons pull-right noselect">reply</i>
     </a>
     <div id="videoDescription" style="display: none; margin-top: 5px; padding-bottom: 10px;">
+      <p style="white-space: pre-wrap; color: white; margin-bottom: 5px;"><strong>{{ $video->title() }}</strong></p>
       <p style="white-space: pre-wrap; color: white; margin-bottom: 20px;">{{ $video->caption }}</p>
-      <p style="white-space: pre-wrap; color: white; margin-bottom: 20px;">劇情大綱</p>
+      <p style="white-space: pre-wrap; color: white; margin-bottom: 5px;"><strong>劇情大綱</strong></p>
       <p style="white-space: pre-wrap; color: white; margin-bottom: 20px;">{{ $watch != false ? $watch->description : ''}}</p>
-      <p style="white-space: pre-wrap; color: white; margin-bottom: 20px;">角色聲優</p>
+      <p style="white-space: pre-wrap; color: white; margin-bottom: 5px;"><strong>登場人物</strong></p>
       <p style="white-space: pre-wrap; color: white; margin-bottom: 20px;">{{ $watch != false ? $watch->cast : ''}}</p>
       <p><a style="color:white; text-decoration: none;" href="{{ route('video.intro', [$video->genre, $watch->titleToUrl()]) }}"><strong>完整介紹 ></strong></a></p>
     </div>

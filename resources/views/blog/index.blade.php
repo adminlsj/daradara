@@ -6,13 +6,13 @@
 
 @section('content')
 	<div class="padding-setup mobile-container">
-		<div class="row" style="padding-top: 5px; padding-bottom: 4px">
+		<div class="row" style="padding-top: 5px;">
 			@foreach ($blogs as $blog)
 				<div class="row hover-box-shadow" style="margin:0px 0px; padding: 15px 15px;">
 	                <a href="{{ route('blog.show', ['blog' => $blog]) }}">
 	                    <div class="col-xs-4" style="position:relative; padding-right:5px">
 	                        <div class="row">
-	                            <img style="width:100%; border-radius:2px" src="{{ $blog->imgur() }}" alt="日本文化">
+	                            <img style="width:100%; border-radius:2px" src="{{ $blog->imgurH() }}" alt="{{ $blog->title }}">
 	                            <div class="related-blogs-date" style="font-size: 12.5px; color: gray; position:absolute; bottom:1px; right:-93px; font-weight:400;">{{ Carbon\Carbon::parse($blog->created_at)->format("Y-m-d") }}</div>
 	                        </div>
 	                    </div>

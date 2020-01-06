@@ -23,7 +23,7 @@
 	<div class="row no-gutter" style="padding-top: 15px;">
 		<div class="col-md-8">
 			<div style="margin-bottom: 5px" class="blog-content">
-				<img class="img-responsive border-radius-2" style="width:100%;height:100%" src="{{ $blog->imgur() }}" alt="日本文化">
+				<img class="img-responsive border-radius-2" style="width:100%;height:100%" src="{{ $blog->imgurH() }}" alt="{{ $blog->title }}">
 				
 				<div>
 					<h4 style="padding-top: 3px; font-weight: 400; margin-bottom:0px">

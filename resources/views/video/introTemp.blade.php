@@ -1,5 +1,6 @@
 <div class="col-xs-6 col-xs-offset-3 col-sm-6 col-sm-offset-3 col-md-3 col-md-offset-0">
-	<img src="{{ $watch->imgurH() }}" style="width: 100%; height: 100%; border-radius: 3px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.5);" alt="{{ $watch->title }}">
+	<img class="lazy" style="width: 100%; height: 100%; border-radius: 3px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.5);" src="{{ $watch->imgurDefault() }}" data-src="{{ $watch->imgurH() }}" data-srcset="{{ $watch->imgurH() }}" alt="{{ $watch->title }}">
+
 	<div style="margin-top: 10px" class="visible-xs visible-sm"></div>
 </div>
 <div class="col-xs-12 col-sm-12 col-md-9">
@@ -14,6 +15,6 @@
 	</a>
 
 	<h4 style="white-space: pre-wrap;color:white; line-height: 19px; font-size: 0.95em;">{{ $watch->description }}</h4>
-	<h4 style="white-space: pre-wrap;color:white; line-height: 19px; font-size: 1.2em; padding-top: 5px;">角色聲優</h4>
+	<h4 style="white-space: pre-wrap;color:white; line-height: 19px; font-size: 1.2em; padding-top: 5px;">登場人物</h4>
 	<h4 style="white-space: pre-wrap;color:white; line-height: 19px; font-size: 0.95em; margin-top: -4px;">{{ $watch->cast }}</h4>
 </div>
