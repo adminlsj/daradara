@@ -21,7 +21,7 @@
 			<ins class="adsbygoogle"
 			     style="display:block"
 			     data-ad-format="fluid"
-			     data-ad-layout-key="-c1+bv-4e-8c+w6"
+			     data-ad-layout-key="-e2+91-3d-8i+sa"
 			     data-ad-client="ca-pub-4485968980278243"
 			     data-ad-slot="1056756521"></ins>
 			<script>
