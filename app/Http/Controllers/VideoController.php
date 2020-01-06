@@ -133,34 +133,33 @@ class VideoController extends Controller
 
         if ($request->has('v') && $request->v != 'null') {
             $video = Video::find($request->v);
+            $video->views++;
+            $video->save();
+            $current = $video;
+
+            $videosSelect = Video::where('id', '!=', $video->id)->inRandomOrder()->select('id', 'tags')->get()->toArray();
+            $rankings = [];
+            foreach ($videosSelect as $videoSelect) {
+                $score = 0;
+                foreach ($video->tags() as $tag) {
+                    if (strpos($videoSelect['tags'], $tag) !== false) {
+                        $score++;
+                    }
+                }
+                array_push($rankings, ['score' => $score, 'id' => $videoSelect['id']]);
+            }
+            usort($rankings, function ($a, $b) {
+                return $b['score'] <=> $a['score'];
+            });
+
+            $related = [];
+            for ($i = 0; $i < 30; $i++) {
+                array_push($related, Video::find($rankings[$i]['id']));
+            }
 
             if ($video->category == 'video') {
-                $videosSelect = Video::where('genre', '!=', 'blog')->where('id', '!=', $video->id)->inRandomOrder()->select('id', 'tags')->get()->toArray();
-                $rankings = [];
-                foreach ($videosSelect as $videoSelect) {
-                    $score = 0;
-                    foreach ($video->tags() as $tag) {
-                        if (strpos($videoSelect['tags'], $tag) !== false) {
-                            $score++;
-                        }
-                    }
-                    array_push($rankings, ['score' => $score, 'id' => $videoSelect['id']]);
-                }
-                usort($rankings, function ($a, $b) {
-                    return $b['score'] <=> $a['score'];
-                });
-
-                $videos = [];
-                for ($i = 0; $i < 30; $i++) { 
-                    array_push($videos, Video::find($rankings[$i]['id']));
-                }
-
-                $video->views++;
-                $video->save();
-
-                $current = $video;
+                $videos = $related;
                 $is_program = false;
-
                 return view('video.show', compact('video', 'videos', 'current', 'is_program'));
 
             } else {
@@ -171,8 +170,8 @@ class VideoController extends Controller
                 }
 
                 $query = Video::where('category', $video->category)->orderBy('created_at', 'asc')->pluck('id')->toArray();
-                $current = array_search($video->id, $query);
-                while(key($query) !== null && key($query) !== $current) next($query);
+                $now = array_search($video->id, $query);
+                while(key($query) !== null && key($query) !== $now) next($query);
 
                 $prev = 0; $next = 0;
                 if ($this->has_prev($query)) {
@@ -187,17 +186,11 @@ class VideoController extends Controller
                     $next = false;
                 }
 
-                $video->views++;
-                $video->save();
-
-                $genre = $video->genre;
-
                 $watch = Watch::where('category', $video->category)->first();
-
-                $current = $video;
+                $genre = $video->genre;
                 $is_program = true;
 
-                return view('video.showWatch', compact('genre', 'video', 'videos', 'prev', 'next', 'watch', 'current', 'is_program'));
+                return view('video.showWatch', compact('genre', 'video', 'videos', 'related', 'prev', 'next', 'watch', 'current', 'is_program'));
             }
         }
     }
