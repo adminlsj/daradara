@@ -19,9 +19,9 @@
 		<div style="padding:7px 0px;">
 			<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 			<ins class="adsbygoogle"
-			     style="display:block;"
+			     style="display:block"
 			     data-ad-format="fluid"
-			     data-ad-layout-key="-ew+88-16-i1+10j"
+			     data-ad-layout-key="-c1+bv-4e-8c+w6"
 			     data-ad-client="ca-pub-4485968980278243"
 			     data-ad-slot="1056756521"></ins>
 			<script>
