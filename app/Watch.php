@@ -13,7 +13,7 @@ class Watch extends Model
 
     public function videos()
     {
-        return Video::where('category', $this->category)->orderBy('created_at', 'asc')->get();
+        return Video::where('category', $this->category)->where('season', $this->season)->orderBy('created_at', 'asc')->get();
     }
 
     public function titleToURL()

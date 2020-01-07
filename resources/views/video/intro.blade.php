@@ -28,29 +28,108 @@
 	<br class="hidden-xs hidden-sm">
 	<hr style="border:solid 1.5px #222222; margin-top: 0px">
 
-	<div class="padding-setup mobile-container">
+	<div style="margin-top: -20px;" class="padding-setup mobile-container">
 		<div class="row">
-			<div class="padding-setup" style="font-weight: 400; margin-bottom: 10px; font-size: 1.2em; color: white; font-weight: bold;">播放列表</div>
-		    @foreach ($videos as $video)
-			    <div style="padding: 7px 0px;">
-				  <a href="{{ route('video.watch') }}?v={{ $video->id }}" class="row no-gutter">
-				    <div style="padding-left: 12px; padding-right: 4px; position: relative;" class="col-xs-6 col-sm-6 col-md-3">
-				      <img class="lazy" style="width: 100%; height: 100%;" src="{{ $video->imgur16by9() }}" data-src="{{ $video->imgurM() }}" data-srcset="{{ $video->imgurM() }}" alt="{{ $video->title }}">
-				      <span style="position: absolute; bottom:6px; right: 9px; background-color: rgba(0,0,0,0.8); color: white; padding: 1px 5px 1px 5px; opacity: 0.9; font-size: 0.85em; border-radius: 2px;">{{ $video->duration() }}</span>
-				    </div>
-				    <div style="padding-top: 1px; padding-right: 12px; padding-left: 4px;" class="col-xs-6 col-sm-6 col-md-9">
-				      <h4 style="margin-top:0px; margin-bottom: 0px; line-height: 19px; font-size: 1.05em; color:white;">{{ $video->title() }}</h4>
-				      <p style="color: gray; margin-top: 1px; margin-bottom: 0px; font-size: 0.85em; color:#e5e5e5">觀看次數：{{ $video->views() }}次</p>
-				      <div class="hidden-sm hidden-xs" style="margin-top:5px; font-size: 0.95em; color: #cccccc; line-height: 19px; white-space: pre-wrap;">{{ $video->caption }}</div>
-				    </div>
-				  </a>
+			<!-- Tab links -->
+			<div class="tab">
+			  <button class="tablinks" onclick="openList(event, 'Watch')" id="defaultOpen">全集列表</button>
+			  <button class="tablinks" onclick="openList(event, 'Related')">相關影片</button>
+			</div>
+
+			<!-- Tab content -->
+			<div id="Watch" class="tabcontent">
+				<div class="dropdown">
+				  <button style="padding-top: 0px;" onclick="openDropdown()" class="dropbtn">{{ $watch->season }}<span style="padding-top: 0px; padding-left: 7px; padding-right: 0px;" class="stretch dropbtn">v</span></button>
+				  <div id="myDropdown" class="dropdown-content">
+				      @foreach ($dropdown as $watch)
+				      	<a style="color:white; text-decoration: none;" href="{{ route('video.intro', [$watch->genre, $watch->titleToUrl()]) }}">{{ $watch->season }}</a>
+				      @endforeach
+				  </div>
 				</div>
 
-		    	<a class="visible-sm visible-xs" style="text-decoration: none;" href="{{ route('video.watch') }}?v={{ $video->id }}">
-			    	<div class="padding-setup" style="font-size: 0.95em; color: #cccccc; line-height: 19px; white-space: pre-wrap;">{{ $video->caption }}</div>
-			    </a>
-		    	<br>
-		    @endforeach
+			    @foreach ($videos as $video)
+				    <div style="padding: 7px 0px;">
+					  <a href="{{ route('video.watch') }}?v={{ $video->id }}" class="row no-gutter">
+					    <div style="padding-left: 12px; padding-right: 4px; position: relative;" class="col-xs-6 col-sm-6 col-md-3">
+					      <img class="lazy" style="width: 100%; height: 100%;" src="{{ $video->imgur16by9() }}" data-src="{{ $video->imgurM() }}" data-srcset="{{ $video->imgurM() }}" alt="{{ $video->title }}">
+					      <span style="position: absolute; bottom:6px; right: 9px; background-color: rgba(0,0,0,0.8); color: white; padding: 1px 5px 1px 5px; opacity: 0.9; font-size: 0.85em; border-radius: 2px;">{{ $video->duration() }}</span>
+					    </div>
+					    <div style="padding-top: 1px; padding-right: 12px; padding-left: 4px;" class="col-xs-6 col-sm-6 col-md-9">
+					      <h4 style="margin-top:0px; margin-bottom: 0px; line-height: 19px; font-size: 1.05em; color:white;">{{ $video->title() }}</h4>
+					      <p style="color: gray; margin-top: 1px; margin-bottom: 0px; font-size: 0.85em; color:#e5e5e5">觀看次數：{{ $video->views() }}次</p>
+					      <div class="hidden-sm hidden-xs" style="margin-top:5px; font-size: 0.95em; color: #cccccc; line-height: 19px; white-space: pre-wrap;">{{ $video->caption }}</div>
+					    </div>
+					  </a>
+					</div>
+
+			    	<a class="visible-sm visible-xs" style="text-decoration: none;" href="{{ route('video.watch') }}?v={{ $video->id }}">
+				    	<div class="padding-setup" style="font-size: 0.95em; color: #cccccc; line-height: 19px; white-space: pre-wrap;">{{ $video->caption }}</div>
+				    </a>
+			    	<br>
+			    @endforeach
+			</div>
+
+			<div id="Related" style="padding: 7px 8px;" class="tabcontent">
+		  		@foreach ($related as $watch)
+		  			<div class="{{ $watch->genre == 'variety' ? 'watch-variety' : 'watch-single' }}">
+		  		    <a style="text-decoration: none;" href="{{ route('video.intro', [$watch->genre, $watch->titleToUrl()]) }}">
+
+		            <img class="lazy" style="width: 100%; height: 100%; border-radius: 3px;" src="{{ $watch->imgurDefault() }}" data-src="{{ $watch->imgurM() }}" data-srcset="{{ $watch->imgurM() }}" alt="{{ $watch->title }}">
+
+		  			    <div style="height: 34px">
+		  				    <div style="margin-top: -26px;float: right; margin-right: 3px"><span style="background-color: rgba(0,0,0,0.8); color: white; padding: 1px 5px 1px 5px; opacity: 0.9; font-size: 0.85em; border-radius: 2px; font-weight: 300">更新至第{{ $watch->videos()->count() }}集</span></div>
+		  						<h4 style="color:white; margin-top:4px; margin-bottom: 0px; line-height: 19px; font-size: 1em;overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; font-weight: 500;">{{ $watch->title }}</h4>
+		  					</div>
+		  				</a>
+		  			</div>
+		  		@endforeach
+			</div>
 		</div>
 	</div>
+
+	<script>
+		function openList(evt, listName) {
+		  // Declare all variables
+		  var i, tabcontent, tablinks;
+
+		  // Get all elements with class="tabcontent" and hide them
+		  tabcontent = document.getElementsByClassName("tabcontent");
+		  for (i = 0; i < tabcontent.length; i++) {
+		    tabcontent[i].style.display = "none";
+		  }
+
+		  // Get all elements with class="tablinks" and remove the class "active"
+		  tablinks = document.getElementsByClassName("tablinks");
+		  for (i = 0; i < tablinks.length; i++) {
+		    tablinks[i].className = tablinks[i].className.replace(" active", "");
+		  }
+
+		  // Show the current tab, and add an "active" class to the button that opened the tab
+		  document.getElementById(listName).style.display = "block";
+		  evt.currentTarget.className += " active";
+		}
+
+		// Get the element with id="defaultOpen" and click on it
+		document.getElementById("defaultOpen").click();
+
+		/* When the user clicks on the button,
+		toggle between hiding and showing the dropdown content */
+		function openDropdown() {
+		  document.getElementById("myDropdown").classList.toggle("show");
+		}
+
+		// Close the dropdown menu if the user clicks outside of it
+		window.onclick = function(event) {
+		  if (!event.target.matches('.dropbtn')) {
+		    var dropdowns = document.getElementsByClassName("dropdown-content");
+		    var i;
+		    for (i = 0; i < dropdowns.length; i++) {
+		      var openDropdown = dropdowns[i];
+		      if (openDropdown.classList.contains('show')) {
+		        openDropdown.classList.remove('show');
+		      }
+		    }
+		  }
+		}
+	</script>
 @endsection

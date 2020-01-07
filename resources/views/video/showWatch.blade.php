@@ -23,9 +23,10 @@
 
 			<!-- Tab content -->
 			<div id="Watch" class="tabcontent">
+				<div style="border: solid 1px black">
 				<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 				<ins class="adsbygoogle"
-				     style="display:block"
+				     style="display:block;"
 				     data-ad-format="fluid"
 				     data-ad-layout-key="-do+97-3z-b8+zi"
 				     data-ad-client="ca-pub-4485968980278243"
@@ -33,6 +34,17 @@
 				<script>
 				     (adsbygoogle = window.adsbygoogle || []).push({});
 				</script>
+			</div>
+
+				<div class="dropdown">
+				  <button onclick="openDropdown()" class="dropbtn">{{ $watch->season }}<span style="padding-left: 7px; padding-right: 0px;" class="stretch dropbtn">v</span></button>
+				  <div id="myDropdown" class="dropdown-content">
+				      @foreach ($dropdown as $watch)
+				      	<a style="color:white; text-decoration: none;" href="{{ route('video.intro', [$watch->genre, $watch->titleToUrl()]) }}">{{ $watch->season }}</a>
+				      @endforeach
+				  </div>
+				</div>
+
 			    @foreach ($videos as $video)
 				    <div style="{{ $video->id == $current->id ? 'background-color: #7A7A7A' : '' }}">
 				    	@include('video.singleRelatedWatch')
@@ -72,5 +84,25 @@
 
 		// Get the element with id="defaultOpen" and click on it
 		document.getElementById("defaultOpen").click();
+
+		/* When the user clicks on the button,
+		toggle between hiding and showing the dropdown content */
+		function openDropdown() {
+		  document.getElementById("myDropdown").classList.toggle("show");
+		}
+
+		// Close the dropdown menu if the user clicks outside of it
+		window.onclick = function(event) {
+		  if (!event.target.matches('.dropbtn')) {
+		    var dropdowns = document.getElementsByClassName("dropdown-content");
+		    var i;
+		    for (i = 0; i < dropdowns.length; i++) {
+		      var openDropdown = dropdowns[i];
+		      if (openDropdown.classList.contains('show')) {
+		        openDropdown.classList.remove('show');
+		      }
+		    }
+		  }
+		}
 	</script>
 @endsection

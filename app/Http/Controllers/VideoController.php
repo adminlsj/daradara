@@ -73,6 +73,17 @@ class VideoController extends Controller
             'imgur' => '',
         ]);*/
 
+        $videos = Video::where('genre', 'variety')->where('category', '!=', 'video')->get();
+        foreach ($videos as $video) {
+            $video->season = '2020年';
+            $video->save();
+        }
+        $watches = Watch::where('genre', 'variety')->get();
+        foreach ($watches as $watch) {
+            $watch->season = '2020年';
+            $watch->save();
+        }
+
         $genre = $request->path();
         if ($genre == 'variety') {
             $watches = Watch::where('genre', $genre)->get();
@@ -95,15 +106,18 @@ class VideoController extends Controller
         $title = str_replace("-", " ", $title);
         $watch = Watch::where('genre', $genre)->where('title', $title)->first();
 
-        $videos = Video::where('category', $watch->category);
+        $videos = Video::where('category', $watch->category)->where('season', $watch->season);
         if ($genre == 'drama' || $genre == 'anime') {
             $videos = $videos->orderBy('created_at', 'asc')->get();
         } else {
             $videos = $videos->orderBy('created_at', 'desc')->get();
         }
 
+        $dropdown = Watch::where('category', $watch->category)->orderBy('created_at', 'asc')->get();
+        $related = Watch::where('genre', $watch->genre)->orderBy('created_at', 'desc')->limit(30)->get();
+
         $is_program = true;
-        return view('video.intro', compact('watch', 'videos', 'is_program'));
+        return view('video.intro', compact('watch', 'videos', 'dropdown', 'related', 'is_program'));
     }
 
     public function watch(Request $request){
@@ -164,12 +178,12 @@ class VideoController extends Controller
 
             } else {
                 if ($video->genre == 'drama' || $video->genre == 'anime') {
-                    $videos = Video::where('category', $video->category)->orderBy('created_at', 'asc')->get();
+                    $videos = Video::where('category', $video->category)->where('season', $video->season)->orderBy('created_at', 'asc')->get();
                 } else {
-                    $videos = Video::where('category', $video->category)->orderBy('created_at', 'desc')->get();
+                    $videos = Video::where('category', $video->category)->where('season', $video->season)->orderBy('created_at', 'desc')->get();
                 }
 
-                $query = Video::where('category', $video->category)->orderBy('created_at', 'asc')->pluck('id')->toArray();
+                $query = Video::where('category', $video->category)->where('season', $video->season)->orderBy('created_at', 'asc')->pluck('id')->toArray();
                 $now = array_search($video->id, $query);
                 while(key($query) !== null && key($query) !== $now) next($query);
 
@@ -186,11 +200,13 @@ class VideoController extends Controller
                     $next = false;
                 }
 
-                $watch = Watch::where('category', $video->category)->first();
+                $dropdown = Watch::where('category', $video->category)->orderBy('created_at', 'asc')->get();
+
+                $watch = Watch::where('category', $video->category)->where('season', $video->season)->first();
                 $genre = $video->genre;
                 $is_program = true;
 
-                return view('video.showWatch', compact('genre', 'video', 'videos', 'related', 'prev', 'next', 'watch', 'current', 'is_program'));
+                return view('video.showWatch', compact('genre', 'video', 'videos', 'related', 'prev', 'next', 'dropdown', 'watch', 'current', 'is_program'));
             }
         }
     }
