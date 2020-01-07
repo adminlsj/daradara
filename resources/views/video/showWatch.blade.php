@@ -23,7 +23,6 @@
 
 			<!-- Tab content -->
 			<div id="Watch" class="tabcontent">
-				<div style="border: solid 1px black">
 				<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 				<ins class="adsbygoogle"
 				     style="display:block;"
@@ -34,7 +33,6 @@
 				<script>
 				     (adsbygoogle = window.adsbygoogle || []).push({});
 				</script>
-			</div>
 
 				<div class="dropdown">
 				  <button onclick="openDropdown()" class="dropbtn">{{ $watch->season }}<span style="padding-left: 7px; padding-right: 0px;" class="stretch dropbtn">v</span></button>

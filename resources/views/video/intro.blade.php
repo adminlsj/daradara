@@ -39,7 +39,7 @@
 			<!-- Tab content -->
 			<div id="Watch" class="tabcontent">
 				<div class="dropdown">
-				  <button style="padding-top: 0px;" onclick="openDropdown()" class="dropbtn">{{ $watch->season }}<span style="padding-top: 0px; padding-left: 7px; padding-right: 0px;" class="stretch dropbtn">v</span></button>
+				  <button onclick="openDropdown()" class="dropbtn">{{ $watch->season }}<span style="padding-top: 0px; padding-left: 7px; padding-right: 0px;" class="stretch dropbtn">v</span></button>
 				  <div id="myDropdown" class="dropdown-content">
 				      @foreach ($dropdown as $watch)
 				      	<a style="color:white; text-decoration: none;" href="{{ route('video.intro', [$watch->genre, $watch->titleToUrl()]) }}">{{ $watch->season }}</a>
