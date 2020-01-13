@@ -23,16 +23,19 @@
 
 			<!-- Tab content -->
 			<div id="Watch" class="tabcontent">
-				<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-				<ins class="adsbygoogle"
-				     style="display:block;"
-				     data-ad-format="fluid"
-				     data-ad-layout-key="-do+97-3z-b8+zi"
-				     data-ad-client="ca-pub-4485968980278243"
-				     data-ad-slot="1056756521"></ins>
-				<script>
-				     (adsbygoogle = window.adsbygoogle || []).push({});
-				</script>
+				<div style="padding: 7px 0px;">
+					<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+					<!-- Horizontal Banner Ads -->
+					<ins class="adsbygoogle"
+					     style="display:block;"
+					     data-ad-client="ca-pub-4485968980278243"
+					     data-ad-slot="8455082664"
+					     data-ad-format="auto"
+					     data-full-width-responsive="true"></ins>
+					<script>
+					     (adsbygoogle = window.adsbygoogle || []).push({});
+					</script>
+				</div>
 
 				<div class="dropdown">
 				  <button onclick="openDropdown()" class="dropbtn">{{ $watch->season }}<span style="padding-left: 7px; padding-right: 0px;" class="stretch dropbtn">v</span></button>

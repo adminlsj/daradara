@@ -12,7 +12,7 @@
 @endsection
 
 @section('content')
-	<div style="background-image: url({{ $watch->imgurH() }}); background-size: 100%; background-repeat: no-repeat; background-position: 50%; filter: blur(30px); z-index: 0; opacity: 0.5;">
+	<div style="background-image: url({{ $watch->imgurH() }}); background-size: 100%; background-repeat: no-repeat; background-position: 50%; filter: blur(30px); z-index: -1; opacity: 0.5; pointer-events: none;">
 		<div class="padding-setup mobile-container">
 			<div style="padding-top: 15px; padding-bottom: 10px;" class="row">
 				@include('video.introTemp')

@@ -1,4 +1,4 @@
-<div class="col-xs-6 col-xs-offset-3 col-sm-6 col-sm-offset-3 col-md-3 col-md-offset-0">
+<div class="{{ $watch->genre == 'variety' ? 'col-xs-8 col-xs-offset-2' : 'col-xs-6 col-xs-offset-3' }} col-md-3 col-md-offset-0">
 	<img class="lazy" style="width: 100%; height: 100%; border-radius: 3px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.5);" src="{{ $watch->imgurDefault() }}" data-src="{{ $watch->imgurH() }}" data-srcset="{{ $watch->imgurH() }}" alt="{{ $watch->title }}">
 
 	<div style="margin-top: 10px" class="visible-xs visible-sm"></div>

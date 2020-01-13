@@ -17,6 +17,7 @@ Route::resource('blog', 'BlogController');
 
 Route::get('/about-us', 'HomeController@aboutUs');
 Route::get('/policy', 'HomeController@policy');
+Route::get('/check', 'HomeController@check');
 Route::get('/sitemap.xml', 'HomeController@sitemap');
 
 Route::get('/trending', 'VideoController@watch')->name('video.trending');

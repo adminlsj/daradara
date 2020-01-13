@@ -33,6 +33,27 @@ class Video extends Model
         }
     }
 
+    public function genre()
+    {
+        switch ($this->genre) {
+            case 'variety':
+                return '綜藝';
+                break;
+
+            case 'drama':
+                return '日劇';
+                break;
+
+            case 'anime':
+                return '動漫';
+                break;
+            
+            default:
+                return '綜藝';
+                break;
+        }
+    }
+
     public function views()
     {
         if ($this->views >= 10000) {

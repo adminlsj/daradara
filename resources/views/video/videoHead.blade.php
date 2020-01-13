@@ -4,8 +4,8 @@
 <meta property="og:description" content="{{ $current->caption }}" />
 <meta property="og:image" content="https://i.imgur.com/{{ $current->imgur }}h.png" />
 
-<meta name="title" content="{{ $current->title }} | 娛見日本 LaughSeeJapan">
-<title>{{ $current->title }} | 娛見日本 LaughSeeJapan</title>
+<title>{{ $current->title }} | {{ $current->genre() }}線上看 | 娛見日本 LaughSeeJapan</title>
+<meta name="title" content="{{ $current->title }} | {{ $current->genre() }}線上看 | 娛見日本 LaughSeeJapan">
 <meta name="description" content="{{ $current->caption }}">
 
 <script type="application/ld+json">
