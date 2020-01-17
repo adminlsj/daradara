@@ -40,19 +40,20 @@ class VideoController extends Controller
     }
 
     public function genre(Request $request){
-        /*$id = 1727;
+        /*$id = 1857;
         $genre = 'anime';
-        $category = 'sao3B';
-        $title = '刀劍神域 Alicization 愛麗絲篇異界戰爭 第三季後半';
-        $created_at = new Carbon('2019-10-27 10:55:30');
-        for ($i = 3; $i <= 12; $i++) { 
+        $category = 'wbsslnlypjzm';
+        $title = '我不是說了能力要平均值嗎？';
+        $created_at = new Carbon('2019-10-07 13:05:51');
+        for ($i = 1; $i <= 12; $i++) { 
             $video = Video::create([
                 'id' => $id,
                 'title' =>  $title.'【第'.$i.'話】',
                 'caption' => $title.'【第'.$i.'話】',
                 'genre' => $genre,
                 'category' => $category,
-                'tags' => '刀劍神域 Alicization 桐人 亞絲娜 愛麗絲 松岡禎丞 戶松遙 茅野愛衣',
+                'season' => '第一季',
+                'tags' => '我不是說了能力要平均值嗎？',
                 'hd' => 'https://archive.org/download/sqzw_11/SQZW0'.$i.'.mp4',
                 'sd' => 'https://archive.org/download/sqzw_11/SQZW0'.$i.'.mp4',
                 'imgur' => 'pending',
@@ -64,25 +65,14 @@ class VideoController extends Controller
             $created_at = $created_at->addDays(7);
             $id++;
         }
-        /*$watch = Watch::create([
-            'id' => 97,
+        $watch = Watch::create([
+            'id' => 158,
             'genre' => $genre,
             'category' => $category,
             'title' => $title,
             'description' => '',
             'imgur' => '',
         ]);*/
-
-        $videos = Video::where('genre', 'variety')->where('category', '!=', 'video')->get();
-        foreach ($videos as $video) {
-            $video->season = '2020年';
-            $video->save();
-        }
-        $watches = Watch::where('genre', 'variety')->get();
-        foreach ($watches as $watch) {
-            $watch->season = '2020年';
-            $watch->save();
-        }
 
         $genre = $request->path();
         if ($genre == 'variety') {

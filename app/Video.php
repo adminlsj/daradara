@@ -124,6 +124,27 @@ class Video extends Model
         return "https://i.imgur.com/".$this->imgur."h.jpg";
     }
 
+    public function source()
+    {
+        $sd = $this->sd;
+        if (strpos($sd, 'https://www.instagram.com/p/') !== false) {
+            try {
+                $curl_connection = curl_init($sd.'?__a=1');
+                curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+                curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+
+                $data = json_decode(curl_exec($curl_connection), true);
+                curl_close($curl_connection);
+                return $data['graphql']['shortcode_media']['video_url'];
+            } catch(Exception $e) {
+                return $e->getMessage();
+            }
+        } else {
+            return $sd;
+        }
+    }
+
     /* public function getRouteKeyName()
 	{
 	    return 'title';

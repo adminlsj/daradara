@@ -36,15 +36,23 @@ class HomeController extends Controller
         echo "Video Check STARTED<br>";
         foreach ($videos as $video) {
             $url = $video->sd;
-            if (strpos($url, 'google') !== false) {
-                $ch = curl_init($url);
-                curl_setopt($ch, CURLOPT_HEADER, 1);
-                curl_setopt($ch, CURLOPT_NOBODY, 1);
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-                $headers = curl_exec($ch);
-                curl_close($ch);
-                if (preg_match('/^Location: (.+)$/im', $headers, $matches)) {
-                    $url = trim($matches[1]);
+            if (strpos($url, 'https://www.instagram.com/p/') !== false) {
+                try {
+                    $curl_connection = curl_init($url.'?__a=1');
+                    curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+                    curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+                    curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+
+                    $data = json_decode(curl_exec($curl_connection), true);
+                    curl_close($curl_connection);
+
+                    if ($data === null) {
+                        $url = 'https://www.bilibili.com/404error';
+                    } else {
+                        $url = $data['graphql']['shortcode_media']['video_url'];
+                    }
+                } catch(Exception $e) {
+                    $url = $e->getMessage();
                 }
             }
             $headers = get_headers($url);
