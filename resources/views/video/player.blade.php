@@ -8,7 +8,7 @@
         poster='https://i.imgur.com/{{ $video->imgur }}l.png'
         oncontextmenu="return false;"
         data-setup='{ "aspectRatio":"16:9", "controls": true, "playsinline" : true, "autoplay": true, "muted": true, "preload": "auto" }'>
-      <source src="{{ $video->source() }}" type="video/mp4">
+      <source id="video-source" src="{{ $video->source() }}" type="video/mp4">
     </video>
   </div>
   <script src="{{ mix('js/video.js') }}"></script>

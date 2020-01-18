@@ -369,4 +369,21 @@ class VideoController extends Controller
     {
       return next($_array) !== false ?: key($_array) !== null;
     }
+
+    public function getSourceIG(Request $request)
+    {
+        $url = Input::get('urlIG');
+        try {
+            $curl_connection = curl_init($url.'?__a=1');
+            curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+            curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+
+            $data = json_decode(curl_exec($curl_connection), true);
+            curl_close($curl_connection);
+            return $data['graphql']['shortcode_media']['video_url'];
+        } catch(Exception $e) {
+            return $e->getMessage();
+        }
+    }
 }

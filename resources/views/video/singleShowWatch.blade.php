@@ -1,8 +1,8 @@
 @include('video.player')
 
 <div style="background-color:#222222; padding-bottom: 5px" class="padding-setup">
-    <div style="margin-bottom: 5px;">
-        <p style="padding: 7px 0px 2px 0px; font-size: 0.9em;">
+    <div style="margin-bottom: 5px; padding-top: 7px;">
+        <p style="margin-bottom:2px; font-size: 0.9em; {{ count($video->sd()) > 1 ? 'display:none;' : '' }}">
           @foreach ($video->tags() as $tag)
             @if (strpos($tag, '完整版') !== false)
               <a style="color:#e5e5e5;" href="{{ route('video.watch') }}?v={{ App\Video::where('category', $video->category)->orderBy('created_at', 'desc')->first()->id }}">#{{ $tag }}</a>
@@ -11,9 +11,34 @@
             @endif
           @endforeach
         </p>
+
         <a id="shareBtn-link" href="{{ route('video.watch') }}?v={{ $video->id }}" style="text-decoration: none; pointer-events: none;">
-          <h4 id="shareBtn-title" style="line-height: 23px; font-weight: 500; margin-top:-10px; margin-bottom: 0px; color:white; font-size: 1.25em">{{ $video->title }}</h4>
+          <h4 id="shareBtn-title" style="line-height: 23px; font-weight: 500; margin-top:0px; margin-bottom: 0px; color:white; font-size: 1.25em">{{ $video->title }}</h4>
         </a>
+
+        <div class="video-parts-wrapper" style="padding-top: 12px; padding-bottom: 5px; {{ count($video->sd()) == 1 ? 'display:none;' : '' }}">
+          @foreach ($video->sd() as $url)
+            <span class="{{ $loop->iteration == 1 ? 'active' : '' }}" onclick="changeSrc(this)" data-url="{{ $url }}">P{{ $loop->iteration }}</span>
+          @endforeach
+        </div>
+
+        <script>
+          function changeSrc(identifier) {
+            link = $(identifier).data('url');
+            $(".video-parts-wrapper>span.active").removeClass("active");
+            $(identifier).addClass('active');
+            $.ajax({
+               type:'GET',
+               url:'/getSourceIG',
+               data: {urlIG : link},
+               success:function(source) {
+                  document.getElementById('video-source').src = source;
+                  document.getElementById('video-source').parentNode.load();
+               }
+            });
+          }
+        </script>
+
     </div>
     <div style="margin-left: -4px;">
         <a style="text-decoration: none; {{ $prev != false ? 'color: white;' : 'pointer-events: none; color: #414141;' }}" href="{{ route('video.watch') }}?v={{ $prev }}"><i class="material-icons noselect">skip_previous</i></a>
