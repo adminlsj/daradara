@@ -24,16 +24,18 @@
 
         <script>
           function changeSrc(identifier) {
+            parentNode = $('#video-source').parent();
+            parentNode.parent().addClass('vjs-waiting');
+
             link = $(identifier).data('url');
             $(".video-parts-wrapper>span.active").removeClass("active");
             $(identifier).addClass('active');
+            
             $.ajax({
                type:'GET',
                url:'/getSourceIG',
                data: {urlIG : link},
                success:function(source) {
-                  parentNode = $('#video-source').parent();
-                  parentNode.parent().addClass('vjs-waiting');
                   parentNode.attr('src', source);
                   parentNode.load();
                   parentNode.play();
