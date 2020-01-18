@@ -32,8 +32,10 @@
                url:'/getSourceIG',
                data: {urlIG : link},
                success:function(source) {
-                  document.getElementById('video-source').src = source;
-                  document.getElementById('video-source').parentNode.load();
+                  parentNode = $('#video-source').parent();
+                  parentNode.attr('src', source);
+                  parentNode.load();
+                  parentNode.play();
                }
             });
           }
