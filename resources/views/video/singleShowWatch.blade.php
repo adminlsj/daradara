@@ -33,6 +33,7 @@
                data: {urlIG : link},
                success:function(source) {
                   parentNode = $('#video-source').parent();
+                  parentNode.parent().addClass('vjs-waiting');
                   parentNode.attr('src', source);
                   parentNode.load();
                   parentNode.play();
