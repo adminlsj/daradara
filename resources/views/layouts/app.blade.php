@@ -28,9 +28,15 @@
 </head>
 <body>
     <div style="background-color:{{ !Request::is('/') && !Request::is('*rank*') && !Request::is('*search*') && $is_program ? '#414141' : 'white' }};">
+
         @yield('nav')
 
         <div style="margin-top: 50px;" class="responsive-frame">
+            @if ($errors->any())
+                @foreach ($errors->all() as $error)
+                    <div id="error" style="color: white; width: 100%; background-color: #d84b6b; text-align: center; padding: 10px;">感謝您向我們提供意見，我們會儘快修正任何錯誤。</div>
+                @endforeach
+            @endif
             @yield('content')
         </div>
 

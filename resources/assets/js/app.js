@@ -52,5 +52,9 @@ window.onscroll = function() {
   prevScrollpos = currentScrollPos;
 }
 
+setTimeout(function(){
+    $('#error').hide()
+}, 5000)
+
 require('./lazyLoad');
 require('./videoShow');

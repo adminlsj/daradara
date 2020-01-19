@@ -7,6 +7,9 @@ use App\Watch;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Response;
+use Mail;
+use App\Mail\UserReport;
+use Redirect;
 
 class HomeController extends Controller
 {
@@ -22,6 +25,15 @@ class HomeController extends Controller
         return view('layouts.policy', compact('is_program'));
     }
 
+    public function userReport(Request $request)
+    {
+        if ($request->has('v') && $request->v != 'null') {
+            $video = Video::find($request->v);
+            Mail::to('laughseejapan@gmail.com')->send(new UserReport($video));
+        }
+        return Redirect::back()->withErrors('感謝您向我們提供意見或回報任何錯誤。');
+    }
+
     public function sitemap()
     {
         $videos = Video::orderBy('created_at', 'desc')->get();
@@ -35,30 +47,31 @@ class HomeController extends Controller
         $videos = Video::where('outsource', false)->orderBy('id', 'asc')->get();
         echo "Video Check STARTED<br>";
         foreach ($videos as $video) {
-            $url = $video->sd;
-            if (strpos($url, 'https://www.instagram.com/p/') !== false) {
-                try {
-                    $curl_connection = curl_init($url.'?__a=1');
-                    curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
-                    curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
-                    curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+            foreach ($video->sd() as $url) {
+                if (strpos($url, 'https://www.instagram.com/p/') !== false) {
+                    try {
+                        $curl_connection = curl_init($url.'?__a=1');
+                        curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+                        curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+                        curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
 
-                    $data = json_decode(curl_exec($curl_connection), true);
-                    curl_close($curl_connection);
+                        $data = json_decode(curl_exec($curl_connection), true);
+                        curl_close($curl_connection);
 
-                    if ($data === null) {
-                        $url = 'https://www.bilibili.com/404error';
-                    } else {
-                        $url = $data['graphql']['shortcode_media']['video_url'];
+                        if ($data === null) {
+                            $url = 'https://www.bilibili.com/404error';
+                        } else {
+                            $url = $data['graphql']['shortcode_media']['video_url'];
+                        }
+                    } catch(Exception $e) {
+                        $url = $e->getMessage();
                     }
-                } catch(Exception $e) {
-                    $url = $e->getMessage();
                 }
-            }
-            $headers = get_headers($url);
-            $http_response_code = substr($headers[0], 9, 3);
-            if (!($http_response_code == 200)) {
-              echo "<span style='color:red; font-weight:600;'>/watch?v=".$video->id." FAILED</span><br>";
+                $headers = get_headers($url);
+                $http_response_code = substr($headers[0], 9, 3);
+                if (!($http_response_code == 200)) {
+                  echo "<span style='color:red; font-weight:600;'>/watch?v=".$video->id." FAILED</span><br>";
+                }
             }
         }
         echo "Video Check ENDED<br>";
