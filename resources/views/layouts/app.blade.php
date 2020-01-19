@@ -9,7 +9,7 @@
         <link rel="shortcut icon" type="image/x-icon" href="https://s3.amazonaws.com/twobayjobs/system/intro/browser-icon.ico"/>
         <link rel="apple-touch-icon" href="https://i.imgur.com/OCEaQMK.png"/>
         <link rel="canonical" href="https://www.laughseejapan.com{{ Request::getRequestUri() }}" />
-        @if (Request::is('*trending*'))
+        @if (Request::is('*trending*') || Request::is('*userReport*'))
             <meta name="robots" content="noindex, follow" />
         @endif
     @show
