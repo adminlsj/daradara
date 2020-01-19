@@ -41,7 +41,7 @@
           </div>
           <div style="border: 0px; margin-bottom: -10px; font-size: 1.05em;" class="modal-footer">
             <a style="width: auto; background-color: white; border: 0px; color: black; font-weight: 400;" class="btn btn-primary" data-dismiss="modal">取消</a>
-            <a href="{{ route('email.userReport') }}?v={{ $video->id }}" style="width: auto; background-color: white; border: 0px; color: #d84b6b; font-weight: 400;" class="btn btn-primary">提交</a>
+            <a rel="nofollow" href="{{ route('email.userReport') }}?v={{ $video->id }}" style="width: auto; background-color: white; border: 0px; color: #d84b6b; font-weight: 400;" class="btn btn-primary">提交</a>
           </div>
         </div>
       </div>
