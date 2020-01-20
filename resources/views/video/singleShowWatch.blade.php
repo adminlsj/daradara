@@ -52,13 +52,13 @@
         <a style="text-decoration: none; margin-left: 8px; {{ $next != false ? 'color: white;' : 'pointer-events: none; color: #414141;' }}" href="{{ route('video.watch') }}?v={{ $next }}"><i class="material-icons noselect">skip_next</i></a>
     </div>
 
-    <div id="toggleVideoDescription" style="margin-top: -40px; padding-top:10px; padding-right:2px;cursor: pointer; color: white" class="pull-right"><i id="toggleVideoDescriptionIcon" class="material-icons noselect">expand_more</i></div>
+    <div id="toggleVideoDescription" style="margin-top: -40px; padding-top:11px; padding-right:2px;cursor: pointer; color: white" class="pull-right"><i id="toggleVideoDescriptionIcon" class="material-icons noselect">expand_more</i></div>
 
-    <a style="margin-top: -35px; margin-right: 31px; padding-right:10px; cursor: pointer;" class="pull-right" data-toggle="modal" data-target="#reportModal">
+    <a style="margin-top: -34px; margin-right: 31px; padding-right:10px; cursor: pointer;" class="pull-right" data-toggle="modal" data-target="#reportModal">
       <i style="color: white;" class="material-icons pull-right noselect">flag</i>
     </a>
 
-    <a id="shareBtn" style="margin-top: -35px; margin-right: 74px; padding-right:8px; cursor: pointer; text-decoration: none;" class="pull-right">
+    <a id="shareBtn" style="margin-top: -34px; margin-right: 74px; padding-right:8px; cursor: pointer; text-decoration: none;" class="pull-right">
       <i style="color: white;-moz-transform: scale(-1, 1);-webkit-transform: scale(-1, 1);-o-transform: scale(-1, 1);-ms-transform: scale(-1, 1);transform: scale(-1, 1);" class="material-icons pull-right noselect">reply</i>
     </a>
 
