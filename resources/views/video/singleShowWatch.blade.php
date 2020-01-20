@@ -54,31 +54,15 @@
 
     <div id="toggleVideoDescription" style="margin-top: -40px; padding-top:10px; padding-right:2px;cursor: pointer; color: white" class="pull-right"><i id="toggleVideoDescriptionIcon" class="material-icons noselect">expand_more</i></div>
 
-    <a style="margin-top: -35px; margin-right: 30px; padding-right:10px; cursor: pointer;" class="pull-right" data-toggle="modal" data-target="#reportModal">
+    <a style="margin-top: -35px; margin-right: 31px; padding-right:10px; cursor: pointer;" class="pull-right" data-toggle="modal" data-target="#reportModal">
       <i style="color: white;" class="material-icons pull-right noselect">flag</i>
     </a>
 
-    <a id="shareBtn" style="margin-top: -35px; margin-right: 70px; padding-right:10px; cursor: pointer; text-decoration: none;" class="pull-right">
+    <a id="shareBtn" style="margin-top: -35px; margin-right: 74px; padding-right:8px; cursor: pointer; text-decoration: none;" class="pull-right">
       <i style="color: white;-moz-transform: scale(-1, 1);-webkit-transform: scale(-1, 1);-o-transform: scale(-1, 1);-ms-transform: scale(-1, 1);transform: scale(-1, 1);" class="material-icons pull-right noselect">reply</i>
     </a>
 
-    <!-- Modal -->
-    <div style="padding: 150px;" class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="reportModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div style="padding: 10px;" class="modal-content">
-          <div style="border: 0px;" class="modal-header">
-            <h4 style="color: black; margin-bottom: 0px;" class="modal-title" id="reportModalLabel">無法觀看這部影片嗎？</h4>
-          </div>
-          <div style="color: gray; font-weight: 300; margin-top: -15px;" class="modal-body">
-            感謝您向我們提供意見或回報任何錯誤。
-          </div>
-          <div style="border: 0px; margin-bottom: -10px; font-size: 1.05em;" class="modal-footer">
-            <a style="width: auto; background-color: white; border: 0px; color: black; font-weight: 400;" class="btn btn-primary" data-dismiss="modal">取消</a>
-            <a rel="nofollow" href="{{ route('email.userReport') }}?v={{ $video->id }}" style="width: auto; background-color: white; border: 0px; color: #d84b6b; font-weight: 400;" class="btn btn-primary">提交</a>
-          </div>
-        </div>
-      </div>
-    </div>
+    @include('video.userReportModal')
 
     <div id="videoDescription" style="display: none; margin-top: 5px; padding-bottom: 10px;">
       <p style="white-space: pre-wrap; color: white; margin-bottom: 5px;"><strong>{{ $video->title() }}</strong></p>
