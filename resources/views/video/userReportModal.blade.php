@@ -1,6 +1,6 @@
 <!-- Modal -->
-<div style="padding: 150px;" class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="reportModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+<div style="padding:125px" class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="reportModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
     <form action="{{ route('email.userReport') }}" method="GET">
       <div style="padding: 10px;" class="modal-content">
         <div style="border: 0px;" class="modal-header">
