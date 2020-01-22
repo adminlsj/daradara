@@ -1,5 +1,5 @@
 @if ($video->outsource)
-  <div class="aspect-ratio" style="background-color: black">
+  <div class="aspect-ratio" style="background-color: black; background-image: url('https://i.imgur.com/o2hJHsfl.png'); background-position: center; background-repeat: no-repeat; background-size: 30px;">
       <iframe src="{{ $video->sd }}" style="border: 0; overflow: hidden;" allow="autoplay" allowfullscreen></iframe>
   </div>
 @else
