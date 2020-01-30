@@ -20,9 +20,9 @@
   "uploadDate": "{{ \Carbon\Carbon::parse($current->created_at)->format('Y-m-d\Th:i:s').'+00:00' }}",
   "duration": "{{ $current->durationData() }}",
   @if ($current->outsource)
-      "embedUrl": "{{ $current->sd }}",
+      "embedUrl": "{!! $current->sd !!}",
   @else
-      "contentUrl": "{{ $current->sd }}",
+      "contentUrl": "{!! $current->sd !!}",
   @endif
   "interactionStatistic": {
     "@type": "InteractionCounter",
