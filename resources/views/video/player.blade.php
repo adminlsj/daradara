@@ -15,6 +15,7 @@
       autoplay: true,
       theme: '#d84b6b',
       preload: 'auto',
+      volume: '0',
       video: {
         url: '{!! $video->source() !!}',
         pic: 'https://i.imgur.com/{{ $video->imgur }}l.png',
