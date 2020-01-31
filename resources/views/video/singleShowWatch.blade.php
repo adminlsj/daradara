@@ -24,8 +24,7 @@
 
         <script>
           function changeSrc(identifier) {
-            parentNode = $('#video-source').parent();
-            parentNode.parent().addClass('vjs-waiting');
+            $('#dplayer').addClass('dplayer-loading');
 
             link = $(identifier).data('url');
             $(".video-parts-wrapper>span.active>i").hide();
@@ -38,9 +37,17 @@
                url:'/getSourceIG',
                data: {urlIG : link},
                success:function(source) {
-                  parentNode.attr('src', source);
-                  parentNode.load();
-                  parentNode.play();
+                  const dp = new DPlayer({
+                    container: document.getElementById('dplayer'),
+                    autoplay: true,
+                    theme: '#d84b6b',
+                    preload: 'auto',
+                    video: {
+                      url: source,
+                      pic: 'https://i.imgur.com/{{ $video->imgur }}l.png',
+                      thumbnails: 'https://i.imgur.com/{{ $video->imgur }}l.png',
+                    },
+                  });
                }
             });
           }
