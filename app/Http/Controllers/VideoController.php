@@ -40,12 +40,12 @@ class VideoController extends Controller
     }
 
     public function genre(Request $request){
-        /*$id = 2101;
+        /*$id = 2137;
         $genre = 'anime';
-        $category = 'cqfdqfk';
-        $title = '純情房東俏房客';
-        $created_at = new Carbon('2000-08-03 10:15:02');
-        for ($i = 1; $i <= 25; $i++) { 
+        $category = 'mmgjydqdw';
+        $title = '迷茫管家與膽怯的我';
+        $created_at = new Carbon('2011-07-07 11:25:52');
+        for ($i = 1; $i <= 13; $i++) { 
             $video = Video::create([
                 'id' => $id,
                 'title' =>  $title.'【第'.$i.'話】',
@@ -53,7 +53,7 @@ class VideoController extends Controller
                 'genre' => $genre,
                 'category' => $category,
                 'season' => '第一季',
-                'tags' => '純情房東俏房客',
+                'tags' => '迷茫管家與膽怯的我',
                 'hd' => 'https://archive.org/download/sqzw_11/SQZW0'.$i.'.mp4',
                 'sd' => 'https://archive.org/download/sqzw_11/SQZW0'.$i.'.mp4',
                 'imgur' => 'pending',
@@ -66,7 +66,7 @@ class VideoController extends Controller
             $id++;
         }
         $watch = Watch::create([
-            'id' => 178,
+            'id' => 179,
             'genre' => $genre,
             'category' => $category,
             'title' => $title,
