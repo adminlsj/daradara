@@ -32,6 +32,7 @@ Route::get('/{genre}/{title}', 'VideoController@intro')->name('video.intro');
 
 Route::get('/watch', 'VideoController@watch')->name('video.watch');
 Route::get('/search', ['as' => 'video.search', 'uses' => 'VideoController@search']);
+Route::get('/search-google', ['as' => 'video.searchGoogle', 'uses' => 'VideoController@searchGoogle']);
 
 Auth::routes();
 Route::get('auth/{provider}', 'Auth\LoginController@redirectToProvider');

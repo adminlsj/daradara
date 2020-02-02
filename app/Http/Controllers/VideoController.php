@@ -40,12 +40,12 @@ class VideoController extends Controller
     }
 
     public function genre(Request $request){
-        /*$id = 1857;
+        /*$id = 2101;
         $genre = 'anime';
-        $category = 'wbsslnlypjzm';
-        $title = '我不是說了能力要平均值嗎？';
-        $created_at = new Carbon('2019-10-07 13:05:51');
-        for ($i = 1; $i <= 12; $i++) { 
+        $category = 'cqfdqfk';
+        $title = '純情房東俏房客';
+        $created_at = new Carbon('2000-08-03 10:15:02');
+        for ($i = 1; $i <= 25; $i++) { 
             $video = Video::create([
                 'id' => $id,
                 'title' =>  $title.'【第'.$i.'話】',
@@ -53,7 +53,7 @@ class VideoController extends Controller
                 'genre' => $genre,
                 'category' => $category,
                 'season' => '第一季',
-                'tags' => '我不是說了能力要平均值嗎？',
+                'tags' => '純情房東俏房客',
                 'hd' => 'https://archive.org/download/sqzw_11/SQZW0'.$i.'.mp4',
                 'sd' => 'https://archive.org/download/sqzw_11/SQZW0'.$i.'.mp4',
                 'imgur' => 'pending',
@@ -66,7 +66,7 @@ class VideoController extends Controller
             $id++;
         }
         $watch = Watch::create([
-            'id' => 158,
+            'id' => 178,
             'genre' => $genre,
             'category' => $category,
             'title' => $title,
@@ -358,6 +358,11 @@ class VideoController extends Controller
         }
 
         return view('video.search', compact('videos', 'query'));
+    }
+
+    public function searchGoogle(Request $request)
+    {
+        return view('video.searchGoogle');
     }
 
     public function has_prev(array $_array)
