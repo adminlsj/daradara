@@ -8,7 +8,7 @@ use App\Video;
 class Watch extends Model
 {
 	protected $fillable = [
-        'id', 'genre', 'category', 'title', 'description', 'imgur',
+        'id', 'genre', 'category', 'season', 'title', 'description', 'imgur',
     ];
 
     public function videos()

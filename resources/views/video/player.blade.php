@@ -23,4 +23,23 @@
     });
   </script>
 
+  <!--<video id="video_player" width="320" height="240" controls>
+    <source src="{!! $video->source() !!}" type="video/mp4">
+  </video>
+  <div id="meta"></div>
+
+  <script>
+    var myVideoPlayer = document.getElementById('video_player'),
+    meta = document.getElementById('meta');
+
+    myVideoPlayer.addEventListener('loadedmetadata', function () {
+        var duration = myVideoPlayer.duration;
+        $.ajax({
+           type:'GET',
+           url:'/updateDuration',
+           data: {video: {{ $video->id }}, dura: duration.toFixed(0)}
+        });
+    });
+  </script>-->
+
 @endif

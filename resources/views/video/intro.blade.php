@@ -48,7 +48,7 @@
 				</div>
 
 			    @foreach ($videos as $video)
-				    <div style="padding: 7px 0px;">
+				    <div id="{{ $video->id }}" style="padding: 7px 0px;">
 					  <a href="{{ route('video.watch') }}?v={{ $video->id }}" class="row no-gutter">
 					    <div style="padding-left: 12px; padding-right: 4px; position: relative;" class="col-xs-6 col-sm-6 col-md-3">
 					      <img class="lazy" style="width: 100%; height: 100%;" src="{{ $video->imgur16by9() }}" data-src="{{ $video->imgurM() }}" data-srcset="{{ $video->imgurM() }}" alt="{{ $video->title }}">

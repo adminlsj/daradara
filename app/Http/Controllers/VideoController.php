@@ -40,35 +40,37 @@ class VideoController extends Controller
     }
 
     public function genre(Request $request){
-        /*$id = 2137;
-        $genre = 'anime';
-        $category = 'mmgjydqdw';
-        $title = '迷茫管家與膽怯的我';
-        $created_at = new Carbon('2011-07-07 11:25:52');
-        for ($i = 1; $i <= 13; $i++) { 
+        /*$id = 2188;
+        $genre = 'variety';
+        $category = 'akbingo';
+        $season = '2020年';
+        $title = 'AKBINGO!';
+        $created_at = new Carbon('2019-05-07 01:20:52');
+        for ($i = 1; $i <= 21; $i++) { 
             $video = Video::create([
                 'id' => $id,
-                'title' =>  $title.'【第'.$i.'話】',
-                'caption' => $title.'【第'.$i.'話】',
+                'title' =>  Carbon::parse($created_at)->format('Y.m.d').' AKBINGO! EP'.($i+539),
+                'caption' => Carbon::parse($created_at)->format('Y.M.d').' AKBINGO! EP'.($i+523),
                 'genre' => $genre,
                 'category' => $category,
-                'season' => '第一季',
-                'tags' => '迷茫管家與膽怯的我',
+                'season' => $season,
+                'tags' => 'AKBINGO AKB48',
                 'hd' => 'https://archive.org/download/sqzw_11/SQZW0'.$i.'.mp4',
                 'sd' => 'https://archive.org/download/sqzw_11/SQZW0'.$i.'.mp4',
                 'imgur' => 'pending',
                 'views' => 100000,
                 'duration' => 0,
-                'outsource' => true,
+                'outsource' => false,
                 'created_at' => $created_at,
             ]);
             $created_at = $created_at->addDays(7);
             $id++;
         }
         $watch = Watch::create([
-            'id' => 179,
+            'id' => 182,
             'genre' => $genre,
             'category' => $category,
+            'season' => $season,
             'title' => $title,
             'description' => '',
             'imgur' => '',
@@ -390,5 +392,14 @@ class VideoController extends Controller
         } catch(Exception $e) {
             return $e->getMessage();
         }
+    }
+
+    public function updateDuration(Request $request)
+    {
+        $out = new \Symfony\Component\Console\Output\ConsoleOutput();
+        $video = Video::find(Input::get('video'));
+        $video->duration = Input::get('dura');
+        $out->writeln("Duration is ".Input::get('dura'));
+        $video->save();
     }
 }

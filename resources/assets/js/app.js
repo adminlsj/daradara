@@ -56,5 +56,12 @@ setTimeout(function(){
     $('#error').hide()
 }, 5000)
 
+$(document).ready(function () {
+    var hash = window.location.hash.substr(1);
+    $('html, body').animate({
+        scrollTop: $('#' + hash).offset().top
+    }, 'slow');
+});
+
 require('./lazyLoad');
 require('./videoShow');

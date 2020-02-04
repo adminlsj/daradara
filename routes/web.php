@@ -40,3 +40,5 @@ Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallb
 
 Route::resource('user', 'UserController');
 Route::post('users/{user}/storeAvatar', 'UserController@storeAvatar');
+
+Route::get('/updateDuration', 'VideoController@updateDuration');
