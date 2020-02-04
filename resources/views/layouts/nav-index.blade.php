@@ -12,6 +12,7 @@
               <option {{ Request::has('y') && Request::get('y') == '2017' ? 'selected' : '' }} value="2017">2017年</option>
               <option {{ Request::has('y') && Request::get('y') == '2016' ? 'selected' : '' }} value="2016">2016年</option>
               <option {{ Request::has('y') && Request::get('y') == '2015' ? 'selected' : '' }} value="2015">2015年</option>
+              <option {{ Request::has('y') && Request::get('y') == '2012' ? 'selected' : '' }} value="2012">2012年</option>
               <option {{ Request::has('y') && Request::get('y') == '2011' ? 'selected' : '' }} value="2011">2011年</option>
               <option {{ Request::has('y') && Request::get('y') == '2000' ? 'selected' : '' }} value="2000">2000年</option>
             </select>

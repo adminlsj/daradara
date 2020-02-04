@@ -87,6 +87,14 @@ nav input[type=text]:focus {
   display: flex;
 }
 
+.play-button-cover { 
+  position: absolute;
+  width: 20%;
+  height: auto;
+  bottom: 31.5%;
+  left: 41.5%;
+}
+
 .noselect {
   -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */

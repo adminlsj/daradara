@@ -40,21 +40,21 @@ class VideoController extends Controller
     }
 
     public function genre(Request $request){
-        /*$id = 2188;
-        $genre = 'variety';
-        $category = 'akbingo';
-        $season = '2020年';
-        $title = 'AKBINGO!';
-        $created_at = new Carbon('2019-05-07 01:20:52');
+        /*$id = 2224;
+        $genre = 'anime';
+        $category = 'zqxshz';
+        $season = '第一季';
+        $title = '最強學生會長';
+        $created_at = new Carbon('2012-04-04 11:20:52');
         for ($i = 1; $i <= 21; $i++) { 
             $video = Video::create([
                 'id' => $id,
-                'title' =>  Carbon::parse($created_at)->format('Y.m.d').' AKBINGO! EP'.($i+539),
-                'caption' => Carbon::parse($created_at)->format('Y.M.d').' AKBINGO! EP'.($i+523),
+                'title' =>  $title.'【第'.$i.'話】',
+                'caption' => $title.'【第'.$i.'話】',
                 'genre' => $genre,
                 'category' => $category,
                 'season' => $season,
-                'tags' => 'AKBINGO AKB48',
+                'tags' => '最強學生會長 最強會長黑神',
                 'hd' => 'https://archive.org/download/sqzw_11/SQZW0'.$i.'.mp4',
                 'sd' => 'https://archive.org/download/sqzw_11/SQZW0'.$i.'.mp4',
                 'imgur' => 'pending',
@@ -67,7 +67,7 @@ class VideoController extends Controller
             $id++;
         }
         $watch = Watch::create([
-            'id' => 182,
+            'id' => 183,
             'genre' => $genre,
             'category' => $category,
             'season' => $season,
