@@ -35,6 +35,12 @@ $('#search-submit-btn').click(function(e) {
     $("#search-form").submit();
 });
 
+$('#unmute-btn').click(function(e) {
+  dp.volume(0.7, true, false);
+  $('video').prop('muted', false);
+  $('#unmute-btn').css('display','none');
+});
+
 var prevScrollpos = window.pageYOffset;
 window.onscroll = function() {
   var currentScrollPos = window.pageYOffset;

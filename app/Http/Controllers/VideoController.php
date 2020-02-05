@@ -96,6 +96,9 @@ class VideoController extends Controller
     public function intro(String $genre, String $title, Request $request){
         $title = str_replace("_", " / ", $title);
         $title = str_replace("-", " ", $title);
+        if ($title == '跟你回家可以嗎？') {
+            $title = '跟拍到你家';
+        }
         $watch = Watch::where('genre', $genre)->where('title', $title)->first();
 
         $videos = Video::where('category', $watch->category)->where('season', $watch->season);
