@@ -39,6 +39,7 @@ $('#unmute-btn').click(function(e) {
   dp.volume(0.7, true, false);
   $('video').prop('muted', false);
   $('#unmute-btn').css('display','none');
+  $('#dplayer').addClass('dplayer-hide-controller');
 });
 
 var prevScrollpos = window.pageYOffset;
