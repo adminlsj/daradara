@@ -116,18 +116,19 @@ class VideoController extends Controller
     }
 
     public function watch(Request $request){
-        /*$id = 1360;
+        /*$id = 2252;
         $genre = 'variety';
-        $category = 'lddtz';
-        $created_at = new Carbon('2019-01-12 14:47:15');
+        $category = 'msydt';
+        $created_at = new Carbon('2019-03-07 11:47:15');
         for ($i = 1; $i <= 50; $i++) { 
             $video = Video::create([
                 'id' => $id,
-                'title' =>  $created_at->format('Y.m.d').' 嵐的大挑戰 / 交給嵐吧',
-                'caption' => $created_at->format('Y.m.d').' 嵐的大挑戰 / 交給嵐吧',
+                'title' =>  $created_at->format('Y.m.d').' 美食冤大頭',
+                'caption' => $created_at->format('Y.m.d').' 美食冤大頭',
                 'genre' => $genre,
                 'category' => $category,
-                'tags' => '嵐的大挑戰 交給嵐吧',
+                'season' => '2020年',
+                'tags' => '美食冤大頭',
                 'hd' => 'https://archive.org/download/sqzw_11/SQZW0'.$i.'.mp4',
                 'sd' => 'https://archive.org/download/sqzw_11/SQZW0'.$i.'.mp4',
                 'imgur' => 'pending',
@@ -383,18 +384,21 @@ class VideoController extends Controller
     public function getSourceIG(Request $request)
     {
         $url = Input::get('urlIG');
-        try {
-            $curl_connection = curl_init($url.'?__a=1');
-            curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
-            curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+        if (strpos($url, 'https://www.instagram.com/p/') !== false) {
+            try {
+                $curl_connection = curl_init($url.'?__a=1');
+                curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+                curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
 
-            $data = json_decode(curl_exec($curl_connection), true);
-            curl_close($curl_connection);
-            return $data['graphql']['shortcode_media']['video_url'];
-        } catch(Exception $e) {
-            return $e->getMessage();
+                $data = json_decode(curl_exec($curl_connection), true);
+                curl_close($curl_connection);
+                return $data['graphql']['shortcode_media']['video_url'];
+            } catch(Exception $e) {
+                return $e->getMessage();
+            }
         }
+        return $url;
     }
 
     public function updateDuration(Request $request)
