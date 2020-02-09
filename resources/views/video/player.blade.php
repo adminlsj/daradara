@@ -11,6 +11,7 @@
   </button>
   <div id="dplayer" style="width: 100%;height: auto;"></div>
   <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/flv.js/dist/flv.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/dplayer/dist/DPlayer.min.js"></script>
 
   <script>
