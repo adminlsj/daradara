@@ -159,6 +159,7 @@ class Video extends Model
 
     public function getSourceBB($url)
     {
+        $page = 1;
         if (($pos = strpos($url, "?p=")) !== FALSE) { 
             $page = substr($url, $pos + 3);
             $url = str_replace("?p=".$page, "", $url);
@@ -186,7 +187,8 @@ class Video extends Model
             $data = json_decode(curl_exec($curl_connection), true);
             curl_close($curl_connection);
 
-            return $data['data']['durl'][0]['url'];
+            $url = $data['data']['durl'][0]['url'];
+            return str_replace("http://", "https://", $url);
         } catch(Exception $e) {
             return $e->getMessage();
         }
