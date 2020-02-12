@@ -31,7 +31,7 @@
 
         @yield('nav')
 
-        <div style="margin-top: 50px;">
+        <div id="content-div" style="margin-top: 50px;">
             @if ($errors->any())
                 @foreach ($errors->all() as $error)
                     <div id="error" style="color: white; width: 100%; background-color: #d84b6b; text-align: center; padding: 10px;">感謝您向我們提供意見，我們會儘快修正任何錯誤。</div>
@@ -71,6 +71,7 @@
 
             if (is_mobile) {
                 $('nav').addClass('scroll-hide-nav');
+                $('#content-div').css('overflow-x', 'hidden');
             }
           </script>
     @show
