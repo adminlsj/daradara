@@ -2,7 +2,7 @@
   <div style="width: 80%; max-width: 1200px; background-color: {{ $backgroundColor }}" class="container-fluid responsive-frame">
     <div style="background-color: {{ $backgroundColor }}">
       <a href="/">
-          <img src="{{ $logoImage }}" style="margin-top: -6px;" height="30" alt="娛見日本 LaughSeeJapan">
+          <img src="{{ $logoImage }}" style="margin-top: -6px; margin-left: -5px;" height="30" alt="娛見日本 LaughSeeJapan">
       </a>
 
       <a style="font-size: 25px; line-height: 50px;" href="/"> </a>

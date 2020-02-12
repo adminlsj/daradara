@@ -18,6 +18,8 @@ Route::resource('blog', 'BlogController');
 Route::get('/about-us', 'HomeController@aboutUs');
 Route::get('/policy', 'HomeController@policy');
 Route::get('/check', 'HomeController@check');
+Route::get('/categoryEdit', 'HomeController@categoryEdit')->name('category.edit');
+Route::post('/categoryUpdate', 'HomeController@categoryUpdate')->name('category.update');
 Route::get('/sitemap.xml', 'HomeController@sitemap');
 Route::get('/getSourceIG', 'VideoController@getSourceIG');
 Route::get('/userReport', 'HomeController@userReport')->name('email.userReport');

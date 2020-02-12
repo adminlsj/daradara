@@ -106,7 +106,7 @@ nav input[type=text]:focus {
 }
 
 .padding-setup {
-  padding: 0px 15px;
+  padding: 0px 10px;
 }
 
 .video-parts-wrapper span {
@@ -121,6 +121,10 @@ nav input[type=text]:focus {
 .video-parts-wrapper span.active {
   background-color: red;
   color: white;
+}
+
+.home-video-wrapper {
+  padding-left: 10px; padding-right: 10px;
 }
 
 /* Place the navbar at the bottom of the page, and make it stick */
@@ -299,10 +303,6 @@ nav {
   width: 100%; /* Full width */
   display: block;
   transition: top 0.3s; /* Transition effect when sliding down (and up) */
-  z-index: 99;
-  -webkit-box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.3);
-  -moz-box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.3);
-  box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.3);
   z-index: 100;
 }
 
@@ -730,7 +730,7 @@ a > i {
   width: 20%;
   height: 100%;
   float: left;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
 .watch-variety{
@@ -738,7 +738,7 @@ a > i {
   width: 25%;
   height: 100%;
   float: left;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
 .home-padding-container {

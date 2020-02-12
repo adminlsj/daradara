@@ -68,6 +68,8 @@ class HomeController extends Controller
                     } catch(Exception $e) {
                         $url = $e->getMessage();
                     }
+                } elseif (strpos($url, 'https://www.bilibili.com/') !== false) {
+                    $url = $video->getSourceBB($url);
                 }
                 $headers = get_headers($url);
                 $http_response_code = substr($headers[0], 9, 3);
@@ -77,5 +79,33 @@ class HomeController extends Controller
             }
         }
         echo "Video Check ENDED<br>";
+    }
+
+    public function categoryEdit()
+    {
+        $is_program = false;
+        return view('video.categoryEdit', compact('is_program')); 
+    }
+
+    public function categoryUpdate(Request $request)
+    {
+        $videos = Video::where('category', request('category'))->orderBy('created_at', 'asc')->get();
+        $links = request('sourceLinks');
+        $links = preg_split('/\r\n|\r|\n/', $links);
+
+        for ($i = 0; $i < count($links); $i++) { 
+            $links[$i] = trim($links[$i]);
+            if (($pos = strpos($links[$i], "$")) !== FALSE) { 
+                $links[$i] = trim(substr($links[$i], $pos + 1));
+            }
+        }
+
+        for ($i = 0; $i < count($videos); $i++) { 
+            $videos[$i]->sd = $links[$i];
+            $videos[$i]->hd = $links[$i];
+            $videos[$i]->save();
+        }
+
+        return redirect()->action('HomeController@categoryEdit', ['is_program' => false]);
     }
 }
