@@ -1,7 +1,7 @@
 <div class="col-xs-6 col-sm-6 col-md-3" style="padding-left:5px; padding-right:5px; margin-bottom: 10px;">
 	<div style="background-color: white; border-radius: 3px; box-shadow: 0 1px 3px rgba(0,0,0,0.05)">
 		<a href="{{ route('video.watch') }}?v={{ $video->id }}">
-			<img class="lazy" style="border-top-left-radius: 3px; border-top-right-radius: 3px; width: 100%; height: 100%;" src="{{ $video->imgur16by9() }}" data-src="{{ $video->imgurM() }}" data-srcset="{{ $video->imgurM() }}" alt="{{ $video->title }}">
+			<img class="lazy" style="border-top-left-radius: 3px; border-top-right-radius: 3px; width: 100%; height: 100%;" src="{{ $video->imgur16by9() }}" data-src="{{ $video->imgurL() }}" data-srcset="{{ $video->imgurL() }}" alt="{{ $video->title }}">
 		</a>
 
 		<div style="position: relative; height: 47px; padding: 0px 8px;">

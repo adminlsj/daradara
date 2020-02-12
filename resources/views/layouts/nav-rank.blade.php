@@ -1,5 +1,5 @@
-<nav style="background-color: white; margin-top: 49px;" class="scroll-hide-nav" >
-  <div style="width: 80%; max-width: 1200px; background-color: white" class="container-fluid responsive-frame">
+<nav style="background-color: white; margin-top: 49px;" class="nav-sub-width">
+  <div style="background-color: white" class="container-fluid">
     <div class="nav-tab-container" style="background-color: white;">
       <a href="{{ route('video.rank') }}" style="width: 25%; float:left; text-align: center; text-decoration: none;">
         <h4 class="{{ !Request::has('g') ? 'nav-tab-active' : '' }}"><span>&nbsp;全部&nbsp;</span></h4>

@@ -1,4 +1,4 @@
-<div class="navbar">
+<div class="navbar hidden-lg hidden-md">
   <a href="/" class="{{ Request::is('/') ? 'active' : ''}}">
     <i class="material-icons">home</i>
     <span>主頁</span>

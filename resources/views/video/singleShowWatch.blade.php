@@ -1,6 +1,6 @@
 @include('video.player')
 
-<div style="background-color:#222222; padding-bottom: 5px" class="padding-setup">
+<div style="background-color:#222222; padding-bottom: 5px; padding-left: 15px; padding-right: 15px;">
     <div style="margin-bottom: 5px; padding-top: 7px;">
         <p style="margin-bottom:2px; font-size: 0.9em; {{ count($video->sd()) > 1 ? 'display:none;' : '' }}">
           @foreach ($video->tags() as $tag)

@@ -9,13 +9,17 @@
 @endsection
 
 @section('nav')
-	@include('layouts.nav-main', ['logoImage' => 'https://i.imgur.com/M8tqx5K.png', 'backgroundColor' => 'white', 'itemsColor' => "gray"])
+	@include('layouts.nav-main', ['logoImage' => 'https://i.imgur.com/M8tqx5K.png', 'backgroundColor' => 'white', 'itemsColor' => "gray", 'menuBtnColor' => '#595959'])
 @endsection
 
 @section('content')
-<div class="padding-setup mobile-container">
-	<div class="row" style="padding-top: 6px;">
-		<div class="col-md-12">
+<div class="row">
+	<div class="col-lg-2 col-md-2 hidden-sm hidden-xs sidebar-menu">
+		@include('video.sidebarMenu', ['theme' => 'white'])
+	</div>
+
+	<div class="col-md-10">
+		<div style="background-color: white" class="padding-setup">
 			<div style="margin-left: -14px; margin-right: -14px; overflow-y: hidden;">
 			    <script async src="https://cse.google.com/cse.js?cx=004204537983416081067:6ev1yqb2x3e"></script>
 				<div class="gcse-search"></div>

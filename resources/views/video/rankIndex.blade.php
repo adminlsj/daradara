@@ -1,19 +1,19 @@
 @extends('layouts.app')
 
 @section('nav')
-	@include('layouts.nav-main', ['logoImage' => 'https://i.imgur.com/M8tqx5K.png', 'backgroundColor' => 'white', 'itemsColor' => "gray"])
-	@include('layouts.nav-rank')
+	@include('layouts.nav-main', ['logoImage' => 'https://i.imgur.com/M8tqx5K.png', 'backgroundColor' => 'white', 'itemsColor' => "gray", 'menuBtnColor' => '#595959'])
 @endsection
 
 @section('content')
-	<div class="padding-setup mobile-container">
-		<div class="row">
-			<div class="col-md-12" style="margin-top: 32px;">
-				<br>
-				<div class="video-sidebar-wrapper">
-				    <div id="sidebar-results"><!-- results appear here --></div>
-				    <div style="text-align: center" class="ajax-loading"><img src="https://s3.amazonaws.com/twobayjobs/system/loading.gif"/></div>
-				</div>
+	<div class="row">
+		<div class="col-lg-2 col-md-2 hidden-sm hidden-xs sidebar-menu">
+			@include('video.sidebarMenu', ['theme' => 'white'])
+		</div>
+		<div class="col-md-10">
+			@include('layouts.nav-rank')
+			<div style="background-color: #F5F5F5; padding-top: 44px" class="video-sidebar-wrapper padding-setup">
+			    <div id="sidebar-results"><!-- results appear here --></div>
+			    <div style="text-align: center" class="ajax-loading"><img src="https://s3.amazonaws.com/twobayjobs/system/loading.gif"/></div>
 			</div>
 		</div>
 	</div>

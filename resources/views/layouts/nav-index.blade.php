@@ -1,5 +1,5 @@
-<nav style="background-color: #222222; margin-top: 49px; {{ Request::is('drama') || Request::is('anime') ? '' : 'display:none;' }}" class="scroll-hide-nav" >
-  <div style="width: 80%; max-width: 1200px; background-color: #222222" class="container-fluid responsive-frame">
+<nav style="background-color: #282828; margin-top: 49px; {{ Request::is('drama') || Request::is('anime') ? '' : 'display:none;' }}" class="nav-sub-width" >
+  <div style="background-color: #282828" class="container-fluid">
     <div class="nav-tab-container-watch" style="background-color: white;">
       <a class="watch-year-nav">
         <h4>
