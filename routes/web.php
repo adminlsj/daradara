@@ -20,6 +20,8 @@ Route::get('/policy', 'HomeController@policy');
 Route::get('/check', 'HomeController@check');
 Route::get('/categoryEdit', 'HomeController@categoryEdit')->name('category.edit');
 Route::post('/categoryUpdate', 'HomeController@categoryUpdate')->name('category.update');
+Route::get('/singleNewCreate', 'HomeController@singleNewCreate')->name('single.create');
+Route::post('/singleNewStore', 'HomeController@singleNewStore')->name('single.store');
 Route::get('/sitemap.xml', 'HomeController@sitemap');
 Route::get('/getSourceIG', 'VideoController@getSourceIG');
 Route::get('/userReport', 'HomeController@userReport')->name('email.userReport');

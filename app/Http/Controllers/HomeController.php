@@ -108,4 +108,11 @@ class HomeController extends Controller
 
         return redirect()->action('HomeController@categoryEdit', ['is_program' => false]);
     }
+
+    public function singleNewCreate()
+    {
+        $is_program = false;
+        return 'hi';
+        return view('video.categoryEdit', compact('is_program')); 
+    }
 }

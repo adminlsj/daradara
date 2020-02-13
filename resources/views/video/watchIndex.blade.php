@@ -12,7 +12,8 @@
 
     <div class="col-md-10">
       @include('layouts.nav-index')
-      <div style="background-color: #1F1F1F; padding-top: {{ $genre == 'variety' ? '10px' : '44px' }}">
+      <div style="background-color: #1F1F1F; padding-top: {{ $genre == 'variety' ? '10px' : '43px' }}">
+        <div style="padding-top: 10px" class="hidden-xs hidden-sm"></div>
         <div class="padding-setup">
           <div class="row home-video-wrapper">
             @foreach ($watches as $watch)
