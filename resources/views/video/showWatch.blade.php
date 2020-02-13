@@ -17,7 +17,6 @@
 
 	    <div class="col-md-10">
 			<div style="background-color:#414141; color: white;">
-				<div class="hidden-xs hidden-sm"></div>
 				<div class="video-sidebar-wrapper">
 					@include('video.singleShowWatch')
 

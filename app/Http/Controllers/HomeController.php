@@ -112,7 +112,50 @@ class HomeController extends Controller
     public function singleNewCreate()
     {
         $is_program = false;
-        return 'hi';
-        return view('video.categoryEdit', compact('is_program')); 
+        return view('video.singleNewCreate', compact('is_program')); 
+    }
+
+    public function singleNewStore(Request $request)
+    {
+        $latest = Video::where('category', request('category'))->orderBy('created_at', 'desc')->first();
+        $title = request('title');
+        if ($title == "") {
+            $prevEpisode = $this->get_string_between($latest->title, '【第', '話】');
+            $episode = $prevEpisode;
+            if (is_numeric($prevEpisode) && floor($prevEpisode) != $prevEpisode) {
+                $episode = $prevEpisode + 0.5;
+            } else {
+                $episode = $prevEpisode + 1;
+            }
+            $title = str_replace($prevEpisode, $episode, $latest->title);
+        }
+
+        $video = Video::create([
+            'id' => Video::latest()->first()->id + 1,
+            'title' => $title,
+            'caption' => request('caption'),
+            'hd' => request('link'),
+            'sd' => request('link'),
+            'imgur' => request('imgur'),
+            'genre' => $latest->genre,
+            'category' => $latest->category,
+            'season' => $latest->season,
+            'tags' => request('tags') == "" ? $latest->tags : request('tags'),
+            'views' => request('views') == "" ? $latest->views : request('views'),
+            'duration' => $latest->duration,
+            'outsource' => false,
+            'created_at' => Carbon::createFromFormat('Y-m-d\TH:i:s', request('created_at'))->format('Y-m-d H:i:s'),
+        ]);
+
+        return redirect()->action('HomeController@singleNewCreate', ['is_program' => false]);
+    }
+
+    function get_string_between($string, $start, $end){
+        $string = ' ' . $string;
+        $ini = strpos($string, $start);
+        if ($ini == 0) return '';
+        $ini += strlen($start);
+        $len = strpos($string, $end, $ini) - $ini;
+        return substr($string, $ini, $len);
     }
 }
