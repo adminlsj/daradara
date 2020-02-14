@@ -750,6 +750,10 @@ a > i {
   text-decoration: none;
 }
 
+.dark-theme .row.active i {
+  color: white;
+}
+
 .dark-theme hr {
   border-color: #3E3E3E;
 }

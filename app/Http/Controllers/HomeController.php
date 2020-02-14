@@ -131,7 +131,7 @@ class HomeController extends Controller
         }
 
         $video = Video::create([
-            'id' => Video::latest()->first()->id + 1,
+            'id' => Video::orderBy('id', 'desc')->first()->id + 1,
             'title' => $title,
             'caption' => request('caption'),
             'hd' => request('link'),

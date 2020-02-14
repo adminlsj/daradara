@@ -21,7 +21,7 @@
 
 	<div class="form-group">
 		<label for="caption">Caption</label>
-		<input type="text" class="form-control" name="caption" id="caption" placeholder="(optional)">
+		<textarea class="form-control" name="caption" id="caption" rows="3"></textarea>
 	</div>
 
 	<div class="form-group">
