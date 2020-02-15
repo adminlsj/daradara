@@ -94,7 +94,7 @@ class HomeController extends Controller
                 'Host: api.bilibili.com',
                 'Cookie: SESSDATA=1feadc09%2C1582358038%2Ca8f2f511;'
             ]);
-            $data = json_decode(curl_exec($curl_connection), true);
+            return $data = json_decode(curl_exec($curl_connection), true);
             curl_close($curl_connection);
 
             $durl = $data['data']['durl'][0];
