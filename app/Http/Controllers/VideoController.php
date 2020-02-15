@@ -78,13 +78,26 @@ class VideoController extends Controller
 
         $genre = $request->path();
         if ($genre == 'variety') {
-            $watches = Watch::where('genre', $genre)->get();
+            $year = $request->has('y') && $request->y != null ? $request->y : '2020';
+            switch ($request->p) {
+                case 'current':
+                    $watches = Watch::where('genre', $genre)->where('is_ended', false)->orderBy('updated_at', 'desc')->get();
+                    break;
+
+                case 'past':
+                    $watches = Watch::where('genre', $genre)->where('is_ended', true)->orderBy('updated_at', 'desc')->get();
+                    break;
+                
+                default:
+                    $watches = Watch::where('genre', $genre)->orderBy('updated_at', 'desc')->get();
+                    break;
+            }
         } else {
             $year = $request->has('y') && $request->y != null ? $request->y : '2020';
             if ($request->has('m') && $request->m != null) {
-                $watches = Watch::where('genre', $genre)->whereYear('created_at', $year)->whereMonth('created_at', $request->m)->get();
+                $watches = Watch::where('genre', $genre)->whereYear('created_at', $year)->whereMonth('created_at', '>=', $request->m)->whereMonth('created_at', '<', $request->m + 3)->orderBy('updated_at', 'desc')->get();
             } else {
-                $watches = Watch::where('genre', $genre)->whereYear('created_at', $year)->get();
+                $watches = Watch::where('genre', $genre)->whereYear('created_at', $year)->orderBy('updated_at', 'desc')->get();
             }
         }
 

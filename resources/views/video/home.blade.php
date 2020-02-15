@@ -9,7 +9,7 @@
 	<div class="col-lg-2 col-md-2 hidden-sm hidden-xs sidebar-menu">
 		@include('video.sidebarMenu', ['theme' => 'white'])
 	</div>
-	<div class="col-md-10">
+	<div class="col-md-10 col-md-offset-2">
 		<div style="background-color: #F5F5F5;">
 			<div class="padding-setup">
 				<div class="row" style="padding-top: 6px; padding-bottom: 4px">

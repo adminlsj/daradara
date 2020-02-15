@@ -15,7 +15,7 @@
 	      @include('video.sidebarMenu', ['theme' => 'dark'])
 	    </div>
 
-	    <div class="col-md-10">
+	    <div class="col-md-10 col-md-offset-2">
 			<div style="background-color:#414141; color: white;">
 				<div class="video-sidebar-wrapper">
 					@include('video.singleShowWatch')

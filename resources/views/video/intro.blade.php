@@ -17,7 +17,7 @@
 	      @include('video.sidebarMenu', ['theme' => 'dark'])
 	    </div>
 
-	    <div class="col-md-10">
+	    <div class="col-md-10 col-md-offset-2">
 	    	<div style="background-color: #1F1F1F;">
 				<div style="background-image: url({{ $watch->imgurH() }}); background-size: 100%; background-repeat: no-repeat; background-position: 50%; filter: blur(30px); z-index: -1; opacity: 0.5; pointer-events: none;">
 					<div style="padding: 0px 15px">

@@ -147,6 +147,10 @@ class HomeController extends Controller
             'created_at' => Carbon::createFromFormat('Y-m-d\TH:i:s', request('created_at'))->format('Y-m-d H:i:s'),
         ]);
 
+        $watch = $video->watch();
+        $watch->updated_at = $video->created_at;
+        $watch->save();
+
         return redirect()->action('HomeController@singleNewCreate', ['is_program' => false]);
     }
 

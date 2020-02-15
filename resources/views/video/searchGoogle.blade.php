@@ -18,7 +18,7 @@
 		@include('video.sidebarMenu', ['theme' => 'white'])
 	</div>
 
-	<div class="col-md-10">
+	<div class="col-md-10 col-md-offset-2">
 		<div style="background-color: white" class="padding-setup">
 			<div style="margin-left: -14px; margin-right: -14px; overflow-y: hidden;">
 			    <script async src="https://cse.google.com/cse.js?cx=004204537983416081067:6ev1yqb2x3e"></script>

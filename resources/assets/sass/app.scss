@@ -723,9 +723,10 @@ a > i {
 }
 
 .sidebar-menu {
-  position: -webkit-sticky;
-  position: sticky;
+  position: -webkit-fixed;
+  position: fixed;
   top: 50px;
+  z-index: 1000;
 }
 
 .dark-theme {
@@ -886,6 +887,13 @@ a > i {
 
 .watch-year-nav, .watch-month-nav {
   width: 20%;
+  float:left;
+  text-align: center;
+  text-decoration: none !important;
+}
+
+.variety-year-nav, .variety-parameter-nav {
+  width: 25%;
   float:left;
   text-align: center;
   text-decoration: none !important;

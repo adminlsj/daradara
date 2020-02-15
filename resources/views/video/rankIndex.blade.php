@@ -9,7 +9,7 @@
 		<div class="col-lg-2 col-md-2 hidden-sm hidden-xs sidebar-menu">
 			@include('video.sidebarMenu', ['theme' => 'white'])
 		</div>
-		<div class="col-md-10">
+		<div class="col-md-10 col-md-offset-2">
 			@include('layouts.nav-rank')
 			<div style="background-color: #F5F5F5; padding-top: 44px" class="video-sidebar-wrapper padding-setup">
 				<div style="padding-top: 10px" class="hidden-xs hidden-sm"></div>
