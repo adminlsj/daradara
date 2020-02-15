@@ -86,15 +86,6 @@ class HomeController extends Controller
         $url = 'https://api.bilibili.com/x/player/playurl?avid=74613148&cid=148094348&qn=0&type=mp4&otype=json&fnver=0&fnval=1&platform=html5&html5=1&high_quality=1';
         try {
             $curl_connection = curl_init($url);
-            curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
-            curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
-            curl_setopt($curl_connection, CURLOPT_HTTPHEADER, [
-                'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:56.0) Gecko/20100101 Firefox/56.0',
-                'Host: api.bilibili.com',
-                'Cookie: SESSDATA=1feadc09%2C1582358038%2Ca8f2f511;',
-                'Referer: '
-            ]);
             return $data = json_decode(curl_exec($curl_connection), true);
             curl_close($curl_connection);
 
