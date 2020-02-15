@@ -83,6 +83,9 @@ class HomeController extends Controller
 
     public function categoryEdit()
     {
+        $url = 'http://api.bilibili.com/x/player/playurl?avid=70534327&cid=123691341&qn=0&type=mp4&otype=json&fnver=0&fnval=1&platform=html5&html5=1&high_quality=1';
+        echo '<br><br><br><br><br>';
+        echo file_get_contents($url);
         $is_program = false;
         return view('video.categoryEdit', compact('is_program')); 
     }
