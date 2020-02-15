@@ -67,9 +67,9 @@
        <video:title>{{ $video->title }}</video:title>
        <video:description>{{ $video->caption }}</video:description>
        @if ($video->outsource)
-         <video:player_loc>{{ $video->sd }}</video:player_loc>
+         <video:player_loc>{{ $video->source() }}</video:player_loc>
        @else
-         <video:content_loc>{{ $video->sd }}</video:content_loc>
+         <video:content_loc>{{ $video->source() }}</video:content_loc>
        @endif
        <video:duration>{{ $video->duration }}</video:duration>
        <video:view_count>{{ $video->views }}</video:view_count>

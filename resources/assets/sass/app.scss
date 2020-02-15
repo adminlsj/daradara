@@ -129,7 +129,7 @@ nav input[type=text]:focus {
 
 /* Place the navbar at the bottom of the page, and make it stick */
 .navbar {
-  background-color: black;
+  background-color: #282828;
   overflow: hidden;
   position: fixed;
   display: inline-block;
@@ -154,6 +154,7 @@ nav input[type=text]:focus {
 }
 
 .navbar i {
+  color: darkgray;
   font-size: 24px;
 }
 
@@ -176,8 +177,16 @@ nav input[type=text]:focus {
   color: white;
 }
 
+.navbar a:hover i {
+  color: white;
+}
+
 /* Add a color to the active/current link */
 .navbar a.active {
+  color: white;
+}
+
+.navbar a.active i {
   color: white;
 }
 

@@ -23,7 +23,7 @@ Route::post('/categoryUpdate', 'HomeController@categoryUpdate')->name('category.
 Route::get('/singleNewCreate', 'HomeController@singleNewCreate')->name('single.create');
 Route::post('/singleNewStore', 'HomeController@singleNewStore')->name('single.store');
 Route::get('/sitemap.xml', 'HomeController@sitemap');
-Route::get('/getSourceIG', 'VideoController@getSourceIG');
+Route::get('/getSource', 'VideoController@getSource');
 Route::get('/userReport', 'HomeController@userReport')->name('email.userReport');
 
 Route::get('/trending', 'VideoController@watch')->name('video.trending');
