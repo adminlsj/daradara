@@ -99,9 +99,7 @@ class HomeController extends Controller
 
             $durl = $data['data']['durl'][0];
             $url = $durl['url'];
-            if ($durl['backup_url'][0] != null && strpos($durl['backup_url'][0], 'upos-hz-mirrorakam') !== false) {
-                $url = $durl['backup_url'][0];
-            }
+ 
 
             return str_replace("http://", "https://", $url);
         } catch(Exception $e) {
