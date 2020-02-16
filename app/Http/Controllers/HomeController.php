@@ -83,7 +83,7 @@ class HomeController extends Controller
 
     public function categoryEdit()
     {
-        $url = 'http://api.bilibili.com/x/player/playurl?avid=70534327&cid=123691341&qn=0&type=mp4&otype=json&fnver=0&fnval=1&platform=html5&html5=1&high_quality=1';
+        $url = 'https://api.bilibili.com/x/player/playurl?avid=25117707&cid=42530349&qn=0&type=mp4&otype=json&fnver=0&fnval=1&platform=html5&html5=1&high_quality=1';
         try {
             $curl_connection = curl_init($url);
             curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
