@@ -46,7 +46,7 @@ class HomeController extends Controller
 
     public function check()
     {
-        $url = 'http://api.bilibili.com/x/player/playurl?avid=61769681&cid=107207180&qn=0&type=mp4&otype=json&fnver=0&fnval=1&platform=html5&html5=1&high_quality=1';
+        $url = 'https://api.bilibili.com/x/player/playurl?avid=61769681&cid=107207180&qn=0&type=mp4&otype=json&fnver=0&fnval=1&platform=html5&html5=1&high_quality=1';
         $curl_connection = curl_init($url);
 
         curl_setopt($curl_connection, CURLOPT_VERBOSE, true);
@@ -62,7 +62,7 @@ class HomeController extends Controller
         echo "Verbose information:\n<pre>", htmlspecialchars($verboseLog), "</pre>\n";
 
         curl_setopt($curl_connection, CURLOPT_HTTPHEADER, [
-            'Host: api.bilibili.com',
+            'Host: https://api.bilibili.com',
         ]);
         $data = json_decode(curl_exec($curl_connection), true);
         curl_close($curl_connection);
