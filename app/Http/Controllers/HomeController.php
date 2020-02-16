@@ -54,8 +54,11 @@ class HomeController extends Controller
                     $url = $video->getSourceIG($url);
                 } elseif (strpos($url, 'https://api.bilibili.com/') !== false) {
                     echo $url = $video->getSourceBB($url);
+                    echo '<br>'
+                    echo implode('<br>', get_headers($url));
+                    echo '<br>'
                 }
-                echo implode('<br>', $headers = get_headers($url));
+                $headers = get_headers($url);
                 $http_response_code = substr($headers[0], 9, 3);
                 if (!($http_response_code == 200)) {
                   echo "<span style='color:red; font-weight:600;'>/watch?v=".$video->id."【".$video->title."】</span><br>";
