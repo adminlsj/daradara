@@ -46,7 +46,7 @@ class HomeController extends Controller
 
     public function check()
     {
-        $videos = Video::where('id', 2057)->where('sd', 'not like', "%.m3u8%")->orderBy('id', 'asc')->get();
+        $videos = Video::where('outsource', false)->where('sd', 'not like', "%.m3u8%")->orderBy('id', 'asc')->get();
         echo "Video Check STARTED<br>";
         foreach ($videos as $video) {
             foreach ($video->sd() as $url) {
