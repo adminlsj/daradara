@@ -46,8 +46,7 @@ class HomeController extends Controller
 
     public function check()
     {
-        echo file_get_contents("https://api.bilibili.com/x/player/playurl?avid=61769681&cid=107207180&qn=0&type=mp4&otype=json&fnver=0&fnval=1&platform=html5&html5=1&high_quality=1");
-        /*$videos = Video::where('id', 2057)->where('sd', 'not like', "%.m3u8%")->orderBy('id', 'asc')->get();
+        $videos = Video::where('id', 2057)->where('sd', 'not like', "%.m3u8%")->orderBy('id', 'asc')->get();
         echo "Video Check STARTED<br>";
         foreach ($videos as $video) {
             foreach ($video->sd() as $url) {
@@ -66,7 +65,7 @@ class HomeController extends Controller
                 }
             }
         }
-        echo "Video Check ENDED<br>";*/
+        echo "Video Check ENDED<br>";
     }
 
     public function categoryEdit()
