@@ -189,6 +189,33 @@ class VideoController extends Controller
                 }
             }
 
+            /* ------------------------------TESTING START------------------------------- */
+            $url = $video->sd();
+            try {
+                $curl_connection = curl_init($url);
+                curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+                curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+                curl_setopt($curl_connection, CURLOPT_HTTPHEADER, [
+                    'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:56.0) Gecko/20100101 Firefox/56.0',
+                    'Host: api.bilibili.com',
+                    'User-Agent: curl/7.54.0'
+                ]);
+                return $data = json_decode(curl_exec($curl_connection), true);
+                curl_close($curl_connection);
+
+                $durl = $data['data']['durl'][0];
+                $url = $durl['url'];
+                if ($durl['backup_url'] != null && strpos($durl['backup_url'][0], 'upos-hz-mirrorakam') !== false) {
+                    $url = $durl['backup_url'][0];
+                }
+
+                return str_replace("http://", "https://", $url);
+            } catch(Exception $e) {
+                return $e->getMessage();
+            }
+            /* ------------------------------TESTING ENDED------------------------------- */
+
             $videosSelect = Video::where('id', '!=', $video->id)->inRandomOrder()->select('id', 'tags')->get()->toArray();
             $rankings = [];
             foreach ($videosSelect as $videoSelect) {
