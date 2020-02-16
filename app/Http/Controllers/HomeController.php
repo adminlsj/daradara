@@ -46,7 +46,7 @@ class HomeController extends Controller
 
     public function check()
     {
-        $url = 'api.bilibili.com/x/player/playurl?avid=61769681&cid=107207180&qn=0&type=mp4&otype=json&fnver=0&fnval=1&platform=html5&html5=1&high_quality=1';
+        $url = 'http://api.bilibili.com/x/player/playurl?avid=61769681&cid=107207180&qn=0&type=mp4&otype=json&fnver=0&fnval=1&platform=html5&html5=1&high_quality=1';
         $curl_connection = curl_init($url);
 
         curl_setopt($curl_connection, CURLOPT_VERBOSE, true);
