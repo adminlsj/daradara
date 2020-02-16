@@ -30,7 +30,7 @@
         </div>
 	</div>
 
-	<div class="footer-copyright padding-setup" style="margin-top: 25px; text-align: center">
+	<div class="sidebar-footer-copyright padding-setup" style="margin-top: 25px; text-align: center">
         <p style="white-space: pre-wrap; padding-bottom: 50px; margin-left: auto; margin-right: auto;">本網站內容收集於互聯網上公開資源，提供最優質的網頁界面服務，但不提供也不參與影片檔案錄製、下載、上傳、儲存。娛見日本Laughseejapan 不承擔任何由於內容的合法性所引起的爭議和法律責任。若本站收錄的資源涉及您的版權或知識產權或其他利益，<a style="color: gray" href="/policy" target="_blank">請留言並附上版權證明</a>，我們會盡快確認後作出刪除等處理措施，以保護版權方的權益 。
 
 Copyright @ 2019 娛見日本 LaughSeeJapan</p>

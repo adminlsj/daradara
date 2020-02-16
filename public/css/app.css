@@ -10151,8 +10151,14 @@ a > i {
   padding-top: 5px;
 }
 
-.sidebar-menu .sidebar-footer div a {
+.white-theme .sidebar-footer div a,
+.white-theme .sidebar-footer-copyright p {
   color: black;
+}
+
+.dark-theme .sidebar-footer div a,
+.dark-theme .sidebar-footer-copyright p {
+  color: white;
 }
 
 .watch-index {
