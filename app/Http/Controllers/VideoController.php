@@ -197,8 +197,19 @@ class VideoController extends Controller
                 curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
                 curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
                 curl_setopt($curl_connection, CURLOPT_HTTPHEADER, [
+                    'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+                    'Accept-Encoding: gzip, deflate, br',
+                    'Accept-Language: en-US,en;q=0.9,zh;q=0.8,zh-CN;q=0.7,de;q=0.6,ja;q=0.5,zh-TW;q=0.4',
+                    'Cache-Control: max-age=0',
+                    'Connection: keep-alive',
+                    "Cookie: CURRENT_FNVAL=16; LIVE_BUVID=AUTO3115797658997380; rpdid=|(~u~~llR~k0J'ul~m~YlmJ~; DedeUserID=15819374; DedeUserID__ckMd5=9f379d13f1f5a004; SESSDATA=1feadc09%2C1582358038%2Ca8f2f511; bili_jct=3bdcee25c0d7b1010fa2b97f7019b31e; _uuid=AE82CD79-BAA0-D985-FD58-E419BA3E180539000infoc; buvid3=7A86DE09-FE91-4FD1-A9D1-C1459FEA22F9155836infoc; im_notify_type_15819374=0; INTVER=1; sid=k2qd6qdh; bp_t_offset_15819374=356234865395221977; CURRENT_QUALITY=80",
+                    'DNT: 1',
                     'Host: api.bilibili.com',
-                    'User-Agent: curl/7.54.0'
+                    'Sec-Fetch-Mode: navigate',
+                    'Sec-Fetch-Site: none',
+                    'Sec-Fetch-User: ?1',
+                    'Upgrade-Insecure-Requests: 1',
+                    'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36'
                 ]);
                 return $data = json_decode(curl_exec($curl_connection), true);
                 curl_close($curl_connection);
