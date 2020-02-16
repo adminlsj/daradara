@@ -46,27 +46,7 @@ class HomeController extends Controller
 
     public function check()
     {
-        $url = 'https://api.bilibili.com/x/player/playurl?avid=61769681&cid=107207180&qn=0&type=mp4&otype=json&fnver=0&fnval=1&platform=html5&html5=1&high_quality=1';
-        $curl_connection = curl_init($url);
-
-        curl_setopt($curl_connection, CURLOPT_VERBOSE, true);
-        $verbose = fopen('php://temp', 'w+');
-        curl_setopt($curl_connection, CURLOPT_STDERR, $verbose);
-        $result = curl_exec($curl_connection);
-        if ($result === FALSE) {
-            printf("cUrl error (#%d): %s<br>\n", curl_errno($curl_connection),
-                   htmlspecialchars(curl_error($curl_connection)));
-        }
-        rewind($verbose);
-        $verboseLog = stream_get_contents($verbose);
-        echo "Verbose information:\n<pre>", htmlspecialchars($verboseLog), "</pre>\n";
-
-        curl_setopt($curl_connection, CURLOPT_HTTPHEADER, [
-            'Host: api.bilibili.com',
-        ]);
-        $data = json_decode(curl_exec($curl_connection), true);
-        curl_close($curl_connection);
-        return $data;
+        echo file_get_contents("https://api.bilibili.com/x/player/playurl?avid=61769681&cid=107207180&qn=0&type=mp4&otype=json&fnver=0&fnval=1&platform=html5&html5=1&high_quality=1");
         /*$videos = Video::where('id', 2057)->where('sd', 'not like', "%.m3u8%")->orderBy('id', 'asc')->get();
         echo "Video Check STARTED<br>";
         foreach ($videos as $video) {
