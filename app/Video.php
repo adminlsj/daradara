@@ -178,7 +178,7 @@ class Video extends Model
                 $url = $durl['backup_url'][0];
             }
 
-            return str_replace("http://", "https://", $url);
+            return $url;
         } catch(Exception $e) {
             return $e->getMessage();
         }
