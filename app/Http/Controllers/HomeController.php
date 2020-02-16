@@ -46,29 +46,13 @@ class HomeController extends Controller
 
     public function check()
     {
-        $videos = Video::where('outsource', false)->where('sd', 'not like', "%.m3u8%")->orderBy('id', 'asc')->get();
+        $videos = Video::where('id', 2057)->where('sd', 'not like', "%.m3u8%")->orderBy('id', 'asc')->get();
         echo "Video Check STARTED<br>";
         foreach ($videos as $video) {
             foreach ($video->sd() as $url) {
                 if (strpos($url, 'https://www.instagram.com/p/') !== false) {
-                    try {
-                        $curl_connection = curl_init($url.'?__a=1');
-                        curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
-                        curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
-                        curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
-
-                        $data = json_decode(curl_exec($curl_connection), true);
-                        curl_close($curl_connection);
-
-                        if ($data === null) {
-                            $url = 'https://www.bilibili.com/404error';
-                        } else {
-                            $url = $data['graphql']['shortcode_media']['video_url'];
-                        }
-                    } catch(Exception $e) {
-                        $url = $e->getMessage();
-                    }
-                } elseif (strpos($url, 'https://www.bilibili.com/') !== false) {
+                    $url = $video->getSourceIG($url);
+                } elseif (strpos($url, 'https://api.bilibili.com/') !== false) {
                     $url = $video->getSourceBB($url);
                 }
                 $headers = get_headers($url);
