@@ -62,7 +62,7 @@ class HomeController extends Controller
         echo "Verbose information:\n<pre>", htmlspecialchars($verboseLog), "</pre>\n";
 
         curl_setopt($curl_connection, CURLOPT_HTTPHEADER, [
-            'Host: bilibili.com',
+            'Host: api.bilibili.com',
         ]);
         $data = json_decode(curl_exec($curl_connection), true);
         curl_close($curl_connection);
