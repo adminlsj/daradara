@@ -173,9 +173,8 @@ class Video extends Model
             curl_close($curl_connection);
 
             $durl = $data['data']['durl'][0];
-            $url = $durl['url'];
+            return $url = $durl['url'];
 
-            return str_replace("upos-hz-mirrorakam.akamaized.net", "cn-hk-eq-bcache-01.bilivideo.com", $url);
         } catch(Exception $e) {
             return $e->getMessage();
         }
