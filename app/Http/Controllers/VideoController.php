@@ -189,27 +189,17 @@ class VideoController extends Controller
                 }
             }
 
-            /* ------------------------------TESTING START------------------------------- */
+            /* ------------------------------TESTING START-------------------------------
             $url = $video->sd()[0];
             try {
                 $curl_connection = curl_init($url);
                 curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
                 curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
-                curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, true);
+                curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
                 curl_setopt($curl_connection, CURLOPT_HTTPHEADER, [
-                    'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
-                    'Accept-Encoding: gzip, deflate, br',
-                    'Accept-Language: en-US,en;q=0.9,zh;q=0.8,zh-CN;q=0.7,de;q=0.6,ja;q=0.5,zh-TW;q=0.4',
-                    'Cache-Control: max-age=0',
-                    'Connection: keep-alive',
-                    "Cookie: CURRENT_FNVAL=16; LIVE_BUVID=AUTO3115797658997380; rpdid=|(~u~~llR~k0J'ul~m~YlmJ~; DedeUserID=15819374; DedeUserID__ckMd5=9f379d13f1f5a004; SESSDATA=1feadc09%2C1582358038%2Ca8f2f511; bili_jct=3bdcee25c0d7b1010fa2b97f7019b31e; _uuid=AE82CD79-BAA0-D985-FD58-E419BA3E180539000infoc; buvid3=7A86DE09-FE91-4FD1-A9D1-C1459FEA22F9155836infoc; im_notify_type_15819374=0; INTVER=1; sid=k2qd6qdh; bp_t_offset_15819374=356234865395221977; CURRENT_QUALITY=80",
-                    'DNT: 1',
+                    'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:56.0) Gecko/20100101 Firefox/56.0',
                     'Host: api.bilibili.com',
-                    'Sec-Fetch-Mode: navigate',
-                    'Sec-Fetch-Site: none',
-                    'Sec-Fetch-User: ?1',
-                    'Upgrade-Insecure-Requests: 1',
-                    'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36'
+                    'Cookie: SESSDATA=1feadc09%2C1582358038%2Ca8f2f511;'
                 ]);
                 return $data = json_decode(curl_exec($curl_connection), true);
                 curl_close($curl_connection);
@@ -220,7 +210,7 @@ class VideoController extends Controller
                     $url = $durl['backup_url'][0];
                 }
 
-                return str_replace("http://", "https://", $url);
+                return str_replace("upos-hz-mirrorakam.akamaized.net", "cn-hk-eq-bcache-04.bilivideo.com", $url);
             } catch(Exception $e) {
                 return $e->getMessage();
             }

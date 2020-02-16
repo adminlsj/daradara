@@ -174,11 +174,8 @@ class Video extends Model
 
             $durl = $data['data']['durl'][0];
             $url = $durl['url'];
-            if ($durl['backup_url'] != null && strpos($durl['backup_url'][0], 'upos-hz-mirrorakam') !== false) {
-                $url = $durl['backup_url'][0];
-            }
 
-            return str_replace("http://", "https://", $url);
+            return str_replace("upos-hz-mirrorakam.akamaized.net", "cn-hk-eq-bcache-01.bilivideo.com", $url);
         } catch(Exception $e) {
             return $e->getMessage();
         }
