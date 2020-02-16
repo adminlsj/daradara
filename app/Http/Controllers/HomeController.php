@@ -46,7 +46,15 @@ class HomeController extends Controller
 
     public function check()
     {
-        $videos = Video::where('outsource', false)->where('sd', 'not like', "%.m3u8%")->orderBy('id', 'asc')->get();
+        $url = 'https://api.bilibili.com/x/player/playurl?avid=61769681&cid=107207180&qn=0&type=mp4&otype=json&fnver=0&fnval=1&platform=html5&html5=1&high_quality=1';
+        $curl_connection = curl_init($url);
+        curl_setopt($curl_connection, CURLOPT_HTTPHEADER, [
+            'Host: api.bilibili.com',
+        ]);
+        $data = json_decode(curl_exec($curl_connection), true);
+        curl_close($curl_connection);
+        return $data;
+        /*$videos = Video::where('id', 2057)->where('sd', 'not like', "%.m3u8%")->orderBy('id', 'asc')->get();
         echo "Video Check STARTED<br>";
         foreach ($videos as $video) {
             foreach ($video->sd() as $url) {
@@ -65,7 +73,7 @@ class HomeController extends Controller
                 }
             }
         }
-        echo "Video Check ENDED<br>";
+        echo "Video Check ENDED<br>";*/
     }
 
     public function categoryEdit()
