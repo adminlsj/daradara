@@ -142,5 +142,5 @@
 				</script>
 			</div>
 		</div>
-	</a>
+	</div>
 @endsection

@@ -1,4 +1,4 @@
-<footer id="myFooter" class="footer">
+<footer id="myFooter" class="footer hidden-md hidden-lg" style="z-index: 1000 !important;">
     <div style="width: 90%" class="container">
         <div class="row">
             <div style="text-align: center" class="col-sm-12 col-md-3">
