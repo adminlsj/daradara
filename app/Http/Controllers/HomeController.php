@@ -46,17 +46,14 @@ class HomeController extends Controller
 
     public function check()
     {
-        $videos = Video::where('id', 2057)->where('sd', 'not like', "%.m3u8%")->orderBy('id', 'asc')->get();
+        $videos = Video::where('outsource', false)->where('sd', 'not like', "%.m3u8%")->orderBy('id', 'asc')->get();
         echo "Video Check STARTED<br>";
         foreach ($videos as $video) {
             foreach ($video->sd() as $url) {
                 if (strpos($url, 'https://www.instagram.com/p/') !== false) {
                     $url = $video->getSourceIG($url);
                 } elseif (strpos($url, 'https://api.bilibili.com/') !== false) {
-                    echo $url = $video->getSourceBB($url);
-                    echo '<br>';
-                    echo implode('<br>', get_headers($url));
-                    echo '<br>';
+                    echo $video->getSourceBB($url);
                 }
                 $headers = get_headers($url);
                 $http_response_code = substr($headers[0], 9, 3);
