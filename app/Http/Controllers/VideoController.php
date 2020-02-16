@@ -197,7 +197,6 @@ class VideoController extends Controller
                 curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
                 curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
                 curl_setopt($curl_connection, CURLOPT_HTTPHEADER, [
-                    'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:56.0) Gecko/20100101 Firefox/56.0',
                     'Host: api.bilibili.com',
                     'User-Agent: curl/7.54.0'
                 ]);
