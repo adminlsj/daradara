@@ -6,7 +6,7 @@
 	@include('video.sidebarItem', ['link' => route('video.drama'), 'is_current' => strpos(Request::path(), 'drama' ) !== false || (Request::has('v') && $current->genre == 'drama') ? 'active' : '', 'icon' => 'movie_filter', 'title' => '日劇'])
 	@include('video.sidebarItem', ['link' => route('video.anime'), 'is_current' => strpos(Request::path(), 'anime' ) !== false || (Request::has('v') && $current->genre == 'anime') ? 'active' : '', 'icon' => 'palette', 'title' => '動漫'])
 	<hr style="margin: 10px 0px;">
-	<div style="margin-left: 26px; color: #595959; font-weight: 500; padding-top: 5px; padding-bottom: 5px;">LaughSeeJapan 推薦</div>
+	<div style="margin-left: 26px; color: #595959; font-weight: 500; padding-top: 8px; padding-bottom: 10px;">LaughSeeJapan 推薦</div>
 	@include('video.sidebarRecommend', ['link' => route('video.intro', ['variety', '月曜夜未央']), 'is_current' => isset($watch) && $watch->category == 'monday' && !Request::has('v') ? 'active' : '', 'icon' => 'iXyOfUs', 'title' => '月曜夜未央'])
 	@include('video.sidebarRecommend', ['link' => route('video.intro', ['variety', '人類觀察']), 'is_current' => isset($watch) && $watch->category == 'monitoring' && !Request::has('v') ? 'active' : '', 'icon' => 'wLpWH5h', 'title' => '人類觀察'])
 	@include('video.sidebarRecommend', ['link' => route('video.intro', ['variety', '跟拍到你家']), 'is_current' => isset($watch) && $watch->category == 'home' && !Request::has('v') ? 'active' : '', 'icon' => 'NF0Gqew', 'title' => '跟拍到你家'])
