@@ -47,7 +47,8 @@ class HomeController extends Controller
     public function check()
     {
         $videos = Video::where('outsource', false)->where('sd', 'not like', "%.m3u8%")->orderBy('id', 'asc')->get();
-        echo "Video Check STARTED<br>";
+        return view('layouts.check', compact('videos'));
+
         foreach ($videos as $video) {
             foreach ($video->sd() as $url) {
                 if (strpos($url, 'https://www.instagram.com/p/') !== false) {
