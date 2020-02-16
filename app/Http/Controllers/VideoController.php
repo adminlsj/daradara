@@ -190,7 +190,7 @@ class VideoController extends Controller
             }
 
             /* ------------------------------TESTING START------------------------------- */
-            $url = $video->sd();
+            $url = $video->sd()[0];
             try {
                 $curl_connection = curl_init($url);
                 curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
