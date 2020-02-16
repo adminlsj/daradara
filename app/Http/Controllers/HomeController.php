@@ -48,7 +48,8 @@ class HomeController extends Controller
     {
         $url = 'https://api.bilibili.com/x/player/playurl?avid=61769681&cid=107207180&qn=0&type=mp4&otype=json&fnver=0&fnval=1&platform=html5&html5=1&high_quality=1';
         $curl_connection = curl_init($url);
-        
+
+        curl_setopt($curl_connection, CURLOPT_HTTPHEADER, array("REMOTE_ADDR: 128.1.62.201", "HTTP_X_FORWARDED_FOR: 128.1.62.201"));
         curl_setopt($curl_connection, CURLOPT_VERBOSE, true);
         $verbose = fopen('php://temp', 'w+');
         curl_setopt($curl_connection, CURLOPT_STDERR, $verbose);
