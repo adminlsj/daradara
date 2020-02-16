@@ -10161,6 +10161,11 @@ a > i {
   color: white;
 }
 
+.sidebar-footer div a {
+  font-weight: 500;
+  color: #595959 !important;
+}
+
 .watch-index {
   width: 80%;
   margin: 0 auto;

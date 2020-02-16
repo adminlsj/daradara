@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('nav')
-	@include('layouts.nav-main', ['logoImage' => 'https://i.imgur.com/M8tqx5K.png', 'backgroundColor' => 'white', 'itemsColor' => "gray"])
+	@include('layouts.nav-main', ['logoImage' => 'https://i.imgur.com/M8tqx5K.png', 'backgroundColor' => 'white', 'itemsColor' => "gray", 'menuBtnColor' => '#595959'])
 @endsection
 
 @section('content')
@@ -9,8 +9,9 @@
 	<div style="margin-top:7%; text-align: center; font-size: 50px; font-weight: 600">通知刪除說明</div>
 	<div class="policy" style="margin-top:40px;">
 		<h2 style="font-weight: 600">1）基本聲明</a></h2>
+		<p>本網站內容收集於互聯網上公開資源，提供最優質的網頁界面服務，但不提供也不參與影片檔案錄製、下載、上傳、儲存。娛見日本Laughseejapan 不承擔任何由於內容的合法性所引起的爭議和法律責任。</p>
 		<p>在為使用者提供高品質視頻體驗的同時，娛見日本LaughSeeJapan 始終非常重視智慧財產權及其他用戶權益的保護。</p>
-		<p>由於我們無法對使用者上傳的作品涉及或包含的權利資訊進行甄別，若您認為 娛見日本LaughSeeJapan 網站上的視聽內容侵犯了您的合法權益，請按以下要求提交材料通知。我們將根據權利人提供的資料，遵循相關法律，在審查核實後刪除侵權內容。</p>
+		<p>由於我們無法對使用者上傳的作品涉及或包含的權利資訊進行甄別，若您認為 娛見日本LaughSeeJapan 網站收錄的資源涉及您的版權或知識產權或其他利益，請按以下要求提交材料通知。我們將根據權利人提供的資料，遵循相關法律，在審查核實後刪除侵權內容，以保護版權方的權益。</p>
 		<br>
 		<h2 style="font-weight: 600">2）通知刪除指引</a></h2>
 		<h4 style="line-height: 35px;">2.1）為了確保通知刪除的有效性，權利人應儘量提供下列材料的原件。不能提供原件的，應在提供的影本上簽章。</h4>
