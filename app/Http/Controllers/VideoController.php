@@ -195,7 +195,7 @@ class VideoController extends Controller
                 $curl_connection = curl_init($url);
                 curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
                 curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
-                curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+                curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, true);
                 curl_setopt($curl_connection, CURLOPT_HTTPHEADER, [
                     'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
                     'Accept-Encoding: gzip, deflate, br',
