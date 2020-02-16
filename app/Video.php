@@ -101,7 +101,7 @@ class Video extends Model
 
     public function imgur16by9()
     {
-        return "https://i.imgur.com/JMcgEkPm.jpg";
+        return "https://i.imgur.com/JMcgEkPl.jpg";
     }
 
     public function imgurT()
