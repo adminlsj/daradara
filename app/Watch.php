@@ -48,19 +48,19 @@ class Watch extends Model
     {
         switch ($this->genre) {
             case 'variety':
-                return "https://i.imgur.com/sMSpYFXm.jpg";
+                return "https://i.imgur.com/sMSpYFXl.jpg";
                 break;
 
             case 'drama':
-                return "https://i.imgur.com/v2CKkxbm.jpg";
+                return "https://i.imgur.com/v2CKkxbl.jpg";
                 break;
 
             case 'anime':
-                return "https://i.imgur.com/z060y3ym.jpg";
+                return "https://i.imgur.com/z060y3yl.jpg";
                 break;
             
             default:
-                return "https://i.imgur.com/sMSpYFXm.jpg";
+                return "https://i.imgur.com/sMSpYFXl.jpg";
                 break;
         }
     }
