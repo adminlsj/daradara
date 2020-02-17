@@ -28,8 +28,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
-    <div style="background-color:{{ !Request::is('/') && !Request::is('*rank*') && !Request::is('*search*') && $is_program ? '#282828' : 'white' }};">
-
+    <div>
         @yield('nav')
 
         <div id="content-div" style="margin-top: 50px; overflow-x: hidden;">

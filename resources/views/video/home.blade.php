@@ -11,18 +11,14 @@
 	</div>
 	<div class="col-md-10 col-md-offset-2">
 		<div style="background-color: #F5F5F5;">
-			<div class="padding-setup">
-				<div class="row" style="padding-top: 6px; padding-bottom: 4px">
-					<div class="col-md-12">
-						<h4>
-							熱門推薦
-							<a href="{{ route('video.rank') }}" style="text-decoration: none; color: #323232;" class="pull-right">
-								<i style="color:#323232; vertical-align:middle; font-size: 1.4em; margin-top: -3px; margin-right: -3px;" class="material-icons">bar_chart</i>
-								排行榜
-								<i style="color:darkgray; vertical-align:middle; font-size: 1em; margin-top: -3px;" class="material-icons">arrow_forward_ios</i>
-							</a>
-						</h4>
-					</div>
+			<div class="padding-setup" style="overflow-x: hidden;">
+				<div class="row banner" style="padding-top: 10px; padding-bottom: 10px;">
+					<a href="{{ route('video.intro', ['variety', '月曜夜未央']) }}">
+						<div class="col-md-12" style="position: relative; background-color: #040A1D">
+							<img src="https://i.imgur.com/aUKNJ5x.png" alt="月曜夜未央">
+							<div class="button">立即觀看</div>
+						</div>
+					</a>
 				</div>
 				<div class="row home-video-wrapper">
 					@foreach ($videos as $video)

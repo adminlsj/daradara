@@ -18,50 +18,57 @@
 	    <div class="col-md-10 col-md-offset-2">
 			<div style="background-color:#1F1F1F; color: white;">
 				<div class="video-sidebar-wrapper">
-					@include('video.singleShowWatch')
-
-					<!-- Tab links -->
-					<div style="margin-top: -20px" class="tab">
-					  <button class="tablinks" onclick="openList(event, 'Watch')" id="defaultOpen">全集列表</button>
-					  <button class="tablinks" onclick="openList(event, 'Related')">相關影片</button>
-					</div>
-
-					<!-- Tab content -->
-					<div id="Watch" class="tabcontent">
-						<div style="padding: 7px 0px;">
-							<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-							<!-- Horizontal Banner Ads -->
-							<ins class="adsbygoogle"
-							     style="display:block;"
-							     data-ad-client="ca-pub-4485968980278243"
-							     data-ad-slot="8455082664"
-							     data-ad-format="auto"
-							     data-full-width-responsive="true"></ins>
-							<script>
-							     (adsbygoogle = window.adsbygoogle || []).push({});
-							</script>
+					<div class="row">
+						<div class="col-md-8 single-show-player">
+							@include('video.singleShowWatch')
 						</div>
 
-						<div class="dropdown">
-						  <button onclick="openDropdown()" class="dropbtn">{{ $watch->season }}<span style="padding-left: 7px; padding-right: 0px;" class="stretch dropbtn">v</span></button>
-						  <div id="myDropdown" class="dropdown-content">
-						      @foreach ($dropdown as $watch)
-						      	<a style="color:white; text-decoration: none;" href="{{ route('video.intro', [$watch->genre, $watch->titleToUrl()]) }}">{{ $watch->season }}</a>
-						      @endforeach
-						  </div>
+						<div class="col-md-4 single-show-list">
+							<br class="hidden-sm hidden-xs">
+							<!-- Tab links -->
+							<div style="margin-top: -20px" class="tab">
+							  <button class="tablinks" onclick="openList(event, 'Watch')" id="defaultOpen">全集列表</button>
+							  <button class="tablinks" onclick="openList(event, 'Related')">相關影片</button>
+							</div>
+
+							<!-- Tab content -->
+							<div id="Watch" class="tabcontent">
+								<div style="padding: 7px 0px;">
+									<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+									<!-- Horizontal Banner Ads -->
+									<ins class="adsbygoogle"
+									     style="display:block;"
+									     data-ad-client="ca-pub-4485968980278243"
+									     data-ad-slot="8455082664"
+									     data-ad-format="auto"
+									     data-full-width-responsive="true"></ins>
+									<script>
+									     (adsbygoogle = window.adsbygoogle || []).push({});
+									</script>
+								</div>
+
+								<div class="dropdown">
+								  <button onclick="openDropdown()" class="dropbtn">{{ $watch->season }}<span style="padding-left: 7px; padding-right: 0px;" class="stretch dropbtn">v</span></button>
+								  <div id="myDropdown" class="dropdown-content">
+								      @foreach ($dropdown as $watch)
+								      	<a style="color:white; text-decoration: none;" href="{{ route('video.intro', [$watch->genre, $watch->titleToUrl()]) }}">{{ $watch->season }}</a>
+								      @endforeach
+								  </div>
+								</div>
+
+							    @foreach ($videos as $video)
+								    <div style="{{ $video->id == $current->id ? 'background-color: #7A7A7A' : '' }}">
+								    	@include('video.singleRelatedWatch')
+							    	</div>
+							    @endforeach
+							</div>
+
+							<div id="Related" class="tabcontent">
+								@foreach ($related as $video)
+							    	@include('video.singleRelatedPost')
+							    @endforeach
+							</div>
 						</div>
-
-					    @foreach ($videos as $video)
-						    <div style="{{ $video->id == $current->id ? 'background-color: #7A7A7A' : '' }}">
-						    	@include('video.singleRelatedWatch')
-					    	</div>
-					    @endforeach
-					</div>
-
-					<div id="Related" class="tabcontent">
-						@foreach ($related as $video)
-					    	@include('video.singleRelatedPost')
-					    @endforeach
 					</div>
 				</div>
 			</div>

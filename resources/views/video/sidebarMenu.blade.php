@@ -1,4 +1,4 @@
-<div class="{{ $theme == 'dark' ? 'dark-theme' : 'white-theme' }}" style="margin-right: -20px; height: 100vh; overflow-y: scroll; overflow-x: hidden;">
+<div class="{{ $theme == 'dark' ? 'dark-theme' : 'white-theme' }}" style="padding-top:10px; margin-right: -20px; height: 100vh; overflow-y: scroll; overflow-x: hidden;">
 	@include('video.sidebarItem', ['link' => '/', 'is_current' => Request::is('/') ? 'active' : '', 'icon' => 'home', 'title' => '首頁'])
 	@include('video.sidebarItem', ['link' => route('video.rank'), 'is_current' => Request::is('*rank*') ? 'active' : '', 'icon' => 'whatshot', 'title' => '發燒影片'])
 	<hr style="margin: 10px 0px;">
@@ -24,7 +24,7 @@
             <div><a href="/about-us">關於</a>&nbsp;<a href="/policy">免責聲明</a>&nbsp;<a href="/policy">私隱條例</a></div>
             <div style="margin-top: -5px;"><a href="/about-us">與我們聯絡</a>&nbsp;<a href="/about-us">廣告</a></div>
         </div>
-        <div class="col-sm-12 col-md-12" style="margin-left: 25px; margin-top: 10px">
+        <div class="col-sm-12 col-md-12" style="margin-left: 25px; margin-top: 5px">
             <div style="font-size: 0.8em; color: gray">© 2020 娛見日本 LaughSeeJapan</div>
         </div>
     </div>

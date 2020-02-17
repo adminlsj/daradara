@@ -28,11 +28,47 @@ class VideoController extends Controller
         $variety = Video::where('genre', 'variety')
                        ->whereDate('created_at', '>=', Carbon::now()->subMonth())->inRandomOrder()->limit(12)->get();
         $drama = Video::where('genre', 'drama')
-                     ->whereDate('created_at', '>=', Carbon::now()->subMonth())->inRandomOrder()->limit(12)->get();
+                     ->whereDate('created_at', '>=', Carbon::now()->subWeek())->inRandomOrder()->limit(12)->get();
         $anime = Video::where('genre', 'anime')
-                     ->whereDate('created_at', '>=', Carbon::now()->subMonth())->inRandomOrder()->limit(12)->get();
+                     ->whereDate('created_at', '>=', Carbon::now()->subWeek())->inRandomOrder()->limit(12)->get();
 
         return view('video.home', compact('videos', 'variety', 'drama', 'anime'));
+    }
+
+    public function rank(Request $request){
+        if ($request->has('g') && $request->g != 'null') {
+            $genre = $request->g;
+            $months = 3;
+            switch ($genre) {
+                case 'variety':
+                    $months = 3;
+                    break;
+                case 'drama':
+                    $months = 3;
+                    break;
+                case 'anime':
+                    $months = 3;
+                    break;
+                default:
+                    $months = 3;
+                    break;
+            }
+            $videos = Video::where('genre', $genre)->whereDate('created_at', '>=', Carbon::now()->subMonths($months))->orderBy('views', 'desc')->paginate(10);
+            $html = $this->rankLoadHTML($videos);
+            if ($request->ajax()) {
+                return $html;
+            }
+
+            return view('video.rankIndex', compact('videos'));
+        } else {
+            $videos = Video::whereDate('created_at', '>=', Carbon::now()->subMonths(3))->orderBy('views', 'desc')->paginate(10);
+            $html = $this->rankLoadHTML($videos);
+            if ($request->ajax()) {
+                return $html;
+            }
+
+            return view('video.rankIndex', compact('videos'));
+        }
     }
 
     public function genre(Request $request){
@@ -185,33 +221,6 @@ class VideoController extends Controller
                 }
             }
 
-            /* ------------------------------TESTING START-------------------------------
-            $url = $video->sd()[0];
-            try {
-                $curl_connection = curl_init($url);
-                curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
-                curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
-                curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
-                curl_setopt($curl_connection, CURLOPT_HTTPHEADER, [
-                    'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:56.0) Gecko/20100101 Firefox/56.0',
-                    'Host: api.bilibili.com',
-                    'Cookie: SESSDATA=1feadc09%2C1582358038%2Ca8f2f511;'
-                ]);
-                $data = json_decode(curl_exec($curl_connection), true);
-                curl_close($curl_connection);
-
-                $durl = $data['data']['durl'][0];
-                $url = $durl['url'];
-                if ($durl['backup_url'] != null && strpos($durl['backup_url'][0], 'upos-hz-mirrorakam') !== false) {
-                    $url = $durl['backup_url'][0];
-                }
-
-                return str_replace("upos-hz-mirrorakam.akamaized.net", "cn-hk-eq-bcache-01.bilivideo.com", $url);
-            } catch(Exception $e) {
-                return $e->getMessage();
-            }
-            /* ------------------------------TESTING ENDED------------------------------- */
-
             $videosSelect = Video::where('id', '!=', $video->id)->inRandomOrder()->select('id', 'tags')->get()->toArray();
             $rankings = [];
             foreach ($videosSelect as $videoSelect) {
@@ -269,42 +278,6 @@ class VideoController extends Controller
 
                 return view('video.showWatch', compact('genre', 'video', 'videos', 'related', 'prev', 'next', 'dropdown', 'watch', 'current', 'is_program'));
             }
-        }
-    }
-
-    public function rank(Request $request){
-        if ($request->has('g') && $request->g != 'null') {
-            $genre = $request->g;
-            $months = 3;
-            switch ($genre) {
-                case 'variety':
-                    $months = 3;
-                    break;
-                case 'drama':
-                    $months = 12;
-                    break;
-                case 'anime':
-                    $months = 12;
-                    break;
-                default:
-                    $months = 3;
-                    break;
-            }
-            $videos = Video::where('genre', $genre)->whereDate('created_at', '>=', Carbon::now()->subMonths($months))->orderBy('views', 'desc')->paginate(10);
-            $html = $this->rankLoadHTML($videos);
-            if ($request->ajax()) {
-                return $html;
-            }
-
-            return view('video.rankIndex', compact('videos'));
-        } else {
-            $videos = Video::whereDate('created_at', '>=', Carbon::now()->subMonths(3))->orderBy('views', 'desc')->paginate(10);
-            $html = $this->rankLoadHTML($videos);
-            if ($request->ajax()) {
-                return $html;
-            }
-
-            return view('video.rankIndex', compact('videos'));
         }
     }
 
