@@ -24,16 +24,16 @@ class VideoController extends Controller
     }
 
     public function home(Request $request){
-        $videos = Video::whereDate('created_at', '>=', Carbon::now()->subMonths(6))
+        $videos = Video::whereDate('created_at', '>=', Carbon::now()->subMonths(1))
                       ->where('views', '>=', '500000')->inRandomOrder()->limit(12)->get();
         $variety = Video::where('genre', 'variety')
-                       ->whereDate('created_at', '>=', Carbon::now()->subMonths(6))
+                       ->whereDate('created_at', '>=', Carbon::now()->subMonths(1))
                        ->where('views', '>=', '500000')->inRandomOrder()->limit(12)->get();
         $drama = Video::where('genre', 'drama')
-                     ->whereDate('created_at', '>=', Carbon::now()->subMonths(12))
+                     ->whereDate('created_at', '>=', Carbon::now()->subMonths(1))
                      ->where('views', '>=', '200000')->inRandomOrder()->limit(12)->get();
         $anime = Video::where('genre', 'anime')
-                     ->whereDate('created_at', '>=', Carbon::now()->subMonths(12))
+                     ->whereDate('created_at', '>=', Carbon::now()->subMonths(1))
                      ->where('views', '>=', '200000')->inRandomOrder()->limit(12)->get();
 
         return view('video.home', compact('videos', 'variety', 'drama', 'anime'));
