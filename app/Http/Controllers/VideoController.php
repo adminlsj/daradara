@@ -72,13 +72,13 @@ class VideoController extends Controller
     }
 
     public function genre(Request $request){
-        /*$id = 2224;
-        $genre = 'anime';
-        $category = 'zqxshz';
-        $season = '第一季';
-        $title = '最強學生會長';
-        $created_at = new Carbon('2012-04-04 11:20:52');
-        for ($i = 1; $i <= 21; $i++) { 
+        /*$id = 2482;
+        $genre = 'variety';
+        $category = 'scgy';
+        $season = '東京2019-2020';
+        $title = '雙層公寓：東京2019-2020';
+        $created_at = new Carbon('2019-05-02 10:29:32');
+        for ($i = 1; $i <= 33; $i++) { 
             $video = Video::create([
                 'id' => $id,
                 'title' =>  $title.'【第'.$i.'話】',
@@ -86,7 +86,7 @@ class VideoController extends Controller
                 'genre' => $genre,
                 'category' => $category,
                 'season' => $season,
-                'tags' => '最強學生會長 最強會長黑神',
+                'tags' => '東京2019-2020 雙層公寓 排屋公寓 TerraceHouse 愛情 YOU 玲奈 德井義實 山里亮太 登坂廣臣 綜藝',
                 'hd' => 'https://archive.org/download/sqzw_11/SQZW0'.$i.'.mp4',
                 'sd' => 'https://archive.org/download/sqzw_11/SQZW0'.$i.'.mp4',
                 'imgur' => 'pending',
@@ -99,7 +99,7 @@ class VideoController extends Controller
             $id++;
         }
         $watch = Watch::create([
-            'id' => 183,
+            'id' => 189,
             'genre' => $genre,
             'category' => $category,
             'season' => $season,
@@ -143,6 +143,9 @@ class VideoController extends Controller
         $title = str_replace("-", " ", $title);
         if ($title == '跟你回家可以嗎？') {
             $title = '跟拍到你家';
+        }
+        if ($title == '雙層公寓：東京2019 2020') {
+            $title = '雙層公寓：東京2019-2020';
         }
         $watch = Watch::where('genre', $genre)->where('title', $title)->first();
 

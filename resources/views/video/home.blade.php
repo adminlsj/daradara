@@ -12,10 +12,10 @@
 	<div class="col-md-10 col-md-offset-2">
 		<div style="background-color: #F5F5F5;">
 			<div class="padding-setup" style="overflow-x: hidden;">
-				<div class="row banner" style="padding-top: 10px; padding-bottom: 10px;">
+				<div class="row banner" style="padding-top: 10px; padding-bottom: 10px; margin-left: -20px; margin-right: -20px;">
 					<a href="{{ route('video.intro', ['variety', '月曜夜未央']) }}">
-						<div class="col-md-12" style="position: relative; background-color: #040A1D">
-							<img src="https://i.imgur.com/aUKNJ5x.png" alt="月曜夜未央">
+						<div class="col-md-12 banner-img-container" style="position: relative; background-color: #080B1A;">
+							<img src="https://i.imgur.com/Zb9Tnxe.png" alt="月曜夜未央">
 							<div class="button">立即觀看</div>
 						</div>
 					</a>

@@ -376,16 +376,18 @@ nav {
     align-items: center;
 }
 
-.banner img {
+.banner-img-container img{
+  margin-left: -15px;
+}
+
+.banner-img-container, .banner-img-container img {
   height: 300px;
-  width: auto;
-  margin-left: -20px;
 }
 
 .banner .button {
   position: absolute;
   bottom: 20px;
-  right: 15px;
+  right: 20px;
   color: white;
   border: 1.5px solid white;
   padding:10px 20px;
@@ -1060,9 +1062,12 @@ a > i {
     width: 100%; 
   }
 
-  .banner img {
+  .banner-img-container, .banner-img-container img {
     height: 200px;
-    margin-left: -10px;
+  }
+
+  .banner-img-container img {
+    margin-left: -5px;
   }
 
   .banner .button {
