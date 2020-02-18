@@ -32,7 +32,7 @@
 
 						<!-- Tab content -->
 						<div id="Watch" class="tabcontent">
-							<div style="padding: 7px 0px;">
+							<div style="padding: 7px 15px;">
 								<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 								<!-- Horizontal Banner Ads -->
 								<ins class="adsbygoogle"

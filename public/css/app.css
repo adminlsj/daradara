@@ -10462,6 +10462,10 @@ a > i {
     padding: 0px 10px;
   }
 
+  .mobile-text-center {
+    text-align: center;
+  }
+
   .main-content {
     width: 100%;
     padding: 0px;
