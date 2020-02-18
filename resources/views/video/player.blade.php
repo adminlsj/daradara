@@ -3,8 +3,6 @@
       <iframe src="{{ $video->sd }}" style="border: 0; overflow: hidden;" allow="autoplay" allowfullscreen></iframe>
   </div>
 
-  {{ $video->getSourceBB('https://api.bilibili.com/x/player/playurl?avid=74613148&cid=148094348&qn=0&type=mp4&otype=json&fnver=0&fnval=1&platform=html5&html5=1&high_quality=1') }}
-
 @else
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/dplayer/dist/DPlayer.min.css">
   <button id="unmute-btn" style="padding: 5px; background-color: #e5e5e5; color: black; font-weight: 400; border: none; outline:0; margin-top: 15px; margin-left:15px; position: absolute; z-index: 99; border-radius: 2px;" class="hidden-md hidden-lg">
