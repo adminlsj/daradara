@@ -44882,7 +44882,6 @@ Object.defineProperty(document, "referrer", {
     return "https://www.bilibili.com/blackboard/html5mobileplayer.html";
   }
 });
-alert(window.document.referrer.match(/^http(s)?:\/\/(.*?)\//));
 $('[id=toggleSearchBar]').click(function (e) {
   var x = document.getElementById("searchBar");
 
