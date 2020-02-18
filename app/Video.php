@@ -24,7 +24,7 @@ class Video extends Model
     public function title()
     {
         $title = $this->title;
-        if ($this->genre == 'drama' || $this->genre == 'anime') {
+        if ($this->genre == 'drama' || $this->genre == 'anime' || $this->category == 'scgy') {
             $start = strpos($title, "【");
             $end = strpos($title, "】") - $start;
             return str_replace("【", "", substr($title, $start, $end));
