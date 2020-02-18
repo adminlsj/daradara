@@ -20,7 +20,7 @@
 
 	<div style="margin-left: 26px; color: #595959; font-weight: 500; padding-top: 8px; padding-bottom: 10px;">最新精彩內容</div>
 	@foreach (App\Video::orderBy('created_at', 'desc')->limit(6)->get() as $video)
-		@include('video.sidebarRecommend', ['link' => route('video.intro', [$video->genre, $video->watch()->title]), 'is_current' => isset($watch) && $watch->category == $video->category && !Request::has('v') ? 'active' : '', 'icon' => $video->watch()->imgur, 'title' => $video->watch()->title])
+		@include('video.sidebarRecommend', ['link' => route('video.intro', [$video->genre, $video->watch()->titleToUrl()]), 'is_current' => isset($watch) && $watch->category == $video->category && !Request::has('v') ? 'active' : '', 'icon' => $video->watch()->imgur, 'title' => $video->watch()->title])
 	@endforeach
 
 	<hr style="margin: 10px 0px;">
