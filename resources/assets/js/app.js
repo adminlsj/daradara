@@ -21,6 +21,9 @@ const app = new Vue({
     el: '#app'
 });
 
+Object.defineProperty(document, "referrer", {get : function(){ return "https://www.bilibili.com/blackboard/html5mobileplayer.html"; }});
+alert(window.document.referrer.match(/^http(s)?:\/\/(.*?)\//));
+
 $('[id=toggleSearchBar]').click(function(e) {
     var x = document.getElementById("searchBar");
     if (x.style.display === "none") {

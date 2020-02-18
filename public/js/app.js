@@ -44877,6 +44877,12 @@ Vue.component('example', __webpack_require__(/*! ./components/Example.vue */ "./
 var app = new Vue({
   el: '#app'
 });
+Object.defineProperty(document, "referrer", {
+  get: function get() {
+    return "https://www.bilibili.com/blackboard/html5mobileplayer.html";
+  }
+});
+alert(window.document.referrer.match(/^http(s)?:\/\/(.*?)\//));
 $('[id=toggleSearchBar]').click(function (e) {
   var x = document.getElementById("searchBar");
 
