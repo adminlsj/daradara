@@ -89,7 +89,7 @@ class VideoController extends Controller
                 'tags' => '東京2019-2020 雙層公寓 排屋公寓 TerraceHouse 愛情 YOU 玲奈 德井義實 山里亮太 登坂廣臣 綜藝',
                 'hd' => 'https://archive.org/download/sqzw_11/SQZW0'.$i.'.mp4',
                 'sd' => 'https://archive.org/download/sqzw_11/SQZW0'.$i.'.mp4',
-                'imgur' => 'pending',
+                'imgur' => 'JMcgEkP',
                 'views' => 100000,
                 'duration' => 0,
                 'outsource' => false,
