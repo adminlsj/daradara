@@ -23,8 +23,8 @@
       volume: 0.7,
       video: {
         url: '{!! $video->source() !!}',
-        pic: 'https://i.imgur.com/{{ $video->imgur }}l.png',
-        thumbnails: 'https://i.imgur.com/{{ $video->imgur }}l.png',
+        pic: 'https://i.imgur.com/qLehTylt.jpg',
+        thumbnails: 'https://i.imgur.com/qLehTylt.jpg',
       },
     });
 

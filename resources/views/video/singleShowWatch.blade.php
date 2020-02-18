@@ -44,8 +44,8 @@
                     preload: 'auto',
                     video: {
                       url: source,
-                      pic: 'https://i.imgur.com/{{ $video->imgur }}l.png',
-                      thumbnails: 'https://i.imgur.com/{{ $video->imgur }}l.png',
+                      pic: 'https://i.imgur.com/qLehTylt.jpg',
+                      thumbnails: 'https://i.imgur.com/qLehTylt.jpg',
                     },
                   });
                }
