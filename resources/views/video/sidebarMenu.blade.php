@@ -9,18 +9,18 @@
 	<hr style="margin: 10px 0px;">
 
 	<div style="margin-left: 26px; color: #595959; font-weight: 500; padding-top: 8px; padding-bottom: 10px;">LaughSeeJapan 推薦</div>
-	@include('video.sidebarRecommend', ['link' => route('video.intro', ['variety', '月曜夜未央']), 'is_current' => isset($watch) && $watch->category == 'monday' && !Request::has('v') ? 'active' : '', 'icon' => 'iXyOfUs', 'title' => '月曜夜未央'])
-	@include('video.sidebarRecommend', ['link' => route('video.intro', ['variety', '人類觀察']), 'is_current' => isset($watch) && $watch->category == 'monitoring' && !Request::has('v') ? 'active' : '', 'icon' => 'wLpWH5h', 'title' => '人類觀察'])
-	@include('video.sidebarRecommend', ['link' => route('video.intro', ['variety', '24小時不准笑']), 'is_current' => isset($watch) && $watch->category == '24xsbzx' && !Request::has('v') ? 'active' : '', 'icon' => 'EK6Lyip', 'title' => '24小時不准笑'])
-	@include('video.sidebarRecommend', ['link' => route('video.intro', ['variety', '跟拍到你家']), 'is_current' => isset($watch) && $watch->category == 'home' && !Request::has('v') ? 'active' : '', 'icon' => 'NF0Gqew', 'title' => '跟拍到你家'])
-	@include('video.sidebarRecommend', ['link' => route('video.intro', ['variety', '交給嵐吧_嵐的大挑戰']), 'is_current' => isset($watch) && $watch->category == 'lddtz' && !Request::has('v') ? 'active' : '', 'icon' => 'jBZX4mj', 'title' => '交給嵐吧'])
-	@include('video.sidebarRecommend', ['link' => route('video.intro', ['variety', '閒聊007']), 'is_current' => isset($watch) && $watch->category == 'talk' && !Request::has('v') ? 'active' : '', 'icon' => 'BqVcMd9', 'title' => '閒聊007'])
+	@include('video.sidebarRecommend', ['link' => route('video.intro', ['variety', '月曜夜未央']), 'is_current' => isset($watch) && $watch->category == 'monday' && !Request::has('v'), 'icon' => 'iXyOfUs', 'title' => '月曜夜未央'])
+	@include('video.sidebarRecommend', ['link' => route('video.intro', ['variety', '人類觀察']), 'is_current' => isset($watch) && $watch->category == 'monitoring' && !Request::has('v'), 'icon' => 'wLpWH5h', 'title' => '人類觀察'])
+	@include('video.sidebarRecommend', ['link' => route('video.intro', ['variety', '24小時不准笑']), 'is_current' => isset($watch) && $watch->category == '24xsbzx' && !Request::has('v'), 'icon' => 'EK6Lyip', 'title' => '24小時不准笑'])
+	@include('video.sidebarRecommend', ['link' => route('video.intro', ['variety', '跟拍到你家']), 'is_current' => isset($watch) && $watch->category == 'home' && !Request::has('v'), 'icon' => 'NF0Gqew', 'title' => '跟拍到你家'])
+	@include('video.sidebarRecommend', ['link' => route('video.intro', ['variety', '交給嵐吧_嵐的大挑戰']), 'is_current' => isset($watch) && $watch->category == 'lddtz' && !Request::has('v'), 'icon' => 'jBZX4mj', 'title' => '交給嵐吧'])
+	@include('video.sidebarRecommend', ['link' => route('video.intro', ['variety', '閒聊007']), 'is_current' => isset($watch) && $watch->category == 'talk' && !Request::has('v'), 'icon' => 'BqVcMd9', 'title' => '閒聊007'])
 
 	<hr style="margin: 10px 0px;">
 
 	<div style="margin-left: 26px; color: #595959; font-weight: 500; padding-top: 8px; padding-bottom: 10px;">最新精彩內容</div>
 	@foreach (App\Video::orderBy('created_at', 'desc')->limit(6)->get() as $video)
-		@include('video.sidebarRecommend', ['link' => route('video.intro', [$video->genre, $video->watch()->titleToUrl()]), 'is_current' => isset($watch) && $watch->category == $video->category && !Request::has('v') ? 'active' : '', 'icon' => $video->watch()->imgur, 'title' => $video->watch()->title])
+		@include('video.sidebarRecommend', ['link' => route('video.intro', [$video->genre, $video->watch()->titleToUrl()]), 'is_current' => false, 'icon' => $video->watch()->imgur, 'title' => $video->watch()->title])
 	@endforeach
 
 	<hr style="margin: 10px 0px;">
