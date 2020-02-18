@@ -13,20 +13,18 @@
 @endsection
 
 @section('content')
-<div class="row">
-	<div class="col-lg-2 col-md-2 hidden-sm hidden-xs sidebar-menu">
-		@include('video.sidebarMenu', ['theme' => 'white'])
-	</div>
+<div class="hidden-sm hidden-xs sidebar-menu">
+	@include('video.sidebarMenu', ['theme' => 'white'])
+</div>
 
-	<div class="col-md-10 col-md-offset-2">
-		<div style="background-color: #F5F5F5;" class="padding-setup">
-			<div class="row" style="padding-top: 6px;">
-				<div class="col-md-12">
-					<h4 style="color: black; font-weight: 500; margin-bottom: 8px;"><a href="{{ route('video.search')}}?query={{ $query }}">#{{ $query }}</a> 標籤的影片</h4>
-					<div style="margin-left: -10px; margin-right: -10px;" class="video-sidebar-wrapper">
-					    <div id="sidebar-results"><!-- results appear here --></div>
-					    <div style="text-align: center;" class="ajax-loading"><img style="width: 40px; height: auto; padding-top: 25px; padding-bottom: 30px;" src="https://i.imgur.com/TcZjkZa.gif"/></div>
-					</div>
+<div class="main-content">
+	<div style="background-color: #F5F5F5;" class="padding-setup">
+		<div class="row" style="padding-top: 6px;">
+			<div class="col-md-12">
+				<h4 style="color: black; font-weight: 500; margin-bottom: 8px;"><a href="{{ route('video.search')}}?query={{ $query }}">#{{ $query }}</a> 標籤的影片</h4>
+				<div style="margin-left: -10px; margin-right: -10px;" class="video-sidebar-wrapper">
+				    <div id="sidebar-results"><!-- results appear here --></div>
+				    <div style="text-align: center;" class="ajax-loading"><img style="width: 40px; height: auto; padding-top: 25px; padding-bottom: 30px;" src="https://i.imgur.com/TcZjkZa.gif"/></div>
 				</div>
 			</div>
 		</div>

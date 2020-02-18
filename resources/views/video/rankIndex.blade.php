@@ -5,19 +5,17 @@
 @endsection
 
 @section('content')
-	<div class="row">
-		<div class="col-lg-2 col-md-2 hidden-sm hidden-xs sidebar-menu">
-			@include('video.sidebarMenu', ['theme' => 'white'])
-		</div>
-		<div class="col-md-10 col-md-offset-2">
-			@include('layouts.nav-rank')
-			<div style="background-color: #F5F5F5; padding-top: 44px" class="video-sidebar-wrapper padding-setup">
-				<div style="padding-top: 10px" class="hidden-xs hidden-sm"></div>
-			    <div id="sidebar-results"><!-- results appear here --></div>
-			    <div style="text-align: center;" class="ajax-loading"><img style="width: 40px; height: auto; padding-top: 15px; padding-bottom: 30px;" src="https://i.imgur.com/TcZjkZa.gif"/></div>
-			</div>
-		</div>
+<div class="hidden-sm hidden-xs sidebar-menu">
+	@include('video.sidebarMenu', ['theme' => 'white'])
+</div>
+<div class="main-content">
+	@include('layouts.nav-rank')
+	<div style="background-color: #F5F5F5; padding-top: 44px" class="video-sidebar-wrapper padding-setup">
+		<div style="padding-top: 10px" class="hidden-xs hidden-sm"></div>
+	    <div id="sidebar-results"><!-- results appear here --></div>
+	    <div style="text-align: center;" class="ajax-loading"><img style="width: 40px; height: auto; padding-top: 15px; padding-bottom: 30px;" src="https://i.imgur.com/TcZjkZa.gif"/></div>
 	</div>
+</div>
 @endsection
 
 @section('script')

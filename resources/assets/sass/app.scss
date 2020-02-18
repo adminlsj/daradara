@@ -376,10 +376,6 @@ nav {
     align-items: center;
 }
 
-.banner-img-container img{
-  margin-left: -15px;
-}
-
 .banner-img-container, .banner-img-container img {
   height: 300px;
 }
@@ -759,16 +755,46 @@ a > i {
   margin: 0 auto;
 }
 
+.main-content {
+  width: calc(100% - 235px);
+  float: right;
+  padding-left: 20px;
+}
+
+.main-content > div {
+  min-height: calc(100vh - 50px);
+}
+
 .sidebar-menu {
   position: -webkit-fixed;
   position: fixed;
   top: 50px;
   z-index: 101;
-  padding-right: 0px;
+  width: 235px;
 }
 
-.dark-theme {
+.sidebar-menu > div {
+  padding-top:10px;
+  margin-right: -20px;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.sidebar-menu > div:hover {
+  overflow-y: scroll;
+}
+
+/* width */
+.sidebar-menu > div::-webkit-scrollbar {
+  width: 8px;
+}
+
+.dark-theme, .dark-theme::-webkit-scrollbar-track {
   background-color: #282828;
+}
+
+.dark-theme::-webkit-scrollbar-thumb, .dark-theme::-webkit-scrollbar-thumb:hover {
+  background: #4e4e4e; 
 }
 
 .dark-theme #fontColor{
@@ -801,8 +827,12 @@ a > i {
   color: darkgray;
 }
 
-.white-theme {
-  background-color: white;
+.white-theme, .white-theme::-webkit-scrollbar-track {
+  background: white; 
+}
+
+.white-theme::-webkit-scrollbar-thumb, .white-theme::-webkit-scrollbar-thumb:hover {
+  background: #c5c5c5; 
 }
 
 .white-theme #fontColor{
@@ -1058,6 +1088,11 @@ a > i {
     padding: 0px 10px;
   }
 
+  .main-content {
+    width: 100%;
+    padding: 0px;
+  }
+
   .nav-sub-width {
     width: 100%; 
   }
@@ -1066,12 +1101,10 @@ a > i {
     height: 200px;
   }
 
-  .banner-img-container img {
-    margin-left: -5px;
-  }
-
   .banner .button {
     bottom: 14px;
+    right: 10px;
+    padding: 5px 15px;
   }
 
   .single-show-player {
