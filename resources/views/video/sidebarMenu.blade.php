@@ -19,8 +19,8 @@
 	<hr style="margin: 10px 0px;">
 
 	<div style="margin-left: 26px; color: #595959; font-weight: 500; padding-top: 8px; padding-bottom: 10px;">最新精彩內容</div>
-	@foreach (App\Video::orderBy('created_at', 'desc')->limit(6)->get() as $video)
-		@include('video.sidebarRecommend', ['link' => route('video.intro', [$video->genre, $video->watch()->titleToUrl()]), 'is_current' => false, 'icon' => $video->watch()->imgur, 'title' => $video->watch()->title])
+	@foreach (App\Watch::orderBy('updated_at', 'desc')->limit(6)->get() as $watch)
+		@include('video.sidebarRecommend', ['link' => route('video.intro', [$watch->genre, $watch->titleToUrl()]), 'is_current' => false, 'icon' => $watch->imgur, 'title' => $watch->title])
 	@endforeach
 
 	<hr style="margin: 10px 0px;">
