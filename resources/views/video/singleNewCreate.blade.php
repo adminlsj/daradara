@@ -46,7 +46,7 @@
 
 	<div class="form-group">
 		<label for="created_at">Created At</label>
-		<input type="datetime-local" class="form-control" name="created_at" id="created_at" placeholder="(optional)" value="{{ Carbon\Carbon::now()->addHours(12)->format('Y-m-d\Th:i:s') }}">
+		<input type="datetime-local" class="form-control" name="created_at" id="created_at" placeholder="(optional)" value="{{ Carbon\Carbon::now()->format('Y-m-d\Th:i:s') }}">
 	</div>
 
 	<button type="submit" class="btn btn-info">Submit</button>
