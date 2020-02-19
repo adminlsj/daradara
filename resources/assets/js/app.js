@@ -65,9 +65,15 @@ setTimeout(function(){
 
 $(document).ready(function () {
     var hash = window.location.hash.substr(1);
-    $('html, body').animate({
-        scrollTop: $('#' + hash).offset().top
-    }, 'slow');
+    if (is_mobile) {
+      $('html, body').animate({
+          scrollTop: $('#' + hash).offset().top
+      }, 'slow');
+    } else {
+      $('html, body').animate({
+          scrollTop: $('#' + hash).offset().top - 50
+      }, 'slow');
+    }
 });
 
 require('./lazyLoad');
