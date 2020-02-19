@@ -6,8 +6,8 @@
 @else
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/dplayer/dist/DPlayer.min.css">
   <button id="unmute-btn" style="padding: 5px; background-color: #e5e5e5; color: black; font-weight: 400; border: none; outline:0; margin-top: 15px; margin-left:15px; position: absolute; z-index: 99; border-radius: 2px;" class="hidden-md hidden-lg">
-    <i style="vertical-align:middle;" class="material-icons">volume_off</i>
-    <span style="vertical-align:middle; font-weight: 500">取消靜音</span>
+    <i style="vertical-align:middle;" class="material-icons no-select">volume_off</i>
+    <span style="vertical-align:middle; font-weight: 500" class="no-select">取消靜音</span>
   </button>
   <div id="dplayer" style="width: 100%;height: auto;"></div>
   <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
