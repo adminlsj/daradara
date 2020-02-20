@@ -26,8 +26,8 @@
 						<br class="hidden-sm hidden-xs">
 						<!-- Tab links -->
 						<div style="margin-top: -20px; position: relative;" class="tab">
-							<button class="tablinks" onclick="openList(event, 'Watch')" id="defaultOpen">全集列表</button>
-							<button class="tablinks" onclick="openList(event, 'Related')">相關影片</button>
+							<button class="tablinks video-tablinks" onclick="openList(event, 'Watch')" id="defaultOpen">全集列表</button>
+							<button class="tablinks video-tablinks" onclick="openList(event, 'Related')">相關影片</button>
 							<a style="position:absolute; top:14px; right:55px; text-decoration: none; {{ $prev != false ? 'color: white;' : 'pointer-events: none; color: #414141;' }}" href="{{ route('video.watch') }}?v={{ $prev }}"><i class="material-icons noselect">skip_previous</i></a>
 							<a style="position:absolute; top:14px; right:15px; text-decoration: none; margin-left: 8px; {{ $next != false ? 'color: white;' : 'pointer-events: none; color: #414141;' }}" href="{{ route('video.watch') }}?v={{ $next }}"><i class="material-icons noselect">skip_next</i></a>
 						</div>
