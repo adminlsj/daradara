@@ -9,7 +9,7 @@
     <i style="vertical-align:middle;" class="material-icons no-select">volume_off</i>
     <span style="vertical-align:middle; font-weight: 500" class="no-select">取消靜音</span>
   </button>
-  <div id="dplayer" style="width: 100%;height: auto;"></div>
+  <div id="dplayer"></div>
   <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
   <script src="https://cdn.jsdelivr.net/npm/flv.js/dist/flv.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/dplayer/dist/DPlayer.min.js"></script>

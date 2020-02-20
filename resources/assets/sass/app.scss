@@ -40,6 +40,12 @@ body {
                                   supported by Chrome, Opera and Firefox */
 }
 
+.text-ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
 .stretch {
   display:inline-block;
   -webkit-transform:scale(1.5,0.7); /* Safari and Chrome */

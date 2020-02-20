@@ -1,8 +1,8 @@
 @include('video.player')
 
 <div style="background-color:#282828; padding-bottom: 5px; padding-left: 15px; padding-right: 15px;">
-    <div style="margin-bottom: 5px; padding-top: 7px;">
-        <p style="margin-bottom:2px; font-size: 0.9em; {{ count($video->sd()) > 1 ? 'display:none;' : '' }}">
+    <div style="margin-bottom: 5px; padding-top: 7px; position:relative;">
+        <p id="video-tags" class="text-ellipsis" style="padding-right:40px; margin-bottom:2px; font-size: 0.9em; {{ count($video->sd()) > 1 ? 'display:none;' : '' }}">
           @foreach ($video->tags() as $tag)
             @if (strpos($tag, '完整版') !== false)
               <a style="color:#e5e5e5;" href="{{ route('video.watch') }}?v={{ App\Video::where('category', $video->category)->orderBy('created_at', 'desc')->first()->id }}">#{{ $tag }}</a>
@@ -13,8 +13,10 @@
         </p>
 
         <a id="shareBtn-link" href="{{ route('video.watch') }}?v={{ $video->id }}" style="text-decoration: none; pointer-events: none;">
-          <h4 id="shareBtn-title" style="line-height: 23px; font-weight: 500; margin-top:0px; margin-bottom: 0px; color:white; font-size: 1.25em">{{ $video->title }}</h4>
+          <h4 id="shareBtn-title" style="padding-right:40px; line-height: 23px; font-weight: 500; margin-top:0px; margin-bottom: 0px; color:white; font-size: 1.25em">{{ $video->title }}</h4>
         </a>
+
+        <div id="toggleVideoDescription" style="position:absolute; top:6px; right:3px; cursor: pointer; color: white" class="pull-right"><i id="toggleVideoDescriptionIcon" class="material-icons noselect">expand_more</i></div>
 
         <div class="video-parts-wrapper" style="padding-top: 12px; padding-bottom: 5px; {{ count($video->sd()) == 1 ? 'display:none;' : '' }}">
           @foreach ($video->sd() as $url)
@@ -44,8 +46,6 @@
                     preload: 'auto',
                     video: {
                       url: source,
-                      pic: 'https://i.imgur.com/{{ $video->imgur }}l.png',
-                      thumbnails: 'https://i.imgur.com/{{ $video->imgur }}l.png',
                     },
                   });
                }
@@ -59,13 +59,11 @@
         <a style="text-decoration: none; margin-left: 8px; {{ $next != false ? 'color: white;' : 'pointer-events: none; color: #414141;' }}" href="{{ route('video.watch') }}?v={{ $next }}"><i class="material-icons noselect">skip_next</i></a>
     </div>
 
-    <div id="toggleVideoDescription" style="margin-top: -40px; padding-top:11px; padding-right:2px;cursor: pointer; color: white" class="pull-right"><i id="toggleVideoDescriptionIcon" class="material-icons noselect">expand_more</i></div>
-
-    <a style="margin-top: -34px; margin-right: 31px; padding-right:10px; cursor: pointer;" class="pull-right" data-toggle="modal" data-target="#reportModal">
+    <a style="margin-top: -34px; margin-right: 0px; padding-right:5px; cursor: pointer;" class="pull-right" data-toggle="modal" data-target="#reportModal">
       <i style="color: white;" class="material-icons pull-right noselect">flag</i>
     </a>
 
-    <a id="shareBtn" style="margin-top: -34px; margin-right: 74px; padding-right:8px; cursor: pointer; text-decoration: none;" class="pull-right">
+    <a id="shareBtn" style="margin-top: -34px; margin-right: 40px; padding-right:5px; cursor: pointer; text-decoration: none;" class="pull-right">
       <i style="color: white;-moz-transform: scale(-1, 1);-webkit-transform: scale(-1, 1);-o-transform: scale(-1, 1);-ms-transform: scale(-1, 1);transform: scale(-1, 1);" class="material-icons pull-right noselect">reply</i>
     </a>
 
