@@ -29,10 +29,12 @@ $('[id=toggleVideoDescription]').click(function(e) {
 });
 
 $(".dplayer-full-icon, .dplayer-full-in-icon").on('click', function(event){
+  if (!is_mobile) {
     var videoWrap = $(".dplayer-video-wrap");
     if (videoWrap.css("padding-bottom") == "0px") {
         videoWrap.css("padding-bottom", "56.25%");
     } else {
         videoWrap.css("padding-bottom", "0px");
     }
+  }
 });
