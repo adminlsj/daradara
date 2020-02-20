@@ -1,1 +1,1 @@
-<div style="float: right; margin-top: -28px; color: crimson; font-weight: 500; cursor: pointer;" data-toggle="modal" data-target="{{ Auth::check() ? '#subscribeModal' : '#signUpModal'}}">訂閱</div>
+<div style="float: right; margin-top: -30px; color: crimson; font-weight: 500; cursor: pointer; font-size: 1.1em" data-toggle="modal" data-target="{{ Auth::check() ? '#subscribeModal' : '#signUpModal'}}">訂閱</div>
