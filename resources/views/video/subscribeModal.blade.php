@@ -1,4 +1,4 @@
-<div style="padding:125px" class="modal fade" id="subscribeModal" tabindex="-1" role="dialog" aria-labelledby="subscribeModalLabel" aria-hidden="true">
+<div class="modal" id="subscribeModal" tabindex="-1" role="dialog" aria-labelledby="subscribeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
 
     <form id="subscribe-form" action="{{ route('video.subscribe') }}" method="POST">
