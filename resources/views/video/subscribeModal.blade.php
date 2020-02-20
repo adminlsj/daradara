@@ -5,7 +5,7 @@
 
       {{ csrf_field() }}
 
-      <div style="padding: 10px;" class="modal-content">
+      <div style="padding: 15px;" class="modal-content">
         <div style="border: 0px; position: relative;" class="modal-header">
           <h4 style="color: gray;font-weight: 100; transform: rotate(45deg);position: absolute; font-size: 3em; top: -10px; cursor: pointer;" class="no-select" data-dismiss="modal">+</h4>
           <h4 style="color: #3F3F3F; margin-bottom: 0px; margin-top: 40px; font-size: 1.7em" class="modal-title" id="subscribeModalLabel">開始訂閱《{{ $video->watch()->title }}》</h4>
@@ -18,7 +18,7 @@
 
           <input name="subscribe-watch-id" type="hidden" value="{{ $video->watch()->id }}">
           <input name="subscribe-user-id" type="hidden" value="{{ Auth::user()->id }}">
-          <button id="subscribe-btn" style="height: 45px; margin-top: 10px;" type="submit" class="btn btn-info" name="submit">訂閱</button>
+          <button id="subscribe-btn" style="height: 45px; margin-top: 10px; font-size: 1em;" type="submit" class="btn btn-info" name="submit">訂閱</button>
         </div>
       </div>
 

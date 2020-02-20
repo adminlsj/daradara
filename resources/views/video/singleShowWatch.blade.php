@@ -89,7 +89,7 @@
     </div>
 </div>
 
-<hr style="border:solid 0.5px #383838; margin-top: 54px; margin-bottom: 10px">
+<hr style="border:solid 0.5px #383838; margin-top: 53px; margin-bottom: 10px">
 <div style="padding-left: 15px; padding-right: 15px;">
   <a href="{{ route('video.intro', [$watch->genre, $watch->titleToUrl()]) }}">
     <img class="lazy img-circle" style="width: 35px; height: auto; float:left;" src="https://i.imgur.com/JMcgEkPs.jpg" data-src="https://i.imgur.com/{{ $video->watch()->imgur }}s.jpg" data-srcset="https://i.imgur.com/{{ $video->watch()->imgur }}s.jpg" alt="{{ $video->watch()->title }}">
