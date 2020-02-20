@@ -97,3 +97,7 @@ $(document).ready(function() {
         $('#subscribeModal').modal('show');
     }
 });
+
+$('form').submit(function(){
+    $(this).find('button[type=submit]').prop('disabled', true);
+});

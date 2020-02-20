@@ -48,7 +48,7 @@
 								<ins class="adsbygoogle"
 								     style="display:block"
 								     data-ad-format="fluid"
-								     data-ad-layout-key="-a0+ep-49-9g+xj"
+								     data-ad-layout-key="-a0+er-4n-a9+10i"
 								     data-ad-client="ca-pub-4485968980278243"
 								     data-ad-slot="9284406342"></ins>
 								<script>
