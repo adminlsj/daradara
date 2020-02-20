@@ -437,6 +437,11 @@ nav {
   border-top:solid 3px transparent;
 }
 
+.tab .video-tablinks.active {
+  color: white;
+  border-color: crimson;
+}
+
 .banner-img-container, .banner-img-container img {
   height: 300px;
 }
