@@ -1,4 +1,4 @@
-<div style="padding:100px" class="modal fade" id="signUpModal" tabindex="-1" role="dialog" aria-labelledby="signUpModalLabel" aria-hidden="true">
+<div style="padding:50px" class="modal fade" id="signUpModal" tabindex="-1" role="dialog" aria-labelledby="signUpModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
 
     <form action="{{ route('register') }}" method="POST">
