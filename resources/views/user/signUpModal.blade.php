@@ -1,0 +1,33 @@
+<div style="padding:125px" class="modal fade" id="signUpModal" tabindex="-1" role="dialog" aria-labelledby="signUpModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+
+    <form action="{{ route('register') }}" method="POST">
+
+      {{ csrf_field() }}
+
+      <div style="padding: 10px;" class="modal-content">
+        <div style="border: 0px; position: relative;" class="modal-header">
+          <h4 style="color: gray;font-weight: 100; transform: rotate(45deg);position: absolute; font-size: 3em; top: -10px; cursor: pointer;" class="no-select" data-dismiss="modal">+</h4>
+          <h4 style="color: #3F3F3F; margin-bottom: 0px; margin-top: 40px; font-size: 1.7em" class="modal-title" id="signUpModalLabel">註冊帳戶開始訂閱</h4>
+        </div>
+        <div style="color: #3F3F3F; margin-top: -15px; font-size: 1.1em" class="modal-body">
+          <span style="font-weight: 500;">訂閱通知將發送至你的電郵地址。</span>
+          <div class="form-group" style="margin-top: 20px;">
+            <input type="email" class="form-control" name="email" id="email" placeholder="電郵地址" required>
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" name="name" id="name" placeholder="名字" required>
+          </div>
+          <div class="form-group">
+            <input type="password" class="form-control" name="password" id="password" placeholder="設定密碼" required>
+          </div>
+          <button style="height: 45px; margin-top: 10px;" type="submit" class="btn btn-info" name="submit">登記</button>
+          <hr style="margin:15px 0px">
+          <span style="font-weight: 400">已經有LaughSeeJapan帳戶了？</span>&nbsp;<a id="switch-login-modal" style="cursor: pointer; text-decoration: none; font-weight: 500">登入</a>
+        </div>
+      </div>
+
+    </form>
+
+  </div>
+</div>

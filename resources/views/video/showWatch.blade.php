@@ -25,28 +25,16 @@
 					<div class="col-md-4 single-show-list">
 						<br class="hidden-sm hidden-xs">
 						<!-- Tab links -->
-						<div style="margin-top: -20px" class="tab">
-						  <button class="tablinks" onclick="openList(event, 'Watch')" id="defaultOpen">全集列表</button>
-						  <button class="tablinks" onclick="openList(event, 'Related')">相關影片</button>
+						<div style="margin-top: -20px; position: relative;" class="tab">
+							<button class="tablinks" onclick="openList(event, 'Watch')" id="defaultOpen">全集列表</button>
+							<button class="tablinks" onclick="openList(event, 'Related')">相關影片</button>
+							<a style="position:absolute; top:14px; right:55px; text-decoration: none; {{ $prev != false ? 'color: white;' : 'pointer-events: none; color: #414141;' }}" href="{{ route('video.watch') }}?v={{ $prev }}"><i class="material-icons noselect">skip_previous</i></a>
+							<a style="position:absolute; top:14px; right:15px; text-decoration: none; margin-left: 8px; {{ $next != false ? 'color: white;' : 'pointer-events: none; color: #414141;' }}" href="{{ route('video.watch') }}?v={{ $next }}"><i class="material-icons noselect">skip_next</i></a>
 						</div>
 
 						<!-- Tab content -->
 						<div id="Watch" class="tabcontent">
-							<div style="padding: 7px 15px;">
-								<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-								<!-- Horizontal Banner Ads -->
-								<ins class="adsbygoogle"
-								     style="display:block;"
-								     data-ad-client="ca-pub-4485968980278243"
-								     data-ad-slot="8455082664"
-								     data-ad-format="auto"
-								     data-full-width-responsive="true"></ins>
-								<script>
-								     (adsbygoogle = window.adsbygoogle || []).push({});
-								</script>
-							</div>
-
-							<div class="dropdown">
+							<div class="dropdown" style="margin-top: -3px">
 							  <button onclick="openDropdown()" class="dropbtn">{{ $watch->season }}<span style="padding-left: 7px; padding-right: 0px;" class="stretch dropbtn">v</span></button>
 							  <div id="myDropdown" class="dropdown-content">
 							      @foreach ($dropdown as $watch)
@@ -55,8 +43,21 @@
 							  </div>
 							</div>
 
+							<div style="margin: 7px 15px;">
+								<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+								<ins class="adsbygoogle"
+								     style="display:block"
+								     data-ad-format="fluid"
+								     data-ad-layout-key="-a0+ep-49-9g+xj"
+								     data-ad-client="ca-pub-4485968980278243"
+								     data-ad-slot="9284406342"></ins>
+								<script>
+								     (adsbygoogle = window.adsbygoogle || []).push({});
+								</script>
+							</div>
+
 						    @foreach ($videos as $video)
-							    <div style="{{ $video->id == $current->id ? 'background-color: #7A7A7A' : '' }}">
+							    <div class="related-watch-wrap" style="{{ $video->id == $current->id ? 'background-color: #7A7A7A' : '' }};">
 							    	@include('video.singleRelatedWatch')
 						    	</div>
 						    @endforeach

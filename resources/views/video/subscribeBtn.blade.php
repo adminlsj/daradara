@@ -1,0 +1,1 @@
+<div style="float: right; margin-top: -28px; color: red; font-weight: 500; cursor: pointer;" data-toggle="modal" data-target="{{ Auth::check() ? '#subscribeModal' : '#signUpModal'}}">訂閱</div>

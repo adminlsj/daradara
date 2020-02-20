@@ -1,6 +1,6 @@
 @include('video.player')
 
-<div style="background-color:#282828; padding-bottom: 5px; padding-left: 15px; padding-right: 15px;">
+<div style="padding-bottom: 5px; padding-left: 15px; padding-right: 15px;">
     <div style="margin-bottom: 5px; padding-top: 7px; position:relative;">
         <p id="video-tags" class="text-ellipsis" style="padding-right:40px; margin-bottom:2px; font-size: 0.9em; {{ count($video->sd()) > 1 ? 'display:none;' : '' }}">
           @foreach ($video->tags() as $tag)
@@ -16,7 +16,7 @@
           <h4 id="shareBtn-title" style="padding-right:40px; line-height: 23px; font-weight: 500; margin-top:0px; margin-bottom: 0px; color:white; font-size: 1.25em">{{ $video->title }}</h4>
         </a>
 
-        <div id="toggleVideoDescription" style="position:absolute; top:6px; right:3px; cursor: pointer; color: white" class="pull-right"><i id="toggleVideoDescriptionIcon" class="material-icons noselect">expand_more</i></div>
+        <div id="toggleVideoDescription" style="position:absolute; top:6px; right:3px; cursor: pointer; color: darkgray" class="pull-right"><i id="toggleVideoDescriptionIcon" class="material-icons noselect">expand_more</i></div>
 
         <div class="video-parts-wrapper" style="padding-top: 12px; padding-bottom: 5px; {{ count($video->sd()) == 1 ? 'display:none;' : '' }}">
           @foreach ($video->sd() as $url)
@@ -54,22 +54,8 @@
         </script>
 
     </div>
-    <div style="margin-left: -4px;">
-        <a style="text-decoration: none; {{ $prev != false ? 'color: white;' : 'pointer-events: none; color: #414141;' }}" href="{{ route('video.watch') }}?v={{ $prev }}"><i class="material-icons noselect">skip_previous</i></a>
-        <a style="text-decoration: none; margin-left: 8px; {{ $next != false ? 'color: white;' : 'pointer-events: none; color: #414141;' }}" href="{{ route('video.watch') }}?v={{ $next }}"><i class="material-icons noselect">skip_next</i></a>
-    </div>
 
-    <a style="margin-top: -34px; margin-right: 0px; padding-right:5px; cursor: pointer;" class="pull-right" data-toggle="modal" data-target="#reportModal">
-      <i style="color: white;" class="material-icons pull-right noselect">flag</i>
-    </a>
-
-    <a id="shareBtn" style="margin-top: -34px; margin-right: 40px; padding-right:5px; cursor: pointer; text-decoration: none;" class="pull-right">
-      <i style="color: white;-moz-transform: scale(-1, 1);-webkit-transform: scale(-1, 1);-o-transform: scale(-1, 1);-ms-transform: scale(-1, 1);transform: scale(-1, 1);" class="material-icons pull-right noselect">reply</i>
-    </a>
-
-    @include('video.userReportModal')
-
-    <div id="videoDescription" style="display: none; margin-top: 5px; padding-bottom: 10px;">
+    <div id="videoDescription" style="display: none; margin-top: 5px;">
       <p style="white-space: pre-wrap; color: white; margin-bottom: 5px;"><strong>{{ $video->title() }}</strong></p>
       <p style="white-space: pre-wrap; color: white; margin-bottom: 20px;">{{ $video->caption }}</p>
       <p style="white-space: pre-wrap; color: white; margin-bottom: 5px;"><strong>劇情大綱</strong></p>
@@ -78,4 +64,54 @@
       <p style="white-space: pre-wrap; color: white; margin-bottom: 20px;">{{ $watch != false ? $watch->cast : ''}}</p>
       <p><a style="color:white; text-decoration: none;" href="{{ route('video.intro', [$video->genre, $watch->titleToUrl()]) }}"><strong>完整介紹 ></strong></a></p>
     </div>
-</div>​
+
+    <div class="show-panel-icons">
+      <div class="single-icon">
+        <i class="material-icons noselect">thumb_up</i>
+        <div>26k</div>
+      </div>
+      <div class="single-icon">
+        <i class="material-icons noselect">thumb_down</i>
+        <div>15k</div>
+      </div>
+      <div id="shareBtn" class="single-icon">
+        <i class="material-icons noselect" style="-moz-transform: scale(-1, 1);-webkit-transform: scale(-1, 1);-o-transform: scale(-1, 1);-ms-transform: scale(-1, 1);transform: scale(-1, 1); font-size: 2.2em; margin-top: -4px;">reply</i>
+        <div style="margin-top: -5px;">分享</div>
+      </div>
+      <div class="single-icon">
+        <i class="material-icons noselect">chat</i>
+        <div>評論</div>
+      </div>
+      <div class="single-icon" data-toggle="modal" data-target="#reportModal">
+        <i class="material-icons noselect">flag</i>
+        <div>回報</div>
+      </div>
+    </div>
+</div>
+
+<hr style="border:solid 0.5px #383838; margin-top: 54px; margin-bottom: 10px">
+<div style="padding-left: 15px; padding-right: 15px;">
+  <a href="{{ route('video.intro', [$watch->genre, $watch->titleToUrl()]) }}">
+    <img class="lazy img-circle" style="width: 35px; height: auto; float:left;" src="https://i.imgur.com/JMcgEkPs.jpg" data-src="https://i.imgur.com/{{ $video->watch()->imgur }}s.jpg" data-srcset="https://i.imgur.com/{{ $video->watch()->imgur }}s.jpg" alt="{{ $video->watch()->title }}">
+  </a>
+  <div style="margin-left: 45px;">
+    <div><a style="text-decoration: none; color: white;" href="{{ route('video.intro', [$watch->genre, $watch->titleToUrl()]) }}">{{ $video->watch()->title }}</a></div>
+    <div style="color: darkgray; font-size: 0.85em; margin-top: -1px;">7.01M 位訂閱者</div>
+    <div id="subscribe-panel">
+      @if ($is_subscribed)
+        @include('video.unsubscribeBtn')
+      @else
+        @include('video.subscribeBtn')
+      @endif
+    </div>
+  </div>
+</div>
+<hr style="border:solid 0.5px #383838; margin-top: 9px">
+
+@include('video.userReportModal')
+@if (Auth::check())
+  @include('video.subscribeModal')
+@else
+  @include('user.signUpModal')
+  @include('user.loginModal')
+@endif

@@ -30,7 +30,10 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected function redirectTo()
+    {
+        return url()->previous().'&from_subscribe=1';
+    }
 
     /**
      * Create a new controller instance.
@@ -98,19 +101,6 @@ class LoginController extends Controller
             'provider' => $provider,
             'provider_id' => $fb_id,
             'password' => bcrypt(uniqid())
-        ]);
-        
-        Avatar::create([
-            'user_id' => $localUser->id,
-            'filename' => 'default_freerider_profile_pic',
-            'mime' => 'image',
-            'original_filename' => 'default',
-        ]);
-
-        Resume::create([
-            'user_id' => $localUser->id,
-            'name' => $localUser->name,
-            'email' => $localUser->email,
         ]);
 
         return $localUser;

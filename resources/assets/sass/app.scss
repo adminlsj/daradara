@@ -96,6 +96,15 @@ nav input[type=text]:focus {
   box-shadow: -8px 10px 0px -8px #d84b6b, 8px 10px 0px -8px #d84b6b;
 }
 
+#signUpModal input[type=text], #signUpModal input[type=email], #signUpModal input[type=password],
+#loginModal input[type=text], #loginModal input[type=email], #loginModal input[type=password],
+#subscribeModal input[type=text], #subscribeModal input[type=email], #subscribeModal input[type=password] {
+  width: 100%;
+  height: 45px;
+  border: 0.5px solid #e9e9e9;
+  box-shadow: none;
+}
+
 .video-js .vjs-control-bar { 
   display: -webkit-box;
   display: -webkit-flex;
@@ -141,6 +150,14 @@ nav input[type=text]:focus {
 
 .home-video-wrapper {
   padding-left: 10px; padding-right: 10px;
+}
+
+.related-watch-wrap {
+  margin: 7px 15px;
+}
+
+.related-watch-wrap .related-watch-title {
+  padding: 3px 0px;
 }
 
 /* Place the navbar at the bottom of the page, and make it stick */
@@ -250,6 +267,26 @@ nav input[type=text]:focus {
 
 .single-show-list {
   padding-left: 0px;
+}
+
+.show-panel-icons {
+  margin-top: 12px;
+  color: darkgray;
+}
+
+.show-panel-icons .single-icon {
+  width: 20%;
+  float: left;
+  text-align: center;
+}
+
+.show-panel-icons .single-icon i, .show-panel-icons .single-icon div {
+  cursor: pointer;
+}
+
+.show-panel-icons .single-icon div {
+  margin-top: -2px;
+  font-size: 0.94em;
 }
 
 .circle {
@@ -1132,6 +1169,15 @@ a > i {
 
   .single-show-list {
     padding-left: 15px;
+  }
+
+  .related-watch-wrap {
+    margin: 0px;
+    padding: 7px 15px;
+  }
+
+  .related-watch-wrap .related-watch-title {
+    padding: 1px 0px 0px 0px;
   }
 
   .mobile-container {

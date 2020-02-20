@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Video;
 use App\Watch;
+use App\User;
+use App\Subscribe;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -11,6 +13,7 @@ use Storage;
 use File;
 use Image;
 use DB;
+use Auth;
 use App\Mail\Contact;
 use App\Mail\ContactUser;
 use Carbon\Carbon;
@@ -279,7 +282,12 @@ class VideoController extends Controller
                 $genre = $video->genre;
                 $is_program = true;
 
-                return view('video.showWatch', compact('genre', 'video', 'videos', 'related', 'prev', 'next', 'dropdown', 'watch', 'current', 'is_program'));
+                $is_subscribed = false;
+                if (Auth::check() && Subscribe::where('user_id', Auth::user()->id)->where('category', $watch->category)->first() != null) {
+                    $is_subscribed = true;
+                }
+
+                return view('video.showWatch', compact('genre', 'video', 'videos', 'related', 'prev', 'next', 'dropdown', 'watch', 'current', 'is_program', 'is_subscribed'));
             }
         }
     }
@@ -291,6 +299,47 @@ class VideoController extends Controller
             $html .= view('video.singleVideoPost', compact('video'));
         }
         return $html;
+    }
+
+    public function subscribe(Request $request)
+    {
+        $user = User::find(request('subscribe-user-id'));
+        $watch = Watch::find(request('subscribe-watch-id'));
+
+        $user->email = request('email');
+        $user->save();
+
+        if (Subscribe::where('user_id', Auth::user()->id)->where('category', $watch->category)->first() == null) {
+            $subscribe = Subscribe::create([
+                'user_id' => $user->id,
+                'genre' => $watch->genre,
+                'category' => $watch->category,
+            ]);
+        }
+
+        $html = '';
+        $html .= view('video.unsubscribeBtn', compact('watch'));
+
+        return response()->json([
+            'unsubscribe_btn' => $html,
+            'csrf_token' => csrf_token(),
+        ]);
+    }
+
+    public function unsubscribe(Request $request)
+    {
+        if (Auth::user()->id == request('subscribe-user-id')) {
+            $subscribe = Subscribe::where('user_id', request('subscribe-user-id'))->where('category', request('subscribe-watch-category'));
+            $subscribe->delete();
+        }
+
+        $html = '';
+        $html .= view('video.subscribeBtn', compact('watch'));
+
+        return response()->json([
+            'subscribe_btn' => $html,
+            'csrf_token' => csrf_token(),
+        ]);
     }
 
     public function searchLoadHTML($videos)

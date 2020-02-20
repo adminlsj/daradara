@@ -29,7 +29,10 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected function redirectTo()
+    {
+        return url()->previous().'&from_subscribe=1';
+    }
 
     /**
      * Create a new controller instance.
@@ -52,7 +55,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
+            'password' => 'required|string|min:6',
         ]);
     }
 
@@ -68,19 +71,6 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-        ]);
-
-        Avatar::create([
-            'user_id' => $user->id,
-            'filename' => 'default_freerider_profile_pic',
-            'mime' => 'image',
-            'original_filename' => 'default',
-        ]);
-
-        Resume::create([
-            'user_id' => $user->id,
-            'name' => $user->name,
-            'email' => $user->email,
         ]);
 
         return $user;

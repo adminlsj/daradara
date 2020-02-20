@@ -15,6 +15,11 @@ Route::get('/', 'VideoController@home');
 
 Route::resource('blog', 'BlogController');
 
+Route::resource('user', 'UserController');
+Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
+Route::post('/subscribe', 'VideoController@subscribe')->name('video.subscribe');
+Route::post('/unsubscribe', 'VideoController@unsubscribe')->name('video.unsubscribe');
+
 Route::get('/about-us', 'HomeController@aboutUs');
 Route::get('/policy', 'HomeController@policy');
 Route::get('/check', 'HomeController@check');
@@ -42,7 +47,6 @@ Auth::routes();
 Route::get('auth/{provider}', 'Auth\LoginController@redirectToProvider');
 Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
 
-Route::resource('user', 'UserController');
 Route::post('users/{user}/storeAvatar', 'UserController@storeAvatar');
 
 Route::get('/updateDuration', 'VideoController@updateDuration');

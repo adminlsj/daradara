@@ -7,7 +7,7 @@
           <img src="{{ $logoImage }}" style="margin-top: 10px; margin-left: -5px;" height="30" alt="娛見日本 LaughSeeJapan">
       </a>
 
-      <a class="pull-right" style="color: {{ $itemsColor }}; padding: 0px 0px 0px 15px;" href="/"><i style="font-size: 25px; vertical-align:middle; margin-bottom: -22.5px" class="material-icons">account_circle</i></a>
+      <a class="pull-right" style="color: {{ $itemsColor }}; padding: 0px 0px 0px 15px;" href="{{ Auth::check() ? route('user.show', Auth::user()) : '/'}}"><i style="font-size: 25px; vertical-align:middle; margin-bottom: -22.5px" class="material-icons">account_circle</i></a>
       <a id="toggleSearchBar" class="pull-right" style="color: {{ $itemsColor }}; padding: 0px 0px 15px 15px; cursor: pointer;"><i style="font-size: 25px; vertical-align:middle; margin-bottom: -22.5px" class="material-icons">search</i></a>
     </div>
   </div>
