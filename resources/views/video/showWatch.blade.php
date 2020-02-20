@@ -28,8 +28,8 @@
 						<div style="margin-top: -20px; position: relative;" class="tab">
 							<button class="tablinks video-tablinks" onclick="openList(event, 'Watch')" id="defaultOpen">全集列表</button>
 							<button class="tablinks video-tablinks" onclick="openList(event, 'Related')">相關影片</button>
-							<a style="position:absolute; top:14px; right:55px; text-decoration: none; {{ $prev != false ? 'color: white;' : 'pointer-events: none; color: #414141;' }}" href="{{ route('video.watch') }}?v={{ $prev }}"><i class="material-icons noselect">skip_previous</i></a>
-							<a style="position:absolute; top:14px; right:15px; text-decoration: none; margin-left: 8px; {{ $next != false ? 'color: white;' : 'pointer-events: none; color: #414141;' }}" href="{{ route('video.watch') }}?v={{ $next }}"><i class="material-icons noselect">skip_next</i></a>
+							<a style="position:absolute; top:14px; right:53px; text-decoration: none; {{ $prev != false ? 'color: white;' : 'pointer-events: none; color: #414141;' }}" href="{{ route('video.watch') }}?v={{ $prev }}"><i class="material-icons noselect">skip_previous</i></a>
+							<a style="position:absolute; top:14px; right:13px; text-decoration: none; margin-left: 8px; {{ $next != false ? 'color: white;' : 'pointer-events: none; color: #414141;' }}" href="{{ route('video.watch') }}?v={{ $next }}"><i class="material-icons noselect">skip_next</i></a>
 						</div>
 
 						<!-- Tab content -->
@@ -48,7 +48,7 @@
 								<ins class="adsbygoogle"
 								     style="display:block"
 								     data-ad-format="fluid"
-								     data-ad-layout-key="-a0+er-4n-a9+10i"
+								     data-ad-layout-key="-a0+ev-53-bk+14i"
 								     data-ad-client="ca-pub-4485968980278243"
 								     data-ad-slot="9284406342"></ins>
 								<script>

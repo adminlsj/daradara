@@ -12,7 +12,7 @@
           @endforeach
         </p>
 
-        <a id="shareBtn-link" href="{{ route('video.watch') }}?v={{ $video->id }}" style="text-decoration: none; pointer-events: none;">
+        <a style="text-decoration: none; pointer-events: none;">
           <h4 id="shareBtn-title" style="padding-right:40px; line-height: 23px; font-weight: 400; margin-top:0px; margin-bottom: 0px; color:white; font-size: 1.15em">{{ $video->title }}</h4>
         </a>
 
