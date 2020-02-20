@@ -334,7 +334,7 @@ class VideoController extends Controller
         }
 
         $html = '';
-        $html .= view('video.subscribeBtn', compact('watch'));
+        $html .= view('video.subscribeBtn');
 
         return response()->json([
             'subscribe_btn' => $html,
