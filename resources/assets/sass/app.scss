@@ -284,9 +284,13 @@ nav input[type=text]:focus {
   cursor: pointer;
 }
 
+.show-panel-icons .single-icon i {
+  font-size: 1.7em;
+}
+
 .show-panel-icons .single-icon div {
   margin-top: -2px;
-  font-size: 0.94em;
+  font-size: 0.85em;
 }
 
 .circle {

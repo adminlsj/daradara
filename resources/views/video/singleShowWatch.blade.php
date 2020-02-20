@@ -2,7 +2,7 @@
 
 <div style="padding-bottom: 5px; padding-left: 15px; padding-right: 15px;">
     <div style="margin-bottom: 5px; padding-top: 7px; position:relative;">
-        <p id="video-tags" class="text-ellipsis" style="padding-right:40px; margin-bottom:2px; font-size: 0.9em; {{ count($video->sd()) > 1 ? 'display:none;' : '' }}">
+        <p id="video-tags" class="text-ellipsis" style="padding-right:40px; margin-bottom:2px; font-size: 0.85em; {{ count($video->sd()) > 1 ? 'display:none;' : '' }}">
           @foreach ($video->tags() as $tag)
             @if (strpos($tag, '完整版') !== false)
               <a style="color:#e5e5e5;" href="{{ route('video.watch') }}?v={{ App\Video::where('category', $video->category)->orderBy('created_at', 'desc')->first()->id }}">#{{ $tag }}</a>
@@ -13,7 +13,7 @@
         </p>
 
         <a id="shareBtn-link" href="{{ route('video.watch') }}?v={{ $video->id }}" style="text-decoration: none; pointer-events: none;">
-          <h4 id="shareBtn-title" style="padding-right:40px; line-height: 23px; font-weight: 500; margin-top:0px; margin-bottom: 0px; color:white; font-size: 1.25em">{{ $video->title }}</h4>
+          <h4 id="shareBtn-title" style="padding-right:40px; line-height: 23px; font-weight: 400; margin-top:0px; margin-bottom: 0px; color:white; font-size: 1.15em">{{ $video->title }}</h4>
         </a>
 
         <div id="toggleVideoDescription" style="position:absolute; top:6px; right:3px; cursor: pointer; color: darkgray" class="pull-right"><i id="toggleVideoDescriptionIcon" class="material-icons noselect">expand_more</i></div>
@@ -75,8 +75,8 @@
         <div style="color: #363636">0</div>
       </div>
       <div id="shareBtn" class="single-icon">
-        <i class="material-icons noselect" style="-moz-transform: scale(-1, 1);-webkit-transform: scale(-1, 1);-o-transform: scale(-1, 1);-ms-transform: scale(-1, 1);transform: scale(-1, 1); font-size: 2.2em; margin-top: -4px;">reply</i>
-        <div style="margin-top: -5px;">分享</div>
+        <i class="material-icons noselect" style="-moz-transform: scale(-1, 1);-webkit-transform: scale(-1, 1);-o-transform: scale(-1, 1);-ms-transform: scale(-1, 1);transform: scale(-1, 1); font-size: 2em; margin-top: -5px;">reply</i>
+        <div style="margin-top: -4px;">分享</div>
       </div>
       <div class="single-icon">
         <i style="color: #363636" class="material-icons noselect">chat</i>
