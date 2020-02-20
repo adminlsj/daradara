@@ -8,7 +8,7 @@
       <div style="padding: 10px;" class="modal-content">
         <div style="border: 0px; position: relative;" class="modal-header">
           <h4 style="color: gray;font-weight: 100; transform: rotate(45deg);position: absolute; font-size: 3em; top: -10px; cursor: pointer;" class="no-select" data-dismiss="modal">+</h4>
-          <h4 style="color: #3F3F3F; margin-bottom: 0px; margin-top: 40px; font-size: 1.7em" class="modal-title" id="subscribeModalLabel">開始訂閱 {{ $video->watch()->title }}</h4>
+          <h4 style="color: #3F3F3F; margin-bottom: 0px; margin-top: 40px; font-size: 1.7em" class="modal-title" id="subscribeModalLabel">開始訂閱《{{ $video->watch()->title }}》</h4>
         </div>
         <div style="color: #3F3F3F; margin-top: -15px; font-weight: 500; font-size: 1.1em" class="modal-body">
           訂閱通知將發送至你的電郵地址。
