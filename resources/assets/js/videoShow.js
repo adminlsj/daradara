@@ -82,6 +82,7 @@ $('div#subscribe-panel').on("submit", "form#unsubscribe-form", function(e) {
         data:$(this).serialize(),
         dataType: 'json',
         success: function(data){
+            $("button#subscribe-btn").prop('disabled', false);
             $("div#subscribe-panel").html(data.subscribe_btn);
         },
         error: function(xhr, ajaxOptions, thrownError){

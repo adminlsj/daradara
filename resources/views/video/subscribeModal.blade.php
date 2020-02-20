@@ -18,7 +18,7 @@
 
           <input name="subscribe-watch-id" type="hidden" value="{{ $video->watch()->id }}">
           <input name="subscribe-user-id" type="hidden" value="{{ Auth::user()->id }}">
-          <button style="height: 45px; margin-top: 10px;" type="submit" class="btn btn-info" name="submit">訂閱</button>
+          <button id="subscribe-btn" style="height: 45px; margin-top: 10px;" type="submit" class="btn btn-info" name="submit">訂閱</button>
         </div>
       </div>
 
