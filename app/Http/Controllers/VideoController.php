@@ -41,19 +41,19 @@ class VideoController extends Controller
     public function rank(Request $request){
         if ($request->has('g') && $request->g != 'null') {
             $genre = $request->g;
-            $months = 3;
+            $months = 1;
             switch ($genre) {
                 case 'variety':
-                    $months = 3;
+                    $months = 1;
                     break;
                 case 'drama':
-                    $months = 3;
+                    $months = 1;
                     break;
                 case 'anime':
-                    $months = 3;
+                    $months = 1;
                     break;
                 default:
-                    $months = 3;
+                    $months = 1;
                     break;
             }
             $videos = Video::where('genre', $genre)->whereDate('created_at', '>=', Carbon::now()->subMonths($months))->orderBy('views', 'desc')->paginate(10);
@@ -64,7 +64,7 @@ class VideoController extends Controller
 
             return view('video.rankIndex', compact('videos'));
         } else {
-            $videos = Video::whereDate('created_at', '>=', Carbon::now()->subMonths(3))->orderBy('views', 'desc')->paginate(10);
+            $videos = Video::whereDate('created_at', '>=', Carbon::now()->subMonths(1))->orderBy('views', 'desc')->paginate(10);
             $html = $this->rankLoadHTML($videos);
             if ($request->ajax()) {
                 return $html;

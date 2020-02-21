@@ -8,7 +8,9 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Response;
 use Mail;
+use Auth;
 use App\Mail\UserReport;
+use App\Mail\SubscribeNotify;
 use Redirect;
 
 class HomeController extends Controller
@@ -96,47 +98,63 @@ class HomeController extends Controller
 
     public function singleNewCreate()
     {
-        $is_program = false;
-        return view('video.singleNewCreate', compact('is_program')); 
+        if (Auth::check() && Auth::user()->email == 'laughseejapan@gmail.com') {
+            $is_program = false;
+            return view('video.singleNewCreate', compact('is_program')); 
+
+        } else {
+            return redirect()->action('VideoController@home');
+        }
     }
 
     public function singleNewStore(Request $request)
     {
-        $latest = Video::where('category', request('category'))->orderBy('created_at', 'desc')->first();
-        $title = request('title');
-        if ($title == "") {
-            $prevEpisode = $this->get_string_between($latest->title, '【第', '話】');
-            $episode = $prevEpisode;
-            if (is_numeric($prevEpisode) && floor($prevEpisode) != $prevEpisode) {
-                $episode = $prevEpisode + 0.5;
-            } else {
-                $episode = $prevEpisode + 1;
+        if (Auth::check() && Auth::user()->email == 'laughseejapan@gmail.com') {
+            $latest = Video::where('category', request('category'))->orderBy('created_at', 'desc')->first();
+            $title = request('title');
+            if ($title == "") {
+                $prevEpisode = $this->get_string_between($latest->title, '【第', '話】');
+                $episode = $prevEpisode;
+                if (is_numeric($prevEpisode) && floor($prevEpisode) != $prevEpisode) {
+                    $episode = $prevEpisode + 0.5;
+                } else {
+                    $episode = $prevEpisode + 1;
+                }
+                $title = str_replace($prevEpisode, $episode, $latest->title);
             }
-            $title = str_replace($prevEpisode, $episode, $latest->title);
+
+            $video = Video::create([
+                'id' => Video::orderBy('id', 'desc')->first()->id + 1,
+                'title' => $title,
+                'caption' => request('caption'),
+                'hd' => request('link'),
+                'sd' => request('link'),
+                'imgur' => request('imgur'),
+                'genre' => $latest->genre,
+                'category' => $latest->category,
+                'season' => $latest->season,
+                'tags' => request('tags') == "" ? $latest->tags : request('tags'),
+                'views' => request('views') == "" ? $latest->views : request('views'),
+                'duration' => $latest->duration,
+                'outsource' => false,
+                'created_at' => Carbon::createFromFormat('Y-m-d\TH:i:s', request('created_at'))->format('Y-m-d H:i:s'),
+            ]);
+
+            $watch = $video->watch();
+            $watch->updated_at = $video->created_at;
+            $watch->save();
+
+            $subscribes = $watch->subscribes();
+            foreach ($subscribes as $subscribe) {
+                $user = $subscribe->user();
+                Mail::to($user->email)->send(new SubscribeNotify($user, $video));
+            }
+
+            return redirect()->action('HomeController@singleNewCreate', ['is_program' => false]);
+
+        } else {
+            return redirect()->action('VideoController@home');
         }
-
-        $video = Video::create([
-            'id' => Video::orderBy('id', 'desc')->first()->id + 1,
-            'title' => $title,
-            'caption' => request('caption'),
-            'hd' => request('link'),
-            'sd' => request('link'),
-            'imgur' => request('imgur'),
-            'genre' => $latest->genre,
-            'category' => $latest->category,
-            'season' => $latest->season,
-            'tags' => request('tags') == "" ? $latest->tags : request('tags'),
-            'views' => request('views') == "" ? $latest->views : request('views'),
-            'duration' => $latest->duration,
-            'outsource' => false,
-            'created_at' => Carbon::createFromFormat('Y-m-d\TH:i:s', request('created_at'))->format('Y-m-d H:i:s'),
-        ]);
-
-        $watch = $video->watch();
-        $watch->updated_at = $video->created_at;
-        $watch->save();
-
-        return redirect()->action('HomeController@singleNewCreate', ['is_program' => false]);
     }
 
     function get_string_between($string, $start, $end){

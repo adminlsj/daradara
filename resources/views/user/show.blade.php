@@ -11,8 +11,10 @@
 </div>
 <div class="main-content">
 	<div style="background-color: #F5F5F5;">
-		{{ $user->email }}
-		<a href="{{ url('/logout') }}"> logout </a>
+		@if (Auth::user()->id == $user->id)
+			{{ $user->email }}
+			<a href="{{ url('/logout') }}"> logout </a>
+		@endif
 	</div>
 </div>
 

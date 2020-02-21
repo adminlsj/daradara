@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\User;
 
 class Subscribe extends Model
 {
@@ -14,4 +15,9 @@ class Subscribe extends Model
     protected $fillable = [
         'user_id', 'genre', 'category',
     ];
+
+    public function user()
+    {
+        return User::find($this->user_id);
+    }
 }
