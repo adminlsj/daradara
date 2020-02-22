@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\User;
+use App\Watch;
 
 class Subscribe extends Model
 {
@@ -19,5 +20,10 @@ class Subscribe extends Model
     public function user()
     {
         return User::find($this->user_id);
+    }
+
+    public function watch()
+    {
+        return Watch::where('category', $this->category)->first();
     }
 }

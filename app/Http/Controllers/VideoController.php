@@ -365,6 +365,14 @@ class VideoController extends Controller
         return $html;
     }
 
+    public function subscribeIndex(Request $request)
+    {
+        if (auth()->check()) {
+            $subscribes = auth()->user()->subscribes();
+            return view('video.subscribeIndex', compact('subscribes'));
+        }
+    }
+
     public function subscribe(Request $request)
     {
         $user = User::find(request('subscribe-user-id'));

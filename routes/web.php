@@ -17,6 +17,7 @@ Route::resource('blog', 'BlogController');
 
 Route::resource('user', 'UserController');
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
+Route::get('/subscribes', 'VideoController@subscribeIndex')->name('video.subscribes');
 Route::post('/subscribe', 'VideoController@subscribe')->name('video.subscribe');
 Route::post('/unsubscribe', 'VideoController@unsubscribe')->name('video.unsubscribe');
 

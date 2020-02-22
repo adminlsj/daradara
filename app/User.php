@@ -27,6 +27,11 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function subscribes()
+    {
+        return Subscribe::where('user_id', $this->id)->orderBy('created_at', 'desc')->get();
+    }
+
     public function avatar()
     {
         return $this->hasOne('App\Avatar');
