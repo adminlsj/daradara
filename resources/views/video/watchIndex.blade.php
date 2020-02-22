@@ -11,7 +11,7 @@
 
 <div class="main-content">
   @include('layouts.nav-index')
-  <div style="background-color: #1F1F1F; padding-top: 43px">
+  <div style="background-color: #1F1F1F; padding-top: 37px">
     <div style="padding-top: 10px" class="hidden-xs hidden-sm"></div>
     <div class="padding-setup">
       <div class="row home-video-wrapper">

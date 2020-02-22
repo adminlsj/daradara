@@ -1,4 +1,4 @@
-<nav style="background-color: white; margin-top: 42px;" class="nav-sub-width hidden-md hidden-lg">
+<nav style="background-color: white; margin-top: 43px;" class="nav-sub-width hidden-md hidden-lg">
   <div style="background-color: white" class="container-fluid">
     <div class="nav-tab-container" style="background-color: white;">
       <a href="/" style="width: 20%; float:left; text-align: center; text-decoration: none;">
