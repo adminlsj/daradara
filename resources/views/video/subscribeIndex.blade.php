@@ -20,12 +20,12 @@
 				</a>
 			@endforeach
 		</div>
-		<hr style="margin: 0px 0px 20px 0px; border-color: #e5e5e5;">
+		<hr style="margin: 0px 0px 15px 0px; border-color: #e5e5e5;">
 		<div class="subscribes-tab padding-setup">
 			<a href="{{ route('video.subscribes') }}?m=newest" class="{{ Request::is('*subscribes*') ? 'active' : '' }}" style="margin-right: 5px;">最新内容</a>
 			<!-- <a href="#">儲存的影片</a>-->
 		</div>
-		<hr style="margin: 20px 0px 0px 0px; border-color: #e5e5e5;">
+		<hr style="margin: 15px 0px 0px 0px; border-color: #e5e5e5;">
 		@foreach ($videos as $video)
 			<div style="margin-bottom: 30px;">
 				<a href="{{ route('video.watch') }}?v={{ $video->id }}" style="text-decoration: none;">
