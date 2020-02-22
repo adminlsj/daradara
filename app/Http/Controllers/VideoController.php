@@ -373,7 +373,7 @@ class VideoController extends Controller
             $first = true;
             foreach ($subscribes as $subscribe) {
                 if ($first) {
-                    $videos = Video::whereDate('created_at', '>=', Carbon::now()->subMonth())->where('category', $subscribe->category);
+                    $videos = Video::whereDate('created_at', '>=', Carbon::now()->subMonths(3))->where('category', $subscribe->category);
                     $first = false;
                 } else {
                     $videos = $videos->orWhere('category', $subscribe->category);
