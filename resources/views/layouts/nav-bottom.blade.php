@@ -4,8 +4,8 @@
     <span style="padding-right: 1px;">主頁</span>
   </a>
   <a href="{{ route('video.rank') }}" class="{{ Request::is('*rank*') ? 'active' : ''}}">
-    <i style="font-size: 26px;" class="material-icons">whatshot</i>
-    <span>熱門</span>
+    <i style="font-size: 26px;" class="material-icons">subscriptions</i>
+    <span>訂閱</span>
   </a>
   <a href="{{ route('video.variety') }}" class="{{ strpos(Request::path(), 'variety' ) !== false || (Request::has('v') && $current->genre == 'variety') ? 'active' : ''}}">
     <i style="padding-left: 1px; font-size: 25px;" class="material-icons">live_tv</i>
