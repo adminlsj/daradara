@@ -22,8 +22,8 @@
 		</div>
 		<hr style="margin: 0px 0px 20px 0px; border-color: #e5e5e5;">
 		<div class="subscribes-tab padding-setup">
-			<a style="margin-right: 5px;">最新内容</a>
-			<a>儲存的影片</a>
+			<a href="{{ route('video.subscribes') }}?m=newest" class="{{ Request::is('*subscribes*') ? 'active' : '' }}" style="margin-right: 5px;">最新内容</a>
+			<!-- <a href="#">儲存的影片</a>-->
 		</div>
 		<hr style="margin: 20px 0px 0px 0px; border-color: #e5e5e5;">
 		@foreach ($videos as $video)
