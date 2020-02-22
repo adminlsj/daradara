@@ -1,5 +1,5 @@
 @if (Request::is('drama') || Request::is('anime'))
-  <nav style="background-color: #282828; margin-top: 49px;" class="nav-sub-width" >
+  <nav style="background-color: #282828; margin-top: 42px;" class="nav-sub-width" >
     <div style="background-color: #282828" class="container-fluid">
       <div class="nav-tab-container-watch" style="background-color: white;">
         <a class="watch-year-nav">
