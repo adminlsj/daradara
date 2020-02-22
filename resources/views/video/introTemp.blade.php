@@ -22,7 +22,7 @@
 			<i style="vertical-align:middle; font-size: 1.4em; margin-top: -3px; margin-right: -3px;" class="material-icons">play_arrow</i>&nbsp;&nbsp;立即播放
 		</a>
 	</div>
-	<div id="subscribe-panel" class="intro-subscribe-btn hidden-xs hidden-sm">
+	<div id="subscribe-panel" class="intro-subscribe-btn">
       @if ($is_subscribed)
         @include('video.unsubscribeBtn')
       @else
