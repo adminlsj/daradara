@@ -13,14 +13,14 @@
 		<div class="row no-gutter padding-setup">
 			@foreach ($subscribes as $subscribe)
 				<a href="{{ route('video.intro', [$subscribe->watch()->genre, $subscribe->watch()->titleToUrl()]) }}" style="text-decoration: none;">
-					<div class="col-xs-1" style="width: 60px; margin: 0px; padding: 0px; text-align: center; margin-right: 15px;">
+					<div class="col-xs-1" style="width: 60px; margin: 0px; padding: 0px; text-align: center; margin-right: 15px; margin-bottom: 10px">
 						<img style="width: 100%; height: auto; border-radius: 50%;" src="{{ $subscribe->watch()->imgurS() }}" alt="{{ $subscribe->watch()->title }}">
 						<div class="text-ellipsis" style="width: 100%; font-size: 0.8em; padding-top: 5px; color: gray;">{{ $subscribe->watch()->title }}</div>
 					</div>
 				</a>
 			@endforeach
 		</div>
-		<hr style="margin: 10px 0px 20px 0px; border-color: #e5e5e5;">
+		<hr style="margin: 0px 0px 20px 0px; border-color: #e5e5e5;">
 		<div class="subscribes-tab padding-setup">
 			<a style="margin-right: 5px;">最新内容</a>
 			<a>儲存的影片</a>
