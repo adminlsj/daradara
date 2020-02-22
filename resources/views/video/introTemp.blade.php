@@ -9,7 +9,7 @@
 	<h4 class="mobile-text-center" style="margin-top:5px; white-space: pre-wrap;color:#d3d3d3; line-height: 15px; font-size: 0.95em; font-weight: 300;">{{ Carbon\Carbon::parse($watch->created_at )->format('Y年m月d日首播') }}  |  {{ $watch->genre == 'variety' ? Carbon\Carbon::parse($watch->updated_at)->diffForHumans().'更新' : ($watch->is_ended ? '已完結全' : '更新至第'.$watch->videos()->count().'集') }}
     </h4>
 
-    <div id="subscribe-panel" style="margin-top: -37px; margin-bottom: 47px; margin-right: 5px;">
+    <div id="subscribe-panel" style="margin-top: -38px; margin-bottom: 48px; margin-right: 5px;">
       @if ($is_subscribed)
         @include('video.unsubscribeBtn')
       @else
