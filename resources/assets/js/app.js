@@ -54,7 +54,8 @@ window.onscroll = function() {
     scrollHideNav = document.querySelectorAll(".scroll-hide-nav");
     for (i = 0; i < scrollHideNav.length; i++) {
       $path = window.location.pathname;
-      if ($path == '/' || $path.indexOf("rank") > -1 || $path.indexOf("variety") > -1 || $path.indexOf("drama") > -1 || $path.indexOf("anime") > -1) {
+      alert(window.location.pathname);
+      if ($path == '/' || $path == '/rank' || $path == '/variety' || $path == '/drama' || $path == '/anime') {
         scrollHideNav[i].style.top = "-41px";
       } else {
         scrollHideNav[i].style.top = "-50px";
