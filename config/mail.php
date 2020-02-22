@@ -57,7 +57,7 @@ return [
 
     'from' => [
         'address' => env('MAIL_FROM_ADDRESS', 'twobayjobs@gmail.com'),
-        'name' => env('MAIL_FROM_NAME', 'LaughSeeJapan'),
+        'name' => env('MAIL_FROM_NAME', 'Twobayjobs'),
     ],
 
     'reply_to' => [
