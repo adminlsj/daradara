@@ -8,7 +8,7 @@
     <span>熱門</span>
   </a>
   <a href="{{ route('video.variety') }}" class="{{ strpos(Request::path(), 'variety' ) !== false || (Request::has('v') && $current->genre == 'variety') ? 'active' : ''}}">
-    <i class="material-icons">live_tv</i>
+    <i style="font-size: 26px;" class="material-icons">live_tv</i>
     <span>綜藝</span>
   </a>
   <a href="{{ route('video.drama') }}" class="{{ strpos(Request::path(), 'drama' ) !== false || (Request::has('v') && $current->genre == 'drama') ? 'active' : ''}}">
