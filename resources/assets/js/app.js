@@ -137,5 +137,13 @@ $('[id=switch-signup-modal]').click(function(e) {
     $('#signUpModal').modal('show');
 });
 
+$(document).ready(function() {
+    var urlParams = new URLSearchParams(window.location.search);
+    var from_subscribe = urlParams.get('from_subscribe');
+    if (from_subscribe == 1) {
+        $('#subscribeModal').modal('show');
+    }
+});
+
 require('./lazyLoad');
 require('./videoShow');

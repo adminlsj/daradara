@@ -36,6 +36,10 @@ class LoginController extends Controller
         $previous = url()->previous();
         if (strpos($previous, "/watch?v=") !== FALSE) {
             return url()->previous().'&from_subscribe=1';
+
+        } elseif ((strpos($previous, "/variety/") !== FALSE || strpos($previous, "/drama/") !== FALSE || strpos($previous, "/anime/") !== FALSE)) {
+            return url()->previous().'?from_subscribe=1';
+
         } else {
             return '/';
         }
