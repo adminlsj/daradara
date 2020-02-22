@@ -2,6 +2,7 @@
 
 @section('nav')
 	@include('layouts.nav-main', ['logoImage' => 'https://i.imgur.com/M8tqx5K.png', 'backgroundColor' => 'white', 'itemsColor' => "gray", 'menuBtnColor' => '#595959'])
+	@include('layouts.nav-home-mobile')
 @endsection
 
 @section('content')
@@ -9,7 +10,7 @@
 	@include('video.sidebarMenu', ['theme' => 'white'])
 </div>
 <div class="main-content">
-	<div style="background-color: #F5F5F5;">
+	<div style="background-color: #F5F5F5;" class="nav-home-mobile-padding">
 		<div class="banner" style="padding: 10px 0px">
 			<a href="{{ route('video.intro', ['variety', '月曜夜未央']) }}">
 				<div class="banner-img-container" style="position: relative; background-color: #080B1A;">

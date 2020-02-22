@@ -74,6 +74,42 @@ class VideoController extends Controller
         }
     }
 
+    public function newest(Request $request){
+        if ($request->has('g') && $request->g != 'null') {
+            $genre = $request->g;
+            $months = 1;
+            switch ($genre) {
+                case 'variety':
+                    $months = 1;
+                    break;
+                case 'drama':
+                    $months = 1;
+                    break;
+                case 'anime':
+                    $months = 1;
+                    break;
+                default:
+                    $months = 1;
+                    break;
+            }
+            $videos = Video::where('genre', $genre)->whereDate('created_at', '>=', Carbon::now()->subMonths($months))->orderBy('created_at', 'desc')->paginate(10);
+            $html = $this->rankLoadHTML($videos);
+            if ($request->ajax()) {
+                return $html;
+            }
+
+            return view('video.newestIndex', compact('videos'));
+        } else {
+            $videos = Video::whereDate('created_at', '>=', Carbon::now()->subMonths(1))->orderBy('created_at', 'desc')->paginate(10);
+            $html = $this->rankLoadHTML($videos);
+            if ($request->ajax()) {
+                return $html;
+            }
+
+            return view('video.newestIndex', compact('videos'));
+        }
+    }
+
     public function genre(Request $request){
         /*$id = 2482;
         $genre = 'variety';
