@@ -16,7 +16,7 @@ return [
     |
     */
 
-    'driver' => env('MAIL_DRIVER', 'mailgun'),
+    'driver' => env('MAIL_DRIVER', 'smpt'),
 
     /*
     |--------------------------------------------------------------------------
@@ -29,7 +29,7 @@ return [
     |
     */
 
-    'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
+    'host' => env('MAIL_HOST', 'smtp.gmail.com'),
 
     /*
     |--------------------------------------------------------------------------
@@ -56,13 +56,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'twobayjobs@gmail.com'),
-        'name' => env('MAIL_FROM_NAME', 'Twobayjobs'),
-    ],
-
-    'reply_to' => [
-        'address' => 'laughseejapan@gmail.com',
-        'name' => 'LaughSeeJapan',
+        'address' => env('MAIL_FROM_ADDRESS', 'laughseejapan@gmail.com'),
+        'name' => env('MAIL_FROM_NAME', 'LaughSeeJapan'),
     ],
 
     /*

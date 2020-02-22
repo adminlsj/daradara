@@ -48,24 +48,29 @@ class HomeController extends Controller
 
     public function check()
     {
-        $videos = Video::where('outsource', false)->where('sd', 'not like', "%.m3u8%")->orderBy('id', 'asc')->get();
-        echo "Video Check STARTED<br>";
-        foreach ($videos as $video) {
-            foreach ($video->sd() as $url) {
-                if (strpos($url, 'https://www.instagram.com/p/') !== false) {
-                    $url = $video->getSourceIG($url);
-                } elseif (strpos($url, 'https://api.bilibili.com/') !== false) {
-                    echo $video->getSourceBB($url);
-                    echo '<br>';
-                }
-                $headers = get_headers($url);
-                $http_response_code = substr($headers[0], 9, 3);
-                if (!($http_response_code == 200)) {
-                  echo "<span style='color:red; font-weight:600;'>/watch?v=".$video->id."【".$video->title."】</span><br>";
+        if (Auth::check() && Auth::user()->email == 'laughseejapan@gmail.com') {
+            $videos = Video::where('outsource', false)->where('sd', 'not like', "%.m3u8%")->orderBy('id', 'asc')->get();
+            echo "Video Check STARTED<br>";
+            foreach ($videos as $video) {
+                foreach ($video->sd() as $url) {
+                    if (strpos($url, 'https://www.instagram.com/p/') !== false) {
+                        $url = $video->getSourceIG($url);
+                    } elseif (strpos($url, 'https://api.bilibili.com/') !== false) {
+                        echo $video->getSourceBB($url);
+                        echo '<br>';
+                    }
+                    $headers = get_headers($url);
+                    $http_response_code = substr($headers[0], 9, 3);
+                    if (!($http_response_code == 200)) {
+                      echo "<span style='color:red; font-weight:600;'>/watch?v=".$video->id."【".$video->title."】</span><br>";
+                    }
                 }
             }
+            echo "Video Check ENDED<br>";
+            
+        } else {
+            return redirect()->action('VideoController@home');
         }
-        echo "Video Check ENDED<br>";
     }
 
     public function categoryEdit()
