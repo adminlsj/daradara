@@ -20,7 +20,12 @@
 				</a>
 			@endforeach
 		</div>
-		<hr style="margin-left: -20px; margin-right: -20px; margin-top: 10px; border-color: #e5e5e5;">
+		<hr style="margin-left: -20px; margin-right: -20px; margin-top: 10px; margin-bottom: 20px; border-color: #e5e5e5;">
+		<div class="subscribes-tab">
+			<a style="margin-right: 5px;">最新内容</a>
+			<a>儲存的影片</a>
+		</div>
+		<hr style="margin-left: -20px; margin-right: -20px; margin-top: 20px; border-color: #e5e5e5;">
 	</div>
 </div>
 @endsection

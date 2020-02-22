@@ -1174,6 +1174,15 @@ a > i {
   padding-top: 10px;
 }
 
+.subscribes-tab a {
+  padding: 9px;
+  border: 1px #d9d9d9 solid;
+  color: black;
+  background-color: #e5e5e5;
+  border-radius: 20px;
+  font-weight: 300;
+}
+
 @media (max-width: 991px) {
   .padding-setup {
     padding: 0px 10px;
