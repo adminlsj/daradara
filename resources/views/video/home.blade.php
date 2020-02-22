@@ -19,7 +19,7 @@
 				</div>
 			</a>
 		</div>
-		<div class="padding-setup" style="overflow-x: hidden; padding-top: 10px">
+		<div class="padding-setup" style="overflow-x: hidden; {{ Request::has('g') ? '' : 'padding-top: 10px' }}">
 			<div class="row home-video-wrapper">
 				@foreach ($videos as $video)
 					@include('video.singleHomeVideo')

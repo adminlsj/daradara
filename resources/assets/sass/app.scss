@@ -1170,6 +1170,10 @@ a > i {
   padding: 0px 15px;
 }
 
+.nav-home-mobile-padding {
+  padding-top: 10px;
+}
+
 @media (max-width: 991px) {
   .padding-setup {
     padding: 0px 10px;
@@ -1189,7 +1193,7 @@ a > i {
   }
 
   .nav-home-mobile-padding {
-    padding-top: 29px;
+    padding-top: 39px;
   }
 
   .banner-img-container, .banner-img-container img {
