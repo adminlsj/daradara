@@ -9,6 +9,7 @@ use App\Avatar;
 use App\Resume;
 use Auth;
 use Socialite;
+use Request;
 
 class LoginController extends Controller
 {
@@ -32,7 +33,12 @@ class LoginController extends Controller
      */
     protected function redirectTo()
     {
-        return url()->previous().'&from_subscribe=1';
+        $previous = url()->previous();
+        if (strpos($previous, "/watch?v=") !== FALSE) {
+            return url()->previous().'&from_subscribe=1';
+        } else {
+            return '/';
+        }
     }
 
     /**

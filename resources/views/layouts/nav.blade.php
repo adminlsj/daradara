@@ -7,7 +7,7 @@
 
 	    <a style="font-size: 25px; line-height: 50px;" href="/"> </a>
 
-      <a class="pull-right" style="color: {{ !Request::is('/') && !Request::is('*rank*') && !Request::is('*search*') && $is_program ? 'white' : 'gray' }}; padding: 0px 0px 0px 15px;" href="/"><i style="font-size: 25px; vertical-align:middle; margin-bottom: -22.5px" class="material-icons">account_circle</i></a>
+      <a class="pull-right" style="color: {{ !Request::is('/') && !Request::is('*rank*') && !Request::is('*search*') && $is_program ? 'white' : 'gray' }}; padding: 0px 0px 0px 15px;" href="{{ route('login') }}"><i style="font-size: 25px; vertical-align:middle; margin-bottom: -22.5px" class="material-icons">account_circle</i></a>
       <a id="toggleSearchBar" class="pull-right" style="color: {{ !Request::is('/') && !Request::is('*rank*') && !Request::is('*search*') && $is_program ? 'white' : 'gray' }}; padding: 0px 0px 15px 15px; cursor: pointer;"><i style="font-size: 25px; vertical-align:middle; margin-bottom: -22.5px" class="material-icons">search</i></a>
     </div>
   </div>
