@@ -33,7 +33,23 @@ class VideoController extends Controller
             return view('video.home', compact('videos'));
 
         } elseif ($request->has('g') && $request->g != 'null') {
-            $videos = Video::where('genre', $request->g)->whereDate('created_at', '>=', Carbon::now()->subMonth())->orderBy('created_at', 'desc')->get();
+            $genre = $request->g;
+            $weeks = 4;
+            switch ($genre) {
+                case 'variety':
+                    $weeks = 4;
+                    break;
+                case 'drama':
+                    $weeks = 1;
+                    break;
+                case 'anime':
+                    $weeks = 1;
+                    break;
+                default:
+                    $weeks = 1;
+                    break;
+            }
+            $videos = Video::where('genre', $genre)->whereDate('created_at', '>=', Carbon::now()->subWeeks($weeks))->orderBy('created_at', 'desc')->get();
 
             return view('video.home', compact('videos'));
 
