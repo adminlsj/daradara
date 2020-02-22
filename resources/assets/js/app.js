@@ -53,7 +53,12 @@ window.onscroll = function() {
   } else {
     scrollHideNav = document.querySelectorAll(".scroll-hide-nav");
     for (i = 0; i < scrollHideNav.length; i++) {
-      scrollHideNav[i].style.top = "-50px";
+      $path = window.location.pathname;
+      if ($path == '/' || $path.indexOf("rank") > -1 || $path.indexOf("vareity") > -1 || $path.indexOf("drama") > -1 || $path.indexOf("anime") > -1) {
+        scrollHideNav[i].style.top = "-40px";
+      } else {
+        scrollHideNav[i].style.top = "-50px";
+      }
     }
   }
   prevScrollpos = currentScrollPos;
