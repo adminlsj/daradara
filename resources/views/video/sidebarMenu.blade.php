@@ -2,7 +2,7 @@
 	@include('video.sidebarItem', ['link' => '/', 'is_current' => Request::is('/') ? 'active' : '', 'icon' => 'home', 'title' => '首頁'])
 	@include('video.sidebarItem', ['link' => route('video.rank'), 'is_current' => Request::is('*rank*') ? 'active' : '', 'icon' => 'whatshot', 'title' => '發燒影片'])
 	@include('video.sidebarItem', ['link' => route('video.newest'), 'is_current' => Request::is('*newest*') ? 'active' : '', 'icon' => 'explore', 'title' => '最新內容'])
-	@include('video.sidebarItem', ['link' => route('video.subscribes'), 'is_current' => Request::is('*subsribes*') ? 'active' : '', 'icon' => 'subscriptions', 'title' => '訂閱項目'])
+	@include('video.sidebarItem', ['link' => route('video.subscribes'), 'is_current' => Request::is('*subscribes*') ? 'active' : '', 'icon' => 'subscriptions', 'title' => '訂閱項目'])
 	<hr style="margin: 10px 0px;">
 	@include('video.sidebarItem', ['link' => route('video.variety'), 'is_current' => strpos(Request::path(), 'variety') !== false && !isset($watch) || Request::has('v') && $current->genre == 'variety' ? 'active' : '', 'icon' => 'live_tv', 'title' => '綜藝'])
 	@include('video.sidebarItem', ['link' => route('video.drama'), 'is_current' => strpos(Request::path(), 'drama' ) !== false || (Request::has('v') && $current->genre == 'drama') ? 'active' : '', 'icon' => 'movie_filter', 'title' => '日劇'])

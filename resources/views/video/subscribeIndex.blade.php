@@ -8,9 +8,9 @@
 <div class="hidden-sm hidden-xs sidebar-menu">
 	@include('video.sidebarMenu', ['theme' => 'white'])
 </div>
-<div class="main-content">
-	<div style="background-color: #F5F5F5; padding-top: 10px;" class="padding-setup">
-		<div class="row no-gutter">
+<div class="main-content" style="background-color: #F5F5F5;">
+	<div style="padding-top: 10px;">
+		<div class="row no-gutter padding-setup">
 			@foreach ($subscribes as $subscribe)
 				<a href="{{ route('video.intro', [$subscribe->watch()->genre, $subscribe->watch()->titleToUrl()]) }}" style="text-decoration: none;">
 					<div class="col-xs-1" style="width: 60px; margin: 0px; padding: 0px; text-align: center; margin-right: 15px;">
@@ -20,12 +20,27 @@
 				</a>
 			@endforeach
 		</div>
-		<hr style="margin-left: -20px; margin-right: -20px; margin-top: 10px; margin-bottom: 20px; border-color: #e5e5e5;">
-		<div class="subscribes-tab">
+		<hr style="margin: 10px 0px 20px 0px; border-color: #e5e5e5;">
+		<div class="subscribes-tab padding-setup">
 			<a style="margin-right: 5px;">最新内容</a>
 			<a>儲存的影片</a>
 		</div>
-		<hr style="margin-left: -20px; margin-right: -20px; margin-top: 20px; border-color: #e5e5e5;">
+		<hr style="margin: 20px 0px 0px 0px; border-color: #e5e5e5;">
+		@foreach ($videos as $video)
+			<div style="margin-bottom: 30px;">
+				<a href="{{ route('video.watch') }}?v={{ $video->id }}" style="text-decoration: none;">
+					<img style="width: 100%;" src="https://i.imgur.com/{{ $video->imgur }}h.png" alt="{{ $video->title }}">
+				</a>
+
+				<div class="padding-setup" style="margin-top: 10px">
+					<a href="{{ route('video.watch') }}?v={{ $video->id }}" style="text-decoration: none; color: black;">
+						<img style="width: 45px; height: auto; float: left; border-radius: 50%;" src="https://i.imgur.com/{{ $video->watch()->imgur }}s.jpg" alt="{{ $video->watch()->title }}">
+						<div style="margin-left: 53px; font-size: 1.1em;">{{ $video->title }}</div>
+						<div style="margin-left: 53px; font-size: 0.7em; color: gray; margin-top: 2px;">{{ $video->watch()->title }} • 收看次數：{{ $video->views() }} • {{ Carbon\Carbon::parse($video->created_at)->diffForHumans() }}</div>
+					</a>
+				</div>
+			</div>
+		@endforeach
 	</div>
 </div>
 @endsection

@@ -3,7 +3,7 @@
     <i class="material-icons">home</i>
     <span style="padding-right: 1px;">主頁</span>
   </a>
-  <a href="{{ route('video.rank') }}" class="{{ Request::is('*rank*') ? 'active' : ''}}">
+  <a href="{{ route('video.subscribes') }}" class="{{ Request::is('*subscribes*') ? 'active' : ''}}">
     <i style="font-size: 25px;" class="material-icons">subscriptions</i>
     <span style="padding-right: 1px;">訂閱</span>
   </a>

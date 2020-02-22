@@ -6,7 +6,7 @@
 
 <div style="margin-top: 15px">
 	<a href="{{ route('video.watch') }}?v={{ $video->id }}" style="text-decoration: none;">
-		<img src="https://i.imgur.com/{{ $video->imgur }}.png" alt="{{ $video->title }}">
+		<img src="https://i.imgur.com/{{ $video->imgur }}h.png" alt="{{ $video->title }}">
 	</a>
 </div>
 
