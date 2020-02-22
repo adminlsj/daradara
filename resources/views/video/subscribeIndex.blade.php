@@ -15,7 +15,7 @@
 				<a href="{{ route('video.intro', [$subscribe->watch()->genre, $subscribe->watch()->titleToUrl()]) }}" style="text-decoration: none;">
 					<div class="col-xs-1" style="width: 60px; margin: 0px; padding: 0px; text-align: center; margin-right: 15px; margin-bottom: 10px">
 						<img style="width: 100%; height: auto; border-radius: 50%;" src="{{ $subscribe->watch()->imgurS() }}" alt="{{ $subscribe->watch()->title }}">
-						<div class="text-ellipsis" style="width: 100%; font-size: 0.8em; padding-top: 5px; color: gray;">{{ $subscribe->watch()->title }}</div>
+						<div class="text-ellipsis" style="width: 100%; font-size: 0.8em; padding-top: 5px; color: dimgray;">{{ $subscribe->watch()->title }}</div>
 					</div>
 				</a>
 			@endforeach
@@ -38,7 +38,7 @@
 					</a>
 					<a href="{{ route('video.watch') }}?v={{ $video->id }}" style="text-decoration: none; color: black;">
 						<div style="margin-left: 53px; font-size: 1.1em;">{{ $video->title }}</div>
-						<div style="margin-left: 53px; font-size: 0.8em; color: gray; margin-top: 2px;">{{ $video->watch()->title }} • 收看次數：{{ $video->views() }} • {{ Carbon\Carbon::parse($video->created_at)->diffForHumans() }}</div>
+						<div style="margin-left: 53px; font-size: 0.8em; color: dimgray; margin-top: 2px;">{{ $video->watch()->title }} • 收看次數：{{ $video->views() }} • {{ Carbon\Carbon::parse($video->created_at)->diffForHumans() }}</div>
 					</a>
 				</div>
 			</div>
