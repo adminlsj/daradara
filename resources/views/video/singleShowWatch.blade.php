@@ -71,16 +71,16 @@
         <div style="color: #363636">0</div>
       </div>
       <div class="single-icon">
-        <i style="color: #363636" class="material-icons noselect">thumb_down</i>
-        <div style="color: #363636">0</div>
+        <i style="color: #363636" class="material-icons noselect">chat</i>
+        <div style="color: #363636">評論</div>
       </div>
       <div id="shareBtn" class="single-icon">
         <i class="material-icons noselect" style="-moz-transform: scale(-1, 1);-webkit-transform: scale(-1, 1);-o-transform: scale(-1, 1);-ms-transform: scale(-1, 1);transform: scale(-1, 1); font-size: 2.05em; margin-top: -4px;">reply</i>
         <div style="margin-top: -4px;">分享</div>
       </div>
       <div class="single-icon">
-        <i style="color: #363636" class="material-icons noselect">chat</i>
-        <div style="color: #363636">評論</div>
+        <i style="color: #363636" class="material-icons noselect">library_add</i>
+        <div style="color: #363636">儲存</div>
       </div>
       <div class="single-icon" data-toggle="modal" data-target="#reportModal">
         <i class="material-icons noselect">flag</i>
