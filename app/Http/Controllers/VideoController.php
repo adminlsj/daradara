@@ -27,15 +27,27 @@ class VideoController extends Controller
     }
 
     public function home(Request $request){
-        $videos = Video::whereDate('created_at', '>=', Carbon::now()->subWeek())->inRandomOrder()->limit(12)->get();
-        $variety = Video::where('genre', 'variety')
-                       ->whereDate('created_at', '>=', Carbon::now()->subMonth())->inRandomOrder()->limit(12)->get();
-        $drama = Video::where('genre', 'drama')
-                     ->whereDate('created_at', '>=', Carbon::now()->subWeek())->inRandomOrder()->limit(12)->get();
-        $anime = Video::where('genre', 'anime')
-                     ->whereDate('created_at', '>=', Carbon::now()->subWeek())->inRandomOrder()->limit(12)->get();
+        if ($request->has('g') && $request->g == 'newest') {
+            $videos = Video::whereDate('created_at', '>=', Carbon::now()->subWeek())->orderBy('created_at', 'desc')->get();
 
-        return view('video.home', compact('videos', 'variety', 'drama', 'anime'));
+            return view('video.home', compact('videos'));
+
+        } elseif ($request->has('g') && $request->g != 'null') {
+            $videos = Video::where('genre', $request->g)->whereDate('created_at', '>=', Carbon::now()->subMonth())->orderBy('created_at', 'desc')->get();
+
+            return view('video.home', compact('videos'));
+
+        } else {
+            $videos = Video::whereDate('created_at', '>=', Carbon::now()->subWeek())->inRandomOrder()->limit(12)->get();
+            $variety = Video::where('genre', 'variety')
+                         ->whereDate('created_at', '>=', Carbon::now()->subMonth())->inRandomOrder()->limit(12)->get();
+            $drama = Video::where('genre', 'drama')
+                         ->whereDate('created_at', '>=', Carbon::now()->subWeek())->inRandomOrder()->limit(12)->get();
+            $anime = Video::where('genre', 'anime')
+                         ->whereDate('created_at', '>=', Carbon::now()->subWeek())->inRandomOrder()->limit(12)->get();
+
+            return view('video.home', compact('videos', 'variety', 'drama', 'anime'));
+        }
     }
 
     public function rank(Request $request){

@@ -4,16 +4,16 @@
       <a href="/" style="width: 20%; float:left; text-align: center; text-decoration: none;">
         <h4 class="{{ !Request::has('g') ? 'nav-tab-active' : '' }}"><span>&nbsp;熱門&nbsp;</span></h4>
       </a>
-      <a href="{{ route('video.newest') }}" style="width: 20%; float:left; text-align: center; text-decoration: none;">
+      <a href="?g=newest" style="width: 20%; float:left; text-align: center; text-decoration: none;">
         <h4 class="{{ Request::has('g') && Request::get('g') == 'newest' ? 'nav-tab-active' : '' }}"><span>&nbsp;最新&nbsp;</span></h4>
       </a>
-      <a href="{{ route('video.newest') }}?g=variety" style="width: 20%; float:left; text-align: center; text-decoration: none;">
+      <a href="?g=variety" style="width: 20%; float:left; text-align: center; text-decoration: none;">
         <h4 class="{{ Request::has('g') && Request::get('g') == 'variety' ? 'nav-tab-active' : '' }}"><span>&nbsp;綜藝&nbsp;</span></h4>
       </a>
-      <a href="{{ route('video.newest') }}?g=drama" style="width: 20%; float:left; text-align: center; text-decoration: none;">
+      <a href="?g=drama" style="width: 20%; float:left; text-align: center; text-decoration: none;">
         <h4 class="{{ Request::has('g') && Request::get('g') == 'drama' ? 'nav-tab-active' : '' }}"><span>&nbsp;日劇&nbsp;</span></h4>
       </a>
-      <a href="{{ route('video.newest') }}?g=anime" style="width: 20%; float:left; text-align: center; text-decoration: none;">
+      <a href="?g=anime" style="width: 20%; float:left; text-align: center; text-decoration: none;">
         <h4 class="{{ Request::has('g') && Request::get('g') == 'anime' ? 'nav-tab-active' : '' }}"><span>&nbsp;動漫&nbsp;</span></h4>
       </a>
     </div>
