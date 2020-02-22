@@ -1,10 +1,10 @@
 <div class="navbar hidden-lg hidden-md">
   <a href="/" class="{{ Request::is('/') ? 'active' : ''}}">
     <i class="material-icons">home</i>
-    <span>主頁</span>
+    <span style="padding-right: 1px;">主頁</span>
   </a>
   <a href="{{ route('video.rank') }}" class="{{ Request::is('*rank*') ? 'active' : ''}}">
-    <i class="material-icons">whatshot</i>
+    <i style="font-size: 26px;" class="material-icons">whatshot</i>
     <span>熱門</span>
   </a>
   <a href="{{ route('video.variety') }}" class="{{ strpos(Request::path(), 'variety' ) !== false || (Request::has('v') && $current->genre == 'variety') ? 'active' : ''}}">
@@ -16,7 +16,7 @@
     <span>日劇</span>
   </a>
   <a href="{{ route('video.anime') }}" class="{{ strpos(Request::path(), 'anime' ) !== false || (Request::has('v') && $current->genre == 'anime') ? 'active' : ''}}">
-    <i class="material-icons">palette</i>
+    <i style="font-size: 26px;" class="material-icons">palette</i>
     <span>動漫</span>
   </a>
 </div>
