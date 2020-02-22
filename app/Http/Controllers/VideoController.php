@@ -381,6 +381,9 @@ class VideoController extends Controller
             }
             $videos = $videos->whereDate('created_at', '>=', Carbon::now()->subMonth())->orderBy('created_at', 'desc')->get();
             return view('video.subscribeIndex', compact('subscribes', 'videos'));
+
+        } else {
+            return view('auth.login');
         }
     }
 
