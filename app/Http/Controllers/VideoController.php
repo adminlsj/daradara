@@ -227,7 +227,13 @@ class VideoController extends Controller
         $related = Watch::where('genre', $watch->genre)->orderBy('created_at', 'desc')->limit(30)->get();
 
         $is_program = true;
-        return view('video.intro', compact('watch', 'videos', 'dropdown', 'related', 'is_program'));
+
+        $is_subscribed = false;
+        if (Auth::check() && Subscribe::where('user_id', Auth::user()->id)->where('category', $watch->category)->first() != null) {
+            $is_subscribed = true;
+        }
+
+        return view('video.intro', compact('watch', 'videos', 'dropdown', 'related', 'is_program', 'is_subscribed'));
     }
 
     public function watch(Request $request){
@@ -369,6 +375,9 @@ class VideoController extends Controller
     {
         if (auth()->check()) {
             $subscribes = auth()->user()->subscribes();
+            if ($subscribes->isEmpty()) {
+                return view('video.subscribeIndexEmpty');
+            }
             $videos = [];
             $first = true;
             foreach ($subscribes as $subscribe) {

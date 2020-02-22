@@ -8,7 +8,7 @@
       <div style="padding: 15px;" class="modal-content">
         <div style="border: 0px; position: relative;" class="modal-header">
           <h4 style="color: gray;font-weight: 100; transform: rotate(45deg);position: absolute; font-size: 3em; top: -10px; cursor: pointer;" class="no-select" data-dismiss="modal">+</h4>
-          <h4 style="color: #3F3F3F; margin-bottom: 0px; margin-top: 40px; font-size: 1.7em" class="modal-title" id="subscribeModalLabel">開始訂閱《{{ $video->watch()->title }}》</h4>
+          <h4 style="color: #3F3F3F; margin-bottom: 0px; margin-top: 40px; font-size: 1.7em" class="modal-title" id="subscribeModalLabel">開始訂閱《{{ $watch->title }}》</h4>
         </div>
         <div style="color: #3F3F3F; margin-top: -15px; font-weight: 500; font-size: 1.1em" class="modal-body">
           訂閱通知將發送至你的電郵地址。
@@ -16,7 +16,7 @@
             <input type="email" class="form-control" name="email" id="email" value="{{ Auth::user()->email }}" placeholder="電郵地址">
           </div>
 
-          <input name="subscribe-watch-id" type="hidden" value="{{ $video->watch()->id }}">
+          <input name="subscribe-watch-id" type="hidden" value="{{ $watch->id }}">
           <input name="subscribe-user-id" type="hidden" value="{{ Auth::user()->id }}">
           <button id="subscribe-btn" style="height: 45px; margin-top: 10px; font-size: 1em;" type="submit" class="btn btn-info" name="submit">訂閱</button>
         </div>

@@ -1191,6 +1191,18 @@ a > i {
   border-color: gray; 
 }
 
+.intro-play-btn {
+  margin-right: 90px;
+}
+
+.intro-subscribe-btn div {
+  padding-right: 17px;
+}
+
+.intro-subscribe-btn form {
+  padding-right: 10px;
+}
+
 @media (max-width: 991px) {
   .padding-setup {
     padding: 0px 10px;
@@ -1198,6 +1210,14 @@ a > i {
 
   .mobile-text-center {
     text-align: center;
+  }
+
+  .mobile-text-center div, .mobile-text-center form {
+    text-align: center;
+  }
+
+  .intro-play-btn {
+    margin-right: 0px;
   }
 
   .main-content {

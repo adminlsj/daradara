@@ -110,7 +110,7 @@
 
 @include('video.userReportModal')
 @if (Auth::check())
-  @include('video.subscribeModal')
+  @include('video.subscribeModal', ['watch' => $video->watch()])
 @else
   @include('user.signUpModal')
   @include('user.loginModal')

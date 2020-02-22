@@ -39,66 +39,10 @@ $(".dplayer-full-icon, .dplayer-full-in-icon").on('click', function(event){
   }
 });
 
-$('[id=switch-login-modal]').click(function(e) {
-    $('#signUpModal').modal('hide');
-    $('#loginModal').modal('show');
-});
-
-$('[id=switch-signup-modal]').click(function(e) {
-    $('#loginModal').modal('hide');
-    $('#signUpModal').modal('show');
-});
-
-$('div#subscribeModal').on("submit", "form#subscribe-form", function(e) {
-    $.ajaxSetup({
-        header:$('meta[name="_token"]').attr('content')
-    })
-    e.preventDefault(e);
-
-    $.ajax({
-        type:"POST",
-        url: $(this).attr("action"),
-        data:$(this).serialize(),
-        dataType: 'json',
-        success: function(data){
-            $('#subscribeModal').modal('hide');
-            $("div#subscribe-panel").html(data.unsubscribe_btn);
-        },
-        error: function(xhr, ajaxOptions, thrownError){
-            $("#subscribe-panel").html(xhr.responseText);
-        }
-    })
-});
-
-$('div#subscribe-panel').on("submit", "form#unsubscribe-form", function(e) {
-    $.ajaxSetup({
-        header:$('meta[name="_token"]').attr('content')
-    })
-    e.preventDefault(e);
-
-    $.ajax({
-        type:"POST",
-        url: $(this).attr("action"),
-        data:$(this).serialize(),
-        dataType: 'json',
-        success: function(data){
-            $("button#subscribe-btn").prop('disabled', false);
-            $("div#subscribe-panel").html(data.subscribe_btn);
-        },
-        error: function(xhr, ajaxOptions, thrownError){
-            $("#subscribe-panel").html(xhr.responseText);
-        }
-    })
-});
-
 $(document).ready(function() {
     var urlParams = new URLSearchParams(window.location.search);
     var from_subscribe = urlParams.get('from_subscribe');
     if (from_subscribe == 1) {
         $('#subscribeModal').modal('show');
     }
-});
-
-$('form').submit(function(){
-    $(this).find('button[type=submit]').prop('disabled', true);
 });
