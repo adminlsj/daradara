@@ -14,7 +14,7 @@
 	<a href="https://www.laughseejapan.com/{{ $video->genre }}/{{ $video->watch()->titleToUrl() }}" style="text-decoration: none; color: black;">
 		<img style="width: 30px; height: auto; float: left; border-radius: 50%;" src="https://i.imgur.com/{{ $video->watch()->imgur }}s.jpg" alt="{{ $video->watch()->title.' 更新了 ' }}">
 	</a>
-	<a href="https://www.laughseejapan.com/watch?v={{ $video->id }}" style="text-decoration: none; color: black;">
+	<a href="https://www.laughseejapan.com/{{ $video->genre }}/{{ $video->watch()->titleToUrl() }}#{{ $video->id }}" style="text-decoration: none; color: black;">
 		<div style="margin-left: 38px; font-size: 0.95em;">{{ $video->title }}</div>
 		<div style="margin-left: 38px; font-size: 0.7em; color: gray">{{ $video->watch()->title }}</div>
 	</a>
