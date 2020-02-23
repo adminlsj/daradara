@@ -61,7 +61,7 @@
 
           gtag('config', 'UA-125786247-1');
         </script>
-        
+
         <!-- Go to www.addthis.com/dashboard to customize your tools -->
         <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5e521ceef60346cb"></script>
 
@@ -74,6 +74,7 @@
 
             if (is_mobile) {
                 $('nav').addClass('scroll-hide-nav');
+                $("shareModal").remove();
             }
           </script>
     @show

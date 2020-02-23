@@ -8,7 +8,7 @@
       <div style="color: #3F3F3F; margin-top: -15px; font-weight: 500; font-size: 1.1em" class="modal-body">
         <hr style="margin-top: 8px; margin-bottom: 28px">
         <div class="addthis_inline_share_toolbox"></div>
-        <hr>
+        <hr style="margin-top: 24px;">
         <div id="copy-text-wrapper" style="background-color: #f9f9f9; border: 1px #e5e5e5 solid; padding: 10px;"><span id="copy-text">{{ Request::fullUrl() }}</span><span id="copy-btn" style="cursor: pointer; color: #d84b6b" class="pull-right no-select" onclick="copyToClipboard('#copy-text')">複製</span></div>
       </div>
     </div>
