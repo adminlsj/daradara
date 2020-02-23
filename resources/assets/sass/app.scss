@@ -1207,6 +1207,11 @@ a > i {
   margin-right: 7px !important;
 }
 
+#copy-btn:active {
+  outline: solid;
+  outline-width: 2px;
+}
+
 @media (max-width: 991px) {
   .padding-setup {
     padding: 0px 10px;
