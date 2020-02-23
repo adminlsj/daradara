@@ -74,8 +74,7 @@
 
             if (is_mobile) {
                 $('nav').addClass('scroll-hide-nav');
-                $('#shareBtn').removeAttr('data-toggle');
-                $('#shareBtn').removeAttr('data-target');
+                $('#shareModal').remove();
             }
           </script>
     @show
