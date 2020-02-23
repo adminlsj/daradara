@@ -97,6 +97,11 @@ class Watch extends Model
         return "https://i.imgur.com/".$this->imgur."s.jpg";
     }
 
+    public function imgurB()
+    {
+        return "https://i.imgur.com/".$this->imgur."b.jpg";
+    }
+
     public function imgurT()
     {
         return "https://i.imgur.com/".$this->imgur."t.jpg";
