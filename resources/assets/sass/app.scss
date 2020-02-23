@@ -1203,6 +1203,10 @@ a > i {
   padding-right: 10px;
 }
 
+.at-share-btn-elements a {
+  margin-right: 7px !important;
+}
+
 @media (max-width: 991px) {
   .padding-setup {
     padding: 0px 10px;

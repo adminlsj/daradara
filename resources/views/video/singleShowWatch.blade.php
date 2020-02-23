@@ -74,7 +74,7 @@
         <i style="color: #363636" class="material-icons noselect">chat</i>
         <div style="color: #363636">評論</div>
       </div>
-      <div id="shareBtn" class="single-icon">
+      <div id="shareBtn" class="single-icon" data-toggle="modal" data-target="#shareModal">
         <i class="material-icons noselect" style="-moz-transform: scale(-1, 1);-webkit-transform: scale(-1, 1);-o-transform: scale(-1, 1);-ms-transform: scale(-1, 1);transform: scale(-1, 1); font-size: 2.05em; margin-top: -4px;">reply</i>
         <div style="margin-top: -4px;">分享</div>
       </div>
@@ -108,6 +108,7 @@
 </div>
 <hr style="border:solid 0.5px #383838; margin-top: 9px">
 
+@include('video.shareModal')
 @include('video.userReportModal')
 @if (Auth::check())
   @include('video.subscribeModal', ['watch' => $video->watch()])
