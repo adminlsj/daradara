@@ -56,7 +56,6 @@
     </div>
 
     <div id="videoDescription" style="display: none; margin-top: 5px;">
-      <p style="white-space: pre-wrap; color: white; margin-bottom: 5px;"><strong>{{ $video->title() }}</strong></p>
       <p style="white-space: pre-wrap; color: white; margin-bottom: 20px;">{{ $video->caption }}</p>
       <p style="white-space: pre-wrap; color: white; margin-bottom: 5px;"><strong>劇情大綱</strong></p>
       <p style="white-space: pre-wrap; color: white; margin-bottom: 20px;">{{ $watch != false ? $watch->description : ''}}</p>
