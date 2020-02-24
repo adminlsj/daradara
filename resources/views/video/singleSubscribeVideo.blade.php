@@ -1,6 +1,6 @@
 <div style="margin-bottom: 30px;">
 	<a href="{{ route('video.watch') }}?v={{ $video->id }}" style="text-decoration: none;">
-		<img style="width: 100%;" src="{{ $video->imgurH() }}" alt="{{ $video->title }}">
+		<img class="lazy" style="width: 100%;" src="{{ $video->imgur16by9() }}" data-src="{{ $video->imgurH() }}" data-srcset="{{ $video->imgurH() }}" alt="{{ $video->title }}">
 	</a>
 
 	<div class="padding-setup" style="margin-top: 10px">
