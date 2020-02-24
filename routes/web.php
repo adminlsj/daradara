@@ -15,8 +15,13 @@ Route::get('/', 'VideoController@home');
 
 Route::resource('blog', 'BlogController');
 
+Auth::routes();
 Route::resource('user', 'UserController');
+Route::get('auth/{provider}', 'Auth\LoginController@redirectToProvider');
+Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
+Route::post('users/{user}/storeAvatar', 'UserController@storeAvatar');
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
+
 Route::get('/subscribes', 'VideoController@subscribeIndex')->name('video.subscribes');
 Route::post('/subscribe', 'VideoController@subscribe')->name('video.subscribe');
 Route::post('/unsubscribe', 'VideoController@unsubscribe')->name('video.unsubscribe');
@@ -44,11 +49,5 @@ Route::get('/{genre}/{title}', 'VideoController@intro')->name('video.intro');
 Route::get('/watch', 'VideoController@watch')->name('video.watch');
 Route::get('/search', ['as' => 'video.search', 'uses' => 'VideoController@search']);
 Route::get('/search-google', ['as' => 'video.searchGoogle', 'uses' => 'VideoController@searchGoogle']);
-
-Auth::routes();
-Route::get('auth/{provider}', 'Auth\LoginController@redirectToProvider');
-Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
-
-Route::post('users/{user}/storeAvatar', 'UserController@storeAvatar');
 
 Route::get('/updateDuration', 'VideoController@updateDuration');

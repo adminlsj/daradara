@@ -34,6 +34,9 @@
           </div>
 
         </form>
+
+        <a class="btn social-signin facebook" href="{{ url('/auth/facebook') }}">Log in with Facebook</a>
+
     </div>
 </div>
 @endsection

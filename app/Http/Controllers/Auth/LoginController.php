@@ -91,9 +91,7 @@ class LoginController extends Controller
      */
     public function findOrCreateUser($user, $provider)
     {
-        $fb_id = strval($user->id);
-        $authUser = User::where('provider_id', $fb_id)->first();
-        if ($authUser) {
+        if ($authUser = User::where('provider_id', strval($user->getId()))->first()) {
             return $authUser;
         }
 
@@ -104,13 +102,19 @@ class LoginController extends Controller
             $email = $fb_id.'@facebook.com';
         }
 
-
         $localUser = User::create([
-            'name'     => $user->name,
-            'email'    => $email,
+            'name'     => $user->getName(),
+            'email'    => $user->getEmail(),
             'provider' => $provider,
-            'provider_id' => $fb_id,
+            'provider_id' => $user->getId(),
             'password' => bcrypt(uniqid())
+        ]);
+
+        Avatar::create([
+            'user_id'     => $localUser->id,
+            'filename'    => $user->getAvatar(),
+            'mime' => 'jpg',
+            'original_filename' => $user->getAvatar(),
         ]);
 
         return $localUser;
