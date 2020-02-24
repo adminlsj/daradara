@@ -67,8 +67,8 @@ function load_more(page){
             }
         });
 
-        var lazyImages = [].slice.call(document.querySelectorAll("img.lazy"));
-
+        var container = document.querySelector("#" + newDivName);
+        var lazyImages = [].slice.call(container.querySelectorAll("img.lazy"));
         if ("IntersectionObserver" in window) {
             let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
               entries.forEach(function(entry) {
