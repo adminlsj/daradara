@@ -39,7 +39,7 @@
 
 			<hr style="border:solid 1.5px #282828; margin-top: 0px">
 
-			<div style="margin-top: -20px; padding: 0px 15px">
+			<div style="margin-top: -20px; padding: 0px 15px; padding-bottom: 7px;">
 				<div class="row">
 					<!-- Tab links -->
 					<div class="tab">
