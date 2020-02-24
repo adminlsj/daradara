@@ -1,7 +1,7 @@
-<footer id="myFooter" class="footer hidden-md hidden-lg" style="z-index: 1000 !important;">
+<footer id="myFooter" class="footer hidden-md hidden-lg" style="z-index: 1000 !important; padding-top: 0px; padding-bottom: 0px;">
     <div style="width: 90%;" class="container">
-        <div class="row">
-            <div style="text-align: center" class="col-sm-12 col-md-3">
+        <div class="row" style="margin-bottom: 15px">
+            <!-- <div style="text-align: center" class="col-sm-12 col-md-3">
                 <h2 class="logo"><a style="font-size: 1em" href="#">LaughSeeJapan</a></h2>
             </div>
             <div class="col-sm-12 col-md-2 text-center">
@@ -27,12 +27,13 @@
                     <li><a href="/policy">免責聲明</a></li>
                     <li><a href="/policy">私隱條例</a></li>
                 </ul>
-            </div>
-            <div class="col-sm-12 col-md-3">
+            </div> -->
+            <div class="col-sm-12 col-md-3" style="margin-top: -20px">
                 <div class="social-networks">
                     <a href="https://www.facebook.com/laughseejapan/" target="_blank" class="twitter"><i class="fab fa-twitter"></i></a>
                     <a href="https://www.facebook.com/laughseejapan/" target="_blank" class="facebook"><i class="fab fa-facebook"></i></a>
                     <a href="https://www.instagram.com/laughseejapan/" target="_blank" class="google"><i class="fab fa-instagram"></i></a>
+                    <a href="/about-us" target="_blank" class="email"><i class="fab fa-envelope-square"></i></a>
                 </div>
                 <a href="/about-us" class="btn btn-info" target="_blank">聯絡我們</a>
             </div>
