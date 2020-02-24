@@ -40,6 +40,8 @@
 
             @yield('content')
         </div>
+
+        @include('layouts.footer')
     </div>
 
     <!-- CSS Styles Deferred -->

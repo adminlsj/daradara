@@ -1,5 +1,5 @@
 <footer id="myFooter" class="footer hidden-md hidden-lg" style="z-index: 1000 !important;">
-    <div style="width: 90%" class="container">
+    <div style="width: 90%;" class="container">
         <div class="row">
             <div style="text-align: center" class="col-sm-12 col-md-3">
                 <h2 class="logo"><a style="font-size: 1em" href="#">LaughSeeJapan</a></h2>
