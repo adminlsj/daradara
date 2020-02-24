@@ -1,6 +1,6 @@
 <footer id="myFooter" class="footer hidden-md hidden-lg" style="z-index: 1000 !important; padding-top: 0px; padding-bottom: 0px;">
     <div style="width: 90%;" class="container">
-        <div class="row" style="margin-bottom: -10px">
+        <div class="row" style="margin-bottom: -15px">
             <!-- <div style="text-align: center" class="col-sm-12 col-md-3">
                 <h2 class="logo"><a style="font-size: 1em" href="#">LaughSeeJapan</a></h2>
             </div>
@@ -28,7 +28,7 @@
                     <li><a href="/policy">私隱條例</a></li>
                 </ul>
             </div> -->
-            <div class="col-sm-12 col-md-3" style="margin-top: -23px; padding-bottom: 50px;">
+            <div class="col-sm-12 col-md-3" style="margin-top: -28px;">
                 <div class="social-networks">
                     <a href="https://www.facebook.com/laughseejapan/" target="_blank" class="twitter"><i class="fab fa-twitter"></i></a>
                     <a href="https://www.facebook.com/laughseejapan/" target="_blank" class="facebook"><i class="fab fa-facebook"></i></a>
@@ -37,5 +37,10 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="footer-copyright padding-setup">
+        <p class="mobile-container" style="white-space: pre-wrap; padding-bottom: 50px; margin-left: auto; margin-right: auto;">本網站內容收集於互聯網上公開資源，提供最優質的網頁界面服務，但不提供也不參與影片檔案錄製、下載、上傳、儲存。娛見日本Laughseejapan 不承擔任何由於內容的合法性所引起的爭議和法律責任。若本站收錄的資源涉及您的版權或知識產權或其他利益，<a style="color: gray" href="/policy" target="_blank">請留言並附上版權證明</a>，我們會盡快確認後作出刪除等處理措施，以保護版權方的權益 。
+
+Copyright @ 2019 娛見日本 LaughSeeJapan</p>
     </div>
 </footer>
