@@ -33,7 +33,7 @@
 						</div>
 
 						<!-- Tab content -->
-						<div id="Watch" class="tabcontent">
+						<div id="Watch" class="tabcontent" style="padding-bottom: 7px;">
 							<div class="dropdown" style="margin-top: -3px">
 							  <button onclick="openDropdown()" class="dropbtn">{{ $watch->season }}<span style="padding-left: 7px; padding-right: 0px;" class="stretch dropbtn">v</span></button>
 							  <div id="myDropdown" class="dropdown-content">
@@ -64,7 +64,7 @@
 						    @endforeach
 						</div>
 
-						<div id="Related" class="tabcontent">
+						<div id="Related" class="tabcontent" style="padding-bottom: 7px;">
 							@foreach ($related as $video)
 						    	@include('video.singleRelatedPost')
 						    @endforeach
