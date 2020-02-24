@@ -28,7 +28,7 @@
 		<hr style="margin: 15px 0px 0px 0px; border-color: #e5e5e5;">
 		<div class="video-sidebar-wrapper">
 		    <div id="sidebar-results"><!-- results appear here --></div>
-		    <div style="text-align: center;" class="ajax-loading"><img style="width: 40px; height: auto; padding-top: 25px; padding-bottom: 55px;" src="https://i.imgur.com/TcZjkZa.gif"/></div>
+		    <div style="text-align: center;" class="ajax-loading"><img style="width: 40px; height: auto; padding-top: 25px; padding-bottom: 65px;" src="https://i.imgur.com/TcZjkZa.gif"/></div>
 		</div>
 	</div>
 </div>

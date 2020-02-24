@@ -1259,6 +1259,10 @@ a > i {
 }
 
 @media (max-width: 991px) {
+  #content-div {
+    padding-bottom: 50px
+  }
+
   .padding-setup {
     padding: 0px 10px;
   }
