@@ -40,10 +40,6 @@ function load_more(page){
         url: '?v=' + video + '&g=' + genre + '&page=' + page + '&query=' + query,
         type: "get",
         datatype: "html",
-        beforeSend: function()
-        {
-            $('.ajax-loading').show();
-        }
     })
 
     .done(function(data){
@@ -52,7 +48,6 @@ function load_more(page){
             $('.ajax-loading').html(" ");
             return;
         }
-        $('.ajax-loading').hide(); //hide loading animation once data is received
 
         newDivName = "d" + String(new Date().valueOf());
         var $newhtml = $("<div id='" + newDivName + "'>" + data + "</div>");
