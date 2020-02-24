@@ -388,7 +388,13 @@ class VideoController extends Controller
                     $videos = $videos->orWhere('category', $subscribe->category);
                 }
             }
-            $videos = $videos->orderBy('created_at', 'desc')->get();
+            $videos = $videos->orderBy('created_at', 'desc')->paginate(10);
+
+            $html = $this->subscribeLoadHTML($videos);
+            if ($request->ajax()) {
+                return $html;
+            }
+
             return view('video.subscribeIndex', compact('subscribes', 'videos'));
 
         } else {
@@ -452,6 +458,16 @@ class VideoController extends Controller
         $html = '';
         foreach ($videos as $video) {
             $html .= view('video.rankVideoPost', compact('video'));
+        }
+        return $html;
+    }
+
+    public function subscribeLoadHTML($videos)
+    {
+        $html = '';
+        $is_program = false;
+        foreach ($videos as $video) {
+            $html .= view('video.singleSubscribeVideo', compact('video', 'is_program'));
         }
         return $html;
     }

@@ -26,23 +26,10 @@
 			<!-- <a href="#">儲存的影片</a>-->
 		</div>
 		<hr style="margin: 15px 0px 0px 0px; border-color: #e5e5e5;">
-		@foreach ($videos as $video)
-			<div style="margin-bottom: 30px;">
-				<a href="{{ route('video.watch') }}?v={{ $video->id }}" style="text-decoration: none;">
-					<img class="lazy" style="width: 100%;" src="{{ $video->imgur16by9() }}" data-src="{{ $video->imgurH() }}" data-srcset="{{ $video->imgurH() }}" alt="{{ $video->title }}">
-				</a>
-
-				<div class="padding-setup" style="margin-top: 10px">
-					<a href="{{ route('video.intro', [$video->genre, $video->watch()->titleToUrl()]) }}" style="text-decoration: none;">
-						<img style="width: 45px; height: auto; float: left; border-radius: 50%;" src="https://i.imgur.com/{{ $video->watch()->imgur }}s.jpg" alt="{{ $video->watch()->title }}">
-					</a>
-					<a href="{{ route('video.watch') }}?v={{ $video->id }}" style="text-decoration: none; color: black;">
-						<div style="margin-left: 53px; font-size: 1.1em; line-height: 19px">{{ $video->title }}</div>
-						<div style="margin-left: 53px; font-size: 0.85em; color: dimgray; margin-top: 3px;">{{ $video->watch()->title }} • 收看次數：{{ $video->views() }} • {{ Carbon\Carbon::parse($video->created_at)->diffForHumans() }}</div>
-					</a>
-				</div>
-			</div>
-		@endforeach
+		<div class="video-sidebar-wrapper">
+		    <div id="sidebar-results"><!-- results appear here --></div>
+		    <div style="text-align: center;" class="ajax-loading"><img style="width: 40px; height: auto; padding-top: 25px; padding-bottom: 30px;" src="https://i.imgur.com/TcZjkZa.gif"/></div>
+		</div>
 	</div>
 </div>
 @endsection
