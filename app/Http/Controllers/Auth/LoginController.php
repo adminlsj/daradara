@@ -41,7 +41,7 @@ class LoginController extends Controller
             return url()->previous().'?from_subscribe=1';
 
         } else {
-            return '/';
+            return '/subscribes';
         }
     }
 
