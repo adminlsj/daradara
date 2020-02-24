@@ -20,7 +20,6 @@ Route::resource('user', 'UserController');
 Route::get('auth/{provider}', 'Auth\LoginController@redirectToProvider');
 Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
 Route::post('users/{user}/storeAvatar', 'UserController@storeAvatar');
-Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 Route::get('/subscribes', 'VideoController@subscribeIndex')->name('video.subscribes');
 Route::post('/subscribe', 'VideoController@subscribe')->name('video.subscribe');

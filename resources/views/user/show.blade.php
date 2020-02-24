@@ -13,7 +13,10 @@
 	<div style="background-color: #F5F5F5;">
 		@if (Auth::user()->id == $user->id)
 			{{ $user->email }}
-			<a href="{{ url('/logout') }}"> logout </a>
+			<form id="logout-form" action="{{ route('logout') }}" method="POST">
+		        {{ csrf_field() }}
+		        <button type="submit">登出</button>
+		    </form>
 		@endif
 	</div>
 </div>
