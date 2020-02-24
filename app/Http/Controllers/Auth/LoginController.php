@@ -9,7 +9,7 @@ use App\Avatar;
 use App\Resume;
 use Auth;
 use Socialite;
-use Request;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
