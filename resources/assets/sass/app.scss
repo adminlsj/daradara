@@ -181,9 +181,7 @@ nav input[type=text]:focus {
   padding: 3px 0px;
 }
 
-/* Place the navbar at the bottom of the page, and make it stick */
-.navbar {
-  background-color: #282828;
+.bottom-nav {
   overflow: hidden;
   position: fixed;
   display: inline-block;
@@ -196,23 +194,20 @@ nav input[type=text]:focus {
   font-size: 5px;
 }
 
-/* Style the links inside the navigation bar */
-.navbar a {
+.bottom-nav a {
   float: left;
   display: block;
-  color: gray;
   text-align: center;
   text-decoration: none;
   width: 20%;
   height: 100%;
 }
 
-.navbar i {
-  color: darkgray;
+.bottom-nav i {
   font-size: 28px;
 }
 
-.navbar span {
+.bottom-nav span {
   float: left;
   display: block;
   color: inherit;
@@ -226,22 +221,28 @@ nav input[type=text]:focus {
   padding-bottom: 5px;
 }
 
-/* Change the color of links on hover */
-.navbar a:hover {
+.dark-theme-nav-bottom {
+  background-color: #282828;
+}
+
+.dark-theme-nav-bottom a, .dark-theme-nav-bottom i {
+  color: darkgray;
+}
+
+.dark-theme-nav-bottom a:hover, .dark-theme-nav-bottom a:hover i, .dark-theme-nav-bottom a.active, .dark-theme-nav-bottom a.active i {
   color: white;
 }
 
-.navbar a:hover i {
-  color: white;
+.white-theme-nav-bottom {
+  background-color: white;
 }
 
-/* Add a color to the active/current link */
-.navbar a.active {
-  color: white;
+.white-theme-nav-bottom a, .white-theme-nav-bottom i {
+  color: dimgray;
 }
 
-.navbar a.active i {
-  color: white;
+.white-theme-nav-bottom a:hover, .white-theme-nav-bottom a:hover i, .white-theme-nav-bottom a.active, .white-theme-nav-bottom a.active i {
+  color: red;
 }
 
 .nav-tab-container h4{
@@ -938,6 +939,23 @@ a > i {
   color: red;
   font-weight: 500;
   text-decoration: none;
+}
+
+/* Nav Main */
+.dark-theme-nav-main, .dark-theme-nav-main div {
+  background-color: #282828;
+}
+
+.dark-theme-nav-main i, .dark-theme-nav-main .pull-right, .dark-theme-nav-main #toggleSearchBar {
+  color: white;
+}
+
+.white-theme-nav-main, .white-theme-nav-main div {
+  background-color: white;
+}
+
+.white-theme-nav-main i, .white-theme-nav-main .pull-right, .dark-theme-nav-main #toggleSearchBar {
+  color: #595959;
 }
 
 .sidebar-menu .sidebar-footer:hover {
