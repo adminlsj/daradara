@@ -99,6 +99,10 @@ class LoginController extends Controller
             return $authUser;
         }
 
+        if ($currentUser = User::where('email', $user->getEmail())->first()) {
+            return $currentUser;
+        }
+
         $localUser = User::create([
             'name'     => $user->getName(),
             'email'    => $user->getEmail(),

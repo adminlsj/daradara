@@ -21,9 +21,13 @@
           <div class="form-group">
             <input type="password" class="form-control" name="password" id="password" placeholder="設定密碼" required>
           </div>
-          <button style="height: 45px; margin-top: 10px; font-size: 1em;" type="submit" class="btn btn-info" name="submit">登記</button>
-          <hr style="margin:15px 0px">
-          <span style="font-weight: 400">已經有LaughSeeJapan帳戶了？</span>&nbsp;<a id="switch-login-modal" style="cursor: pointer; text-decoration: none; font-weight: 500;">登入</a>
+          <button style="height: 45px; margin-top: 10px; font-size: 1em;" type="submit" class="btn btn-info" name="submit">註冊</button>
+
+          @include('layouts.socialLoginBtn')
+
+          <div style="margin-top: 20px; font-size: 0.95em">
+            <span style="font-weight: 400">已經有LaughSeeJapan帳戶了？</span>&nbsp;<a id="switch-login-modal" style="cursor: pointer; text-decoration: none; font-weight: 500;">登入</a>
+          </div>
         </div>
       </div>
 

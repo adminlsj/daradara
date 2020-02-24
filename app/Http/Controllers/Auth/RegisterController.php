@@ -65,6 +65,10 @@ class RegisterController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6',
+        ], [
+            'email.unique' => '該電子郵件已登記賬戶，若忘記密碼，請聯絡我們 laughseejapan@gmail.com',
+            'email.max'  => '該電子郵件的字數超過系統允許的長度',
+            'password.min'  => '請設定密碼為6個字母或以上',
         ]);
     }
 

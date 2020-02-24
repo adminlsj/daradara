@@ -34,10 +34,6 @@
           </div>
 
         </form>
-
-        <a class="btn social-signin facebook" href="{{ url('/auth/facebook') }}">Log in with Facebook</a>
-        <a class="btn social-signin facebook" href="{{ url('/auth/google') }}">Log in with Google</a>
-
     </div>
 </div>
 @endsection

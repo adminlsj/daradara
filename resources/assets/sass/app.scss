@@ -1212,6 +1212,26 @@ a > i {
   outline-width: 2px;
 }
 
+.separator {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: dimgray;
+    font-size: 0.8em;
+    margin: 20px 0px;
+}
+.separator::before, .separator::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #e9e9e9;
+}
+.separator::before {
+    margin-right: 1em;
+}
+.separator::after {
+    margin-left: 1em;
+}
+
 @media (max-width: 991px) {
   .padding-setup {
     padding: 0px 10px;
