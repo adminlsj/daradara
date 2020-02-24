@@ -1232,6 +1232,14 @@ a > i {
     margin-left: 1em;
 }
 
+.social-login-wrapper-left {
+  margin-right: 3px;
+}
+
+.social-login-wrapper-right {
+  margin-left: 3px;
+}
+
 @media (max-width: 991px) {
   .padding-setup {
     padding: 0px 10px;
@@ -1262,6 +1270,14 @@ a > i {
   .banner .button {
     right: 10px;
     padding: 5px 15px;
+  }
+
+  .social-login-wrapper-left, .social-login-wrapper-right {
+    margin: 0px;
+  }
+
+  .social-login-wrapper-right {
+    margin-top: 10px;
   }
 
   .single-show-player {
