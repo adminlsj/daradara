@@ -22,7 +22,7 @@
 		<div id="search-top-watch">
 		  <a href="{{ route('video.intro', [$watch->genre, $watch->titleToUrl()]) }}" class="row no-gutter">
 		    <div class="col-xs-6 col-sm-6 col-md-3">
-		      <img style="width: 100%; height: 100%;" src="{{ $watch->imgurB() }}" alt="{{ $watch->title }}">
+		      <img style="width: 100%; height: 100%;" src="{{ $watch->imgurL() }}" alt="{{ $watch->title }}">
 		      <span style="position: absolute; bottom:6px; right: 9px; background-color: rgba(0,0,0,0.8); color: white; padding: 1px 5px 1px 5px; opacity: 0.9; font-size: 0.85em; border-radius: 2px;">
 		      	@if ($watch->genre == 'variety')
 	                {{ Carbon\Carbon::parse($watch->updated_at)->diffForHumans() }}更新
