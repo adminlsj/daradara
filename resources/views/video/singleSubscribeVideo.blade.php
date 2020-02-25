@@ -9,7 +9,7 @@
 		</a>
 		<a href="{{ route('video.watch') }}?v={{ $video->id }}" style="text-decoration: none; color: black;">
 			<div style="margin-left: 53px; font-size: 1.1em; line-height: 19px">{{ $video->title }}</div>
-			<div style="margin-left: 53px; font-size: 0.85em; color: dimgray; margin-top: 3px;">{{ $video->watch()->title }} • 收看次數：{{ $video->views() }} • {{ Carbon\Carbon::parse($video->created_at)->diffForHumans() }}</div>
+			<div style="margin-left: 53px; font-size: 0.85em; color: #595959; margin-top: 3px;">{{ $video->watch()->title }} • 收看次數：{{ $video->views() }} • {{ Carbon\Carbon::parse($video->created_at)->diffForHumans() }}</div>
 		</a>
 	</div>
 </div>
