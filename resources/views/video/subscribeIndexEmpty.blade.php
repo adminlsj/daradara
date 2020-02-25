@@ -12,12 +12,12 @@
 	<div>
 		<div class="padding-setup" style="padding-top: 20px">
 			<i style="font-size: 80px; color: gray; float: left; margin-left: -5px;" class="material-icons">subscriptions</i>
-			<div style="margin-left: 85px; margin-top: 3px">
+			<div style="margin-left: 85px; margin-top: 3px; height: 76px">
 				<div style="font-size: 1.2em">讓頻道訂閱信息更充實</div>
 				<div style="color: darkgray; margin-top: 3px;">訂閱您喜愛的頻道，保證不會錯過最新內容。</div>
 			</div>
 		</div>
-		<hr style="border-color: #e9e9e9; margin-top: 50px; margin-bottom: 0px">
+		<hr style="border-color: #e9e9e9; margin-bottom: 0px">
 		<div class="row padding-setup" style="padding-top:12px; padding-bottom: 4px;">
 			<div class="col-md-12">
 				<h4>
