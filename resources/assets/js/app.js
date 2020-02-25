@@ -35,6 +35,11 @@ $('#search-submit-btn').click(function(e) {
     $("#search-form").submit();
 });
 
+$('#subscribe-show-all').click(function(e) {
+    $("#subscribes-watch-wrapper").css('height', 'auto');
+    $(this).css('display', 'none');
+});
+
 $('#unmute-btn').click(function(e) {
   dp.volume(0.7, true, false);
   $('video').prop('muted', false);
