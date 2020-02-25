@@ -1,5 +1,5 @@
 <div class="{{ $watch->genre == 'variety' ? 'watch-variety' : 'watch-single' }} {{ Request::is('*subscribes*') ? 'watch-index-white-theme' : 'watch-index-dark-theme' }}">
-  <div style="border-radius: 3px;">
+  <div style="border-radius: 3px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
     <a style="text-decoration: none;" href="{{ route('video.intro', [$watch->genre, $watch->titleToUrl()]) }}">
 
       <img class="lazy" style="width: 100%; height: 100%; border-top-left-radius: 3px; border-top-right-radius: 3px; padding-top: 1px; padding-left: 1px; padding-right: 1px;" src="{{ $watch->imgurDefault() }}" data-src="{{ $watch->imgurL() }}" data-srcset="{{ $watch->imgurL() }}" alt="{{ $watch->title }}">
