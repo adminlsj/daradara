@@ -521,7 +521,7 @@ class VideoController extends Controller
         $idsArray = [];
 
         // Exact Match Query [e.g. TerraceHouse or 2012.09.14]
-        $exactQuery = Video::where('title', 'like', '%'.request('query').'%')->orWhere('tags', 'like', '%'.request('query').'%')->distinct()->orderBy('created_at', 'desc')->get();
+        $exactQuery = Video::where('title', 'like', '%'.request('query').'%')->orderBy('created_at', 'desc')->get();
         foreach ($exactQuery as $q) {
             if (!in_array($q->id, $idsArray)) {
                 array_push($videosArray, $q);
