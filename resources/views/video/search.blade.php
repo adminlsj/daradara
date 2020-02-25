@@ -34,7 +34,7 @@
 		    <div class="col-xs-6 col-sm-6 col-md-7">
 		      <h4>{{ $watch->title }}</h4>
 		      <p style="overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;">{{ $watch->cast }}</p>
-		      <p style="margin-top: 9px; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;" class="hidden-xs hidden-sm">{{ $watch->description }}</p>
+		      <p style="margin-top: 9px; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">{{ $watch->description }}</p>
 		    </div>
 		  </a>
 		</div>
