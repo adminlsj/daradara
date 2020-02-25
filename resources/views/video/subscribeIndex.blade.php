@@ -10,7 +10,7 @@
 </div>
 <div class="main-content" style="background-color: #F5F5F5;">
 	<div style="padding-top: 10px;">
-		<div id="subscribes-watch-wrapper" class="row no-gutter padding-setup" style="height: 92px; overflow-x: hidden; position: relative;">
+		<div id="subscribes-watch-wrapper" class="row no-gutter padding-setup" style="height: 90px; overflow-x: hidden; position: relative;">
 			@foreach ($subscribes as $subscribe)
 				<a href="{{ route('video.intro', [$subscribe->watch()->genre, $subscribe->watch()->titleToUrl()]) }}" style="text-decoration: none;">
 					<div class="col-xs-1" style="width: 60px; margin: 0px; padding: 0px; text-align: center; margin-right: 15px; margin-bottom: 10px;">
@@ -19,7 +19,7 @@
 					</div>
 				</a>
 			@endforeach
-			<div id="subscribe-show-all" class="no-select" style="height: 82px; vertical-align: middle; padding: 0px 15px; position: absolute; top: 0px; right: 0px; background-color: #F5F5F5; font-size: 1.1em; padding-top: 27px; color: #d84b6b; font-weight: 500; cursor: pointer">所有</div>
+			<div id="subscribe-show-all" class="no-select" style="height: 80px; vertical-align: middle; padding: 0px 15px; position: absolute; top: 0px; right: 0px; background-color: #F5F5F5; font-size: 1.1em; padding-top: 25px; color: #d84b6b; font-weight: 500; cursor: pointer">所有</div>
 		</div>
 		<hr style="margin: 0px 0px 16px 0px; border-color: #e5e5e5;">
 		<div class="subscribes-tab padding-setup">
