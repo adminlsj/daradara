@@ -18,7 +18,7 @@
 </div>
 
 <div class="main-content">
-	<div class="padding-setup" style="background-color: #e9e9e9; min-height: auto; padding-top: 14px; padding-bottom: 14px;">
+	<div class="padding-setup" style="background-color: #e9e9e9; min-height: auto; padding-top: 11px; padding-bottom: 11px;">
 		<div id="search-top-watch">
 		  <a href="{{ route('video.intro', [$watch->genre, $watch->titleToUrl()]) }}" class="row no-gutter">
 		    <div class="col-xs-6 col-sm-6 col-md-3">
