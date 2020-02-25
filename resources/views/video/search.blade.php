@@ -23,12 +23,18 @@
 		  <a href="{{ route('video.intro', [$watch->genre, $watch->titleToUrl()]) }}" class="row no-gutter">
 		    <div class="col-xs-6 col-sm-6 col-md-3">
 		      <img style="width: 100%; height: 100%;" src="{{ $watch->imgurL() }}" alt="{{ $watch->title }}">
-		      <span style="position: absolute; bottom:6px; right: 9px; background-color: rgba(0,0,0,0.8); color: white; padding: 1px 5px 1px 5px; opacity: 0.9; font-size: 0.85em; border-radius: 2px;">推薦</span>
+		      <span style="position: absolute; bottom:6px; right: 9px; background-color: rgba(0,0,0,0.8); color: white; padding: 1px 5px 1px 5px; opacity: 0.9; font-size: 0.85em; border-radius: 2px;">
+		      	@if ($watch->genre == 'variety')
+	                {{ Carbon\Carbon::parse($watch->updated_at)->diffForHumans() }}更新
+	            @else
+	                {{ $watch->is_ended ? '已完結全' : '更新至第' }}{{ $watch->videos()->count() }}集
+	            @endif
+		      </span>
 		    </div>
 		    <div class="col-xs-6 col-sm-6 col-md-7">
 		      <h4>{{ $watch->title }}</h4>
 		      <p style="overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;">{{ $watch->cast }}</p>
-		      <p style="margin-top: 9px; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;">{{ $watch->description }}</p>
+		      <p style="margin-top: 9px; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: {{ $watch->genre == 'variety' ? 3 : 10 }}; -webkit-box-orient: vertical;">{{ $watch->description }}</p>
 		    </div>
 		  </a>
 		</div>
