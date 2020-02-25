@@ -508,7 +508,8 @@ class VideoController extends Controller
 
     public function search(Request $request)
     {
-        $query = request('query');
+        $query = str_replace(' ', '', request('query'));
+
         $queryArray = [];
         preg_match_all('/./u', $query, $queryArray);
         $queryArray = $queryArray[0];
@@ -516,7 +517,30 @@ class VideoController extends Controller
             unset($queryArray[$key]);
         }
 
-        $videosSelect = Video::where('genre', '!=', 'blog')->orderBy('created_at', 'desc')->select('id', 'title', 'tags')->get()->toArray();
+        $videosArray = [];
+        $idsArray = [];
+
+        // Exact Match Query [e.g. TerraceHouse or 2012.09.14]
+        $exactQuery = Video::where('title', 'like', '%'.request('query').'%')->orWhere('tags', 'like', '%'.request('query').'%')->distinct()->orderBy('created_at', 'desc')->get();
+        foreach ($exactQuery as $q) {
+            if (!in_array($q->id, $idsArray)) {
+                array_push($videosArray, $q);
+                array_push($idsArray, $q->id);
+            }
+        }
+
+        // Exact Order Match Query (search query in same order e.g. 2012 => 2>0>1>2) [e.g. 2012 09 14]
+        $exactOrderQueryScope = '%'.implode('%', $queryArray).'%';
+        $exactOrderQuery = Video::where('title', 'like', $exactOrderQueryScope)->orderBy('created_at', 'desc')->get();
+        foreach ($exactOrderQuery as $q) {
+            if (!in_array($q->id, $idsArray)) {
+                array_push($videosArray, $q);
+                array_push($idsArray, $q->id);
+            }
+        }
+
+        // Character Match Query (search query as a whole e.g. 2012 => contains 2/0/1/2) [e.g. 郡司桑 月曜]
+        $videosSelect = Video::orderBy('created_at', 'desc')->select('id', 'title', 'tags')->get()->toArray();
         $rankings = [];
         foreach ($videosSelect as $videoSelect) {
             $score = 0;
@@ -542,10 +566,13 @@ class VideoController extends Controller
             return $b['score'] <=> $a['score'];
         });
 
-        $videosArray = [];
         foreach ($rankings as $rank) {
-            array_push($videosArray, Video::find($rank['id']));
+            if (!in_array($rank['id'], $idsArray)) {
+                array_push($videosArray, Video::find($rank['id']));
+            }
         }
+
+        $watch = $videosArray[0]->watch();
 
         $page = Input::get('page', 1); // Get the ?page=1 from the url
         $perPage = 10; // Number of items per page
@@ -564,7 +591,7 @@ class VideoController extends Controller
             return $html;
         }
 
-        return view('video.search', compact('videos', 'query'));
+        return view('video.search', compact('videos', 'watch', 'query'));
     }
 
     public function searchGoogle(Request $request)

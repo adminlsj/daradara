@@ -61,7 +61,6 @@
       <p style="white-space: pre-wrap; color: white; margin-bottom: 20px;">{{ $watch != false ? $watch->description : ''}}</p>
       <p style="white-space: pre-wrap; color: white; margin-bottom: 5px;"><strong>登場人物</strong></p>
       <p style="white-space: pre-wrap; color: white; margin-bottom: 20px;">{{ $watch != false ? $watch->cast : ''}}</p>
-      <p><a style="color:white; text-decoration: none;" href="{{ route('video.intro', [$video->genre, $watch->titleToUrl()]) }}"><strong>完整介紹 ></strong></a></p>
     </div>
 
     <div class="show-panel-icons">

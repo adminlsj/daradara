@@ -18,10 +18,30 @@
 </div>
 
 <div class="main-content">
+	<div class="padding-setup" style="background-color: #e9e9e9; min-height: auto; padding-top: 7px; padding-bottom: 7px;">
+		<div id="search-top-watch">
+		  <a href="{{ route('video.intro', [$watch->genre, $watch->titleToUrl()]) }}" class="row no-gutter">
+		    <div class="col-xs-6 col-sm-6 col-md-3">
+		      <img style="width: 100%; height: 100%;" src="{{ $watch->imgurB() }}" alt="{{ $watch->title }}">
+		      <span style="position: absolute; bottom:6px; right: 9px; background-color: rgba(0,0,0,0.8); color: white; padding: 1px 5px 1px 5px; opacity: 0.9; font-size: 0.85em; border-radius: 2px;">
+		      	@if ($watch->genre == 'variety')
+	                {{ Carbon\Carbon::parse($watch->updated_at)->diffForHumans() }}更新
+	            @else
+	                {{ $watch->is_ended ? '已完結全' : '更新至第' }}{{ $watch->videos()->count() }}集
+	            @endif
+		      </span>
+		    </div>
+		    <div class="col-xs-6 col-sm-6 col-md-7">
+		      <h4>{{ $watch->title }}</h4>
+		      <p style="overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;">{{ $watch->cast }}</p>
+		      <p style="margin-top: 9px; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;" class="hidden-xs hidden-sm">{{ $watch->description }}</p>
+		    </div>
+		  </a>
+		</div>
+	</div>
 	<div style="background-color: #F5F5F5;" class="padding-setup">
 		<div class="row" style="padding-top: 6px;">
 			<div class="col-md-12">
-				<h4 style="color: black; font-weight: 500; margin-bottom: 8px;"><a href="{{ route('video.search')}}?query={{ $query }}">#{{ $query }}</a> 標籤的影片</h4>
 				<div style="margin-left: -10px; margin-right: -10px;" class="video-sidebar-wrapper">
 				    <div id="sidebar-results"><!-- results appear here --></div>
 				    <div style="text-align: center;" class="ajax-loading"><img style="width: 40px; height: auto; padding-top: 25px; padding-bottom: 30px;" src="https://i.imgur.com/TcZjkZa.gif"/></div>
