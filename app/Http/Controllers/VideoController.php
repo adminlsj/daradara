@@ -572,7 +572,7 @@ class VideoController extends Controller
             }
         }
 
-        $watch = $videosArray[0]->watch();
+        $watch = $videosArray[0]->category == 'video' ? Watch::first() : $videosArray[0]->watch();
 
         $page = Input::get('page', 1); // Get the ?page=1 from the url
         $perPage = 10; // Number of items per page
