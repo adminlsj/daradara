@@ -12,7 +12,6 @@
         </div>
         <div style="color: #3F3F3F; margin-top: -15px; font-size: 1.1em" class="modal-body">
           <div style="font-weight: 500;">訂閱通知將發送至你的電郵地址。</div>
-          <div style="font-weight: 500;">溫馨提示：請務必檢查垃圾郵件！</div>
           <div class="form-group" style="margin-top: 20px;">
             <input type="email" class="form-control" name="email" id="email" placeholder="電郵地址" required>
           </div>

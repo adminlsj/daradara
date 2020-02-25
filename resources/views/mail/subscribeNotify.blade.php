@@ -17,6 +17,7 @@
 	<a href="https://www.laughseejapan.com/watch?v={{ $video->id }}&utm_source=email" style="text-decoration: none; color: black;">
 		<div style="margin-left: 38px; font-size: 0.95em;">{{ $video->title }}</div>
 		<div style="margin-left: 38px; font-size: 0.7em; color: gray">{{ $video->watch()->title }}</div>
+		<div style="margin-left: 38px; font-size: 0.7em; color: gray; margin-top: 10px">{{ $video->caption }}</div>
 	</a>
 </div>
 

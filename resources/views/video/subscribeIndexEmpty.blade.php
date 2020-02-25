@@ -18,7 +18,7 @@
 			</div>
 		</div>
 		<hr style="border-color: #e9e9e9; margin-bottom: 0px">
-		<div class="row padding-setup" style="padding-top:12px; padding-bottom: 4px;">
+		<div class="row padding-setup" style="padding-top:12px; padding-bottom: 5px;">
 			<div class="col-md-12">
 				<h4>
 					綜藝推薦

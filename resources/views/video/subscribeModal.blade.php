@@ -11,7 +11,8 @@
           <h4 style="color: #3F3F3F; margin-bottom: 0px; margin-top: 40px; font-size: 1.7em" class="modal-title" id="subscribeModalLabel">開始訂閱《{{ $watch->title }}》</h4>
         </div>
         <div style="color: #3F3F3F; margin-top: -15px; font-weight: 500; font-size: 1.1em" class="modal-body">
-          訂閱通知將發送至你的電郵地址。
+          <div>訂閱通知將發送至你的電郵地址。</div>
+          <div><span style="color: red">溫馨提示：</span>請務必檢查垃圾郵件！</div>
           <div class="form-group" style="margin-top: 20px;">
             <input type="email" class="form-control" name="email" id="email" value="{{ Auth::user()->email }}" placeholder="電郵地址">
           </div>
