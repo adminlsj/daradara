@@ -15,9 +15,9 @@
 		<img style="width: 30px; height: auto; float: left; border-radius: 50%;" src="https://i.imgur.com/{{ $video->watch()->imgur }}s.jpg" alt="{{ $video->watch()->title.' 更新了 ' }}">
 	</a>
 	<a href="https://www.laughseejapan.com/watch?v={{ $video->id }}&utm_source=email" style="text-decoration: none; color: black;">
-		<div style="margin-left: 38px; font-size: 0.95em;">{{ $video->title }}</div>
-		<div style="margin-left: 38px; font-size: 0.7em; color: gray">{{ $video->watch()->title }}</div>
-		<div style="margin-left: 38px; font-size: 0.7em; color: gray; margin-top: 10px">{{ $video->caption }}</div>
+		<div style="margin-left: 38px; font-size: 1em;">{{ $video->title }}</div>
+		<div style="margin-left: 38px; font-size: 0.8em; color: gray">{{ $video->watch()->title }}</div>
+		<div style="margin-left: 38px; font-size: 0.8em; color: gray; margin-top: 5px">{{ $video->caption }}</div>
 	</a>
 </div>
 
