@@ -995,6 +995,32 @@ a > i {
   margin-bottom: 10px;
 }
 
+.watch-index-dark-theme > div {
+  background-color: #282828;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.watch-index-dark-theme h4 {
+  color:white;
+}
+
+.watch-index-dark-theme p {
+  color: #a9a9a9;
+}
+
+.watch-index-white-theme > div {
+  background-color: white;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.watch-index-white-theme h4 {
+  color:black;
+}
+
+.watch-index-white-theme p {
+  color: #595959;
+}
+
 .home-padding-container {
   padding-left: 0px;
   padding-right: 0px;

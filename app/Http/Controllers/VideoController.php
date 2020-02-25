@@ -376,7 +376,10 @@ class VideoController extends Controller
         if (auth()->check()) {
             $subscribes = auth()->user()->subscribes();
             if ($subscribes->isEmpty()) {
-                return view('video.subscribeIndexEmpty');
+                $variety = Watch::where('genre', 'variety')->orderBy('updated_at', 'desc')->limit(12)->get();
+                $drama = Watch::where('genre', 'drama')->orderBy('updated_at', 'desc')->limit(15)->get();
+                $anime = Watch::where('genre', 'anime')->orderBy('updated_at', 'desc')->limit(15)->get();
+                return view('video.subscribeIndexEmpty', compact('variety', 'drama', 'anime'));
             }
             $videos = [];
             $first = true;
