@@ -28,8 +28,11 @@
                 <input type="password" class="form-control" name="password" id="password" placeholder="密碼" required>
               </div>
               <button style="height: 45px; margin-top: 10px; font-size: 1em;" type="submit" class="btn btn-info" name="submit">登入</button>
-              <hr style="margin:15px 0px">
-              <span style="font-weight: 400">暫不開放公開註冊。</span>&nbsp;
+              @include('layouts.socialLoginBtn')
+
+              <div style="margin-top: 20px; font-size: 0.95em">
+                <span style="font-weight: 400">暫不開放公開註冊。</span>
+              </div>
             </div>
           </div>
 
