@@ -1,10 +1,10 @@
 @include('video.player')
 
-<div style="background-color: #151515; border-top: 1px solid #383838; min-height: 79px">
+<div style="background-color: #151515; border-top: 1px solid #383838;">
   <ins class="adsbygoogle"
        style="display:block"
        data-ad-format="fluid"
-       data-ad-layout-key="-ia+f-1a-3i+b9"
+       data-ad-layout-key="-id+f-r-4c+aj"
        data-ad-client="ca-pub-4485968980278243"
        data-ad-slot="3332191764"></ins>
 </div>
