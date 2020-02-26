@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\User;
 use App\Avatar;
+use App\Watch;
 use Auth;
 use Socialite;
 use Illuminate\Http\Request;
@@ -25,6 +26,8 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
+    protected $previousUrl = '';
+
     /**
      * Where to redirect users after login.
      *
@@ -32,8 +35,7 @@ class LoginController extends Controller
      */
     protected function redirectTo()
     {
-        $previous = url()->previous();
-        if (strpos($previous, "/watch?v=") !== FALSE) {
+        if (strpos($this->previousUrl, "/watch?v=") !== FALSE) {
             return url()->previous().'&from_subscribe=1';
 
         } elseif ((strpos($previous, "/variety/") !== FALSE || strpos($previous, "/drama/") !== FALSE || strpos($previous, "/anime/") !== FALSE)) {
@@ -61,6 +63,7 @@ class LoginController extends Controller
      */
     public function redirectToProvider($provider)
     {
+        $this->previousUrl = url()->previous();
         return Socialite::driver($provider)->redirect();
     }
 
@@ -121,6 +124,31 @@ class LoginController extends Controller
         ]);
 
         return $localUser;
+    }
+
+    /**
+     * Send the response after the user was authenticated.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    protected function sendLoginResponse(Request $request)
+    {
+        $request->session()->regenerate();
+
+        $this->clearLoginAttempts($request);
+
+        if ($request->ajax()) {
+            return response()->json([
+                'href' => route('user.show', auth()->user()),
+                'email' => auth()->user()->email,
+                'subscribe_user_id' => auth()->user()->id,
+                'csrf_token' => csrf_token(),
+            ]);
+        }
+
+        return $this->authenticated($request, $this->guard()->user())
+                ?: redirect()->intended($this->redirectPath());
     }
 
     /**

@@ -18,7 +18,7 @@
 
     <div class="main-content">
     	<div style="background-color: #1F1F1F;">
-			<div style="background-image: url({{ $watch->imgurH() }}); background-size: 100%; background-repeat: no-repeat; background-position: 50%; filter: blur(30px); z-index: -1; opacity: 0.5; pointer-events: none;">
+			<div style="background-image: url({{ $watch->imgurH() }}); background-size: 100% 100%; background-repeat: no-repeat; background-position: 50%; filter: blur(30px); z-index: -1; opacity: 0.5; pointer-events: none;">
 				<div style="padding: 0px 15px">
 					<div style="padding-top: 20px; padding-bottom: 10px; padding-left: 0px;" class="row">
 						@include('video.introTemp')

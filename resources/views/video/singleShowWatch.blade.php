@@ -108,9 +108,8 @@
 
 @include('video.shareModal')
 @include('video.userReportModal')
-@if (Auth::check())
-  @include('video.subscribeModal', ['watch' => $video->watch()])
-@else
+@include('video.subscribeModal', ['watch' => $video->watch()])
+@if (!Auth::check())
   @include('user.signUpModal')
   @include('user.loginModal')
 @endif

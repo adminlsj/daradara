@@ -132,6 +132,56 @@ $('div#subscribe-panel').on("submit", "form#unsubscribe-form", function(e) {
     })
 });
 
+$('div#loginModal').on("submit", "form#loginModalForm", function(e) {
+    $.ajaxSetup({
+        header:$('meta[name="_token"]').attr('content')
+    })
+    e.preventDefault(e);
+
+    $.ajax({
+        type:"POST",
+        url: $(this).attr("action"),
+        data:$(this).serialize(),
+        dataType: 'json',
+        success: function(data){
+            $('#loginModal').modal('hide');
+            $('#nav-account-icon').attr('href', data.href);
+            $('form#subscribe-form input[name="_token"]').attr('value', data.csrf_token);
+            $('#email').attr('value', data.email);
+            $('#subscribe-user-id').attr('value', data.subscribe_user_id);
+            $('#subscribeModal').modal('show');
+        },
+        error: function(xhr, ajaxOptions, thrownError){
+            $('div#loginModal').html(xhr.responseText);
+        }
+    })
+});
+
+$('div#signUpModal').on("submit", "form#signUpModalForm", function(e) {
+    $.ajaxSetup({
+        header:$('meta[name="_token"]').attr('content')
+    })
+    e.preventDefault(e);
+
+    $.ajax({
+        type:"POST",
+        url: $(this).attr("action"),
+        data:$(this).serialize(),
+        dataType: 'json',
+        success: function(data){
+            $('#signUpModal').modal('hide');
+            $('#nav-account-icon').attr('href', data.href);
+            $('form#subscribe-form input[name="_token"]').attr('value', data.csrf_token);
+            $('#email').attr('value', data.email);
+            $('#subscribe-user-id').attr('value', data.subscribe_user_id);
+            $('#subscribeModal').modal('show');
+        },
+        error: function(xhr, ajaxOptions, thrownError){
+            $('div#signUpModal').html(xhr.responseText);
+        }
+    })
+});
+
 $('[id=switch-login-modal]').click(function(e) {
     $('#signUpModal').modal('hide');
     $('#loginModal').modal('show');

@@ -105,6 +105,15 @@ class RegisterController extends Controller
 
         $this->guard()->login($user, true);
 
+        if ($request->ajax()) {
+            return response()->json([
+                'href' => route('user.show', auth()->user()),
+                'email' => auth()->user()->email,
+                'subscribe_user_id' => auth()->user()->id,
+                'csrf_token' => csrf_token(),
+            ]);
+        }
+
         return $this->registered($request, $user)
                         ?: redirect($this->redirectPath());
     }

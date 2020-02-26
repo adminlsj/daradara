@@ -12,13 +12,13 @@
         </div>
         <div style="color: #3F3F3F; margin-top: -15px; font-weight: 500; font-size: 1.1em" class="modal-body">
           <div>訂閱通知將發送至你的電郵地址。</div>
-          <div><span style="color: red">溫馨提示：</span>請務必檢查垃圾郵件！</div>
+          <div><span style="color: red">殘念提示：</span>請務必檢查垃圾郵件！</div>
           <div class="form-group" style="margin-top: 20px;">
-            <input type="email" class="form-control" name="email" id="email" value="{{ Auth::user()->email }}" placeholder="電郵地址">
+            <input type="email" class="form-control" name="email" id="email" value="{{ Auth::check() ? Auth::user()->email : ''}}" placeholder="電郵地址">
           </div>
 
           <input name="subscribe-watch-id" type="hidden" value="{{ $watch->id }}">
-          <input name="subscribe-user-id" type="hidden" value="{{ Auth::user()->id }}">
+          <input id="subscribe-user-id" name="subscribe-user-id" type="hidden" value="{{ Auth::check() ? Auth::user()->id : ''}}">
           <button id="subscribe-btn" style="height: 45px; margin-top: 10px; font-size: 1em;" type="submit" class="btn btn-info" name="submit">訂閱</button>
         </div>
       </div>

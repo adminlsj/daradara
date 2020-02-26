@@ -1,7 +1,7 @@
 <div class="modal" id="signUpModal" tabindex="-1" role="dialog" aria-labelledby="signUpModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
 
-    <form action="{{ route('register') }}" method="POST">
+    <form id="signUpModalForm" action="{{ route('register') }}" method="POST">
 
       {{ csrf_field() }}
 

@@ -10,7 +10,7 @@
 </div>
 <div class="main-content" style="background-color: #F5F5F5;">
 	<div style="padding-top: 10px;">
-		<div id="subscribes-watch-wrapper" class="row no-gutter padding-setup" style="height: 90px; overflow-x: hidden; position: relative;">
+		<div id="subscribes-watch-wrapper" class="row no-gutter padding-setup" style="height: 90px; overflow-x: hidden; overflow-y: hidden; position: relative;">
 			@foreach ($subscribes as $subscribe)
 				<a href="{{ route('video.intro', [$subscribe->watch()->genre, $subscribe->watch()->titleToUrl()]) }}" style="text-decoration: none;">
 					<div class="col-xs-1" style="width: 60px; margin: 0px; padding: 0px; text-align: center; margin-right: 15px; margin-bottom: 10px;">
