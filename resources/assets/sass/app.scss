@@ -264,6 +264,15 @@ nav input[type=text]:focus {
   padding-bottom: 5px;
 }
 
+.nav-rank-btn {
+  width: 25%;
+  float:left;
+  text-align: center;
+  text-decoration: none !important;
+  height: 35px;
+  margin-top: -5px;
+}
+
 .nav-tab-active {
   margin-top: 9px;
 }
@@ -1330,7 +1339,7 @@ a > i {
   font-size: 0.94em;
 }
 
-#singleSearchVideo h4 {
+#singleSearchVideo h4, #singleRankVideo h4 {
   margin-top:0px;
   margin-bottom: 0px;
   line-height: 19px;
@@ -1339,14 +1348,14 @@ a > i {
   color:black;
 }
 
-#singleSearchVideo p {
+#singleSearchVideo p, #singleRankVideo p {
   color: #595959;
   margin-top: 2px;
   margin-bottom: 0px;
   font-size: 0.94em;
 }
 
-#singleSearchVideo .col-md-3 {
+#singleSearchVideo .col-md-3, #singleRankVideo .col-md-3 {
   padding-left: 12px;
   padding-right: 13px;
   position: relative;
@@ -1416,6 +1425,14 @@ a > i {
   }
 
   #singleSearchVideo p {
+    font-size: 0.85em;
+  }
+
+  #singleRankVideo h4 {
+    font-size: 1.05em;
+  }
+
+  #singleRankVideo p {
     font-size: 0.85em;
   }
 

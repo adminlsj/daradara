@@ -10,8 +10,8 @@
 </div>
 <div class="main-content">
 	@include('layouts.nav-newest')
-	<div style="background-color: #F5F5F5; padding-top: 44px" class="video-sidebar-wrapper padding-setup">
-		<div style="padding-top: 10px" class="hidden-xs hidden-sm"></div>
+	<div style="background-color: #F5F5F5; padding-top: 43px" class="video-sidebar-wrapper padding-setup">
+		<div style="padding-top: 6px" class="hidden-xs hidden-sm"></div>
 	    <div id="sidebar-results"><!-- results appear here --></div>
 	    <div style="text-align: center;" class="ajax-loading"><img style="width: 40px; height: auto; padding-top: 15px; padding-bottom: 30px;" src="https://i.imgur.com/TcZjkZa.gif"/></div>
 	</div>

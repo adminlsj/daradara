@@ -56,9 +56,9 @@ function load_more(page){
         $('#' + newDivName + ' h5').each(function (index) {
             rank = index + 1 + (page - 1) * 10;
             if (rank < 10) {
-                $(this).html('<span style="color:white; background-color:pink; padding: 3px 10px; border-radius:3px;">' + rank + '</span>');
+                $(this).html('<span style="color:white; background-color:#595959; padding: 3px 10px; border-radius:3px;">' + rank + '</span>');
             } else {
-                $(this).html('<span style="color:white; background-color:pink; padding: 3px 6px; border-radius:3px;">' + rank + '</span>');
+                $(this).html('<span style="color:white; background-color:#595959; padding: 3px 6px; border-radius:3px;">' + rank + '</span>');
             }
         });
 
