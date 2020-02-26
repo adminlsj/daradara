@@ -26,7 +26,7 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
-    protected $previousUrl = '/watch?v=2537';
+    private $previousUrl = '';
 
     /**
      * Where to redirect users after login.
@@ -35,7 +35,15 @@ class LoginController extends Controller
      */
     protected function redirectTo()
     {
-            return $this->previousUrl;
+        if (strpos($this->previousUrl, "/watch?v=") !== FALSE) {
+            return $this->previousUrl.'&from_subscribe=1';
+
+        } elseif ((strpos($this->previousUrl, "/variety/") !== FALSE || strpos($this->previousUrl, "/drama/") !== FALSE || strpos($this->previousUrl, "/anime/") !== FALSE)) {
+            return $this->previousUrl.'?from_subscribe=1';
+
+        } else {
+            return '/subscribes';
+        }
     }
 
     /**
