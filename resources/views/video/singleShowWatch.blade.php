@@ -1,13 +1,13 @@
 @include('video.player')
 
-<div style="background-color: #151515">
+<div style="background-color: #151515; border-top: 1px solid #383838; min-height: 79px">
   <ins class="adsbygoogle"
        style="display:block"
        data-ad-format="fluid"
        data-ad-layout-key="-ia+f-1a-3i+b9"
        data-ad-client="ca-pub-4485968980278243"
        data-ad-slot="3332191764"></ins>
- </div>
+</div>
 
 <div style="padding-bottom: 5px; padding-left: 15px; padding-right: 15px; border-top: 1px solid #383838">
     <div style="margin-bottom: 5px; padding-top: 6px; position:relative;">
