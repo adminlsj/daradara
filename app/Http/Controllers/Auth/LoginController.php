@@ -36,10 +36,10 @@ class LoginController extends Controller
     protected function redirectTo()
     {
         if (strpos($this->previousUrl, "/watch?v=") !== FALSE) {
-            return url()->previous().'&from_subscribe=1';
+            return $this->previousUrl.'&from_subscribe=1';
 
         } elseif ((strpos($this->previousUrl, "/variety/") !== FALSE || strpos($this->previousUrl, "/drama/") !== FALSE || strpos($this->previousUrl, "/anime/") !== FALSE)) {
-            return url()->previous().'?from_subscribe=1';
+            return $this->previousUrl.'?from_subscribe=1';
 
         } else {
             return '/subscribes';
