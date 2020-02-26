@@ -34,7 +34,7 @@
 
 						<!-- Tab content -->
 						<div id="Watch" class="tabcontent" style="padding-bottom: 7px;">
-							<div class="dropdown" style="margin-top: -3px">
+							<div class="dropdown" style="margin-top: -5px">
 							  <button onclick="openDropdown()" class="dropbtn">{{ $watch->season }}<span style="padding-left: 7px; padding-right: 0px;" class="stretch dropbtn">v</span></button>
 							  <div id="myDropdown" class="dropdown-content">
 							      @foreach ($dropdown as $watch)
@@ -44,17 +44,12 @@
 							</div>
 
 							<div style="margin: 7px 15px;">
-								<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-								<!-- Horizontal Banner Ads -->
 								<ins class="adsbygoogle"
 								     style="display:block;"
 								     data-ad-client="ca-pub-4485968980278243"
 								     data-ad-slot="8455082664"
 								     data-ad-format="auto"
 								     data-full-width-responsive="true"></ins>
-								<script>
-								     (adsbygoogle = window.adsbygoogle || []).push({});
-								</script>
 							</div>
 
 						    @foreach ($videos as $video)

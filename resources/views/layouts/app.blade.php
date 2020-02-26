@@ -62,6 +62,9 @@
 
         <!-- Google Adsense -->
         <script data-ad-client="ca-pub-4485968980278243" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
 
         <script>
             var is_mobile = false

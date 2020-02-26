@@ -1,6 +1,13 @@
 @include('video.player')
 
-<div style="padding-bottom: 5px; padding-left: 15px; padding-right: 15px;">
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-format="fluid"
+     data-ad-layout-key="-i7+7-v-2e+7l"
+     data-ad-client="ca-pub-4485968980278243"
+     data-ad-slot="3332191764"></ins>
+
+<div style="padding-bottom: 5px; padding-left: 15px; padding-right: 15px; border-top: 1px solid #383838">
     <div style="margin-bottom: 5px; padding-top: 7px; position:relative;">
         <p id="video-tags" class="text-ellipsis" style="padding-right:40px; margin-bottom:2px; font-size: 0.85em; {{ count($video->sd()) > 1 ? 'display:none;' : '' }}">
           @foreach ($video->tags() as $tag)
