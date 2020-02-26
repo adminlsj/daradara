@@ -19,11 +19,9 @@ $('[id=toggleVideoDescription]').click(function(e) {
     var icon = document.getElementById("toggleVideoDescriptionIcon");
     if (description.style.display === "none") {
         description.style.display = "block";
-        videoTags.classList.remove("text-ellipsis");
         icon.innerHTML = 'expand_less';
     } else {
         description.style.display = "none";
-        videoTags.classList.add("text-ellipsis");
         icon.innerHTML = 'expand_more';
     }
 });
