@@ -1,6 +1,6 @@
-<nav style="background-color: white; margin-top: 50px; max-height: 20px; line-height: 20px" class="nav-sub-width">
+<nav style="background-color: white; margin-top: 50px;" class="nav-sub-width">
   <div style="background-color: white" class="container-fluid">
-    <div class="nav-tab-container" style="background-color: white; line-height: 10px; height: 10px">
+    <div class="nav-tab-container" style="background-color: white;">
       <a class="nav-rank-btn" href="{{ route('video.rank') }}">
         <h4 class="{{ !Request::has('g') ? 'nav-tab-active' : '' }}"><span>&nbsp;全部&nbsp;</span></h4>
       </a>

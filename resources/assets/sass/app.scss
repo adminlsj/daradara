@@ -269,7 +269,16 @@ nav input[type=text]:focus {
   float:left;
   text-align: center;
   text-decoration: none !important;
-  height: 35px;
+  height: 34px;
+  margin-top: -5px;
+}
+
+.nav-home-btn {
+  width: 20%;
+  float:left;
+  text-align: center;
+  text-decoration: none !important;
+  height: 34px;
   margin-top: -5px;
 }
 
