@@ -1,15 +1,17 @@
 @include('video.player')
 
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-format="fluid"
-     data-ad-layout-key="-ia+f-1a-3i+b9"
-     data-ad-client="ca-pub-4485968980278243"
-     data-ad-slot="3332191764"></ins>
+<div style="background-color: #151515">
+  <ins class="adsbygoogle"
+       style="display:block"
+       data-ad-format="fluid"
+       data-ad-layout-key="-ia+f-1a-3i+b9"
+       data-ad-client="ca-pub-4485968980278243"
+       data-ad-slot="3332191764"></ins>
+ </div>
 
 <div style="padding-bottom: 5px; padding-left: 15px; padding-right: 15px; border-top: 1px solid #383838">
-    <div style="margin-bottom: 5px; padding-top: 7px; position:relative;">
-        <p id="video-tags" class="text-ellipsis" style="padding-right:40px; margin-bottom:2px; font-size: 0.85em; {{ count($video->sd()) > 1 ? 'display:none;' : '' }}">
+    <div style="margin-bottom: 5px; padding-top: 6px; position:relative;">
+        <!-- <p id="video-tags" class="text-ellipsis" style="padding-right:40px; margin-bottom:2px; font-size: 0.85em; {{ count($video->sd()) > 1 ? 'display:none;' : '' }}">
           @foreach ($video->tags() as $tag)
             @if (strpos($tag, '完整版') !== false)
               <a style="color:#e5e5e5;" href="{{ route('video.watch') }}?v={{ App\Video::where('category', $video->category)->orderBy('created_at', 'desc')->first()->id }}">#{{ $tag }}</a>
@@ -17,7 +19,7 @@
               <a style="color:#e5e5e5;" href="{{ route('video.search') }}?query={{ $tag }}">#{{ $tag }}</a>
             @endif
           @endforeach
-        </p>
+        </p>-->
 
         <a style="text-decoration: none; pointer-events: none;">
           <h4 id="shareBtn-title" style="padding-right:40px; line-height: 23px; font-weight: 400; margin-top:0px; margin-bottom: 0px; color:white; font-size: 1.15em">{{ $video->title }}</h4>
