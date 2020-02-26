@@ -9,6 +9,7 @@ use App\Avatar;
 use App\Watch;
 use Auth;
 use Socialite;
+use Session;
 use Illuminate\Http\Request;
 
 class LoginController extends Controller
@@ -26,8 +27,6 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
-    private $previousUrl = '';
-
     /**
      * Where to redirect users after login.
      *
@@ -35,11 +34,12 @@ class LoginController extends Controller
      */
     protected function redirectTo()
     {
-        if (strpos($this->previousUrl, "/watch?v=") !== FALSE) {
-            return $this->previousUrl.'&from_subscribe=1';
+        $previousUrl = Session::get('previousUrl');
+        if (strpos($previousUrl, "/watch?v=") !== FALSE) {
+            return $previousUrl.'&from_subscribe=1';
 
-        } elseif ((strpos($this->previousUrl, "/variety/") !== FALSE || strpos($this->previousUrl, "/drama/") !== FALSE || strpos($this->previousUrl, "/anime/") !== FALSE)) {
-            return $this->previousUrl.'?from_subscribe=1';
+        } elseif ((strpos($previousUrl, "/variety/") !== FALSE || strpos($previousUrl, "/drama/") !== FALSE || strpos($previousUrl, "/anime/") !== FALSE)) {
+            return $previousUrl.'?from_subscribe=1';
 
         } else {
             return '/subscribes';
@@ -63,7 +63,7 @@ class LoginController extends Controller
      */
     public function redirectToProvider($provider)
     {
-        $this->previousUrl = url()->previous();
+        Session::put('previousUrl', url()->previous());
         return Socialite::driver($provider)->redirect();
     }
 
