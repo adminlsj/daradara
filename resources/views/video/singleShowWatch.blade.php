@@ -102,8 +102,8 @@
     <img class="lazy img-circle" style="width: 35px; height: auto; float:left;" src="https://i.imgur.com/JMcgEkPs.jpg" data-src="https://i.imgur.com/{{ $video->watch()->imgur }}s.jpg" data-srcset="https://i.imgur.com/{{ $video->watch()->imgur }}s.jpg" alt="{{ $video->watch()->title }}">
   </a>
   <div style="margin-left: 45px;">
-    <div><a style="text-decoration: none; color: white;" href="{{ route('video.intro', [$watch->genre, $watch->titleToUrl()]) }}">{{ $video->watch()->title }}</a></div>
-    <div style="color: darkgray; font-size: 0.85em; margin-top: -1px;">7.01M 位訂閱者</div>
+    <div class="text-ellipsis" style="padding-right: 50px"><a style="text-decoration: none; color: white;" href="{{ route('video.intro', [$watch->genre, $watch->titleToUrl()]) }}">{{ $video->watch()->title }}</a></div>
+    <div style="color: darkgray; font-size: 0.85em; margin-top: -1px;">{{ $video->subscribes()->count() }} 位訂閱者</div>
     <div id="subscribe-panel">
       @if ($is_subscribed)
         @include('video.unsubscribeBtn')

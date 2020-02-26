@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Watch;
+use App\Subscribe;
 
 class Video extends Model
 {
@@ -14,6 +15,11 @@ class Video extends Model
     public function watch()
     {
         return Watch::where('category', $this->category)->first();
+    }
+
+    public function subscribes()
+    {
+        return Subscribe::where('category', $this->category)->orderBy('created_at', 'asc')->get();
     }
 
     public function tags()
