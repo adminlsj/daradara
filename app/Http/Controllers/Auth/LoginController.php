@@ -26,7 +26,7 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
-    protected $previousUrl = '';
+    protected $previousUrl = '/watch?v=2537';
 
     /**
      * Where to redirect users after login.
