@@ -237,12 +237,6 @@ class VideoController extends Controller
     }
 
     public function watch(Request $request){
-        $videos = Video::all();
-        foreach ($videos as $video) {
-            $video->uploaded_at = $video->created_at;
-            $video->save();
-        }
-
         /*$id = 2759;
         $genre = 'variety';
         $category = 'ametalk';

@@ -75,6 +75,11 @@ class HomeController extends Controller
 
     public function checkSubscribes()
     {
+        $videos = Video::all();
+        foreach ($videos as $video) {
+            $video->uploaded_at = $video->created_at;
+            $video->save();
+        }
         if (Auth::check() && Auth::user()->email == 'laughseejapan@gmail.com') {
             $watches = Watch::all();
             $rankings = [];
