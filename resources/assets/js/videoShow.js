@@ -26,7 +26,27 @@ $('[id=toggleVideoDescription]').click(function(e) {
     }
 });
 
-$(".dplayer-full-icon, .dplayer-full-in-icon").on('click', function(event){
+/* Standard syntax */
+document.addEventListener("fullscreenchange", function() {
+  handleFullscreenChange()
+});
+
+/* Firefox */
+document.addEventListener("mozfullscreenchange", function() {
+  handleFullscreenChange()
+});
+
+/* Chrome, Safari and Opera */
+document.addEventListener("webkitfullscreenchange", function() {
+  handleFullscreenChange()
+});
+
+/* IE / Edge */
+document.addEventListener("msfullscreenchange", function() {
+  handleFullscreenChange()
+});
+
+function handleFullscreenChange() {
   if (!is_mobile) {
     var videoWrap = $(".dplayer-video-wrap");
     if (videoWrap.css("padding-bottom") == "0px") {
@@ -35,4 +55,4 @@ $(".dplayer-full-icon, .dplayer-full-in-icon").on('click', function(event){
         videoWrap.css("padding-bottom", "0px");
     }
   }
-});
+}

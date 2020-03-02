@@ -49,6 +49,11 @@
 		<input type="datetime-local" class="form-control" name="created_at" id="created_at" placeholder="(optional)" value="{{ Carbon\Carbon::now()->format('Y-m-d\TH:i:s') }}">
 	</div>
 
+	<div class="form-group">
+		<label for="uploaded_at">Uploaded At</label>
+		<input type="datetime-local" class="form-control" name="uploaded_at" id="uploaded_at" placeholder="(optional)" value="{{ Carbon\Carbon::now()->format('Y-m-d\TH:i:s') }}">
+	</div>
+
 	<button type="submit" class="btn btn-info">Submit</button>
 	<br><br>
 </form>

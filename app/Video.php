@@ -9,7 +9,7 @@ use App\Subscribe;
 class Video extends Model
 {
 	protected $fillable = [
-        'id', 'title', 'caption', 'genre', 'category', 'season', 'tags', 'hd', 'sd', 'imgur', 'views', 'duration', 'outsource', 'created_at',
+        'id', 'title', 'caption', 'genre', 'category', 'season', 'tags', 'hd', 'sd', 'imgur', 'views', 'duration', 'outsource', 'created_at', 'uploaded_at',
     ];
 
     public function watch()

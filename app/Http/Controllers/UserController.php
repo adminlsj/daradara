@@ -15,7 +15,7 @@ class UserController extends Controller
     public function __construct()
     {
         $this->middleware('auth')->only('edit', 'update', 'destroy', 'savedJobsIndex', 'storeAvatar');
-        $this->middleware('sameUser')->only('edit', 'update', 'destroy', 'savedJobsIndex', 'storeAvatar');
+        $this->middleware('sameUser')->only('show', 'edit', 'update', 'destroy', 'savedJobsIndex', 'storeAvatar');
     }
 
     /**

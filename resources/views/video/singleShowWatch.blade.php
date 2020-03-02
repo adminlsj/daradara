@@ -4,23 +4,13 @@
   <ins class="adsbygoogle"
        style="display:block"
        data-ad-format="fluid"
-       data-ad-layout-key="-id+f-r-4c+aj"
+       data-ad-layout-key="-ie+f-17-3w+bl"
        data-ad-client="ca-pub-4485968980278243"
        data-ad-slot="3332191764"></ins>
 </div>
 
 <div style="padding-bottom: 5px; padding-left: 15px; padding-right: 15px; border-top: 1px solid #383838">
     <div style="margin-bottom: 5px; padding-top: 6px; position:relative;">
-        <!-- <p id="video-tags" class="text-ellipsis" style="padding-right:40px; margin-bottom:2px; font-size: 0.85em; {{ count($video->sd()) > 1 ? 'display:none;' : '' }}">
-          @foreach ($video->tags() as $tag)
-            @if (strpos($tag, '完整版') !== false)
-              <a style="color:#e5e5e5;" href="{{ route('video.watch') }}?v={{ App\Video::where('category', $video->category)->orderBy('created_at', 'desc')->first()->id }}">#{{ $tag }}</a>
-            @else
-              <a style="color:#e5e5e5;" href="{{ route('video.search') }}?query={{ $tag }}">#{{ $tag }}</a>
-            @endif
-          @endforeach
-        </p>-->
-
         <a style="text-decoration: none; pointer-events: none;">
           <h4 id="shareBtn-title" style="padding-right:40px; line-height: 23px; font-weight: 400; margin-top:0px; margin-bottom: 0px; color:white; font-size: 1.15em">{{ $video->title }}</h4>
         </a>
@@ -65,7 +55,16 @@
     </div>
 
     <div id="videoDescription" style="display: none; margin-top: 5px;">
-      <p style="white-space: pre-wrap; color: white; margin-bottom: 20px;">{{ $video->caption }}</p>
+      <p style="white-space: pre-wrap; color: white; margin-bottom: 5px;">{{ $video->caption }}</p>
+      <p id="video-tags" style="padding-right:40px; margin-bottom:20px;">
+        @foreach ($video->tags() as $tag)
+          @if (strpos($tag, '完整版') !== false)
+            <a href="{{ route('video.watch') }}?v={{ App\Video::where('category', $video->category)->orderBy('created_at', 'desc')->first()->id }}">#{{ $tag }}</a>
+          @else
+            <a href="{{ route('video.search') }}?query={{ $tag }}">#{{ $tag }}</a>
+          @endif
+        @endforeach
+      </p>
       <p style="white-space: pre-wrap; color: white; margin-bottom: 5px;"><strong>劇情大綱</strong></p>
       <p style="white-space: pre-wrap; color: white; margin-bottom: 20px;">{{ $watch != false ? $watch->description : ''}}</p>
       <p style="white-space: pre-wrap; color: white; margin-bottom: 5px;"><strong>登場人物</strong></p>

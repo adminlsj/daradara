@@ -73,6 +73,31 @@ class HomeController extends Controller
         }
     }
 
+    public function checkSubscribes()
+    {
+        if (Auth::check() && Auth::user()->email == 'laughseejapan@gmail.com') {
+            $watches = Watch::all();
+            $rankings = [];
+            foreach ($watches as $watch) {
+                $subscribes = $watch->subscribes()->count();
+                array_push($rankings, ['subscribes' => $subscribes, 'id' => $watch->id]);
+            }
+            usort($rankings, function ($a, $b) {
+                return $b['subscribes'] <=> $a['subscribes'];
+            });
+
+            $sortedWatches = [];
+            foreach ($rankings as $rank) {
+                array_push($sortedWatches, Watch::find($rank['id']));
+            }
+
+            return view('layouts.checkSubscribes', compact('sortedWatches'));
+
+        } else {
+            return redirect()->action('VideoController@home');
+        }
+    }
+
     public function categoryEdit()
     {
         $is_program = false;
@@ -143,10 +168,11 @@ class HomeController extends Controller
                 'duration' => $latest->duration,
                 'outsource' => false,
                 'created_at' => Carbon::createFromFormat('Y-m-d\TH:i:s', request('created_at'))->format('Y-m-d H:i:s'),
+                'uploaded_at' => Carbon::createFromFormat('Y-m-d\TH:i:s', request('uploaded_at'))->format('Y-m-d H:i:s'),
             ]);
 
             $watch = $video->watch();
-            $watch->updated_at = $video->created_at;
+            $watch->updated_at = $video->uploaded_at;
             $watch->save();
 
             $subscribes = $watch->subscribes();

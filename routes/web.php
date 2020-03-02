@@ -28,6 +28,7 @@ Route::post('/unsubscribe', 'VideoController@unsubscribe')->name('video.unsubscr
 Route::get('/about-us', 'HomeController@aboutUs');
 Route::get('/policy', 'HomeController@policy');
 Route::get('/check', 'HomeController@check');
+Route::get('/checkSubscribes', 'HomeController@checkSubscribes');
 Route::get('/categoryEdit', 'HomeController@categoryEdit')->name('category.edit');
 Route::post('/categoryUpdate', 'HomeController@categoryUpdate')->name('category.update');
 Route::get('/singleNewCreate', 'HomeController@singleNewCreate')->name('single.create');

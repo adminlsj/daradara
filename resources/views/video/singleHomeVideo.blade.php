@@ -13,7 +13,7 @@
 
 		        <p style="color: #a9a9a9; margin-top: -5px; margin-bottom: 2px; font-size: 0.8em;">
 		        	<i style="vertical-align:middle; font-size: 1.15em; margin-top: -2px; margin-right: -1px;" class="material-icons">play_circle_filled</i>
-		        	{{ $video->views() }} • {{ $video->genre() }} • {{ Carbon\Carbon::parse($video->created_at)->diffForHumans() }}
+		        	{{ $video->views() }} • {{ $video->genre() }} • {{ Carbon\Carbon::parse($video->uploaded_at)->diffForHumans() }}
 		        </p>
 		    </div>
 		</div>​

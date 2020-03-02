@@ -43,7 +43,7 @@
 							  </div>
 							</div>
 
-							<div style="margin: 7px 15px;">
+							<div style="margin: 7px 15px 0px 15px;">
 								<ins class="adsbygoogle"
 								     style="display:block;"
 								     data-ad-client="ca-pub-4485968980278243"

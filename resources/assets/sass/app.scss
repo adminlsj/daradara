@@ -125,6 +125,31 @@ nav input[type=text]:focus {
   box-shadow: inset 0px 0px 0px 0px red;
 }
 
+.multiple-link-wrapper {
+  position:relative;
+}
+
+.multiple-link-wrapper .overlay {
+  position:absolute;
+  left:0; top:0; bottom:0; right:0;
+}
+
+.multiple-link-wrapper .inner {
+  position:relative;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.multiple-link-wrapper .inner a {
+  color: #595959;
+  text-decoration: none;
+  pointer-events: all;
+}
+
+.multiple-link-wrapper .inner a:hover {
+  color: black;
+}
+
 .video-js .vjs-control-bar { 
   display: -webkit-box;
   display: -webkit-flex;
@@ -154,6 +179,14 @@ nav input[type=text]:focus {
   padding: 0px 20px;
 }
 
+.carousel-indicators {
+  text-align: right;
+  float: right;
+  right: 20px !important;
+  left: inherit;
+  top:10px;
+}
+
 .video-parts-wrapper span {
   margin-right:3px;
   padding: 6px 15px 6px 15px;
@@ -173,7 +206,7 @@ nav input[type=text]:focus {
 }
 
 .related-watch-wrap {
-  margin: 7px 0px 7px 15px;
+  margin: 14px 0px 14px 15px;
   padding-right: 15px;
 }
 
@@ -1348,18 +1381,17 @@ a > i {
   font-size: 0.94em;
 }
 
-#singleSearchVideo h4, #singleRankVideo h4 {
+#singleSearchVideo h4, #singleRankVideo h4, #singleSubscribeVideo h4 {
   margin-top:0px;
-  margin-bottom: 0px;
-  line-height: 19px;
+  margin-bottom: 1px;
+  line-height: 23px;
   font-size: 1.3em;
   font-weight: 400;
   color:black;
 }
 
-#singleSearchVideo p, #singleRankVideo p {
+#singleSearchVideo p, #singleRankVideo p, #singleSubscribeVideo p {
   color: #595959;
-  margin-top: 2px;
   margin-bottom: 0px;
   font-size: 0.94em;
 }
@@ -1370,7 +1402,7 @@ a > i {
   position: relative;
 }
 
-#singleSearchVideo .col-md-3 span {
+#singleSearchVideo .col-md-3 span, #singleSubscribeVideo .col-md-3 span {
   position: absolute;
   bottom:6px;
   right: 18px;
@@ -1385,6 +1417,10 @@ a > i {
 #searchBar {
   padding-left: 260px;
   padding-right: 15px;
+}
+
+.padding-desktop-only {
+  padding: 7px 0px;
 }
 
 @media (max-width: 991px) {
@@ -1429,19 +1465,13 @@ a > i {
     right: 9px;
   }
 
-  #singleSearchVideo h4 {
+  #singleSearchVideo h4, #singleRankVideo h4 {
     font-size: 1.05em;
+    line-height: 19px;
+    margin-bottom: 2px;
   }
 
-  #singleSearchVideo p {
-    font-size: 0.85em;
-  }
-
-  #singleRankVideo h4 {
-    font-size: 1.05em;
-  }
-
-  #singleRankVideo p {
+  #singleSearchVideo p, #singleRankVideo p {
     font-size: 0.85em;
   }
 
@@ -1456,6 +1486,10 @@ a > i {
   .main-content {
     width: 100%;
     padding: 0px;
+  }
+
+  .carousel-indicators {
+    right: 10px !important;
   }
 
   .nav-sub-width {
@@ -1575,6 +1609,10 @@ a > i {
 
   .watch-month-nav {
     width: 16.66%;
+  }
+
+  .padding-desktop-only {
+    padding: 0px;
   }
 }
 

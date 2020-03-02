@@ -28,7 +28,7 @@ class VideoController extends Controller
 
     public function home(Request $request){
         if ($request->has('g') && $request->g == 'newest') {
-            $videos = Video::whereDate('created_at', '>=', Carbon::now()->subWeek())->orderBy('created_at', 'desc')->get();
+            $videos = Video::whereDate('uploaded_at', '>=', Carbon::now()->subWeek())->orderBy('uploaded_at', 'desc')->get();
 
             return view('video.home', compact('videos'));
 
@@ -49,18 +49,18 @@ class VideoController extends Controller
                     $weeks = 1;
                     break;
             }
-            $videos = Video::where('genre', $genre)->whereDate('created_at', '>=', Carbon::now()->subWeeks($weeks))->orderBy('created_at', 'desc')->get();
+            $videos = Video::where('genre', $genre)->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks($weeks))->orderBy('uploaded_at', 'desc')->get();
 
             return view('video.home', compact('videos'));
 
         } else {
-            $videos = Video::whereDate('created_at', '>=', Carbon::now()->subWeek())->inRandomOrder()->limit(12)->get();
+            $videos = Video::whereDate('uploaded_at', '>=', Carbon::now()->subWeek())->inRandomOrder()->limit(12)->get();
             $variety = Video::where('genre', 'variety')
-                         ->whereDate('created_at', '>=', Carbon::now()->subMonth())->inRandomOrder()->limit(12)->get();
+                         ->whereDate('uploaded_at', '>=', Carbon::now()->subMonth())->inRandomOrder()->limit(12)->get();
             $drama = Video::where('genre', 'drama')
-                         ->whereDate('created_at', '>=', Carbon::now()->subWeek())->inRandomOrder()->limit(12)->get();
+                         ->whereDate('uploaded_at', '>=', Carbon::now()->subWeek())->inRandomOrder()->limit(12)->get();
             $anime = Video::where('genre', 'anime')
-                         ->whereDate('created_at', '>=', Carbon::now()->subWeek())->inRandomOrder()->limit(12)->get();
+                         ->whereDate('uploaded_at', '>=', Carbon::now()->subWeek())->inRandomOrder()->limit(12)->get();
 
             return view('video.home', compact('videos', 'variety', 'drama', 'anime'));
         }
@@ -69,22 +69,22 @@ class VideoController extends Controller
     public function rank(Request $request){
         if ($request->has('g') && $request->g != 'null') {
             $genre = $request->g;
-            $months = 1;
+            $weeks = 4;
             switch ($genre) {
                 case 'variety':
-                    $months = 1;
+                    $weeks = 4;
                     break;
                 case 'drama':
-                    $months = 1;
+                    $weeks = 1;
                     break;
                 case 'anime':
-                    $months = 1;
+                    $weeks = 1;
                     break;
                 default:
-                    $months = 1;
+                    $weeks = 1;
                     break;
             }
-            $videos = Video::where('genre', $genre)->whereDate('created_at', '>=', Carbon::now()->subMonths($months))->orderBy('views', 'desc')->paginate(10);
+            $videos = Video::where('genre', $genre)->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks($weeks))->orderBy('views', 'desc')->paginate(10);
             $html = $this->rankLoadHTML($videos);
             if ($request->ajax()) {
                 return $html;
@@ -92,7 +92,7 @@ class VideoController extends Controller
 
             return view('video.rankIndex', compact('videos'));
         } else {
-            $videos = Video::whereDate('created_at', '>=', Carbon::now()->subMonths(1))->orderBy('views', 'desc')->paginate(10);
+            $videos = Video::whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->orderBy('views', 'desc')->paginate(10);
             $html = $this->rankLoadHTML($videos);
             if ($request->ajax()) {
                 return $html;
@@ -120,7 +120,7 @@ class VideoController extends Controller
                     $months = 1;
                     break;
             }
-            $videos = Video::where('genre', $genre)->whereDate('created_at', '>=', Carbon::now()->subMonths($months))->orderBy('created_at', 'desc')->paginate(10);
+            $videos = Video::where('genre', $genre)->whereDate('uploaded_at', '>=', Carbon::now()->subMonths($months))->orderBy('uploaded_at', 'desc')->paginate(10);
             $html = $this->rankLoadHTML($videos);
             if ($request->ajax()) {
                 return $html;
@@ -128,7 +128,7 @@ class VideoController extends Controller
 
             return view('video.newestIndex', compact('videos'));
         } else {
-            $videos = Video::whereDate('created_at', '>=', Carbon::now()->subMonths(1))->orderBy('created_at', 'desc')->paginate(10);
+            $videos = Video::whereDate('uploaded_at', '>=', Carbon::now()->subMonths(1))->orderBy('uploaded_at', 'desc')->paginate(10);
             $html = $this->rankLoadHTML($videos);
             if ($request->ajax()) {
                 return $html;
@@ -237,22 +237,28 @@ class VideoController extends Controller
     }
 
     public function watch(Request $request){
-        /*$id = 2252;
+        $videos = Video::all();
+        foreach ($videos as $video) {
+            $video->uploaded_at = $video->created_at;
+            $video->save();
+        }
+
+        /*$id = 2759;
         $genre = 'variety';
-        $category = 'msydt';
-        $created_at = new Carbon('2019-03-07 11:47:15');
+        $category = 'ametalk';
+        $created_at = new Carbon('2019-01-10 11:47:15');
         for ($i = 1; $i <= 50; $i++) { 
             $video = Video::create([
                 'id' => $id,
-                'title' =>  $created_at->format('Y.m.d').' 美食冤大頭',
-                'caption' => $created_at->format('Y.m.d').' 美食冤大頭',
+                'title' =>  $created_at->format('Y.m.d').' Ametalk 毒舌糾察隊',
+                'caption' => $created_at->format('Y.m.d').' Ametalk 毒舌糾察隊',
                 'genre' => $genre,
                 'category' => $category,
                 'season' => '2020年',
-                'tags' => '美食冤大頭',
+                'tags' => 'Ametalk 毒舌糾察隊',
                 'hd' => 'https://archive.org/download/sqzw_11/SQZW0'.$i.'.mp4',
                 'sd' => 'https://archive.org/download/sqzw_11/SQZW0'.$i.'.mp4',
-                'imgur' => 'pending',
+                'imgur' => 'JMcgEkP',
                 'views' => 100000,
                 'duration' => 0,
                 'outsource' => false,
@@ -270,7 +276,7 @@ class VideoController extends Controller
 
             foreach ($video->sd() as $sd) {
                 $url = $sd;
-                if (strpos($url, "www.bilibili.com") !== FALSE) {
+                if (strpos($url, "www.bilibili.com") !== FALSE && !$video->outsource) {
                     $page = 1;
                     if (($pos = strpos($url, "?p=")) !== FALSE) { 
                         $page = substr($url, $pos + 3);
@@ -385,13 +391,13 @@ class VideoController extends Controller
             $first = true;
             foreach ($subscribes as $subscribe) {
                 if ($first) {
-                    $videos = Video::whereDate('created_at', '>=', Carbon::now()->subMonths(3))->where('category', $subscribe->category);
+                    $videos = Video::whereDate('uploaded_at', '>=', Carbon::now()->subMonths(3))->where('category', $subscribe->category);
                     $first = false;
                 } else {
                     $videos = $videos->orWhere('category', $subscribe->category);
                 }
             }
-            $videos = $videos->orderBy('created_at', 'desc')->paginate(10);
+            $videos = $videos->orderBy('uploaded_at', 'desc')->paginate(10);
 
             $html = $this->subscribeLoadHTML($videos);
             if ($request->ajax()) {
@@ -524,7 +530,7 @@ class VideoController extends Controller
         $idsArray = [];
 
         // Exact Match Query [e.g. TerraceHouse or 2012.09.14]
-        $exactQuery = Video::where('title', 'like', '%'.request('query').'%')->orderBy('created_at', 'desc')->get();
+        $exactQuery = Video::where('title', 'like', '%'.request('query').'%')->orderBy('uploaded_at', 'desc')->get();
         foreach ($exactQuery as $q) {
             if (!in_array($q->id, $idsArray)) {
                 array_push($videosArray, $q);
@@ -534,7 +540,7 @@ class VideoController extends Controller
 
         // Exact Order Match Query (search query in same order e.g. 2012 => 2>0>1>2) [e.g. 2012 09 14]
         $exactOrderQueryScope = '%'.implode('%', $queryArray).'%';
-        $exactOrderQuery = Video::where('title', 'like', $exactOrderQueryScope)->orderBy('created_at', 'desc')->get();
+        $exactOrderQuery = Video::where('title', 'like', $exactOrderQueryScope)->orderBy('uploaded_at', 'desc')->get();
         foreach ($exactOrderQuery as $q) {
             if (!in_array($q->id, $idsArray)) {
                 array_push($videosArray, $q);
@@ -543,7 +549,7 @@ class VideoController extends Controller
         }
 
         // Character Match Query (search query as a whole e.g. 2012 => contains 2/0/1/2) [e.g. 郡司桑 月曜]
-        $videosSelect = Video::orderBy('created_at', 'desc')->select('id', 'title', 'tags')->get()->toArray();
+        $videosSelect = Video::orderBy('uploaded_at', 'desc')->select('id', 'title', 'tags')->get()->toArray();
         $rankings = [];
         foreach ($videosSelect as $videoSelect) {
             $score = 0;
