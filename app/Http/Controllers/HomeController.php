@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Video;
 use App\Watch;
+use App\Subscribe;
+use App\User;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Response;
@@ -73,25 +75,33 @@ class HomeController extends Controller
         }
     }
 
-    public function checkSubscribes()
+    public function checkSubscribes(Request $request)
     {
         if (Auth::check() && Auth::user()->email == 'laughseejapan@gmail.com') {
-            $watches = Watch::all();
-            $rankings = [];
-            foreach ($watches as $watch) {
-                $subscribes = $watch->subscribes()->count();
-                array_push($rankings, ['subscribes' => $subscribes, 'id' => $watch->id]);
-            }
-            usort($rankings, function ($a, $b) {
-                return $b['subscribes'] <=> $a['subscribes'];
-            });
+            if ($request->has('c')) {
+                $category = $request->c;
+                $subscribes = Subscribe::where('category', $category)->get();
 
-            $sortedWatches = [];
-            foreach ($rankings as $rank) {
-                array_push($sortedWatches, Watch::find($rank['id']));
-            }
+                return view('layouts.checkSubscribesCategory', compact('subscribes'));
+                
+            } else {
+                $watches = Watch::all();
+                $rankings = [];
+                foreach ($watches as $watch) {
+                    $subscribes = $watch->subscribes()->count();
+                    array_push($rankings, ['subscribes' => $subscribes, 'id' => $watch->id]);
+                }
+                usort($rankings, function ($a, $b) {
+                    return $b['subscribes'] <=> $a['subscribes'];
+                });
 
-            return view('layouts.checkSubscribes', compact('sortedWatches'));
+                $sortedWatches = [];
+                foreach ($rankings as $rank) {
+                    array_push($sortedWatches, Watch::find($rank['id']));
+                }
+
+                return view('layouts.checkSubscribes', compact('sortedWatches'));
+            }
 
         } else {
             return redirect()->action('VideoController@home');

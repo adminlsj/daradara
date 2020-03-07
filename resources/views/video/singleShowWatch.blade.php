@@ -56,7 +56,7 @@
 
     <div id="videoDescription" style="display: none; margin-top: 5px;">
       <p style="white-space: pre-wrap; color: white; margin-bottom: 5px;">{{ $video->caption }}</p>
-      <p id="video-tags" style="padding-right:40px; margin-bottom:20px;">
+      <p id="video-tags" style="padding-right:10px; margin-bottom:20px;">
         @foreach ($video->tags() as $tag)
           @if (strpos($tag, '完整版') !== false)
             <a href="{{ route('video.watch') }}?v={{ App\Video::where('category', $video->category)->orderBy('created_at', 'desc')->first()->id }}">#{{ $tag }}</a>

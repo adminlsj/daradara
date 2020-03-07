@@ -237,19 +237,46 @@ class VideoController extends Controller
     }
 
     public function watch(Request $request){
-        /*$id = 2759;
+        // Bilibili Duration in bilibili.com
+        /*$video = Video::find($request->v);
+        $url = $video->sd;
+        $page = 1;
+        if (($pos = strpos($url, "?p=")) !== FALSE) { 
+            $page = substr($url, $pos + 3);
+            $url = str_replace("?p=".$page, "", $url);
+        }
+        if (($pos = strpos($url, "av")) !== FALSE) { 
+            $aid = substr($url, $pos + 2); 
+        }
+        try {
+            $curl_connection = curl_init("https://api.bilibili.com/x/web-interface/view?aid=".$aid);
+            curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+            curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+            $data = json_decode(curl_exec($curl_connection), true);
+            $duration = $data['data']['pages'][$page - 1]["duration"];
+            curl_close($curl_connection);
+
+            $video->duration = $duration - 1;
+            $video->save();
+
+        } catch(Exception $e) {
+            return $e->getMessage();
+        }*/
+
+        /*$id = 2852;
         $genre = 'variety';
-        $category = 'ametalk';
-        $created_at = new Carbon('2019-01-10 11:47:15');
-        for ($i = 1; $i <= 50; $i++) { 
+        $category = 'nmbqnl';
+        $created_at = new Carbon('2019-11-26 11:47:15');
+        for ($i = 6; $i <= 30; $i++) { 
             $video = Video::create([
                 'id' => $id,
-                'title' =>  $created_at->format('Y.m.d').' Ametalk 毒舌糾察隊',
-                'caption' => $created_at->format('Y.m.d').' Ametalk 毒舌糾察隊',
+                'title' =>  $created_at->format('Y.m.d').' 乃木坂去哪里 EP0'.$i,
+                'caption' => $created_at->format('Y.m.d').' 乃木坂去哪里 EP0'.$i,
                 'genre' => $genre,
                 'category' => $category,
                 'season' => '2020年',
-                'tags' => 'Ametalk 毒舌糾察隊',
+                'tags' => '乃木坂去哪里 乃木坂46',
                 'hd' => 'https://archive.org/download/sqzw_11/SQZW0'.$i.'.mp4',
                 'sd' => 'https://archive.org/download/sqzw_11/SQZW0'.$i.'.mp4',
                 'imgur' => 'JMcgEkP',
@@ -257,6 +284,7 @@ class VideoController extends Controller
                 'duration' => 0,
                 'outsource' => false,
                 'created_at' => $created_at,
+                'uploaded_at' => $created_at,
             ]);
             $created_at = $created_at->addDays(7);
             $id++;

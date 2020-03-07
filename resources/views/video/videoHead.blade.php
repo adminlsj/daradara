@@ -13,7 +13,7 @@
   "@context": "https://schema.org",
   "@type": "VideoObject",
   "name": "{{ $current->title }}",
-  "description": "{{ $current->caption }}",
+  "description": "{{ $current->caption == '' ? $current->title : $current->caption}}",
   "thumbnailUrl": [
     "https://i.imgur.com/{{ $current->imgur }}l.png"
    ],
