@@ -42,6 +42,11 @@ class User extends Authenticatable
         return $this->hasOne('App\Avatar');
     }
 
+    public function avatarDefault()
+    {
+        return "https://i.imgur.com/KqDtqhMb.jpg";
+    }
+
     public function avatarCircleB()
     {
         return "https://i.imgur.com/sMSpYFXb.jpg";
