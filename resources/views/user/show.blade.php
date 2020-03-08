@@ -36,7 +36,7 @@
 			@endforeach
 		@endif
 
-		@if (Auth::user()->id == $user->id)
+		@if (Auth::check() && Auth::user()->id == $user->id)
 			<form id="logout-form" action="{{ route('logout') }}" method="POST">
 		        {{ csrf_field() }}
 		        <button type="submit">登出</button>
