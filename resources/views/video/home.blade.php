@@ -2,7 +2,6 @@
 
 @section('nav')
 	@include('layouts.nav-main', ['theme' => 'white', 'logoImage' => 'https://i.imgur.com/M8tqx5K.png'])
-	@include('layouts.nav-home-mobile')
 @endsection
 
 @section('content')
@@ -10,8 +9,8 @@
 	@include('video.sidebarMenu', ['theme' => 'white'])
 </div>
 <div class="main-content">
-	<div style="background-color: #F5F5F5;" class="nav-home-mobile-padding">
-		<div class="padding-setup" style="overflow-x: hidden;">
+	<div style="background-color: #F5F5F5;">
+		<div class="padding-setup" style="overflow-x: hidden; padding-top:10px;">
 			<div class="home-ads-wrapper">
 				<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 				<!-- Horizontal Banner Ads -->
@@ -24,11 +23,11 @@
 				</script>
 			</div>
 
-			<div class="row" style="padding-top:6px; padding-bottom: 4px;">
+			<div class="row" style="padding-top:7px; padding-bottom: 4px;">
 				<div class="col-md-12">
 					<h4>
 						發燒影片
-						<a href="{{ route('video.rank') }}?g=variety" style="text-decoration: none; color: #323232;" class="pull-right">
+						<a href="{{ route('video.rank') }}" style="text-decoration: none; color: #323232;" class="pull-right">
 							<i style="color:#323232; vertical-align:middle; font-size: 1.4em; margin-top: -3px; margin-right: -3px;" class="material-icons">bar_chart</i>
 							排行榜
 							<i style="color:darkgray; vertical-align:middle; font-size: 1em; margin-top: -3px;" class="material-icons">arrow_forward_ios</i>
@@ -46,7 +45,7 @@
 				<div class="col-md-12">
 					<h4>
 						最新上傳
-						<a href="{{ route('video.rank') }}?g=variety" style="text-decoration: none; color: #323232;" class="pull-right">
+						<a href="{{ route('video.newest') }}" style="text-decoration: none; color: #323232;" class="pull-right">
 							<i style="color:#323232; vertical-align:middle; font-size: 1.4em; margin-top: -3px; margin-right: -3px;" class="material-icons">bar_chart</i>
 							排行榜
 							<i style="color:darkgray; vertical-align:middle; font-size: 1em; margin-top: -3px;" class="material-icons">arrow_forward_ios</i>
