@@ -24,10 +24,22 @@ class HomeController extends Controller
         return view('layouts.about-us', compact('is_program'));
     }
 
-    public function policy()
+    public function terms()
     {
         $is_program = false;
-        return view('layouts.policy', compact('is_program'));
+        return view('layouts.terms', compact('is_program'));
+    }
+
+    public function policies()
+    {
+        $is_program = false;
+        return view('layouts.policies', compact('is_program'));
+    }
+
+    public function copyright()
+    {
+        $is_program = false;
+        return view('layouts.copyright', compact('is_program'));
     }
 
     public function userReport(Request $request)

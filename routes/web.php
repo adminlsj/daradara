@@ -26,7 +26,9 @@ Route::post('/subscribe', 'VideoController@subscribe')->name('video.subscribe');
 Route::post('/unsubscribe', 'VideoController@unsubscribe')->name('video.unsubscribe');
 
 Route::get('/about-us', 'HomeController@aboutUs');
-Route::get('/policy', 'HomeController@policy');
+Route::get('/terms', 'HomeController@terms');
+Route::get('/policies', 'HomeController@policies');
+Route::get('/copyright', 'HomeController@copyright');
 Route::get('/check', 'HomeController@check');
 Route::get('/checkSubscribes', 'HomeController@checkSubscribes');
 Route::get('/categoryEdit', 'HomeController@categoryEdit')->name('category.edit');
