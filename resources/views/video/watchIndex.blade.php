@@ -11,7 +11,7 @@
 
 <div class="main-content">
   @include('layouts.nav-index')
-  <div style="background-color: #1F1F1F; margin-top: 27px; padding-top: 10px">
+  <div style="background-color: #1F1F1F; padding-top: 10px; {{ Request::is('drama') || Request::is('anime') ? 'margin-top: 27px;' : '' }}">
     <div style="padding-top: 10px" class="hidden-xs hidden-sm"></div>
     <div class="padding-setup">
       <div class="row home-video-wrapper">

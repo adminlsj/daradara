@@ -150,20 +150,12 @@ class VideoController extends Controller
 
         $genre = $request->path();
         if ($genre == 'variety') {
-            $year = $request->has('y') && $request->y != null ? $request->y : '2020';
-            switch ($request->p) {
-                case 'current':
-                    $watches = Watch::where('genre', $genre)->where('is_ended', false)->orderBy('updated_at', 'desc')->get();
-                    break;
+            $selected = Watch::where('category', 'monday')->orWhere('category', 'monitoring')->orWhere('category', '24xsbzx')->orWhere('category', 'home')->orWhere('category', 'lddtz')->orWhere('category', 'talk')->orWhere('category', 'nmbgsz')->orWhere('category', 'djyhly')->orWhere('category', 'syrddowntown')->orWhere('category', 'scgy')->orWhere('category', 'szbzddsj')->orWhere('category', 'vsarashi')->orWhere('category', 'yjyjdwxyh')->inRandomOrder()->get();
+            $newest = Video::where('genre', 'variety')->orderBy('uploaded_at', 'desc')->limit(12)->get();
+            $artist = Video::where('tags', 'LIKE', '%明星%')->orderBy('uploaded_at', 'desc')->limit(12)->get();
+            $trick = Video::where('tags', 'LIKE', '%整人%')->orderBy('uploaded_at', 'desc')->limit(12)->get();
+            return view('video.varietyIndex', compact('genre', 'selected', 'newest', 'artist', 'trick', 'is_program'));
 
-                case 'past':
-                    $watches = Watch::where('genre', $genre)->where('is_ended', true)->orderBy('updated_at', 'desc')->get();
-                    break;
-                
-                default:
-                    $watches = Watch::where('genre', $genre)->orderBy('updated_at', 'desc')->get();
-                    break;
-            }
         } else {
             $year = $request->has('y') && $request->y != null ? $request->y : '2020';
             if ($request->has('m') && $request->m != null) {

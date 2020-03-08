@@ -35,32 +35,6 @@
       </div>
     </div>
   </nav>
-@elseif (Request::is('variety'))
-  <nav style="background-color: #282828; margin-top: 50px;" class="nav-sub-width" >
-    <div style="background-color: #282828" class="container-fluid">
-      <div class="nav-tab-container-watch" style="background-color: white;">
-        <a class="variety-year-nav nav-rank-btn">
-          <h4>
-            <div class="custom-select">
-              <select id="watch-year-select">
-                <option {{ Request::has('y') && Request::get('y') == '2020' ? 'selected' : '' }} value="2020">2020年</option>
-                <option value="2020">2020年</option>
-              </select>
-            </div>
-          </h4>
-        </a>
-        <a class="variety-parameter-nav nav-rank-btn" href="{{ Request::path() }}?y={{ Request::get('y') }}&p=all">
-          <h4 class="{{ !Request::has('p') || Request::has('p') && Request::get('p') == 'all' ? 'nav-tab-active' : '' }}"><span>&nbsp;全部&nbsp;</span></h4>
-        </a>
-        <a class="variety-parameter-nav nav-rank-btn" href="{{ Request::path() }}?y={{ Request::get('y') }}&p=current">
-          <h4 class="{{ Request::has('p') && Request::get('p') == 'current' ? 'nav-tab-active' : '' }}"><span>&nbsp;放送中&nbsp;</span></h4>
-        </a>
-        <a class="variety-parameter-nav nav-rank-btn" href="{{ Request::path() }}?y={{ Request::get('y') }}&p=past">
-          <h4 class="{{ Request::has('p') && Request::get('p') == 'past' ? 'nav-tab-active' : '' }}"><span>&nbsp;已完結&nbsp;</span></h4>
-        </a>
-      </div>
-    </div>
-  </nav>
 @endif
 
 @section('script')
