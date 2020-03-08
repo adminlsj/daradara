@@ -15,7 +15,7 @@
 				<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 				<!-- Horizontal Banner Ads -->
 				<ins class="adsbygoogle"
-				     style="display:inline-block; width: calc(100%); border: 1px solid black"
+				     style="display:inline-block; width: calc(100%);"
 				     data-ad-client="ca-pub-4485968980278243"
 				     data-ad-slot="8455082664"></ins>
 				<script>
