@@ -88,6 +88,7 @@
     <script>
       var swiper = new Swiper('.swiper-container', {
         slidesPerView: 'auto',
+        freeMode: true,
         spaceBetween: 10,
       });
     </script>
