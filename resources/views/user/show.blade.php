@@ -14,7 +14,7 @@
 
 		<div style="padding: 10px 0px;">
 			<img class="lazy" style="float:left; border-radius: 50%; width: 70px; height: 70px;" src="{{ $user->avatarCircleB() }}" data-src="{{ $user->avatar == null ? $user->avatarDefault() : $user->avatar->filename }}" data-srcset="{{ $user->avatar == null ? $user->avatarDefault() : $user->avatar->filename }}">
-			@if ($user->id == Auth::user()->id)
+			@if (Auth::check() && $user->id == Auth::user()->id)
 				<a style="width:auto; height: auto; font-size: 1em; margin-top: 9px;" class="btn btn-info pull-right" data-toggle="modal" data-target="#uploadVideoModal">上傳影片</a>
 			@endif
 			<div style="height: 70px; margin-left: 80px">
