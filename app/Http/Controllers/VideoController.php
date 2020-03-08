@@ -154,7 +154,8 @@ class VideoController extends Controller
             $newest = Video::where('genre', 'variety')->orderBy('uploaded_at', 'desc')->limit(12)->get();
             $artist = Video::where('tags', 'LIKE', '%明星%')->orderBy('uploaded_at', 'desc')->limit(12)->get();
             $trick = Video::where('tags', 'LIKE', '%整人%')->orderBy('uploaded_at', 'desc')->limit(12)->get();
-            return view('video.varietyIndex', compact('genre', 'selected', 'newest', 'artist', 'trick', 'is_program'));
+
+            return view('video.varietyIndex', compact('genre', 'selected', 'newest', 'artist', 'trick'));
 
         } else {
             $year = $request->has('y') && $request->y != null ? $request->y : '2020';
