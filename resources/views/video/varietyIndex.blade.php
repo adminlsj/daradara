@@ -48,7 +48,7 @@
     </div>
     <div style="padding: 0px 20px; margin-top: -4px; text-align: center;" class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
       <a style="text-decoration: none; color: black; font-size: 1em;" href="{{ route('video.newest') }}?g=variety">
-        <div style="border: 1px solid black; padding: 8px; border-radius: 7px">顯示更多</div>
+        <div style="border: 1px solid black; padding: 8px; border-radius: 7px; font-weight: 500">顯示更多</div>
       </a>
     </div>
 
@@ -64,7 +64,7 @@
     </div>
     <div style="padding: 0px 20px; margin-top: -4px; text-align: center;" class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
       <a style="text-decoration: none; color: black; font-size: 1em;" href="{{ route('video.search') }}?query=明星">
-        <div style="border: 1px solid black; padding: 8px; border-radius: 7px">顯示更多</div>
+        <div style="border: 1px solid black; padding: 8px; border-radius: 7px; font-weight: 500">顯示更多</div>
       </a>
     </div>
 
@@ -80,7 +80,7 @@
     </div>
     <div style="padding: 0px 20px; margin-top: -4px; text-align: center;" class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
       <a style="text-decoration: none; color: black; font-size: 1em;" href="{{ route('video.search') }}?query=整人">
-        <div style="border: 1px solid black; padding: 8px; border-radius: 7px">顯示更多</div>
+        <div style="border: 1px solid black; padding: 8px; border-radius: 7px; font-weight: 500">顯示更多</div>
       </a>
     </div>
 
