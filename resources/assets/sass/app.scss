@@ -126,10 +126,6 @@ nav input[type=text]:focus {
   box-shadow: inset 0px 0px 0px 0px red;
 }
 
-.home-ads-wrapper ins {
-  height:200px;
-}
-
 .multiple-link-wrapper {
   position:relative;
 }
@@ -1431,10 +1427,6 @@ a > i {
 @media (max-width: 991px) {
   #content-div {
     padding-bottom: 50px
-  }
-
-  .home-ads-wrapper ins {
-    height:150px;
   }
 
   #searchBar {
