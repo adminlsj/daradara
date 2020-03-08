@@ -41,6 +41,7 @@
 		        {{ csrf_field() }}
 		        <button type="submit">登出</button>
 		    </form>
+		</div>
 		@endif
 	</div>
 </div>
