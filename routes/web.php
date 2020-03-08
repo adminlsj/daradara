@@ -36,6 +36,7 @@ Route::post('/singleNewStore', 'HomeController@singleNewStore')->name('single.st
 Route::get('/sitemap.xml', 'HomeController@sitemap');
 Route::get('/getSource', 'VideoController@getSource');
 Route::get('/userReport', 'HomeController@userReport')->name('email.userReport');
+Route::get('/userUploadVideo', 'HomeController@userUploadVideo')->name('email.userUploadVideo');
 
 Route::get('/trending', 'VideoController@watch')->name('video.trending');
 

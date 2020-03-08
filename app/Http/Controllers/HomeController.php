@@ -12,6 +12,7 @@ use Response;
 use Mail;
 use Auth;
 use App\Mail\UserReport;
+use App\Mail\UserUploadVideo;
 use App\Mail\SubscribeNotify;
 use Redirect;
 
@@ -38,6 +39,20 @@ class HomeController extends Controller
         $video = Video::find(request('video-id'));
         Mail::to('laughseejapan@gmail.com')->send(new UserReport($reason, $video));
         return Redirect::back()->withErrors('感謝您向我們提供意見或回報任何錯誤。');
+    }
+
+    public function userUploadVideo(Request $request)
+    {
+        $genre = request('channel-genre');
+        $category = request('channel-category');
+        $title = request('video-title');
+        $description = request('video-description');
+        $image = request('video-image');
+        $link = request('video-link');
+
+        $user = auth()->user();
+        Mail::to('laughseejapan@gmail.com')->send(new UserUploadVideo($user, $genre, $category, $title, $description, $image, $link));
+        return Redirect::back()->withErrors('影片將在系統處理完畢後自動上傳');   
     }
 
     public function sitemap()

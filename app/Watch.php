@@ -3,14 +3,20 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\User;
 use App\Video;
 use App\Subscribe;
 
 class Watch extends Model
 {
 	protected $fillable = [
-        'id', 'genre', 'category', 'season', 'title', 'description', 'imgur',
+        'id', 'user_id', 'genre', 'category', 'season', 'title', 'description', 'imgur',
     ];
+
+    public function user()
+    {
+        return User::find($this->user_id);
+    }
 
     public function videos()
     {

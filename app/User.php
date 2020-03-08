@@ -27,6 +27,11 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function watches()
+    {
+        return Watch::where('user_id', $this->id)->orderBy('created_at', 'desc')->get();
+    }
+
     public function subscribes()
     {
         return Subscribe::where('user_id', $this->id)->orderBy('created_at', 'desc')->get();
@@ -35,6 +40,11 @@ class User extends Authenticatable
     public function avatar()
     {
         return $this->hasOne('App\Avatar');
+    }
+
+    public function avatarCircleB()
+    {
+        return "https://i.imgur.com/sMSpYFXb.jpg";
     }
 
     public function shops()

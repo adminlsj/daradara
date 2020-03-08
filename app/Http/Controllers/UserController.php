@@ -14,8 +14,8 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->only('edit', 'update', 'destroy', 'savedJobsIndex', 'storeAvatar');
-        $this->middleware('sameUser')->only('show', 'edit', 'update', 'destroy', 'savedJobsIndex', 'storeAvatar');
+        $this->middleware('auth')->only('edit', 'update', 'destroy', 'storeAvatar');
+        $this->middleware('sameUser')->only('edit', 'update', 'destroy', 'storeAvatar');
     }
 
     /**
@@ -26,7 +26,8 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return view('user.show', compact('user'));
+        $watches = $user->watches();
+        return view('user.show', compact('user', 'watches'));
     }
 
     /**
