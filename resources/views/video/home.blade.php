@@ -11,36 +11,7 @@
 </div>
 <div class="main-content">
 	<div style="background-color: #F5F5F5;" class="nav-home-mobile-padding">
-		<div id="myCarousel" class="carousel slide" data-ride="carousel" style="{{ !Request::has('g') || Request::get('g') == 'newest' ? '' : 'display:none;' }}">
-		  <!-- Indicators -->
-		  <ol class="carousel-indicators">
-		    <li data-target="#myCarousel" data-slide-to="0" class="{{ !Request::has('g') ? 'active' : '' }}"></li>
-		    <li data-target="#myCarousel" data-slide-to="1" class="{{ Request::has('g') && Request::get('g') == 'newest' ? 'active' : ''}}"></li>
-		  </ol>
-
-		  <!-- Wrapper for slides -->
-		  <div class="carousel-inner">
-		    <div class="banner item {{ !Request::has('g') ? 'active' : '' }}">
-				<a href="{{ route('video.intro', ['variety', '月曜夜未央']) }}">
-					<div class="banner-img-container" style="position: relative; background-color: #080B1A;">
-						<img src="https://i.imgur.com/Zb9Tnxe.png" alt="月曜夜未央">
-						<div class="button">立即觀看</div>
-					</div>
-				</a>
-			</div>
-
-		    <div class="banner item {{ Request::has('g') && Request::get('g') == 'newest' ? 'active' : ''}}">
-				<a href="{{ route('video.intro', ['variety', '交給嵐吧_嵐的大挑戰']) }}">
-					<div class="banner-img-container" style="position: relative; background-color: #EAE5B9;">
-						<img src="https://i.imgur.com/kJylGtE.png" alt="交給嵐吧 / 嵐的大挑戰">
-						<div style="color: #372020; border-color: #372020" class="button">立即觀看</div>
-					</div>
-				</a>
-			</div>
-		  </div>
-		</div>
-
-		<div class="padding-setup" style="overflow-x: hidden; {{ !Request::has('g') || Request::get('g') == 'newest' ? 'padding-top: 10px' : '' }}">
+		<div class="padding-setup" style="overflow-x: hidden;">
 			<div class="row home-video-wrapper">
 				@foreach ($videos as $video)
 					@include('video.singleHomeVideo')
