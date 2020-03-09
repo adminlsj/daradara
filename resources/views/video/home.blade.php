@@ -24,21 +24,10 @@
 				</script>
 			</div>
 
-			<div class="hidden-md hidden-lg">
-				<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-				<ins class="adsbygoogle"
-				     style="display:inline-block; width: calc(100%); height:150px;"
-				     data-ad-client="ca-pub-4485968980278243"
-				     data-ad-slot="2160211323"></ins>
-				<script>
-				     (adsbygoogle = window.adsbygoogle || []).push({});
-				</script>
-			</div>
-
 			<link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css">
 		    <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
 
-		    <div style="margin-top: 28px; padding: 0px 20px; padding-bottom: 10px">
+		    <div id='home-first-title' style="padding: 0px 20px; padding-bottom: 10px">
 		      <h4>LaughSeeJapan熱門頻道<a href="{{ route('video.varietyList') }}" style="float: right; text-decoration: none; color: black"><i style="vertical-align:middle; font-size: 1em; margin-top: -3.5px;" class="material-icons">arrow_forward_ios</i></a></h4>
 		    </div>
 		    <div class="swiper-container">
