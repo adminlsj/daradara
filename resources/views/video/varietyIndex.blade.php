@@ -72,7 +72,7 @@
     <div class="row no-gutter" style="padding: 0px 15px">
       <div class="video-sidebar-wrapper">
           <div id="sidebar-results"><!-- results appear here --></div>
-          <div style="text-align: center;" class="ajax-loading"><img style="width: 40px; height: auto; padding-top: 25px; padding-bottom: 45px;" src="https://i.imgur.com/TcZjkZa.gif"/></div>
+          <div style="text-align: center;" class="ajax-loading"><img style="width: 40px; height: auto; padding-top: 25px; padding-bottom: 50px;" src="https://i.imgur.com/TcZjkZa.gif"/></div>
       </div>
     </div>
   </div>
