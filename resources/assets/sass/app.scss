@@ -1434,6 +1434,29 @@ a > i {
   border-radius: 2px;
 }
 
+.show-more-btn {
+  padding: 0px 20px;
+  margin-top: -4px;
+  text-align: center;
+}
+
+.show-more-btn a {
+  text-decoration: none;
+  color: black;
+  font-size: 1em;
+}
+
+.show-more-btn div {
+  border: 1px solid black;
+  padding: 8px;
+  border-radius: 7px;
+  font-weight: 500;
+}
+
+.show-more-btn div:hover {
+  background-color: #e5e5e5;
+}
+
 #searchBar {
   padding-left: 260px;
   padding-right: 15px;
