@@ -27,16 +27,28 @@ class VideoController extends Controller
     }
 
     public function home(Request $request){
-        $trending = Video::where('genre', 'variety')->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(4))->orWhere('genre', 'drama')->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->inRandomOrder()->limit(12)->get();
-        $newest = Video::orderBy('uploaded_at', 'desc')->limit(12)->get();
+        $selected = Watch::where('category', 'monday')->orWhere('category', 'monitoring')->orWhere('category', '24xsbzx')->orWhere('category', 'home')->orWhere('category', 'lddtz')->orWhere('category', 'talk')->orWhere('category', 'nmbgsz')->orWhere('category', 'djyhly')->orWhere('category', 'syrddowntown')->orWhere('category', 'scgy')->orWhere('category', 'szbzddsj')->orWhere('category', 'vsarashi')->orWhere('category', 'yjyjdwxyh')->inRandomOrder()->get();
+        $trendings = Video::where('genre', 'variety')->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(4))->orWhere('genre', 'drama')->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->inRandomOrder()->limit(8)->get();
+        $newest = Video::orderBy('uploaded_at', 'desc')->limit(8)->get();
         $variety = Video::where('genre', 'variety')
-                     ->whereDate('uploaded_at', '>=', Carbon::now()->subMonth())->inRandomOrder()->limit(12)->get();
+                     ->whereDate('uploaded_at', '>=', Carbon::now()->subMonth())->inRandomOrder()->limit(8)->get();
         $drama = Video::where('genre', 'drama')
-                     ->whereDate('uploaded_at', '>=', Carbon::now()->subWeek())->inRandomOrder()->limit(12)->get();
+                     ->whereDate('uploaded_at', '>=', Carbon::now()->subWeek())->inRandomOrder()->limit(8)->get();
         $anime = Video::where('genre', 'anime')
-                     ->whereDate('uploaded_at', '>=', Carbon::now()->subWeek())->inRandomOrder()->limit(12)->get();
+                     ->whereDate('uploaded_at', '>=', Carbon::now()->subWeek())->inRandomOrder()->limit(8)->get();
+        $load_more = Video::where('genre', 'variety')->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(4))->orWhere('genre', 'drama')->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->inRandomOrder()->paginate(8);
 
-        return view('video.home', compact('trending', 'newest', 'variety', 'drama', 'anime'));
+        $html = '';
+        foreach ($load_more as $video) {
+            $html .= view('video.singleLoadMoreSliderVideos', compact('video'));
+        }            
+        if ($request->ajax()) {
+            return $html;
+        }
+
+        $is_mobile = $this->checkMobile();
+
+        return view('video.home', compact('selected', 'trendings', 'newest', 'variety', 'drama', 'anime', 'load_more', 'is_mobile'));
     }
 
     public function rank(Request $request){
