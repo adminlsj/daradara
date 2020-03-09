@@ -18,7 +18,7 @@
     <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
 
     <div style="padding: 0px 20px; padding-bottom: 10px">
-      <h4>LaughSeeJapan熱門頻道<span style="float: right;"><i style="vertical-align:middle; font-size: 1em; margin-top: -3.5px;" class="material-icons">arrow_forward_ios</i></span></h4>
+      <h4>LaughSeeJapan熱門頻道<a href="{{ route('video.varietyList') }}" style="float: right; text-decoration: none; color: black"><i style="vertical-align:middle; font-size: 1em; margin-top: -3.5px;" class="material-icons">arrow_forward_ios</i></a></h4>
     </div>
     <div class="swiper-container">
       <div class="swiper-wrapper">

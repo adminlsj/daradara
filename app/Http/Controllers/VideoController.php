@@ -194,6 +194,13 @@ class VideoController extends Controller
         return view('video.watchIndex', compact('genre', 'watches', 'is_program'));
     }
 
+    public function genreList(Request $request){
+        $genre = str_replace('List', '', $request->path());
+        $watches = Watch::where('genre', $genre)->orderBy('updated_at', 'desc')->get();
+
+        return view('video.genreList', compact('genre', 'watches'));
+    }
+
     public function intro(String $genre, String $title, Request $request){
         $title = str_replace("_", " / ", $title);
         $title = str_replace("-", " ", $title);

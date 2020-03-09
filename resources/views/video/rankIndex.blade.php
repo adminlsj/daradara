@@ -11,7 +11,20 @@
 <div class="main-content">
 	@include('layouts.nav-rank')
 	<div style="background-color: #F5F5F5; margin-top: 33px; padding-top: 10px" class="video-sidebar-wrapper padding-setup">
-		<div style="padding-top: 6px" class="hidden-xs hidden-sm"></div>
+		@switch(Request::get('g'))
+		    @case('variety')
+		        <h4>綜藝發燒影片</h4>
+		        @break
+		    @case('drama')
+		        <h4>日劇發燒影片</h4>
+		        @break
+		    @case('anime')
+		        <h4>動漫發燒影片</h4>
+		        @break
+		    @default
+		        <h4>最夯發燒影片</h4>
+		@endswitch
+		<div style="padding-top: 9px"></div>
 	    <div id="sidebar-results"><!-- results appear here --></div>
 	    <div style="text-align: center;" class="ajax-loading"><img style="width: 40px; height: auto; padding-top: 15px; padding-bottom: 30px;" src="https://i.imgur.com/TcZjkZa.gif"/></div>
 	</div>

@@ -14,7 +14,7 @@
 			<div class="hidden-xs hidden-sm">
 				<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 				<ins class="adsbygoogle"
-				     style="display:block; border: solid 1px black"
+				     style="display:block;"
 				     data-ad-client="ca-pub-4485968980278243"
 				     data-ad-slot="4478704168"
 				     data-ad-format="auto"
@@ -27,7 +27,7 @@
 			<div class="hidden-md hidden-lg">
 				<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 				<ins class="adsbygoogle"
-				     style="display:inline-block; width: calc(100%); height:150px; border: solid 1px black"
+				     style="display:inline-block; width: calc(100%); height:150px;"
 				     data-ad-client="ca-pub-4485968980278243"
 				     data-ad-slot="2160211323"></ins>
 				<script>
@@ -39,7 +39,7 @@
 		    <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
 
 		    <div style="margin-top: 28px; padding: 0px 20px; padding-bottom: 10px">
-		      <h4>LaughSeeJapan熱門頻道<span style="float: right;"><i style="vertical-align:middle; font-size: 1em; margin-top: -3.5px;" class="material-icons">arrow_forward_ios</i></span></h4>
+		      <h4>LaughSeeJapan熱門頻道<a href="{{ route('video.varietyList') }}" style="float: right; text-decoration: none; color: black"><i style="vertical-align:middle; font-size: 1em; margin-top: -3.5px;" class="material-icons">arrow_forward_ios</i></a></h4>
 		    </div>
 		    <div class="swiper-container">
 		      <div class="swiper-wrapper">

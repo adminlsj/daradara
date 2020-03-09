@@ -45,6 +45,7 @@ Route::get('/trending', 'VideoController@watch')->name('video.trending');
 Route::get('/rank', 'VideoController@rank')->name('video.rank');
 Route::get('/newest', 'VideoController@newest')->name('video.newest');
 Route::get('/variety', 'VideoController@genre')->name('video.variety');
+Route::get('/varietyList', 'VideoController@genreList')->name('video.varietyList');
 Route::get('/drama', 'VideoController@genre')->name('video.drama');
 Route::get('/anime', 'VideoController@genre')->name('video.anime');
 Route::get('/{genre}/{title}', 'VideoController@intro')->name('video.intro');
