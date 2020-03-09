@@ -5,6 +5,30 @@
     <title>{{ $watch->title }} | {{ $watch->genre() }}線上看 | 中文字幕 | 娛見日本 LaughSeeJapan</title>
     <meta name="title" content="{{ $watch->title }} | {{ $watch->genre() }}線上看 | 中文字幕 | 娛見日本 LaughSeeJapan">
     <meta name="description" content="{{ $watch->description }}">
+
+    <script type="application/ld+json">
+	{
+	  "@context": "https://schema.org",
+	  "@type": "VideoObject",
+	  "name": "{{ $first->title }}",
+	  "description": "{{ $first->caption == '' ? $first->title : $first->caption}}",
+	  "thumbnailUrl": [
+	    "https://i.imgur.com/{{ $first->imgur }}l.png"
+	   ],
+	  "uploadDate": "{{ \Carbon\Carbon::parse($first->created_at)->format('Y-m-d\Th:i:s').'+00:00' }}",
+	  "duration": "{{ $first->durationData() }}",
+	  @if ($first->outsource)
+	      "embedUrl": "{!! $first->source() !!}",
+	  @else
+	      "contentUrl": "{!! $first->source() !!}",
+	  @endif
+	  "interactionStatistic": {
+	    "@type": "InteractionCounter",
+	    "interactionType": { "@type": "http://schema.org/WatchAction" },
+	    "userInteractionCount": {{ $first->views }}
+	  }
+	}
+	</script>
 @endsection
 
 @section('nav')
@@ -61,7 +85,15 @@
 						    <div id="{{ $video->id }}" style="padding: 7px 4px;">
 							  <a href="{{ route('video.watch') }}?v={{ $video->id }}" class="row no-gutter">
 							    <div style="padding-left: 12px; padding-right: 4px; position: relative;" class="col-xs-6 col-sm-6 col-md-3">
-							      <img class="lazy" style="width: 100%; height: 100%;" src="{{ $video->imgur16by9() }}" data-src="{{ $video->imgurL() }}" data-srcset="{{ $video->imgurL() }}" alt="{{ $video->title }}">
+							      @if ($loop->iteration == 1)
+								    <div class="aspect-ratio">
+								        <video style="width: 100%; height: auto" poster="{{ $video->imgurL() }}">
+										  <source src="{!! $video->source() !!}" type="video/mp4">
+										</video>
+									</div>
+							      @else
+								    <img class="lazy" style="width: 100%; height: 100%;" src="{{ $video->imgur16by9() }}" data-src="{{ $video->imgurL() }}" data-srcset="{{ $video->imgurL() }}" alt="{{ $video->title }}">
+							      @endif
 							      <img style="opacity: 0.6;" class="play-button-cover" src="https://i.imgur.com/WSrfkoQ.png" alt="play button">
 							      <img class="play-button-cover" src="https://i.imgur.com/BrOdkqU.png" alt="play button">
 							      <span style="position: absolute; bottom:6px; right: 9px; background-color: rgba(0,0,0,0.8); color: white; padding: 1px 5px 1px 5px; opacity: 0.9; font-size: 0.85em; border-radius: 2px;">{{ $video->duration() }}</span>

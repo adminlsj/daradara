@@ -1,5 +1,5 @@
 <nav class="{{ $theme == 'dark' ? 'dark-theme-nav-main' : 'white-theme-nav-main' }}">
-  <div class="container-fluid responsive-frame">
+  <div class="container-fluid">
     <div style="height: 50px;">
       <i style="vertical-align:middle; margin-left: 10px; margin-right:25px; font-size: 1.8em; margin-top: 9px" class="material-icons hidden-xs hidden-sm">menu</i>
 

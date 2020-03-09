@@ -233,4 +233,70 @@ class HomeController extends Controller
         $len = strpos($string, $end, $ini) - $ini;
         return substr($string, $ini, $len);
     }
+
+    public function bccToSrt(String $url){
+        try {
+            $curl_connection = curl_init($url);
+            curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+            curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+            $data = json_decode(curl_exec($curl_connection), true);
+            curl_close($curl_connection);
+
+            for ($i=0; $i < count($data['body']); $i++) { 
+                $current = $data['body'][$i];
+                echo ($i + 1).'<br>';
+
+                $from_seconds = floor($current['from']);
+                $from_miliseconds = floor(($current['from'] - floor($current['from'])) * 1000);
+                if ($from_miliseconds < 100) {
+                    $from_miliseconds = $from_miliseconds.'0';
+                }
+
+                $from_hours = floor($from_seconds / 3600);
+                $from_mins = floor($from_seconds / 60 % 60);
+                $from_secs = floor($from_seconds % 60);
+
+                if ($from_hours < 10) {
+                    $from_hours = '0'.$from_hours;
+                }
+                if ($from_mins < 10) {
+                    $from_mins = '0'.$from_mins;
+                }
+                if ($from_secs < 10) {
+                    $from_secs = '0'.$from_secs;
+                }
+
+                $to_seconds = floor($current['to']);
+                $to_miliseconds = ($current['to'] - floor($current['to'])) * 1000;
+                $to_miliseconds = floor(($current['from'] - floor($current['from'])) * 1000);
+                if ($to_miliseconds < 100) {
+                    $to_miliseconds = $to_miliseconds.'0';
+                }
+                
+                $to_hours = floor($to_seconds / 3600);
+                $to_mins = floor($to_seconds / 60 % 60);
+                $to_secs = floor($to_seconds % 60);
+
+                if ($to_hours < 10) {
+                    $to_hours = '0'.$to_hours;
+                }
+                if ($to_mins < 10) {
+                    $to_mins = '0'.$to_mins;
+                }
+                if ($to_secs < 10) {
+                    $to_secs = '0'.$to_secs;
+                }
+
+                echo $from_hours.':'.$from_mins.':'.$from_secs.','.$from_miliseconds.' --> '.$to_hours.':'.$to_mins.':'.$to_secs.','.$to_miliseconds.'<br>';
+
+                echo $current['content'];
+                echo '<br>';
+                echo '<br>';
+            }
+
+        } catch(Exception $e) {
+            return $e->getMessage();
+        }
+    }
 }

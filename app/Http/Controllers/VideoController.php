@@ -220,16 +220,17 @@ class VideoController extends Controller
         }
 
         $dropdown = Watch::where('category', $watch->category)->orderBy('created_at', 'asc')->get();
-        $related = Watch::where('genre', $watch->genre)->orderBy('created_at', 'desc')->limit(30)->get();
+        $related = Watch::where('genre', $watch->genre)->orderBy('updated_at', 'desc')->limit(32)->get();
 
         $is_program = true;
+        $first = $watch->videos()->last();
 
         $is_subscribed = false;
         if (Auth::check() && Subscribe::where('user_id', Auth::user()->id)->where('category', $watch->category)->first() != null) {
             $is_subscribed = true;
         }
 
-        return view('video.intro', compact('watch', 'videos', 'dropdown', 'related', 'is_program', 'is_subscribed'));
+        return view('video.intro', compact('watch', 'videos', 'dropdown', 'related', 'is_program', 'first', 'is_subscribed'));
     }
 
     public function watch(Request $request){
