@@ -49,7 +49,7 @@ class HomeController extends Controller
                 'Referer: https://www.bilibili.com/video/av95065476',
                 'X-Forwarded-For: 127.0.0.1:8000',
             ]);
-            $_SERVER["HTTP_X_FORWARDED_FOR"] = '127.0.0.1';
+            $_SERVER["HTTP_X_FORWARDED_FOR"] = '127.0.0.1:8000';
             return $data = json_decode(curl_exec($curl_connection), true);
             curl_close($curl_connection);
 
