@@ -1,6 +1,6 @@
 @if ($video->outsource)
   <div class="aspect-ratio" style="background-color: black; background-image: url('https://i.imgur.com/o2hJHsfl.png'); background-position: center; background-repeat: no-repeat; background-size: 30px;">
-      <iframe src="{{ $video->sd }}" style="border: 0; overflow: hidden;" allow="autoplay" allowfullscreen></iframe>
+      <iframe src="//player.bilibili.com/player.html?aid=95065476&cid=162286742&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
   </div>
 
 @else
