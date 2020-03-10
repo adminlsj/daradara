@@ -36,7 +36,13 @@ class VideoController extends Controller
                      ->whereDate('uploaded_at', '>=', Carbon::now()->subWeek())->inRandomOrder()->limit(8)->get();
         $anime = Video::where('genre', 'anime')
                      ->whereDate('uploaded_at', '>=', Carbon::now()->subWeek())->inRandomOrder()->limit(8)->get();
-        $load_more = Video::where('genre', 'variety')->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(4))->orWhere('genre', 'drama')->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->inRandomOrder()->paginate(8);
+        $load_more = Video::where(function ($query) {
+                            $query->where('genre', '=', 'variety')
+                                  ->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(4));
+                        })->orWhere(function ($query) {
+                            $query->where('genre', '=', 'drama')
+                                  ->orWhere('uploaded_at', '>=', Carbon::now()->subWeeks(1));
+                        })->inRandomOrder()->paginate(8);
 
         $html = '';
         foreach ($load_more as $video) {
