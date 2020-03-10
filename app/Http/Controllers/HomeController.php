@@ -45,6 +45,7 @@ class HomeController extends Controller
             curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
             curl_setopt($curl_connection, CURLOPT_HTTPHEADER, [
+                'Sec-Fetch-Site: same-origin',
                 'Referer: https://www.bilibili.com/video/av95065476',
                 'X-Forwarded-For: 127.0.0.1:8000',
             ]);
