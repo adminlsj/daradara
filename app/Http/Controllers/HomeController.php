@@ -38,10 +38,7 @@ class HomeController extends Controller
             $cid = $data['data']['pages'][$page - 1]["cid"];
             curl_close($curl_connection);
 
-            $payload = 'appkey=iVGUTjsxvpLeuDCf&cid='.$cid.'&otype=json&quality=2&type=mp4';
-            $sign = md5(iconv('UTF-8', 'GBK', $payload.'aHRmhWMLkdeMuILqORnYZocwMBpMEOdt'));
-
-            $url = "https://api.bilibili.com/x/player/playurl?avid=".$aid."&cid=".$cid."&qn=0&type=mp4&otype=json&fnver=0&fnval=1&platform=html5&html5=1&high_quality=1&appkey=iVGUTjsxvpLeuDCf&sign=".$sign;
+            $url = "https://api.bilibili.com/x/player/playurl?avid=".$aid."&cid=".$cid."&qn=0&type=mp4&otype=json&fnver=0&fnval=1&platform=html5&html5=1&high_quality=1";
 
             $curl_connection = curl_init($url);
             curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
@@ -49,6 +46,7 @@ class HomeController extends Controller
             curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
             curl_setopt($curl_connection, CURLOPT_HTTPHEADER, [
                 'Referer: https://www.bilibili.com/video/av95065476',
+                'X-Forwarded-For: 120.92.78.97',
             ]);
             return $data = json_decode(curl_exec($curl_connection), true);
             curl_close($curl_connection);
