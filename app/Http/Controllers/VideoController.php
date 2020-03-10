@@ -36,18 +36,12 @@ class VideoController extends Controller
                      ->whereDate('uploaded_at', '>=', Carbon::now()->subWeek())->inRandomOrder()->limit(8)->get();
         $anime = Video::where('genre', 'anime')
                      ->whereDate('uploaded_at', '>=', Carbon::now()->subWeek())->inRandomOrder()->limit(8)->get();
-        $load_more = Video::where(function ($query) {
-                            $query->where('genre', '=', 'variety')
-                                  ->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(4));
-                        })->orWhere(function ($query) {
-                            $query->where('genre', '=', 'drama')
-                                  ->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1));
-                        })->inRandomOrder()->paginate(8);
+        $load_more = Video::where('genre', 'variety')->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(4))->orWhere('genre', 'drama')->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->orderBy('views', 'desc')->paginate(8);
 
         $html = '';
         foreach ($load_more as $video) {
             $html .= view('video.singleLoadMoreSliderVideos', compact('video'));
-        }            
+        }
         if ($request->ajax()) {
             return $html;
         }
@@ -172,7 +166,7 @@ class VideoController extends Controller
             $newest = Video::where('genre', 'variety')->orderBy('uploaded_at', 'desc')->limit(8)->get();
             $artist = Video::whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(4))->where('tags', 'LIKE', '%明星%')->inRandomOrder()->limit(8)->get();
             $trick = Video::whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(4))->where('tags', 'LIKE', '%整人%')->inRandomOrder()->limit(8)->get();
-            $trendings = Video::where('genre', 'variety')->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(4))->inRandomOrder()->paginate(8);
+            $trendings = Video::where('genre', 'variety')->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(4))->orderBy('views', 'desc')->paginate(8);
 
             $html = '';
             foreach ($trendings as $video) {
