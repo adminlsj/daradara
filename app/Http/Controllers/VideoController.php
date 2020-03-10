@@ -41,7 +41,7 @@ class VideoController extends Controller
                                   ->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(4));
                         })->orWhere(function ($query) {
                             $query->where('genre', '=', 'drama')
-                                  ->orWhere('uploaded_at', '>=', Carbon::now()->subWeeks(1));
+                                  ->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1));
                         })->inRandomOrder()->paginate(8);
 
         $html = '';
