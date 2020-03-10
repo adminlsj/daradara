@@ -81,7 +81,7 @@
 		    </div>
 		    @include('video.single-video-slider', ['videos' => $drama])
 		    <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 show-more-btn">
-		      <a href="{{ route('video.rank') }}?g=drama">
+		      <a href="{{ route('video.drama') }}">
 		        <div>顯示更多</div>
 		      </a>
 		    </div>
@@ -91,7 +91,7 @@
 		    </div>
 		    @include('video.single-video-slider', ['videos' => $anime])
 		    <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 show-more-btn">
-		      <a href="{{ route('video.rank') }}?g=anime">
+		      <a href="{{ route('video.anime') }}">
 		        <div>顯示更多</div>
 		      </a>
 		    </div>
