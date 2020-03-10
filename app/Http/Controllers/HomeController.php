@@ -20,49 +20,6 @@ class HomeController extends Controller
 {
     public function aboutUs()
     {
-        $url = 'https://www.bilibili.com/video/av95065476';
-        $page = 1;
-        if (($pos = strpos($url, "?p=")) !== FALSE) { 
-            $page = substr($url, $pos + 3);
-            $url = str_replace("?p=".$page, "", $url);
-        }
-        if (($pos = strpos($url, "av")) !== FALSE) { 
-            $aid = substr($url, $pos + 2); 
-        }
-        try {
-            $curl_connection = curl_init("https://api.bilibili.com/x/web-interface/view?aid=".$aid);
-            curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
-            curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
-            $data = json_decode(curl_exec($curl_connection), true);
-            $cid = $data['data']['pages'][$page - 1]["cid"];
-            curl_close($curl_connection);
-
-            $url = "https://api.bilibili.com/x/player/playurl?avid=".$aid."&cid=".$cid."&qn=0&type=mp4&otype=json&fnver=0&fnval=1&platform=html5&html5=1&high_quality=1";
-
-            $curl_connection = curl_init($url);
-            curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
-            curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
-            curl_setopt($curl_connection, CURLOPT_HTTPHEADER, [
-                'Sec-Fetch-Site: same-origin',
-                'Referer: https://www.bilibili.com/video/av95065476',
-                'X-Forwarded-For: 127.0.0.1:8000',
-            ]);
-            $_SERVER["HTTP_X_FORWARDED_FOR"] = '127.0.0.1:8000';
-            return $data = json_decode(curl_exec($curl_connection), true);
-            curl_close($curl_connection);
-
-            $durl = $data['data']['durl'][0];
-            $url = $durl['url'];
-            if ($durl['backup_url'] != null && strpos($durl['backup_url'][0], 'upos-hz-mirrorakam') !== false) {
-                $url = $durl['backup_url'][0];
-            }
-
-            return $url;
-        } catch(Exception $e) {
-            return $e->getMessage();
-        }
         $is_program = false;
         return view('layouts.about-us', compact('is_program'));
     }
