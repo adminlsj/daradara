@@ -25,13 +25,15 @@ $.ajax({
     beforeSend: function(request) {
         request.setRequestHeader("User-Agent", 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:56.0) Gecko/20100101 Firefox/56.0');
         request.setRequestHeader("Host", 'api.bilibili.com');
+        request.setRequestHeader("Referer", 'https://www.bilibili.com/video/av94295388');
         request.setRequestHeader("Cookie", 'SESSDATA=1feadc09%2C1582358038%2Ca8f2f511;');
     },
+    crossDomain: true,
     dataType: "json",
     url: 'https://api.bilibili.com/x/player/playurl?avid=94295388&cid=160981360&qn=0&type=mp4&otype=json&fnver=0&fnval=1&platform=html5&html5=1&high_quality=1',
     success: function(data) {
         alert(data['data']['durl'][0]['url']);
-    }
+    },
 });
 
 $('[id=toggleSearchBar]').click(function(e) {
