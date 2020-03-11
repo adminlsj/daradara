@@ -445,14 +445,6 @@ nav input[type=text]:focus {
   font-size: 0.85em;
 }
 
-.show-panel-icons .single-icon:focus {
-  color: #3ea6ff;
-}
-
-@keyframes pulse {
-  0% { box-shadow: 0 0 0 0 var(--hover); }
-}
-
 .circle {
   width:60px;
   height:60px;
