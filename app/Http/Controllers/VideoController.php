@@ -408,6 +408,8 @@ class VideoController extends Controller
                 $anime = Watch::where('genre', 'anime')->orderBy('updated_at', 'desc')->limit(15)->get();
                 return view('video.subscribeIndexEmpty', compact('variety', 'drama', 'anime'));
             }
+
+            $videos = [];
             $g = $request->get('g');
             if ($g != 'newest' && $g != 'saved') {
                 $g = 'newest';
@@ -435,7 +437,10 @@ class VideoController extends Controller
                     }
                 }
             }
-            $videos = $videos->whereDate('uploaded_at', '>=', Carbon::now()->subMonths(6))->orderBy('uploaded_at', 'desc')->paginate(10);
+            
+            if (count($videos) != 0) {
+                $videos = $videos->whereDate('uploaded_at', '>=', Carbon::now()->subMonths(6))->orderBy('uploaded_at', 'desc')->paginate(10);
+            }
 
             $html = $this->subscribeLoadHTML($videos);
             if ($request->ajax()) {
