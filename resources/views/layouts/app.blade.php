@@ -40,6 +40,9 @@
 
             @yield('content')
         </div>
+
+        <!-- The actual snackbar -->
+        <div id="snackbar">Some text some message..</div>
     </div>
 
     <!-- CSS Styles Deferred -->
