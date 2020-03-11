@@ -46,7 +46,7 @@
 							<div class="hidden-xs hidden-sm" style="margin: 7px 15px 0px 15px;">
 								<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 								<ins class="adsbygoogle"
-								     style="display:block; border:1px solid black"
+								     style="display:block;"
 								     data-ad-client="ca-pub-4485968980278243"
 								     data-ad-slot="8455082664"
 								     data-ad-format="auto"
