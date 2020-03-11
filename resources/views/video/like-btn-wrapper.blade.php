@@ -1,0 +1,10 @@
+@if (!Auth::check())
+  <a data-toggle="modal" data-target="#signUpModal" style="text-decoration: none; color: inherit" class="single-icon">
+    <i class="material-icons">thumb_up</i>
+    <div>{{ App\Like::count('video', $video->id, true) }}</div>
+  </a>
+@elseif (App\Like::where('user_id', auth()->user()->id)->where('type', 'video')->where('foreign_id', $video->id)->first() != null)
+  @include('video.unlikeBtn')
+@else
+  @include('video.likeBtn')
+@endif

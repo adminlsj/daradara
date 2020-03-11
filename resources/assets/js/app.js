@@ -132,7 +132,7 @@ $('div#subscribe-panel').on("submit", "form#unsubscribe-form", function(e) {
     })
 });
 
-$('div#loginModal').on("submit", "form#loginModalForm", function(e) {
+$('div#video-like-form-wrapper').on("submit", "form#video-like-form", function(e) {
     $.ajaxSetup({
         header:$('meta[name="_token"]').attr('content')
     })
@@ -144,20 +144,15 @@ $('div#loginModal').on("submit", "form#loginModalForm", function(e) {
         data:$(this).serialize(),
         dataType: 'json',
         success: function(data){
-            $('#loginModal').modal('hide');
-            $('#nav-account-icon').attr('href', data.href);
-            $('form#subscribe-form input[name="_token"]').attr('value', data.csrf_token);
-            $('#email').attr('value', data.email);
-            $('#subscribe-user-id').attr('value', data.subscribe_user_id);
-            $('#subscribeModal').modal('show');
+            $('div#video-like-form-wrapper').html(data.unlikeBtn);
         },
         error: function(xhr, ajaxOptions, thrownError){
-            $('div#loginModal').html(xhr.responseText);
+            $('div#video-like-form-wrapper').html(xhr.responseText);
         }
     })
 });
 
-$('div#signUpModal').on("submit", "form#signUpModalForm", function(e) {
+$('div#video-like-form-wrapper').on("submit", "form#video-unlike-form", function(e) {
     $.ajaxSetup({
         header:$('meta[name="_token"]').attr('content')
     })
@@ -169,15 +164,50 @@ $('div#signUpModal').on("submit", "form#signUpModalForm", function(e) {
         data:$(this).serialize(),
         dataType: 'json',
         success: function(data){
-            $('#signUpModal').modal('hide');
-            $('#nav-account-icon').attr('href', data.href);
-            $('form#subscribe-form input[name="_token"]').attr('value', data.csrf_token);
-            $('#email').attr('value', data.email);
-            $('#subscribe-user-id').attr('value', data.subscribe_user_id);
-            $('#subscribeModal').modal('show');
+            $('div#video-like-form-wrapper').html(data.likeBtn);
         },
         error: function(xhr, ajaxOptions, thrownError){
-            $('div#signUpModal').html(xhr.responseText);
+            $('div#video-like-form-wrapper').html(xhr.responseText);
+        }
+    })
+});
+
+$('div#video-save-form-wrapper').on("submit", "form#video-save-form", function(e) {
+    $.ajaxSetup({
+        header:$('meta[name="_token"]').attr('content')
+    })
+    e.preventDefault(e);
+
+    $.ajax({
+        type:"POST",
+        url: $(this).attr("action"),
+        data:$(this).serialize(),
+        dataType: 'json',
+        success: function(data){
+            $('div#video-save-form-wrapper').html(data.unsaveBtn);
+        },
+        error: function(xhr, ajaxOptions, thrownError){
+            $('div#video-save-form-wrapper').html(xhr.responseText);
+        }
+    })
+});
+
+$('div#video-save-form-wrapper').on("submit", "form#video-unsave-form", function(e) {
+    $.ajaxSetup({
+        header:$('meta[name="_token"]').attr('content')
+    })
+    e.preventDefault(e);
+
+    $.ajax({
+        type:"POST",
+        url: $(this).attr("action"),
+        data:$(this).serialize(),
+        dataType: 'json',
+        success: function(data){
+            $('div#video-save-form-wrapper').html(data.saveBtn);
+        },
+        error: function(xhr, ajaxOptions, thrownError){
+            $('div#video-save-form-wrapper').html(xhr.responseText);
         }
     })
 });

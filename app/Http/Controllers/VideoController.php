@@ -6,6 +6,8 @@ use App\Video;
 use App\Watch;
 use App\User;
 use App\Subscribe;
+use App\Like;
+use App\Save;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -406,17 +408,34 @@ class VideoController extends Controller
                 $anime = Watch::where('genre', 'anime')->orderBy('updated_at', 'desc')->limit(15)->get();
                 return view('video.subscribeIndexEmpty', compact('variety', 'drama', 'anime'));
             }
-            $videos = [];
-            $first = true;
-            foreach ($subscribes as $subscribe) {
-                if ($first) {
-                    $videos = Video::whereDate('uploaded_at', '>=', Carbon::now()->subMonths(3))->where('category', $subscribe->category);
-                    $first = false;
-                } else {
-                    $videos = $videos->orWhere('category', $subscribe->category);
+            $g = $request->get('g');
+            if ($g != 'newest' && $g != 'saved') {
+                $g = 'newest';
+            }
+            if ($g == 'newest') {
+                $first = true;
+                foreach ($subscribes as $subscribe) {
+                    if ($first) {
+                        $videos = Video::where('category', $subscribe->category);
+                        $first = false;
+                    } else {
+                        $videos = $videos->orWhere('category', $subscribe->category);
+                    }
+                }
+
+            } elseif ($g == 'saved') {
+                $saved = Save::where('user_id', auth()->user()->id)->get();
+                $first = true;
+                foreach ($saved as $save) {
+                    if ($first) {
+                        $videos = Video::where('id', $save->foreign_id);
+                        $first = false;
+                    } else {
+                        $videos = $videos->orWhere('id', $save->foreign_id);
+                    }
                 }
             }
-            $videos = $videos->orderBy('uploaded_at', 'desc')->paginate(10);
+            $videos = $videos->whereDate('uploaded_at', '>=', Carbon::now()->subMonths(6))->orderBy('uploaded_at', 'desc')->paginate(10);
 
             $html = $this->subscribeLoadHTML($videos);
             if ($request->ajax()) {
@@ -467,6 +486,99 @@ class VideoController extends Controller
 
         return response()->json([
             'subscribe_btn' => $html,
+            'csrf_token' => csrf_token(),
+        ]);
+    }
+
+    public function like(Request $request)
+    {
+        $user_id = request('like-user-id');
+        $type = request('like-type');
+        $foreign_id = request('like-foreign-id');
+        $is_positive = request('like-is-positive');
+
+        $like = Like::where('user_id', $user_id)->where('type', $type)->where('foreign_id', $foreign_id)->first();
+        if ($like != null) {
+            $like->delete();
+        }
+
+        $like = Like::create([
+            'user_id' => $user_id,
+            'type' => $type,
+            'foreign_id' => $foreign_id,
+            'is_positive' => $is_positive,
+        ]);
+
+        $video = Video::find($foreign_id);
+        $html = '';
+        $html .= view('video.unlikeBtn', compact('video'));
+
+        return response()->json([
+            'unlikeBtn' => $html,
+            'csrf_token' => csrf_token(),
+        ]);
+    }
+
+    public function unlike(Request $request)
+    {
+        $user_id = request('like-user-id');
+        $type = request('like-type');
+        $foreign_id = request('like-foreign-id');
+        $is_positive = request('like-is-positive');
+
+        $like = Like::where('user_id', $user_id)->where('type', $type)->where('foreign_id', $foreign_id)->first();
+        if ($like != null) {
+            $like->delete();
+        }
+
+        $video = Video::find($foreign_id);
+        $html = '';
+        $html .= view('video.likeBtn', compact('video'));
+
+        return response()->json([
+            'likeBtn' => $html,
+            'csrf_token' => csrf_token(),
+        ]);
+    }
+
+    public function save(Request $request)
+    {
+        $user_id = request('save-user-id');
+        $foreign_id = request('save-foreign-id');
+
+        if (Save::where('user_id', $user_id)->where('foreign_id', $foreign_id)->first() == null) {
+            $save = Save::create([
+                'user_id' => $user_id,
+                'foreign_id' => $foreign_id,
+            ]);
+        }
+
+        $video = Video::find($foreign_id);
+        $html = '';
+        $html .= view('video.unsaveBtn', compact('video'));
+
+        return response()->json([
+            'unsaveBtn' => $html,
+            'csrf_token' => csrf_token(),
+        ]);
+    }
+
+    public function unsave(Request $request)
+    {
+        $user_id = request('save-user-id');
+        $foreign_id = request('save-foreign-id');
+
+        $save = Save::where('user_id', $user_id)->where('foreign_id', $foreign_id)->first();
+        if ($save != null) {
+            $save->delete();
+        }
+
+        $video = Video::find($foreign_id);
+        $html = '';
+        $html .= view('video.saveBtn', compact('video'));
+
+        return response()->json([
+            'saveBtn' => $html,
             'csrf_token' => csrf_token(),
         ]);
     }

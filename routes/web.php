@@ -25,6 +25,15 @@ Route::get('/subscribes', 'VideoController@subscribeIndex')->name('video.subscri
 Route::post('/subscribe', 'VideoController@subscribe')->name('video.subscribe');
 Route::post('/unsubscribe', 'VideoController@unsubscribe')->name('video.unsubscribe');
 
+Route::post('/like', 'VideoController@like')->name('video.like');
+Route::post('/unlike', 'VideoController@unlike')->name('video.unlike');
+
+Route::post('/save', 'VideoController@save')->name('video.save');
+Route::post('/unsave', 'VideoController@unsave')->name('video.unsave');
+
+Route::get('f2507ca41e20beb66004a3edcc40879c.txt', function(){
+});
+
 Route::get('/about-us', 'HomeController@aboutUs');
 Route::get('/terms', 'HomeController@terms');
 Route::get('/policies', 'HomeController@policies');

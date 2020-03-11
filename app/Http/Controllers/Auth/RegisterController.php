@@ -105,16 +105,18 @@ class RegisterController extends Controller
 
         $this->guard()->login($user, true);
 
-        if ($request->ajax()) {
-            return response()->json([
-                'href' => route('user.show', auth()->user()),
-                'email' => auth()->user()->email,
-                'subscribe_user_id' => auth()->user()->id,
-                'csrf_token' => csrf_token(),
-            ]);
+        $previousUrl = url()->previous();
+        if (strpos($previousUrl, "/watch?v=") !== FALSE) {
+            $previousUrl = $previousUrl.'&from_subscribe=1';
+
+        } elseif ((strpos($previousUrl, "/variety/") !== FALSE || strpos($previousUrl, "/drama/") !== FALSE || strpos($previousUrl, "/anime/") !== FALSE)) {
+            $previousUrl = $previousUrl.'?from_subscribe=1';
+
+        } else {
+            $previousUrl = '/subscribes';
         }
 
         return $this->registered($request, $user)
-                        ?: redirect($this->redirectPath());
+                        ?: redirect($previousUrl);
     }
 }

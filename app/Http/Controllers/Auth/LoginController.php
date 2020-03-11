@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\User;
 use App\Avatar;
 use App\Watch;
+use App\Video;
 use Auth;
 use Socialite;
 use Session;
@@ -138,17 +139,19 @@ class LoginController extends Controller
 
         $this->clearLoginAttempts($request);
 
-        if ($request->ajax()) {
-            return response()->json([
-                'href' => route('user.show', auth()->user()),
-                'email' => auth()->user()->email,
-                'subscribe_user_id' => auth()->user()->id,
-                'csrf_token' => csrf_token(),
-            ]);
+        $previousUrl = url()->previous();
+        if (strpos($previousUrl, "/watch?v=") !== FALSE) {
+            $previousUrl = $previousUrl.'&from_subscribe=1';
+
+        } elseif ((strpos($previousUrl, "/variety/") !== FALSE || strpos($previousUrl, "/drama/") !== FALSE || strpos($previousUrl, "/anime/") !== FALSE)) {
+            $previousUrl = $previousUrl.'?from_subscribe=1';
+
+        } else {
+            $previousUrl = '/subscribes';
         }
 
         return $this->authenticated($request, $this->guard()->user())
-                ?: redirect()->intended($this->redirectPath());
+                ?: redirect()->intended($previousUrl);
     }
 
     /**

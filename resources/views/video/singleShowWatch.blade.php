@@ -72,9 +72,8 @@
     </div>
 
     <div class="show-panel-icons">
-      <div class="single-icon">
-        <i style="color: #363636" class="material-icons noselect">thumb_up</i>
-        <div style="color: #363636">0</div>
+      <div id="video-like-form-wrapper">
+        @include('video.like-btn-wrapper')
       </div>
       <div class="single-icon">
         <i style="color: #363636" class="material-icons noselect">chat</i>
@@ -84,9 +83,8 @@
         <i class="material-icons noselect" style="-moz-transform: scale(-1, 1);-webkit-transform: scale(-1, 1);-o-transform: scale(-1, 1);-ms-transform: scale(-1, 1);transform: scale(-1, 1); font-size: 2.05em; margin-top: -4px;">reply</i>
         <div style="margin-top: -4px;">分享</div>
       </div>
-      <div class="single-icon">
-        <i style="color: #363636" class="material-icons noselect">library_add</i>
-        <div style="color: #363636">儲存</div>
+      <div id="video-save-form-wrapper">
+        @include('video.save-btn-wrapper')
       </div>
       <div class="single-icon" data-toggle="modal" data-target="#reportModal">
         <i class="material-icons noselect">flag</i>
@@ -104,11 +102,7 @@
     <div class="text-ellipsis" style="padding-right: 50px"><a style="text-decoration: none; color: white;" href="{{ route('video.intro', [$watch->genre, $watch->titleToUrl()]) }}">{{ $video->watch()->title }}</a></div>
     <div style="color: darkgray; font-size: 0.85em; margin-top: -1px;">{{ $video->subscribes()->count() }} 位訂閱者</div>
     <div id="subscribe-panel">
-      @if ($is_subscribed)
-        @include('video.unsubscribeBtn')
-      @else
-        @include('video.subscribeBtn')
-      @endif
+      @include('video.subscribe-btn-wrapper')
     </div>
   </div>
 </div>
