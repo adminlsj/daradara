@@ -438,7 +438,7 @@ class VideoController extends Controller
                 }
             }
             
-            if (count($videos) != 0) {
+            if ($videos != []) {
                 $videos = $videos->whereDate('uploaded_at', '>=', Carbon::now()->subMonths(6))->orderBy('uploaded_at', 'desc')->paginate(10);
             }
 
