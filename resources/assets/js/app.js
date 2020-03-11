@@ -185,10 +185,7 @@ $('div#video-save-form-wrapper').on("submit", "form#video-save-form", function(e
         dataType: 'json',
         success: function(data){
             $('div#video-save-form-wrapper').html(data.unsaveBtn);
-            var snackbar = document.getElementById("snackbar");
-            snackbar.innerHTML = "影片已儲存於「訂閱」項目";
-            snackbar.className = "show";
-            setTimeout(function(){ snackbar.className = snackbar.className.replace("show", ""); }, 3000);
+            showSnackbar('影片已儲存於「訂閱」項目');
         },
         error: function(xhr, ajaxOptions, thrownError){
             $('div#video-save-form-wrapper').html(xhr.responseText);
@@ -233,6 +230,13 @@ $(document).ready(function() {
         $('#subscribeModal').modal('show');
     }
 });
+
+function showSnackbar(text) {
+    var snackbar = document.getElementById("snackbar");
+    snackbar.innerHTML = text;
+    snackbar.className = "show";
+    setTimeout(function(){ snackbar.className = snackbar.className.replace("show", ""); }, 3000);
+}
 
 require('./lazyLoad');
 require('./videoShow');
