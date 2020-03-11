@@ -1365,6 +1365,8 @@ a > i {
   cursor: pointer;
 }
 
+.subscribes-tab a:hover,
+.subscribes-tab a:focus, 
 .subscribes-tab a.active {
   background-color: #595959;
   color: white;
