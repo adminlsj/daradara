@@ -235,7 +235,7 @@ function showSnackbar(text) {
     var snackbar = document.getElementById("snackbar");
     snackbar.innerHTML = text;
     snackbar.className = "show";
-    setTimeout(function(){ snackbar.className = snackbar.className.replace("show", ""); }, 3000);
+    setTimeout(function(){ snackbar.className = snackbar.className.replace("show", ""); }, 4000);
 }
 
 require('./lazyLoad');
