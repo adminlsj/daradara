@@ -1,6 +1,6 @@
 @include('video.player')
 
-<div class="hidden-md hidden-lg" style="background-color: #151515; border-top: 1px solid #383838;">
+<div class="hidden-md hidden-lg" style="background-color: #151515; border-top: 0.5px solid #383838;">
   <ins class="adsbygoogle"
        style="display:block"
        data-ad-format="fluid"

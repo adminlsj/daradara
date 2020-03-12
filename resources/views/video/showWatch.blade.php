@@ -70,7 +70,7 @@
 						</div>
 
 						@if ($is_mobile)
-							<div style="border-top: solid 0.5px #383838;">
+							<div style="border-top: solid 1px #383838;">
 								@include('video.comment-section-wrapper')
 							</div>
 						@endif
