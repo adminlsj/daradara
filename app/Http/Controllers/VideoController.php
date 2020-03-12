@@ -593,8 +593,6 @@ class VideoController extends Controller
 
     public function createComment(Request $request)
     {
-        $foreign_id = request('save-foreign-id');
-
         $comment = Comment::create([
             'user_id' => auth()->user()->id,
             'type' => request('comment-type'),
@@ -605,7 +603,11 @@ class VideoController extends Controller
         $html = '';
         $html .= view('video.singleVideoComment', compact('comment'));
 
+        if (request('comment-type') == 'video') {
+            $comment_count = $comment->video()->comments()->count();
+        }
         return response()->json([
+            'comment_count' => $comment_count,
             'single_video_comment' => $html,
             'csrf_token' => csrf_token(),
         ]);
