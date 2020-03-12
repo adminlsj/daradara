@@ -11,10 +11,8 @@
 	    <input style="margin-left: 10px; width: calc(100% - 45px); line-height: 30px; background-color: inherit; border: none; outline: none;" type="text" id="comment-text" name="comment-text" placeholder="新增一則公開評論...">
 	  </form>
 	@else
-	  <div style="margin-top: 10px;">
-	    <a href="{{ route('login') }}">
-	      <img class="img-circle" style="width: 35px; height: auto; float:left;" src="https://i.imgur.com/KqDtqhMb.jpg">
-	    </a>
+	  <div data-toggle="modal" data-target="#signUpModal" style="margin-top: 10px;">
+	    <img class="img-circle" style="width: 35px; height: auto; float:left;" src="https://i.imgur.com/KqDtqhMb.jpg">
 	    <input style="margin-left: 10px; width: calc(100% - 45px); line-height: 30px; background-color: inherit; border: none; outline: none;" type="text" id="comment-signup-modal" placeholder="新增一則公開評論...">
 	  </div>
 	@endif

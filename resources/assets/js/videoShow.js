@@ -128,10 +128,6 @@ $('div#comment-create-form-wrapper').on("submit", "form#comment-create-form", fu
     })
 });
 
-$("#comment-signup-modal").focus(function(){
-  $('#signUpModal').modal('show');
-});
-
 $("#comment-icon").click(function() {
     if (is_mobile) {
       $('html, body').animate({
