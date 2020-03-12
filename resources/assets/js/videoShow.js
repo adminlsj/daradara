@@ -121,6 +121,7 @@ $('div#comment-create-form-wrapper').on("submit", "form#comment-create-form", fu
         success: function(data){
             $('#comment-text').val('');
             $('div#comment-start').prepend(data.single_video_comment);
+            document.activeElement.blur();
         },
         error: function(xhr, ajaxOptions, thrownError){
             $('div#comment-create-form-wrapper').html(xhr.responseText);
