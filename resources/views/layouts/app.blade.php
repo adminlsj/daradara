@@ -5,7 +5,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="referrer" content="no-referrer">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <meta name="google-site-verification" content="oV77KljbCxlciy-aD-Uy_dZSYUENVR_6jAhWSp_cb48" />
         <link rel="shortcut icon" type="image/x-icon" href="https://s3.amazonaws.com/twobayjobs/system/intro/browser-icon.ico"/>
         <link rel="apple-touch-icon" href="https://i.imgur.com/OCEaQMK.png"/>
