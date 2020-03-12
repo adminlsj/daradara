@@ -1531,6 +1531,10 @@ a > i {
   margin-top: -20px;
 }
 
+#comment-index-text {
+  padding-left: 45px;
+}
+
 @media (max-width: 991px) {
   #content-div {
     padding-bottom: 50px
@@ -1593,6 +1597,10 @@ a > i {
 
   #video-show-tabs-margin-top {
     margin-top: 0px;
+  }
+
+  #comment-index-text {
+    padding-left: 50px;
   }
 
   .mobile-text-center {
