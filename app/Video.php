@@ -186,10 +186,10 @@ class Video extends Model
 
             $durl = $data['data']['durl'][0];
             $url = $durl['url'];
-            if ($durl['backup_url'] != null && strpos($durl['backup_url'][0], 'upos-hz-mirrorakam') !== false) {
-                $url = $durl['backup_url'][0];
-            }
 
+            $start = strpos($url, 'http');
+            $end = strpos($url, 'upgcxcode/');
+            $url = substr_replace($url, 'https://cn-hk-eq-bcache-01.bilivideo.com/upgcxcode/', $start, $end - $start + 10);
             return $url;
         } catch(Exception $e) {
             return $e->getMessage();
