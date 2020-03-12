@@ -18,7 +18,7 @@
 	@endif
 </div>
 
-<hr style="border:solid 0.5px #383838; margin-top: 19px; margin-bottom: 0px">
+<hr style="border:solid 0.5px #383838; margin-top: 19px;">
 
 <div id="comment-start" style="padding: 0px 15px;">
 	@foreach ($current->comments() as $comment)
