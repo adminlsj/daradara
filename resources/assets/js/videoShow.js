@@ -132,6 +132,18 @@ $("#comment-signup-modal").focus(function(){
   $('#signUpModal').modal('show');
 });
 
+$("#comment-icon").click(function() {
+    if (is_mobile) {
+      $('html, body').animate({
+          scrollTop: $('#comment-create-form-wrapper').offset().top - 15
+      }, 'slow');
+    } else {
+      $('html, body').animate({
+          scrollTop: $('#comment-create-form-wrapper').offset().top - 65
+      }, 'slow');
+    }
+});
+
 /* Standard syntax */
 document.addEventListener("fullscreenchange", function() {
   handleFullscreenChange()

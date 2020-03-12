@@ -75,9 +75,9 @@
       <div id="video-like-form-wrapper">
         @include('video.like-btn-wrapper')
       </div>
-      <div class="single-icon">
-        <i style="color: #363636" class="material-icons noselect">chat</i>
-        <div style="color: #363636">評論</div>
+      <div id="comment-icon" class="single-icon">
+        <i class="material-icons">chat</i>
+        <div>評論</div>
       </div>
       <div id="shareBtn" class="single-icon" data-toggle="modal" data-target="#shareModal">
         <i class="material-icons noselect" style="-moz-transform: scale(-1, 1);-webkit-transform: scale(-1, 1);-o-transform: scale(-1, 1);-ms-transform: scale(-1, 1);transform: scale(-1, 1); font-size: 2.05em; margin-top: -4px;">reply</i>
