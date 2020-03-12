@@ -8,6 +8,7 @@ use App\User;
 use App\Subscribe;
 use App\Like;
 use App\Save;
+use App\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -384,7 +385,9 @@ class VideoController extends Controller
                     $is_subscribed = true;
                 }
 
-                return view('video.showWatch', compact('genre', 'video', 'videos', 'related', 'prev', 'next', 'dropdown', 'watch', 'current', 'is_program', 'is_subscribed'));
+                $is_mobile = $this->checkMobile();
+
+                return view('video.showWatch', compact('genre', 'video', 'videos', 'related', 'prev', 'next', 'dropdown', 'watch', 'current', 'is_program', 'is_subscribed', 'is_mobile'));
             }
         }
     }
@@ -588,6 +591,26 @@ class VideoController extends Controller
         ]);
     }
 
+    public function createComment(Request $request)
+    {
+        $foreign_id = request('save-foreign-id');
+
+        $comment = Comment::create([
+            'user_id' => auth()->user()->id,
+            'type' => request('comment-type'),
+            'foreign_id' => request('comment-foreign-id'),
+            'text' => request('comment-text'),
+        ]);
+
+        $html = '';
+        $html .= view('video.singleVideoComment', compact('comment'));
+
+        return response()->json([
+            'single_video_comment' => $html,
+            'csrf_token' => csrf_token(),
+        ]);
+    }
+
     public function searchLoadHTML($videos)
     {
         $html = '';
@@ -675,8 +698,24 @@ class VideoController extends Controller
         $videosArray = [];
         $idsArray = [];
 
-        // Exact Match Query [e.g. TerraceHouse or 2012.09.14]
-        $exactQuery = Video::where('title', 'like', '%'.request('query').'%')->orderBy('uploaded_at', 'desc')->get();
+        // Exact Match Query [e.g. 2012.09.14]
+        $lowerQuery = '';
+        $upperQuery = '';
+        $exactQuery = [];
+        foreach ($queryArray as $char) {
+            if (preg_match("/^[a-zA-Z]$/", $char)) {
+                $lowerQuery = $lowerQuery.strtolower($char);
+                $upperQuery = $upperQuery.strtoupper($char);
+            } else {
+                $lowerQuery = $lowerQuery.$char;
+                $upperQuery = $upperQuery.$char;
+            }
+        }
+        if ($lowerQuery == $upperQuery) {
+            $exactQuery = Video::where('title', 'like', '%'.$lowerQuery.'%')->orderBy('uploaded_at', 'desc')->distinct()->get();
+        } else {
+            $exactQuery = Video::where('title', 'like', '%'.$lowerQuery.'%')->orWhere('title', 'like', '%'.$upperQuery.'%')->orderBy('uploaded_at', 'desc')->distinct()->get();
+        }
         foreach ($exactQuery as $q) {
             if (!in_array($q->id, $idsArray)) {
                 array_push($videosArray, $q);

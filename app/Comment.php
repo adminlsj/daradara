@@ -3,20 +3,16 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\User;
 
 class Comment extends Model
 {
     protected $fillable = [
-        'user_id', 'company_id', 'text'
+        'user_id', 'type', 'foreign_id', 'text',
     ];
 
     public function user()
     {
-        return $this->belongsTo('App\User');
-    }
-
-    public function company()
-    {
-        return $this->belongsTo('App\Company');
+        return User::find($this->user_id);
     }
 }

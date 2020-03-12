@@ -106,7 +106,13 @@
     </div>
   </div>
 </div>
-<hr style="border:solid 0.5px #383838; margin-top: 9px">
+<hr style="border:solid 0.5px #383838; margin-top: 9px; margin-bottom: 0px">
+
+@if (!$is_mobile)
+  @include('video.comment-section-wrapper')
+@endif
+
+
 
 @include('video.shareModal')
 @include('video.userReportModal')

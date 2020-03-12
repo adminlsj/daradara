@@ -1527,6 +1527,10 @@ a > i {
   padding: 7px 0px;
 }
 
+#video-show-tabs-margin-top {
+  margin-top: -20px;
+}
+
 @media (max-width: 991px) {
   #content-div {
     padding-bottom: 50px
@@ -1585,6 +1589,10 @@ a > i {
 
   .padding-setup {
     padding: 0px 10px;
+  }
+
+  #video-show-tabs-margin-top {
+    margin-top: 0px;
   }
 
   .mobile-text-center {

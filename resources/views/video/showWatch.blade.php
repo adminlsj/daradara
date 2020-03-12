@@ -25,7 +25,7 @@
 					<div class="col-md-4 single-show-list">
 						<br class="hidden-sm hidden-xs">
 						<!-- Tab links -->
-						<div style="margin-top: -20px; position: relative;" class="tab">
+						<div style="position: relative;" class="tab" id="video-show-tabs-margin-top">
 							<button class="tablinks video-tablinks" onclick="openList(event, 'Watch')" id="defaultOpen">全集列表</button>
 							<button class="tablinks video-tablinks" onclick="openList(event, 'Related')">相關影片</button>
 							<a style="position:absolute; top:14px; right:53px; text-decoration: none; {{ $prev != false ? 'color: white;' : 'pointer-events: none; color: #414141;' }}" href="{{ route('video.watch') }}?v={{ $prev }}"><i class="material-icons noselect">skip_previous</i></a>
@@ -68,6 +68,12 @@
 						    	@include('video.singleRelatedPost')
 						    @endforeach
 						</div>
+
+						@if ($is_mobile)
+							<div style="border-top: solid 0.5px #383838; margin-bottom: -20px">
+								@include('video.comment-section-wrapper')
+							</div>
+						@endif
 					</div>
 				</div>
 			</div>

@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\Watch;
 use App\Subscribe;
+use App\Comment;
 
 class Video extends Model
 {
@@ -20,6 +21,11 @@ class Video extends Model
     public function subscribes()
     {
         return Subscribe::where('category', $this->category)->orderBy('created_at', 'asc')->get();
+    }
+
+    public function comments()
+    {
+        return Comment::where('type', 'video')->where('foreign_id', $this->id)->orderBy('created_at', 'desc')->get();
     }
 
     public function tags()

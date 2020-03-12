@@ -26,6 +26,112 @@ $('[id=toggleVideoDescription]').click(function(e) {
     }
 });
 
+$('div#video-like-form-wrapper').on("submit", "form#video-like-form", function(e) {
+    $.ajaxSetup({
+        header:$('meta[name="_token"]').attr('content')
+    })
+    e.preventDefault(e);
+
+    $.ajax({
+        type:"POST",
+        url: $(this).attr("action"),
+        data:$(this).serialize(),
+        dataType: 'json',
+        success: function(data){
+            $('div#video-like-form-wrapper').html(data.unlikeBtn);
+        },
+        error: function(xhr, ajaxOptions, thrownError){
+            $('div#video-like-form-wrapper').html(xhr.responseText);
+        }
+    })
+});
+
+$('div#video-like-form-wrapper').on("submit", "form#video-unlike-form", function(e) {
+    $.ajaxSetup({
+        header:$('meta[name="_token"]').attr('content')
+    })
+    e.preventDefault(e);
+
+    $.ajax({
+        type:"POST",
+        url: $(this).attr("action"),
+        data:$(this).serialize(),
+        dataType: 'json',
+        success: function(data){
+            $('div#video-like-form-wrapper').html(data.likeBtn);
+        },
+        error: function(xhr, ajaxOptions, thrownError){
+            $('div#video-like-form-wrapper').html(xhr.responseText);
+        }
+    })
+});
+
+$('div#video-save-form-wrapper').on("submit", "form#video-save-form", function(e) {
+    $.ajaxSetup({
+        header:$('meta[name="_token"]').attr('content')
+    })
+    e.preventDefault(e);
+
+    $.ajax({
+        type:"POST",
+        url: $(this).attr("action"),
+        data:$(this).serialize(),
+        dataType: 'json',
+        success: function(data){
+            $('div#video-save-form-wrapper').html(data.unsaveBtn);
+            showSnackbar('影片已儲存於「訂閱」項目');
+        },
+        error: function(xhr, ajaxOptions, thrownError){
+            $('div#video-save-form-wrapper').html(xhr.responseText);
+        }
+    })
+});
+
+$('div#video-save-form-wrapper').on("submit", "form#video-unsave-form", function(e) {
+    $.ajaxSetup({
+        header:$('meta[name="_token"]').attr('content')
+    })
+    e.preventDefault(e);
+
+    $.ajax({
+        type:"POST",
+        url: $(this).attr("action"),
+        data:$(this).serialize(),
+        dataType: 'json',
+        success: function(data){
+            $('div#video-save-form-wrapper').html(data.saveBtn);
+        },
+        error: function(xhr, ajaxOptions, thrownError){
+            $('div#video-save-form-wrapper').html(xhr.responseText);
+        }
+    })
+});
+
+$('div#comment-create-form-wrapper').on("submit", "form#comment-create-form", function(e) {
+    $.ajaxSetup({
+        header:$('meta[name="_token"]').attr('content')
+    })
+    e.preventDefault(e);
+
+    $.ajax({
+        type:"POST",
+        url: $(this).attr("action"),
+        data:$(this).serialize(),
+        dataType: 'json',
+        success: function(data){
+            $('#comment-text').val('');
+            $('div#comment-start').prepend(data.single_video_comment);
+        },
+        error: function(xhr, ajaxOptions, thrownError){
+            $('div#comment-create-form-wrapper').html(xhr.responseText);
+        }
+    })
+});
+
+$("#comment-signup-modal").focus(function(){
+  $('#signUpModal').modal('show');
+});
+
 /* Standard syntax */
 document.addEventListener("fullscreenchange", function() {
   handleFullscreenChange()

@@ -31,6 +31,9 @@ Route::post('/unlike', 'VideoController@unlike')->name('video.unlike');
 Route::post('/save', 'VideoController@save')->name('video.save');
 Route::post('/unsave', 'VideoController@unsave')->name('video.unsave');
 
+Route::post('/createComment', 'VideoController@createComment')->name('video.createComment');
+Route::post('/deleteComment', 'VideoController@deleteComment')->name('video.deleteComment');
+
 Route::get('/about-us', 'HomeController@aboutUs');
 Route::get('/terms', 'HomeController@terms');
 Route::get('/policies', 'HomeController@policies');
