@@ -20,7 +20,7 @@
 
 <hr style="border:solid 0.5px #383838; margin-top: 19px; margin-bottom: 0px">
 
-<div id="comment-start" style="padding: 0px 15px; padding-top: 15px">
+<div id="comment-start" style="padding: 0px 15px; {{ $current->comments()->count() == 0 ? '' : 'padding-top:20px;' }}">
 	@foreach ($current->comments() as $comment)
 	  @include('video.singleVideoComment')
 	@endforeach

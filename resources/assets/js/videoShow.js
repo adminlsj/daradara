@@ -112,6 +112,7 @@ $('div#comment-create-form-wrapper').on("submit", "form#comment-create-form", fu
         header:$('meta[name="_token"]').attr('content')
     })
     e.preventDefault(e);
+    document.activeElement.blur();
 
     $.ajax({
         type:"POST",
@@ -121,7 +122,6 @@ $('div#comment-create-form-wrapper').on("submit", "form#comment-create-form", fu
         success: function(data){
             $('#comment-text').val('');
             $('div#comment-start').prepend(data.single_video_comment);
-            document.activeElement.blur();
             $('#comment-count').html(data.comment_count);
         },
         error: function(xhr, ajaxOptions, thrownError){
