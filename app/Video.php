@@ -171,13 +171,13 @@ class Video extends Model
 
     public static function getSourceBB($url)
     {
-        /* try {
+        try {
             $curl_connection = curl_init($url);
             curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
             curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
             curl_setopt($curl_connection, CURLOPT_HTTPHEADER, [
-                'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:56.0) Gecko/20100101 Firefox/56.0',
+                'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3738.1 Safari/537.36',
                 'Host: api.bilibili.com',
                 'Cookie: SESSDATA=1feadc09%2C1582358038%2Ca8f2f511;'
             ]);
@@ -193,12 +193,7 @@ class Video extends Model
             return $url;
         } catch(Exception $e) {
             return $e->getMessage();
-        }*/
-
-        $url = 'https://www.bilibili.com/video/av84400542';
-        $cmd = ' youtube-dl --geo-bypass-country HK -g ' . escapeshellarg($url);
-        return exec($cmd, $outputsd);
-        return $results = print_r($outputsd[0], true);
+        }
     }
 
     public static function transDayOfWeek($day)
