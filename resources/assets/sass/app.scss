@@ -36,8 +36,7 @@ body {
 }
 
 #custom-scroll-slider::-webkit-scrollbar { /* WebKit */
-  width: 0;
-  height: 0;
+  display: none;
 }
 
 #custom-scroll-slider > div {
