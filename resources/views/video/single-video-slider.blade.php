@@ -1,8 +1,7 @@
 @if ($is_mobile)
-	<div class="swiper-container">
-	  <div class="swiper-wrapper">
+	<div id="custom-scroll-slider">
 	    @foreach ($videos as $video)
-	        <div class="swiper-slide multiple-link-wrapper" style="width: 250px !important;">
+	        <div class="multiple-link-wrapper" style="width: 250px !important; display: inline-block;">
 			    <a style="text-decoration: none; color: black" class="overlay" href="{{ route('video.watch') }}?v={{ $video->id }}"></a>
 			    <img class="lazy" style="border-radius: 3px; width: 100%; height: 100%;" src="{{ $video->imgur16by9() }}" data-src="{{ $video->imgurL() }}" data-srcset="{{ $video->imgurL() }}" alt="{{ $video->title }}">
 
@@ -12,7 +11,6 @@
 			    </div>
 			</div>
 	    @endforeach
-	  </div>
 	</div>
 
 @else
