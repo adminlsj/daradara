@@ -171,7 +171,7 @@ class Video extends Model
 
     public static function getSourceBB($url)
     {
-        try {
+        /* try {
             $curl_connection = curl_init($url);
             curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
             curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
@@ -193,7 +193,12 @@ class Video extends Model
             return $url;
         } catch(Exception $e) {
             return $e->getMessage();
-        }
+        }*/
+
+        $url = 'https://www.bilibili.com/video/av84400542';
+        $cmd = ' youtube-dl --geo-bypass -g ' . escapeshellarg($url);
+        return exec($cmd, $outputsd);
+        return $results = print_r($outputsd[0], true);
     }
 
     public static function transDayOfWeek($day)

@@ -30,12 +30,6 @@ class VideoController extends Controller
     }
 
     public function home(Request $request){
-        $url = 'https://www.bilibili.com/video/av84400542';
-        $cmd = ' youtube-dl -g --proxy 127.0.0.1:8000 ' . escapeshellarg($url);
-        exec($cmd, $outputsd);
-        return $results = print_r($outputsd[0], true);
-
-
         $selected = Watch::where('category', 'monday')->orWhere('category', 'monitoring')->orWhere('category', '24xsbzx')->orWhere('category', 'home')->orWhere('category', 'lddtz')->orWhere('category', 'talk')->orWhere('category', 'nmbgsz')->orWhere('category', 'djyhly')->orWhere('category', 'syrddowntown')->orWhere('category', 'scgy')->orWhere('category', 'szbzddsj')->orWhere('category', 'vsarashi')->orWhere('category', 'yjyjdwxyh')->orWhere('category', 'nnjcd')->inRandomOrder()->get();
         $trendings = Video::where('genre', 'variety')->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(4))->orWhere('genre', 'drama')->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->inRandomOrder()->limit(8)->get();
         $newest = Video::orderBy('uploaded_at', 'desc')->limit(8)->get();
