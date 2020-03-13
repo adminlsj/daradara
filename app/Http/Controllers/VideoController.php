@@ -31,7 +31,7 @@ class VideoController extends Controller
 
     public function home(Request $request){
         $url = 'https://www.bilibili.com/video/av84400542';
-        $cmd = ' youtube-dl -g ' . escapeshellarg($url);
+        $cmd = ' youtube-dl -g --proxy 127.0.0.1:8000 ' . escapeshellarg($url);
         exec($cmd, $outputsd);
         return $results = print_r($outputsd[0], true);
 
