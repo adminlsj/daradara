@@ -4,6 +4,8 @@
     <form id="signUpModalForm" action="{{ route('register') }}" method="POST">
 
       {{ csrf_field() }}
+      
+      {{ Session::put('previousUrl', Request::fullUrl()) }}
 
       <div style="padding: 15px;" class="modal-content">
         <div style="border: 0px; position: relative;" class="modal-header">

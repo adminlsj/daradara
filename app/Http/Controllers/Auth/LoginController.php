@@ -64,7 +64,6 @@ class LoginController extends Controller
      */
     public function redirectToProvider($provider)
     {
-        Session::put('previousUrl', url()->previous());
         return Socialite::driver($provider)->redirect();
     }
 

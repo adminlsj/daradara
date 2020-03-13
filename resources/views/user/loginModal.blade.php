@@ -5,6 +5,8 @@
 
       {{ csrf_field() }}
 
+      {{ Session::put('previousUrl', Request::fullUrl()) }}
+
       <div style="padding: 15px;" class="modal-content">
         <div style="border: 0px; position: relative;" class="modal-header">
           <h4 style="color: gray;font-weight: 100; transform: rotate(45deg);position: absolute; font-size: 3em; top: -10px; cursor: pointer;" class="no-select" data-dismiss="modal">+</h4>
