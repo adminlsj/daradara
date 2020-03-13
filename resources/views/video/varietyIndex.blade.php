@@ -14,26 +14,21 @@
   <div style="background-color: #F5F5F5; padding-top: 10px; {{ Request::is('drama') || Request::is('anime') ? 'margin-top: 27px;' : '' }}">
     <div style="padding-top: 10px"></div>
 
-    <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css">
-    <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
-
-    <div style="padding: 0px 20px; padding-bottom: 10px">
+    <div style="padding: 0px 20px; padding-bottom: 9px">
       <h4>LaughSeeJapan熱門頻道<a href="{{ route('video.varietyList') }}" style="float: right; text-decoration: none; color: black"><i style="vertical-align:middle; font-size: 1em; margin-top: -3.5px;" class="material-icons">arrow_forward_ios</i></a></h4>
     </div>
-    <div class="swiper-container">
-      <div class="swiper-wrapper">
-        @foreach ($selected as $watch)
-          <div class="swiper-slide" style="border-radius: 10px; box-shadow: 1px 4px 6px rgba(0,0,0,0.1); width: 150px !important; background: #fff;">
-            <a style="text-decoration: none; color: black" href="{{ route('video.intro', [$watch->genre, $watch->titleToUrl()]) }}">
-              <img class="lazy" style="width: 100%; height: 100%; border-top-left-radius: 10px; border-top-right-radius: 10px;" src="{{ $watch->imgurDefault() }}" data-src="{{ $watch->imgurL() }}" data-srcset="{{ $watch->imgurL() }}" alt="{{ $watch->title }}">
+    <div id="custom-scroll-slider">
+      @foreach ($selected as $watch)
+        <div style="border-radius: 10px; box-shadow: 1px 4px 6px rgba(0,0,0,0.1); width: 150px !important; background: #fff; display: inline-block;">
+          <a style="text-decoration: none; color: black" href="{{ route('video.intro', [$watch->genre, $watch->titleToUrl()]) }}">
+            <img class="lazy" style="width: 100%; height: 100%; border-top-left-radius: 10px; border-top-right-radius: 10px;" src="{{ $watch->imgurDefault() }}" data-src="{{ $watch->imgurL() }}" data-srcset="{{ $watch->imgurL() }}" alt="{{ $watch->title }}">
 
-              <div style="height: 47px; padding: 2px 15px;">
-                <h4 style="line-height: 19px; font-size: 1em;overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; font-weight: 450;">{{ $watch->title }}</h4>
-              </div>
-            </a>
-          </div>
-        @endforeach
-      </div>
+            <div style="height: 47px; padding: 2px 15px;">
+              <h4 style="line-height: 19px; font-size: 1em;overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; font-weight: 450;">{{ $watch->title }}</h4>
+            </div>
+          </a>
+        </div>
+      @endforeach
     </div>
 
     <div style="margin-top: 25px; padding: 0px 20px; padding-bottom: 9px">

@@ -30,9 +30,9 @@ class VideoController extends Controller
     }
 
     public function home(Request $request){
-        $selected = Watch::where('category', 'monday')->orWhere('category', 'monitoring')->orWhere('category', '24xsbzx')->orWhere('category', 'home')->orWhere('category', 'lddtz')->orWhere('category', 'talk')->orWhere('category', 'nmbgsz')->orWhere('category', 'djyhly')->orWhere('category', 'syrddowntown')->orWhere('category', 'scgy')->orWhere('category', 'szbzddsj')->orWhere('category', 'vsarashi')->orWhere('category', 'yjyjdwxyh')->orWhere('category', 'nnjcd')->inRandomOrder()->get();
+        $selected = $this->trendingWatch();
         $trendings = Video::where('genre', 'variety')->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(4))->orWhere('genre', 'drama')->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->inRandomOrder()->limit(8)->get();
-        $newest = Video::orderBy('uploaded_at', 'desc')->limit(8)->get();
+        $newest = Video::where('genre', 'variety')->orWhere('genre', 'drama')->orderBy('uploaded_at', 'desc')->limit(8)->get();
         $variety = Video::where('genre', 'variety')
                      ->whereDate('uploaded_at', '>=', Carbon::now()->subMonth())->inRandomOrder()->limit(8)->get();
         $drama = Video::where('genre', 'drama')
@@ -165,7 +165,7 @@ class VideoController extends Controller
 
         $genre = $request->path();
         if ($genre == 'variety') {
-            $selected = Watch::where('category', 'monday')->orWhere('category', 'monitoring')->orWhere('category', '24xsbzx')->orWhere('category', 'home')->orWhere('category', 'lddtz')->orWhere('category', 'talk')->orWhere('category', 'nmbgsz')->orWhere('category', 'djyhly')->orWhere('category', 'syrddowntown')->orWhere('category', 'scgy')->orWhere('category', 'szbzddsj')->orWhere('category', 'vsarashi')->orWhere('category', 'yjyjdwxyh')->orWhere('category', 'nnjcd')->inRandomOrder()->get();
+            $selected = $this->trendingWatch();
             $newest = Video::where('genre', 'variety')->orderBy('uploaded_at', 'desc')->limit(8)->get();
             $artist = Video::whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(4))->where('tags', 'LIKE', '%明星%')->inRandomOrder()->limit(8)->get();
             $trick = Video::whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(4))->where('tags', 'LIKE', '%整人%')->inRandomOrder()->limit(8)->get();
@@ -650,6 +650,11 @@ class VideoController extends Controller
             $is_mobile = true;
         }
         return $is_mobile;
+    }
+
+    public function trendingWatch()
+    {
+        return Watch::where('category', 'monday')->orWhere('category', 'monitoring')->orWhere('category', '24xsbzx')->orWhere('category', 'home')->orWhere('category', 'lddtz')->orWhere('category', 'talk')->orWhere('category', 'nmbgsz')->orWhere('category', 'djyhly')->orWhere('category', 'syrddowntown')->orWhere('category', 'scgy')->orWhere('category', 'szbzddsj')->orWhere('category', 'vsarashi')->orWhere('category', 'yjyjdwxyh')->orWhere('category', 'nnjcd')->orWhere('category', 'zrds')->orWhere('category', 'qytzz')->orWhere('category', 'sjqmwy')->orWhere('category', 'msydt')->orWhere('category', 'xxsdcj')->orWhere('category', 'xyfsb')->inRandomOrder()->get();
     }
 
     /**

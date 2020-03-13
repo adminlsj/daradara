@@ -80,8 +80,8 @@
 
           <button style="height: 45px; margin-top: 10px; font-size: 1em; margin-bottom: 20px" type="submit" class="btn btn-info" name="submit">儲存</button>
 
-          <div style="font-size: 0.8em; color: gray; font-weight: 300">將影片提交至 LaughSeeJapan 即代表您瞭解並同意 LaughSeeJapan 的《<a href="/policy">服務條款</a>》和《<a href="/policy">社群規範</a>》。</div>
-		  <div style="font-size: 0.8em; color: gray; font-weight: 300; margin-top:5px;">請勿侵犯其他使用者的版權或隱私權。 <a href="/policy">瞭解詳情</a></div>
+          <div style="font-size: 0.8em; color: gray; font-weight: 300">將影片提交至 LaughSeeJapan 即代表您瞭解並同意 LaughSeeJapan 的《<a href="/terms">服務條款</a>》和《<a href="/policies">社群規範</a>》。</div>
+		  <div style="font-size: 0.8em; color: gray; font-weight: 300; margin-top:5px;">請勿侵犯其他使用者的版權或隱私權。 <a href="/copyright">瞭解詳情</a></div>
         </div>
       </div>
 

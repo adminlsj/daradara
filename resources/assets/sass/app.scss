@@ -26,6 +26,32 @@ body {
     overflow-x:hidden;
 }
 
+#custom-scroll-slider {
+  width: 100%;
+  overflow-x: auto;
+  white-space: nowrap;
+  padding-bottom: 10px;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+}
+
+#custom-scroll-slider::-webkit-scrollbar { /* WebKit */
+  width: 0;
+  height: 0;
+}
+
+#custom-scroll-slider > div {
+  margin-right: 6px;
+}
+
+#custom-scroll-slider div:first-child {
+  margin-left: 20px !important;
+}
+
+#custom-scroll-slider div:last-child {
+  margin-right: 20px !important;
+}
+
 .swiper-container {
   width: 100%;
   height: 100%;
@@ -131,6 +157,15 @@ body {
 @keyframes fadeout {
   from {bottom: 30px; opacity: 1;}
   to {bottom: 0; opacity: 0;}
+}
+
+#copyright-form h4, #copyright-form h5, #copyright-form p {
+  padding: 0px 10px;
+}
+
+#copyright-form hr {
+  border-color: #595959;
+  margin:0px;
 }
 
 #left {

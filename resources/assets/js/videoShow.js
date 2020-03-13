@@ -177,3 +177,10 @@ function handleFullscreenChange() {
     }
   }
 }
+
+function showSnackbar(text) {
+    var snackbar = document.getElementById("snackbar");
+    snackbar.innerHTML = text;
+    snackbar.className = "show";
+    setTimeout(function(){ snackbar.className = snackbar.className.replace("show", ""); }, 4000);
+}
