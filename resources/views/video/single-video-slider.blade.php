@@ -6,7 +6,7 @@
 			    <img class="lazy" style="border-radius: 3px; width: 100%; height: 100%;" src="{{ $video->imgur16by9() }}" data-src="{{ $video->imgurL() }}" data-srcset="{{ $video->imgurL() }}" alt="{{ $video->title }}">
 
 			    <div class="inner" style="height: 47px; margin-top: -4px;">
-			      <h4 style="line-height: 19px; font-size: 1.05em;overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; font-weight: 400; color: black">{{ $video->title }}</h4>
+			      <h4 style="line-height: 19px; font-size: 1.05em;overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; font-weight: 400; color: black">{{ $video->title }}</h4>
 			      <p style="font-size: 0.9em; margin-top: -9px; color: #595959"><a href="{{ route('video.intro', [$video->genre, $video->watch()->titleToUrl()]) }}">{{ $video->watch()->title }}</a> • {{ Carbon\Carbon::parse($video->uploaded_at)->diffForHumans() }}</p>
 			    </div>
 			</div>
@@ -20,8 +20,8 @@
               <a style="text-decoration: none; color: black" class="overlay" href="{{ route('video.watch') }}?v={{ $video->id }}"></a>
               <img class="lazy" style="border-radius: 3px; width: 100%; height: 100%;" src="{{ $video->imgur16by9() }}" data-src="{{ $video->imgurL() }}" data-srcset="{{ $video->imgurL() }}" alt="{{ $video->title }}">
 
-              <div class="inner" style="height: 47px; margin-top: -4px;">
-                <h4 style="line-height: 19px; font-size: 1.05em;overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; font-weight: 400; color: black">{{ $video->title }}</h4>
+              <div class="inner" style="height: 66px; margin-top: -4px;">
+                <h4 style="line-height: 19px; font-size: 1.05em;overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; font-weight: 400; color: black">{{ $video->title }}</h4>
                 <p style="font-size: 0.9em; margin-top: -9px; color: #595959"><a href="{{ route('video.intro', [$video->genre, $video->watch()->titleToUrl()]) }}">{{ $video->watch()->title }}</a> • {{ Carbon\Carbon::parse($video->uploaded_at)->diffForHumans() }}</p>
               </div>
           </div>
