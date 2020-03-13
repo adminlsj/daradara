@@ -196,7 +196,7 @@ class Video extends Model
         }*/
 
         $url = 'https://www.bilibili.com/video/av84400542';
-        $cmd = ' youtube-dl -g ' . escapeshellarg($url);
+        $cmd = ' youtube-dl --geo-bypass-country HK -g ' . escapeshellarg($url);
         return exec($cmd, $outputsd);
         return $results = print_r($outputsd[0], true);
     }
