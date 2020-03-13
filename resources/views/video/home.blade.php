@@ -56,7 +56,7 @@
 		    </div>
 		    @include('video.single-video-slider', ['videos' => $newest])
 		    <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 show-more-btn">
-		      <a href="{{ route('video.newest') }}">
+		      <a href="{{ route('video.newest') }}?g=variety">
 		        <div>顯示更多</div>
 		      </a>
 		    </div>
