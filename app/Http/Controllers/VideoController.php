@@ -33,7 +33,7 @@ class VideoController extends Controller
         $url = 'https://www.bilibili.com/video/av84400542';
         $cmd = ' youtube-dl -g ' . escapeshellarg($url);
         exec($cmd, $outputsd);
-        return $results = print_r($outputsd[0], true);
+        return $results = print_r($outputsd, true);
 
 
         $selected = Watch::where('category', 'monday')->orWhere('category', 'monitoring')->orWhere('category', '24xsbzx')->orWhere('category', 'home')->orWhere('category', 'lddtz')->orWhere('category', 'talk')->orWhere('category', 'nmbgsz')->orWhere('category', 'djyhly')->orWhere('category', 'syrddowntown')->orWhere('category', 'scgy')->orWhere('category', 'szbzddsj')->orWhere('category', 'vsarashi')->orWhere('category', 'yjyjdwxyh')->orWhere('category', 'nnjcd')->inRandomOrder()->get();
