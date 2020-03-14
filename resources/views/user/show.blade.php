@@ -26,22 +26,22 @@
 		<div style="font-size: 1em; margin-bottom: 10px; font-weight: 500; border-bottom: solid black 2px; width: 70px; text-align: center; line-height: 35px">所有頻道</div>
 
 		@if ($watches->count() != 0)
-			@foreach ($watches as $watch)
-				<a href="{{ route('video.intro', [$watch->genre, $watch->titleToUrl()]) }}" style="text-decoration: none;">
-					<div class="col-xs-1" style="width: 70px; margin: 0px; padding: 0px; text-align: center; margin-right: 15px; margin-bottom: 10px;">
-						<img class="lazy" style="width: 100%; height: auto;" src="{{ $watch->imgurDefaultCircleB() }}" data-src="{{ $watch->imgurB() }}" data-srcset="{{ $watch->imgurB() }}" alt="{{ $watch->title }}">
-						<div class="text-ellipsis" style="width: 100%; font-size: 0.8em; padding-top: 5px; color: #595959;">{{ $watch->title }}</div>
-					</div>
-				</a>
-			@endforeach
+			<div class="row no-gutter">
+				@foreach ($watches as $watch)
+					<a href="{{ route('video.intro', [$watch->genre, $watch->titleToUrl()]) }}" style="text-decoration: none;">
+						<div class="col-xs-1" style="width: 70px; margin: 0px; padding: 0px; text-align: center; margin-right: 15px; margin-bottom: 10px;">
+							<img class="lazy" style="width: 100%; height: auto;" src="{{ $watch->imgurDefaultCircleB() }}" data-src="{{ $watch->imgurB() }}" data-srcset="{{ $watch->imgurB() }}" alt="{{ $watch->title }}">
+							<div class="text-ellipsis" style="width: 100%; font-size: 0.8em; padding-top: 5px; color: #595959;">{{ $watch->title }}</div>
+						</div>
+					</a>
+				@endforeach
+			</div>
 		@endif
-
 		@if (Auth::check() && Auth::user()->id == $user->id)
 			<form id="logout-form" action="{{ route('logout') }}" method="POST">
 		        {{ csrf_field() }}
 		        <button type="submit">登出</button>
 		    </form>
-		</div>
 		@endif
 	</div>
 </div>
@@ -66,16 +66,19 @@
             <input type="text" class="form-control" name="channel-category" id="channel-category" placeholder="頻道標題" required>
           </div>
           <div class="form-group">
+            <input type="text" class="form-control" name="channel-description" id="channel-description" placeholder="頻道說明" required>
+          </div>
+          <div class="form-group">
             <input type="text" class="form-control" name="video-title" id="video-title" placeholder="影片標題" required>
           </div>
           <div class="form-group">
-            <input type="text" class="form-control" name="video-description" id="video-description" placeholder="說明">
-          </div>
-          <div class="form-group">
-            <input type="text" class="form-control" name="video-image" id="video-image" placeholder="縮圖鏈結" required>
+            <input type="text" class="form-control" name="video-description" id="video-description" placeholder="影片說明">
           </div>
           <div class="form-group">
             <input type="text" class="form-control" name="video-link" id="video-link" placeholder="影片鏈結" required>
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" name="video-image" id="video-image" placeholder="縮圖鏈結" required>
           </div>
 
           <button style="height: 45px; margin-top: 10px; font-size: 1em; margin-bottom: 20px" type="submit" class="btn btn-info" name="submit">儲存</button>

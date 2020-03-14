@@ -57,13 +57,14 @@ class HomeController extends Controller
     {
         $genre = request('channel-genre');
         $category = request('channel-category');
+        $watchDescription = request('channel-description');
         $title = request('video-title');
-        $description = request('video-description');
+        $videoDescription = request('video-description');
         $image = request('video-image');
         $link = request('video-link');
 
         $user = auth()->user();
-        Mail::to('laughseejapan@gmail.com')->send(new UserUploadVideo($user, $genre, $category, $title, $description, $image, $link));
+        Mail::to('laughseejapan@gmail.com')->send(new UserUploadVideo($user, $genre, $category, $watchDescription, $title, $videoDescription, $image, $link));
         return Redirect::back()->withErrors('影片將在系統處理完畢後自動上傳');   
     }
 

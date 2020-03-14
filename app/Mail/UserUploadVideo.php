@@ -15,8 +15,9 @@ class UserUploadVideo extends Mailable
     public $user;
     public $genre;
     public $category;
+    public $watchDescription;
     public $title;
-    public $description;
+    public $videoDescription;
     public $image;
     public $link;
 
@@ -25,13 +26,14 @@ class UserUploadVideo extends Mailable
      *
      * @return void
      */
-    public function __construct(User $user, String $genre, String $category, String $title, String $description, String $image, String $link)
+    public function __construct(User $user, String $genre, String $category, String $watchDescription, String $title, String $videoDescription, String $image, String $link)
     {
         $this->user = $user;
         $this->genre = $genre;
         $this->category = $category;
+        $this->watchDescription = $watchDescription;
         $this->title = $title;
-        $this->description = $description;
+        $this->videoDescription = $videoDescription;
         $this->image = $image;
         $this->link = $link;
     }
