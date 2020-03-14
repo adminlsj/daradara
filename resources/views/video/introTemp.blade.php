@@ -12,7 +12,7 @@
 		@endif
     </div>
 
-    <div id="subscribe-panel" style="float: left; margin-top: 40px; font-size: 0.85em">
+    <div id="subscribe-panel" style="float: left; margin-top: 41px; font-size: 0.85em">
       @if ($is_subscribed)
         @include('video.unsubscribeBtn')
       @else
@@ -20,7 +20,7 @@
       @endif
     </div>
 </div>
-<div style="margin-top: 15px" class="col-xs-12 col-sm-12 col-md-9">
+<div style="margin-top: 20px" class="col-xs-12 col-sm-12 col-md-9">
     <div class="intro-play-btn" style="width: 100%">
 		<a style="color: white; margin-top: -15px; margin-bottom: 0px;" href="{{ route('video.watch') }}?v={{ $videos->first()->id }}" class="btn btn-info" target="_blank">
 			<i style="vertical-align:middle; font-size: 1.4em; margin-top: -3px; margin-right: -3px;" class="material-icons">play_arrow</i>&nbsp;&nbsp;立即播放
