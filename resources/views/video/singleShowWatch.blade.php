@@ -101,12 +101,10 @@
   <div style="margin-left: 45px;">
     <div class="text-ellipsis" style="padding-right: 50px"><a style="text-decoration: none; color: white;" href="{{ route('video.intro', [$watch->genre, $watch->titleToUrl()]) }}">{{ $video->watch()->title }}</a></div>
     <div style="color: darkgray; font-size: 0.85em; margin-top: -1px;">{{ $video->subscribes()->count() }} 位訂閱者</div>
-    <div id="subscribe-panel">
-      @include('video.subscribe-btn-wrapper')
-    </div>
+    @include('video.subscribe-btn-wrapper')
   </div>
 </div>
-<hr style="border:solid 0.5px #383838; margin-top: 9px; margin-bottom: 0px">
+<hr style="border:solid 0.5px #383838; margin-top: 15px; margin-bottom: 0px">
 
 @if (!$is_mobile)
   @include('video.comment-section-wrapper')

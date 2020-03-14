@@ -52,11 +52,6 @@
 			<div style="padding: 0px 15px;">
 				<div class="row" style="padding-top: 62px; padding-bottom: 10px; padding-left: 0px; margin-right:0px; position: absolute; top: 0px;">
 					@include('video.introTemp')
-					@include('video.subscribeModal', ['watch' => $watch])
-					@if (!Auth::check())
-					  @include('user.signUpModal')
-					  @include('user.loginModal')
-					@endif
 				</div>
 			</div>
 

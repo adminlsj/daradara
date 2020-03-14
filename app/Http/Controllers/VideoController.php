@@ -233,7 +233,9 @@ class VideoController extends Controller
             $is_subscribed = true;
         }
 
-        return view('video.intro', compact('watch', 'videos', 'dropdown', 'related', 'is_program', 'first', 'is_subscribed'));
+        $is_mobile = $this->checkMobile();
+
+        return view('video.intro', compact('watch', 'videos', 'dropdown', 'related', 'is_program', 'first', 'is_subscribed', 'is_mobile'));
     }
 
     public function watch(Request $request){
