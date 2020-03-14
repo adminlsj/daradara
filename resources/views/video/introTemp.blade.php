@@ -1,9 +1,9 @@
-<div class="col-xs-6 col-md-3 col-md-offset-0">
+<div class="col-xs-6 col-md-3 col-md-offset-0" style="padding-right: 5px;">
 	<img class="lazy" style="width: 100%; height: 100%; border-radius: 3px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.5); margin-top: 3px;" src="{{ $watch->imgurDefaultIntro() }}" data-src="{{ $watch->imgurH() }}" data-srcset="{{ $watch->imgurH() }}" alt="{{ $watch->title }}">
 
 	<div style="margin-top: 10px" class="visible-xs visible-sm"></div>
 </div>
-<div class="col-xs-6 col-sm-6 col-md-9" style="padding-left: 0px">
+<div class="col-xs-6 col-sm-6 col-md-9" style="padding-left: 5px">
 	<h4 style="margin-top:5px; margin-bottom: 0px; line-height: 24px; font-size: 1.3em; font-weight: bold; color: white;">{{ $watch->title }}</h4>
 
 	<div style="margin-top: {{ $watch->genre == "variety" ? '5px' : '10px' }}; color:#d3d3d3;"><a style="color:#d3d3d3;" href="{{ route('user.show', $watch->user()) }}">{{ $watch->user()->name }}</a> • </div>
