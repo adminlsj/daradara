@@ -31,6 +31,24 @@ class VideoController extends Controller
 
     public function home(Request $request){
         $selected = $this->trendingWatch();
+
+        $subscribes = [];
+        if (auth()->check()) {
+            $subscriptions = auth()->user()->subscribes();
+            if (!$subscriptions->isEmpty()) {
+                $first = true;
+                foreach ($subscriptions as $subscribe) {
+                    if ($first) {
+                        $subscribes = Video::where('category', $subscribe->category);
+                        $first = false;
+                    } else {
+                        $subscribes = $subscribes->orWhere('category', $subscribe->category);
+                    }
+                }
+                $subscribes = $subscribes->whereDate('uploaded_at', '>=', Carbon::now()->subMonths(6))->orderBy('uploaded_at', 'desc')->limit(8)->get();
+            }
+        }
+
         $trendings = Video::where('genre', 'variety')->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(4))->orWhere('genre', 'drama')->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->inRandomOrder()->limit(8)->get();
         $newest = Video::where('genre', 'variety')->orWhere('genre', 'drama')->orderBy('uploaded_at', 'desc')->limit(8)->get();
         $variety = Video::where('genre', 'variety')
@@ -51,7 +69,7 @@ class VideoController extends Controller
 
         $is_mobile = $this->checkMobile();
 
-        return view('video.home', compact('selected', 'trendings', 'newest', 'variety', 'drama', 'anime', 'load_more', 'is_mobile'));
+        return view('video.home', compact('selected', 'trendings', 'newest', 'variety', 'drama', 'anime', 'load_more', 'is_mobile', 'subscribes'));
     }
 
     public function rank(Request $request){
@@ -296,6 +314,10 @@ class VideoController extends Controller
             $video = Video::find($request->v);
             $video->views++;
             $video->save();
+            if (auth()->check()) {
+                auth()->user()->updated_at = Carbon::now();
+                auth()->user()->save();
+            }
             $current = $video;
 
             foreach ($video->sd() as $sd) {

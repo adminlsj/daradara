@@ -41,7 +41,19 @@
 		        @endforeach
 	        </div>
 
-		    <div style="margin-top: 25px; padding: 0px 20px; padding-bottom: 9px">
+	        @if (count($subscribes) != 0)
+	        	<div style="margin-top: 25px; padding: 0px 20px; padding-bottom: 9px">
+			      <h4>最新訂閱內容</h4>
+			    </div>
+			    @include('video.single-video-slider', ['videos' => $subscribes])
+			    <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 show-more-btn">
+			      <a href="{{ route('video.subscribes') }}">
+			        <div>顯示更多</div>
+			      </a>
+			    </div>
+	        @endif
+
+		    <div style="margin-top: {{ count($subscribes) != 0 ? '70px' : '25px' }}; padding: 0px 20px; padding-bottom: 9px">
 		      <h4>最夯發燒影片</h4>
 		    </div>
 		    @include('video.single-video-slider', ['videos' => $trendings])
