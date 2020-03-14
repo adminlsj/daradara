@@ -7,7 +7,7 @@
 	<h4 style="margin-top:5px; margin-bottom: 0px; line-height: 24px; font-size: 1.3em; font-weight: bold; color: white;">{{ $watch->title }}</h4>
 
 	<div style="margin-top: 10px; color:#d3d3d3;"><a style="color:#d3d3d3;" href="{{ route('user.show', $watch->user()) }}">{{ $watch->user()->name }}</a> • </div>
-	<div style="color:#d3d3d3;">@if ($watch->genre == 'variety')每週{{ App\Video::transDayOfWeek(Carbon\Carbon::parse($watch->created_at )->dayOfWeek) }}晚間播放 • {{ Carbon\Carbon::parse($watch->updated_at)->diffForHumans().'更新' }}
+	<div style="color:#d3d3d3;">@if ($watch->genre == 'variety')每週{{ App\Video::transDayOfWeek(Carbon\Carbon::parse($watch->created_at )->dayOfWeek) }}播放 • {{ Carbon\Carbon::parse($watch->updated_at)->diffForHumans().'更新' }}
 		@else{{ Carbon\Carbon::parse($watch->created_at )->format('Y年m月d日首播') }} • {{ $watch->is_ended ? '已完結全' : '更新至第'.$watch->videos()->count().'集' }}
 		@endif
     </div>
