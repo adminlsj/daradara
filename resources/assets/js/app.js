@@ -85,7 +85,7 @@ $(document).ready(function () {
           scrollTop: $('#' + hash).offset().top - 50
       }, 'slow');
     }
-    $('#' + hash).css("transition", "background-color 1.5s ease-in");
+    $('#' + hash).css("transition", "background-color 3s ease-in");
     $('#' + hash).css("background-color", "#1F1F1F");
 });
 
