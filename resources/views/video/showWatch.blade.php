@@ -46,7 +46,7 @@
 							<div class="hidden-xs hidden-sm" style="margin: 7px 15px 0px 15px;">
 								<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 								<ins class="adsbygoogle"
-								     style="display:block;"
+								     style="display:block; border: 1px solid black;"
 								     data-ad-client="ca-pub-4485968980278243"
 								     data-ad-slot="8455082664"
 								     data-ad-format="auto"
@@ -56,11 +56,9 @@
 								</script>
 							</div>
 
-						    @foreach ($videos as $video)
-							    <div class="related-watch-wrap" style="{{ $video->id == $current->id ? 'background-color: #7A7A7A' : '' }};">
-							    	@include('video.singleRelatedWatch')
-						    	</div>
-						    @endforeach
+							<div id="video-playlist-wrapper">
+								<div style="text-align: center;" class="ajax-loading"><img style="width: 40px; height: auto; padding-top: 14px; padding-bottom: 14px;" src="https://i.imgur.com/TcZjkZa.gif"/></div>
+							</div>
 						</div>
 
 						<div id="Related" class="tabcontent" style="padding-bottom: 7px;">

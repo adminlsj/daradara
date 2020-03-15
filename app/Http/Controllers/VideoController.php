@@ -837,6 +837,23 @@ class VideoController extends Controller
         return view('video.search', compact('videos', 'watch', 'query'));
     }
 
+    public function loadPlaylist(Request $request)
+    {
+        $video = Video::find($request->video_id);
+        $current = $video;
+        
+        if ($video->genre == 'drama' || $video->genre == 'anime') {
+            $videos = Video::where('category', $video->category)->where('season', $video->season)->orderBy('created_at', 'asc')->get();
+        } else {
+            $videos = Video::where('category', $video->category)->where('season', $video->season)->orderBy('created_at', 'desc')->get();
+        }
+
+        $html = view('video.video-playlist-wrapper', compact('videos', 'current'));
+        if ($request->ajax()) {
+            return $html;
+        }
+    }
+
     public function searchGoogle(Request $request)
     {
         return view('video.searchGoogle');
