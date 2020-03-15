@@ -45,13 +45,13 @@
 			<div style="background-image: url({{ $watch->imgurH() }}); background-size: 100% 100%; background-repeat: no-repeat; background-position: 50%; filter: blur(30px); z-index: -1; opacity: 0.5; pointer-events: none;">
 				<div style="padding: 0px 15px">
 					<div style="padding-top: 20px; padding-bottom: 10px; padding-left: 0px;" class="row">
-						@include('video.introTemp')
+						@include('video.introTemp', ['is_background' => true])
 					</div>
 				</div>
 			</div>
 			<div style="padding: 0px 15px;">
 				<div class="row" style="padding-top: 62px; padding-bottom: 10px; padding-left: 0px; margin-right:0px; position: absolute; top: 0px;">
-					@include('video.introTemp')
+					@include('video.introTemp', ['is_background' => false])
 				</div>
 			</div>
 

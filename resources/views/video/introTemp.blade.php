@@ -11,10 +11,17 @@
 		@endif
     </h4>
     
-    <div>
-		<a style="color: white; margin-top: -15px; margin-bottom: 0px;" href="{{ route('video.watch') }}?v={{ $videos->first()->id }}" class="btn btn-info" target="_blank">
-			<i style="vertical-align:middle; font-size: 1.4em; margin-top: -3px; margin-right: -3px;" class="material-icons">play_arrow</i>&nbsp;&nbsp;立即播放
-		</a>
+    <div class="row no-gutter">
+    	<div class="col-xs-8 col-md-4" style="padding-right: 5px;">
+    		<a style="color: white; margin-top: -15px; margin-bottom: 0px;" href="{{ route('video.watch') }}?v={{ $videos->first()->id }}" class="btn btn-info" target="_blank">
+				<i style="vertical-align:middle; font-size: 1.4em; margin-top: -3px; margin-right: -3px;" class="material-icons">play_arrow</i>&nbsp;&nbsp;立即播放
+			</a>
+    	</div>
+    	<div class="col-xs-4 col-md-2">
+    		@if (!$is_background)
+    			@include('video.intro-subscribe-wrapper')
+    		@endif
+		</div>
 	</div>
 
 	<h4 style="white-space: pre-wrap;color:white; line-height: 19px; font-size: 0.95em;">{{ $watch->description }}</h4>

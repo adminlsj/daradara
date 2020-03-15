@@ -498,6 +498,7 @@ class VideoController extends Controller
     {
         $user = User::find(request('subscribe-user-id'));
         $watch = Watch::find(request('subscribe-watch-id'));
+        $source = request('subscribe-source');
 
         if (Subscribe::where('user_id', Auth::user()->id)->where('category', $watch->category)->first() == null) {
             $subscribe = Subscribe::create([
@@ -508,7 +509,19 @@ class VideoController extends Controller
         }
 
         $html = '';
-        $html .= view('video.unsubscribeBtn', compact('watch'));
+        switch ($source) {
+            case 'video':
+                $html .= view('video.unsubscribeBtn', compact('watch'));
+                break;
+
+            case 'intro':
+                $html .= view('video.intro-unsubscribe-btn', compact('watch'));
+                break;
+            
+            default:
+                $html .= view('video.unsubscribeBtn', compact('watch'));
+                break;
+        }
 
         return response()->json([
             'unsubscribe_btn' => $html,
@@ -520,6 +533,7 @@ class VideoController extends Controller
     {
         $user = User::find(request('subscribe-user-id'));
         $watch = Watch::find(request('subscribe-watch-id'));
+        $source = request('subscribe-source');
 
         if (Auth::user()->id == request('subscribe-user-id')) {
             $subscribe = Subscribe::where('user_id', $user->id)->where('category', $watch->category);
@@ -527,7 +541,19 @@ class VideoController extends Controller
         }
 
         $html = '';
-        $html .= view('video.subscribeBtn', compact('watch'));
+        switch ($source) {
+            case 'video':
+                $html .= view('video.subscribeBtn', compact('watch'));
+                break;
+
+            case 'intro':
+                $html .= view('video.intro-subscribe-btn', compact('watch'));
+                break;
+            
+            default:
+                $html .= view('video.subscribeBtn', compact('watch'));
+                break;
+        }
 
         return response()->json([
             'subscribe_btn' => $html,
