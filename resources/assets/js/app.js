@@ -75,6 +75,7 @@ setTimeout(function(){
 
 $(document).ready(function () {
     var hash = window.location.hash.substr(1);
+    $('#' + hash).css("background-color", "#7A7A7A");
     if (is_mobile) {
       $('html, body').animate({
           scrollTop: $('#' + hash).offset().top
@@ -84,6 +85,8 @@ $(document).ready(function () {
           scrollTop: $('#' + hash).offset().top - 50
       }, 'slow');
     }
+    $('#' + hash).css("transition", "background-color 1.5s ease-in");
+    $('#' + hash).css("background-color", "#1F1F1F");
 });
 
 $('form').submit(function(){
