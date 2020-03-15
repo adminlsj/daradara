@@ -487,6 +487,10 @@ class VideoController extends Controller
                 return $html;
             }
 
+            $user = auth()->user();
+            $user->alert = str_replace('subscribe', '', $user->alert);
+            $user->save();
+
             return view('video.subscribeIndex', compact('subscribes', 'videos'));
 
         } else {

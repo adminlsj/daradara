@@ -51,6 +51,12 @@ body {
   margin-right: 20px !important;
 }
 
+.alert-circle:before {
+  content: ' \25CF';
+  font-size: 22px;
+  color: red;
+}
+
 .swiper-container {
   width: 100%;
   height: 100%;
