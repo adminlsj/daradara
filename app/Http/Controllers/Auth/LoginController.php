@@ -36,12 +36,8 @@ class LoginController extends Controller
     protected function redirectTo()
     {
         $previousUrl = Session::get('previousUrl');
-        if (strpos($previousUrl, "/watch?v=") !== FALSE) {
-            return $previousUrl.'&from_subscribe=1';
-
-        } elseif ((strpos($previousUrl, "/variety/") !== FALSE || strpos($previousUrl, "/drama/") !== FALSE || strpos($previousUrl, "/anime/") !== FALSE)) {
-            return $previousUrl.'?from_subscribe=1';
-
+        if ($previousUrl !== '') {
+            return $previousUrl;
         } else {
             return '/subscribes';
         }
@@ -138,19 +134,8 @@ class LoginController extends Controller
 
         $this->clearLoginAttempts($request);
 
-        $previousUrl = url()->previous();
-        if (strpos($previousUrl, "/watch?v=") !== FALSE) {
-            $previousUrl = $previousUrl.'&from_subscribe=1';
-
-        } elseif ((strpos($previousUrl, "/variety/") !== FALSE || strpos($previousUrl, "/drama/") !== FALSE || strpos($previousUrl, "/anime/") !== FALSE)) {
-            $previousUrl = $previousUrl.'?from_subscribe=1';
-
-        } else {
-            $previousUrl = '/subscribes';
-        }
-
         return $this->authenticated($request, $this->guard()->user())
-                ?: redirect()->intended($previousUrl);
+                ?: redirect()->intended($this->redirectTo());
     }
 
     /**

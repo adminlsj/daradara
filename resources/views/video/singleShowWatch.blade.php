@@ -110,11 +110,8 @@
   @include('video.comment-section-wrapper')
 @endif
 
-
-
 @include('video.shareModal')
 @include('video.userReportModal')
-@include('video.subscribeModal', ['watch' => $video->watch()])
 @if (!Auth::check())
   @include('user.signUpModal')
   @include('user.loginModal')

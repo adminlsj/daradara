@@ -10,6 +10,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\Events\Registered;
+use Session;
 
 class RegisterController extends Controller
 {
@@ -33,15 +34,11 @@ class RegisterController extends Controller
      */
     protected function redirectTo()
     {
-        $previous = url()->previous();
-        if (strpos($previous, "/watch?v=") !== FALSE) {
-            return url()->previous().'&from_subscribe=1';
-
-        } elseif ((strpos($previous, "/variety/") !== FALSE || strpos($previous, "/drama/") !== FALSE || strpos($previous, "/anime/") !== FALSE)) {
-            return url()->previous().'?from_subscribe=1';
-
+        $previousUrl = Session::get('previousUrl');
+        if ($previousUrl !== '') {
+            return $previousUrl;
         } else {
-            return '/';
+            return '/subscribes';
         }
     }
 
@@ -105,18 +102,7 @@ class RegisterController extends Controller
 
         $this->guard()->login($user, true);
 
-        $previousUrl = url()->previous();
-        if (strpos($previousUrl, "/watch?v=") !== FALSE) {
-            $previousUrl = $previousUrl.'&from_subscribe=1';
-
-        } elseif ((strpos($previousUrl, "/variety/") !== FALSE || strpos($previousUrl, "/drama/") !== FALSE || strpos($previousUrl, "/anime/") !== FALSE)) {
-            $previousUrl = $previousUrl.'?from_subscribe=1';
-
-        } else {
-            $previousUrl = '/subscribes';
-        }
-
         return $this->registered($request, $user)
-                        ?: redirect($previousUrl);
+                        ?: redirect($this->redirectTo());
     }
 }

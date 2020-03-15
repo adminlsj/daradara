@@ -90,7 +90,7 @@ $('form').submit(function(){
     $(this).find('button[type=submit]').prop('disabled', true);
 });
 
-$('div#subscribeModal').on("submit", "form#subscribe-form", function(e) {
+$('div#subscribe-panel').on("submit", "form#subscribe-form", function(e) {
     $.ajaxSetup({
         header:$('meta[name="_token"]').attr('content')
     })
@@ -102,7 +102,6 @@ $('div#subscribeModal').on("submit", "form#subscribe-form", function(e) {
         data:$(this).serialize(),
         dataType: 'json',
         success: function(data){
-            $('#subscribeModal').modal('hide');
             $("div#subscribe-panel").html(data.unsubscribe_btn);
         },
         error: function(xhr, ajaxOptions, thrownError){
@@ -123,7 +122,6 @@ $('div#subscribe-panel').on("submit", "form#unsubscribe-form", function(e) {
         data:$(this).serialize(),
         dataType: 'json',
         success: function(data){
-            $("button#subscribe-btn").prop('disabled', false);
             $("div#subscribe-panel").html(data.subscribe_btn);
         },
         error: function(xhr, ajaxOptions, thrownError){

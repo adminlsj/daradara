@@ -430,10 +430,28 @@ class VideoController extends Controller
         if (auth()->check()) {
             $subscribes = auth()->user()->subscribes();
             if ($subscribes->isEmpty()) {
-                $variety = Watch::where('genre', 'variety')->orderBy('updated_at', 'desc')->limit(12)->get();
-                $drama = Watch::where('genre', 'drama')->orderBy('updated_at', 'desc')->limit(15)->get();
-                $anime = Watch::where('genre', 'anime')->orderBy('updated_at', 'desc')->limit(15)->get();
-                return view('video.subscribeIndexEmpty', compact('variety', 'drama', 'anime'));
+                $selected = $this->trendingWatch();
+                $trendings = Video::where('genre', 'variety')->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(4))->orWhere('genre', 'drama')->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->inRandomOrder()->limit(8)->get();
+                $newest = Video::where('genre', 'variety')->orWhere('genre', 'drama')->orderBy('uploaded_at', 'desc')->limit(8)->get();
+                $variety = Video::where('genre', 'variety')
+                             ->whereDate('uploaded_at', '>=', Carbon::now()->subMonth())->inRandomOrder()->limit(8)->get();
+                $drama = Video::where('genre', 'drama')
+                             ->whereDate('uploaded_at', '>=', Carbon::now()->subWeek())->inRandomOrder()->limit(8)->get();
+                $anime = Video::where('genre', 'anime')
+                             ->whereDate('uploaded_at', '>=', Carbon::now()->subWeek())->inRandomOrder()->limit(8)->get();
+                $load_more = Video::where('genre', 'variety')->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(4))->orWhere('genre', 'drama')->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->orderBy('views', 'desc')->paginate(8);
+
+                $html = '';
+                foreach ($load_more as $video) {
+                    $html .= view('video.singleLoadMoreSliderVideos', compact('video'));
+                }
+                if ($request->ajax()) {
+                    return $html;
+                }
+
+                $is_mobile = $this->checkMobile();
+
+                return view('video.subscribeIndexEmpty', compact('selected', 'trendings', 'newest', 'variety', 'drama', 'anime', 'load_more', 'is_mobile'));
             }
 
             $videos = [];
@@ -486,9 +504,6 @@ class VideoController extends Controller
         $user = User::find(request('subscribe-user-id'));
         $watch = Watch::find(request('subscribe-watch-id'));
 
-        $user->email = request('email');
-        $user->save();
-
         if (Subscribe::where('user_id', Auth::user()->id)->where('category', $watch->category)->first() == null) {
             $subscribe = Subscribe::create([
                 'user_id' => $user->id,
@@ -508,13 +523,16 @@ class VideoController extends Controller
 
     public function unsubscribe(Request $request)
     {
+        $user = User::find(request('subscribe-user-id'));
+        $watch = Watch::find(request('subscribe-watch-id'));
+
         if (Auth::user()->id == request('subscribe-user-id')) {
-            $subscribe = Subscribe::where('user_id', request('subscribe-user-id'))->where('category', request('subscribe-watch-category'));
+            $subscribe = Subscribe::where('user_id', $user->id)->where('category', $watch->category);
             $subscribe->delete();
         }
 
         $html = '';
-        $html .= view('video.subscribeBtn');
+        $html .= view('video.subscribeBtn', compact('watch'));
 
         return response()->json([
             'subscribe_btn' => $html,
