@@ -73,6 +73,10 @@ body {
   margin-top: 30px;
 }
 
+#intro-play-button {
+  width: 150px;
+}
+
 .no-hover{
     pointer-events: none;
 }
@@ -1576,6 +1580,10 @@ a > i {
 
   #home-first-title {
     margin-top: 20px;
+  }
+
+  #intro-play-button {
+    width: calc(100% - 80px);
   }
 
   .social-login-wrapper-left:hover, .social-login-wrapper-right:hover {
