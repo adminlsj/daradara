@@ -152,7 +152,7 @@ $(document).ready(function(){
     $.ajax({ 
         type:"GET",
         url: "/loadPlaylist",
-        data: {video_id: urlParams.get('v')},
+        data: {v: urlParams.get('v')},
         dataType: 'html',
         success: function(data){
             $('.ajax-loading').html(" ");

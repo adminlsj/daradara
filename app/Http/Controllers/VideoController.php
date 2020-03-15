@@ -375,11 +375,6 @@ class VideoController extends Controller
                 return view('video.show', compact('video', 'videos', 'current', 'is_program'));
 
             } else {
-                if ($video->genre == 'drama' || $video->genre == 'anime') {
-                    $videos = Video::where('category', $video->category)->where('season', $video->season)->orderBy('created_at', 'asc')->get();
-                } else {
-                    $videos = Video::where('category', $video->category)->where('season', $video->season)->orderBy('created_at', 'desc')->get();
-                }
 
                 $query = Video::where('category', $video->category)->where('season', $video->season)->orderBy('created_at', 'asc')->pluck('id')->toArray();
                 $now = array_search($video->id, $query);
@@ -411,7 +406,7 @@ class VideoController extends Controller
 
                 $is_mobile = $this->checkMobile();
 
-                return view('video.showWatch', compact('genre', 'video', 'videos', 'related', 'prev', 'next', 'dropdown', 'watch', 'current', 'is_program', 'is_subscribed', 'is_mobile'));
+                return view('video.showWatch', compact('genre', 'video', 'related', 'prev', 'next', 'dropdown', 'watch', 'current', 'is_program', 'is_subscribed', 'is_mobile'));
             }
         }
     }
@@ -839,9 +834,9 @@ class VideoController extends Controller
 
     public function loadPlaylist(Request $request)
     {
-        $video = Video::find($request->video_id);
+        $video = Video::find($request->v);
         $current = $video;
-        
+
         if ($video->genre == 'drama' || $video->genre == 'anime') {
             $videos = Video::where('category', $video->category)->where('season', $video->season)->orderBy('created_at', 'asc')->get();
         } else {
