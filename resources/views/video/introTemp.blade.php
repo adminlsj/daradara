@@ -12,7 +12,7 @@
     </h4>
     
     <div class="row no-gutter">
-    	<div id="intro-play-button" class="col-xs-8 col-md-4" style="padding-right: 2px;">
+    	<div id="intro-play-button" class="col-xs-8 col-md-4" style="padding-right: 3px;">
     		<a style="color: white; margin-top: -15px; margin-bottom: 0px;" href="{{ route('video.watch') }}?v={{ $videos->first()->id }}" class="btn btn-info" target="_blank">
 				<i style="vertical-align:middle; font-size: 1.4em; margin-top: -3px; margin-right: 3px; margin-left: -7px" class="material-icons">play_arrow</i>立即播放
 			</a>
