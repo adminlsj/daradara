@@ -217,8 +217,10 @@ class HomeController extends Controller
             foreach ($subscribes as $subscribe) {
                 $user = $subscribe->user();
                 Mail::to($user->email)->send(new SubscribeNotify($user, $video));
-                $user->alert = $user->alert."subscribe";
-                $user->save();
+                if (strpos($user->alert, 'subscribe') === false) {
+                    $user->alert = $user->alert."subscribe";
+                    $user->save();
+                }
             }
 
             return redirect()->action('HomeController@singleNewCreate', ['is_program' => false]);
