@@ -5,9 +5,7 @@
 
       {{ csrf_field() }}
       
-      @if (!Auth::check())
-        {{ Session::put('previousUrl', Request::fullUrl()) }}
-      @endif
+      {{ Session::put('previousUrl', Request::fullUrl()) }}
 
       <div style="padding: 15px;" class="modal-content">
         <div style="border: 0px; position: relative;" class="modal-header">
