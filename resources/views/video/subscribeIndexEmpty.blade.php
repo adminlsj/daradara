@@ -10,7 +10,7 @@
 </div>
 <div class="main-content" style="background-color: #F5F5F5;">
 	<div>
-		<div class="padding-setup" style="padding-top: 20px">
+		<div style="padding: 20px; padding-bottom: 0px; ">
 			<i style="font-size: 80px; color: gray; float: left; margin-left: -5px;" class="material-icons">subscriptions</i>
 			<div style="margin-left: 85px; margin-top: 3px; height: 76px">
 				<div style="font-size: 1.2em">讓頻道訂閱信息更充實</div>
