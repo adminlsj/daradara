@@ -7,7 +7,7 @@
     <i style="font-size: 25px; position: relative" class="material-icons">subscriptions</i>
     <span style="padding-right: 1px;">訂閱</span>
     @if (Auth::check() && strpos(auth()->user()->alert, 'subscribe') !== false)
-      <span style="position: absolute; top: -5px; right: calc(60% - 9px); font-size: 4.1em;" class="alert-circle"></span>
+      <span style="position: absolute; top: -5px; right: calc(60% - 9px)" class="alert-circle"></span>
     @endif
   </a>
   <a href="{{ route('video.variety') }}" class="{{ strpos(Request::path(), 'variety' ) !== false || (Request::has('v') && $current->genre == 'variety') ? 'active' : ''}}">

@@ -27,7 +27,7 @@
 
 					<button style="font-weight: 500; margin-top: -20px; font-size: 1.2em; border: none; border-top: solid 4px #d84b6b; outline: none; cursor: pointer; padding: 14px 15px;">相關影片</button>
 
-					<div style="padding: 7px 15px;">
+					<div class="hidden-xs hidden-sm" style="padding: 7px 15px;">
 						<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 						<!-- Horizontal Banner Ads -->
 						<ins class="adsbygoogle"

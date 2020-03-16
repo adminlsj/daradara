@@ -1,5 +1,14 @@
 @include('video.player')
 
+<div class="hidden-md hidden-lg" style="background-color: white; border-top: 1px solid #383838;">
+  <ins class="adsbygoogle"
+       style="display:block"
+       data-ad-format="fluid"
+       data-ad-layout-key="-ie+f-17-3w+bl"
+       data-ad-client="ca-pub-4485968980278243"
+       data-ad-slot="3332191764"></ins>
+</div>
+
 <div style="background-color: #f9f9f9; padding-top: 7px; padding-bottom: 9px; padding-left: 15px; padding-right: 15px;">
     <p style="font-size: 0.9em; padding-bottom: 2px;">
       @foreach ($video->tags() as $tag)

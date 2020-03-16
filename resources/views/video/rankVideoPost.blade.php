@@ -8,7 +8,7 @@
             <h4>{{ $video->title }}</h4>
             <p>
             @if ($video->category == 'video')
-              {{ $video->genre }}
+              {{ $video->genre() }}
             @else
               <a href="{{ route('video.intro', [$video->genre, $video->watch()->titleToUrl()]) }}">{{ $video->watch()->title }}</a>
             @endif
