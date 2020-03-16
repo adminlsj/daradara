@@ -34,10 +34,11 @@
       <i style="color: gray;" class="material-icons pull-right noselect">flag</i>
     </a>
 
-    <a id="shareBtn" style="margin-top: -26px; margin-right:11px; padding-right:7px; cursor: pointer; text-decoration: none;" class="pull-right">
+    <a id="shareBtn" style="margin-top: -26px; margin-right:11px; padding-right:7px; cursor: pointer; text-decoration: none;" class="pull-right" data-toggle="modal" data-target="#shareModal">
       <i style="color: gray;-moz-transform: scale(-1, 1);-webkit-transform: scale(-1, 1);-o-transform: scale(-1, 1);-ms-transform: scale(-1, 1);transform: scale(-1, 1);" class="material-icons pull-right noselect">reply</i>
     </a>
 
+    @include('video.shareModal')
     @include('video.userReportModal')
 
     <div id="videoDescription" style="display: none; margin-top: 10px;">
