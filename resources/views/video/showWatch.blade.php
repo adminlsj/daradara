@@ -25,7 +25,7 @@
 					<div class="col-md-4 single-show-list">
 						<br class="hidden-sm hidden-xs">
 						<!-- Tab links -->
-						<div style="position: relative; {{ !$is_program && $is_mobile ? 'margin-top: -10px' : '' }}" class="tab" id="video-show-tabs-margin-top">
+						<div style="position: relative;" class="tab" id="video-show-tabs-margin-top">
 							<button style="{{ $is_program ? '' : 'display:none' }}" class="tablinks video-tablinks" onclick="openList(event, 'Watch')" id={{ $is_program ? 'defaultOpen' : '' }}>全集列表</button>
 							<button class="tablinks video-tablinks" onclick="openList(event, 'Related')" id={{ $is_program ? '' : 'defaultOpen' }}>相關影片</button>
 							@if ($is_program)

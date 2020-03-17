@@ -55,12 +55,7 @@
     </div>
 
     <div id="videoDescription" style="display: none; margin-top: 5px;">
-      <p style="white-space: pre-wrap; color: white; margin-bottom: 5px;">{{ $video->caption }}</p>
-      <p id="video-tags" style="padding-right:10px; margin-bottom:20px;">
-        @foreach ($video->tags() as $tag)
-            <a href="{{ route('video.search') }}?query={{ $tag }}">#{{ $tag }}</a>
-        @endforeach
-      </p>
+      <p style="white-space: pre-wrap; color: white; margin-bottom: 20px;">{{ $video->caption }}</p>
       @if ($is_program)
         <p style="white-space: pre-wrap; color: white; margin-bottom: 5px;"><strong>劇情大綱</strong></p>
         <p style="white-space: pre-wrap; color: white; margin-bottom: 20px;">{{ $watch != false ? $watch->description : ''}}</p>
@@ -103,8 +98,15 @@
       @include('video.subscribe-btn-wrapper')
     </div>
   </div>
-  <hr style="border:solid 0.5px #383838; margin-top: 15px; margin-bottom: 0px">
 @endif
+
+<div style="margin-top: 15px; padding: 0px 15px; position: relative; padding-right: 40px; width: 100%; overflow-x: hidden; overflow-y: hidden; height: 34px" class="subscribes-tab-inverse" id="subscribe-tags-wrapper">
+  @foreach ($video->tags() as $tag)
+      <a style="margin-right: 3px; text-decoration: none; display: inline-block; margin-bottom: 5px; padding: 5px 10px; font-size: 0.9em" href="{{ route('video.search') }}?query={{ $tag }}">#{{ $tag }}</a>
+  @endforeach
+  <div id="toggle-subscribe-tags" style="position:absolute; top:3px; right:20px; cursor: pointer; color: darkgray" class="pull-right"><i id="toggle-subscribe-tags-icon" class="material-icons noselect">expand_more</i></div>
+</div>
+<hr style="border:solid 0.5px #383838; margin-top: 5px; margin-bottom: 0px">
 
 @if (!$is_mobile)
   @include('video.comment-section-wrapper')

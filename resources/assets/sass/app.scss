@@ -1409,6 +1409,25 @@ a > i {
   border-color: #595959; 
 }
 
+.subscribes-tab-inverse a {
+  padding: 8px 13px;
+  border: 1px #595959 solid;
+  color: white;
+  background-color: #595959;
+  border-radius: 20px;
+  font-weight: 400;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.subscribes-tab-inverse a:hover,
+.subscribes-tab-inverse a:focus, 
+.subscribes-tab-inverse a.active {
+  background-color: #e5e5e5;
+  color: black;
+  border-color: #e5e5e5; 
+}
+
 .intro-play-btn {
   margin-right: 89px;
 }
