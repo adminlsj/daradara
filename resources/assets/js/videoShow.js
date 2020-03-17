@@ -29,8 +29,8 @@ $('[id=toggleVideoDescription]').click(function(e) {
 $('[id=toggle-subscribe-tags]').click(function(e) {
     var wrapper = $("#subscribe-tags-wrapper");
     var icon = $("#toggle-subscribe-tags-icon");
-    if (wrapper.css('height') == 'auto') {
-        wrapper.css('height', '34px');
+    if (icon.html() == 'expand_less') {
+        wrapper.css('height', '39px');
         icon.html('expand_more');
     } else {
         wrapper.css('height', 'auto');
