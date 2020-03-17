@@ -100,13 +100,13 @@
   </div>
 @endif
 
-<div style="margin-top: 15px; padding: 0px 15px; position: relative; padding-right: 40px; width: 100%; overflow-x: hidden; overflow-y: hidden; height: 39px" class="subscribes-tab-inverse" id="subscribe-tags-wrapper">
+<div style="margin-top: 16px; padding: 0px 15px; position: relative; padding-right: 40px; width: 100%; overflow-x: hidden; overflow-y: hidden; height: 39px" class="subscribes-tab-inverse" id="subscribe-tags-wrapper">
   @foreach ($video->tags() as $tag)
       <a style="margin-right: 3px; text-decoration: none; display: inline-block; margin-bottom: 10px; padding: 5px 10px; font-size: 0.9em" href="{{ route('video.search') }}?query={{ $tag }}">#{{ $tag }}</a>
   @endforeach
   <div id="toggle-subscribe-tags" style="position:absolute; top:3px; right:20px; cursor: pointer; color: darkgray" class="pull-right"><i id="toggle-subscribe-tags-icon" class="material-icons noselect">expand_more</i></div>
 </div>
-<hr style="border:solid 0.5px #383838; margin-top: 0px; margin-bottom: 0px">
+<hr style="border:solid 0.5px #383838; margin-top: 1px; margin-bottom: 0px">
 
 @if (!$is_mobile)
   @include('video.comment-section-wrapper')
