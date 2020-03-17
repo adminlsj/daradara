@@ -25,43 +25,61 @@
 					<div class="col-md-4 single-show-list">
 						<br class="hidden-sm hidden-xs">
 						<!-- Tab links -->
-						<div style="position: relative;" class="tab" id="video-show-tabs-margin-top">
-							<button class="tablinks video-tablinks" onclick="openList(event, 'Watch')" id="defaultOpen">全集列表</button>
-							<button class="tablinks video-tablinks" onclick="openList(event, 'Related')">相關影片</button>
-							<a style="position:absolute; top:14px; right:53px; text-decoration: none; {{ $prev != false ? 'color: white;' : 'pointer-events: none; color: #414141;' }}" href="{{ route('video.watch') }}?v={{ $prev }}"><i class="material-icons noselect">skip_previous</i></a>
-							<a style="position:absolute; top:14px; right:13px; text-decoration: none; margin-left: 8px; {{ $next != false ? 'color: white;' : 'pointer-events: none; color: #414141;' }}" href="{{ route('video.watch') }}?v={{ $next }}"><i class="material-icons noselect">skip_next</i></a>
+						<div style="position: relative; {{ !$is_program && $is_mobile ? 'margin-top: -10px' : '' }}" class="tab" id="video-show-tabs-margin-top">
+							<button style="{{ $is_program ? '' : 'display:none' }}" class="tablinks video-tablinks" onclick="openList(event, 'Watch')" id={{ $is_program ? 'defaultOpen' : '' }}>全集列表</button>
+							<button class="tablinks video-tablinks" onclick="openList(event, 'Related')" id={{ $is_program ? '' : 'defaultOpen' }}>相關影片</button>
+							@if ($is_program)
+								<a style="position:absolute; top:14px; right:53px; text-decoration: none; {{ $prev != false ? 'color: white;' : 'pointer-events: none; color: #414141;' }}" href="{{ route('video.watch') }}?v={{ $prev }}"><i class="material-icons noselect">skip_previous</i></a>
+								<a style="position:absolute; top:14px; right:13px; text-decoration: none; margin-left: 8px; {{ $next != false ? 'color: white;' : 'pointer-events: none; color: #414141;' }}" href="{{ route('video.watch') }}?v={{ $next }}"><i class="material-icons noselect">skip_next</i></a>
+							@endif
 						</div>
 
 						<!-- Tab content -->
-						<div id="Watch" class="tabcontent" style="padding-bottom: 7px;">
-							<div class="dropdown" style="margin-top: -5px">
-							  <button onclick="openDropdown()" class="dropbtn">{{ $watch->season }}<span style="padding-left: 7px; padding-right: 0px;" class="stretch dropbtn">v</span></button>
-							  <div id="myDropdown" class="dropdown-content">
-							      @foreach ($dropdown as $watch)
-							      	<a style="color:white; text-decoration: none;" href="{{ route('video.intro', [$watch->genre, $watch->titleToUrl()]) }}">{{ $watch->season }}</a>
-							      @endforeach
-							  </div>
-							</div>
+						@if ($is_program)
+							<div id="Watch" class="tabcontent" style="padding-bottom: 7px;">
+								<div class="dropdown" style="margin-top: -5px">
+								  <button onclick="openDropdown()" class="dropbtn">{{ $watch->season }}<span style="padding-left: 7px; padding-right: 0px;" class="stretch dropbtn">v</span></button>
+								  <div id="myDropdown" class="dropdown-content">
+								      @foreach ($dropdown as $watch)
+								      	<a style="color:white; text-decoration: none;" href="{{ route('video.intro', [$watch->genre, $watch->titleToUrl()]) }}">{{ $watch->season }}</a>
+								      @endforeach
+								  </div>
+								</div>
 
-							<div class="hidden-xs hidden-sm" style="margin: 7px 15px 0px 15px;">
-								<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-								<ins class="adsbygoogle"
-								     style="display:block;"
-								     data-ad-client="ca-pub-4485968980278243"
-								     data-ad-slot="8455082664"
-								     data-ad-format="auto"
-								     data-full-width-responsive="true"></ins>
-								<script>
-								     (adsbygoogle = window.adsbygoogle || []).push({});
-								</script>
-							</div>
+								<div class="hidden-xs hidden-sm" style="margin: 7px 15px 0px 15px;">
+									<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+									<ins class="adsbygoogle"
+									     style="display:block;"
+									     data-ad-client="ca-pub-4485968980278243"
+									     data-ad-slot="8455082664"
+									     data-ad-format="auto"
+									     data-full-width-responsive="true"></ins>
+									<script>
+									     (adsbygoogle = window.adsbygoogle || []).push({});
+									</script>
+								</div>
 
-							<div id="video-playlist-wrapper">
-								<div style="text-align: center;" class="ajax-loading"><img style="width: 40px; height: auto; padding-top: 14px; padding-bottom: 28px;" src="https://i.imgur.com/TcZjkZa.gif"/></div>
+								<div id="video-playlist-wrapper">
+									<div style="text-align: center;" class="ajax-loading"><img style="width: 40px; height: auto; padding-top: 14px; padding-bottom: 28px;" src="https://i.imgur.com/TcZjkZa.gif"/></div>
+								</div>
 							</div>
-						</div>
+						@endif
 
 						<div id="Related" class="tabcontent" style="padding-bottom: 7px;">
+							@if (!$is_program)
+								<div class="hidden-xs hidden-sm" style="margin: 7px 15px 7px 15px;">
+									<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+									<ins class="adsbygoogle"
+									     style="display:block;"
+									     data-ad-client="ca-pub-4485968980278243"
+									     data-ad-slot="8455082664"
+									     data-ad-format="auto"
+									     data-full-width-responsive="true"></ins>
+									<script>
+									     (adsbygoogle = window.adsbygoogle || []).push({});
+									</script>
+								</div>
+							@endif
 							@foreach ($related as $video)
 						    	@include('video.singleRelatedPost')
 						    @endforeach

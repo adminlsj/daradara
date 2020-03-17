@@ -369,10 +369,11 @@ class VideoController extends Controller
                 array_push($related, Video::find($rankings[$i]['id']));
             }
 
+            $is_mobile = $this->checkMobile();
+
             if ($video->category == 'video') {
-                $videos = $related;
                 $is_program = false;
-                return view('video.show', compact('video', 'videos', 'current', 'is_program'));
+                return view('video.showWatch', compact('video', 'related', 'current', 'is_program', 'is_mobile'));
 
             } else {
 
@@ -403,8 +404,6 @@ class VideoController extends Controller
                 if (Auth::check() && Subscribe::where('user_id', Auth::user()->id)->where('category', $watch->category)->first() != null) {
                     $is_subscribed = true;
                 }
-
-                $is_mobile = $this->checkMobile();
 
                 return view('video.showWatch', compact('genre', 'video', 'related', 'prev', 'next', 'dropdown', 'watch', 'current', 'is_program', 'is_subscribed', 'is_mobile'));
             }

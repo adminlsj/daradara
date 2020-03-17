@@ -58,17 +58,15 @@
       <p style="white-space: pre-wrap; color: white; margin-bottom: 5px;">{{ $video->caption }}</p>
       <p id="video-tags" style="padding-right:10px; margin-bottom:20px;">
         @foreach ($video->tags() as $tag)
-          @if (strpos($tag, '完整版') !== false)
-            <a href="{{ route('video.watch') }}?v={{ App\Video::where('category', $video->category)->orderBy('created_at', 'desc')->first()->id }}">#{{ $tag }}</a>
-          @else
             <a href="{{ route('video.search') }}?query={{ $tag }}">#{{ $tag }}</a>
-          @endif
         @endforeach
       </p>
-      <p style="white-space: pre-wrap; color: white; margin-bottom: 5px;"><strong>劇情大綱</strong></p>
-      <p style="white-space: pre-wrap; color: white; margin-bottom: 20px;">{{ $watch != false ? $watch->description : ''}}</p>
-      <p style="white-space: pre-wrap; color: white; margin-bottom: 5px;"><strong>登場人物</strong></p>
-      <p style="white-space: pre-wrap; color: white; margin-bottom: 20px;">{{ $watch != false ? $watch->cast : ''}}</p>
+      @if ($is_program)
+        <p style="white-space: pre-wrap; color: white; margin-bottom: 5px;"><strong>劇情大綱</strong></p>
+        <p style="white-space: pre-wrap; color: white; margin-bottom: 20px;">{{ $watch != false ? $watch->description : ''}}</p>
+        <p style="white-space: pre-wrap; color: white; margin-bottom: 5px;"><strong>登場人物</strong></p>
+        <p style="white-space: pre-wrap; color: white; margin-bottom: 20px;">{{ $watch != false ? $watch->cast : ''}}</p>
+      @endif
     </div>
 
     <div class="show-panel-icons">
@@ -94,17 +92,19 @@
 </div>
 
 <hr style="border:solid 0.5px #383838; margin-top: 53px; margin-bottom: 10px">
-<div style="padding-left: 15px; padding-right: 15px;">
-  <a href="{{ route('video.intro', [$watch->genre, $watch->titleToUrl()]) }}">
-    <img class="lazy img-circle" style="width: 35px; height: auto; float:left;" src="https://i.imgur.com/JMcgEkPs.jpg" data-src="https://i.imgur.com/{{ $video->watch()->imgur }}s.jpg" data-srcset="https://i.imgur.com/{{ $video->watch()->imgur }}s.jpg" alt="{{ $video->watch()->title }}">
-  </a>
-  <div style="margin-left: 45px;">
-    <div class="text-ellipsis" style="padding-right: 50px"><a style="text-decoration: none; color: white;" href="{{ route('video.intro', [$watch->genre, $watch->titleToUrl()]) }}">{{ $video->watch()->title }}</a></div>
-    <div style="color: darkgray; font-size: 0.85em; margin-top: -1px;">{{ $video->subscribes()->count() }} 位訂閱者</div>
-    @include('video.subscribe-btn-wrapper')
+@if ($is_program)
+  <div style="padding-left: 15px; padding-right: 15px;">
+    <a href="{{ route('video.intro', [$watch->genre, $watch->titleToUrl()]) }}">
+      <img class="lazy img-circle" style="width: 35px; height: auto; float:left;" src="https://i.imgur.com/JMcgEkPs.jpg" data-src="https://i.imgur.com/{{ $video->watch()->imgur }}s.jpg" data-srcset="https://i.imgur.com/{{ $video->watch()->imgur }}s.jpg" alt="{{ $video->watch()->title }}">
+    </a>
+    <div style="margin-left: 45px;">
+      <div class="text-ellipsis" style="padding-right: 50px"><a style="text-decoration: none; color: white;" href="{{ route('video.intro', [$watch->genre, $watch->titleToUrl()]) }}">{{ $video->watch()->title }}</a></div>
+      <div style="color: darkgray; font-size: 0.85em; margin-top: -1px;">{{ $video->subscribes()->count() }} 位訂閱者</div>
+      @include('video.subscribe-btn-wrapper')
+    </div>
   </div>
-</div>
-<hr style="border:solid 0.5px #383838; margin-top: 15px; margin-bottom: 0px">
+  <hr style="border:solid 0.5px #383838; margin-top: 15px; margin-bottom: 0px">
+@endif
 
 @if (!$is_mobile)
   @include('video.comment-section-wrapper')
