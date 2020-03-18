@@ -106,6 +106,7 @@ $('div#subscribe-panel').on("submit", "form#subscribe-form", function(e) {
         dataType: 'json',
         success: function(data){
             $("div#subscribe-panel").html(data.unsubscribe_btn);
+            $("span#subscribes-count").html(parseInt($("span#subscribes-count").html()) + 1);
         },
         error: function(xhr, ajaxOptions, thrownError){
             $("#subscribe-panel").html(xhr.responseText);
@@ -126,6 +127,7 @@ $('div#subscribe-panel').on("submit", "form#unsubscribe-form", function(e) {
         dataType: 'json',
         success: function(data){
             $("div#subscribe-panel").html(data.subscribe_btn);
+            $("span#subscribes-count").html(parseInt($("span#subscribes-count").html()) - 1);
         },
         error: function(xhr, ajaxOptions, thrownError){
             $("#subscribe-panel").html(xhr.responseText);

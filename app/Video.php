@@ -20,7 +20,7 @@ class Video extends Model
 
     public function subscribes()
     {
-        return Subscribe::where('category', $this->category)->orderBy('created_at', 'asc')->get();
+        return Subscribe::where('tag', $this->watch()->title)->orderBy('created_at', 'asc')->get();
     }
 
     public function comments()
@@ -75,6 +75,11 @@ class Video extends Model
         }
     }
 
+    public static function tagSubscribeFirst(Subscribe $subscribe)
+    {
+        return Video::where('tags', 'LIKE', '%'.$subscribe->tag.'%')->orderBy('uploaded_at', 'desc')->first();
+    }
+
     public function duration()
     {
         $min = (int) floor($this->duration / 60);
@@ -114,6 +119,21 @@ class Video extends Model
     public function imgur16by9()
     {
         return "https://i.imgur.com/JMcgEkPl.jpg";
+    }
+
+    public function imgurDefaultCircleB()
+    {
+        return "https://i.imgur.com/sMSpYFXb.jpg";
+    }
+
+    public function imgurS()
+    {
+        return "https://i.imgur.com/".$this->imgur."s.jpg";
+    }
+
+    public function imgurB()
+    {
+        return "https://i.imgur.com/".$this->imgur."b.jpg";
     }
 
     public function imgurT()

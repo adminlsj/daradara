@@ -68,41 +68,47 @@
       <div id="video-like-form-wrapper">
         @include('video.like-btn-wrapper')
       </div>
-      <div id="comment-icon" class="single-icon">
-        <i class="material-icons">chat</i>
-        <div>評論</div>
+      <div id="comment-icon" class="single-icon-wrapper">
+        <div class="single-icon">
+          <i class="material-icons">chat</i>
+          <div>評論</div>
+        </div>
       </div>
-      <div id="shareBtn" class="single-icon" data-toggle="modal" data-target="#shareModal">
-        <i class="material-icons noselect" style="-moz-transform: scale(-1, 1);-webkit-transform: scale(-1, 1);-o-transform: scale(-1, 1);-ms-transform: scale(-1, 1);transform: scale(-1, 1); font-size: 2.05em; margin-top: -4px;">reply</i>
-        <div style="margin-top: -4px;">分享</div>
+      <div id="shareBtn" class="single-icon-wrapper" data-toggle="modal" data-target="#shareModal">
+        <div class="single-icon">
+          <i class="material-icons noselect" style="-moz-transform: scale(-1, 1);-webkit-transform: scale(-1, 1);-o-transform: scale(-1, 1);-ms-transform: scale(-1, 1);transform: scale(-1, 1); font-size: 2.2em; margin-top: -4px;">reply</i>
+          <div style="margin-top: -4px;">分享</div>
+        </div>
       </div>
       <div id="video-save-form-wrapper">
         @include('video.save-btn-wrapper')
       </div>
-      <div class="single-icon" data-toggle="modal" data-target="#reportModal">
-        <i class="material-icons noselect">flag</i>
-        <div>報告</div>
+      <div class="single-icon-wrapper" data-toggle="modal" data-target="#reportModal">
+        <div class="single-icon">
+          <i class="material-icons noselect">flag</i>
+          <div>報告</div>
+        </div>
       </div>
     </div>
 </div>
 
 <hr style="border:solid 0.5px #383838; margin-top: 53px; margin-bottom: 10px">
 @if ($is_program)
-  <div style="padding-left: 15px; padding-right: 15px;">
+  <div style="padding-left: 15px; padding-right: 15px; margin-bottom: 16px;">
     <a href="{{ route('video.intro', [$watch->genre, $watch->titleToUrl()]) }}">
       <img class="lazy img-circle" style="width: 35px; height: auto; float:left;" src="https://i.imgur.com/JMcgEkPs.jpg" data-src="https://i.imgur.com/{{ $video->watch()->imgur }}s.jpg" data-srcset="https://i.imgur.com/{{ $video->watch()->imgur }}s.jpg" alt="{{ $video->watch()->title }}">
     </a>
     <div style="margin-left: 45px;">
       <div class="text-ellipsis" style="padding-right: 50px"><a style="text-decoration: none; color: white;" href="{{ route('video.intro', [$watch->genre, $watch->titleToUrl()]) }}">{{ $video->watch()->title }}</a></div>
-      <div style="color: darkgray; font-size: 0.85em; margin-top: -1px;">{{ $video->subscribes()->count() }} 位訂閱者</div>
-      @include('video.subscribe-btn-wrapper')
+      <div style="color: darkgray; font-size: 0.85em; margin-top: -1px;"><span id="subscribes-count">{{ $video->subscribes()->count() }}</span> 位訂閱者</div>
+      @include('video.subscribe-btn-wrapper', ['tag' => $watch->title])
     </div>
   </div>
 @endif
 
-<div style="margin-top: 16px; padding: 0px 15px; position: relative; padding-right: 40px; width: 100%; overflow-x: hidden; overflow-y: hidden; height: 39px" class="subscribes-tab-inverse" id="subscribe-tags-wrapper">
+<div style="padding: 0px 15px; position: relative; padding-right: 40px; width: 100%; overflow-x: hidden; overflow-y: hidden; height: 39px" class="subscribes-tab-inverse" id="subscribe-tags-wrapper">
   @foreach ($video->tags() as $tag)
-      <a style="margin-right: 3px; text-decoration: none; display: inline-block; margin-bottom: 10px; padding: 5px 10px; font-size: 0.9em" href="{{ route('video.search') }}?query={{ $tag }}">#{{ $tag }}</a>
+      <a style="margin-right: 3px; text-decoration: none; display: inline-block; margin-bottom: 10px; padding: 5px 10px; font-size: 0.9em" href="{{ route('video.subscribeTag') }}?query={{ $tag }}">#{{ $tag }}</a>
   @endforeach
   <div id="toggle-subscribe-tags" style="position:absolute; top:3px; right:20px; cursor: pointer; color: darkgray" class="pull-right"><i id="toggle-subscribe-tags-icon" class="material-icons noselect">expand_more</i></div>
 </div>

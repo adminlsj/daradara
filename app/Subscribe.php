@@ -14,7 +14,7 @@ class Subscribe extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'genre', 'category',
+        'user_id', 'type', 'tag',
     ];
 
     public function user()
@@ -24,6 +24,6 @@ class Subscribe extends Model
 
     public function watch()
     {
-        return Watch::where('category', $this->category)->first();
+        return Watch::where('title', $this->tag)->first();
     }
 }

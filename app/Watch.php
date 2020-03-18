@@ -25,7 +25,7 @@ class Watch extends Model
 
     public function subscribes()
     {
-        return Subscribe::where('category', $this->category)->orderBy('created_at', 'asc')->get();
+        return Subscribe::where('tag', $this->title)->orderBy('created_at', 'asc')->get();
     }
 
     public function titleToURL()

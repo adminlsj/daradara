@@ -19,7 +19,7 @@
     	</div>
     	<div class="col-xs-4 col-md-2" style="width: 80px">
     		@if (!$is_background)
-    			@include('video.intro-subscribe-wrapper')
+    			@include('video.intro-subscribe-wrapper', ['tag' => $watch->title])
     		@endif
 		</div>
 	</div>

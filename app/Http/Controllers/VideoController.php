@@ -39,12 +39,23 @@ class VideoController extends Controller
                 $first = true;
                 foreach ($subscriptions as $subscribe) {
                     if ($first) {
-                        $subscribes = Video::where('category', $subscribe->category);
+                        if ($subscribe->type == 'watch') {
+                            $watch = Watch::where('title', $subscribe->tag)->first();
+                            $subscribes = Video::where('category', $watch->category);
+                        } else {
+                            $subscribes = Video::where('tags', 'LIKE', '%'.$subscribe->tag.'%');
+                        }
                         $first = false;
                     } else {
-                        $subscribes = $subscribes->orWhere('category', $subscribe->category);
+                        if ($subscribe->type == 'watch') {
+                            $watch = Watch::where('title', $subscribe->tag)->first();
+                            $subscribes = $subscribes->orWhere('category', $watch->category);
+                        } else {
+                            $subscribes = $subscribes->orWhere('tags', 'LIKE', '%'.$subscribe->tag.'%');
+                        }
                     }
                 }
+
                 $subscribes = $subscribes->whereDate('uploaded_at', '>=', Carbon::now()->subMonths(6))->orderBy('uploaded_at', 'desc')->limit(8)->get();
             }
         }
@@ -246,10 +257,7 @@ class VideoController extends Controller
         $is_program = true;
         $first = $watch->videos()->last();
 
-        $is_subscribed = false;
-        if (Auth::check() && Subscribe::where('user_id', Auth::user()->id)->where('category', $watch->category)->first() != null) {
-            $is_subscribed = true;
-        }
+        $is_subscribed = $this->is_subscribed($watch->title);
 
         $is_mobile = $this->checkMobile();
 
@@ -400,10 +408,7 @@ class VideoController extends Controller
                 $genre = $video->genre;
                 $is_program = true;
 
-                $is_subscribed = false;
-                if (Auth::check() && Subscribe::where('user_id', Auth::user()->id)->where('category', $watch->category)->first() != null) {
-                    $is_subscribed = true;
-                }
+                $is_subscribed = $this->is_subscribed($watch->title);
 
                 return view('video.showWatch', compact('genre', 'video', 'related', 'prev', 'next', 'dropdown', 'watch', 'current', 'is_program', 'is_subscribed', 'is_mobile'));
             }
@@ -457,10 +462,20 @@ class VideoController extends Controller
                 $first = true;
                 foreach ($subscribes as $subscribe) {
                     if ($first) {
-                        $videos = Video::where('category', $subscribe->category);
+                        if ($subscribe->type == 'watch') {
+                            $watch = Watch::where('title', $subscribe->tag)->first();
+                            $videos = Video::where('category', $watch->category);
+                        } else {
+                            $videos = Video::where('tags', 'LIKE', '%'.$subscribe->tag.'%');
+                        }
                         $first = false;
                     } else {
-                        $videos = $videos->orWhere('category', $subscribe->category);
+                        if ($subscribe->type == 'watch') {
+                            $watch = Watch::where('title', $subscribe->tag)->first();
+                            $videos = $videos->orWhere('category', $watch->category);
+                        } else {
+                            $videos = $videos->orWhere('tags', 'LIKE', '%'.$subscribe->tag.'%');
+                        }
                     }
                 }
 
@@ -478,7 +493,7 @@ class VideoController extends Controller
             }
             
             if ($videos != []) {
-                $videos = $videos->whereDate('uploaded_at', '>=', Carbon::now()->subMonths(6))->orderBy('uploaded_at', 'desc')->paginate(10);
+                $videos = $videos->orderBy('uploaded_at', 'desc')->paginate(10);
             }
 
             $html = $this->subscribeLoadHTML($videos);
@@ -500,29 +515,34 @@ class VideoController extends Controller
     public function subscribe(Request $request)
     {
         $user = User::find(request('subscribe-user-id'));
-        $watch = Watch::find(request('subscribe-watch-id'));
         $source = request('subscribe-source');
+        $type = request('subscribe-type');
+        $tag = request('subscribe-tag');
 
-        if (Subscribe::where('user_id', Auth::user()->id)->where('category', $watch->category)->first() == null) {
+        if (Subscribe::where('user_id', Auth::user()->id)->where('tag', $tag)->first() == null) {
             $subscribe = Subscribe::create([
                 'user_id' => $user->id,
-                'genre' => $watch->genre,
-                'category' => $watch->category,
+                'type' => $type,
+                'tag' => $tag,
             ]);
         }
 
         $html = '';
         switch ($source) {
             case 'video':
-                $html .= view('video.unsubscribeBtn', compact('watch'));
+                $html .= view('video.unsubscribeBtn', compact('tag'));
                 break;
 
             case 'intro':
-                $html .= view('video.intro-unsubscribe-btn', compact('watch'));
+                $html .= view('video.intro-unsubscribe-btn', compact('tag'));
+                break;
+
+            case 'tag':
+                $html .= view('video.tag-unsubscribe-btn', compact('tag'));
                 break;
             
             default:
-                $html .= view('video.unsubscribeBtn', compact('watch'));
+                $html .= view('video.unsubscribeBtn', compact('tag'));
                 break;
         }
 
@@ -535,26 +555,31 @@ class VideoController extends Controller
     public function unsubscribe(Request $request)
     {
         $user = User::find(request('subscribe-user-id'));
-        $watch = Watch::find(request('subscribe-watch-id'));
         $source = request('subscribe-source');
+        $type = request('subscribe-type');
+        $tag = request('subscribe-tag');
 
         if (Auth::user()->id == request('subscribe-user-id')) {
-            $subscribe = Subscribe::where('user_id', $user->id)->where('category', $watch->category);
+            $subscribe = Subscribe::where('user_id', $user->id)->where('tag', $tag);
             $subscribe->delete();
         }
 
         $html = '';
         switch ($source) {
             case 'video':
-                $html .= view('video.subscribeBtn', compact('watch'));
+                $html .= view('video.subscribeBtn', compact('tag'));
                 break;
 
             case 'intro':
-                $html .= view('video.intro-subscribe-btn', compact('watch'));
+                $html .= view('video.intro-subscribe-btn', compact('tag'));
+                break;
+
+            case 'tag':
+                $html .= view('video.tag-subscribe-btn', compact('tag'));
                 break;
             
             default:
-                $html .= view('video.subscribeBtn', compact('watch'));
+                $html .= view('video.subscribeBtn', compact('tag'));
                 break;
         }
 
@@ -562,6 +587,20 @@ class VideoController extends Controller
             'subscribe_btn' => $html,
             'csrf_token' => csrf_token(),
         ]);
+    }
+
+    public function subscribeTag(Request $request) {
+        $tag = request('query');
+        $videos = Video::where('tags', 'like', '%'.$tag.'%')->orderBy('uploaded_at', 'desc')->paginate(10);
+
+        $html = $this->subscribeLoadHTML($videos);
+        if ($request->ajax()) {
+            return $html;
+        }
+
+        $is_subscribed = $this->is_subscribed($tag);
+
+        return view('video.subscribeTag', compact('tag', 'videos', 'is_subscribed'));
     }
 
     public function like(Request $request)
@@ -903,6 +942,15 @@ class VideoController extends Controller
         } else {
             return $url;
         }
+    }
+
+    public function is_subscribed(String $tag)
+    {
+        $is_subscribed = false;
+        if (Auth::check() && Subscribe::where('user_id', Auth::user()->id)->where('tag', $tag)->first() != null) {
+            $is_subscribed = true;
+        }
+        return $is_subscribed;
     }
 
     public function updateDuration(Request $request)

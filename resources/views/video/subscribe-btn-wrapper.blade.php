@@ -7,7 +7,7 @@
 		@endif
 	@else
 		<div data-toggle="modal" data-target="#signUpModal">
-		  <button id="subscribe-btn" type="submit" style="font-weight: 500; cursor: pointer; border: none; background-color: inherit; font-size: 1.3em; padding-bottom: 0px; padding-right: 0px; color: crimson">訂閱</button>
+		  <button id="subscribe-btn" class="video-subscribe-btn" type="submit">訂閱</button>
 		</div>
 	@endif
 </div>
