@@ -108,27 +108,36 @@ class HomeController extends Controller
         if (Auth::check() && Auth::user()->email == 'laughseejapan@gmail.com') {
             if ($request->has('c')) {
                 $category = $request->c;
-                $subscribes = Subscribe::where('category', $category)->get();
+                $subscribes = Subscribe::where('tag', $category)->get();
 
                 return view('layouts.checkSubscribesCategory', compact('subscribes'));
                 
             } else {
-                $watches = Watch::all();
+                $subscribes = Subscribe::all();
                 $rankings = [];
-                foreach ($watches as $watch) {
-                    $subscribes = $watch->subscribes()->count();
-                    array_push($rankings, ['subscribes' => $subscribes, 'id' => $watch->id]);
+                foreach ($subscribes as $subscribe) {
+                    $exist = false;
+                    $position = 0;
+                    $i = 0;
+                    foreach ($rankings as $rank) {
+                        if ($rank['tag'] == $subscribe->tag) {
+                            $exist = true;
+                            $position = $i;
+                            break;
+                        }
+                        $i++;
+                    }
+                    if ($exist) {
+                        $rankings[$i]['count'] = $rankings[$i]['count'] + 1;
+                    } else {
+                        array_push($rankings, ['tag' => $subscribe->tag, 'count' => 1]);
+                    }
                 }
                 usort($rankings, function ($a, $b) {
-                    return $b['subscribes'] <=> $a['subscribes'];
+                    return $b['count'] <=> $a['count'];
                 });
 
-                $sortedWatches = [];
-                foreach ($rankings as $rank) {
-                    array_push($sortedWatches, Watch::find($rank['id']));
-                }
-
-                return view('layouts.checkSubscribes', compact('sortedWatches'));
+                return view('layouts.checkSubscribes', compact('rankings'));
             }
 
         } else {
@@ -327,7 +336,7 @@ class HomeController extends Controller
         }
     }
 
-    public function tempMethods()
+    /*public function tempMethods()
     {
         if (Auth::check() && Auth::user()->email == 'laughseejapan@gmail.com') {
             $subscribes = Subscribe::all();
@@ -339,5 +348,5 @@ class HomeController extends Controller
             }
         }
         return redirect()->action('VideoController@home');
-    }
+    }*/
 }

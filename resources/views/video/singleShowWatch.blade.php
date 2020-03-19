@@ -77,7 +77,7 @@
       <div id="shareBtn" class="single-icon-wrapper" data-toggle="modal" data-target="#shareModal">
         <div class="single-icon">
           <i class="material-icons noselect" style="-moz-transform: scale(-1, 1);-webkit-transform: scale(-1, 1);-o-transform: scale(-1, 1);-ms-transform: scale(-1, 1);transform: scale(-1, 1); font-size: 2.2em; margin-top: -4px;">reply</i>
-          <div style="margin-top: -4px;">分享</div>
+          <div style="margin-top: -5px;">分享</div>
         </div>
       </div>
       <div id="video-save-form-wrapper">
@@ -110,7 +110,7 @@
   @foreach ($video->tags() as $tag)
       <a style="margin-right: 3px; text-decoration: none; display: inline-block; margin-bottom: 10px; padding: 5px 10px; font-size: 0.9em" href="{{ route('video.subscribeTag') }}?query={{ $tag }}">#{{ $tag }}</a>
   @endforeach
-  <div id="toggle-subscribe-tags" style="position:absolute; top:3px; right:20px; cursor: pointer; color: darkgray" class="pull-right"><i id="toggle-subscribe-tags-icon" class="material-icons noselect">expand_more</i></div>
+  <div id="toggle-subscribe-tags" style="position:absolute; top:3px; right:19px; cursor: pointer; color: darkgray" class="pull-right"><i id="toggle-subscribe-tags-icon" class="material-icons noselect">expand_more</i></div>
 </div>
 <hr style="border:solid 0.5px #383838; margin-top: 1px; margin-bottom: 0px">
 
