@@ -89,7 +89,7 @@ class VideoController extends Controller
             $weeks = 1;
             switch ($genre) {
                 case 'variety':
-                    $weeks = 2;
+                    $weeks = 1;
                     break;
                 case 'drama':
                     $weeks = 1;
