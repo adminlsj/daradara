@@ -195,13 +195,14 @@ class VideoController extends Controller
         $genre = $request->path();
         if ($genre == 'variety') {
             $selected = $this->trendingWatch();
+            $trendings = Video::where('genre', 'variety')->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(4))->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->inRandomOrder()->limit(8)->get();
             $newest = Video::where('genre', 'variety')->orderBy('uploaded_at', 'desc')->limit(8)->get();
             $artist = Video::whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(4))->where('tags', 'LIKE', '%明星%')->inRandomOrder()->limit(8)->get();
             $trick = Video::whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(4))->where('tags', 'LIKE', '%整人%')->inRandomOrder()->limit(8)->get();
-            $trendings = Video::where('genre', 'variety')->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->orderBy('views', 'desc')->paginate(8);
+            $load_more = Video::where('genre', 'variety')->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->orderBy('views', 'desc')->paginate(8);
 
             $html = '';
-            foreach ($trendings as $video) {
+            foreach ($load_more as $video) {
                 $html .= view('video.singleLoadMoreSliderVideos', compact('video'));
             }            
             if ($request->ajax()) {
@@ -210,7 +211,7 @@ class VideoController extends Controller
 
             $is_mobile = $this->checkMobile();
 
-            return view('video.varietyIndex', compact('genre', 'selected', 'newest', 'artist', 'trick', 'is_mobile'));
+            return view('video.varietyIndex', compact('genre', 'selected', 'trendings', 'newest', 'artist', 'trick', 'is_mobile'));
 
         } else {
             $year = $request->has('y') && $request->y != null ? $request->y : '2020';
@@ -241,6 +242,9 @@ class VideoController extends Controller
         }
         if ($title == '雙層公寓：東京2019 2020') {
             $title = '雙層公寓：東京2019-2020';
+        }
+        if ($title == 'A Studio') {
+            $title = 'A-Studio';
         }
         $watch = Watch::where('genre', $genre)->where('title', $title)->first();
 

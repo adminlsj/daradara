@@ -32,6 +32,16 @@
     </div>
 
     <div style="margin-top: 25px; padding: 0px 20px; padding-bottom: 9px">
+      <h4>最夯發燒影片</h4>
+    </div>
+    @include('video.single-video-slider', ['videos' => $trendings])
+    <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 show-more-btn">
+      <a href="{{ route('video.rank') }}?g=variety">
+        <div>顯示更多</div>
+      </a>
+    </div>
+
+    <div style="margin-top: 70px; padding: 0px 20px; padding-bottom: 9px">
       <h4>最新精彩內容</h4>
     </div>
     @include('video.single-video-slider', ['videos' => $newest])
