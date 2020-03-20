@@ -195,7 +195,7 @@ class VideoController extends Controller
         $genre = $request->path();
         if ($genre == 'variety') {
             $selected = $this->trendingWatch();
-            $trendings = Video::where('genre', 'variety')->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->inRandomOrder()->limit(8)->get();
+            $trendings = Video::where('genre', 'variety')->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(2))->inRandomOrder()->limit(8)->get();
             $newest = Video::where('genre', 'variety')->orderBy('uploaded_at', 'desc')->limit(8)->get();
             $artist = Video::whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(4))->where('tags', 'LIKE', '%明星%')->inRandomOrder()->limit(8)->get();
             $trick = Video::whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(4))->where('tags', 'LIKE', '%整人%')->inRandomOrder()->limit(8)->get();
