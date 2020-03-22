@@ -11,6 +11,9 @@
 |
 */
 
+Route::get('/videoDurationEdit', 'HomeController@videoDurationEdit');
+Route::get('/videoDurationUpdate', 'HomeController@videoDurationUpdate');
+
 Route::get('/', 'VideoController@home');
 
 Route::resource('blog', 'BlogController');
@@ -49,6 +52,7 @@ Route::get('/singleNewCreate', 'HomeController@singleNewCreate')->name('single.c
 Route::post('/singleNewStore', 'HomeController@singleNewStore')->name('single.store');
 Route::get('/sitemap.xml', 'HomeController@sitemap');
 Route::get('/getSource', 'VideoController@getSource');
+Route::get('/createGetSource', 'VideoController@createGetSource');
 Route::get('/loadPlaylist', 'VideoController@loadPlaylist')->name('video.loadPlaylist');
 Route::get('/userReport', 'HomeController@userReport')->name('email.userReport');
 Route::get('/userUploadVideo', 'HomeController@userUploadVideo')->name('email.userUploadVideo');
@@ -66,5 +70,3 @@ Route::get('/{genre}/{title}', 'VideoController@intro')->name('video.intro');
 Route::get('/watch', 'VideoController@watch')->name('video.watch');
 Route::get('/search', ['as' => 'video.search', 'uses' => 'VideoController@search']);
 Route::get('/search-google', ['as' => 'video.searchGoogle', 'uses' => 'VideoController@searchGoogle']);
-
-Route::get('/updateDuration', 'VideoController@updateDuration');

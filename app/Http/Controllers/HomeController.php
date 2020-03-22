@@ -7,6 +7,7 @@ use App\Watch;
 use App\Subscribe;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 use Carbon\Carbon;
 use Response;
 use Mail;
@@ -212,11 +213,40 @@ class HomeController extends Controller
                 'season' => $latest->season,
                 'tags' => request('tags') == "" ? $latest->tags : request('tags'),
                 'views' => request('views') == "" ? $latest->views : request('views'),
-                'duration' => $latest->duration,
+                'duration' => request('duration') == "" ? $latest->duration : request('duration'),
                 'outsource' => false,
                 'created_at' => Carbon::createFromFormat('Y-m-d\TH:i:s', request('created_at'))->format('Y-m-d H:i:s'),
                 'uploaded_at' => Carbon::createFromFormat('Y-m-d\TH:i:s', request('uploaded_at'))->format('Y-m-d H:i:s'),
             ]);
+
+            foreach ($video->sd() as $sd) {
+                $url = $sd;
+                if (strpos($url, "www.bilibili.com") !== FALSE && !$video->outsource) {
+                    $page = 1;
+                    if (($pos = strpos($url, "?p=")) !== FALSE) { 
+                        $page = substr($url, $pos + 3);
+                        $url = str_replace("?p=".$page, "", $url);
+                    }
+                    if (($pos = strpos($url, "av")) !== FALSE) { 
+                        $aid = substr($url, $pos + 2); 
+                    }
+                    try {
+                        $curl_connection = curl_init("https://api.bilibili.com/x/web-interface/view?aid=".$aid);
+                        curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+                        curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+                        curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+                        $data = json_decode(curl_exec($curl_connection), true);
+                        $cid = $data['data']['pages'][$page - 1]["cid"];
+                        curl_close($curl_connection);
+
+                        $video->sd = str_replace($sd, "https://api.bilibili.com/x/player/playurl?avid=".$aid."&cid=".$cid."&qn=0&type=mp4&otype=json&fnver=0&fnval=1&platform=html5&html5=1&high_quality=1", $video->sd);
+                        $video->save();
+
+                    } catch(Exception $e) {
+                        return $e->getMessage();
+                    }
+                }
+            }
 
             $users = [];
             $userArray = [];
@@ -254,11 +284,22 @@ class HomeController extends Controller
                 }
             }
 
-            return redirect()->action('HomeController@singleNewCreate', ['is_program' => false]);
+            // return view('layouts.getVideoDuration', compact('video')); 
+            return redirect()->action('HomeController@singleNewCreate');
 
         } else {
             return redirect()->action('VideoController@home');
         }
+    }
+
+    public function videoDurationUpdate(Request $request)
+    {
+        $out = new \Symfony\Component\Console\Output\ConsoleOutput();
+        $video = Video::find(Input::get('video'));
+        $video->duration = Input::get('dura');
+        $out->writeln("Duration is ".Input::get('dura'));
+        $video->save();
+        return $video;
     }
 
     function get_string_between($string, $start, $end){

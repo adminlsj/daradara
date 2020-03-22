@@ -6,8 +6,10 @@
 
 @section('content')
 
-<form action="{{ route('single.store') }}" method="POST" style="padding-top: 15px;" class="padding-setup mobile-container">
+<form id="singleNewCreateForm" action="{{ route('single.store') }}" method="POST" style="padding-top: 15px;" class="padding-setup mobile-container">
 	{{ csrf_field() }}
+
+	<input id="duration" name="duration" type="hidden" value="">
 
 	<div class="form-group">
 		<label for="category">Category</label>
@@ -54,8 +56,14 @@
 		<input type="datetime-local" class="form-control" name="uploaded_at" id="uploaded_at" placeholder="(optional)" value="{{ Carbon\Carbon::now()->format('Y-m-d\TH:i:s') }}">
 	</div>
 
-	<button type="submit" class="btn btn-info">Submit</button>
+	<button id="singleNewCreateBtn" type="submit" class="btn btn-info">Submit</button>
 	<br><br>
 </form>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/dplayer/dist/DPlayer.min.css">
+<div style="display: none;" id="dplayer"></div>
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+<script src="https://cdn.jsdelivr.net/npm/flv.js/dist/flv.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dplayer/dist/DPlayer.min.js"></script>
 
 @endsection

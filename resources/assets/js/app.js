@@ -21,6 +21,38 @@ const app = new Vue({
     el: '#app'
 });
 
+$(document).on("click", "#singleNewCreateBtn", function(e) {
+    e.preventDefault(e);
+    $(this).prop('disabled', true);
+
+    $.ajax({
+       type:'GET',
+       url:'/createGetSource',
+       data: {url: $('#link').val()},
+       success: function(data){
+          const dp = new DPlayer({
+            container: document.getElementById('dplayer'),
+            autoplay: false,
+            theme: '#d84b6b',
+            preload: 'auto',
+            volume: 0,
+            video: {
+              url: data,
+            },
+          });
+          dp.video.pause();
+
+          $('video').on('loadedmetadata', function() {
+              $('#duration').val(dp.video.duration.toFixed(0));
+              $('#singleNewCreateForm').submit();
+          });
+       },
+       error: function(xhr, ajaxOptions, thrownError){
+         $("#meta").html('error');
+       }
+    });
+});
+
 $('[id=toggleSearchBar]').click(function(e) {
     var x = document.getElementById("searchBar");
     if (x.style.display === "none") {
