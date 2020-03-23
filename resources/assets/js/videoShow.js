@@ -198,6 +198,14 @@ $(document).ready(function(){
     });
 });
 
+$('#others-text').focus(function() {
+    $('input:radio[id=others]').prop('checked', true);
+});
+
+$('input:radio[id=others]').click(function(){
+    $('#others-text').focus();
+});
+
 /* Standard syntax */
 document.addEventListener("fullscreenchange", function() {
   handleFullscreenChange()

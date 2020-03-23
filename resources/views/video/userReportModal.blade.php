@@ -31,7 +31,7 @@
           <div style="margin-top: 5px;" class="form-check">
             <input class="form-check-input" type="radio" name="userReportReason" id="others" value="其他原因" required>
             <label style="font-weight: 400; margin-left: 10px;" class="form-check-label" for="others">
-              其他原因
+              其他原因：<input type="text" class="form-control-plaintext" name="others-text" id="others-text" value="">
             </label>
           </div>
         </div>

@@ -49,6 +49,9 @@ class HomeController extends Controller
             'userReportReason' => 'required'
         ]);
         $reason = request('userReportReason');
+        if ($reason == '其他原因') {
+            $reason = $reason.'：'.request('others-text');
+        }
         $video = Video::find(request('video-id'));
         Mail::to('laughseejapan@gmail.com')->send(new UserReport($reason, $video));
         return Redirect::back()->withErrors('感謝您向我們提供意見或回報任何錯誤。');
