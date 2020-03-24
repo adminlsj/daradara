@@ -4,7 +4,7 @@
         <div class="col-xs-5 col-sm-5 col-md-4 col-lg-3" style="padding-right: 10px">
             <img class="lazy" style="border-radius: 5px; width: 100%; height: 100%;" src="{{ $video->imgur16by9() }}" data-src="{{ $video->imgurL() }}" data-srcset="{{ $video->imgurL() }}" alt="{{ $video->title }}">
         </div>
-        <div class="col-xs-7 col-sm-7 col-md-8 col-lg-9" style="padding-top: 1px; padding-left: 0px;">
+        <div class="col-xs-7 col-sm-7 col-md-8 col-lg-9" style="padding-top: 0px; padding-left: 0px;">
             <h4>{{ $video->title }}</h4>
             <p>
             @if ($video->category == 'video')
