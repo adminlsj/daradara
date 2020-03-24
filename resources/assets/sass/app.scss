@@ -1641,6 +1641,10 @@ a > i {
   padding-left: 45px;
 }
 
+.rank-index-padding-top {
+  padding-top: 35px;
+}
+
 @media (max-width: 991px) {
   #content-div {
     padding-bottom: 50px
@@ -1648,6 +1652,10 @@ a > i {
 
   #home-first-title {
     margin-top: 20px;
+  }
+
+  .rank-index-padding-top {
+    padding-top: 40px;
   }
 
   #intro-play-button {

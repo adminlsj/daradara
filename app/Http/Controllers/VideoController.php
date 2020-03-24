@@ -84,6 +84,7 @@ class VideoController extends Controller
     }
 
     public function rank(Request $request){
+        $selected = $this->trendingWatch();
         if ($request->has('g') && $request->g != 'null') {
             $genre = $request->g;
             $weeks = 1;
@@ -107,7 +108,7 @@ class VideoController extends Controller
                 return $html;
             }
 
-            return view('video.rankIndex', compact('videos'));
+            return view('video.rankIndex', compact('videos', 'selected'));
         } else {
             $videos = Video::whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->orderBy('views', 'desc')->paginate(10);
             $html = $this->rankLoadHTML($videos);
@@ -115,11 +116,12 @@ class VideoController extends Controller
                 return $html;
             }
 
-            return view('video.rankIndex', compact('videos'));
+            return view('video.rankIndex', compact('videos', 'selected'));
         }
     }
 
     public function newest(Request $request){
+        $selected = Watch::where('genre', 'variety')->orderBy('updated_at', 'desc')->limit(20)->get();
         if ($request->has('g') && $request->g != 'null') {
             $genre = $request->g;
             $months = 1;
@@ -143,7 +145,7 @@ class VideoController extends Controller
                 return $html;
             }
 
-            return view('video.newestIndex', compact('videos'));
+            return view('video.newestIndex', compact('videos', 'selected'));
         } else {
             $videos = Video::whereDate('uploaded_at', '>=', Carbon::now()->subMonths(1))->orderBy('uploaded_at', 'desc')->paginate(10);
             $html = $this->rankLoadHTML($videos);
@@ -151,7 +153,7 @@ class VideoController extends Controller
                 return $html;
             }
 
-            return view('video.newestIndex', compact('videos'));
+            return view('video.newestIndex', compact('videos', 'selected'));
         }
     }
 
