@@ -8,11 +8,11 @@
             <h4>{{ $video->title }}</h4>
             <p>
             @if ($video->category == 'video')
-              {{ $video->genre() }}
+              {{ $video->genre() }} • 
             @else
-              <a href="{{ route('video.intro', [$video->genre, $video->watch()->titleToUrl()]) }}">{{ $video->watch()->title }}</a>
+              <a class="text-ellipsis-mobile" href="{{ route('video.intro', [$video->genre, $video->watch()->titleToUrl()]) }}">{{ $video->watch()->title }} • </a>
             @endif
-             • <br class="hidden-md hidden-lg">觀看次數：{{ $video->views() }}次 • {{ Carbon\Carbon::parse($video->uploaded_at)->diffForHumans() }}</p>
+            觀看次數：{{ $video->views() }}次 • {{ Carbon\Carbon::parse($video->uploaded_at)->diffForHumans() }}</p>
             <p style="margin-top: 9px; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;" class="hidden-xs hidden-sm">{{ $video->caption }}</p>
         </div>
     </div>

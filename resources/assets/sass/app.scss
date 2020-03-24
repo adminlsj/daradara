@@ -1654,6 +1654,14 @@ a > i {
     margin-top: 20px;
   }
 
+  .text-ellipsis-mobile {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+  }
+
   .rank-index-padding-top {
     padding-top: 40px;
   }
