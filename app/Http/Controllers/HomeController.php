@@ -314,7 +314,8 @@ class HomeController extends Controller
         return substr($string, $ini, $len);
     }
 
-    public function bccToSrt(String $url){
+    public function bccToSrt(Request $request){
+        $url = request('url');
         try {
             $curl_connection = curl_init($url);
             curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);

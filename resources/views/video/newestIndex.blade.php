@@ -29,7 +29,7 @@
 	        @endforeach
 	    </div>
 
-		<div style="margin-top: 15px; padding: 0px 20px;" class="video-sidebar-wrapper padding-setup">
+		<div style="margin-top: 14px; padding: 0px 20px;" class="video-sidebar-wrapper padding-setup">
 			@switch(Request::get('g'))
 			    @case('variety')
 			        <h4>綜藝最新內容</h4>
@@ -43,7 +43,7 @@
 			    @default
 			        <h4>最新精彩內容</h4>
 			@endswitch
-			<div style="padding-top: 9px"></div>
+			<div style="padding-top: 10px"></div>
 		    <div id="sidebar-results"><!-- results appear here --></div>
 		    <div style="text-align: center;" class="ajax-loading"><img style="width: 40px; height: auto; padding-top: 15px; padding-bottom: 30px;" src="https://i.imgur.com/TcZjkZa.gif"/></div>
 		</div>
