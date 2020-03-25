@@ -13,7 +13,7 @@
 
 	<div style="background-color: #F5F5F5;" class="rank-index-padding-top">
 		<div id='home-first-title' style="padding: 0px 20px; padding-bottom: 8px">
-	      <h4>最夯熱門頻道<a href="{{ route('video.varietyList') }}" style="float: right; text-decoration: none; color: black"><i style="vertical-align:middle; font-size: 1em; margin-top: -3.5px;" class="material-icons">arrow_forward_ios</i></a></h4>
+	      <h4>LaughSeeJapan熱門頻道<a href="{{ route('video.varietyList') }}" style="float: right; text-decoration: none; color: black"><i style="vertical-align:middle; font-size: 1em; margin-top: -3.5px;" class="material-icons">arrow_forward_ios</i></a></h4>
 	    </div>
 	    <div id="custom-scroll-slider">
 		    @foreach ($selected as $watch)

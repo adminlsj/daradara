@@ -1471,6 +1471,24 @@ a > i {
   border-color: #e5e5e5; 
 }
 
+.explore-tab a {
+  padding: 8px 13px;
+  border: 1px #e5e5e5 solid;
+  color: black;
+  background-color: white;
+  border-radius: 20px;
+  font-weight: 400;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.explore-tab a:hover,
+.explore-tab a:focus, 
+.explore-tab a.active {
+  background-color: #e5e5e5;
+  border-color: black; 
+}
+
 .intro-play-btn {
   margin-right: 89px;
 }
