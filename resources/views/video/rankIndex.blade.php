@@ -30,9 +30,9 @@
 
 		<div style="margin-top: 25px; padding: 0px 20px;">
 			@if (Request::path() == 'rank')
-				<h4><a style="text-decoration: none; color: inherit;" href="{{ route('video.rank') }}">發燒影片</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a style="color: #595959; font-weight: 300" href="{{ route('video.newest') }}">最新內容</a></h4>
+				<h4><a style="text-decoration: none; color: inherit;" href="{{ route('video.rank') }}">發燒影片</a><span style="color: #595959; font-weight: 300">&nbsp;&nbsp;|&nbsp;&nbsp;</span><a style="color: #595959; font-weight: 300" href="{{ route('video.newest') }}">最新內容</a></h4>
 			@elseif (Request::path() == 'newest')
-				<h4><a style="text-decoration: none; color: inherit;" href="{{ route('video.newest') }}">最新內容</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a style="color: #595959; font-weight: 300" href="{{ route('video.rank') }}">發燒影片</a></h4>
+				<h4><a style="text-decoration: none; color: inherit;" href="{{ route('video.newest') }}">最新內容</a><span style="color: #595959; font-weight: 300">&nbsp;&nbsp;|&nbsp;&nbsp;</span><a style="color: #595959; font-weight: 300" href="{{ route('video.rank') }}">發燒影片</a></h4>
 			@endif
 			<div style="padding-top: 9px"></div>
 		    <div id="sidebar-results"><!-- results appear here --></div>
