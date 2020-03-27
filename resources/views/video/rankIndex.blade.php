@@ -30,19 +30,7 @@
 	    </div>
 
 		<div style="margin-top: 14px; padding: 0px 20px;" class="video-sidebar-wrapper">
-			@switch(Request::get('g'))
-			    @case('variety')
-			        <h4>綜藝發燒影片</h4>
-			        @break
-			    @case('drama')
-			        <h4>日劇發燒影片</h4>
-			        @break
-			    @case('anime')
-			        <h4>動漫發燒影片</h4>
-			        @break
-			    @default
-			        <h4>最夯發燒影片</h4>
-			@endswitch
+			<h4>發燒影片</h4> | <h4>最新內容</h4>
 			<div style="padding-top: 9px"></div>
 		    <div id="sidebar-results"><!-- results appear here --></div>
 		    <div style="text-align: center;" class="ajax-loading"><img style="width: 40px; height: auto; padding-top: 15px; padding-bottom: 30px;" src="https://i.imgur.com/TcZjkZa.gif"/></div>
