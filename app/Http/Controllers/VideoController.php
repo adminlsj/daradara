@@ -92,7 +92,7 @@ class VideoController extends Controller
 
             case 'newest':
                 $selected = Watch::where('genre', 'variety')->orderBy('updated_at', 'desc')->limit(20)->get();
-                $videos = Video::whereDate('uploaded_at', '>=', Carbon::now()->subMonths(1))->orderBy('uploaded_at', 'desc')->paginate(10);
+                $videos = Video::where('genre', 'variety')->whereDate('uploaded_at', '>=', Carbon::now()->subMonths(1))->orderBy('uploaded_at', 'desc')->paginate(10);
                 break;
             
             default:
