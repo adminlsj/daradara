@@ -34,7 +34,7 @@
     </div>
     @include('video.single-video-slider', ['videos' => $trendings])
     <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 show-more-btn">
-      <a href="{{ route('video.rank') }}?g=variety">
+      <a href="{{ route('video.rank') }}">
         <div>顯示更多</div>
       </a>
     </div>
@@ -44,7 +44,7 @@
     </div>
     @include('video.single-video-slider', ['videos' => $newest])
     <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 show-more-btn">
-      <a href="{{ route('video.newest') }}?g=variety">
+      <a href="{{ route('video.newest') }}">
         <div>顯示更多</div>
       </a>
     </div>
