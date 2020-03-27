@@ -60,8 +60,8 @@ Route::get('/userUploadVideo', 'HomeController@userUploadVideo')->name('email.us
 
 Route::get('/trending', 'VideoController@watch')->name('video.trending');
 
-Route::get('/rank', 'VideoController@rank')->name('video.rank');
-Route::get('/newest', 'VideoController@newest')->name('video.newest');
+Route::get('/rank', 'VideoController@explore')->name('video.rank');
+Route::get('/newest', 'VideoController@explore')->name('video.newest');
 Route::get('/variety', 'VideoController@genre')->name('video.variety');
 Route::get('/varietyList', 'VideoController@genreList')->name('video.varietyList');
 Route::get('/drama', 'VideoController@genre')->name('video.drama');

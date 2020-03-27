@@ -83,6 +83,32 @@ class VideoController extends Controller
         return view('video.home', compact('selected', 'trendings', 'newest', 'variety', 'drama', 'anime', 'load_more', 'is_mobile', 'subscribes'));
     }
 
+    public function explore(Request $request){
+        switch ($request->path()) {
+            case 'rank':
+                $selected = $this->trendingWatch();
+                $videos = Video::whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->orderBy('views', 'desc')->paginate(10);
+                break;
+
+            case 'newest':
+                $selected = Watch::where('genre', 'variety')->orderBy('updated_at', 'desc')->limit(20)->get();
+                $videos = Video::whereDate('uploaded_at', '>=', Carbon::now()->subMonths(1))->orderBy('uploaded_at', 'desc')->paginate(10);
+                break;
+            
+            default:
+                $selected = $this->trendingWatch();
+                $videos = Video::whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->orderBy('views', 'desc')->paginate(10);
+                break;
+        }
+
+        $html = $this->rankLoadHTML($videos);
+        if ($request->ajax()) {
+            return $html;
+        }
+
+        return view('video.rankIndex', compact('videos', 'selected'));
+    }
+
     public function rank(Request $request){
         $selected = $this->trendingWatch();
         if ($request->has('g') && $request->g != 'null') {
