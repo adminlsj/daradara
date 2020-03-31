@@ -227,14 +227,12 @@ document.addEventListener("msfullscreenchange", function() {
 });
 
 function handleFullscreenChange() {
-  if (!is_mobile) {
     var videoWrap = $(".dplayer-video-wrap");
     if (videoWrap.css("padding-bottom") == "0px") {
         videoWrap.css("padding-bottom", "56.25%");
     } else {
         videoWrap.css("padding-bottom", "0px");
     }
-  }
 }
 
 function showSnackbar(text) {

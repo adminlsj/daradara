@@ -184,13 +184,13 @@ class VideoController extends Controller
     }
 
     public function genre(Request $request){
-        /*$id = 2482;
-        $genre = 'variety';
-        $category = 'scgy';
-        $season = '東京2019-2020';
-        $title = '雙層公寓：東京2019-2020';
-        $created_at = new Carbon('2019-05-02 10:29:32');
-        for ($i = 1; $i <= 33; $i++) { 
+        /*$id = 3526;
+        $genre = 'drama';
+        $category = 'thdyc';
+        $season = '第一季';
+        $title = '天皇的御廚';
+        $created_at = new Carbon('2015-04-26 10:29:32');
+        for ($i = 1; $i <= 12; $i++) { 
             $video = Video::create([
                 'id' => $id,
                 'title' =>  $title.'【第'.$i.'話】',
@@ -198,7 +198,7 @@ class VideoController extends Controller
                 'genre' => $genre,
                 'category' => $category,
                 'season' => $season,
-                'tags' => '東京2019-2020 雙層公寓 排屋公寓 TerraceHouse 愛情 YOU 玲奈 德井義實 山里亮太 登坂廣臣 綜藝',
+                'tags' => '天皇的御廚 日劇',
                 'hd' => 'https://archive.org/download/sqzw_11/SQZW0'.$i.'.mp4',
                 'sd' => 'https://archive.org/download/sqzw_11/SQZW0'.$i.'.mp4',
                 'imgur' => 'JMcgEkP',
@@ -211,7 +211,7 @@ class VideoController extends Controller
             $id++;
         }
         $watch = Watch::create([
-            'id' => 189,
+            'id' => 271,
             'genre' => $genre,
             'category' => $category,
             'season' => $season,
