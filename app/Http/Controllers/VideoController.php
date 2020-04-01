@@ -361,31 +361,9 @@ class VideoController extends Controller
             $current = $video;
 
             foreach ($video->sd() as $sd) {
-                $url = $sd;
-                if (strpos($url, "www.bilibili.com") !== FALSE && !$video->outsource) {
-                    $page = 1;
-                    if (($pos = strpos($url, "?p=")) !== FALSE) { 
-                        $page = substr($url, $pos + 3);
-                        $url = str_replace("?p=".$page, "", $url);
-                    }
-                    if (($pos = strpos($url, "av")) !== FALSE) { 
-                        $aid = substr($url, $pos + 2); 
-                    }
-                    try {
-                        $curl_connection = curl_init("https://api.bilibili.com/x/web-interface/view?aid=".$aid);
-                        curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
-                        curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
-                        curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
-                        $data = json_decode(curl_exec($curl_connection), true);
-                        $cid = $data['data']['pages'][$page - 1]["cid"];
-                        curl_close($curl_connection);
-
-                        $video->sd = str_replace($sd, "https://api.bilibili.com/x/player/playurl?avid=".$aid."&cid=".$cid."&qn=0&type=mp4&otype=json&fnver=0&fnval=1&platform=html5&html5=1&high_quality=1", $video->sd);
-                        $video->save();
-
-                    } catch(Exception $e) {
-                        return $e->getMessage();
-                    }
+                if (strpos($sd, "www.bilibili.com") !== FALSE && !$video->outsource) {
+                    $video->sd = str_replace($sd, Video::getLinkBB($sd, $video->outsource), $video->sd);
+                    $video->save();
                 }
             }
 
@@ -982,55 +960,10 @@ class VideoController extends Controller
         if (strpos($url, 'https://www.instagram.com/p/') !== false) {
             return Video::getSourceIG($url);
         } elseif (strpos($url, 'www.bilibili.com') !== false) {
-            return $this->getSourceBB($url);
+            $link = Video::getLinkBB($url, false);
+            return Video::getSourceBB($link);
         } else {
             return $url;
-        }
-    }
-
-    public static function getSourceBB($url)
-    {
-        $page = 1;
-        if (($pos = strpos($url, "?p=")) !== FALSE) { 
-            $page = substr($url, $pos + 3);
-            $url = str_replace("?p=".$page, "", $url);
-        }
-        if (($pos = strpos($url, "av")) !== FALSE) { 
-            $aid = substr($url, $pos + 2); 
-        }
-        try {
-            $curl_connection = curl_init("https://api.bilibili.com/x/web-interface/view?aid=".$aid);
-            curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
-            curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
-            $data = json_decode(curl_exec($curl_connection), true);
-            $cid = $data['data']['pages'][$page - 1]["cid"];
-            curl_close($curl_connection);
-
-            $url = "https://api.bilibili.com/x/player/playurl?avid=".$aid."&cid=".$cid."&qn=0&type=mp4&otype=json&fnver=0&fnval=1&platform=html5&html5=1&high_quality=1";
-
-            $curl_connection = curl_init($url);
-            curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
-            curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
-            curl_setopt($curl_connection, CURLOPT_HTTPHEADER, [
-                'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:56.0) Gecko/20100101 Firefox/56.0',
-                'Host: api.bilibili.com',
-                'Cookie: SESSDATA=1feadc09%2C1582358038%2Ca8f2f511;'
-            ]);
-            $data = json_decode(curl_exec($curl_connection), true);
-            curl_close($curl_connection);
-
-            $durl = $data['data']['durl'][0];
-            $url = $durl['url'];
-
-            $start = strpos($url, 'http');
-            $end = strpos($url, 'upgcxcode/');
-            $url = substr_replace($url, 'https://cn-hk-eq-bcache-01.bilivideo.com/upgcxcode/', $start, $end - $start + 10);
-            return $url;
-
-        } catch(Exception $e) {
-            return $e->getMessage();
         }
     }
 

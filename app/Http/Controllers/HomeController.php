@@ -21,25 +21,21 @@ class HomeController extends Controller
 {
     public function aboutUs()
     {
-        $is_program = false;
-        return view('layouts.about-us', compact('is_program'));
+        return view('layouts.about-us');
     }
 
     public function terms()
     {
-        $is_program = false;
         return view('layouts.terms', compact('is_program'));
     }
 
     public function policies()
     {
-        $is_program = false;
         return view('layouts.policies', compact('is_program'));
     }
 
     public function copyright()
     {
-        $is_program = false;
         return view('layouts.copyright', compact('is_program'));
     }
 
@@ -191,7 +187,7 @@ class HomeController extends Controller
     public function singleNewStore(Request $request)
     {
         if (Auth::check() && Auth::user()->email == 'laughseejapan@gmail.com') {
-            $latest = Video::where('category', request('category'))->orderBy('created_at', 'desc')->first();
+            $latest = Video::where('category', request('category'))->orderBy('uploaded_at', 'desc')->first();
             $title = request('title');
             if ($title == "") {
                 $prevEpisode = $this->get_string_between($latest->title, '【第', '話】');
@@ -223,32 +219,8 @@ class HomeController extends Controller
             ]);
 
             foreach ($video->sd() as $sd) {
-                $url = $sd;
-                if (strpos($url, "www.bilibili.com") !== FALSE && !$video->outsource) {
-                    $page = 1;
-                    if (($pos = strpos($url, "?p=")) !== FALSE) { 
-                        $page = substr($url, $pos + 3);
-                        $url = str_replace("?p=".$page, "", $url);
-                    }
-                    if (($pos = strpos($url, "av")) !== FALSE) { 
-                        $aid = substr($url, $pos + 2); 
-                    }
-                    try {
-                        $curl_connection = curl_init("https://api.bilibili.com/x/web-interface/view?aid=".$aid);
-                        curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
-                        curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
-                        curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
-                        $data = json_decode(curl_exec($curl_connection), true);
-                        $cid = $data['data']['pages'][$page - 1]["cid"];
-                        curl_close($curl_connection);
-
-                        $video->sd = str_replace($sd, "https://api.bilibili.com/x/player/playurl?avid=".$aid."&cid=".$cid."&qn=0&type=mp4&otype=json&fnver=0&fnval=1&platform=html5&html5=1&high_quality=1", $video->sd);
-                        $video->save();
-
-                    } catch(Exception $e) {
-                        return $e->getMessage();
-                    }
-                }
+                $video->sd = str_replace($sd, Video::getLinkBB($sd, $video->outsource), $video->sd);
+                $video->save();
             }
 
             $users = [];
@@ -287,7 +259,6 @@ class HomeController extends Controller
                 }
             }
 
-            // return view('layouts.getVideoDuration', compact('video')); 
             return redirect()->action('HomeController@singleNewCreate');
 
         } else {

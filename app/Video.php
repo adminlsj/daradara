@@ -221,6 +221,35 @@ class Video extends Model
         return $results = print_r($outputsd[0], true);*/
     }
 
+    public static function getLinkBB(String $url, Bool $outsource)
+    {
+        if (strpos($url, "www.bilibili.com") !== FALSE && !$outsource) {
+            $page = 1;
+            if (($pos = strpos($url, "?p=")) !== FALSE) { 
+                $page = substr($url, $pos + 3);
+                $url = str_replace("?p=".$page, "", $url);
+            }
+            if (($pos = strpos($url, "BV")) !== FALSE) { 
+                $bvid = substr($url, $pos + 2); 
+            }
+            try {
+                $curl_connection = curl_init("https://api.bilibili.com/x/web-interface/view?bvid=".$bvid);
+                curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+                curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+                $data = json_decode(curl_exec($curl_connection), true);
+                $aid = $data['data']['stat']['aid'];
+                $cid = $data['data']['pages'][$page - 1]["cid"];
+                curl_close($curl_connection);
+
+                return "https://api.bilibili.com/x/player/playurl?avid=".$aid."&bvid=".$bvid."&cid=".$cid."&qn=0&type=mp4&otype=json&fnver=0&fnval=1&platform=html5&html5=1&high_quality=1";
+
+            } catch(Exception $e) {
+                return $e->getMessage();
+            }
+        }
+    }
+
     public static function transDayOfWeek($day)
     {
         $weekMap = [
