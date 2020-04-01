@@ -230,7 +230,7 @@ class Video extends Model
                 $url = str_replace("?p=".$page, "", $url);
             }
             if (($pos = strpos($url, "BV")) !== FALSE) { 
-                $bvid = substr($url, $pos + 2); 
+                $bvid = substr($url, $pos); 
             }
             try {
                 $curl_connection = curl_init("https://api.bilibili.com/x/web-interface/view?bvid=".$bvid);
