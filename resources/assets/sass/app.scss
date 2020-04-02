@@ -79,6 +79,14 @@ body {
   display: none !important;
 }
 
+.variety-list-btn i {
+  color: #595959;
+}
+
+.variety-list-btn:hover .variety-list-arrow {
+  color: black;
+}
+
 #home-first-title {
   margin-top: 30px;
 }
