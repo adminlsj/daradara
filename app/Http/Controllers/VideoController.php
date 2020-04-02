@@ -106,7 +106,9 @@ class VideoController extends Controller
             return $html;
         }
 
-        return view('video.rankIndex', compact('videos', 'selected'));
+        $is_mobile = $this->checkMobile();
+
+        return view('video.rankIndex', compact('videos', 'selected', 'is_mobile'));
     }
 
     public function rank(Request $request){
