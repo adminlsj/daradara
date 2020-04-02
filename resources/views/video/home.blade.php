@@ -25,7 +25,7 @@
 			</div>
 
 		    <div id='home-first-title' style="padding: 0px 20px; padding-bottom: 8px">
-		      <h4>LaughSeeJapan熱門頻道</h4>
+		      <h4>LaughSeeJapan熱門頻道<a href="{{ route('video.varietyList') }}" style="float: right; text-decoration: none; color: black" class="hidden-md hidden-lg"><i style="vertical-align:middle; font-size: 1em; margin-top: -3.5px;" class="material-icons">arrow_forward_ios</i></a></h4>
 		    </div>
 		    @include('video.single-watch-slider')
 
