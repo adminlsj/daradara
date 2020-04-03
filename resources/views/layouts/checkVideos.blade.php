@@ -38,6 +38,9 @@
 	    })
 
 	    .done(function(data){
+	    	$("#checking").remove();
+	    	$("#body").append('<div id="checking">CHECKING ' + data.id + '</div>');
+
 	    	const dp = new DPlayer({
 	            container: document.getElementById('dplayer'),
 	            autoplay: false,
@@ -58,6 +61,7 @@
 	        if (page == data.count){
 	        	var message = '<div>CHECK FINISHED</div>';
 	        	$("#body").append(message);
+	        	$("#checking").remove();
 	        	$('.ajax-loading').html(" ");
 	            return;
 	        } else {
