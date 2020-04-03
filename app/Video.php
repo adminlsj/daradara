@@ -204,13 +204,17 @@ class Video extends Model
             $data = json_decode(curl_exec($curl_connection), true);
             curl_close($curl_connection);
 
-            $durl = $data['data']['durl'][0];
-            $url = $durl['url'];
+            if (array_key_exists('durl', $data['data'])) {
+                $durl = $data['data']['durl'][0];
+                $url = $durl['url'];
 
-            $start = strpos($url, 'http');
-            $end = strpos($url, 'upgcxcode/');
-            $url = substr_replace($url, 'https://cn-hk-eq-bcache-01.bilivideo.com/upgcxcode/', $start, $end - $start + 10);
-            return $url;
+                $start = strpos($url, 'http');
+                $end = strpos($url, 'upgcxcode/');
+                $url = substr_replace($url, 'https://cn-hk-eq-bcache-01.bilivideo.com/upgcxcode/', $start, $end - $start + 10);
+                return $url;
+            } else {
+                return 'error';
+            }
         } catch(Exception $e) {
             return $e->getMessage();
         }

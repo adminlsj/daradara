@@ -76,18 +76,29 @@ class HomeController extends Controller
         return Response::view('layouts.sitemap', compact('videos', 'watches', 'time'))->header('Content-Type', 'application/xml');
     }
 
-    public function check()
+    public function check(Request $request)
     {
-        if (Auth::check() && Auth::user()->email == 'laughseejapan@gmail.com') {
-            $videos = Video::where('outsource', false)->where('sd', 'not like', "%.m3u8%")->orderBy('id', 'asc')->get();
+        $videos = Video::where('outsource', false)->orderBy('id', 'desc')->paginate(1);
+        $count = Video::where('outsource', false)->orderBy('id', 'desc')->count();
+
+        if ($request->ajax()) {
+            return response()->json([
+                'id' => $videos->first()->id,
+                'title' => $videos->first()->title,
+                'link' => $videos->first()->source(),
+                'count' => $count,
+            ]);
+        }
+        return view('layouts.checkVideos', compact('videos'));
+        /* if (Auth::check() && Auth::user()->email == 'laughseejapan@gmail.com') {
+            $videos = Video::where('outsource', false)->where('sd', 'not like', "%.m3u8%")->orderBy('id', 'desc')->get();
             echo "Video Check STARTED<br>";
             foreach ($videos as $video) {
                 foreach ($video->sd() as $url) {
                     if (strpos($url, 'https://www.instagram.com/p/') !== false) {
                         $url = $video->getSourceIG($url);
                     } elseif (strpos($url, 'https://api.bilibili.com/') !== false) {
-                        echo $video->getSourceBB($url);
-                        echo '<br>';
+                        $url = $video->getSourceBB($url);
                     }
                     $headers = get_headers($url);
                     $http_response_code = substr($headers[0], 9, 3);
@@ -100,7 +111,7 @@ class HomeController extends Controller
             
         } else {
             return redirect()->action('VideoController@home');
-        }
+        } */
     }
 
     public function checkSubscribes(Request $request)
