@@ -69,7 +69,7 @@
 		</div>
 	</div>
 
-	<div class="paravi-padding-setup row" style="margin: 30px auto 35px auto;">
+	<div class="paravi-padding-setup row hidden-md hidden-lg" style="margin: 30px auto 35px auto;">
 		<div style="margin: 0px -5px;">
 		    @include('layouts.single-genre-card', ['genre' => '綜藝', 'imgur' => 'iXyOfUs', 'link' => route('video.variety')])
 		    @include('layouts.single-genre-card', ['genre' => '日劇', 'imgur' => 'aALP7mY', 'link' => route('video.drama')])
