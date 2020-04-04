@@ -68,18 +68,6 @@
       </div>
     </div>
   </div>
-
-    <!-- Initialize Swiper -->
-    <script>
-      var swiper = new Swiper('.swiper-container', {
-        slidesPerView: 'auto',
-        freeMode: true,
-        mousewheel: true,
-        spaceBetween: 10,
-      });
-    </script>
-
-  </div>
 </div>
 @endsection
 

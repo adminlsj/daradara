@@ -36,12 +36,25 @@ class Video extends Model
     public function title()
     {
         $title = $this->title;
-        if ($this->genre == 'drama' || $this->genre == 'anime' || $this->category == 'scgy' || $this->category == 'labs') {
+        if ($this->genre == 'drama' || $this->genre == 'anime' || $this->category == 'scgy' || $this->category == 'labs' || $this->category == 'jdrdsfyq') {
             $start = strpos($title, "【");
             $end = strpos($title, "】") - $start;
             return str_replace("【", "", substr($title, $start, $end));
         } else {
             return $title;
+        }
+    }
+
+    public function explodeTitle()
+    {
+        $title = $this->title;
+        if ($this->genre == 'drama' || $this->genre == 'anime' || $this->category == 'scgy' || $this->category == 'labs' || $this->category == 'jdrdsfyq') {
+            $start = strpos($title, "【");
+            $end = strpos($title, "】") - $start;
+            return str_replace("【", "", substr($title, $start, $end));
+        } else {
+            $explode = explode(' ', $title);
+            return end($explode);
         }
     }
 
@@ -204,7 +217,7 @@ class Video extends Model
             $data = json_decode(curl_exec($curl_connection), true);
             curl_close($curl_connection);
 
-            if (array_key_exists('durl', $data['data'])) {
+            if (array_key_exists('data', $data) && array_key_exists('durl', $data['data'])) {
                 $durl = $data['data']['durl'][0];
                 $url = $durl['url'];
 

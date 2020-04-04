@@ -26,6 +26,64 @@ body {
     overflow-x:hidden;
 }
 
+.paravi-padding-setup {
+  width: 92%;
+  margin: 0 auto;
+}
+
+.hover-opacity-all:hover {
+  opacity: 0.8;
+}
+
+.hover-opacity img:hover {
+  opacity: 0.8;
+}
+
+.hover-underline h4:hover {
+  text-decoration: underline;
+}
+
+.slider-wrapper .slider-scroll-left, .slider-wrapper .slider-scroll-right {
+  width: 35px; 
+  height: 35px; 
+  background-color: white; 
+  padding: 10px; 
+  box-shadow: 1px 1px 1px rgba(0,0,0,0.3); 
+  border-radius: 50%; 
+  position: absolute; 
+  top: 50px; 
+  cursor: pointer;
+}
+
+.slider-wrapper .slider-scroll-left {
+  left: -35px;
+  display: none;
+}
+
+.slider-wrapper .slider-scroll-right {
+  right: -35px;
+}
+
+.slider-wrapper:hover .slider-scroll-left {
+  left: 45px;
+  transition: 0.5s;
+}
+
+.slider-wrapper:hover .slider-scroll-right {
+  right: 45px;
+  transition: 0.5s;
+}
+
+.slider-wrapper:not(:hover) .slider-scroll-left {
+  left: -35px;
+  transition: 0.5s;
+}
+
+.slider-wrapper:not(:hover) .slider-scroll-right {
+  right: -35px;
+  transition: 0.5s;
+}
+
 #custom-scroll-slider {
   width: 100%;
   overflow-x: auto;
@@ -40,15 +98,46 @@ body {
 }
 
 #custom-scroll-slider > div {
-  margin-right: 6px;
+  margin-right: 5px;
 }
 
 #custom-scroll-slider div:first-child {
-  margin-left: 20px !important;
+  margin-left: 4% !important;
 }
 
 #custom-scroll-slider div:last-child {
-  margin-right: 20px !important;
+  margin-right: 4% !important;
+}
+
+#custom-scroll-slider .hover-opacity {
+  width: 215px !important;
+}
+
+.video-slider-title {
+  padding-bottom: 2px;
+  color: #222222;
+  margin-top: 25px;
+}
+
+.video-slider-title h4 {
+  font-size: 1.4em;
+  letter-spacing: 0.1px;
+}
+
+.video-slider-title a {
+  text-decoration: none;
+  color: #222222 !important;
+  font-size: 0.8em;
+  font-weight: 400;
+  margin-left: 10px;
+}
+
+.video-slider-title i {
+  vertical-align:middle;
+  font-size: 0.8em;
+  margin-left:4px;
+  margin-top: -2px;
+  font-weight: 500;
 }
 
 .alert-circle:before {
@@ -1674,13 +1763,19 @@ a > i {
   padding-top: 35px;
 }
 
+@media (max-width: 768px) {
+  #custom-scroll-slider .hover-opacity {
+    width: 150px !important;
+  }
+
+  #custom-scroll-slider > div {
+    margin-right: 1px;
+  }
+}
+
 @media (max-width: 991px) {
   #content-div {
     padding-bottom: 50px
-  }
-
-  #home-first-title {
-    margin-top: 20px;
   }
 
   .text-ellipsis-mobile {

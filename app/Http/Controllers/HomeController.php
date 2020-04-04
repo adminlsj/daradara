@@ -78,32 +78,51 @@ class HomeController extends Controller
 
     public function check(Request $request)
     {
-        $videos = Video::where('outsource', false)->orderBy('id', 'desc')->paginate(1);
-        $count = Video::where('outsource', false)->orderBy('id', 'desc')->count();
-
-        if ($request->ajax()) {
-            return response()->json([
-                'id' => $videos->first()->id,
-                'title' => $videos->first()->title,
-                'link' => $videos->first()->source(),
-                'count' => $count,
-            ]);
-        }
-        return view('layouts.checkVideos', compact('videos'));
         /* if (Auth::check() && Auth::user()->email == 'laughseejapan@gmail.com') {
+            $videos = Video::where('outsource', false)->orderBy('id', 'desc')->paginate(1);
+            $count = Video::where('outsource', false)->orderBy('id', 'desc')->count();
+
+            if ($request->ajax()) {
+                return response()->json([
+                    'id' => $videos->first()->id,
+                    'title' => $videos->first()->title,
+                    'link' => $videos->first()->source(),
+                    'count' => $count,
+                ]);
+            }
+
+            return view('layouts.checkVideos', compact('videos'));
+
+        } else {
+            return redirect()->action('VideoController@home');
+        } */
+        if (Auth::check() && Auth::user()->email == 'laughseejapan@gmail.com') {
             $videos = Video::where('outsource', false)->where('sd', 'not like', "%.m3u8%")->orderBy('id', 'desc')->get();
             echo "Video Check STARTED<br>";
             foreach ($videos as $video) {
                 foreach ($video->sd() as $url) {
                     if (strpos($url, 'https://www.instagram.com/p/') !== false) {
                         $url = $video->getSourceIG($url);
+                        $headers = get_headers($url);
+                        $http_response_code = substr($headers[0], 9, 3);
+                        if (!($http_response_code == 200)) {
+                          echo "<span style='color:red; font-weight:600;'>/watch?v=".$video->id."【".$video->title."】</span><br>";
+                        }
                     } elseif (strpos($url, 'https://api.bilibili.com/') !== false) {
-                        $url = $video->getSourceBB($url);
-                    }
-                    $headers = get_headers($url);
-                    $http_response_code = substr($headers[0], 9, 3);
-                    if (!($http_response_code == 200)) {
-                      echo "<span style='color:red; font-weight:600;'>/watch?v=".$video->id."【".$video->title."】</span><br>";
+                        $curl_connection = curl_init($url);
+                        curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+                        curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+                        curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+                        curl_setopt($curl_connection, CURLOPT_HTTPHEADER, [
+                            'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:56.0) Gecko/20100101 Firefox/56.0',
+                            'Host: api.bilibili.com',
+                            'Cookie: SESSDATA=1feadc09%2C1582358038%2Ca8f2f511;'
+                        ]);
+                        $data = json_decode(curl_exec($curl_connection), true);
+                        curl_close($curl_connection);
+                        if (!array_key_exists('data', $data) || !array_key_exists('durl', $data['data'])) {
+                            echo "<span style='color:red; font-weight:600;'>/watch?v=".$video->id."【".$video->title."】</span><br>";
+                        }
                     }
                 }
             }
@@ -111,7 +130,7 @@ class HomeController extends Controller
             
         } else {
             return redirect()->action('VideoController@home');
-        } */
+        }
     }
 
     public function checkSubscribes(Request $request)

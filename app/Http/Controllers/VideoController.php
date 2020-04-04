@@ -60,14 +60,14 @@ class VideoController extends Controller
             }
         }
 
-        $trendings = Video::where('genre', 'variety')->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(4))->orWhere('genre', 'drama')->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->inRandomOrder()->limit(8)->get();
-        $newest = Video::where('genre', 'variety')->orWhere('genre', 'drama')->orderBy('uploaded_at', 'desc')->limit(8)->get();
+        $trendings = Video::where('genre', 'variety')->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(4))->orWhere('genre', 'drama')->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->inRandomOrder()->limit(12)->get();
+        $newest = Video::where('genre', 'variety')->orWhere('genre', 'drama')->orderBy('uploaded_at', 'desc')->limit(12)->get();
         $variety = Video::where('genre', 'variety')
-                     ->whereDate('uploaded_at', '>=', Carbon::now()->subMonth())->inRandomOrder()->limit(8)->get();
+                     ->whereDate('uploaded_at', '>=', Carbon::now()->subMonth())->inRandomOrder()->limit(12)->get();
         $drama = Video::where('genre', 'drama')
-                     ->whereDate('uploaded_at', '>=', Carbon::now()->subWeek())->inRandomOrder()->limit(8)->get();
+                     ->whereDate('uploaded_at', '>=', Carbon::now()->subWeek())->inRandomOrder()->limit(12)->get();
         $anime = Video::where('genre', 'anime')
-                     ->whereDate('uploaded_at', '>=', Carbon::now()->subWeek())->inRandomOrder()->limit(8)->get();
+                     ->whereDate('uploaded_at', '>=', Carbon::now()->subWeek())->inRandomOrder()->limit(12)->get();
         $load_more = Video::where('genre', 'variety')->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->orWhere('genre', 'drama')->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->orderBy('views', 'desc')->paginate(8);
 
         $html = '';
@@ -771,7 +771,7 @@ class VideoController extends Controller
 
     public function trendingWatch()
     {
-        return Watch::where('category', 'monday')->orWhere('category', 'monitoring')->orWhere('category', '24xsbzx')->orWhere('category', 'home')->orWhere('category', 'lddtz')->orWhere('category', 'talk')->orWhere('category', 'nmbgsz')->orWhere('category', 'djyhly')->orWhere('category', 'syrddowntown')->orWhere('category', 'scgy')->orWhere('category', 'szbzddsj')->orWhere('category', 'vsarashi')->orWhere('category', 'yjyjdwxyh')->orWhere('category', 'nnjcd')->orWhere('category', 'zrds')->orWhere('category', 'qytzz')->orWhere('category', 'sjqmwy')->orWhere('category', 'msydt')->orWhere('category', 'xxsdcj')->orWhere('category', 'xyfsb')->inRandomOrder()->get();
+        return Watch::where('category', 'monday')->orWhere('category', 'monitoring')->orWhere('category', '24xsbzx')->orWhere('category', 'home')->orWhere('category', 'lddtz')->orWhere('category', 'talk')->orWhere('category', 'nmbgsz')->orWhere('category', 'djyhly')->orWhere('category', 'syrddowntown')->orWhere('category', 'scgy')->orWhere('category', 'szbzddsj')->orWhere('category', 'vsarashi')->orWhere('category', 'yjyjdwxyh')->orWhere('category', 'nnjcd')->orWhere('category', 'zrds')->orWhere('category', 'qytzz')->orWhere('category', 'msydt')->orWhere('category', 'xyfsb')->inRandomOrder()->get();
     }
 
     /**

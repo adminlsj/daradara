@@ -27,7 +27,6 @@
 	$(document).ready(function() {
         $("#body").append('<div>CHECK STARTED</div>');
 	    load_more(page);
-	    page++;
 	});
 
 	function load_more(page){

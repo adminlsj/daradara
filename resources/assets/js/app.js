@@ -21,6 +21,20 @@ const app = new Vue({
     el: '#app'
 });
 
+$('.slider-scroll-right').click(function() {
+    $(this).parent().children(':first-child').animate({
+      scrollLeft: '+=' + (parseInt(($(window).width() - 60) / 224) * 224)
+    }, 'slow');
+
+    $(this).prev().css('display', 'block');
+})
+
+$('.slider-scroll-left').click(function() {
+    $(this).parent().children(':first-child').animate({
+      scrollLeft: '-=' + (parseInt(($(window).width() - 60) / 224) * 224)
+    }, 'slow');
+})
+
 $(document).on("click", "#singleNewCreateBtn", function(e) {
     e.preventDefault(e);
     $(this).prop('disabled', true);
