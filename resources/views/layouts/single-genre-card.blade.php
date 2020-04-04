@@ -3,7 +3,7 @@
 	  <a style="text-decoration: none; color: black;" href="{{ $link }}">
 	    <img class="lazy" style="width: 100%; height: 100%; border-top-left-radius: 10px; border-top-right-radius: 10px;" src="https://i.imgur.com/sMSpYFXl.jpg" data-src="https://i.imgur.com/{{ $imgur }}l.jpg" data-srcset="https://i.imgur.com/{{ $imgur }}l.jpg">
 
-	    <div style="height: 47px; padding: 2px 15px;">
+	    <div style="height: 45px; padding: 2px 15px;">
 	      <h4 style="line-height: 19px; font-size: 1em; font-weight: 450;">{{ $genre }}</h4>
 	    </div>
 	  </a>
