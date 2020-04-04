@@ -37,7 +37,7 @@
 		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 		<!-- Home Desktop Ads -->
 		<ins class="adsbygoogle"
-		     style="display:block; border: 1px solid black"
+		     style="display:block; border: 1px solid black !important"
 		     data-ad-client="ca-pub-4485968980278243"
 		     data-ad-slot="4478704168"
 		     data-ad-format="auto"
