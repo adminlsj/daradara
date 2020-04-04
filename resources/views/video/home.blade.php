@@ -7,7 +7,7 @@
 @section('content')
 <div style="background-color: #FEFEFE;">
 
-	<div class="row no-gutter paravi-padding-setup" style="margin: 20px auto 50px auto; position:relative;">
+	<div class="row no-gutter paravi-padding-setup hidden-xs hidden-sm" style="margin: 20px auto 50px auto; position:relative;">
 		@foreach ($selected as $watch)
 			<div class="col-xs-3 col-sm-2 col-md-2 hover-opacity">
 				@if ($loop->iteration == 9 || $loop->iteration == 10)
@@ -25,6 +25,12 @@
 				<a href="{{ route('video.varietyList') }}" style="background-color: #d84b6b; color: white; padding: 10px 40px; border-radius: 50px; font-size: 1em">更多熱門頻道<i style="vertical-align: middle; font-size: 0.8em; margin-top: -2px; margin-left: 5px; margin-right: -5px" class="material-icons">arrow_forward_ios</i></a>
 			</div>
 		</div>
+	</div>
+
+	<div class="hidden-md hidden-lg">
+		<a href="{{ route('video.varietyList') }}">
+			<img style="width: 100%; height: 100%; display: inline-block;" src="https://i.imgur.com/J0Jadmvh.jpg" alt="LaughSeeJapan 娛見日本">
+		</a>
 	</div>
 
 	<div class="paravi-padding-setup" style="padding: 0px 6%; padding-bottom: 12px">
