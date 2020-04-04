@@ -29,7 +29,7 @@
 
 	<div class="hidden-md hidden-lg">
 		<a href="{{ route('video.varietyList') }}">
-			<img style="width: 100%; height: 100%; display: inline-block;" src="https://i.imgur.com/kgpP39Ph.jpg" alt="LaughSeeJapan 娛見日本">
+			<img style="width: 100%; height: 100%; display: inline-block;" src="https://i.imgur.com/9Fi3zWah.jpg" alt="LaughSeeJapan 娛見日本">
 		</a>
 	</div>
 
@@ -64,7 +64,7 @@
 				</div>
 			</a>
 			<a href="{{ route('video.intro', ['drama', 'MIU404']) }}" class="col-xs-4 hover-opacity-all hidden-xs">
-				<img style="width: 100%; height: 100%; display: inline-block;" src="https://i.imgur.com/9Fi3zWah.jpg">
+				<img style="width: 100%; height: 100%; display: inline-block;" src="https://i.imgur.com/2loSVtch.jpg">
 				<div style="text-align: center; margin-top: 0.7vw">
 					<span class="featured-new-tag">NEW</span>
 					<span class="featured-catchphrase">搞笑偵探拍檔，笑笑更健康！</span>
