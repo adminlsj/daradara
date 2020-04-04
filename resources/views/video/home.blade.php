@@ -33,7 +33,7 @@
 		</a>
 	</div>
 
-	<div class="paravi-padding-setup" style="padding: 0px 6%; padding-bottom: 12px">
+	<div class="paravi-padding-setup home-horizontal-ads">
 		<div style="border: 1px solid black">
 			<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 			<!-- Home Desktop Ads -->

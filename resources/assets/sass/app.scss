@@ -145,6 +145,11 @@ body {
   margin-left: 9px;
 }
 
+.home-horizontal-ads {
+  padding: 0px 6%; 
+  padding-bottom: 12px;
+}
+
 .video-slider-title {
   padding-bottom: 2px;
   margin-top: 25px;
@@ -1809,6 +1814,12 @@ a > i {
 
   .home-featured-wrapper a {
     padding: 0px 5px !important;
+  }
+
+  .home-horizontal-ads {
+    padding: 0px; 
+    margin-top: -20px;
+    margin-bottom: -10px;
   }
 
   #custom-scroll-slider .hover-opacity {
