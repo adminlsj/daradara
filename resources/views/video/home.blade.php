@@ -75,32 +75,32 @@
     @endif
 
     <div class="video-slider-title paravi-padding-setup">
-    	<h4>最夯發燒影片<a href="{{ route('video.rank') }}">更多內容<i class="material-icons">arrow_forward_ios</i></a></h4>
+    	<a href="{{ route('video.rank') }}"><h4>最夯發燒影片<span class="hidden-xs">更多內容</span><i class="material-icons">arrow_forward_ios</i></h4></a>
     </div>
     @include('video.single-video-slider', ['videos' => $trendings])
 
     <div class="video-slider-title paravi-padding-setup">
-      <h4>最新精彩內容<a href="{{ route('video.newest') }}">更多內容<i class="material-icons">arrow_forward_ios</i></a></h4>
+    	<a href="{{ route('video.newest') }}"><h4>最新精彩內容<span class="hidden-xs">更多內容</span><i class="material-icons">arrow_forward_ios</i></h4></a>
     </div>
     @include('video.single-video-slider', ['videos' => $newest])
 
     <div class="video-slider-title paravi-padding-setup">
-      <h4>綜藝推薦<a href="{{ route('video.rank') }}">更多內容<i class="material-icons">arrow_forward_ios</i></a></h4>
+    	<a href="{{ route('video.rank') }}"><h4>綜藝推薦<span class="hidden-xs">更多內容</span><i class="material-icons">arrow_forward_ios</i></h4></a>
     </div>
     @include('video.single-video-slider', ['videos' => $variety])
 
     <div class="video-slider-title paravi-padding-setup">
-      <h4>日劇推薦<a href="{{ route('video.drama') }}">更多內容<i class="material-icons">arrow_forward_ios</i></a></h4>
+    	<a href="{{ route('video.drama') }}"><h4>日劇推薦<span class="hidden-xs">更多內容</span><i class="material-icons">arrow_forward_ios</i></h4></a>
     </div>
     @include('video.single-video-slider', ['videos' => $drama])
 
     <div class="video-slider-title paravi-padding-setup">
-      <h4>動漫推薦<a href="{{ route('video.anime') }}">更多內容<i class="material-icons">arrow_forward_ios</i></a></h4>
+    	<a href="{{ route('video.anime') }}"><h4>動漫推薦<span class="hidden-xs">更多內容</span><i class="material-icons">arrow_forward_ios</i></h4></a>
     </div>
     @include('video.single-video-slider', ['videos' => $anime])
 
     <div class="video-slider-title paravi-padding-setup">
-      <h4>更多發燒影片<a href="{{ route('video.rank') }}">更多內容<i class="material-icons">arrow_forward_ios</i></a></h4>
+    	<a href="{{ route('video.rank') }}"><h4>更多發燒影片<span class="hidden-xs">更多內容</span><i class="material-icons">arrow_forward_ios</i></h4></a>
     </div>
     <div class="row no-gutter" style="padding: 0px calc(4% - 5px)">
       <div class="video-sidebar-wrapper">
