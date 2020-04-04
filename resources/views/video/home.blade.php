@@ -27,13 +27,7 @@
 		</div>
 	</div>
 
-	<div class="hidden-md hidden-lg hover-opacity" style="margin-bottom: 50px;">
-		<a href="{{ route('video.varietyList') }}">
-			<img style="width: 100%; height: 100%; display: inline-block;" src="https://i.imgur.com/CssRcYDh.jpg" alt="LaughSeeJapan 娛見日本">
-		</a>
-	</div>
-
-	<div class="paravi-padding-setup home-horizontal-ads">
+	<div class="paravi-padding-setup home-horizontal-ads hidden-xs hidden-sm">
 		<div style="border: 1px solid black">
 			<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 			<!-- Home Desktop Ads -->
@@ -49,30 +43,38 @@
 		</div>
 	</div>
 
-	<div class="paravi-padding-setup home-featured-wrapper">
+	<div class="paravi-padding-setup home-featured-wrapper hidden-xs hidden-sm">
 		<div class="row no-gutter">
 			<a href="{{ route('video.intro', ['drama', '半澤直樹-第二季']) }}" class="col-xs-6 col-sm-4 hover-opacity-all">
 				<img style="width: 100%; height: 100%; display: inline-block;" src="https://i.imgur.com/LwQAG3Yh.jpg">
 				<div style="margin-top: 0.7vw">
 					<span class="featured-new-tag">NEW</span>
-					<span class="featured-catchphrase">那個加倍奉還的男人！</span>
+					<span class="featured-catchphrase">那個男人，又要加倍奉還啦！</span>
 				</div>
 			</a>
 			<a href="{{ route('video.intro', ['drama', '默默奉獻的灰姑娘-醫院藥劑師的處方箋']) }}" class="col-xs-6 col-sm-4 hover-opacity-all">
 				<img style="width: 100%; height: 100%; display: inline-block;" src="https://i.imgur.com/coFdG2lh.jpg">
 				<div style="margin-top: 0.7vw">
 					<span class="featured-new-tag">NEW</span>
-					<span class="featured-catchphrase">白衣天使的石原女神！</span>
+					<span class="featured-catchphrase">女神化身白衣天使，看無赦！</span>
 				</div>
 			</a>
 			<a href="{{ route('video.intro', ['drama', 'MIU404']) }}" class="col-xs-4 hover-opacity-all hidden-xs">
 				<img style="width: 100%; height: 100%; display: inline-block;" src="https://i.imgur.com/2loSVtch.jpg">
 				<div style="margin-top: 0.7vw">
 					<span class="featured-new-tag">NEW</span>
-					<span class="featured-catchphrase">搞笑偵探拍檔雙上陣！</span>
+					<span class="featured-catchphrase">搞笑偵探拍檔，笑笑更健康！</span>
 				</div>
 			</a>
 		</div>
+	</div>
+
+	<div class="paravi-padding-setup row" style="margin: 30px auto 35px auto;">
+		<div style="margin: 0px -5px;">
+		    @include('layouts.single-genre-card', ['genre' => '綜藝', 'imgur' => 'iXyOfUs', 'link' => route('video.variety')])
+		    @include('layouts.single-genre-card', ['genre' => '日劇', 'imgur' => 'aALP7mY', 'link' => route('video.drama')])
+		    @include('layouts.single-genre-card', ['genre' => '動漫', 'imgur' => 'VHxhxcI', 'link' => route('video.anime')])
+	    </div>
 	</div>
 
     @if (count($subscribes) != 0)

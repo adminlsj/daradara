@@ -1804,24 +1804,6 @@ a > i {
 }
 
 @media (max-width: 768px) {
-  .home-featured-wrapper {
-    padding: 40px 0px 25px 0px;
-  }
-
-  .home-featured-wrapper .row {
-    margin: 0px -5px;
-  }
-
-  .home-featured-wrapper a {
-    padding: 0px 5px !important;
-  }
-
-  .home-horizontal-ads {
-    padding: 0px; 
-    margin-top: -25px;
-    margin-bottom: -15px;
-  }
-
   #custom-scroll-slider .hover-opacity {
     width: 173px !important;
   }
@@ -1851,22 +1833,6 @@ a > i {
 @media (max-width: 991px) {
   #content-div {
     padding-bottom: 50px
-  }
-
-  .home-featured-wrapper a {
-    text-align: left;
-  }
-
-  .home-featured-wrapper .featured-new-tag {
-    padding: 0px 5px; 
-    font-size: 0.9em;
-    float: left;
-    margin-top: 2px
-  }
-
-  .home-featured-wrapper .featured-catchphrase {
-    margin-left: 5px;
-    font-size: 0.85em;
   }
 
   .text-ellipsis-mobile {

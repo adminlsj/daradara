@@ -771,7 +771,7 @@ class VideoController extends Controller
 
     public function trendingWatch()
     {
-        return Watch::where('category', 'monday')->orWhere('category', 'monitoring')->orWhere('category', '24xsbzx')->orWhere('category', 'home')->orWhere('category', 'lddtz')->orWhere('category', 'talk')->orWhere('category', 'nmbgsz')->orWhere('category', 'djyhly')->orWhere('category', 'syrddowntown')->orWhere('category', 'scgy')->orWhere('category', 'szbzddsj')->orWhere('category', 'vsarashi')->orWhere('category', 'yjyjdwxyh')->orWhere('category', 'nnjcd')->orWhere('category', 'zrds')->orWhere('category', 'qytzz')->orWhere('category', 'msydt')->orWhere('category', 'xyfsb')->inRandomOrder()->get();
+        return Watch::where('category', 'monday')->orWhere('category', 'monitoring')->orWhere('category', '24xsbzx')->orWhere('category', 'home')->orWhere('category', 'lddtz')->orWhere('category', 'talk')->orWhere('category', 'nmbgsz')->orWhere('category', 'djyhly')->orWhere('category', 'syrddowntown')->orWhere('category', 'scgy')->orWhere('category', 'szbzddsj')->orWhere('category', 'vsarashi')->orWhere('category', 'yjyjdwxyh')->orWhere('category', 'nnjcd')->orWhere('category', 'zrds')->orWhere('category', 'qytzz')->orWhere('category', 'tczcdwy')->orWhere('category', 'xyfsb')->inRandomOrder()->get();
     }
 
     /**
