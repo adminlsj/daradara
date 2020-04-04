@@ -41,23 +41,23 @@
 		</script>
 	</div>
 
-	<div class="paravi-padding-setup" style="padding: 40px 5.3% 25px 5.3%;">
+	<div class="paravi-padding-setup home-featured-wrapper">
 		<div class="row no-gutter">
-			<a href="{{ route('video.intro', ['drama', '半澤直樹-第二季']) }}" class="col-xs-4 hover-opacity-all" style="padding: 0px 0.7%; text-decoration: none; color: #222222">
+			<a href="{{ route('video.intro', ['drama', '半澤直樹-第二季']) }}" class="col-xs-4 hover-opacity-all">
 				<img style="width: 100%; height: 100%; display: inline-block;" src="https://i.imgur.com/LwQAG3Yh.jpg">
 				<div style="text-align: center; margin-top: 0.7vw">
 					<span style="padding: 3px 30px; background-color: #d84b6b; color: white; font-size: 1.1vw">NEW</span>
 					<span style="font-size: 1.15vw;font-weight: 600; margin-left: 9px">那個男人，又要加倍奉還啦！</span>
 				</div>
 			</a>
-			<a href="{{ route('video.intro', ['drama', '默默奉獻的灰姑娘-醫院藥劑師的處方箋']) }}" class="col-xs-4 hover-opacity-all" style="padding: 0px 0.7%; text-decoration: none; color: #222222">
+			<a href="{{ route('video.intro', ['drama', '默默奉獻的灰姑娘-醫院藥劑師的處方箋']) }}" class="col-xs-4 hover-opacity-all">
 				<img style="width: 100%; height: 100%; display: inline-block;" src="https://i.imgur.com/coFdG2lh.jpg">
 				<div style="text-align: center; margin-top: 0.7vw">
 					<span style="padding: 3px 30px; background-color: #d84b6b; color: white; font-size: 1.1vw">NEW</span>
 					<span style="font-size: 1.15vw;font-weight: 600; margin-left: 9px">女神化身白衣天使，看無赦！</span>
 				</div>
 			</a>
-			<a href="{{ route('video.intro', ['drama', 'MIU404']) }}" class="col-xs-4 hover-opacity-all" style="padding: 0px 0.7%; text-decoration: none; color: #222222">
+			<a href="{{ route('video.intro', ['drama', 'MIU404']) }}" class="col-xs-4 hover-opacity-all">
 				<img style="width: 100%; height: 100%; display: inline-block;" src="https://i.imgur.com/2loSVtch.jpg">
 				<div style="text-align: center; margin-top: 0.7vw">
 					<span style="padding: 3px 30px; background-color: #d84b6b; color: white; font-size: 1.1vw">NEW</span>
