@@ -73,12 +73,12 @@ body {
 }
 
 .slider-wrapper:hover .slider-scroll-left {
-  left: 45px;
+  left: 2%;
   transition: 0.5s;
 }
 
 .slider-wrapper:hover .slider-scroll-right {
-  right: 45px;
+  right: 2%;
   transition: 0.5s;
 }
 
@@ -1775,12 +1775,17 @@ a > i {
 }
 
 @media (max-width: 768px) {
+  .paravi-padding-setup {
+    width: 100%;
+    padding: 0px 10px;
+  }
+
   #custom-scroll-slider .hover-opacity {
     width: 160px !important;
   }
 
   #custom-scroll-slider > div {
-    margin-right: -1px;
+    margin-right: -2px;
   }
 
   .video-slider-title h4 {
