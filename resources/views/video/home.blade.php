@@ -29,7 +29,7 @@
 
 	<div class="hidden-md hidden-lg">
 		<a href="{{ route('video.varietyList') }}">
-			<img style="width: 100%; height: 100%; display: inline-block;" src="https://i.imgur.com/J0Jadmvh.jpg" alt="LaughSeeJapan 娛見日本">
+			<img style="width: 100%; height: 100%; display: inline-block;" src="https://i.imgur.com/59llA2uh.jpg" alt="LaughSeeJapan 娛見日本">
 		</a>
 	</div>
 
