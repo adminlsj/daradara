@@ -1803,8 +1803,12 @@ a > i {
     padding: 40px 0px 25px 0px;
   }
 
+  .home-featured-wrapper .row {
+    margin: 0px -5px;
+  }
+
   .home-featured-wrapper a {
-    padding: 0px 1px !important;
+    padding: 0px 5px !important;
   }
 
   #custom-scroll-slider .hover-opacity {
@@ -1844,14 +1848,14 @@ a > i {
 
   .home-featured-wrapper .featured-new-tag {
     padding: 0px 5px; 
-    font-size: 0.95em;
+    font-size: 0.9em;
     float: left;
-    margin-top: 1px
+    margin-top: 2px
   }
 
   .home-featured-wrapper .featured-catchphrase {
     margin-left: 5px;
-    font-size: 0.9em;
+    font-size: 0.85em;
   }
 
   .text-ellipsis-mobile {
