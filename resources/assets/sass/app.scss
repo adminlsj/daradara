@@ -1765,11 +1765,15 @@ a > i {
 
 @media (max-width: 768px) {
   #custom-scroll-slider .hover-opacity {
-    width: 150px !important;
+    width: 160px !important;
   }
 
   #custom-scroll-slider > div {
-    margin-right: 1px;
+    margin-right: 0px;
+  }
+
+  .video-slider-title h4 {
+    font-size: 1.2em;
   }
 }
 
