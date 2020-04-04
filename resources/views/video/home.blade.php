@@ -27,7 +27,7 @@
 		</div>
 	</div>
 
-	<div class="hidden-md hidden-lg">
+	<div class="hidden-md hidden-lg" style="margin-bottom: 50px;">
 		<a href="{{ route('video.varietyList') }}">
 			<img style="width: 100%; height: 100%; display: inline-block;" src="https://i.imgur.com/D3Kniu2h.jpg" alt="LaughSeeJapan 娛見日本">
 		</a>
@@ -51,21 +51,21 @@
 		<div class="row no-gutter">
 			<a href="{{ route('video.intro', ['drama', '半澤直樹-第二季']) }}" class="col-xs-6 col-sm-4 hover-opacity-all">
 				<img style="width: 100%; height: 100%; display: inline-block;" src="https://i.imgur.com/LwQAG3Yh.jpg">
-				<div style="text-align: center; margin-top: 0.7vw">
+				<div style="margin-top: 0.7vw">
 					<span class="featured-new-tag">NEW</span>
 					<span class="featured-catchphrase">那個男人，又要加倍奉還啦！</span>
 				</div>
 			</a>
 			<a href="{{ route('video.intro', ['drama', '默默奉獻的灰姑娘-醫院藥劑師的處方箋']) }}" class="col-xs-6 col-sm-4 hover-opacity-all">
 				<img style="width: 100%; height: 100%; display: inline-block;" src="https://i.imgur.com/coFdG2lh.jpg">
-				<div style="text-align: center; margin-top: 0.7vw">
+				<div style="margin-top: 0.7vw">
 					<span class="featured-new-tag">NEW</span>
 					<span class="featured-catchphrase">女神化身白衣天使，看無赦！</span>
 				</div>
 			</a>
 			<a href="{{ route('video.intro', ['drama', 'MIU404']) }}" class="col-xs-4 hover-opacity-all hidden-xs">
 				<img style="width: 100%; height: 100%; display: inline-block;" src="https://i.imgur.com/2loSVtch.jpg">
-				<div style="text-align: center; margin-top: 0.7vw">
+				<div style="margin-top: 0.7vw">
 					<span class="featured-new-tag">NEW</span>
 					<span class="featured-catchphrase">搞笑偵探拍檔，笑笑更健康！</span>
 				</div>

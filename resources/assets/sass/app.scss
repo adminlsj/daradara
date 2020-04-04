@@ -129,6 +129,7 @@ body {
   padding: 0px 0.7% !important;
   text-decoration: none;
   color: #222222;
+  text-align: center;
 }
 
 .home-featured-wrapper .featured-new-tag {
@@ -1837,14 +1838,19 @@ a > i {
     padding-bottom: 50px
   }
 
+  .home-featured-wrapper a {
+    text-align: left;
+  }
+
   .home-featured-wrapper .featured-new-tag {
     padding: 0px 5px; 
     font-size: 0.95em;
     float: left;
+    margin-top: 1px
   }
 
   .home-featured-wrapper .featured-catchphrase {
-    margin-left: 2px;
+    margin-left: 5px;
     font-size: 0.9em;
   }
 
