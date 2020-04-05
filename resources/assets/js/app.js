@@ -25,7 +25,7 @@ $('.slider-scroll-right').click(function() {
     var $windowWidth = $(window).width();
     var $scrollWidth;
     if ($windowWidth > 991) {
-      $scrollWidth = $windowWidth - 220 - 50 - 7;
+      $scrollWidth = $windowWidth - 220 - 50 - 10;
     } else if ($windowWidth > 768) {
       $scrollWidth = $windowWidth - 30 + 7;
     } else {
@@ -43,7 +43,7 @@ $('.slider-scroll-left').click(function() {
     var $windowWidth = $(window).width();
     var $scrollWidth;
     if ($windowWidth > 991) {
-      $scrollWidth = $windowWidth - 220 - 50 - 7;
+      $scrollWidth = $windowWidth - 220 - 50 - 10;
     } else if ($windowWidth > 768) {
       $scrollWidth = $windowWidth - 30 + 7;
     } else {
