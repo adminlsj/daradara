@@ -232,6 +232,7 @@ class VideoController extends Controller
             $newest = Video::where('genre', 'variety')->orderBy('uploaded_at', 'desc')->limit($pages)->get();
             $artist = Video::whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(4))->where('tags', 'LIKE', '%明星%')->inRandomOrder()->limit($pages)->get();
             $trick = Video::whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(4))->where('tags', 'LIKE', '%整人%')->inRandomOrder()->limit($pages)->get();
+            $reality = Video::whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(4))->where('tags', 'LIKE', '%真人秀%')->inRandomOrder()->limit($pages)->get();
             $load_more = Video::where('genre', 'variety')->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->orderBy('views', 'desc')->paginate($pages);
 
             $html = '';
@@ -244,7 +245,7 @@ class VideoController extends Controller
 
             $is_mobile = $this->checkMobile();
 
-            return view('video.varietyIndex', compact('genre', 'selected', 'trendings', 'newest', 'artist', 'trick', 'is_mobile'));
+            return view('video.varietyIndex', compact('genre', 'selected', 'trendings', 'newest', 'artist', 'trick', 'reality', 'is_mobile'));
 
         } else {
             $year = $request->has('y') && $request->y != null ? $request->y : '2020';

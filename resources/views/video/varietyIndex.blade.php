@@ -35,6 +35,11 @@
   @include('video.single-video-slider', ['videos' => $trick])
 
   <div class="video-slider-title paravi-padding-setup">
+    <a href="{{ route('video.subscribeTag') }}?query=真人秀"><h4>#真人秀<span class="hidden-xs">更多內容</span><i class="material-icons">arrow_forward_ios</i></h4></a>
+  </div>
+  @include('video.single-video-slider', ['videos' => $reality])
+
+  <div class="video-slider-title paravi-padding-setup">
     <a href="{{ route('video.rank') }}"><h4>更多發燒影片<span class="hidden-xs">更多內容</span><i class="material-icons">arrow_forward_ios</i></h4></a>
   </div>
   <div class="row no-gutter load-more-container">
