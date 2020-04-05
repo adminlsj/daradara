@@ -21,8 +21,10 @@
 		@endforeach
 		<div class="col-xs-6 col-sm-4 col-md-4" style="position: absolute; top: 50%; left: 50%; -ms-transform: translate(-50%, -50%); transform: translate(-50%, -50%);">
 			<div style="width: 100%; height: 100%; text-align: center">
-				<div style="font-weight: 500; font-size: 1.5em; padding-bottom: 1vw; margin-top: -15px">LaughSeeJapan 娛見日本</div>
-				<a href="{{ route('video.varietyList') }}" style="background-color: #d84b6b; color: white; padding: 10px 40px; border-radius: 50px; font-size: 1em">更多熱門頻道<i style="vertical-align: middle; font-size: 0.8em; margin-top: -2px; margin-left: 5px; margin-right: -5px" class="material-icons">arrow_forward_ios</i></a>
+				<div style="font-weight: 500; font-size: 1.5em; padding-bottom: 1.2vw; margin-top: -15px">LaughSeeJapan 娛見日本</div>
+				<a style="background-color: #cf2d52" class="desktop-home-banner-btn hover-opacity" href="{{ route('video.variety') }}">綜藝<i class="material-icons">arrow_forward_ios</i></a>
+				<a style="background-color: #d84b6b; margin-left: 5px; margin-right: 5px;" class="desktop-home-banner-btn" href="{{ route('video.drama') }}">日劇<i class="material-icons">arrow_forward_ios</i></a>
+				<a style="background-color: #df6b86" class="desktop-home-banner-btn" href="{{ route('video.anime') }}">動漫<i class="material-icons">arrow_forward_ios</i></a>
 			</div>
 		</div>
 	</div>
@@ -95,7 +97,7 @@
     @include('video.single-video-slider', ['videos' => $newest])
 
     <div class="video-slider-title paravi-padding-setup">
-    	<a href="{{ route('video.rank') }}"><h4>綜藝推薦<span class="hidden-xs">更多內容</span><i class="material-icons">arrow_forward_ios</i></h4></a>
+    	<a href="{{ route('video.variety') }}"><h4>綜藝推薦<span class="hidden-xs">更多內容</span><i class="material-icons">arrow_forward_ios</i></h4></a>
     </div>
     @include('video.single-video-slider', ['videos' => $variety])
 
@@ -112,7 +114,7 @@
     <div class="video-slider-title paravi-padding-setup">
     	<a href="{{ route('video.rank') }}"><h4>更多發燒影片<span class="hidden-xs">更多內容</span><i class="material-icons">arrow_forward_ios</i></h4></a>
     </div>
-    <div class="row no-gutter" style="padding: 0px calc(4% - 5px)">
+    <div class="row no-gutter load-more-container">
       <div class="video-sidebar-wrapper">
           <div id="sidebar-results"><!-- results appear here --></div>
           <div style="text-align: center;" class="ajax-loading"><img style="width: 40px; height: auto; padding-top: 25px; padding-bottom: 50px;" src="https://i.imgur.com/TcZjkZa.gif"/></div>

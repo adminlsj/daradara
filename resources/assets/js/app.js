@@ -23,7 +23,7 @@ const app = new Vue({
 
 $('.slider-scroll-right').click(function() {
     $(this).parent().children(':first-child').animate({
-      scrollLeft: '+=' + (parseInt(($(window).width() - 60) / 224) * 224)
+      scrollLeft: '+=' + ($(window).width() * 0.92 + 12)
     }, 'slow');
 
     $(this).prev().css('display', 'block');
@@ -31,7 +31,7 @@ $('.slider-scroll-right').click(function() {
 
 $('.slider-scroll-left').click(function() {
     $(this).parent().children(':first-child').animate({
-      scrollLeft: '-=' + (parseInt(($(window).width() - 60) / 224) * 224)
+      scrollLeft: '-=' + ($(window).width() * 0.92 + 12)
     }, 'slow');
 })
 

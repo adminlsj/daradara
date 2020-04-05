@@ -56,19 +56,19 @@ class VideoController extends Controller
                     }
                 }
 
-                $subscribes = $subscribes->whereDate('uploaded_at', '>=', Carbon::now()->subMonths(6))->orderBy('uploaded_at', 'desc')->limit(8)->get();
+                $subscribes = $subscribes->whereDate('uploaded_at', '>=', Carbon::now()->subMonths(6))->orderBy('uploaded_at', 'desc')->limit(16)->get();
             }
         }
 
-        $trendings = Video::where('genre', 'variety')->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(4))->orWhere('genre', 'drama')->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->inRandomOrder()->limit(12)->get();
-        $newest = Video::where('genre', 'variety')->orWhere('genre', 'drama')->orderBy('uploaded_at', 'desc')->limit(12)->get();
+        $trendings = Video::where('genre', 'variety')->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(4))->orWhere('genre', 'drama')->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->inRandomOrder()->limit(16)->get();
+        $newest = Video::where('genre', 'variety')->orWhere('genre', 'drama')->orderBy('uploaded_at', 'desc')->limit(16)->get();
         $variety = Video::where('genre', 'variety')
-                     ->whereDate('uploaded_at', '>=', Carbon::now()->subMonth())->inRandomOrder()->limit(12)->get();
+                     ->whereDate('uploaded_at', '>=', Carbon::now()->subMonth())->inRandomOrder()->limit(16)->get();
         $drama = Video::where('genre', 'drama')
-                     ->whereDate('uploaded_at', '>=', Carbon::now()->subWeek())->inRandomOrder()->limit(12)->get();
+                     ->whereDate('uploaded_at', '>=', Carbon::now()->subWeek())->inRandomOrder()->limit(16)->get();
         $anime = Video::where('genre', 'anime')
-                     ->whereDate('uploaded_at', '>=', Carbon::now()->subWeek())->inRandomOrder()->limit(12)->get();
-        $load_more = Video::where('genre', 'variety')->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->orWhere('genre', 'drama')->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->orderBy('views', 'desc')->paginate(8);
+                     ->whereDate('uploaded_at', '>=', Carbon::now()->subWeek())->inRandomOrder()->limit(16)->get();
+        $load_more = Video::where('genre', 'variety')->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->orWhere('genre', 'drama')->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(2))->orderBy('views', 'desc')->paginate(12);
 
         $html = '';
         foreach ($load_more as $video) {
