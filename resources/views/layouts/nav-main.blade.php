@@ -56,7 +56,7 @@
       <a class="no-select nav-item-text hidden-sm hidden-md hidden-lg" style="color: #cf2d52; border: 2px solid #cf2d52;" href="{{ Auth::check() ? route('video.subscribes') : route('login') }}">訂閱</a>
 
       <form id="search-form" class="hidden-xs" style="display: inline-block; float: right; margin-top: 9px; margin-right: 5px" action="{{ route('video.search') }}" method="GET">
-	      <input id="query" name="query" style="vertical-align:middle; box-shadow: none; border: 1px solid #d84b6b; background-color: white; font-size: 1em; width: 200px; border-top-left-radius: 2px; border-bottom-left-radius: 2px; height: 31px; padding-left: 10px;" type="text" value="{{ request('query') }}" placeholder="最新日本綜藝、日劇、動漫">
+	      <input name="query" style="vertical-align:middle; box-shadow: none; border: 1px solid #d84b6b; background-color: white; font-size: 1em; width: 200px; border-top-left-radius: 2px; border-bottom-left-radius: 2px; height: 31px; padding-left: 10px;" type="text" value="{{ request('query') }}" placeholder="最新日本綜藝、日劇、動漫">
 	      <a id="search-submit-btn" type="submit" style="cursor: pointer;"><i style="font-size: 22px; vertical-align:middle; border: 1px solid #d84b6b; background-color: #d84b6b; color: white; padding: 3.5px 10px; margin-top: -1px; margin-left: -4px; border-top-right-radius: 2px; border-bottom-right-radius: 2px;" class="material-icons no-select">search</i></a>
 	  </form>
 
