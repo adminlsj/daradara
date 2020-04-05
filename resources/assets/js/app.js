@@ -77,8 +77,8 @@ $('[id=toggleSearchBar]').click(function(e) {
     }
 });
 
-$('#search-submit-btn').click(function(e) {
-    $("#search-form").submit();
+$('.search-submit-btn').click(function(e) {
+    $(this).parent().submit();
 });
 
 $('#subscribe-show-all').click(function(e) {
