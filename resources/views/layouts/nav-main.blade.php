@@ -3,7 +3,7 @@
     <div style="height: 50px;">
 
       <a style="text-decoration: none;" href="/">
-          <img src="https://i.imgur.com/SyISzCK.png" style="margin-top:-8px;" height="24" alt="娛見日本 LaughSeeJapan">
+          <img class="logo-image" src="https://i.imgur.com/SyISzCK.png" alt="娛見日本 LaughSeeJapan">
           <span class="logo-text">LaughSeeJapan</span>
       </a>
 
@@ -59,7 +59,7 @@
 	      <a id="search-submit-btn" type="submit" style="cursor: pointer;"><i style="font-size: 22px; vertical-align:middle; border: 1px solid #d84b6b; background-color: #d84b6b; color: white; padding: 3.5px 10px; margin-top: -1px; margin-left: -4px; border-top-right-radius: 2px; border-bottom-right-radius: 2px;" class="material-icons no-select">search</i></a>
 	  </form>
 
-      <a id="toggleSearchBar" class="pull-right hidden-sm hidden-md hidden-lg" style="padding: 0px 0px 15px 15px; cursor: pointer;"><i style="font-size: 25px; vertical-align:middle; margin-bottom: -22.5px" class="material-icons">search</i></a>
+      <a id="toggleSearchBar" class="pull-right hidden-sm hidden-md hidden-lg" style="padding: 0px 0px 15px 15px; cursor: pointer; margin-right: 10px;"><i style="font-size: 25px; vertical-align:middle; margin-bottom: -24px; color: #222222" class="material-icons">search</i></a>
     </div>
   </div>
 </nav>
