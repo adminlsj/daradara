@@ -2,17 +2,12 @@
   <div class="container-fluid">
     <div style="height: 50px;">
 
-      <a class="hidden-xs" style="text-decoration: none;" href="/">
-          <img class="logo-image" src="https://i.imgur.com/SyISzCK.png" alt="娛見日本 LaughSeeJapan">
-          <span class="logo-text">LaughSeeJapan</span>
-      </a>
-
-      <a class="hidden-sm hidden-md hidden-lg" href="/">
-          <img src="https://i.imgur.com/M8tqx5K.png" style="margin-top: 11px; margin-left: 0px;" height="28" alt="娛見日本 LaughSeeJapan">
+      <a class="nav-image-wrapper" style="text-decoration: none;" href="/">
+          <img src="https://i.imgur.com/{{ $theme == 'dark' ? 'xSMGFWh' : 'M8tqx5K.png'}}.png" style="margin-left: 0px;" height="27" alt="娛見日本 LaughSeeJapan">
       </a>
 
       <span id="nav-menu-trigger" class="hidden-xs" style="color: #cf2d52; font-size: 1.05em; margin-left: 20px; text-decoration: none; cursor: pointer; padding-bottom: 15px;">
-      	<span>搜索內容</span>
+      	<span style="line-height: 50px">搜索內容</span>
       	<span class="caret-reversed"></span>
       	<div class="caret"></div>
 		<div class="nav-menu-list">

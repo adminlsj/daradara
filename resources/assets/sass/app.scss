@@ -123,8 +123,56 @@ body {
   width: calc(92% / 6 - 7px) !important;
 }
 
-.watch-slider > div {
+
+.watch-slider #custom-scroll-slider > div {
   width: 150px !important;
+}
+
+.watch-slider .slider-scroll-left, .watch-slider .slider-scroll-right {
+  width: 35px; 
+  height: 35px; 
+  background-color: white; 
+  padding: 10px; 
+  box-shadow: 1px 1px 1px rgba(0,0,0,0.3); 
+  border-radius: 50%; 
+  position: absolute; 
+  top: 45%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.watch-slider .slider-scroll-left {
+  left: -35px;
+  display: none;
+}
+
+.watch-slider .slider-scroll-right {
+  right: -35px;
+}
+
+.watch-slider:hover .slider-scroll-left {
+  left: 2%;
+  transition: 0.5s;
+}
+
+.watch-slider:hover .slider-scroll-right {
+  right: 2%;
+  transition: 0.5s;
+}
+
+.watch-slider:not(:hover) .slider-scroll-left {
+  left: -35px;
+  transition: 0.5s;
+}
+
+.watch-slider:not(:hover) .slider-scroll-right {
+  right: -35px;
+  transition: 0.5s;
+}
+
+.nav-image-wrapper img {
+  margin-top: -3px;
 }
 
 .home-featured-wrapper {
@@ -2197,6 +2245,10 @@ a > i {
 }
 
 @media (max-width: 768px) {
+  .nav-image-wrapper img {
+    margin-top: 11px;
+  }
+
   #custom-scroll-slider .hover-opacity {
     width: calc(92% / 2 - 7px) !important;
   }
@@ -2205,7 +2257,7 @@ a > i {
     margin-right: -2px;
   }
 
-  .watch-slider > div {
+  .watch-slider #custom-scroll-slider > div {
     width: 120px !important;
   }
 
