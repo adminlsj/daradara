@@ -1,136 +1,92 @@
 @extends('layouts.app')
 
 @section('nav')
-	@include('layouts.nav-main', ['theme' => 'white'])
+	@include('layouts.nav-main-original', ['theme' => 'white'])
 @endsection
 
 @section('content')
-<div style="background-color: #FEFEFE;">
-
-	<div class="row no-gutter paravi-padding-setup hidden-xs hidden-sm" style="margin: 20px auto 50px auto; position:relative;">
-		@foreach ($selected as $watch)
-			<div class="col-xs-3 col-sm-2 col-md-2 hover-opacity">
-				@if ($loop->iteration == 9 || $loop->iteration == 10)
-					<img style="width: 100%; height: 100%; display: inline-block;" src="https://i.imgur.com/JlOsTjd.jpg">
-				@else
-					<a href="{{ route('video.intro', [$watch->genre, $watch->titleToUrl()]) }}">
-						<img class="lazy" style="width: 100%; height: 100%; display: inline-block;" src="{{ $watch->imgurDefault() }}" data-src="{{ $watch->imgurL() }}" data-srcset="{{ $watch->imgurL() }}" alt="{{ $watch->title }}">
-					</a>
-				@endif
-			</div>
-		@endforeach
-		<div class="col-xs-6 col-sm-4 col-md-4" style="position: absolute; top: 50%; left: 50%; -ms-transform: translate(-50%, -50%); transform: translate(-50%, -50%);">
-			<div style="width: 100%; height: 100%; text-align: center">
-				<div style="font-weight: 500; font-size: 1.5em; padding-bottom: 1.2vw; margin-top: -14px">LaughSeeJapan 娛見日本</div>
-				<a style="background-color: #cf2d52" class="desktop-home-banner-btn hover-opacity" href="{{ route('video.variety') }}">綜藝<i class="material-icons">arrow_forward_ios</i></a>
-				<a style="background-color: #d84b6b; margin-left: 5px; margin-right: 5px;" class="desktop-home-banner-btn" href="{{ route('video.drama') }}">日劇<i class="material-icons">arrow_forward_ios</i></a>
-				<a style="background-color: #df6b86" class="desktop-home-banner-btn" href="{{ route('video.anime') }}">動漫<i class="material-icons">arrow_forward_ios</i></a>
-			</div>
-		</div>
-	</div>
-
-	<div class="paravi-padding-setup home-horizontal-ads hidden-xs hidden-sm">
-		<div style="border: 1px solid black">
-			<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-			<!-- Home Desktop Ads -->
-			<ins class="adsbygoogle"
-			     style="display:block;"
-			     data-ad-client="ca-pub-4485968980278243"
-			     data-ad-slot="4478704168"
-			     data-ad-format="auto"
-			     data-full-width-responsive="true"></ins>
-			<script>
-			     (adsbygoogle = window.adsbygoogle || []).push({});
-			</script>
-		</div>
-	</div>
-
-	<div class="paravi-padding-setup home-featured-wrapper hidden-xs hidden-sm">
-		<div class="row no-gutter">
-			<a href="{{ route('video.intro', ['drama', '半澤直樹-第二季']) }}" class="col-xs-6 col-sm-4 hover-opacity-all">
-				<img style="width: 100%; height: 100%; display: inline-block;" src="https://i.imgur.com/LwQAG3Yh.jpg">
-				<div style="margin-top: 0.7vw">
-					<span class="featured-new-tag">NEW</span>
-					<span class="featured-catchphrase">那個男人，又要加倍奉還啦！</span>
-				</div>
-			</a>
-			<a href="{{ route('video.intro', ['drama', '默默奉獻的灰姑娘-醫院藥劑師的處方箋']) }}" class="col-xs-6 col-sm-4 hover-opacity-all">
-				<img style="width: 100%; height: 100%; display: inline-block;" src="https://i.imgur.com/coFdG2lh.jpg">
-				<div style="margin-top: 0.7vw">
-					<span class="featured-new-tag">NEW</span>
-					<span class="featured-catchphrase">女神化身白衣天使，看無赦！</span>
-				</div>
-			</a>
-			<a href="{{ route('video.intro', ['drama', 'MIU404']) }}" class="col-xs-4 hover-opacity-all hidden-xs">
-				<img style="width: 100%; height: 100%; display: inline-block;" src="https://i.imgur.com/2loSVtch.jpg">
-				<div style="margin-top: 0.7vw">
-					<span class="featured-new-tag">NEW</span>
-					<span class="featured-catchphrase">搞笑偵探拍檔，笑笑更健康！</span>
-				</div>
-			</a>
-		</div>
-	</div>
-
-	<div class="paravi-padding-setup row hidden-md hidden-lg" style="margin: 30px auto 35px auto;">
-		<div style="margin: 0px -5px;">
-		    @include('layouts.single-genre-card', ['genre' => '綜藝', 'imgur' => 'iXyOfUs', 'link' => route('video.variety')])
-		    @include('layouts.single-genre-card', ['genre' => '日劇', 'imgur' => 'aALP7mY', 'link' => route('video.drama')])
-		    @include('layouts.single-genre-card', ['genre' => '動漫', 'imgur' => 'VHxhxcI', 'link' => route('video.anime')])
-	    </div>
-	</div>
-
-    @if (count($subscribes) != 0)
-    	<div class="video-slider-title paravi-padding-setup">
-    		<a href="{{ route('video.subscribes') }}"><h4>最新訂閱內容<span class="hidden-xs">更多內容</span><i class="material-icons">arrow_forward_ios</i></h4></a>
-	    </div>
-	    @include('video.single-video-slider', ['videos' => $subscribes])
-    @endif
-
-    <div class="video-slider-title paravi-padding-setup">
-    	<a href="{{ route('video.rank') }}"><h4>最夯發燒影片<span class="hidden-xs">更多內容</span><i class="material-icons">arrow_forward_ios</i></h4></a>
-    </div>
-    @include('video.single-video-slider', ['videos' => $trendings])
-
-    <div class="video-slider-title paravi-padding-setup">
-    	<a href="{{ route('video.newest') }}"><h4>最新精彩內容<span class="hidden-xs">更多內容</span><i class="material-icons">arrow_forward_ios</i></h4></a>
-    </div>
-    @include('video.single-video-slider', ['videos' => $newest])
-
-    <div class="video-slider-title paravi-padding-setup">
-    	<a href="{{ route('video.variety') }}"><h4>綜藝推薦<span class="hidden-xs">更多內容</span><i class="material-icons">arrow_forward_ios</i></h4></a>
-    </div>
-    @include('video.single-video-slider', ['videos' => $variety])
-
-    <div class="video-slider-title paravi-padding-setup">
-    	<a href="{{ route('video.drama') }}"><h4>日劇推薦<span class="hidden-xs">更多內容</span><i class="material-icons">arrow_forward_ios</i></h4></a>
-    </div>
-    @include('video.single-video-slider', ['videos' => $drama])
-
-    <div class="video-slider-title paravi-padding-setup">
-    	<a href="{{ route('video.anime') }}"><h4>動漫推薦<span class="hidden-xs">更多內容</span><i class="material-icons">arrow_forward_ios</i></h4></a>
-    </div>
-    @include('video.single-video-slider', ['videos' => $anime])
-
-    <div class="video-slider-title paravi-padding-setup">
-    	<a href="{{ route('video.rank') }}"><h4>更多發燒影片<span class="hidden-xs">更多內容</span><i class="material-icons">arrow_forward_ios</i></h4></a>
-    </div>
-    <div class="row no-gutter load-more-container">
-      <div class="video-sidebar-wrapper">
-          <div id="sidebar-results"><!-- results appear here --></div>
-          <div style="text-align: center;" class="ajax-loading"><img style="width: 40px; height: auto; padding-top: 25px; padding-bottom: 50px;" src="https://i.imgur.com/TcZjkZa.gif"/></div>
-      </div>
-    </div>
+<div class="hidden-sm hidden-xs sidebar-menu">
+    @include('video.sidebarMenu', ['theme' => 'white'])
 </div>
 
-<!-- Initialize Swiper -->
-<script>
-  var swiper = new Swiper('.swiper-container', {
-    slidesPerView: 'auto',
-    freeMode: true,
-    mousewheel: true,
-    spaceBetween: 10,
-  });
-</script>
+<div class="main-content">
+	<div style="background-color: #F5F5F5;">
+
+		<div class="hidden-xs hidden-sm" style="padding-top: 10px; padding-bottom: 10px">
+			<div style="border: 1px solid black">
+				<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+				<!-- Home Desktop Ads -->
+				<ins class="adsbygoogle"
+				     style="display:block;"
+				     data-ad-client="ca-pub-4485968980278243"
+				     data-ad-slot="4478704168"
+				     data-ad-format="auto"
+				     data-full-width-responsive="true"></ins>
+				<script>
+				     (adsbygoogle = window.adsbygoogle || []).push({});
+				</script>
+			</div>
+		</div>
+
+		<div class="paravi-padding-setup row hidden-xs" style="margin: 0 auto 0 auto; padding-top: 30px; padding-bottom: 20px;">
+			<div style="margin: 0px -10px;">
+			    @include('layouts.single-horizontal-genre-card', ['genre' => '綜藝節目', 'imgur' => 'iXyOfUs', 'link' => route('video.variety')])
+			    @include('layouts.single-horizontal-genre-card', ['genre' => '電視劇', 'imgur' => 'aALP7mY', 'link' => route('video.drama')])
+			    @include('layouts.single-horizontal-genre-card', ['genre' => '動漫卡通', 'imgur' => 'VHxhxcI', 'link' => route('video.anime')])
+		    </div>
+		</div>
+
+		<div class="paravi-padding-setup row hidden-sm hidden-md hidden-lg" style="margin: 0 auto 0 auto; padding-top: 30px; padding-bottom: 20px;">
+			<div style="margin: 0px -5px;">
+			    @include('layouts.single-genre-card', ['genre' => '綜藝節目', 'imgur' => 'iXyOfUs', 'link' => route('video.variety')])
+			    @include('layouts.single-genre-card', ['genre' => '電視劇', 'imgur' => 'aALP7mY', 'link' => route('video.drama')])
+			    @include('layouts.single-genre-card', ['genre' => '動漫卡通', 'imgur' => 'VHxhxcI', 'link' => route('video.anime')])
+		    </div>
+		</div>
+
+	    @if (count($subscribes) != 0)
+	    	<div class="video-slider-title paravi-padding-setup">
+	    		<a href="{{ route('video.subscribes') }}"><h4>最新訂閱內容<span class="hidden-xs">更多內容</span><i class="material-icons">arrow_forward_ios</i></h4></a>
+		    </div>
+		    @include('video.single-video-slider', ['videos' => $subscribes])
+	    @endif
+
+	    <div class="video-slider-title paravi-padding-setup">
+	    	<a href="{{ route('video.rank') }}"><h4>最夯發燒影片<span class="hidden-xs">更多內容</span><i class="material-icons">arrow_forward_ios</i></h4></a>
+	    </div>
+	    @include('video.single-video-slider', ['videos' => $trendings])
+
+	    <div class="video-slider-title paravi-padding-setup">
+	    	<a href="{{ route('video.newest') }}"><h4>最新精彩內容<span class="hidden-xs">更多內容</span><i class="material-icons">arrow_forward_ios</i></h4></a>
+	    </div>
+	    @include('video.single-video-slider', ['videos' => $newest])
+
+	    <div class="video-slider-title paravi-padding-setup">
+	    	<a href="{{ route('video.variety') }}"><h4>綜藝推薦<span class="hidden-xs">更多內容</span><i class="material-icons">arrow_forward_ios</i></h4></a>
+	    </div>
+	    @include('video.single-video-slider', ['videos' => $variety])
+
+	    <div class="video-slider-title paravi-padding-setup">
+	    	<a href="{{ route('video.drama') }}"><h4>日劇推薦<span class="hidden-xs">更多內容</span><i class="material-icons">arrow_forward_ios</i></h4></a>
+	    </div>
+	    @include('video.single-video-slider', ['videos' => $drama])
+
+	    <div class="video-slider-title paravi-padding-setup">
+	    	<a href="{{ route('video.anime') }}"><h4>動漫推薦<span class="hidden-xs">更多內容</span><i class="material-icons">arrow_forward_ios</i></h4></a>
+	    </div>
+	    @include('video.single-video-slider', ['videos' => $anime])
+
+	    <div class="video-slider-title paravi-padding-setup">
+	    	<a href="{{ route('video.rank') }}"><h4>更多發燒影片<span class="hidden-xs">更多內容</span><i class="material-icons">arrow_forward_ios</i></h4></a>
+	    </div>
+	    <div class="row no-gutter load-more-container">
+	      <div class="video-sidebar-wrapper">
+	          <div id="sidebar-results"><!-- results appear here --></div>
+	          <div style="text-align: center;" class="ajax-loading"><img style="width: 40px; height: auto; padding-top: 25px; padding-bottom: 50px;" src="https://i.imgur.com/TcZjkZa.gif"/></div>
+	      </div>
+	    </div>
+	</div>
+</div>
 
 @endsection
 

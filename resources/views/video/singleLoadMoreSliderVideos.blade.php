@@ -1,4 +1,4 @@
-<div class="col-xs-6 col-sm-3 col-md-2 hover-opacity load-more-wrapper">
+<div class="col-xs-6 col-sm-3 col-md-3 hover-opacity load-more-wrapper">
     <a style="text-decoration: none; color: black" class="overlay" href="{{ route('video.watch') }}?v={{ $video->id }}">
 		<img class="lazy" style="width: 100%; height: 100%;" src="{{ $video->imgur16by9() }}" data-src="{{ $video->imgurL() }}" data-srcset="{{ $video->imgurL() }}" alt="{{ $video->title }}">
 

@@ -27,8 +27,7 @@ body {
 }
 
 .paravi-padding-setup {
-  width: 92%;
-  margin: 0 auto;
+  padding: 0px 25px;
 }
 
 .hover-opacity-all:hover {
@@ -44,7 +43,7 @@ body {
 }
 
 .slider-wrapper h4, .load-more-wrapper h4 {
-  font-size: 0.95em;
+  font-size: 1em;
   font-weight: 600;
   color: #222222;
   margin-top: 7px; 
@@ -112,17 +111,16 @@ body {
 }
 
 #custom-scroll-slider div:first-child {
-  margin-left: 4% !important;
+  margin-left: 25px !important;
 }
 
 #custom-scroll-slider div:last-child {
-  margin-right: 4% !important;
+  margin-right: 25px !important;
 }
 
 #custom-scroll-slider .hover-opacity {
-  width: calc(92% / 6 - 7px) !important;
+  width: calc((100% - 25px) / 4 - 12px) !important;
 }
-
 
 .watch-slider #custom-scroll-slider > div {
   width: 150px !important;
@@ -200,7 +198,7 @@ body {
 }
 
 .load-more-container {
-  padding: 0px calc(4% - 5px);
+  padding: 0px calc(25px - 5px);
 }
 
 .load-more-wrapper {
@@ -266,7 +264,7 @@ body {
 
 .explore-slider-title {
   padding-bottom: 40px;
-  margin-top: 45px;
+  padding-top: 40px;
 }
 
 .explore-slider-title a {
@@ -1360,7 +1358,7 @@ a > i {
 }
 
 .main-content {
-  width: calc(100% - 235px);
+  width: calc(100% - 220px);
   float: right;
   padding-left: 20px;
 }
@@ -1374,7 +1372,7 @@ a > i {
   position: fixed;
   top: 50px;
   z-index: 101;
-  width: 235px;
+  width: 220px;
 }
 
 .sidebar-menu > div {
@@ -2024,8 +2022,20 @@ a > i {
     padding-bottom: 50px
   }
 
+  .paravi-padding-setup {
+    padding: 0px 15px;
+  }
+
+  #custom-scroll-slider div:first-child {
+    margin-left: 15px !important;
+  }
+
+  #custom-scroll-slider div:last-child {
+    margin-right: 15px !important;
+  }
+
   #custom-scroll-slider .hover-opacity {
-    width: calc(92% / 4 - 6px) !important;
+    width: calc((100% - 15px) / 4 - 12px) !important;
   }
 
   .text-ellipsis-mobile {
@@ -2246,6 +2256,15 @@ a > i {
   .nav-main-original {
     padding: 0px 5px;
   }
+
+  .explore-slider-title {
+    padding-bottom: 30px;
+    padding-top: 30px;
+  }
+
+  .load-more-container {
+    padding: 0px calc(15px - 1px);
+  }
 }
 
 @media (max-width: 768px) {
@@ -2280,10 +2299,6 @@ a > i {
   .video-slider-title i {
     margin-top: -2px;
     font-size: 0.8em;
-  }
-
-  .load-more-container {
-    padding: 0px calc(4% - 1px);
   }
 
   .load-more-wrapper {
