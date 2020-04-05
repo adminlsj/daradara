@@ -2242,6 +2242,10 @@ a > i {
   .padding-desktop-only {
     padding: 0px;
   }
+
+  .nav-main-original {
+    padding: 0px 5px;
+  }
 }
 
 @media (max-width: 768px) {
