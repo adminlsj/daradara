@@ -3,7 +3,7 @@
     <div style="height: 50px;">
 
       <a class="nav-image-wrapper" style="text-decoration: none;" href="/">
-          <img src="https://i.imgur.com/{{ $theme == 'dark' ? 'xSMGFWh' : 'M8tqx5K.png'}}.png" style="margin-left: 0px;" height="27" alt="娛見日本 LaughSeeJapan">
+          <img src="https://i.imgur.com/{{ $theme == 'dark' ? 'xSMGFWh' : 'M8tqx5K.png'}}.png" style="margin-left: 0px;" height="28" alt="娛見日本 LaughSeeJapan">
       </a>
 
       <span id="nav-menu-trigger" class="hidden-xs" style="color: #cf2d52; font-size: 1.05em; margin-left: 20px; text-decoration: none; cursor: pointer; padding-bottom: 15px;">
@@ -53,14 +53,15 @@
 
       <a class="no-select nav-item-text hidden-xs" style="color: white; background-color: #d84b6b; border: 2px solid #d84b6b;" href="{{ Auth::check() ? route('video.subscribes') : route('login') }}">訂閱項目</span></a>
 
-      <a class="no-select nav-item-text hidden-sm hidden-md hidden-lg" style="color: #cf2d52; border: 2px solid #cf2d52;" href="{{ Auth::check() ? route('video.subscribes') : route('login') }}">訂閱</a>
+      <!--<a class="no-select nav-item-text hidden-sm hidden-md hidden-lg" style="color: #cf2d52; border: 2px solid #cf2d52;" href="{{ Auth::check() ? route('video.subscribes') : route('login') }}">訂閱</a>-->
 
       <form id="search-form" class="hidden-xs" style="display: inline-block; float: right; margin-top: 9px; margin-right: 5px" action="{{ route('video.search') }}" method="GET">
 	      <input name="query" style="vertical-align:middle; box-shadow: none; border: 1px solid #d84b6b; background-color: white; font-size: 1em; width: 200px; border-top-left-radius: 2px; border-bottom-left-radius: 2px; height: 31px; padding-left: 10px;" type="text" value="{{ request('query') }}" placeholder="最新日本綜藝、日劇、動漫">
 	      <a class="search-submit-btn" type="submit" style="cursor: pointer;"><i style="font-size: 22px; vertical-align:middle; border: 1px solid #d84b6b; background-color: #d84b6b; color: white; padding: 3.5px 10px; margin-top: -1px; margin-left: -4px; border-top-right-radius: 2px; border-bottom-right-radius: 2px;" class="material-icons no-select">search</i></a>
 	  </form>
 
-      <a id="toggleSearchBar" class="pull-right hidden-sm hidden-md hidden-lg" style="padding: 0px 0px 15px 15px; cursor: pointer; margin-right: 7px;"><i style="font-size: 25px; vertical-align:middle; margin-bottom: -24px; color: #222222" class="material-icons">search</i></a>
+	  <a id="nav-account-icon" class="pull-right hidden-sm hidden-md hidden-lg" style="padding: 0px 0px 0px 15px;" href="{{ Auth::check() ? route('user.show', Auth::user()) : route('login')}}"><i style="font-size: 25px; vertical-align:middle; margin-bottom: -22.5px" class="material-icons">account_circle</i></a>
+      <a id="toggleSearchBar" class="pull-right hidden-sm hidden-md hidden-lg" style="padding: 0px 0px 15px 15px; cursor: pointer;"><i style="font-size: 25px; vertical-align:middle; margin-bottom: -22.5px" class="material-icons">search</i></a>
     </div>
   </div>
 </nav>
