@@ -107,7 +107,7 @@ body {
 }
 
 #custom-scroll-slider > div {
-  margin-right: 5px;
+  margin-right: 4px;
 }
 
 #custom-scroll-slider div:first-child {
@@ -119,7 +119,7 @@ body {
 }
 
 #custom-scroll-slider .hover-opacity {
-  width: calc((100% - 25px) / 4 - 12px) !important;
+  width: calc((100% - 25px) / 4 - 11px) !important;
 }
 
 .watch-slider #custom-scroll-slider > div {
@@ -2035,7 +2035,7 @@ a > i {
   }
 
   #custom-scroll-slider .hover-opacity {
-    width: calc((100% - 15px) / 4 - 12px) !important;
+    width: calc((100% - 15px) / 4 - 10px) !important;
   }
 
   .text-ellipsis-mobile {
@@ -2273,11 +2273,11 @@ a > i {
   }
 
   #custom-scroll-slider .hover-opacity {
-    width: calc(92% / 2) !important;
+    width: calc((100% - 15px) / 2 - 8px) !important;
   }
 
   #custom-scroll-slider > div {
-    margin-right: -2px;
+    margin-right: -1px;
   }
 
   .watch-slider #custom-scroll-slider > div {

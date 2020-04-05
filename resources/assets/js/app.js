@@ -27,9 +27,9 @@ $('.slider-scroll-right').click(function() {
     if ($windowWidth > 991) {
       $scrollWidth = $windowWidth - 220 - 50 - 7;
     } else if ($windowWidth > 768) {
-      $scrollWidth = $windowWidth - 30 + 2;
+      $scrollWidth = $windowWidth - 30 + 7;
     } else {
-      $scrollWidth = $windowWidth - 30 - 6;
+      $scrollWidth = $windowWidth - 30 + 5;
     }
 
     $(this).parent().children(':first-child').animate({
@@ -45,9 +45,9 @@ $('.slider-scroll-left').click(function() {
     if ($windowWidth > 991) {
       $scrollWidth = $windowWidth - 220 - 50 - 7;
     } else if ($windowWidth > 768) {
-      $scrollWidth = $windowWidth - 30 + 2;
+      $scrollWidth = $windowWidth - 30 + 7;
     } else {
-      $scrollWidth = $windowWidth - 30 - 6;
+      $scrollWidth = $windowWidth - 30 + 5;
     }
     
     $(this).parent().children(':first-child').animate({
