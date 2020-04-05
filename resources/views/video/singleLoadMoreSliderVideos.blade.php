@@ -3,7 +3,7 @@
 		<img class="lazy" style="width: 100%; height: 100%;" src="{{ $video->imgur16by9() }}" data-src="{{ $video->imgurL() }}" data-srcset="{{ $video->imgurL() }}" alt="{{ $video->title }}">
 
 		<div class="hover-underline">
-		    <h4 style="font-size: 0.95em; margin-top: 7px; color: #222222;" class="text-ellipsis">@if ($video->category != 'video'){{ $video->watch()->title }}@endif {{ $video->explodeTitle() }}</h4>
+		    <h4 class="text-ellipsis" style="padding-right: 10px">@if ($video->category != 'video'){{ $video->watch()->title }}@endif {{ $video->explodeTitle() }}</h4>
 		</div>
     </a>
 </div>
