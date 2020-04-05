@@ -86,22 +86,24 @@ class VideoController extends Controller
     public function explore(Request $request){
         switch ($request->path()) {
             case 'rank':
-                $selected = $this->trendingWatch();
-                $videos = Video::whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->orderBy('views', 'desc')->paginate(10);
+                $videos = Video::whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(2))->orderBy('views', 'desc');
                 break;
 
             case 'newest':
-                $selected = Watch::where('genre', 'variety')->orderBy('updated_at', 'desc')->limit(20)->get();
-                $videos = Video::where('genre', 'variety')->whereDate('uploaded_at', '>=', Carbon::now()->subMonths(1))->orderBy('uploaded_at', 'desc')->paginate(10);
+                $videos = Video::where('genre', 'variety')->orWhere('genre', 'drama')->whereDate('uploaded_at', '>=', Carbon::now()->subMonths(2))->orderBy('uploaded_at', 'desc');
                 break;
             
             default:
-                $selected = $this->trendingWatch();
-                $videos = Video::whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->orderBy('views', 'desc')->paginate(10);
+                $videos = Video::whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(2))->orderBy('views', 'desc');
                 break;
         }
 
-        $html = $this->rankLoadHTML($videos);
+        $videos = $videos->paginate(24);
+
+        $html = '';
+        foreach ($videos as $video) {
+            $html .= view('video.singleLoadMoreSliderVideos', compact('video'));
+        }
         if ($request->ajax()) {
             return $html;
         }
@@ -259,7 +261,15 @@ class VideoController extends Controller
 
     public function genreList(Request $request){
         $genre = str_replace('List', '', $request->path());
-        $watches = Watch::where('genre', $genre)->orderBy('updated_at', 'desc')->get();
+        $watches = Watch::where('genre', $genre)->orderBy('updated_at', 'desc')->paginate(24);
+
+        $html = '';
+        foreach ($watches as $watch) {
+            $html .= view('video.load-more-watch-slider', compact('watch'));
+        }
+        if ($request->ajax()) {
+            return $html;
+        }
 
         return view('video.genreList', compact('genre', 'watches'));
     }

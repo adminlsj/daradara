@@ -5,28 +5,20 @@
 @endsection
 
 @section('content')
-<div class="hidden-sm hidden-xs sidebar-menu">
-	@include('video.sidebarMenu', ['theme' => 'white'])
-</div>
-<div class="main-content">
-	<div style="background-color: #F5F5F5; padding-top: 20px;">
-		
-		<div style="padding: 0px 20px; padding-bottom: 8px">
-	      <h4>LaughSeeJapan{{ Request::path() == 'newest' ? '最新' : '熱門' }}頻道<a href="{{ route('video.varietyList') }}" style="float: right; text-decoration: none; color: black" class="hidden-md hidden-lg"><i style="vertical-align:middle; font-size: 1em; margin-top: -3.5px;" class="material-icons">arrow_forward_ios</i></a></h4>
-	    </div>
-	    @include('video.single-watch-slider')
-
-		<div style="margin-top: 25px; padding: 0px 20px;">
-			@if (Request::path() == 'rank')
-				<h4><a style="text-decoration: none; color: inherit;" href="{{ route('video.rank') }}">發燒影片</a><span style="color: #595959; font-weight: 300">&nbsp;&nbsp;|&nbsp;&nbsp;</span><a style="color: #595959; font-weight: 300" href="{{ route('video.newest') }}">最新內容</a></h4>
-			@elseif (Request::path() == 'newest')
-				<h4><a style="text-decoration: none; color: inherit;" href="{{ route('video.newest') }}">最新內容</a><span style="color: #595959; font-weight: 300">&nbsp;&nbsp;|&nbsp;&nbsp;</span><a style="color: #595959; font-weight: 300" href="{{ route('video.rank') }}">發燒影片</a></h4>
-			@endif
-			<div style="padding-top: 9px"></div>
-		    <div id="sidebar-results"><!-- results appear here --></div>
-		    <div style="text-align: center;" class="ajax-loading"><img style="width: 40px; height: auto; padding-top: 15px; padding-bottom: 30px;" src="https://i.imgur.com/TcZjkZa.gif"/></div>
-		</div>
-	</div>
+<div style="background-color: #FEFEFE;">
+	<div class="explore-slider-title paravi-padding-setup">
+		@if (Request::path() == 'rank')
+	    	<a href="{{ route('video.newest') }}"><h4>最夯發燒影片<span>最新內容</span><i class="material-icons">arrow_forward_ios</i></h4></a>
+    	@elseif (Request::path() == 'newest')
+	    	<a href="{{ route('video.rank') }}"><h4>最新精彩內容<span>發燒影片</span><i class="material-icons">arrow_forward_ios</i></h4></a>
+    	@endif
+    </div>
+	<div class="row no-gutter load-more-container">
+      <div class="video-sidebar-wrapper">
+          <div id="sidebar-results"><!-- results appear here --></div>
+          <div style="text-align: center;" class="ajax-loading"><img style="width: 40px; height: auto; padding-top: 25px; padding-bottom: 50px;" src="https://i.imgur.com/TcZjkZa.gif"/></div>
+      </div>
+    </div>
 </div>
 @endsection
 

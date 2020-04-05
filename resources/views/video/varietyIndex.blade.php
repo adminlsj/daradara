@@ -37,7 +37,7 @@
   <div class="video-slider-title paravi-padding-setup">
     <a href="{{ route('video.rank') }}"><h4>更多發燒影片<span class="hidden-xs">更多內容</span><i class="material-icons">arrow_forward_ios</i></h4></a>
   </div>
-  <div class="row no-gutter" style="padding: 0px calc(4% - 5px)">
+  <div class="row no-gutter load-more-container">
     <div class="video-sidebar-wrapper">
         <div id="sidebar-results"><!-- results appear here --></div>
         <div style="text-align: center;" class="ajax-loading"><img style="width: 40px; height: auto; padding-top: 25px; padding-bottom: 50px;" src="https://i.imgur.com/TcZjkZa.gif"/></div>
