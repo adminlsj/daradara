@@ -13,5 +13,5 @@
 	    @endforeach
 	</div>
 	<div class="slider-scroll-left no-select"><i style="vertical-align:middle; font-size: 1em; margin-top: -7px; margin-left: 3px" class="material-icons">arrow_back_ios</i></div>
-	<div class="slider-scroll-right no-select"><i style="vertical-align:middle; font-size: 1em; margin-top: -7px; margin-left: 1px; {{ $is_mobile ? 'display:none' : '' }}" class="material-icons">arrow_forward_ios</i></div>
+	<div class="slider-scroll-right no-select" style="{{ $is_mobile ? 'display:none' : '' }}"><i style="vertical-align:middle; font-size: 1em; margin-top: -7px; margin-left: 1px;" class="material-icons">arrow_forward_ios</i></div>
 </div>
