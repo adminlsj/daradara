@@ -48,11 +48,13 @@
 		</div>
       </span>
 
-      <a class="hidden-xs hidden-sm" style="color: #cf2d52; font-size: 1.05em; margin-left: 15px" href="{{ Auth::check() ? route('video.subscribes') : route('login')}}">訂閱項目</a>
+      <a class="hidden-xs hidden-sm" style="color: #cf2d52; font-size: 1.05em; margin-left: 15px" href="{{ Auth::check() ? route('video.subscribes') : route('login') }}">訂閱項目</a>
 
-      <a class="no-select nav-item-text" style="color: #cf2d52; border: 2px solid #cf2d52;" href="{{ Auth::check() ? route('user.show', Auth::user()) : route('login')}}"><span class="hidden-xs">我的</span>帳戶</a>
+      <a class="no-select nav-item-text hidden-xs" style="color: #cf2d52; border: 2px solid #cf2d52;" href="{{ Auth::check() ? route('user.show', Auth::user()) : route('login') }}">我的帳戶</a>
 
-      <a class="no-select nav-item-text" style="color: white; background-color: #d84b6b; border: 2px solid #d84b6b;" href="{{ Auth::check() ? route('user.show', Auth::user()) : route('login')}}">訂閱<span class="hidden-xs">項目</span></a>
+      <a class="no-select nav-item-text hidden-xs" style="color: white; background-color: #d84b6b; border: 2px solid #d84b6b;" href="{{ Auth::check() ? route('video.subscribes') : route('login') }}">訂閱項目</span></a>
+
+      <a class="no-select nav-item-text hidden-sm hidden-md hidden-lg" style="color: #cf2d52; border: 2px solid #cf2d52;" href="{{ Auth::check() ? route('video.subscribes') : route('login') }}">訂閱項目</a>
 
       <form id="search-form" class="hidden-xs" style="display: inline-block; float: right; margin-top: 9px" action="{{ route('video.search') }}" method="GET">
 	      <input id="query" name="query" style="vertical-align:middle; box-shadow: none; border: 1px solid #d84b6b; background-color: white; font-size: 1em; width: 200px; border-top-left-radius: 2px; border-bottom-left-radius: 2px; height: 31px; padding-left: 10px;" type="text" value="{{ request('query') }}" placeholder="最新日本綜藝、日劇、動漫">
