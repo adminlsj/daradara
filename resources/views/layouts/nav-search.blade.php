@@ -1,4 +1,4 @@
-<nav style="border-bottom: 1px solid #d9d9d9; background-color: #e9e9e9; height: 50px; {{ request('query') != '' ? '' : 'display: none'}}" id="searchBar" class="">
+<nav style="padding: 0px 4%; border-bottom: 1px solid #d9d9d9; background-color: #e9e9e9; height: 50px; {{ request('query') != '' ? '' : 'display: none'}}" id="searchBar" class="">
   <div style="background-color: #e9e9e9;">
 
     <form id="search-form" style="background-color: #e9e9e9;" action="{{ route('video.search') }}" method="GET">

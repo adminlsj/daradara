@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('nav')
-	@include('layouts.nav-main', ['theme' => 'white', 'logoImage' => 'https://i.imgur.com/M8tqx5K.png'])
+	@include('layouts.nav-main', ['theme' => 'white'])
 @endsection
 
 @section('content')
@@ -21,7 +21,7 @@
 		@endforeach
 		<div class="col-xs-6 col-sm-4 col-md-4" style="position: absolute; top: 50%; left: 50%; -ms-transform: translate(-50%, -50%); transform: translate(-50%, -50%);">
 			<div style="width: 100%; height: 100%; text-align: center">
-				<div style="font-weight: 500; font-size: 1.5em; padding-bottom: 1.2vw; margin-top: -15px">LaughSeeJapan 娛見日本</div>
+				<div style="font-weight: 500; font-size: 1.5em; padding-bottom: 1.2vw; margin-top: -14px">LaughSeeJapan 娛見日本</div>
 				<a style="background-color: #cf2d52" class="desktop-home-banner-btn hover-opacity" href="{{ route('video.variety') }}">綜藝<i class="material-icons">arrow_forward_ios</i></a>
 				<a style="background-color: #d84b6b; margin-left: 5px; margin-right: 5px;" class="desktop-home-banner-btn" href="{{ route('video.drama') }}">日劇<i class="material-icons">arrow_forward_ios</i></a>
 				<a style="background-color: #df6b86" class="desktop-home-banner-btn" href="{{ route('video.anime') }}">動漫<i class="material-icons">arrow_forward_ios</i></a>
@@ -81,7 +81,7 @@
 
     @if (count($subscribes) != 0)
     	<div class="video-slider-title paravi-padding-setup">
-	      <h4>最新訂閱內容<a href="{{ route('video.subscribes') }}">更多內容<i class="material-icons">arrow_forward_ios</i></a></h4>
+    		<a href="{{ route('video.subscribes') }}"><h4>最新訂閱內容<span class="hidden-xs">更多內容</span><i class="material-icons">arrow_forward_ios</i></h4></a>
 	    </div>
 	    @include('video.single-video-slider', ['videos' => $subscribes])
     @endif
