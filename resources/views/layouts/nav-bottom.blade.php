@@ -1,4 +1,4 @@
-<div class="bottom-nav hidden-lg hidden-md {{ $theme == 'dark' ? 'dark-theme-nav-bottom' : 'white-theme-nav-bottom' }}">
+<div style="{{ Request::is('watch') || Request::is('search') ? '' : 'display:none' }}" class="bottom-nav hidden-lg hidden-md {{ $theme == 'dark' ? 'dark-theme-nav-bottom' : 'white-theme-nav-bottom' }}">
   <a href="/" class="{{ Request::is('/') ? 'active' : ''}}">
     <i class="material-icons">home</i>
     <span style="padding-right: 1px;">主頁</span>
