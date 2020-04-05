@@ -412,6 +412,17 @@ a:hover, a:visited {
     color: #97344a;
 }
 
+.nav-item-text {
+  font-size: 1.05em; 
+  margin-left: 5px; 
+  float: right; 
+  border: 2px solid #cf2d52; 
+  border-radius: 2px; 
+  padding: 3px 10px; 
+  margin-top: 9px; 
+  text-decoration: none;
+}
+
 .caret {
   border-bottom: 11px solid #cf2d52;
   border-left: 10px solid rgba(0, 0, 0, 0);
@@ -1329,6 +1340,13 @@ a > i {
   overflow-y: scroll;
 }
 
+.logo-text {
+  font-size: 1.5em; 
+  line-height: 46px; 
+  padding-left: 2px; 
+  letter-spacing: -0.5px;
+}
+
 /* width */
 .sidebar-menu > div::-webkit-scrollbar {
   width: 8px;
@@ -2210,5 +2228,10 @@ a > i {
   .load-more-wrapper {
     padding: 0px 1px !important; 
     margin-bottom: 20px;
+  }
+
+  .nav-item-text {
+    margin-top: 11px; 
+    font-size: 0.95em;
   }
 }
