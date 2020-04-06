@@ -16,7 +16,7 @@
 			<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 			<!-- Home Desktop Ads -->
 			<ins class="adsbygoogle"
-			     style="display:block;"
+			     style="display:block; border: 1px solid black"
 			     data-ad-client="ca-pub-4485968980278243"
 			     data-ad-slot="4478704168"
 			     data-ad-format="auto"
@@ -26,7 +26,10 @@
 			</script>
 		</div>
 
-		<div class="paravi-padding-setup row hidden-xs" style="margin: 0 auto 0 auto; padding-top: 30px; padding-bottom: 20px;">
+		<div class="video-slider-title paravi-padding-setup hidden-xs hidden-sm" style="margin: 0 auto 0 auto; padding-top: 10px">
+	    	<a href="{{ route('video.rank') }}"><h4>探索LaughSeeJapan</h4></a>
+	    </div>
+		<div class="paravi-padding-setup row hidden-xs hidden-sm" style="margin: 0 auto 0 auto; padding-top: 3px; padding-bottom: 15px;">
 			<div style="margin: 0px -10px;">
 			    @include('layouts.single-horizontal-genre-card', ['genre' => '綜藝節目', 'imgur' => 'iXyOfUs', 'link' => route('video.variety')])
 			    @include('layouts.single-horizontal-genre-card', ['genre' => '電視劇', 'imgur' => 'aALP7mY', 'link' => route('video.drama')])
@@ -34,7 +37,7 @@
 		    </div>
 		</div>
 
-		<div class="paravi-padding-setup row hidden-sm hidden-md hidden-lg" style="margin: 0 auto 0 auto; padding-top: 30px; padding-bottom: 20px;">
+		<div class="paravi-padding-setup row hidden-md hidden-lg" style="margin: 0 auto 0 auto; padding-top: 30px; padding-bottom: 20px;">
 			<div style="margin: 0px -5px;">
 			    @include('layouts.single-genre-card', ['genre' => '綜藝節目', 'imgur' => 'iXyOfUs', 'link' => route('video.variety')])
 			    @include('layouts.single-genre-card', ['genre' => '電視劇', 'imgur' => 'aALP7mY', 'link' => route('video.drama')])
