@@ -18,65 +18,42 @@
 			</div>
 		</div>
 		<hr style="border-color: #e9e9e9; margin-bottom: 0px">
-		<div id='home-first-title' style="padding: 0px 20px; padding-bottom: 8px">
-	      <h4>LaughSeeJapan熱門頻道<a href="{{ route('video.varietyList') }}" style="float: right; text-decoration: none; color: black" class="hidden-md hidden-lg"><i style="vertical-align:middle; font-size: 1em; margin-top: -3.5px;" class="material-icons">arrow_forward_ios</i></a></h4>
+		<div style="margin: 0 auto 0 auto; padding-top: 10px; padding-bottom: 10px;">
+	      <div class="video-slider-title paravi-padding-setup">
+	        <a href="{{ route('video.varietyList') }}"><h4>LaughSeeJapan綜藝頻道<span class="hidden-xs">更多內容</span><i class="material-icons">arrow_forward_ios</i></h4></a>
+	      </div>
+	      @include('video.single-watch-slider')
 	    </div>
-	    @include('video.single-watch-slider')
 
-	    <div style="margin-top: 25px; padding: 0px 20px; padding-bottom: 9px">
-	      <h4>最夯發燒影片</h4>
+	    <div class="video-slider-title paravi-padding-setup">
+	    	<a href="{{ route('video.rank') }}"><h4>最夯發燒影片<span class="hidden-xs">更多內容</span><i class="material-icons">arrow_forward_ios</i></h4></a>
 	    </div>
 	    @include('video.single-video-slider', ['videos' => $trendings])
-	    <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 show-more-btn">
-	      <a href="{{ route('video.rank') }}">
-	        <div>顯示更多</div>
-	      </a>
-	    </div>
 
-	    <div style="margin-top: 70px; padding: 0px 20px; padding-bottom: 9px">
-	      <h4>最新精彩內容</h4>
+	    <div class="video-slider-title paravi-padding-setup">
+	    	<a href="{{ route('video.newest') }}"><h4>最新精彩內容<span class="hidden-xs">更多內容</span><i class="material-icons">arrow_forward_ios</i></h4></a>
 	    </div>
 	    @include('video.single-video-slider', ['videos' => $newest])
-	    <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 show-more-btn">
-	      <a href="{{ route('video.newest') }}?g=variety">
-	        <div>顯示更多</div>
-	      </a>
-	    </div>
 
-	    <div style="margin-top: 70px; padding: 0px 20px; padding-bottom: 9px">
-	      <h4>綜藝推薦</h4>
+	    <div class="video-slider-title paravi-padding-setup">
+	    	<a href="{{ route('video.variety') }}"><h4>綜藝推薦<span class="hidden-xs">更多內容</span><i class="material-icons">arrow_forward_ios</i></h4></a>
 	    </div>
 	    @include('video.single-video-slider', ['videos' => $variety])
-	    <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 show-more-btn">
-	      <a href="{{ route('video.rank') }}?g=variety">
-	        <div>顯示更多</div>
-	      </a>
-	    </div>
 
-	    <div style="margin-top: 70px; padding: 0px 20px; padding-bottom: 9px">
-	      <h4>日劇推薦</h4>
+	    <div class="video-slider-title paravi-padding-setup">
+	    	<a href="{{ route('video.drama') }}"><h4>日劇推薦<span class="hidden-xs">更多內容</span><i class="material-icons">arrow_forward_ios</i></h4></a>
 	    </div>
 	    @include('video.single-video-slider', ['videos' => $drama])
-	    <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 show-more-btn">
-	      <a href="{{ route('video.drama') }}">
-	        <div>顯示更多</div>
-	      </a>
-	    </div>
 
-	    <div style="margin-top: 70px; padding: 0px 20px; padding-bottom: 9px">
-	      <h4>動漫推薦</h4>
+	    <div class="video-slider-title paravi-padding-setup">
+	    	<a href="{{ route('video.anime') }}"><h4>動漫推薦<span class="hidden-xs">更多內容</span><i class="material-icons">arrow_forward_ios</i></h4></a>
 	    </div>
 	    @include('video.single-video-slider', ['videos' => $anime])
-	    <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 show-more-btn">
-	      <a href="{{ route('video.anime') }}">
-	        <div>顯示更多</div>
-	      </a>
-	    </div>
 
-	    <div style="margin-top: 70px; padding: 0px 20px; padding-bottom: 9px">
-	      <h4>更多發燒影片</h4>
+	    <div class="video-slider-title paravi-padding-setup">
+	      <a href="{{ route('video.rank') }}"><h4>更多發燒影片<span class="hidden-xs">更多內容</span><i class="material-icons">arrow_forward_ios</i></h4></a>
 	    </div>
-	    <div class="row no-gutter" style="padding: 0px 15px">
+	    <div class="row no-gutter load-more-container">
 	      <div class="video-sidebar-wrapper">
 	          <div id="sidebar-results"><!-- results appear here --></div>
 	          <div style="text-align: center;" class="ajax-loading"><img style="width: 40px; height: auto; padding-top: 25px; padding-bottom: 50px;" src="https://i.imgur.com/TcZjkZa.gif"/></div>

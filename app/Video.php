@@ -264,6 +264,8 @@ class Video extends Model
             } catch(Exception $e) {
                 return $e->getMessage();
             }
+        } else {
+            return $url;
         }
     }
 

@@ -21,7 +21,7 @@ const app = new Vue({
     el: '#app'
 });
 
-$('.slider-scroll-right').click(function() {
+$('.slider-wrapper .slider-scroll-right').click(function() {
     var $windowWidth = $(window).width();
     var $scrollWidth;
     if ($windowWidth > 991) {
@@ -39,7 +39,41 @@ $('.slider-scroll-right').click(function() {
     $(this).prev().css('display', 'block');
 })
 
-$('.slider-scroll-left').click(function() {
+$('.slider-wrapper .slider-scroll-left').click(function() {
+    var $windowWidth = $(window).width();
+    var $scrollWidth;
+    if ($windowWidth > 991) {
+      $scrollWidth = $windowWidth - 220 - 50 - 10;
+    } else if ($windowWidth > 768) {
+      $scrollWidth = $windowWidth - 30 + 7;
+    } else {
+      $scrollWidth = $windowWidth - 30 + 5;
+    }
+    
+    $(this).parent().children(':first-child').animate({
+      scrollLeft: '-=' + $scrollWidth
+    }, 'slow');
+})
+
+$('.watch-slider .slider-scroll-right').click(function() {
+    var $windowWidth = $(window).width();
+    var $scrollWidth;
+    if ($windowWidth > 991) {
+      $scrollWidth = parseInt(($windowWidth - 220 - 50) / (150 + 5)) * (150 + 5) + 25;
+    } else if ($windowWidth > 768) {
+      $scrollWidth = parseInt(($windowWidth - 30) / (150 + 5)) * (150 + 5) + 20;
+    } else {
+      $scrollWidth = parseInt(($windowWidth - 30) / (120 + 5)) * (120 + 5) + 15;
+    }
+
+    $(this).parent().children(':first-child').animate({
+      scrollLeft: '+=' + $scrollWidth
+    }, 'slow');
+
+    $(this).prev().css('display', 'block');
+})
+
+$('.watch-slider .slider-scroll-left').click(function() {
     var $windowWidth = $(window).width();
     var $scrollWidth;
     if ($windowWidth > 991) {
