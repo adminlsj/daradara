@@ -13,19 +13,17 @@
 	<div style="background-color: #F5F5F5;">
 
 		<div class="hidden-xs hidden-sm" style="padding-top: 10px; padding-bottom: 10px">
-			<div style="border: 1px solid black">
-				<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-				<!-- Home Desktop Ads -->
-				<ins class="adsbygoogle"
-				     style="display:block;"
-				     data-ad-client="ca-pub-4485968980278243"
-				     data-ad-slot="4478704168"
-				     data-ad-format="auto"
-				     data-full-width-responsive="true"></ins>
-				<script>
-				     (adsbygoogle = window.adsbygoogle || []).push({});
-				</script>
-			</div>
+			<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+			<!-- Home Desktop Ads -->
+			<ins class="adsbygoogle"
+			     style="display:block;"
+			     data-ad-client="ca-pub-4485968980278243"
+			     data-ad-slot="4478704168"
+			     data-ad-format="auto"
+			     data-full-width-responsive="true"></ins>
+			<script>
+			     (adsbygoogle = window.adsbygoogle || []).push({});
+			</script>
 		</div>
 
 		<div class="paravi-padding-setup row hidden-xs" style="margin: 0 auto 0 auto; padding-top: 30px; padding-bottom: 20px;">
