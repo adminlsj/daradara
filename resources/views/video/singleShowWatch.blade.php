@@ -69,13 +69,13 @@
         @include('video.like-btn-wrapper')
       </div>
       <div id="comment-icon" class="single-icon-wrapper">
-        <div class="single-icon">
+        <div class="single-icon no-select">
           <i class="material-icons">chat</i>
           <div>評論</div>
         </div>
       </div>
       <div id="shareBtn" class="single-icon-wrapper" data-toggle="modal" data-target="#shareModal">
-        <div class="single-icon">
+        <div class="single-icon no-select">
           <i class="material-icons noselect" style="-moz-transform: scale(-1, 1);-webkit-transform: scale(-1, 1);-o-transform: scale(-1, 1);-ms-transform: scale(-1, 1);transform: scale(-1, 1); font-size: 2.2em; margin-top: -4px;">reply</i>
           <div style="margin-top: -5px;">分享</div>
         </div>
@@ -84,7 +84,7 @@
         @include('video.save-btn-wrapper')
       </div>
       <div class="single-icon-wrapper" data-toggle="modal" data-target="#reportModal">
-        <div class="single-icon">
+        <div class="single-icon no-select">
           <i class="material-icons noselect">flag</i>
           <div>報告</div>
         </div>

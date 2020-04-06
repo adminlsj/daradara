@@ -5,7 +5,7 @@
   <input name="like-foreign-id" type="hidden" value="{{ $video->id }}">
   <input name="like-is-positive" type="hidden" value="{{ true }}">
   <button class="single-icon-wrapper no-button-style" method="POST">
-  	<div class="single-icon">
+  	<div class="single-icon no-select">
 	    <i class="material-icons">thumb_up</i>
 	    <div>{{ App\Like::count('video', $video->id, true) }}</div>
 	</div>
