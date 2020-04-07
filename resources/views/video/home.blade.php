@@ -27,7 +27,7 @@
 		</div>
 
 		<div class="video-slider-title paravi-padding-setup hidden-xs hidden-sm" style="margin: 0 auto 0 auto; padding-top: 10px">
-	    	<a href="{{ route('video.rank') }}"><h4>探索LaughSeeJapan</h4></a>
+	    	<a href="{{ route('video.rank') }}"><h4>LaughSeeJapan 探索頻道</h4></a>
 	    </div>
 		<div class="paravi-padding-setup row hidden-xs hidden-sm" style="margin: 0 auto 0 auto; padding-top: 3px; padding-bottom: 15px;">
 			<div style="margin: 0px -10px;">

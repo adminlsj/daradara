@@ -12,7 +12,7 @@
 <div class="main-content">
   <div style="background-color: #F5F5F5;">
     <div class="explore-slider-title paravi-padding-setup">
-        <a href="{{ route('video.varietyList') }}"><h4>LaughSeeJapan綜藝頻道</h4></a>
+        <a href="{{ route('video.varietyList') }}"><h4>LaughSeeJapan 綜藝頻道</h4></a>
     </div>
     <div class="row no-gutter load-more-container">
         <div class="video-sidebar-wrapper">

@@ -26,17 +26,17 @@ class HomeController extends Controller
 
     public function terms()
     {
-        return view('layouts.terms', compact('is_program'));
+        return view('layouts.terms');
     }
 
     public function policies()
     {
-        return view('layouts.policies', compact('is_program'));
+        return view('layouts.policies');
     }
 
     public function copyright()
     {
-        return view('layouts.copyright', compact('is_program'));
+        return view('layouts.copyright');
     }
 
     public function userReport(Request $request)
@@ -78,7 +78,7 @@ class HomeController extends Controller
 
     public function check(Request $request)
     {
-        /* if (Auth::check() && Auth::user()->email == 'laughseejapan@gmail.com') {
+        if (Auth::check() && Auth::user()->email == 'laughseejapan@gmail.com') {
             $videos = Video::where('outsource', false)->orderBy('id', 'desc')->paginate(1);
             $count = Video::where('outsource', false)->orderBy('id', 'desc')->count();
 
@@ -95,8 +95,8 @@ class HomeController extends Controller
 
         } else {
             return redirect()->action('VideoController@home');
-        } */
-        if (Auth::check() && Auth::user()->email == 'laughseejapan@gmail.com') {
+        }
+        /*if (Auth::check() && Auth::user()->email == 'laughseejapan@gmail.com') {
             $videos = Video::where('outsource', false)->where('sd', 'not like', "%.m3u8%")->orderBy('id', 'desc')->get();
             echo "Video Check STARTED<br>";
             foreach ($videos as $video) {
@@ -130,7 +130,7 @@ class HomeController extends Controller
             
         } else {
             return redirect()->action('VideoController@home');
-        }
+        }*/
     }
 
     public function checkSubscribes(Request $request)

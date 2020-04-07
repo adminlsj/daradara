@@ -14,7 +14,7 @@
 
     <div style="margin: 0 auto 0 auto; padding-top: 10px; padding-bottom: 10px;">
       <div class="video-slider-title paravi-padding-setup">
-        <a href="{{ route('video.varietyList') }}"><h4>LaughSeeJapan綜藝頻道<span class="hidden-xs">更多內容</span><i class="material-icons">arrow_forward_ios</i></h4></a>
+        <a href="{{ route('video.varietyList') }}"><h4>LaughSeeJapan 綜藝頻道<span class="hidden-xs">更多內容</span><i class="material-icons">arrow_forward_ios</i></h4></a>
       </div>
       @include('video.single-watch-slider')
     </div>
