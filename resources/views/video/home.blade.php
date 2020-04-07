@@ -26,8 +26,8 @@
 			</script>
 		</div>
 
-		<div class="video-slider-title paravi-padding-setup hidden-xs hidden-sm" style="margin: 0 auto 0 auto; padding-top: 10px">
-	    	<a href="{{ route('video.rank') }}"><h4>LaughSeeJapan 探索頻道</h4></a>
+		<div id="home-first-title" class="video-slider-title paravi-padding-setup" style="margin: 0 auto 0 auto;">
+	    	<a href="{{ route('video.variety') }}"><h4>LaughSeeJapan 探索頻道</h4></a>
 	    </div>
 		<div class="paravi-padding-setup row hidden-xs hidden-sm" style="margin: 0 auto 0 auto; padding-top: 3px; padding-bottom: 15px;">
 			<div style="margin: 0px -10px;">
@@ -37,8 +37,8 @@
 		    </div>
 		</div>
 
-		<div class="paravi-padding-setup row hidden-md hidden-lg" style="margin: 0 auto 0 auto; padding-top: 30px; padding-bottom: 20px;">
-			<div style="margin: 0px -5px;">
+		<div class="paravi-padding-setup row hidden-md hidden-lg" style="margin: 0 auto 0 auto; padding-bottom: 20px; padding-top: 2px;">
+			<div style="margin: 0px -4px;">
 			    @include('layouts.single-genre-card', ['genre' => '綜藝節目', 'imgur' => 'iXyOfUs', 'link' => route('video.variety')])
 			    @include('layouts.single-genre-card', ['genre' => '電視劇', 'imgur' => 'aALP7mY', 'link' => route('video.drama')])
 			    @include('layouts.single-genre-card', ['genre' => '動漫卡通', 'imgur' => 'VHxhxcI', 'link' => route('video.anime')])

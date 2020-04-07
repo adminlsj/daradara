@@ -59,11 +59,11 @@ $('.watch-slider .slider-scroll-right').click(function() {
     var $windowWidth = $(window).width();
     var $scrollWidth;
     if ($windowWidth > 991) {
-      $scrollWidth = parseInt(($windowWidth - 220 - 50) / (150 + 5)) * (150 + 5) + 25;
+      $scrollWidth = $windowWidth - 220 - 50 - 12;
     } else if ($windowWidth > 768) {
-      $scrollWidth = parseInt(($windowWidth - 30) / (150 + 5)) * (150 + 5) + 20;
+      $scrollWidth = $windowWidth - 30 + 7;
     } else {
-      $scrollWidth = parseInt(($windowWidth - 30) / (120 + 5)) * (120 + 5) + 15;
+      $scrollWidth = $windowWidth - 30 + 9;
     }
 
     $(this).parent().children(':first-child').animate({
