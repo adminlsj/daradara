@@ -13,6 +13,7 @@ use Response;
 use Mail;
 use Auth;
 use App\Mail\UserReport;
+use App\Mail\CopyrightReport;
 use App\Mail\UserUploadVideo;
 use App\Mail\SubscribeNotify;
 use Redirect;
@@ -34,9 +35,13 @@ class HomeController extends Controller
         return view('layouts.policies');
     }
 
-    public function copyright()
+    public function copyright(Request $request)
     {
-        return view('layouts.copyright');
+        if ($request->lang == 'en') {
+            return view('layouts.copyright-en');
+        } else {
+            return view('layouts.copyright-ch');
+        }
     }
 
     public function userReport(Request $request)
@@ -51,6 +56,12 @@ class HomeController extends Controller
         $video = Video::find(request('video-id'));
         Mail::to('laughseejapan@gmail.com')->send(new UserReport($reason, $video));
         return Redirect::back()->withErrors('感謝您向我們提供意見或回報任何錯誤。');
+    }
+
+    public function copyrightReport(Request $request)
+    {
+        Mail::to('laughseejapan@gmail.com')->send(new CopyrightReport($request));
+        return Redirect::back()->withErrors('Your complaint has been submitted successfully. We will handle accordingly and email you the latest progress.');
     }
 
     public function userUploadVideo(Request $request)

@@ -6,11 +6,11 @@
 
       <div style="height: 47px; padding: 0px 8px;">
         <div style="margin-top: -29px;float: right; margin-right: -3px">
-          <span style="background-color: rgba(0,0,0,0.8); color: white; padding: 1px 5px 1px 5px; opacity: 0.9; font-size: 0.85em; border-radius: 2px; font-weight: 300">
+          <span style="background-color: rgba(0,0,0,0.8); color: white; padding: 1px 5px 1px 5px; opacity: 0.9; font-size: 0.85em; border-radius: 2px; font-weight: 500">
             @if ($watch->genre == 'variety')
               {{ Carbon\Carbon::parse($watch->updated_at)->diffForHumans() }}更新
             @else
-              {{ $watch->is_ended ? '已完結全' : '更新至第' }}{{ $watch->videos()->count() }}集
+              {{ explode(' ', $watch->videos()->last()->title())[0] }}
             @endif
           </span>
         </div>

@@ -58,6 +58,8 @@ Route::get('/loadPlaylist', 'VideoController@loadPlaylist')->name('video.loadPla
 Route::get('/userReport', 'HomeController@userReport')->name('email.userReport');
 Route::get('/userUploadVideo', 'HomeController@userUploadVideo')->name('email.userUploadVideo');
 
+Route::get('/copyrightReport', 'HomeController@copyrightReport')->name('email.copyrightReport');
+
 Route::get('/trending', 'VideoController@watch')->name('video.trending');
 
 Route::get('/rank', 'VideoController@explore')->name('video.rank');
