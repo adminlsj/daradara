@@ -2,7 +2,7 @@
   <div id="custom-scroll-slider">
     @foreach ($selected as $watch)
       <div class="hover-opacity-all" style="border-radius: 10px; box-shadow: 1px 4px 6px rgba(0,0,0,0.1); display: inline-block; vertical-align: text-top; margin-right: 4px; background-color: #F5F5F5">
-        <a style="text-decoration: none; color: black" href="{{ route('video.intro', [$watch->genre, $watch->titleToUrl()]) }}">
+        <a style="text-decoration: none; color: black" href="{{ route('video.intro', ['channel', $watch->titleToUrl()]) }}">
           <img class="lazy" style="width: 100%; height: 100%; border-top-left-radius: 10px; border-top-right-radius: 10px;" src="{{ $watch->imgurDefault() }}" data-src="{{ $watch->imgurL() }}" data-srcset="{{ $watch->imgurL() }}" alt="{{ $watch->title }}">
 
           <div style="height: 45px; padding: 2px 0px 2px 15px;">

@@ -21,7 +21,7 @@
               <h4 style="color: #3F3F3F; margin-bottom: 0px; font-size: 1.7em" class="modal-title" id="loginModalLabel">登入帳戶</h4>
             </div>
             <div style="color: #3F3F3F; margin-top: -15px; font-size: 1.1em" class="modal-body">
-              <span style="font-weight: 500;">暫不開放公開註冊。</span>
+              <span style="font-weight: 500;">娛見日本 LaughSeeJapan 讓您享受最愛的影片、上傳原創內容，並與全世界觀眾分享您的影片。</span>
               <div class="form-group" style="margin-top: 20px;">
                 <input type="email" class="form-control" name="email" id="email" placeholder="電郵地址" required>
               </div>
@@ -32,7 +32,7 @@
               @include('layouts.socialLoginBtn')
 
               <div style="margin-top: 20px; font-size: 0.95em">
-                <span style="font-weight: 400">暫不開放公開註冊。</span>
+                <span style="font-weight: 400">尚未擁有帳戶？</span>&nbsp;<a href="{{ route('register') }}" style="cursor: pointer; text-decoration: none; font-weight: 500;">註冊</a>
               </div>
             </div>
           </div>

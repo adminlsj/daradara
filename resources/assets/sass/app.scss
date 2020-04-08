@@ -228,6 +228,19 @@ body {
   margin-right: -5px;
 }
 
+#nav-main-hamburger {
+  vertical-align:middle; 
+  margin-left: 10px; 
+  margin-right:25px; 
+  font-size: 1.8em; 
+  margin-top: 0px;
+}
+
+#nav-main-logo {
+  margin-top: 0px; 
+  margin-left: -5px;
+}
+
 .video-slider-title {
   padding-bottom: 2px;
   margin-top: 25px;
@@ -331,6 +344,84 @@ body {
 
 #intro-play-button {
   width: 200px;
+}
+
+/* Style the tab */
+.user-show-tab {
+  padding-top: 15px;
+  margin-bottom: -20px;
+  overflow: hidden;
+}
+
+/* Style the buttons that are used to open the tab content */
+.user-show-tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 1.1em;
+  line-height: 40px;
+  width: 90px;
+  border-bottom: solid 3px #F9F9F9;
+}
+
+/* Change background color of buttons on hover */
+.user-show-tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.user-show-tab button.active {
+  border-bottom: solid 3px dimgray;
+}
+
+/* Style the tab content */
+.user-show-tabcontent {
+  display: none;
+  border-top: none;
+}
+
+/* Style the tab */
+.user-upload-tab {
+  padding-top: 15px;
+  overflow: hidden;
+}
+
+/* Style the buttons that are used to open the tab content */
+.user-upload-tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 1.1em;
+  line-height: 40px;
+  width: 90px;
+  color: #d84b6b;
+  border: solid 3px #d84b6b;
+  font-weight: 500;
+}
+
+/* Change background color of buttons on hover */
+.user-upload-tab button:hover {
+  background-color: #d84b6b;
+  color: white;
+}
+
+/* Create an active/current tablink class */
+.user-upload-tab button.active {
+  background-color: #d84b6b;
+  color: white;
+}
+
+/* Style the tab content */
+.user-upload-tabcontent {
+  display: none;
+  border-top: none;
+  margin-top: 15px;
 }
 
 .no-hover{
@@ -1115,10 +1206,6 @@ pre {
 .navbar-right {
     font-size: 15px;
     font-weight: 600;
-}
-
-input[type=file] {
-    display:none;    
 }
 
 .btn-info {
@@ -2020,6 +2107,14 @@ a > i {
 
   .paravi-padding-setup {
     padding: 0px 15px;
+  }
+
+  #nav-main-hamburger {
+    margin-top: 8px;
+  }
+
+  #nav-main-logo {
+    margin-top: 14px; 
   }
 
   #custom-scroll-slider div:first-child {

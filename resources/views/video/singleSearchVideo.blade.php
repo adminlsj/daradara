@@ -11,7 +11,7 @@
         @if ($video->category == 'video')
           {{ $video->genre() }} • 
         @else
-          <a class="text-ellipsis-mobile" href="{{ route('video.intro', [$video->genre, $video->watch()->titleToUrl()]) }}">{{ $video->watch()->title }} • </a>
+          <a class="text-ellipsis-mobile" href="{{ route('video.intro', ['channel', $video->watch()->titleToUrl()]) }}">{{ $video->watch()->title }} • </a>
         @endif
         <span class="text-ellipsis-mobile">觀看次數：{{ $video->views() }}次 • {{ Carbon\Carbon::parse($video->uploaded_at)->diffForHumans() }}</p></span>
       <p style="margin-top: 9px; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;" class="hidden-xs hidden-sm">{{ $video->caption }}</p>

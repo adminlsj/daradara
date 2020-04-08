@@ -10,16 +10,16 @@
       <span style="position: absolute; top: -5px; right: calc(60% - 9px)" class="alert-circle"></span>
     @endif
   </a>
-  <a href="{{ route('video.variety') }}" class="{{ strpos(Request::path(), 'variety' ) !== false || (Request::has('v') && $current->genre == 'variety') ? 'active' : ''}}">
-    <i style="padding-left: 1px; font-size: 25px;" class="material-icons">live_tv</i>
-    <span>綜藝</span>
+  <a href="{{ route('video.rank') }}" class="{{ Request::is('*rank*') ? 'active' : '' }}">
+    <i style="padding-left: 1px; font-size: 25px;" class="material-icons">whatshot</i>
+    <span>發燒影片</span>
   </a>
-  <a href="{{ route('video.drama') }}" class="{{ strpos(Request::path(), 'drama' ) !== false || (Request::has('v') && $current->genre == 'drama') ? 'active' : ''}}">
-    <i style="padding-left: 2px;" class="material-icons">movie_filter</i>
-    <span>日劇</span>
+  <a href="{{ route('video.newest') }}" class="{{ Request::is('*newest*') ? 'active' : '' }}">
+    <i style="padding-left: 2px;" class="material-icons">explore</i>
+    <span>最新內容</span>
   </a>
-  <a href="{{ route('video.anime') }}" class="{{ strpos(Request::path(), 'anime' ) !== false || (Request::has('v') && $current->genre == 'anime') ? 'active' : ''}}">
-    <i style="font-size: 26px;" class="material-icons">palette</i>
-    <span>動漫</span>
+  <a href="{{ Auth::check() ? route('user.show', Auth::user()) : route('login') }}" class="{{ Request::is('*user*') ? 'active' : '' }}">
+    <i style="font-size: 26px;" class="material-icons">video_library</i>
+    <span>媒體庫</span>
   </a>
 </div>

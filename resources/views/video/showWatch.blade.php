@@ -37,14 +37,6 @@
 						<!-- Tab content -->
 						@if ($is_program)
 							<div id="Watch" class="tabcontent" style="padding-bottom: 7px;">
-								<div class="dropdown" style="margin-top: -5px">
-								  <button onclick="openDropdown()" class="dropbtn">{{ $watch->season }}<span style="padding-left: 7px; padding-right: 0px;" class="stretch dropbtn">v</span></button>
-								  <div id="myDropdown" class="dropdown-content">
-								      @foreach ($dropdown as $watch)
-								      	<a style="color:white; text-decoration: none;" href="{{ route('video.intro', [$watch->genre, $watch->titleToUrl()]) }}">{{ $watch->season }}</a>
-								      @endforeach
-								  </div>
-								</div>
 
 								<div class="hidden-xs hidden-sm" style="margin: 7px 15px 0px 15px;">
 									<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>

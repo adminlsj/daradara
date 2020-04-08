@@ -288,14 +288,10 @@ class VideoController extends Controller
         if ($title == 'A Studio') {
             $title = 'A-Studio';
         }
-        $watch = Watch::where('genre', $genre)->where('title', $title)->first();
+        $watch = Watch::where('title', $title)->first();
 
         $videos = Video::where('category', $watch->category)->where('season', $watch->season);
-        if ($genre == 'drama' || $genre == 'anime') {
-            $videos = $videos->orderBy('created_at', 'asc')->get();
-        } else {
-            $videos = $videos->orderBy('created_at', 'desc')->get();
-        }
+        $videos = $videos->orderBy('created_at', 'desc')->get();
 
         $dropdown = Watch::where('category', $watch->category)->orderBy('created_at', 'asc')->get();
         $related = Watch::where('genre', $watch->genre)->orderBy('updated_at', 'desc')->limit(32)->get();

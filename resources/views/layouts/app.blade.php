@@ -15,10 +15,10 @@
         @endif
     @show
 
-    <meta name="title" content="娛見日本 LaughSeeJapan | 日本最強娛樂 | 綜藝 | 日劇 | 動漫">
-    <title>娛見日本 LaughSeeJapan | 日本最強娛樂 | 綜藝 | 日劇 | 動漫</title>
+    <meta name="title" content="娛見日本 LaughSeeJapan">
+    <title>娛見日本 LaughSeeJapan</title>
     <meta name="description" 
-          content="日本最強娛樂，最新綜藝！從綜藝到日劇和動漫，娛見日本 LaughSeeJapan 包攬最新最全的日娛王道！從搞笑到感動，從笑梗到溫情，從寵物到家庭，這裡可以找到讓你大笑，讓你痛哭，讓你重拾失去的情感，讓你回歸最原始的自己！這裡是日本，最強娛樂，最新綜藝，以及人文與文化！">
+          content="娛見日本 LaughSeeJapan 讓您享受最愛的影片、上傳原創內容，並與全世界觀眾分享您的影片。">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">

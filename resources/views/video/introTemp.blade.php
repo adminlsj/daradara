@@ -4,16 +4,13 @@
 	<div style="margin-top: 10px" class="visible-xs visible-sm"></div>
 </div>
 <div class="col-xs-12 col-sm-12 col-md-9">
-	<h4 class="mobile-text-center" style="margin-top:5px; margin-bottom: 0px; line-height: 24px; font-size: 1.3em; font-weight: bold; color: white;">{{ $watch->title }}</h4>
+	<h4 class="mobile-text-center" style="margin-top:5px; margin-bottom: 0px; line-height: 24px; font-size: 1.5em; font-weight: bold; color: white;">{{ $watch->title }}</h4>
 
-	<h4 class="mobile-text-center" style="margin-top:5px; white-space: pre-wrap;color:#d3d3d3; line-height: 15px; font-size: 0.95em; font-weight: 300;">@if ($watch->genre == 'variety')每週{{ App\Video::transDayOfWeek(Carbon\Carbon::parse($watch->created_at )->dayOfWeek) }}晚間播放  |  {{ Carbon\Carbon::parse($watch->updated_at)->diffForHumans().'更新' }}  |  <a style="color:#d3d3d3;" href="{{ route('user.show', $watch->user()) }}">{{ $watch->user()->name }}</a>
-		@else{{ Carbon\Carbon::parse($watch->created_at )->format('Y年m月d日首播') }}  |  {{ $watch->is_ended ? '已完結全' : '更新至第'.$watch->videos()->count().'集' }}  |  <a style="color:#d3d3d3;" href="{{ route('user.show', $watch->user()) }}">{{ $watch->user()->name }}</a>
-		@endif
-    </h4>
-    
-    <div class="row no-gutter">
+	<div class="mobile-text-center" style="font-size: 0.95em; margin-top: 5px; color: #f5f5f5">上傳用戶：<a style="color: #f5f5f5" href="{{ route('user.show', $watch->user()) }}">{{ $watch->user()->name }}</a></div>
+
+	<div class="row no-gutter" style="margin-top: 25px">
     	<div id="intro-play-button" class="col-xs-8 col-md-4" style="padding-right: 3px;">
-    		<a style="color: white; margin-top: -15px; margin-bottom: 0px;" href="{{ route('video.watch') }}?v={{ $videos->first()->id }}" class="btn btn-info" target="_blank">
+    		<a style="color: white; margin-top: -15px; margin-bottom: 0px;" @if($videos->first() != null)href="{{ route('video.watch') }}?v={{ $videos->first()->id }}"@endif class="btn btn-info" target="_blank">
 				<i style="vertical-align:middle; font-size: 1.4em; margin-top: -3px; margin-right: 3px; margin-left: -3px" class="material-icons">play_arrow</i>立即播放
 			</a>
     	</div>
@@ -25,6 +22,10 @@
 	</div>
 
 	<h4 style="white-space: pre-wrap;color:white; line-height: 19px; font-size: 0.95em;">{{ $watch->description }}</h4>
-	<h4 style="white-space: pre-wrap;color:white; line-height: 19px; font-size: 1.2em; padding-top: 5px;">登場人物</h4>
-	<h4 style="white-space: pre-wrap;color:white; line-height: 19px; font-size: 0.95em; margin-top: -4px;">{{ $watch->cast }}</h4>
+
+	<div style="padding: 0px 0px; position: relative; padding-right: 40px; width: 100%;" class="subscribes-tab-inverse subscribe-tags-wrapper">
+	  @foreach (explode(' ', $watch->cast) as $tag)
+	      <a style="margin-right: 3px; text-decoration: none; display: inline-block; margin-bottom: 10px; padding: 5px 10px; font-size: 0.9em" href="{{ route('video.subscribeTag') }}?query={{ $tag }}">#{{ $tag }}</a>
+	  @endforeach
+	</div>
 </div>

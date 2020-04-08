@@ -6,29 +6,31 @@
     <meta name="title" content="{{ $watch->title }} | {{ $watch->genre() }}線上看 | 中文字幕 | 娛見日本 LaughSeeJapan">
     <meta name="description" content="{{ $watch->description }}">
 
-    <script type="application/ld+json">
-	{
-	  "@context": "https://schema.org",
-	  "@type": "VideoObject",
-	  "name": "{{ $first->title }}",
-	  "description": "{{ $first->caption == '' ? $first->title : $first->caption}}",
-	  "thumbnailUrl": [
-	    "https://i.imgur.com/{{ $first->imgur }}l.png"
-	   ],
-	  "uploadDate": "{{ \Carbon\Carbon::parse($first->created_at)->format('Y-m-d\Th:i:s').'+00:00' }}",
-	  "duration": "{{ $first->durationData() }}",
-	  @if ($first->outsource)
-	      "embedUrl": "{!! $first->source() !!}",
-	  @else
-	      "contentUrl": "{!! $first->source() !!}",
-	  @endif
-	  "interactionStatistic": {
-	    "@type": "InteractionCounter",
-	    "interactionType": { "@type": "http://schema.org/WatchAction" },
-	    "userInteractionCount": {{ $first->views }}
-	  }
-	}
-	</script>
+    @if ($first != null)
+    	<script type="application/ld+json">
+		{
+		  "@context": "https://schema.org",
+		  "@type": "VideoObject",
+		  "name": "{{ $first->title }}",
+		  "description": "{{ $first->caption == '' ? $first->title : $first->caption}}",
+		  "thumbnailUrl": [
+		    "https://i.imgur.com/{{ $first->imgur }}l.png"
+		   ],
+		  "uploadDate": "{{ \Carbon\Carbon::parse($first->created_at)->format('Y-m-d\Th:i:s').'+00:00' }}",
+		  "duration": "{{ $first->durationData() }}",
+		  @if ($first->outsource)
+		      "embedUrl": "{!! $first->source() !!}",
+		  @else
+		      "contentUrl": "{!! $first->source() !!}",
+		  @endif
+		  "interactionStatistic": {
+		    "@type": "InteractionCounter",
+		    "interactionType": { "@type": "http://schema.org/WatchAction" },
+		    "userInteractionCount": {{ $first->views }}
+		  }
+		}
+		</script>
+    @endif
 @endsection
 
 @section('nav')
@@ -62,56 +64,49 @@
 					<!-- Tab links -->
 					<div class="tab">
 					  <button class="tablinks" onclick="openList(event, 'Watch')" id="defaultOpen">全集列表</button>
-					  <button class="tablinks" onclick="openList(event, 'Related')">相關影片</button>
+					  <button class="tablinks" onclick="openList(event, 'Related')">相關頻道</button>
 					</div>
 
 					<!-- Tab content -->
 					<div id="Watch" class="tabcontent">
-						<div class="dropdown">
-						  <button onclick="openDropdown()" class="dropbtn">{{ $watch->season }}<span style="padding-top: 0px; padding-left: 7px; padding-right: 0px;" class="stretch dropbtn">v</span></button>
-						  <div id="myDropdown" class="dropdown-content">
-						      @foreach ($dropdown as $watch)
-						      	<a style="color:white; text-decoration: none;" href="{{ route('video.intro', [$watch->genre, $watch->titleToUrl()]) }}">{{ $watch->season }}</a>
-						      @endforeach
-						  </div>
-						</div>
+						@if ($videos != null)
+						    @foreach ($videos as $video)
+							    <div id="{{ $video->id }}" style="padding: 7px 4px;">
+								  <a href="{{ route('video.watch') }}?v={{ $video->id }}" class="row no-gutter">
+								    <div style="padding-left: 12px; padding-right: 4px; position: relative;" class="col-xs-6 col-sm-6 col-md-3">
+								      @if ($loop->iteration == 1)
+									    <div class="aspect-ratio">
+									        <video style="width: 100%; height: auto" poster="{{ $video->imgurL() }}">
+											  <source src="{!! $video->source() !!}" type="video/mp4">
+											</video>
+										</div>
+								      @else
+									    <img class="lazy" style="width: 100%; height: 100%;" src="{{ $video->imgur16by9() }}" data-src="{{ $video->imgurL() }}" data-srcset="{{ $video->imgurL() }}" alt="{{ $video->title }}">
+								      @endif
+								      <img style="opacity: 0.6;" class="play-button-cover" src="https://i.imgur.com/WSrfkoQ.png" alt="play button">
+								      <img class="play-button-cover" src="https://i.imgur.com/BrOdkqU.png" alt="play button">
+								      <span style="position: absolute; bottom:6px; right: 9px; background-color: rgba(0,0,0,0.8); color: white; padding: 1px 5px 1px 5px; opacity: 0.9; font-size: 0.85em; border-radius: 2px;">{{ $video->duration() }}</span>
+								    </div>
+								    <div style="padding-top: 1px; padding-right: 12px; padding-left: 4px;" class="col-xs-6 col-sm-6 col-md-9">
+								      <h4 style="margin-top:0px; margin-bottom: 0px; line-height: 19px; font-size: 1.05em; color:white;">{{ $video->title() }}</h4>
+								      <p style="color: gray; margin-top: 1px; margin-bottom: 0px; font-size: 0.85em; color:#e5e5e5">觀看次數：{{ $video->views() }}次</p>
+								      <div class="hidden-sm hidden-xs" style="margin-top:5px; font-size: 0.95em; color: #cccccc; line-height: 19px; white-space: pre-wrap;">{{ $video->caption }}</div>
+								    </div>
+								</div>
 
-					    @foreach ($videos as $video)
-						    <div id="{{ $video->id }}" style="padding: 7px 4px;">
-							  <a href="{{ route('video.watch') }}?v={{ $video->id }}" class="row no-gutter">
-							    <div style="padding-left: 12px; padding-right: 4px; position: relative;" class="col-xs-6 col-sm-6 col-md-3">
-							      @if ($loop->iteration == 1)
-								    <div class="aspect-ratio">
-								        <video style="width: 100%; height: auto" poster="{{ $video->imgurL() }}">
-										  <source src="{!! $video->source() !!}" type="video/mp4">
-										</video>
-									</div>
-							      @else
-								    <img class="lazy" style="width: 100%; height: 100%;" src="{{ $video->imgur16by9() }}" data-src="{{ $video->imgurL() }}" data-srcset="{{ $video->imgurL() }}" alt="{{ $video->title }}">
-							      @endif
-							      <img style="opacity: 0.6;" class="play-button-cover" src="https://i.imgur.com/WSrfkoQ.png" alt="play button">
-							      <img class="play-button-cover" src="https://i.imgur.com/BrOdkqU.png" alt="play button">
-							      <span style="position: absolute; bottom:6px; right: 9px; background-color: rgba(0,0,0,0.8); color: white; padding: 1px 5px 1px 5px; opacity: 0.9; font-size: 0.85em; border-radius: 2px;">{{ $video->duration() }}</span>
-							    </div>
-							    <div style="padding-top: 1px; padding-right: 12px; padding-left: 4px;" class="col-xs-6 col-sm-6 col-md-9">
-							      <h4 style="margin-top:0px; margin-bottom: 0px; line-height: 19px; font-size: 1.05em; color:white;">{{ $video->title() }}</h4>
-							      <p style="color: gray; margin-top: 1px; margin-bottom: 0px; font-size: 0.85em; color:#e5e5e5">觀看次數：{{ $video->views() }}次</p>
-							      <div class="hidden-sm hidden-xs" style="margin-top:5px; font-size: 0.95em; color: #cccccc; line-height: 19px; white-space: pre-wrap;">{{ $video->caption }}</div>
-							    </div>
-							</div>
-
-					    	<a class="visible-sm visible-xs" style="text-decoration: none; padding: 0px 7px;" href="{{ route('video.watch') }}?v={{ $video->id }}">
-						    	<div class="padding-setup" style="font-size: 0.95em; color: #cccccc; line-height: 19px; white-space: pre-wrap;">{{ $video->caption }}</div>
-						    </a>
-					    	<br>
-					    @endforeach
+						    	<a class="visible-sm visible-xs" style="text-decoration: none; padding: 0px 7px;" href="{{ route('video.watch') }}?v={{ $video->id }}">
+							    	<div class="padding-setup" style="font-size: 0.95em; color: #cccccc; line-height: 19px; white-space: pre-wrap;">{{ $video->caption }}</div>
+							    </a>
+						    	<br>
+						    @endforeach
+						@endif
 					</div>
 
 					<div id="Related" style="padding: 7px 8px;" class="tabcontent">
 				  		@foreach ($related as $watch)
 				  			<div class="{{ $watch->genre == 'variety' ? 'watch-variety' : 'watch-single' }}">
 					            <div style="background-color: #282828; border-radius: 3px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
-					              <a style="text-decoration: none;" href="{{ route('video.intro', [$watch->genre, $watch->titleToUrl()]) }}">
+					              <a style="text-decoration: none;" href="{{ route('video.intro', ['channel', $watch->titleToUrl()]) }}">
 
 					                <img class="lazy" style="width: 100%; height: 100%; border-top-left-radius: 3px; border-top-right-radius: 3px; padding-top: 1px; padding-left: 1px; padding-right: 1px;" src="{{ $watch->imgurDefault() }}" data-src="{{ $watch->imgurL() }}" data-srcset="{{ $watch->imgurL() }}" alt="{{ $watch->title }}">
 

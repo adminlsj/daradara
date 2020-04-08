@@ -18,37 +18,17 @@
 			</div>
 		</div>
 		<hr style="border-color: #e9e9e9; margin-bottom: 0px">
-		<div style="margin: 0 auto 0 auto; padding-top: 10px; padding-bottom: 10px;">
+		<div style="margin: 0 auto 0 auto; padding-top: 10px;">
 	      <div class="video-slider-title paravi-padding-setup">
-	        <a href="{{ route('video.varietyList') }}"><h4>LaughSeeJapan綜藝頻道<span class="hidden-xs">更多內容</span><i class="material-icons">arrow_forward_ios</i></h4></a>
-	      </div>
-	      @include('video.single-watch-slider')
+		    	<a href="{{ route('video.rank') }}"><h4>最夯發燒影片<span class="hidden-xs">更多內容</span><i class="material-icons">arrow_forward_ios</i></h4></a>
+		    </div>
+		    @include('video.single-video-slider', ['videos' => $trendings])
 	    </div>
-
-	    <div class="video-slider-title paravi-padding-setup">
-	    	<a href="{{ route('video.rank') }}"><h4>最夯發燒影片<span class="hidden-xs">更多內容</span><i class="material-icons">arrow_forward_ios</i></h4></a>
-	    </div>
-	    @include('video.single-video-slider', ['videos' => $trendings])
 
 	    <div class="video-slider-title paravi-padding-setup">
 	    	<a href="{{ route('video.newest') }}"><h4>最新精彩內容<span class="hidden-xs">更多內容</span><i class="material-icons">arrow_forward_ios</i></h4></a>
 	    </div>
 	    @include('video.single-video-slider', ['videos' => $newest])
-
-	    <div class="video-slider-title paravi-padding-setup">
-	    	<a href="{{ route('video.variety') }}"><h4>綜藝推薦<span class="hidden-xs">更多內容</span><i class="material-icons">arrow_forward_ios</i></h4></a>
-	    </div>
-	    @include('video.single-video-slider', ['videos' => $variety])
-
-	    <div class="video-slider-title paravi-padding-setup">
-	    	<a href="{{ route('video.drama') }}"><h4>日劇推薦<span class="hidden-xs">更多內容</span><i class="material-icons">arrow_forward_ios</i></h4></a>
-	    </div>
-	    @include('video.single-video-slider', ['videos' => $drama])
-
-	    <div class="video-slider-title paravi-padding-setup">
-	    	<a href="{{ route('video.anime') }}"><h4>動漫推薦<span class="hidden-xs">更多內容</span><i class="material-icons">arrow_forward_ios</i></h4></a>
-	    </div>
-	    @include('video.single-video-slider', ['videos' => $anime])
 
 	    <div class="video-slider-title paravi-padding-setup">
 	      <a href="{{ route('video.rank') }}"><h4>更多發燒影片<span class="hidden-xs">更多內容</span><i class="material-icons">arrow_forward_ios</i></h4></a>

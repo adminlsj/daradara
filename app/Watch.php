@@ -10,7 +10,7 @@ use App\Subscribe;
 class Watch extends Model
 {
 	protected $fillable = [
-        'id', 'user_id', 'genre', 'category', 'season', 'title', 'description', 'imgur',
+        'id', 'user_id', 'genre', 'category', 'season', 'title', 'description', 'cast', 'imgur', 'is_ended',
     ];
 
     public function user()
@@ -20,7 +20,7 @@ class Watch extends Model
 
     public function videos()
     {
-        return Video::where('category', $this->category)->where('season', $this->season)->orderBy('created_at', 'asc')->get();
+        return Video::where('category', $this->category)->where('season', $this->season)->orderBy('uploaded_at', 'asc')->get();
     }
 
     public function subscribes()

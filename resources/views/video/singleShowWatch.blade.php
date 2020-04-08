@@ -95,22 +95,22 @@
 <hr style="border:solid 0.5px #383838; margin-top: 53px; margin-bottom: 10px">
 @if ($is_program)
   <div style="padding-left: 15px; padding-right: 15px; margin-bottom: 16px;">
-    <a href="{{ route('video.intro', [$watch->genre, $watch->titleToUrl()]) }}">
+    <a href="{{ route('video.intro', ['channel', $watch->titleToUrl()]) }}">
       <img class="lazy img-circle" style="width: 35px; height: auto; float:left;" src="https://i.imgur.com/JMcgEkPs.jpg" data-src="https://i.imgur.com/{{ $video->watch()->imgur }}s.jpg" data-srcset="https://i.imgur.com/{{ $video->watch()->imgur }}s.jpg" alt="{{ $video->watch()->title }}">
     </a>
     <div style="margin-left: 45px;">
-      <div class="text-ellipsis" style="padding-right: 50px"><a style="text-decoration: none; color: white;" href="{{ route('video.intro', [$watch->genre, $watch->titleToUrl()]) }}">{{ $video->watch()->title }}</a></div>
+      <div class="text-ellipsis" style="padding-right: 50px"><a style="text-decoration: none; color: white;" href="{{ route('video.intro', ['channel', $watch->titleToUrl()]) }}">{{ $video->watch()->title }}</a></div>
       <div style="color: darkgray; font-size: 0.85em; margin-top: -1px;"><span id="subscribes-count">{{ $video->subscribes()->count() }}</span> 位訂閱者</div>
       @include('video.subscribe-btn-wrapper', ['tag' => $watch->title])
     </div>
   </div>
 @endif
 
-<div style="padding: 0px 15px; position: relative; padding-right: 40px; width: 100%; overflow-x: hidden; overflow-y: hidden; height: 39px" class="subscribes-tab-inverse" id="subscribe-tags-wrapper">
+<div style="padding: 0px 15px; position: relative; padding-right: 40px; width: 100%; overflow-x: hidden; overflow-y: hidden; height: 39px" class="subscribes-tab-inverse subscribe-tags-wrapper">
   @foreach ($video->tags() as $tag)
       <a style="margin-right: 3px; text-decoration: none; display: inline-block; margin-bottom: 10px; padding: 5px 10px; font-size: 0.9em" href="{{ route('video.subscribeTag') }}?query={{ $tag }}">#{{ $tag }}</a>
   @endforeach
-  <div id="toggle-subscribe-tags" style="position:absolute; top:3px; right:19px; cursor: pointer; color: darkgray" class="pull-right"><i id="toggle-subscribe-tags-icon" class="material-icons noselect">expand_more</i></div>
+  <div style="position:absolute; top:3px; right:19px; cursor: pointer; color: darkgray" class="pull-right toggle-subscribe-tags"><i class="material-icons noselect toggle-subscribe-tags-icon">expand_more</i></div>
 </div>
 <hr style="border:solid 0.5px #383838; margin-top: 1px; margin-bottom: 0px">
 

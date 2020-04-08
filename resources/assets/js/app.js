@@ -235,6 +235,18 @@ $('div#subscribe-panel').on("submit", "form#unsubscribe-form", function(e) {
     })
 });
 
+$('.toggle-subscribe-tags').click(function(e) {
+    var wrapper = $(".subscribe-tags-wrapper");
+    var icon = $(".toggle-subscribe-tags-icon");
+    if (icon.html() == 'expand_less') {
+        wrapper.css('height', '39px');
+        icon.html('expand_more');
+    } else {
+        wrapper.css('height', 'auto');
+        icon.html('expand_less');
+    }
+});
+
 $('[id=switch-login-modal]').click(function(e) {
     $('#signUpModal').modal('hide');
     $('#loginModal').modal('show');
