@@ -128,7 +128,6 @@ class VideoController extends Controller
         $videos = $videos->orderBy('created_at', 'desc')->get();
 
         $dropdown = Watch::where('category', $watch->category)->orderBy('created_at', 'asc')->get();
-        $related = Watch::where('genre', $watch->genre)->orderBy('updated_at', 'desc')->limit(32)->get();
 
         $is_program = true;
         $first = $watch->videos()->last();
@@ -137,7 +136,7 @@ class VideoController extends Controller
 
         $is_mobile = $this->checkMobile();
 
-        return view('video.intro', compact('watch', 'videos', 'dropdown', 'related', 'is_program', 'first', 'is_subscribed', 'is_mobile'));
+        return view('video.intro', compact('watch', 'videos', 'dropdown', 'is_program', 'first', 'is_subscribed', 'is_mobile'));
     }
 
     public function watch(Request $request){
