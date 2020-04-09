@@ -2,8 +2,8 @@
 
 @section('head')
     @parent
-    <title>{{ $watch->title }} | 線上看 | 娛見日本 LaughSeeJapan</title>
-    <meta name="title" content="{{ $watch->title }} | {{ $watch->genre() }}線上看 | 中文字幕 | 娛見日本 LaughSeeJapan">
+    <title>{{ $watch->title }} - 娛見日本 LaughSeeJapan</title>
+    <meta name="title" content="{{ $watch->title }} - 娛見日本 LaughSeeJapan">
     <meta name="description" content="{{ $watch->description }}">
 
     @if ($first != null)
@@ -46,7 +46,7 @@
     	<div style="background-color: #F5F5F5;">
     		<div class="row no-gutter">
     			<div class="col-md-5" style="padding: 21px 30px 25px 30px; background-color: #F9F9F9; min-height: 100%;">
-    				<div style="position: relative; text-align: center">
+    				<div style="position: relative; text-align: center" class="hover-opacity-all">
     					<a href="{{ route('video.watch') }}?v={{ $videos->first()->id }}">
 		    				<img class="lazy" style="width: 100%; height: 100%;" src="{{ $first->imgur16by9() }}" data-src="{{ $first->imgurH() }}" data-srcset="{{ $first->imgurH() }}" alt="{{ $first->title }}">
 		    				<div style="position: absolute; bottom: 0px; color: white; background-color: rgba(0, 0, 0, .8); width: 100%; height: 40px; padding-top: 10px"><i style="vertical-align:middle; font-size: 1.95em; margin-top: -3px; margin-right: 7px; margin-left: -3px" class="material-icons">play_arrow</i><span style="font-size: 1.05em">全部播放</span></div>

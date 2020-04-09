@@ -384,29 +384,29 @@ class HomeController extends Controller
         }
     }
 
-    /*public function tempMethods()
+    public function tempMethods()
     {
         if (Auth::check() && Auth::user()->email == 'laughseejapan@gmail.com') {
+            $videos = Video::where('category', 'monday')->get();
+            foreach ($videos as $video) {
+                if (strpos($video->title, "完整版") !== FALSE) { 
+                    $video->title = str_replace("完整版", "", $video->title);
+                    $video->save();
+                }
+            }
+
             $videos = Video::all();
             foreach ($videos as $video) {
-                if ($video->genre == 'drama' || $video->genre == 'anime' || $video->category == 'scgy' || $video->category == 'labs' || $video->category == 'jdrdsfyq' || $video->category == 'src') {
-                    $title = $video->title;
-                    $start = strpos($title, "【");
-                    $end = strpos($title, "】") - $start;
-                    $newTitle = str_replace("【", "", substr($title, $start, $end));
-                    $video->title = $newTitle;
-                } elseif ($video->genre == 'variety') {
-                    $title = $video->title;
-                    $explode = explode(' ', $title);
-                    $newTitle = end($explode);
-                    $video->title = $newTitle;
+                $video->views = 0;
+                if ($video->category != 'video') {
+                    $video->user_id = Watch::where('category', $video->category)->first()->user()->id;
+                    $video->playlist_id = Watch::where('category', $video->category)->first()->id;
                 }
-
                 $video->save();
             }
         }
         return redirect()->action('VideoController@home');
-    }*/
+    }
 
     function get_string_between($string, $start, $end){
         $string = ' ' . $string;

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Video;
 use App\Watch;
+use App\Subscribe;
 use App\Avatar;
 use Illuminate\Http\Request;
 use Hash;
@@ -34,31 +35,23 @@ class UserController extends Controller
     public function show(User $user, Request $request)
     {
         $watches = $user->watches();
-        $first = true;
+        $subscribers = 0;
         if ($watches->first()) {
             foreach ($watches as $watch) {
-                if ($first) {
-                    $videos = Video::where('category', $watch->category);
-                    $first = false;
-                } else {
-                    $videos = $videos->orWhere('category', $watch->category);
-                }
+                $subscribers = $subscribers + Subscribe::where('tag', $watch->title)->count();
             }
-            $videos = $videos->orderBy('uploaded_at', 'desc')->paginate(12);
-
-            $html = '';
-            foreach ($videos as $video) {
-                $html .= view('video.singleLoadMoreSliderVideos', compact('video'));
-            }
-            if ($request->ajax()) {
-                return $html;
-            }
-
-        } else {
-            $videos = null;
         }
 
-        return view('user.show', compact('user', 'watches', 'videos'));
+        $videos = Video::where('user_id', $user->id)->orderBy('created_at', 'desc')->paginate(12);
+        $html = '';
+        foreach ($videos as $video) {
+            $html .= view('video.singleLoadMoreSliderVideos', compact('video'));
+        }
+        if ($request->ajax()) {
+            return $html;
+        }
+
+        return view('user.show', compact('user', 'watches', 'videos', 'subscribers'));
     }
 
     /**
@@ -123,19 +116,31 @@ class UserController extends Controller
 
     public function userUpdateUpload(User $user, Request $request)
     {
-        $img = $_FILES['image'];
-        if ($img['name'] == '') {  
-            echo "<h2>An Image Please.</h2>";
-        } else {
+        if ($request->type == 'playlist') {
+            $watch = Watch::create([
+                'id' => Watch::orderBy('id', 'desc')->first()->id + 1,
+                'user_id' => $user->id,
+                'genre' => '',
+                'category' => '',
+                'season' => '',
+                'title' => $request->title,
+                'description' => $request->description,
+                'cast' => '',
+                'is_ended' => false,
+                'imgur' => '',
+            ]);
+            return Redirect::back()->withErrors('已成功建立播放列表《'.$request->title.'》');
+
+        } elseif ($request->type == 'video') {
+            $img = $_FILES['image'];
             $filename = $img['tmp_name'];
             $client_id = "932b67e13e4f069";
             $handle = fopen($filename, "r");
             $data = fread($handle, filesize($filename));
-            $pvars   = array('image' => base64_encode($data));
-            $timeout = 30;
+            $pvars = array('image' => base64_encode($data));
             $curl = curl_init();
             curl_setopt($curl, CURLOPT_URL, 'https://api.imgur.com/3/image.json');
-            curl_setopt($curl, CURLOPT_TIMEOUT, $timeout);
+            curl_setopt($curl, CURLOPT_TIMEOUT, 30);
             curl_setopt($curl, CURLOPT_HTTPHEADER, array('Authorization: Client-ID ' . $client_id));
             curl_setopt($curl, CURLOPT_POST, 1);
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
@@ -144,89 +149,71 @@ class UserController extends Controller
             curl_close ($curl);
             $pms = json_decode($out, true);
             $url = $pms['data']['link'];
-            if ($url != "") {
-                if ($request->type == 'channel') {
-                    $watch = Watch::create([
-                        'id' => Watch::orderBy('id', 'desc')->first()->id + 1,
-                        'user_id' => $user->id,
-                        'genre' => $request->genre,
-                        'category' => $request->title,
-                        'season' => '2020年',
-                        'title' => $request->title,
-                        'description' => $request->description,
-                        'cast' => $request->tags,
-                        'is_ended' => false,
-                        'imgur' => $this->get_string_between($url, 'https://i.imgur.com/', '.'),
-                    ]);
-                    return Redirect::back()->withErrors('已成功創建頻道《'.$request->title.'》');
+            if ($url != "") {            
+                $video = Video::create([
+                    'id' => Video::orderBy('id', 'desc')->first()->id + 1,
+                    'title' => request('title'),
+                    'caption' => request('description'),
+                    'hd' => request('link'),
+                    'sd' => request('link'),
+                    'imgur' => $this->get_string_between($url, 'https://i.imgur.com/', '.'),
+                    'genre' => '',
+                    'category' => '',
+                    'season' => '',
+                    'tags' => request('tags'),
+                    'views' => 0,
+                    'duration' => request('duration') == null ? 2000 : request('duration'),
+                    'outsource' => false,
+                    'created_at' => Carbon::createFromFormat('Y-m-d\TH:i:s', request('created_at'))->format('Y-m-d H:i:s'),
+                    'uploaded_at' => Carbon::createFromFormat('Y-m-d\TH:i:s', request('uploaded_at'))->format('Y-m-d H:i:s'),
+                ]);
 
-                } elseif ($request->type == 'video') {
-                    $latest = Watch::where('title', request('channel'))->first()->videos()->last();
-                    $video = Video::create([
-                        'id' => Video::orderBy('id', 'desc')->first()->id + 1,
-                        'title' => request('title'),
-                        'caption' => request('description'),
-                        'hd' => request('link'),
-                        'sd' => request('link'),
-                        'imgur' => $this->get_string_between($url, 'https://i.imgur.com/', '.'),
-                        'genre' => $latest == null ? request('channel') : $latest->genre,
-                        'category' => $latest == null ? request('channel') : $latest->category,
-                        'season' => $latest == null ? '2020年' : $latest->season,
-                        'tags' => request('tags') == "" ? $latest->tags : request('tags'),
-                        'views' => Video::where('genre', 'variety')->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(4))->orWhere('genre', 'drama')->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->orderBy('views', 'desc')->first()->views - 1,
-                        'duration' => request('duration') == null ? 2000 : request('duration'),
-                        'outsource' => false,
-                        'created_at' => Carbon::createFromFormat('Y-m-d\TH:i:s', request('created_at'))->format('Y-m-d H:i:s'),
-                        'uploaded_at' => Carbon::createFromFormat('Y-m-d\TH:i:s', request('uploaded_at'))->format('Y-m-d H:i:s'),
-                    ]);
-
-                    foreach ($video->sd() as $sd) {
-                        $video->sd = str_replace($sd, Video::getLinkBB($sd, $video->outsource), $video->sd);
-                        $video->save();
-                    }
-
-                    $users = [];
-                    $userArray = [];
-
-                    if ($video->category != 'video') {
-                        $watch = $video->watch();
-                        $watch->updated_at = $video->uploaded_at;
-                        $watch->save();
-
-                        $subscribes = $watch->subscribes();
-                        foreach ($subscribes as $subscribe) {
-                            $user = $subscribe->user();
-                            array_push($userArray, $user->id);
-                        }
-                    }
-
-                    foreach ($video->tags() as $tag) {
-                        $subscribes = Subscribe::where('tag', $tag)->get();
-                        foreach ($subscribes as $subscribe) {
-                            if (!in_array($subscribe->user()->id, $userArray)) {
-                                array_push($userArray, $subscribe->user()->id);
-                            }
-                        }
-                    }
-
-                    foreach ($userArray as $user_id) {
-                        array_push($users, User::find($user_id));
-                    }
-
-                    foreach ($users as $user) {
-                        Mail::to($user->email)->send(new SubscribeNotify($user, $video));
-                        if (strpos($user->alert, 'subscribe') === false) {
-                            $user->alert = $user->alert."subscribe";
-                            $user->save();
-                        }
-                    }
-
-                    return Redirect::back()->withErrors('已成功上傳影片《'.$title.'》');
+                foreach ($video->sd() as $sd) {
+                    $video->sd = str_replace($sd, Video::getLinkBB($sd, $video->outsource), $video->sd);
+                    $video->save();
                 }
-            } else {
-                return Redirect::back()->withErrors('封面圖片上傳失敗，請重新上傳。');
-            } 
-        }
+
+                /*$users = [];
+                $userArray = [];
+
+                if ($video->category != 'video') {
+                    $watch = $video->watch();
+                    $watch->updated_at = $video->uploaded_at;
+                    $watch->save();
+
+                    $subscribes = $watch->subscribes();
+                    foreach ($subscribes as $subscribe) {
+                        $user = $subscribe->user();
+                        array_push($userArray, $user->id);
+                    }
+                }
+
+                foreach ($video->tags() as $tag) {
+                    $subscribes = Subscribe::where('tag', $tag)->get();
+                    foreach ($subscribes as $subscribe) {
+                        if (!in_array($subscribe->user()->id, $userArray)) {
+                            array_push($userArray, $subscribe->user()->id);
+                        }
+                    }
+                }
+
+                foreach ($userArray as $user_id) {
+                    array_push($users, User::find($user_id));
+                }
+
+                foreach ($users as $user) {
+                    Mail::to($user->email)->send(new SubscribeNotify($user, $video));
+                    if (strpos($user->alert, 'subscribe') === false) {
+                        $user->alert = $user->alert."subscribe";
+                        $user->save();
+                    }
+                }*/
+
+                return Redirect::back()->withErrors('已成功上傳影片《'.$video->title.'》');
+            }
+        } else {
+            return Redirect::back()->withErrors('封面圖片上傳失敗，請重新上傳。');
+        } 
     }
 
     public function storeAvatar(User $user, Request $request)

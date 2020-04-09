@@ -20,7 +20,7 @@ class Watch extends Model
 
     public function videos()
     {
-        return Video::where('category', $this->category)->where('season', $this->season)->orderBy('uploaded_at', 'asc')->get();
+        return Video::where('playlist_id', $this->id)->orderBy('created_at', 'desc')->get();
     }
 
     public function subscribes()

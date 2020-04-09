@@ -12,42 +12,32 @@
 <div class="main-content">
 	<div class="paravi-padding-setup" style="background-color: #F5F5F5;">
 		<!-- Tab links -->
-		<div class="user-upload-tab">
-		  <button class="user-upload-tablinks" onclick="openCity(event, '創建頻道')" id="defaultOpen">創建頻道</button>
-		  <button class="user-upload-tablinks" onclick="openCity(event, '上傳影片')" style="margin-left: 15px">上傳影片</button>
+		<div class="user-upload-tab" style="margin-left: 15px; padding-top: 25px; margin-bottom: -10px">
+		  <button class="user-upload-tablinks" onclick="openCity(event, '創建頻道')">播放清單</button>
+		  <button class="user-upload-tablinks" onclick="openCity(event, '上傳影片')" style="margin-left: 15px" id="defaultOpen">上傳影片</button>
 		</div>
 
 		<!-- Tab content -->
 		<div id="創建頻道" class="user-upload-tabcontent">
 		  <form action="{{ route('user.userUpdateUpload', ['user' => Auth::user()]) }}" method="POST" enctype="multipart/form-data">
 		  	  {{ csrf_field() }}
-		  	  <input id="type" name="type" type="hidden" value="channel">
+		  	  <input id="type" name="type" type="hidden" value="playlist">
 
-		      <div style="padding: 15px;" class="modal-content">
+		      <div style="padding: 0px;">
 		        <div style="border: 0px; position: relative;" class="modal-header">
-		          <h4 style="color: #3F3F3F; margin-bottom: 0px; font-size: 1.7em" class="modal-title">創建頻道</h4>
+		          <h4 style="color: #3F3F3F; margin-bottom: 0px; font-size: 1.7em" class="modal-title">新增播放清單</h4>
 		        </div>
 		        <div style="color: #3F3F3F; margin-top: -15px; font-weight: 500; font-size: 1.1em" class="modal-body">
-		          <div>請填寫創建頻道的基本資料：</div>
+		          <div>請填寫播放清單的基本資料：</div>
 
 		          <div class="form-group" style="margin-top: 20px;">
-		            <input type="text" class="form-control" name="genre" id="genre" placeholder="類型" required>
-		          </div>
-		          <div class="form-group">
 		            <input type="text" class="form-control" name="title" id="title" placeholder="標題" required>
 		          </div>
 		          <div class="form-group">
 		            <textarea class="form-control" name="description" id="description" rows="3" placeholder="簡介" required></textarea>
 		          </div>
-		          <div class="form-group">
-		            <input type="text" class="form-control" name="tags" id="tags" placeholder="標籤（各標籤之間請預留空格）" required>
-		          </div>
-				  <div class="form-group">
-				    <label for="image">上傳封面圖片</label>
-					<input style="font-size:0.8em" type="file" name="image" id="image" accept="image/*" required>
-				  </div>
 
-		          <button style="height: 45px; margin-top: 5px; font-size: 1em; margin-bottom: 20px" type="submit" class="btn btn-info" name="submit">創建頻道</button>
+		          <button style="height: 45px; margin-top: 5px; font-size: 1em; margin-bottom: 20px" type="submit" class="btn btn-info" name="submit">建立播放清單</button>
 
 		          <div style="font-size: 0.8em; color: gray; font-weight: 300">將影片提交至 LaughSeeJapan 即代表您瞭解並同意 LaughSeeJapan 的《<a href="/terms">服務條款</a>》和《<a href="/policies">社群規範</a>》。</div>
 				  <div style="font-size: 0.8em; color: gray; font-weight: 300; margin-top:5px;">請勿侵犯其他使用者的版權或隱私權。 <a href="/copyright">瞭解詳情</a></div>
@@ -66,7 +56,7 @@
 			  <input type="hidden" name="created_at" id="created_at" value="{{ Carbon\Carbon::now()->format('Y-m-d\TH:i:s') }}">
 			  <input type="hidden" name="uploaded_at" id="uploaded_at" value="{{ Carbon\Carbon::now()->format('Y-m-d\TH:i:s') }}">
 
-		      <div style="padding: 15px;" class="modal-content">
+		      <div style="padding: 0px;">
 		        <div style="border: 0px; position: relative;" class="modal-header">
 		          <h4 style="color: #3F3F3F; margin-bottom: 0px; font-size: 1.7em" class="modal-title" id="uploadVideoModalLabel">上傳影片</h4>
 		        </div>
@@ -91,15 +81,25 @@
 		          <div class="form-group">
 		            <textarea class="form-control" name="description" id="description" rows="3" placeholder="簡介" required></textarea>
 		          </div>
-		          <div class="form-group">
-		            <input type="text" class="form-control" name="link" id="link" placeholder="影片鏈結（現有影片網址）" required>
-		          </div>
+
 		          <div class="form-group">
 		            <input type="text" class="form-control" name="tags" id="tags" placeholder="標籤（各標籤之間請預留空格）" required>
 		          </div>
+
+		          <div style="margin-right:100px; position: relative;" class="form-group">
+		            <input type="text" class="form-control" name="link" id="link" placeholder="影片鏈結 (e.g. bilibili / weibo / 直鏈)" required>
+		            <div id="test-play-btn" style="width: 102px; position: absolute; top: 0px; right:-100px; background-color: gray; color: white; padding: 6px 0px 6px 20px; cursor: pointer;">測試播放</div>
+		          </div>
+
+		          <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/dplayer/dist/DPlayer.min.css">
+				  <div id="dplayer" style="margin-bottom: 20px; max-width: 400px"></div>
+				  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+				  <script src="https://cdn.jsdelivr.net/npm/flv.js/dist/flv.min.js"></script>
+				  <script src="https://cdn.jsdelivr.net/npm/dplayer/dist/DPlayer.min.js"></script>
+
 		          <div class="form-group">
-				    <label for="image">上傳封面圖片</label>
-					<input style="font-size:0.8em" type="file" name="image" id="image" accept="image/*" required>
+				    <h4 style="color: #3F3F3F; margin-bottom: 0px; font-size: 1.7em; padding-bottom: 10px" class="modal-title" id="uploadVideoModalLabel">上傳縮圖</h4>
+					<input style="font-size:1em" type="file" name="image" id="image" accept="image/*" required>
 				  </div>
 
 		          <button id="singleNewCreateBtn" style="height: 45px; margin-top: 10px; font-size: 1em; margin-bottom: 20px" type="submit" class="btn btn-info">上傳影片</button>
@@ -114,12 +114,6 @@
 		<br>
 	</div>
 </div>
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/dplayer/dist/DPlayer.min.css">
-<div style="display: none;" id="dplayer"></div>
-<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-<script src="https://cdn.jsdelivr.net/npm/flv.js/dist/flv.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/dplayer/dist/DPlayer.min.js"></script>
 
 <script>
 	function openCity(evt, cityName) {

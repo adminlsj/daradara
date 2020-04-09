@@ -117,18 +117,13 @@ class VideoController extends Controller
         if ($request->has('list') && $request->list != 'null') {
 
             $watch = Watch::find($request->list);
+            $videos = $watch->videos();
 
-            $videos = Video::where('category', $watch->category);
-            $videos = $videos->orderBy('created_at', 'desc')->get();
-
-            $is_program = true;
-            $first = $watch->videos()->last();
-
+            $first = $watch->videos()->first();
             $is_subscribed = $this->is_subscribed($watch->title);
-
             $is_mobile = $this->checkMobile();
 
-            return view('video.intro', compact('watch', 'videos', 'is_program', 'first', 'is_subscribed', 'is_mobile'));
+            return view('video.intro', compact('watch', 'videos', 'first', 'is_subscribed', 'is_mobile'));
         }
     }
 

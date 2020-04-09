@@ -90,15 +90,7 @@
     </div>
 </div>
 
-<hr style="border:solid 0.5px #383838; margin-top: 53px; margin-bottom: 10px">
-
-<div style="padding: 0px 15px; position: relative; padding-right: 40px; width: 100%; overflow-x: hidden; overflow-y: hidden; height: 39px" class="subscribes-tab-inverse subscribe-tags-wrapper">
-  @foreach ($video->tags() as $tag)
-      <a style="margin-right: 3px; text-decoration: none; display: inline-block; margin-bottom: 10px; padding: 5px 10px; font-size: 0.9em" href="{{ route('video.subscribeTag') }}?query={{ $tag }}">#{{ $tag }}</a>
-  @endforeach
-  <div style="position:absolute; top:3px; right:19px; cursor: pointer; color: darkgray" class="pull-right toggle-subscribe-tags"><i class="material-icons noselect toggle-subscribe-tags-icon">expand_more</i></div>
-</div>
-<hr style="border:solid 0.5px #383838; margin-top: 1px; margin-bottom: 0px">
+<hr style="border:solid 0.5px #383838; margin-top: 53px; margin-bottom: 0px">
 
 @if (!$is_mobile)
   @include('video.comment-section-wrapper')

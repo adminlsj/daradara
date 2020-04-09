@@ -23,21 +23,21 @@
 			@endif
 			<div style="height: 70px; margin-left: 80px">
 				<div style="font-size: 1.5em">{{ $user->name }}</div>
-				<div style="color: gray">{{ $watches->count() }} 個頻道</div>
+				<div style="color: gray">{{ $subscribers }} 位訂閱者</div>
 			</div>
 
       <!-- Tab links -->
       <div class="user-show-tab">
         <button class="user-show-tablinks" onclick="openCity(event, 'London')" id="defaultOpen">首頁</button>
-        <button class="user-show-tablinks" onclick="openCity(event, 'Paris')">頻道</button>
+        <button class="user-show-tablinks" onclick="openCity(event, 'Paris')">播放清單</button>
         <button class="user-show-tablinks" onclick="openCity(event, 'Tokyo')">簡介</button>
       </div>
 		</div>
 
     <!-- Tab content -->
     <div id="London" class="user-show-tabcontent">
-      <div class="video-slider-title paravi-padding-setup">
-        <h4>上傳的影片</h4>
+      <div class="explore-slider-title paravi-padding-setup">
+          <h4>上傳的影片</h4>
       </div>
       @if ($videos != null)
         <div class="row no-gutter load-more-container">
@@ -50,18 +50,18 @@
     </div>
 
     <div id="Paris" class="user-show-tabcontent">
-      <div class="video-slider-title paravi-padding-setup">
-        <h4>上傳的頻道</h4>
+      <div class="explore-slider-title paravi-padding-setup">
+          <h4>已建立的播放清單</h4>
       </div>
       @if ($watches->count() != 0)
         <div class="row no-gutter paravi-padding-setup">
           @foreach ($watches as $watch)
-            <div class="col-xs-6 col-sm-3 col-md-2 hover-opacity load-more-wrapper">
-                <a style="text-decoration: none; color: black" href="{{ route('video.intro', ['channel', $watch->titleToUrl()]) }}">
-                <img style="width: 100%; height: 100%;" src="{{ $watch->imgurB() }}" alt="{{ $watch->title }}">
+            <div class="col-xs-6 col-sm-3 col-md-3 hover-opacity load-more-wrapper">
+                <a style="text-decoration: none; color: black" href="{{ route('video.playlist') }}?list={{ $watch->id }}">
+                <img style="width: 100%; height: 100%;" src="{{ $watch->videos()->first() ? $watch->videos()->last()->imgurH() : '' }}" alt="{{ $watch->title }}">
 
                 <div class="hover-underline">
-                    <h4 style="font-size: 0.95em; margin-top: 7px; color: #222222;" class="text-ellipsis">{{ $watch->title }}</h4>
+                    <h4 style="font-size: 0.95em; margin-top: 7px; color: #222222;" class="text-ellipsis">{{ $watch->title }}【{{ $watch->videos()->count()}} 部影片】</h4>
                 </div>
                 </a>
             </div>
@@ -71,8 +71,8 @@
     </div>
 
     <div id="Tokyo" class="user-show-tabcontent">
-      <div class="video-slider-title paravi-padding-setup">
-        <h4>上傳的頻道</h4>
+      <div class="explore-slider-title paravi-padding-setup">
+          <h4>用戶簡介</h4>
       </div>
       <div class="paravi-padding-setup">
         <div>用戶名稱：{{ $user->name }}</div>

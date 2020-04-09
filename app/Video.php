@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\User;
 use App\Watch;
 use App\Subscribe;
 use App\Comment;
@@ -13,9 +14,14 @@ class Video extends Model
         'id', 'title', 'caption', 'genre', 'category', 'season', 'tags', 'hd', 'sd', 'imgur', 'views', 'duration', 'outsource', 'created_at', 'uploaded_at',
     ];
 
+    public function user()
+    {
+        return User::find($this->user_id);
+    }
+
     public function watch()
     {
-        return Watch::where('category', $this->category)->first();
+        return Watch::find($this->playlist_id);
     }
 
     public function subscribes()

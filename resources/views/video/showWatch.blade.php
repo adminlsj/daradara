@@ -38,14 +38,20 @@
 							@endif
 						</div>
 
-						<!-- Tab content -->
+						<div style="padding: 0px 15px; position: relative; padding-right: 40px; width: 100%; overflow-x: hidden; overflow-y: hidden; height: 39px; margin-bottom: 7px; margin-top: -5px" class="subscribes-tab-inverse subscribe-tags-wrapper">
+						  @foreach ($video->tags() as $tag)
+						      <a style="margin-right: 3px; text-decoration: none; display: inline-block; margin-bottom: 10px; padding: 5px 10px; font-size: 0.9em" href="{{ route('video.subscribeTag') }}?query={{ $tag }}">#{{ $tag }}</a>
+						  @endforeach
+						  <div style="position:absolute; top:3px; right:13px; cursor: pointer; color: darkgray" class="pull-right toggle-subscribe-tags"><i class="material-icons noselect toggle-subscribe-tags-icon">expand_more</i></div>
+						</div>
+
 						@if ($is_program)
 							<div style="padding-bottom: 7px;">
 
-								<div class="hidden-xs hidden-sm" style="margin: 7px 15px 0px 15px;">
+								<div class="hidden-xs hidden-sm" style="margin: 6px 15px 0px 15px;">
 									<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 									<ins class="adsbygoogle"
-									     style="display:block;"
+									     style="display:block; border: solid 1px white"
 									     data-ad-client="ca-pub-4485968980278243"
 									     data-ad-slot="8455082664"
 									     data-ad-format="auto"

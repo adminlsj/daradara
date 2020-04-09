@@ -20,20 +20,14 @@
 <div class="main-content">
 	<div class="padding-setup" style="background-color: #e9e9e9; min-height: auto; padding-top: 11px; padding-bottom: 11px;">
 		<div id="search-top-watch">
-		  <a href="{{ route('video.intro', ['channel', $watch->titleToUrl()]) }}" class="row no-gutter">
+		  <a href="{{ route('video.playlist') }}?list={{ $watch->id }}" class="row no-gutter">
 		    <div class="col-xs-6 col-sm-6 col-md-3">
-		      <img class="lazy" style="width: 100%; height: 100%;" src="{{ $watch->imgurDefault() }}" data-src="{{ $watch->imgurL() }}" data-srcset="{{ $watch->imgurL() }}" alt="{{ $watch->title }}">
-		      <span>
-		      	@if ($watch->genre == 'variety')
-	                {{ Carbon\Carbon::parse($watch->updated_at)->diffForHumans() }}更新
-	            @else
-	                {{ $watch->is_ended ? '已完結全' : '更新至第' }}{{ $watch->videos()->count() }}集
-	            @endif
-		      </span>
+		      <img class="lazy" style="width: 100%; height: 100%;" src="{{ $watch->videos()->first()->imgur16by9() }}" data-src="{{ $watch->videos()->first()->imgurL() }}" data-srcset="{{ $watch->videos()->first()->imgurL() }}" alt="{{ $watch->title }}">
+		      <span>播放清單</span>
 		    </div>
 		    <div class="col-xs-6 col-sm-6 col-md-7">
 		      <h4 style="overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;">{{ $watch->title }}</h4>
-		      <p style="overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;">{{ $watch->cast }}</p>
+		      <p style="overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;">創建者：{{ $watch->user()->name }}</p>
 		      <p style="margin-top: 9px; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: {{ $watch->genre == 'variety' ? 3 : 10 }}; -webkit-box-orient: vertical;">{{ $watch->description }}</p>
 		    </div>
 		  </a>

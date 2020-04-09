@@ -13,9 +13,9 @@
 		<div id="subscribes-watch-wrapper" class="row no-gutter padding-setup" style="height: 90px; overflow-x: hidden; overflow-y: hidden; position: relative;">
 			@foreach ($subscribes as $subscribe)
 				@if ($subscribe->type == 'watch')
-					<a href="{{ route('video.intro', [$subscribe->watch()->genre, $subscribe->watch()->titleToUrl()]) }}" style="text-decoration: none;">
+					<a href="{{ route('video.playlist') }}?list={{ $subscribe->watch()->id }}" style="text-decoration: none;">
 						<div class="col-xs-1" style="width: 60px; margin: 0px; padding: 0px; text-align: center; margin-right: 15px; margin-bottom: 10px;">
-							<img class="lazy" style="width: 100%; height: auto; border-radius: 50%;" src="{{ $subscribe->watch()->imgurDefaultCircleB() }}" data-src="{{ $subscribe->watch()->imgurB() }}" data-srcset="{{ $subscribe->watch()->imgurB() }}" alt="{{ $subscribe->watch()->title }}">
+							<img class="lazy" style="width: 100%; height: auto; border-radius: 50%;" src="{{ $subscribe->watch()->imgurDefaultCircleB() }}" data-src="{{ $subscribe->watch()->videos()->first()->imgurB() }}" data-srcset="{{ $subscribe->watch()->videos()->first()->imgurB() }}" alt="{{ $subscribe->watch()->title }}">
 							<div class="text-ellipsis" style="width: 100%; font-size: 0.8em; padding-top: 5px; color: #595959;">{{ $subscribe->watch()->title }}</div>
 						</div>
 					</a>

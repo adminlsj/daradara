@@ -6,7 +6,7 @@
 	
 	<hr style="margin: 10px 0px;">
 	
-	@include('video.sidebarItem', ['link' => '', 'is_current' => '', 'icon' => 'watch_later', 'title' => '稍後觀看'])
+	@include('video.sidebarItem', ['link' => route('video.subscribes').'?g=saved', 'is_current' => '', 'icon' => 'watch_later', 'title' => '稍後觀看'])
 	@include('video.sidebarItem', ['link' => '', 'is_current' => '', 'icon' => 'thumb_up', 'title' => '喜歡的影片'])
 	@include('video.sidebarItem', ['link' => '', 'is_current' => '', 'icon' => 'history', 'title' => '觀看紀錄'])
 
