@@ -124,93 +124,103 @@ class VideoController extends Controller
         }
         $watch = Watch::where('title', $title)->first();
 
-        $videos = Video::where('category', $watch->category)->where('season', $watch->season);
-        $videos = $videos->orderBy('created_at', 'desc')->get();
+        if ($watch->genre == 'drama' || $watch->genre == 'anime') {
+            return redirect()->action('VideoController@home');
 
-        $dropdown = Watch::where('category', $watch->category)->orderBy('created_at', 'asc')->get();
+        } else {
+            $videos = Video::where('category', $watch->category)->where('season', $watch->season);
+            $videos = $videos->orderBy('created_at', 'desc')->get();
 
-        $is_program = true;
-        $first = $watch->videos()->last();
+            $dropdown = Watch::where('category', $watch->category)->orderBy('created_at', 'asc')->get();
 
-        $is_subscribed = $this->is_subscribed($watch->title);
+            $is_program = true;
+            $first = $watch->videos()->last();
 
-        $is_mobile = $this->checkMobile();
+            $is_subscribed = $this->is_subscribed($watch->title);
 
-        return view('video.intro', compact('watch', 'videos', 'dropdown', 'is_program', 'first', 'is_subscribed', 'is_mobile'));
+            $is_mobile = $this->checkMobile();
+
+            return view('video.intro', compact('watch', 'videos', 'dropdown', 'is_program', 'first', 'is_subscribed', 'is_mobile'));
+        }
     }
 
     public function watch(Request $request){
         if ($request->has('v') && $request->v != 'null') {
             $video = Video::find($request->v);
-            $video->views++;
-            $video->save();
-            if (auth()->check()) {
-                auth()->user()->updated_at = Carbon::now();
-                auth()->user()->save();
-            }
-            $current = $video;
-
-            foreach ($video->sd() as $sd) {
-                if (strpos($sd, "www.bilibili.com") !== FALSE && !$video->outsource) {
-                    $video->sd = str_replace($sd, Video::getLinkBB($sd, $video->outsource), $video->sd);
-                    $video->save();
+            if ($video->genre == 'drama' || $video->genre == 'anime') {
+                return redirect()->action('VideoController@home');
+            
+            } else {
+                $video->views++;
+                $video->save();
+                if (auth()->check()) {
+                    auth()->user()->updated_at = Carbon::now();
+                    auth()->user()->save();
                 }
-            }
+                $current = $video;
 
-            $videosSelect = Video::where('id', '!=', $video->id)->inRandomOrder()->select('id', 'tags')->get()->toArray();
-            $rankings = [];
-            foreach ($videosSelect as $videoSelect) {
-                $score = 0;
-                foreach ($video->tags() as $tag) {
-                    if (strpos($videoSelect['tags'], $tag) !== false) {
-                        $score++;
+                foreach ($video->sd() as $sd) {
+                    if (strpos($sd, "www.bilibili.com") !== FALSE && !$video->outsource) {
+                        $video->sd = str_replace($sd, Video::getLinkBB($sd, $video->outsource), $video->sd);
+                        $video->save();
                     }
                 }
-                array_push($rankings, ['score' => $score, 'id' => $videoSelect['id']]);
-            }
-            usort($rankings, function ($a, $b) {
-                return $b['score'] <=> $a['score'];
-            });
 
-            $related = [];
-            for ($i = 0; $i < 30; $i++) {
-                array_push($related, Video::find($rankings[$i]['id']));
-            }
-
-            $is_mobile = $this->checkMobile();
-
-            if ($video->category == 'video') {
-                $is_program = false;
-                return view('video.showWatch', compact('video', 'related', 'current', 'is_program', 'is_mobile'));
-
-            } else {
-
-                $query = Video::where('category', $video->category)->where('season', $video->season)->orderBy('created_at', 'asc')->pluck('id')->toArray();
-                $now = array_search($video->id, $query);
-                while(key($query) !== null && key($query) !== $now) next($query);
-
-                $prev = 0; $next = 0;
-                if ($this->has_prev($query)) {
-                    $prev = prev($query);
-                    next($query);
-                } else {
-                    $prev = false;
+                $videosSelect = Video::where('id', '!=', $video->id)->inRandomOrder()->select('id', 'tags')->get()->toArray();
+                $rankings = [];
+                foreach ($videosSelect as $videoSelect) {
+                    $score = 0;
+                    foreach ($video->tags() as $tag) {
+                        if (strpos($videoSelect['tags'], $tag) !== false) {
+                            $score++;
+                        }
+                    }
+                    array_push($rankings, ['score' => $score, 'id' => $videoSelect['id']]);
                 }
-                if ($this->has_next($query)) {
-                    $next = next($query);
-                } else {
-                    $next = false;
+                usort($rankings, function ($a, $b) {
+                    return $b['score'] <=> $a['score'];
+                });
+
+                $related = [];
+                for ($i = 0; $i < 30; $i++) {
+                    array_push($related, Video::find($rankings[$i]['id']));
                 }
 
-                $dropdown = Watch::where('category', $video->category)->orderBy('created_at', 'asc')->get();
+                $is_mobile = $this->checkMobile();
 
-                $watch = Watch::where('category', $video->category)->where('season', $video->season)->first();
-                $genre = $video->genre;
-                $is_program = true;
+                if ($video->category == 'video') {
+                    $is_program = false;
+                    return view('video.showWatch', compact('video', 'related', 'current', 'is_program', 'is_mobile'));
 
-                $is_subscribed = $this->is_subscribed($watch->title);
+                } else {
 
-                return view('video.showWatch', compact('genre', 'video', 'related', 'prev', 'next', 'dropdown', 'watch', 'current', 'is_program', 'is_subscribed', 'is_mobile'));
+                    $query = Video::where('category', $video->category)->where('season', $video->season)->orderBy('created_at', 'asc')->pluck('id')->toArray();
+                    $now = array_search($video->id, $query);
+                    while(key($query) !== null && key($query) !== $now) next($query);
+
+                    $prev = 0; $next = 0;
+                    if ($this->has_prev($query)) {
+                        $prev = prev($query);
+                        next($query);
+                    } else {
+                        $prev = false;
+                    }
+                    if ($this->has_next($query)) {
+                        $next = next($query);
+                    } else {
+                        $next = false;
+                    }
+
+                    $dropdown = Watch::where('category', $video->category)->orderBy('created_at', 'asc')->get();
+
+                    $watch = Watch::where('category', $video->category)->where('season', $video->season)->first();
+                    $genre = $video->genre;
+                    $is_program = true;
+
+                    $is_subscribed = $this->is_subscribed($watch->title);
+
+                    return view('video.showWatch', compact('genre', 'video', 'related', 'prev', 'next', 'dropdown', 'watch', 'current', 'is_program', 'is_subscribed', 'is_mobile'));
+                }
             }
         }
     }

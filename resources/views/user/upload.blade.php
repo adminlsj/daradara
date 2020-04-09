@@ -92,7 +92,7 @@
 		            <textarea class="form-control" name="description" id="description" rows="3" placeholder="簡介" required></textarea>
 		          </div>
 		          <div class="form-group">
-		            <input type="text" class="form-control" name="link" id="link" placeholder="影片鏈結（填寫影片現存的鏈結）" required>
+		            <input type="text" class="form-control" name="link" id="link" placeholder="影片鏈結（現有影片網址）" required>
 		          </div>
 		          <div class="form-group">
 		            <input type="text" class="form-control" name="tags" id="tags" placeholder="標籤（各標籤之間請預留空格）" required>
