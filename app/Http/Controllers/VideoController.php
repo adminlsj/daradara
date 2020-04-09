@@ -124,7 +124,7 @@ class VideoController extends Controller
         }
         $watch = Watch::where('title', $title)->first();
 
-        if ($watch->genre == 'drama' || $watch->genre == 'anime') {
+        if ($watch == null || $watch->genre == 'drama' || $watch->genre == 'anime') {
             return redirect()->action('VideoController@home');
 
         } else {
@@ -147,7 +147,7 @@ class VideoController extends Controller
     public function watch(Request $request){
         if ($request->has('v') && $request->v != 'null') {
             $video = Video::find($request->v);
-            if ($video->genre == 'drama' || $video->genre == 'anime') {
+            if ($video == null || $video->genre == 'drama' || $video->genre == 'anime') {
                 return redirect()->action('VideoController@home');
             
             } else {
