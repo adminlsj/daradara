@@ -169,16 +169,20 @@ class Video extends Model
             $avid = '';
             $bvid = '';
             $cid = '';
-            if (($pos = strpos($url, "avid=")) !== FALSE) { 
+            $page = 1;
+            if (strpos($url, "avid=") !== FALSE) { 
                 $avid = $this->get_string_between($url, 'avid=', '&');
             }
-            if (($pos = strpos($url, "bvid=")) !== FALSE) { 
+            if (strpos($url, "bvid=") !== FALSE) { 
                 $bvid = $this->get_string_between($url, 'bvid=', '&');
             }
-            if (($pos = strpos($url, "cid=")) !== FALSE) { 
+            if (strpos($url, "cid=") !== FALSE) { 
                 $cid = $this->get_string_between($url, 'cid=', '&');
             }
-            return '//player.bilibili.com/player.html?aid='.$avid.'&bvid='.$bvid.'&cid'.$cid.'&danmaku=0&qn=0&type=mp4&otype=json&fnver=0&fnval=1&platform=html5&html5=1&high_quality=1';
+            if (($pos = strpos($this->hd, "?p=")) !== FALSE) { 
+                $page = substr($this->hd, $pos + 3);
+            }
+            return '//player.bilibili.com/player.html?aid='.$avid.'&bvid='.$bvid.'&cid='.$cid.'&page='.$page.'&danmaku=0&qn=0&type=mp4&otype=json&fnver=0&fnval=1&platform=html5&html5=1&high_quality=1';
         }
     }
 
