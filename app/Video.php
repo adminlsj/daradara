@@ -183,6 +183,8 @@ class Video extends Model
                 $page = substr($this->hd, $pos + 3);
             }
             return '//player.bilibili.com/player.html?aid='.$avid.'&bvid='.$bvid.'&cid='.$cid.'&page='.$page.'&danmaku=0&qn=0&type=mp4&otype=json&fnver=0&fnval=1&platform=html5&html5=1&high_quality=1';
+        } else {
+            return $url;
         }
     }
 
