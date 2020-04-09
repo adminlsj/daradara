@@ -1,4 +1,4 @@
-@if (!$is_mobile || $video->outsource)
+@if ($video->outsource || !$is_mobile && strpos($video->sd, "api.bilibili.com") !== FALSE)
   <div class="aspect-ratio" style="background-color: black; background-image: url('https://i.imgur.com/o2hJHsfl.png'); background-position: center; background-repeat: no-repeat; background-size: 30px;">
       <iframe src="{{ $video->outsource() }}" style="border: 0; overflow: hidden;" allow="autoplay" allowfullscreen></iframe>
   </div>
