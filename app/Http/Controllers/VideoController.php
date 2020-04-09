@@ -113,6 +113,25 @@ class VideoController extends Controller
         return view('video.rankIndex', compact('videos', 'is_mobile'));
     }
 
+    public function playlist(Request $request){
+        if ($request->has('list') && $request->list != 'null') {
+
+            $watch = Watch::find($request->list);
+
+            $videos = Video::where('category', $watch->category);
+            $videos = $videos->orderBy('created_at', 'desc')->get();
+
+            $is_program = true;
+            $first = $watch->videos()->last();
+
+            $is_subscribed = $this->is_subscribed($watch->title);
+
+            $is_mobile = $this->checkMobile();
+
+            return view('video.intro', compact('watch', 'videos', 'is_program', 'first', 'is_subscribed', 'is_mobile'));
+        }
+    }
+
     public function intro(String $genre, String $title, Request $request){
         $title = str_replace("_", " / ", $title);
         $title = str_replace("-", " ", $title);

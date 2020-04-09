@@ -384,7 +384,7 @@ class HomeController extends Controller
         }
     }
 
-    public function tempMethods()
+    /*public function tempMethods()
     {
         if (Auth::check() && Auth::user()->email == 'laughseejapan@gmail.com') {
             $videos = Video::all();
@@ -406,7 +406,7 @@ class HomeController extends Controller
             }
         }
         return redirect()->action('VideoController@home');
-    }
+    }*/
 
     function get_string_between($string, $start, $end){
         $string = ' ' . $string;

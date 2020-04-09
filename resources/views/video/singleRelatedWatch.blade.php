@@ -5,6 +5,6 @@
   </div>
   <div style="padding-left: 4px;" class="col-xs-6 col-sm-6 col-md-6 related-watch-title">
     <h4 style="margin-top:0px; margin-bottom: 0px; line-height: 19px; font-size: 1.05em; color:white;">{{ $video->title() }}</h4>
-    <p style="color: darkgray; margin-top: 1px; margin-bottom: 0px; font-size: 0.85em;">觀看次數：{{ $video->views() }}次</p>
+    <p style="color: darkgray; margin-top: 1px; margin-bottom: 0px; font-size: 0.85em;">{{ $video->watch()->user()->name }}</p>
   </div>
 </a>

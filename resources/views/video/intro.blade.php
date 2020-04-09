@@ -34,119 +34,49 @@
 @endsection
 
 @section('nav')
-  @include('layouts.nav-main-original', ['theme' => 'dark'])
+  @include('layouts.nav-main-original', ['theme' => 'white'])
 @endsection
 
 @section('content')
     <div class="hidden-sm hidden-xs sidebar-menu">
-	    @include('video.sidebarMenu', ['theme' => 'dark'])
+	    @include('video.sidebarMenu', ['theme' => 'white'])
     </div>
 
     <div class="main-content">
-    	<div style="background-color: #1F1F1F;">
-			<div style="background-image: url({{ $watch->imgurH() }}); background-size: 100% 100%; background-repeat: no-repeat; background-position: 50%; filter: blur(30px); z-index: -1; opacity: 0.5; pointer-events: none;">
-				<div style="padding: 0px 15px">
-					<div style="padding-top: 20px; padding-bottom: 10px; padding-left: 0px;" class="row">
-						@include('video.introTemp', ['is_background' => true])
-					</div>
-				</div>
-			</div>
-			<div style="padding: 0px 15px;">
-				<div class="row" style="padding-top: 62px; padding-bottom: 10px; padding-left: 0px; margin-right:0px; position: absolute; top: 0px;">
-					@include('video.introTemp', ['is_background' => false])
-				</div>
-			</div>
-
-			<hr style="border:solid 1.5px #282828; margin-top: 0px">
-
-			<div style="margin-top: -20px; padding: 0px 15px; padding-bottom: 7px;">
-				<div class="row">
-					<!-- Tab links -->
-					<div class="tab">
-					  <button class="tablinks" onclick="openList(event, 'Watch')" id="defaultOpen">播放清單</button>
-					</div>
-
-					<!-- Tab content -->
-					<div id="Watch" class="tabcontent">
-						@if ($videos != null)
-						    @foreach ($videos as $video)
-							    <div id="{{ $video->id }}" style="padding: 7px 4px;">
-								  <a href="{{ route('video.watch') }}?v={{ $video->id }}" class="row no-gutter">
-								    <div style="padding-left: 12px; padding-right: 4px; position: relative;" class="col-xs-6 col-sm-6 col-md-3">
-								      @if ($loop->iteration == 1)
-									    <div class="aspect-ratio">
-									        <video style="width: 100%; height: auto" poster="{{ $video->imgurL() }}">
-											  <source src="{!! $video->source() !!}" type="video/mp4">
-											</video>
-										</div>
-								      @else
-									    <img class="lazy" style="width: 100%; height: 100%;" src="{{ $video->imgur16by9() }}" data-src="{{ $video->imgurL() }}" data-srcset="{{ $video->imgurL() }}" alt="{{ $video->title }}">
-								      @endif
-								      <img style="opacity: 0.6;" class="play-button-cover" src="https://i.imgur.com/WSrfkoQ.png" alt="play button">
-								      <img class="play-button-cover" src="https://i.imgur.com/BrOdkqU.png" alt="play button">
-								      <span style="position: absolute; bottom:6px; right: 9px; background-color: rgba(0,0,0,0.8); color: white; padding: 1px 5px 1px 5px; opacity: 0.9; font-size: 0.85em; border-radius: 2px;">{{ $video->duration() }}</span>
-								    </div>
-								    <div style="padding-top: 1px; padding-right: 12px; padding-left: 4px;" class="col-xs-6 col-sm-6 col-md-9">
-								      <h4 style="margin-top:0px; margin-bottom: 0px; line-height: 19px; font-size: 1.05em; color:white;">{{ $video->title() }}</h4>
-								      <div class="hidden-sm hidden-xs" style="margin-top:5px; font-size: 0.95em; color: #cccccc; line-height: 19px; white-space: pre-wrap;">{{ $video->caption }}</div>
-								    </div>
-								</div>
-
-						    	<a class="visible-sm visible-xs" style="text-decoration: none; padding: 0px 7px;" href="{{ route('video.watch') }}?v={{ $video->id }}">
-							    	<div class="padding-setup" style="font-size: 0.95em; color: #cccccc; line-height: 19px; white-space: pre-wrap;">{{ $video->caption }}</div>
-							    </a>
-						    	<br>
-						    @endforeach
-						@endif
-					</div>
-				</div>
-			</div>
-
-			<script>
-				function openList(evt, listName) {
-				  // Declare all variables
-				  var i, tabcontent, tablinks;
-
-				  // Get all elements with class="tabcontent" and hide them
-				  tabcontent = document.getElementsByClassName("tabcontent");
-				  for (i = 0; i < tabcontent.length; i++) {
-				    tabcontent[i].style.display = "none";
-				  }
-
-				  // Get all elements with class="tablinks" and remove the class "active"
-				  tablinks = document.getElementsByClassName("tablinks");
-				  for (i = 0; i < tablinks.length; i++) {
-				    tablinks[i].className = tablinks[i].className.replace(" active", "");
-				  }
-
-				  // Show the current tab, and add an "active" class to the button that opened the tab
-				  document.getElementById(listName).style.display = "block";
-				  evt.currentTarget.className += " active";
-				}
-
-				// Get the element with id="defaultOpen" and click on it
-				document.getElementById("defaultOpen").click();
-
-				/* When the user clicks on the button,
-				toggle between hiding and showing the dropdown content */
-				function openDropdown() {
-				  document.getElementById("myDropdown").classList.toggle("show");
-				}
-
-				// Close the dropdown menu if the user clicks outside of it
-				window.onclick = function(event) {
-				  if (!event.target.matches('.dropbtn')) {
-				    var dropdowns = document.getElementsByClassName("dropdown-content");
-				    var i;
-				    for (i = 0; i < dropdowns.length; i++) {
-				      var openDropdown = dropdowns[i];
-				      if (openDropdown.classList.contains('show')) {
-				        openDropdown.classList.remove('show');
-				      }
-				    }
-				  }
-				}
-			</script>
+    	<div style="background-color: #F5F5F5;">
+    		<div class="row no-gutter">
+    			<div class="col-md-5" style="padding: 21px 30px 25px 30px; background-color: #F9F9F9; min-height: 100%;">
+    				<div style="position: relative; text-align: center">
+    					<a href="{{ route('video.watch') }}?v={{ $videos->first()->id }}">
+		    				<img class="lazy" style="width: 100%; height: 100%;" src="{{ $first->imgur16by9() }}" data-src="{{ $first->imgurH() }}" data-srcset="{{ $first->imgurH() }}" alt="{{ $first->title }}">
+		    				<div style="position: absolute; bottom: 0px; color: white; background-color: rgba(0, 0, 0, .8); width: 100%; height: 40px; padding-top: 10px"><i style="vertical-align:middle; font-size: 1.95em; margin-top: -3px; margin-right: 7px; margin-left: -3px" class="material-icons">play_arrow</i><span style="font-size: 1.05em">全部播放</span></div>
+		    			</a>
+    				</div>
+    				<h3>{{ $watch->title }}</h3>
+    				<h5 style="color: dimgray; font-weight: 400; margin-top: 15px">{{ $videos->count()}} 部影片 <small>•</small> {{ Carbon\Carbon::parse($watch->updated_at)->diffForHumans() }}更新</h5>
+    				<h5 style="color: dimgray; font-weight: 400; margin-top: 15px; line-height: 20px">{{ $watch->description }}</h5>
+    				<hr style="border-color: #e1e1e1;">
+    				<a href="{{ route('user.show', [$watch->user()]) }}"><img class="lazy" style="float:left; border-radius: 50%; width: 50px; height: 50px;" src="{{ $watch->user()->avatarCircleB() }}" data-src="{{ $watch->user()->avatar == null ? $watch->user()->avatarDefault() : $watch->user()->avatar->filename }}" data-srcset="{{ $watch->user()->avatar == null ? $watch->user()->avatarDefault() : $watch->user()->avatar->filename }}"></a>
+    				<h5 style="margin-top: 38px; margin-left: 65px"><a style="text-decoration: none; color: #222222" href="{{ route('user.show', [$watch->user()]) }}">{{ $watch->user()->name }}</a></h5>
+    				<div style="float: right; margin-top: -25px; width: 75px">
+	    				@include('video.intro-subscribe-wrapper', ['tag' => $watch->title])
+    				</div>
+    			</div>
+    			<div class="col-md-7" style="padding-top: 12px;">
+    				@foreach ($videos as $video)
+	    				<div class="multiple-link-wrapper hover-opacity-all">
+		    				<a href="{{ route('video.watch') }}?v={{ $video->id }}" class="overlay"></a>
+	    					<div style="height: 85px" class="inner">
+			    				<span style="float: left; width: 40px; font-weight: 500; padding-top: 30px; text-align: center">{{ $videos->count() - $loop->index }}</span>
+		    					<img class="lazy" style="width: 150px; height: auto; float: left;" src="{{ $video->imgur16by9() }}" data-src="{{ $video->imgurH() }}" data-srcset="{{ $video->imgurH() }}" alt="{{ $video->title }}">
+		    					<h4 style="margin-left: 200px; padding-right: 25px; font-size: 1.2em; line-height: 22px">{{ $video->title }}</h4>
+		    					<h5 style="margin-left: 200px; color: dimgray; font-weight: 400; font-size: 0.95em"><a href="{{ route('user.show', [$video->watch()->user()]) }}">{{ $watch->user()->name }}</a></h5>
+		    				</div>
+		    				<hr style="border-color: #e1e1e1; margin-left: 40px; margin-right: 25px">
+	    				</div>
+    				@endforeach
+    			</div>
+    		</div>
 		</div>
 	</div>
 @endsection
