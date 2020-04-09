@@ -57,10 +57,8 @@
     <div id="videoDescription" style="display: none; margin-top: 5px;">
       <p style="white-space: pre-wrap; color: white; margin-bottom: 20px;">{{ $video->caption }}</p>
       @if ($is_program)
-        <p style="white-space: pre-wrap; color: white; margin-bottom: 5px;"><strong>劇情大綱</strong></p>
-        <p style="white-space: pre-wrap; color: white; margin-bottom: 20px;">{{ $watch != false ? $watch->description : ''}}</p>
-        <p style="white-space: pre-wrap; color: white; margin-bottom: 5px;"><strong>登場人物</strong></p>
-        <p style="white-space: pre-wrap; color: white; margin-bottom: 20px;">{{ $watch != false ? $watch->cast : ''}}</p>
+        <p style="white-space: pre-wrap; color: white; margin-bottom: 5px;"><strong>頻道簡介</strong></p>
+        <p style="white-space: pre-wrap; color: white; margin-bottom: 10px;">{{ $watch != false ? $watch->description : ''}}</p>
       @endif
     </div>
 

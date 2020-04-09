@@ -37,7 +37,7 @@
 		            <input type="text" class="form-control" name="title" id="title" placeholder="標題" required>
 		          </div>
 		          <div class="form-group">
-		            <input type="text" class="form-control" name="description" id="description" placeholder="簡介" required>
+		            <textarea class="form-control" name="description" id="description" rows="3" placeholder="簡介" required></textarea>
 		          </div>
 		          <div class="form-group">
 		            <input type="text" class="form-control" name="tags" id="tags" placeholder="標籤（各標籤之間請預留空格）" required>
@@ -74,13 +74,22 @@
 		          <div>請填寫上傳影片的基本資料：</div>
 
 		          <div class="form-group" style="margin-top: 20px;">
-		            <input type="text" class="form-control" name="channel" id="channel" placeholder="所屬頻道" required>
-		          </div>
+				    <select class="form-control" name="channel" id="channel" required>
+				      @if ($watches->first())
+					      <option value="">選擇所屬頻道...</option>
+					      @foreach ($watches as $watch)
+					      	 <option value="{{ $watch->title }}">{{ $watch->title }}</option>
+					      @endforeach
+					  @else
+						  <option value="">請先創建頻道...</option>
+				      @endif
+				    </select>
+				  </div>
 		          <div class="form-group">
 		            <input type="text" class="form-control" name="title" id="title" placeholder="影片標題" required>
 		          </div>
 		          <div class="form-group">
-		            <input type="text" class="form-control" name="description" id="description" placeholder="影片說明">
+		            <textarea class="form-control" name="description" id="description" rows="3" placeholder="簡介" required></textarea>
 		          </div>
 		          <div class="form-group">
 		            <input type="text" class="form-control" name="link" id="link" placeholder="影片鏈結（填寫影片現存的鏈結）" required>

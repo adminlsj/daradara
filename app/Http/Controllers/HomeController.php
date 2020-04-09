@@ -317,15 +317,6 @@ class HomeController extends Controller
         return $video;
     }
 
-    function get_string_between($string, $start, $end){
-        $string = ' ' . $string;
-        $ini = strpos($string, $start);
-        if ($ini == 0) return '';
-        $ini += strlen($start);
-        $len = strpos($string, $end, $ini) - $ini;
-        return substr($string, $ini, $len);
-    }
-
     public function bccToSrt(Request $request){
         $url = request('url');
         try {
@@ -393,17 +384,36 @@ class HomeController extends Controller
         }
     }
 
-    /*public function tempMethods()
+    public function tempMethods()
     {
         if (Auth::check() && Auth::user()->email == 'laughseejapan@gmail.com') {
-            $subscribes = Subscribe::all();
-            foreach ($subscribes as $subscribe) {
-                $subscribe->type = 'watch';
-                $watch = Watch::where('category', $subscribe->tag)->first();
-                $subscribe->tag = $watch->title;
-                $subscribe->save();
+            $videos = Video::all();
+            foreach ($videos as $video) {
+                if ($video->genre == 'drama' || $video->genre == 'anime' || $video->category == 'scgy' || $video->category == 'labs' || $video->category == 'jdrdsfyq' || $video->category == 'src') {
+                    $title = $video->title;
+                    $start = strpos($title, "【");
+                    $end = strpos($title, "】") - $start;
+                    $newTitle = str_replace("【", "", substr($title, $start, $end));
+                    $video->title = $newTitle;
+                } elseif ($video->genre == 'variety') {
+                    $title = $video->title;
+                    $explode = explode(' ', $title);
+                    $newTitle = end($explode);
+                    $video->title = $newTitle;
+                }
+
+                $video->save();
             }
         }
         return redirect()->action('VideoController@home');
-    }*/
+    }
+
+    function get_string_between($string, $start, $end){
+        $string = ' ' . $string;
+        $ini = strpos($string, $start);
+        if ($ini == 0) return '';
+        $ini += strlen($start);
+        $len = strpos($string, $end, $ini) - $ini;
+        return substr($string, $ini, $len);
+    }
 }

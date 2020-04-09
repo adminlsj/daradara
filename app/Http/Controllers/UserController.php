@@ -117,7 +117,8 @@ class UserController extends Controller
 
     public function userEditUpload(User $user, Request $request)
     {
-        return view('user.upload', compact('user'));
+        $watches = $user->watches();
+        return view('user.upload', compact('user', 'watches'));
     }
 
     public function userUpdateUpload(User $user, Request $request)
@@ -161,21 +162,9 @@ class UserController extends Controller
 
                 } elseif ($request->type == 'video') {
                     $latest = Watch::where('title', request('channel'))->first()->videos()->last();
-                    $title = request('title');
-                    if ($title == "") {
-                        $prevEpisode = $this->get_string_between($latest->title, '【第', '話】');
-                        $episode = $prevEpisode;
-                        if (is_numeric($prevEpisode) && floor($prevEpisode) != $prevEpisode) {
-                            $episode = $prevEpisode + 0.5;
-                        } else {
-                            $episode = $prevEpisode + 1;
-                        }
-                        $title = str_replace($prevEpisode, $episode, $latest->title);
-                    }
-
                     $video = Video::create([
                         'id' => Video::orderBy('id', 'desc')->first()->id + 1,
-                        'title' => $title,
+                        'title' => request('title'),
                         'caption' => request('description'),
                         'hd' => request('link'),
                         'sd' => request('link'),
@@ -196,41 +185,39 @@ class UserController extends Controller
                         $video->save();
                     }
 
-                    if (Auth::check() && Auth::user()->email == 'laughseejapan@gmail.com') {
-                        $users = [];
-                        $userArray = [];
+                    $users = [];
+                    $userArray = [];
 
-                        if ($video->category != 'video') {
-                            $watch = $video->watch();
-                            $watch->updated_at = $video->uploaded_at;
-                            $watch->save();
+                    if ($video->category != 'video') {
+                        $watch = $video->watch();
+                        $watch->updated_at = $video->uploaded_at;
+                        $watch->save();
 
-                            $subscribes = $watch->subscribes();
-                            foreach ($subscribes as $subscribe) {
-                                $user = $subscribe->user();
-                                array_push($userArray, $user->id);
+                        $subscribes = $watch->subscribes();
+                        foreach ($subscribes as $subscribe) {
+                            $user = $subscribe->user();
+                            array_push($userArray, $user->id);
+                        }
+                    }
+
+                    foreach ($video->tags() as $tag) {
+                        $subscribes = Subscribe::where('tag', $tag)->get();
+                        foreach ($subscribes as $subscribe) {
+                            if (!in_array($subscribe->user()->id, $userArray)) {
+                                array_push($userArray, $subscribe->user()->id);
                             }
                         }
+                    }
 
-                        foreach ($video->tags() as $tag) {
-                            $subscribes = Subscribe::where('tag', $tag)->get();
-                            foreach ($subscribes as $subscribe) {
-                                if (!in_array($subscribe->user()->id, $userArray)) {
-                                    array_push($userArray, $subscribe->user()->id);
-                                }
-                            }
-                        }
+                    foreach ($userArray as $user_id) {
+                        array_push($users, User::find($user_id));
+                    }
 
-                        foreach ($userArray as $user_id) {
-                            array_push($users, User::find($user_id));
-                        }
-
-                        foreach ($users as $user) {
-                            Mail::to($user->email)->send(new SubscribeNotify($user, $video));
-                            if (strpos($user->alert, 'subscribe') === false) {
-                                $user->alert = $user->alert."subscribe";
-                                $user->save();
-                            }
+                    foreach ($users as $user) {
+                        Mail::to($user->email)->send(new SubscribeNotify($user, $video));
+                        if (strpos($user->alert, 'subscribe') === false) {
+                            $user->alert = $user->alert."subscribe";
+                            $user->save();
                         }
                     }
 

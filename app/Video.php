@@ -36,26 +36,7 @@ class Video extends Model
     public function title()
     {
         $title = $this->title;
-        if ($this->genre == 'drama' || $this->genre == 'anime' || $this->category == 'scgy' || $this->category == 'labs' || $this->category == 'jdrdsfyq') {
-            $start = strpos($title, "【");
-            $end = strpos($title, "】") - $start;
-            return str_replace("【", "", substr($title, $start, $end));
-        } else {
-            return $title;
-        }
-    }
-
-    public function explodeTitle()
-    {
-        $title = $this->title;
-        if ($this->genre == 'drama' || $this->genre == 'anime' || $this->category == 'scgy' || $this->category == 'labs' || $this->category == 'jdrdsfyq') {
-            $start = strpos($title, "【");
-            $end = strpos($title, "】") - $start;
-            return str_replace("【", "", substr($title, $start, $end));
-        } else {
-            $explode = explode(' ', $title);
-            return end($explode);
-        }
+        return $title;
     }
 
     public function genre()
@@ -181,6 +162,26 @@ class Video extends Model
         }
     }
 
+    public function outsource()
+    {
+        $url = $this->sd;
+        if (strpos($url, "api.bilibili.com") !== FALSE) {
+            $avid = '';
+            $bvid = '';
+            $cid = '';
+            if (($pos = strpos($url, "avid=")) !== FALSE) { 
+                $avid = $this->get_string_between($url, 'avid=', '&');
+            }
+            if (($pos = strpos($url, "bvid=")) !== FALSE) { 
+                $bvid = $this->get_string_between($url, 'bvid=', '&');
+            }
+            if (($pos = strpos($url, "cid=")) !== FALSE) { 
+                $cid = $this->get_string_between($url, 'cid=', '&');
+            }
+            return '//player.bilibili.com/player.html?aid='.$avid.'&bvid='.$bvid.'&cid'.$cid.'&danmaku=0&qn=0&type=mp4&otype=json&fnver=0&fnval=1&platform=html5&html5=1&high_quality=1';
+        }
+    }
+
     public function sd()
     {
         return explode(" ",$this->sd);
@@ -281,6 +282,15 @@ class Video extends Model
             6 => '六',
         ];
         return $weekMap[$day];
+    }
+
+    function get_string_between($string, $start, $end){
+        $string = ' ' . $string;
+        $ini = strpos($string, $start);
+        if ($ini == 0) return '';
+        $ini += strlen($start);
+        $len = strpos($string, $end, $ini) - $ini;
+        return substr($string, $ini, $len);
     }
 
     /* public function getRouteKeyName()

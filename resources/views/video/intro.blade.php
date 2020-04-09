@@ -63,7 +63,7 @@
 				<div class="row">
 					<!-- Tab links -->
 					<div class="tab">
-					  <button class="tablinks" onclick="openList(event, 'Watch')" id="defaultOpen">全集列表</button>
+					  <button class="tablinks" onclick="openList(event, 'Watch')" id="defaultOpen">播放清單</button>
 					</div>
 
 					<!-- Tab content -->
@@ -88,7 +88,6 @@
 								    </div>
 								    <div style="padding-top: 1px; padding-right: 12px; padding-left: 4px;" class="col-xs-6 col-sm-6 col-md-9">
 								      <h4 style="margin-top:0px; margin-bottom: 0px; line-height: 19px; font-size: 1.05em; color:white;">{{ $video->title() }}</h4>
-								      <p style="color: gray; margin-top: 1px; margin-bottom: 0px; font-size: 0.85em; color:#e5e5e5">觀看次數：{{ $video->views() }}次</p>
 								      <div class="hidden-sm hidden-xs" style="margin-top:5px; font-size: 0.95em; color: #cccccc; line-height: 19px; white-space: pre-wrap;">{{ $video->caption }}</div>
 								    </div>
 								</div>

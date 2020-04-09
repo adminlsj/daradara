@@ -6,7 +6,7 @@
 				    <img class="lazy" style="width: 100%; height: 100%;" src="{{ $video->imgur16by9() }}" data-src="{{ $video->imgurL() }}" data-srcset="{{ $video->imgurL() }}" alt="{{ $video->title }}">
 
 				    <div class="hover-underline">
-					    <h4 class="text-ellipsis">@if ($video->category != 'video'){{ $video->watch()->title }}@endif {{ $video->explodeTitle() }}</h4>
+					    <h4 class="text-ellipsis">@if ($video->watch()){{ $video->watch()->title }}@endif {{ $video->title }}</h4>
 				    </div>
 			    </a>
 			</div>

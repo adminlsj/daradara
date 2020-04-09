@@ -26,7 +26,7 @@
 						<br class="hidden-sm hidden-xs">
 						<!-- Tab links -->
 						<div style="position: relative;" class="tab" id="video-show-tabs-margin-top">
-							<button style="{{ $is_program ? '' : 'display:none' }}" class="tablinks video-tablinks" onclick="openList(event, 'Watch')" id={{ $is_program ? 'defaultOpen' : '' }}>全集列表</button>
+							<button style="{{ $is_program ? '' : 'display:none' }}" class="tablinks video-tablinks" onclick="openList(event, 'Watch')" id={{ $is_program ? 'defaultOpen' : '' }}>播放清單</button>
 							<button class="tablinks video-tablinks" onclick="openList(event, 'Related')" id={{ $is_program ? '' : 'defaultOpen' }}>相關影片</button>
 							@if ($is_program)
 								<a style="position:absolute; top:14px; right:53px; text-decoration: none; {{ $prev != false ? 'color: white;' : 'pointer-events: none; color: #414141;' }}" href="{{ route('video.watch') }}?v={{ $prev }}"><i class="material-icons noselect">skip_previous</i></a>
