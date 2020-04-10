@@ -744,8 +744,8 @@ class VideoController extends Controller
         $url = Input::get('url');
         if (strpos($url, 'https://www.instagram.com/p/') !== false) {
             return Video::getSourceIG($url);
-        } elseif (strpos($url, 'https://api.bilibili.com/') !== false) {
-            return Video::getSourceBB($url);
+        } elseif (strpos($url, 'player.bilibili.com') !== false) {
+            return Video::getMobileBB($url);
         } else {
             return $url;
         }

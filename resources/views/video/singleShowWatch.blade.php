@@ -25,30 +25,36 @@
 
         <script>
           function changeSrc(identifier) {
-            $('#dplayer').addClass('dplayer-loading');
 
             link = $(identifier).data('url');
+            $('#dplayer').addClass('dplayer-loading');
             $(".video-parts-wrapper>span.active>i").hide();
             $(".video-parts-wrapper>span.active").removeClass("active");
             $(identifier).addClass('active');
             $(".video-parts-wrapper>span.active>i").show();
-            
-            $.ajax({
-               type:'GET',
-               url:'/getSource',
-               data: {url : link},
-               success:function(source) {
-                  const dp = new DPlayer({
-                    container: document.getElementById('dplayer'),
-                    autoplay: true,
-                    theme: '#d84b6b',
-                    preload: 'auto',
-                    video: {
-                      url: source,
-                    },
-                  });
-               }
-            });
+
+            if (is_mobile) {
+              $.ajax({
+                 type:'GET',
+                 url:'/getSource',
+                 data: {url : link},
+                 success:function(source) {
+                    const dp = new DPlayer({
+                      container: document.getElementById('dplayer'),
+                      autoplay: true,
+                      theme: '#d84b6b',
+                      preload: 'auto',
+                      video: {
+                        url: source,
+                      },
+                    });
+                 }
+              });
+
+            } else {
+              $('.aspect-ratio').html('<iframe src="' + link + '" style="border: 0; overflow: hidden;" allow="autoplay" allowfullscreen></iframe>');
+
+            }
           }
         </script>
 

@@ -170,8 +170,7 @@ class Video extends Model
 
     public function outsource()
     {
-        $url = $this->sd;
-        return $url;
+        return $this->sd()[0];
     }
 
     public function sd()
