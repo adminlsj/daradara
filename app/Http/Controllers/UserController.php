@@ -152,6 +152,8 @@ class UserController extends Controller
             if ($url != "") {            
                 $video = Video::create([
                     'id' => Video::orderBy('id', 'desc')->first()->id + 1,
+                    'user_id' => $user->id,
+                    'playlist_id' => request('channel'),
                     'title' => request('title'),
                     'caption' => request('description'),
                     'hd' => request('link'),
@@ -163,7 +165,7 @@ class UserController extends Controller
                     'tags' => request('tags'),
                     'views' => 0,
                     'duration' => request('duration') == null ? 2000 : request('duration'),
-                    'outsource' => false,
+                    'outsource' => true,
                     'created_at' => Carbon::createFromFormat('Y-m-d\TH:i:s', request('created_at'))->format('Y-m-d H:i:s'),
                     'uploaded_at' => Carbon::createFromFormat('Y-m-d\TH:i:s', request('uploaded_at'))->format('Y-m-d H:i:s'),
                 ]);

@@ -11,7 +11,7 @@ use App\Comment;
 class Video extends Model
 {
 	protected $fillable = [
-        'id', 'title', 'caption', 'genre', 'category', 'season', 'tags', 'hd', 'sd', 'imgur', 'views', 'duration', 'outsource', 'created_at', 'uploaded_at',
+        'id', 'user_id', 'playlist_id', 'title', 'caption', 'genre', 'category', 'season', 'tags', 'hd', 'sd', 'imgur', 'views', 'duration', 'outsource', 'created_at', 'uploaded_at',
     ];
 
     public function user()
@@ -161,8 +161,8 @@ class Video extends Model
         $sd = $this->sd()[0];
         if (strpos($sd, 'https://www.instagram.com/p/') !== false) {
             return Video::getSourceIG($sd);
-        } elseif (strpos($sd, 'https://api.bilibili.com/') !== false) {
-            return Video::getSourceBB($sd);
+        } elseif (strpos($sd, 'player.bilibili.com') !== false) {
+            return Video::getMobileBB($sd);
         } else {
             return $sd;
         }
@@ -171,30 +171,15 @@ class Video extends Model
     public function outsource()
     {
         $url = $this->sd;
-        if (strpos($url, "api.bilibili.com") !== FALSE) {
-            $avid = '';
-            $bvid = '';
-            $cid = '';
-            $page = 1;
-            if (strpos($url, "avid=") !== FALSE) { 
-                $avid = $this->get_string_between($url, 'avid=', '&');
-            }
-            if (strpos($url, "bvid=") !== FALSE) { 
-                $bvid = $this->get_string_between($url, 'bvid=', '&');
-            }
-            if (strpos($url, "cid=") !== FALSE) { 
-                $cid = $this->get_string_between($url, 'cid=', '&');
-            }
-            if (($pos = strpos($this->hd, "?p=")) !== FALSE) { 
-                $page = substr($this->hd, $pos + 3);
-            }
-            return '//player.bilibili.com/player.html?aid='.$avid.'&bvid='.$bvid.'&cid='.$cid.'&page='.$page.'&danmaku=0&qn=0&type=mp4&otype=json&fnver=0&fnval=1&platform=html5&html5=1&high_quality=1';
-        } else {
-            return $url;
-        }
+        return $url;
     }
 
     public function sd()
+    {
+        return explode(" ",$this->sd);
+    }
+
+    public function hd()
     {
         return explode(" ",$this->sd);
     }
@@ -210,6 +195,51 @@ class Video extends Model
             $data = json_decode(curl_exec($curl_connection), true);
             curl_close($curl_connection);
             return $data['graphql']['shortcode_media']['video_url'];
+        } catch(Exception $e) {
+            return $e->getMessage();
+        }
+    }
+
+    public static function getMobileBB($url)
+    {
+        $avid = '';
+        $bvid = '';
+        $cid = '';
+        if (strpos($url, "aid=") !== FALSE) { 
+            $avid = Video::get_string_between($url, 'aid=', '&');
+        }
+        if (strpos($url, "bvid=") !== FALSE) { 
+            $bvid = Video::get_string_between($url, 'bvid=', '&');
+        }
+        if (strpos($url, "cid=") !== FALSE) { 
+            $cid = Video::get_string_between($url, 'cid=', '&');
+        }
+        $url = "https://api.bilibili.com/x/player/playurl?avid=".$avid."&bvid=".$bvid."&cid=".$cid."&qn=0&type=mp4&otype=json&fnver=0&fnval=1&platform=html5&html5=1&high_quality=1";
+
+        try {
+            $curl_connection = curl_init($url);
+            curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+            curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($curl_connection, CURLOPT_HTTPHEADER, [
+                'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:56.0) Gecko/20100101 Firefox/56.0',
+                'Host: api.bilibili.com',
+                'Cookie: SESSDATA=1feadc09%2C1582358038%2Ca8f2f511;'
+            ]);
+            $data = json_decode(curl_exec($curl_connection), true);
+            curl_close($curl_connection);
+
+            if (array_key_exists('data', $data) && array_key_exists('durl', $data['data'])) {
+                $durl = $data['data']['durl'][0];
+                $url = $durl['url'];
+
+                $start = strpos($url, 'http');
+                $end = strpos($url, 'upgcxcode/');
+                $url = substr_replace($url, 'https://cn-hk-eq-bcache-01.bilivideo.com/upgcxcode/', $start, $end - $start + 10);
+                return $url;
+            } else {
+                return 'error';
+            }
         } catch(Exception $e) {
             return $e->getMessage();
         }
@@ -244,11 +274,6 @@ class Video extends Model
         } catch(Exception $e) {
             return $e->getMessage();
         }
-
-        /*$url = 'https://www.bilibili.com/video/av84400542';
-        $cmd = ' youtube-dl --proxy 184.168.131.241 -g ' . escapeshellarg($url);
-        return exec($cmd, $outputsd);
-        return $results = print_r($outputsd[0], true);*/
     }
 
     public static function getLinkBB(String $url, Bool $outsource)
@@ -296,7 +321,7 @@ class Video extends Model
         return $weekMap[$day];
     }
 
-    function get_string_between($string, $start, $end){
+    static function get_string_between($string, $start, $end){
         $string = ' ' . $string;
         $ini = strpos($string, $start);
         if ($ini == 0) return '';

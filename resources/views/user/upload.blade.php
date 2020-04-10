@@ -66,12 +66,12 @@
 		          <div class="form-group" style="margin-top: 20px;">
 				    <select class="form-control" name="channel" id="channel" required>
 				      @if ($watches->first())
-					      <option value="">選擇所屬頻道...</option>
+					      <option value="">選擇播放清單...</option>
 					      @foreach ($watches as $watch)
-					      	 <option value="{{ $watch->title }}">{{ $watch->title }}</option>
+					      	 <option value="{{ $watch->id }}">{{ $watch->title }}</option>
 					      @endforeach
 					  @else
-						  <option value="">請先創建頻道...</option>
+						  <option value="">請先建立播放清單...</option>
 				      @endif
 				    </select>
 				  </div>
@@ -87,15 +87,12 @@
 		          </div>
 
 		          <div style="margin-right:100px; position: relative;" class="form-group">
-		            <input type="text" class="form-control" name="link" id="link" placeholder="影片鏈結 (e.g. bilibili / weibo / 直鏈)" required>
+		            <input type="text" class="form-control" name="link" id="link" placeholder="影片崁入鏈結（查看教學：https://tutorialehtml.com/en/html-tutorial-embed-video/）" required>
 		            <div id="test-play-btn" style="width: 102px; position: absolute; top: 0px; right:-100px; background-color: gray; color: white; padding: 6px 0px 6px 20px; cursor: pointer;">測試播放</div>
 		          </div>
 
-		          <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/dplayer/dist/DPlayer.min.css">
-				  <div id="dplayer" style="margin-bottom: 20px; max-width: 400px"></div>
-				  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-				  <script src="https://cdn.jsdelivr.net/npm/flv.js/dist/flv.min.js"></script>
-				  <script src="https://cdn.jsdelivr.net/npm/dplayer/dist/DPlayer.min.js"></script>
+				  <div id="test-player" class="aspect-ratio" style="background-color: black; background-image: url('https://i.imgur.com/TcZjkZa.gif'); background-position: center; background-repeat: no-repeat; background-size: 50px; margin-bottom: 25px; display: none;">
+				  </div>
 
 		          <div class="form-group">
 				    <h4 style="color: #3F3F3F; margin-bottom: 0px; font-size: 1.7em; padding-bottom: 10px" class="modal-title" id="uploadVideoModalLabel">上傳縮圖</h4>

@@ -30,8 +30,6 @@ class VideoController extends Controller
     }
 
     public function home(Request $request){
-        $selected = $this->trendingWatch();
-
         $subscribes = [];
         if (auth()->check()) {
             $subscriptions = auth()->user()->subscribes();
@@ -41,7 +39,7 @@ class VideoController extends Controller
                     if ($first) {
                         if ($subscribe->type == 'watch') {
                             $watch = Watch::where('title', $subscribe->tag)->first();
-                            $subscribes = Video::where('category', $watch->category);
+                            $subscribes = Video::where('playlist_id', $watch->id);
                         } else {
                             $subscribes = Video::where('tags', 'LIKE', '%'.$subscribe->tag.'%');
                         }
@@ -49,7 +47,7 @@ class VideoController extends Controller
                     } else {
                         if ($subscribe->type == 'watch') {
                             $watch = Watch::where('title', $subscribe->tag)->first();
-                            $subscribes = $subscribes->orWhere('category', $watch->category);
+                            $subscribes = $subscribes->orWhere('playlist_id', $watch->id);
                         } else {
                             $subscribes = $subscribes->orWhere('tags', 'LIKE', '%'.$subscribe->tag.'%');
                         }
@@ -60,14 +58,8 @@ class VideoController extends Controller
             }
         }
 
-        $trendings = Video::where('genre', 'variety')->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(4))->orWhere('genre', 'drama')->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->inRandomOrder()->limit(16)->get();
-        $newest = Video::where('genre', 'variety')->orWhere('genre', 'drama')->orderBy('uploaded_at', 'desc')->limit(16)->get();
-        $variety = Video::where('genre', 'variety')
-                     ->whereDate('uploaded_at', '>=', Carbon::now()->subMonth())->inRandomOrder()->limit(16)->get();
-        $drama = Video::where('genre', 'drama')
-                     ->whereDate('uploaded_at', '>=', Carbon::now()->subWeek())->inRandomOrder()->limit(16)->get();
-        $anime = Video::where('genre', 'anime')
-                     ->whereDate('uploaded_at', '>=', Carbon::now()->subWeek())->inRandomOrder()->limit(16)->get();
+        $trendings = Video::whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(2))->inRandomOrder()->limit(16)->get();
+        $newest = Video::orderBy('uploaded_at', 'desc')->limit(16)->get();
         $load_more = Video::where('genre', 'variety')->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->orWhere('genre', 'drama')->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(2))->orderBy('views', 'desc')->paginate(12);
 
         $html = '';
@@ -80,7 +72,7 @@ class VideoController extends Controller
 
         $is_mobile = $this->checkMobile();
 
-        return view('video.home', compact('selected', 'trendings', 'newest', 'variety', 'drama', 'anime', 'load_more', 'is_mobile', 'subscribes'));
+        return view('video.home', compact('trendings', 'newest', 'load_more', 'is_mobile', 'subscribes'));
     }
 
     public function explore(Request $request){
@@ -90,7 +82,7 @@ class VideoController extends Controller
                 break;
 
             case 'newest':
-                $videos = Video::where('genre', 'variety')->orWhere('genre', 'drama')->whereDate('uploaded_at', '>=', Carbon::now()->subMonths(2))->orderBy('uploaded_at', 'desc');
+                $videos = Video::whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(2))->orderBy('uploaded_at', 'desc');
                 break;
             
             default:
@@ -202,39 +194,30 @@ class VideoController extends Controller
 
                 $is_mobile = $this->checkMobile();
 
-                if ($video->category == 'video') {
-                    $is_program = false;
-                    return view('video.showWatch', compact('video', 'related', 'current', 'is_program', 'is_mobile'));
+                $query = Video::where('playlist_id', $video->playlist_id)->orderBy('created_at', 'asc')->pluck('id')->toArray();
+                $now = array_search($video->id, $query);
+                while(key($query) !== null && key($query) !== $now) next($query);
 
+                $prev = 0; $next = 0;
+                if ($this->has_prev($query)) {
+                    $prev = prev($query);
+                    next($query);
                 } else {
-
-                    $query = Video::where('category', $video->category)->where('season', $video->season)->orderBy('created_at', 'asc')->pluck('id')->toArray();
-                    $now = array_search($video->id, $query);
-                    while(key($query) !== null && key($query) !== $now) next($query);
-
-                    $prev = 0; $next = 0;
-                    if ($this->has_prev($query)) {
-                        $prev = prev($query);
-                        next($query);
-                    } else {
-                        $prev = false;
-                    }
-                    if ($this->has_next($query)) {
-                        $next = next($query);
-                    } else {
-                        $next = false;
-                    }
-
-                    $dropdown = Watch::where('category', $video->category)->orderBy('created_at', 'asc')->get();
-
-                    $watch = Watch::where('category', $video->category)->where('season', $video->season)->first();
-                    $genre = $video->genre;
-                    $is_program = true;
-
-                    $is_subscribed = $this->is_subscribed($watch->title);
-
-                    return view('video.showWatch', compact('genre', 'video', 'related', 'prev', 'next', 'dropdown', 'watch', 'current', 'is_program', 'is_subscribed', 'is_mobile'));
+                    $prev = false;
                 }
+                if ($this->has_next($query)) {
+                    $next = next($query);
+                } else {
+                    $next = false;
+                }
+
+                $watch = Watch::find($video->playlist_id);
+                $genre = $video->genre;
+                $is_program = true;
+
+                $is_subscribed = $this->is_subscribed($watch->title);
+
+                return view('video.showWatch', compact('genre', 'video', 'related', 'prev', 'next', 'watch', 'current', 'is_program', 'is_subscribed', 'is_mobile'));
             }
         }
     }

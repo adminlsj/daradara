@@ -387,22 +387,34 @@ class HomeController extends Controller
     public function tempMethods()
     {
         if (Auth::check() && Auth::user()->email == 'laughseejapan@gmail.com') {
-            $videos = Video::where('category', 'monday')->get();
-            foreach ($videos as $video) {
-                if (strpos($video->title, "完整版") !== FALSE) { 
-                    $video->title = str_replace("完整版", "", $video->title);
-                    $video->save();
-                }
-            }
-
             $videos = Video::all();
             foreach ($videos as $video) {
-                $video->views = 0;
-                if ($video->category != 'video') {
-                    $video->user_id = Watch::where('category', $video->category)->first()->user()->id;
-                    $video->playlist_id = Watch::where('category', $video->category)->first()->id;
+                $loop = 0;
+                foreach ($video->sd() as $url) {
+                    if (strpos($url, "api.bilibili.com") !== FALSE) {
+                        $avid = '';
+                        $bvid = '';
+                        $cid = '';
+                        $page = 1;
+                        if (strpos($url, "avid=") !== FALSE) { 
+                            $avid = $this->get_string_between($url, 'avid=', '&');
+                        }
+                        if (strpos($url, "bvid=") !== FALSE) { 
+                            $bvid = $this->get_string_between($url, 'bvid=', '&');
+                        }
+                        if (strpos($url, "cid=") !== FALSE) { 
+                            $cid = $this->get_string_between($url, 'cid=', '&');
+                        }
+                        if (($pos = strpos($video->hd, "?p=")) !== FALSE) { 
+                            $page = substr($video->hd, $pos + 3);
+                        }
+
+                        $video->sd = str_replace($url, '//player.bilibili.com/player.html?aid='.$avid.'&bvid='.$bvid.'&cid='.$cid.'&page='.$page.'&danmaku=0&qn=0&type=mp4&otype=json&fnver=0&fnval=1&platform=html5&html5=1&high_quality=1', $video->sd);
+                        $video->outsource = true;
+                        $video->save();
+                    }
+                    $loop++;
                 }
-                $video->save();
             }
         }
         return redirect()->action('VideoController@home');

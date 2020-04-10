@@ -90,6 +90,11 @@ $('.watch-slider .slider-scroll-left').click(function() {
 })
 
 $(document).on("click", "#test-play-btn", function(e) {
+    $('#test-player').html('<iframe src="' + $('#link').val() + '" style="border: 0; overflow: hidden;" allow="autoplay" allowfullscreen></iframe>');
+    $('#test-player').css('display', 'block');
+});
+
+/*$(document).on("click", "#test-play-btn", function(e) {
     e.preventDefault(e);
 
     $.ajax({
@@ -118,7 +123,7 @@ $(document).on("click", "#test-play-btn", function(e) {
          $("#meta").html('error');
        }
     });
-});
+});*/
 
 $('[id=toggleSearchBar]').click(function(e) {
     var x = document.getElementById("searchBar");

@@ -1,9 +1,4 @@
-@if ($video->outsource /*|| !$is_mobile && strpos($video->sd, "api.bilibili.com") !== FALSE*/)
-  <div class="aspect-ratio" style="background-color: black; background-image: url('https://i.imgur.com/o2hJHsfl.png'); background-position: center; background-repeat: no-repeat; background-size: 30px;">
-      <iframe src="{!! $video->outsource() !!}" style="border: 0; overflow: hidden;" allow="autoplay" allowfullscreen></iframe>
-  </div>
-
-@else
+@if (!$video->outsource || $is_mobile && strpos($video->sd, "player.bilibili.com") !== FALSE)
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/dplayer/dist/DPlayer.min.css">
   <button id="unmute-btn" style="padding: 5px; background-color: #e5e5e5; color: black; font-weight: 400; border: none; outline:0; margin-top: 15px; margin-left:15px; position: absolute; z-index: 99; border-radius: 2px;" class="hidden-md hidden-lg">
     <i style="vertical-align:middle;" class="material-icons no-select">volume_off</i>
@@ -32,5 +27,10 @@
       dp.video.muted = true;
     }
   </script>
+
+@else
+  <div class="aspect-ratio" style="background-color: black; background-image: url('https://i.imgur.com/TcZjkZa.gif'); background-position: center; background-repeat: no-repeat; background-size: 50px;">
+      <iframe src="{!! $video->outsource() !!}" style="border: 0; overflow: hidden;" allow="autoplay" allowfullscreen></iframe>
+  </div>
 
 @endif
