@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('nav')
-	@include('layouts.nav-main', ['logoImage' => 'https://i.imgur.com/M8tqx5K.png', 'backgroundColor' => 'white', 'itemsColor' => "gray", 'menuBtnColor' => '#595959'])
+	@include('layouts.nav-main-original', ['theme' => 'white'])
 @endsection
 
 @section('content')

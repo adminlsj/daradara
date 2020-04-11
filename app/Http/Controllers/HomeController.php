@@ -208,6 +208,7 @@ class HomeController extends Controller
         for ($i = 0; $i < count($videos); $i++) { 
             $videos[$i]->sd = $links[$i];
             $videos[$i]->hd = $links[$i];
+            $videos[$i]->outsource = true;
             $videos[$i]->save();
         }
 
