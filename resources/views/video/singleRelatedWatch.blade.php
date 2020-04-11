@@ -1,7 +1,6 @@
 <a href="{{ route('video.watch') }}?v={{ $video->id }}" class="row no-gutter">
   <div style="padding-right: 4px; position: relative;" class="col-xs-6 col-sm-6 col-md-6">
     <img class="lazy" style="width: 100%; height: 100%;" src="{{ $video->imgur16by9() }}" data-src="{{ $video->imgurL() }}" data-srcset="{{ $video->imgurL() }}" alt="{{ $video->title }}">
-    <span style="position: absolute; bottom:6px; right: 9px; background-color: rgba(0,0,0,0.8); color: white; padding: 0px 5px 1px 5px; opacity: 0.9; font-size: 0.85em; border-radius: 2px; font-weight: 500">{{ $video->duration() }}</span>
   </div>
   <div style="padding-left: 4px;" class="col-xs-6 col-sm-6 col-md-6 related-watch-title">
     <h4 style="margin-top:0px; margin-bottom: 0px; line-height: 19px; font-size: 1.05em; color:white;">{{ $video->title() }}</h4>
