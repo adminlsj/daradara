@@ -16,6 +16,7 @@ use Mail;
 use Auth;
 use App\Mail\UserStartUpload;
 use Redirect;
+use Illuminate\Support\Facades\Input;
 use Carbon\Carbon;
 
 class UserController extends Controller
@@ -132,9 +133,11 @@ class UserController extends Controller
             return Redirect::back()->withErrors('已成功建立播放列表《'.$request->title.'》');
 
         } elseif ($request->type == 'video') {
-
+            ini_set('post_max_size', '100M'); 
+            ini_set('upload_max_filesize', '100M'); 
+            ini_set('memory_limit', '1000M'); 
+            ini_set('max_execution_time', '1920');
             $original = request()->file('image');
-            $extension = $original->getClientOriginalExtension();
             $image = Image::make($original);
             if ($image->height() <= $image->width()) {
                 $image = $image->crop($image->height(), $image->height())->resize(2880, 1620);
