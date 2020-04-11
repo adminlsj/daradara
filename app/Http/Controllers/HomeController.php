@@ -54,7 +54,7 @@ class HomeController extends Controller
             $reason = $reason.'：'.request('others-text');
         }
         $video = Video::find(request('video-id'));
-        Mail::to('laughseejapan@gmail.com')->send(new UserReport($reason, $video));
+        Mail::to(['acura1989akc@gmail.com', 'laughseejapan@gmail.com'])->send(new UserReport($reason, $video));
         return Redirect::back()->withErrors('感謝您向我們提供意見或回報任何錯誤。');
     }
 

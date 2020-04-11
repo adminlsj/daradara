@@ -60,7 +60,7 @@ class VideoController extends Controller
 
         $trendings = Video::whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(2))->inRandomOrder()->limit(16)->get();
         $newest = Video::orderBy('uploaded_at', 'desc')->limit(16)->get();
-        $load_more = Video::where('genre', 'variety')->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->orWhere('genre', 'drama')->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(2))->orderBy('views', 'desc')->paginate(12);
+        $load_more = Video::whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(2))->orderBy('views', 'desc')->paginate(12);
 
         $html = '';
         foreach ($load_more as $video) {
@@ -236,16 +236,9 @@ class VideoController extends Controller
         if (auth()->check()) {
             $subscribes = auth()->user()->subscribes();
             if ($subscribes->isEmpty()) {
-                $selected = $this->trendingWatch();
-                $trendings = Video::where('genre', 'variety')->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(4))->orWhere('genre', 'drama')->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->inRandomOrder()->limit(8)->get();
-                $newest = Video::where('genre', 'variety')->orWhere('genre', 'drama')->orderBy('uploaded_at', 'desc')->limit(8)->get();
-                $variety = Video::where('genre', 'variety')
-                             ->whereDate('uploaded_at', '>=', Carbon::now()->subMonth())->inRandomOrder()->limit(8)->get();
-                $drama = Video::where('genre', 'drama')
-                             ->whereDate('uploaded_at', '>=', Carbon::now()->subWeek())->inRandomOrder()->limit(8)->get();
-                $anime = Video::where('genre', 'anime')
-                             ->whereDate('uploaded_at', '>=', Carbon::now()->subWeek())->inRandomOrder()->limit(8)->get();
-                $load_more = Video::where('genre', 'variety')->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(4))->orWhere('genre', 'drama')->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->orderBy('views', 'desc')->paginate(8);
+                $trendings = Video::whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(2))->inRandomOrder()->limit(16)->get();
+                $newest = Video::orderBy('uploaded_at', 'desc')->limit(16)->get();
+                $load_more = Video::whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(2))->orderBy('views', 'desc')->paginate(12);
 
                 $html = '';
                 foreach ($load_more as $video) {
@@ -257,7 +250,7 @@ class VideoController extends Controller
 
                 $is_mobile = $this->checkMobile();
 
-                return view('video.subscribeIndexEmpty', compact('selected', 'trendings', 'newest', 'variety', 'drama', 'anime', 'load_more', 'is_mobile'));
+                return view('video.subscribeIndexEmpty', compact('trendings', 'newest', 'load_more', 'is_mobile'));
             }
 
             $videos = [];

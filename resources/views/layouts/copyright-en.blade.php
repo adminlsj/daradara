@@ -29,6 +29,14 @@
 
 			<p>The fastest and simplest way to submit a copyright takedown notice is through our webform. We recommend using a computer for the easiest method. We will also accept free-form copyright infringement notifications, submitted by email, fax, and mail.</p>
 
+			<p style="white-space: pre-line">LaughSeeJapan DMCA Designated Agent contact information:
+Email: acura1989akc@gmail.com
+Address:
+24 Kendrick street
+Paramus,  NJ 07652
+USA
+			</p>
+
 			<p>The name you enter as copyright owner will be published on LaughSeeJapan in place of the turned off content. If you can give us a valid legal alternative, such as a company name or the name of an authorized representative, we'll review and apply it if appropriate. The name will become part of the public record of your request, along with your description of the work(s) allegedly infringed. All other information, including your full legal name and email, are part of the full takedown notice, which may be given to the uploader.</p>
 
 			<p>If you choose to submit a copyright takedown request, remember that you're starting a legal process.</p>
