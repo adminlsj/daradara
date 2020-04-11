@@ -16,7 +16,6 @@ use Mail;
 use Auth;
 use App\Mail\UserStartUpload;
 use Redirect;
-use Illuminate\Support\Facades\Input;
 use Carbon\Carbon;
 
 class UserController extends Controller
@@ -133,17 +132,9 @@ class UserController extends Controller
             return Redirect::back()->withErrors('已成功建立播放列表《'.$request->title.'》');
 
         } elseif ($request->type == 'video') {
-            ini_set('post_max_size', '100M'); 
-            ini_set('upload_max_filesize', '100M'); 
-            ini_set('memory_limit', '1000M'); 
-            ini_set('max_execution_time', '1920');
             $original = request()->file('image');
             $image = Image::make($original);
-            if ($image->height() <= $image->width()) {
-                $image = $image->crop($image->height(), $image->height())->resize(2880, 1620);
-            } else {
-                $image = $image->crop($image->width(), $image->width())->resize(2880, 1620);
-            }
+            $image = $image->fit(2880, 1620);
             $image = $image->stream();
             $pvars = array('image' => base64_encode($image));
 
@@ -159,7 +150,7 @@ class UserController extends Controller
             $pms = json_decode($out, true);
             $url = $pms['data']['link'];
 
-            if ($url != "") {            
+            if ($url != "") {
                 $video = Video::create([
                     'id' => Video::orderBy('id', 'desc')->first()->id + 1,
                     'user_id' => $user->id,
@@ -172,18 +163,13 @@ class UserController extends Controller
                     'genre' => '',
                     'category' => '',
                     'season' => '',
-                    'tags' => request('tags'),
+                    'tags' => implode(' ', preg_split('/\s+/', request('tags'))),
                     'views' => 0,
                     'duration' => request('duration') == null ? 2000 : request('duration'),
                     'outsource' => true,
                     'created_at' => Carbon::createFromFormat('Y-m-d\TH:i:s', request('created_at'))->format('Y-m-d H:i:s'),
                     'uploaded_at' => Carbon::createFromFormat('Y-m-d\TH:i:s', request('uploaded_at'))->format('Y-m-d H:i:s'),
                 ]);
-
-                foreach ($video->sd() as $sd) {
-                    $video->sd = str_replace($sd, Video::getLinkBB($sd, $video->outsource), $video->sd);
-                    $video->save();
-                }
 
                 /*$users = [];
                 $userArray = [];

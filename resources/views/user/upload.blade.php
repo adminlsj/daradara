@@ -91,7 +91,7 @@
 				  </div>
 
 		          <div class="form-group">
-				    <h4 style="color: #3F3F3F; margin-bottom: 0px; font-size: 1.7em; padding-bottom: 10px" class="modal-title" id="uploadVideoModalLabel">上傳縮圖</h4>
+				    <h4 style="color: #3F3F3F; margin-bottom: 0px; font-size: 1.7em; padding-bottom: 10px" class="modal-title" id="uploadVideoModalLabel">上傳縮圖&nbsp;<small>(< 2MB)</small></h4>
 					<input style="font-size:1em" type="file" name="image" id="image" accept="image/*" required>
 				  </div>
 
