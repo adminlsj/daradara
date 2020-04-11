@@ -54,13 +54,13 @@ class HomeController extends Controller
             $reason = $reason.'：'.request('others-text');
         }
         $video = Video::find(request('video-id'));
-        Mail::to(['acura1989akc@gmail.com', 'laughseejapan@gmail.com'])->send(new UserReport($reason, $video));
+        Mail::to('laughseejapan@gmail.com')->send(new UserReport($reason, $video));
         return Redirect::back()->withErrors('感謝您向我們提供意見或回報任何錯誤。');
     }
 
     public function copyrightReport(Request $request)
     {
-        Mail::to('laughseejapan@gmail.com')->send(new CopyrightReport($request));
+        Mail::to(['acura1989akc@gmail.com', 'laughseejapan@gmail.com'])->send(new CopyrightReport($request));
         return Redirect::back()->withErrors('Your complaint has been submitted successfully. We will handle accordingly and email you the latest progress.');
     }
 
