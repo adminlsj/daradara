@@ -19,7 +19,7 @@
             {{ csrf_field() }}
             <button style="background-color: inherit !important; color: #d84b6b" class="btn btn-info" type="submit">登出</button>
         </form>
-				<a style="width:auto; height: auto; font-size: 1em; margin-top: 9px; margin-right: 5px;" class="btn btn-info pull-right" data-toggle="modal" data-target="#uploadVideoModal">上傳影片</a>
+				<a style="width:auto; height: auto; font-size: 1em; margin-top: 9px; margin-right: 5px; color: white" class="btn btn-info pull-right" href="{{ route('user.userEditUpload', $user) }}">上傳影片</a>
 			@endif
 			<div style="height: 70px; margin-left: 80px">
 				<div style="font-size: 1.5em">{{ $user->name }}</div>
@@ -58,7 +58,7 @@
           @foreach ($watches as $watch)
             <div class="col-xs-6 col-sm-3 col-md-3 hover-opacity load-more-wrapper">
                 <a style="text-decoration: none; color: black" href="{{ route('video.playlist') }}?list={{ $watch->id }}">
-                <img style="width: 100%; height: 100%;" src="{{ $watch->videos()->first() ? $watch->videos()->last()->imgurH() : '' }}" alt="{{ $watch->title }}">
+                <img style="width: 100%; height: 100%;" src="{{ $watch->videos()->first() ? $watch->videos()->last()->imgurH() : 'https://i.imgur.com/JMcgEkPl.jpg' }}" alt="{{ $watch->title }}">
 
                 <div class="hover-underline">
                     <h4 style="font-size: 0.95em; margin-top: 7px; color: #222222;" class="text-ellipsis">{{ $watch->title }}【{{ $watch->videos()->count()}} 部影片】</h4>
@@ -80,31 +80,6 @@
       </div>
     </div>
 	</div>
-</div>
-
-<div class="modal" id="uploadVideoModal" tabindex="-1" role="dialog" aria-labelledby="uploadVideoModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-
-    <form action="{{ route('email.userStartUpload') }}" method="GET">
-
-      <div style="padding: 15px;" class="modal-content">
-        <div style="border: 0px; position: relative;" class="modal-header">
-          <h4 style="color: gray;font-weight: 100; transform: rotate(45deg);position: absolute; font-size: 3em; top: -10px; cursor: pointer;" class="no-select" data-dismiss="modal">+</h4>
-          <h4 style="color: #3F3F3F; margin-bottom: 0px; margin-top: 40px; font-size: 1.7em" class="modal-title" id="uploadVideoModalLabel">上傳影片</h4>
-        </div>
-        <div style="color: #3F3F3F; margin-top: -15px; font-weight: 500; font-size: 1.1em" class="modal-body">
-          <div>將影片提交至 LaughSeeJapan 即代表您瞭解並同意 LaughSeeJapan 的《<a href="/terms">服務條款</a>》和《<a href="/policies">社群規範</a>》。</div>
-          <div style="margin-top: 15px;">請勿侵犯其他使用者的版權或隱私權。 <a href="/copyright">瞭解詳情</a></div>
-
-          <div style="text-align: center;">
-            <button style="height: 45px; margin-top: 20px; font-size: 1em; margin-bottom: 10px; width: auto;" type="submit" class="btn btn-info" name="submit">開始上傳影片</button>
-          </div>
-        </div>
-      </div>
-
-    </form>
-
-  </div>
 </div>
 
 <script>

@@ -64,22 +64,18 @@
 		          <div>請填寫上傳影片的基本資料：</div>
 
 		          <div class="form-group" style="margin-top: 20px;">
-				    <select class="form-control" name="channel" id="channel" required>
-				      @if ($watches->first())
-					      <option value="">選擇播放清單...</option>
-					      @foreach ($watches as $watch)
-					      	 <option value="{{ $watch->id }}">{{ $watch->title }}</option>
-					      @endforeach
-					  @else
-						  <option value="">請先建立播放清單...</option>
-				      @endif
+				    <select class="form-control" name="channel" id="channel">
+					    <option value="">選擇播放清單...</option>
+					    @foreach ($watches as $watch)
+					       <option value="{{ $watch->id }}">{{ $watch->title }}</option>
+					    @endforeach
 				    </select>
 				  </div>
 		          <div class="form-group">
 		            <input type="text" class="form-control" name="title" id="title" placeholder="影片標題" required>
 		          </div>
 		          <div class="form-group">
-		            <textarea class="form-control" name="description" id="description" rows="3" placeholder="簡介" required></textarea>
+		            <textarea class="form-control" name="description" id="description" rows="3" placeholder="簡介"></textarea>
 		          </div>
 
 		          <div class="form-group">

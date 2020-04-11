@@ -90,7 +90,22 @@ $('.watch-slider .slider-scroll-left').click(function() {
 })
 
 $(document).on("click", "#test-play-btn", function(e) {
-    $('#test-player').html('<iframe src="' + $('#link').val() + '" style="border: 0; overflow: hidden;" allow="autoplay" allowfullscreen></iframe>');
+    var link = $('#link').val();
+    if (link.indexOf("src='") >= 0) {
+      link = link.split("src='")[1];
+      link = link.substring(
+          0, 
+          link.indexOf("'")
+      );
+    } else if (link.indexOf('src="') >= 0) {
+      link = link.split('src="')[1];
+      link = link.substring(
+          0, 
+          link.indexOf('"')
+      );
+    }
+    $('#link').val(link);
+    $('#test-player').html('<iframe src="' + link + '" style="border: 0; overflow: hidden;" allow="autoplay" allowfullscreen></iframe>');
     $('#test-player').css('display', 'block');
 });
 

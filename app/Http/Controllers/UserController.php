@@ -132,16 +132,22 @@ class UserController extends Controller
             return Redirect::back()->withErrors('已成功建立播放列表《'.$request->title.'》');
 
         } elseif ($request->type == 'video') {
-            $img = $_FILES['image'];
-            $filename = $img['tmp_name'];
-            $client_id = "932b67e13e4f069";
-            $handle = fopen($filename, "r");
-            $data = fread($handle, filesize($filename));
-            $pvars = array('image' => base64_encode($data));
+
+            $original = request()->file('image');
+            $extension = $original->getClientOriginalExtension();
+            $image = Image::make($original);
+            if ($image->height() <= $image->width()) {
+                $image = $image->crop($image->height(), $image->height())->resize(2880, 1620);
+            } else {
+                $image = $image->crop($image->width(), $image->width())->resize(2880, 1620);
+            }
+            $image = $image->stream();
+            $pvars = array('image' => base64_encode($image));
+
             $curl = curl_init();
             curl_setopt($curl, CURLOPT_URL, 'https://api.imgur.com/3/image.json');
             curl_setopt($curl, CURLOPT_TIMEOUT, 30);
-            curl_setopt($curl, CURLOPT_HTTPHEADER, array('Authorization: Client-ID ' . $client_id));
+            curl_setopt($curl, CURLOPT_HTTPHEADER, array('Authorization: Client-ID ' . '932b67e13e4f069'));
             curl_setopt($curl, CURLOPT_POST, 1);
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
             curl_setopt($curl, CURLOPT_POSTFIELDS, $pvars);
@@ -149,6 +155,7 @@ class UserController extends Controller
             curl_close ($curl);
             $pms = json_decode($out, true);
             $url = $pms['data']['link'];
+
             if ($url != "") {            
                 $video = Video::create([
                     'id' => Video::orderBy('id', 'desc')->first()->id + 1,

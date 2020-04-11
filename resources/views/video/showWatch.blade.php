@@ -26,9 +26,11 @@
 						<div style="padding: 10px 15px; background-color: #595959; height: 70px;">
 							<a href="{{ route('user.show', [$video->user()]) }}"><img class="lazy" style="float:left; border-radius: 50%; width: 50px; height: 50px;" src="{{ $video->user()->avatarCircleB() }}" data-src="{{ $video->user()->avatar == null ? $video->user()->avatarDefault() : $video->user()->avatar->filename }}" data-srcset="{{ $video->user()->avatar == null ? $video->user()->avatarDefault() : $video->user()->avatar->filename }}"></a>
 		    				<h5 style="margin-top: 16px; margin-left: 65px"><a style="text-decoration: none; color: white" href="{{ route('user.show', [$video->user()]) }}">{{ $video->user()->name }}</a></h5>
-		    				<div style="float: right; margin-top: -21px; width: 75px">
-			    				@include('video.intro-subscribe-wrapper', ['tag' => $video->watch()->title])
-		    				</div>
+		    				@if ($watch != null)
+		    					<div style="float: right; margin-top: -21px; width: 75px">
+				    				@include('video.intro-subscribe-wrapper', ['tag' => $video->watch()->title])
+			    				</div>
+		    				@endif
 	    				</div>
 						<div style="position: relative;" class="tab">
 							@if ($is_program)
@@ -49,27 +51,24 @@
 
 						<hr style="margin: 0px 15px 15px 15px; border-color: #595959;">
 
-						@if ($is_program)
-							<div style="padding-bottom: 7px;">
-
-								<div class="hidden-xs hidden-sm" style="margin: 15px 15px 0px 15px;">
-									<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-									<ins class="adsbygoogle"
-									     style="display:block;"
-									     data-ad-client="ca-pub-4485968980278243"
-									     data-ad-slot="8455082664"
-									     data-ad-format="auto"
-									     data-full-width-responsive="true"></ins>
-									<script>
-									     (adsbygoogle = window.adsbygoogle || []).push({});
-									</script>
-								</div>
-
-								<div id="video-playlist-wrapper">
-									<div style="text-align: center;" class="ajax-loading"><img style="width: 40px; height: auto; padding-top: 14px; padding-bottom: 28px;" src="https://i.imgur.com/TcZjkZa.gif"/></div>
-								</div>
+						<div style="padding-bottom: 7px;">
+							<div class="hidden-xs hidden-sm" style="margin: 15px 15px 0px 15px;">
+								<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+								<ins class="adsbygoogle"
+								     style="display:block;"
+								     data-ad-client="ca-pub-4485968980278243"
+								     data-ad-slot="8455082664"
+								     data-ad-format="auto"
+								     data-full-width-responsive="true"></ins>
+								<script>
+								     (adsbygoogle = window.adsbygoogle || []).push({});
+								</script>
 							</div>
-						@endif
+
+							<div id="video-playlist-wrapper">
+								<div style="text-align: center;" class="ajax-loading"><img style="width: 40px; height: auto; padding-top: 14px; padding-bottom: 28px;" src="https://i.imgur.com/TcZjkZa.gif"/></div>
+							</div>
+						</div>
 
 						@if ($is_mobile)
 							<div style="border-top: solid 1px #383838;">

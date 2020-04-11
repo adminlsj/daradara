@@ -8,8 +8,8 @@
       </a>
 
       @if (Auth::check())
-        <a id="nav-account-icon" class="pull-right hidden-xs" style="padding: 0px 0px 0px 15px;" href="{{ Auth::check() ? route('user.show', Auth::user()) : route('login')}}"><i style="font-size: 25px; vertical-align:middle; margin-bottom: -22.5px" class="material-icons">account_circle</i></a>
-        <a id="nav-account-icon" class="pull-right hidden-xs" style="padding: 0px 0px 0px 15px;" href="{{ Auth::check() ? route('user.show', Auth::user()) : route('login')}}"><i style="font-size: 25px; vertical-align:middle; margin-bottom: -22.5px" class="material-icons">video_call</i></a>
+        <a id="nav-account-icon" class="pull-right hidden-xs" style="padding: 0px 0px 0px 15px;" href="{{ route('user.show', Auth::user()) }}"><i style="font-size: 25px; vertical-align:middle; margin-bottom: -22.5px" class="material-icons">account_circle</i></a>
+        <a id="nav-account-icon" class="pull-right hidden-xs" style="padding: 0px 0px 0px 15px;" href="{{ route('user.userEditUpload', Auth::user()) }}"><i style="font-size: 25px; vertical-align:middle; margin-bottom: -22.5px" class="material-icons">video_call</i></a>
       @else
         <a class="no-select nav-item-text hidden-xs" style="color: #cf2d52; border: 1px solid #cf2d52; padding: 6px 10px; margin-top: 7px; margin-right: 15px; font-weight: 500" href="{{ route('login') }}">登入</a>
         <a class="no-select nav-item-text hidden-xs" style="color: white; background-color: #cf2d52; padding: 5px 10px; margin-top: 7px; font-weight: 500" href="{{ route('register') }}">註冊</a>
@@ -22,7 +22,7 @@
 
       <a id="nav-account-icon" class="pull-right hidden-sm hidden-md hidden-lg" style="padding: 0px 0px 0px 15px;" href="{{ Auth::check() ? route('user.show', Auth::user()) : route('login')}}"><i style="font-size: 25px; vertical-align:middle; margin-bottom: -22.5px" class="material-icons">account_circle</i></a>
       <a id="toggleSearchBar" class="pull-right hidden-sm hidden-md hidden-lg" style="padding: 0px 0px 15px 15px; cursor: pointer;"><i style="font-size: 25px; vertical-align:middle; margin-bottom: -22.5px;" class="material-icons">search</i></a>
-      <a id="nav-account-icon" class="pull-right hidden-sm hidden-md hidden-lg" style="padding: 0px 0px 0px 15px;" href="{{ Auth::check() ? route('user.show', Auth::user()) : route('login')}}"><i style="font-size: 25px; vertical-align:middle; margin-bottom: -22.5px" class="material-icons">video_call</i></a>
+      <a id="nav-account-icon" class="pull-right hidden-sm hidden-md hidden-lg" style="padding: 0px 0px 0px 15px;" href="{{ Auth::check() ? route('user.userEditUpload', Auth::user()) : route('login')}}"><i style="font-size: 25px; vertical-align:middle; margin-bottom: -22.5px" class="material-icons">video_call</i></a>
 
     </div>
   </div>
