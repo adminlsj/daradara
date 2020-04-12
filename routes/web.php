@@ -46,6 +46,7 @@ Route::get('/policies', 'HomeController@policies');
 Route::get('/copyright', 'HomeController@copyright');
 Route::get('/check', 'HomeController@check');
 Route::get('/checkSubscribes', 'HomeController@checkSubscribes');
+Route::get('/checkZeroSubscribes', 'HomeController@checkZeroSubscribes');
 Route::get('/bccToSrt', 'HomeController@bccToSrt');
 Route::get('/categoryEdit', 'HomeController@categoryEdit')->name('category.edit');
 Route::post('/categoryUpdate', 'HomeController@categoryUpdate')->name('category.update');

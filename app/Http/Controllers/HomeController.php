@@ -186,6 +186,25 @@ class HomeController extends Controller
         }
     }
 
+    public function checkZeroSubscribes(Request $request)
+    {
+        if (Auth::check() && Auth::user()->email == 'laughseejapan@gmail.com') {
+
+            $watches = Watch::all();
+            $rankings = [];
+            foreach ($watches as $watch) {
+                if ($watch->subscribes()->count() == 0) {
+                    array_push($rankings, ['tag' => $watch->title, 'count' => 0]);
+                }
+            }
+
+            return view('layouts.checkSubscribes', compact('rankings'));
+
+        } else {
+            return redirect()->action('VideoController@home');
+        }
+    }
+
     public function categoryEdit()
     {
         $is_program = false;
