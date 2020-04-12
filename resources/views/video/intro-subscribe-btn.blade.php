@@ -4,5 +4,5 @@
   <input name="subscribe-type" type="hidden" value="watch">
   <input name="subscribe-tag" type="hidden" value="{{ $tag }}">
   <input name="subscribe-user-id" type="hidden" value="{{ Auth::user()->id }}">
-  <button id="subscribe-btn" type="submit" style="background-color: crimson !important; border-color: crimson !important" class="btn btn-info">訂閱</button>
+  <button id="subscribe-btn" type="submit" style="background-color: crimson !important; border-color: crimson !important; height: 35px; line-height: 10px; width: 60px;" class="btn btn-info">訂閱</button>
 </form>

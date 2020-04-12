@@ -1,4 +1,4 @@
-<div id="subscribe-panel" style="padding-left: 5px; margin-top: -15px;">
+<div id="subscribe-panel" style="padding-left: 5px; margin-top: -13px;">
 	@if (Auth::check())
 		@if ($is_subscribed)
 			@include('video.intro-unsubscribe-btn')
