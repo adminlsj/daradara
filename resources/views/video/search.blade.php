@@ -18,21 +18,28 @@
 </div>
 
 <div class="main-content">
-	<div class="padding-setup" style="background-color: #e9e9e9; min-height: auto; padding-top: 11px; padding-bottom: 11px;">
-		<div id="search-top-watch">
-		  <a href="{{ route('video.playlist') }}?list={{ $watch->id }}" class="row no-gutter">
-		    <div class="col-xs-6 col-sm-6 col-md-3">
-		      <img class="lazy" style="width: 100%; height: 100%;" src="{{ $watch->videos()->first()->imgur16by9() }}" data-src="{{ $watch->videos()->first()->imgurL() }}" data-srcset="{{ $watch->videos()->first()->imgurL() }}" alt="{{ $watch->title }}">
-		      <span>播放清單</span>
-		    </div>
-		    <div class="col-xs-6 col-sm-6 col-md-7">
-		      <h4 style="overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;">{{ $watch->title }}</h4>
-		      <p style="overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;">創建者：{{ $watch->user()->name }}</p>
-		      <p style="margin-top: 9px; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">{{ $watch->description }}</p>
-		    </div>
-		  </a>
+	@if ($watch != null)	
+		<div class="padding-setup" style="background-color: #e9e9e9; min-height: auto; padding-top: 11px; padding-bottom: 11px;">
+			<div id="search-top-watch">
+			  <a href="{{ route('video.playlist') }}?list={{ $watch->id }}" class="row no-gutter">
+			    <div class="col-xs-6 col-sm-6 col-md-3">
+			      <img class="lazy" style="width: 100%; height: 100%;" src="{{ $watch->videos()->first()->imgur16by9() }}" data-src="{{ $watch->videos()->first()->imgurL() }}" data-srcset="{{ $watch->videos()->first()->imgurL() }}" alt="{{ $watch->title }}">
+			      <span>
+			      	<div style="margin: 0;position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+				      	<div>{{ $watch->videos()->count() }}</div>
+				      	<i style="font-size: 1.6em; margin-right: -2px" class="material-icons">playlist_play</i>
+				    </div>
+			      </span>
+			    </div>
+			    <div class="col-xs-6 col-sm-6 col-md-7">
+			      <h4 style="overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;">{{ $watch->title }}</h4>
+			      <p style="overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;">創建者：{{ $watch->user()->name }}</p>
+			      <p style="margin-top: 9px; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">{{ $watch->description }}</p>
+			    </div>
+			  </a>
+			</div>
 		</div>
-	</div>
+	@endif
 	<div style="background-color: #F5F5F5;" class="padding-setup">
 		<div class="row" style="padding-top: 6px;">
 			<div class="col-md-12">

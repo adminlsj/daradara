@@ -648,7 +648,7 @@ class VideoController extends Controller
             }
         }
 
-        $watch = $videosArray[0]->playlist_id == '' ? Watch::inRandomOrder()->first() : $videosArray[0]->watch();
+        $watch = $videosArray[0]->playlist_id == '' ? null : $videosArray[0]->watch();
 
         $page = Input::get('page', 1); // Get the ?page=1 from the url
         $perPage = 10; // Number of items per page
@@ -675,8 +675,8 @@ class VideoController extends Controller
         $video = Video::find($request->v);
         $current = $video;
 
-        if ($video->playlist_id != '') {
-            $videos = Video::where('playlist_id', $video->playlist_id)->orderBy('created_at', 'desc')->get();
+        if ($request->list != '') {
+            $videos = Video::where('playlist_id', $request->list)->orderBy('created_at', 'desc')->get();
         } else {
             $videosSelect = Video::where('id', '!=', $video->id)->inRandomOrder()->select('id', 'tags')->get()->toArray();
             $rankings = [];

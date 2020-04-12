@@ -29,7 +29,7 @@
 
 			<p>The fastest and simplest way to submit a copyright takedown notice is through our webform. We recommend using a computer for the easiest method. We will also accept free-form copyright infringement notifications, submitted by email, fax, and mail.</p>
 
-			<p style="white-space: pre-line">LaughSeeJapan DMCA Designated Agent contact information:
+			<p style="white-space: pre-line">LaughSeeJapan Copyright Contact Information:
 Email: acura1989akc@gmail.com
 Address:
 24 Kendrick street

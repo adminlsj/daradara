@@ -30,7 +30,7 @@
 
 			<p>如要提交侵權下架通知，最簡單快速的方法就是填寫我們的網路表單。建議您使用電腦填寫表單，填寫過程會較為輕鬆。我們也接受形式不拘的版權侵害通知；透過電子郵件或郵寄方式均可提交。</p>
 
-			<p style="white-space: pre-line">LaughSeeJapan DMCA Designated Agent 版權聯絡資訊：
+			<p style="white-space: pre-line">LaughSeeJapan 版權聯絡資訊：
 電子郵件：acura1989akc@gmail.com
 地址：
 24 Kendrick street
