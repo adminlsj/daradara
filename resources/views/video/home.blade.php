@@ -20,17 +20,22 @@
 			    @include('video.single-video-slider', ['videos' => $subscribes])
 			</div>
 			<div class="video-slider-title paravi-padding-setup">
-		    	<a href="{{ route('video.rank') }}"><h4>最夯發燒影片<span class="hidden-xs">更多內容</span><i class="material-icons">arrow_forward_ios</i></h4></a>
+		    	<a href="{{ route('video.rank') }}"><h4>推薦影片<span class="hidden-xs">更多內容</span><i class="material-icons">arrow_forward_ios</i></h4></a>
 		    </div>
-		    @include('video.single-video-slider', ['videos' => $trendings])
+		    @include('video.single-video-slider', ['videos' => $selected])
 		@else
 			<div style="margin: 0 auto 0 auto; padding-top: 10px;">
 			    <div class="video-slider-title paravi-padding-setup">
-			    	<a href="{{ route('video.rank') }}"><h4>最夯發燒影片<span class="hidden-xs">更多內容</span><i class="material-icons">arrow_forward_ios</i></h4></a>
+			    	<a href="{{ route('video.rank') }}"><h4>推薦影片<span class="hidden-xs">更多內容</span><i class="material-icons">arrow_forward_ios</i></h4></a>
 			    </div>
 			</div>
-		    @include('video.single-video-slider', ['videos' => $trendings])
+		    @include('video.single-video-slider', ['videos' => $selected])
 	    @endif
+
+	    <div class="video-slider-title paravi-padding-setup">
+	    	<a href="{{ route('video.rank') }}"><h4>最夯發燒影片<span class="hidden-xs">更多內容</span><i class="material-icons">arrow_forward_ios</i></h4></a>
+	    </div>
+	    @include('video.single-video-slider', ['videos' => $trendings])
 
 	    <div class="video-slider-title paravi-padding-setup">
 	    	<a href="{{ route('video.newest') }}"><h4>最新精彩內容<span class="hidden-xs">更多內容</span><i class="material-icons">arrow_forward_ios</i></h4></a>

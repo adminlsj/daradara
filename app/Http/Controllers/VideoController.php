@@ -58,6 +58,7 @@ class VideoController extends Controller
             }
         }
 
+        $selected = Video::where('user_id', 1809)->inRandomOrder()->limit(16)->get();
         $trendings = Video::whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(2))->inRandomOrder()->limit(16)->get();
         $newest = Video::orderBy('uploaded_at', 'desc')->limit(16)->get();
         $load_more = Video::whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(2))->orderBy('views', 'desc')->paginate(12);
@@ -72,7 +73,7 @@ class VideoController extends Controller
 
         $is_mobile = $this->checkMobile();
 
-        return view('video.home', compact('trendings', 'newest', 'load_more', 'is_mobile', 'subscribes'));
+        return view('video.home', compact('selected', 'trendings', 'newest', 'load_more', 'is_mobile', 'subscribes'));
     }
 
     public function explore(Request $request){
