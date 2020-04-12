@@ -649,9 +649,11 @@ class VideoController extends Controller
         }
 
         $watch = $videosArray[0]->playlist_id == '' ? null : $videosArray[0]->watch();
+        $topResults = array_slice($videosArray, 0, 15);
 
-        $page = Input::get('page', 1); // Get the ?page=1 from the url
-        $perPage = 10; // Number of items per page
+
+        $page = Input::get('page', 1) + 1; // Get the ?page=1 from the url
+        $perPage = 15; // Number of items per page
         $offset = ($page * $perPage) - $perPage;
 
         $videos = new LengthAwarePaginator(
@@ -667,7 +669,7 @@ class VideoController extends Controller
             return $html;
         }
 
-        return view('video.search', compact('videos', 'watch', 'query'));
+        return view('video.search', compact('videos', 'watch', 'query', 'topResults'));
     }
 
     public function loadPlaylist(Request $request)

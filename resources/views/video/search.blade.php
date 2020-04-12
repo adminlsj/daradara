@@ -19,7 +19,7 @@
 
 <div class="main-content">
 	@if ($watch != null)	
-		<div class="padding-setup" style="background-color: #e9e9e9; min-height: auto; padding-top: 11px; padding-bottom: 11px;">
+		<div class="padding-setup hover-opacity-all" style="background-color: #e9e9e9; min-height: auto; padding-top: 11px; padding-bottom: 11px;">
 			<div id="search-top-watch">
 			  <a href="{{ route('video.playlist') }}?list={{ $watch->id }}" class="row no-gutter">
 			    <div class="col-xs-6 col-sm-6 col-md-3">
@@ -44,6 +44,9 @@
 		<div class="row" style="padding-top: 6px;">
 			<div class="col-md-12">
 				<div style="margin-left: -10px; margin-right: -10px;" class="video-sidebar-wrapper">
+					@foreach ($topResults as $video)
+						@include('video.singleSearchVideo')
+					@endforeach
 				    <div id="sidebar-results"><!-- results appear here --></div>
 				    <div style="text-align: center;" class="ajax-loading"><img style="width: 40px; height: auto; padding-top: 25px; padding-bottom: 30px;" src="https://i.imgur.com/TcZjkZa.gif"/></div>
 				</div>

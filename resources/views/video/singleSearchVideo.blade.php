@@ -1,4 +1,4 @@
-<div id="singleSearchVideo" style="padding: 7px 0px;" class="multiple-link-wrapper">
+<div id="singleSearchVideo" style="padding: 7px 0px;" class="multiple-link-wrapper hover-opacity-all">
   <a href="{{ route('video.watch') }}?v={{ $video->id }}" class="overlay"></a>
   <div class="row no-gutter inner">
     <div class="col-xs-6 col-sm-6 col-md-3">
