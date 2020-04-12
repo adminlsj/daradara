@@ -25,7 +25,7 @@
 					<div class="col-md-4 single-show-list">
 						<div style="padding: 6px 15px; background-color: #595959; height: 48px;">
 							<a href="{{ route('user.show', [$video->user()]) }}"><img class="lazy" style="float:left; border-radius: 50%; width: 36px; height: 36px;" src="{{ $video->user()->avatarCircleB() }}" data-src="{{ $video->user()->avatar == null ? $video->user()->avatarDefault() : $video->user()->avatar->filename }}" data-srcset="{{ $video->user()->avatar == null ? $video->user()->avatarDefault() : $video->user()->avatar->filename }}"></a>
-		    				<h5 style="margin-top: 11px; margin-left: 65px"><a style="text-decoration: none; color: white" href="{{ route('user.show', [$video->user()]) }}">{{ $video->user()->name }}</a></h5>
+		    				<h5 style="margin-top: 11px; margin-left: 50px"><a style="text-decoration: none; color: white" href="{{ route('user.show', [$video->user()]) }}">{{ $video->user()->name }}</a></h5>
 		    				@if ($watch != null)
 		    					<div style="float: right; margin-top: -23px;">
 				    				@include('video.intro-subscribe-wrapper', ['tag' => $video->watch()->title])
