@@ -2,8 +2,8 @@
 
 @section('head')
     @parent
-    <title>{{ $query }} | 娛見日本 LaughSeeJapan</title>
-    <meta name="title" content="{{ $query }} | 娛見日本 LaughSeeJapan">
+    <title>{{ $query }} - 娛見日本 LaughSeeJapan</title>
+    <meta name="title" content="{{ $query }} - 娛見日本 LaughSeeJapan">
     <meta name="description" 
               content="娛見日本 LaughSeeJapan 讓您享受最愛的影片、上傳原創內容，並與全世界觀眾分享您的影片。">
 @endsection
@@ -19,7 +19,7 @@
 
 <div class="main-content">
 	@if ($watch != null)	
-		<div class="padding-setup hover-opacity-all" style="background-color: #e9e9e9; min-height: auto; padding-top: 11px; padding-bottom: 11px;">
+		<div class="padding-setup hover-opacity-all" style="background-color: #F5F5F5; min-height: auto; padding-top: 13px;">
 			<div id="search-top-watch">
 			  <a href="{{ route('video.playlist') }}?list={{ $watch->id }}" class="row no-gutter">
 			    <div class="col-xs-6 col-sm-6 col-md-3">

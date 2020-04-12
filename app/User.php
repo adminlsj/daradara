@@ -29,7 +29,7 @@ class User extends Authenticatable
 
     public function watches()
     {
-        return Watch::where('user_id', $this->id)->orderBy('created_at', 'desc')->get();
+        return Watch::where('user_id', $this->id)->orderBy('updated_at', 'desc')->get();
     }
 
     public function subscribes()

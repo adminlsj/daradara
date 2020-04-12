@@ -171,6 +171,12 @@ class UserController extends Controller
                     'uploaded_at' => Carbon::createFromFormat('Y-m-d\TH:i:s', request('uploaded_at'))->format('Y-m-d H:i:s'),
                 ]);
 
+                if ($video->playlist_id != '') {
+                    $watch = $video->watch();
+                    $watch->updated_at = $video->updated_at;
+                    $watch->save();
+                }
+
                 /*$users = [];
                 $userArray = [];
 
