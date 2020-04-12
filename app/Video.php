@@ -169,11 +169,11 @@ class Video extends Model
     public function outsource()
     {
         $sd = $this->sd()[0];
-        if (strpos($sd, '?') !== false) {
+        /*if (strpos($sd, '?') !== false) {
             return $sd.'&danmaku=0&qn=0&type=mp4&otype=json&fnver=0&fnval=1&platform=html5&html5=1&high_quality=1&autoplay=1';
         } else {
             return $sd.'?danmaku=0&qn=0&type=mp4&otype=json&fnver=0&fnval=1&platform=html5&html5=1&high_quality=1&autoplay=1';;
-        }
+        }*/
     }
 
     public function sd()
