@@ -234,7 +234,7 @@ class VideoController extends Controller
                     if ($first) {
                         if ($subscribe->type == 'watch') {
                             $watch = Watch::where('title', $subscribe->tag)->first();
-                            $videos = Video::where('category', $watch->category);
+                            $videos = Video::where('playlist_id', $watch->id);
                         } else {
                             $videos = Video::where('tags', 'LIKE', '%'.$subscribe->tag.'%');
                         }
@@ -242,7 +242,7 @@ class VideoController extends Controller
                     } else {
                         if ($subscribe->type == 'watch') {
                             $watch = Watch::where('title', $subscribe->tag)->first();
-                            $videos = $videos->orWhere('category', $watch->category);
+                            $videos = $videos->orWhere('playlist_id', $watch->id);
                         } else {
                             $videos = $videos->orWhere('tags', 'LIKE', '%'.$subscribe->tag.'%');
                         }
