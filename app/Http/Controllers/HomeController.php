@@ -64,21 +64,6 @@ class HomeController extends Controller
         return Redirect::back()->withErrors('Your complaint has been submitted successfully. We will handle accordingly and email you the latest progress.');
     }
 
-    public function userUploadVideo(Request $request)
-    {
-        $genre = request('channel-genre');
-        $category = request('channel-category');
-        $watchDescription = request('channel-description');
-        $title = request('video-title');
-        $videoDescription = request('video-description');
-        $image = request('video-image');
-        $link = request('video-link');
-
-        $user = auth()->user();
-        Mail::to('laughseejapan@gmail.com')->send(new UserUploadVideo($user, $genre, $category, $watchDescription, $title, $videoDescription, $image, $link));
-        return Redirect::back()->withErrors('影片將在系統處理完畢後自動上傳');   
-    }
-
     public function sitemap()
     {
         $videos = Video::orderBy('created_at', 'desc')->get();
@@ -205,7 +190,7 @@ class HomeController extends Controller
         }
     }
 
-    public function categoryEdit()
+    /* public function categoryEdit()
     {
         $is_program = false;
         return view('video.categoryEdit', compact('is_program')); 
@@ -325,7 +310,7 @@ class HomeController extends Controller
         } else {
             return redirect()->action('VideoController@home');
         }
-    }
+    } */
 
     public function videoDurationUpdate(Request $request)
     {
@@ -337,7 +322,7 @@ class HomeController extends Controller
         return $video;
     }
 
-    public function bccToSrt(Request $request){
+    /* public function bccToSrt(Request $request){
         $url = request('url');
         try {
             $curl_connection = curl_init($url);
@@ -438,7 +423,7 @@ class HomeController extends Controller
             }
         }
         return redirect()->action('VideoController@home');
-    }
+    } */
 
     function get_string_between($string, $start, $end){
         $string = ' ' . $string;

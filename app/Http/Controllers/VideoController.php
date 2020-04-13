@@ -142,9 +142,9 @@ class VideoController extends Controller
     }
 
     public function watch(Request $request){
-        if ($request->has('v') && $request->v != 'null') {
-            $video = Video::find($request->v);
+        $vid = $request->v;
 
+        if (is_numeric($vid) && $video = Video::find($request->v)) {
             $video->views++;
             $video->save();
             if (auth()->check()) {
@@ -152,13 +152,6 @@ class VideoController extends Controller
                 auth()->user()->save();
             }
             $current = $video;
-
-            /*foreach ($video->sd() as $sd) {
-                if (strpos($sd, "www.bilibili.com") !== FALSE && !$video->outsource) {
-                    $video->sd = str_replace($sd, Video::getLinkBB($sd, $video->outsource), $video->sd);
-                    $video->save();
-                }
-            }*/
 
             $is_mobile = $this->checkMobile();
 
@@ -190,6 +183,9 @@ class VideoController extends Controller
             }
 
             return view('video.showWatch', compact('video', 'prev', 'next', 'watch', 'current', 'is_program', 'is_subscribed', 'is_mobile'));
+
+        } else {
+            return view('errors.404');
         }
     }
 
