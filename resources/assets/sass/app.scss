@@ -728,11 +728,12 @@ nav input[type=text]:focus {
 
 .video-parts-wrapper span {
   margin-right:3px;
-  padding: 6px 15px 6px 15px;
+  padding: 7px 15px;
   background-color: #D5D5D5;
-  color: black;
+  color: #666666;
   cursor: pointer;
   border-radius: 2px;
+  font-weight: 500;
 }
 
 .video-parts-wrapper span.active {
