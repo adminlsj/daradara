@@ -22,7 +22,7 @@
     </div>
   @endif
 
-  <h5 style="color: dimgray; font-weight: 400; margin-top: 20px; line-height: 20px; margin-bottom: 0px">{{ $video->description != '' ? $video->description : $watch->description }}</h5>
+  <h5 style="color: dimgray; font-weight: 400; margin-top: 20px; line-height: 20px; margin-bottom: 0px">{{ $video->description == '' && $video->watch() ? $watch->description : $video->description }}</h5>
 
   <h5 style="font-weight: 400; line-height: 20px; margin-bottom: 15px">
     @foreach ($video->tags() as $tag)
