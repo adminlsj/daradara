@@ -372,7 +372,7 @@ class VideoController extends Controller
         $tag = request('query');
         $videos = Video::where('tags', 'like', '%'.$tag.'%')->orderBy('uploaded_at', 'desc')->paginate(10);
 
-        $html = $this->subscribeLoadHTML($videos);
+        $html = $this->searchLoadHTML($videos);
         if ($request->ajax()) {
             return $html;
         }
