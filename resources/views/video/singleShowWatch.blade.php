@@ -10,6 +10,12 @@
 </div>
 
 <div style="padding: 0px 30px 25px 30px;">
+  <div class="video-parts-wrapper" style="padding-top: 25px; padding-bottom: -25px; {{ count($video->sd()) == 1 ? 'display:none;' : '' }}">
+    @foreach ($video->sd() as $url)
+      <span class="{{ $loop->iteration == 1 ? 'active' : '' }}" onclick="changeSrc(this)" data-url="{{ $url }}"><i style="vertical-align:middle; font-size: 1.4em; margin-top: -3px; margin-right: 2px; margin-left: -3px; {{ $loop->iteration == 1 ? '' : 'display:none;' }}" class="material-icons">play_arrow</i>P{{ $loop->iteration }}</span>
+    @endforeach
+  </div>
+
   <h3 id="shareBtn-title" style="line-height: 32px">{{ $video->title }}</h3>
 
   <a href="{{ route('user.show', [$video->user()]) }}"><img class="lazy" style="float:left; border-radius: 50%; width: 35px; height: 35px;" src="{{ $video->user()->avatarCircleB() }}" data-src="{{ $video->user()->avatar == null ? $video->user()->avatarDefault() : $video->user()->avatar->filename }}" data-srcset="{{ $video->user()->avatar == null ? $video->user()->avatarDefault() : $video->user()->avatar->filename }}"></a>
@@ -22,7 +28,7 @@
     </div>
   @endif
 
-  <h5 style="color: dimgray; font-weight: 400; margin-top: 20px; line-height: 20px; margin-bottom: 0px">{{ $video->description == '' && $video->watch() ? $watch->description : $video->description }}</h5>
+  <h5 style="color: dimgray; font-weight: 400; margin-top: 20px; line-height: 20px; margin-bottom: 0px">{{ $video->description }}</h5>
 
   <h5 style="font-weight: 400; line-height: 20px; margin-bottom: 15px">
     @foreach ($video->tags() as $tag)
@@ -56,12 +62,6 @@
       </div>
     </div>
   </div>
-</div>
-
-<div class="video-parts-wrapper" style="padding-top: 12px; padding-bottom: 5px; {{ count($video->sd()) == 1 ? 'display:none;' : '' }}">
-  @foreach ($video->sd() as $url)
-    <span class="{{ $loop->iteration == 1 ? 'active' : '' }}" onclick="changeSrc(this)" data-url="{{ $url }}"><i style="vertical-align:middle; font-size: 1.4em; margin-top: -3px; margin-right: 2px; margin-left: -3px; {{ $loop->iteration == 1 ? '' : 'display:none;' }}" class="material-icons">play_arrow</i>P{{ $loop->iteration }}</span>
-  @endforeach
 </div>
 
 <script>
