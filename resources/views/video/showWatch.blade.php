@@ -48,7 +48,8 @@
 						</div>
 
 						@if ($video->watch() && Request::get('list') != $video->watch()->id)
-							<div id="suggested-watch-wrapper" style="padding: 0px 15px" class="hover-opacity-all">
+							<div class="hidden-xs hidden-sm" style="margin-top: 6px"></div>
+							<div id="suggested-watch-wrapper" style="padding: 0px 15px; padding-top: 8px" class="hover-opacity-all">
 								<a href="{{ route('video.playlist') }}?list={{ $video->watch()->id }}" class="row no-gutter">
 								  <div style="padding-right: 4px; position: relative;" class="col-xs-6 col-sm-6 col-md-6">
 								    <img class="lazy" style="width: 100%; height: 100%;" src="{{ $video->imgur16by9() }}" data-src="{{ $video->watch()->videos()->first()->imgurL() }}" data-srcset="{{ $video->watch()->videos()->first()->imgurL() }}" alt="{{ $video->watch()->title }}">
