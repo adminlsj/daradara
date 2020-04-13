@@ -1060,6 +1060,10 @@ nav {
 .tab .video-tablinks {
   border-top:solid 3px transparent;
   margin-bottom: -15px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space:nowrap;
+  width: calc(100% - 80px)
 }
 
 .tab .video-tablinks.active {

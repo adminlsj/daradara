@@ -39,7 +39,7 @@
 
 						<div style="position: relative; margin-top: 5px" class="tab">
 							@if (Request::get('list') != '')
-								<a href="{{ route('video.playlist') }}?list={{ $video->watch()->id }}"><button style="color: #222222; font-weight: 400;" class="tablinks video-tablinks">{{ $video->watch()->title }}</button></a>
+								<a href="{{ route('video.playlist') }}?list={{ $video->watch()->id }}"><button style="color: #222222; font-weight: 400;" class="tablinks video-tablinks">村上美乃滋的請讓我吐槽村上美乃滋的請讓我吐槽村上美乃滋的請讓我吐槽</button></a>
 								<a style="position:absolute; top:12px; right:56px; text-decoration: none; {{ $prev != false ? 'color: #414141;' : 'pointer-events: none; color: #B9B9B9;' }}" href="{{ route('video.watch') }}?v={{ $prev }}"><i class="material-icons noselect">skip_previous</i></a>
 								<a style="position:absolute; top:12px; right:15px; text-decoration: none; margin-left: 8px; {{ $next != false ? 'color: #414141;' : 'pointer-events: none; color: #B9B9B9;' }}" href="{{ route('video.watch') }}?v={{ $next }}"><i class="material-icons noselect">skip_next</i></a>
 							@else
