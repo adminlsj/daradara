@@ -19,7 +19,7 @@
     <span>最新內容</span>
   </a>
   <a href="{{ Auth::check() ? route('user.show', Auth::user()) : route('login') }}" class="{{ Request::is('*user*') ? 'active' : '' }}">
-    <i style="font-size: 26px;" class="material-icons">video_library</i>
+    <i style="font-size: 25px;" class="material-icons">video_library</i>
     <span>媒體庫</span>
   </a>
 </div>
