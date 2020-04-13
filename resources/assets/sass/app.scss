@@ -1059,6 +1059,7 @@ nav {
 
 .tab .video-tablinks {
   border-top:solid 3px transparent;
+  margin-bottom: -15px;
 }
 
 .tab .video-tablinks.active {
@@ -2126,6 +2127,10 @@ a > i {
 
   #nav-main-hamburger {
     margin-top: 8px;
+  }
+
+  .tab .video-tablinks {
+    margin-bottom: -5px;
   }
 
   #search-top-watch .col-md-3 > span {
