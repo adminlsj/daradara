@@ -391,7 +391,7 @@ class VideoController extends Controller
         }
 
         $like = Like::create([
-            'id' => Like::orderBy('id', 'desc') + 1,
+            'id' => Like::orderBy('id', 'desc')->first()->id + 1,
             'user_id' => $user_id,
             'type' => $type,
             'foreign_id' => $foreign_id,
