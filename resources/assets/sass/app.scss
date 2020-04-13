@@ -899,11 +899,12 @@ nav input[type=text]:focus {
 }
 
 .single-icon-wrapper .single-icon:hover {
-  background-color: #595959;
+  background-color: #F1F1F1;
 }
 
 .show-panel-icons .single-icon i, .show-panel-icons .single-icon div {
   cursor: pointer;
+  color: dimgray;
 }
 
 .show-panel-icons .single-icon i {

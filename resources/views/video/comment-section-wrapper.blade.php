@@ -1,5 +1,5 @@
-<div id="comment-create-form-wrapper" style="padding: 0px 15px;">
-	<h4 style="line-height: 23px; font-weight: 400; margin-top:15px; margin-bottom: 10px; color:white; font-size: 1.15em">評論<span id="comment-count" style="margin-left: 10px; color: gray">{{ $current->comments()->count() }}</span></h4>
+<div id="comment-create-form-wrapper">
+	<h4 style="line-height: 23px; font-weight: 400; margin-top:15px; margin-bottom: 10px; font-size: 1.15em">評論<span id="comment-count" style="margin-left: 10px; color: gray">{{ $current->comments()->count() }}</span></h4>
 	@if (Auth::check())
 	  <form id="comment-create-form" style="margin-top: 10px;" action="{{ route('video.createComment') }}" method="POST">
 	    {{ csrf_field() }}
@@ -18,9 +18,9 @@
 	@endif
 </div>
 
-<hr style="border:solid 0.5px #383838; margin-top: 19px;">
+<hr style="margin: 20px 0px; margin-top: 20px;">
 
-<div id="comment-start" style="padding: 0px 15px;">
+<div id="comment-start">
 	@foreach ($current->comments() as $comment)
 	  @include('video.singleVideoComment')
 	@endforeach

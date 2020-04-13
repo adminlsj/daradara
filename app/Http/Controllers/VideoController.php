@@ -308,6 +308,10 @@ class VideoController extends Controller
                 $html .= view('video.intro-unsubscribe-btn', compact('tag'));
                 break;
 
+            case 'show':
+                $html .= view('video.watch-unsubscribe-btn', compact('tag'));
+                break;
+
             case 'tag':
                 $html .= view('video.tag-unsubscribe-btn', compact('tag'));
                 break;
@@ -343,6 +347,10 @@ class VideoController extends Controller
 
             case 'intro':
                 $html .= view('video.intro-subscribe-btn', compact('tag'));
+                break;
+
+            case 'show':
+                $html .= view('video.watch-subscribe-btn', compact('tag'));
                 break;
 
             case 'tag':

@@ -4,7 +4,7 @@
   <input name="save-foreign-id" type="hidden" value="{{ $video->id }}">
   <button class="single-icon-wrapper no-button-style" method="POST">
   	<div class="single-icon no-select">
-	    <i style="color: #3ea6ff" class="material-icons">library_add_check</i>
+	    <i style="color: #4377e8" class="material-icons">library_add_check</i>
 	    <div>已儲存</div>
 	</div>
   </button>
