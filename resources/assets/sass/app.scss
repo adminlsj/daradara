@@ -1063,7 +1063,8 @@ nav {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space:nowrap;
-  width: calc(100% - 80px)
+  width: calc(100% - 80px);
+  text-align: left;
 }
 
 .tab .video-tablinks.active {
