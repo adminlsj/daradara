@@ -54,7 +54,7 @@
           <h4>已建立的播放清單</h4>
       </div>
       @if ($watches->count() != 0)
-        <div class="row no-gutter paravi-padding-setup" style="margin-left: -5px; margin-right: -5px">
+        <div class="row paravi-padding-setup user-show-playlist">
           @foreach ($watches as $watch)
             <div class="col-xs-6 col-sm-3 col-md-3 hover-opacity-all load-more-wrapper" style="position: relative;">
                 <a style="text-decoration: none; color: black" href="{{ route('video.playlist') }}?list={{ $watch->id }}">
