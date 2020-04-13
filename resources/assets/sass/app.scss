@@ -2036,6 +2036,19 @@ a > i {
   font-size: 1.3em;
 }
 
+.load-more-wrapper span {
+  position: absolute;
+  right: 4px;
+  background-color: rgba(0,0,0,0.8);
+  color: white;
+  opacity: 0.9;
+  font-size: 0.85em;
+  height: calc(100% - 31px);
+  width: 37%;
+  text-align: center;
+  font-size: 1.3em;
+}
+
 #search-top-watch .col-md-7 {
   padding-top: 1px;
   padding-right: 12px;
@@ -2469,5 +2482,9 @@ a > i {
   .nav-item-text {
     margin-top: 11px; 
     font-size: 0.95em;
+  }
+
+  .load-more-wrapper span {
+    right: 1px;
   }
 }

@@ -56,13 +56,19 @@
       @if ($watches->count() != 0)
         <div class="row no-gutter paravi-padding-setup" style="margin-left: -5px; margin-right: -5px">
           @foreach ($watches as $watch)
-            <div class="col-xs-6 col-sm-3 col-md-3 hover-opacity load-more-wrapper">
+            <div class="col-xs-6 col-sm-3 col-md-3 hover-opacity-all load-more-wrapper" style="position: relative;">
                 <a style="text-decoration: none; color: black" href="{{ route('video.playlist') }}?list={{ $watch->id }}">
-                <img style="width: 100%; height: 100%;" src="{{ $watch->videos()->first() ? $watch->videos()->first()->imgurH() : 'https://i.imgur.com/JMcgEkPl.jpg' }}" alt="{{ $watch->title }}">
+                  <img style="width: 100%; height: 100%;" src="{{ $watch->videos()->first() ? $watch->videos()->first()->imgurH() : 'https://i.imgur.com/JMcgEkPl.jpg' }}" alt="{{ $watch->title }}">
+                  <span>
+                    <div style="margin: 0;position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                      <div>{{ $watch->videos()->count() }}</div>
+                      <i style="font-size: 1.6em; margin-right: -2px" class="material-icons">playlist_play</i>
+                    </div>
+                  </span>
 
-                <div class="hover-underline">
-                    <h4 style="font-size: 0.95em; margin-top: 7px; color: #222222; padding-right: 10px" class="text-ellipsis">{{ $watch->title }}【{{ $watch->videos()->count()}} 部影片】</h4>
-                </div>
+                  <div class="hover-underline">
+                    <h4 style="font-size: 0.95em; margin-top: 7px; color: #222222; padding-right: 10px" class="text-ellipsis">{{ $watch->title }}</h4>
+                  </div>
                 </a>
             </div>
           @endforeach
