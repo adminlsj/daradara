@@ -928,6 +928,20 @@ nav input[type=text]:focus {
   text-align:center;
 }
 
+.intro-video-list h4 {
+  margin-left: 200px;
+  padding-right: 25px;
+  font-size: 1.2em; 
+  line-height: 22px;
+}
+
+.intro-video-list h5 {
+  margin-left: 200px; 
+  color: dimgray; 
+  font-weight: 400; 
+  font-size: 0.95em;
+}
+
 .blog-title {
   font-weight: 600;
   font-size: 19px;
@@ -2139,12 +2153,13 @@ a > i {
   }
 
   .intro-video-list h4 {
-    font-size: 1.05em;
+    font-size: 1.06em;
+    line-height: 19px;
   }
 
   .intro-video-list h5 {
     font-size: 0.85em;
-    margin-top: -3px;
+    margin-top: -5px;
   }
 
   .tab .video-tablinks {

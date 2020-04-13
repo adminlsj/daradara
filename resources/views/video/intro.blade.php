@@ -59,8 +59,8 @@
 	    					<div style="height: 85px" class="inner">
 			    				<span style="float: left; width: 40px; font-weight: 500; padding-top: 30px; text-align: center">{{ $videos->count() - $loop->index }}</span>
 		    					<img class="lazy" style="width: 150px; height: auto; float: left;" src="{{ $video->imgur16by9() }}" data-src="{{ $video->imgurH() }}" data-srcset="{{ $video->imgurH() }}" alt="{{ $video->title }}">
-		    					<h4 style="margin-left: 200px; padding-right: 25px; font-size: 1.2em; line-height: 22px">{{ $video->title }}</h4>
-		    					<h5 style="margin-left: 200px; color: dimgray; font-weight: 400; font-size: 0.95em"><a href="{{ route('user.show', [$video->watch()->user()]) }}">{{ $watch->user()->name }}</a></h5>
+		    					<h4>{{ $video->title }}</h4>
+		    					<h5><a href="{{ route('user.show', [$video->watch()->user()]) }}">{{ $watch->user()->name }}</a></h5>
 		    				</div>
 		    				<hr style="border-color: #e1e1e1; margin-left: 40px; margin-right: 25px">
 	    				</div>
