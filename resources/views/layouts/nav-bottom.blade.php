@@ -15,7 +15,7 @@
     <span>發燒影片</span>
   </a>
   <a href="{{ route('video.newest') }}" class="{{ Request::is('*newest*') ? 'active' : '' }}">
-    <i style="padding-left: 2px; font-size: 27px;" class="material-icons">explore</i>
+    <i style="padding-left: 2px; font-size: 26px; margin-top: 3px" class="material-icons">explore</i>
     <span>最新內容</span>
   </a>
   <a href="{{ Auth::check() ? route('user.show', Auth::user()) : route('login') }}" class="{{ Request::is('*user*') ? 'active' : '' }}">
