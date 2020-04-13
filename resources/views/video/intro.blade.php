@@ -54,7 +54,7 @@
     			</div>
     			<div class="col-md-7" style="padding-top: 12px;">
     				@foreach ($videos as $video)
-	    				<div class="multiple-link-wrapper hover-opacity-all">
+	    				<div class="multiple-link-wrapper hover-opacity-all intro-video-list">
 		    				<a href="{{ route('video.watch') }}?v={{ $video->id }}&list={{ $watch->id }}" class="overlay"></a>
 	    					<div style="height: 85px" class="inner">
 			    				<span style="float: left; width: 40px; font-weight: 500; padding-top: 30px; text-align: center">{{ $videos->count() - $loop->index }}</span>
