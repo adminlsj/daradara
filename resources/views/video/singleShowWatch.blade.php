@@ -28,7 +28,7 @@
     </div>
   @endif
 
-  <h5 style="color: dimgray; font-weight: 400; margin-top: 20px; line-height: 20px; margin-bottom: -5px; white-space: pre-wrap;">{{ $video->caption }}</h5>
+  <h5 style="color: dimgray; font-weight: 400; margin-top: 19px; line-height: 20px; margin-bottom: -5px; white-space: pre-wrap;">{{ $video->caption }}</h5>
 
   <h5 style="font-weight: 400; line-height: 20px; margin-bottom: 15px">
     @foreach ($video->tags() as $tag)
