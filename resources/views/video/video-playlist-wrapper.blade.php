@@ -1,5 +1,14 @@
-@foreach ($videos as $video)
+@if ($videos)
+	@foreach ($videos as $video)
+	    <div class="related-watch-wrap" style="{{ $video->id == $current->id ? 'background-color: #E5E5E5' : '' }};">
+	    	@include('video.singleRelatedWatch', ['source' => 'playlist'])
+		</div>
+	@endforeach
+	<hr style="margin: 0px 15px; border-color: #e5e5e5">
+@endif
+
+@foreach ($related as $video)
     <div class="related-watch-wrap" style="{{ $video->id == $current->id ? 'background-color: #E5E5E5' : '' }};">
-    	@include('video.singleRelatedWatch')
+    	@include('video.singleRelatedWatch', ['source' => 'video'])
 	</div>
 @endforeach

@@ -687,29 +687,32 @@ class VideoController extends Controller
 
         if ($request->list != '') {
             $videos = Video::where('playlist_id', $request->list)->orderBy('created_at', 'desc')->get();
+            $videosSelect = Video::where('playlist_id', '!=', $video->playlist_id)->inRandomOrder()->select('id', 'tags')->get()->toArray();
         } else {
+            $videos = null;
             $videosSelect = Video::where('id', '!=', $video->id)->inRandomOrder()->select('id', 'tags')->get()->toArray();
-            $rankings = [];
-            foreach ($videosSelect as $videoSelect) {
-                $score = 0;
-                foreach ($video->tags() as $tag) {
-                    if (strpos($videoSelect['tags'], $tag) !== false) {
-                        $score++;
-                    }
-                }
-                array_push($rankings, ['score' => $score, 'id' => $videoSelect['id']]);
-            }
-            usort($rankings, function ($a, $b) {
-                return $b['score'] <=> $a['score'];
-            });
-
-            $videos = [];
-            for ($i = 0; $i < 30; $i++) {
-                array_push($videos, Video::find($rankings[$i]['id']));
-            }
         }
 
-        $html = view('video.video-playlist-wrapper', compact('videos', 'current'));
+        $rankings = [];
+        foreach ($videosSelect as $videoSelect) {
+            $score = 0;
+            foreach ($video->tags() as $tag) {
+                if (strpos($videoSelect['tags'], $tag) !== false) {
+                    $score++;
+                }
+            }
+            array_push($rankings, ['score' => $score, 'id' => $videoSelect['id']]);
+        }
+        usort($rankings, function ($a, $b) {
+            return $b['score'] <=> $a['score'];
+        });
+
+        $related = [];
+        for ($i = 0; $i < 30; $i++) {
+            array_push($related, Video::find($rankings[$i]['id']));
+        }
+
+        $html = view('video.video-playlist-wrapper', compact('current', 'videos', 'related'));
         if ($request->ajax()) {
             return $html;
         }
