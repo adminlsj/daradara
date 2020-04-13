@@ -142,8 +142,8 @@ class VideoController extends Controller
     }
 
     public function watch(Request $request){
-        $vid = $request->v;
-        if (is_numeric($vid) && $video = Video::find($request->v) != null) {
+        if ($request->has('v') && $request->v != 'null') {
+            $video = Video::find($request->v);
 
             $video->views++;
             $video->save();
@@ -190,9 +190,6 @@ class VideoController extends Controller
             }
 
             return view('video.showWatch', compact('video', 'prev', 'next', 'watch', 'current', 'is_program', 'is_subscribed', 'is_mobile'));
-
-        } else {
-            return 'bye'
         }
     }
 
