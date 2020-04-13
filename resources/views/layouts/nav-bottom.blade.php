@@ -11,11 +11,11 @@
     @endif
   </a>
   <a href="{{ route('video.rank') }}" class="{{ Request::is('*rank*') ? 'active' : '' }}">
-    <i style="padding-left: 1px; font-size: 25px;" class="material-icons">whatshot</i>
+    <i style="padding-left: 1px; font-size: 26px;" class="material-icons">whatshot</i>
     <span>發燒影片</span>
   </a>
   <a href="{{ route('video.newest') }}" class="{{ Request::is('*newest*') ? 'active' : '' }}">
-    <i style="padding-left: 2px;" class="material-icons">explore</i>
+    <i style="padding-left: 2px; font-size: 25px;" class="material-icons">explore</i>
     <span>最新內容</span>
   </a>
   <a href="{{ Auth::check() ? route('user.show', Auth::user()) : route('login') }}" class="{{ Request::is('*user*') ? 'active' : '' }}">
