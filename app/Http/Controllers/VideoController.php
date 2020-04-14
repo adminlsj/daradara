@@ -147,12 +147,8 @@ class VideoController extends Controller
         if (is_numeric($vid) && $video = Video::find($request->v)) {
             $video->views++;
             $video->save();
-            if (auth()->check()) {
-                auth()->user()->updated_at = Carbon::now();
-                auth()->user()->save();
-            }
-            $current = $video;
 
+            $current = $video;
             $is_mobile = $this->checkMobile();
 
             $query = Video::where('playlist_id', $video->playlist_id)->orderBy('created_at', 'asc')->pluck('id')->toArray();
