@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Video;
-use App\Watch;
+use App\Playlist;
 use App\User;
 use App\Subscribe;
 use App\Like;
@@ -33,16 +33,16 @@ class HomeController extends Controller
                 foreach ($subscriptions as $subscribe) {
                     if ($first) {
                         if ($subscribe->type == 'watch') {
-                            $watch = Watch::where('title', $subscribe->tag)->first();
-                            $subscribes = Video::where('playlist_id', $watch->id);
+                            $playlist = Playlist::where('title', $subscribe->tag)->first();
+                            $subscribes = Video::where('playlist_id', $playlist->id);
                         } else {
                             $subscribes = Video::where('tags', 'LIKE', '%'.$subscribe->tag.'%');
                         }
                         $first = false;
                     } else {
                         if ($subscribe->type == 'watch') {
-                            $watch = Watch::where('title', $subscribe->tag)->first();
-                            $subscribes = $subscribes->orWhere('playlist_id', $watch->id);
+                            $playlist = Playlist::where('title', $subscribe->tag)->first();
+                            $subscribes = $subscribes->orWhere('playlist_id', $playlist->id);
                         } else {
                             $subscribes = $subscribes->orWhere('tags', 'LIKE', '%'.$subscribe->tag.'%');
                         }

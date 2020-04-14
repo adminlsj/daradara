@@ -26,4 +26,29 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function playlists()
+    {
+        return Playlist::where('user_id', $this->id)->orderBy('updated_at', 'desc')->get();
+    }
+
+    public function subscribes()
+    {
+        return Subscribe::where('user_id', $this->id)->orderBy('created_at', 'desc')->get();
+    }
+
+    public function avatar()
+    {
+        return $this->hasOne('App\Avatar');
+    }
+
+    public function avatarDefault()
+    {
+        return "https://i.imgur.com/KqDtqhMb.jpg";
+    }
+
+    public function avatarCircleB()
+    {
+        return "https://i.imgur.com/sMSpYFXb.jpg";
+    }
 }

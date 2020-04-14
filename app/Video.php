@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\User;
-use App\Watch;
+use App\Playlist;
 use App\Subscribe;
 use App\Comment;
 
@@ -19,14 +19,14 @@ class Video extends Model
         return User::find($this->user_id);
     }
 
-    public function watch()
+    public function playlist()
     {
-        return Watch::find($this->playlist_id);
+        return Playlist::find($this->playlist_id);
     }
 
     public function subscribes()
     {
-        return Subscribe::where('tag', $this->watch()->title)->orderBy('created_at', 'asc')->get();
+        return Subscribe::where('tag', $this->playlist()->title)->orderBy('created_at', 'asc')->get();
     }
 
     public function comments()
