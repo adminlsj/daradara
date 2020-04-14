@@ -66,8 +66,8 @@ Route::get('/copyrightReport', 'HomeController@copyrightReport')->name('email.co
 
 Route::get('/trending', 'VideoController@watch')->name('video.trending');
 
-Route::get('/rank', 'VideoController@explore')->name('video.rank');
-Route::get('/newest', 'VideoController@explore')->name('video.newest');
+Route::get('/rank', 'VideoController@index')->name('video.rank');
+Route::get('/newest', 'VideoController@index')->name('video.newest');
 Route::get('/playlist', 'VideoController@playlist')->name('video.playlist');
 Route::get('/{genre}/{title}', 'VideoController@intro')->name('video.intro');
 
