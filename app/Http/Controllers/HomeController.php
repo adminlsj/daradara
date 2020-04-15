@@ -222,6 +222,18 @@ class HomeController extends Controller
                     $avatar->delete();
                 }
                 break;
+
+            case 'playlist':
+                for ($i = 0; $i < 300; $i++) {
+                    $playlist = Playlist::create([
+                        'id' => 1,
+                        'user_id' => 1,
+                        'title' => 'demo',
+                        'description' => 'demo',
+                    ]);
+                    $playlist->delete();
+                }
+                break;
             
             default:
                 # code...
