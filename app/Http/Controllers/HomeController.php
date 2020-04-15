@@ -202,7 +202,7 @@ class HomeController extends Controller
         // User seeds
         switch ($request->seed) {
             case 'user':
-                for ($i = 0; $i < 500; $i++) {
+                for ($i = 0; $i < 300; $i++) {
                     $user = User::create([
                         'name' => 'demo'.$i,
                         'email' => 'demo'.$i.'@gmail.com',
@@ -213,7 +213,7 @@ class HomeController extends Controller
                 break;
 
             case 'avatar':
-                for ($i = 0; $i < 500; $i++) {
+                for ($i = 0; $i < 300; $i++) {
                     $avatar = Avatar::create([
                         'user_id' => 1,
                         'filename' =>'demo',
