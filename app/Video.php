@@ -11,7 +11,7 @@ use App\Comment;
 class Video extends Model
 {
 	protected $fillable = [
-        'id', 'user_id', 'playlist_id', 'title', 'caption', 'genre', 'category', 'season', 'tags', 'hd', 'sd', 'imgur', 'views', 'duration', 'outsource', 'created_at', 'uploaded_at',
+        'id', 'user_id', 'playlist_id', 'title', 'description', 'tags', 'link', 'imgur', 'views', 'outsource', 'created_at', 'uploaded_at',
     ];
 
     public function user()
