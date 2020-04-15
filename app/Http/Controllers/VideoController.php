@@ -399,8 +399,14 @@ class VideoController extends Controller
                 return $b['score'] <=> $a['score'];
             });
 
+            $i = 0;
             foreach ($rankings as $ranking) {
                 array_push($related, Video::find($ranking['id']));
+                $i++;
+
+                if ($i == 30) {
+                    break;
+                }
             }
         }
 

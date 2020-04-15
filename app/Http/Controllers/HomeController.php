@@ -276,6 +276,16 @@ class HomeController extends Controller
                     $like->delete();
                 }
                 break;
+
+            case 'save':
+                for ($i = 0; $i < 300; $i++) {
+                    $save = Save::create([
+                        'user_id' => 1,
+                        'foreign_id' => 1,
+                    ]);
+                    $save->delete();
+                }
+                break;
             
             default:
                 # code...
