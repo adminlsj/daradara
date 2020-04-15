@@ -21,6 +21,7 @@ use App\Mail\Contact;
 use App\Mail\ContactUser;
 use Carbon\Carbon;
 use Response;
+use Redirect;
 
 class VideoController extends Controller
 {
@@ -122,6 +123,89 @@ class VideoController extends Controller
         } else {
             return view('errors.404');
         }
+    }
+
+    public function store(User $user, Request $request){
+        $original = request()->file('image');
+            $image = Image::make($original);
+            $image = $image->fit(2880, 1620);
+            $image = $image->stream();
+            $pvars = array('image' => base64_encode($image));
+
+            $curl = curl_init();
+            curl_setopt($curl, CURLOPT_URL, 'https://api.imgur.com/3/image.json');
+            curl_setopt($curl, CURLOPT_TIMEOUT, 30);
+            curl_setopt($curl, CURLOPT_HTTPHEADER, array('Authorization: Client-ID ' . '932b67e13e4f069'));
+            curl_setopt($curl, CURLOPT_POST, 1);
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($curl, CURLOPT_POSTFIELDS, $pvars);
+            $out = curl_exec($curl);
+            curl_close ($curl);
+            $pms = json_decode($out, true);
+            $url = $pms['data']['link'];
+
+            if ($url != "") {
+                $video = Video::create([
+                    'id' => Video::orderBy('id', 'desc')->first()->id + 1,
+                    'user_id' => $user->id,
+                    'playlist_id' => request('channel'),
+                    'title' => request('title'),
+                    'description' => request('description'),
+                    'link' => request('link'),
+                    'imgur' => $this->get_string_between($url, 'https://i.imgur.com/', '.'),
+                    'tags' => implode(' ', preg_split('/\s+/', request('tags'))),
+                    'views' => 0,
+                    'outsource' => true,
+                    'created_at' => Carbon::createFromFormat('Y-m-d\TH:i:s', request('created_at'))->format('Y-m-d H:i:s'),
+                    'uploaded_at' => Carbon::createFromFormat('Y-m-d\TH:i:s', request('uploaded_at'))->format('Y-m-d H:i:s'),
+                ]);
+
+                if ($video->playlist_id != '') {
+                    $playlist = $video->playlist();
+                    $playlist->updated_at = $playlist->updated_at;
+                    $playlist->save();
+                }
+
+                /*$users = [];
+                $userArray = [];
+
+                if ($video->category != 'video') {
+                    $watch = $video->watch();
+                    $watch->updated_at = $video->uploaded_at;
+                    $watch->save();
+
+                    $subscribes = $watch->subscribes();
+                    foreach ($subscribes as $subscribe) {
+                        $user = $subscribe->user();
+                        array_push($userArray, $user->id);
+                    }
+                }
+
+                foreach ($video->tags() as $tag) {
+                    $subscribes = Subscribe::where('tag', $tag)->get();
+                    foreach ($subscribes as $subscribe) {
+                        if (!in_array($subscribe->user()->id, $userArray)) {
+                            array_push($userArray, $subscribe->user()->id);
+                        }
+                    }
+                }
+
+                foreach ($userArray as $user_id) {
+                    array_push($users, User::find($user_id));
+                }
+
+                foreach ($users as $user) {
+                    Mail::to($user->email)->send(new SubscribeNotify($user, $video));
+                    if (strpos($user->alert, 'subscribe') === false) {
+                        $user->alert = $user->alert."subscribe";
+                        $user->save();
+                    }
+                }*/
+
+                return Redirect::back()->withErrors('已成功上傳影片《'.$video->title.'》');
+            } else {
+                return Redirect::back()->withErrors('封面圖片上傳失敗，請重新上傳。');
+            } 
     }
 
     public function videoLoadHTML($videos)
@@ -374,5 +458,14 @@ class VideoController extends Controller
             $is_subscribed = true;
         }
         return $is_subscribed;
+    }
+
+    function get_string_between($string, $start, $end){
+        $string = ' ' . $string;
+        $ini = strpos($string, $start);
+        if ($ini == 0) return '';
+        $ini += strlen($start);
+        $len = strpos($string, $end, $ini) - $ini;
+        return substr($string, $ini, $len);
     }
 }

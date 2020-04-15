@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
 @section('nav')
-	@include('layouts.nav-main-original', ['theme' => 'white'])
+	@include('nav.top')
 @endsection
 
 @section('content')
 <div class="hidden-sm hidden-xs sidebar-menu">
-    @include('video.sidebarMenu', ['theme' => 'white'])
+    @include('nav.side')
 </div>
 
 <div class="main-content">
@@ -19,7 +19,7 @@
 
 		<!-- Tab content -->
 		<div id="創建頻道" class="user-upload-tabcontent">
-		  <form action="{{ route('user.userUpdateUpload', ['user' => Auth::user()]) }}" method="POST" enctype="multipart/form-data">
+		  <form action="{{ route('playlist.store', ['user' => Auth::user()]) }}" method="POST" enctype="multipart/form-data">
 		  	  {{ csrf_field() }}
 		  	  <input id="type" name="type" type="hidden" value="playlist">
 
@@ -48,7 +48,7 @@
 		</div>
 
 		<div id="上傳影片" class="user-upload-tabcontent">
-		  <form id="singleNewCreateForm" action="{{ route('user.userUpdateUpload', ['user' => Auth::user()]) }}" method="POST" enctype="multipart/form-data">
+		  <form id="singleNewCreateForm" action="{{ route('video.store', ['user' => Auth::user()]) }}" method="POST" enctype="multipart/form-data">
 
 			  {{ csrf_field() }}
 			  <input id="type" name="type" type="hidden" value="video">
@@ -66,8 +66,8 @@
 		          <div class="form-group" style="margin-top: 20px;">
 				    <select class="form-control" name="channel" id="channel">
 					    <option value="">選擇播放清單...</option>
-					    @foreach ($watches as $watch)
-					       <option value="{{ $watch->id }}">{{ $watch->title }}</option>
+					    @foreach ($playlists as $playlist)
+					       <option value="{{ $playlist->id }}">{{ $playlist->title }}</option>
 					    @endforeach
 				    </select>
 				  </div>

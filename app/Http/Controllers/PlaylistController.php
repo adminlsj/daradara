@@ -6,8 +6,9 @@ use App\User;
 use App\Video;
 use App\Playlist;
 use App\Subscribe;
-use Auth;
 use Illuminate\Http\Request;
+use Auth;
+use Redirect;
 
 class PlaylistController extends Controller
 {
@@ -23,6 +24,16 @@ class PlaylistController extends Controller
 
             return view('playlist.show', compact('playlist', 'videos', 'first', 'is_subscribed', 'is_mobile'));
         }
+    }
+
+    public function store(User $user, Request $request){
+        $playlist = Playlist::create([
+            'id' => Playlist::orderBy('id', 'desc')->first()->id + 1,
+            'user_id' => $user->id,
+            'title' => $request->title,
+            'description' => $request->description,
+        ]);
+        return Redirect::back()->withErrors('已成功建立播放列表《'.$playlist->title.'》');
     }
 
     public function is_subscribed(String $tag)

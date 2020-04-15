@@ -101,13 +101,6 @@ class UserController extends Controller
         //
     }
 
-    public function userStartUpload(Request $request)
-    {
-        $user = auth()->user();
-        Mail::to('laughseejapan@gmail.com')->send(new UserStartUpload($user));
-        return redirect()->action('UserController@userEditUpload', ['user' => $user]);
-    }
-
     public function userEditUpload(User $user, Request $request)
     {
         $playlists = $user->playlists();
