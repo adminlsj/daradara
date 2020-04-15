@@ -56,7 +56,7 @@
         <div class="row paravi-padding-setup user-show-playlist">
           @foreach ($playlists as $playlist)
             <div class="col-xs-6 col-sm-3 col-md-3 hover-opacity-all load-more-wrapper" style="position: relative;">
-                <a style="text-decoration: none; color: black" href="{{ route('video.playlist') }}?list={{ $playlist->id }}">
+                <a style="text-decoration: none; color: black" href="{{ route('playlist.show') }}?list={{ $playlist->id }}">
                   <img style="width: 100%; height: 100%;" src="{{ $playlist->videos()->first() ? $playlist->videos()->first()->imgurH() : 'https://i.imgur.com/JMcgEkPl.jpg' }}" alt="{{ $playlist->title }}">
                   <span>
                     <div style="margin: 0;position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
