@@ -14,7 +14,7 @@
         <form method="POST" action="{{ route('login') }}">
 
           {{ csrf_field() }}
-          {{ Session::put('previousUrl', route('video.subscribes')) }}
+          {{ Session::put('previousUrl', route('subscribe.index')) }}
 
           <div style="padding: 15px;">
             <div style="border: 0px; position: relative;" class="modal-header">
