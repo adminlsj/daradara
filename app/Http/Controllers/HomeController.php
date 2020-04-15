@@ -83,6 +83,26 @@ class HomeController extends Controller
 
     public function aboutUs()
     {
+        $playlist = Playlist::create([
+            'id' => Playlist::orderBy('id', 'desc')->first()->id + 1,
+            'user_id' => User::first()->id,
+            'title' => '超異域公主連結 Re:Demo',
+            'description' => 'Cygames製作奇幻風格角色扮演手機遊戲續篇改編成動畫。在和風吹拂的美麗大地·阿斯特雷亞大陸。在大陸的一角，失去記憶的少年·佑樹醒了過來。照顧他的小小嚮導·可可蘿。總是肚子空空的美少女劍士·佩可莉露。略顯高冷的貓耳魔法少女·凱露。他們就這麼在命運引導下，建立起名為「美食殿」的公會。現在，佑樹與她們的冒險即將開幕——',
+        ]);
+        $video = Video::create([
+            'id' => Video::orderBy('id', 'desc')->first()->id + 1,
+            'user_id' => User::first()->id,
+            'playlist_id' => $playlist->id,
+            'title' => '超異域公主連結 Re:Demo【第2話】',
+            'description' => '',
+            'link' => 'https://cdn-yong.bejingyongjiu.com/share/a7bf3f5462cc82062e41b3a2262e1a21',
+            'imgur' => 'MnDFAw7',
+            'tags' => '超異域公主連結 プリンセスコネクト Re:Dive 動漫',
+            'views' => 0,
+            'outsource' => true,
+            'created_at' => Carbon::now(),
+            'uploaded_at' => Carbon::now(),
+        ]);
         return view('layouts.about-us');
     }
 

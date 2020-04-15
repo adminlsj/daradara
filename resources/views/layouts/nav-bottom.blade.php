@@ -3,7 +3,7 @@
     <i class="material-icons">home</i>
     <span style="padding-right: 1px;">主頁</span>
   </a>
-  <a href="{{ route('video.subscribes') }}" class="{{ Request::is('*subscribes*') ? 'active' : ''}}">
+  <a href="{{ route('subscribe.index') }}" class="{{ Request::is('*subscribes*') ? 'active' : ''}}">
     <i style="font-size: 25px; position: relative" class="material-icons">subscriptions</i>
     <span style="padding-right: 1px;">訂閱</span>
     @if (Auth::check() && strpos(auth()->user()->alert, 'subscribe') !== false)
