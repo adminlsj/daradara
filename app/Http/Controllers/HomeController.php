@@ -264,6 +264,18 @@ class HomeController extends Controller
                     $comment->delete();
                 }
                 break;
+
+            case 'like':
+                for ($i = 0; $i < 300; $i++) {
+                    $like = Like::create([
+                        'user_id' => 1,
+                        'type' => 'demo',
+                        'foreign_id' => 1,
+                        'is_positive' => true,
+                    ]);
+                    $like->delete();
+                }
+                break;
             
             default:
                 # code...
