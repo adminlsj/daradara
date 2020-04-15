@@ -151,7 +151,7 @@ $(document).ready(function(){
     var urlParams = new URLSearchParams(window.location.search);
     $.ajax({ 
         type:"GET",
-        url: "/loadPlaylist",
+        url: "/loadRelated",
         data: {v: urlParams.get('v'), list: urlParams.get('list')},
         dataType: 'html',
         success: function(data){

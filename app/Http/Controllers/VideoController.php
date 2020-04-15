@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Video;
-use App\Watch;
+use App\Playlist;
 use App\User;
 use App\Subscribe;
 use App\Like;
@@ -62,14 +62,14 @@ class VideoController extends Controller
     public function playlist(Request $request){
         if ($request->has('list') && $request->list != 'null') {
 
-            $watch = Watch::find($request->list);
-            $videos = $watch->videos();
+            $playlist = Playlist::find($request->list);
+            $videos = $playlist->videos();
 
-            $first = $watch->videos()->first();
-            $is_subscribed = $this->is_subscribed($watch->title);
+            $first = $playlist->videos()->first();
+            $is_subscribed = $this->is_subscribed($playlist->title);
             $is_mobile = $this->checkMobile();
 
-            return view('video.intro', compact('watch', 'videos', 'first', 'is_subscribed', 'is_mobile'));
+            return view('video.intro', compact('playlist', 'videos', 'first', 'is_subscribed', 'is_mobile'));
         }
     }
 
@@ -82,19 +82,19 @@ class VideoController extends Controller
         if ($title == 'A Studio') {
             $title = 'A-Studio';
         }
-        $watch = Watch::where('title', $title)->first();
-        $videos = $watch->videos();
+        $playlist = Playlist::where('title', $title)->first();
+        $videos = $playlist->videos();
 
-        $first = $watch->videos()->first();
+        $first = $playlist->videos()->first();
 
-        $is_subscribed = $this->is_subscribed($watch->title);
+        $is_subscribed = $this->is_subscribed($playlist->title);
 
         $is_mobile = $this->checkMobile();
 
-        return view('video.intro', compact('watch', 'videos', 'first', 'is_subscribed', 'is_mobile'));
+        return view('video.intro', compact('playlist', 'videos', 'first', 'is_subscribed', 'is_mobile'));
     }
 
-    public function watch(Request $request){
+    public function show(Request $request){
         $vid = $request->v;
 
         if (is_numeric($vid) && $video = Video::find($request->v)) {
@@ -122,16 +122,16 @@ class VideoController extends Controller
             }
 
             if ($video->playlist_id != null) {
-                $watch = Watch::find($video->playlist_id);
-                $is_subscribed = $this->is_subscribed($watch->title);
+                $playlist = Playlist::find($video->playlist_id);
+                $is_subscribed = $this->is_subscribed($playlist->title);
                 $is_program = true;
             } else {
-                $watch = null;
+                $playlist = null;
                 $is_subscribed = false;
                 $is_program = false;
             }
 
-            return view('video.showWatch', compact('video', 'prev', 'next', 'watch', 'current', 'is_program', 'is_subscribed', 'is_mobile'));
+            return view('video.show', compact('video', 'prev', 'next', 'playlist', 'current', 'is_program', 'is_subscribed', 'is_mobile'));
 
         } else {
             return view('errors.404');
@@ -168,7 +168,7 @@ class VideoController extends Controller
 
         $video = Video::find($foreign_id);
         $html = '';
-        $html .= view('video.unlikeBtn', compact('video'));
+        $html .= view('video.unlike-btn', compact('video'));
 
         return response()->json([
             'unlikeBtn' => $html,
@@ -190,7 +190,7 @@ class VideoController extends Controller
 
         $video = Video::find($foreign_id);
         $html = '';
-        $html .= view('video.likeBtn', compact('video'));
+        $html .= view('video.like-btn', compact('video'));
 
         return response()->json([
             'likeBtn' => $html,
@@ -212,7 +212,7 @@ class VideoController extends Controller
 
         $video = Video::find($foreign_id);
         $html = '';
-        $html .= view('video.unsaveBtn', compact('video'));
+        $html .= view('video.unsave-btn', compact('video'));
 
         return response()->json([
             'unsaveBtn' => $html,
@@ -232,7 +232,7 @@ class VideoController extends Controller
 
         $video = Video::find($foreign_id);
         $html = '';
-        $html .= view('video.saveBtn', compact('video'));
+        $html .= view('video.save-btn', compact('video'));
 
         return response()->json([
             'saveBtn' => $html,
@@ -299,11 +299,6 @@ class VideoController extends Controller
             $is_mobile = true;
         }
         return $is_mobile;
-    }
-
-    public function trendingWatch()
-    {
-        return Watch::where('category', 'monday')->orWhere('category', 'monitoring')->orWhere('category', '24xsbzx')->orWhere('category', 'home')->orWhere('category', 'lddtz')->orWhere('category', 'talk')->orWhere('category', 'nmbgsz')->orWhere('category', 'djyhly')->orWhere('category', 'syrddowntown')->orWhere('category', 'scgy')->orWhere('category', 'szbzddsj')->orWhere('category', 'vsarashi')->orWhere('category', 'yjyjdwxyh')->orWhere('category', 'nnjcd')->orWhere('category', 'zrds')->orWhere('category', 'qytzz')->orWhere('category', 'tczcdwy')->orWhere('category', 'xyfsb')->inRandomOrder()->get();
     }
 
     public function search(Request $request)
@@ -388,7 +383,7 @@ class VideoController extends Controller
             }
         }
 
-        $watch = $videosArray[0]->playlist_id == '' ? null : $videosArray[0]->watch();
+        $playlist = $videosArray[0]->playlist_id == '' ? null : $videosArray[0]->playlist();
         $topResults = array_slice($videosArray, 0, 15);
 
         $page = Input::get('page', 1) + 1; // Get the ?page=1 from the url
@@ -408,10 +403,10 @@ class VideoController extends Controller
             return $html;
         }
 
-        return view('video.search', compact('videos', 'watch', 'query', 'topResults'));
+        return view('video.search', compact('videos', 'playlist', 'query', 'topResults'));
     }
 
-    public function loadPlaylist(Request $request)
+    public function loadRelated(Request $request)
     {
         $video = Video::find($request->v);
         $current = $video;
@@ -443,7 +438,7 @@ class VideoController extends Controller
             array_push($related, Video::find($rankings[$i]['id']));
         }
 
-        $html = view('video.video-playlist-wrapper', compact('current', 'videos', 'related'));
+        $html = view('video.related', compact('current', 'videos', 'related'));
         if ($request->ajax()) {
             return $html;
         }

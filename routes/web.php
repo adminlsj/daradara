@@ -27,8 +27,8 @@ Route::post('users/{user}/storeAvatar', 'UserController@storeAvatar');
 Route::get('/tempMethods', 'HomeController@tempMethods');
 
 Route::get('/subscribes', 'SubscribeController@index')->name('subscribe.index');
-Route::post('/subscribe', 'SubscribeController@subscribe')->name('subscribe.store');
-Route::post('/unsubscribe', 'SubscribeController@unsubscribe')->name('subscribe.destroy');
+Route::post('/subscribe', 'SubscribeController@store')->name('subscribe.store');
+Route::post('/unsubscribe', 'SubscribeController@destroy')->name('subscribe.destroy');
 Route::get('/tag', 'SubscribeControlller@tag')->name('subscribe.tag');
 
 Route::post('/like', 'VideoController@like')->name('video.like');
@@ -55,7 +55,7 @@ Route::post('/singleNewStore', 'HomeController@singleNewStore')->name('single.st
 Route::get('/sitemap.xml', 'HomeController@sitemap');
 Route::get('/getSource', 'VideoController@getSource');
 Route::get('/createGetSource', 'VideoController@createGetSource');
-Route::get('/loadPlaylist', 'VideoController@loadPlaylist')->name('video.loadPlaylist');
+Route::get('/loadRelated', 'VideoController@loadRelated');
 Route::get('/userReport', 'HomeController@userReport')->name('email.userReport');
 Route::get('/userStartUpload', 'UserController@userStartUpload')->name('email.userStartUpload');
 Route::get('/user/{user}/upload', 'UserController@userEditUpload')->name('user.userEditUpload');
@@ -71,6 +71,6 @@ Route::get('/newest', 'VideoController@index')->name('video.newest');
 Route::get('/playlist', 'VideoController@playlist')->name('video.playlist');
 Route::get('/{genre}/{title}', 'VideoController@intro')->name('video.intro');
 
-Route::get('/watch', 'VideoController@watch')->name('video.watch');
+Route::get('/watch', 'VideoController@show')->name('video.show');
 Route::get('/search', ['as' => 'video.search', 'uses' => 'VideoController@search']);
 Route::get('/search-google', ['as' => 'video.searchGoogle', 'uses' => 'VideoController@searchGoogle']);

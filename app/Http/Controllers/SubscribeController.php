@@ -124,7 +124,7 @@ class SubscribeController extends Controller
         $html = '';
         switch ($source) {
             case 'video':
-                $html .= view('video.unsubscribeBtn', compact('tag'));
+                $html .= view('video.unsubscribe-btn', compact('tag'));
                 break;
 
             case 'intro':
@@ -140,7 +140,7 @@ class SubscribeController extends Controller
                 break;
             
             default:
-                $html .= view('video.unsubscribeBtn', compact('tag'));
+                $html .= view('video.unsubscribe-btn', compact('tag'));
                 break;
         }
 
@@ -165,7 +165,7 @@ class SubscribeController extends Controller
         $html = '';
         switch ($source) {
             case 'video':
-                $html .= view('video.subscribeBtn', compact('tag'));
+                $html .= view('video.subscribe-btn', compact('tag'));
                 break;
 
             case 'intro':
@@ -181,7 +181,7 @@ class SubscribeController extends Controller
                 break;
             
             default:
-                $html .= view('video.subscribeBtn', compact('tag'));
+                $html .= view('video.subscribe-btn', compact('tag'));
                 break;
         }
 
