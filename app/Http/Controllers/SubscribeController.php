@@ -127,8 +127,8 @@ class SubscribeController extends Controller
                 $html .= view('video.unsubscribe-btn', compact('tag'));
                 break;
 
-            case 'intro':
-                $html .= view('video.intro-unsubscribe-btn', compact('tag'));
+            case 'playlist':
+                $html .= view('playlist.unsubscribe-btn', compact('tag'));
                 break;
 
             case 'show':
@@ -168,8 +168,8 @@ class SubscribeController extends Controller
                 $html .= view('video.subscribe-btn', compact('tag'));
                 break;
 
-            case 'intro':
-                $html .= view('video.intro-subscribe-btn', compact('tag'));
+            case 'playlist':
+                $html .= view('playlist.subscribe-btn', compact('tag'));
                 break;
 
             case 'show':

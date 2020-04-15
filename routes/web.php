@@ -68,8 +68,8 @@ Route::get('/trending', 'VideoController@watch')->name('video.trending');
 
 Route::get('/rank', 'VideoController@index')->name('video.rank');
 Route::get('/newest', 'VideoController@index')->name('video.newest');
-Route::get('/playlist', 'VideoController@playlist')->name('video.playlist');
-Route::get('/{genre}/{title}', 'VideoController@intro')->name('video.intro');
+Route::get('/playlist', 'PlaylistController@show')->name('playlist.show');
+Route::get('/{genre}/{title}', 'VideoController@intro');
 
 Route::get('/watch', 'VideoController@show')->name('video.show');
 Route::get('/search', ['as' => 'video.search', 'uses' => 'VideoController@search']);

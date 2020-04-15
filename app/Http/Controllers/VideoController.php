@@ -59,20 +59,6 @@ class VideoController extends Controller
         return view('video.index', compact('videos', 'is_mobile'));
     }
 
-    public function playlist(Request $request){
-        if ($request->has('list') && $request->list != 'null') {
-
-            $playlist = Playlist::find($request->list);
-            $videos = $playlist->videos();
-
-            $first = $playlist->videos()->first();
-            $is_subscribed = $this->is_subscribed($playlist->title);
-            $is_mobile = $this->checkMobile();
-
-            return view('video.intro', compact('playlist', 'videos', 'first', 'is_subscribed', 'is_mobile'));
-        }
-    }
-
     public function intro(String $genre, String $title, Request $request){
         $title = str_replace("_", " / ", $title);
         $title = str_replace("-", " ", $title);
@@ -91,7 +77,7 @@ class VideoController extends Controller
 
         $is_mobile = $this->checkMobile();
 
-        return view('video.intro', compact('playlist', 'videos', 'first', 'is_subscribed', 'is_mobile'));
+        return view('playlist.show', compact('playlist', 'videos', 'first', 'is_subscribed', 'is_mobile'));
     }
 
     public function show(Request $request){
