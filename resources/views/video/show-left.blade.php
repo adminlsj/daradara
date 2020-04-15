@@ -10,8 +10,8 @@
 </div>
 
 <div style="padding: 0px 30px 25px 30px;">
-  <div class="video-parts-wrapper" style="padding-top: 25px; margin-bottom: -4px; {{ count($video->sd()) == 1 ? 'display:none;' : '' }}">
-    @foreach ($video->sd() as $url)
+  <div class="video-parts-wrapper" style="padding-top: 25px; margin-bottom: -4px; {{ count($video->link()) == 1 ? 'display:none;' : '' }}">
+    @foreach ($video->link() as $url)
       <span class="{{ $loop->iteration == 1 ? 'active' : '' }}" onclick="changeSrc(this)" data-url="{{ $url }}"><i style="vertical-align:middle; font-size: 1.4em; margin-top: -3px; margin-right: 2px; margin-left: -3px; {{ $loop->iteration == 1 ? '' : 'display:none;' }}" class="material-icons">play_arrow</i>P{{ $loop->iteration }}</span>
     @endforeach
   </div>
