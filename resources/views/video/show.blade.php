@@ -34,9 +34,9 @@
 
 					<div style="position: relative; margin-top: 5px" class="tab">
 						@if (Request::get('list') != '')
-							<a href="{{ route('video.playlist') }}?list={{ $video->playlist()->id }}"><button style="color: #222222; font-weight: 400;" class="tablinks video-tablinks">{{ $video->playlist()->title }}</button></a>
-							<a style="position:absolute; top:12px; right:56px; text-decoration: none; {{ $prev != false ? 'color: #414141;' : 'pointer-events: none; color: #B9B9B9;' }}" href="{{ route('video.playlist') }}?v={{ $prev }}&list={{ $video->playlist()->id }}"><i class="material-icons noselect">skip_previous</i></a>
-							<a style="position:absolute; top:12px; right:15px; text-decoration: none; margin-left: 8px; {{ $next != false ? 'color: #414141;' : 'pointer-events: none; color: #B9B9B9;' }}" href="{{ route('video.playlist') }}?v={{ $next }}&list={{ $video->playlist()->id }}"><i class="material-icons noselect">skip_next</i></a>
+							<a href="{{ route('playlist.show') }}?list={{ $video->playlist()->id }}"><button style="color: #222222; font-weight: 400;" class="tablinks video-tablinks">{{ $video->playlist()->title }}</button></a>
+							<a style="position:absolute; top:12px; right:56px; text-decoration: none; {{ $prev != false ? 'color: #414141;' : 'pointer-events: none; color: #B9B9B9;' }}" href="{{ route('video.show') }}?v={{ $prev }}&list={{ $video->playlist()->id }}"><i class="material-icons noselect">skip_previous</i></a>
+							<a style="position:absolute; top:12px; right:15px; text-decoration: none; margin-left: 8px; {{ $next != false ? 'color: #414141;' : 'pointer-events: none; color: #B9B9B9;' }}" href="{{ route('video.show') }}?v={{ $next }}&list={{ $video->playlist()->id }}"><i class="material-icons noselect">skip_next</i></a>
 						@else
 							<a><button style="color: #222222; font-weight: 400" class="tablinks video-tablinks">相關影片</button></a>
 						@endif
@@ -45,7 +45,7 @@
 					@if ($video->playlist() && Request::get('list') != $video->playlist()->id)
 						<div class="hidden-xs hidden-sm" style="margin-top: 6px"></div>
 						<div id="suggested-watch-wrapper" style="padding: 0px 15px; padding-top: 8px" class="hover-opacity-all">
-							<a href="{{ route('video.playlist') }}?list={{ $video->playlist()->id }}" class="row no-gutter">
+							<a href="{{ route('playlist.show') }}?list={{ $video->playlist()->id }}" class="row no-gutter">
 							  <div style="padding-right: 4px; position: relative;" class="col-xs-6 col-sm-6 col-md-6">
 							    <img class="lazy" style="width: 100%; height: 100%;" src="{{ $video->imgur16by9() }}" data-src="{{ $video->playlist()->videos()->first()->imgurL() }}" data-srcset="{{ $video->playlist()->videos()->first()->imgurL() }}" alt="{{ $video->playlist()->title }}">
 							    <span>
