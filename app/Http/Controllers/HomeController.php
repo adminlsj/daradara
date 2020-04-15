@@ -233,6 +233,25 @@ class HomeController extends Controller
                     $playlist->delete();
                 }
                 break;
+
+            case 'video':
+                for ($i = 0; $i < 300; $i++) {
+                    $video = Video::create([
+                        'user_id' => 1,
+                        'playlist_id' => 1,
+                        'title' => 'demo',
+                        'description' => 'demo',
+                        'link' => 'demo',
+                        'imgur' => 'demo',
+                        'tags' => 'demo',
+                        'views' => 0,
+                        'outsource' => true,
+                        'created_at' => Carbon::now(),
+                        'uploaded_at' => Carbon::now(),
+                    ]);
+                    $video->delete();
+                }
+                break;
             
             default:
                 # code...
