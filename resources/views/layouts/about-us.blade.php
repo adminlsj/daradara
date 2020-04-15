@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('nav')
-	@include('layouts.nav-main-original', ['theme' => 'white'])
+	@include('nav.top')
 @endsection
 
 @section('content')
