@@ -226,7 +226,6 @@ class HomeController extends Controller
             case 'playlist':
                 for ($i = 0; $i < 300; $i++) {
                     $playlist = Playlist::create([
-                        'id' => 1,
                         'user_id' => 1,
                         'title' => 'demo',
                         'description' => 'demo',

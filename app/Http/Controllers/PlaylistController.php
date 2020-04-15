@@ -28,7 +28,6 @@ class PlaylistController extends Controller
 
     public function store(User $user, Request $request){
         $playlist = Playlist::create([
-            'id' => Playlist::orderBy('id', 'desc')->first()->id + 1,
             'user_id' => $user->id,
             'title' => $request->title,
             'description' => $request->description,
