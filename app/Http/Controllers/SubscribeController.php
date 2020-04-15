@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Video;
-use App\Watch;
+use App\Playlist;
 use App\Subscribe;
 use App\Avatar;
+use App\Save;
 use Illuminate\Http\Request;
 use Hash;
 use Storage;
@@ -57,16 +58,16 @@ class SubscribeController extends Controller
                 foreach ($subscribes as $subscribe) {
                     if ($first) {
                         if ($subscribe->type == 'watch') {
-                            $watch = Watch::where('title', $subscribe->tag)->first();
-                            $videos = Video::where('playlist_id', $watch->id);
+                            $playlist = Playlist::where('title', $subscribe->tag)->first();
+                            $videos = Video::where('playlist_id', $playlist->id);
                         } else {
                             $videos = Video::where('tags', 'LIKE', '%'.$subscribe->tag.'%');
                         }
                         $first = false;
                     } else {
                         if ($subscribe->type == 'watch') {
-                            $watch = Watch::where('title', $subscribe->tag)->first();
-                            $videos = $videos->orWhere('playlist_id', $watch->id);
+                            $playlist = Playlist::where('title', $subscribe->tag)->first();
+                            $videos = $videos->orWhere('playlist_id', $playlist->id);
                         } else {
                             $videos = $videos->orWhere('tags', 'LIKE', '%'.$subscribe->tag.'%');
                         }
@@ -203,6 +204,16 @@ class SubscribeController extends Controller
         $is_subscribed = $this->is_subscribed($tag);
 
         return view('video.subscribeTag', compact('tag', 'videos', 'is_subscribed'));
+    }
+
+    public function subscribeLoadHTML($videos)
+    {
+        $html = '';
+        $is_program = false;
+        foreach ($videos as $video) {
+            $html .= view('subscribe.index-single', compact('video', 'is_program'));
+        }
+        return $html;
     }
 
     public function checkMobile()

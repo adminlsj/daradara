@@ -71,6 +71,121 @@ class HomeController extends Controller
         return view('home.index', compact('selected', 'trendings', 'newest', 'load_more', 'is_mobile', 'subscribes'));
     }
 
+    public function search(Request $request)
+    {
+        $query = str_replace(' ', '', request('query'));
+
+        $queryArray = [];
+        preg_match_all('/./u', $query, $queryArray);
+        $queryArray = $queryArray[0];
+        if (($key = array_search(' ', $queryArray)) !== false) {
+            unset($queryArray[$key]);
+        }
+
+        $videosArray = [];
+        $idsArray = [];
+
+        // Exact Match Query [e.g. 2012.09.14]
+        $lowerQuery = '';
+        $upperQuery = '';
+        $exactQuery = [];
+        foreach ($queryArray as $char) {
+            if (preg_match("/^[a-zA-Z]$/", $char)) {
+                $lowerQuery = $lowerQuery.strtolower($char);
+                $upperQuery = $upperQuery.strtoupper($char);
+            } else {
+                $lowerQuery = $lowerQuery.$char;
+                $upperQuery = $upperQuery.$char;
+            }
+        }
+        if ($lowerQuery == $upperQuery) {
+            $exactQuery = Video::where('title', 'like', '%'.$lowerQuery.'%')->orderBy('uploaded_at', 'desc')->distinct()->get();
+        } else {
+            $exactQuery = Video::where('title', 'like', '%'.$lowerQuery.'%')->orWhere('title', 'like', '%'.$upperQuery.'%')->orderBy('uploaded_at', 'desc')->distinct()->get();
+        }
+        foreach ($exactQuery as $q) {
+            if (!in_array($q->id, $idsArray)) {
+                array_push($videosArray, $q);
+                array_push($idsArray, $q->id);
+            }
+        }
+
+        // Exact Order Match Query (search query in same order e.g. 2012 => 2>0>1>2) [e.g. 2012 09 14]
+        $exactOrderQueryScope = '%'.implode('%', $queryArray).'%';
+        $exactOrderQuery = Video::where('title', 'like', $exactOrderQueryScope)->orderBy('uploaded_at', 'desc')->get();
+        foreach ($exactOrderQuery as $q) {
+            if (!in_array($q->id, $idsArray)) {
+                array_push($videosArray, $q);
+                array_push($idsArray, $q->id);
+            }
+        }
+
+        // Character Match Query (search query as a whole e.g. 2012 => contains 2/0/1/2) [e.g. 郡司桑 月曜]
+        $videosSelect = Video::orderBy('uploaded_at', 'desc')->select('id', 'title', 'tags')->get()->toArray();
+        $rankings = [];
+        foreach ($videosSelect as $videoSelect) {
+            $score = 0;
+            foreach ($queryArray as $q) {
+                if (is_numeric($q)) {
+                    if (strpos($videoSelect['title'], $q) !== false) {
+                        $score++;
+                    }
+                } else {
+                    if (strpos($videoSelect['title'], $q) !== false) {
+                        $score++;
+                    }
+                    if (strpos($videoSelect['tags'], $q) !== false) {
+                        $score++;
+                    }
+                }
+            }
+            if ($score > 0) {
+                array_push($rankings, ['score' => $score, 'id' => $videoSelect['id']]);
+            }
+        }
+        usort($rankings, function ($a, $b) {
+            return $b['score'] <=> $a['score'];
+        });
+
+        foreach ($rankings as $rank) {
+            if (!in_array($rank['id'], $idsArray)) {
+                array_push($videosArray, Video::find($rank['id']));
+            }
+        }
+
+        $playlist = $videosArray[0]->playlist_id == '' ? null : $videosArray[0]->playlist();
+        $topResults = array_slice($videosArray, 0, 15);
+
+        $page = Input::get('page', 1) + 1; // Get the ?page=1 from the url
+        $perPage = 15; // Number of items per page
+        $offset = ($page * $perPage) - $perPage;
+
+        $videos = new LengthAwarePaginator(
+            array_slice($videosArray, $offset, $perPage, true), // Only grab the items we need
+            count($videosArray), // Total items
+            $perPage, // Items per page
+            $page, // Current page
+            ['path' => $request->url(), 'query' => $request->query()] // We need this so we can keep all old query parameters from the url
+        );
+
+        $html = $this->searchLoadHTML($videos);
+        if ($request->ajax()) {
+            return $html;
+        }
+
+        return view('home.search', compact('videos', 'playlist', 'query', 'topResults'));
+    }
+
+    public function searchLoadHTML($videos)
+    {
+        $html = '';
+        $is_program = false;
+        foreach ($videos as $video) {
+            $html .= view('home.search-single', compact('video', 'is_program'));
+        }
+        return $html;
+    }
+
     public function checkMobile()
     {
         $useragent = $_SERVER['HTTP_USER_AGENT'];

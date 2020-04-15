@@ -22,6 +22,6 @@
 
 <div id="comment-start">
 	@foreach ($current->comments() as $comment)
-	  @include('video.singleVideoComment')
+	  @include('video.comment-single')
 	@endforeach
 </div>

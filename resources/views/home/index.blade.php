@@ -15,7 +15,7 @@
 	    @if (count($subscribes) != 0)
 		    <div style="margin: 0 auto 0 auto; padding-top: 10px;">
 		    	<div class="video-slider-title paravi-padding-setup">
-		    		<a href="{{ route('video.subscribes') }}"><h4>最新訂閱內容<span class="hidden-xs">更多內容</span><i class="material-icons">arrow_forward_ios</i></h4></a>
+		    		<a href="{{ route('subscribe.index') }}"><h4>最新訂閱內容<span class="hidden-xs">更多內容</span><i class="material-icons">arrow_forward_ios</i></h4></a>
 			    </div>
 			    @include('video.slider', ['videos' => $subscribes])
 			</div>

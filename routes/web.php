@@ -72,5 +72,5 @@ Route::get('/playlist', 'PlaylistController@show')->name('playlist.show');
 Route::get('/{genre}/{title}', 'VideoController@intro');
 
 Route::get('/watch', 'VideoController@show')->name('video.show');
-Route::get('/search', ['as' => 'video.search', 'uses' => 'VideoController@search']);
+Route::get('/search', 'HomeController@search')->name('home.search');
 Route::get('/search-google', ['as' => 'video.searchGoogle', 'uses' => 'VideoController@searchGoogle']);
