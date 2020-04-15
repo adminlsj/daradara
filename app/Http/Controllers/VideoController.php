@@ -434,8 +434,10 @@ class VideoController extends Controller
         });
 
         $related = [];
-        for ($i = 0; $i < 30; $i++) {
-            array_push($related, Video::find($rankings[$i]['id']));
+        if ($rankings != []) {
+            for ($i = 0; $i < 30; $i++) {
+                array_push($related, Video::find($rankings[$i]['id']));
+            }
         }
 
         $html = view('video.related', compact('current', 'videos', 'related'));
