@@ -252,6 +252,18 @@ class HomeController extends Controller
                     $video->delete();
                 }
                 break;
+
+            case 'comment':
+                for ($i = 0; $i < 100; $i++) {
+                    $comment = Comment::create([
+                        'user_id' => 1,
+                        'type' => 'demo',
+                        'foreign_id' => 1,
+                        'text' => 'demo',
+                    ]);
+                    $comment->delete();
+                }
+                break;
             
             default:
                 # code...
