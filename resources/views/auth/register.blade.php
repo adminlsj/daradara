@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
 @section('nav')
-    @include('layouts.nav-main-original', ['theme' => 'white'])
+  @include('nav.top')
 @endsection
 
 @section('content')
 <div class="hidden-sm hidden-xs sidebar-menu">
-    @include('video.sidebarMenu', ['theme' => 'white'])
+    @include('nav.side')
 </div>
 
 <div class="main-content">
