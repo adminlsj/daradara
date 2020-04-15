@@ -198,7 +198,7 @@ class HomeController extends Controller
 
     public function aboutUs()
     {
-        $playlist = Playlist::create([
+        /*$playlist = Playlist::create([
             'id' => 1,
             'user_id' => 1,
             'title' => '超異域公主連結 Re:Demo',
@@ -217,7 +217,7 @@ class HomeController extends Controller
             'outsource' => true,
             'created_at' => Carbon::now(),
             'uploaded_at' => Carbon::now(),
-        ]);
+        ]);*/
         return view('layouts.about-us');
     }
 
