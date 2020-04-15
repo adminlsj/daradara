@@ -115,7 +115,6 @@ class LoginController extends Controller
             'user_id'     => $localUser->id,
             'filename'    => $user->getAvatar(),
             'mime' => 'jpg',
-            'original_filename' => $user->getAvatar(),
         ]);
 
         return $localUser;
