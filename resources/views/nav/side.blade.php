@@ -2,7 +2,7 @@
 	@include('nav.side-item', ['link' => '/', 'is_current' => Request::is('/') ? 'active' : '', 'icon' => 'home', 'title' => '首頁'])
 	@include('nav.side-item', ['link' => route('video.rank'), 'is_current' => Request::is('*rank*') ? 'active' : '', 'icon' => 'whatshot', 'title' => '發燒影片'])
 	@include('nav.side-item', ['link' => route('video.newest'), 'is_current' => Request::is('*newest*') ? 'active' : '', 'icon' => 'explore', 'title' => '最新內容'])
-	@include('nav.side-item', ['link' => route('video.subscribes'), 'is_current' => Request::is('*subscribes*') ? 'active' : '', 'icon' => 'subscriptions', 'title' => '訂閱項目'])
+	@include('nav.side-item', ['link' => route('subscribe.index'), 'is_current' => Request::is('*subscribes*') ? 'active' : '', 'icon' => 'subscriptions', 'title' => '訂閱項目'])
 
 	<hr style="margin: 10px 0px 9px 0px;">
 	

@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\User;
 use App\Avatar;
-use App\Watch;
 use App\Video;
 use Auth;
 use Socialite;

@@ -26,10 +26,10 @@ Route::post('users/{user}/storeAvatar', 'UserController@storeAvatar');
 
 Route::get('/tempMethods', 'HomeController@tempMethods');
 
-Route::get('/subscribes', 'VideoController@subscribeIndex')->name('video.subscribes');
-Route::post('/subscribe', 'VideoController@subscribe')->name('video.subscribe');
-Route::post('/unsubscribe', 'VideoController@unsubscribe')->name('video.unsubscribe');
-Route::get('/tag', 'VideoController@subscribeTag')->name('video.subscribeTag');
+Route::get('/subscribes', 'SubscribeController@index')->name('subscribe.index');
+Route::post('/subscribe', 'SubscribeController@subscribe')->name('subscribe.store');
+Route::post('/unsubscribe', 'SubscribeController@unsubscribe')->name('subscribe.destroy');
+Route::get('/tag', 'SubscribeControlller@tag')->name('subscribe.tag');
 
 Route::post('/like', 'VideoController@like')->name('video.like');
 Route::post('/unlike', 'VideoController@unlike')->name('video.unlike');

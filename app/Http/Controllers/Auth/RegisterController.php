@@ -3,10 +3,14 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\Avatar;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Auth\Events\Registered;
+use Session;
 
 class RegisterController extends Controller
 {
@@ -28,7 +32,15 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected function redirectTo()
+    {
+        $previousUrl = Session::get('previousUrl');
+        if ($previousUrl !== '') {
+            return $previousUrl;
+        } else {
+            return '/subscribes';
+        }
+    }
 
     /**
      * Create a new controller instance.
@@ -51,7 +63,11 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
+            'password' => 'required|string|min:6',
+        ], [
+            'email.unique' => '該電子郵件已登記賬戶，若忘記密碼，請聯絡我們 laughseejapan@gmail.com',
+            'email.max'  => '該電子郵件的字數超過系統允許的長度',
+            'password.min'  => '請設定密碼為6個字母或以上',
         ]);
     }
 
@@ -63,10 +79,30 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+            'password' => bcrypt($data['password']),
         ]);
+
+        return $user;
+    }
+
+    /**
+     * Handle a registration request for the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+
+        event(new Registered($user = $this->create($request->all())));
+
+        $this->guard()->login($user, true);
+
+        return $this->registered($request, $user)
+                        ?: redirect($this->redirectTo());
     }
 }
