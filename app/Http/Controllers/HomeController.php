@@ -218,7 +218,6 @@ class HomeController extends Controller
                         'user_id' => 1,
                         'filename' =>'demo',
                         'mime' => 'jpg',
-                        'original_filename' => 'demo',
                     ]);
                     $avatar->delete();
                 }
