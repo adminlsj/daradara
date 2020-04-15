@@ -286,6 +286,17 @@ class HomeController extends Controller
                     $save->delete();
                 }
                 break;
+
+            case 'subscribe':
+                for ($i = 0; $i < 300; $i++) {
+                    $subscribe = Subscribe::create([
+                        'user_id' => 1,
+                        'type' => 'demo',
+                        'tag' => 'demo',
+                    ]);
+                    $subscribe->delete();
+                }
+                break;
             
             default:
                 # code...
