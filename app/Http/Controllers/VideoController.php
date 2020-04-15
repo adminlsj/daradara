@@ -384,22 +384,22 @@ class VideoController extends Controller
             $videosSelect = Video::where('id', '!=', $video->id)->inRandomOrder()->select('id', 'tags')->get()->toArray();
         }
 
-        $rankings = [];
-        foreach ($videosSelect as $videoSelect) {
-            $score = 0;
-            foreach ($video->tags() as $tag) {
-                if (strpos($videoSelect['tags'], $tag) !== false) {
-                    $score++;
-                }
-            }
-            array_push($rankings, ['score' => $score, 'id' => $videoSelect['id']]);
-        }
-        usort($rankings, function ($a, $b) {
-            return $b['score'] <=> $a['score'];
-        });
-
         $related = [];
-        if (!empty($rankings)) {
+        if (!empty($videosSelect)) {
+            $rankings = [];
+            foreach ($videosSelect as $videoSelect) {
+                $score = 0;
+                foreach ($video->tags() as $tag) {
+                    if (strpos($videoSelect['tags'], $tag) !== false) {
+                        $score++;
+                    }
+                }
+                array_push($rankings, ['score' => $score, 'id' => $videoSelect['id']]);
+            }
+            usort($rankings, function ($a, $b) {
+                return $b['score'] <=> $a['score'];
+            });
+
             for ($i = 0; $i < 30; $i++) {
                 array_push($related, Video::find($rankings[$i]['id']));
             }
