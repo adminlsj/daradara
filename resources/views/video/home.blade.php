@@ -13,13 +13,15 @@
 	<div style="background-color: #F5F5F5;">
 
 		<div class="home-banner-wrapper" style="margin-top: 10px; margin: 0 auto 0 auto; padding-top: 10px;">
-			<div style="background-color: white; text-align: left; position: relative;">
-				<img src="https://i.imgur.com/X29HWB5.png">
-				<div id="home-banner-catchphrase">崁入你的原創內容
-一鍵分享給全世界的觀眾</div>
+			<a href="/about">
+				<div style="background-color: white; text-align: left; position: relative;">
+					<img src="https://i.imgur.com/X29HWB5.png">
+					<div id="home-banner-catchphrase">崁入你的原創內容
+	一鍵分享給全世界的觀眾</div>
 
-				<div id="home-banner-logo"><span id="english-logo">LaughSeeJapan</span><span id="chinese-logo">娛見日本</span></div>
-			</div>
+					<div id="home-banner-logo"><span id="english-logo">LaughSeeJapan</span><span id="chinese-logo">娛見日本</span></div>
+				</div>
+			</a>
 		</div>
 
 	    @if (count($subscribes) != 0)
