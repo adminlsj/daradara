@@ -83,9 +83,10 @@
 		          </div>
 
 		          <div style="margin-right:100px; position: relative;" class="form-group">
-		            <input type="text" class="form-control" name="link" id="link" placeholder="影片崁入鏈結（查看教學：https://tutorialehtml.com/en/html-tutorial-embed-video/）" required>
+		            <input type="text" class="form-control" name="link" id="link" placeholder="影片崁入鏈結" required>
 		            <div id="test-play-btn" style="width: 102px; position: absolute; top: 0px; right:-100px; background-color: gray; color: white; padding: 6px 0px 6px 20px; cursor: pointer;">測試播放</div>
 		          </div>
+		          <small>在娛見日本 LaughSeeJapan 崁入內容的<a href="/about">指南與守則</a>。</small>
 
 				  <div id="test-player" class="aspect-ratio" style="background-color: black; background-image: url('https://i.imgur.com/TcZjkZa.gif'); background-position: center; background-repeat: no-repeat; background-size: 50px; margin-bottom: 25px; display: none;">
 				  </div>
