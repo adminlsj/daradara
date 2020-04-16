@@ -38,6 +38,10 @@ body {
   text-decoration: underline;
 }
 
+.home-banner-wrapper, .home-banner-wrapper img {
+  max-height: 250px;
+}
+
 .slider-wrapper h4, .load-more-wrapper h4 {
   font-size: 1em;
   font-weight: 600;
@@ -2454,6 +2458,10 @@ a > i {
 @media (max-width: 768px) {
   .nav-image-wrapper img {
     margin-top: 11px;
+  }
+
+  .home-banner-wrapper, .home-banner-wrapper img {
+    max-height: 150px;
   }
 
   #custom-scroll-slider .hover-opacity {
