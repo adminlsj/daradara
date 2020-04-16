@@ -668,7 +668,7 @@ class VideoController extends Controller
             return $html;
         }
 
-        $watch = $videosArray[0]->playlist_id == '' ? null : $videosArray[0]->watch();
+        $watch = empty($videosArray) || $videosArray[0]->playlist_id == '' ? null : $videosArray[0]->watch();
         $topResults = array_slice($videosArray, 0, 15);
 
         return view('video.search', compact('watch', 'query', 'topResults'));
