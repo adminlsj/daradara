@@ -606,68 +606,70 @@ class VideoController extends Controller
             }
         }
 
-        // Exact Order Match Query (search query in same order e.g. 2012 => 2>0>1>2) [e.g. 2012 09 14]
-        $exactOrderQueryScope = '%'.implode('%', $queryArray).'%';
-        $exactOrderQuery = Video::where('title', 'like', $exactOrderQueryScope)->orderBy('uploaded_at', 'desc')->get();
-        foreach ($exactOrderQuery as $q) {
-            if (!in_array($q->id, $idsArray)) {
-                array_push($videosArray, $q);
-                array_push($idsArray, $q->id);
-            }
-        }
+        if ($request->ajax()) {
+            $videosArray = array_slice($videosArray, 15);
 
-        // Character Match Query (search query as a whole e.g. 2012 => contains 2/0/1/2) [e.g. 郡司桑 月曜]
-        $videosSelect = Video::orderBy('uploaded_at', 'desc')->select('id', 'title', 'tags')->get()->toArray();
-        $rankings = [];
-        foreach ($videosSelect as $videoSelect) {
-            $score = 0;
-            foreach ($queryArray as $q) {
-                if (is_numeric($q)) {
-                    if (strpos($videoSelect['title'], $q) !== false) {
-                        $score++;
-                    }
-                } else {
-                    if (strpos($videoSelect['title'], $q) !== false) {
-                        $score++;
-                    }
-                    if (strpos($videoSelect['tags'], $q) !== false) {
-                        $score++;
-                    }
+            // Exact Order Match Query (search query in same order e.g. 2012 => 2>0>1>2) [e.g. 2012 09 14]
+            $exactOrderQueryScope = '%'.implode('%', $queryArray).'%';
+            $exactOrderQuery = Video::where('title', 'like', $exactOrderQueryScope)->orderBy('uploaded_at', 'desc')->get();
+            foreach ($exactOrderQuery as $q) {
+                if (!in_array($q->id, $idsArray)) {
+                    array_push($videosArray, $q);
+                    array_push($idsArray, $q->id);
                 }
             }
-            if ($score > 0) {
-                array_push($rankings, ['score' => $score, 'id' => $videoSelect['id']]);
-            }
-        }
-        usort($rankings, function ($a, $b) {
-            return $b['score'] <=> $a['score'];
-        });
 
-        foreach ($rankings as $rank) {
-            if (!in_array($rank['id'], $idsArray)) {
-                array_push($videosArray, Video::find($rank['id']));
+            // Character Match Query (search query as a whole e.g. 2012 => contains 2/0/1/2) [e.g. 郡司桑 月曜]
+            $videosSelect = Video::orderBy('uploaded_at', 'desc')->select('id', 'title', 'tags')->get()->toArray();
+            $rankings = [];
+            foreach ($videosSelect as $videoSelect) {
+                $score = 0;
+                foreach ($queryArray as $q) {
+                    if (is_numeric($q)) {
+                        if (strpos($videoSelect['title'], $q) !== false) {
+                            $score++;
+                        }
+                    } else {
+                        if (strpos($videoSelect['title'], $q) !== false) {
+                            $score++;
+                        }
+                        if (strpos($videoSelect['tags'], $q) !== false) {
+                            $score++;
+                        }
+                    }
+                }
+                if ($score > 0) {
+                    array_push($rankings, ['score' => $score, 'id' => $videoSelect['id']]);
+                }
             }
+            usort($rankings, function ($a, $b) {
+                return $b['score'] <=> $a['score'];
+            });
+
+            foreach ($rankings as $rank) {
+                if (!in_array($rank['id'], $idsArray)) {
+                    array_push($videosArray, Video::find($rank['id']));
+                }
+            }
+
+            $page = Input::get('page', 1); // Get the ?page=1 from the url
+            $perPage = 15; // Number of items per page
+            $offset = ($page * $perPage) - $perPage;
+
+            $videos = new LengthAwarePaginator(
+                array_slice($videosArray, $offset, $perPage, true), // Only grab the items we need
+                count($videosArray), // Total items
+                $perPage, // Items per page
+                $page, // Current page
+                ['path' => $request->url(), 'query' => $request->query()] // We need this so we can keep all old query parameters from the url
+            );
+
+            $html = $this->searchLoadHTML($videos);
+            return $html;
         }
 
         $watch = $videosArray[0]->playlist_id == '' ? null : $videosArray[0]->watch();
         $topResults = array_slice($videosArray, 0, 15);
-
-        $page = Input::get('page', 1) + 1; // Get the ?page=1 from the url
-        $perPage = 15; // Number of items per page
-        $offset = ($page * $perPage) - $perPage;
-
-        $videos = new LengthAwarePaginator(
-            array_slice($videosArray, $offset, $perPage, true), // Only grab the items we need
-            count($videosArray), // Total items
-            $perPage, // Items per page
-            $page, // Current page
-            ['path' => $request->url(), 'query' => $request->query()] // We need this so we can keep all old query parameters from the url
-        );
-
-        $html = $this->searchLoadHTML($videos);
-        if ($request->ajax()) {
-            return $html;
-        }
 
         return view('video.search', compact('videos', 'watch', 'query', 'topResults'));
     }
