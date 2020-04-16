@@ -671,7 +671,7 @@ class VideoController extends Controller
         $watch = $videosArray[0]->playlist_id == '' ? null : $videosArray[0]->watch();
         $topResults = array_slice($videosArray, 0, 15);
 
-        return view('video.search', compact('videos', 'watch', 'query', 'topResults'));
+        return view('video.search', compact('watch', 'query', 'topResults'));
     }
 
     public function loadPlaylist(Request $request)
