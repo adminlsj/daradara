@@ -31,10 +31,7 @@
 
 			<p style="white-space: pre-line">LaughSeeJapan Copyright Contact Information:
 Email: acura1989akc@gmail.com
-Address:
-24 Kendrick street
-Paramus,  NJ 07652
-USA
+Address: 24 Kendrick street, Paramus,  NJ 07652, USA
 			</p>
 
 			<p>The name you enter as copyright owner will be published on LaughSeeJapan in place of the turned off content. If you can give us a valid legal alternative, such as a company name or the name of an authorized representative, we'll review and apply it if appropriate. The name will become part of the public record of your request, along with your description of the work(s) allegedly infringed. All other information, including your full legal name and email, are part of the full takedown notice, which may be given to the uploader.</p>

@@ -12,8 +12,8 @@
             <div style="margin-top: -5px;"><a href="https://www.facebook.com/freeriderjapan/" target="_blank">這裡是日本</a></div>
         </div>
         <div class="col-sm-12 col-md-12" style="margin-left: 25px;">
-            <div><a href="/about-us">關於</a>&nbsp;<a href="/terms">服務條款</a>&nbsp;<a href="/policies">社群規範</a></div>
-            <div style="margin-top: -5px;"><a href="/about-us">與我們聯絡</a>&nbsp;<a href="/copyright">版權</a></div>
+            <div><a href="/about">關於</a>&nbsp;<a href="/terms">服務條款</a>&nbsp;<a href="/policies">社群規範</a></div>
+            <div style="margin-top: -5px;"><a href="/contact">與我們聯絡</a>&nbsp;<a href="/copyright">版權</a></div>
         </div>
         <div class="col-sm-12 col-md-12" style="margin-left: 25px; margin-top: 5px">
             <div style="font-size: 0.8em; color: gray">© 2020 娛見日本 LaughSeeJapan</div>

@@ -18,7 +18,7 @@
     <meta name="title" content="娛見日本 LaughSeeJapan">
     <title>娛見日本 LaughSeeJapan</title>
     <meta name="description" 
-          content="娛見日本 LaughSeeJapan 讓您享受最愛的影片、上傳原創內容，並與全世界觀眾分享您的影片。">
+          content="在娛見日本 LaughSeeJapan 上享受您最愛的影片、崁入原創內容，並與全世界觀眾分享您的影片。">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">

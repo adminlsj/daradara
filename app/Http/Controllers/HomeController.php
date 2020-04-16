@@ -20,9 +20,14 @@ use Redirect;
 
 class HomeController extends Controller
 {
-    public function aboutUs()
+    public function about()
     {
         return view('layouts.about-us');
+    }
+
+    public function contact()
+    {
+        return view('layouts.contact');
     }
 
     public function terms()

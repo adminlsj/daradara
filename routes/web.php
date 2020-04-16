@@ -40,7 +40,8 @@ Route::post('/unsave', 'VideoController@unsave')->name('video.unsave');
 Route::post('/createComment', 'VideoController@createComment')->name('video.createComment');
 Route::post('/deleteComment', 'VideoController@deleteComment')->name('video.deleteComment');
 
-Route::get('/about-us', 'HomeController@aboutUs');
+Route::get('/about', 'HomeController@about');
+Route::get('/contact', 'HomeController@contact');
 Route::get('/terms', 'HomeController@terms');
 Route::get('/policies', 'HomeController@policies');
 Route::get('/copyright', 'HomeController@copyright');
