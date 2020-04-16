@@ -15,10 +15,10 @@
 		<div class="home-banner-wrapper" style="margin-top: 10px; margin: 0 auto 0 auto; padding-top: 10px;">
 			<div style="background-color: white; text-align: left; position: relative;">
 				<img src="https://i.imgur.com/X29HWB5.png">
-				<div style="white-space: pre-wrap; text-align: right; position: absolute; bottom: 16px; right: 30px; font-size: 2.2em; font-weight: 300; color: gray; line-height: 47px">崁入你的原創內容
+				<div id="home-banner-catchphrase">崁入你的原創內容
 一鍵分享給全世界的觀眾</div>
 
-				<div style="white-space: pre-wrap; text-align: left; position: absolute; top: 10px; right: 30px; font-size: 1.2em; font-weight: 400;line-height: 47px;"><span style="border: 1px solid #E5E5E5; padding: 5px 9px; border-top-left-radius: 2px; border-bottom-left-radius: 2px; color: gray">LaughSeeJapan</span><span style="border: 1px solid #E5E5E5; background-color:#E5E5E5; color: white; padding: 5px 9px; border-top-right-radius: 2px; border-bottom-right-radius: 2px;">娛見日本</span></div>
+				<div id="home-banner-logo"><span id="english-logo">LaughSeeJapan</span><span id="chinese-logo">娛見日本</span></div>
 			</div>
 		</div>
 
