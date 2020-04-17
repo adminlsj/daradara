@@ -21,6 +21,7 @@
   font-weight: bold !important;
   font-size: 1.15em !important;
   letter-spacing: 0.2px;
+  text-decoration: none !important;
 }
 
 .gs-title:hover {
@@ -30,6 +31,7 @@
 .gs-title b {
   color: #0000CC !important;
   font-size: 1em !important;
+  text-decoration: none !important;
 }
 
 .gsc-url-top {
@@ -2267,6 +2269,11 @@ a > i {
 
 .rank-index-padding-top {
   padding-top: 35px;
+}
+
+.search-tag-title {
+  padding-top: 10px !important;
+  padding-bottom: 5px !important;
 }
 
 @media (max-width: 991px) {
