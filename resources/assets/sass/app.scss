@@ -40,7 +40,7 @@
 
 .gs-bidi-start-align {
   padding-top: 0px;
-  padding-left: 68px;
+  padding-left: 108px;
   letter-spacing: 0.2px;
   font-size: 1.05em;
   line-height: 21px;
@@ -79,6 +79,10 @@
 .gsc-cursor-current-page {
   font-weight: bold !important;
   color: black !important;
+}
+
+.gs-web-image-box img {
+  max-width: 100px !important;
 }
 
 html, body {
@@ -2276,6 +2280,10 @@ a > i {
   padding-bottom: 5px !important;
 }
 
+.search-google-wrapper {
+  padding-top: 10px;
+}
+
 @media (max-width: 991px) {
   #content-div {
     padding-bottom: 50px
@@ -2283,6 +2291,10 @@ a > i {
 
   .paravi-padding-setup {
     padding: 0px 15px;
+  }
+
+  .search-google-wrapper {
+    padding-top: 0px;
   }
 
   #nav-main-hamburger {

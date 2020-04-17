@@ -714,9 +714,7 @@ class VideoController extends Controller
 
     public function searchGoogle(Request $request)
     {
-        $videos = Video::where('tags', 'like', '%'.request('q').'%')->orderBy('uploaded_at', 'desc')->paginate(10);
-        $is_mobile = $this->checkMobile();
-        return view('video.searchGoogle', compact('videos', 'is_mobile'));
+        return view('video.searchGoogle');
     }
 
     public function has_prev(array $_array)

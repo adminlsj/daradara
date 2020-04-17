@@ -16,7 +16,7 @@
       @endif
 
       <form id="search-form" class="hidden-xs hidden-sm pull-right" style="text-align: left; width: 62%; margin-top: 10px;" action="{{ route('video.searchGoogle') }}" method="GET">
-          <input name="query" style="box-shadow: none; border: 1px solid #d1d1d1; background-color: white; font-size: 1em; width: 62%; border-top-left-radius: 2px; border-bottom-left-radius: 2px; height: 31px; padding-left: 10px; color: #222222" type="text" value="{{ request('q') }}" placeholder="搜索">
+          <input name="q" style="box-shadow: none; border: 1px solid #d1d1d1; background-color: white; font-size: 1em; width: 62%; border-top-left-radius: 2px; border-bottom-left-radius: 2px; height: 31px; padding-left: 10px; color: #222222" type="text" value="{{ request('q') }}" placeholder="搜索">
           <a class="search-submit-btn hover-opacity-all" type="submit" style="cursor: pointer;"><i style="font-size: 22px; vertical-align:middle; border: 1px solid #d1d1d1; background-color: #f9f9f9; color: #888888; padding: 3.5px 20px; margin-top: -3px; margin-left: -5px; border-top-right-radius: 2px; border-bottom-right-radius: 2px;" class="material-icons no-select">search</i></a>
       </form>
 
