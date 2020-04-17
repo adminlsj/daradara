@@ -42,16 +42,50 @@ class UserController extends Controller
             }
         }
 
-        $videos = Video::where('user_id', $user->id)->orderBy('created_at', 'desc')->paginate(12);
-        $html = '';
-        foreach ($videos as $video) {
-            $html .= view('video.singleLoadMoreSliderVideos', compact('video'));
+        switch ($request->genre) {
+            case 'featured':
+                if ($request->ajax()) {
+                    $videos = Video::where('user_id', $user->id)->orderBy('created_at', 'desc')->paginate(12);
+                    $html = '';
+                    foreach ($videos as $video) {
+                        $html .= view('video.singleLoadMoreSliderVideos', compact('video'));
+                    }
+                    return $html;
+                }
+                return view('user.show-featured', compact('user', 'subscribers'));
+
+            case 'playlists':
+                return view('user.show-playlists', compact('user', 'watches', 'subscribers'));
+
+            case 'about':
+                return view('user.show-about', compact('user', 'subscribers'));
+            
+            default:
+                if ($request->ajax()) {
+                    $videos = Video::where('user_id', $user->id)->orderBy('created_at', 'desc')->paginate(12);
+                    $html = '';
+                    foreach ($videos as $video) {
+                        $html .= view('video.singleLoadMoreSliderVideos', compact('video'));
+                    }
+                    return $html;
+                }
+                return view('user.show-featured', compact('user', 'subscribers'));
+                break;
         }
-        if ($request->ajax()) {
-            return $html;
+    }
+
+    public function showPlaylist(User $user, Request $request)
+    {
+        $watches = $user->watches();
+
+        $subscribers = 0;
+        if ($watches->first()) {
+            foreach ($watches as $watch) {
+                $subscribers = $subscribers + Subscribe::where('tag', $watch->title)->count();
+            }
         }
 
-        return view('user.show', compact('user', 'watches', 'videos', 'subscribers'));
+        return view('user.show-playlists', compact('user', 'watches', 'subscribers'));
     }
 
     /**

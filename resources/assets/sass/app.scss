@@ -214,8 +214,8 @@ body {
 }
 
 .user-show-tabcontent .user-show-playlist {
-  margin-left: -5px;
-  margin-right: -5px;
+  margin-left: 50px;
+  margin-right: 50px;
 }
 
 .nav-image-wrapper img {
@@ -403,7 +403,7 @@ body {
 }
 
 /* Style the buttons that are used to open the tab content */
-.user-show-tab button {
+.user-show-tab a {
   background-color: inherit;
   float: left;
   border: none;
@@ -414,16 +414,21 @@ body {
   line-height: 40px;
   width: 100px;
   border-bottom: solid 3px #F9F9F9;
+  text-align: center;
+  text-decoration: none;
+  color: gray !important;
 }
 
 /* Change background color of buttons on hover */
-.user-show-tab button:hover {
+.user-show-tab a:hover {
   background-color: #ddd;
+  color: black !important;
 }
 
 /* Create an active/current tablink class */
-.user-show-tab button.active {
+.user-show-tab a.active {
   border-bottom: solid 3px dimgray;
+  color: black !important;
 }
 
 /* Style the tab content */

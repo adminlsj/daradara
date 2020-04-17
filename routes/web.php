@@ -58,6 +58,7 @@ Route::get('/getSource', 'VideoController@getSource');
 Route::get('/createGetSource', 'VideoController@createGetSource');
 Route::get('/loadPlaylist', 'VideoController@loadPlaylist')->name('video.loadPlaylist');
 Route::get('/userReport', 'HomeController@userReport')->name('email.userReport');
+Route::get('/user/{user}/{genre?}', 'UserController@show')->name('user.show');
 Route::get('/userStartUpload', 'UserController@userStartUpload')->name('email.userStartUpload');
 Route::get('/user/{user}/upload', 'UserController@userEditUpload')->name('user.userEditUpload');
 Route::post('/user/{user}/userUpdateUpload', 'UserController@userUpdateUpload')->name('user.userUpdateUpload');
