@@ -3,7 +3,7 @@
 	    @foreach ($videos as $video)
 	        <div class="hover-opacity" style="display: inline-block; vertical-align: text-top;">
 			    <a style="text-decoration: none; color: black" class="overlay" href="{{ route('video.watch') }}?v={{ $video->id }}">
-				    <img loading="lazy" style="width: 100%; height: 100%;" src="{{ $video->imgurL() }}" alt="{{ $video->title }}">
+				    <img class="lazy" style="width: 100%; height: 100%;" src="{{ $video->imgur16by9() }}" data-src="{{ $video->imgurL() }}" data-srcset="{{ $video->imgurL() }}" alt="{{ $video->title }}">
 
 				    <div class="hover-underline">
 					    <h4 class="text-ellipsis">{{ $video->title }}</h4>

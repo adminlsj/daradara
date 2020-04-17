@@ -2,14 +2,14 @@
 
 @section('head')
     @parent
-    <title>{{ Request::get('q') }} | 娛見日本 LaughSeeJapan</title>
-    <meta name="title" content="{{ Request::get('q') }} | 娛見日本 LaughSeeJapan | 日本最強娛樂 | 綜藝 | 日劇 | 動漫">
+    <title>{{ Request::get('q') }} - 娛見日本 LaughSeeJapan</title>
+    <meta name="title" content="{{ Request::get('q') }} - 娛見日本 LaughSeeJapan">
     <meta name="description" 
-              content="日本最強娛樂，最新綜藝！從綜藝到日劇和動漫，娛見日本 LaughSeeJapan 包攬最新最全的日娛王道！從搞笑到感動，從笑梗到溫情，從寵物到家庭，這裡可以找到讓你大笑，讓你痛哭，讓你重拾失去的情感，讓你回歸最原始的自己！這裡是日本，最強娛樂，最新綜藝，以及人文與文化！">
+          content="在娛見日本 LaughSeeJapan 上享受您最愛的影片、崁入原創內容，並與全世界觀眾分享您的影片。">
 @endsection
 
 @section('nav')
-	@include('layouts.nav-main', ['theme' => 'white', 'logoImage' => 'https://i.imgur.com/M8tqx5K.png'])
+	@include('layouts.nav-main-original', ['theme' => 'white'])
 @endsection
 
 @section('content')
@@ -19,9 +19,9 @@
 
 <div class="main-content">
 	<div style="background-color: white" class="padding-setup">
-		<div style="margin-left: -14px; margin-right: -14px; overflow-y: hidden;">
+		<div style="margin-left: -14px; margin-right: -14px; overflow-y: hidden; margin-top: 2px">
 		    <script async src="https://cse.google.com/cse.js?cx=004204537983416081067:6ev1yqb2x3e"></script>
-			<div class="gcse-search"></div>
+			<div class="gcse-searchresults-only"></div>
 		</div>
 	</div>
 </div>
