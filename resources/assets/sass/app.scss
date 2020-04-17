@@ -2279,6 +2279,11 @@ a > i {
     padding-left: 0px;
   }
 
+  .gsc-cursor div {
+    border: solid 1px black !important;
+    padding: 10px !important;
+  }
+
   #search-top-watch .col-md-3 > span {
     margin-right: -5px;
   }

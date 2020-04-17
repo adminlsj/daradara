@@ -18,16 +18,29 @@
 </div>
 
 <div class="main-content">
-	<div style="background-color: #F5F5F5" class="paravi-padding-setup">
-		<div class="row" style="margin: 0 auto 0 auto; padding-top: 10px; padding-bottom: 10px">
+	<div style="background-color: #F5F5F5; padding-bottom: 10px">
+
+		<div style="margin: 0 auto 0 auto; padding-top: 10px; margin-bottom: 10px">
+			<div style="background-color: white; padding-top: 1px; margin-left: 10px;">
+				<div style="margin-left: -5px">
+					<div class="video-slider-title paravi-padding-setup">
+				    	<a href="{{ route('video.newest') }}"><h4>最新精彩內容<span class="hidden-xs">更多內容</span><i class="material-icons">arrow_forward_ios</i></h4></a>
+				    </div>
+				    @include('video.single-video-slider', ['videos' => $newest])
+			    </div>
+		    </div>
+		</div>
+
+		<div class="row paravi-padding-setup">
 			<div style="overflow-y: hidden;">
-				<div class="video-slider-title" style="background-color: white; padding: 15px 0px 0px 18px; margin-bottom: -10px;">
-		    		<a href="{{ route('video.subscribes') }}"><h4>搜索結果<span class="hidden-xs">更多內容</span><i class="material-icons">arrow_forward_ios</i></h4></a>
+				<div class="explore-slider-title" style="background-color: white; padding: 15px 0px 0px 18px; margin-bottom: -10px;">
+		    		<a href="{{ route('video.newest') }}"><h4 style="font-weight: 500">搜索結果<span>最新內容</span><i class="material-icons">arrow_forward_ios</i></h4></a>
 			    </div>
 			    <script async src="https://cse.google.com/cse.js?cx=004204537983416081067:6ev1yqb2x3e"></script>
 				<div class="gcse-searchresults-only"></div>
 			</div>
 		</div>
+
 	</div>
 </div>
 @endsection
