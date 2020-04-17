@@ -18,10 +18,15 @@
 </div>
 
 <div class="main-content">
-	<div style="background-color: white" class="padding-setup">
-		<div style="margin-left: -14px; margin-right: -14px; overflow-y: hidden; margin-top: 2px">
-		    <script async src="https://cse.google.com/cse.js?cx=004204537983416081067:6ev1yqb2x3e"></script>
-			<div class="gcse-searchresults-only"></div>
+	<div style="background-color: #F5F5F5" class="paravi-padding-setup">
+		<div class="row" style="margin: 0 auto 0 auto; padding-top: 10px; padding-bottom: 10px">
+			<div style="overflow-y: hidden;">
+				<div class="video-slider-title" style="background-color: white; padding: 15px 0px 0px 18px; margin-bottom: -10px;">
+		    		<a href="{{ route('video.subscribes') }}"><h4>搜索結果<span class="hidden-xs">更多內容</span><i class="material-icons">arrow_forward_ios</i></h4></a>
+			    </div>
+			    <script async src="https://cse.google.com/cse.js?cx=004204537983416081067:6ev1yqb2x3e"></script>
+				<div class="gcse-searchresults-only"></div>
+			</div>
 		</div>
 	</div>
 </div>
