@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
+  alert('hi');
   var lazyImages = [].slice.call(document.querySelectorAll("img.lazy"));
 
   if ("IntersectionObserver" in window) {
