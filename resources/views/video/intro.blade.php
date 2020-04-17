@@ -2,7 +2,7 @@
 
 @section('head')
     @parent
-    <title>{{ $watch->title }} - 播放清單 - 娛見日本 LaughSeeJapan</title>
+    <title>{{ $watch->title }}&nbsp;-&nbsp;播放清單&nbsp;-&nbsp;娛見日本 LaughSeeJapan</title>
     <meta name="title" content="{{ $watch->title }} - 播放清單 - 娛見日本 LaughSeeJapan">
     <meta name="description" content="{{ $watch->description }}">
 

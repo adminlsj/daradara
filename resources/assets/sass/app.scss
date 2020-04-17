@@ -94,6 +94,21 @@ body {
     overflow-x:hidden;
 }
 
+#nav-logo-image {
+  width: 35px; 
+  height: 35px; 
+  margin-top: -6px; 
+  margin-left: 5px;
+}
+
+#nav-logo-text {
+  font-size: 1.5em; 
+  line-height: 48px; 
+  margin-left: 15px; 
+  color: dimgray; 
+  letter-spacing: -1px;
+}
+
 .paravi-padding-setup {
   padding: 0px 25px;
 }
@@ -2291,6 +2306,14 @@ a > i {
 
   .paravi-padding-setup {
     padding: 0px 15px;
+  }
+
+  #nav-logo-image {
+    margin-left: -5px;
+  }
+
+  #nav-logo-text {
+    margin-left: 5px; 
   }
 
   .search-google-wrapper {

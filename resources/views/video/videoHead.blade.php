@@ -4,7 +4,7 @@
 <meta property="og:description" content="{{ $current->caption }}" />
 <meta property="og:image" content="https://i.imgur.com/{{ $current->imgur }}h.png" />
 
-<title>{{ $current->title }} - 線上看 - 娛見日本 LaughSeeJapan</title>
+<title>{{ $current->title }}&nbsp;-&nbsp;線上看&nbsp;-&nbsp;娛見日本 LaughSeeJapan</title>
 <meta name="title" content="{{ $current->title }} - 線上看 - 娛見日本 LaughSeeJapan">
 <meta name="description" content="{{ $current->caption }}">
 

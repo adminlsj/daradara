@@ -1,10 +1,10 @@
 <nav class="nav-main-original {{ $theme == 'dark' ? 'dark-theme-nav-main' : 'white-theme-nav-main' }}">
   <div class="container-fluid">
     <div style="height: 50px;">
-      <i id="nav-main-hamburger" class="material-icons hidden-xs hidden-sm" style="margin-top: -6px">menu</i>
+      <img id="nav-logo-image" src="https://i.imgur.com/6ePdVGMm.jpg">
 
       <a style="text-decoration: none;" href="/">
-          <span style="font-size: 1.5em; line-height: 47px; margin-left: -4px; color: #d84b6b; letter-spacing: -0.5px; font-weight:500">LaughSeeJapan</span>
+          <span id="nav-logo-text">LaughSeeJapan</span>
       </a>
 
       @if (Auth::check())
