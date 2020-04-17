@@ -38,15 +38,15 @@
   display: none !important;
 }
 
-.gs-bidi-start-align {
+.gsc-table-cell-snippet-close .gs-bidi-start-align {
   padding-top: 0px;
-  padding-left: 108px;
+  padding-left: 113px;
   letter-spacing: 0.2px;
   font-size: 1.05em;
   line-height: 21px;
 }
 
-.gs-bidi-start-align b {
+.gsc-table-cell-snippet-close .gs-bidi-start-align b {
   font-weight: bold;
   color: black;
 }
@@ -82,7 +82,7 @@
 }
 
 .gs-web-image-box img {
-  max-width: 100px !important;
+  max-width: 105px !important;
 }
 
 html, body {
@@ -2324,7 +2324,7 @@ a > i {
     margin-bottom: -5px;
   }
 
-  .gs-bidi-start-align {
+  .gsc-table-cell-snippet-close .gs-bidi-start-align {
     padding-left: 0px;
   }
 
