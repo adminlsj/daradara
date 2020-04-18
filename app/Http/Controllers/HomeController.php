@@ -23,6 +23,7 @@ class HomeController extends Controller
 {
     public function index(Request $request){
         $subscribes = [];
+        $subscribes_id = [];
         if (auth()->check()) {
             $subscriptions = auth()->user()->subscribes();
             if (!$subscriptions->isEmpty()) {
