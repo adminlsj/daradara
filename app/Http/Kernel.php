@@ -35,7 +35,6 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
-            \App\Http\Middleware\HttpsProtocol::class,
         ],
 
         'api' => [
@@ -59,7 +58,5 @@ class Kernel extends HttpKernel
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'sameUser' => \App\Http\Middleware\CheckSameUser::class,
-        'notPayed' => \App\Http\Middleware\CheckNotPayed::class,
-        'setGenre' => \App\Http\Middleware\SetGenre::class,
     ];
 }
