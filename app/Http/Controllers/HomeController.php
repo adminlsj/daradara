@@ -35,7 +35,7 @@ class HomeController extends Controller
                         $subscribes = $subscribes->orWhere('tags', 'LIKE', '%'.$subscribe->tag.'%');
                     }
                 }
-                $subscribes = $subscribes->orderBy('uploaded_at', 'desc')->limit(16)->get();
+                $subscribes = $subscribes->orderBy('uploaded_at', 'desc')->limit(12)->get();
             }
         }
 

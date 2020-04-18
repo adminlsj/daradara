@@ -11,7 +11,7 @@
 
 <div class="main-content">
 	<div style="background-color: #F5F5F5;">
-		<div class="home-banner-wrapper" style="margin-top: 10px; margin: 0 auto 0 auto; padding-top: 10px;">
+		<div class="home-banner-wrapper" style="padding-top: 10px; margin-bottom: 35px;">
 			<div style="background-color: white; text-align: left; position: relative;">
 				<img src="https://i.imgur.com/X29HWB5.png">
 				<div id="home-banner-catchphrase">崁入你的原創內容

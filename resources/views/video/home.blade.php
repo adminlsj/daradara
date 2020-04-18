@@ -24,19 +24,17 @@
 			</a>
 		</div>
 
-	    @if (count($subscribes) != 0)
-	    	<div class="video-slider-title paravi-padding-setup">
-	    		<a href="{{ route('video.subscribes') }}"><h4>最新訂閱內容<span class="hidden-xs">更多內容</span><i class="material-icons">arrow_forward_ios</i></h4></a>
-		    </div>
-		    @include('video.single-video-slider', ['videos' => $subscribes])
-	    @endif
-
 	    <div class="explore-slider-title paravi-padding-setup">
 	    	<a href="{{ route('video.rank') }}"><h4>推薦內容<span>發燒影片</span><i class="material-icons">arrow_forward_ios</i></h4></a>
 	    </div>
 
 	    <div class="row no-gutter load-more-container">
 	        <div class="video-sidebar-wrapper">
+	        	@if (count($subscribes) != 0)
+				    @foreach ($subscribes as $video)
+				    	@include('video.singleLoadMoreSliderVideos')
+				    @endforeach
+			    @endif
 	        	@foreach ($newest as $video)
 			    	@include('video.singleLoadMoreSliderVideos')
 			    @endforeach
