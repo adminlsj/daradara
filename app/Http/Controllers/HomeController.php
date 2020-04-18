@@ -26,16 +26,16 @@ class HomeController extends Controller
         if (auth()->check()) {
             $subscriptions = auth()->user()->subscribes();
             if (!$subscriptions->isEmpty()) {
-                $subscribes = Video::query();
-                foreach ($subscriptions as $subscribe) {
-                    if ($subscribe->type == 'watch') {
-                        $watch = Watch::where('title', $subscribe->tag)->first();
-                        $subscribes = $subscribes->orWhere('playlist_id', $watch->id);
-                    } else {
-                        $subscribes = $subscribes->orWhere('tags', 'LIKE', '%'.$subscribe->tag.'%');
+                $subscribes = Video::where(function($query) use ($subscriptions) {
+                    foreach ($subscriptions as $subscribe) {
+                        if ($subscribe->type == 'watch') {
+                            $watch = Watch::where('title', $subscribe->tag)->first();
+                            $query->orWhere('playlist_id', $watch->id);
+                        } else {
+                            $query->orWhere('tags', 'LIKE', '%'.$subscribe->tag.'%');
+                        }
                     }
-                }
-                $subscribes = $subscribes->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->orderBy('uploaded_at', 'desc')->get();
+                })->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->orderBy('uploaded_at', 'desc')->limit(12)->get();
             }
         }
 
