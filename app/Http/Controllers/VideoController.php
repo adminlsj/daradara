@@ -33,15 +33,15 @@ class VideoController extends Controller
         if ($request->ajax()) {
             switch ($request->path()) {
                 case 'rank':
-                    $videos = Video::whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(2))->orderBy('views', 'desc');
+                    $videos = Video::whereDate('uploaded_at', '>=', Carbon::now()->subMonth())->orderBy('views', 'desc');
                     break;
 
                 case 'newest':
-                    $videos = Video::whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(2))->orderBy('uploaded_at', 'desc');
+                    $videos = Video::whereDate('uploaded_at', '>=', Carbon::now()->subMonth())->orderBy('uploaded_at', 'desc');
                     break;
                 
                 default:
-                    $videos = Video::whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(2))->orderBy('views', 'desc');
+                    $videos = Video::whereDate('uploaded_at', '>=', Carbon::now()->subMonth())->orderBy('views', 'desc');
                     break;
             }
             $videos = $videos->paginate(24);
