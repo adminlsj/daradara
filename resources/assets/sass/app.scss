@@ -125,10 +125,6 @@ body {
   max-height: 250px;
 }
 
-.home-banner-wrapper {
-  margin-bottom: 45px !important;
-}
-
 .home-banner-wrapper #home-banner-catchphrase {
   white-space: pre-wrap; 
   text-align: right; 
@@ -1609,10 +1605,6 @@ a > i {
   padding-left: 20px;
 }
 
-.main-content > div {
-  min-height: calc(100vh - 50px);
-}
-
 .sidebar-menu {
   position: -webkit-fixed;
   position: fixed;
@@ -2619,10 +2611,6 @@ a > i {
 
   .home-banner-wrapper, .home-banner-wrapper img {
     max-height: 150px;
-  }
-
-  .home-banner-wrapper {
-    margin-bottom: 35px !important;
   }
 
   .home-banner-wrapper #home-banner-catchphrase {

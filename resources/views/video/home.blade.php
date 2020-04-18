@@ -12,7 +12,7 @@
 <div class="main-content">
 	<div style="background-color: #F5F5F5;">
 
-		<div class="home-banner-wrapper" style="margin-top: 10px; margin: 0 auto 0 auto; padding-top: 10px;">
+		<div class="home-banner-wrapper" style="padding-top: 10px; margin-bottom: 7px">
 			<a href="/about">
 				<div style="background-color: white; text-align: left; position: relative;">
 					<img src="https://i.imgur.com/X29HWB5.png">
@@ -31,7 +31,7 @@
 		    @include('video.single-video-slider', ['videos' => $subscribes])
 	    @endif
 
-	    <div style="padding-top: 1px;" class="explore-slider-title paravi-padding-setup">
+	    <div class="explore-slider-title paravi-padding-setup">
 	    	<a href="{{ route('video.rank') }}"><h4>推薦內容<span>發燒影片</span><i class="material-icons">arrow_forward_ios</i></h4></a>
 	    </div>
 
