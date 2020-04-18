@@ -17,27 +17,19 @@
 				<div style="color: gray; margin-top: 3px;">訂閱您喜愛的頻道，保證不會錯過最新內容。</div>
 			</div>
 		</div>
-		<hr style="border-color: #e9e9e9; margin-bottom: 0px">
-		<div style="margin: 0 auto 0 auto; padding-top: 10px;">
-	      <div class="video-slider-title paravi-padding-setup">
-		    	<a href="{{ route('video.rank') }}"><h4>最夯發燒影片<span class="hidden-xs">更多內容</span><i class="material-icons">arrow_forward_ios</i></h4></a>
-		    </div>
-		    @include('video.single-video-slider', ['videos' => $trendings])
+		<hr style="border-color: #e9e9e9; margin-bottom: -3px">
+		<div class="explore-slider-title paravi-padding-setup">
+	    	<a href="{{ route('video.rank') }}"><h4>推薦內容<span>發燒影片</span><i class="material-icons">arrow_forward_ios</i></h4></a>
 	    </div>
 
-	    <div class="video-slider-title paravi-padding-setup">
-	    	<a href="{{ route('video.newest') }}"><h4>最新精彩內容<span class="hidden-xs">更多內容</span><i class="material-icons">arrow_forward_ios</i></h4></a>
-	    </div>
-	    @include('video.single-video-slider', ['videos' => $newest])
-
-	    <div class="video-slider-title paravi-padding-setup">
-	      <a href="{{ route('video.rank') }}"><h4>更多發燒影片<span class="hidden-xs">更多內容</span><i class="material-icons">arrow_forward_ios</i></h4></a>
-	    </div>
 	    <div class="row no-gutter load-more-container">
-	      <div class="video-sidebar-wrapper">
-	          <div id="sidebar-results"><!-- results appear here --></div>
-	          <div style="text-align: center;" class="ajax-loading"><img style="width: 40px; height: auto; padding-top: 25px; padding-bottom: 50px;" src="https://i.imgur.com/TcZjkZa.gif"/></div>
-	      </div>
+	        <div class="video-sidebar-wrapper">
+	        	@foreach ($newest as $video)
+			    	@include('video.singleLoadMoreSliderVideos')
+			    @endforeach
+		        <div id="sidebar-results"><!-- results appear here --></div>
+		        <div style="text-align: center;" class="ajax-loading"><img style="width: 40px; height: auto; padding-top: 25px; padding-bottom: 50px;" src="https://i.imgur.com/TcZjkZa.gif"/></div>
+	        </div>
 	    </div>
 	</div>
 </div>

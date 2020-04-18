@@ -148,66 +148,67 @@ class VideoController extends Controller
     {
         if (auth()->check()) {
             $subscribes = auth()->user()->subscribes();
-            if ($subscribes->isEmpty()) {
-                $trendings = Video::whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(2))->inRandomOrder()->limit(16)->get();
-                $newest = Video::orderBy('uploaded_at', 'desc')->limit(16)->get();
-                $load_more = Video::whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(2))->orderBy('views', 'desc')->paginate(12);
 
-                $html = '';
-                foreach ($load_more as $video) {
-                    $html .= view('video.singleLoadMoreSliderVideos', compact('video'));
-                }
+            if ($subscribes->isEmpty()) {
+                $newest = Video::orderBy('uploaded_at', 'desc')->limit(12);
+                $newest_id = $newest->pluck('id');
+                $newest = $newest->get();
+
                 if ($request->ajax()) {
+                    $html = '';
+                    $load_more = Video::whereNotIn('id', $newest_id)->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->orderBy('views', 'desc')->paginate(24);
+                    foreach ($load_more as $video) {
+                        $html .= view('video.singleLoadMoreSliderVideos', compact('video'));
+                    }
                     return $html;
                 }
 
-                $is_mobile = $this->checkMobile();
-
-                return view('video.subscribeIndexEmpty', compact('trendings', 'newest', 'load_more', 'is_mobile'));
+                return view('video.subscribeIndexEmpty', compact('newest'));
             }
 
-            $videos = Video::query();
-            $g = $request->get('g');
-            if ($g != 'newest' && $g != 'saved') {
-                $g = 'newest';
-            }
-            if ($g == 'newest') {
-                foreach ($subscribes as $subscribe) {
-                    if ($subscribe->type == 'watch') {
-                        $watch = Watch::where('title', $subscribe->tag)->first();
-                        $videos->orWhere('playlist_id', $watch->id);
-                    } else {
-                        $videos->orWhere('tags', 'LIKE', '%'.$subscribe->tag.'%');
-                    }
-                }
-
-            } elseif ($g == 'saved') {
-                $saved = Save::where('user_id', auth()->user()->id)->get();
-                $first = true;
-                foreach ($saved as $save) {
-                    if ($first) {
-                        $videos = Video::where('id', $save->foreign_id);
-                        $first = false;
-                    } else {
-                        $videos = $videos->orWhere('id', $save->foreign_id);
-                    }
-                }
-            }
-            
-            if ($videos != []) {
-                $videos = $videos->orderBy('uploaded_at', 'desc')->paginate(10);
-            }
-
-            $html = $this->subscribeLoadHTML($videos);
             if ($request->ajax()) {
-                return $html;
+                $videos = Video::query();
+                switch ($request->get('g')) {
+                    case 'newest':
+                        foreach ($subscribes as $subscribe) {
+                            if ($subscribe->type == 'watch') {
+                                $watch = Watch::where('title', $subscribe->tag)->first();
+                                $videos->orWhere('playlist_id', $watch->id);
+                            } else {
+                                $videos->orWhere('tags', 'LIKE', '%'.$subscribe->tag.'%');
+                            }
+                        }
+                        break;
+
+                    case 'saved':
+                        $saved = Save::where('user_id', auth()->user()->id)->pluck('foreign_id');
+                        $videos = $videos->whereIn('id', $saved);
+                        break;
+                    
+                    default:
+                        foreach ($subscribes as $subscribe) {
+                            if ($subscribe->type == 'watch') {
+                                $watch = Watch::where('title', $subscribe->tag)->first();
+                                $videos->orWhere('playlist_id', $watch->id);
+                            } else {
+                                $videos->orWhere('tags', 'LIKE', '%'.$subscribe->tag.'%');
+                            }
+                        }
+                        break;
+                }
+                
+                if ($videos != []) {
+                    $videos = $videos->orderBy('uploaded_at', 'desc')->paginate(10);
+                }
+
+                return $this->subscribeLoadHTML($videos);
             }
 
             $user = auth()->user();
             $user->alert = str_replace('subscribe', '', $user->alert);
             $user->save();
 
-            return view('video.subscribeIndex', compact('subscribes', 'videos'));
+            return view('video.subscribeIndex', compact('subscribes'));
 
         } else {
             return view('auth.login');
