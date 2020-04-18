@@ -22,49 +22,39 @@ class HomeController extends Controller
 {
     public function index(Request $request){
         $subscribes = [];
+        $subscribes_id = [];
         if (auth()->check()) {
             $subscriptions = auth()->user()->subscribes();
             if (!$subscriptions->isEmpty()) {
-                $first = true;
-                foreach ($subscriptions as $subscribe) {
-                    if ($first) {
+                $subscribes = Video::where(function($query) use ($subscriptions) {
+                    foreach ($subscriptions as $subscribe) {
                         if ($subscribe->type == 'watch') {
                             $watch = Watch::where('title', $subscribe->tag)->first();
-                            $subscribes = Video::where('playlist_id', $watch->id);
+                            $query->orWhere('playlist_id', $watch->id);
                         } else {
-                            $subscribes = Video::where('tags', 'LIKE', '%'.$subscribe->tag.'%');
-                        }
-                        $first = false;
-                    } else {
-                        if ($subscribe->type == 'watch') {
-                            $watch = Watch::where('title', $subscribe->tag)->first();
-                            $subscribes = $subscribes->orWhere('playlist_id', $watch->id);
-                        } else {
-                            $subscribes = $subscribes->orWhere('tags', 'LIKE', '%'.$subscribe->tag.'%');
+                            $query->orWhere('tags', 'LIKE', '%'.$subscribe->tag.'%');
                         }
                     }
-                }
-
-                $subscribes = $subscribes->whereDate('uploaded_at', '>=', Carbon::now()->subMonths(6))->orderBy('uploaded_at', 'desc')->limit(16)->get();
+                })->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->orderBy('uploaded_at', 'desc')->limit(12);
+                $subscribes_id = $subscribes->pluck('id');
+                $subscribes = $subscribes->get();
             }
         }
 
-        $selected = Video::where('user_id', 1809)->inRandomOrder()->limit(16)->get();
-        $trendings = Video::whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(2))->inRandomOrder()->limit(16)->get();
-        $newest = Video::orderBy('uploaded_at', 'desc')->limit(16)->get();
-        $load_more = Video::whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(2))->orderBy('views', 'desc')->paginate(12);
+        $newest = Video::whereNotIn('id', $subscribes_id)->orderBy('uploaded_at', 'desc')->limit(12);
+        $newest_id = $newest->pluck('id');
+        $newest = $newest->get();
 
-        $html = '';
-        foreach ($load_more as $video) {
-            $html .= view('video.singleLoadMoreSliderVideos', compact('video'));
-        }
         if ($request->ajax()) {
+            $html = '';
+            $load_more = Video::whereNotIn('id', $subscribes_id)->whereNotIn('id', $newest_id)->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->orderBy('views', 'desc')->paginate(24);
+            foreach ($load_more as $video) {
+                $html .= view('video.singleLoadMoreSliderVideos', compact('video'));
+            }
             return $html;
         }
 
-        $is_mobile = $this->checkMobile();
-
-        return view('video.home', compact('selected', 'trendings', 'newest', 'load_more', 'is_mobile', 'subscribes'));
+        return view('video.home', compact('subscribes', 'newest'));
     }
 
     public function about()
