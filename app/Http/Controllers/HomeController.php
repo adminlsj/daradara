@@ -35,7 +35,7 @@ class HomeController extends Controller
                         $subscribes = $subscribes->orWhere('tags', 'LIKE', '%'.$subscribe->tag.'%');
                     }
                 }
-                $subscribes = $subscribes->orderBy('uploaded_at', 'desc')->limit(12)->get();
+                $subscribes = $subscribes->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->orderBy('uploaded_at', 'desc')->get();
             }
         }
 
