@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('nav')
-<<<<<<< HEAD
 	@include('layouts.nav-main-original', ['theme' => 'white'])
 @endsection
 
@@ -12,7 +11,7 @@
 
 <div class="main-content">
 	<div style="background-color: #F5F5F5;">
-		<div class="home-banner-wrapper" style="padding-top: 10px; margin-bottom: 35px;">
+		<div class="home-banner-wrapper" style="margin-top: 10px; margin: 0 auto 0 auto; padding-top: 10px;">
 			<div style="background-color: white; text-align: left; position: relative;">
 				<img src="https://i.imgur.com/X29HWB5.png">
 				<div id="home-banner-catchphrase">崁入你的原創內容
@@ -58,35 +57,4 @@
 		</script>
 	</div>
 </div>
-=======
-	@include('nav.top')
-@endsection
-
-@section('content')
-<div class="padding-setup mobile-container">
-	<div class="policy" style="margin-top:40px;">
-		<h2 style="font-weight: 600">聯絡我們</h2>
-		<p>電郵地址：laughseejapan@gmail.com</p>
-		<p>官方網站：<a href="https://www.laughseejapan.com">https://www.laughseejapan.com</a></p>
-		<a href="/terms">服務條款</a>
-		<a href="/policies">社群規範</a>
-		<a href="/copyright">版權申訴</a>
-	</div>
-	<br><br><br><br><br><br><br>
-</div>
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "url": "http://www.laughseejapan.com",
-  "name": "娛見日本 LaughSeeJapan",
-  "contactPoint": {
-    "@type": "ContactPoint",
-    "email": "laughseejapan@gmail.com",
-    "contactType": "Customer service"
-  }
-}
-</script>
->>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
 @endsection

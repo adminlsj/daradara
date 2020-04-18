@@ -1,20 +1,12 @@
 @extends('layouts.app')
 
 @section('nav')
-<<<<<<< HEAD
 	@include('layouts.nav-main-original', ['theme' => 'white'])
-=======
-	@include('nav.top')
->>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
 @endsection
 
 @section('content')
 <div class="hidden-sm hidden-xs sidebar-menu">
-<<<<<<< HEAD
     @include('video.sidebarMenu', ['theme' => 'white'])
-=======
-    @include('nav.side')
->>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
 </div>
 
 <div class="main-content">

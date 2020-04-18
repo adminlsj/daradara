@@ -1,20 +1,12 @@
 @extends('layouts.app')
 
 @section('nav')
-<<<<<<< HEAD
 	@include('layouts.nav-main-original', ['theme' => 'white'])
-=======
-	@include('nav.top')
->>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
 @endsection
 
 @section('content')
 <div class="hidden-sm hidden-xs sidebar-menu">
-<<<<<<< HEAD
   @include('video.sidebarMenu', ['theme' => 'white'])
-=======
-    @include('nav.side')
->>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
 </div>
 
 <div class="main-content">
@@ -39,14 +31,7 @@
 
 			<p style="white-space: pre-line">LaughSeeJapan Copyright Contact Information:
 Email: acura1989akc@gmail.com
-<<<<<<< HEAD
 Address: 24 Kendrick street, Paramus,  NJ 07652, USA
-=======
-Address:
-24 Kendrick street
-Paramus,  NJ 07652
-USA
->>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
 			</p>
 
 			<p>The name you enter as copyright owner will be published on LaughSeeJapan in place of the turned off content. If you can give us a valid legal alternative, such as a company name or the name of an authorized representative, we'll review and apply it if appropriate. The name will become part of the public record of your request, along with your description of the work(s) allegedly infringed. All other information, including your full legal name and email, are part of the full takedown notice, which may be given to the uploader.</p>

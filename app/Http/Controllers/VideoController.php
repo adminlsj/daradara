@@ -30,33 +30,30 @@ class VideoController extends Controller
     }
 
     public function explore(Request $request){
-        switch ($request->path()) {
-            case 'rank':
-                $videos = Video::whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(2))->orderBy('views', 'desc');
-                break;
-
-            case 'newest':
-                $videos = Video::whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(2))->orderBy('uploaded_at', 'desc');
-                break;
-            
-            default:
-                $videos = Video::whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(2))->orderBy('views', 'desc');
-                break;
-        }
-
-        $videos = $videos->paginate(24);
-
-        $html = '';
-        foreach ($videos as $video) {
-            $html .= view('video.singleLoadMoreSliderVideos', compact('video'));
-        }
         if ($request->ajax()) {
+            switch ($request->path()) {
+                case 'rank':
+                    $videos = Video::whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(2))->orderBy('views', 'desc');
+                    break;
+
+                case 'newest':
+                    $videos = Video::whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(2))->orderBy('uploaded_at', 'desc');
+                    break;
+                
+                default:
+                    $videos = Video::whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(2))->orderBy('views', 'desc');
+                    break;
+            }
+            $videos = $videos->paginate(24);
+
+            $html = '';
+            foreach ($videos as $video) {
+                $html .= view('video.singleLoadMoreSliderVideos', compact('video'));
+            }
             return $html;
         }
 
-        $is_mobile = $this->checkMobile();
-
-        return view('video.rankIndex', compact('videos', 'is_mobile'));
+        return view('video.rankIndex');
     }
 
     public function playlist(Request $request){
@@ -169,29 +166,18 @@ class VideoController extends Controller
                 return view('video.subscribeIndexEmpty', compact('trendings', 'newest', 'load_more', 'is_mobile'));
             }
 
-            $videos = [];
+            $videos = Video::query();
             $g = $request->get('g');
             if ($g != 'newest' && $g != 'saved') {
                 $g = 'newest';
             }
             if ($g == 'newest') {
-                $first = true;
                 foreach ($subscribes as $subscribe) {
-                    if ($first) {
-                        if ($subscribe->type == 'watch') {
-                            $watch = Watch::where('title', $subscribe->tag)->first();
-                            $videos = Video::where('playlist_id', $watch->id);
-                        } else {
-                            $videos = Video::where('tags', 'LIKE', '%'.$subscribe->tag.'%');
-                        }
-                        $first = false;
+                    if ($subscribe->type == 'watch') {
+                        $watch = Watch::where('title', $subscribe->tag)->first();
+                        $videos->orWhere('playlist_id', $watch->id);
                     } else {
-                        if ($subscribe->type == 'watch') {
-                            $watch = Watch::where('title', $subscribe->tag)->first();
-                            $videos = $videos->orWhere('playlist_id', $watch->id);
-                        } else {
-                            $videos = $videos->orWhere('tags', 'LIKE', '%'.$subscribe->tag.'%');
-                        }
+                        $videos->orWhere('tags', 'LIKE', '%'.$subscribe->tag.'%');
                     }
                 }
 

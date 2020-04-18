@@ -11,12 +11,10 @@
 		{
 		  "@context": "https://schema.org",
 		  "@type": "ImageObject",
-		  "name": "{{ $watch->title }}",
-		  "description": "{{ $watch->description }}",
-		  "contentUrl": [
-		    "https://i.imgur.com/{{ $first->imgur }}l.png"
-		   ],
-		  "uploadDate": "{{ \Carbon\Carbon::parse($watch->created_at)->format('Y-m-d\Th:i:s').'+00:00' }}",
+		  "name": "{{ $first->title }}",
+		  "description": "{{ $first->caption == '' ? $first->title : $first->caption}}",
+		  "contentUrl": "https://i.imgur.com/{{ $first->imgur }}l.png",
+		  "uploadDate": "{{ \Carbon\Carbon::parse($first->created_at)->format('Y-m-d\Th:i:s').'+00:00' }}",
 		}
 		</script>
     @endif
@@ -32,9 +30,9 @@
     </div>
 
     <div class="main-content">
-    	<div style="background-color: #F5F5F5; min-height: calc(100vh - 50px);">
+    	<div style="background-color: #F5F5F5;">
     		<div class="row no-gutter">
-    			<div class="col-md-5" style="padding: 21px 30px 25px 30px; background-color: #F9F9F9;">
+    			<div class="col-md-5" style="padding: 21px 30px 25px 30px; background-color: #F9F9F9; min-height: 100%;">
     				@if ($videos->first())
     					@include('video.intro-left', ['link' => route('video.watch').'?v='.$videos->first()->id.'&list='.$watch->id, 'image' => $first->imgurH(), 'title' => $first->title])
     				@else

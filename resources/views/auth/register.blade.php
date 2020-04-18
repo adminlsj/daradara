@@ -1,20 +1,12 @@
 @extends('layouts.app')
 
 @section('nav')
-<<<<<<< HEAD
     @include('layouts.nav-main-original', ['theme' => 'white'])
-=======
-  @include('nav.top')
->>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
 @endsection
 
 @section('content')
 <div class="hidden-sm hidden-xs sidebar-menu">
-<<<<<<< HEAD
     @include('video.sidebarMenu', ['theme' => 'white'])
-=======
-    @include('nav.side')
->>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
 </div>
 
 <div class="main-content">
@@ -22,11 +14,7 @@
         <form id="signUpModalForm" action="{{ route('register') }}" method="POST">
 
           {{ csrf_field() }}
-<<<<<<< HEAD
           {{ Session::put('previousUrl', route('video.subscribes')) }}
-=======
-          {{ Session::put('previousUrl', route('subscribe.index')) }}
->>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
 
           <div style="padding: 15px;">
             <div style="border: 0px; position: relative;" class="modal-header">

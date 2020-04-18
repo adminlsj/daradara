@@ -18,7 +18,7 @@
 </div>
 
 <div class="main-content">
-	<div style="background-color: #F5F5F5; min-height: calc(100vh - 50px); padding-bottom: 10px;">
+	<div style="background-color: #F5F5F5; padding-bottom: 10px">
 
 		<div class="search-google-wrapper" style="margin: 0 auto 0 auto;">
 			<div class="row paravi-padding-setup">
