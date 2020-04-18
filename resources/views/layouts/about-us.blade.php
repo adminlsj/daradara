@@ -11,7 +11,7 @@
 
 <div class="main-content">
 	<div style="background-color: #F5F5F5;">
-		<div class="home-banner-wrapper" style="margin-top: 10px; margin: 0 auto 0 auto; padding-top: 10px;">
+		<div class="home-banner-wrapper" style="padding-top: 10px;">
 			<div style="background-color: white; text-align: left; position: relative;">
 				<img src="https://i.imgur.com/X29HWB5.png">
 				<div id="home-banner-catchphrase">崁入你的原創內容
@@ -21,7 +21,7 @@
 			</div>
 		</div>
 
-		<div style="padding: 0px 30px">
+		<div style="padding: 0px 30px; margin-top: 40px">
 			<p style="font-size: 1.2em; color: #222222; line-height: 28px;">在娛見日本 LaughSeeJapan 上享受您最愛的影片、崁入原創內容，並與全世界觀眾分享您的影片。如此一來，您不僅可以省去跨平台管理影片的麻煩，更可以透過簡單的步驟，一鍵觸及娛見日本 LaughSeeJapan 龐大的用戶群。以下將以影音網站 <a href="https://vimeo.com/" target="_blank">Vimeo</a> 為例，示範在娛見日本 LaughSeeJapan 崁入影片的幾個步驟：</p>
 			<h4 style="margin-top: 30px">1. 前往影片的顯示頁面並點選分享影片</h4>
 			<img style="width: 100%; max-width: 700px; height: auto" src="https://i.imgur.com/QKVvaM2.png">
