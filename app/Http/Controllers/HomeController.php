@@ -42,11 +42,13 @@ class HomeController extends Controller
             }
         }
 
-        $newest = Video::whereNotIn('id', $subscribes_id)->orderBy('uploaded_at', 'desc')->limit(12)->get();
+        $newest = Video::whereNotIn('id', $subscribes_id)->orderBy('uploaded_at', 'desc')->limit(12);
+        $newest_id = $newest->pluck('id');
+        $newest = $newest->get();
 
         if ($request->ajax()) {
             $html = '';
-            $load_more = Video::whereNotIn('id', $subscribes_id)->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->orderBy('views', 'desc')->paginate(12);
+            $load_more = Video::whereNotIn('id', $subscribes_id)->whereNotIn('id', $newest_id)->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->orderBy('views', 'desc')->paginate(12);
             foreach ($load_more as $video) {
                 $html .= view('video.singleLoadMoreSliderVideos', compact('video'));
             }
