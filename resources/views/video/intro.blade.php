@@ -43,9 +43,9 @@
     </div>
 
     <div class="main-content">
-    	<div style="background-color: #F5F5F5;">
+    	<div style="background-color: #F5F5F5; min-height: calc(100vh - 50px);">
     		<div class="row no-gutter">
-    			<div class="col-md-5" style="padding: 21px 30px 25px 30px; background-color: #F9F9F9; min-height: 100%;">
+    			<div class="col-md-5" style="padding: 21px 30px 25px 30px; background-color: #F9F9F9;">
     				@if ($videos->first())
     					@include('video.intro-left', ['link' => route('video.watch').'?v='.$videos->first()->id.'&list='.$watch->id, 'image' => $first->imgurH(), 'title' => $first->title])
     				@else

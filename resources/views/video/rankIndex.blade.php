@@ -10,7 +10,7 @@
 </div>
 
 <div class="main-content">
-	<div style="background-color: #F5F5F5;">
+	<div style="background-color: #F5F5F5; min-height: calc(100vh - 50px);">
 		<div class="explore-slider-title paravi-padding-setup">
 			@if (Request::path() == 'rank')
 		    	<a href="{{ route('video.newest') }}"><h4>最夯發燒影片<span>最新內容</span><i class="material-icons">arrow_forward_ios</i></h4></a>

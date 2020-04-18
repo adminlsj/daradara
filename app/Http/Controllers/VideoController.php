@@ -24,33 +24,32 @@ class VideoController extends Controller
     }
 
     public function explore(Request $request){
-        switch ($request->path()) {
-            case 'rank':
-                $videos = Video::whereDate('uploaded_at', '>=', Carbon::now()->subMonth())->orderBy('views', 'desc');
-                break;
-
-            case 'newest':
-                $videos = Video::whereDate('uploaded_at', '>=', Carbon::now()->subMonth())->orderBy('uploaded_at', 'desc');
-                break;
-            
-            default:
-                $videos = Video::whereDate('uploaded_at', '>=', Carbon::now()->subMonth())->orderBy('views', 'desc');
-                break;
-        }
-
-        $videos = $videos->paginate(24);
-
-        $html = '';
-        foreach ($videos as $video) {
-            $html .= view('video.singleLoadMoreSliderVideos', compact('video'));
-        }
         if ($request->ajax()) {
+            switch ($request->path()) {
+                case 'rank':
+                    $videos = Video::whereDate('uploaded_at', '>=', Carbon::now()->subMonth())->orderBy('views', 'desc');
+                    break;
+
+                case 'newest':
+                    $videos = Video::whereDate('uploaded_at', '>=', Carbon::now()->subMonth())->orderBy('uploaded_at', 'desc');
+                    break;
+                
+                default:
+                    $videos = Video::whereDate('uploaded_at', '>=', Carbon::now()->subMonth())->orderBy('views', 'desc');
+                    break;
+            }
+
+            $videos = $videos->paginate(24);
+
+            $html = '';
+            foreach ($videos as $video) {
+                $html .= view('video.singleLoadMoreSliderVideos', compact('video'));
+            }
+
             return $html;
         }
 
-        $is_mobile = Method::checkMobile();
-
-        return view('video.rankIndex', compact('videos', 'is_mobile'));
+        return view('video.rankIndex');
     }
 
     public function playlist(Request $request){

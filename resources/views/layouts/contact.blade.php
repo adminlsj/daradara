@@ -10,7 +10,7 @@
 </div>
 
 <div class="main-content">
-	<div style="background-color: #F5F5F5;">
+	<div style="background-color: #F5F5F5; min-height: calc(100vh - 50px);">
 		<div class="paravi-padding-setup" style="margin-top: 10px; margin: 0 auto 0 auto; padding-top: 10px;">
 				<h2 style="font-weight: 600">聯絡我們</h2>
 				<p>電郵地址：laughseejapan@gmail.com</p>

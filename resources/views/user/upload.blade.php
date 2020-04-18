@@ -10,7 +10,7 @@
 </div>
 
 <div class="main-content">
-	<div class="paravi-padding-setup" style="background-color: #F5F5F5;">
+	<div class="paravi-padding-setup" style="background-color: #F5F5F5; min-height: calc(100vh - 50px);">
 		<!-- Tab links -->
 		<div class="user-upload-tab" style="margin-left: 15px; padding-top: 25px; margin-bottom: -10px">
 		  <button class="user-upload-tablinks" onclick="openCity(event, '創建頻道')">播放清單</button>

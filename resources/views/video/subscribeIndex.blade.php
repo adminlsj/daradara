@@ -9,7 +9,7 @@
 	@include('video.sidebarMenu', ['theme' => 'white'])
 </div>
 <div class="main-content" style="background-color: #F5F5F5;">
-	<div style="padding-top: 10px;">
+	<div style="padding-top: 10px; min-height: calc(100vh - 50px);">
 		<div id="subscribes-watch-wrapper" class="row no-gutter padding-setup" style="height: 90px; overflow-x: hidden; overflow-y: hidden; position: relative;">
 			@foreach ($subscribes as $subscribe)
 				@if ($subscribe->type == 'watch')

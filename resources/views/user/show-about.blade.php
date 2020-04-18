@@ -10,7 +10,7 @@
 	@include('video.sidebarMenu', ['theme' => 'white'])
 </div>
 <div class="main-content">
-	<div style="background-color: #F5F5F5;">
+	<div style="background-color: #F5F5F5; min-height: calc(100vh - 50px);">
 
 		<div class="paravi-padding-setup" style="padding-top: 20px; padding-bottom: 20px; background-color: #F9F9F9">
 			<img class="lazy" style="float:left; border-radius: 50%; width: 70px; height: 70px;" src="{{ $user->avatarCircleB() }}" data-src="{{ $user->avatar == null ? $user->avatarDefault() : $user->avatar->filename }}" data-srcset="{{ $user->avatar == null ? $user->avatarDefault() : $user->avatar->filename }}">
