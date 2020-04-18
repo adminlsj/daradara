@@ -48,16 +48,14 @@ class HomeController extends Controller
 
         if ($request->ajax()) {
             $html = '';
-            $load_more = Video::whereNotIn('id', $subscribes_id)->whereNotIn('id', $newest_id)->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->orderBy('views', 'desc')->paginate(12);
+            $load_more = Video::whereNotIn('id', $subscribes_id)->whereNotIn('id', $newest_id)->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->orderBy('views', 'desc')->paginate(24);
             foreach ($load_more as $video) {
                 $html .= view('video.singleLoadMoreSliderVideos', compact('video'));
             }
             return $html;
         }
 
-        $is_mobile = Method::checkMobile();
-
-        return view('video.home', compact('subscribes', 'newest', 'is_mobile'));
+        return view('video.home', compact('subscribes', 'newest'));
     }
 
     public function about()
