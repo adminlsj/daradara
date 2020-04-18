@@ -39,7 +39,7 @@ class HomeController extends Controller
             }
         }
 
-        $newest = Video::orderBy('uploaded_at', 'desc')->limit(8)->get();
+        $newest = Video::orderBy('uploaded_at', 'desc')->limit(12)->get();
 
         if ($request->ajax()) {
             $html = '';
