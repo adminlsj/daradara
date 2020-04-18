@@ -1,13 +1,7 @@
 {
-<<<<<<< HEAD
     "/js/app.js": "/js/app.js?id=51c2625e5325975523de",
-    "/css/app.css": "/css/app.css?id=66430f798eb2e871b003",
+    "/css/app.css": "/css/app.css?id=b940d392f502d3eaf30c",
     "/js/customSelect.js": "/js/customSelect.js?id=b862d8d31a8822e3e953",
     "/js/loadMore.js": "/js/loadMore.js?id=0e00765927cdcf979c12",
     "/js/video.js": "/js/video.js?id=492514d9e24c05bdb649"
-=======
-    "/js/app.js": "/js/app.js?id=c86c92ddcc13966a2f6d",
-    "/css/app.css": "/css/app.css?id=517aec03b34a8ea292d2",
-    "/js/loadMore.js": "/js/loadMore.js?id=2c95d2fd6fc7c1ec5965"
->>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
 }

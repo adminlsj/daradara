@@ -29,11 +29,7 @@ return [
     |
     */
 
-<<<<<<< HEAD
     'lifetime' => 120,
-=======
-    'lifetime' => env('SESSION_LIFETIME', 120),
->>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
 
     'expire_on_close' => false,
 

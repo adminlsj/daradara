@@ -27,15 +27,9 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-<<<<<<< HEAD
     public function watches()
     {
         return Watch::where('user_id', $this->id)->orderBy('updated_at', 'desc')->get();
-=======
-    public function playlists()
-    {
-        return Playlist::where('user_id', $this->id)->orderBy('updated_at', 'desc')->get();
->>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
     }
 
     public function subscribes()
@@ -57,7 +51,6 @@ class User extends Authenticatable
     {
         return "https://i.imgur.com/sMSpYFXb.jpg";
     }
-<<<<<<< HEAD
 
     public function shops()
     {
@@ -78,6 +71,4 @@ class User extends Authenticatable
     {
         return $this->hasManyThrough('App\Job', 'App\SavedJob');
     }
-=======
->>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
 }

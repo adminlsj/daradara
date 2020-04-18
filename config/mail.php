@@ -16,11 +16,7 @@ return [
     |
     */
 
-<<<<<<< HEAD
     'driver' => env('MAIL_DRIVER', 'smpt'),
-=======
-    'driver' => env('MAIL_DRIVER', 'smtp'),
->>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
 
     /*
     |--------------------------------------------------------------------------
@@ -33,11 +29,7 @@ return [
     |
     */
 
-<<<<<<< HEAD
     'host' => env('MAIL_HOST', 'smtp.sendgrid.net'),
-=======
-    'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
->>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
 
     /*
     |--------------------------------------------------------------------------
@@ -64,13 +56,8 @@ return [
     */
 
     'from' => [
-<<<<<<< HEAD
         'address' => env('MAIL_FROM_ADDRESS', 'info@laughseejapan.com'),
         'name' => env('MAIL_FROM_NAME', 'LaughSeeJapan'),
-=======
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-        'name' => env('MAIL_FROM_NAME', 'Example'),
->>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
     ],
 
     /*

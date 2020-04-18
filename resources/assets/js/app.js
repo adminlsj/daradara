@@ -144,11 +144,7 @@ $('[id=toggleSearchBar]').click(function(e) {
     var x = document.getElementById("searchBar");
     if (x.style.display === "none") {
         x.style.display = "block";
-<<<<<<< HEAD
         document.getElementById("q").focus();
-=======
-        document.getElementById("query").focus();
->>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
     } else {
         x.style.display = "none";
     }

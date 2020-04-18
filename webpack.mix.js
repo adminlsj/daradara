@@ -14,13 +14,9 @@ const CompressionPlugin = require('compression-webpack-plugin');
 
 mix.js('resources/assets/js/app.js', 'public/js')
    .sass('resources/assets/sass/app.scss', 'public/css')
-<<<<<<< HEAD
    .js('resources/assets/js/video.js', 'public/js')
    .js('resources/assets/js/loadMore.js', 'public/js')
    .js('resources/assets/js/customSelect.js', 'public/js')
-=======
-   .js('resources/assets/js/loadMore.js', 'public/js')
->>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
    .webpackConfig({
 	    plugins: [
 	      new CompressionPlugin({

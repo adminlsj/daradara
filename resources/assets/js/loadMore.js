@@ -11,11 +11,7 @@ $document.ready(function () {
 var page = 1; //track user scroll as page number, right now page number is 1
 var urlParams = new URLSearchParams(window.location.search);
 var query = urlParams.get('query');
-<<<<<<< HEAD
 // var video = urlParams.get('v');
-=======
-var video = urlParams.get('v');
->>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
 var genre = urlParams.get('g');
 load_more(page); //initial content load
 
@@ -41,11 +37,7 @@ function getDocHeight() {
 
 function load_more(page){
     $.ajax({
-<<<<<<< HEAD
         url: '?g=' + genre + '&page=' + page + '&query=' + query,
-=======
-        url: '?v=' + video + '&g=' + genre + '&page=' + page + '&query=' + query,
->>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
         type: "get",
         datatype: "html",
     })

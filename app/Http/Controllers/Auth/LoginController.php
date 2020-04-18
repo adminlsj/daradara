@@ -6,10 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\User;
 use App\Avatar;
-<<<<<<< HEAD
 use App\Watch;
-=======
->>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
 use App\Video;
 use Auth;
 use Socialite;
@@ -119,10 +116,7 @@ class LoginController extends Controller
             'user_id'     => $localUser->id,
             'filename'    => $user->getAvatar(),
             'mime' => 'jpg',
-<<<<<<< HEAD
             'original_filename' => $user->getAvatar(),
-=======
->>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
         ]);
 
         return $localUser;

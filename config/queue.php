@@ -4,22 +4,14 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-<<<<<<< HEAD
     | Default Queue Driver
-=======
-    | Default Queue Connection Name
->>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
     |--------------------------------------------------------------------------
     |
     | Laravel's queue API supports an assortment of back-ends via a single
     | API, giving you convenient access to each back-end using the same
-<<<<<<< HEAD
     | syntax for each one. Here you may set the default queue driver.
     |
     | Supported: "sync", "database", "beanstalkd", "sqs", "redis", "null"
-=======
-    | syntax for every one. Here you may define a default connection.
->>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
     |
     */
 
@@ -34,11 +26,6 @@ return [
     | is used by your application. A default configuration has been added
     | for each back-end shipped with Laravel. You are free to add more.
     |
-<<<<<<< HEAD
-=======
-    | Drivers: "sync", "database", "beanstalkd", "sqs", "redis", "null"
-    |
->>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
     */
 
     'connections' => [
@@ -63,19 +50,11 @@ return [
 
         'sqs' => [
             'driver' => 'sqs',
-<<<<<<< HEAD
             'key' => 'your-public-key',
             'secret' => 'your-secret-key',
             'prefix' => 'https://sqs.us-east-1.amazonaws.com/your-account-id',
             'queue' => 'your-queue-name',
             'region' => 'us-east-1',
-=======
-            'key' => env('SQS_KEY', 'your-public-key'),
-            'secret' => env('SQS_SECRET', 'your-secret-key'),
-            'prefix' => env('SQS_PREFIX', 'https://sqs.us-east-1.amazonaws.com/your-account-id'),
-            'queue' => env('SQS_QUEUE', 'your-queue-name'),
-            'region' => env('SQS_REGION', 'us-east-1'),
->>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
         ],
 
         'redis' => [
@@ -83,10 +62,6 @@ return [
             'connection' => 'default',
             'queue' => 'default',
             'retry_after' => 90,
-<<<<<<< HEAD
-=======
-            'block_for' => null,
->>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
         ],
 
     ],

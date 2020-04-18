@@ -3,11 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Video;
-<<<<<<< HEAD
 use App\Watch;
 use App\Subscribe;
 use App\User;
-use App\Method;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Carbon\Carbon;
@@ -19,77 +17,11 @@ use App\Mail\CopyrightReport;
 use App\Mail\UserUploadVideo;
 use App\Mail\SubscribeNotify;
 use Redirect;
-=======
-use App\Playlist;
-use App\User;
-use App\Avatar;
-use App\Subscribe;
-use App\Like;
-use App\Save;
-use App\Comment;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Input;
-use Illuminate\Pagination\LengthAwarePaginator;
-use Storage;
-use File;
-use Image;
-use DB;
-use Auth;
-use App\Mail\Contact;
-use App\Mail\ContactUser;
-use Carbon\Carbon;
-use Response;
->>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
 
 class HomeController extends Controller
 {
     public function index(Request $request){
         $subscribes = [];
-<<<<<<< HEAD
-        $subscribes_id = [];
-        if (auth()->check()) {
-            $subscriptions = auth()->user()->subscribes();
-            if (!$subscriptions->isEmpty()) {
-                $subscribes = Video::where(function($query) use ($subscriptions) {
-                    foreach ($subscriptions as $subscribe) {
-                        if ($subscribe->type == 'watch') {
-                            $watch = Watch::where('title', $subscribe->tag)->first();
-                            $query->orWhere('playlist_id', $watch->id);
-                        } else {
-                            $query->orWhere('tags', 'LIKE', '%'.$subscribe->tag.'%');
-                        }
-                    }
-                })->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->orderBy('uploaded_at', 'desc')->limit(12);
-                $subscribes_id = $subscribes->pluck('id');
-                $subscribes = $subscribes->get();
-            }
-        }
-
-        $newest = Video::whereNotIn('id', $subscribes_id)->orderBy('uploaded_at', 'desc')->limit(12);
-        $newest_id = $newest->pluck('id');
-        $newest = $newest->get();
-
-        if ($request->ajax()) {
-            $html = '';
-            $load_more = Video::whereNotIn('id', $subscribes_id)->whereNotIn('id', $newest_id)->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->orderBy('views', 'desc')->paginate(24);
-            foreach ($load_more as $video) {
-                $html .= view('video.singleLoadMoreSliderVideos', compact('video'));
-            }
-            return $html;
-        }
-
-        return view('video.home', compact('subscribes', 'newest'));
-    }
-
-    public function about()
-    {
-        return view('layouts.about-us');
-    }
-
-    public function contact()
-    {
-        return view('layouts.contact');
-=======
         if (auth()->check()) {
             $subscriptions = auth()->user()->subscribes();
             if (!$subscriptions->isEmpty()) {
@@ -97,16 +29,16 @@ class HomeController extends Controller
                 foreach ($subscriptions as $subscribe) {
                     if ($first) {
                         if ($subscribe->type == 'watch') {
-                            $playlist = Playlist::where('title', $subscribe->tag)->first();
-                            $subscribes = Video::where('playlist_id', $playlist->id);
+                            $watch = Watch::where('title', $subscribe->tag)->first();
+                            $subscribes = Video::where('playlist_id', $watch->id);
                         } else {
                             $subscribes = Video::where('tags', 'LIKE', '%'.$subscribe->tag.'%');
                         }
                         $first = false;
                     } else {
                         if ($subscribe->type == 'watch') {
-                            $playlist = Playlist::where('title', $subscribe->tag)->first();
-                            $subscribes = $subscribes->orWhere('playlist_id', $playlist->id);
+                            $watch = Watch::where('title', $subscribe->tag)->first();
+                            $subscribes = $subscribes->orWhere('playlist_id', $watch->id);
                         } else {
                             $subscribes = $subscribes->orWhere('tags', 'LIKE', '%'.$subscribe->tag.'%');
                         }
@@ -124,7 +56,7 @@ class HomeController extends Controller
 
         $html = '';
         foreach ($load_more as $video) {
-            $html .= view('video.load-more', compact('video'));
+            $html .= view('video.singleLoadMoreSliderVideos', compact('video'));
         }
         if ($request->ajax()) {
             return $html;
@@ -132,241 +64,17 @@ class HomeController extends Controller
 
         $is_mobile = $this->checkMobile();
 
-        return view('home.index', compact('selected', 'trendings', 'newest', 'load_more', 'is_mobile', 'subscribes'));
+        return view('video.home', compact('selected', 'trendings', 'newest', 'load_more', 'is_mobile', 'subscribes'));
     }
 
-    public function search(Request $request)
+    public function about()
     {
-        $query = str_replace(' ', '', request('query'));
-
-        $queryArray = [];
-        preg_match_all('/./u', $query, $queryArray);
-        $queryArray = $queryArray[0];
-        if (($key = array_search(' ', $queryArray)) !== false) {
-            unset($queryArray[$key]);
-        }
-
-        $videosArray = [];
-        $idsArray = [];
-
-        // Exact Match Query [e.g. 2012.09.14]
-        $lowerQuery = '';
-        $upperQuery = '';
-        $exactQuery = [];
-        foreach ($queryArray as $char) {
-            if (preg_match("/^[a-zA-Z]$/", $char)) {
-                $lowerQuery = $lowerQuery.strtolower($char);
-                $upperQuery = $upperQuery.strtoupper($char);
-            } else {
-                $lowerQuery = $lowerQuery.$char;
-                $upperQuery = $upperQuery.$char;
-            }
-        }
-        if ($lowerQuery == $upperQuery) {
-            $exactQuery = Video::where('title', 'like', '%'.$lowerQuery.'%')->orderBy('uploaded_at', 'desc')->distinct()->get();
-        } else {
-            $exactQuery = Video::where('title', 'like', '%'.$lowerQuery.'%')->orWhere('title', 'like', '%'.$upperQuery.'%')->orderBy('uploaded_at', 'desc')->distinct()->get();
-        }
-        foreach ($exactQuery as $q) {
-            if (!in_array($q->id, $idsArray)) {
-                array_push($videosArray, $q);
-                array_push($idsArray, $q->id);
-            }
-        }
-
-        // Exact Order Match Query (search query in same order e.g. 2012 => 2>0>1>2) [e.g. 2012 09 14]
-        $exactOrderQueryScope = '%'.implode('%', $queryArray).'%';
-        $exactOrderQuery = Video::where('title', 'like', $exactOrderQueryScope)->orderBy('uploaded_at', 'desc')->get();
-        foreach ($exactOrderQuery as $q) {
-            if (!in_array($q->id, $idsArray)) {
-                array_push($videosArray, $q);
-                array_push($idsArray, $q->id);
-            }
-        }
-
-        // Character Match Query (search query as a whole e.g. 2012 => contains 2/0/1/2) [e.g. 郡司桑 月曜]
-        $videosSelect = Video::orderBy('uploaded_at', 'desc')->select('id', 'title', 'tags')->get()->toArray();
-        $rankings = [];
-        foreach ($videosSelect as $videoSelect) {
-            $score = 0;
-            foreach ($queryArray as $q) {
-                if (is_numeric($q)) {
-                    if (strpos($videoSelect['title'], $q) !== false) {
-                        $score++;
-                    }
-                } else {
-                    if (strpos($videoSelect['title'], $q) !== false) {
-                        $score++;
-                    }
-                    if (strpos($videoSelect['tags'], $q) !== false) {
-                        $score++;
-                    }
-                }
-            }
-            if ($score > 0) {
-                array_push($rankings, ['score' => $score, 'id' => $videoSelect['id']]);
-            }
-        }
-        usort($rankings, function ($a, $b) {
-            return $b['score'] <=> $a['score'];
-        });
-
-        foreach ($rankings as $rank) {
-            if (!in_array($rank['id'], $idsArray)) {
-                array_push($videosArray, Video::find($rank['id']));
-            }
-        }
-
-        $playlist = $videosArray[0]->playlist_id == '' ? null : $videosArray[0]->playlist();
-        $topResults = array_slice($videosArray, 0, 15);
-
-        $page = Input::get('page', 1) + 1; // Get the ?page=1 from the url
-        $perPage = 15; // Number of items per page
-        $offset = ($page * $perPage) - $perPage;
-
-        $videos = new LengthAwarePaginator(
-            array_slice($videosArray, $offset, $perPage, true), // Only grab the items we need
-            count($videosArray), // Total items
-            $perPage, // Items per page
-            $page, // Current page
-            ['path' => $request->url(), 'query' => $request->query()] // We need this so we can keep all old query parameters from the url
-        );
-
-        $html = $this->searchLoadHTML($videos);
-        if ($request->ajax()) {
-            return $html;
-        }
-
-        return view('home.search', compact('videos', 'playlist', 'query', 'topResults'));
-    }
-
-    public function searchLoadHTML($videos)
-    {
-        $html = '';
-        $is_program = false;
-        foreach ($videos as $video) {
-            $html .= view('home.search-single', compact('video', 'is_program'));
-        }
-        return $html;
-    }
-
-    public function checkMobile()
-    {
-        $useragent = $_SERVER['HTTP_USER_AGENT'];
-        $is_mobile = false;
-        if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows (ce|phone)|xda|xiino/i',$useragent)||preg_match('/1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i',substr($useragent,0,4))) { 
-            $is_mobile = true;
-        }
-        return $is_mobile;
-    }
-
-    public function aboutUs(Request $request)
-    {
-        // User seeds
-        switch ($request->seed) {
-            case 'user':
-                for ($i = 0; $i < 300; $i++) {
-                    $user = User::create([
-                        'name' => 'demo'.$i,
-                        'email' => 'demo'.$i.'@gmail.com',
-                        'password' => bcrypt('demo'.$i),
-                    ]);
-                    $user->delete();
-                }
-                break;
-
-            case 'avatar':
-                for ($i = 0; $i < 300; $i++) {
-                    $avatar = Avatar::create([
-                        'user_id' => 1,
-                        'filename' =>'demo',
-                        'mime' => 'jpg',
-                    ]);
-                    $avatar->delete();
-                }
-                break;
-
-            case 'playlist':
-                for ($i = 0; $i < 300; $i++) {
-                    $playlist = Playlist::create([
-                        'user_id' => 1,
-                        'title' => 'demo',
-                        'description' => 'demo',
-                    ]);
-                    $playlist->delete();
-                }
-                break;
-
-            case 'video':
-                for ($i = 0; $i < 300; $i++) {
-                    $video = Video::create([
-                        'user_id' => 1,
-                        'playlist_id' => 1,
-                        'title' => 'demo',
-                        'description' => 'demo',
-                        'link' => 'demo',
-                        'imgur' => 'demo',
-                        'tags' => 'demo',
-                        'views' => 0,
-                        'outsource' => true,
-                        'created_at' => Carbon::now(),
-                        'uploaded_at' => Carbon::now(),
-                    ]);
-                    $video->delete();
-                }
-                break;
-
-            case 'comment':
-                for ($i = 0; $i < 100; $i++) {
-                    $comment = Comment::create([
-                        'user_id' => 1,
-                        'type' => 'demo',
-                        'foreign_id' => 1,
-                        'text' => 'demo',
-                    ]);
-                    $comment->delete();
-                }
-                break;
-
-            case 'like':
-                for ($i = 0; $i < 300; $i++) {
-                    $like = Like::create([
-                        'user_id' => 1,
-                        'type' => 'demo',
-                        'foreign_id' => 1,
-                        'is_positive' => true,
-                    ]);
-                    $like->delete();
-                }
-                break;
-
-            case 'save':
-                for ($i = 0; $i < 300; $i++) {
-                    $save = Save::create([
-                        'user_id' => 1,
-                        'foreign_id' => 1,
-                    ]);
-                    $save->delete();
-                }
-                break;
-
-            case 'subscribe':
-                for ($i = 0; $i < 300; $i++) {
-                    $subscribe = Subscribe::create([
-                        'user_id' => 1,
-                        'type' => 'demo',
-                        'tag' => 'demo',
-                    ]);
-                    $subscribe->delete();
-                }
-                break;
-            
-            default:
-                # code...
-                break;
-        }
         return view('layouts.about-us');
->>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
+    }
+
+    public function contact()
+    {
+        return view('layouts.contact');
     }
 
     public function terms()
@@ -434,11 +142,7 @@ class HomeController extends Controller
             return view('layouts.checkVideos', compact('videos'));
 
         } else {
-<<<<<<< HEAD
             return redirect()->action('HomeController@index');
-=======
-            return redirect()->action('VideoController@home');
->>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
         }
         /*if (Auth::check() && Auth::user()->email == 'laughseejapan@gmail.com') {
             $videos = Video::where('outsource', false)->where('sd', 'not like', "%.m3u8%")->orderBy('id', 'desc')->get();
@@ -473,11 +177,7 @@ class HomeController extends Controller
             echo "Video Check ENDED<br>";
             
         } else {
-<<<<<<< HEAD
             return redirect()->action('HomeController@index');
-=======
-            return redirect()->action('VideoController@home');
->>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
         }*/
     }
 
@@ -519,11 +219,7 @@ class HomeController extends Controller
             }
 
         } else {
-<<<<<<< HEAD
             return redirect()->action('HomeController@index');
-=======
-            return redirect()->action('VideoController@home');
->>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
         }
     }
 
@@ -542,11 +238,7 @@ class HomeController extends Controller
             return view('layouts.checkSubscribes', compact('rankings'));
 
         } else {
-<<<<<<< HEAD
             return redirect()->action('HomeController@index');
-        }
-=======
-            return redirect()->action('VideoController@home');
         }
     }
 
@@ -586,7 +278,7 @@ class HomeController extends Controller
             return view('video.singleNewCreate', compact('is_program')); 
 
         } else {
-            return redirect()->action('VideoController@home');
+            return redirect()->action('HomeController@index');
         }
     }
 
@@ -668,7 +360,7 @@ class HomeController extends Controller
             return redirect()->action('HomeController@singleNewCreate');
 
         } else {
-            return redirect()->action('VideoController@home');
+            return redirect()->action('HomeController@index');
         }
     } */
 
@@ -782,7 +474,7 @@ class HomeController extends Controller
                 }
             }
         }
-        return redirect()->action('VideoController@home');
+        return redirect()->action('HomeController@Index');
     } */
 
     function get_string_between($string, $start, $end){
@@ -792,6 +484,5 @@ class HomeController extends Controller
         $ini += strlen($start);
         $len = strpos($string, $end, $ini) - $ini;
         return substr($string, $ini, $len);
->>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
     }
 }

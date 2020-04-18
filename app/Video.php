@@ -4,22 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\User;
-<<<<<<< HEAD
 use App\Watch;
-=======
-use App\Playlist;
->>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
 use App\Subscribe;
 use App\Comment;
 
 class Video extends Model
 {
 	protected $fillable = [
-<<<<<<< HEAD
         'id', 'user_id', 'playlist_id', 'title', 'caption', 'genre', 'category', 'season', 'tags', 'hd', 'sd', 'imgur', 'views', 'duration', 'outsource', 'created_at', 'uploaded_at',
-=======
-        'id', 'user_id', 'playlist_id', 'title', 'description', 'tags', 'link', 'imgur', 'views', 'outsource', 'created_at', 'uploaded_at',
->>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
     ];
 
     public function user()
@@ -27,24 +19,14 @@ class Video extends Model
         return User::find($this->user_id);
     }
 
-<<<<<<< HEAD
     public function watch()
     {
         return Watch::find($this->playlist_id);
-=======
-    public function playlist()
-    {
-        return Playlist::find($this->playlist_id);
->>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
     }
 
     public function subscribes()
     {
-<<<<<<< HEAD
         return Subscribe::where('tag', $this->watch()->title)->orderBy('created_at', 'asc')->get();
-=======
-        return Subscribe::where('tag', $this->playlist()->title)->orderBy('created_at', 'asc')->get();
->>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
     }
 
     public function comments()
@@ -57,8 +39,6 @@ class Video extends Model
         return explode(" ", $this->tags);
     }
 
-<<<<<<< HEAD
-=======
     public function title()
     {
         $title = $this->title;
@@ -86,7 +66,6 @@ class Video extends Model
         }
     }
 
->>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
     public function views()
     {
         if ($this->views >= 10000) {
@@ -101,8 +80,6 @@ class Video extends Model
         return Video::where('tags', 'LIKE', '%'.$subscribe->tag.'%')->orderBy('uploaded_at', 'desc')->first();
     }
 
-<<<<<<< HEAD
-=======
     public function duration()
     {
         $min = (int) floor($this->duration / 60);
@@ -139,7 +116,6 @@ class Video extends Model
         return 'T'.$hour.'H'.$min.'M'.$sec.'S';
     }
 
->>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
     public function imgur16by9()
     {
         return "https://i.imgur.com/JMcgEkPl.jpg";
@@ -182,25 +158,16 @@ class Video extends Model
 
     public function source()
     {
-<<<<<<< HEAD
         $sd = $this->sd()[0];
         if (strpos($sd, 'player.bilibili.com') !== false) {
             return Video::getMobileBB($sd);
         } else {
             return $sd;
-=======
-        $link = $this->link()[0];
-        if (strpos($link, 'player.bilibili.com') !== false) {
-            return Video::getMobileBB($link);
-        } else {
-            return $link;
->>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
         }
     }
 
     public function outsource()
     {
-<<<<<<< HEAD
         $sd = $this->sd()[0];
         if (strpos($sd, '?') !== false) {
             return $sd.'&danmaku=0&qn=0&type=mp4&otype=json&fnver=0&fnval=1&platform=html5&html5=1&high_quality=1&autoplay=1';
@@ -217,18 +184,6 @@ class Video extends Model
     public function hd()
     {
         return explode(" ",$this->sd);
-=======
-        $link = $this->link()[0];
-        if (strpos($link, '?') !== false) {
-            return $link.'&danmaku=0&qn=0&type=mp4&otype=json&fnver=0&fnval=1&platform=html5&html5=1&high_quality=1&autoplay=1';
-        } else {
-            return $link.'?danmaku=0&qn=0&type=mp4&otype=json&fnver=0&fnval=1&platform=html5&html5=1&high_quality=1&autoplay=1';;
-        }
-    }
-
-    public function link()
-    {
-        return explode(" ",$this->link);
     }
 
     public static function getSourceIG($url)
@@ -245,7 +200,6 @@ class Video extends Model
         } catch(Exception $e) {
             return $e->getMessage();
         }
->>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
     }
 
     public static function getMobileBB($url)
@@ -254,15 +208,6 @@ class Video extends Model
         $bvid = '';
         $cid = '';
         if (strpos($url, "aid=") !== FALSE) { 
-<<<<<<< HEAD
-            $avid = Method::get_string_between($url, 'aid=', '&');
-        }
-        if (strpos($url, "bvid=") !== FALSE) { 
-            $bvid = Method::get_string_between($url, 'bvid=', '&');
-        }
-        if (strpos($url, "cid=") !== FALSE) { 
-            $cid = Method::get_string_between($url, 'cid=', '&');
-=======
             $avid = Video::get_string_between($url, 'aid=', '&');
         }
         if (strpos($url, "bvid=") !== FALSE) { 
@@ -270,7 +215,6 @@ class Video extends Model
         }
         if (strpos($url, "cid=") !== FALSE) { 
             $cid = Video::get_string_between($url, 'cid=', '&');
->>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
         }
         $url = "https://api.bilibili.com/x/player/playurl?avid=".$avid."&bvid=".$bvid."&cid=".$cid."&qn=0&type=mp4&otype=json&fnver=0&fnval=1&platform=html5&html5=1&high_quality=1";
 
@@ -303,21 +247,6 @@ class Video extends Model
         }
     }
 
-<<<<<<< HEAD
-    public function scopeOne($query)
-    {
-        return $query->where('id', 1841);
-    }
-
-    public function scopeTwo($query)
-    {
-        return $query->where('id', 14);
-    }
-
-    public function scopeThree($query)
-    {
-        return $query->where('id', 3841);
-=======
     public static function getSourceBB($url)
     {
         try {
@@ -380,6 +309,20 @@ class Video extends Model
         }
     }
 
+    public static function transDayOfWeek($day)
+    {
+        $weekMap = [
+            0 => '日',
+            1 => '一',
+            2 => '二',
+            3 => '三',
+            4 => '四',
+            5 => '五',
+            6 => '六',
+        ];
+        return $weekMap[$day];
+    }
+
     static function get_string_between($string, $start, $end){
         $string = ' ' . $string;
         $ini = strpos($string, $start);
@@ -387,6 +330,10 @@ class Video extends Model
         $ini += strlen($start);
         $len = strpos($string, $end, $ini) - $ini;
         return substr($string, $ini, $len);
->>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
     }
+
+    /* public function getRouteKeyName()
+	{
+	    return 'title';
+	} */
 }
