@@ -3,18 +3,38 @@
 namespace App\Http\Controllers;
 
 use App\Video;
+<<<<<<< HEAD
 use App\Watch;
+=======
+use App\Playlist;
+>>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
 use App\User;
 use App\Subscribe;
 use App\Like;
 use App\Save;
 use App\Comment;
+<<<<<<< HEAD
 use App\Method;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Auth;
 use Carbon\Carbon;
 use Response;
+=======
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Storage;
+use File;
+use Image;
+use DB;
+use Auth;
+use App\Mail\Contact;
+use App\Mail\ContactUser;
+use Carbon\Carbon;
+use Response;
+use Redirect;
+>>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
 
 class VideoController extends Controller
 {
@@ -23,6 +43,7 @@ class VideoController extends Controller
         $this->middleware('auth')->only('edit', 'update', 'destroy');
     }
 
+<<<<<<< HEAD
     public function explore(Request $request){
         if ($request->ajax()) {
             switch ($request->path()) {
@@ -64,6 +85,36 @@ class VideoController extends Controller
 
             return view('video.intro', compact('watch', 'videos', 'first', 'is_subscribed', 'is_mobile'));
         }
+=======
+    public function index(Request $request){
+        switch ($request->path()) {
+            case 'rank':
+                $videos = Video::whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(2))->orderBy('views', 'desc');
+                break;
+
+            case 'newest':
+                $videos = Video::whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(2))->orderBy('uploaded_at', 'desc');
+                break;
+            
+            default:
+                $videos = Video::whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(2))->orderBy('views', 'desc');
+                break;
+        }
+
+        $videos = $videos->paginate(24);
+
+        $html = '';
+        foreach ($videos as $video) {
+            $html .= view('video.load-more', compact('video'));
+        }
+        if ($request->ajax()) {
+            return $html;
+        }
+
+        $is_mobile = $this->checkMobile();
+
+        return view('video.index', compact('videos', 'is_mobile'));
+>>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
     }
 
     public function intro(String $genre, String $title, Request $request){
@@ -75,6 +126,7 @@ class VideoController extends Controller
         if ($title == 'A Studio') {
             $title = 'A-Studio';
         }
+<<<<<<< HEAD
         $watch = Watch::where('title', $title)->first();
         $videos = $watch->videos();
 
@@ -88,6 +140,21 @@ class VideoController extends Controller
     }
 
     public function watch(Request $request){
+=======
+        $playlist = Playlist::where('title', $title)->first();
+        $videos = $playlist->videos();
+
+        $first = $playlist->videos()->first();
+
+        $is_subscribed = $this->is_subscribed($playlist->title);
+
+        $is_mobile = $this->checkMobile();
+
+        return view('playlist.show', compact('playlist', 'videos', 'first', 'is_subscribed', 'is_mobile'));
+    }
+
+    public function show(Request $request){
+>>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
         $vid = $request->v;
 
         if (is_numeric($vid) && $video = Video::find($request->v)) {
@@ -95,6 +162,7 @@ class VideoController extends Controller
             $video->save();
 
             $current = $video;
+<<<<<<< HEAD
             $is_mobile = Method::checkMobile();
 
             $query = Video::where('playlist_id', $video->playlist_id)->orderBy('created_at', 'asc')->pluck('id')->toArray();
@@ -108,17 +176,49 @@ class VideoController extends Controller
                 $is_program = true;
             } else {
                 $watch = null;
+=======
+            $is_mobile = $this->checkMobile();
+
+            $query = Video::where('playlist_id', $video->playlist_id)->orderBy('created_at', 'asc')->pluck('id')->toArray();
+            $now = array_search($video->id, $query);
+            while(key($query) !== null && key($query) !== $now) next($query);
+
+            $prev = 0; $next = 0;
+            if ($this->has_prev($query)) {
+                $prev = prev($query);
+                next($query);
+            } else {
+                $prev = false;
+            }
+            if ($this->has_next($query)) {
+                $next = next($query);
+            } else {
+                $next = false;
+            }
+
+            if ($video->playlist_id != null) {
+                $playlist = Playlist::find($video->playlist_id);
+                $is_subscribed = $this->is_subscribed($playlist->title);
+                $is_program = true;
+            } else {
+                $playlist = null;
+>>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
                 $is_subscribed = false;
                 $is_program = false;
             }
 
+<<<<<<< HEAD
             return view('video.showWatch', compact('video', 'prev', 'next', 'watch', 'current', 'is_program', 'is_subscribed', 'is_mobile'));
+=======
+            return view('video.show', compact('video', 'prev', 'next', 'playlist', 'current', 'is_program', 'is_subscribed', 'is_mobile'));
+>>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
 
         } else {
             return view('errors.404');
         }
     }
 
+<<<<<<< HEAD
     public function videoLoadHTML($videos)
     {
         $html = '';
@@ -295,6 +395,97 @@ class VideoController extends Controller
         $is_subscribed = $this->is_subscribed($tag);
 
         return view('video.subscribeTag', compact('tag', 'videos', 'is_subscribed'));
+=======
+    public function store(User $user, Request $request){
+        $original = request()->file('image');
+        $image = Image::make($original);
+        $image = $image->fit(2880, 1620);
+        $image = $image->stream();
+        $pvars = array('image' => base64_encode($image));
+
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_URL, 'https://api.imgur.com/3/image.json');
+        curl_setopt($curl, CURLOPT_TIMEOUT, 30);
+        curl_setopt($curl, CURLOPT_HTTPHEADER, array('Authorization: Client-ID ' . '932b67e13e4f069'));
+        curl_setopt($curl, CURLOPT_POST, 1);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $pvars);
+        $out = curl_exec($curl);
+        curl_close ($curl);
+        $pms = json_decode($out, true);
+        $url = $pms['data']['link'];
+
+        if ($url != "") {
+            $video = Video::create([
+                'user_id' => $user->id,
+                'playlist_id' => request('channel'),
+                'title' => request('title'),
+                'description' => request('description'),
+                'link' => request('link'),
+                'imgur' => $this->get_string_between($url, 'https://i.imgur.com/', '.'),
+                'tags' => implode(' ', preg_split('/\s+/', request('tags'))),
+                'views' => 0,
+                'outsource' => true,
+                'created_at' => Carbon::createFromFormat('Y-m-d\TH:i:s', request('created_at'))->format('Y-m-d H:i:s'),
+                'uploaded_at' => Carbon::createFromFormat('Y-m-d\TH:i:s', request('uploaded_at'))->format('Y-m-d H:i:s'),
+            ]);
+
+            if ($video->playlist_id != '') {
+                $playlist = $video->playlist();
+                $playlist->updated_at = $playlist->updated_at;
+                $playlist->save();
+            }
+
+            /*$users = [];
+            $userArray = [];
+
+            if ($video->category != 'video') {
+                $watch = $video->watch();
+                $watch->updated_at = $video->uploaded_at;
+                $watch->save();
+
+                $subscribes = $watch->subscribes();
+                foreach ($subscribes as $subscribe) {
+                    $user = $subscribe->user();
+                    array_push($userArray, $user->id);
+                }
+            }
+
+            foreach ($video->tags() as $tag) {
+                $subscribes = Subscribe::where('tag', $tag)->get();
+                foreach ($subscribes as $subscribe) {
+                    if (!in_array($subscribe->user()->id, $userArray)) {
+                        array_push($userArray, $subscribe->user()->id);
+                    }
+                }
+            }
+
+            foreach ($userArray as $user_id) {
+                array_push($users, User::find($user_id));
+            }
+
+            foreach ($users as $user) {
+                Mail::to($user->email)->send(new SubscribeNotify($user, $video));
+                if (strpos($user->alert, 'subscribe') === false) {
+                    $user->alert = $user->alert."subscribe";
+                    $user->save();
+                }
+            }*/
+
+            return Redirect::back()->withErrors('已成功上傳影片《'.$video->title.'》');
+        } else {
+            return Redirect::back()->withErrors('封面圖片上傳失敗，請重新上傳。');
+        } 
+    }
+
+    public function videoLoadHTML($videos)
+    {
+        $html = '';
+        foreach ($videos as $video) {
+            $html .= view('video.singleVideoPost', compact('video'));
+        }
+        return $html;
+>>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
     }
 
     public function like(Request $request)
@@ -318,7 +509,11 @@ class VideoController extends Controller
 
         $video = Video::find($foreign_id);
         $html = '';
+<<<<<<< HEAD
         $html .= view('video.unlikeBtn', compact('video'));
+=======
+        $html .= view('video.unlike-btn', compact('video'));
+>>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
 
         return response()->json([
             'unlikeBtn' => $html,
@@ -340,7 +535,11 @@ class VideoController extends Controller
 
         $video = Video::find($foreign_id);
         $html = '';
+<<<<<<< HEAD
         $html .= view('video.likeBtn', compact('video'));
+=======
+        $html .= view('video.like-btn', compact('video'));
+>>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
 
         return response()->json([
             'likeBtn' => $html,
@@ -362,7 +561,11 @@ class VideoController extends Controller
 
         $video = Video::find($foreign_id);
         $html = '';
+<<<<<<< HEAD
         $html .= view('video.unsaveBtn', compact('video'));
+=======
+        $html .= view('video.unsave-btn', compact('video'));
+>>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
 
         return response()->json([
             'unsaveBtn' => $html,
@@ -382,7 +585,11 @@ class VideoController extends Controller
 
         $video = Video::find($foreign_id);
         $html = '';
+<<<<<<< HEAD
         $html .= view('video.saveBtn', compact('video'));
+=======
+        $html .= view('video.save-btn', compact('video'));
+>>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
 
         return response()->json([
             'saveBtn' => $html,
@@ -400,7 +607,11 @@ class VideoController extends Controller
         ]);
 
         $html = '';
+<<<<<<< HEAD
         $html .= view('video.singleVideoComment', compact('comment'));
+=======
+        $html .= view('video.comment-single', compact('comment'));
+>>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
 
         if (request('comment-type') == 'video') {
             $comment_count = $comment->video()->comments()->count();
@@ -441,7 +652,21 @@ class VideoController extends Controller
         return $html;
     }
 
+<<<<<<< HEAD
     public function loadPlaylist(Request $request)
+=======
+    public function checkMobile()
+    {
+        $useragent = $_SERVER['HTTP_USER_AGENT'];
+        $is_mobile = false;
+        if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows (ce|phone)|xda|xiino/i',$useragent)||preg_match('/1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i',substr($useragent,0,4))) { 
+            $is_mobile = true;
+        }
+        return $is_mobile;
+    }
+
+    public function loadRelated(Request $request)
+>>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
     {
         $video = Video::find($request->v);
         $current = $video;
@@ -454,6 +679,7 @@ class VideoController extends Controller
             $videosSelect = Video::where('id', '!=', $video->id)->inRandomOrder()->select('id', 'tags')->get()->toArray();
         }
 
+<<<<<<< HEAD
         $rankings = [];
         foreach ($videosSelect as $videoSelect) {
             $score = 0;
@@ -474,6 +700,36 @@ class VideoController extends Controller
         }
 
         $html = view('video.video-playlist-wrapper', compact('current', 'videos', 'related'));
+=======
+        $related = [];
+        if (!empty($videosSelect)) {
+            $rankings = [];
+            foreach ($videosSelect as $videoSelect) {
+                $score = 0;
+                foreach ($video->tags() as $tag) {
+                    if (strpos($videoSelect['tags'], $tag) !== false) {
+                        $score++;
+                    }
+                }
+                array_push($rankings, ['score' => $score, 'id' => $videoSelect['id']]);
+            }
+            usort($rankings, function ($a, $b) {
+                return $b['score'] <=> $a['score'];
+            });
+
+            $i = 0;
+            foreach ($rankings as $ranking) {
+                array_push($related, Video::find($ranking['id']));
+                $i++;
+
+                if ($i == 30) {
+                    break;
+                }
+            }
+        }
+
+        $html = view('video.related', compact('current', 'videos', 'related'));
+>>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
         if ($request->ajax()) {
             return $html;
         }
@@ -494,6 +750,34 @@ class VideoController extends Controller
       return next($_array) !== false ?: key($_array) !== null;
     }
 
+<<<<<<< HEAD
+=======
+    public function getSource(Request $request)
+    {
+        $url = Input::get('url');
+        if (strpos($url, 'https://www.instagram.com/p/') !== false) {
+            return Video::getSourceIG($url);
+        } elseif (strpos($url, 'player.bilibili.com') !== false) {
+            return Video::getMobileBB($url);
+        } else {
+            return $url;
+        }
+    }
+
+    public function createGetSource(Request $request)
+    {
+        $url = Input::get('url');
+        if (strpos($url, 'https://www.instagram.com/p/') !== false) {
+            return Video::getSourceIG($url);
+        } elseif (strpos($url, 'www.bilibili.com') !== false) {
+            $link = Video::getLinkBB($url, false);
+            return Video::getSourceBB($link);
+        } else {
+            return $url;
+        }
+    }
+
+>>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
     public function is_subscribed(String $tag)
     {
         $is_subscribed = false;
@@ -502,4 +786,16 @@ class VideoController extends Controller
         }
         return $is_subscribed;
     }
+<<<<<<< HEAD
+=======
+
+    function get_string_between($string, $start, $end){
+        $string = ' ' . $string;
+        $ini = strpos($string, $start);
+        if ($ini == 0) return '';
+        $ini += strlen($start);
+        $len = strpos($string, $end, $ini) - $ini;
+        return substr($string, $ini, $len);
+    }
+>>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
 }

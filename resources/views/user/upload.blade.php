@@ -1,16 +1,28 @@
 @extends('layouts.app')
 
 @section('nav')
+<<<<<<< HEAD
 	@include('layouts.nav-main-original', ['theme' => 'white'])
+=======
+	@include('nav.top')
+>>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
 @endsection
 
 @section('content')
 <div class="hidden-sm hidden-xs sidebar-menu">
+<<<<<<< HEAD
     @include('video.sidebarMenu', ['theme' => 'white'])
 </div>
 
 <div class="main-content">
 	<div class="paravi-padding-setup" style="background-color: #F5F5F5; min-height: calc(100vh - 50px);">
+=======
+    @include('nav.side')
+</div>
+
+<div class="main-content">
+	<div class="paravi-padding-setup" style="background-color: #F5F5F5;">
+>>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
 		<!-- Tab links -->
 		<div class="user-upload-tab" style="margin-left: 15px; padding-top: 25px; margin-bottom: -10px">
 		  <button class="user-upload-tablinks" onclick="openCity(event, '創建頻道')">播放清單</button>
@@ -19,7 +31,11 @@
 
 		<!-- Tab content -->
 		<div id="創建頻道" class="user-upload-tabcontent">
+<<<<<<< HEAD
 		  <form action="{{ route('user.userUpdateUpload', ['user' => Auth::user()]) }}" method="POST" enctype="multipart/form-data">
+=======
+		  <form action="{{ route('playlist.store', ['user' => Auth::user()]) }}" method="POST" enctype="multipart/form-data">
+>>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
 		  	  {{ csrf_field() }}
 		  	  <input id="type" name="type" type="hidden" value="playlist">
 
@@ -48,7 +64,11 @@
 		</div>
 
 		<div id="上傳影片" class="user-upload-tabcontent">
+<<<<<<< HEAD
 		  <form id="singleNewCreateForm" action="{{ route('user.userUpdateUpload', ['user' => Auth::user()]) }}" method="POST" enctype="multipart/form-data">
+=======
+		  <form id="singleNewCreateForm" action="{{ route('video.store', ['user' => Auth::user()]) }}" method="POST" enctype="multipart/form-data">
+>>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
 
 			  {{ csrf_field() }}
 			  <input id="type" name="type" type="hidden" value="video">
@@ -66,8 +86,13 @@
 		          <div class="form-group" style="margin-top: 20px;">
 				    <select class="form-control" name="channel" id="channel">
 					    <option value="">選擇播放清單...</option>
+<<<<<<< HEAD
 					    @foreach ($watches as $watch)
 					       <option value="{{ $watch->id }}">{{ $watch->title }}</option>
+=======
+					    @foreach ($playlists as $playlist)
+					       <option value="{{ $playlist->id }}">{{ $playlist->title }}</option>
+>>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
 					    @endforeach
 				    </select>
 				  </div>
@@ -82,6 +107,7 @@
 		            <input type="text" class="form-control" name="tags" id="tags" placeholder="標籤（各標籤之間請預留空格）" required>
 		          </div>
 
+<<<<<<< HEAD
 		          <div style="margin-right:100px; position: relative; margin-bottom: 0px" class="form-group">
 		            <input type="text" class="form-control" name="link" id="link" placeholder="影片崁入鏈結" required>
 		            <div id="test-play-btn" style="width: 102px; position: absolute; top: 0px; right:-100px; background-color: gray; color: white; padding: 6px 0px 6px 20px; cursor: pointer;">測試播放</div>
@@ -89,6 +115,12 @@
 		          <div style="margin-bottom: 20px;">
 			          <small style="font-weight: 400; margin-left: 5px; color: #595959;">請參閱在娛見日本 LaughSeeJapan 崁入內容的<a href="/about">指南與守則</a>。</small>
 		          </div>
+=======
+		          <div style="margin-right:100px; position: relative;" class="form-group">
+		            <input type="text" class="form-control" name="link" id="link" placeholder="影片崁入鏈結（查看教學：https://tutorialehtml.com/en/html-tutorial-embed-video/）" required>
+		            <div id="test-play-btn" style="width: 102px; position: absolute; top: 0px; right:-100px; background-color: gray; color: white; padding: 6px 0px 6px 20px; cursor: pointer;">測試播放</div>
+		          </div>
+>>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
 
 				  <div id="test-player" class="aspect-ratio" style="background-color: black; background-image: url('https://i.imgur.com/TcZjkZa.gif'); background-position: center; background-repeat: no-repeat; background-size: 50px; margin-bottom: 25px; display: none;">
 				  </div>

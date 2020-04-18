@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Video;
+<<<<<<< HEAD
 use App\Watch;
+=======
+use App\Playlist;
+>>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
 use App\Subscribe;
 use App\Avatar;
 use Illuminate\Http\Request;
@@ -34,6 +38,7 @@ class UserController extends Controller
      */
     public function show(User $user, Request $request)
     {
+<<<<<<< HEAD
         $watches = $user->watches();
         $subscribers = 0;
         if ($watches->first()) {
@@ -86,6 +91,26 @@ class UserController extends Controller
         }
 
         return view('user.show-playlists', compact('user', 'watches', 'subscribers'));
+=======
+        $playlists = $user->playlists();
+        $subscribers = 0;
+        if ($playlists->first()) {
+            foreach ($playlists as $playlist) {
+                $subscribers = $subscribers + Subscribe::where('tag', $playlist->title)->count();
+            }
+        }
+
+        $videos = Video::where('user_id', $user->id)->orderBy('created_at', 'desc')->paginate(12);
+        $html = '';
+        foreach ($videos as $video) {
+            $html .= view('video.load-more', compact('video'));
+        }
+        if ($request->ajax()) {
+            return $html;
+        }
+
+        return view('user.show', compact('user', 'playlists', 'videos', 'subscribers'));
+>>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
     }
 
     /**
@@ -135,6 +160,7 @@ class UserController extends Controller
         //
     }
 
+<<<<<<< HEAD
     public function userStartUpload(Request $request)
     {
         $user = auth()->user();
@@ -146,11 +172,18 @@ class UserController extends Controller
     {
         $watches = $user->watches();
         return view('user.upload', compact('user', 'watches'));
+=======
+    public function userEditUpload(User $user, Request $request)
+    {
+        $playlists = $user->playlists();
+        return view('user.upload', compact('user', 'playlists'));
+>>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
     }
 
     public function userUpdateUpload(User $user, Request $request)
     {
         if ($request->type == 'playlist') {
+<<<<<<< HEAD
             $watch = Watch::create([
                 'id' => Watch::orderBy('id', 'desc')->first()->id + 1,
                 'user_id' => $user->id,
@@ -164,6 +197,15 @@ class UserController extends Controller
                 'imgur' => '',
             ]);
             return Redirect::back()->withErrors('已成功建立播放列表《'.$request->title.'》');
+=======
+            $playlist = Playlist::create([
+                'id' => Watch::orderBy('id', 'desc')->first()->id + 1,
+                'user_id' => $user->id,
+                'title' => $request->title,
+                'description' => $request->description,
+            ]);
+            return Redirect::back()->withErrors('已成功建立播放列表《'.$playlist->title.'》');
+>>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
 
         } elseif ($request->type == 'video') {
             $original = request()->file('image');
@@ -190,6 +232,7 @@ class UserController extends Controller
                     'user_id' => $user->id,
                     'playlist_id' => request('channel'),
                     'title' => request('title'),
+<<<<<<< HEAD
                     'caption' => request('description'),
                     'hd' => request('link'),
                     'sd' => request('link'),
@@ -200,15 +243,28 @@ class UserController extends Controller
                     'tags' => implode(' ', preg_split('/\s+/', request('tags'))),
                     'views' => 0,
                     'duration' => request('duration') == null ? 2000 : request('duration'),
+=======
+                    'description' => request('description'),
+                    'link' => request('link'),
+                    'imgur' => $this->get_string_between($url, 'https://i.imgur.com/', '.'),
+                    'tags' => implode(' ', preg_split('/\s+/', request('tags'))),
+                    'views' => 0,
+>>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
                     'outsource' => true,
                     'created_at' => Carbon::createFromFormat('Y-m-d\TH:i:s', request('created_at'))->format('Y-m-d H:i:s'),
                     'uploaded_at' => Carbon::createFromFormat('Y-m-d\TH:i:s', request('uploaded_at'))->format('Y-m-d H:i:s'),
                 ]);
 
                 if ($video->playlist_id != '') {
+<<<<<<< HEAD
                     $watch = $video->watch();
                     $watch->updated_at = $video->updated_at;
                     $watch->save();
+=======
+                    $playlist = $video->playlist();
+                    $playlist->updated_at = $playlist->updated_at;
+                    $playlist->save();
+>>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
                 }
 
                 /*$users = [];

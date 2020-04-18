@@ -13,7 +13,11 @@ return [
     |
     */
 
+<<<<<<< HEAD
     'default' => env('FILESYSTEM_DRIVER', 's3'),
+=======
+    'default' => env('FILESYSTEM_DRIVER', 'local'),
+>>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
 
     /*
     |--------------------------------------------------------------------------
@@ -37,7 +41,11 @@ return [
     | may even configure multiple disks of the same driver. Defaults have
     | been setup for each driver as an example of the required options.
     |
+<<<<<<< HEAD
     | Supported Drivers: "local", "ftp", "s3", "rackspace"
+=======
+    | Supported Drivers: "local", "ftp", "sftp", "s3", "rackspace"
+>>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
     |
     */
 
@@ -57,10 +65,18 @@ return [
 
         's3' => [
             'driver' => 's3',
+<<<<<<< HEAD
             'key' => env('AWS_KEY'),
             'secret' => env('AWS_SECRET'),
             'region' => env('AWS_REGION', 'us-west-2'),
             'bucket' => env('AWS_BUCKET'),
+=======
+            'key' => env('AWS_ACCESS_KEY_ID'),
+            'secret' => env('AWS_SECRET_ACCESS_KEY'),
+            'region' => env('AWS_DEFAULT_REGION'),
+            'bucket' => env('AWS_BUCKET'),
+            'url' => env('AWS_URL'),
+>>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
         ],
 
     ],

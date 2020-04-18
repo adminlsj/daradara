@@ -10,15 +10,22 @@
         <link rel="shortcut icon" type="image/x-icon" href="https://s3.amazonaws.com/twobayjobs/system/intro/browser-icon.ico"/>
         <link rel="apple-touch-icon" href="https://i.imgur.com/OCEaQMK.png"/>
         <link rel="canonical" href="https://www.laughseejapan.com{{ Request::getRequestUri() }}" />
+<<<<<<< HEAD
         @if (Request::is('*trending*') || Request::is('*userReport*'))
             <meta name="robots" content="noindex, follow" />
         @endif
+=======
+>>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
     @show
 
     <meta name="title" content="娛見日本 LaughSeeJapan">
     <title>娛見日本 LaughSeeJapan</title>
     <meta name="description" 
+<<<<<<< HEAD
           content="在娛見日本 LaughSeeJapan 上享受您最愛的影片、崁入原創內容，並與全世界觀眾分享您的影片。">
+=======
+          content="娛見日本 LaughSeeJapan 讓您享受最愛的影片、上傳原創內容，並與全世界觀眾分享您的影片。">
+>>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">

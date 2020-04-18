@@ -1,12 +1,20 @@
 @extends('layouts.app')
 
 @section('nav')
+<<<<<<< HEAD
     @include('layouts.nav-main-original', ['theme' => 'white'])
+=======
+  @include('nav.top')
+>>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
 @endsection
 
 @section('content')
 <div class="hidden-sm hidden-xs sidebar-menu">
+<<<<<<< HEAD
     @include('video.sidebarMenu', ['theme' => 'white'])
+=======
+    @include('nav.side')
+>>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
 </div>
 
 <div class="main-content">
@@ -14,7 +22,11 @@
         <form method="POST" action="{{ route('login') }}">
 
           {{ csrf_field() }}
+<<<<<<< HEAD
           {{ Session::put('previousUrl', route('video.subscribes')) }}
+=======
+          {{ Session::put('previousUrl', route('subscribe.index')) }}
+>>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
 
           <div style="padding: 15px;">
             <div style="border: 0px; position: relative;" class="modal-header">
@@ -29,7 +41,11 @@
                 <input type="password" class="form-control" name="password" id="password" placeholder="密碼" required>
               </div>
               <button style="height: 45px; margin-top: 10px; font-size: 1em;" type="submit" class="btn btn-info" name="submit">登入</button>
+<<<<<<< HEAD
               @include('layouts.socialLoginBtn')
+=======
+              @include('auth.social-btns')
+>>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
 
               <div style="margin-top: 20px; font-size: 0.95em">
                 <span style="font-weight: 400">尚未擁有帳戶？</span>&nbsp;<a href="{{ route('register') }}" style="cursor: pointer; text-decoration: none; font-weight: 500;">註冊</a>

@@ -17,6 +17,7 @@
 // Video-js
 @import "video-js.css";
 
+<<<<<<< HEAD
 .gs-title {
   font-weight: bold !important;
   font-size: 1.15em !important;
@@ -85,6 +86,8 @@
   max-width: 105px !important;
 }
 
+=======
+>>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
 html, body {
     max-width: 100%;
 }
@@ -94,6 +97,7 @@ body {
     overflow-x:hidden;
 }
 
+<<<<<<< HEAD
 #nav-logo-image {
   width: 35px; 
   height: 35px; 
@@ -109,6 +113,8 @@ body {
   letter-spacing: -1px;
 }
 
+=======
+>>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
 .paravi-padding-setup {
   padding: 0px 25px;
 }
@@ -121,6 +127,7 @@ body {
   text-decoration: underline;
 }
 
+<<<<<<< HEAD
 .home-banner-wrapper, .home-banner-wrapper img {
   max-height: 250px;
 }
@@ -166,6 +173,8 @@ body {
   border-bottom-right-radius: 2px;
 }
 
+=======
+>>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
 .slider-wrapper h4, .load-more-wrapper h4 {
   font-size: 1em;
   font-weight: 600;
@@ -294,8 +303,13 @@ body {
 }
 
 .user-show-tabcontent .user-show-playlist {
+<<<<<<< HEAD
   margin-left: 50px;
   margin-right: 50px;
+=======
+  margin-left: -5px;
+  margin-right: -5px;
+>>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
 }
 
 .nav-image-wrapper img {
@@ -483,7 +497,11 @@ body {
 }
 
 /* Style the buttons that are used to open the tab content */
+<<<<<<< HEAD
 .user-show-tab a {
+=======
+.user-show-tab button {
+>>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
   background-color: inherit;
   float: left;
   border: none;
@@ -494,6 +512,7 @@ body {
   line-height: 40px;
   width: 100px;
   border-bottom: solid 3px #F9F9F9;
+<<<<<<< HEAD
   text-align: center;
   text-decoration: none;
   color: gray !important;
@@ -509,6 +528,18 @@ body {
 .user-show-tab a.active {
   border-bottom: solid 3px dimgray;
   color: black !important;
+=======
+}
+
+/* Change background color of buttons on hover */
+.user-show-tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.user-show-tab button.active {
+  border-bottom: solid 3px dimgray;
+>>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
 }
 
 /* Style the tab content */
@@ -1606,6 +1637,13 @@ a > i {
   padding-left: 20px;
 }
 
+<<<<<<< HEAD
+=======
+.main-content > div {
+  min-height: calc(100vh - 50px);
+}
+
+>>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
 .sidebar-menu {
   position: -webkit-fixed;
   position: fixed;
@@ -2283,6 +2321,7 @@ a > i {
   padding-top: 35px;
 }
 
+<<<<<<< HEAD
 .search-tag-title {
   padding-top: 10px !important;
   padding-bottom: 5px !important;
@@ -2292,6 +2331,8 @@ a > i {
   padding-top: 10px;
 }
 
+=======
+>>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
 @media (max-width: 991px) {
   #content-div {
     padding-bottom: 50px
@@ -2301,6 +2342,7 @@ a > i {
     padding: 0px 15px;
   }
 
+<<<<<<< HEAD
   #nav-logo-image {
     margin-left: -5px;
   }
@@ -2313,6 +2355,8 @@ a > i {
     padding-top: 0px;
   }
 
+=======
+>>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
   #nav-main-hamburger {
     margin-top: 8px;
   }
@@ -2340,10 +2384,13 @@ a > i {
     margin-bottom: -5px;
   }
 
+<<<<<<< HEAD
   .gsc-table-cell-snippet-close .gs-bidi-start-align {
     padding-left: 0px;
   }
 
+=======
+>>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
   #search-top-watch .col-md-3 > span {
     margin-right: -5px;
   }
@@ -2610,6 +2657,7 @@ a > i {
     margin-top: 11px;
   }
 
+<<<<<<< HEAD
   .home-banner-wrapper, .home-banner-wrapper img {
     max-height: 150px;
   }
@@ -2636,6 +2684,8 @@ a > i {
   padding: 3px 7px; 
 }
 
+=======
+>>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
   #custom-scroll-slider .hover-opacity {
     width: calc((100% - 15px) / 2 - 8px) !important;
   }

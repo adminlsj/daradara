@@ -13,7 +13,11 @@ return [
     |
     */
 
+<<<<<<< HEAD
     'name' => env('APP_NAME', 'FreeRider'),
+=======
+    'name' => env('APP_NAME', 'Laravel'),
+>>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
 
     /*
     |--------------------------------------------------------------------------
@@ -110,6 +114,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+<<<<<<< HEAD
     | Logging Configuration
     |--------------------------------------------------------------------------
     |
@@ -127,6 +132,8 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+=======
+>>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
     | Autoloaded Service Providers
     |--------------------------------------------------------------------------
     |
@@ -228,6 +235,10 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+<<<<<<< HEAD
+=======
+
+>>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
     ],
 
 ];

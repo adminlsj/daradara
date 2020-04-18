@@ -36,7 +36,12 @@ return [
             'secret' => env('PUSHER_APP_SECRET'),
             'app_id' => env('PUSHER_APP_ID'),
             'options' => [
+<<<<<<< HEAD
                 //
+=======
+                'cluster' => env('PUSHER_APP_CLUSTER'),
+                'encrypted' => true,
+>>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
             ],
         ],
 

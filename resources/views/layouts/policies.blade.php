@@ -1,19 +1,31 @@
 @extends('layouts.app')
 
 @section('nav')
+<<<<<<< HEAD
 	@include('layouts.nav-main-original', ['theme' => 'white'])
+=======
+	@include('nav.top')
+>>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
 @endsection
 
 @section('content')
 <div class="hidden-sm hidden-xs sidebar-menu">
+<<<<<<< HEAD
   @include('video.sidebarMenu', ['theme' => 'white'])
+=======
+    @include('nav.side')
+>>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
 </div>
 
 <div class="main-content">
   @include('layouts.nav-index')
   <div style="background-color: #F5F5F5;">
     <div style="padding-top: 10px" class="hidden-xs hidden-sm"></div>
+<<<<<<< HEAD
     <div class="paravi-padding-setup">
+=======
+    <div class="padding-setup">
+>>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
     	<h4>社群規範</h4>
     	<p>這裡有一些可幫助您避免麻煩的常識規則，請務必遵守這些規則並謹記在心。千萬不要嘗試鑽漏洞或在指南的法律邊緣遊走，請務必瞭解這些規則，並尊重當初制訂規則的精神。</p>
     	
@@ -39,7 +51,11 @@
 		<p>諸如威嚇、跟蹤、威脅、騷擾、恐嚇、侵犯隱私、洩露他人的個人資料，以及唆使他人從事暴力行為或違反《使用條款》等情事，我們將從嚴處理。使用者如遭檢舉從事這類行為，將會受到永久不得使用 LaughSeeJapan 的處分。</p>
 
 		<h5>版權</h5>
+<<<<<<< HEAD
 		<p>請尊重版權，僅崁入您自行製作或授權崁入的影片。換句話說，請勿崁入非原創影片以及法律上無權崁入的內容，亦不得在未經授權的情況下，於影片中使用他人所擁有的版權內容，例如音樂曲目、版權節目的片段，或他人製作的影片。詳情請參閱我們的版權中心。</p>
+=======
+		<p>請尊重版權，僅上傳您自行製作或有權使用的影片。換句話說，請勿上傳非原創影片，亦不得在未經授權的情況下，於影片中使用他人所擁有的版權內容，例如音樂曲目、版權節目的片段，或他人製作的影片。詳情請參閱我們的版權中心。</p>
+>>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
 
 		<h5>隱私權</h5>
 		<p>如果有人未經您的同意即擅自發佈您的個人資訊或上傳關於您的影片，您可以根據 LaughSeeJapan 的《隱私權指南》要求我們移除該內容。</p>

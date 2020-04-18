@@ -24,8 +24,16 @@
     </filter>
     <php>
         <env name="APP_ENV" value="testing"/>
+<<<<<<< HEAD
         <env name="CACHE_DRIVER" value="array"/>
         <env name="SESSION_DRIVER" value="array"/>
         <env name="QUEUE_DRIVER" value="sync"/>
+=======
+        <env name="BCRYPT_ROUNDS" value="4"/>
+        <env name="CACHE_DRIVER" value="array"/>
+        <env name="SESSION_DRIVER" value="array"/>
+        <env name="QUEUE_DRIVER" value="sync"/>
+        <env name="MAIL_DRIVER" value="array"/>
+>>>>>>> 66270956aa8ff1aadc870cf50685126f1bc1e11c
     </php>
 </phpunit>
