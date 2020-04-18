@@ -13,7 +13,7 @@
   @include('layouts.nav-index')
   <div style="background-color: #F5F5F5;">
     <div style="padding-top: 10px" class="hidden-xs hidden-sm"></div>
-    <div class="padding-setup">
+    <div class="paravi-padding-setup">
     	<h4>社群規範</h4>
     	<p>這裡有一些可幫助您避免麻煩的常識規則，請務必遵守這些規則並謹記在心。千萬不要嘗試鑽漏洞或在指南的法律邊緣遊走，請務必瞭解這些規則，並尊重當初制訂規則的精神。</p>
     	

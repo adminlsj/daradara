@@ -13,7 +13,7 @@
   @include('layouts.nav-index')
   <div style="background-color: #F5F5F5;">
     <div style="padding-top: 10px" class="hidden-xs hidden-sm"></div>
-    <div class="padding-setup">
+    <div class="paravi-padding-setup">
     	<h4>服務條款</h4>
     	<p>日期：2018年8月8日</p>
     	

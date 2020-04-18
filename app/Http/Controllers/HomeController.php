@@ -232,14 +232,4 @@ class HomeController extends Controller
             return redirect()->action('HomeController@index');
         }
     }
-
-    public function videoDurationUpdate(Request $request)
-    {
-        $out = new \Symfony\Component\Console\Output\ConsoleOutput();
-        $video = Video::find(Input::get('video'));
-        $video->duration = Input::get('dura');
-        $out->writeln("Duration is ".Input::get('dura'));
-        $video->save();
-        return $video;
-    }
 }

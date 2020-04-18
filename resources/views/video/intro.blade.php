@@ -10,24 +10,13 @@
     	<script type="application/ld+json">
 		{
 		  "@context": "https://schema.org",
-		  "@type": "VideoObject",
-		  "name": "{{ $first->title }}",
-		  "description": "{{ $first->caption == '' ? $first->title : $first->caption}}",
-		  "thumbnailUrl": [
+		  "@type": "ImageObject",
+		  "name": "{{ $watch->title }}",
+		  "description": "{{ $watch->description }}",
+		  "contentUrl": [
 		    "https://i.imgur.com/{{ $first->imgur }}l.png"
 		   ],
-		  "uploadDate": "{{ \Carbon\Carbon::parse($first->created_at)->format('Y-m-d\Th:i:s').'+00:00' }}",
-		  "duration": "PT24M54S",
-		  @if ($first->outsource)
-		      "embedUrl": "{!! $first->source() !!}",
-		  @else
-		      "contentUrl": "{!! $first->source() !!}",
-		  @endif
-		  "interactionStatistic": {
-		    "@type": "InteractionCounter",
-		    "interactionType": { "@type": "http://schema.org/WatchAction" },
-		    "userInteractionCount": {{ $first->views }}
-		  }
+		  "uploadDate": "{{ \Carbon\Carbon::parse($watch->created_at)->format('Y-m-d\Th:i:s').'+00:00' }}",
 		}
 		</script>
     @endif
