@@ -14,7 +14,7 @@
 Route::get('/videoDurationEdit', 'HomeController@videoDurationEdit');
 Route::get('/videoDurationUpdate', 'HomeController@videoDurationUpdate');
 
-Route::get('/', 'VideoController@home');
+Route::get('/', 'HomeController@index');
 
 Route::resource('blog', 'BlogController');
 

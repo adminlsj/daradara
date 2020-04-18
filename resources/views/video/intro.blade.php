@@ -17,7 +17,7 @@
 		    "https://i.imgur.com/{{ $first->imgur }}l.png"
 		   ],
 		  "uploadDate": "{{ \Carbon\Carbon::parse($first->created_at)->format('Y-m-d\Th:i:s').'+00:00' }}",
-		  "duration": "{{ $first->durationData() }}",
+		  "duration": "PT24M54S",
 		  @if ($first->outsource)
 		      "embedUrl": "{!! $first->source() !!}",
 		  @else
