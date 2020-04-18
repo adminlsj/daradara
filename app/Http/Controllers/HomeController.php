@@ -35,15 +35,17 @@ class HomeController extends Controller
                             $query->orWhere('tags', 'LIKE', '%'.$subscribe->tag.'%');
                         }
                     }
-                })->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->orderBy('uploaded_at', 'desc')->limit(12)->get();
+                })->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->orderBy('uploaded_at', 'desc')->limit(12);
+                $subscribes_id = $subscribes->pluck('id');
+                $subscribes = $subscribes->get();
             }
         }
 
-        $newest = Video::orderBy('uploaded_at', 'desc')->limit(12)->get();
+        $newest = Video::whereNotIn('id', $subscribes_id)->orderBy('uploaded_at', 'desc')->limit(12)->get();
 
         if ($request->ajax()) {
             $html = '';
-            $load_more = Video::whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->orderBy('views', 'desc')->paginate(12);
+            $load_more = Video::whereNotIn('id', $subscribes_id)->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->orderBy('views', 'desc')->paginate(12);
             foreach ($load_more as $video) {
                 $html .= view('video.singleLoadMoreSliderVideos', compact('video'));
             }
