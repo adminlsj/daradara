@@ -10,7 +10,7 @@ use App\Subscribe;
 class Watch extends Model
 {
 	protected $fillable = [
-        'id', 'user_id', 'genre', 'category', 'season', 'title', 'description', 'cast', 'imgur', 'is_ended',
+        'id', 'user_id', 'title', 'description'
     ];
 
     public function user()
@@ -33,27 +33,6 @@ class Watch extends Model
     	$title = str_replace(" / ", "_", $this->title);
     	$title = str_replace(" ", "-", $title);
     	return $title;
-    }
-
-    public function genre()
-    {
-        switch ($this->genre) {
-            case 'variety':
-                return '綜藝';
-                break;
-
-            case 'drama':
-                return '日劇';
-                break;
-
-            case 'anime':
-                return '動漫';
-                break;
-            
-            default:
-                return '綜藝';
-                break;
-        }
     }
 
     public function imgurDefault()
