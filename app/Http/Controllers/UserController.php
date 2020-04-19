@@ -179,20 +179,14 @@ class UserController extends Controller
 
             if ($url != "") {
                 $video = Video::create([
-                    'id' => Video::orderBy('id', 'desc')->first()->id + 1,
                     'user_id' => $user->id,
                     'playlist_id' => request('channel'),
                     'title' => request('title'),
                     'caption' => request('description'),
-                    'hd' => request('link'),
                     'sd' => request('link'),
                     'imgur' => $this->get_string_between($url, 'https://i.imgur.com/', '.'),
-                    'genre' => '',
-                    'category' => '',
-                    'season' => '',
                     'tags' => implode(' ', preg_split('/\s+/', request('tags'))),
                     'views' => 0,
-                    'duration' => request('duration') == null ? 2000 : request('duration'),
                     'outsource' => true,
                     'created_at' => Carbon::createFromFormat('Y-m-d\TH:i:s', request('created_at'))->format('Y-m-d H:i:s'),
                     'uploaded_at' => Carbon::createFromFormat('Y-m-d\TH:i:s', request('uploaded_at'))->format('Y-m-d H:i:s'),
