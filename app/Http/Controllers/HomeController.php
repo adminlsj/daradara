@@ -6,6 +6,7 @@ use App\Video;
 use App\Watch;
 use App\Subscribe;
 use App\User;
+use App\Avatar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Carbon\Carbon;
