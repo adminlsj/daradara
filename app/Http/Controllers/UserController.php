@@ -152,16 +152,9 @@ class UserController extends Controller
     {
         if ($request->type == 'playlist') {
             $watch = Watch::create([
-                'id' => Watch::orderBy('id', 'desc')->first()->id + 1,
                 'user_id' => $user->id,
-                'genre' => '',
-                'category' => '',
-                'season' => '',
                 'title' => $request->title,
                 'description' => $request->description,
-                'cast' => '',
-                'is_ended' => false,
-                'imgur' => '',
             ]);
             return Redirect::back()->withErrors('已成功建立播放列表《'.$request->title.'》');
 
