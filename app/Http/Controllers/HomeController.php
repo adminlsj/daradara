@@ -7,6 +7,9 @@ use App\Watch;
 use App\Subscribe;
 use App\User;
 use App\Avatar;
+use App\Comment
+use App\Like;
+use App\Save;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Carbon\Carbon;
@@ -96,7 +99,7 @@ class HomeController extends Controller
                 break;
 
             case 'video':
-                for ($i = 0; $i < 84; $i++) {
+                for ($i = 0; $i < 300; $i++) {
                     $video = Video::create([
                         'user_id' => 1,
                         'playlist_id' => 1,
