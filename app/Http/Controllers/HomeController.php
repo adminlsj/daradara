@@ -7,7 +7,7 @@ use App\Watch;
 use App\Subscribe;
 use App\User;
 use App\Avatar;
-use App\Comment
+use App\Comment;
 use App\Like;
 use App\Save;
 use Illuminate\Http\Request;
