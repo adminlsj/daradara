@@ -1,4 +1,4 @@
-<nav style="border-bottom: 1px solid #d9d9d9; background-color: #e9e9e9; height: 50px; {{ request('q') != '' ? '' : 'display: none'}}" id="searchBar" class="hidden-md hidden-lg">
+<nav style="z-index: 1000; border-bottom: 1px solid #d9d9d9; background-color: #e9e9e9; height: 50px; {{ request('q') != '' ? '' : 'display: none'}}" id="searchBar" class="hidden-md hidden-lg">
   <div style="background-color: #e9e9e9;">
 
     <form id="search-form" style="background-color: #e9e9e9;" action="{{ route('video.searchGoogle') }}" method="GET">
