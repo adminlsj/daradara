@@ -96,7 +96,7 @@ class HomeController extends Controller
                 break;
 
             case 'video':
-                for ($i = 0; $i < 300; $i++) {
+                for ($i = 0; $i < 84; $i++) {
                     $video = Video::create([
                         'user_id' => 1,
                         'playlist_id' => 1,
