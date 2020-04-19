@@ -4,7 +4,7 @@
       <img id="nav-logo-image" src="https://i.imgur.com/6ePdVGMm.jpg">
 
       <a style="text-decoration: none;" href="/">
-          <span id="nav-logo-text">LaughSeeJapan</span>
+          <span id="nav-logo-text">LaughSeeJapan S1</span>
       </a>
 
       @if (Auth::check())
