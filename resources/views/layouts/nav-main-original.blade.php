@@ -1,4 +1,4 @@
-<nav class="nav-main-original {{ $theme == 'dark' ? 'dark-theme-nav-main' : 'white-theme-nav-main' }}">
+<nav style="border-bottom: 1px solid #e9e9e9; background-color: white; z-index: 1000" class="nav-main-original white-theme-nav-main">
   <div class="container-fluid">
     <div style="height: 50px;">
 

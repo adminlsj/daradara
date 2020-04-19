@@ -1,4 +1,4 @@
-<a style="text-decoration: none; color: #595959" href="{{ $link }}">
+<a style="text-decoration: none;" href="{{ $link }}">
 	<div class="row {{ $is_current ? 'active' : ''}}" style="height: 40px; margin-right: 0px;">
 		<div class="col-md-6" style="margin-top: 8px; width: auto; margin-left: 25px;">
 			@if (Auth::check() && strpos(auth()->user()->alert, 'subscribe') !== false && $icon == 'subscriptions')
