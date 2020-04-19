@@ -607,7 +607,7 @@ class VideoController extends Controller
         });
 
         $related = [];
-        $max = count($rankings) >= 30 ? 30 : count($rankings);
+        $max = count($rankings) > 30 ? 30 : count($rankings) - 1;
         for ($i = 0; $i < $max; $i++) {
             array_push($related, Video::find($rankings[$i]['id']));
         }
