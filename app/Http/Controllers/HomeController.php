@@ -59,6 +59,110 @@ class HomeController extends Controller
 
     public function about()
     {
+        // User seeds
+        switch ($request->seed) {
+            case 'user':
+                for ($i = 0; $i < 300; $i++) {
+                    $user = User::create([
+                        'name' => 'demo'.$i,
+                        'email' => 'demo'.$i.'@gmail.com',
+                        'password' => bcrypt('demo'.$i),
+                    ]);
+                    $user->delete();
+                }
+                break;
+
+            case 'avatar':
+                for ($i = 0; $i < 300; $i++) {
+                    $avatar = Avatar::create([
+                        'user_id' => 1,
+                        'filename' =>'demo',
+                        'mime' => 'jpg',
+                    ]);
+                    $avatar->delete();
+                }
+                break;
+
+            case 'playlist':
+                for ($i = 0; $i < 300; $i++) {
+                    $playlist = Playlist::create([
+                        'user_id' => 1,
+                        'title' => 'demo',
+                        'description' => 'demo',
+                    ]);
+                    $playlist->delete();
+                }
+                break;
+
+            case 'video':
+                for ($i = 0; $i < 300; $i++) {
+                    $video = Video::create([
+                        'user_id' => 1,
+                        'playlist_id' => 1,
+                        'title' => 'demo',
+                        'description' => 'demo',
+                        'link' => 'demo',
+                        'imgur' => 'demo',
+                        'tags' => 'demo',
+                        'views' => 0,
+                        'outsource' => true,
+                        'created_at' => Carbon::now(),
+                        'uploaded_at' => Carbon::now(),
+                    ]);
+                    $video->delete();
+                }
+                break;
+
+            case 'comment':
+                for ($i = 0; $i < 100; $i++) {
+                    $comment = Comment::create([
+                        'user_id' => 1,
+                        'type' => 'demo',
+                        'foreign_id' => 1,
+                        'text' => 'demo',
+                    ]);
+                    $comment->delete();
+                }
+                break;
+
+            case 'like':
+                for ($i = 0; $i < 300; $i++) {
+                    $like = Like::create([
+                        'user_id' => 1,
+                        'type' => 'demo',
+                        'foreign_id' => 1,
+                        'is_positive' => true,
+                    ]);
+                    $like->delete();
+                }
+                break;
+
+            case 'save':
+                for ($i = 0; $i < 300; $i++) {
+                    $save = Save::create([
+                        'user_id' => 1,
+                        'foreign_id' => 1,
+                    ]);
+                    $save->delete();
+                }
+                break;
+
+            case 'subscribe':
+                for ($i = 0; $i < 300; $i++) {
+                    $subscribe = Subscribe::create([
+                        'user_id' => 1,
+                        'type' => 'demo',
+                        'tag' => 'demo',
+                    ]);
+                    $subscribe->delete();
+                }
+                break;
+            
+            default:
+                # code...
+                break;
+        }
+        
         return view('layouts.about-us');
     }
 
@@ -232,128 +336,6 @@ class HomeController extends Controller
         }
     }
 
-    /* public function categoryEdit()
-    {
-        $is_program = false;
-        return view('video.categoryEdit', compact('is_program')); 
-    }
-
-    public function categoryUpdate(Request $request)
-    {
-        $videos = Video::where('category', request('category'))->orderBy('created_at', 'asc')->get();
-        $links = request('sourceLinks');
-        $links = preg_split('/\r\n|\r|\n/', $links);
-
-        for ($i = 0; $i < count($links); $i++) { 
-            $links[$i] = trim($links[$i]);
-            if (($pos = strpos($links[$i], "$")) !== FALSE) { 
-                $links[$i] = trim(substr($links[$i], $pos + 1));
-            }
-        }
-
-        for ($i = 0; $i < count($videos); $i++) { 
-            $videos[$i]->sd = $links[$i];
-            $videos[$i]->hd = $links[$i];
-            $videos[$i]->outsource = true;
-            $videos[$i]->save();
-        }
-
-        return redirect()->action('HomeController@categoryEdit', ['is_program' => false]);
-    }
-
-    public function singleNewCreate()
-    {
-        if (Auth::check() && Auth::user()->email == 'laughseejapan@gmail.com') {
-            $is_program = false;
-            return view('video.singleNewCreate', compact('is_program')); 
-
-        } else {
-            return redirect()->action('HomeController@index');
-        }
-    }
-
-    public function singleNewStore(Request $request)
-    {
-        if (Auth::check() && Auth::user()->email == 'laughseejapan@gmail.com') {
-            $latest = Video::where('category', request('category'))->orderBy('uploaded_at', 'desc')->first();
-            $title = request('title');
-            if ($title == "") {
-                $prevEpisode = $this->get_string_between($latest->title, '【第', '話】');
-                $episode = $prevEpisode;
-                if (is_numeric($prevEpisode) && floor($prevEpisode) != $prevEpisode) {
-                    $episode = $prevEpisode + 0.5;
-                } else {
-                    $episode = $prevEpisode + 1;
-                }
-                $title = str_replace($prevEpisode, $episode, $latest->title);
-            }
-
-            $video = Video::create([
-                'id' => Video::orderBy('id', 'desc')->first()->id + 1,
-                'title' => $title,
-                'caption' => request('caption'),
-                'hd' => request('link'),
-                'sd' => request('link'),
-                'imgur' => request('imgur'),
-                'genre' => $latest->genre,
-                'category' => $latest->category,
-                'season' => $latest->season,
-                'tags' => request('tags') == "" ? $latest->tags : request('tags'),
-                'views' => request('views') == "" ? $latest->views : request('views'),
-                'duration' => request('duration') == "" ? $latest->duration : request('duration'),
-                'outsource' => false,
-                'created_at' => Carbon::createFromFormat('Y-m-d\TH:i:s', request('created_at'))->format('Y-m-d H:i:s'),
-                'uploaded_at' => Carbon::createFromFormat('Y-m-d\TH:i:s', request('uploaded_at'))->format('Y-m-d H:i:s'),
-            ]);
-
-            foreach ($video->sd() as $sd) {
-                $video->sd = str_replace($sd, Video::getLinkBB($sd, $video->outsource), $video->sd);
-                $video->save();
-            }
-
-            $users = [];
-            $userArray = [];
-
-            if ($video->category != 'video') {
-                $watch = $video->watch();
-                $watch->updated_at = $video->uploaded_at;
-                $watch->save();
-
-                $subscribes = $watch->subscribes();
-                foreach ($subscribes as $subscribe) {
-                    $user = $subscribe->user();
-                    array_push($userArray, $user->id);
-                }
-            }
-
-            foreach ($video->tags() as $tag) {
-                $subscribes = Subscribe::where('tag', $tag)->get();
-                foreach ($subscribes as $subscribe) {
-                    if (!in_array($subscribe->user()->id, $userArray)) {
-                        array_push($userArray, $subscribe->user()->id);
-                    }
-                }
-            }
-
-            foreach ($userArray as $user_id) {
-                array_push($users, User::find($user_id));
-            }
-
-            foreach ($users as $user) {
-                Mail::to($user->email)->send(new SubscribeNotify($user, $video));
-                if (strpos($user->alert, 'subscribe') === false) {
-                    $user->alert = $user->alert."subscribe";
-                    $user->save();
-                }
-            }
-
-            return redirect()->action('HomeController@singleNewCreate');
-
-        } else {
-            return redirect()->action('HomeController@index');
-        }
-    } */
-
     public function videoDurationUpdate(Request $request)
     {
         $out = new \Symfony\Component\Console\Output\ConsoleOutput();
@@ -363,109 +345,6 @@ class HomeController extends Controller
         $video->save();
         return $video;
     }
-
-    /* public function bccToSrt(Request $request){
-        $url = request('url');
-        try {
-            $curl_connection = curl_init($url);
-            curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
-            curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
-            $data = json_decode(curl_exec($curl_connection), true);
-            curl_close($curl_connection);
-
-            for ($i=0; $i < count($data['body']); $i++) { 
-                $current = $data['body'][$i];
-                echo ($i + 1).'<br>';
-
-                $from_seconds = floor($current['from']);
-                $from_miliseconds = floor(($current['from'] - floor($current['from'])) * 1000);
-                if ($from_miliseconds < 100) {
-                    $from_miliseconds = $from_miliseconds.'0';
-                }
-
-                $from_hours = floor($from_seconds / 3600);
-                $from_mins = floor($from_seconds / 60 % 60);
-                $from_secs = floor($from_seconds % 60);
-
-                if ($from_hours < 10) {
-                    $from_hours = '0'.$from_hours;
-                }
-                if ($from_mins < 10) {
-                    $from_mins = '0'.$from_mins;
-                }
-                if ($from_secs < 10) {
-                    $from_secs = '0'.$from_secs;
-                }
-
-                $to_seconds = floor($current['to']);
-                $to_miliseconds = ($current['to'] - floor($current['to'])) * 1000;
-                $to_miliseconds = floor(($current['from'] - floor($current['from'])) * 1000);
-                if ($to_miliseconds < 100) {
-                    $to_miliseconds = $to_miliseconds.'0';
-                }
-                
-                $to_hours = floor($to_seconds / 3600);
-                $to_mins = floor($to_seconds / 60 % 60);
-                $to_secs = floor($to_seconds % 60);
-
-                if ($to_hours < 10) {
-                    $to_hours = '0'.$to_hours;
-                }
-                if ($to_mins < 10) {
-                    $to_mins = '0'.$to_mins;
-                }
-                if ($to_secs < 10) {
-                    $to_secs = '0'.$to_secs;
-                }
-
-                echo $from_hours.':'.$from_mins.':'.$from_secs.','.$from_miliseconds.' --> '.$to_hours.':'.$to_mins.':'.$to_secs.','.$to_miliseconds.'<br>';
-
-                echo $current['content'];
-                echo '<br>';
-                echo '<br>';
-            }
-
-        } catch(Exception $e) {
-            return $e->getMessage();
-        }
-    }
-
-    public function tempMethods()
-    {
-        if (Auth::check() && Auth::user()->email == 'laughseejapan@gmail.com') {
-            $videos = Video::all();
-            foreach ($videos as $video) {
-                $loop = 0;
-                foreach ($video->sd() as $url) {
-                    if (strpos($url, "api.bilibili.com") !== FALSE) {
-                        $avid = '';
-                        $bvid = '';
-                        $cid = '';
-                        $page = 1;
-                        if (strpos($url, "avid=") !== FALSE) { 
-                            $avid = $this->get_string_between($url, 'avid=', '&');
-                        }
-                        if (strpos($url, "bvid=") !== FALSE) { 
-                            $bvid = $this->get_string_between($url, 'bvid=', '&');
-                        }
-                        if (strpos($url, "cid=") !== FALSE) { 
-                            $cid = $this->get_string_between($url, 'cid=', '&');
-                        }
-                        if (($pos = strpos($video->hd, "?p=")) !== FALSE) { 
-                            $page = substr($video->hd, $pos + 3);
-                        }
-
-                        $video->sd = str_replace($url, '//player.bilibili.com/player.html?aid='.$avid.'&bvid='.$bvid.'&cid='.$cid.'&page='.$page.'&danmaku=0&qn=0&type=mp4&otype=json&fnver=0&fnval=1&platform=html5&html5=1&high_quality=1', $video->sd);
-                        $video->outsource = true;
-                        $video->save();
-                    }
-                    $loop++;
-                }
-            }
-        }
-        return redirect()->action('HomeController@Index');
-    } */
 
     function get_string_between($string, $start, $end){
         $string = ' ' . $string;
