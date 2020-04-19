@@ -585,7 +585,11 @@ class VideoController extends Controller
             $videosSelect = Video::where('playlist_id', '!=', $video->playlist_id)->inRandomOrder()->select('id', 'tags')->get()->toArray();
         } else {
             $videos = null;
-            $videosSelect = Video::where('id', '!=', $video->id)->inRandomOrder()->select('id', 'tags')->get()->toArray();
+            $videosSelect = Video::where(function($query) use ($video) {
+                foreach ($video->tags() as $tag) {
+                    $query->orWhere('tags', 'like', '%'.$tag.'%');
+                }
+            })->where('id', '!=', $video->id)->inRandomOrder()->select('id', 'tags')->get()->toArray();
         }
 
         $rankings = [];
