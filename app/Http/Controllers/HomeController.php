@@ -84,14 +84,14 @@ class HomeController extends Controller
                 }
                 break;
 
-            case 'playlist':
+            case 'watch':
                 for ($i = 0; $i < 300; $i++) {
-                    $playlist = Playlist::create([
+                    $watch = Watch::create([
                         'user_id' => 1,
                         'title' => 'demo',
                         'description' => 'demo',
                     ]);
-                    $playlist->delete();
+                    $watch->delete();
                 }
                 break;
 
