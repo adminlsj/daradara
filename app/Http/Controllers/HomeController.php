@@ -57,7 +57,7 @@ class HomeController extends Controller
         return view('video.home', compact('subscribes', 'newest'));
     }
 
-    public function about()
+    public function about(Request $request)
     {
         // User seeds
         switch ($request->seed) {
@@ -162,7 +162,7 @@ class HomeController extends Controller
                 # code...
                 break;
         }
-        
+
         return view('layouts.about-us');
     }
 
