@@ -13,19 +13,6 @@ shareButton.addEventListener('click', event => {
   }
 });
 
-$('[id=toggleVideoDescription]').click(function(e) {
-    var description = document.getElementById("videoDescription");
-    var videoTags = document.getElementById("video-tags");
-    var icon = document.getElementById("toggleVideoDescriptionIcon");
-    if (description.style.display === "none") {
-        description.style.display = "block";
-        icon.innerHTML = 'expand_less';
-    } else {
-        description.style.display = "none";
-        icon.innerHTML = 'expand_more';
-    }
-});
-
 $('div#video-like-form-wrapper').on("submit", "form#video-like-form", function(e) {
     $.ajaxSetup({
         header:$('meta[name="_token"]').attr('content')
@@ -41,7 +28,7 @@ $('div#video-like-form-wrapper').on("submit", "form#video-like-form", function(e
             $('div#video-like-form-wrapper').html(data.unlikeBtn);
         },
         error: function(xhr, ajaxOptions, thrownError){
-            $('div#video-like-form-wrapper').html(xhr.responseText);
+            showSnackbar('請刷新頁面後重試。');
         }
     })
 });
@@ -61,7 +48,7 @@ $('div#video-like-form-wrapper').on("submit", "form#video-unlike-form", function
             $('div#video-like-form-wrapper').html(data.likeBtn);
         },
         error: function(xhr, ajaxOptions, thrownError){
-            $('div#video-like-form-wrapper').html(xhr.responseText);
+            showSnackbar('請刷新頁面後重試。');
         }
     })
 });
@@ -82,7 +69,7 @@ $('div#video-save-form-wrapper').on("submit", "form#video-save-form", function(e
             showSnackbar('影片已儲存於「訂閱」項目');
         },
         error: function(xhr, ajaxOptions, thrownError){
-            $('div#video-save-form-wrapper').html(xhr.responseText);
+            showSnackbar('請刷新頁面後重試。');
         }
     })
 });
@@ -102,7 +89,7 @@ $('div#video-save-form-wrapper').on("submit", "form#video-unsave-form", function
             $('div#video-save-form-wrapper').html(data.saveBtn);
         },
         error: function(xhr, ajaxOptions, thrownError){
-            $('div#video-save-form-wrapper').html(xhr.responseText);
+            showSnackbar('請刷新頁面後重試。');
         }
     })
 });
@@ -130,7 +117,7 @@ $('div#comment-create-form-wrapper').on("submit", "form#comment-create-form", fu
             }
         },
         error: function(xhr, ajaxOptions, thrownError){
-            $('div#comment-create-form-wrapper').html(xhr.responseText);
+            showSnackbar('請刷新頁面後重試。');
         }
     })
 });
