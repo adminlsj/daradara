@@ -152,6 +152,7 @@ class UserController extends Controller
     {
         if ($request->type == 'playlist') {
             $watch = Watch::create([
+                'id' => Watch::orderBy('id', 'desc')->first()->id + 1,
                 'user_id' => $user->id,
                 'title' => $request->title,
                 'description' => $request->description,
@@ -179,6 +180,7 @@ class UserController extends Controller
 
             if ($url != "") {
                 $video = Video::create([
+                    'id' => Video::orderBy('id', 'desc')->first()->id + 1,
                     'user_id' => $user->id,
                     'playlist_id' => request('channel'),
                     'title' => request('title'),
