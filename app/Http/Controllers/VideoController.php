@@ -292,25 +292,53 @@ class VideoController extends Controller
 
         switch ($path) {
             case '/rank':
-                $videos = $videos->whereDate('uploaded_at', '>=', Carbon::now()->subMonth())->where('tags', 'like', '%'.$tag.'%')->orderBy('views', 'desc');
-                break;
+                $videos = $videos->whereDate('uploaded_at', '>=', Carbon::now()->subMonth())->where('tags', 'like', '%'.$tag.'%')->orderBy('views', 'desc')->paginate(24);
+                return $this->singleLoadMoreSliderVideosHTML($videos);
 
             case '/newest':
-                $videos = $videos->whereDate('uploaded_at', '>=', Carbon::now()->subMonth())->where('tags', 'like', '%'.$tag.'%')->orderBy('uploaded_at', 'desc');
-                break;
+                $videos = $videos->whereDate('uploaded_at', '>=', Carbon::now()->subMonth())->where('tags', 'like', '%'.$tag.'%')->orderBy('uploaded_at', 'desc')->paginate(24);
+                return $this->singleLoadMoreSliderVideosHTML($videos);
             
-            default:
-                # code...
-                break;
-        }
-        $videos = $videos->paginate(24);
+            case '/':
+                $subscribes = [];
+                $subscribes_id = [];
+                if (auth()->check()) {
+                    $subscriptions = auth()->user()->subscribes();
+                    if (!$subscriptions->isEmpty()) {
+                        $subscribes = Video::where(function($query) use ($subscriptions) {
+                            foreach ($subscriptions as $subscribe) {
+                                if ($subscribe->type == 'watch') {
+                                    $watch = Watch::where('title', $subscribe->tag)->first();
+                                    $query->orWhere('playlist_id', $watch->id);
+                                } else {
+                                    $query->orWhere('tags', 'LIKE', '%'.$subscribe->tag.'%');
+                                }
+                            }
+                        })->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->where('tags', 'like', '%'.$tag.'%')->orderBy('uploaded_at', 'desc')->limit(12);
+                        $subscribes_id = $subscribes->pluck('id');
+                        $subscribes = $subscribes->get();
+                    }
+                }
 
-        $html = '';
-        foreach ($videos as $video) {
-            $html .= view('video.singleLoadMoreSliderVideos', compact('video'));
-        }
-        if ($request->ajax()) {
-            return $html;
+                $newest = Video::whereNotIn('id', $subscribes_id)->where('tags', 'like', '%'.$tag.'%')->orderBy('uploaded_at', 'desc')->limit(12);
+                $newest_id = $newest->pluck('id');
+                $newest = $newest->get();
+
+                $videos = Video::whereNotIn('id', $subscribes_id)->whereNotIn('id', $newest_id)->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->where('tags', 'like', '%'.$tag.'%')->orderBy('views', 'desc')->paginate(24);
+
+                $html = '';
+                if ($request->page == 1) {
+                    foreach ($subscribes as $video) {
+                        $html .= view('video.singleLoadMoreSliderVideos', compact('video'));
+                    }
+                    foreach ($newest as $video) {
+                        $html .= view('video.singleLoadMoreSliderVideos', compact('video'));
+                    }
+                }
+                foreach ($videos as $video) {
+                    $html .= view('video.singleLoadMoreSliderVideos', compact('video'));
+                }
+                return $html;
         }
     }
 
@@ -454,6 +482,15 @@ class VideoController extends Controller
         $is_program = false;
         foreach ($videos as $video) {
             $html .= view('video.singleSubscribeVideo', compact('video', 'is_program'));
+        }
+        return $html;
+    }
+
+    public function singleLoadMoreSliderVideosHTML($videos)
+    {
+        $html = '';
+        foreach ($videos as $video) {
+            $html .= view('video.singleLoadMoreSliderVideos', compact('video'));
         }
         return $html;
     }

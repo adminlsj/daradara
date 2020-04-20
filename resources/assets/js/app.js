@@ -115,6 +115,12 @@ $(document).on("click", ".load-tag-videos", function(e) {
     previous.removeClass("active");
     current.addClass('active');
 
+    if (current.text().indexOf("全部") >= 0) {
+      $('#home-preload-videos').css('display', 'block');
+    } else {
+      $('#home-preload-videos').css('display', 'none');
+    }
+
     $('#sidebar-results').html(" ");
     $('.ajax-loading').html('<img style="width: 40px; height: auto; padding-top: 25px; padding-bottom: 50px;" src="https://i.imgur.com/TcZjkZa.gif"/>');
 
@@ -153,7 +159,7 @@ $(document).on("click", ".load-tag-videos", function(e) {
     function load_more(page){
         $.ajax({
             type:'GET',
-            url:'/loadTagList?tag=' + current.text() + '&path=' + window.location.pathname + '&page=' + page,
+            url:'/loadTagList?tag=' + current.text().replace('#', '') + '&path=' + window.location.pathname + '&page=' + page,
             datatype: "html",
         })
 

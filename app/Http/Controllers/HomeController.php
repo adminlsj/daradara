@@ -25,40 +25,7 @@ use Redirect;
 class HomeController extends Controller
 {
     public function index(Request $request){
-        $subscribes = [];
-        $subscribes_id = [];
-        if (auth()->check()) {
-            $subscriptions = auth()->user()->subscribes();
-            if (!$subscriptions->isEmpty()) {
-                $subscribes = Video::where(function($query) use ($subscriptions) {
-                    foreach ($subscriptions as $subscribe) {
-                        if ($subscribe->type == 'watch') {
-                            $watch = Watch::where('title', $subscribe->tag)->first();
-                            $query->orWhere('playlist_id', $watch->id);
-                        } else {
-                            $query->orWhere('tags', 'LIKE', '%'.$subscribe->tag.'%');
-                        }
-                    }
-                })->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->orderBy('uploaded_at', 'desc')->limit(12);
-                $subscribes_id = $subscribes->pluck('id');
-                $subscribes = $subscribes->get();
-            }
-        }
-
-        $newest = Video::whereNotIn('id', $subscribes_id)->orderBy('uploaded_at', 'desc')->limit(12);
-        $newest_id = $newest->pluck('id');
-        $newest = $newest->get();
-
-        if ($request->ajax()) {
-            $html = '';
-            $load_more = Video::whereNotIn('id', $subscribes_id)->whereNotIn('id', $newest_id)->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->orderBy('views', 'desc')->paginate(24);
-            foreach ($load_more as $video) {
-                $html .= view('video.singleLoadMoreSliderVideos', compact('video'));
-            }
-            return $html;
-        }
-
-        return view('video.home', compact('subscribes', 'newest'));
+        return view('video.home');
     }
 
     public function about(Request $request)
