@@ -286,7 +286,7 @@ class VideoController extends Controller
     }
 
     public function loadTagList(Request $request) {
-        $tag = $request->tag;
+        $tag = strpos($request->tag, '全部') !== false ? '' : $request->tag;
         $path = $request->path;
         $videos = Video::query();
 
