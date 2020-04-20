@@ -21,9 +21,9 @@
 			    	@elseif (Request::path() == 'newest')
 				    	<a id="default-tag" class="load-tag-videos active" style="margin-right: 5px;">全部最新內容</a>
 			    	@endif
-					<a class="load-tag-videos" style="margin-right: 5px;">#綜藝</a>
 					<a class="load-tag-videos" style="margin-right: 5px;">#日劇</a>
 					<a class="load-tag-videos" style="margin-right: 5px;">#動漫</a>
+					<a class="load-tag-videos" style="margin-right: 5px;">#綜藝</a>
 				</div>
 				<hr style="margin: 15px 0px 15px 0px; border-color: #e1e1e1; border-width: 3px">
 			</div>
