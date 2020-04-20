@@ -64,7 +64,7 @@ class HomeController extends Controller
     public function about(Request $request)
     {
         // User seeds
-        switch ($request->seed) {
+        /* switch ($request->seed) {
             case 'user':
                 for ($i = 0; $i < 300; $i++) {
                     $user = User::create([
@@ -165,7 +165,7 @@ class HomeController extends Controller
             default:
                 # code...
                 break;
-        }
+        } */
 
         return view('layouts.about-us');
     }

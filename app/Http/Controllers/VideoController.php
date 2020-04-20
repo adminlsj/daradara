@@ -12,13 +12,7 @@ use App\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Pagination\LengthAwarePaginator;
-use Storage;
-use File;
-use Image;
-use DB;
 use Auth;
-use App\Mail\Contact;
-use App\Mail\ContactUser;
 use Carbon\Carbon;
 use Response;
 
