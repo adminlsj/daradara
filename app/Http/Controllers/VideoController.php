@@ -24,29 +24,6 @@ class VideoController extends Controller
     }
 
     public function explore(Request $request){
-        if ($request->ajax()) {
-            switch ($request->path()) {
-                case 'rank':
-                    $videos = Video::whereDate('uploaded_at', '>=', Carbon::now()->subMonth())->orderBy('views', 'desc');
-                    break;
-
-                case 'newest':
-                    $videos = Video::whereDate('uploaded_at', '>=', Carbon::now()->subMonth())->orderBy('uploaded_at', 'desc');
-                    break;
-                
-                default:
-                    $videos = Video::whereDate('uploaded_at', '>=', Carbon::now()->subMonth())->orderBy('views', 'desc');
-                    break;
-            }
-            $videos = $videos->paginate(24);
-
-            $html = '';
-            foreach ($videos as $video) {
-                $html .= view('video.singleLoadMoreSliderVideos', compact('video'));
-            }
-            return $html;
-        }
-
         return view('video.rankIndex');
     }
 
@@ -306,6 +283,35 @@ class VideoController extends Controller
         $is_subscribed = $this->is_subscribed($tag);
 
         return view('video.subscribeTag', compact('tag', 'videos', 'is_subscribed'));
+    }
+
+    public function loadTagList(Request $request) {
+        $tag = $request->tag;
+        $path = $request->path;
+        $videos = Video::query();
+
+        switch ($path) {
+            case '/rank':
+                $videos = $videos->whereDate('uploaded_at', '>=', Carbon::now()->subMonth())->where('tags', 'like', '%'.$tag.'%')->orderBy('views', 'desc');
+                break;
+
+            case '/newest':
+                $videos = $videos->whereDate('uploaded_at', '>=', Carbon::now()->subMonth())->where('tags', 'like', '%'.$tag.'%')->orderBy('uploaded_at', 'desc');
+                break;
+            
+            default:
+                # code...
+                break;
+        }
+        $videos = $videos->paginate(24);
+
+        $html = '';
+        foreach ($videos as $video) {
+            $html .= view('video.singleLoadMoreSliderVideos', compact('video'));
+        }
+        if ($request->ajax()) {
+            return $html;
+        }
     }
 
     public function like(Request $request)

@@ -109,36 +109,96 @@ $(document).on("click", "#test-play-btn", function(e) {
     $('#test-player').css('display', 'block');
 });
 
-/*$(document).on("click", "#test-play-btn", function(e) {
-    e.preventDefault(e);
+$(document).on("click", ".load-tag-videos", function(e) {
+    var previous = $('.subscribes-tab .active');
+    var current = $(this);
+    if (!current.hasClass('active')) {
+      previous.removeClass("active");
+      current.addClass('active');
 
-    $.ajax({
-       type:'GET',
-       url:'/createGetSource',
-       data: {url: $('#link').val()},
-       success: function(data){
-          const dp = new DPlayer({
-            container: document.getElementById('dplayer'),
-            autoplay: false,
-            theme: '#d84b6b',
-            preload: 'auto',
-            volume: 0,
-            video: {
-              url: data,
-            },
-          });
-          dp.video.pause();
+      $('#sidebar-results').html(" ");
+      $('.ajax-loading').html('<img style="width: 40px; height: auto; padding-top: 25px; padding-bottom: 50px;" src="https://i.imgur.com/TcZjkZa.gif"/>');
 
-          $('video').on('loadedmetadata', function() {
-              $('#duration').val(dp.video.duration.toFixed(0));
-              // $('#singleNewCreateForm').submit();
+      var _throttleTimer = null;
+      var _throttleDelay = 100;
+      var $window = $(window);
+      var $document = $(document);
+      $window.off('scroll', ScrollHandler).on('scroll', ScrollHandler);
+      $(document).on("click", ".load-tag-videos", function(e) {
+          $window.off('scroll', ScrollHandler);
+      });
+
+      var page = 1; //track user scroll as page number, right now page number is 1
+      load_more(page); //initial content load
+
+      function ScrollHandler(e) {
+        if (current.hasClass('active')) {
+          //throttle event:
+          clearTimeout(_throttleTimer);
+          _throttleTimer = setTimeout(function () {
+              if ($(window).scrollTop() + $(window).height() + 1500 >= getDocHeight()) {
+                page++; //page number increment
+                load_more(page); //load content   
+              }
+          }, _throttleDelay);
+        }
+      }
+
+      function getDocHeight() {
+          var D = document;
+          return Math.max(
+              D.body.scrollHeight, D.documentElement.scrollHeight,
+              D.body.offsetHeight, D.documentElement.offsetHeight,
+              D.body.clientHeight, D.documentElement.clientHeight
+          );
+      }
+
+      function load_more(page){
+          $.ajax({
+              type:'GET',
+              url:'/loadTagList?tag=' + current.text() + '&path=' + window.location.pathname + '&page=' + page,
+              datatype: "html",
+          })
+
+          .done(function(data){
+              if (data.length == 0){
+                console.log(data.length);
+                  $('.ajax-loading').html(" ");
+                  return;
+              }
+
+              newDivName = "d" + String(new Date().valueOf());
+              var $newhtml = $("<div id='" + newDivName + "'>" + data + "</div>");
+              $('#sidebar-results').append($newhtml);
+
+              var container = document.querySelector("#" + newDivName);
+              var lazyImages = [].slice.call(container.querySelectorAll("img.lazy"));
+              if ("IntersectionObserver" in window) {
+                  let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+                    entries.forEach(function(entry) {
+                      if (entry.isIntersecting) {
+                        let lazyImage = entry.target;
+                        lazyImage.src = lazyImage.dataset.src;
+                        lazyImage.srcset = lazyImage.dataset.srcset;
+                        lazyImage.classList.remove("lazy");
+                        lazyImageObserver.unobserve(lazyImage);
+                      }
+                    });
+                  }, {
+                    rootMargin: "0px 0px 256px 0px"
+                  });
+                  
+                  lazyImages.forEach(function(lazyImage) {
+                    lazyImageObserver.observe(lazyImage);
+                  });
+              }
+          })
+
+          .fail(function(jqXHR, ajaxOptions, thrownError){
           });
-       },
-       error: function(xhr, ajaxOptions, thrownError){
-         $("#meta").html('error');
-       }
-    });
-});*/
+      }
+    }
+});
 
 $('[id=toggleSearchBar]').click(function(e) {
     var x = document.getElementById("searchBar");
