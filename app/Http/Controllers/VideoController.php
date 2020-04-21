@@ -27,10 +27,10 @@ class VideoController extends Controller
         $tags = [];
 
         if (auth()->check()) {
-            array_push($tags, '日劇', '動漫', '綜藝');
+            array_push($tags, '#日劇', '#動漫', '#綜藝');
             $selected = Watch::orderBy('created_at', 'desc')->limit(5)->get();
             foreach ($selected as $watch) {
-                array_push($tags, explode(' ', $watch->title)[0]);
+                array_push($tags, '#'.explode(' ', $watch->title)[0]);
             }
         } else {
             array_push($tags, '#創意廣告', '#搞笑影片', '#動漫講評', '#日劇講評', '#電影講評');
