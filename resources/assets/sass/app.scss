@@ -249,14 +249,15 @@ body {
 }
 
 .subscribes-tab {
-  width: 100%;
+  width: calc(100% - 50px);
+  margin-left: 25px;
   overflow-x: auto;
   white-space: nowrap;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none;  /* Internet Explorer 10+ */
   padding: 15px 0px;
-  border-top: solid 3px #e1e1e1;
-  border-bottom: solid 3px #e1e1e1;
+  border-top: solid 2px #e1e1e1;
+  border-bottom: solid 2px #e1e1e1;
   margin-bottom: 15px;
 }
 
@@ -2272,6 +2273,20 @@ a > i {
   .paravi-padding-setup {
     padding: 0px 15px;
   }
+
+  .subscribes-tab {
+    width: 100%;
+    margin-left: 0px;
+  }
+
+  .subscribes-tab a:first-child {
+    margin-left: 15px;
+  }
+
+  .subscribes-tab a:last-child {
+    margin-right: 15px !important;
+  }
+
 
   #nav-logo-image {
     margin-left: -5px;

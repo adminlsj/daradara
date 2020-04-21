@@ -12,17 +12,15 @@
 <div class="main-content">
 	<div style="background-color: #F5F5F5;">
 
-		<div class="paravi-padding-setup">
-			<div class="subscribes-tab">
-				@if (Request::path() == 'rank')
-			    	<a id="default-tag" class="load-tag-videos active" style="margin-right: 5px;">全部發燒影片</a>
-		    	@elseif (Request::path() == 'newest')
-			    	<a id="default-tag" class="load-tag-videos active" style="margin-right: 5px;">全部最新內容</a>
-		    	@endif
-				@foreach ($tags as $tag)
-					<a class="load-tag-videos" style="margin-right: 5px;">{{ $tag }}</a>
-				@endforeach
-			</div>
+		<div class="subscribes-tab">
+			@if (Request::path() == 'rank')
+		    	<a id="default-tag" class="load-tag-videos active" style="margin-right: 5px;">全部發燒影片</a>
+	    	@elseif (Request::path() == 'newest')
+		    	<a id="default-tag" class="load-tag-videos active" style="margin-right: 5px;">全部最新內容</a>
+	    	@endif
+			@foreach ($tags as $tag)
+				<a class="load-tag-videos" style="margin-right: 5px;">{{ $tag }}</a>
+			@endforeach
 		</div>
 
 		<div class="row no-gutter load-more-container">
