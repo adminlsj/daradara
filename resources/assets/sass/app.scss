@@ -2287,6 +2287,13 @@ a > i {
     margin-right: 15px !important;
   }
 
+  .subscribes-index-tab a:first-child {
+    margin-left: 0px;
+  }
+
+  .subscribes-index-tab a:last-child {
+    margin-right: 0px !important;
+  }
 
   #nav-logo-image {
     margin-left: -5px;
