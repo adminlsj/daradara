@@ -13,18 +13,16 @@
 	<div style="background-color: #F5F5F5;">
 
 		@if (Auth::check())
-			<div class="paravi-padding-setup">
-				<div class="subscribes-tab">
-			    	<a id="default-tag" class="load-tag-videos active" style="margin-right: 5px;">全部推薦內容</a>
-					<a class="load-tag-videos" style="margin-right: 5px;">#日劇</a>
-					<a class="load-tag-videos" style="margin-right: 5px;">#動漫</a>
-					<a class="load-tag-videos" style="margin-right: 5px;">#綜藝</a>
-					@if ($subscribe = Auth::user()->subscribes()->first())
-						@foreach ($subscribe->watch()->videos()->first()->tags() as $tag)
-							<a class="load-tag-videos" style="margin-right: 5px;">#{{ $tag }}</a>
-						@endforeach
-					@endif
-				</div>
+			<div class="subscribes-tab">
+		    	<a id="default-tag" class="load-tag-videos active" style="margin-right: 5px;">全部推薦內容</a>
+				<a class="load-tag-videos" style="margin-right: 5px;">#日劇</a>
+				<a class="load-tag-videos" style="margin-right: 5px;">#動漫</a>
+				<a class="load-tag-videos" style="margin-right: 5px;">#綜藝</a>
+				@if ($subscribe = Auth::user()->subscribes()->first())
+					@foreach ($subscribe->watch()->videos()->first()->tags() as $tag)
+						<a class="load-tag-videos" style="margin-right: 5px;">#{{ $tag }}</a>
+					@endforeach
+				@endif
 			</div>
 		@else
 			<div class="home-banner-wrapper" style="padding-top: 10px;">
@@ -39,15 +37,13 @@
 				</a>
 			</div>
 
-		    <div class="paravi-padding-setup">
-				<div class="subscribes-tab">
-			    	<a id="default-tag" class="load-tag-videos active" style="margin-right: 5px;">全部推薦內容</a>
-					<a class="load-tag-videos" style="margin-right: 5px;">#創意廣告</a>
-					<a class="load-tag-videos" style="margin-right: 5px;">#搞笑影片</a>
-					<a class="load-tag-videos" style="margin-right: 5px;">#動漫講評</a>
-					<a class="load-tag-videos" style="margin-right: 5px;">#日劇講評</a>
-					<a class="load-tag-videos" style="margin-right: 5px;">#電影講評</a>
-				</div>
+			<div class="subscribes-tab">
+		    	<a id="default-tag" class="load-tag-videos active" style="margin-right: 5px;">全部推薦內容</a>
+				<a class="load-tag-videos" style="margin-right: 5px;">#創意廣告</a>
+				<a class="load-tag-videos" style="margin-right: 5px;">#搞笑影片</a>
+				<a class="load-tag-videos" style="margin-right: 5px;">#動漫講評</a>
+				<a class="load-tag-videos" style="margin-right: 5px;">#日劇講評</a>
+				<a class="load-tag-videos" style="margin-right: 5px;">#電影講評</a>
 			</div>
 		@endif
 
