@@ -6,7 +6,7 @@
 
       <input id="q" name="q" style="vertical-align:middle; margin-bottom: -28px; background-color: #e9e9e9; box-shadow: none; border-bottom: none;" type="text" value="{{ request('q') }}" placeholder="搜索">
 
-      <a class="search-submit-btn" type="submit" style="color: #646464 !important; padding: 0px 0px 15px 15px; cursor: pointer;"><i style="font-size: 25px; vertical-align:middle; margin-bottom: -24px" class="material-icons">search</i></a>
+      <a class="search-submit-btn" type="submit" style="color: #646464 !important; position: absolute; top: 8px; right: 26px; cursor: pointer;"><i style="font-size: 27px;" class="material-icons">search</i></a>
     </form>
   </div>
 </nav>

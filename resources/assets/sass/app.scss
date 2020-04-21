@@ -113,6 +113,15 @@ body {
   letter-spacing: -0.5px;
 }
 
+.nav-item-icon {
+  position: absolute !important;
+  top: 8px;
+}
+
+.nav-item-icon i {
+  font-size: 27px;
+}
+
 .paravi-padding-setup {
   padding: 0px 25px;
 }
@@ -2311,6 +2320,15 @@ a > i {
 
   #nav-logo-text {
     margin-left: 3px; 
+  }
+
+  .nav-item-icon {
+    position: absolute !important;
+    top: 9px;
+  }
+
+  .nav-item-icon i {
+    font-size: 27px;
   }
 
   .search-google-wrapper {
