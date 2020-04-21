@@ -3,7 +3,7 @@
     <div style="height: 50px;">
 
       <a class="pull-left" style="text-decoration: none; line-height: 50px;" href="/">
-          <img id="nav-image" style="height: 23px; margin-top: -1px;" src="https://i.imgur.com/MSUYFUo.png">
+          <img id="nav-image" style="height: 23px; margin-top: -1px;" src="https://i.imgur.com/bskg2P0.png">
       </a>
 
       <form id="search-form" class="hidden-xs hidden-sm pull-left" style="width: 50%; margin-top: 5px; left:370px; position: absolute;" action="{{ route('video.searchGoogle') }}" method="GET">
