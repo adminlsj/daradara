@@ -5,13 +5,13 @@
   </a>
   <a href="{{ route('video.subscribes') }}" class="{{ Request::is('*subscribes*') ? 'active' : ''}}">
     <i style="font-size: 25px; position: relative" class="material-icons">subscriptions</i>
-    <span style="padding-right: 1px;">訂閱</span>
+    <span style="padding-right: 1px;">訂閱項目</span>
     @if (Auth::check() && strpos(auth()->user()->alert, 'subscribe') !== false)
       <span style="position: absolute; top: -5px; right: calc(60% - 9px)" class="alert-circle"></span>
     @endif
   </a>
   <a href="{{ route('video.rank') }}" class="{{ Request::is('*rank*') ? 'active' : '' }}">
-    <i style="padding-left: 1px; font-size: 26px;" class="material-icons">whatshot</i>
+    <i style="padding-left: 0px; font-size: 26px;" class="material-icons">whatshot</i>
     <span>發燒影片</span>
   </a>
   <a href="{{ route('video.newest') }}" class="{{ Request::is('*newest*') ? 'active' : '' }}">
