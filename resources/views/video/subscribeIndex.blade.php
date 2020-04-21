@@ -30,12 +30,12 @@
 			@endforeach
 			<div id="subscribe-show-all" class="no-select" style="height: 80px; vertical-align: middle; padding: 0px 15px; position: absolute; top: 0px; right: 0px; background-color: #F5F5F5; font-size: 1.1em; padding-top: 25px; color: #d84b6b; font-weight: 500; cursor: pointer">所有</div>
 		</div>
-		<hr style="margin: 0px 0px 16px 0px; border-color: #e5e5e5;">
-		<div class="subscribes-tab padding-setup">
-			<a href="{{ route('video.subscribes') }}?g=newest" class="{{ !Request::has('g') || Request::get('g') == 'newest' ? 'active' : '' }}" style="margin-right: 5px;">最新訂閱内容</a>
-			<a href="{{ route('video.subscribes') }}?g=saved" class="{{ Request::has('g') && Request::get('g') == 'saved' ? 'active' : '' }}" style="margin-right: 5px;">儲存影片</a>
+		<div class="subscribes-tab" style="margin-bottom: 0px; border-width: 1px;">
+			<div class="paravi-padding-setup">
+				<a href="{{ route('video.subscribes') }}?g=newest" class="{{ !Request::has('g') || Request::get('g') == 'newest' ? 'active' : '' }}">最新訂閱内容</a>
+				<a href="{{ route('video.subscribes') }}?g=saved" class="{{ Request::has('g') && Request::get('g') == 'saved' ? 'active' : '' }}">儲存影片</a>
+			</div>
 		</div>
-		<hr style="margin: 15px 0px 0px 0px; border-color: #e5e5e5;">
 		<div class="video-sidebar-wrapper padding-desktop-only">
 		    <div id="sidebar-results"><!-- results appear here --></div>
 		    <div style="text-align: center;" class="ajax-loading"><img style="width: 40px; height: auto; padding-top: 25px; padding-bottom: 70px;" src="https://i.imgur.com/TcZjkZa.gif"/></div>

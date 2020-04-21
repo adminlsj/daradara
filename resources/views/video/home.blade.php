@@ -14,17 +14,17 @@
 
 		@if (Auth::check())
 			<div class="paravi-padding-setup">
-				<hr style="margin: 0px 0px 15px 0px; border-color: #e1e1e1; border-width: 3px">
 				<div class="subscribes-tab">
 			    	<a id="default-tag" class="load-tag-videos active" style="margin-right: 5px;">全部推薦內容</a>
 					<a class="load-tag-videos" style="margin-right: 5px;">#日劇</a>
 					<a class="load-tag-videos" style="margin-right: 5px;">#動漫</a>
 					<a class="load-tag-videos" style="margin-right: 5px;">#綜藝</a>
+					@foreach (Auth::user()->subscribes()->first()->watch()->videos()->first()->tags() as $tag)
+						<a class="load-tag-videos" style="margin-right: 5px;">#{{ $tag }}</a>
+					@endforeach
 				</div>
-				<hr style="margin: 15px 0px 15px 0px; border-color: #e1e1e1; border-width: 3px">
 			</div>
 		@else
-			<a id="default-tag" class="load-tag-videos active" style="display: none;">全部推薦內容</a>
 			<div class="home-banner-wrapper" style="padding-top: 10px;">
 				<a href="/about">
 					<div style="background-color: white; text-align: left; position: relative;">
@@ -37,9 +37,16 @@
 				</a>
 			</div>
 
-		    <div class="explore-slider-title paravi-padding-setup">
-		    	<a href="{{ route('video.rank') }}"><h4>推薦內容<span>發燒影片</span><i class="material-icons">arrow_forward_ios</i></h4></a>
-		    </div>
+		    <div class="paravi-padding-setup">
+				<div class="subscribes-tab">
+			    	<a id="default-tag" class="load-tag-videos active" style="margin-right: 5px;">全部推薦內容</a>
+					<a class="load-tag-videos" style="margin-right: 5px;">#創意廣告</a>
+					<a class="load-tag-videos" style="margin-right: 5px;">#搞笑影片</a>
+					<a class="load-tag-videos" style="margin-right: 5px;">#動漫講評</a>
+					<a class="load-tag-videos" style="margin-right: 5px;">#日劇講評</a>
+					<a class="load-tag-videos" style="margin-right: 5px;">#電影講評</a>
+				</div>
+			</div>
 		@endif
 
 	    <div class="row no-gutter load-more-container">

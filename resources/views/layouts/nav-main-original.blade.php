@@ -12,7 +12,7 @@
 
       <form id="search-form" class="hidden-xs hidden-sm pull-left" style="width: 50%; margin-top: 5px; left:370px; position: absolute;" action="{{ route('video.searchGoogle') }}" method="GET">
           <i style="position: absolute; top: 8px; left: 17px; color: dimgray" class="material-icons">search</i>
-          <input name="q" style="box-shadow: none; border: 1px solid #e8eaed; background-color: #e8eaed; font-size: 1.1em;border-radius: 7px; height: 40px; padding-left: 53px; color: #222222; padding-bottom: 2.5px;" type="text" value="{{ request('q') }}" placeholder="搜索">
+          <input name="q" style="box-shadow: none; border: 1px solid #e8eaed; background-color: #e8eaed; font-size: 1.1em;border-radius: 7px; height: 40px; padding-left: 53px; color: #222222; padding-bottom: 2px; font-weight: 500;" type="text" value="{{ request('q') }}" placeholder="搜索">
       </form>
 
       @if (Auth::check())

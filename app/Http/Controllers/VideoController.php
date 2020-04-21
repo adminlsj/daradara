@@ -24,7 +24,19 @@ class VideoController extends Controller
     }
 
     public function explore(Request $request){
-        return view('video.rankIndex');
+        $tags = [];
+
+        if (auth()->check()) {
+            array_push($tags, '日劇', '動漫', '綜藝');
+            $selected = Watch::orderBy('created_at', 'desc')->limit(5)->get();
+            foreach ($selected as $watch) {
+                array_push($tags, explode(' ', $watch->title)[0]);
+            }
+        } else {
+            array_push($tags, '#創意廣告', '#搞笑影片', '#動漫講評', '#日劇講評', '#電影講評');
+        }
+
+        return view('video.rankIndex', compact('tags'));
     }
 
     public function playlist(Request $request){
@@ -292,17 +304,25 @@ class VideoController extends Controller
 
         switch ($path) {
             case '/rank':
-                $videos = $videos->whereDate('uploaded_at', '>=', Carbon::now()->subMonth())->where('tags', 'like', '%'.$tag.'%')->orderBy('views', 'desc')->paginate(24);
+                if (!auth()->check() && $tag == '') {
+                    $videos = $videos->orWhere('tags', 'like', '%創意廣告%')->orWhere('tags', 'like', '%搞笑影片%')->orWhere('tags', 'like', '%講評%')->orderBy('views', 'desc')->paginate(24);   
+                } else {
+                    $videos = $videos->whereDate('uploaded_at', '>=', Carbon::now()->subMonth())->where('tags', 'like', '%'.$tag.'%')->orderBy('views', 'desc')->paginate(24);
+                }
                 return $this->singleLoadMoreSliderVideosHTML($videos);
 
             case '/newest':
-                $videos = $videos->whereDate('uploaded_at', '>=', Carbon::now()->subMonth())->where('tags', 'like', '%'.$tag.'%')->orderBy('uploaded_at', 'desc')->paginate(24);
+                if (!auth()->check() && $tag == '') {
+                    $videos = $videos->orWhere('tags', 'like', '%創意廣告%')->orWhere('tags', 'like', '%搞笑影片%')->orWhere('tags', 'like', '%講評%')->orderBy('uploaded_at', 'desc')->paginate(24);   
+                } else {
+                    $videos = $videos->whereDate('uploaded_at', '>=', Carbon::now()->subMonth())->where('tags', 'like', '%'.$tag.'%')->orderBy('uploaded_at', 'desc')->paginate(24);
+                }
                 return $this->singleLoadMoreSliderVideosHTML($videos);
             
             case '/':
-                $subscribes = [];
-                $subscribes_id = [];
                 if (auth()->check()) {
+                    $subscribes = [];
+                    $subscribes_id = [];
                     $subscriptions = auth()->user()->subscribes();
                     if (!$subscriptions->isEmpty()) {
                         $subscribes = Video::where(function($query) use ($subscriptions) {
@@ -318,27 +338,45 @@ class VideoController extends Controller
                         $subscribes_id = $subscribes->pluck('id');
                         $subscribes = $subscribes->get();
                     }
-                }
 
-                $newest = Video::whereNotIn('id', $subscribes_id)->where('tags', 'like', '%'.$tag.'%')->orderBy('uploaded_at', 'desc')->limit(12);
-                $newest_id = $newest->pluck('id');
-                $newest = $newest->get();
+                    $newest = Video::whereNotIn('id', $subscribes_id)->where('tags', 'like', '%'.$tag.'%')->orderBy('uploaded_at', 'desc')->limit(12);
+                    $newest_id = $newest->pluck('id');
+                    $newest = $newest->get();
 
-                $videos = Video::whereNotIn('id', $subscribes_id)->whereNotIn('id', $newest_id)->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->where('tags', 'like', '%'.$tag.'%')->orderBy('views', 'desc')->paginate(24);
+                    $videos = Video::whereNotIn('id', $subscribes_id)->whereNotIn('id', $newest_id)->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->where('tags', 'like', '%'.$tag.'%')->orderBy('views', 'desc')->paginate(24);
 
-                $html = '';
-                if ($request->page == 1) {
-                    foreach ($subscribes as $video) {
-                        $html .= view('video.singleLoadMoreSliderVideos', compact('video'));
+                    $html = '';
+                    if ($request->page == 1) {
+                        $html .= $this->singleLoadMoreSliderVideosHTML($subscribes);
+                        $html .= $this->singleLoadMoreSliderVideosHTML($newest);
                     }
-                    foreach ($newest as $video) {
-                        $html .= view('video.singleLoadMoreSliderVideos', compact('video'));
+                    $html .= $this->singleLoadMoreSliderVideosHTML($videos);
+                    return $html;
+
+                } else {
+                    if ($tag == '') {
+                        $newest = Video::where(function($query) {
+                            $query->orWhere('tags', 'like', '%創意廣告%')->orWhere('tags', 'like', '%搞笑影片%')->orWhere('tags', 'like', '%講評%');
+                        })->orderBy('uploaded_at', 'desc')->limit(12)->get();
+                        $newest_id = $newest->pluck('id');
+
+                        $videos = Video::where(function($query) {
+                            $query->orWhere('tags', 'like', '%創意廣告%')->orWhere('tags', 'like', '%搞笑影片%')->orWhere('tags', 'like', '%講評%');
+                        })->whereNotIn('id', $newest_id)->orderBy('views', 'desc')->paginate(24);
+
+                    } else {
+                        $newest = Video::where('tags', 'like', '%'.$tag.'%')->orderBy('uploaded_at', 'desc')->limit(12)->get();
+                        $newest_id = $newest->pluck('id');
+                        $videos = Video::where('tags', 'like', '%'.$tag.'%')->whereNotIn('id', $newest_id)->orderBy('views', 'desc')->paginate(24);
                     }
+
+                    $html = '';
+                    if ($request->page == 1) {
+                        $html .= $this->singleLoadMoreSliderVideosHTML($newest);
+                    }
+                    $html .= $this->singleLoadMoreSliderVideosHTML($videos);
+                    return $html;
                 }
-                foreach ($videos as $video) {
-                    $html .= view('video.singleLoadMoreSliderVideos', compact('video'));
-                }
-                return $html;
         }
     }
 
