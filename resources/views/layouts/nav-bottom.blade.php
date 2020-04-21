@@ -1,4 +1,4 @@
-<div class="bottom-nav hidden-lg hidden-md white-theme-nav-bottom">
+<div style="border-top: 1px solid #e9e9e9;" class="bottom-nav hidden-lg hidden-md white-theme-nav-bottom">
   <a href="/" class="{{ Request::is('/') ? 'active' : ''}}">
     <i class="material-icons">home</i>
     <span style="padding-right: 1px;">主頁</span>
