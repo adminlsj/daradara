@@ -94,6 +94,10 @@ body {
   max-width: 105px !important;
 }
 
+#nav-image {
+  margin-left: 13px;
+}
+
 #nav-logo-image {
   width: 35px; 
   height: 35px; 
@@ -2293,6 +2297,10 @@ a > i {
 
   .subscribes-index-tab a:last-child {
     margin-right: 0px !important;
+  }
+
+  #nav-image {
+    margin-left: -5px;
   }
 
   #nav-logo-image {

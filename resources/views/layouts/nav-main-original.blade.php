@@ -2,12 +2,8 @@
   <div class="container-fluid">
     <div style="height: 50px;">
 
-      <div style="line-height: 50px;" class="pull-left">
-        <img id="nav-logo-image" src="https://i.imgur.com/6ePdVGMm.jpg">
-      </div>
-
-      <a class="pull-left" style="text-decoration: none; transform:scale(1,1.05); -webkit-transform:scale(1,1.05); " href="/">
-          <span id="nav-logo-text">LaughSeeJapan</span>
+      <a class="pull-left" style="text-decoration: none; line-height: 50px;" href="/">
+          <img id="nav-image" style="height: 25px; margin-top: -1px;" src="https://i.imgur.com/ck6bHHA.png">
       </a>
 
       <form id="search-form" class="hidden-xs hidden-sm pull-left" style="width: 50%; margin-top: 5px; left:370px; position: absolute;" action="{{ route('video.searchGoogle') }}" method="GET">
