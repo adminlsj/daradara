@@ -19,9 +19,11 @@
 					<a class="load-tag-videos" style="margin-right: 5px;">#日劇</a>
 					<a class="load-tag-videos" style="margin-right: 5px;">#動漫</a>
 					<a class="load-tag-videos" style="margin-right: 5px;">#綜藝</a>
-					@foreach (Auth::user()->subscribes()->first()->watch()->videos()->first()->tags() as $tag)
-						<a class="load-tag-videos" style="margin-right: 5px;">#{{ $tag }}</a>
-					@endforeach
+					@if ($subscribe = Auth::user()->subscribes()->first())
+						@foreach ($subscribe->watch()->videos()->first()->tags() as $tag)
+							<a class="load-tag-videos" style="margin-right: 5px;">#{{ $tag }}</a>
+						@endforeach
+					@endif
 				</div>
 			</div>
 		@else
