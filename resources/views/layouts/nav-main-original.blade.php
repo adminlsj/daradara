@@ -15,8 +15,8 @@
         <a class="hidden-xs hidden-sm nav-item-icon" style="right: 26px;" href="{{ route('user.show', Auth::user()) }}"><i class="material-icons">account_circle</i></a>
         <a class="hidden-xs hidden-sm nav-item-icon" style="right: 70px;" href="{{ route('user.userEditUpload', Auth::user()) }}"><i class="material-icons">video_call</i></a>
       @else
-        <a class="no-select nav-item-text hidden-xs hidden-sm" style="color: #cf2d52; border: 1px solid #cf2d52; padding: 6px 10px; margin-top: 7px; margin-right: 15px; font-weight: 500;" href="{{ route('login') }}">登入</a>
-        <a class="no-select nav-item-text hidden-xs hidden-sm" style="color: white; background-color: #cf2d52; padding: 5px 10px; margin-top: 7px; font-weight: 500" href="{{ route('register') }}">註冊</a>
+        <a class="no-select nav-item-text hidden-xs hidden-sm" style="color: #e8eaed; border: 1px solid #e8eaed; padding: 8px 14px; margin-top: 5px; margin-right: 15px; font-weight: bold; color: #666666" href="{{ route('login') }}">登入</a>
+        <a class="no-select nav-item-text hidden-xs hidden-sm" style="color: white; background-color: #e8eaed; border-color: #e8eaed; padding: 7px 14px; margin-top: 5px; font-weight: bold; color: #666666" href="{{ route('register') }}">註冊</a>
       @endif
 
       <a class="hidden-md hidden-lg nav-item-icon" style="right: 21px;" href="{{ Auth::check() ? route('user.show', Auth::user()) : route('login')}}"><i class="material-icons">account_circle</i></a>
