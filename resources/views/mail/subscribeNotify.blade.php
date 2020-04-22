@@ -15,7 +15,7 @@
 		<img style="width: 30px; height: auto; float: left; border-radius: 50%;" src="{{ $video->user()->avatar == null ? $video->user()->avatarDefault() : $video->user()->avatar->filename }}" alt="{{ $video->title }}">
 	</a>
 	<a href="{{ route('video.watch') }}?v={{ $video->id }}&utm_source=email" style="text-decoration: none; color: black;">
-		<div style="margin-left: 38px; font-size: 18px;">{{ $video->title }}</div>
+		<div style="margin-left: 38px; font-size: 16px;">{{ $video->title }}</div>
 		<div style="margin-left: 38px; font-size: 12px; color: gray">{{ $video->user()->name }}</div>
 		<div style="margin-left: 38px; font-size: 12px; color: gray; margin-top: 5px">{{ $video->caption }}</div>
 	</a>
