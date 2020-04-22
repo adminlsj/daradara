@@ -34,7 +34,7 @@ class SubscribeNotify extends Mailable
      */
     public function build()
     {
-        $title = $this->video->title;
+        $title = $this->video->playlist_id == '' ? $this->video->title : $this->video->watch()->title;
         return $this->subject($title.' 剛剛更新了內容')
                     ->markdown('mail.subscribeNotify');
     }
