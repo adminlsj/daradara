@@ -24,7 +24,8 @@ use Redirect;
 
 class HomeController extends Controller
 {
-    public function index(Request $request){
+    public function index(Request $request)
+    {
         return view('video.home');
     }
 

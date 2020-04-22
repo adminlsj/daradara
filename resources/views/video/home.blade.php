@@ -12,7 +12,7 @@
 <div class="main-content">
 	<div style="background-color: #F5F5F5;">
 
-		@if (Auth::check())
+		@if (Auth::check() && Auth::user()->subscribes()->first())
 			<div class="subscribes-tab">
 		    	<a id="default-tag" class="load-tag-videos active" style="margin-right: 5px;">全部推薦內容</a>
 				<a class="load-tag-videos" style="margin-right: 5px;">#日劇</a>

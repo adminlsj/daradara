@@ -11,10 +11,10 @@
 		{
 		  "@context": "https://schema.org",
 		  "@type": "ImageObject",
-		  "name": "{{ $first->title }}",
-		  "description": "{{ $first->caption == '' ? $first->title : $first->caption}}",
+		  "name": "{{ $watch->title }}",
+		  "description": "{{ $watch->description }}",
 		  "contentUrl": "https://i.imgur.com/{{ $first->imgur }}l.png",
-		  "uploadDate": "{{ \Carbon\Carbon::parse($first->created_at)->format('Y-m-d\Th:i:s').'+00:00' }}",
+		  "uploadDate": "{{ \Carbon\Carbon::parse($watch->updated_at)->format('Y-m-d\Th:i:s').'+00:00' }}"
 		}
 		</script>
     @endif

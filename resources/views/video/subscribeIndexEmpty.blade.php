@@ -17,16 +17,18 @@
 				<div style="color: gray; margin-top: 3px;">訂閱您喜愛的頻道，保證不會錯過最新內容。</div>
 			</div>
 		</div>
-		<hr style="border-color: #e9e9e9; margin-bottom: -3px">
-		<div class="explore-slider-title paravi-padding-setup">
-	    	<a href="{{ route('video.rank') }}"><h4>推薦內容<span>發燒影片</span><i class="material-icons">arrow_forward_ios</i></h4></a>
-	    </div>
+		<hr style="border-color: #F5F5F5; margin-bottom: 0px">
+		<div class="subscribes-tab">
+	    	<a id="default-tag" class="load-tag-videos active" style="margin-right: 5px;">全部推薦內容</a>
+			<a class="load-tag-videos" style="margin-right: 5px;">#創意廣告</a>
+			<a class="load-tag-videos" style="margin-right: 5px;">#搞笑影片</a>
+			<a class="load-tag-videos" style="margin-right: 5px;">#動漫講評</a>
+			<a class="load-tag-videos" style="margin-right: 5px;">#日劇講評</a>
+			<a class="load-tag-videos" style="margin-right: 5px;">#電影講評</a>
+		</div>
 
-	    <div class="row no-gutter load-more-container">
+		<div class="row no-gutter load-more-container">
 	        <div class="video-sidebar-wrapper">
-	        	@foreach ($newest as $video)
-			    	@include('video.singleLoadMoreSliderVideos')
-			    @endforeach
 		        <div id="sidebar-results"><!-- results appear here --></div>
 		        <div style="text-align: center;" class="ajax-loading"><img style="width: 40px; height: auto; padding-top: 25px; padding-bottom: 50px;" src="https://i.imgur.com/TcZjkZa.gif"/></div>
 	        </div>

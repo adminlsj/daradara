@@ -26,7 +26,7 @@ class VideoController extends Controller
     public function explore(Request $request){
         $tags = [];
 
-        if (auth()->check()) {
+        if (auth()->check() && auth()->user()->subscribes()->first()) {
             array_push($tags, '#日劇', '#動漫', '#綜藝');
             $selected = Watch::orderBy('created_at', 'desc')->limit(5)->get();
             foreach ($selected as $watch) {
@@ -304,23 +304,31 @@ class VideoController extends Controller
 
         switch ($path) {
             case '/rank':
-                if (!auth()->check() && $tag == '') {
-                    $videos = $videos->orWhere('tags', 'like', '%創意廣告%')->orWhere('tags', 'like', '%搞笑影片%')->orWhere('tags', 'like', '%講評%')->orderBy('views', 'desc')->paginate(24);   
-                } else {
+                if (auth()->check() && auth()->user()->subscribes()->first()) {
                     $videos = $videos->whereDate('uploaded_at', '>=', Carbon::now()->subMonth())->where('tags', 'like', '%'.$tag.'%')->orderBy('views', 'desc')->paginate(24);
+                } else {
+                    if ($tag == '') {
+                        $videos = $videos->orWhere('tags', 'like', '%創意廣告%')->orWhere('tags', 'like', '%搞笑影片%')->orWhere('tags', 'like', '%講評%')->orderBy('views', 'desc')->paginate(24);   
+                    } else {
+                        $videos = $videos->where('tags', 'like', '%'.$tag.'%')->orderBy('views', 'desc')->paginate(24);
+                    }
                 }
                 return $this->singleLoadMoreSliderVideosHTML($videos);
 
             case '/newest':
-                if (!auth()->check() && $tag == '') {
-                    $videos = $videos->orWhere('tags', 'like', '%創意廣告%')->orWhere('tags', 'like', '%搞笑影片%')->orWhere('tags', 'like', '%講評%')->orderBy('uploaded_at', 'desc')->paginate(24);   
-                } else {
+                if (auth()->check() && auth()->user()->subscribes()->first()) {
                     $videos = $videos->whereDate('uploaded_at', '>=', Carbon::now()->subMonth())->where('tags', 'like', '%'.$tag.'%')->orderBy('uploaded_at', 'desc')->paginate(24);
+                } else {
+                    if ($tag == '') {
+                        $videos = $videos->orWhere('tags', 'like', '%創意廣告%')->orWhere('tags', 'like', '%搞笑影片%')->orWhere('tags', 'like', '%講評%')->orderBy('uploaded_at', 'desc')->paginate(24);   
+                    } else {
+                        $videos = $videos->where('tags', 'like', '%'.$tag.'%')->orderBy('uploaded_at', 'desc')->paginate(24);
+                    }
                 }
                 return $this->singleLoadMoreSliderVideosHTML($videos);
             
-            case '/':
-                if (auth()->check()) {
+            default:
+                if (auth()->check() && auth()->user()->subscribes()->first()) {
                     $subscribes = [];
                     $subscribes_id = [];
                     $subscriptions = auth()->user()->subscribes();

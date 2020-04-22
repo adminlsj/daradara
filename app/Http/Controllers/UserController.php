@@ -44,18 +44,16 @@ class UserController extends Controller
         }
 
         switch ($request->genre) {
-            case 'featured':
+            case 'playlists':
                 if ($request->ajax()) {
-                    $videos = Video::where('user_id', $user->id)->orderBy('created_at', 'desc')->paginate(12);
+                    $userWatches = Watch::where('user_id', $user->id)->orderBy('updated_at', 'desc')->paginate(12);
                     $html = '';
-                    foreach ($videos as $video) {
-                        $html .= view('video.singleLoadMoreSliderVideos', compact('video'));
+                    foreach ($userWatches as $watch) {
+                        $first = $watch->videos()->first();
+                        $html .= view('video.singleLoadMoreSliderWatches', compact('watch', 'first'));
                     }
                     return $html;
                 }
-                return view('user.show-featured', compact('user', 'subscribers'));
-
-            case 'playlists':
                 return view('user.show-playlists', compact('user', 'watches', 'subscribers'));
 
             case 'about':
