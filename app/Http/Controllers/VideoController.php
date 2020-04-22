@@ -133,20 +133,7 @@ class VideoController extends Controller
             $subscribes = auth()->user()->subscribes();
 
             if ($subscribes->isEmpty()) {
-                $newest = Video::orderBy('uploaded_at', 'desc')->limit(12);
-                $newest_id = $newest->pluck('id');
-                $newest = $newest->get();
-
-                if ($request->ajax()) {
-                    $html = '';
-                    $load_more = Video::whereNotIn('id', $newest_id)->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->orderBy('views', 'desc')->paginate(24);
-                    foreach ($load_more as $video) {
-                        $html .= view('video.singleLoadMoreSliderVideos', compact('video'));
-                    }
-                    return $html;
-                }
-
-                return view('video.subscribeIndexEmpty', compact('newest'));
+                return view('video.subscribeIndexEmpty');
             }
 
             if ($request->ajax()) {

@@ -8,8 +8,8 @@
 <div class="hidden-sm hidden-xs sidebar-menu">
 	@include('video.sidebarMenu', ['theme' => 'white'])
 </div>
-<div class="main-content" style="background-color: #F5F5F5;">
-	<div>
+<div class="main-content">
+	<div style="background-color: #F5F5F5;">
 		<div style="padding: 20px; padding-bottom: 0px; ">
 			<i style="font-size: 80px; color: gray; float: left; margin-left: -5px;" class="material-icons">subscriptions</i>
 			<div style="margin-left: 85px; margin-top: 3px; height: 76px">
@@ -35,9 +35,4 @@
 	    </div>
 	</div>
 </div>
-@endsection
-
-@section('script')
-	@parent
-	<script src="{{ mix('js/loadMore.js') }}"></script>
 @endsection
