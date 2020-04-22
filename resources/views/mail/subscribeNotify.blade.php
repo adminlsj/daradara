@@ -16,7 +16,7 @@
 	</a>
 	<a href="{{ route('video.watch') }}?v={{ $video->id }}&utm_source=email" style="text-decoration: none; color: black;">
 		<div style="margin-left: 38px; font-size: 1em;">{{ $video->title }}</div>
-		<div style="margin-left: 38px; font-size: 0.8em; color: gray">{{ $video->user()->name }} • {{ Carbon\Carbon::parse($video->uploaded_at)->diffForHumans() }}</div>
+		<div style="margin-left: 38px; font-size: 0.8em; color: gray">{{ $video->user()->name }}</div>
 		<div style="margin-left: 38px; font-size: 0.8em; color: gray; margin-top: 5px">{{ $video->caption }}</div>
 	</a>
 </div>
