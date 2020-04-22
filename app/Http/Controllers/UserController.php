@@ -17,6 +17,7 @@ use Auth;
 use App\Mail\UserStartUpload;
 use Redirect;
 use Carbon\Carbon;
+use App\Jobs\SendSubscriptionEmail;
 
 class UserController extends Controller
 {
@@ -192,16 +193,9 @@ class UserController extends Controller
                     'uploaded_at' => Carbon::createFromFormat('Y-m-d\TH:i:s', request('uploaded_at'))->format('Y-m-d H:i:s'),
                 ]);
 
-                if ($video->playlist_id != '') {
-                    $watch = $video->watch();
-                    $watch->updated_at = $video->updated_at;
-                    $watch->save();
-                }
-
-                /*$users = [];
                 $userArray = [];
 
-                if ($video->category != 'video') {
+                if ($video->playlist_id != '') {
                     $watch = $video->watch();
                     $watch->updated_at = $video->uploaded_at;
                     $watch->save();
@@ -223,16 +217,8 @@ class UserController extends Controller
                 }
 
                 foreach ($userArray as $user_id) {
-                    array_push($users, User::find($user_id));
+                    SendSubscriptionEmail::dispatch(User::find($user_id), $video);
                 }
-
-                foreach ($users as $user) {
-                    Mail::to($user->email)->send(new SubscribeNotify($user, $video));
-                    if (strpos($user->alert, 'subscribe') === false) {
-                        $user->alert = $user->alert."subscribe";
-                        $user->save();
-                    }
-                }*/
 
                 return Redirect::back()->withErrors('已成功上傳影片《'.$video->title.'》');
             }
