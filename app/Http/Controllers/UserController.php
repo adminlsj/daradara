@@ -220,7 +220,7 @@ class UserController extends Controller
                     SendSubscriptionEmail::dispatch(User::find($user_id), $video);
                 }
 
-                return Redirect::back()->withErrors('已成功上傳影片《'.$video->title.'》');
+                return Redirect::route('video.watch', ['v' => $video->id]);
             }
         } else {
             return Redirect::back()->withErrors('封面圖片上傳失敗，請重新上傳。');
