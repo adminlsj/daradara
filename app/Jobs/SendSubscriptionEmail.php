@@ -18,16 +18,18 @@ class SendSubscriptionEmail implements ShouldQueue
 
     public $user;
     public $video;
+    public $title;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct(User $user, Video $video)
+    public function __construct(User $user, Video $video, String $title)
     {
         $this->user = $user;
         $this->video = $video;
+        $this->title = $title;
     }
 
     /**
@@ -41,6 +43,6 @@ class SendSubscriptionEmail implements ShouldQueue
             $this->user->alert = $this->user->alert."subscribe";
             $this->user->save();
         }
-        Mail::to($this->user->email)->send(new SubscribeNotify($this->user, $this->video));
+        Mail::to($this->user->email)->send(new SubscribeNotify($this->user, $this->video, $this->title));
     }
 }

@@ -15,16 +15,18 @@ class SubscribeNotify extends Mailable
 
     public $user;
     public $video;
+    public $title;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(User $user, Video $video)
+    public function __construct(User $user, Video $video, String $title)
     {
         $this->user = $user;
         $this->video = $video;
+        $this->title = $title;
     }
 
     /**
@@ -34,8 +36,7 @@ class SubscribeNotify extends Mailable
      */
     public function build()
     {
-        $title = $this->video->playlist_id == '' ? $this->video->title : $this->video->watch()->title;
-        return $this->subject($title.' 剛剛更新了內容')
+        return $this->subject($this->title.' 剛剛更新了內容')
                     ->markdown('mail.subscribeNotify');
     }
 }

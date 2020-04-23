@@ -201,6 +201,7 @@ class UserController extends Controller
                     $subscribes = $watch->subscribes();
                     foreach ($subscribes as $subscribe) {
                         $user = $subscribe->user();
+                        SendSubscriptionEmail::dispatch($user, $video, $subscribe->tag);
                         array_push($userArray, $user->id);
                     }
                 }
@@ -209,13 +210,9 @@ class UserController extends Controller
                     $subscribes = Subscribe::where('tag', $tag)->get();
                     foreach ($subscribes as $subscribe) {
                         if (!in_array($subscribe->user()->id, $userArray)) {
-                            array_push($userArray, $subscribe->user()->id);
+                            SendSubscriptionEmail::dispatch($subscribe->user(), $video, $subscribe->tag);
                         }
                     }
-                }
-
-                foreach ($userArray as $user_id) {
-                    SendSubscriptionEmail::dispatch(User::find($user_id), $video);
                 }
 
                 return Redirect::route('video.watch', ['v' => $video->id]);
