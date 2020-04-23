@@ -155,7 +155,7 @@ class UserController extends Controller
                 'title' => $request->title,
                 'description' => $request->description,
             ]);
-            return Redirect::back()->withErrors('已成功建立播放列表《'.$request->title.'》');
+            return Redirect::route('video.playlist', ['list' => $watch->id]);
 
         } elseif ($request->type == 'video') {
             $original = request()->file('image');
