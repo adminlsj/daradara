@@ -14,7 +14,7 @@
 		<!-- Tab links -->
 		<div class="user-upload-tab" style="margin-left: 15px; padding-top: 25px; margin-bottom: -10px">
 		  <button class="user-upload-tablinks" onclick="openCity(event, '創建頻道')">播放清單</button>
-		  <button class="user-upload-tablinks" onclick="openCity(event, '上傳影片')" style="margin-left: 15px" id="defaultOpen">上傳影片</button>
+		  <button class="user-upload-tablinks" onclick="openCity(event, '上傳影片')" style="margin-left: 15px" id="defaultOpen">崁入影片</button>
 		</div>
 
 		<!-- Tab content -->
@@ -58,10 +58,10 @@
 
 		      <div style="padding: 0px;">
 		        <div style="border: 0px; position: relative;" class="modal-header">
-		          <h4 style="color: #3F3F3F; margin-bottom: 0px; font-size: 1.7em" class="modal-title" id="uploadVideoModalLabel">上傳影片</h4>
+		          <h4 style="color: #3F3F3F; margin-bottom: 0px; font-size: 1.7em" class="modal-title" id="uploadVideoModalLabel">崁入影片</h4>
 		        </div>
 		        <div style="color: #3F3F3F; margin-top: -15px; font-weight: 500; font-size: 1.1em" class="modal-body">
-		          <div>請填寫上傳影片的基本資料：</div>
+		          <div>請填寫崁入影片的基本資料：</div>
 
 		          <div class="form-group" style="margin-top: 20px;">
 				    <select class="form-control" name="channel" id="channel">
