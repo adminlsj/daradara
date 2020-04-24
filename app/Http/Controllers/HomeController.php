@@ -57,7 +57,7 @@ class HomeController extends Controller
 
             case 'playlist':
                 for ($i = 0; $i < 300; $i++) {
-                    $playlist = Playlist::create([
+                    $playlist = Watch::create([
                         'user_id' => 1,
                         'title' => 'demo',
                         'description' => 'demo',
@@ -134,7 +134,7 @@ class HomeController extends Controller
                 # code...
                 break;
         }
-        
+
         return view('layouts.about-us');
     }
 
