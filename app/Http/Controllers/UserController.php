@@ -191,29 +191,7 @@ class UserController extends Controller
                     'uploaded_at' => Carbon::createFromFormat('Y-m-d\TH:i:s', request('uploaded_at'))->format('Y-m-d H:i:s'),
                 ]);
 
-                $userArray = [];
-
-                if ($video->playlist_id != '') {
-                    $watch = $video->watch();
-                    $watch->updated_at = $video->uploaded_at;
-                    $watch->save();
-
-                    $subscribes = $watch->subscribes();
-                    foreach ($subscribes as $subscribe) {
-                        $user = $subscribe->user();
-                        SendSubscriptionEmail::dispatch($user, $video, $subscribe->tag);
-                        array_push($userArray, $user->id);
-                    }
-                }
-
-                foreach ($video->tags() as $tag) {
-                    $subscribes = Subscribe::where('tag', $tag)->get();
-                    foreach ($subscribes as $subscribe) {
-                        if (!in_array($subscribe->user()->id, $userArray)) {
-                            SendSubscriptionEmail::dispatch($subscribe->user(), $video, $subscribe->tag);
-                        }
-                    }
-                }
+                SendSubscriptionEmail::dispatch($video);
 
                 return Redirect::route('video.watch', ['v' => $video->id]);
             }

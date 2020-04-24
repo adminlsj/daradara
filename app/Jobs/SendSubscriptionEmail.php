@@ -16,20 +16,16 @@ class SendSubscriptionEmail implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    public $user;
     public $video;
-    public $title;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct(User $user, Video $video, String $title)
+    public function __construct(Video $video)
     {
-        $this->user = $user;
         $this->video = $video;
-        $this->title = $title;
     }
 
     /**
@@ -39,10 +35,37 @@ class SendSubscriptionEmail implements ShouldQueue
      */
     public function handle()
     {        
-        if (strpos($this->user->alert, 'subscribe') === false) {
-            $this->user->alert = $this->user->alert."subscribe";
-            $this->user->save();
+        $userArray = [];
+
+        if ($this->video->playlist_id != '') {
+            $watch = $this->video->watch();
+            $watch->updated_at = $this->video->uploaded_at;
+            $watch->save();
+
+            $subscribes = $watch->subscribes();
+            foreach ($subscribes as $subscribe) {
+                $user = $subscribe->user();
+                if (strpos($user->alert, 'subscribe') === false) {
+                    $user->alert = $user->alert."subscribe";
+                    $user->save();
+                }
+                Mail::to($user->email)->send(new SubscribeNotify($user, $this->video, $subscribe->tag));
+                array_push($userArray, $user->id);
+            }
         }
-        Mail::to($this->user->email)->send(new SubscribeNotify($this->user, $this->video, $this->title));
+
+        foreach ($this->video->tags() as $tag) {
+            $subscribes = Subscribe::where('tag', $tag)->get();
+            foreach ($subscribes as $subscribe) {
+                if (!in_array($subscribe->user()->id, $userArray)) {
+                    $user = $subscribe->user();
+                    if (strpos($user->alert, 'subscribe') === false) {
+                        $user->alert = $user->alert."subscribe";
+                        $user->save();
+                    }
+                    Mail::to($user->email)->send(new SubscribeNotify($user, $this->video, $subscribe->tag));
+                }
+            }
+        }
     }
 }
