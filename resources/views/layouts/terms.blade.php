@@ -15,7 +15,7 @@
     <div style="padding-top: 10px" class="hidden-xs hidden-sm"></div>
     <div class="padding-setup">
     	<h4>服務條款</h4>
-    	<p>日期：2018年8月8日</p>
+    	<p>日期：2019年8月8日</p>
     	
     	<h4>歡迎使用 LaughSeeJapan！</h4>
 
