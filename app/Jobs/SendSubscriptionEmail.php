@@ -9,6 +9,8 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use App\User;
 use App\Video;
+use App\Watch;
+use App\Subscribe;
 use Mail;
 use App\Mail\SubscribeNotify;
 
