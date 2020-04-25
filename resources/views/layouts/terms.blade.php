@@ -10,7 +10,6 @@
 </div>
 
 <div class="main-content">
-  @include('layouts.nav-index')
   <div style="background-color: #F5F5F5;">
     <div style="padding-top: 10px" class="hidden-xs hidden-sm"></div>
     <div class="padding-setup">
