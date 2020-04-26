@@ -33,7 +33,7 @@ class VideoController extends Controller
                 array_push($tags, '#'.explode(' ', $watch->title)[0]);
             }
         } else {
-            array_push($tags, '#創意廣告', '#日本網紅', '#動漫講評', '#MAD·AMV', '#日劇講評');
+            array_push($tags, '#創意廣告', '#日本人氣YouTuber', '#動漫講評', '#MAD·AMV', '#日劇講評');
         }
 
         return view('video.rankIndex', compact('tags'));
@@ -295,7 +295,7 @@ class VideoController extends Controller
                     $videos = $videos->whereDate('uploaded_at', '>=', Carbon::now()->subMonth())->where('tags', 'like', '%'.$tag.'%')->orderBy('views', 'desc')->paginate(24);
                 } else {
                     if ($tag == '') {
-                        $videos = $videos->orWhere('tags', 'like', '%創意廣告%')->orWhere('tags', 'like', '%日本網紅%')->orWhere('tags', 'like', '%MAD·AMV%')->orWhere('tags', 'like', '%講評%')->orderBy('views', 'desc')->paginate(24);
+                        $videos = $videos->orWhere('tags', 'like', '%創意廣告%')->orWhere('tags', 'like', '%日本人氣YouTuber%')->orWhere('tags', 'like', '%MAD·AMV%')->orWhere('tags', 'like', '%講評%')->orderBy('views', 'desc')->paginate(24);
                     } else {
                         $videos = $videos->where('tags', 'like', '%'.$tag.'%')->orderBy('views', 'desc')->paginate(24);
                     }
@@ -307,7 +307,7 @@ class VideoController extends Controller
                     $videos = $videos->whereDate('uploaded_at', '>=', Carbon::now()->subMonth())->where('tags', 'like', '%'.$tag.'%')->orderBy('uploaded_at', 'desc')->paginate(24);
                 } else {
                     if ($tag == '') {
-                        $videos = $videos->orWhere('tags', 'like', '%創意廣告%')->orWhere('tags', 'like', '%日本網紅%')->orWhere('tags', 'like', '%MAD·AMV%')->orWhere('tags', 'like', '%講評%')->orderBy('uploaded_at', 'desc')->paginate(24);   
+                        $videos = $videos->orWhere('tags', 'like', '%創意廣告%')->orWhere('tags', 'like', '%日本人氣YouTuber%')->orWhere('tags', 'like', '%MAD·AMV%')->orWhere('tags', 'like', '%講評%')->orderBy('uploaded_at', 'desc')->paginate(24);   
                     } else {
                         $videos = $videos->where('tags', 'like', '%'.$tag.'%')->orderBy('uploaded_at', 'desc')->paginate(24);
                     }
@@ -351,12 +351,12 @@ class VideoController extends Controller
                 } else {
                     if ($tag == '') {
                         $newest = Video::where(function($query) {
-                            $query->orWhere('tags', 'like', '%創意廣告%')->orWhere('tags', 'like', '%日本網紅%')->orWhere('tags', 'like', '%MAD·AMV%')->orWhere('tags', 'like', '%講評%');
+                            $query->orWhere('tags', 'like', '%創意廣告%')->orWhere('tags', 'like', '%日本人氣YouTuber%')->orWhere('tags', 'like', '%MAD·AMV%')->orWhere('tags', 'like', '%講評%');
                         })->orderBy('uploaded_at', 'desc')->limit(12)->get();
                         $newest_id = $newest->pluck('id');
 
                         $videos = Video::where(function($query) {
-                            $query->orWhere('tags', 'like', '%創意廣告%')->orWhere('tags', 'like', '%日本網紅%')->orWhere('tags', 'like', '%MAD·AMV%')->orWhere('tags', 'like', '%講評%');
+                            $query->orWhere('tags', 'like', '%創意廣告%')->orWhere('tags', 'like', '%日本人氣YouTuber%')->orWhere('tags', 'like', '%MAD·AMV%')->orWhere('tags', 'like', '%講評%');
                         })->whereNotIn('id', $newest_id)->orderBy('views', 'desc')->paginate(24);
 
                     } else {
