@@ -96,7 +96,9 @@ class Video extends Model
     public function source()
     {
         $sd = $this->sd()[0];
-        if (strpos($sd, 'player.bilibili.com') !== false) {
+        if (strpos($sd, 'instagram.com') !== false) {
+            return Video::getSourceIG($sd);
+        } elseif (strpos($sd, 'player.bilibili.com') !== false) {
             return Video::getMobileBB($sd);
         } else {
             return $sd;
@@ -116,6 +118,22 @@ class Video extends Model
     public function sd()
     {
         return explode(" ",$this->sd);
+    }
+
+    public static function getSourceIG($url)
+    {
+        try {
+            $curl_connection = curl_init($url.'?__a=1');
+            curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+            curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+
+            $data = json_decode(curl_exec($curl_connection), true);
+            curl_close($curl_connection);
+            return $data['graphql']['shortcode_media']['video_url'];
+        } catch(Exception $e) {
+            return $e->getMessage();
+        }
     }
 
     public static function getMobileBB($url)
