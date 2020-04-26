@@ -1,6 +1,6 @@
 @if (!$video->outsource || strpos($video->sd, "instagram.com") !== FALSE || $is_mobile && strpos($video->sd, "player.bilibili.com") !== FALSE )
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/dplayer/dist/DPlayer.min.css">
-  <button id="unmute-btn" style="padding: 5px 7px 5px 5px; background-color: #e8eaed; color: black; font-weight: bolder; border: none; outline:0; margin-top: 15px; margin-left:15px; position: absolute; z-index: 99; border-radius: 2px;" class="hidden-md hidden-lg">
+  <button id="unmute-btn" style="padding: 5px 8px 6px 6px; background-color: #e8eaed; color: black; font-weight: bolder; border: none; outline:0; margin-top: 15px; margin-left:15px; position: absolute; z-index: 99; border-radius: 2px; font-size: 1.1em" class="hidden-md hidden-lg">
     <i style="vertical-align:middle;" class="material-icons no-select">volume_off</i>
     <span style="vertical-align:middle; font-weight: 500" class="no-select">取消靜音</span>
   </button>
