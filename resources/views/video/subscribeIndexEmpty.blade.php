@@ -21,10 +21,10 @@
 		<div class="subscribes-tab">
 	    	<a id="default-tag" class="load-tag-videos active" style="margin-right: 5px;">全部推薦內容</a>
 			<a class="load-tag-videos" style="margin-right: 5px;">#創意廣告</a>
-			<a class="load-tag-videos" style="margin-right: 5px;">#搞笑影片</a>
+			<a class="load-tag-videos" style="margin-right: 5px;">#日本人氣YouTuber</a>
 			<a class="load-tag-videos" style="margin-right: 5px;">#動漫講評</a>
+			<a class="load-tag-videos" style="margin-right: 5px;">#MAD·AMV</a>
 			<a class="load-tag-videos" style="margin-right: 5px;">#日劇講評</a>
-			<a class="load-tag-videos" style="margin-right: 5px;">#電影講評</a>
 		</div>
 
 		<div class="row no-gutter load-more-container">
