@@ -127,10 +127,10 @@ class Video extends Model
         try {
             $curl_connection = curl_init();
             curl_setopt($curl_connection, CURLOPT_URL, $url);
-            curl_setopt($curl_connection, CURLOPT_FOLLOWLOCATION, false); // follow the redirects
+            curl_setopt($curl_connection, CURLOPT_FOLLOWLOCATION, true); // follow the redirects
             curl_setopt($curl_connection, CURLOPT_NOBODY, true); // get the resource without a body
             curl_exec($curl_connection);
-            $redirect = curl_getinfo($curl_connection, CURLINFO_REDIRECT_URL);
+            $redirect = curl_getinfo($curl_connection, CURLINFO_EFFECTIVE_URL);
             curl_close($curl_connection);
 
             return str_replace('http://', 'https://apd-vliveachy.apdcdn.tc.qq.com/', $redirect);
