@@ -135,10 +135,8 @@ class Video extends Model
             $redirect = curl_getinfo($curl_connection, CURLINFO_EFFECTIVE_URL);
             curl_close($curl_connection);
 
-            $start = strpos($redirect, 'http');
-            $end = strpos($redirect, '.com/');
-            return substr_replace($redirect, 'https://apd-vliveachy.apdcdn.tc.qq.com/vmtt.tc.qq.com/', $start, $end - $start + 5);
-            
+            return str_replace('http://', 'https://apd-vliveachy.apdcdn.tc.qq.com/', $redirect);
+
         } catch (Exception $e) {
             return $e->getMessage();
         }
