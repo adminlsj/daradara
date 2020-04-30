@@ -127,12 +127,10 @@ class Video extends Model
         try {
             $curl_connection = curl_init();
             curl_setopt($curl_connection, CURLOPT_URL, $url);
-            curl_setopt($curl_connection, CURLOPT_FOLLOWLOCATION, true); // follow the redirects
-            curl_setopt($curl_connection, CURLOPT_HEADER, false); // no needs to pass the headers to the data stream
+            curl_setopt($curl_connection, CURLOPT_FOLLOWLOCATION, false); // follow the redirects
             curl_setopt($curl_connection, CURLOPT_NOBODY, true); // get the resource without a body
-            curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false); // accept any server certificate
             curl_exec($curl_connection);
-            $redirect = curl_getinfo($curl_connection, CURLINFO_EFFECTIVE_URL);
+            $redirect = curl_getinfo($curl_connection, CURLINFO_REDIRECT_URL);
             curl_close($curl_connection);
 
             return str_replace('http://', 'https://apd-vliveachy.apdcdn.tc.qq.com/', $redirect);
@@ -143,9 +141,7 @@ class Video extends Model
 
         /* $headers = get_headers($url, 1);
         $redirect = $headers['Location'][1];
-        $start = strpos($redirect, 'http');
-        $end = strpos($redirect, '.com/');
-        return substr_replace($redirect, 'https://apd-vliveachy.apdcdn.tc.qq.com/vmtt.tc.qq.com/', $start, $end - $start + 5); */
+        return str_replace('http://', 'https://apd-vliveachy.apdcdn.tc.qq.com/', $redirect); */
     }
 
     public static function getSourceIG($url)

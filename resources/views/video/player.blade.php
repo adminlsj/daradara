@@ -1,4 +1,4 @@
-@if (!$video->outsource || strpos($video->sd, "instagram.com") !== FALSE || $is_mobile && strpos($video->sd, "player.bilibili.com") !== FALSE )
+@if (!$video->outsource || strpos($video->sd, "quan.qq.com") !== FALSE || strpos($video->sd, "instagram.com") !== FALSE || $is_mobile && strpos($video->sd, "player.bilibili.com") !== FALSE )
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/dplayer/dist/DPlayer.min.css">
   <button id="unmute-btn" style="padding: 5px 8px 6px 6px; background-color: #e8eaed; color: black; font-weight: bold; border: none; outline:0; margin-top: 15px; margin-left:15px; position: absolute; z-index: 99; border-radius: 2px; font-size: 1.1em" class="hidden-md hidden-lg">
     <i style="vertical-align:middle;" class="material-icons no-select">volume_off</i>
