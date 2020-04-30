@@ -138,10 +138,6 @@ class Video extends Model
         } catch (Exception $e) {
             return $e->getMessage();
         }
-
-        /* $headers = get_headers($url, 1);
-        $redirect = $headers['Location'][1];
-        return str_replace('http://', 'https://apd-vliveachy.apdcdn.tc.qq.com/', $redirect); */
     }
 
     public static function getSourceIG($url)
