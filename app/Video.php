@@ -96,7 +96,9 @@ class Video extends Model
     public function source()
     {
         $sd = $this->sd()[0];
-        if (strpos($sd, 'instagram.com') !== false) {
+        if (strpos($sd, 'quan.qq.com') !== false) {
+            return Video::getSourceQQ($sd);
+        } elseif (strpos($sd, 'instagram.com') !== false) {
             return Video::getSourceIG($sd);
         } elseif (strpos($sd, 'player.bilibili.com') !== false) {
             return Video::getMobileBB($sd);
@@ -118,6 +120,15 @@ class Video extends Model
     public function sd()
     {
         return explode(" ",$this->sd);
+    }
+
+    public static function getSourceQQ($url)
+    {
+        $headers = get_headers($url, 1);
+        $redirect = $headers['Location'][1];
+        $start = strpos($redirect, 'http');
+        $end = strpos($redirect, '.com/');
+        return substr_replace($redirect, 'https://apd-vliveachy.apdcdn.tc.qq.com/vmtt.tc.qq.com/', $start, $end - $start + 5);
     }
 
     public static function getSourceIG($url)
