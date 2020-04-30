@@ -51,7 +51,7 @@ class SendSubscriptionEmail implements ShouldQueue
                     $user->alert = $user->alert."subscribe";
                     $user->save();
                 }
-                Mail::to($user->email)->send(new SubscribeNotify($user, $this->video, $subscribe->tag));
+                // Mail::to($user->email)->send(new SubscribeNotify($user, $this->video, $subscribe->tag));
                 array_push($userArray, $user->id);
             }
         }
@@ -65,7 +65,7 @@ class SendSubscriptionEmail implements ShouldQueue
                         $user->alert = $user->alert."subscribe";
                         $user->save();
                     }
-                    Mail::to($user->email)->send(new SubscribeNotify($user, $this->video, $subscribe->tag));
+                    // Mail::to($user->email)->send(new SubscribeNotify($user, $this->video, $subscribe->tag));
                 }
             }
         }
