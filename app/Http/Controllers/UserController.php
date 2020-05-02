@@ -186,12 +186,42 @@ class UserController extends Controller
                     'imgur' => $this->get_string_between($url, 'https://i.imgur.com/', '.'),
                     'tags' => implode(' ', preg_split('/\s+/', request('tags'))),
                     'views' => 0,
-                    'outsource' => true,
+                    'outsource' => request('outsource') == 'on' ? true : false,
                     'created_at' => Carbon::createFromFormat('Y-m-d\TH:i:s', request('created_at'))->format('Y-m-d H:i:s'),
                     'uploaded_at' => Carbon::createFromFormat('Y-m-d\TH:i:s', request('uploaded_at'))->format('Y-m-d H:i:s'),
                 ]);
 
-                SendSubscriptionEmail::dispatch($video);
+                $userArray = [];
+                if ($video->playlist_id != '') {
+                    $watch = $video->watch();
+                    $watch->updated_at = $video->uploaded_at;
+                    $watch->save();
+
+                    $subscribes = $watch->subscribes();
+                    foreach ($subscribes as $subscribe) {
+                        $user = $subscribe->user();
+                        if (strpos($user->alert, 'subscribe') === false) {
+                            $user->alert = $user->alert."subscribe";
+                            $user->save();
+                        }
+                        array_push($userArray, $user->id);
+                    }
+                }
+
+                foreach ($video->tags() as $tag) {
+                    $subscribes = Subscribe::where('tag', $tag)->get();
+                    foreach ($subscribes as $subscribe) {
+                        if (!in_array($subscribe->user()->id, $userArray)) {
+                            $user = $subscribe->user();
+                            if (strpos($user->alert, 'subscribe') === false) {
+                                $user->alert = $user->alert."subscribe";
+                                $user->save();
+                            }
+                        }
+                    }
+                }
+
+                // SendSubscriptionEmail::dispatch($video);
 
                 return Redirect::route('video.watch', ['v' => $video->id]);
             }

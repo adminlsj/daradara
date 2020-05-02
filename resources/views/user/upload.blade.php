@@ -86,9 +86,13 @@
 		            <input type="text" class="form-control" name="link" id="link" placeholder="影片崁入鏈結" required>
 		            <div id="test-play-btn" style="width: 102px; position: absolute; top: 0px; right:-100px; background-color: gray; color: white; padding: 6px 0px 6px 20px; cursor: pointer;">測試播放</div>
 		          </div>
-		          <div style="margin-bottom: 20px;">
-			          <small style="font-weight: 400; margin-left: 5px; color: #595959;">請參閱在娛見日本 LaughSeeJapan 崁入內容的<a href="/about">指南與守則</a>。</small>
-		          </div>
+
+				  <div style="margin-top:3px; margin-bottom: 20px;" class="form-check">
+					<input class="form-check-input" type="checkbox" name="outsource" id="outsource" checked=checked>
+					<label class="form-check-label" for="outsource">
+					    <small style="font-weight: 400; margin-left: 5px; color: #595959;">崁入影片（請參閱在娛見日本 LaughSeeJapan 崁入內容的<a href="/about">指南與守則</a>）</small>
+					</label>
+				  </div>
 
 				  <div id="test-player" class="aspect-ratio" style="background-color: black; background-image: url('https://i.imgur.com/TcZjkZa.gif'); background-position: center; background-repeat: no-repeat; background-size: 50px; margin-bottom: 25px; display: none;">
 				  </div>

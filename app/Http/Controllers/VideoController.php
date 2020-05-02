@@ -640,18 +640,18 @@ class VideoController extends Controller
             }
         }
 
+        // Exact Order Match Query (search query in same order e.g. 2012 => 2>0>1>2) [e.g. 2012 09 14]
+        $exactOrderQueryScope = '%'.implode('%', $queryArray).'%';
+        $exactOrderQuery = Video::where('title', 'like', $exactOrderQueryScope)->orderBy('uploaded_at', 'desc')->get();
+        foreach ($exactOrderQuery as $q) {
+            if (!in_array($q->id, $idsArray)) {
+                array_push($videosArray, $q);
+                array_push($idsArray, $q->id);
+            }
+        }
+
         if ($request->ajax()) {
             $videosArray = array_slice($videosArray, 15);
-
-            // Exact Order Match Query (search query in same order e.g. 2012 => 2>0>1>2) [e.g. 2012 09 14]
-            $exactOrderQueryScope = '%'.implode('%', $queryArray).'%';
-            $exactOrderQuery = Video::where('title', 'like', $exactOrderQueryScope)->orderBy('uploaded_at', 'desc')->get();
-            foreach ($exactOrderQuery as $q) {
-                if (!in_array($q->id, $idsArray)) {
-                    array_push($videosArray, $q);
-                    array_push($idsArray, $q->id);
-                }
-            }
 
             // Character Match Query (search query as a whole e.g. 2012 => contains 2/0/1/2) [e.g. 郡司桑 月曜]
             $videosSelect = Video::orderBy('uploaded_at', 'desc')->select('id', 'title', 'tags')->get()->toArray();
