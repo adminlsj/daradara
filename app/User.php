@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'provider', 'provider_id',
+        'name', 'email', 'tags', 'password', 'provider', 'provider_id',
     ];
 
     /**
@@ -26,6 +26,16 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function tags()
+    {
+        $tags = $this->tags;
+        if ($tags == '') {
+            return [];
+        } else {
+            return explode(" ", $this->tags);
+        }
+    }
 
     public function watches()
     {

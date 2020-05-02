@@ -18,9 +18,18 @@
 	    	@elseif (Request::path() == 'newest')
 		    	<a id="default-tag" class="load-tag-videos active" style="margin-right: 5px;">全部最新內容</a>
 	    	@endif
-			@foreach ($tags as $tag)
-				<a class="load-tag-videos" style="margin-right: 5px;">{{ $tag }}</a>
-			@endforeach
+
+	    	@if (Auth::check() && auth()->user()->tags != '')
+				@foreach (Auth::user()->tags() as $tag)
+					<a class="load-tag-videos" style="margin-right: 5px;">#{{ $tag }}</a>
+				@endforeach
+			@else
+				<a class="load-tag-videos" style="margin-right: 5px;">#日本人氣YouTuber</a>
+				<a class="load-tag-videos" style="margin-right: 5px;">#日本創意廣告</a>
+				<a class="load-tag-videos" style="margin-right: 5px;">#動漫講評</a>
+				<a class="load-tag-videos" style="margin-right: 5px;">#MAD·AMV</a>
+				<a class="load-tag-videos" style="margin-right: 5px;">#日劇講評</a>
+			@endif
 		</div>
 
 		<div class="row no-gutter load-more-container">

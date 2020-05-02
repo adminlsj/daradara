@@ -222,4 +222,55 @@ class HomeController extends Controller
         $len = strpos($string, $end, $ini) - $ini;
         return substr($string, $ini, $len);
     }
+
+    public function tempMethods()
+    {
+        $users = User::orderBy('id', 'desc')->get();
+        foreach ($users as $user) {
+            $user->tags = null;
+            $user->save();
+        }
+        foreach ($users as $user) {
+            $tags = [];
+            foreach ($user->subscribes() as $subscribe) {
+                if ($subscribe->type == 'watch' && $subscribe->watch()) {
+                    if (strpos($subscribe->watch()->videos()->first()->tags, '動漫') !== false && !in_array('動漫', $tags)) {
+                        array_unshift($tags, '動漫');
+                        if (!in_array('動漫講評', $tags)) {
+                            array_push($tags, '動漫講評');
+                        }
+                        if (!in_array('MAD·AMV', $tags)) {
+                            array_push($tags, 'MAD·AMV');
+                        }
+                        if (!in_array('費米研究所', $tags)) {
+                            array_push($tags, '費米研究所');
+                        }
+                    }
+                    if (strpos($subscribe->watch()->videos()->first()->tags, '日劇') !== false && !in_array('日劇', $tags)) {
+                        array_unshift($tags, '日劇');
+                        if (!in_array('日本人氣YouTuber', $tags)) {
+                            array_push($tags, '日本人氣YouTuber');
+                        }
+                        if (!in_array('日本創意廣告', $tags)) {
+                            array_push($tags, '日本創意廣告');
+                        }
+                        if (!in_array('日劇講評', $tags)) {
+                            array_push($tags, '日劇講評');
+                        }
+                    }
+                    if (strpos($subscribe->watch()->videos()->first()->tags, '綜藝') !== false && !in_array('綜藝', $tags)) {
+                        array_unshift($tags, '綜藝');
+                        if (!in_array('日本人氣YouTuber', $tags)) {
+                            array_push($tags, '日本人氣YouTuber');
+                        }
+                        if (!in_array('日本創意廣告', $tags)) {
+                            array_push($tags, '日本創意廣告');
+                        }
+                    }
+                }
+            }
+            $user->tags = implode(" ", $tags);
+            $user->save();
+        }
+    }
 }
