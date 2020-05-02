@@ -264,7 +264,7 @@ class VideoController extends Controller
         $tag = request('subscribe-tag');
 
         if (Auth::user()->id == request('subscribe-user-id')) {
-            $subscribe = Subscribe::where('user_id', $user->id)->where('tag', $tag);
+            $subscribe = Subscribe::where('user_id', $user->id)->where('tag', $tag)->first();
             $subscribe->delete();
         }
 
