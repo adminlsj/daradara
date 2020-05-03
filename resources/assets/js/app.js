@@ -225,13 +225,6 @@ $('#subscribe-show-all').click(function(e) {
     $(this).css('display', 'none');
 });
 
-$('#unmute-btn').click(function(e) {
-  dp.volume(0.7, true, false);
-  $('video').prop('muted', false);
-  $('#unmute-btn').css('display','none');
-  $('#dplayer').addClass('dplayer-hide-controller');
-});
-
 var prevScrollpos = window.pageYOffset;
 window.onscroll = function() {
   var currentScrollPos = window.pageYOffset;
