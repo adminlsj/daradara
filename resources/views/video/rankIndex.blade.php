@@ -19,8 +19,8 @@
 		    	<a id="default-tag" class="load-tag-videos active" style="margin-right: 5px;">全部最新內容</a>
 	    	@endif
 
-	    	@if (Auth::check() && auth()->user()->tags != '')
-				@foreach (Auth::user()->tags() as $tag)
+	    	@if (Auth::check() && auth()->user()->subscribes()->first())
+				@foreach (auth()->user()->recommendTags() as $tag)
 					<a class="load-tag-videos" style="margin-right: 5px;">#{{ $tag }}</a>
 				@endforeach
 			@else

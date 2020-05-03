@@ -188,43 +188,23 @@ class VideoController extends Controller
             ]);
 
             $tags = $user->tags();
-            if ($subscribe->type == 'watch' && $subscribe->watch()) {
-                if (strpos($subscribe->watch()->videos()->first()->tags, '動漫') !== false && !in_array('動漫', $tags)) {
+            $watch = $subscribe->watch();
+            if ($subscribe->type == 'watch' && $watch) {
+                $videoTags = $subscribe->watch()->videos()->first()->tags;
+                if (strpos($videoTags, '動漫') !== false && !in_array('動漫', $tags)) {
                     array_unshift($tags, '動漫');
-                    if (!in_array('動漫講評', $tags)) {
-                        array_push($tags, '動漫講評');
-                    }
-                    if (!in_array('MAD·AMV', $tags)) {
-                        array_push($tags, 'MAD·AMV');
-                    }
-                    if (!in_array('費米研究所', $tags)) {
-                        array_push($tags, '費米研究所');
-                    }
                 }
-                if (strpos($subscribe->watch()->videos()->first()->tags, '日劇') !== false && !in_array('日劇', $tags)) {
+                if (strpos($videoTags, '日劇') !== false && !in_array('日劇', $tags)) {
                     array_unshift($tags, '日劇');
-                    if (!in_array('日本人氣YouTuber', $tags)) {
-                        array_push($tags, '日本人氣YouTuber');
-                    }
-                    if (!in_array('日本創意廣告', $tags)) {
-                        array_push($tags, '日本創意廣告');
-                    }
-                    if (!in_array('日劇講評', $tags)) {
-                        array_push($tags, '日劇講評');
-                    }
                 }
-                if (strpos($subscribe->watch()->videos()->first()->tags, '綜藝') !== false && !in_array('綜藝', $tags)) {
+                if (strpos($videoTags, '綜藝') !== false && !in_array('綜藝', $tags)) {
                     array_unshift($tags, '綜藝');
-                    if (!in_array('日本人氣YouTuber', $tags)) {
-                        array_push($tags, '日本人氣YouTuber');
-                    }
-                    if (!in_array('日本創意廣告', $tags)) {
-                        array_push($tags, '日本創意廣告');
-                    }
                 }
             }
-            $user->tags = implode(" ", $tags);
-            $user->save();
+            if ($tags != $user->tags()) {
+                $user->tags = implode(" ", $tags);
+                $user->save();
+            }
         }
 
         $html = '';
@@ -316,11 +296,58 @@ class VideoController extends Controller
         $path = $request->path;
         $videos = Video::query();
 
+        $tags = [];
+        if (auth()->check() && auth()->user()->subscribes()->first()) {
+            $user = auth()->user();
+            $subscribes = Subscribe::where('user_id', $user->id)->orderBy('created_at', 'asc')->get();
+            foreach ($subscribes as $subscribe) {
+                if ($subscribe->type == 'watch' && $watch = $subscribe->watch()) {
+                    $videoTags = $watch->videos()->first()->tags;
+                    if (strpos($videoTags, '動漫') !== false && !in_array('動漫', $tags)) {
+                        array_unshift($tags, '動漫');
+                        if (!in_array('動漫講評', $tags)) {
+                            array_push($tags, '動漫講評');
+                        }
+                        if (!in_array('MAD·AMV', $tags)) {
+                            array_push($tags, 'MAD·AMV');
+                        }
+                        if (!in_array('費米研究所', $tags)) {
+                            array_push($tags, '費米研究所');
+                        }
+                    }
+                    if (strpos($videoTags, '日劇') !== false && !in_array('日劇', $tags)) {
+                        array_unshift($tags, '日劇');
+                        if (!in_array('日本人氣YouTuber', $tags)) {
+                            array_push($tags, '日本人氣YouTuber');
+                        }
+                        if (!in_array('日本創意廣告', $tags)) {
+                            array_push($tags, '日本創意廣告');
+                        }
+                        if (!in_array('日劇講評', $tags)) {
+                            array_push($tags, '日劇講評');
+                        }
+                    }
+                    if (strpos($videoTags, '綜藝') !== false && !in_array('綜藝', $tags)) {
+                        array_unshift($tags, '綜藝');
+                        if (!in_array('日本人氣YouTuber', $tags)) {
+                            array_push($tags, '日本人氣YouTuber');
+                        }
+                        if (!in_array('日本創意廣告', $tags)) {
+                            array_push($tags, '日本創意廣告');
+                        }
+                    }
+                } elseif ($subscribe->type == 'video') {
+                    if (!in_array($subscribe->tag, $tags)) {
+                        array_push($tags, $subscribe->tag);
+                    }
+                }
+            }
+        }
+
         switch ($path) {
             case '/rank':
-                if (auth()->check() && auth()->user()->tags != '') {
+                if ($tags != []) {
                     if ($tag == '') {
-                        $tags = auth()->user()->tags();
                         $videos = Video::where(function($query) use ($tags) {
                             foreach ($tags as $tag) {
                                 $query->orWhere('tags', 'like', '%'.$tag.'%');
@@ -340,9 +367,8 @@ class VideoController extends Controller
                 return $this->singleLoadMoreSliderVideosHTML($videos);
 
             case '/newest':
-                if (auth()->check() && auth()->user()->tags != '') {
+                if ($tags != []) {
                     if ($tag == '') {
-                        $tags = auth()->user()->tags();
                         $videos = Video::where(function($query) use ($tags) {
                             foreach ($tags as $tag) {
                                 $query->orWhere('tags', 'like', '%'.$tag.'%');
@@ -362,7 +388,7 @@ class VideoController extends Controller
                 return $this->singleLoadMoreSliderVideosHTML($videos);
             
             default:
-                if (auth()->check() && auth()->user()->subscribes()->first()) {
+                if ($tags != []) {
                     $subscribes = [];
                     $subscribes_id = [];
                     if ($tag == '') {
@@ -381,7 +407,6 @@ class VideoController extends Controller
                             $subscribes_id = $subscribes->pluck('id');
                         }
 
-                        $tags = auth()->user()->tags();
                         $newest = Video::whereNotIn('id', $subscribes_id)->where(function($query) use ($tags) {
                             foreach ($tags as $tag) {
                                 $query->orWhere('tags', 'like', '%'.$tag.'%');
