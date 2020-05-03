@@ -186,25 +186,6 @@ class VideoController extends Controller
                 'type' => $type,
                 'tag' => $tag,
             ]);
-
-            $tags = $user->tags();
-            $watch = $subscribe->watch();
-            if ($subscribe->type == 'watch' && $watch) {
-                $videoTags = $subscribe->watch()->videos()->first()->tags;
-                if (strpos($videoTags, '動漫') !== false && !in_array('動漫', $tags)) {
-                    array_unshift($tags, '動漫');
-                }
-                if (strpos($videoTags, '日劇') !== false && !in_array('日劇', $tags)) {
-                    array_unshift($tags, '日劇');
-                }
-                if (strpos($videoTags, '綜藝') !== false && !in_array('綜藝', $tags)) {
-                    array_unshift($tags, '綜藝');
-                }
-            }
-            if ($tags != $user->tags()) {
-                $user->tags = implode(" ", $tags);
-                $user->save();
-            }
         }
 
         $html = '';
