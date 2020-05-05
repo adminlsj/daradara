@@ -14,6 +14,10 @@ class Video extends Model
         'id', 'user_id', 'playlist_id', 'title', 'caption', 'tags', 'sd', 'imgur', 'views', 'outsource', 'created_at', 'uploaded_at',
     ];
 
+    public static $tags = [
+        '日本人氣YouTuber', '日本創意廣告', 'MAD·AMV', '講評',
+    ];
+
     public function user()
     {
         return User::find($this->user_id);

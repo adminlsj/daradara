@@ -292,8 +292,8 @@ class VideoController extends Controller
                         if (!in_array('MAD·AMV', $tags)) {
                             array_push($tags, 'MAD·AMV');
                         }
-                        if (!in_array('費米研究所', $tags)) {
-                            array_push($tags, '費米研究所');
+                        if (!in_array('動畫', $tags)) {
+                            array_push($tags, '動畫');
                         }
                     }
                     if (strpos($videoTags, '日劇') !== false && !in_array('日劇', $tags)) {
@@ -329,23 +329,56 @@ class VideoController extends Controller
             case '/rank':
                 if ($tags != []) {
                     if ($tag == '') {
+                        $recent = Video::where(function($query) use ($tags) {
+                            foreach ($tags as $tag) {
+                                $query->orWhere('tags', 'like', '%'.$tag.'%');
+                            }
+                        })->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->orderBy('views', 'desc')->limit(24)->get();
+                        $recent_id = $recent->pluck('id');
+
                         $videos = Video::where(function($query) use ($tags) {
                             foreach ($tags as $tag) {
                                 $query->orWhere('tags', 'like', '%'.$tag.'%');
                             }
-                        })->orderBy('views', 'desc')->paginate(24);
+                        })->whereNotIn('id', $recent_id)->orderBy('views', 'desc')->paginate(24);
+                        
                     } else {
-                        $videos = $videos->where('tags', 'like', '%'.$tag.'%')->orderBy('views', 'desc')->paginate(24);
+                        $recent = Video::where('tags', 'like', '%'.$tag.'%')->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->orderBy('views', 'desc')->limit(24)->get();
+                        $recent_id = $recent->pluck('id');
+
+                        $videos = Video::where('tags', 'like', '%'.$tag.'%')->whereNotIn('id', $recent_id)->orderBy('views', 'desc')->paginate(24);
                     }
 
                 } else {
                     if ($tag == '') {
-                        $videos = $videos->orWhere('tags', 'like', '%日本創意廣告%')->orWhere('tags', 'like', '%日本人氣YouTuber%')->orWhere('tags', 'like', '%MAD·AMV%')->orWhere('tags', 'like', '%講評%')->orderBy('views', 'desc')->paginate(24);
+                        $tags = Video::$tags;
+                        $recent = Video::where(function($query) use ($tags) {
+                            foreach ($tags as $tag) {
+                                $query->orWhere('tags', 'like', '%'.$tag.'%');
+                            }
+                        })->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->orderBy('views', 'desc')->limit(24)->get();
+                        $recent_id = $recent->pluck('id');
+
+                        $videos = Video::where(function($query) use ($tags) {
+                            foreach ($tags as $tag) {
+                                $query->orWhere('tags', 'like', '%'.$tag.'%');
+                            }
+                        })->whereNotIn('id', $recent_id)->orderBy('views', 'desc')->paginate(24);
+
                     } else {
-                        $videos = $videos->where('tags', 'like', '%'.$tag.'%')->orderBy('views', 'desc')->paginate(24);
+                        $recent = Video::where('tags', 'like', '%'.$tag.'%')->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->orderBy('views', 'desc')->paginate(24);
+                        $recent_id = $recent->pluck('id');
+
+                        $videos = Video::where('tags', 'like', '%'.$tag.'%')->whereNotIn('id', $recent_id)->orderBy('views', 'desc')->paginate(24);
                     }
                 }
-                return $this->singleLoadMoreSliderVideosHTML($videos);
+                
+                $html = '';
+                if ($request->page == 1) {
+                    $html .= $this->singleLoadMoreSliderVideosHTML($recent);
+                }
+                $html .= $this->singleLoadMoreSliderVideosHTML($videos);
+                return $html;
 
             case '/newest':
                 if ($tags != []) {
