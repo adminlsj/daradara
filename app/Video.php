@@ -18,7 +18,7 @@ class Video extends Model
         '日本人氣YouTuber', '日本創意廣告', 'MAD·AMV', '講評',
     ];
 
-    public static $cookie_qq = 'uin=o1377071018; p_skey=shiTDw1x*ArdteupDei2B4ZrhAorhVkQ*45XlpyKb2Y_;';
+    public static $cookie_qq = 'uin=o1377071018; p_skey=shiTDw1x*ArdteupDei2B4ZrhAorhVkQ*45XlpyKb2Y_;'; // 2020-05-06 15:00
 
     public function user()
     {
@@ -104,6 +104,8 @@ class Video extends Model
         $sd = $this->sd()[0];
         if (strpos($sd, 'quan.qq.com') !== false) {
             return Video::getSourceQQ($sd);
+        } elseif (strpos($sd, 'agefans.tv') !== false) {
+            return Video::getSourceQZ($sd);
         } elseif (strpos($sd, 'instagram.com') !== false) {
             return Video::getSourceIG($sd);
         } elseif (strpos($sd, 'player.bilibili.com') !== false) {
@@ -116,9 +118,6 @@ class Video extends Model
     public function outsource()
     {
         $sd = $this->sd()[0];
-        if (strpos($sd, 'agefans.tv') !== false) {
-            return Video::getSourceQZ($sd);
-        }
         if (strpos($sd, '?') !== false) {
             return $sd.'&danmaku=0&qn=0&type=mp4&otype=json&fnver=0&fnval=1&platform=html5&html5=1&high_quality=1&autoplay=1';
         } else {
@@ -186,7 +185,7 @@ class Video extends Model
                     parse_str($parts['query'], $query);
                     $vkey = $query['vkey'];
                     $picKey = $value["picKey"];
-                    return 'https://www.agefans.tv/player/dpx/?url='.urlencode("https://apd-videohy.apdcdn.tc.qq.com/vwecam.tc.qq.com/{$picKey}.f0.mp4?vkey={$vkey}");
+                    return "https://apd-videohy.apdcdn.tc.qq.com/vwecam.tc.qq.com/{$picKey}.f0.mp4?vkey={$vkey}";
                 }
             }
         }

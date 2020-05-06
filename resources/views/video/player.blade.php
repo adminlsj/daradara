@@ -1,4 +1,4 @@
-@if (!$video->outsource || strpos($video->sd, "quan.qq.com") !== FALSE || strpos($video->sd, "instagram.com") !== FALSE || $is_mobile && strpos($video->sd, "player.bilibili.com") !== FALSE )
+@if (!$video->outsource || strpos($video->sd, "quan.qq.com") !== FALSE || strpos($video->sd, "agefans.tv") !== FALSE || strpos($video->sd, "instagram.com") !== FALSE || $is_mobile && strpos($video->sd, "player.bilibili.com") !== FALSE )
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/dplayer/dist/DPlayer.min.css">
   <div id="dplayer"></div>
   <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
