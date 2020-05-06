@@ -104,7 +104,7 @@ class Video extends Model
         $sd = $this->sd()[0];
         if (strpos($sd, 'quan.qq.com') !== false) {
             return Video::getSourceQQ($sd);
-        } elseif (strpos($sd, 'agefans.tv') !== false) {
+        } elseif (strpos($sd, '1006_') !== false) {
             return Video::getSourceQZ($sd);
         } elseif (strpos($sd, 'instagram.com') !== false) {
             return Video::getSourceIG($sd);
@@ -150,10 +150,7 @@ class Video extends Model
 
     public static function getSourceQZ($url)
     {
-        $parts = parse_url($url);
-        parse_str($parts['query'], $query);
-        $vid = $query['url'];
-        return Video::get_qzone_video($vid);
+        return Video::get_qzone_video($url);
     }
 
     static function get_qzone_video($picKey){  
