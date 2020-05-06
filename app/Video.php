@@ -106,6 +106,8 @@ class Video extends Model
             return Video::getSourceQQ($sd);
         } elseif (strpos($sd, '1006_') !== false) {
             return Video::getSourceQZ($sd);
+        } elseif (strpos($sd, 'agefans.tv') !== false) {
+            return Video::getSourceAF($sd);
         } elseif (strpos($sd, 'instagram.com') !== false) {
             return Video::getSourceIG($sd);
         } elseif (strpos($sd, 'player.bilibili.com') !== false) {
@@ -207,6 +209,29 @@ class Video extends Model
         } else {  
             return $num;  
         }  
+    }
+
+    public static function getSourceAF($url)
+    {
+        try {
+            $curl_connection = curl_init($url);
+            curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+            curl_setopt($curl_connection, CURLOPT_FOLLOWLOCATION, false);
+            curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($curl_connection, CURLOPT_HTTPHEADER, [
+                'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:76.0) Gecko/20100101 Firefox/76.0',
+                'Host: www.agefans.tv',
+                'Cookie: k2=5115835365976; t2=1588733938560; fa_t=1588733938597; fa_c=1; t1=1588734008072; k1=45717783;',
+                'Referer: https://www.agefans.tv/play/20120070?playid=3_1'
+            ]);
+            $data = json_decode(curl_exec($curl_connection), true);
+            curl_close($curl_connection);
+            return urldecode($data['vurl']);
+
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
     }
 
     public static function getSourceIG($url)

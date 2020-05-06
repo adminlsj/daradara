@@ -31,29 +31,6 @@ class HomeController extends Controller
 
     public function about(Request $request)
     {
-        /*$url = 'https://play.agefans.tv/_getplay2?kp=JEFxwD9k4o%2FZ7F%2FfgOcfF2pAJ1otsSb%2FZZoUxdDZ%2FMoO1Fai1KEzWvIeVbI4tm0HDbaST9oJyNVd8mJmScrwY0KisARX32CNZRzaAn7DMeQFXQNSWqtteYdRE7DpDoMjxkhdTQhujx8%3D';
-        $url = 'https://www.agefans.tv/_getplay?aid=20120070&playindex=3&epindex=1&r=0.11893817877179758';
-        try {
-            $curl_connection = curl_init($url);
-            curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
-            curl_setopt($curl_connection, CURLOPT_HEADER, true);
-            curl_setopt($curl_connection, CURLOPT_FOLLOWLOCATION, false);
-            curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
-            curl_setopt($curl_connection, CURLOPT_HTTPHEADER, [
-                'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:76.0) Gecko/20100101 Firefox/76.0',
-                'Host: www.agefans.tv',
-                'Cookie: k2=5115835365976; t2=1588733938560; fa_t=1588733938597; fa_c=1; t1=1588734008072; k1=45717783;',
-                'Referer: https://www.agefans.tv/play/20120070?playid=3_1'
-            ]);
-            $data = curl_exec($curl_connection);
-            curl_close($curl_connection);
-            return $data;
-            return 'https://www.agefans.tv'.$data['purl_mp4'].$data['vurl'];
-
-        } catch (Exception $e) {
-            return $e->getMessage();
-        }*/
         return view('layouts.about-us');
     }
 
