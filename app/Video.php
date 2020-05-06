@@ -18,6 +18,8 @@ class Video extends Model
         '日本人氣YouTuber', '日本創意廣告', 'MAD·AMV', '講評',
     ];
 
+    public static $cookie_qq = 'uin=o1377071018; p_skey=shiTDw1x*ArdteupDei2B4ZrhAorhVkQ*45XlpyKb2Y_;';
+
     public function user()
     {
         return User::find($this->user_id);
@@ -114,6 +116,9 @@ class Video extends Model
     public function outsource()
     {
         $sd = $this->sd()[0];
+        if (strpos($sd, 'agefans.tv') !== false) {
+            return Video::getSourceQZ($sd);
+        }
         if (strpos($sd, '?') !== false) {
             return $sd.'&danmaku=0&qn=0&type=mp4&otype=json&fnver=0&fnval=1&platform=html5&html5=1&high_quality=1&autoplay=1';
         } else {
@@ -142,6 +147,70 @@ class Video extends Model
         } catch (Exception $e) {
             return $e->getMessage();
         }
+    }
+
+    public static function getSourceQZ($url)
+    {
+        $parts = parse_url($url);
+        parse_str($parts['query'], $query);
+        $vid = $query['url'];
+        return Video::get_qzone_video($vid);
+    }
+
+    static function get_qzone_video($picKey){  
+        preg_match('#p_skey=(.*);#iU', Video::$cookie_qq, $p_skey); 
+        preg_match('#uin=(.*);#iU', Video::$cookie_qq, $uin);  
+        $tk = Video::g_tk($p_skey[1]); 
+        $hostUin = str_replace("o","",$uin[1]);  
+        $url = "https://h5.qzone.qq.com/proxy/domain/taotao.qq.com/cgi-bin/video_get_data?g_tk={$tk}&picKey={$picKey}&number=1&hostUin={$hostUin}&getMethod=3";
+
+        $curl_connection = curl_init($url);
+        curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+        curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($curl_connection, CURLOPT_HTTPHEADER, [
+            'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:56.0) Gecko/20100101 Firefox/56.0',
+            'Host: h5.qzone.qq.com',
+            'Cookie: '.Video::$cookie_qq,
+        ]);
+        $content = curl_exec($curl_connection);
+        curl_close($curl_connection);
+
+        $json = str_replace(");","",str_replace("_Callback(","",$content));  
+        $data = json_decode($json,true);  
+        if ($data["code"] == 0){  
+            foreach ($data["data"]["photos"] as $key => $value) {  
+                $fkey = $value["picKey"];  
+                if($fkey == $picKey){
+                    $parts = parse_url($value["url"]);
+                    parse_str($parts['query'], $query);
+                    $vkey = $query['vkey'];
+                    $picKey = $value["picKey"];
+                    return 'https://www.agefans.tv/player/ckx1/?url='.urlencode("https://apd-videohy.apdcdn.tc.qq.com/vwecam.tc.qq.com/{$picKey}.f0.mp4?vkey={$vkey}");
+                }
+            }
+        }
+    }
+
+    static function g_tk($data) {  
+        $t = 5381;  
+        $chars = str_split($data);  
+        for ($n = 0,$r = strlen($data); $n < $r; ++$n) {  
+            $t += Video::intval32($t << 5) + ord($chars[$n]);  
+        }  
+        return $t & 2147483647;  
+    }  
+    static function intval32($num) {  
+        $num = $num & 0xffffffff;  
+        $p = $num>>31;  
+        if($p==1) {  
+            $num = $num-1;  
+            $num = ~$num;  
+            $num = $num & 0xffffffff;  
+            return $num * -1;  
+        } else {  
+            return $num;  
+        }  
     }
 
     public static function getSourceIG($url)
