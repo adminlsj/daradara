@@ -186,7 +186,7 @@ class Video extends Model
                     parse_str($parts['query'], $query);
                     $vkey = $query['vkey'];
                     $picKey = $value["picKey"];
-                    return 'https://www.agefans.tv/player/ckx1/?url='.urlencode("https://apd-videohy.apdcdn.tc.qq.com/vwecam.tc.qq.com/{$picKey}.f0.mp4?vkey={$vkey}");
+                    return 'https://www.agefans.tv/player/dpx/?url='.urlencode("https://apd-videohy.apdcdn.tc.qq.com/vwecam.tc.qq.com/{$picKey}.f0.mp4?vkey={$vkey}");
                 }
             }
         }
