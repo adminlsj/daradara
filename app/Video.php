@@ -159,7 +159,8 @@ class Video extends Model
     static function get_qzone_video($picKey){  
         preg_match('#p_skey=(.*);#iU', Video::$cookie_qq, $p_skey); 
         preg_match('#uin=(.*);#iU', Video::$cookie_qq, $uin);  
-        $tk = Video::g_tk($p_skey[1]); 
+        // $tk = Video::g_tk($p_skey[1]); 
+        $tk = Video::g_tk('@AU1T086rF');
         $hostUin = str_replace("o","",$uin[1]);  
         $url = "https://h5.qzone.qq.com/proxy/domain/taotao.qq.com/cgi-bin/video_get_data?g_tk={$tk}&picKey={$picKey}&number=1&hostUin={$hostUin}&getMethod=3";
 
