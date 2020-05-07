@@ -542,13 +542,13 @@ body {
   outline: none;
   cursor: pointer;
   transition: 0.3s;
-  font-size: 1.1em;
+  font-size: 1em;
   line-height: 40px;
-  width: 100px;
+  width: 85px;
   border-bottom: solid 3px #F9F9F9;
   text-align: center;
   text-decoration: none;
-  color: gray !important;
+  color: dimgray !important;
 }
 
 /* Change background color of buttons on hover */
@@ -2170,6 +2170,24 @@ a > i {
   font-size: 1.3em;
 }
 
+.single-playlist-slider span {
+  position: absolute;
+  right: 0px;
+  background-color: rgba(0,0,0,0.8);
+  color: white;
+  opacity: 0.9;
+  font-size: 0.85em;
+  height: calc(100% - 32px);
+  width: 37%;
+  text-align: center !important;
+  font-size: 1.3em;
+}
+
+.single-playlist-slider span div {
+  margin-right: 23px; 
+  margin-top: 45%;
+}
+
 #search-top-watch .col-md-7 {
   padding-top: 1px;
   padding-right: 12px;
@@ -2278,6 +2296,10 @@ a > i {
   padding-top: 10px;
 }
 
+.user-show-top-panel {
+  margin-bottom: 40px;
+}
+
 @media (max-width: 991px) {
   #content-div {
     padding-bottom: 50px
@@ -2306,6 +2328,14 @@ a > i {
 
   .subscribes-index-tab a:last-child {
     margin-right: 0px !important;
+  }
+
+  .single-playlist-slider span div {
+    margin-right: 15px; 
+  }
+
+  .user-show-top-panel {
+    margin-bottom: -5px;
   }
 
   #nav-image {

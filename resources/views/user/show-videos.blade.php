@@ -12,7 +12,7 @@
 <div class="main-content">
 	<div style="background-color: #F5F5F5;">
 
-		<div class="paravi-padding-setup" style="padding-top: 20px; padding-bottom: 20px; background-color: #F9F9F9">
+		<div class="paravi-padding-setup" style="padding-top: 20px; padding-bottom: 20px; background-color: #F9F9F9;">
 			<img class="lazy" style="float:left; border-radius: 50%; width: 70px; height: 70px;" src="{{ $user->avatarCircleB() }}" data-src="{{ $user->avatar == null ? $user->avatarDefault() : $user->avatar->filename }}" data-srcset="{{ $user->avatar == null ? $user->avatarDefault() : $user->avatar->filename }}">
 			@if (Auth::check() && $user->id == Auth::user()->id)
         <form style="width:auto; height: auto; font-size: 1em; margin-top: 9px;" id="logout-form" action="{{ route('logout') }}" method="POST" class="pull-right">
@@ -28,23 +28,23 @@
 
       <div class="user-show-tab">
         <a href="{{ route('user.show', [$user, 'featured']) }}" class="user-show-tablinks">首頁</a>
-        <a href="{{ route('user.show', [$user, 'videos']) }}" class="user-show-tablinks">影片</a>
-        <a style="width: 100px;" href="{{ route('user.show', [$user, 'playlists']) }}" class="user-show-tablinks active">播放清單</a>
+        <a href="{{ route('user.show', [$user, 'videos']) }}" class="user-show-tablinks active">影片</a>
+        <a style="width: 100px;" href="{{ route('user.show', [$user, 'playlists']) }}" class="user-show-tablinks">播放清單</a>
         <a href="{{ route('user.show', [$user, 'about']) }}" class="user-show-tablinks">簡介</a>
       </div>
 		</div>
 
     <div class="explore-slider-title paravi-padding-setup">
-        <h4>已建立的播放清單</h4>
+        <h4>上傳的影片</h4>
     </div>
     <div class="row no-gutter load-more-container">
       <div class="video-sidebar-wrapper">
-          <div id="sidebar-results"><!-- results appear here --></div>
+          <div id="sidebar-results"></div>
           <div style="text-align: center;" class="ajax-loading"><img style="width: 40px; height: auto; padding-top: 25px; padding-bottom: 50px;" src="https://i.imgur.com/TcZjkZa.gif"/></div>
       </div>
     </div>
 
-  </div>
+	</div>
 </div>
 
 @endsection

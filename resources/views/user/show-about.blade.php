@@ -28,7 +28,8 @@
 
       <div class="user-show-tab">
         <a href="{{ route('user.show', [$user, 'featured']) }}" class="user-show-tablinks">首頁</a>
-        <a href="{{ route('user.show', [$user, 'playlists']) }}" class="user-show-tablinks">播放清單</a>
+        <a href="{{ route('user.show', [$user, 'videos']) }}" class="user-show-tablinks">影片</a>
+        <a style="width: 100px;" href="{{ route('user.show', [$user, 'playlists']) }}" class="user-show-tablinks">播放清單</a>
         <a href="{{ route('user.show', [$user, 'about']) }}" class="user-show-tablinks active">簡介</a>
       </div>
 		</div>
