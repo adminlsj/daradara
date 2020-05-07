@@ -84,7 +84,7 @@ class UserController extends Controller
                     }
                     return $html;
                 }*/
-                return view('user.show-featured', compact('user', 'subscribers', 'video', 'videos', 'trending', 'playlists', 'is_mobile'));
+                return view('user.show-featured', compact('user', 'subscribers', 'video', 'videos', 'playlists', 'is_mobile'));
                 break;
         }
     }
