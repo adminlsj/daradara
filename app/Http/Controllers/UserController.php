@@ -76,14 +76,6 @@ class UserController extends Controller
                 $videos = Video::where('user_id', $user->id)->orderBy('created_at', 'desc')->limit(16)->get();
                 $playlists = Watch::where('user_id', $user->id)->orderBy('created_at', 'desc')->limit(16)->get();
                 $is_mobile = $this->checkMobile();
-                /* if ($request->ajax()) {
-                    $videos = Video::where('user_id', $user->id)->orderBy('created_at', 'desc')->paginate(12);
-                    $html = '';
-                    foreach ($videos as $video) {
-                        $html .= view('video.singleLoadMoreSliderVideos', compact('video'));
-                    }
-                    return $html;
-                }*/
                 return view('user.show-featured', compact('user', 'subscribers', 'video', 'videos', 'playlists', 'is_mobile'));
                 break;
         }

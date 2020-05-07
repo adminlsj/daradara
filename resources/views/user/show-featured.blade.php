@@ -12,7 +12,7 @@
 <div class="main-content">
 	<div style="background-color: #F5F5F5;">
 
-		<div class="paravi-padding-setup" style="padding-top: 20px; padding-bottom: 20px; background-color: #F9F9F9; margin-bottom: 25px">
+		<div class="paravi-padding-setup user-show-general-panel" style="padding-top: 20px; padding-bottom: 20px; background-color: #F9F9F9;">
 			<img class="lazy" style="float:left; border-radius: 50%; width: 70px; height: 70px;" src="{{ $user->avatarCircleB() }}" data-src="{{ $user->avatar == null ? $user->avatarDefault() : $user->avatar->filename }}" data-srcset="{{ $user->avatar == null ? $user->avatarDefault() : $user->avatar->filename }}">
 			@if (Auth::check() && $user->id == Auth::user()->id)
         <form style="width:auto; height: auto; font-size: 1em; margin-top: 9px;" id="logout-form" action="{{ route('logout') }}" method="POST" class="pull-right">
@@ -34,28 +34,32 @@
       </div>
 		</div>
 
-    <div class="paravi-padding-setup user-show-top-panel">
-      <div class="row">
-        <div class="col-md-6">
-          @include('video.player')
-        </div>
-        <div class="col-md-6">
-          <div style="margin-top: 0px; margin-bottom: 0px" class="video-slider-title">
-            <a href="{{ route('video.watch') }}?v={{ $video->id }}"><h4>{{ $video->title }}</h4></a>
+    @if ($video)
+      <div class="paravi-padding-setup user-show-top-panel">
+        <div class="row">
+          <div class="col-md-6">
+            @include('video.player')
           </div>
-          <h5 style="line-height: 37px; color: dimgray; font-weight: 500; margin-top: -15px;">{{ $user->name }} • {{ Carbon\Carbon::parse($video->uploaded_at)->diffForHumans() }}</h5>
-          <h5 class="hidden-xs hidden-sm" style="color: dimgray; font-weight: 400; margin-top: -5px; line-height: 20px; margin-bottom: -5px; white-space: pre-wrap;">{{ $video->caption }}</h5>
-          <h5 class="hidden-xs hidden-sm" style="font-weight: 400; line-height: 20px; margin-bottom: 15px">
-            @foreach ($video->tags() as $tag)
-                <a style="margin-right: 3px; color: #4377e8;" href="{{ route('video.subscribeTag') }}?query={{ $tag }}">#{{ $tag }}</a>
-            @endforeach
-          </h5>
+          <div class="col-md-6">
+            <div style="margin-top: 0px; margin-bottom: 0px" class="video-slider-title">
+              <a href="{{ route('video.watch') }}?v={{ $video->id }}"><h4>{{ $video->title }}</h4></a>
+            </div>
+            <h5 style="line-height: 37px; color: dimgray; font-weight: 500; margin-top: -17px;">{{ $user->name }} • {{ Carbon\Carbon::parse($video->uploaded_at)->diffForHumans() }}</h5>
+            <h5 class="hidden-xs hidden-sm" style="color: dimgray; font-weight: 400; margin-top: -5px; line-height: 20px; margin-bottom: -5px; white-space: pre-wrap;">{{ $video->caption }}</h5>
+            <h5 class="hidden-xs hidden-sm" style="font-weight: 400; line-height: 20px; margin-bottom: 15px">
+              @foreach ($video->tags() as $tag)
+                  <a style="margin-right: 3px; color: #4377e8;" href="{{ route('video.subscribeTag') }}?query={{ $tag }}">#{{ $tag }}</a>
+              @endforeach
+            </h5>
+          </div>
         </div>
       </div>
-    </div>
+    @else
+      <div style="margin-top: 45px"></div>
+    @endif
 
     <div class="video-slider-title paravi-padding-setup">
-      <a href="{{ route('user.show', [$user, 'videos']) }}"><h4>最新精彩內容<span class="hidden-xs">更多內容</span><i class="material-icons">arrow_forward_ios</i></h4></a>
+      <a href="{{ route('user.show', [$user, 'videos']) }}"><h4>上傳的影片<span class="hidden-xs">更多內容</span><i class="material-icons">arrow_forward_ios</i></h4></a>
     </div>
     @include('video.single-video-slider', ['videos' => $videos])
 

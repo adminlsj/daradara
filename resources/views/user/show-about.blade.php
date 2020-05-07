@@ -12,7 +12,7 @@
 <div class="main-content">
 	<div style="background-color: #F5F5F5;">
 
-		<div class="paravi-padding-setup" style="padding-top: 20px; padding-bottom: 20px; background-color: #F9F9F9">
+		<div class="paravi-padding-setup user-show-general-panel" style="padding-top: 20px; padding-bottom: 20px; background-color: #F9F9F9">
 			<img class="lazy" style="float:left; border-radius: 50%; width: 70px; height: 70px;" src="{{ $user->avatarCircleB() }}" data-src="{{ $user->avatar == null ? $user->avatarDefault() : $user->avatar->filename }}" data-srcset="{{ $user->avatar == null ? $user->avatarDefault() : $user->avatar->filename }}">
 			@if (Auth::check() && $user->id == Auth::user()->id)
         <form style="width:auto; height: auto; font-size: 1em; margin-top: 9px;" id="logout-form" action="{{ route('logout') }}" method="POST" class="pull-right">
@@ -34,9 +34,6 @@
       </div>
 		</div>
 
-    <div class="explore-slider-title paravi-padding-setup">
-        <h4>用戶簡介</h4>
-    </div>
     <div class="paravi-padding-setup">
       <div>用戶名稱：{{ $user->name }}</div>
       <div>電郵地址：[***僅該用戶可查看***]</div>

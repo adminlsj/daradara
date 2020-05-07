@@ -2300,6 +2300,10 @@ a > i {
   margin-bottom: 40px;
 }
 
+.user-show-general-panel {
+    margin-bottom: 25px;
+  }
+
 @media (max-width: 991px) {
   #content-div {
     padding-bottom: 50px
@@ -2336,6 +2340,10 @@ a > i {
 
   .user-show-top-panel {
     margin-bottom: -5px;
+  }
+
+  .user-show-general-panel {
+    margin-bottom: 15px;
   }
 
   #nav-image {
