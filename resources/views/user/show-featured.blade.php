@@ -51,7 +51,7 @@
       </div>
     </div>
 
-    <div class="row no-gutter load-more-container" style="margin-top: -10px">
+    <div class="row no-gutter load-more-container" style="margin-top: -5px">
       <a href="{{ route('user.show', [$user, 'videos']) }}" style="color: inherit; text-decoration: none">
         <h3 class="user-show-title">發燒影片<i style="font-size: 0.85em; vertical-align: middle; margin-top: -4px; margin-left: 5px" class="material-icons">arrow_forward_ios</i></h3>
       </a>
@@ -64,7 +64,7 @@
       </div>
     </div>
 
-    <div class="row no-gutter load-more-container" style="margin-top: -10px">
+    <div class="row no-gutter load-more-container" style="margin-top: -5px">
       <a href="{{ route('user.show', [$user, 'playlists']) }}" style="color: inherit; text-decoration: none">
         <h3 class="user-show-title">播放清單<i style="font-size: 0.85em; vertical-align: middle; margin-top: -3px; margin-left: 5px" class="material-icons">arrow_forward_ios</i></h3>
       </a>

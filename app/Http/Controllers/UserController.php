@@ -72,7 +72,7 @@ class UserController extends Controller
                 return view('user.show-about', compact('user', 'subscribers'));
             
             default:
-                $videos = Video::where('user_id', $user->id)->orderBy('created_at', 'desc')->limit(8)->get();
+                $videos = Video::where('user_id', $user->id)->orderBy('uploaded_at', 'desc')->limit(8)->get();
                 $trendings = Video::where('user_id', $user->id)->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->orderBy('views', 'desc')->limit(8)->get();
                 $playlists = Watch::where('user_id', $user->id)->orderBy('created_at', 'desc')->limit(8)->get();
                 $is_mobile = $this->checkMobile();
