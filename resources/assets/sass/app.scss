@@ -2313,11 +2313,12 @@ a > i {
 
 .single-load-more-video-wrapper {
   position: absolute; 
-  bottom: 0px; width: 100%;
+  bottom: 0px; 
+  width: 100%;
   padding: 8px 10px; 
-  font-size: 0.95em; 
+  font-size: 1em; 
   color: white; 
-  background: linear-gradient(to bottom, transparent 0%, black 120%);
+  background: linear-gradient(to bottom, transparent 10%, black 120%);
 }
 
 @media (max-width: 991px) {

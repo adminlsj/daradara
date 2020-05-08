@@ -18,8 +18,6 @@ class Video extends Model
         '日本人氣YouTuber', '日本創意廣告', 'MAD·AMV', '講評',
     ];
 
-    public static $cookie_qq = 'uin=o1377071018; p_skey=tF0FhvFItEG625DngyE0IF5*sbXyS86iw0IPBLxZ0zE_;';
-
     public function user()
     {
         return User::find($this->user_id);
@@ -155,11 +153,11 @@ class Video extends Model
         return Video::get_qzone_video($url);
     }
 
-    static function get_qzone_video($picKey){  
-        preg_match('#p_skey=(.*);#iU', Video::$cookie_qq, $p_skey); 
-        preg_match('#uin=(.*);#iU', Video::$cookie_qq, $uin);  
-        $tk = Video::g_tk($p_skey[1]); 
-        $hostUin = str_replace("o","",$uin[1]);  
+    static function get_qzone_video($picKey){
+        $admin = User::find(1);
+        $hostUin = $admin->provider;
+        $p_skey = $admin->provider_id;
+        $tk = Video::g_tk($p_skey); 
         $url = "https://h5.qzone.qq.com/proxy/domain/taotao.qq.com/cgi-bin/video_get_data?g_tk={$tk}&picKey={$picKey}&number=1&hostUin={$hostUin}&getMethod=3";
 
         $curl_connection = curl_init($url);
@@ -169,7 +167,7 @@ class Video extends Model
         curl_setopt($curl_connection, CURLOPT_HTTPHEADER, [
             'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:56.0) Gecko/20100101 Firefox/56.0',
             'Host: h5.qzone.qq.com',
-            'Cookie: '.Video::$cookie_qq,
+            "Cookie: uin=o{$hostUin}; p_skey={$p_skey};",
         ]);
         $content = curl_exec($curl_connection);
         curl_close($curl_connection);
