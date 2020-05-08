@@ -45,7 +45,7 @@
       <div class="video-sidebar-wrapper">
         @foreach ($videos as $video)
           <div class="{{ $loop->iteration > 4 ? 'hidden-xs hidden-sm' : ''}}">
-            @include('video.singleLoadMoreSliderVideos')
+            @include('video.new-singleLoadMoreVideos')
           </div>
         @endforeach
       </div>
@@ -58,7 +58,7 @@
       <div class="video-sidebar-wrapper">
         @foreach ($trendings as $video)
           <div class="{{ $loop->iteration > 4 ? 'hidden-xs hidden-sm' : ''}}">
-            @include('video.singleLoadMoreSliderVideos')
+            @include('video.new-singleLoadMoreVideos')
           </div>
         @endforeach
       </div>
@@ -85,7 +85,7 @@
         <div class="video-sidebar-wrapper">
           @foreach (App\Video::where('user_id', 5190)->orderBy('views', 'desc')->limit(8)->get() as $video)
             <div class="{{ $loop->iteration > 4 ? 'hidden-xs hidden-sm' : ''}}">
-              @include('video.singleLoadMoreSliderVideos')
+            @include('video.new-singleLoadMoreVideos')
             </div>
           @endforeach
         </div>
