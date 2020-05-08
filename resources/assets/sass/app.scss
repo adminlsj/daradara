@@ -2311,6 +2311,15 @@ a > i {
   margin-left: 3px;
 }
 
+.single-load-more-video-wrapper {
+  position: absolute; 
+  bottom: 0px; width: 100%;
+  padding: 8px 10px; 
+  font-size: 0.95em; 
+  color: white; 
+  background: linear-gradient(to bottom, transparent 0%, black 120%);
+}
+
 @media (max-width: 991px) {
   #content-div {
     padding-bottom: 50px
@@ -2355,6 +2364,11 @@ a > i {
 
   .user-show-title {
     margin-left: 0px;
+  }
+
+  .single-load-more-video-wrapper {
+    padding: 5px 6px; 
+    font-size: 0.9em; 
   }
 
   #nav-image {
