@@ -61,8 +61,8 @@ class UserController extends Controller
                     $userWatches = Watch::where('user_id', $user->id)->orderBy('updated_at', 'desc')->paginate(24);
                     $html = '';
                     foreach ($userWatches as $watch) {
-                        $first = $watch->videos()->first();
-                        $html .= view('video.singleLoadMoreSliderWatches', compact('watch', 'first'));
+                        $video = $watch->videos()->first();
+                        $html .= view('video.singleLoadMoreSliderPlaylists', compact('video'));
                     }
                     return $html;
                 }
@@ -72,11 +72,11 @@ class UserController extends Controller
                 return view('user.show-about', compact('user', 'subscribers'));
             
             default:
-                $video = Video::where('user_id', $user->id)->whereDate('uploaded_at', '>=', Carbon::now()->subWeek())->orderBy('views', 'desc')->first();
-                $videos = Video::where('user_id', $user->id)->orderBy('created_at', 'desc')->limit(16)->get();
-                $playlists = Watch::where('user_id', $user->id)->orderBy('created_at', 'desc')->limit(16)->get();
+                $videos = Video::where('user_id', $user->id)->orderBy('created_at', 'desc')->limit(8)->get();
+                $trendings = Video::where('user_id', $user->id)->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->orderBy('views', 'desc')->limit(8)->get();
+                $playlists = Watch::where('user_id', $user->id)->orderBy('created_at', 'desc')->limit(8)->get();
                 $is_mobile = $this->checkMobile();
-                return view('user.show-featured', compact('user', 'subscribers', 'video', 'videos', 'playlists', 'is_mobile'));
+                return view('user.show-featured', compact('user', 'subscribers', 'videos', 'trendings', 'playlists', 'is_mobile'));
                 break;
         }
     }

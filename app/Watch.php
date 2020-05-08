@@ -82,6 +82,11 @@ class Watch extends Model
         return "https://i.imgur.com/sMSpYFXb.jpg";
     }
 
+    public function imgur16by9()
+    {
+        return "https://i.imgur.com/JMcgEkPl.jpg";
+    }
+
     public function imgurS()
     {
         return "https://i.imgur.com/".$this->imgur."s.jpg";

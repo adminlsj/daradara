@@ -18,7 +18,7 @@ class Video extends Model
         '日本人氣YouTuber', '日本創意廣告', 'MAD·AMV', '講評',
     ];
 
-    public static $cookie_qq = 'uin=o1377071018; p_skey=tF0FhvFItEG625DngyE0IF5*sbXyS86iw0IPBLxZ0zE_;'; // 2020-05-06 15:00
+    public static $cookie_qq = 'uin=o1377071018; p_skey=tF0FhvFItEG625DngyE0IF5*sbXyS86iw0IPBLxZ0zE_;';
 
     public function user()
     {

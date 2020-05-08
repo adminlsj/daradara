@@ -2301,8 +2301,15 @@ a > i {
 }
 
 .user-show-general-panel {
-    margin-bottom: 25px;
-  }
+  margin-bottom: 25px;
+}
+
+.user-show-title {
+  font-weight: bolder; 
+  margin-bottom: 17px; 
+  font-size: 1.4em; 
+  margin-left: 3px;
+}
 
 @media (max-width: 991px) {
   #content-div {
@@ -2344,6 +2351,10 @@ a > i {
 
   .user-show-general-panel {
     margin-bottom: 15px;
+  }
+
+  .user-show-title {
+    margin-left: 0px;
   }
 
   #nav-image {
