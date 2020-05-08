@@ -7,7 +7,7 @@
 		@endif
 	@else
 		<div data-toggle="modal" data-target="#signUpModal">
-			<button style="background-color: crimson !important; border-color: crimson !important;" class="btn btn-info">訂閱</button>
+			<button style="background-color: #D5D5D5 !important; color: #666666; border-color: #D5D5D5 !important;" class="btn btn-info">訂閱</button>
 		</div>
 	    @include('user.signUpModal')
 	    @include('user.loginModal')
