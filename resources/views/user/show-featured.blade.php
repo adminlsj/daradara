@@ -88,7 +88,7 @@
           @foreach (App\Watch::where('user_id', 5190)->inRandomOrder()->get() as $watch)
             @if ($watch->videos()->first())
               <div class="{{ $loop->iteration > 4 ? 'hidden-xs hidden-sm' : ''}}">
-              @include('video.singleLoadMoreSliderPlaylists', ['video' => $watch->videos()->first()])
+                @include('video.singleLoadMoreSliderPlaylists', ['video' => $watch->videos()->first()])
               </div>
             @endif
           @endforeach

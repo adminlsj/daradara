@@ -32,7 +32,7 @@
 		  			<img class="lazy" style="float:left; border-radius: 50%; width: 70px; height: 70px; border: 1px solid #f5f5f5;" src="https://i.imgur.com/sMSpYFXb.jpg" data-src="https://i.imgur.com/kYs5o10h.jpg" data-srcset="https://i.imgur.com/kYs5o10h.jpg">
 		  			<div style="height: 70px; margin-left: 85px; padding-top: 10px;">
 		  				<div style="font-size: 1.5em; font-weight: bold">動漫領域</div>
-		  				<div style="color: gray; font-weight: bold">只有你想不到的動漫，沒有你找不到的動漫。</div>
+		  				<div style="color: gray; font-weight: bold">只有你想不到的，沒有你找不到的。</div>
 		  			</div>
 		        </div>
 		    </div>
@@ -55,7 +55,7 @@
 		  			<img class="lazy" style="float:left; border-radius: 50%; width: 70px; height: 70px; border: 1px solid #f5f5f5;" src="https://i.imgur.com/sMSpYFXb.jpg" data-src="https://i.imgur.com/OQu2LYfh.jpg" data-srcset="https://i.imgur.com/OQu2LYfh.jpg">
 		  			<div style="height: 70px; margin-left: 85px; padding-top: 10px;">
 		  				<div style="font-size: 1.5em; font-weight: bold">明星專區</div>
-		  				<div style="color: gray; font-weight: bold">日星最新情報</div>
+		  				<div style="color: gray; font-weight: bold">日本明星．綜藝．劇集．直播．情報</div>
 		  			</div>
 		        </div>
 		    </div>
@@ -69,7 +69,6 @@
 				<a class="load-home-tag-videos" style="margin-right: 5px;">#倫敦靴子1號2號</a>
 				<a class="load-home-tag-videos" style="margin-right: 5px;">#新垣結衣</a>
 				<a class="load-home-tag-videos" style="margin-right: 5px;">#橋本環奈</a>
-				<a class="load-home-tag-videos" style="margin-right: 5px;">#上白石萌音</a>
 			</div>
 			<div class="row no-gutter load-more-container">
 		        <div class="video-sidebar-wrapper">
@@ -83,7 +82,7 @@
 		  			<img class="lazy" style="float:left; border-radius: 50%; width: 70px; height: 70px; border: 1px solid #f5f5f5;" src="https://i.imgur.com/sMSpYFXb.jpg" data-src="https://i.imgur.com/lnTT7tmh.jpg" data-srcset="https://i.imgur.com/lnTT7tmh.jpg">
 		  			<div style="height: 70px; margin-left: 85px; padding-top: 10px;">
 		  				<div style="font-size: 1.5em; font-weight: bold">日本人氣YouTuber</div>
-		  				<div style="color: gray; font-weight: bold">路人明星</div>
+		  				<div style="color: gray; font-weight: bold">日本超人氣YouTuber & Twitter推主</div>
 		  			</div>
 		        </div>
 		    </div>
