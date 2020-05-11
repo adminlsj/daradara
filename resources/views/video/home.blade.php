@@ -32,7 +32,7 @@
 		  			<img class="lazy" style="float:left; border-radius: 50%; width: 70px; height: 70px; border: 1px solid #f5f5f5;" src="https://i.imgur.com/sMSpYFXb.jpg" data-src="https://i.imgur.com/kYs5o10h.jpg" data-srcset="https://i.imgur.com/kYs5o10h.jpg">
 		  			<div style="height: 70px; margin-left: 85px; padding-top: 10px;">
 		  				<div style="font-size: 1.5em; font-weight: bold">動漫領域</div>
-		  				<div style="color: gray; font-weight: bold">動漫愛好者</div>
+		  				<div style="color: gray; font-weight: bold">只有你想不到的動漫，沒有你找不到的動漫。</div>
 		  			</div>
 		        </div>
 		    </div>
