@@ -15,7 +15,7 @@ class Video extends Model
     ];
 
     public static $tags = [
-        '日本人氣YouTuber', '日本創意廣告', 'MAD·AMV', '講評',
+        '正版動漫', '同人動畫', '動漫講評', '明星', '日本人氣YouTuber', '日本創意廣告', '日劇講評'
     ];
 
     public function user()

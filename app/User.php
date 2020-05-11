@@ -45,35 +45,46 @@ class User extends Authenticatable
             if ($subscribe->type == 'watch' && $watch = $subscribe->watch()) {
                 $videoTags = $watch->videos()->first()->tags;
                 if (strpos($videoTags, '動漫') !== false && !in_array('動漫', $tags)) {
-                    array_push($tags, '動漫');
+                    array_unshift($tags, '動漫');
+                    if (!in_array('同人動畫', $tags)) {
+                        array_push($tags, '同人動畫');
+                    }
+                    if (!in_array('動漫講評', $tags)) {
+                        array_push($tags, '動漫講評');
+                    }
+                    if (!in_array('MAD·AMV', $tags)) {
+                        array_push($tags, 'MAD·AMV');
+                    }
                 }
                 if (strpos($videoTags, '日劇') !== false && !in_array('日劇', $tags)) {
-                    array_push($tags, '日劇');
+                    array_unshift($tags, '日劇');
+                    if (!in_array('明星', $tags)) {
+                        array_push($tags, '明星');
+                    }
+                    if (!in_array('日本人氣YouTuber', $tags)) {
+                        array_push($tags, '日本人氣YouTuber');
+                    }
+                    if (!in_array('日劇講評', $tags)) {
+                        array_push($tags, '日劇講評');
+                    }
                 }
                 if (strpos($videoTags, '綜藝') !== false && !in_array('綜藝', $tags)) {
-                    array_push($tags, '綜藝');
+                    array_unshift($tags, '綜藝');
+                    if (!in_array('明星', $tags)) {
+                        array_push($tags, '明星');
+                    }
+                    if (!in_array('日本人氣YouTuber', $tags)) {
+                        array_push($tags, '日本人氣YouTuber');
+                    }
+                    if (!in_array('日本創意廣告', $tags)) {
+                        array_push($tags, '日本創意廣告');
+                    }
                 }
             } elseif ($subscribe->type == 'video') {
                 if (!in_array($subscribe->tag, $tags)) {
                     array_push($tags, $subscribe->tag);
                 }
             }
-        }
-
-        if (!in_array('日本人氣YouTuber', $tags)) {
-            array_push($tags, '日本人氣YouTuber');
-        }
-        if (!in_array('日本創意廣告', $tags)) {
-            array_push($tags, '日本創意廣告');
-        }
-        if (!in_array('動漫講評', $tags)) {
-            array_push($tags, '動漫講評');
-        }
-        if (!in_array('MAD·AMV', $tags)) {
-            array_push($tags, 'MAD·AMV');
-        }
-        if (!in_array('日劇講評', $tags)) {
-            array_push($tags, '日劇講評');
         }
 
         if (!in_array('日劇', $tags)) {

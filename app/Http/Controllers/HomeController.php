@@ -29,6 +29,47 @@ class HomeController extends Controller
         return view('video.home');
     }
 
+    public function loadHomeTagList(Request $request)
+    {
+        $tag = strpos($request->tag, '全部') !== false ? '' : $request->tag;
+        $genre = $request->genre;
+        if ($tag == '') {
+            switch ($genre) {
+                case 'anime':
+                    $videos = Video::where(function($query) {
+                        $query->orWhere('tags', 'like', '%正版動漫%')->orWhere('tags', 'like', '%動畫%')->orWhere('tags', 'like', '%動漫講評%')->orWhere('tags', 'like', '%MAD·AMV%');
+                    })->orderBy('uploaded_at', 'desc')->limit(8)->get();
+                    break;
+
+                case 'artist':
+                    $videos = Video::where(function($query) {
+                        $query->orWhere('tags', 'like', '%明星%');
+                    })->orderBy('uploaded_at', 'desc')->limit(8)->get();
+                    break;
+
+                case 'youtuber':
+                    $videos = Video::where(function($query) {
+                        $query->orWhere('tags', 'like', '%日本人氣YouTuber%');
+                    })->orderBy('uploaded_at', 'desc')->limit(8)->get();
+                    break;
+            }
+
+        } else {
+            $videos = Video::where('tags', 'like', '%'.$tag.'%')->orderBy('uploaded_at', 'desc')->limit(8)->get();
+        }
+
+        return $this->newSingleLoadMoreSliderVideosHTML($videos);
+    }
+
+    public function newSingleLoadMoreSliderVideosHTML($videos)
+    {
+        $html = '';
+        foreach ($videos as $video) {
+            $html .= view('video.new-singleLoadMoreVideos', compact('video'));
+        }
+        return $html;
+    }
+
     public function about(Request $request)
     {
         return view('layouts.about-us');

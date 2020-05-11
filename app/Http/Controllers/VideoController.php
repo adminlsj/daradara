@@ -394,7 +394,13 @@ class VideoController extends Controller
 
                 } else {
                     if ($tag == '') {
-                        $videos = $videos->orWhere('tags', 'like', '%日本創意廣告%')->orWhere('tags', 'like', '%日本人氣YouTuber%')->orWhere('tags', 'like', '%MAD·AMV%')->orWhere('tags', 'like', '%講評%')->orderBy('uploaded_at', 'desc')->paginate(24);   
+                        $tags = Video::$tags;
+                        $videos = Video::where(function($query) use ($tags) {
+                            foreach ($tags as $tag) {
+                                $query->orWhere('tags', 'like', '%'.$tag.'%');
+                            }
+                        })->orderBy('uploaded_at', 'desc')->paginate(24);
+
                     } else {
                         $videos = $videos->where('tags', 'like', '%'.$tag.'%')->orderBy('uploaded_at', 'desc')->paginate(24);
                     }
@@ -460,7 +466,7 @@ class VideoController extends Controller
                     $html .= $this->singleLoadMoreSliderVideosHTML($videos);
                     return $html;
 
-                } else {
+                } /*else {
                     if ($tag == '') {
                         $newest = Video::where(function($query) {
                             $query->orWhere('tags', 'like', '%日本創意廣告%')->orWhere('tags', 'like', '%日本人氣YouTuber%')->orWhere('tags', 'like', '%MAD·AMV%')->orWhere('tags', 'like', '%講評%');
@@ -490,7 +496,7 @@ class VideoController extends Controller
                     }
                     $html .= $this->singleLoadMoreSliderVideosHTML($videos);
                     return $html;
-                }
+                }*/
         }
     }
 

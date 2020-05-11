@@ -24,10 +24,12 @@
 					<a class="load-tag-videos" style="margin-right: 5px;">#{{ $tag }}</a>
 				@endforeach
 			@else
+				<a class="load-tag-videos" style="margin-right: 5px;">#正版動漫</a>
+				<a class="load-tag-videos" style="margin-right: 5px;">#同人動畫</a>
+				<a class="load-tag-videos" style="margin-right: 5px;">#動漫講評</a>
+				<a class="load-tag-videos" style="margin-right: 5px;">#明星</a>
 				<a class="load-tag-videos" style="margin-right: 5px;">#日本人氣YouTuber</a>
 				<a class="load-tag-videos" style="margin-right: 5px;">#日本創意廣告</a>
-				<a class="load-tag-videos" style="margin-right: 5px;">#動漫講評</a>
-				<a class="load-tag-videos" style="margin-right: 5px;">#MAD·AMV</a>
 				<a class="load-tag-videos" style="margin-right: 5px;">#日劇講評</a>
 			@endif
 		</div>
