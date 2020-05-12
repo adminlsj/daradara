@@ -15,7 +15,7 @@ $(document).on("click", ".load-home-tag-videos", function(e) {
     previous.removeClass("active");
     current.addClass('active');
 
-    $('#sidebar-' + genre + '-results').css('opacity', '0.5');
+    $('#sidebar-' + genre + '-results').css('opacity', '0.3');
     $('.ajax-' + genre + '-loading').html('<img style="width: 40px; height: auto; margin: 0; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" src="https://i.imgur.com/TcZjkZa.gif"/>');
 
     $.ajax({
