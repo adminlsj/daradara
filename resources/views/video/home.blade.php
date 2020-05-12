@@ -45,7 +45,17 @@
 			</div>
 			<div class="row no-gutter load-more-container">
 		        <div class="video-sidebar-wrapper">
-			        <div id="sidebar-anime-results"><!-- results appear here --></div>
+			        <div id="sidebar-anime-results">
+			        	@for ($i = 0; $i < 8; $i++)
+			        		<div class="col-xs-6 col-sm-3 col-md-3 hover-opacity-all load-more-wrapper" style="margin-bottom: 9px">
+							    <div style="position: relative;">
+								    <a>
+								      <img style="width: 100%; height: 100%;" src="https://i.imgur.com/JMcgEkPl.jpg">
+								    </a>
+								</div>
+							</div>
+			        	@endfor
+			        </div>
 			        <div style="text-align: center;" class="ajax-anime-loading"><img style="width: 40px; height: auto; padding-top: 25px; padding-bottom: 50px;" src="https://i.imgur.com/TcZjkZa.gif"/></div>
 		        </div>
 		    </div>
