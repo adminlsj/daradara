@@ -44,22 +44,8 @@
 				<a class="load-home-tag-videos" style="margin-right: 5px;">#MAD·AMV</a>
 			</div>
 			<div class="row no-gutter load-more-container">
-		        <div class="video-sidebar-wrapper">
-			        <div id="sidebar-anime-results">
-			        	@for ($i = 0; $i < 8; $i++)
-			        		<div class="col-xs-6 col-sm-3 col-md-3 hover-opacity-all load-more-wrapper" style="margin-bottom: 9px">
-							    <div style="position: relative;">
-								    <a>
-								      <img style="width: 100%; height: 100%;" src="https://i.imgur.com/JMcgEkPl.jpg">
-								      <div class="single-load-more-video-wrapper">
-								        <div style="font-size: 0.8em; font-weight: bold;"></div>
-								        <div style="margin-top: 1px; font-weight: bold; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;"></div>
-								      </div>
-								    </a>
-								</div>
-							</div>
-			        	@endfor
-			        </div>
+		        <div class="video-sidebar-wrapper" style="position: relative;">
+			        <div id="sidebar-anime-results"><!-- results appear here --></div>
 			        <div style="text-align: center;" class="ajax-anime-loading"><img style="width: 40px; height: auto; padding-top: 25px; padding-bottom: 50px;" src="https://i.imgur.com/TcZjkZa.gif"/></div>
 		        </div>
 		    </div>
@@ -85,7 +71,7 @@
 				<a class="load-home-tag-videos" style="margin-right: 5px;">#橋本環奈</a>
 			</div>
 			<div class="row no-gutter load-more-container">
-		        <div class="video-sidebar-wrapper">
+		        <div class="video-sidebar-wrapper" style="position: relative;">
 			        <div id="sidebar-artist-results"><!-- results appear here --></div>
 			        <div style="text-align: center;" class="ajax-artist-loading"><img style="width: 40px; height: auto; padding-top: 25px; padding-bottom: 50px;" src="https://i.imgur.com/TcZjkZa.gif"/></div>
 		        </div>
@@ -108,7 +94,7 @@
 				<a class="load-home-tag-videos" style="margin-right: 5px;">#費米研究所</a>
 			</div>
 			<div class="row no-gutter load-more-container">
-		        <div class="video-sidebar-wrapper">
+		        <div class="video-sidebar-wrapper" style="position: relative;">
 			        <div id="sidebar-youtuber-results"><!-- results appear here --></div>
 			        <div style="text-align: center;" class="ajax-youtuber-loading"><img style="width: 40px; height: auto; padding-top: 25px; padding-bottom: 50px;" src="https://i.imgur.com/TcZjkZa.gif"/></div>
 		        </div>
