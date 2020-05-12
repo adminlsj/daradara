@@ -51,6 +51,10 @@
 							    <div style="position: relative;">
 								    <a>
 								      <img style="width: 100%; height: 100%;" src="https://i.imgur.com/JMcgEkPl.jpg">
+								      <div class="single-load-more-video-wrapper">
+								        <div style="font-size: 0.8em; font-weight: bold;"></div>
+								        <div style="margin-top: 1px; font-weight: bold; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;"></div>
+								      </div>
 								    </a>
 								</div>
 							</div>
