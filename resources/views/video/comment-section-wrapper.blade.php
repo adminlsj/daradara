@@ -1,7 +1,7 @@
 <div id="comment-create-form-wrapper">
-	<h4 style="line-height: 23px; font-weight: 400; margin-top:15px; margin-bottom: 10px; font-size: 1.15em">評論<span id="comment-count" style="margin-left: 10px; color: gray">{{ $current->comments()->count() }}</span></h4>
+	<h4 style="line-height: 23px; font-weight: bold; margin-top:15px; margin-bottom: 10px; font-size: 1.2em">評論<span id="comment-count" style="margin-left: 10px; color: gray; font-weight: 400">{{ $current->comments()->count() }}</span></h4>
 	@if (Auth::check())
-	  <form id="comment-create-form" style="margin-top: 10px;" action="{{ route('video.createComment') }}" method="POST">
+	  <form id="comment-create-form" style="margin-top: 12px;" action="{{ route('video.createComment') }}" method="POST">
 	    {{ csrf_field() }}
 	    <input name="comment-type" type="hidden" value="video">
 	    <input name="comment-foreign-id" type="hidden" value="{{ $current->id }}">
@@ -11,7 +11,7 @@
 	    <input style="margin-left: 10px; width: calc(100% - 45px); line-height: 30px; background-color: inherit; border: none; outline: none;" type="text" id="comment-text" name="comment-text" placeholder="新增一則公開評論...">
 	  </form>
 	@else
-	  <div data-toggle="modal" data-target="#signUpModal" style="margin-top: 10px;">
+	  <div data-toggle="modal" data-target="#signUpModal" style="margin-top: 12px;">
 	    <img class="img-circle" style="width: 35px; height: auto; float:left;" src="https://i.imgur.com/KqDtqhMb.jpg">
 	    <input style="margin-left: 10px; width: calc(100% - 45px); line-height: 30px; background-color: inherit; border: none; outline: none;" type="text" id="comment-signup-modal" placeholder="新增一則公開評論...">
 	  </div>
