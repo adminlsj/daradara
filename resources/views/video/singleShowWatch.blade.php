@@ -37,7 +37,7 @@
       @endforeach
     </h5>
 
-    <div class="show-panel-icons" style="padding-bottom: 35px">
+    <div class="show-panel-icons" style="padding-bottom: 35px; font-weight: bold">
       <div id="video-like-form-wrapper">
         @include('video.like-btn-wrapper')
       </div>
