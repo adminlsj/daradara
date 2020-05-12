@@ -24,7 +24,7 @@
 				<div class="col-md-4 single-show-list">
 
 					<div style="padding-bottom: 7px;">
-						<div class="hidden-xs hidden-sm" style="margin: 15px 15px 0px 15px;">
+						<div class="hidden-xs hidden-sm" style="margin: 15px">
 							<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 							<ins class="adsbygoogle"
 							     style="display:block; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1); border-radius: 3px; background-color: #F9F9F9"
@@ -38,7 +38,6 @@
 						</div>
 
 						@if ($video->watch() && Request::get('list') != $video->watch()->id)
-							<div class="hidden-xs hidden-sm" style="margin-top: 6px"></div>
 							<div id="suggested-watch-wrapper" class="related-watch-wrap hover-opacity-all" style="background-color: #F9F9F9">
 								<a href="{{ route('video.playlist') }}?list={{ $video->watch()->id }}" class="row no-gutter">
 								  <div style="padding-right: 4px; position: relative;" class="col-xs-6 col-sm-6 col-md-6">
