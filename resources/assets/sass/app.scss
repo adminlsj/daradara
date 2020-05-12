@@ -94,6 +94,16 @@ body {
   max-width: 105px !important;
 }
 
+.playlist-scoll-wrapper::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 8px;
+}
+
+.playlist-scoll-wrapper::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, .2);
+  box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+}
+
 #nav-image {
   margin-top: -2px;
   margin-left: 13px;
