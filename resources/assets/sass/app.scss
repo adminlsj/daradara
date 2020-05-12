@@ -2350,6 +2350,11 @@ a > i {
   background: linear-gradient(to bottom, transparent 0%, black 120%);
 }
 
+.paravi-padding-hr {
+  border-color: #e1e1e1; 
+  margin: 25px 25px 0px 25px;
+}
+
 @media (max-width: 991px) {
   #content-div {
     padding-bottom: 50px
@@ -2361,6 +2366,10 @@ a > i {
 
   #comment-section-wrapper {
     display: none;
+  }
+
+  .paravi-padding-hr {
+    margin: 25px 0px 0px 0px;
   }
 
   .subscribes-tab {
