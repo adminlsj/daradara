@@ -935,10 +935,24 @@ nav input[type=text]:focus {
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1);
   font-weight: bold;
   border-radius: 3px;
+  position: relative;
 }
 
 .related-watch-wrap .related-watch-title {
   padding: 5px 7px !important;
+}
+
+.related-watch-wrap .related-watch-title h4 {
+  margin-top:0px; 
+  margin-bottom: 0px; 
+  line-height: 19px; 
+  font-size: 1.00em; 
+  color:#222222;
+  overflow: hidden;
+  text-overflow: ellipsis; 
+  display: -webkit-box; 
+  -webkit-line-clamp: 3; 
+  -webkit-box-orient: vertical;
 }
 
 .bottom-nav {

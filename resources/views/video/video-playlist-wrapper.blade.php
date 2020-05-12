@@ -1,6 +1,6 @@
 @if ($videos)
 	@foreach ($videos as $video)
-	    <div class="related-watch-wrap" style="{{ $video->id == $current->id ? 'background-color: #E5E5E5' : '' }};">
+	    <div class="related-watch-wrap hover-opacity-all" style="{{ $video->id == $current->id ? 'background-color: #E5E5E5' : '' }};">
 	    	@include('video.singleShowRelated', ['source' => 'playlist'])
 		</div>
 	@endforeach
@@ -8,7 +8,7 @@
 @endif
 
 @foreach ($related as $video)
-    <div class="related-watch-wrap hover-opacity-all" style="position: relative;">
+    <div class="related-watch-wrap hover-opacity-all">
     	@include('video.singleShowRelated', ['source' => 'video'])
 	</div>
 @endforeach

@@ -27,7 +27,7 @@
 						<div class="hidden-xs hidden-sm" style="margin: 15px 15px 0px 15px;">
 							<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 							<ins class="adsbygoogle"
-							     style="display:block; border: 1px solid white"
+							     style="display:block; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1); border-radius: 3px"
 							     data-ad-client="ca-pub-4485968980278243"
 							     data-ad-slot="8455082664"
 							     data-ad-format="auto"
@@ -42,17 +42,15 @@
 								<a href="{{ route('video.playlist') }}?list={{ $video->watch()->id }}"><button style="color: #222222; font-weight: 400;" class="tablinks video-tablinks">{{ $video->watch()->title }}</button></a>
 								<a style="position:absolute; top:12px; right:56px; text-decoration: none; {{ $prev != false ? 'color: #414141;' : 'pointer-events: none; color: #B9B9B9;' }}" href="{{ route('video.watch') }}?v={{ $prev }}&list={{ $video->watch()->id }}"><i class="material-icons noselect">skip_previous</i></a>
 								<a style="position:absolute; top:12px; right:15px; text-decoration: none; margin-left: 8px; {{ $next != false ? 'color: #414141;' : 'pointer-events: none; color: #B9B9B9;' }}" href="{{ route('video.watch') }}?v={{ $next }}&list={{ $video->watch()->id }}"><i class="material-icons noselect">skip_next</i></a>
-							@else
-								<a><button style="color: #222222; font-weight: 400" class="tablinks video-tablinks">相關影片</button></a>
 							@endif
 						</div>
 
 						@if ($video->watch() && Request::get('list') != $video->watch()->id)
 							<div class="hidden-xs hidden-sm" style="margin-top: 6px"></div>
-							<div id="suggested-watch-wrapper" style="padding: 0px 15px; padding-top: 8px" class="hover-opacity-all">
+							<div id="suggested-watch-wrapper" class="related-watch-wrap hover-opacity-all">
 								<a href="{{ route('video.playlist') }}?list={{ $video->watch()->id }}" class="row no-gutter">
 								  <div style="padding-right: 4px; position: relative;" class="col-xs-6 col-sm-6 col-md-6">
-								    <img class="lazy" style="width: 100%; height: 100%;" src="{{ $video->imgur16by9() }}" data-src="{{ $video->watch()->videos()->first()->imgurL() }}" data-srcset="{{ $video->watch()->videos()->first()->imgurL() }}" alt="{{ $video->watch()->title }}">
+								    <img class="lazy" style="width: 100%; height: 100%; border-top-left-radius: 3px; border-bottom-left-radius: 3px;" src="{{ $video->imgur16by9() }}" data-src="{{ $video->watch()->videos()->first()->imgurL() }}" data-srcset="{{ $video->watch()->videos()->first()->imgurL() }}" alt="{{ $video->watch()->title }}">
 								    <span>
 								      	<div style="margin: 0;position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
 									      	<div>{{ $video->watch()->videos()->count() }}</div>
@@ -61,10 +59,13 @@
 								    </span>
 								  </div>
 								  <div style="padding-left: 4px;" class="col-xs-6 col-sm-6 col-md-6 related-watch-title">
-								    <h4 style="margin-top:3px; margin-bottom: 0px; line-height: 19px; font-size: 1.05em; color:#222222;">{{ $video->watch()->title }}</h4>
-								    <p style="color: dimgray; margin-top: 3px; margin-bottom: 0px; font-size: 0.85em;">{{ $video->watch()->user()->name }}</p>
+								    <h4>{{ $video->watch()->title }}</h4>
 								  </div>
 								</a>
+								<div style="position: absolute; bottom: 7px; left: calc(50% + 7px);">
+									<img class="lazy" style="float:left; width: 18px; height: 18px; border: 1px solid #f5f5f5; margin-top: 1px" src="{{ $video->user()->avatarCircleB() }}" data-src="{{ $video->user()->avatar == null ? $video->user()->avatarDefault() : $video->user()->avatar->filename }}" data-srcset="{{ $video->user()->avatar == null ? $video->user()->avatarDefault() : $video->user()->avatar->filename }}">
+									<a href="{{ route('user.show', [$video->user()]) }}" style="color: darkgray; font-size: 0.8em; margin-left: 5px;">{{ $video->user()->name }}</a>
+								</div>
 							</div>
 						@endif
 
