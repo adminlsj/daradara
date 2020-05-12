@@ -1081,6 +1081,8 @@ nav input[type=text]:focus {
 
 .single-show-player {
   padding-right: 0px;
+  padding-top: 15px; 
+  padding-left: 14px !important;
 }
 
 .single-show-list {
@@ -2593,6 +2595,8 @@ a > i {
 
   .single-show-player {
     padding-right: 15px;
+    padding-top: 0px;
+    padding-left: 0px !important;
   }
 
   .single-show-list {

@@ -17,7 +17,7 @@
     <div class="main-content">
 		<div style="background-color:#F5F5F5;">
 			<div class="row no-gutter">
-				<div class="col-md-8 single-show-player" style="background-color: #F9F9F9;">
+				<div class="col-md-8 single-show-player">
 					@include('video.singleShowWatch')
 				</div>
 
