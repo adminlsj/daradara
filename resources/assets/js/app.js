@@ -122,8 +122,8 @@ $(document).on("click", ".load-tag-videos", function(e) {
       $('#home-preload-videos').css('display', 'none');
     }
 
-    $('#sidebar-results').html(" ");
-    $('.ajax-loading').html('<img style="width: 40px; height: auto; padding-top: 25px; padding-bottom: 50px;" src="https://i.imgur.com/TcZjkZa.gif"/>');
+    $('#sidebar-results').css('opacity', '0.3');
+    $('.ajax-loading').html('<img style="width: 40px; height: auto; margin: 0; position: absolute; top: 150px; left: 50%; transform: translate(-50%, -50%);" src="https://i.imgur.com/TcZjkZa.gif"/>');
 
     var _throttleTimer = null;
     var _throttleDelay = 100;
@@ -173,7 +173,13 @@ $(document).on("click", ".load-tag-videos", function(e) {
 
             newDivName = "d" + String(new Date().valueOf());
             var $newhtml = $("<div id='" + newDivName + "'>" + data + "</div>");
-            $('#sidebar-results').append($newhtml);
+            if (page == 1) {
+              $('#sidebar-results').html($newhtml);
+              $('#sidebar-results').css('opacity', '1');
+              $('.ajax-loading').html(" ");
+            } else {
+              $('#sidebar-results').append($newhtml);
+            }
 
             var container = document.querySelector("#" + newDivName);
             var lazyImages = [].slice.call(container.querySelectorAll("img.lazy"));
