@@ -933,7 +933,7 @@ nav input[type=text]:focus {
 .related-watch-wrap {
   margin: 10px 15px;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1);
-  font-weight: bold;
+  font-weight: bold !important;
   border-radius: 3px;
   position: relative;
 }
