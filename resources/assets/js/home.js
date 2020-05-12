@@ -16,7 +16,7 @@ $(document).on("click", ".load-home-tag-videos", function(e) {
     current.addClass('active');
 
     $('#sidebar-' + genre + '-results').css('opacity', '0.3');
-    $('.ajax-' + genre + '-loading').html('<img style="width: 40px; height: auto; margin: 0; position: absolute; top: calc(50% - 7px); left: 50%; transform: translate(-50%, -50%);" src="https://i.imgur.com/TcZjkZa.gif"/>');
+    $('.ajax-' + genre + '-loading').html('<img style="width: 40px; height: auto; margin: 0; position: absolute; top: calc(50% - 5px); left: 50%; transform: translate(-50%, -50%);" src="https://i.imgur.com/TcZjkZa.gif"/>');
 
     $.ajax({
         type:'GET',
