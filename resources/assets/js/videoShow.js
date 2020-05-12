@@ -123,15 +123,8 @@ $('div#comment-create-form-wrapper').on("submit", "form#comment-create-form", fu
 });
 
 $("#comment-icon").click(function() {
-    if (is_mobile) {
-      $('html, body').animate({
-          scrollTop: $('#comment-create-form-wrapper').offset().top - 15
-      }, 'slow');
-    } else {
-      $('html, body').animate({
-          scrollTop: $('#comment-create-form-wrapper').offset().top - 65
-      }, 'slow');
-    }
+    $("#comment-section-wrapper").css('display', 'block');
+    $("#comment-text").focus();
 });
 
 $(document).ready(function(){

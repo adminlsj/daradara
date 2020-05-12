@@ -4,7 +4,7 @@
 	    	@include('video.singleShowRelated', ['source' => 'playlist'])
 		</div>
 	@endforeach
-	<hr style="margin: 7px 15px; border-color: #e5e5e5">
+	<hr style="margin: 15px; border-color: #e5e5e5">
 @endif
 
 @foreach ($related as $video)

@@ -101,11 +101,9 @@
   }
 </script>
 
-@if (!$is_mobile)
-  <div style="background-color: #F9F9F9; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1); padding: 5px 25px 0px 25px; margin-top: 10px;">
-    @include('video.comment-section-wrapper')
-  </div>
-@endif
+<div id="comment-section-wrapper" style="background-color: #F9F9F9; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1); padding: 5px 25px 0px 25px; margin-top: 10px;">
+  @include('video.comment-section-wrapper')
+</div>
 
 @include('video.shareModal')
 @include('video.userReportModal')

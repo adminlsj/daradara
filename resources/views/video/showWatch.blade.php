@@ -73,13 +73,6 @@
 							<div style="text-align: center;" class="ajax-loading"><img style="width: 40px; height: auto; padding-top: 14px; padding-bottom: 28px;" src="https://i.imgur.com/TcZjkZa.gif"/></div>
 						</div>
 					</div>
-
-					@if ($is_mobile)
-						<div style="padding: 0px 15px">
-							<hr style="margin: 0px; margin-top: 7px;">
-							@include('video.comment-section-wrapper')
-						</div>
-					@endif
 				</div>
 			</div>
 		</div>
