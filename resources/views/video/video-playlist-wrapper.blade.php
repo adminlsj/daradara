@@ -5,7 +5,7 @@
 			<div><a style="color: dimgray; font-weight: bold; font-size: 0.85em" href="{{ route('user.show', [$current->user()]) }}">{{ $current->user()->name }}</a></div>
 		</div>
 
-		<div style="height: 325px; overflow-y: scroll; padding: 5px 0px;">
+		<div style="max-height: 325px; overflow-y: scroll; padding: 5px 0px;">
 			@foreach ($videos as $video)
 			    <div class="hover-opacity-all" style="{{ $video->id == $current->id ? 'background-color: #e9e9e9' : '' }}; padding: 5px 10px;">
 			    	<a href="{{ route('video.watch') }}?v={{ $video->id }}&list={{ Request::get('list') }}" class="row no-gutter">
