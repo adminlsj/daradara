@@ -123,6 +123,7 @@ $('div#comment-create-form-wrapper').on("submit", "form#comment-create-form", fu
 });
 
 $("#comment-icon").click(function() {
+    $(".alert-circle").css('display', 'none');
     $("#comment-section-wrapper").css('display', 'block');
     $("#comment-text").focus();
 });

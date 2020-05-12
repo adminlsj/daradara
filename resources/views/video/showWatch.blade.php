@@ -37,14 +37,6 @@
 							</script>
 						</div>
 
-						<div style="position: relative; margin-top: 5px" class="tab">
-							@if (Request::get('list') != '')
-								<a href="{{ route('video.playlist') }}?list={{ $video->watch()->id }}"><button style="color: #222222; font-weight: 400;" class="tablinks video-tablinks">{{ $video->watch()->title }}</button></a>
-								<a style="position:absolute; top:12px; right:56px; text-decoration: none; {{ $prev != false ? 'color: #414141;' : 'pointer-events: none; color: #B9B9B9;' }}" href="{{ route('video.watch') }}?v={{ $prev }}&list={{ $video->watch()->id }}"><i class="material-icons noselect">skip_previous</i></a>
-								<a style="position:absolute; top:12px; right:15px; text-decoration: none; margin-left: 8px; {{ $next != false ? 'color: #414141;' : 'pointer-events: none; color: #B9B9B9;' }}" href="{{ route('video.watch') }}?v={{ $next }}&list={{ $video->watch()->id }}"><i class="material-icons noselect">skip_next</i></a>
-							@endif
-						</div>
-
 						@if ($video->watch() && Request::get('list') != $video->watch()->id)
 							<div class="hidden-xs hidden-sm" style="margin-top: 6px"></div>
 							<div id="suggested-watch-wrapper" class="related-watch-wrap hover-opacity-all">

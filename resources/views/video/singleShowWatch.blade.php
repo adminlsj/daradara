@@ -42,9 +42,12 @@
         @include('video.like-btn-wrapper')
       </div>
       <div id="comment-icon" class="single-icon-wrapper">
-        <div class="single-icon no-select">
+        <div class="single-icon no-select" style="position: relative;">
           <i class="material-icons">chat</i>
           <div>評論</div>
+          @if ($current->comments()->count() > 0)
+            <span style="position: absolute; margin-top: -55px; right: 11px;" class="alert-circle"></span>
+          @endif
         </div>
       </div>
       <div id="shareBtn" class="single-icon-wrapper" data-toggle="modal" data-target="#shareModal">
