@@ -52,7 +52,7 @@
 								  <div style="padding-right: 4px; position: relative;" class="col-xs-6 col-sm-6 col-md-6">
 								    <img class="lazy" style="width: 100%; height: 100%; border-top-left-radius: 3px; border-bottom-left-radius: 3px;" src="{{ $video->imgur16by9() }}" data-src="{{ $video->watch()->videos()->first()->imgurL() }}" data-srcset="{{ $video->watch()->videos()->first()->imgurL() }}" alt="{{ $video->watch()->title }}">
 								    <span>
-								      	<div style="margin: 0;position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+								      	<div style="margin: 0;position: absolute; top: calc(50% + 3px); left: 50%; transform: translate(-50%, -50%);">
 									      	<div>{{ $video->watch()->videos()->count() }}</div>
 									      	<i style="font-size: 1.6em; margin-right: -2px" class="material-icons">playlist_play</i>
 									    </div>
