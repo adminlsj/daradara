@@ -27,7 +27,7 @@
 						<div class="hidden-xs hidden-sm" style="margin: 15px 15px 0px 15px;">
 							<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 							<ins class="adsbygoogle"
-							     style="display:block; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1); border-radius: 3px"
+							     style="display:block; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1); border-radius: 3px; background-color: #F9F9F9"
 							     data-ad-client="ca-pub-4485968980278243"
 							     data-ad-slot="8455082664"
 							     data-ad-format="auto"

@@ -5,7 +5,7 @@
 			<div><a style="color: dimgray; font-weight: bold; font-size: 0.85em" href="{{ route('user.show', [$current->user()]) }}">{{ $current->user()->name }}</a></div>
 		</div>
 
-		<div class="playlist-scoll-wrapper" style="max-height: 325px; overflow-y: scroll; padding: 5px 0px;">
+		<div class="playlist-scoll-wrapper" style="max-height: 325px; overflow-y: scroll; padding: 5px 0px; background-color: #F9F9F9">
 			@foreach ($videos as $video)
 			    <div class="hover-opacity-all" style="{{ $video->id == $current->id ? 'background-color: #e9e9e9' : '' }}; padding: 5px 10px;">
 			    	<a href="{{ route('video.watch') }}?v={{ $video->id }}&list={{ Request::get('list') }}" class="row no-gutter">
@@ -23,7 +23,7 @@
 @endif
 
 @foreach ($related as $video)
-    <div class="related-watch-wrap hover-opacity-all">
+    <div class="related-watch-wrap hover-opacity-all" style="background-color: #F9F9F9">
     	@include('video.singleShowRelated', ['source' => 'video'])
 	</div>
 @endforeach
