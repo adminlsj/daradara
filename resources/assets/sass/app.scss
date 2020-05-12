@@ -931,12 +931,14 @@ nav input[type=text]:focus {
 }
 
 .related-watch-wrap {
-  margin: 14px 0px 14px 15px;
-  padding-right: 15px;
+  margin: 10px 15px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1);
+  font-weight: bold;
+  border-radius: 3px;
 }
 
 .related-watch-wrap .related-watch-title {
-  padding: 3px 0px;
+  padding: 5px 7px !important;
 }
 
 .bottom-nav {
@@ -2581,15 +2583,6 @@ a > i {
 
   .single-show-list {
     padding-left: 15px;
-  }
-
-  .related-watch-wrap {
-    margin: 0px;
-    padding: 7px 15px;
-  }
-
-  .related-watch-wrap .related-watch-title {
-    padding: 1px 0px 0px 0px;
   }
 
   .mobile-container {
