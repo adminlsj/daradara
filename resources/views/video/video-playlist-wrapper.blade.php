@@ -11,7 +11,7 @@
 			    	<a href="{{ route('video.watch') }}?v={{ $video->id }}&list={{ Request::get('list') }}" style="position: relative" class="row no-gutter">
 					  <div style="padding-right: 4px; position: relative;" class="col-xs-4 col-sm-4 col-md-4">
 					    <img class="lazy" style="width: 100%; height: 100%; border-top-left-radius: 3px; border-bottom-left-radius: 3px;" src="{{ $video->imgur16by9() }}" data-src="{{ $video->imgurL() }}" data-srcset="{{ $video->imgurL() }}" alt="{{ $video->title }}">
-					    <span style="position: absolute; bottom: 0px; left: 6px; color: white; font-size: 1.2em;">{{ $videos->count() - $loop->index }}</span>
+					    <span style="position: absolute; bottom: 0px; left: 5px; color: white; font-weight: bold; font-size: 1.1em;">{{ $videos->count() - $loop->index }}</span>
 					  </div>
 					  <div style="padding-left: 4px;" class="col-xs-8 col-sm-8 col-md-8" style="position: relative;">
 					    <h4 style="font-size: 1.0em; font-weight: bold; margin-top: 0px; color: #444444; line-height: 19px; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;">{{ $video->title }}</h4>
