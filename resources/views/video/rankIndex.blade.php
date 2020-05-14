@@ -25,9 +25,11 @@
 				@endforeach
 			@else
 				<a class="load-tag-videos" style="margin-right: 5px;">#正版動漫</a>
+				<a class="load-tag-videos" style="margin-right: 5px;">#anime1</a>
 				<a class="load-tag-videos" style="margin-right: 5px;">#同人動畫</a>
 				<a class="load-tag-videos" style="margin-right: 5px;">#動漫講評</a>
 				<a class="load-tag-videos" style="margin-right: 5px;">#明星</a>
+				<a class="load-tag-videos" style="margin-right: 5px;">#Gimy劇迷</a>
 				<a class="load-tag-videos" style="margin-right: 5px;">#日本人氣YouTuber</a>
 				<a class="load-tag-videos" style="margin-right: 5px;">#日本創意廣告</a>
 				<a class="load-tag-videos" style="margin-right: 5px;">#日劇講評</a>
