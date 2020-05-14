@@ -1090,10 +1090,6 @@ nav input[type=text]:focus {
   display: none !important;
 }
 
-.single-show-player, .single-show-list {
-  width: 100%;
-}
-
 .single-show-player {
   padding-right: 0px;
   padding-top: 15px; 
@@ -2621,6 +2617,10 @@ a > i {
 
   .social-login-wrapper-right {
     margin-top: 10px;
+  }
+
+  .single-show-player, .single-show-list {
+    width: 100%;
   }
 
   .single-show-player {
