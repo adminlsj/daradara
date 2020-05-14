@@ -1,5 +1,12 @@
 @extends('layouts.app')
 
+@section('head')
+    @parent
+    <title>{{ $user->name }}&nbsp;-&nbsp;娛見日本 LaughSeeJapan</title>
+    <meta name="title" content="{{ $user->name }} - 娛見日本 LaughSeeJapan">
+    <meta name="description" content="{{ $user->name }}">
+@endsection
+
 @section('nav')
 	@include('layouts.nav-main-original', ['theme' => 'white'])
 @endsection

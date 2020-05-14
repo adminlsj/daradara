@@ -55,7 +55,13 @@ class HomeController extends Controller
             }
 
         } else {
-            $videos = Video::where('tags', 'like', '%'.$tag.'%')->orderBy('uploaded_at', 'desc')->limit(8)->get();
+            if ($tag == 'anime1') {
+                $videos= Video::where('user_id', 746)->orderBy('uploaded_at', 'desc')->limit(8)->get();
+            } elseif ($tag == 'Gimy劇迷') {
+                $videos= Video::where('user_id', 750)->orderBy('uploaded_at', 'desc')->limit(8)->get();
+            } else {
+                $videos = Video::where('tags', 'like', '%'.$tag.'%')->orderBy('uploaded_at', 'desc')->limit(8)->get();
+            }
         }
 
         return $this->newSingleLoadMoreSliderVideosHTML($videos);

@@ -24,14 +24,13 @@
 				<div class="col-md-4 single-show-list">
 
 					<div style="padding-bottom: 7px;">
-						<div class="hidden-xs hidden-sm" style="margin: 15px;">
+						<div class="hidden-xs hidden-sm" style="margin: 15px 15px 10px 15px;">
 							<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+							<!-- fixed square ad -->
 							<ins class="adsbygoogle"
-							     style="display:block; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1); border-radius: 3px; background-color: #F9F9F9;"
+							     style="display:inline-block;width:100%;height:370px;box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1); border-radius: 3px; background-color: #F9F9F9;"
 							     data-ad-client="ca-pub-4485968980278243"
-							     data-ad-slot="8455082664"
-							     data-ad-format="auto"
-							     data-full-width-responsive="true"></ins>
+							     data-ad-slot="2765106128"></ins>
 							<script>
 							     (adsbygoogle = window.adsbygoogle || []).push({});
 							</script>
@@ -40,7 +39,7 @@
 						@if ($video->watch() && Request::get('list') != $video->watch()->id)
 							<div id="suggested-watch-wrapper" class="related-watch-wrap hover-opacity-all" style="background-color: #F9F9F9">
 								<a href="{{ route('video.playlist') }}?list={{ $video->watch()->id }}" class="row no-gutter">
-								  <div style="padding-right: 4px; position: relative;" class="col-xs-6 col-sm-6 col-md-6">
+								  <div style="padding-right: 4px; position: relative; width: 175px;" class="col-xs-6 col-sm-6 col-md-6">
 								    <img class="lazy" style="width: 100%; height: 100%; border-top-left-radius: 3px; border-bottom-left-radius: 3px;" src="{{ $video->imgur16by9() }}" data-src="{{ $video->watch()->videos()->first()->imgurL() }}" data-srcset="{{ $video->watch()->videos()->first()->imgurL() }}" alt="{{ $video->watch()->title }}">
 								    <span>
 								      	<div style="margin: 0;position: absolute; top: calc(50% + 3px); left: 50%; transform: translate(-50%, -50%);">
@@ -53,8 +52,8 @@
 								    <h4>{{ $video->watch()->title }}</h4>
 								  </div>
 								</a>
-								<div style="position: absolute; bottom: 7px; left: calc(50% + 7px);">
-									<img class="lazy" style="float:left; width: 18px; height: 18px; border: 1px solid #f5f5f5; margin-top: 1px" src="{{ $video->user()->avatarCircleB() }}" data-src="{{ $video->user()->avatar == null ? $video->user()->avatarDefault() : $video->user()->avatar->filename }}" data-srcset="{{ $video->user()->avatar == null ? $video->user()->avatarDefault() : $video->user()->avatar->filename }}">
+								<div style="position: absolute; bottom: 7px; left: 182px">
+									<img class="lazy" style="float:left; width: 18px; height: 18px; margin-top: 1px" src="{{ $video->user()->avatarCircleB() }}" data-src="{{ $video->user()->avatar == null ? $video->user()->avatarDefault() : $video->user()->avatar->filename }}" data-srcset="{{ $video->user()->avatar == null ? $video->user()->avatarDefault() : $video->user()->avatar->filename }}">
 									<a href="{{ route('user.show', [$video->user()]) }}" style="color: darkgray; font-size: 0.8em; margin-left: 5px;">{{ $video->user()->name }}</a>
 								</div>
 							</div>

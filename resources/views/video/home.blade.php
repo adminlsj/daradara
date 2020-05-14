@@ -39,6 +39,7 @@
 			<div class="subscribes-tab home-anime-wrapper" style="margin-bottom: 13px;">
 		    	<a id="default-anime-tag" class="load-home-tag-videos active" style="margin-right: 5px;">全部推薦內容</a>
 		    	<a class="load-home-tag-videos" style="margin-right: 5px;">#正版動漫</a>
+		    	<a class="load-home-tag-videos" style="margin-right: 5px;">#anime1</a>
 				<a class="load-home-tag-videos" style="margin-right: 5px;">#同人動畫</a>
 				<a class="load-home-tag-videos" style="margin-right: 5px;">#動漫講評</a>
 				<a class="load-home-tag-videos" style="margin-right: 5px;">#MAD·AMV</a>
@@ -61,14 +62,14 @@
 		    </div>
 			<div class="subscribes-tab home-artist-wrapper" style="margin-bottom: 13px;">
 		    	<a id="default-artist-tag" class="load-home-tag-videos active" style="margin-right: 5px;">全部推薦內容</a>
-		    	<a class="load-home-tag-videos" style="margin-right: 5px;">#佐藤健</a>
 				<a class="load-home-tag-videos" style="margin-right: 5px;">#嵐Arashi</a>
-				<a class="load-home-tag-videos" style="margin-right: 5px;">#石原聰美</a>
+				<a class="load-home-tag-videos" style="margin-right: 5px;">#Gimy劇迷</a>
 				<a class="load-home-tag-videos" style="margin-right: 5px;">#貴婦松子Deluxe</a>
 				<a class="load-home-tag-videos" style="margin-right: 5px;">#Downtown</a>
 				<a class="load-home-tag-videos" style="margin-right: 5px;">#倫敦靴子1號2號</a>
+				<a class="load-home-tag-videos" style="margin-right: 5px;">#佐藤健</a>
+				<a class="load-home-tag-videos" style="margin-right: 5px;">#石原聰美</a>
 				<a class="load-home-tag-videos" style="margin-right: 5px;">#新垣結衣</a>
-				<a class="load-home-tag-videos" style="margin-right: 5px;">#橋本環奈</a>
 			</div>
 			<div class="row no-gutter load-more-container">
 		        <div class="video-sidebar-wrapper" style="position: relative;">

@@ -1,5 +1,12 @@
 @extends('layouts.app')
 
+@section('head')
+    @parent
+    <title>{{ $user->name }}&nbsp;-&nbsp;娛見日本 LaughSeeJapan</title>
+    <meta name="title" content="{{ $user->name }} - 娛見日本 LaughSeeJapan">
+    <meta name="description" content="{{ $user->name }}">
+@endsection
+
 @section('nav')
 	@include('layouts.nav-main-original', ['theme' => 'white'])
 @endsection
@@ -81,11 +88,11 @@
 
     @if ($user->id == 746)
       <div class="row no-gutter load-more-container" style="margin-top: 5px;">
-        <a href="{{ route('user.show', [5190, 'playlists']) }}" style="color: inherit; text-decoration: none">
+        <a href="{{ route('user.show', [5190]) }}" style="color: inherit; text-decoration: none">
           <h3 class="user-show-title">精選頻道<i style="font-size: 0.85em; vertical-align: middle; margin-top: -4px; margin-left: 5px" class="material-icons">arrow_forward_ios</i></h3>
         </a>
         <div class="video-sidebar-wrapper">
-          @foreach (App\Watch::where('user_id', 5190)->inRandomOrder()->get() as $watch)
+          @foreach (App\Watch::where('user_id', 5190)->inRandomOrder()->limit(8)->get() as $watch)
             @if ($watch->videos()->first())
               <div class="{{ $loop->iteration > 4 ? 'hidden-xs hidden-sm' : ''}}">
                 @include('video.singleLoadMoreSliderPlaylists', ['video' => $watch->videos()->first()])
