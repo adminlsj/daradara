@@ -1,5 +1,5 @@
 <div class="separator">或</div>
-<div class="row" style="text-align: center">
+<div class="row" style="text-align: center; padding: 0px 15px">
   <div class="col-xs-12 col-md-6">
     <a href="{{ url('/auth/facebook') }}" style="text-decoration: none; color: #4267B2">
       <div class="social-login-wrapper-left" style="padding: 10px; border: 1px solid #e9e9e9;">
