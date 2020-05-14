@@ -1090,11 +1090,15 @@ nav input[type=text]:focus {
   display: none !important;
 }
 
+.single-show-player, .single-show-list {
+  width: 100%;
+}
+
 .single-show-player {
   padding-right: 0px;
   padding-top: 15px; 
   padding-left: 14px !important;
-  width: calc(100% - 400px)
+  width: calc(100% - 400px);
 }
 
 .single-show-list {
@@ -2358,10 +2362,6 @@ a > i {
 }
 
 @media (max-width: 991px) {
-  .single-show-player, .single-show-list {
-    width: 100%;
-  }
-
   #content-div {
     padding-bottom: 50px
   }
