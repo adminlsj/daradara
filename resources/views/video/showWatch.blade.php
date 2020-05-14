@@ -48,7 +48,7 @@
 									    </div>
 								    </span>
 								  </div>
-								  <div style="padding-left: 4px;" class="col-xs-6 col-sm-6 col-md-6 related-watch-title">
+								  <div style="padding-left: 4px; width: calc(100% - 175px)" class="col-xs-6 col-sm-6 col-md-6 related-watch-title">
 								    <h4>{{ $video->watch()->title }}</h4>
 								  </div>
 								</a>

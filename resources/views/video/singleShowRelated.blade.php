@@ -1,8 +1,8 @@
 <a href="{{ route('video.watch') }}?v={{ $video->id }}{{ $source == 'playlist' ? '&list='.Request::get('list') : '' }}" class="row no-gutter">
-  <div style="padding-right: 4px; position: relative; width: 175px;" class="col-xs-6 col-sm-6 col-md-6">
+  <div style="padding-right: 4px; width: 175px;" class="col-xs-6 col-sm-6 col-md-6">
     <img class="lazy" style="width: 100%; height: 100%; border-top-left-radius: 3px; border-bottom-left-radius: 3px;" src="{{ $video->imgur16by9() }}" data-src="{{ $video->imgurL() }}" data-srcset="{{ $video->imgurL() }}" alt="{{ $video->title }}">
   </div>
-  <div style="padding-left: 4px;" class="col-xs-6 col-sm-6 col-md-6 related-watch-title" style="position: relative;">
+  <div style="padding-left: 4px; width: calc(100% - 175px)" class="col-xs-6 col-sm-6 col-md-6 related-watch-title">
     <h4>{{ $video->title }}</h4>
   </div>
 </a>
