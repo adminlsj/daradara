@@ -28,7 +28,7 @@
 							<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 							<!-- fixed square ad -->
 							<ins class="adsbygoogle"
-							     style="display:inline-block;width:100%;height:370px;box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1); border-radius: 3px; background-color: #F9F9F9;"
+							     style="display:inline-block;width:100%;height:309px;box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1); border-radius: 3px; background-color: #F9F9F9;"
 							     data-ad-client="ca-pub-4485968980278243"
 							     data-ad-slot="2765106128"></ins>
 							<script>
