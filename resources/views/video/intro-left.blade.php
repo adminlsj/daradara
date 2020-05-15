@@ -1,12 +1,10 @@
 <div style="position: relative; text-align: center" class="hover-opacity-all">
 	<a href="{{ $link }}">
-		<video style="width: 100%; height: 100%;" poster="{{ $image }}">
-			<source src="{!! $first->source() !!}" type="video/mp4">
-		</video>
-		<div style="position: absolute; bottom: 5px; color: white; background-color: rgba(0, 0, 0, .8); width: 100%; height: 40px; padding-top: 10px"><i style="vertical-align:middle; font-size: 1.95em; margin-top: -3px; margin-right: 7px; margin-left: -3px" class="material-icons">play_arrow</i><span style="font-size: 1.05em; font-weight: 500">全部播放</span></div>
+		<img class="lazy" style="width: 100%; height: 100%;" src="https://i.imgur.com/JMcgEkPl.jpg" data-src="{{ $image }}" data-srcset="{{ $image }}" alt="{{ $title }}">
+		<div style="position: absolute; bottom: 0px; color: white; background-color: rgba(0, 0, 0, .8); width: 100%; height: 40px; padding-top: 10px"><i style="vertical-align:middle; font-size: 1.95em; margin-top: -3px; margin-right: 7px; margin-left: -3px" class="material-icons">play_arrow</i><span style="font-size: 1.05em; font-weight: 500">全部播放</span></div>
 	</a>
 </div>
-<h3 style="line-height: 32px; margin-top: 13px">{{ $watch->title }}</h3>
+<h3 style="line-height: 32px">{{ $watch->title }}</h3>
 <h5 style="color: dimgray; font-weight: 400; margin-top: 15px">{{ $videos->count()}} 部影片 <small>•</small> {{ Carbon\Carbon::parse($watch->updated_at)->diffForHumans() }}更新</h5>
 <h5 style="color: dimgray; font-weight: 400; margin-top: 15px; line-height: 20px">{{ $watch->description }}</h5>
 <hr style="border-color: #e1e1e1;">
