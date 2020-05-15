@@ -7,28 +7,16 @@
     <meta name="description" content="{{ $watch->description }}">
 
     @if ($first != null)
-    	<script type="application/ld+json">
-        {
-          "@context": "https://schema.org",
-          "@type": "VideoObject",
-          "name": "{{ $watch->title }}",
-          "description": "{{ $watch->description }}",
-          "thumbnailUrl": [
-            "https://i.imgur.com/{{ $first->imgur }}l.png"
-           ],
-          "uploadDate": "{{ \Carbon\Carbon::parse($first->created_at)->format('Y-m-d\Th:i:s').'+00:00' }}",
-          @if ($first->outsource && strpos($first->sd, 'player.bilibili.com') === false)
-              "embedUrl": "{!! $first->source() !!}",
-          @else
-              "contentUrl": "{!! $first->source() !!}",
-          @endif
-          "interactionStatistic": {
-            "@type": "InteractionCounter",
-            "interactionType": { "@type": "http://schema.org/WatchAction" },
-            "userInteractionCount": {{ $first->views }}
-          }
-        }
-		</script>
+      <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "ImageObject",
+        "name": "{{ $watch->title }}",
+        "description": "{{ $watch->description }}",
+        "contentUrl": "https://i.imgur.com/{{ $first->imgur }}l.png",
+        "uploadDate": "{{ \Carbon\Carbon::parse($watch->updated_at)->format('Y-m-d\Th:i:s').'+00:00' }}"
+      }
+      </script>
     @endif
 @endsection
 
