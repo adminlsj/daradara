@@ -9,7 +9,7 @@
     @include('video.sidebarMenu', ['theme' => 'white'])
 </div>
 
-<div class="main-content home">
+<div class="main-content">
 	<div style="background-color: #F5F5F5;">
 
 		@if (Auth::check() && auth()->user()->subscribes()->first())
@@ -27,7 +27,7 @@
 		    </div>
 
 		@else
-			<div class="home-genre-banner-wrapper" style="background-color: #EFE3E3;">
+			<div class="home-genre-banner-wrapper home" style="background-color: #EFE3E3;">
 				<img style="width: auto; height: 100%; float: right" src="https://i.imgur.com/Qlawqysh.png">
 				<div class="home-genre-panel">
 		  			<img class="lazy" style="float:left; width: 70px; height: 70px; border-top-left-radius: 3px; border-bottom-left-radius: 3px;" src="https://i.imgur.com/sMSpYFXb.jpg" data-src="https://i.imgur.com/kYs5o10h.jpg" data-srcset="https://i.imgur.com/kYs5o10h.jpg">
@@ -52,7 +52,7 @@
 		        </div>
 		    </div>
 
-		    <div class="home-genre-banner-wrapper" style="background-color: #EAEBF7;">
+		    <div class="home-genre-banner-wrapper home" style="background-color: #EAEBF7;">
 				<img style="width: auto; height: 100%; float: right; -webkit-transform: scaleX(-1); transform: scaleX(-1);" src="https://i.imgur.com/Qq8Vf7Uh.jpg">
 				<div class="home-genre-panel">
 		  			<img class="lazy" style="float:left; width: 70px; height: 70px; border-top-left-radius: 3px; border-bottom-left-radius: 3px;" src="https://i.imgur.com/sMSpYFXb.jpg" data-src="https://i.imgur.com/OQu2LYfh.jpg" data-srcset="https://i.imgur.com/OQu2LYfh.jpg">
@@ -80,7 +80,7 @@
 		        </div>
 		    </div>
 
-		    <div class="home-genre-banner-wrapper" style="background-color: #C5E2EC;">
+		    <div class="home-genre-banner-wrapper home" style="background-color: #C5E2EC;">
 				<img style="width: auto; height: 100%; float: right; padding-right: 15px" src="https://i.imgur.com/7YbBOwNh.jpg">
 				<div class="home-genre-panel">
 		  			<img class="lazy" style="float:left; width: 70px; height: 70px; border-top-left-radius: 3px; border-bottom-left-radius: 3px;" src="https://i.imgur.com/sMSpYFXb.jpg" data-src="https://i.imgur.com/lnTT7tmh.jpg" data-srcset="https://i.imgur.com/lnTT7tmh.jpg">
