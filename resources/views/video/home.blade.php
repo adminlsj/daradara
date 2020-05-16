@@ -47,7 +47,7 @@
 		    </div>
 			<div class="row no-gutter load-more-container" style="margin-top: 13px; padding-bottom: 5px;">
 		        <div class="video-sidebar-wrapper" style="position: relative;">
-			        <div id="sidebar-anime-results"><!-- results appear here --></div>
+			        <div id="sidebar-anime-results" style="position: relative"><!-- results appear here --></div>
 			        <div style="text-align: center;" class="ajax-anime-loading"><img style="width: 40px; height: auto; padding-top: 25px; padding-bottom: 50px;" src="https://i.imgur.com/TcZjkZa.gif"/></div>
 		        </div>
 		    </div>
@@ -75,7 +75,7 @@
 		    </div>
 			<div class="row no-gutter load-more-container" style="margin-top: 13px; padding-bottom: 5px;">
 		        <div class="video-sidebar-wrapper" style="position: relative;">
-			        <div id="sidebar-artist-results"><!-- results appear here --></div>
+			        <div id="sidebar-artist-results" style="position: relative"><!-- results appear here --></div>
 			        <div style="text-align: center;" class="ajax-artist-loading"><img style="width: 40px; height: auto; padding-top: 25px; padding-bottom: 50px;" src="https://i.imgur.com/TcZjkZa.gif"/></div>
 		        </div>
 		    </div>
@@ -99,7 +99,7 @@
 		    </div>
 			<div class="row no-gutter load-more-container" style="margin-top: 13px; padding-bottom: 5px;">
 		        <div class="video-sidebar-wrapper" style="position: relative;">
-			        <div id="sidebar-youtuber-results"><!-- results appear here --></div>
+			        <div id="sidebar-youtuber-results" style="position: relative"><!-- results appear here --></div>
 			        <div style="text-align: center;" class="ajax-youtuber-loading"><img style="width: 40px; height: auto; padding-top: 25px; padding-bottom: 50px;" src="https://i.imgur.com/TcZjkZa.gif"/></div>
 		        </div>
 		    </div>
