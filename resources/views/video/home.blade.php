@@ -45,7 +45,7 @@
 					<a class="load-home-tag-videos" style="margin-right: 5px;">#MAD·AMV</a>
 				</div>
 		    </div>
-			<div class="row no-gutter load-more-container load-anime-container" style="margin-top: 13px; padding-bottom: 5px;">
+			<div class="row no-gutter load-more-container" style="margin-top: 13px; padding-bottom: 5px;">
 		        <div class="video-sidebar-wrapper" style="position: relative;">
 			        <div id="sidebar-anime-results"><!-- results appear here --></div>
 			        <div style="text-align: center;" class="ajax-anime-loading"><img style="width: 40px; height: auto; padding-top: 25px; padding-bottom: 50px;" src="https://i.imgur.com/TcZjkZa.gif"/></div>
@@ -73,7 +73,7 @@
 					<a class="load-home-tag-videos" style="margin-right: 5px;">#新垣結衣</a>
 				</div>
 		    </div>
-			<div class="row no-gutter load-more-container load-artist-container" style="margin-top: 13px; padding-bottom: 5px;">
+			<div class="row no-gutter load-more-container" style="margin-top: 13px; padding-bottom: 5px;">
 		        <div class="video-sidebar-wrapper" style="position: relative;">
 			        <div id="sidebar-artist-results"><!-- results appear here --></div>
 			        <div style="text-align: center;" class="ajax-artist-loading"><img style="width: 40px; height: auto; padding-top: 25px; padding-bottom: 50px;" src="https://i.imgur.com/TcZjkZa.gif"/></div>
@@ -97,7 +97,7 @@
 				<a class="load-home-tag-videos" style="margin-right: 5px;">#費米研究所</a>
 				</div>
 		    </div>
-			<div class="row no-gutter load-more-container load-youtuber-container" style="margin-top: 13px; padding-bottom: 5px;">
+			<div class="row no-gutter load-more-container" style="margin-top: 13px; padding-bottom: 5px;">
 		        <div class="video-sidebar-wrapper" style="position: relative;">
 			        <div id="sidebar-youtuber-results"><!-- results appear here --></div>
 			        <div style="text-align: center;" class="ajax-youtuber-loading"><img style="width: 40px; height: auto; padding-top: 25px; padding-bottom: 50px;" src="https://i.imgur.com/TcZjkZa.gif"/></div>

@@ -15,7 +15,7 @@ $(document).on("click", ".load-home-tag-videos", function(e) {
     previous.removeClass("active");
     current.addClass('active');
 
-    $('.load-' + genre + '-container').css('opacity', '0.3');
+    $('#sidebar-' + genre + '-results').css('opacity', '0.3');
     $('.ajax-' + genre + '-loading').html('<img style="width: 40px; height: auto; margin: 0; position: absolute; top: 150px; left: 50%; transform: translate(-50%, -50%);" src="https://i.imgur.com/TcZjkZa.gif"/>');
 
     $.ajax({
@@ -30,7 +30,7 @@ $(document).on("click", ".load-home-tag-videos", function(e) {
         newDivName = "d" + String(new Date().valueOf());
         var $newhtml = $("<div id='" + newDivName + "'>" + data + "</div>");
         $('#sidebar-' + genre + '-results').html($newhtml);
-        $('.load-' + genre + '-container').css('opacity', '1');
+        $('#sidebar-' + genre + '-results').css('opacity', '1');
 
         var container = document.querySelector("#" + newDivName);
         var lazyImages = [].slice.call(container.querySelectorAll("img.lazy"));
