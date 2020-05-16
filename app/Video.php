@@ -67,6 +67,11 @@ class Video extends Model
         return "https://i.imgur.com/sMSpYFXb.jpg";
     }
 
+    public function imgur()
+    {
+        return "https://i.imgur.com/".$this->imgur.".jpg";
+    }
+
     public function imgurS()
     {
         return "https://i.imgur.com/".$this->imgur."s.jpg";
