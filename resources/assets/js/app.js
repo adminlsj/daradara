@@ -143,6 +143,7 @@ $(document).on("click", ".load-tag-videos", function(e) {
 
     $('#sidebar-results').css('opacity', '0.3');
     $('.ajax-loading').html('<img style="width: 40px; height: auto; margin: 0; position: absolute; top: 150px; left: 50%; transform: translate(-50%, -50%);" src="https://i.imgur.com/TcZjkZa.gif"/>');
+    $('.ajax-loading-default').html('<img style="width: 40px; height: auto; padding-top: 20px; padding-bottom: 50px;" src="https://i.imgur.com/TcZjkZa.gif"/>');
 
     var _throttleTimer = null;
     var _throttleDelay = 100;
