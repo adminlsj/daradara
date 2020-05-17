@@ -38,7 +38,7 @@
 		  			</div>
 		        </div>
 		        <div class="subscribes-tab home-anime-wrapper" style="border: none; position: absolute; bottom: -10px;">
-			    	<a id="default-anime-tag" class="load-home-tag-videos active" style="margin-right: 5px;">全部<span class="hidden-xs">推薦內容</span></a>
+			    	<a id="default-anime-tag" class="load-home-tag-videos active" style="margin-right: 5px;">全部推薦<span class="hidden-xs">內容</span></a>
 			    	<a class="load-home-tag-videos" style="margin-right: 5px;">#正版動漫</a>
 			    	<a class="load-home-tag-videos" style="margin-right: 5px;">#anime1</a>
 					<a class="load-home-tag-videos" style="margin-right: 5px;">#同人動畫</a>
