@@ -30,10 +30,11 @@
 			<div class="home-genre-banner-wrapper home" style="background-color: #EFE3E3;">
 				<img style="width: auto; height: 100%; float: right" src="https://i.imgur.com/Qlawqysh.png">
 				<div class="home-genre-panel">
-		  			<img class="lazy" style="float:left; width: 70px; height: 70px; border-top-left-radius: 3px; border-bottom-left-radius: 3px;" src="https://i.imgur.com/sMSpYFXb.jpg" data-src="https://i.imgur.com/kYs5o10h.jpg" data-srcset="https://i.imgur.com/kYs5o10h.jpg">
+		  			<img class="lazy" style="float:left; width: 70px; height: 70px; border-top-left-radius: 3px; border-bottom-left-radius: 3px;" src="https://i.imgur.com/sMSpYFXb.jpg" data-src="https://i.imgur.com/i0qmoB7.gif" data-srcset="https://i.imgur.com/i0qmoB7.gif">
 		  			<div style="height: 70px; margin-left: 85px; padding-top: 9px; padding-right: 15px;">
 		  				<div style="font-size: 1.5em; font-weight: bold; color: #444444">動漫領域</div>
-		  				<div style="color: gray; font-weight: bold; color: #666666">只有你想不到的，沒有你找不到的。</div>
+		  				<div class="hidden-xs" style="color: gray; font-weight: bold; color: #666666">只有你想不到的，沒有你找不到的。</div>
+		  				<div class="hidden-sm hidden-md hidden-lg" style="color: gray; font-weight: bold; color: #666666">只有想不到，沒有找不到</div>
 		  			</div>
 		        </div>
 		        <div class="subscribes-tab home-anime-wrapper" style="border: none; position: absolute; bottom: -10px;">
@@ -55,10 +56,10 @@
 		    <div class="home-genre-banner-wrapper home" style="background-color: #EAEBF7;">
 				<img style="width: auto; height: 100%; float: right; -webkit-transform: scaleX(-1); transform: scaleX(-1);" src="https://i.imgur.com/Qq8Vf7Uh.jpg">
 				<div class="home-genre-panel">
-		  			<img class="lazy" style="float:left; width: 70px; height: 70px; border-top-left-radius: 3px; border-bottom-left-radius: 3px;" src="https://i.imgur.com/sMSpYFXb.jpg" data-src="https://i.imgur.com/OQu2LYfh.jpg" data-srcset="https://i.imgur.com/OQu2LYfh.jpg">
+		  			<img class="lazy" style="float:left; width: 70px; height: 70px; border-top-left-radius: 3px; border-bottom-left-radius: 3px;" src="https://i.imgur.com/sMSpYFXb.jpg" data-src="https://i.imgur.com/F4MuxgA.gif" data-srcset="https://i.imgur.com/F4MuxgA.gif">
 		  			<div style="height: 70px; margin-left: 85px; padding-top: 9px; padding-right: 15px">
 		  				<div style="font-size: 1.5em; font-weight: bold; color: #444444">明星專區</div>
-		  				<div style="color: gray; font-weight: bold; color: #666666">日本明星．綜藝．劇集．直播．情報</div>
+		  				<div style="color: gray; font-weight: bold; color: #666666">日本明星．綜藝．劇集<span class="hidden-xs">．直播．情報</span></div>
 		  			</div>
 		        </div>
 		        <div class="subscribes-tab home-artist-wrapper" style="border: none; position: absolute; bottom: -10px;">
@@ -83,10 +84,10 @@
 		    <div class="home-genre-banner-wrapper home" style="background-color: #C5E2EC;">
 				<img style="width: auto; height: 100%; float: right; padding-right: 15px" src="https://i.imgur.com/7YbBOwNh.jpg">
 				<div class="home-genre-panel">
-		  			<img class="lazy" style="float:left; width: 70px; height: 70px; border-top-left-radius: 3px; border-bottom-left-radius: 3px;" src="https://i.imgur.com/sMSpYFXb.jpg" data-src="https://i.imgur.com/lnTT7tmh.jpg" data-srcset="https://i.imgur.com/lnTT7tmh.jpg">
+		  			<img class="lazy" style="float:left; width: 70px; height: 70px; border-top-left-radius: 3px; border-bottom-left-radius: 3px;" src="https://i.imgur.com/sMSpYFXb.jpg" data-src="https://i.imgur.com/wR0VuiK.gif" data-srcset="https://i.imgur.com/wR0VuiK.gif">
 		  			<div style="height: 70px; margin-left: 85px; padding-top: 9px; padding-right: 15px">
 		  				<div style="font-size: 1.5em; font-weight: bold; color: #444444">日本人氣YouTuber</div>
-		  				<div style="color: gray; font-weight: bold; color: #666666">日本超人氣YouTuber & Twitter推主</div>
+		  				<div style="color: gray; font-weight: bold; color: #666666"><span class="hidden-xs">日本超人氣</span>YouTuber & Twitter推主</div>
 		  			</div>
 		        </div>
 		        <div class="subscribes-tab home-youtuber-wrapper" style="border: none; position: absolute; bottom: -10px;">
