@@ -27,8 +27,8 @@
 		    </div>
 
 		@else
-			<div class="home-genre-banner-wrapper home" style="background-color: #F7D9D5;">
-				<img style="width: auto; height: 100%; float: right" src="https://i.imgur.com/drNeWcrh.jpg">
+			<div class="home-genre-banner-wrapper home" style="background-color: #676358;">
+				<img style="width: auto; height: 100%; float: right" src="https://i.imgur.com/9HD4lash.png">
 				<div class="home-genre-panel">
 		  			<img class="lazy" style="float:left; width: 70px; height: 70px; border-top-left-radius: 3px; border-bottom-left-radius: 3px;" src="https://i.imgur.com/sMSpYFXb.jpg" data-src="https://i.imgur.com/i0qmoB7.gif" data-srcset="https://i.imgur.com/i0qmoB7.gif">
 		  			<div style="height: 70px; margin-left: 85px; padding-top: 9px; padding-right: 15px;">
