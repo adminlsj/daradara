@@ -1,0 +1,67 @@
+<?php
+
+namespace App\Console\Commands;
+
+use Illuminate\Console\Command;
+use App\Video;
+
+class UpdateVideos extends Command
+{
+    /**
+     * The name and signature of the console command.
+     *
+     * @var string
+     */
+    protected $signature = 'laughseejapan:update-videos';
+
+    /**
+     * The console command description.
+     *
+     * @var string
+     */
+    protected $description = 'Update all videos in terms of links from quan and qzone';
+
+    /**
+     * Create a new command instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
+    /**
+     * Execute the console command.
+     *
+     * @return mixed
+     */
+    public function handle()
+    {
+        $quan = Video::where('sd', 'like', '%1098_%')->get();
+        $qzone = Video::where('sd', 'like', '%1006_%')->get();
+        
+        foreach ($quan as $video) {
+            $sd = $this->get_string_between($video->sd, 'vmtt.tc.qq.com/', '.f0.mp4');
+            $video->sd = Video::getSourceQQ("https://quan.qq.com/video/".$sd);
+            $video->save();
+        }
+
+        foreach ($qzone as $video) {
+            $sd = $this->get_string_between($video->sd, 'vwecam.tc.qq.com/', '.f0.mp4');
+            $video->sd = Video::getSourceQZ($sd);
+            $video->save();
+        }
+
+        $this->info("Done!");
+    }
+
+    function get_string_between($string, $start, $end){
+        $string = ' ' . $string;
+        $ini = strpos($string, $start);
+        if ($ini == 0) return '';
+        $ini += strlen($start);
+        $len = strpos($string, $end, $ini) - $ini;
+        return substr($string, $ini, $len);
+    }
+}

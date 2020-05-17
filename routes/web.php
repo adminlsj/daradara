@@ -58,6 +58,10 @@ Route::get('/getSource', 'VideoController@getSource');
 Route::get('/createGetSource', 'VideoController@createGetSource');
 Route::get('/loadPlaylist', 'VideoController@loadPlaylist')->name('video.loadPlaylist');
 Route::get('/loadTagList', 'VideoController@loadTagList');
+
+Route::get('/updateSourceToMP4', 'HomeController@updateSourceToMP4');
+Route::get('/updateSourceQQ', 'HomeController@updateSourceQQ');
+
 Route::get('/loadHomeTagList', 'HomeController@loadHomeTagList');
 Route::get('/userReport', 'HomeController@userReport')->name('email.userReport');
 Route::get('/userStartUpload', 'UserController@userStartUpload')->name('email.userStartUpload');

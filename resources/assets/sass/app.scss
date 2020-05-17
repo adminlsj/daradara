@@ -202,7 +202,7 @@ body {
   position: absolute; 
   top: 13px; 
   left: 25px; 
-  background-color: rgba(255, 255, 255, 0.8); 
+  background-color: rgba(255, 255, 255, 0.3); 
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1);
   border-radius: 3px;
 }
@@ -316,7 +316,7 @@ body {
 }
 
 .home .subscribes-tab a {
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.9);
 }
 
 .subscribes-tab a:hover,

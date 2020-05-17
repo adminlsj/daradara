@@ -261,6 +261,29 @@ class HomeController extends Controller
         return $video;
     }
 
+    public function updateSourceToMP4()
+    {
+        $quan = Video::where('sd', 'like', '%1098_%')->get();
+        $qzone = Video::where('sd', 'like', '%1006_%')->get();
+
+        foreach ($quan as $video) {
+            $video->sd = Video::getSourceQQ($video->sd);
+            $video->save();
+        }
+
+        foreach ($qzone as $video) {
+            $video->sd = Video::getSourceQZ($video->sd);
+            $video->save();
+        }
+
+        return "Done";
+    }
+
+    public function tempMethods()
+    {
+
+    }
+
     function get_string_between($string, $start, $end){
         $string = ' ' . $string;
         $ini = strpos($string, $start);
@@ -268,32 +291,5 @@ class HomeController extends Controller
         $ini += strlen($start);
         $len = strpos($string, $end, $ini) - $ini;
         return substr($string, $ini, $len);
-    }
-
-    public function tempMethods()
-    {
-        $users = User::orderBy('id', 'desc')->get();
-        foreach ($users as $user) {
-            $user->tags = null;
-            $user->save();
-        }
-        foreach ($users as $user) {
-            $tags = [];
-            foreach ($user->subscribes() as $subscribe) {
-                if ($subscribe->type == 'watch' && $subscribe->watch()) {
-                    if (strpos($subscribe->watch()->videos()->first()->tags, '動漫') !== false && !in_array('動漫', $tags)) {
-                        array_push($tags, '動漫');
-                    }
-                    if (strpos($subscribe->watch()->videos()->first()->tags, '日劇') !== false && !in_array('日劇', $tags)) {
-                        array_push($tags, '日劇');
-                    }
-                    if (strpos($subscribe->watch()->videos()->first()->tags, '綜藝') !== false && !in_array('綜藝', $tags)) {
-                        array_push($tags, '綜藝');
-                    }
-                }
-            }
-            $user->tags = implode(" ", $tags);
-            $user->save();
-        }
     }
 }

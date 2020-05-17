@@ -105,13 +105,7 @@ class Video extends Model
     public function source()
     {
         $sd = $this->sd()[0];
-        if (strpos($sd, 'quan.qq.com') !== false) {
-            return Video::getSourceQQ($sd);
-        } elseif (strpos($sd, '1006_') !== false) {
-            return Video::getSourceQZ($sd);
-        } elseif (strpos($sd, 'agefans.tv') !== false) {
-            return Video::getSourceAF($sd);
-        } elseif (strpos($sd, 'instagram.com') !== false) {
+        if (strpos($sd, 'instagram.com') !== false) {
             return Video::getSourceIG($sd);
         } elseif (strpos($sd, 'player.bilibili.com') !== false) {
             return Video::getMobileBB($sd);
@@ -146,7 +140,9 @@ class Video extends Model
             $redirect = curl_getinfo($curl_connection, CURLINFO_EFFECTIVE_URL);
             curl_close($curl_connection);
 
-            return str_replace('http://', 'https://apd-vliveachy.apdcdn.tc.qq.com/', $redirect);
+            $start = strpos($redirect, 'http');
+            $end = strpos($redirect, 'vmtt.tc.qq.com/');
+            return substr_replace($redirect, 'https://apd-vliveachy.apdcdn.tc.qq.com/vmtt.tc.qq.com/', $start, $end - $start + 15);
 
         } catch (Exception $e) {
             return $e->getMessage();
