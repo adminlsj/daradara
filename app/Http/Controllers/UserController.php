@@ -238,6 +238,16 @@ class UserController extends Controller
         } 
     }
 
+    public function getSourceQQ(Request $request)
+    {
+        $id = $request->id;
+        if (strpos($id, '1098_') !== false) {
+            return Video::getSourceQQ("https://quan.qq.com/video/".$id);
+        } elseif (strpos($id, '1006_') !== false) {
+            return Video::getSourceQZ($id);
+        }
+    }
+
     public function storeAvatar(User $user, Request $request)
     {
         $this->validate($request, [

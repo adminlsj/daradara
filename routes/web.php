@@ -55,6 +55,7 @@ Route::get('/singleNewCreate', 'HomeController@singleNewCreate')->name('single.c
 Route::post('/singleNewStore', 'HomeController@singleNewStore')->name('single.store');
 Route::get('/sitemap.xml', 'HomeController@sitemap');
 Route::get('/getSource', 'VideoController@getSource');
+Route::get('/getSourceQQ', 'UserController@getSourceQQ');
 Route::get('/createGetSource', 'VideoController@createGetSource');
 Route::get('/loadPlaylist', 'VideoController@loadPlaylist')->name('video.loadPlaylist');
 Route::get('/loadTagList', 'VideoController@loadTagList');
