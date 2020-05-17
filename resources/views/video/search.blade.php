@@ -19,7 +19,7 @@
 
 <div class="main-content">
 
-	@if ($user)
+	@if ($user && $user->videos()->count() > 0)
 		<div class="padding-setup hover-opacity-all" style="background-color: #F5F5F5; min-height: auto; padding-top: 13px;">
 			<div id="search-top-watch" style="position: relative;">
 			  <a href="{{ route('user.show', [$user]) }}" class="row no-gutter">
