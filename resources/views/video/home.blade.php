@@ -63,7 +63,7 @@
 		  			</div>
 		        </div>
 		        <div class="subscribes-tab home-artist-wrapper" style="border: none; position: absolute; bottom: -10px;">
-			    	<a id="default-artist-tag" class="load-home-tag-videos active" style="margin-right: 5px;">全部推薦內容</a>
+			    	<a id="default-artist-tag" class="load-home-tag-videos active" style="margin-right: 5px;">全部推薦<span class="hidden-xs">內容</span></a>
 			    	<a class="load-home-tag-videos" style="margin-right: 5px;">#嵐Arashi</a>
 					<a class="load-home-tag-videos" style="margin-right: 5px;">#Gimy劇迷</a>
 					<a class="load-home-tag-videos" style="margin-right: 5px;">#貴婦松子Deluxe</a>
@@ -91,7 +91,7 @@
 		  			</div>
 		        </div>
 		        <div class="subscribes-tab home-youtuber-wrapper" style="border: none; position: absolute; bottom: -10px;">
-			    	<a id="default-youtuber-tag" class="load-home-tag-videos active" style="margin-right: 5px;">全部推薦內容</a>
+			    	<a id="default-youtuber-tag" class="load-home-tag-videos active" style="margin-right: 5px;">全部推薦<span class="hidden-xs">內容</span></a>
 				<a class="load-home-tag-videos" style="margin-right: 5px;">#日本快嘴小姐姐</a>
 				<a class="load-home-tag-videos" style="margin-right: 5px;">#神谷惠里奈</a>
 				<a class="load-home-tag-videos" style="margin-right: 5px;">#俄羅斯佐藤</a>
