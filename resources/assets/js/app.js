@@ -185,9 +185,9 @@ $(document).on("click", ".load-tag-videos", function(e) {
 
         .done(function(data){
             if (data.length == 0){
-              console.log(data.length);
-                $('.ajax-loading').html(" ");
-                return;
+              $('.ajax-loading').html(" ");
+              $('.ajax-loading-default').html(" ");
+              return;
             }
 
             newDivName = "d" + String(new Date().valueOf());
