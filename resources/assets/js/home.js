@@ -25,10 +25,9 @@ $(document).on("click", ".load-home-tag-videos", function(e) {
     })
 
     .done(function(data){
-        $('.ajax-' + genre + '-loading').html(" ");
-
         newDivName = "d" + String(new Date().valueOf());
         var $newhtml = $("<div id='" + newDivName + "'>" + data + "</div>");
+        $('.ajax-' + genre + '-loading').html(" ");
         $('#sidebar-' + genre + '-results').html($newhtml);
         $('#sidebar-' + genre + '-results').css('opacity', '1');
 
