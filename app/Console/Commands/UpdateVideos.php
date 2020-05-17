@@ -38,8 +38,8 @@ class UpdateVideos extends Command
      */
     public function handle()
     {
-        $quan = Video::where('sd', 'like', '%1098_%')->get();
-        $qzone = Video::where('sd', 'like', '%1006_%')->get();
+        $quan = Video::where('sd', 'like', '%1098\_%')->get();
+        $qzone = Video::where('sd', 'like', '%1006\_%')->get();
         
         foreach ($quan as $video) {
             $sd = $this->get_string_between($video->sd, 'vmtt.tc.qq.com/', '.f0.mp4');
