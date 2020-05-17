@@ -780,9 +780,10 @@ class VideoController extends Controller
         }
 
         $watch = empty($videosArray) || $videosArray[0]->playlist_id == '' ? null : $videosArray[0]->watch();
+        $user = User::where('name', 'like', '%'.$query.'%')->first();
         $topResults = array_slice($videosArray, 0, 15);
 
-        return view('video.search', compact('watch', 'query', 'topResults'));
+        return view('video.search', compact('watch', 'query', 'topResults', 'user'));
     }
 
     public function loadPlaylist(Request $request)

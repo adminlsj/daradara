@@ -105,9 +105,26 @@ class User extends Authenticatable
         return Watch::where('user_id', $this->id)->orderBy('updated_at', 'desc')->get();
     }
 
+    public function videos()
+    {
+        return Video::where('user_id', $this->id)->orderBy('uploaded_at', 'desc')->get();
+    }
+
     public function subscribes()
     {
         return Subscribe::where('user_id', $this->id)->orderBy('created_at', 'desc')->get();
+    }
+
+    public function subscribers()
+    {
+        $watches = $this->watches();
+        $subscribers = 0;
+        if ($watches->first()) {
+            foreach ($watches as $watch) {
+                $subscribers = $subscribers + Subscribe::where('tag', $watch->title)->count();
+            }
+        }
+        return $subscribers;
     }
 
     public function avatar()

@@ -2376,9 +2376,17 @@ a > i {
   margin: 25px 25px 0px 25px;
 }
 
+.search-user-text-wrapper {
+  left: calc(25% - 1px);
+}
+
 @media (max-width: 991px) {
   #content-div {
     padding-bottom: 50px
+  }
+
+  .search-user-text-wrapper {
+    left: calc(50% + 2px);
   }
 
   .paravi-padding-setup {

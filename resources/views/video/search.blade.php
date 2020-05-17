@@ -18,6 +18,23 @@
 </div>
 
 <div class="main-content">
+
+	@if ($user)
+		<div class="padding-setup hover-opacity-all" style="background-color: #F5F5F5; min-height: auto; padding-top: 13px;">
+			<div id="search-top-watch" style="position: relative;">
+			  <a href="{{ route('user.show', [$user]) }}" class="row no-gutter">
+			    <div class="col-xs-6 col-sm-6 col-md-3" style="text-align: center;">
+			    	<img class="lazy" style="width: calc((9 / 16) * 100%); height: auto; border-radius: 50%;" src="{{ $user->avatarCircleB() }}" data-src="{{ $user->avatar == null ? $user->avatarDefault() : $user->avatar->filename }}" data-srcset="{{ $user->avatar == null ? $user->avatarDefault() : $user->avatar->filename }}">
+			    </div>
+		    	<div class="search-user-text-wrapper" style="margin: 0; position: absolute; top: 50%; transform: translate(0%, -50%);">
+					<h4 style="overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;">{{ $user->name }}</h4>
+					<p style="overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;">{{ $user->subscribers() }} 位訂閱者 • {{ $user->videos()->count() }} 部影片</p>
+				</div>
+			  </a>
+			</div>
+		</div>
+	@endif
+
 	@if ($watch != null)	
 		<div class="padding-setup hover-opacity-all" style="background-color: #F5F5F5; min-height: auto; padding-top: 13px;">
 			<div id="search-top-watch">
@@ -40,6 +57,7 @@
 			</div>
 		</div>
 	@endif
+
 	<div style="background-color: #F5F5F5;" class="padding-setup">
 		<div class="row" style="padding-top: 6px;">
 			<div class="col-md-12">
