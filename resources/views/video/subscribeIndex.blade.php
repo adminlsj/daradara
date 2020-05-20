@@ -16,14 +16,14 @@
 					<a href="{{ route('video.playlist') }}?list={{ $subscribe->watch()->id }}" style="text-decoration: none;">
 						<div class="col-xs-1" style="width: 60px; margin: 0px; padding: 0px; text-align: center; margin-right: 15px; margin-bottom: 10px;">
 							<img class="lazy" style="width: 100%; height: auto; border-radius: 50%;" src="{{ $subscribe->watch()->imgurDefaultCircleB() }}" data-src="{{ $subscribe->watch()->videos()->first()->imgurB() }}" data-srcset="{{ $subscribe->watch()->videos()->first()->imgurB() }}" alt="{{ $subscribe->watch()->title }}">
-							<div class="text-ellipsis" style="width: 100%; font-size: 0.8em; padding-top: 5px; color: #595959;">{{ $subscribe->watch()->title }}</div>
+							<div class="text-ellipsis" style="width: 100%; font-size: 0.75em; padding-top: 5px; color: #595959; font-weight: bold">{{ $subscribe->watch()->title }}</div>
 						</div>
 					</a>
 				@else
 					<a href="{{ route('video.subscribeTag') }}?query={{ $subscribe->tag }}" style="text-decoration: none;">
 						<div class="col-xs-1" style="width: 60px; margin: 0px; padding: 0px; text-align: center; margin-right: 15px; margin-bottom: 10px;">
 							<img class="lazy" style="width: 100%; height: auto; border-radius: 50%;" src="{{ App\Video::tagSubscribeFirst($subscribe)->imgurDefaultCircleB() }}" data-src="{{ App\Video::tagSubscribeFirst($subscribe)->imgurB() }}" data-srcset="{{ App\Video::tagSubscribeFirst($subscribe)->imgurB() }}" alt="{{ $subscribe->tag }}">
-							<div class="text-ellipsis" style="width: 100%; font-size: 0.8em; padding-top: 5px; color: #595959;">#{{ $subscribe->tag }}</div>
+							<div class="text-ellipsis" style="width: 100%; font-size: 0.75em; padding-top: 5px; color: #595959; font-weight: bold">#{{ $subscribe->tag }}</div>
 						</div>
 					</a>
 				@endif

@@ -261,7 +261,7 @@ class HomeController extends Controller
         return $video;
     }
 
-    public function updateSourceToMP4()
+    /* public function updateSourceToMP4()
     {
         $quan = Video::where('sd', 'like', '%1098_%')->get();
         $qzone = Video::where('sd', 'like', '%1006_%')->get();
@@ -277,7 +277,7 @@ class HomeController extends Controller
         }
 
         return "Done";
-    }
+    } */
 
     public function tempMethods()
     {
