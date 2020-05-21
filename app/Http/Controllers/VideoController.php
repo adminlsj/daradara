@@ -327,64 +327,91 @@ class VideoController extends Controller
 
         switch ($path) {
             case '/rank':
-                if ($tags != []) {
-                    if ($tag == '') {
-                        $recent = Video::where(function($query) use ($tags) {
-                            foreach ($tags as $tag) {
-                                $query->orWhere('tags', 'like', '%'.$tag.'%');
-                            }
-                        })->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->orderBy('views', 'desc')->limit(24)->get();
-                        $recent_id = $recent->pluck('id');
-
-                        $videos = Video::where(function($query) use ($tags) {
-                            foreach ($tags as $tag) {
-                                $query->orWhere('tags', 'like', '%'.$tag.'%');
-                            }
-                        })->whereNotIn('id', $recent_id)->orderBy('views', 'desc')->paginate(24);
-                        
-                    } else {
-                        $recent = Video::where('tags', 'like', '%'.$tag.'%')->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->orderBy('views', 'desc')->limit(24)->get();
-                        $recent_id = $recent->pluck('id');
-
-                        $videos = Video::where('tags', 'like', '%'.$tag.'%')->whereNotIn('id', $recent_id)->orderBy('views', 'desc')->paginate(24);
-                    }
-
-                } else {
-                    if ($tag == '') {
+                if ($tag == '') {
+                    if ($tags == []) {
                         $tags = Video::$tags;
-                        $recent = Video::where(function($query) use ($tags) {
-                            foreach ($tags as $tag) {
-                                $query->orWhere('tags', 'like', '%'.$tag.'%');
-                            }
-                        })->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->orderBy('views', 'desc')->limit(24)->get();
-                        $recent_id = $recent->pluck('id');
-
-                        $videos = Video::where(function($query) use ($tags) {
-                            foreach ($tags as $tag) {
-                                $query->orWhere('tags', 'like', '%'.$tag.'%');
-                            }
-                        })->whereNotIn('id', $recent_id)->orderBy('views', 'desc')->paginate(24);
-
-                    } else {
-                        if ($tag == 'anime1') {
-                            $recent = Video::where('user_id', 746)->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->orderBy('views', 'desc')->paginate(24);
-                            $recent_id = $recent->pluck('id');
-                            $videos = Video::where('user_id', 746)->whereNotIn('id', $recent_id)->orderBy('views', 'desc')->paginate(24);
-                        } elseif ($tag == 'Gimy劇迷') {
-                            $recent = Video::where('user_id', 750)->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->orderBy('views', 'desc')->paginate(24);
-                            $recent_id = $recent->pluck('id');
-                            $videos = Video::where('user_id', 750)->whereNotIn('id', $recent_id)->orderBy('views', 'desc')->paginate(24);
-                        } else {
-                            $recent = Video::where('tags', 'like', '%'.$tag.'%')->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->orderBy('views', 'desc')->paginate(24);
-                            $recent_id = $recent->pluck('id');
-                            $videos = Video::where('tags', 'like', '%'.$tag.'%')->whereNotIn('id', $recent_id)->orderBy('views', 'desc')->paginate(24);
-                        }
                     }
+                    $week = Video::where(function($query) use ($tags) {
+                        foreach ($tags as $tag) {
+                            $query->orWhere('tags', 'like', '%'.$tag.'%');
+                        }
+                    })->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->orderBy('views', 'desc')->limit(24)->get();
+                    $week_id = $week->pluck('id');
+
+                    $quarter = Video::whereNotIn('id', $week_id)->where(function($query) use ($tags) {
+                        foreach ($tags as $tag) {
+                            $query->orWhere('tags', 'like', '%'.$tag.'%');
+                        }
+                    })->whereDate('uploaded_at', '>=', Carbon::now()->subMonths(3))->orderBy('views', 'desc')->limit(24)->get();
+                    $quarter_id = $quarter->pluck('id');
+
+                    $semi = Video::whereNotIn('id', $week_id)->whereNotIn('id', $quarter_id)->where(function($query) use ($tags) {
+                        foreach ($tags as $tag) {
+                            $query->orWhere('tags', 'like', '%'.$tag.'%');
+                        }
+                    })->whereDate('uploaded_at', '>=', Carbon::now()->subMonths(6))->orderBy('views', 'desc')->limit(24)->get();
+                    $semi_id = $semi->pluck('id');
+
+                    $year = Video::whereNotIn('id', $week_id)->whereNotIn('id', $quarter_id)->whereNotIn('id', $semi_id)->where(function($query) use ($tags) {
+                        foreach ($tags as $tag) {
+                            $query->orWhere('tags', 'like', '%'.$tag.'%');
+                        }
+                    })->whereDate('uploaded_at', '>=', Carbon::now()->subMonths(12))->orderBy('views', 'desc')->limit(24)->get();
+                    $year_id = $year->pluck('id');
+
+                    $videos = Video::whereNotIn('id', $week_id)->whereNotIn('id', $quarter_id)->whereNotIn('id', $semi_id)->whereNotIn('id', $year_id)->where(function($query) use ($tags) {
+                        foreach ($tags as $tag) {
+                            $query->orWhere('tags', 'like', '%'.$tag.'%');
+                        }
+                    })->orderBy('views', 'desc')->paginate(24);
+                    
+                } else {
+                    switch ($tag) {
+                        case 'anime1':
+                            $column = 'user_id';
+                            $operator = '=';
+                            $value = 746;
+                            break;
+
+                        case 'Gimy劇迷':
+                            $column = 'user_id';
+                            $operator = '=';
+                            $value = 750;
+                            break;
+                        
+                        default:
+                            $column = 'tags';
+                            $operator = 'like';
+                            $value = '%'.$tag.'%';
+                            break;
+                    }
+
+                    $recent = Video::where($column, $operator, $value)->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->orderBy('views', 'desc')->limit(24)->get();
+                    $recent_id = $recent->pluck('id');
+
+                    $videos = Video::where($column, $operator, $value)->whereNotIn('id', $recent_id)->orderBy('views', 'desc')->paginate(24);
+
+                    $week = Video::where($column, $operator, $value)->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->orderBy('views', 'desc')->limit(24)->get();
+                    $week_id = $week->pluck('id');
+
+                    $quarter = Video::whereNotIn('id', $week_id)->where($column, $operator, $value)->whereDate('uploaded_at', '>=', Carbon::now()->subMonths(3))->orderBy('views', 'desc')->limit(24)->get();
+                    $quarter_id = $quarter->pluck('id');
+
+                    $semi = Video::whereNotIn('id', $week_id)->whereNotIn('id', $quarter_id)->where($column, $operator, $value)->whereDate('uploaded_at', '>=', Carbon::now()->subMonths(6))->orderBy('views', 'desc')->limit(24)->get();
+                    $semi_id = $semi->pluck('id');
+
+                    $year = Video::whereNotIn('id', $week_id)->whereNotIn('id', $quarter_id)->whereNotIn('id', $semi_id)->where($column, $operator, $value)->whereDate('uploaded_at', '>=', Carbon::now()->subMonths(12))->orderBy('views', 'desc')->limit(24)->get();
+                    $year_id = $year->pluck('id');
+
+                    $videos = Video::whereNotIn('id', $week_id)->whereNotIn('id', $quarter_id)->whereNotIn('id', $semi_id)->whereNotIn('id', $year_id)->where($column, $operator, $value)->orderBy('views', 'desc')->paginate(24);
                 }
                 
                 $html = '';
                 if ($request->page == 1) {
-                    $html .= $this->singleLoadMoreSliderVideosHTML($recent);
+                    $html .= $this->singleLoadMoreSliderVideosHTML($week);
+                    $html .= $this->singleLoadMoreSliderVideosHTML($quarter);
+                    $html .= $this->singleLoadMoreSliderVideosHTML($semi);
+                    $html .= $this->singleLoadMoreSliderVideosHTML($year);
                 }
                 $html .= $this->singleLoadMoreSliderVideosHTML($videos);
                 return $html;

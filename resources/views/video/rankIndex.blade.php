@@ -37,7 +37,7 @@
 		</div>
 
 		<div class="row no-gutter load-more-container">
-	      <div class="video-sidebar-wrapper" style="position: relative;">
+	      <div class="video-sidebar-wrapper" style="position: relative; overflow-y: hidden;">
 	          <div id="sidebar-results"><!-- results appear here --></div>
 	          <div style="text-align: center;" class="ajax-loading-default"><img style="width: 40px; height: auto; padding-top: 20px; padding-bottom: 50px;" src="https://i.imgur.com/TcZjkZa.gif"/></div>
 		      <div style="text-align: center;" class="ajax-loading"></div>
