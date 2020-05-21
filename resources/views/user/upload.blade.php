@@ -52,12 +52,12 @@
 
 				          <div style="margin-right:100px; position: relative;" class="form-group">
 				            <input type="text" class="form-control" name="link" id="link" placeholder="影片崁入鏈結" required>
-				            <div id="test-play-btn" style="width: 103px; position: absolute; top: 0px; right:-100px; background-color: #D5D5D5; color: #666666; border-color: #D5D5D5; cursor: pointer; height: 45px; line-height: 45px; text-align: center">測試播放</div>
+				            <div id="test-play-btn" style="width: 103px; position: absolute; top: 0px; right:-100px; background-color: #D5D5D5; color: #666666; border-color: #D5D5D5; cursor: pointer; height: 45px; line-height: 45px; text-align: center; border-top-right-radius: 3px; border-bottom-right-radius: 3px;">測試播放</div>
 				          </div>
 
 						  <div style="margin-right:100px; position: relative;" class="form-group">
 				            <input style="background-color: white" readonly="readonly" type="text" class="form-control" name="file-text" id="file-text" placeholder="上傳影片縮圖" required>
-				            <label class="upload-image-btn">
+				            <label class="upload-image-btn" style="border-top-right-radius: 3px; border-bottom-right-radius: 3px;">
 							    <input type="file" name="image" id="image" accept="image/*" required>
 							    <span style="color: #666666; font-weight: 500;">選擇圖片</span>
 							</label>

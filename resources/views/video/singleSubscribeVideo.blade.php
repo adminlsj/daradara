@@ -8,8 +8,8 @@
 			<img style="width: 45px; height: auto; float: left; border-radius: 50%;" src="{{ $video->user()->avatar == null ? $video->user()->avatarDefault() : $video->user()->avatar->filename }}">
 		</a>
 		<a href="{{ route('video.watch') }}?v={{ $video->id }}" style="text-decoration: none; color: black; font-weight: bold">
-			<div style="margin-left: 53px; font-size: 1.1em; line-height: 19px">{{ $video->title }}</div>
-			<div style="margin-left: 53px; font-size: 0.85em; color: #595959; margin-top: 3px;">{{ $video->user()->name }} • 觀看次數：{{ $video->views() }}次 • {{ Carbon\Carbon::parse($video->uploaded_at)->diffForHumans() }}</div>
+			<div style="margin-left: 53px; font-size: 1.1em; line-height: 19px; color: #444444">{{ $video->title }}</div>
+			<div style="margin-left: 53px; font-size: 0.85em; color: dimgray; margin-top: 3px;">{{ $video->user()->name }} • 觀看次數：{{ $video->views() }}次 • {{ Carbon\Carbon::parse($video->uploaded_at)->diffForHumans() }}</div>
 		</a>
 	</div>
 </div>
