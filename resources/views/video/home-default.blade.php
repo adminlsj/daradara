@@ -1,7 +1,7 @@
 <div class="home-genre-banner-wrapper home" style="background-color: #EFE3E3;">
 	<img style="width: auto; height: 100%; float: right" src="https://i.imgur.com/Qlawqysh.png">
 	<div class="home-genre-panel">
-			<img class="lazy" style="float:left; width: 70px; height: 70px; border-top-left-radius: 3px; border-bottom-left-radius: 3px;" src="https://i.imgur.com/sMSpYFXb.jpg" data-src="https://i.imgur.com/i0qmoB7.gif" data-srcset="https://i.imgur.com/i0qmoB7.gif">
+			<img class="lazy" style="float:left; width: 70px; height: 70px; border-top-left-radius: 3px; border-bottom-left-radius: 3px;" src="https://i.imgur.com/v9iawRPh.jpg" data-src="https://i.imgur.com/i0qmoB7.gif" data-srcset="https://i.imgur.com/i0qmoB7.gif">
 			<div style="height: 70px; margin-left: 85px; padding-top: 9px; padding-right: 15px;">
 				<div style="font-size: 1.5em; font-weight: bold; color: #444444">動漫領域</div>
 				<div class="hidden-xs" style="color: gray; font-weight: bold; color: #666666">只有你想不到的，沒有你找不到的。</div>

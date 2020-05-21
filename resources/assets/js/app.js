@@ -254,7 +254,6 @@ $('.search-submit-btn').click(function(e) {
 
 $('#subscribe-show-all').click(function(e) {
     $("#subscribes-watch-wrapper").css('height', 'auto');
-    $("#subscribes-watch-wrapper").css('overflow-y', 'auto');
     $("#subscribes-watch-wrapper").css('white-space', 'normal');
     $(this).css('display', 'none');
 });
