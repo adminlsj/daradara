@@ -22,6 +22,11 @@ const app = new Vue({
     el: '#app'
 });
 
+$(".upload-image-btn").on("change", function() {
+  var fileName = $('#image').val().split("\\").pop();
+  $('#file-text').val(fileName);
+});
+
 $('.slider-wrapper .slider-scroll-right').click(function() {
     var $windowWidth = $(window).width();
     var $scrollWidth;

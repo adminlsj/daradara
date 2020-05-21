@@ -11,11 +11,11 @@
 // Dropdown
 @import "dropdown";
 
+// Switch
+@import "switch";
+
 // Bootstrap
 @import "~bootstrap-sass/assets/stylesheets/bootstrap";
-
-// Video-js
-@import "video-js.css";
 
 html, body {
     max-width: 100%;
@@ -287,6 +287,31 @@ body {
   width: calc((100% - 25px) / 4 - 12px) !important;
 }
 
+label.upload-image-btn input[type="file"] {
+    position:absolute;
+    top: -1000px;
+}
+
+.upload-image-btn {
+    width: 103px; 
+    position: absolute; 
+    top: 0px; 
+    right:-100px; 
+    background-color: #D5D5D5; 
+    color: #666666; 
+    border-color: #D5D5D5; 
+    cursor: pointer; 
+    height: 45px; 
+    line-height: 45px; 
+    text-align: center;
+}
+.upload-image-btn :invalid + span {
+    color: #A44;
+}
+.upload-image-btn :valid + span {
+    color: #4A4;
+}
+
 .subscribes-tab {
   width: calc(100% - 50px);
   margin-left: 25px;
@@ -300,7 +325,7 @@ body {
   margin-bottom: 15px;
 }
 
-.subscribes-tab::-webkit-scrollbar { /* WebKit */
+.subscribes-tab::-webkit-scrollbar, #subscribes-watch-wrapper::-webkit-scrollbar { /* WebKit */
   display: none;
 }
 
@@ -870,7 +895,8 @@ nav input[type=text]:focus {
 #signUpModal input[type=text], #signUpModal input[type=email], #signUpModal input[type=password],
 #loginModal input[type=text], #loginModal input[type=email], #loginModal input[type=password],
 #subscribeModal input[type=text], #subscribeModal input[type=email], #subscribeModal input[type=password],
-#uploadVideoModal input[type=text], #uploadVideoModal input[type=email], #uploadVideoModal input[type=password] {
+#uploadVideoModal input[type=text], #uploadVideoModal input[type=email], #uploadVideoModal input[type=password],
+#uploadPlaylistModal input[type=text], #uploadVideoModal input[type=email], #uploadVideoModal input[type=password] {
   width: 100%;
   height: 45px;
   border: 0.5px solid #e9e9e9;
@@ -2379,6 +2405,15 @@ a > i {
   left: calc(25% - 1px);
 }
 
+.embed-video-switch-text {
+  position: absolute; 
+  bottom: 25px; 
+  left: 85px; 
+  font-weight: bold; 
+  font-size: 1.2em; 
+  color: #595959;
+}
+
 @media (max-width: 991px) {
   #content-div {
     padding-bottom: 50px
@@ -2394,6 +2429,10 @@ a > i {
 
   #comment-section-wrapper {
     display: none;
+  }
+
+  .embed-video-switch-text {
+    bottom: 10px; 
   }
 
   .paravi-padding-hr {
