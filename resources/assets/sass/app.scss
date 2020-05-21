@@ -340,6 +340,30 @@ label.upload-image-btn input[type="file"] {
   margin-right: 5px;
 }
 
+#subscribes-watch-wrapper {
+  height: 90px; 
+  width: calc(100%); 
+  overflow-x: auto; 
+  overflow-y: hidden; 
+  white-space: nowrap; 
+  scrollbar-width: none; 
+  -ms-overflow-style: none;
+}
+
+#subscribes-watch-wrapper .single-top-watch {
+  width: 60px; 
+  margin: 0px; 
+  padding: 0px; 
+  text-align: center;
+  margin-right: 10px;
+  margin-bottom: 10px; 
+  display: inline-block;
+}
+
+#subscribes-watch-wrapper:last-child .single-top-watch {
+  margin-right: 1000px !important;
+}
+
 .home .subscribes-tab a {
   background-color: white;
 }
