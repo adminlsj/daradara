@@ -20,7 +20,7 @@ $(document).on("click", ".load-home-tag-videos", function(e) {
 
     $.ajax({
         type:'GET',
-        url:'/loadHomeTagList?tag=' + current.text().replace('#', '') + '&genre=' + genre + '&page=1',
+        url:'/loadHomeTagList?tag=' + current.text().replace('#', '') + '&genre=' + genre,
         datatype: "html",
     })
 
@@ -30,6 +30,7 @@ $(document).on("click", ".load-home-tag-videos", function(e) {
         $('.ajax-' + genre + '-loading').html(" ");
         $('#sidebar-' + genre + '-results').html($newhtml);
         $('#sidebar-' + genre + '-results').css('opacity', '1');
+        $('.home-more-' + genre + '-btn').show();
 
         var container = document.querySelector("#" + newDivName);
         var lazyImages = [].slice.call(container.querySelectorAll("img.lazy"));
@@ -64,51 +65,8 @@ $(document).ready(function () {
   $('#default-youtuber-tag').click();
 });
 
-$(".home-more-btn").on("click", function() {
-  var button = $(this);
-  var genre = button.data('genre');
-  var tag = $('.home-' + genre + '-wrapper .active').text().replace('#', '');
-  var page = button.data('page');
-  button.data('page', page + 1);
-  button.hide();
-  $('.ajax-' + genre + '-loading').html('<img style="width: 40px; height: auto; padding-top: 25px; padding-bottom: 50px;" src="https://i.imgur.com/TcZjkZa.gif"/>');
-
-  $.ajax({
-        type:'GET',
-        url:'/loadHomeTagList?genre=' + genre + '&tag=' + tag + '&page=' + page,
-        datatype: "html",
-    })
-
-    .done(function(data){
-        newDivName = "d" + String(new Date().valueOf());
-        var $newhtml = $("<div id='" + newDivName + "'>" + data + "</div>");
-        $('#sidebar-' + genre + '-results').append($newhtml);
-        $('.ajax-' + genre + '-loading').html(" ");
-        button.show();
-
-        var container = document.querySelector("#" + newDivName);
-        var lazyImages = [].slice.call(container.querySelectorAll("img.lazy"));
-        if ("IntersectionObserver" in window) {
-            let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
-              entries.forEach(function(entry) {
-                if (entry.isIntersecting) {
-                  let lazyImage = entry.target;
-                  lazyImage.src = lazyImage.dataset.src;
-                  lazyImage.srcset = lazyImage.dataset.srcset;
-                  lazyImage.classList.remove("lazy");
-                  lazyImageObserver.unobserve(lazyImage);
-                }
-              });
-            }, {
-              rootMargin: "0px 0px 256px 0px"
-            });
-            
-            lazyImages.forEach(function(lazyImage) {
-              lazyImageObserver.observe(lazyImage);
-            });
-        }
-    })
-
-    .fail(function(jqXHR, ajaxOptions, thrownError){
-    });
+$("div[class^='home-more-']").on("click", function() {
+  var genre = $(this).data('genre');
+  $('.load-more-' + genre + '-wrapper').show();
+  $(this).hide();
 });

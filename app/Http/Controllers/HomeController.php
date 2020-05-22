@@ -38,33 +38,45 @@ class HomeController extends Controller
                 case 'anime':
                     $videos = Video::where(function($query) {
                         $query->orWhere('tags', 'like', '%正版動漫%')->orWhere('tags', 'like', '%動畫%')->orWhere('tags', 'like', '%動漫講評%')->orWhere('tags', 'like', '%MAD·AMV%');
-                    })->orderBy('uploaded_at', 'desc')->paginate(8);
+                    })->orderBy('uploaded_at', 'desc')->limit(16)->get();
                     break;
 
                 case 'artist':
                     $videos = Video::where(function($query) {
                         $query->orWhere('tags', 'like', '%明星%');
-                    })->orderBy('uploaded_at', 'desc')->paginate(8);
+                    })->orderBy('uploaded_at', 'desc')->limit(16)->get();
                     break;
 
                 case 'youtuber':
                     $videos = Video::where(function($query) {
                         $query->orWhere('tags', 'like', '%日本人氣YouTuber%');
-                    })->orderBy('uploaded_at', 'desc')->paginate(8);
+                    })->orderBy('uploaded_at', 'desc')->limit(16)->get();
                     break;
             }
 
         } else {
             if ($tag == 'anime1') {
-                $videos= Video::where('user_id', 746)->orderBy('uploaded_at', 'desc')->paginate(8);
+                $videos = Video::where('user_id', 746)->orderBy('uploaded_at', 'desc')->limit(16)->get();
             } elseif ($tag == 'Gimy劇迷') {
-                $videos= Video::where('user_id', 750)->orderBy('uploaded_at', 'desc')->paginate(8);
+                $videos= Video::where('user_id', 750)->orderBy('uploaded_at', 'desc')->limit(16)->get();
             } else {
-                $videos = Video::where('tags', 'like', '%'.$tag.'%')->orderBy('uploaded_at', 'desc')->paginate(8);
+                $videos = Video::where('tags', 'like', '%'.$tag.'%')->orderBy('uploaded_at', 'desc')->limit(16)->get();
             }
         }
 
-        return $this->newSingleLoadMoreSliderVideosHTML($videos);
+        $html = '';
+        for ($i = 0; $i < 8; $i++) {
+            $video = $videos[$i];
+            $html .= view('video.new-singleLoadMoreVideos', compact('video'));
+        }
+        $html .= '<div class="load-more-'.$genre.'-wrapper" style="display:none">';
+        for ($i = 8; $i < $videos->count(); $i++) {
+            $video = $videos[$i];
+            $html .= view('video.new-singleLoadMoreVideos', compact('video'));
+        }
+        $html .= '</div>';
+
+        return $html;
     }
 
     public function newSingleLoadMoreSliderVideosHTML($videos)

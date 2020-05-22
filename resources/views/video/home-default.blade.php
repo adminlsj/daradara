@@ -23,9 +23,13 @@
         <div style="text-align: center;" class="ajax-anime-loading"><img style="width: 40px; height: auto; padding-top: 25px; padding-bottom: 50px;" src="https://i.imgur.com/TcZjkZa.gif"/></div>
     </div>
 
-    <div class="home-more-btn no-select" style="cursor: pointer;" data-genre="anime" data-page="2">
-    	<h1 style="margin-top: 1px; padding-bottom: 5px;"><span style="font-size: 1em; vertical-align: middle; border-radius: 50%; padding: 2px; color: #888888; box-shadow: 1px 1px 5px 0px rgba(0,0,0,0.2);" class="material-icons">expand_more</span></h1>
+    <div class="home-more-anime-btn no-select" data-genre="anime">
+    	<span style="font-size: 2em; vertical-align: middle; color: #888888;" class="material-icons">expand_more</span>
     </div>
+
+    <!--<div class="home-more-btn no-select" style="cursor: pointer;" data-genre="anime">
+    	<h1 style="margin-top: 1px; padding-bottom: 5px;"><span style="font-size: 1em; vertical-align: middle; border-radius: 50%; padding: 2px; color: #888888; box-shadow: 1px 1px 5px 0px rgba(0,0,0,0.2);" class="material-icons">expand_more</span></h1>
+    </div>-->
 </div>
 
 <div class="home-genre-banner-wrapper home" style="background-color: #EAEBF7;">
@@ -54,6 +58,10 @@
         <div id="sidebar-artist-results" style="position: relative"><!-- results appear here --></div>
         <div style="text-align: center;" class="ajax-artist-loading"><img style="width: 40px; height: auto; padding-top: 25px; padding-bottom: 50px;" src="https://i.imgur.com/TcZjkZa.gif"/></div>
     </div>
+
+    <div class="home-more-artist-btn no-select" data-genre="artist">
+    	<span style="font-size: 2em; vertical-align: middle; color: #888888;" class="material-icons">expand_more</span>
+    </div>
 </div>
 
 <div class="home-genre-banner-wrapper home" style="background-color: #C5E2EC;">
@@ -77,5 +85,9 @@
     <div class="video-sidebar-wrapper" style="position: relative;">
         <div id="sidebar-youtuber-results" style="position: relative"><!-- results appear here --></div>
         <div style="text-align: center;" class="ajax-youtuber-loading"><img style="width: 40px; height: auto; padding-top: 25px; padding-bottom: 50px;" src="https://i.imgur.com/TcZjkZa.gif"/></div>
+    </div>
+
+    <div class="home-more-youtuber-btn no-select" data-genre="youtuber">
+    	<span style="font-size: 2em; vertical-align: middle; color: #888888;" class="material-icons">expand_more</span>
     </div>
 </div>

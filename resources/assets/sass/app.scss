@@ -2461,8 +2461,16 @@ a > i {
   color: #595959;
 }
 
-.home-more-btn {
-  padding: 0px 4px !important; 
+.home-more-anime-btn, .home-more-artist-btn, .home-more-youtuber-btn {
+  cursor: pointer; 
+  text-align: center; 
+  background-color: #e5e5e5;
+  padding: 3px 0px;
+  margin: 0px 4px 8px 4px;
+}
+
+.home-more-anime-btn:hover, .home-more-artist-btn:hover, .home-more-youtuber-btn:hover {
+  background-color: #dddddd;
 }
 
 @media (max-width: 991px) {
@@ -2479,7 +2487,7 @@ a > i {
   }
 
   .home-more-btn {
-    padding: 0px 1px !important; 
+    margin: 0px 1px 8px 1px;
   }
 
   #comment-section-wrapper {
