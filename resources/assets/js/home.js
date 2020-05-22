@@ -65,10 +65,13 @@ $(document).ready(function () {
 });
 
 $(".home-more-btn").on("click", function() {
-  var genre = $(this).data('genre');
+  var button = $(this);
+  var genre = button.data('genre');
   var tag = $('.home-' + genre + '-wrapper .active').text().replace('#', '');
-  var page = $(this).data('page');
-  $(this).data('page', page + 1);
+  var page = button.data('page');
+  button.data('page', page + 1);
+  button.hide();
+  $('.ajax-' + genre + '-loading').html('<img style="width: 40px; height: auto; padding-top: 25px; padding-bottom: 50px;" src="https://i.imgur.com/TcZjkZa.gif"/>');
 
   $.ajax({
         type:'GET',
@@ -80,6 +83,8 @@ $(".home-more-btn").on("click", function() {
         newDivName = "d" + String(new Date().valueOf());
         var $newhtml = $("<div id='" + newDivName + "'>" + data + "</div>");
         $('#sidebar-' + genre + '-results').append($newhtml);
+        $('.ajax-' + genre + '-loading').html(" ");
+        button.show();
 
         var container = document.querySelector("#" + newDivName);
         var lazyImages = [].slice.call(container.querySelectorAll("img.lazy"));
