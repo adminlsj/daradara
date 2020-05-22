@@ -26,6 +26,29 @@ body {
     overflow-x:hidden;
 }
 
+.load-more-container h1 {
+    overflow: hidden;
+    text-align: center;
+}
+.load-more-container h1:before,
+.load-more-container h1:after {
+    background-color: #dddddd;
+    content: "";
+    display: inline-block;
+    height: 2px;
+    position: relative;
+    vertical-align: middle;
+    width: 50%;
+}
+.load-more-container h1:before {
+    right: 0.5em;
+    margin-left: -50%;
+}
+.load-more-container h1:after {
+    left: 0.5em;
+    margin-right: -50%;
+}
+
 .gs-title {
   font-weight: bold !important;
   font-size: 1.15em !important;
@@ -2438,6 +2461,10 @@ a > i {
   color: #595959;
 }
 
+.home-more-btn {
+  padding: 0px 4px !important; 
+}
+
 @media (max-width: 991px) {
   #content-div {
     padding-bottom: 50px
@@ -2449,6 +2476,10 @@ a > i {
 
   .paravi-padding-setup {
     padding: 0px 15px;
+  }
+
+  .home-more-btn {
+    padding: 0px 1px !important; 
   }
 
   #comment-section-wrapper {
