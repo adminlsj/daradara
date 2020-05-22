@@ -38,29 +38,29 @@ class HomeController extends Controller
                 case 'anime':
                     $videos = Video::where(function($query) {
                         $query->orWhere('tags', 'like', '%正版動漫%')->orWhere('tags', 'like', '%動畫%')->orWhere('tags', 'like', '%動漫講評%')->orWhere('tags', 'like', '%MAD·AMV%');
-                    })->orderBy('uploaded_at', 'desc')->limit(8)->get();
+                    })->orderBy('uploaded_at', 'desc')->paginate(8);
                     break;
 
                 case 'artist':
                     $videos = Video::where(function($query) {
                         $query->orWhere('tags', 'like', '%明星%');
-                    })->orderBy('uploaded_at', 'desc')->limit(8)->get();
+                    })->orderBy('uploaded_at', 'desc')->paginate(8);
                     break;
 
                 case 'youtuber':
                     $videos = Video::where(function($query) {
                         $query->orWhere('tags', 'like', '%日本人氣YouTuber%');
-                    })->orderBy('uploaded_at', 'desc')->limit(8)->get();
+                    })->orderBy('uploaded_at', 'desc')->paginate(8);
                     break;
             }
 
         } else {
             if ($tag == 'anime1') {
-                $videos= Video::where('user_id', 746)->orderBy('uploaded_at', 'desc')->limit(8)->get();
+                $videos= Video::where('user_id', 746)->orderBy('uploaded_at', 'desc')->paginate(8);
             } elseif ($tag == 'Gimy劇迷') {
-                $videos= Video::where('user_id', 750)->orderBy('uploaded_at', 'desc')->limit(8)->get();
+                $videos= Video::where('user_id', 750)->orderBy('uploaded_at', 'desc')->paginate(8);
             } else {
-                $videos = Video::where('tags', 'like', '%'.$tag.'%')->orderBy('uploaded_at', 'desc')->limit(8)->get();
+                $videos = Video::where('tags', 'like', '%'.$tag.'%')->orderBy('uploaded_at', 'desc')->paginate(8);
             }
         }
 

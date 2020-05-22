@@ -20,7 +20,7 @@ $(document).on("click", ".load-home-tag-videos", function(e) {
 
     $.ajax({
         type:'GET',
-        url:'/loadHomeTagList?tag=' + current.text().replace('#', '') + '&genre=' + genre,
+        url:'/loadHomeTagList?tag=' + current.text().replace('#', '') + '&genre=' + genre + '&page=1',
         datatype: "html",
     })
 
@@ -62,4 +62,46 @@ $(document).ready(function () {
   $('#default-anime-tag').click();
   $('#default-artist-tag').click();
   $('#default-youtuber-tag').click();
+});
+
+$(".home-more-btn").on("click", function() {
+  var genre = $(this).data('genre');
+  var tag = $('.home-' + genre + '-wrapper .active').text().replace('#', '');
+
+  $.ajax({
+        type:'GET',
+        url:'/loadHomeTagList?genre=' + genre + '&tag=' + tag + '&page=2',
+        datatype: "html",
+    })
+
+    .done(function(data){
+        newDivName = "d" + String(new Date().valueOf());
+        var $newhtml = $("<div id='" + newDivName + "'>" + data + "</div>");
+        $('#sidebar-' + genre + '-results').append($newhtml);
+
+        var container = document.querySelector("#" + newDivName);
+        var lazyImages = [].slice.call(container.querySelectorAll("img.lazy"));
+        if ("IntersectionObserver" in window) {
+            let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+              entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                  let lazyImage = entry.target;
+                  lazyImage.src = lazyImage.dataset.src;
+                  lazyImage.srcset = lazyImage.dataset.srcset;
+                  lazyImage.classList.remove("lazy");
+                  lazyImageObserver.unobserve(lazyImage);
+                }
+              });
+            }, {
+              rootMargin: "0px 0px 256px 0px"
+            });
+            
+            lazyImages.forEach(function(lazyImage) {
+              lazyImageObserver.observe(lazyImage);
+            });
+        }
+    })
+
+    .fail(function(jqXHR, ajaxOptions, thrownError){
+    });
 });
