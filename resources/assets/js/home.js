@@ -67,10 +67,12 @@ $(document).ready(function () {
 $(".home-more-btn").on("click", function() {
   var genre = $(this).data('genre');
   var tag = $('.home-' + genre + '-wrapper .active').text().replace('#', '');
+  var page = $(this).data('page');
+  $(this).data('page', page + 1);
 
   $.ajax({
         type:'GET',
-        url:'/loadHomeTagList?genre=' + genre + '&tag=' + tag + '&page=2',
+        url:'/loadHomeTagList?genre=' + genre + '&tag=' + tag + '&page=' + page,
         datatype: "html",
     })
 
