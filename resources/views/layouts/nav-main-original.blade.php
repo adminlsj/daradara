@@ -17,6 +17,7 @@
       @else
         <a class="no-select nav-item-text hidden-xs hidden-sm" style="color: #e8eaed; border: 1px solid #e8eaed; padding: 8px 14px; margin-top: 5px; margin-right: 15px; font-weight: bold; color: #666666" href="{{ route('login') }}">登入</a>
         <a class="no-select nav-item-text hidden-xs hidden-sm" style="color: white; background-color: #e8eaed; border-color: #e8eaed; padding: 7px 14px; margin-top: 5px; font-weight: bold; color: #666666" href="{{ route('register') }}">註冊</a>
+        <a class="no-select pull-right hidden-xs hidden-sm" style="margin-top: 8px; margin-right: 18px;" href="{{ route('register') }}"><i class="material-icons">video_call</i></a>
       @endif
 
       <a class="hidden-md hidden-lg nav-item-icon" style="right: 21px;" href="{{ Auth::check() ? route('user.show', Auth::user()) : route('login')}}"><i class="material-icons">account_circle</i></a>

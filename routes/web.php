@@ -25,6 +25,7 @@ Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallb
 Route::post('users/{user}/storeAvatar', 'UserController@storeAvatar');
 
 Route::get('/tempMethods', 'HomeController@tempMethods');
+Route::get('/createDummyVideos', 'HomeController@createDummyVideos');
 
 Route::get('/subscribes', 'VideoController@subscribeIndex')->name('video.subscribes');
 Route::post('/subscribe', 'VideoController@subscribe')->name('video.subscribe');

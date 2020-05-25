@@ -110,7 +110,7 @@ class Video extends Model
         } elseif (strpos($sd, 'player.bilibili.com') !== false) {
             return Video::getMobileBB($sd);
         } else {
-            return $sd;
+            return 'https://www.agefans.tv/player/ckx1/?url='.urlencode($sd);
         }
     }
 

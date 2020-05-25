@@ -273,27 +273,49 @@ class HomeController extends Controller
         return $video;
     }
 
-    /* public function updateSourceToMP4()
+    public function updateVideos()
     {
-        $quan = Video::where('sd', 'like', '%1098_%')->get();
-        $qzone = Video::where('sd', 'like', '%1006_%')->get();
+        if (Auth::check() && Auth::user()->email == 'laughseejapan@gmail.com') {
+            $quan = Video::where('sd', 'like', '%1098\_%')->get();
+            $qzone = Video::where('sd', 'like', '%1006\_%')->get();
+            
+            foreach ($quan as $video) {
+                $sd = $this->get_string_between($video->sd, 'vmtt.tc.qq.com/', '.f0.mp4');
+                $video->sd = Video::getSourceQQ("https://quan.qq.com/video/".$sd);
+                $video->save();
+            }
 
-        foreach ($quan as $video) {
-            $video->sd = Video::getSourceQQ($video->sd);
-            $video->save();
+            foreach ($qzone as $video) {
+                $sd = $this->get_string_between($video->sd, 'vwecam.tc.qq.com/', '.f0.mp4');
+                $video->sd = Video::getSourceQZ($sd);
+                $video->save();
+            }
+
+            $this->info("Done!");
         }
+    }
 
-        foreach ($qzone as $video) {
-            $video->sd = Video::getSourceQZ($video->sd);
-            $video->save();
-        }
-
-        return "Done";
-    } */
-
-    public function tempMethods()
+    public function createDummyVideos(Request $request)
     {
-
+        if (Auth::check() && Auth::user()->email == 'laughseejapan@gmail.com') {
+            for ($i = 0; $i < $request->count; $i++) {
+                $video = Video::create([
+                    'user_id' => 1,
+                    'playlist_id' => 1,
+                    'title' => 'demo',
+                    'description' => 'demo',
+                    'link' => 'demo',
+                    'imgur' => 'demo',
+                    'tags' => 'demo',
+                    'views' => 0,
+                    'outsource' => true,
+                    'created_at' => Carbon::now(),
+                    'uploaded_at' => Carbon::now(),
+                ]);
+                $video->delete();
+            }
+        }
+        return redirect()->action('HomeController@index');
     }
 
     function get_string_between($string, $start, $end){
