@@ -110,7 +110,7 @@ class Video extends Model
         } elseif (strpos($sd, 'player.bilibili.com') !== false) {
             return Video::getMobileBB($sd);
         } else {
-            return urlencode($sd);
+            return $sd;
         }
     }
 
