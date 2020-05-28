@@ -97,7 +97,7 @@ $('.watch-slider .slider-scroll-left').click(function() {
 
 $(document).on("click", "#test-play-btn", function(e) {
     var link = $('#link').val();
-    if (link.startsWith('1098_') || link.startsWith('1006_')) {
+    if (link.startsWith('1098_') || link.startsWith('1006_') || link.startsWith('1097_')) {
       $("#outsource").prop("checked", false);
       $.ajax({
           type:'GET',
@@ -107,6 +107,50 @@ $(document).on("click", "#test-play-btn", function(e) {
 
       .done(function(data){
         $('#link').val(data);
+        $('#test-player').html('<iframe src="' + data + '" style="border: 0; overflow: hidden;" allow="autoplay" allowfullscreen></iframe>');
+        $('#test-player').css('display', 'block');
+      })
+
+      .fail(function(jqXHR, ajaxOptions, thrownError){
+      });
+
+    } else {
+      if (link.indexOf("src='") >= 0) {
+        link = link.split("src='")[1];
+        link = link.substring(
+            0, 
+            link.indexOf("'")
+        );
+      } else if (link.indexOf('src="') >= 0) {
+        link = link.split('src="')[1];
+        link = link.substring(
+            0, 
+            link.indexOf('"')
+        );
+      }
+      $('#link').val(link);
+      $('#test-player').html('<iframe src="' + link + '" style="border: 0; overflow: hidden;" allow="autoplay" allowfullscreen></iframe>');
+      $('#test-player').css('display', 'block');
+    }
+});
+
+$(document).on("click", "#test-play-singleton-btn", function(e) {
+    var link = $('#link').val();
+    if (link.startsWith('1098_') || link.startsWith('1006_') || link.startsWith('1097_')) {
+      $("#outsource").prop("checked", false);
+      $.ajax({
+          type:'GET',
+          url:'/getSourceQQ?id=' + link,
+          datatype: "html",
+      })
+
+      .done(function(data){
+        $('#link').val(data);
+        if ($('#sd').text() == '') {
+          $('#sd').append(data);
+        } else {
+          $('#sd').append(' ' + data);
+        }
         $('#test-player').html('<iframe src="' + data + '" style="border: 0; overflow: hidden;" allow="autoplay" allowfullscreen></iframe>');
         $('#test-player').css('display', 'block');
       })

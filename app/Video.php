@@ -273,7 +273,7 @@ class Video extends Model
             curl_setopt($curl_connection, CURLOPT_HTTPHEADER, [
                 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:56.0) Gecko/20100101 Firefox/56.0',
                 'Host: api.bilibili.com',
-                'Cookie: SESSDATA=1feadc09%2C1582358038%2Ca8f2f511;'
+                'Cookie: SESSDATA=33c1bfb1%2C1606096573%2C4f954*51;'
             ]);
             $data = json_decode(curl_exec($curl_connection), true);
             curl_close($curl_connection);
