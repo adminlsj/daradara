@@ -66,6 +66,18 @@ class VideoController extends Controller
         $vid = $request->v;
 
         if (is_numeric($vid) && $video = Video::find($request->v)) {
+
+            // QQ video auto transform START
+            if (substr($video->sd, 0, 5) === "1098_") {
+                $video->sd = Video::getSourceQQ("https://quan.qq.com/video/".$video->sd);
+                $video->save();
+            }
+            if (substr($video->sd, 0, 5) === "1006_" || substr($video->sd, 0, 5) === "1097_") {
+                $video->sd = Video::getSourceQZ($video->sd);
+                $video->save();
+            }
+            // QQ video auto transform END
+
             $video->views++;
             $video->save();
 
@@ -367,6 +379,12 @@ class VideoController extends Controller
                     
                 } else {
                     switch ($tag) {
+                        case '動漫新番':
+                            $column = 'user_id';
+                            $operator = '=';
+                            $value = 746;
+                            break;
+
                         case 'anime1':
                             $column = 'user_id';
                             $operator = '=';
@@ -424,6 +442,10 @@ class VideoController extends Controller
                                 $query->orWhere('tags', 'like', '%'.$tag.'%');
                             }
                         })->orderBy('uploaded_at', 'desc')->paginate(24);
+
+                    } elseif ($tag == '動漫新番') {
+                        $videos = $videos->where('user_id', 746)->orderBy('uploaded_at', 'desc')->paginate(24);
+
                     } else {
                         $videos = $videos->where('tags', 'like', '%'.$tag.'%')->orderBy('uploaded_at', 'desc')->paginate(24);
                     }
@@ -495,6 +517,18 @@ class VideoController extends Controller
                                 $query->orWhere('tags', 'like', '%'.$tag.'%');
                             }
                         })->orderBy('uploaded_at', 'desc')->paginate(24);
+
+                    } elseif ($tag == '動漫新番') {
+                        $newest = Video::whereNotIn('id', $subscribes_id)->where('user_id', 746)->orderBy('uploaded_at', 'desc')->limit(24)->get();
+                        $newest_id = $newest->pluck('id');
+
+                        $trending = Video::whereNotIn('id', $subscribes_id)->whereNotIn('id', $newest_id)->where('user_id', 746)->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->orderBy('views', 'desc')->limit(12)->get();
+                        $trending_id = $trending->pluck('id');
+
+                        $views = Video::whereNotIn('id', $subscribes_id)->whereNotIn('id', $newest_id)->whereNotIn('id', $trending_id)->where('user_id', 746)->where('views', '>=', 5000)->inRandomOrder()->limit(12)->get();
+                        $views_id = $views->pluck('id');
+
+                        $videos = Video::whereNotIn('id', $subscribes_id)->whereNotIn('id', $newest_id)->whereNotIn('id', $trending_id)->whereNotIn('id', $views_id)->where('user_id', 746)->orderBy('uploaded_at', 'desc')->paginate(24);
 
                     } else {
                         $newest = Video::whereNotIn('id', $subscribes_id)->where('tags', 'like', '%'.$tag.'%')->orderBy('uploaded_at', 'desc')->limit(24)->get();

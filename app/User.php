@@ -44,8 +44,8 @@ class User extends Authenticatable
         foreach ($subscribes as $subscribe) {
             if ($subscribe->type == 'watch' && $watch = $subscribe->watch()) {
                 $videoTags = $watch->videos()->first()->tags;
-                if (strpos($videoTags, '動漫') !== false && !in_array('動漫', $tags)) {
-                    array_unshift($tags, '動漫');
+                if (strpos($videoTags, '動漫') !== false && !in_array('動漫新番', $tags)) {
+                    array_unshift($tags, '動漫新番');
                     if (!in_array('同人動畫', $tags)) {
                         array_push($tags, '同人動畫');
                     }
@@ -93,7 +93,7 @@ class User extends Authenticatable
         if (!in_array('綜藝', $tags)) {
             array_push($tags, '綜藝');
         }
-        if (!in_array('動漫', $tags)) {
+        if (!in_array('動漫新番', $tags)) {
             array_push($tags, '動漫');
         }
 

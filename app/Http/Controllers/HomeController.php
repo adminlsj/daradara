@@ -319,7 +319,7 @@ class HomeController extends Controller
         return redirect()->action('HomeController@index');
     }
 
-    /*public function editSingleton()
+    public function editSingleton()
     {
         return view('video.editSingleton');
     }
@@ -372,7 +372,7 @@ class HomeController extends Controller
         }
 
         return redirect()->action('HomeController@index');
-    }*/
+    }
 
     function get_string_between($string, $start, $end){
         $string = ' ' . $string;
