@@ -67,17 +67,6 @@ class VideoController extends Controller
 
         if (is_numeric($vid) && $video = Video::find($request->v)) {
 
-            // QQ video auto transform START
-            if (substr($video->sd, 0, 5) === "1098_") {
-                $video->sd = Video::getSourceQQ("https://quan.qq.com/video/".$video->sd);
-                $video->save();
-            }
-            if (substr($video->sd, 0, 5) === "1006_" || substr($video->sd, 0, 5) === "1097_") {
-                $video->sd = Video::getSourceQZ($video->sd);
-                $video->save();
-            }
-            // QQ video auto transform END
-
             $video->views++;
             $video->save();
 
@@ -310,11 +299,11 @@ class VideoController extends Controller
                     }
                     if (strpos($videoTags, '日劇') !== false && !in_array('日劇', $tags)) {
                         array_unshift($tags, '日劇');
+                        if (!in_array('番宣', $tags)) {
+                            array_push($tags, '番宣');
+                        }
                         if (!in_array('日本人氣YouTuber', $tags)) {
                             array_push($tags, '日本人氣YouTuber');
-                        }
-                        if (!in_array('日本創意廣告', $tags)) {
-                            array_push($tags, '日本創意廣告');
                         }
                         if (!in_array('日劇講評', $tags)) {
                             array_push($tags, '日劇講評');
@@ -735,23 +724,7 @@ class VideoController extends Controller
         $idsArray = [];
 
         // Exact Match Query [e.g. 2012.09.14]
-        $lowerQuery = '';
-        $upperQuery = '';
-        $exactQuery = [];
-        foreach ($queryArray as $char) {
-            if (preg_match("/^[a-zA-Z]$/", $char)) {
-                $lowerQuery = $lowerQuery.strtolower($char);
-                $upperQuery = $upperQuery.strtoupper($char);
-            } else {
-                $lowerQuery = $lowerQuery.$char;
-                $upperQuery = $upperQuery.$char;
-            }
-        }
-        if ($lowerQuery == $upperQuery) {
-            $exactQuery = Video::where('title', 'like', '%'.$lowerQuery.'%')->orderBy('uploaded_at', 'desc')->distinct()->get();
-        } else {
-            $exactQuery = Video::where('title', 'like', '%'.$lowerQuery.'%')->orWhere('title', 'like', '%'.$upperQuery.'%')->orderBy('uploaded_at', 'desc')->distinct()->get();
-        }
+        $exactQuery = Video::where('title', 'ilike', '%'.trim(request('query')).'%')->orderBy('uploaded_at', 'desc')->distinct()->get();
         foreach ($exactQuery as $q) {
             if (!in_array($q->id, $idsArray)) {
                 array_push($videosArray, $q);
@@ -761,7 +734,7 @@ class VideoController extends Controller
 
         // Exact Order Match Query (search query in same order e.g. 2012 => 2>0>1>2) [e.g. 2012 09 14]
         $exactOrderQueryScope = '%'.implode('%', $queryArray).'%';
-        $exactOrderQuery = Video::where('title', 'like', $exactOrderQueryScope)->orderBy('uploaded_at', 'desc')->get();
+        $exactOrderQuery = Video::where('title', 'ilike', $exactOrderQueryScope)->orderBy('uploaded_at', 'desc')->get();
         foreach ($exactOrderQuery as $q) {
             if (!in_array($q->id, $idsArray)) {
                 array_push($videosArray, $q);
