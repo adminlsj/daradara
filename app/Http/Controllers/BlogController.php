@@ -7,48 +7,10 @@ use Illuminate\Http\Request;
 
 class BlogController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function show(Request $request)
     {
-        $blogs = Blog::orderBy('created_at', 'desc')->get();
-        $is_program = false;
-        return view('blog.index', compact('blogs', 'is_program'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Video  $blog
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Request $request, Blog $blog)
-    {
-        $content = $blog->content;
+        $blog = Blog::find($request->r);
+        $content = $blog->caption;
 
         $content = str_replace('(SUB)', '<h5 style="font-size:2.1rem;font-weight:bold; line-height:30px;">', $content);
         $content = str_replace('(/SUB)', '</h5>', $content);
@@ -108,62 +70,44 @@ class BlogController extends Controller
         return view('blog.show', compact('blog', 'content', 'fb_title', 'current', 'sideBlogsMobile', 'sideBlogsDesktop', 'is_program'));
     }
 
-    public function sidebarHTML($sideVideosMobile)
+    public function loadBloglist(Request $request)
     {
-        $html = '';
-        foreach ($sideVideosMobile as $blog) {
-            $html .='<div class="row hover-box-shadow" style="margin:0px -5px; padding: 15px 15px;">
-                        <a href="https://www.laughseejapan.com'.'/'.$blog->genre.'/'.$blog->category.'/'.$blog->id.'">
-                            <div class="col-xs-3" style="position:relative; padding-right:5px">
-                                <div class="row">
-                                    <img style="width:100%; border-radius:2px" src="https://s3.amazonaws.com/twobayjobs/blogImgs/thumbnails/'.$blog->id.'/'.$blog->blogImgs->sortby("created_at")->first()->filename.'" alt="日本文化">
-                                    <div class="related-blogs-date" style="font-size: 12.5px; color: gray; position:absolute; bottom:1px; right:-93px; font-weight:400;">'.Carbon::parse($blog->created_at)->format("Y-m-d").'</div>
-                                </div>
-                            </div>
+        $blog = Blog::find($request->r);
+        $current = $blog;
 
-                            <div style="padding: 0px 30px 0px 40px" class="col-xs-9">
-                                <div class="row">
-                                    <div class="blog-title">'.str_limit($blog->title, 95).'</div>
-                                    <div class="hidden-xs" style="font-weight: 400; font-size: 13.5px; color: #696969; margin-top:10px">'.str_limit($blog->caption, 300).'</div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>';
+        $blog->views++;
+        $blog->save();
+
+        $videos = null;
+        $videosSelect = Blog::where(function($query) use ($blog) {
+            foreach ($blog->tags() as $tag) {
+                $query->orWhere('tags', 'like', '%'.$tag.'%');
+            }
+        })->where('id', '!=', $blog->id)->inRandomOrder()->select('id', 'tags')->get()->toArray();
+
+        $rankings = [];
+        foreach ($videosSelect as $videoSelect) {
+            $score = 0;
+            foreach ($blog->tags() as $tag) {
+                if (strpos($videoSelect['tags'], $tag) !== false) {
+                    $score++;
+                }
+            }
+            array_push($rankings, ['score' => $score, 'id' => $videoSelect['id']]);
         }
-        return $html;
-    }
+        usort($rankings, function ($a, $b) {
+            return $b['score'] <=> $a['score'];
+        });
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Blog  $blog
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Blog $blog)
-    {
-        //
-    }
+        $related = [];
+        $max = count($rankings) > 30 ? 30 : count($rankings) - 1;
+        for ($i = 0; $i < $max; $i++) {
+            array_push($related, Blog::find($rankings[$i]['id']));
+        }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Blog  $blog
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Blog $blog)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Blog  $blog
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Blog $blog)
-    {
-        //
+        $html = view('blog.blog-playlist-wrapper', compact('current', 'videos', 'related'));
+        if ($request->ajax()) {
+            return $html;
+        }
     }
 }

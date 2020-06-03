@@ -63,6 +63,7 @@ Route::get('/getSourceQQ', 'UserController@getSourceQQ');
 Route::get('/createGetSource', 'VideoController@createGetSource');
 Route::get('/loadPlaylist', 'VideoController@loadPlaylist')->name('video.loadPlaylist');
 Route::get('/loadTagList', 'VideoController@loadTagList');
+Route::get('/loadBloglist', 'BlogController@loadBloglist')->name('blog.loadBloglist');
 
 Route::get('/updateSourceToMP4', 'HomeController@updateSourceToMP4');
 Route::get('/updateSourceQQ', 'HomeController@updateSourceQQ');
@@ -85,5 +86,6 @@ Route::get('/playlist', 'VideoController@playlist')->name('video.playlist');
 Route::get('/{genre}/{title}', 'VideoController@intro')->name('video.intro');
 
 Route::get('/watch', 'VideoController@watch')->name('video.watch');
+Route::get('/blog', 'BlogController@show')->name('blog.read');
 Route::get('/search', ['as' => 'video.search', 'uses' => 'VideoController@search']);
 Route::get('/search-google', ['as' => 'video.searchGoogle', 'uses' => 'VideoController@searchGoogle']);

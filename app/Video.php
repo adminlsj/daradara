@@ -19,15 +19,15 @@ class Video extends Model
     ];
 
     public static $content = [
-        'anime' => ['正版動漫', 'anime1', '同人動畫', '動漫講評', 'MAD·AMV'], 'aninews' => ['動漫資訊'], 'variety' => ['綜藝'], 'artist' => ['明星'], 'meme' => ['搞笑'], 'travel' => ['旅遊']
+        'anime' => ['正版動漫', 'anime1', '同人動畫', '動漫講評', 'MAD·AMV'], 'aninews' => ['動漫情報'], 'variety' => ['綜藝'], 'artist' => ['明星'], 'meme' => ['搞笑'], 'daily' => ['旅遊']
     ];
 
     public static $titles = [
-        'anime' => '動漫', 'aninews' => '專欄', 'variety' => '綜藝', 'artist' => '明星', 'meme' => '迷因', 'travel' => '旅遊'
+        'anime' => '動漫', 'aninews' => '專欄', 'variety' => '綜藝', 'artist' => '明星', 'meme' => '迷因', 'daily' => '生活'
     ];
 
     public static $tagsArray = [
-        'anime' => ['正版動漫', 'anime1', '同人動畫', '動漫講評', 'MAD·AMV'], 'aninews' => ['正版動漫', 'anime1', '同人動畫', '動漫講評', 'MAD·AMV'], 'variety' => ['嵐Arashi', '貴婦松子Deluxe', 'Downtown', '倫敦靴子1號2號', '有吉弘行', 'RunningMan'], 'artist' => ['佐藤健', '石原聰美', '新垣結衣', '木村拓哉', '竹內涼真', '長澤雅美', '綾瀨遙', '劉在錫'], 'meme' => ['正版動漫', 'anime1', '同人動畫', '動漫講評', 'MAD·AMV'], 'travel' => ['正版動漫', 'anime1', '同人動畫', '動漫講評', 'MAD·AMV']
+        'anime' => ['正版動漫', 'anime1', '同人動畫', '動漫講評', 'MAD·AMV'], 'aninews' => ['新番情報', '劇場版', '聲優', '動漫講評', '動漫新聞', 'Cosplay'], 'variety' => ['嵐Arashi', '貴婦松子Deluxe', 'Downtown', '倫敦靴子1號2號', '有吉弘行', 'RunningMan'], 'artist' => ['佐藤健', '石原聰美', '新垣結衣', '木村拓哉', '竹內涼真', '長澤雅美', '綾瀨遙', '劉在錫'], 'meme' => ['日本人氣YouTuber', '日本創意廣告', '搞笑影片', '綜藝剪輯'], 'daily' => ['新聞資訊', '流行速報', '日本旅遊', '日本美食', '日本房產']
     ];
 
     public function user()

@@ -14,69 +14,65 @@
 @endsection
 
 @section('nav')
-	@include('layouts.nav-blog', ['logoImage' => 'https://i.imgur.com/M8tqx5K.png', 'backgroundColor' => 'white', 'itemsColor' => "gray"])
+	@include('layouts.nav-main-original', ['theme' => 'white'])
 @endsection
 
 @section('content')
+<div class="hidden-sm hidden-xs sidebar-menu">
+    @include('video.sidebarMenu', ['theme' => 'white'])
+</div>
 
-<div class="padding-setup mobile-container">
-	<div class="row no-gutter" style="padding-top: 15px;">
-		<div class="col-md-8">
-			<div style="margin-bottom: 5px" class="blog-content">
-				<img class="img-responsive border-radius-2" style="width:100%;height:100%" src="{{ $blog->imgurH() }}" alt="{{ $blog->title }}">
-				
-				<div>
-					<h4 style="padding-top: 3px; font-weight: 400; margin-bottom:0px">
-						<div class="blog-show-title">{{ $blog->title }}</div>
-						<div style="padding-left: 3px; margin-top: -8px;" class="vertical-align">
-							<div style="font-size:14px;font-weight:300;">
-								{{ Carbon\Carbon::parse($blog->created_at)->format('d / m / Y') }}
-							</div>
+<div class="main-content">
+	<div style="background-color: #F5F5F5;">
+		<div class="row no-gutter">
+			<div class="col-md-8 single-show-player">
+				<div style="background-color: #F9F9F9; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1); margin-bottom: 15px;" class="blog-content">
+					<img class="lazy" style="width: 100%; height: 100%;" src="{{ $blog->imgur16by9() }}" data-src="{{ $blog->imgurH() }}" data-srcset="{{ $blog->imgurH() }}" alt="{{ $blog->title }}">
+					<div class="hidden-md hidden-lg" style="background-color: white;">
+					    <ins class="adsbygoogle"
+					         style="display:block"
+					         data-ad-format="fluid"
+					         data-ad-layout-key="-ie+f-17-3w+bl"
+					         data-ad-client="ca-pub-4485968980278243"
+					         data-ad-slot="3332191764"></ins>
+					</div>
+					<div style="padding: 0px 25px 25px 25px;">
+						<h3 style="line-height: 30px; font-weight: bold; font-size: 1.5em">{{ $blog->title }}</h3>
+
+						<a href="{{ route('user.show', [$blog->user()]) }}"><img class="lazy" style="float:left; border-radius: 50%; width: 35px; height: 35px;" src="{{ $blog->user()->avatarCircleB() }}" data-src="{{ $blog->user()->avatar == null ? $blog->user()->avatarDefault() : $blog->user()->avatar->filename }}" data-srcset="{{ $blog->user()->avatar == null ? $blog->user()->avatarDefault() : $blog->user()->avatar->filename }}"></a>
+
+					    <h5 style="margin-left: 45px; line-height: 37px;"><a style="text-decoration: none; color: dimgray; font-weight: bold" href="{{ route('user.show', [$blog->user()]) }}">{{ $blog->user()->name }}</a></h5>
+
+					    <div style="padding-top: 8px">
+							@foreach ($content as $cont)
+								{!! $cont !!}
+							@endforeach
 						</div>
-					</h4>
+					</div>
+				</div>
+			</div>
 
-					@foreach ($content as $cont)
-						{!! $cont !!}
-					@endforeach
+			<div class="col-md-4 single-show-list">
+				<div style="padding-bottom: 7px;">
+					<div class="hidden-xs hidden-sm" style="margin: 15px 15px 10px 15px;">
+						<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+						<!-- fixed square ad -->
+						<ins class="adsbygoogle"
+						     style="display:inline-block;width:100%;height:305px;box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1); border-radius: 3px; background-color: #F9F9F9;"
+						     data-ad-client="ca-pub-4485968980278243"
+						     data-ad-slot="2765106128"></ins>
+						<script>
+						     (adsbygoogle = window.adsbygoogle || []).push({});
+						</script>
+					</div>
 
-					<div style="margin-top:20px; padding: 10px 5px; width: 100%; background-color: #f0f0f0; text-align: center; color: #3b5998">
-						<div style="line-height: 15px">更多日本旅遊與文化，讚好<a style="color: #3b5998; text-decoration: underline;" href="https://www.facebook.com/freeriderjapan" target="_blank">FreeRider專頁</a></div>
+					<div id="blog-playlist-wrapper">
+						<div style="text-align: center;" class="ajax-loading"><img style="width: 40px; height: auto; padding-top: 14px; padding-bottom: 28px;" src="https://i.imgur.com/TcZjkZa.gif"/></div>
 					</div>
 				</div>
 			</div>
 		</div>
 
-		<div style="padding-left: 20px" class="hidden-xs hidden-sm col-md-4 sticky">
-			<div>
-		        <h3 style="color: black; font-weight: 500; margin-bottom: 17px;">相關主題</h3>
-		    </div>
-		    @foreach ($sideBlogsDesktop as $blog)
-				<div style="border-left: black 3px solid; margin-left: 0px" class="row">
-		            <a href="{{ route('blog.show', ['blog' => $blog]) }}">
-		                <div class="col-md-12">
-		                    <div style="font-weight: 400; font-size: 15px; color: black">{{str_limit($blog->title, 80)}}</div>
-		                    <div style="font-size: 12.5px; color: #D3D3D3; margin-top: 10px;">{{ Carbon\Carbon::parse($blog->created_at)->format("Y年m月d日") }}</div>
-		                </div>
-		            </a>
-		        </div>
-		        <br>
-		    @endforeach
-		    <div style="margin:5px 0px 15px 0px; border: 1px black solid">
-                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                <!-- Blog Show Ads -->
-                <ins class="adsbygoogle"
-                     style="display:block"
-                     data-ad-client="ca-pub-4485968980278243"
-                     data-ad-slot="6532428575"
-                     data-ad-format="auto"
-                     data-full-width-responsive="true"></ins>
-                <script>
-                     (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
-	        </div>
-	    </div>
 	</div>
-
-	@include('blog.list-blogs')
 </div>
 @endsection

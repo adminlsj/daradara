@@ -420,4 +420,5 @@ function showSnackbar(text) {
 }
 
 require('./lazyLoad');
+require('./blogShow');
 require('./videoShow');

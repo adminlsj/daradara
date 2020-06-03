@@ -8,6 +8,7 @@ use App\User;
 use App\Subscribe;
 use App\Like;
 use App\Save;
+use App\Blog;
 use App\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
@@ -471,7 +472,7 @@ class VideoController extends Controller
                 }
                 return $this->singleLoadMoreSliderVideosHTML($videos);
 
-            case (substr($path, 0, 9) === "/channel/" ? true: false):
+            case ($path == '/channel/anime' || $path == '/channel/variety' || $path == '/channel/artist' || $path == '/channel/meme' ? true: false):
                 if ($tag == '') {
                     $genre = substr($path, 9);
                     $tags = Video::$content[$genre];
@@ -498,6 +499,22 @@ class VideoController extends Controller
                     }                    
                 }
                 return $this->singleLoadMoreSliderVideosHTML($videos);
+
+            case ($path == '/channel/aninews' || $path == '/channel/daily' ? true : false):
+                if ($tag == '') {
+                    $genre = substr($path, 9);
+                    $tags = Blog::$content[$genre];
+                    $videos = Blog::where(function($query) use ($tags) {
+                        foreach ($tags as $tag) {
+                            $query->orWhere('tags', 'like', '%'.$tag.'%');
+                        }
+                    })->orderBy('created_at', 'desc')->paginate(24);
+
+
+                } else {
+                    $videos = Blog::where('tags', 'like', '%'.$tag.'%')->orderBy('created_at', 'desc')->paginate(24);
+                }
+                return $this->singleLoadMoreSliderBlogsHTML($videos);
             
             default:
                 if ($tags != []) {
@@ -733,7 +750,16 @@ class VideoController extends Controller
     {
         $html = '';
         foreach ($videos as $video) {
-            $html .= view('video.singleLoadMoreSliderVideos', compact('video'));
+            $html .= view('video.new-singleLoadMoreVideos', compact('video'));
+        }
+        return $html;
+    }
+
+    public function singleLoadMoreSliderBlogsHTML($videos)
+    {
+        $html = '';
+        foreach ($videos as $video) {
+            $html .= view('blog.new-singleLoadMoreBlogs', compact('video'));
         }
         return $html;
     }

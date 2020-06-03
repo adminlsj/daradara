@@ -18,12 +18,12 @@
 
 <div class="row no-gutter load-more-container" style="margin-top: 5px;">
   <a href="{{ route('genre.index', 'aninews') }}" style="color: inherit; text-decoration: none">
-    <h3 class="user-show-title">動漫資訊<i style="font-size: 0.85em; vertical-align: middle; margin-top: -4px; margin-left: 5px" class="material-icons">arrow_forward_ios</i></h3>
+    <h3 class="user-show-title">動漫情報<i style="font-size: 0.85em; vertical-align: middle; margin-top: -4px; margin-left: 5px" class="material-icons">arrow_forward_ios</i></h3>
   </a>
   <div class="video-sidebar-wrapper">
     @foreach ($animeNews as $video)
       <div class="{{ $loop->iteration > 4 ? 'hidden-xs hidden-sm' : ''}}">
-        @include('video.new-singleLoadMoreVideos')
+        @include('blog.new-singleLoadMoreBlogs')
       </div>
     @endforeach
   </div>
@@ -69,13 +69,13 @@
 </div>
 
 <div class="row no-gutter load-more-container" style="margin-top: 5px;">
-  <a href="{{ route('genre.index', 'travel') }}" style="color: inherit; text-decoration: none">
-    <h3 class="user-show-title">日本旅遊<i style="font-size: 0.85em; vertical-align: middle; margin-top: -4px; margin-left: 5px" class="material-icons">arrow_forward_ios</i></h3>
+  <a href="{{ route('genre.index', 'daily') }}" style="color: inherit; text-decoration: none">
+    <h3 class="user-show-title">日本生活<i style="font-size: 0.85em; vertical-align: middle; margin-top: -4px; margin-left: 5px" class="material-icons">arrow_forward_ios</i></h3>
   </a>
   <div class="video-sidebar-wrapper">
-    @foreach ($meme as $video)
+    @foreach ($daily as $video)
       <div class="{{ $loop->iteration > 4 ? 'hidden-xs hidden-sm' : ''}}">
-        @include('video.new-singleLoadMoreVideos')
+        @include('blog.new-singleLoadMoreBlogs')
       </div>
     @endforeach
   </div>

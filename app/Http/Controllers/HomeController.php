@@ -10,6 +10,7 @@ use App\Avatar;
 use App\Comment;
 use App\Like;
 use App\Save;
+use App\Blog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Carbon\Carbon;
@@ -31,9 +32,9 @@ class HomeController extends Controller
             $query->orWhere('tags', 'like', '%正版動漫%')->orWhere('tags', 'like', '%動畫%')->orWhere('tags', 'like', '%動漫講評%')->orWhere('tags', 'like', '%MAD·AMV%');
         })->orderBy('uploaded_at', 'desc')->limit(8)->get();
 
-        $animeNews = Video::where(function($query) {
-            $query->orWhere('tags', 'like', '%正版動漫%')->orWhere('tags', 'like', '%動畫%')->orWhere('tags', 'like', '%動漫講評%')->orWhere('tags', 'like', '%MAD·AMV%');
-        })->orderBy('uploaded_at', 'desc')->limit(8)->get();
+        $animeNews = Blog::where(function($query) {
+            $query->orWhere('tags', 'like', '%動漫情報%');
+        })->orderBy('created_at', 'desc')->limit(8)->get();
 
         $variety = Video::where(function($query) {
             $query->orWhere('tags', 'like', '%綜藝%');
@@ -44,14 +45,14 @@ class HomeController extends Controller
         })->orderBy('uploaded_at', 'desc')->limit(8)->get();
 
         $meme = Video::where(function($query) {
-            $query->orWhere('tags', 'like', '%日本人氣YouTuber%');
+            $query->orWhere('tags', 'like', '%日本人氣YouTuber%')->orWhere('tags', 'like', '%日本創意廣告%')->orWhere('tags', 'like', '%搞笑影片%');
         })->orderBy('uploaded_at', 'desc')->limit(8)->get();
 
-        $travel = Video::where(function($query) {
-            $query->orWhere('tags', 'like', '%日本人氣YouTuber%');
-        })->orderBy('uploaded_at', 'desc')->limit(8)->get();
+        $daily = Blog::where(function($query) {
+            $query->orWhere('tags', 'like', '%生活%');
+        })->orderBy('created_at', 'desc')->limit(8)->get();
 
-        return view('video.home', compact('animeVid', 'animeNews', 'variety', 'artist', 'meme', 'travel'));
+        return view('video.home', compact('animeVid', 'animeNews', 'variety', 'artist', 'meme', 'daily'));
     }
 
     public function genre(Request $request)
