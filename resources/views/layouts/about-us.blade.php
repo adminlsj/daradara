@@ -29,34 +29,34 @@
 					<div style="border: 1px solid black; padding: 0px 20px">
 						<h4 style="margin-top: 25px">崁入影片的步驟：</h4>
 						<h4 style="margin-top: 25px">1. 前往影片的顯示頁面並點選分享影片</h4>
-						<img style="width: 100%; max-width: 700px; height: auto" src="https://i.imgur.com/QKVvaM2.png">
+						<img style="width: 100%; max-width: 700px; height: auto" src="https://i.imgur.com/QKVvaM2h.png">
 						<h4 style="margin-top: 40px">2. 選擇全部並複製崁入影片的代碼</h4>
-						<img style="width: 100%; max-width: 700px;" src="https://i.imgur.com/Y22rwzL.png">
+						<img style="width: 100%; max-width: 700px;" src="https://i.imgur.com/Y22rwzLh.png">
 						<h4 style="margin-top: 40px">3. 點選右上方的上傳影片圖示或用戶主頁的上傳影片按鈕</h4>
-						<img style="width: 100%; max-width: 700px;" src="https://i.imgur.com/Ks2sWEb.png">
+						<img style="width: 100%; max-width: 700px;" src="https://i.imgur.com/Ks2sWEbh.png">
 						<h4 style="margin-top: 40px; line-height: 25px; margin-bottom: 7px">4. 填寫影片的基本資料並將複製的代碼貼上「影片崁入連結」的欄位。請確保已勾選崁入影片的選項（預設）</h4>
-						<img style="width: 100%; max-width: 700px;" src="https://i.imgur.com/fgcKOwR.png">
+						<img style="width: 100%; max-width: 700px;" src="https://i.imgur.com/fgcKOwRh.png">
 						<h4 style="margin-top: 40px">5. 請點選「測試播放」按鈕以確保影片可正常顯示</h4>
-						<img style="width: 100%; max-width: 700px;" src="https://i.imgur.com/rxRqQ3r.png">
+						<img style="width: 100%; max-width: 700px;" src="https://i.imgur.com/rxRqQ3rh.png">
 						<h4 style="margin-top: 40px">6. 上傳影片並見證影片播放次數的增長！</h4>
-						<img style="width: 100%; max-width: 700px;" src="https://i.imgur.com/26wRkW8.png">
+						<img style="width: 100%; max-width: 700px;" src="https://i.imgur.com/26wRkW8h.png">
 					</div>
 				</div>
 				<div class="col-md-6">
 					<div style="border: 1px solid black; padding: 0px 20px">
 						<h4 style="margin-top: 25px">分享影片鏈結的步驟：</h4>
 						<h4 style="margin-top: 25px">1. 前往您上傳的影片的顯示頁面</h4>
-						<img style="width: 100%; max-width: 700px; height: auto" src="https://i.imgur.com/lprJgJf.png">
+						<img style="width: 100%; max-width: 700px; height: auto" src="https://i.imgur.com/lprJgJfh.png">
 						<h4 style="margin-top: 40px">2. 選擇並複製要分享的影片的鏈結</h4>
-						<img style="width: 100%; max-width: 700px;" src="https://i.imgur.com/PC2pDYv.png">
+						<img style="width: 100%; max-width: 700px;" src="https://i.imgur.com/PC2pDYvh.png">
 						<h4 style="margin-top: 40px">3. 點選右上方的上傳影片圖示或用戶主頁的上傳影片按鈕</h4>
-						<img style="width: 100%; max-width: 700px;" src="https://i.imgur.com/Ks2sWEb.png">
+						<img style="width: 100%; max-width: 700px;" src="https://i.imgur.com/Ks2sWEbh.png">
 						<h4 style="margin-top: 39px; line-height: 25px; margin-bottom: 7px">4. 填寫影片的基本資料並將複製的影片鏈結貼上「影片崁入連結」的欄位。請確保已取消勾選崁入影片的選項</h4>
-						<img style="width: 100%; max-width: 700px;" src="https://i.imgur.com/CSVsn5x.png">
+						<img style="width: 100%; max-width: 700px;" src="https://i.imgur.com/CSVsn5xh.png">
 						<h4 style="margin-top: 40px">5. 請點選「測試播放」按鈕以確保影片可正常顯示</h4>
-						<img style="width: 100%; max-width: 700px;" src="https://i.imgur.com/YP3h6HK.png">
+						<img style="width: 100%; max-width: 700px;" src="https://i.imgur.com/YP3h6HKh.png">
 						<h4 style="margin-top: 40px">6. 上傳影片並見證影片播放次數的增長！</h4>
-						<img style="width: 100%; max-width: 700px;" src="https://i.imgur.com/Vx2Xe7U.png">
+						<img style="width: 100%; max-width: 700px;" src="https://i.imgur.com/Vx2Xe7Uh.png">
 					</div>
 				</div>
 			</div>

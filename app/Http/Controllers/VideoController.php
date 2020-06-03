@@ -67,6 +67,17 @@ class VideoController extends Controller
 
         if (is_numeric($vid) && $video = Video::find($request->v)) {
 
+            // QQ video auto transform START
+            if (substr($video->sd, 0, 5) === "1098_") {
+                $video->sd = Video::getSourceQQ("https://quan.qq.com/video/".$video->sd);
+                $video->save();
+            }
+            if (substr($video->sd, 0, 5) === "1006_" || substr($video->sd, 0, 5) === "1097_") {
+                $video->sd = Video::getSourceQZ($video->sd);
+                $video->save();
+            }
+            // QQ video auto transform END
+
             $video->views++;
             $video->save();
 
@@ -457,6 +468,34 @@ class VideoController extends Controller
                             $videos = $videos->where('tags', 'like', '%'.$tag.'%')->orderBy('uploaded_at', 'desc')->paginate(24);
                         }
                     }
+                }
+                return $this->singleLoadMoreSliderVideosHTML($videos);
+
+            case (substr($path, 0, 9) === "/channel/" ? true: false):
+                if ($tag == '') {
+                    $genre = substr($path, 9);
+                    $tags = Video::$content[$genre];
+                    $videos = Video::where(function($query) use ($tags) {
+                        foreach ($tags as $tag) {
+                            if ($tag == 'anime1') {
+                                $query->orWhere('user_id', 746);
+                            } elseif ($tag == 'Gimy劇迷') {
+                                $query->orWhere('user_id', 750);
+                            } else {
+                                $query->orWhere('tags', 'like', '%'.$tag.'%');
+                            }
+                        }
+                    })->orderBy('uploaded_at', 'desc')->paginate(24);
+
+
+                } else {
+                    if ($tag == 'anime1') {
+                        $videos = $videos->where('user_id', 746)->orderBy('uploaded_at', 'desc')->paginate(24);
+                    } elseif ($tag == 'Gimy劇迷') {
+                        $videos = $videos->where('user_id', 750)->orderBy('uploaded_at', 'desc')->paginate(24);
+                    } else {
+                        $videos = $videos->where('tags', 'like', '%'.$tag.'%')->orderBy('uploaded_at', 'desc')->paginate(24);
+                    }                    
                 }
                 return $this->singleLoadMoreSliderVideosHTML($videos);
             

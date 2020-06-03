@@ -18,6 +18,18 @@ class Video extends Model
         '正版動漫', '同人動畫', '動漫講評', '明星', '日本人氣YouTuber', '日本創意廣告', '日劇講評'
     ];
 
+    public static $content = [
+        'anime' => ['正版動漫', 'anime1', '同人動畫', '動漫講評', 'MAD·AMV'], 'aninews' => ['動漫資訊'], 'variety' => ['綜藝'], 'artist' => ['明星'], 'meme' => ['搞笑'], 'travel' => ['旅遊']
+    ];
+
+    public static $titles = [
+        'anime' => '動畫卡通', 'aninews' => '動漫資訊', 'variety' => '綜藝頻道', 'artist' => '明星專區', 'meme' => '迷因翻譯', 'travel' => '日本旅遊'
+    ];
+
+    public static $tagsArray = [
+        'anime' => ['正版動漫', 'anime1', '同人動畫', '動漫講評', 'MAD·AMV'], 'aninews' => ['正版動漫', 'anime1', '同人動畫', '動漫講評', 'MAD·AMV'], 'variety' => ['嵐Arashi', '貴婦松子Deluxe', 'Downtown', '倫敦靴子1號2號', '有吉弘行', 'RunningMan'], 'artist' => ['佐藤健', '石原聰美', '新垣結衣', '木村拓哉', '竹內涼真', '長澤雅美', '綾瀨遙', '劉在錫'], 'meme' => ['正版動漫', 'anime1', '同人動畫', '動漫講評', 'MAD·AMV'], 'travel' => ['正版動漫', 'anime1', '同人動畫', '動漫講評', 'MAD·AMV']
+    ];
+
     public function user()
     {
         return User::find($this->user_id);

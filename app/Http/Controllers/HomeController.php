@@ -27,7 +27,39 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
-        return view('video.home');
+        $animeVid = Video::where(function($query) {
+            $query->orWhere('tags', 'like', '%正版動漫%')->orWhere('tags', 'like', '%動畫%')->orWhere('tags', 'like', '%動漫講評%')->orWhere('tags', 'like', '%MAD·AMV%');
+        })->orderBy('uploaded_at', 'desc')->limit(8)->get();
+
+        $animeNews = Video::where(function($query) {
+            $query->orWhere('tags', 'like', '%正版動漫%')->orWhere('tags', 'like', '%動畫%')->orWhere('tags', 'like', '%動漫講評%')->orWhere('tags', 'like', '%MAD·AMV%');
+        })->orderBy('uploaded_at', 'desc')->limit(8)->get();
+
+        $variety = Video::where(function($query) {
+            $query->orWhere('tags', 'like', '%綜藝%');
+        })->orderBy('uploaded_at', 'desc')->limit(8)->get();
+
+        $artist = Video::where(function($query) {
+            $query->orWhere('tags', 'like', '%明星%')->orWhere('tags', 'like', '%日劇%');
+        })->orderBy('uploaded_at', 'desc')->limit(8)->get();
+
+        $meme = Video::where(function($query) {
+            $query->orWhere('tags', 'like', '%日本人氣YouTuber%');
+        })->orderBy('uploaded_at', 'desc')->limit(8)->get();
+
+        $travel = Video::where(function($query) {
+            $query->orWhere('tags', 'like', '%日本人氣YouTuber%');
+        })->orderBy('uploaded_at', 'desc')->limit(8)->get();
+
+        return view('video.home', compact('animeVid', 'animeNews', 'variety', 'artist', 'meme', 'travel'));
+    }
+
+    public function genre(Request $request)
+    {
+        $genre = $request->genre;
+        $title = Video::$titles[$genre];
+        $tags = Video::$tagsArray[$genre];
+        return view('video.genre', compact('title', 'tags'));
     }
 
     public function loadHomeTagList(Request $request)
@@ -316,6 +348,62 @@ class HomeController extends Controller
                 $video->delete();
             }
         }
+        return redirect()->action('HomeController@index');
+    }
+
+    public function editSingleton()
+    {
+        return view('video.editSingleton');
+    }
+
+    public function uploadSingleton(Request $request)
+    {
+        $id = request('video-id');
+        $episodes = request('episodes');
+        $user_id = request('user-id');
+        $playlist_id = request('playlist-id');
+        $title = request('title');
+        $created_at = new Carbon(Carbon::createFromFormat('Y-m-d\TH:i:s', request('created-at'))->format('Y-m-d H:i:s'));
+        $sd = explode(' ', request('sd'));
+        for ($i = 1; $i <= $episodes; $i++) {
+            $image = Image::make($_FILES["images"]["tmp_name"][$i - 1]);
+            $image = $image->fit(2880, 1620);
+            $image = $image->stream();
+            $pvars = array('image' => base64_encode($image));
+
+            $curl = curl_init();
+            curl_setopt($curl, CURLOPT_URL, 'https://api.imgur.com/3/image.json');
+            curl_setopt($curl, CURLOPT_TIMEOUT, 30);
+            curl_setopt($curl, CURLOPT_HTTPHEADER, array('Authorization: Client-ID ' . '932b67e13e4f069'));
+            curl_setopt($curl, CURLOPT_POST, 1);
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($curl, CURLOPT_POSTFIELDS, $pvars);
+            $out = curl_exec($curl);
+            curl_close ($curl);
+            $pms = json_decode($out, true);
+            $url = $pms['data']['link'];
+
+            $zero = $i < 10 ? '0' : '';
+            if ($url != "") {
+                $video = Video::create([
+                    'id' => $id,
+                    'user_id' => $user_id,
+                    'playlist_id' => $playlist_id,
+                    'title' =>  $title.'【第'.$i.'話】',
+                    'caption' => $title.'【第'.$zero.$i.'話】',
+                    'tags' => request('tags'),
+                    'views' => 0,
+                    'imgur' => $this->get_string_between($url, 'https://i.imgur.com/', '.'),
+                    'sd' => '',
+                    'outsource' => false,
+                    'created_at' => $created_at,
+                    'uploaded_at' => $created_at,
+                ]);
+                $created_at = $created_at->addDays(7);
+                $id++;
+            }
+        }
+
         return redirect()->action('HomeController@index');
     }
 

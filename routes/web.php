@@ -73,6 +73,7 @@ Route::get('/userStartUpload', 'UserController@userStartUpload')->name('email.us
 Route::get('/user/{user}/upload', 'UserController@userEditUpload')->name('user.userEditUpload');
 Route::post('/user/{user}/userUpdateUpload', 'UserController@userUpdateUpload')->name('user.userUpdateUpload');
 Route::get('/user/{user}/{genre?}', 'UserController@show')->name('user.show');
+Route::get('/channel/{genre}', 'HomeController@genre')->name('genre.index');
 
 Route::get('/copyrightReport', 'HomeController@copyrightReport')->name('email.copyrightReport');
 
