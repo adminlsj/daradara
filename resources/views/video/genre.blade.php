@@ -13,7 +13,7 @@
     <div style="background-color: #F5F5F5;">
         <div class="row no-gutter load-more-container" style="padding-top: 19px;">
           <h5 class="user-show-title" style="font-size: 1em; color: #555555; font-weight: normal; line-height: 0px">只有想不到，沒有找不到</h5>
-          <h3 class="user-show-title no-select" style="font-size: 2em; margin-top: 5px; margin-bottom: 10px">LaughSeeJapan <span style="font-size: 0.92em">{{ $title }}</span></h3>
+          <h3 class="user-show-title no-select" style="font-size: 2em; margin-top: 5px; margin-bottom: 10px">LaughSeeJapan <span style="font-size: 0.93em">{{ $title }}</span></h3>
         </div>
 
         <div class="subscribes-tab" style="border: none; margin-top: 5px; margin-bottom: 0px">
