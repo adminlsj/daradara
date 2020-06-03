@@ -16,7 +16,7 @@
           <h3 class="user-show-title no-select" style="font-size: 2em; margin-top: 5px; margin-bottom: 10px">LaughSeeJapan <span style="font-size: 0.93em">{{ $title }}</span></h3>
         </div>
 
-        <div class="subscribes-tab" style="border: none; margin-top: 5px; margin-bottom: 0px">
+        <div class="subscribes-tab" style="border: none; margin-top: 4px; margin-bottom: 0px">
         	<a id="default-tag" class="load-tag-videos active no-select" style="margin-right: 5px;">全部推薦</a>
             @foreach ($tags as $tag)
                 <a class="load-tag-videos no-select" style="margin-right: 5px;">#{{ $tag }}</a>
