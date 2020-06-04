@@ -134,7 +134,30 @@ class VideoController extends Controller
             $subscribes = auth()->user()->subscribes();
 
             if ($subscribes->isEmpty()) {
-                return view('video.subscribeIndexEmpty');
+                $animeVid = Video::where(function($query) {
+                    $query->orWhere('tags', 'like', '%正版動漫%')->orWhere('tags', 'like', '%動畫%')->orWhere('tags', 'like', '%動漫講評%')->orWhere('tags', 'like', '%MAD·AMV%');
+                })->orderBy('uploaded_at', 'desc')->limit(8)->get();
+
+                $animeNews = Blog::where(function($query) {
+                    $query->orWhere('tags', 'like', '%動漫情報%');
+                })->orderBy('created_at', 'desc')->limit(8)->get();
+
+                $variety = Video::where(function($query) {
+                    $query->orWhere('tags', 'like', '%綜藝%');
+                })->orderBy('uploaded_at', 'desc')->limit(8)->get();
+
+                $artist = Video::where(function($query) {
+                    $query->orWhere('tags', 'like', '%明星%')->orWhere('tags', 'like', '%日劇%');
+                })->orderBy('uploaded_at', 'desc')->limit(8)->get();
+
+                $meme = Video::where(function($query) {
+                    $query->orWhere('tags', 'like', '%日本人氣YouTuber%')->orWhere('tags', 'like', '%日本創意廣告%')->orWhere('tags', 'like', '%搞笑影片%');
+                })->orderBy('uploaded_at', 'desc')->limit(8)->get();
+
+                $daily = Blog::where(function($query) {
+                    $query->orWhere('tags', 'like', '%生活%');
+                })->orderBy('created_at', 'desc')->limit(8)->get();
+                return view('video.subscribeIndexEmpty', compact('animeVid', 'animeNews', 'variety', 'artist', 'meme', 'daily'));
             }
 
             if ($request->ajax()) {

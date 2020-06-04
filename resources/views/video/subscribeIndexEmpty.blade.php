@@ -17,6 +17,7 @@
 				<div style="color: gray; font-weight: bold">訂閱您喜愛的頻道，保證不會錯過最新內容。</div>
 			</div>
 		</div>
+		<hr style="border-color: #e1e1e1; margin: 0px">
 		@include('video.home-default')
 	</div>
 </div>
