@@ -501,16 +501,9 @@ class VideoController extends Controller
                     $tags = Video::$content[$genre];
                     $videos = Video::where(function($query) use ($tags) {
                         foreach ($tags as $tag) {
-                            if ($tag == 'anime1') {
-                                $query->orWhere('user_id', 746);
-                            } elseif ($tag == 'Gimy劇迷') {
-                                $query->orWhere('user_id', 750);
-                            } else {
-                                $query->orWhere('tags', 'like', '%'.$tag.'%');
-                            }
+                            $query->orWhere('tags', 'like', '%'.$tag.'%');
                         }
                     })->orderBy('uploaded_at', 'desc')->paginate(24);
-
 
                 } else {
                     if ($tag == 'anime1') {
