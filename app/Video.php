@@ -27,7 +27,7 @@ class Video extends Model
     ];
 
     public static $tagsArray = [
-        'anime' => ['正版動漫', 'anime1', '同人動畫', '自製動畫', '動漫講評', 'MAD·AMV'], 'aninews' => ['新番情報', '劇場版', '聲優', '動漫講評', '動漫新聞', 'Cosplay'], 'variety' => ['嵐Arashi', '貴婦松子Deluxe', 'Downtown', '倫敦靴子1號2號', '有吉弘行', 'RunningMan'], 'artist' => ['明星', 'Gimy劇迷', '佐藤健', '石原聰美', '新垣結衣', '木村拓哉', '綾瀨遙', '劉在錫'], 'meme' => ['日本人氣YouTuber', '日本創意廣告', '搞笑影片', '綜藝剪輯'], 'daily' => ['新聞資訊', '流行速報', '日本旅遊', '日本美食', '日本房產']
+        'anime' => ['正版動漫', 'anime1', '同人動畫', '原創動畫', '動漫講評', 'MAD·AMV'], 'aninews' => ['新番情報', '劇場版', '聲優', '動漫講評', '動漫新聞', 'Cosplay'], 'variety' => ['嵐Arashi', '貴婦松子Deluxe', 'Downtown', '倫敦靴子1號2號', '有吉弘行', 'RunningMan'], 'artist' => ['明星', 'Gimy劇迷', '佐藤健', '石原聰美', '新垣結衣', '木村拓哉', '綾瀨遙', '劉在錫'], 'meme' => ['日本人氣YouTuber', '日本創意廣告', '搞笑影片', '綜藝剪輯'], 'daily' => ['新聞資訊', '流行速報', '日本旅遊', '日本美食', '日本房產']
     ];
 
     public function user()
