@@ -28,9 +28,10 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
+        $animeFirst = Video::where('tags', 'like', '%正版動漫%')->orderBy('uploaded_at', 'desc')->first();
         $animeVid = Video::where(function($query) {
             $query->orWhere('tags', 'like', '%正版動漫%')->orWhere('tags', 'like', '%動畫%')->orWhere('tags', 'like', '%動漫講評%')->orWhere('tags', 'like', '%MAD·AMV%');
-        })->orderBy('uploaded_at', 'desc')->limit(8)->get();
+        })->where('id', '!=', $animeFirst->id)->orderBy('uploaded_at', 'desc')->limit(7)->get();
 
         $animeNews = Blog::where(function($query) {
             $query->orWhere('tags', 'like', '%動漫情報%');
@@ -52,7 +53,7 @@ class HomeController extends Controller
             $query->orWhere('tags', 'like', '%生活%');
         })->orderBy('created_at', 'desc')->limit(8)->get();
 
-        return view('video.home', compact('animeVid', 'animeNews', 'variety', 'artist', 'meme', 'daily'));
+        return view('video.home', compact('animeFirst', 'animeVid', 'animeNews', 'variety', 'artist', 'meme', 'daily'));
     }
 
     public function genre(Request $request)
