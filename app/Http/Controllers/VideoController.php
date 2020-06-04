@@ -134,9 +134,10 @@ class VideoController extends Controller
             $subscribes = auth()->user()->subscribes();
 
             if ($subscribes->isEmpty()) {
+                $animeFirst = Video::where('tags', 'like', '%正版動漫%')->orderBy('uploaded_at', 'desc')->first();
                 $animeVid = Video::where(function($query) {
                     $query->orWhere('tags', 'like', '%正版動漫%')->orWhere('tags', 'like', '%動畫%')->orWhere('tags', 'like', '%動漫講評%')->orWhere('tags', 'like', '%MAD·AMV%');
-                })->orderBy('uploaded_at', 'desc')->limit(8)->get();
+                })->where('id', '!=', $animeFirst->id)->orderBy('uploaded_at', 'desc')->limit(7)->get();
 
                 $animeNews = Blog::where(function($query) {
                     $query->orWhere('tags', 'like', '%動漫情報%');
@@ -157,7 +158,7 @@ class VideoController extends Controller
                 $daily = Blog::where(function($query) {
                     $query->orWhere('tags', 'like', '%生活%');
                 })->orderBy('created_at', 'desc')->limit(8)->get();
-                return view('video.subscribeIndexEmpty', compact('animeVid', 'animeNews', 'variety', 'artist', 'meme', 'daily'));
+                return view('video.subscribeIndexEmpty', compact('animeFirst', 'animeVid', 'animeNews', 'variety', 'artist', 'meme', 'daily'));
             }
 
             if ($request->ajax()) {

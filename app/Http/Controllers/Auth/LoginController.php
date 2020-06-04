@@ -39,7 +39,7 @@ class LoginController extends Controller
         if ($previousUrl !== '') {
             return $previousUrl;
         } else {
-            return '/subscribes';
+            return '/';
         }
     }
 
