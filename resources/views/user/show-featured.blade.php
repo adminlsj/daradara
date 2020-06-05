@@ -17,7 +17,7 @@
 	@include('video.sidebarMenu', ['theme' => 'white'])
 </div>
 
-<div class="main-content home">
+<div class="main-content">
 	<div style="background-color: #F5F5F5;">
 
     <div class="row no-gutter load-more-container" style="padding-top: 19px;">
@@ -26,7 +26,17 @@
       <h3 class="user-show-title no-select" style="font-size: 2em; margin-top: 4px; margin-bottom: 10px"><span style="font-size: 0.93em">{{ $user->name }}</span></h3>
     </div>
 
-    <div class="row no-gutter load-more-container" style="margin-top: -6px;">
+    <div class="subscribes-tab" style="border: none; margin-top: 4px; margin-bottom: 0px">
+        <a href="{{ route('user.show', [$user, 'featured']) }}" class="active" style="margin-right: 5px;">首頁</a>
+        <a href="{{ route('user.show', [$user, 'videos']) }}" style="margin-right: 5px;">影片</a>
+        <a href="{{ route('user.show', [$user, 'playlists']) }}" style="margin-right: 5px;">播放清單</a>
+        <a href="{{ route('user.show', [$user, 'about']) }}" style="margin-right: 5px;">簡介</a>
+        @if (Auth::check() && $user->id == Auth::user()->id)
+          <a href="{{ route('user.userEditUpload', $user) }}" style="margin-right: 5px;">上傳影片</a>
+        @endif
+    </div>
+
+    <div class="row no-gutter load-more-container" style="margin-top: -1px;">
       <a href="{{ route('user.show', [$user, 'videos']) }}" style="color: inherit; text-decoration: none">
         <h3 class="user-show-title">近期動態<i style="font-size: 0.85em; vertical-align: middle; margin-top: -3px; margin-left: 5px" class="material-icons">arrow_forward_ios</i></h3>
       </a>
