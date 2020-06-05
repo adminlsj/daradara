@@ -18,8 +18,12 @@ class Video extends Model
         '正版動漫', '同人動畫', '動漫講評', '明星', '日本人氣YouTuber', '日本創意廣告', '日劇講評'
     ];
 
+    public static $genres = [
+        '動畫卡通' => 'anime', '綜藝頻道' => 'variety', '明星專區' => 'artist', '迷因翻譯' => 'meme'
+    ];
+
     public static $content = [
-        'anime' => ['動漫', '動畫', '動漫講評', 'MAD·AMV'], 'aninews' => ['動漫情報'], 'variety' => ['綜藝'], 'artist' => ['明星', '日劇'], 'meme' => ['搞笑'], 'daily' => ['旅遊']
+        'anime' => ['動漫', '動畫', '動漫講評', 'MAD·AMV'], 'aninews' => ['動漫情報'], 'variety' => ['綜藝'], 'artist' => ['明星', '日劇'], 'meme' => ['迷因翻譯'], 'daily' => ['生活']
     ];
 
     public static $titles = [

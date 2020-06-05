@@ -11,18 +11,16 @@
 
 <div class="main-content">
 	<div style="background-color: #F5F5F5;">
-
 		<div class="row no-gutter load-more-container" style="padding-top: 19px;">
           <h5 class="user-show-title" style="font-size: 1em; color: #555555; font-weight: normal; line-height: 0px">只有想不到，沒有找不到</h5>
-          <h3 class="user-show-title no-select" style="font-size: 2em; margin-top: 5px; margin-bottom: 10px">LaughSeeJapan <span style="font-size: 0.93em">{{ Request::path() == 'rank' ? '熱門' : '最新' }}</span></h3>
+          <h3 class="user-show-title no-select" style="font-size: 2em; margin-top: 5px; margin-bottom: 10px">LaughSeeJapan <span style="font-size: 0.93em">推薦</span></h3>
         </div>
 
         <div class="subscribes-tab" style="border: none; margin-top: 4px; margin-bottom: 0px">
-        	<a id="default-tag" class="load-tag-videos active no-select" style="margin-right: 5px;">全部{{ Request::path() == 'rank' ? '發燒影片' : '最新內容' }}</a>
-            <a class="load-tag-videos no-select" style="margin-right: 5px;">動畫卡通</a>
-            <a class="load-tag-videos no-select" style="margin-right: 5px;">綜藝頻道</a>
-            <a class="load-tag-videos no-select" style="margin-right: 5px;">明星專區</a>
-            <a class="load-tag-videos no-select" style="margin-right: 5px;">迷因翻譯</a>
+        	<a id="default-tag" class="load-tag-videos active no-select" style="margin-right: 5px;">全部推薦內容</a>
+            @foreach (auth()->user()->recommendTags() as $tag)
+                <a class="load-tag-videos no-select" style="margin-right: 5px;">#{{ $tag }}</a>
+            @endforeach
     	</div>
 
         <div class="row no-gutter load-more-container" style="margin-top: 18px; padding-bottom: 5px;">
@@ -32,7 +30,7 @@
                 <div style="text-align: center;" class="ajax-loading"></div>
             </div>
         </div>
-        
 	</div>
 </div>
+
 @endsection

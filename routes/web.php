@@ -75,13 +75,18 @@ Route::get('/user/{user}/upload', 'UserController@userEditUpload')->name('user.u
 Route::post('/user/{user}/userUpdateUpload', 'UserController@userUpdateUpload')->name('user.userUpdateUpload');
 Route::get('/user/{user}/{genre?}', 'UserController@show')->name('user.show');
 Route::get('/channel/{genre}', 'HomeController@genre')->name('genre.index');
+Route::get('/channel/{genre}/loadTagList', 'VideoController@loadChannelVideos');
 
 Route::get('/copyrightReport', 'HomeController@copyrightReport')->name('email.copyrightReport');
 
 Route::get('/trending', 'VideoController@watch')->name('video.trending');
 
 Route::get('/rank', 'VideoController@explore')->name('video.rank');
+Route::get('/rank/loadTagList', 'VideoController@loadRankVideos');
 Route::get('/newest', 'VideoController@explore')->name('video.newest');
+Route::get('/newest/loadTagList', 'VideoController@loadNewestVideos');
+Route::get('/recommend', 'VideoController@recommend')->name('video.recommend');
+Route::get('/recommend/loadTagList', 'VideoController@loadRecommendVideos');
 Route::get('/playlist', 'VideoController@playlist')->name('video.playlist');
 Route::get('/{genre}/{title}', 'VideoController@intro')->name('video.intro');
 
