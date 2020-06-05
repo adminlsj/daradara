@@ -32,6 +32,10 @@
         <a href="{{ route('user.show', [$user, 'about']) }}" style="margin-right: 5px;">簡介</a>
         @if (Auth::check() && $user->id == Auth::user()->id)
           <a href="{{ route('user.userEditUpload', $user) }}" style="margin-right: 5px;">上傳影片</a>
+          <form id="logout-form" style="display: inline-block; margin-top: -10px; margin-bottom: -10px" action="{{ route('logout') }}" method="POST">
+              {{ csrf_field() }}
+              <button style="margin: 0px; margin-right: 5px; border: none;" type="submit">登出</button>
+          </form>
         @endif
     </div>
 

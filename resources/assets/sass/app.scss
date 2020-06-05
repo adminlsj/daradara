@@ -351,7 +351,7 @@ label.upload-image-btn input[type="file"] {
   display: none;
 }
 
-.subscribes-tab a {
+.subscribes-tab a, .subscribes-tab button {
   padding: 9px 14px;
   color: #666666 !important;
   background-color: #e8eaed;
@@ -392,7 +392,10 @@ label.upload-image-btn input[type="file"] {
 
 .subscribes-tab a:hover,
 .subscribes-tab a:focus, 
-.subscribes-tab a.active {
+.subscribes-tab a.active,
+.subscribes-tab button:hover,
+.subscribes-tab button:focus, 
+.subscribes-tab button.active {
   background-color: #595959;
   color: white !important;
   border-color: #595959; 
