@@ -36,7 +36,7 @@
         @endif
     </div>
 
-    <div class="row no-gutter load-more-container" style="margin-top: -1px;">
+    <div class="row no-gutter load-more-container">
       <a href="{{ route('user.show', [$user, 'videos']) }}" style="color: inherit; text-decoration: none">
         <h3 class="user-show-title">近期動態<i style="font-size: 0.85em; vertical-align: middle; margin-top: -3px; margin-left: 5px" class="material-icons">arrow_forward_ios</i></h3>
       </a>
