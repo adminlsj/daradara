@@ -71,7 +71,7 @@
 
 <div class="row no-gutter load-more-container" style="margin-top: 5px;">
   <a href="{{ route('genre.index', 'daily') }}" style="color: inherit; text-decoration: none">
-    <h3 class="user-show-title">日本生活<i style="font-size: 0.85em; vertical-align: middle; margin-top: -4px; margin-left: 5px" class="material-icons">arrow_forward_ios</i></h3>
+    <h3 class="user-show-title">旅遊生活<i style="font-size: 0.85em; vertical-align: middle; margin-top: -4px; margin-left: 5px" class="material-icons">arrow_forward_ios</i></h3>
   </a>
   <div class="video-sidebar-wrapper">
     @foreach ($daily as $video)
