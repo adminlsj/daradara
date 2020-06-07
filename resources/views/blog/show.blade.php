@@ -8,8 +8,8 @@
 	<meta property="og:description" content="{{ $current->caption }}" />
 	<meta property="og:image" content="https://i.imgur.com/{{ $current->imgur }}.jpg" />
 
-	<meta name="title" content="{{ $current->title }} | 娛見日本 LaughSeeJapan">
-	<title>{{ $current->title }} | 娛見日本 LaughSeeJapan</title>
+	<title>{{ $current->title }}&nbsp;-&nbsp;娛見日本 LaughSeeJapan</title>
+	<meta name="title" content="{{ $current->title }} - 娛見日本 LaughSeeJapan">
 	<meta name="description" content="{{ $current->caption }}">
 @endsection
 
