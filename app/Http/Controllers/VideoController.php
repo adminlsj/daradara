@@ -684,7 +684,7 @@ class VideoController extends Controller
             $videosArray = array_slice($videosArray, 15);
 
             // Character Match Query (search query as a whole e.g. 2012 => contains 2/0/1/2) [e.g. 郡司桑 月曜]
-            $videosSelect = Video::orderBy('uploaded_at', 'desc')->select('id', 'title', 'tags')->get()->toArray();
+            /* $videosSelect = Video::orderBy('uploaded_at', 'desc')->select('id', 'title', 'tags')->get()->toArray();
             $rankings = [];
             foreach ($videosSelect as $videoSelect) {
                 $score = 0;
@@ -714,7 +714,7 @@ class VideoController extends Controller
                 if (!in_array($rank['id'], $idsArray)) {
                     array_push($videosArray, Video::find($rank['id']));
                 }
-            }
+            } */
 
             $page = Input::get('page', 1); // Get the ?page=1 from the url
             $perPage = 15; // Number of items per page
@@ -733,7 +733,7 @@ class VideoController extends Controller
         }
 
         $watch = empty($videosArray) || $videosArray[0]->playlist_id == '' ? null : $videosArray[0]->watch();
-        $user = User::where('name', 'like', '%'.strtolower($query).'%')->first();
+        $user = User::withCount('videos')->where('name', 'like', '%'.strtolower($query).'%')->first();
         $topResults = array_slice($videosArray, 0, 15);
 
         return view('video.search', compact('watch', 'query', 'topResults', 'user'));
