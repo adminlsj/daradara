@@ -16,7 +16,7 @@ class Blog extends Model
 
     public function user()
     {
-        return User::find($this->user_id);
+        return $this->belongsTo('App\User');
     }
 
     public function tags()
@@ -67,5 +67,23 @@ class Blog extends Model
     public function imgurH()
     {
         return "https://i.imgur.com/".$this->imgur."h.jpg";
+    }
+
+    public function scopeTagsWithLimit($query, $tags, $count = 8)
+    {
+        return $query->with('user:id,name')->where(function($query) use ($tags) {
+            foreach ($tags as $tag) {
+                $query->orWhere('tags', 'like', '%'.$tag.'%');
+            }
+        })->orderBy('created_at', 'desc')->limit($count)->select('id', 'user_id', 'imgur', 'title');
+    }
+
+    public function scopeTagsWithPaginate($query, $tags)
+    {
+        return $query->with('user:id,name')->where(function($query) use ($tags) {
+            foreach ($tags as $tag) {
+                $query->orWhere('tags', 'like', '%'.$tag.'%');
+            }
+        })->select('id', 'user_id', 'imgur', 'title');
     }
 }

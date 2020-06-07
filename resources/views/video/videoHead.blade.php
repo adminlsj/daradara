@@ -20,7 +20,7 @@
   "uploadDate": "{{ \Carbon\Carbon::parse($current->created_at)->format('Y-m-d\Th:i:s').'+00:00' }}",
   "author": {
     "@type": "Person",
-    "name": "{{ $current->user()->name }}"
+    "name": "{{ $current->user->name }}"
   },
   @if ($current->outsource)
       "embedUrl": "{!! $current->source() !!}",

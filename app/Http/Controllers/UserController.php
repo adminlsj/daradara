@@ -36,17 +36,17 @@ class UserController extends Controller
     public function show(User $user, Request $request)
     {
         $watches = $user->watches();
-        $subscribers = 0;
-        if ($watches->first()) {
+        $subscribers = 5000;
+        /*if ($watches->first()) {
             foreach ($watches as $watch) {
                 $subscribers = $subscribers + Subscribe::where('tag', $watch->title)->count();
             }
-        }
+        }*/
 
         switch ($request->genre) {
             case 'videos':
                 if ($request->ajax()) {
-                    $videos = Video::where('user_id', $user->id)->orderBy('created_at', 'desc')->paginate(24);
+                    $videos = Video::where('user_id', $user->id)->orderBy('created_at', 'desc')->select('id', 'user_id', 'imgur', 'title')->paginate(24);
                     $html = '';
                     foreach ($videos as $video) {
                         $html .= view('video.singleLoadMoreSliderVideos', compact('video'));
@@ -62,7 +62,7 @@ class UserController extends Controller
                     $html = '';
                     foreach ($userWatches as $watch) {
                         $video = $watch->videos()->first();
-                        $html .= view('video.singleLoadMoreSliderPlaylists', compact('video'));
+                        $html .= view('video.singleLoadMoreSliderPlaylists', compact('watch', 'video'));
                     }
                     return $html;
                 }
@@ -72,8 +72,8 @@ class UserController extends Controller
                 return view('user.show-about', compact('user', 'subscribers'));
             
             default:
-                $videos = Video::where('user_id', $user->id)->orderBy('uploaded_at', 'desc')->limit(8)->get();
-                $trendings = Video::where('user_id', $user->id)->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->orderBy('views', 'desc')->limit(8)->get();
+                $videos = Video::with('user:id,name')->where('user_id', $user->id)->orderBy('uploaded_at', 'desc')->limit(8)->select('id', 'user_id', 'imgur', 'title')->get();
+                $trendings = Video::with('user:id,name')->where('user_id', $user->id)->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->orderBy('views', 'desc')->limit(8)->select('id', 'user_id', 'imgur', 'title')->get();
                 $playlists = Watch::where('user_id', $user->id)->orderBy('created_at', 'desc')->limit(8)->get();
                 $is_mobile = $this->checkMobile();
                 return view('user.show-featured', compact('user', 'subscribers', 'videos', 'trendings', 'playlists', 'is_mobile'));

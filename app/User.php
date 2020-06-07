@@ -105,9 +105,19 @@ class User extends Authenticatable
         return Watch::where('user_id', $this->id)->orderBy('updated_at', 'desc')->get();
     }
 
-    public function videos()
+    /* public function videos()
     {
         return Video::where('user_id', $this->id)->orderBy('uploaded_at', 'desc')->get();
+    } */
+
+    public function videos()
+    {
+        return $this->hasMany('App\Video');
+    }
+
+    public function blogs()
+    {
+        return $this->hasMany('App\Blog');
     }
 
     public function subscribes()

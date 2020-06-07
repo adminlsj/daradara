@@ -7,7 +7,7 @@
     <div style="padding-top: 1px; padding-right: 12px; padding-left: 4px;" class="col-xs-6 col-sm-6 col-md-7">
       <h4 style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;">{{ $video->title }}</h4>
       <p>
-        <a class="text-ellipsis-mobile" href="{{ route('user.show', $video->user()) }}">{{ $video->user()->name }} • </a><span class="text-ellipsis-mobile">觀看次數：{{ $video->views() }}次 • {{ Carbon\Carbon::parse($video->uploaded_at)->diffForHumans() }}</p></span>
+        <a class="text-ellipsis-mobile" href="{{ route('user.show', $video->user) }}">{{ $video->user->name }} • </a><span class="text-ellipsis-mobile">觀看次數：{{ $video->views() }}次 • {{ Carbon\Carbon::parse($video->uploaded_at)->diffForHumans() }}</p></span>
       <p style="margin-top: 9px; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;" class="hidden-xs hidden-sm">{{ $video->caption }}</p>
     </div>
   </div>

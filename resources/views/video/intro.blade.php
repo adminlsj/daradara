@@ -33,8 +33,8 @@
     	<div style="background-color: #F5F5F5;">
     		<div class="row no-gutter">
     			<div class="col-md-5" style="padding: 21px 30px 25px 30px; background-color: #F9F9F9; min-height: 100%;">
-    				@if ($videos->first())
-    					@include('video.intro-left', ['link' => route('video.watch').'?v='.$videos->first()->id.'&list='.$watch->id, 'image' => $first->imgurH(), 'title' => $first->title])
+    				@if ($first)
+    					@include('video.intro-left', ['link' => route('video.watch').'?v='.$first->id.'&list='.$watch->id, 'image' => $first->imgurH(), 'title' => $first->title])
     				@else
 	    				@include('video.intro-left', ['link' => '', 'image' => 'https://i.imgur.com/JMcgEkPl.jpg', 'title' => ''])
     				@endif
@@ -47,7 +47,7 @@
 			    				<span style="float: left; width: 40px; font-weight: 500; padding-top: 30px; text-align: center">{{ $videos->count() - $loop->index }}</span>
 		    					<img class="lazy" style="width: 150px; height: auto; float: left;" src="{{ $video->imgur16by9() }}" data-src="{{ $video->imgurH() }}" data-srcset="{{ $video->imgurH() }}" alt="{{ $video->title }}">
 		    					<h4>{{ $video->title }}</h4>
-		    					<h5><a href="{{ route('user.show', [$video->watch()->user()]) }}">{{ $watch->user()->name }}</a></h5>
+		    					<h5><a href="{{ route('user.show', [$user]) }}">{{ $user->name }}</a></h5>
 		    				</div>
 		    				<hr style="border-color: #e1e1e1; margin-left: 40px; margin-right: 25px">
 	    				</div>

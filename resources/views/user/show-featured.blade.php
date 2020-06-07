@@ -54,9 +54,9 @@
       </a>
       <div class="video-sidebar-wrapper">
         @foreach ($playlists as $watch)
-          @if ($watch->videos()->first())
+          @if ($video = $watch->videos()->first())
             <div class="{{ $loop->iteration > 4 ? 'hidden-xs hidden-sm' : ''}}">
-              @include('video.singleLoadMoreSliderPlaylists', ['video' => $watch->videos()->first()])
+              @include('video.singleLoadMoreSliderPlaylists', ['video' => $video])
             </div>
           @endif
         @endforeach
@@ -70,9 +70,9 @@
         </a>
         <div class="video-sidebar-wrapper">
           @foreach (App\Watch::where('user_id', 5190)->inRandomOrder()->limit(8)->get() as $watch)
-            @if ($watch->videos()->first())
+            @if ($video = $watch->videos()->first())
               <div class="{{ $loop->iteration > 4 ? 'hidden-xs hidden-sm' : ''}}">
-                @include('video.singleLoadMoreSliderPlaylists', ['video' => $watch->videos()->first()])
+                @include('video.singleLoadMoreSliderPlaylists', ['video' => $video])
               </div>
             @endif
           @endforeach
@@ -85,9 +85,4 @@
 	</div>
 </div>
 
-@endsection
-
-@section('script')
-  @parent
-  <script src="{{ mix('js/loadMore.js') }}"></script>
 @endsection

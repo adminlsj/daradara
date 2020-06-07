@@ -8,7 +8,7 @@
     <h3 class="user-show-title">動畫卡通<i style="font-size: 0.85em; vertical-align: middle; margin-top: -3px; margin-left: 5px" class="material-icons">arrow_forward_ios</i></h3>
   </a>
   <div class="video-sidebar-wrapper">
-    @include('video.new-singleLoadMoreVideos', ['video' => $animeFirst])
+    @include('video.new-singleLoadMoreVideos', ['video' => $animeFirst[0]])
     @foreach ($animeVid as $video)
       <div class="{{ $loop->iteration > 3 ? 'hidden-xs hidden-sm' : ''}}">
         @include('video.new-singleLoadMoreVideos')

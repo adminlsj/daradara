@@ -2,7 +2,7 @@
 	<div style="margin: 10px 15px 15px 15px; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1); border-radius: 3px;">
 		<div style="background-color: #e1e1e1; padding: 10px; border-top-left-radius: 3px; border-top-right-radius: 3px;">
 			<div><a style="color: #222222; font-weight: bold; font-size: 1.1em" href="{{ route('video.playlist') }}?list={{ $current->watch()->id }}">{{ $current->watch()->title }}</a></div>
-			<div><a style="color: dimgray; font-weight: bold; font-size: 0.85em" href="{{ route('user.show', [$current->user()]) }}">{{ $current->user()->name }}</a></div>
+			<div><a style="color: dimgray; font-weight: bold; font-size: 0.85em" href="{{ route('user.show', [$current->user]) }}">{{ $current->user->name }}</a></div>
 		</div>
 
 		<div class="playlist-scoll-wrapper" style="max-height: 325px; overflow-y: scroll; padding: 5px 0px; background-color: #F9F9F9; border-bottom-left-radius: 3px; border-bottom-right-radius: 3px;">

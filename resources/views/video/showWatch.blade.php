@@ -36,25 +36,25 @@
 							</script>
 						</div>
 
-						@if ($video->watch() && Request::get('list') != $video->watch()->id)
+						@if ($watch && Request::get('list') != $watch->id)
 							<div id="suggested-watch-wrapper" class="related-watch-wrap hover-opacity-all" style="background-color: #F9F9F9">
-								<a href="{{ route('video.playlist') }}?list={{ $video->watch()->id }}" class="row no-gutter">
+								<a href="{{ route('video.playlist') }}?list={{ $watch->id }}" class="row no-gutter">
 								  <div style="padding-right: 4px; position: relative; width: 175px;" class="col-xs-6 col-sm-6 col-md-6">
-								    <img class="lazy" style="width: 100%; height: 100%; border-top-left-radius: 3px; border-bottom-left-radius: 3px;" src="{{ $video->imgur16by9() }}" data-src="{{ $video->watch()->videos()->first()->imgurL() }}" data-srcset="{{ $video->watch()->videos()->first()->imgurL() }}" alt="{{ $video->watch()->title }}">
+								    <img class="lazy" style="width: 100%; height: 100%; border-top-left-radius: 3px; border-bottom-left-radius: 3px;" src="{{ $first->imgur16by9() }}" data-src="{{ $first->imgurL() }}" data-srcset="{{ $first->imgurL() }}" alt="{{ $watch->title }}">
 								    <span>
 								      	<div style="margin: 0;position: absolute; top: calc(50% + 3px); left: 50%; transform: translate(-50%, -50%);">
-									      	<div>{{ $video->watch()->videos()->count() }}</div>
+									      	<div>{{ $watch->videos()->count() }}</div>
 									      	<i style="font-size: 1.6em; margin-right: -2px" class="material-icons">playlist_play</i>
 									    </div>
 								    </span>
 								  </div>
 								  <div style="padding-left: 4px; width: calc(100% - 175px)" class="col-xs-6 col-sm-6 col-md-6 related-watch-title">
-								    <h4>{{ $video->watch()->title }}</h4>
+								    <h4>{{ $watch->title }}</h4>
 								  </div>
 								</a>
 								<div style="position: absolute; bottom: 7px; left: 182px">
-									<img class="lazy" style="float:left; width: 18px; height: 18px; margin-top: 1px" src="{{ $video->user()->avatarCircleB() }}" data-src="{{ $video->user()->avatar == null ? $video->user()->avatarDefault() : $video->user()->avatar->filename }}" data-srcset="{{ $video->user()->avatar == null ? $video->user()->avatarDefault() : $video->user()->avatar->filename }}">
-									<a href="{{ route('user.show', [$video->user()]) }}" style="color: darkgray; font-size: 0.8em; margin-left: 5px;">{{ $video->user()->name }}</a>
+									<img class="lazy" style="float:left; width: 18px; height: 18px; margin-top: 1px" src="{{ $video->user->avatarCircleB() }}" data-src="{{ $video->user->avatar == null ? $video->user->avatarDefault() : $video->user->avatar->filename }}" data-srcset="{{ $video->user->avatar == null ? $video->user->avatarDefault() : $video->user->avatar->filename }}">
+									<a href="{{ route('user.show', [$video->user]) }}" style="color: darkgray; font-size: 0.8em; margin-left: 5px;">{{ $video->user->name }}</a>
 								</div>
 							</div>
 						@endif

@@ -39,9 +39,9 @@
 					<div style="padding: 0px 25px 25px 25px;">
 						<h3 style="line-height: 30px; font-weight: bold; font-size: 1.5em">{{ $blog->title }}</h3>
 
-						<a href="{{ route('user.show', [$blog->user()]) }}"><img class="lazy" style="float:left; border-radius: 50%; width: 35px; height: 35px;" src="{{ $blog->user()->avatarCircleB() }}" data-src="{{ $blog->user()->avatar == null ? $blog->user()->avatarDefault() : $blog->user()->avatar->filename }}" data-srcset="{{ $blog->user()->avatar == null ? $blog->user()->avatarDefault() : $blog->user()->avatar->filename }}"></a>
+						<a href="{{ route('user.show', [$blog->user]) }}"><img class="lazy" style="float:left; border-radius: 50%; width: 35px; height: 35px;" src="{{ $blog->user->avatarCircleB() }}" data-src="{{ $blog->user->avatar == null ? $blog->user->avatarDefault() : $blog->user->avatar->filename }}" data-srcset="{{ $blog->user->avatar == null ? $blog->user->avatarDefault() : $blog->user->avatar->filename }}"></a>
 
-					    <h5 style="margin-left: 45px; line-height: 37px;"><a style="text-decoration: none; color: dimgray; font-weight: bold" href="{{ route('user.show', [$blog->user()]) }}">{{ $blog->user()->name }}</a></h5>
+					    <h5 style="margin-left: 45px; line-height: 37px;"><a style="text-decoration: none; color: dimgray; font-weight: bold" href="{{ route('user.show', [$blog->user]) }}">{{ $blog->user->name }}</a></h5>
 
 					    <div style="padding-top: 8px">
 							@foreach ($content as $cont)

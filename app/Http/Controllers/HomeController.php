@@ -28,17 +28,13 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
-        $animeFirst = Video::where('tags', 'like', '%正版動漫%')->orderBy('uploaded_at', 'desc')->first();
-        $animeVid = Video::where(function($query) {
-            $query->orWhere('tags', 'like', '%正版動漫%')->orWhere('tags', 'like', '%動畫%')->orWhere('tags', 'like', '%動漫講評%')->orWhere('tags', 'like', '%MAD·AMV%');
-        })->where('id', '!=', $animeFirst->id)->orderBy('uploaded_at', 'desc')->limit(7)->get();
-
-        $animeNews = Blog::where('tags', 'like', '%動漫情報%')->orderBy('created_at', 'desc')->limit(8)->get();
-        $variety = Video::where('tags', 'like', '%綜藝%')->orderBy('uploaded_at', 'desc')->limit(8)->get();
-        $artist = Video::where('tags', 'like', '%明星%')->orWhere('tags', 'like', '%日劇%')->orderBy('uploaded_at', 'desc')->limit(8)->get();
-        $meme = Video::where('tags', 'like', '%迷因%')->orderBy('uploaded_at', 'desc')->limit(8)->get();
-        $daily = Blog::where('tags', 'like', '%生活%')->orderBy('created_at', 'desc')->limit(8)->get();
-
+        $animeFirst = Video::tagsWithLimit(['正版動漫'], 1)->get();
+        $animeVid = Video::where('id', '!=', $animeFirst[0]->id)->tagsWithLimit(['正版動漫', '動畫', '動漫講評', 'MAD·AMV'], 7)->get();
+        $animeNews = Blog::tagsWithLimit(['動漫情報'])->get();
+        $variety = Video::tagsWithLimit(['綜藝'])->get();
+        $artist = Video::tagsWithLimit(['明星', '日劇'])->get();
+        $meme = Video::tagsWithLimit(['迷因'])->get();
+        $daily = Blog::tagsWithLimit(['生活'])->get();
         return view('video.home', compact('animeFirst', 'animeVid', 'animeNews', 'variety', 'artist', 'meme', 'daily'));
     }
 

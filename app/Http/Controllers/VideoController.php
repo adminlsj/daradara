@@ -13,6 +13,7 @@ use App\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Arr;
 use Auth;
 use Carbon\Carbon;
 use Response;
@@ -40,13 +41,15 @@ class VideoController extends Controller
         if ($request->has('list') && $request->list != 'null') {
 
             $watch = Watch::find($request->list);
-            $videos = $watch->videos();
+            $user = $watch->user();
+            $videos = Video::where('playlist_id', $watch->id)->orderBy('created_at', 'desc')->select('id', 'user_id', 'imgur', 'title')->get();
+            $count = $videos->count();
 
-            $first = $watch->videos()->first();
+            $first = $videos->first();
             $is_subscribed = $this->is_subscribed($watch->title);
             $is_mobile = $this->checkMobile();
 
-            return view('video.intro', compact('watch', 'videos', 'first', 'is_subscribed', 'is_mobile'));
+            return view('video.intro', compact('watch', 'user', 'videos', 'count', 'first', 'is_subscribed', 'is_mobile'));
         }
     }
 
@@ -93,34 +96,19 @@ class VideoController extends Controller
             $current = $video;
             $is_mobile = $this->checkMobile();
 
-            $query = Video::where('playlist_id', $video->playlist_id)->orderBy('created_at', 'asc')->pluck('id')->toArray();
-            $now = array_search($video->id, $query);
-            while(key($query) !== null && key($query) !== $now) next($query);
-
-            $prev = 0; $next = 0;
-            if ($this->has_prev($query)) {
-                $prev = prev($query);
-                next($query);
-            } else {
-                $prev = false;
-            }
-            if ($this->has_next($query)) {
-                $next = next($query);
-            } else {
-                $next = false;
-            }
-
             if ($video->playlist_id != null) {
                 $watch = Watch::find($video->playlist_id);
+                $first = $watch->videos()->first();
                 $is_subscribed = $this->is_subscribed($watch->title);
                 $is_program = true;
             } else {
                 $watch = null;
+                $first = null;
                 $is_subscribed = false;
                 $is_program = false;
             }
 
-            return view('video.showWatch', compact('video', 'prev', 'next', 'watch', 'current', 'is_program', 'is_subscribed', 'is_mobile'));
+            return view('video.showWatch', compact('video', 'watch', 'first', 'current', 'is_program', 'is_subscribed', 'is_mobile'));
 
         } else {
             return view('errors.404');
@@ -138,34 +126,18 @@ class VideoController extends Controller
 
     public function subscribeIndex(Request $request)
     {
+        $user = auth()->user();
         if (auth()->check()) {
-            $subscribes = auth()->user()->subscribes();
+            $subscribes = $user->subscribes();
 
             if ($subscribes->isEmpty()) {
-                $animeFirst = Video::where('tags', 'like', '%正版動漫%')->orderBy('uploaded_at', 'desc')->first();
-                $animeVid = Video::where(function($query) {
-                    $query->orWhere('tags', 'like', '%正版動漫%')->orWhere('tags', 'like', '%動畫%')->orWhere('tags', 'like', '%動漫講評%')->orWhere('tags', 'like', '%MAD·AMV%');
-                })->where('id', '!=', $animeFirst->id)->orderBy('uploaded_at', 'desc')->limit(7)->get();
-
-                $animeNews = Blog::where(function($query) {
-                    $query->orWhere('tags', 'like', '%動漫情報%');
-                })->orderBy('created_at', 'desc')->limit(8)->get();
-
-                $variety = Video::where(function($query) {
-                    $query->orWhere('tags', 'like', '%綜藝%');
-                })->orderBy('uploaded_at', 'desc')->limit(8)->get();
-
-                $artist = Video::where(function($query) {
-                    $query->orWhere('tags', 'like', '%明星%')->orWhere('tags', 'like', '%日劇%');
-                })->orderBy('uploaded_at', 'desc')->limit(8)->get();
-
-                $meme = Video::where(function($query) {
-                    $query->orWhere('tags', 'like', '%日本人氣YouTuber%')->orWhere('tags', 'like', '%日本創意廣告%')->orWhere('tags', 'like', '%搞笑影片%');
-                })->orderBy('uploaded_at', 'desc')->limit(8)->get();
-
-                $daily = Blog::where(function($query) {
-                    $query->orWhere('tags', 'like', '%生活%');
-                })->orderBy('created_at', 'desc')->limit(8)->get();
+                $animeFirst = Video::tagsWithLimit(['正版動漫'], 1)->get();
+                $animeVid = Video::where('id', '!=', $animeFirst[0]->id)->tagsWithLimit(['正版動漫', '動畫', '動漫講評', 'MAD·AMV'], 7)->get();
+                $animeNews = Blog::tagsWithLimit(['動漫情報'])->get();
+                $variety = Video::tagsWithLimit(['綜藝'])->get();
+                $artist = Video::tagsWithLimit(['明星', '日劇'])->get();
+                $meme = Video::tagsWithLimit(['迷因'])->get();
+                $daily = Blog::tagsWithLimit(['生活'])->get();
                 return view('video.subscribeIndexEmpty', compact('animeFirst', 'animeVid', 'animeNews', 'variety', 'artist', 'meme', 'daily'));
             }
 
@@ -184,7 +156,7 @@ class VideoController extends Controller
                         break;
 
                     case 'saved':
-                        $saved = Save::where('user_id', auth()->user()->id)->pluck('foreign_id');
+                        $saved = Save::where('user_id', $user->id)->pluck('foreign_id');
                         $videos = $videos->whereIn('id', $saved);
                         break;
                     
@@ -207,7 +179,6 @@ class VideoController extends Controller
                 return $this->subscribeLoadHTML($videos);
             }
 
-            $user = auth()->user();
             $user->alert = str_replace('subscribe', '', $user->alert);
             $user->save();
 
@@ -324,36 +295,27 @@ class VideoController extends Controller
         if ($genre == 'aninews' || $genre == 'daily') {
             if (strpos($tag, '全部') !== false) {
                 $tags = Blog::$content[$genre];
-                $videos = Blog::where(function($query) use ($tags) {
-                    foreach ($tags as $tag) {
-                        $query->orWhere('tags', 'like', '%'.$tag.'%');
-                    }
-                })->orderBy('created_at', 'desc')->paginate(24);
+                $videos = Blog::tagsWithPaginate($tags)->orderBy('created_at', 'desc')->paginate(24);
 
             } else {
-                $videos = Blog::where('tags', 'like', '%'.$tag.'%')->orderBy('created_at', 'desc')->paginate(24);
+                $videos = Blog::tagsWithPaginate([$tag])->orderBy('created_at', 'desc')->paginate(24);
             }
 
         } else {
-            $videos = Video::query();
             if (strpos($tag, '全部') !== false) {
                 $tags = Video::$content[$genre];
-                $videos = Video::where(function($query) use ($tags) {
-                    foreach ($tags as $tag) {
-                        $query->orWhere('tags', 'like', '%'.$tag.'%');
-                    }
-                });
+                $videos = Video::tagsWithPaginate($tags);
                 if ($genre != 'meme') {
                     $videos = $videos->whereDate('uploaded_at', '>=', Carbon::now()->subMonths(3));
                 }
 
             } else {
                 if ($tag == 'anime1') {
-                    $videos = $videos->where('user_id', 746);
+                    $videos = Video::with('user:id,name')->where('user_id', 746)->select('id', 'user_id', 'imgur', 'title');
                 } elseif ($tag == 'Gimy劇迷') {
-                    $videos = $videos->where('user_id', 750);
+                    $videos = Video::with('user:id,name')->where('user_id', 750)->select('id', 'user_id', 'imgur', 'title');
                 } else {
-                    $videos = $videos->where('tags', 'like', '%'.$tag.'%');
+                    $videos = Video::tagsWithPaginate([$tag]);
                 }                    
             }
             $videos = $videos->orderBy('uploaded_at', 'desc')->paginate(24);
@@ -364,39 +326,20 @@ class VideoController extends Controller
 
     public function loadRankVideos(Request $request) {
         $tags = strpos($request->tag, '全部') !== false ? ['正版動漫', '動畫', '動漫講評', 'MAD·AMV', '綜藝', '日劇', '迷因翻譯'] : Video::$content[Video::$genres[$request->tag]];
-        $week = Video::where(function($query) use ($tags) {
-            foreach ($tags as $tag) {
-                $query->orWhere('tags', 'like', '%'.$tag.'%');
-            }
-        })->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->orderBy('views', 'desc')->limit(24)->get();
+
+        $week = Video::tagsWithPaginate($tags)->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->orderBy('views', 'desc')->limit(24)->get();
         $week_id = $week->pluck('id');
 
-        $quarter = Video::whereNotIn('id', $week_id)->where(function($query) use ($tags) {
-            foreach ($tags as $tag) {
-                $query->orWhere('tags', 'like', '%'.$tag.'%');
-            }
-        })->whereDate('uploaded_at', '>=', Carbon::now()->subMonths(3))->orderBy('views', 'desc')->limit(24)->get();
+        $quarter = Video::whereNotIn('id', $week_id)->tagsWithPaginate($tags)->whereDate('uploaded_at', '>=', Carbon::now()->subMonths(3))->orderBy('views', 'desc')->limit(24)->get();
         $quarter_id = $quarter->pluck('id');
 
-        $semi = Video::whereNotIn('id', $week_id)->whereNotIn('id', $quarter_id)->where(function($query) use ($tags) {
-            foreach ($tags as $tag) {
-                $query->orWhere('tags', 'like', '%'.$tag.'%');
-            }
-        })->whereDate('uploaded_at', '>=', Carbon::now()->subMonths(6))->orderBy('views', 'desc')->limit(24)->get();
+        $semi = Video::whereNotIn('id', $week_id)->whereNotIn('id', $quarter_id)->tagsWithPaginate($tags)->whereDate('uploaded_at', '>=', Carbon::now()->subMonths(6))->orderBy('views', 'desc')->limit(24)->get();
         $semi_id = $semi->pluck('id');
 
-        $year = Video::whereNotIn('id', $week_id)->whereNotIn('id', $quarter_id)->whereNotIn('id', $semi_id)->where(function($query) use ($tags) {
-            foreach ($tags as $tag) {
-                $query->orWhere('tags', 'like', '%'.$tag.'%');
-            }
-        })->whereDate('uploaded_at', '>=', Carbon::now()->subMonths(12))->orderBy('views', 'desc')->limit(24)->get();
+        $year = Video::whereNotIn('id', $week_id)->whereNotIn('id', $quarter_id)->whereNotIn('id', $semi_id)->tagsWithPaginate($tags)->whereDate('uploaded_at', '>=', Carbon::now()->subMonths(12))->orderBy('views', 'desc')->limit(24)->get();
         $year_id = $year->pluck('id');
 
-        $videos = Video::whereNotIn('id', $week_id)->whereNotIn('id', $quarter_id)->whereNotIn('id', $semi_id)->whereNotIn('id', $year_id)->where(function($query) use ($tags) {
-            foreach ($tags as $tag) {
-                $query->orWhere('tags', 'like', '%'.$tag.'%');
-            }
-        })->orderBy('views', 'desc')->paginate(24);
+        $videos = Video::whereNotIn('id', $week_id)->whereNotIn('id', $quarter_id)->whereNotIn('id', $semi_id)->whereNotIn('id', $year_id)->tagsWithPaginate($tags)->orderBy('views', 'desc')->paginate(24);
 
         $html = '';
         if ($request->page == 1) {
@@ -411,11 +354,7 @@ class VideoController extends Controller
 
     public function loadNewestVideos(Request $request) {
         $tags = strpos($request->tag, '全部') !== false ? [] : Video::$content[Video::$genres[$request->tag]];
-        $videos = Video::where(function($query) use ($tags) {
-            foreach ($tags as $tag) {
-                $query->orWhere('tags', 'like', '%'.$tag.'%');
-            }
-        })->orderBy('uploaded_at', 'desc')->paginate(24);
+        $videos = Video::tagsWithPaginate($tags)->orderBy('uploaded_at', 'desc')->paginate(24);
 
         return $this->singleLoadMoreSliderVideosHTML($videos);
     }
@@ -489,56 +428,40 @@ class VideoController extends Controller
                 $subscribes_id = $subscribes->pluck('id');
             }
 
-            $newest = Video::whereNotIn('id', $subscribes_id)->where(function($query) use ($tags) {
-                foreach ($tags as $tag) {
-                    $query->orWhere('tags', 'like', '%'.$tag.'%');
-                }
-            })->orderBy('uploaded_at', 'desc')->limit(24)->get();
+            $newest = Video::whereNotIn('id', $subscribes_id)->tagsWithPaginate($tags)->orderBy('uploaded_at', 'desc')->limit(24)->get();
             $newest_id = $newest->pluck('id');
 
-            $trending = Video::whereNotIn('id', $subscribes_id)->whereNotIn('id', $newest_id)->where(function($query) use ($tags) {
-                foreach ($tags as $tag) {
-                    $query->orWhere('tags', 'like', '%'.$tag.'%');
-                }
-            })->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->orderBy('views', 'desc')->limit(24)->get();
+            $trending = Video::whereNotIn('id', $subscribes_id)->whereNotIn('id', $newest_id)->tagsWithPaginate($tags)->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->orderBy('views', 'desc')->limit(24)->get();
             $trending_id = $trending->pluck('id');
 
-            $views = Video::whereNotIn('id', $subscribes_id)->whereNotIn('id', $newest_id)->whereNotIn('id', $trending_id)->where(function($query) use ($tags) {
-                foreach ($tags as $tag) {
-                    $query->orWhere('tags', 'like', '%'.$tag.'%');
-                }
-            })->where('views', '>=', 5000)->inRandomOrder()->limit(12)->get();
+            $views = Video::whereNotIn('id', $subscribes_id)->whereNotIn('id', $newest_id)->whereNotIn('id', $trending_id)->tagsWithPaginate($tags)->where('views', '>=', 5000)->inRandomOrder()->limit(12)->get();
             $views_id = $views->pluck('id');
 
-            $videos = Video::whereNotIn('id', $subscribes_id)->whereNotIn('id', $newest_id)->whereNotIn('id', $trending_id)->whereNotIn('id', $views_id)->where(function($query) use ($tags) {
-                foreach ($tags as $tag) {
-                    $query->orWhere('tags', 'like', '%'.$tag.'%');
-                }
-            })->orderBy('uploaded_at', 'desc')->paginate(24);
+            $videos = Video::whereNotIn('id', $subscribes_id)->whereNotIn('id', $newest_id)->whereNotIn('id', $trending_id)->whereNotIn('id', $views_id)->tagsWithPaginate($tags)->orderBy('uploaded_at', 'desc')->paginate(24);
 
         } elseif ($tag == '動漫新番') {
-            $newest = Video::whereNotIn('id', $subscribes_id)->where('user_id', 746)->orderBy('uploaded_at', 'desc')->limit(24)->get();
+            $newest = Video::with('user:id,name')->whereNotIn('id', $subscribes_id)->where('user_id', 746)->orderBy('uploaded_at', 'desc')->limit(24)->select('id', 'user_id', 'imgur', 'title')->get();
             $newest_id = $newest->pluck('id');
 
-            $trending = Video::whereNotIn('id', $subscribes_id)->whereNotIn('id', $newest_id)->where('user_id', 746)->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->orderBy('views', 'desc')->limit(12)->get();
+            $trending = Video::with('user:id,name')->whereNotIn('id', $subscribes_id)->whereNotIn('id', $newest_id)->where('user_id', 746)->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->orderBy('views', 'desc')->limit(12)->select('id', 'user_id', 'imgur', 'title')->get();
             $trending_id = $trending->pluck('id');
 
-            $views = Video::whereNotIn('id', $subscribes_id)->whereNotIn('id', $newest_id)->whereNotIn('id', $trending_id)->where('user_id', 746)->where('views', '>=', 5000)->inRandomOrder()->limit(12)->get();
+            $views = Video::with('user:id,name')->whereNotIn('id', $subscribes_id)->whereNotIn('id', $newest_id)->whereNotIn('id', $trending_id)->where('user_id', 746)->where('views', '>=', 5000)->inRandomOrder()->limit(12)->select('id', 'user_id', 'imgur', 'title')->get();
             $views_id = $views->pluck('id');
 
-            $videos = Video::whereNotIn('id', $subscribes_id)->whereNotIn('id', $newest_id)->whereNotIn('id', $trending_id)->whereNotIn('id', $views_id)->where('user_id', 746)->orderBy('uploaded_at', 'desc')->paginate(24);
+            $videos = Video::with('user:id,name')->whereNotIn('id', $subscribes_id)->whereNotIn('id', $newest_id)->whereNotIn('id', $trending_id)->whereNotIn('id', $views_id)->where('user_id', 746)->orderBy('uploaded_at', 'desc')->select('id', 'user_id', 'imgur', 'title')->paginate(24);
 
         } else {
-            $newest = Video::whereNotIn('id', $subscribes_id)->where('tags', 'like', '%'.$tag.'%')->orderBy('uploaded_at', 'desc')->limit(24)->get();
+            $newest = Video::whereNotIn('id', $subscribes_id)->tagsWithPaginate([$tag])->orderBy('uploaded_at', 'desc')->limit(24)->get();
             $newest_id = $newest->pluck('id');
 
-            $trending = Video::whereNotIn('id', $subscribes_id)->whereNotIn('id', $newest_id)->where('tags', 'like', '%'.$tag.'%')->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->orderBy('views', 'desc')->limit(12)->get();
+            $trending = Video::whereNotIn('id', $subscribes_id)->whereNotIn('id', $newest_id)->tagsWithPaginate([$tag])->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->orderBy('views', 'desc')->limit(12)->get();
             $trending_id = $trending->pluck('id');
 
-            $views = Video::whereNotIn('id', $subscribes_id)->whereNotIn('id', $newest_id)->whereNotIn('id', $trending_id)->where('tags', 'like', '%'.$tag.'%')->where('views', '>=', 5000)->inRandomOrder()->limit(12)->get();
+            $views = Video::whereNotIn('id', $subscribes_id)->whereNotIn('id', $newest_id)->whereNotIn('id', $trending_id)->tagsWithPaginate([$tag])->where('views', '>=', 5000)->inRandomOrder()->limit(12)->get();
             $views_id = $views->pluck('id');
 
-            $videos = Video::whereNotIn('id', $subscribes_id)->whereNotIn('id', $newest_id)->whereNotIn('id', $trending_id)->whereNotIn('id', $views_id)->where('tags', 'like', '%'.$tag.'%')->orderBy('uploaded_at', 'desc')->paginate(24);
+            $videos = Video::whereNotIn('id', $subscribes_id)->whereNotIn('id', $newest_id)->whereNotIn('id', $trending_id)->whereNotIn('id', $views_id)->tagsWithPaginate([$tag])->orderBy('uploaded_at', 'desc')->paginate(24);
         }
 
         $html = '';
@@ -821,16 +744,18 @@ class VideoController extends Controller
         $video = Video::find($request->v);
         $current = $video;
 
+        $videosSelect = Video::where(function($query) use ($video) {
+            foreach ($video->tags() as $tag) {
+                $query->orWhere('tags', 'like', '%'.$tag.'%');
+            }
+        });
+
         if ($request->list != '') {
-            $videos = Video::where('playlist_id', $request->list)->orderBy('created_at', 'desc')->get();
-            $videosSelect = Video::where('playlist_id', '!=', $video->playlist_id)->inRandomOrder()->select('id', 'tags')->get()->toArray();
+            $videos = Video::where('playlist_id', $request->list)->orderBy('created_at', 'desc')->select('id', 'imgur', 'title')->get();
+            $videosSelect = $videosSelect->where('playlist_id', '!=', $video->playlist_id)->inRandomOrder()->select('id', 'tags')->get()->toArray();
         } else {
             $videos = null;
-            $videosSelect = Video::where(function($query) use ($video) {
-                foreach ($video->tags() as $tag) {
-                    $query->orWhere('tags', 'like', '%'.$tag.'%');
-                }
-            })->where('id', '!=', $video->id)->inRandomOrder()->select('id', 'tags')->get()->toArray();
+            $videosSelect = $videosSelect->where('id', '!=', $video->id)->inRandomOrder()->select('id', 'tags')->get()->toArray();
         }
 
         $rankings = [];
@@ -847,11 +772,7 @@ class VideoController extends Controller
             return $b['score'] <=> $a['score'];
         });
 
-        $related = [];
-        $max = count($rankings) > 30 ? 30 : count($rankings) - 1;
-        for ($i = 0; $i < $max; $i++) {
-            array_push($related, Video::find($rankings[$i]['id']));
-        }
+        $related = Video::with('user.avatar')->whereIn('id', Arr::pluck(array_slice($rankings, 0, 30), 'id'))->select('id', 'user_id', 'imgur', 'title')->get();
 
         $html = view('video.video-playlist-wrapper', compact('current', 'videos', 'related'));
         if ($request->ajax()) {

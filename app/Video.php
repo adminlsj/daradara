@@ -36,7 +36,7 @@ class Video extends Model
 
     public function user()
     {
-        return User::find($this->user_id);
+        return $this->belongsTo('App\User');
     }
 
     public function watch()
@@ -317,5 +317,23 @@ class Video extends Model
         $ini += strlen($start);
         $len = strpos($string, $end, $ini) - $ini;
         return substr($string, $ini, $len);
+    }
+
+    public function scopeTagsWithLimit($query, $tags, $count = 8)
+    {
+        return $query->with('user:id,name')->where(function($query) use ($tags) {
+            foreach ($tags as $tag) {
+                $query->orWhere('tags', 'like', '%'.$tag.'%');
+            }
+        })->orderBy('uploaded_at', 'desc')->limit($count)->select('id', 'user_id', 'imgur', 'title');
+    }
+
+    public function scopeTagsWithPaginate($query, $tags)
+    {
+        return $query->with('user:id,name')->where(function($query) use ($tags) {
+            foreach ($tags as $tag) {
+                $query->orWhere('tags', 'like', '%'.$tag.'%');
+            }
+        })->select('id', 'user_id', 'imgur', 'title');
     }
 }
