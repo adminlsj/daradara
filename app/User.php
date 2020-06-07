@@ -49,6 +49,9 @@ class User extends Authenticatable
                     if (!in_array('同人動畫', $tags)) {
                         array_push($tags, '同人動畫');
                     }
+                    if (!in_array('原創動畫', $tags)) {
+                        array_push($tags, '原創動畫');
+                    }
                     if (!in_array('動漫講評', $tags)) {
                         array_push($tags, '動漫講評');
                     }

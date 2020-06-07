@@ -339,7 +339,7 @@ class VideoController extends Controller
         $year = Video::whereNotIn('id', $week_id)->whereNotIn('id', $quarter_id)->whereNotIn('id', $semi_id)->tagsWithPaginate($tags)->whereDate('uploaded_at', '>=', Carbon::now()->subMonths(12))->orderBy('views', 'desc')->limit(24)->get();
         $year_id = $year->pluck('id');
 
-        $videos = Video::whereNotIn('id', $week_id)->whereNotIn('id', $quarter_id)->whereNotIn('id', $semi_id)->whereNotIn('id', $year_id)->tagsWithPaginate($tags)->orderBy('views', 'desc')->paginate(24);
+        $videos = Video::whereNotIn('id', $week_id)->whereNotIn('id', $quarter_id)->whereNotIn('id', $semi_id)->whereNotIn('id', $year_id)->tagsWithPaginate($tags)->whereDate('uploaded_at', '>=', Carbon::now()->subMonths(3))->orderBy('views', 'desc')->paginate(24);
 
         $html = '';
         if ($request->page == 1) {
@@ -354,7 +354,7 @@ class VideoController extends Controller
 
     public function loadNewestVideos(Request $request) {
         $tags = strpos($request->tag, '全部') !== false ? [] : Video::$content[Video::$genres[$request->tag]];
-        $videos = Video::tagsWithPaginate($tags)->orderBy('uploaded_at', 'desc')->paginate(24);
+        $videos = Video::tagsWithPaginate($tags)->whereDate('uploaded_at', '>=', Carbon::now()->subMonths(3))->orderBy('uploaded_at', 'desc')->paginate(24);
 
         return $this->singleLoadMoreSliderVideosHTML($videos);
     }
@@ -437,7 +437,7 @@ class VideoController extends Controller
             $views = Video::whereNotIn('id', $subscribes_id)->whereNotIn('id', $newest_id)->whereNotIn('id', $trending_id)->tagsWithPaginate($tags)->where('views', '>=', 5000)->inRandomOrder()->limit(12)->get();
             $views_id = $views->pluck('id');
 
-            $videos = Video::whereNotIn('id', $subscribes_id)->whereNotIn('id', $newest_id)->whereNotIn('id', $trending_id)->whereNotIn('id', $views_id)->tagsWithPaginate($tags)->orderBy('uploaded_at', 'desc')->paginate(24);
+            $videos = Video::whereNotIn('id', $subscribes_id)->whereNotIn('id', $newest_id)->whereNotIn('id', $trending_id)->whereNotIn('id', $views_id)->tagsWithPaginate($tags)->whereDate('uploaded_at', '>=', Carbon::now()->subMonths(3))->orderBy('uploaded_at', 'desc')->paginate(24);
 
         } elseif ($tag == '動漫新番') {
             $newest = Video::with('user:id,name')->whereNotIn('id', $subscribes_id)->where('user_id', 746)->orderBy('uploaded_at', 'desc')->limit(24)->select('id', 'user_id', 'imgur', 'title')->get();
@@ -461,7 +461,13 @@ class VideoController extends Controller
             $views = Video::whereNotIn('id', $subscribes_id)->whereNotIn('id', $newest_id)->whereNotIn('id', $trending_id)->tagsWithPaginate([$tag])->where('views', '>=', 5000)->inRandomOrder()->limit(12)->get();
             $views_id = $views->pluck('id');
 
-            $videos = Video::whereNotIn('id', $subscribes_id)->whereNotIn('id', $newest_id)->whereNotIn('id', $trending_id)->whereNotIn('id', $views_id)->tagsWithPaginate([$tag])->orderBy('uploaded_at', 'desc')->paginate(24);
+            $videos = Video::whereNotIn('id', $subscribes_id)->whereNotIn('id', $newest_id)->whereNotIn('id', $trending_id)->whereNotIn('id', $views_id)->tagsWithPaginate([$tag]);
+
+            if ($tag != '原創動畫' && $tag != '同人動畫' && $tag != '動漫講評' && $tag != 'MAD·AMV') {
+                $videos = $videos->whereDate('uploaded_at', '>=', Carbon::now()->subMonths(3));
+            }
+
+            $videos = $videos->orderBy('uploaded_at', 'desc')->paginate(24);
         }
 
         $html = '';
