@@ -23,7 +23,7 @@ class Video extends Model
     ];
 
     public static $content = [
-        'anime' => ['動漫', '動畫', '動漫講評', 'MAD·AMV'], 'aninews' => ['動漫情報'], 'variety' => ['綜藝'], 'artist' => ['明星', '日劇'], 'meme' => ['迷因翻譯'], 'daily' => ['生活']
+        'anime' => ['動漫', '動畫', '動漫講評', 'MAD·AMV'], 'aninews' => ['動漫情報'], 'variety' => ['綜藝'], 'artist' => ['明星', '日劇'], 'meme' => ['迷因'], 'daily' => ['生活']
     ];
 
     public static $titles = [

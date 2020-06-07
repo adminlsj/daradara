@@ -13,16 +13,16 @@
 
       @if (Auth::check())
         <a class="hidden-xs hidden-sm nav-item-icon" style="right: 26px;" href="{{ route('user.show', Auth::user()) }}"><i class="material-icons">account_circle</i></a>
-        <a class="hidden-xs hidden-sm nav-item-icon" style="right: 70px;" href="{{ route('user.userEditUpload', Auth::user()) }}"><i class="material-icons">video_call</i></a>
+        <a class="hidden-xs hidden-sm nav-item-icon" style="right: 75px;" href="{{ route('user.userEditUpload', Auth::user()) }}"><i class="material-icons">video_call</i></a>
       @else
-        <a class="no-select nav-item-text hidden-xs hidden-sm" style="color: #e8eaed; border: 1px solid #e8eaed; padding: 8px 14px; margin-top: 5px; margin-right: 15px; font-weight: bold; color: #666666" href="{{ route('login') }}">登入</a>
-        <a class="no-select nav-item-text hidden-xs hidden-sm" style="color: white; background-color: #e8eaed; border-color: #e8eaed; padding: 7px 14px; margin-top: 5px; font-weight: bold; color: #666666" href="{{ route('register') }}">註冊</a>
+        <a class="no-select nav-item-text hidden-xs hidden-sm" style="color: #e8eaed; border: 1px solid #e8eaed; padding: 8px 14px; margin-top: 5px; margin-right: 7px; font-weight: bold; color: #666666" href="{{ route('login') }}">登入</a>
+        <a class="no-select nav-item-text hidden-xs hidden-sm" style="color: white; background-color: #e8eaed; border-color: #e8eaed; padding: 7px 14px; margin-top: 5px; font-weight: bold; color: #666666;" href="{{ route('register') }}">註冊</a>
         <a class="no-select pull-right hidden-xs hidden-sm" style="margin-top: 8px; margin-right: 18px;" href="{{ route('login') }}"><i class="material-icons">video_call</i></a>
       @endif
 
-      <a class="hidden-md hidden-lg nav-item-icon" style="right: 21px;" href="{{ Auth::check() ? route('user.show', Auth::user()) : route('login')}}"><i class="material-icons">account_circle</i></a>
-      <a id="toggleSearchBar" class="hidden-md hidden-lg nav-item-icon" style="right: 65px; cursor: pointer;"><i class="material-icons">search</i></a>
-      <a id="nav-account-icon" class="pull-right hidden-md hidden-lg nav-item-icon" style="right: 109px;" href="{{ Auth::check() ? route('user.userEditUpload', Auth::user()) : route('login')}}"><i class="material-icons">video_call</i></a>
+      <a class="hidden-md hidden-lg nav-item-icon" style="right: 16px;" href="{{ Auth::check() ? route('user.show', Auth::user()) : route('login')}}"><i class="material-icons">account_circle</i></a>
+      <a id="toggleSearchBar" class="hidden-md hidden-lg nav-item-icon" style="right: 60px; cursor: pointer;"><i class="material-icons">search</i></a>
+      <a id="nav-account-icon" class="pull-right hidden-md hidden-lg nav-item-icon" style="right: 104px;" href="{{ Auth::check() ? route('user.userEditUpload', Auth::user()) : route('login')}}"><i class="material-icons">video_call</i></a>
 
     </div>
   </div>

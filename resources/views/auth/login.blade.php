@@ -14,7 +14,7 @@
         <form method="POST" action="{{ route('login') }}">
 
           {{ csrf_field() }}
-          {{ Session::put('previousUrl', '/') }}
+          {{ Session::put('previousUrl', '/recommend') }}
 
           <div style="padding: 15px;">
             <div style="border: 0px; position: relative;" class="modal-header">

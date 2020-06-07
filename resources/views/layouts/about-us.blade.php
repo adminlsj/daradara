@@ -22,7 +22,7 @@
 		</div>
 
 		<div style="padding: 0px 30px; margin-top: 30px">
-			<p style="font-size: 1.15em; color: #222222; line-height: 28px;">在娛見日本 LaughSeeJapan 上享受您最愛的影片、崁入原創內容，並與全世界觀眾分享您的影片。如此一來，您不僅可以省去跨平台管理影片的麻煩，更可以透過簡單的步驟，一鍵觸及娛見日本 LaughSeeJapan 龐大的用戶群。除了崁入影片之外，您仍可選擇分享及播放您儲存於第三方伺服器的原創影片的鏈結。目前支持播放的影片鏈結的格式包括：MP4、FLV、M3U8。娛見日本 LaughSeeJapan 暫時不支持用戶直接上傳影片，也因此不提供儲存任何影片檔案的服務。以下將以影片串流網站 <a href="https://vimeo.com/" target="_blank">Vimeo</a> 以及影片儲存網站 <a href="https://jwplayer.com/" target="_blank">JWPlayer</a> 為例，分別示範在娛見日本 LaughSeeJapan 崁入影片及影片鏈結的幾個步驟：</p>
+			<p style="font-size: 1.15em; color: #222222; line-height: 28px;">在娛見日本 LaughSeeJapan 上享受您最愛的影片、崁入原創內容，並與全世界觀眾分享您的影片。如此一來，您不僅可以省去跨平台管理影片的麻煩，更可以透過簡單的步驟，一鍵觸及娛見日本 LaughSeeJapan 龐大的用戶群。除了崁入影片之外，您仍可選擇分享及播放您儲存於第三方伺服器的原創影片的鏈結。目前支持播放的影片鏈結的格式包括：MP4、FLV、M3U8。娛見日本 LaughSeeJapan 暫時不支持用戶直接上傳影片檔案，也因此不提供儲存任何影片檔案的服務。以下將以影片串流網站 <a href="https://vimeo.com/" target="_blank">Vimeo</a> 以及影片儲存網站 <a href="https://jwplayer.com/" target="_blank">JWPlayer</a> 為例，分別示範在娛見日本 LaughSeeJapan 崁入影片及影片鏈結的幾個步驟：</p>
 
 			<div class="row" style="margin-top: 20px">
 				<div class="col-md-6">
