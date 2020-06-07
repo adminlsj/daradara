@@ -316,5 +316,4 @@ function showSnackbar(text) {
 
 require('./loadTag');
 require('./lazyLoad');
-require('./blogShow');
 require('./videoShow');

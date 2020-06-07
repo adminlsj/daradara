@@ -11,9 +11,6 @@
 |
 */
 
-Route::get('/videoDurationEdit', 'HomeController@videoDurationEdit');
-Route::get('/videoDurationUpdate', 'HomeController@videoDurationUpdate');
-
 Route::get('/', 'HomeController@index');
 
 Route::resource('blog', 'BlogController');
@@ -64,9 +61,6 @@ Route::get('/createGetSource', 'VideoController@createGetSource');
 Route::get('/loadPlaylist', 'VideoController@loadPlaylist')->name('video.loadPlaylist');
 Route::get('/loadTagList', 'VideoController@loadTagList');
 Route::get('/loadBloglist', 'BlogController@loadBloglist')->name('blog.loadBloglist');
-
-Route::get('/updateSourceToMP4', 'HomeController@updateSourceToMP4');
-Route::get('/updateSourceQQ', 'HomeController@updateSourceQQ');
 
 Route::get('/loadHomeTagList', 'HomeController@loadHomeTagList');
 Route::get('/userReport', 'HomeController@userReport')->name('email.userReport');

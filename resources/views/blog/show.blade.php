@@ -76,3 +76,8 @@
 	</div>
 </div>
 @endsection
+
+@section('script')
+    @parent
+    <script src="{{ mix('js/blogShow.js') }}"></script>
+@endsection
