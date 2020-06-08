@@ -646,6 +646,10 @@ class VideoController extends Controller
     {
         $query = str_replace(' ', '', request('query'));
 
+        if ($query == '') {
+            return redirect('/');
+        }
+
         $queryArray = [];
         preg_match_all('/./u', $query, $queryArray);
         $queryArray = $queryArray[0];
