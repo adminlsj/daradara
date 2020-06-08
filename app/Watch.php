@@ -18,9 +18,14 @@ class Watch extends Model
         return User::find($this->user_id);
     }
 
-    public function videos()
+    /* public function videos()
     {
         return Video::where('playlist_id', $this->id)->orderBy('created_at', 'desc')->get();
+    } */
+
+    public function videos()
+    {
+        return $this->hasMany('App\Video', 'playlist_id');
     }
 
     public function subscribes()
@@ -115,5 +120,12 @@ class Watch extends Model
     public function imgurH()
     {
         return "https://i.imgur.com/".$this->imgur."h.jpg";
+    }
+
+    public function scopeWithVideos($query)
+    {
+        return $query->with(['videos' => function ($query) {
+            $query->orderBy('created_at', 'desc')->select('id', 'playlist_id', 'title', 'imgur');
+        }]);
     }
 }

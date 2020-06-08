@@ -54,7 +54,7 @@
       </a>
       <div class="video-sidebar-wrapper">
         @foreach ($playlists as $watch)
-          @if ($video = $watch->videos()->first())
+          @if ($video = $watch->videos->first())
             <div class="{{ $loop->iteration > 4 ? 'hidden-xs hidden-sm' : ''}}">
               @include('video.singleLoadMoreSliderPlaylists', ['video' => $video])
             </div>
@@ -69,8 +69,8 @@
           <h3 class="user-show-title">精選頻道<i style="font-size: 0.85em; vertical-align: middle; margin-top: -4px; margin-left: 5px" class="material-icons">arrow_forward_ios</i></h3>
         </a>
         <div class="video-sidebar-wrapper">
-          @foreach (App\Watch::where('user_id', 5190)->inRandomOrder()->limit(8)->get() as $watch)
-            @if ($video = $watch->videos()->first())
+          @foreach (App\Watch::withVideos()->where('user_id', 5190)->inRandomOrder()->limit(8)->select('id', 'title')->get() as $watch)
+            @if ($video = $watch->videos->first())
               <div class="{{ $loop->iteration > 4 ? 'hidden-xs hidden-sm' : ''}}">
                 @include('video.singleLoadMoreSliderPlaylists', ['video' => $video])
               </div>

@@ -154,24 +154,4 @@ class User extends Authenticatable
     {
         return "https://i.imgur.com/sMSpYFXb.jpg";
     }
-
-    public function shops()
-    {
-        return $this->hasMany('App\Shop');
-    }
-
-    public function resume()
-    {
-        return $this->hasOne('App\Resume');
-    }
-
-    public function savedJobs()
-    {
-        return $this->hasMany('App\SavedJob');
-    }
-
-    public function jobs()
-    {
-        return $this->hasManyThrough('App\Job', 'App\SavedJob');
-    }
 }

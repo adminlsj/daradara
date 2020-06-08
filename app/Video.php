@@ -41,7 +41,7 @@ class Video extends Model
 
     public function watch()
     {
-        return Watch::find($this->playlist_id);
+        return $this->belongsTo('App\Watch', 'playlist_id');
     }
 
     public function subscribes()

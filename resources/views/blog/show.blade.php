@@ -2,7 +2,7 @@
 
 @section('head')
     @parent
-    <meta property="og:url" content="{{ route('blog.show', ['blog' => $current]) }}" />
+    <meta property="og:url" content="{{ route('blog.read') }}?r={{ $current->id }}" />
 	<meta property="og:type" content="article" />
 	<meta property="og:title" content="{{ $current->title }}" />
 	<meta property="og:description" content="{{ $current->caption }}" />

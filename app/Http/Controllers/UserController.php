@@ -58,10 +58,10 @@ class UserController extends Controller
 
             case 'playlists':
                 if ($request->ajax()) {
-                    $userWatches = Watch::where('user_id', $user->id)->orderBy('updated_at', 'desc')->paginate(24);
+                    $userWatches = Watch::withVideos()->where('user_id', $user->id)->orderBy('updated_at', 'desc')->select('id', 'title')->paginate(24);
                     $html = '';
                     foreach ($userWatches as $watch) {
-                        $video = $watch->videos()->first();
+                        $video = $watch->videos->first();
                         $html .= view('video.singleLoadMoreSliderPlaylists', compact('watch', 'video'));
                     }
                     return $html;
@@ -74,25 +74,11 @@ class UserController extends Controller
             default:
                 $videos = Video::with('user:id,name')->where('user_id', $user->id)->orderBy('uploaded_at', 'desc')->limit(8)->select('id', 'user_id', 'imgur', 'title')->get();
                 $trendings = Video::with('user:id,name')->where('user_id', $user->id)->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->orderBy('views', 'desc')->limit(8)->select('id', 'user_id', 'imgur', 'title')->get();
-                $playlists = Watch::where('user_id', $user->id)->orderBy('created_at', 'desc')->limit(8)->get();
+                $playlists = Watch::withVideos()->where('user_id', $user->id)->orderBy('created_at', 'desc')->limit(8)->select('id', 'title')->get();
                 $is_mobile = $this->checkMobile();
                 return view('user.show-featured', compact('user', 'subscribers', 'videos', 'trendings', 'playlists', 'is_mobile'));
                 break;
         }
-    }
-
-    public function showPlaylist(User $user, Request $request)
-    {
-        $watches = $user->watches();
-
-        $subscribers = 0;
-        if ($watches->first()) {
-            foreach ($watches as $watch) {
-                $subscribers = $subscribers + Subscribe::where('tag', $watch->title)->count();
-            }
-        }
-
-        return view('user.show-playlists', compact('user', 'watches', 'subscribers'));
     }
 
     /**

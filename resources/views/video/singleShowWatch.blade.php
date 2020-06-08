@@ -19,13 +19,13 @@
 
     <h3 id="shareBtn-title" style="line-height: 30px; font-weight: bold; font-size: 1.5em">{{ $video->title }}</h3>
 
-    <a href="{{ route('user.show', [$video->user]) }}"><img class="lazy" style="float:left; border-radius: 50%; width: 35px; height: 35px;" src="{{ $video->user->avatarCircleB() }}" data-src="{{ $video->user->avatar == null ? $video->user->avatarDefault() : $video->user->avatar->filename }}" data-srcset="{{ $video->user->avatar == null ? $video->user->avatarDefault() : $video->user->avatar->filename }}"></a>
+    <a href="{{ route('user.show', [$video->user->id]) }}"><img class="lazy" style="float:left; border-radius: 50%; width: 35px; height: 35px;" src="{{ $video->user->avatarCircleB() }}" data-src="{{ $video->user->avatar == null ? $video->user->avatarDefault() : $video->user->avatar->filename }}" data-srcset="{{ $video->user->avatar == null ? $video->user->avatarDefault() : $video->user->avatar->filename }}"></a>
 
     <h5 style="margin-left: 45px; line-height: 37px;"><a style="text-decoration: none; color: dimgray; font-weight: bold" href="{{ route('user.show', [$video->user]) }}">{{ $video->user->name }}</a></h5>
 
     @if ($watch != null)
       <div style="float: right; margin-top: -35px;">
-        @include('video.watch-subscribe-wrapper', ['tag' => $video->watch()->title])
+        @include('video.watch-subscribe-wrapper', ['tag' => $video->watch->title])
       </div>
     @endif
 

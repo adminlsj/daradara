@@ -142,19 +142,8 @@ class VideoController extends Controller
             }
 
             if ($request->ajax()) {
-                $videos = Video::query();
+                $videos = Video::with('watch:id');
                 switch ($request->get('g')) {
-                    case 'newest':
-                        foreach ($subscribes as $subscribe) {
-                            if ($subscribe->type == 'watch') {
-                                $watch = Watch::where('title', $subscribe->tag)->first();
-                                $videos->orWhere('playlist_id', $watch->id);
-                            } else {
-                                $videos->orWhere('tags', 'LIKE', '%'.$subscribe->tag.'%');
-                            }
-                        }
-                        break;
-
                     case 'saved':
                         $saved = Save::where('user_id', $user->id)->pluck('foreign_id');
                         $videos = $videos->whereIn('id', $saved);
@@ -668,7 +657,7 @@ class VideoController extends Controller
         $idsArray = [];
 
         // Exact Match Query [e.g. 2012.09.14]
-        $exactQuery = Video::where('title', 'ilike', '%'.trim(request('query')).'%')->orderBy('uploaded_at', 'desc')->distinct()->get();
+        $exactQuery = Video::with('user:id,name')->where('title', 'ilike', '%'.trim(request('query')).'%')->orderBy('uploaded_at', 'desc')->distinct()->get();
         foreach ($exactQuery as $q) {
             if (!in_array($q->id, $idsArray)) {
                 array_push($videosArray, $q);
@@ -678,7 +667,7 @@ class VideoController extends Controller
 
         // Exact Order Match Query (search query in same order e.g. 2012 => 2>0>1>2) [e.g. 2012 09 14]
         $exactOrderQueryScope = '%'.implode('%', $queryArray).'%';
-        $exactOrderQuery = Video::where('title', 'ilike', $exactOrderQueryScope)->orderBy('uploaded_at', 'desc')->get();
+        $exactOrderQuery = Video::with('user:id,name')->where('title', 'ilike', $exactOrderQueryScope)->orderBy('uploaded_at', 'desc')->get();
         foreach ($exactOrderQuery as $q) {
             if (!in_array($q->id, $idsArray)) {
                 array_push($videosArray, $q);
@@ -687,43 +676,17 @@ class VideoController extends Controller
         }
 
         if ($request->ajax()) {
-            $videosArray = array_slice($videosArray, 15);
-
-            // Character Match Query (search query as a whole e.g. 2012 => contains 2/0/1/2) [e.g. 郡司桑 月曜]
-            /* $videosSelect = Video::orderBy('uploaded_at', 'desc')->select('id', 'title', 'tags')->get()->toArray();
-            $rankings = [];
-            foreach ($videosSelect as $videoSelect) {
-                $score = 0;
-                foreach ($queryArray as $q) {
-                    if (is_numeric($q)) {
-                        if (strpos($videoSelect['title'], $q) !== false) {
-                            $score++;
-                        }
-                    } else {
-                        if (strpos($videoSelect['title'], $q) !== false) {
-                            $score++;
-                        }
-                        if (strpos($videoSelect['tags'], $q) !== false) {
-                            $score++;
-                        }
-                    }
-                }
-                if ($score > 0) {
-                    array_push($rankings, ['score' => $score, 'id' => $videoSelect['id']]);
+            $videosArray = array_slice($videosArray, 24);
+            $exactOrderTagQuery = Video::with('user:id,name')->where('tags', 'ilike', $exactOrderQueryScope)->orderBy('uploaded_at', 'desc')->get();
+            foreach ($exactOrderTagQuery as $q) {
+                if (!in_array($q->id, $idsArray)) {
+                    array_push($videosArray, $q);
+                    array_push($idsArray, $q->id);
                 }
             }
-            usort($rankings, function ($a, $b) {
-                return $b['score'] <=> $a['score'];
-            });
-
-            foreach ($rankings as $rank) {
-                if (!in_array($rank['id'], $idsArray)) {
-                    array_push($videosArray, Video::find($rank['id']));
-                }
-            } */
 
             $page = Input::get('page', 1); // Get the ?page=1 from the url
-            $perPage = 15; // Number of items per page
+            $perPage = 24; // Number of items per page
             $offset = ($page * $perPage) - $perPage;
 
             $videos = new LengthAwarePaginator(
@@ -738,11 +701,11 @@ class VideoController extends Controller
             return $html;
         }
 
-        $watch = empty($videosArray) || $videosArray[0]->playlist_id == '' ? null : $videosArray[0]->watch();
+        $watches = Watch::with('videos:id,playlist_id,imgur')->where('title', 'ilike', $exactOrderQueryScope)->orderBy('created_at', 'desc')->get();
         $user = User::withCount('videos')->where('name', 'like', '%'.strtolower($query).'%')->first();
-        $topResults = array_slice($videosArray, 0, 15);
+        $topResults = array_slice($videosArray, 0, 24);
 
-        return view('video.search', compact('watch', 'query', 'topResults', 'user'));
+        return view('video.search', compact('watches', 'query', 'topResults', 'user'));
     }
 
     public function loadPlaylist(Request $request)
