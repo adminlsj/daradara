@@ -263,7 +263,7 @@ class VideoController extends Controller
 
     public function subscribeTag(Request $request) {
         $tag = request('query');
-        $videos = Video::where('tags', 'like', '%'.$tag.'%')->orderBy('uploaded_at', 'desc')->paginate(10);
+        $videos = Video::with('user:id,name')->where('tags', 'like', '%'.$tag.'%')->orderBy('uploaded_at', 'desc')->paginate(10);
 
         $html = $this->searchLoadHTML($videos);
         if ($request->ajax()) {
