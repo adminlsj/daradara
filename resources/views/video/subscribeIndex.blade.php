@@ -15,7 +15,7 @@
 				@if ($subscribe->type == 'watch')
 					<a href="{{ route('video.playlist') }}?list={{ $subscribe->watch()->id }}" style="text-decoration: none;">
 						<div class="single-top-watch">
-							<img class="lazy" style="width: 100%; height: auto; border-radius: 50%;" src="{{ $subscribe->watch()->imgurDefaultCircleB() }}" data-src="{{ $subscribe->watch()->videos()->first()->imgurB() }}" data-srcset="{{ $subscribe->watch()->videos()->first()->imgurB() }}" alt="{{ $subscribe->watch()->title }}">
+							<img class="lazy" style="width: 100%; height: auto; border-radius: 50%;" src="{{ $subscribe->watch()->imgurDefaultCircleB() }}" data-src="{{ $subscribe->watch()->videos->first()->imgurB() }}" data-srcset="{{ $subscribe->watch()->videos->first()->imgurB() }}" alt="{{ $subscribe->watch()->title }}">
 							<div class="text-ellipsis" style="width: 100%; font-size: 0.75em; padding-top: 5px; color: #595959; font-weight: bold">{{ $subscribe->watch()->title }}</div>
 						</div>
 					</a>

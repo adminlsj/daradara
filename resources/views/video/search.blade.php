@@ -61,7 +61,7 @@
 	@endforeach
 
 	<div style="background-color: #F5F5F5;" class="padding-setup">
-		<div class="row" style="padding-top: 6px;">
+		<div class="row" style="padding-top: 6px; padding-bottom: 8px">
 			<div class="col-md-12">
 				<div style="margin-left: -10px; margin-right: -10px;" class="video-sidebar-wrapper">
 					@foreach ($topResults as $video)
