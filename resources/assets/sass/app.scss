@@ -2468,9 +2468,17 @@ a > i {
   background-color: #dddddd;
 }
 
+#tag-subscribe-wrapper-btn {
+  margin-right: calc(2/12 * 100% - 11px);
+}
+
 @media (max-width: 991px) {
   #content-div {
     padding-bottom: 50px
+  }
+
+  #tag-subscribe-wrapper-btn {
+    margin-right: 0px;
   }
 
   .search-user-text-wrapper {
