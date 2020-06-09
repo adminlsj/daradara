@@ -705,7 +705,7 @@ class VideoController extends Controller
             return $html;
         }
 
-        $watches = Watch::with('videos:id,playlist_id,imgur')->where('title', 'ilike', $exactOrderQueryScope)->orderBy('created_at', 'desc')->get();
+        $watches = Watch::withVideos()->where('title', 'ilike', $exactOrderQueryScope)->orderBy('created_at', 'desc')->get();
         $user = User::withCount('videos')->where('name', 'like', '%'.strtolower($query).'%')->first();
         $topResults = array_slice($videosArray, 0, 24);
 
