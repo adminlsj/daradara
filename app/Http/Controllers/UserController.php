@@ -187,7 +187,7 @@ class UserController extends Controller
 
                 $userArray = [];
                 if ($video->playlist_id != '') {
-                    $watch = $video->watch();
+                    $watch = $video->watch;
                     $watch->updated_at = $video->uploaded_at;
                     $watch->save();
 

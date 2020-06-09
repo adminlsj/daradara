@@ -27,8 +27,8 @@
 			    	<img class="lazy" style="width: calc((9 / 16) * 100%); height: auto; border-radius: 50%;" src="{{ $user->avatarCircleB() }}" data-src="{{ $user->avatar == null ? $user->avatarDefault() : $user->avatar->filename }}" data-srcset="{{ $user->avatar == null ? $user->avatarDefault() : $user->avatar->filename }}">
 			    </div>
 		    	<div class="search-user-text-wrapper" style="margin: 0; position: absolute; top: 50%; transform: translate(0%, -50%);">
-					<h4 style="overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;">{{ $user->name }}</h4>
-					<p style="overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;">5000 位訂閱者 • {{ $user->videos_count }} 部影片</p>
+					<h4 style="font-weight: bold; color: #444444; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;">{{ $user->name }}</h4>
+					<p style="font-weight: bold; color: gray; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;">5000 位訂閱者 • {{ $user->videos_count }} 部影片</p>
 				</div>
 			  </a>
 			</div>
@@ -44,15 +44,15 @@
 				      <img class="lazy" style="width: 100%; height: 100%;" src="{{ $watch->videos->first()->imgur16by9() }}" data-src="{{ $watch->videos->first()->imgurL() }}" data-srcset="{{ $watch->videos->first()->imgurL() }}" alt="{{ $watch->title }}">
 				      <span>
 				      	<div style="margin: 0;position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
-					      	<div>{{ $watch->videos->count() }}</div>
-					      	<i style="font-size: 1.6em; margin-right: -2px" class="material-icons">playlist_play</i>
+					      	<div style="font-weight: bold">{{ $watch->videos->count() }}</div>
+					      	<i style="font-size: 1.6em; margin-right: -5px; font-weight: bold" class="material-icons">playlist_play</i>
 					    </div>
 				      </span>
 				    </div>
 				    <div class="col-xs-6 col-sm-6 col-md-7">
-				      <h4 style="overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;">{{ $watch->title }}</h4>
-				      <p style="overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;">創建者：{{ $watch->user()->name }}</p>
-				      <p style="margin-top: 9px; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">{{ $watch->description }}</p>
+				      <h4 style="font-weight: bold; color: #444444; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;">{{ $watch->title }}</h4>
+				      <p style="font-weight: bold; color: gray; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;">創建者：{{ $watch->user()->name }}</p>
+				      <p style="font-weight: bold; color: gray; margin-top: 9px; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">{{ $watch->description }}</p>
 				    </div>
 				  </a>
 				</div>
