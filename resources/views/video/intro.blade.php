@@ -49,7 +49,11 @@
 		    					<h4>{{ $video->title }}</h4>
 		    					<h5><a href="{{ route('user.show', [$user]) }}">{{ $user->name }}</a></h5>
 		    				</div>
-		    				<hr style="border-color: #e1e1e1; margin-left: 40px; margin-right: 25px">
+		    				@if ($videos->count() - $loop->index > 1)
+                                <hr style="border-color: #e1e1e1; margin-left: 40px; margin-right: 25px">
+                            @else
+                                <br>
+                            @endif
 	    				</div>
     				@endforeach
     			</div>

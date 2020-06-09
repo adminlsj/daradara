@@ -51,7 +51,7 @@
 				          </div>
 
 				          <div style="margin-right:100px; position: relative;" class="form-group">
-				            <input type="text" class="form-control" name="link" id="link" placeholder="影片崁入鏈結" required>
+				            <input type="text" class="form-control" name="link" id="link" placeholder="影片崁入鏈結" required onkeyup="$('#test-play-btn').click()">
 				            <div id="test-play-btn" style="width: 103px; position: absolute; top: 0px; right:-100px; background-color: #D5D5D5; color: #666666; border-color: #D5D5D5; cursor: pointer; height: 45px; line-height: 45px; text-align: center; border-top-right-radius: 3px; border-bottom-right-radius: 3px;">測試播放</div>
 				          </div>
 

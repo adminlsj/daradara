@@ -97,18 +97,16 @@ class VideoController extends Controller
             $is_mobile = $this->checkMobile();
 
             if ($video->playlist_id != null) {
-                $watch = Watch::find($video->playlist_id);
-                $first = $watch->videos()->first();
+                $watch = Watch::withVideos()->where('id', $video->playlist_id)->first();
                 $is_subscribed = $this->is_subscribed($watch->title);
                 $is_program = true;
             } else {
                 $watch = null;
-                $first = null;
                 $is_subscribed = false;
                 $is_program = false;
             }
 
-            return view('video.showWatch', compact('video', 'watch', 'first', 'current', 'is_program', 'is_subscribed', 'is_mobile'));
+            return view('video.showWatch', compact('video', 'watch', 'current', 'is_program', 'is_subscribed', 'is_mobile'));
 
         } else {
             return view('errors.404');

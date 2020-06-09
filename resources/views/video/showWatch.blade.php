@@ -40,7 +40,7 @@
 							<div id="suggested-watch-wrapper" class="related-watch-wrap hover-opacity-all" style="background-color: #F9F9F9">
 								<a href="{{ route('video.playlist') }}?list={{ $watch->id }}" class="row no-gutter">
 								  <div style="padding-right: 4px; position: relative; width: 175px;" class="col-xs-6 col-sm-6 col-md-6">
-								    <img class="lazy" style="width: 100%; height: 100%; border-top-left-radius: 3px; border-bottom-left-radius: 3px;" src="{{ $first->imgur16by9() }}" data-src="{{ $first->imgurL() }}" data-srcset="{{ $first->imgurL() }}" alt="{{ $watch->title }}">
+								    <img class="lazy" style="width: 100%; height: 100%; border-top-left-radius: 3px; border-bottom-left-radius: 3px;" src="{{ $video->imgur16by9() }}" data-src="{{ $watch->videos->first()->imgurL() }}" data-srcset="{{ $watch->videos->first()->imgurL() }}" alt="{{ $watch->title }}">
 								    <span>
 								      	<div style="margin: 0;position: absolute; top: calc(50% + 3px); left: 50%; transform: translate(-50%, -50%);">
 									      	<div>{{ $watch->videos->count() }}</div>
