@@ -283,10 +283,10 @@ class VideoController extends Controller
             if (strpos($tag, '全部') !== false) {
                 $tags = Blog::$content[$genre];
                 $videos = Blog::tagsWithPaginate($tags)->orderBy('created_at', 'desc')->paginate(24);
-
             } else {
                 $videos = Blog::tagsWithPaginate([$tag])->orderBy('created_at', 'desc')->paginate(24);
             }
+            return $this->singleLoadMoreSliderBlogsHTML($videos);
 
         } else {
             if (strpos($tag, '全部') !== false) {
@@ -306,9 +306,8 @@ class VideoController extends Controller
                 }                    
             }
             $videos = $videos->orderBy('uploaded_at', 'desc')->paginate(24);
+            return $this->singleLoadMoreSliderVideosHTML($videos);
         }
-
-        return $this->singleLoadMoreSliderVideosHTML($videos);
     }
 
     public function loadRankVideos(Request $request) {

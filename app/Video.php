@@ -120,7 +120,7 @@ class Video extends Model
 
     public function source()
     {
-        $sd = $this->sd;
+        $sd = $this->sd()[0];
         if (strpos($sd, 'instagram.com') !== false) {
             return Video::getSourceIG($sd);
         } elseif (strpos($sd, 'player.bilibili.com') !== false) {
