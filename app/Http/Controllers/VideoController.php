@@ -63,15 +63,8 @@ class VideoController extends Controller
             $title = 'A-Studio';
         }
         $watch = Watch::where('title', $title)->first();
-        $videos = $watch->videos();
-
-        $first = $watch->videos()->first();
-
-        $is_subscribed = $this->is_subscribed($watch->title);
-
-        $is_mobile = $this->checkMobile();
-
-        return view('video.intro', compact('watch', 'videos', 'first', 'is_subscribed', 'is_mobile'));
+        $url = '/playlist?list='.$watch->id;
+        return redirect($url);
     }
 
     public function watch(Request $request){
