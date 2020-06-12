@@ -2472,9 +2472,35 @@ a > i {
   margin-right: calc(2/12 * 100% - 11px);
 }
 
+.intro-left {
+  padding: 21px 30px 8px 30px !important; 
+  background-color: #F9F9F9; 
+  height: calc(100vh - 50px); 
+  overflow-y: scroll;
+}
+
+.intro-right {
+  padding: 12px 30px 12px 30px !important;
+  height: calc(100vh - 50px); 
+  overflow-y: scroll; 
+  font-weight:bold;
+}
+
 @media (max-width: 991px) {
   #content-div {
     padding-bottom: 50px
+  }
+
+  .intro-left {
+    padding-left: 15px !important; 
+    padding-right: 15px !important;
+    height: auto; 
+  }
+
+  .intro-right {
+    padding-left: 15px !important; 
+    padding-right: 15px !important;
+    height: auto; 
   }
 
   #tag-subscribe-wrapper-btn {

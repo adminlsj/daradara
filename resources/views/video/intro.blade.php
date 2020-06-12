@@ -32,14 +32,14 @@
     <div class="main-content">
     	<div style="background-color: #F5F5F5;">
     		<div class="row no-gutter">
-    			<div class="col-md-5" style="padding: 21px 30px 10px 30px; background-color: #F9F9F9; height: calc(100vh - 50px); overflow-y: scroll;">
+    			<div class="col-md-5 intro-left">
     				@if ($first)
     					@include('video.intro-left', ['link' => route('video.watch').'?v='.$first->id.'&list='.$watch->id, 'image' => $first->imgurH(), 'title' => $first->title])
     				@else
 	    				@include('video.intro-left', ['link' => '', 'image' => 'https://i.imgur.com/JMcgEkPl.jpg', 'title' => ''])
     				@endif
     			</div>
-    			<div class="col-md-7" style="padding: 12px 30px 12px 30px; height: calc(100vh - 50px); overflow-y: scroll; font-weight:bold">
+    			<div class="col-md-7 intro-right">
     				@foreach ($videos as $video)
 	    				<div class="multiple-link-wrapper hover-opacity-all intro-video-list">
 		    				<a href="{{ route('video.watch') }}?v={{ $video->id }}&list={{ $watch->id }}" class="overlay"></a>
