@@ -32,25 +32,28 @@
     <div class="main-content">
     	<div style="background-color: #F5F5F5;">
     		<div class="row no-gutter">
-    			<div class="col-md-5" style="padding: 21px 30px 25px 30px; background-color: #F9F9F9; min-height: 100%;">
+    			<div class="col-md-5" style="padding: 21px 30px 10px 30px; background-color: #F9F9F9; height: calc(100vh - 50px); overflow-y: scroll;">
     				@if ($first)
     					@include('video.intro-left', ['link' => route('video.watch').'?v='.$first->id.'&list='.$watch->id, 'image' => $first->imgurH(), 'title' => $first->title])
     				@else
 	    				@include('video.intro-left', ['link' => '', 'image' => 'https://i.imgur.com/JMcgEkPl.jpg', 'title' => ''])
     				@endif
     			</div>
-    			<div class="col-md-7" style="padding-top: 12px;">
+    			<div class="col-md-7" style="padding: 12px 30px 12px 30px; height: calc(100vh - 50px); overflow-y: scroll; font-weight:bold">
     				@foreach ($videos as $video)
 	    				<div class="multiple-link-wrapper hover-opacity-all intro-video-list">
 		    				<a href="{{ route('video.watch') }}?v={{ $video->id }}&list={{ $watch->id }}" class="overlay"></a>
-	    					<div style="height: 85px" class="inner">
-			    				<span style="float: left; width: 40px; font-weight: 500; padding-top: 30px; text-align: center">{{ $videos->count() - $loop->index }}</span>
-		    					<img class="lazy" style="width: 150px; height: auto; float: left;" src="{{ $video->imgur16by9() }}" data-src="{{ $video->imgurH() }}" data-srcset="{{ $video->imgurH() }}" alt="{{ $video->title }}">
-		    					<h4>{{ $video->title }}</h4>
-		    					<h5><a href="{{ route('user.show', [$user]) }}">{{ $user->name }}</a></h5>
+	    					<div style="height: 85px;" class="inner">
+		    					<img class="lazy" style="width: 175px; height: auto; float: left;" src="{{ $video->imgur16by9() }}" data-src="{{ $video->imgurH() }}" data-srcset="{{ $video->imgurH() }}" alt="{{ $video->title }}">
+                                <span style="position: absolute; bottom: -13px; left: 7px; color: white; font-weight: bold; font-size: 1.2em;">{{ $videos->count() - $loop->index }}</span>
+		    					<h4 style="margin-left: 185px; font-weight: bold">{{ $video->title }}</h4>
+                                <div style="position: absolute; bottom: -8px; left: 185px;">
+                                    <img class="lazy" style="float:left; width: 18px; height: 18px; margin-top: 1px" src="{{ $video->user->avatarCircleB() }}" data-src="{{ $video->user->avatar == null ? $video->user->avatarDefault() : $video->user->avatar->filename }}" data-srcset="{{ $video->user->avatar == null ? $video->user->avatarDefault() : $video->user->avatar->filename }}">
+                                    <a href="{{ route('user.show', [$video->user]) }}" style="color: darkgray; font-size: 0.8em; margin-left: 5px;">{{ $video->user->name }}</a>
+                                </div>
 		    				</div>
 		    				@if ($videos->count() - $loop->index > 1)
-                                <hr style="border-color: #e1e1e1; margin-left: 40px; margin-right: 25px">
+                                <hr style="border-color: #e1e1e1; margin-top: 34px;">
                             @else
                                 <br>
                             @endif

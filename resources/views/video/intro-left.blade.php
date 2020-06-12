@@ -4,12 +4,15 @@
 		<div style="position: absolute; bottom: 0px; color: white; background-color: rgba(0, 0, 0, .8); width: 100%; height: 40px; padding-top: 10px"><i style="vertical-align:middle; font-size: 1.95em; margin-top: -3px; margin-right: 7px; margin-left: -3px" class="material-icons">play_arrow</i><span style="font-size: 1.05em; font-weight: 500">全部播放</span></div>
 	</a>
 </div>
-<h3 style="line-height: 32px">{{ $watch->title }}</h3>
-<h5 style="color: dimgray; font-weight: 400; margin-top: 15px">{{ $videos->count()}} 部影片 <small>•</small> {{ Carbon\Carbon::parse($watch->updated_at)->diffForHumans() }}更新</h5>
-<h5 style="color: dimgray; font-weight: 400; margin-top: 15px; line-height: 20px">{{ $watch->description }}</h5>
-<hr style="border-color: #e1e1e1;">
-<a href="{{ route('user.show', [$watch->user()]) }}"><img class="lazy" style="float:left; border-radius: 50%; width: 50px; height: 50px;" src="{{ $watch->user()->avatarCircleB() }}" data-src="{{ $watch->user()->avatar == null ? $watch->user()->avatarDefault() : $watch->user()->avatar->filename }}" data-srcset="{{ $watch->user()->avatar == null ? $watch->user()->avatarDefault() : $watch->user()->avatar->filename }}"></a>
-<h5 style="margin-top: 38px; margin-left: 65px"><a style="text-decoration: none; color: #222222" href="{{ route('user.show', [$watch->user()]) }}">{{ $watch->user()->name }}</a></h5>
-<div style="float: right; margin-top: -25px; width: 75px">
+
+<div style="font-size: 0.9em; color: dimgray; font-weight: bold; margin-top: 20px; margin-left: 2px">{{ $videos->count()}} 部影片 <small>•</small> {{ Carbon\Carbon::parse($watch->updated_at)->diffForHumans() }}更新</div>
+<h3 style="margin-top: 4px; margin-bottom: 13px; line-height: 31px; font-weight: bold;">{{ $watch->title }}</h3>
+
+<a href="{{ route('user.show', [$watch->user()]) }}"><img class="lazy" style="float:left; border-radius: 50%; width: 35px; height: 35px;" src="{{ $watch->user()->avatarCircleB() }}" data-src="{{ $watch->user()->avatar == null ? $watch->user()->avatarDefault() : $watch->user()->avatar->filename }}" data-srcset="{{ $watch->user()->avatar == null ? $watch->user()->avatarDefault() : $watch->user()->avatar->filename }}"></a>
+<h5 style="margin-left: 45px; line-height: 37px;"><a style="text-decoration: none; color: dimgray; font-weight: bold;" href="{{ route('user.show', [$watch->user()]) }}">{{ $watch->user()->name }}</a></h5>
+
+<div style="float: right; margin-top: -35px;">
 	@include('video.intro-subscribe-wrapper', ['tag' => $watch->title])
 </div>
+
+<h5 style="color: dimgray; font-weight: 400; margin-top: 15px; line-height: 20px">{{ $watch->description }}</h5>

@@ -25,7 +25,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('laughseejapan:update-videos')
-                 ->dailyAt('17:45');
+                 ->dailyAt('16:30');
     }
 
     /**

@@ -295,8 +295,8 @@ class HomeController extends Controller
             $title = request('title');
             $created_at = new Carbon(Carbon::createFromFormat('Y-m-d\TH:i:s', request('created-at'))->format('Y-m-d H:i:s'));
             $sd = explode(' ', request('sd'));
-            for ($i = 61; $i <= $episodes; $i++) {
-                $image = Image::make($_FILES["images"]["tmp_name"][$i - 61]);
+            for ($i = 1; $i <= $episodes; $i++) {
+                $image = Image::make($_FILES["images"]["tmp_name"][$i - 1]);
                 $image = $image->fit(2880, 1620);
                 $image = $image->stream();
                 $pvars = array('image' => base64_encode($image));
@@ -313,15 +313,7 @@ class HomeController extends Controller
                 $pms = json_decode($out, true);
                 $url = $pms['data']['link'];
 
-                $zero = '';
-                if ($i < 10) {
-                    $zero = '00';
-                } elseif ($i >= 10 && $i < 100) {
-                    $zero = '0';
-                }
-
-                // $zero = $i < 10 ? '0' : '';
-
+                $zero = $i < 10 ? '0' : '';
                 if ($url != "") {
                     $video = Video::create([
                         'id' => $id,
