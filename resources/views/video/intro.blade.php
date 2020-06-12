@@ -39,7 +39,7 @@
 	    				@include('video.intro-left', ['link' => '', 'image' => 'https://i.imgur.com/JMcgEkPl.jpg', 'title' => ''])
     				@endif
     			</div>
-    			<div class="col-md-7 intro-right">
+    			<div class="col-md-7 intro-right playlist-scoll-wrapper">
     				@foreach ($videos as $video)
 	    				<div class="multiple-link-wrapper hover-opacity-all intro-video-list">
 		    				<a href="{{ route('video.watch') }}?v={{ $video->id }}&list={{ $watch->id }}" class="overlay"></a>
