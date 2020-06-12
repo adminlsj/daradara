@@ -5,7 +5,7 @@
 	</a>
 </div>
 
-<div style="font-size: 0.9em; color: dimgray; font-weight: bold; margin-top: 20px; margin-left: 2px">{{ $videos->count()}} 部影片 <small>•</small> {{ Carbon\Carbon::parse($watch->updated_at)->diffForHumans() }}更新</div>
+<div class="intro-left-subtitle">{{ $videos->count()}} 部影片 <small>•</small> {{ Carbon\Carbon::parse($watch->updated_at)->diffForHumans() }}更新</div>
 <h3 style="margin-top: 4px; margin-bottom: 13px; line-height: 31px; font-weight: bold;">{{ $watch->title }}</h3>
 
 <a href="{{ route('user.show', [$watch->user()]) }}"><img class="lazy" style="float:left; border-radius: 50%; width: 35px; height: 35px;" src="{{ $watch->user()->avatarCircleB() }}" data-src="{{ $watch->user()->avatar == null ? $watch->user()->avatarDefault() : $watch->user()->avatar->filename }}" data-srcset="{{ $watch->user()->avatar == null ? $watch->user()->avatarDefault() : $watch->user()->avatar->filename }}"></a>

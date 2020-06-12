@@ -2479,6 +2479,14 @@ a > i {
   overflow-y: scroll;
 }
 
+.intro-left-subtitle {
+  font-size: 0.9em; 
+  color: dimgray; 
+  font-weight: bold; 
+  margin-top: 20px; 
+  margin-left: 2px;
+}
+
 .intro-right {
   padding: 12px 30px 12px 30px !important;
   height: calc(100vh - 50px); 
@@ -2492,9 +2500,14 @@ a > i {
   }
 
   .intro-left {
+    padding-top: 15px !important;
     padding-left: 15px !important; 
     padding-right: 15px !important;
     height: auto; 
+  }
+
+  .intro-left-subtitle {
+    margin-top: 15px; 
   }
 
   .intro-right {
