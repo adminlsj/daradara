@@ -55,7 +55,7 @@
 		    				@if ($videos->count() - $loop->index > 1)
                                 <hr style="border-color: #e1e1e1; margin-top: 23px;">
                             @else
-                                <div style="margin-top: 13px;"></div>
+                                <div style="margin-top: 12px;"></div>
                             @endif
 	    				</div>
     				@endforeach
