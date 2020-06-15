@@ -310,6 +310,17 @@ class Video extends Model
         }
     }
 
+    public static function updateQQRawLink($video){
+        if (substr($video->sd, 0, 5) === "1098_") {
+            $video->sd = Video::getSourceQQ("https://quan.qq.com/video/".$video->sd);
+            $video->save();
+        }
+        if (substr($video->sd, 0, 5) === "1006_" || substr($video->sd, 0, 5) === "1097_") {
+            $video->sd = Video::getSourceQZ($video->sd);
+            $video->save();
+        }
+    }
+
     static function get_string_between($string, $start, $end){
         $string = ' ' . $string;
         $ini = strpos($string, $start);

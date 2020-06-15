@@ -14,7 +14,7 @@
     @include('video.sidebarItem', ['link' => '/contact', 'is_current' => Request::is('contact') ? 'active' : '', 'icon' => 'mail', 'title' => '與我們聯絡', 'marginTop' => '1px'])
     @include('video.sidebarItem', ['link' => '/terms', 'is_current' => Request::is('terms') ? 'active' : '', 'icon' => 'developer_board', 'title' => '服務條款', 'marginTop' => '1px'])
     @include('video.sidebarItem', ['link' => '/policies', 'is_current' => Request::is('policies') ? 'active' : '', 'icon' => 'policy', 'title' => '社群規範', 'marginTop' => '0px'])
-    @include('video.sidebarItem', ['link' => 'copyright', 'is_current' => Request::is('copyright') ? 'active' : '', 'icon' => 'report', 'title' => '版權申訴', 'marginTop' => '1px'])
+    @include('video.sidebarItem', ['link' => '/copyright', 'is_current' => Request::is('copyright') ? 'active' : '', 'icon' => 'report', 'title' => '版權申訴', 'marginTop' => '1px'])
 	
     <div style="margin-left: 25px; margin-top: 5px; position: absolute; bottom: 70px;">
         <div style="font-size: 0.8em; color: gray">© 2020 娛見日本 LaughSeeJapan</div>

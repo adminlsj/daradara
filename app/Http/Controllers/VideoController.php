@@ -72,16 +72,11 @@ class VideoController extends Controller
 
         if (is_numeric($vid) && $video = Video::find($request->v)) {
 
-            // QQ video auto transform START
-            /*if (substr($video->sd, 0, 5) === "1098_") {
-                $video->sd = Video::getSourceQQ("https://quan.qq.com/video/".$video->sd);
-                $video->save();
+            // Video::updateQQRawLink($video);
+
+            if (strpos($video->tags, '動漫') !== FALSE && count($sd = $video->sd()) > 1) {
+                return $request->ip();
             }
-            if (substr($video->sd, 0, 5) === "1006_" || substr($video->sd, 0, 5) === "1097_") {
-                $video->sd = Video::getSourceQZ($video->sd);
-                $video->save();
-            }*/
-            // QQ video auto transform END
 
             $video->views++;
             $video->save();
