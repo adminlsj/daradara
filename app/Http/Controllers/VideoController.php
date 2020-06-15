@@ -75,7 +75,7 @@ class VideoController extends Controller
             // Video::updateQQRawLink($video);
 
             if (strpos($video->tags, '動漫') !== FALSE && count($sd = $video->sd()) > 1) {
-                return $request->ip();
+                return geoip($request->ip())->toArray()['iso_code'];
             }
 
             $video->views++;

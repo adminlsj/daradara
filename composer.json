@@ -17,7 +17,8 @@
         "laravelrus/localized-carbon": "1.*",
         "league/flysystem-aws-s3-v3": "~1.0",
         "predis/predis": "~1.0",
-        "stripe/stripe-php": "^5.2"
+        "stripe/stripe-php": "^5.2",
+        "torann/geoip": "^1.1"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.3",
