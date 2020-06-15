@@ -149,7 +149,8 @@ class Video extends Model
     {
         if ($video->foreign_url && geoip($request->ip())->toArray()['iso_code'] == 'HK') {
             if (strpos($video->foreign_url, 'www.viu.com') !== FALSE) {
-                return redirect($video->foreign_url);
+                header("Location: ".$video->foreign_url); 
+                exit();
             } else {
                 $outsource = true;
                 $sd = $video->foreign_url;
