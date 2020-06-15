@@ -145,6 +145,35 @@ class Video extends Model
         return explode(" ",$this->sd);
     }
 
+    public static function setPlayerConfig($video, $request, $is_mobile, &$outsource, &$sd)
+    {
+        if ($video->foreign_url && geoip($request->ip())->toArray()['iso_code'] == 'HK') {
+            if (strpos($video->foreign_url, 'www.viu.com') !== FALSE) {
+                return redirect($video->foreign_url);
+            } else {
+                $outsource = true;
+                $sd = $video->foreign_url;
+            }
+        }
+
+        $bilibili = strpos($sd, "player.bilibili.com") !== FALSE;
+        if ($is_mobile && $bilibili) {
+            $outsource = false;
+        }
+
+        if ($outsource) {
+            if (strpos($sd, '?') !== false) {
+                $sd = $sd.'&danmaku=0&qn=0&type=mp4&otype=json&fnver=0&fnval=1&platform=html5&html5=1&high_quality=1&autoplay=1';
+            } else {
+                $sd = $sd.'?danmaku=0&qn=0&type=mp4&otype=json&fnver=0&fnval=1&platform=html5&html5=1&high_quality=1&autoplay=1';;
+            }
+        } else {
+            if ($bilibili) {
+                $sd = Video::getMobileBB($sd);
+            }
+        }
+    }
+
     public static function getSourceQQ($url)
     {
         try {

@@ -74,15 +74,14 @@ class VideoController extends Controller
 
             // Video::updateQQRawLink($video);
 
-            if (strpos($video->tags, '動漫') !== FALSE && count($sd = $video->sd()) > 1) {
-                return geoip($request->ip())->toArray()['iso_code'];
-            }
+            $outsource = $video->outsource;
+            $sd = $video->sd()[0];
+            $is_mobile = $this->checkMobile();
+            Video::setPlayerConfig($video, $request, $is_mobile, $outsource, $sd);
 
             $video->views++;
             $video->save();
-
             $current = $video;
-            $is_mobile = $this->checkMobile();
 
             if ($video->playlist_id != null) {
                 $watch = Watch::withVideos()->where('id', $video->playlist_id)->first();
@@ -94,7 +93,7 @@ class VideoController extends Controller
                 $is_program = false;
             }
 
-            return view('video.showWatch', compact('video', 'watch', 'current', 'is_program', 'is_subscribed', 'is_mobile'));
+            return view('video.showWatch', compact('video', 'outsource', 'sd', 'watch', 'current', 'is_program', 'is_subscribed', 'is_mobile'));
 
         } else {
             return view('errors.404');
