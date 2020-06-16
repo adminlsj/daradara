@@ -785,4 +785,9 @@ class VideoController extends Controller
         }
         return $is_subscribed;
     }
+
+    public function copyright(Request $request)
+    {
+        return view('video.copyright');
+    }
 }
