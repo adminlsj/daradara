@@ -151,15 +151,12 @@ class Video extends Model
 
     public static function setPlayerConfig($video, $request, $is_mobile, &$outsource, &$sd)
     {
-        if ($video->foreign_sd) {
-            $iso_code = geoip($request->ip())->toArray()['iso_code'];
-            if (array_key_exists($iso_code, $video->foreign_sd)) {
-                $outsource = true;
-                $sd = $video->foreign_sd[$iso_code];
-                if (strpos($sd, 'www.viu.com') !== FALSE) {
-                    header("Location: ".$sd); 
-                    exit();
-                }
+        if ($video->foreign_sd && array_key_exists($iso_code = geoip($request->ip())->toArray()['iso_code'], $video->foreign_sd)) {
+            $outsource = true;
+            $sd = $video->foreign_sd[$iso_code];
+            if (strpos($sd, 'www.viu.com') !== FALSE) {
+                header("Location: ".$sd); 
+                exit();
             }
         }
 
