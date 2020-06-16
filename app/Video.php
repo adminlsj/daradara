@@ -161,8 +161,9 @@ class Video extends Model
         }
 
         $bilibili = strpos($sd, "player.bilibili.com") !== FALSE;
-        if ($is_mobile && $bilibili) {
+        if (!$outsource && $bilibili || $is_mobile && $bilibili) {
             $outsource = false;
+            $sd = Video::getMobileBB($sd);
         }
 
         if ($outsource) {
@@ -170,10 +171,6 @@ class Video extends Model
                 $sd = $sd.'&danmaku=0&qn=0&type=mp4&otype=json&fnver=0&fnval=1&platform=html5&html5=1&high_quality=1&autoplay=1';
             } else {
                 $sd = $sd.'?danmaku=0&qn=0&type=mp4&otype=json&fnver=0&fnval=1&platform=html5&html5=1&high_quality=1&autoplay=1';;
-            }
-        } else {
-            if ($bilibili) {
-                $sd = Video::getMobileBB($sd);
             }
         }
     }
