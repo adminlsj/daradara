@@ -10,8 +10,12 @@ use App\Comment;
 
 class Video extends Model
 {
+    protected $casts = [
+        'foreign_sd' => 'array'
+    ];
+
 	protected $fillable = [
-        'id', 'user_id', 'playlist_id', 'title', 'caption', 'tags', 'sd', 'imgur', 'views', 'outsource', 'created_at', 'uploaded_at',
+        'id', 'user_id', 'playlist_id', 'title', 'caption', 'tags', 'sd', 'imgur', 'views', 'outsource', 'foreign_sd', 'created_at', 'uploaded_at',
     ];
 
     public static $tags = [
@@ -147,13 +151,15 @@ class Video extends Model
 
     public static function setPlayerConfig($video, $request, $is_mobile, &$outsource, &$sd)
     {
-        if ($video->foreign_url && geoip($request->ip())->toArray()['iso_code'] == 'HK') {
-            if (strpos($video->foreign_url, 'www.viu.com') !== FALSE) {
-                header("Location: ".$video->foreign_url); 
-                exit();
-            } else {
+        if ($video->foreign_sd) {
+            $iso_code = geoip($request->ip())->toArray()['iso_code'];
+            if (array_key_exists($iso_code, $video->foreign_sd)) {
                 $outsource = true;
-                $sd = $video->foreign_url;
+                $sd = $video->foreign_sd[$iso_code];
+                if (strpos($sd, 'www.viu.com') !== FALSE) {
+                    header("Location: ".$sd); 
+                    exit();
+                }
             }
         }
 
