@@ -154,10 +154,6 @@ class Video extends Model
         if ($video->foreign_sd && array_key_exists($country_code, $video->foreign_sd)) {
             $outsource = true;
             $sd = $video->foreign_sd[$country_code];
-            if (strpos($sd, 'www.viu.com') !== FALSE) {
-                header("Location: ".$sd); 
-                exit();
-            }
         }
 
         $bilibili = strpos($sd, "player.bilibili.com") !== FALSE;
