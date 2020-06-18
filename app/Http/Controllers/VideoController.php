@@ -77,7 +77,11 @@ class VideoController extends Controller
             $outsource = $video->outsource;
             $sd = $video->sd()[0];
             $is_mobile = $this->checkMobile();
-            Video::setPlayerConfig($video, $request, $is_mobile, $outsource, $sd);
+            $country_code = 'N/A';
+            if (isset($_SERVER["HTTP_CF_IPCOUNTRY"])) {
+              $country_code = $_SERVER["HTTP_CF_IPCOUNTRY"];
+            }
+            Video::setPlayerConfig($video, $country_code, $is_mobile, $outsource, $sd);
 
             $video->views++;
             $video->save();

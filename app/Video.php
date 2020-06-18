@@ -149,11 +149,11 @@ class Video extends Model
         return explode(" ",$this->sd);
     }
 
-    public static function setPlayerConfig($video, $request, $is_mobile, &$outsource, &$sd)
+    public static function setPlayerConfig($video, $country_code, $is_mobile, &$outsource, &$sd)
     {
-        if ($video->foreign_sd && array_key_exists($iso_code = geoip($request->ip())->toArray()['iso_code'], $video->foreign_sd)) {
+        if ($video->foreign_sd && array_key_exists($country_code, $video->foreign_sd)) {
             $outsource = true;
-            $sd = $video->foreign_sd[$iso_code];
+            $sd = $video->foreign_sd[$country_code];
             if (strpos($sd, 'www.viu.com') !== FALSE) {
                 header("Location: ".$sd); 
                 exit();

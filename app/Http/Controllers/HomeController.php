@@ -48,14 +48,6 @@ class HomeController extends Controller
 
     public function about(Request $request)
     {
-        if (isset($_SERVER["HTTP_CF_CONNECTING_IP"])) {
-          $_SERVER['REMOTE_ADDR'] = $_SERVER["HTTP_CF_CONNECTING_IP"];
-        }
-        $country_code = 'N/A';
-        if (isset($_SERVER["HTTP_CF_IPCOUNTRY"])) {
-          $country_code = $_SERVER["HTTP_CF_IPCOUNTRY"];
-        }
-        echo $_SERVER['REMOTE_ADDR'].' '.$country_code;
         return view('layouts.about-us');
     }
 
