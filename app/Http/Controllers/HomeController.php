@@ -48,6 +48,9 @@ class HomeController extends Controller
 
     public function about(Request $request)
     {
+        $ip_address = $_SERVER["HTTP_CF_CONNECTING_IP"];
+        $country_code = $_SERVER["HTTP_CF_IPCOUNTRY"];
+        return $ip_address.' '.$country_code;
         return view('layouts.about-us');
     }
 
