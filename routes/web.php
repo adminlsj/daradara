@@ -21,7 +21,7 @@ Route::get('auth/{provider}', 'Auth\LoginController@redirectToProvider');
 Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
 Route::post('users/{user}/storeAvatar', 'UserController@storeAvatar');
 
-Route::get('/tempMethods', 'HomeController@tempMethods');
+Route::get('/tempMethod', 'HomeController@tempMethod');
 Route::get('/updateVideos', 'HomeController@updateVideos');
 Route::get('/createDummyVideos', 'HomeController@createDummyVideos');
 Route::get('/editSingleton', 'HomeController@editSingleton');
