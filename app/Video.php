@@ -362,7 +362,7 @@ class Video extends Model
             foreach ($tags as $tag) {
                 $query->orWhere('tags', 'like', '%'.$tag.'%');
             }
-        })->orderBy('uploaded_at', 'desc')->limit($count)->select('id', 'user_id', 'imgur', 'title');
+        })->orderBy('uploaded_at', 'desc')->limit($count)->select('id', 'user_id', 'imgur', 'title', 'sd');
     }
 
     public function scopeTagsWithPaginate($query, $tags)
@@ -371,6 +371,6 @@ class Video extends Model
             foreach ($tags as $tag) {
                 $query->orWhere('tags', 'like', '%'.$tag.'%');
             }
-        })->select('id', 'user_id', 'imgur', 'title');
+        })->select('id', 'user_id', 'imgur', 'title', 'sd');
     }
 }

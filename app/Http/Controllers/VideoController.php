@@ -289,9 +289,9 @@ class VideoController extends Controller
 
             } else {
                 if ($tag == 'anime1') {
-                    $videos = Video::with('user:id,name')->where('user_id', 746)->select('id', 'user_id', 'imgur', 'title');
+                    $videos = Video::with('user:id,name')->where('user_id', 746)->select('id', 'user_id', 'imgur', 'title', 'sd');
                 } elseif ($tag == 'Gimy劇迷') {
-                    $videos = Video::with('user:id,name')->where('user_id', 750)->select('id', 'user_id', 'imgur', 'title');
+                    $videos = Video::with('user:id,name')->where('user_id', 750)->select('id', 'user_id', 'imgur', 'title', 'sd');
                 } else {
                     $videos = Video::tagsWithPaginate([$tag]);
                 }                    
@@ -606,7 +606,8 @@ class VideoController extends Controller
     {
         $html = '';
         foreach ($videos as $video) {
-            $html .= view('video.new-singleLoadMoreVideos', compact('video'));
+            // $html .= view('video.new-singleLoadMoreVideos', compact('video'));
+            $html .= view('video.card', compact('video'));
         }
         return $html;
     }
