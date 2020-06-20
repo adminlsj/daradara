@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Video;
+use App\PendingVideo;
 use App\Watch;
 use App\Subscribe;
 use App\Avatar;
@@ -171,7 +172,7 @@ class UserController extends Controller
             $url = $pms['data']['link'];
 
             if ($url != "") {
-                $video = Video::create([
+                $video = PendingVideo::create([
                     'user_id' => $user->id,
                     'playlist_id' => request('channel'),
                     'title' => request('title'),
@@ -185,39 +186,7 @@ class UserController extends Controller
                     'uploaded_at' => Carbon::createFromFormat('Y-m-d\TH:i:s', request('uploaded_at'))->format('Y-m-d H:i:s'),
                 ]);
 
-                $userArray = [];
-                if ($video->playlist_id != '') {
-                    $watch = $video->watch;
-                    $watch->updated_at = $video->uploaded_at;
-                    $watch->save();
-
-                    $subscribes = $watch->subscribes();
-                    foreach ($subscribes as $subscribe) {
-                        $user = $subscribe->user();
-                        if (strpos($user->alert, 'subscribe') === false) {
-                            $user->alert = $user->alert."subscribe";
-                            $user->save();
-                        }
-                        array_push($userArray, $user->id);
-                    }
-                }
-
-                foreach ($video->tags() as $tag) {
-                    $subscribes = Subscribe::where('tag', $tag)->get();
-                    foreach ($subscribes as $subscribe) {
-                        if (!in_array($subscribe->user()->id, $userArray)) {
-                            $user = $subscribe->user();
-                            if (strpos($user->alert, 'subscribe') === false) {
-                                $user->alert = $user->alert."subscribe";
-                                $user->save();
-                            }
-                        }
-                    }
-                }
-
-                // SendSubscriptionEmail::dispatch($video);
-
-                return Redirect::route('video.watch', ['v' => $video->id]);
+                return redirect()->action('HomeController@index');
             }
         } else {
             return Redirect::back()->withErrors('封面圖片上傳失敗，請重新上傳。');

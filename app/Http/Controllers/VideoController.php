@@ -606,8 +606,8 @@ class VideoController extends Controller
     {
         $html = '';
         foreach ($videos as $video) {
-            // $html .= view('video.new-singleLoadMoreVideos', compact('video'));
-            $html .= view('video.card', compact('video'));
+            $html .= view('video.new-singleLoadMoreVideos', compact('video'));
+            // $html .= view('video.card', compact('video'));
         }
         return $html;
     }

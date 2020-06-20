@@ -23,6 +23,7 @@ Route::post('users/{user}/storeAvatar', 'UserController@storeAvatar');
 
 Route::get('/tempMethod', 'HomeController@tempMethod');
 Route::get('/updateVideos', 'HomeController@updateVideos');
+Route::get('/uploadPendingVideos', 'HomeController@uploadPendingVideos');
 Route::get('/createDummyVideos', 'HomeController@createDummyVideos');
 Route::get('/editSingleton', 'HomeController@editSingleton');
 Route::post('/uploadSingleton', 'HomeController@uploadSingleton')->name('video.uploadSingleton');

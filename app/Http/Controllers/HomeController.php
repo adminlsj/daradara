@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Video;
+use App\PendingVideo;
 use App\Watch;
 use App\Subscribe;
 use App\User;
@@ -239,13 +240,15 @@ class HomeController extends Controller
             
             foreach ($quan as $video) {
                 $sd = $this->get_string_between($video->sd, 'vmtt.tc.qq.com/', '.f0.mp4');
-                $video->sd = 'https://www.agefans.tv/player/ckx1/?url='.urlencode(Video::getSourceQQ("https://quan.qq.com/video/".$sd));
+                $video->sd = 'https://www.agefans.tv/player/dpx/?url='.urlencode(Video::getSourceQQ("https://quan.qq.com/video/".$sd));
+                $video->outsource = true;
                 $video->save();
             }
 
             foreach ($qzone as $video) {
                 $sd = $this->get_string_between($video->sd, 'vwecam.tc.qq.com/', '.f0.mp4');
-                $video->sd = 'https://www.agefans.tv/player/ckx1/?url='.urlencode(Video::getSourceQZ($sd));
+                $video->sd = 'https://www.agefans.tv/player/dpx/?url='.urlencode(Video::getSourceQZ($sd));
+                $video->outsource = true;
                 $video->save();
             }
 
@@ -261,6 +264,60 @@ class HomeController extends Controller
             $video->outsource = true;
             $video->save();
         }
+        return redirect()->action('HomeController@index');
+    }
+
+    public function uploadPendingVideos()
+    {
+        $pendings = PendingVideo::all();
+        foreach ($pendings as $pending) {
+            $video = Video::create([
+                'user_id' => $pending->user_id,
+                'playlist_id' => $pending->playlist_id,
+                'title' => $pending->title,
+                'caption' => $pending->caption,
+                'sd' => $pending->sd,
+                'imgur' => $pending->imgur,
+                'tags' => $pending->tags,
+                'views' => $pending->views,
+                'outsource' => $pending->outsource,
+                'created_at' => $pending->created_at,
+                'uploaded_at' => $pending->uploaded_at,
+            ]);
+
+            $userArray = [];
+            if ($video->playlist_id != '') {
+                $watch = $video->watch;
+                $watch->updated_at = $video->uploaded_at;
+                $watch->save();
+
+                $subscribes = $watch->subscribes();
+                foreach ($subscribes as $subscribe) {
+                    $user = $subscribe->user();
+                    if (strpos($user->alert, 'subscribe') === false) {
+                        $user->alert = $user->alert."subscribe";
+                        $user->save();
+                    }
+                    array_push($userArray, $user->id);
+                }
+            }
+
+            foreach ($video->tags() as $tag) {
+                $subscribes = Subscribe::where('tag', $tag)->get();
+                foreach ($subscribes as $subscribe) {
+                    if (!in_array($subscribe->user()->id, $userArray)) {
+                        $user = $subscribe->user();
+                        if (strpos($user->alert, 'subscribe') === false) {
+                            $user->alert = $user->alert."subscribe";
+                            $user->save();
+                        }
+                    }
+                }
+            }
+
+            $pending->delete();
+        }
+
         return redirect()->action('HomeController@index');
     }
 

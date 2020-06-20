@@ -13,7 +13,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        'App\Console\Commands\UpdateVideos'
+        'App\Console\Commands\UpdateVideos',
+        'App\Console\Commands\UploadVideos'
     ];
 
     /**
@@ -24,8 +25,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('laughseejapan:update-videos')
-                 ->dailyAt('16:30');
+        $schedule->command('laughseejapan:update-videos')->dailyAt('16:30');
+        $schedule->command('laughseejapan:upload-videos')->everyFiveMinutes();
     }
 
     /**
@@ -38,5 +39,15 @@ class Kernel extends ConsoleKernel
         $this->load(__DIR__.'/Commands');
 
         require base_path('routes/console.php');
+    }
+
+    /**
+     * Get the timezone that should be used by default for scheduled events.
+     *
+     * @return \DateTimeZone|string|null
+     */
+    protected function scheduleTimezone()
+    {
+        return 'Asia/Taipei';
     }
 }

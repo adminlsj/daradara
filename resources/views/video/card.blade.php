@@ -1,12 +1,13 @@
-<div class="hidden-xs col-sm-3 hover-opacity-all load-more-wrapper multiple-link-wrapper" style="margin-bottom: 9px;">
-	<a style="color: inherit" href="{{ route('video.watch') }}?v={{ $video->id }}" class="overlay"></a>
-    <div style="position: relative;" class="inner">
-        <img class="lazy" style="width: 100%; height: 100%;" src="{{ $video->imgur16by9() }}" data-src="{{ $video->imgurL() }}" data-srcset="{{ $video->imgurL() }}" alt="{{ $video->title }}">
-	    <div style="background-color: #e8eaed; padding: 7px 10px; height: 73px">
-		    <div style="font-weight: bold; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">{{ $video->title }}</div>
-		    <a target="_blank" href="{{ $video->sd }}" style="color: darkgray; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; font-size: 0.95em">{{ str_ireplace('www.', '', parse_url($video->sd, PHP_URL_HOST)) }}</a>
+<div class="hidden-xs col-sm-3 hover-opacity-all load-more-wrapper" style="margin-bottom: 9px;">
+	<a style="color: inherit; text-decoration: none;" href="{{ route('video.watch') }}?v={{ $video->id }}">
+	    <div style="position: relative;">
+	        <img class="lazy" style="width: 100%; height: 100%;" src="{{ $video->imgur16by9() }}" data-src="{{ $video->imgurL() }}" data-srcset="{{ $video->imgurL() }}" alt="{{ $video->title }}">
+		    <div style="background-color: #e8eaed; padding: 7px 10px; height: 73px">
+			    <div style="font-weight: bold; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">{{ $video->title }}</div>
+			    <div href="{{ $video->sd }}" style="color: darkgray; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; font-size: 0.95em">{{ str_ireplace('player.', '', str_ireplace('www.', '', parse_url($video->sd, PHP_URL_HOST))) }}</div>
+			</div>
 		</div>
-	</div>
+	</a>
 </div>
 
 <div class="hidden-sm hidden-md hidden-lg related-watch-wrap hover-opacity-all" style="background-color: #F9F9F9; margin-top: 0px; margin-left: 0px; margin-right: 0px;">

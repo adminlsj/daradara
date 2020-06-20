@@ -52,8 +52,6 @@ class UpdateVideos extends Command
             $video->sd = Video::getSourceQZ($sd);
             $video->save();
         }
-
-        $this->info("Done!");
     }
 
     function get_string_between($string, $start, $end){
