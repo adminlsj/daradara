@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\Video;
 use App\PendingVideo;
+use App\Subscribe;
 
 class UploadVideos extends Command
 {
