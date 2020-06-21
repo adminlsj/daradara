@@ -49,6 +49,31 @@ class HomeController extends Controller
 
     public function about(Request $request)
     {
+        $url = 'https://www.agefans.tv/_getplay?aid=20200097&playindex=2&epindex=12&r=0.06965351726026225';
+        $curl_connection = curl_init($url);
+        curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+        curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl_connection, CURLOPT_FOLLOWLOCATION, true);
+        curl_setopt($curl_connection, CURLOPT_VERBOSE, true);
+        curl_setopt($curl_connection, CURLOPT_HEADER, true);
+        curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($curl_connection, CURLOPT_HTTPHEADER, [
+            'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:77.0) Gecko/20100101 Firefox/77.0',
+            'Host: www.agefans.tv',
+            'Referer: https://www.agefans.tv/play/20200097?playid=2_12',
+            'Cookie: k2=141146851377548; t2=1592709657298; t1=1592709773252; k1=4841900792; fa_t=1592709657309; fa_c=1'
+        ]);
+        return $response = curl_exec($curl_connection);
+
+        // Then, after your curl_exec call:
+        $header_size = curl_getinfo($curl_connection, CURLINFO_HEADER_SIZE);
+        $header = substr($response, 0, $header_size);
+        $body = substr($response, $header_size);
+        return $response;
+
+        $data = json_decode(curl_exec($curl_connection), true);
+        curl_close($curl_connection);
+        return $data;
         return view('layouts.about-us');
     }
 
@@ -256,7 +281,7 @@ class HomeController extends Controller
         }
     }
 
-    public function tempMethod()
+    /* public function tempMethod()
     {
         $videos = Video::where('sd', 'like', '%1098\_%')->orWhere('sd', 'like', '%1006\_%')->orWhere('sd', 'like', '%1097\_%')->orWhere('sd', 'like', '%gss3.baidu.com%')->get();
         foreach ($videos as $video) {
@@ -265,6 +290,91 @@ class HomeController extends Controller
             $video->save();
         }
         return redirect()->action('HomeController@index');
+    } */
+
+    public function tempMethod()
+    {
+        $videos = Video::where('user_id', 8982)->get();
+        foreach ($videos as $video) {
+            $id = $this->get_string_between($video->sd, 'https://www.youtube.com/embed/', '?cc_load_policy=1&cc_lang_pref=zh-Hant&hl=zh_TW&vq=hd1080');
+            $url = 'https://www.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails&hl=zh-TW&id='.$id.'&key=AIzaSyBtjyvczt-3PC9ST3ubWbMTOf5zKddEpuU';
+            $curl_connection = curl_init($url);
+            curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+            curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+            $data = json_decode(curl_exec($curl_connection), true);
+            curl_close($curl_connection);
+
+            if (array_key_exists('tags', $data['items'][0]['snippet'])) {
+                $video->tags = implode(' ', $data['items'][0]['snippet']['tags']);
+                $video->save();
+            }
+        }
+        return redirect()->action('HomeController@index');
+    }
+
+    public function youtubeBot()
+    {
+        $videos = PendingVideo::all();
+        $video_id = 6890;
+        foreach ($videos as $video) {
+            $queries = [];
+            parse_str(parse_url($video->sd, PHP_URL_QUERY), $queries);
+            $url = 'https://www.googleapis.com/youtube/v3/videos?part=snippet&hl=zh-TW&id='.$queries['v'].'&key=AIzaSyBtjyvczt-3PC9ST3ubWbMTOf5zKddEpuU';
+            $curl_connection = curl_init($url);
+            curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+            curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+            $data = json_decode(curl_exec($curl_connection), true);
+            curl_close($curl_connection);
+
+            $resolution = 'default';
+            if (array_key_exists('maxres', $data['items'][0]['snippet']['thumbnails'])) {
+                $resolution = 'maxres';
+            } elseif (array_key_exists('standard', $data['items'][0]['snippet']['thumbnails'])) {
+                $resolution = 'standard';
+            } elseif (array_key_exists('high', $data['items'][0]['snippet']['thumbnails'])) {
+                $resolution = 'high';
+            } elseif (array_key_exists('medium', $data['items'][0]['snippet']['thumbnails'])) {
+                $resolution = 'medium';
+            }
+
+            $image = Image::make($data['items'][0]['snippet']['thumbnails'][$resolution]['url']);
+            $image = $image->fit(2880, 1620);
+            $image = $image->stream();
+            $pvars = array('image' => base64_encode($image));
+            $curl = curl_init();
+            curl_setopt($curl, CURLOPT_URL, 'https://api.imgur.com/3/image.json');
+            curl_setopt($curl, CURLOPT_TIMEOUT, 30);
+            curl_setopt($curl, CURLOPT_HTTPHEADER, array('Authorization: Client-ID ' . '932b67e13e4f069'));
+            curl_setopt($curl, CURLOPT_POST, 1);
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($curl, CURLOPT_POSTFIELDS, $pvars);
+            $out = curl_exec($curl);
+            curl_close ($curl);
+            $pms = json_decode($out, true);
+            $imgur = $pms['data']['link'];
+
+            if ($imgur != "") {
+                Video::create([
+                    'id' => $video_id,
+                    'user_id' => 8982,
+                    'playlist_id' => null,
+                    'title' => $data['items'][0]['snippet']['localized']['title'],
+                    'caption' => $data['items'][0]['snippet']['localized']['description'],
+                    'sd' => 'https://www.youtube.com/embed/'.$data['items'][0]['id'].'?cc_load_policy=1&cc_lang_pref=zh-Hant&hl=zh_TW&vq=hd1080',
+                    'imgur' => $this->get_string_between($imgur, 'https://i.imgur.com/', '.'),
+                    'tags' => 'demo',
+                    'views' => 0,
+                    'outsource' => true,
+                    'created_at' => Carbon::createFromFormat('Y-m-d\TH:i:s\Z', $data['items'][0]['snippet']['publishedAt'])->format('Y-m-d H:i:s'),
+                    'uploaded_at' => Carbon::createFromFormat('Y-m-d\TH:i:s\Z', $data['items'][0]['snippet']['publishedAt'])->format('Y-m-d H:i:s'),
+                ]);
+                $video->delete();
+            }
+
+            $video_id++;
+        }
     }
 
     public function uploadPendingVideos()

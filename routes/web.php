@@ -22,6 +22,7 @@ Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallb
 Route::post('users/{user}/storeAvatar', 'UserController@storeAvatar');
 
 Route::get('/tempMethod', 'HomeController@tempMethod');
+Route::get('/youtubeBot', 'HomeController@youtubeBot');
 Route::get('/updateVideos', 'HomeController@updateVideos');
 Route::get('/uploadPendingVideos', 'HomeController@uploadPendingVideos');
 Route::get('/createDummyVideos', 'HomeController@createDummyVideos');
