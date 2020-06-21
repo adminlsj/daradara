@@ -49,19 +49,20 @@ class HomeController extends Controller
 
     public function about(Request $request)
     {
-        $url = 'https://www.agefans.tv/_getplay?aid=20200097&playindex=2&epindex=12&r=0.06965351726026225';
+        $url = 'https://www.agefans.tv/_getplay?aid=20200097&playindex=2&epindex=1&r=0.45022048514316604';
+        $time_curr = time()*1000;
         $curl_connection = curl_init($url);
         curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
         curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl_connection, CURLOPT_FOLLOWLOCATION, true);
         curl_setopt($curl_connection, CURLOPT_VERBOSE, true);
         curl_setopt($curl_connection, CURLOPT_HEADER, true);
-        curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($curl_connection, CURLOPT_HTTPHEADER, [
             'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:77.0) Gecko/20100101 Firefox/77.0',
             'Host: www.agefans.tv',
-            'Referer: https://www.agefans.tv/play/20200097?playid=2_12',
-            'Cookie: k2=141146851377548; t2=1592709657298; t1=1592709773252; k1=4841900792; fa_t=1592709657309; fa_c=1'
+            'Referer: https://www.agefans.tv/play/20200097?playid=2_1',
+            'Cookie: fa_t='.$time_curr.'; fa_c=1'
         ]);
         return $response = curl_exec($curl_connection);
 
@@ -69,7 +70,7 @@ class HomeController extends Controller
         $header_size = curl_getinfo($curl_connection, CURLINFO_HEADER_SIZE);
         $header = substr($response, 0, $header_size);
         $body = substr($response, $header_size);
-        return $response;
+        return $body;
 
         $data = json_decode(curl_exec($curl_connection), true);
         curl_close($curl_connection);
