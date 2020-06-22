@@ -646,57 +646,24 @@ class VideoController extends Controller
             unset($queryArray[$key]);
         }
 
-        $videosArray = [];
-        $idsArray = [];
-
-        // Exact Match Query [e.g. 2012.09.14]
-        $exactQuery = Video::with('user:id,name')->where('title', 'ilike', '%'.trim(request('query')).'%')->orderBy('uploaded_at', 'desc')->distinct()->get();
-        foreach ($exactQuery as $q) {
-            if (!in_array($q->id, $idsArray)) {
-                array_push($videosArray, $q);
-                array_push($idsArray, $q->id);
-            }
-        }
-
-        // Exact Order Match Query (search query in same order e.g. 2012 => 2>0>1>2) [e.g. 2012 09 14]
-        $exactOrderQueryScope = '%'.implode('%', $queryArray).'%';
-        $exactOrderQuery = Video::with('user:id,name')->where('title', 'ilike', $exactOrderQueryScope)->orderBy('uploaded_at', 'desc')->get();
-        foreach ($exactOrderQuery as $q) {
-            if (!in_array($q->id, $idsArray)) {
-                array_push($videosArray, $q);
-                array_push($idsArray, $q->id);
-            }
-        }
+        $exactTitleQuery = '%'.trim(request('query')).'%';
+        $exactOrderTitleQuery = '%'.implode('%', $queryArray).'%';
+        $exactTagQuery = '%'.$query.'%';
 
         if ($request->ajax()) {
-            $videosArray = array_slice($videosArray, 24);
-            $exactOrderTagQuery = Video::with('user:id,name')->where('tags', 'ilike', $exactOrderQueryScope)->orderBy('uploaded_at', 'desc')->get();
-            foreach ($exactOrderTagQuery as $q) {
-                if (!in_array($q->id, $idsArray)) {
-                    array_push($videosArray, $q);
-                    array_push($idsArray, $q->id);
-                }
+            $request->replace(['page' => $request->page + 1]);
+            $videos = Video::with('user:id,name')->where('title', 'ilike', $exactTitleQuery)->orWhere('title', 'ilike', $exactOrderTitleQuery)->orWhere('tags', 'ilike', $exactTagQuery)->orderBy('uploaded_at', 'desc')->distinct()->paginate(30);
+
+            $html = '';
+            foreach ($videos as $video) {
+                $html .= view('video.card', compact('video'));
             }
-
-            $page = Input::get('page', 1); // Get the ?page=1 from the url
-            $perPage = 24; // Number of items per page
-            $offset = ($page * $perPage) - $perPage;
-
-            $videos = new LengthAwarePaginator(
-                array_slice($videosArray, $offset, $perPage, true), // Only grab the items we need
-                count($videosArray), // Total items
-                $perPage, // Items per page
-                $page, // Current page
-                ['path' => $request->url(), 'query' => $request->query()] // We need this so we can keep all old query parameters from the url
-            );
-
-            $html = $this->searchLoadHTML($videos);
             return $html;
         }
 
-        $watches = Watch::withVideos()->where('title', 'ilike', $exactOrderQueryScope)->orderBy('created_at', 'desc')->get();
-        $user = User::withCount('videos')->where('name', 'like', '%'.strtolower($query).'%')->first();
-        $topResults = array_slice($videosArray, 0, 24);
+        $watches = Watch::withVideos()->where('title', 'ilike', $exactOrderTitleQuery)->orderBy('created_at', 'desc')->get();
+        $user = User::where('name', 'like', '%'.strtolower($query).'%')->first();
+        $topResults = Video::with('user:id,name')->where('title', 'ilike', $exactTitleQuery)->orWhere('title', 'ilike', $exactOrderTitleQuery)->orWhere('tags', 'ilike', $exactTagQuery)->orderBy('uploaded_at', 'desc')->distinct()->limit(30)->get();
 
         return view('video.search', compact('watches', 'query', 'topResults', 'user'));
     }

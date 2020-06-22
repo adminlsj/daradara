@@ -187,6 +187,15 @@ $('[id=toggleSearchBar]').click(function(e) {
     }
 });
 
+$('[id=home-menu-btn]').click(function(e) {
+    var x = document.getElementById("home-sidebar-menu");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+});
+
 $('.search-submit-btn').click(function(e) {
     $(this).parent().submit();
 });
@@ -222,22 +231,6 @@ window.onscroll = function() {
 setTimeout(function(){
     $('#error').hide()
 }, 5000)
-
-$(document).ready(function () {
-    var hash = window.location.hash.substr(1);
-    $('#' + hash).css("background-color", "#7A7A7A");
-    if (is_mobile) {
-      $('html, body').animate({
-          scrollTop: $('#' + hash).offset().top
-      }, 'slow');
-    } else {
-      $('html, body').animate({
-          scrollTop: $('#' + hash).offset().top - 50
-      }, 'slow');
-    }
-    $('#' + hash).css("transition", "background-color 3s ease-in");
-    $('#' + hash).css("background-color", "#1F1F1F");
-});
 
 $('form').submit(function(){
     $(this).find('button[type=submit]').prop('disabled', true);

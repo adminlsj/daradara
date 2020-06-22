@@ -49,33 +49,28 @@ class HomeController extends Controller
 
     public function about(Request $request)
     {
-        $url = 'https://www.agefans.tv/_getplay?aid=20200097&playindex=2&epindex=1&r=0.45022048514316604';
-        $time_curr = time()*1000;
-        $curl_connection = curl_init($url);
-        curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
-        curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curl_connection, CURLOPT_FOLLOWLOCATION, true);
-        curl_setopt($curl_connection, CURLOPT_VERBOSE, true);
-        curl_setopt($curl_connection, CURLOPT_HEADER, true);
-        curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, true);
-        curl_setopt($curl_connection, CURLOPT_HTTPHEADER, [
-            'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:77.0) Gecko/20100101 Firefox/77.0',
-            'Host: www.agefans.tv',
-            'Referer: https://www.agefans.tv/play/20200097?playid=2_1',
-            'Cookie: fa_t='.$time_curr.'; fa_c=1'
-        ]);
-        return $response = curl_exec($curl_connection);
+        $url = 'http://www.yongjiuzy1.com/?m=vod-detail-id-35262.html';
+        $content = file_get_contents($url);
 
-        // Then, after your curl_exec call:
-        $header_size = curl_getinfo($curl_connection, CURLINFO_HEADER_SIZE);
-        $header = substr($response, 0, $header_size);
-        $body = substr($response, $header_size);
-        return $body;
+        $start = explode('<!--火车头地址开始<li>', $content);
+        $end = explode('</li>火车头地址结束-->' , $start[1]);
+        $snippet = explode('</li><li>', $end[0]);
 
-        $data = json_decode(curl_exec($curl_connection), true);
-        curl_close($curl_connection);
-        return $data;
-        return view('layouts.about-us');
+        for ($i = 0; $i < count($snippet); $i++) { 
+            if (strpos($snippet[$i], '.m3u8') !== false) {
+               array_splice($snippet, $i, 1);
+               $i--;
+            }
+        }
+
+        foreach ($snippet as $line) {
+            $data = explode('$', $line);
+            $episode = $data[0];
+            $link = $data[1];
+            echo $episode.'&nbsp;'.$link.'<br>';
+        }
+
+        // return view('layouts.about-us');
     }
 
     public function contact()
