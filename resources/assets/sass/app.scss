@@ -1817,6 +1817,20 @@ a > i {
   color: dimgray;
 }
 
+.home-title {
+  font-size: 2.8em; 
+  margin-top: 5px; 
+  margin-bottom: 10px
+}
+
+.home-subtitle {
+  font-size: 1em; 
+  color: #555555; 
+  font-weight: normal; 
+  line-height: 0px; 
+  margin-left: 145px;
+}
+
 .trending-search-text {
   margin-top: 25px; 
   margin-left: calc(50% - 351px); 
@@ -2973,8 +2987,21 @@ a > i {
     margin-left: 14px; 
   }
 
+  .home-title {
+    font-size: 2.5em; 
+    margin-bottom: 10px;
+  }
+
+  .home-subtitle {
+    font-size: 1em; 
+    color: #555555; 
+    font-weight: normal; 
+    line-height: 0px; 
+    margin-left: 113px;
+  }
+
   .trending-search-text {
-    width: calc(100% - 30px); 
+    width: 100%; 
     margin-left: 0px; 
   }
 

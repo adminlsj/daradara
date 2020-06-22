@@ -13,8 +13,8 @@
 	<div style="background-color: white; text-align: center; position: relative;">
 		<div style="margin: 0;position: absolute;top: 35%;left: 50%;transform: translate(-50%, -50%); width: 100%">
 			<div class="row no-gutter load-more-container" style="padding-top: 19px;">
-			  <h5 class="user-show-title" style="font-size: 1em; color: #555555; font-weight: normal; line-height: 0px; margin-left: 145px">只有想不到，沒有找不到</h5>
-			  <h3 class="user-show-title" style="font-size: 2.8em; margin-top: 5px; margin-bottom: 10px">LaughSeeJapan</h3>
+			  <h5 class="user-show-title home-subtitle">只有想不到，沒有找不到</h5>
+			  <h3 class="user-show-title home-title">LaughSeeJapan</h3>
 			</div>
 			<form id="search-form" class="home-search-form" action="{{ route('video.search') }}" method="GET">
 	          <i style="position: absolute; top: 13px; left: 17px; color: dimgray" class="material-icons">search</i>
