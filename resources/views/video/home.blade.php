@@ -9,7 +9,7 @@
   @include('layouts.sidebarMenu', ['theme' => 'white'])
 </div>
 
-<div class="new-main-content">
+<div class="new-main-content" style="margin-top: -50px;">
 	<div style="background-color: white; text-align: center; position: relative;">
 		<div style="margin: 0;position: absolute;top: 35%;left: 50%;transform: translate(-50%, -50%); width: 100%">
 			<div class="row no-gutter load-more-container" style="padding-top: 19px;">
