@@ -9,8 +9,8 @@
   @include('layouts.sidebarMenu', ['theme' => 'white'])
 </div>
 
-<div class="new-main-content" style="margin-top: -50px;">
-	<div style="background-color: white; text-align: center; position: relative;">
+<div class="new-main-content">
+	<div style="background-color: white; text-align: center; position: relative; min-height: calc(100vh - 200px)">
 		<div style="margin: 0;position: absolute;top: 35%;left: 50%;transform: translate(-50%, -50%); width: 100%">
 			<div class="row no-gutter load-more-container" style="padding-top: 19px;">
 			  <h5 class="user-show-title home-subtitle">只有想不到，沒有找不到</h5>
