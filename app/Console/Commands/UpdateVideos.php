@@ -40,16 +40,25 @@ class UpdateVideos extends Command
     {
         $quan = Video::where('sd', 'like', '%1098\_%')->get();
         $qzone = Video::where('sd', 'like', '%1006\_%')->orWhere('sd', 'like', '%1097\_%')->get();
+        $direct = Video::where('sd', 'like', '%gss3.baidu.com%')->orWhere('sd', 'like', '%.m3u8%')->get();
         
         foreach ($quan as $video) {
             $sd = $this->get_string_between($video->sd, 'vmtt.tc.qq.com/', '.f0.mp4');
-            $video->sd = Video::getSourceQQ("https://quan.qq.com/video/".$sd);
+            $video->sd = 'https://gimy.cc/template/gimy/asset/fed/player.php?id=m3u8&url='.Video::getSourceQQ("https://quan.qq.com/video/".$sd);
+            $video->outsource = true;
             $video->save();
         }
 
         foreach ($qzone as $video) {
             $sd = $this->get_string_between($video->sd, 'vwecam.tc.qq.com/', '.f0.mp4');
-            $video->sd = Video::getSourceQZ($sd);
+            $video->sd = 'https://gimy.cc/template/gimy/asset/fed/player.php?id=m3u8&url='.Video::getSourceQZ($sd);
+            $video->outsource = true;
+            $video->save();
+        }
+
+        foreach ($direct as $video) {
+            $video->sd = 'https://gimy.cc/template/gimy/asset/fed/player.php?id=m3u8&url='.$video->sd;
+            $video->outsource = true;
             $video->save();
         }
     }
