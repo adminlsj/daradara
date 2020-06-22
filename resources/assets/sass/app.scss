@@ -1818,17 +1818,17 @@ a > i {
 }
 
 .home-title {
-  font-size: 2.8em; 
+  font-size: 2.8em !important; 
   margin-top: 5px; 
-  margin-bottom: 10px
+  margin-bottom: 10px !important; 
 }
 
 .home-subtitle {
-  font-size: 1em; 
+  font-size: 1em !important; 
   color: #555555; 
-  font-weight: normal; 
-  line-height: 0px; 
-  margin-left: 145px;
+  font-weight: normal !important; 
+  line-height: 0px;
+  margin-left: 145px !important; 
 }
 
 .trending-search-text {
@@ -2980,7 +2980,8 @@ a > i {
   }
 
   .home-search-form input {
-    width: calc(100% - 30px); 
+    width: calc(100% - 30px);
+    -webkit-appearance: none;
   }
 
   .home-search-form i {
@@ -2988,16 +2989,13 @@ a > i {
   }
 
   .home-title {
-    font-size: 2.5em; 
-    margin-bottom: 10px;
+    font-size: 2.5em !important; 
+    margin-bottom: 10px !important; 
   }
 
   .home-subtitle {
-    font-size: 1em; 
-    color: #555555; 
-    font-weight: normal; 
-    line-height: 0px; 
-    margin-left: 113px;
+    font-size: 1em !important; 
+    margin-left: 113px !important; 
   }
 
   .trending-search-text {
