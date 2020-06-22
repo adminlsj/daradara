@@ -1785,14 +1785,14 @@ a > i {
   min-height: calc(100vh - 50px);
 }
 
-#search-form {
+.home-search-form {
   margin-top: 25px;
   position: relative;
   width: 700px;
   margin-left: calc(50% - 350px);
 }
 
-#search-form input {
+.home-search-form input {
   width: 100%; 
   box-shadow: none; 
   border: 1px solid #e8eaed; 
@@ -1806,11 +1806,11 @@ a > i {
   font-weight: 500;
 }
 
-#search-form input:focus {
+.home-search-form input:focus {
   outline: none;
 }
 
-#search-form i {
+.home-search-form i {
   position: absolute; 
   top: 13px; 
   left: 17px; 
@@ -2960,16 +2960,16 @@ a > i {
     margin-top: 11px;
   }
 
-  #search-form {
+  .home-search-form {
     width: 100%;
     margin-left: 0px;
   }
 
-  #search-form input {
+  .home-search-form input {
     width: calc(100% - 30px); 
   }
 
-  #search-form i {
+  .home-search-form i {
     margin-left: 14px; 
   }
 

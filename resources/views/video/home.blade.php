@@ -16,7 +16,7 @@
 			  <h5 class="user-show-title" style="font-size: 1em; color: #555555; font-weight: normal; line-height: 0px; margin-left: 145px">只有想不到，沒有找不到</h5>
 			  <h3 class="user-show-title" style="font-size: 2.8em; margin-top: 5px; margin-bottom: 10px">LaughSeeJapan</h3>
 			</div>
-			<form id="search-form" action="{{ route('video.search') }}" method="GET">
+			<form id="search-form" class="home-search-form" action="{{ route('video.search') }}" method="GET">
 	          <i style="position: absolute; top: 13px; left: 17px; color: dimgray" class="material-icons">search</i>
 	          <input name="query" type="text" value="{{ request('query') }}" placeholder="探索全世界的影片" autofocus>
 		    </form>
