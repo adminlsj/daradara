@@ -1,4 +1,4 @@
-<div class="hidden-xs col-sm-3 hover-opacity-all load-more-wrapper" style="margin-bottom: 9px; width: 20%">
+<div class="hidden-xs col-sm-3 hover-opacity-all load-more-wrapper" style="margin-bottom: 9px;">
 	<a style="color: inherit; text-decoration: none;" href="{{ route('video.watch') }}?v={{ $video->id }}">
 	    <div style="position: relative;">
 	        <img class="lazy" style="width: 100%; height: 100%;" src="{{ $video->imgur16by9() }}" data-src="{{ $video->imgurL() }}" data-srcset="{{ $video->imgurL() }}" alt="{{ $video->title }}">

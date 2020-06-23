@@ -71,7 +71,7 @@
 				  	</div>
 
 				  	<div class="col-md-6">
-				  		<div id="test-player" class="aspect-ratio" style="background-color: black; background-image: url('https://i.imgur.com/TcZjkZa.gif'); background-position: center; background-repeat: no-repeat; background-size: 50px;">
+				  		<div id="test-player" class="aspect-ratio" style="background-color: black; background-image: url('https://i.imgur.com/wgOXAy6.gif'); background-position: center; background-repeat: no-repeat; background-size: 50px;">
 						</div>
 						<div style="margin-top: 15px; margin-bottom: 15px;">
 						  <label class="switch">

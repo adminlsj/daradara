@@ -40,26 +40,26 @@
     				@endif
     			</div>
     			<div class="col-md-7 intro-right playlist-scoll-wrapper">
-    				@foreach ($videos as $video)
-	    				<div class="multiple-link-wrapper hover-opacity-all intro-video-list">
-		    				<a href="{{ route('video.watch') }}?v={{ $video->id }}&list={{ $watch->id }}" class="overlay"></a>
-	    					<div style="height: 85px;" class="inner">
-		    					<img class="lazy" style="width: 155px; height: auto; float: left;" src="{{ $video->imgur16by9() }}" data-src="{{ $video->imgurH() }}" data-srcset="{{ $video->imgurH() }}" alt="{{ $video->title }}">
+                    @foreach ($videos as $video)
+                        <div class="multiple-link-wrapper hover-opacity-all intro-video-list">
+                            <a href="{{ route('video.watch') }}?v={{ $video->id }}&list={{ $watch->id }}" class="overlay"></a>
+                            <div style="height: 85px;" class="inner">
+                                <img class="lazy" style="width: 155px; height: auto; float: left;" src="{{ $video->imgur16by9() }}" data-src="{{ $video->imgurH() }}" data-srcset="{{ $video->imgurH() }}" alt="{{ $video->title }}">
                                 <span style="position: absolute; bottom: -3px; left: 6px; color: white; font-weight: bold; font-size: 1.2em;">{{ $videos->count() - $loop->index }}</span>
-		    					<h4 style="margin-left: 165px; font-weight: bold; padding-right: 0px">{{ $video->title }}</h4>
+                                <h4 style="margin-left: 165px; font-weight: bold; padding-right: 0px">{{ $video->title }}</h4>
                                 <div style="position: absolute; bottom: 0px; left: 165px;">
                                     <img class="lazy" style="float:left; width: 18px; height: 18px; margin-top: 1px" src="{{ $video->user->avatarCircleB() }}" data-src="{{ $video->user->avatar == null ? $video->user->avatarDefault() : $video->user->avatar->filename }}" data-srcset="{{ $video->user->avatar == null ? $video->user->avatarDefault() : $video->user->avatar->filename }}">
                                     <a href="{{ route('user.show', [$video->user]) }}" style="color: darkgray; font-size: 0.8em; margin-left: 5px;">{{ $video->user->name }}</a>
                                 </div>
-		    				</div>
-		    				@if ($videos->count() - $loop->index > 1)
+                            </div>
+                            @if ($videos->count() - $loop->index > 1)
                                 <hr style="border-color: #e1e1e1; margin-top: 23px;">
                             @else
                                 <div style="margin-top: 12px;"></div>
                             @endif
-	    				</div>
-    				@endforeach
-    			</div>
+                        </div>
+                    @endforeach
+                </div>
     		</div>
 		</div>
 	</div>

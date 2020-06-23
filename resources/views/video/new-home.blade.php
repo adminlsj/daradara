@@ -20,7 +20,7 @@
 	          <i style="position: absolute; top: 13px; left: 17px; color: dimgray" class="material-icons">search</i>
 	          <input name="query" type="text" value="{{ request('query') }}" placeholder="探索全世界的影片" autofocus>
 		    </form>
-		    <div class="trending-search-text">熱門搜索詞：<a style="padding-left: 5px" href="/search?query=動漫">動漫</a>|<a class="hidden-xs" href="/search?query=anime1">anime1</a><span class="hidden-xs">|</span><a href="/search?query=原創動畫">原創動畫</a>|<a href="/search?query=綜藝">綜藝</a>|<a class="hidden-xs" href="/search?query=嵐Arashi">嵐Arashi</a><span class="hidden-xs">|</span><a class="hidden-xs" href="/search?query=松子Deluxe">松子Deluxe</a><span class="hidden-xs">|</span><a href="/search?query=日劇">日劇</a><span class="hidden-xs">|</span><a class="hidden-xs" href="/search?query=木村拓哉">木村拓哉</a></div>
+		    <div class="trending-search-text">熱門搜索詞：<a style="padding-left: 5px" href="/search?query=動漫">動漫</a>|<a class="hidden-xs" href="/search?query=anime1">anime1</a><span class="hidden-xs">|</span><a class="hidden-xs" href="/search?query=格萊普尼爾">格萊普尼爾</a><span class="hidden-xs">|</span><a href="/search?query=原創動畫">原創動畫</a>|<a href="/search?query=綜藝">綜藝</a>|<a class="hidden-xs" href="/search?query=嵐Arashi">嵐Arashi</a><span class="hidden-xs">|</span><a class="hidden-xs" href="/search?query=松子Deluxe">松子Deluxe</a><span class="hidden-xs">|</span><a href="/search?query=日劇">日劇</a><span class="hidden-xs">|</span><a class="hidden-xs" href="/search?query=木村拓哉">木村拓哉</a></div>
 	    </div>
 	</div>
 </div>

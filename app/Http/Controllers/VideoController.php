@@ -42,7 +42,7 @@ class VideoController extends Controller
 
             $watch = Watch::find($request->list);
             $user = $watch->user();
-            $videos = Video::with('user.avatar')->where('playlist_id', $watch->id)->orderBy('created_at', 'desc')->select('id', 'user_id', 'imgur', 'title')->get();
+            $videos = Video::with('user.avatar')->where('playlist_id', $watch->id)->orderBy('created_at', 'desc')->select('id', 'user_id', 'imgur', 'title', 'sd')->get();
             $count = $videos->count();
 
             $first = $videos->first();
@@ -606,8 +606,8 @@ class VideoController extends Controller
     {
         $html = '';
         foreach ($videos as $video) {
-            $html .= view('video.new-singleLoadMoreVideos', compact('video'));
-            // $html .= view('video.card', compact('video'));
+            // $html .= view('video.new-singleLoadMoreVideos', compact('video'));
+            $html .= view('video.card-4', compact('video'));
         }
         return $html;
     }
@@ -661,8 +661,8 @@ class VideoController extends Controller
             return $html;
         }
 
-        $watches = Watch::withVideos()->where('title', 'ilike', $exactOrderTitleQuery)->orderBy('created_at', 'desc')->get();
-        $user = User::where('name', 'like', '%'.strtolower($query).'%')->first();
+        $watches = $query == '動漫' || $query == '日劇' || $query == '綜藝' ? [] : Watch::withVideos()->where('title', 'ilike', $exactOrderTitleQuery)->orderBy('created_at', 'desc')->get();
+        $user = $query == '動漫' || $query == '日劇' || $query == '綜藝' ? [] : User::where('name', 'like', '%'.strtolower($query).'%')->first();
         $topResults = Video::with('user:id,name')->where('title', 'ilike', $exactTitleQuery)->orWhere('title', 'ilike', $exactOrderTitleQuery)->orWhere('tags', 'ilike', $exactTagQuery)->orderBy('uploaded_at', 'desc')->distinct()->limit(30)->get();
 
         return view('video.search', compact('watches', 'query', 'topResults', 'user'));
@@ -701,7 +701,7 @@ class VideoController extends Controller
             return $b['score'] <=> $a['score'];
         });
 
-        $related = Video::with('user.avatar')->whereIn('id', Arr::pluck(array_slice($rankings, 0, 30), 'id'))->select('id', 'user_id', 'imgur', 'title')->get();
+        $related = Video::with('user.avatar')->whereIn('id', Arr::pluck(array_slice($rankings, 0, 30), 'id'))->select('id', 'user_id', 'imgur', 'title', 'sd')->get();
 
         $html = view('video.video-playlist-wrapper', compact('current', 'videos', 'related'));
         if ($request->ajax()) {

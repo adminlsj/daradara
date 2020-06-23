@@ -5,13 +5,12 @@
 	</a>
 </div>
 
-<div class="intro-left-subtitle">{{ $videos->count()}} 部影片 <small>•</small> {{ Carbon\Carbon::parse($watch->updated_at)->diffForHumans() }}更新</div>
+<div class="intro-left-subtitle">創建者：<a style="color: inherit;" href="{{ route('user.show', [$watch->user()]) }}">{{ $watch->user()->name }}</a></div>
 <h3 style="margin-top: 4px; margin-bottom: 13px; line-height: 31px; font-weight: bold;">{{ $watch->title }}</h3>
 
-<a href="{{ route('user.show', [$watch->user()]) }}"><img class="lazy" style="float:left; border-radius: 50%; width: 35px; height: 35px;" src="{{ $watch->user()->avatarCircleB() }}" data-src="{{ $watch->user()->avatar == null ? $watch->user()->avatarDefault() : $watch->user()->avatar->filename }}" data-srcset="{{ $watch->user()->avatar == null ? $watch->user()->avatarDefault() : $watch->user()->avatar->filename }}"></a>
-<h5 style="margin-left: 45px; line-height: 37px;"><a style="text-decoration: none; color: dimgray; font-weight: bold;" href="{{ route('user.show', [$watch->user()]) }}">{{ $watch->user()->name }}</a></h5>
+<h5 style="line-height: 30px; color: dimgray; font-size: 1em">{{ $videos->count()}} 部影片 <small>•</small> {{ Carbon\Carbon::parse($watch->updated_at)->diffForHumans() }}更新</h5>
 
-<div style="float: right; margin-top: -35px;">
+<div style="float: right; margin-top: -30px;">
 	@include('video.intro-subscribe-wrapper', ['tag' => $watch->title])
 </div>
 
