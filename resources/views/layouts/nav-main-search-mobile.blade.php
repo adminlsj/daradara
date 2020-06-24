@@ -27,7 +27,3 @@
     </div>
   </div>
 </nav>
-
-@include('layouts.nav-search')
-
-@include('layouts.nav-bottom')
