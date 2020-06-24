@@ -155,8 +155,20 @@ body {
   font-size: 27px;
 }
 
+.search-sub-nav a {
+  padding: 0px 18px;
+  color: dimgray !important;
+  text-decoration: none;
+  cursor: pointer;
+}
+
 .paravi-padding-setup {
   padding: 0px 25px;
+}
+
+.search-padding-setup {
+  padding: 0px 96px;
+  background-color: white;
 }
 
 .hover-opacity img:hover, .hover-opacity-all:hover {
@@ -332,6 +344,16 @@ label.upload-image-btn input[type="file"] {
 }
 .upload-image-btn :valid + span {
     color: #4A4;
+}
+
+.video-card {
+  width: 20%;
+}
+
+.nav-search-input {
+  width: 734px; 
+  margin-top: 24px; 
+  position: relative;
 }
 
 .subscribes-tab {
@@ -1325,7 +1347,7 @@ div.sticky {
     color: gray;
 }
 
-nav {
+nav.main {
   position: fixed; /* Make it stick/fixed */
   top: 0; /* Stay on top */
   width: 100%; /* Full width */
@@ -2580,6 +2602,14 @@ a > i {
     height: auto; 
   }
 
+  .video-card {
+    width: 25%;
+  }
+
+  .nav-search-input {
+    width: 85%; 
+  }
+
   #tag-subscribe-wrapper-btn {
     margin-right: 0px;
   }
@@ -2972,6 +3002,11 @@ a > i {
 @media (max-width: 768px) {
   .nav-image-wrapper img {
     margin-top: 11px;
+  }
+
+  .search-padding-setup {
+    padding: 0px 15px;
+    background-color: #F5F5F5;
   }
 
   .home-search-form {

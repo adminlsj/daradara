@@ -9,16 +9,17 @@
 @endsection
 
 @section('nav')
-	@include('layouts.nav-main-original', ['theme' => 'white'])
+<div class="hidden-xs">
+	@include('layouts.nav-main-search', ['theme' => 'white'])
+</div>
+<div class="hidden-sm hidden-md hidden-lg">
+	@include('layouts.nav-main-search-mobile', ['theme' => 'white'])
+</div>
 @endsection
 
 @section('content')
 <div class="new-main-content">
-	<div style="background-color: #F5F5F5;" class="paravi-padding-setup">
-		<form id="search-form" class="hidden-md hidden-lg" style="width: 100%; position: relative; padding-top: 15px" action="{{ route('video.search') }}" method="GET">
-	        <input name="query" style="width: 100%; box-shadow: none; border: 1px solid #e8eaed; background-color: #e8eaed; font-size: 1.1em;border-radius: 7px; height: 40px; padding-left: 13px; color: #222222; padding-bottom: 2px; font-weight: 500; -webkit-appearance: none;" type="text" value="{{ request('query') }}" placeholder="搜索">
-	        <a class="search-submit-btn" type="submit" style="position: absolute; top: 19px; right: 15px; color: dimgray; cursor: pointer;"><i class="material-icons">search</i></a>
-	    </form>
+	<div class="search-padding-setup">
 		<div class="row" style="padding-top: 15px; padding-bottom: 8px">
 			<div class="col-md-12">
 				<div class="video-sidebar-wrapper">

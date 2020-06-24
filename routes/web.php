@@ -26,6 +26,7 @@ Route::get('/youtubeBot', 'HomeController@youtubeBot');
 Route::get('/updateVideos', 'HomeController@updateVideos');
 Route::get('/uploadPendingVideos', 'HomeController@uploadPendingVideos');
 Route::get('/createDummyVideos', 'HomeController@createDummyVideos');
+Route::get('/youtubePre', 'HomeController@youtubePre');
 Route::get('/editSingleton', 'HomeController@editSingleton');
 Route::post('/uploadSingleton', 'HomeController@uploadSingleton')->name('video.uploadSingleton');
 

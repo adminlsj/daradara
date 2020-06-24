@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Video;
-use App\PendingVideo;
+use App\Bot;
 use App\Watch;
 use App\Subscribe;
 use App\User;
@@ -23,6 +23,7 @@ use App\Mail\UserReport;
 use App\Mail\CopyrightReport;
 use App\Mail\UserUploadVideo;
 use App\Mail\SubscribeNotify;
+use SteelyWing\Chinese\Chinese;
 use Redirect;
 
 class HomeController extends Controller
@@ -49,6 +50,25 @@ class HomeController extends Controller
 
     public function about(Request $request)
     {
+        $bots = Bot::all();
+        foreach ($bots as $bot) {
+            switch (str_ireplace('www.', '', parse_url($bot->data['source'], PHP_URL_HOST))) {
+                case 'youtube.com':
+                    Bot::youtube($bot);
+                    break;
+                
+                default:
+                    # code...
+                    break;
+            }
+        }
+
+        /* Bot::create([
+            'data' => ['user_id' => 7266, 'playlist_id' => 608, 'tags' => '動漫', 'source' => 'https://www.youtube.com/channel/UCgVmx-hK3HE6Yfu85Shifuw']
+        ]);
+
+        return view('layouts.about-us'); 
+
         $url = 'http://www.yongjiuzy1.com/?m=vod-detail-id-35262.html';
         $content = file_get_contents($url);
 
@@ -68,7 +88,7 @@ class HomeController extends Controller
             $episode = $data[0];
             $link = $data[1];
             echo $episode.'&nbsp;'.$link.'<br>';
-        }
+        } */
 
         // return view('layouts.about-us');
     }
@@ -284,7 +304,7 @@ class HomeController extends Controller
         }
     }
 
-    /* public function tempMethod()
+    public function tempMethod()
     {
         $videos = Video::where('sd', 'like', '%1098\_%')->orWhere('sd', 'like', '%1006\_%')->orWhere('sd', 'like', '%1097\_%')->orWhere('sd', 'like', '%gss3.baidu.com%')->get();
         foreach ($videos as $video) {
@@ -293,145 +313,14 @@ class HomeController extends Controller
             $video->save();
         }
         return redirect()->action('HomeController@index');
-    } */
-
-    public function tempMethod()
-    {
-        $videos = Video::where('user_id', 8982)->get();
-        foreach ($videos as $video) {
-            $id = $this->get_string_between($video->sd, 'https://www.youtube.com/embed/', '?cc_load_policy=1&cc_lang_pref=zh-Hant&hl=zh_TW&vq=hd1080');
-            $url = 'https://www.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails&hl=zh-TW&id='.$id.'&key=AIzaSyBtjyvczt-3PC9ST3ubWbMTOf5zKddEpuU';
-            $curl_connection = curl_init($url);
-            curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
-            curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
-            $data = json_decode(curl_exec($curl_connection), true);
-            curl_close($curl_connection);
-
-            if (array_key_exists('tags', $data['items'][0]['snippet'])) {
-                $video->tags = implode(' ', $data['items'][0]['snippet']['tags']);
-                $video->save();
-            }
-        }
-        return redirect()->action('HomeController@index');
     }
 
-    public function youtubeBot()
+    public function youtubePre(Request $request)
     {
-        $videos = PendingVideo::all();
-        $video_id = 6890;
-        foreach ($videos as $video) {
-            $queries = [];
-            parse_str(parse_url($video->sd, PHP_URL_QUERY), $queries);
-            $url = 'https://www.googleapis.com/youtube/v3/videos?part=snippet&hl=zh-TW&id='.$queries['v'].'&key=AIzaSyBtjyvczt-3PC9ST3ubWbMTOf5zKddEpuU';
-            $curl_connection = curl_init($url);
-            curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
-            curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
-            $data = json_decode(curl_exec($curl_connection), true);
-            curl_close($curl_connection);
-
-            $resolution = 'default';
-            if (array_key_exists('maxres', $data['items'][0]['snippet']['thumbnails'])) {
-                $resolution = 'maxres';
-            } elseif (array_key_exists('standard', $data['items'][0]['snippet']['thumbnails'])) {
-                $resolution = 'standard';
-            } elseif (array_key_exists('high', $data['items'][0]['snippet']['thumbnails'])) {
-                $resolution = 'high';
-            } elseif (array_key_exists('medium', $data['items'][0]['snippet']['thumbnails'])) {
-                $resolution = 'medium';
-            }
-
-            $image = Image::make($data['items'][0]['snippet']['thumbnails'][$resolution]['url']);
-            $image = $image->fit(2880, 1620);
-            $image = $image->stream();
-            $pvars = array('image' => base64_encode($image));
-            $curl = curl_init();
-            curl_setopt($curl, CURLOPT_URL, 'https://api.imgur.com/3/image.json');
-            curl_setopt($curl, CURLOPT_TIMEOUT, 30);
-            curl_setopt($curl, CURLOPT_HTTPHEADER, array('Authorization: Client-ID ' . '932b67e13e4f069'));
-            curl_setopt($curl, CURLOPT_POST, 1);
-            curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-            curl_setopt($curl, CURLOPT_POSTFIELDS, $pvars);
-            $out = curl_exec($curl);
-            curl_close ($curl);
-            $pms = json_decode($out, true);
-            $imgur = $pms['data']['link'];
-
-            if ($imgur != "") {
-                Video::create([
-                    'id' => $video_id,
-                    'user_id' => 8982,
-                    'playlist_id' => null,
-                    'title' => $data['items'][0]['snippet']['localized']['title'],
-                    'caption' => $data['items'][0]['snippet']['localized']['description'],
-                    'sd' => 'https://www.youtube.com/embed/'.$data['items'][0]['id'].'?cc_load_policy=1&cc_lang_pref=zh-Hant&hl=zh_TW&vq=hd1080',
-                    'imgur' => $this->get_string_between($imgur, 'https://i.imgur.com/', '.'),
-                    'tags' => 'demo',
-                    'views' => 0,
-                    'outsource' => true,
-                    'created_at' => Carbon::createFromFormat('Y-m-d\TH:i:s\Z', $data['items'][0]['snippet']['publishedAt'])->format('Y-m-d H:i:s'),
-                    'uploaded_at' => Carbon::createFromFormat('Y-m-d\TH:i:s\Z', $data['items'][0]['snippet']['publishedAt'])->format('Y-m-d H:i:s'),
-                ]);
-                $video->delete();
-            }
-
-            $video_id++;
-        }
-    }
-
-    public function uploadPendingVideos()
-    {
-        $pendings = PendingVideo::all();
-        foreach ($pendings as $pending) {
-            $video = Video::create([
-                'user_id' => $pending->user_id,
-                'playlist_id' => $pending->playlist_id,
-                'title' => $pending->title,
-                'caption' => $pending->caption,
-                'sd' => $pending->sd,
-                'imgur' => $pending->imgur,
-                'tags' => $pending->tags,
-                'views' => $pending->views,
-                'outsource' => $pending->outsource,
-                'created_at' => $pending->created_at,
-                'uploaded_at' => $pending->uploaded_at,
-            ]);
-
-            $userArray = [];
-            if ($video->playlist_id != '') {
-                $watch = $video->watch;
-                $watch->updated_at = $video->uploaded_at;
-                $watch->save();
-
-                $subscribes = $watch->subscribes();
-                foreach ($subscribes as $subscribe) {
-                    $user = $subscribe->user();
-                    if (strpos($user->alert, 'subscribe') === false) {
-                        $user->alert = $user->alert."subscribe";
-                        $user->save();
-                    }
-                    array_push($userArray, $user->id);
-                }
-            }
-
-            foreach ($video->tags() as $tag) {
-                $subscribes = Subscribe::where('tag', $tag)->get();
-                foreach ($subscribes as $subscribe) {
-                    if (!in_array($subscribe->user()->id, $userArray)) {
-                        $user = $subscribe->user();
-                        if (strpos($user->alert, 'subscribe') === false) {
-                            $user->alert = $user->alert."subscribe";
-                            $user->save();
-                        }
-                    }
-                }
-            }
-
-            $pending->delete();
-        }
-
-        return redirect()->action('HomeController@index');
+        $video_id = 8355;
+        $user_id = 9318;
+        $playlist_id = 749;
+        Bot::youtubePre($video_id, $user_id, $playlist_id);
     }
 
     public function createDummyVideos(Request $request)
