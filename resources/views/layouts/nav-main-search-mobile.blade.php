@@ -7,7 +7,7 @@
       </a>
 
       <form id="search-form" style="margin-top: 3px; margin-left: -5px; width: 100%;" class="pull-left nav-search-input" action="{{ route('video.search') }}" method="GET">
-          <input name="query" style="box-shadow: none; border: 1px solid #e8eaed; background-color: white; font-size: 1.15em;border-radius: 7px; height: 40px; padding-left: 15px; color: #222222; padding-bottom: 2px; font-weight: normal; color: black; -webkit-appearance: none; width: calc(100% + 10px);" type="text" value="{{ request('query') }}" placeholder="搜索">
+          <input name="query" style="box-shadow: none; border: 1px solid #e8eaed; background-color: white; font-size: 1.15em;border-radius: 7px; height: 40px; padding-left: 13px; color: #222222; padding-bottom: 2px; font-weight: normal; color: black; -webkit-appearance: none; width: calc(100% + 10px);" type="text" value="{{ request('query') }}" placeholder="搜索">
           <a class="search-submit-btn" type="submit" style="position: absolute; top: 4px; right: 2px; color: dimgray; cursor: pointer;"><i class="material-icons">search</i></a>
       </form>
 
