@@ -77,7 +77,7 @@
             }
 
             if (is_mobile) {
-                $('nav').addClass('scroll-hide-nav');
+                $('.main').addClass('scroll-hide-nav');
                 $('#shareModal').remove();
             }
           </script>
