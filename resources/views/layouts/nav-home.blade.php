@@ -1,4 +1,4 @@
-<nav style="background-color: white; z-index: 999;" class="nav-main-original white-theme-nav-main">
+<nav style="background-color: white; z-index: 999;" class="nav-main-original white-theme-nav-main main">
   <div class="container-fluid">
     <div style="height: 50px;">
 
