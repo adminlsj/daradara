@@ -18,7 +18,7 @@
 @endsection
 
 @section('content')
-<div class="new-main-content" style="margin-bottom: -50px">
+<div class="new-main-content">
 	<div class="search-padding-setup">
 		<div class="row" style="padding-top: 15px; padding-bottom: 8px">
 			<div class="col-md-12">

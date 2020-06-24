@@ -31,7 +31,7 @@
     <div>
         @yield('nav')
 
-        <div id="content-div" style="margin-top: 50px; overflow-x: hidden;">
+        <div id="{{ Request::is('*search*') ? '' : 'content-div'}}" style="margin-top: 50px; overflow-x: hidden;">
             @if ($errors->any())
                 @foreach ($errors->all() as $error)
                     <div id="error" style="color: white; width: 100%; background-color: #d84b6b; text-align: center; padding: 10px;">{{ $error }}</div>
