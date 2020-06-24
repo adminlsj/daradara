@@ -45,10 +45,6 @@ class UploadVideos extends Command
                 case 'youtube.com':
                     Bot::youtube($bot);
                     break;
-                
-                default:
-                    # code...
-                    break;
             }
         }
     }

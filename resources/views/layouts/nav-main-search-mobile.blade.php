@@ -13,10 +13,10 @@
 
       <a class="hidden-md hidden-lg nav-item-icon" style="right: 16px;" href="{{ Auth::check() ? route('user.show', Auth::user()) : route('login')}}"><i class="material-icons">account_circle</i></a>
       <a href="{{ route('video.subscribes') }}" class="hidden-md hidden-lg nav-item-icon" style="top: 10px; right: 62px; cursor: pointer;"><i style="font-size: 1.65em" class="material-icons">subscriptions</i></a>
-      <a id="nav-account-icon" class="pull-right hidden-md hidden-lg nav-item-icon" style="right: 106px;" href="{{ Auth::check() ? route('user.userEditUpload', Auth::user()) : route('login')}}"><i class="material-icons">video_call</i></a>
+      <a id="nav-account-icon" class="pull-right hidden-md hidden-lg nav-item-icon" style="right: 105px;" href="{{ Auth::check() ? route('user.userEditUpload', Auth::user()) : route('login')}}"><i class="material-icons">video_call</i></a>
 
       <div class="row search-sub-nav" style="position: absolute; left: 30px; bottom: 0px; font-size: 0.94em;">
-        <span style="display:inline-block; border-bottom:3px solid #333333; padding-bottom:10px; ">
+        <span style="display:inline-block; border-bottom:3px solid #333333; padding-bottom:8px; ">
           <a style="font-weight: bold;">全部</a>
         </span>
         <a>影片</a>

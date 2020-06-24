@@ -50,7 +50,7 @@ class HomeController extends Controller
 
     public function about(Request $request)
     {
-        $bots = Bot::all();
+        /* $bots = Bot::all();
         foreach ($bots as $bot) {
             switch (str_ireplace('www.', '', parse_url($bot->data['source'], PHP_URL_HOST))) {
                 case 'youtube.com':
@@ -61,7 +61,7 @@ class HomeController extends Controller
                     # code...
                     break;
             }
-        }
+        } */
 
         /* Bot::create([
             'data' => ['user_id' => 7266, 'playlist_id' => 608, 'tags' => '動漫', 'source' => 'https://www.youtube.com/channel/UCgVmx-hK3HE6Yfu85Shifuw']
@@ -90,7 +90,7 @@ class HomeController extends Controller
             echo $episode.'&nbsp;'.$link.'<br>';
         } */
 
-        // return view('layouts.about-us');
+        return view('layouts.about-us');
     }
 
     public function contact()
