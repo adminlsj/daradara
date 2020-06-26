@@ -33,16 +33,16 @@ class BotController extends Controller
 
     public function bilibiliPrePre(Request $request)
     {
-        $mid = 5382023;
+        $mid = 272328566;
         Bot::bilibiliPrePre($mid);
     }
 
     public function bilibiliPre(Request $request)
     {
-        $video_id = 8755;
-        $user_id = 9379;
-        $playlist_id = 169;
-        Bot::bilibiliPre($video_id, $user_id, $playlist_id);
+        $video_id = 11139;
+        $user_id = 9489;
+        $playlist_id = null;
+        Bot::bilibiliPre('blueinta', $video_id, $user_id, $playlist_id);
     }
 
     public function uploadVideos(Request $request)
@@ -56,6 +56,10 @@ class BotController extends Controller
 
                 case 'space.bilibili.com':
                     Bot::bilibili($bot);
+                    break;
+
+                case 'yongjiuzy.vip':
+                    Bot::yongjiu($bot);
                     break;
             }
         }

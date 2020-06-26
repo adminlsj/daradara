@@ -180,7 +180,7 @@ class Bot extends Model
         }
     }
 
-    public static function bilibiliPre($video_id, $user_id, $playlist_id)
+    public static function bilibiliPre($name, $video_id, $user_id, $playlist_id)
     {
         $bots = Bot::all();
         foreach ($bots as $bot) {
@@ -210,17 +210,19 @@ class Bot extends Model
                 $imgur = $pms['data']['link'];
 
                 if ($imgur != "") {
-                    $name = '倫敦之心字幕組';
+                    $title = $data['data']['title'];
+                    $tags = '綜藝';
+                    Bot::setBilibiliConfigs($name, $playlist_id, $title, $tags);
                     $chinese = new Chinese();
                     $video = Video::create([
                         'id' => $video_id,
                         'user_id' => $user_id,
-                        'playlist_id' => Bot::getPlaylistId($name, $data['data']['title'], $playlist_id),
-                        'title' => $chinese->to(Chinese::ZH_HANT, Bot::getTitle($name, $data['data']['title'])),
+                        'playlist_id' => $playlist_id,
+                        'title' => $chinese->to(Chinese::ZH_HANT, $title),
                         'caption' => $chinese->to(Chinese::ZH_HANT, $data['data']['desc']),
                         'sd' => '//player.bilibili.com/player.html?aid='.$data['data']['aid'].'&bvid='.$data['data']['bvid'].'&cid='.$data['data']['pages'][0]['cid'].'&page=1',
                         'imgur' => Bot::get_string_between($imgur, 'https://i.imgur.com/', '.'),
-                        'tags' => $chinese->to(Chinese::ZH_HANT, Bot::getTags($name, $data['data']['title'])),
+                        'tags' => $chinese->to(Chinese::ZH_HANT, $tags),
                         'views' => 0,
                         'outsource' => true,
                         'created_at' => date('Y-m-d H:i:s', $data['data']['pubdate']),
@@ -308,6 +310,85 @@ class Bot extends Model
                     $tags = '綜藝';
                 }
                 break;
+
+            case 'blueinta':
+                if (strpos($title, '有吉君的正直散步') !== false) {
+                    $playlist_id = 204;
+                    $tags = '有吉弘行 生野陽子 有吉君的正直散步 有吉くんの正直さんぽ 搞笑 旅行 美食 綜藝';
+                } elseif (strpos($title, '幸福窮女孩') !== false) {
+                    $playlist_id = 215;
+                    $tags = '水卜麻美 植松晃士 劇團一人 杉村太蔵 DAIGO 針千本 近藤春菜 箕輪遙 森泉 幸福窮女孩 幸せ!ボンビーガール 窮人 有錢人 真人秀 跟拍 街訪 路人 紀錄片 成長 奮鬥 感動 綜藝';
+                } elseif (strpos($title, '日本我來了') !== false) {
+                    $playlist_id = 185;
+                    $tags = '香蕉人 設樂統 日村勇紀 外國人 老外 跟拍 路人 街訪 日本我來了 YOUは何しに日本へ? 綜藝';
+                } elseif (strpos($title, '跟拍到你家') !== false) {
+                    $playlist_id = 4;
+                    $tags = '驚嚇大木 矢作兼 鷲見玲奈 路人 街訪 感動 跟拍到你家 家、ついて行ってイイですか？ 中文字幕 明星 綜藝';
+                } elseif (strpos($title, '新鮮事調查局') !== false) {
+                    $playlist_id = 198;
+                    $tags = '香蕉人 設樂統 日村勇紀 新鮮事調查局 ソノサキ～知りたい見たいを大追跡!～ 小知識 潮流 調查 明星 綜藝';
+                } elseif (strpos($title, '日本太太好吃驚') !== false) {
+                    $playlist_id = 250;
+                    $tags = '爆笑問題 太田光 田中裕二 大吉洋平 加藤夏希 渡邊滿裡奈 MEGUMI YOU 松嶋尚美 出川哲朗 黛薇夫人 日本太太好吃驚 世界の日本人妻は見た! 旅遊 真人秀 小知識 綜藝';
+                } elseif (strpos($title, '移居世界秘境日本人好吃驚') !== false) {
+                    $playlist_id = 233;
+                    $tags = '千原兄弟 千原Junior 千原靖史 森山良子 高橋南 須賀健太 移居世界秘境日本人好吃驚 世界の村で発見!こんなところに日本人 旅行 真人秀 綜藝';
+                } else {
+                    $playlist_id = null;
+                    $tags = '綜藝';
+                }
+                break;
+        }
+    }
+
+    public static function yongjiu(Bot $bot)
+    {
+        $chinese = new Chinese();
+        $url = $bot->data['source'];
+        $content = file_get_contents($url);
+        $start = explode('<!--火车头地址开始<li>', $content);
+        $end = explode('</li>火车头地址结束-->' , $start[1]);
+        $snippet = explode('</li><li>', $end[0]);
+        for ($i = 0; $i < count($snippet); $i++) { 
+            if (strpos($snippet[$i], '.m3u8') !== false) {
+               array_splice($snippet, $i, 1);
+               $i--;
+            }
+        }
+
+        $start = explode('<!--片名开始-->', $content);
+        $end = explode('<!--片名结束-->' , $start[1]);
+        $title_short = $title_long = $chinese->to(Chinese::ZH_HANT, explode('</li><li>', $end[0])[0]);
+        $start = explode('<!--别名开始-->', $content);
+        $end = explode('<!--别名结束-->' , $start[1]);
+        $title_nickname = $chinese->to(Chinese::ZH_HANT, explode('</li><li>', $end[0])[0]);
+        if ($title_nickname != '') {
+            $title_long = $title_short.'/'.$title_nickname;
+        }
+
+        $start = explode('<!--年代开始-->', $content);
+        $end = explode('<!--年代结束-->' , $start[1]);
+        $date = Carbon::createFromDate(explode('</li><li>', $end[0])[0]);
+
+        foreach ($snippet as $line) {
+            $data = explode('$', $line);
+            $episode = $chinese->to(Chinese::ZH_HANT, $data[0]);
+            $link = $data[1];
+            if (!Video::where('title', 'ilike', '%'.$title_short.'%'.$episode.'%')->exists()) {
+                Video::create([
+                    'user_id' => $bot->data['user_id'],
+                    'playlist_id' => $bot->data['playlist_id'],
+                    'title' => $title_long.'【'.$episode.'】',
+                    'caption' => $title_long.'【'.$episode.'】',
+                    'sd' => $link,
+                    'imgur' => 'JMcgEkP',
+                    'tags' => str_replace('/', ' ', $title_long).' '.$bot->data['tags'],
+                    'views' => 0,
+                    'outsource' => true,
+                    'created_at' => $date,
+                    'uploaded_at' => $date,
+                ]);
+            }
         }
     }
 

@@ -347,7 +347,7 @@ label.upload-image-btn input[type="file"] {
 }
 
 .video-card {
-  width: 20%;
+  width: calc(100% / 6);
 }
 
 .nav-search-input {
@@ -2578,6 +2578,12 @@ a > i {
   height: calc(100vh - 50px); 
   overflow-y: scroll; 
   font-weight:bold;
+}
+
+@media (max-width: 1599px) {
+  .video-card {
+    width: 20%;
+  }
 }
 
 @media (max-width: 991px) {

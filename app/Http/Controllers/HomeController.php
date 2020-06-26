@@ -50,32 +50,12 @@ class HomeController extends Controller
 
     public function about(Request $request)
     {
-        /* Bot::create([
-            'data' => ['user_id' => 7266, 'playlist_id' => 608, 'tags' => '動漫', 'source' => 'https://www.youtube.com/channel/UCgVmx-hK3HE6Yfu85Shifuw']
-        ]);
-
-        return view('layouts.about-us'); 
-
-        $url = 'http://www.yongjiuzy1.com/?m=vod-detail-id-35262.html';
+        $url = 'http://www.yongjiuzy.vip/?m=vod-detail-id-35626.html';
         $content = file_get_contents($url);
-
-        $start = explode('<!--火车头地址开始<li>', $content);
-        $end = explode('</li>火车头地址结束-->' , $start[1]);
-        $snippet = explode('</li><li>', $end[0]);
-
-        for ($i = 0; $i < count($snippet); $i++) { 
-            if (strpos($snippet[$i], '.m3u8') !== false) {
-               array_splice($snippet, $i, 1);
-               $i--;
-            }
-        }
-
-        foreach ($snippet as $line) {
-            $data = explode('$', $line);
-            $episode = $data[0];
-            $link = $data[1];
-            echo $episode.'&nbsp;'.$link.'<br>';
-        } */
+        $start = explode('<!--年代开始-->', $content);
+        $end = explode('<!--年代结束-->' , $start[1]);
+        $date = Carbon::createFromDate(explode('</li><li>', $end[0])[0]);
+        return $date;
 
         return view('layouts.about-us');
     }
