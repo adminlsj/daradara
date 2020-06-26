@@ -45,6 +45,10 @@ class UploadVideos extends Command
                 case 'youtube.com':
                     Bot::youtube($bot);
                     break;
+
+                case 'space.bilibili.com':
+                    Bot::bilibili($bot);
+                    break;
             }
         }
     }

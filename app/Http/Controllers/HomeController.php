@@ -50,19 +50,6 @@ class HomeController extends Controller
 
     public function about(Request $request)
     {
-        /* $bots = Bot::all();
-        foreach ($bots as $bot) {
-            switch (str_ireplace('www.', '', parse_url($bot->data['source'], PHP_URL_HOST))) {
-                case 'youtube.com':
-                    Bot::youtube($bot);
-                    break;
-                
-                default:
-                    # code...
-                    break;
-            }
-        } */
-
         /* Bot::create([
             'data' => ['user_id' => 7266, 'playlist_id' => 608, 'tags' => '動漫', 'source' => 'https://www.youtube.com/channel/UCgVmx-hK3HE6Yfu85Shifuw']
         ]);
@@ -321,6 +308,18 @@ class HomeController extends Controller
         $user_id = 9318;
         $playlist_id = 749;
         Bot::youtubePre($video_id, $user_id, $playlist_id);
+    }
+
+    public function bilibiliPrePre(Request $request)
+    {
+        $mid = 5382023;
+        Bot::bilibiliPre($mid);
+    }
+
+    public function bilibiliPre(Request $request)
+    {
+        $mid = 5382023;
+        Bot::bilibiliPre($mid);
     }
 
     public function createDummyVideos(Request $request)

@@ -72,7 +72,7 @@ class VideoController extends Controller
 
         if (is_numeric($vid) && $video = Video::find($request->v)) {
 
-            // Video::updateQQRawLink($video);
+            Video::updateQQRawLink($video);
 
             $outsource = $video->outsource;
             $sd = $video->sd()[0];
