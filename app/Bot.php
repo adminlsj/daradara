@@ -235,6 +235,41 @@ class Bot extends Model
         }
     }
 
+    public static function bilibiliPrePlaylist($aid, $video_id, $user_id, $playlist_id, $tags)
+    {
+        $url = 'https://api.bilibili.com/x/web-interface/view?aid='.$aid;
+        $curl_connection = curl_init($url);
+        curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+        curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+        $data = json_decode(curl_exec($curl_connection), true);
+        curl_close($curl_connection);
+
+        $aid = $data['data']['aid'];
+        $bvid = $data['data']['bvid'];
+        $date = new Carbon(Carbon::createFromFormat('Y-m-d H:i:s', date('Y-m-d H:i:s', $data['data']['pubdate']))->format('Y-m-d H:i:s'));
+        $chinese = new Chinese();
+        foreach ($data['data']['pages'] as $video) {
+            $title = str_replace('ほこ×たて', '矛盾大對決', str_replace('矛x盾', '矛盾大對決', $video['part']));
+            $video = Video::create([
+                'id' => $video_id,
+                'user_id' => $user_id,
+                'playlist_id' => $playlist_id,
+                'title' => $chinese->to(Chinese::ZH_HANT, $title),
+                'caption' => '',
+                'sd' => '//player.bilibili.com/player.html?aid='.$aid.'&bvid='.$bvid.'&cid='.$video['cid'].'&page='.$video['page'],
+                'imgur' => 'JMcgEkP',
+                'tags' => $chinese->to(Chinese::ZH_HANT, $tags),
+                'views' => 0,
+                'outsource' => true,
+                'created_at' => $date,
+                'uploaded_at' => $date,
+            ]);
+            $date = $date->addDays(7);
+            $video_id++;
+        }
+    }
+
     public static function bilibili(Bot $bot)
     {
         $mid = str_ireplace('https://space.bilibili.com/', '', $bot->data['source']);
@@ -333,6 +368,9 @@ class Bot extends Model
                 } elseif (strpos($title, '移居世界秘境日本人好吃驚') !== false) {
                     $playlist_id = 233;
                     $tags = '千原兄弟 千原Junior 千原靖史 森山良子 高橋南 須賀健太 移居世界秘境日本人好吃驚 世界の村で発見!こんなところに日本人 旅行 真人秀 綜藝';
+                } elseif (strpos($title, '全能住宅改造王') !== false) {
+                    $playlist_id = 259;
+                    $tags = '所喬治 江口朋美 加藤綠 窮人 有錢人 真人秀 小知識 日本房產 全能住宅改造王 大改造!!劇的ビフォーアフター 綜藝';
                 } else {
                     $playlist_id = null;
                     $tags = '綜藝';
@@ -345,7 +383,12 @@ class Bot extends Model
     {
         $chinese = new Chinese();
         $url = $bot->data['source'];
-        $content = file_get_contents($url);
+        $curl_connection = curl_init($url);
+        curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+        curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+        $content = curl_exec($curl_connection);
+        curl_close($curl_connection);
         $start = explode('<!--火车头地址开始<li>', $content);
         $end = explode('</li>火车头地址结束-->' , $start[1]);
         $snippet = explode('</li><li>', $end[0]);

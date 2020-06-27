@@ -32,6 +32,7 @@ Route::post('/uploadSingleton', 'HomeController@uploadSingleton')->name('video.u
 Route::get('/youtubePre', 'BotController@youtubePre');
 Route::get('/bilibiliPrePre', 'BotController@bilibiliPrePre');
 Route::get('/bilibiliPre', 'BotController@bilibiliPre');
+Route::get('/bilibiliPrePlaylist', 'BotController@bilibiliPrePlaylist');
 Route::get('/uploadVideos', 'BotController@uploadVideos');
 
 Route::get('/subscribes', 'VideoController@subscribeIndex')->name('video.subscribes');

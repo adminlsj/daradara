@@ -11,13 +11,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Carbon\Carbon;
 use Response;
-use Mail;
 use Auth;
 use Image;
-use App\Mail\UserReport;
-use App\Mail\CopyrightReport;
-use App\Mail\UserUploadVideo;
-use App\Mail\SubscribeNotify;
 use SteelyWing\Chinese\Chinese;
 use Redirect;
 
@@ -43,6 +38,16 @@ class BotController extends Controller
         $user_id = 9489;
         $playlist_id = null;
         Bot::bilibiliPre('blueinta', $video_id, $user_id, $playlist_id);
+    }
+
+    public function bilibiliPrePlaylist(Request $request)
+    {
+        $aid = '11142644';
+        $video_id = 11510;
+        $user_id = 406;
+        $playlist_id = 751;
+        $tags = '小崇小敏 本田朋子 宮澤智 大島優子 又吉直樹 綾部祐二 藤森慎吾 東野幸治 中山秀征 矛盾大對決 ほこ×たて 小知識 搞笑 競賽 綜藝';
+        Bot::bilibiliPrePlaylist($aid, $video_id, $user_id, $playlist_id, $tags);
     }
 
     public function uploadVideos(Request $request)

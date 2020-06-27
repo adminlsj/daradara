@@ -50,13 +50,6 @@ class HomeController extends Controller
 
     public function about(Request $request)
     {
-        $url = 'http://www.yongjiuzy.vip/?m=vod-detail-id-35626.html';
-        $content = file_get_contents($url);
-        $start = explode('<!--年代开始-->', $content);
-        $end = explode('<!--年代结束-->' , $start[1]);
-        $date = Carbon::createFromDate(explode('</li><li>', $end[0])[0]);
-        return $date;
-
         return view('layouts.about-us');
     }
 
