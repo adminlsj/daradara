@@ -2559,10 +2559,16 @@ a > i {
 }
 
 .intro-left {
-  padding: 21px 30px 8px 30px !important; 
-  background-color: #F9F9F9; 
-  height: calc(100vh - 50px); 
-  overflow-y: scroll;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1); 
+  background-color: #f9f9f9; 
+  margin: 15px 0px 0px 14px; 
+  position: fixed; 
+  top: 50px; 
+  left: 240px; 
+  width: 540px; 
+  height: calc(100vh - 81px); 
+  overflow-y: scroll; 
+  border-radius: 3px;
 }
 
 .intro-left-subtitle {
@@ -2574,10 +2580,10 @@ a > i {
 }
 
 .intro-right {
-  padding: 12px 30px 12px 30px !important;
-  height: calc(100vh - 50px); 
-  overflow-y: scroll; 
-  font-weight:bold;
+  margin-top: 15px; 
+  margin-left: 568px; 
+  margin-right: 15px; 
+  margin-bottom: 16px;
 }
 
 @media (max-width: 1599px) {
@@ -2586,26 +2592,47 @@ a > i {
   }
 }
 
-@media (max-width: 991px) {
-  #content-div {
-    padding-bottom: 50px
+@media (max-width: 1199px) {
+  .main-content, .new-main-content {
+    width: 100%;
+    padding: 0px;
   }
 
   .intro-left {
-    padding-top: 15px !important;
-    padding-left: 15px !important; 
-    padding-right: 15px !important;
-    height: auto; 
+    left: 0px; 
+  }
+
+  #nav-image {
+    margin-top: 0px;
+    margin-left: -5px;
+  }
+}
+
+@media (max-width: 991px) {
+  #content-div {
+    padding-bottom: 50px
   }
 
   .intro-left-subtitle {
     margin-top: 15px; 
   }
 
+  .intro-left {
+    margin: 0px; 
+    position: relative; 
+    top: 0px; 
+    left: 0px; 
+    width: 100%; 
+    height: 100%; 
+    overflow-y: auto; 
+    border-radius: 0px;
+  }
+
   .intro-right {
-    padding-left: 15px !important; 
-    padding-right: 15px !important;
-    height: auto; 
+    margin-top: 15px; 
+    margin-left: 15px; 
+    margin-right: 15px; 
+    margin-bottom: 15px;
   }
 
   .video-card {
@@ -2688,11 +2715,6 @@ a > i {
   .single-load-more-video-wrapper {
     padding: 5px 7px; 
     font-size: 0.9em; 
-  }
-
-  #nav-image {
-    margin-top: 0px;
-    margin-left: -5px;
   }
 
   #nav-logo-image {
@@ -2856,11 +2878,6 @@ a > i {
 
   .mobile-text-center {
     text-align: center;
-  }
-
-  .main-content, .new-main-content {
-    width: 100%;
-    padding: 0px;
   }
 
   .carousel-indicators {

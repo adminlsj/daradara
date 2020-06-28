@@ -30,9 +30,10 @@ Route::get('/editSingleton', 'HomeController@editSingleton');
 Route::post('/uploadSingleton', 'HomeController@uploadSingleton')->name('video.uploadSingleton');
 
 Route::get('/youtubePre', 'BotController@youtubePre');
+Route::get('/youtubePlaylist', 'BotController@youtubePlaylist');
 Route::get('/bilibiliPrePre', 'BotController@bilibiliPrePre');
 Route::get('/bilibiliPre', 'BotController@bilibiliPre');
-Route::get('/bilibiliPrePlaylist', 'BotController@bilibiliPrePlaylist');
+Route::get('/bilibiliPlaylist', 'BotController@bilibiliPlaylist');
 Route::get('/uploadVideos', 'BotController@uploadVideos');
 
 Route::get('/subscribes', 'VideoController@subscribeIndex')->name('video.subscribes');

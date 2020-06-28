@@ -26,28 +26,39 @@ class BotController extends Controller
         Bot::youtubePre($video_id, $user_id, $playlist_id);
     }
 
+    public function youtubePlaylist(Request $request)
+    {
+        $channel_id = 'PL12UaAf_xzfpKB3uUvYYbxg3UBOxBZfDl';
+        $video_id = 8778;
+        $user_id = 5190;
+        $playlist_id = 752;
+        $tags = '冰菓 冰果 氷菓 古籍研究社系列 正版動漫 動漫 線上看 中文字幕';
+        Bot::youtubePlaylist($channel_id, $video_id, $user_id, $playlist_id, $tags);
+    }
+
     public function bilibiliPrePre(Request $request)
     {
-        $mid = 272328566;
+        $mid = 28447;
         Bot::bilibiliPrePre($mid);
     }
 
     public function bilibiliPre(Request $request)
     {
-        $video_id = 11139;
-        $user_id = 9489;
-        $playlist_id = null;
-        Bot::bilibiliPre('blueinta', $video_id, $user_id, $playlist_id);
+        $video_id = 9064;
+        $user_id = 363;
+        $playlist_id = 252;
+        $tags = '鐵公雞二人組 遠藤章造 田中直樹 榊原郁惠 松居直美 SHELLY 濱口優 山崎弘也 小崇小敏 奧黛麗 若林正恭 春日俊彰 挑戰 競賽 明星 搞笑 黃金傳說 いきなり!黄金伝説。 綜藝';
+        Bot::bilibiliPre('黃金傳說', $video_id, $user_id, $playlist_id, $tags);
     }
 
-    public function bilibiliPrePlaylist(Request $request)
+    public function bilibiliPlaylist(Request $request)
     {
-        $aid = '11142644';
-        $video_id = 11510;
+        $aid = '10990791';
+        $video_id = 8801;
         $user_id = 406;
-        $playlist_id = 751;
-        $tags = '小崇小敏 本田朋子 宮澤智 大島優子 又吉直樹 綾部祐二 藤森慎吾 東野幸治 中山秀征 矛盾大對決 ほこ×たて 小知識 搞笑 競賽 綜藝';
-        Bot::bilibiliPrePlaylist($aid, $video_id, $user_id, $playlist_id, $tags);
+        $playlist_id = 217;
+        $tags = '三野文泰 久本雅美 妙國民糾察隊 日本大國民 日本妙國民 秘密のケンミンSHOW 縣民 地域戰 小知識 美食 料理 學習 教育 旅行 文化 搞笑 綜藝';
+        Bot::bilibiliPlaylist($aid, $video_id, $user_id, $playlist_id, $tags);
     }
 
     public function uploadVideos(Request $request)

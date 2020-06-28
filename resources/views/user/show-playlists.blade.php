@@ -13,7 +13,7 @@
 
 @section('content')
 
-<div class="hidden-sm hidden-xs sidebar-menu">
+<div class="hidden-xs hidden-sm hidden-md sidebar-menu">
 	@include('video.sidebarMenu', ['theme' => 'white'])
 </div>
 <div class="main-content">
