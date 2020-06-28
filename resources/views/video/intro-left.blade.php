@@ -6,7 +6,7 @@
 		</a>
 	</div>
 
-	<div style="padding: 0px 25px">
+	<div style="padding: 0px 20px">
 		<div class="intro-left-subtitle">創建者：<a style="color: inherit;" href="{{ route('user.show', [$watch->user()]) }}">{{ $watch->user()->name }}</a></div>
 		<h3 style="margin-top: 4px; margin-bottom: 13px; line-height: 31px; font-weight: bold;">{{ $watch->title }}</h3>
 
