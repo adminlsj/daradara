@@ -43,6 +43,7 @@
                             <a href="{{ route('video.watch') }}?v={{ $video->id }}" class="row no-gutter">
                               <div style="padding-right: 4px; width: 175px;" class="col-xs-6 col-sm-6 col-md-6">
                                 <img class="lazy" style="width: 100%; height: 100%; border-top-left-radius: 3px; border-bottom-left-radius: 3px;" src="{{ $video->imgur16by9() }}" data-src="{{ $video->imgurL() }}" data-srcset="{{ $video->imgurL() }}" alt="{{ $video->title }}">
+                                <span style="position: absolute; bottom: 0px; left: 5px; color: white; font-weight: bold; font-size: 1.1em;">{{ $videos->count() - $loop->index }}</span>
                               </div>
                               <div style="padding-left: 4px; width: calc(100% - 175px)" class="col-xs-6 col-sm-6 col-md-6 related-watch-title">
                                 <h4>{{ $video->title }}</h4>
