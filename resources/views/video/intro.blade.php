@@ -40,7 +40,7 @@
                 <div class="intro-right">
                     @foreach ($videos as $video)
                         <div class="related-watch-wrap hover-opacity-all" style="background-color: #F9F9F9; margin-top: 0px; margin-left: 0px; margin-right: 0px;">
-                            <a href="{{ route('video.watch') }}?v={{ $video->id }}" class="row no-gutter">
+                            <a href="{{ route('video.watch') }}?v={{ $video->id }}&list={{ $watch->id }}" class="row no-gutter">
                               <div style="padding-right: 4px; width: 175px;" class="col-xs-6 col-sm-6 col-md-6">
                                 <img class="lazy" style="width: 100%; height: 100%; border-top-left-radius: 3px; border-bottom-left-radius: 3px;" src="{{ $video->imgur16by9() }}" data-src="{{ $video->imgurL() }}" data-srcset="{{ $video->imgurL() }}" alt="{{ $video->title }}">
                                 <span style="position: absolute; bottom: 0px; left: 5px; color: white; font-weight: bold; font-size: 1.1em;">{{ $videos->count() - $loop->index }}</span>
