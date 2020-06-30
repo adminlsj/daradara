@@ -38,17 +38,17 @@ class BotController extends Controller
 
     public function bilibiliPrePre(Request $request)
     {
-        $mid = 28447;
+        $mid = 5988114;
         Bot::bilibiliPrePre($mid);
     }
 
     public function bilibiliPre(Request $request)
     {
-        $video_id = 9064;
-        $user_id = 363;
-        $playlist_id = 252;
-        $tags = '鐵公雞二人組 遠藤章造 田中直樹 榊原郁惠 松居直美 SHELLY 濱口優 山崎弘也 小崇小敏 奧黛麗 若林正恭 春日俊彰 挑戰 競賽 明星 搞笑 黃金傳說 いきなり!黄金伝説。 綜藝';
-        Bot::bilibiliPre('黃金傳說', $video_id, $user_id, $playlist_id, $tags);
+        $video_id = 9193;
+        $user_id = 423;
+        $playlist_id = 240;
+        $tags = '千鳥 大悟 阿信 NOBU 高橋茂雄 田中卓志 狩野英孝 小島瑠璃子 中岡創一 千鳥電視台 テレビ千鳥 搞笑 綜藝';
+        Bot::bilibiliPre('千鳥電視台', $video_id, $user_id, $playlist_id, $tags);
     }
 
     public function bilibiliPlaylist(Request $request)

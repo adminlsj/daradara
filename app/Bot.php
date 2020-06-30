@@ -195,7 +195,7 @@ class Bot extends Model
 
                 if ($imgur != "") {
                     $chinese = new Chinese();
-                    Video::create([
+                    $video = Video::create([
                         'user_id' => $bot->data['user_id'],
                         'playlist_id' => $bot->data['playlist_id'],
                         'title' => $chinese->to(Chinese::ZH_HANT, $data['items'][0]['snippet']['localized']['title']),
@@ -208,6 +208,7 @@ class Bot extends Model
                         'created_at' => Carbon::createFromFormat('Y-m-d\TH:i:s\Z', $data['items'][0]['snippet']['publishedAt'])->format('Y-m-d H:i:s'),
                         'uploaded_at' => Carbon::createFromFormat('Y-m-d\TH:i:s\Z', $data['items'][0]['snippet']['publishedAt'])->format('Y-m-d H:i:s'),
                     ]);
+                    Video::notifySubscribers($video);
                 }
             }
         }
@@ -269,14 +270,15 @@ class Bot extends Model
                 $imgur = $pms['data']['link'];
 
                 if ($imgur != "") {
-                    $title = $data['data']['title'];
-                    // Bot::setBilibiliConfigs($name, $playlist_id, $title, $tags);
                     $chinese = new Chinese();
+                    $title = $chinese->to(Chinese::ZH_HANT, $data['data']['title']);
+                    $pass = true;
+                    Bot::setBilibiliConfigs($name, $playlist_id, $title, $tags, $pass);
                     $video = Video::create([
                         'id' => $video_id,
                         'user_id' => $user_id,
                         'playlist_id' => $playlist_id,
-                        'title' => $chinese->to(Chinese::ZH_HANT, $title),
+                        'title' => $title,
                         'caption' => $chinese->to(Chinese::ZH_HANT, $data['data']['desc']),
                         'sd' => '//player.bilibili.com/player.html?aid='.$data['data']['aid'].'&bvid='.$data['data']['bvid'].'&cid='.$data['data']['pages'][0]['cid'].'&page=1',
                         'imgur' => Bot::get_string_between($imgur, 'https://i.imgur.com/', '.'),
@@ -342,6 +344,7 @@ class Bot extends Model
         $data = json_decode(curl_exec($curl_connection), true);
         curl_close($curl_connection);
 
+        $chinese = new Chinese();
         foreach ($data['data']['vlist'] as $video) {
             $aid = $video['aid'];
             if (!Video::where('sd', 'ilike', '%aid='.$aid.'%')->exists()) {
@@ -353,48 +356,51 @@ class Bot extends Model
                 $data = json_decode(curl_exec($curl_connection), true);
                 curl_close($curl_connection);
 
-                $image = Image::make($data['data']['pic']);
-                $image = $image->fit(2880, 1620);
-                $image = $image->stream();
-                $pvars = array('image' => base64_encode($image));
-                $curl = curl_init();
-                curl_setopt($curl, CURLOPT_URL, 'https://api.imgur.com/3/image.json');
-                curl_setopt($curl, CURLOPT_TIMEOUT, 30);
-                curl_setopt($curl, CURLOPT_HTTPHEADER, array('Authorization: Client-ID ' . '932b67e13e4f069'));
-                curl_setopt($curl, CURLOPT_POST, 1);
-                curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-                curl_setopt($curl, CURLOPT_POSTFIELDS, $pvars);
-                $out = curl_exec($curl);
-                curl_close ($curl);
-                $pms = json_decode($out, true);
-                $imgur = $pms['data']['link'];
+                $playlist_id = $bot->data['playlist_id'];
+                $title = $chinese->to(Chinese::ZH_HANT, $data['data']['title']);
+                $tags = $bot->data['tags'];
+                $pass = true;
+                Bot::setBilibiliConfigs($bot->data['name'], $playlist_id, $title, $tags, $pass);
 
-                if ($imgur != "") {
-                    $playlist_id = $bot->data['playlist_id'];
-                    $title = $data['data']['title'];
-                    $tags = $bot->data['tags'];
-                    Bot::setBilibiliConfigs($bot->data['name'], $playlist_id, $title, $tags);
+                if ($pass) {
+                    $image = Image::make($data['data']['pic']);
+                    $image = $image->fit(2880, 1620);
+                    $image = $image->stream();
+                    $pvars = array('image' => base64_encode($image));
+                    $curl = curl_init();
+                    curl_setopt($curl, CURLOPT_URL, 'https://api.imgur.com/3/image.json');
+                    curl_setopt($curl, CURLOPT_TIMEOUT, 30);
+                    curl_setopt($curl, CURLOPT_HTTPHEADER, array('Authorization: Client-ID ' . '932b67e13e4f069'));
+                    curl_setopt($curl, CURLOPT_POST, 1);
+                    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+                    curl_setopt($curl, CURLOPT_POSTFIELDS, $pvars);
+                    $out = curl_exec($curl);
+                    curl_close ($curl);
+                    $pms = json_decode($out, true);
+                    $imgur = $pms['data']['link'];
 
-                    $chinese = new Chinese();
-                    Video::create([
-                        'user_id' => $bot->data['user_id'],
-                        'playlist_id' => $playlist_id,
-                        'title' => $chinese->to(Chinese::ZH_HANT, $title),
-                        'caption' => $chinese->to(Chinese::ZH_HANT, $data['data']['desc']),
-                        'sd' => '//player.bilibili.com/player.html?aid='.$data['data']['aid'].'&bvid='.$data['data']['bvid'].'&cid='.$data['data']['pages'][0]['cid'].'&page=1',
-                        'imgur' => Bot::get_string_between($imgur, 'https://i.imgur.com/', '.'),
-                        'tags' => $chinese->to(Chinese::ZH_HANT, $tags),
-                        'views' => 0,
-                        'outsource' => true,
-                        'created_at' => date('Y-m-d H:i:s', $data['data']['pubdate']),
-                        'uploaded_at' => date('Y-m-d H:i:s', $data['data']['pubdate']),
-                    ]);
+                    if ($imgur != "") {
+                        $video = Video::create([
+                            'user_id' => $bot->data['user_id'],
+                            'playlist_id' => $playlist_id,
+                            'title' => $title,
+                            'caption' => $chinese->to(Chinese::ZH_HANT, $data['data']['desc']),
+                            'sd' => '//player.bilibili.com/player.html?aid='.$data['data']['aid'].'&bvid='.$data['data']['bvid'].'&cid='.$data['data']['pages'][0]['cid'].'&page=1',
+                            'imgur' => Bot::get_string_between($imgur, 'https://i.imgur.com/', '.'),
+                            'tags' => $chinese->to(Chinese::ZH_HANT, $tags),
+                            'views' => 0,
+                            'outsource' => true,
+                            'created_at' => date('Y-m-d H:i:s', $data['data']['pubdate']),
+                            'uploaded_at' => date('Y-m-d H:i:s', $data['data']['pubdate']),
+                        ]);
+                        Video::notifySubscribers($video);
+                    }
                 }
             }
         }
     }
 
-    public static function setBilibiliConfigs($name, &$playlist_id, &$title, &$tags)
+    public static function setBilibiliConfigs($name, &$playlist_id, &$title, &$tags, &$pass)
     {
         switch ($name) {
             case '倫敦之心字幕組':
@@ -432,6 +438,32 @@ class Bot extends Model
                 } elseif (strpos($title, '全能住宅改造王') !== false) {
                     $playlist_id = 259;
                     $tags = '所喬治 江口朋美 加藤綠 窮人 有錢人 真人秀 小知識 日本房產 全能住宅改造王 大改造!!劇的ビフォーアフター 綜藝';
+                } else {
+                    $playlist_id = null;
+                    $tags = '綜藝';
+                }
+                break;
+
+            case 'NO GOOD TV':
+                if (strpos($title, '【中字】') !== false) {
+                    $title = str_replace('【中字】', '', $title);
+                } else {
+                    $pass = false;
+                }
+                break;
+
+            case '秋爸是奶爸':
+                if (strpos($title, '【Music Station】') !== false) {
+                    $pass = true;
+                } else {
+                    $pass = false;
+                }
+                break;
+
+            case '千鳥電視台':
+                if (strpos($title, '千鳥電視台') !== false) {
+                    $playlist_id = 240;
+                    $tags = '千鳥 大悟 阿信 NOBU 高橋茂雄 田中卓志 狩野英孝 小島瑠璃子 中岡創一 千鳥電視台 テレビ千鳥 搞笑 綜藝';
                 } else {
                     $playlist_id = null;
                     $tags = '綜藝';
@@ -478,20 +510,37 @@ class Bot extends Model
             $data = explode('$', $line);
             $episode = $chinese->to(Chinese::ZH_HANT, $data[0]);
             $link = $data[1];
-            if (!Video::where('title', 'ilike', '%'.$title_short.'%'.$episode.'%')->exists()) {
-                Video::create([
-                    'user_id' => $bot->data['user_id'],
-                    'playlist_id' => $bot->data['playlist_id'],
-                    'title' => $title_long.'【'.$episode.'】',
-                    'caption' => $title_long.'【'.$episode.'】',
-                    'sd' => $link,
-                    'imgur' => 'JMcgEkP',
-                    'tags' => str_replace('/', ' ', $title_long).' '.$bot->data['tags'],
-                    'views' => 0,
-                    'outsource' => true,
-                    'created_at' => $date,
-                    'uploaded_at' => $date,
-                ]);
+            if (!Video::where('playlist_id', $bot->data['playlist_id'])->where('title', 'ilike', '%'.$episode.'%')->exists()) {
+                if ($first = Video::where('playlist_id', $bot->data['playlist_id'])->first()) {
+                    $video = Video::create([
+                        'user_id' => $first->user_id,
+                        'playlist_id' => $first->playlist_id,
+                        'title' => explode('【', $first->title)[0].'【'.$episode.'】',
+                        'caption' => explode('【', $first->title)[0].'【'.$episode.'】',
+                        'sd' => $link,
+                        'imgur' => 'JJPMK1A',
+                        'tags' => $first->tags,
+                        'views' => 0,
+                        'outsource' => true,
+                        'created_at' => $date,
+                        'uploaded_at' => Carbon::now(),
+                    ]);
+                } else {
+                    $video = Video::create([
+                        'user_id' => $bot->data['user_id'],
+                        'playlist_id' => $bot->data['playlist_id'],
+                        'title' => $title_long.'【'.$episode.'】',
+                        'caption' => $title_long.'【'.$episode.'】',
+                        'sd' => $link,
+                        'imgur' => 'JJPMK1A',
+                        'tags' => str_replace('/', ' ', $title_long).' '.$bot->data['tags'],
+                        'views' => 0,
+                        'outsource' => true,
+                        'created_at' => $date,
+                        'uploaded_at' => Carbon::now(),
+                    ]);
+                }
+                Video::notifySubscribers($video);
             }
         }
     }

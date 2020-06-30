@@ -77,6 +77,24 @@ class Video extends Model
         return Video::where('tags', 'LIKE', '%'.$subscribe->tag.'%')->orderBy('uploaded_at', 'desc')->first();
     }
 
+    public static function notifySubscribers(Video $video)
+    {
+        if ($video->playlist_id != '') {
+            $watch = $video->watch;
+            $watch->updated_at = $video->uploaded_at;
+            $watch->save();
+
+            $subscribes = $watch->subscribes();
+            foreach ($subscribes as $subscribe) {
+                $user = $subscribe->user();
+                if (strpos($user->alert, 'subscribe') === false) {
+                    $user->alert = $user->alert."subscribe";
+                    $user->save();
+                }
+            }
+        }
+    }
+
     public function imgur16by9()
     {
         return "https://i.imgur.com/JMcgEkPl.jpg";
