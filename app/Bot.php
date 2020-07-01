@@ -233,9 +233,11 @@ class Bot extends Model
             $data = json_decode(curl_exec($curl_connection), true);
             curl_close($curl_connection);
             foreach ($data['data']['vlist'] as $video) {
-                Bot::create([
-                    'temp' => $video['aid']
-                ]);
+                if (!Video::where('sd', 'ilike', '%aid='.$video['aid'].'%')->exists()) {
+                    Bot::create([
+                        'temp' => $video['aid']
+                    ]);
+                }
             }
         }
     }
@@ -243,6 +245,7 @@ class Bot extends Model
     public static function bilibiliPre($name, $video_id, $user_id, $playlist_id, $tags)
     {
         $bots = Bot::all();
+        $chinese = new Chinese();
         foreach ($bots as $bot) {
             if ($bot->temp != '') {
                 $url = 'https://api.bilibili.com/x/web-interface/view?aid='.$bot->temp;
@@ -250,46 +253,53 @@ class Bot extends Model
                 curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
                 curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
                 curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+                curl_setopt($curl_connection, CURLOPT_HTTPHEADER, [
+                    'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:56.0) Gecko/20100101 Firefox/56.0',
+                    'Host: api.bilibili.com',
+                    'Cookie: SESSDATA=33c1bfb1%2C1606096573%2C4f954*51;'
+                ]);
                 $data = json_decode(curl_exec($curl_connection), true);
                 curl_close($curl_connection);
 
-                $image = Image::make($data['data']['pic']);
-                $image = $image->fit(2880, 1620);
-                $image = $image->stream();
-                $pvars = array('image' => base64_encode($image));
-                $curl = curl_init();
-                curl_setopt($curl, CURLOPT_URL, 'https://api.imgur.com/3/image.json');
-                curl_setopt($curl, CURLOPT_TIMEOUT, 30);
-                curl_setopt($curl, CURLOPT_HTTPHEADER, array('Authorization: Client-ID ' . '932b67e13e4f069'));
-                curl_setopt($curl, CURLOPT_POST, 1);
-                curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-                curl_setopt($curl, CURLOPT_POSTFIELDS, $pvars);
-                $out = curl_exec($curl);
-                curl_close ($curl);
-                $pms = json_decode($out, true);
-                $imgur = $pms['data']['link'];
+                $title = $chinese->to(Chinese::ZH_HANT, $data['data']['title']);
+                $pass = true;
+                Bot::setBilibiliConfigs($name, $playlist_id, $title, $tags, $pass);
 
-                if ($imgur != "") {
-                    $chinese = new Chinese();
-                    $title = $chinese->to(Chinese::ZH_HANT, $data['data']['title']);
-                    $pass = true;
-                    Bot::setBilibiliConfigs($name, $playlist_id, $title, $tags, $pass);
-                    $video = Video::create([
-                        'id' => $video_id,
-                        'user_id' => $user_id,
-                        'playlist_id' => $playlist_id,
-                        'title' => $title,
-                        'caption' => $chinese->to(Chinese::ZH_HANT, $data['data']['desc']),
-                        'sd' => '//player.bilibili.com/player.html?aid='.$data['data']['aid'].'&bvid='.$data['data']['bvid'].'&cid='.$data['data']['pages'][0]['cid'].'&page=1',
-                        'imgur' => Bot::get_string_between($imgur, 'https://i.imgur.com/', '.'),
-                        'tags' => $chinese->to(Chinese::ZH_HANT, $tags),
-                        'views' => 0,
-                        'outsource' => true,
-                        'created_at' => date('Y-m-d H:i:s', $data['data']['pubdate']),
-                        'uploaded_at' => date('Y-m-d H:i:s', $data['data']['pubdate']),
-                    ]);
-                    $bot->delete();
-                    $video_id++;
+                if ($pass) {
+                    $image = Image::make($data['data']['pic']);
+                    $image = $image->fit(2880, 1620);
+                    $image = $image->stream();
+                    $pvars = array('image' => base64_encode($image));
+                    $curl = curl_init();
+                    curl_setopt($curl, CURLOPT_URL, 'https://api.imgur.com/3/image.json');
+                    curl_setopt($curl, CURLOPT_TIMEOUT, 30);
+                    curl_setopt($curl, CURLOPT_HTTPHEADER, array('Authorization: Client-ID ' . '932b67e13e4f069'));
+                    curl_setopt($curl, CURLOPT_POST, 1);
+                    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+                    curl_setopt($curl, CURLOPT_POSTFIELDS, $pvars);
+                    $out = curl_exec($curl);
+                    curl_close ($curl);
+                    $pms = json_decode($out, true);
+                    $imgur = $pms['data']['link'];
+
+                    if ($imgur != "") {
+                        $video = Video::create([
+                            'id' => $video_id,
+                            'user_id' => $user_id,
+                            'playlist_id' => $playlist_id,
+                            'title' => $title,
+                            'caption' => $chinese->to(Chinese::ZH_HANT, $data['data']['desc']),
+                            'sd' => '//player.bilibili.com/player.html?aid='.$data['data']['aid'].'&bvid='.$data['data']['bvid'].'&cid='.$data['data']['pages'][0]['cid'].'&page=1',
+                            'imgur' => Bot::get_string_between($imgur, 'https://i.imgur.com/', '.'),
+                            'tags' => $chinese->to(Chinese::ZH_HANT, $tags),
+                            'views' => 0,
+                            'outsource' => true,
+                            'created_at' => date('Y-m-d H:i:s', $data['data']['pubdate']),
+                            'uploaded_at' => date('Y-m-d H:i:s', $data['data']['pubdate']),
+                        ]);
+                        $bot->delete();
+                        $video_id++;
+                    }
                 }
             }
         }
@@ -353,6 +363,11 @@ class Bot extends Model
                 curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
                 curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
                 curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+                curl_setopt($curl_connection, CURLOPT_HTTPHEADER, [
+                    'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:56.0) Gecko/20100101 Firefox/56.0',
+                    'Host: api.bilibili.com',
+                    'Cookie: SESSDATA=33c1bfb1%2C1606096573%2C4f954*51;'
+                ]);
                 $data = json_decode(curl_exec($curl_connection), true);
                 curl_close($curl_connection);
 
@@ -467,6 +482,96 @@ class Bot extends Model
                 } else {
                     $playlist_id = null;
                     $tags = '綜藝';
+                }
+                break;
+
+            case '村上信五補給站':
+                if (strpos($title, '請聽村上黑美吐槽') !== false) {
+                    $title = str_replace('請聽村上黑美吐槽', '村上美乃滋的請讓我吐槽', $title);
+                    $pass = true;
+                } else {
+                    $pass = false;
+                }
+                break;
+
+            case '反正不是字幕組':
+                if (strpos($title, '關西鐵漢們的成長記錄') !== false) {
+                    $playlist_id = 242;
+                    $title = str_replace('關西鐵漢們的成長記錄', '關八編年史', $title);
+                    $tags = '關西傑尼斯8 關8 橫山裕 村上信五 丸山隆平 錦戶亮 安田章大 大倉忠義 內博貴 澀谷昴 關八編年史 関ジャニ∞クロニクル 搞笑 明星 挑戰 綜藝';
+                } else {
+                    $playlist_id = null;
+                    $tags = '綜藝';
+                }
+                break;
+
+            case '二宮先生':
+                if (strpos($title, '【小和組】加倍寵尼') !== false) {
+                    $title = str_replace('【小和組】加倍寵尼', '二宮先生', $title);
+                    $pass = true;
+                } else {
+                    $pass = false;
+                }
+                break;
+
+            case '千葉名產保護組':
+                if (strpos($title, '【動物世界】【字】') !== false) {
+                    $playlist_id = 223;
+                    $title = str_replace('【動物世界】【字】', '天才！志村動物園 ', $title);
+                    $tags = '志村健 相葉雅紀 嵐Arashi 山瀨麻美 小崇小敏 DAIGO 針千本 近藤春菜 箕輪遙 動物 寵物 可愛 貓咪 狗狗 喵星人 汪星人 感動 搞笑 天才！志村動物園 天才!志村どうぶつ園 綜藝';
+                } elseif (strpos($title, '【農廣天地】【字】') !== false) {
+                    $playlist_id = 216;
+                    $title = str_replace('【農廣天地】【字】', '相葉愛學習 ', $title);
+                    $tags = '相葉雅紀 嵐Arashi 高橋茂雄 Unjash 渡邊健 原市 澤部佑 小知識 美食 料理 學習 教育 旅行 搞笑 明星 相葉愛學習 相葉マナブ 綜藝';
+                } else {
+                    $playlist_id = null;
+                    $tags = '綜藝';
+                }
+                break;
+
+            case '千葉幽羽':
+                if (strpos($title, '乃木坂工事中') !== false) {
+                    $playlist_id = 152;
+                    $tags = '乃木坂46 秋元真夏 岩本蓮加 梅澤美波 遠藤さくら 大園桃子 賀喜遥香 久保史緒里 齋藤飛鳥 白石麻衣 新内眞衣 清宮レイ 高山一実 筒井あやめ 中田花奈 樋口日奈 星野みなみ 堀未央奈 松村沙友理 山下美月 与田祐希 和田まあや 乃木坂工事中 香蕉人 明星 搞笑 女子偶像團體 綜藝';
+                    $pass = true;
+                } else {
+                    $pass = false;
+                }
+                break;
+
+            case 'SHOS字幕组':
+                if (strpos($title, '【周四晚與小櫻約會】') !== false) {
+                    $playlist_id = 75;
+                    $title = str_replace('【周四晚與小櫻約會】', '櫻井有吉的危險夜會 ', $title);
+                    $tags = '櫻井翔 嵐Arashi 有吉弘行 明星 訪談 搞笑 櫻井有吉的危險夜會 櫻井有吉アブナイ夜會 綜藝';
+                } else {
+                    $playlist_id = null;
+                    $tags = '綜藝';
+                }
+                break;
+
+            case 'Aloha':
+                if (strpos($title, '【字】土曜團建日') !== false) {
+                    $playlist_id = 76;
+                    $title = str_replace('【字】土曜團建日', '交給嵐吧/嵐的大挑戰', $title);
+                    $tags = '嵐Arashi 大野智 櫻井翔 相葉雅紀 松本潤 二宫和也 嵐的大挑戰 交給嵐吧 嵐にしやがれ 明星 搞笑 競賽 美食 MJ俱樂部 綜藝';
+                } else {
+                    $playlist_id = null;
+                    $tags = '綜藝';
+                }
+                break;
+
+            case '豬豬搬運工':
+                if (strpos($title, '人間觀察') !== false) {
+                    $playlist_id = 2;
+                    $inner = Bot::get_string_between($title, '【', '綜藝】');
+                    $title = str_replace('【'.$inner.'綜藝】', '', $title);
+                    $title = str_replace('人間觀察', ' 人類觀察', $title);
+                    $title = substr_replace(substr_replace($title, '.', 4, 0), '.', 7, 0);
+                    $tags = '黑色美乃滋 小杉龍一 吉田敬 小泉孝太郎 笹野高史 木下優樹菜 千針本 近藤春菜 箕輪遙 NAOTO 人類觀察 Monitoring ニンゲン観察バラエティモニタリング 爆笑監視中 搞笑 整人 整蠱 綜藝';
+                    $pass = true;
+                } else {
+                    $pass = false;
                 }
                 break;
         }
