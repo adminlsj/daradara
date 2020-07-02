@@ -3,8 +3,8 @@
 @section('head')
     @parent
     <title>{{ $watch->title }}&nbsp;-&nbsp;播放清單&nbsp;-&nbsp;娛見日本 LaughSeeJapan</title>
-    <meta name="title" content="{{ $watch->title }} - 播放清單 - 娛見日本 LaughSeeJapan">
-    <meta name="description" content="{{ $watch->description }}">
+    <meta name="title" content="{{ $watch->title }} 線上看 - 播放清單 - 娛見日本 LaughSeeJapan">
+    <meta name="description" content="{{ $watch->title }} 線上看 - {{ $watch->description }}">
 
     @if ($first != null)
       <script type="application/ld+json">
@@ -12,7 +12,7 @@
         "@context": "https://schema.org",
         "@type": "ImageObject",
         "name": "{{ $watch->title }}",
-        "description": "{{ $watch->description }}",
+        "description": "{{ $watch->title }} 線上看 - {{ $watch->description }}",
         "contentUrl": "https://i.imgur.com/{{ $first->imgur }}l.png",
         "uploadDate": "{{ \Carbon\Carbon::parse($watch->updated_at)->format('Y-m-d\Th:i:s').'+00:00' }}"
       }
