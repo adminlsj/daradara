@@ -29,7 +29,7 @@
       </div>
     @endif
 
-    <h5 style="color: dimgray; font-weight: 400; margin-top: 19px; line-height: 20px; margin-bottom: -5px; white-space: pre-wrap;">{{ $video->caption }}</h5>
+    <h5 style="color: dimgray; font-weight: 400; margin-top: 19px; line-height: 20px; margin-bottom: -5px; white-space: pre-wrap;">{{ $video->caption != 'SHOW' && $video->caption != 'HIDE' ? $video->caption : ''}}</h5>
 
     <h5 style="line-height: 20px; margin-bottom: 15px">
       <a style="text-decoration: none; color: darkgray; font-weight: bold" href="{{ $video->sd }}" target="_blank"><span style="vertical-align: middle; margin-top: -2px; margin-right: 5px" class="material-icons">link</span>{{ str_ireplace('player.', '', str_ireplace('www.', '', parse_url($video->sd, PHP_URL_HOST))) }}</a>
