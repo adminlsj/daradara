@@ -49,11 +49,8 @@ class UploadVideos extends Command
                 case 'space.bilibili.com':
                     Bot::bilibili($bot);
                     break;
-
-                case 'yongjiuzy.vip':
-                    Bot::yongjiu($bot);
-                    break;
             }
         }
+        Bot::yongjiu('http://www.yongjiuzy.vip/?m=vod-type-id-14.html');
     }
 }

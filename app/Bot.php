@@ -3,10 +3,12 @@
 namespace App;
 
 use App\Video;
+use App\Watch;
 use Image;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use SteelyWing\Chinese\Chinese;
+use Sunra\PhpSimple\HtmlDomParser;
 
 class Bot extends Model
 {
@@ -577,75 +579,102 @@ class Bot extends Model
         }
     }
 
-    public static function yongjiu(Bot $bot)
+    public static function yongjiu(String $url)
     {
         $chinese = new Chinese();
-        $url = $bot->data['source'];
         $curl_connection = curl_init($url);
         curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
         curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
-        $content = curl_exec($curl_connection);
+        $data = curl_exec($curl_connection);
         curl_close($curl_connection);
-        $start = explode('<!--火车头地址开始<li>', $content);
-        $end = explode('</li>火车头地址结束-->' , $start[1]);
-        $snippet = explode('</li><li>', $end[0]);
-        for ($i = 0; $i < count($snippet); $i++) { 
-            if (strpos($snippet[$i], '.m3u8') !== false) {
-               array_splice($snippet, $i, 1);
-               $i--;
-            }
-        }
+        $start = explode('<!--影片列表开始-->', $data);
+        $end = explode('<!--影片列表结束-->' , $start[1]);
+        $list = $chinese->to(Chinese::ZH_HANT, explode('</li><li>', $end[0])[0]);
 
-        $start = explode('<!--片名开始-->', $content);
-        $end = explode('<!--片名结束-->' , $start[1]);
-        $title_short = $title_long = $chinese->to(Chinese::ZH_HANT, explode('</li><li>', $end[0])[0]);
-        $start = explode('<!--别名开始-->', $content);
-        $end = explode('<!--别名结束-->' , $start[1]);
-        $title_nickname = $chinese->to(Chinese::ZH_HANT, explode('</li><li>', $end[0])[0]);
-        if ($title_nickname != '') {
-            $title_long = $title_short.'/'.$title_nickname;
-        }
-
-        $start = explode('<!--年代开始-->', $content);
-        $end = explode('<!--年代结束-->' , $start[1]);
-        $date = Carbon::createFromDate(explode('</li><li>', $end[0])[0]);
-
-        foreach ($snippet as $line) {
-            $data = explode('$', $line);
-            $episode = $chinese->to(Chinese::ZH_HANT, $data[0]);
-            $link = $data[1];
-            if (!Video::where('playlist_id', $bot->data['playlist_id'])->where('title', 'ilike', '%'.$episode.'%')->exists()) {
-                if ($first = Video::where('playlist_id', $bot->data['playlist_id'])->first()) {
-                    $video = Video::create([
-                        'user_id' => $first->user_id,
-                        'playlist_id' => $first->playlist_id,
-                        'title' => explode('【', $first->title)[0].'【'.$episode.'】',
-                        'caption' => explode('【', $first->title)[0].'【'.$episode.'】',
-                        'sd' => $link,
-                        'imgur' => 'JJPMK1A',
-                        'tags' => $first->tags,
-                        'views' => 0,
-                        'outsource' => true,
-                        'created_at' => $date,
-                        'uploaded_at' => Carbon::now(),
-                    ]);
-                } else {
-                    $video = Video::create([
-                        'user_id' => $bot->data['user_id'],
-                        'playlist_id' => $bot->data['playlist_id'],
-                        'title' => $title_long.'【'.$episode.'】',
-                        'caption' => $title_long.'【'.$episode.'】',
-                        'sd' => $link,
-                        'imgur' => 'JJPMK1A',
-                        'tags' => str_replace('/', ' ', $title_long).' '.$bot->data['tags'],
-                        'views' => 0,
-                        'outsource' => true,
-                        'created_at' => $date,
-                        'uploaded_at' => Carbon::now(),
-                    ]);
+        $html = HtmlDomParser::str_get_html($list);
+        foreach ($html->find('a') as $element) {
+            $link = $element->href;
+            if ($link != '/?m=vod-type-id-14.html') {
+                $url = 'http://www.yongjiuzy.vip'.$link;
+                $curl_connection = curl_init($url);
+                curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+                curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+                $content = curl_exec($curl_connection);
+                curl_close($curl_connection);
+                $start = explode('<!--火车头地址开始<li>', $content);
+                $end = explode('</li>火车头地址结束-->' , $start[1]);
+                $snippet = explode('</li><li>', $end[0]);
+                for ($i = 0; $i < count($snippet); $i++) { 
+                    if (strpos($snippet[$i], '.m3u8') !== false) {
+                       array_splice($snippet, $i, 1);
+                       $i--;
+                    }
                 }
-                Video::notifySubscribers($video);
+
+                $start = explode('<!--片名开始-->', $content);
+                $end = explode('<!--片名结束-->' , $start[1]);
+                $title_short = $title_long = $chinese->to(Chinese::ZH_HANT, explode('</li><li>', $end[0])[0]);
+                $start = explode('<!--别名开始-->', $content);
+                $end = explode('<!--别名结束-->' , $start[1]);
+                $title_nickname = $chinese->to(Chinese::ZH_HANT, explode('</li><li>', $end[0])[0]);
+                if ($title_nickname != '') {
+                    $title_long = $title_short.'/'.$title_nickname;
+                }
+                if ($watch = Watch::where('title', 'ilike', '%'.$title_short.'%')->first()) {
+                    $playlist_id = $watch->id;
+                } else {
+                    $start = explode('<!--简介开始-->', $content);
+                    $end = explode('<!--简介结束-->' , $start[1]);
+                    $description = $chinese->to(Chinese::ZH_HANT, explode('</li><li>', $end[0])[0]);
+                    $watch = Watch::create([
+                        'user_id' => 750,
+                        'title' => $title_long,
+                        'description' => $description,
+                    ]);
+                    $playlist_id = $watch->id;
+                }
+
+                $date = Carbon::now();
+                foreach ($snippet as $line) {
+                    $data = explode('$', $line);
+                    $episode = $chinese->to(Chinese::ZH_HANT, $data[0]);
+                    $link = $data[1];
+                    if (!Video::where('playlist_id', $playlist_id)->where('title', 'ilike', '%'.$episode.'%')->exists()) {
+                        if ($first = Video::where('playlist_id', $playlist_id)->first()) {
+                            $video = Video::create([
+                                'user_id' => $first->user_id,
+                                'playlist_id' => $first->playlist_id,
+                                'title' => explode('【', $first->title)[0].'【'.$episode.'】',
+                                'caption' => explode('【', $first->title)[0].'【'.$episode.'】',
+                                'sd' => $link,
+                                'imgur' => 'JJPMK1A',
+                                'tags' => $first->tags,
+                                'views' => 0,
+                                'outsource' => true,
+                                'created_at' => $date,
+                                'uploaded_at' => $date,
+                            ]);
+                        } else {
+                            $video = Video::create([
+                                'user_id' => 750,
+                                'playlist_id' => $playlist_id,
+                                'title' => $title_long.'【'.$episode.'】',
+                                'caption' => $title_long.'【'.$episode.'】',
+                                'sd' => $link,
+                                'imgur' => 'JJPMK1A',
+                                'tags' => str_replace('/', ' ', $title_long).' 日劇 線上看 中文字幕',
+                                'views' => 0,
+                                'outsource' => true,
+                                'created_at' => $date,
+                                'uploaded_at' => $date,
+                            ]);
+                        }
+                        $date = $date->addSeconds(1);
+                        Video::notifySubscribers($video);
+                    }
+                }
             }
         }
     }
