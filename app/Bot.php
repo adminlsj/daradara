@@ -8,7 +8,7 @@ use Image;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use SteelyWing\Chinese\Chinese;
-use Sunra\PhpSimple\HtmlDomParser;
+use simplehtmldom\HtmlWeb;
 
 class Bot extends Model
 {
@@ -582,17 +582,8 @@ class Bot extends Model
     public static function yongjiu(String $url)
     {
         $chinese = new Chinese();
-        $curl_connection = curl_init($url);
-        curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
-        curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
-        $data = curl_exec($curl_connection);
-        curl_close($curl_connection);
-        $start = explode('<!--影片列表开始-->', $data);
-        $end = explode('<!--影片列表结束-->' , $start[1]);
-        $list = $chinese->to(Chinese::ZH_HANT, explode('</li><li>', $end[0])[0]);
-
-        $html = HtmlDomParser::str_get_html($list);
+        $client = new HtmlWeb();
+        $html = $client->load($url)->find('tr.DianDian')[0];
         foreach ($html->find('a') as $element) {
             $link = $element->href;
             if ($link != '/?m=vod-type-id-14.html') {

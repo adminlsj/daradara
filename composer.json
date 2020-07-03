@@ -17,9 +17,9 @@
         "laravelrus/localized-carbon": "1.*",
         "league/flysystem-aws-s3-v3": "~1.0",
         "predis/predis": "~1.0",
+        "simplehtmldom/simplehtmldom": "dev-master",
         "steelywing/chinese": "^0.5.3",
         "stripe/stripe-php": "^5.2",
-        "sunra/php-simple-html-dom-parser": "^1.5",
         "torann/geoip": "^1.1"
     },
     "require-dev": {

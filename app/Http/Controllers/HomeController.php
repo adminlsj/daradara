@@ -25,6 +25,7 @@ use App\Mail\UserUploadVideo;
 use App\Mail\SubscribeNotify;
 use SteelyWing\Chinese\Chinese;
 use Redirect;
+use simplehtmldom\HtmlWeb;
 
 class HomeController extends Controller
 {
@@ -50,6 +51,9 @@ class HomeController extends Controller
 
     public function about(Request $request)
     {
+        if ($request->url) {
+            return urlencode($request->url);
+        }
         return view('layouts.about-us');
     }
 
@@ -238,16 +242,25 @@ class HomeController extends Controller
         if (Auth::check() && Auth::user()->email == 'laughseejapan@gmail.com') {
             $quan = Video::where('sd', 'like', '%1098\_%')->get();
             $qzone = Video::where('sd', 'like', '%1006\_%')->orWhere('sd', 'like', '%1097\_%')->get();
+            $direct = Video::where('sd', 'like', '%gss3.baidu.com%')->get();
             
             foreach ($quan as $video) {
-                $sd = $this->get_string_between($video->sd, 'vmtt.tc.qq.com/', '.f0.mp4');
-                $video->sd = 'https://www.agefans.tv/age/player/ckx1/?url='.urlencode(Video::getSourceQQ("https://quan.qq.com/video/".$sd));
+                $sd = $this->get_string_between($video->sd, 'vmtt.tc.qq.com%2F', '.f0.mp4');
+                $video->sd = Video::getSourceQQ("https://quan.qq.com/video/".$sd);
+                $video->outsource = false;
                 $video->save();
             }
 
             foreach ($qzone as $video) {
-                $sd = $this->get_string_between($video->sd, 'vwecam.tc.qq.com/', '.f0.mp4');
-                $video->sd = 'https://www.agefans.tv/age/player/ckx1/?url='.urlencode(Video::getSourceQZ($sd));
+                $sd = $this->get_string_between($video->sd, 'vwecam.tc.qq.com%2F', '.f0.mp4');
+                $video->sd = Video::getSourceQZ($sd);
+                $video->outsource = false;
+                $video->save();
+            }
+
+            foreach ($direct as $video) {
+                $video->sd = urldecode(str_replace('https://www.agefans.tv/age/player/ckx1/?url=', '', $video->sd));
+                $video->outsource = false;
                 $video->save();
             }
         }

@@ -42,13 +42,13 @@ class UpdateVideos extends Command
         $qzone = Video::where('sd', 'like', '%1006\_%')->orWhere('sd', 'like', '%1097\_%')->get();
         
         foreach ($quan as $video) {
-            $sd = $this->get_string_between($video->sd, 'vmtt.tc.qq.com/', '.f0.mp4');
+            $sd = $this->get_string_between($video->sd, 'vmtt.tc.qq.com%2F', '.f0.mp4');
             $video->sd = 'https://www.agefans.tv/age/player/ckx1/?url='.urlencode(Video::getSourceQQ("https://quan.qq.com/video/".$sd));
             $video->save();
         }
 
         foreach ($qzone as $video) {
-            $sd = $this->get_string_between($video->sd, 'vwecam.tc.qq.com/', '.f0.mp4');
+            $sd = $this->get_string_between($video->sd, 'vwecam.tc.qq.com%2F', '.f0.mp4');
             $video->sd = 'https://www.agefans.tv/age/player/ckx1/?url='.urlencode(Video::getSourceQZ($sd));
             $video->save();
         }
