@@ -43,15 +43,13 @@ class UpdateVideos extends Command
         
         foreach ($quan as $video) {
             $sd = $this->get_string_between($video->sd, 'vmtt.tc.qq.com/', '.f0.mp4');
-            $video->sd = 'https://gimy.cc/template/gimy/asset/fed/player.php?id=m3u8&url='.Video::getSourceQQ("https://quan.qq.com/video/".$sd);
-            $video->outsource = true;
+            $video->sd = 'https://www.agefans.tv/age/player/ckx1/?url='.urlencode(Video::getSourceQQ("https://quan.qq.com/video/".$sd));
             $video->save();
         }
 
         foreach ($qzone as $video) {
             $sd = $this->get_string_between($video->sd, 'vwecam.tc.qq.com/', '.f0.mp4');
-            $video->sd = 'https://gimy.cc/template/gimy/asset/fed/player.php?id=m3u8&url='.Video::getSourceQZ($sd);
-            $video->outsource = true;
+            $video->sd = 'https://www.agefans.tv/age/player/ckx1/?url='.urlencode(Video::getSourceQZ($sd));
             $video->save();
         }
     }
