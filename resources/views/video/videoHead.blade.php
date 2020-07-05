@@ -22,10 +22,10 @@
     "@type": "Person",
     "name": "{{ $current->user->name }}"
   },
-  @if ($current->outsource)
-      "embedUrl": "{!! $current->source() !!}",
+  @if ($outsource)
+      "embedUrl": "{!! $sd !!}",
   @else
-      "contentUrl": "{!! $current->source() !!}",
+      "contentUrl": "{!! $sd !!}",
   @endif
   "interactionStatistic": {
     "@type": "InteractionCounter",

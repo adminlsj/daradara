@@ -229,9 +229,11 @@ class UserController extends Controller
     {
         $id = $request->id;
         if (strpos($id, '1098_') !== false) {
-            return Video::getSourceQQ("https://quan.qq.com/video/".$id);
+            return 'https://www.agefans.tv/age/player/ckx1/?url='.urlencode(Video::getSourceQQ("https://quan.qq.com/video/".$id));
         } elseif (strpos($id, '1006_') !== false || strpos($id, '1097_') !== false) {
-            return Video::getSourceQZ($id);
+            return 'https://www.agefans.tv/age/player/ckx1/?url='.urlencode(Video::getSourceQZ($id));
+        } elseif (strpos($id, 'gss3.baidu.com') !== false) {
+            return 'https://www.agefans.tv/age/player/ckx1/?url='.urlencode($id);
         }
     }
 

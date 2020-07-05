@@ -96,8 +96,8 @@ $('.watch-slider .slider-scroll-left').click(function() {
 
 $(document).on("click", "#test-play-btn", function(e) {
     var link = $('#link').val();
-    if (link.startsWith('1098_') || link.startsWith('1006_') || link.startsWith('1097_')) {
-      $("#outsource").prop("checked", false);
+    if (link.startsWith('1098_') || link.startsWith('1006_') || link.startsWith('1097_') || link.startsWith('https://gss3.baidu.com')) {
+      $("#outsource").prop("checked", true);
       $.ajax({
           type:'GET',
           url:'/getSourceQQ?id=' + link,
