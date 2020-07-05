@@ -376,8 +376,9 @@ class Bot extends Model
                 $playlist_id = $bot->data['playlist_id'];
                 $title = $chinese->to(Chinese::ZH_HANT, $data['data']['title']);
                 $tags = $bot->data['tags'];
+                $outsource = true;
                 $pass = true;
-                Bot::setBilibiliConfigs($bot->data['name'], $playlist_id, $title, $tags, $pass);
+                Bot::setBilibiliConfigs($bot->data['name'], $playlist_id, $title, $tags, $outsource, $pass);
 
                 if ($pass) {
                     $image = Image::make($data['data']['pic']);
@@ -406,7 +407,7 @@ class Bot extends Model
                             'imgur' => Bot::get_string_between($imgur, 'https://i.imgur.com/', '.'),
                             'tags' => $chinese->to(Chinese::ZH_HANT, $tags),
                             'views' => 0,
-                            'outsource' => true,
+                            'outsource' => $outsource,
                             'created_at' => date('Y-m-d H:i:s', $data['data']['pubdate']),
                             'uploaded_at' => date('Y-m-d H:i:s', $data['data']['pubdate']),
                         ]);
@@ -417,7 +418,7 @@ class Bot extends Model
         }
     }
 
-    public static function setBilibiliConfigs($name, &$playlist_id, &$title, &$tags, &$pass)
+    public static function setBilibiliConfigs($name, &$playlist_id, &$title, &$tags, &$outsource, &$pass)
     {
         switch ($name) {
             case '倫敦之心字幕組':
@@ -575,6 +576,22 @@ class Bot extends Model
                 } else {
                     $pass = false;
                 }
+                break;
+
+            case '空靈雨跡':
+                if (strpos($title, 'WEB動畫') !== false) {
+                    $tags = 'WEB動畫 原創動畫 動漫';
+                    $outsource = false;
+                } elseif (strpos($title, '動畫廣告') !== false) {
+                    $tags = '動畫廣告 原創動畫 動漫';
+                    $outsource = false;
+                } else {
+                    $pass = false;
+                }
+                break;
+
+            case 'Sunday動漫館':
+                $outsource = false;
                 break;
         }
     }
