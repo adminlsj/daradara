@@ -18,6 +18,7 @@
         "league/flysystem-aws-s3-v3": "~1.0",
         "predis/predis": "~1.0",
         "simplehtmldom/simplehtmldom": "dev-master",
+        "spatie/browsershot": "^3.37",
         "steelywing/chinese": "^0.5.3",
         "stripe/stripe-php": "^5.2",
         "torann/geoip": "^1.1"

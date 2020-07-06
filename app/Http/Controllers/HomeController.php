@@ -26,6 +26,7 @@ use App\Mail\SubscribeNotify;
 use SteelyWing\Chinese\Chinese;
 use Redirect;
 use simplehtmldom\HtmlWeb;
+use Spatie\Browsershot\Browsershot;
 
 class HomeController extends Controller
 {
@@ -59,7 +60,35 @@ class HomeController extends Controller
 
     public function contact()
     {
-        return view('layouts.contact');
+
+        /* $screenshot = Browsershot::url('https://apd-vliveachy.apdcdn.tc.qq.com/vmtt.tc.qq.com/1098_544bf4c1def0ca1ef67abab0b2a2ca6d.f0.mp4?vkey=0C9C828B13FA8EF7700CC385FE07EEC7CACC33C6F48E045E2E957C92AF0196B07AB65A723ACEACBCE5236A10438DFB4C2D42B14FE82BFCB2722114B01A97BEFFFEA3B1A2BD34481D0BB459608BB6416C61EE0EF9AB5373DB')->userAgent('Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1')->mobile()->touch()->windowSize(1920, 1080)->setDelay(10000)->screenshot();
+        $image = Image::make($screenshot);
+        $image = $image->fit(2880, 1620);
+        $image = $image->stream();
+        $pvars = array('image' => base64_encode($image));
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_URL, 'https://api.imgur.com/3/image.json');
+        curl_setopt($curl, CURLOPT_TIMEOUT, 30);
+        curl_setopt($curl, CURLOPT_HTTPHEADER, array('Authorization: Client-ID ' . '932b67e13e4f069'));
+        curl_setopt($curl, CURLOPT_POST, 1);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $pvars);
+        $out = curl_exec($curl);
+        curl_close ($curl);
+        $pms = json_decode($out, true);
+        $imgur = $pms['data']['link'];
+        return $imgur; */
+
+        return $requests = Browsershot::url('https://www.agefans.tv/play/20100006?playid=2_1')
+            ->setOption('args', ['--headless=false'])
+            ->triggeredRequests();
+
+
+        return Browsershot::url('https://www.agefans.tv/')
+                    ->userAgent('Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1')
+                    ->setDelay(10000)
+                    ->bodyHtml();
+        // return view('layouts.contact');
     }
 
     public function terms()

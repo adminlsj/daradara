@@ -172,9 +172,6 @@ class Video extends Model
         if ($video->foreign_sd && array_key_exists($country_code, $video->foreign_sd)) {
             $outsource = true;
             $sd = $video->foreign_sd[$country_code];
-        } elseif ($is_mobile && strpos($sd, "agefans.tv") !== FALSE) {
-            $outsource = false;
-            $sd = urldecode(str_replace('https://www.agefans.tv/age/player/ckx1/?url=', '', $video->sd));
         }
 
         $bilibili = strpos($sd, "player.bilibili.com") !== FALSE;
