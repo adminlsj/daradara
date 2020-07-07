@@ -631,7 +631,7 @@ class Bot extends Model
                 if ($title_nickname != '') {
                     $title_long = $title_short.'/'.$title_nickname;
                 }
-                if ($watch = Watch::where('title', 'ilike', '%'.$title_short.'%')->first()) {
+                if ($watch = Watch::where('title', 'ilike', '%'.$title_short.'%')->orderBy('created_at', 'asc')->first()) {
                     $playlist_id = $watch->id;
                 } else {
                     $start = explode('<!--简介开始-->', $content);

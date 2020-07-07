@@ -131,6 +131,8 @@ class HomeController extends Controller
 
     public function terms()
     {
+        $watch = Watch::where('title', 'ilike', '%'.'詐欺遊戲'.'%')->orderBy('created_at', 'asc')->first();
+        return $watch;
         return view('layouts.terms');
     }
 
