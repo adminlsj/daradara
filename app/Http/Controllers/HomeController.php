@@ -79,7 +79,7 @@ class HomeController extends Controller
             }
         }*/
 
-        $screenshot = Browsershot::url('https://mingxing.xianyongjiu.com/share/fd95ec8df5dbeea25aa8e6c808bad583')
+        /* $screenshot = Browsershot::url('https://mingxing.xianyongjiu.com/share/fd95ec8df5dbeea25aa8e6c808bad583')
             ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
             ->windowSize(1920, 1080)
             ->setOption('addStyleTag', json_encode(['content' => '.dplayer-controller,.dplayer-controller-mask{ display: none; }']))
@@ -125,8 +125,8 @@ class HomeController extends Controller
         return Browsershot::url('https://www.agefans.tv/')
                     ->userAgent('Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1')
                     ->setDelay(10000)
-                    ->bodyHtml();
-        // return view('layouts.contact');*/
+                    ->bodyHtml();*/
+        return view('layouts.contact');
     }
 
     public function terms()
