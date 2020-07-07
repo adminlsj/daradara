@@ -61,6 +61,37 @@ class HomeController extends Controller
 
     public function contact()
     {
+        /* $bot = ['name' => '魔法水果籃 第二季', 'source' => 'https://www.agefans.tv/play/20200158?playid=2_1'];
+        $url = explode('?', $bot['source'])[0];
+        $query = explode('_', explode('?', $bot['source'])[1])[0];
+        $curl_connection = curl_init($url);
+        curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+        curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+        $content = curl_exec($curl_connection);
+        curl_close($curl_connection);
+
+        $start = explode('<div class="main0" id="main0">', $content);
+        $end = explode('<script id="DEF_PLAYINDEX">1</script>' , $start[1]);
+        $remove = ['<div class="movurl" style="display:none">', '<ul>', '<li>', '</li>', '</ul>', '</div>', '<div class="movurl" style="display:block">'];
+        $html = str_replace($remove, '', $end[0]);
+        $dom = new \DOMDocument();
+        $dom->loadHTML('<meta http-equiv="content-type" content="text/html; charset=utf-8">'.$html);
+        $links = $dom->getElementsByTagName('a');
+        $linkArray = [];
+        foreach ($links as $link){
+            if (strpos($query, $link->getAttribute('href')) !== false) {
+                $linkArray[] = ['href' => $link->getAttribute('href'), 'text' => ];
+            }
+            echo $link->nodeValue.'<br>';
+        } 
+
+        /* return $requests = Browsershot::url('https://www.agefans.tv/play/20190373?playid=2_28')
+            ->useCookies(['username' => 'admin'])
+            ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
+            ->triggeredRequests(); */
+
+
         /*return $requests = Browsershot::url('https://www.agefans.tv/play/20190373?playid=2_1')
             ->useCookies(['username' => 'admin'])
             ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
@@ -131,8 +162,6 @@ class HomeController extends Controller
 
     public function terms()
     {
-        $watch = Watch::where('title', 'ilike', '%'.'詐欺遊戲'.'%')->orderBy('created_at', 'asc')->first();
-        return $watch;
         return view('layouts.terms');
     }
 
@@ -337,12 +366,14 @@ class HomeController extends Controller
 
     public function tempMethod()
     {
-        $videos = Video::where('sd', 'like', '%gss3.baidu.com%')->get();
+        $videos = Video::where('sd', 'like', '%https://www.agefans.tv/age/player/ckx1/?url=https%3A%2F%2Fapd-vliveachy.apdcdn.tc.qq.com%2Fvmtt.tc.qq.com%2F.com%2Fvideo%2F1098_%')->get();
         foreach ($videos as $video) {
-            $video->sd = str_replace('https://gimy.cc/template/gimy/asset/fed/player.php?id=m3u8&url=', '', $video->sd);
-            $video->sd = 'https://www.agefans.tv/age/player/ckx1/?url='.urlencode($video->sd);
-            $video->outsource = true;
-            $video->save();
+            if (strpos($video->sd, 'f0.mp4') === false) {
+                $sd = str_replace('https://www.agefans.tv/age/player/ckx1/?url=https%3A%2F%2Fapd-vliveachy.apdcdn.tc.qq.com%2Fvmtt.tc.qq.com%2F.com%2Fvideo%2F', '', $video->sd);
+                $video->sd = 'https://www.agefans.tv/age/player/ckx1/?url='.urlencode(Video::getSourceQQ("https://quan.qq.com/video/".$sd));
+                $video->outsource = true;
+                $video->save();
+            }
         }
         return redirect()->action('HomeController@index');
     }

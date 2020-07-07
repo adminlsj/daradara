@@ -63,18 +63,20 @@ class BotController extends Controller
 
     public function uploadVideos(Request $request)
     {
-        $bots = Bot::all();
-        foreach ($bots as $bot) {
-            switch (str_ireplace('www.', '', parse_url($bot->data['source'], PHP_URL_HOST))) {
-                case 'youtube.com':
-                    Bot::youtube($bot);
-                    break;
+        if (Auth::check() && Auth::user()->email == 'laughseejapan@gmail.com') {
+            $bots = Bot::all();
+            foreach ($bots as $bot) {
+                switch (str_ireplace('www.', '', parse_url($bot->data['source'], PHP_URL_HOST))) {
+                    case 'youtube.com':
+                        Bot::youtube($bot);
+                        break;
 
-                case 'space.bilibili.com':
-                    Bot::bilibili($bot);
-                    break;
+                    case 'space.bilibili.com':
+                        Bot::bilibili($bot);
+                        break;
+                }
             }
+            Bot::yongjiu('http://www.yongjiuzy.vip/?m=vod-type-id-14.html');
         }
-        Bot::yongjiu('http://www.yongjiuzy.vip/?m=vod-type-id-14.html');
     }
 }
