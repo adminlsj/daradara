@@ -340,25 +340,16 @@ class HomeController extends Controller
         if (Auth::check() && Auth::user()->email == 'laughseejapan@gmail.com') {
             $quan = Video::where('sd', 'like', '%1098\_%')->get();
             $qzone = Video::where('sd', 'like', '%1006\_%')->orWhere('sd', 'like', '%1097\_%')->get();
-            $direct = Video::where('sd', 'like', '%gss3.baidu.com%')->get();
             
             foreach ($quan as $video) {
                 $sd = $this->get_string_between($video->sd, 'vmtt.tc.qq.com%2F', '.f0.mp4');
-                $video->sd = Video::getSourceQQ("https://quan.qq.com/video/".$sd);
-                $video->outsource = false;
+                $video->sd = 'https://www.agefans.tv/age/player/ckx1/?url='.urlencode(Video::getSourceQQ("https://quan.qq.com/video/".$sd));
                 $video->save();
             }
 
             foreach ($qzone as $video) {
                 $sd = $this->get_string_between($video->sd, 'vwecam.tc.qq.com%2F', '.f0.mp4');
-                $video->sd = Video::getSourceQZ($sd);
-                $video->outsource = false;
-                $video->save();
-            }
-
-            foreach ($direct as $video) {
-                $video->sd = urldecode(str_replace('https://www.agefans.tv/age/player/ckx1/?url=', '', $video->sd));
-                $video->outsource = false;
+                $video->sd = 'https://www.agefans.tv/age/player/ckx1/?url='.urlencode(Video::getSourceQZ($sd));
                 $video->save();
             }
         }
