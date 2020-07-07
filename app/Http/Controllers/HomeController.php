@@ -32,14 +32,15 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
-        $animeFirst = Video::tagsWithLimit(['正版動漫'], 1)->get();
+        /*$animeFirst = Video::tagsWithLimit(['正版動漫'], 1)->get();
         $animeVid = Video::where('id', '!=', $animeFirst[0]->id)->tagsWithLimit(['正版動漫', '動畫', '動漫講評', 'MAD·AMV'], 7)->get();
         $animeNews = Blog::tagsWithLimit(['動漫情報'])->get();
         $variety = Video::tagsWithLimit(['綜藝'])->get();
         $artist = Video::tagsWithLimit(['明星', '日劇'])->get();
         $meme = Video::tagsWithLimit(['迷因'])->get();
         $daily = Blog::tagsWithLimit(['生活'])->get();
-        return view('video.home', compact('animeFirst', 'animeVid', 'animeNews', 'variety', 'artist', 'meme', 'daily'));
+        return view('video.home', compact('animeFirst', 'animeVid', 'animeNews', 'variety', 'artist', 'meme', 'daily'));*/
+        return view('video.home');
     }
 
     public function genre(Request $request)
