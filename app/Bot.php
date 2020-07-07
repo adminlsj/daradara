@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use SteelyWing\Chinese\Chinese;
 use simplehtmldom\HtmlWeb;
+use Spatie\Browsershot\Browsershot;
 
 class Bot extends Model
 {
@@ -650,37 +651,63 @@ class Bot extends Model
                     $episode = $chinese->to(Chinese::ZH_HANT, $data[0]);
                     $link = $data[1];
                     if (!Video::where('playlist_id', $playlist_id)->where('title', 'ilike', '%'.$episode.'%')->exists()) {
-                        if ($first = Video::where('playlist_id', $playlist_id)->first()) {
-                            $video = Video::create([
-                                'user_id' => $first->user_id,
-                                'playlist_id' => $first->playlist_id,
-                                'title' => explode('【', $first->title)[0].'【'.$episode.'】',
-                                'caption' => explode('【', $first->title)[0].'【'.$episode.'】',
-                                'sd' => $link,
-                                'imgur' => 'JJPMK1A',
-                                'tags' => $first->tags,
-                                'views' => 0,
-                                'outsource' => true,
-                                'created_at' => $date,
-                                'uploaded_at' => $date,
-                            ]);
-                        } else {
-                            $video = Video::create([
-                                'user_id' => 750,
-                                'playlist_id' => $playlist_id,
-                                'title' => $title_long.'【'.$episode.'】',
-                                'caption' => $title_long.'【'.$episode.'】',
-                                'sd' => $link,
-                                'imgur' => 'JJPMK1A',
-                                'tags' => str_replace('/', ' ', $title_long).' 日劇 線上看 中文字幕',
-                                'views' => 0,
-                                'outsource' => true,
-                                'created_at' => $date,
-                                'uploaded_at' => $date,
-                            ]);
+
+                        $screenshot = Browsershot::url($link)
+                            ->windowSize(1920, 1080)
+                            ->setOption('addStyleTag', json_encode(['content' => '.dplayer-controller,.dplayer-controller-mask{ display: none; }']))
+                            ->waitUntilNetworkIdle()
+                            ->screenshot();
+                        $image = Image::make($screenshot);
+                        $image = $image->crop(1440, 1080);
+                        $image = $image->resize(1920, null);
+                        $image = $image->fit(2880, 1620);
+                        $image = $image->stream();
+                        $pvars = array('image' => base64_encode($image));
+                        $curl = curl_init();
+                        curl_setopt($curl, CURLOPT_URL, 'https://api.imgur.com/3/image.json');
+                        curl_setopt($curl, CURLOPT_TIMEOUT, 30);
+                        curl_setopt($curl, CURLOPT_HTTPHEADER, array('Authorization: Client-ID ' . '932b67e13e4f069'));
+                        curl_setopt($curl, CURLOPT_POST, 1);
+                        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+                        curl_setopt($curl, CURLOPT_POSTFIELDS, $pvars);
+                        $out = curl_exec($curl);
+                        curl_close ($curl);
+                        $pms = json_decode($out, true);
+                        $imgur = $pms['data']['link'];
+
+                        if ($imgur != "") {
+                            if ($first = Video::where('playlist_id', $playlist_id)->first()) {
+                                $video = Video::create([
+                                    'user_id' => $first->user_id,
+                                    'playlist_id' => $first->playlist_id,
+                                    'title' => explode('【', $first->title)[0].'【'.$episode.'】',
+                                    'caption' => explode('【', $first->title)[0].'【'.$episode.'】',
+                                    'sd' => $link,
+                                    'imgur' => Bot::get_string_between($imgur, 'https://i.imgur.com/', '.'),
+                                    'tags' => $first->tags,
+                                    'views' => 0,
+                                    'outsource' => true,
+                                    'created_at' => $date,
+                                    'uploaded_at' => $date,
+                                ]);
+                            } else {
+                                $video = Video::create([
+                                    'user_id' => 750,
+                                    'playlist_id' => $playlist_id,
+                                    'title' => $title_long.'【'.$episode.'】',
+                                    'caption' => $title_long.'【'.$episode.'】',
+                                    'sd' => $link,
+                                    'imgur' => Bot::get_string_between($imgur, 'https://i.imgur.com/', '.'),
+                                    'tags' => str_replace('/', ' ', $title_long).' 日劇 線上看 中文字幕',
+                                    'views' => 0,
+                                    'outsource' => true,
+                                    'created_at' => $date,
+                                    'uploaded_at' => $date,
+                                ]);
+                            }
+                            $date = $date->addSeconds(1);
+                            Video::notifySubscribers($video);
                         }
-                        $date = $date->addSeconds(1);
-                        Video::notifySubscribers($video);
                     }
                 }
             }
