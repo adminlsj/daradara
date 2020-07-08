@@ -769,8 +769,11 @@ class Bot extends Model
 
     public static function updateAgefans(Bot $bot)
     {
-        $inner = Bot::get_string_between($bot->data['title'], '【第', '話】');
-        $title = str_replace('【第'.$inner.'話】', '【第'.($inner + 1).'話】', $bot->data['title']);
+        $current = Bot::get_string_between($bot->data['title'], '【第', '話】');
+        $next = $current + 1;
+        $title = str_replace('【第'.$current.'話】', '【第'.$next.'話】', $bot->data['title']);
+        $next = $next < 10 ? '0'.$next : $next;
+        $caption = str_replace('【第'.$current.'話】', '【第'.$next.'話】', $bot->data['title']);
 
         $url = explode('?', $bot->data['source'])[0];
         $query = explode('?', $bot->data['source'])[1];
@@ -784,7 +787,7 @@ class Bot extends Model
             'imgur' => '',
             'title' => $title,
             'source' => $source,
-            'caption' => $title,
+            'caption' => $caption,
             'user_id' => $bot->data['user_id'],
             'playlist_id' => $bot->data['playlist_id'],
         ];
