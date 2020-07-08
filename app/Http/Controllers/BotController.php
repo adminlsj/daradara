@@ -79,4 +79,16 @@ class BotController extends Controller
             Bot::yongjiu('http://www.yongjiuzy.vip/?m=vod-type-id-14.html');
         }
     }
+
+    public function uploadAgefans(Request $request)
+    {
+        if (Auth::check() && Auth::user()->email == 'laughseejapan@gmail.com') {
+            $bots = Bot::all();
+            foreach ($bots as $bot) {
+                if (str_ireplace('www.', '', parse_url($bot->data['source'], PHP_URL_HOST)) == 'agefans.tv') {
+                    Bot::agefans($bot);
+                }
+            }
+        }
+    }
 }

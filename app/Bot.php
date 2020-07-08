@@ -599,10 +599,55 @@ class Bot extends Model
 
     public static function agefans(Bot $bot)
     {
-        return $requests = Browsershot::url('https://www.agefans.tv/play/20190373?playid=2_1')
+        $requests = Browsershot::url($bot->data['source'])
             ->useCookies(['username' => 'admin'])
             ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
             ->triggeredRequests();
+
+        foreach ($requests as $request) {
+            if (strpos($request['url'], 'https://www.agefans.tv/age/player/') !== false && strpos($request['url'], 'https://gss3.baidu.com/') !== false) {
+
+                $imgur = Bot::uploadUrlImage($bot->data['imgur']);
+                if ($imgur != "") {
+                    $video = Video::create([
+                        'user_id' => $bot->data['user_id'],
+                        'playlist_id' => $bot->data['playlist_id'],
+                        'title' => $bot->data['title'],
+                        'caption' => $bot->data['caption'],
+                        'sd' => $request['url'],
+                        'imgur' => Bot::get_string_between($imgur, 'https://i.imgur.com/', '.'),
+                        'tags' => $bot->data['tags'],
+                        'views' => 0,
+                        'outsource' => true,
+                        'created_at' => Carbon::now(),
+                        'uploaded_at' => Carbon::now(),
+                    ]);
+                    Video::notifySubscribers($video);
+                    Bot::updateAgefans($bot);
+                }
+
+            } elseif (strpos($request['url'], 'https://www.agefans.tv/age/player/') === false && strpos($request['url'], '1098_') !== false) {
+
+                $imgur = Bot::uploadUrlImage($bot->data['imgur']);
+                if ($imgur != "") {
+                    $video = Video::create([
+                        'user_id' => $bot->data['user_id'],
+                        'playlist_id' => $bot->data['playlist_id'],
+                        'title' => $bot->data['title'],
+                        'caption' => $bot->data['caption'],
+                        'sd' => 'https://www.agefans.tv/age/player/ckx1/?url='.urlencode($request['url']),
+                        'imgur' => Bot::get_string_between($imgur, 'https://i.imgur.com/', '.'),
+                        'tags' => $bot->data['tags'],
+                        'views' => 0,
+                        'outsource' => true,
+                        'created_at' => Carbon::now(),
+                        'uploaded_at' => Carbon::now(),
+                    ]);
+                    Video::notifySubscribers($video);
+                    Bot::updateAgefans($bot);
+                }
+            }
+        }
     }
 
     public static function yongjiu(String $url)

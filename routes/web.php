@@ -35,6 +35,7 @@ Route::get('/bilibiliPrePre', 'BotController@bilibiliPrePre');
 Route::get('/bilibiliPre', 'BotController@bilibiliPre');
 Route::get('/bilibiliPlaylist', 'BotController@bilibiliPlaylist');
 Route::get('/uploadVideos', 'BotController@uploadVideos');
+Route::get('/uploadAgefans', 'BotController@uploadAgefans');
 
 Route::get('/subscribes', 'VideoController@subscribeIndex')->name('video.subscribes');
 Route::post('/subscribe', 'VideoController@subscribe')->name('video.subscribe');
