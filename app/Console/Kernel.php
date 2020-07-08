@@ -27,6 +27,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('laughseejapan:update-videos')->dailyAt('16:30');
         $schedule->command('laughseejapan:upload-videos')->hourly()->unlessBetween('2:00', '9:00');
+        $schedule->command('laughseejapan:upload-agefans')->hourly()->unlessBetween('3:00', '8:00');
     }
 
     /**

@@ -61,6 +61,58 @@ class HomeController extends Controller
 
     public function contact()
     {
+        $bot = Bot::find(23);
+
+        $requests = Browsershot::url($bot->data['source'])
+            ->useCookies(['username' => 'admin'])
+            ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
+            ->triggeredRequests();
+
+        foreach ($requests as $request) {
+            if (strpos($request['url'], 'https://www.agefans.tv/age/player/') !== false && strpos($request['url'], 'https://gss3.baidu.com/') !== false) {
+
+                $imgur = Bot::uploadUrlImage($bot->data['imgur']);
+                if ($imgur != "") {
+                    $video = Video::create([
+                        'user_id' => $bot->data['user_id'],
+                        'playlist_id' => $bot->data['playlist_id'],
+                        'title' => $bot->data['title'],
+                        'caption' => $bot->data['caption'],
+                        'sd' => $request['url'],
+                        'imgur' => Bot::get_string_between($imgur, 'https://i.imgur.com/', '.'),
+                        'tags' => $bot->data['tags'],
+                        'views' => 0,
+                        'outsource' => true,
+                        'created_at' => Carbon::now(),
+                        'uploaded_at' => Carbon::now(),
+                    ]);
+                    Video::notifySubscribers($video);
+                    Bot::updateAgefans($bot);
+                }
+
+            } elseif (strpos($request['url'], 'https://www.agefans.tv/age/player/') === false && strpos($request['url'], '1098_') !== false) {
+
+                $imgur = Bot::uploadUrlImage($bot->data['imgur']);
+                if ($imgur != "") {
+                    $video = Video::create([
+                        'user_id' => $bot->data['user_id'],
+                        'playlist_id' => $bot->data['playlist_id'],
+                        'title' => $bot->data['title'],
+                        'caption' => $bot->data['caption'],
+                        'sd' => 'https://www.agefans.tv/age/player/ckx1/?url='.urlencode($request['url']),
+                        'imgur' => Bot::get_string_between($imgur, 'https://i.imgur.com/', '.'),
+                        'tags' => $bot->data['tags'],
+                        'views' => 0,
+                        'outsource' => true,
+                        'created_at' => Carbon::now(),
+                        'uploaded_at' => Carbon::now(),
+                    ]);
+                    Video::notifySubscribers($video);
+                    Bot::updateAgefans($bot);
+                }
+            }
+        }
+
         /* $bot = ['name' => '魔法水果籃 第二季', 'source' => 'https://www.agefans.tv/play/20200158?playid=2_1'];
         $url = explode('?', $bot['source'])[0];
         $query = explode('_', explode('?', $bot['source'])[1])[0];
@@ -91,13 +143,7 @@ class HomeController extends Controller
             ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
             ->triggeredRequests(); */
 
-
-        /*return $requests = Browsershot::url('https://www.agefans.tv/play/20190373?playid=2_1')
-            ->useCookies(['username' => 'admin'])
-            ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
-            ->triggeredRequests();
-
-        $episodes = 132;
+        /*$episodes = 132;
         for ($i = 1; $i <= 132; $i++) { 
             $url = 'http://agefans.tw/play/20170172?playid=1_'.$i;
             $requests = Browsershot::url($url)
@@ -157,7 +203,7 @@ class HomeController extends Controller
                     ->userAgent('Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1')
                     ->setDelay(10000)
                     ->bodyHtml();*/
-        return view('layouts.contact');
+        // return view('layouts.contact');
     }
 
     public function terms()

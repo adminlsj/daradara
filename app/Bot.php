@@ -722,6 +722,50 @@ class Bot extends Model
         }
     }
 
+    public static function updateAgefans(Bot $bot)
+    {
+        $inner = Bot::get_string_between($bot->data['title'], '【第', '話】');
+        $title = str_replace('【第'.$inner.'話】', '【第'.($inner + 1).'話】', $bot->data['title']);
+
+        $url = explode('?', $bot->data['source'])[0];
+        $query = explode('?', $bot->data['source'])[1];
+        $playlist = explode('_', $query)[0];
+        $episode = explode('_', $query)[1];
+        $source = $url.'?'.$playlist.'_'.($episode + 1);
+
+        $bot->data = [
+            'name' => $bot->data['name'],
+            'tags' => $bot->data['tags'],
+            'imgur' => '',
+            'title' => $title,
+            'source' => $source,
+            'caption' => $title,
+            'user_id' => $bot->data['user_id'],
+            'playlist_id' => $bot->data['playlist_id'],
+        ];
+        $bot->save();
+        return $bot;
+    }
+
+    public static function uploadUrlImage(String $url)
+    {
+        $image = Image::make($url);
+        $image = $image->fit(2880, 1620);
+        $image = $image->stream();
+        $pvars = array('image' => base64_encode($image));
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_URL, 'https://api.imgur.com/3/image.json');
+        curl_setopt($curl, CURLOPT_TIMEOUT, 30);
+        curl_setopt($curl, CURLOPT_HTTPHEADER, array('Authorization: Client-ID ' . '932b67e13e4f069'));
+        curl_setopt($curl, CURLOPT_POST, 1);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $pvars);
+        $out = curl_exec($curl);
+        curl_close ($curl);
+        $pms = json_decode($out, true);
+        return $pms['data']['link'];
+    }
+
     public static function get_string_between($string, $start, $end)
     {
         $string = ' ' . $string;
