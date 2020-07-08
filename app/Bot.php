@@ -607,8 +607,9 @@ class Bot extends Model
         foreach ($requests as $request) {
             if (strpos($request['url'], 'https://www.agefans.tv/age/player/') !== false && strpos($request['url'], 'https://gss3.baidu.com/') !== false) {
 
+                $link = 'https://gss3.baidu.com/'.Bot::get_string_between($request['url'], 'https://gss3.baidu.com/', '.mp4').'.mp4';
                 $imgur = Bot::uploadUrlImage($bot->data['imgur']);
-                if ($imgur != "") {
+                if ($imgur != "" && !Video::where('sd', 'ilike', '%'.$link.'%')->exists()) {
                     $video = Video::create([
                         'user_id' => $bot->data['user_id'],
                         'playlist_id' => $bot->data['playlist_id'],
@@ -628,8 +629,9 @@ class Bot extends Model
 
             } elseif (strpos($request['url'], 'https://www.agefans.tv/age/player/') === false && strpos($request['url'], '1098_') !== false) {
 
+                $link = '1098_'.Bot::get_string_between($request['url'], '1098_', '.f0.mp4').'.f0.mp4';
                 $imgur = Bot::uploadUrlImage($bot->data['imgur']);
-                if ($imgur != "") {
+                if ($imgur != "" && !Video::where('sd', 'ilike', '%'.$link.'%')->exists()) {
                     $video = Video::create([
                         'user_id' => $bot->data['user_id'],
                         'playlist_id' => $bot->data['playlist_id'],
