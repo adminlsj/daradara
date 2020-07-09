@@ -15,6 +15,8 @@ use Auth;
 use Image;
 use SteelyWing\Chinese\Chinese;
 use Redirect;
+use simplehtmldom\HtmlWeb;
+use Spatie\Browsershot\Browsershot;
 
 class BotController extends Controller
 {
@@ -82,13 +84,16 @@ class BotController extends Controller
 
     public function uploadAgefans(Request $request)
     {
-        if (Auth::check() && Auth::user()->email == 'laughseejapan@gmail.com') {
-            $bots = Bot::all();
-            foreach ($bots as $bot) {
-                if (str_ireplace('www.', '', parse_url($bot->data['source'], PHP_URL_HOST)) == 'agefans.tv') {
-                    Bot::agefans($bot);
-                }
-            }
+        $curl_connection = curl_init('https://www.agefans.tv/update');
+        curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+        curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+        $content = curl_exec($curl_connection);
+        curl_close($curl_connection);
+        $link = 'https://www.agefans.tv'.Bot::get_string_between(explode('</h4>', explode('<h4 class="anime_icon2_name">', $content)[1])[0], '<a href="', '">');
+
+        if ($bot = Bot::where('temp', $link)->first()) {
+            Bot::agefans($bot);
         }
     }
 }
