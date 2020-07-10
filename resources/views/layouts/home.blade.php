@@ -6,7 +6,7 @@
   @include('layouts.sidebarMenu', ['theme' => 'white'])
 </div>
 
-<div class="home-main-content">
+<div style="height: 100%;">
 	<span id="home-menu-btn" class="pull-left nav-item-icon no-select hidden-xs hidden-sm" style="text-decoration: none; line-height: 50px; margin-top: -1px; left: 23px; color: gray; cursor: pointer;">
 		<span class="material-icons">menu</span>
 	</span>
@@ -18,8 +18,8 @@
 	</div>
 
 	<div style="margin: 0;position: absolute;top: 46%;left: 50%;transform: translate(-50%, -50%); width: 100%;">
-		<div style="text-align: center">
-			<img style="height: 35px;" src="https://i.imgur.com/5Hi5Sx7.png">
+		<div class="home-logo" style="text-align: center">
+			<img src="https://i.imgur.com/5Hi5Sx7.png">
 		</div>
 		<form id="search-form" class="home-search-form" action="{{ route('video.search') }}" method="GET">
           <i style="position: absolute; top: 13px; left: 17px; color: dimgray" class="material-icons">search</i>

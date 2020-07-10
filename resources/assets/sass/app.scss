@@ -1816,10 +1816,8 @@ a > i {
   min-height: calc(100vh - 50px);
 }
 
-.home-main-content {
-  height: 100%; 
-  background: url('https://i.imgur.com/ankEp1y.jpg') no-repeat fixed center; 
-  background-size: cover;
+.home-logo img {
+  height: 35px;
 }
 
 .home-search-form {
@@ -3039,6 +3037,15 @@ a > i {
 }
 
 @media (max-width: 768px) {
+  .home-logo img {
+    height: 30px;
+  }
+
+  .home-search-form input {
+    height: 50px;
+    margin-bottom: 5px;
+  }
+
   .nav-image-wrapper img {
     margin-top: 11px;
   }
