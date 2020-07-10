@@ -1817,7 +1817,7 @@ a > i {
 }
 
 .home-main-content {
-  height: 100vh; 
+  height: 100%; 
   background: url('https://i.imgur.com/ankEp1y.jpg') no-repeat fixed center; 
   background-size: cover;
 }
@@ -2626,6 +2626,7 @@ a > i {
 
 @media (max-width: 991px) {
   #content-div {
+    padding-bottom: 50px
   }
 
   .intro-left-subtitle {
