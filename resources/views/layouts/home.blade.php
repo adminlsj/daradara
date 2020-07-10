@@ -37,16 +37,16 @@
 	          <div class="no-select"><a href="/search?query=Downtown">Downtown</a></div>
 	          <div class="no-select"><a href="/search?query=倫敦之心">倫敦之心</a></div>
 	          <div class="no-select"><a href="/search?query=Running+Man">Running Man</a></div>
-	          <div class="no-select"><a href="/search?query=明星">明星</a></div>
-	          <div class="no-select"><a href="/search?query=木村拓哉">木村拓哉</a></div>
-	          <div class="no-select"><a href="/search?query=石原聰美">石原聰美</a></div>
-	          <div class="no-select"><a href="/search?query=WEB動畫">WEB動畫</a></div>
-	          <div class="no-select"><a href="/search?query=裏番">裏番</a></div>
-	          <div class="no-select"><a href="/search?query=動畫廣告">動畫廣告</a></div>
-	          <div class="no-select"><a href="/search?query=迷因翻譯">迷因翻譯</a></div>
-	          <div class="no-select"><a href="/search?query=日本創意廣告">日本創意廣告</a></div>
-	          <div class="no-select"><a href="/search?query=MAD·AMV">MAD·AMV</a></div>
-	          <div class="no-select"><a href="/search?query=日本人氣YouTuber">日本人氣YouTuber</a></div>
+	          <div class="no-select hidden-xs"><a href="/search?query=明星">明星</a></div>
+	          <div class="no-select hidden-xs"><a href="/search?query=木村拓哉">木村拓哉</a></div>
+	          <div class="no-select hidden-xs"><a href="/search?query=石原聰美">石原聰美</a></div>
+	          <div class="no-select hidden-xs"><a href="/search?query=WEB動畫">WEB動畫</a></div>
+	          <div class="no-select hidden-xs"><a href="/search?query=裏番">裏番</a></div>
+	          <div class="no-select hidden-xs"><a href="/search?query=動畫廣告">動畫廣告</a></div>
+	          <div class="no-select hidden-xs"><a href="/search?query=迷因翻譯">迷因翻譯</a></div>
+	          <div class="no-select hidden-xs"><a href="/search?query=日本創意廣告">日本創意廣告</a></div>
+	          <div class="no-select hidden-xs"><a href="/search?query=MAD·AMV">MAD·AMV</a></div>
+	          <div class="no-select hidden-xs"><a href="/search?query=日本人氣YouTuber">日本人氣YouTuber</a></div>
           </div>
 	    </form>
     </div>
@@ -55,5 +55,7 @@
 <div class="hidden-xs" style="background-color: #333333; width: 100%; position: absolute; bottom: 0px; padding: 10px 10px; z-index: 100000;">
 	<span style="float: left;"><a href="/contact" style="padding: 0px 15px; color: dimgray">廣告</a><a href="/about" style="padding: 0px 15px; color: dimgray">娛見日本</a><a href="/about" style="padding: 0px 15px; color: dimgray">關於</a><a href="/contact" style="padding: 0px 15px; color: dimgray">聯絡</a></span><span style="float: right"><a href="/terms" style="padding: 0px 15px; color: dimgray">服務條款</a><a href="/policies" style="padding: 0px 15px; color: dimgray">社群規範</a><a href="/copyright" style="padding: 0px 15px; color: dimgray">版權申訴</a></span>
 </div>
+
+@include('layouts.nav-bottom')
 
 @endsection
