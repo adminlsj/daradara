@@ -34,7 +34,7 @@
           <i style="position: absolute; top: 13px; left: 17px; color: dimgray" class="material-icons">search</i>
           <input name="query" type="text" value="{{ request('query') }}" placeholder="探索全世界的影片" autofocus>
 
-          <div class="home-suggestion-tab" style="margin-top: 25px; padding: 0px 10px">
+          <div class="home-suggestion-tab" style="margin-top: 30px; padding: 0px 10px">
 	          <div class="no-select"><a href="/search?query=動漫">動漫</a></div>
 	          <div class="no-select"><a href="/search?query=原創動畫">原創動畫</a></div>
 	          <div class="no-select"><a href="/search?query=新番">新番</a></div>
