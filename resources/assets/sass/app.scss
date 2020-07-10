@@ -373,7 +373,7 @@ label.upload-image-btn input[type="file"] {
   display: none;
 }
 
-.subscribes-tab a, .subscribes-tab button {
+.subscribes-tab a, .subscribes-tab button, .home-suggestion-tab a {
   padding: 9px 14px;
   color: #666666 !important;
   background-color: #e8eaed;
@@ -382,6 +382,11 @@ label.upload-image-btn input[type="file"] {
   text-decoration: none;
   cursor: pointer;
   margin-right: 5px;
+}
+
+.home-suggestion-tab div {
+  margin-bottom: 26px;
+  display: inline-block;
 }
 
 #subscribes-watch-wrapper {
@@ -417,7 +422,11 @@ label.upload-image-btn input[type="file"] {
 .subscribes-tab a.active,
 .subscribes-tab button:hover,
 .subscribes-tab button:focus, 
-.subscribes-tab button.active {
+.subscribes-tab button.active,
+.home-suggestion-tab a:hover,
+.home-suggestion-tab a:focus,
+.home-suggestion-tab a.active
+{
   background-color: #595959;
   color: white !important;
   border-color: #595959; 
@@ -1812,16 +1821,17 @@ a > i {
   position: relative;
   width: 700px;
   margin-left: calc(50% - 350px);
+  text-align: center;
 }
 
 .home-search-form input {
   width: 100%; 
-  box-shadow: none; 
+  box-shadow: 0 2px 4px rgba(0,0,0,.3);
   border: 1px solid #e8eaed; 
-  background-color: #e8eaed; 
+  background-color: white; 
   font-size: 1.1em;
   border-radius: 7px; 
-  height: 50px; 
+  height: 52px; 
   padding-left: 53px; 
   color: #222222; 
   padding-bottom: 2px; 

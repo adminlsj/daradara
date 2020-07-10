@@ -652,7 +652,12 @@ class VideoController extends Controller
 
         if ($request->ajax()) {
             $request->replace(['page' => $request->page + 1]);
-            $videos = Video::with('user:id,name')->where('title', 'ilike', $exactTitleQuery)->orWhere('title', 'ilike', $exactOrderTitleQuery)->orWhere('tags', 'ilike', $exactTagQuery)->orderBy('uploaded_at', 'desc')->distinct()->paginate(30);
+
+            if ($query == '新番' || $query == 'anime1') {
+                $videos = Video::with('user:id,name')->where('user_id', 746)->orderBy('uploaded_at', 'desc')->distinct()->paginate(30);
+            } else {
+                $videos = Video::with('user:id,name')->where('title', 'ilike', $exactTitleQuery)->orWhere('title', 'ilike', $exactOrderTitleQuery)->orWhere('tags', 'ilike', $exactTagQuery)->orderBy('uploaded_at', 'desc')->distinct()->paginate(30);
+            }
 
             $html = '';
             foreach ($videos as $video) {
@@ -661,9 +666,14 @@ class VideoController extends Controller
             return $html;
         }
 
-        $watches = $query == '動漫' || $query == '日劇' || $query == '綜藝' ? [] : Watch::withVideos()->where('title', 'ilike', $exactOrderTitleQuery)->orderBy('created_at', 'desc')->get();
-        $user = $query == '動漫' || $query == '日劇' || $query == '綜藝' ? [] : User::where('name', 'like', '%'.strtolower($query).'%')->first();
-        $topResults = Video::with('user:id,name')->where('title', 'ilike', $exactTitleQuery)->orWhere('title', 'ilike', $exactOrderTitleQuery)->orWhere('tags', 'ilike', $exactTagQuery)->orderBy('uploaded_at', 'desc')->distinct()->limit(30)->get();
+        $watches = $query == '動漫' || $query == '日劇' || $query == '綜藝' || $query == '新番' || $query == 'anime1'? [] : Watch::withVideos()->where('title', 'ilike', $exactOrderTitleQuery)->orderBy('created_at', 'desc')->get();
+        $user = $query == '動漫' || $query == '日劇' || $query == '綜藝' || $query == '新番' || $query == 'anime1'? [] : User::where('name', 'like', '%'.strtolower($query).'%')->first();
+
+        if ($query == '新番' || $query == 'anime1') {
+            $topResults = Video::with('user:id,name')->where('user_id', 746)->orderBy('uploaded_at', 'desc')->distinct()->limit(30)->get();
+        } else {
+            $topResults = Video::with('user:id,name')->where('title', 'ilike', $exactTitleQuery)->orWhere('title', 'ilike', $exactOrderTitleQuery)->orWhere('tags', 'ilike', $exactTagQuery)->orderBy('uploaded_at', 'desc')->distinct()->limit(30)->get();
+        }
 
         return view('video.search', compact('watches', 'query', 'topResults', 'user'));
     }

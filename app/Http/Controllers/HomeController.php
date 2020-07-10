@@ -40,7 +40,7 @@ class HomeController extends Controller
         $meme = Video::tagsWithLimit(['迷因'])->get();
         $daily = Blog::tagsWithLimit(['生活'])->get();
         return view('video.home', compact('animeFirst', 'animeVid', 'animeNews', 'variety', 'artist', 'meme', 'daily'));*/
-        return view('video.home');
+        return view('layouts.home');
     }
 
     public function genre(Request $request)
