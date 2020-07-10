@@ -52,8 +52,10 @@
     </div>
 </div>
 
-<div class="hidden-xs" style="background-color: #333333; width: 100%; position: absolute; bottom: 0px; padding: 10px 10px; z-index: 100000;">
+<!-- <div class="hidden-xs" style="background-color: #333333; width: 100%; position: absolute; bottom: 0px; padding: 10px 10px; z-index: 100000;">
 	<span style="float: left;"><a href="/contact" style="padding: 0px 15px; color: dimgray">廣告</a><a href="/about" style="padding: 0px 15px; color: dimgray">娛見日本</a><a href="/about" style="padding: 0px 15px; color: dimgray">關於</a><a href="/contact" style="padding: 0px 15px; color: dimgray">聯絡</a></span><span style="float: right"><a href="/terms" style="padding: 0px 15px; color: dimgray">服務條款</a><a href="/policies" style="padding: 0px 15px; color: dimgray">社群規範</a><a href="/copyright" style="padding: 0px 15px; color: dimgray">版權申訴</a></span>
 </div>
+
+@include('layouts.nav-bottom')-->
 
 @endsection
