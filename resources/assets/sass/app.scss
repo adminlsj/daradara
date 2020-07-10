@@ -1816,6 +1816,12 @@ a > i {
   min-height: calc(100vh - 50px);
 }
 
+.home-main-content {
+  height: 100vh; 
+  background: url('https://i.imgur.com/ankEp1y.jpg') no-repeat fixed center; 
+  background-size: cover;
+}
+
 .home-search-form {
   margin-top: 25px;
   position: relative;
@@ -3033,6 +3039,10 @@ a > i {
 }
 
 @media (max-width: 768px) {
+  .home-main-content {
+    background-position: right;
+  }
+
   .nav-image-wrapper img {
     margin-top: 11px;
   }

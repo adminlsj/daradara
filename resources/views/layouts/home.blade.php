@@ -6,7 +6,7 @@
   @include('layouts.sidebarMenu', ['theme' => 'white'])
 </div>
 
-<div style="height: 100vh; background: url('https://i.imgur.com/ankEp1y.jpg') no-repeat fixed center; background-size: cover;">
+<div class="home-main-content">
 	<span id="home-menu-btn" class="pull-left nav-item-icon no-select hidden-xs hidden-sm" style="text-decoration: none; line-height: 50px; margin-top: -1px; left: 23px; color: gray; cursor: pointer;">
 		<span class="material-icons">menu</span>
 	</span>
