@@ -11,10 +11,12 @@
 		<span class="material-icons">menu</span>
 	</span>
 
+
 	<div style="padding: 0 20px">
 		@if (Auth::check())
 	        <a class="hidden-xs hidden-sm nav-item-icon" style="right: 26px; color: #666666;" href="{{ route('user.show', Auth::user()) }}"><i class="material-icons">account_circle</i></a>
-	        <a class="hidden-xs hidden-sm nav-item-icon" style="right: 75px; color: #666666;" href="{{ route('user.userEditUpload', Auth::user()) }}"><i class="material-icons">video_call</i></a>
+	        <a class="hidden-xs hidden-sm nav-item-icon" style="top: 9px; right: 76px; color: #666666;" href="{{ route('video.subscribes') }}"><i class="material-icons" style="font-size: 1.7em">subscriptions</i></a>
+	        <a class="hidden-xs hidden-sm nav-item-icon" style="right: 122px; color: #666666;" href="{{ route('user.userEditUpload', Auth::user()) }}"><i class="material-icons">video_call</i></a>
 	    @else
 	        <a class="no-select nav-item-text hidden-xs hidden-sm" style="color: #e8eaed; border: 1px solid #e8eaed; padding: 8px 14px; margin-top: 5px; margin-right: 7px; font-weight: bold; color: #666666" href="{{ route('login') }}">登入</a>
 	        <a class="no-select nav-item-text hidden-xs hidden-sm" style="color: white; background-color: #e8eaed; border-color: #e8eaed; padding: 7px 14px; margin-top: 5px; font-weight: bold; color: #666666;" href="{{ route('register') }}">註冊</a>

@@ -15,6 +15,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         'App\Console\Commands\UpdateVideos',
         'App\Console\Commands\UploadVideos',
+        'App\Console\Commands\UploadYongjiu',
         'App\Console\Commands\UploadAgefans'
     ];
 
@@ -28,6 +29,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('laughseejapan:update-videos')->dailyAt('16:30');
         $schedule->command('laughseejapan:upload-videos')->hourly()->unlessBetween('2:00', '9:00');
+        $schedule->command('laughseejapan:upload-yongjiu')->everyThirtyMinutes()->unlessBetween('3:00', '8:00');
         $schedule->command('laughseejapan:upload-agefans')->everyMinute()->unlessBetween('3:00', '8:00');
     }
 
