@@ -78,7 +78,6 @@ class BotController extends Controller
                         break;
                 }
             }
-            Bot::yongjiu('http://www.yongjiuzy5.com/?m=vod-type-id-14.html');
         }
     }
 

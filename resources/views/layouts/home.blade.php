@@ -40,7 +40,7 @@
 	          <div class="no-select"><a href="/search?query=動漫">動漫</a></div>
 	          <div class="no-select"><a href="/search?query=原創動畫">原創動畫</a></div>
 	          <div class="no-select"><a href="/search?query=新番">新番</a></div>
-	          <div class="no-select"><a href="/search?query=anime1">anime1</a></div>
+	          <div class="no-select"><a href="/user/746">anime1</a></div>
 	          <div class="no-select"><a href="/search?query=日劇">日劇</a></div>
 	          <div class="no-select"><a href="/search?query=綜藝">綜藝</a></div>
 	          <div class="no-select"><a href="/search?query=嵐Arashi">嵐Arashi</a></div>
