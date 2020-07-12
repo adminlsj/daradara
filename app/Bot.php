@@ -655,12 +655,24 @@ class Bot extends Model
     public static function yongjiu(String $url)
     {
         $chinese = new Chinese();
-        $client = new HtmlWeb();
-        $html = $client->load($url)->find('tr.DianDian')[0];
-        foreach ($html->find('a') as $element) {
-            $link = $element->href;
+        $curl_connection = curl_init($url);
+        curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+        curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+        $html = curl_exec($curl_connection);
+        curl_close($curl_connection);
+
+        $start = explode('<!--影片列表开始-->', $html);
+        $end = explode('<!--影片列表结束-->' , $start[1]);
+        $list = $end[0];
+
+        $dom = new \DOMDocument();
+        $dom->loadHTML('<meta http-equiv="content-type" content="text/html; charset=utf-8">'.$list);
+        $links = $dom->getElementsByTagName('a');
+        foreach ($links as $link) {
+            $link = $link->getAttribute('href');
             if ($link != '/?m=vod-type-id-14.html') {
-                $url = 'http://www.yongjiuzy.vip'.$link;
+                $url = 'http://www.yongjiuzy5.com'.$link;
                 $curl_connection = curl_init($url);
                 curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
                 curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
