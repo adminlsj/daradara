@@ -60,7 +60,7 @@
 						@endif
 
 						<div id="video-playlist-wrapper">
-							<div style="text-align: center;" class="ajax-loading"><img style="width: 40px; height: auto; padding-top: 14px; padding-bottom: 28px;" src="https://i.imgur.com/TcZjkZa.gif"/></div>
+							<div style="text-align: center;" class="ajax-loading"><img style="width: 40px; height: auto; padding-top: 14px; padding-bottom: 28px;" src="https://i.imgur.com/wgOXAy6.gif"/></div>
 						</div>
 					</div>
 				</div>

@@ -786,7 +786,7 @@ class Bot extends Model
         $bot->data = [
             'name' => $bot->data['name'],
             'tags' => $bot->data['tags'],
-            'imgur' => '',
+            'imgur' => 'https://i.imgur.com/JJPMK1A.jpg',
             'title' => $title,
             'source' => $source,
             'caption' => $caption,

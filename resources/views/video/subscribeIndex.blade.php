@@ -36,7 +36,7 @@
 		</div>
 		<div class="video-sidebar-wrapper padding-desktop-only">
 		    <div id="sidebar-results"><!-- results appear here --></div>
-		    <div style="text-align: center;" class="ajax-loading"><img style="width: 40px; height: auto; padding-top: 25px; padding-bottom: 70px;" src="https://i.imgur.com/TcZjkZa.gif"/></div>
+		    <div style="text-align: center;" class="ajax-loading"><img style="width: 40px; height: auto; padding-top: 25px; padding-bottom: 70px;" src="https://i.imgur.com/wgOXAy6.gif"/></div>
 		</div>
 	</div>
 </div>

@@ -40,17 +40,17 @@ class BotController extends Controller
 
     public function bilibiliPrePre(Request $request)
     {
-        $mid = 35581334;
+        $mid = 129426196;
         Bot::bilibiliPrePre($mid);
     }
 
     public function bilibiliPre(Request $request)
     {
-        $video_id = 9240;
-        $user_id = 363;
-        $playlist_id = 2;
-        $tags = '黑色美乃滋 小杉龍一 吉田敬 小泉孝太郎 笹野高史 木下優樹菜 千針本 近藤春菜 箕輪遙 NAOTO 人類觀察 Monitoring ニンゲン観察バラエティモニタリング 爆笑監視中 搞笑 整人 整蠱 綜藝';
-        Bot::bilibiliPre('豬豬搬運工', $video_id, $user_id, $playlist_id, $tags);
+        $video_id = 9361;
+        $user_id = 365;
+        $playlist_id = 148;
+        $tags = '嵐Arashi 大野智 櫻井翔 相葉雅紀 二宮和也 松本潤 VS嵐 嵐的大運動會 搞笑 運動 競賽 明星 綜藝';
+        Bot::bilibiliPre('VS嵐', $video_id, $user_id, $playlist_id, $tags);
     }
 
     public function bilibiliPlaylist(Request $request)
