@@ -61,28 +61,6 @@ class HomeController extends Controller
 
     public function contact()
     {
-        $url = 'http://www.yongjiuzy5.com/?m=vod-type-id-14.html';
-        $curl_connection = curl_init($url);
-        curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
-        curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
-        $content = curl_exec($curl_connection);
-        curl_close($curl_connection);
-
-        $start = explode('<!--影片列表开始-->', $content);
-        $end = explode('<!--影片列表结束-->' , $start[1]);
-        $list = $end[0];
-
-        $dom = new \DOMDocument();
-        $dom->loadHTML('<meta http-equiv="content-type" content="text/html; charset=utf-8">'.$list);
-        $links = $dom->getElementsByTagName('a');
-        $linkArray = [];
-        foreach ($links as $link) {
-            echo $link->getAttribute('href').'<br>';
-            echo $link->nodeValue.'<br>';
-        } 
-
-
         /* $bot = ['name' => '魔法水果籃 第二季', 'source' => 'https://www.agefans.tv/play/20200158?playid=2_1'];
         $url = explode('?', $bot['source'])[0];
         $query = explode('_', explode('?', $bot['source'])[1])[0];
