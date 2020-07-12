@@ -61,6 +61,53 @@ class HomeController extends Controller
 
     public function contact()
     {
+        $url = 'https://player.bilibili.com/player.html?aid=711145840&bvid=BV1hD4y1Q7RD&cid=208445020&ep_id=330429&page=1&danmaku=0&qn=0&type=mp4&otype=json&fnver=0&fnval=1&platform=html5&html5=1&high_quality=1&autoplay=0';
+        return $html = Browsershot::url($url)
+            ->useCookies(['SESSDATA' => '33c1bfb1%2C1606096573%2C4f954*51'], 'bilibili.com')
+            ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
+            ->bodyHtml();
+
+        return $html = Browsershot::url($url)
+            ->useCookies(['SESSDATA' => '33c1bfb1%2C1606096573%2C4f954*51'], 'bilibili.com')
+            ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
+            ->bodyHtml();
+
+        $api = "https://passport.bilibili.com/qrcode/getLoginUrl";
+        $ch = curl_init($api);
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+        curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:62.0) Gecko/20100101 Firefox/62.0');
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+        $content = curl_exec($ch);
+
+        if (curl_errno($ch)) {
+            echo 'curl打开网页报错:' . curl_error($ch);
+        }
+        curl_close($ch);
+        $key = json_decode($content,true)['data']['oauthKey'];
+
+        $api="https://passport.bilibili.com/qrcode/getLoginInfo";
+        $ch = curl_init($api);
+        $post="oauthKey=".$key."&gourl=https%3A%2F%2Fapp.bilibili.com%2F%3Fbsource%3Dlogin_download_bili";
+        $cookie="sid=bzt8sh2j; finger=964b42c0; buvid3=4E59E79D-A448-4AF7-A2CB-694EF51C103512199infoc";
+        curl_setopt($ch, CURLOPT_HEADER, 1);
+        curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:62.0) Gecko/20100101 Firefox/62.0');
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+        curl_setopt($ch,CURLOPT_POSTFIELDS,$post);
+        curl_setopt($ch,CURLOPT_COOKIE,$cookie);
+        $content = curl_exec($ch);
+        preg_match_all('/Set-Cookie:\s(.*);/U', $content, $results);
+        var_dump($results);
+
+        // return '<iframe style="width:100vh;height:100vh" src="https://player.bilibili.com/player.html?bvid=BV1hD4y1Q7RD&cid=208445020&ep_id=330429&page=1&danmaku=0&qn=0&type=mp4&otype=json&fnver=0&fnval=1&platform=html5&html5=1&high_quality=1&autoplay=0" style="border: 0; overflow: hidden;" allow="autoplay" allowfullscreen>';
+        
+        /* $url = 'https://player.bilibili.com/player.html?bvid=BV1hD4y1Q7RD&cid=208445020&ep_id=330429&page=1&danmaku=0&qn=0&type=mp4&otype=json&fnver=0&fnval=1&platform=html5&html5=1&high_quality=1&autoplay=0';
+        return $requests = Browsershot::url($url)
+            ->useCookies(['SESSDATA' => '33c1bfb1%2C1606096573%2C4f954*51'], 'bilibili.com')
+            ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
+            ->bodyHtml(); */
+
         /* $bot = ['name' => '魔法水果籃 第二季', 'source' => 'https://www.agefans.tv/play/20200158?playid=2_1'];
         $url = explode('?', $bot['source'])[0];
         $query = explode('_', explode('?', $bot['source'])[1])[0];
