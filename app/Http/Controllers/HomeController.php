@@ -61,7 +61,7 @@ class HomeController extends Controller
 
     public function contact()
     {
-        $url = 'https://player.bilibili.com/player.html?aid=711145840&bvid=BV1hD4y1Q7RD&cid=208445020&ep_id=330429&page=1&danmaku=0&qn=0&type=mp4&otype=json&fnver=0&fnval=1&platform=html5&html5=1&high_quality=1&autoplay=0';
+        /* $url = 'https://player.bilibili.com/player.html?aid=711145840&bvid=BV1hD4y1Q7RD&cid=208445020&ep_id=330429&page=1&danmaku=0&qn=0&type=mp4&otype=json&fnver=0&fnval=1&platform=html5&html5=1&high_quality=1&autoplay=0';
         return $html = Browsershot::url($url)
             ->useCookies(['SESSDATA' => '33c1bfb1%2C1606096573%2C4f954*51'], 'bilibili.com')
             ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
@@ -194,7 +194,7 @@ class HomeController extends Controller
             }
         }*/
         
-        // return view('layouts.contact');
+        return view('layouts.contact');
     }
 
     public function terms()
