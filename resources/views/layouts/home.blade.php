@@ -41,7 +41,6 @@
 	          <div class="no-select"><a href="/search?query=原創動畫">原創動畫</a></div>
 	          <div class="no-select"><a href="/search?query=新番">新番</a></div>
 	          <div class="no-select"><a href="/user/746">anime1</a></div>
-	          <div class="no-select"><a href="/hentai">裏番Hentai</a></div>
 	          <div class="no-select"><a href="/search?query=日劇">日劇</a></div>
 	          <div class="no-select"><a href="/search?query=綜藝">綜藝</a></div>
 	          <div class="no-select"><a href="/search?query=嵐Arashi">嵐Arashi</a></div>
@@ -53,7 +52,9 @@
 	          <div class="no-select hidden-xs"><a href="/search?query=木村拓哉">木村拓哉</a></div>
 	          <div class="no-select hidden-xs"><a href="/search?query=石原聰美">石原聰美</a></div>
 	          <div class="no-select hidden-xs"><a href="/search?query=WEB動畫">WEB動畫</a></div>
+	          <div class="no-select hidden-xs"><a href="/search?query=裏番">裏番</a></div>
 	          <div class="no-select hidden-xs"><a href="/search?query=動畫廣告">動畫廣告</a></div>
+	          <div class="no-select hidden-xs"><a href="/search?query=迷因翻譯">迷因翻譯</a></div>
 	          <div class="no-select hidden-xs"><a href="/search?query=日本創意廣告">日本創意廣告</a></div>
 	          <div class="no-select hidden-xs"><a href="/search?query=MAD·AMV">MAD·AMV</a></div>
 	          <div class="no-select hidden-xs"><a href="/search?query=日本人氣YouTuber">日本人氣YouTuber</a></div>

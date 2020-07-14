@@ -1,62 +1,28 @@
 @extends('layouts.app')
 
 @section('nav')
-	@include('layouts.nav-main-original', ['theme' => 'white'])
+	@include('layouts.nav-main-original-dark', ['theme' => 'white'])
 @endsection
 
 @section('content')
+
 <div class="hidden-sm hidden-xs sidebar-menu">
-    @include('video.sidebarMenu', ['theme' => 'white'])
+  @include('layouts.sidebarMenu', ['theme' => 'white'])
 </div>
 
-<div class="main-content">
-	<div style="background-color: #F5F5F5;">
-		<div class="row no-gutter load-more-container" style="padding-top: 19px;">
-		  <h5 class="user-show-title" style="font-size: 1em; color: #555555; font-weight: normal; line-height: 0px">Hentai 紳士的成人動漫聖地</h5>
-		  <h3 class="user-show-title" style="font-size: 2em; margin-top: 5px; margin-bottom: 10px">LaughSeeJapan 裏番</h3>
-		</div>
-
-		<div class="row no-gutter load-more-container">
-		  <a href="/user/6944/playlists" style="color: inherit; text-decoration: none">
-		    <h3 class="user-show-title">最新內容<i style="font-size: 0.85em; vertical-align: middle; margin-top: -3px; margin-left: 5px" class="material-icons">arrow_forward_ios</i></h3>
-		  </a>
-		  <div class="video-sidebar-wrapper">
-		    @foreach ($newest as $watch)
-		      <div class="{{ $loop->iteration > 4 ? 'hidden-xs' : ''}}">
-		        @include('video.singleLoadMoreSliderPlaylists', ['video' => $watch->videos->first()])
-		      </div>
-		    @endforeach
-		  </div>
-		</div>
-
-		<div class="row no-gutter load-more-container" style="margin-top: 5px;">
-		  <a href="/search?query=裏番" style="color: inherit; text-decoration: none">
-		    <h3 class="user-show-title">發燒影片<i style="font-size: 0.85em; vertical-align: middle; margin-top: -4px; margin-left: 5px" class="material-icons">arrow_forward_ios</i></h3>
-		  </a>
-		  <div class="video-sidebar-wrapper">
-		    @foreach ($trending as $video)
-		      <div class="{{ $loop->iteration > 4 ? 'hidden-xs' : ''}}">
-		        @include('video.new-singleLoadMoreVideos')
-		      </div>
-		    @endforeach
-		  </div>
-		</div>
-
-		<div class="row no-gutter load-more-container" style="margin-top: 5px;">
-		  <a href="/user/6944/playlists" style="color: inherit; text-decoration: none">
-		    <h3 class="user-show-title">精選推薦<i style="font-size: 0.85em; vertical-align: middle; margin-top: -4px; margin-left: 5px" class="material-icons">arrow_forward_ios</i></h3>
-		  </a>
-		  <div class="video-sidebar-wrapper">
-		    @foreach ($random as $watch)
-		      <div class="{{ $loop->iteration > 4 ? 'hidden-xs' : ''}}">
-		        @include('video.singleLoadMoreSliderPlaylists', ['video' => $watch->videos->first()])
-		      </div>
-		    @endforeach
-		  </div>
-		</div>
-
-		<br>
+<div class="paravi-padding-setup" style="padding-top: 13px; background-color: #303030">
+	<div class="row">
+		@foreach ($watches as $watch)
+			<div class="col-xs-4 col-sm-3 col-md-2 hover-opacity-all">
+				<a href="/playlist?list={{ $watch->id }}" style="text-decoration: none;">
+					<img class="lazy" style="border-radius: 3px; width: 100%; height: 100%;" src="{{ App\Image::$portrait }}" data-src="{{ $watch->cover }}" data-srcset="{{ $watch->cover }}" alt="{{ $watch->title }}">
+					<div style="height: 65px; padding: 3px 1px; color: #fff; font-size: 0.95em; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; line-height: 19px;">{{ $watch->title }}</div>
+				</a>
+			</div>
+		@endforeach
 	</div>
 </div>
+
+@include('layouts.nav-bottom')
 
 @endsection

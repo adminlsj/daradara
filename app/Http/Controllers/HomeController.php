@@ -45,10 +45,8 @@ class HomeController extends Controller
 
     public function hentai(Request $request)
     {
-        $newest = Watch::withVideos()->where('user_id', 6944)->orWhere('id', 810)->orderBy('created_at', 'desc')->limit(8)->select('id', 'title')->get();
-        $trending = Video::with('user:id,name')->where('tags', 'ilike', '%裏番%')->whereDate('uploaded_at', '>=', Carbon::now()->subWeek())->orderBy('views', 'desc')->limit(8)->select('id', 'user_id', 'imgur', 'title', 'sd')->get();
-        $random = Watch::withVideos()->where('user_id', 6944)->orWhere('id', 810)->inRandomOrder()->limit(8)->select('id', 'title')->get();
-        return view('layouts.hentai', compact('newest', 'trending', 'random'));
+        $watches = Watch::where('user_id', 6944)->orWhere('id', 810)->orderBy('updated_at', 'desc')->select('id', 'title', 'cover')->get();
+        return view('layouts.hentai', compact('watches'));
     }
 
     public function genre(Request $request)
@@ -69,6 +67,16 @@ class HomeController extends Controller
 
     public function contact()
     {
+        /* $url = 'https://kum.com/qdgrhv';
+        $requests = Browsershot::url($url)
+            ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
+            ->triggeredRequests();
+        foreach ($requests as $request) {
+            if (strpos($request['url'], '.mp4') !== false) {
+                return $request['url'];
+            }
+        }
+
         /* $url = 'https://www.bilibili.com/video/BV11J411c7Ly';
         return $html = Browsershot::url($url)
             ->setChromePath("/Applications/Google Chrome.app/Contents/MacOS/Google Chrome")
