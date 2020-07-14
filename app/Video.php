@@ -169,7 +169,6 @@ class Video extends Model
 
     public static function setPlayerConfig($video, $country_code, $is_mobile, &$outsource, &$sd)
     {
-        $country_code = 'HK';
         if ($video->foreign_sd && array_key_exists($country_code, $video->foreign_sd)) {
             $outsource = true;
             $sd = $video->foreign_sd[$country_code];

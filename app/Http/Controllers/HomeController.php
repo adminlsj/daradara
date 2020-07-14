@@ -43,6 +43,14 @@ class HomeController extends Controller
         return view('layouts.home');
     }
 
+    public function hentai(Request $request)
+    {
+        $newest = Watch::withVideos()->where('user_id', 6944)->orWhere('id', 810)->orderBy('created_at', 'desc')->limit(8)->select('id', 'title')->get();
+        $trending = Video::with('user:id,name')->where('tags', 'ilike', '%裏番%')->whereDate('uploaded_at', '>=', Carbon::now()->subWeek())->orderBy('views', 'desc')->limit(8)->select('id', 'user_id', 'imgur', 'title', 'sd')->get();
+        $random = Watch::withVideos()->where('user_id', 6944)->orWhere('id', 810)->inRandomOrder()->limit(8)->select('id', 'title')->get();
+        return view('layouts.hentai', compact('newest', 'trending', 'random'));
+    }
+
     public function genre(Request $request)
     {
         $genre = $request->genre;
@@ -61,7 +69,7 @@ class HomeController extends Controller
 
     public function contact()
     {
-        $url = 'https://www.bilibili.com/video/BV11J411c7Ly';
+        /* $url = 'https://www.bilibili.com/video/BV11J411c7Ly';
         return $html = Browsershot::url($url)
             ->setChromePath("/Applications/Google Chrome.app/Contents/MacOS/Google Chrome")
             ->useCookies(['SESSDATA' => '33c1bfb1%2C1606096573%2C4f954*51'])

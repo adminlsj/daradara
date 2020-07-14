@@ -12,6 +12,7 @@
 */
 
 Route::get('/', 'HomeController@index');
+Route::get('/hentai', 'HomeController@hentai')->name('home.hentai');
 
 Route::resource('blog', 'BlogController');
 
