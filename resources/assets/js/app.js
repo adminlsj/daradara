@@ -226,6 +226,16 @@ window.onscroll = function() {
     }
   }
   prevScrollpos = currentScrollPos;
+
+  if (window.pageYOffset != 0) {
+    $('#hentai-main-nav').css('background-color', 'black');
+    $('#hentai-main-nav input').css('background-color', '#202020');
+    $('#hentai-main-nav input').css('border-color', '#202020');
+  } else {
+    $('#hentai-main-nav').css('background-color', '#303030');
+    $('#hentai-main-nav input').css('background-color', '#404040');
+    $('#hentai-main-nav input').css('border-color', '#404040');
+  }
 }
 
 setTimeout(function(){
