@@ -483,9 +483,9 @@ class Bot extends Model
                 if (strpos($title, '千鳥電視台') !== false) {
                     $playlist_id = 240;
                     $tags = '千鳥 大悟 阿信 NOBU 高橋茂雄 田中卓志 狩野英孝 小島瑠璃子 中岡創一 千鳥電視台 テレビ千鳥 搞笑 綜藝';
+                    $pass = true;
                 } else {
-                    $playlist_id = null;
-                    $tags = '綜藝';
+                    $pass = false;
                 }
                 break;
 
