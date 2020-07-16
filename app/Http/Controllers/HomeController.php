@@ -45,9 +45,11 @@ class HomeController extends Controller
 
     public function hentai(Request $request)
     {
-        $watches = Watch::where('user_id', 6944)->orWhere('id', 810)->orderBy('updated_at', 'desc')->select('id', 'title', 'cover')->paginate(48);
+        if (Auth::check() && Auth::user()->email == 'laughseejapan@gmail.com') {
+            $watches = Watch::where('user_id', 6944)->orWhere('id', 810)->orWhere('id', 797)->orWhere('id', 619)->orderBy('updated_at', 'desc')->select('id', 'title', 'cover')->paginate(48);
 
-        return view('layouts.hentai', compact('watches'));
+            return view('layouts.hentai', compact('watches'));
+        }
     }
 
     public function genre(Request $request)
