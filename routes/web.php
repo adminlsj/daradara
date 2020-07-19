@@ -13,6 +13,10 @@
 
 Route::get('/', 'HomeController@index');
 Route::get('/hentai', 'HomeController@hentai')->name('home.hentai');
+Route::get('/database', 'DatabaseController@index')->name('database.index');
+Route::get('/database/{table}', 'DatabaseController@show')->name('database.show');
+Route::get('/database/{table}/{id}/edit', 'DatabaseController@edit')->name('database.edit');
+Route::post('/database/{table}/{id}/update', 'DatabaseController@update')->name('database.update');
 
 Route::resource('blog', 'BlogController');
 

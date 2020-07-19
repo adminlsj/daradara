@@ -1,6 +1,6 @@
-@if ($video->caption != 'SHOW' && $video->caption != 'HIDE')
+@if ($video->caption != 'SHOW')
 	<div class="hidden-xs col-sm-3 hover-opacity-all load-more-wrapper video-card" style="margin-bottom: 9px;">
-		<a style="color: inherit; text-decoration: none;" href="{{ route('video.watch') }}?v={{ $video->id }}">
+		<a style="color: inherit; text-decoration: none;" href="{{ route('video.watch') }}?v={{ $video->id }}" title="{{ $video->title }}">
 		    <div style="position: relative;">
 		        <img class="lazy" style="width: 100%; height: 100%;" src="{{ $video->imgur16by9() }}" data-src="{{ $video->imgurL() }}" data-srcset="{{ $video->imgurL() }}" alt="{{ $video->title }}">
 			    <div style="background-color: #f5f5f5; padding: 7px 10px; height: 73px">
