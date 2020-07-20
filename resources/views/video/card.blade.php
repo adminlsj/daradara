@@ -1,4 +1,4 @@
-@if ($video->caption != 'SHOW')
+@if (strpos($video->caption, '[SHOW]') === false)
 	<div class="hidden-xs col-sm-3 hover-opacity-all load-more-wrapper video-card" style="margin-bottom: 9px;">
 		<a style="color: inherit; text-decoration: none;" href="{{ route('video.watch') }}?v={{ $video->id }}" title="{{ $video->title }}">
 		    <div style="position: relative;">
@@ -26,7 +26,8 @@
 			<a href="{{ route('user.show', [$video->user]) }}" style="color: darkgray; font-size: 0.8em; margin-left: 5px;">{{ $video->user->name }}</a>
 		</div>
 	</div>
-@elseif ($video->caption == 'SHOW')
+	
+@elseif (strpos($video->caption, '[SHOW]') !== false)
 	<div class="hidden-xs col-sm-3 hover-opacity-all load-more-wrapper video-card" style="margin-bottom: 9px;">
 		<a style="color: inherit; text-decoration: none;" href="{{ route('video.playlist') }}?list={{ $video->watch->id }}">
 		    <div style="position: relative;">

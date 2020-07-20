@@ -58,20 +58,12 @@
 		          </div>
 
 		          <div class="form-group">
-		            <textarea style="border: 0.5px solid #e9e9e9; -webkit-appearance: none; box-shadow: inset 0px 0px 0px 0px red;" class="form-control" name="sd" id="sd" rows="13" placeholder="鏈結"></textarea>
+		            <textarea style="border: 0.5px solid #e9e9e9; -webkit-appearance: none; box-shadow: inset 0px 0px 0px 0px red;" class="form-control" name="images" id="images" rows="13" placeholder="圖片鏈結"></textarea>
 		          </div>
 
 		          <div style="margin-right:100px; position: relative;" class="form-group">
 		            <input type="text" class="form-control" name="link" id="link" placeholder="影片崁入鏈結">
 		            <div id="test-play-singleton-btn" style="width: 103px; position: absolute; top: 0px; right:-100px; background-color: #D5D5D5; color: #666666; border-color: #D5D5D5; cursor: pointer; height: 45px; line-height: 45px; text-align: center; border-top-right-radius: 3px; border-bottom-right-radius: 3px;">測試播放</div>
-		          </div>
-
-				  <div style="margin-right:100px; position: relative;" class="form-group">
-		            <input style="background-color: white" readonly="readonly" type="text" class="form-control" name="file-text" id="file-text" placeholder="上傳影片縮圖" required>
-		            <label class="upload-image-btn" style="border-top-right-radius: 3px; border-bottom-right-radius: 3px;">
-					    <input type="file" name="images[]" id="images[]" accept="image/*" required multiple>
-					    <span style="color: #666666; font-weight: 500;">選擇圖片</span>
-					</label>
 		          </div>
 
 		          <button id="singleNewCreateBtn" style="height: 45px; font-size: 1em; margin-bottom: 15px; width: 103px; background-color: red !important; border: none;" type="submit" class="btn btn-info">發佈</button>
