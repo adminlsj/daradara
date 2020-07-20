@@ -483,9 +483,9 @@ class HomeController extends Controller
             $user_id = request('user-id');
             $playlist_id = request('playlist-id');
             $title = request('title');
+            $link = request('link');
             $created_at = new Carbon(Carbon::createFromFormat('Y-m-d\TH:i:s', request('created-at'))->format('Y-m-d H:i:s'));
             $imageLinks = explode("\n", request('images'));
-            $link = 'https://www.agefans.tv/play/20190032?playid=3_1';
 
             for ($i = 1; $i <= $episodes; $i++) {
                 $imageLink = trim($imageLinks[$i-1]);

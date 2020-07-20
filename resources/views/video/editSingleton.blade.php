@@ -58,6 +58,10 @@
 		          </div>
 
 		          <div class="form-group">
+		            <input type="text" class="form-control" name="link" id="link" placeholder="影片鏈結" required>
+		          </div>
+
+		          <div class="form-group">
 		            <textarea style="border: 0.5px solid #e9e9e9; -webkit-appearance: none; box-shadow: inset 0px 0px 0px 0px red;" class="form-control" name="images" id="images" rows="13" placeholder="圖片鏈結"></textarea>
 		          </div>
 
