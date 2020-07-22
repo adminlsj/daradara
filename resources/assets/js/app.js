@@ -177,6 +177,32 @@ $(document).on("click", "#test-play-singleton-btn", function(e) {
     }
 });
 
+$('[id=database-search-btn]').click(function(e) {
+  var column = $('#column').find(":selected").text();
+  var expression = $('#expression').find(":selected").text();
+  var query = $('#dbquery').val();
+
+  var urlParams = new URLSearchParams(window.location.search);
+  urlParams.set('column', column);
+  urlParams.set('expression', expression);
+  urlParams.set('dbquery', query);
+  window.location.href = window.location.href.split('?')[0] + '?' + urlParams;
+});
+
+$('[class=database-column]').click(function(e) {
+  var sort = $(this).data('sort');
+
+  var urlParams = new URLSearchParams(window.location.search);
+  var order = 'desc';
+  if (urlParams.get('order') == 'desc') {
+    order = 'asc';
+  }
+
+  urlParams.set('sort', sort);
+  urlParams.set('order', order);
+  window.location.href = window.location.href.split('?')[0] + '?' + urlParams;
+});
+
 $('[id=toggleSearchBar]').click(function(e) {
     var x = document.getElementById("searchBar");
     if (x.style.display === "none") {

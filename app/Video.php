@@ -7,6 +7,7 @@ use App\User;
 use App\Watch;
 use App\Subscribe;
 use App\Comment;
+use Spatie\Browsershot\Browsershot;
 
 class Video extends Model
 {
@@ -370,6 +371,33 @@ class Video extends Model
             $video->sd = Video::getSourceQZ($video->sd);
             $video->save();
         }
+    }
+
+    public static function setAgefansLink($video){
+        $requests = Browsershot::url($video->sd)
+        ->useCookies(['username' => 'admin'])
+        ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
+        ->waitUntilNetworkIdle()
+        ->triggeredRequests();
+
+        foreach ($requests as $request) {
+            if (strpos($request['url'], 'https://www.agefans.tv/age/player/') !== false && strpos($request['url'], 'https://gss3.baidu.com/') !== false) {
+                $video->sd = $request['url'];
+
+            } elseif (strpos($request['url'], 'https://www.agefans.tv/age/player/') === false && strpos($request['url'], '1098_') !== false) {
+                $video->sd = 'https://www.agefans.tv/age/player/ckx1/?url='.urlencode($request['url']);
+
+            } elseif (strpos($request['url'], 'https://www.agefans.tv/age/player/') !== false && strpos($request['url'], '1006_') !== false) {
+                $url = '1006_'.Bot::get_string_between($request['url'], '1006_', '.f');
+                $video->sd = 'https://www.agefans.tv/age/player/ckx1/?url='.urlencode(Video::getSourceQZ($url));
+
+            } elseif (strpos($request['url'], 'https://www.agefans.tv/age/player/') !== false && strpos($request['url'], '1097_') !== false) {
+                $url = '1097_'.Bot::get_string_between($request['url'], '1097_', '.f');
+                $video->sd = 'https://www.agefans.tv/age/player/ckx1/?url='.urlencode(Video::getSourceQZ($url));
+            }
+        }
+
+        $video->save();
     }
 
     static function get_string_between($string, $start, $end){

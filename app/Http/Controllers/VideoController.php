@@ -74,6 +74,9 @@ class VideoController extends Controller
         if (is_numeric($vid) && $video = Video::find($request->v)) {
 
             // Video::updateQQRawLink($video);
+            if (strpos($video->sd, 'https://www.agefans.tv/play/') !== false) {
+                Video::setAgefansLink($video);
+            }
 
             $outsource = $video->outsource;
             $sd = $video->sd()[0];

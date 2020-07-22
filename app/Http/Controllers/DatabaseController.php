@@ -49,11 +49,27 @@ class DatabaseController extends Controller
             $model = 'App\\'.studly_case(strtolower(str_singular($table)));
         }
 
-        if ($request->exists('sort') && $request->exists('order')) {
-            $results = (new $model)::orderBy($request->sort, $request->order)->paginate(20);
-        } else {
-            $results = (new $model)::orderBy('id', 'desc')->paginate(20);
+        $results = (new $model)::query();
+
+        if ($request->exists('column') && $request->exists('expression') && $request->exists('dbquery')) {
+            switch ($request->expression) {
+                case 'contains':
+                    $results = $results->where($request->column, 'ilike', '%'.$request->dbquery.'%');
+                    break;
+
+                case 'is exactly':
+                    $results = $results->where($request->column, '=', $request->dbquery);
+                    break;
+            }
         }
+
+        if ($request->exists('sort') && $request->exists('order')) {
+            $results = $results->orderBy($request->sort, $request->order);
+        } else {
+            $results = $results->orderBy('id', 'desc');
+        }
+
+        $results = $results->paginate(20);
 
         $columns = Schema::getColumnListing($table);
 

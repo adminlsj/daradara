@@ -28,6 +28,7 @@ use Redirect;
 use simplehtmldom\HtmlWeb;
 use Spatie\Browsershot\Browsershot;
 use Illuminate\Support\Facades\Schema;
+use Config;
 
 class HomeController extends Controller
 {
@@ -492,25 +493,6 @@ class HomeController extends Controller
                 $imgur = Bot::uploadUrlImage($imageLink);
                 $zero = $i < 10 ? '0' : '';
                 if ($imgur != "") {
-
-                    $requests = Browsershot::url($link)
-                    ->useCookies(['username' => 'admin'])
-                    ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
-                    ->triggeredRequests();
-
-                    foreach ($requests as $request) {
-                        if (strpos($request['url'], 'https://www.agefans.tv/age/player/') !== false && strpos($request['url'], 'https://gss3.baidu.com/') !== false) {
-                            $sd = $request['url'];
- 
-                        } elseif (strpos($request['url'], 'https://www.agefans.tv/age/player/') === false && strpos($request['url'], '1098_') !== false) {
-                            $sd = 'https://www.agefans.tv/age/player/ckx1/?url='.urlencode($request['url']);
-
-                        } elseif (strpos($request['url'], 'https://www.agefans.tv/age/player/') !== false && (strpos($request['url'], '1006_') !== false || strpos($request['url'], '1097_') !== false)) {
-                            $url = '1006_'.Bot::get_string_between($request['url'], '1006_', '.f');
-                            $sd = 'https://www.agefans.tv/age/player/ckx1/?url='.urlencode(Video::getSourceQZ($url));
-                        }
-                    }
-
                     $video = Video::create([
                         'id' => $id,
                         'user_id' => $user_id,
@@ -520,7 +502,7 @@ class HomeController extends Controller
                         'tags' => request('tags'),
                         'views' => 0,
                         'imgur' => $this->get_string_between($imgur, 'https://i.imgur.com/', '.'),
-                        'sd' => $sd,
+                        'sd' => $link,
                         'outsource' => true,
                         'created_at' => $created_at,
                         'uploaded_at' => $created_at,

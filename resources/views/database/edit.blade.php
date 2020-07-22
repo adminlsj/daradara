@@ -1,9 +1,5 @@
 @extends('layouts.app')
 
-@section('nav')
-	@include('layouts.nav-main-original', ['theme' => 'white'])
-@endsection
-
 @section('content')
 
 <div class="hidden-sm hidden-xs sidebar-menu">
