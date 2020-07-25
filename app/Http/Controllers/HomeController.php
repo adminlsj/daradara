@@ -48,7 +48,7 @@ class HomeController extends Controller
     public function hentai(Request $request)
     {
         if (Auth::check() && Auth::user()->email == 'laughseejapan@gmail.com') {
-            $videos = Video::where('cover', '!=', '')->orwhere('cover', '!=', null)->select('id', 'title', 'cover')->paginate(48);
+            $videos = Video::where('cover', '!=', '')->orwhere('cover', '!=', null)->select('id', 'title', 'cover')->orderBy('created_at', 'desc')->paginate(48);
 
             return view('layouts.hentai', compact('videos'));
         }

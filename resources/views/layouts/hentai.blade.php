@@ -11,7 +11,7 @@
 	<div class="row hentai-row-wrapper" style="margin-top: 20px;">
 		@foreach ($videos as $video)
 			<div class="col-xs-4 col-sm-3 col-md-2">
-				<a href="/watch?v={{ $video->id }}" style="text-decoration: none;" class="hover-opacity-all">
+				<a href="/watch?v={{ $video->id }}" style="text-decoration: none;" class="hover-opacity-all" title="{{ $video->title }}">
 					<img class="lazy" style="border-radius: 3px; width: 100%; height: 100%;" src="{{ App\Image::$portrait }}" data-src="{{ $video->cover }}" data-srcset="{{ $video->cover }}" alt="{{ $video->title }}">
 					<div style="height: 65px; padding: 4px 1px; color: #fff; font-size: 0.95em; line-height: 19px;"><span style="overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">{{ $video->title }}</span></div>
 				</a>
