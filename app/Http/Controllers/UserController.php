@@ -36,6 +36,10 @@ class UserController extends Controller
      */
     public function show(User $user, Request $request)
     {
+        if ($user->id == 6944) {
+            return redirect()->action('HomeController@hentai');
+        }
+
         $watches = $user->watches();
         $subscribers = 5000;
         /*if ($watches->first()) {

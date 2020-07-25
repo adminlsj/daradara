@@ -47,11 +47,28 @@ class HomeController extends Controller
 
     public function hentai(Request $request)
     {
-        if (Auth::check() && Auth::user()->email == 'laughseejapan@gmail.com') {
-            $videos = Video::where('cover', '!=', '')->orwhere('cover', '!=', null)->select('id', 'title', 'cover')->orderBy('created_at', 'desc')->paginate(48);
+        $tags = [];
+        $videos = Video::where('cover', '!=', null);
 
-            return view('layouts.hentai', compact('videos'));
+        if ($tags = $request->tags) {
+            if ($request->broad) {
+                $videos = $videos->where(function($query) use ($tags) {
+                    foreach ($tags as $tag) {
+                        $query->orWhere('tags', 'ilike', '%'.$tag.'%');
+                    }
+                });
+            } else {
+                $videos = $videos->where(function($query) use ($tags) {
+                    foreach ($tags as $tag) {
+                        $query->where('tags', 'ilike', '%'.$tag.'%');
+                    }
+                });
+            }
         }
+
+        $videos = $videos->select('id', 'title', 'cover')->orderBy('created_at', 'desc')->paginate(48);
+
+        return view('layouts.hentai', compact('tags', 'videos'));
     }
 
     public function genre(Request $request)

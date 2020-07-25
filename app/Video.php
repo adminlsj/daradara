@@ -19,6 +19,10 @@ class Video extends Model
         'id', 'user_id', 'playlist_id', 'title', 'caption', 'tags', 'sd', 'imgur', 'views', 'outsource', 'foreign_sd', 'created_at', 'uploaded_at',
     ];
 
+    public static $hentai = [
+        '3D', '高潮', '肛交', 'BDSM', '巨乳', '口交', '綑綁', '乳交', '角色扮演', '內射', '黑皮膚', '顏射', '奇幻', '腳交', '雙性', '群交', '眼鏡娘', '手交', '後宮', '驚悚', '爆精', '乳汁', '女僕', '自慰', '熟女', '精神控制', '怪獸', '貓耳', 'NTR', '護士', '劇情', '懷孕', '公眾場合', '學生妹', '泳裝', '老師', '觸手', '玩具', '傲嬌', '醜男', '無碼', '純愛', '處女', '百合', '耽美'
+    ];
+
     public static $tags = [
         '正版動漫', '同人動畫', '動漫講評', '明星', '日本人氣YouTuber', '日本創意廣告', '日劇講評'
     ];

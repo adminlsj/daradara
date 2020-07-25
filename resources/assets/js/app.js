@@ -21,6 +21,14 @@ const app = new Vue({
     el: '#app'
 });
 
+$('#broad').change(function(){
+  if (this.checked) {
+    $('#hentai-tags-text').text('搜索包含任何一個以下選擇的標籤的影片：');
+  } else {
+    $('#hentai-tags-text').text('搜索包含所有以下選擇的標籤的影片：');
+  }
+});
+
 $(".upload-image-btn").on("change", function() {
   var fileName = $('#image').val().split("\\").pop();
   $('#file-text').val(fileName);

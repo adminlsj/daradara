@@ -638,10 +638,14 @@ class VideoController extends Controller
     public function search(Request $request)
     {
         $chinese = new Chinese();
-        $query = str_replace(' ', '', $chinese->to(Chinese::ZH_HANT, request('query')));
+        $query = str_replace(' ', '', request('query'));
 
         if ($query == '') {
             return redirect('/');
+        }
+
+        if (in_array($query, ['肉番', '裏番', '里番', 'hentai', 'H漫', 'H動漫', 'H動畫', '十八禁', '成人動畫', '成人動漫'])) {
+           return redirect()->action('HomeController@hentai');
         }
 
         $queryArray = [];
@@ -651,8 +655,10 @@ class VideoController extends Controller
             unset($queryArray[$key]);
         }
 
+        $original = '%'.implode('%', $queryArray).'%';
+
         // exactTitleQuery = '%'.trim($chinese->to(Chinese::ZH_HANT, request('query'))).'%';
-        $exactOrderTitleQuery = '%'.implode('%', $queryArray).'%';
+        $exactOrderTitleQuery = $chinese->to(Chinese::ZH_HANT, '%'.implode('%', $queryArray).'%');
         $exactTagQuery = '%'.$query.'%';
 
         if ($request->ajax()) {
@@ -663,7 +669,7 @@ class VideoController extends Controller
             } else {
                 // $videos = Video::with('user:id,name')->where('title', 'ilike', $exactTitleQuery)->orWhere('title', 'ilike', $exactOrderTitleQuery)->orWhere('tags', 'ilike', $exactTagQuery)->orderBy('uploaded_at', 'desc')->distinct()->paginate(30);
 
-                $videos = Video::with('user:id,name')->where('title', 'ilike', $exactOrderTitleQuery)->orWhere('tags', 'ilike', $exactTagQuery)->orderBy('uploaded_at', 'desc')->distinct()->paginate(30);
+                $videos = Video::with('user:id,name')->where('title', 'ilike', $exactOrderTitleQuery)->orWhere('tags', 'ilike', $exactTagQuery)->orWhere('title', 'ilike', $original)->orWhere('tags', 'ilike', $original)->orderBy('uploaded_at', 'desc')->distinct()->paginate(30);
             }
 
             $html = '';
@@ -681,7 +687,7 @@ class VideoController extends Controller
         } else {
             // $topResults = Video::with('user:id,name')->where('title', 'ilike', $exactTitleQuery)->orWhere('title', 'ilike', $exactOrderTitleQuery)->orWhere('tags', 'ilike', $exactTagQuery)->orderBy('uploaded_at', 'desc')->distinct()->limit(30)->get();
 
-            $topResults = Video::with('user:id,name')->where('title', 'ilike', $exactOrderTitleQuery)->orWhere('tags', 'ilike', $exactTagQuery)->orderBy('uploaded_at', 'desc')->distinct()->limit(30)->get();
+            $topResults = Video::with('user:id,name')->where('title', 'ilike', $exactOrderTitleQuery)->orWhere('tags', 'ilike', $exactTagQuery)->orWhere('title', 'ilike', $original)->orWhere('tags', 'ilike', $original)->orderBy('uploaded_at', 'desc')->distinct()->limit(30)->get();
         }
 
         return view('video.search', compact('watches', 'query', 'topResults', 'user'));
