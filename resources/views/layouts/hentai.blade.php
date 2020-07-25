@@ -8,7 +8,7 @@
 
 <div class="paravi-padding-setup" style="padding-top: 65px; background-color: #303030">
 	<div style="text-align: center; {{ $videos->count() > 48 ? 'margin-bottom: -15px' : '' }}">{!! $videos->render() !!}</div>
-	<div class="row hentai-row-wrapper" style="margin-top: 20px;">
+	<div class="row hentai-row-wrapper" style="margin-top: 7px;">
 		@foreach ($videos as $video)
 			<div class="col-xs-4 col-sm-3 col-md-2">
 				<a href="/watch?v={{ $video->id }}" style="text-decoration: none;" class="hover-opacity-all" title="{{ $video->title }}">
