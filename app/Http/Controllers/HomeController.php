@@ -279,6 +279,37 @@ class HomeController extends Controller
         return Response::view('layouts.sitemap', compact('videos', 'watches', 'time'))->header('Content-Type', 'application/xml');
     }
 
+    public function checkKum(Request $request)
+    {
+        if (Auth::check() && Auth::user()->email == 'laughseejapan@gmail.com') {
+
+            $videos = Video::where('sd', 'ilike', '%https://cdn-videos.kum.com%')->get();
+            
+            echo "Video Check STARTED<br>";
+
+            foreach ($videos as $video) {
+                ini_set('memory_limit', '-1');
+                ini_set('max_execution_time', 0); 
+                $ch = curl_init($video->sd);
+                curl_setopt($ch, CURLOPT_HEADER, 1);
+                curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:62.0) Gecko/20100101 Firefox/62.0');
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+                $response = curl_exec($ch);
+                $header_size = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
+                $header = substr($response, 0, $header_size);
+                $http_response_code = substr($header, 9, 3);
+                if (!($http_response_code == 200)) {
+                  echo "<span style='color:red; font-weight:600;'>/watch?v=".$video->id."【".$video->title."】【".$video->created_at."】</span><br>";
+                }
+            }
+
+            echo "Video Check ENDED<br>";
+
+        }
+    }
+
+
     public function check(Request $request)
     {
         if (Auth::check() && Auth::user()->email == 'laughseejapan@gmail.com') {

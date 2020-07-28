@@ -18,7 +18,7 @@
 				        @break
 
 				    @case($column == 'title' || $column == 'cover' || $column == 'tags' || $column == 'imgur' || $column == 'sd' || $column == 'name' || $column == 'email' || $column == 'password' || $column == 'provider' || $column == 'provider_id' || $column == 'remember_token' || $column == 'alert' || $column == 'temp')
-				        <input type="text" class="form-control" name="{{ $column }}" id="{{ $column }}" placeholder="{{ $column }}" value="{{ $row->{$column} }}" {{ $column == 'foreign_sd' || $column == 'temp' ? '' : 'required' }}>
+				        <input type="text" class="form-control" name="{{ $column }}" id="{{ $column }}" placeholder="{{ $column }}" value="{{ $row->{$column} }}" {{ $column == 'foreign_sd' || $column == 'temp' || $column == 'cover' ? '' : 'required' }}>
 				        @break
 
 				    @case($column == 'description' || $column == 'caption')
