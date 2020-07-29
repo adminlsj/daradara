@@ -1,16 +1,18 @@
 <div style="background-color: #F9F9F9; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1); margin-bottom: 15px;">
   @include('video.player')
 
-  <div class="hidden-md hidden-lg" style="background-color: white;">
-    <ins class="adsbygoogle"
-         style="display:block"
-         data-ad-format="fluid"
-         data-ad-layout-key="-ie+f-17-3w+bl"
-         data-ad-client="ca-pub-4485968980278243"
-         data-ad-slot="3332191764"></ins>
-  </div>
+  @if (strpos($video->tags, '裏番') === false)
+    <div class="hidden-md hidden-lg" style="background-color: white;">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-format="fluid"
+           data-ad-layout-key="-ie+f-17-3w+bl"
+           data-ad-client="ca-pub-4485968980278243"
+           data-ad-slot="3332191764"></ins>
+    </div>
+  @endif
 
-  <div style="padding: 0px 25px 25px 25px;">
+  <div style="padding: 0px 25px 25px 25px; background-color: white; z-index: 1000000000 !important">
     <div class="video-parts-wrapper" style="padding-top: 25px; margin-bottom: -4px; {{ count($video->sd()) == 1 ? 'display:none;' : '' }}">
       @foreach ($video->sd() as $url)
         <span class="{{ $loop->iteration == 1 ? 'active' : '' }}" onclick="changeSrc(this)" data-url="{{ $url }}"><i style="vertical-align:middle; font-size: 1.4em; margin-top: -3px; margin-right: 2px; margin-left: -3px; {{ $loop->iteration == 1 ? '' : 'display:none;' }}" class="material-icons">play_arrow</i>P{{ $loop->iteration }}</span>

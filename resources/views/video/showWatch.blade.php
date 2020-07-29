@@ -25,7 +25,17 @@
 
 					<div style="padding-bottom: 7px;">
 						@if (strpos($video->tags, '裏番') !== false)
-							<div class="hidden-xs hidden-sm" id='b9c-b26930' style="margin: 15px 15px 10px 15px;"><script>var b9c=typeof(b9c)!=="undefined"?b9c:{choose:function(c){c.sort(function(e,f){return f.Rank-e.Rank});var a=c.filter(function(e){return !b9c.isChosen(e)});if(a.length>0){var d=a[0];this.chosen.push(d.Placement);return d}else{var b=c[0];this.chosen=[b.Placement];return b}},chosen:[],isChosen:function(a){return this.chosen.indexOf(a.Placement)>=0}};(function(){var a=function(){var f=null;try{if(window.parent.frameElement!=null&&window.parent.document.referrer!=""){f=window.parent.document.referrer}else{f=window.parent.document.location.href}}catch(g){f=document.referrer}return f};var c=function(e){b9c.b26930={init:function(){var l=encodeURIComponent(window.document.referrer);var k=encodeURIComponent(Math.floor(Math.random()*100000+1));var o=encodeURIComponent(new Date().getTimezoneOffset());var f=document.location.ancestorOrigins;var i=(top!==self)?(f!==undefined&&f.length>1?f[f.length-1]:a()):document.location.href;var h="https://impactserving.com/banner.engine?id=75b4ac7f-9a66-41df-8b31-822964ff008b&z=26930&cid=b9c&rand="+k+"&ver=async&time="+o+"&referrerurl="+l+"&abr=false&curl="+encodeURIComponent(i);var m=document.createElement("script");m.type="text/javascript";m.async=true;m.src=h;m.onload=m.onreadystatechange=function(p){if(!this.readyState||this.readyState=="loaded"||this.readyState=="complete"){m.onload=m.onreadystatechange=null;if(typeof(b9c.b26930.Media)!=="undefined"){g()}else{n();g()}}};var j=document.getElementsByTagName("script")[0];j.parentNode.insertBefore(m,j);function n(){if(b9c.b26930.Medias!=="undefined"){b9c.b26930.Media=b9c.choose(b9c.b26930.Medias)}}function g(r){var p=e("#b9c-b26930");var q;if(b9c.b26930.Media.BannerDiv){q=e("<div />",{style:"display: block; margin: 0 auto; padding: 0; border: none; height: "+b9c.b26930.Media.Height+"px; width: "+b9c.b26930.Media.Width+"px;"});e.ajax({dataType:"html",url:"https://impactserving.com"+b9c.b26930.Media.Url+"&cu=",cache:false,success:function(s){q.html(s)}})}else{q=e("<iframe />",{scrolling:"no",style:"z-index: 5000001; margin: 0px; padding: 0px; border: none; width: "+b9c.b26930.Media.Width+"px; height: "+b9c.b26930.Media.Height+"px;",src:"https://impactserving.com"+b9c.b26930.Media.Url+"&cu="})}q.appendTo(p)}}};b9c.b26930.init()};if(typeof jQuery==="undefined"){var b=document.createElement("script");b.type="text/javascript";b.src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js";b.onload=b.onreadystatechange=function(){c(window.jQuery)};var d=document.getElementsByTagName("script")[0];d.parentNode.insertBefore(b,d)}else{c(window.jQuery)}})();</script></div>
+							<div class="hidden-xs hidden-sm" style="margin: 15px 15px 10px 15px;">
+								<script type="application/javascript">
+								    var ad_idzone = "3944568",
+								    ad_width = "300",
+								    ad_height = "250"
+								</script>
+								<script type="application/javascript" src="https://a.realsrv.com/ads.js"></script>
+								<noscript>
+								    <iframe src="https://syndication.realsrv.com/ads-iframe-display.php?idzone=3944568&output=noscript&type=300x250" width="300" height="250" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
+								</noscript>
+							</div>
 						@else
 							<div class="hidden-xs hidden-sm" style="margin: 15px 15px 10px 15px;">
 								<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
