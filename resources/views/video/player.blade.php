@@ -6,7 +6,7 @@
 @else
   @if (strpos($video->sd, 'https://cdn-videos.kum.com') !== false)
     <script src="https://cdn.fluidplayer.com/v3/current/fluidplayer.min.js"></script>
-    <div style="background-color: white; margin-bottom: -20px; padding-bottom: 15px">
+    <div style="margin-bottom: -5px">
       <video id="video-id" controls>
         <source src="{!! $sd !!}" type="video/mp4">
       </video>
