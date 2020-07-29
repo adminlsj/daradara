@@ -1,7 +1,7 @@
 <div style="background-color: #F9F9F9; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1); margin-bottom: 15px;">
   @include('video.player')
 
-  @if (strpos($video->tags, '裏番') === false)
+  @if (strpos($video->sd, 'https://cdn-videos.kum.com') === false)
     <div class="hidden-md hidden-lg" style="background-color: white;">
       <ins class="adsbygoogle"
            style="display:block"

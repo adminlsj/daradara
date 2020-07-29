@@ -22,7 +22,7 @@
 </div>
 
 <div style="background-color: #212121;">
-	<div style="color: gray; margin: 0px 10px; padding: 20px 20% 10px 20%; font-size: 0.95em; line-height: 22px; background: #212121 url('https://i.imgur.com/W65AiZb.png') bottom left/120px auto no-repeat">
+	<div class="hentai-footer">
 		<p>LaughSeeJapan hentai haven 帶給你最新最全的無碼高清中文字幕Hentai成人動漫。我們提供最優質的Hentai色情動漫裏番，並以最高畫質1080p呈現的Blu-ray rip。我們的18禁H漫網站適用於手機設備，並提供全網最優質的Hentai動畫。最新最全的Hentai裏番資料庫，LaughSeeJapan hentai 讓你一個按鈕觀看所有Hentai成人動畫，包括最新的2020年Hentai成人動漫。在這裏，你可以找到最優質的中文字幕H動畫 24小時！免費享受hentai動漫，成人動畫，H動漫，並且更有中文字幕，不必再聽日語猜故事！這個網站是繼avbebe之後，亞洲最優質的色情工口Hentai成人動漫，並且有許多Hentai分類，包括顏射、乳交、口交、熟女、學生妹、中出、百合、肛交，以及更多！</p>
 
 		<p>Hentai是什麼？Hentai（変態 或 へんたい），Hentai 或 成人動漫的詞源來自日本，並指色情或成人動漫和動畫，特別是來自日本的18禁H動漫和成人動畫。</p>
@@ -64,8 +64,8 @@
 	</div>
 </form>
 
-<div class="hidden-xs hidden-sm" style="background-color: #17181a; width: 100%; height: 40px; line-height: 40px">
-	<span style="float: left;"><a href="/contact" style="padding: 0px 15px; color: darkgray">廣告</a><a href="/about" style="padding: 0px 15px; color: darkgray">娛見日本</a><a href="/about" style="padding: 0px 15px; color: darkgray">關於</a><a href="/contact" style="padding: 0px 15px; color: darkgray">聯絡</a></span><span style="float: right"><a href="/terms" style="padding: 0px 15px; color: darkgray">服務條款</a><a href="/policies" style="padding: 0px 15px; color: darkgray">社群規範</a><a href="/copyright" style="padding: 0px 15px; color: darkgray">版權申訴</a></span>
+<div style="background-color: #17181a; width: 100%; height: 40px; line-height: 40px">
+	<span style="float: left;"><a href="/contact" class="hidden-xs hidden-sm" style="padding: 0px 15px; color: darkgray">廣告</a><a href="/about" class="hidden-xs hidden-sm" style="padding: 0px 15px; color: darkgray">娛見日本</a><a href="/about" style="padding: 0px 15px; color: darkgray">關於</a><a href="/contact" style="padding: 0px 15px; color: darkgray">聯絡</a></span><span style="float: right"><a href="/terms" style="padding: 0px 15px; color: darkgray"><span class="hidden-xs hidden-sm">服務</span>條款</a><a href="/policies" style="padding: 0px 15px; color: darkgray"><span class="hidden-xs hidden-sm">社群</span>規範</a><a href="/copyright" style="padding: 0px 15px; color: darkgray">版權<span class="hidden-xs hidden-sm">申訴</span></a></span>
 </div>
 
 @endsection

@@ -24,7 +24,7 @@
 				<div class="col-md-4 single-show-list">
 
 					<div style="padding-bottom: 7px;">
-						@if (strpos($video->tags, '裏番') !== false)
+						@if (strpos($video->sd, 'https://cdn-videos.kum.com') !== false)
 							<div class="hidden-xs hidden-sm" style="margin: 15px 15px 10px 15px;">
 								<script type="application/javascript">
 								    var ad_idzone = "3944568",

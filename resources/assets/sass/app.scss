@@ -604,7 +604,7 @@ label.upload-image-btn input[type="file"] {
   line-height: 27px;
   width: auto;
   background-color: transparent;
-  font-size: 0.6em !important;
+  font-size: 12px !important;
   padding: 2px 12px;
   border: solid 1px #b08fff;
   border-radius: 28px;
@@ -637,6 +637,15 @@ label.upload-image-btn input[type="file"] {
 /* Style the checkmark/indicator */
 .hentai-tags-wrapper .checkmark:after {
   background-color: #b08fff;
+}
+
+.hentai-footer {
+  color: gray; 
+  margin: 0px 10px; 
+  padding: 20px 20% 10px 20%; 
+  font-size: 0.95em; 
+  line-height: 22px; 
+  background: #212121 url('https://i.imgur.com/W65AiZb.png') bottom left/120px auto no-repeat;
 }
 
 .load-more-container {
@@ -2786,6 +2795,10 @@ a > i {
 
   #hentai-filter-nav {
     padding: 0px 8px
+  }
+
+  .hentai-footer {
+    padding: 15px 5px 5px 5px;
   }
 
   .intro-left-subtitle {
