@@ -4,7 +4,7 @@
   </div>
 
 @else
-  @if (strpos($video->tags, '裏番') !== false && strpos($video->sd, '.mp4') !== false)
+  @if (strpos($video->sd, 'https://cdn-videos.kum.com') !== false)
     <script src="https://cdn.fluidplayer.com/v3/current/fluidplayer.min.js"></script>
     <div style="background-color: white; margin-bottom: -20px; padding-bottom: 15px">
       <video id="video-id" controls>
@@ -21,7 +21,7 @@
                 "autoHide": true
               },
               "autoPlay": true,
-              "allowTheatre": true,
+              "allowTheatre": false,
               "playPauseAnimation": true,
               "playbackRateEnabled": false,
               "allowDownload": false,
