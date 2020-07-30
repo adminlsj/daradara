@@ -11,9 +11,6 @@
 		<span class="material-icons">menu</span>
 	</span>
 
-	<button id="youtube-btn">Youtube</button>
-	<div id="youtube-player"></div>
-
 	<div style="padding: 0 20px">
 		@if (Auth::check())
 	        <a class="hidden-xs hidden-sm nav-item-icon" style="right: 26px; color: #666666;" href="{{ route('user.show', Auth::user()) }}"><i class="material-icons">account_circle</i></a>
