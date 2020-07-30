@@ -11,6 +11,8 @@
 		<span class="material-icons">menu</span>
 	</span>
 
+	<button id="youtube-btn">Youtube</button>
+	<div id="youtube-player"></div>
 
 	<div style="padding: 0 20px">
 		@if (Auth::check())

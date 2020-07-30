@@ -63,6 +63,7 @@ Route::get('/policies', 'HomeController@policies');
 Route::get('/copyright', 'HomeController@copyright');
 Route::get('/video-copyright', 'VideoController@copyright');
 Route::get('/check', 'HomeController@check');
+Route::get('/checkKum', 'HomeController@checkKum');
 Route::get('/checkSubscribes', 'HomeController@checkSubscribes');
 Route::get('/checkZeroSubscribes', 'HomeController@checkZeroSubscribes');
 Route::get('/bccToSrt', 'HomeController@bccToSrt');

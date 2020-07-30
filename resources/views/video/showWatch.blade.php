@@ -24,31 +24,17 @@
 				<div class="col-md-4 single-show-list">
 
 					<div style="padding-bottom: 7px;">
-						@if (strpos($video->sd, 'https://cdn-videos.kum.com') !== false)
-							<div class="hidden-xs hidden-sm" style="margin: 15px 15px 10px 15px;">
-								<script type="application/javascript">
-								    var ad_idzone = "3944568",
-								    ad_width = "300",
-								    ad_height = "250"
-								</script>
-								<script type="application/javascript" src="https://a.realsrv.com/ads.js"></script>
-								<noscript>
-								    <iframe src="https://syndication.realsrv.com/ads-iframe-display.php?idzone=3944568&output=noscript&type=300x250" width="300" height="250" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
-								</noscript>
-							</div>
-						@else
-							<div class="hidden-xs hidden-sm" style="margin: 15px 15px 10px 15px;">
-								<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-								<!-- fixed square ad -->
-								<ins class="adsbygoogle"
-								     style="display:inline-block;width:100%;height:305px;box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1); border-radius: 3px; background-color: #F9F9F9;"
-								     data-ad-client="ca-pub-4485968980278243"
-								     data-ad-slot="2765106128"></ins>
-								<script>
-								     (adsbygoogle = window.adsbygoogle || []).push({});
-								</script>
-							</div>
-						@endif
+						<div class="hidden-xs hidden-sm" style="margin: 15px 15px 10px 15px;">
+							<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+							<!-- fixed square ad -->
+							<ins class="adsbygoogle"
+							     style="display:inline-block;width:100%;height:305px;box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1); border-radius: 3px; background-color: #F9F9F9;"
+							     data-ad-client="ca-pub-4485968980278243"
+							     data-ad-slot="2765106128"></ins>
+							<script>
+							     (adsbygoogle = window.adsbygoogle || []).push({});
+							</script>
+						</div>
 
 						@if ($watch && Request::get('list') != $watch->id)
 							<div id="suggested-watch-wrapper" class="related-watch-wrap hover-opacity-all" style="background-color: #F9F9F9">

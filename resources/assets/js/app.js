@@ -21,6 +21,11 @@ const app = new Vue({
     el: '#app'
 });
 
+$('#youtube-btn').click(function() {
+    $('#youtube-player').html('<iframe width="560" height="315" src="https://www.youtube.com/embed/42VYM08soKE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+})
+
+
 $('#broad').change(function(){
   if (this.checked) {
     $('#hentai-tags-text').text('搜索包含任何一個以下選擇的標籤的影片：');
