@@ -11,8 +11,6 @@
 		<span class="material-icons">menu</span>
 	</span>
 
-	<iframe width="560" height="315" src="https://www.youtube.com/embed/42VYM08soKE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
 	<div style="padding: 0 20px">
 		@if (Auth::check())
 	        <a class="hidden-xs hidden-sm nav-item-icon" style="right: 26px; color: #666666;" href="{{ route('user.show', Auth::user()) }}"><i class="material-icons">account_circle</i></a>
