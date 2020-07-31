@@ -306,7 +306,7 @@ class VideoController extends Controller
     }
 
     public function loadRankVideos(Request $request) {
-        $tags = strpos($request->tag, '全部') !== false ? ['正版動漫', '動畫', '動漫講評', 'MAD·AMV', '綜藝', '日劇', '迷因翻譯'] : Video::$content[Video::$genres[$request->tag]];
+        $tags = strpos($request->tag, '全部') !== false ? [''] : Video::$content[Video::$genres[$request->tag]];
 
         $week = Video::tagsWithPaginate($tags)->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->orderBy('views', 'desc')->limit(24)->get();
         $week_id = $week->pluck('id');
@@ -610,8 +610,7 @@ class VideoController extends Controller
     {
         $html = '';
         foreach ($videos as $video) {
-            // $html .= view('video.new-singleLoadMoreVideos', compact('video'));
-            $html .= view('video.card-4', compact('video'));
+            $html .= view('video.card', compact('video'));
         }
         return $html;
     }
