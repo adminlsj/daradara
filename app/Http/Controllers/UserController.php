@@ -51,10 +51,10 @@ class UserController extends Controller
         switch ($request->genre) {
             case 'videos':
                 if ($request->ajax()) {
-                    $videos = Video::where('user_id', $user->id)->orderBy('created_at', 'desc')->select('id', 'user_id', 'imgur', 'title')->paginate(24);
+                    $videos = Video::where('user_id', $user->id)->orderBy('created_at', 'desc')->select('id', 'user_id', 'imgur', 'title')->paginate(30);
                     $html = '';
                     foreach ($videos as $video) {
-                        $html .= view('video.singleLoadMoreSliderVideos', compact('video'));
+                        $html .= view('video.card', compact('video'));
                     }
                     return $html;
                 }

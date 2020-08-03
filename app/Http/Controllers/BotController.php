@@ -91,7 +91,8 @@ class BotController extends Controller
         curl_close($curl_connection);
         $link = 'https://www.agefans.tv'.Bot::get_string_between(explode('</h4>', explode('<h4 class="anime_icon2_name">', $content)[1])[0], '<a href="', '">');
 
-        if ($bot = Bot::where('temp', $link)->first()) {
+        $bots = Bot::where('temp', $link)->get();
+        foreach ($bots as $bot) {
             Bot::agefans($bot);
         }
     }

@@ -664,6 +664,28 @@ class Bot extends Model
                     Video::notifySubscribers($video);
                     Bot::updateAgefans($bot);
                 }
+
+            } elseif (strpos($request['url'], 'https://www.agefans.tv/age/player/') !== false && strpos($request['url'], 'myqcloud.com') !== false) {
+                
+                $link = $request['url'];
+                $imgur = Bot::uploadUrlImage($bot->data['imgur']);
+                if ($imgur != "" && !Video::where('sd', 'ilike', '%'.$link.'%')->exists()) {
+                    $video = Video::create([
+                        'user_id' => $bot->data['user_id'],
+                        'playlist_id' => $bot->data['playlist_id'],
+                        'title' => $bot->data['title'],
+                        'caption' => $bot->data['caption'],
+                        'sd' => $request['url'],
+                        'imgur' => Bot::get_string_between($imgur, 'https://i.imgur.com/', '.'),
+                        'tags' => $bot->data['tags'],
+                        'views' => 0,
+                        'outsource' => true,
+                        'created_at' => Carbon::now(),
+                        'uploaded_at' => Carbon::now(),
+                    ]);
+                    Video::notifySubscribers($video);
+                    Bot::updateAgefans($bot);
+                }
             }
         }
     }
