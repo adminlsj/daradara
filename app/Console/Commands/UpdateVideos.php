@@ -48,7 +48,7 @@ class UpdateVideos extends Command
         }
 
         foreach ($qzone as $video) {
-            $sd = $this->get_string_between($video->sd, 'vwecam.tc.qq.com%2F', '.f0.mp4');
+            $sd = $this->get_string_between($video->sd, 'vwecam.tc.qq.com%2F', '.f20.mp4');
             $qzone = urlencode(Video::getSourceQZ($sd));
             if ($qzone != '') {
                 $video->sd = 'https://www.agefans.tv/age/player/ckx1/?url='.$qzone;

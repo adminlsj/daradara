@@ -463,13 +463,15 @@ class HomeController extends Controller
 
     public function tempMethod()
     {
-        $videos = Video::where('sd', 'like', '%https://www.agefans.tv/age/player/ckx1/?url=https%3A%2F%2Fapd-vliveachy.apdcdn.tc.qq.com%2Fvmtt.tc.qq.com%2F.com%2Fvideo%2F1098_%')->get();
-        foreach ($videos as $video) {
-            if (strpos($video->sd, 'f0.mp4') === false) {
-                $sd = str_replace('https://www.agefans.tv/age/player/ckx1/?url=https%3A%2F%2Fapd-vliveachy.apdcdn.tc.qq.com%2Fvmtt.tc.qq.com%2F.com%2Fvideo%2F', '', $video->sd);
-                $video->sd = 'https://www.agefans.tv/age/player/ckx1/?url='.urlencode(Video::getSourceQQ("https://quan.qq.com/video/".$sd));
-                $video->outsource = true;
-                $video->save();
+        $qzone = Video::where('sd', 'like', '%1006\_%')->orWhere('sd', 'like', '%1097\_%')->get();
+        foreach ($qzone as $video) {
+            if (strpos($video->sd, 'f0.mp4') !== false) {
+                $sd = $this->get_string_between($video->sd, 'vwecam.tc.qq.com%2F', '.f0.mp4');
+                $qzone = urlencode(Video::getSourceQZ($sd));
+                if ($qzone != '') {
+                    $video->sd = 'https://www.agefans.tv/age/player/ckx1/?url='.$qzone;
+                    $video->save();
+                }
             }
         }
         return redirect()->action('HomeController@index');
