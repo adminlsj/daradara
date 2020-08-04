@@ -21,7 +21,7 @@ class Video extends Model
 
     public static $hentai = [
         '3D', 'JK', '御姐', '人妻', '熟女', '大小姐', '公主', '傲嬌', '碧池', '處女', '眼鏡娘', '黑皮膚', '歐尼醬', '老師', '醜男',
-        '巨乳', '貧乳', '乳交', '手交', '口交', '腳交', '肛交', '自慰', '玩具', '顏射', '內射', '群交', '後宮', '阿嘿顏', '援交',
+        '巨乳', '貧乳', '乳交', '手交', '口交', '腳交', '肛交', '自慰', '玩具', '顏射', '內射', '3P', '群交', '後宮', '阿嘿顏', '援交',
         'BDSM', '綑綁', '觸手', '強制', '逆強制', '女王', '調教', '精神控制', '精神崩潰', '爆精', '放尿', '懷孕', '乳汁',
         '角色扮演', '貓耳', '護士', '泳裝', '巫女', '女僕',
         '異世界', '異種族', '妖精', '怪獸',
@@ -261,7 +261,7 @@ class Video extends Model
                     parse_str($parts['query'], $query);
                     $vkey = $query['vkey'];
                     $picKey = $value["picKey"];
-                    return "https://apd-videohy.apdcdn.tc.qq.com/vwecam.tc.qq.com/{$picKey}.f0.mp4?vkey={$vkey}";
+                    return "https://vwecam.tc.qq.com/{$picKey}.f20.mp4?vkey={$vkey}";
                 }
             }
         }
@@ -404,6 +404,9 @@ class Video extends Model
             } elseif (strpos($request['url'], 'https://www.agefans.tv/age/player/') !== false && strpos($request['url'], '1097_') !== false) {
                 $url = '1097_'.Bot::get_string_between($request['url'], '1097_', '.f');
                 $video->sd = 'https://www.agefans.tv/age/player/ckx1/?url='.urlencode(Video::getSourceQZ($url));
+
+            } elseif (strpos($request['url'], 'https://www.agefans.tv/age/player/') !== false && strpos($request['url'], 'myqcloud') !== false) {
+                $video->sd = $request['url'];
             }
         }
 
