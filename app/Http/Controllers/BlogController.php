@@ -24,7 +24,7 @@ class BlogController extends Controller
         $content = str_replace('(IMG)', '<img class="img-responsive border-radius-2" style="padding-top:15px;padding-bottom:15px;width:100%; height:100%" src="https://i.imgur.com/', $content);
         $content = str_replace('(/IMG)', 'h.jpg" alt="'.$blog->title.'">', $content);
 
-        $content = str_replace('(IMG_DIRECT)', '<img class="img-responsive border-radius-2" style="padding-top:15px;padding-bottom:15px;max-width:400px; height:auto" src="', $content);
+        $content = str_replace('(IMG_DIRECT)', '<img class="img-responsive border-radius-2 blog-image-direct" style="padding-top:15px;padding-bottom:15px;" src="', $content);
         $content = str_replace('(/IMG_DIRECT)', '" alt="'.$blog->title.'">', $content);
 
         $content = str_replace('(TwitterIMG)', '<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">

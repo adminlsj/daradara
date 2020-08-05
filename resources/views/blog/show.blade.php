@@ -18,7 +18,7 @@
 @endsection
 
 @section('content')
-<div class="hidden-sm hidden-xs sidebar-menu">
+<div class="hidden-sm hidden-xs hidden-md sidebar-menu">
     @include('video.sidebarMenu', ['theme' => 'white'])
 </div>
 
