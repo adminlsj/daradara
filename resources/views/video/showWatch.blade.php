@@ -25,16 +25,18 @@
 
 					<div style="padding-bottom: 7px;">
 						<div class="hidden-xs hidden-sm" style="margin: 15px 15px 10px 15px;">
-							@if (strpos($video->sd, 'https://cdn-videos.kum.com') !== false)
-								<script type="application/javascript">
-								    var ad_idzone = "3944568",
-								    ad_width = "300",
-								    ad_height = "250"
-								</script>
-								<script type="application/javascript" src="https://a.realsrv.com/ads.js"></script>
-								<noscript>
-								    <iframe src="https://syndication.realsrv.com/ads-iframe-display.php?idzone=3944568&output=noscript&type=300x250" width="300" height="250" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
-								</noscript>
+							@if (strpos($video->sd, 'avbebe.com') !== false)
+								<div class="hidden-xs hover-opacity-all load-more-wrapper video-card" style="margin-bottom: 15px; width: calc(100% + 8px); margin-left: -4px;">
+									<a style="color: inherit; text-decoration: none;" href="{{ route('blog.read') }}?r={{ $blog->id }}" title="{{ $blog->title }}" target="_blank">
+									    <div style="position: relative;">
+									        <img class="lazy" style="width: 100%; height: 100%; border-top-left-radius: 3px; border-top-right-radius: 3px;" src="{{ $blog->imgur16by9() }}" data-src="{{ $blog->imgurL() }}" data-srcset="{{ $blog->imgurL() }}" alt="{{ $blog->title }}">
+										    <div style="background-color: #F9F9F9; padding: 7px 10px; height: 73px; border-radius: 3px; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1);">
+											    <div style="font-weight: bold; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">{{ $blog->title }}</div>
+											    <div style="color: darkgray; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; font-size: 0.85em; margin-top: 3px;">laughseejapan.com</div>
+											</div>
+										</div>
+									</a>
+								</div>
 							@else
 								<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 								<!-- fixed square ad -->
@@ -70,6 +72,24 @@
 								</div>
 							</div>
 						@endif
+
+						<div class="related-watch-wrap hover-opacity-all hidden-md hidden-lg" style="background-color: #F9F9F9">
+							@if (strpos($video->sd, 'avbebe.com') !== false)
+								<a href="{{ route('blog.read') }}?r={{ $blog->id }}" class="row no-gutter" target="_blank">
+								  <div style="padding-right: 4px; width: 175px;" class="col-xs-6 col-sm-6 col-md-6">
+								    <img class="lazy" style="width: 100%; height: 100%; border-top-left-radius: 3px; border-bottom-left-radius: 3px;" src="{{ $blog->imgur16by9() }}" data-src="{{ $blog->imgurL() }}" data-srcset="{{ $blog->imgurL() }}" alt="{{ $blog->title }}">
+								  </div>
+								  <div style="padding-left: 4px; width: calc(100% - 175px)" class="col-xs-6 col-sm-6 col-md-6 related-watch-title">
+								    <h4>{{ $blog->title }}</h4>
+								  </div>
+								</a>
+
+								<div style="position: absolute; bottom: 7px; left: 182px;">
+									<img class="lazy" style="float:left; width: 18px; height: 18px; margin-top: 1px" src="{{ $blog->user->avatarCircleB() }}" data-src="{{ $blog->user->avatar == null ? $blog->user->avatarDefault() : $blog->user->avatar->filename }}" data-srcset="{{ $blog->user->avatar == null ? $blog->user->avatarDefault() : $blog->user->avatar->filename }}">
+									<a href="{{ route('user.show', [$blog->user]) }}" style="color: darkgray; font-size: 0.8em; margin-left: 5px;">laughseejapan</a>
+								</div>
+							@endif
+						</div>
 
 						<div id="video-playlist-wrapper">
 							<div style="text-align: center;" class="ajax-loading"><img style="width: 40px; height: auto; padding-top: 14px; padding-bottom: 28px;" src="https://i.imgur.com/wgOXAy6.gif"/></div>

@@ -73,7 +73,6 @@ class VideoController extends Controller
 
         if (is_numeric($vid) && $video = Video::find($request->v)) {
 
-            // Video::updateQQRawLink($video);
             if (strpos($video->sd, 'https://www.agefans.tv/play/') !== false) {
                 Video::setAgefansLink($video);
             }
@@ -101,7 +100,9 @@ class VideoController extends Controller
                 $is_program = false;
             }
 
-            return view('video.showWatch', compact('video', 'outsource', 'sd', 'watch', 'current', 'is_program', 'is_subscribed', 'is_mobile'));
+            $blog = Blog::where('tags', 'ilike', '%美女%')->inRandomOrder()->first();
+
+            return view('video.showWatch', compact('video', 'outsource', 'sd', 'watch', 'current', 'is_program', 'is_subscribed', 'is_mobile', 'blog'));
 
         } else {
             return view('errors.404');
