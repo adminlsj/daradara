@@ -96,4 +96,28 @@ class BotController extends Controller
             Bot::agefans($bot);
         }
     }
+
+    /* public function updateData(Request $request)
+    {
+        $videos = Video::all();
+        foreach ($videos as $video) {
+            if ($video->data == null || !array_key_exists('views', $video->data)) {
+                $views['increment'] = [];
+                $views['total'] = [];
+                $start = Carbon::parse('2020-08-01 00:00:00');
+                $diff = $start->diffInDays(Carbon::now());
+                for ($i = 0; $i < $diff; $i++) { 
+                    array_push($views['total'], 0);
+                    array_push($views['increment'], 0);
+                }
+            } else {
+                $views = $video->data['views'];
+            }
+
+            array_push($views['increment'], $video->views - end($views['total']));
+            array_push($views['total'], $video->views);
+            $video->data = ['views' => $views];
+            $video->save();
+        }
+    } */
 }

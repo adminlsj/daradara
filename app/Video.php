@@ -12,11 +12,11 @@ use Spatie\Browsershot\Browsershot;
 class Video extends Model
 {
     protected $casts = [
-        'foreign_sd' => 'array'
+        'foreign_sd' => 'array', 'data' => 'array'
     ];
 
 	protected $fillable = [
-        'id', 'user_id', 'playlist_id', 'title', 'caption', 'tags', 'sd', 'imgur', 'views', 'outsource', 'foreign_sd', 'created_at', 'uploaded_at',
+        'id', 'user_id', 'playlist_id', 'title', 'caption', 'tags', 'sd', 'imgur', 'views', 'outsource', 'foreign_sd', 'data', 'created_at', 'uploaded_at',
     ];
 
     public static $hentai = [

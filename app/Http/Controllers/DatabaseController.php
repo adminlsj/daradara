@@ -105,6 +105,39 @@ class DatabaseController extends Controller
         return redirect()->action('DatabaseController@edit', ['table' => $table, 'id' => $request->id]);
     }
 
+    public function analytics(Request $request)
+    {
+        $anime = Video::where('tags', 'ilike', '% 動漫 %')->select('id', 'title', 'data')->get();
+        $variety = Video::where('tags', 'ilike', '%綜藝%')->select('id', 'title', 'data')->get();
+        $drama = Video::where('tags', 'ilike', '%日劇%')->select('id', 'title', 'data')->get();
+        $hentai = Video::where('tags', 'ilike', '%裏番%')->select('id', 'title', 'data')->get();
+
+        $count = count($anime->first()->data['views']['increment']);
+        $atotal = $vtotal = $dtotal = $htotal = [];
+
+        for ($i = 0; $i < $count; $i++) { 
+            array_push($atotal, 0);
+            array_push($vtotal, 0);
+            array_push($dtotal, 0);
+            array_push($htotal, 0);
+        }
+
+        $videos = ['anime' => $anime, 'variety' => $variety, 'drama' => $drama, 'hentai' => $hentai];
+        $totals = ['anime' => $atotal, 'variety' => $vtotal, 'drama' => $dtotal, 'hentai' => $htotal];
+        foreach ($videos as $key => $value) {
+            foreach ($value as $video) {
+                $increment = $video->data['views']['increment'];
+                $i = 0;
+                foreach ($increment as $views) {
+                    $totals[$key][$i] = $totals[$key][$i] + $views;
+                    $i++;
+                }
+            }
+        }
+
+        return view('database.analytics', compact('videos', 'totals', 'count')); 
+    }
+
     function get_string_between($string, $start, $end){
         $string = ' ' . $string;
         $ini = strpos($string, $start);

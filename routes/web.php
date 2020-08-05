@@ -17,6 +17,7 @@ Route::get('/database', 'DatabaseController@index')->name('database.index');
 Route::get('/database/{table}', 'DatabaseController@show')->name('database.show');
 Route::get('/database/{table}/{id}/edit', 'DatabaseController@edit')->name('database.edit');
 Route::post('/database/{table}/{id}/update', 'DatabaseController@update')->name('database.update');
+Route::get('/analytics', 'DatabaseController@analytics')->name('database.analytics');
 
 Route::resource('blog', 'BlogController');
 
@@ -29,6 +30,7 @@ Route::post('users/{user}/storeAvatar', 'UserController@storeAvatar');
 Route::get('/tempMethod', 'HomeController@tempMethod');
 Route::get('/youtubeBot', 'HomeController@youtubeBot');
 Route::get('/updateVideos', 'HomeController@updateVideos');
+Route::get('/updateData', 'BotController@updateData');
 Route::get('/uploadPendingVideos', 'HomeController@uploadPendingVideos');
 Route::get('/createDummyVideos', 'HomeController@createDummyVideos');
 Route::get('/editSingleton', 'HomeController@editSingleton');
