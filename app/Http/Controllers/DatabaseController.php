@@ -107,10 +107,10 @@ class DatabaseController extends Controller
 
     public function analytics(Request $request)
     {
-        $anime = Video::where('data', '!=', null)->where('tags', 'ilike', '% 動漫 %')->select('id', 'title', 'data')->get();
-        $variety = Video::where('data', '!=', null)->where('tags', 'ilike', '%綜藝%')->select('id', 'title', 'data')->get();
-        $drama = Video::where('data', '!=', null)->where('tags', 'ilike', '%日劇%')->select('id', 'title', 'data')->get();
-        $hentai = Video::where('data', '!=', null)->where('tags', 'ilike', '%裏番%')->select('id', 'title', 'data')->get();
+        $anime = Video::where('data', '!=', null)->where('tags', 'ilike', '% 動漫 %')->select('id', 'title', 'data', 'views')->get();
+        $variety = Video::where('data', '!=', null)->where('tags', 'ilike', '%綜藝%')->select('id', 'title', 'data', 'views')->get();
+        $drama = Video::where('data', '!=', null)->where('tags', 'ilike', '%日劇%')->select('id', 'title', 'data', 'views')->get();
+        $hentai = Video::where('data', '!=', null)->where('tags', 'ilike', '%裏番%')->select('id', 'title', 'data', 'views')->get();
 
         $count = count($anime->first()->data['views']['increment']);
         $atotal = $vtotal = $dtotal = $htotal = [];
