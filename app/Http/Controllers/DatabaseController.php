@@ -111,19 +111,21 @@ class DatabaseController extends Controller
         $variety = Video::where('data', '!=', null)->where('tags', 'ilike', '%綜藝%')->select('id', 'title', 'data', 'views')->get();
         $drama = Video::where('data', '!=', null)->where('tags', 'ilike', '%日劇%')->select('id', 'title', 'data', 'views')->get();
         $hentai = Video::where('data', '!=', null)->where('tags', 'ilike', '%裏番%')->select('id', 'title', 'data', 'views')->get();
+        $others = Video::where('data', '!=', null)->where('tags', 'not like', '% 動漫 %')->where('tags', 'not like', '%綜藝%')->where('tags', 'not like', '%日劇%')->where('tags', 'not like', '%裏番%')->select('id', 'title', 'data', 'views')->get();
 
         $count = count($anime->first()->data['views']['increment']);
-        $atotal = $vtotal = $dtotal = $htotal = [];
+        $atotal = $vtotal = $dtotal = $htotal = $ototal = [];
 
         for ($i = 0; $i < $count; $i++) { 
             array_push($atotal, 0);
             array_push($vtotal, 0);
             array_push($dtotal, 0);
             array_push($htotal, 0);
+            array_push($ototal, 0);
         }
 
-        $videos = ['anime' => $anime, 'variety' => $variety, 'drama' => $drama, 'hentai' => $hentai];
-        $totals = ['anime' => $atotal, 'variety' => $vtotal, 'drama' => $dtotal, 'hentai' => $htotal];
+        $videos = ['anime' => $anime, 'variety' => $variety, 'drama' => $drama, 'hentai' => $hentai, 'others' => $others];
+        $totals = ['anime' => $atotal, 'variety' => $vtotal, 'drama' => $dtotal, 'hentai' => $htotal, 'others' => $ototal];
         foreach ($videos as $key => $value) {
             foreach ($value as $video) {
                 $increment = $video->data['views']['increment'];
