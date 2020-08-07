@@ -18,6 +18,7 @@ Route::get('/database/{table}', 'DatabaseController@show')->name('database.show'
 Route::get('/database/{table}/{id}/edit', 'DatabaseController@edit')->name('database.edit');
 Route::post('/database/{table}/{id}/update', 'DatabaseController@update')->name('database.update');
 Route::get('/analytics', 'DatabaseController@analytics')->name('database.analytics');
+Route::get('/analytics/{genre}', 'DatabaseController@genre')->name('database.genre');
 
 Route::resource('blog', 'BlogController');
 

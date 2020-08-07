@@ -182,13 +182,21 @@ body {
   text-decoration: underline;
 }
 
-.analytics-row {
+.analytics-row, .analytics-genre-row {
   padding: 6px 10px;
   border-bottom: solid 1px black;
 }
 
 .analytics-row .col-md-2 {
   width: 14.2%
+}
+
+.analytics-genre-row .col-md-3 {
+  width: 40%;
+}
+
+.analytics-genre-row .col-md-2 {
+  width: 12%;
 }
 
 .home-banner-wrapper, .home-banner-wrapper img {

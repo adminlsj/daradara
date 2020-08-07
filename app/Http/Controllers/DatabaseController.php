@@ -137,7 +137,48 @@ class DatabaseController extends Controller
             }
         }
 
-        return view('database.analytics', compact('videos', 'totals', 'count')); 
+        $panime = $anime->pluck('data')->pluck('views')->pluck('total')->toArray();
+        $pvariety = $variety->pluck('data')->pluck('views')->pluck('total')->toArray();
+        $pdrama = $drama->pluck('data')->pluck('views')->pluck('total')->toArray();
+        $phentai = $hentai->pluck('data')->pluck('views')->pluck('total')->toArray();
+        $pothers = $others->pluck('data')->pluck('views')->pluck('total')->toArray();
+        $ptotals = ['anime' => $panime, 'variety' => $pvariety, 'drama' => $pdrama, 'hentai' => $phentai, 'others' => $pothers];
+
+        return view('database.analytics', compact('videos', 'totals', 'count', 'ptotals')); 
+    }
+
+    public function genre(Request $request)
+    {
+        switch ($genre = $request->genre) {
+            case 'anime':
+                $videos = Video::where('data', '!=', null)->where('tags', 'ilike', '% 動漫 %')->select('id', 'title', 'data')->get()->toArray();
+                break;
+            
+            case 'variety':
+                $videos = Video::where('data', '!=', null)->where('tags', 'ilike', '%綜藝%')->select('id', 'title', 'data')->get()->toArray();
+                break;
+
+            case 'drama':
+                $videos = Video::where('data', '!=', null)->where('tags', 'ilike', '%日劇%')->select('id', 'title', 'data')->get()->toArray();
+                break;
+
+            case 'hentai':
+                $videos = Video::where('data', '!=', null)->where('tags', 'ilike', '%裏番%')->select('id', 'title', 'data')->get()->toArray();
+                break;
+
+            case 'others':
+                $videos = Video::where('data', '!=', null)->where('tags', 'not like', '% 動漫 %')->where('tags', 'not like', '%綜藝%')->where('tags', 'not like', '%日劇%')->where('tags', 'not like', '%裏番%')->select('id', 'title', 'data')->get()->toArray();
+                break;
+        }
+
+        usort($videos, function ($a, $b) {
+            return end($b['data']['views']['increment']) - end($a['data']['views']['increment']);
+        });
+
+        $videos = array_slice($videos, 0, 50);
+        $count = count($videos[0]['data']['views']['increment']);
+
+        return view('database.genre', compact('videos', 'count', 'genre')); 
     }
 
     function get_string_between($string, $start, $end){
