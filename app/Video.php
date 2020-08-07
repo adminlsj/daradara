@@ -19,7 +19,7 @@ class Video extends Model
         'id', 'user_id', 'playlist_id', 'title', 'caption', 'tags', 'sd', 'imgur', 'views', 'outsource', 'foreign_sd', 'data', 'created_at', 'uploaded_at',
     ];
 
-    public static $hentai = [
+    public static $hentai_tags = [
         '3D', 'JK', '御姐', '人妻', '熟女', '大小姐', '公主', '傲嬌', '碧池', '處女', '眼鏡娘', '黑皮膚', '歐尼醬', '老師', '醜男',
         '巨乳', '貧乳', '乳交', '手交', '口交', '腳交', '肛交', '自慰', '玩具', '顏射', '內射', '3P', '群交', '後宮', '親子丼', '阿嘿顏', '援交',
         'BDSM', '綑綁', '觸手', '強制', '逆強制', '女王', '調教', '精神控制', '精神崩潰', '爆精', '放尿', '懷孕', '噴奶',
@@ -27,6 +27,10 @@ class Video extends Model
         '異世界', '異種族', '妖精', '怪獸',
         '劇情', '校園', '純愛', '奇幻', '鬼畜', 'NTR', '窩邊草', '公眾場合',
         '百合', '雙性', '偽娘', '耽美', 'YOOO'
+    ];
+
+    public static $hentai_brands = [
+        '妄想実現めでぃあ', 'メリー・ジェーン', 'ピンクパイナップル', 'ばにぃうぉ～か～', 'Queen Bee', 'PoRO', 'せるふぃっしゅ', '鈴木みら乃', 'ショーテン', 'GOLD BEAR', 'ZIZ', 'EDGE', 'Collaboration Works', 'BOOTLEG', 'BOMB!CUTE!BOMB!', 'nur', 'あんてきぬすっ', '魔人', 'ルネ', 'Princess Sugar'
     ];
 
     public static $tags = [

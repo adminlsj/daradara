@@ -34,20 +34,13 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
-        /*$animeFirst = Video::tagsWithLimit(['正版動漫'], 1)->get();
-        $animeVid = Video::where('id', '!=', $animeFirst[0]->id)->tagsWithLimit(['正版動漫', '動畫', '動漫講評', 'MAD·AMV'], 7)->get();
-        $animeNews = Blog::tagsWithLimit(['動漫情報'])->get();
-        $variety = Video::tagsWithLimit(['綜藝'])->get();
-        $artist = Video::tagsWithLimit(['明星', '日劇'])->get();
-        $meme = Video::tagsWithLimit(['迷因'])->get();
-        $daily = Blog::tagsWithLimit(['生活'])->get();
-        return view('video.home', compact('animeFirst', 'animeVid', 'animeNews', 'variety', 'artist', 'meme', 'daily'));*/
         return view('layouts.home');
     }
 
     public function hentai(Request $request)
     {
         $tags = [];
+        $brands = [];
         $videos = Video::where('cover', '!=', null);
 
         if ($tags = $request->tags) {
@@ -66,9 +59,17 @@ class HomeController extends Controller
             }
         }
 
+        if ($brands = $request->brands) {
+            $videos = $videos->where(function($query) use ($brands) {
+                foreach ($brands as $brand) {
+                    $query->orWhere('tags', 'ilike', '%'.$brand.'%');
+                }
+            });
+        }
+
         $videos = $videos->select('id', 'title', 'cover')->orderBy('created_at', 'desc')->paginate(48);
 
-        return view('layouts.hentai', compact('tags', 'videos'));
+        return view('layouts.hentai', compact('tags', 'brands', 'videos'));
     }
 
     public function genre(Request $request)

@@ -645,7 +645,7 @@ class Bot extends Model
 
             } elseif (strpos($request['url'], 'https://www.agefans.tv/age/player/') === false && strpos($request['url'], '1098_') !== false) {
 
-                $link = '1098_'.Bot::get_string_between($request['url'], '1098_', '.f0.mp4').'.f0.mp4';
+                $link = '1098_'.Bot::get_string_between($request['url'], '1098_', '.f0.mp4');
                 $imgur = Bot::uploadUrlImage($bot->data['imgur']);
                 if ($imgur != "" && !Video::where('sd', 'ilike', '%'.$link.'%')->exists()) {
                     $video = Video::create([
@@ -653,7 +653,7 @@ class Bot extends Model
                         'playlist_id' => $bot->data['playlist_id'],
                         'title' => $bot->data['title'],
                         'caption' => $bot->data['caption'],
-                        'sd' => 'https://www.agefans.tv/age/player/ckx1/?url='.urlencode($request['url']),
+                        'sd' => 'https://www.agefans.tv/age/player/ckx1/?url='.urlencode(Video::getSourceQQ("https://quan.qq.com/video/".$link)),
                         'imgur' => Bot::get_string_between($imgur, 'https://i.imgur.com/', '.'),
                         'tags' => $bot->data['tags'],
                         'views' => 0,

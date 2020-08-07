@@ -30,7 +30,7 @@
 </div>
 
 <form action="{{ route('home.hentai') }}" method="GET">
-	<div id="myModal" class="modal fade" role="dialog">
+	<div id="tags" class="modal fade" role="dialog">
 	  <div class="modal-dialog">
 	    <div class="modal-content" style="border-radius: 3px; background-color: #424242; color: white">
 	      <div class="modal-header" style="border-bottom: 1px solid #3a3c3f">
@@ -48,10 +48,35 @@
 	        <p style="color: darkgray; padding-bottom: 15px">較多結果，較不精準。配對所有包含任何一個選擇的標籤的影片，而非全部標籤。</p>
 	        <h4>包含標籤</h4>
 	        <p id="hentai-tags-text" style="color: darkgray; padding-bottom: 10px">搜索包含所有以下選擇的標籤的影片：</p>
-	        @foreach (App\Video::$hentai as $tag)
+	        @foreach (App\Video::$hentai_tags as $tag)
 	        	<label class="hentai-tags-wrapper">
 				  <input name="tags[]" type="checkbox" value="{{ $tag }}" {{ $tags != [] && in_array($tag, $tags) ? 'checked' : '' }}>
 				  <span class="checkmark">{{ $tag }}</span>
+				</label>
+	        @endforeach
+	      </div>
+	      <div class="modal-footer" style="border-top: none;">
+	      	<button style="border: none; color: white; background-color: transparent;" type="button" class="pull-left" data-dismiss="modal">取消</button>
+	        <button style="border: none; color: #b08fff; background-color: transparent;" type="submit">搜索</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+	<div id="brands" class="modal fade" role="dialog">
+	  <div class="modal-dialog">
+	    <div class="modal-content" style="border-radius: 3px; background-color: #424242; color: white">
+	      <div class="modal-header" style="border-bottom: 1px solid #3a3c3f">
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	        <h4 class="modal-title" style="text-align: center">品牌</h4>
+	      </div>
+	      <div class="modal-body">
+	        <h4>品牌 / 製作</h4>
+	        <p id="hentai-tags-text" style="color: darkgray; padding-bottom: 10px">搜索以下選擇的品牌或製作的影片：</p>
+	        @foreach (App\Video::$hentai_brands as $brand)
+	        	<label class="hentai-tags-wrapper">
+				  <input name="brands[]" type="checkbox" value="{{ $brand }}" {{ $brands != [] && in_array($brand, $brands) ? 'checked' : '' }}>
+				  <span style="border-radius: 0px;" class="checkmark">{{ $brand }}</span>
 				</label>
 	        @endforeach
 	      </div>
