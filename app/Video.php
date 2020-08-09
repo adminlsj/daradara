@@ -191,7 +191,7 @@ class Video extends Model
                 $sd = urldecode(str_replace('https://www.agefans.tv/age/player/ckx1/?url=', '', $video->sd));
             }
 
-        } elseif ($is_mobile && strpos($sd, "agefans.tv") !== FALSE) {
+        } elseif (strpos($sd, "agefans.tv") !== FALSE) {
             $outsource = false;
             $sd = urldecode(str_replace('https://www.agefans.tv/age/player/ckx1/?url=', '', $video->sd));
         }
