@@ -32,6 +32,7 @@ Route::get('/tempMethod', 'HomeController@tempMethod');
 Route::get('/youtubeBot', 'HomeController@youtubeBot');
 Route::get('/updateVideos', 'HomeController@updateVideos');
 Route::get('/updateData', 'BotController@updateData');
+Route::get('/updateHentai', 'BotController@updateHentai');
 Route::get('/uploadPendingVideos', 'HomeController@uploadPendingVideos');
 Route::get('/createDummyVideos', 'HomeController@createDummyVideos');
 Route::get('/editSingleton', 'HomeController@editSingleton');
