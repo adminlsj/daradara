@@ -34,32 +34,6 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
-        $videos = Video::where('tags', 'ilike', '%裏番%')->where('foreign_sd', '!=', null)->get();
-        foreach ($videos as $video) {
-            if (array_key_exists('slutload', $video->foreign_sd)) {
-                $requests = Browsershot::url($video->foreign_sd['slutload'])
-                    ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
-                    ->triggeredRequests();
-                foreach ($requests as $request) {
-                    if (strpos($request['url'], 'https://v-rn.slutload-media.com/') !== false && strpos($request['url'], '.mp4') !== false) {
-                        $video->sd = $request['url'];
-                        $video->outsource = false;
-                        $video->save();
-                    }
-                }
-            } elseif (array_key_exists('gounlimited', $video->foreign_sd)) {
-                $requests = Browsershot::url($video->foreign_sd['gounlimited'])
-                    ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
-                    ->triggeredRequests();
-                foreach ($requests as $request) {
-                    if (strpos($request['url'], '.gounlimited.to/') !== false && strpos($request['url'], 'v.mp4') !== false) {
-                        $video->sd = $request['url'];
-                        $video->outsource = false;
-                        $video->save();
-                    }
-                }
-            }
-        }
         return view('layouts.home');
     }
 
