@@ -353,7 +353,7 @@ class Bot extends Model
     public static function bilibili(Bot $bot)
     {
         $mid = str_ireplace('https://space.bilibili.com/', '', $bot->data['source']);
-        $url = 'https://space.bilibili.com/ajax/member/getSubmitVideos?mid='.$mid;
+        $url = 'https://api.bilibili.com/x/space/arc/search?mid='.$mid.'&ps=30&tid=0&pn=1&keyword=&order=pubdate&jsonp=jsonp';
         $curl_connection = curl_init($url);
         curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
         curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
@@ -362,7 +362,7 @@ class Bot extends Model
         curl_close($curl_connection);
 
         $chinese = new Chinese();
-        foreach ($data['data']['vlist'] as $video) {
+        foreach ($data['data']['list']['vlist'] as $video) {
             $aid = $video['aid'];
             if (!Video::where('sd', 'ilike', '%aid='.$aid.'%')->exists()) {
                 $url = 'https://api.bilibili.com/x/web-interface/view?aid='.$aid;
