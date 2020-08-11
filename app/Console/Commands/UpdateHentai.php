@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use App\Video;
+use Spatie\Browsershot\Browsershot;
 
 class UpdateHentai extends Command
 {

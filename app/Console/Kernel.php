@@ -15,10 +15,10 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         'App\Console\Commands\UpdateVideos',
         'App\Console\Commands\UpdateData',
+        'App\Console\Commands\UpdateHentai',
         'App\Console\Commands\UploadVideos',
         'App\Console\Commands\UploadYongjiu',
-        'App\Console\Commands\UploadAgefans',
-        'App\Console\Commands\UpdateHentai'
+        'App\Console\Commands\UploadAgefans'
     ];
 
     /**
