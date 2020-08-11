@@ -17,7 +17,8 @@ class Kernel extends ConsoleKernel
         'App\Console\Commands\UpdateData',
         'App\Console\Commands\UploadVideos',
         'App\Console\Commands\UploadYongjiu',
-        'App\Console\Commands\UploadAgefans'
+        'App\Console\Commands\UploadAgefans',
+        'App\Console\Commands\UpdateHentai'
     ];
 
     /**
@@ -33,6 +34,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('laughseejapan:upload-videos')->hourly()->unlessBetween('2:00', '9:00');
         $schedule->command('laughseejapan:upload-yongjiu')->everyThirtyMinutes()->unlessBetween('3:00', '8:00');
         $schedule->command('laughseejapan:upload-agefans')->everyMinute()->unlessBetween('3:00', '8:00');
+        $schedule->command('laughseejapan:update-hentai')->hourly();
     }
 
     /**
