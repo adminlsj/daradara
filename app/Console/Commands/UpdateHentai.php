@@ -46,8 +46,15 @@ class UpdateHentai extends Command
                     ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
                     ->triggeredRequests();
                 foreach ($requests as $request) {
-                    if (strpos($request['url'], 'https://v-rn.slutload-media.com/') !== false && strpos($request['url'], '.mp4') !== false) {
-                        $video->sd = $request['url'];
+                    if (strpos($request['url'], 'https://www.slutload.com/get_file/') !== false) {
+                        $curl_connection = curl_init();
+                        curl_setopt($curl_connection, CURLOPT_URL, $request['url']);
+                        curl_setopt($curl_connection, CURLOPT_FOLLOWLOCATION, true); // follow the redirects
+                        curl_setopt($curl_connection, CURLOPT_NOBODY, true); // get the resource without a body
+                        curl_exec($curl_connection);
+                        $redirect = curl_getinfo($curl_connection, CURLINFO_EFFECTIVE_URL);
+                        curl_close($curl_connection);
+                        $video->sd = $redirect;
                         $video->outsource = false;
                         $video->save();
                     }

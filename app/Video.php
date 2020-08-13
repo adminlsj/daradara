@@ -262,6 +262,7 @@ class Video extends Model
                 $fkey = $value["picKey"];  
                 if($fkey == $picKey){
                     $parts = parse_url($value["url"]);
+                    $query = [];
                     parse_str($parts['query'], $query);
                     $vkey = $query['vkey'];
                     $picKey = $value["picKey"];
