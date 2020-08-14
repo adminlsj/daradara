@@ -18,7 +18,7 @@
 	</div>
 
 	<div class="row analytics-row" style="text-align: center; border-right: 1px solid black; border-left: 1px solid black">
-		<div class="col-md-2">{{ Carbon\Carbon::parse('2020-08-01 00:00:00')->addDays($count)->toDateString() }}</div>
+		<div class="col-md-2" style="text-align:left">&nbsp;{{ Carbon\Carbon::parse('2020-08-01 00:00:00')->addDays($count)->format('Y-m-d l') }}</div>
 		<div class="col-md-2">{{ $anime = $videos['anime']->sum('views') - array_sum(array_column($ptotals['anime'], $count - 1)) }}</div>
 		<div class="col-md-2">{{ $variety = $videos['variety']->sum('views') - array_sum(array_column($ptotals['variety'], $count - 1)) }}</div>
 		<div class="col-md-2">{{ $drama = $videos['drama']->sum('views') - array_sum(array_column($ptotals['drama'], $count - 1)) }}</div>
@@ -27,9 +27,9 @@
 		<div class="col-md-2" style="font-weight: bold">{{ $anime + $variety + $drama + $hentai + $others }}</div>
 	</div>
 
-	@for ($i = 0; $i < 5; $i++)
+	@for ($i = 0; $i < 12; $i++)
 		<div class="row analytics-row" style="text-align: center; border-right: 1px solid black; border-left: 1px solid black">
-			<div class="col-md-2">{{ Carbon\Carbon::parse('2020-08-01 00:00:00')->addDays($count - 1)->subdays($i)->toDateString() }}</div>
+			<div class="col-md-2" style="text-align:left">&nbsp;{{ Carbon\Carbon::parse('2020-08-01 00:00:00')->addDays($count - 1)->subdays($i)->format('Y-m-d l') }}</div>
 			<div class="col-md-2">{{ $anime = $totals['anime'][$count - 1 - $i] }}</div>
 			<div class="col-md-2">{{ $drama = $totals['drama'][$count - 1 - $i] }}</div>
 			<div class="col-md-2">{{ $variety = $totals['variety'][$count - 1 - $i] }}</div>
