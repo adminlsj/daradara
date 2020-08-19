@@ -22,7 +22,7 @@
 
 <div class="hidden-sm hidden-md hidden-lg" style="position: relative;">
 	<img style="width: 100%; -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));" src="https://i.imgur.com/OCatT3B.jpg">
-	<div style="position: absolute; left: 50%; -webkit-transform: translateX(-50%); transform: translateX(-50%); width: 96%; bottom: 20%; text-align: center; color: white">
+	<div style="position: absolute; left: 50%; -webkit-transform: translateX(-50%); transform: translateX(-50%); width: 96%; bottom: 15%; text-align: center; color: white">
 		<h3 style="font-weight: bold; font-size: 20px;"><span style="color: crimson">H</span>anime1<span style="color: crimson">.</span>me</h3>
 		<h1 style="font-size: 30px; font-weight: bold; margin: 0">{{ explode('/', $banner->title)[0] }}</h1>
 		<h4 style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; line-height: 16px; font-size: 12px; width: 80%; margin-left: 10%;">{{ $banner->watch->description }}</h4>
