@@ -1,10 +1,10 @@
 <div class="bottom-nav hidden-lg hidden-md white-theme-nav-bottom">
   <a href="/" class="{{ Request::is('/') ? 'active' : ''}}">
-    <i style="font-size: 24px; margin-top: 5px" class="material-icons">home</i>
+    <i style="font-size: 24px; margin-top: 10px" class="material-icons">home</i>
     <span style="padding-right: 1px;">主頁</span>
   </a>
   <a href="{{ route('video.subscribes') }}" class="{{ Request::is('*subscribes*') ? 'active' : ''}}">
-    <i style="font-size: 23px; position: relative; margin-top: 5px" class="material-icons">subscriptions</i>
+    <i style="font-size: 23px; position: relative; margin-top: 10px" class="material-icons">subscriptions</i>
     <span style="padding-right: 1px;">訂閱項目</span>
     @if (Auth::check() && strpos(auth()->user()->alert, 'subscribe') !== false)
       <span style="position: absolute; top: -5px; right: calc(60% - 9px)" class="alert-circle"></span>
