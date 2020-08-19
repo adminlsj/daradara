@@ -11,7 +11,7 @@
 	<div id="home-banner-wrapper" style="position: absolute; left: 4%; color: white">
 		<h3 style="font-weight: bold"><span style="color: crimson">H</span>anime1<span style="color: crimson">.</span>me</h3>
 		<h1 style="margin: 0">{{ explode('/', $banner->title)[0] }}</h1>
-		<h4>{{ $banner->watch->description }}</h4>
+		<h4 class="hidden-xs">{{ $banner->watch->description }}</h4>
 		<div>
 			<a class="hover-opacity-all home-banner-btn home-banner-play-btn"><span style="vertical-align: middle; font-size: 2em; margin-top: -3px; padding-right: 5px" class="material-icons">play_arrow</span>播放</a>
 			&nbsp;
