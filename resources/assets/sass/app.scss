@@ -3380,7 +3380,7 @@ a > i {
 
   #home-banner-wrapper h1 {
     font-size: 24px;
-    padding-bottom: 25px;
+    padding-bottom: 20px;
     font-weight: bold;
   }
 
@@ -3399,6 +3399,10 @@ a > i {
     padding: 10px 21px 10px 13px; 
     color: white; 
     opacity: 0.8; 
+  }
+
+  #home-rows-wrapper {
+    margin-top: -20vw;
   }
 
   #home-rows-wrapper .home-rows-videos-wrapper img {
