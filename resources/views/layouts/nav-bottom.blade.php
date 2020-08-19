@@ -1,6 +1,6 @@
 <div class="bottom-nav hidden-lg hidden-md white-theme-nav-bottom">
   <a href="/" class="{{ Request::is('/') ? 'active' : ''}}">
-    <i style="font-size: 23px;" class="material-icons">home</i>
+    <i style="font-size: 23px; margin-top: 3px" class="material-icons">home</i>
     <span style="padding-right: 1px;">主頁</span>
   </a>
   <a href="{{ route('video.subscribes') }}" class="{{ Request::is('*subscribes*') ? 'active' : ''}}">
