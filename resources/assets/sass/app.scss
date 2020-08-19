@@ -33,22 +33,22 @@ body {
   font-weight: bold;
 }
 
-#main-nav .nav-item {
+#main-nav .nav-item, #main-mobile-nav .nav-item {
   font-size: 14px;
   padding: 0 8px;
   color: white;
 }
 
-#main-nav .nav-icon {
+#main-nav .nav-icon, #main-mobile-nav .nav-icon {
   padding: 0 12px;
   color: white;
 }
 
-#main-nav .nav-icon span {
+#main-nav .nav-icon span, #main-mobile-nav .nav-icon span {
   font-size: 1.9em;
 }
 
-#main-nav a {
+#main-nav a, #main-mobile-nav a {
   text-decoration: none;
 }
 

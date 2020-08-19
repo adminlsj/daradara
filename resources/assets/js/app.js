@@ -248,25 +248,6 @@ $('#subscribe-show-all').click(function(e) {
 
 var prevScrollpos = window.pageYOffset;
 window.onscroll = function() {
-  var currentScrollPos = window.pageYOffset;
-  if (prevScrollpos > currentScrollPos || currentScrollPos < 60) {
-    scrollHideNav = document.querySelectorAll(".scroll-hide-nav");
-    for (i = 0; i < scrollHideNav.length; i++) {
-      scrollHideNav[i].style.top = "0";
-    }
-  } else {
-    scrollHideNav = document.querySelectorAll(".scroll-hide-nav");
-    for (i = 0; i < scrollHideNav.length; i++) {
-      $path = window.location.pathname;
-      if ($path == '/rank' || $path == '/newest' || $path == '/drama' || $path == '/anime') {
-        scrollHideNav[i].style.top = "-46px";
-      } else {
-        scrollHideNav[i].style.top = "-50px";
-      }
-    }
-  }
-  prevScrollpos = currentScrollPos;
-
   if (window.pageYOffset != 0) {
     $('#hentai-main-nav').css('background-color', 'black');
     $('#hentai-main-nav input').css('background-color', '#202020');
