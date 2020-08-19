@@ -12,5 +12,3 @@
   <a class="nav-icon pull-right hidden-xs" href="javascript:void(0)"><span style="vertical-align: middle;" class="material-icons">notifications</span></a>
   <a class="nav-icon pull-right hidden-xs" href="javascript:void(0)"><span style="vertical-align: middle;" class="material-icons">search</span></a>
 </div>
-
-@include('layouts.nav-bottom')
