@@ -6,7 +6,7 @@
 
 @section('content')
 
-<div style="padding-bottom: 50px;">
+<div id="content-div">
 	<div class="hidden-xs" style="position: relative;">
 		<img style="width: 100%; -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0.3)));" src="{{ $banner->imgur() }}">
 		<div id="home-banner-wrapper" style="position: absolute; left: 4%; color: white">
