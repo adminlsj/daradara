@@ -73,7 +73,7 @@
 	</div>
 
 	<div style="margin-top: 10px; margin-bottom: -5px">
-		<div style="display: inline-block;"><span class="hidden-xs hidden-sm">本網站已依台灣網站內容分級規定處理，</span>未滿十八歲者不得瀏覽</div>
+		<div style="display: inline-block; color: dimgray"><span class="hidden-xs hidden-sm">本網站已依台灣網站內容分級規定處理，</span>未滿十八歲者不得瀏覽</div>
 		<img style="display: inline-block; margin-top: -2px; margin-left: 5px" height='13' src="https://i.imgur.com/aJ6decG.gif">
 	</div>
 </div>
