@@ -58,31 +58,26 @@
 	@endforeach
 </div>
 
-<div class="row" style="padding: 0 4%">
-	<div class="col-md-3">
-		<div>Audio and Subtitles</div>
-		<div>Audio and Subtitles</div>
-		<div>Audio and Subtitles</div>
+<div style="position: relative; padding: 0 4%; margin-top: 50px">
+	<div style="margin-left: -15px; display: inline-block;">
+		<a class="hidden-xs hidden-sm" href="/contact" style="padding: 0px 15px; color: dimgray">廣告</a>
+		<a class="hidden-xs hidden-sm" href="/about" style="padding: 0px 15px; color: dimgray">Hanime1</a>
+		<a href="/about" style="padding: 0px 15px; color: dimgray">關於</a>
+		<a href="/contact" style="padding: 0px 15px; color: dimgray">聯絡</a>
 	</div>
-	<div class="col-md-3">
-		<div>Audio and Subtitles</div>
-		<div>Audio and Subtitles</div>
-		<div>Audio and Subtitles</div>
+
+	<div style="float: right; margin-right: -15px; display: inline-block;">
+		<a href="/terms" style="padding: 0px 15px; color: dimgray"><span class="hidden-xs hidden-sm">服務</span>條款</a>
+		<a href="/policies" style="padding: 0px 15px; color: dimgray">社群<span class="hidden-xs hidden-sm">規範</span></a>
+		<a href="/copyright" style="padding: 0px 15px; color: dimgray">版權<span class="hidden-xs hidden-sm">申訴</span></a>
 	</div>
-	<div class="col-md-3">
-		<div>Audio and Subtitles</div>
-		<div>Audio and Subtitles</div>
-		<div>Audio and Subtitles</div>
-	</div>
-	<div class="col-md-3">
-		<div>Audio and Subtitles</div>
-		<div>Audio and Subtitles</div>
-		<div>Audio and Subtitles</div>
+
+	<div style="margin-top: 10px; margin-bottom: -5px">
+		<div style="display: inline-block;"><span class="hidden-xs hidden-sm">本網站已依台灣網站內容分級規定處理，</span>未滿十八歲者不得瀏覽</div>
+		<img style="display: inline-block; margin-top: -2px; margin-left: 5px" height='13' src="https://i.imgur.com/aJ6decG.gif">
 	</div>
 </div>
 
-<div style="padding: 0 4%">
-	<div>© 2020 娛見日本 LaughSeeJapan</div>
-</div>
+<br>
 
 @endsection
