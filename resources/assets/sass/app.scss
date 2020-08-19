@@ -1420,15 +1420,16 @@ nav input[type=text]:focus {
 }
 
 .white-theme-nav-bottom {
-  background-color: white;
+  background-color: #131313;
 }
 
 .white-theme-nav-bottom a, .white-theme-nav-bottom i {
-  color: #595959;
+  color: dimgray;
+  font-weight: lighter;
 }
 
 .white-theme-nav-bottom a:hover, .white-theme-nav-bottom a:hover i, .white-theme-nav-bottom a.active, .white-theme-nav-bottom a.active i {
-  color: red;
+  color: white;
 }
 
 .nav-tab-container h4{
