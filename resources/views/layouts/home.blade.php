@@ -36,7 +36,7 @@
 			</div>
 			<div style="width: 33%; float:left; display: inline-block;">
 				<span class="material-icons">info</span>
-				<div style="font-size: 12px; margin-top: -1px">更多資訊</div>
+				<div style="font-size: 12px; margin-top: 0px">更多資訊</div>
 			</div>
 		</div>
 	</div>
