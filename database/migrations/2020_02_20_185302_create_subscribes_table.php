@@ -15,9 +15,11 @@ class CreateSubscribesTable extends Migration
     {
         Schema::create('subscribes', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('user_id');
-            $table->string('genre');
-            $table->string('category');
+            $table->integer('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->integer('playlist_id');
+            $table->foreign('playlist_id')->references('id')->on('watches')->onDelete('cascade');
+            $table->string('tag');
             $table->timestamps();
         });
     }

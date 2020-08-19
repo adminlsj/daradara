@@ -7,7 +7,7 @@
 @section('content')
 
 <div class="paravi-padding-setup" style="padding-top: 65px; background-color: #303030">
-	<div style="text-align: center;">{!! $videos->render() !!}</div>
+	<div style="text-align: center;">{!! $videos->appends(request()->input())->links() !!}</div>
 	<div class="row hentai-row-wrapper" style="{{ $videos->count() >= 48 || Request::get('page') > 1 ? 'margin-top: 5px;' : 'margin-top: 20px;' }}">
 		@foreach ($videos as $video)
 			<div class="col-xs-4 col-sm-3 col-md-2">
@@ -18,7 +18,7 @@
 			</div>
 		@endforeach
 	</div>
-	<div style="text-align: center;">{!! $videos->render() !!}</div>
+	<div style="text-align: center;">{!! $videos->appends(request()->input())->links() !!}</div>
 </div>
 
 <div style="background-color: #212121;">
@@ -29,7 +29,7 @@
 	</div>
 </div>
 
-<form action="{{ route('home.hentai') }}" method="GET">
+<form id="hentai-form" action="{{ route('home.hentai') }}" method="GET">
 	<div id="tags" class="modal fade" role="dialog">
 	  <div class="modal-dialog">
 	    <div class="modal-content" style="border-radius: 3px; background-color: #424242; color: white">
@@ -86,6 +86,14 @@
 	      </div>
 	    </div>
 	  </div>
+	</div>
+
+	<div id="sort-wrapper" class="modal fade" role="dialog">
+		<div id="hentai-sort-panel">
+			<input type="hidden" id="sort" name="sort" value="{{ Request::get('sort') }}">
+			<div class="hentai-sort-options-wrapper"><div class="hentai-sort-options">上傳日期</div></div>
+			<div class="hentai-sort-options-wrapper"><div class="hentai-sort-options">觀看次數</div></div>
+		</div>
 	</div>
 </form>
 

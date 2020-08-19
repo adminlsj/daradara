@@ -12,21 +12,12 @@
 	<div style="padding-top: 10px; position: relative;">
 		<div id="subscribes-watch-wrapper" class="row no-gutter padding-setup">
 			@foreach ($subscribes as $subscribe)
-				@if ($subscribe->type == 'watch')
-					<a href="{{ route('video.playlist') }}?list={{ $subscribe->watch()->id }}" style="text-decoration: none;">
-						<div class="single-top-watch">
-							<img class="lazy" style="width: 100%; height: auto; border-radius: 50%;" src="{{ $subscribe->watch()->imgurDefaultCircleB() }}" data-src="{{ $subscribe->watch()->videos->first()->imgurB() }}" data-srcset="{{ $subscribe->watch()->videos->first()->imgurB() }}" alt="{{ $subscribe->watch()->title }}">
-							<div class="text-ellipsis" style="width: 100%; font-size: 0.75em; padding-top: 5px; color: #595959; font-weight: bold">{{ $subscribe->watch()->title }}</div>
-						</div>
-					</a>
-				@else
-					<a href="{{ route('video.subscribeTag') }}?query={{ $subscribe->tag }}" style="text-decoration: none;">
-						<div class="single-top-watch">
-							<img class="lazy" style="width: 100%; height: auto; border-radius: 50%;" src="{{ App\Video::tagSubscribeFirst($subscribe)->imgurDefaultCircleB() }}" data-src="{{ App\Video::tagSubscribeFirst($subscribe)->imgurB() }}" data-srcset="{{ App\Video::tagSubscribeFirst($subscribe)->imgurB() }}" alt="{{ $subscribe->tag }}">
-							<div class="text-ellipsis" style="width: 100%; font-size: 0.75em; padding-top: 5px; color: #595959; font-weight: bold">#{{ $subscribe->tag }}</div>
-						</div>
-					</a>
-				@endif
+				<a href="{{ route('video.playlist') }}?list={{ $subscribe->watch()->id }}" style="text-decoration: none;">
+					<div class="single-top-watch">
+						<img class="lazy" style="width: 100%; height: auto; border-radius: 50%;" src="{{ $subscribe->watch()->imgurDefaultCircleB() }}" data-src="{{ $subscribe->watch()->videos->first()->imgurB() }}" data-srcset="{{ $subscribe->watch()->videos->first()->imgurB() }}" alt="{{ $subscribe->watch()->title }}">
+						<div class="text-ellipsis" style="width: 100%; font-size: 0.75em; padding-top: 5px; color: #595959; font-weight: bold">{{ $subscribe->watch()->title }}</div>
+					</div>
+				</a>
 			@endforeach
 		</div>
 		<div id="subscribe-show-all" class="no-select" style="height: 100px; vertical-align: middle; padding: 0px 15px; position: absolute; top: 0px; right: 0px; background-color: #F5F5F5; font-size: 1.1em; padding-top: 40px; color: #d84b6b; font-weight: 500; cursor: pointer;">所有</div>

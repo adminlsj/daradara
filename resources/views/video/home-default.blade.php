@@ -4,7 +4,7 @@
 </div>
 
 <div class="row no-gutter load-more-container">
-  <a href="{{ route('genre.index', 'anime') }}" style="color: inherit; text-decoration: none">
+  <a href="/search?query=動漫" style="color: inherit; text-decoration: none">
     <h3 class="user-show-title">動畫卡通<i style="font-size: 0.85em; vertical-align: middle; margin-top: -3px; margin-left: 5px" class="material-icons">arrow_forward_ios</i></h3>
   </a>
   <div class="video-sidebar-wrapper">
@@ -31,7 +31,7 @@
 </div>
 
 <div class="row no-gutter load-more-container" style="margin-top: 5px;">
-  <a href="{{ route('genre.index', 'variety') }}" style="color: inherit; text-decoration: none">
+  <a href="/search?query=綜藝" style="color: inherit; text-decoration: none">
     <h3 class="user-show-title">綜藝頻道<i style="font-size: 0.85em; vertical-align: middle; margin-top: -4px; margin-left: 5px" class="material-icons">arrow_forward_ios</i></h3>
   </a>
   <div class="video-sidebar-wrapper">
@@ -44,7 +44,7 @@
 </div>
 
 <div class="row no-gutter load-more-container" style="margin-top: 5px;">
-  <a href="{{ route('genre.index', 'artist') }}" style="color: inherit; text-decoration: none">
+  <a href="/search?query=日劇" style="color: inherit; text-decoration: none">
     <h3 class="user-show-title">明星專區<i style="font-size: 0.85em; vertical-align: middle; margin-top: -4px; margin-left: 5px" class="material-icons">arrow_forward_ios</i></h3>
   </a>
   <div class="video-sidebar-wrapper">
@@ -57,7 +57,7 @@
 </div>
 
 <div class="row no-gutter load-more-container" style="margin-top: 5px;">
-  <a href="{{ route('genre.index', 'meme') }}" style="color: inherit; text-decoration: none">
+  <a href="/search?query=迷因翻譯" style="color: inherit; text-decoration: none">
     <h3 class="user-show-title">迷因翻譯<i style="font-size: 0.85em; vertical-align: middle; margin-top: -4px; margin-left: 5px" class="material-icons">arrow_forward_ios</i></h3>
   </a>
   <div class="video-sidebar-wrapper">

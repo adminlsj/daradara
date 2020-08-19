@@ -1,5 +1,5 @@
 <div class="hidden-md hidden-lg" style="margin-bottom: 30px;">
-	<a href="{{ route('video.watch') }}?v={{ $video->id }}{{ $video->watch ? '&list='.$video->watch->id : ''}}" style="text-decoration: none;">
+	<a href="{{ route('video.watch') }}?v={{ $video->id }}&list={{ $video->watch->id }}" style="text-decoration: none;">
 		<img class="lazy" style="width: 100%;" src="{{ $video->imgur16by9() }}" data-src="{{ $video->imgurH() }}" data-srcset="{{ $video->imgurH() }}" alt="{{ $video->title }}">
 	</a>
 
@@ -15,7 +15,7 @@
 </div>
 
 <div id="singleSubscribeVideo" style="padding: 7px 20px;" class="multiple-link-wrapper hidden-xs hidden-sm hover-opacity-all">
-  <a href="{{ route('video.watch') }}?v={{ $video->id }}{{ $video->watch ? '&list='.$video->watch->id : ''}}" class="overlay"></a>
+  <a href="{{ route('video.watch') }}?v={{ $video->id }}&list={{ $video->watch->id }}" class="overlay"></a>
   <div class="row no-gutter inner">
     <div class="col-xs-6 col-sm-6 col-md-3">
       <img class="lazy" style="width: 100%; height: 100%; padding-right: 13px" src="{{ $video->imgur16by9() }}" data-src="{{ $video->imgurL() }}" data-srcset="{{ $video->imgurL() }}" alt="{{ $video->title }}">

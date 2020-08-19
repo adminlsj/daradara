@@ -45,7 +45,7 @@
 
       <div class="pull-right" style="color: #d1d1d1">
         <div style="border: 1px solid rgba(58,60,63,.85); line-height: 48px; width: 16vw; text-align: center; display: inline-block; margin-right: 4px"><span style="vertical-align: middle; color: darkgray;" class="material-icons">clear_all</span><span class="hidden-xs" style="margin-left: 10px">重設</span></div>
-        <div style="border: 1px solid rgba(58,60,63,.85); line-height: 48px; width: 16vw; text-align: center; display: inline-block; margin-right: 4px"><span style="vertical-align: middle; color: darkgray;" class="material-icons">sort</span><span class="hidden-xs" style="margin-left: 10px">排序</span></div>
+        <button id="hentai-filter-sort" style="position: relative;" type="button" data-toggle="modal" data-target="#sort-wrapper"><span style="vertical-align: middle; color: darkgray;" class="material-icons">sort</span><span class="hidden-xs" style="margin-left: 10px">排序</span></button>
       </div>
     </div>
   </div>

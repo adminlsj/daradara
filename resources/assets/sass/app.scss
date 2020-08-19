@@ -25,8 +25,90 @@ html, body {
 }
 
 body {
-    background-color: white; 
-    overflow-x:hidden;
+  /* font-family: 'Arial', 'Microsoft YaHei', '黑體', '宋體', sans-serif;
+  font: 12px/1.5 Tahoma,Helvetica,Arial,'宋體',sans-serif; */
+  font-family: 'Arial', 'Microsoft YaHei', '黑體', '宋體', sans-serif;
+  background-color: #141414; 
+  overflow-x: hidden;
+  font-weight: bold;
+}
+
+#main-nav .nav-item {
+  font-size: 14px;
+  padding: 0 8px;
+  color: white;
+}
+
+#main-nav .nav-icon {
+  padding: 0 12px;
+  color: white;
+}
+
+#main-nav .nav-icon span {
+  font-size: 1.9em;
+}
+
+#main-nav a {
+  text-decoration: none;
+}
+
+#home-banner-wrapper {
+  width: 36%;
+  bottom: 37%;
+}
+
+#home-banner-wrapper h4 {
+  overflow: hidden;
+  text-overflow: ellipsis; 
+  display: -webkit-box; 
+  -webkit-line-clamp: 3; 
+  -webkit-box-orient: vertical; 
+  line-height: 25px; 
+  text-shadow: 2px 2px 5px gray; 
+  padding-top: 10px;
+  margin-bottom: 30px;
+}
+
+#home-banner-wrapper .home-banner-btn {
+  cursor: pointer; 
+  font-size: 16px; 
+  border-radius: 5px; 
+  text-decoration: none;
+}
+
+#home-banner-wrapper .home-banner-play-btn {
+  background-color: white; 
+  padding: 14px 30px 14px 20px; 
+  color: black;
+}
+
+#home-banner-wrapper .home-banner-info-btn {
+  background-color: gray; 
+  padding: 14px 30px 14px 25px; 
+  color: white; 
+  opacity: 0.8; 
+}
+
+#home-rows-wrapper {
+  margin-top: -15vw;
+}
+
+#home-rows-wrapper h3 {
+  padding: 0 4%; 
+  font-size: 20px; 
+  color: white; 
+  padding-bottom: 5px;
+}
+
+#home-rows-wrapper .home-rows-videos-wrapper {
+  overflow: auto; 
+  white-space: nowrap; 
+  padding: 0 4%; 
+  margin-bottom: 50px;
+}
+
+#home-rows-wrapper .home-rows-videos-wrapper img {
+  width: 190px;
 }
 
 .load-more-container h1 {
@@ -371,6 +453,10 @@ label.upload-image-btn input[type="file"] {
     color: #4A4;
 }
 
+#comment-like-form-wrapper {
+  margin-left: 45px;
+}
+
 .video-card {
   width: calc(100% / 6);
 }
@@ -668,6 +754,27 @@ label.upload-image-btn input[type="file"] {
   font-size: 0.95em; 
   line-height: 22px; 
   background: #212121 url('https://i.imgur.com/W65AiZb.png') bottom left/120px auto no-repeat;
+}
+
+#hentai-sort-panel {
+  padding: 9px 0px;
+  position: fixed; 
+  right: 30px; 
+  top: 65px; 
+  background-color: #424242; 
+  color: white;
+  z-index: 100000;
+  border-radius: 3px;
+}
+
+#hentai-sort-panel .hentai-sort-options {
+  padding: 13px 40px;
+  cursor:pointer;
+}
+
+#hentai-sort-panel .hentai-sort-options-wrapper:hover {
+  background-color: #555555;
+  transition: .3s cubic-bezier(.25,.8,.5,1);
 }
 
 .load-more-container {
@@ -2293,6 +2400,10 @@ a > i {
   text-decoration: none !important;
 }
 
+.comment-reply-reply-form-wrapper .comment-text {
+  margin-left: 10px;
+}
+
 @-webkit-keyframes slide {
     100% { right: 0; }
 }
@@ -2800,11 +2911,37 @@ a > i {
     margin-top: 0px;
     margin-left: -5px;
   }
+
+  #home-banner-wrapper {
+    width: 40%;
+  }
 }
 
 @media (max-width: 991px) {
+  #home-rows-wrapper {
+    margin-top: 3.5vw;
+  }
+
+  #home-rows-wrapper h3 {
+    font-size: 16px;
+    padding-bottom: 0px;
+  }
+
+  #home-rows-wrapper .home-rows-videos-wrapper {
+    margin-bottom: 10px;
+  }
+
+  #home-banner-wrapper {
+    width: 50%;
+    bottom: 8%;
+  }
+
   #content-div {
     padding-bottom: 50px
+  }
+
+  #comment-like-form-wrapper {
+    margin-left: 50px;
   }
 
   #hentai-menu-btn {
@@ -3233,12 +3370,60 @@ a > i {
 }
 
 @media (max-width: 768px) {
+  #home-banner-wrapper {
+    width: 80%;
+  }
+
+  #home-banner-wrapper h3 {
+    font-size: 15px;
+  }
+
+  #home-banner-wrapper h1 {
+    font-size: 20px;
+  }
+
+  #home-banner-wrapper h4 {
+    font-size: 14px;
+    padding-top: 0px;
+    line-height: 19px;
+    margin-bottom: 20px;
+  }
+
+  #home-banner-wrapper .home-banner-btn {
+    font-size: 13px; 
+  }
+
+  #home-banner-wrapper .home-banner-play-btn {
+    background-color: white; 
+    padding: 10px 21px 10px 11px; 
+    color: black;
+  }
+
+  #home-banner-wrapper .home-banner-info-btn {
+    background-color: gray; 
+    padding: 10px 21px 10px 13px; 
+    color: white; 
+    opacity: 0.8; 
+  }
+
+  #home-rows-wrapper .home-rows-videos-wrapper img {
+    width: 150px;
+  }
+
+  #home-rows-wrapper .home-rows-videos-wrapper #home-rows-videos-title {
+    font-size: 12px;
+  }
+
   .home-logo img {
     height: 30px;
   }
 
   .home-search-form input {
     height: 50px;
+  }
+
+  .comment-reply-reply-form-wrapper .comment-text {
+    margin-left: 5px;
   }
 
   .hentai-row-wrapper {

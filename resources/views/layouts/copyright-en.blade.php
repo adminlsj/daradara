@@ -14,194 +14,50 @@
     <div class="paravi-padding-setup" style="margin: 0 auto 0 auto; padding-top: 10px; padding-bottom: 10px;">
     	<form action="{{ route('email.copyrightReport') }}" method="GET">
 	    	<h4>Copyright
-		      <div style="margin-top:-3px; font-weight: 400 !important;" class="pull-right">
+		      <!-- <div style="margin-top:-3px; font-weight: 400 !important;" class="pull-right">
 			    <select name="forma" onchange="location = this.value;">
 			     <option value="#">Languages...</option>
 				 <option value="/copyright?lang=ch">中文</option>
 				 <option value="#">English</option>
 				</select>
-			  </div>
+			  </div> -->
 			</h4>
-	    	<p>Copyright is an important topic for the LaughSeeJapan community. Below, you can find out how to manage your rights on LaughSeeJapan and learn more about respecting the rights of others.</p>
+	    	<p>Copyright is an important topic for the LaughSeeJapan community. This LaughSeeJapan Copyright Policy is a part of LaughSeeJapan’s Terms of Service and sets forth the process by which copyright holders and their agents may remove allegedly infringing materials available on one of LaughSeeJapan’s online services. Below, you can find out how to manage your rights on LaughSeeJapan and learn more about respecting the rights of others.</p>
 	    	
-			<h5>Submit a copyright takedown notice</h5>
-			<p>If your copyright-protected work was posted on LaughSeeJapan without authorization, you may submit a copyright infringement notification. Be sure to consider whether fair use, fair dealing, or a similar exception to copyright applies before you submit. These requests should be sent by the copyright owner or an agent authorized to act on the owner’s behalf.</p>
+			<h5>1. DMCA Policy</h5>
+			<p>LaughSeeJapan respects the intellectual property of others and expects its users to do the same. Each user must ensure that the materials they upload do not infringe any third-party copyright. LaughSeeJapan will promptly remove materials in accordance with the Digital Millennium Copyright Act (“DMCA”) when properly notified that the materials infringe a third party's copyright. LaughSeeJapan will also, in appropriate circumstances, terminate the accounts of repeat copyright infringers.In filing any request, please ensure that your notice is complete and that your statements are accurate. If we request additional information necessary to make your notice complete, please provide that information promptly. If you fail to provide the required information, your request may not be processed further. For non-copyright complaints, please see our Trademark Infringement Complaint Form or our Privacy Complaint Form.</p>
 
-			<p>The fastest and simplest way to submit a copyright takedown notice is through our webform. We recommend using a computer for the easiest method. We will also accept free-form copyright infringement notifications, submitted by email, fax, and mail.</p>
+			<h5>2. DMCA Takedown Notices</h5>
+			<p style="white-space: pre-line;">To request the removal of materials based upon copyright infringement, you must file a notice containing the following:
+1. Your name, address, telephone number, and email address (if any).
+2. A description of the copyrighted work that you claim has been infringed.
+3. A description of where on LaughSeeJapan’s service the material that you claim is infringing may be found, sufficient for LaughSeeJapan to locate the material (e.g., the URL for the video).
+4. A statement that you have a good faith belief that the use of the copyrighted work is not authorized by the copyright owner, its agent, or the law.
+5. A statement by you UNDER PENALTY OF PERJURY that the information in your notice is accurate and that you are the copyright owner or authorized to act on the copyright owner's behalf.
+6. Your electronic or physical signature.</p>
+<p style="white-space: pre-line;">You may file your notice:
+- By email: laughseejapan@freemail.hu</p>
+<p>LaughSeeJapan may disclose notices with affected users and third-party databases that collect information about copyright takedown notices.</p>
 
-			<p style="white-space: pre-line">LaughSeeJapan Copyright Contact Information:
-Email: acura1989akc@gmail.com
-Address: 24 Kendrick street, Paramus,  NJ 07652, USA
-			</p>
+			<h5>3. DMCA Counter-Notifications</h5>
+			<p style="white-space: pre-line;">If you are a LaughSeeJapan user who wishes to challenge the removal of materials caused by a DMCA takedown notice, you must file a counter-notification containing the following:
+1. Your name, address, and telephone number.
+2. A description of the material that was removed and the location on LaughSeeJapan’s service where it previously appeared (e.g., the URL of the video).
+3. A statement UNDER PENALTY OF PERJURY that you have a good faith belief that the material was removed or disabled as a result of mistake or misidentification.
+4. A statement that you consent to the jurisdiction of the Federal District Court for the judicial district in which your address is located, or if your address is outside of the United States, any judicial district in which LaughSeeJapan may be found (the United States District Court for the Southern District of New York), and that you will accept service of process from the person who filed the original DMCA notice or an agent of that person.
+5. Your electronic or physical signature.</p>
+<p style="white-space: pre-line;">You may submit this notice:
+- By email: laughseejapan@freemail.hu</p>
+<p>LaughSeeJapan will forward any complete counter-notification to the person who filed the original DMCA notice. The copyright owner(s) may elect to file a lawsuit against you for copyright infringement. If we do not receive notice that such a lawsuit has been filed within ten (10) business days after we provide notice of your counter-notification, we may restore the challenged materials. Until that time, your materials will remain removed.</p>
 
-			<p>The name you enter as copyright owner will be published on LaughSeeJapan in place of the turned off content. If you can give us a valid legal alternative, such as a company name or the name of an authorized representative, we'll review and apply it if appropriate. The name will become part of the public record of your request, along with your description of the work(s) allegedly infringed. All other information, including your full legal name and email, are part of the full takedown notice, which may be given to the uploader.</p>
+			<h5>4. Repeat Infringers</h5>
+			<p>LaughSeeJapan will terminate user accounts that receive three (3) DMCA strikes. A “DMCA strike” accrues each time that material is removed from a user’s account due to a DMCA notice. We may group multiple DMCA notices received within a short period of time as a single DMCA strike.
+
+We may remove a DMCA strike in appropriate circumstances, such as where (1) the underlying material is ultimately restored due to a DMCA counter-notification; or (2) the claimant withdraws the underlying notice.
+
+We may terminate user accounts that receive fewer than three (3) DMCA strikes in appropriate circumstances, such as where the user has a history of violating or willfully disregarding our Terms of Service.</p>
 
 			<p>If you choose to submit a copyright takedown request, remember that you're starting a legal process.</p>
-
-			<div id="copyright-form" style="border: 1px solid #595959; margin-top: 15px">
-				<h4>Copyright Infringement Notification</h4>
-
-				<hr>
-
-				<h5 style="font-weight: 600">What is the issue?</h5>
-				<div style="padding: 0px 10px 5px 10px;">
-					<div>
-					  <input type="radio" name="copyrightReason" id="logo" value="Trademark infringement (Someone is using my trademark)" required>
-					  <label for="logo" style="font-weight: 400">
-					    &nbsp;Trademark infringement (Someone is using my trademark)
-					  </label>
-					</div>
-					<div>
-					  <input type="radio" name="copyrightReason" id="copyright" value="Copyright infringement (Someone copied my creation)" required>
-					  <label for="copyright" style="font-weight: 400">
-					    &nbsp;Copyright infringement (Someone copied my creation)
-					  </label>
-					</div>
-					<div>
-					  <input type="radio" name="copyrightReason" id="others" value="Other legal issue" required>
-					  <label for="others" style="font-weight: 400">
-					    &nbsp;Other legal issue
-					  </label>
-					</div>
-				</div>
-
-				<hr>
-
-				<h5 style="font-weight: 600">Copyright infringement - Who is affected?</h5>
-				<div style="padding: 0px 10px 5px 10px;">
-					<div>
-					  <input type="radio" name="copyrightStakeholders" id="individual" value="I am!" required>
-					  <label for="individual" style="font-weight: 400">
-					    &nbsp;I am!
-					  </label>
-					</div>
-					<div>
-					  <input type="radio" name="copyrightStakeholders" id="company" value="My company, organization, or client" required>
-					  <label for="company" style="font-weight: 400">
-					    &nbsp;My company, organization, or client
-					  </label>
-					</div>
-					<div>
-					  <input type="radio" name="copyrightStakeholders" id="thirdparty" value="Another copyright owner" required>
-					  <label for="thirdparty" style="font-weight: 400">
-					    &nbsp;Another copyright owner
-					  </label>
-					</div>
-				</div>
-
-				<hr>
-
-				<h5 style="font-weight: 600">Videos to be removed</h5>
-				<p style="margin-bottom: 3px">URL of allegedly infringing video to be removed:</p>
-				<div style="padding: 0px 10px 10px 10px;">
-				  <input type="text" class="form-control" name="copyrightURL" id="copyrightURL" required>
-				</div>
-				<p style="margin-bottom: 3px">Describe the work allegedly infringed:</p>
-				<div style="padding: 0px 10px 10px 10px;">
-			      <select name="copyrightSelect" id="copyrightSelect" class="form-control" required>
-			        <option value="">Please select one...</option>
-			        <option value="My company, organization, or client's LaughSeeJapan video was reuploaded by another user">My company, organization, or client's LaughSeeJapan video was reuploaded by another user</option>
-			        <option value="My company, organization, or client's name">My company, organization, or client's name</option>
-			        <option value="My company, organization, or client's original song">My company, organization, or client's original song</option>
-			        <option value="My company, organization, or client's software">My company, organization, or client's software</option>
-			        <option value="My company, organization, or client's artwork">My company, organization, or client's artwork</option>
-			        <option value="My company, organization, or client's live performance">My company, organization, or client's live performance</option>
-			        <option value="My company, organization, or client's video (not from LaughSeeJapan)">My company, organization, or client's video (not from LaughSeeJapan)</option>
-			        <option value="My company, organization, or client's copyrighted logo">My company, organization, or client's copyrighted logo</option>
-			        <option value="Other">Other</option>
-			      </select>
-			    </div>
-
-				<hr>
-
-				<h5 style="font-weight: 600">Tell us about yourself</h5>
-				<p style="margin-bottom: 3px">Copyright Owner Name (Company Name):</p>
-				<div style="padding: 0px 10px 10px 10px;">
-				  <input type="text" class="form-control" name="copyrightCompanyName" id="copyrightCompanyName" required>
-				  <small style="padding: 0px; margin-bottom: 0px">The copyright owner name will be published on LaughSeeJapan in place of disabled content. This will become part of the public record of your request, along with your description(s) of the work(s) allegedly infringed. All other information, including your full legal name and email address, are part of the full takedown notice, which may be provided to the uploader.</small>
-				</div>
-				<p style="margin-bottom: 3px">Your Title or Job Position (What is your authority to make this complaint?):</p>
-				<div style="padding: 0px 10px 10px 10px;">
-				  <input type="text" class="form-control" name="copyrightUserOccupation" id="copyrightUserOccupation" required>
-				</div>
-				<p style="margin-bottom: 3px">Primary Email Address:</p>
-				<div style="padding: 0px 10px 10px 10px;">
-				  <input type="text" class="form-control" name="copyrightUserEmail" id="copyrightUserEmail" required>
-				  <small style="padding: 0px; margin-bottom: 0px">We may email you about your takedown request if additional information is required. You may wish to provide an alternative email address where we can reach you, for example, if you don't frequently check the email address associated with your account.</small>
-				</div>
-				<p style="margin-bottom: 3px">Your Full Legal Name (A first and a last name, not a company name):</p>
-				<div style="padding: 0px 10px 10px 10px;">
-				  <input type="text" class="form-control" name="copyrightUserName" id="copyrightUserName" required>
-				</div>
-				<p style="margin-bottom: 3px">Street Address:</p>
-				<div style="padding: 0px 10px 10px 10px;">
-				  <input type="text" class="form-control" name="copyrightUserStreet" id="copyrightUserStreet" required>
-				</div>
-				<p style="margin-bottom: 3px">City:</p>
-				<div style="padding: 0px 10px 10px 10px;">
-				  <input type="text" class="form-control" name="copyrightUserCity" id="copyrightUserCity" required>
-				</div>
-				<p style="margin-bottom: 3px">State/Province:</p>
-				<div style="padding: 0px 10px 10px 10px;">
-				  <input type="text" class="form-control" name="copyrightUserRegion" id="copyrightUserRegion" required>
-				</div>
-				<p style="margin-bottom: 3px">ZIP/Postal Code:</p>
-				<div style="padding: 0px 10px 10px 10px;">
-				  <input type="text" class="form-control" name="copyrightUserCode" id="copyrightUserCode" required>
-				</div>
-				<p style="margin-bottom: 3px">Country:</p>
-				<div style="padding: 0px 10px 10px 10px;">
-				  <input type="text" class="form-control" name="copyrightUserCountry" id="copyrightUserCountry" required>
-				</div>
-				<p style="margin-bottom: 3px">Phone:</p>
-				<div style="padding: 0px 10px 10px 10px;">
-				  <input type="text" class="form-control" name="copyrightUserMobile" id="copyrightUserMobile" required>
-				</div>
-
-				<hr>
-
-				<h5 style="font-weight: 600">By checking the following boxes, I, in good faith, state that:</h5>
-				<div style="padding: 0px 10px 5px 10px;">
-					<div class="form-check form-check-inline">
-					  <input class="form-check-input" type="checkbox" name="copyrightConfirmAuthorized" id="copyrightConfirmAuthorized" value="I am the owner, or an agent authorized to act on behalf of the owner of an exclusive right that is allegedly infringed." required>
-					  <label style="font-weight: 400" class="form-check-label" for="copyrightConfirmAuthorized">&nbsp;I am the owner, or an agent authorized to act on behalf of the owner of an exclusive right that is allegedly infringed.</label>
-					</div>
-				</div>
-				<div style="padding: 0px 10px 5px 10px;">
-					<div class="form-check form-check-inline">
-					  <input class="form-check-input" type="checkbox" name="copyrightConfirmSensible" id="copyrightConfirmSensible" value="I have a good faith belief that the use of the material in the manner complained of is not authorized by the copyright owner, its agent, or the law; and" required>
-					  <label style="font-weight: 400" class="form-check-label" for="copyrightConfirmSensible">&nbsp;I have a good faith belief that the use of the material in the manner complained of is not authorized by the copyright owner, its agent, or the law; and</label>
-					</div>
-				</div>
-				<div style="padding: 0px 10px 5px 10px;">
-					<div class="form-check form-check-inline">
-					  <input class="form-check-input" type="checkbox" name="copyrightConfirmCorrect" id="copyrightConfirmCorrect" value="This notification is accurate." required>
-					  <label style="font-weight: 400" class="form-check-label" for="copyrightConfirmCorrect">&nbsp;This notification is accurate.</label>
-					</div>
-				</div>
-				<div style="padding: 0px 10px 5px 10px;">
-					<div class="form-check form-check-inline">
-					  <input class="form-check-input" type="checkbox" name="copyrightConfirmAcknowledge" id="copyrightConfirmAcknowledge" value="I acknowledge that there may be adverse legal consequences for making false or bad faith allegations of copyright infringement by using this process." required>
-					  <label style="font-weight: 400" class="form-check-label" for="copyrightConfirmAcknowledge">&nbsp;I acknowledge that there may be adverse legal consequences for making false or bad faith allegations of copyright infringement by using this process.</label>
-					</div>
-				</div>
-				<div style="padding: 0px 10px 5px 10px;">
-					<div class="form-check form-check-inline">
-					  <input class="form-check-input" type="checkbox" name="copyrightConfirmTerminate" id="copyrightConfirmTerminate" value="I understand that abuse of this tool will result in termination of my LaughSeeJapan account." required>
-					  <label style="font-weight: 400" class="form-check-label" for="copyrightConfirmTerminate">&nbsp;I understand that abuse of this tool will result in termination of my LaughSeeJapan account.</label>
-					</div>
-				</div>
-
-				<hr>
-
-				<h5 style="font-weight: 600">Typing your full name in this box will act as your digital signature.</h5>
-				<div style="padding: 0px 10px 10px 10px;">
-				  <input type="text" class="form-control" name="copyrightUserSignature" id="copyrightUserSignature" required>
-				</div>
-
-				<button type="submit" style="margin: 0px 10px 10px 10px; width: auto; border: 0px; font-weight: 500; font-size: 1em; padding: 7px 10px" class="btn btn-primary" name="submit">Submit Complaint</button>
-			</div>
-		</form>
 		<br>
     </div>
 </div>

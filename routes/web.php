@@ -54,11 +54,16 @@ Route::get('/tag', 'VideoController@subscribeTag')->name('video.subscribeTag');
 Route::post('/like', 'VideoController@like')->name('video.like');
 Route::post('/unlike', 'VideoController@unlike')->name('video.unlike');
 
+Route::post('/commentLike', 'VideoController@commentLike')->name('comment.like');
+Route::post('/commentUnlike', 'VideoController@commentUnlike')->name('comment.unlike');
+
 Route::post('/save', 'VideoController@save')->name('video.save');
 Route::post('/unsave', 'VideoController@unsave')->name('video.unsave');
 
 Route::post('/createComment', 'VideoController@createComment')->name('video.createComment');
 Route::post('/deleteComment', 'VideoController@deleteComment')->name('video.deleteComment');
+
+Route::post('/createFeedback', 'HomeController@createFeedback')->name('home.createFeedback');
 
 Route::get('/about', 'HomeController@about');
 Route::get('/contact', 'HomeController@contact');

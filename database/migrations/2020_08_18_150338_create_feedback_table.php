@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddDataToVideos extends Migration
+class CreateFeedbackTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,12 @@ class AddDataToVideos extends Migration
      */
     public function up()
     {
-        Schema::table('videos', function (Blueprint $table) {
-            $table->jsonb('data')->nullable();
+        Schema::create('feedback', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('name');
+            $table->string('email')->nullable();
+            $table->text('text');
+            $table->timestamps();
         });
     }
 
@@ -25,8 +29,6 @@ class AddDataToVideos extends Migration
      */
     public function down()
     {
-        Schema::table('videos', function (Blueprint $table) {
-            
-        });
+        Schema::dropIfExists('feedback');
     }
 }

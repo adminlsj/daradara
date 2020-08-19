@@ -7,6 +7,7 @@ use App\User;
 use App\Watch;
 use App\Subscribe;
 use App\Comment;
+use App\Like;
 use Spatie\Browsershot\Browsershot;
 
 class Video extends Model
@@ -30,7 +31,7 @@ class Video extends Model
     ];
 
     public static $hentai_brands = [
-        '妄想実現めでぃあ', 'メリー・ジェーン', 'ピンクパイナップル', 'ばにぃうぉ～か～', 'Queen Bee', 'PoRO', 'せるふぃっしゅ', '鈴木みら乃', 'ショーテン', 'GOLD BEAR', 'ZIZ', 'EDGE', 'Collaboration Works', 'BOOTLEG', 'BOMB!CUTE!BOMB!', 'nur', 'あんてきぬすっ', '魔人', 'ルネ', 'Princess Sugar'
+        '妄想実現めでぃあ', 'メリー・ジェーン', 'ピンクパイナップル', 'ばにぃうぉ～か～', 'Queen Bee', 'PoRO', 'せるふぃっしゅ', '鈴木みら乃', 'ショーテン', 'GOLD BEAR', 'ZIZ', 'EDGE', 'Collaboration Works', 'BOOTLEG', 'BOMB!CUTE!BOMB!', 'nur', 'あんてきぬすっ', '魔人', 'ルネ', 'Princess Sugar', 'パシュミナ'
     ];
 
     public static $tags = [
@@ -76,6 +77,11 @@ class Video extends Model
     public function tags()
     {
         return explode(" ", $this->tags);
+    }
+
+    public function likes()
+    {
+        return Like::where('type', 'video')->where('foreign_id', $this->id)->orderBy('created_at', 'desc')->get();
     }
 
     public function views()

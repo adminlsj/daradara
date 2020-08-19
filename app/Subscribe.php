@@ -14,7 +14,7 @@ class Subscribe extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'type', 'tag',
+        'user_id', 'playlist_id', 'tag',
     ];
 
     public function user()

@@ -102,7 +102,9 @@ class VideoController extends Controller
 
             $blog = Blog::where('tags', 'ilike', '%美女%')->inRandomOrder()->first();
 
-            return view('video.showWatch', compact('video', 'outsource', 'sd', 'watch', 'current', 'is_program', 'is_subscribed', 'is_mobile', 'blog'));
+            $comments = Comment::with('user.avatar')->where('type', 'video')->where('foreign_id', $video->id)->orderBy('created_at', 'desc')->get();
+
+            return view('video.showWatch', compact('video', 'outsource', 'sd', 'watch', 'current', 'is_program', 'is_subscribed', 'is_mobile', 'blog', 'comments'));
 
         } else {
             return view('errors.404');
@@ -175,38 +177,33 @@ class VideoController extends Controller
     public function subscribe(Request $request)
     {
         $user = User::find(request('subscribe-user-id'));
+        $watch = Watch::find(request('subscribe-playlist-id'));
         $source = request('subscribe-source');
-        $type = request('subscribe-type');
-        $tag = request('subscribe-tag');
 
-        if (Subscribe::where('user_id', Auth::user()->id)->where('tag', $tag)->first() == null) {
+        if (!Subscribe::where('user_id', Auth::user()->id)->where('playlist_id', $watch->id)->exists()) {
             $subscribe = Subscribe::create([
                 'user_id' => $user->id,
-                'type' => $type,
-                'tag' => $tag,
+                'playlist_id' => $watch->id,
+                'tag' => $watch->title,
             ]);
         }
 
         $html = '';
         switch ($source) {
             case 'video':
-                $html .= view('video.unsubscribeBtn', compact('tag'));
+                $html .= view('video.unsubscribeBtn', compact('watch'));
                 break;
 
             case 'intro':
-                $html .= view('video.intro-unsubscribe-btn', compact('tag'));
+                $html .= view('video.intro-unsubscribe-btn', compact('watch'));
                 break;
 
             case 'show':
-                $html .= view('video.watch-unsubscribe-btn', compact('tag'));
-                break;
-
-            case 'tag':
-                $html .= view('video.tag-unsubscribe-btn', compact('tag'));
+                $html .= view('video.watch-unsubscribe-btn', compact('watch'));
                 break;
             
             default:
-                $html .= view('video.unsubscribeBtn', compact('tag'));
+                $html .= view('video.unsubscribeBtn', compact('watch'));
                 break;
         }
 
@@ -219,35 +216,30 @@ class VideoController extends Controller
     public function unsubscribe(Request $request)
     {
         $user = User::find(request('subscribe-user-id'));
+        $watch = Watch::find(request('subscribe-playlist-id'));
         $source = request('subscribe-source');
-        $type = request('subscribe-type');
-        $tag = request('subscribe-tag');
 
         if (Auth::user()->id == request('subscribe-user-id')) {
-            $subscribe = Subscribe::where('user_id', $user->id)->where('tag', $tag)->first();
+            $subscribe = Subscribe::where('user_id', $user->id)->where('playlist_id', $watch->id)->first();
             $subscribe->delete();
         }
 
         $html = '';
         switch ($source) {
             case 'video':
-                $html .= view('video.subscribeBtn', compact('tag'));
+                $html .= view('video.subscribeBtn', compact('watch'));
                 break;
 
             case 'intro':
-                $html .= view('video.intro-subscribe-btn', compact('tag'));
+                $html .= view('video.intro-subscribe-btn', compact('watch'));
                 break;
 
             case 'show':
-                $html .= view('video.watch-subscribe-btn', compact('tag'));
-                break;
-
-            case 'tag':
-                $html .= view('video.tag-subscribe-btn', compact('tag'));
+                $html .= view('video.watch-subscribe-btn', compact('watch'));
                 break;
             
             default:
-                $html .= view('video.subscribeBtn', compact('tag'));
+                $html .= view('video.subscribeBtn', compact('watch'));
                 break;
         }
 
@@ -255,20 +247,6 @@ class VideoController extends Controller
             'subscribe_btn' => $html,
             'csrf_token' => csrf_token(),
         ]);
-    }
-
-    public function subscribeTag(Request $request) {
-        $tag = request('query');
-        $videos = Video::with('user:id,name')->where('tags', 'like', '%'.$tag.'%')->orderBy('uploaded_at', 'desc')->paginate(10);
-
-        $html = $this->searchLoadHTML($videos);
-        if ($request->ajax()) {
-            return $html;
-        }
-
-        $is_subscribed = $this->is_subscribed($tag);
-
-        return view('video.subscribeTag', compact('tag', 'videos', 'is_subscribed'));
     }
 
     public function loadChannelVideos(Request $request) {
@@ -309,19 +287,19 @@ class VideoController extends Controller
     public function loadRankVideos(Request $request) {
         $tags = strpos($request->tag, '全部') !== false ? [''] : Video::$content[Video::$genres[$request->tag]];
 
-        $week = Video::tagsWithPaginate($tags)->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->orderBy('views', 'desc')->limit(24)->get();
+        $week = Video::tagsWithPaginate($tags)->whereDate('uploaded_at', '>=', Carbon::now()->subWeeks(1))->orderBy('views', 'desc')->limit(15)->get();
         $week_id = $week->pluck('id');
 
-        $quarter = Video::whereNotIn('id', $week_id)->tagsWithPaginate($tags)->whereDate('uploaded_at', '>=', Carbon::now()->subMonths(3))->orderBy('views', 'desc')->limit(24)->get();
+        $quarter = Video::whereNotIn('id', $week_id)->tagsWithPaginate($tags)->whereDate('uploaded_at', '>=', Carbon::now()->subMonths(3))->orderBy('views', 'desc')->limit(15)->get();
         $quarter_id = $quarter->pluck('id');
 
-        $semi = Video::whereNotIn('id', $week_id)->whereNotIn('id', $quarter_id)->tagsWithPaginate($tags)->whereDate('uploaded_at', '>=', Carbon::now()->subMonths(6))->orderBy('views', 'desc')->limit(24)->get();
+        $semi = Video::whereNotIn('id', $week_id)->whereNotIn('id', $quarter_id)->tagsWithPaginate($tags)->whereDate('uploaded_at', '>=', Carbon::now()->subMonths(6))->orderBy('views', 'desc')->limit(15)->get();
         $semi_id = $semi->pluck('id');
 
-        $year = Video::whereNotIn('id', $week_id)->whereNotIn('id', $quarter_id)->whereNotIn('id', $semi_id)->tagsWithPaginate($tags)->whereDate('uploaded_at', '>=', Carbon::now()->subMonths(12))->orderBy('views', 'desc')->limit(24)->get();
+        $year = Video::whereNotIn('id', $week_id)->whereNotIn('id', $quarter_id)->whereNotIn('id', $semi_id)->tagsWithPaginate($tags)->whereDate('uploaded_at', '>=', Carbon::now()->subMonths(12))->orderBy('views', 'desc')->limit(15)->get();
         $year_id = $year->pluck('id');
 
-        $videos = Video::whereNotIn('id', $week_id)->whereNotIn('id', $quarter_id)->whereNotIn('id', $semi_id)->whereNotIn('id', $year_id)->tagsWithPaginate($tags)->whereDate('uploaded_at', '>=', Carbon::now()->subMonths(3))->orderBy('views', 'desc')->paginate(24);
+        $videos = Video::whereNotIn('id', $week_id)->whereNotIn('id', $quarter_id)->whereNotIn('id', $semi_id)->whereNotIn('id', $year_id)->tagsWithPaginate($tags)->whereDate('uploaded_at', '>=', Carbon::now()->subMonths(3))->orderBy('views', 'desc')->paginate(30);
 
         $html = '';
         if ($request->page == 1) {
@@ -336,7 +314,7 @@ class VideoController extends Controller
 
     public function loadNewestVideos(Request $request) {
         $tags = strpos($request->tag, '全部') !== false ? [] : Video::$content[Video::$genres[$request->tag]];
-        $videos = Video::tagsWithPaginate($tags)->whereDate('uploaded_at', '>=', Carbon::now()->subMonths(3))->orderBy('uploaded_at', 'desc')->paginate(24);
+        $videos = Video::tagsWithPaginate($tags)->whereDate('uploaded_at', '>=', Carbon::now()->subMonths(3))->orderBy('uploaded_at', 'desc')->paginate(30);
 
         return $this->singleLoadMoreSliderVideosHTML($videos);
     }
@@ -565,15 +543,80 @@ class VideoController extends Controller
             'text' => request('comment-text'),
         ]);
 
-        $html = '';
-        $html .= view('video.singleVideoComment', compact('comment'));
-
         if (request('comment-type') == 'video') {
-            $comment_count = $comment->video()->comments()->count();
+            $html = '';
+            $html .= view('video.singleVideoComment', compact('comment'));
+
+        } elseif (request('comment-type') == 'comment') {
+            $comment_reply = $comment;
+            $comment = Comment::find(request('comment-foreign-id'));
+            $html = '';
+            $html .= view('video.single-comment-reply', compact('comment', 'comment_reply'));
         }
+
+        $comment_count = $comment->video()->comments()->count();
+
         return response()->json([
+            'comment_id' => $comment->id,
             'comment_count' => $comment_count,
             'single_video_comment' => $html,
+            'csrf_token' => csrf_token(),
+        ]);
+    }
+
+    public function commentLike(Request $request)
+    {
+        $user_id = Auth::user()->id;
+        $type = request('type');
+        $foreign_id = request('foreign_id');
+        $is_positive = request('is_positive');
+
+        if ($like = Like::where('user_id', $user_id)->where('type', $type)->where('foreign_id', $foreign_id)->where('is_positive', true)->first()) {
+            $like->delete();
+        } else {
+            $like = Like::create([
+                'user_id' => $user_id,
+                'type' => $type,
+                'foreign_id' => $foreign_id,
+                'is_positive' => $is_positive,
+            ]);
+        }
+
+        $comment = Comment::find($foreign_id);
+        $html = '';
+        $html .= view('video.comment-like-btn', compact('comment'));
+
+        return response()->json([
+            'comment_id' => $comment->id,
+            'comment_like_btn' => $html,
+            'csrf_token' => csrf_token(),
+        ]);
+    }
+
+    public function commentUnlike(Request $request)
+    {
+        $user_id = Auth::user()->id;
+        $type = request('type');
+        $foreign_id = request('foreign_id');
+
+        if ($like = Like::where('user_id', $user_id)->where('type', $type)->where('foreign_id', $foreign_id)->where('is_positive', false)->first()) {
+            $like->delete();
+        } else {
+            $like = Like::create([
+                'user_id' => $user_id,
+                'type' => $type,
+                'foreign_id' => $foreign_id,
+                'is_positive' => false,
+            ]);
+        }
+
+        $comment = Comment::find($foreign_id);
+        $html = '';
+        $html .= view('video.comment-unlike-btn', compact('comment'));
+
+        return response()->json([
+            'comment_id' => $comment->id,
+            'comment_unlike_btn' => $html,
             'csrf_token' => csrf_token(),
         ]);
     }

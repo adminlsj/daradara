@@ -12,6 +12,7 @@ use App\Comment;
 use App\Like;
 use App\Save;
 use App\Blog;
+use App\Feedback;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Carbon\Carbon;
@@ -34,7 +35,22 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
-        return view('layouts.home');
+        $banner = Video::find(12872);
+        $count = 20;
+        $upload = Video::where('cover', '!=', null)->orderBy('created_at', 'asc')->limit($count)->get();
+        $trending = Video::where('cover', '!=', null)->orderBy('views', 'desc')->limit($count)->get();
+        $newest =Video::where('cover', '!=', null)->orderBy('created_at', 'desc')->limit($count)->get();
+        $tag1 = Video::where('cover', '!=', null)->where('tags', 'ilike', '%巨乳%')->inRandomOrder()->limit($count)->get();
+        $tag2 = Video::where('cover', '!=', null)->where('tags', 'ilike', '%貧乳%')->inRandomOrder()->limit($count)->get();
+        $tag3 = Video::where('cover', '!=', null)->where('tags', 'ilike', '%肛交%')->inRandomOrder()->limit($count)->get();
+        $tag4 = Video::where(function($query) {
+            $query->orWhere('tags', 'like', '%扶他%')->orWhere('tags', 'like', '%偽娘%')->orWhere('tags', 'like', '%耽美%');
+        })->where('cover', '!=', null)->inRandomOrder()->limit($count)->get();
+        $tag5 = Video::where('cover', '!=', null)->inRandomOrder()->limit($count)->get();
+
+        $rows = ['最新上傳' => $upload, '發燒影片' => $trending, '最新內容' => $newest, '乳不巨何以聚人心' => $tag1, '胸不平何以平天下' => $tag2, '菊不爆何以保家園' => $tag3, '女不腐何以撫民心' => $tag4, '更多精彩內容' => $tag5];
+
+        return view('layouts.home', compact('banner', 'rows'));
     }
 
     public function hentai(Request $request)
@@ -67,6 +83,14 @@ class HomeController extends Controller
             });
         }
 
+        if ($sort = $request->sort) {
+            switch ($sort) {
+                case '觀看次數':
+                    $videos = $videos->orderBy('views', 'desc');
+                    break;
+            }
+        }
+
         $videos = $videos->select('id', 'title', 'cover')->orderBy('created_at', 'desc')->paginate(48);
 
         return view('layouts.hentai', compact('tags', 'brands', 'videos'));
@@ -90,147 +114,19 @@ class HomeController extends Controller
 
     public function contact()
     {
-        /* $url = 'https://kum.com/qdgrhv';
-        $requests = Browsershot::url($url)
-            ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
-            ->triggeredRequests();
-        foreach ($requests as $request) {
-            if (strpos($request['url'], '.mp4') !== false) {
-                return $request['url'];
-            }
-        }
+        $feedbacks = Feedback::orderBy('created_at', 'desc')->get();
+        return view('layouts.contact', compact('feedbacks'));
+    }
 
-        /* $url = 'https://www.bilibili.com/video/BV11J411c7Ly';
-        return $html = Browsershot::url($url)
-            ->setChromePath("/Applications/Google Chrome.app/Contents/MacOS/Google Chrome")
-            ->useCookies(['SESSDATA' => '33c1bfb1%2C1606096573%2C4f954*51'])
-            ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
-            ->waitUntilNetworkIdle()
-            ->bodyHtml();
+    public function createFeedback()
+    {
+        $feedback = Feedback::create([
+            'name' => request('name'),
+            'email' => request('email'),
+            'text' => request('text'),
+        ]);
 
-        $api = "https://passport.bilibili.com/qrcode/getLoginUrl";
-        $ch = curl_init($api);
-        curl_setopt($ch, CURLOPT_HEADER, 0);
-        curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:62.0) Gecko/20100101 Firefox/62.0');
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-        $content = curl_exec($ch);
-
-        if (curl_errno($ch)) {
-            echo 'curl打开网页报错:' . curl_error($ch);
-        }
-        curl_close($ch);
-        $key = json_decode($content,true)['data']['oauthKey'];
-
-        $api="https://passport.bilibili.com/qrcode/getLoginInfo";
-        $ch = curl_init($api);
-        $post="oauthKey=".$key."&gourl=https%3A%2F%2Fapp.bilibili.com%2F%3Fbsource%3Dlogin_download_bili";
-        $cookie="sid=bzt8sh2j; finger=964b42c0; buvid3=4E59E79D-A448-4AF7-A2CB-694EF51C103512199infoc";
-        curl_setopt($ch, CURLOPT_HEADER, 1);
-        curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:62.0) Gecko/20100101 Firefox/62.0');
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-        curl_setopt($ch,CURLOPT_POSTFIELDS,$post);
-        curl_setopt($ch,CURLOPT_COOKIE,$cookie);
-        $content = curl_exec($ch);
-        preg_match_all('/Set-Cookie:\s(.*);/U', $content, $results);
-        var_dump($results);
-
-        // return '<iframe style="width:100vh;height:100vh" src="https://player.bilibili.com/player.html?bvid=BV1hD4y1Q7RD&cid=208445020&ep_id=330429&page=1&danmaku=0&qn=0&type=mp4&otype=json&fnver=0&fnval=1&platform=html5&html5=1&high_quality=1&autoplay=0" style="border: 0; overflow: hidden;" allow="autoplay" allowfullscreen>';
-        
-        /* $url = 'https://player.bilibili.com/player.html?bvid=BV1hD4y1Q7RD&cid=208445020&ep_id=330429&page=1&danmaku=0&qn=0&type=mp4&otype=json&fnver=0&fnval=1&platform=html5&html5=1&high_quality=1&autoplay=0';
-        return $requests = Browsershot::url($url)
-            ->useCookies(['SESSDATA' => '33c1bfb1%2C1606096573%2C4f954*51'], 'bilibili.com')
-            ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
-            ->bodyHtml(); */
-
-        /* $bot = ['name' => '魔法水果籃 第二季', 'source' => 'https://www.agefans.tv/play/20200158?playid=2_1'];
-        $url = explode('?', $bot['source'])[0];
-        $query = explode('_', explode('?', $bot['source'])[1])[0];
-        $curl_connection = curl_init($url);
-        curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
-        curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
-        $content = curl_exec($curl_connection);
-        curl_close($curl_connection);
-
-        $start = explode('<div class="main0" id="main0">', $content);
-        $end = explode('<script id="DEF_PLAYINDEX">1</script>' , $start[1]);
-        $remove = ['<div class="movurl" style="display:none">', '<ul>', '<li>', '</li>', '</ul>', '</div>', '<div class="movurl" style="display:block">'];
-        $html = str_replace($remove, '', $end[0]);
-        $dom = new \DOMDocument();
-        $dom->loadHTML('<meta http-equiv="content-type" content="text/html; charset=utf-8">'.$html);
-        $links = $dom->getElementsByTagName('a');
-        $linkArray = [];
-        foreach ($links as $link){
-            if (strpos($query, $link->getAttribute('href')) !== false) {
-                $linkArray[] = ['href' => $link->getAttribute('href'), 'text' => ];
-            }
-            echo $link->nodeValue.'<br>';
-        } 
-
-        return $requests = Browsershot::url('https://www.agefans.tv/play/20190373?playid=2_28')
-            ->useCookies(['username' => 'admin'])
-            ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
-            ->triggeredRequests();
-
-        $episodes = 132;
-        for ($i = 1; $i <= 132; $i++) { 
-            $url = 'http://agefans.tw/play/20170172?playid=1_'.$i;
-            $requests = Browsershot::url($url)
-            ->userAgent('Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1')
-            ->triggeredRequests();
-            foreach ($requests as $request) {
-                if (strpos($request['url'], "http://agefans.tw/static/ck/index.html?url=") !== FALSE) {
-                    echo '第'.$i.'話 '.$request['url'].'<br>';
-                }
-            }
-        }
-
-        $screenshot = Browsershot::url('https://mingxing.xianyongjiu.com/share/fd95ec8df5dbeea25aa8e6c808bad583')
-            ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
-            ->windowSize(1920, 1080)
-            ->setOption('addStyleTag', json_encode(['content' => '.dplayer-controller,.dplayer-controller-mask{ display: none; }']))
-            ->waitUntilNetworkIdle()
-            ->screenshot();
-        $image = Image::make($screenshot);
-        $image = $image->crop(1440, 1080);
-        $image = $image->resize(1920, null);
-        $image = $image->fit(2880, 1620);
-        $image = $image->stream();
-        $pvars = array('image' => base64_encode($image));
-        $curl = curl_init();
-        curl_setopt($curl, CURLOPT_URL, 'https://api.imgur.com/3/image.json');
-        curl_setopt($curl, CURLOPT_TIMEOUT, 30);
-        curl_setopt($curl, CURLOPT_HTTPHEADER, array('Authorization: Client-ID ' . '932b67e13e4f069'));
-        curl_setopt($curl, CURLOPT_POST, 1);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($curl, CURLOPT_POSTFIELDS, $pvars);
-        $out = curl_exec($curl);
-        curl_close ($curl);
-        $pms = json_decode($out, true);
-        $imgur = $pms['data']['link'];
-        return $imgur;
-
-        $start = 19026;
-        $episodes = 132;
-        for ($i = 0; $i < $episodes; $i++) {
-            $id = $start - $i;
-            $url = 'http://agefans.tw/myapp/_get_play_data?id='.$id;
-            $curl_connection = curl_init($url);
-            curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
-            curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
-            $data = json_decode(curl_exec($curl_connection), true);
-            curl_close($curl_connection);
-            if (array_key_exists('result', $data)) {
-                echo '第'.($i + 1).'話 '.$data['result']['url'].'<br>';
-            } else {
-                $i--;
-            }
-        }*/
-        
-        return view('layouts.contact');
+        return redirect()->action('HomeController@contact');
     }
 
     public function terms()
@@ -245,11 +141,13 @@ class HomeController extends Controller
 
     public function copyright(Request $request)
     {
-        if ($request->lang == 'en') {
+        /* if ($request->lang == 'en') {
             return view('layouts.copyright-en');
         } else {
             return view('layouts.copyright-ch');
-        }
+        } */
+
+        return view('layouts.copyright-en');
     }
 
     public function userReport(Request $request)
@@ -464,16 +362,11 @@ class HomeController extends Controller
 
     public function tempMethod()
     {
-        $qzone = Video::where('sd', 'like', '%1006\_%')->orWhere('sd', 'like', '%1097\_%')->get();
-        foreach ($qzone as $video) {
-            if (strpos($video->sd, 'f0.mp4') !== false) {
-                $sd = $this->get_string_between($video->sd, 'vwecam.tc.qq.com%2F', '.f0.mp4');
-                $qzone = urlencode(Video::getSourceQZ($sd));
-                if ($qzone != '') {
-                    $video->sd = 'https://www.agefans.tv/age/player/ckx1/?url='.$qzone;
-                    $video->save();
-                }
-            }
+        $subscribes = Subscribe::where('playlist_id', null)->get();
+        foreach ($subscribes as $subscribe) {
+            $watch = Watch::where('title', $subscribe->tag)->first();
+            $subscribe->playlist_id = $watch->id;
+            $subscribe->save();
         }
         return redirect()->action('HomeController@index');
     }

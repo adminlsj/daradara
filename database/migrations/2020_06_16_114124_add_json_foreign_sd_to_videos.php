@@ -15,6 +15,7 @@ class AddJsonForeignSdToVideos extends Migration
     {
         Schema::table('videos', function (Blueprint $table) {
             $table->jsonb('foreign_sd')->nullable();
+            $table->jsonb('data')->nullable();
         });
     }
 

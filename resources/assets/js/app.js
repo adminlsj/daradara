@@ -34,6 +34,12 @@ $(".upload-image-btn").on("change", function() {
   $('#file-text').val(fileName);
 });
 
+$('.hentai-sort-options-wrapper').click(function() {
+  var sort = $(this).find("div").text();
+  $("#sort").val(sort);
+  $('form#hentai-form').submit();
+})
+
 $('.slider-wrapper .slider-scroll-right').click(function() {
     var $windowWidth = $(window).width();
     var $scrollWidth;
@@ -265,10 +271,15 @@ window.onscroll = function() {
     $('#hentai-main-nav').css('background-color', 'black');
     $('#hentai-main-nav input').css('background-color', '#202020');
     $('#hentai-main-nav input').css('border-color', '#202020');
+
+    $('#main-nav').css('background-color', '#141414');
+
   } else {
     $('#hentai-main-nav').css('background-color', '#303030');
     $('#hentai-main-nav input').css('background-color', '#404040');
     $('#hentai-main-nav input').css('border-color', '#404040');
+
+    $('#main-nav').css('background-color', 'transparent');
   }
 }
 

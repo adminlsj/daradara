@@ -122,6 +122,28 @@ $('div#comment-create-form-wrapper').on("submit", "form#comment-create-form", fu
     })
 });
 
+$('.comment-reply-reply-form-wrapper').on("submit", ".comment-reply-create-form", function(e) {
+    $.ajaxSetup({
+        header:$('meta[name="_token"]').attr('content')
+    })
+    e.preventDefault(e);
+    document.activeElement.blur();
+
+    $.ajax({
+        type:"POST",
+        url: $(this).attr("action"),
+        data:$(this).serialize(),
+        dataType: 'json',
+        success: function(data){
+            $(".comment-reply-reply-form-wrapper").css('display', 'none');
+            $('div#comment-reply-start-' + data.comment_id).prepend(data.single_video_comment);
+        },
+        error: function(xhr, ajaxOptions, thrownError){
+            showSnackbar('請刷新頁面後重試。');
+        }
+    })
+});
+
 $("#comment-icon").click(function() {
     $(".alert-circle").css('display', 'none');
     $("#comment-section-wrapper").css('display', 'block');
@@ -129,6 +151,61 @@ $("#comment-icon").click(function() {
         $("#comment-text").focus();
     }
 });
+
+$('div#comment-like-form-wrapper').on("submit", "form#comment-like-form", function(e) {
+    $.ajaxSetup({
+        header:$('meta[name="_token"]').attr('content')
+    })
+    e.preventDefault(e);
+
+    $.ajax({
+        type:"POST",
+        url: $(this).attr("action"),
+        data:$(this).serialize(),
+        dataType: 'json',
+        success: function(data){
+            $('#comment-like-btn-' + data.comment_id).html(data.comment_like_btn);
+        },
+        error: function(xhr, ajaxOptions, thrownError){
+            showSnackbar('請刷新頁面後重試。');
+        }
+    })
+});
+
+$('div#comment-like-form-wrapper').on("submit", "form#comment-unlike-form", function(e) {
+    $.ajaxSetup({
+        header:$('meta[name="_token"]').attr('content')
+    })
+    e.preventDefault(e);
+
+    $.ajax({
+        type:"POST",
+        url: $(this).attr("action"),
+        data:$(this).serialize(),
+        dataType: 'json',
+        success: function(data){
+            $('#comment-unlike-btn-' + data.comment_id).html(data.comment_unlike_btn);
+        },
+        error: function(xhr, ajaxOptions, thrownError){
+            showSnackbar('請刷新頁面後重試。');
+        }
+    })
+});
+
+$('.comment-reply-btn').click(function() {
+    $(".comment-reply-reply-form-wrapper").css('display', 'none');
+    var comment_id = $(this).data("comment-id");
+    var comment_wrapper = $('#comment-reply-form-wrapper-' + comment_id);
+    var comment_text = comment_wrapper.find('#comment-text');
+    var comment_user = false;
+    if (comment_user = $(this).data("comment-user")) {
+        comment_text.val('@' + comment_user + ' ');
+    } else {
+        comment_text.val('');
+    }
+    comment_wrapper.css('display', 'block');
+    comment_text.focus();
+})
 
 $(document).ready(function(){
     var urlParams = new URLSearchParams(window.location.search);

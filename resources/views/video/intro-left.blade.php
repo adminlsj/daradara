@@ -12,7 +12,7 @@
 
 		<h5 style="line-height: 30px; color: dimgray; font-size: 1em">{{ $videos->count()}} 部影片 <small>•</small> {{ Carbon\Carbon::parse($watch->updated_at)->diffForHumans() }}更新</h5>
 		<div style="float: right; margin-top: -30px;">
-			@include('video.intro-subscribe-wrapper', ['tag' => $watch->title])
+			@include('video.intro-subscribe-wrapper')
 		</div>
 		<h5 style="color: dimgray; font-weight: 400; margin-top: 15px; line-height: 20px">{{ $watch->description }}</h5>
 	</div>
