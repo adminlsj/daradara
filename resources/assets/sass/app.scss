@@ -3386,6 +3386,8 @@ a > i {
     position: absolute;
     background-image: linear-gradient(to bottom,rgba(0,0,0,.7) 10%,rgba(0,0,0,0)) !important; 
     background-color: transparent !important;
+    height: 50px;
+    line-height: 50px;
   }
 
   #home-banner-wrapper {
