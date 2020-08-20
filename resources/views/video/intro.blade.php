@@ -80,7 +80,7 @@
     </div>
   </div>
 
-  <img style="width: 100%; position: absolute; top: 0; left: 0; z-index: -1; filter: blur(10px); -webkit-filter: blur(10px); -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));" src="{{ $watch->videos()->orderBy('created_at', 'desc')->first()->cover }}">
+  <img style="width: 100%; position: absolute; top: 0; left: 0; z-index: -1; filter: blur(10px) brightness(65%); -webkit-filter: blur(10px) brightness(65%);" src="{{ $watch->videos()->orderBy('created_at', 'desc')->first()->cover }}">
 
   <div id="home-rows-wrapper" style="position: relative; margin-top: 100px">
     @foreach ($rows as $title => $videos)
