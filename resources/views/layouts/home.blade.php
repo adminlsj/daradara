@@ -33,12 +33,12 @@
 					<div style="font-size: 12px; margin-top: -1px">播放清單</div>
 				</div>
 				<div style="width: 33%; float:left; display: inline-block; margin-top: 10px;">
-					<a class="hover-opacity-all home-banner-btn home-banner-play-btn" style="cursor: pointer; font-size: 14px; border-radius: 3px; text-decoration: none; background-color: white; padding: 7px 22px 7px 12px; color: black;"><span style="vertical-align: middle; font-size: 2em; margin-top: -3px; padding-right: 3px" class="material-icons">play_arrow</span>播放</a>
+					<a href="{{ route('video.watch') }}?v={{ $banner->id }}" target="_blank" class="hover-opacity-all home-banner-btn home-banner-play-btn" style="cursor: pointer; font-size: 14px; border-radius: 3px; text-decoration: none; background-color: white; padding: 7px 22px 7px 12px; color: black;"><span style="vertical-align: middle; font-size: 2em; margin-top: -3px; padding-right: 3px" class="material-icons">play_arrow</span>播放</a>
 				</div>
-				<div style="width: 33%; float:left; display: inline-block;">
+				<a href="{{ route('video.info') }}?v={{ $banner->id }}" style="width: 33%; float:left; display: inline-block; color: white; text-decoration: none;">
 					<span class="material-icons">info</span>
 					<div style="font-size: 12px; margin-top: 0px">更多資訊</div>
-				</div>
+				</a>
 			</div>
 		</div>
 	</div>

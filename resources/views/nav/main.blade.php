@@ -4,7 +4,7 @@
   </a>
   <a class="nav-item hidden-xs" href="javascript:void(0)">主頁</a>
   <a class="nav-item" href="javascript:void(0)">H動漫</a>
-  <a class="nav-item" href="javascript:void(0)">動畫卡通</a>
+  <a href="https://www.laughseejapan.com/search?query=%E5%8B%95%E6%BC%AB" target="_blank" class="nav-item" href="javascript:void(0)">動畫卡通</a>
   <a class="nav-item" href="javascript:void(0)">最新內容</a>
   <a class="nav-item hidden-xs" href="javascript:void(0)">我的清單</a>
 
