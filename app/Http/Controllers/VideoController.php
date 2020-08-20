@@ -41,8 +41,9 @@ class VideoController extends Controller
             $videos = $watch->videos()->orderBy('created_at', 'desc')->get();
             $recommends = Video::where('cover', '!=', null)->inRandomOrder()->limit(20)->get();
             $rows = ['集數列表' => $videos, '相關推薦' => $recommends];
+            $video = $watch->videos()->orderBy('created_at', 'desc')->first();
 
-            return view('video.intro', compact('watch', 'user', 'videos', 'count', 'first', 'is_subscribed', 'is_mobile', 'rows'));
+            return view('video.intro', compact('watch', 'user', 'videos', 'count', 'first', 'is_subscribed', 'is_mobile', 'rows', 'video'));
         }
     }
 
