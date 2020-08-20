@@ -39,7 +39,7 @@
   <div class="hidden-sm hidden-md hidden-lg" style="position: relative; text-align: center;">
     <img style="width: 40%; margin-top: 70px; box-shadow: 3px 3px 10px black;" src="{{ $video->cover }}">
     <div style="text-align: center; color: white; margin-top: 20px;">
-      <h1 style="font-size: 22px; font-weight: bold; margin: 0">{{ explode('/', $video->title)[0] }}</h1>
+      <h1 style="font-size: 22px; font-weight: bold; margin: 0; padding: 0 4%">{{ explode('/', $video->title)[0] }}</h1>
       <div style="width: 92%; margin-top: 18px;">
         <a href="{{ route('video.watch') }}?v={{ $video->id }}" target="_blank" style="cursor: pointer; font-size: 14px; border-radius: 3px; text-decoration: none; background-color: red; color: black; color: white; margin-left: 4%; padding: 5px 0" class="btn-block"><span style="vertical-align: middle; font-size: 2em; margin-top: -3px; padding-right: 3px; color: white;" class="material-icons">play_arrow</span>播放</a>
       </div>
