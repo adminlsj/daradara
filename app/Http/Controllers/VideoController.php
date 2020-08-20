@@ -26,18 +26,6 @@ class VideoController extends Controller
         $this->middleware('auth')->only('edit', 'update', 'destroy');
     }
 
-    public function explore(Request $request){
-        return view('video.rankIndex');
-    }
-
-    public function recommend(Request $request){
-        if (Auth::check() && auth()->user()->subscribes()->first()) {
-            return view('video.recommend');
-        } else {
-            return redirect('/');
-        }
-    }
-
     public function playlist(Request $request){
         if ($request->has('list') && $request->list != 'null') {
 
@@ -50,22 +38,12 @@ class VideoController extends Controller
             $is_subscribed = $this->is_subscribed($watch->title);
             $is_mobile = $this->checkMobile();
 
-            return view('video.intro', compact('watch', 'user', 'videos', 'count', 'first', 'is_subscribed', 'is_mobile'));
-        }
-    }
+            $videos = $watch->videos()->orderBy('created_at', 'desc')->get();
+            $recommends = Video::where('cover', '!=', null)->inRandomOrder()->limit(20)->get();
+            $rows = ['集數列表' => $videos, '相關推薦' => $recommends];
 
-    public function intro(String $genre, String $title, Request $request){
-        $title = str_replace("_", " / ", $title);
-        $title = str_replace("-", " ", $title);
-        if ($title == '雙層公寓：東京2019 2020') {
-            $title = '雙層公寓：東京2019-2020';
+            return view('video.intro', compact('watch', 'user', 'videos', 'count', 'first', 'is_subscribed', 'is_mobile', 'rows'));
         }
-        if ($title == 'A Studio') {
-            $title = 'A-Studio';
-        }
-        $watch = Watch::where('title', $title)->first();
-        $url = '/playlist?list='.$watch->id;
-        return redirect($url);
     }
 
     public function watch(Request $request){
