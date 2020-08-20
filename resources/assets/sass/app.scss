@@ -127,6 +127,20 @@ body {
   width: 100%;
 }
 
+#info-btn-wrapper div {
+  width: 50px; 
+  height: 50px;
+  display: inline-block; 
+  border: solid white 1px; 
+  border-radius: 50%;
+  vertical-align: middle; 
+  margin-right: 3px;
+}
+
+#info-btn-wrapper div i {
+  vertical-align: middle;
+}
+
 .load-more-container h1 {
     overflow: hidden;
     text-align: center;
@@ -1478,18 +1492,11 @@ nav input[type=text]:focus {
 }
 
 .aspect-ratio, .dplayer-video-wrap {
-  position: relative;
-  width: 100%;
-  height: 0;
-  padding-bottom: 56.25%;
+  
 }
 
 .aspect-ratio iframe, .dplayer-video-wrap video {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  left: 0;
-  top: 0;
+
 }
 
 .dplayer-full-in-icon {
@@ -2926,7 +2933,7 @@ a > i {
   }
 
   #home-banner-wrapper {
-    width: 40%;
+    width: 50%;
   }
 
   #home-rows-wrapper .home-rows-videos-wrapper #home-rows-videos-div {
@@ -2949,7 +2956,7 @@ a > i {
   }
 
   #home-banner-wrapper {
-    width: 50%;
+    width: 60%;
     bottom: 8%;
   }
 
@@ -3445,6 +3452,10 @@ a > i {
   #home-rows-wrapper .home-rows-videos-wrapper #home-rows-videos-div {
     width: calc((100% - 12px) / 3);
     margin-bottom: 4px !important;
+  }
+
+  .intro-rows-wrapper {
+    margin-top: 100px !important;
   }
 
   .home-logo img {

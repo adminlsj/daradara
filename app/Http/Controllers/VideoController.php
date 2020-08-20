@@ -26,24 +26,14 @@ class VideoController extends Controller
         $this->middleware('auth')->only('edit', 'update', 'destroy');
     }
 
-    public function playlist(Request $request){
-        if ($request->has('list') && $request->list != 'null') {
-
-            $watch = Watch::find($request->list);
-            $user = $watch->user();
-            $videos = Video::with('user.avatar')->where('playlist_id', $watch->id)->orderBy('created_at', 'desc')->select('id', 'user_id', 'imgur', 'title', 'sd')->get();
-            $count = $videos->count();
-
-            $first = $videos->first();
-            $is_subscribed = $this->is_subscribed($watch->title);
-            $is_mobile = $this->checkMobile();
-
-            $videos = $watch->videos()->orderBy('created_at', 'desc')->get();
-            $recommends = Video::where('cover', '!=', null)->inRandomOrder()->limit(20)->get();
+    public function info(Request $request){
+        $vid = $request->v;
+        if (is_numeric($vid) && $video = Video::find($request->v)) {
+            $videos = Video::where('playlist_id', $video->playlist_id)->orderBy('created_at', 'desc')->get();
+            $recommends = Video::where('cover', '!=', null)->inRandomOrder()->limit(42)->get();
             $rows = ['集數列表' => $videos, '相關推薦' => $recommends];
-            $video = $watch->videos()->orderBy('created_at', 'desc')->first();
 
-            return view('video.intro', compact('watch', 'user', 'videos', 'count', 'first', 'is_subscribed', 'is_mobile', 'rows', 'video'));
+            return view('video.info', compact('rows', 'video'));
         }
     }
 
@@ -52,38 +42,7 @@ class VideoController extends Controller
 
         if (is_numeric($vid) && $video = Video::find($request->v)) {
 
-            if (strpos($video->sd, 'https://www.agefans.tv/play/') !== false) {
-                Video::setAgefansLink($video);
-            }
-
-            $outsource = $video->outsource;
-            $sd = $video->sd()[0];
-            $is_mobile = $this->checkMobile();
-            $country_code = 'N/A';
-            if (isset($_SERVER["HTTP_CF_IPCOUNTRY"])) {
-              $country_code = $_SERVER["HTTP_CF_IPCOUNTRY"];
-            }
-            Video::setPlayerConfig($video, $country_code, $is_mobile, $outsource, $sd);
-
-            $video->views++;
-            $video->save();
-            $current = $video;
-
-            if ($video->playlist_id != null) {
-                $watch = Watch::withVideos()->where('id', $video->playlist_id)->first();
-                $is_subscribed = $this->is_subscribed($watch->title);
-                $is_program = true;
-            } else {
-                $watch = null;
-                $is_subscribed = false;
-                $is_program = false;
-            }
-
-            $blog = Blog::where('tags', 'ilike', '%美女%')->inRandomOrder()->first();
-
-            $comments = Comment::with('user.avatar')->where('type', 'video')->where('foreign_id', $video->id)->orderBy('created_at', 'desc')->get();
-
-            return view('video.showWatch', compact('video', 'outsource', 'sd', 'watch', 'current', 'is_program', 'is_subscribed', 'is_mobile', 'blog', 'comments'));
+            return view('video.watch', compact('video'));
 
         } else {
             return view('errors.404');

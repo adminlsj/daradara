@@ -111,6 +111,7 @@ Route::get('/playlist', 'VideoController@playlist')->name('video.playlist');
 Route::get('/{genre}/{title}', 'VideoController@intro')->name('video.intro');
 
 Route::get('/watch', 'VideoController@watch')->name('video.watch');
+Route::get('/info', 'VideoController@info')->name('video.info');
 Route::get('/blog', 'BlogController@show')->name('blog.read');
 Route::get('/search', ['as' => 'video.search', 'uses' => 'VideoController@search']);
 Route::get('/search-google', ['as' => 'video.searchGoogle', 'uses' => 'VideoController@searchGoogle']);
