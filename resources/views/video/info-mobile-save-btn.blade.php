@@ -5,7 +5,7 @@
 		    <div>已儲存</div>
 		@else
 			<i class="material-icons">add</i>
-		    <div>儲存</div>
+		    <div>{{ Request::is('/') ? '播放清單' : '儲存' }}</div>
   		@endif
 	</div>
 </button>
