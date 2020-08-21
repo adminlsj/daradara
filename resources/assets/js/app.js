@@ -40,6 +40,55 @@ $('.hentai-sort-options-wrapper').click(function() {
   $('form#hentai-form').submit();
 })
 
+$('nav#hentai-main-nav').on("submit", "form#search-form", function(e) {
+  e.preventDefault(e);
+  var query = $('#nav-query').val();
+  $('#hentai-form #query').val(query);
+  $('form#hentai-form').submit();
+});
+
+$('.video-like-form').on("submit", function(e) {
+  $.ajaxSetup({
+      header:$('meta[name="_token"]').attr('content')
+  })
+  e.preventDefault(e);
+
+  $.ajax({
+      type:"POST",
+      url: $(this).attr("action"),
+      data:$(this).serialize(),
+      dataType: 'json',
+      success: function(data){
+          $('#info-desktop-like-btn').replaceWith(data.desktop);
+          $('#info-mobile-like-btn').replaceWith(data.mobile);
+      },
+      error: function(xhr, ajaxOptions, thrownError){
+          showSnackbar('請刷新頁面後重試。');
+      }
+  })
+});
+
+$('.video-save-form').on("submit", function(e) {
+  $.ajaxSetup({
+      header:$('meta[name="_token"]').attr('content')
+  })
+  e.preventDefault(e);
+
+  $.ajax({
+      type:"POST",
+      url: $(this).attr("action"),
+      data:$(this).serialize(),
+      dataType: 'json',
+      success: function(data){
+          $('#info-desktop-save-btn').replaceWith(data.desktop);
+          $('#info-mobile-save-btn').replaceWith(data.mobile);
+      },
+      error: function(xhr, ajaxOptions, thrownError){
+          showSnackbar('請刷新頁面後重試。');
+      }
+  })
+});
+
 $('.slider-wrapper .slider-scroll-right').click(function() {
     var $windowWidth = $(window).width();
     var $scrollWidth;
@@ -249,17 +298,9 @@ $('#subscribe-show-all').click(function(e) {
 var prevScrollpos = window.pageYOffset;
 window.onscroll = function() {
   if (window.pageYOffset != 0) {
-    $('#hentai-main-nav').css('background-color', 'black');
-    $('#hentai-main-nav input').css('background-color', '#202020');
-    $('#hentai-main-nav input').css('border-color', '#202020');
-
     $('#main-nav').css('background-color', '#141414');
 
   } else {
-    $('#hentai-main-nav').css('background-color', '#303030');
-    $('#hentai-main-nav input').css('background-color', '#404040');
-    $('#hentai-main-nav input').css('border-color', '#404040');
-
     $('#main-nav').css('background-color', 'transparent');
   }
 }

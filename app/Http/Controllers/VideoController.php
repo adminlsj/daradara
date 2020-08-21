@@ -386,46 +386,29 @@ class VideoController extends Controller
         $foreign_id = request('like-foreign-id');
         $is_positive = request('like-is-positive');
 
-        $like = Like::where('user_id', $user_id)->where('type', $type)->where('foreign_id', $foreign_id)->first();
-        if ($like != null) {
+        if ($like = Like::where('user_id', $user_id)->where('type', $type)->where('foreign_id', $foreign_id)->where('is_positive', $is_positive)->first()) {
             $like->delete();
-        }
 
-        $like = Like::create([
-            'user_id' => $user_id,
-            'type' => $type,
-            'foreign_id' => $foreign_id,
-            'is_positive' => $is_positive,
-        ]);
-
-        $video = Video::find($foreign_id);
-        $html = '';
-        $html .= view('video.unlikeBtn', compact('video'));
-
-        return response()->json([
-            'unlikeBtn' => $html,
-            'csrf_token' => csrf_token(),
-        ]);
-    }
-
-    public function unlike(Request $request)
-    {
-        $user_id = request('like-user-id');
-        $type = request('like-type');
-        $foreign_id = request('like-foreign-id');
-        $is_positive = request('like-is-positive');
-
-        $like = Like::where('user_id', $user_id)->where('type', $type)->where('foreign_id', $foreign_id)->first();
-        if ($like != null) {
-            $like->delete();
+        } else {
+            $like = Like::create([
+                'user_id' => $user_id,
+                'type' => $type,
+                'foreign_id' => $foreign_id,
+                'is_positive' => $is_positive,
+            ]);
         }
 
         $video = Video::find($foreign_id);
-        $html = '';
-        $html .= view('video.likeBtn', compact('video'));
+
+        $desktop = '';
+        $desktop .= view('video.info-desktop-like-btn', compact('video'));
+
+        $mobile = '';
+        $mobile .= view('video.info-mobile-like-btn', compact('video'));
 
         return response()->json([
-            'likeBtn' => $html,
+            'desktop' => $desktop,
+            'mobile' => $mobile,
             'csrf_token' => csrf_token(),
         ]);
     }
@@ -435,7 +418,9 @@ class VideoController extends Controller
         $user_id = request('save-user-id');
         $foreign_id = request('save-foreign-id');
 
-        if (Save::where('user_id', $user_id)->where('foreign_id', $foreign_id)->first() == null) {
+        if ($save = Save::where('user_id', $user_id)->where('foreign_id', $foreign_id)->first()) {
+            $save->delete();
+        } else {
             $save = Save::create([
                 'user_id' => $user_id,
                 'foreign_id' => $foreign_id,
@@ -443,11 +428,16 @@ class VideoController extends Controller
         }
 
         $video = Video::find($foreign_id);
-        $html = '';
-        $html .= view('video.unsaveBtn', compact('video'));
+
+        $desktop = '';
+        $desktop .= view('video.info-desktop-save-btn', compact('video'));
+
+        $mobile = '';
+        $mobile .= view('video.info-mobile-save-btn', compact('video'));
 
         return response()->json([
-            'unsaveBtn' => $html,
+            'desktop' => $desktop,
+            'mobile' => $mobile,
             'csrf_token' => csrf_token(),
         ]);
     }

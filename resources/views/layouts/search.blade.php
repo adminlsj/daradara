@@ -6,19 +6,18 @@
 
 @section('content')
 
-<div class="paravi-padding-setup" style="padding-top: 65px; background-color: #303030">
-	<div style="text-align: center;">{!! $videos->appends(request()->input())->links() !!}</div>
-	<div class="row hentai-row-wrapper" style="{{ $videos->count() >= 48 || Request::get('page') > 1 ? 'margin-top: 5px;' : 'margin-top: 20px;' }}">
-		@foreach ($videos as $video)
-			<div class="col-xs-4 col-sm-3 col-md-2">
-				<a href="/watch?v={{ $video->id }}" style="text-decoration: none;" class="hover-opacity-all" title="{{ $video->title }}">
-					<img class="lazy" style="border-radius: 3px; width: 100%; height: 100%;" src="{{ App\Image::$portrait }}" data-src="{{ $video->cover }}" data-srcset="{{ $video->cover }}" alt="{{ $video->title }}">
-					<div style="height: 65px; padding: 4px 1px; color: #fff; font-size: 0.95em; line-height: 19px;"><span style="overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">{{ $video->title }}</span></div>
-				</a>
-			</div>
-		@endforeach
-	</div>
-	<div style="text-align: center;">{!! $videos->appends(request()->input())->links() !!}</div>
+<div id="home-rows-wrapper" class="search-rows-wrapper" style="position: relative;">
+	  <div class="home-rows-videos-wrapper" style="white-space: normal;">
+	    @foreach ($videos as $video)
+	      <a style="text-decoration: none;" href="{{ route('video.info') }}?v={{ $video->id }}">
+	        <div id="home-rows-videos-div" style="position: relative; display: inline-block; margin-bottom:50px">
+	          <img src="{{ $video->cover }}">
+	          <div id="home-rows-videos-title" style="position:absolute; bottom:0; left:0; white-space: initial; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; color: white; width: 100%; padding: 3px 3px; background: linear-gradient(to bottom, transparent 0%, black 120%);">{{ explode('/', $video->title)[0] }}</div>
+	          </div>
+	      </a>
+	    @endforeach
+	  </div>
+	  <div id="search-pagination">{!! $videos->appends(request()->input())->links() !!}</div>
 </div>
 
 <div style="background-color: #212121;">
@@ -29,7 +28,8 @@
 	</div>
 </div>
 
-<form id="hentai-form" action="{{ route('home.hentai') }}" method="GET">
+<form id="hentai-form" action="{{ route('home.search') }}" method="GET">
+	<input type="hidden" id="query" name="query" value="{{ Request::get('query') }}">
 	<div id="tags" class="modal fade" role="dialog">
 	  <div class="modal-dialog">
 	    <div class="modal-content" style="border-radius: 3px; background-color: #424242; color: white">

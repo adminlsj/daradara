@@ -10,5 +10,5 @@
 
   <a style="padding-right: 0px" class="nav-icon pull-right hidden-xs" href="javascript:void(0)"><span style="vertical-align: middle;" class="material-icons">account_circle</span></a>
   <a class="nav-icon pull-right hidden-xs" href="javascript:void(0)"><span style="vertical-align: middle;" class="material-icons">notifications</span></a>
-  <a class="nav-icon pull-right hidden-xs" href="javascript:void(0)"><span style="vertical-align: middle;" class="material-icons">search</span></a>
+  <a class="nav-icon pull-right hidden-xs" href="{{ route('home.search') }}"><span style="vertical-align: middle;" class="material-icons">search</span></a>
 </div>

@@ -8,14 +8,10 @@
 @endsection
 
 @section('nav')
-	@include('layouts.nav-main-original', ['theme' => 'white'])
+	@include('nav.main', ['theme' => 'white'])
 @endsection
 
 @section('content')
-
-<div class="hidden-xs hidden-sm hidden-md sidebar-menu">
-	@include('video.sidebarMenu', ['theme' => 'white'])
-</div>
 
 <div class="main-content">
 	<div style="background-color: #F5F5F5;">

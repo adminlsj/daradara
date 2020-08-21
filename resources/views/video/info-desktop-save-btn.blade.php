@@ -1,0 +1,1 @@
+<button id="info-desktop-save-btn" class="no-button-style" type="submit"><i style="margin-top: 4px; margin-left: 0px; font-size: 2.3em" class="material-icons">{{ Auth::check() && App\Save::where('user_id', auth()->user()->id)->where('foreign_id', $video->id)->first() ? 'done' : 'add' }}</i></button>

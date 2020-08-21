@@ -29,8 +29,21 @@
 			<h4 style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; line-height: 16px; font-size: 12px; width: 80%; margin-left: 10%;">{{ $banner->watch->description }}</h4>
 			<div style="margin-top: 20px; width: 100%">
 				<div style="width: 33%; float:left; display: inline-block;">
-					<span class="material-icons">add</span>
-					<div style="font-size: 12px; margin-top: -1px">播放清單</div>
+					@if (!Auth::check())
+			            <div data-toggle="modal" data-target="#signUpModal" style="text-decoration: none; color: inherit" class="single-icon-wrapper">
+			              <div class="single-icon no-select">
+			                <i class="material-icons">add</i>
+			                <div>儲存</div>
+			              </div>
+			            </div>
+			          @else
+			            <form class="video-save-form home-save-form" action="{{ route('video.save') }}" method="POST">
+			              {{ csrf_field() }}
+			              <input name="save-user-id" type="hidden" value="{{ Auth::user()->id }}">
+			              <input name="save-foreign-id" type="hidden" value="{{ $banner->id }}">
+			              @include('video.info-mobile-save-btn', ['video' => $banner])
+			            </form>
+			          @endif
 				</div>
 				<div style="width: 33%; float:left; display: inline-block; margin-top: 10px;">
 					<a href="{{ route('video.watch') }}?v={{ $banner->id }}" target="_blank" class="hover-opacity-all home-banner-btn home-banner-play-btn" style="cursor: pointer; font-size: 14px; border-radius: 3px; text-decoration: none; background-color: white; padding: 8px 22px 8px 12px; color: black;"><span style="vertical-align: middle; font-size: 2em; margin-top: -3px; padding-right: 3px" class="material-icons">play_arrow</span>播放</a>

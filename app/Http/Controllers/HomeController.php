@@ -53,11 +53,25 @@ class HomeController extends Controller
         return view('layouts.home', compact('banner', 'rows'));
     }
 
-    public function hentai(Request $request)
+    public function search(Request $request)
     {
         $tags = [];
         $brands = [];
         $videos = Video::where('cover', '!=', null);
+
+        if ($query = $request->query) {
+            $query = str_replace(' ', '', request('query'));
+            $queryArray = [];
+            preg_match_all('/./u', $query, $queryArray);
+            $queryArray = $queryArray[0];
+            if (($key = array_search(' ', $queryArray)) !== false) {
+                unset($queryArray[$key]);
+            }
+            $searchQuery = '%'.implode('%', $queryArray).'%';
+            $videos = $videos->where(function($query) use ($searchQuery) {
+                $query->where('title', 'ilike', $searchQuery)->orWhere('tags', 'ilike', $searchQuery);
+            });
+        }
 
         if ($tags = $request->tags) {
             if ($request->broad) {
@@ -91,9 +105,9 @@ class HomeController extends Controller
             }
         }
 
-        $videos = $videos->select('id', 'title', 'cover')->orderBy('created_at', 'desc')->paginate(48);
+        $videos = $videos->distinct()->orderBy('created_at', 'desc')->paginate(42);
 
-        return view('layouts.hentai', compact('tags', 'brands', 'videos'));
+        return view('layouts.search', compact('tags', 'brands', 'videos'));
     }
 
     public function genre(Request $request)

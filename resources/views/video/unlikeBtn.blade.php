@@ -6,7 +6,7 @@
   <input name="like-is-positive" type="hidden" value="{{ true }}">
   <button class="single-icon-wrapper no-button-style" method="POST">
   	<div class="single-icon no-select">
-	    <i style="color: #4377e8" class="material-icons">thumb_up</i>
+	    <i class="{{ Auth::check() && App\Like::where('type', 'video')->where('user_id', Auth::user()->id)->where('foreign_id', $video->id)->first() ? 'material-icons' : 'material-icons-outlined' }}">thumb_up</i>
 	    <div>{{ App\Like::count('video', $video->id, true) }}</div>
 	</div>
   </button>

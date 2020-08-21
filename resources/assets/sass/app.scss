@@ -33,6 +33,16 @@ body {
   font-weight: bold;
 }
 
+.no-button-style{
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+}
+
 #main-nav {
   position: fixed; 
   top: 0; 
@@ -127,7 +137,11 @@ body {
   width: 100%;
 }
 
-#info-btn-wrapper div {
+.search-rows-wrapper {
+  margin-top: 160px !important;
+}
+
+#info-btn-wrapper button {
   width: 50px; 
   height: 50px;
   display: inline-block; 
@@ -135,10 +149,25 @@ body {
   border-radius: 50%;
   vertical-align: middle; 
   margin-right: 3px;
+  cursor: pointer;
+}
+
+#info-btn-wrapper button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 #info-btn-wrapper div i {
   vertical-align: middle;
+}
+
+.home-save-form .single-icon i {
+  margin-top: -2px;
+  font-size: 1.9em;
+}
+
+.home-save-form .single-icon div {
+  margin-top: -2px;
+  font-size: 12px;
 }
 
 .load-more-container h1 {
@@ -655,37 +684,23 @@ label.upload-image-btn input[type="file"] {
 }
 
 #hentai-main-nav {
-  background-color: #303030; 
-  z-index: 999; 
-  padding: 0px 5px; 
-  height: 65px; 
+  background-color: #141414; 
+  z-index: 1; 
+  padding: 0 4%; 
+  height: 68px; 
   position: fixed; 
   top: 0; 
   width: 100%;
   transition: .3s cubic-bezier(0,0,.2,1);
 }
 
-#hentai-menu-btn {
-  text-decoration: none;
-  line-height: 65px;
-  margin-top: -1px;
-  left: 23px;
-  color: white;
-  cursor: pointer;
-}
-
 #hentai-logo {
   text-decoration: none;
-  line-height: 65px;
+  line-height: 68px;
 }
 
 #hentai-logo img {
-  height: 22px;
-  margin-left: 45px;
-}
-
-#hentai-filter-nav {
-  padding: 0px 20px
+  height: 25px;
 }
 
 #hentai-filter-nav button {
@@ -706,6 +721,11 @@ label.upload-image-btn input[type="file"] {
 #hentai-filter-nav button:focus {
   text-decoration: none;
   outline: 0;
+}
+
+#search-pagination {
+  text-align: center; 
+  margin-top: -75px
 }
 
 .modal-header .close {
@@ -1051,16 +1071,6 @@ label.upload-image-btn input[type="file"] {
         -ms-user-select: none; /* Internet Explorer/Edge */
             user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome, Opera and Firefox */
-}
-
-.no-button-style{
-  background: none;
-  color: inherit;
-  border: none;
-  padding: 0;
-  font: inherit;
-  cursor: pointer;
-  outline: inherit;
 }
 
 .text-ellipsis {
@@ -2939,6 +2949,10 @@ a > i {
   #home-rows-wrapper .home-rows-videos-wrapper #home-rows-videos-div {
     width: calc((100% - 24px) / 6);
   }
+
+  #search-pagination {
+    margin-top: -70px
+  }
 }
 
 @media (max-width: 991px) {
@@ -2964,24 +2978,16 @@ a > i {
     width: calc((100% - 16px) / 4);
   }
 
+  #search-pagination {
+    margin-top: -35px
+  }
+
   #content-div {
     padding-bottom: 50px
   }
 
   #comment-like-form-wrapper {
     margin-left: 50px;
-  }
-
-  #hentai-menu-btn {
-    left: 11px;
-  }
-
-  #hentai-logo img {
-    margin-left: 27px;
-  }
-
-  #hentai-filter-nav {
-    padding: 0px 8px
   }
 
   .hentai-footer {
@@ -3454,8 +3460,16 @@ a > i {
     margin-bottom: 4px !important;
   }
 
+  #search-pagination {
+    margin-top: 10px;
+  }
+
   .intro-rows-wrapper {
     margin-top: 100px !important;
+  }
+
+  .search-rows-wrapper {
+    margin-top: 130px !important;
   }
 
   .home-logo img {

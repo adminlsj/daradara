@@ -1,20 +1,17 @@
 @extends('layouts.app')
 
 @section('nav')
-    @include('layouts.nav-main-original', ['theme' => 'white'])
+    @include('nav.main', ['theme' => 'white'])
 @endsection
 
 @section('content')
-<div class="hidden-xs hidden-sm hidden-md sidebar-menu">
-    @include('video.sidebarMenu', ['theme' => 'white'])
-</div>
 
 <div class="main-content">
     <div id="loginModal" style="background-color: #F5F5F5;">
         <form method="POST" action="{{ route('login') }}">
 
           {{ csrf_field() }}
-          {{ Session::put('previousUrl', '/recommend') }}
+          {{ Session::put('previousUrl', '/') }}
 
           <div style="padding: 15px;">
             <div style="border: 0px; position: relative;" class="modal-header">
