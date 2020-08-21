@@ -30,7 +30,14 @@ class VideoController extends Controller
         $vid = $request->v;
         if (is_numeric($vid) && $video = Video::find($request->v)) {
             $videos = Video::where('playlist_id', $video->playlist_id)->orderBy('created_at', 'desc')->get();
-            $recommends = Video::where('cover', '!=', null)->inRandomOrder()->limit(42)->get();
+
+            $tags = array_intersect($video->tags(), Video::$selected_tags);
+            $recommends = Video::where(function($query) use ($tags) {
+                foreach ($tags as $tag) {
+                    $query->orWhere('tags', 'ilike', '%'.$tag.'%');
+                }
+            })->where('cover', '!=', null)->inRandomOrder()->limit(42)->get();
+
             $rows = ['集數列表' => $videos, '相關推薦' => $recommends];
 
             return view('video.info', compact('rows', 'video'));

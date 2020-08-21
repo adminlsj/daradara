@@ -19,6 +19,16 @@
         </a>
       @endforeach
     </div>
+    <div style="padding: 0 4%;">
+      <form action="{{ route('logout') }}" method="POST">
+        {{ csrf_field() }}
+        <br class="hidden-sm hidden-md hidden-lg">
+        <button style="height: 40px; width: 80px; background-color: dimgray !important; border-color: dimgray !important;" class="no-button-style btn-info" type="submit">登出</button>
+        <br class="hidden-sm hidden-md hidden-lg">
+        <br class="hidden-sm hidden-md hidden-lg">
+        <br class="hidden-sm hidden-md hidden-lg">
+      </form>
+    </div>
   </div>
 
   <div class="hidden-xs" style="position: relative; padding: 0 4%; margin-top: 50px">
@@ -41,11 +51,6 @@
     </div>
   </div>
 </div>
-
-<form id="logout-form" style="display: inline-block; margin-top: -10px; margin-bottom: -10px" action="{{ route('logout') }}" method="POST">
-    {{ csrf_field() }}
-    <button style="margin: 0px; margin-right: 5px; border: none;" type="submit">登出</button>
-</form>
 
 @include('layouts.nav-bottom')
 
