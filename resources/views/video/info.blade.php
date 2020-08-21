@@ -19,26 +19,37 @@
         &nbsp;
 
         <div id="info-btn-wrapper" style="display: inline-block;">
-
-          <form style="display: inline-block;" class="video-like-form" action="{{ route('video.like') }}" method="POST">
-            {{ csrf_field() }}
-            <input name="like-user-id" type="hidden" value="{{ Auth::user()->id }}">
-            <input name="like-type" type="hidden" value="video">
-            <input name="like-foreign-id" type="hidden" value="{{ $video->id }}">
-            <input name="like-is-positive" type="hidden" value="{{ true }}">
-            @include('video.info-desktop-like-btn')
-          </form>
+          @if (!Auth::check())
+            <div data-toggle="modal" data-target="#signUpModal" style="text-decoration: none; color: inherit; display: inline-block;">
+              <button id="info-desktop-like-btn" class="no-button-style" type="submit"><i style="margin-top: -5px; margin-left: 0px;" class="material-icons-outlined">thumb_up</i></button>
+            </div>
+          @else
+            <form style="display: inline-block;" class="video-like-form" action="{{ route('video.like') }}" method="POST">
+              {{ csrf_field() }}
+              <input name="like-user-id" type="hidden" value="{{ Auth::user()->id }}">
+              <input name="like-type" type="hidden" value="video">
+              <input name="like-foreign-id" type="hidden" value="{{ $video->id }}">
+              <input name="like-is-positive" type="hidden" value="{{ true }}">
+              @include('video.info-desktop-like-btn')
+            </form>
+          @endif
 
           <button class="no-button-style" id="comment-icon"><i style="margin-top: 6px; margin-left: 1px; font-size: 1.9em" class="material-icons">chat</i></button>
 
           <button class="no-button-style" id="shareBtn" data-toggle="modal" data-target="#shareModal"><i style="-moz-transform: scale(-1, 1);-webkit-transform: scale(-1, 1);-o-transform: scale(-1, 1);-ms-transform: scale(-1, 1);transform: scale(-1, 1); margin-right: 3px; margin-top: 2px; margin-left: 3px; font-size: 2.3em" class="material-icons">reply</i></button>
 
-          <form style="display: inline-block;" class="video-save-form" action="{{ route('video.save') }}" method="POST">
-            {{ csrf_field() }}
-            <input name="save-user-id" type="hidden" value="{{ Auth::user()->id }}">
-            <input name="save-foreign-id" type="hidden" value="{{ $video->id }}">
-            @include('video.info-desktop-save-btn')
-          </form>
+          @if (!Auth::check())
+            <div data-toggle="modal" data-target="#signUpModal" style="text-decoration: none; color: inherit; display: inline-block;" class="single-icon-wrapper">
+              <button id="info-desktop-save-btn" class="no-button-style" type="submit"><i style="margin-top: -1px; margin-left: 0px; font-size: 2.3em" class="material-icons">add</i></button>
+            </div>
+          @else
+            <form style="display: inline-block;" class="video-save-form" action="{{ route('video.save') }}" method="POST">
+              {{ csrf_field() }}
+              <input name="save-user-id" type="hidden" value="{{ Auth::user()->id }}">
+              <input name="save-foreign-id" type="hidden" value="{{ $video->id }}">
+              @include('video.info-desktop-save-btn')
+            </form>
+          @endif
 
           <button class="no-button-style" data-toggle="modal" data-target="#reportModal"><i style="margin-top: 5px; margin-left: 1px; font-size: 2em" class="material-icons">flag</i></button>
 
@@ -62,7 +73,7 @@
           @if (!Auth::check())
             <div data-toggle="modal" data-target="#signUpModal" style="text-decoration: none; color: inherit" class="single-icon-wrapper">
               <div class="single-icon no-select">
-                <i class="material-icons">thumb_up</i>
+                <i class="material-icons-outlined">thumb_up</i>
                 <div>{{ App\Like::count('video', $video->id, true) }}</div>
               </div>
             </div>

@@ -41,8 +41,8 @@ class VideoController extends Controller
         $vid = $request->v;
 
         if (is_numeric($vid) && $video = Video::find($request->v)) {
-
-            return view('video.watch', compact('video'));
+            $is_mobile = $this->checkMobile();
+            return view('video.watch', compact('video', 'is_mobile'));
 
         } else {
             return view('errors.404');

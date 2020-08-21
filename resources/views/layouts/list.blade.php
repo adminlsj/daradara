@@ -42,6 +42,11 @@
   </div>
 </div>
 
+<form id="logout-form" style="display: inline-block; margin-top: -10px; margin-bottom: -10px" action="{{ route('logout') }}" method="POST">
+    {{ csrf_field() }}
+    <button style="margin: 0px; margin-right: 5px; border: none;" type="submit">登出</button>
+</form>
+
 @include('layouts.nav-bottom')
 
 @endsection
