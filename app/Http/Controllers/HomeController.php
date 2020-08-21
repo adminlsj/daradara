@@ -7,21 +7,17 @@ use App\Bot;
 use App\Watch;
 use App\Subscribe;
 use App\User;
-use App\Avatar;
 use App\Comment;
 use App\Like;
 use App\Save;
-use App\Blog;
 use App\Feedback;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Carbon\Carbon;
 use Response;
-use Mail;
 use Auth;
 use Image;
 use App\Mail\UserReport;
-use App\Mail\CopyrightReport;
 use App\Mail\UserUploadVideo;
 use App\Mail\SubscribeNotify;
 use SteelyWing\Chinese\Chinese;
@@ -108,6 +104,13 @@ class HomeController extends Controller
         $videos = $videos->distinct()->orderBy('created_at', 'desc')->paginate(42);
 
         return view('layouts.search', compact('tags', 'brands', 'videos'));
+    }
+
+    public function list()
+    {
+        $saved = Save::where('user_id', Auth::user()->id)->pluck('foreign_id');
+        $videos = Video::whereIn('id', $saved)->orderBy('created_at', 'desc')->get();
+        return view('layouts.list', compact('videos'));
     }
 
     public function genre(Request $request)
