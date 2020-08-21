@@ -3,7 +3,7 @@
     <i style="font-size: 24px; margin-top: 7px" class="material-icons">home</i>
     <span style="padding-right: 1px;">主頁</span>
   </a>
-  <a href="{{ route('home.list') }}" class="{{ Request::is('*subscribes*') ? 'active' : ''}}">
+  <a href="{{ Auth::check() ? route('home.list') : route('login') }}" class="{{ Request::is('*subscribes*') ? 'active' : ''}}">
     <i style="font-size: 23px; position: relative; margin-top: 7px" class="material-icons">subscriptions</i>
     <span style="padding-right: 1px;">訂閱項目</span>
     @if (Auth::check() && strpos(auth()->user()->alert, 'subscribe') !== false)
@@ -18,7 +18,7 @@
     <i style="padding-left: 2px; font-size: 25px; margin-top: 6px" class="material-icons">explore</i>
     <span>最新內容</span>
   </a>
-  <a href="{{ Auth::check() ? route('user.show', Auth::user()) : route('login') }}" class="{{ Request::is('*user*') ? 'active' : '' }}">
+  <a href="{{ Auth::check() ? route('home.list') : route('login') }}" class="{{ Request::is('*user*') ? 'active' : '' }}">
     <i style="font-size: 23px; margin-top: 7px" class="material-icons">video_library</i>
     <span>媒體庫</span>
   </a>
