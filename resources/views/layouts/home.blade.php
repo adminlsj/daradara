@@ -30,12 +30,9 @@
 			<div style="margin-top: 20px; width: 100%">
 				<div style="width: 33%; float:left; display: inline-block;">
 					@if (!Auth::check())
-			            <div data-toggle="modal" data-target="#signUpModal" style="text-decoration: none; color: inherit" class="single-icon-wrapper">
-			              <div class="single-icon no-select">
-			                <i class="material-icons">add</i>
-			                <div>儲存</div>
-			              </div>
-			            </div>
+						<div data-toggle="modal" data-target="#signUpModal" class="video-save-form home-save-form">
+				            @include('video.info-mobile-save-btn', ['video' => $banner])
+				        </div>
 			          @else
 			            <form class="video-save-form home-save-form" action="{{ route('video.save') }}" method="POST">
 			              {{ csrf_field() }}
@@ -94,5 +91,10 @@
 </div>
 
 @include('layouts.nav-bottom')
+
+@if (!Auth::check())
+  @include('user.signUpModal')
+  @include('user.loginModal')
+@endif
 
 @endsection
