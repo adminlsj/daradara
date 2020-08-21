@@ -14,17 +14,10 @@
     <i style="padding-left: 0px; font-size: 24px;  margin-top: 7px" class="material-icons">whatshot</i>
     <span>發燒影片</span>
   </a>
-  @if (Auth::check() && auth()->user()->subscribes()->first())
-    <a href="{{ route('video.recommend') }}" class="{{ Request::is('*recommend*') ? 'active' : '' }}">
-      <i style="padding-left: 2px; font-size: 25px; margin-top: 10px" class="material-icons">explore</i>
-      <span>最新推薦</span>
-    </a>
-  @else
-    <a href="{{ route('video.newest') }}" class="{{ Request::is('*newest*') ? 'active' : '' }}">
-      <i style="padding-left: 2px; font-size: 25px; margin-top: 6px" class="material-icons">explore</i>
-      <span>最新內容</span>
-    </a>
-  @endif
+  <a href="{{ route('video.newest') }}" class="{{ Request::is('*newest*') ? 'active' : '' }}">
+    <i style="padding-left: 2px; font-size: 25px; margin-top: 6px" class="material-icons">explore</i>
+    <span>最新內容</span>
+  </a>
   <a href="{{ Auth::check() ? route('user.show', Auth::user()) : route('login') }}" class="{{ Request::is('*user*') ? 'active' : '' }}">
     <i style="font-size: 23px; margin-top: 7px" class="material-icons">video_library</i>
     <span>媒體庫</span>
