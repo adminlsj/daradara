@@ -33,7 +33,7 @@ class HomeController extends Controller
     {
         $banner = Video::find(12872);
         $count = 20;
-        $upload = Video::where('cover', '!=', null)->orderBy('created_at', 'asc')->limit($count)->get();
+        $upload = Video::where('cover', '!=', null)->orderBy('id', 'desc')->limit($count)->get();
         $trending = Video::where('cover', '!=', null)->orderBy('views', 'desc')->limit($count)->get();
         $newest =Video::where('cover', '!=', null)->orderBy('created_at', 'desc')->limit($count)->get();
         $tag1 = Video::where('cover', '!=', null)->where('tags', 'ilike', '%巨乳%')->inRandomOrder()->limit($count)->get();
@@ -148,6 +148,23 @@ class HomeController extends Controller
 
     public function terms()
     {
+        // SpankBang link retrieve
+        /* $requests = Browsershot::url('https://spankbang.com/4anle/video/lucky+man+get+to+be+sucked+by+bitch+hardly')
+            ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
+            ->triggeredRequests();
+        foreach ($requests as $request) {
+            if (strpos($request['url'], 'spankbang.com/stream/') !== false && strpos($request['url'], '.mp4') !== false) {
+                $second_requests = Browsershot::url($request['url'])
+                    ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
+                    ->triggeredRequests();
+                foreach ($second_requests as $second_request) {
+                    if (strpos($second_request['url'], 'vdownload') !== false && strpos($second_request['url'], '.mp4') !== false) {
+                        $link = str_replace('720p', '1080p', $second_request['url']);
+                        return $link;
+                    }
+                }
+            }
+        } */
         return view('layouts.terms');
     }
 
