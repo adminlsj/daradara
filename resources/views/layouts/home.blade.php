@@ -16,7 +16,7 @@
 			<div style="display: inline-block; padding: 10px 30px 6px 20px; margin-top: -8px; margin-bottom: -10px" data-toggle="modal" data-target="#playModal" class="hover-opacity-all home-banner-btn home-banner-play-btn play-btn"><span style="vertical-align: middle; font-size: 2em; margin-top: -4px; padding-right: 5px" class="material-icons">play_arrow</span>播放</div>
 			@include('video.playModal', ['video' => $banner])
 			&nbsp;
-			<a href="{{ route('video.info') }}?v={{ $banner->id }}" class="hover-opacity-all home-banner-btn home-banner-info-btn"><span style="vertical-align: middle; font-size: 1.7em; margin-top: -2px; padding-right: 7px" class="material-icons">info</span>更多資訊</a>
+			<a href="{{ route('video.watch') }}?v={{ $banner->id }}" class="hover-opacity-all home-banner-btn home-banner-info-btn"><span style="vertical-align: middle; font-size: 1.7em; margin-top: -2px; padding-right: 7px" class="material-icons">info</span>更多資訊</a>
 		</div>
 	</div>
 
@@ -44,7 +44,7 @@
 				<div style="width: 33%; float:left; display: inline-block; margin-top: 10px;">
 					<a href="{{ route('video.watch') }}?v={{ $banner->id }}" target="_blank" class="hover-opacity-all home-banner-btn home-banner-play-btn" style="cursor: pointer; font-size: 14px; border-radius: 3px; text-decoration: none; background-color: white; padding: 8px 22px 8px 12px; color: black;"><span style="vertical-align: middle; font-size: 2em; margin-top: -3px; padding-right: 3px" class="material-icons">play_arrow</span>播放</a>
 				</div>
-				<a href="{{ route('video.info') }}?v={{ $banner->id }}" style="width: 33%; float:left; display: inline-block; color: white; text-decoration: none;">
+				<a href="{{ route('video.watch') }}?v={{ $banner->id }}" style="width: 33%; float:left; display: inline-block; color: white; text-decoration: none;">
 					<span class="material-icons">info</span>
 					<div style="font-size: 12px; margin-top: 0px">更多資訊</div>
 				</a>
@@ -57,7 +57,7 @@
 			<h3>{{ $title }}</h3>
 			<div class="home-rows-videos-wrapper">
 				@foreach ($videos as $video)
-					<a style="text-decoration: none;" href="{{ route('video.info') }}?v={{ $video->id }}">
+					<a style="text-decoration: none;" href="{{ route('video.watch') }}?v={{ $video->id }}">
 						<div id="home-rows-videos-div" style="position: relative; display: inline-block;">
 							<img src="{{ $video->cover }}">
 					        <div id="home-rows-videos-title" style="position:absolute; bottom:0; left:0; white-space: initial; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; color: white; width: 100%; padding: 3px 3px; background: linear-gradient(to bottom, transparent 0%, black 120%);">{{ explode('/', $video->watch->title)[0] }}</div>

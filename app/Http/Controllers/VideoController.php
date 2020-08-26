@@ -26,7 +26,7 @@ class VideoController extends Controller
         $this->middleware('auth')->only('edit', 'update', 'destroy');
     }
 
-    public function info(Request $request){
+    public function watch(Request $request){
         $vid = $request->v;
         if (is_numeric($vid) && $video = Video::find($request->v)) {
             $videos = Video::where('playlist_id', $video->playlist_id)->orderBy('created_at', 'desc')->get();
@@ -40,18 +40,7 @@ class VideoController extends Controller
 
             $rows = ['集數列表' => $videos, '相關推薦' => $recommends];
 
-            return view('video.info', compact('rows', 'video'));
-        }
-    }
-
-    public function watch(Request $request){
-        $vid = $request->v;
-
-        if (is_numeric($vid) && $video = Video::find($request->v)) {
-            $is_mobile = $this->checkMobile();
-            $video->views++;
-            $video->save();
-            return view('video.watch', compact('video', 'is_mobile'));
+            return view('video.watch', compact('rows', 'video'));
         }
     }
 
