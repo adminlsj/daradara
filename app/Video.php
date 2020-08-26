@@ -198,6 +198,7 @@ class Video extends Model
             $redirect = curl_getinfo($curl_connection, CURLINFO_EFFECTIVE_URL);
             curl_close($curl_connection);
             return str_replace('720p', '1080p', $redirect);
+            
         } else {
             return $this->sd;
         }
