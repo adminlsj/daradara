@@ -13,7 +13,7 @@
     <img class="lazy" style="background-color: black; width: 100%; -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0.3)));" src="https://i.imgur.com/CJ5svNv.png" data-src="{{ $video->imgur() }}" data-srcset="{{ $video->imgur() }}" alt="{{ $video->title }}">
     <div id="home-banner-wrapper" style="position: absolute; left: 4%; color: white">
       <h3 style="font-weight: bold"><span style="color: crimson">H</span>anime1<span style="color: crimson">.</span>me</h3>
-      <h1 style="margin: 0; line-height: 45px; margin-bottom: -5px;">{{ $video->translations['JP'] }}</h1>
+      <h1 style="margin: 0; line-height: 45px; margin-bottom: -5px; font-weight: bold;">{{ $video->translations['JP'] }}</h1>
       <h4 class="hidden-xs">{{ $video->title }} <span style="color: crimson">•</span> {{ $video->caption }}</h4>
       <div style="margin-top: -10px; margin-bottom: -11px">
         <div style="display: inline-block; padding: 10px 30px 7px 20px;" data-toggle="modal" data-target="#playModal" class="hover-opacity-all home-banner-btn home-banner-play-btn play-btn"><span style="vertical-align: middle; font-size: 2em; margin-top: -4px; padding-right: 5px;" class="material-icons">play_arrow</span>播放</div>
