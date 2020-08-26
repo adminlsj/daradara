@@ -13,12 +13,10 @@
 			<h3 style="font-weight: bold"><span style="color: crimson">H</span>anime1<span style="color: crimson">.</span>me</h3>
 			<h1 style="margin: 0">{{ explode('/', $banner->title)[0] }}</h1>
 			<h4 class="hidden-xs">{{ $banner->watch->description }}</h4>
-			<div>
-				<div style="display: inline-block; padding: 10px 30px 7px 20px;" data-toggle="modal" data-target="#playModal" class="hover-opacity-all home-banner-btn home-banner-play-btn"><span style="vertical-align: middle; font-size: 2em; margin-top: -3px; padding-right: 5px" class="material-icons">play_arrow</span>播放</div>
-				@include('video.playModal', ['video' => $banner])
-				&nbsp;
-				<a href="{{ route('video.info') }}?v={{ $banner->id }}" class="hover-opacity-all home-banner-btn home-banner-info-btn"><span style="vertical-align: middle; font-size: 1.7em; margin-top: -2px; padding-right: 7px" class="material-icons">info</span>更多資訊</a>
-			</div>
+			<div style="display: inline-block; padding: 10px 30px 6px 20px; margin-top: -8px; margin-bottom: -10px" data-toggle="modal" data-target="#playModal" class="hover-opacity-all home-banner-btn home-banner-play-btn"><span style="vertical-align: middle; font-size: 2em; margin-top: -4px; padding-right: 5px" class="material-icons">play_arrow</span>播放</div>
+			@include('video.playModal', ['video' => $banner])
+			&nbsp;
+			<a href="{{ route('video.info') }}?v={{ $banner->id }}" class="hover-opacity-all home-banner-btn home-banner-info-btn"><span style="vertical-align: middle; font-size: 1.7em; margin-top: -2px; padding-right: 7px" class="material-icons">info</span>更多資訊</a>
 		</div>
 	</div>
 
