@@ -14,7 +14,7 @@
     <div id="home-banner-wrapper" style="position: absolute; left: 4%; color: white">
       <h3 style="font-weight: bold"><span style="color: crimson">H</span>anime1<span style="color: crimson">.</span>me</h3>
       <h1 style="margin: 0; line-height: 45px; margin-bottom: -5px;">{{ $video->translations['JP'] }}</h1>
-      <h4 class="hidden-xs">{{ $video->title }} • {{ $video->caption }}</h4>
+      <h4 class="hidden-xs">{{ $video->title }} <span style="color: crimson">•</span> {{ $video->caption }}</h4>
       <div style="margin-top: -10px; margin-bottom: -11px">
         <div style="display: inline-block; padding: 10px 30px 7px 20px;" data-toggle="modal" data-target="#playModal" class="hover-opacity-all home-banner-btn home-banner-play-btn play-btn"><span style="vertical-align: middle; font-size: 2em; margin-top: -4px; padding-right: 5px;" class="material-icons">play_arrow</span>播放</div>
 
@@ -68,7 +68,7 @@
       <div style="width: 92%; margin-top: 18px;">
         <div data-toggle="modal" data-target="#playModal" style="cursor: pointer; font-size: 14px; border-radius: 3px; text-decoration: none; background-color: red; color: black; color: white; margin-left: 4%; padding: 5px 0" class="btn-block play-btn"><span style="vertical-align: middle; font-size: 2em; margin-top: -3px; padding-right: 3px; color: white;" class="material-icons">play_arrow</span>播放</div>
       </div>
-      <h4 style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; line-height: 16px; font-size: 12px; width: 92%; margin-left: 4%;">{{ $video->title }} • {{ $video->caption }}</h4>
+      <h4 style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; line-height: 16px; font-size: 12px; width: 92%; margin-left: 4%;">{{ $video->title }} <span style="color: crimson">•</span> {{ $video->caption }}</h4>
       
       <div class="show-panel-icons" style="margin:0; margin-top: 15px;">
         <div id="video-like-form-wrapper" class="hover-opacity-all">
