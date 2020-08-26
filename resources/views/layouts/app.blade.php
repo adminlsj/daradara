@@ -14,10 +14,10 @@
         <meta name="RATING" content="RTA-5042-1996-1400-1577-RTA" />
     @show
 
-    <meta name="title" content="娛見日本 LaughSeeJapan">
-    <title>娛見日本 LaughSeeJapan</title>
+    <meta name="title" content="Hanime1.me - H動漫的完美體驗">
+    <title>Hanime1.me - H動漫的完美體驗</title>
     <meta name="description" 
-          content="在娛見日本 LaughSeeJapan 上享受您最愛的影片、崁入原創內容，並與全世界觀眾分享您的影片。">
+          content="Hanime1.me 帶給你最完美的H動漫、H動畫、成人體驗">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -53,14 +53,14 @@
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
         <script src="{{ mix('js/app.js') }}"></script>
 
-        <!-- Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-125786247-1"></script>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-125786247-2"></script>
         <script>
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
 
-          gtag('config', 'UA-125786247-1');
+          gtag('config', 'UA-125786247-2');
         </script>
 
         <!-- Google Adsense -->
