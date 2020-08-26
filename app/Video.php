@@ -189,7 +189,18 @@ class Video extends Model
 
     public function sd()
     {
-        return explode(" ",$this->sd);
+        if (strpos($this->sd, "spankbang.com") !== FALSE) {
+            $curl_connection = curl_init();
+            curl_setopt($curl_connection, CURLOPT_URL, $this->sd);
+            curl_setopt($curl_connection, CURLOPT_FOLLOWLOCATION, true); // follow the redirects
+            curl_setopt($curl_connection, CURLOPT_NOBODY, true); // get the resource without a body
+            curl_exec($curl_connection);
+            $redirect = curl_getinfo($curl_connection, CURLINFO_EFFECTIVE_URL);
+            curl_close($curl_connection);
+            return str_replace('720p', '1080p', $redirect);
+        } else {
+            return $this->sd;
+        }
     }
 
     public static function setPlayerConfig($video, $country_code, $is_mobile, &$outsource, &$sd)

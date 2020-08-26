@@ -22,7 +22,7 @@
             preload: 'auto',
             volume: 0.7,
             video: {
-              url: '{!! $video->sd !!}',
+              url: '{!! $video->sd() !!}',
             },
           });
         </script>
