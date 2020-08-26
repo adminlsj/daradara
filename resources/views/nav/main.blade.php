@@ -1,6 +1,6 @@
 <div id="main-nav">
-  <a href="/" style="padding-right: 2.5%; font-size: 1.5em; color: white;">
-    <span style="color: crimson;">H</span>anime1<span style="color: crimson;">.</span>me
+  <a href="/" style="padding-right: 2.5%; color: white; font-size: 1.5em;">
+    <span style="color: crimson">H</span>anime1<span style="color: crimson">.</span>me
   </a>
   <a class="nav-item hidden-xs" href="/">主頁</a>
   <a class="nav-item" href="{{ route('home.search') }}">H動漫</a>

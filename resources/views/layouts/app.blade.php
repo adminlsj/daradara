@@ -8,8 +8,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <meta name="google-site-verification" content="oV77KljbCxlciy-aD-Uy_dZSYUENVR_6jAhWSp_cb48" />
         <meta name="exoclick-site-verification" content="931150d86a55634ee548ee3d8c755e27">
-        <link rel="shortcut icon" type="image/x-icon" href="https://s3.amazonaws.com/twobayjobs/system/intro/browser-icon.ico"/>
-        <link rel="apple-touch-icon" href="https://i.imgur.com/OCEaQMK.png"/>
+        <link rel="shortcut icon" type="image/x-icon" href="https://i.imgur.com/PTFz5Ej.png"/>
+        <link rel="apple-touch-icon" href="https://i.imgur.com/PTFz5Ej.png"/>
         <link rel="canonical" href="https://www.hanime1.me{{ Request::getRequestUri() }}" />
         <meta name="RATING" content="RTA-5042-1996-1400-1577-RTA" />
     @show
