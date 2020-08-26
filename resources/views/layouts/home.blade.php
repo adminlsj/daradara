@@ -7,6 +7,9 @@
 @section('content')
 
 <div id="content-div">
+
+	@include('video.playModal', ['video' => $banner])
+
 	<div class="hidden-xs" style="position: relative;">
 		<img class="lazy" style="width: 100%; -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0.3)));" src="https://i.imgur.com/CJ5svNv.png" data-src="{{ $banner->imgur() }}" data-srcset="{{ $banner->imgur() }}" alt="{{ $banner->title }}">
 		<div id="home-banner-wrapper" style="position: absolute; left: 4%; color: white">
@@ -14,7 +17,6 @@
 			<h1 style="margin: 0">{{ explode('/', $banner->title)[0] }}</h1>
 			<h4 class="hidden-xs">{{ $banner->watch->description }}</h4>
 			<div style="display: inline-block; padding: 10px 30px 6px 20px; margin-top: -8px; margin-bottom: -10px" data-toggle="modal" data-target="#playModal" class="hover-opacity-all home-banner-btn home-banner-play-btn play-btn"><span style="vertical-align: middle; font-size: 2em; margin-top: -4px; padding-right: 5px" class="material-icons">play_arrow</span>播放</div>
-			@include('video.playModal', ['video' => $banner])
 			&nbsp;
 			<a href="{{ route('video.watch') }}?v={{ $banner->id }}" class="hover-opacity-all home-banner-btn home-banner-info-btn"><span style="vertical-align: middle; font-size: 1.7em; margin-top: -2px; padding-right: 7px" class="material-icons">info</span>更多資訊</a>
 		</div>
@@ -42,7 +44,7 @@
 			          @endif
 				</div>
 				<div style="width: 33%; float:left; display: inline-block; margin-top: 10px;">
-					<a href="{{ route('video.watch') }}?v={{ $banner->id }}" target="_blank" class="hover-opacity-all home-banner-btn home-banner-play-btn" style="cursor: pointer; font-size: 14px; border-radius: 3px; text-decoration: none; background-color: white; padding: 8px 22px 8px 12px; color: black;"><span style="vertical-align: middle; font-size: 2em; margin-top: -3px; padding-right: 3px" class="material-icons">play_arrow</span>播放</a>
+					<a class="hover-opacity-all home-banner-btn home-banner-play-btn play-btn" data-toggle="modal" data-target="#playModal" style="cursor: pointer; font-size: 14px; border-radius: 3px; text-decoration: none; background-color: white; padding: 8px 22px 8px 12px; color: black;"><span style="vertical-align: middle; font-size: 2em; margin-top: -3px; padding-right: 3px" class="material-icons">play_arrow</span>播放</a>
 				</div>
 				<a href="{{ route('video.watch') }}?v={{ $banner->id }}" style="width: 33%; float:left; display: inline-block; color: white; text-decoration: none;">
 					<span class="material-icons">info</span>
