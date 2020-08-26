@@ -44,8 +44,6 @@ Route::get('/terms', 'HomeController@terms');
 Route::get('/policies', 'HomeController@policies');
 Route::get('/copyright', 'HomeController@copyright');
 Route::get('/video-copyright', 'VideoController@copyright');
-Route::get('/check', 'HomeController@check');
-Route::get('/checkKum', 'HomeController@checkKum');
 Route::get('/checkSubscribes', 'HomeController@checkSubscribes');
 Route::get('/checkZeroSubscribes', 'HomeController@checkZeroSubscribes');
 Route::get('/bccToSrt', 'HomeController@bccToSrt');
@@ -57,6 +55,7 @@ Route::get('/sitemap.xml', 'HomeController@sitemap');
 Route::get('/createGetSource', 'VideoController@createGetSource');
 Route::get('/loadPlaylist', 'VideoController@loadPlaylist')->name('video.loadPlaylist');
 Route::get('/loadTagList', 'VideoController@loadTagList');
+Route::get('/updateHentai', 'HomeController@updateHentai');
 
 Route::get('/loadHomeTagList', 'HomeController@loadHomeTagList');
 Route::get('/userReport', 'HomeController@userReport')->name('email.userReport');

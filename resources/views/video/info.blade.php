@@ -7,14 +7,16 @@
 @section('content')
 <div id="content-div">
 
+  @include('video.playModal')
+
   <div class="hidden-xs" style="position: relative;">
-    <img style="width: 100%; -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0.3)));" src="{{ $video->imgur() }}">
+    <img class="lazy" style="background-color: black; width: 100%; -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0.3)));" src="https://i.imgur.com/CJ5svNv.png" data-src="{{ $video->imgur() }}" data-srcset="{{ $video->imgur() }}" alt="{{ $video->title }}">
     <div id="home-banner-wrapper" style="position: absolute; left: 4%; color: white">
       <h3 style="font-weight: bold"><span style="color: crimson">H</span>anime1<span style="color: crimson">.</span>me</h3>
       <h1 style="margin: 0">{{ explode('/', $video->title)[0] }}</h1>
       <h4 class="hidden-xs">{{ $video->caption }}</h4>
       <div style="margin-top: -10px; margin-bottom: -11px">
-        <a href="{{ route('video.watch') }}?v={{ $video->id }}" target="_blank" class="hover-opacity-all home-banner-btn home-banner-play-btn"><span style="vertical-align: middle; font-size: 2em; margin-top: -3px; padding-right: 5px;" class="material-icons">play_arrow</span>播放</a>
+        <div style="display: inline-block; padding: 10px 30px 7px 20px;" data-toggle="modal" data-target="#playModal" class="hover-opacity-all home-banner-btn home-banner-play-btn play-btn"><span style="vertical-align: middle; font-size: 2em; margin-top: -4px; padding-right: 5px;" class="material-icons">play_arrow</span>播放</div>
 
         &nbsp;
 
@@ -64,7 +66,7 @@
     <div style="text-align: center; color: white; margin-top: 15px;">
       <h1 style="font-size: 22px; font-weight: bold; margin: 0; padding: 0 4%; line-height: 30px">{{ explode('/', $video->title)[0] }}</h1>
       <div style="width: 92%; margin-top: 18px;">
-        <a href="{{ route('video.watch') }}?v={{ $video->id }}" target="_blank" style="cursor: pointer; font-size: 14px; border-radius: 3px; text-decoration: none; background-color: red; color: black; color: white; margin-left: 4%; padding: 5px 0" class="btn-block"><span style="vertical-align: middle; font-size: 2em; margin-top: -3px; padding-right: 3px; color: white;" class="material-icons">play_arrow</span>播放</a>
+        <div data-toggle="modal" data-target="#playModal" style="cursor: pointer; font-size: 14px; border-radius: 3px; text-decoration: none; background-color: red; color: black; color: white; margin-left: 4%; padding: 5px 0" class="btn-block play-btn"><span style="vertical-align: middle; font-size: 2em; margin-top: -3px; padding-right: 3px; color: white;" class="material-icons">play_arrow</span>播放</div>
       </div>
       <h4 style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; line-height: 16px; font-size: 12px; width: 92%; margin-left: 4%;">{{ $video->caption }}</h4>
       

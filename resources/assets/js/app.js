@@ -40,6 +40,14 @@ $('.hentai-sort-options-wrapper').click(function() {
   $('form#hentai-form').submit();
 })
 
+$('.play-btn').click(function() {
+  dp.play()
+})
+
+$('#playModal').on('hidden.bs.modal', function () {
+  dp.pause()
+});
+
 $('nav#hentai-main-nav').on("submit", "form#search-form", function(e) {
   e.preventDefault(e);
   var query = $('#nav-query').val();

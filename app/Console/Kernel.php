@@ -15,7 +15,9 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         'App\Console\Commands\UpdateVideos',
         'App\Console\Commands\UpdateData',
-        'App\Console\Commands\UpdateHentai',
+        'App\Console\Commands\UpdateSpankbang',
+        'App\Console\Commands\UpdateYoujizz',
+        'App\Console\Commands\UpdateSlutload',
         'App\Console\Commands\UploadVideos',
         'App\Console\Commands\UploadYongjiu',
         'App\Console\Commands\UploadAgefans'
@@ -31,7 +33,9 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('laughseejapan:update-videos')->dailyAt('16:30');
         $schedule->command('laughseejapan:update-data')->dailyAt('05:00');
-        $schedule->command('laughseejapan:update-hentai')->everyThirtyMinutes();
+        $schedule->command('laughseejapan:update-spankbang')->cron('0 */3 * * *');
+        $schedule->command('laughseejapan:update-youjizz')->cron('0 */6 * * *');
+        $schedule->command('laughseejapan:update-slutload')->everyThirtyMinutes();
         $schedule->command('laughseejapan:upload-videos')->hourly()->unlessBetween('2:00', '9:00');
         $schedule->command('laughseejapan:upload-yongjiu')->everyThirtyMinutes()->unlessBetween('3:00', '8:00');
         $schedule->command('laughseejapan:upload-agefans')->everyMinute()->unlessBetween('3:00', '8:00');

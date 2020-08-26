@@ -204,6 +204,17 @@ class Video extends Model
         } elseif (strpos($sd, "agefans.tv") !== FALSE) {
             $outsource = false;
             $sd = urldecode(str_replace('https://www.agefans.tv/age/player/ckx1/?url=', '', $video->sd));
+        
+        } elseif (strpos($sd, "spankbang.com") !== FALSE) {
+            $outsource = false;
+            $curl_connection = curl_init();
+            curl_setopt($curl_connection, CURLOPT_URL, $sd);
+            curl_setopt($curl_connection, CURLOPT_FOLLOWLOCATION, true); // follow the redirects
+            curl_setopt($curl_connection, CURLOPT_NOBODY, true); // get the resource without a body
+            curl_exec($curl_connection);
+            $redirect = curl_getinfo($curl_connection, CURLINFO_EFFECTIVE_URL);
+            curl_close($curl_connection);
+            $sd = str_replace('720p', '1080p', $redirect);
         }
 
         $bilibili = strpos($sd, "player.bilibili.com") !== FALSE;

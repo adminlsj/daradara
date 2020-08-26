@@ -148,23 +148,6 @@ class HomeController extends Controller
 
     public function terms()
     {
-        // SpankBang link retrieve
-        /* $requests = Browsershot::url('https://spankbang.com/4anle/video/lucky+man+get+to+be+sucked+by+bitch+hardly')
-            ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
-            ->triggeredRequests();
-        foreach ($requests as $request) {
-            if (strpos($request['url'], 'spankbang.com/stream/') !== false && strpos($request['url'], '.mp4') !== false) {
-                $second_requests = Browsershot::url($request['url'])
-                    ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
-                    ->triggeredRequests();
-                foreach ($second_requests as $second_request) {
-                    if (strpos($second_request['url'], 'vdownload') !== false && strpos($second_request['url'], '.mp4') !== false) {
-                        $link = str_replace('720p', '1080p', $second_request['url']);
-                        return $link;
-                    }
-                }
-            }
-        } */
         return view('layouts.terms');
     }
 
@@ -210,94 +193,6 @@ class HomeController extends Controller
         $watches = Watch::orderBy('created_at', 'desc')->get();
         $time = Carbon::now()->format('Y-m-d\Th:i:s').'+00:00';
         return Response::view('layouts.sitemap', compact('videos', 'watches', 'time'))->header('Content-Type', 'application/xml');
-    }
-
-    public function checkKum(Request $request)
-    {
-        if (Auth::check() && Auth::user()->email == 'laughseejapan@gmail.com') {
-
-            $videos = Video::where('sd', 'ilike', '%https://cdn-videos.kum.com%')->get();
-            
-            echo "Video Check STARTED<br>";
-
-            foreach ($videos as $video) {
-                ini_set('memory_limit', '-1');
-                ini_set('max_execution_time', 0); 
-                $ch = curl_init($video->sd);
-                curl_setopt($ch, CURLOPT_HEADER, 1);
-                curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:62.0) Gecko/20100101 Firefox/62.0');
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-                $response = curl_exec($ch);
-                $header_size = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
-                $header = substr($response, 0, $header_size);
-                $http_response_code = substr($header, 9, 3);
-                if (!($http_response_code == 200)) {
-                  echo "<span style='color:red; font-weight:600;'>/watch?v=".$video->id."【".$video->title."】【".$video->created_at."】</span><br>";
-                }
-            }
-
-            echo "Video Check ENDED<br>";
-
-        }
-    }
-
-
-    public function check(Request $request)
-    {
-        if (Auth::check() && Auth::user()->email == 'laughseejapan@gmail.com') {
-            $videos = Video::where('outsource', false)->orderBy('id', 'desc')->paginate(1);
-            $count = Video::where('outsource', false)->orderBy('id', 'desc')->count();
-
-            if ($request->ajax()) {
-                return response()->json([
-                    'id' => $videos->first()->id,
-                    'title' => $videos->first()->title,
-                    'link' => $videos->first()->source(),
-                    'count' => $count,
-                ]);
-            }
-
-            return view('layouts.checkVideos', compact('videos'));
-
-        } else {
-            return redirect()->action('HomeController@index');
-        }
-        /*if (Auth::check() && Auth::user()->email == 'laughseejapan@gmail.com') {
-            $videos = Video::where('outsource', false)->where('sd', 'not like', "%.m3u8%")->orderBy('id', 'desc')->get();
-            echo "Video Check STARTED<br>";
-            foreach ($videos as $video) {
-                foreach ($video->sd() as $url) {
-                    if (strpos($url, 'https://www.instagram.com/p/') !== false) {
-                        $url = $video->getSourceIG($url);
-                        $headers = get_headers($url);
-                        $http_response_code = substr($headers[0], 9, 3);
-                        if (!($http_response_code == 200)) {
-                          echo "<span style='color:red; font-weight:600;'>/watch?v=".$video->id."【".$video->title."】</span><br>";
-                        }
-                    } elseif (strpos($url, 'https://api.bilibili.com/') !== false) {
-                        $curl_connection = curl_init($url);
-                        curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
-                        curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
-                        curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
-                        curl_setopt($curl_connection, CURLOPT_HTTPHEADER, [
-                            'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:56.0) Gecko/20100101 Firefox/56.0',
-                            'Host: api.bilibili.com',
-                            'Cookie: SESSDATA=1feadc09%2C1582358038%2Ca8f2f511;'
-                        ]);
-                        $data = json_decode(curl_exec($curl_connection), true);
-                        curl_close($curl_connection);
-                        if (!array_key_exists('data', $data) || !array_key_exists('durl', $data['data'])) {
-                            echo "<span style='color:red; font-weight:600;'>/watch?v=".$video->id."【".$video->title."】</span><br>";
-                        }
-                    }
-                }
-            }
-            echo "Video Check ENDED<br>";
-            
-        } else {
-            return redirect()->action('HomeController@index');
-        }*/
     }
 
     public function checkSubscribes(Request $request)
@@ -396,13 +291,23 @@ class HomeController extends Controller
 
     public function tempMethod()
     {
-        $subscribes = Subscribe::where('playlist_id', null)->get();
-        foreach ($subscribes as $subscribe) {
-            $watch = Watch::where('title', $subscribe->tag)->first();
-            $subscribe->playlist_id = $watch->id;
-            $subscribe->save();
+        $requests = Browsershot::url('https://spankbang.com/4anle/video/lucky+man+get+to+be+sucked+by+bitch+hardly')
+                    ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
+                    ->triggeredRequests();
+        foreach ($requests as $request) {
+            if (strpos($request['url'], 'spankbang.com/stream/') !== false && strpos($request['url'], '.mp4') !== false) {
+                $curl_connection = curl_init();
+                curl_setopt($curl_connection, CURLOPT_URL, $request['url']);
+                curl_setopt($curl_connection, CURLOPT_FOLLOWLOCATION, true); // follow the redirects
+                curl_setopt($curl_connection, CURLOPT_NOBODY, true); // get the resource without a body
+                curl_exec($curl_connection);
+                $redirect = curl_getinfo($curl_connection, CURLINFO_EFFECTIVE_URL);
+                curl_close($curl_connection);
+                return str_replace('720p', '1080p', $redirect);
+                $video->outsource = false;
+                $video->save();
+            }
         }
-        return redirect()->action('HomeController@index');
     }
 
     public function youtubePre(Request $request)
@@ -501,6 +406,57 @@ class HomeController extends Controller
         }
 
         return redirect()->action('HomeController@index');
+    }
+
+    public function updateHentai(Request $request)
+    {
+        $videos = Video::where('tags', 'ilike', '%裏番%')->where('foreign_sd', '!=', null)->get();
+        foreach ($videos as $video) {
+            if (array_key_exists('spankbang', $video->foreign_sd)) {
+                $requests = Browsershot::url($video->foreign_sd['spankbang'])
+                    ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
+                    ->triggeredRequests();
+                foreach ($requests as $request) {
+                    if (strpos($request['url'], 'spankbang.com/stream/') !== false && strpos($request['url'], '.mp4') !== false) {
+                        $second_requests = Browsershot::url($request['url'])
+                            ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
+                            ->triggeredRequests();
+                        foreach ($second_requests as $second_request) {
+                            if (strpos($second_request['url'], 'vdownload') !== false && strpos($second_request['url'], '.mp4') !== false) {
+                                $video->sd = str_replace('720p', '1080p', $second_request['url']);
+                                $video->outsource = false;
+                                $video->save();
+                            }
+                        }
+                    }
+                }
+                
+            } elseif (array_key_exists('youjizz', $video->foreign_sd)) {
+                $requests = Browsershot::url($video->foreign_sd['youjizz'])
+                    ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
+                    ->triggeredRequests();
+                foreach ($requests as $request) {
+                    if (strpos($request['url'], 'https://cdne-mobile.youjizz.com/') !== false && strpos($request['url'], '.mp4') !== false) {
+                        $video->sd = $request['url'];
+                        $video->outsource = false;
+                        $video->save();
+                    }
+                }
+                
+            } elseif (array_key_exists('slutload', $video->foreign_sd)) {
+                $requests = Browsershot::url($video->foreign_sd['slutload'])
+                    ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
+                    ->triggeredRequests();
+                foreach ($requests as $request) {
+                    if (strpos($request['url'], 'https://v-rn.slutload-media.com/') !== false) {
+                        $video->sd = $request['url'];
+                        $video->outsource = false;
+                        $video->save();
+                    }
+                }
+                
+            }
+        }
     }
 
     function get_string_between($string, $start, $end){

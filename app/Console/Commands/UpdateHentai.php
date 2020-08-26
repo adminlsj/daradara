@@ -20,7 +20,7 @@ class UpdateHentai extends Command
      *
      * @var string
      */
-    protected $description = 'Update hentai hourly with slutload and gounlimited';
+    protected $description = 'Update all hentai at once';
 
     /**
      * Create a new command instance.
@@ -41,7 +41,38 @@ class UpdateHentai extends Command
     {
         $videos = Video::where('tags', 'ilike', '%裏番%')->where('foreign_sd', '!=', null)->get();
         foreach ($videos as $video) {
-            if (array_key_exists('slutload', $video->foreign_sd)) {
+            if (array_key_exists('spankbang', $video->foreign_sd)) {
+                $requests = Browsershot::url($video->foreign_sd['spankbang'])
+                    ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
+                    ->triggeredRequests();
+                foreach ($requests as $request) {
+                    if (strpos($request['url'], 'spankbang.com/stream/') !== false && strpos($request['url'], '.mp4') !== false) {
+                        $second_requests = Browsershot::url($request['url'])
+                            ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
+                            ->triggeredRequests();
+                        foreach ($second_requests as $second_request) {
+                            if (strpos($second_request['url'], 'vdownload') !== false && strpos($second_request['url'], '.mp4') !== false) {
+                                $video->sd = str_replace('720p', '1080p', $second_request['url']);
+                                $video->outsource = false;
+                                $video->save();
+                            }
+                        }
+                    }
+                }
+                
+            } elseif (array_key_exists('youjizz', $video->foreign_sd)) {
+                $requests = Browsershot::url($video->foreign_sd['youjizz'])
+                    ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
+                    ->triggeredRequests();
+                foreach ($requests as $request) {
+                    if (strpos($request['url'], 'https://cdne-mobile.youjizz.com/') !== false && strpos($request['url'], '.mp4') !== false) {
+                        $video->sd = $request['url'];
+                        $video->outsource = false;
+                        $video->save();
+                    }
+                }
+                
+            } elseif (array_key_exists('slutload', $video->foreign_sd)) {
                 $requests = Browsershot::url($video->foreign_sd['slutload'])
                     ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
                     ->triggeredRequests();
@@ -53,17 +84,6 @@ class UpdateHentai extends Command
                     }
                 }
                 
-            } elseif (array_key_exists('gounlimited', $video->foreign_sd)) {
-                $requests = Browsershot::url($video->foreign_sd['gounlimited'])
-                    ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
-                    ->triggeredRequests();
-                foreach ($requests as $request) {
-                    if (strpos($request['url'], '.gounlimited.to/') !== false && strpos($request['url'], 'v.mp4') !== false) {
-                        $video->sd = $request['url'];
-                        $video->outsource = false;
-                        $video->save();
-                    }
-                }
             }
         }
     }
