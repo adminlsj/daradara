@@ -9,7 +9,7 @@
 <div id="home-rows-wrapper" class="search-rows-wrapper" style="position: relative;">
 	  <div class="home-rows-videos-wrapper" style="white-space: normal;">
 	    @foreach ($videos as $video)
-	      <a style="text-decoration: none;" href="{{ route('video.info') }}?v={{ $video->id }}">
+	      <a style="text-decoration: none;" href="{{ route('video.watch') }}?v={{ $video->id }}">
 	        <div id="home-rows-videos-div" style="position: relative; display: inline-block; margin-bottom:50px">
 	          <img src="{{ $video->cover }}">
 	          <div id="home-rows-videos-title" style="position:absolute; bottom:0; left:0; white-space: initial; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; color: white; width: 100%; padding: 3px 3px; background: linear-gradient(to bottom, transparent 0%, black 120%);">{{ explode('/', $video->title)[0] }}</div>
