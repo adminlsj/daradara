@@ -38,9 +38,7 @@ class VideoController extends Controller
                 }
             })->where('cover', '!=', null)->inRandomOrder()->limit(42)->get();
 
-            $rows = ['集數列表' => $videos, '相關推薦' => $recommends];
-
-            return view('video.watch', compact('rows', 'video'));
+            return view('video.watch', compact('rows', 'video', 'videos', 'recommends'));
         }
     }
 
