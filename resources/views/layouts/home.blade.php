@@ -14,7 +14,7 @@
 		<img class="lazy" style="width: 100%; -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0.3)));" src="https://i.imgur.com/CJ5svNv.png" data-src="{{ $banner->imgur() }}" data-srcset="{{ $banner->imgur() }}" alt="{{ $banner->title }}">
 		<div id="home-banner-wrapper" style="position: absolute; left: 4%; color: white">
 			<h3 style="font-weight: bold"><span style="color: crimson">H</span>anime1<span style="color: crimson">.</span>me</h3>
-			<h1 style="margin: 0">{{ $banner->title }}</h1>
+			<h1 style="margin: 0; font-weight: bold;">{{ $banner->title }}</h1>
 			<h4 class="hidden-xs">{{ $banner->translations['JP'] }} • 中文字幕 • {{ $banner->caption }}</h4>
 			<div style="display: inline-block; padding: 10px 30px 6px 20px; margin-top: -8px; margin-bottom: -10px" data-toggle="modal" data-target="#playModal" class="hover-opacity-all home-banner-btn home-banner-play-btn play-btn"><span style="vertical-align: middle; font-size: 2em; margin-top: -4px; padding-right: 5px" class="material-icons">play_arrow</span>播放</div>
 			&nbsp;
