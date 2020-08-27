@@ -14,8 +14,8 @@
 		<img class="lazy" style="width: 100%; -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0.3)));" src="https://i.imgur.com/CJ5svNv.png" data-src="{{ $banner->imgur() }}" data-srcset="{{ $banner->imgur() }}" alt="{{ $banner->title }}">
 		<div id="home-banner-wrapper" style="position: absolute; left: 4%; color: white">
 			<h3 style="font-weight: bold"><span style="color: crimson">H</span>anime1<span style="color: crimson">.</span>me</h3>
-			<h1 style="margin: 0">{{ explode('/', $banner->title)[0] }}</h1>
-			<h4 class="hidden-xs">{{ $banner->watch->description }}</h4>
+			<h1 style="margin: 0">{{ $banner->translations['JP'] }}</h1>
+			<h4 class="hidden-xs">{{ $banner->title }} • 中文字幕 • {{ $banner->caption }}</h4>
 			<div style="display: inline-block; padding: 10px 30px 6px 20px; margin-top: -8px; margin-bottom: -10px" data-toggle="modal" data-target="#playModal" class="hover-opacity-all home-banner-btn home-banner-play-btn play-btn"><span style="vertical-align: middle; font-size: 2em; margin-top: -4px; padding-right: 5px" class="material-icons">play_arrow</span>播放</div>
 			&nbsp;
 			<a href="{{ route('video.watch') }}?v={{ $banner->id }}" class="hover-opacity-all home-banner-btn home-banner-info-btn"><span style="vertical-align: middle; font-size: 1.7em; margin-top: -2px; padding-right: 7px" class="material-icons">info</span>更多資訊</a>
@@ -26,8 +26,8 @@
 		<img style="width: 100%; -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));" src="https://i.imgur.com/OCatT3B.jpg">
 		<div style="position: absolute; left: 50%; -webkit-transform: translateX(-50%); transform: translateX(-50%); width: 96%; bottom: 15%; text-align: center; color: white">
 			<h3 style="font-weight: bold; font-size: 20px;"><span style="color: crimson">H</span>anime1<span style="color: crimson">.</span>me</h3>
-			<h1 style="font-size: 30px; font-weight: bold; margin: 0">{{ explode('/', $banner->title)[0] }}</h1>
-			<h4 style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; line-height: 16px; font-size: 12px; width: 80%; margin-left: 10%;">{{ $banner->watch->description }}</h4>
+			<h1 style="font-size: 30px; font-weight: bold; margin: 0">{{ $banner->translations['JP'] }}</h1>
+			<h4 style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; line-height: 16px; font-size: 12px; width: 80%; margin-left: 10%;">{{ $banner->title }} • 中文字幕 • {{ $banner->caption }}</h4>
 			<div style="margin-top: 20px; width: 100%">
 				<div style="width: 33%; float:left; display: inline-block;">
 					@if (!Auth::check())
