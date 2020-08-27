@@ -4,7 +4,7 @@
 
       @if ($video->outsource)
         <div style="background-color: black; background-image: url('https://i.imgur.com/wgOXAy6.gif'); background-position: center; background-repeat: no-repeat; background-size: 50px; height: 100%;">
-            <iframe src="{!! $video->sd !!}" style="border: 0; overflow: hidden; height: 100%; width: 100%" allow="autoplay" allowfullscreen></iframe>
+            <iframe src="{!! $video->sd !!}" style="border: 0; overflow: hidden; height: 100%; width: 100%" allowfullscreen></iframe>
         </div>
 
       @else
