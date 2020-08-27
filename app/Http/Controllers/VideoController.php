@@ -38,7 +38,7 @@ class VideoController extends Controller
                 }
             })->where('cover', '!=', null)->inRandomOrder()->limit(42)->get();
 
-            return view('video.watch', compact('rows', 'video', 'videos', 'recommends'));
+            return view('video.watch', compact('video', 'videos', 'recommends'));
         }
     }
 
