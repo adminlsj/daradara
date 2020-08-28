@@ -182,7 +182,7 @@ body {
 }
 
 .play-modal {
-  width: 80%;
+  width: 75%;
 }
 
 .load-more-container h1 {
@@ -2980,6 +2980,10 @@ a > i {
 }
 
 @media (max-width: 991px) {
+  .play-modal {
+    width: 85%;
+  }
+
   #home-rows-wrapper {
     margin-top: 3.5vw;
   }
