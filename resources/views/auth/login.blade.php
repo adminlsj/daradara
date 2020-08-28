@@ -6,7 +6,7 @@
 
 @section('content')
 
-  <div id="loginModal" style="padding: 0 4%; margin-top: 100px; color: white;">
+  <div id="loginModal" class="list-rows-wrapper" style="padding: 0 4%; color: white;">
       <form method="POST" action="{{ route('login') }}">
 
         {{ csrf_field() }}

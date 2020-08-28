@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-  <div id="signUpModal" style="padding: 0 4%; margin-top: 100px; color: white;">
+  <div id="signUpModal" class="list-rows-wrapper" style="padding: 0 4%; color: white;">
     <form action="{{ route('register') }}" method="POST">
 
       {{ csrf_field() }}
