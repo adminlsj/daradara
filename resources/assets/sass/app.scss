@@ -3434,7 +3434,11 @@ a > i {
 @media (max-width: 768px) {
   .play-modal {
     width: calc(100% - 10px);
-
+    margin: 0;
+    position: absolute;
+    top: calc(50% - 50px);
+    -ms-transform: translateY(-50%) !important;
+    transform: translateY(-50%) !important;
     margin-left: 5px;
   }
 
