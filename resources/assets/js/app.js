@@ -386,7 +386,7 @@ $('[id=switch-signup-modal]').click(function(e) {
 });
 
 $(document).ready(function() {
-  if (is_mobile) {
+  if (true) {
     $("#playModal").removeClass("fade");
   }
 });
