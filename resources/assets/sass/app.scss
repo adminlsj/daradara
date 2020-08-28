@@ -3434,6 +3434,12 @@ a > i {
 @media (max-width: 768px) {
   .play-modal {
     width: calc(100% - 20px);
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%) !important;
+    transform: translateY(-50%) !important;
+    margin-left: 10px;
   }
 
   #main-nav {
