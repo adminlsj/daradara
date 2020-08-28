@@ -4,7 +4,7 @@
     <span style="padding-right: 1px;">主頁</span>
   </a>
   <a href="{{ route('home.search') }}" class="{{ Request::is('*search*') ? 'active' : '' }}">
-    <i style="font-size: 27px; margin-top: 6px" class="material-icons">search</i>
+    <i style="font-size: 27px; margin-top: 5px" class="material-icons">search</i>
     <span>搜索</span>
   </a>
   <a href="{{ Auth::check() ? route('home.list') : route('login') }}" class="{{ Request::is('*subscribes*') ? 'active' : ''}}">
