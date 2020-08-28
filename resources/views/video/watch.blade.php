@@ -133,7 +133,7 @@
     </div>
   </div>
 
-  <img class="hidden-sm hidden-md hidden-lg" style="width: 100%; position: absolute; top: 0; left: 0; z-index: -1; filter: blur(10px) brightness(65%); -webkit-filter: blur(10px) brightness(65%);" src="{{ $video->cover }}">
+  <img class="hidden-sm hidden-md hidden-lg" style="width: 100%; position: absolute; top: 0; left: 0; z-index: -1; filter: blur(10px) brightness(80%); -webkit-filter: blur(10px) brightness(80%); -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));" src="{{ $video->cover }}">
 
   <div id="home-rows-wrapper" class="intro-rows-wrapper" style="position: relative;">
     <h3>集數列表</h3>
