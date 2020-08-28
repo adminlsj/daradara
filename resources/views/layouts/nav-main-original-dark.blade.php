@@ -1,6 +1,10 @@
 <nav id="hentai-main-nav" style="background-image: linear-gradient(to bottom,rgba(0,0,0,.7) 10%,rgba(0,0,0,0));">
-  <a id="hentai-logo" class="pull-left" href="/" style="color: white; font-size: 1.4em;">
+  <a id="hentai-logo" class="pull-left hidden-md hidden-sm hidden-xs" href="/" style="color: white; font-size: 1.4em;">
       <span style="color: crimson">H</span>anime1<span style="color: crimson">.</span>me
+  </a>
+
+  <a class="pull-left hidden-lg" href="/" style="color: white; line-height: 68px;">
+      <img height="30" src="https://i.imgur.com/PTFz5Ej.png">
   </a>
 
   <form id="search-form" class="pull-left">
