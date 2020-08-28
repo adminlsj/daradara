@@ -1,5 +1,5 @@
 <div id="playModal" class="modal fade" role="dialog">
-  <div class="modal-dialog play-modal">
+  <div class="modal-dialog play-modal" style="margin: 0; position: absolute; top: 50%; -ms-transform: translateY(-50%); transform: translateY(-50%); margin-left: 10px;">
     <div class="modal-content">
 
       @if ($video->outsource)
