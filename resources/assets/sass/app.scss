@@ -74,6 +74,13 @@ body {
   text-decoration: none;
 }
 
+#search-form {
+  width: 50%; 
+  margin-top: 14px; 
+  left:370px; 
+  position: absolute;
+}
+
 #home-banner-wrapper {
   width: 36%;
   bottom: 37%;
@@ -2964,6 +2971,11 @@ a > i {
 
   .list-rows-wrapper {
     margin-top: 90px !important;
+  }
+
+  #search-form {
+    left: calc(4% + 140px);
+    width: calc(92% - 55px); 
   }
 }
 

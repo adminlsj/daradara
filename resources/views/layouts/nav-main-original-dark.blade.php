@@ -3,23 +3,19 @@
       <span style="color: crimson">H</span>anime1<span style="color: crimson">.</span>me
   </a>
 
-  <form id="search-form" class="hidden-xs hidden-sm pull-left" style="width: 50%; margin-top: 14px; left:370px; position: absolute;">
+  <form id="search-form" class="pull-left">
       <i style="position: absolute; top: 8px; left: 17px; color: dimgray" class="material-icons">search</i>
       <input id="nav-query" name="query" style="box-shadow: none; border: 1px solid rgba(58,60,63,.85); background-color: transparent; font-size: 1.1em;border-radius: 3px; height: 40px; padding-left: 53px; color: darkgray; padding-bottom: 2px; font-weight: 500; transition: .3s cubic-bezier(0,0,.2,1);" type="text" value="{{ request('query') }}" placeholder="搜索">
   </form>
 
   @if (Auth::check())
-    <a class="hidden-xs hidden-sm nav-item-icon" style="top: 17px; right: 4%; color: white;" href="{{ route('user.show', Auth::user()) }}"><i class="material-icons">account_circle</i></a>
-    <a class="hidden-xs hidden-sm nav-item-icon" style="top: 17px; right: calc(4% + 50px); color: white;" href="{{ route('user.userEditUpload', Auth::user()) }}"><i class="material-icons">video_call</i></a>
+    <a class="hidden-xs hidden-sm hidden-md nav-item-icon" style="top: 17px; right: 4%; color: white;" href="{{ route('user.show', Auth::user()) }}"><i class="material-icons">account_circle</i></a>
+    <a class="hidden-xs hidden-sm hidden-md nav-item-icon" style="top: 17px; right: calc(4% + 50px); color: white;" href="{{ route('user.userEditUpload', Auth::user()) }}"><i class="material-icons">video_call</i></a>
   @else
-    <a class="no-select nav-item-text hidden-xs hidden-sm" style="top: 15px; color: white; border: 1px solid transparent; padding: 8px 14px; margin-top: 12px; margin-right: 7px; font-weight: bold;" href="{{ route('login') }}">登入</a>
-    <a class="no-select nav-item-text hidden-xs hidden-sm" style="top: 15px; color: white; background-color: transparent; border-color: transparent; padding: 7px 14px; margin-top: 12px; font-weight: bold;" href="{{ route('register') }}">註冊</a>
-    <a class="no-select pull-right hidden-xs hidden-sm" style="top: 15px; margin-top: 15px; margin-right: 18px;" href="{{ route('login') }}"><i class="material-icons" style="color: white;">video_call</i></a>
+    <a class="no-select nav-item-text hidden-xs hidden-sm hidden-md" style="top: 15px; color: white; border: 1px solid transparent; padding: 8px 14px; margin-top: 12px; margin-right: 7px; font-weight: bold;" href="{{ route('login') }}">登入</a>
+    <a class="no-select nav-item-text hidden-xs hidden-sm hidden-md" style="top: 15px; color: white; background-color: transparent; border-color: transparent; padding: 7px 14px; margin-top: 12px; font-weight: bold;" href="{{ route('register') }}">註冊</a>
+    <a class="no-select pull-right hidden-xs hidden-sm hidden-md" style="top: 15px; margin-top: 15px; margin-right: 18px;" href="{{ route('login') }}"><i class="material-icons" style="color: white;">video_call</i></a>
   @endif
-
-  <a class="hidden-md hidden-lg nav-item-icon" style="top: 16px; right: calc(4% + 2px); color: white;" href="{{ Auth::check() ? route('user.show', Auth::user()) : route('login')}}"><i class="material-icons">account_circle</i></a>
-  <a id="toggleSearchBar" class="hidden-md hidden-lg nav-item-icon" style="top: 16px; right: calc(4% + 47px); cursor: pointer; color: white;"><i class="material-icons">search</i></a>
-  <a id="nav-account-icon" class="pull-right hidden-md hidden-lg nav-item-icon" style="top: 16px; right: calc(4% + 92px); color: white;" href="{{ Auth::check() ? route('user.userEditUpload', Auth::user()) : route('login')}}"><i class="material-icons">video_call</i></a>
 </nav>
 
 <nav id="hentai-filter-nav-wrapper" style="background-color: #141414; z-index: 1; padding: 0px 4%; height: 50px; border-bottom: 1px solid #141414; box-shadow: 0 3px 3px -2px rgba(0,0,0,.2),0 3px 4px 0 rgba(0,0,0,.14),0 1px 8px -8px rgba(0,0,0,.12)!important; position: fixed; top: 68px; width: 100%;" class="dark-theme-nav-main">
