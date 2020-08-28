@@ -1,6 +1,6 @@
 <nav id="hentai-main-nav" style="background-image: linear-gradient(to bottom,rgba(0,0,0,.7) 10%,rgba(0,0,0,0));">
-  <a id="hentai-logo" class="pull-left" href="/">
-      <img height="25" src="https://upload.wikimedia.org/wikipedia/commons/0/0f/Logo_Netflix.png">
+  <a id="hentai-logo" class="pull-left" href="/" style="color: white; font-size: 1.4em;">
+      <span style="color: crimson">H</span>anime1<span style="color: crimson">.</span>me
   </a>
 
   <form id="search-form" class="hidden-xs hidden-sm pull-left" style="width: 50%; margin-top: 14px; left:370px; position: absolute;">

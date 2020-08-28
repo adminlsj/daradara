@@ -477,4 +477,19 @@ class Video extends Model
             }
         })->select('id', 'user_id', 'imgur', 'title', 'sd');
     }
+
+    public static function getExcludedIds()
+    {
+        $first = [];
+        $playlists = [797, 308, 122, 685, 810, 680, 732, 813];
+        foreach ($playlists as $playlist_id) {
+            array_push($first, Video::where('playlist_id', $playlist_id)->orderBy('created_at', 'desc')->first()->id);
+        }
+
+        return $videos = Video::where(function($query) use ($playlists) {
+            foreach ($playlists as $playlist) {
+                $query->orWhere('playlist_id', $playlist);
+            }
+        })->whereNotIn('id', $first)->pluck('id');
+    }
 }

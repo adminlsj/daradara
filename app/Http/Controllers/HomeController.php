@@ -31,11 +31,13 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
+        $excluded = Video::getExcludedIds();
+
         $banner = Video::find(12872);
         $count = 20;
         $upload = Video::where('cover', '!=', null)->orderBy('id', 'desc')->limit($count)->get();
-        $trending = Video::where('cover', '!=', null)->orderBy('views', 'desc')->limit($count)->get();
-        $newest =Video::where('cover', '!=', null)->orderBy('created_at', 'desc')->limit($count)->get();
+        $trending = Video::where('cover', '!=', null)->whereNotIn('id', $excluded)->orderBy('views', 'desc')->limit($count)->get();
+        $newest =Video::where('cover', '!=', null)->whereNotIn('id', $excluded)->orderBy('created_at', 'desc')->limit($count)->get();
         $tag1 = Video::where('cover', '!=', null)->where('tags', 'ilike', '%巨乳%')->inRandomOrder()->limit($count)->get();
         $tag2 = Video::where('cover', '!=', null)->where('tags', 'ilike', '%貧乳%')->inRandomOrder()->limit($count)->get();
         $tag3 = Video::where('cover', '!=', null)->where('tags', 'ilike', '%肛交%')->inRandomOrder()->limit($count)->get();
@@ -44,7 +46,16 @@ class HomeController extends Controller
         })->where('cover', '!=', null)->inRandomOrder()->limit($count)->get();
         $tag5 = Video::where('cover', '!=', null)->inRandomOrder()->limit($count)->get();
 
-        $rows = ['最新上傳' => $upload, '發燒影片' => $trending, '最新內容' => $newest, '乳不巨何以聚人心' => $tag1, '胸不平何以平天下' => $tag2, '菊不爆何以保家園' => $tag3, '女不腐何以撫民心' => $tag4, '更多精彩內容' => $tag5];
+        $rows = [
+            '最新上傳' => ['videos' => $upload, 'link' => '/search?query=&sort=上傳日期'], 
+            '發燒影片' => ['videos' => $trending, 'link' => '/search?query=&sort=觀看次數'], 
+            '最新內容' => ['videos' => $newest, 'link' => '/search?query=&sort=上傳日期'], 
+            '乳不巨何以聚人心' => ['videos' => $tag1, 'link' => '/search?query=&tags%5B%5D=巨乳&sort='], 
+            '胸不平何以平天下' => ['videos' => $tag2, 'link' => '/search?query=&tags%5B%5D=貧乳&sort='], 
+            '菊不爆何以保家園' => ['videos' => $tag3, 'link' => '/search?query=&tags%5B%5D=肛交&sort='], 
+            '女不腐何以撫民心' => ['videos' => $tag4, 'link' => '/search?query=&broad=on&tags%5B%5D=扶他&tags%5B%5D=偽娘&tags%5B%5D=耽美'], 
+            '更多精彩內容' => ['videos' => $tag5, 'link' => '/search']
+        ];
 
         return view('layouts.home', compact('banner', 'rows'));
     }
@@ -55,7 +66,9 @@ class HomeController extends Controller
         $brands = [];
         $videos = Video::where('cover', '!=', null);
 
-        if ($query = $request->query) {
+        $excluded = Video::getExcludedIds();
+        
+        if ($query = request('query')) {
             $query = str_replace(' ', '', request('query'));
             $queryArray = [];
             preg_match_all('/./u', $query, $queryArray);
@@ -67,6 +80,9 @@ class HomeController extends Controller
             $videos = $videos->where(function($query) use ($searchQuery) {
                 $query->where('title', 'ilike', $searchQuery)->orWhere('tags', 'ilike', $searchQuery);
             });
+
+        } else {
+            $videos = $videos->whereNotIn('id', $excluded);
         }
 
         if ($tags = $request->tags) {
@@ -459,7 +475,8 @@ class HomeController extends Controller
         }
     }
 
-    function get_string_between($string, $start, $end){
+    function get_string_between($string, $start, $end)
+    {
         $string = ' ' . $string;
         $ini = strpos($string, $start);
         if ($ini == 0) return '';

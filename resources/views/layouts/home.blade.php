@@ -55,10 +55,10 @@
 	</div>
 
 	<div id="home-rows-wrapper" style="position: relative;">
-		@foreach ($rows as $title => $videos)
-			<h3>{{ $title }}</h3>
+		@foreach ($rows as $title => $data)
+			<a style="text-decoration: none;" href="{{ $data['link'] }}"><h3>{{ $title }}</h3></a>
 			<div class="home-rows-videos-wrapper">
-				@foreach ($videos as $video)
+				@foreach ($data['videos'] as $video)
 					<a style="text-decoration: none;" href="{{ route('video.watch') }}?v={{ $video->id }}">
 						<div id="home-rows-videos-div" style="position: relative; display: inline-block;">
 							<img src="{{ $video->cover }}">
