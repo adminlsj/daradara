@@ -385,6 +385,12 @@ $('[id=switch-signup-modal]').click(function(e) {
     $('#signUpModal').modal('show');
 });
 
+$(document).ready(function() {
+  if ($is_mobile) {
+    $("#playModal").removeClass("fade");
+  }
+});
+
 function showSnackbar(text) {
     var snackbar = document.getElementById("snackbar");
     snackbar.innerHTML = text;

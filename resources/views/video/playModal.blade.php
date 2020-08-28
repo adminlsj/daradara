@@ -1,4 +1,4 @@
-<div id="playModal" class="modal" role="dialog">
+<div id="playModal" class="modal fade" role="dialog">
   <div class="modal-dialog play-modal">
     <div class="modal-content">
 
