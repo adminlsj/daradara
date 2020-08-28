@@ -3,7 +3,7 @@
       <span style="color: crimson">H</span>anime1<span style="color: crimson">.</span>me
   </a>
 
-  <a class="pull-left hidden-lg" href="/" style="color: white; line-height: 68px;">
+  <a class="pull-left hidden-lg hover-opacity" href="/" style="color: white; line-height: 68px;">
       <img height="30" src="https://i.imgur.com/PTFz5Ej.png">
   </a>
 
