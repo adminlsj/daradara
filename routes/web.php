@@ -56,6 +56,7 @@ Route::get('/createGetSource', 'VideoController@createGetSource');
 Route::get('/loadPlaylist', 'VideoController@loadPlaylist')->name('video.loadPlaylist');
 Route::get('/loadTagList', 'VideoController@loadTagList');
 Route::get('/updateHentai', 'HomeController@updateHentai');
+Route::get('/updateSlutload', 'HomeController@updateSlutload');
 
 Route::get('/loadHomeTagList', 'HomeController@loadHomeTagList');
 Route::get('/userReport', 'HomeController@userReport')->name('email.userReport');
