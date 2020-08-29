@@ -38,6 +38,9 @@ class VideoController extends Controller
                 }
             })->whereNotIn('id', $videos->pluck('id'))->where('cover', '!=', null)->inRandomOrder()->limit(42)->get();
 
+            $video->views++;
+            $video->save();
+
             return view('video.watch', compact('video', 'videos', 'recommends'));
         }
     }
