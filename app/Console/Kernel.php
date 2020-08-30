@@ -13,8 +13,6 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        'App\Console\Commands\UpdateSpankbang',
-        'App\Console\Commands\UpdateYoujizz',
         'App\Console\Commands\UpdateSlutload',
     ];
 
@@ -26,9 +24,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('laughseejapan:update-slutload')->cron('*/30 * * * *');
-        $schedule->command('laughseejapan:update-spankbang')->cron('0 */3 * * *');
-        $schedule->command('laughseejapan:update-youjizz')->cron('0 */3 * * *');
+        $schedule->command('laughseejapan:update-slutload')->everyThirtyMinutes();
     }
 
     /**
