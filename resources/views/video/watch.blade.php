@@ -1,5 +1,10 @@
 @extends('layouts.app')
 
+@section('head')
+    @parent
+    @include('video.videoHead')
+@endsection
+
 @section('nav')
   @include('nav.main')
 @endsection

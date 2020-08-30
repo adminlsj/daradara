@@ -1,36 +1,32 @@
-<meta property="og:url" content="{{ route('video.watch') }}?v={{ $current->id }}" />
+<meta property="og:url" content="{{ route('video.watch') }}?v={{ $video->id }}" />
 <meta property="og:type" content="article" />
-<meta property="og:title" content="{{ $current->title }}" />
-<meta property="og:description" content="{{ $current->caption }}" />
-<meta property="og:image" content="https://i.imgur.com/{{ $current->imgur }}h.png" />
+<meta property="og:title" content="{{ $video->translations['JP'] }}" />
+<meta property="og:description" content="{{ $video->caption }}" />
+<meta property="og:image" content="https://i.imgur.com/{{ $video->imgur }}h.png" />
 
-<title>{{ $current->title }}&nbsp;-&nbsp;線上看&nbsp;-&nbsp;娛見日本 LaughSeeJapan</title>
-<meta name="title" content="{{ $current->title }} - 線上看 - 娛見日本 LaughSeeJapan">
-<meta name="description" content="{{ $current->caption }}">
+<title>{{ $video->translations['JP'] }}&nbsp;-&nbsp;線上看&nbsp;-&nbsp;Hanime1.me</title>
+<meta name="title" content="{{ $video->translations['JP'] }} - 線上看 - 娛見日本 LaughSeeJapan">
+<meta name="description" content="{{ $video->caption }}">
 
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "VideoObject",
-  "name": "{{ $current->title }}",
-  "description": "{{ $current->caption == '' ? $current->title : $current->caption}}",
+  "name": "{{ $video->translations['JP'] }}",
+  "description": "{{ $video->caption == '' ? $video->translations['JP'] : $video->caption}}",
   "thumbnailUrl": [
-    "https://i.imgur.com/{{ $current->imgur }}l.png"
+    "https://i.imgur.com/{{ $video->imgur }}l.png"
    ],
-  "uploadDate": "{{ \Carbon\Carbon::parse($current->created_at)->format('Y-m-d\Th:i:s').'+00:00' }}",
+  "uploadDate": "{{ \Carbon\Carbon::parse($video->created_at)->format('Y-m-d\Th:i:s').'+00:00' }}",
   "author": {
     "@type": "Person",
-    "name": "{{ $current->user->name }}"
+    "name": "{{ $video->user->name }}"
   },
-  @if ($outsource)
-      "embedUrl": "{!! $sd !!}",
-  @else
-      "contentUrl": "{!! $sd !!}",
-  @endif
+  "contentUrl": "{!! $video->sd !!}",
   "interactionStatistic": {
     "@type": "InteractionCounter",
     "interactionType": { "@type": "http://schema.org/WatchAction" },
-    "userInteractionCount": {{ $current->views }}
+    "userInteractionCount": {{ $video->views }}
   }
 }
 </script>
