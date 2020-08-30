@@ -78,7 +78,7 @@ class HomeController extends Controller
             }
             $searchQuery = '%'.implode('%', $queryArray).'%';
             $videos = $videos->where(function($query) use ($searchQuery) {
-                $query->where('title', 'ilike', $searchQuery)->orWhere('tags', 'ilike', $searchQuery);
+                $query->where('title', 'ilike', $searchQuery)->orWhere('translations', 'ilike', $searchQuery)->orWhere('tags', 'ilike', $searchQuery);
             });
 
         } else {
