@@ -17,6 +17,7 @@ use Carbon\Carbon;
 use Response;
 use Auth;
 use Image;
+use Mail;
 use App\Mail\UserReport;
 use App\Mail\UserUploadVideo;
 use App\Mail\SubscribeNotify;
