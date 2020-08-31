@@ -36,10 +36,6 @@ class UserController extends Controller
      */
     public function show(User $user, Request $request)
     {
-        if ($user->id == 6944) {
-            return redirect()->action('HomeController@hentai');
-        }
-
         $watches = $user->watches();
         $subscribers = 5000;
         /*if ($watches->first()) {
@@ -142,7 +138,7 @@ class UserController extends Controller
 
     public function userEditUpload(User $user, Request $request)
     {
-        if (Auth::user()->email == 'laughseejapan@gmail.com') {
+        if (Auth::user()->email == 'guaishushukanlifan@qq.com' || Auth::user()->email == 'laughseejapan@gmail.com') {
             $watches = $user->watches();
             return view('user.upload', compact('user', 'watches'));
         }
