@@ -13,7 +13,7 @@
   </form>
 
   @if (Auth::check())
-    <a class="hidden-xs hidden-sm hidden-md nav-item-icon" style="top: 17px; right: 4%; color: white;" href="{{ route('user.show', Auth::user()) }}"><i class="material-icons">account_circle</i></a>
+    <a class="hidden-xs hidden-sm hidden-md nav-item-icon" style="top: 17px; right: 4%; color: white;" href="{{ route('home.list') }}"><i class="material-icons">account_circle</i></a>
     <a class="hidden-xs hidden-sm hidden-md nav-item-icon" style="top: 17px; right: calc(4% + 50px); color: white;" href="{{ route('user.userEditUpload', Auth::user()) }}"><i class="material-icons">video_call</i></a>
   @else
     <a class="no-select nav-item-text hidden-xs hidden-sm hidden-md" style="top: 15px; color: white; border: 1px solid transparent; padding: 8px 14px; margin-top: 12px; margin-right: 7px; font-weight: bold;" href="{{ route('login') }}">登入</a>

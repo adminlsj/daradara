@@ -142,8 +142,10 @@ class UserController extends Controller
 
     public function userEditUpload(User $user, Request $request)
     {
-        $watches = $user->watches();
-        return view('user.upload', compact('user', 'watches'));
+        if (Auth::user()->email == 'laughseejapan@gmail.com') {
+            $watches = $user->watches();
+            return view('user.upload', compact('user', 'watches'));
+        }
     }
 
     public function userUpdateUpload(User $user, Request $request)
@@ -154,7 +156,7 @@ class UserController extends Controller
                 'title' => $request->title,
                 'description' => $request->description,
             ]);
-            return Redirect::route('video.playlist', ['list' => $watch->id]);
+            return Redirect::route('user.userEditUpload', ['user' => $user, 'watches' => $user->watches()]);
 
         } elseif ($request->type == 'video') {
             $original = request()->file('image');
@@ -176,18 +178,36 @@ class UserController extends Controller
             $url = $pms['data']['link'];
 
             if ($url != "") {
+
+                $foreign_sd = request('foreign_sd');
+                if (strpos($foreign_sd, 'spankbang') !== false) {
+                    $sd = Video::getSpankbang($foreign_sd, implode(' ', preg_split('/\s+/', request('tags'))));
+                    $foreign_sd = ['spankbang' => $foreign_sd];
+
+                } elseif (strpos($foreign_sd, 'youjizz') !== false) {
+                    $sd = Video::getYoujizz($foreign_sd);
+                    $foreign_sd = ['youjizz' => $foreign_sd];
+
+                } elseif (strpos($foreign_sd, 'slutload') !== false) {
+                    $sd = Video::getSlutload($foreign_sd);
+                    $foreign_sd = ['slutload' => $foreign_sd];
+                }
+
                 $video = Video::create([
                     'user_id' => $user->id,
                     'playlist_id' => request('channel'),
                     'title' => request('title'),
+                    'translations' => ['JP' => request('translations')],
                     'caption' => request('description'),
-                    'sd' => request('link'),
+                    'sd' => $sd,
                     'imgur' => $this->get_string_between($url, 'https://i.imgur.com/', '.'),
                     'tags' => implode(' ', preg_split('/\s+/', request('tags'))),
                     'views' => 0,
-                    'outsource' => request('outsource') == 'on' ? true : false,
+                    'outsource' => false,
                     'created_at' => Carbon::createFromFormat('Y-m-d\TH:i:s', request('created_at'))->format('Y-m-d H:i:s'),
-                    'uploaded_at' => Carbon::createFromFormat('Y-m-d\TH:i:s', request('uploaded_at'))->format('Y-m-d H:i:s'),
+                    'uploaded_at' => Carbon::createFromFormat('Y-m-d\TH:i:s', request('created_at'))->format('Y-m-d H:i:s'),
+                    'foreign_sd' => $foreign_sd,
+                    'cover' => request('cover'),
                 ]);
 
                 $userArray = [];

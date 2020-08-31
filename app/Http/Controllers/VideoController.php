@@ -41,7 +41,7 @@ class VideoController extends Controller
             $video->views++;
             $video->save();
 
-            return view('video.watch', compact('video', 'videos', 'recommends'));
+            return view('video.watch', compact('video', 'videos', 'recommends', 'tags'));
         }
     }
 

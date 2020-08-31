@@ -17,7 +17,7 @@ class Video extends Model
     ];
 
 	protected $fillable = [
-        'id', 'user_id', 'playlist_id', 'title', 'caption', 'tags', 'sd', 'imgur', 'views', 'outsource', 'foreign_sd', 'data', 'created_at', 'uploaded_at',
+        'id', 'user_id', 'playlist_id', 'title', 'caption', 'tags', 'sd', 'imgur', 'views', 'outsource', 'foreign_sd', 'data', 'created_at', 'uploaded_at', 'cover', 'translations'
     ];
 
     public static $hentai_tags = [
@@ -88,12 +88,51 @@ class Video extends Model
         return Like::where('type', 'video')->where('foreign_id', $this->id)->orderBy('created_at', 'desc')->get();
     }
 
-    public function views()
+    public static function getSpankbang(String $url, String $tags)
     {
-        if ($this->views >= 10000) {
-            return ceil($this->views / 10000).'萬';
-        } else {
-            return $this->views;
+        $requests = Browsershot::url($url)
+            ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
+            ->triggeredRequests();
+        foreach ($requests as $request) {
+            if (strpos($request['url'], 'spankbang.com/stream/') !== false && strpos($request['url'], '.mp4') !== false) {
+                $curl_connection = curl_init();
+                curl_setopt($curl_connection, CURLOPT_URL, $request['url']);
+                curl_setopt($curl_connection, CURLOPT_FOLLOWLOCATION, true); // follow the redirects
+                curl_setopt($curl_connection, CURLOPT_NOBODY, true); // get the resource without a body
+                curl_exec($curl_connection);
+                $redirect = curl_getinfo($curl_connection, CURLINFO_EFFECTIVE_URL);
+                curl_close($curl_connection);
+
+                if (strpos($tags, ' 1080p ') !== false) {
+                    return str_replace('720p', '1080p', $redirect);
+                } else {
+                    return $redirect;
+                }
+            }
+        }
+    }
+
+    public static function getYoujizz(String $url)
+    {
+        $requests = Browsershot::url($url)
+            ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
+            ->triggeredRequests();
+        foreach ($requests as $request) {
+            if ((strpos($request['url'], 'https://cdne-mobile.youjizz.com/') !== false || strpos($request['url'], 'yjcontentdelivery.com') !== false) && strpos($request['url'], '.mp4') !== false) {
+                return $request['url'];
+            }
+        }
+    }
+
+    public static function getSlutload(String $url)
+    {
+        $requests = Browsershot::url($url)
+            ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
+            ->triggeredRequests();
+        foreach ($requests as $request) {
+            if (strpos($request['url'], 'https://v-rn.slutload-media.com/') !== false) {
+                return $request['url'];
+            }
         }
     }
 
@@ -242,213 +281,6 @@ class Video extends Model
                 $sd = $sd.'?danmaku=0&qn=0&type=mp4&otype=json&fnver=0&fnval=1&platform=html5&html5=1&high_quality=1&autoplay=1';;
             }
         }
-    }
-
-    public static function getSourceQQ($url)
-    {
-        try {
-            $curl_connection = curl_init();
-            curl_setopt($curl_connection, CURLOPT_URL, $url);
-            curl_setopt($curl_connection, CURLOPT_FOLLOWLOCATION, true); // follow the redirects
-            curl_setopt($curl_connection, CURLOPT_NOBODY, true); // get the resource without a body
-            curl_exec($curl_connection);
-            $redirect = curl_getinfo($curl_connection, CURLINFO_EFFECTIVE_URL);
-            curl_close($curl_connection);
-
-            $start = strpos($redirect, 'http');
-            $end = strpos($redirect, 'vmtt.tc.qq.com/');
-            return substr_replace($redirect, 'https://apd-vliveachy.apdcdn.tc.qq.com/vmtt.tc.qq.com/', $start, $end - $start + 15);
-
-        } catch (Exception $e) {
-            return $e->getMessage();
-        }
-    }
-
-    public static function getSourceQZ($url)
-    {
-        return Video::get_qzone_video($url);
-    }
-
-    static function get_qzone_video($picKey){
-        $admin = User::find(1);
-        $hostUin = $admin->provider;
-        $p_skey = $admin->provider_id;
-        $tk = Video::g_tk($p_skey); 
-        $url = "https://h5.qzone.qq.com/proxy/domain/taotao.qq.com/cgi-bin/video_get_data?g_tk={$tk}&picKey={$picKey}&number=1&hostUin={$hostUin}&getMethod=3";
-
-        $curl_connection = curl_init($url);
-        curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
-        curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($curl_connection, CURLOPT_HTTPHEADER, [
-            'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:56.0) Gecko/20100101 Firefox/56.0',
-            'Host: h5.qzone.qq.com',
-            "Cookie: uin=o{$hostUin}; p_skey={$p_skey};",
-        ]);
-        $content = curl_exec($curl_connection);
-        curl_close($curl_connection);
-
-        $json = str_replace(");","",str_replace("_Callback(","",$content));  
-        $data = json_decode($json,true);  
-        if ($data["code"] == 0){  
-            foreach ($data["data"]["photos"] as $key => $value) {  
-                $fkey = $value["picKey"];  
-                if($fkey == $picKey){
-                    $parts = parse_url($value["url"]);
-                    $query = [];
-                    parse_str($parts['query'], $query);
-                    $vkey = $query['vkey'];
-                    $picKey = $value["picKey"];
-                    return "https://vwecam.tc.qq.com/{$picKey}.f20.mp4?vkey={$vkey}";
-                }
-            }
-        }
-    }
-
-    static function g_tk($data) {  
-        $t = 5381;  
-        $chars = str_split($data);  
-        for ($n = 0,$r = strlen($data); $n < $r; ++$n) {  
-            $t += Video::intval32($t << 5) + ord($chars[$n]);  
-        }  
-        return $t & 2147483647;  
-    }  
-    static function intval32($num) {  
-        $num = $num & 0xffffffff;  
-        $p = $num>>31;  
-        if($p==1) {  
-            $num = $num-1;  
-            $num = ~$num;  
-            $num = $num & 0xffffffff;  
-            return $num * -1;  
-        } else {  
-            return $num;  
-        }  
-    }
-
-    public static function getSourceAF($url)
-    {
-        try {
-            $curl_connection = curl_init($url);
-            curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
-            curl_setopt($curl_connection, CURLOPT_FOLLOWLOCATION, false);
-            curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
-            curl_setopt($curl_connection, CURLOPT_HTTPHEADER, [
-                'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:76.0) Gecko/20100101 Firefox/76.0',
-                'Host: www.agefans.tv',
-                'Cookie: k2=5115835365976; t2=1588733938560; fa_t=1588733938597; fa_c=1; t1=1588734008072; k1=45717783;',
-                'Referer: https://www.agefans.tv/play/20120070?playid=3_1'
-            ]);
-            $data = json_decode(curl_exec($curl_connection), true);
-            curl_close($curl_connection);
-            return urldecode($data['vurl']);
-
-        } catch (Exception $e) {
-            return $e->getMessage();
-        }
-    }
-
-    public static function getSourceIG($url)
-    {
-        try {
-            $curl_connection = curl_init($url.'?__a=1');
-            curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
-            curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
-
-            $data = json_decode(curl_exec($curl_connection), true);
-            curl_close($curl_connection);
-            return $data['graphql']['shortcode_media']['video_url'];
-        } catch(Exception $e) {
-            return $e->getMessage();
-        }
-    }
-
-    public static function getMobileBB($url)
-    {
-        $avid = '';
-        $bvid = '';
-        $cid = '';
-        if (strpos($url, "aid=") !== FALSE) { 
-            $avid = Video::get_string_between($url, 'aid=', '&');
-        }
-        if (strpos($url, "bvid=") !== FALSE) { 
-            $bvid = Video::get_string_between($url, 'bvid=', '&');
-        }
-        if (strpos($url, "cid=") !== FALSE) { 
-            $cid = Video::get_string_between($url, 'cid=', '&');
-        }
-        $url = "https://api.bilibili.com/x/player/playurl?avid=".$avid."&bvid=".$bvid."&cid=".$cid."&qn=0&type=mp4&otype=json&fnver=0&fnval=1&platform=html5&html5=1&high_quality=1";
-
-        try {
-            $curl_connection = curl_init($url);
-            curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
-            curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
-            curl_setopt($curl_connection, CURLOPT_HTTPHEADER, [
-                'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:56.0) Gecko/20100101 Firefox/56.0',
-                'Host: api.bilibili.com',
-                'Cookie: SESSDATA=33c1bfb1%2C1606096573%2C4f954*51;'
-            ]);
-            $data = json_decode(curl_exec($curl_connection), true);
-            curl_close($curl_connection);
-
-            if (array_key_exists('data', $data) && array_key_exists('durl', $data['data'])) {
-                $durl = $data['data']['durl'][0];
-                $url = $durl['url'];
-
-                $start = strpos($url, 'http');
-                $end = strpos($url, 'upgcxcode/');
-                $url = substr_replace($url, 'https://cn-hk-eq-bcache-01.bilivideo.com/upgcxcode/', $start, $end - $start + 10);
-                return $url;
-            } else {
-                return 'error';
-            }
-        } catch(Exception $e) {
-            return $e->getMessage();
-        }
-    }
-
-    public static function updateQQRawLink($video){
-        if (substr($video->sd, 0, 5) === "1098_") {
-            $video->sd = Video::getSourceQQ("https://quan.qq.com/video/".$video->sd);
-            $video->save();
-        }
-        if (substr($video->sd, 0, 5) === "1006_" || substr($video->sd, 0, 5) === "1097_") {
-            $video->sd = Video::getSourceQZ($video->sd);
-            $video->save();
-        }
-    }
-
-    public static function setAgefansLink($video){
-        $requests = Browsershot::url($video->sd)
-        ->useCookies(['username' => 'admin'])
-        ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
-        ->waitUntilNetworkIdle()
-        ->triggeredRequests();
-
-        foreach ($requests as $request) {
-            if (strpos($request['url'], 'https://www.agefans.tv/age/player/') !== false && strpos($request['url'], 'https://gss3.baidu.com/') !== false) {
-                $video->sd = $request['url'];
-
-            } elseif (strpos($request['url'], 'https://www.agefans.tv/age/player/') === false && strpos($request['url'], '1098_') !== false) {
-                $video->sd = 'https://www.agefans.tv/age/player/ckx1/?url='.urlencode($request['url']);
-
-            } elseif (strpos($request['url'], 'https://www.agefans.tv/age/player/') !== false && strpos($request['url'], '1006_') !== false) {
-                $url = '1006_'.Bot::get_string_between($request['url'], '1006_', '.f');
-                $video->sd = 'https://www.agefans.tv/age/player/ckx1/?url='.urlencode(Video::getSourceQZ($url));
-
-            } elseif (strpos($request['url'], 'https://www.agefans.tv/age/player/') !== false && strpos($request['url'], '1097_') !== false) {
-                $url = '1097_'.Bot::get_string_between($request['url'], '1097_', '.f');
-                $video->sd = 'https://www.agefans.tv/age/player/ckx1/?url='.urlencode(Video::getSourceQZ($url));
-
-            } elseif (strpos($request['url'], 'https://www.agefans.tv/age/player/') !== false && strpos($request['url'], 'myqcloud') !== false) {
-                $video->sd = $request['url'];
-            }
-        }
-
-        $video->save();
     }
 
     static function get_string_between($string, $start, $end){
