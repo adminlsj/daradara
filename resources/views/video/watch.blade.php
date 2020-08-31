@@ -89,7 +89,7 @@
         <a style="color: white; border: 1px solid white; padding: 5px 7px; font-size: 10px;" href="/"><span style="color: crimson">H</span>anime1<span style="color: crimson">.</span>me</a>
         @foreach ($tags as $tag)
           <div style="margin-bottom: 10px; display: inline-block;">
-            <a style="color: white; border: 1px solid white; padding: 5px 7px; font-size: 12px;" href="/search?tags%5B%5D={{ $tag }}">{{ $tag }}</a>
+            <a style="color: white; border: 1px solid white; padding: 5px 7px; font-size: 10px;" href="/search?tags%5B%5D={{ $tag }}">{{ $tag }}</a>
           </div>
         @endforeach
       </div>
