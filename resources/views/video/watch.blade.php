@@ -83,7 +83,7 @@
       <div style="width: 92%; margin-top: 18px;">
         <div data-toggle="modal" data-target="#playModal" style="cursor: pointer; font-size: 14px; border-radius: 3px; text-decoration: none; background-color: red; color: black; color: white; margin-left: 4%; padding: 5px 0" class="btn-block play-btn"><span style="vertical-align: middle; font-size: 2em; margin-top: -3px; padding-right: 3px; color: white;" class="material-icons">play_arrow</span>播放</div>
       </div>
-      <h4 style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; line-height: 16px; font-size: 12px; width: 92%; margin-left: 4%; text-align: left; margin-bottom: -3px;">{{ $video->title }} • 中文字幕 • {{ $video->caption }}</h4>
+      <h4 style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; line-height: 16px; font-size: 12px; width: 92%; margin-left: 4%; text-align: left; margin-bottom: -2px;">{{ $video->title }} • 中文字幕 • {{ $video->caption }}</h4>
 
       <h5 style="text-align: left; padding: 0 4%; color: darkgray; font-size: 11px; line-height: 16px;">
         標籤: 
