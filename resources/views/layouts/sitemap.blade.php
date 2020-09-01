@@ -9,52 +9,15 @@
 
 <!-- Home -->
 <url>
-  <loc>https://www.laughseejapan.com/</loc>
+  <loc>https://hanime1.me/</loc>
   <lastmod>{{$time}}</lastmod>
   <priority>1.00</priority>
 </url>
 
-<!-- Genre -->
-<url>
-  <loc>https://www.laughseejapan.com/rank</loc>
-  <lastmod>{{$time}}</lastmod>
-  <priority>0.60</priority>
-</url>
-<url>
-  <loc>https://www.laughseejapan.com/newest</loc>
-  <lastmod>{{$time}}</lastmod>
-  <priority>0.60</priority>
-</url>
-
-<!-- Search -->
-<url>
-  <loc>https://www.laughseejapan.com/search?query={{ rawurlencode('郡司') }}</loc>
-  <lastmod>{{$time}}</lastmod>
-  <priority>0.80</priority>
-
-  <loc>https://www.laughseejapan.com/search?query={{ rawurlencode('郡司桑') }}</loc>
-  <lastmod>{{$time}}</lastmod>
-  <priority>0.80</priority>
-</url>
-
-<!-- Watches -->
-@foreach ($watches as $watch)
-  <url>
-    <loc>https://www.laughseejapan.com/playlist?list={{ $watch->id }}</loc>
-    <lastmod>{{$time}}</lastmod>
-    <priority>0.90</priority>
-    <image:image>
-       <image:loc>https://i.imgur.com/{{ $watch->videos()->first()->imgur }}.jpg</image:loc>
-       <image:title>{{ $watch->title }}</image:title>
-       <image:caption>{{ $watch->description }}</image:caption>
-     </image:image>
-  </url>
-@endforeach
-
 <!-- Videos -->
 @foreach ($videos as $video)
   <url>
-    <loc>https://www.laughseejapan.com/watch?v={{$video->id}}</loc>
+    <loc>https://hanime1.me/watch?v={{$video->id}}</loc>
     <lastmod>{{$time}}</lastmod>
     <priority>0.90</priority>
     <video:video>
@@ -62,9 +25,9 @@
        <video:title>{{ $video->title }}</video:title>
        <video:description>{{ $video->caption }}</video:description>
        @if ($video->outsource)
-         <video:player_loc>{{ $video->outsource() }}</video:player_loc>
+         <video:player_loc>{{ $video->sd }}</video:player_loc>
        @else
-         <video:content_loc>{{ $video->source() }}</video:content_loc>
+         <video:content_loc>{{ $video->sd }}</video:content_loc>
        @endif
        <video:view_count>{{ $video->views }}</video:view_count>
        <video:publication_date>{{ \Carbon\Carbon::parse($video->created_at)->format('Y-m-d\Th:i:s').'+00:00' }}</video:publication_date>

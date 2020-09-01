@@ -29,6 +29,12 @@ class VideoController extends Controller
     public function watch(Request $request){
         $vid = $request->v;
         if (is_numeric($vid) && $video = Video::find($request->v)) {
+
+            if ($video->cover == null) {
+                header("Location: https://www.laughseejapan.com".$request->getRequestUri());
+                die();
+            }
+
             $videos = Video::where('playlist_id', $video->playlist_id)->orderBy('created_at', 'desc')->get();
 
             $tags = array_intersect($video->tags(), Video::$selected_tags);

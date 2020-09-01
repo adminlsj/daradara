@@ -206,10 +206,9 @@ class HomeController extends Controller
 
     public function sitemap()
     {
-        $videos = Video::orderBy('created_at', 'desc')->get();
-        $watches = Watch::orderBy('created_at', 'desc')->get();
+        $videos = Video::where('cover', '!=', null)->orderBy('created_at', 'desc')->get();
         $time = Carbon::now()->format('Y-m-d\Th:i:s').'+00:00';
-        return Response::view('layouts.sitemap', compact('videos', 'watches', 'time'))->header('Content-Type', 'application/xml');
+        return Response::view('layouts.sitemap', compact('videos', 'time'))->header('Content-Type', 'application/xml');
     }
 
     public function checkSubscribes(Request $request)
