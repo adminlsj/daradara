@@ -91,7 +91,8 @@
 	<div id="sort-wrapper" class="modal fade" role="dialog">
 		<div id="hentai-sort-panel">
 			<input type="hidden" id="sort" name="sort" value="{{ Request::get('sort') }}">
-			<div class="hentai-sort-options-wrapper"><div class="hentai-sort-options">上傳日期</div></div>
+			<div class="hentai-sort-options-wrapper"><div class="hentai-sort-options">最新內容</div></div>
+			<div class="hentai-sort-options-wrapper"><div class="hentai-sort-options">最新上傳</div></div>
 			<div class="hentai-sort-options-wrapper"><div class="hentai-sort-options">觀看次數</div></div>
 		</div>
 	</div>

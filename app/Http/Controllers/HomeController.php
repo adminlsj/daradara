@@ -110,15 +110,25 @@ class HomeController extends Controller
             });
         }
 
-        if ($sort = $request->sort) {
-            switch ($sort) {
-                case '觀看次數':
-                    $videos = $videos->orderBy('views', 'desc');
-                    break;
-            }
+        switch ($request->sort) {
+            case '最新內容':
+                $videos = $videos->orderBy('created_at', 'desc');
+                break;
+
+            case '最新上傳':
+                $videos = $videos->orderBy('id', 'desc');
+                break;
+
+            case '觀看次數':
+                $videos = $videos->orderBy('views', 'desc');
+                break;
+
+            default:
+                $videos = $videos->orderBy('created_at', 'desc');
+                break;
         }
 
-        $videos = $videos->distinct()->orderBy('created_at', 'desc')->paginate(42);
+        $videos = $videos->distinct()->paginate(42);
 
         return view('layouts.search', compact('tags', 'brands', 'videos'));
     }
