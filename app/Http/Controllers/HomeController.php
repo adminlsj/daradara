@@ -27,6 +27,7 @@ use simplehtmldom\HtmlWeb;
 use Spatie\Browsershot\Browsershot;
 use Illuminate\Support\Facades\Schema;
 use Config;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class HomeController extends Controller
 {
@@ -48,9 +49,9 @@ class HomeController extends Controller
         $tag5 = Video::where('cover', '!=', null)->inRandomOrder()->limit($count)->get();
 
         $rows = [
-            '最新上傳' => ['videos' => $upload, 'link' => '/search?query=&sort=上傳日期'], 
+            '最新上傳' => ['videos' => $upload, 'link' => '/search?query=&sort=最新上傳'], 
             '發燒影片' => ['videos' => $trending, 'link' => '/search?query=&sort=觀看次數'], 
-            '最新內容' => ['videos' => $newest, 'link' => '/search?query=&sort=上傳日期'], 
+            '最新內容' => ['videos' => $newest, 'link' => '/search?query=&sort=最新內容'], 
             '乳不巨何以聚人心' => ['videos' => $tag1, 'link' => '/search?query=&tags%5B%5D=巨乳&sort='], 
             '胸不平何以平天下' => ['videos' => $tag2, 'link' => '/search?query=&tags%5B%5D=貧乳&sort='], 
             '菊不爆何以保家園' => ['videos' => $tag3, 'link' => '/search?query=&tags%5B%5D=肛交&sort='], 
@@ -111,6 +112,28 @@ class HomeController extends Controller
         }
 
         switch ($request->sort) {
+            case '本日排行':
+                $videos = $videos->where('data', '!=', null)->select('id', 'title', 'cover', 'data')->get()->toArray();
+                usort($videos, function ($a, $b) {
+                    return end($b['data']['views']['increment']) - end($a['data']['views']['increment']);
+                });
+
+                $page = Input::get('page', 1); // Get the ?page=1 from the url
+                $perPage = 42; // Number of items per page
+                $offset = ($page * $perPage) - $perPage;
+
+                $videos = new LengthAwarePaginator(
+                    array_slice($videos, $offset, $perPage, true), // Only grab the items we need
+                    count($videos), // Total items
+                    $perPage, // Items per page
+                    $page, // Current page
+                    ['path' => $request->url(), 'query' => $request->query()] // We need this so we can keep all old query parameters from the url
+                );
+
+                return view('layouts.search', compact('tags', 'brands', 'videos'));
+
+                break;
+
             case '最新內容':
                 $videos = $videos->orderBy('created_at', 'desc');
                 break;
