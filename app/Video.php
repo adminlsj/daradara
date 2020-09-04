@@ -114,14 +114,11 @@ class Video extends Model
 
     public static function getYoujizz(String $url)
     {
-        $requests = Browsershot::url($url)
+        $html = Browsershot::url($url)
             ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
-            ->triggeredRequests();
-        foreach ($requests as $request) {
-            if ((strpos($request['url'], 'https://cdne-mobile.youjizz.com/') !== false || strpos($request['url'], 'yjcontentdelivery.com') !== false) && strpos($request['url'], '.mp4') !== false) {
-                return $request['url'];
-            }
-        }
+            ->bodyHtml();
+        $start = explode('<source src="', $html);
+        return html_entity_decode("https:".explode('" title="' , $start[1])[0]);
     }
 
     public static function getSlutload(String $url)

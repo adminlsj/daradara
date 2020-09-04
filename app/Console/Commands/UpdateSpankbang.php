@@ -54,7 +54,13 @@ class UpdateSpankbang extends Command
                         curl_exec($curl_connection);
                         $redirect = curl_getinfo($curl_connection, CURLINFO_EFFECTIVE_URL);
                         curl_close($curl_connection);
-                        $video->sd = str_replace('720p', '1080p', $redirect);
+
+                        if (strpos($video->tags, ' 1080p ') !== false) {
+                            $video->sd = str_replace('720p', '1080p', $redirect);
+                        } else {
+                            $video->sd = $redirect;
+                        }
+                        
                         $video->outsource = false;
                         $video->save();
                     }

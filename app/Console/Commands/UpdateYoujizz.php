@@ -42,16 +42,13 @@ class UpdateYoujizz extends Command
         $videos = Video::where('tags', 'ilike', '%裏番%')->where('foreign_sd', '!=', null)->get();
         foreach ($videos as $video) {
             if (array_key_exists('youjizz', $video->foreign_sd)) {
-                $requests = Browsershot::url($video->foreign_sd['youjizz'])
+                $html = Browsershot::url($video->foreign_sd['youjizz'])
                     ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
-                    ->triggeredRequests();
-                foreach ($requests as $request) {
-                    if ((strpos($request['url'], 'https://cdne-mobile.youjizz.com/') !== false || strpos($request['url'], 'yjcontentdelivery.com') !== false) && strpos($request['url'], '.mp4') !== false) {
-                        $video->sd = $request['url'];
-                        $video->outsource = false;
-                        $video->save();
-                    }
-                }
+                    ->bodyHtml();
+                $start = explode('<source src="', $html);
+                $video->sd = html_entity_decode("https:".explode('" title="' , $start[1])[0]);
+                $video->outsource = false;
+                $video->save();
             }
         }
     }
