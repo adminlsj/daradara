@@ -10,7 +10,7 @@
         <meta name="exoclick-site-verification" content="931150d86a55634ee548ee3d8c755e27">
         <link rel="shortcut icon" type="image/x-icon" href="https://i.imgur.com/PTFz5Ej.png"/>
         <link rel="apple-touch-icon" href="https://i.imgur.com/PTFz5Ej.png"/>
-        <link rel="canonical" href="https://www.hanime1.me{{ Request::getRequestUri() }}" />
+        <link rel="canonical" href="https://hanime1.me{{ Request::getRequestUri() }}" />
         <meta name="RATING" content="RTA-5042-1996-1400-1577-RTA" />
     @show
 
