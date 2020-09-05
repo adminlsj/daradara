@@ -81,19 +81,19 @@ class HomeController extends Controller
         }
 
         if ($tags = $request->tags) {
-            /* if ($request->broad) {
+            //if ($request->broad) {
                 $videos = $videos->where(function($query) use ($tags) {
                     foreach ($tags as $tag) {
                         $query->orWhere('tags', 'ilike', '%'.$tag.'%');
                     }
                 });
-            } else { */
+            /* } else {
                 $videos = $videos->where(function($query) use ($tags) {
                     foreach ($tags as $tag) {
                         $query->where('tags', 'ilike', '%'.$tag.'%');
                     }
                 });
-            // }
+            } */
         }
 
         if ($brands = $request->brands) {
