@@ -21,7 +21,7 @@ class Video extends Model
     ];
 
     public static $setting = [
-        '姐', '妹', '母', '人妻', '青梅竹馬', '御姐', '熟女'
+        '姐', '妹', '母', '人妻', '青梅竹馬', '處女', '御姐', '熟女'
     ];
 
     public static $profession = [
@@ -29,7 +29,7 @@ class Video extends Model
     ];
 
     public static $appearance = [
-        '巨乳', '貧乳', '黑皮膚', '眼鏡娘', '泳裝', '圍裙', '黑絲襪', '和服', '獸耳', '處女', '碧池', '不良少女', '傲嬌', '病嬌', '偽娘', '扶他'
+        '巨乳', '貧乳', '黑皮膚', '眼鏡娘', '泳裝', '圍裙', '黑絲襪', '和服', '獸耳', '碧池', '不良少女', '傲嬌', '病嬌', '偽娘', '扶他'
     ];
 
     public static $storyline = [
