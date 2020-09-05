@@ -27,7 +27,7 @@
 	    <div class="modal-content" style="border-radius: 3px; background-color: #424242; color: white">
 	      <div class="modal-header" style="border-bottom: 1px solid #3a3c3f">
 	        <button type="button" class="close" data-dismiss="modal">&times;</button>
-	        <h4 class="modal-title" style="text-align: center">標籤</h4>
+	        <h4 class="modal-title" style="text-align: center;">標籤</h4>
 	      </div>
 	      <div class="modal-body">
 	      	<!--<h5>
@@ -39,7 +39,7 @@
 			</h5>
 	        <p style="color: darkgray; padding-bottom: 15px; font-size: 12px">較多結果，較不精準。配對所有包含任何一個選擇的標籤的影片，而非全部標籤。</p>-->
 
-	        <h5 style="margin-bottom: 15px">人物設定：</h5>
+	        <h5 style="margin-bottom: 15px; font-weight: bold">人物設定：</h5>
 	        @foreach (App\Video::$setting as $tag)
 	        	<label class="hentai-tags-wrapper">
 				  <input name="tags[]" type="checkbox" value="{{ $tag }}" {{ $tags != [] && in_array($tag, $tags) ? 'checked' : '' }}>
@@ -47,7 +47,7 @@
 				</label>
 	        @endforeach
 
-	        <h5 style="margin-top: 15px; margin-bottom: 15px">職業設定：</h5>
+	        <h5 style="margin-top: 15px; margin-bottom: 15px; font-weight: bold">職業設定：</h5>
 	        @foreach (App\Video::$profession as $tag)
 	        	<label class="hentai-tags-wrapper">
 				  <input name="tags[]" type="checkbox" value="{{ $tag }}" {{ $tags != [] && in_array($tag, $tags) ? 'checked' : '' }}>
@@ -55,7 +55,7 @@
 				</label>
 	        @endforeach
 
-	        <h5 style="margin-top: 15px; margin-bottom: 15px">外貌身材：</h5>
+	        <h5 style="margin-top: 15px; margin-bottom: 15px; font-weight: bold">外貌身材：</h5>
 	        @foreach (App\Video::$appearance as $tag)
 	        	<label class="hentai-tags-wrapper">
 				  <input name="tags[]" type="checkbox" value="{{ $tag }}" {{ $tags != [] && in_array($tag, $tags) ? 'checked' : '' }}>
@@ -63,7 +63,7 @@
 				</label>
 	        @endforeach
 
-	        <h5 style="margin-top: 15px; margin-bottom: 15px">劇情內容：</h5>
+	        <h5 style="margin-top: 15px; margin-bottom: 15px; font-weight: bold">劇情內容：</h5>
 	        @foreach (App\Video::$storyline as $tag)
 	        	<label class="hentai-tags-wrapper">
 				  <input name="tags[]" type="checkbox" value="{{ $tag }}" {{ $tags != [] && in_array($tag, $tags) ? 'checked' : '' }}>
