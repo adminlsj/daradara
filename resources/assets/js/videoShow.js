@@ -254,35 +254,6 @@ $('input:radio[id=others]').click(function(){
     $('#others-text').focus();
 });
 
-/* Standard syntax */
-document.addEventListener("fullscreenchange", function() {
-  handleFullscreenChange()
-});
-
-/* Firefox */
-document.addEventListener("mozfullscreenchange", function() {
-  handleFullscreenChange()
-});
-
-/* Chrome, Safari and Opera */
-document.addEventListener("webkitfullscreenchange", function() {
-  handleFullscreenChange()
-});
-
-/* IE / Edge */
-document.addEventListener("msfullscreenchange", function() {
-  handleFullscreenChange()
-});
-
-function handleFullscreenChange() {
-    var videoWrap = $(".dplayer-video-wrap");
-    if (videoWrap.css("padding-bottom") == "0px") {
-        videoWrap.css("padding-bottom", "56.25%");
-    } else {
-        videoWrap.css("padding-bottom", "0px");
-    }
-}
-
 function showSnackbar(text) {
     var snackbar = document.getElementById("snackbar");
     snackbar.innerHTML = text;

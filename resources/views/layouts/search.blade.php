@@ -20,14 +20,6 @@
 	  <div id="search-pagination">{!! $videos->appends(request()->input())->links() !!}</div>
 </div>
 
-<div style="background-color: #212121;">
-	<div class="hentai-footer">
-		<p>Hanime1.me hentai haven 帶給你最新最全的無碼高清中文字幕Hentai成人動漫。我們提供最優質的Hentai色情動漫裏番，並以最高畫質1080p呈現的Blu-ray rip。我們的18禁H漫網站適用於手機設備，並提供全網最優質的Hentai動畫。最新最全的Hentai裏番資料庫，Hanime1.me hentai 讓你一個按鈕觀看所有Hentai成人動畫，包括最新的2020年Hentai成人動漫。在這裏，你可以找到最優質的中文字幕H動畫 24小時！免費享受hentai動漫，成人動畫，H動漫，並且更有中文字幕，不必再聽日語猜故事！這個網站是繼avbebe之後，亞洲最優質的色情工口Hentai成人動漫，並且有許多Hentai分類，包括顏射、乳交、口交、熟女、學生妹、中出、百合、肛交，以及更多！</p>
-
-		<p>Hentai是什麼？Hentai（変態 或 へんたい），Hentai 或 成人動漫的詞源來自日本，並指色情或成人動漫和動畫，特別是來自日本的18禁H動漫和成人動畫。</p>
-	</div>
-</div>
-
 <form id="hentai-form" action="{{ route('home.search') }}" method="GET">
 	<input type="hidden" id="query" name="query" value="{{ Request::get('query') }}">
 	<div id="tags" class="modal fade" role="dialog">
@@ -38,17 +30,41 @@
 	        <h4 class="modal-title" style="text-align: center">標籤</h4>
 	      </div>
 	      <div class="modal-body">
-	      	<h4>
+	      	<!--<h5>
 	      		廣泛配對
 		      	<label class="hentai-switch" style="float: right">
 					<input type="checkbox" name="broad" id="broad" {{ Request::get('broad') ? 'checked' : '' }}>
 					<span class="hentai-slider round"></span>
 				</label>
-			</h4>
-	        <p style="color: darkgray; padding-bottom: 15px">較多結果，較不精準。配對所有包含任何一個選擇的標籤的影片，而非全部標籤。</p>
-	        <h4>包含標籤</h4>
-	        <p id="hentai-tags-text" style="color: darkgray; padding-bottom: 10px">搜索包含所有以下選擇的標籤的影片：</p>
-	        @foreach (App\Video::$hentai_tags as $tag)
+			</h5>
+	        <p style="color: darkgray; padding-bottom: 15px; font-size: 12px">較多結果，較不精準。配對所有包含任何一個選擇的標籤的影片，而非全部標籤。</p>-->
+
+	        <h5 style="margin-bottom: 15px">人物設定：</h5>
+	        @foreach (App\Video::$setting as $tag)
+	        	<label class="hentai-tags-wrapper">
+				  <input name="tags[]" type="checkbox" value="{{ $tag }}" {{ $tags != [] && in_array($tag, $tags) ? 'checked' : '' }}>
+				  <span class="checkmark">{{ $tag }}</span>
+				</label>
+	        @endforeach
+
+	        <h5 style="margin-top: 15px; margin-bottom: 15px">職業設定：</h5>
+	        @foreach (App\Video::$profession as $tag)
+	        	<label class="hentai-tags-wrapper">
+				  <input name="tags[]" type="checkbox" value="{{ $tag }}" {{ $tags != [] && in_array($tag, $tags) ? 'checked' : '' }}>
+				  <span class="checkmark">{{ $tag }}</span>
+				</label>
+	        @endforeach
+
+	        <h5 style="margin-top: 15px; margin-bottom: 15px">外貌身材：</h5>
+	        @foreach (App\Video::$appearance as $tag)
+	        	<label class="hentai-tags-wrapper">
+				  <input name="tags[]" type="checkbox" value="{{ $tag }}" {{ $tags != [] && in_array($tag, $tags) ? 'checked' : '' }}>
+				  <span class="checkmark">{{ $tag }}</span>
+				</label>
+	        @endforeach
+
+	        <h5 style="margin-top: 15px; margin-bottom: 15px">劇情內容：</h5>
+	        @foreach (App\Video::$storyline as $tag)
 	        	<label class="hentai-tags-wrapper">
 				  <input name="tags[]" type="checkbox" value="{{ $tag }}" {{ $tags != [] && in_array($tag, $tags) ? 'checked' : '' }}>
 				  <span class="checkmark">{{ $tag }}</span>
@@ -98,9 +114,5 @@
 		</div>
 	</div>
 </form>
-
-<div style="background-color: #17181a; width: 100%; height: 40px; line-height: 40px">
-	<span style="float: left;"><a href="/contact" class="hidden-xs hidden-sm" style="padding: 0px 15px; color: darkgray">廣告</a><a href="/about" class="hidden-xs hidden-sm" style="padding: 0px 15px; color: darkgray">娛見日本</a><a href="/about" style="padding: 0px 15px; color: darkgray">關於</a><a href="/contact" style="padding: 0px 15px; color: darkgray">聯絡</a></span><span style="float: right"><a href="/terms" style="padding: 0px 15px; color: darkgray"><span class="hidden-xs hidden-sm">服務</span>條款</a><a href="/policies" style="padding: 0px 15px; color: darkgray"><span class="hidden-xs hidden-sm">社群</span>規範</a><a href="/copyright" style="padding: 0px 15px; color: darkgray">版權<span class="hidden-xs hidden-sm">申訴</span></a></span>
-</div>
 
 @endsection

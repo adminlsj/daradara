@@ -6,8 +6,7 @@
 
 @section('content')
 
-<div id="content-div">
-
+<div class="nav-bottom-padding">
 	@include('video.playModal', ['video' => $banner])
 
 	<div class="hidden-xs" style="position: relative;">
@@ -27,7 +26,7 @@
 		<div style="position: absolute; left: 50%; -webkit-transform: translateX(-50%); transform: translateX(-50%); width: 96%; bottom: 15%; text-align: center; color: white">
 			<h3 style="font-weight: bold; font-size: 20px;"><span style="color: crimson">H</span>anime1<span style="color: crimson">.</span>me</h3>
 			<h1 style="font-size: 30px; font-weight: bold; margin: 0">{{ $banner->title }}</h1>
-			<h4 style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; line-height: 16px; font-size: 12px; width: 80%; margin-left: 10%;">{{ $banner->translations['JP'] }} • 中文字幕 • {{ $banner->caption }}</h4>
+			<h4 style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; line-height: 16px; font-size: 12px; width: 92%; margin-left: 4%;">{{ $banner->translations['JP'] }} • 中文字幕 • {{ $banner->caption }}</h4>
 			<div style="margin-top: 20px; width: 100%">
 				<div style="width: 33%; float:left; display: inline-block;">
 					@if (!Auth::check())
@@ -70,32 +69,17 @@
 		@endforeach
 	</div>
 
-	<div class="hidden-xs" style="position: relative; padding: 0 4%; margin-top: 50px">
-		<div style="margin-left: -15px; display: inline-block;">
-			<a class="hidden-xs" href="/contact" style="padding: 0px 15px; color: dimgray">廣告</a>
-			<a class="hidden-xs" href="/about" style="padding: 0px 15px; color: dimgray">Hanime1</a>
-			<a href="/about" style="padding: 0px 15px; color: dimgray">關於</a>
-			<a href="/contact" style="padding: 0px 15px; color: dimgray">聯絡</a>
-		</div>
+	<br>
 
-		<div style="float: right; margin-right: -15px; display: inline-block;">
-			<a href="/terms" style="padding: 0px 15px; color: dimgray"><span class="hidden-xs">服務</span>條款</a>
-			<a href="/policies" style="padding: 0px 15px; color: dimgray">社群<span class="hidden-xs">規範</span></a>
-			<a href="/copyright" style="padding: 0px 15px; color: dimgray">版權<span class="hidden-xs">申訴</span></a>
-		</div>
+	<div style="background-color: #212121;">
+		<div class="hentai-footer">
+			<p>Hanime1.me 暗黑版 anime1.me 帶給你最新最全的無碼高清中文字幕Hentai成人動漫。我們提供最優質的Hentai色情動漫裏番，並以最高畫質1080p呈現的Blu-ray rip。我們的18禁H漫網站適用於手機設備，並提供全網最優質的Hentai動畫。最新最全的Hentai裏番資料庫，Hanime1.me hentai 讓你一個按鈕觀看所有Hentai成人動畫，包括最新的2020年Hentai成人動漫。在這裏，你可以找到最優質的中文字幕H動畫 24小時！免費享受hentai動漫，成人動畫，H動漫，並且更有中文字幕，不必再聽日語猜故事！這個網站是繼avbebe之後，亞洲最優質的色情工口Hentai成人動漫，並且有許多Hentai分類，包括顏射、乳交、口交、熟女、學生妹、中出、百合、肛交，以及更多！</p>
 
-		<div style="margin-top: 10px; margin-bottom: 10px">
-			<div style="display: inline-block; color: dimgray"><span class="hidden-xs">本網站已依台灣網站內容分級規定處理，</span>未滿十八歲者不得瀏覽</div>
-			<img style="display: inline-block; margin-top: -2px; margin-left: 5px" height='13' src="https://i.imgur.com/aJ6decG.gif">
+			<p>Hentai是什麼？Hentai（変態 或 へんたい），Hentai 或 成人動漫的詞源來自日本，並指色情或成人動漫和動畫，特別是來自日本的18禁H動漫和成人動畫。</p>
 		</div>
 	</div>
 </div>
 
 @include('layouts.nav-bottom')
-
-@if (!Auth::check())
-  @include('user.signUpModal')
-  @include('user.loginModal')
-@endif
 
 @endsection
