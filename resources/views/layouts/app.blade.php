@@ -26,6 +26,8 @@
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
 
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 </head>
 <body>
     <div>
@@ -52,7 +54,6 @@
 
     @section('script')
         <!-- Scripts -->
-        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
         <script src="{{ mix('js/app.js') }}"></script>
 
         <!-- Global site tag (gtag.js) - Google Analytics -->

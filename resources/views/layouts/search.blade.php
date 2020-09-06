@@ -116,4 +116,14 @@
 	</div>
 </form>
 
+<script>
+	var urlParams = new URLSearchParams(window.location.search);
+	if (urlParams.has('page') && urlParams.get('page') > 2) {
+		$(".mobile-search-pagination .pagination .page-item:nth-child(3)").addClass('hidden');
+	}
+	if (urlParams.has('page') && urlParams.get('page') < {{ $videos->lastPage() }} - 1) {
+		$(".mobile-search-pagination .pagination .page-item:nth-last-child(3)").addClass('hidden');
+	}
+</script>
+
 @endsection
