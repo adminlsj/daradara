@@ -145,7 +145,7 @@ class HomeController extends Controller
         }
 
         $videos = $videos->distinct()->paginate(42);
-
+        
         return view('layouts.search', compact('tags', 'brands', 'videos'));
     }
 

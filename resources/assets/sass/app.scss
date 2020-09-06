@@ -341,7 +341,7 @@ label.upload-image-btn input[type="file"] {
   outline: 0;
 }
 
-#search-pagination {
+.search-pagination {
   text-align: center; 
   margin-top: -75px
 }
@@ -923,7 +923,7 @@ div.sticky {
     width: calc((100% - 24px) / 6);
   }
 
-  #search-pagination {
+  .search-pagination {
     margin-top: -70px
   }
 
@@ -964,7 +964,7 @@ div.sticky {
     width: calc((100% - 16px) / 4);
   }
 
-  #search-pagination {
+  .search-pagination {
     margin-top: -35px
   }
 
@@ -1073,7 +1073,7 @@ div.sticky {
     margin-top: 134px !important;
   }
 
-  #search-pagination {
+  .search-pagination {
     margin-top: 10px;
   }
 

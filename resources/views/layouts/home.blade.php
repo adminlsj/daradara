@@ -81,5 +81,9 @@
 </div>
 
 @include('layouts.nav-bottom')
+@if (!Auth::check())
+  @include('user.signUpModal')
+  @include('user.loginModal')
+@endif
 
 @endsection

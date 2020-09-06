@@ -18,8 +18,8 @@
     <img class="lazy" style="background-color: black; width: 100%; -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0.3)));" src="https://i.imgur.com/CJ5svNv.png" data-src="{{ $video->imgur() }}" data-srcset="{{ $video->imgur() }}" alt="{{ $video->title }}">
     <div id="home-banner-wrapper" style="position: absolute; left: 4%; color: white">
       <h3 class="hidden-sm hidden-md" style="font-weight: bold"><span style="color: crimson">H</span>anime1<span style="color: crimson">.</span>me</h3>
-      <h1 style="margin: 0; line-height: 45px; margin-bottom: -5px; font-weight: bold;">{{ $video->translations['JP'] }}</h1>
-      <h4 class="hidden-xs">{{ $video->title }} • 中文字幕 • {{ $video->caption }}</h4>
+      <h1 style="margin: 0; line-height: 45px; margin-bottom: -5px; font-weight: bold;">{{ $video->title }}</h1>
+      <h4 class="hidden-xs">{{ $video->translations['JP'] }} • 中文字幕 • {{ $video->caption }}</h4>
 
       <div style="margin-top: -20px; margin-bottom: 28px; white-space: initial;">
         <a style="color: white; border: 1px solid white; padding: 5px 7px;" href="/"><span style="color: crimson">H</span>anime1<span style="color: crimson">.</span>me</a>

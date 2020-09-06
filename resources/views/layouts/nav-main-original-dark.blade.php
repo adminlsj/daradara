@@ -16,9 +16,9 @@
     <a class="hidden-xs hidden-sm hidden-md nav-item-icon" style="top: 17px; right: 4%; color: white;" href="{{ route('home.list') }}"><i class="material-icons">account_circle</i></a>
     <a class="hidden-xs hidden-sm hidden-md nav-item-icon" style="top: 17px; right: calc(4% + 50px); color: white;" href="{{ route('user.userEditUpload', Auth::user()) }}"><i class="material-icons">video_call</i></a>
   @else
-    <a class="no-select nav-item-text hidden-xs hidden-sm hidden-md" style="top: 15px; color: white; border: 1px solid transparent; padding: 8px 14px; margin-top: 12px; margin-right: 7px; font-weight: bold;" href="{{ route('login') }}">登入</a>
-    <a class="no-select nav-item-text hidden-xs hidden-sm hidden-md" style="top: 15px; color: white; background-color: transparent; border-color: transparent; padding: 7px 14px; margin-top: 12px; font-weight: bold;" href="{{ route('register') }}">註冊</a>
-    <a class="no-select pull-right hidden-xs hidden-sm hidden-md" style="top: 15px; margin-top: 15px; margin-right: 18px;" href="{{ route('login') }}"><i class="material-icons" style="color: white;">video_call</i></a>
+    <a class="no-select pull-right hidden-xs hidden-sm hidden-md" style="margin-right: 5px; line-height: 67px; color: white; font-weight: bold;" href="{{ route('login') }}">登入</a>
+    <a class="no-select pull-right hidden-xs hidden-sm hidden-md" style="color: white; line-height: 67px; font-weight: bold; margin-right: 30px" href="{{ route('register') }}">註冊</a>
+    <a class="no-select pull-right hidden-xs hidden-sm hidden-md" style="line-height: 67px; margin-top: 7px; margin-right: 30px;" href="{{ route('login') }}"><i class="material-icons" style="color: white;">video_call</i></a>
   @endif
 </nav>
 

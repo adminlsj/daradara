@@ -17,7 +17,8 @@
 	      </a>
 	    @endforeach
 	  </div>
-	  <div id="search-pagination">{!! $videos->appends(request()->input())->links() !!}</div>
+	  <div class="search-pagination hidden-xs">{!! $videos->appends(request()->input())->links() !!}</div>
+	  <div class="search-pagination mobile-search-pagination hidden-sm hidden-md hidden-lg">{!! $videos->appends(request()->input())->onEachSide(1)->links() !!}</div>
 </div>
 
 <form id="hentai-form" action="{{ route('home.search') }}" method="GET">

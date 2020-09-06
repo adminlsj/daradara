@@ -201,6 +201,12 @@ $(document).ready(function() {
   if (is_mobile) {
     $("#playModal").removeClass("fade");
   }
+
+  var urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.has('page') && urlParams.get('page') > 2) {
+    $(".mobile-search-pagination .pagination .page-item:nth-child(3)").addClass('hidden');
+    $(".mobile-search-pagination .pagination .page-item:nth-last-child(3)").addClass('hidden');
+  }
 });
 
 /* Standard syntax */

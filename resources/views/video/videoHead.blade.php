@@ -5,7 +5,7 @@
 <meta property="og:image" content="https://i.imgur.com/{{ $video->imgur }}h.png" />
 
 <title>{{ $video->translations['JP'] }}&nbsp;-&nbsp;線上看&nbsp;-&nbsp;Hanime1.me</title>
-<meta name="title" content="{{ $video->translations['JP'] }} - 線上看 - 娛見日本 LaughSeeJapan">
+<meta name="title" content="{{ $video->translations['JP'] }} - 線上看 - Hanime1.me">
 <meta name="description" content="{{ $video->caption }}">
 
 <script type="application/ld+json">
