@@ -31,20 +31,20 @@ class HomeController extends Controller
         $banner = Video::find(12872);
         $count = 20;
         $upload = Video::where('cover', '!=', null)->orderBy('id', 'desc')->limit($count)->get();
-        $trending = Video::where('cover', '!=', null)->whereNotIn('id', $excluded)->orderBy('views', 'desc')->limit($count)->get();
         $newest =Video::where('cover', '!=', null)->whereNotIn('id', $excluded)->orderBy('created_at', 'desc')->limit($count)->get();
-        $tag1 = Video::where('cover', '!=', null)->where('tags', 'ilike', '%巨乳%')->inRandomOrder()->limit($count)->get();
-        $tag2 = Video::where('cover', '!=', null)->where('tags', 'ilike', '%貧乳%')->inRandomOrder()->limit($count)->get();
-        $tag3 = Video::where('cover', '!=', null)->where('tags', 'ilike', '%肛交%')->inRandomOrder()->limit($count)->get();
+        $trending = Video::where('cover', '!=', null)->whereNotIn('id', $excluded)->orderBy('views', 'desc')->limit($count)->get();
+        $tag1 = Video::where('cover', '!=', null)->where('tags', 'ilike', '%巨乳%')->whereNotIn('id', $excluded)->inRandomOrder()->limit($count)->get();
+        $tag2 = Video::where('cover', '!=', null)->where('tags', 'ilike', '%貧乳%')->whereNotIn('id', $excluded)->inRandomOrder()->limit($count)->get();
+        $tag3 = Video::where('cover', '!=', null)->where('tags', 'ilike', '%肛交%')->whereNotIn('id', $excluded)->inRandomOrder()->limit($count)->get();
         $tag4 = Video::where(function($query) {
             $query->orWhere('tags', 'like', '%扶他%')->orWhere('tags', 'like', '%偽娘%')->orWhere('tags', 'like', '%耽美%');
-        })->where('cover', '!=', null)->inRandomOrder()->limit($count)->get();
-        $tag5 = Video::where('cover', '!=', null)->inRandomOrder()->limit($count)->get();
+        })->where('cover', '!=', null)->whereNotIn('id', $excluded)->inRandomOrder()->limit($count)->get();
+        $tag5 = Video::where('cover', '!=', null)->whereNotIn('id', $excluded)->inRandomOrder()->limit($count)->get();
 
         $rows = [
             '最新上傳' => ['videos' => $upload, 'link' => '/search?query=&sort=最新上傳'], 
+            '最新內容' => ['videos' => $newest, 'link' => '/search?query=&sort=最新內容'],
             '發燒影片' => ['videos' => $trending, 'link' => '/search?query=&sort=觀看次數'], 
-            '最新內容' => ['videos' => $newest, 'link' => '/search?query=&sort=最新內容'], 
             '乳不巨何以聚人心' => ['videos' => $tag1, 'link' => '/search?query=&tags%5B%5D=巨乳&sort='], 
             '胸不平何以平天下' => ['videos' => $tag2, 'link' => '/search?query=&tags%5B%5D=貧乳&sort='], 
             '菊不爆何以保家園' => ['videos' => $tag3, 'link' => '/search?query=&tags%5B%5D=肛交&sort='], 
