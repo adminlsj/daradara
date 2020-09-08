@@ -30,6 +30,8 @@ class VideoController extends Controller
         $vid = $request->v;
         if (is_numeric($vid) && $video = Video::find($request->v)) {
 
+            $excluded = Video::getExcludedIds();
+
             if ($video->cover == null) {
                 header("Location: https://www.laughseejapan.com".$request->getRequestUri());
                 die();
@@ -42,7 +44,7 @@ class VideoController extends Controller
                 foreach ($tags as $tag) {
                     $query->orWhere('tags', 'ilike', '%'.$tag.'%');
                 }
-            })->whereNotIn('id', $videos->pluck('id'))->where('cover', '!=', null)->inRandomOrder()->limit(42)->get();
+            })->whereNotIn('id', $videos->pluck('id'))->whereNotIn('id', $excluded)->where('cover', '!=', null)->inRandomOrder()->limit(42)->get();
 
             $video->views++;
             $video->save();
