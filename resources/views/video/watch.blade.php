@@ -13,6 +13,8 @@
 <div id="content-div">
 
   @include('video.playModal')
+  @include('video.userReportModal')
+  @include('video.shareModal')
 
   <div class="hidden-xs" style="position: relative;">
     <img class="lazy" style="background-color: black; width: 100%; -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0.3)));" src="https://i.imgur.com/CJ5svNv.png" data-src="{{ $video->imgur() }}" data-srcset="{{ $video->imgur() }}" alt="{{ $video->title }}">
@@ -185,8 +187,6 @@
 </div>
 
 @include('layouts.nav-bottom')
-@include('video.shareModal')
-@include('video.userReportModal')
 @if (!Auth::check())
   @include('user.signUpModal')
   @include('user.loginModal')
