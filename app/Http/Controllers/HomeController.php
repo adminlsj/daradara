@@ -84,7 +84,7 @@ class HomeController extends Controller
             //if ($request->broad) {
                 $videos = $videos->where(function($query) use ($tags) {
                     foreach ($tags as $tag) {
-                        $query->orWhere('tags', 'ilike', '%'.$tag.'%');
+                        $query->orWhere('tags', 'ilike', $tag.'%')->orWhere('tags', 'ilike', '% '.$tag.' %');
                     }
                 });
             /* } else {
