@@ -8,6 +8,7 @@ use App\Watch;
 use App\Subscribe;
 use App\Comment;
 use App\Like;
+use App\Bot;
 use Spatie\Browsershot\Browsershot;
 
 class Video extends Model
@@ -305,36 +306,9 @@ class Video extends Model
         return substr($string, $ini, $len);
     }
 
-    public function scopeTagsWithLimit($query, $tags, $count = 8)
-    {
-        return $query->with('user:id,name')->where(function($query) use ($tags) {
-            foreach ($tags as $tag) {
-                $query->orWhere('tags', 'like', '%'.$tag.'%');
-            }
-        })->orderBy('uploaded_at', 'desc')->limit($count)->select('id', 'user_id', 'imgur', 'title', 'sd');
-    }
-
-    public function scopeTagsWithPaginate($query, $tags)
-    {
-        return $query->with('user:id,name')->where(function($query) use ($tags) {
-            foreach ($tags as $tag) {
-                $query->orWhere('tags', 'like', '%'.$tag.'%');
-            }
-        })->select('id', 'user_id', 'imgur', 'title', 'sd');
-    }
-
     public static function getExcludedIds()
     {
-        $first = [];
-        $playlists = [797, 308, 122, 685, 810, 680, 732, 813, 657];
-        foreach ($playlists as $playlist_id) {
-            array_push($first, Video::where('playlist_id', $playlist_id)->orderBy('created_at', 'desc')->first()->id);
-        }
-
-        return $videos = Video::where(function($query) use ($playlists) {
-            foreach ($playlists as $playlist) {
-                $query->orWhere('playlist_id', $playlist);
-            }
-        })->whereNotIn('id', $first)->pluck('id');
+        $bot = Bot::where('temp', 'exclude')->first();
+        return $bot->data['videos'];
     }
 }

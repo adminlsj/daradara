@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Video;
 use App\Watch;
 use App\Subscribe;
+use App\Bot;
 use App\User;
 use App\Comment;
 use App\Like;
@@ -224,6 +225,26 @@ class HomeController extends Controller
 
     public function tempMethod()
     {
-        
+
+    }
+
+    public function setExcludedIds()
+    {
+        $bot = Bot::where('temp', 'exclude')->first();
+
+        $first = [];
+        $playlists = $bot->data['playlists'];
+        foreach ($playlists as $playlist_id) {
+            array_push($first, Video::where('playlist_id', $playlist_id)->orderBy('created_at', 'desc')->first()->id);
+        }
+
+        $videos = Video::where(function($query) use ($playlists) {
+            foreach ($playlists as $playlist) {
+                $query->orWhere('playlist_id', $playlist);
+            }
+        })->whereNotIn('id', $first)->pluck('id');
+
+        $bot->data = ['playlists' => $playlists, 'videos' => $videos];
+        $bot->save();
     }
 }

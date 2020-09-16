@@ -26,6 +26,7 @@ Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallb
 Route::post('users/{user}/storeAvatar', 'UserController@storeAvatar');
 
 Route::get('/tempMethod', 'HomeController@tempMethod');
+Route::get('/setExcludedIds', 'HomeController@setExcludedIds');
 
 Route::post('/like', 'VideoController@like')->name('video.like');
 Route::post('/save', 'VideoController@save')->name('video.save');

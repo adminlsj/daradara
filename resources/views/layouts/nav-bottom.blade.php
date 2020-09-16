@@ -11,7 +11,7 @@
     <i style="font-size: 23px; position: relative; margin-top: 7px" class="material-icons">subscriptions</i>
     <span style="padding-right: 1px;">我的清單</span>
   </a>
-  <a href="{{ route('home.search') }}?query=&sort=觀看次數" class="{{ Request::is('*rank*') ? 'active' : '' }}">
+  <a href="{{ route('home.search') }}?query=&sort=本日排行" class="{{ Request::is('*rank*') ? 'active' : '' }}">
     <i style="padding-left: 0px; font-size: 24px;  margin-top: 7px" class="material-icons">whatshot</i>
     <span>發燒影片</span>
   </a>

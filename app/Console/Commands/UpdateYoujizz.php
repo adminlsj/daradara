@@ -46,7 +46,17 @@ class UpdateYoujizz extends Command
                     ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
                     ->bodyHtml();
                 $start = explode('<source src="', $html);
-                $video->sd = html_entity_decode("https:".explode('" title="' , $start[1])[0]);
+                $link = html_entity_decode("https:".explode('" title="' , $start[1])[0]);
+                $loop = 0;
+                while (strpos($link, 'https://cdnc-videos.youjizz.com/') !== false && $loop < 10) {
+                    $html = Browsershot::url($video->foreign_sd['youjizz'])
+                        ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
+                        ->bodyHtml();
+                    $start = explode('<source src="', $html);
+                    $link = html_entity_decode("https:".explode('" title="' , $start[1])[0]);
+                    $loop++;
+                }
+                $video->sd = $link;
                 $video->outsource = false;
                 $video->save();
             }
