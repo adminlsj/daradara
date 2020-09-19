@@ -53,7 +53,7 @@ Route::get('/categoryEdit', 'HomeController@categoryEdit')->name('category.edit'
 Route::post('/categoryUpdate', 'HomeController@categoryUpdate')->name('category.update');
 Route::get('/singleNewCreate', 'HomeController@singleNewCreate')->name('single.create');
 Route::post('/singleNewStore', 'HomeController@singleNewStore')->name('single.store');
-Route::get('/sitemap.xml', 'HomeController@sitemap');
+// Route::get('/sitemap.xml', 'HomeController@sitemap');
 Route::get('/createGetSource', 'VideoController@createGetSource');
 Route::get('/loadPlaylist', 'VideoController@loadPlaylist')->name('video.loadPlaylist');
 Route::get('/loadTagList', 'VideoController@loadTagList');
