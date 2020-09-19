@@ -22,7 +22,7 @@
 	</div>
 
 	<div class="hidden-sm hidden-md hidden-lg" style="position: relative;">
-		<img style="width: 100%; -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));" src="https://i.imgur.com/OCatT3B.jpg">
+		<img style="width: 100%; -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));" src="https://i.imgur.com/ddXLQyU.jpg">
 		<div style="position: absolute; left: 50%; -webkit-transform: translateX(-50%); transform: translateX(-50%); width: 96%; bottom: 15%; text-align: center; color: white">
 			<h3 style="font-weight: bold; font-size: 20px;"><span style="color: crimson">H</span>anime1<span style="color: crimson">.</span>me</h3>
 			<h1 style="font-size: 30px; font-weight: bold; margin: 0">{{ $banner->title }}</h1>
@@ -56,7 +56,7 @@
 	<div id="home-rows-wrapper" style="position: relative;">
 		@foreach ($rows as $title => $data)
 			<a style="text-decoration: none;" href="{{ $data['link'] }}"><h3>{{ $title }}</h3></a>
-			<div class="home-rows-videos-wrapper">
+			<div class="home-rows-videos-wrapper no-scrollbar-style">
 				@foreach ($data['videos'] as $video)
 					<a style="text-decoration: none;" href="{{ route('video.watch') }}?v={{ $video->id }}">
 						<div id="home-rows-videos-div" style="position: relative; display: inline-block;">

@@ -161,7 +161,7 @@
 
   <div id="home-rows-wrapper" class="intro-rows-wrapper" style="position: relative;">
     <h3>集數列表</h3>
-    <div class="home-rows-videos-wrapper">
+    <div class="home-rows-videos-wrapper no-scrollbar-style">
       @foreach ($videos as $video)
         <a style="text-decoration: none;" href="{{ route('video.watch') }}?v={{ $video->id }}">
           <div id="home-rows-videos-div" style="position: relative; display: inline-block;">

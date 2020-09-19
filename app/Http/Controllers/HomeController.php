@@ -29,7 +29,7 @@ class HomeController extends Controller
     {
         $excluded = Video::getExcludedIds();
 
-        $banner = Video::find(12872);
+        $banner = Video::find(12927);
         $count = 20;
         $upload = Video::where('cover', '!=', null)->orderBy('id', 'desc')->limit($count)->get();
         $newest =Video::where('cover', '!=', null)->whereNotIn('id', $excluded)->orderBy('created_at', 'desc')->limit($count)->get();

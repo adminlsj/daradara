@@ -34,6 +34,16 @@ body {
   outline: inherit;
 }
 
+.no-scrollbar-style {
+    overflow-y: scroll;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+}
+.no-scrollbar-style::-webkit-scrollbar { /* WebKit */
+    width: 0;
+    height: 0;
+}
+
 #main-nav {
   position: fixed; 
   top: 0; 
