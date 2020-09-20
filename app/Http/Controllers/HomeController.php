@@ -152,8 +152,7 @@ class HomeController extends Controller
 
     public function list()
     {
-        $saved = Save::where('user_id', Auth::user()->id)->pluck('foreign_id');
-        $videos = Video::whereIntegerInRaw('id', $saved)->orderBy('created_at', 'desc')->select('id', 'title', 'cover')->get();
+        $videos = Video::whereIntegerInRaw('id', Auth::user()->saves->pluck('video_id'))->orderBy('created_at', 'desc')->select('id', 'title', 'cover')->get();
         return view('layouts.list', compact('videos'));
     }
 
