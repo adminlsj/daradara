@@ -59,6 +59,7 @@ Route::get('/loadPlaylist', 'VideoController@loadPlaylist')->name('video.loadPla
 Route::get('/loadTagList', 'VideoController@loadTagList');
 Route::get('/updateHentai', 'HomeController@updateHentai');
 Route::get('/updateYoujizz', 'BotController@updateYoujizz');
+Route::get('/updateSpankbang', 'BotController@updateSpankbang');
 Route::get('/updateSlutload', 'HomeController@updateSlutload');
 
 Route::get('/loadHomeTagList', 'HomeController@loadHomeTagList');

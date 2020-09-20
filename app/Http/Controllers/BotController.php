@@ -113,6 +113,28 @@ class BotController extends Controller
         }
     }
 
+    public function updateSpankbang(Request $request)
+    {
+        $videos = Video::where('tags', 'ilike', '%裏番%')->where('foreign_sd', 'ilike', '%"spankbang"%')->get();
+        foreach ($videos as $video) {
+            $requests = Browsershot::url($video->foreign_sd['spankbang'])
+                ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
+                ->triggeredRequests();
+            foreach ($requests as $request) {
+                if (strpos($request['url'], 'https://vdownload') !== false && strpos($request['url'], '.mp4') !== false) {
+                    if (strpos($video->tags, ' 1080p ') !== false) {
+                        $video->sd = str_replace('720p', '1080p', $request['url']);
+                    } else {
+                        $video->sd = $request['url'];
+                    }
+                    
+                    $video->outsource = false;
+                    $video->save();
+                }
+            }
+        }
+    }
+
     public function updateHentai(Request $request)
     {
         $videos = Video::where('tags', 'ilike', '%裏番%')->where('foreign_sd', '!=', null)->get();
