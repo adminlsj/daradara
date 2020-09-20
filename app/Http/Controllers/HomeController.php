@@ -31,16 +31,16 @@ class HomeController extends Controller
 
         $banner = Video::find(12927);
         $count = 20;
-        $upload = Video::where('cover', '!=', null)->orderBy('id', 'desc')->limit($count)->select('id', 'title', 'cover', 'imgur')->get();
-        $newest =Video::where('cover', '!=', null)->whereNotIn('id', $excluded)->orderBy('created_at', 'desc')->limit($count)->select('id', 'title', 'cover', 'imgur')->get();
-        $trending = Video::where('cover', '!=', null)->whereNotIn('id', $excluded)->orderBy('views', 'desc')->limit($count)->select('id', 'title', 'cover', 'imgur')->get();
-        $tag1 = Video::where('cover', '!=', null)->where('tags', 'ilike', '%巨乳%')->whereNotIn('id', $excluded)->inRandomOrder()->limit($count)->select('id', 'title', 'cover', 'imgur')->get();
-        $tag2 = Video::where('cover', '!=', null)->where('tags', 'ilike', '%貧乳%')->whereNotIn('id', $excluded)->inRandomOrder()->limit($count)->select('id', 'title', 'cover', 'imgur')->get();
-        $tag3 = Video::where('cover', '!=', null)->where('tags', 'ilike', '%肛交%')->whereNotIn('id', $excluded)->inRandomOrder()->limit($count)->select('id', 'title', 'cover', 'imgur')->get();
+        $upload = Video::where('cover', '!=', null)->orderBy('id', 'desc')->limit($count)->select('id', 'title', 'cover')->get();
+        $newest =Video::where('cover', '!=', null)->whereNotIn('id', $excluded)->orderBy('created_at', 'desc')->limit($count)->select('id', 'title', 'cover')->get();
+        $trending = Video::where('cover', '!=', null)->whereNotIn('id', $excluded)->orderBy('views', 'desc')->limit($count)->select('id', 'title', 'cover')->get();
+        $tag1 = Video::where('cover', '!=', null)->where('tags', 'ilike', '%巨乳%')->whereNotIn('id', $excluded)->inRandomOrder()->limit($count)->select('id', 'title', 'cover')->get();
+        $tag2 = Video::where('cover', '!=', null)->where('tags', 'ilike', '%貧乳%')->whereNotIn('id', $excluded)->inRandomOrder()->limit($count)->select('id', 'title', 'cover')->get();
+        $tag3 = Video::where('cover', '!=', null)->where('tags', 'ilike', '%肛交%')->whereNotIn('id', $excluded)->inRandomOrder()->limit($count)->select('id', 'title', 'cover')->get();
         $tag4 = Video::where(function($query) {
             $query->orWhere('tags', 'like', '%扶他%')->orWhere('tags', 'like', '%偽娘%')->orWhere('tags', 'like', '%耽美%');
-        })->where('cover', '!=', null)->whereNotIn('id', $excluded)->inRandomOrder()->limit($count)->select('id', 'title', 'cover', 'imgur')->get();
-        $tag5 = Video::where('cover', '!=', null)->whereNotIn('id', $excluded)->inRandomOrder()->limit($count)->select('id', 'title', 'cover', 'imgur')->get();
+        })->where('cover', '!=', null)->whereNotIn('id', $excluded)->inRandomOrder()->limit($count)->select('id', 'title', 'cover')->get();
+        $tag5 = Video::where('cover', '!=', null)->whereNotIn('id', $excluded)->inRandomOrder()->limit($count)->select('id', 'title', 'cover')->get();
 
         $rows = [
             '最新上傳' => ['videos' => $upload, 'link' => '/search?query=&sort=最新上傳'], 
@@ -153,7 +153,7 @@ class HomeController extends Controller
     public function list()
     {
         $saved = Save::where('user_id', Auth::user()->id)->pluck('foreign_id');
-        $videos = Video::whereIn('id', $saved)->orderBy('created_at', 'desc')->get();
+        $videos = Video::whereIn('id', $saved)->orderBy('created_at', 'desc')->select('id', 'title', 'cover')->get();
         return view('layouts.list', compact('videos'));
     }
 

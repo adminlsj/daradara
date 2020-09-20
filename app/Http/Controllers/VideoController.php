@@ -37,14 +37,14 @@ class VideoController extends Controller
                 die();
             }
 
-            $videos = Video::where('playlist_id', $video->playlist_id)->orderBy('created_at', 'desc')->get();
+            $videos = Video::where('playlist_id', $video->playlist_id)->orderBy('created_at', 'desc')->select('id', 'title', 'cover')->get();
 
             $tags = array_intersect($video->tags(), Video::$selected_tags);
             $recommends = Video::where(function($query) use ($tags) {
                 foreach ($tags as $tag) {
                     $query->orWhere('tags', 'ilike', '%'.$tag.'%');
                 }
-            })->whereNotIn('id', $videos->pluck('id'))->whereNotIn('id', $excluded)->where('cover', '!=', null)->inRandomOrder()->limit(42)->get();
+            })->whereNotIn('id', $videos->pluck('id'))->whereNotIn('id', $excluded)->where('cover', '!=', null)->select('id', 'title', 'cover')->inRandomOrder()->limit(42)->get();
 
             $video->views++;
             $video->save();
