@@ -39,7 +39,7 @@ class UpdateSlutload extends Command
      */
     public function handle()
     {
-        $videos = Video::where('tags', 'ilike', '%裏番%')->where('foreign_sd', '!=', null)->get();
+        $videos = Video::where('tags', 'ilike', '%裏番%')->where('foreign_sd', 'ilike', '%"slutload"%')->get();
         foreach ($videos as $video) {
             if (array_key_exists('slutload', $video->foreign_sd)) {
                 $requests = Browsershot::url($video->foreign_sd['slutload'])

@@ -39,7 +39,7 @@ class UpdateYoujizz extends Command
      */
     public function handle()
     {
-        $videos = Video::where('tags', 'ilike', '%裏番%')->where('foreign_sd', '!=', null)->get();
+        $videos = Video::where('tags', 'ilike', '%裏番%')->where('foreign_sd', 'ilike', '%"youjizz"%')->get();
         foreach ($videos as $video) {
             if (array_key_exists('youjizz', $video->foreign_sd)) {
                 $html = Browsershot::url($video->foreign_sd['youjizz'])
