@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddForeignKeyToVideos extends Migration
+class AddForeignKeysToSaves extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class AddForeignKeyToVideos extends Migration
      */
     public function up()
     {
-        Schema::table('videos', function (Blueprint $table) {
+        Schema::table('saves', function (Blueprint $table) {
+            $table->renameColumn('foreign_id', 'video_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('playlist_id')->references('id')->on('watches')->onDelete('cascade');
+            $table->foreign('video_id')->references('id')->on('videos')->onDelete('cascade');
         });
     }
 
@@ -26,7 +27,7 @@ class AddForeignKeyToVideos extends Migration
      */
     public function down()
     {
-        Schema::table('videos', function (Blueprint $table) {
+        Schema::table('saves', function (Blueprint $table) {
             //
         });
     }

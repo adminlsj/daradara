@@ -15,11 +15,10 @@ class CreateWatchesTable extends Migration
     {
         Schema::create('watches', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('genre');
-            $table->string('category');
             $table->string('title');
-            $table->text('imgur')->nullable();
             $table->timestamps();
+            $table->text('description')->nullable();
+            $table->integer('user_id')->nullable();
         });
     }
 
