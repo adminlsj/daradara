@@ -24,7 +24,7 @@ class CreateVideosTable extends Migration
             $table->text('sd')->nullable();
             $table->boolean('outsource')->nullable();
             $table->dateTime('uploaded_at')->nullable();
-            $table->integer('playlist_id')->unsigned();
+            $table->integer('playlist_id')->unsigned()->nullable();
             $table->foreign('playlist_id')->references('id')->on('watches')->onDelete('cascade');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
