@@ -212,9 +212,9 @@ class UserController extends Controller
                     $watch->updated_at = $video->uploaded_at;
                     $watch->save();
 
-                    $subscribes = $watch->subscribes();
+                    $subscribes = $watch->subscribes;
                     foreach ($subscribes as $subscribe) {
-                        $user = $subscribe->user();
+                        $user = $subscribe->user;
                         if (strpos($user->alert, 'subscribe') === false) {
                             $user->alert = $user->alert."subscribe";
                             $user->save();

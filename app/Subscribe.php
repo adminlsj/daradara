@@ -19,11 +19,11 @@ class Subscribe extends Model
 
     public function user()
     {
-        return User::find($this->user_id);
+        return $this->belongsTo('App\User');
     }
 
     public function watch()
     {
-        return Watch::where('title', $this->tag)->first();
+        return $this->belongsTo('App\Watch', 'playlist_id');
     }
 }

@@ -30,7 +30,7 @@ class Watch extends Model
 
     public function subscribes()
     {
-        return Subscribe::where('tag', $this->title)->orderBy('created_at', 'asc')->get();
+        return $this->hasMany('App\Subscribe', 'playlist_id');
     }
 
     public function titleToURL()
