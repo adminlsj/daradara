@@ -118,6 +118,11 @@ class User extends Authenticatable
         return $this->hasMany('App\Video');
     }
 
+    public function saves()
+    {
+        return $this->hasMany('App\Save');
+    }
+
     public function blogs()
     {
         return $this->hasMany('App\Blog');
