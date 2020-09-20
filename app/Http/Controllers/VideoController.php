@@ -668,47 +668,6 @@ class VideoController extends Controller
         return view('video.search', compact('watches', 'query', 'topResults', 'user'));
     }
 
-    public function loadPlaylist(Request $request)
-    {
-        $video = Video::find($request->v);
-        $current = $video;
-
-        $videosSelect = Video::where(function($query) use ($video) {
-            foreach ($video->tags() as $tag) {
-                $query->orWhere('tags', 'like', '%'.$tag.'%');
-            }
-        });
-
-        if ($request->list != '') {
-            $videos = Video::where('playlist_id', $request->list)->orderBy('created_at', 'desc')->select('id', 'imgur', 'title')->get();
-            $videosSelect = $videosSelect->where('playlist_id', '!=', $video->playlist_id)->inRandomOrder()->select('id', 'tags')->get()->toArray();
-        } else {
-            $videos = null;
-            $videosSelect = $videosSelect->where('id', '!=', $video->id)->inRandomOrder()->select('id', 'tags')->get()->toArray();
-        }
-
-        $rankings = [];
-        foreach ($videosSelect as $videoSelect) {
-            $score = 0;
-            foreach ($video->tags() as $tag) {
-                if (strpos($videoSelect['tags'], $tag) !== false) {
-                    $score++;
-                }
-            }
-            array_push($rankings, ['score' => $score, 'id' => $videoSelect['id']]);
-        }
-        usort($rankings, function ($a, $b) {
-            return $b['score'] <=> $a['score'];
-        });
-
-        $related = Video::with('user.avatar')->whereIn('id', Arr::pluck(array_slice($rankings, 0, 30), 'id'))->select('id', 'user_id', 'imgur', 'title', 'sd')->get();
-
-        $html = view('video.video-playlist-wrapper', compact('current', 'videos', 'related'));
-        if ($request->ajax()) {
-            return $html;
-        }
-    }
-
     public function searchGoogle(Request $request)
     {
         return view('video.searchGoogle');

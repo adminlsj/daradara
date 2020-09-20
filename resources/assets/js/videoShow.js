@@ -207,45 +207,6 @@ $('.comment-reply-btn').click(function() {
     comment_text.focus();
 })
 
-$(document).ready(function(){
-    var urlParams = new URLSearchParams(window.location.search);
-    $.ajax({ 
-        type:"GET",
-        url: "/loadPlaylist",
-        data: {v: urlParams.get('v'), list: urlParams.get('list')},
-        dataType: 'html',
-        success: function(data){
-            $('.ajax-loading').html(" ");
-            $('div#video-playlist-wrapper').html(data);
-
-            var container = document.querySelector('div#video-playlist-wrapper');
-            var lazyImages = [].slice.call(container.querySelectorAll("img.lazy"));
-            if ("IntersectionObserver" in window) {
-                let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
-                  entries.forEach(function(entry) {
-                    if (entry.isIntersecting) {
-                      let lazyImage = entry.target;
-                      lazyImage.src = lazyImage.dataset.src;
-                      lazyImage.srcset = lazyImage.dataset.srcset;
-                      lazyImage.classList.remove("lazy");
-                      lazyImageObserver.unobserve(lazyImage);
-                    }
-                  });
-                }, {
-                  rootMargin: "0px 0px 256px 0px"
-                });
-                
-                lazyImages.forEach(function(lazyImage) {
-                  lazyImageObserver.observe(lazyImage);
-                });
-            }
-        },
-        error: function(xhr, ajaxOptions, thrownError){
-            $('div#video-playlist-wrapper').html(xhr.responseText);
-        }
-    });
-});
-
 $('#others-text').focus(function() {
     $('input:radio[id=others]').prop('checked', true);
 });

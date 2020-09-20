@@ -17,7 +17,7 @@
     <meta name="title" content="Hanime1.me - H動漫的完美體驗">
     <title>Hanime1.me - H動漫的完美體驗</title>
     <meta name="description" 
-          content="Hanime1.me 帶給你最完美的H動漫、H動畫、成人體驗。沒有天殺的片頭廣告！">
+          content="Hanime1.me 帶給你最完美的H動漫、H動畫、成人工口的觀賞體驗，並且沒有天殺的片頭廣告！">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
