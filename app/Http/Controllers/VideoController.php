@@ -228,18 +228,18 @@ class VideoController extends Controller
     public function save(Request $request)
     {
         $user_id = request('save-user-id');
-        $foreign_id = request('save-foreign-id');
+        $video_id = request('save-video-id');
 
-        if ($save = Save::where('user_id', $user_id)->where('foreign_id', $foreign_id)->first()) {
+        if ($save = Save::where('user_id', $user_id)->where('video_id', $video_id)->first()) {
             $save->delete();
         } else {
             $save = Save::create([
                 'user_id' => $user_id,
-                'foreign_id' => $foreign_id,
+                'video_id' => $video_id,
             ]);
         }
 
-        $video = Video::find($foreign_id);
+        $video = Video::find($video_id);
 
         $desktop = '';
         $desktop .= view('video.info-desktop-save-btn', compact('video'));
@@ -257,14 +257,14 @@ class VideoController extends Controller
     public function unsave(Request $request)
     {
         $user_id = request('save-user-id');
-        $foreign_id = request('save-foreign-id');
+        $video_id = request('save-video-id');
 
-        $save = Save::where('user_id', $user_id)->where('foreign_id', $foreign_id)->first();
+        $save = Save::where('user_id', $user_id)->where('video_id', $video_id)->first();
         if ($save != null) {
             $save->delete();
         }
 
-        $video = Video::find($foreign_id);
+        $video = Video::find($video_id);
         $html = '';
         $html .= view('video.saveBtn', compact('video'));
 

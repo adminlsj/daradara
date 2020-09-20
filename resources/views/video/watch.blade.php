@@ -65,7 +65,7 @@
             <form style="display: inline-block;" class="video-save-form" action="{{ route('video.save') }}" method="POST">
               {{ csrf_field() }}
               <input name="save-user-id" type="hidden" value="{{ Auth::user()->id }}">
-              <input name="save-foreign-id" type="hidden" value="{{ $video->id }}">
+              <input name="save-video-id" type="hidden" value="{{ $video->id }}">
               @include('video.info-desktop-save-btn')
             </form>
           @endif
