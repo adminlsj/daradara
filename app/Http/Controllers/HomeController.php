@@ -22,6 +22,7 @@ use App\Mail\UserUploadVideo;
 use Redirect;
 use Spatie\Browsershot\Browsershot;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Storage;
 
 class HomeController extends Controller
 {
@@ -215,11 +216,17 @@ class HomeController extends Controller
         return Redirect::back()->withErrors('感謝您向我們提供意見或回報任何錯誤。');
     }
 
-    public function sitemap()
+    public function getSitemap()
     {
-        $videos = Video::where('cover', '!=', null)->orderBy('created_at', 'desc')->get();
-        $time = Carbon::now()->format('Y-m-d\Th:i:s').'+00:00';
-        return Response::view('layouts.sitemap', compact('videos', 'time'))->header('Content-Type', 'application/xml');
+        $sitemap = Storage::disk('local')->get('sitemap.xml');
+        $response = Response::make($sitemap);
+        $response->header('Content-Type', 'application/xml');
+        return $response;
+    }
+
+    public function setSitemap()
+    {
+        Bot::setSitemap();
     }
 
     public function tempMethod()

@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 use SteelyWing\Chinese\Chinese;
 use simplehtmldom\HtmlWeb;
 use Spatie\Browsershot\Browsershot;
+use Storage;
 
 class Bot extends Model
 {
@@ -817,6 +818,66 @@ class Bot extends Model
                 }
             }
         }
+    }
+
+    public static function setSitemap()
+    {
+        // ini_set('max_execution_time', 300);
+        // ini_set('memory_limit', '-1');
+
+        $videos = Video::where('cover', '!=', null)->orderBy('created_at', 'desc')->get();
+
+        $presets = '<?xml version="1.0" encoding="UTF-8"?>
+            <urlset
+              xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+                    http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd"
+              xmlns:video="http://www.google.com/schemas/sitemap-video/1.1"
+              xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">';
+
+        $homeMap = '
+            <url>
+              <loc>https://hanime1.me/</loc>
+              <lastmod>'.Carbon::now()->format('Y-m-d\Th:i:s').'+00:00'.'</lastmod>
+              <priority>1.00</priority>
+            </url>';
+
+        $videoMap = '';
+        foreach ($videos as $video) {
+            $single = '
+            <url>
+                <loc>https://hanime1.me/watch?v='.$video->id.'</loc>
+                <lastmod>'.$video->updated_at.'</lastmod>
+                <priority>0.90</priority>
+                <video:video>
+                   <video:thumbnail_loc>https://i.imgur.com/'.$video->imgur.'.jpg</video:thumbnail_loc>
+                   <video:title>'.htmlspecialchars($video->title).'</video:title>
+                   <video:description>'.htmlspecialchars($video->caption).'</video:description>';
+
+                   if ($video->outsource) {
+                       $single = $single.'<video:player_loc>'.htmlspecialchars($video->sd).'</video:player_loc>';
+                   } else {
+                        $single = $single.'<video:content_loc>'.htmlspecialchars($video->sd).'</video:content_loc>';
+                   }
+
+                $single = $single.'<video:view_count>'.$video->views.'</video:view_count>
+                   <video:publication_date>'.Carbon::parse($video->created_at)->format('Y-m-d\Th:i:s').'+00:00'.'</video:publication_date>
+                   <video:live>no</video:live>';
+                   foreach ($video->tags() as $tag) {
+                        $single = $single.'<video:tag>'.htmlspecialchars($tag).'</video:tag>';
+                   }
+                $single = $single.'</video:video>
+                 <image:image>
+                   <image:loc>https://i.imgur.com/'.$video->imgur.'.jpg</image:loc>
+                   <image:title>'.htmlspecialchars($video->title).'</image:title>
+                   <image:caption>'.htmlspecialchars($video->caption).'</image:caption>
+                 </image:image>
+            </url>';
+            $videoMap = $videoMap.$single;
+        }
+
+        Storage::disk('local')->put('sitemap.xml', $presets.$homeMap.$videoMap.'</urlset>');
     }
 
     public static function updateAgefans(Bot $bot)

@@ -516,15 +516,6 @@ class VideoController extends Controller
         }
     }
 
-    public function is_subscribed(String $tag)
-    {
-        $is_subscribed = false;
-        if (Auth::check() && Subscribe::where('user_id', Auth::user()->id)->where('tag', $tag)->first() != null) {
-            $is_subscribed = true;
-        }
-        return $is_subscribed;
-    }
-
     public function copyright(Request $request)
     {
         return view('video.copyright');
