@@ -14,16 +14,20 @@ class UserReport extends Mailable
 
     public $reason;
     public $video;
+    public $country_code;
+    public $ip_address;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(String $reason, Video $video)
+    public function __construct(String $reason, Video $video, String $ip_address, String $country_code)
     {
         $this->reason = $reason;
         $this->video = $video;
+        $this->ip_address = $ip_address;
+        $this->country_code = $country_code;
     }
 
     /**

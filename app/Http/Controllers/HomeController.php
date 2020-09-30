@@ -212,7 +212,9 @@ class HomeController extends Controller
             $reason = $reason.'：'.request('others-text');
         }
         $video = Video::find(request('video-id'));
-        Mail::to('laughseejapan@gmail.com')->send(new UserReport($reason, $video));
+        $ip_address = isset($_SERVER["HTTP_CF_CONNECTING_IP"]) ? $_SERVER["HTTP_CF_CONNECTING_IP"] : 'N/A';
+        $country_code = isset($_SERVER["HTTP_CF_IPCOUNTRY"]) ? $_SERVER["HTTP_CF_IPCOUNTRY"] : 'N/A';
+        Mail::to('laughseejapan@gmail.com')->send(new UserReport($reason, $video, $ip_address, $country_code));
         return Redirect::back()->withErrors('感謝您向我們提供意見或回報任何錯誤。');
     }
 
