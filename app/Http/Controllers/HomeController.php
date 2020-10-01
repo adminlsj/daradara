@@ -32,7 +32,7 @@ class HomeController extends Controller
 
         $banner = Video::find(12927);
         $count = 20;
-        $upload = Video::where('cover', '!=', null)->orderBy('id', 'desc')->limit($count)->select('id', 'title', 'cover')->get();
+        $upload = Video::where('cover', '!=', null)->whereIntegerNotInRaw('id', $excluded)->orderBy('id', 'desc')->limit($count)->select('id', 'title', 'cover')->get();
         $newest =Video::where('cover', '!=', null)->whereIntegerNotInRaw('id', $excluded)->orderBy('created_at', 'desc')->limit($count)->select('id', 'title', 'cover')->get();
         $trending = Video::where('cover', '!=', null)->whereIntegerNotInRaw('id', $excluded)->orderBy('views', 'desc')->limit($count)->select('id', 'title', 'cover')->get();
         $tag1 = Video::where('cover', '!=', null)->where('tags', 'ilike', '%巨乳%')->whereIntegerNotInRaw('id', $excluded)->inRandomOrder()->limit($count)->select('id', 'title', 'cover')->get();
