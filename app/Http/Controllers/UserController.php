@@ -175,7 +175,7 @@ class UserController extends Controller
 
             if ($url != "") {
 
-                $foreign_sd = request('foreign_sd');
+                $sd = $foreign_sd = request('foreign_sd');
                 if (strpos($foreign_sd, 'spankbang') !== false) {
                     $sd = Video::getSpankbang($foreign_sd, implode(' ', preg_split('/\s+/', request('tags'))));
                     $foreign_sd = ['spankbang' => $foreign_sd];
@@ -202,7 +202,7 @@ class UserController extends Controller
                     'outsource' => false,
                     'created_at' => Carbon::createFromFormat('Y-m-d\TH:i:s', request('created_at'))->format('Y-m-d H:i:s'),
                     'uploaded_at' => Carbon::createFromFormat('Y-m-d\TH:i:s', request('created_at'))->format('Y-m-d H:i:s'),
-                    'foreign_sd' => $foreign_sd,
+                    'foreign_sd' => $sd == $foreign_sd ? null : $foreign_sd,
                     'cover' => request('cover'),
                 ]);
 
