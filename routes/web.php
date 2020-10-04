@@ -61,7 +61,7 @@ Route::get('/loadTagList', 'VideoController@loadTagList');
 Route::get('/updateHentai', 'HomeController@updateHentai');
 Route::get('/updateYoujizz', 'BotController@updateYoujizz');
 Route::get('/updateSpankbang', 'BotController@updateSpankbang');
-Route::get('/updateSlutload', 'HomeController@updateSlutload');
+Route::get('/updateSlutload', 'BotController@updateSlutload');
 
 Route::get('/loadHomeTagList', 'HomeController@loadHomeTagList');
 Route::get('/userReport', 'HomeController@userReport')->name('email.userReport');
