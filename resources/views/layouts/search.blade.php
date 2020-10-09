@@ -31,14 +31,14 @@
 	        <h4 class="modal-title" style="text-align: center;">標籤</h4>
 	      </div>
 	      <div class="modal-body">
-	      	<!--<h5>
+	      	<h5>
 	      		廣泛配對
 		      	<label class="hentai-switch" style="float: right">
 					<input type="checkbox" name="broad" id="broad" {{ Request::get('broad') ? 'checked' : '' }}>
 					<span class="hentai-slider round"></span>
 				</label>
 			</h5>
-	        <p style="color: darkgray; padding-bottom: 15px; font-size: 12px">較多結果，較不精準。配對所有包含任何一個選擇的標籤的影片，而非全部標籤。</p>-->
+	        <p style="color: darkgray; padding-bottom: 15px; font-size: 12px">較多結果，較不精準。配對所有包含任何一個選擇的標籤的影片，而非全部標籤。</p>
 
 	        <h5 style="margin-bottom: 15px; font-weight: bold">人物設定：</h5>
 	        @foreach (App\Video::$setting as $tag)
