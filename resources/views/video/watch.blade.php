@@ -55,7 +55,7 @@
 
           <button class="no-button-style" id="comment-icon"><i style="margin-top: 6px; margin-left: 1px; font-size: 1.9em" class="material-icons">chat</i></button>
 
-          <button class="no-button-style" id="shareBtn" data-toggle="modal" data-target="#shareModal"><i style="-moz-transform: scale(-1, 1);-webkit-transform: scale(-1, 1);-o-transform: scale(-1, 1);-ms-transform: scale(-1, 1);transform: scale(-1, 1); margin-right: 3px; margin-top: 2px; margin-left: 3px; font-size: 2.3em" class="material-icons">reply</i></button>
+          <button class="no-button-style" data-toggle="modal" data-target="#shareModal"><i style="-moz-transform: scale(-1, 1);-webkit-transform: scale(-1, 1);-o-transform: scale(-1, 1);-ms-transform: scale(-1, 1);transform: scale(-1, 1); margin-right: 3px; margin-top: 2px; margin-left: 3px; font-size: 2.3em" class="material-icons">reply</i></button>
 
           @if (!Auth::check())
             <div data-toggle="modal" data-target="#signUpModal" style="text-decoration: none; color: inherit; display: inline-block;" class="single-icon-wrapper">
@@ -81,7 +81,7 @@
   <div class="hidden-sm hidden-md hidden-lg" style="position: relative; text-align: center;">
     <img style="width: 40%; margin-top: 70px; box-shadow: 3px 3px 10px black;" src="{{ $video->cover }}">
     <div style="text-align: center; color: white; margin-top: 15px;">
-      <h1 style="font-size: 22px; font-weight: bold; margin: 0; padding: 0 4%; line-height: 30px">{{ $video->translations['JP'] }}</h1>
+      <h1 id="shareBtn-title" style="font-size: 22px; font-weight: bold; margin: 0; padding: 0 4%; line-height: 30px">{{ $video->translations['JP'] }}</h1>
       <div style="width: 92%; margin-top: 18px;">
         <div data-toggle="modal" data-target="#playModal" style="cursor: pointer; font-size: 14px; border-radius: 3px; text-decoration: none; background-color: red; color: black; color: white; margin-left: 4%; padding: 5px 0" class="btn-block play-btn"><span style="vertical-align: middle; font-size: 2em; margin-top: -3px; padding-right: 3px; color: white;" class="material-icons">play_arrow</span>播放</div>
       </div>
