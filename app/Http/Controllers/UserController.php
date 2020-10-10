@@ -223,19 +223,6 @@ class UserController extends Controller
                     }
                 }
 
-                foreach ($video->tags() as $tag) {
-                    $subscribes = Subscribe::where('tag', $tag)->get();
-                    foreach ($subscribes as $subscribe) {
-                        if (!in_array($subscribe->user()->id, $userArray)) {
-                            $user = $subscribe->user();
-                            if (strpos($user->alert, 'subscribe') === false) {
-                                $user->alert = $user->alert."subscribe";
-                                $user->save();
-                            }
-                        }
-                    }
-                }
-
                 // SendSubscriptionEmail::dispatch($video);
 
                 return Redirect::route('video.watch', ['v' => $video->id]);

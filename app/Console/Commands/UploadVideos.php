@@ -39,7 +39,7 @@ class UploadVideos extends Command
      */
     public function handle()
     {
-        $bots = Bot::all();
+        $bots = Bot::where('temp', null)->get();
         foreach ($bots as $bot) {
             switch (str_ireplace('www.', '', parse_url($bot->data['source'], PHP_URL_HOST))) {
                 case 'youtube.com':

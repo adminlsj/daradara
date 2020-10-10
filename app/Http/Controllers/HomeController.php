@@ -83,19 +83,19 @@ class HomeController extends Controller
         }
 
         if ($tags = $request->tags) {
-            //if ($request->broad) {
+            if ($request->broad) {
                 $videos = $videos->where(function($query) use ($tags) {
                     foreach ($tags as $tag) {
                         $query->orWhere('tags', 'ilike', $tag.'%')->orWhere('tags', 'ilike', '% '.$tag.' %');
                     }
                 });
-            /* } else {
-                $videos = $videos->where(function($query) use ($tags) {
-                    foreach ($tags as $tag) {
-                        $query->where('tags', 'ilike', '%'.$tag.'%');
-                    }
-                });
-            } */
+            } else {
+                foreach ($tags as $tag) {
+                    $videos = $videos->where(function($query) use ($tag) {
+                        $query->orWhere('tags', 'ilike', $tag.'%')->orWhere('tags', 'ilike', '% '.$tag.' %');
+                    });
+                }
+            }
         }
 
         if ($brands = $request->brands) {
@@ -184,6 +184,20 @@ class HomeController extends Controller
 
     public function terms()
     {
+        /* $requests = Browsershot::url('https://www.eporner.com/video-VGtg33oz99l/karde-im-emziriyor-yan-mama-2/')
+            ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
+            ->triggeredRequests();
+        foreach ($requests as $request) {
+            if (strpos($request['url'], 'https://www.eporner.com/xhr/video/') !== false && strpos($request['url'], 'mp4') !== false) {
+                $curl_connection = curl_init($request['url']);
+                curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+                curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+                $data = json_decode(curl_exec($curl_connection), true);
+                curl_close($curl_connection);
+                return $data['sources']['mp4']['1080p HD']['src'];
+            }
+        } */
         return view('layouts.terms');
     }
 

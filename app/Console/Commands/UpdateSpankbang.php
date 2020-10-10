@@ -47,7 +47,7 @@ class UpdateSpankbang extends Command
             foreach ($requests as $request) {
                 if (strpos($request['url'], 'https://vdownload') !== false && strpos($request['url'], '.mp4') !== false) {
                     if (strpos($video->tags, ' 1080p ') !== false) {
-                        $video->sd = str_replace('720p', '1080p', $request['url']);
+                        $video->sd = str_replace('-720p', '-1080p', $request['url']);
                     } else {
                         $video->sd = $request['url'];
                     }
