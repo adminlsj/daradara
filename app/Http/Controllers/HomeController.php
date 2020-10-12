@@ -248,8 +248,11 @@ class HomeController extends Controller
     {
         $videos = Video::where('cover', '!=', null)->get();
         foreach ($videos as $video) {
-            $video->views = 0;
-            $video->save();
+            $views = $video->data['views']['total'];
+            if ($views != null) {
+                $video->views = end($views);
+                $video->save();
+            }
         }
     }
 
