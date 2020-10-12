@@ -1,6 +1,6 @@
 <button id="info-mobile-save-btn" class="single-icon-wrapper no-button-style" method="POST">
   	<div class="single-icon no-select">
-  		@if (Auth::check() && App\Save::where('user_id', auth()->user()->id)->where('video_id', $video->id)->first())
+  		@if (Auth::check() && $video->saves->where('user_id', Auth::user()->id)->first())
   			<i class="material-icons">done</i>
 		    <div>已儲存</div>
 		@else

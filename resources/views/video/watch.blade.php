@@ -46,7 +46,7 @@
             <form style="display: inline-block;" class="video-like-form" action="{{ route('video.like') }}" method="POST">
               {{ csrf_field() }}
               <input name="like-user-id" type="hidden" value="{{ Auth::user()->id }}">
-              <input name="like-type" type="hidden" value="video">
+              <input name="like-foreign-type" type="hidden" value="video">
               <input name="like-foreign-id" type="hidden" value="{{ $video->id }}">
               <input name="like-is-positive" type="hidden" value="{{ true }}">
               @include('video.info-desktop-like-btn')
@@ -59,7 +59,7 @@
 
           @if (!Auth::check())
             <div data-toggle="modal" data-target="#signUpModal" style="text-decoration: none; color: inherit; display: inline-block;" class="single-icon-wrapper">
-              <button id="info-desktop-save-btn" class="no-button-style" type="submit"><i style="margin-top: -1px; margin-left: 0px; font-size: 2.3em" class="material-icons">add</i></button>
+              <button id="info-desktop-save-btn" class="no-button-style" type="submit"><i style="margin-top: -1px; margin-left: 0px; font-size: 2.3em" class="material-icons" title="加入我的清單">add</i></button>
             </div>
           @else
             <form style="display: inline-block;" class="video-save-form" action="{{ route('video.save') }}" method="POST">
@@ -107,7 +107,7 @@
             <form class="video-like-form" action="{{ route('video.like') }}" method="POST">
               {{ csrf_field() }}
               <input name="like-user-id" type="hidden" value="{{ Auth::user()->id }}">
-              <input name="like-type" type="hidden" value="video">
+              <input name="like-foreign-type" type="hidden" value="video">
               <input name="like-foreign-id" type="hidden" value="{{ $video->id }}">
               <input name="like-is-positive" type="hidden" value="{{ true }}">
               @include('video.info-mobile-like-btn')

@@ -28,20 +28,19 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
+        $banner = Video::find(13654);
         $excluded = Video::getExcludedIds();
-
-        $banner = Video::find(12927);
         $count = 20;
-        $upload = Video::where('cover', '!=', null)->whereIntegerNotInRaw('id', $excluded)->orderBy('id', 'desc')->limit($count)->select('id', 'title', 'cover')->get();
-        $newest =Video::where('cover', '!=', null)->whereIntegerNotInRaw('id', $excluded)->orderBy('created_at', 'desc')->limit($count)->select('id', 'title', 'cover')->get();
-        $trending = Video::where('cover', '!=', null)->whereIntegerNotInRaw('id', $excluded)->orderBy('views', 'desc')->limit($count)->select('id', 'title', 'cover')->get();
-        $tag1 = Video::where('cover', '!=', null)->where('tags', 'ilike', '%巨乳%')->whereIntegerNotInRaw('id', $excluded)->inRandomOrder()->limit($count)->select('id', 'title', 'cover')->get();
-        $tag2 = Video::where('cover', '!=', null)->where('tags', 'ilike', '%貧乳%')->whereIntegerNotInRaw('id', $excluded)->inRandomOrder()->limit($count)->select('id', 'title', 'cover')->get();
-        $tag3 = Video::where('cover', '!=', null)->where('tags', 'ilike', '%肛交%')->whereIntegerNotInRaw('id', $excluded)->inRandomOrder()->limit($count)->select('id', 'title', 'cover')->get();
-        $tag4 = Video::where(function($query) {
-            $query->orWhere('tags', 'like', '%扶他%')->orWhere('tags', 'like', '%偽娘%')->orWhere('tags', 'like', '%耽美%');
-        })->where('cover', '!=', null)->whereIntegerNotInRaw('id', $excluded)->inRandomOrder()->limit($count)->select('id', 'title', 'cover')->get();
-        $tag5 = Video::where('cover', '!=', null)->whereIntegerNotInRaw('id', $excluded)->inRandomOrder()->limit($count)->select('id', 'title', 'cover')->get();
+
+        $upload = Video::whereOrderBy('id', $excluded, $count)->get();
+        $newest = Video::whereOrderBy('created_at', $excluded, $count)->get();
+        $trending = Video::whereOrderBy('views', $excluded, $count)->get();
+
+        $tag1 = Video::whereHasTags(['巨乳'], $excluded, $count)->get();
+        $tag2 = Video::whereHasTags(['貧乳'], $excluded, $count)->get();
+        $tag3 = Video::whereHasTags(['肛交'], $excluded, $count)->get();
+        $tag4 = Video::whereHasTags(['扶他', '偽娘', '耽美'], $excluded, $count)->get();
+        $tag5 = Video::whereHasTags([''], $excluded, $count)->get();
 
         $rows = [
             '最新上傳' => ['videos' => $upload, 'link' => '/search?query=&sort=最新上傳'], 
@@ -153,7 +152,7 @@ class HomeController extends Controller
 
     public function list()
     {
-        $videos = Video::whereIntegerInRaw('id', Auth::user()->saves->pluck('video_id'))->orderBy('created_at', 'desc')->select('id', 'title', 'cover')->get();
+        $videos = Video::where('cover', '!=', null)->whereIntegerInRaw('id', Auth::user()->saves->pluck('video_id'))->orderBy('created_at', 'desc')->select('id', 'title', 'cover')->get();
         return view('layouts.list', compact('videos'));
     }
 

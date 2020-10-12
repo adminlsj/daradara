@@ -52,27 +52,7 @@ class Video extends Model
     ];
 
     public static $hentai_brands = [
-        '妄想実現めでぃあ', 'メリー・ジェーン', 'ピンクパイナップル', 'ばにぃうぉ～か～', 'Queen Bee', 'PoRO', 'せるふぃっしゅ', '鈴木みら乃', 'ショーテン', 'GOLD BEAR', 'ZIZ', 'EDGE', 'Collaboration Works', 'BOOTLEG', 'BOMB!CUTE!BOMB!', 'nur', 'あんてきぬすっ', '魔人', 'ルネ', 'Princess Sugar', 'パシュミナ', 'WHITE BEAR', 'AniMan', 'chippai', 'トップマーシャル', 'erozuki', 'サークルトリビュート', 'spermation', 'Milky', 'King Bee'
-    ];
-
-    public static $tags = [
-        '正版動漫', '同人動畫', '動漫講評', '明星', '日本人氣YouTuber', '日本創意廣告', '日劇講評'
-    ];
-
-    public static $genres = [
-        '動畫卡通' => 'anime', '綜藝頻道' => 'variety', '明星專區' => 'artist', '迷因翻譯' => 'meme'
-    ];
-
-    public static $content = [
-        'anime' => ['動漫', '動畫', '動漫講評', 'MAD·AMV'], 'aninews' => ['動漫情報'], 'variety' => ['綜藝'], 'artist' => ['明星', '日劇'], 'meme' => ['迷因'], 'daily' => ['生活']
-    ];
-
-    public static $titles = [
-        'anime' => '動漫', 'aninews' => '情報', 'variety' => '綜藝', 'artist' => '明星', 'meme' => '迷因', 'daily' => '生活'
-    ];
-
-    public static $tagsArray = [
-        'anime' => ['正版動漫', 'anime1', '同人動畫', '原創動畫', '動漫講評', 'MAD·AMV'], 'aninews' => ['新番情報', '劇場版', '聲優', '動漫講評', '動漫新聞', 'Cosplay'], 'variety' => ['嵐Arashi', '貴婦松子Deluxe', 'Downtown', '倫敦靴子1號2號', '有吉弘行', 'RunningMan'], 'artist' => ['明星', 'Gimy劇迷', '佐藤健', '石原聰美', '新垣結衣', '木村拓哉', '綾瀨遙', '劉在錫'], 'meme' => ['日本人氣YouTuber', '日本創意廣告', '搞笑影片', '綜藝剪輯'], 'daily' => ['新聞資訊', '流行速報', '日本旅遊', '日本美食', '日本房產']
+        '妄想実現めでぃあ', 'メリー・ジェーン', 'ピンクパイナップル', 'ばにぃうぉ～か～', 'Queen Bee', 'PoRO', 'せるふぃっしゅ', '鈴木みら乃', 'ショーテン', 'GOLD BEAR', 'ZIZ', 'EDGE', 'Collaboration Works', 'BOOTLEG', 'BOMB!CUTE!BOMB!', 'nur', 'あんてきぬすっ', '魔人', 'ルネ', 'Princess Sugar', 'パシュミナ', 'WHITE BEAR', 'AniMan', 'chippai', 'トップマーシャル', 'erozuki', 'サークルトリビュート', 'spermation', 'Milky', 'King Bee', 'PashminaA', 'じゅうしぃまんご～', 'Hills'
     ];
 
     public function user()
@@ -102,7 +82,12 @@ class Video extends Model
 
     public function likes()
     {
-        return Like::where('type', 'video')->where('foreign_id', $this->id)->orderBy('created_at', 'desc')->get();
+        return $this->morphMany('App\Like', 'foreign');
+    }
+
+    public function saves()
+    {
+        return $this->hasMany('App\Save');
     }
 
     public static function getSpankbang(String $url, String $tags)
@@ -128,18 +113,6 @@ class Video extends Model
             ->bodyHtml();
         $start = explode('<source src="', $html);
         return html_entity_decode("https:".explode('" title="' , $start[1])[0]);
-    }
-
-    public static function getSlutload(String $url)
-    {
-        $requests = Browsershot::url($url)
-            ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
-            ->triggeredRequests();
-        foreach ($requests as $request) {
-            if (strpos($request['url'], 'https://v-rn.slutload-media.com/') !== false) {
-                return $request['url'];
-            }
-        }
     }
 
     public static function tagSubscribeFirst(Subscribe $subscribe)
@@ -210,85 +183,6 @@ class Video extends Model
         return "https://i.imgur.com/".$this->imgur."h.jpg";
     }
 
-    public function source()
-    {
-        $sd = $this->sd()[0];
-        if (strpos($sd, 'instagram.com') !== false) {
-            return Video::getSourceIG($sd);
-        } elseif (strpos($sd, 'player.bilibili.com') !== false) {
-            return Video::getMobileBB($sd);
-        } else {
-            return $sd;
-        }
-    }
-
-    public function outsource()
-    {
-        $sd = $this->sd()[0];
-        if (strpos($sd, '?') !== false) {
-            return $sd.'&danmaku=0&qn=0&type=mp4&otype=json&fnver=0&fnval=1&platform=html5&html5=1&high_quality=1&autoplay=1';
-        } else {
-            return $sd.'?danmaku=0&qn=0&type=mp4&otype=json&fnver=0&fnval=1&platform=html5&html5=1&high_quality=1&autoplay=1';;
-        }
-    }
-
-    public function sd()
-    {
-        if (strpos($this->sd, "spankbang.com") !== FALSE) {
-            $curl_connection = curl_init();
-            curl_setopt($curl_connection, CURLOPT_URL, $this->sd);
-            curl_setopt($curl_connection, CURLOPT_FOLLOWLOCATION, true); // follow the redirects
-            curl_setopt($curl_connection, CURLOPT_NOBODY, true); // get the resource without a body
-            curl_exec($curl_connection);
-            $redirect = curl_getinfo($curl_connection, CURLINFO_EFFECTIVE_URL);
-            curl_close($curl_connection);
-            return str_replace('720p', '1080p', $redirect);
-            
-        } else {
-            return $this->sd;
-        }
-    }
-
-    public static function setPlayerConfig($video, $country_code, $is_mobile, &$outsource, &$sd)
-    {
-        if ($video->foreign_sd && array_key_exists($country_code, $video->foreign_sd)) {
-            $outsource = true;
-            $sd = $video->foreign_sd[$country_code];
-            if ($is_mobile && strpos($sd, "player.bilibili.com") !== FALSE) {
-                $sd = urldecode(str_replace('https://www.agefans.tv/age/player/ckx1/?url=', '', $video->sd));
-            }
-
-        } elseif (strpos($sd, "agefans.tv") !== FALSE) {
-            $outsource = false;
-            $sd = urldecode(str_replace('https://www.agefans.tv/age/player/ckx1/?url=', '', $video->sd));
-        
-        } elseif (strpos($sd, "spankbang.com") !== FALSE) {
-            $outsource = false;
-            $curl_connection = curl_init();
-            curl_setopt($curl_connection, CURLOPT_URL, $sd);
-            curl_setopt($curl_connection, CURLOPT_FOLLOWLOCATION, true); // follow the redirects
-            curl_setopt($curl_connection, CURLOPT_NOBODY, true); // get the resource without a body
-            curl_exec($curl_connection);
-            $redirect = curl_getinfo($curl_connection, CURLINFO_EFFECTIVE_URL);
-            curl_close($curl_connection);
-            $sd = str_replace('720p', '1080p', $redirect);
-        }
-
-        $bilibili = strpos($sd, "player.bilibili.com") !== FALSE;
-        if (!$outsource && $bilibili || $is_mobile && $bilibili) {
-            $outsource = false;
-            $sd = Video::getMobileBB($sd);
-        }
-
-        if ($outsource) {
-            if (strpos($sd, '?') !== false) {
-                $sd = $sd.'&danmaku=0&qn=0&type=mp4&otype=json&fnver=0&fnval=1&platform=html5&html5=1&high_quality=1&autoplay=1';
-            } else {
-                $sd = $sd.'?danmaku=0&qn=0&type=mp4&otype=json&fnver=0&fnval=1&platform=html5&html5=1&high_quality=1&autoplay=1';;
-            }
-        }
-    }
-
     static function get_string_between($string, $start, $end){
         $string = ' ' . $string;
         $ini = strpos($string, $start);
@@ -302,5 +196,27 @@ class Video extends Model
     {
         $bot = Bot::where('temp', 'exclude')->first();
         return $bot->data['videos'];
+    }
+
+    public function scopeWhereHasTags($query, $tags, $excluded, $count)
+    {
+        return $query->where(function($query) use ($tags) {
+            foreach ($tags as $tag) {
+                $query->orWhere('tags', 'like', '%'.$tag.'%');
+            }
+        })->where('cover', '!=', null)
+          ->whereIntegerNotInRaw('id', $excluded)
+          ->select('id', 'title', 'cover')      
+          ->inRandomOrder()
+          ->limit($count);
+    }
+
+    public function scopeWhereOrderBy($query, $order, $excluded, $count)
+    {
+        return $query->orderBy($order, 'desc')
+                     ->where('cover', '!=', null)
+                     ->whereIntegerNotInRaw('id', $excluded)
+                     ->select('id', 'title', 'cover')      
+                     ->limit($count);
     }
 }
