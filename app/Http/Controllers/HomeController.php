@@ -246,7 +246,11 @@ class HomeController extends Controller
 
     public function tempMethod()
     {
-
+        $videos = Video::where('cover', '!=', null)->get();
+        foreach ($videos as $video) {
+            $video->views = 0;
+            $video->save();
+        }
     }
 
     public function setExcludedIds()
