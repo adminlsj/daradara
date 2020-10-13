@@ -57,7 +57,7 @@
 		@foreach ($rows as $title => $data)
 			<a style="text-decoration: none;" href="{{ $data['link'] }}"><h3>{{ $title }}</h3></a>
 			<div style="position: relative;">
-				<div class="hidden-xs hidden-sm no-select navigate-before-btn" style="background-color: rgba(0, 0, 0, .7); height: 100%; width: calc(4% + 1px); position: absolute; top: 0; left: 0; cursor: pointer; z-index: 1; display: none;">
+				<div class="hidden-xs hidden-sm no-select navigate-before-btn" style="background-color: rgba(0, 0, 0, .7); height: 100%; width: calc(4% + 0px); position: absolute; top: 0; left: 0; cursor: pointer; z-index: 1; display: none;">
 					<span class="material-icons" style="font-size: 50px; color: white; margin: 0; position: absolute; top: 50%; left: 50%; -ms-transform: translate(-50%, -50%); transform: translate(-50%, -50%);">navigate_before</span>
 				</div>
 				<div class="home-rows-videos-wrapper no-scrollbar-style">
