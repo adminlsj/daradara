@@ -29,6 +29,21 @@ $('#broad').change(function(){
   }
 });
 
+$('.navigate-next-btn').click(function() {
+  var row = $(this).prev();
+  var rowWidth = row.width();
+  var pos = row.scrollLeft() + rowWidth;
+  row.animate({scrollLeft: pos}, 600);
+  $(this).prev().prev().css('display', 'block');
+})
+
+$('.navigate-before-btn').click(function() {
+  var row = $(this).next();
+  var rowWidth = row.width();
+  var pos = row.scrollLeft() - rowWidth;
+  row.animate({scrollLeft: pos + 1}, 600);
+})
+
 $(".upload-image-btn").on("change", function() {
   var fileName = $('#image').val().split("\\").pop();
   $('#file-text').val(fileName);
