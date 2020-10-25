@@ -186,6 +186,10 @@
   </div>
 </div>
 
+<div class="watch-exoclick-wrapper">
+  @include('layouts.exoclick')
+</div>
+
 @include('layouts.nav-bottom')
 @if (!Auth::check())
   @include('user.signUpModal')
