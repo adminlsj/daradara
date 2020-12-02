@@ -12,6 +12,7 @@ class UserReport extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $email;
     public $reason;
     public $video;
     public $country_code;
@@ -22,8 +23,9 @@ class UserReport extends Mailable
      *
      * @return void
      */
-    public function __construct(String $reason, Video $video, String $ip_address, String $country_code)
+    public function __construct(String $email, String $reason, Video $video, String $ip_address, String $country_code)
     {
+        $this->email = $email;
         $this->reason = $reason;
         $this->video = $video;
         $this->ip_address = $ip_address;

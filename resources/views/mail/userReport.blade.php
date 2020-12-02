@@ -8,6 +8,7 @@
 <div><span style="font-weight: 600">reason: </span>{{ $reason }}</div>
 <div><span style="font-weight: 600">country code: </span>{{ $country_code }}</div>
 <div><span style="font-weight: 600">ip address: </span>{{ $ip_address }}</div>
+<div><span style="font-weight: 600">email: </span>{{ $email }}</div>
 <div><span style="font-weight: 600">time: </span>{{ Carbon\Carbon::now()->addHours(8)->format('Y-m-d H:i:s') }}</div>
 <div><span style="font-weight: 600">link: </span>{{ route('video.watch') }}?v={{ $video->id }}</div>
 <div><span style="font-weight: 600">sd: </span>{{ $video->sd }}</div>
