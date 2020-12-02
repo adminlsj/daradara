@@ -220,7 +220,7 @@ class HomeController extends Controller
         $request->validate([
             'userReportReason' => 'required'
         ]);
-        $email = request('report-email');
+        $email = request('report-email') == null ? '' : request('report-email');
         $reason = request('userReportReason');
         if ($reason == '其他原因') {
             $reason = $reason.'：'.request('others-text');

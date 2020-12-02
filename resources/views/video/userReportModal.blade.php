@@ -40,7 +40,7 @@
           <div style="margin-top: 5px;" class="form-check">
             <div>我們會透過電郵告知您相關問題的進度：</div>
             <label style="font-weight: 400; margin-top: 10px;" class="form-check-label" for="report-email">
-              <input style="width: 280px;" type="text" class="form-control-plaintext" name="report-email" id="report-email" value="{{ Auth::check() ? Auth::user()->email : '' }}" placeholder="電郵地址" required>
+              <input style="width: 280px;" type="text" class="form-control-plaintext" name="report-email" id="report-email" value="{{ Auth::check() ? Auth::user()->email : '' }}" placeholder="電郵地址">
             </label>
           </div>
           
