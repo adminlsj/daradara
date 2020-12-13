@@ -21,7 +21,7 @@ class VideoController extends Controller
 {
     public function watch(Request $request){
         $vid = $request->v;
-        if (is_numeric($vid) && $video = Video::with('user:id,name', 'likes:id,foreign_id,user_id', 'saves:id,user_id,video_id')->select('id', 'user_id', 'playlist_id', 'title', 'translations', 'caption', 'cover', 'tags', 'imgur', 'sd', 'views')->find($request->v)) {
+        if (is_numeric($vid) && $video = Video::with('user:id,name', 'likes:id,foreign_id,user_id', 'saves:id,user_id,video_id')->select('id', 'user_id', 'playlist_id', 'title', 'translations', 'caption', 'cover', 'tags', 'imgur', 'sd', 'views', 'outsource')->find($request->v)) {
 
             $excluded = Video::getExcludedIds();
 

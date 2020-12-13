@@ -3,8 +3,8 @@
     <div class="modal-content">
 
       @if ($video->outsource)
-        <div style="background-color: black; background-image: url('https://i.imgur.com/wgOXAy6.gif'); background-position: center; background-repeat: no-repeat; background-size: 50px; height: 100%;">
-            <iframe src="{!! $video->sd !!}" style="border: 0; overflow: hidden; height: 100%; width: 100%" allowfullscreen></iframe>
+        <div style="background-color: black; background-image: url('https://i.imgur.com/wgOXAy6.gif'); background-position: center; background-repeat: no-repeat; background-size: 50px; position: relative; width: 100%; height: 0; padding-bottom: 56.25%;">
+            <iframe src="{!! $video->sd !!}" style="border: 0; overflow: hidden; position: absolute; width: 100%; height: 100%; left: 0; top: 0;" allowfullscreen></iframe>
         </div>
 
       @else
