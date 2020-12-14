@@ -26,6 +26,38 @@ use Storage;
 
 class HomeController extends Controller
 {
+    public function tempMethod(Request $request)
+    {   
+        $videos = Video::where('sd', 'ilike', 'https://www.bilibili.com/video/%')->where('sd', 'not like', "% %")->orderBy('id', 'desc')->get();
+        foreach ($videos as $video) {
+            $bvid = str_replace('https://www.bilibili.com/video/', '', strtok($video->sd, '?'));
+
+            $queries = parse_url($video->sd, PHP_URL_QUERY);
+            $queriesArray = [];
+            parse_str($queries, $queriesArray);
+            $page = $queriesArray == [] ? 1 : trim($queriesArray['p']);
+
+            $api = 'https://api.bilibili.com/x/web-interface/view?bvid='.$bvid;
+            $curl_connection = curl_init($api);
+            curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+            curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($curl_connection, CURLOPT_HTTPHEADER, [
+                'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:56.0) Gecko/20100101 Firefox/56.0',
+                'Host: api.bilibili.com',
+                'Cookie: SESSDATA=33c1bfb1%2C1606096573%2C4f954*51;'
+            ]);
+            $data = json_decode(curl_exec($curl_connection), true);
+            curl_close($curl_connection);
+
+            $avid = $data['data']['aid'];
+            $cid = $data['data']['pages'][$page - 1]['cid'];
+            $video->sd = '//player.bilibili.com/player.html?aid='.$avid.'&bvid='.$bvid.'&cid='.$cid.'&page='.$page;
+            $video->outsource = false;
+            $video->save();
+        }
+    }
+
     public function index(Request $request)
     {
         $banner = Video::find(13654);
@@ -243,18 +275,6 @@ class HomeController extends Controller
     public function setSitemap()
     {
         Bot::setSitemap();
-    }
-
-    public function tempMethod()
-    {
-        $videos = Video::where('cover', '!=', null)->get();
-        foreach ($videos as $video) {
-            $views = $video->data['views']['total'];
-            if ($views != null) {
-                $video->views = end($views);
-                $video->save();
-            }
-        }
     }
 
     public function setExcludedIds()
