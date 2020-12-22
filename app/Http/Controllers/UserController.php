@@ -206,23 +206,6 @@ class UserController extends Controller
                     'cover' => request('cover'),
                 ]);
 
-                $userArray = [];
-                if ($video->playlist_id != '') {
-                    $watch = $video->watch;
-                    $watch->updated_at = $video->uploaded_at;
-                    $watch->save();
-
-                    $subscribes = $watch->subscribes;
-                    foreach ($subscribes as $subscribe) {
-                        $user = $subscribe->user;
-                        if (strpos($user->alert, 'subscribe') === false) {
-                            $user->alert = $user->alert."subscribe";
-                            $user->save();
-                        }
-                        array_push($userArray, $user->id);
-                    }
-                }
-
                 // SendSubscriptionEmail::dispatch($video);
 
                 return Redirect::route('video.watch', ['v' => $video->id]);
