@@ -5,6 +5,11 @@
       <div style="padding: 15px;" class="modal-content">
         <div style="border: 0px;" class="modal-header">
           <h4 style="color: gray;font-weight: 100; transform: rotate(45deg);position: absolute; font-size: 3em; top: 5px; cursor: pointer;" class="no-select" data-dismiss="modal">+</h4>
+          @if ($country_code == 'CN' || $country_code == 'MY')
+            <div style="padding: 15px 15px; color: maroon; background-color: pink; border: 1px solid lightpink; border-radius: 4px; margin-top: 40px; margin-bottom: -20px">
+              由於您身處的地區限制訪問色情網站，請安裝VPN翻牆工具，以便影片正常播放。
+            </div>
+          @endif
           <h4 style="color: #3F3F3F; margin-bottom: 0px; margin-top: 40px; font-size: 1.7em" class="modal-title" id="reportModalLabel">無法觀看這部影片嗎？</h4>
         </div>
         <div style="color: #3F3F3F; margin-top: -15px; font-weight: 500; font-size: 1.1em" class="modal-body">

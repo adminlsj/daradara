@@ -43,7 +43,9 @@ class VideoController extends Controller
             $video->views++;
             $video->save();
 
-            return view('video.watch', compact('video', 'videos', 'recommends', 'tags'));
+            $country_code = isset($_SERVER["HTTP_CF_IPCOUNTRY"]) ? $_SERVER["HTTP_CF_IPCOUNTRY"] : 'N/A';
+
+            return view('video.watch', compact('video', 'videos', 'recommends', 'tags', 'country_code'));
         }
     }
 
