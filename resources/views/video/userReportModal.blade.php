@@ -5,7 +5,7 @@
       <div style="padding: 15px;" class="modal-content">
         <div style="border: 0px;" class="modal-header">
           <h4 style="color: gray;font-weight: 100; transform: rotate(45deg);position: absolute; font-size: 3em; top: 5px; cursor: pointer;" class="no-select" data-dismiss="modal">+</h4>
-          @if ($country_code == 'CN' || $country_code == 'MY')
+          @if ($country_code == 'CN' || $country_code == 'MY' || $country_code == 'ZA')
             <div style="padding: 15px 15px; color: maroon; background-color: pink; border: 1px solid lightpink; border-radius: 4px; margin-top: 40px; margin-bottom: -20px">
               由於您身處的地區限制訪問色情網站，請安裝VPN翻牆工具，以便影片正常播放。
             </div>
