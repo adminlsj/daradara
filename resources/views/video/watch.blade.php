@@ -175,9 +175,11 @@
           </a>
         @endforeach
       </div>
-      <div class="hidden-xs hidden-sm no-select navigate-next-btn" style="background-color: rgba(0, 0, 0, .7); height: 100%; width: calc(4% + 2px); position: absolute; top: 0; right: 0; cursor: pointer; z-index: 1">
-        <span class="material-icons" style="font-size: 50px; color: white; margin: 0; position: absolute; top: 50%; left: 50%; -ms-transform: translate(-50%, -50%); transform: translate(-50%, -50%);">navigate_next</span>
-      </div>
+      @if ($videos->count() > 6)
+        <div class="hidden-xs hidden-sm no-select navigate-next-btn" style="background-color: rgba(0, 0, 0, .7); height: 100%; width: calc(4% + 2px); position: absolute; top: 0; right: 0; cursor: pointer; z-index: 1">
+          <span class="material-icons" style="font-size: 50px; color: white; margin: 0; position: absolute; top: 50%; left: 50%; -ms-transform: translate(-50%, -50%); transform: translate(-50%, -50%);">navigate_next</span>
+        </div>
+      @endif
     </div>
 
     <h3>相關推薦</h3>
