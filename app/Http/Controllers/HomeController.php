@@ -210,7 +210,7 @@ class HomeController extends Controller
         $video = Video::find(request('video-id'));
         $ip_address = isset($_SERVER["HTTP_CF_CONNECTING_IP"]) ? $_SERVER["HTTP_CF_CONNECTING_IP"] : 'N/A';
         $country_code = isset($_SERVER["HTTP_CF_IPCOUNTRY"]) ? $_SERVER["HTTP_CF_IPCOUNTRY"] : 'N/A';
-        if ($ip_address == '106.38.121.194') {
+        if ($ip_address == '106.38.121.194' || $ip_address == '223.104.65.11') {
             return 'error';
         } else {
             Mail::to('laughseejapan@gmail.com')->send(new UserReport($email, $reason, $video, $ip_address, $country_code));
