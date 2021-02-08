@@ -33,7 +33,7 @@
       </div>
 
       <div style="margin-top: -10px; margin-bottom: -11px">
-        @if (strpos($video->sd, 'avbebe.com') !== false)
+        @if (strpos($video->sd, 'avbebe.com') !== false && $video->outsource == false)
           <a href="{{ $video->sd }}" target="_blank">
             <div style="display: inline-block; padding: 10px 30px 7px 20px;" class="hover-opacity-all home-banner-btn home-banner-play-btn play-btn"><span style="vertical-align: middle; font-size: 2em; margin-top: -4px; padding-right: 5px;" class="material-icons">play_arrow</span>播放</div>
           </a>
