@@ -115,7 +115,7 @@ class HomeController extends Controller
                 break;
 
             case '最新上傳':
-                $videos = $videos->orderBy('id', 'desc');
+                $videos = $videos->orderBy('id', 'desc')->where('imgur', '!=', 'CJ5svNv');
                 break;
 
             case '觀看次數':
