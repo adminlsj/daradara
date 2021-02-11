@@ -37,7 +37,7 @@ class VideoController extends Controller
                 foreach ($tags as $tag) {
                     $query->orWhere('tags', 'ilike', '%'.$tag.'%');
                 }
-            })->whereIntegerNotInRaw('id', $videos->pluck('id'))->whereIntegerNotInRaw('id', $excluded)->where('cover', '!=', null)->select('id', 'title', 'cover')->inRandomOrder()->limit(42)->get();
+            })->whereIntegerNotInRaw('id', $videos->pluck('id'))->whereIntegerNotInRaw('id', $excluded)->where('cover', '!=', null)->where('imgur', '!=', 'CJ5svNv')->select('id', 'title', 'cover')->inRandomOrder()->limit(42)->get();
 
             $video->current_views++;
             $video->views++;
