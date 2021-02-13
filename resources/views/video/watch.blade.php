@@ -12,7 +12,7 @@
 @section('content')
 <div id="content-div">
 
-  @if (!array_key_exists('redirect', $video->foreign_sd))
+  @if ($video->foreign_sd == null || !array_key_exists('redirect', $video->foreign_sd))
     @include('video.playModal')
   @endif
   @include('video.userReportModal')
@@ -35,7 +35,7 @@
       </div>
 
       <div style="margin-top: -10px; margin-bottom: -11px">
-        @if (array_key_exists('redirect', $video->foreign_sd))
+        @if ($video->foreign_sd != null && array_key_exists('redirect', $video->foreign_sd))
           <a href="https://www.laughseejapan.com/watch?v={{ $video->id }}" target="_blank">
             <div style="display: inline-block; padding: 10px 30px 7px 20px;" class="hover-opacity-all home-banner-btn home-banner-play-btn play-btn"><span style="vertical-align: middle; font-size: 2em; margin-top: -4px; padding-right: 5px;" class="material-icons">play_arrow</span>播放</div>
           </a>
@@ -92,7 +92,7 @@
     <div style="text-align: center; color: white; margin-top: 15px;">
       <h1 id="shareBtn-title" style="font-size: 22px; font-weight: bold; margin: 0; padding: 0 4%; line-height: 30px">{{ $video->translations['JP'] }}</h1>
       <div style="width: 92%; margin-top: 18px;">
-        @if (array_key_exists('redirect', $video->foreign_sd))
+        @if ($video->foreign_sd != null && array_key_exists('redirect', $video->foreign_sd))
           <a href="https://www.laughseejapan.com/watch?v={{ $video->id }}" target="_blank">
             <div style="cursor: pointer; font-size: 14px; border-radius: 3px; text-decoration: none; background-color: red; color: black; color: white; margin-left: 4%; padding: 5px 0" class="btn-block play-btn"><span style="vertical-align: middle; font-size: 2em; margin-top: -3px; padding-right: 3px; color: white;" class="material-icons">play_arrow</span>播放</div>
           </a>
