@@ -32,7 +32,7 @@ class HomeController extends Controller
         $excluded = Video::getExcludedIds();
         $count = 42;
 
-        $upload = Video::whereOrderBy('id', $excluded, $count)->where('imgur', '!=', 'CJ5svNv')->get();
+        $upload = Video::whereOrderBy('uploaded_at', $excluded, $count)->where('imgur', '!=', 'CJ5svNv')->get();
         $newest = Video::whereOrderBy('created_at', $excluded, $count)->get();
         $trending = Video::whereOrderBy('views', $excluded, $count)->get();
 
