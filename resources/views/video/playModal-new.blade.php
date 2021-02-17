@@ -1,6 +1,13 @@
 <div id="playModal" class="modal fade" role="dialog">
   <div class="modal-dialog play-modal">
     <div class="modal-content">
+      @if ($country_code == 'JP' && ($video->id == 12258 || $video->id == 13362 || $video->id == 13470 || $video->id == 14174))
+        <div style="background-color: black; position: relative; width: 100%; height: 0; padding-bottom: 56.25%; text-align: center;">
+            <div style="font-size: 18px; color: white; margin: 0; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%">This video is no longer available. :(</div>
+        </div>
+
+      @else
+
         @if ($video->outsource)
           <div style="background-color: black; background-image: url('https://i.imgur.com/zXoBhXA.gif'); background-position: center; background-repeat: no-repeat; background-size: 150px; position: relative; width: 100%; height: 0; padding-bottom: 56.25%;">
               <iframe src="{!! $video->sd !!}" style="border: 0; overflow: hidden; position: absolute; width: 100%; height: 100%; left: 0; top: 0;" allowfullscreen></iframe>
@@ -26,6 +33,8 @@
             });
           </script>
         @endif
+
+      @endif
     </div>
   </div>
 </div>
