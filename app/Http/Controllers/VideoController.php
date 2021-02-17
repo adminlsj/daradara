@@ -25,7 +25,7 @@ class VideoController extends Controller
         if (Auth::check()) {
             $video = $video->with('likes:id,foreign_id,user_id', 'saves:id,user_id,video_id');
         }
-        $video = $video->select('id', 'user_id', 'playlist_id', 'title', 'translations', 'caption', 'cover', 'tags', 'imgur', 'sd', 'foreign_sd', 'views', 'outsource')->withCount('likes')->find($request->v);
+        $video = $video->select('id', 'user_id', 'playlist_id', 'title', 'translations', 'caption', 'cover', 'tags', 'imgur', 'sd', 'foreign_sd', 'current_views', 'views', 'outsource')->withCount('likes')->find($request->v);
 
         if ($video->cover == null) {
             header("Location: https://www.laughseejapan.com".$request->getRequestUri());
