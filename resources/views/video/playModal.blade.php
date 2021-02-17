@@ -1,7 +1,7 @@
 <div id="playModal" class="modal fade" role="dialog">
   <div class="modal-dialog play-modal">
     <div class="modal-content">
-      @if ($country_code == 'JP')
+      @if ($country_code == 'JP' && in_array($video->id, [12258, 13362, 13470, 14174]))
         <div style="background-color: black; position: relative; width: 100%; height: 0; padding-bottom: 56.25%; text-align: center;">
             <div style="font-size: 18px; color: white; margin: 0; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%">This video is no longer available. :(</div>
         </div>
