@@ -20,7 +20,7 @@
   "uploadDate": "{{ \Carbon\Carbon::parse($video->created_at)->format('Y-m-d\Th:i:s').'+00:00' }}",
   "author": {
     "@type": "Person",
-    "name": "{{ $video->user->name }}"
+    "name": "Hanime1.me"
   },
   "contentUrl": "{!! $video->sd !!}",
   "interactionStatistic": {

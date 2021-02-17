@@ -1,1 +1,1 @@
-<button id="info-desktop-save-btn" class="no-button-style" type="submit" title="加入我的清單"><i style="margin-top: 4px; margin-left: 0px; font-size: 2.3em" class="material-icons">{{ Auth::check() && $video->saves->where('user_id', Auth::user()->id)->first() ? 'done' : 'add' }}</i></button>
+<button id="info-desktop-save-btn" class="no-button-style" type="submit" title="加入我的清單"><i style="margin-top: 4px; margin-left: 0px; font-size: 2.3em" class="material-icons">{{ $video->saves->where('user_id', Auth::user()->id)->first() ? 'done' : 'add' }}</i></button>

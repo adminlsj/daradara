@@ -20,31 +20,34 @@ use SteelyWing\Chinese\Chinese;
 class VideoController extends Controller
 {
     public function watch(Request $request){
-        $id = $request->v;
-        if (is_numeric($id) && $video = Video::with('user:id,name', 'likes:id,foreign_id,user_id', 'saves:id,user_id,video_id')->select('id', 'user_id', 'playlist_id', 'title', 'translations', 'caption', 'cover', 'tags', 'imgur', 'sd', 'foreign_sd', 'views', 'outsource')->withCount('likes')->find($id)) {
 
-            if ($video->cover == null) {
-                header("Location: https://www.laughseejapan.com".$request->getRequestUri());
-                die();
-            }
-
-            $videos = Video::where('playlist_id', $video->playlist_id)->orderBy('created_at', 'desc')->select('id', 'title', 'cover')->get();
-
-            $tags = array_intersect($video->tags(), Video::$selected_tags);
-            $recommends = Video::where(function($query) use ($tags) {
-                foreach ($tags as $tag) {
-                    $query->orWhere('tags', 'ilike', '%'.$tag.'%');
-                }
-            })->whereIntegerNotInRaw('id', $videos->pluck('id'))->where('cover', '!=', null)->where('imgur', '!=', 'CJ5svNv')->select('id', 'title', 'cover')->inRandomOrder()->limit(42)->get();
-
-            $video->current_views++;
-            $video->views++;
-            $video->save();
-
-            $country_code = isset($_SERVER["HTTP_CF_IPCOUNTRY"]) ? $_SERVER["HTTP_CF_IPCOUNTRY"] : 'N/A';
-
-            return view('video.watch', compact('video', 'videos', 'recommends', 'tags', 'country_code'));
+        $video = Video::query();
+        if (Auth::check()) {
+            $video = $video->with('likes:id,foreign_id,user_id', 'saves:id,user_id,video_id');
         }
+        $video = $video->select('id', 'user_id', 'playlist_id', 'title', 'translations', 'caption', 'cover', 'tags', 'imgur', 'sd', 'foreign_sd', 'views', 'outsource')->withCount('likes')->find($request->v);
+
+        if ($video->cover == null) {
+            header("Location: https://www.laughseejapan.com".$request->getRequestUri());
+            die();
+        }
+
+        $videos = Video::where('playlist_id', $video->playlist_id)->orderBy('created_at', 'desc')->select('id', 'title', 'cover')->get();
+
+        $tags = array_intersect($video->tags(), Video::$selected_tags);
+        $recommends = Video::where(function($query) use ($tags) {
+            foreach ($tags as $tag) {
+                $query->orWhere('tags', 'ilike', '%'.$tag.'%');
+            }
+        })->whereIntegerNotInRaw('id', $videos->pluck('id'))->where('cover', '!=', null)->where('imgur', '!=', 'CJ5svNv')->select('id', 'title', 'cover')->inRandomOrder()->limit(42)->get();
+
+        $video->current_views++;
+        $video->views++;
+        $video->save();
+
+        $country_code = isset($_SERVER["HTTP_CF_IPCOUNTRY"]) ? $_SERVER["HTTP_CF_IPCOUNTRY"] : 'N/A';
+
+        return view('video.watch', compact('video', 'videos', 'recommends', 'tags', 'country_code'));
     }
 
     public function like(Request $request)
@@ -66,7 +69,7 @@ class VideoController extends Controller
             ]);
         }
 
-        $video = Video::find($foreign_id);
+        $video = Video::with('likes:id,foreign_id,user_id')->select('id', 'user_id')->withCount('likes')->find($foreign_id);
 
         $desktop = '';
         $desktop .= view('video.info-desktop-like-btn', compact('video'));
@@ -95,7 +98,7 @@ class VideoController extends Controller
             ]);
         }
 
-        $video = Video::find($video_id);
+        $video = Video::with('saves:id,user_id,video_id')->find($video_id);
 
         $desktop = '';
         $desktop .= view('video.info-desktop-save-btn', compact('video'));

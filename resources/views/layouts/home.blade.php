@@ -33,14 +33,14 @@
 						<div data-toggle="modal" data-target="#signUpModal" class="video-save-form home-save-form">
 				            @include('video.info-mobile-save-btn', ['video' => $banner])
 				        </div>
-			          @else
+			        @else
 			            <form class="video-save-form home-save-form" action="{{ route('video.save') }}" method="POST">
 			              {{ csrf_field() }}
 			              <input name="save-user-id" type="hidden" value="{{ Auth::user()->id }}">
 			              <input name="save-video-id" type="hidden" value="{{ $banner->id }}">
 			              @include('video.info-mobile-save-btn', ['video' => $banner])
 			            </form>
-			          @endif
+			        @endif
 				</div>
 				<div style="width: 33%; float:left; display: inline-block; margin-top: 10px;">
 					<a class="hover-opacity-all home-banner-btn home-banner-play-btn play-btn" data-toggle="modal" data-target="#playModal" style="cursor: pointer; font-size: 14px; border-radius: 3px; text-decoration: none; background-color: white; padding: 8px 22px 8px 12px; color: black;"><span style="vertical-align: middle; font-size: 2em; margin-top: -3px; padding-right: 3px" class="material-icons">play_arrow</span>播放</a>
