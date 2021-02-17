@@ -198,24 +198,22 @@ class Video extends Model
         return $bot->data['videos'];
     }
 
-    public function scopeWhereHasTags($query, $tags, $excluded, $count)
+    public function scopeWhereHasTags($query, $tags, $count)
     {
         return $query->where(function($query) use ($tags) {
             foreach ($tags as $tag) {
                 $query->orWhere('tags', 'like', '%'.$tag.'%');
             }
         })->where('cover', '!=', null)
-          ->whereIntegerNotInRaw('id', $excluded)
           ->select('id', 'title', 'cover')      
           ->inRandomOrder()
           ->limit($count);
     }
 
-    public function scopeWhereOrderBy($query, $order, $excluded, $count)
+    public function scopeWhereOrderBy($query, $order, $count)
     {
         return $query->orderBy($order, 'desc')
                      ->where('cover', '!=', null)
-                     ->whereIntegerNotInRaw('id', $excluded)
                      ->select('id', 'title', 'cover')      
                      ->limit($count);
     }

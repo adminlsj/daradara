@@ -1,1 +1,1 @@
-<button id="info-desktop-like-btn" class="no-button-style" type="submit"><i style="margin-top: 3px; margin-left: 0px;" class="{{ Auth::check() && $video->likes->where('user_id', Auth::user()->id)->first() ? 'material-icons' : 'material-icons-outlined' }}">thumb_up</i></button>
+<button id="info-desktop-like-btn" class="no-button-style" type="submit"><i style="margin-top: 3px; margin-left: 0px;" class="{{ $video->likes->where('user_id', Auth::user()->id)->first() ? 'material-icons' : 'material-icons-outlined' }}">thumb_up</i></button>

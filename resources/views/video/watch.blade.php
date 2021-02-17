@@ -115,7 +115,7 @@
             <div data-toggle="modal" data-target="#signUpModal" style="text-decoration: none; color: inherit" class="single-icon-wrapper">
               <div class="single-icon no-select">
                 <i class="material-icons-outlined">thumb_up</i>
-                <div>{{ App\Like::count('video', $video->id, true) }}</div>
+                <div>{{ $video->likes_count }}</div>
               </div>
             </div>
           @else

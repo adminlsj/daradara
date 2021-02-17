@@ -29,18 +29,17 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         $banner = Video::find(13654);
-        $excluded = Video::getExcludedIds();
-        $count = 42;
+        $count = 28;
 
-        $upload = Video::whereOrderBy('uploaded_at', $excluded, $count)->where('imgur', '!=', 'CJ5svNv')->get();
-        $newest = Video::whereOrderBy('created_at', $excluded, $count)->get();
-        $trending = Video::whereOrderBy('views', $excluded, $count)->get();
+        $upload = Video::whereOrderBy('uploaded_at', $count)->where('imgur', '!=', 'CJ5svNv')->get();
+        $newest = Video::whereOrderBy('created_at', $count)->get();
+        $trending = Video::whereOrderBy('views', $count)->get();
 
-        $tag1 = Video::whereHasTags(['巨乳'], $excluded, $count)->get();
-        $tag2 = Video::whereHasTags(['貧乳'], $excluded, $count)->get();
-        $tag3 = Video::whereHasTags(['肛交'], $excluded, $count)->get();
-        $tag4 = Video::whereHasTags(['扶他', '偽娘', '耽美'], $excluded, $count)->get();
-        $tag5 = Video::whereHasTags([''], $excluded, $count)->get();
+        $tag1 = Video::whereHasTags(['巨乳'], $count)->get();
+        $tag2 = Video::whereHasTags(['貧乳'], $count)->get();
+        $tag3 = Video::whereHasTags(['肛交'], $count)->get();
+        $tag4 = Video::whereHasTags(['扶他', '偽娘', '耽美'], $count)->get();
+        $tag5 = Video::whereHasTags([''], $count)->get();
 
         $rows = [
             '最新上傳' => ['videos' => $upload, 'link' => '/search?query=&sort=最新上傳'], 
@@ -63,8 +62,6 @@ class HomeController extends Controller
         $tags = [];
         $brands = [];
         $videos = Video::where('cover', '!=', null);
-
-        $excluded = Video::getExcludedIds();
         
         if ($query = request('query')) {
             $query = str_replace(' ', '', request('query'));
@@ -78,9 +75,6 @@ class HomeController extends Controller
             $videos = $videos->where(function($query) use ($searchQuery) {
                 $query->where('title', 'ilike', $searchQuery)->orWhere('translations', 'ilike', $searchQuery)->orWhere('tags', 'ilike', $searchQuery);
             });
-
-        } else {
-            $videos = $videos->whereIntegerNotInRaw('id', $excluded);
         }
 
         if ($tags = $request->tags) {
@@ -167,20 +161,6 @@ class HomeController extends Controller
 
     public function terms()
     {
-        /* $requests = Browsershot::url('https://www.eporner.com/video-VGtg33oz99l/karde-im-emziriyor-yan-mama-2/')
-            ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
-            ->triggeredRequests();
-        foreach ($requests as $request) {
-            if (strpos($request['url'], 'https://www.eporner.com/xhr/video/') !== false && strpos($request['url'], 'mp4') !== false) {
-                $curl_connection = curl_init($request['url']);
-                curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
-                curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
-                curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
-                $data = json_decode(curl_exec($curl_connection), true);
-                curl_close($curl_connection);
-                return $data['sources']['mp4']['1080p HD']['src'];
-            }
-        } */
         return view('layouts.terms');
     }
 
@@ -201,23 +181,23 @@ class HomeController extends Controller
 
     public function userReport(Request $request)
     {
-        $request->validate([
-            'userReportReason' => 'required'
-        ]);
-        $email = request('report-email') == null ? '' : request('report-email');
-        $reason = request('userReportReason');
-        if ($reason == '其他原因') {
-            $reason = $reason.'：'.request('others-text');
-        }
-        $video = Video::find(request('video-id'));
         $ip_address = isset($_SERVER["HTTP_CF_CONNECTING_IP"]) ? $_SERVER["HTTP_CF_CONNECTING_IP"] : 'N/A';
         $country_code = isset($_SERVER["HTTP_CF_IPCOUNTRY"]) ? $_SERVER["HTTP_CF_IPCOUNTRY"] : 'N/A';
         if ($ip_address == '106.38.121.194' || $ip_address == '223.104.65.11') {
             return 'error';
         } else {
+            $request->validate([
+                'userReportReason' => 'required'
+            ]);
+            $email = request('report-email') == null ? '' : request('report-email');
+            $reason = request('userReportReason');
+            if ($reason == '其他原因') {
+                $reason = $reason.'：'.request('others-text');
+            }
+            $video = Video::find(request('video-id'));
             Mail::to('laughseejapan@gmail.com')->send(new UserReport($email, $reason, $video, $ip_address, $country_code));
+            return Redirect::back()->withErrors('感謝您向我們提供意見或回報任何錯誤。');
         }
-        return Redirect::back()->withErrors('感謝您向我們提供意見或回報任何錯誤。');
     }
 
     public function getSitemap()
@@ -243,25 +223,5 @@ class HomeController extends Controller
                 $video->save();
             }
         }
-    }
-
-    public function setExcludedIds()
-    {
-        $bot = Bot::where('temp', 'exclude')->first();
-
-        $first = [];
-        $playlists = $bot->data['playlists'];
-        foreach ($playlists as $playlist_id) {
-            array_push($first, Video::where('playlist_id', $playlist_id)->orderBy('created_at', 'desc')->first()->id);
-        }
-
-        $videos = Video::where(function($query) use ($playlists) {
-            foreach ($playlists as $playlist) {
-                $query->orWhere('playlist_id', $playlist);
-            }
-        })->whereNotIn('id', $first)->pluck('id');
-
-        $bot->data = ['playlists' => $playlists, 'videos' => $videos];
-        $bot->save();
     }
 }
