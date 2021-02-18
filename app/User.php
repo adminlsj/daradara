@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Notifications\CustomResetPassword;
 
 class User extends Authenticatable
 {
@@ -158,5 +159,13 @@ class User extends Authenticatable
     public function avatarCircleB()
     {
         return "https://i.imgur.com/sMSpYFXb.jpg";
+    }
+
+    /**
+     * Send a password reset email to the user
+     */
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new CustomResetPassword($token));
     }
 }

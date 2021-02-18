@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'failed' => '登錄賬號與密碼不匹配，若忘記密碼，請聯絡我們 laughseejapan@gmail.com',
+    'failed' => '登錄賬號與密碼不匹配，請再次嘗試，或點選 忘記密碼',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
 
 ];

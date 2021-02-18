@@ -21,6 +21,11 @@
           <div class="form-group">
             <input style="background-color: #131313; color: gray;" type="password" class="form-control" name="password" id="password" placeholder="密碼" required>
           </div>
+
+          <div style="margin-top: 20px; margin-bottom: 20px; font-size: 0.95em">
+            <a href="/password/reset" target="_blank" style="cursor: pointer; text-decoration: none; font-weight: 500;">忘記密碼？</a>
+          </div>
+
           <button style="height: 45px; margin-top: 10px; font-size: 1em; background-color: red !important; border-color: red !important;" type="submit" class="btn btn-info" name="submit">登入</button>
           @include('layouts.socialLoginBtn')
 
