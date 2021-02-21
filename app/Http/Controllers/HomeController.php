@@ -52,9 +52,9 @@ class HomeController extends Controller
             '更多精彩內容' => ['videos' => $tag5, 'link' => '/search']
         ];
 
-        // $country_code = isset($_SERVER["HTTP_CF_IPCOUNTRY"]) ? $_SERVER["HTTP_CF_IPCOUNTRY"] : 'N/A';
+        $country_code = isset($_SERVER["HTTP_CF_IPCOUNTRY"]) ? $_SERVER["HTTP_CF_IPCOUNTRY"] : 'N/A';
 
-        return view('layouts.home', compact('banner', 'rows'));
+        return view('layouts.home', compact('banner', 'rows', 'country_code'));
     }
 
     public function search(Request $request)
