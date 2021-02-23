@@ -28,10 +28,12 @@
         @include('layouts.socialLoginBtn')
 
         <div style="margin-top: 20px; font-size: 0.95em">
-          <span style="font-weight: 400">已經有LaughSeeJapan帳戶了？</span>&nbsp;<a href="{{ route('login') }}" style="cursor: pointer; text-decoration: none; font-weight: 500;">登入</a>
+          <span style="font-weight: 400">已經有Hanime1帳戶了？</span>&nbsp;<a href="{{ route('login') }}" style="cursor: pointer; text-decoration: none; font-weight: 500;">登入</a>
         </div>
       </div>
 
     </form>
   </div>
+
+  <br>
 @endsection
