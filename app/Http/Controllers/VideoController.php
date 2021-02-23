@@ -30,7 +30,7 @@ class VideoController extends Controller
             die();
         }
 
-        $videos = Video::where('playlist_id', $video->playlist_id)->orderBy('created_at', 'desc')->select('id', 'title', 'cover')->get();
+        $videos = Video::with('user:id,name')->where('playlist_id', $video->playlist_id)->orderBy('created_at', 'desc')->select('id', 'user_id', 'imgur', 'title', 'sd', 'views', 'created_at')->get();
 
         $tags = array_intersect($video->tags(), Video::$selected_tags);
         $recommends = Video::where(function($query) use ($tags) {

@@ -122,6 +122,18 @@
         </noscript>
       </div>
 
+      <h4 style="font-size: 1.00em; color: white;">集數列表</h4>
+      <div id="video-playlist-wrapper">
+        <div style="text-align: left;">
+          @foreach ($videos as $video)
+            <div class="related-watch-wrap hover-opacity-all">
+              @include('video.singleShowRelated', ['source' => 'video'])
+            </div>
+          @endforeach
+        </div>
+      </div>
+
+      <h4 style="font-size: 1.00em; color: white; margin-top: 15px;">相關影片</h4>
       <div id="video-playlist-wrapper">
         <div style="text-align: left;">
           @foreach ($related as $video)
