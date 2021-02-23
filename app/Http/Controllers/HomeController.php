@@ -130,7 +130,10 @@ class HomeController extends Controller
 
     public function list()
     {
-        $saves = Save::with('video:id,title,cover')->where('user_id', Auth::user()->id)->orderBy('created_at', 'desc')->get();
+        $saves = Save::with(['video' => function($query) {
+            $query->where('cover', '!=', null)->select('id', 'title', 'cover');
+        }])->where('user_id', Auth::user()->id)->orderBy('created_at', 'desc')->get();
+
         return view('layouts.list', compact('saves'));
     }
 
