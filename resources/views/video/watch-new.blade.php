@@ -68,7 +68,7 @@
           </a>
         </div>
 
-        <h5 style="color: #bdbdbd; font-weight: 400; margin-top: 18px; line-height: 20px; margin-bottom: 14px; white-space: pre-wrap;">{{ $video->translations['JP'] }} • 中文字幕 • {{ $video->caption }}</h5>
+        <h5 style="color: #bdbdbd; font-weight: 400; margin-top: 18px; line-height: 20px; margin-bottom: 14px; white-space: pre-wrap; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;">{{ $video->translations['JP'] }} • 中文字幕 • {{ $video->caption }}</h5>
 
         <h5 style="font-weight: 400; margin-bottom: 3px; margin-top: 0px;">
           @foreach ($video->tags() as $tag)
