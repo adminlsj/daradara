@@ -76,7 +76,7 @@
           @endforeach
         </h5>
 
-        <div id="video-like-form-wrapper" style="display: inline-block; position: absolute;" title="讚好">
+        <div id="video-like-form-wrapper" style="display: inline-block; position: absolute;" title="{{ $video->likes_count }} 個讚好">
           @include('video.like-btn-wrapper')
         </div>
 

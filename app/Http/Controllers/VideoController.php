@@ -23,7 +23,7 @@ class VideoController extends Controller
 {
     public function watch(Request $request){
 
-        $video = Video::select('id', 'user_id', 'playlist_id', 'title', 'translations', 'caption', 'cover', 'tags', 'sd', 'outsource', 'current_views', 'views', 'imgur', 'foreign_sd', 'duration', 'uploaded_at')->find($request->v);
+        $video = Video::select('id', 'user_id', 'playlist_id', 'title', 'translations', 'caption', 'cover', 'tags', 'sd', 'outsource', 'current_views', 'views', 'imgur', 'foreign_sd', 'duration', 'uploaded_at')->withCount('likes')->find($request->v);
 
         if ($video->cover == null || ($video->foreign_sd != null && array_key_exists('redirect', $video->foreign_sd))) {
             header("Location: https://www.laughseejapan.com".$request->getRequestUri());

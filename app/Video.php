@@ -87,7 +87,7 @@ class Video extends Model
 
     public function likes()
     {
-        return Like::where('type', 'video')->where('foreign_id', $this->id)->orderBy('created_at', 'desc')->get();
+        return $this->hasMany('App\Like', 'foreign_id');
     }
 
     public function saves()
