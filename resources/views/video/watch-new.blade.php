@@ -122,7 +122,7 @@
         </noscript>
       </div>
 
-      <h4 style="font-size: 1.00em; color: white; font-weight: bold">集數列表</h4>
+      <h4 style="font-size: 15px; color: white; font-weight: bold">集數列表</h4>
       <div id="video-playlist-wrapper">
         <div style="text-align: left;">
           @foreach ($videos as $video)
@@ -133,7 +133,7 @@
         </div>
       </div>
 
-      <h4 style="font-size: 1.00em; color: white; margin-top: 15px; font-weight: bold">相關影片</h4>
+      <h4 style="font-size: 15px; color: white; margin-top: 15px; font-weight: bold">相關影片</h4>
       <div id="video-playlist-wrapper">
         <div style="text-align: left;">
           @foreach ($related as $video)
