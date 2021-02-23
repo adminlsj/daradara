@@ -1,4 +1,4 @@
-<div id="main-nav" style="z-index: 10">
+<div id="main-nav" style="z-index: 10" class="main-nav{{ Request::is('*watch*') ? '-video-show' : '' }}">
   <a href="/" style="padding-right: 2.5%; color: white; font-size: 1.4em;">
     <span style="color: crimson">H</span>anime1<span style="color: crimson">.</span>me
   </a>

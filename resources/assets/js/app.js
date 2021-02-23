@@ -29,6 +29,15 @@ $('#broad').change(function(){
   }
 });
 
+$('.load-more-related-btn').click(function() {
+    $(this).css('display', 'none');
+    $(".hidden-related-video").css('display', 'block');
+})
+
+$('#video-play-image').click(function() {
+  dp.play()
+})
+
 $('.navigate-next-btn').click(function() {
   var row = $(this).prev();
   var rowWidth = row.width();
@@ -68,48 +77,6 @@ $('nav#hentai-main-nav').on("submit", "form#search-form", function(e) {
   var query = $('#nav-query').val();
   $('#hentai-form #query').val(query);
   $('form#hentai-form').submit();
-});
-
-$('.video-like-form').on("submit", function(e) {
-  $.ajaxSetup({
-      header:$('meta[name="_token"]').attr('content')
-  })
-  e.preventDefault(e);
-
-  $.ajax({
-      type:"POST",
-      url: $(this).attr("action"),
-      data:$(this).serialize(),
-      dataType: 'json',
-      success: function(data){
-          $('#info-desktop-like-btn').replaceWith(data.desktop);
-          $('#info-mobile-like-btn').replaceWith(data.mobile);
-      },
-      error: function(xhr, ajaxOptions, thrownError){
-          showSnackbar('請刷新頁面後重試。');
-      }
-  })
-});
-
-$('.video-save-form').on("submit", function(e) {
-  $.ajaxSetup({
-      header:$('meta[name="_token"]').attr('content')
-  })
-  e.preventDefault(e);
-
-  $.ajax({
-      type:"POST",
-      url: $(this).attr("action"),
-      data:$(this).serialize(),
-      dataType: 'json',
-      success: function(data){
-          $('#info-desktop-save-btn').replaceWith(data.desktop);
-          $('#info-mobile-save-btn').replaceWith(data.mobile);
-      },
-      error: function(xhr, ajaxOptions, thrownError){
-          showSnackbar('請刷新頁面後重試。');
-      }
-  })
 });
 
 $('[id=database-search-btn]').click(function(e) {

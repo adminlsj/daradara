@@ -6,10 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 use App\User;
 use App\Video;
 
-class Comment extends Model
+class Reply extends Model
 {
     protected $fillable = [
-        'user_id', 'type', 'foreign_id', 'text',
+        'user_id', 'comment_id', 'text',
     ];
 
     public function user()
@@ -17,18 +17,13 @@ class Comment extends Model
         return $this->belongsTo('App\User', 'user_id');
     }
 
-    public function video()
+    public function comment()
     {
-        return Video::find($this->foreign_id);
+        return $this->belongsTo('App\Comment', 'comment_id');
     }
 
     public function likes()
     {
         return $this->morphMany('App\Like', 'foreign');
-    }
-
-    public function replies()
-    {
-        return $this->hasMany('App\Reply');
     }
 }

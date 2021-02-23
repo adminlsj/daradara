@@ -25,26 +25,6 @@ $('div#video-like-form-wrapper').on("submit", "form#video-like-form", function(e
         data:$(this).serialize(),
         dataType: 'json',
         success: function(data){
-            $('div#video-like-form-wrapper').html(data.unlikeBtn);
-        },
-        error: function(xhr, ajaxOptions, thrownError){
-            showSnackbar('請刷新頁面後重試。');
-        }
-    })
-});
-
-$('div#video-like-form-wrapper').on("submit", "form#video-unlike-form", function(e) {
-    $.ajaxSetup({
-        header:$('meta[name="_token"]').attr('content')
-    })
-    e.preventDefault(e);
-
-    $.ajax({
-        type:"POST",
-        url: $(this).attr("action"),
-        data:$(this).serialize(),
-        dataType: 'json',
-        success: function(data){
             $('div#video-like-form-wrapper').html(data.likeBtn);
         },
         error: function(xhr, ajaxOptions, thrownError){
@@ -136,7 +116,7 @@ $('.comment-reply-reply-form-wrapper').on("submit", ".comment-reply-create-form"
         dataType: 'json',
         success: function(data){
             $(".comment-reply-reply-form-wrapper").css('display', 'none');
-            $('div#comment-reply-start-' + data.comment_id).prepend(data.single_video_comment);
+            $('div#reply-start-' + data.comment_id).prepend(data.single_video_comment);
         },
         error: function(xhr, ajaxOptions, thrownError){
             showSnackbar('請刷新頁面後重試。');
@@ -163,8 +143,8 @@ $('div#comment-like-form-wrapper').on("submit", "form#comment-like-form", functi
         url: $(this).attr("action"),
         data:$(this).serialize(),
         dataType: 'json',
-        success: function(data){
-            $('#comment-like-btn-' + data.comment_id).html(data.comment_like_btn);
+        success: (json) => {
+            $(this).find('button').html(json.comment_like_btn);
         },
         error: function(xhr, ajaxOptions, thrownError){
             showSnackbar('請刷新頁面後重試。');
@@ -183,8 +163,28 @@ $('div#comment-like-form-wrapper').on("submit", "form#comment-unlike-form", func
         url: $(this).attr("action"),
         data:$(this).serialize(),
         dataType: 'json',
+        success: (json) => {
+            $(this).find('button').html(json.comment_unlike_btn);
+        },
+        error: function(xhr, ajaxOptions, thrownError){
+            showSnackbar('請刷新頁面後重試。');
+        }
+    })
+});
+
+$('div#comment-like-form-wrapper').on("submit", "form#reply-unlike-form", function(e) {
+    $.ajaxSetup({
+        header:$('meta[name="_token"]').attr('content')
+    })
+    e.preventDefault(e);
+
+    $.ajax({
+        type:"POST",
+        url: $(this).attr("action"),
+        data:$(this).serialize(),
+        dataType: 'json',
         success: function(data){
-            $('#comment-unlike-btn-' + data.comment_id).html(data.comment_unlike_btn);
+            $('#reply-unlike-btn-' + data.reply_id).html(data.reply_unlike_btn);
         },
         error: function(xhr, ajaxOptions, thrownError){
             showSnackbar('請刷新頁面後重試。');
@@ -196,7 +196,7 @@ $('.comment-reply-btn').click(function() {
     $(".comment-reply-reply-form-wrapper").css('display', 'none');
     var comment_id = $(this).data("comment-id");
     var comment_wrapper = $('#comment-reply-form-wrapper-' + comment_id);
-    var comment_text = comment_wrapper.find('#comment-text');
+    var comment_text = comment_wrapper.find('#reply-comment-text');
     var comment_user = false;
     if (comment_user = $(this).data("comment-user")) {
         comment_text.val('@' + comment_user + ' ');
@@ -207,6 +207,60 @@ $('.comment-reply-btn').click(function() {
     comment_text.focus();
 })
 
+/* $(document).ready(function(){
+    var urlParams = new URLSearchParams(window.location.search);
+    $.ajax({ 
+        type:"GET",
+        url: "/loadPlaylist",
+        data: {v: urlParams.get('v'), list: urlParams.get('list')},
+        dataType: 'html',
+        success: function(data){
+            $('.ajax-loading').html(" ");
+            $('div#video-playlist-wrapper').html(data);
+
+            var container = document.querySelector('div#video-playlist-wrapper');
+            var lazyImages = [].slice.call(container.querySelectorAll("img.lazy"));
+            if ("IntersectionObserver" in window) {
+                let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+                  entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                      let lazyImage = entry.target;
+                      lazyImage.src = lazyImage.dataset.src;
+                      lazyImage.srcset = lazyImage.dataset.srcset;
+                      lazyImage.classList.remove("lazy");
+                      lazyImageObserver.unobserve(lazyImage);
+                    }
+                  });
+                }, {
+                  rootMargin: "0px 0px 256px 0px"
+                });
+                
+                lazyImages.forEach(function(lazyImage) {
+                  lazyImageObserver.observe(lazyImage);
+                });
+            }
+        },
+        error: function(xhr, ajaxOptions, thrownError){
+            $('div#video-playlist-wrapper').html(xhr.responseText);
+        }
+    });
+
+    $.ajax({ 
+        type:"GET",
+        url: "/getVideoSd",
+        data: {v: urlParams.get('v')},
+        dataType: 'json',
+        success: function(data){
+            if (data.outsource) {
+                $('iframe#iframe').attr("src", data.sd);
+            }
+        },
+        error: function(xhr, ajaxOptions, thrownError){
+            $('div#video-playlist-wrapper').html(xhr.responseText);
+        }
+    });
+}); */
+
 $('#others-text').focus(function() {
     $('input:radio[id=others]').prop('checked', true);
 });
@@ -214,6 +268,35 @@ $('#others-text').focus(function() {
 $('input:radio[id=others]').click(function(){
     $('#others-text').focus();
 });
+
+/* Standard syntax */
+document.addEventListener("fullscreenchange", function() {
+  handleFullscreenChange()
+});
+
+/* Firefox */
+document.addEventListener("mozfullscreenchange", function() {
+  handleFullscreenChange()
+});
+
+/* Chrome, Safari and Opera */
+document.addEventListener("webkitfullscreenchange", function() {
+  handleFullscreenChange()
+});
+
+/* IE / Edge */
+document.addEventListener("msfullscreenchange", function() {
+  handleFullscreenChange()
+});
+
+function handleFullscreenChange() {
+    var videoWrap = $(".dplayer-video-wrap");
+    if (videoWrap.css("padding-bottom") == "0px") {
+        videoWrap.css("padding-bottom", "56.25%");
+    } else {
+        videoWrap.css("padding-bottom", "0px");
+    }
+}
 
 function showSnackbar(text) {
     var snackbar = document.getElementById("snackbar");

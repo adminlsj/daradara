@@ -17,8 +17,8 @@ class Video extends Model
         'foreign_sd' => 'array', 'data' => 'array', 'translations' => 'array'
     ];
 
-	protected $fillable = [
-        'id', 'user_id', 'playlist_id', 'title', 'caption', 'tags', 'sd', 'imgur', 'current_views', 'views', 'outsource', 'foreign_sd', 'data', 'created_at', 'uploaded_at', 'cover', 'translations'
+    protected $fillable = [
+        'id', 'user_id', 'playlist_id', 'title', 'caption', 'tags', 'sd', 'imgur', 'current_views', 'views', 'outsource', 'foreign_sd', 'data', 'created_at', 'uploaded_at', 'duration', 'translations'
     ];
 
     public static $banned = [
@@ -81,17 +81,27 @@ class Video extends Model
 
     public function tags()
     {
-        return explode(" ", $this->tags);
+        $tags = str_replace(' 肉番 裏番 里番 hentai H動漫 H動畫 十八禁 成人動畫 成人動漫 線上看 中文字幕', '', $this->tags);
+        return explode(" ", trim($tags));
     }
 
     public function likes()
     {
-        return $this->morphMany('App\Like', 'foreign');
+        return Like::where('type', 'video')->where('foreign_id', $this->id)->orderBy('created_at', 'desc')->get();
     }
 
     public function saves()
     {
         return $this->hasMany('App\Save');
+    }
+
+    public function views()
+    {
+        if ($this->views >= 10000) {
+            return round($this->views / 10000, 1).'萬';
+        } else {
+            return $this->views;
+        }
     }
 
     public static function getSpankbang(String $url, String $tags)

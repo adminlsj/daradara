@@ -24,6 +24,17 @@ body {
   font-weight: bold;
 }
 
+.row.no-gutter {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.row.no-gutter [class*='col-']:not(:first-child),
+.row.no-gutter [class*='col-']:not(:last-child) {
+  padding-right: 0;
+  padding-left: 0;
+}
+
 .no-button-style{
   background: none;
   color: inherit;
@@ -42,6 +53,31 @@ body {
 .no-scrollbar-style::-webkit-scrollbar { /* WebKit */
     width: 0;
     height: 0;
+}
+
+.single-show-player {
+  padding-right: 15px !important;
+  width: calc(100% - 396px);
+}
+
+.single-show-list {
+  padding-left: 0px;
+  width: 396px;
+}
+
+.video-show-width {
+  padding: 0 4%;
+  padding-top: 83px;
+}
+
+.video-show-panel-width {
+  padding: 14px 0px 25px 0px;
+}
+
+.video-show-comment-width {
+  padding: 5px 0px 2px 0px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 #main-nav {
@@ -156,6 +192,58 @@ body {
 
 .search-rows-wrapper {
   margin-top: 160px !important;
+}
+
+.single-video-tag {
+  display: inline-block;
+  margin-bottom: 18px;
+}
+
+.single-video-tag a {
+  text-decoration: none;
+  margin-right: 3px;
+  color: #bdbdbd !important;
+  border: 1px solid #7e7e7e;
+  padding: 4px 9px;
+}
+
+.load-more-related-btn {
+  text-align: center;
+  padding: 11px 0px;
+  cursor: pointer;
+  box-shadow: none !important;
+  margin-bottom: 7px;
+  color: #bdbdbd;
+  border: 1px solid #7e7e7e;
+}
+
+.single-video-tag a:hover, div.load-more-related-btn:hover {
+  color: white !important;
+  border: 1px solid white;
+}
+
+#video-like-form-wrapper {
+  left: 0px;
+}
+
+#video-save-form-wrapper {
+  left: 40px;
+}
+
+#shareBtn {
+  left: 80px;
+}
+
+#reportBtn {
+  left: 120px;
+}
+
+#complainBtn {
+  right: 20px;
+}
+
+.hidden-related-video {
+  display: none;
 }
 
 #info-btn-wrapper button {
@@ -576,6 +664,10 @@ nav input[type=text]:focus {
     text-align: left;
     vertical-align: middle;
   }
+
+  .comment-reply-reply-form-wrapper .comment-text {
+    margin-left: 5px;
+  }
 }
 
 #signUpModal input[type=text], #signUpModal input[type=email], #signUpModal input[type=password],
@@ -752,14 +844,18 @@ nav input[type=text]:focus {
 }
 
 .single-icon-wrapper .single-icon {
-  width: 55px;
-  height: 55px;
+  width: 35px;
+  height: 35px;
   border-radius: 50%;
+}
+
+.single-icon-wrapper .single-icon:hover {
+  background-color: dimgray;
 }
 
 .show-panel-icons .single-icon i, .show-panel-icons .single-icon div {
   cursor: pointer;
-  color: white;
+  color: dimgray;
 }
 
 .show-panel-icons .single-icon i {
@@ -776,17 +872,6 @@ div.sticky {
   position: -webkit-sticky;
   position: sticky;
   top: 0;
-}
-
-.row.no-gutter {
-  margin-left: 0;
-  margin-right: 0;
-}
-
-.row.no-gutter [class*='col-']:not(:first-child),
-.row.no-gutter [class*='col-']:not(:last-child) {
-  padding-right: 0;
-  padding-left: 0;
 }
 
 /* Place the navbar at the bottom of the page, and make it stick */
@@ -873,6 +958,39 @@ div.sticky {
 .pagination>li.active>span:hover {
   background-color: crimson;
   border-color: crimson;
+}
+
+.related-watch-wrap {
+  margin: 10px 0px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1);
+  font-weight: bold !important;
+  position: relative;
+}
+
+.related-watch-wrap .related-watch-title {
+  padding: 2px 9px 5px 9px !important;
+}
+
+.related-watch-wrap .related-watch-title h4 {
+  margin-top:0px;
+  margin-bottom: 0px;
+  line-height: 19px;
+  font-size: 1.00em;
+  font-weight: bold;
+  color: #444444;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.comment-index-text {
+  padding-left: 45px;
+}
+
+.comment-reply-reply-form-wrapper .comment-text {
+  margin-left: 10px;
 }
 
 .btn-info {
@@ -964,9 +1082,88 @@ div.sticky {
   }
 }
 
+@media (min-width: 1425px) {
+  .exoclick-video-show-squares, .exoclick-video-show-square {
+    display: none;
+  }
+}
+
+@media (max-width: 1425px) {
+  .exoclick-video-show-banner, .exoclick-video-show-square {
+    display: none;
+  }
+
+  .exoclick-video-show-squares {
+    display: block;
+  }
+}
+
+@media (max-width: 1103px) {
+  .exoclick-video-show-banner, .exoclick-video-show-squares {
+    display: none;
+  }
+
+  .exoclick-video-show-square {
+    display: block;
+  }
+}
+
 @media (max-width: 991px) {
+  .video-show-mobile-background {
+    background-color: #1e1e1e;
+  }
+
+  .video-show-width {
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 50px;
+  }
+
+  .video-show-panel-width {
+    padding-left: 4%;
+    padding-right: 4%;
+  }
+
+  .video-show-comment-width {
+    padding-left: 4% !important;
+    padding-right: 4% !important;
+  }
+
+  #video-like-form-wrapper {
+    left: calc(4%);
+  }
+
+  #video-save-form-wrapper {
+    left: calc(4% + 40px);
+  }
+
+  #shareBtn {
+    left: calc(4% + 79px);
+  }
+
+  #reportBtn {
+    left: calc(4% + 118px);
+  }
+
+  #complainBtn {
+    right: 4%;
+  }
+
+  .hidden-related-video {
+    display: none;
+  }
+
+  .video-show-panel-separate-line {
+    margin-left: -4%;
+    margin-right: -4%;
+  }
+
   .play-modal {
     width: 85%;
+  }
+
+  .comment-index-text {
+    padding-left: 51px;
   }
 
   #home-rows-wrapper {
@@ -989,6 +1186,21 @@ div.sticky {
 
   #home-rows-wrapper .home-rows-videos-wrapper .home-rows-videos-div {
     width: calc(100% / 4);
+  }
+
+  .single-show-player, .single-show-list {
+    width: 100%;
+  }
+
+  .single-show-player {
+    padding-right: 0px !important;
+    padding-top: 0px;
+    padding-left: 0px !important;
+  }
+
+  .single-show-list {
+    padding: 0 4% !important;
+    padding-top: 4px !important;
   }
 
   .search-pagination {
@@ -1035,12 +1247,20 @@ div.sticky {
     margin-left: 5px;
   }
 
-  #main-nav {
-    position: absolute;
+  .main-nav-video-show {
+    position: fixed !important;
+    background-image: rgba(0,0,0,0.8) !important; 
+    background-color: rgba(0,0,0,0.8) !important;
+    height: 50px !important; 
+    line-height: 50px !important; 
+  }
+
+  .main-nav {
+    position: absolute !important;
     background-image: linear-gradient(to bottom,rgba(0,0,0,.7) 10%,rgba(0,0,0,0)) !important; 
     background-color: transparent !important;
-    height: 50px;
-    line-height: 50px;
+    height: 50px !important; 
+    line-height: 50px !important;
   }
 
   #home-banner-wrapper {
