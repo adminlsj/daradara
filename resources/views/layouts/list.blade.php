@@ -11,12 +11,14 @@
     <h3>我的播放清單</h3>
     <div class="home-rows-videos-wrapper" style="white-space: normal;">
       @foreach ($saves as $save)
-        <a style="text-decoration: none;" href="{{ route('video.watch') }}?v={{ $save->video->id }}">
-          <div class="home-rows-videos-div" style="position: relative; display: inline-block; margin-bottom:50px">
-            <img src="{{ $save->video->cover }}">
-            <div class="home-rows-videos-title" style="position:absolute; bottom:0; left:0; white-space: initial; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; color: white; width: 100%; padding: 3px 3px; background: linear-gradient(to bottom, transparent 0%, black 120%);">{{ $save->video->title }}</div>
-            </div>
-        </a>
+        @if ($save->video != null)
+          <a style="text-decoration: none;" href="{{ route('video.watch') }}?v={{ $save->video->id }}">
+            <div class="home-rows-videos-div" style="position: relative; display: inline-block; margin-bottom:50px">
+              <img src="{{ $save->video->cover }}">
+              <div class="home-rows-videos-title" style="position:absolute; bottom:0; left:0; white-space: initial; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; color: white; width: 100%; padding: 3px 3px; background: linear-gradient(to bottom, transparent 0%, black 120%);">{{ $save->video->title }}</div>
+              </div>
+          </a>
+        @endif
       @endforeach
     </div>
     <div style="padding: 0 4%;">
