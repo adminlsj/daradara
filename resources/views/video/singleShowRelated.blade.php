@@ -2,7 +2,7 @@
   <div style="padding-right: 0px; width: 198px; max-width: 50%; position: relative;" class="col-xs-6 col-sm-6 col-md-6">
     @if ($video->id == $current->id)
 	    <img class="lazy" style="width: 100%; height: 100%; opacity: 0.3" src="{{ $video->imgur16by9() }}" data-src="{{ $video->imgurL() }}" data-srcset="{{ $video->imgurL() }}" alt="{{ $video->title }}">
-	   <div style="margin: 0; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white">現正播放</div>
+	   <div style="margin: 0; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-weight: bold">現正播放</div>
 	@else
 		<img class="lazy" style="width: 100%; height: 100%;" src="{{ $video->imgur16by9() }}" data-src="{{ $video->imgurL() }}" data-srcset="{{ $video->imgurL() }}" alt="{{ $video->title }}">
     @endif
