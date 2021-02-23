@@ -1,6 +1,11 @@
 <a href="{{ route('video.watch') }}?v={{ $video->id }}{{ $source == 'playlist' ? '&list='.Request::get('list') : '' }}" class="row no-gutter">
-  <div style="padding-right: 0px; width: 198px; max-width: 50%;" class="col-xs-6 col-sm-6 col-md-6">
-    <img class="lazy" style="width: 100%; height: 100%;" src="{{ $video->imgur16by9() }}" data-src="{{ $video->imgurL() }}" data-srcset="{{ $video->imgurL() }}" alt="{{ $video->title }}">
+  <div style="padding-right: 0px; width: 198px; max-width: 50%; position: relative;" class="col-xs-6 col-sm-6 col-md-6">
+    @if ($video->id == $current->id)
+	    <img class="lazy" style="width: 100%; height: 100%; opacity: 0.3" src="{{ $video->imgur16by9() }}" data-src="{{ $video->imgurL() }}" data-srcset="{{ $video->imgurL() }}" alt="{{ $video->title }}">
+	   <div style="margin: 0; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white">現正播放</div>
+	@else
+		<img class="lazy" style="width: 100%; height: 100%;" src="{{ $video->imgur16by9() }}" data-src="{{ $video->imgurL() }}" data-srcset="{{ $video->imgurL() }}" alt="{{ $video->title }}">
+    @endif
   </div>
   <div style="width: calc(100% - 198px); min-width: 50%;" class="col-xs-6 col-sm-6 col-md-6 related-watch-title">
     <h4 style="font-weight: 600; color: white;">{{ $video->title }}</h4>
