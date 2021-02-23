@@ -50,7 +50,7 @@ class VideoController extends Controller
                     $query->orWhere('tags', 'like', '%'.$tag.'%');
                 }
             }
-        })->where('cover', '!=', null)->where('imgur', '!=', 'CJ5svNv')->inRandomOrder()->select('id', 'user_id', 'imgur', 'title', 'sd', 'views', 'created_at')->limit(60)->get();
+        })->where('cover', '!=', null)->where('imgur', '!=', 'CJ5svNv')->where('playlist_id', '!=', $current->playlist_id)->inRandomOrder()->select('id', 'user_id', 'imgur', 'title', 'sd', 'views', 'created_at')->limit(60)->get();
 
         $country_code = isset($_SERVER["HTTP_CF_IPCOUNTRY"]) ? $_SERVER["HTTP_CF_IPCOUNTRY"] : 'N/A';
 

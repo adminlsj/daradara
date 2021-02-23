@@ -24,10 +24,6 @@ body {
   font-weight: bold;
 }
 
-.dplayer-bezel {
-  display: none;
-}
-
 .row.no-gutter {
   margin-left: 0;
   margin-right: 0;
@@ -972,7 +968,7 @@ div.sticky {
 }
 
 .related-watch-wrap .related-watch-title {
-  padding: 2px 9px 5px 9px !important;
+  padding: 0px 9px 5px 9px !important;
 }
 
 .related-watch-wrap .related-watch-title h4 {
