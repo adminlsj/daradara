@@ -46,7 +46,7 @@ $('div#video-save-form-wrapper').on("submit", "form#video-save-form", function(e
         dataType: 'json',
         success: function(data){
             $('div#video-save-form-wrapper').html(data.unsaveBtn);
-            showSnackbar('影片已儲存於「訂閱」項目');
+            showSnackbar('影片已儲存於「我的清單」');
         },
         error: function(xhr, ajaxOptions, thrownError){
             showSnackbar('請刷新頁面後重試。');
@@ -289,14 +289,14 @@ document.addEventListener("msfullscreenchange", function() {
   handleFullscreenChange()
 });
 
-function handleFullscreenChange() {
+/* function handleFullscreenChange() {
     var videoWrap = $(".dplayer-video-wrap");
     if (videoWrap.css("padding-bottom") == "0px") {
         videoWrap.css("padding-bottom", "56.25%");
     } else {
         videoWrap.css("padding-bottom", "0px");
     }
-}
+} */
 
 function showSnackbar(text) {
     var snackbar = document.getElementById("snackbar");
