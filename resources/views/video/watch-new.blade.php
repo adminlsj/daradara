@@ -61,7 +61,7 @@
 
       <div class="video-show-panel-width">
         <div style="margin-bottom: -6px;">
-          <p style="font-size: 12px; color: #bdbdbd; font-weight: 500">{{ Carbon\Carbon::parse($video->uploaded_at)->diffForHumans() }} <span style="font-weight: normal;">&nbsp;|&nbsp;</span> {{ $video->views() }} 次點閱</p>
+          <p style="font-size: 12px; color: #bdbdbd; font-weight: 500">{{ Carbon\Carbon::parse($video->created_at)->format('Y-m-d') }} <span style="font-weight: normal;">&nbsp;|&nbsp;</span> {{ $video->views() }}次點閱</p>
         </div>
 
         <h3 id="shareBtn-title" style="line-height: 30px; font-weight: bold; font-size: 1.5em; margin-top: 0px; color: white;">{{ $video->title }}</h3>

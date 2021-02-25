@@ -1109,6 +1109,26 @@ div.sticky {
 }
 
 @media (max-width: 991px) {
+  .main-nav-video-show {
+    position: fixed !important;
+    background-image: rgba(0,0,0,0.8) !important; 
+    background-color: rgba(0,0,0,0.8) !important;
+    height: 50px !important; 
+    line-height: 50px !important; 
+  }
+
+  .main-nav {
+    position: absolute !important;
+    background-image: linear-gradient(to bottom,rgba(0,0,0,.7) 10%,rgba(0,0,0,0)) !important; 
+    background-color: transparent !important;
+    height: 50px !important; 
+    line-height: 50px !important;
+  }
+
+  #main-nav .nav-icon, #main-mobile-nav .nav-icon {
+    padding: 0 10px;
+  }
+  
   .video-show-mobile-background {
     background-color: #1e1e1e;
   }
@@ -1245,22 +1265,6 @@ div.sticky {
     -ms-transform: translateY(-50%) !important;
     transform: translateY(-50%) !important;
     margin-left: 5px;
-  }
-
-  .main-nav-video-show {
-    position: fixed !important;
-    background-image: rgba(0,0,0,0.8) !important; 
-    background-color: rgba(0,0,0,0.8) !important;
-    height: 50px !important; 
-    line-height: 50px !important; 
-  }
-
-  .main-nav {
-    position: absolute !important;
-    background-image: linear-gradient(to bottom,rgba(0,0,0,.7) 10%,rgba(0,0,0,0)) !important; 
-    background-color: transparent !important;
-    height: 50px !important; 
-    line-height: 50px !important;
   }
 
   #home-banner-wrapper {
