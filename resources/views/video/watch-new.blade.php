@@ -13,45 +13,50 @@
 <div id="content-div" class="video-show-mobile-background">
   <div class="row no-gutter video-show-width">
     <div class="col-md-9 single-show-player" style="background-color: #141414;">
-      @if ($video->outsource)
-        <div style="background-color: black; background-image: url('https://i.imgur.com/zXoBhXA.gif'); background-position: center; background-repeat: no-repeat; background-size: 150px; position: relative; width: 100%; height: 0; padding-bottom: 56.25%;">
-            <iframe src="{!! $video->sd !!}" style="border: 0; overflow: hidden; position: absolute; width: 100%; height: 100%; left: 0; top: 0;" allowfullscreen></iframe>
-        </div>
-
-      @else
-        <div style="position: relative;">
-          <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/dplayer/dist/DPlayer.min.css">
-          <div id="dplayer"></div>
-          <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-          <script src="https://cdn.jsdelivr.net/npm/flv.js/dist/flv.min.js"></script>
-          <script src="https://cdn.jsdelivr.net/npm/dplayer/dist/DPlayer.min.js"></script>
-
-          <script>
-            const dp = new DPlayer({
-              container: document.getElementById('dplayer'),
-              autoplay: false,
-              theme: '#FF0000',
-              preload: 'auto',
-              volume: 0.7,
-              video: {
-                url: '{!! $video->sd !!}',
-                pic: '{{ $video->imgurH() }}',
-              },
-            });
-
-            dp.on('play', function () {
-              $('#video-play-image').hide();
-            });
-            dp.on('pause', function () {
-              $('#video-play-image').show();
-            });
-          </script>
-
-          <div id="video-play-image" style="margin: 0; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
-            <img style="width: 100px; height: auto; cursor: pointer" src="https://i.imgur.com/brUASlm.png">
+      @if ($country_code == 'JP' && in_array($video->id, App\Video::$banned))
+          <div style="background-color: black; position: relative; width: 100%; height: 0; padding-bottom: 56.25%; text-align: center;">
+            <div style="font-size: 18px; color: white; margin: 0; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%">This video is no longer available. :(</div>
           </div>
-        </div>
+      @else
+        @if ($video->outsource)
+          <div style="background-color: black; background-image: url('https://i.imgur.com/zXoBhXA.gif'); background-position: center; background-repeat: no-repeat; background-size: 150px; position: relative; width: 100%; height: 0; padding-bottom: 56.25%;">
+              <iframe src="{!! $video->sd !!}" style="border: 0; overflow: hidden; position: absolute; width: 100%; height: 100%; left: 0; top: 0;" allowfullscreen></iframe>
+          </div>
 
+        @else
+          <div style="position: relative;">
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/dplayer/dist/DPlayer.min.css">
+            <div id="dplayer"></div>
+            <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+            <script src="https://cdn.jsdelivr.net/npm/flv.js/dist/flv.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/dplayer/dist/DPlayer.min.js"></script>
+
+            <script>
+              const dp = new DPlayer({
+                container: document.getElementById('dplayer'),
+                autoplay: false,
+                theme: '#FF0000',
+                preload: 'auto',
+                volume: 0.7,
+                video: {
+                  url: '{!! $video->sd !!}',
+                  pic: '{{ $video->imgurH() }}',
+                },
+              });
+
+              dp.on('play', function () {
+                $('#video-play-image').hide();
+              });
+              dp.on('pause', function () {
+                $('#video-play-image').show();
+              });
+            </script>
+
+            <div id="video-play-image" style="margin: 0; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+              <img style="width: 100px; height: auto; cursor: pointer" src="https://i.imgur.com/brUASlm.png">
+            </div>
+          </div>
+        @endif
       @endif
 
       <div class="video-show-panel-width">

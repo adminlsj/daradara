@@ -1,8 +1,8 @@
 <div style="padding-top: 15px">
-	<a href="">
+	<a>
 	  <img class="img-circle" style="width: 25px; height: auto; float:left;" src="{{ $reply->user->avatar == null ? $reply->user->avatarDefault() : $reply->user->avatar->filename }}">
 	</a>
-	<div class="comment-index-text" style="font-size: 0.9em; padding-left: 35px"><a style="text-decoration: none; color: darkgray;" href="">{{ $reply->user->name }} • <span style="color: darkgray;">{{ Carbon\Carbon::parse($reply->created_at)->diffForHumans() }}</span></a></div>
+	<div class="comment-index-text" style="font-size: 0.9em; padding-left: 35px"><a style="text-decoration: none; color: darkgray;">{{ $reply->user->name }} • <span style="color: darkgray;">{{ Carbon\Carbon::parse($reply->created_at)->diffForHumans() }}</span></a></div>
 	<div class="comment-index-text" style="color: white; font-size: 1em; margin-top: 1px; padding-left: 35px">{{ $reply->text }}</div>
 </div>
 <div style="padding-left: 35px; padding-top: 9px">

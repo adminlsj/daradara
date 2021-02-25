@@ -1,7 +1,7 @@
-<a href="{{ route('user.show', $comment->user) }}">
+<a>
   <img class="img-circle" style="width: 35px; height: auto; float:left;" src="{{ $comment->user->avatar == null ? $comment->user->avatarDefault() : $comment->user->avatar->filename }}">
 </a>
-<div class="comment-index-text" style="font-size: 0.9em;"><a style="text-decoration: none; color: darkgray;" href="{{ route('user.show', $comment->user) }}">{{ $comment->user->name }} • <span style="color: darkgray;">{{ Carbon\Carbon::parse($comment->created_at)->diffForHumans() }}</span></a></div>
+<div class="comment-index-text" style="font-size: 0.9em;"><a style="text-decoration: none; color: darkgray;">{{ $comment->user->name }} • <span style="color: darkgray;">{{ Carbon\Carbon::parse($comment->created_at)->diffForHumans() }}</span></a></div>
 <div class="comment-index-text" style="color: white; font-size: 1em; margin-top: 1px;">{{ $comment->text }}</div>
 
 <div id="comment-like-form-wrapper" style="margin-top: 10px">
@@ -27,10 +27,10 @@
 		<span style="color: darkgray; margin-left: 25px; font-size: 0.95em; cursor: pointer;" data-toggle="modal" data-target="#signUpModal">回覆</span>
 		@foreach ($comment->replies as $reply)
 			<div style="padding-top: 15px">
-				<a href="{{ route('user.show', $reply->user) }}">
+				<a>
 				  <img class="img-circle" style="width: 25px; height: auto; float:left;" src="{{ $reply->user->avatar == null ? $reply->user->avatarDefault() : $reply->user->avatar->filename }}">
 				</a>
-				<div class="comment-index-text" style="font-size: 0.9em; padding-left: 35px"><a style="text-decoration: none; color: darkgray;" href="{{ route('user.show', $reply->user) }}">{{ $reply->user->name }} • <span style="color: darkgray;">{{ Carbon\Carbon::parse($reply->created_at)->diffForHumans() }}</span></a></div>
+				<div class="comment-index-text" style="font-size: 0.9em; padding-left: 35px"><a style="text-decoration: none; color: darkgray;">{{ $reply->user->name }} • <span style="color: darkgray;">{{ Carbon\Carbon::parse($reply->created_at)->diffForHumans() }}</span></a></div>
 				<div class="comment-index-text" style="color: white; font-size: 1em; margin-top: 1px; padding-left: 35px">{{ $reply->text }}</div>
 			</div>
 			<div style="padding-left: 35px; padding-top: 9px">

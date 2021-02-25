@@ -5,7 +5,7 @@
 	    {{ csrf_field() }}
 	    <input name="comment-type" type="hidden" value="video">
 	    <input name="comment-foreign-id" type="hidden" value="{{ $current->id }}">
-	    <a href="{{ route('user.show', Auth::user()) }}">
+	    <a>
 	      <img class="lazy img-circle" style="width: 35px; height: auto; float:left;" src="https://i.imgur.com/JMcgEkPs.jpg" data-src="{{ Auth::user()->avatar == null ? Auth::user()->avatarDefault() : Auth::user()->avatar->filename }}" data-srcset="{{ Auth::user()->avatar == null ? Auth::user()->avatarDefault() : Auth::user()->avatar->filename }}">
 	    </a>
 	    <input style="margin-left: 10px; width: calc(100% - 45px); line-height: 30px; background-color: inherit; border: none; outline: none; color: white;" type="text" id="comment-text" name="comment-text" placeholder="新增一則公開評論...">
