@@ -15,7 +15,7 @@
   @if ($video->foreign_sd == null || !array_key_exists('redirect', $video->foreign_sd))
     @include('video.playModal')
   @endif
-  @include('video.userReportModal')
+  <!-- include video.userReportModal-->
   @include('video.shareModal')
 
   <div class="hidden-xs" style="position: relative;">

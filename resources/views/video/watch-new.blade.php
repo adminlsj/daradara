@@ -154,7 +154,7 @@
   </div>
 
   @include('video.shareModal')
-  @include('video.userReportModal')
+  <!-- include video.userReportModal-->
   @if (!Auth::check())
     @include('user.signUpModal')
     @include('user.loginModal')
