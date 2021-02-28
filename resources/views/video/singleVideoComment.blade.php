@@ -36,7 +36,7 @@
 			<div style="padding-left: 35px; padding-top: 9px">
 				<div style="display: inline-block;" data-toggle="modal" data-target="#signUpModal">
 				  	<span style="vertical-align: middle; font-size: 1.2em; color: darkgray; margin-top: -3px; cursor: pointer;" class="material-icons">thumb_up</span>
-				  	<span style="font-size: 0.95em; color: darkgray; padding-left: 5px; {{ $comment->likes->count() == 0 ? 'display:none' : '' }}">{{ $comment->likes->count() }}</span>
+				  	<span style="font-size: 0.95em; color: darkgray; padding-left: 5px; {{ $reply->likes->count() == 0 ? 'display:none' : '' }}">{{ $reply->likes->where('is_positive', true)->count() }}</span>
 				</div>
 				<div style="display: inline-block;" data-toggle="modal" data-target="#signUpModal">
 				  	<span style="vertical-align: middle; font-size: 1.2em; color: darkgray; margin-top: -3px; margin-left: 15px; cursor: pointer;" class="material-icons">thumb_down</span>
