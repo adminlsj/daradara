@@ -66,7 +66,7 @@ Route::get('/updateSpankbang', 'BotController@updateSpankbang');
 Route::get('/updateSlutload', 'BotController@updateSlutload');
 
 Route::get('/loadHomeTagList', 'HomeController@loadHomeTagList');
-// Route::get('/userReport', 'HomeController@userReport')->name('email.userReport');
+Route::get('/userReport', 'HomeController@userReport')->name('email.userReport');
 Route::get('/userStartUpload', 'UserController@userStartUpload')->name('email.userStartUpload');
 Route::get('/user/{user}/upload', 'UserController@userEditUpload')->name('user.userEditUpload');
 Route::post('/user/{user}/userUpdateUpload', 'UserController@userUpdateUpload')->name('user.userUpdateUpload');

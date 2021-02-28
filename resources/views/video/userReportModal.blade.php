@@ -2,6 +2,10 @@
 <div class="modal" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="reportModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <form action="{{ route('email.userReport') }}" method="GET">
+      <input type="hidden" id="video-id" name="video-id" value="{{ $current->id }}">
+      <input type="hidden" id="video-title" name="video-title" value="{{ $current->title }}">
+      <input type="hidden" id="video-sd" name="video-sd" value="{{ $current->sd }}">
+
       <div style="padding: 15px;" class="modal-content">
         <div style="border: 0px;" class="modal-header">
           <h4 style="color: gray;font-weight: 100; transform: rotate(45deg);position: absolute; font-size: 3em; top: 5px; cursor: pointer;" class="no-select" data-dismiss="modal">+</h4>
@@ -51,7 +55,6 @@
           
         </div>
         <div style="border: 0px; margin-bottom: -10px;" class="modal-footer">
-            <input name="video-id" type="hidden" value="{{ $video->id }}">
             <a style="width: auto; background-color: white; border: 0px; color: black; font-weight: 400; font-size: 1.1em;" class="btn btn-primary" data-dismiss="modal">取消</a>
             <button type="submit" style="width: auto; background-color: white; border: 0px; color: #d84b6b; font-weight: 400; font-size: 1.1em;" class="btn btn-primary" name="submit">提交</button>
         </div>
