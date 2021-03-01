@@ -73,14 +73,7 @@
           </a>
         </div>
 
-        <h5 style="color: #bdbdbd; font-weight: 400; margin-top: 18px; line-height: 20px; margin-bottom: 0px; white-space: pre-wrap; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;"><span style="font-weight: bold">{{ $video->translations['JP'] }}</span> • <span style="font-weight: bold">中文字幕</span> • {{ $video->caption }}</h5>
-
-        <h5 style="color: #bdbdbd; margin-top: 10px; line-height: 20px; margin-bottom: 20px;">
-          <div>播放時<span style="font-weight: bold; color: crimson;">影片載入失敗</span>嗎？</div>
-          <div>1. 請先嘗試刷新頁面</div>
-          <div>2. 請安裝VPN翻牆工具</div>
-          <div>3. 請透過報錯按鈕告訴給我們🙏</div>
-        </h5>
+        <h5 style="color: #bdbdbd; font-weight: 400; margin-top: 18px; line-height: 20px; margin-bottom: 15px; white-space: pre-wrap; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;"><span style="font-weight: bold">{{ $video->translations['JP'] }}</span> • <span style="font-weight: bold">中文字幕</span> • {{ $video->caption }}</h5>
 
         <h5 style="font-weight: 400; margin-bottom: 3px; margin-top: 0px;">
           @foreach ($video->tags() as $tag)

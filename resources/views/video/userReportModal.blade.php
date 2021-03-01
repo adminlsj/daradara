@@ -21,7 +21,7 @@
               <h4 style="color: gray;font-weight: 100; transform: rotate(45deg);position: absolute; font-size: 3em; top: 5px; cursor: pointer;" class="no-select" data-dismiss="modal">+</h4>
               <h4 style="color: #3F3F3F; margin-bottom: 0px; margin-top: 40px; font-size: 1.7em" class="modal-title" id="reportModalLabel">播放時影片載入失敗嗎？</h4>
               <div style="color: #3F3F3F; margin-bottom: 0px; margin-top: 5px; line-height: 22px">
-                <div>1. 請先嘗試刷新頁面</div>
+                <div>1. 請先嘗試<span style="color: red">刷新頁面</span></div>
                 <div>2. 請安裝VPN翻牆工具</div>
                 <div>3. 如果問題持續請告訴我們🙏</div>
               </div>
