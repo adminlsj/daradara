@@ -62,7 +62,7 @@
 
 			@if ($loop->iteration <= 2)
 				<div style="margin-bottom: -15px;">
-					@include('layouts.exoclick')
+					@include('layouts.exoclick-home')
 				</div>
 			@endif
 		@endforeach
