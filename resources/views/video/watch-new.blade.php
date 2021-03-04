@@ -141,12 +141,12 @@
       </div>
 
       <div class="tab mobile-padding" style="margin-top: 30px;">
-        <button id="defaultOpen" style="margin-right: 5px;" class="tablinks" onclick="openCity(event, 'London')">相關影片</button>
+        <button id="defaultOpen" style="margin-right: 10px;" class="tablinks" onclick="openCity(event, 'London')">相關影片</button>
         <button class="tablinks" onclick="openCity(event, 'Paris')">評論&nbsp;&nbsp;<span style="color: white; background-color: red; font-size: 12px; border-radius: 10px; padding: 1px 5px">{{ $comments->count() }}</span></button>
       </div>
 
       <!-- Tab content -->
-      <div id="London" class="tabcontent mobile-padding" style="margin-top: 75px">
+      <div id="London" class="tabcontent mobile-padding" style="margin-top: 79px">
         <div class="row" style="margin: 0px -2px;">
           @foreach ($related as $video)
             <div class="col-xs-2 hover-opacity-all related-video-width" style="padding: 0px 2px;">
@@ -161,7 +161,7 @@
         </div>
       </div>
 
-      <div id="Paris" class="tabcontent" style="margin-top: 90px">
+      <div id="Paris" class="tabcontent" style="margin-top: 79px">
         <div id="comment-section-wrapper" class="video-show-comment-width">
           @include('video.comment-section-wrapper')
         </div>

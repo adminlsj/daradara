@@ -910,21 +910,21 @@ div.sticky {
   background-color: inherit;
   float: left;
   border: none;
+  border-top: 4px solid #141414;
   outline: none;
   cursor: pointer;
-  padding: 12px 14px;
+  padding: 12px 5px;
   transition: 0.3s;
   color: #bdbdbd;
 }
 
 .tab button:hover {
-  background-color: #303030;
   color: white;
 }
 
 .tab button.active {
-  background-color: #3a3c3f;
   color: white;
+  border-top: 4px solid red;
 }
 
 .tabcontent {
