@@ -73,5 +73,6 @@ Route::post('/user/{user}/userUpdateUpload', 'UserController@userUpdateUpload')-
 Route::get('/user/{user}/{genre?}', 'UserController@show')->name('user.show');
 
 Route::get('/watch', 'VideoController@watch')->name('video.watch');
+Route::get('/download', 'VideoController@download')->name('video.download');
 Route::get('/list', 'HomeController@list')->name('home.list');
 Route::get('/search', ['as' => 'home.search', 'uses' => 'HomeController@search']);

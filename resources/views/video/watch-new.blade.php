@@ -112,6 +112,12 @@
           </div>
         </div>
 
+        <a href="{{ route('video.download') }}?v={{ $video->id }}" target="_blank" style="position: absolute; cursor: pointer; display: inline-block; cursor: pointer;" id="downloadBtn" class="single-icon-wrapper" title="下載">
+          <div class="single-icon no-select">
+            <i class="material-icons noselect" style="font-size: 22px; padding-top: 7px; padding-left: 7px; color: white">download</i>
+          </div>
+        </a>
+
         <div style="position: absolute; cursor: pointer; display: inline-block; cursor: pointer;" id="reportBtn" class="single-icon-wrapper" data-toggle="modal" data-target="#reportModal" title="報錯">
           <div class="single-icon no-select">
             <i class="material-icons noselect" style="font-size: 21px; padding-top: 7px; padding-left: 7px; color: white">outlined_flag</i>

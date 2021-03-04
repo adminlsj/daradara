@@ -59,6 +59,12 @@
 					<span class="material-icons" style="font-size: 50px; color: white; margin: 0; position: absolute; top: 50%; left: 50%; -ms-transform: translate(-50%, -50%); transform: translate(-50%, -50%);">navigate_next</span>
 				</div>
 			</div>
+
+			@if ($loop->iteration <= 2)
+				<div style="margin-bottom: -15px;">
+					@include('layouts.exoclick')
+				</div>
+			@endif
 		@endforeach
 	</div>
 
