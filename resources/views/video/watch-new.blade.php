@@ -146,7 +146,7 @@
       </div>
 
       <!-- Tab content -->
-      <div id="London" class="tabcontent mobile-padding" style="margin-top: 76px">
+      <div id="London" class="tabcontent mobile-padding" style="margin-top: 75px">
         <div class="row" style="margin: 0px -2px;">
           @foreach ($related as $video)
             <div class="col-xs-2 hover-opacity-all related-video-width" style="padding: 0px 2px;">
@@ -161,7 +161,7 @@
         </div>
       </div>
 
-      <div id="Paris" class="tabcontent" style="margin-top: 91px">
+      <div id="Paris" class="tabcontent" style="margin-top: 90px">
         <div id="comment-section-wrapper" class="video-show-comment-width">
           @include('video.comment-section-wrapper')
         </div>
