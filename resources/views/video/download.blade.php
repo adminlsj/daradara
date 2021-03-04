@@ -45,7 +45,7 @@
 		@include('layouts.exoclick')
 	</div>
 
-	<div class="hidden-md hidden-lg" style="text-align: left; padding-left: 5px; padding-top: 5px; margin-top: 15px; padding-bottom: 0px; margin-left: 15px; margin-right: 15px; width: 310px; height: 282px; background-color: #3a3c3f;">
+	<div class="hidden-md hidden-lg" style="text-align: left; padding-left: 5px; padding-top: 5px; margin-top: 15px; padding-bottom: 0px; margin-left: 15px; margin-right: 15px; margin-bottom: 15px; width: 310px; height: 282px; background-color: #3a3c3f;">
 	    <div style="margin-bottom: 5px; color: white; font-size: 12px;">點點廣告，贊助我們（●´∀｀）ノ♡</div>
 	    <script type="application/javascript">
 	        var ad_idzone = "4011926",
