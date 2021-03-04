@@ -1187,6 +1187,12 @@ div.sticky {
   }
 }
 
+@media (max-width: 1250px) {
+  .related-video-width {
+    width: calc(100% / 4);
+  }
+}
+
 @media (max-width: 1103px) {
   .exoclick-video-show-banner, .exoclick-video-show-squares {
     display: none;
@@ -1194,10 +1200,6 @@ div.sticky {
 
   .exoclick-video-show-square {
     display: block;
-  }
-
-  .related-video-width {
-    width: calc(100% / 4);
   }
 }
 
