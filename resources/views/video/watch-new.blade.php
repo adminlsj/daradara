@@ -163,7 +163,7 @@
       <div id="London" class="tabcontent mobile-padding" style="margin-top: 85px">
         <div class="row" style="margin: 0px -2px;">
           @foreach ($related as $video)
-            <div class="col-xs-2 hover-opacity-all related-video-width" style="padding: 0px 2px;">
+            <div class="col-xs-2 hover-opacity-all related-video-width {{ $loop->iteration > 30 ? 'hidden-xs hidden-sm' : '' }}" style="padding: 0px 2px;">
               <a style="text-decoration: none;" href="{{ route('video.watch') }}?v={{ $video->id }}">
                 <div class="home-rows-videos-div" style="position: relative; display: inline-block; margin-bottom:15px">
                   <img style="width: 100%" src="{{ $video->cover }}">
@@ -172,6 +172,19 @@
               </a>
             </div>
           @endforeach
+        </div>
+        <div class="load-more-related-btn related-watch-wrap hidden-md hidden-lg" style="font-weight: 400 !important; margin-top: 0px;">更多相關影片</div>
+        <div id="more-related-ad" class="hidden-md hidden-lg" style="text-align: left; padding-left: 5px; padding-top: 5px; margin-top: 15px; margin-bottom: 10px; padding-bottom: 0px; width: 310px; height: 282px; background-color: #3a3c3f;">
+          <div style="margin-bottom: 5px; color: white; font-size: 12px;">點點廣告，贊助我們（●´∀｀）ノ♡</div>
+          <script type="application/javascript">
+              var ad_idzone = "4011926",
+              ad_width = "300",
+              ad_height = "250"
+          </script>
+          <script type="application/javascript" src="https://a.realsrv.com/ads.js"></script>
+          <noscript>
+              <iframe src="https://syndication.realsrv.com/ads-iframe-display.php?idzone=4011926&output=noscript&type=300x250" width="300" height="250" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
+          </noscript>
         </div>
       </div>
 
@@ -204,8 +217,6 @@
           evt.currentTarget.className += " active";
         }
       </script>
-
-      <!-- <div class="load-more-related-btn related-watch-wrap" style="font-weight: 400 !important; margin-top: 0px; margin-bottom: 30px;">更多相關影片</div> -->
 
       @include('layouts.exoclick-video-show')
     </div>

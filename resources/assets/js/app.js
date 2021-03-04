@@ -31,7 +31,10 @@ $('#broad').change(function(){
 
 $('.load-more-related-btn').click(function() {
     $(this).css('display', 'none');
-    $(".hidden-related-video").css('display', 'block');
+    var hidden = $(".related-video-width");
+    hidden.removeClass('hidden-xs');
+    hidden.removeClass('hidden-sm');
+    $('#more-related-ad').css('margin-top', '0px');
 })
 
 $('#video-play-image').click(function() {
