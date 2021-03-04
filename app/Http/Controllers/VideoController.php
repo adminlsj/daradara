@@ -59,7 +59,7 @@ class VideoController extends Controller
 
         $video = Video::select('id', 'user_id', 'playlist_id', 'title', 'translations', 'caption', 'cover', 'tags', 'sd', 'outsource', 'current_views', 'views', 'imgur', 'foreign_sd', 'duration', 'created_at', 'uploaded_at')->find($request->v);
 
-        if (!array_key_exists('spankbang', $video->foreign_sd) && !array_key_exists('youjizz', $video->foreign_sd)) {
+        if ($video->foreign_sd == null || (!array_key_exists('spankbang', $video->foreign_sd) && !array_key_exists('youjizz', $video->foreign_sd))) {
             return 'error';
         }
 
