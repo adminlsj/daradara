@@ -139,11 +139,17 @@ $('.comment-reply-reply-form-wrapper').on("submit", ".comment-reply-create-form"
     })
 });
 
-$("#comment-icon").click(function() {
-    $(".alert-circle").css('display', 'none');
-    $("#comment-section-wrapper").css('display', 'block');
-    if (!is_mobile) {
-        $("#comment-text").focus();
+$("#hide-playlist-btn").click(function() {
+    var scroll = $("#playlist-scroll");
+    var icon = $("#hide-playlist-btn i");
+    if (scroll.css('display') == 'none') {
+        scroll.css('display', 'block');
+        icon.css('padding-top', '3px');
+        icon.html('keyboard_arrow_down');
+    } else {
+        scroll.css('display', 'none');
+        icon.css('padding-top', '2px');
+        icon.html('keyboard_arrow_up');
     }
 });
 
