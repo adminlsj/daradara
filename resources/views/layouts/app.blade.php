@@ -14,10 +14,10 @@
         <meta name="RATING" content="RTA-5042-1996-1400-1577-RTA" />
     @show
 
-    <meta name="title" content="Hanime1.me - H動漫的完美體驗">
-    <title>Hanime1.me - H動漫的完美體驗</title>
+    <meta name="title" content="Hanime1.me - H動漫/裏番/線上看">
+    <title>Hanime1.me - H動漫/裏番/線上看</title>
     <meta name="description" 
-          content="Hanime1.me 帶給你最完美的H動漫、H動畫、成人工口的線上看體驗，絕對沒有天殺的片頭廣告！">
+          content="Hanime1.me 帶給你最完美的H動漫、H動畫、裏番、里番、成人工口的線上看體驗，絕對沒有天殺的片頭廣告！">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">

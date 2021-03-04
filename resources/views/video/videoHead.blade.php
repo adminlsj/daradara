@@ -4,8 +4,8 @@
 <meta property="og:description" content="{{ $video->caption }}" />
 <meta property="og:image" content="https://i.imgur.com/{{ $video->imgur }}h.png" />
 
-<title>{{ $video->translations['JP'] }}&nbsp;-&nbsp;H動漫線上看&nbsp;-&nbsp;Hanime1.me</title>
-<meta name="title" content="{{ $video->translations['JP'] }} - H動漫線上看 - Hanime1.me">
+<title>{{ $video->translations['JP'] }} [中文字幕]&nbsp;-&nbsp;H動漫/裏番/線上看&nbsp;-&nbsp;Hanime1.me</title>
+<meta name="title" content="{{ $video->translations['JP'] }} - H動漫/裏番/線上看 - Hanime1.me">
 <meta name="description" content="{{ $video->caption }}">
 
 <script type="application/ld+json">

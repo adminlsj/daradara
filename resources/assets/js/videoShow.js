@@ -13,6 +13,21 @@ shareButton.addEventListener('click', event => {
   }
 });
 
+$(document).ready(function() {
+  var myElement = document.getElementById('current');
+  var topPos = myElement.offsetTop;
+  document.getElementById('playlist-scroll').scrollTop = topPos - 185 + myElement.offsetHeight / 2;
+});
+
+var stickyOffset = $('#myHeader').offset().top;
+$(window).scroll(function(){
+  var sticky = $('#myHeader'),
+      scroll = $(window).scrollTop();
+
+  if (scroll + 68 >= stickyOffset) sticky.addClass('fixed');
+  else sticky.removeClass('fixed');
+});
+
 $('div#video-like-form-wrapper').on("submit", "form#video-like-form", function(e) {
     $.ajaxSetup({
         header:$('meta[name="_token"]').attr('content')

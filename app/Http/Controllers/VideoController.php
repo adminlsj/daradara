@@ -23,7 +23,9 @@ class VideoController extends Controller
 {
     public function watch(Request $request){
 
-        $video = Video::select('id', 'user_id', 'playlist_id', 'title', 'translations', 'caption', 'cover', 'tags', 'sd', 'outsource', 'current_views', 'views', 'imgur', 'foreign_sd', 'duration', 'created_at', 'uploaded_at')->withCount('likes')->find($request->v);
+        $video = Video::with('watch:id,title')->select('id', 'user_id', 'playlist_id', 'title', 'translations', 'caption', 'cover', 'tags', 'sd', 'outsource', 'current_views', 'views', 'imgur', 'foreign_sd', 'duration', 'created_at', 'uploaded_at')->withCount('likes')->find($request->v);
+
+        $watch = Watch::where('id', $video->playlist_id)->select('id', 'title')->withCount('videos')->first();
 
         if ($video->cover == null || ($video->foreign_sd != null && array_key_exists('redirect', $video->foreign_sd))) {
             header("Location: https://www.laughseejapan.com".$request->getRequestUri());
@@ -33,12 +35,6 @@ class VideoController extends Controller
         $videos = Video::with('user:id,name')->where('playlist_id', $video->playlist_id)->orderBy('created_at', 'desc')->select('id', 'user_id', 'imgur', 'title', 'sd', 'views', 'created_at')->get();
 
         $tags = array_intersect($video->tags(), Video::$selected_tags);
-        $recommends = Video::where(function($query) use ($tags) {
-            foreach ($tags as $tag) {
-                $query->orWhere('tags', 'ilike', '%'.$tag.'%');
-            }
-        })->whereIntegerNotInRaw('id', $videos->pluck('id'))->where('cover', '!=', null)->where('imgur', '!=', 'CJ5svNv')->select('id', 'title', 'cover')->inRandomOrder()->limit(42)->get();
-
         $video->current_views++;
         $video->views++;
         $video->save();
@@ -50,13 +46,13 @@ class VideoController extends Controller
                     $query->orWhere('tags', 'like', '%'.$tag.'%');
                 }
             }
-        })->where('cover', '!=', null)->where('imgur', '!=', 'CJ5svNv')->where('playlist_id', '!=', $current->playlist_id)->inRandomOrder()->select('id', 'user_id', 'imgur', 'title', 'sd', 'views', 'created_at')->limit(60)->get();
+        })->where('cover', '!=', null)->where('imgur', '!=', 'CJ5svNv')->where('playlist_id', '!=', $current->playlist_id)->inRandomOrder()->select('id', 'user_id', 'cover', 'imgur', 'title', 'sd', 'views', 'created_at')->limit(60)->get();
 
         $country_code = isset($_SERVER["HTTP_CF_IPCOUNTRY"]) ? $_SERVER["HTTP_CF_IPCOUNTRY"] : 'N/A';
 
         $comments = Comment::with('user.avatar', 'likes', 'replies.likes', 'replies.user.avatar')->where('foreign_id', $video->id)->orderBy('created_at', 'desc')->get();
 
-        return view('video.watch-new', compact('video', 'videos', 'current', 'recommends', 'tags', 'country_code', 'comments', 'related'));
+        return view('video.watch-new', compact('video', 'watch', 'videos', 'current', 'tags', 'country_code', 'comments', 'related'));
     }
 
     public function like(Request $request)

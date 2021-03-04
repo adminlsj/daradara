@@ -65,6 +65,23 @@ body {
   width: 396px;
 }
 
+.playlist-scoll-wrapper::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 8px;
+}
+
+.playlist-scoll-wrapper::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, .4);
+}
+
+.hover-video-playlist > div {
+  transition: 0.3s;
+}
+
+.hover-video-playlist > div:hover {
+  background-color: #454545;
+}
+
 .video-show-width {
   padding: 0 4%;
   padding-top: 83px;
@@ -78,6 +95,10 @@ body {
   padding: 5px 0px 2px 0px;
   margin-top: 10px;
   margin-bottom: 10px;
+}
+
+.related-video-width {
+  width: 20%;
 }
 
 #main-nav {
@@ -874,6 +895,48 @@ div.sticky {
   top: 0;
 }
 
+.fixed {
+  position: fixed;
+  top: 53px;
+  width: 100%;
+}
+
+/* Style the buttons that are used to open the tab content */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 12px 14px;
+  transition: 0.3s;
+  color: #bdbdbd;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: white;
+  color: black;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  animation: fadeEffect 1s; /* Fading effect takes 1 second */
+}
+
+/* Go from zero to full opacity */
+@keyframes fadeEffect {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
 /* Place the navbar at the bottom of the page, and make it stick */
 .navbar-bottom {
   background-color: #3c3d41;
@@ -961,8 +1024,7 @@ div.sticky {
 }
 
 .related-watch-wrap {
-  margin: 10px 0px;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1);
+  padding: 10px 15px;
   font-weight: bold !important;
   position: relative;
 }
@@ -1098,6 +1160,24 @@ div.sticky {
   }
 }
 
+@media (min-width: 1400px) {
+  .related-video-width {
+    width: calc(100% / 5);
+  }
+}
+
+@media (min-width: 1500px) {
+  .related-video-width {
+    width: calc(100% / 6);
+  }
+}
+
+@media (max-width: 1400px) {
+  .related-video-width {
+    width: calc(100% / 5);
+  }
+}
+
 @media (max-width: 1103px) {
   .exoclick-video-show-banner, .exoclick-video-show-squares {
     display: none;
@@ -1106,15 +1186,29 @@ div.sticky {
   .exoclick-video-show-square {
     display: block;
   }
+
+  .related-video-width {
+    width: calc(100% / 4);
+  }
 }
 
 @media (max-width: 991px) {
+  .mobile-padding {
+    padding: 0 15px;
+  }
+
+  .related-video-width {
+    width: calc(100% / 4);
+  }
+
   .main-nav-video-show {
     position: fixed !important;
     background-image: rgba(0,0,0,0.8) !important; 
     background-color: rgba(0,0,0,0.8) !important;
     height: 50px !important; 
     line-height: 50px !important; 
+    padding-left: 15px !important;
+    padding-right: 15px !important;
   }
 
   .main-nav {
@@ -1140,8 +1234,8 @@ div.sticky {
   }
 
   .video-show-panel-width {
-    padding-left: 4%;
-    padding-right: 4%;
+    padding-left: 15px;
+    padding-right: 15px;
   }
 
   .video-show-comment-width {
@@ -1150,23 +1244,23 @@ div.sticky {
   }
 
   #video-like-form-wrapper {
-    left: calc(4%);
+    left: calc(15px);
   }
 
   #video-save-form-wrapper {
-    left: calc(4% + 40px);
+    left: calc(15px + 40px);
   }
 
   #shareBtn {
-    left: calc(4% + 79px);
+    left: calc(15px + 79px);
   }
 
   #reportBtn {
-    left: calc(4% + 118px);
+    left: calc(15px + 118px);
   }
 
   #complainBtn {
-    right: 4%;
+    right: 15px;
   }
 
   .hidden-related-video {
@@ -1253,6 +1347,10 @@ div.sticky {
 }
 
 @media (max-width: 767.9px) {
+  .related-video-width {
+    width: calc(100% / 3);
+  }
+
   .nav-bottom-padding {
     padding-bottom: 50px;
   }

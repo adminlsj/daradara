@@ -10,7 +10,7 @@
 @endsection
 
 @section('content')
-<div id="content-div" class="video-show-mobile-background">
+<div id="content-div">
   <div class="row no-gutter video-show-width">
     <div class="col-md-9 single-show-player" style="background-color: #141414;">
       @if ($country_code == 'JP' && in_array($video->id, App\Video::$banned))
@@ -59,6 +59,30 @@
         @endif
       @endif
 
+      <div class="hidden-md hidden-lg" style="text-align: center; padding-top: 5px; background-color: #1e1e1e">
+        <script type="application/javascript">
+            var ad_idzone = "4206424",
+            ad_width = "300",
+            ad_height = "100";
+        </script>
+        <script type="application/javascript" src="https://a.realsrv.com/ads.js"></script>
+        <noscript>
+            <iframe src="https://syndication.realsrv.com/ads-iframe-display.php?idzone=4206424&output=noscript" width="300" height="100" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
+        </noscript>
+      </div>
+
+      <div class="hidden-xs hidden-sm" style="margin-top: 7px; margin-bottom: -5px; text-align: center">
+        <script type="application/javascript">
+            var ad_idzone = "4205380",
+            ad_width = "728",
+            ad_height = "90";
+        </script>
+        <script type="application/javascript" src="https://a.realsrv.com/ads.js"></script>
+        <noscript>
+            <iframe src="https://syndication.realsrv.com/ads-iframe-display.php?idzone=4205380&output=noscript" width="728" height="90" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
+        </noscript>
+      </div>
+
       <div class="video-show-panel-width">
         <div style="margin-bottom: -6px;">
           <p style="font-size: 12px; color: #bdbdbd; font-weight: 500">{{ Carbon\Carbon::parse($video->created_at)->format('Y-m-d') }} <span style="font-weight: normal;">&nbsp;|&nbsp;</span> {{ $video->views() }}次點閱</p>
@@ -66,14 +90,7 @@
 
         <h3 id="shareBtn-title" style="line-height: 30px; font-weight: bold; font-size: 1.5em; margin-top: 0px; color: white;">{{ $video->title }}</h3>
 
-        <div style="margin-top: 14px">
-          <a style="text-decoration: none;">
-            <img class="lazy" style="float:left; width: 20px; height: 20px; margin-top: 0px;" src="{{ $video->user->avatarCircleB() }}" data-src="{{ $video->user->avatar == null ? $video->user->avatarDefault() : $video->user->avatar->filename }}" data-srcset="{{ $video->user->avatar == null ? $video->user->avatarDefault() : $video->user->avatar->filename }}">
-            <span style="color: #bdbdbd; font-weight: 500; padding-left: 7px;">{{ $video->user->name }}</span>
-          </a>
-        </div>
-
-        <h5 style="color: #bdbdbd; font-weight: 400; margin-top: 18px; line-height: 20px; margin-bottom: 15px; white-space: pre-wrap; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;"><span style="font-weight: bold">{{ $video->translations['JP'] }}</span> • <span style="font-weight: bold">中文字幕</span> • {{ $video->caption }}</h5>
+        <h5 style="color: #bdbdbd; font-weight: 400; margin-top: 10px; line-height: 20px; margin-bottom: 15px; white-space: pre-wrap; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;"><span style="font-weight: bold">{{ $video->translations['JP'] }} [中文字幕]</span></h5>
 
         <h5 style="font-weight: 400; margin-bottom: 3px; margin-top: 0px;">
           @foreach ($video->tags() as $tag)
@@ -106,16 +123,12 @@
         </div>
       </div>
 
-      <div id="comment-section-wrapper" class="video-show-comment-width">
-        <hr class="video-show-panel-separate-line" style=" margin-top: 10px; border-color: dimgray;">
-        @include('video.comment-section-wrapper')
+      <div class="hidden-md hidden-lg" style="margin-top: 25px">
+        @include('video.playlist-panel')
       </div>
 
-      @include('layouts.exoclick-video-show')
-    </div>
-
-    <div class="col-md-3 single-show-list">
-      <div style="text-align: center; margin-top: 0px">
+      <div class="hidden-md hidden-lg" style="text-align: left; padding-left: 5px; padding-top: 5px; margin-top: 15px; margin-bottom: -15px; padding-bottom: 0px; margin-left: 15px; margin-right: 15px; width: 310px; height: 282px; background-color: #3a3c3f;">
+        <div style="margin-bottom: 5px; color: white; font-size: 12px;">點點廣告，贊助我們（●´∀｀）ノ♡</div>
         <script type="application/javascript">
             var ad_idzone = "4011926",
             ad_width = "300",
@@ -127,29 +140,107 @@
         </noscript>
       </div>
 
-      <h4 style="font-size: 15px; color: white; font-weight: bold">集數列表</h4>
-      <div id="video-playlist-wrapper">
-        <div style="text-align: left;">
-          @foreach ($videos as $video)
-            <div class="related-watch-wrap hover-opacity-all">
-              @include('video.singleShowRelated', ['source' => 'video'])
-            </div>
-          @endforeach
-        </div>
+      <div class="tab mobile-padding" style="margin-top: 30px;">
+        <button id="defaultOpen" class="tablinks" onclick="openCity(event, 'London')">相關影片</button>
+        <button class="tablinks" onclick="openCity(event, 'Paris')">評論&nbsp;&nbsp;<span style="color: white; background-color: red; font-size: 12px; border-radius: 10px; padding: 1px 5px">{{ $comments->count() }}</span></button>
       </div>
 
-      <h4 style="font-size: 15px; color: white; margin-top: 15px; font-weight: bold">相關影片</h4>
-      <div id="video-playlist-wrapper">
-        <div style="text-align: left;">
+      <!-- Tab content -->
+      <div id="London" class="tabcontent mobile-padding" style="margin-top: 75px">
+        <div class="row" style="margin: 0px -2px;">
           @foreach ($related as $video)
-            <div class="related-watch-wrap hover-opacity-all {{ $loop->iteration > 30 ? 'hidden-related-video' : '' }}">
-              @include('video.singleShowRelated', ['source' => 'video'])
+            <div class="col-xs-2 hover-opacity-all related-video-width" style="padding: 0px 2px;">
+              <a style="text-decoration: none;" href="{{ route('video.watch') }}?v={{ $video->id }}">
+                <div class="home-rows-videos-div" style="position: relative; display: inline-block; margin-bottom:15px">
+                  <img style="width: 100%" src="{{ $video->cover }}">
+                  <div class="home-rows-videos-title" style="position:absolute; bottom:0; left:0; white-space: initial; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; color: white; width: 100%; padding: 3px 3px; background: linear-gradient(to bottom, transparent 0%, black 120%);">{{ $video->title }}</div>
+                  </div>
+              </a>
             </div>
           @endforeach
         </div>
       </div>
 
-      <div class="load-more-related-btn related-watch-wrap" style="font-weight: 400 !important;">更多相關影片</div>
+      <div id="Paris" class="tabcontent" style="margin-top: 90px">
+        <div id="comment-section-wrapper" class="video-show-comment-width">
+          @include('video.comment-section-wrapper')
+        </div>
+      </div>
+
+      <script>
+        document.getElementById("defaultOpen").click();
+        function openCity(evt, cityName) {
+          // Declare all variables
+          var i, tabcontent, tablinks;
+
+          // Get all elements with class="tabcontent" and hide them
+          tabcontent = document.getElementsByClassName("tabcontent");
+          for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+          }
+
+          // Get all elements with class="tablinks" and remove the class "active"
+          tablinks = document.getElementsByClassName("tablinks");
+          for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+          }
+
+          // Show the current tab, and add an "active" class to the button that opened the tab
+          document.getElementById(cityName).style.display = "block";
+          evt.currentTarget.className += " active";
+        }
+      </script>
+
+      <!-- <div class="load-more-related-btn related-watch-wrap" style="font-weight: 400 !important; margin-top: 0px; margin-bottom: 30px;">更多相關影片</div> -->
+
+      @include('layouts.exoclick-video-show')
+    </div>
+
+    <div class="col-md-3 single-show-list">
+      <div class="hidden-xs hidden-sm" style="text-align: left; padding-left: 5px; padding-top: 5px; margin-top: 0px; margin-bottom: 15px; padding-bottom: 0px; width: 310px; height: 282px; background-color: #3a3c3f;">
+        <div style="margin-bottom: 5px; color: white; font-size: 12px;">點點廣告，贊助我們（●´∀｀）ノ♡</div>
+        <script type="application/javascript">
+            var ad_idzone = "4011926",
+            ad_width = "300",
+            ad_height = "250"
+        </script>
+        <script type="application/javascript" src="https://a.realsrv.com/ads.js"></script>
+        <noscript>
+            <iframe src="https://syndication.realsrv.com/ads-iframe-display.php?idzone=4011926&output=noscript&type=300x250" width="300" height="250" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
+        </noscript>
+      </div>
+
+      <div class="hidden-xs hidden-sm">
+        @include('video.playlist-panel')
+      </div>
+
+      <div id="myHeader" class="hidden-xs hidden-sm">
+        <div style="text-align: left; padding-left: 5px; padding-top: 5px; margin-top: 15px; margin-bottom: 10px; padding-bottom: 0px; width: 310px; height: 282px; background-color: #3a3c3f;">
+          <div style="margin-bottom: 5px; color: white; font-size: 12px;">點點廣告，贊助我們（●´∀｀）ノ♡</div>
+          <script type="application/javascript">
+              var ad_idzone = "4011926",
+              ad_width = "300",
+              ad_height = "250"
+          </script>
+          <script type="application/javascript" src="https://a.realsrv.com/ads.js"></script>
+          <noscript>
+              <iframe src="https://syndication.realsrv.com/ads-iframe-display.php?idzone=4011926&output=noscript&type=300x250" width="300" height="250" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
+          </noscript>
+        </div>
+
+        <div style="text-align: left; padding-left: 5px; padding-top: 5px; margin-top: 15px; margin-bottom: 10px; padding-bottom: 0px; width: 310px; height: 282px; background-color: #3a3c3f;">
+          <div style="margin-bottom: 5px; color: white; font-size: 12px;">點點廣告，贊助我們（●´∀｀）ノ♡</div>
+          <script type="application/javascript">
+              var ad_idzone = "4011926",
+              ad_width = "300",
+              ad_height = "250"
+          </script>
+          <script type="application/javascript" src="https://a.realsrv.com/ads.js"></script>
+          <noscript>
+              <iframe src="https://syndication.realsrv.com/ads-iframe-display.php?idzone=4011926&output=noscript&type=300x250" width="300" height="250" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
+          </noscript>
+        </div>
+      </div>
     </div>
   </div>
 
