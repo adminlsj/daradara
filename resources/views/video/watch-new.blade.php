@@ -174,11 +174,37 @@
           @endforeach
         </div>
         <div class="load-more-related-btn related-watch-wrap hidden-md hidden-lg" style="font-weight: 400 !important; margin-top: 0px;">更多相關影片</div>
+
+        <div id="more-related-ad" class="hidden-md hidden-lg" style="text-align: left; padding-left: 5px; padding-top: 5px; margin-top: 15px; margin-bottom: 10px; padding-bottom: 0px; width: 310px; height: 282px; background-color: #3a3c3f;">
+          <div style="margin-bottom: 5px; color: white; font-size: 12px;">點點廣告，贊助我們（●´∀｀）ノ♡</div>
+          <script type="application/javascript">
+              var ad_idzone = "4011926",
+              ad_width = "300",
+              ad_height = "250"
+          </script>
+          <script type="application/javascript" src="https://a.realsrv.com/ads.js"></script>
+          <noscript>
+              <iframe src="https://syndication.realsrv.com/ads-iframe-display.php?idzone=4011926&output=noscript&type=300x250" width="300" height="250" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
+          </noscript>
+        </div>
       </div>
 
       <div id="Paris" class="tabcontent" style="margin-top: 85px">
         <div id="comment-section-wrapper" class="video-show-comment-width">
           @include('video.comment-section-wrapper')
+        </div>
+
+        <div id="more-related-ad" class="hidden-md hidden-lg" style="text-align: left; padding-left: 5px; padding-top: 5px; margin-top: 0px; margin-bottom: 10px; padding-bottom: 0px; width: 310px; height: 282px; background-color: #3a3c3f; margin-left: 15px; margin-right: 15px;">
+          <div style="margin-bottom: 5px; color: white; font-size: 12px;">點點廣告，贊助我們（●´∀｀）ノ♡</div>
+          <script type="application/javascript">
+              var ad_idzone = "4011926",
+              ad_width = "300",
+              ad_height = "250"
+          </script>
+          <script type="application/javascript" src="https://a.realsrv.com/ads.js"></script>
+          <noscript>
+              <iframe src="https://syndication.realsrv.com/ads-iframe-display.php?idzone=4011926&output=noscript&type=300x250" width="300" height="250" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
+          </noscript>
         </div>
       </div>
 
@@ -205,19 +231,6 @@
           evt.currentTarget.className += " active";
         }
       </script>
-
-      <div id="more-related-ad" class="hidden-md hidden-lg" style="text-align: left; padding-left: 5px; padding-top: 5px; margin-top: 15px; margin-bottom: 10px; padding-bottom: 0px; margin-left: 15px; margin-right: 15px; width: 310px; height: 282px; background-color: #3a3c3f;">
-        <div style="margin-bottom: 5px; color: white; font-size: 12px;">點點廣告，贊助我們（●´∀｀）ノ♡</div>
-        <script type="application/javascript">
-            var ad_idzone = "4011926",
-            ad_width = "300",
-            ad_height = "250"
-        </script>
-        <script type="application/javascript" src="https://a.realsrv.com/ads.js"></script>
-        <noscript>
-            <iframe src="https://syndication.realsrv.com/ads-iframe-display.php?idzone=4011926&output=noscript&type=300x250" width="300" height="250" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
-        </noscript>
-      </div>
 
       @include('layouts.exoclick-video-show')
     </div>
