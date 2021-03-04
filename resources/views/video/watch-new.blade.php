@@ -140,7 +140,7 @@
         </noscript>
       </div>
 
-      <div class="tab mobile-padding" style="margin-top: 30px;">
+      <div class="tab mobile-padding" style="margin-top: 30px; font-weight: bold;">
         <button id="defaultOpen" style="margin-right: 10px;" class="tablinks" onclick="openCity(event, 'London')">相關影片</button>
         <button class="tablinks" onclick="openCity(event, 'Paris')">評論&nbsp;&nbsp;<span style="color: white; background-color: red; font-size: 12px; border-radius: 10px; padding: 1px 5px">{{ $comments->count() }}</span></button>
       </div>
