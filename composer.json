@@ -15,7 +15,7 @@
         "laravel/socialite": "^3.0",
         "laravel/tinker": "~1.0",
         "laravelrus/localized-carbon": "1.*",
-        "league/flysystem-aws-s3-v3": "~1.0",
+        "league/flysystem-aws-s3-v3": "^2.0",
         "predis/predis": "~1.0",
         "simplehtmldom/simplehtmldom": "dev-master",
         "spatie/browsershot": "^3.37",
