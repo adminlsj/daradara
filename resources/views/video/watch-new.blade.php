@@ -23,6 +23,37 @@
               <iframe src="{!! $video->sd !!}" style="border: 0; overflow: hidden; position: absolute; width: 100%; height: 100%; left: 0; top: 0;" allowfullscreen></iframe>
           </div>
 
+        @elseif (strpos($video->sd, 'https://space.hanime1.me/') !== false)
+          <link rel="stylesheet" href="https://cdn.fluidplayer.com/v2/current/fluidplayer.min.css" type="text/css">
+          <script src="https://cdn.fluidplayer.com/v2/current/fluidplayer.min.js"></script>
+
+          <div style="margin-bottom: -5px;">
+            <video id="my-video">
+                <source src="{!! $video->sd !!}" type="video/mp4">
+            </video>
+          </div>
+
+          <script type="application/javascript">
+              var testVideo = fluidPlayer(
+                  "my-video",
+                  {
+                      layoutControls: {
+                        "allowTheatre": false,
+                        "fillToContainer": false,
+                        "playButtonShowing": true,
+                        "posterImage": "{{ $video->imgurH() }}"
+                      },
+                      vastOptions: {
+                          "adList": [{
+                              "roll": "preRoll",
+                              "vastTag": "https://syndication.realsrv.com/splash.php?idzone=4208068",
+                              "timer": 5
+                          }]
+                      }
+                  }
+              );
+          </script>
+
         @else
           <div style="position: relative;">
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/dplayer/dist/DPlayer.min.css">
@@ -59,7 +90,7 @@
         @endif
       @endif
 
-      <div class="hidden-md hidden-lg" style="text-align: center; padding-top: 5px; background-color: black">
+      <div class="hidden-md hidden-lg" style="text-align: center; padding-top: 5px; background-color: black;">
         <script type="application/javascript">
             var ad_idzone = "4206424",
             ad_width = "300",
