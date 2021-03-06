@@ -38,35 +38,61 @@
             </div>
           </div>
 
-          <script type="application/javascript">
-              var fluidplayer = fluidPlayer(
-                  "my-video",
-                  {
-                      layoutControls: {
-                        "primaryColor": 'red',
-                        "allowTheatre": false,
-                        "fillToContainer": false,
-                        "playButtonShowing": false,
-                        "playPauseAnimation": false,
-                        "posterImage": "{{ $video->imgurH() }}"
-                      },
-                      vastOptions: {
-                          "adList": [{
-                              "roll": "preRoll",
-                              "vastTag": "https://syndication.realsrv.com/splash.php?idzone=4208068",
-                              "timer": 5
-                          }]
-                      }
-                  }
-              );
+          @if (strpos($video->sd, 'https://vdownload.hembed.com/') !== false)
+            <script type="application/javascript">
+                var fluidplayer = fluidPlayer(
+                    "my-video",
+                    {
+                        layoutControls: {
+                          "primaryColor": 'red',
+                          "allowTheatre": false,
+                          "fillToContainer": false,
+                          "playButtonShowing": false,
+                          "playPauseAnimation": false,
+                          "posterImage": "{{ $video->imgurH() }}"
+                        },
+                        vastOptions: {
+                            "adList": [{
+                                "roll": "preRoll",
+                                "vastTag": "https://syndication.realsrv.com/splash.php?idzone=4208068",
+                                "timer": 5
+                            }]
+                        }
+                    }
+                );
 
-              fluidplayer.on('play', function () {
-                $('#video-play-image').hide();
-              });
-              fluidplayer.on('pause', function () {
-                $('#video-play-image').show();
-              });
-          </script>
+                fluidplayer.on('play', function () {
+                  $('#video-play-image').hide();
+                });
+                fluidplayer.on('pause', function () {
+                  $('#video-play-image').show();
+                });
+            </script>
+          @else
+            <script type="application/javascript">
+                var fluidplayer = fluidPlayer(
+                    "my-video",
+                    {
+                        layoutControls: {
+                          "primaryColor": 'red',
+                          "allowTheatre": false,
+                          "fillToContainer": false,
+                          "playButtonShowing": false,
+                          "playPauseAnimation": false,
+                          "posterImage": "{{ $video->imgurH() }}"
+                        }
+                    }
+                );
+
+                fluidplayer.on('play', function () {
+                  $('#video-play-image').hide();
+                });
+                fluidplayer.on('pause', function () {
+                  $('#video-play-image').show();
+                });
+            </script>
+          @endif
+
         @endif
       @endif
 
