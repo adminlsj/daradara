@@ -49,7 +49,12 @@
                           "fillToContainer": false,
                           "playButtonShowing": false,
                           "playPauseAnimation": false,
-                          "posterImage": "{{ $video->imgurH() }}"
+                          "posterImage": "{{ $video->imgurH() }}",
+                          "controlBar": {
+                              "autoHide": true,
+                              "autoHideTimeout": 2,
+                              "animated": true
+                          }
                         },
                         vastOptions: {
                             "adList": [{
@@ -79,7 +84,12 @@
                           "fillToContainer": false,
                           "playButtonShowing": false,
                           "playPauseAnimation": false,
-                          "posterImage": "{{ $video->imgurH() }}"
+                          "posterImage": "{{ $video->imgurH() }}",
+                          "controlBar": {
+                              "autoHide": true,
+                              "autoHideTimeout": 2,
+                              "animated": true
+                          }
                         }
                     }
                 );
