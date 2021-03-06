@@ -38,7 +38,7 @@
             </div>
           </div>
 
-          @if (strpos($video->sd, 'https://vdownload.hembed.com/') !== false)
+          @if (strpos($video->sd, 'https://vdownload.hembed.com/temp') !== false)
             <script type="application/javascript">
                 var fluidplayer = fluidPlayer(
                     "my-video",
