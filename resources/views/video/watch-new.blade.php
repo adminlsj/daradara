@@ -23,7 +23,7 @@
               <iframe src="{!! $video->sd !!}" style="border: 0; overflow: hidden; position: absolute; width: 100%; height: 100%; left: 0; top: 0;" allowfullscreen></iframe>
           </div>
 
-        @elseif (strpos($video->sd, 'https://space.hanime1.me/') !== false)
+        @elseif (strpos($video->sd, /* 'https://space.hanime1.me/' */ 'tempxxx12345') !== false)
           <link rel="stylesheet" href="https://cdn.fluidplayer.com/v2/current/fluidplayer.min.css" type="text/css">
           <script src="https://cdn.fluidplayer.com/v2/current/fluidplayer.min.js"></script>
 
