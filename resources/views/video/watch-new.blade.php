@@ -49,6 +49,7 @@
                           "fillToContainer": false,
                           "playButtonShowing": false,
                           "playPauseAnimation": false,
+                          "playbackRateEnabled": true,
                           "posterImage": "{{ $video->imgurH() }}",
                           "controlBar": {
                               "autoHide": true,
@@ -84,6 +85,7 @@
                           "fillToContainer": false,
                           "playButtonShowing": false,
                           "playPauseAnimation": false,
+                          "playbackRateEnabled": true,
                           "posterImage": "{{ $video->imgurH() }}",
                           "controlBar": {
                               "autoHide": true,
