@@ -38,7 +38,13 @@ $('.load-more-related-btn').click(function() {
 })
 
 $('#video-play-image').click(function() {
-  dp.play()
+  fluidplayer.play();
+  $('#my-video_fluid_controls_container').css('display', 'block');
+  fluidplayer.toggleControlBar(true);
+})
+
+$('#close-mobile-ad-btn').click(function() {
+  $('#mobile-ad').css('display', 'none');
 })
 
 $('.navigate-next-btn').click(function() {

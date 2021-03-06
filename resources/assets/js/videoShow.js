@@ -19,13 +19,29 @@ $(document).ready(function() {
   document.getElementById('playlist-scroll').scrollTop = topPos - 185 + myElement.offsetHeight / 2;
 });
 
-var stickyOffset = $('#myHeader').offset().top;
+var sticky = $('#myHeader');
+var stickyHeight = sticky.height();
+var stickyOffset = sticky.offset().top;
+var commentsTabcontent = $('#Paris');
+var videosTabcontent = $('#London');
+var videosOffset = videosTabcontent.offset().top + videosTabcontent.height();
 $(window).scroll(function(){
-  var sticky = $('#myHeader'),
-      scroll = $(window).scrollTop();
+    var scroll = $(window).scrollTop();
+    var commentsDisplay = commentsTabcontent.css('display');
 
-  if (scroll + 68 >= stickyOffset) sticky.addClass('fixed');
-  else sticky.removeClass('fixed');
+    if ((scroll + stickyHeight > videosOffset - 68) && commentsDisplay == 'none') {
+        sticky.css('position', 'absolute');
+        sticky.css('top', videosOffset - stickyHeight - 113);
+        sticky.css('width', '100%');
+    } else if ((scroll + 68 >= stickyOffset) && commentsDisplay == 'none') {
+        sticky.css('position', 'fixed');
+        sticky.css('top', '53px');
+        sticky.css('width', '100%');
+    } else {
+        sticky.css('position', '');
+        sticky.css('top', '');
+        sticky.css('width', '');
+    }
 });
 
 $('div#video-like-form-wrapper').on("submit", "form#video-like-form", function(e) {

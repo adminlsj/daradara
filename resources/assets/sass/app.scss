@@ -24,8 +24,8 @@ body {
   font-weight: bold;
 }
 
-.dplayer-menu {
-  display: none !important;
+#my-video_fluid_controls_container {
+  display: none;
 }
 
 .row.no-gutter {
@@ -901,16 +901,25 @@ nav input[type=text]:focus {
   font-size: 0.85em;
 }
 
+#video-play-image img:hover {
+  filter: brightness(200%);
+}
+
 div.sticky {
   position: -webkit-sticky;
   position: sticky;
   top: 0;
 }
 
-.fixed {
+.fixed-top {
   position: fixed;
   top: 53px;
   width: 100%;
+}
+
+.absolute-bottom {
+  position: absolute;
+  bottom: -3446px;
 }
 
 /* Style the buttons that are used to open the tab content */

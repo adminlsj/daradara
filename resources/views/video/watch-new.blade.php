@@ -23,24 +23,31 @@
               <iframe src="{!! $video->sd !!}" style="border: 0; overflow: hidden; position: absolute; width: 100%; height: 100%; left: 0; top: 0;" allowfullscreen></iframe>
           </div>
 
-        @elseif (strpos($video->sd, /* 'https://space.hanime1.me/' */ 'tempxxx12345') !== false)
+        @else
           <link rel="stylesheet" href="https://cdn.fluidplayer.com/v2/current/fluidplayer.min.css" type="text/css">
           <script src="https://cdn.fluidplayer.com/v2/current/fluidplayer.min.js"></script>
 
-          <div style="margin-bottom: -5px;">
-            <video id="my-video">
-                <source src="{!! $video->sd !!}" type="video/mp4">
-            </video>
+          <div style="position: relative;">
+            <div style="margin-bottom: -5px;">
+              <video id="my-video">
+                  <source src="{!! $video->sd !!}" type='{{ strpos($video->sd, '.m3u8') !== false ? 'application/x-mpegURL' : 'video/mp4'}}'>
+              </video>
+            </div>
+            <div id="video-play-image" style="margin: 0; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; height: 100%; text-align: center">
+              <img style="width: 100px; height: auto; cursor: pointer; position: absolute; top: calc(50% - 3px); left: 50%; transform: translate(-50%, -50%)" src="https://i.imgur.com/cCCxUci.png">
+            </div>
           </div>
 
           <script type="application/javascript">
-              var testVideo = fluidPlayer(
+              var fluidplayer = fluidPlayer(
                   "my-video",
                   {
                       layoutControls: {
+                        "primaryColor": 'red',
                         "allowTheatre": false,
                         "fillToContainer": false,
-                        "playButtonShowing": true,
+                        "playButtonShowing": false,
+                        "playPauseAnimation": false,
                         "posterImage": "{{ $video->imgurH() }}"
                       },
                       vastOptions: {
@@ -52,45 +59,18 @@
                       }
                   }
               );
-          </script>
 
-        @else
-          <div style="position: relative;">
-            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/dplayer/dist/DPlayer.min.css">
-            <div id="dplayer"></div>
-            <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-            <script src="https://cdn.jsdelivr.net/npm/flv.js/dist/flv.min.js"></script>
-            <script src="https://cdn.jsdelivr.net/npm/dplayer/dist/DPlayer.min.js"></script>
-
-            <script>
-              const dp = new DPlayer({
-                container: document.getElementById('dplayer'),
-                autoplay: false,
-                theme: '#FF0000',
-                preload: 'auto',
-                volume: 0.7,
-                video: {
-                  url: '{!! $video->sd !!}',
-                  pic: '{{ $video->imgurH() }}',
-                },
-              });
-
-              dp.on('play', function () {
+              fluidplayer.on('play', function () {
                 $('#video-play-image').hide();
               });
-              dp.on('pause', function () {
+              fluidplayer.on('pause', function () {
                 $('#video-play-image').show();
               });
-            </script>
-
-            <div id="video-play-image" style="margin: 0; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
-              <img style="width: 100px; height: auto; cursor: pointer" src="https://i.imgur.com/brUASlm.png">
-            </div>
-          </div>
+          </script>
         @endif
       @endif
 
-      <div class="hidden-md hidden-lg" style="text-align: center; padding-top: 5px; background-color: black;">
+      <div id="mobile-ad" class="hidden-md hidden-lg" style="text-align: center; padding-top: 5px; background-color: black; position: relative;">
         <script type="application/javascript">
             var ad_idzone = "4206424",
             ad_width = "300",
@@ -100,6 +80,7 @@
         <noscript>
             <iframe src="https://syndication.realsrv.com/ads-iframe-display.php?idzone=4206424&output=noscript" width="300" height="100" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
         </noscript>
+        <div id="close-mobile-ad-btn" style="position: absolute; top: 5px; right: 1px; cursor: pointer; border: 1px solid white;"><i style="vertical-align: middle; color: white;" class="material-icons">close</i></div>
       </div>
 
       <div class="hidden-xs hidden-sm" style="margin-top: 7px; margin-bottom: -5px; text-align: center">
@@ -250,8 +231,6 @@
           evt.currentTarget.className += " active";
         }
       </script>
-
-      @include('layouts.exoclick-video-show')
     </div>
 
     <div class="col-md-3 single-show-list">
@@ -294,6 +273,10 @@
         </div>
       </div>
     </div>
+  </div>
+
+  <div style="margin-top: 30px; margin-bottom: -10px;" class="hidden-xs hidden-sm">
+    @include('layouts.exoclick')
   </div>
 
   @include('video.shareModal')

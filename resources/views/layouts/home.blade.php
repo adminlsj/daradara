@@ -60,9 +60,14 @@
 				</div>
 			</div>
 
-			@if ($loop->iteration <= 2)
+			@if ($loop->iteration == 1)
 				<div style="margin-bottom: -15px;">
 					@include('layouts.exoclick-home')
+				</div>
+			@endif
+			@if ($loop->iteration == 2)
+				<div style="margin-bottom: -15px;">
+					@include('layouts.juicyads-home')
 				</div>
 			@endif
 		@endforeach
