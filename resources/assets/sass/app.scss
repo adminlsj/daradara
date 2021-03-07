@@ -24,9 +24,9 @@ body {
   font-weight: bold;
 }
 
-#my-video_fluid_controls_container {
+/* #my-video_fluid_controls_container {
   display: none;
-}
+} */
 
 .row.no-gutter {
   margin-left: 0;
@@ -845,14 +845,14 @@ nav input[type=text]:focus {
   margin-top: 9px;
 }
 
-.aspect-ratio, .dplayer-video-wrap, .fluid_video_wrapper {
+.aspect-ratio, .dplayer-video-wrap, .fluid-player-desktop-styles .fluid_video_wrapper {
   position: relative !important;
   width: 100% !important;
   height: 0 !important;
   padding-bottom: 56.25% !important;
 }
 
-.aspect-ratio iframe, .dplayer-video-wrap video, .fluid_video_wrapper video {
+.aspect-ratio iframe, .dplayer-video-wrap video, .fluid-player-desktop-styles .fluid_video_wrapper video {
   position: absolute !important;
   width: 100% !important;
   height: 100% !important;

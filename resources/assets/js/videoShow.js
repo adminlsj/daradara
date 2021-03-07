@@ -326,8 +326,12 @@ document.addEventListener("msfullscreenchange", function() {
   handleFullscreenChange()
 });
 
+function handleFullscreenChange() {
+    $("#player-div-wrapper").removeClass('fluid-player-desktop-styles');
+}
+
 /* function handleFullscreenChange() {
-    var videoWrap = $(".dplayer-video-wrap");
+    var videoWrap = $(".fluid_video_wrapper");
     if (videoWrap.css("padding-bottom") == "0px") {
         videoWrap.css("padding-bottom", "56.25%");
     } else {

@@ -37,11 +37,11 @@ $('.load-more-related-btn').click(function() {
     $('#more-related-ad').css('margin-top', '0px');
 })
 
-$('#video-play-image').click(function() {
+/* $('#video-play-image').click(function() {
   fluidplayer.play();
   $('#my-video_fluid_controls_container').css('display', 'block');
   fluidplayer.toggleControlBar(true);
-})
+}) */
 
 $('#close-mobile-ad-btn').click(function() {
   $('#mobile-ad').css('display', 'none');

@@ -12,7 +12,7 @@
 @section('content')
 <div id="content-div">
   <div class="row no-gutter video-show-width">
-    <div class="col-md-9 single-show-player" style="background-color: #141414;">
+    <div id="player-div-wrapper" class="col-md-9 single-show-player fluid-player-desktop-styles" style="background-color: #141414;">
       @if ($country_code == 'JP' && in_array($video->id, App\Video::$banned))
           <div style="background-color: black; position: relative; width: 100%; height: 0; padding-bottom: 56.25%; text-align: center;">
             <div style="font-size: 18px; color: white; margin: 0; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%">This video is no longer available. :(</div>
@@ -27,16 +27,9 @@
           <link rel="stylesheet" href="https://cdn.fluidplayer.com/v2/current/fluidplayer.min.css" type="text/css">
           <script src="https://cdn.fluidplayer.com/v2/current/fluidplayer.min.js"></script>
 
-          <div style="position: relative;">
-            <div style="margin-bottom: -5px;">
-              <video id="my-video">
-                  <source src="{!! $video->sd !!}" type='{{ strpos($video->sd, '.m3u8') !== false ? 'application/x-mpegURL' : 'video/mp4'}}'>
-              </video>
-            </div>
-            <div id="video-play-image" style="margin: 0; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; height: 100%; text-align: center">
-              <img style="width: 100px; height: auto; cursor: pointer; position: absolute; top: calc(50% - 3px); left: 50%; transform: translate(-50%, -50%)" src="https://i.imgur.com/cCCxUci.png">
-            </div>
-          </div>
+          <video id="my-video">
+              <source src="{!! $video->sd !!}" type='{{ strpos($video->sd, '.m3u8') !== false ? 'application/x-mpegURL' : 'video/mp4'}}'>
+          </video>
 
           @if (strpos($video->sd, 'https://vdownload.hembed.com/') !== false)
             <script type="application/javascript">
@@ -46,9 +39,9 @@
                         layoutControls: {
                           "primaryColor": 'red',
                           "allowTheatre": false,
-                          "fillToContainer": false,
-                          "playButtonShowing": false,
-                          "playPauseAnimation": false,
+                          "fillToContainer": true,
+                          "playButtonShowing": true,
+                          "playPauseAnimation": true,
                           "playbackRateEnabled": true,
                           "posterImage": "{{ $video->imgurH() }}",
                           "controlBar": {
@@ -82,9 +75,9 @@
                         layoutControls: {
                           "primaryColor": 'red',
                           "allowTheatre": false,
-                          "fillToContainer": false,
-                          "playButtonShowing": false,
-                          "playPauseAnimation": false,
+                          "fillToContainer": true,
+                          "playButtonShowing": true,
+                          "playPauseAnimation": true,
                           "playbackRateEnabled": true,
                           "posterImage": "{{ $video->imgurH() }}",
                           "controlBar": {
