@@ -9,7 +9,7 @@
   </div>
   <div id="playlist-scroll" class="hover-video-playlist" style="text-align: left; max-height: 370px; overflow-y: scroll; position: relative">
     @foreach ($videos as $video)
-      <div id="{{ $video->id == $current->id ? 'current' : ''}}" class="related-watch-wrap">
+      <div class="related-watch-wrap {{ $video->id == $current->id ? 'videos-scroll' : ''}}">
         @include('video.singleShowRelated', ['source' => 'video'])
       </div>
     @endforeach

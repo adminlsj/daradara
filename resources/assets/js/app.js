@@ -191,36 +191,14 @@ $(document).ready(function() {
   if (is_mobile) {
     $("#playModal").removeClass("fade");
   }
-});
 
-/* Standard syntax */
-document.addEventListener("fullscreenchange", function() {
-  handleFullscreenChange()
+  var videos_scroll = document.querySelectorAll('.videos-scroll');
+  for (var i = 0; i < videos_scroll.length; ++i) {
+    var item = videos_scroll[i];  
+    var topPos = item.offsetTop;
+    item.parentNode.scrollTop = topPos - 185 + item.offsetHeight / 2;
+  }
 });
-
-/* Firefox */
-document.addEventListener("mozfullscreenchange", function() {
-  handleFullscreenChange()
-});
-
-/* Chrome, Safari and Opera */
-document.addEventListener("webkitfullscreenchange", function() {
-  handleFullscreenChange()
-});
-
-/* IE / Edge */
-document.addEventListener("msfullscreenchange", function() {
-  handleFullscreenChange()
-});
-
-function handleFullscreenChange() {
-    var videoWrap = $(".dplayer-video-wrap");
-    if (videoWrap.css("padding-bottom") == "0px") {
-        videoWrap.css("padding-bottom", "56.25%");
-    } else {
-        videoWrap.css("padding-bottom", "0px");
-    }
-}
 
 function showSnackbar(text) {
     var snackbar = document.getElementById("snackbar");

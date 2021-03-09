@@ -13,23 +13,17 @@ shareButton.addEventListener('click', event => {
   }
 });
 
-$(document).ready(function() {
-  var myElement = document.getElementById('current');
-  var topPos = myElement.offsetTop;
-  document.getElementById('playlist-scroll').scrollTop = topPos - 185 + myElement.offsetHeight / 2;
-});
-
 var sticky = $('#myHeader');
 var stickyHeight = sticky.height();
 var stickyOffset = sticky.offset().top;
 var commentsTabcontent = $('#Paris');
 var videosTabcontent = $('#London');
-var videosOffset = videosTabcontent.offset().top + videosTabcontent.height();
 $(window).scroll(function(){
     var scroll = $(window).scrollTop();
     var commentsDisplay = commentsTabcontent.css('display');
+    var videosOffset = videosTabcontent.offset().top + videosTabcontent.height();
 
-    if ((scroll + stickyHeight > videosOffset - 68) && commentsDisplay == 'none') {
+    if ((scroll + stickyHeight > videosOffset - 83) && commentsDisplay == 'none') {
         sticky.css('position', 'absolute');
         sticky.css('top', videosOffset - stickyHeight - 113);
         sticky.css('width', '100%');
@@ -243,60 +237,6 @@ $('.comment-reply-btn').click(function() {
     comment_wrapper.css('display', 'block');
     comment_text.focus();
 })
-
-/* $(document).ready(function(){
-    var urlParams = new URLSearchParams(window.location.search);
-    $.ajax({ 
-        type:"GET",
-        url: "/loadPlaylist",
-        data: {v: urlParams.get('v'), list: urlParams.get('list')},
-        dataType: 'html',
-        success: function(data){
-            $('.ajax-loading').html(" ");
-            $('div#video-playlist-wrapper').html(data);
-
-            var container = document.querySelector('div#video-playlist-wrapper');
-            var lazyImages = [].slice.call(container.querySelectorAll("img.lazy"));
-            if ("IntersectionObserver" in window) {
-                let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
-                  entries.forEach(function(entry) {
-                    if (entry.isIntersecting) {
-                      let lazyImage = entry.target;
-                      lazyImage.src = lazyImage.dataset.src;
-                      lazyImage.srcset = lazyImage.dataset.srcset;
-                      lazyImage.classList.remove("lazy");
-                      lazyImageObserver.unobserve(lazyImage);
-                    }
-                  });
-                }, {
-                  rootMargin: "0px 0px 256px 0px"
-                });
-                
-                lazyImages.forEach(function(lazyImage) {
-                  lazyImageObserver.observe(lazyImage);
-                });
-            }
-        },
-        error: function(xhr, ajaxOptions, thrownError){
-            $('div#video-playlist-wrapper').html(xhr.responseText);
-        }
-    });
-
-    $.ajax({ 
-        type:"GET",
-        url: "/getVideoSd",
-        data: {v: urlParams.get('v')},
-        dataType: 'json',
-        success: function(data){
-            if (data.outsource) {
-                $('iframe#iframe').attr("src", data.sd);
-            }
-        },
-        error: function(xhr, ajaxOptions, thrownError){
-            $('div#video-playlist-wrapper').html(xhr.responseText);
-        }
-    });
-}); */
 
 $('#others-text').focus(function() {
     $('input:radio[id=others]').prop('checked', true);

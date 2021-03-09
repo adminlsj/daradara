@@ -304,7 +304,7 @@
     </div>
   </div>
 
-  <div style="margin-top: 30px; margin-bottom: -10px;" class="hidden-xs hidden-sm">
+  <div id="bottom-ads" style="margin-top: 30px; margin-bottom: -10px;" class="hidden-xs hidden-sm">
     @include('layouts.exoclick')
   </div>
 
