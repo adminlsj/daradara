@@ -65,6 +65,10 @@ body {
   width: 396px;
 }
 
+.modal {
+  z-index: 10001;
+}
+
 .playlist-scoll-wrapper::-webkit-scrollbar {
   -webkit-appearance: none;
   width: 8px;

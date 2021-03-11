@@ -59,7 +59,7 @@ class VideoController extends Controller
 
         $video = Video::select('id', 'user_id', 'playlist_id', 'title', 'translations', 'caption', 'cover', 'tags', 'sd', 'outsource', 'current_views', 'views', 'imgur', 'foreign_sd', 'duration', 'created_at', 'uploaded_at')->find($request->v);
 
-        if ($video->foreign_sd == null || (!array_key_exists('spankbang', $video->foreign_sd) && !array_key_exists('youjizz', $video->foreign_sd))) {
+        if ($video->foreign_sd == null || (!array_key_exists('spankbang', $video->foreign_sd) && !array_key_exists('youjizz', $video->foreign_sd) && strpos($video->sd, 'motherless') === false)) {
             return 'error';
         }
 
@@ -69,30 +69,6 @@ class VideoController extends Controller
         }
 
         $link = $video->sd;
-        if (array_key_exists('spankbang', $video->foreign_sd)) {
-            $html = '';
-            $loop = 0;
-            $pass = false;
-
-            while (strpos($html, '"contentUrl": "') === false && $loop < 10) {
-                $curl_connection = curl_init($video->foreign_sd['spankbang']);
-                curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
-                curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
-                curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
-                $html = curl_exec($curl_connection);
-                curl_close($curl_connection);
-
-                if (strpos($html, '"contentUrl": "') !== false) {
-                    $link = Video::get_string_between($html, '"contentUrl": "', '"');
-                    if (strpos($video->tags, ' 1080p ') !== false) {
-                        $link = str_replace('-720p.', '-1080p.', $link);
-                    }
-                    $pass = true;
-                }
-
-                $loop++;
-            }
-        }
 
         return view('video.download', compact('video', 'link'));
     }
