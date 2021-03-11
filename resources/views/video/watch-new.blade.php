@@ -108,7 +108,7 @@
 
         <h5 style="font-weight: 400; margin-bottom: 3px; margin-top: 0px;">
           @foreach ($video->tags() as $tag)
-              <div class="single-video-tag"><a href="/search?query={{ $tag }}">{{ $tag }}</a></div>
+              <div class="single-video-tag"><a href="/search?tags%5B%5D={{ $tag }}">{{ $tag }}</a></div>
           @endforeach
         </h5>
 
