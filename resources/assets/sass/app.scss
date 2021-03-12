@@ -13,6 +13,7 @@
 
 html, body {
     max-width: 100%;
+    --plyr-color-main: red;
 }
 
 body {
@@ -845,19 +846,19 @@ nav input[type=text]:focus {
   margin-top: 9px;
 }
 
-.aspect-ratio, .dplayer-video-wrap, .fluid-player-desktop-styles .fluid_video_wrapper {
-  position: relative !important;
-  width: 100% !important;
-  height: 0 !important;
-  padding-bottom: 56.25% !important;
+.aspect-ratio, .dplayer-video-wrap, .fluid-player-desktop-styles .fluid_video_wrapper, .plyr__video-wrapper {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 56.25%;
 }
 
-.aspect-ratio iframe, .dplayer-video-wrap video, .fluid-player-desktop-styles .fluid_video_wrapper video {
-  position: absolute !important;
-  width: 100% !important;
-  height: 100% !important;
-  left: 0 !important;
-  top: 0 !important;
+.aspect-ratio iframe, .dplayer-video-wrap video, .fluid-player-desktop-styles .fluid_video_wrapper video, .plyr__video-wrapper video {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
 }
 
 .dplayer-full-in-icon {

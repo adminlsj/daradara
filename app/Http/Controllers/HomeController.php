@@ -61,6 +61,8 @@ class HomeController extends Controller
     {
         $tags = [];
         $brands = [];
+        $year = '';
+        $month = '';
         $videos = Video::where('cover', '!=', null);
         
         if ($query = request('query')) {
@@ -101,6 +103,14 @@ class HomeController extends Controller
             });
         }
 
+        if ($year = request('year')) {
+            if ($month = request('month')) {
+                $videos = $videos->whereYear('created_at', '=', $year)->whereMonth('created_at', '=', $month);
+            } else {
+                $videos = $videos->whereYear('created_at', '=', $year);
+            }
+        }
+
         switch ($request->sort) {
             case '本日排行':
                 $videos = $videos->orderBy('current_views', 'desc')->orderBy('id', 'desc');
@@ -125,7 +135,7 @@ class HomeController extends Controller
 
         $videos = $videos->distinct()->paginate(42);
         
-        return view('layouts.search', compact('tags', 'brands', 'videos'));
+        return view('layouts.search', compact('tags', 'brands', 'year', 'month', 'videos'));
     }
 
     public function list()

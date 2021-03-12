@@ -209,7 +209,11 @@ class UserController extends Controller
                 // SendSubscriptionEmail::dispatch($video);
 
                 return Redirect::route('video.watch', ['v' => $video->id]);
+
+            } else {
+                return Redirect::back()->withErrors('封面圖片上傳失敗，請重新上傳。');
             }
+            
         } else {
             return Redirect::back()->withErrors('封面圖片上傳失敗，請重新上傳。');
         }

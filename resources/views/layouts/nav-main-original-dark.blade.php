@@ -29,7 +29,7 @@
 
       <button style="position: relative;" type="button" data-toggle="modal" data-target="#brands"><span style="vertical-align: middle; color: darkgray;" class="material-icons">domain</span><span class="hidden-xs" style="margin-left: 10px">品牌</span><span class="hidden-xs" style="position: absolute; text-align: center; top: 5px; border: 1px solid crimson; border-radius: 50%; background-color: crimson; color: white; line-height: 20px; height: 22px; width: 22px; font-weight: 300; font-size: 0.8em; {{ $brands == [] ? 'display:none;' : '' }}">{{ $brands == [] ? '' : count($brands) }}</span></button>
 
-      <div style="border: 1px solid rgba(58,60,63,.85); line-height: 48px; width: 16vw; text-align: center; display: inline-block; margin-right: 4px"><span style="vertical-align: middle; color: darkgray;" class="material-icons">filter_list</span><span class="hidden-xs" style="margin-left: 10px">屏蔽</span></div>
+      <button id="date-selector" style="position: relative;" type="button" data-toggle="modal" data-target="#date"><span style="vertical-align: middle; color: darkgray;" class="material-icons">date_range</span><span class="hidden-xs" style="margin-left: 10px">日期</span></button>
     </div>
 
     <div class="pull-right" style="color: #d1d1d1; margin-right: -15px;">

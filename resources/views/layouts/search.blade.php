@@ -19,6 +19,8 @@
 	  </div>
 	  <div class="search-pagination hidden-xs">{!! $videos->appends(request()->input())->links() !!}</div>
 	  <div class="search-pagination mobile-search-pagination hidden-sm hidden-md hidden-lg">{!! $videos->appends(request()->input())->onEachSide(1)->links() !!}</div>
+
+	  @include('layouts.exoclick')
 </div>
 
 <form id="hentai-form" action="{{ route('home.search') }}" method="GET">
@@ -97,6 +99,40 @@
 				</label>
 	        @endforeach
 	      </div>
+	      <div class="modal-footer" style="border-top: none;">
+	      	<button style="border: none; color: white; background-color: transparent;" type="button" class="pull-left" data-dismiss="modal">取消</button>
+	        <button style="border: none; color: #b08fff; background-color: transparent;" type="submit">搜索</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+	<div id="date" class="modal fade" role="dialog">
+	  <div class="modal-dialog">
+	    <div class="modal-content" style="border-radius: 3px; background-color: #424242; color: white">
+	      <div class="modal-header" style="border-bottom: 1px solid #3a3c3f">
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	        <h4 class="modal-title" style="text-align: center">日期</h4>
+	      </div>
+	      <div class="modal-body">
+	        <h4>發佈日期</h4>
+	        <p id="hentai-tags-text" style="color: darkgray; padding-bottom: 10px">搜索以下選擇的年份或月份的影片：</p>
+			<div class="form-group">
+				<select class="form-control" id="year" name="year" style="width: calc(50% - 5px); display: inline-block; float: left;">
+					<option value="">全部年份...</option>
+					@for ($i = 2021; $i >= 1990; $i--)
+						<option value="{{ $i }}" {{ $i == $year ? 'selected' : '' }}>{{ $i }}年</option>
+					@endfor
+				</select>
+				<select class="form-control" id="month" name="month" style="width: calc(50% - 5px); display: inline-block; float: right;">
+					<option value="">全部月份...</option>
+					@for ($i = 1; $i <= 12; $i++)
+						<option value="{{ $i }}" {{ $i == $month ? 'selected' : '' }}>{{ $i }}月</option>
+					@endfor
+				</select>
+			</div>
+	      </div>
+	      <br>
 	      <div class="modal-footer" style="border-top: none;">
 	      	<button style="border: none; color: white; background-color: transparent;" type="button" class="pull-left" data-dismiss="modal">取消</button>
 	        <button style="border: none; color: #b08fff; background-color: transparent;" type="submit">搜索</button>

@@ -266,18 +266,18 @@ document.addEventListener("msfullscreenchange", function() {
   handleFullscreenChange()
 });
 
-function handleFullscreenChange() {
-    $("#player-div-wrapper").removeClass('fluid-player-desktop-styles');
-}
-
 /* function handleFullscreenChange() {
-    var videoWrap = $(".fluid_video_wrapper");
+    $("#player-div-wrapper").removeClass('fluid-player-desktop-styles');
+} */
+
+function handleFullscreenChange() {
+    var videoWrap = $(".dplayer-video-wrap");
     if (videoWrap.css("padding-bottom") == "0px") {
         videoWrap.css("padding-bottom", "56.25%");
     } else {
         videoWrap.css("padding-bottom", "0px");
     }
-} */
+}
 
 function showSnackbar(text) {
     var snackbar = document.getElementById("snackbar");

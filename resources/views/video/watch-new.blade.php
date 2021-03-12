@@ -24,49 +24,15 @@
           </div>
 
         @else
-          <link rel="stylesheet" href="https://cdn.fluidplayer.com/v2/current/fluidplayer.min.css" type="text/css">
-          <script src="https://cdn.fluidplayer.com/v2/current/fluidplayer.min.js"></script>
 
-          <div style="position: relative;">
-            <div style="margin-bottom: -5px;">
-              <video id="my-video">
-                  <source src="{!! $video->sd !!}" type='{{ strpos($video->sd, '.m3u8') !== false ? 'application/x-mpegURL' : 'video/mp4'}}'>
-              </video>
-            </div>
-            <div id="video-play-image" style="margin: 0; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80px; height: 80px; text-align: center; background-color: transparent; cursor: pointer;">
-            </div>
-          </div>
-
-          <script type="application/javascript">
-              var fluidplayer = fluidPlayer(
-                  "my-video",
-                  {
-                      layoutControls: {
-                        "primaryColor": 'red',
-                        "allowTheatre": false,
-                        "fillToContainer": true,
-                        "playButtonShowing": true,
-                        "playPauseAnimation": true,
-                        "playbackRateEnabled": true,
-                        "posterImage": "{{ $video->imgurH() }}",
-                        "controlBar": {
-                            "autoHide": true,
-                            "autoHideTimeout": 2,
-                            "animated": true
-                        }
-                      },
-                      vastOptions: {
-                          "adList": [{
-                              "roll": "preRoll",
-                              "vastTag": "https://syndication.realsrv.com/splash.php?idzone=4208068",
-                              "timer": 5
-                          }]
-                      }
-                  }
-              );
-              fluidplayer.on('play', function () {
-                $('#video-play-image').hide();
-              });
+          <script src="https://cdn.plyr.io/3.6.4/plyr.js"></script>
+          <link rel="stylesheet" href="https://cdn.plyr.io/3.6.4/plyr.css" />
+          <video style="width: 100%; height: 100%" id="player" playsinline controls data-poster="{{ $video->imgurH() }}">
+            <source src="{!! $video->sd !!}" type="video/mp4" />
+          </video>
+          <script>
+            const player = new Plyr('video', {ads: {enabled: true, tagUrl: 'https://syndication.realsrv.com/splash.php?idzone=4208068'}});
+            window.player = player;
           </script>
 
         @endif
