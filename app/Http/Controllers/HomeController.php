@@ -196,7 +196,7 @@ class HomeController extends Controller
     {
         $ip_address = isset($_SERVER["HTTP_CF_CONNECTING_IP"]) ? $_SERVER["HTTP_CF_CONNECTING_IP"] : 'N/A';
         $country_code = isset($_SERVER["HTTP_CF_IPCOUNTRY"]) ? $_SERVER["HTTP_CF_IPCOUNTRY"] : 'N/A';
-        if ($ip_address == '106.38.121.194' || $ip_address == '223.104.65.11') {
+        if ($ip_address == '106.38.121.194' || $ip_address == '223.104.65.11' || $ip_address ==  'N/A') {
             return 'error';
         } else {
             $request->validate([
@@ -208,7 +208,12 @@ class HomeController extends Controller
                 $reason = $reason.'：'.request('others-text');
             }
             Mail::to('laughseejapan@gmail.com')->send(new UserReport($email, $reason, request('video-id'), request('video-title'), request('video-sd'), $ip_address, $country_code));
-            return Redirect::back()->withErrors('感謝您向我們提供意見或回報任何錯誤。');
+
+            if (request('video-title') == 'User Verification') {
+                return Redirect::back()->withErrors('我們已收到您的申請，並會在近日內透過您的電郵地址聯繫您。');
+            } else {
+                return Redirect::back()->withErrors('感謝您向我們提供意見或回報任何錯誤。');
+            }
         }
     }
 

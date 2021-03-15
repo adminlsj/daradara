@@ -138,9 +138,11 @@ class UserController extends Controller
 
     public function userEditUpload(User $user, Request $request)
     {
-        if (Auth::user()->email == 'guaishushukanlifan@qq.com' || Auth::user()->email == 'laughseejapan@gmail.com') {
+        if (in_array($user->id, [1, 6944])) {
             $watches = $user->watches();
             return view('user.upload', compact('user', 'watches'));
+        } else {
+            return view('user.verify', compact('user'));
         }
     }
 
