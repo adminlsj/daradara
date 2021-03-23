@@ -39,7 +39,13 @@
               speed: {
                 selected: 1, 
                 options: [0.5, 0.75, 1, 1.25, 1.5, 2]
-              }
+              },
+              fullscreen: {
+                enabled: true,
+                fallback: true,
+                iosNative: true,
+                container: null
+              },
             });
             window.player = player;
           </script>
