@@ -28,7 +28,13 @@
           <script src="https://cdn.plyr.io/3.6.4/plyr.js"></script>
           <link rel="stylesheet" href="https://cdn.plyr.io/3.6.4/plyr.css" />
           <video style="width: 100%; height: 100%" id="player" playsinline controls data-poster="{{ $video->imgurH() }}">
-            <source src="{!! $video->sd !!}" type="video/mp4" />
+            @if ($video->qualities == null)
+              <source src="{!! $video->sd !!}" type="video/mp4" size="720">
+            @else
+              @foreach ($video->qualities as $quality => $source)
+                <source src="{!! $source !!}" type="video/mp4" size="{{ $quality }}"> 
+              @endforeach
+            @endif
           </video>
           <script>
             const player = new Plyr('video', {
@@ -46,8 +52,21 @@
                 iosNative: true,
                 container: null
               },
+              quality: {
+                default: 1080
+              }
             });
             window.player = player;
+
+            if (!'{{ $video->duration }}') {
+              player.on('loadedmetadata', event => {
+                $.ajax({
+                   type:'GET',
+                   url:'/setVideoDuration',
+                   data: { duration: player.duration, id: '{{ $video->id }}'},
+                });
+              });
+            }
           </script>
 
         @endif

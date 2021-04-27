@@ -7,7 +7,6 @@
 @section('content')
 
 <div class="nav-bottom-padding">
-	@include('video.playModal', ['video' => $banner])
 
 	<div class="hidden-xs" style="position: relative;">
 		<img class="lazy" style="width: 100%; -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0.3)));" src="https://i.imgur.com/CJ5svNv.png" data-src="{{ $banner->imgur() }}" data-srcset="{{ $banner->imgur() }}" alt="{{ $banner->title }}">
@@ -15,14 +14,14 @@
 			<h3 style="font-weight: bold"><span style="color: crimson">H</span>anime1<span style="color: crimson">.</span>me</h3>
 			<h1 style="margin: 0; font-weight: bold;">{{ $banner->title }}</h1>
 			<h4 class="hidden-xs">{{ $banner->translations['JP'] }} • 中文字幕 • {{ $banner->caption }}</h4>
-			<div style="display: inline-block; padding: 10px 30px 6px 20px; margin-top: -8px; margin-bottom: -10px" data-toggle="modal" data-target="#playModal" class="hover-opacity-all home-banner-btn home-banner-play-btn play-btn"><span style="vertical-align: middle; font-size: 2em; margin-top: -4px; padding-right: 5px" class="material-icons">play_arrow</span>播放</div>
+			<a href="{{ route('video.watch') }}?v={{ $banner->id }}" style="display: inline-block; padding: 10px 30px 6px 20px; margin-top: -8px; margin-bottom: -10px" class="hover-opacity-all home-banner-btn home-banner-play-btn play-btn"><span style="vertical-align: middle; font-size: 2em; margin-top: -4px; padding-right: 5px" class="material-icons">play_arrow</span>播放</a>
 			&nbsp;
 			<a href="{{ route('video.watch') }}?v={{ $banner->id }}" class="hover-opacity-all home-banner-btn home-banner-info-btn"><span style="vertical-align: middle; font-size: 1.7em; margin-top: -2px; padding-right: 7px" class="material-icons">info</span>更多資訊</a>
 		</div>
 	</div>
 
 	<div class="hidden-sm hidden-md hidden-lg" style="position: relative;">
-		<img style="width: 100%; -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));" src="https://i.imgur.com/rEe2SNO.png">
+		<img style="width: 100%; -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));" src="https://i.imgur.com/FVZrnDL.png">
 		<div style="position: absolute; left: 50%; -webkit-transform: translateX(-50%); transform: translateX(-50%); width: 96%; bottom: 15%; text-align: center; color: white">
 			<h3 style="font-weight: bold; font-size: 20px;"><span style="color: crimson">H</span>anime1<span style="color: crimson">.</span>me</h3>
 			<h1 style="font-size: 30px; font-weight: bold; margin: 0">{{ $banner->title }}</h1>
@@ -40,7 +39,9 @@
 
 	<div id="home-rows-wrapper" style="position: relative;">
 		@foreach ($rows as $title => $data)
-			<a style="text-decoration: none;" href="{{ $data['link'] }}"><h3>{{ $title }}</h3></a>
+			<a style="text-decoration: none;" href="{{ $data['link'] }}">
+				<h3>{{ $title }}<span style="vertical-align: middle; margin-top: -2px; margin-left: 2px" class="material-icons">chevron_right</span></h3>
+			</a>
 			<div style="position: relative;">
 				<div class="hidden-xs hidden-sm no-select navigate-before-btn" style="background-color: rgba(0, 0, 0, .7); height: 100%; width: calc(4% - 2px); position: absolute; top: 0; left: 0; cursor: pointer; z-index: 1; display: none;">
 					<span class="material-icons" style="font-size: 50px; color: white; margin: 0; position: absolute; top: 50%; left: 50%; -ms-transform: translate(-50%, -50%); transform: translate(-50%, -50%);">navigate_before</span>

@@ -87,6 +87,13 @@ $('nav#hentai-main-nav').on("submit", "form#search-form", function(e) {
   $('form#hentai-form').submit();
 });
 
+/* $('div#main-nav').on("submit", "form#main-search-form", function(e) {
+  e.preventDefault(e);
+  var query = $('#nav-query').val();
+  $('#hentai-form #query').val(query);
+  $('form#hentai-form').submit();
+}); */
+
 $('[id=database-search-btn]').click(function(e) {
   var column = $('#column').find(":selected").text();
   var expression = $('#expression').find(":selected").text();

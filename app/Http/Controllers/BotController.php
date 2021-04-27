@@ -20,6 +20,13 @@ use Spatie\Browsershot\Browsershot;
 
 class BotController extends Controller
 {
+    public function setVideoDuration(Request $request)
+    {
+        $video = Video::find($request->id);
+        $video->duration = round($request->duration);
+        $video->save();
+    }
+    
     public function youtubePre(Request $request)
     {
         $video_id = 8555;

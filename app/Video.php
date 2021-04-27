@@ -14,11 +14,11 @@ use Spatie\Browsershot\Browsershot;
 class Video extends Model
 {
     protected $casts = [
-        'foreign_sd' => 'array', 'data' => 'array', 'translations' => 'array'
+        'foreign_sd' => 'array', 'data' => 'array', 'translations' => 'array', 'qualities' => 'array'
     ];
 
     protected $fillable = [
-        'id', 'user_id', 'playlist_id', 'title', 'caption', 'tags', 'sd', 'imgur', 'current_views', 'views', 'outsource', 'foreign_sd', 'data', 'created_at', 'uploaded_at', 'duration', 'translations', 'cover'
+        'id', 'user_id', 'playlist_id', 'title', 'caption', 'tags', 'sd', 'qualities', 'imgur', 'current_views', 'views', 'outsource', 'foreign_sd', 'data', 'created_at', 'uploaded_at', 'duration', 'translations', 'cover'
     ];
 
     public static $banned = [
@@ -39,6 +39,10 @@ class Video extends Model
 
     public static $storyline = [
         '自慰', '口交', '乳交', '肛交', '腳交', '腋下', '玩具', '觸手', '內射', '顏射', '3P', '群交', '肉便器', '後宮', '公眾場合', '近親', '師生', 'NTR', '懷孕', '噴奶', '放尿', '精神控制', '藥物', '痴漢', '阿嘿顏', '精神崩潰', '鬼畜', 'BDSM', '調教', '強制', '逆強制', '痴女', '女王樣', '百合', '耽美', '性轉換', '異世界', '異種族', '純愛', '戀愛喜劇', '世界末日', '1080p', '無碼'
+    ];
+
+    public static $genre = [
+        '裏番', '同人', 'Cosplay', '素人自拍'
     ];
 
     public static $hentai_tags = [
@@ -219,6 +223,7 @@ class Video extends Model
                 $query->orWhere('tags', 'like', '%'.$tag.'%');
             }
         })->where('cover', '!=', null)
+          ->where('cover', '!=', 'https://i.imgur.com/E6mSQA2.png')
           ->select('id', 'title', 'cover')      
           ->inRandomOrder()
           ->limit($count);
@@ -228,6 +233,7 @@ class Video extends Model
     {
         return $query->orderBy($order, 'desc')
                      ->where('cover', '!=', null)
+                     ->where('cover', '!=', 'https://i.imgur.com/E6mSQA2.png')
                      ->select('id', 'title', 'cover')      
                      ->limit($count);
     }

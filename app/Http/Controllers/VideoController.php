@@ -23,7 +23,7 @@ class VideoController extends Controller
 {
     public function watch(Request $request){
 
-        $video = Video::with('watch:id,title')->select('id', 'user_id', 'playlist_id', 'title', 'translations', 'caption', 'cover', 'tags', 'sd', 'outsource', 'current_views', 'views', 'imgur', 'foreign_sd', 'duration', 'created_at', 'uploaded_at')->withCount('likes')->find($request->v);
+        $video = Video::with('watch:id,title', 'user.avatar')->select('id', 'user_id', 'playlist_id', 'title', 'translations', 'caption', 'cover', 'tags', 'sd', 'qualities', 'outsource', 'current_views', 'views', 'imgur', 'foreign_sd', 'duration', 'created_at', 'uploaded_at')->withCount('likes')->find($request->v);
 
         $watch = Watch::where('id', $video->playlist_id)->select('id', 'title')->withCount('videos')->first();
 
@@ -46,7 +46,7 @@ class VideoController extends Controller
                     $query->orWhere('tags', 'like', '%'.$tag.'%');
                 }
             }
-        })->where('cover', '!=', null)->where('imgur', '!=', 'CJ5svNv')->where('playlist_id', '!=', $current->playlist_id)->inRandomOrder()->select('id', 'user_id', 'cover', 'imgur', 'title', 'sd', 'views', 'created_at')->limit(60)->get();
+        })->where('cover', '!=', null)->where('cover', '!=', 'https://i.imgur.com/E6mSQA2.png')->where('playlist_id', '!=', $current->playlist_id)->inRandomOrder()->select('id', 'user_id', 'cover', 'imgur', 'title', 'sd', 'views', 'created_at')->limit(60)->get();
 
         $country_code = isset($_SERVER["HTTP_CF_IPCOUNTRY"]) ? $_SERVER["HTTP_CF_IPCOUNTRY"] : 'N/A';
 

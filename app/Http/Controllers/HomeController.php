@@ -28,10 +28,10 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
-        $banner = Video::find(13654);
+        $banner = Video::find(22319);
         $count = 28;
 
-        $upload = Video::whereOrderBy('uploaded_at', $count)->where('imgur', '!=', 'CJ5svNv')->get();
+        $upload = Video::whereOrderBy('uploaded_at', $count)->get();
         $newest = Video::whereOrderBy('created_at', $count)->get();
         $trending = Video::whereOrderBy('views', $count)->get();
 
@@ -63,7 +63,8 @@ class HomeController extends Controller
         $brands = [];
         $year = '';
         $month = '';
-        $videos = Video::where('cover', '!=', null);
+        $videos = Video::query();
+        $doujin = false;
         
         if ($query = request('query')) {
             $query = str_replace(' ', '', request('query'));
@@ -80,6 +81,9 @@ class HomeController extends Controller
         }
 
         if ($tags = $request->tags) {
+            if (in_array('同人', $tags) || in_array('Cosplay', $tags) || in_array('素人自拍', $tags)) {
+                $doujin = true;
+            }
             if ($request->broad) {
                 $videos = $videos->where(function($query) use ($tags) {
                     foreach ($tags as $tag) {
@@ -133,9 +137,13 @@ class HomeController extends Controller
                 break;
         }
 
+        if (!$doujin) {
+            $videos = $videos->where('cover', '!=', null)->where('cover', '!=', 'https://i.imgur.com/E6mSQA2.png');
+        }
+
         $videos = $videos->distinct()->paginate(42);
         
-        return view('layouts.search', compact('tags', 'brands', 'year', 'month', 'videos'));
+        return view('layouts.search', compact('tags', 'brands', 'year', 'month', 'videos', 'doujin'));
     }
 
     public function list()

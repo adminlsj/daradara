@@ -9,12 +9,32 @@
 <div id="home-rows-wrapper" class="search-rows-wrapper" style="position: relative;">
 	  <div class="home-rows-videos-wrapper" style="white-space: normal;">
 	    @foreach ($videos as $video)
-	      <a style="text-decoration: none;" href="{{ route('video.watch') }}?v={{ $video['id'] }}" target="_blank">
-	        <div class="home-rows-videos-div" style="position: relative; display: inline-block; margin-bottom:50px">
-	          <img src="{{ $video['cover'] }}">
-	          <div class="home-rows-videos-title" style="position:absolute; bottom:0; left:0; white-space: initial; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; color: white; width: 100%; padding: 3px 3px; background: linear-gradient(to bottom, transparent 0%, black 120%);">{{ $video['title'] }}</div>
-	          </div>
-	      </a>
+	      	@if ($doujin)
+	      		<div class="hidden-xs hover-opacity-all load-more-wrapper video-card multiple-link-wrapper" style="margin-bottom: 30px; width: calc(20% - 4px); display: inline-block;">
+					<a href="{{ route('video.watch').'?v='.$video->id }}" class="overlay" target="_blank" title="{{ $video->title }}"></a>
+				    <div style="position: relative;" class="inner">
+				        <div style="position: relative;">
+						    <img class="lazy" style="width: 100%; height: 100%;" src="{{ $video->imgur16by9() }}" data-src="{{ $video->imgurL() }}" data-srcset="{{ $video->imgurL() }}" alt="{{ $video->title }}">
+						    @if ($video->duration != null)
+							    <div style="position: absolute; right: 4px; bottom: 4px; color: white; background-color: rgba(0, 0, 0, 0.75); font-size: 12px; font-weight: 500; padding: 0px 5px; border-radius: 2px;">
+							    	{{ $video->duration >= 3600 ? gmdate('H:i:s', $video->duration) : gmdate('i:s', $video->duration) }}
+							    </div>
+						    @endif
+					    </div>
+					    <div style="background-color: transparent; padding: 7px 5px; height: 77px">
+						    <div style="color:white; font-weight: bold; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">{{ $video->title }}</div>
+						    <div style="color: gray; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; font-size: 0.85em; margin-top: 5px;">觀看次數：{{ $video->views() }}次 • {{ Carbon\Carbon::parse($video->uploaded_at)->diffForHumans() }}</div>
+						</div>
+					</div>
+				</div>
+	      	@else
+		      	<a style="text-decoration: none;" href="{{ route('video.watch') }}?v={{ $video['id'] }}" target="_blank">
+			        <div class="home-rows-videos-div" style="position: relative; display: inline-block; margin-bottom:50px">
+			          <img src="{{ $video['cover'] }}">
+			          <div class="home-rows-videos-title" style="position:absolute; bottom:0; left:0; white-space: initial; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; color: white; width: 100%; padding: 3px 3px; background: linear-gradient(to bottom, transparent 0%, black 120%);">{{ $video['title'] }}</div>
+			        </div>
+			    </a>
+	        @endif
 	    @endforeach
 	  </div>
 	  <div class="search-pagination hidden-xs">{!! $videos->appends(request()->input())->links() !!}</div>
@@ -68,6 +88,14 @@
 
 	        <h5 style="margin-top: 15px; margin-bottom: 15px; font-weight: bold">劇情內容：</h5>
 	        @foreach (App\Video::$storyline as $tag)
+	        	<label class="hentai-tags-wrapper">
+				  <input name="tags[]" type="checkbox" value="{{ $tag }}" {{ $tags != [] && in_array($tag, $tags) ? 'checked' : '' }}>
+				  <span class="checkmark">{{ $tag }}</span>
+				</label>
+	        @endforeach
+
+	        <h5 style="margin-top: 15px; margin-bottom: 15px; font-weight: bold">分類：</h5>
+	        @foreach (App\Video::$genre as $tag)
 	        	<label class="hentai-tags-wrapper">
 				  <input name="tags[]" type="checkbox" value="{{ $tag }}" {{ $tags != [] && in_array($tag, $tags) ? 'checked' : '' }}>
 				  <span class="checkmark">{{ $tag }}</span>
