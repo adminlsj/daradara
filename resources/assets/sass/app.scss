@@ -106,6 +106,10 @@ body {
   width: 20%;
 }
 
+.video-card {
+  width: calc(20% - 4px);
+}
+
 #main-nav {
   position: fixed; 
   top: 0; 
@@ -1140,7 +1144,17 @@ div.sticky {
   margin-top: -50px;
 }
 
+@media (max-width: 1599px) {
+  .video-card {
+    width: calc(20% - 4px);
+  }
+}
+
 @media (max-width: 1199px) {
+  .video-card {
+    width: calc(25% - 4px);
+  }
+
   #home-banner-wrapper {
     width: 50%;
   }
@@ -1214,6 +1228,10 @@ div.sticky {
 }
 
 @media (max-width: 991px) {
+  .video-card {
+    width: calc(100% / 3 - 4px);
+  }
+
   .mobile-padding {
     padding: 0 15px;
   }
@@ -1372,6 +1390,10 @@ div.sticky {
 }
 
 @media (max-width: 767.9px) {
+  .video-card {
+    width: calc(50% - 4px);
+  }
+
   .related-video-width {
     width: calc(100% / 3);
   }

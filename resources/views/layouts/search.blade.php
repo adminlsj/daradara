@@ -10,7 +10,7 @@
 	  <div class="home-rows-videos-wrapper" style="white-space: normal;">
 	    @foreach ($videos as $video)
 	      	@if ($doujin)
-	      		<div class="hidden-xs hover-opacity-all load-more-wrapper video-card multiple-link-wrapper" style="margin-bottom: 30px; width: calc(20% - 4px); display: inline-block;">
+	      		<div class="hover-opacity-all load-more-wrapper video-card multiple-link-wrapper" style="margin-bottom: 30px; display: inline-block; vertical-align: top">
 					<a href="{{ route('video.watch').'?v='.$video->id }}" class="overlay" target="_blank" title="{{ $video->title }}"></a>
 				    <div style="position: relative;" class="inner">
 				        <div style="position: relative;">
