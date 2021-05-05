@@ -79,8 +79,8 @@
 	    @endforeach
 	</div>
 
-	<div style="z-index: 10000 !important; border-top: 1px solid #222222; {{ Request::is('*watch*') ? 'display:none;' : '' }}" class="bottom-nav white-theme-nav-bottom">
-		<a style="color: darkgray; border: none; background-color: transparent; height: 100%; width: 50%; line-height: 35px" href="/genre" class="pull-left btn btn-primary">重設</a>
+	<div style="z-index: 10000 !important; border-top: 1px solid #222222; height: 45px; {{ Request::is('*watch*') ? 'display:none;' : '' }}" class="bottom-nav white-theme-nav-bottom">
+		<a style="color: darkgray; border: none; background-color: transparent; height: 100%; width: 50%; line-height: 30px" href="/genre" class="pull-left btn btn-primary">重設</a>
 	    <button style="border: none; color: white; background-color: #b08fff; border-radius: 0; height: 100%; width: 50%" class="pull-right btn btn-primary" type="submit">搜索</button>
 	</div>
 </form>
