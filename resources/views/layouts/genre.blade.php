@@ -35,7 +35,7 @@
 					<span class="hentai-slider round"></span>
 				</label>
 			</h5>
-		    <p style="color: darkgray; padding-bottom: 15px; font-size: 12px; padding-right: 50px;">較多結果，較不精準。配對所有包含任何一個選擇的標籤的影片，而非全部標籤。</p>
+		    <p style="color: darkgray; padding-bottom: 12px; font-size: 12px; padding-right: 50px;">較多結果，較不精準。配對所有包含任何一個選擇的標籤的影片，而非全部標籤。</p>
 	    </div>
 
 		<h5 style="margin-top: 15px; margin-bottom: 15px; font-weight: bold; color: darkgray">分類：</h5>
