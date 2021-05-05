@@ -25,17 +25,17 @@
 	    <a class="no-select pull-right hidden-xs hidden-sm hidden-md" style="line-height: 67px; margin-top: 7px; margin-right: 30px;" href="{{ route('login') }}"><i class="material-icons" style="color: white;">video_call</i></a>
 	  @endif
 	</nav>
-	
+
 	<div id="home-rows-wrapper" style="position: relative; margin-top: 68px; padding: 0px 15px; margin-bottom: 130px; color: white">
 		<div style="background-color: #333333; margin: 0 -15px; padding: 5px 15px 0px 15px;">
-			<h5>
+			<h5 style="font-weight: bold">
 		  		廣泛配對
 		      	<label class="hentai-switch" style="float: right">
 					<input type="checkbox" name="broad" id="broad" {{ Request::get('broad') ? 'checked' : '' }}>
 					<span class="hentai-slider round"></span>
 				</label>
 			</h5>
-		    <p style="color: darkgray; padding-bottom: 15px; font-size: 12px">較多結果，較不精準。配對所有包含任何一個選擇的標籤的影片，而非全部標籤。</p>
+		    <p style="color: darkgray; padding-bottom: 15px; font-size: 12px; padding-right: 50px;">較多結果，較不精準。配對所有包含任何一個選擇的標籤的影片，而非全部標籤。</p>
 	    </div>
 
 		<h5 style="margin-top: 15px; margin-bottom: 15px; font-weight: bold; color: darkgray">分類：</h5>
