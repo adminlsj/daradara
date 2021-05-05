@@ -19,7 +19,7 @@
 	@else
 		<div style="display: inline-block;" data-toggle="modal" data-target="#signUpModal">
 		  	<span style="vertical-align: middle; font-size: 1.15em; color: darkgray; margin-top: -3px; cursor: pointer;" class="material-icons">thumb_up</span>
-		  	<span style="font-size: 0.90em; color: darkgray; padding-left: 5px; {{ $comment->likes->count() == 0 ? 'display:none' : '' }}">{{ $comment->likes->count() }}</span>
+		  	<span style="font-size: 0.90em; color: gray; padding-left: 5px; {{ $comment->likes->count() == 0 ? 'display:none' : '' }}">{{ $comment->likes->where('is_positive', true)->count() - $comment->likes->where('is_positive', false)->count() }}</span>
 		</div>
 		<div style="display: inline-block;" data-toggle="modal" data-target="#signUpModal">
 		  	<span style="vertical-align: middle; font-size: 1.15em; color: darkgray; margin-top: -3px; margin-left: 15px; cursor: pointer;" class="material-icons">thumb_down</span>

@@ -10,7 +10,7 @@
 	    <input style="margin-left: 55px; width: calc(100% - 55px); line-height: 30px; background-color: inherit; border: none; outline: none; color: white; vertical-align: top; margin-top: -45px;" type="text" id="comment-text" name="comment-text" placeholder="新增一則公開評論...">
 	  </form>
 	@else
-	  <div data-toggle="modal" data-target="#signUpModal" style="margin-top: 0px;">
+	  <div data-toggle="modal" data-target="#signUpModal" style="margin-top: 0px; margin-bottom: 25px;">
 	    <img class="img-circle" style="width: 40px; height: auto; float:left;" src="https://i.imgur.com/KqDtqhMb.jpg">
 	    <input style="margin-left: 15px; width: calc(100% - 55px); line-height: 30px; background-color: inherit; border: none; outline: none;" type="text" id="comment-signup-modal" placeholder="新增一則公開評論...">
 	  </div>
