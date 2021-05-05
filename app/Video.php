@@ -42,7 +42,7 @@ class Video extends Model
     ];
 
     public static $genre = [
-        '裏番', '3D', '同人', 'Cosplay', '素人自拍'
+        '裏番', '3D', '同人'//, 'Cosplay', '素人自拍'
     ];
 
     public static $selected_tags = [
