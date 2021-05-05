@@ -47,6 +47,7 @@ Route::get('/terms', 'HomeController@terms');
 Route::get('/policies', 'HomeController@policies');
 Route::get('/copyright', 'HomeController@copyright');
 Route::get('/2257', 'HomeController@p2257');
+Route::get('/genre', 'HomeController@genre')->name('home.genre');
 Route::get('/video-copyright', 'VideoController@copyright');
 Route::get('/checkSubscribes', 'HomeController@checkSubscribes');
 Route::get('/checkZeroSubscribes', 'HomeController@checkZeroSubscribes');

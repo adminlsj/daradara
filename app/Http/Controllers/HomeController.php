@@ -146,6 +146,11 @@ class HomeController extends Controller
         return view('layouts.search', compact('tags', 'brands', 'year', 'month', 'videos', 'doujin'));
     }
 
+    public function genre()
+    {
+        return view('layouts.genre');
+    }
+
     public function list()
     {
         if (Auth::check()) {
