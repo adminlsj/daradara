@@ -30,16 +30,15 @@ $('.preview-trigger-desktop').hover(function(){
   $('.preview').remove();
 });
 
-$('.preview-trigger-mobile').hover(function(){
+$('.preview-trigger-mobile').on({ 'touchstart' : function(){
   if (!$(this).find('.preview').length) {
     $('.preview').remove();
     var url = $(this).data('preview');
     var poster = $(this).data('poster');
-    $(this).find('.preview-wrapper').append('<video style="position:absolute;top:0;left:0;width:100%;height:100%;background-color:black" class="preview" autoplay muted loop poster="' + poster + '"><source src="' + url + '" type="video/mp4"></video>');
+    $(this).find('.preview-wrapper').append('<video style="position:absolute;top:0;left:0;width:100%;height:100%;background-color:black" class="preview" autoplay muted loop playsinline poster="' + poster + '"><source src="' + url + '" type="video/mp4"></video>');
     $('.preview').play();
   }
-},function(){
-});
+} });
 
 $('#broad').change(function(){
   if (this.checked) {
