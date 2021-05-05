@@ -196,6 +196,7 @@ $('div#comment-like-form-wrapper').on("submit", "form#comment-unlike-form", func
         dataType: 'json',
         success: (json) => {
             $(this).find('button').html(json.comment_unlike_btn);
+            $('#comment-like-btn-' + json.comment_id).html(json.comment_like_btn);
         },
         error: function(xhr, ajaxOptions, thrownError){
             showSnackbar('請刷新頁面後重試。');

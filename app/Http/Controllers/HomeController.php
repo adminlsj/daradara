@@ -63,7 +63,7 @@ class HomeController extends Controller
         $brands = [];
         $year = '';
         $month = '';
-        $videos = Video::query();
+        $videos = Video::with('user:id,name');
         $doujin = false;
         
         if ($query = request('query')) {
@@ -81,7 +81,7 @@ class HomeController extends Controller
         }
 
         if ($tags = $request->tags) {
-            if (in_array('同人', $tags) || in_array('Cosplay', $tags) || in_array('素人自拍', $tags)) {
+            if (in_array('3D', $tags) || in_array('同人', $tags) || in_array('Cosplay', $tags) || in_array('素人自拍', $tags) || !in_array($tags[0], Video::$all_tag)) {
                 $doujin = true;
             }
             if ($request->broad) {
@@ -138,21 +138,25 @@ class HomeController extends Controller
         }
 
         if (!$doujin) {
-            $videos = $videos->where('cover', '!=', null)->where('cover', '!=', 'https://i.imgur.com/E6mSQA2.png');
+            $videos = $videos->where('cover', '!=', null)->where('cover', '!=', 'https://i.imgur.com/E6mSQA2.png')->distinct()->paginate(42);
+        } else {
+            $videos = $videos->where('cover', '!=', null)->distinct()->paginate(60);
         }
-
-        $videos = $videos->distinct()->paginate(42);
         
         return view('layouts.search', compact('tags', 'brands', 'year', 'month', 'videos', 'doujin'));
     }
 
     public function list()
     {
-        $saves = Save::with(['video' => function($query) {
-            $query->where('cover', '!=', null)->select('id', 'title', 'cover');
-        }])->where('user_id', Auth::user()->id)->orderBy('created_at', 'desc')->get();
+        if (Auth::check()) {
+            $saves = Save::with(['video' => function($query) {
+                $query->where('cover', '!=', null)->select('id', 'title', 'cover', 'imgur');
+            }])->where('user_id', Auth::user()->id)->orderBy('created_at', 'desc')->get();
+            return view('layouts.list', compact('saves'));
 
-        return view('layouts.list', compact('saves'));
+        } else {
+            return redirect('/login');
+        }
     }
 
     public function about(Request $request)

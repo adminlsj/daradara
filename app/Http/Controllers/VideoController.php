@@ -39,6 +39,7 @@ class VideoController extends Controller
         $video->views++;
         $video->save();
         $current = $video;
+        $doujin = false;
 
         $related = Video::with('user:id,name')->where(function($query) use ($current) {
             foreach ($current->tags() as $tag) {
@@ -46,13 +47,24 @@ class VideoController extends Controller
                     $query->orWhere('tags', 'like', '%'.$tag.'%');
                 }
             }
-        })->where('cover', '!=', null)->where('cover', '!=', 'https://i.imgur.com/E6mSQA2.png')->where('playlist_id', '!=', $current->playlist_id)->inRandomOrder()->select('id', 'user_id', 'cover', 'imgur', 'title', 'sd', 'views', 'created_at')->limit(60)->get();
+        });
+
+        if (in_array('3D', $tags) || in_array('同人', $tags) || in_array('Cosplay', $tags) || in_array('素人自拍', $tags)) {
+            $doujin = true;
+            $related = $related->where('cover', '!=', null)->where('id', '!=', $current->id)->inRandomOrder()->select('id', 'user_id', 'cover', 'imgur', 'title', 'sd', 'qualities', 'views', 'duration', 'created_at')->limit(60)->get();
+
+        } else {
+            $related = $related->where('cover', '!=', null)->where('cover', '!=', 'https://i.imgur.com/E6mSQA2.png')->where('playlist_id', '!=', $current->playlist_id)->inRandomOrder()->select('id', 'user_id', 'cover', 'imgur', 'title', 'sd', 'qualities', 'views', 'created_at')->limit(60)->get();
+        }
 
         $country_code = isset($_SERVER["HTTP_CF_IPCOUNTRY"]) ? $_SERVER["HTTP_CF_IPCOUNTRY"] : 'N/A';
 
-        $comments = Comment::with('user.avatar', 'likes', 'replies.likes', 'replies.user.avatar')->where('foreign_id', $video->id)->orderBy('created_at', 'desc')->get();
+        $comments = Comment::with('user.avatar', 'likes', 'replies.likes', 'replies.user.avatar')->where('foreign_id', $video->id)->withCount('likes')->orderBy('likes_count', 'desc')->orderBy('created_at', 'desc')->get()->sortBy(function($comment)
+        {
+            return $comment->likes->where('is_positive', false)->count() - $comment->likes->where('is_positive', true)->count();
+        });
 
-        return view('video.watch-new', compact('video', 'watch', 'videos', 'current', 'tags', 'country_code', 'comments', 'related'));
+        return view('video.watch-new', compact('video', 'watch', 'videos', 'current', 'tags', 'country_code', 'comments', 'related', 'doujin'));
     }
 
     public function download(Request $request){
@@ -222,12 +234,15 @@ class VideoController extends Controller
 
         $model = 'App\\'.studly_case(strtolower(str_singular($foreign_type)));
         $comment = (new $model)::find($foreign_id);
-        $html = '';
-        $html .= view('video.comment-unlike-btn', compact('comment'));
+        $comment_unlike_btn = '';
+        $comment_unlike_btn .= view('video.comment-unlike-btn', compact('comment'));
+        $comment_like_btn = '';
+        $comment_like_btn .= view('video.comment-like-btn', compact('comment'));
 
         return response()->json([
             'comment_id' => $comment->id,
-            'comment_unlike_btn' => $html,
+            'comment_like_btn' => $comment_like_btn,
+            'comment_unlike_btn' => $comment_unlike_btn,
             'csrf_token' => csrf_token(),
         ]);
     }

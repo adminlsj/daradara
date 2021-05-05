@@ -21,6 +21,26 @@ const app = new Vue({
     el: '#app'
 });
 
+$('.preview-trigger-desktop').hover(function(){
+  var url = $(this).data('preview');
+  var poster = $(this).data('poster');
+  $(this).find('.preview-wrapper').append('<video style="position:absolute;top:0;left:0;width:100%;height:100%;background-color:black" class="preview" autoplay muted loop poster="' + poster + '"><source src="' + url + '" type="video/mp4"></video>');
+  $('.preview').play();
+},function(){
+  $('.preview').remove();
+});
+
+$('.preview-trigger-mobile').hover(function(){
+  if (!$(this).find('.preview').length) {
+    $('.preview').remove();
+    var url = $(this).data('preview');
+    var poster = $(this).data('poster');
+    $(this).find('.preview-wrapper').append('<video style="position:absolute;top:0;left:0;width:100%;height:100%;background-color:black" class="preview" autoplay muted loop poster="' + poster + '"><source src="' + url + '" type="video/mp4"></video>');
+    $('.preview').play();
+  }
+},function(){
+});
+
 $('#broad').change(function(){
   if (this.checked) {
     $('#hentai-tags-text').text('搜索包含任何一個以下選擇的標籤的影片：');
@@ -31,7 +51,7 @@ $('#broad').change(function(){
 
 $('.load-more-related-btn').click(function() {
     $(this).css('display', 'none');
-    var hidden = $(".related-video-width");
+    var hidden = $(".temp-hidden-related-video");
     hidden.removeClass('hidden-xs');
     hidden.removeClass('hidden-sm');
     $('#more-related-ad').css('margin-top', '0px');

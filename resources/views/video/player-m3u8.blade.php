@@ -1,0 +1,37 @@
+<link rel="stylesheet" href="https://cdn.plyr.io/3.6.4/plyr.css" />
+<script src="https://cdn.plyr.io/3.6.4/plyr.js"></script>
+<script src="//cdn.jsdelivr.net/npm/hls.js@latest"></script>
+<video style="width: 100%; height: 100%" id="player" playsinline controls data-poster="{{ $video->imgurH() }}" {{ $doujin ? 'loop' : '' }}>
+</video>
+<script>
+  const source = '{!! $video->sd !!}';
+  const video = document.querySelector('video');
+  
+  const player = new Plyr(video, {
+    ads: {
+      enabled: true, 
+      tagUrl: 'https://syndication.realsrv.com/splash.php?idzone=4208068'
+    }, 
+    speed: {
+      selected: 1, 
+      options: [0.5, 0.75, 1, 1.25, 1.5, 2]
+    },
+    fullscreen: {
+      enabled: true,
+      fallback: true,
+      iosNative: true,
+      container: null
+    },
+  });
+  
+  if (!Hls.isSupported()) {
+    video.src = source;
+  } else {
+    const hls = new Hls();
+    hls.loadSource(source);
+    hls.attachMedia(video);
+    window.hls = hls;
+  }
+  
+  window.player = player;
+</script>

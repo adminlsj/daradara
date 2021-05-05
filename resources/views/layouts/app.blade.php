@@ -4,7 +4,7 @@
     @section('head')
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        @if (isset($current) && strpos($current->sd, 'rule34.xxx') !== false)
+        @if (Request::is('*search*') || (isset($current) && strpos($current->sd, 'rule34.xxx') !== false))
             <meta name="referrer" content="no-referrer">
         @else
             <meta name="referrer" content="origin">

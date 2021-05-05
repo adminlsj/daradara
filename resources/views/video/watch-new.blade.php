@@ -13,7 +13,7 @@
 <div id="content-div">
   <div class="row no-gutter video-show-width">
     <div id="player-div-wrapper" class="col-md-9 single-show-player fluid-player-desktop-styles" style="background-color: #141414;">
-      @if ($country_code == 'JP' && in_array($video->id, App\Video::$banned))
+      @if ($country_code == 'JP' /* && in_array($video->id, App\Video::$banned) */ )
           <div style="background-color: black; position: relative; width: 100%; height: 0; padding-bottom: 56.25%; text-align: center;">
             <div style="font-size: 18px; color: white; margin: 0; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%">This video is no longer available. :(</div>
           </div>
@@ -25,49 +25,11 @@
 
         @else
 
-          <script src="https://cdn.plyr.io/3.6.4/plyr.js"></script>
-          <link rel="stylesheet" href="https://cdn.plyr.io/3.6.4/plyr.css" />
-          <video style="width: 100%; height: 100%" id="player" playsinline controls data-poster="{{ $video->imgurH() }}">
-            @if ($video->qualities == null)
-              <source src="{!! $video->sd !!}" type="video/mp4" size="720">
-            @else
-              @foreach ($video->qualities as $quality => $source)
-                <source src="{!! $source !!}" type="video/mp4" size="{{ $quality }}"> 
-              @endforeach
-            @endif
-          </video>
-          <script>
-            const player = new Plyr('video', {
-              ads: {
-                enabled: true, 
-                tagUrl: 'https://syndication.realsrv.com/splash.php?idzone=4208068'
-              }, 
-              speed: {
-                selected: 1, 
-                options: [0.5, 0.75, 1, 1.25, 1.5, 2]
-              },
-              fullscreen: {
-                enabled: true,
-                fallback: true,
-                iosNative: true,
-                container: null
-              },
-              quality: {
-                default: 1080
-              }
-            });
-            window.player = player;
-
-            if (!'{{ $video->duration }}') {
-              player.on('loadedmetadata', event => {
-                $.ajax({
-                   type:'GET',
-                   url:'/setVideoDuration',
-                   data: { duration: player.duration, id: '{{ $video->id }}'},
-                });
-              });
-            }
-          </script>
+          @if (strpos($video->sd, '.m3u8'))
+            @include('video.player-m3u8')
+          @else
+            @include('video.player-mp4')
+          @endif
 
         @endif
       @endif
@@ -175,16 +137,22 @@
 
       <!-- Tab content -->
       <div id="London" class="tabcontent mobile-padding" style="margin-top: 85px">
-        <div class="row" style="margin: 0px -2px;">
+        <div class="row {{ $doujin ? 'doujin-row' : '' }}" style="margin: 0px -2px;">
           @foreach ($related as $video)
-            <div class="col-xs-2 hover-opacity-all related-video-width {{ $loop->iteration > 30 ? 'hidden-xs hidden-sm' : '' }}" style="padding: 0px 2px;">
-              <a style="text-decoration: none;" href="{{ route('video.watch') }}?v={{ $video->id }}">
-                <div class="home-rows-videos-div" style="position: relative; display: inline-block; margin-bottom:15px">
-                  <img style="width: 100%" src="{{ $video->cover }}">
-                  <div class="home-rows-videos-title" style="position:absolute; bottom:0; left:0; white-space: initial; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; color: white; width: 100%; padding: 3px 3px; background: linear-gradient(to bottom, transparent 0%, black 120%);">{{ $video->title }}</div>
-                  </div>
-              </a>
-            </div>
+            @if ($doujin)
+              <span class="related-video-width-horizontal {{ $loop->iteration > 30 ? 'hidden-xs hidden-sm temp-hidden-related-video' : '' }}">
+                @include('video.card')
+              </span>
+            @else
+              <div class="col-xs-2 hover-opacity-all related-video-width {{ $loop->iteration > 30 ? 'hidden-xs hidden-sm temp-hidden-related-video' : '' }}" style="padding: 0px 2px;">
+                <a style="text-decoration: none;" href="{{ route('video.watch') }}?v={{ $video->id }}">
+                  <div class="home-rows-videos-div" style="position: relative; display: inline-block; margin-bottom:15px">
+                    <img style="width: 100%" src="{{ $video->cover }}">
+                    <div class="home-rows-videos-title" style="position:absolute; bottom:0; left:0; white-space: initial; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; color: white; width: 100%; padding: 3px 3px; background: linear-gradient(to bottom, transparent 0%, black 120%);">{{ $video->title }}</div>
+                    </div>
+                </a>
+              </div>
+            @endif
           @endforeach
         </div>
         <div class="load-more-related-btn related-watch-wrap hidden-md hidden-lg" style="font-weight: 400 !important; margin-top: 0px;">更多相關影片</div>
