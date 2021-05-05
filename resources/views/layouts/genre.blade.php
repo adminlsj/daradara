@@ -26,7 +26,7 @@
 	  @endif
 	</nav>
 
-	<div id="home-rows-wrapper" style="position: relative; margin-top: 68px; padding: 0px 15px; margin-bottom: 130px; color: white">
+	<div id="home-rows-wrapper" style="position: relative; margin-top: 68px; padding: 0px 15px; margin-bottom: 60px; color: white">
 		<div style="background-color: #333333; margin: 0 -15px; padding: 5px 15px 0px 15px;">
 			<h5 style="font-weight: bold">
 		  		廣泛配對
@@ -77,13 +77,11 @@
 			  <span class="checkmark">{{ $tag }}</span>
 			</label>
 	    @endforeach
+	</div>
 
-		<div style="border-top: none; margin-top: 20px;">
-			<button style="border-color: #b08fff; color: white; background-color: #b08fff;" class="pull-right btn btn-primary" type="submit">搜索</button>
-			<a style="color: darkgray; border-color: transparent; background-color: transparent; margin-right: 5px;" href="/genre" class="pull-right btn btn-primary">重設</a>
-		</div>
+	<div style="z-index: 10000 !important; border-top: 1px solid #222222; {{ Request::is('*watch*') ? 'display:none;' : '' }}" class="bottom-nav white-theme-nav-bottom">
+		<a style="color: darkgray; border: none; background-color: transparent; height: 100%; width: 50%; line-height: 35px" href="/genre" class="pull-left btn btn-primary">重設</a>
+	    <button style="border: none; color: white; background-color: #b08fff; border-radius: 0; height: 100%; width: 50%" class="pull-right btn btn-primary" type="submit">搜索</button>
 	</div>
 </form>
-@include('layouts.nav-bottom')
-
 @endsection
