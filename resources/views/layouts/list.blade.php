@@ -9,7 +9,7 @@
 <div class="nav-bottom-padding">
   <div id="home-rows-wrapper" class="list-rows-wrapper" style="position: relative;">
     <h3>我的播放清單</h3>
-    <div class="home-rows-videos-wrapper" style="white-space: normal;">
+    <div class="home-rows-videos-wrapper" style="white-space: normal; margin: 0 -2px;">
       @foreach ($saves as $save)
         @if ($save->video != null)
           <a style="text-decoration: none;" href="{{ route('video.watch') }}?v={{ $save->video->id }}" class="hover-opacity">
@@ -26,7 +26,7 @@
         @endif
       @endforeach
     </div>
-    <div style="padding: 0 4%;">
+    <div id="list-logout-btn" style="padding: 0 4%;">
       <form action="{{ route('logout') }}" method="POST">
         {{ csrf_field() }}
         <br class="hidden-sm hidden-md hidden-lg">

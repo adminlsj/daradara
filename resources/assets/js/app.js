@@ -21,17 +21,43 @@ const app = new Vue({
     el: '#app'
 });
 
+var progress;
 $('.preview-trigger-desktop').hover(function(){
+  var bar = $(this).find('#myBar');
+  var width = 1;
+  progress = setInterval(function(){
+    if (width >= 100) {
+      clearInterval(progress);
+    } else {
+      width++;
+      bar.width(width + '%');
+    }
+  }, 25);
+
   var url = $(this).data('preview');
   var poster = $(this).data('poster');
   $(this).find('.preview-wrapper').append('<video style="position:absolute;top:0;left:0;width:100%;height:100%;background-color:black" class="preview" autoplay muted loop poster="' + poster + '"><source src="' + url + '" type="video/mp4"></video>');
   $('.preview').play();
+
 },function(){
   $('.preview').remove();
+  clearInterval(progress);
+  $(this).find('#myBar').width(0);
 });
 
 $('.preview-trigger-mobile').on({ 'touchstart' : function(){
   if (!$(this).find('.preview').length) {
+    var bar = $(this).find('#myBar');
+    var width = 1;
+    var progress = setInterval(function(){
+      if (width >= 100) {
+        clearInterval(progress);
+      } else {
+        width++;
+        bar.width(width + '%');
+      }
+    }, 25);
+
     $('.preview').remove();
     var url = $(this).data('preview');
     var poster = $(this).data('poster');

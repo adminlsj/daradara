@@ -22,7 +22,7 @@
   @endif
 </nav>
 
-<nav id="hentai-filter-nav-wrapper" style="background-color: #141414; z-index: 1; padding: 0px 4%; height: 50px; border-bottom: 1px solid #141414; box-shadow: 0 3px 3px -2px rgba(0,0,0,.2),0 3px 4px 0 rgba(0,0,0,.14),0 1px 8px -8px rgba(0,0,0,.12)!important; position: fixed; top: 67px; width: 100%; z-index: 100" class="dark-theme-nav-main">
+<nav id="hentai-filter-nav-wrapper" style="background-color: #141414; z-index: 1; height: 50px; border-bottom: 1px solid #141414; box-shadow: 0 3px 3px -2px rgba(0,0,0,.2),0 3px 4px 0 rgba(0,0,0,.14),0 1px 8px -8px rgba(0,0,0,.12)!important; position: fixed; top: 67px; width: 100%; z-index: 100;" class="dark-theme-nav-main">
   <div class="container-fluid" id="hentai-filter-nav" style="height: 50px;">
     <div class="pull-left" style="color: #d1d1d1; margin-left: -15px;">
       <button style="position: relative;" type="button" data-toggle="modal" data-target="#tags"><span style="vertical-align: middle; color: darkgray;" class="material-icons">loyalty</span><span class="hidden-xs" style="margin-left: 10px">標籤</span><span class="hidden-xs" style="position: absolute; text-align: center; top: 5px; border: 1px solid crimson; border-radius: 50%; background-color: crimson; color: white; line-height: 20px; height: 22px; width: 22px; font-weight: 300; font-size: 0.8em; {{ $tags == [] ? 'display:none;' : '' }}">{{ $tags == [] ? '' : count($tags) }}</span></button>
@@ -32,7 +32,7 @@
       <button id="date-selector" style="position: relative;" type="button" data-toggle="modal" data-target="#date"><span style="vertical-align: middle; color: darkgray;" class="material-icons">date_range</span><span class="hidden-xs" style="margin-left: 10px">日期</span></button>
     </div>
 
-    <div class="pull-right" style="color: #d1d1d1; margin-right: -15px;">
+    <div class="pull-right" style="color: #d1d1d1; margin-right: -20px;">
       <form style="display: inline-block;" action="/search"><button style="position: relative;"><span style="vertical-align: middle; color: darkgray;" class="material-icons">clear_all</span><span class="hidden-xs" style="margin-left: 10px">重設</span></button>
       </form>
       <button id="hentai-filter-sort" style="position: relative;" type="button" data-toggle="modal" data-target="#sort-wrapper"><span style="vertical-align: middle; color: darkgray;" class="material-icons">sort</span><span class="hidden-xs" style="margin-left: 10px">排序</span></button>

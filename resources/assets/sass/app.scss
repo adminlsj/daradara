@@ -222,7 +222,7 @@ body {
 
 #home-rows-wrapper .home-rows-videos-wrapper .home-rows-videos-div {
   width: calc(100% / 7);
-  padding-right: 4px;
+  padding: 0 2px;
 }
 
 #home-rows-wrapper .home-rows-videos-wrapper img {
@@ -464,6 +464,10 @@ label.upload-image-btn input[type="file"] {
   top: 0; 
   width: 100%;
   transition: .3s cubic-bezier(0,0,.2,1);
+}
+
+#hentai-filter-nav-wrapper {
+  padding: 0px 4%;
 }
 
 #hentai-logo {
@@ -1413,6 +1417,31 @@ div.sticky {
 }
 
 @media (max-width: 767.9px) {
+  #main-nav {
+    padding: 0 15px;    
+  }
+
+  #hentai-main-nav {
+    padding: 0 15px;
+  }
+
+  #hentai-filter-nav-wrapper {
+    padding: 0px 15px;
+  }
+
+  #search-form {
+    left: calc(15px + 35px);
+    width: calc(100% + 25px); 
+  }
+
+  #home-rows-wrapper h3 {
+    padding: 0 15px; 
+  }
+
+  #list-logout-btn {
+    padding: 0 15px !important;
+  }
+
   .doujin-row {
     margin: 0 -15px !important;
   }
@@ -1483,6 +1512,10 @@ div.sticky {
     font-weight: bold;
   }
 
+  #home-rows-wrapper .home-rows-videos-wrapper {
+    padding: 0 15px; 
+  }
+
   #home-rows-wrapper .home-rows-videos-wrapper .home-rows-videos-div .home-rows-videos-title {
     font-size: 12px;
   }
@@ -1493,7 +1526,7 @@ div.sticky {
 
   #home-rows-wrapper .home-rows-videos-wrapper .home-rows-videos-div {
     width: calc(100% / 3);
-    margin-bottom: 4px !important;
+    margin-bottom: 15px !important;
   }
 
   .intro-rows-wrapper {
