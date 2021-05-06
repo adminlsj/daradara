@@ -56,7 +56,7 @@ $('.preview-trigger-mobile').on({ 'touchstart' : function(){
         width++;
         bar.width(width + '%');
       }
-    }, 25);
+    }, 30);
 
     $('.preview').remove();
     var url = $(this).data('preview');
