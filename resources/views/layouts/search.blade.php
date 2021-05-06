@@ -7,29 +7,28 @@
 @section('content')
 
 <div id="home-rows-wrapper" class="search-rows-wrapper" style="position: relative;">
-	  	@if ($doujin)
-		  	<div class="home-rows-videos-wrapper mobile-full-width" style="white-space: normal;">
-			    @foreach ($videos as $video)
-				    @include('video.card')
-				@endforeach
-			</div>
-	    @else
-		    <div class="home-rows-videos-wrapper" style="white-space: normal; margin: 0 -2px">
-			    @foreach ($videos as $video)
-			      	<a style="text-decoration: none;" href="{{ route('video.watch') }}?v={{ $video['id'] }}" target="_blank">
-				        <div class="home-rows-videos-div" style="position: relative; display: inline-block; margin-bottom:50px;">
-				          <img src="{{ $video['cover'] }}">
-				          <div class="home-rows-videos-title" style="position:absolute; bottom:0; left:0; white-space: initial; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; color: white; width: 100%; padding: 3px 5px; background: linear-gradient(to bottom, transparent 0%, black 120%);">{{ $video['title'] }}</div>
-				        </div>
-				    </a>
-			    @endforeach
-			</div>
-		@endif
-	  </div>
-	  <div class="search-pagination hidden-xs">{!! $videos->appends(request()->input())->links() !!}</div>
-	  <div class="search-pagination mobile-search-pagination hidden-sm hidden-md hidden-lg">{!! $videos->appends(request()->input())->onEachSide(1)->links() !!}</div>
+  	@if ($doujin)
+	  	<div class="home-rows-videos-wrapper mobile-full-width" style="white-space: normal;">
+		    @foreach ($videos as $video)
+			    @include('video.card')
+			@endforeach
+		</div>
+    @else
+	    <div class="home-rows-videos-wrapper" style="white-space: normal; margin-left: -2px; margin-right: -2px;">
+		    @foreach ($videos as $video)
+		      	<a style="text-decoration: none;" href="{{ route('video.watch') }}?v={{ $video['id'] }}" target="_blank">
+			        <div class="home-rows-videos-div" style="position: relative; display: inline-block; margin-bottom:50px;">
+			          <img src="{{ $video['cover'] }}">
+			          <div class="home-rows-videos-title" style="position:absolute; bottom:0; left:0; white-space: initial; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; color: white; width: 100%; padding: 3px 5px; background: linear-gradient(to bottom, transparent 0%, black 120%);">{{ $video['title'] }}</div>
+			        </div>
+			    </a>
+		    @endforeach
+		</div>
+	@endif
+	<div class="search-pagination hidden-xs">{!! $videos->appends(request()->input())->links() !!}</div>
+	<div class="search-pagination mobile-search-pagination hidden-sm hidden-md hidden-lg">{!! $videos->appends(request()->input())->onEachSide(1)->links() !!}</div>
 
-	  @include('ads.home-top-squares')
+	@include('ads.home-top-squares')
 </div>
 
 <form id="hentai-form" action="{{ route('home.search') }}" method="GET">
