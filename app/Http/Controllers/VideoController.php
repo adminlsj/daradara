@@ -23,7 +23,7 @@ class VideoController extends Controller
 {
     public function watch(Request $request){
 
-        $video = Video::with('watch:id,title', 'user.avatar')->select('id', 'user_id', 'playlist_id', 'title', 'translations', 'caption', 'cover', 'tags', 'sd', 'qualities', 'outsource', 'current_views', 'views', 'imgur', 'foreign_sd', 'duration', 'created_at', 'uploaded_at')->withCount('likes')->find($request->v);
+        $video = Video::with('watch:id,title')->select('id', 'user_id', 'playlist_id', 'title', 'translations', 'caption', 'cover', 'tags', 'sd', 'qualities', 'outsource', 'current_views', 'views', 'imgur', 'foreign_sd', 'duration', 'created_at', 'uploaded_at')->withCount('likes')->find($request->v);
 
         $watch = Watch::where('id', $video->playlist_id)->select('id', 'title')->withCount('videos')->first();
 
@@ -32,16 +32,16 @@ class VideoController extends Controller
             die();
         }
 
-        $videos = Video::with('user:id,name')->where('playlist_id', $video->playlist_id)->orderBy('created_at', 'desc')->select('id', 'user_id', 'imgur', 'title', 'sd', 'views', 'created_at')->get();
-
         $tags = array_intersect($video->tags(), Video::$selected_tags);
         $video->current_views++;
         $video->views++;
         $video->save();
+        $videos = Video::where('playlist_id', $video->playlist_id)->orderBy('created_at', 'desc')->select('id', 'user_id', 'imgur', 'title', 'sd', 'views', 'created_at')->get();
+
         $current = $video;
         $doujin = false;
 
-        $related = Video::with('user:id,name')->where(function($query) use ($current) {
+        $related = Video::where(function($query) use ($current) {
             foreach ($current->tags() as $tag) {
                 if (in_array($tag, Video::$selected_tags)) {
                     $query->orWhere('tags', 'like', '%'.$tag.'%');
@@ -51,7 +51,7 @@ class VideoController extends Controller
 
         if (in_array('3D', $tags) || in_array('同人', $tags) || in_array('Cosplay', $tags) || in_array('素人自拍', $tags)) {
             $doujin = true;
-            $related = $related->where('cover', '!=', null)->where('id', '!=', $current->id)->inRandomOrder()->select('id', 'user_id', 'cover', 'imgur', 'title', 'sd', 'qualities', 'views', 'duration', 'created_at')->limit(60)->get();
+            $related = $related->with('user:id,name', 'user.avatar')->where('cover', '!=', null)->where('id', '!=', $current->id)->inRandomOrder()->select('id', 'user_id', 'cover', 'imgur', 'title', 'sd', 'qualities', 'views', 'duration', 'created_at')->limit(60)->get();
 
         } else {
             $related = $related->where('cover', '!=', null)->where('cover', '!=', 'https://i.imgur.com/E6mSQA2.png')->where('playlist_id', '!=', $current->playlist_id)->inRandomOrder()->select('id', 'user_id', 'cover', 'imgur', 'title', 'sd', 'qualities', 'views', 'created_at')->limit(60)->get();

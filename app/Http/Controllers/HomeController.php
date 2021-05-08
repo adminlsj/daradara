@@ -63,7 +63,7 @@ class HomeController extends Controller
         $brands = [];
         $year = '';
         $month = '';
-        $videos = Video::with('user:id,name');
+        $videos = Video::query();
         $doujin = false;
         
         if ($query = request('query')) {
@@ -140,7 +140,7 @@ class HomeController extends Controller
         if (!$doujin) {
             $videos = $videos->where('cover', '!=', null)->where('cover', '!=', 'https://i.imgur.com/E6mSQA2.png')->distinct()->paginate(42);
         } else {
-            $videos = $videos->where('cover', '!=', null)->distinct()->paginate(60);
+            $videos = $videos->with('user:id,name', 'user.avatar')->where('cover', '!=', null)->distinct()->paginate(60);
         }
         
         return view('layouts.search', compact('tags', 'brands', 'year', 'month', 'videos', 'doujin'));
