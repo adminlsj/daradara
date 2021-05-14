@@ -19,6 +19,7 @@ class CreateVideosTable extends Migration
             $table->timestamps();
             $table->text('caption')->nullable();
             $table->text('tags')->nullable();
+            $table->integer('current_views')->default(0);
             $table->integer('views');
             $table->string('imgur')->nullable();
             $table->text('sd')->nullable();
