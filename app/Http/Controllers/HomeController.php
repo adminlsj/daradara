@@ -224,7 +224,7 @@ class HomeController extends Controller
             if ($reason == '其他原因') {
                 $reason = $reason.'：'.request('others-text');
             }
-            Mail::to('laughseejapan@gmail.com')->send(new UserReport($email, $reason, request('video-id'), request('video-title'), request('video-sd'), $ip_address, $country_code));
+            Mail::to('vicky.avionteam@gmail.com')->send(new UserReport($email, $reason, request('video-id'), request('video-title'), request('video-sd'), $ip_address, $country_code));
 
             if (request('video-title') == 'User Verification') {
                 return Redirect::back()->withErrors('我們已收到您的申請，並會在近日內透過您的電郵地址聯繫您。');
