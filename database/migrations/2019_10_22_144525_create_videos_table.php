@@ -31,7 +31,6 @@ class CreateVideosTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->jsonb('foreign_sd')->nullable();
             $table->string('cover')->nullable();
-            $table->jsonb('data')->nullable();
             $table->jsonb('translations')->nullable();
         });
     }
