@@ -23,6 +23,7 @@ use Redirect;
 use Spatie\Browsershot\Browsershot;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Storage;
+use SteelyWing\Chinese\Chinese;
 
 class HomeController extends Controller
 {
@@ -74,7 +75,9 @@ class HomeController extends Controller
             if (($key = array_search(' ', $queryArray)) !== false) {
                 unset($queryArray[$key]);
             }
-            $searchQuery = '%'.implode('%', $queryArray).'%';
+
+            $chinese = new Chinese();
+            $searchQuery = $chinese->to(Chinese::ZH_HANT, '%'.implode('%', $queryArray).'%');
             $videos = $videos->where(function($query) use ($searchQuery) {
                 $query->where('title', 'ilike', $searchQuery)->orWhere('translations', 'ilike', $searchQuery)->orWhere('tags', 'ilike', $searchQuery);
             });
