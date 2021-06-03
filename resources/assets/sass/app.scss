@@ -1534,9 +1534,7 @@ div.sticky {
   }
 
   #search-nav-wrapper {
-    padding: 0px 15px 15px 15px;
-    /* border-top: 1px solid #333333;
-    border-bottom: 1px solid #333333; */
+    padding: 0px 15px 14px 15px;
     white-space: nowrap;
     overflow-x: scroll;
     scrollbar-width: none; /* Firefox */
@@ -1544,6 +1542,8 @@ div.sticky {
     position: fixed;
     top: 68px;
     z-index: 1000;
+    border-bottom: 1px solid black;
+    box-shadow: 0 3px 3px -2px rgba(0,0,0,.2), 0 3px 4px 0 rgba(0,0,0,.14), 0 1px 8px -8px rgba(0,0,0,.12);
   }
   #search-nav-wrapper::-webkit-scrollbar { /* WebKit */
     width: 0;
@@ -1678,7 +1678,7 @@ div.sticky {
   }
 
   .search-rows-wrapper {
-    margin-top: 127px !important;
+    margin-top: 141px !important;
   }
 
   .search-pagination {
