@@ -8,13 +8,13 @@
       <span style="padding-right: 1px;">主頁</span>
     @endif
   </a>
-  <a href="{{ route('home.genre') }}">
-    @if (Request::is('*genre'))
-      <i style="font-size: 24px; margin-top: 5px; color: white;" class="material-icons">dashboard</i>
-      <span style="color: white;">分類</span>
+  <a href="{{ route('home.search') }}">
+    @if (Request::is('*search'))
+      <i style="font-size: 26px; margin-top: 5px; color: white;" class="material-icons">search</i>
+      <span style="color: white;">搜索</span>
     @else
-      <i style="font-size: 24px; margin-top: 5px;" class="material-icons">dashboard</i>
-      <span>分類</span>
+      <i style="font-size: 26px; margin-top: 5px;" class="material-icons">search</i>
+      <span>搜索</span>
     @endif
   </a>
   <a href="{{ Auth::check() ? route('home.list') : route('login') }}">
