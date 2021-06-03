@@ -9,10 +9,12 @@
 		    <img height="30" src="https://i.imgur.com/PTFz5Ej.png">
 	    </a>
 
-		<form id="search-form" style="display: inline-block; margin-left: 8px; width: calc(100% - 33px); position: relative;">
-		    <div id="search-btn"><i style="margin-top: 6px; margin-left: 7px; color: white; font-size: 17px; font-weight: bold;" class="material-icons">search</i></div>
+		<form id="search-form" style="display: inline-block; margin-left: 8px; width: calc(100% - 74px); position: relative;">
+		    <div id="search-btn"><i style="margin-top: 4px; margin-left: 5px; color: white; font-size: 21px; font-weight: bold;" class="material-icons">search</i></div>
 		    <input id="query" name="query" style="width: 100%" class="search-nav-bar" type="text" value="{{ request('query') }}" placeholder="搜索">
 		</form>
+
+		<a style="padding-right: 0px; line-height: 68px; color: white;" class="nav-icon pull-right" href="{{ Auth::check() ? route('home.list') : route('login') }}"><span style="vertical-align: middle; font-size: 36px; margin-top: -1px;" class="material-icons">account_circle</span></a>
 	</div>
 @endsection
 
