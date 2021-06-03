@@ -26,7 +26,7 @@
 	  <div class="modal-dialog modal-sm" style="position: absolute; top: 87px;">
 	    <div class="modal-content" style="border-radius: 3px; background-color: #222222; color: white;">
 	      <div class="modal-header" style="border-bottom: 1px solid #333333; position: relative; height: 65px;">
-	      	<span style="position: absolute; top: 20px; left: 16px; cursor: pointer; font-size: 24px;" class="material-icons pull-left no-select" data-dismiss="modal">close</span>
+	      	<span class="material-icons pull-left no-select modal-close-btn" data-dismiss="modal">close</span>
 	        <h4 class="modal-title" style="text-align: center; font-weight: bold; margin: 0; padding: 0; margin-top: 5px; font-size: 18px;">影片類型</h4>
 	      </div>
 	      <div class="modal-body" style="padding: 0;">
@@ -109,7 +109,7 @@
 	  <div class="modal-dialog modal-sm" style="position: absolute; top: 87px;">
 	    <div class="modal-content" style="border-radius: 3px; background-color: #222222; color: white;">
 	      <div class="modal-header" style="border-bottom: 1px solid #333333; position: relative; height: 65px;">
-	      	<span style="position: absolute; top: 20px; left: 16px; cursor: pointer; font-size: 24px;" class="material-icons pull-left no-select" data-dismiss="modal">close</span>
+	      	<span class="material-icons pull-left no-select modal-close-btn" data-dismiss="modal">close</span>
 	        <h4 class="modal-title" style="text-align: center; font-weight: bold; margin: 0; padding: 0; margin-top: 5px; font-size: 18px;">排序方式</h4>
 	      </div>
 	      <div class="modal-body" style="padding: 0;">
@@ -158,7 +158,7 @@
 	  <div class="modal-dialog modal-sm" style="position: absolute; top: 87px;">
 	    <div class="modal-content" style="border-radius: 3px; background-color: #222222; color: white;">
 	      <div class="modal-header" style="border-bottom: 1px solid #333333; position: relative; height: 65px;">
-	      	<span style="position: absolute; top: 20px; left: 16px; cursor: pointer; font-size: 24px;" class="material-icons pull-left no-select" data-dismiss="modal">close</span>
+	      	<span class="material-icons pull-left no-select modal-close-btn" data-dismiss="modal">close</span>
 	        <h4 class="modal-title" style="text-align: center; font-weight: bold; margin: 0; padding: 0; margin-top: 5px; font-size: 18px;">發佈日期</h4>
 	      </div>
 	      <div class="modal-body" style="padding: 24px 20px;">
@@ -190,7 +190,7 @@
 	  <div class="modal-dialog modal-sm" style="position: absolute; top: 87px; left: calc(4% + 449px);">
 	    <div class="modal-content" style="border-radius: 3px; background-color: #222222; color: white;">
 	      <div class="modal-header" style="border-bottom: 1px solid #333333; position: relative; height: 65px;">
-	      	<span style="position: absolute; top: 20px; left: 16px; cursor: pointer; font-size: 24px;" class="material-icons pull-left no-select" data-dismiss="modal">close</span>
+	      	<span class="material-icons pull-left no-select modal-close-btn" data-dismiss="modal">close</span>
 	        <h4 class="modal-title" style="text-align: center; font-weight: bold; margin: 0; padding: 0; margin-top: 5px; font-size: 18px;">影片長度</h4>
 	      </div>
 	      <div class="modal-body" style="padding: 0;">
