@@ -9,10 +9,12 @@
 		    <img height="30" src="https://i.imgur.com/PTFz5Ej.png">
 	    </a>
 
-		<form id="search-form" style="display: inline-block; margin-left: 8px; width: calc(100% - 33px); position: relative;">
-		    <i style="position: absolute; top: 8px; left: 17px; color: dimgray;" class="material-icons">search</i>
-		    <input id="nav-query" name="query" style="box-shadow: none; outline: none; border: 1px solid rgba(58,60,63,.85); background-color: transparent; font-size: 1.1em;border-radius: 3px; height: 40px; color: darkgray; padding-bottom: 2px; font-weight: 500; transition: .3s cubic-bezier(0,0,.2,1); width: 100%; padding-left: 52px;" type="text" value="{{ request('query') }}" placeholder="搜索">
+		<form id="search-form" style="display: inline-block; margin-left: 8px; width: calc(100% - 78px); position: relative;">
+		    <div id="search-btn"><i style="margin-top: 6px; margin-left: 7px; color: white; font-size: 17px; font-weight: bold;" class="material-icons">search</i></div>
+		    <input id="query" name="query" style="width: 100%" class="search-nav-bar" type="text" value="{{ request('query') }}" placeholder="搜索">
 		</form>
+
+		<a style="padding-right: 0px; line-height: 68px; color: white;" class="nav-icon pull-right" href="{{ Auth::check() ? route('home.list') : route('login') }}"><span style="vertical-align: middle; font-size: 36px; margin-top: -1px;" class="material-icons">account_circle</span></a>
 	</div>
 @endsection
 
