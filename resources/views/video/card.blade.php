@@ -4,7 +4,7 @@
         <div class="preview-wrapper" style="position: relative;">
 		    <img class="lazy" style="width: 100%; height: 100%;" src="{{ $video->imgur16by9() }}" data-src="{{ $video->imgurL() }}" data-srcset="{{ $video->imgurL() }}" alt="{{ $video->title }}">
 		    @if ($video->duration != null)
-			    <div style="position: absolute; right: 4px; bottom: 4px; color: white; background-color: rgba(0, 0, 0, 0.75); font-size: 12px; font-weight: 500; padding: 0px 5px; border-radius: 2px; z-index: 1">
+			    <div style="position: absolute; right: 4px; bottom: 4px; color: white; background-color: rgba(0, 0, 0, 0.75); font-size: 12px; font-weight: 500; padding: 0px 5px; border-radius: 2px; z-index: 1;">
 			    	{{ $video->duration >= 3600 ? gmdate('H:i:s', $video->duration) : gmdate('i:s', $video->duration) }}
 			    </div>
 		    @endif
@@ -23,7 +23,7 @@
 		<div class="preview-wrapper" style="position: relative;">
 			<img class="lazy" style="width: 100%;" src="{{ $video->imgur16by9() }}" data-src="{{ $video->imgurH() }}" data-srcset="{{ $video->imgurH() }}" alt="{{ $video->title }}">
 			@if ($video->duration != null)
-			    <div style="position: absolute; right: 6px; bottom: 6px; color: white; background-color: rgba(0, 0, 0, 0.75); font-size: 12px; font-weight: 500; padding: 0px 5px; border-radius: 2px; z-index: 1">
+			    <div style="position: absolute; right: 6px; bottom: 6px; color: white; background-color: rgba(0, 0, 0, 0.75); font-size: 12px; font-weight: bold; padding: 0px 5px; border-radius: 2px; z-index: 1">
 			    	{{ $video->duration >= 3600 ? gmdate('H:i:s', $video->duration) : gmdate('i:s', $video->duration) }}
 			    </div>
 		    @endif
