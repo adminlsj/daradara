@@ -10,7 +10,7 @@
 	    </a>
 
 		<form id="search-form" style="display: inline-block; margin-left: 8px; width: calc(100% - 78px); position: relative;">
-		    <div id="search-btn"><i style="margin-top: 4px; margin-left: 5px; color: white; font-size: 22px; font-weight: bold;" class="material-icons">search</i></div>
+		    <div id="search-btn"><i style="margin-top: 4px; margin-left: 5px; color: white; font-size: 21px; font-weight: bold;" class="material-icons">search</i></div>
 		    <input id="query" name="query" style="width: 100%" class="search-nav-bar" type="text" value="{{ request('query') }}" placeholder="搜索">
 		</form>
 
