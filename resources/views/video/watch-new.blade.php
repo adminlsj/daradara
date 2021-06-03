@@ -66,9 +66,9 @@
 
         <h3 id="shareBtn-title" style="line-height: 30px; font-weight: bold; font-size: 1.5em; margin-top: 0px; color: white;">{{ $video->title }}</h3>
 
-        <h5 style="color: #bdbdbd; font-weight: 400; margin-top: 10px; line-height: 20px; margin-bottom: 15px; white-space: pre-wrap; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;"><span style="font-weight: bold">{{ $video->translations['JP'] }} [中文字幕]</span></h5>
+        <h5 style="color: #bdbdbd; font-weight: 400; margin-top: 10px; line-height: 20px; margin-bottom: 20px; white-space: pre-wrap; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;"><span style="font-weight: bold">{{ $video->translations['JP'] }} [中文字幕]</span></h5>
 
-        <h5 style="font-weight: 400; margin-bottom: 3px; margin-top: 0px;">
+        <h5 style="font-weight: 400; margin-bottom: 0px; margin-top: 0px;">
           @foreach ($video->tags() as $tag)
               <div class="single-video-tag"><a href="/search?tags%5B%5D={{ $tag }}">{{ $tag }}</a></div>
           @endforeach
