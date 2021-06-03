@@ -4,21 +4,15 @@
 	<div class="hidden-xs">
 		@include('nav.main')
 	</div>
-	<div class="hidden-sm hidden-md hidden-lg">
-		<nav id="hentai-main-nav" style="background-image: linear-gradient(to bottom,rgba(0,0,0,.7) 10%,rgba(0,0,0,0)); z-index: 100">
-		  <a id="hentai-logo" class="pull-left hidden-md hidden-sm hidden-xs" href="/" style="color: white; font-size: 1.4em;">
-		      <span style="color: crimson">H</span>anime1<span style="color: crimson">.</span>me
-		  </a>
+	<div class="hidden-sm hidden-md hidden-lg" style="padding: 0 15px; height: 68px;">
+	    <a class="hover-opacity" href="/" style="color: white; line-height: 68px;">
+		    <img height="30" src="https://i.imgur.com/PTFz5Ej.png">
+	    </a>
 
-		  <a class="pull-left hidden-lg hover-opacity" href="/" style="color: white; line-height: 68px;">
-		      <img height="30" src="https://i.imgur.com/PTFz5Ej.png">
-		  </a>
-
-		  <form id="search-form" class="pull-left">
-		      <i style="position: absolute; top: 8px; left: 17px; color: dimgray" class="material-icons">search</i>
-		      <input id="nav-query" name="query" style="box-shadow: none; border: 1px solid rgba(58,60,63,.85); background-color: transparent; font-size: 1.1em;border-radius: 3px; height: 40px; padding-left: 53px; color: darkgray; padding-bottom: 2px; font-weight: 500; transition: .3s cubic-bezier(0,0,.2,1);" type="text" value="{{ request('query') }}" placeholder="搜索">
-		  </form>
-		</nav>
+		<form id="search-form" style="display: inline-block; margin-left: 8px; width: calc(100% - 33px); position: relative;">
+		    <i style="position: absolute; top: 8px; left: 17px; color: dimgray;" class="material-icons">search</i>
+		    <input id="nav-query" name="query" style="box-shadow: none; outline: none; border: 1px solid rgba(58,60,63,.85); background-color: transparent; font-size: 1.1em;border-radius: 3px; height: 40px; color: darkgray; padding-bottom: 2px; font-weight: 500; transition: .3s cubic-bezier(0,0,.2,1); width: 100%; padding-left: 52px;" type="text" value="{{ request('query') }}" placeholder="搜索">
+		</form>
 	</div>
 @endsection
 

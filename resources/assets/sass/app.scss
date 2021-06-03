@@ -146,13 +146,6 @@ body {
   text-decoration: none;
 }
 
-#search-form {
-  width: 50%; 
-  margin-top: 14px; 
-  left:370px; 
-  position: absolute;
-}
-
 #search-btn {
   position: absolute;
   top: 5px; 
@@ -1283,11 +1276,6 @@ div.sticky {
   .list-rows-wrapper {
     margin-top: 90px !important;
   }
-
-  #search-form {
-    left: calc(4% + 35px);
-    width: calc(92% + 50px); 
-  }
 }
 
 @media (min-width: 1425px) {
@@ -1554,7 +1542,7 @@ div.sticky {
   }
 
   .search-nav span {
-    font-size: 26px;
+    font-size: 25px;
   }
 
   #main-nav {
@@ -1569,11 +1557,6 @@ div.sticky {
 
   #hentai-filter-nav-wrapper {
     padding: 0px 15px;
-  }
-
-  #search-form {
-    left: calc(15px + 35px);
-    width: calc(100% + 25px); 
   }
 
   #home-rows-wrapper h3 {
