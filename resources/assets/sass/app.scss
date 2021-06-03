@@ -1520,7 +1520,7 @@ div.sticky {
   }
 
   #search-nav-wrapper {
-    padding: 0px 15px 14px 15px;
+    padding: 0px 15px 15px 15px;
     /* border-top: 1px solid #333333;
     border-bottom: 1px solid #333333; */
     white-space: nowrap;
@@ -1529,7 +1529,7 @@ div.sticky {
     -ms-overflow-style: none;  /* Internet Explorer 10+ */
     position: fixed;
     top: 68px;
-    z-index: 1;
+    z-index: 1000;
   }
   #search-nav-wrapper::-webkit-scrollbar { /* WebKit */
     width: 0;
@@ -1664,7 +1664,7 @@ div.sticky {
   }
 
   .search-rows-wrapper {
-    margin-top: 130px !important;
+    margin-top: 127px !important;
   }
 
   .search-pagination {
