@@ -1,54 +1,74 @@
 @extends('layouts.app')
 
 @section('nav')
-	@include('layouts.nav-main-original-dark', ['theme' => 'white'])
+	<div class="hidden-xs">
+		@include('nav.main')
+	</div>
+	<div class="hidden-sm hidden-md hidden-lg">
+		<nav id="hentai-main-nav" style="background-image: linear-gradient(to bottom,rgba(0,0,0,.7) 10%,rgba(0,0,0,0)); z-index: 100">
+		  <a id="hentai-logo" class="pull-left hidden-md hidden-sm hidden-xs" href="/" style="color: white; font-size: 1.4em;">
+		      <span style="color: crimson">H</span>anime1<span style="color: crimson">.</span>me
+		  </a>
+
+		  <a class="pull-left hidden-lg hover-opacity" href="/" style="color: white; line-height: 68px;">
+		      <img height="30" src="https://i.imgur.com/PTFz5Ej.png">
+		  </a>
+
+		  <form id="search-form" class="pull-left">
+		      <i style="position: absolute; top: 8px; left: 17px; color: dimgray" class="material-icons">search</i>
+		      <input id="nav-query" name="query" style="box-shadow: none; border: 1px solid rgba(58,60,63,.85); background-color: transparent; font-size: 1.1em;border-radius: 3px; height: 40px; padding-left: 53px; color: darkgray; padding-bottom: 2px; font-weight: 500; transition: .3s cubic-bezier(0,0,.2,1);" type="text" value="{{ request('query') }}" placeholder="搜索">
+		  </form>
+		</nav>
+	</div>
 @endsection
 
 @section('content')
-
-<div id="home-rows-wrapper" class="search-rows-wrapper" style="position: relative;">
-  	@if ($doujin)
-	  	<div class="home-rows-videos-wrapper mobile-full-width" style="white-space: normal;">
-		    @foreach ($videos as $video)
-			    @include('video.card')
-			@endforeach
-		</div>
-    @else
-	    <div class="home-rows-videos-wrapper" style="white-space: normal; margin-left: -2px; margin-right: -2px;">
-		    @foreach ($videos as $video)
-		      	<a style="text-decoration: none;" href="{{ route('video.watch') }}?v={{ $video['id'] }}" target="_blank">
-			        <div class="home-rows-videos-div" style="position: relative; display: inline-block; margin-bottom:50px;">
-			          <img src="{{ $video['cover'] }}">
-			          <div class="home-rows-videos-title" style="position:absolute; bottom:0; left:0; white-space: initial; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; color: white; width: 100%; padding: 3px 5px; background: linear-gradient(to bottom, transparent 0%, black 120%);">{{ $video['title'] }}</div>
-			        </div>
-			    </a>
-		    @endforeach
-		</div>
-	@endif
-	<div class="search-pagination hidden-xs">{!! $videos->appends(request()->input())->links() !!}</div>
-	<div class="search-pagination mobile-search-pagination hidden-sm hidden-md hidden-lg">{!! $videos->appends(request()->input())->onEachSide(1)->links() !!}</div>
-
-	@include('ads.home-top-squares')
-</div>
-
 <form id="hentai-form" action="{{ route('home.search') }}" method="GET">
-	<input type="hidden" id="query" name="query" value="{{ Request::get('query') }}">
-	<div id="tags" class="modal fade" role="dialog">
+	@include('video.search-nav')
+
+	<div id="home-rows-wrapper" class="search-rows-wrapper" style="position: relative;">
+	  	@if ($doujin)
+		  	<div class="home-rows-videos-wrapper mobile-full-width" style="white-space: normal;">
+			    @foreach ($videos as $video)
+				    @include('video.card')
+				@endforeach
+			</div>
+	    @else
+		    <div class="home-rows-videos-wrapper" style="white-space: normal; margin-left: -2px; margin-right: -2px;">
+			    @foreach ($videos as $video)
+			      	<a style="text-decoration: none;" href="{{ route('video.watch') }}?v={{ $video['id'] }}" target="_blank">
+				        <div class="home-rows-videos-div" style="position: relative; display: inline-block; margin-bottom:50px;">
+				          <img src="{{ $video['cover'] }}">
+				          <div class="home-rows-videos-title" style="position:absolute; bottom:0; left:0; white-space: initial; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; color: white; width: 100%; padding: 3px 5px; background: linear-gradient(to bottom, transparent 0%, black 120%);">{{ $video['title'] }}</div>
+				        </div>
+				    </a>
+			    @endforeach
+			</div>
+		@endif
+		<div class="search-pagination hidden-xs">{!! $videos->appends(request()->input())->links() !!}</div>
+		<div class="search-pagination mobile-search-pagination hidden-sm hidden-md hidden-lg">{!! $videos->appends(request()->input())->onEachSide(1)->links() !!}</div>
+
+		@include('ads.home-top-squares')
+	</div>
+
+	<div id="tags" class="modal" role="dialog">
 	  <div class="modal-dialog">
-	    <div class="modal-content" style="border-radius: 3px; background-color: #424242; color: white">
-	      <div class="modal-header" style="border-bottom: 1px solid #3a3c3f">
-	        <button type="button" class="close" data-dismiss="modal">&times;</button>
-	        <h4 class="modal-title" style="text-align: center;">標籤</h4>
+	    <div class="modal-content" style="border-radius: 3px; background-color: #222222; color: white">
+	      <div class="modal-header" style="border-bottom: 1px solid #333333; position: relative; height: 65px;">
+	        <span style="position: absolute; top: 20px; left: 16px; cursor: pointer; font-size: 24px;" class="material-icons pull-left no-select" data-dismiss="modal">close</span>
+	        <h4 class="modal-title" style="text-align: center; font-weight: bold; margin: 0; padding: 0; margin-top: 5px; font-size: 18px;">內容標籤</h4>
 	      </div>
-	      <div class="modal-body">
-	      	<h5>
-	      		廣泛配對
-		      	<label class="hentai-switch" style="float: right">
-					<input type="checkbox" name="broad" id="broad" {{ Request::get('broad') ? 'checked' : '' }}>
-					<span class="hentai-slider round"></span>
-				</label>
-			</h5>
-	        <p style="color: darkgray; padding-bottom: 15px; font-size: 12px">較多結果，較不精準。配對所有包含任何一個選擇的標籤的影片，而非全部標籤。</p>
+	      <div class="modal-body" style="overflow-y: scroll; padding-top: 0px;">
+	      	<div style="background-color: #333333; margin: 0 -15px 20px -15px; padding: 5px 15px 0px 15px;">
+				<h5 style="font-weight: bold">
+			  		廣泛配對
+			      	<label class="hentai-switch" style="float: right">
+						<input type="checkbox" name="broad" id="broad" {{ Request::get('broad') ? 'checked' : '' }}>
+						<span class="hentai-slider round"></span>
+					</label>
+				</h5>
+			    <p style="color: darkgray; padding-bottom: 12px; font-size: 12px; padding-right: 60px;">較多結果，較不精準。配對所有包含任何一個選擇的標籤的影片，而非全部標籤。</p>
+		    </div>
 
 	        <h5 style="margin-bottom: 15px; font-weight: bold">人物設定：</h5>
 	        @foreach (App\Video::$setting as $tag)
@@ -81,29 +101,22 @@
 				  <span class="checkmark">{{ $tag }}</span>
 				</label>
 	        @endforeach
-
-	        <h5 style="margin-top: 15px; margin-bottom: 15px; font-weight: bold">分類：</h5>
-	        @foreach (App\Video::$genre as $tag)
-	        	<label class="hentai-tags-wrapper">
-				  <input name="tags[]" type="checkbox" value="{{ $tag }}" {{ $tags != [] && in_array($tag, $tags) ? 'checked' : '' }}>
-				  <span class="checkmark">{{ $tag }}</span>
-				</label>
-	        @endforeach
 	      </div>
-	      <div class="modal-footer" style="border-top: none;">
-	      	<button style="border: none; color: white; background-color: transparent;" type="button" class="pull-left" data-dismiss="modal">取消</button>
-	        <button style="border: none; color: #b08fff; background-color: transparent;" type="submit">搜索</button>
+	      <hr style="border-color: #3a3c3f; margin: 0">
+	      <div class="modal-footer" style="border-top: none; width: 100%; text-align: center; padding: 0;">
+			<div style="display: inline-block; width: 50%; float: left; line-height: 46px; color: darkgray; cursor: pointer;" data-dismiss="modal">取消</div>
+			<button style="border: none; color: white; background-color: #b08fff; border-radius: 0; height: 100%; width: 50%; font-weight: bold; line-height: 34px;" class="pull-right btn btn-primary" type="submit">儲存</button>
 	      </div>
 	    </div>
 	  </div>
 	</div>
 
-	<div id="brands" class="modal fade" role="dialog">
+	<div id="brands" class="modal" role="dialog">
 	  <div class="modal-dialog">
-	    <div class="modal-content" style="border-radius: 3px; background-color: #424242; color: white">
-	      <div class="modal-header" style="border-bottom: 1px solid #3a3c3f">
-	        <button type="button" class="close" data-dismiss="modal">&times;</button>
-	        <h4 class="modal-title" style="text-align: center">品牌</h4>
+	    <div class="modal-content" style="border-radius: 3px; background-color: #222222; color: white">
+	      <div class="modal-header" style="border-bottom: 1px solid #333333; position: relative; height: 65px;">
+	        <span style="position: absolute; top: 20px; left: 16px; cursor: pointer; font-size: 24px;" class="material-icons pull-left no-select" data-dismiss="modal">close</span>
+	        <h4 class="modal-title" style="text-align: center; font-weight: bold; margin: 0; padding: 0; margin-top: 5px; font-size: 18px;">製作公司</h4>
 	      </div>
 	      <div class="modal-body">
 	        <h4>品牌 / 製作</h4>
@@ -115,56 +128,13 @@
 				</label>
 	        @endforeach
 	      </div>
-	      <div class="modal-footer" style="border-top: none;">
-	      	<button style="border: none; color: white; background-color: transparent;" type="button" class="pull-left" data-dismiss="modal">取消</button>
-	        <button style="border: none; color: #b08fff; background-color: transparent;" type="submit">搜索</button>
+	      <hr style="border-color: #3a3c3f; margin: 0">
+	      <div class="modal-footer" style="border-top: none; width: 100%; text-align: center; padding: 0;">
+			<div style="display: inline-block; width: 50%; float: left; line-height: 46px; color: darkgray; cursor: pointer;" data-dismiss="modal">取消</div>
+			<button style="border: none; color: white; background-color: #b08fff; border-radius: 0; height: 100%; width: 50%; font-weight: bold; line-height: 34px;" class="pull-right btn btn-primary" type="submit">儲存</button>
 	      </div>
 	    </div>
 	  </div>
-	</div>
-
-	<div id="date" class="modal fade" role="dialog">
-	  <div class="modal-dialog">
-	    <div class="modal-content" style="border-radius: 3px; background-color: #424242; color: white">
-	      <div class="modal-header" style="border-bottom: 1px solid #3a3c3f">
-	        <button type="button" class="close" data-dismiss="modal">&times;</button>
-	        <h4 class="modal-title" style="text-align: center">日期</h4>
-	      </div>
-	      <div class="modal-body">
-	        <h4>發佈日期</h4>
-	        <p id="hentai-tags-text" style="color: darkgray; padding-bottom: 10px">搜索以下選擇的年份或月份的影片：</p>
-			<div class="form-group">
-				<select class="form-control" id="year" name="year" style="width: calc(50% - 5px); display: inline-block; float: left;">
-					<option value="">全部年份...</option>
-					@for ($i = 2021; $i >= 1990; $i--)
-						<option value="{{ $i }}" {{ $i == $year ? 'selected' : '' }}>{{ $i }}年</option>
-					@endfor
-				</select>
-				<select class="form-control" id="month" name="month" style="width: calc(50% - 5px); display: inline-block; float: right;">
-					<option value="">全部月份...</option>
-					@for ($i = 1; $i <= 12; $i++)
-						<option value="{{ $i }}" {{ $i == $month ? 'selected' : '' }}>{{ $i }}月</option>
-					@endfor
-				</select>
-			</div>
-	      </div>
-	      <br>
-	      <div class="modal-footer" style="border-top: none;">
-	      	<button style="border: none; color: white; background-color: transparent;" type="button" class="pull-left" data-dismiss="modal">取消</button>
-	        <button style="border: none; color: #b08fff; background-color: transparent;" type="submit">搜索</button>
-	      </div>
-	    </div>
-	  </div>
-	</div>
-
-	<div id="sort-wrapper" class="modal fade" role="dialog">
-		<div id="hentai-sort-panel">
-			<input type="hidden" id="sort" name="sort" value="{{ Request::get('sort') }}">
-			<div class="hentai-sort-options-wrapper"><div class="hentai-sort-options">本日排行</div></div>
-			<div class="hentai-sort-options-wrapper"><div class="hentai-sort-options">最新內容</div></div>
-			<div class="hentai-sort-options-wrapper"><div class="hentai-sort-options">最新上傳</div></div>
-			<div class="hentai-sort-options-wrapper"><div class="hentai-sort-options">觀看次數</div></div>
-		</div>
 	</div>
 </form>
 

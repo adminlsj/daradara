@@ -59,7 +59,17 @@ class VideoController extends Controller
 
         $country_code = isset($_SERVER["HTTP_CF_IPCOUNTRY"]) ? $_SERVER["HTTP_CF_IPCOUNTRY"] : 'N/A';
 
-        $comments = Comment::with('user.avatar', 'likes', 'replies.likes', 'replies.user.avatar')->where('foreign_id', $video->id)->withCount('likes')->orderBy('likes_count', 'desc')->orderBy('created_at', 'desc')->get()->sortBy(function($comment)
+        $comments = Comment::with('user.avatar', 'likes', 'replies.user.avatar')
+                        ->with('replies.likes')
+                        ->with(['replies' => function($query) {
+                            $query->orderBy('created_at', 'asc');
+                        }])
+                        ->where('foreign_id', $video->id)
+                        ->withCount('likes')
+                        ->orderBy('likes_count', 'desc')
+                        ->orderBy('created_at', 'desc')
+                        ->get()
+                        ->sortBy(function($comment)
         {
             return $comment->likes->where('is_positive', false)->count() - $comment->likes->where('is_positive', true)->count();
         });

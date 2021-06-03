@@ -80,8 +80,58 @@ class HomeController extends Controller
             });
         }
 
+        if ($genre = $request->genre) {
+            switch ($genre) {
+                case '全部':
+                    $doujin = true;
+                    break;
+
+                case 'H動漫':
+                    $videos = $videos->where(function($query) {
+                        $query->orWhere('tags', 'ilike', '裏番%')->orWhere('tags', 'ilike', '% 裏番 %');
+                    });
+                    break;
+
+                case '3D動畫':
+                    $doujin = true;
+                    $videos = $videos->where(function($query) {
+                        $query->orWhere('tags', 'ilike', '3D%')->orWhere('tags', 'ilike', '% 3D %');
+                    });
+                    break;
+
+                case '同人作品':
+                    $doujin = true;
+                    $videos = $videos->where(function($query) {
+                        $query->orWhere('tags', 'ilike', '同人%')->orWhere('tags', 'ilike', '% 同人 %');
+                    });
+                    break;
+
+                case 'Cosplay':
+                    $doujin = true;
+                    $videos = $videos->where(function($query) {
+                        $query->orWhere('tags', 'ilike', 'Cosplay%')->orWhere('tags', 'ilike', '% Cosplay %');
+                    });
+                    break;
+                
+                default:
+                    break;
+            }
+        }
+
+        if ($duration = $request->duration) {
+            if (strpos($duration, '短片') === 0) {
+                $videos = $videos->where('duration', '<=', 240);
+
+            } elseif (strpos($duration, '中長片') === 0) {
+                $videos = $videos->where('duration', '>=', 240)->where('duration', '<=', 1200);
+
+            } elseif (strpos($duration, '長片') === 0) {
+                $videos = $videos->where('duration', '>=', 1200);
+            }
+        }
+
         if ($tags = $request->tags) {
-            if (in_array('3D', $tags) || in_array('同人', $tags) || in_array('Cosplay', $tags) || in_array('素人自拍', $tags) || !in_array($tags[0], Video::$all_tag)) {
+            if (!in_array($tags[0], Video::$all_tag)) {
                 $doujin = true;
             }
             if ($request->broad) {

@@ -111,9 +111,25 @@ $(".upload-image-btn").on("change", function() {
   $('#file-text').val(fileName);
 });
 
+$('.genre-option').click(function() {
+  var genre = $(this).text();
+  $("#genre").val(genre);
+  $('form#hentai-form').submit();
+})
+
+$('.duration-option').click(function() {
+  var duration = $(this).find('span').text();
+  $("#duration").val(duration);
+  $('form#hentai-form').submit();
+})
+
 $('.hentai-sort-options-wrapper').click(function() {
   var sort = $(this).find("div").text();
   $("#sort").val(sort);
+  $('form#hentai-form').submit();
+})
+
+$('#search-btn').click(function() {
   $('form#hentai-form').submit();
 })
 
@@ -239,11 +255,27 @@ $('[id=switch-signup-modal]').click(function(e) {
     $('#signUpModal').modal('show');
 });
 
-$(document).ready(function() {
-  if (is_mobile) {
-    $("#playModal").removeClass("fade");
-  }
+$('#genre-modal-trigger').click(function(e) {
+    var genre_left = $(this).offset().left;
+    $('#genre-modal .modal-dialog').css('left', genre_left - 1);
+});
 
+$('#sort-modal-trigger').click(function(e) {
+    var sort_left = $(this).offset().left;
+    $('#sort-modal .modal-dialog').css('left', sort_left);
+});
+
+$('#date-modal-trigger').click(function(e) {
+    var date_left = $(this).offset().left;
+    $('#date-modal .modal-dialog').css('left', date_left);
+});
+
+$('#duration-modal-trigger').click(function(e) {
+    var duration_left = $(this).offset().left;
+    $('#duration-modal .modal-dialog').css('left', duration_left);
+});
+
+$(document).ready(function() {
   var videos_scroll = document.querySelectorAll('.videos-scroll');
   for (var i = 0; i < videos_scroll.length; ++i) {
     var item = videos_scroll[i];  

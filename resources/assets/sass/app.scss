@@ -153,6 +153,91 @@ body {
   position: absolute;
 }
 
+#search-btn {
+  position: absolute;
+  top: 5px; 
+  right: 5px; 
+  height: 30px; 
+  width: 30px; 
+  background-color: crimson; 
+  border-radius: 20px; 
+  cursor: pointer;
+}
+
+#search-nav-wrapper {
+  margin-top: 1px;
+  padding: 0 4%;
+}
+
+.search-nav {
+  display: inline-block; 
+  border-radius: 20px;
+  color: #e9e9e9; 
+  padding: 9px 20px; 
+  font-weight: 400;
+  cursor: pointer;
+  background-color: #333333;
+  margin-right: 7px;
+  border: none;
+}
+
+.search-nav:hover {
+  background-color: #666666;
+}
+
+.search-nav.active {
+  background-color: #666666;
+}
+
+.search-nav-bar {
+  box-shadow: none; 
+  border: 1px solid #444444; 
+  background-color: transparent; 
+  border-radius: 20px; 
+  height: 40px; 
+  line-height: 40px; 
+  padding-left: 19px; 
+  color: #d1d1d1; 
+  font-weight: 500; 
+  transition: .3s cubic-bezier(0,0,.2,1); 
+  width: 250px;
+}
+
+.search-nav-bar:hover {
+  border-color: white !important;
+}
+
+.search-nav-bar:focus{
+  outline: none;
+  border-color: white !important;
+}
+
+.search-nav-bar::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #d9d9d9;
+  opacity: 1; /* Firefox */
+}
+
+.search-nav-bar:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: #d9d9d9;
+}
+
+.search-nav-bar::-ms-input-placeholder { /* Microsoft Edge */
+  color: #d9d9d9;
+}
+
+.simple-dropdown-item {
+  cursor: pointer;
+  padding: 15px 35px;
+}
+
+.simple-dropdown-item:hover {
+  background-color: #333333;
+}
+
+.simple-dropdown-item.active {
+  background-color: #333333;
+}
+
 #home-banner-wrapper {
   width: 36%;
   bottom: 37%;
@@ -230,7 +315,7 @@ body {
 }
 
 .search-rows-wrapper {
-  margin-top: 160px !important;
+  margin-top: 50px !important;
 }
 
 .single-video-tag {
@@ -460,8 +545,6 @@ label.upload-image-btn input[type="file"] {
   z-index: 1; 
   padding: 0 4%; 
   height: 68px; 
-  position: fixed; 
-  top: 0; 
   width: 100%;
   transition: .3s cubic-bezier(0,0,.2,1);
 }
@@ -710,6 +793,13 @@ nav input[type=text]:focus {
     display: inline-block;
     text-align: left;
     vertical-align: middle;
+    max-height: calc(100vh - 60px);
+  }
+
+  .modal-body {
+    /* 100% = dialog height, 120px = header + footer */
+    max-height: calc(100vh - 200px);
+    overflow-y: scroll;
   }
 
   .comment-reply-reply-form-wrapper .comment-text {
@@ -1174,6 +1264,10 @@ div.sticky {
 }
 
 @media (max-width: 1299px) {
+  .search-nav-bar {
+    width: 160px;
+  }
+
   .video-card {
     width: calc(25% - 4px);
   }
@@ -1281,8 +1375,6 @@ div.sticky {
     position: absolute !important;
     background-image: linear-gradient(to bottom,rgba(0,0,0,.7) 10%,rgba(0,0,0,0)) !important; 
     background-color: transparent !important;
-    height: 50px !important; 
-    line-height: 50px !important;
   }
 
   #main-nav .nav-icon, #main-mobile-nav .nav-icon {
@@ -1417,8 +1509,54 @@ div.sticky {
 }
 
 @media (max-width: 767.9px) {
+  .modal {
+    padding: 0 !important; // override inline padding-right added from js
+  }
+  .modal .modal-dialog {
+    width: 100%;
+    max-width: none;
+    height: 100%;
+    margin: 0;
+    top: 0 !important;
+    left: 0 !important; 
+  }
+  .modal .modal-content {
+    height: 100%;
+    border: 0;
+    border-radius: 0;
+  }
+  .modal .modal-body {
+    height: calc(100% - 112px);
+    overflow-y: scroll;
+  }
+
+  #search-nav-wrapper {
+    padding: 0px 15px 2px 15px;
+    /* border-top: 1px solid #333333;
+    border-bottom: 1px solid #333333; */
+    white-space: nowrap;
+    overflow-x: scroll;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  }
+  #search-nav-wrapper::-webkit-scrollbar { /* WebKit */
+    width: 0;
+    height: 0;
+  }
+
+  .search-nav {
+    margin-top: 1px;
+    padding: 9px 10px; 
+    margin-right: 5px;
+    font-weight: bold;
+    border-radius: 50%;
+    color: white;
+  }
+
   #main-nav {
     padding: 0 15px;    
+    height: 50px !important; 
+    line-height: 50px !important;
   }
 
   #hentai-main-nav {
@@ -1535,7 +1673,7 @@ div.sticky {
   }
 
   .search-rows-wrapper {
-    margin-top: 134px !important;
+    margin-top: 15px !important;
   }
 
   .search-pagination {

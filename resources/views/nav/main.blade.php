@@ -1,11 +1,11 @@
-<div id="main-nav" style="z-index: 10000 !important" class="main-nav{{ Request::is('*watch*') || Request::is('*download*') ? '-video-show' : '' }}">
+<div id="main-nav" style="z-index: 10000 !important; {{ Request::is('*search*') ? 'position: static !important' : '' }}" class="main-nav{{ Request::is('*watch*') || Request::is('*download*') ? '-video-show' : '' }}">
   <a href="/" style="padding-right: 2.5%; color: white; font-size: 1.4em;">
     <span style="color: crimson">H</span>anime1<span style="color: crimson">.</span>me
   </a>
-  <a class="nav-item hidden-xs" href="{{ route('home.search') }}">H動漫</a>
-  <a class="nav-item hidden-xs" href="{{ route('home.search') }}?query=&tags%5B%5D=3D&year=&month=&sort=">3D動畫</a>
-  <a class="nav-item hidden-xs" href="{{ route('home.search') }}?query=&tags%5B%5D=同人&year=&month=&sort=">同人作品</a>
-  <a class="nav-item hidden-xs" href="{{ route('home.search') }}?query=&tags%5B%5D=Cosplay&year=&month=&sort=">Cosplay</a>
+  <a class="nav-item hidden-xs" href="{{ route('home.search') }}?genre=H動漫&duration=&sort=&query=&year=&month=">H動漫</a>
+  <a class="nav-item hidden-xs" href="{{ route('home.search') }}?genre=3D動畫&duration=&sort=&query=&year=&month=">3D動畫</a>
+  <a class="nav-item hidden-xs" href="{{ route('home.search') }}?genre=同人作品&duration=&sort=&query=&year=&month==">同人作品</a>
+  <a class="nav-item hidden-xs" href="{{ route('home.search') }}?genre=Cosplay&duration=&sort=&query=&year=&month=">Cosplay</a>
   <a class="nav-item hidden-xs" href="{{ Auth::check() ? route('home.list') : route('login') }}">我的清單</a>
 
   <a style="padding-right: 0px" class="nav-icon pull-right" href="{{ Auth::check() ? route('home.list') : route('login') }}"><span style="vertical-align: middle;" class="material-icons">account_circle</span></a>
