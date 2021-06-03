@@ -158,8 +158,9 @@ body {
 }
 
 #search-nav-wrapper {
-  margin-top: 1px;
   padding: 0 4%;
+  background-color: #141414;
+  width: 100%;
 }
 
 .search-nav {
@@ -1519,13 +1520,16 @@ div.sticky {
   }
 
   #search-nav-wrapper {
-    padding: 0px 15px 2px 15px;
+    padding: 0px 15px 14px 15px;
     /* border-top: 1px solid #333333;
     border-bottom: 1px solid #333333; */
     white-space: nowrap;
     overflow-x: scroll;
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    position: fixed;
+    top: 68px;
+    z-index: 1;
   }
   #search-nav-wrapper::-webkit-scrollbar { /* WebKit */
     width: 0;
@@ -1660,7 +1664,7 @@ div.sticky {
   }
 
   .search-rows-wrapper {
-    margin-top: 15px !important;
+    margin-top: 130px !important;
   }
 
   .search-pagination {
