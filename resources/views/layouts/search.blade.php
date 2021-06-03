@@ -5,7 +5,7 @@
 		@include('nav.main')
 	</div>
 	<div class="hidden-sm hidden-md hidden-lg" style="padding: 0 15px; height: 68px; position: fixed; z-index: 1000; background-color: #141414; width: 100%;">
-	    <a class="hover-opacity" href="/" style="color: white; line-height: 68px;">
+	    <a class="hover-opacity" href="/" style="color: white; line-height: 68px; text-decoration: none;">
 		    <img height="30" src="https://i.imgur.com/PTFz5Ej.png">
 	    </a>
 
