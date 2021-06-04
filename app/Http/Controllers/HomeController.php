@@ -77,9 +77,11 @@ class HomeController extends Controller
             }
 
             $chinese = new Chinese();
-            $searchQuery = $chinese->to(Chinese::ZH_HANT, '%'.implode('%', $queryArray).'%');
-            $videos = $videos->where(function($query) use ($searchQuery) {
-                $query->where('title', 'ilike', $searchQuery)->orWhere('translations', 'ilike', $searchQuery)->orWhere('tags', 'ilike', $searchQuery);
+            $originalQuery = '%'.implode('%', $queryArray).'%';
+            $newQuery = $chinese->to(Chinese::ZH_HANT, '%'.implode('%', $queryArray).'%');
+            $videos = $videos->where(function($query) use ($originalQuery, $newQuery) {
+                $query->where('title', 'ilike', $originalQuery)->orWhere('translations', 'ilike', $originalQuery)->orWhere('tags', 'ilike', $originalQuery)
+                      ->orWhere('title', 'ilike', $newQuery)->orWhere('translations', 'ilike', $newQuery)->orWhere('tags', 'ilike', $newQuery);
             });
         }
 
