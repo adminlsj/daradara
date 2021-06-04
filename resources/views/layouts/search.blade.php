@@ -4,14 +4,14 @@
 	<div class="hidden-xs">
 		@include('nav.main')
 	</div>
-	<div class="hidden-sm hidden-md hidden-lg" style="padding: 0 15px; height: 68px; position: fixed; z-index: 1000; background-color: #141414; width: 100%;">
+	<div id="search-top-nav-mobile" class="hidden-sm hidden-md hidden-lg" style="padding: 0 15px; height: 68px; position: fixed; z-index: 1000; background-color: #141414; width: 100%;">
 	    <a class="hover-opacity" href="/" style="color: white; line-height: 68px; text-decoration: none;">
 		    <img height="30" src="https://i.imgur.com/PTFz5Ej.png">
 	    </a>
 
 		<form id="search-form" style="display: inline-block; margin-left: 8px; width: calc(100% - 74px); position: relative;">
-		    <div id="search-btn"><i style="margin-top: 4px; margin-left: 5px; color: white; font-size: 21px; font-weight: bold;" class="material-icons">search</i></div>
-		    <input id="query" name="query" style="width: 100%" class="search-nav-bar" type="text" value="{{ request('query') }}" placeholder="搜索">
+		    <div id="nav-search-btn" class="search-btn"><i style="margin-top: 4px; margin-left: 5px; color: white; font-size: 21px; font-weight: bold;" class="material-icons">search</i></div>
+		    <input id="nav-query" name="nav-query" style="width: 100%" class="search-nav-bar" type="text" value="{{ request('query') }}" placeholder="搜索">
 		</form>
 
 		<a style="padding-right: 0px; line-height: 68px; color: white;" class="nav-icon pull-right" href="{{ Auth::check() ? route('home.list') : route('login') }}"><span style="vertical-align: middle; font-size: 36px; margin-top: -1px;" class="material-icons">account_circle</span></a>

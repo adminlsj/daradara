@@ -31,7 +31,7 @@
 	</div>
 
 	<div class="no-select hidden-xs" style="display: inline-block; position: relative;">
-		<div id="search-btn"><i style="margin-top: 6px; margin-left: 7px; color: white; font-size: 17px; font-weight: bold;" class="material-icons">search</i></div>
+		<div id="search-btn" class="search-btn"><i style="margin-top: 6px; margin-left: 7px; color: white; font-size: 17px; font-weight: bold;" class="material-icons">search</i></div>
 		<input id="query" name="query" class="search-nav-bar" type="text" value="{{ request('query') }}" placeholder="搜索">
 	</div>
 </div>
