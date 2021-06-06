@@ -16,7 +16,7 @@ class BlockUser
     public function handle($request, Closure $next)
     {
         if (!isset($_SERVER["HTTP_USER_AGENT"])) {
-            dd();
+            die();
         }
         // Log::info('USER INFO - COUNTRY CODE: '.$country_code.' / IP ADDRESS: '.$ip_address.' / USER AGENT: '.$user_agent);
 
