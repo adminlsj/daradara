@@ -30,7 +30,7 @@ class HomeController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('sameUser')->only('index');
+        $this->middleware('blockUser')->only('index');
     }
 
     public function index(Request $request)
