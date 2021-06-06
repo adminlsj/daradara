@@ -30,7 +30,7 @@ class HomeController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('blockUser')->only('index');
+        $this->middleware('sameUser')->only('index');
     }
 
     public function index(Request $request)
@@ -58,6 +58,8 @@ class HomeController extends Controller
             '女不腐何以撫民心' => ['videos' => $tag4, 'link' => '/search?query=&broad=on&tags%5B%5D=扶他&tags%5B%5D=偽娘&tags%5B%5D=耽美'], 
             '更多精彩內容' => ['videos' => $tag5, 'link' => '/search']
         ];
+
+        $country_code = isset($_SERVER["HTTP_CF_IPCOUNTRY"]) ? $_SERVER["HTTP_CF_IPCOUNTRY"] : 'N/A';
 
         return view('layouts.home', compact('banner', 'rows', 'country_code'));
     }
