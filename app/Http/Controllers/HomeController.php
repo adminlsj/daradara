@@ -28,6 +28,11 @@ use Illuminate\Support\Facades\Log;
 
 class HomeController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('blockUser')->only('index');
+    }
+
     public function index(Request $request)
     {
         $banner = Video::find(22319);
@@ -53,11 +58,6 @@ class HomeController extends Controller
             '女不腐何以撫民心' => ['videos' => $tag4, 'link' => '/search?query=&broad=on&tags%5B%5D=扶他&tags%5B%5D=偽娘&tags%5B%5D=耽美'], 
             '更多精彩內容' => ['videos' => $tag5, 'link' => '/search']
         ];
-
-        $country_code = isset($_SERVER["HTTP_CF_IPCOUNTRY"]) ? $_SERVER["HTTP_CF_IPCOUNTRY"] : 'N/A';
-        $ip_address = isset($_SERVER["HTTP_CF_CONNECTING_IP"]) ? $_SERVER["HTTP_CF_CONNECTING_IP"] : 'N/A';
-        $user_agent = isset($_SERVER["HTTP_USER_AGENT"]) ? $_SERVER["HTTP_USER_AGENT"] : 'N/A';
-        Log::info('USER INFO - COUNTRY CODE: '.$country_code.' / IP ADDRESS: '.$ip_address.' / USER AGENT: '.$user_agent);
 
         return view('layouts.home', compact('banner', 'rows', 'country_code'));
     }
