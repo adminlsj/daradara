@@ -169,6 +169,7 @@ return [
          */
         Intervention\Image\ImageServiceProvider::class,
         \Torann\GeoIP\GeoIPServiceProvider::class,
+        Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
 
         /*
          * Application Service Providers...
