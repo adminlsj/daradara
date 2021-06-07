@@ -21,7 +21,8 @@ class BlockUser
         $user_agent = isset($_SERVER["HTTP_USER_AGENT"]) ? $_SERVER["HTTP_USER_AGENT"] : 'N/A';
 
         if ($country_code == 'N/A' || $ip_address == 'N/A' || $user_agent == 'N/A') {
-            Log::info('Outbound Access - Country Code: '.$country_code.' | IP Address: '.$ip_address.' | User Agent: '.$user_agent);
+            $path = $request->path();
+            Log::info('Outbound Access - Path: '.$path.' | Country Code: '.$country_code.' | IP Address: '.$ip_address.' | User Agent: '.$user_agent);
         }
 
         return $next($request);
