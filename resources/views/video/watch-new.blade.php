@@ -13,7 +13,7 @@
 <div id="content-div">
   <div class="row no-gutter video-show-width">
     <div id="player-div-wrapper" class="col-md-9 single-show-player fluid-player-desktop-styles" style="background-color: #141414;">
-      @if ($country_code == 'JP' /* && in_array($video->id, App\Video::$banned) */ )
+      @if ($country_code == 'JP')
           <div style="background-color: black; position: relative; width: 100%; height: 0; padding-bottom: 56.25%; text-align: center;">
             <div style="font-size: 18px; color: white; margin: 0; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%"><div style="display: inline-block;">您身處的地區已被限制瀏覽，</div><div style="display: inline-block;">請使用VPN工具切換IP位置</div></div>
           </div>

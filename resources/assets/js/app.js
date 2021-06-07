@@ -82,11 +82,6 @@ $('.load-more-related-btn').click(function() {
     $('#more-related-ad').css('margin-top', '0px');
 })
 
-$('#video-play-image').click(function() {
-  $(this).css('display', 'none');
-  fluidplayer.play();
-})
-
 $('#close-mobile-ad-btn').click(function() {
   $('#mobile-ad').css('display', 'none');
 })

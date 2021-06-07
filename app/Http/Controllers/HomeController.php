@@ -23,7 +23,7 @@ use Redirect;
 use Spatie\Browsershot\Browsershot;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Storage;
-use SteelyWing\Chinese\Chinese;
+// use SteelyWing\Chinese\Chinese;
 use Illuminate\Support\Facades\Log;
 
 class HomeController extends Controller
@@ -74,7 +74,11 @@ class HomeController extends Controller
         $doujin = false;
         
         if ($query = request('query')) {
-            $query = str_replace(' ', '', request('query'));
+            $context = '%'.$query.'%';
+            $videos = $videos->where(function($query) use ($context) {
+                $query->where('title', 'ilike', $context)->orWhere('translations', 'ilike', $context)->orWhere('tags', 'ilike', $context);
+            });
+            /* $query = str_replace(' ', '', request('query'));
             $queryArray = [];
             preg_match_all('/./u', $query, $queryArray);
             $queryArray = $queryArray[0];
@@ -88,7 +92,7 @@ class HomeController extends Controller
             $videos = $videos->where(function($query) use ($originalQuery, $newQuery) {
                 $query->where('title', 'ilike', $originalQuery)->orWhere('translations', 'ilike', $originalQuery)->orWhere('tags', 'ilike', $originalQuery)
                       ->orWhere('title', 'ilike', $newQuery)->orWhere('translations', 'ilike', $newQuery)->orWhere('tags', 'ilike', $newQuery);
-            });
+            }); */
         }
 
         if ($genre = $request->genre) {
