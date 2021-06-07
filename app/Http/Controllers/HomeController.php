@@ -24,7 +24,6 @@ use Spatie\Browsershot\Browsershot;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Storage;
 // use SteelyWing\Chinese\Chinese;
-use Illuminate\Support\Facades\Log;
 
 class HomeController extends Controller
 {
