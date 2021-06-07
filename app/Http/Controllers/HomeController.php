@@ -136,7 +136,7 @@ class HomeController extends Controller
             }
         }
 
-        if ($duration = $request->duration) {
+        /* if ($duration = $request->duration) {
             if (strpos($duration, '短片') === 0) {
                 $videos = $videos->where('duration', '<=', 240);
 
@@ -146,7 +146,7 @@ class HomeController extends Controller
             } elseif (strpos($duration, '長片') === 0) {
                 $videos = $videos->where('duration', '>=', 1200);
             }
-        }
+        } */
 
         if ($tags = $request->tags) {
             if (!in_array($tags[0], Video::$all_tag)) {
