@@ -66,10 +66,13 @@ class HomeController extends Controller
 
     public function search(Request $request)
     {
+        $genre = '';
         $tags = [];
+        $sort = '';
         $brands = [];
         $year = '';
         $month = '';
+        $duration = '';
         $videos = Video::query();
         $doujin = false;
         
@@ -180,26 +183,30 @@ class HomeController extends Controller
             }
         }
 
-        switch ($request->sort) {
-            case '本日排行':
-                $videos = $videos->orderBy('current_views', 'desc')->orderBy('id', 'desc');
-                break;
+        if ($sort = $request->sort) {
+            switch ($sort) {
+                case '本日排行':
+                    $videos = $videos->orderBy('current_views', 'desc')->orderBy('id', 'desc');
+                    break;
 
-            case '最新內容':
-                $videos = $videos->orderBy('created_at', 'desc');
-                break;
+                case '最新內容':
+                    $videos = $videos->orderBy('created_at', 'desc');
+                    break;
 
-            case '最新上傳':
-                $videos = $videos->orderBy('uploaded_at', 'desc');
-                break;
+                case '最新上傳':
+                    $videos = $videos->orderBy('uploaded_at', 'desc');
+                    break;
 
-            case '觀看次數':
-                $videos = $videos->orderBy('views', 'desc');
-                break;
+                case '觀看次數':
+                    $videos = $videos->orderBy('views', 'desc');
+                    break;
 
-            default:
-                $videos = $videos->orderBy('created_at', 'desc');
-                break;
+                default:
+                    $videos = $videos->orderBy('created_at', 'desc');
+                    break;
+            }
+        } else {
+            $videos = $videos->orderBy('created_at', 'desc');
         }
 
         if (!$doujin) {
@@ -208,7 +215,7 @@ class HomeController extends Controller
             $videos = $videos->with('user:id,name', 'user.avatar')->where('cover', '!=', null)->distinct()->paginate(60);
         }
         
-        return view('layouts.search', compact('tags', 'brands', 'year', 'month', 'videos', 'doujin'));
+        return view('layouts.search', compact('genre', 'tags', 'sort', 'brands', 'year', 'month', 'duration', 'videos', 'doujin'));
     }
 
     public function genre()

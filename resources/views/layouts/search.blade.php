@@ -30,16 +30,16 @@
 	        <h4 class="modal-title" style="text-align: center; font-weight: bold; margin: 0; padding: 0; margin-top: 5px; font-size: 18px;">影片類型</h4>
 	      </div>
 	      <div class="modal-body" style="padding: 0;">
-	        <input type="hidden" id="genre" name="genre" value="{{ Request::get('genre') }}">
-			<div class="simple-dropdown-item genre-option {{ Request::get('genre') == '全部' ? 'active' : ''}}" style="{{ Request::get('genre') == '全部' ? 'background-color: #333333' : ''}}">全部</div>
+	        <input type="hidden" id="genre" name="genre" value="{{ $genre }}">
+			<div class="simple-dropdown-item genre-option {{ $genre == '全部' ? 'active' : ''}}" style="{{ $genre == '全部' ? 'background-color: #333333' : ''}}">全部</div>
 			<hr style="margin: 0; border-color: #333333;">
-			<div class="simple-dropdown-item genre-option {{ Request::get('genre') == 'H動漫' ? 'active' : ''}}">H動漫</div>
+			<div class="simple-dropdown-item genre-option {{ $genre == 'H動漫' ? 'active' : ''}}">H動漫</div>
 			<hr style="margin: 0; border-color: #333333;">
-			<div class="simple-dropdown-item genre-option {{ Request::get('genre') == '3D動畫' ? 'active' : ''}}">3D動畫</div>
+			<div class="simple-dropdown-item genre-option {{ $genre == '3D動畫' ? 'active' : ''}}">3D動畫</div>
 			<hr style="margin: 0; border-color: #333333;">
-			<div class="simple-dropdown-item genre-option {{ Request::get('genre') == '同人作品' ? 'active' : ''}}">同人作品</div>
+			<div class="simple-dropdown-item genre-option {{ $genre == '同人作品' ? 'active' : ''}}">同人作品</div>
 			<hr style="margin: 0; border-color: #333333;">
-			<div class="simple-dropdown-item genre-option {{ Request::get('genre') == 'Cosplay' ? 'active' : ''}}">Cosplay</div>
+			<div class="simple-dropdown-item genre-option {{ $genre == 'Cosplay' ? 'active' : ''}}">Cosplay</div>
 	      </div>
 	    </div>
 	  </div>
@@ -113,16 +113,16 @@
 	        <h4 class="modal-title" style="text-align: center; font-weight: bold; margin: 0; padding: 0; margin-top: 5px; font-size: 18px;">排序方式</h4>
 	      </div>
 	      <div class="modal-body" style="padding: 0;">
-	        <input type="hidden" id="sort" name="sort" value="{{ Request::get('sort') }}">
-			<div class="simple-dropdown-item hentai-sort-options-wrapper {{ Request::get('sort') == '本日排行' ? 'active' : ''}}"><div class="hentai-sort-options">本日排行</div></div>
+	        <input type="hidden" id="sort" name="sort" value="{{ $sort }}">
+			<div class="simple-dropdown-item hentai-sort-options-wrapper {{ $sort == '本日排行' ? 'active' : ''}}"><div class="hentai-sort-options">本日排行</div></div>
 			<hr style="margin: 0; border-color: #333333;">
 			<!--<div class="simple-dropdown-item hentai-sort-options-wrapper"><div class="hentai-sort-options">本月排行</div></div>
 			<hr style="margin: 0; border-color: #222222;">-->
-			<div class="simple-dropdown-item hentai-sort-options-wrapper {{ Request::get('sort') == '最新內容' ? 'active' : ''}}"><div class="hentai-sort-options">最新內容</div></div>
+			<div class="simple-dropdown-item hentai-sort-options-wrapper {{ $sort == '最新內容' ? 'active' : ''}}"><div class="hentai-sort-options">最新內容</div></div>
 			<hr style="margin: 0; border-color: #333333;">
-			<div class="simple-dropdown-item hentai-sort-options-wrapper {{ Request::get('sort') == '最新上傳' ? 'active' : ''}}"><div class="hentai-sort-options">最新上傳</div></div>
+			<div class="simple-dropdown-item hentai-sort-options-wrapper {{ $sort == '最新上傳' ? 'active' : ''}}"><div class="hentai-sort-options">最新上傳</div></div>
 			<hr style="margin: 0; border-color: #333333;">
-			<div class="simple-dropdown-item hentai-sort-options-wrapper {{ Request::get('sort') == '觀看次數' ? 'active' : ''}}"><div class="hentai-sort-options">觀看次數</div></div>
+			<div class="simple-dropdown-item hentai-sort-options-wrapper {{ $sort == '觀看次數' ? 'active' : ''}}"><div class="hentai-sort-options">觀看次數</div></div>
 	      </div>
 	    </div>
 	  </div>
@@ -194,14 +194,14 @@
 	        <h4 class="modal-title" style="text-align: center; font-weight: bold; margin: 0; padding: 0; margin-top: 5px; font-size: 18px;">影片長度</h4>
 	      </div>
 	      <div class="modal-body" style="padding: 0;">
-	        <input type="hidden" id="duration" name="duration" value="{{ Request::get('duration') }}">
+	        <input type="hidden" id="duration" name="duration" value="{{ $duration }}">
 			<div class="simple-dropdown-item duration-option"><span></span>全部</div>
 			<hr style="margin: 0; border-color: #333333;">
-			<div class="simple-dropdown-item duration-option {{ Request::get('duration') == '短片' ? 'active' : ''}}"><span>短片</span>&nbsp;（4 分鐘內）</div>
+			<div class="simple-dropdown-item duration-option {{ $duration }}"><span>短片</span>&nbsp;（4 分鐘內）</div>
 			<hr style="margin: 0; border-color: #333333;">
-			<div class="simple-dropdown-item duration-option {{ Request::get('duration') == '中長片' ? 'active' : ''}}"><span>中長片</span>&nbsp;（4 至 20 分鐘）</div>
+			<div class="simple-dropdown-item duration-option {{ $duration }}"><span>中長片</span>&nbsp;（4 至 20 分鐘）</div>
 			<hr style="margin: 0; border-color: #333333;">
-			<div class="simple-dropdown-item duration-option {{ Request::get('duration') == '長片' ? 'active' : ''}}"><span>長片</span>&nbsp;（20 分鐘以上）</div>
+			<div class="simple-dropdown-item duration-option {{ $duration }}"><span>長片</span>&nbsp;（20 分鐘以上）</div>
 	      </div>
 	    </div>
 	  </div>
