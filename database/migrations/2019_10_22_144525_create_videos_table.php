@@ -32,6 +32,8 @@ class CreateVideosTable extends Migration
             $table->jsonb('foreign_sd')->nullable();
             $table->string('cover')->nullable();
             $table->jsonb('translations')->nullable();
+            $table->integer('duration')->nullable();
+            $table->jsonb('qualities')->nullable();
         });
     }
 

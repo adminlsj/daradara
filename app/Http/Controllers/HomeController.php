@@ -28,10 +28,10 @@ use Illuminate\Support\Facades\Log;
 
 class HomeController extends Controller
 {
-    public function __construct()
+    /* public function __construct()
     {
-        // $this->middleware('blockUser')->only('index');
-    }
+        $this->middleware('blockUser')->only('index');
+    } */
 
     public function index(Request $request)
     {

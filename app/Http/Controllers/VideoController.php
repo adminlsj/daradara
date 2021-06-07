@@ -22,57 +22,62 @@ use SteelyWing\Chinese\Chinese;
 class VideoController extends Controller
 {
     public function watch(Request $request){
+        $vid = $request->v;
 
-        $video = Video::with('watch:id,title')->select('id', 'user_id', 'playlist_id', 'title', 'translations', 'caption', 'cover', 'tags', 'sd', 'qualities', 'outsource', 'current_views', 'views', 'imgur', 'foreign_sd', 'duration', 'created_at', 'uploaded_at')->withCount('likes')->find($request->v);
+        if (is_numeric($vid) && $video = Video::with('watch:id,title')->select('id', 'user_id', 'playlist_id', 'title', 'translations', 'caption', 'cover', 'tags', 'sd', 'qualities', 'outsource', 'current_views', 'views', 'imgur', 'foreign_sd', 'duration', 'created_at', 'uploaded_at')->withCount('likes')->find($vid)) {
 
-        $watch = Watch::where('id', $video->playlist_id)->select('id', 'title')->withCount('videos')->first();
+            $watch = Watch::where('id', $video->playlist_id)->select('id', 'title')->withCount('videos')->first();
 
-        if ($video->cover == null || ($video->foreign_sd != null && array_key_exists('redirect', $video->foreign_sd))) {
-            header("Location: https://www.laughseejapan.com".$request->getRequestUri());
-            die();
-        }
-
-        $tags = array_intersect($video->tags(), Video::$selected_tags);
-        $video->current_views++;
-        $video->views++;
-        $video->save();
-        $videos = Video::where('playlist_id', $video->playlist_id)->orderBy('created_at', 'desc')->select('id', 'user_id', 'imgur', 'title', 'sd', 'views', 'created_at')->get();
-
-        $current = $video;
-        $doujin = false;
-
-        $related = Video::where(function($query) use ($current) {
-            foreach ($current->tags() as $tag) {
-                if (in_array($tag, Video::$selected_tags)) {
-                    $query->orWhere('tags', 'like', '%'.$tag.'%');
-                }
+            if ($video->cover == null || ($video->foreign_sd != null && array_key_exists('redirect', $video->foreign_sd))) {
+                header("Location: https://www.laughseejapan.com".$request->getRequestUri());
+                die();
             }
-        });
 
-        if (in_array('3D', $tags) || in_array('同人', $tags) || in_array('Cosplay', $tags) || in_array('素人自拍', $tags)) {
-            $doujin = true;
-            $related = $related->with('user:id,name', 'user.avatar')->where('cover', '!=', null)->where('id', '!=', $current->id)->inRandomOrder()->select('id', 'user_id', 'cover', 'imgur', 'title', 'sd', 'qualities', 'views', 'duration', 'created_at')->limit(60)->get();
+            $tags = array_intersect($video->tags(), Video::$selected_tags);
+            $video->current_views++;
+            $video->views++;
+            $video->save();
+            $videos = Video::where('playlist_id', $video->playlist_id)->orderBy('created_at', 'desc')->select('id', 'user_id', 'imgur', 'title', 'sd', 'views', 'created_at')->get();
+
+            $current = $video;
+            $doujin = false;
+
+            $related = Video::where(function($query) use ($current) {
+                foreach ($current->tags() as $tag) {
+                    if (in_array($tag, Video::$selected_tags)) {
+                        $query->orWhere('tags', 'like', '%'.$tag.'%');
+                    }
+                }
+            });
+
+            if (in_array('3D', $tags) || in_array('同人', $tags) || in_array('Cosplay', $tags) || in_array('素人自拍', $tags)) {
+                $doujin = true;
+                $related = $related->with('user:id,name', 'user.avatar')->where('cover', '!=', null)->where('id', '!=', $current->id)->inRandomOrder()->select('id', 'user_id', 'cover', 'imgur', 'title', 'sd', 'qualities', 'views', 'duration', 'created_at')->limit(60)->get();
+
+            } else {
+                $related = $related->where('cover', '!=', null)->where('cover', '!=', 'https://i.imgur.com/E6mSQA2.png')->where('playlist_id', '!=', $current->playlist_id)->inRandomOrder()->select('id', 'user_id', 'cover', 'imgur', 'title', 'sd', 'qualities', 'views', 'created_at')->limit(60)->get();
+            }
+
+            $country_code = isset($_SERVER["HTTP_CF_IPCOUNTRY"]) ? $_SERVER["HTTP_CF_IPCOUNTRY"] : 'N/A';
+
+            $comments = Comment::with('user.avatar', 'likes', 'replies.user.avatar')
+                            ->with('replies.likes')
+                            ->with(['replies' => function($query) {
+                                $query->orderBy('created_at', 'asc');
+                            }])
+                            ->where('foreign_id', $video->id)
+                            ->withCount('likes')
+                            ->orderBy('likes_count', 'desc')
+                            ->orderBy('created_at', 'desc')
+                            ->get()
+                            ->sortBy(function($comment)
+            {
+                return $comment->likes->where('is_positive', false)->count() - $comment->likes->where('is_positive', true)->count();
+            });
 
         } else {
-            $related = $related->where('cover', '!=', null)->where('cover', '!=', 'https://i.imgur.com/E6mSQA2.png')->where('playlist_id', '!=', $current->playlist_id)->inRandomOrder()->select('id', 'user_id', 'cover', 'imgur', 'title', 'sd', 'qualities', 'views', 'created_at')->limit(60)->get();
+            abort(403);
         }
-
-        $country_code = isset($_SERVER["HTTP_CF_IPCOUNTRY"]) ? $_SERVER["HTTP_CF_IPCOUNTRY"] : 'N/A';
-
-        $comments = Comment::with('user.avatar', 'likes', 'replies.user.avatar')
-                        ->with('replies.likes')
-                        ->with(['replies' => function($query) {
-                            $query->orderBy('created_at', 'asc');
-                        }])
-                        ->where('foreign_id', $video->id)
-                        ->withCount('likes')
-                        ->orderBy('likes_count', 'desc')
-                        ->orderBy('created_at', 'desc')
-                        ->get()
-                        ->sortBy(function($comment)
-        {
-            return $comment->likes->where('is_positive', false)->count() - $comment->likes->where('is_positive', true)->count();
-        });
 
         return view('video.watch-new', compact('video', 'watch', 'videos', 'current', 'tags', 'country_code', 'comments', 'related', 'doujin'));
     }
