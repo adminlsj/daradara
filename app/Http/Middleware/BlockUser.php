@@ -24,7 +24,7 @@ class BlockUser
             $path = $request->getRequestUri();
             if ($path != '/logs') {
                 Log::info('Outbound Access - Path: '.$path.' | Country Code: '.$country_code.' | IP Address: '.$ip_address.' | IP Address V2: '.$this->getIp().' | User Agent: '.$user_agent);
-                echo '<a href="https://hanime1.me">https://hanime1.me</a>';
+                echo '<a href="https://hanime1.me'.$path.'">https://hanime1.me'.$path.'</a>';
                 die();
             }
         }
