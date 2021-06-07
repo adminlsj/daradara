@@ -22,7 +22,11 @@ class BlockUser
 
         if ($country_code == 'N/A' || $ip_address == 'N/A' || $user_agent == 'N/A') {
             $path = $request->getRequestUri();
-            Log::info('Outbound Access - Path: '.$path.' | Country Code: '.$country_code.' | IP Address: '.$ip_address.' | IP Address V2: '.$this->getIp().' | User Agent: '.$user_agent);
+            if ($path != '/logs') {
+                Log::info('Outbound Access - Path: '.$path.' | Country Code: '.$country_code.' | IP Address: '.$ip_address.' | IP Address V2: '.$this->getIp().' | User Agent: '.$user_agent);
+                echo '<a href="https://hanime1.me">https://hanime1.me</a>';
+                die();
+            }
         }
 
         return $next($request);
