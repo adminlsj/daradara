@@ -20,7 +20,6 @@ use Mail;
 use App\Mail\UserReport;
 use App\Mail\UserUploadVideo;
 use Redirect;
-use Spatie\Browsershot\Browsershot;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Storage;
 // use SteelyWing\Chinese\Chinese;
