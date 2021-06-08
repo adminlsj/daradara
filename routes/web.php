@@ -13,12 +13,12 @@
 
 Route::get('/', 'HomeController@index');
 Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
-Route::get('/database', 'DatabaseController@index')->name('database.index');
-Route::get('/database/{table}', 'DatabaseController@show')->name('database.show');
-Route::get('/database/{table}/{id}/edit', 'DatabaseController@edit')->name('database.edit');
-Route::post('/database/{table}/{id}/update', 'DatabaseController@update')->name('database.update');
-Route::get('/analytics', 'DatabaseController@analytics')->name('database.analytics');
-Route::get('/analytics/{genre}', 'DatabaseController@genre')->name('database.genre');
+// Route::get('/database', 'DatabaseController@index')->name('database.index');
+// Route::get('/database/{table}', 'DatabaseController@show')->name('database.show');
+// Route::get('/database/{table}/{id}/edit', 'DatabaseController@edit')->name('database.edit');
+// Route::post('/database/{table}/{id}/update', 'DatabaseController@update')->name('database.update');
+// Route::get('/analytics', 'DatabaseController@analytics')->name('database.analytics');
+// Route::get('/analytics/{genre}', 'DatabaseController@genre')->name('database.genre');
 
 Auth::routes();
 Route::resource('user', 'UserController');
@@ -26,8 +26,8 @@ Route::get('auth/{provider}', 'Auth\LoginController@redirectToProvider');
 Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
 Route::post('users/{user}/storeAvatar', 'UserController@storeAvatar');
 
-Route::get('/tempMethod', 'HomeController@tempMethod');
-Route::get('/setExcludedIds', 'HomeController@setExcludedIds');
+// Route::get('/tempMethod', 'HomeController@tempMethod');
+// Route::get('/setExcludedIds', 'HomeController@setExcludedIds');
 
 Route::post('/like', 'VideoController@like')->name('video.like');
 Route::post('/save', 'VideoController@save')->name('video.save');
@@ -48,33 +48,32 @@ Route::get('/terms', 'HomeController@terms');
 Route::get('/policies', 'HomeController@policies');
 Route::get('/copyright', 'HomeController@copyright');
 Route::get('/2257', 'HomeController@p2257');
-Route::get('/genre', 'HomeController@genre')->name('home.genre');
+// Route::get('/genre', 'HomeController@genre')->name('home.genre');
 Route::get('/video-copyright', 'VideoController@copyright');
-Route::get('/checkSubscribes', 'HomeController@checkSubscribes');
-Route::get('/checkZeroSubscribes', 'HomeController@checkZeroSubscribes');
-Route::get('/bccToSrt', 'HomeController@bccToSrt');
-Route::get('/categoryEdit', 'HomeController@categoryEdit')->name('category.edit');
-Route::post('/categoryUpdate', 'HomeController@categoryUpdate')->name('category.update');
-Route::get('/singleNewCreate', 'HomeController@singleNewCreate')->name('single.create');
-Route::post('/singleNewStore', 'HomeController@singleNewStore')->name('single.store');
+// Route::get('/checkSubscribes', 'HomeController@checkSubscribes');
+// Route::get('/checkZeroSubscribes', 'HomeController@checkZeroSubscribes');
+// Route::get('/bccToSrt', 'HomeController@bccToSrt');
+// Route::get('/categoryEdit', 'HomeController@categoryEdit')->name('category.edit');
+// Route::post('/categoryUpdate', 'HomeController@categoryUpdate')->name('category.update');
+// Route::get('/singleNewCreate', 'HomeController@singleNewCreate')->name('single.create');
+// Route::post('/singleNewStore', 'HomeController@singleNewStore')->name('single.store');
 // Route::get('/sitemap.xml', 'HomeController@getSitemap');
-Route::get('/setSitemap', 'HomeController@setSitemap');
-Route::get('/createGetSource', 'VideoController@createGetSource');
-Route::get('/loadPlaylist', 'VideoController@loadPlaylist')->name('video.loadPlaylist');
-Route::get('/loadTagList', 'VideoController@loadTagList');
-Route::get('/updateHentai', 'HomeController@updateHentai');
+// Route::get('/setSitemap', 'HomeController@setSitemap');
+// Route::get('/createGetSource', 'VideoController@createGetSource');
+// Route::get('/loadPlaylist', 'VideoController@loadPlaylist')->name('video.loadPlaylist');
+// Route::get('/loadTagList', 'VideoController@loadTagList');
+// Route::get('/updateHentai', 'HomeController@updateHentai');
 Route::get('/updateYoujizz', 'BotController@updateYoujizz');
 Route::get('/updateSpankbang', 'BotController@updateSpankbang');
 Route::get('/updateSlutload', 'BotController@updateSlutload');
 
 Route::get('/setVideoDuration', 'BotController@setVideoDuration');
 
-Route::get('/loadHomeTagList', 'HomeController@loadHomeTagList');
-Route::get('/userReport', 'HomeController@userReport')->name('email.userReport');
-Route::get('/userStartUpload', 'UserController@userStartUpload')->name('email.userStartUpload');
-Route::get('/user/{user}/upload', 'UserController@userEditUpload')->name('user.userEditUpload');
-Route::post('/user/{user}/userUpdateUpload', 'UserController@userUpdateUpload')->name('user.userUpdateUpload');
-Route::get('/user/{user}/{genre?}', 'UserController@show')->name('user.show');
+// Route::get('/userReport', 'HomeController@userReport')->name('email.userReport');
+// Route::get('/userStartUpload', 'UserController@userStartUpload')->name('email.userStartUpload');
+// Route::get('/user/{user}/upload', 'UserController@userEditUpload')->name('user.userEditUpload');
+// Route::post('/user/{user}/userUpdateUpload', 'UserController@userUpdateUpload')->name('user.userUpdateUpload');
+// Route::get('/user/{user}/{genre?}', 'UserController@show')->name('user.show');
 
 Route::get('/watch', 'VideoController@watch')->name('video.watch');
 Route::get('/download', 'VideoController@download')->name('video.download');
