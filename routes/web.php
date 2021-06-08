@@ -63,9 +63,9 @@ Route::get('/video-copyright', 'VideoController@copyright');
 // Route::get('/loadPlaylist', 'VideoController@loadPlaylist')->name('video.loadPlaylist');
 // Route::get('/loadTagList', 'VideoController@loadTagList');
 // Route::get('/updateHentai', 'HomeController@updateHentai');
-Route::get('/updateYoujizz', 'BotController@updateYoujizz');
-Route::get('/updateSpankbang', 'BotController@updateSpankbang');
-Route::get('/updateSlutload', 'BotController@updateSlutload');
+// Route::get('/updateYoujizz', 'BotController@updateYoujizz');
+// Route::get('/updateSpankbang', 'BotController@updateSpankbang');
+// Route::get('/updateSlutload', 'BotController@updateSlutload');
 
 Route::get('/setVideoDuration', 'BotController@setVideoDuration');
 
