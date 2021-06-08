@@ -227,7 +227,7 @@ class HomeController extends Controller
         if (Auth::check()) {
             $saves = Save::with(['video' => function($query) {
                 $query->where('cover', '!=', null)->select('id', 'title', 'cover', 'imgur');
-            }])->where('user_id', Auth::user()->id)->orderBy('created_at', 'desc')->get();
+            }])->where('user_id', Auth::user()->id)->orderBy('created_at', 'desc')->paginate(42);
             return view('layouts.list', compact('saves'));
 
         } else {

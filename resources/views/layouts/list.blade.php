@@ -9,7 +9,7 @@
 <div class="nav-bottom-padding">
   <div id="home-rows-wrapper" class="list-rows-wrapper" style="position: relative;">
     <h3>我的播放清單</h3>
-    <div class="home-rows-videos-wrapper" style="white-space: normal; margin: 0 -2px;">
+    <div class="home-rows-videos-wrapper" style="white-space: normal; margin-left: -2px; margin-right: -2px;">
       @foreach ($saves as $save)
         @if ($save->video != null)
           <a style="text-decoration: none;" href="{{ route('video.watch') }}?v={{ $save->video->id }}" class="hover-opacity">
@@ -26,6 +26,9 @@
         @endif
       @endforeach
     </div>
+    <div class="search-pagination hidden-xs">{!! $saves->appends(request()->input())->links() !!}</div>
+    <div class="search-pagination mobile-search-pagination hidden-sm hidden-md hidden-lg">{!! $saves->appends(request()->input())->onEachSide(1)->links() !!}</div>
+    <br><br><br>
     <div id="list-logout-btn" style="padding: 0 4%;">
       <form action="{{ route('logout') }}" method="POST">
         {{ csrf_field() }}
@@ -36,6 +39,7 @@
         <br class="hidden-sm hidden-md hidden-lg">
       </form>
     </div>
+
   </div>
 </div>
 
