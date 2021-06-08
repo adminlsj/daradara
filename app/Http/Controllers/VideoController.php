@@ -28,7 +28,7 @@ class VideoController extends Controller
 
             $watch = Watch::where('id', $video->playlist_id)->select('id', 'title')->withCount('videos')->first();
 
-            if ($video->cover == null || ($video->foreign_sd != null && array_key_exists('redirect', $video->foreign_sd))) {
+            if ($video->cover == null) {
                 header("Location: https://www.laughseejapan.com".$request->getRequestUri());
                 die();
             }
