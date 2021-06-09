@@ -12,7 +12,7 @@
 */
 
 Route::get('/', 'HomeController@index');
-Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
+// Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 // Route::get('/database', 'DatabaseController@index')->name('database.index');
 // Route::get('/database/{table}', 'DatabaseController@show')->name('database.show');
 // Route::get('/database/{table}/{id}/edit', 'DatabaseController@edit')->name('database.edit');
