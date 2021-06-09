@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Support\Facades\Log;
 
-class BlockUser
+class LogRequest
 {
     /**
      * Handle an incoming request.
@@ -20,19 +20,12 @@ class BlockUser
         $ip_address = isset($_SERVER["HTTP_CF_CONNECTING_IP"]) ? $_SERVER["HTTP_CF_CONNECTING_IP"] : 'N/A';
         $user_agent = isset($_SERVER["HTTP_USER_AGENT"]) ? $_SERVER["HTTP_USER_AGENT"] : 'N/A';
 
-        if ($country_code == 'N/A' || $ip_address == 'N/A' || $user_agent == 'N/A') {
-            $path = $request->getRequestUri();
-            if ($path != '/logs') {
-                Log::info('Outbound Access - Url: '.$request->fullUrl().' | Country Code: '.$country_code.' | IP Address: '.$ip_address.' | IP Address V2: '.$this->getIp().' | User Agent: '.$user_agent);
-                echo '<a href="https://hanime1.me'.$path.'">https://hanime1.me'.$path.'</a>';
-                die();
-            }
-        }
+        Log::info($request->method().' '.$request->fullUrl().' | Country Code: '.$country_code.' | IP Address: '.$ip_address.' | User Agent: '.$user_agent);
 
         return $next($request);
     }
 
-    public function getIp(){
+    /* public function getIp(){
         foreach (array('HTTP_CLIENT_IP', 'HTTP_X_FORWARDED_FOR', 'HTTP_X_FORWARDED', 'HTTP_X_CLUSTER_CLIENT_IP', 'HTTP_FORWARDED_FOR', 'HTTP_FORWARDED', 'REMOTE_ADDR') as $key){
             if (array_key_exists($key, $_SERVER) === true){
                 foreach (explode(',', $_SERVER[$key]) as $ip){
@@ -44,5 +37,5 @@ class BlockUser
             }
         }
         return request()->ip(); // it will return server ip when no client ip found
-    }
+    } */
 }
