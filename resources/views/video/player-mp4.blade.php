@@ -31,14 +31,4 @@
     }
   });
   window.player = player;
-
-  if (!'{{ $video->duration }}') {
-    player.on('loadedmetadata', event => {
-      $.ajax({
-         type:'GET',
-         url:'/setVideoDuration',
-         data: { duration: player.duration, id: '{{ $video->id }}'},
-      });
-    });
-  }
 </script>
