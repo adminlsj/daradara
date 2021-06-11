@@ -25,6 +25,8 @@
 
         @else
 
+          <!-- @include('video.player') -->
+          
           @if (strpos($video->sd, '.m3u8'))
             @include('video.player-m3u8')
           @else

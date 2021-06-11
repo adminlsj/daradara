@@ -22,6 +22,9 @@
       iosNative: true,
       container: null
     },
+    quality: {
+      default: 1080
+    }
   });
   
   if (!Hls.isSupported()) {
