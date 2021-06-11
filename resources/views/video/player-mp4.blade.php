@@ -27,7 +27,7 @@
       container: null
     },
     quality: {
-      default: {{ strpos($video->sd, 'vdownload') !== false ? 720 : 1080 }}
+      default: 1080
     }
   });
   window.player = player;
