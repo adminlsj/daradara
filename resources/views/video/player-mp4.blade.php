@@ -27,7 +27,7 @@
       container: null
     },
     quality: {
-      default: 1080
+      default: 720
     }
   });
   window.player = player;
