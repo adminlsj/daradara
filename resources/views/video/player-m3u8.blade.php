@@ -23,7 +23,7 @@
       container: null
     },
     quality: {
-      default: 720
+      default: 1080
     }
   });
   

@@ -24,14 +24,12 @@
           </div>
 
         @else
-
-          @include('video.player')
           
-          <!-- @if (strpos($video->sd, '.m3u8'))
+          @if (strpos($video->sd, '.m3u8'))
             @include('video.player-m3u8')
           @else
             @include('video.player-mp4')
-          @endif -->
+          @endif
 
         @endif
       @endif
