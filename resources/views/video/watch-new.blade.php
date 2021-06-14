@@ -93,7 +93,7 @@
           </div>
         </div>
 
-        @if (strpos($video->sd, 'cloudfront') !== false)
+        @if (strpos($video->sd, 'xvideos') !== false)
           <a style="position: absolute; cursor: pointer; display: inline-block;" id="downloadBtn" class="single-icon-wrapper" title="無法下載">
             <div class="single-icon no-select" style="background-color: inherit !important">
               <i class="material-icons noselect" style="font-size: 23px; padding-top: 7px; padding-left: 6px; color: dimgray">download</i>
