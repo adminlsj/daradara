@@ -10,7 +10,7 @@ use Image;
 use Auth;
 use Redirect;
 use Carbon\Carbon;
-use Helper;
+use App\Helper;
 
 class UserController extends Controller
 {

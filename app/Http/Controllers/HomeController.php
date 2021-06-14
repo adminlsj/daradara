@@ -13,7 +13,7 @@ use Mail;
 use App\Mail\UserReport;
 use Redirect;
 use Storage;
-use Helper;
+use App\Helper;
 // use SteelyWing\Chinese\Chinese;
 
 class HomeController extends Controller

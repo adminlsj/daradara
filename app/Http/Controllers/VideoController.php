@@ -18,7 +18,7 @@ use Auth;
 use Carbon\Carbon;
 use Response;
 use SteelyWing\Chinese\Chinese;
-use Helper;
+use App\Helper;
 
 class VideoController extends Controller
 {
