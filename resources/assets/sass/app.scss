@@ -115,6 +115,17 @@ body {
   width: calc(20% - 4px);
 }
 
+.card-desktop {
+  margin-bottom: 50px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.card-desktop .card-info-wrapper {
+  padding: 7px 5px; 
+  height: 77px
+}
+
 #main-nav {
   position: fixed; 
   top: 0; 
@@ -1512,6 +1523,26 @@ div.sticky {
 }
 
 @media (max-width: 767.9px) {
+  .card-desktop {
+    width: calc(100%);
+    margin-bottom: 20px;
+  }
+
+  .card-desktop .card-info-wrapper {
+    padding-left: 15px; 
+    padding-right: 15px; 
+    height: auto;
+  }
+
+  .video-card {
+    width: calc(108%);
+  }
+
+  .related-video-width-horizontal .video-card {
+    width: calc(100%) !important;
+    margin-bottom: 20px !important;
+  }
+
   .modal {
     padding: 0 !important; // override inline padding-right added from js
   }
@@ -1587,10 +1618,6 @@ div.sticky {
 
   .doujin-row {
     margin: 0 -15px !important;
-  }
-
-  .video-card {
-    width: calc(108%);
   }
 
   .mobile-full-width {

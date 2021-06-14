@@ -22,7 +22,7 @@ const app = new Vue({
 });
 
 var progress;
-$('.preview-trigger-desktop').hover(function(){
+$('.preview-trigger').hover(function(){
   var bar = $(this).find('#myBar');
   var width = 1;
   progress = setInterval(function(){
@@ -45,7 +45,7 @@ $('.preview-trigger-desktop').hover(function(){
   $(this).find('#myBar').width(0);
 });
 
-$('.preview-trigger-mobile').on({ 'touchstart' : function(){
+$('.preview-trigger').on({ 'touchstart' : function(){
   if (!$(this).find('.preview').length) {
     var bar = $(this).find('#myBar');
     var width = 1;

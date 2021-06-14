@@ -210,9 +210,15 @@
 	<div id="home-rows-wrapper" class="search-rows-wrapper" style="position: relative;">
 	  	@if ($doujin)
 		  	<div class="home-rows-videos-wrapper mobile-full-width" style="white-space: normal;">
-			    @foreach ($videos as $video)
-				    @include('video.card')
-				@endforeach
+		  		@if ($is_mobile)
+				    @foreach ($videos as $video)
+					    @include('video.card-mobile')
+					@endforeach
+				@else
+					@foreach ($videos as $video)
+					    @include('video.card-desktop')
+					@endforeach
+				@endif
 			</div>
 	    @else
 		    <div class="home-rows-videos-wrapper" style="white-space: normal; margin-left: -2px; margin-right: -2px;">

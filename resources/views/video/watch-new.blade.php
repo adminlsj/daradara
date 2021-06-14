@@ -93,7 +93,7 @@
           </div>
         </div>
 
-        @if ($video->foreign_sd == null || (!array_key_exists('spankbang', $video->foreign_sd) && !array_key_exists('youjizz', $video->foreign_sd) && strpos($video->sd, 'motherless') === false))
+        @if (strpos($video->sd, 'cloudfront') !== false)
           <a style="position: absolute; cursor: pointer; display: inline-block;" id="downloadBtn" class="single-icon-wrapper" title="無法下載">
             <div class="single-icon no-select" style="background-color: inherit !important">
               <i class="material-icons noselect" style="font-size: 23px; padding-top: 7px; padding-left: 6px; color: dimgray">download</i>
@@ -143,22 +143,33 @@
       <!-- Tab content -->
       <div id="London" class="tabcontent mobile-padding" style="margin-top: 85px">
         <div class="row {{ $doujin ? 'doujin-row' : '' }}" style="margin: 0px -2px;">
-          @foreach ($related as $video)
             @if ($doujin)
-              <span class="related-video-width-horizontal {{ $loop->iteration > 30 ? 'hidden-xs hidden-sm temp-hidden-related-video' : '' }}">
-                @include('video.card')
-              </span>
+              @if ($is_mobile)
+                @foreach ($related as $video)
+                  <span class="related-video-width-horizontal {{ $loop->iteration > 30 ? 'hidden-xs hidden-sm temp-hidden-related-video' : '' }}">
+                    @include('video.card-mobile')
+                  </span>
+                @endforeach
+              @else
+                @foreach ($related as $video)
+                  <span class="related-video-width-horizontal {{ $loop->iteration > 30 ? 'hidden-xs hidden-sm temp-hidden-related-video' : '' }}">
+                    @include('video.card-desktop')
+                  </span>
+                @endforeach
+              @endif
+
             @else
-              <div class="col-xs-2 hover-opacity-all related-video-width {{ $loop->iteration > 30 ? 'hidden-xs hidden-sm temp-hidden-related-video' : '' }}" style="padding: 0px 2px;">
-                <a style="text-decoration: none;" href="{{ route('video.watch') }}?v={{ $video->id }}">
-                  <div class="home-rows-videos-div" style="position: relative; display: inline-block; margin-bottom:15px">
-                    <img style="width: 100%" src="{{ $video->cover }}">
-                    <div class="home-rows-videos-title" style="position:absolute; bottom:0; left:0; white-space: initial; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; color: white; width: 100%; padding: 3px 3px; background: linear-gradient(to bottom, transparent 0%, black 120%);">{{ $video->title }}</div>
-                    </div>
-                </a>
-              </div>
+              @foreach ($related as $video)
+                <div class="col-xs-2 hover-opacity-all related-video-width {{ $loop->iteration > 30 ? 'hidden-xs hidden-sm temp-hidden-related-video' : '' }}" style="padding: 0px 2px;">
+                  <a style="text-decoration: none;" href="{{ route('video.watch') }}?v={{ $video->id }}">
+                    <div class="home-rows-videos-div" style="position: relative; display: inline-block; margin-bottom:15px">
+                      <img style="width: 100%" src="{{ $video->cover }}">
+                      <div class="home-rows-videos-title" style="position:absolute; bottom:0; left:0; white-space: initial; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; color: white; width: 100%; padding: 3px 3px; background: linear-gradient(to bottom, transparent 0%, black 120%);">{{ $video->title }}</div>
+                      </div>
+                  </a>
+                </div>
+              @endforeach
             @endif
-          @endforeach
         </div>
         <div class="load-more-related-btn related-watch-wrap hidden-md hidden-lg" style="font-weight: 400 !important; margin-top: 0px;">更多相關影片</div>
 
@@ -254,7 +265,10 @@
     @include('layouts.exoclick')
   </div>
 
-  @include('video.shareModal')
+  @if (!$is_mobile)
+    @include('video.shareModal')
+  @endif
+
   @if (!Auth::check())
     @include('user.signUpModal')
     @include('user.loginModal')

@@ -3,34 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Video;
-use App\Watch;
-use App\Subscribe;
 use App\Bot;
-use App\User;
-use App\Comment;
-use App\Like;
 use App\Save;
 use App\Feedback;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Input;
-use Carbon\Carbon;
 use Response;
 use Auth;
 use Mail;
 use App\Mail\UserReport;
-use App\Mail\UserUploadVideo;
 use Redirect;
-use Illuminate\Pagination\LengthAwarePaginator;
 use Storage;
+use Helper;
 // use SteelyWing\Chinese\Chinese;
 
 class HomeController extends Controller
 {
-    /* public function __construct()
-    {
-        $this->middleware('blockUser')->only('index');
-    } */
-
     public function index(Request $request)
     {
         $banner = Video::find(22319);
@@ -73,6 +60,7 @@ class HomeController extends Controller
         $duration = '';
         $videos = Video::query();
         $doujin = false;
+        $is_mobile = false;
         
         if ($query = request('query')) {
             $context = '%'.$query.'%';
@@ -211,9 +199,10 @@ class HomeController extends Controller
             $videos = $videos->where('cover', '!=', null)->where('cover', '!=', 'https://i.imgur.com/E6mSQA2.png')->distinct()->paginate(42);
         } else {
             $videos = $videos->with('user:id,name', 'user.avatar')->where('cover', '!=', null)->distinct()->paginate(60);
+            $is_mobile = Helper::checkIsMobile();
         }
         
-        return view('layouts.search', compact('genre', 'tags', 'sort', 'brands', 'year', 'month', 'duration', 'videos', 'doujin'));
+        return view('layouts.search', compact('genre', 'tags', 'sort', 'brands', 'year', 'month', 'duration', 'videos', 'doujin', 'is_mobile'));
     }
 
     public function genre()
@@ -303,29 +292,4 @@ class HomeController extends Controller
             }
         }
     } */
-
-    /* public function getSitemap()
-    {
-        $sitemap = Storage::disk('local')->get('sitemap.xml');
-        $response = Response::make($sitemap);
-        $response->header('Content-Type', 'application/xml');
-        return $response;
-    } */
-
-    public function setSitemap()
-    {
-        Bot::setSitemap();
-    }
-
-    public function tempMethod()
-    {
-        $videos = Video::where('cover', '!=', null)->get();
-        foreach ($videos as $video) {
-            $views = $video->data['views']['total'];
-            if ($views != null) {
-                $video->views = end($views);
-                $video->save();
-            }
-        }
-    }
 }

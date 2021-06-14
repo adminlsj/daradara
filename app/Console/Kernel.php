@@ -13,7 +13,6 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        'App\Console\Commands\UpdateSitemap',
     ];
 
     /**
@@ -24,7 +23,6 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('laughseejapan:update-sitemap')->dailyAt('04:00');
     }
 
     /**

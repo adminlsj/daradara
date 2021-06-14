@@ -18,6 +18,7 @@ use Auth;
 use Carbon\Carbon;
 use Response;
 use SteelyWing\Chinese\Chinese;
+use Helper;
 
 class VideoController extends Controller
 {
@@ -26,6 +27,7 @@ class VideoController extends Controller
 
         if (is_numeric($vid) && $video = Video::with('watch:id,title')->select('id', 'user_id', 'playlist_id', 'title', 'translations', 'caption', 'cover', 'tags', 'sd', 'qualities', 'outsource', 'current_views', 'views', 'imgur', 'foreign_sd', 'duration', 'created_at', 'uploaded_at')->withCount('likes')->find($vid)) {
 
+            $is_mobile = false;
             $watch = Watch::where('id', $video->playlist_id)->select('id', 'title')->withCount('videos')->first();
 
             if ($video->cover == null) {
@@ -52,6 +54,7 @@ class VideoController extends Controller
 
             if (in_array('3D', $tags) || in_array('同人', $tags) || in_array('Cosplay', $tags) || in_array('素人自拍', $tags)) {
                 $doujin = true;
+                $is_mobile = Helper::checkIsMobile();
                 $related = $related->with('user:id,name', 'user.avatar')->where('cover', '!=', null)->where('id', '!=', $current->id)->inRandomOrder()->select('id', 'user_id', 'cover', 'imgur', 'title', 'sd', 'qualities', 'views', 'duration', 'created_at')->limit(60)->get();
 
             } else {
@@ -79,18 +82,18 @@ class VideoController extends Controller
             abort(403);
         }
 
-        return view('video.watch-new', compact('video', 'watch', 'videos', 'current', 'tags', 'country_code', 'comments', 'related', 'doujin'));
+        return view('video.watch-new', compact('video', 'watch', 'videos', 'current', 'tags', 'country_code', 'comments', 'related', 'doujin', 'is_mobile'));
     }
 
     public function download(Request $request){
 
         $video = Video::select('id', 'user_id', 'playlist_id', 'title', 'translations', 'caption', 'cover', 'tags', 'sd', 'outsource', 'current_views', 'views', 'imgur', 'foreign_sd', 'duration', 'created_at', 'uploaded_at')->find($request->v);
 
-        if ($video->foreign_sd == null || (!array_key_exists('spankbang', $video->foreign_sd) && !array_key_exists('youjizz', $video->foreign_sd) && strpos($video->sd, 'motherless') === false)) {
-            return 'error';
+        if (strpos($video->sd, 'cloudfront') !== false) {
+            abort(403);
         }
 
-        if ($video->cover == null || ($video->foreign_sd != null && array_key_exists('redirect', $video->foreign_sd))) {
+        if ($video->cover == null) {
             header("Location: https://www.laughseejapan.com".$request->getRequestUri());
             die();
         }
