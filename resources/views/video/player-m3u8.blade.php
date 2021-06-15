@@ -23,6 +23,7 @@
       },
     };
 
+    if (Hls.isSupported()) {
       // For more Hls.js options, see https://github.com/dailymotion/hls.js
       const hls = new Hls();
       hls.loadSource(source);
@@ -50,7 +51,10 @@
       });
       hls.attachMedia(video);
       window.hls = hls;
-
+    } else {
+      // default options with no quality update in case Hls is not supported
+      const player = new Plyr(video, defaultOptions);
+    }
 
     function updateQuality(newQuality) {
       window.hls.levels.forEach((level, levelIndex) => {
