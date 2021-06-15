@@ -21,10 +21,6 @@ class Video extends Model
         'id', 'user_id', 'playlist_id', 'title', 'caption', 'tags', 'sd', 'qualities', 'imgur', 'current_views', 'views', 'outsource', 'foreign_sd', 'data', 'created_at', 'uploaded_at', 'duration', 'translations', 'cover'
     ];
 
-    public static $banned = [
-        12258, 13362, 13470, 14174
-    ];
-
     public static $setting = [
         '姐', '妹', '母', '人妻', '青梅竹馬', '處女', '御姐', '熟女'
     ];

@@ -41,7 +41,7 @@ Route::get('/video-copyright', 'VideoController@copyright');
 
 Route::get('/setVideoDuration', 'BotController@setVideoDuration');
 
-// Route::get('/userReport', 'HomeController@userReport')->name('email.userReport');
+Route::get('/userReport', 'HomeController@userReport')->name('email.userReport');
 // Route::get('/user/{user}/upload', 'UserController@userEditUpload')->name('user.userEditUpload');
 // Route::post('/user/{user}/userUpdateUpload', 'UserController@userUpdateUpload')->name('user.userUpdateUpload');
 

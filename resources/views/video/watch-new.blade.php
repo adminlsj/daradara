@@ -13,30 +13,23 @@
 <div id="content-div">
   <div class="row no-gutter video-show-width">
     <div id="player-div-wrapper" class="col-md-9 single-show-player fluid-player-desktop-styles" style="background-color: #141414;">
-      @if ($country_code == 'JP')
-          <div style="background-color: black; position: relative; width: 100%; height: 0; padding-bottom: 56.25%; text-align: center;">
-            <div style="font-size: 18px; color: white; margin: 0; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%"><div style="display: inline-block;">您身處的地區已被限制瀏覽，</div><div style="display: inline-block;">請使用VPN工具切換IP位置</div></div>
-          </div>
+      @if ($video->outsource)
+        <div style="background-color: black; background-image: url('https://i.imgur.com/zXoBhXA.gif'); background-position: center; background-repeat: no-repeat; background-size: 150px; position: relative; width: 100%; height: 0; padding-bottom: 56.25%;">
+            <iframe src="{!! $video->sd !!}" style="border: 0; overflow: hidden; position: absolute; width: 100%; height: 100%; left: 0; top: 0;" allowfullscreen></iframe>
+        </div>
+
       @else
-        @if ($video->outsource)
-          <div style="background-color: black; background-image: url('https://i.imgur.com/zXoBhXA.gif'); background-position: center; background-repeat: no-repeat; background-size: 150px; position: relative; width: 100%; height: 0; padding-bottom: 56.25%;">
-              <iframe src="{!! $video->sd !!}" style="border: 0; overflow: hidden; position: absolute; width: 100%; height: 100%; left: 0; top: 0;" allowfullscreen></iframe>
-          </div>
+        @if (strpos($video->sd, '.m3u8') !== false)
+          @include('video.player-m3u8')
 
         @else
-
-          @if (strpos($video->sd, '.m3u8') !== false)
-            @include('video.player-m3u8')
-
+          @if (strpos($video->sd, 'vdownload') !== false)
+            @include('video.player-spankbang')
           @else
-            @if (strpos($video->sd, 'vdownload') !== false)
-              @include('video.player-spankbang')
-            @else
-              @include('video.player-mp4')
-            @endif
+            @include('video.player-mp4')
           @endif
-
         @endif
+
       @endif
 
       <div id="mobile-ad" class="hidden-md hidden-lg" style="text-align: center; padding-top: 5px; background-color: black; position: relative;">
@@ -265,10 +258,8 @@
     @include('layouts.exoclick')
   </div>
 
-  @if (!$is_mobile)
-    @include('video.shareModal')
-  @endif
-
+  @include('video.userReportModal')
+  @include('video.shareModal')
   @if (!Auth::check())
     @include('user.signUpModal')
     @include('user.loginModal')

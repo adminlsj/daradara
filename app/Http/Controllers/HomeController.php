@@ -268,7 +268,7 @@ class HomeController extends Controller
         return view('layouts.2257');
     }
 
-    /* public function userReport(Request $request)
+    public function userReport(Request $request)
     {
         $ip_address = isset($_SERVER["HTTP_CF_CONNECTING_IP"]) ? $_SERVER["HTTP_CF_CONNECTING_IP"] : 'N/A';
         $country_code = isset($_SERVER["HTTP_CF_IPCOUNTRY"]) ? $_SERVER["HTTP_CF_IPCOUNTRY"] : 'N/A';
@@ -291,5 +291,5 @@ class HomeController extends Controller
                 return Redirect::back()->withErrors('感謝您向我們提供意見或回報任何錯誤。');
             }
         }
-    } */
+    }
 }
