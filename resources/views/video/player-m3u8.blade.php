@@ -10,7 +10,18 @@
     const source = video.getElementsByTagName("source")[0].src;
     
     // For more options see: https://github.com/sampotts/plyr/#options
-    const defaultOptions = {};
+    const defaultOptions = {
+      speed: {
+        selected: 1, 
+        options: [0.5, 0.75, 1, 1.25, 1.5, 2]
+      },
+      fullscreen: {
+        enabled: true,
+        fallback: true,
+        iosNative: true,
+        container: null
+      },
+    };
 
       // For more Hls.js options, see https://github.com/dailymotion/hls.js
       const hls = new Hls();
