@@ -27,7 +27,7 @@ class VideoController extends Controller
 
         if (is_numeric($vid) && $video = Video::with('watch:id,title')->select('id', 'user_id', 'playlist_id', 'title', 'translations', 'caption', 'cover', 'tags', 'sd', 'qualities', 'outsource', 'current_views', 'views', 'imgur', 'foreign_sd', 'duration', 'created_at', 'uploaded_at')->withCount('likes')->find($vid)) {
 
-            $is_mobile = false;
+            $is_mobile = Helper::checkIsMobile();
             $watch = Watch::where('id', $video->playlist_id)->select('id', 'title')->withCount('videos')->first();
 
             if ($video->cover == null) {
@@ -54,7 +54,6 @@ class VideoController extends Controller
 
             if (in_array('3D', $tags) || in_array('同人', $tags) || in_array('Cosplay', $tags) || in_array('素人自拍', $tags)) {
                 $doujin = true;
-                $is_mobile = Helper::checkIsMobile();
                 $related = $related->with('user:id,name', 'user.avatar')->where('cover', '!=', null)->where('id', '!=', $current->id)->inRandomOrder()->select('id', 'user_id', 'cover', 'imgur', 'title', 'sd', 'qualities', 'views', 'duration', 'created_at')->limit(60)->get();
 
             } else {
