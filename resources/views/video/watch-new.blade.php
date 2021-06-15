@@ -20,7 +20,7 @@
 
       @else
 
-        @if (strpos($video->sd, '.m3u8') !== false)
+        @if (strpos($video->sd, 'xvideos') || !$is_mobile && strpos($video->sd, '.m3u8') !== false)
           @include('video.player-m3u8')
 
         @else
