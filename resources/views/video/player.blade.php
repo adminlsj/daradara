@@ -1,7 +1,7 @@
 <script type="text/javascript" src="//cdn.jsdelivr.net/npm/clappr@latest/dist/clappr.min.js"></script>
 <script type="text/javascript" src="//cdn.jsdelivr.net/gh/clappr/clappr-level-selector-plugin@latest/dist/level-selector.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/clappr.thumbnails-plugin/latest/clappr-responsive-container-plugin.js"></script>
-<div><div id="player"></div></div>
+<div><div id="player" playsinline controls></div></div>
 <script>
 	var player = new Clappr.Player({
 	  source: '{!! $video->sd !!}',
