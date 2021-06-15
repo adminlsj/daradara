@@ -59,7 +59,6 @@
     function updateQuality(newQuality) {
       window.hls.levels.forEach((level, levelIndex) => {
         if (level.height === newQuality) {
-          console.log("Found quality match with " + newQuality);
           window.hls.currentLevel = levelIndex;
         }
       });
