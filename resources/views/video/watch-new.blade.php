@@ -20,15 +20,17 @@
 
       @else
 
-        @if (strpos($video->sd, 'xvideos') || !$is_mobile && strpos($video->sd, '.m3u8') !== false)
-          @include('video.player-m3u8')
-
-        @else
-          @if (strpos($video->sd, 'vdownload') !== false)
-            @include('video.player-spankbang')
+        @if (strpos($video->sd, 'https://hls-uranus.sb-cd.com/') !== false)
+          @if (!$is_mobile)
+            @include('video.player-m3u8-spankbang')
           @else
-            @include('video.player-mp4')
+            @include('video.player-mp4-spankbang')
           @endif
+
+        @elseif (strpos($video->sd, '.m3u8') !== false)
+          @include('video.player-m3u8')
+        @else
+          @include('video.player-mp4')
         @endif
 
       @endif

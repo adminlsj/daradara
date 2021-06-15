@@ -1,13 +1,17 @@
-<link rel="stylesheet" href="https://cdn.plyr.io/3.6.4/plyr.css" />
 <script src="https://cdn.plyr.io/3.6.4/plyr.js"></script>
 <script src="//cdn.jsdelivr.net/npm/hls.js@latest"></script>
+<link rel="stylesheet" href="https://cdn.plyr.io/3.6.4/plyr.css" />
 <video style="width: 100%; height: 100%" id="player" playsinline controls data-poster="{{ $video->imgurH() }}" {{ $doujin ? 'loop' : '' }}>
+  @if ($video->qualities == null)
+    <source src="{!! $video->sd !!}" type="video/mp4" size="720">
+  @else
+    @foreach ($video->qualities as $quality => $source)
+      <source src="{!! $source !!}" type="video/mp4" size="{{ $quality }}"> 
+    @endforeach
+  @endif
 </video>
 <script>
-  const source = '{!! $video->sd !!}';
-  const video = document.querySelector('video');
-  
-  const player = new Plyr(video, {
+  const player = new Plyr('video', {
     /* ads: {
       enabled: true, 
       tagUrl: 'https://syndication.realsrv.com/splash.php?idzone=4208068'
@@ -23,18 +27,8 @@
       container: null
     },
     quality: {
-      default: 1080
+      default: 720
     }
   });
-  
-  if (!Hls.isSupported()) {
-    video.src = source;
-  } else {
-    const hls = new Hls();
-    hls.loadSource(source);
-    hls.attachMedia(video);
-    window.hls = hls;
-  }
-  
   window.player = player;
 </script>
