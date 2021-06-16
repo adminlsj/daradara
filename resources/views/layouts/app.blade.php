@@ -4,6 +4,11 @@
     @section('head')
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        @if (Request::is('*search*') || (isset($current) && strpos($current->sd, 'rule34.xxx') !== false))
+            <meta name="referrer" content="no-referrer">
+        @else
+            <meta name="referrer" content="origin">
+        @endif
         <meta name="referrer" content="no-referrer">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <meta name="google-site-verification" content="oV77KljbCxlciy-aD-Uy_dZSYUENVR_6jAhWSp_cb48" />
