@@ -20,10 +20,7 @@
 
       @else
 
-        @if (array_key_exists('spankbang', $video->foreign_sd))
-          @include('video.player-mp4-spankbang')
-
-        @elseif (strpos($video->sd, '.m3u8') !== false)
+        @if (strpos($video->sd, '.m3u8') !== false)
           @include('video.player-m3u8')
         @else
           @include('video.player-mp4')
@@ -85,7 +82,7 @@
           </div>
         </div>
 
-        @if (strpos($video->sd, 'xvideos') !== false)
+        @if ($video->qualities == null)
           <a style="position: absolute; cursor: pointer; display: inline-block;" id="downloadBtn" class="single-icon-wrapper" title="無法下載">
             <div class="single-icon no-select" style="background-color: inherit !important">
               <i class="material-icons noselect" style="font-size: 23px; padding-top: 7px; padding-left: 6px; color: dimgray">download</i>

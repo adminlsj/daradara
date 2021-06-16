@@ -20,7 +20,13 @@
 				        <p style="font-size: 12px; color: #bdbdbd; font-weight: 500">{{ Carbon\Carbon::parse($video->created_at)->format('Y-m-d') }} <span style="font-weight: normal;">&nbsp;|&nbsp;</span> {{ $video->views() }}次點閱</p>
 			        </div>
 			        <h3 style="line-height: 30px; font-weight: bold; font-size: 1.5em; margin-top: 0px; color: white; margin-bottom: 30px;">{{ $video->title }}</h3>
-		        	<a class="exoclick-popunder" style="padding: 15px 50px; border: 1px solid white; border-radius: 2px; color: white; font-size: 20px; font-weight: 400; text-decoration: none;" href="{{ $link }}" download="{{ $video->title }}">{{ strpos($video->tags, ' 1080p ') !== false ? '1080P' : '720P' }}</a>
+			        @foreach (array_reverse($video->qualities, true) as $key => $value)
+				        @if ($key == '1080' || $key == '720')
+					        <a style="text-decoration: none; color: dimgray; text-align: center" href="#" title="無法下載"><div style="display: inline-block; padding: 15px 0px; width: 120px; border: 1px solid white; border-radius: 2px; font-size: 20px; font-weight: 400; margin-bottom: 10px; background-color: #222222;">{{ $key }}p</div></a>
+				        @else
+					        <a class="exoclick-popunder" style="text-decoration: none; color: white; text-align: center" href="{{ $value }}" download="{{ $video->title }}"><div style="display: inline-block; padding: 15px 0px; width: 120px; border: 1px solid white; border-radius: 2px; font-size: 20px; font-weight: 400; margin-bottom: 10px;">{{ $key }}p</div></a>
+				        @endif
+			        @endforeach
 		        </div>
 			</div>
 		</div>

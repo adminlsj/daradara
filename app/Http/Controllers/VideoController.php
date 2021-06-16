@@ -86,20 +86,13 @@ class VideoController extends Controller
 
     public function download(Request $request){
 
-        $video = Video::select('id', 'user_id', 'playlist_id', 'title', 'translations', 'caption', 'cover', 'tags', 'sd', 'outsource', 'current_views', 'views', 'imgur', 'foreign_sd', 'duration', 'created_at', 'uploaded_at')->find($request->v);
+        $video = Video::select('id', 'user_id', 'playlist_id', 'title', 'translations', 'caption', 'cover', 'tags', 'sd', 'qualities', 'outsource', 'current_views', 'views', 'imgur', 'foreign_sd', 'duration', 'created_at', 'uploaded_at')->find($request->v);
 
-        if (strpos($video->sd, 'cloudfront') !== false) {
+        if ($video->qualities == null) {
             abort(403);
         }
 
-        if ($video->cover == null) {
-            header("Location: https://www.laughseejapan.com".$request->getRequestUri());
-            die();
-        }
-
-        $link = $video->sd;
-
-        return view('video.download', compact('video', 'link'));
+        return view('video.download', compact('video'));
     }
 
     public function like(Request $request)
