@@ -20,12 +20,8 @@
 
       @else
 
-        @if (strpos($video->sd, 'https://hls-uranus.sb-cd.com/') !== false)
-          @if (!$is_mobile)
-            @include('video.player-m3u8-spankbang')
-          @else
-            @include('video.player-mp4-spankbang')
-          @endif
+        @if (array_key_exists('spankbang', $video->sd))
+          @include('video.player-mp4-spankbang')
 
         @elseif (strpos($video->sd, '.m3u8') !== false)
           @include('video.player-m3u8')
