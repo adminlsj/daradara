@@ -20,7 +20,7 @@
 
       @else
 
-        @if (array_key_exists('spankbang', $video->sd))
+        @if (array_key_exists('spankbang', $video->foreign_sd))
           @include('video.player-mp4-spankbang')
 
         @elseif (strpos($video->sd, '.m3u8') !== false)
