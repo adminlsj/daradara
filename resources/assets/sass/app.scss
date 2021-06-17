@@ -1523,6 +1523,15 @@ div.sticky {
 }
 
 @media (max-width: 767.9px) {
+  .video-card {
+    width: calc(108%);
+  }
+
+  .related-video-width-horizontal .video-card {
+    width: calc(100%) !important;
+    margin-bottom: 20px !important;
+  }
+
   .card-desktop {
     width: calc(100%);
     margin-bottom: 20px;
@@ -1532,15 +1541,6 @@ div.sticky {
     padding-left: 15px; 
     padding-right: 15px; 
     height: auto;
-  }
-
-  .video-card {
-    width: calc(108%);
-  }
-
-  .related-video-width-horizontal .video-card {
-    width: calc(100%) !important;
-    margin-bottom: 20px !important;
   }
 
   .modal {

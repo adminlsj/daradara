@@ -37,10 +37,6 @@ class Video extends Model
         '自慰', '口交', '乳交', '肛交', '腳交', '腋下', '玩具', '觸手', '內射', '顏射', '3P', '群交', '肉便器', '後宮', '公眾場合', '近親', '師生', 'NTR', '懷孕', '噴奶', '放尿', '精神控制', '藥物', '痴漢', '阿嘿顏', '精神崩潰', '鬼畜', 'BDSM', '調教', '強制', '逆強制', '痴女', '女王樣', '百合', '耽美', '性轉換', '異世界', '異種族', '純愛', '戀愛喜劇', '世界末日', '1080p', '無碼'
     ];
 
-    public static $genre = [
-        '裏番', '3D', '同人', 'Cosplay'//, '素人自拍'
-    ];
-
     public static $selected_tags = [
         '姐', '妹', '母', '人妻', '青梅竹馬', '御姐', '熟女', 'JK', '運動少女', '大小姐', '老師', '女醫護士', '女僕', '巫女', '修女', '偶像', 'OL', '風俗娘', '公主', '女騎士', '魔法少女', '妖精', '魔物娘', '獸娘', '貧乳', '黑皮膚', '眼鏡娘', '泳裝', '圍裙', '黑絲襪', '和服', '獸耳', '處女', '不良少女', '傲嬌', '病嬌', '偽娘', '扶他', '肛交', '腳交', '腋下', '觸手', '群交', '肉便器', '後宮', '近親', '師生', 'NTR', '懷孕', '噴奶', '放尿', '精神控制', '藥物', '痴漢', '阿嘿顏', '精神崩潰', '鬼畜', 'BDSM', '強制', '逆強制', '痴女', '女王樣', '百合', '耽美', '性轉換', '異世界', '異種族', '純愛', '戀愛喜劇', '世界末日', '1080p', '無碼', '3D', '同人', 'Cosplay'
     ];
@@ -126,29 +122,6 @@ class Video extends Model
         return html_entity_decode("https:".explode('" title="' , $start[1])[0]);
     }
 
-    public static function tagSubscribeFirst(Subscribe $subscribe)
-    {
-        return Video::where('tags', 'LIKE', '%'.$subscribe->tag.'%')->orderBy('uploaded_at', 'desc')->first();
-    }
-
-    public static function notifySubscribers(Video $video)
-    {
-        if ($video->playlist_id != '') {
-            $watch = $video->watch;
-            $watch->updated_at = $video->uploaded_at;
-            $watch->save();
-
-            $subscribes = $watch->subscribes();
-            foreach ($subscribes as $subscribe) {
-                $user = $subscribe->user();
-                if (strpos($user->alert, 'subscribe') === false) {
-                    $user->alert = $user->alert."subscribe";
-                    $user->save();
-                }
-            }
-        }
-    }
-
     public function imgur16by9()
     {
         return "https://i.imgur.com/JMcgEkPl.jpg";
@@ -201,12 +174,6 @@ class Video extends Model
         $ini += strlen($start);
         $len = strpos($string, $end, $ini) - $ini;
         return substr($string, $ini, $len);
-    }
-
-    public static function getExcludedIds()
-    {
-        $bot = Bot::where('temp', 'exclude')->first();
-        return $bot->data['videos'];
     }
 
     public function scopeWhereHasTags($query, $tags, $count)

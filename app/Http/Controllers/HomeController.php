@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Video;
 use App\Bot;
 use App\Save;
-use App\Feedback;
 use Illuminate\Http\Request;
 use Response;
 use Auth;
@@ -44,9 +43,7 @@ class HomeController extends Controller
             '更多精彩內容' => ['videos' => $tag5, 'link' => '/search']
         ];
 
-        $country_code = isset($_SERVER["HTTP_CF_IPCOUNTRY"]) ? $_SERVER["HTTP_CF_IPCOUNTRY"] : 'N/A';
-
-        return view('layouts.home', compact('banner', 'rows', 'country_code'));
+        return view('layouts.home', compact('banner', 'rows'));
     }
 
     public function search(Request $request)
@@ -205,11 +202,6 @@ class HomeController extends Controller
         return view('layouts.search', compact('genre', 'tags', 'sort', 'brands', 'year', 'month', 'duration', 'videos', 'doujin', 'is_mobile'));
     }
 
-    public function genre()
-    {
-        return view('layouts.genre');
-    }
-
     public function list()
     {
         if (Auth::check()) {
@@ -225,27 +217,12 @@ class HomeController extends Controller
 
     public function about(Request $request)
     {
-        if ($request->url) {
-            return urlencode($request->url);
-        }
         return view('layouts.about-us');
     }
 
     public function contact()
     {
-        $feedbacks = Feedback::orderBy('created_at', 'desc')->get();
-        return view('layouts.contact', compact('feedbacks'));
-    }
-
-    public function createFeedback()
-    {
-        $feedback = Feedback::create([
-            'name' => request('name'),
-            'email' => request('email'),
-            'text' => request('text'),
-        ]);
-
-        return redirect()->action('HomeController@contact');
+        return view('layouts.contact');
     }
 
     public function terms()
