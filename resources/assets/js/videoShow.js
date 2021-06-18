@@ -70,28 +70,8 @@ $('div#video-save-form-wrapper').on("submit", "form#video-save-form", function(e
         data:$(this).serialize(),
         dataType: 'json',
         success: function(data){
-            $('div#video-save-form-wrapper').html(data.unsaveBtn);
-            showSnackbar('影片已儲存於「我的清單」');
-        },
-        error: function(xhr, ajaxOptions, thrownError){
-            showSnackbar('請刷新頁面後重試。');
-        }
-    })
-});
-
-$('div#video-save-form-wrapper').on("submit", "form#video-unsave-form", function(e) {
-    $.ajaxSetup({
-        header:$('meta[name="_token"]').attr('content')
-    })
-    e.preventDefault(e);
-
-    $.ajax({
-        type:"POST",
-        url: $(this).attr("action"),
-        data:$(this).serialize(),
-        dataType: 'json',
-        success: function(data){
             $('div#video-save-form-wrapper').html(data.saveBtn);
+            showSnackbar('影片已儲存於「我的清單」');
         },
         error: function(xhr, ajaxOptions, thrownError){
             showSnackbar('請刷新頁面後重試。');
@@ -175,7 +155,7 @@ $('div#comment-like-form-wrapper').on("submit", "form#comment-like-form", functi
         data:$(this).serialize(),
         dataType: 'json',
         success: (json) => {
-            $(this).find('button').html(json.comment_like_btn);
+            $(this).find('#comment-like-btn-wrapper').html(json.comment_like_btn);
         },
         error: function(xhr, ajaxOptions, thrownError){
             showSnackbar('請刷新頁面後重試。');
@@ -183,45 +163,12 @@ $('div#comment-like-form-wrapper').on("submit", "form#comment-like-form", functi
     })
 });
 
-$('div#comment-like-form-wrapper').on("submit", "form#comment-unlike-form", function(e) {
-    $.ajaxSetup({
-        header:$('meta[name="_token"]').attr('content')
-    })
-    e.preventDefault(e);
-
-    $.ajax({
-        type:"POST",
-        url: $(this).attr("action"),
-        data:$(this).serialize(),
-        dataType: 'json',
-        success: (json) => {
-            $(this).find('button').html(json.comment_unlike_btn);
-            $('#comment-like-btn-' + json.comment_id).html(json.comment_like_btn);
-        },
-        error: function(xhr, ajaxOptions, thrownError){
-            showSnackbar('請刷新頁面後重試。');
-        }
-    })
+$('div#comment-like-form-wrapper').on("click", ".comment-like-btn", function() {
+    $(this).parent().parent().find('#is_positive').val(1);
 });
 
-$('div#comment-like-form-wrapper').on("submit", "form#reply-unlike-form", function(e) {
-    $.ajaxSetup({
-        header:$('meta[name="_token"]').attr('content')
-    })
-    e.preventDefault(e);
-
-    $.ajax({
-        type:"POST",
-        url: $(this).attr("action"),
-        data:$(this).serialize(),
-        dataType: 'json',
-        success: function(data){
-            $('#reply-unlike-btn-' + data.reply_id).html(data.reply_unlike_btn);
-        },
-        error: function(xhr, ajaxOptions, thrownError){
-            showSnackbar('請刷新頁面後重試。');
-        }
-    })
+$('div#comment-like-form-wrapper').on("click", ".comment-unlike-btn", function() {
+    $(this).parent().parent().find('#is_positive').val(0);
 });
 
 $('.comment-reply-btn').click(function() {

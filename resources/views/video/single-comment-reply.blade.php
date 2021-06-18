@@ -7,6 +7,5 @@
 </div>
 <div style="padding-left: 45px; padding-top: 10px">
 	@include('video.comment-like-form', ['comment' => $reply])
-	@include('video.comment-unlike-form', ['comment' => $reply])
 	<span class="comment-reply-btn" style="color: darkgray; margin-left: 25px; font-size: 0.95em; cursor: pointer;" data-comment-id="{{ $comment->id }}" data-comment-user="{{ $reply->user->name }}">回覆</span>
 </div>

@@ -4,8 +4,6 @@
 	    <i style="padding-top: 7px; font-size: 21px; color: white" class="material-icons">add_circle_outline</i>
 	</div>
   </div>
-@elseif (App\Save::where('user_id', auth()->user()->id)->where('video_id', $video->id)->first() != null)
-  @include('video.unsaveBtn')
 @else
-  @include('video.saveBtn')
+  @include('video.saveBtn', ['user_id' => Auth::user()->id, 'video_id' => $video->id])
 @endif

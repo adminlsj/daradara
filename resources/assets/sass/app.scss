@@ -1523,10 +1523,6 @@ div.sticky {
 }
 
 @media (max-width: 767.9px) {
-  .video-card {
-    width: calc(108%);
-  }
-
   .related-video-width-horizontal .video-card {
     width: calc(100%) !important;
     margin-bottom: 20px !important;

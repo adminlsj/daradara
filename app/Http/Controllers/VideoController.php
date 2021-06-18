@@ -77,11 +77,19 @@ class VideoController extends Controller
                 return $comment->likes->where('is_positive', false)->count() - $comment->likes->where('is_positive', true)->count();
             });
 
+            if (Auth::check()) {
+                $saved = Save::where('user_id', auth()->user()->id)->where('video_id', $video->id)->exists();
+                $liked = Like::where('user_id', Auth::user()->id)->where('foreign_type', 'video')->where('foreign_id', $video->id)->exists();
+            } else {
+                $saved = false;
+                $liked = false;
+            }
+
         } else {
             abort(403);
         }
 
-        return view('video.watch-new', compact('video', 'watch', 'videos', 'current', 'tags', 'country_code', 'comments', 'related', 'doujin', 'is_mobile'));
+        return view('video.watch-new', compact('video', 'watch', 'videos', 'current', 'tags', 'country_code', 'comments', 'related', 'doujin', 'is_mobile', 'saved', 'liked'));
     }
 
     public function download(Request $request){
@@ -98,24 +106,29 @@ class VideoController extends Controller
     public function like(Request $request)
     {
         $user_id = request('like-user-id');
-        $foreign_type = request('like-foreign-type');
-        $foreign_id = request('like-foreign-id');
+        $video_id = request('like-foreign-id');
         $is_positive = request('like-is-positive');
+        $liked = request('like-status');
 
-        if ($like = Like::where('user_id', $user_id)->where('foreign_type', $foreign_type)->where('foreign_id', $foreign_id)->where('is_positive', $is_positive)->first()) {
-            $like->delete();
+        if ($liked) {
+            Like::where('user_id', $user_id)
+                ->where('foreign_type', 'video')
+                ->where('foreign_id', $video_id)
+                ->where('is_positive', $is_positive)
+                ->delete();
+            $liked = false;
         } else {
-            $like = Like::create([
+            Like::create([
                 'user_id' => $user_id,
-                'foreign_type' => $foreign_type,
-                'foreign_id' => $foreign_id,
+                'foreign_type' => 'video',
+                'foreign_id' => $video_id,
                 'is_positive' => $is_positive,
             ]);
+            $liked = true;
         }
 
-        $video = Video::find($foreign_id);
         $html = '';
-        $html .= view('video.likeBtn', compact('video'));
+        $html .= view('video.likeBtn', compact('user_id', 'video_id', 'liked'));
 
         return response()->json([
             'likeBtn' => $html,
@@ -127,37 +140,18 @@ class VideoController extends Controller
     {
         $user_id = request('save-user-id');
         $video_id = request('save-video-id');
+        $saved = request('save-status');
 
-        if (Save::where('user_id', $user_id)->where('video_id', $video_id)->first() == null) {
-            $save = Save::create([
-                'user_id' => $user_id,
-                'video_id' => $video_id,
-            ]);
+        if ($saved) {
+            Save::where('user_id', $user_id)->where('video_id', $video_id)->delete();
+            $saved = false;
+        } else {
+            Save::create(['user_id' => $user_id, 'video_id' => $video_id]);
+            $saved = true;
         }
 
-        $video = Video::find($video_id);
         $html = '';
-        $html .= view('video.unsaveBtn', compact('video'));
-
-        return response()->json([
-            'unsaveBtn' => $html,
-            'csrf_token' => csrf_token(),
-        ]);
-    }
-
-    public function unsave(Request $request)
-    {
-        $user_id = request('save-user-id');
-        $video_id = request('save-video-id');
-
-        $save = Save::where('user_id', $user_id)->where('video_id', $video_id)->first();
-        if ($save != null) {
-            $save->delete();
-        }
-
-        $video = Video::find($video_id);
-        $html = '';
-        $html .= view('video.saveBtn', compact('video'));
+        $html .= view('video.saveBtn', compact('user_id', 'video_id', 'saved'));
 
         return response()->json([
             'saveBtn' => $html,
@@ -197,29 +191,64 @@ class VideoController extends Controller
 
     public function commentLike(Request $request)
     {
-        $user_id = Auth::user()->id;
+        $commentLikeUserId = request('comment-like-user-id');
         $foreign_type = request('foreign_type');
         $foreign_id = request('foreign_id');
         $is_positive = request('is_positive');
+        $likedComment = request('like-comment-status');
+        $commentLikesCount = request('comment-likes-count');
+        $commentLikesSum = request('comment-likes-sum');
+        $unlikedComment = request('unlike-comment-status');
 
-        if ($like = Like::where('user_id', $user_id)->where('foreign_type', $foreign_type)->where('foreign_id', $foreign_id)->where('is_positive', true)->first()) {
-            $like->delete();
+        if ($is_positive) {
+            if ($likedComment) {
+                Like::where('user_id', $commentLikeUserId)
+                    ->where('foreign_type', $foreign_type)
+                    ->where('foreign_id', $foreign_id)
+                    ->where('is_positive', $is_positive)
+                    ->delete();
+                $likedComment = false;
+                $commentLikesCount--;
+                $commentLikesSum--;
+            } else {
+                Like::create([
+                    'user_id' => $commentLikeUserId,
+                    'foreign_type' => $foreign_type,
+                    'foreign_id' => $foreign_id,
+                    'is_positive' => $is_positive,
+                ]);
+                $likedComment = true;
+                $commentLikesCount++;
+                $commentLikesSum++;
+            }
+
         } else {
-            $like = Like::create([
-                'user_id' => $user_id,
-                'foreign_type' => $foreign_type,
-                'foreign_id' => $foreign_id,
-                'is_positive' => $is_positive,
-            ]);
+            if ($unlikedComment) {
+                Like::where('user_id', $commentLikeUserId)
+                    ->where('foreign_type', $foreign_type)
+                    ->where('foreign_id', $foreign_id)
+                    ->where('is_positive', $is_positive)
+                    ->delete();
+                $unlikedComment = false;
+                $commentLikesCount++;
+                $commentLikesSum++;
+            } else {
+                Like::create([
+                    'user_id' => $commentLikeUserId,
+                    'foreign_type' => $foreign_type,
+                    'foreign_id' => $foreign_id,
+                    'is_positive' => $is_positive,
+                ]);
+                $unlikedComment = true;
+                $commentLikesCount--;
+                $commentLikesSum--;
+            }
         }
 
-        $model = 'App\\'.studly_case(strtolower(str_singular($foreign_type)));
-        $comment = (new $model)::find($foreign_id);
         $html = '';
-        $html .= view('video.comment-like-btn', compact('comment'));
+        $html .= view('video.comment-like-btn', compact('commentLikeUserId', 'likedComment', 'commentLikesCount', 'commentLikesSum', 'unlikedComment'));
 
         return response()->json([
-            'comment_id' => $comment->id,
             'comment_like_btn' => $html,
             'csrf_token' => csrf_token(),
         ]);

@@ -8,7 +8,6 @@
 
 	@if (Auth::check())
 		@include('video.comment-like-form')
-		@include('video.comment-unlike-form')
 		<span class="comment-reply-btn" style="color: darkgray; margin-left: 25px; font-size: 0.95em; cursor: pointer;" data-comment-id="{{ $comment->id }}">回覆</span>
 		@include('video.comment-reply-form')
 		<div id="reply-start-{{ $comment->id }}">

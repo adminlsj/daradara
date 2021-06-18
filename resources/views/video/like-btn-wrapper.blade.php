@@ -5,5 +5,5 @@
 	</div>
   </div>
 @else
-  @include('video.likeBtn')
+  @include('video.likeBtn', ['user_id' => Auth::user()->id, 'video_id' => $video->id])
 @endif
