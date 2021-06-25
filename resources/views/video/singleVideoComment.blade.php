@@ -1,5 +1,5 @@
 <a>
-  <img class="img-circle" style="width: 40px; height: auto; float:left;" src="{{ $comment->user->avatar == null ? $comment->user->avatarDefault() : $comment->user->avatar->filename }}">
+  <img class="img-circle" style="width: 40px; height: auto; float:left;" src="{{ $comment->user->avatar_temp }}">
 </a>
 <div class="comment-index-text" style="font-size: 0.9em;"><a style="text-decoration: none; color: darkgray;">{{ $comment->user->name }} • <span style="color: darkgray;">{{ Carbon\Carbon::parse($comment->created_at)->diffForHumans() }}</span></a></div>
 <div class="comment-index-text" style="color: white; font-size: 1em; margin-top: 3px;">{{ $comment->text }}</div>
@@ -27,7 +27,7 @@
 		@foreach ($comment->replies as $reply)
 			<div style="padding-top: 20px">
 				<a>
-				  <img class="img-circle" style="width: 30px; height: auto; float:left;" src="{{ $reply->user->avatar == null ? $reply->user->avatarDefault() : $reply->user->avatar->filename }}">
+				  <img class="img-circle" style="width: 30px; height: auto; float:left;" src="{{ $reply->user->avatar_temp }}">
 				</a>
 				<div class="comment-index-text" style="font-size: 0.9em; padding-left: 45px"><a style="text-decoration: none; color: darkgray;">{{ $reply->user->name }} • <span style="color: darkgray;">{{ Carbon\Carbon::parse($reply->created_at)->diffForHumans() }}</span></a></div>
 				<div class="comment-index-text" style="color: white; font-size: 1em; margin-top: 1px; padding-left: 45px">{{ $reply->text }}</div>

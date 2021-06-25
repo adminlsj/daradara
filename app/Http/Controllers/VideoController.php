@@ -11,24 +11,22 @@ use App\Subscribe;
 use App\Like;
 use App\Save;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Input;
-use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Support\Arr;
 use Auth;
 use Carbon\Carbon;
-use Response;
 use SteelyWing\Chinese\Chinese;
 use App\Helper;
 
 class VideoController extends Controller
 {
-    public function watch(Request $request){
+    public function watch(Request $request)
+    {
         $vid = $request->v;
 
         if (is_numeric($vid) && $video = Video::with('watch:id,title')->select('id', 'user_id', 'playlist_id', 'title', 'translations', 'caption', 'cover', 'tags', 'sd', 'qualities', 'outsource', 'current_views', 'views', 'imgur', 'foreign_sd', 'duration', 'created_at', 'uploaded_at')->withCount('likes')->find($vid)) {
 
+            $current = $video;
+            $doujin = false;
             $is_mobile = Helper::checkIsMobile();
-            $watch = Watch::where('id', $video->playlist_id)->select('id', 'title')->withCount('videos')->first();
 
             if ($video->cover == null) {
                 header("Location: https://www.laughseejapan.com".$request->getRequestUri());
@@ -40,21 +38,15 @@ class VideoController extends Controller
             $video->views++;
             $video->save();
             $videos = Video::where('playlist_id', $video->playlist_id)->orderBy('created_at', 'desc')->select('id', 'user_id', 'imgur', 'title', 'sd', 'views', 'created_at')->get();
-
-            $current = $video;
-            $doujin = false;
-
-            $related = Video::where(function($query) use ($current) {
-                foreach ($current->tags() as $tag) {
-                    if (in_array($tag, Video::$selected_tags)) {
-                        $query->orWhere('tags', 'like', '%'.$tag.'%');
-                    }
+            $related = Video::where(function($query) use ($tags) {
+                foreach ($tags as $tag) {
+                    $query->orWhere('tags', 'like', '%'.$tag.'%');
                 }
             });
 
             if (in_array('3D', $tags) || in_array('同人', $tags) || in_array('Cosplay', $tags) || in_array('素人自拍', $tags)) {
                 $doujin = true;
-                $related = $related->with('user:id,name', 'user.avatar')->where('cover', '!=', null)->where('id', '!=', $current->id)->inRandomOrder()->select('id', 'user_id', 'cover', 'imgur', 'title', 'sd', 'qualities', 'views', 'duration', 'created_at')->limit(60)->get();
+                $related = $related->with('user:id,name,avatar_temp')->where('cover', '!=', null)->where('id', '!=', $current->id)->inRandomOrder()->select('id', 'user_id', 'cover', 'imgur', 'title', 'sd', 'qualities', 'views', 'duration', 'created_at')->limit(60)->get();
 
             } else {
                 $related = $related->where('cover', '!=', null)->where('cover', '!=', 'https://i.imgur.com/E6mSQA2.png')->where('playlist_id', '!=', $current->playlist_id)->inRandomOrder()->select('id', 'user_id', 'cover', 'imgur', 'title', 'sd', 'qualities', 'views', 'created_at')->limit(60)->get();
@@ -62,7 +54,7 @@ class VideoController extends Controller
 
             $country_code = isset($_SERVER["HTTP_CF_IPCOUNTRY"]) ? $_SERVER["HTTP_CF_IPCOUNTRY"] : 'N/A';
 
-            $comments = Comment::with('user.avatar', 'likes', 'replies.user.avatar')
+            $comments = Comment::with('user', 'likes', 'replies.user')
                             ->with('replies.likes')
                             ->with(['replies' => function($query) {
                                 $query->orderBy('created_at', 'asc');
@@ -89,10 +81,11 @@ class VideoController extends Controller
             abort(403);
         }
 
-        return view('video.watch-new', compact('video', 'watch', 'videos', 'current', 'tags', 'country_code', 'comments', 'related', 'doujin', 'is_mobile', 'saved', 'liked'));
+        return view('video.watch-new', compact('video', 'videos', 'current', 'tags', 'country_code', 'comments', 'related', 'doujin', 'is_mobile', 'saved', 'liked'));
     }
 
-    public function download(Request $request){
+    public function download(Request $request)
+    {
 
         $video = Video::select('id', 'user_id', 'playlist_id', 'title', 'translations', 'caption', 'cover', 'tags', 'sd', 'qualities', 'outsource', 'current_views', 'views', 'imgur', 'foreign_sd', 'duration', 'created_at', 'uploaded_at')->find($request->v);
 
@@ -250,38 +243,6 @@ class VideoController extends Controller
 
         return response()->json([
             'comment_like_btn' => $html,
-            'csrf_token' => csrf_token(),
-        ]);
-    }
-
-    public function commentUnlike(Request $request)
-    {
-        $user_id = Auth::user()->id;
-        $foreign_type = request('foreign_type');
-        $foreign_id = request('foreign_id');
-
-        if ($like = Like::where('user_id', $user_id)->where('foreign_type', $foreign_type)->where('foreign_id', $foreign_id)->where('is_positive', false)->first()) {
-            $like->delete();
-        } else {
-            $like = Like::create([
-                'user_id' => $user_id,
-                'foreign_type' => $foreign_type,
-                'foreign_id' => $foreign_id,
-                'is_positive' => false,
-            ]);
-        }
-
-        $model = 'App\\'.studly_case(strtolower(str_singular($foreign_type)));
-        $comment = (new $model)::find($foreign_id);
-        $comment_unlike_btn = '';
-        $comment_unlike_btn .= view('video.comment-unlike-btn', compact('comment'));
-        $comment_like_btn = '';
-        $comment_like_btn .= view('video.comment-like-btn', compact('comment'));
-
-        return response()->json([
-            'comment_id' => $comment->id,
-            'comment_like_btn' => $comment_like_btn,
-            'comment_unlike_btn' => $comment_unlike_btn,
             'csrf_token' => csrf_token(),
         ]);
     }

@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\User;
-use App\Avatar;
 use App\Watch;
 use App\Video;
 use Auth;
@@ -109,14 +108,8 @@ class LoginController extends Controller
             'email'    => $user->getEmail(),
             'provider' => $provider,
             'provider_id' => $user->getId(),
-            'password' => bcrypt(uniqid())
-        ]);
-
-        Avatar::create([
-            'user_id'     => $localUser->id,
-            'filename'    => $user->getAvatar(),
-            'mime' => 'jpg',
-            'original_filename' => $user->getAvatar(),
+            'password' => bcrypt(uniqid()),
+            'avatar_temp' => $user->getAvatar()
         ]);
 
         return $localUser;

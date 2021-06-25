@@ -15,7 +15,7 @@
 		<div class="multiple-link-wrapper" style="text-decoration: none; color: black;">
 			<a href="{{ route('video.watch').'?v='.$video->id }}" class="overlay"></a>
 			<div class="inner"><a href="{{ route('video.watch').'?v='.$video->id }}" style="text-decoration: none; float: left; ">
-				<img style="width: 38px; height: auto; border-radius: 50%;" src="{{ $video->user->avatar == null ? $video->user->avatarDefault() : $video->user->avatar->filename }}">
+				<img style="width: 38px; height: auto; border-radius: 50%;" src="{{ $video->user->avatar_temp }}">
 			</a></div>
 			<div style="margin-left: 50px; font-size: 1.05em; line-height: 20px; color: white; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">{{ $video->title }}</div>
 			<div style="margin-left: 50px; font-size: 0.89em; color: dimgray; margin-top: 3px;" class="inner">{{ $video->user->name }} • 觀看次數：{{ $video->views() }}次 • {{ Carbon\Carbon::parse($video->created_at)->diffForHumans() }}</div>
