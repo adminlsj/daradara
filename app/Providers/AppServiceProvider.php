@@ -21,6 +21,9 @@ class AppServiceProvider extends ServiceProvider
             'comment' => 'App\Comment',
             'reply' => 'App\Reply',
         ]);
+        if($this->app->environment('production')) {
+            \URL::forceScheme('https');
+        }
     }
 
     /**
