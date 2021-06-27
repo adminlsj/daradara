@@ -155,24 +155,16 @@ class VideoController extends Controller
     public function createComment(Request $request)
     {
         $comment = Comment::create([
-            'user_id' => auth()->user()->id,
+            'user_id' => request('comment-user-id'),
             'type' => request('comment-type'),
             'foreign_id' => request('comment-foreign-id'),
             'text' => request('comment-text'),
         ]);
 
-        if (request('comment-type') == 'video') {
-            $html = '';
-            $html .= view('video.singleVideoComment', compact('comment'));
+        $html = '';
+        $html .= view('video.singleVideoComment', compact('comment'));
 
-        } elseif (request('comment-type') == 'comment') {
-            $comment_reply = $comment;
-            $comment = Comment::find(request('comment-foreign-id'));
-            $html = '';
-            $html .= view('video.single-comment-reply', compact('comment', 'comment_reply'));
-        }
-
-        $comment_count = $comment->video()->comments()->count();
+        $comment_count = request('comment-count') + 1;
 
         return response()->json([
             'comment_id' => $comment->id,

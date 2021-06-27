@@ -94,7 +94,7 @@ $('div#comment-create-form-wrapper').on("submit", "form#comment-create-form", fu
         success: function(data){
             $('#comment-text').val('');
             $('div#comment-start').prepend(data.single_video_comment);
-            $('#comment-count').html(data.comment_count);
+            $('span#tab-comments-count').html(data.comment_count);
             if (is_mobile) {
               $('html, body').animate({
                   scrollTop: $('#comment-create-form-wrapper').offset().top - 15
