@@ -7,6 +7,7 @@
 
 @section('nav')
   @include('nav.main')
+  @include('layouts.devtools')
 @endsection
 
 @section('content')

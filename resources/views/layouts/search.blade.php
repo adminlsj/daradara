@@ -116,8 +116,6 @@
 	        <input type="hidden" id="sort" name="sort" value="{{ $sort }}">
 			<div class="simple-dropdown-item hentai-sort-options-wrapper {{ $sort == '本日排行' ? 'active' : ''}}"><div class="hentai-sort-options">本日排行</div></div>
 			<hr style="margin: 0; border-color: #333333;">
-			<!--<div class="simple-dropdown-item hentai-sort-options-wrapper"><div class="hentai-sort-options">本月排行</div></div>
-			<hr style="margin: 0; border-color: #222222;">-->
 			<div class="simple-dropdown-item hentai-sort-options-wrapper {{ $sort == '最新內容' ? 'active' : ''}}"><div class="hentai-sort-options">最新內容</div></div>
 			<hr style="margin: 0; border-color: #333333;">
 			<div class="simple-dropdown-item hentai-sort-options-wrapper {{ $sort == '最新上傳' ? 'active' : ''}}"><div class="hentai-sort-options">最新上傳</div></div>

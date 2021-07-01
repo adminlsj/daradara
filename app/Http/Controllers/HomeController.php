@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Video;
-use App\Bot;
 use App\Save;
 use Illuminate\Http\Request;
 use Response;
@@ -13,7 +12,7 @@ use App\Mail\UserReport;
 use Redirect;
 use Storage;
 use App\Helper;
-// use SteelyWing\Chinese\Chinese;
+use SteelyWing\Chinese\Chinese;
 
 class HomeController extends Controller
 {
@@ -60,25 +59,17 @@ class HomeController extends Controller
         $is_mobile = false;
         
         if ($query = request('query')) {
-            $context = '%'.$query.'%';
-            $videos = $videos->where(function($query) use ($context) {
-                $query->where('title', 'ilike', $context)->orWhere('translations', 'ilike', $context)->orWhere('tags', 'ilike', $context);
-            });
-            /* $query = str_replace(' ', '', request('query'));
-            $queryArray = [];
-            preg_match_all('/./u', $query, $queryArray);
-            $queryArray = $queryArray[0];
-            if (($key = array_search(' ', $queryArray)) !== false) {
-                unset($queryArray[$key]);
-            }
-
             $chinese = new Chinese();
-            $originalQuery = '%'.implode('%', $queryArray).'%';
-            $newQuery = $chinese->to(Chinese::ZH_HANT, '%'.implode('%', $queryArray).'%');
-            $videos = $videos->where(function($query) use ($originalQuery, $newQuery) {
-                $query->where('title', 'ilike', $originalQuery)->orWhere('translations', 'ilike', $originalQuery)->orWhere('tags', 'ilike', $originalQuery)
-                      ->orWhere('title', 'ilike', $newQuery)->orWhere('translations', 'ilike', $newQuery)->orWhere('tags', 'ilike', $newQuery);
-            }); */
+            $original = '%'.$query.'%';
+            $translated = '%'.$chinese->to(Chinese::ZH_HANT, $query).'%';
+            $videos = $videos->where(function($query) use ($original, $translated) {
+                $query->where('title', 'ilike', $original)
+                      ->orWhere('translations', 'ilike', $original)
+                      ->orWhere('tags', 'ilike', $original)
+                      ->orWhere('title', 'ilike', $translated)
+                      ->orWhere('translations', 'ilike', $translated)
+                      ->orWhere('tags', 'ilike', $translated);
+            });
         }
 
         if ($genre = $request->genre) {
@@ -119,7 +110,7 @@ class HomeController extends Controller
             }
         }
 
-        /* if ($duration = $request->duration) {
+        if ($duration = $request->duration) {
             if (strpos($duration, '短片') === 0) {
                 $videos = $videos->where('duration', '<=', 240);
 
@@ -129,7 +120,7 @@ class HomeController extends Controller
             } elseif (strpos($duration, '長片') === 0) {
                 $videos = $videos->where('duration', '>=', 1200);
             }
-        } */
+        }
 
         if ($tags = $request->tags) {
             if (!in_array($tags[0], Video::$all_tag)) {
@@ -138,13 +129,13 @@ class HomeController extends Controller
             if ($request->broad) {
                 $videos = $videos->where(function($query) use ($tags) {
                     foreach ($tags as $tag) {
-                        $query->orWhere('tags', 'ilike', $tag.'%')->orWhere('tags', 'ilike', '% '.$tag.' %');
+                        $query->orWhere('tags', 'ilike', $tag.' %')->orWhere('tags', 'ilike', '% '.$tag.' %');
                     }
                 });
             } else {
                 foreach ($tags as $tag) {
                     $videos = $videos->where(function($query) use ($tag) {
-                        $query->orWhere('tags', 'ilike', $tag.'%')->orWhere('tags', 'ilike', '% '.$tag.' %');
+                        $query->orWhere('tags', 'ilike', $tag.' %')->orWhere('tags', 'ilike', '% '.$tag.' %');
                     });
                 }
             }

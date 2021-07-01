@@ -18,8 +18,6 @@ Route::resource('user', 'UserController');
 Route::get('auth/{provider}', 'Auth\LoginController@redirectToProvider');
 Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
 
-// Route::get('/tempMethod', 'HomeController@tempMethod');
-
 Route::post('/like', 'VideoController@like')->name('video.like');
 Route::post('/save', 'VideoController@save')->name('video.save');
 Route::post('/unsave', 'VideoController@unsave')->name('video.unsave');

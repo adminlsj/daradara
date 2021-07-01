@@ -7,6 +7,7 @@
 
 @section('nav')
   @include('nav.main')
+  @include('layouts.devtools')
 @endsection
 
 @section('content')
@@ -19,7 +20,6 @@
         </div>
 
       @else
-
         @if (strpos($video->sd, '.m3u8') !== false)
           @include('video.player-m3u8')
         @else
@@ -260,4 +260,5 @@
     @include('user.signUpModal')
     @include('user.loginModal')
   @endif
+</div>
 @endsection
