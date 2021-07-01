@@ -86,14 +86,14 @@ class VideoController extends Controller
 
     public function download(Request $request)
     {
-
+        $is_mobile = Helper::checkIsMobile();
         $video = Video::select('id', 'user_id', 'playlist_id', 'title', 'translations', 'caption', 'cover', 'tags', 'sd', 'qualities', 'outsource', 'current_views', 'views', 'imgur', 'foreign_sd', 'duration', 'created_at', 'uploaded_at')->find($request->v);
 
         if ($video->qualities == null) {
             abort(403);
         }
 
-        return view('video.download', compact('video'));
+        return view('video.download', compact('video', 'is_mobile'));
     }
 
     public function like(Request $request)
