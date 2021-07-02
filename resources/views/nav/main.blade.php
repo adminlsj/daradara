@@ -1,6 +1,6 @@
 <div id="main-nav" style="z-index: 10000 !important; {{ Request::is('*search*') ? 'position: static !important' : '' }}" class="main-nav{{ Request::is('*watch*') || Request::is('*download*') ? '-video-show' : '' }}">
   <a href="/" style="padding-right: 2.5%; color: white; font-size: 1.4em;">
-    <span style="color: crimson">S</span>erver<span style="color: crimson">.</span>1
+    <span style="color: crimson">S</span>erver<span style="color: crimson">.</span>2
   </a>
   <a class="nav-item hidden-xs" href="{{ route('home.search') }}?genre=H動漫&duration=&sort=&query=&year=&month=">H動漫</a>
   <a class="nav-item hidden-xs" href="{{ route('home.search') }}?genre=3D動畫&duration=&sort=&query=&year=&month=">3D動畫</a>
