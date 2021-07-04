@@ -7,9 +7,6 @@
 
 @section('nav')
   @include('nav.main')
-  @if (!$is_mobile)
-    @include('layouts.devtools')
-  @endif
 @endsection
 
 @section('content')
