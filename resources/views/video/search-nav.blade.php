@@ -25,7 +25,7 @@
 		<div class="hidden-sm hidden-md hidden-lg"><span style="vertical-align: middle;" class="material-icons">date_range</span></div>
 	</div>
 
-	<div id="duration-modal-trigger" class="search-nav no-select {{ Request::get('duration') ? 'active' : '' }}" data-toggle="modal" data-target="#duration-modal">
+	<div id="duration-modal-trigger" class="hidden-sm search-nav no-select {{ Request::get('duration') ? 'active' : '' }}" data-toggle="modal" data-target="#duration-modal">
 		<span class="hidden-xs">{{ Request::get('duration') ? Request::get('duration') : '片長'}}</span>
 		<div class="hidden-sm hidden-md hidden-lg"><span style="vertical-align: middle;" class="material-icons">update</span></div>
 	</div>
