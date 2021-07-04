@@ -1,7 +1,7 @@
 <div class="preview-trigger" style="margin-bottom: 20px;" data-poster="{{ $video->imgurL() }}" data-preview="{{ isset($video->qualities) ? $video->qualities[array_key_first($video->qualities)] : $video->sd }}">
 	<a href="{{ route('video.watch') }}?v={{ $video->id }}" style="text-decoration: none;">
 		<div class="preview-wrapper" style="position: relative;">
-			<img style="width: 100%;" src="{{ $video->imgurH() }}" alt="{{ $video->title }}">
+			<img class="lazy" style="width: 100%;" src="https://i.imgur.com/WENZTSJl.jpg" data-src="{{ $video->imgurH() }}" data-srcset="{{ $video->imgurH() }}" alt="{{ $video->title }}">
 			@if ($video->duration != null)
 			    <div style="position: absolute; right: 6px; bottom: 6px; color: white; background-color: rgba(0, 0, 0, 0.75); font-size: 12px; font-weight: bold; padding: 0px 5px; border-radius: 2px; z-index: 1">
 			    	{{ $video->duration >= 3600 ? gmdate('H:i:s', $video->duration) : gmdate('i:s', $video->duration) }}
