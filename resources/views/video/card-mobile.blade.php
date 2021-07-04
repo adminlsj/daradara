@@ -1,4 +1,4 @@
-<div class="hidden-sm hidden-md hidden-lg preview-trigger" style="margin-bottom: 20px;" data-poster="{{ $video->imgurL() }}" data-preview="{{ isset($video->qualities) ? $video->qualities[array_key_first($video->qualities)] : $video->sd }}">
+<div class="preview-trigger" style="margin-bottom: 20px;" data-poster="{{ $video->imgurL() }}" data-preview="{{ isset($video->qualities) ? $video->qualities[array_key_first($video->qualities)] : $video->sd }}">
 	<a href="{{ route('video.watch') }}?v={{ $video->id }}" style="text-decoration: none;">
 		<div class="preview-wrapper" style="position: relative;">
 			<img style="width: 100%;" src="{{ $video->imgurH() }}" alt="{{ $video->title }}">
