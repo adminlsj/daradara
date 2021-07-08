@@ -94,7 +94,7 @@ class HomeController extends Controller
                 case '同人作品':
                     $doujin = true;
                     $videos = $videos->where(function($query) {
-                        $query->orWhere('tags', 'ilike', '同人%')->orWhere('tags', 'ilike', '% 同人 %');
+                        $query->orWhere('tags', 'ilike', '%同人%');
                     });
                     break;
 

@@ -14,11 +14,11 @@ use Spatie\Browsershot\Browsershot;
 class Video extends Model
 {
     protected $casts = [
-        'foreign_sd' => 'array', 'data' => 'array', 'translations' => 'array', 'qualities' => 'array'
+        'foreign_sd' => 'array', 'data' => 'array', 'translations' => 'array', 'qualities' => 'array', 'tags_array' => 'array'
     ];
 
     protected $fillable = [
-        'id', 'user_id', 'playlist_id', 'title', 'caption', 'tags', 'sd', 'qualities', 'imgur', 'current_views', 'views', 'outsource', 'foreign_sd', 'data', 'created_at', 'uploaded_at', 'duration', 'translations', 'cover'
+        'id', 'user_id', 'playlist_id', 'title', 'caption', 'tags', 'sd', 'qualities', 'imgur', 'current_views', 'views', 'outsource', 'foreign_sd', 'data', 'created_at', 'uploaded_at', 'duration', 'translations', 'cover', 'tags_array'
     ];
 
     public static $setting = [

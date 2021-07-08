@@ -34,6 +34,7 @@ class CreateVideosTable extends Migration
             $table->jsonb('translations')->nullable();
             $table->integer('duration')->nullable();
             $table->jsonb('qualities')->nullable();
+            $table->jsonb('tags_array')->nullable();
         });
     }
 
