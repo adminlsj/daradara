@@ -25,6 +25,29 @@ body {
   font-weight: bold;
 }
 
+table, th, td {
+  border: 1px solid dimgray;
+}
+
+th {
+  font-weight: bold;
+}
+
+th, td {
+  padding: 10px;
+}
+
+.download-image {
+  width: 40%; 
+  box-shadow: 3px 3px 10px black; 
+  float: left; 
+  margin-right: 15px;
+}
+
+.download-table {
+  width:calc(60% - 15px);
+}
+
 .row.no-gutter {
   margin-left: 0;
   margin-right: 0;
@@ -1355,6 +1378,20 @@ div.sticky {
 }
 
 @media (max-width: 991px) {
+  .download-panel {
+    margin-top: 15px;
+  }
+
+  .download-image {
+    width: 100%;
+    margin-bottom: 15px;
+    margin-top: -5px;
+  }
+
+  .download-table {
+    width: 100%; 
+  }
+
   .search-nav-bar {
     width: 160px;
   }

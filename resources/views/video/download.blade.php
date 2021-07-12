@@ -7,26 +7,49 @@
 
 @section('nav')
   @include('nav.main')
+  @include('layouts.devtools')
 @endsection
 
 @section('content')
 <div id="content-div">
-	<div class="row no-gutter video-show-width" style="margin-top: 15px;">
-		<div class="col-md-9 single-show-player" style="background-color: #141414;">
+	<div class="row no-gutter video-show-width download-panel">
+		<div class="col-md-12" style="background-color: #141414;">
 			<div style="color: white" class="mobile-padding">
-				<img style="width: 192px; max-width: 40%; box-shadow: 3px 3px 10px black; float: left; margin-right: 15px;" src="{{ $video->cover }}">
 				<div>
 					<div style="margin-bottom: -6px;">
 				        <p style="font-size: 12px; color: #bdbdbd; font-weight: 500">{{ Carbon\Carbon::parse($video->created_at)->format('Y-m-d') }} <span style="font-weight: normal;">&nbsp;|&nbsp;</span> {{ $video->views() }}次點閱</p>
 			        </div>
-			        <h3 style="line-height: 30px; font-weight: bold; font-size: 1.5em; margin-top: 0px; color: white; margin-bottom: 30px;">{{ $video->title }}</h3>
-			        @foreach (array_reverse($video->qualities, true) as $key => $value)
-				        @if ($key == '1080' || $key == '720')
-					        <a style="text-decoration: none; color: dimgray; text-align: center" href="#" title="無法下載"><div style="display: inline-block; padding: 15px 0px; width: 120px; border: 1px solid white; border-radius: 2px; font-size: 20px; font-weight: 400; margin-bottom: 10px; background-color: #222222;">{{ $key }}p</div></a>
-				        @else
-					        <a class="exoclick-popunder" style="text-decoration: none; color: white; text-align: center" href="{{ $value }}" download="{{ $video->title }}"><div style="display: inline-block; padding: 15px 0px; width: 120px; border: 1px solid white; border-radius: 2px; font-size: 20px; font-weight: 400; margin-bottom: 10px;">{{ $key }}p</div></a>
-				        @endif
-			        @endforeach
+			        <h3 style="line-height: 30px; font-weight: bold; font-size: 1.5em; margin-top: 0px; color: white; margin-bottom: 15px;">{{ $video->title }}</h3>
+			        <img class="download-image" src="{{ $video->imgurL() }}">
+
+			        <table class="download-table">
+							  <tr>
+							    <th></th>
+							    <th>影片畫質</th>
+							    <th>檔案類型</th>
+							    <th class="hidden-xs">檔案大小</th>
+							    <th>下載鏈結</th>
+							  </tr>
+				        @foreach (array_reverse($video->qualities, true) as $key => $value)
+						        <tr>
+									    <td style="text-align: center;"><span style="vertical-align: middle;" class="material-icons">play_circle_filled</span></td>
+									    <td>
+									    	@if ($key >= 1080)
+										    	全高清畫質 ({{ $key }}p)
+										    @elseif ($key >= 720)
+											    高清畫質 ({{ $key }}p)
+											  @elseif ($key >= 360)
+												  標準畫質 ({{ $key }}p)
+											  @else
+												  低清畫質 ({{ $key }}p)
+										    @endif
+									    </td>
+									    <td>mp4</td>
+									    <td class="hidden-xs">N/A</td>
+									    <td><a class="exoclick-popunder" style="text-decoration: none; color: white; text-align: center; background-color: crimson; padding: 5px 10px; border-radius: 5px;" href="{{ $value }}" download="{{ $video->title }}">下載</a></td>
+									  </tr>
+				        @endforeach
+			        </table>
 		        </div>
 			</div>
 		</div>
@@ -57,7 +80,7 @@
 			})();
 		</script>
 
-		<div class="col-md-3 single-show-list">
+		<!-- <div class="col-md-3 single-show-list">
 			<div class="hidden-xs hidden-sm" style="text-align: left; padding-left: 5px; padding-top: 5px; margin-top: 0px; margin-bottom: 15px; padding-bottom: 0px; width: 310px; height: 282px; background-color: #3a3c3f;">
 		        <div style="margin-bottom: 5px; color: white; font-size: 12px;">點點廣告，贊助我們（●´∀｀）ノ♡</div>
 		        <script type="application/javascript">
@@ -70,7 +93,7 @@
 		            <iframe src="https://syndication.realsrv.com/ads-iframe-display.php?idzone=4011926&output=noscript&type=300x250" width="300" height="250" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
 		        </noscript>
 		    </div>
-		</div>
+		</div> -->
 	</div>
 
 	<div class="hidden-xs hidden-sm" style="margin-top: 35px;">
