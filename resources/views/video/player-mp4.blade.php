@@ -31,4 +31,14 @@
     }
   });
   window.player = player;
+
+  @if ($video->duration == null)
+    player.on('loadedmetadata', function () {
+      $.ajax({
+         type:'GET',
+         url:'/setVideoDuration',
+         data: { duration: player.duration, id: '{{ $video->id }}'},
+      });
+    });
+  @endif
 </script>
