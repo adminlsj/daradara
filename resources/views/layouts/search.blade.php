@@ -230,8 +230,8 @@
 			    @endforeach
 			</div>
 		@endif
-		<div class="search-pagination hidden-xs">{!! $videos->appends(request()->input())->links() !!}</div>
-		<div class="search-pagination mobile-search-pagination hidden-sm hidden-md hidden-lg">{!! $videos->appends(request()->input())->onEachSide(1)->links() !!}</div>
+		<div class="search-pagination hidden-xs">{!! $videos->appends(request()->query())->links() !!}</div>
+		<div class="search-pagination mobile-search-pagination hidden-sm hidden-md hidden-lg">{!! $videos->appends(request()->query())->onEachSide(1)->links() !!}</div>
 
 		@include('ads.home-top-squares')
 	</div>

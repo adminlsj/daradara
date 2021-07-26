@@ -96,7 +96,7 @@ class LoginController extends Controller
             return $authUser;
         }
 
-        if ($currentUser = User::where('email', $user->getEmail())->first()) {
+        if ($currentUser = User::where('email', 'ilike', $user->getEmail())->first()) {
             $currentUser->provider = $provider;
             $currentUser->provider_id = $user->getId();
             $currentUser->save();
