@@ -189,6 +189,8 @@ class HomeController extends Controller
             $videos = $videos->with('user:id,name,avatar_temp')->where('cover', '!=', null)->distinct()->paginate(60);
             $is_mobile = Helper::checkIsMobile();
         }
+
+        $videos->setPath('');
         
         return view('layouts.search', compact('genre', 'tags', 'sort', 'brands', 'year', 'month', 'duration', 'videos', 'doujin', 'is_mobile'));
     }
