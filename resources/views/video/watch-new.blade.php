@@ -124,12 +124,12 @@
       </div>
 
       <div class="tab mobile-padding" style="margin-top: 30px; font-weight: bold;">
-        <button id="defaultOpen" style="margin-right: 10px;" class="tablinks" onclick="openCity(event, 'London')">相關影片</button>
-        <button class="tablinks" onclick="openCity(event, 'Paris')">評論&nbsp;&nbsp;<span id="tab-comments-count" style="color: white; background-color: red; font-size: 12px; border-radius: 10px; padding: 1px 5px">{{ $comments->count() }}</span></button>
+        <button id="defaultOpen" data-tabcontent="related-tabcontent" class="tablinks" style="margin-right: 10px;">相關影片</button>
+        <button data-tabcontent="comment-tabcontent" class="tablinks">評論&nbsp;&nbsp;<span id="tab-comments-count" style="color: white; background-color: red; font-size: 12px; border-radius: 10px; padding: 1px 5px">{{ $comments->count() }}</span></button>
       </div>
 
       <!-- Tab content -->
-      <div id="London" class="tabcontent mobile-padding" style="margin-top: 85px">
+      <div id="related-tabcontent" class="tabcontent mobile-padding" style="margin-top: 85px">
         <div class="row {{ $doujin ? 'doujin-row' : '' }}" style="margin: 0px -2px;">
             @if ($doujin)
               @if ($is_mobile)
@@ -169,7 +169,7 @@
         </div>
       </div>
 
-      <div id="Paris" class="tabcontent" style="margin-top: 85px">
+      <div id="comment-tabcontent" class="tabcontent" style="margin-top: 85px">
         <div id="comment-section-wrapper" class="video-show-comment-width">
           @include('video.comment-section-wrapper')
         </div>
@@ -181,30 +181,6 @@
           <script type="text/javascript" data-cfasync="false" async>(adsbyjuicy = window.adsbyjuicy || []).push({'adzone':906454});</script>
         </div>
       </div>
-
-      <script>
-        document.getElementById("defaultOpen").click();
-        function openCity(evt, cityName) {
-          // Declare all variables
-          var i, tabcontent, tablinks;
-
-          // Get all elements with class="tabcontent" and hide them
-          tabcontent = document.getElementsByClassName("tabcontent");
-          for (i = 0; i < tabcontent.length; i++) {
-            tabcontent[i].style.display = "none";
-          }
-
-          // Get all elements with class="tablinks" and remove the class "active"
-          tablinks = document.getElementsByClassName("tablinks");
-          for (i = 0; i < tablinks.length; i++) {
-            tablinks[i].className = tablinks[i].className.replace(" active", "");
-          }
-
-          // Show the current tab, and add an "active" class to the button that opened the tab
-          document.getElementById(cityName).style.display = "block";
-          evt.currentTarget.className += " active";
-        }
-      </script>
     </div>
 
     <div class="col-md-3 single-show-list">

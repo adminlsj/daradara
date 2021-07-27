@@ -1,3 +1,15 @@
+$(document).ready(function() {
+  $('#defaultOpen').click();
+});
+
+$(".tablinks").click(function() {
+    var id = $(this).data("tabcontent");
+    $('.tablinks').removeClass("active");
+    $(this).addClass("active");
+    $('.tabcontent').css('display', 'none');
+    $('#' + id).css('display', 'block');
+});
+
 const shareButton = document.querySelector('#shareBtn');
 shareButton.addEventListener('click', event => {
   if (navigator.share) {
