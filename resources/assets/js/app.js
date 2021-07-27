@@ -283,6 +283,7 @@ $('#duration-modal-trigger').click(function(e) {
 });
 
 $(document).ready(function() {
+  $('#defaultOpen').click();
   var videos_scroll = document.querySelectorAll('.videos-scroll');
   for (var i = 0; i < videos_scroll.length; ++i) {
     var item = videos_scroll[i];  

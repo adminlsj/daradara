@@ -1,15 +1,3 @@
-$(document).ready(function() {
-  $('#defaultOpen').click();
-});
-
-$(".tablinks").click(function() {
-    var id = $(this).data("tabcontent");
-    $('.tablinks').removeClass("active");
-    $(this).addClass("active");
-    $('.tabcontent').css('display', 'none');
-    $('#' + id).css('display', 'block');
-});
-
 const shareButton = document.querySelector('#shareBtn');
 shareButton.addEventListener('click', event => {
   if (navigator.share) {
@@ -25,11 +13,19 @@ shareButton.addEventListener('click', event => {
   }
 });
 
+$(".tablinks").click(function() {
+    var id = $(this).data("tabcontent");
+    $('.tablinks').removeClass("active");
+    $(this).addClass("active");
+    $('.tabcontent').css('display', 'none');
+    $('#' + id).css('display', 'block');
+});
+
 var sticky = $('#myHeader');
 var stickyHeight = sticky.height();
 var stickyOffset = sticky.offset().top;
-var commentsTabcontent = $('#Paris');
-var videosTabcontent = $('#London');
+var commentsTabcontent = $('#comment-tabcontent');
+var videosTabcontent = $('#related-tabcontent');
 $(window).scroll(function(){
     var scroll = $(window).scrollTop();
     var commentsDisplay = commentsTabcontent.css('display');
