@@ -13,6 +13,12 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
+        'App\Console\Commands\UpdateData',
+        'App\Console\Commands\UpdateSpankbang',
+        'App\Console\Commands\UpdateSpankbangBackup',
+        'App\Console\Commands\UpdateYoujizz',
+        'App\Console\Commands\UpdateXvideos',
+        'App\Console\Commands\UploadRule34',
     ];
 
     /**
@@ -23,6 +29,12 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+        $schedule->command('hanime1:update-data')->dailyAt('05:00');
+        $schedule->command('hanime1:update-xvideos')->hourly();
+        $schedule->command('hanime1:update-spankbang')->cron('0 */3 * * *')->between('2:00', '22:00');
+        $schedule->command('hanime1:update-spankbangbackup')->hourly();
+        $schedule->command('hanime1:update-youjizz')->cron('0 */4 * * *');
+        $schedule->command('hanime1:upload-rule34')->hourly()->between('6:00', '21:00');
     }
 
     /**
