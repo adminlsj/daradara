@@ -37,6 +37,8 @@ Route::get('/video-copyright', 'VideoController@copyright');
 
 Route::get('/setVideoDuration', 'BotController@setVideoDuration');
 Route::get('/updateSpankbang', 'BotController@updateSpankbang');
+Route::get('/updateYoujizz', 'BotController@updateYoujizz');
+Route::get('/updateXvideos', 'BotController@updateXvideos');
 
 Route::get('/userReport', 'HomeController@userReport')->name('email.userReport');
 Route::get('/user/{user}/upload', 'UserController@userEditUpload')->name('user.userEditUpload');
