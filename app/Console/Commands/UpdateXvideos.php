@@ -6,8 +6,8 @@ use Illuminate\Console\Command;
 use App\Video;
 use Mail;
 use App\Mail\UserReport;
-use Spatie\Browsershot\Browsershot;
 use Illuminate\Support\Facades\Log;
+use App\Helper;
 
 class UpdateXvideos extends Command
 {
@@ -54,7 +54,7 @@ class UpdateXvideos extends Command
             curl_close($curl_connection);
 
             if (strpos($html, "html5player.setVideoHLS('") !== false) {
-                $m3u8 = $this->get_string_between($html, "html5player.setVideoHLS('", "');");
+                $m3u8 = Helper::get_string_between($html, "html5player.setVideoHLS('", "');");
                 $curl_connection = curl_init($m3u8);
                 curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
                 curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
@@ -70,7 +70,7 @@ class UpdateXvideos extends Command
                 array_pop($m3u8_array);
                 $preset = implode('/', $m3u8_array).'/';
                 foreach ($array as $item) {
-                    $quality = $this->get_string_between($item, 'NAME="', '"');
+                    $quality = Helper::get_string_between($item, 'NAME="', '"');
                     $source = $preset.trim(explode('NAME="'.$quality.'"', $item)[1]);
                     $qualities[str_replace('p', '', $quality)] = $source;
                 }
@@ -100,14 +100,5 @@ class UpdateXvideos extends Command
         }
 
         Log::info('Xvideos update ended...');
-    }
-
-    function get_string_between($string, $start, $end){
-        $string = ' ' . $string;
-        $ini = strpos($string, $start);
-        if ($ini == 0) return '';
-        $ini += strlen($start);
-        $len = strpos($string, $end, $ini) - $ini;
-        return substr($string, $ini, $len);
     }
 }

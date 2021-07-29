@@ -9,6 +9,7 @@ use App\Mail\UserReport;
 use Spatie\Browsershot\Browsershot;
 use Illuminate\Support\Facades\Log;
 use Carbon\Carbon;
+use App\Helper;
 
 class UpdateSpankbangBackup extends Command
 {
@@ -50,7 +51,7 @@ class UpdateSpankbangBackup extends Command
         $base = Carbon::now()->addHours(3)->timestamp;
 
         foreach ($videos as $video) {
-            $time = $this->get_string_between($video->sd, ',', '&m=');
+            $time = Helper::get_string_between($video->sd, ',', '&m=');
             if ($time < $base) {
                 $pass = false;
                 $sd = '';
@@ -106,14 +107,5 @@ class UpdateSpankbangBackup extends Command
         }
 
         Log::info('Spankbang backup update ended...');
-    }
-
-    function get_string_between($string, $start, $end){
-        $string = ' ' . $string;
-        $ini = strpos($string, $start);
-        if ($ini == 0) return '';
-        $ini += strlen($start);
-        $len = strpos($string, $end, $ini) - $ini;
-        return substr($string, $ini, $len);
     }
 }

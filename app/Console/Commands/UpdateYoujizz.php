@@ -6,7 +6,6 @@ use Illuminate\Console\Command;
 use App\Video;
 use Mail;
 use App\Mail\UserReport;
-use Spatie\Browsershot\Browsershot;
 use Illuminate\Support\Facades\Log;
 
 class UpdateYoujizz extends Command
