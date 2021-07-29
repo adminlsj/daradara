@@ -122,7 +122,7 @@ class UpdateYoujizz extends Command
                 echo 'ID: '.$video->id.' UPDATED<br>';
 
             } else {
-                Mail::to('vicky.avionteam@gmail.com')->send(new UserReport('Youjizz update failed', $video, 'master', 'master'));
+                Mail::to('vicky.avionteam@gmail.com')->send(new UserReport('master', 'Youjizz update failed', $video->id, $video->title, $video->sd, 'master', 'master'));
                 $temp = $video->foreign_sd;
                 $temp['error'] = $video->foreign_sd['youjizz'];
                 unset($temp['youjizz']);

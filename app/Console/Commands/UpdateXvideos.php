@@ -90,7 +90,7 @@ class UpdateXvideos extends Command
                 $video->save();
 
             } else {
-                Mail::to('vicky.avionteam@gmail.com')->send(new UserReport('Xvideos update failed', $video, 'master', 'master'));
+                Mail::to('vicky.avionteam@gmail.com')->send(new UserReport('master', 'Xvideos update failed', $video->id, $video->title, $video->sd, 'master', 'master'));
                 $temp = $video->foreign_sd;
                 $temp['error'] = $video->foreign_sd['xvideos'];
                 unset($temp['xvideos']);

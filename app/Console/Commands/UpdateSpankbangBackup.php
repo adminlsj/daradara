@@ -96,7 +96,7 @@ class UpdateSpankbangBackup extends Command
                     $video->save();
 
                 } else {
-                    Mail::to('vicky.avionteam@gmail.com')->send(new UserReport('Spankbang update failed', $video, 'master', 'master'));
+                    Mail::to('vicky.avionteam@gmail.com')->send(new UserReport('master', 'Spankbang update failed', $video->id, $video->title, $video->sd, 'master', 'master'));
                     $temp = $video->foreign_sd;
                     $temp['error'] = $video->foreign_sd['spankbang'];
                     unset($temp['spankbang']);
