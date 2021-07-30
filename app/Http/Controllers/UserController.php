@@ -23,7 +23,7 @@ class UserController extends Controller
     public function userEditUpload(User $user, Request $request)
     {
         if (in_array($user->id, [1, 6944])) {
-            $watches = $user->watches();
+            $watches = $user->watches;
             return view('user.upload', compact('user', 'watches'));
         } else {
             return view('user.verify', compact('user'));
