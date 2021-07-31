@@ -8,6 +8,7 @@ use Mail;
 use App\Mail\UserReport;
 use Spatie\Browsershot\Browsershot;
 use Illuminate\Support\Facades\Log;
+use App\Rule34;
 use App\Helper;
 
 class BotController extends Controller
