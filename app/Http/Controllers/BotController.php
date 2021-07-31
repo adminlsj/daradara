@@ -12,6 +12,18 @@ use App\Helper;
 
 class BotController extends Controller
 {
+    public function tempMethod(Request $request)
+    {
+        ini_set('max_execution_time', 0);
+        ini_set('memory_limit', '-1');
+
+        $videos = Video::all();
+        foreach ($videos as $video) {
+            $video->tags_array = explode(" ", trim($video->tags));
+            $video->save();
+        }
+    }
+
     public function setVideoDuration(Request $request)
     {
         $video = Video::find($request->id);
@@ -235,5 +247,10 @@ class BotController extends Controller
         }
 
         Log::info('Xvideos update ended...');
+    }
+
+    public function translateRule34()
+    {
+        Rule34::translateRule34();
     }
 }

@@ -36,9 +36,15 @@ Route::get('/2257', 'HomeController@p2257');
 Route::get('/video-copyright', 'VideoController@copyright');
 
 Route::get('/setVideoDuration', 'BotController@setVideoDuration');
+Route::get('/tempMethod', 'BotController@tempMethod');
 /* Route::get('/updateSpankbang', 'BotController@updateSpankbang');
 Route::get('/updateYoujizz', 'BotController@updateYoujizz');
 Route::get('/updateXvideos', 'BotController@updateXvideos'); */
+
+Route::get('/uploadRule34', 'BotController@uploadRule34');
+Route::get('/importRule34', 'BotController@importRule34');
+Route::get('/translateRule34', 'BotController@translateRule34');
+Route::get('/updateRule34Sd', 'BotController@updateRule34Sd');
 
 Route::get('/userReport', 'HomeController@userReport')->name('email.userReport');
 Route::get('/user/{user}/upload', 'UserController@userEditUpload')->name('user.userEditUpload');
