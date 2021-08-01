@@ -37,6 +37,7 @@ Route::get('/video-copyright', 'VideoController@copyright');
 
 Route::get('/setVideoDuration', 'BotController@setVideoDuration');
 Route::get('/tempMethod', 'BotController@tempMethod');
+Route::get('/comments', 'BotController@comments');
 /* Route::get('/updateSpankbang', 'BotController@updateSpankbang');
 Route::get('/updateYoujizz', 'BotController@updateYoujizz');
 Route::get('/updateXvideos', 'BotController@updateXvideos'); */

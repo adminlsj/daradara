@@ -19,7 +19,7 @@ class Comment extends Model
 
     public function video()
     {
-        return Video::find($this->foreign_id);
+        return $this->belongsTo('App\Video', 'foreign_id');
     }
 
     public function likes()

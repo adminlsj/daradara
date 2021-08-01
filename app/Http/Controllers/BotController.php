@@ -10,6 +10,7 @@ use Spatie\Browsershot\Browsershot;
 use Illuminate\Support\Facades\Log;
 use App\Rule34;
 use App\Helper;
+use App\Comment;
 
 class BotController extends Controller
 {
@@ -253,5 +254,11 @@ class BotController extends Controller
     public function translateRule34()
     {
         Rule34::translateRule34();
+    }
+
+    public function comments(Request $request)
+    {   
+        $comments = Comment::with('video:id,title')->orderBy('created_at', 'desc')->paginate(100);
+        return view('layouts.comments', compact('comments')); 
     }
 }
