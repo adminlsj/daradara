@@ -16,7 +16,7 @@
 	</div>
 
 	@foreach ($comments as $comment)
-		<div class="row analytics-row" style="text-align: center; border-right: 1px solid black; border-left: 1px solid black">
+		<div class="row analytics-row" style="text-align: center; border-right: 1px solid black; border-left: 1px solid black; color: white;">
 			<div class="col-md-1">{{ $comment->id }}</div>
 			<div class="col-md-1">{{ $comment->user_id }}</div>
 			<div class="col-md-1">{{ Carbon\Carbon::parse($comment->created_at)->diffForHumans() }}</div>
