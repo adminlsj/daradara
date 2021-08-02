@@ -38,9 +38,9 @@ Route::get('/video-copyright', 'VideoController@copyright');
 Route::get('/setVideoDuration', 'BotController@setVideoDuration');
 Route::get('/tempMethod', 'BotController@tempMethod');
 Route::get('/comments', 'BotController@comments');
-/* Route::get('/updateSpankbang', 'BotController@updateSpankbang');
+Route::get('/updateSpankbang', 'BotController@updateSpankbang');
 Route::get('/updateYoujizz', 'BotController@updateYoujizz');
-Route::get('/updateXvideos', 'BotController@updateXvideos'); */
+Route::get('/updateXvideos', 'BotController@updateXvideos');
 
 Route::get('/uploadRule34', 'BotController@uploadRule34');
 Route::get('/importRule34', 'BotController@importRule34');
