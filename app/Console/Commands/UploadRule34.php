@@ -126,10 +126,10 @@ class UploadRule34 extends Command
                     'created_at' => $created_at,
                     'uploaded_at' => Carbon::now(),
                 ]);
+
+                Rule34::translateRule34();
             }
         }
-        
-        Rule34::translateRule34();
 
         Log::info('Rule34 user '.$user->name.' upload ended...');
     }

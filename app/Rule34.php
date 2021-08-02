@@ -2,6 +2,9 @@
 
 namespace App;
 
+use App\Video;
+use Carbon\Carbon;
+
 class Rule34
 {
     public static $artists = [
@@ -759,7 +762,7 @@ class Rule34
 
     public static function translateRule34()
     {
-        $videos = Video::where('sd', 'ilike', '%rule34.xxx%')->where('tags_array', '!=', null)->get();
+        $videos = Video::where('sd', 'ilike', '%rule34.xxx%')->where('tags_array', '!=', null)->where('created_at', '>=', Carbon::now()->subDay())->get();
         $translations = Rule34::$translations;
         $removed = Rule34::$removed;
         foreach ($videos as $video) {
