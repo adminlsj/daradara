@@ -29,7 +29,7 @@ class HomeController extends Controller
         $tag2 = Video::whereHasTags(['貧乳'], $count)->get();
         $tag3 = Video::whereHasTags(['肛交'], $count)->get();
         $tag4 = Video::whereHasTags(['扶他', '偽娘', '耽美'], $count)->get();
-        $tag5 = Video::whereHasTags([''], $count)->get();
+        $tag5 = Video::whereHasTags([], $count)->get();
 
         $rows = [
             '最新上傳' => ['videos' => $upload, 'link' => '/search?query=&sort=最新上傳'], 
@@ -65,10 +65,10 @@ class HomeController extends Controller
             $videos = $videos->where(function($query) use ($original, $translated) {
                 $query->where('title', 'ilike', $original)
                       ->orWhere('translations', 'ilike', $original)
-                      ->orWhere('tags', 'ilike', $original)
+                      ->orWhere('tags_array', 'ilike', $original)
                       ->orWhere('title', 'ilike', $translated)
                       ->orWhere('translations', 'ilike', $translated)
-                      ->orWhere('tags', 'ilike', $translated);
+                      ->orWhere('tags_array', 'ilike', $translated);
             });
         }
 
@@ -80,28 +80,28 @@ class HomeController extends Controller
 
                 case 'H動漫':
                     $videos = $videos->where(function($query) {
-                        $query->orWhere('tags', 'ilike', '裏番%')->orWhere('tags', 'ilike', '% 裏番 %');
+                        $query->orWhere('tags_array', 'ilike', '%"裏番"%');
                     });
                     break;
 
                 case '3D動畫':
                     $doujin = true;
                     $videos = $videos->where(function($query) {
-                        $query->orWhere('tags', 'ilike', '3D%')->orWhere('tags', 'ilike', '% 3D %');
+                        $query->orWhere('tags_array', 'ilike', '%"3D"%');
                     });
                     break;
 
                 case '同人作品':
                     $doujin = true;
                     $videos = $videos->where(function($query) {
-                        $query->orWhere('tags', 'ilike', '%同人%');
+                        $query->orWhere('tags_array', 'ilike', '%"同人"%');
                     });
                     break;
 
                 case 'Cosplay':
                     $doujin = true;
                     $videos = $videos->where(function($query) {
-                        $query->orWhere('tags', 'ilike', 'Cosplay%')->orWhere('tags', 'ilike', '% Cosplay %');
+                        $query->orWhere('tags_array', 'ilike', '%"Cosplay"%');
                     });
                     break;
                 
@@ -129,13 +129,13 @@ class HomeController extends Controller
             if ($request->broad) {
                 $videos = $videos->where(function($query) use ($tags) {
                     foreach ($tags as $tag) {
-                        $query->orWhere('tags', 'ilike', $tag.' %')->orWhere('tags', 'ilike', '% '.$tag.' %');
+                        $query->orWhere('tags_array', 'ilike', '%"'.$tag.'"%');
                     }
                 });
             } else {
                 foreach ($tags as $tag) {
                     $videos = $videos->where(function($query) use ($tag) {
-                        $query->orWhere('tags', 'ilike', $tag.' %')->orWhere('tags', 'ilike', '% '.$tag.' %');
+                        $query->orWhere('tags_array', 'ilike', '%"'.$tag.'"%');
                     });
                 }
             }

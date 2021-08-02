@@ -22,7 +22,7 @@ class VideoController extends Controller
     {
         $vid = $request->v;
 
-        if (is_numeric($vid) && $video = Video::with('watch:id,title')->select('id', 'user_id', 'playlist_id', 'title', 'translations', 'caption', 'cover', 'tags', 'sd', 'qualities', 'outsource', 'current_views', 'views', 'imgur', 'foreign_sd', 'duration', 'created_at', 'uploaded_at')->withCount('likes')->find($vid)) {
+        if (is_numeric($vid) && $video = Video::with('watch:id,title')->select('id', 'user_id', 'playlist_id', 'title', 'translations', 'caption', 'cover', 'tags_array', 'sd', 'qualities', 'outsource', 'current_views', 'views', 'imgur', 'foreign_sd', 'duration', 'created_at', 'uploaded_at')->withCount('likes')->find($vid)) {
 
             $current = $video;
             $doujin = false;
@@ -33,14 +33,14 @@ class VideoController extends Controller
                 die();
             }
 
-            $tags = array_intersect($video->tags(), Video::$selected_tags);
+            $tags = array_intersect($video->tags_array, Video::$selected_tags);
             $video->current_views++;
             $video->views++;
             $video->save();
             $videos = Video::where('playlist_id', $video->playlist_id)->orderBy('created_at', 'desc')->select('id', 'user_id', 'imgur', 'title', 'sd', 'views', 'created_at')->get();
             $related = Video::where(function($query) use ($tags) {
                 foreach ($tags as $tag) {
-                    $query->orWhere('tags', 'like', '%'.$tag.'%');
+                    $query->orWhere('tags_array', 'like', '%"'.$tag.'"%');
                 }
             });
 

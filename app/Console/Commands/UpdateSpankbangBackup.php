@@ -46,7 +46,7 @@ class UpdateSpankbangBackup extends Command
     {
         Log::info('Spankbang backup update started...');
 
-        $videos = Video::where('foreign_sd', 'ilike', '%"spankbang"%')->select('id', 'title', 'sd', 'outsource', 'tags', 'foreign_sd', 'created_at')->get();
+        $videos = Video::where('foreign_sd', 'ilike', '%"spankbang"%')->select('id', 'title', 'sd', 'outsource', 'tags_array', 'foreign_sd', 'created_at')->get();
 
         $base = Carbon::now()->addHours(3)->timestamp;
 
@@ -74,7 +74,7 @@ class UpdateSpankbangBackup extends Command
                 }
 
                 if ($pass) {
-                    if (strpos($video->tags, '1080p') !== false) {
+                    if (in_array('1080p', $video->tags_array)) {
                         $sd = str_replace('-720p.mp4', '-1080p.mp4', $sd);
                         $qualities['1080'] = $sd;
                     }

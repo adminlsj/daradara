@@ -72,6 +72,7 @@ class UserController extends Controller
 
                 }
 
+                $tags = implode(' ', preg_split('/\s+/', request('tags')));
                 $video = Video::create([
                     'user_id' => $user->id,
                     'playlist_id' => request('channel'),
@@ -80,7 +81,8 @@ class UserController extends Controller
                     'caption' => request('description'),
                     'sd' => $sd,
                     'imgur' => Helper::get_string_between($url, 'https://i.imgur.com/', '.'),
-                    'tags' => implode(' ', preg_split('/\s+/', request('tags'))),
+                    'tags' => $tags,
+                    'tags_array' => explode(' ', $tags),
                     'views' => 0,
                     'outsource' => false,
                     'created_at' => Carbon::createFromFormat('Y-m-d\TH:i:s', request('created_at'))->format('Y-m-d H:i:s'),
