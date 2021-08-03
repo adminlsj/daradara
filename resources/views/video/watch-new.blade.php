@@ -27,29 +27,13 @@
 
       @endif
 
-      <div id="mobile-ad" class="hidden-md hidden-lg" style="text-align: center; padding-top: 5px; background-color: black; position: relative;">
-        <script type="application/javascript">
-            var ad_idzone = "4206424",
-            ad_width = "300",
-            ad_height = "100";
-        </script>
-        <script type="application/javascript" src="https://a.realsrv.com/ads.js"></script>
-        <noscript>
-            <iframe src="https://syndication.realsrv.com/ads-iframe-display.php?idzone=4206424&output=noscript" width="300" height="100" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
-        </noscript>
+      <div id="mobile-ad" class="hidden-md hidden-lg" style="text-align: center; padding-top: 5px; padding-bottom: 5px;background-color: black; position: relative;">
+        <ins class="adsbyexoclick" data-zoneid="4372430"></ins> 
         <div id="close-mobile-ad-btn" style="position: absolute; top: 5px; right: 1px; cursor: pointer; border: 1px solid white;"><i style="vertical-align: middle; color: white;" class="material-icons">close</i></div>
       </div>
 
-      <div class="hidden-xs hidden-sm" style="margin-top: 7px; margin-bottom: -5px; text-align: center">
-        <script type="application/javascript">
-            var ad_idzone = "4205380",
-            ad_width = "728",
-            ad_height = "90";
-        </script>
-        <script type="application/javascript" src="https://a.realsrv.com/ads.js"></script>
-        <noscript>
-            <iframe src="https://syndication.realsrv.com/ads-iframe-display.php?idzone=4205380&output=noscript" width="728" height="90" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
-        </noscript>
+      <div class="hidden-xs hidden-sm" style="margin-top: 7px; margin-bottom: 0px; text-align: center">
+        <ins class="adsbyexoclick" data-zoneid="4372406"></ins> 
       </div>
 
       <div class="video-show-panel-width">
@@ -110,17 +94,15 @@
         @include('video.playlist-panel')
       </div>
 
-      <div class="hidden-md hidden-lg" style="text-align: left; padding-left: 5px; padding-top: 5px; margin-top: 15px; margin-bottom: -15px; padding-bottom: 0px; margin-left: 15px; margin-right: 15px; width: 310px; height: 282px; background-color: #3a3c3f;">
+      <div class="hidden-md hidden-lg" style="text-align: left; padding-left: 5px; padding-top: 5px; margin-top: 15px; margin-bottom: -15px; padding-bottom: 0px; margin-left: 15px; margin-right: 15px; width: 310px; height: 282px; background-color: #3a3c3f; display: inline-block;">
         <div style="margin-bottom: 5px; color: white; font-size: 12px;">點點廣告，贊助我們（●´∀｀）ノ♡</div>
-        <script type="application/javascript">
-            var ad_idzone = "4011926",
-            ad_width = "300",
-            ad_height = "250"
-        </script>
-        <script type="application/javascript" src="https://a.realsrv.com/ads.js"></script>
-        <noscript>
-            <iframe src="https://syndication.realsrv.com/ads-iframe-display.php?idzone=4011926&output=noscript&type=300x250" width="300" height="250" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
-        </noscript>
+        <ins class="adsbyexoclick" data-zoneid="4372438"></ins>
+      </div>
+
+      <div class="hidden-xs hidden-md hidden-lg" style="text-align: left; padding-left: 5px; padding-top: 5px; margin-top: 15px; margin-bottom: -15px; padding-bottom: 0px; width: 310px; height: 282px; background-color: #3a3c3f; display: inline-block; vertical-align: top; margin-left: -5px;">
+        <div style="margin-bottom: 5px; color: white; font-size: 12px;">點點廣告，贊助我們（●´∀｀）ノ♡</div>
+        <ins id="906454" data-width="300" data-height="262"></ins>
+        <script type="text/javascript" data-cfasync="false" async>(adsbyjuicy = window.adsbyjuicy || []).push({'adzone':906454});</script>
       </div>
 
       <div class="tab mobile-padding" style="margin-top: 30px; font-weight: bold;">
@@ -161,11 +143,15 @@
         </div>
         <div class="load-more-related-btn related-watch-wrap hidden-md hidden-lg" style="font-weight: 400 !important; margin-top: 0px;">更多相關影片</div>
 
-        <div id="more-related-ad" class="hidden-md hidden-lg" style="text-align: left; padding-left: 5px; padding-top: 5px; margin-top: 15px; margin-bottom: 10px; padding-bottom: 0px; width: 310px; height: 282px; background-color: #3a3c3f;">
+        <div id="more-related-ad" class="hidden-md hidden-lg" style="text-align: left; padding-left: 5px; padding-top: 5px; margin-top: 8px; margin-bottom: 10px; padding-bottom: 0px; width: 310px; height: 282px; background-color: #3a3c3f; display: inline-block; vertical-align: top;">
           <div style="margin-bottom: 5px; color: white; font-size: 12px;">點點廣告，贊助我們（●´∀｀）ノ♡</div>
-          <script type="text/javascript" data-cfasync="false" async src="https://poweredby.jads.co/js/jads.js"></script>
           <ins id="906454" data-width="300" data-height="262"></ins>
           <script type="text/javascript" data-cfasync="false" async>(adsbyjuicy = window.adsbyjuicy || []).push({'adzone':906454});</script>
+        </div>
+
+        <div id="exoclick-banner-adjust" class="hidden-xs hidden-md hidden-lg" style="text-align: left; padding-left: 5px; padding-top: 5px; margin-top: 8px; margin-bottom: 10px; padding-bottom: 0px; width: 310px; height: 282px; background-color: #3a3c3f; margin-left: 10px; display: inline-block; vertical-align: top;">
+          <div style="margin-bottom: 5px; color: white; font-size: 12px;">點點廣告，贊助我們（●´∀｀）ノ♡</div>
+          <ins class="adsbyexoclick" data-zoneid="4372438"></ins>
         </div>
       </div>
 
@@ -174,11 +160,15 @@
           @include('video.comment-section-wrapper')
         </div>
 
-        <div id="more-related-ad" class="hidden-md hidden-lg" style="text-align: left; padding-left: 5px; padding-top: 5px; margin-top: 0px; margin-bottom: 10px; padding-bottom: 0px; width: 310px; height: 282px; background-color: #3a3c3f; margin-left: 15px; margin-right: 15px;">
+        <div id="more-related-ad" class="hidden-md hidden-lg" style="text-align: left; padding-left: 5px; padding-top: 5px; margin-top: 0px; margin-bottom: 10px; padding-bottom: 0px; width: 310px; height: 282px; background-color: #3a3c3f; margin-left: 15px; margin-right: 15px; display: inline-block; vertical-align: top;">
           <div style="margin-bottom: 5px; color: white; font-size: 12px;">點點廣告，贊助我們（●´∀｀）ノ♡</div>
-          <script type="text/javascript" data-cfasync="false" async src="https://poweredby.jads.co/js/jads.js"></script>
           <ins id="906454" data-width="300" data-height="262"></ins>
           <script type="text/javascript" data-cfasync="false" async>(adsbyjuicy = window.adsbyjuicy || []).push({'adzone':906454});</script>
+        </div>
+
+        <div class="hidden-xs hidden-md hidden-lg" style="text-align: left; padding-left: 5px; padding-top: 5px; margin-top: 0px; margin-bottom: 10px; padding-bottom: 0px; width: 310px; height: 282px; background-color: #3a3c3f; margin-left: -5px; display: inline-block; vertical-align: top;">
+          <div style="margin-bottom: 5px; color: white; font-size: 12px;">點點廣告，贊助我們（●´∀｀）ノ♡</div>
+          <ins class="adsbyexoclick" data-zoneid="4372438"></ins>
         </div>
       </div>
     </div>
@@ -186,15 +176,7 @@
     <div class="col-md-3 single-show-list">
       <div class="hidden-xs hidden-sm" style="text-align: left; padding-left: 5px; padding-top: 5px; margin-top: 0px; margin-bottom: 15px; padding-bottom: 0px; width: 310px; height: 282px; background-color: #3a3c3f;">
         <div style="margin-bottom: 5px; color: white; font-size: 12px;">點點廣告，贊助我們（●´∀｀）ノ♡</div>
-        <script type="application/javascript">
-            var ad_idzone = "4011926",
-            ad_width = "300",
-            ad_height = "250"
-        </script>
-        <script type="application/javascript" src="https://a.realsrv.com/ads.js"></script>
-        <noscript>
-            <iframe src="https://syndication.realsrv.com/ads-iframe-display.php?idzone=4011926&output=noscript&type=300x250" width="300" height="250" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
-        </noscript>
+        <ins class="adsbyexoclick" data-zoneid="4372438"></ins> 
       </div>
 
       <div class="hidden-xs hidden-sm">
@@ -204,20 +186,11 @@
       <div id="myHeader" class="hidden-xs hidden-sm">
         <div style="text-align: left; padding-left: 5px; padding-top: 5px; margin-top: 15px; margin-bottom: 10px; padding-bottom: 0px; width: 310px; height: 282px; background-color: #3a3c3f;">
           <div style="margin-bottom: 5px; color: white; font-size: 12px;">點點廣告，贊助我們（●´∀｀）ノ♡</div>
-          <script type="application/javascript">
-              var ad_idzone = "4011926",
-              ad_width = "300",
-              ad_height = "250"
-          </script>
-          <script type="application/javascript" src="https://a.realsrv.com/ads.js"></script>
-          <noscript>
-              <iframe src="https://syndication.realsrv.com/ads-iframe-display.php?idzone=4011926&output=noscript&type=300x250" width="300" height="250" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
-          </noscript>
+          <ins class="adsbyexoclick" data-zoneid="4372438"></ins>
         </div>
 
         <div style="text-align: left; padding-left: 5px; padding-top: 5px; margin-top: 15px; margin-bottom: 10px; padding-bottom: 0px; width: 310px; height: 282px; background-color: #3a3c3f;">
           <div style="margin-bottom: 5px; color: white; font-size: 12px;">點點廣告，贊助我們（●´∀｀）ノ♡</div>
-          <script type="text/javascript" data-cfasync="false" async src="https://poweredby.jads.co/js/jads.js"></script>
           <ins id="906454" data-width="300" data-height="262"></ins>
           <script type="text/javascript" data-cfasync="false" async>(adsbyjuicy = window.adsbyjuicy || []).push({'adzone':906454});</script>
         </div>
@@ -225,8 +198,8 @@
     </div>
   </div>
 
-  <div id="bottom-ads" style="margin-top: 30px; margin-bottom: -10px;" class="hidden-xs hidden-sm">
-    @include('layouts.exoclick')
+  <div id="bottom-ads" style="margin-top: 30px; margin-bottom: 0px; text-align: center;" class="hidden-xs hidden-sm">
+    <ins class="adsbyexoclick" data-zoneid="4372454"></ins> 
   </div>
 
   @include('video.userReportModal')

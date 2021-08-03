@@ -13,7 +13,11 @@
 @section('content')
 <div id="content-div">
 	<div class="row no-gutter video-show-width download-panel">
+
+		@include('ads.download-banner-exoclick')
+
 		<div class="col-md-12" style="background-color: #141414;">
+
 			<div style="color: white" class="mobile-padding">
 				<div>
 					<div style="margin-bottom: -6px;">
@@ -21,6 +25,10 @@
 			        </div>
 			        <h3 style="line-height: 30px; font-weight: bold; font-size: 1.5em; margin-top: 0px; color: white; margin-bottom: 15px;">{{ $video->title }}</h3>
 			        <img class="download-image" src="{{ $video->imgurL() }}">
+
+			        <div class="hidden-sm hidden-md hidden-lg" style="text-align: center; padding-bottom: 15px;">
+								<ins class="adsbyexoclick" data-zoneid="4372480"></ins>
+							</div>
 
 			        <table class="download-table">
 							  <tr>
@@ -79,38 +87,9 @@
 			    popMagic.init(adConfig);
 			})();
 		</script>
-
-		<!-- <div class="col-md-3 single-show-list">
-			<div class="hidden-xs hidden-sm" style="text-align: left; padding-left: 5px; padding-top: 5px; margin-top: 0px; margin-bottom: 15px; padding-bottom: 0px; width: 310px; height: 282px; background-color: #3a3c3f;">
-		        <div style="margin-bottom: 5px; color: white; font-size: 12px;">點點廣告，贊助我們（●´∀｀）ノ♡</div>
-		        <script type="application/javascript">
-		            var ad_idzone = "4011926",
-		            ad_width = "300",
-		            ad_height = "250"
-		        </script>
-		        <script type="application/javascript" src="https://a.realsrv.com/ads.js"></script>
-		        <noscript>
-		            <iframe src="https://syndication.realsrv.com/ads-iframe-display.php?idzone=4011926&output=noscript&type=300x250" width="300" height="250" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
-		        </noscript>
-		    </div>
-		</div> -->
 	</div>
 
-	<div class="hidden-xs hidden-sm" style="margin-top: 35px;">
-		@include('layouts.exoclick')
-	</div>
+	@include('ads.download-banner-juicyads')
 
-	<div class="hidden-md hidden-lg" style="text-align: left; padding-left: 5px; padding-top: 5px; margin-top: 15px; padding-bottom: 0px; margin-left: 15px; margin-right: 15px; margin-bottom: 15px; width: 310px; height: 282px; background-color: #3a3c3f;">
-	    <div style="margin-bottom: 5px; color: white; font-size: 12px;">點點廣告，贊助我們（●´∀｀）ノ♡</div>
-	    <script type="application/javascript">
-	        var ad_idzone = "4011926",
-	        ad_width = "300",
-	        ad_height = "250"
-	    </script>
-	    <script type="application/javascript" src="https://a.realsrv.com/ads.js"></script>
-	    <noscript>
-	        <iframe src="https://syndication.realsrv.com/ads-iframe-display.php?idzone=4011926&output=noscript&type=300x250" width="300" height="250" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
-	    </noscript>
-	</div>
 </div>
 @endsection

@@ -80,6 +80,7 @@ $('.load-more-related-btn').click(function() {
     hidden.removeClass('hidden-xs');
     hidden.removeClass('hidden-sm');
     $('#more-related-ad').css('margin-top', '0px');
+    $('#exoclick-banner-adjust').css('margin-top', '0px');
 })
 
 $('#close-mobile-ad-btn').click(function() {

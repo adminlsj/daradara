@@ -19,11 +19,28 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $videos = Video::where('tags_array', null)->get();
+        $videos = Video::where('tags', 'ilike', '%Queen Bee%')->get();
+        foreach ($videos as $video) {
+            $original_tags = $video->tags_array;
+            $new_tags = [];
+            foreach ($original_tags as $tag) {
+                if ($tag == 'Queen') {
+                    array_push($new_tags, 'Queen Bee');
+                } elseif ($tag == 'Bee') {
+                    // code...
+                } else {
+                    array_push($new_tags, $tag);
+                }
+            }
+            $video->tags_array = $new_tags;
+            $video->save();
+        }
+
+        /* $videos = Video::where('tags_array', null)->get();
         foreach ($videos as $video) {
             $video->tags_array = explode(" ", trim($video->tags));
             $video->save();
-        }
+        } */
     }
 
     public function setVideoDuration(Request $request)

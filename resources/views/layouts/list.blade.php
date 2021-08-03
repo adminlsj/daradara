@@ -28,8 +28,10 @@
     </div>
     <div class="search-pagination hidden-xs">{!! $saves->appends(request()->input())->links() !!}</div>
     <div class="search-pagination mobile-search-pagination hidden-sm hidden-md hidden-lg">{!! $saves->appends(request()->input())->onEachSide(1)->links() !!}</div>
-    <br><br><br>
-    <div id="list-logout-btn" style="padding: 0 4%;">
+
+    @include('ads.list-banner-panel')
+
+    <div id="list-logout-btn" style="padding: 0 4%; margin-top: 30px;">
       <form action="{{ route('logout') }}" method="POST">
         {{ csrf_field() }}
         <br class="hidden-sm hidden-md hidden-lg">

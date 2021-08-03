@@ -41,7 +41,10 @@
                 @endforeach
             @endif
 
+            <script async type="application/javascript" src="https://a.realsrv.com/ad-provider.js"></script>
+            <script type="text/javascript" data-cfasync="false" async src="https://poweredby.jads.co/js/jads.js"></script>
             @yield('content')
+            <script>(AdProvider = window.AdProvider || []).push({'serve': {}});</script>
 
             @include('layouts.footer')
         </div>

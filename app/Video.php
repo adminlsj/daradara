@@ -71,7 +71,7 @@ class Video extends Model
 
     public function tags()
     {
-        $tags = str_replace(' 肉番 裏番 里番 hentai H動漫 H動畫 十八禁 成人動畫 成人動漫 線上看 中文字幕', '', implode(' ', $this->tags_array));
+        $tags = str_replace(' 肉番 裏番 里番 hentai H動漫 H動畫 十八禁 成人動畫 成人動漫 線上看 中文字幕', '', $this->tags);
         if ($tags != '3D hentai H動漫 H動畫 十八禁 成人動畫 成人動漫 線上看 中文字幕' && $tags != '肉番 裏番 里番 hentai H動漫 H動畫 十八禁 成人動畫 成人動漫 線上看 中文字幕') {
             $tags = str_replace(' hentai H動漫 H動畫 十八禁 成人動畫 成人動漫 線上看 中文字幕', '', $tags);
         }

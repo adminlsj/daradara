@@ -1,13 +1,12 @@
 @extends('layouts.app')
 
 @section('nav')
-  @include('nav.main')
+  @include('nav.home')
 @endsection
 
 @section('content')
 
 <div class="nav-bottom-padding">
-
 	<div class="hidden-xs" style="position: relative;">
 		<img style="width: 100%; -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0.3)));" src="{{ App\Imgur::h($banner) }}" alt="{{ $banner->title }}">
 		<div id="home-banner-wrapper" style="position: absolute; left: 4%; color: white">
@@ -63,18 +62,20 @@
 
 			@if ($loop->iteration == 1)
 				<div style="margin-bottom: -15px;">
-					@include('layouts.exoclick-home')
+					@include('ads.home-banner-exoclick')
 				</div>
 			@endif
 			@if ($loop->iteration == 2)
 				<div style="margin-bottom: -15px;">
-					@include('layouts.juicyads-home')
+					@include('ads.home-banner-juicyads')
 				</div>
 			@endif
 		@endforeach
 	</div>
 
-	@include('layouts.exoclick')
+	<div style="margin-bottom: 15px;">
+		@include('ads.home-banner-square')
+	</div>
 
 	<div style="background-color: #212121;">
 		<div class="hentai-footer">
