@@ -14,10 +14,10 @@
 
   @if (Request::is('/'))
     <div class="hidden-sm hidden-md hidden-lg" style="position: absolute; top: 40px; z-index: 10001; color: white; margin-left: auto; margin-right: auto; left: 0; right: 0; text-align: center;">
-      <div style="display: inline-block; padding: 0 15px;"><a style="color: white;" href="{{ route('home.search') }}?genre=H動漫&duration=&sort=&query=&year=&month=">H動漫</a></div>
-      <div style="display: inline-block; padding: 0 15px;"><a style="color: white;" href="{{ route('home.search') }}?genre=3D動畫&duration=&sort=&query=&year=&month=">3D動畫</a></div>
-      <div style="display: inline-block; padding: 0 15px;"><a style="color: white;" href="{{ route('home.search') }}?genre=同人作品&duration=&sort=&query=&year=&month=">同人作品</a></div>
-      <div style="display: inline-block; padding: 0 15px;"><a style="color: white;" href="{{ route('home.search') }}?genre=Cosplay&duration=&sort=&query=&year=&month=">Cosplay</a></div>
+      <div style="display: inline-block; padding: 0 15px;"><a style="color: white; font-size: 16px;" href="{{ route('home.search') }}?genre=H動漫&duration=&sort=&query=&year=&month=">H動漫</a></div>
+      <div style="display: inline-block; padding: 0 15px;"><a style="color: white; font-size: 16px;" href="{{ route('home.search') }}?genre=3D動畫&duration=&sort=&query=&year=&month=">3D動畫</a></div>
+      <div style="display: inline-block; padding: 0 15px;"><a style="color: white; font-size: 16px;" href="{{ route('home.search') }}?genre=同人作品&duration=&sort=&query=&year=&month=">同人作品</a></div>
+      <div style="display: inline-block; padding: 0 15px;"><a style="color: white; font-size: 16px;" href="{{ route('home.search') }}?genre=Cosplay&duration=&sort=&query=&year=&month=">Cosplay</a></div>
     </div>
   @endif
 </div>
