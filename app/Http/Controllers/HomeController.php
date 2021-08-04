@@ -18,7 +18,6 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
-        $banner = Video::find(22319);
         $count = 28;
 
         $upload = Video::whereOrderBy('uploaded_at', $count)->get();
@@ -42,7 +41,7 @@ class HomeController extends Controller
             '更多精彩內容' => ['videos' => $tag5, 'link' => '/search']
         ];
 
-        return view('layouts.home', compact('banner', 'rows'));
+        return view('layouts.home', compact('rows'));
     }
 
     public function search(Request $request)

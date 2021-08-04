@@ -8,29 +8,29 @@
 
 <div class="nav-bottom-padding">
 	<div class="hidden-xs" style="position: relative;">
-		<img style="width: 100%; -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0.3)));" src="{{ App\Imgur::h($banner) }}" alt="{{ $banner->title }}">
+		<img style="width: 100%; -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0.3)));" src="https://i.imgur.com/8NwzMbsh.png" alt="危機！ -復仇・闇黑網站-">
 		<div id="home-banner-wrapper" style="position: absolute; left: 4%; color: white">
 			<h3 style="font-weight: bold"><span style="color: crimson">H</span>anime1<span style="color: crimson">.</span>me</h3>
-			<h1 style="margin: 0; font-weight: bold;">{{ $banner->title }}</h1>
-			<h4 class="hidden-xs">{{ $banner->translations['JP'] }} • 中文字幕 • {{ $banner->caption }}</h4>
-			<a href="{{ route('video.watch') }}?v={{ $banner->id }}" target="_blank" style="display: inline-block; padding: 10px 30px 6px 20px; margin-top: -8px; margin-bottom: -10px" class="hover-opacity-all home-banner-btn home-banner-play-btn play-btn"><span style="vertical-align: middle; font-size: 2em; margin-top: -4px; padding-right: 5px" class="material-icons">play_arrow</span>播放</a>
+			<h1 style="margin: 0; font-weight: bold;">危機！ -復仇・闇黑網站-</h1>
+			<h4 class="hidden-xs">ヤバい！復讐・闇サイト • 中文字幕 • 「妹妹自殺了」突然接到父親連絡的手塚遼，在有著普通兄妹以上愛情的妹妹死亡後，過著行屍走肉般生活。有一天他得知了妹妹自殺的內幕...</h4>
+			<a href="{{ route('video.watch') }}?v=22307" target="_blank" style="display: inline-block; padding: 10px 30px 6px 20px; margin-top: -8px; margin-bottom: -10px" class="hover-opacity-all home-banner-btn home-banner-play-btn play-btn"><span style="vertical-align: middle; font-size: 2em; margin-top: -4px; padding-right: 5px" class="material-icons">play_arrow</span>播放</a>
 			&nbsp;
-			<a href="{{ route('video.watch') }}?v={{ $banner->id }}" class="hover-opacity-all home-banner-btn home-banner-info-btn"><span style="vertical-align: middle; font-size: 1.7em; margin-top: -2px; padding-right: 7px" class="material-icons">info</span>更多資訊</a>
+			<a href="{{ route('video.watch') }}?v=22307" class="hover-opacity-all home-banner-btn home-banner-info-btn"><span style="vertical-align: middle; font-size: 1.7em; margin-top: -2px; padding-right: 7px" class="material-icons">info</span>更多資訊</a>
 		</div>
 	</div>
 
 	<div class="hidden-sm hidden-md hidden-lg" style="position: relative;">
 		<img style="width: 100%; -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));" src="https://i.imgur.com/IuFslJU.png">
 		<div style="position: absolute; left: 50%; -webkit-transform: translateX(-50%); transform: translateX(-50%); width: 96%; bottom: 15%; text-align: center; color: white">
-			<h3 style="font-weight: bold; font-size: 20px;"><span style="color: crimson">H</span>anime1<span style="color: crimson">.</span>me</h3>
-			<h1 style="font-size: 30px; font-weight: bold; margin: 0">{{ $banner->title }}</h1>
-			<h4 style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; line-height: 16px; font-size: 12px; width: 92%; margin-left: 4%;">{{ $banner->translations['JP'] }} • 中文字幕 • {{ $banner->caption }}</h4>
+			<!--<h3 style="font-weight: bold; font-size: 20px;"><span style="color: crimson">H</span>anime1<span style="color: crimson">.</span>me</h3>-->
+			<h1 style="font-size: 30px; font-weight: bold; margin: 0"><span style="color: crimson">復</span>仇・<span style="color: crimson">闇黑</span>網站</h1>
+			<h4 style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; line-height: 16px; font-size: 12px; width: 92%; margin-left: 4%;">ヤバい！復讐・闇サイト • 中文字幕 • 「妹妹自殺了」突然接到父親連絡的手塚遼，在有著普通兄妹以上愛情的妹妹死亡後，過著行屍走肉般生活。有一天他得知了妹妹自殺的內幕...</h4>
 			<div style="margin-top: 20px; width: 100%">
 				<div style="display: inline-block; margin-top: 5px;">
-					<a href="{{ route('video.watch') }}?v={{ $banner->id }}" class="hover-opacity-all home-banner-btn home-banner-play-btn play-btn" target="_blank" style="cursor: pointer; font-size: 14px; border-radius: 3px; text-decoration: none; background-color: white; padding: 8px 22px 8px 12px; color: black;"><span style="vertical-align: middle; font-size: 2em; margin-top: -3px; padding-right: 3px" class="material-icons">play_arrow</span>播放</a>
+					<a href="{{ route('video.watch') }}?v=22307" class="hover-opacity-all home-banner-btn home-banner-play-btn play-btn" target="_blank" style="cursor: pointer; font-size: 14px; border-radius: 3px; text-decoration: none; background-color: white; padding: 8px 22px 8px 12px; color: black;"><span style="vertical-align: middle; font-size: 2em; margin-top: -3px; padding-right: 3px" class="material-icons">play_arrow</span>播放</a>
 				</div>
 				<div style="display: inline-block; margin-top: 5px; padding-left: 2px;">
-					<a href="{{ route('video.watch') }}?v={{ $banner->id }}" class="hover-opacity-all home-banner-btn home-banner-info-btn" style="cursor: pointer; font-size: 14px; border-radius: 3px; text-decoration: none; background-color: gray; padding: 8px 21px 8px 17px; color: white; opacity: 0.8;"><span style="vertical-align: middle; font-size: 1.66em; margin-top: -3px; padding-right: 4px" class="material-icons">info</span>更多資訊</a>
+					<a href="{{ route('video.watch') }}?v=22307" class="hover-opacity-all home-banner-btn home-banner-info-btn" style="cursor: pointer; font-size: 14px; border-radius: 3px; text-decoration: none; background-color: gray; padding: 8px 21px 8px 17px; color: white; opacity: 0.8;"><span style="vertical-align: middle; font-size: 1.66em; margin-top: -3px; padding-right: 4px" class="material-icons">info</span>更多資訊</a>
 				</div>
 			</div>
 		</div>
