@@ -13,7 +13,7 @@
 				<h5 style="font-weight: bold">
 			  		注意事項
 				</h5>
-			    <p style="color: darkgray; padding-bottom: 12px; font-size: 12px; padding-right: 60px;">請僅選擇符合影片內容的標籤，濫用該功能的IP地址將被封鎖，謝謝各位紳士的合作。</p>
+			    <p style="color: darkgray; padding-bottom: 12px; font-size: 12px; padding-right: 60px;">請僅選擇符合影片內容的標籤，並勾選下方的「我不是機器人」，謝謝各位紳士的合作。</p>
 		    </div>
 
 	        <h5 style="margin-bottom: 15px; font-weight: bold">人物設定：</h5>
@@ -47,7 +47,12 @@
 				  <span class="checkmark">{{ $tag }}</span>
 				</label>
 	        @endforeach
+
+	        <div style="text-align: center; margin-top: 16px; margin-bottom: 10px;">
+				<div style="display: inline-block; vertical-align: top;" class="g-recaptcha" data-sitekey="{{ config('google_captcha.site_key') }}" data-theme="dark"></div>
+		    </div>
 	      </div>
+
 	      <hr style="border-color: #3a3c3f; margin: 0">
 	      <div class="modal-footer" style="border-top: none; width: 100%; text-align: center; padding: 0;">
 			<div style="display: inline-block; width: 50%; float: left; line-height: 46px; color: darkgray; cursor: pointer;" data-dismiss="modal">取消</div>

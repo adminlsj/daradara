@@ -16,6 +16,7 @@ use Carbon\Carbon;
 use SteelyWing\Chinese\Chinese;
 use App\Helper;
 use Redirect;
+use Validator;
 
 class VideoController extends Controller
 {
@@ -23,7 +24,7 @@ class VideoController extends Controller
     {
         $vid = $request->v;
 
-        if (is_numeric($vid) && $video = Video::with('watch:id,title')->select('id', 'user_id', 'playlist_id', 'title', 'translations', 'caption', 'cover', 'tags', 'tags_array', 'sd', 'qualities', 'outsource', 'current_views', 'views', 'imgur', 'foreign_sd', 'duration', 'created_at', 'uploaded_at')->withCount('likes')->find($vid)) {
+        if (is_numeric($vid) && $video = Video::with('watch:id,title')->select('id', 'user_id', 'playlist_id', 'title', 'translations', 'caption', 'cover', 'tags_array', 'sd', 'qualities', 'outsource', 'current_views', 'views', 'imgur', 'foreign_sd', 'duration', 'created_at', 'uploaded_at')->withCount('likes')->find($vid)) {
 
             $current = $video;
             $doujin = false;
@@ -261,6 +262,12 @@ class VideoController extends Controller
 
     public function addTags(Request $request)
     {
+        $request->validate([
+            'g-recaptcha-response' => 'required',
+        ], [
+            'g-recaptcha-response.required' => '請先勾選「我不是機器人」',       
+        ]);
+
         $video = Video::find($request->video_id);
         if ($tags = $request->tags) {
             $tags_array = $video->tags_array;
@@ -279,6 +286,12 @@ class VideoController extends Controller
 
     public function removeTags(Request $request)
     {
+        $request->validate([
+            'g-recaptcha-response' => 'required',
+        ], [
+            'g-recaptcha-response.required' => '請先勾選「我不是機器人」',       
+        ]);
+
         $video = Video::find($request->video_id);
         if ($tags = $request->tags) {
             $tags_array = $video->tags_array;
