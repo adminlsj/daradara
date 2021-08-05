@@ -102,9 +102,9 @@ class UploadRule34 extends Command
                 $dom->loadHTML('<meta http-equiv="content-type" content="text/html; charset=utf-8">'.$tag_sidebar);
                 $hyperlinks = $dom->getElementsByTagName('a');
                 foreach ($hyperlinks as $hyperlink) {
-                    array_push($tags, $hyperlink->nodeValue);
+                    $tags[$hyperlink->nodeValue] = 10;
                 }
-                array_push($tags, '同人');
+                $tags['同人'] = 10;
 
                 $sd = Helper::get_string_between($html, '<source src="', '"');
                 $created_at = Helper::get_string_between($html, 'Posted: ', '<br>');
@@ -117,7 +117,7 @@ class UploadRule34 extends Command
                     'caption' => $title,
                     'sd' => $sd,
                     'imgur' => 'WENZTSJ',
-                    'tags' => implode(' ', $tags),
+                    'tags' => implode(' ', array_keys($tags)),
                     'tags_array' => $tags,
                     'current_views' => 0,
                     'views' => 0,
