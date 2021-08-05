@@ -46,9 +46,11 @@
         <h5 style="color: #bdbdbd; font-weight: 400; margin-top: 10px; line-height: 20px; margin-bottom: 20px; white-space: pre-wrap; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;"><span style="font-weight: bold">{{ $video->translations['JP'] }} [中文字幕]</span></h5>
 
         <h5 style="font-weight: 400; margin-bottom: 0px; margin-top: 0px;">
-          @foreach ($video->tags() as $tag)
+          @foreach (array_keys($video->tags_array) as $tag)
               <div class="single-video-tag"><a href="/search?tags%5B%5D={{ $tag }}">{{ $tag }}</a></div>
           @endforeach
+          <div class="single-video-tag" data-toggle="modal" data-target="#add-tags-modal" style="position: relative; cursor: pointer; "><a style="padding-left: 15px; padding-right: 15px;"><span class="material-icons" style="position: absolute; margin-left: auto; margin-right: auto; left: -3px; right: 0; text-align: center; margin-top: -4px; font-size: 22px; vertical-align: middle">add</span></a></div>
+          <div class="single-video-tag" data-toggle="modal" data-target="#remove-tags-modal" style="position: relative; cursor: pointer; "><a style="padding-left: 15px; padding-right: 15px;"><span class="material-icons" style="position: absolute; margin-left: auto; margin-right: auto; left: -2px; right: 0; text-align: center; margin-top: -4px; font-size: 22px; vertical-align: middle">remove</span></a></div>
         </h5>
 
         <div id="video-like-form-wrapper" style="display: inline-block; position: absolute;" title="{{ $video->likes_count }} 個讚好">
@@ -207,6 +209,9 @@
   @if (!Auth::check())
     @include('user.signUpModal')
     @include('user.loginModal')
+  @else
+    @include('video.add-tags-modal')
+    @include('video.remove-tags-modal')
   @endif
 </div>
 @endsection

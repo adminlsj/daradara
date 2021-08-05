@@ -15,6 +15,7 @@ use Auth;
 use Carbon\Carbon;
 use SteelyWing\Chinese\Chinese;
 use App\Helper;
+use Redirect;
 
 class VideoController extends Controller
 {
@@ -33,7 +34,7 @@ class VideoController extends Controller
                 die();
             }
 
-            $tags = array_intersect($video->tags_array, Video::$selected_tags);
+            $tags = array_keys($video->tags_array);
             $video->current_views++;
             $video->views++;
             $video->save();
@@ -256,5 +257,42 @@ class VideoController extends Controller
             'single_video_comment' => $html,
             'csrf_token' => csrf_token(),
         ]);
+    }
+
+    public function addTags(Request $request)
+    {
+        $video = Video::find($request->video_id);
+        if ($tags = $request->tags) {
+            $tags_array = $video->tags_array;
+            foreach ($tags as $tag) {
+                if (array_key_exists($tag, $video->tags_array)) {
+                    $tags_array[$tag] = $tags_array[$tag] + 1;
+                } else {
+                    $tags_array[$tag] = 1;
+                }
+            }
+            $video->tags_array = $tags_array;
+            $video->save();
+        }
+        return Redirect::route('video.watch', ['v' => $video->id]);
+    }
+
+    public function removeTags(Request $request)
+    {
+        $video = Video::find($request->video_id);
+        if ($tags = $request->tags) {
+            $tags_array = $video->tags_array;
+            foreach ($tags_array as $key => $value) {
+                if (!in_array($key, $tags)) {
+                    $tags_array[$key] = $tags_array[$key] - 1;
+                    if ($tags_array[$key] <= 0) {
+                        unset($tags_array[$key]);
+                    }
+                }
+            }
+            $video->tags_array = $tags_array;
+            $video->save();
+        }
+        return Redirect::route('video.watch', ['v' => $video->id]);
     }
 }

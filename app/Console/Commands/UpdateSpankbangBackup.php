@@ -74,7 +74,7 @@ class UpdateSpankbangBackup extends Command
                 }
 
                 if ($pass) {
-                    if (in_array('1080p', $video->tags_array)) {
+                    if (in_array('1080p', array_keys($video->tags_array))) {
                         $sd = str_replace('-720p.mp4', '-1080p.mp4', $sd);
                         $qualities['1080'] = $sd;
                     }

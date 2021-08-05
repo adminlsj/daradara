@@ -697,6 +697,13 @@ label.upload-image-btn input[type="file"] {
   background-color: #b08fff;
 }
 
+.hentai-tags-wrapper input[type=checkbox][disabled] ~ .checkmark {
+  cursor: not-allowed;
+  background-color: transparent;
+  color: dimgray;
+  border: solid 1px #494949;
+}
+
 .hentai-footer {
   color: gray; 
   margin: 0px 10px; 

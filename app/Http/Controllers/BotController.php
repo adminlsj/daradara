@@ -19,7 +19,7 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $videos = Video::where('tags', 'ilike', '%Queen Bee%')->get();
+        /* $videos = Video::where('tags', 'ilike', '%Queen Bee%')->get();
         foreach ($videos as $video) {
             $original_tags = $video->tags_array;
             $new_tags = [];
@@ -34,13 +34,21 @@ class BotController extends Controller
             }
             $video->tags_array = $new_tags;
             $video->save();
-        }
-
-        /* $videos = Video::where('tags_array', null)->get();
-        foreach ($videos as $video) {
-            $video->tags_array = explode(" ", trim($video->tags));
-            $video->save();
         } */
+
+        $exclude = ['肉番', '裏番', '里番', 'hentai', 'H動漫', 'H動畫', '十八禁', '成人動畫', '成人動漫', '線上看', '中文字幕'];
+        $videos = Video::all();
+        foreach ($videos as $video) {
+            $tags = explode(" ", trim($video->tags));
+            $tags_array = [];
+            foreach ($tags as $tag) {
+                if (!in_array($tag, $exclude)) {
+                    $tags_array[$tag] = 10;
+                }
+            }
+            $video->tags_array = $tags_array;
+            $video->save();
+        }
     }
 
     public function setVideoDuration(Request $request)
@@ -77,7 +85,7 @@ class BotController extends Controller
             }
 
             if ($pass) {
-                if (in_array('1080p', $video->tags_array)) {
+                if (in_array('1080p', array_keys($video->tags_array))) {
                     $sd = str_replace('-720p.mp4', '-1080p.mp4', $sd);
                     $qualities['1080'] = $sd;
                 }
