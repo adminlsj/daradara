@@ -78,9 +78,6 @@ class HomeController extends Controller
                     break;
 
                 case 'H動漫':
-                    $videos = $videos->where(function($query) {
-                        $query->orWhere('tags_array', 'ilike', '%"裏番"%');
-                    });
                     break;
 
                 case '3D動畫':
