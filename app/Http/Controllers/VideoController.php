@@ -263,9 +263,9 @@ class VideoController extends Controller
     public function addTags(Request $request)
     {
         $request->validate([
-            'g-recaptcha-response' => 'required',
+            'h-captcha-response' => 'required',
         ], [
-            'g-recaptcha-response.required' => '請先勾選「我不是機器人」',       
+            'h-captcha-response.required' => '請先勾選「我是人類」',       
         ]);
 
         $video = Video::find($request->video_id);
@@ -287,9 +287,9 @@ class VideoController extends Controller
     public function removeTags(Request $request)
     {
         $request->validate([
-            'g-recaptcha-response' => 'required',
+            'h-captcha-response' => 'required',
         ], [
-            'g-recaptcha-response.required' => '請先勾選「我不是機器人」',       
+            'h-captcha-response.required' => '請先勾選「我是人類」',       
         ]);
 
         $video = Video::find($request->video_id);

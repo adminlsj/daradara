@@ -1,9 +1,9 @@
 <?php
 
 return [
-    'site_key' => env('GOOGLE_CAPTCHA_SITE_KEY'),
-    'secret_key' => env('GOOGLE_CAPTCHA_SECRET_KEY'),
-    'gc_verification_url' => env('GOOGLE_CAPTCHA_VERIFICATION_URL'),
+    'site_key' => env('HCAPTCHA_SITE_KEY'),
+    'secret_key' => env('HCAPTCHA_SECRET_KEY'),
+    'gc_verification_url' => env('HCAPTCHA_VERIFICATION_URL'),
     'error_codes' => [
         "missing-input-secret" => "The secret parameter is missing.",
         "invalid-input-secret" => "The secret parameter is invalid or malformed.",
