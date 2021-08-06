@@ -19,6 +19,16 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
+        $videos = Video::where('tags', 'ilike', '%Fate/Grand Order%')->get();
+        foreach ($videos as $video) {
+            $tags_array = $video->tags_array;
+            $tags_array['Fate/Grand Order'] = 10;
+            unset($tags_array['Fate/Grand']);
+            unset($tags_array['Order']);
+            $video->tags_array = $tags_array;
+            $video->save();
+        }
+
         /* $videos = Video::where('tags', 'ilike', '%Collaboration Works%')->get();
         foreach ($videos as $video) {
             $video->tags = str_replace('Collaboration Works', 'CollaborationWorks', $video->tags);
@@ -42,7 +52,7 @@ class BotController extends Controller
             $video->save();
         } */
 
-        $exclude = ['肉番', '裏番', '里番', 'hentai', 'H動漫', 'H動畫', '十八禁', '成人動畫', '成人動漫', '線上看', '中文字幕'];
+        /* $exclude = ['肉番', '裏番', '里番', 'hentai', 'H動漫', 'H動畫', '十八禁', '成人動畫', '成人動漫', '線上看', '中文字幕'];
         $videos = Video::all();
         foreach ($videos as $video) {
             $tags = explode(" ", trim($video->tags));
@@ -54,7 +64,7 @@ class BotController extends Controller
             }
             $video->tags_array = $tags_array;
             $video->save();
-        }
+        } */
     }
 
     public function setVideoDuration(Request $request)
