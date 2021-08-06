@@ -19,11 +19,12 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $videos = Video::where('tags', 'ilike', '%CollaborationWorks%')->get();
+        $videos = Video::where('tags', 'ilike', '%GOLD BEAR%')->get();
         foreach ($videos as $video) {
             $tags_array = $video->tags_array;
-            $tags_array['Collaboration Works'] = 10;
-            unset($tags_array['CollaborationWorks']);
+            $tags_array['GOLD BEAR'] = 10;
+            unset($tags_array['GOLD']);
+            unset($tags_array['BEAR']);
             $video->tags_array = $tags_array;
             $video->save();
         }
