@@ -275,7 +275,9 @@ class VideoController extends Controller
                 if (array_key_exists($tag, $video->tags_array)) {
                     $tags_array[$tag] = $tags_array[$tag] + 1;
                 } else {
-                    $tags_array[$tag] = 1;
+                    if ($tag != '1080p') {  
+                        $tags_array[$tag] = 1;
+                    }
                 }
             }
             $video->tags_array = $tags_array;
@@ -296,9 +298,9 @@ class VideoController extends Controller
         if ($tags = $request->tags) {
             $tags_array = $video->tags_array;
             foreach ($tags_array as $key => $value) {
-                if (!in_array($key, $tags)) {
+                if (!in_array($key, $tags) && in_array($key, Video::$all_tag)) {
                     $tags_array[$key] = $tags_array[$key] - 1;
-                    if ($tags_array[$key] <= 0) {
+                    if ($tags_array[$key] <= 0) {   
                         unset($tags_array[$key]);
                     }
                 }

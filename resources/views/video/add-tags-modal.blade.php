@@ -13,10 +13,10 @@
 				<h5 style="font-weight: bold">
 			  		注意事項
 				</h5>
-			    <p style="color: darkgray; padding-bottom: 12px; font-size: 12px; padding-right: 60px;">請僅選擇符合影片內容的標籤，並勾選下方的「我是人類」，謝謝各位紳士的合作。</p>
+			    <p style="color: darkgray; padding-bottom: 12px; font-size: 12px; padding-right: 60px;">請僅選擇符合影片內容的標籤，並勾選下方的「我是人類」，謝謝各位紳士的奉獻。</p>
 		    </div>
 
-	        <h5 style="margin-bottom: 15px; font-weight: bold">人物設定：</h5>
+	        <h5 style="margin-bottom: 15px; font-weight: bold">人物關係：</h5>
 	        @foreach (App\Video::$setting as $tag)
 	        	<label class="hentai-tags-wrapper">
 				  <input name="tags[]" type="checkbox" value="{{ $tag }}">
@@ -24,7 +24,7 @@
 				</label>
 	        @endforeach
 
-	        <h5 style="margin-top: 15px; margin-bottom: 15px; font-weight: bold">職業設定：</h5>
+	        <h5 style="margin-top: 15px; margin-bottom: 15px; font-weight: bold">角色設定：</h5>
 	        @foreach (App\Video::$profession as $tag)
 	        	<label class="hentai-tags-wrapper">
 				  <input name="tags[]" type="checkbox" value="{{ $tag }}">
@@ -40,8 +40,16 @@
 				</label>
 	        @endforeach
 
-	        <h5 style="margin-top: 15px; margin-bottom: 15px; font-weight: bold">劇情內容：</h5>
+	        <h5 style="margin-top: 15px; margin-bottom: 15px; font-weight: bold">故事劇情：</h5>
 	        @foreach (App\Video::$storyline as $tag)
+	        	<label class="hentai-tags-wrapper">
+				  <input name="tags[]" type="checkbox" value="{{ $tag }}">
+				  <span class="checkmark">{{ $tag }}</span>
+				</label>
+	        @endforeach
+
+	        <h5 style="margin-top: 15px; margin-bottom: 15px; font-weight: bold">性交體位：</h5>
+	        @foreach (App\Video::$position as $tag)
 	        	<label class="hentai-tags-wrapper">
 				  <input name="tags[]" type="checkbox" value="{{ $tag }}">
 				  <span class="checkmark">{{ $tag }}</span>
