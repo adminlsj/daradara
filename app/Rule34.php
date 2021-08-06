@@ -420,7 +420,7 @@ class Rule34
         "cat ears" => '貓耳', 
         "catgirl" => '貓娘',
         "caster (fate/stay night)" => 'Caster',
-        "ceo neet" => 'CEO NEET',
+        "ceo neet" => 'Ceo Neet',
         "cerberus (helltaker)" => '克爾柏洛斯',
         "chapayev (azur lane)" => '恰巴耶夫',
         "chapayev (碧藍航線)" => '恰巴耶夫',

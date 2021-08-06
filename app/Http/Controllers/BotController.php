@@ -19,9 +19,9 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $videos = Video::where('tags', 'ilike', '%CEO NEET%')->get();
+        $videos = Video::where('tags', 'ilike', '%Collaboration Works%')->get();
         foreach ($videos as $video) {
-            $video->tags = str_replace('CEO NEET', 'CeoNeet', $video->tags);
+            $video->tags = str_replace('Collaboration Works', 'CollaborationWorks', $video->tags);
             $video->save();
         }
 
