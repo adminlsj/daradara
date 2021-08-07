@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Log;
 use App\Rule34;
 use App\Helper;
 use App\Comment;
+use App\User;
+use Carbon\Carbon;
 
 class BotController extends Controller
 {
@@ -19,21 +21,15 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $videos = Video::where('tags', 'ilike', '%GOLD BEAR%')->get();
+        $videos = Video::where('tags', 'ilike', '% 玩具 %')->get();
         foreach ($videos as $video) {
             $tags_array = $video->tags_array;
-            $tags_array['GOLD BEAR'] = 10;
-            unset($tags_array['GOLD']);
-            unset($tags_array['BEAR']);
+            $tags_array['性玩具'] = 10;
+            unset($tags_array['玩具']);
             $video->tags_array = $tags_array;
+            $video->tags = str_replace(' 玩具 ', ' 性玩具 ', $video->tags);
             $video->save();
         }
-
-        /* $videos = Video::where('tags', 'ilike', '%Collaboration Works%')->get();
-        foreach ($videos as $video) {
-            $video->tags = str_replace('Collaboration Works', 'CollaborationWorks', $video->tags);
-            $video->save();
-        } */
 
         /* $videos = Video::where('tags', 'ilike', '%Queen Bee%')->get();
         foreach ($videos as $video) {
@@ -290,6 +286,98 @@ class BotController extends Controller
         }
 
         Log::info('Xvideos update ended...');
+    }
+
+    public function uploadRule34(Request $request)
+    {
+        $artists = Rule34::$artists;
+        $user = array_rand($artists);
+        $url = $artists[$user];
+
+        $user = User::find($user);
+        Log::info('Rule34 user '.$user->name.' upload started...');
+        $video_links = [];
+        $html = Browsershot::url($url)
+                ->timeout(12800)
+                ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
+                ->bodyHtml();
+
+        $dom = new \DOMDocument();
+        $dom->loadHTML($html);
+        $links = $dom->getElementsByTagName('a');
+        foreach ($links as $link) {
+            $id = $link->getAttribute('id');
+            if ($id != '') {
+                array_push($video_links, 'https://rule34.xxx/'.$link->getAttribute('href'));
+            }
+        }
+
+        $playlist = $user->watches->first();
+        $duplicated = Rule34::$duplicated;
+        foreach ($video_links as $link) {
+            $queries = [];
+            parse_str($link, $queries);
+            $rule_id = $queries['id'];
+            if (!Video::where('sd', 'ilike', '%?'.$rule_id)->exists() && !in_array($rule_id, $duplicated)) {
+                $html = Browsershot::url($link)
+                ->timeout(12800)
+                ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
+                ->bodyHtml();
+
+                $character = Helper::get_string_between($html, '<li class="tag-type-character tag">', '</li>');
+                $dom = new \DOMDocument();
+                $dom->loadHTML('<meta http-equiv="content-type" content="text/html; charset=utf-8">'.$character);
+                $hyperlinks = $dom->getElementsByTagName('a');
+                foreach ($hyperlinks as $hyperlink) {
+                    $character = $hyperlink->nodeValue;
+                }
+
+                $copyright = Helper::get_string_between($html, '<li class="tag-type-copyright tag">', '</li>');
+                $dom = new \DOMDocument();
+                $dom->loadHTML('<meta http-equiv="content-type" content="text/html; charset=utf-8">'.$copyright);
+                $hyperlinks = $dom->getElementsByTagName('a');
+                foreach ($hyperlinks as $hyperlink) {
+                    $copyright = $hyperlink->nodeValue;
+                }
+
+                $title = '['.$user->name.'] '.$character.' ['.$copyright.']';
+
+                $tags = [];
+                $tag_sidebar = Helper::get_string_between($html, '<ul id="tag-sidebar">', '</ul>');
+                $dom = new \DOMDocument();
+                $dom->loadHTML('<meta http-equiv="content-type" content="text/html; charset=utf-8">'.$tag_sidebar);
+                $hyperlinks = $dom->getElementsByTagName('a');
+                foreach ($hyperlinks as $hyperlink) {
+                    $tags[$hyperlink->nodeValue] = 10;
+                }
+                $tags['同人'] = 10;
+
+                $sd = Helper::get_string_between($html, '<source src="', '"');
+                $created_at = Helper::get_string_between($html, 'Posted: ', '<br>');
+
+                $video = Video::create([
+                    'user_id' => $user->id,
+                    'playlist_id' => $playlist->id,
+                    'title' => $title,
+                    'translations' => ['JP' => $title],
+                    'caption' => $title,
+                    'sd' => $sd,
+                    'imgur' => 'WENZTSJ',
+                    'tags' => implode(' ', array_keys($tags)),
+                    'tags_array' => $tags,
+                    'current_views' => 0,
+                    'views' => 0,
+                    'outsource' => false,
+                    'cover' => 'https://i.imgur.com/E6mSQA2.png',
+                    'created_at' => $created_at,
+                    'uploaded_at' => Carbon::now(),
+                ]);
+
+                Rule34::translateRule34();
+            }
+        }
+
+        Log::info('Rule34 user '.$user->name.' upload ended...');
     }
 
     public function translateRule34()

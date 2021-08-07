@@ -148,6 +148,10 @@ th, td {
   height: 77px
 }
 
+#error {
+  line-height: 68px;
+}
+
 #main-nav {
   position: fixed; 
   top: 0; 
@@ -1566,6 +1570,10 @@ div.sticky {
 }
 
 @media (max-width: 767.9px) {
+  #error {
+    line-height: 50px;
+  }
+
   .related-video-width-horizontal .video-card {
     width: calc(100%) !important;
     margin-bottom: 20px !important;

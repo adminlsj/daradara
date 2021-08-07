@@ -35,19 +35,34 @@ class VideoController extends Controller
                 die();
             }
 
-            $tags = array_keys($video->tags_array);
             $video->current_views++;
             $video->views++;
             $video->save();
             $videos = Video::where('playlist_id', $video->playlist_id)->orderBy('created_at', 'desc')->select('id', 'user_id', 'imgur', 'title', 'sd', 'views', 'created_at')->get();
-            $related = Video::where(function($query) use ($tags) {
-                foreach ($tags as $tag) {
+
+            $tags = $tags_random = array_keys($video->tags_array);
+            shuffle($tags_random);
+            $tags_slice = array_slice($tags_random, 0, 5);
+            $related = Video::where(function($query) use ($tags_slice, $tags, &$doujin) {
+                foreach ($tags_slice as $tag) {
                     $query->orWhere('tags_array', 'like', '%"'.$tag.'"%');
+                }
+
+                if (in_array('3D', $tags)) {
+                    $doujin = true;
+                    $query->orWhere('tags_array', 'like', '%"3D"%');
+                }
+                if (in_array('同人', $tags)) {
+                    $doujin = true;
+                    $query->orWhere('tags_array', 'like', '%"同人"%');
+                }
+                if (in_array('Cosplay', $tags)) {
+                    $doujin = true;
+                    $query->orWhere('tags_array', 'like', '%"Cosplay"%');
                 }
             });
 
-            if (in_array('3D', $tags) || in_array('同人', $tags) || in_array('Cosplay', $tags) || in_array('素人自拍', $tags)) {
-                $doujin = true;
+            if ($doujin == true) {
                 $related = $related->with('user:id,name,avatar_temp')->where('cover', '!=', null)->where('id', '!=', $current->id)->inRandomOrder()->select('id', 'user_id', 'cover', 'imgur', 'title', 'sd', 'qualities', 'views', 'duration', 'created_at')->limit(60)->get();
 
             } else {

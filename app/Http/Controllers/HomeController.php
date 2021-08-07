@@ -78,6 +78,7 @@ class HomeController extends Controller
                     break;
 
                 case 'H動漫':
+                    $doujin = false;
                     break;
 
                 case '3D動畫':
