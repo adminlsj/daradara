@@ -8,14 +8,14 @@
 
 <div class="nav-bottom-padding">
 	<div class="hidden-xs" style="position: relative;">
-		<img style="width: 100%; -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0.3)));" src="https://i.imgur.com/8NwzMbsh.png" alt="危機！ -復仇・闇黑網站-">
+		<img style="width: 100%; -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0.3)));" src="https://i.imgur.com/KzhJhsth.jpg" alt="逆轉魔女裁判 ～要被痴女魔女審判了～">
 		<div id="home-banner-wrapper" style="position: absolute; left: 4%; color: white">
 			<h3 style="font-weight: bold"><span style="color: crimson">H</span>anime1<span style="color: crimson">.</span>me</h3>
-			<h1 style="margin: 0; font-weight: bold;">危機！ -復仇・闇黑網站-</h1>
-			<h4 class="hidden-xs">ヤバい！復讐・闇サイト • 中文字幕 • 「妹妹自殺了」突然接到父親連絡的手塚遼，在有著普通兄妹以上愛情的妹妹死亡後，過著行屍走肉般生活。有一天他得知了妹妹自殺的內幕...</h4>
-			<a href="{{ route('video.watch') }}?v=22307" target="_blank" style="display: inline-block; padding: 10px 30px 6px 20px; margin-top: -8px; margin-bottom: -10px" class="hover-opacity-all home-banner-btn home-banner-play-btn play-btn"><span style="vertical-align: middle; font-size: 2em; margin-top: -4px; padding-right: 5px" class="material-icons">play_arrow</span>播放</a>
+			<h1 style="margin: 0; font-weight: bold;">逆轉魔女裁判</h1>
+			<h4 class="hidden-xs">逆転魔女裁判 • 中文字幕 • 魔女艶間薫憑著美貌和巨乳成為學園的女王，而常常跟蹤她的少年，相羽榮被認為是「狩獵魔女教會的爪牙」，因此被拘束並展開淫亂變態的「逆轉魔女裁判」...</h4>
+			<a href="{{ route('video.watch') }}?v=13804" target="_blank" style="display: inline-block; padding: 10px 30px 6px 20px; margin-top: -8px; margin-bottom: -10px" class="hover-opacity-all home-banner-btn home-banner-play-btn play-btn"><span style="vertical-align: middle; font-size: 2em; margin-top: -4px; padding-right: 5px" class="material-icons">play_arrow</span>播放</a>
 			&nbsp;
-			<a href="{{ route('video.watch') }}?v=22307" class="hover-opacity-all home-banner-btn home-banner-info-btn"><span style="vertical-align: middle; font-size: 1.7em; margin-top: -2px; padding-right: 7px" class="material-icons">info</span>更多資訊</a>
+			<a href="{{ route('video.watch') }}?v=13804" class="hover-opacity-all home-banner-btn home-banner-info-btn"><span style="vertical-align: middle; font-size: 1.7em; margin-top: -2px; padding-right: 7px" class="material-icons">info</span>更多資訊</a>
 		</div>
 	</div>
 
