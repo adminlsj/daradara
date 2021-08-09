@@ -9,6 +9,7 @@ use App\Mail\UserReport;
 use Spatie\Browsershot\Browsershot;
 use Illuminate\Support\Facades\Log;
 use App\Rule34;
+use App\Cosplayjav;
 use App\Helper;
 use App\Comment;
 use App\User;
@@ -382,6 +383,16 @@ class BotController extends Controller
     public function translateRule34()
     {
         Rule34::translateRule34();
+    }
+
+    public function uploadCosplayjav(Request $request)
+    {
+        Cosplayjav::uploadCosplayjav($request->url);
+    }
+
+    public function translateCosplayjav()
+    {
+        Cosplayjav::translateCosplayjav();
     }
 
     public function comments(Request $request)

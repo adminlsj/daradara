@@ -49,6 +49,9 @@ Route::get('/importRule34', 'BotController@importRule34');
 Route::get('/translateRule34', 'BotController@translateRule34');
 Route::get('/updateRule34Sd', 'BotController@updateRule34Sd');
 
+Route::get('/uploadCosplayjav', 'BotController@uploadCosplayjav');
+Route::get('/translateCosplayjav', 'BotController@translateCosplayjav');
+
 Route::get('/userReport', 'HomeController@userReport')->name('email.userReport');
 Route::get('/user/{user}/upload', 'UserController@userEditUpload')->name('user.userEditUpload');
 Route::post('/user/{user}/userUpdateUpload', 'UserController@userUpdateUpload')->name('user.userUpdateUpload');
