@@ -107,7 +107,7 @@
 
       <div class="tab mobile-padding" style="margin-top: 30px; font-weight: bold;">
         <button id="defaultOpen" data-tabcontent="related-tabcontent" class="tablinks" style="margin-right: 10px;">相關影片</button>
-        <button data-tabcontent="comment-tabcontent" class="tablinks">評論&nbsp;&nbsp;<span id="tab-comments-count" style="color: white; background-color: red; font-size: 12px; border-radius: 10px; padding: 1px 5px">{{ $comments->count() }}</span></button>
+        <button id="comment-tablink" data-videoid="{{ $current->id }}" data-tabcontent="comment-tabcontent" class="tablinks">評論&nbsp;&nbsp;<span id="tab-comments-count" style="color: white; background-color: red; font-size: 12px; border-radius: 10px; padding: 1px 5px">{{ $comments_count }}</span></button>
       </div>
 
       <!-- Tab content -->
@@ -155,9 +155,9 @@
         </div>
       </div>
 
-      <div id="comment-tabcontent" class="tabcontent" style="margin-top: 85px">
+      <div id="comment-tabcontent" class="tabcontent" style="margin-top: 85px;">
         <div id="comment-section-wrapper" class="video-show-comment-width">
-          @include('video.comment-section-wrapper')
+          <!-- Dynamically loaded comments -->
         </div>
 
         <div id="more-related-ad" class="hidden-md hidden-lg" style="text-align: left; padding-left: 5px; padding-top: 5px; margin-top: 0px; margin-bottom: 10px; padding-bottom: 0px; width: 310px; height: 282px; background-color: #3a3c3f; margin-left: 15px; margin-right: 15px; display: inline-block; vertical-align: top;">

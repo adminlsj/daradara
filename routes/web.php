@@ -28,6 +28,7 @@ Route::post('/createComment', 'VideoController@createComment')->name('video.crea
 Route::post('/replyComment', 'VideoController@replyComment')->name('video.replyComment');
 Route::post('/deleteComment', 'VideoController@deleteComment')->name('video.deleteComment');
 Route::post('/commentLike', 'VideoController@commentLike')->name('comment.like');
+Route::get('/loadComment', 'VideoController@loadComment')->name('comment.loadComment');
 
 Route::get('/about', 'HomeController@about');
 Route::get('/contact', 'HomeController@contact');

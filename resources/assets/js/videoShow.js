@@ -18,7 +18,23 @@ $(".tablinks").click(function() {
     $('.tablinks').removeClass("active");
     $(this).addClass("active");
     $('.tabcontent').css('display', 'none');
-    $('#' + id).css('display', 'block');
+    if (id == 'comment-tabcontent') {
+        $.ajax({
+            type:'GET',
+            url:'/loadComment',
+            data: { id: $(this).data("videoid") },
+            success: function(data){
+                $('div#comment-section-wrapper').html(data.comments);
+                $('#' + id).css('display', 'block');
+            },
+            error: function(xhr, ajaxOptions, thrownError){
+                showSnackbar('請刷新頁面後重試。');
+            }
+        });
+
+    } else {
+        $('#' + id).css('display', 'block');
+    }
 });
 
 var sticky = $('#myHeader');
@@ -87,7 +103,7 @@ $('div#video-save-form-wrapper').on("submit", "form#video-save-form", function(e
     })
 });
 
-$('div#comment-create-form-wrapper').on("submit", "form#comment-create-form", function(e) {
+$('div#comment-section-wrapper').on("submit", "form#comment-create-form", function(e) {
     $.ajaxSetup({
         header:$('meta[name="_token"]').attr('content')
     })
@@ -115,7 +131,7 @@ $('div#comment-create-form-wrapper').on("submit", "form#comment-create-form", fu
     })
 });
 
-$('.comment-reply-reply-form-wrapper').on("submit", ".comment-reply-create-form", function(e) {
+$('div#comment-section-wrapper').on("submit", ".comment-reply-create-form", function(e) {
     $.ajaxSetup({
         header:$('meta[name="_token"]').attr('content')
     })
@@ -151,7 +167,7 @@ $("#hide-playlist-btn").click(function() {
     }
 });
 
-$('div#comment-like-form-wrapper').on("submit", "form#comment-like-form", function(e) {
+$('div#comment-section-wrapper').on("submit", "form#comment-like-form", function(e) {
     $.ajaxSetup({
         header:$('meta[name="_token"]').attr('content')
     })
@@ -171,15 +187,15 @@ $('div#comment-like-form-wrapper').on("submit", "form#comment-like-form", functi
     })
 });
 
-$('div#comment-like-form-wrapper').on("click", ".comment-like-btn", function() {
+$('div#comment-section-wrapper').on("click", ".comment-like-btn", function() {
     $(this).parent().parent().find('#is_positive').val(1);
 });
 
-$('div#comment-like-form-wrapper').on("click", ".comment-unlike-btn", function() {
+$('div#comment-section-wrapper').on("click", ".comment-unlike-btn", function() {
     $(this).parent().parent().find('#is_positive').val(0);
 });
 
-$('.comment-reply-btn').click(function() {
+$('div#comment-section-wrapper').on("click", ".comment-reply-btn", function() {
     $(".comment-reply-reply-form-wrapper").css('display', 'none');
     var comment_id = $(this).data("comment-id");
     var comment_wrapper = $('#comment-reply-form-wrapper-' + comment_id);

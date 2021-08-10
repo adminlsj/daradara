@@ -71,20 +71,7 @@ class VideoController extends Controller
 
             $country_code = isset($_SERVER["HTTP_CF_IPCOUNTRY"]) ? $_SERVER["HTTP_CF_IPCOUNTRY"] : 'N/A';
 
-            $comments = Comment::with('user', 'likes', 'replies.user')
-                            ->with('replies.likes')
-                            ->with(['replies' => function($query) {
-                                $query->orderBy('created_at', 'asc');
-                            }])
-                            ->where('foreign_id', $video->id)
-                            ->withCount('likes')
-                            ->orderBy('likes_count', 'desc')
-                            ->orderBy('created_at', 'desc')
-                            ->get()
-                            ->sortBy(function($comment)
-            {
-                return $comment->likes->where('is_positive', false)->count() - $comment->likes->where('is_positive', true)->count();
-            });
+            $comments_count = Comment::where('foreign_id', $video->id)->count();
 
             if (Auth::check()) {
                 $saved = Save::where('user_id', auth()->user()->id)->where('video_id', $video->id)->exists();
@@ -98,7 +85,7 @@ class VideoController extends Controller
             abort(403);
         }
 
-        return view('video.watch-new', compact('video', 'videos', 'current', 'tags', 'country_code', 'comments', 'related', 'doujin', 'is_mobile', 'saved', 'liked'));
+        return view('video.watch-new', compact('video', 'videos', 'current', 'tags', 'country_code', 'comments_count', 'related', 'doujin', 'is_mobile', 'saved', 'liked'));
     }
 
     public function download(Request $request)
@@ -272,6 +259,32 @@ class VideoController extends Controller
             'comment_id' => $comment->id,
             'single_video_comment' => $html,
             'csrf_token' => csrf_token(),
+        ]);
+    }
+
+    public function loadComment(Request $request)
+    {
+        $video_id = $request->id;
+        $comments = Comment::with('user', 'likes', 'replies.user')
+                        ->with('replies.likes')
+                        ->with(['replies' => function($query) {
+                            $query->orderBy('created_at', 'asc');
+                        }])
+                        ->where('foreign_id', $video_id)
+                        ->withCount('likes')
+                        ->orderBy('likes_count', 'desc')
+                        ->orderBy('created_at', 'desc')
+                        ->get()
+                        ->sortBy(function($comment)
+        {
+            return $comment->likes->where('is_positive', false)->count() - $comment->likes->where('is_positive', true)->count();
+        });
+
+        $html = '';
+        $html .= view('video.comment-section-wrapper', compact('video_id', 'comments'));
+
+        return response()->json([
+            'comments' => $html,
         ]);
     }
 
