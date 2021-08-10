@@ -19,20 +19,20 @@ $(".tablinks").click(function() {
     $(this).addClass("active");
     $('.tabcontent').css('display', 'none');
     $('#' + id).css('display', 'block');
-});
+    if (id == 'comment-tabcontent') {
+        $.ajax({
+            type:'GET',
+            url:'/loadComment',
+            data: { id: $(this).data("videoid") },
+            success: function(data){
+                $('div#comment-section-wrapper').html(data.comments);
+            },
+            error: function(xhr, ajaxOptions, thrownError){
+                showSnackbar('請刷新頁面後重試。');
+            }
+        });
 
-$("#comment-tablink").click(function() {
-    $.ajax({
-        type:'GET',
-        url:'/loadComment',
-        data: { id: $(this).data("videoid") },
-        success: function(data){
-            $('div#comment-section-wrapper').html(data.comments);
-        },
-        error: function(xhr, ajaxOptions, thrownError){
-            showSnackbar('請刷新頁面後重試。');
-        }
-    });
+    }
 });
 
 var sticky = $('#myHeader');
