@@ -18,23 +18,21 @@ $(".tablinks").click(function() {
     $('.tablinks').removeClass("active");
     $(this).addClass("active");
     $('.tabcontent').css('display', 'none');
-    if (id == 'comment-tabcontent') {
-        $.ajax({
-            type:'GET',
-            url:'/loadComment',
-            data: { id: $(this).data("videoid") },
-            success: function(data){
-                $('div#comment-section-wrapper').html(data.comments);
-                $('#' + id).css('display', 'block');
-            },
-            error: function(xhr, ajaxOptions, thrownError){
-                showSnackbar('請刷新頁面後重試。');
-            }
-        });
+    $('#' + id).css('display', 'block');
+});
 
-    } else {
-        $('#' + id).css('display', 'block');
-    }
+$("#comment-tablink").click(function() {
+    $.ajax({
+        type:'GET',
+        url:'/loadComment',
+        data: { id: $(this).data("videoid") },
+        success: function(data){
+            $('div#comment-section-wrapper').html(data.comments);
+        },
+        error: function(xhr, ajaxOptions, thrownError){
+            showSnackbar('請刷新頁面後重試。');
+        }
+    });
 });
 
 var sticky = $('#myHeader');
