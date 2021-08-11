@@ -9,10 +9,29 @@ use Carbon\Carbon;
 class Cosplayjav
 {
     public static $removed = [
-        "1080p", "60fps", "jav_full_hd", "tagme actress", "tagme_actress"
+        "1080p", "60fps", "jav_full_hd", "tagme actress", "tagme_actress", "jav", "sex", "720p", "anime", "video", "wings", "cosplay", "idolmaster", "cosplay_sex", "split_roast", "koshimizu_sachiko", "Sano_Ai", "idolmaster_cinderella_girls"
     ];
 
     public static $translations = [
+        "Nidaime_tsubanomi_ojisan" => '二代目つば飲みおじさん',
+        "Zennihon_Kameko_Kyoudou_Kumiai" => '全日本カメコ協同組合',
+        "koshimizu sachiko (輿水幸子)" => '輿水幸子',
+        "Idolmaster (アイドルマスター) Idolmaster cinderella girls (アイドルマスターシンデレラガールズ)" => '偶像大師 灰姑娘女孩',
+        "school_uniform" => 'JK',
+        "thighhighs" => '大腿襪',
+        "膝下襪" => '大腿襪',
+        "purple_hair" => '紫髮',
+        "short_hair" => '短髮',
+        "stockings" => '絲襪',
+        "kneesocks" => '膝上襪',
+        "group_sex" => '群交',
+        "Sano Ai (佐野あい)" => '佐野愛',
+        "sex_tozs" => '性玩具',
+        "vibrator" => '跳蛋',
+        "collar" => '項圈',
+        "JAV_HD" => 'JAVHD',
+        "skirt" => '迷你裙',
+        "game" => '遊戲',
         "blowjob" => '口交',
         "blue_hair" => '藍髮',
         "creampie" => '內射',
