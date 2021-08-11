@@ -166,7 +166,7 @@ class Cosplayjav
 
     public static function translateCosplayjav()
     {
-        $videos = Video::where('foreign_sd', 'ilike', '%"cosplayjav"%')->where('tags_array', '!=', null)/*->where('created_at', '>=', Carbon::now()->subDays(30))*/->get();
+        $videos = Video::where('foreign_sd', 'ilike', '%"cosplayjav"%')->where('tags_array', '!=', null)->where('created_at', '>=', Carbon::now()->subDays(30))->get();
         $translations = Cosplayjav::$translations;
         $removed = Cosplayjav::$removed;
         foreach ($videos as $video) {

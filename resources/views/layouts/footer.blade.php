@@ -20,7 +20,7 @@
     <div class="col-md-2" style="text-align: center; width: calc(1 / 7 * 100% - 2px)">
         <div><a href="/copyright">DMCA</a></div>
         <div><a href="/2257">2257</a></div>
-        <div><a href="/contact">更多</a></div>
+        <div><a href="#">{{ gethostname() }}</a></div>
     </div>
     <div class="col-md-2" style="text-align: center; width: calc(1 / 7 * 100% - 2px)">
         <img style="width: 80px" src="https://i.imgur.com/aJ6decG.gif">
