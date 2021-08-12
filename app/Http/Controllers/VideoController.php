@@ -272,7 +272,6 @@ class VideoController extends Controller
                         }])
                         ->where('foreign_id', $video_id)
                         ->withCount('likes')
-                        ->orderBy('likes_count', 'desc')
                         ->orderBy('created_at', 'desc')
                         ->get()
                         ->sortBy(function($comment)
