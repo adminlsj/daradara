@@ -27,7 +27,7 @@ class HomeController extends Controller
         $tag1 = Video::whereHasTags(['巨乳'], $count)->get();
         $tag2 = Video::whereHasTags(['貧乳'], $count)->get();
         $tag3 = Video::whereHasTags(['肛交'], $count)->get();
-        $tag4 = Video::whereHasTags(['扶他', '偽娘', '耽美'], $count)->get();
+        $tag4 = Video::whereHasTags(['耽美'], $count)->get();
         $tag5 = Video::whereHasTags([], $count)->get();
 
         $rows = [
