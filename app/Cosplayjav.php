@@ -9,12 +9,13 @@ use Carbon\Carbon;
 class Cosplayjav
 {
     public static $removed = [
-        "1080p", "60fps", "jav_full_hd", "tagme actress", "tagme_actress", "jav", "sex", "720p", "anime", "video", "wings", "cosplay", "idolmaster", "cosplay_sex", "split_roast", "koshimizu_sachiko", "Sano_Ai", "idolmaster_cinderella_girls", "dressing", "Kosutchi", "lightning", "pantsu"
+        "1080p", "60fps", "jav_full_hd", "tagme actress", "tagme_actress", "jav", "sex", "720p", "anime", "video", "wings", "cosplay", "idolmaster", "cosplay_sex", "split_roast", "koshimizu_sachiko", "Sano_Ai", "idolmaster_cinderella_girls", "dressing", "Kosutchi", "lightning", "pantsu", "final_fantasy", "doujin"
     ];
 
     public static $translations = [
+        "Lightning (ライトニング)" => '雷光',
         "pink_hair" => '粉髮',
-        "final_fantasy" => 'Final Fantasy',
+        "Final Fantasy (ファイナルファンタジー)" => 'Final Fantasy',
         "Nidaime_tsubanomi_ojisan" => '二代目つば飲みおじさん',
         "Zennihon_Kameko_Kyoudou_Kumiai" => '全日本カメコ協同組合',
         "koshimizu sachiko (輿水幸子)" => '輿水幸子',
