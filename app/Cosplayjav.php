@@ -9,10 +9,17 @@ use Carbon\Carbon;
 class Cosplayjav
 {
     public static $removed = [
-        "1080p", "60fps", "jav_full_hd", "tagme actress", "tagme_actress", "jav", "sex", "720p", "anime", "video", "wings", "cosplay", "idolmaster", "cosplay_sex", "split_roast", "koshimizu_sachiko", "Sano_Ai", "idolmaster_cinderella_girls", "dressing", "Kosutchi", "lightning", "pantsu", "final_fantasy", "doujin"
+        "1080p", "60fps", "jav_full_hd", "tagme actress", "tagme_actress", "jav", "sex", "720p", "anime", "video", "wings", "cosplay", "idolmaster", "cosplay_sex", "split_roast", "koshimizu_sachiko", "Sano_Ai", "idolmaster_cinderella_girls", "dressing", "Kosutchi", "lightning", "pantsu", "final_fantasy", "doujin", "imageset", "Dangan_ronpa", "Enoshima_Junko"
     ];
 
     public static $translations = [
+        "enoshima junko (江ノ島盾子)" => '江之島盾子', 
+        "dangan ronpa (ダンガンロンパ)" => '槍彈辯駁',
+        "shaved_pussy" => '白虎',
+        "twin_tails" => '雙馬尾',
+        "cum_on_ass" => '臀射',
+        "handjob" => '手交',
+        "blonde" => '金髮',
         "Lightning (ライトニング)" => '雷光',
         "pink_hair" => '粉髮',
         "Final Fantasy (ファイナルファンタジー)" => 'Final Fantasy',
@@ -26,6 +33,7 @@ class Cosplayjav
         "purple_hair" => '紫髮',
         "short_hair" => '短髮',
         "stockings" => '絲襪',
+        "kneehighs" => '膝上襪',
         "kneesocks" => '膝上襪',
         "group_sex" => '群交',
         "Sano Ai (佐野あい)" => '佐野愛',
