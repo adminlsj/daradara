@@ -120,9 +120,6 @@ class HomeController extends Controller
         }
 
         if ($tags = $request->tags) {
-            if (!in_array($tags[0], Video::$all_tag)) {
-                $doujin = true;
-            }
             if ($request->broad) {
                 $videos = $videos->where(function($query) use ($tags) {
                     foreach ($tags as $tag) {
