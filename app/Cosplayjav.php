@@ -9,10 +9,20 @@ use Carbon\Carbon;
 class Cosplayjav
 {
     public static $removed = [
-        "1080p", "60fps", "jav_full_hd", "tagme actress", "tagme_actress", "jav", "sex", "720p", "anime", "video", "wings", "cosplay", "idolmaster", "cosplay_sex", "split_roast", "koshimizu_sachiko", "Sano_Ai", "idolmaster_cinderella_girls", "dressing", "Kosutchi", "lightning", "pantsu", "final_fantasy", "doujin", "imageset", "Dangan_ronpa", "Enoshima_Junko"
+        "1080p", "60fps", "jav_full_hd", "tagme actress", "tagme_actress", "jav", "sex", "720p", "anime", "video", "wings", "cosplay", "idolmaster", "cosplay_sex", "split_roast", "koshimizu_sachiko", "Sano_Ai", "idolmaster_cinderella_girls", "dressing", "Kosutchi", "lightning", "pantsu", "final_fantasy", "doujin", "imageset", "Dangan_ronpa", "Enoshima_Junko", "bondage", "bukkake", "SAIT-024", "anal_toys", "nishita_karina", "Nanpa_Mokushiroku", "Violet Evergarden", "Violet_Evergarden"
     ];
 
     public static $translations = [
+        "Violet Evergarden (ヴァイオレット・エヴァーガーデン)" => '紫羅蘭永恆花園',
+        "Nishita Karina (西田カリナ)" => '西田卡莉娜',
+        "double_penetration" => '雙洞齊下',
+        "butt_plug" => '肛門塞',
+        "sex_toys" => '性玩具',
+        "pillory" => '頸手枷',
+        "facial" => '顏射',
+        "rope" => '綑綁',
+        "bdsm" => 'BDSM',
+        "anal" => '肛交',
         "enoshima junko (江ノ島盾子)" => '江之島盾子', 
         "dangan ronpa (ダンガンロンパ)" => '槍彈辯駁',
         "shaved_pussy" => '白虎',
