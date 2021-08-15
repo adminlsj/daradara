@@ -14,7 +14,7 @@
 Route::get('/', 'HomeController@index');
 
 Auth::routes();
-Route::resource('user', 'UserController');
+// Route::resource('user', 'UserController');
 Route::get('auth/{provider}', 'Auth\LoginController@redirectToProvider');
 Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
 
