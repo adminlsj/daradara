@@ -11,12 +11,12 @@
 |
 */
 
-Route::group(['middleware' => 'throttle:5,1'], function () {
+Route::group(['middleware' => 'throttle:60,1'], function () {
 
 	Route::get('/', 'HomeController@index');
 
-	Auth::routes();
 	// Route::resource('user', 'UserController');
+	Auth::routes();
 	Route::get('auth/{provider}', 'Auth\LoginController@redirectToProvider');
 	Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
 
