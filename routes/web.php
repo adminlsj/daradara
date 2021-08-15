@@ -11,7 +11,7 @@
 |
 */
 
-Route::group(['middleware' => 'throttle:120,1'], function () {
+Route::group(['middleware' => 'throttle:10,1'], function () {
 
 	Route::get('/', 'HomeController@index');
 
