@@ -39,8 +39,8 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
-        if ($exception instanceof ThrottleRequestsException) {
-            if (429 === $exception->getStatusCode()) {
+        if ($exception instanceof HttpException) {
+            if ('Too Many Attempts.' == $exception->getMessage()) {
                 event(new Lockout(request()));
             }
         }
