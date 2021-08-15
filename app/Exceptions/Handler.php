@@ -6,7 +6,7 @@ use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Auth\Events\Lockout;
-use Symfony\Component\HttpKernel\Exception\HttpException;
+use Illuminate\Http\Exceptions\ThrottleRequestsException;
 
 class Handler extends ExceptionHandler
 {
@@ -39,8 +39,8 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
-        if ($exception instanceof HttpException) {
-            if ('Too Many Attempts.' == $exception->getMessage()) {
+        if ($exception instanceof ThrottleRequestsException) {
+            if (429 === $exception->getStatusCode()) {
                 event(new Lockout(request()));
             }
         }
