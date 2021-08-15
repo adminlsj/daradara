@@ -28,10 +28,10 @@ class LogThrottleLimitReached
         $request = $event->request;
 
         \Log::error(sprintf(
-            'Throttling rate limit reached. URL: %s, Body: %s, IP: %s',
+            'Throttling rate limit reached. IP: %s, URL: %s, Body: %s',
+            $request->ip(),
             $request->url(),
-            json_encode($request->all()),
-            $request->ip()
+            json_encode($request->all())
         ));
     }
 }
