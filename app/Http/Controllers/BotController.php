@@ -22,6 +22,8 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
+        return $request->ip();
+
         /* $videos = Video::where('tags', 'ilike', '% 睡房 %')->get();
         foreach ($videos as $video) {
             $tags_array = $video->tags_array;
