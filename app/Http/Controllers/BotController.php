@@ -14,6 +14,7 @@ use App\Helper;
 use App\Comment;
 use App\User;
 use Carbon\Carbon;
+use App\Spankbang;
 
 class BotController extends Controller
 {
@@ -21,8 +22,6 @@ class BotController extends Controller
     {
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
-
-        return $request->ip();
 
         /* $videos = Video::where('tags', 'ilike', '% 睡房 %')->get();
         foreach ($videos as $video) {
@@ -72,124 +71,14 @@ class BotController extends Controller
         $video->save();
     }
 
-    public function updateSpankbang(Request $request)
+    public function updateSpankbang()
     {
-        $videos = Video::where('foreign_sd', 'ilike', '%"spankbang"%')->select('id', 'title', 'sd', 'outsource', 'tags_array', 'foreign_sd', 'created_at')->get();
-
-        foreach ($videos as $video) {
-
-            $pass = false;
-            $sd = '';
-            $source = '';
-            $default = '';
-            $qualities = [];
-
-            $requests = Browsershot::url($video->foreign_sd['spankbang'])
-                ->useCookies(['username' => 'admin'])
-                ->timeout(3600)
-                ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
-                ->triggeredRequests();
-
-            foreach ($requests as $request) {
-                if (strpos($request['url'], 'p.mp4') !== false) {
-                    $sd = $request['url'];
-                    $source = $request['url'];
-                    $pass = true;
-                }
-            }
-
-            if ($pass) {
-                if (in_array('1080p', array_keys($video->tags_array))) {
-                    $sd = str_replace('-720p.mp4', '-1080p.mp4', $sd);
-                    $qualities['1080'] = $sd;
-                }
-                if (strpos($source, '720p') !== false) {
-                    $qualities['720'] = $source;
-                    $source = str_replace('-720p.mp4', '-480p.mp4', $source);
-                }
-                if (strpos($source, '480p') !== false) {
-                    $qualities['480'] = $source;
-                    $source = str_replace('-480p.mp4', '-240p.mp4', $source);
-                }
-                if (strpos($source, '240p') !== false) {
-                    $qualities['240'] = $source;
-                }
-
-                $video->sd = reset($qualities);
-                $video->qualities = $qualities;
-                $video->outsource = false;
-                $video->save();
-
-            } else {
-                Mail::to('vicky.avionteam@gmail.com')->send(new UserReport('master', 'Spankbang update failed', $video->id, $video->title, $video->sd, 'master', 'master'));
-                $temp = $video->foreign_sd;
-                $temp['error'] = $video->foreign_sd['spankbang'];
-                unset($temp['spankbang']);
-                $video->foreign_sd = $temp;
-                $video->save();
-            }
-
-        }
+        Spankbang::updateSpankbang();
     }
 
-    public function updateSpankbangErrors(Request $request)
+    public function updateSpankbangErrors()
     {
-        $videos = Video::where('foreign_sd', 'ilike', '%"error"%')->where('foreign_sd', 'ilike', '%spankbang%')->select('id', 'title', 'sd', 'outsource', 'tags_array', 'foreign_sd', 'created_at')->get();
-
-        foreach ($videos as $video) {
-
-            if (array_key_exists("error", $video->foreign_sd) && strpos($video->foreign_sd["error"], 'spankbang') !== false ) {
-                $pass = false;
-                $sd = '';
-                $source = '';
-                $default = '';
-                $qualities = [];
-
-                $requests = Browsershot::url($video->foreign_sd["error"])
-                    ->useCookies(['username' => 'admin'])
-                    ->timeout(3600)
-                    ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
-                    ->triggeredRequests();
-
-                foreach ($requests as $request) {
-                    if (strpos($request['url'], 'p.mp4') !== false) {
-                        $sd = $request['url'];
-                        $source = $request['url'];
-                        $pass = true;
-                    }
-                }
-
-                if ($pass) {
-                    if (in_array('1080p', array_keys($video->tags_array))) {
-                        $sd = str_replace('-720p.mp4', '-1080p.mp4', $sd);
-                        $qualities['1080'] = $sd;
-                    }
-                    if (strpos($source, '720p') !== false) {
-                        $qualities['720'] = $source;
-                        $source = str_replace('-720p.mp4', '-480p.mp4', $source);
-                    }
-                    if (strpos($source, '480p') !== false) {
-                        $qualities['480'] = $source;
-                        $source = str_replace('-480p.mp4', '-240p.mp4', $source);
-                    }
-                    if (strpos($source, '240p') !== false) {
-                        $qualities['240'] = $source;
-                    }
-
-                    $temp = $video->foreign_sd;
-                    $temp['spankbang'] = $video->foreign_sd['error'];
-                    unset($temp['error']);
-                    $video->foreign_sd = $temp;
-                    $video->sd = reset($qualities);
-                    $video->qualities = $qualities;
-                    $video->outsource = false;
-                    $video->save();
-
-                } else {
-                    Mail::to('vicky.avionteam@gmail.com')->send(new UserReport('master', 'Spankbang update failed', $video->id, $video->title, $video->sd, 'master', 'master'));
-                }
-            }
-        }
+        Spankbang::updateSpankbangErrors();
     }
 
     public function updateYoujizz(Request $request)
