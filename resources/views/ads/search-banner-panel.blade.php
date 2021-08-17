@@ -11,8 +11,11 @@
 	</noscript>
 
 	<span style="vertical-align: top; margin-top: 5px;">
+		<!-- JuicyAds v3.1 -->
+		<script type="text/javascript" data-cfasync="false" async src="https://poweredby.jads.co/js/jads.js"></script>
 		<ins id="919232" data-width="300" data-height="262"></ins>
 		<script type="text/javascript" data-cfasync="false" async>(adsbyjuicy = window.adsbyjuicy || []).push({'adzone':919232});</script>
+		<!--JuicyAds END-->
 
 		<script type="application/javascript">
 		    var ad_idzone = "4372838",

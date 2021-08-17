@@ -14,8 +14,11 @@
 	</noscript>
 
 	<span style="vertical-align: top; margin-top: 5px;">
-		<ins id="906454" data-width="300" data-height="262"></ins>
-		<script type="text/javascript" data-cfasync="false" async>(adsbyjuicy = window.adsbyjuicy || []).push({'adzone':906454});</script>
+		<!-- JuicyAds v3.1 -->
+		<script type="text/javascript" data-cfasync="false" async src="https://poweredby.jads.co/js/jads.js"></script>
+		<ins id="940480" data-width="300" data-height="262"></ins>
+		<script type="text/javascript" data-cfasync="false" async>(adsbyjuicy = window.adsbyjuicy || []).push({'adzone':940480});</script>
+		<!--JuicyAds END-->
 	</span>
 </div>
 
