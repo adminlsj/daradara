@@ -19,7 +19,7 @@
 	@endif
 </div>
 
-<div id="comment-start">
+<div id="comment-start" style="margin-bottom: -15px;">
 	@foreach ($comments as $comment)
 		@if ($loop->first)
 			<div style="margin-top: 5px"></div>

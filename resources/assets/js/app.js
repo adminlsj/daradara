@@ -81,6 +81,7 @@ $('.load-more-related-btn').click(function() {
     hidden.removeClass('hidden-sm');
     $('#more-related-ad').css('margin-top', '0px');
     $('#exoclick-banner-adjust').css('margin-top', '0px');
+    $('#double-banners-adjust').css('margin-top', '-15px');
 })
 
 $('#close-mobile-ad-btn').click(function() {

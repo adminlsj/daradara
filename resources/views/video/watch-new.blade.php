@@ -94,21 +94,25 @@
         @include('video.playlist-panel')
       </div>
 
-      <div class="hidden-md hidden-lg" style="text-align: left; padding-left: 5px; padding-top: 5px; margin-top: 15px; margin-bottom: -15px; padding-bottom: 0px; margin-left: 15px; margin-right: 15px; width: 310px; height: 282px; background-color: #3a3c3f; display: inline-block;">
-        <div style="margin-bottom: 5px; color: white; font-size: 12px;">點點廣告，贊助我們（●´∀｀）ノ♡</div>
-        <ins class="adsbyexoclick" data-zoneid="4372438"></ins>
-      </div>
+      @if (!$is_mobile)
+        <div class="hidden-md hidden-lg" style="text-align: left; padding-left: 5px; padding-top: 5px; margin-top: 15px; margin-bottom: -15px; padding-bottom: 0px; margin-left: 15px; margin-right: 15px; width: 310px; height: 282px; background-color: #3a3c3f; display: inline-block;">
+          <div style="margin-bottom: 5px; color: white; font-size: 12px;">點點廣告，贊助我們（●´∀｀）ノ♡</div>
+          <ins class="adsbyexoclick" data-zoneid="4372438"></ins>
+        </div>
 
-      <div class="hidden-xs hidden-md hidden-lg" style="text-align: left; padding-left: 5px; padding-top: 5px; margin-top: 15px; margin-bottom: -15px; padding-bottom: 0px; width: 310px; height: 282px; background-color: #3a3c3f; display: inline-block; vertical-align: top; margin-left: -5px;">
-        <div style="margin-bottom: 5px; color: white; font-size: 12px;">點點廣告，贊助我們（●´∀｀）ノ♡</div>
-        <!-- JuicyAds v3.1 -->
-        <script type="text/javascript" data-cfasync="false" async src="https://poweredby.jads.co/js/jads.js"></script>
-        <ins id="940485" data-width="300" data-height="262"></ins>
-        <script type="text/javascript" data-cfasync="false" async>(adsbyjuicy = window.adsbyjuicy || []).push({'adzone':940485});</script>
-        <!--JuicyAds END-->
-      </div>
+        <div class="hidden-xs hidden-md hidden-lg" style="text-align: left; padding-left: 5px; padding-top: 5px; margin-top: 15px; margin-bottom: -15px; padding-bottom: 0px; width: 310px; height: 282px; background-color: #3a3c3f; display: inline-block; vertical-align: top; margin-left: -5px;">
+          <div style="margin-bottom: 5px; color: white; font-size: 12px;">點點廣告，贊助我們（●´∀｀）ノ♡</div>
+          <!-- JuicyAds v3.1 -->
+          <script type="text/javascript" data-cfasync="false" async src="https://poweredby.jads.co/js/jads.js"></script>
+          <ins id="940485" data-width="300" data-height="262"></ins>
+          <script type="text/javascript" data-cfasync="false" async>(adsbyjuicy = window.adsbyjuicy || []).push({'adzone':940485});</script>
+          <!--JuicyAds END-->
+        </div>
+      @else
+        @include('ads.watch-double-banners')
+      @endif
 
-      <div class="tab mobile-padding" style="margin-top: 30px; font-weight: bold;">
+      <div id="tablinks-wrapper" class="tab mobile-padding" style="margin-top: 30px; font-weight: bold;">
         <button id="defaultOpen" data-tabcontent="related-tabcontent" class="tablinks" style="margin-right: 10px;">相關影片</button>
         <button id="comment-tablink" data-videoid="{{ $current->id }}" data-tabcontent="comment-tabcontent" class="tablinks">評論&nbsp;&nbsp;<span id="tab-comments-count" style="color: white; background-color: red; font-size: 12px; border-radius: 10px; padding: 1px 5px">{{ $comments_count }}</span></button>
       </div>
@@ -145,20 +149,6 @@
             @endif
         </div>
         <div class="load-more-related-btn related-watch-wrap hidden-md hidden-lg" style="font-weight: 400 !important; margin-top: 0px;">更多相關影片</div>
-
-        <div id="more-related-ad" class="hidden-md hidden-lg" style="text-align: left; padding-left: 5px; padding-top: 5px; margin-top: 8px; margin-bottom: 10px; padding-bottom: 0px; width: 310px; height: 282px; background-color: #3a3c3f; display: inline-block; vertical-align: top;">
-          <div style="margin-bottom: 5px; color: white; font-size: 12px;">點點廣告，贊助我們（●´∀｀）ノ♡</div>
-          <!-- JuicyAds v3.1 -->
-          <script type="text/javascript" data-cfasync="false" async src="https://poweredby.jads.co/js/jads.js"></script>
-          <ins id="940485" data-width="300" data-height="262"></ins>
-          <script type="text/javascript" data-cfasync="false" async>(adsbyjuicy = window.adsbyjuicy || []).push({'adzone':940485});</script>
-          <!--JuicyAds END-->
-        </div>
-
-        <div id="exoclick-banner-adjust" class="hidden-xs hidden-md hidden-lg" style="text-align: left; padding-left: 5px; padding-top: 5px; margin-top: 8px; margin-bottom: 10px; padding-bottom: 0px; width: 310px; height: 282px; background-color: #3a3c3f; margin-left: 10px; display: inline-block; vertical-align: top;">
-          <div style="margin-bottom: 5px; color: white; font-size: 12px;">點點廣告，贊助我們（●´∀｀）ノ♡</div>
-          <ins class="adsbyexoclick" data-zoneid="4372438"></ins>
-        </div>
       </div>
 
       <div id="comment-tabcontent" class="tabcontent" style="margin-top: 85px">
@@ -168,21 +158,30 @@
           </div>
           <!-- Dynamically loaded comments -->
         </div>
-
-        <div id="more-related-ad" class="hidden-md hidden-lg" style="text-align: left; padding-left: 5px; padding-top: 5px; margin-top: 0px; margin-bottom: 10px; padding-bottom: 0px; width: 310px; height: 282px; background-color: #3a3c3f; margin-left: 15px; margin-right: 15px; display: inline-block; vertical-align: top;">
-          <div style="margin-bottom: 5px; color: white; font-size: 12px;">點點廣告，贊助我們（●´∀｀）ノ♡</div>
-          <!-- JuicyAds v3.1 -->
-          <script type="text/javascript" data-cfasync="false" async src="https://poweredby.jads.co/js/jads.js"></script>
-          <ins id="940485" data-width="300" data-height="262"></ins>
-          <script type="text/javascript" data-cfasync="false" async>(adsbyjuicy = window.adsbyjuicy || []).push({'adzone':940485});</script>
-          <!--JuicyAds END-->
-        </div>
-
-        <div class="hidden-xs hidden-md hidden-lg" style="text-align: left; padding-left: 5px; padding-top: 5px; margin-top: 0px; margin-bottom: 10px; padding-bottom: 0px; width: 310px; height: 282px; background-color: #3a3c3f; margin-left: -5px; display: inline-block; vertical-align: top;">
-          <div style="margin-bottom: 5px; color: white; font-size: 12px;">點點廣告，贊助我們（●´∀｀）ノ♡</div>
-          <ins class="adsbyexoclick" data-zoneid="4372438"></ins>
-        </div>
       </div>
+
+      @if (!$is_mobile)
+        <div style="padding: 0 15px;">
+          <div id="more-related-ad" class="hidden-md hidden-lg" style="text-align: left; padding-left: 5px; padding-top: 5px; margin-top: 8px; margin-bottom: 10px; padding-bottom: 0px; width: 310px; height: 282px; background-color: #3a3c3f; display: inline-block; vertical-align: top;">
+            <div style="margin-bottom: 5px; color: white; font-size: 12px;">點點廣告，贊助我們（●´∀｀）ノ♡</div>
+            <!-- JuicyAds v3.1 -->
+            <script type="text/javascript" data-cfasync="false" async src="https://poweredby.jads.co/js/jads.js"></script>
+            <ins id="940485" data-width="300" data-height="262"></ins>
+            <script type="text/javascript" data-cfasync="false" async>(adsbyjuicy = window.adsbyjuicy || []).push({'adzone':940485});</script>
+            <!--JuicyAds END-->
+          </div>
+
+          <div id="exoclick-banner-adjust" class="hidden-xs hidden-md hidden-lg" style="text-align: left; padding-left: 5px; padding-top: 5px; margin-top: 8px; margin-bottom: 10px; padding-bottom: 0px; width: 310px; height: 282px; background-color: #3a3c3f; margin-left: 10px; display: inline-block; vertical-align: top;">
+            <div style="margin-bottom: 5px; color: white; font-size: 12px;">點點廣告，贊助我們（●´∀｀）ノ♡</div>
+            <ins class="adsbyexoclick" data-zoneid="4372438"></ins>
+          </div>
+        </div>
+      @else
+        <div id="double-banners-adjust" style="margin-top: -8px;">
+          @include('ads.watch-double-banners')
+        </div>
+      @endif
+
     </div>
 
     <div class="col-md-3 single-show-list">
@@ -224,4 +223,23 @@
     @include('user.loginModal')
   @endif
 </div>
+
+@if ($is_mobile)
+  <script>
+    var ratio = ($(window).width() / 2) / 300;
+    if (ratio < 1) {
+      var exoclick = $('.scaled-exoclick');
+      var juicyads = $('.scaled-juicyads');
+      exoclick.css('transform-origin', 'top right');
+      exoclick.css('transform', 'scale(' + ratio + ')');
+      juicyads.css('transform-origin', 'top left');
+      juicyads.css('transform', 'scale(' + ratio + ')');
+
+      var gap = 250 - 250 * ratio;
+      $('#tablinks-wrapper').css('margin-top', (5 - gap) + 'px');
+      $('.tabcontent').css('margin-top', '55px');
+    }
+  </script>
+@endif
+
 @endsection
