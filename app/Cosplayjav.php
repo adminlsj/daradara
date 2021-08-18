@@ -9,10 +9,16 @@ use Carbon\Carbon;
 class Cosplayjav
 {
     public static $removed = [
-        "1080p", "60fps", "jav_full_hd", "tagme actress", "tagme_actress", "jav", "sex", "720p", "anime", "video", "wings", "cosplay", "idolmaster", "cosplay_sex", "split_roast", "koshimizu_sachiko", "Sano_Ai", "idolmaster_cinderella_girls", "dressing", "Kosutchi", "lightning", "pantsu", "final_fantasy", "doujin", "imageset", "Dangan_ronpa", "Enoshima_Junko", "bondage", "bukkake", "SAIT-024", "anal_toys", "nishita_karina", "Nanpa_Mokushiroku", "Violet Evergarden", "Violet_Evergarden"
+        "1080p", "60fps", "jav_full_hd", "tagme actress", "tagme_actress", "jav", "sex", "720p", "anime", "video", "wings", "cosplay", "idolmaster", "cosplay_sex", "split_roast", "koshimizu_sachiko", "Sano_Ai", "idolmaster_cinderella_girls", "dressing", "Kosutchi", "lightning", "pantsu", "final_fantasy", "doujin", "imageset", "Dangan_ronpa", "Enoshima_Junko", "bondage", "bukkake", "SAIT-024", "anal_toys", "nishita_karina", "Nanpa_Mokushiroku", "Violet Evergarden", "Violet_Evergarden", "NCY-104", "astolfo", "fate/apocrypha"
     ];
 
     public static $translations = [
+        "fate series (フェイト・シリーズ) fate/apocrypha" => 'Fate/Apocrypha',
+        "Zen_nihon_Kameko_kyoudou_kumiai" => '全日本カメコ協同組合',
+        "astolfo (アストルフォ)" => '阿斯托爾福',
+        "cum_on_boobs" => '乳射',
+        "fate_series" => 'Fate系列',
+        "thong" => '丁字褲',
         "Violet Evergarden (ヴァイオレット・エヴァーガーデン)" => '紫羅蘭永恆花園',
         "Nishita Karina (西田カリナ)" => '西田卡莉娜',
         "double_penetration" => '雙洞齊下',
