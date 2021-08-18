@@ -180,6 +180,18 @@
         <div id="double-banners-adjust" style="margin-top: -8px;">
           @include('ads.watch-double-banners')
         </div>
+        <div id="watch-footer" style="padding: 0 15px; padding-bottom: 15px;">
+          <h1 style="color: white; font-weight: bold; margin-top: 0px"><span style="color: crimson">H</span>anime1<span style="color: crimson">.</span>me</h1>
+          <div style="display: inline-block"><a style="color: gray" href="/about">關於</a></div> - 
+          <div style="display: inline-block"><a style="color: gray" href="/contact">廣告</a></div> - 
+          <div style="display: inline-block"><a style="color: gray" href="/contact">聯絡</a></div> - 
+          <div style="display: inline-block"><a style="color: gray" href="/terms">服務條款</a></div> - 
+          <div style="display: inline-block"><a style="color: gray" href="/policies">社群規範</a></div> - 
+          <div style="display: inline-block"><a style="color: gray" href="/copyright">版權申訴</a></div> - 
+          <div style="display: inline-block"><a style="color: gray" href="/copyright">DMCA</a></div> - 
+          <div style="display: inline-block"><a style="color: gray" href="/2257">2257</a></div> - 
+          <div style="display: inline-block"><a style="color: gray" href="#">{{ gethostname() }}</a></div>
+        </div>
       @endif
 
     </div>
@@ -238,6 +250,7 @@
       var gap = 250 - 250 * ratio;
       $('#tablinks-wrapper').css('margin-top', (5 - gap) + 'px');
       $('.tabcontent').css('margin-top', '55px');
+      $('#watch-footer').css('margin-top', (15 - gap) + 'px');
     }
   </script>
 @endif
