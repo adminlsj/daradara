@@ -181,7 +181,7 @@
           @include('ads.watch-double-banners')
         </div>
         <div id="watch-footer" style="padding: 0 15px; padding-bottom: 15px;">
-          <h1 style="color: white; font-weight: bold; margin-top: 0px"><span style="color: crimson">H</span>anime1<span style="color: crimson">.</span>me</h1>
+          <h2 style="color: white; font-weight: bold; margin-top: 0px"><span style="color: crimson">H</span>anime1<span style="color: crimson">.</span>me</h2>
           <div style="display: inline-block"><a style="color: gray" href="/about">關於</a></div> - 
           <div style="display: inline-block"><a style="color: gray" href="/contact">廣告</a></div> - 
           <div style="display: inline-block"><a style="color: gray" href="/contact">聯絡</a></div> - 
