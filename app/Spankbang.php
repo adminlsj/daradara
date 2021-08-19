@@ -130,7 +130,7 @@ class Spankbang
 
         $videos = Video::where('foreign_sd', 'ilike', '%"spankbang"%')->select('id', 'title', 'sd', 'outsource', 'tags_array', 'foreign_sd', 'created_at')->get();
 
-        $base = Carbon::now()->addHours(3)->timestamp;
+        $base = Carbon::now()->addHours(4)->timestamp;
 
         foreach ($videos as $video) {
             $time = Helper::get_string_between($video->sd, ',', '&m=');
@@ -233,7 +233,7 @@ class Spankbang
                     }
                 } */
 
-                $curl_connection = curl_init($video->foreign_sd['spankbang']);
+                $curl_connection = curl_init($video->foreign_sd['error']);
                 curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
                 curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
                 curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
@@ -283,14 +283,29 @@ class Spankbang
         Log::info('Spankbang errors update ended...');
     }
 
-    public static function checkSpankbang()
+    public static function checkSpankbangOutdate()
     {
         $items = 0;
-        $base = Carbon::now()->addHours(3)->timestamp;
+        $base = Carbon::now()->addHours(4)->timestamp;
         $videos = Video::where('foreign_sd', 'ilike', '%"spankbang"%')->select('id', 'title', 'sd', 'foreign_sd', 'created_at')->get();
         foreach ($videos as $video) {
             $time = Helper::get_string_between($video->sd, ',', '&m=');
             if ($time < $base) {
+                echo $time.'<br>';
+                $items++;
+            }
+        }
+        echo $items;
+    }
+
+    public static function checkSpankbangUpdate()
+    {
+        $items = 0;
+        $base = Carbon::now()->addHours(9)->timestamp;
+        $videos = Video::where('foreign_sd', 'ilike', '%"spankbang"%')->select('id', 'title', 'sd', 'foreign_sd', 'created_at')->get();
+        foreach ($videos as $video) {
+            $time = Helper::get_string_between($video->sd, ',', '&m=');
+            if ($time > $base) {
                 echo $time.'<br>';
                 $items++;
             }

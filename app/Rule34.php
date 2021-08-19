@@ -32,6 +32,8 @@ class Rule34
     ];
 
     public static $translations = [
+        "sett" => '賽特',
+        "aphelios" => '亞菲利歐',
         "saki saki (kanojo mo kanojo)" => '佐木咲',
         "teacher and student" => '師生',
         "kanojo mo kanojo" => '女朋友 and 女朋友',
