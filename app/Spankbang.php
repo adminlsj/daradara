@@ -202,4 +202,19 @@ class Spankbang
 
         Log::info('Spankbang errors update ended...');
     }
+
+    public function checkSpankbang(Request $request)
+    {
+        $items = 0;
+        $base = Carbon::now()->addHours(9)->timestamp;
+        $videos = Video::where('foreign_sd', 'ilike', '%"spankbang"%')->select('id', 'title', 'sd', 'foreign_sd', 'created_at')->get();
+        foreach ($videos as $video) {
+            $time = $this->get_string_between($video->sd, ',', '&m=');
+            if ($time < $base) {
+                echo $time.'<br>';
+                $items++;
+            }
+        }
+        echo $items;
+    }
 }

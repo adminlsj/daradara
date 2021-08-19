@@ -86,6 +86,11 @@ class BotController extends Controller
         Spankbang::updateSpankbangErrors();
     }
 
+    public function checkSpankbang()
+    {
+        Spankbang::checkSpankbang();
+    }
+
     public function updateYoujizz(Request $request)
     {
         Log::info('Youjizz update started...');
