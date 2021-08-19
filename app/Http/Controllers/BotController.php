@@ -23,13 +23,50 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $url = 'https://spankbang.com/5gj9v/video/violet+evergarden+cosplay+sex+sait+024+nishita+karina';
-        $curl_connection = curl_init($url);
-        curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
-        curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
-        $html = curl_exec($curl_connection);
-        curl_close($curl_connection);
+        $videos = Video::where('foreign_sd', 'ilike', '%"spankbang"%')->select('id', 'title', 'sd', 'outsource', 'tags_array', 'foreign_sd', 'created_at')->get();
+
+        $base = Carbon::now()->addHours(3)->timestamp;
+
+        foreach ($videos as $video) {
+            $time = Helper::get_string_between($video->sd, ',', '&m=');
+            
+            if ($time < $base) {
+
+                $curl_connection = curl_init($video->foreign_sd['spankbang']);
+                curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+                curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+                $html = curl_exec($curl_connection);
+                curl_close($curl_connection);
+
+                $sd = Helper::get_string_between($html, '"contentUrl": "', '"');
+                $source = Helper::get_string_between($html, '"contentUrl": "', '"');
+                $qualities = [];
+
+                if (strpos($sd, 'https://vdownload') !== false) {
+                    if (in_array('1080p', array_keys($video->tags_array))) {
+                        $sd = str_replace('-720p.mp4', '-1080p.mp4', $sd);
+                        $qualities['1080'] = $sd;
+                    }
+                    if (strpos($source, '720p') !== false) {
+                        $qualities['720'] = $source;
+                        $source = str_replace('-720p.mp4', '-480p.mp4', $source);
+                    }
+                    if (strpos($source, '480p') !== false) {
+                        $qualities['480'] = $source;
+                        $source = str_replace('-480p.mp4', '-240p.mp4', $source);
+                    }
+                    if (strpos($source, '240p') !== false) {
+                        $qualities['240'] = $source;
+                    }
+
+                    $video->sd = reset($qualities);
+                    $video->qualities = $qualities;
+                    $video->outsource = false;
+                    $video->save();
+                }
+            }
+        }
 
         /* $videos = Video::where('tags', 'ilike', '% 睡房 %')->get();
         foreach ($videos as $video) {
