@@ -23,6 +23,14 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
+        $url = 'https://spankbang.com/5gj9v/video/violet+evergarden+cosplay+sex+sait+024+nishita+karina';
+        $curl_connection = curl_init($url);
+        curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+        curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+        $html = curl_exec($curl_connection);
+        curl_close($curl_connection);
+
         /* $videos = Video::where('tags', 'ilike', '% 睡房 %')->get();
         foreach ($videos as $video) {
             $tags_array = $video->tags_array;
