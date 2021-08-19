@@ -41,7 +41,7 @@ Route::group(['middleware' => 'throttle:120,1'], function () {
 	Route::get('/video-copyright', 'VideoController@copyright');
 
 	Route::get('/setVideoDuration', 'BotController@setVideoDuration');
-	Route::get('/tempMethod', 'BotController@tempMethod');
+	/* Route::get('/tempMethod', 'BotController@tempMethod');
 	Route::get('/comments', 'BotController@comments');
 	Route::get('/updateSpankbang', 'BotController@updateSpankbang');
 	Route::get('/updateSpankbangBackup', 'BotController@updateSpankbangBackup');
@@ -56,7 +56,7 @@ Route::group(['middleware' => 'throttle:120,1'], function () {
 	Route::get('/updateRule34Sd', 'BotController@updateRule34Sd');
 
 	Route::get('/uploadCosplayjav', 'BotController@uploadCosplayjav');
-	Route::get('/translateCosplayjav', 'BotController@translateCosplayjav');
+	Route::get('/translateCosplayjav', 'BotController@translateCosplayjav'); */
 
 	Route::get('/userReport', 'HomeController@userReport')->name('email.userReport');
 	Route::get('/user/{user}/upload', 'UserController@userEditUpload')->name('user.userEditUpload');
