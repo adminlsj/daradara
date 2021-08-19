@@ -56,10 +56,9 @@ class UpdateSpankbangBackup extends Command
                 $pass = false;
                 $sd = '';
                 $source = '';
-                $default = '';
                 $qualities = [];
 
-                $requests = Browsershot::url($video->foreign_sd['spankbang'])
+                /* $requests = Browsershot::url($video->foreign_sd['spankbang'])
                     ->useCookies(['username' => 'admin'])
                     ->timeout(3600)
                     ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
@@ -71,6 +70,19 @@ class UpdateSpankbangBackup extends Command
                         $source = $request['url'];
                         $pass = true;
                     }
+                } */
+
+                $curl_connection = curl_init($video->foreign_sd['spankbang']);
+                curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+                curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+                $html = curl_exec($curl_connection);
+                curl_close($curl_connection);
+
+                $sd = Helper::get_string_between($html, '"contentUrl": "', '"');
+                $source = Helper::get_string_between($html, '"contentUrl": "', '"');
+                if (strpos($sd, 'https://vdownload') !== false) {
+                    $pass = true;
                 }
 
                 if ($pass) {
@@ -103,6 +115,8 @@ class UpdateSpankbangBackup extends Command
                     $video->foreign_sd = $temp;
                     $video->save();
                 }
+
+                sleep(10);
             }
         }
 
