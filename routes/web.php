@@ -42,6 +42,7 @@ Route::group(['middleware' => 'throttle:120,1'], function () {
 
 	Route::get('/setVideoDuration', 'BotController@setVideoDuration');
 	Route::post('/getVideosData', 'BotController@getVideosData');
+	Route::post('/getWatchesData', 'BotController@getWatchesData');
 	/* Route::get('/tempMethod', 'BotController@tempMethod');
 	Route::get('/comments', 'BotController@comments');
 	Route::get('/updateSpankbang', 'BotController@updateSpankbang');

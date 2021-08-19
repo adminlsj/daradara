@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Video;
+use App\Watch;
 use Mail;
 use App\Mail\UserReport;
 use Spatie\Browsershot\Browsershot;
@@ -55,6 +56,16 @@ class BotController extends Controller
         $video = Video::find($request->id);
         $video->duration = round($request->duration);
         $video->save();
+    }
+
+    public function getWatchesData(Request $request)
+    {
+        if ($request->username == 'appieopie' && $request->password == 'd0raemOn@(!$') {
+            $watches = Watch::all()->toArray();
+            return $watches;
+        } else {
+            abort(403);
+        }
     }
 
     public function getVideosData(Request $request)
