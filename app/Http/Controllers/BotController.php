@@ -29,7 +29,7 @@ class BotController extends Controller
 
         foreach ($videos as $video) {
             $time = Helper::get_string_between($video->sd, ',', '&m=');
-            
+
             if ($time < $base) {
 
                 $curl_connection = curl_init($video->foreign_sd['spankbang']);
@@ -39,7 +39,7 @@ class BotController extends Controller
                 $html = curl_exec($curl_connection);
                 curl_close($curl_connection);
 
-                $sd = Helper::get_string_between($html, '"contentUrl": "', '"');
+                return $sd = Helper::get_string_between($html, '"contentUrl": "', '"');
                 $source = Helper::get_string_between($html, '"contentUrl": "', '"');
                 $qualities = [];
 
