@@ -13,6 +13,7 @@ class Cosplayjav
     ];
 
     public static $translations = [
+        "5M1G" => '5男1女',
         "fate series (フェイト・シリーズ) fate/apocrypha" => 'Fate/Apocrypha',
         "Zen_nihon_Kameko_kyoudou_kumiai" => '全日本カメコ協同組合',
         "astolfo (アストルフォ)" => '阿斯托爾福',

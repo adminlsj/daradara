@@ -44,6 +44,7 @@ Route::group(['middleware' => 'throttle:120,1'], function () {
 	Route::get('/tempMethod', 'BotController@tempMethod');
 	Route::get('/comments', 'BotController@comments');
 	Route::get('/updateSpankbang', 'BotController@updateSpankbang');
+	Route::get('/updateSpankbangBackup', 'BotController@updateSpankbangBackup');
 	Route::get('/updateSpankbangErrors', 'BotController@updateSpankbangErrors');
 	Route::get('/updateYoujizz', 'BotController@updateYoujizz');
 	Route::get('/updateXvideos', 'BotController@updateXvideos');
