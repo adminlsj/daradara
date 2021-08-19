@@ -203,7 +203,7 @@ class Spankbang
         Log::info('Spankbang errors update ended...');
     }
 
-    public function checkSpankbang(Request $request)
+    public static function checkSpankbang()
     {
         $items = 0;
         $base = Carbon::now()->addHours(9)->timestamp;
