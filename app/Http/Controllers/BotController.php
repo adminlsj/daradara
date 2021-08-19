@@ -48,20 +48,6 @@ class BotController extends Controller
             $video->tags_array = $new_tags;
             $video->save();
         } */
-
-        /* $exclude = ['肉番', '裏番', '里番', 'hentai', 'H動漫', 'H動畫', '十八禁', '成人動畫', '成人動漫', '線上看', '中文字幕'];
-        $videos = Video::all();
-        foreach ($videos as $video) {
-            $tags = explode(" ", trim($video->tags));
-            $tags_array = [];
-            foreach ($tags as $tag) {
-                if (!in_array($tag, $exclude)) {
-                    $tags_array[$tag] = 10;
-                }
-            }
-            $video->tags_array = $tags_array;
-            $video->save();
-        } */
     }
 
     public function setVideoDuration(Request $request)
@@ -69,6 +55,16 @@ class BotController extends Controller
         $video = Video::find($request->id);
         $video->duration = round($request->duration);
         $video->save();
+    }
+
+    public function getVideosData(Request $request)
+    {
+        if ($request->username == 'appieopie' && $request->password == 'd0raemOn@(!$') {
+            $videos = Video::all()->toArray();
+            return $videos;
+        } else {
+            abort(403);
+        }
     }
 
     public function updateSpankbang()
