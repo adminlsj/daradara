@@ -25,7 +25,7 @@ class BotController extends Controller
 
         $videos = Video::where('foreign_sd', 'ilike', '%"spankbang"%')->select('id', 'title', 'sd', 'outsource', 'tags_array', 'foreign_sd', 'created_at')->get();
 
-        $base = Carbon::now()->addHours(3)->timestamp;
+        $base = Carbon::now()->addHours(6)->timestamp;
 
         foreach ($videos as $video) {
             $time = Helper::get_string_between($video->sd, ',', '&m=');

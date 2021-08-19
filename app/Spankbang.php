@@ -206,7 +206,7 @@ class Spankbang
     public static function checkSpankbang()
     {
         $items = 0;
-        $base = Carbon::now()->addHours(9)->timestamp;
+        $base = Carbon::now()->addHours(6)->timestamp;
         $videos = Video::where('foreign_sd', 'ilike', '%"spankbang"%')->select('id', 'title', 'sd', 'foreign_sd', 'created_at')->get();
         foreach ($videos as $video) {
             $time = Helper::get_string_between($video->sd, ',', '&m=');
