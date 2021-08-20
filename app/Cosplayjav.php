@@ -9,10 +9,14 @@ use Carbon\Carbon;
 class Cosplayjav
 {
     public static $removed = [
-        "1080p", "60fps", "jav_full_hd", "tagme actress", "tagme_actress", "jav", "sex", "720p", "anime", "video", "wings", "cosplay", "idolmaster", "cosplay_sex", "split_roast", "koshimizu_sachiko", "Sano_Ai", "idolmaster_cinderella_girls", "dressing", "Kosutchi", "lightning", "pantsu", "final_fantasy", "doujin", "imageset", "Dangan_ronpa", "Enoshima_Junko", "bondage", "bukkake", "SAIT-024", "anal_toys", "nishita_karina", "Nanpa_Mokushiroku", "Violet Evergarden", "Violet_Evergarden", "NCY-104", "astolfo", "fate/apocrypha"
+        "1080p", "60fps", "jav_full_hd", "tagme actress", "tagme_actress", "jav", "sex", "720p", "anime", "video", "wings", "cosplay", "idolmaster", "cosplay_sex", "split_roast", "koshimizu_sachiko", "Sano_Ai", "idolmaster_cinderella_girls", "dressing", "Kosutchi", "lightning", "pantsu", "final_fantasy", "doujin", "imageset", "Dangan_ronpa", "Enoshima_Junko", "bondage", "bukkake", "SAIT-024", "anal_toys", "nishita_karina", "Nanpa_Mokushiroku", "Violet Evergarden", "Violet_Evergarden", "NCY-104", "astolfo", "fate/apocrypha", "touhou", "kirisame_marisa"
     ];
-
+    
     public static $translations = [
+        "Kirisame Marisa (霧雨魔理沙)" => '霧雨魔理沙',
+        "Touhou (東方)" => '東方Project',
+        "masturbate" => '自慰',
+        "socks" => '襪子',
         "5M1G" => '5男1女',
         "fate series (フェイト・シリーズ) fate/apocrypha" => 'Fate/Apocrypha',
         "Zen_nihon_Kameko_kyoudou_kumiai" => '全日本カメコ協同組合',
