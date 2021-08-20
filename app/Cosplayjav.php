@@ -9,10 +9,33 @@ use Carbon\Carbon;
 class Cosplayjav
 {
     public static $removed = [
-        "1080p", "60fps", "jav_full_hd", "tagme actress", "tagme_actress", "jav", "sex", "720p", "anime", "video", "wings", "cosplay", "idolmaster", "cosplay_sex", "split_roast", "koshimizu_sachiko", "Sano_Ai", "idolmaster_cinderella_girls", "dressing", "Kosutchi", "lightning", "pantsu", "final_fantasy", "doujin", "imageset", "Dangan_ronpa", "Enoshima_Junko", "bondage", "bukkake", "SAIT-024", "anal_toys", "nishita_karina", "Nanpa_Mokushiroku", "Violet Evergarden", "Violet_Evergarden", "NCY-104", "astolfo", "fate/apocrypha", "touhou", "kirisame_marisa"
+        "1080p", "60fps", "jav_full_hd", "tagme actress", "tagme_actress", "jav", "sex", "720p", "anime", "video", "wings", "cosplay", "idolmaster", "cosplay_sex", "split_roast", "koshimizu_sachiko", "Sano_Ai", "idolmaster_cinderella_girls", "dressing", "Kosutchi", "lightning", "pantsu", "final_fantasy", "doujin", "imageset", "Dangan_ronpa", "Enoshima_Junko", "bondage", "bukkake", "SAIT-024", "anal_toys", "nishita_karina", "Nanpa_Mokushiroku", "Violet Evergarden", "Violet_Evergarden", "NCY-104", "astolfo", "fate/apocrypha", "touhou", "kirisame_marisa", "kirito", "SDAB-183", "SOD_Create", "Hayami_Nana", "tagme_series", "tagme_character", "sword_art_online", "MIAA-448", "fukada_eimi", "NieR_Automata", "Yorha_No.2_Type_B", "MMUS-053", "grinding", "handjob_cum", "tohsaka_rin", "Momose_Asuka", "fate_stay/night", "love_live!_sunshine!", "tagme character", "fate_series"
     ];
     
     public static $translations = [
+        "love live! sunshine! (ラブライブ！サンシャイン!! )" => 'Love Live! Sunshine!!',
+        "fate stay/night" => 'Fate/stay night',
+        "fate series (フェイト・シリーズ)": "Fate系列",
+        "Tohsaka Rin (遠坂凛)" => '遠坂凜',
+        "Momose Asuka (百瀬あすか)" => '百瀨飛鳥', 
+        "sailor_uniform" => '水手服',
+        "petting" => '愛撫',
+        "NieR Automata (ニエル オートマトン)" => '尼爾：自動人形',
+        "Yorha No.2 Type B (ヨルハ2号B型)" => '寄葉2號B型',
+        "Fukada Eimi (深田えいみ)" => '深田詠美',
+        "white_hair" => '白髮',
+        "cum_on_bod" => '體外射精',
+        "3M1G" => '3男1女',
+        "2M1G" => '2男1女',
+        "Sword Art Online (ソードアート・オンライン)" => '刀劍神域',
+        "Kirito (キリト)" => '桐人',
+        "Hayami Nana (早見なな)" => '早見奈奈',
+        "SOD_Create" => 'SODクリエイト',
+        "Seishun_Jidai" => '青春時代',
+        "gym_uniform" => '體操服',
+        "black_hair" => '黑髮',
+        "fingering" => '指交',
+        "shorts" => '熱褲',
         "Kirisame Marisa (霧雨魔理沙)" => '霧雨魔理沙',
         "Touhou (東方)" => '東方Project',
         "masturbate" => '自慰',
@@ -22,7 +45,6 @@ class Cosplayjav
         "Zen_nihon_Kameko_kyoudou_kumiai" => '全日本カメコ協同組合',
         "astolfo (アストルフォ)" => '阿斯托爾福',
         "cum_on_boobs" => '乳射',
-        "fate_series" => 'Fate系列',
         "thong" => '丁字褲',
         "Violet Evergarden (ヴァイオレット・エヴァーガーデン)" => '紫羅蘭永恆花園',
         "Nishita Karina (西田カリナ)" => '西田卡莉娜',
