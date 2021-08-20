@@ -12,7 +12,6 @@
 */
 
 Route::group(['middleware' => 'throttle:120,1'], function () {
-
 	Route::get('/', 'HomeController@index');
 
 	Route::resource('user', 'UserController');
@@ -38,28 +37,10 @@ Route::group(['middleware' => 'throttle:120,1'], function () {
 	Route::get('/policies', 'HomeController@policies');
 	Route::get('/copyright', 'HomeController@copyright');
 	Route::get('/2257', 'HomeController@p2257');
-	Route::get('/video-copyright', 'VideoController@copyright');
 
 	Route::get('/setVideoDuration', 'BotController@setVideoDuration');
 	Route::post('/getVideosData', 'BotController@getVideosData');
 	Route::post('/getWatchesData', 'BotController@getWatchesData');
-	/* Route::get('/tempMethod', 'BotController@tempMethod');
-	Route::get('/comments', 'BotController@comments');
-	Route::get('/updateSpankbang', 'BotController@updateSpankbang');
-	Route::get('/updateSpankbangBackup', 'BotController@updateSpankbangBackup');
-	Route::get('/updateSpankbangErrors', 'BotController@updateSpankbangErrors');*/
-	Route::get('/checkSpankbangOutdate', 'BotController@checkSpankbangOutdate');
-	Route::get('/checkSpankbangUpdate', 'BotController@checkSpankbangUpdate');
-	/* Route::get('/updateYoujizz', 'BotController@updateYoujizz');
-	Route::get('/updateXvideos', 'BotController@updateXvideos');
-
-	Route::get('/uploadRule34', 'BotController@uploadRule34');
-	Route::get('/importRule34', 'BotController@importRule34');*/
-	Route::get('/translateRule34', 'BotController@translateRule34');
-	/*Route::get('/updateRule34Sd', 'BotController@updateRule34Sd');
-
-	Route::get('/uploadCosplayjav', 'BotController@uploadCosplayjav');
-	Route::get('/translateCosplayjav', 'BotController@translateCosplayjav'); */
 
 	Route::get('/userReport', 'HomeController@userReport')->name('email.userReport');
 	Route::get('/user/{user}/upload', 'UserController@userEditUpload')->name('user.userEditUpload');
@@ -69,5 +50,24 @@ Route::group(['middleware' => 'throttle:120,1'], function () {
 	Route::get('/download', 'VideoController@download')->name('video.download');
 	Route::get('/list', 'HomeController@list')->name('home.list');
 	Route::get('/search', ['as' => 'home.search', 'uses' => 'HomeController@search']);
+});
 
+Route::group(['middleware' => 'admin'], function () {
+	Route::get('/tempMethod', 'BotController@tempMethod');
+	Route::get('/comments', 'BotController@comments');
+
+	Route::get('/updateSpankbang', 'BotController@updateSpankbang');
+	Route::get('/updateSpankbangBackup', 'BotController@updateSpankbangBackup');
+	Route::get('/updateSpankbangErrors', 'BotController@updateSpankbangErrors');
+	Route::get('/checkSpankbangOutdate', 'BotController@checkSpankbangOutdate');
+	Route::get('/checkSpankbangUpdate', 'BotController@checkSpankbangUpdate');
+	Route::get('/updateYoujizz', 'BotController@updateYoujizz');
+	Route::get('/updateXvideos', 'BotController@updateXvideos');
+
+	Route::get('/uploadRule34', 'BotController@uploadRule34');
+	Route::get('/importRule34', 'BotController@importRule34');
+	Route::get('/translateRule34', 'BotController@translateRule34');
+	Route::get('/updateRule34Sd', 'BotController@updateRule34Sd');
+	Route::get('/uploadCosplayjav', 'BotController@uploadCosplayjav');
+	Route::get('/translateCosplayjav', 'BotController@translateCosplayjav');
 });
