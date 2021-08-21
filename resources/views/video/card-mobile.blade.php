@@ -1,6 +1,6 @@
 <div style="margin-bottom: 20px;">
 	<a class="preview-trigger" href="{{ route('video.watch') }}?v={{ $video->id }}" style="text-decoration: none;" data-poster="{{ $video->imgurH() }}" data-preview="{{ isset($video->qualities) ? $video->qualities[array_key_first($video->qualities)] : $video->sd }}">
-		<div style="position: relative;">
+		<div class="preview-wrapper" style="position: relative;">
 			<img class="lazy" style="width: 100%;" src="https://i.imgur.com/WENZTSJl.jpg" data-src="{{ $video->imgurH() }}" data-srcset="{{ $video->imgurH() }}" alt="{{ $video->title }}">
 			@if ($video->duration != null)
 			    <div style="position: absolute; right: 6px; bottom: 6px; color: white; background-color: rgba(0, 0, 0, 0.75); font-size: 12px; font-weight: bold; padding: 0px 5px; border-radius: 2px; z-index: 1">
@@ -8,9 +8,6 @@
 			    </div>
 		    @endif
 		    <div id="myBar" style="width: 0%; height: 2px; background-color: red; position: absolute; top: 0px; left: 0px; z-index: 2"></div>
-		    <div class="preview-wrapper">
-		    	<!-- Preview video -->
-		    </div>
 	    </div>
 	</a>
 
