@@ -52,19 +52,26 @@ $('.preview-trigger').on({ 'touchstart' : function(){
     var progress = setInterval(function(){
       if (width >= 100) {
         clearInterval(progress);
+        bar.width('0%');
       } else {
         width++;
         bar.width(width + '%');
       }
-    }, 30);
+    }, 20);
 
     $('.preview').remove();
     var url = $(this).data('preview');
     var poster = $(this).data('poster');
-    $(this).find('.preview-wrapper').append('<video style="position:absolute;top:0;left:0;width:100%;height:100%;background-color:black" class="preview" autoplay muted loop playsinline poster="' + poster + '"><source src="' + url + '" type="video/mp4"></video>');
-    $('.preview').play();
+    var video = $('<video style="position:absolute;top:0;left:0;width:100%;height:100%;background-color:transparent" class="preview" muted loop playsinline poster="' + poster + '" src="' + url + '"></video>')
+    .bind("loadeddata", function(){
+        $(this).css('background-color', 'black');
+    }).appendTo($(this).find('.preview-wrapper'))[0].play();
   }
-} });
+}});
+
+$('.preview-wrapper').on("play", "video", function(e) {
+   alert('loaded');
+}); 
 
 $('#broad').change(function(){
   if (this.checked) {

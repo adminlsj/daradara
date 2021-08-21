@@ -218,7 +218,7 @@
 		  	<div class="home-rows-videos-wrapper mobile-full-width" style="white-space: normal;">
 		  		@if ($is_mobile)
 				    @foreach ($videos as $video)
-					    @include('video.card-mobile-new')
+					    @include('video.card-mobile')
 					@endforeach
 				@else
 					@foreach ($videos as $video)
@@ -239,7 +239,7 @@
 			</div>
 		@endif
 		<div class="search-pagination hidden-xs">{!! $videos->appends(request()->query())->links() !!}</div>
-		<div class="search-pagination mobile-search-pagination hidden-sm hidden-md hidden-lg" style="{{ $doujin ? 'margin-top: -20px;' : ''  }}">{!! $videos->appends(request()->query())->onEachSide(1)->links() !!}</div>
+		<div class="search-pagination mobile-search-pagination hidden-sm hidden-md hidden-lg">{!! $videos->appends(request()->query())->onEachSide(1)->links() !!}</div>
 
 		@include('ads.search-banner-panel')
 	</div>

@@ -124,7 +124,7 @@
               @if ($is_mobile)
                 @foreach ($related as $video)
                   <span class="related-video-width-horizontal {{ $loop->iteration > 30 ? 'hidden-xs hidden-sm temp-hidden-related-video' : '' }}">
-                    @include('video.card-mobile-new')
+                    @include('video.card-mobile')
                   </span>
                 @endforeach
               @else

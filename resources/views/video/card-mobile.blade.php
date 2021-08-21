@@ -1,5 +1,5 @@
-<div class="preview-trigger" style="margin-bottom: 20px;" data-poster="{{ $video->imgurL() }}" data-preview="{{ isset($video->qualities) ? $video->qualities[array_key_first($video->qualities)] : $video->sd }}">
-	<a href="{{ route('video.watch') }}?v={{ $video->id }}" style="text-decoration: none;">
+<div style="margin-bottom: 20px;">
+	<a class="preview-trigger" href="{{ route('video.watch') }}?v={{ $video->id }}" style="text-decoration: none;" data-poster="{{ $video->imgurH() }}" data-preview="{{ isset($video->qualities) ? $video->qualities[array_key_first($video->qualities)] : $video->sd }}">
 		<div class="preview-wrapper" style="position: relative;">
 			<img class="lazy" style="width: 100%;" src="https://i.imgur.com/WENZTSJl.jpg" data-src="{{ $video->imgurH() }}" data-srcset="{{ $video->imgurH() }}" alt="{{ $video->title }}">
 			@if ($video->duration != null)
