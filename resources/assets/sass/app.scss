@@ -1575,19 +1575,23 @@ div.sticky {
   }
 
   .related-video-width-horizontal .video-card {
-    width: calc(100%) !important;
+    width: calc(100%);
     margin-bottom: 20px !important;
   }
 
   .card-desktop {
-    width: calc(100%);
+    width: calc(50% - 2px) !important;
     margin-bottom: 20px;
   }
 
   .card-desktop .card-info-wrapper {
-    padding-left: 15px; 
-    padding-right: 15px; 
+    padding-left: 8px; 
+    padding-right: 8px; 
     height: auto;
+  }
+
+  .card-desktop .card-info-wrapper .card-info-lower-wrapper {
+    margin-top: 3px;
   }
 
   .modal {

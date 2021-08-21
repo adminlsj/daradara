@@ -218,7 +218,7 @@
 		  	<div class="home-rows-videos-wrapper mobile-full-width" style="white-space: normal;">
 		  		@if ($is_mobile)
 				    @foreach ($videos as $video)
-					    @include('video.card-mobile')
+					    @include('video.card-desktop')
 					@endforeach
 				@else
 					@foreach ($videos as $video)
