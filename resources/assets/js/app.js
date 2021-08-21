@@ -59,7 +59,7 @@ $('.preview-trigger').on({ 'touchstart' : function(){
       }
     }, 20);
 
-    var previous = $('.preview');
+    var previous = $('.preview-trigger').find('.preview');
     previous.remove();
 
     var url = $(this).data('preview');
