@@ -46,7 +46,8 @@ $('.preview-trigger').hover(function(){
 });
 
 $('.preview-trigger').on({ 'touchstart' : function(){
-  if (!$(this).find('.preview').length) {
+    $('.preview').remove();
+    
     var bar = $(this).find('#myBar');
     var width = 1;
     var progress = setInterval(function(){
@@ -59,14 +60,12 @@ $('.preview-trigger').on({ 'touchstart' : function(){
       }
     }, 20);
 
-    $('.preview').remove();
     var url = $(this).data('preview');
     var poster = $(this).data('poster');
     var video = $('<video style="position:absolute;top:0;left:0;width:100%;height:100%;background-color:transparent" class="preview" muted loop playsinline poster="' + poster + '" src="' + url + '"></video>')
     .bind("loadeddata", function(){
         $(this).css('background-color', 'black');
     }).appendTo($(this).find('.preview-wrapper'))[0].play();
-  }
 }});
 
 $('#broad').change(function(){
