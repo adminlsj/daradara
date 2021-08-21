@@ -61,7 +61,7 @@ $('.preview-trigger').on({ 'touchstart' : function(){
 
     var previous = $('.preview');
     previous.css('z-index', '-1');
-    previous.remove();
+    previous.detach();
 
     var url = $(this).data('preview');
     var poster = $(this).data('poster');
