@@ -60,8 +60,8 @@ $('.preview-trigger').on({ 'touchstart' : function(){
     }, 20);
 
     var previous = $('.preview');
-    previous.css('z-index', '-1');
-    previous.detach();
+    previous.hide();
+    previous.remove();
 
     var url = $(this).data('preview');
     var poster = $(this).data('poster');
