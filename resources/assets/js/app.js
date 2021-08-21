@@ -59,9 +59,7 @@ $('.preview-trigger').on({ 'touchstart' : function(){
       }
     }, 20);
 
-    var previous = $('.preview');
-    previous.hide();
-    previous.remove();
+    $('.preview-wrapper').empty();
 
     var url = $(this).data('preview');
     var poster = $(this).data('poster');
