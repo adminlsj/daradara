@@ -60,11 +60,11 @@ $('.preview-trigger').on({ 'touchstart' : function(){
     }, 20);
 
     var previous = $('.preview');
-    previous.css('z-index', '-1');
+    previous.remove();
 
     var url = $(this).data('preview');
     var poster = $(this).data('poster');
-    var video = $('<video style="position:absolute;top:0;left:0;width:100%;height:100%;background-color:transparent" class="preview" muted loop playsinline poster="' + poster + '" src="' + url + '"></video>')
+    var video = $('<video style="position:absolute;top:0;left:0;width:100%;height:100%;background-color:transparent" class="preview" muted loop playsinline src="' + url + '"></video>')
     .bind("loadeddata", function(){
         $(this).css('background-color', 'black');
     }).appendTo($(this).find('.preview-wrapper'))[0].play();
