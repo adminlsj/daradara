@@ -1590,8 +1590,20 @@ div.sticky {
     height: auto;
   }
 
-  .card-desktop .card-info-wrapper .card-info-lower-wrapper {
-    margin-top: 3px;
+  .card-desktop .card-info-wrapper .card-info-title {
+    font-size: 13px;
+  }
+
+  .card-desktop .card-info-wrapper .card-info-metadata {
+    font-size: 11px !important;
+    margin-top: 5px;
+  }
+
+  .card-desktop .card-duration {
+    font-size: 11px !important;
+    padding: 0 4px !important;
+    right: 3px !important;
+    bottom: 3px !important;
   }
 
   .modal {
