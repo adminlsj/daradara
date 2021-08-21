@@ -69,10 +69,6 @@ $('.preview-trigger').on({ 'touchstart' : function(){
   }
 }});
 
-$('.preview-wrapper').on("play", "video", function(e) {
-   alert('loaded');
-}); 
-
 $('#broad').change(function(){
   if (this.checked) {
     $('#hentai-tags-text').text('搜索包含任何一個以下選擇的標籤的影片：');
