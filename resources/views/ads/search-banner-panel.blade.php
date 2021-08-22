@@ -1,5 +1,5 @@
-<div style="text-align: center; margin-top: 15px; background-color: #202020; padding-bottom: -100px; height: 275px; overflow: hidden;">
-	<div style="color: hsla(0, 100%, 100%, .5); margin-bottom: 1px; background-color: #313131; padding: 2px 0px">點點廣告，贊助我們（●´∀｀）ノ♡</div>
+<div class="hidden-xs" style="text-align: center; margin-top: 15px; padding-bottom: -100px; height: 275px; overflow: hidden;">
+	<div style="color: white; margin-bottom: 3px; padding: 2px 0px">點點廣告，贊助我們（●´∀｀）ノ♡</div>
 	<script type="application/javascript">
 	    var ad_idzone = "4372838",
 	    ad_width = "300",

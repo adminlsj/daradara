@@ -214,6 +214,13 @@
 	</div>
 
 	<div id="home-rows-wrapper" class="search-rows-wrapper" style="position: relative;">
+
+		<div class="hidden-sm hidden-md hidden-lg" style="text-align: center; margin-top: -5px; margin-bottom: -21px;">
+			 <ins class="adsbyexoclick" data-zoneid="4396576"></ins> 
+		</div>
+
+		<div style="margin-bottom: -13px" class="search-pagination mobile-search-pagination hidden-sm hidden-md hidden-lg">{!! $videos->appends(request()->query())->onEachSide(1)->links() !!}</div>
+
 	  	@if ($doujin)
 		  	<div class="home-rows-videos-wrapper mobile-full-width" style="white-space: normal;">
 		  		@if ($is_mobile)
@@ -239,15 +246,23 @@
 			</div>
 		@endif
 		<div class="search-pagination hidden-xs">{!! $videos->appends(request()->query())->links() !!}</div>
-		<div class="search-pagination mobile-search-pagination hidden-sm hidden-md hidden-lg">{!! $videos->appends(request()->query())->onEachSide(1)->links() !!}</div>
+		<div style="margin-top: {{ $doujin ? '-30px' : '-34px' }}" class="search-pagination mobile-search-pagination hidden-sm hidden-md hidden-lg">{!! $videos->appends(request()->query())->onEachSide(1)->links() !!}</div>
 
 		@include('ads.search-banner-panel')
+
+		<div class="hidden-sm hidden-md hidden-lg" style="text-align: center; margin-top: -13px; margin-bottom: -40px;">
+			<!-- JuicyAds v3.1 -->
+			<script type="text/javascript" data-cfasync="false" async src="https://poweredby.jads.co/js/jads.js"></script>
+			<ins id="941419" data-width="300" data-height="112"></ins>
+			<script type="text/javascript" data-cfasync="false" async>(adsbyjuicy = window.adsbyjuicy || []).push({'adzone':941419});</script>
+			<!--JuicyAds END-->
+		</div>
 	</div>
 </form>
 
 <script>
 	var urlParams = new URLSearchParams(window.location.search);
-	$(".mobile-search-pagination .pagination .disabled").addClass('hidden-xs');
+	// $(".mobile-search-pagination .pagination .disabled").addClass('hidden-xs');
 	if (urlParams.has('page') && urlParams.get('page') > 2) {
 		$(".mobile-search-pagination .pagination .page-item:nth-child(3)").addClass('hidden');
 	}
@@ -255,5 +270,13 @@
 		$(".mobile-search-pagination .pagination .page-item:nth-last-child(3)").addClass('hidden');
 	}
 </script>
+
+<div style="background-color: #212121; margin-top: 50px;">
+	<div class="hentai-footer">
+		<p>Hanime1.me 暗黑版 anime1.me 帶給你最新最全的無碼高清中文字幕Hentai成人動漫。我們提供最優質的Hentai色情動漫裏番，並以最高畫質1080p呈現的Blu-ray rip。我們的18禁H漫網站適用於手機設備，並提供全網最優質的Hentai動畫。最新最全的Hentai裏番資料庫，Hanime1.me hentai 讓你一個按鈕觀看所有Hentai成人動畫，包括最新的2020年Hentai成人動漫。在這裏，你可以找到最優質的中文字幕H動畫 24小時！免費享受hentai動漫，成人動畫，H動漫，並且更有中文字幕，不必再聽日語猜故事！這個網站是繼avbebe之後，亞洲最優質的色情工口Hentai成人動漫，並且有許多Hentai分類，包括顏射、乳交、口交、熟女、學生妹、中出、百合、肛交，以及更多！</p>
+
+		<p>Hentai是什麼？Hentai（変態 或 へんたい），Hentai 或 成人動漫的詞源來自日本，並指色情或成人動漫和動畫，特別是來自日本的18禁H動漫和成人動畫。</p>
+	</div>
+</div>
 
 @endsection
