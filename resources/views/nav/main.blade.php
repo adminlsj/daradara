@@ -1,4 +1,4 @@
-<div id="main-nav" style="z-index: 10000 !important; {{ Request::is('*search*') ? 'position: static !important' : '' }}" class="main-nav{{ Request::is('*watch*') || Request::is('*download*') ? '-video-show' : '' }}">
+<div id="main-nav" style="z-index: 10000 !important; {{ Request::is('*search*') || Request::is('g/*') ? 'position: static !important' : '' }}" class="main-nav{{ Request::is('*watch*') || Request::is('*download*') ? '-video-show' : '' }}">
   <a href="/" style="padding-right: 2.5%; color: white; font-size: 1.4em;">
     <span style="color: crimson">H</span>anime1<span style="color: crimson">.</span>me
   </a>

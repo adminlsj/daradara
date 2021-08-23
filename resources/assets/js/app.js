@@ -297,6 +297,52 @@ $(document).ready(function() {
     var topPos = item.offsetTop;
     item.parentNode.scrollTop = topPos - 185 + item.offsetHeight / 2;
   }
+
+  $("html").animate(
+    {
+      scrollTop: $("#comic-content-wrapper").offset().top
+    },
+    500 //speed
+  );
+});
+
+$('.comic-show-content-nav-item-wrapper').on('click', function(e) {
+  e.preventDefault();
+
+  var galleries_id = $(this).attr('data-id');
+  var page = parseInt($(this).attr('data-page'));
+  $('.current-page-number').html(page);
+
+  var base = window.location.pathname;
+  base = base.split('/');
+  base.pop();
+  base = base.join('/') + '/';
+  var string = base + page;
+  window.history.replaceState(page, 'Hanime1.me', string);
+
+  var arrow_left = $('.arrow-left');
+  arrow_left.attr('data-page', page - 1);
+  arrow_left.attr('href', base + (page - 1));
+
+  var arrow_right = $('.arrow-right');
+  arrow_right.attr('data-page', page + 1);
+  arrow_right.attr('href', base + (page + 1));
+
+  var url = 'https://i.nhentai.net/galleries/' + galleries_id + '/' + page + '.jpg';
+  var image = $('#current-page-image');
+  image.attr('src', url);
+
+  $("html").animate(
+    {
+      scrollTop: $("#comic-content-wrapper").offset().top
+    },
+    500 //speed
+  );
+
+  for (i = 1; i <= 5; i++) {
+    var preload = new Image();
+    preload.src = 'https://i.nhentai.net/galleries/' + galleries_id + '/' + (page + i)  + '.jpg';
+  }
 });
 
 function showSnackbar(text) {

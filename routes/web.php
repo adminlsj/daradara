@@ -50,6 +50,9 @@ Route::group(['middleware' => 'throttle:120,1'], function () {
 	Route::get('/download', 'VideoController@download')->name('video.download');
 	Route::get('/list', 'HomeController@list')->name('home.list');
 	Route::get('/search', ['as' => 'home.search', 'uses' => 'HomeController@search']);
+
+	Route::get('/g/{comic}', 'ComicController@showCover')->name('comic.showCover');
+	Route::get('/g/{comic}/{page}', 'ComicController@showContent')->name('comic.showContent');
 });
 
 Route::group(['middleware' => 'admin'], function () {

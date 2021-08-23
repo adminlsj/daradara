@@ -381,6 +381,47 @@ th, td {
   width: 100%;
 }
 
+#comic-rows-wrapper h3 {
+  margin-top: 0;
+  font-size: 20px; 
+  color: white; 
+  padding-bottom: 5px;
+}
+
+#comic-rows-wrapper .comic-rows-videos-wrapper {
+  overflow: auto; 
+  white-space: nowrap; 
+}
+
+#comic-rows-wrapper .comic-rows-videos-wrapper a {
+  font-size: 0;
+}
+
+#comic-rows-wrapper .comic-rows-videos-wrapper .comic-rows-videos-div .comic-rows-videos-title {
+  font-size: 14px;
+}
+
+#comic-rows-wrapper .comic-rows-videos-div .comic-rows-videos-title {
+  font-size: 14px;
+}
+
+#comic-rows-wrapper .comic-rows-videos-div {
+  width: calc(100% / 6 - 4px);
+}
+
+#comic-rows-wrapper .comic-rows-videos-div img {
+  width: 100%;
+}
+
+.comic-show-content-nav-item-wrapper {
+  display: inline-block;
+}
+
+.comic-show-content-nav-item:hover {
+  background-color: #222222;
+  cursor: pointer;
+}
+
 .search-rows-wrapper {
   margin-top: 47px !important;
 }
