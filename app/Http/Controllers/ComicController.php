@@ -3,12 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Comic;
+use App\Nhentai;
 
 class ComicController extends Controller
 {
     public function showCover(Comic $comic)
     {
-        $metadata = ['同人' => $comic->parodies, '角色' => $comic->characters, '標籤' => $comic->tags, '作者' => $comic->artists, '社團' => $comic->groups, '語言' => $comic->languages, '分類' => $comic->categories];
+        $metadata = ['parodies' => $comic->parodies, 'characters' => $comic->characters, 'tags' => $comic->tags, 'artists' => $comic->artists, 'groups' => $comic->groups, 'languages' => $comic->languages, 'categories' => $comic->categories];
+
+        if ($comic->playlist_id) {
+            $comics = Comic::where('playlist_id', $comic->playlist_id)->orderBy('created_at', 'desc')->get();
+        } else {
+            $comics = null;
+        }
 
         $tags = $tags_random = $comic->tags;
         $tags_slice = array_slice($tags_random, 0, 5);
@@ -18,11 +25,44 @@ class ComicController extends Controller
             }
         })->inRandomOrder()->limit(6)->get();
 
-        return view('comic.show-cover', compact('comic', 'metadata', 'related'));
+        return view('comic.show-cover', compact('comic', 'comics', 'metadata', 'related'));
     }
 
     public function showContent(Comic $comic, int $page)
     {
-        return view('comic.show-content', compact('comic', 'page'));
+        $extensions = json_encode($comic->extensions);
+
+        $comic->day_views++;
+        $comic->week_views++;
+        $comic->views++;
+        $comic->save();
+
+        return view('comic.show-content', compact('comic', 'page', 'extensions'));
+    }
+
+    public function searchTags(String $column, String $value, String $time = null)
+    {
+        $comics = Comic::where($column, 'ilike', '%"'.$value.'"%');
+
+        switch ($time) {
+            case 'popular-today':
+                $comics = $comics->orderBy('day_views', 'desc');
+                break;
+
+            case 'popular-week':
+                $comics = $comics->orderBy('week_views', 'desc');
+                break;
+
+            case 'popular':
+                $comics = $comics->orderBy('views', 'desc');
+                break;
+            
+            default:
+                break;
+        }
+
+        $comics = $comics->orderBy('created_at', 'desc')->select('id', 'galleries_id', 'title_n_before', 'title_n_pretty', 'title_n_after', 'extension', 'created_at')->paginate(30);
+
+        return view('comic.search-tags', compact('comics', 'column', 'value'));
     }
 }

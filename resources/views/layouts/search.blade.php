@@ -215,7 +215,7 @@
 
 	<div id="home-rows-wrapper" class="search-rows-wrapper" style="position: relative;">
 
-		<div class="hidden-sm hidden-md hidden-lg" style="text-align: center; margin-top: -5px; margin-bottom: -21px;">
+		<div class="hidden-sm hidden-md hidden-lg" style="text-align: center; margin-top: -4px; margin-bottom: -20px;">
 			 <ins class="adsbyexoclick" data-zoneid="4396576"></ins> 
 		</div>
 
@@ -250,7 +250,7 @@
 
 		@include('ads.search-banner-panel')
 
-		<div class="hidden-sm hidden-md hidden-lg" style="text-align: center; margin-top: -13px; margin-bottom: -40px;">
+		<div class="hidden-sm hidden-md hidden-lg" style="text-align: center; margin-top: -12px; margin-bottom: -40px;">
 			<!-- JuicyAds v3.1 -->
 			<script type="text/javascript" data-cfasync="false" async src="https://poweredby.jads.co/js/jads.js"></script>
 			<ins id="941419" data-width="300" data-height="112"></ins>

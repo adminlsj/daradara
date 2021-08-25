@@ -53,6 +53,7 @@ Route::group(['middleware' => 'throttle:120,1'], function () {
 
 	Route::get('/g/{comic}', 'ComicController@showCover')->name('comic.showCover');
 	Route::get('/g/{comic}/{page}', 'ComicController@showContent')->name('comic.showContent');
+	Route::get('/{column}/{value}/{time?}', 'ComicController@searchTags')->name('comic.searchTags');
 });
 
 Route::group(['middleware' => 'admin'], function () {
@@ -73,4 +74,8 @@ Route::group(['middleware' => 'admin'], function () {
 	Route::get('/updateRule34Sd', 'BotController@updateRule34Sd');
 	Route::get('/uploadCosplayjav', 'BotController@uploadCosplayjav');
 	Route::get('/translateCosplayjav', 'BotController@translateCosplayjav');
+
+	Route::get('/translateNhentaiTags', 'BotController@translateNhentaiTags');
+	Route::get('/translateNhentaiLanguages', 'BotController@translateNhentaiLanguages');
+	Route::get('/translateNhentaiCategories', 'BotController@translateNhentaiCategories');
 });

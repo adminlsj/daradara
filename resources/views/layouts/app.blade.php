@@ -31,7 +31,7 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 </head>
 <body>
-    <div>
+    <div style="{{ Request::is('*g/*') ? 'background-color: #0d0d0d;' : '' }}">
         @yield('nav')
 
         <div style="overflow-x: hidden;">
