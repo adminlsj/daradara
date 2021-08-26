@@ -50,6 +50,13 @@ th, td {
   line-height: 55px; 
 }
 
+#watch-comics-link-btn {
+  margin-top: 15px;
+  margin-bottom: -2px;
+  padding: 10px 18px 10px 16px;
+  width: 113px;
+}
+
 .hover-lighter:hover {
   filter: brightness(110%);
 }
@@ -1580,6 +1587,13 @@ div.sticky {
 }
 
 @media (max-width: 991px) {
+  #watch-comics-link-btn {
+    margin-left: 15px;
+    padding-left: 14px;
+    padding-right: 16px;
+    width: 110px;
+  }
+
   #current-page-image {
     min-width: 100%; 
     max-height: 100%;
