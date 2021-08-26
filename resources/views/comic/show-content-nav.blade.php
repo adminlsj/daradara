@@ -26,7 +26,7 @@
 		</a>
 	</div>
 
-	<div style="display: inline-block; position: absolute; right: 0; width: auto; z-index: 1;">
+	<div class="hidden-xs hidden-sm" style="display: inline-block; position: absolute; right: 0; width: auto; z-index: 1;">
 		<a class="comics-content-zoom-out">
 			<span style="color: white; font-size: 22px; vertical-align: middle; margin-top: 0px; padding: 8px;" class="material-icons comic-show-content-nav-item">zoom_out</span>
 		</a>
