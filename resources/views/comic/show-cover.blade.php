@@ -68,7 +68,7 @@
 <div class="comics-panel-margin comics-panel-margin-top comics-panel-padding comics-thumbnail-wrapper comic-rows-wrapper" style="position: relative;">
   @for ($i = 1; $i <= $comic->pages; $i++)
     <a href="{{ route('comic.showContent', ['comic' => $comic, 'page' => $i]) }}">
-      <img class="lazy comic-rows-videos-div hover-lighter {{ $i > 12 ? 'hidden' : '' }}" style="border-radius: 5px; margin-bottom: 4px;" src="https://i.imgur.com/0n3iJ9Ol.jpg" data-srcset="https://t.nhentai.net/galleries/{{ $comic->galleries_id }}/{{ $i }}t.{{ App\Nhentai::$parseExt[$comic->extensions[$i - 1]] }}">
+      <img class="lazy comic-rows-videos-div hover-lighter {{ $i > 12 ? 'hidden' : '' }}" style="border-radius: 5px; margin-bottom: 4px; vertical-align: top" src="https://i.imgur.com/0n3iJ9Ol.jpg" data-srcset="https://t.nhentai.net/galleries/{{ $comic->galleries_id }}/{{ $i }}t.{{ App\Nhentai::$parseExt[$comic->extensions[$i - 1]] }}">
     </a>
   @endfor
   <div id="comics-thumbnail-show-btn-wrapper" style="{{ $comic->pages <= 12 ? 'display:none' : '' }}">
