@@ -38,7 +38,7 @@
 
       @if ($video->comic_id)
         <a id="watch-comics-link-btn" href="{{ route('comic.showCover', ['comic' => $video->comic_id]) }}" target="_blank" class="no-select" style="background-color: crimson; border: none; border-radius: 5px; color: #d9d9d9; display: block; text-decoration: none; cursor: pointer;">
-          <span style="vertical-align: middle; font-size: 18px; margin-top: -3px; margin-right: 5px; cursor: pointer;" class="material-icons">visibility</span>漫畫鏈結
+          <span style="vertical-align: middle; font-size: 18px; margin-top: -3px; margin-right: 5px; cursor: pointer;" class="material-icons">visibility</span>漫畫原作
         </a>
       @endif
 
