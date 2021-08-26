@@ -408,7 +408,7 @@ th, td {
 
 #current-page-image {
   max-width: 100%;
-  height: calc(100vh - 38px);
+  max-height: calc(100vh - 38px);
   cursor: pointer;
 }
 
