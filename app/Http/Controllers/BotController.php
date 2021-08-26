@@ -26,32 +26,6 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $comics = Comic::where('extensions', null)->orderBy('id', 'asc')->get();
-        foreach ($comics as $comic) {
-            $extensions = [];
-            $url = 'https://nhentai.net/g/'.$comic->nhentai_id.'/';
-            $curl_connection = curl_init($url);
-            curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
-            curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
-            $html = curl_exec($curl_connection);
-            curl_close($curl_connection);
-
-            $data = Helper::get_string_between($html, 'JSON.parse("', '")');
-            $data = json_decode(json_decode('"'.$data.'"'), true);
-
-            foreach ($data['images']['pages'] as $page) {
-                array_push($extensions, $page['t']);
-            }
-
-            if (count($extensions) != $comic->pages) {
-                return '<a target="_blank" href="/g/'.$comic->id.'">ID#'.$comic->id.' - pages count mismatch</a><br>';
-            } else {
-                $comic->extensions = $extensions;
-                $comic->save();
-            }
-        }
-
         /* $videos = Video::where('tags', 'ilike', '% 睡房 %')->get();
         foreach ($videos as $video) {
             $tags_array = $video->tags_array;
@@ -513,6 +487,32 @@ class BotController extends Controller
             $comic->title_o_pretty = html_entity_decode($comic->title_o_pretty, ENT_QUOTES, 'UTF-8');
             $comic->title_o_after = html_entity_decode($comic->title_o_after, ENT_QUOTES, 'UTF-8');
             $comic->save();
+        }
+
+        $comics = Comic::where('extensions', null)->orderBy('id', 'asc')->get();
+        foreach ($comics as $comic) {
+            $extensions = [];
+            $url = 'https://nhentai.net/g/'.$comic->nhentai_id.'/';
+            $curl_connection = curl_init($url);
+            curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+            curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+            $html = curl_exec($curl_connection);
+            curl_close($curl_connection);
+
+            $data = Helper::get_string_between($html, 'JSON.parse("', '")');
+            $data = json_decode(json_decode('"'.$data.'"'), true);
+
+            foreach ($data['images']['pages'] as $page) {
+                array_push($extensions, $page['t']);
+            }
+
+            if (count($extensions) != $comic->pages) {
+                return '<a target="_blank" href="/g/'.$comic->id.'">ID#'.$comic->id.' - pages count mismatch</a><br>';
+            } else {
+                $comic->extensions = $extensions;
+                $comic->save();
+            }
         }
     }
 
