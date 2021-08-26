@@ -1,16 +1,16 @@
 $(document).ready(function() {
-  var zoom = typeof Cookies.get('zoom') === 'undefined' ? 1 : parseInt(Cookies.get('zoom'));
+  /* var zoom = typeof Cookies.get('zoom') === 'undefined' ? 1 : parseInt(Cookies.get('zoom'));
   var image = $('#current-page-image');
-  if (zoom != 1) {
+  if (zoom > 1) {
     var new_width = image.width() * zoom;
-    if (new_width < $(window).width()) {
+    if (new_width > 0 && new_width < $(window).width()) {
       image.css('width', new_width);
     } else {
       image.css('width', $(window).width());
     }
-    image.css('height', 'auto');
+    image.css('height', '100%');
     image.css('max-height', '100%');
-  }
+  } */
 
   $("html").animate(
     {
@@ -115,7 +115,7 @@ $('#show-all-comics-btn').on('click', function(e) {
   $('#comics-thumbnail-show-btn-wrapper').hide();
 });
 
-$('.comics-content-zoom-out').on('click', function(e) {
+/* $('.comics-content-zoom-out').on('click', function(e) {
   var zoom = typeof Cookies.get('zoom') === 'undefined' ? 1 : parseInt(Cookies.get('zoom'));
   var image = $('#current-page-image');
   var max_height = $(window).height() - 38;
@@ -149,7 +149,7 @@ $('.comics-content-zoom-in').on('click', function(e) {
   image.css('max-height', '100%');
   $('.zoom-ratio').html(zoom + '.0x')
   Cookies.set('zoom', zoom, { expires: 365 });
-});
+}); */
 
 $('.comic-rows-wrapper .comic-rows-videos-div').on({ 'touchstart' : function(){
   $(this).find('.comic-rows-videos-title').addClass('active');
