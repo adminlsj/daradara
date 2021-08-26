@@ -215,7 +215,7 @@
 
 	<div id="home-rows-wrapper" class="search-rows-wrapper" style="position: relative;">
 
-		<div class="hidden-sm hidden-md hidden-lg" style="text-align: center; margin-top: -4px; margin-bottom: -20px;">
+		<div class="hidden-sm hidden-md hidden-lg" style="text-align: center; margin-top: -3px; margin-bottom: -19px;">
 			 <ins class="adsbyexoclick" data-zoneid="4396576"></ins> 
 		</div>
 

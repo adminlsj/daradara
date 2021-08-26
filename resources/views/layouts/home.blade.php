@@ -20,17 +20,17 @@
 	</div>
 
 	<div class="hidden-sm hidden-md hidden-lg" style="position: relative;">
-		<img style="width: 100%; -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));" src="https://i.imgur.com/IuFslJU.png">
+		<img style="width: 100%; -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));" src="https://i.imgur.com/HhP30zt.jpg">
 		<div style="position: absolute; left: 50%; -webkit-transform: translateX(-50%); transform: translateX(-50%); width: 96%; bottom: 14%; text-align: center; color: white">
 			<h3 style="font-weight: bold; font-size: 20px;"><span style="color: crimson">H</span>anime1<span style="color: crimson">.</span>me</h3>
-			<h1 style="font-size: 28px; font-weight: bold; margin: 0">復仇・闇黑網站</h1>
-			<h4 style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; line-height: 16px; font-size: 12px; width: 92%; margin-left: 4%;">ヤバい！復讐・闇サイト • 中文字幕 • 「妹妹自殺了」突然接到父親連絡的手塚遼，在有著普通兄妹以上愛情的妹妹死亡後，過著行屍走肉般生活。有一天他得知了妹妹自殺的內幕...</h4>
+			<h1 style="font-size: 28px; font-weight: bold; margin: 0">傲嬌公主</h1>
+			<h4 style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; line-height: 16px; font-size: 12px; width: 92%; margin-left: 4%;">OVA ツンプリ • 中文字幕 • 從刺客手中保護了國王的主角，不僅被賞賜了爆乳女僕濃厚&積極的服侍，更擄獲了擁有極上肉體的金髮傲嬌公主的芳心，三人過著甜蜜的性福生活！</h4>
 			<div style="margin-top: 15px; width: 100%">
 				<div style="display: inline-block; margin-top: 5px;">
-					<a href="{{ route('video.watch') }}?v=22307" class="hover-opacity-all home-banner-btn home-banner-play-btn play-btn" target="_blank" style="cursor: pointer; font-size: 14px; border-radius: 3px; text-decoration: none; background-color: white; padding: 8px 22px 8px 12px; color: black;"><span style="vertical-align: middle; font-size: 2em; margin-top: -3px; padding-right: 3px" class="material-icons">play_arrow</span>播放</a>
+					<a href="{{ route('video.watch') }}?v=13772" class="hover-opacity-all home-banner-btn home-banner-play-btn play-btn" target="_blank" style="cursor: pointer; font-size: 14px; border-radius: 3px; text-decoration: none; background-color: white; padding: 8px 22px 8px 12px; color: black;"><span style="vertical-align: middle; font-size: 2em; margin-top: -3px; padding-right: 3px" class="material-icons">play_arrow</span>播放</a>
 				</div>
 				<div style="display: inline-block; margin-top: 5px; padding-left: 2px;">
-					<a href="{{ route('video.watch') }}?v=22307" class="hover-opacity-all home-banner-btn home-banner-info-btn" style="cursor: pointer; font-size: 14px; border-radius: 3px; text-decoration: none; background-color: gray; padding: 8px 21px 8px 17px; color: white; opacity: 0.8;"><span style="vertical-align: middle; font-size: 1.66em; margin-top: -3px; padding-right: 4px" class="material-icons">info</span>更多資訊</a>
+					<a href="{{ route('video.watch') }}?v=13772" class="hover-opacity-all home-banner-btn home-banner-info-btn" style="cursor: pointer; font-size: 14px; border-radius: 3px; text-decoration: none; background-color: gray; padding: 8px 21px 8px 17px; color: white; opacity: 0.8;"><span style="vertical-align: middle; font-size: 1.66em; margin-top: -3px; padding-right: 4px" class="material-icons">info</span>更多資訊</a>
 				</div>
 			</div>
 		</div>

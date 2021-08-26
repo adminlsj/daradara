@@ -14,7 +14,6 @@
 Route::group(['middleware' => 'throttle:120,1'], function () {
 	Route::get('/', 'HomeController@index');
 
-	Route::resource('user', 'UserController');
 	Auth::routes();
 	Route::get('auth/{provider}', 'Auth\LoginController@redirectToProvider');
 	Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
