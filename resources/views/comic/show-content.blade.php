@@ -17,14 +17,20 @@
     <img id="current-page-image" src="https://i.nhentai.net/galleries/{{ $comic->galleries_id }}/{{ $page }}.{{ App\Nhentai::$parseExt[$comic->extensions[$page - 1]] }}" data-extension="{{ $comic->extension }}">
 
     <script>
-        var image1 = new Image();
-        image1.src = 'https://i.nhentai.net/galleries/{{ $comic->galleries_id }}/{{ $page + 1 }}.{{ App\Nhentai::$parseExt[$comic->extensions[$page + 0]] }}';
+        @if ($comic->pages - $page > 1)
+          var image1 = new Image();
+          image1.src = 'https://i.nhentai.net/galleries/{{ $comic->galleries_id }}/{{ $page + 1 }}.{{ App\Nhentai::$parseExt[$comic->extensions[$page + 0]] }}';
+        @endif
 
-        var image2 = new Image();
-        image2.src = 'https://i.nhentai.net/galleries/{{ $comic->galleries_id }}/{{ $page + 2 }}.{{ App\Nhentai::$parseExt[$comic->extensions[$page + 1]] }}';
+        @if ($comic->pages - $page > 2)
+          var image2 = new Image();
+          image2.src = 'https://i.nhentai.net/galleries/{{ $comic->galleries_id }}/{{ $page + 2 }}.{{ App\Nhentai::$parseExt[$comic->extensions[$page + 1]] }}';
+        @endif
 
-        var image3 = new Image();
-        image3.src = 'https://i.nhentai.net/galleries/{{ $comic->galleries_id }}/{{ $page + 3 }}.{{ App\Nhentai::$parseExt[$comic->extensions[$page + 2]] }}';
+        @if ($comic->pages - $page > 3)
+          var image3 = new Image();
+          image3.src = 'https://i.nhentai.net/galleries/{{ $comic->galleries_id }}/{{ $page + 3 }}.{{ App\Nhentai::$parseExt[$comic->extensions[$page + 2]] }}';
+        @endif
 
         var extensions = document.createElement('textarea');
         extensions.innerHTML = '{{ $extensions }}';

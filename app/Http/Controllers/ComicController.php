@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Comic;
 use App\Nhentai;
+use Cookie;
 
 class ComicController extends Controller
 {

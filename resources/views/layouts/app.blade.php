@@ -28,10 +28,11 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined" rel="stylesheet">
 
     <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.0/dist/js.cookie.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 </head>
 <body>
-    <div style="{{ Request::is('*g/*') ? 'background-color: #0d0d0d;' : '' }}">
+    <div>
         @yield('nav')
 
         <div style="overflow-x: hidden;">

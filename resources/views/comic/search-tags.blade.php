@@ -18,7 +18,7 @@
 
   <h4 class="comics-search-tag-tabs" style="color: #d9d9d9; font-weight: 400;">
     <a href="{{ route('comic.searchTags', ['column' => $column, 'value' => $value]) }}"><div class="no-select {{ !Request::is('*/popular*') ? 'active' : '' }}" style="margin-right: 15px; border-radius: 5px;">最新</div></a>
-    <div class="no-select" style="border-top-left-radius: 5px; border-bottom-left-radius: 5px;">熱門 :</div>
+    <div class="no-select" style="border-top-left-radius: 5px; border-bottom-left-radius: 5px; cursor: auto;">熱門 :</div>
     <a href="{{ route('comic.searchTags', ['column' => $column, 'value' => $value, 'time' => 'popular-today']) }}"><div class="no-select {{ Request::is('*/popular-today') ? 'active' : '' }}">本日</div></a>
     <a href="{{ route('comic.searchTags', ['column' => $column, 'value' => $value, 'time' => 'popular-week']) }}"><div class="no-select {{ Request::is('*/popular-week') ? 'active' : '' }}">本週</div></a>
     <a href="{{ route('comic.searchTags', ['column' => $column, 'value' => $value, 'time' => 'popular']) }}"><div class="no-select {{ Request::is('*/popular') ? 'active' : '' }}" style="border-top-right-radius: 5px; border-bottom-right-radius: 5px;">所有</div></a>

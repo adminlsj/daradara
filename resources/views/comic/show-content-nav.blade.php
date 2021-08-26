@@ -25,4 +25,14 @@
 			<span style="font-size: 22px; vertical-align: middle; margin-left: -4px; margin-top: 0px; padding: 8px 8px 8px 9px;" class="material-icons comic-show-content-nav-item">fast_forward</span>
 		</a>
 	</div>
+
+	<div style="display: inline-block; position: absolute; right: 0; width: auto; z-index: 1;">
+		<a class="comics-content-zoom-out">
+			<span style="color: white; font-size: 22px; vertical-align: middle; margin-top: 0px; padding: 8px;" class="material-icons comic-show-content-nav-item">zoom_out</span>
+		</a>
+		<span class="zoom-ratio" style="color: white; font-weight: 400; padding-left: 7px; padding-right: 7px;">{{ isset($_COOKIE['zoom']) ? $_COOKIE['zoom'] : 1 }}.0x</span>
+		<a class="comics-content-zoom-in">
+			<span style="color: white; font-size: 22px; vertical-align: middle; margin-top: 0px; padding: 8px;" class="material-icons comic-show-content-nav-item">zoom_in</span>
+		</a>
+	</div>
 </div>

@@ -1,4 +1,17 @@
 $(document).ready(function() {
+  var zoom = typeof Cookies.get('zoom') === 'undefined' ? 1 : parseInt(Cookies.get('zoom'));
+  var image = $('#current-page-image');
+  if (zoom != 1) {
+    var new_width = image.width() * zoom;
+    if (new_width < $(window).width()) {
+      image.css('width', new_width);
+    } else {
+      image.css('width', $(window).width());
+    }
+    image.css('height', 'auto');
+    image.css('max-height', '100%');
+  }
+
   $("html").animate(
     {
       scrollTop: $("#comic-content-wrapper").offset().top
@@ -102,7 +115,38 @@ $('#show-all-comics-btn').on('click', function(e) {
   $('#comics-thumbnail-show-btn-wrapper').hide();
 });
 
-function htmlDecode(input) {
-  var doc = new DOMParser().parseFromString(input, "text/html");
-  return doc.documentElement.textContent;
-}
+$('.comics-content-zoom-out').on('click', function(e) {
+  var zoom = typeof Cookies.get('zoom') === 'undefined' ? 1 : parseInt(Cookies.get('zoom'));
+  var image = $('#current-page-image');
+  var max_height = $(window).height() - 38;
+  if (image.height() > max_height && zoom > 1) {
+    zoom = zoom - 1;
+  }
+  var new_height = max_height * zoom;
+  if (new_height < max_height) {
+    image.css('max-height', max_height);
+  } else {
+    image.css('max-height', new_height);
+  }
+  image.css('width', 'auto');
+  $('.zoom-ratio').html(zoom + '.0x')
+  Cookies.set('zoom', zoom, { expires: 365 });
+});
+
+$('.comics-content-zoom-in').on('click', function(e) {
+  var zoom = typeof Cookies.get('zoom') === 'undefined' ? 1 : parseInt(Cookies.get('zoom'));
+  var image = $('#current-page-image');
+  if (image.width() < $(window).width()) {
+    zoom = zoom + 1;
+  }
+  var new_width = image.width() / (zoom - 1) * zoom;
+  if (new_width > $(window).width()) {
+    image.css('width', $(window).width());
+  } else {
+    image.css('width', new_width);
+  }
+  image.css('height', 'auto');
+  image.css('max-height', '100%');
+  $('.zoom-ratio').html(zoom + '.0x')
+  Cookies.set('zoom', zoom, { expires: 365 });
+});
