@@ -150,3 +150,11 @@ $('.comics-content-zoom-in').on('click', function(e) {
   $('.zoom-ratio').html(zoom + '.0x')
   Cookies.set('zoom', zoom, { expires: 365 });
 });
+
+$('.comic-rows-wrapper .comic-rows-videos-div').on({ 'touchstart' : function(){
+  $(this).find('.comic-rows-videos-title').addClass('active');
+}});
+
+$('.comic-rows-wrapper .comic-rows-videos-div').on({ 'touchend' : function(){
+  $(this).find('.comic-rows-videos-title').removeClass('active');
+}});

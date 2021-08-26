@@ -501,7 +501,7 @@ th, td {
   border-bottom-right-radius: 5px;
 }
 
-.comic-rows-wrapper .comic-rows-videos-div:hover .comic-rows-videos-title, .comic-rows-wrapper .comic-rows-videos-div:active .comic-rows-videos-title {
+.comic-rows-wrapper .comic-rows-videos-div:hover .comic-rows-videos-title, .comic-rows-wrapper .comic-rows-videos-div .comic-rows-videos-title.active {
   position: absolute;
   overflow: visible;
   display: block;
