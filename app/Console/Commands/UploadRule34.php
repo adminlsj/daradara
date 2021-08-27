@@ -52,7 +52,7 @@ class UploadRule34 extends Command
         Log::info('Rule34 user '.$user->name.' upload started...');
         $video_links = [];
         $html = Browsershot::url($url)
-                ->timeout(12800)
+                ->timeout(3600)
                 ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
                 ->bodyHtml();
 
@@ -74,7 +74,7 @@ class UploadRule34 extends Command
             $rule_id = $queries['id'];
             if (!Video::where('sd', 'ilike', '%?'.$rule_id)->exists() && !in_array($rule_id, $duplicated)) {
                 $html = Browsershot::url($link)
-                ->timeout(12800)
+                ->timeout(3600)
                 ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
                 ->bodyHtml();
 
