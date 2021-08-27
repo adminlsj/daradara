@@ -21,6 +21,7 @@ class Kernel extends ConsoleKernel
         'App\Console\Commands\UpdateSpankbangErrors',
         'App\Console\Commands\UpdateYoujizz',
         'App\Console\Commands\UpdateXvideos',
+        'App\Console\Commands\UploadNhentai',
         'App\Console\Commands\UploadRule34',
     ];
 
@@ -40,6 +41,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('hanime1:update-spankbangbackup')->hourly();
         $schedule->command('hanime1:update-spankbangerrors')->hourly();
         $schedule->command('hanime1:update-youjizz')->cron('0 */4 * * *');
+        $schedule->command('hanime1:upload-nhentai')->hourly()->between('6:00', '21:00');
         $schedule->command('hanime1:upload-rule34')->hourly()->between('6:00', '21:00');
     }
 

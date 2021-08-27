@@ -5,6 +5,7 @@ namespace App;
 use App\Comic;
 use App\Helper;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 
 class Nhentai
 {
@@ -268,7 +269,9 @@ class Nhentai
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $pages = 10;
+        Log::info('Nhentai upload started...');
+
+        $pages = 5;
         $nhentai_ids = [];
         $url = 'https://nhentai.net/language/chinese/?page=';
         for ($i = 1; $i <= $pages; $i++) { 
@@ -373,6 +376,8 @@ class Nhentai
                 ]);
             }
         }
+
+        Log::info('Nhentai upload ended...');
     }
 
     public static function getNhentaiTags(String $html, String $delimiter)
