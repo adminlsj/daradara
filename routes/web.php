@@ -50,9 +50,12 @@ Route::group(['middleware' => 'throttle:120,1'], function () {
 	Route::get('/list', 'HomeController@list')->name('home.list');
 	Route::get('/search', ['as' => 'home.search', 'uses' => 'HomeController@search']);
 
-	Route::get('/g/{comic}', 'ComicController@showCover')->name('comic.showCover');
-	Route::get('/g/{comic}/{page}', 'ComicController@showContent')->name('comic.showContent');
+	Route::get('/comics', 'ComicController@index')->name('comic.index');
+	Route::get('/comics/search', 'ComicController@search')->name('comic.search');
+	Route::get('/comic/{comic}', 'ComicController@showCover')->name('comic.showCover');
+	Route::get('/comic/{comic}/{page}', 'ComicController@showContent')->name('comic.showContent');
 	Route::get('/{column}/{value}/{time?}', 'ComicController@searchTags')->name('comic.searchTags');
+	Route::get('/getRandomComic', 'ComicController@getRandomComic')->name('comic.random');
 });
 
 Route::group(['middleware' => 'admin'], function () {

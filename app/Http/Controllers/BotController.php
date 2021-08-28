@@ -26,6 +26,25 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
+        $comics = Comic::orderBy('id', 'asc')->get();
+        foreach ($comics as $comic) {
+            $searchtext = $comic->title_n_before.'_'
+                       .$comic->title_n_pretty.'_'
+                       .$comic->title_n_after.'_'
+                       .$comic->title_o_before.'_'
+                       .$comic->title_o_pretty.'_'
+                       .$comic->title_o_after.'_'
+                       .implode('_', $comic->parodies).'_'
+                       .implode('_', $comic->characters).'_'
+                       .implode('_', $comic->tags).'_'
+                       .implode('_', $comic->artists).'_'
+                       .implode('_', $comic->groups).'_'
+                       .implode('_', $comic->languages).'_'
+                       .implode('_', $comic->categories);
+            $comic->searchtext = mb_strtolower($searchtext);
+            $comic->save();
+        }
+
         /* $videos = Video::where('tags', 'ilike', '% 睡房 %')->get();
         foreach ($videos as $video) {
             $tags_array = $video->tags_array;

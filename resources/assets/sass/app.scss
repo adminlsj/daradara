@@ -42,12 +42,28 @@ th, td {
   -moz-transform: rotate(180deg);
 } */
 
-.comics-nav #main-nav {
-  background-color: #1f1f1f !important;
-  background-image: none; 
-  transition: none; 
-  height: 55px; 
-  line-height: 55px; 
+#comic-nav {
+  position: fixed; 
+  top: 0; 
+  width: 100%; 
+  padding: 0 4%; 
+  z-index: 1;
+  position: static; 
+  background-color: #1f1f1f;
+  height: 50px; 
+  line-height: 50px;
+}
+
+.comic-nav-item {
+  font-weight: 400; 
+  color: #d9d9d9 !important; 
+  line-height: 50px; 
+  display: inline-block; 
+  vertical-align: top;
+}
+
+.comic-nav-item:hover {
+  background-color: #383838; 
 }
 
 #watch-comics-link-btn {
@@ -211,22 +227,22 @@ th, td {
   z-index: 1
 }
 
-#main-nav .nav-item, #main-mobile-nav .nav-item {
+#main-nav .nav-item, #main-mobile-nav .nav-item, #comic-nav .nav-item {
   font-size: 14px;
   padding: 0 8px;
   color: white;
 }
 
-#main-nav .nav-icon, #main-mobile-nav .nav-icon {
+#main-nav .nav-icon, #main-mobile-nav .nav-icon, #comic-nav .nav-icon {
   padding: 0 12px;
   color: white;
 }
 
-#main-nav .nav-icon span, #main-mobile-nav .nav-icon span {
+#main-nav .nav-icon span, #main-mobile-nav .nav-icon span, #comic-nav .nav-icon span {
   font-size: 1.9em;
 }
 
-#main-nav a, #main-mobile-nav a {
+#main-nav a, #main-mobile-nav a, #comic-nav a {
   text-decoration: none;
 }
 

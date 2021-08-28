@@ -289,6 +289,16 @@ $('#duration-modal-trigger').click(function(e) {
     $('#duration-modal .modal-dialog').css('left', duration_left);
 });
 
+$('#comic-random-nav-item').click(function(e) {
+  $.ajax({
+    type:'GET',
+    url:'/getRandomComic',
+    success: function(data){
+      window.location.href = '/comic/' + data.id;
+    }
+  });
+});
+
 $(document).ready(function() {
   $('#defaultOpen').click();
   var videos_scroll = document.querySelectorAll('.videos-scroll');

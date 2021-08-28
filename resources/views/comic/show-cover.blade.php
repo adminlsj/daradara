@@ -1,9 +1,7 @@
 @extends('layouts.app')
 
 @section('nav')
-  <span class="comics-nav">
-    @include('nav.main')
-  </span>
+  @include('nav.comic')
 @endsection
 
 @section('content')
@@ -37,7 +35,7 @@
           @if ($value)
             <h5 style="margin:0; color: #d9d9d9;">{{ App\Nhentai::$columns[$key] }}：
               @foreach ($value as $data)
-                <a href="{{ route('comic.searchTags', ['column' => $key, 'value' => $data]) }}"><div class="no-select" style="background-color: #4d4d4d; padding: 4px 7px; border-radius: 5px; color: #d9d9d9; cursor: pointer; display: inline-block; margin-bottom: 4px">{{ $data }}</div></a>
+                <a class="hover-lighter" href="{{ route('comic.searchTags', ['column' => $key, 'value' => $data]) }}"><div class="no-select" style="background-color: #4d4d4d; padding: 4px 7px; border-radius: 5px; color: #d9d9d9; cursor: pointer; display: inline-block; margin-bottom: 4px">{{ $data }}</div></a>
               @endforeach
             </h5>
           @endif

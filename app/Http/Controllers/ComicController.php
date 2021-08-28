@@ -8,6 +8,14 @@ use Illuminate\Http\Request;
 
 class ComicController extends Controller
 {
+    public function index(Request $request)
+    {
+        $trending = Comic::orderBy('day_views', 'desc')->select('id', 'galleries_id', 'title_n_before', 'title_n_pretty', 'title_n_after', 'extension', 'created_at')->limit(6)->get();
+        $newest = Comic::orderBy('created_at', 'desc')->select('id', 'galleries_id', 'title_n_before', 'title_n_pretty', 'title_n_after', 'extension', 'created_at')->paginate(30);
+
+        return view('comic.index', compact('trending', 'newest'));
+    }
+
     public function showCover(Request $request)
     {
         $cid = $request->comic;
@@ -57,6 +65,33 @@ class ComicController extends Controller
         }
     }
 
+    public function search(Request $request)
+    {
+        $query = '%'.strtolower(request('query')).'%';
+        $comics = Comic::where('searchtext', 'like', $query);
+
+        switch (request('sort')) {
+            case 'popular-today':
+                $comics = $comics->orderBy('day_views', 'desc');
+                break;
+
+            case 'popular-week':
+                $comics = $comics->orderBy('week_views', 'desc');
+                break;
+
+            case 'popular':
+                $comics = $comics->orderBy('views', 'desc');
+                break;
+            
+            default:
+                break;
+        }
+
+        $comics = $comics->orderBy('created_at', 'desc')->select('id', 'galleries_id', 'title_n_before', 'title_n_pretty', 'title_n_after', 'extension', 'created_at')->paginate(30);
+
+        return view('comic.search', compact('comics', 'query'));
+    }
+
     public function searchTags(String $column, String $value, String $time = null)
     {
         if (!in_array($column, array_keys(Nhentai::$columns))) {
@@ -85,5 +120,13 @@ class ComicController extends Controller
         $comics = $comics->orderBy('created_at', 'desc')->select('id', 'galleries_id', 'title_n_before', 'title_n_pretty', 'title_n_after', 'extension', 'created_at')->paginate(30);
 
         return view('comic.search-tags', compact('comics', 'column', 'value'));
+    }
+
+    public function getRandomComic()
+    {
+        $random = Comic::inRandomOrder()->select('id')->first();
+        return response()->json([
+            'id' => $random->id,
+        ]);
     }
 }
