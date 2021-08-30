@@ -40,6 +40,8 @@
 			<div class="simple-dropdown-item genre-option {{ $genre == '同人作品' ? 'active' : ''}}">同人作品</div>
 			<hr style="margin: 0; border-color: #333333;">
 			<div class="simple-dropdown-item genre-option {{ $genre == 'Cosplay' ? 'active' : ''}}">Cosplay</div>
+			<hr style="margin: 0; border-color: #333333;">
+			<a style="color: white; text-decoration: none;" href="{{ route('comic.index') }}"><div class="simple-dropdown-item genre-option">H漫畫</div></a>
 	      </div>
 	    </div>
 	  </div>
