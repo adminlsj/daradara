@@ -1,9 +1,7 @@
 @extends('layouts.app')
 
 @section('nav')
-  <span class="comics-nav">
-    @include('nav.main-static')
-  </span>
+  @include('nav.comic')
 @endsection
 
 @section('content')
@@ -13,7 +11,7 @@
 <div id="comics-search-tag-top-row" style="text-align: center;">
   <h2 style="color: #d9d9d9;">
     {{ ucfirst($column) }}
-    <div class="no-select" style="background-color: #4d4d4d; padding: 5px 10px; border-radius: 5px; color: #d9d9d9; cursor: pointer; display: inline-block; margin-bottom: 4px; display: inline-block; margin-left: 5px">{{ $value }}</div>
+    <div class="no-select" style="background-color: #4d4d4d; padding: 5px 0 5px 10px; border-radius: 5px; color: #d9d9d9; display: inline-block; margin-bottom: 4px; display: inline-block; margin-left: 5px"><span style="padding-right: 10px">{{ $value }}</span><span style="background-color: #333; padding: 4px 6px 5px 6px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; color: grey; font-weight: 400;">{{ $count >= 1000 ? round($count / 1000, 1).'k' : $count }}</span></div>
   </h2>
 
   <h4 class="comics-search-tag-tabs" style="color: #d9d9d9; font-weight: 400;">

@@ -1,9 +1,7 @@
 @extends('layouts.app')
 
 @section('nav')
-  <span class="comics-nav">
-    @include('nav.main')
-  </span>
+  @include('nav.comic')
 @endsection
 
 @section('content')

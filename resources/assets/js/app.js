@@ -289,7 +289,7 @@ $('#duration-modal-trigger').click(function(e) {
     $('#duration-modal .modal-dialog').css('left', duration_left);
 });
 
-$('#comic-random-nav-item').click(function(e) {
+$('.comic-random-nav-item').click(function(e) {
   $.ajax({
     type:'GET',
     url:'/getRandomComic',
@@ -298,6 +298,10 @@ $('#comic-random-nav-item').click(function(e) {
     }
   });
 });
+
+$('#comic-menu').click(function() {
+  $('#comic-nav-mobile').toggle();
+})
 
 $(document).ready(function() {
   $('#defaultOpen').click();

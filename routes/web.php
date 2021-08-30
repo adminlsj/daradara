@@ -52,6 +52,7 @@ Route::group(['middleware' => 'throttle:120,1'], function () {
 
 	Route::get('/comics', 'ComicController@index')->name('comic.index');
 	Route::get('/comics/search', 'ComicController@search')->name('comic.search');
+	Route::get('/comics/{column}', 'ComicController@showTags')->name('comic.showTags');
 	Route::get('/comic/{comic}', 'ComicController@showCover')->name('comic.showCover');
 	Route::get('/comic/{comic}/{page}', 'ComicController@showContent')->name('comic.showContent');
 	Route::get('/{column}/{value}/{time?}', 'ComicController@searchTags')->name('comic.searchTags');

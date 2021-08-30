@@ -26,24 +26,35 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
+        $tags_array = [];
         $comics = Comic::orderBy('id', 'asc')->get();
         foreach ($comics as $comic) {
-            $searchtext = $comic->title_n_before.'_'
-                       .$comic->title_n_pretty.'_'
-                       .$comic->title_n_after.'_'
-                       .$comic->title_o_before.'_'
-                       .$comic->title_o_pretty.'_'
-                       .$comic->title_o_after.'_'
-                       .implode('_', $comic->parodies).'_'
-                       .implode('_', $comic->characters).'_'
-                       .implode('_', $comic->tags).'_'
-                       .implode('_', $comic->artists).'_'
-                       .implode('_', $comic->groups).'_'
-                       .implode('_', $comic->languages).'_'
-                       .implode('_', $comic->categories);
-            $comic->searchtext = mb_strtolower($searchtext);
-            $comic->save();
+            $groups = $comic->groups;
+            foreach ($groups as $tag) {
+                if (array_key_exists($tag, $tags_array)) {
+                    $tags_array[$tag] = $tags_array[$tag] + 1;
+                } else {
+                    $tags_array[$tag] = 1;
+                }
+            }
         }
+        arsort($tags_array);
+        return $tags_array;
+
+        /* $tags_array = [];
+        $comics = Comic::orderBy('id', 'asc')->get();
+        foreach ($comics as $comic) {
+            $tags = $comic->tags;
+            foreach ($tags as $tag) {
+                if (array_key_exists($tag, $tags_array)) {
+                    $tags_array[$tag] = $tags_array[$tag] + 1;
+                } else {
+                    $tags_array[$tag] = 1;
+                }
+            }
+        }
+        arsort($tags_array);
+        return $tags_array; */
 
         /* $videos = Video::where('tags', 'ilike', '% 睡房 %')->get();
         foreach ($videos as $video) {
