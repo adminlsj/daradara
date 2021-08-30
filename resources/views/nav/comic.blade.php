@@ -42,3 +42,9 @@
   <a style="text-decoration: none;" href="{{ route('comic.showTags', ['column' => 'groups']) }}"><div class="comic-nav-item-mobile">社團</div></a>
   <a style="text-decoration: none;" href="/"><div class="comic-nav-item-mobile">H動漫</div></a>
 </span>
+
+<script>
+  $('#comic-menu').click(function() {
+    $('#comic-nav-mobile').toggle();
+  })
+</script>

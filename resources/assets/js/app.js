@@ -299,10 +299,6 @@ $('.comic-random-nav-item').click(function(e) {
   });
 });
 
-$('#comic-menu').click(function() {
-  $('#comic-nav-mobile').toggle();
-})
-
 $(document).ready(function() {
   $('#defaultOpen').click();
   var videos_scroll = document.querySelectorAll('.videos-scroll');
