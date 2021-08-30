@@ -11,7 +11,7 @@
 <div id="comics-search-tag-top-row" style="text-align: center;">
   <h2 style="color: #d9d9d9;">
     {{ ucfirst($column) }}
-    <div class="no-select" style="background-color: #4d4d4d; padding: 5px 0 5px 10px; border-radius: 5px; color: #d9d9d9; display: inline-block; margin-bottom: 4px; display: inline-block; margin-left: 5px"><span style="padding-right: 10px">{{ $value }}</span><span style="background-color: #333; padding: 4px 6px 5px 6px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; color: grey; font-weight: 400;">{{ $count >= 1000 ? round($count / 1000, 1).'k' : $count }}</span></div>
+    <div class="no-select" style="background-color: #4d4d4d; padding-left: 10px; border-radius: 5px; color: #d9d9d9; display: inline-block; margin-bottom: 4px; margin-left: 5px; line-height: 44px;"><span style="padding-right: 10px">{{ $value }}</span><div style="display: inline-block; background-color: #333; padding-left: 6px; padding-right: 6px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; color: grey; font-weight: 400; line-height: 44px;">{{ $count >= 1000 ? round($count / 1000, 1).'k' : $count }}</div></div>
   </h2>
 
   <h4 class="comics-search-tag-tabs" style="color: #d9d9d9; font-weight: 400;">
