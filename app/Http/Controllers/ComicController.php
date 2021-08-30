@@ -72,7 +72,7 @@ class ComicController extends Controller
     public function showTags(Request $request)
     {
         $column = $request->column;
-        if (!in_array($column, array_keys(Nhentai::$columns))) {
+        if (!in_array($column, ['tags', 'artists', 'characters', 'parodies', 'groups'])) {
             abort(404);
         }
         $tags = json_decode(Nhentai::${$column.'_array'}, true);
