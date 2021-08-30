@@ -373,19 +373,19 @@ class Nhentai
                     'created_at' => $created_at,
                 ]);
 
-                $searchtext = $comic->title_n_before.'_'
-                             .$comic->title_n_pretty.'_'
-                             .$comic->title_n_after.'_'
-                             .$comic->title_o_before.'_'
-                             .$comic->title_o_pretty.'_'
-                             .$comic->title_o_after.'_'
-                             .implode('_', $comic->parodies).'_'
-                             .implode('_', $comic->characters).'_'
-                             .implode('_', $comic->tags).'_'
-                             .implode('_', $comic->artists).'_'
-                             .implode('_', $comic->groups).'_'
-                             .implode('_', $comic->languages).'_'
-                             .implode('_', $comic->categories);
+                $searchtext = $comic->title_n_before
+                             .$comic->title_n_pretty
+                             .$comic->title_n_after
+                             .$comic->title_o_before
+                             .$comic->title_o_pretty
+                             .$comic->title_o_after
+                             .implode($comic->parodies)
+                             .implode($comic->characters)
+                             .implode($comic->tags)
+                             .implode($comic->artists)
+                             .implode($comic->groups)
+                             .implode($comic->languages)
+                             .implode($comic->categories);
                 $searchtext = mb_strtolower($searchtext);
                 $searchtext = preg_replace('/\s+/', '', $searchtext);
                 $searchtext = preg_split('//u', $searchtext, -1, PREG_SPLIT_NO_EMPTY);

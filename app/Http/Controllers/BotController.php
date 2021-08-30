@@ -26,20 +26,33 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $tags_array = [];
         $comics = Comic::orderBy('id', 'asc')->get();
         foreach ($comics as $comic) {
-            $groups = $comic->groups;
-            foreach ($groups as $tag) {
-                if (array_key_exists($tag, $tags_array)) {
-                    $tags_array[$tag] = $tags_array[$tag] + 1;
-                } else {
-                    $tags_array[$tag] = 1;
+            $searchtext = $comic->title_n_before
+                         .$comic->title_n_pretty
+                         .$comic->title_n_after
+                         .$comic->title_o_before
+                         .$comic->title_o_pretty
+                         .$comic->title_o_after
+                         .implode($comic->parodies)
+                         .implode($comic->characters)
+                         .implode($comic->tags)
+                         .implode($comic->artists)
+                         .implode($comic->groups)
+                         .implode($comic->languages)
+                         .implode($comic->categories);
+            $searchtext = mb_strtolower($searchtext);
+            $searchtext = preg_replace('/\s+/', '', $searchtext);
+            $searchtext = preg_split('//u', $searchtext, -1, PREG_SPLIT_NO_EMPTY);
+            foreach ($searchtext as &$character) {
+                if (strlen($character) != mb_strlen($character, 'utf-8')) {
+                    $character = bin2hex(iconv('UTF-8', 'UTF-16BE', $character));
                 }
             }
+            $searchtext = implode($searchtext);
+            $comic->searchtext = $searchtext;
+            $comic->save();
         }
-        arsort($tags_array);
-        return $tags_array;
 
         /* $tags_array = [];
         $comics = Comic::orderBy('id', 'asc')->get();
