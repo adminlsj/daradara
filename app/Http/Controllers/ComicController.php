@@ -117,7 +117,7 @@ class ComicController extends Controller
 
     public function searchTags(String $column, String $value, String $time = null)
     {
-        if (!in_array($column, ['tags', 'artists', 'characters', 'parodies', 'groups'])) {
+        if (!in_array($column, array_keys(Nhentai::$columns))) {
             abort(404);
         }
 
