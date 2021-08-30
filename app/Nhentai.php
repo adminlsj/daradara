@@ -23123,4 +23123,17 @@ class Nhentai
         "uniuni": 1,
         "maibotsu": 1
     }';
+
+    public static $languages_array = '{
+        "中文": 64708,
+        "翻譯": 60754,
+        "日本語": 828,
+        "英語": 26
+    }';
+
+    public static $categories_array = '{
+        "同人誌": 40370,
+        "漫畫": 23327,
+        "一般向": 9
+    }';
 }
