@@ -9,7 +9,7 @@
 
   <div id="search-form-wrapper" style="display: inline-block; position: relative; vertical-align: top;" class="comic-search-form-wrapper">
     <form id="search-form" action="{{ route('comic.search') }}" method="GET">
-        <input name="query" style="background-color: #4d4d4d; height: 40px; line-height: 40px; border: none; border-top-left-radius: 5px; border-bottom-left-radius: 5px; border-top-right-radius: 0px; border-bottom-right-radius: 0px; width: 100%; outline: none; padding-left: 10px; color: white; font-weight: 400; margin-top: 5px" type="text" value="{{ request('query') }}">
+        <input name="query" style="background-color: #4d4d4d; height: 40px; line-height: 20px; border: none; border-top-left-radius: 5px; border-bottom-left-radius: 5px; border-top-right-radius: 0px; border-bottom-right-radius: 0px; width: 100%; outline: none; padding-left: 10px; color: white; font-weight: 400; margin-top: 5px" type="text" value="{{ request('query') }}">
         <button class="hover-lighter" style="height: 40px; position: absolute; top: 5px; right: -38px; border: none; background-color: crimson; border-top-right-radius: 5px; border-bottom-right-radius: 5px;">
           <span style="color: white; font-weight: bolder; padding-left: 2px;" class="material-icons">search</span>
         </button>
