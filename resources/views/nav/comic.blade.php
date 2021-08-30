@@ -3,8 +3,8 @@
     <span style="color: crimson">H</span>anime1<span style="color: crimson">.</span>me
   </a>
 
-  <a class="hidden-md hidden-lg hover-nav" href="{{ route('comic.index') }}" style="color: white; line-height: 50px; text-decoration: none; padding: 11px 8px 12px 11px; margin: 0; border-radius: 5px;">
-    <img height="30" src="https://i.imgur.com/PTFz5Ej.png">
+  <a class="hidden-md hidden-lg hover-nav" href="{{ route('comic.index') }}" style="color: white; line-height: 40px; text-decoration: none; padding: 11px 8px 12px 11px; margin: 0; border-radius: 5px;">
+    <img style="margin-top: -2px" height="30" src="https://i.imgur.com/PTFz5Ej.png">
   </a>
 
   <div id="search-form-wrapper" style="display: inline-block; position: relative; vertical-align: top;" class="comic-search-form-wrapper">
