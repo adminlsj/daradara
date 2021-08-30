@@ -7,16 +7,16 @@
     <img height="30" src="https://i.imgur.com/PTFz5Ej.png">
   </a>
 
-  <div id="search-form-wrapper" style="display: inline-block; position: relative; vertical-align: top;">
+  <div id="search-form-wrapper" style="display: inline-block; position: relative; vertical-align: top;" class="comic-search-form-wrapper">
     <form id="search-form" action="{{ route('comic.search') }}" method="GET">
-        <input name="query" style="background-color: #4d4d4d; height: 40px; border: none; border-top-left-radius: 5px; border-bottom-left-radius: 5px; width: 100%; outline: none; padding-left: 10px; color: white; font-weight: 400; margin-top: 5px" type="text" value="{{ request('query') }}">
+        <input name="query" style="background-color: #4d4d4d; height: 40px; border: none; border-top-left-radius: 5px; border-bottom-left-radius: 5px; border-top-right-radius: 0px; border-bottom-right-radius: 0px; width: 100%; outline: none; padding-left: 10px; color: white; font-weight: 400; margin-top: 5px" type="text" value="{{ request('query') }}">
         <button class="hover-lighter" style="height: 40px; position: absolute; top: 5px; right: -38px; border: none; background-color: crimson; border-top-right-radius: 5px; border-bottom-right-radius: 5px;">
           <span style="color: white; font-weight: bolder; padding-left: 2px;" class="material-icons">search</span>
         </button>
     </form>
   </div>
 
-  <a id="comic-menu" style="padding: 0px 8px 0px 8px; line-height: 40px; margin-top: 5px; margin-bottom: 5px; border-radius: 5px; cursor: pointer;" class="nav-icon pull-right hover-nav hidden-md hidden-lg"><span style="vertical-align: middle;" class="material-icons">menu</span></a>
+  <a id="comic-menu" style="padding: 0px 8px 0px 8px; line-height: 40px; margin-top: 5px; margin-bottom: 5px; border-radius: 5px; cursor: pointer;" class="nav-icon pull-right hover-nav hidden-md hidden-lg"><span style="vertical-align: middle; margin-top: -1px;" class="material-icons">menu</span></a>
 
   <span class="hidden-xs hidden-sm">
     <a style="padding-left: 10px; cursor: pointer;" class="comic-nav-item comic-random-nav-item">隨機推薦</a>
