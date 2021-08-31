@@ -154,7 +154,7 @@ class ComicController extends Controller
 
         $comics = $comics->orderBy('created_at', 'desc')->select('id', 'galleries_id', 'title_n_before', 'title_n_pretty', 'title_n_after', 'extension', 'created_at')->paginate(30);
 
-        $count = json_decode(Nhentai::${$column.'_array'}, true)[$value];
+        $count = $comics->total();
 
         return view('comic.search-tags', compact('comics', 'column', 'value', 'count'));
     }
