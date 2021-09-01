@@ -27,10 +27,27 @@ class ComicController extends Controller
 
             $metadata = ['parodies' => $comic->parodies, 'characters' => $comic->characters, 'tags' => $comic->tags, 'artists' => $comic->artists, 'groups' => $comic->groups, 'languages' => $comic->languages, 'categories' => $comic->categories];
 
+            $comics = null;
             if ($comic->playlist_id) {
                 $comics = Comic::where('playlist_id', $comic->playlist_id)->orderBy('created_at', 'desc')->get();
             } else {
-                $comics = null;
+                if (!empty($comic->title_o_pretty)) {
+                    $title = explode(' ', $comic->title_o_pretty)[0];
+                    $column = 'title_o_pretty';
+                } elseif (!empty($comic->title_n_pretty)) {
+                    $title = explode(' ', $comic->title_n_pretty)[0];
+                    $column = 'title_n_pretty';
+                }
+                $title = preg_split('//u', $title, -1, PREG_SPLIT_NO_EMPTY);
+                array_pop($title);
+                array_pop($title);
+                $title = '%'.implode($title).'%';
+                if ($comic->artists != []) {
+                    $comics = Comic::where('artists', 'like', '%'.$comic->artists[0].'%');
+                } elseif ($comic->groups != []) {
+                    $comics = Comic::where('groups', 'like', '%'.$comic->groups[0].'%');
+                }
+                $comics = $comics->where($column, 'like', $title)->orderBy('created_at', 'desc')->limit(12)->get();
             }
 
             $tags = $tags_random = $comic->tags;

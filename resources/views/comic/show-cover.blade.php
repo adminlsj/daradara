@@ -79,7 +79,7 @@
   </div>
 </div>
 
-@if ($comics)
+@if ($comics && $comics->count() > 1)
   <div class="comics-panel-margin comics-panel-margin-top comics-panel-padding-less comics-related-wrapper comic-rows-wrapper">
     <h3 style="text-align: center; color: #d9d9d9;">相關集數列表</h3>
     @foreach ($comics as $comic)
