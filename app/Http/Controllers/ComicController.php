@@ -43,11 +43,10 @@ class ComicController extends Controller
                 array_pop($title);
                 $title = '%'.implode($title).'%';
                 if ($comic->artists != []) {
-                    $comics = Comic::where('artists', 'like', '%'.$comic->artists[0].'%');
+                    $comics = Comic::where('artists', 'like', '%'.$comic->artists[0].'%')->where($column, 'like', $title)->orderBy('created_at', 'desc')->limit(12)->get();
                 } elseif ($comic->groups != []) {
-                    $comics = Comic::where('groups', 'like', '%'.$comic->groups[0].'%');
+                    $comics = Comic::where('groups', 'like', '%'.$comic->groups[0].'%')->where($column, 'like', $title)->orderBy('created_at', 'desc')->limit(12)->get();
                 }
-                $comics = $comics->where($column, 'like', $title)->orderBy('created_at', 'desc')->limit(12)->get();
             }
 
             $tags = $tags_random = $comic->tags;
