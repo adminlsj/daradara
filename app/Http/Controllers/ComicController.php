@@ -128,10 +128,11 @@ class ComicController extends Controller
                 break;
             
             default:
+                $comics = $comics->orderBy('created_at', 'desc');
                 break;
         }
 
-        $comics = $comics->orderBy('created_at', 'desc')->select('id', 'galleries_id', 'title_n_before', 'title_n_pretty', 'title_n_after', 'extension', 'created_at')->paginate(30);
+        $comics = $comics->select('id', 'galleries_id', 'title_n_before', 'title_n_pretty', 'title_n_after', 'extension', 'created_at')->paginate(30);
 
         return view('comic.search', compact('comics', 'query'));
     }
@@ -170,10 +171,11 @@ class ComicController extends Controller
                 break;
             
             default:
+                $comics = $comics->orderBy('created_at', 'desc');
                 break;
         }
 
-        $comics = $comics->orderBy('created_at', 'desc')->select('id', 'galleries_id', 'title_n_before', 'title_n_pretty', 'title_n_after', 'extension', 'created_at')->paginate(30);
+        $comics = $comics->select('id', 'galleries_id', 'title_n_before', 'title_n_pretty', 'title_n_after', 'extension', 'created_at')->paginate(30);
 
         $count = $comics->total();
 
