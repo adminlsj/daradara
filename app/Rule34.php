@@ -69,7 +69,7 @@ class Rule34
         "belly button" => '肚臍',
         "fujiwara chika" => '藤原千花',
         "kaguya-sama wa kokurasetai ~tensai-tachi no renai zunousen~" => '輝夜姬想讓人告白～天才們的戀愛頭腦戰～',
-        "bunny tail" => '兔子尾巴',
+        "bunny tail" => '兔尾巴',
         "bunny ears" => '兔耳',
         "umbreon" => '月亮伊布',
         "scrafty" => '頭巾混混',
