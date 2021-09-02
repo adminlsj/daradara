@@ -22,4 +22,17 @@ class Helper
         $len = strpos($string, $end, $ini) - $ini;
         return substr($string, $ini, $len);
     }
+
+    public static function convertBin2hex(String $context){
+        $coverted = mb_strtolower($context);
+        $coverted = preg_replace('/\s+/', '', $coverted);
+        $coverted = preg_split('//u', $coverted, -1, PREG_SPLIT_NO_EMPTY);
+        foreach ($coverted as &$character) {
+            if (strlen($character) != mb_strlen($character, 'utf-8')) {
+                $character = bin2hex(iconv('UTF-8', 'UTF-16BE', $character));
+            }
+        }
+        $coverted = implode($coverted);
+        return $coverted;
+    }
 }

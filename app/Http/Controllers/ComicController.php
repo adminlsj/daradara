@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Comic;
 use App\Nhentai;
+use App\Helper;
 use Illuminate\Http\Request;
 
 class ComicController extends Controller
@@ -50,12 +51,16 @@ class ComicController extends Controller
             }
 
             $tags = $tags_random = $comic->tags;
-            $tags_slice = array_slice($tags_random, 0, 3);
-            $related = Comic::where(function($query) use ($tags_slice, $tags) {
+            shuffle($tags_random);
+            $tags_slice = array_slice($tags_random, 0, 2);
+            $related = Comic::where(function($query) use ($tags_slice) {
                 foreach ($tags_slice as $tag) {
-                    $query->orWhere('tags', 'like', '%"'.$tag.'"%');
+                    $tag = Helper::convertBin2hex($tag);
+                    $query->orWhere('searchtext', 'like', '%'.$tag.'%');
                 }
-            })->inRandomOrder()->limit(6)->get();
+            })->orderBy('day_views', 'desc')->limit(1000)->pluck('id')->toArray();
+            $related = array_rand($related, 6);
+            $related = Comic::select('id', 'galleries_id', 'title_n_before', 'title_n_pretty', 'title_n_after', 'extension', 'created_at')->find($related);
 
             return view('comic.show-cover', compact('comic', 'comics', 'metadata', 'related'));
 
