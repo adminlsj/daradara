@@ -9,10 +9,25 @@ use Carbon\Carbon;
 class Cosplayjav
 {
     public static $removed = [
-        "1080p", "60fps", "jav_full_hd", "tagme actress", "tagme_actress", "jav", "sex", "720p", "anime", "video", "wings", "cosplay", "idolmaster", "cosplay_sex", "split_roast", "koshimizu_sachiko", "Sano_Ai", "idolmaster_cinderella_girls", "dressing", "Kosutchi", "lightning", "pantsu", "final_fantasy", "doujin", "imageset", "Dangan_ronpa", "Enoshima_Junko", "bondage", "bukkake", "SAIT-024", "anal_toys", "nishita_karina", "Nanpa_Mokushiroku", "Violet Evergarden", "Violet_Evergarden", "NCY-104", "astolfo", "fate/apocrypha", "touhou", "kirisame_marisa", "kirito", "SDAB-183", "SOD_Create", "Hayami_Nana", "tagme_series", "tagme_character", "sword_art_online", "MIAA-448", "fukada_eimi", "NieR_Automata", "Yorha_No.2_Type_B", "MMUS-053", "grinding", "handjob_cum", "tohsaka_rin", "Momose_Asuka", "fate_stay/night", "love_live!_sunshine!", "tagme character", "fate_series", "shinon", "full_hd"
+        "1080p", "60fps", "jav_full_hd", "tagme actress", "tagme_actress", "jav", "sex", "720p", "anime", "video", "wings", "cosplay", "idolmaster", "cosplay_sex", "split_roast", "koshimizu_sachiko", "Sano_Ai", "idolmaster_cinderella_girls", "dressing", "Kosutchi", "lightning", "pantsu", "final_fantasy", "doujin", "imageset", "Dangan_ronpa", "Enoshima_Junko", "bondage", "bukkake", "SAIT-024", "anal_toys", "nishita_karina", "Nanpa_Mokushiroku", "Violet Evergarden", "Violet_Evergarden", "NCY-104", "astolfo", "fate/apocrypha", "touhou", "kirisame_marisa", "kirito", "SDAB-183", "SOD_Create", "Hayami_Nana", "tagme_series", "tagme_character", "sword_art_online", "MIAA-448", "fukada_eimi", "NieR_Automata", "Yorha_No.2_Type_B", "MMUS-053", "grinding", "handjob_cum", "tohsaka_rin", "Momose_Asuka", "fate_stay/night", "love_live!_sunshine!", "tagme character", "fate_series", "shinon", "full_hd", "HOIZ-022", "Wakamiya Hono (若宮穂乃), Sakuraba Hikari (桜庭ひかり), Inaba Ruka (稲場るか)", "cum_on_belly", "Mashu_Kyrielight"
     ];
 
     public static $translations = [
+        "fishnet_stockings" => '網襪',
+        "Mashu Kyrielight (マシュ・キリエライト) / Shielder" => '瑪修·基利艾拉特',
+        "fate/grand_order" => 'Fate/Grand Order',
+        "Shirouto_Hoihoi" => '素人ホイホイ',
+        "Sakuraba_Hikari" => '櫻庭光',
+        "Wakamiya_Hono" => '若宮穂乃',
+        "cum_in_mouth" => '口爆',
+        "cum_on_body" => '體外射精',
+        "animal_tail" => '獸尾巴',
+        "animal_ears" => '獸耳',
+        "bunny_tail" => '兔尾巴',
+        "bunny_ears" => '兔耳',
+        "Inaba_Ruka" => '稻場流花',
+        "breastjob" => '乳交',
+        "Mousozoku" => '妄想族',
         "shinon (シノン)" => '詩乃',
         "thigh_boots" => '大腿靴',
         "grey_hair" => '灰髮',
@@ -105,6 +120,8 @@ class Cosplayjav
         "long_hair" => '長髮',
         "sex_syndrome" => 'Sex Syndrome',
         "wafuku" => '和服',
+        "dildo" => '假屌',
+        "shielder" => 'Shielder',
     ];
 
     public static function uploadCosplayjav(String $url)
