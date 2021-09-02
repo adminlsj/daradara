@@ -42,8 +42,6 @@ class Nhentai
         "big breasts" => '巨乳', 
         "sole female" => '女獨秀', 
         "sole male" => '男獨秀', 
-        '女獨秀' => '唯一女性',
-        '男獨秀' => '唯一男性',
         "shotacon" => '正太控',
         "milf" => '熟女', 
         "hairy" => '黑森林', 
