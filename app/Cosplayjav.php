@@ -21,7 +21,7 @@ class Cosplayjav
         "Wakamiya_Hono" => '若宮穂乃',
         "cum_in_mouth" => '口爆',
         "cum_on_body" => '體外射精',
-        "animal_tail" => '獸尾巴',
+        "animal_tail" => '尾巴',
         "animal_ears" => '獸耳',
         "bunny_tail" => '兔尾巴',
         "bunny_ears" => '兔耳',
