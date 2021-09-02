@@ -53,7 +53,7 @@
 
         <h5 style="font-weight: 400; margin-bottom: 0px; margin-top: 0px;">
           @foreach ($tags as $tag)
-              <div class="single-video-tag"><a href="/search?tags%5B%5D={{ $tag }}{{ $doujin ? '&genre=全部' : '' }}">{{ $tag }}</a></div>
+              <div class="single-video-tag"><a href="/search?tags%5B%5D={{ $tag }}{{ $doujin ? '' : '&genre=H動漫' }}">{{ $tag }}</a></div>
           @endforeach
         </h5>
 
