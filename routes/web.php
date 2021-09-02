@@ -83,4 +83,5 @@ Route::group(['middleware' => 'admin'], function () {
 	Route::get('/translateCosplayjav', 'BotController@translateCosplayjav');
 
 	Route::get('/uploadNhentai', 'BotController@uploadNhentai');
+	Route::get('/translateNhentaiTag', 'BotController@translateNhentaiTag');
 });

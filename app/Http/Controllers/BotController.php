@@ -418,6 +418,11 @@ class BotController extends Controller
         Nhentai::uploadNhentai();
     }
 
+    public function translateNhentaiTag(Request $request)
+    {
+        Nhentai::translateNhentaiTag($request->replace);
+    }
+
     public function comments(Request $request)
     {   
         $comments = Comment::with('video:id,title')->orderBy('created_at', 'desc')->paginate(100);

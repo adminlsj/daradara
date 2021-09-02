@@ -54,7 +54,7 @@ class HomeController extends Controller
         $month = '';
         $duration = '';
         $videos = Video::query();
-        $doujin = false;
+        $doujin = true;
         $is_mobile = false;
         
         if ($query = request('query')) {
@@ -74,7 +74,6 @@ class HomeController extends Controller
         if ($genre = $request->genre) {
             switch ($genre) {
                 case '全部':
-                    $doujin = true;
                     break;
 
                 case 'H動漫':
@@ -82,21 +81,18 @@ class HomeController extends Controller
                     break;
 
                 case '3D動畫':
-                    $doujin = true;
                     $videos = $videos->where(function($query) {
                         $query->orWhere('tags_array', 'ilike', '%"3D"%');
                     });
                     break;
 
                 case '同人作品':
-                    $doujin = true;
                     $videos = $videos->where(function($query) {
                         $query->orWhere('tags_array', 'ilike', '%"同人"%');
                     });
                     break;
 
                 case 'Cosplay':
-                    $doujin = true;
                     $videos = $videos->where(function($query) {
                         $query->orWhere('tags_array', 'ilike', '%"Cosplay"%');
                     });
@@ -234,6 +230,31 @@ class HomeController extends Controller
 
     public function userReport(Request $request)
     {
+        $device = '';
+        $user_agent = $_SERVER['HTTP_USER_AGENT'];
+        if (Helper::checkIsMobile()) {
+            if (strpos($user_agent, "Android") !== FALSE) {
+                $device = 'Android';
+            } elseif (strpos($user_agent, "iPhone") !== FALSE) {
+                $device = 'iPhone';
+            } elseif (strpos($user_agent, "webOS") !== FALSE) {
+                $device = 'webOS';
+            } else {
+                $device = 'Mobile';
+            }
+        } else {
+            if (strpos($user_agent, "Win") !== FALSE) {
+                $device = 'Windows';
+            } elseif (strpos($user_agent, "Mac") !== FALSE) {
+                $device = 'Mac';
+            } elseif (strpos($user_agent, "iPad") !== FALSE) {
+                $device = 'iPad';
+            } else {
+                $device = 'Desktop';
+            }
+        }
+        $device = ' ('.$device.')';
+
         $ip_address = isset($_SERVER["HTTP_CF_CONNECTING_IP"]) ? $_SERVER["HTTP_CF_CONNECTING_IP"] : 'N/A';
         $country_code = isset($_SERVER["HTTP_CF_IPCOUNTRY"]) ? $_SERVER["HTTP_CF_IPCOUNTRY"] : 'N/A';
         if ($ip_address == '106.38.121.194' || $ip_address == '223.104.65.11' || $ip_address == '3.137.219.177' || $ip_address == '3.23.208.80' || $ip_address == 'N/A') {
@@ -247,7 +268,7 @@ class HomeController extends Controller
             if ($reason == '其他原因') {
                 $reason = $reason.'：'.request('others-text');
             }
-            Mail::to('vicky.avionteam@gmail.com')->send(new UserReport($email, $reason, request('video-id'), request('video-title'), request('video-sd'), $ip_address, $country_code));
+            Mail::to('vicky.avionteam@gmail.com')->send(new UserReport($email, $reason, request('video-id'), request('video-title'), request('video-sd'), $ip_address, $country_code.$device));
 
             if (request('video-title') == 'User Verification') {
                 return Redirect::back()->withErrors('我們已收到您的申請，並會在近日內透過您的電郵地址聯繫您。');

@@ -31,7 +31,9 @@
 <div style="margin-top: 6px; margin-bottom: -27px" class="search-pagination hidden-xs">{!! $comics->appends(request()->query())->links() !!}</div>
 <div style="margin-top: -10px; margin-bottom: -30px" class="search-pagination mobile-search-pagination hidden-sm hidden-md hidden-lg">{!! $comics->appends(request()->query())->onEachSide(1)->links() !!}</div>
 
-@include('ads.comics-banner-juicyads')
+<div class="{{ $comics->total() <= 30 ? 'comics-no-pagination-padding' : '' }}">
+  @include('ads.comics-banner-juicyads')
+</div>
 
 <script>
   var urlParams = new URLSearchParams(window.location.search);

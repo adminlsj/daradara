@@ -100,6 +100,10 @@ th, td {
   width: 113px;
 }
 
+.comics-no-pagination-padding {
+  margin-top: 58px;
+}
+
 .hover-lighter:hover {
   filter: brightness(110%);
 }
@@ -1647,6 +1651,10 @@ div.sticky {
     font-size: 25px;
     vertical-align: middle;
     margin-top: -14px;
+  }
+
+  .comics-no-pagination-padding {
+    margin-top: 43px;
   }
 
   .content-padding {
