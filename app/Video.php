@@ -179,7 +179,7 @@ class Video extends Model
             }
         })->where('cover', '!=', null)
           ->where('cover', '!=', 'https://i.imgur.com/E6mSQA2.png')
-          ->select('id', 'title', 'cover', "sd")      
+          ->select('id', 'title', 'cover')      
           ->inRandomOrder()
           ->limit($count);
     }
@@ -189,7 +189,7 @@ class Video extends Model
         return $query->orderBy($order, 'desc')
                      ->where('cover', '!=', null)
                      ->where('cover', '!=', 'https://i.imgur.com/E6mSQA2.png')
-                     ->select('id', 'title', 'cover', "sd")      
+                     ->select('id', 'title', 'cover')      
                      ->limit($count);
     }
 }
