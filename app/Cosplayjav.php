@@ -15,7 +15,7 @@ class Cosplayjav
     public static $translations = [
         "Usada Pekora (兎田ぺこら)" => '兔田佩克拉',
         "bunny_uniform" => '兔女郎',
-        "twin braids" => '雙馬辮',
+        "twin_braids" => '雙馬辮',
         "Shirogane Noel (白銀ノエル)" => '白銀諾艾爾',
         "hololive (ホロライブ)" => 'Hololive',
         "vtuber" => '虛擬YouTuber',

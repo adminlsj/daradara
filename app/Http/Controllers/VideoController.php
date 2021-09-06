@@ -26,14 +26,14 @@ class VideoController extends Controller
 
         if (is_numeric($vid) && $video = Video::with('watch:id,title')->select('id', 'user_id', 'playlist_id', 'comic_id', 'title', 'translations', 'caption', 'cover', 'tags_array', 'sd', 'qualities', 'outsource', 'current_views', 'views', 'imgur', 'foreign_sd', 'duration', 'created_at', 'uploaded_at')->withCount('likes')->find($vid)) {
 
+            if (strpos($video->sd, 'avbebe.com') !== false) {
+                header("Location: ".$video->sd);
+                die();
+            }
+
             $current = $video;
             $doujin = false;
             $is_mobile = Helper::checkIsMobile();
-
-            if ($video->cover == null) {
-                header("Location: https://www.laughseejapan.com".$request->getRequestUri());
-                die();
-            }
 
             $video->current_views++;
             $video->views++;
