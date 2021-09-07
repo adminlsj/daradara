@@ -35,14 +35,16 @@ class BotController extends Controller
             $html = curl_exec($curl_connection);
             curl_close($curl_connection);
 
-            $fembed = Helper::get_string_between($html, '<iframe width="100%" height="460" src="', '"');
-            $temp = $video->foreign_sd;
-            $temp['fembed'] = $fembed;
-            unset($temp['fsource']);
-            $video->foreign_sd = $temp;
-            $video->sd = $fembed;
-            $video->outsource = true;
-            $video->save();
+            if (strpos($html, 'https://www.fembed.com/v/') !== false) {
+                $fembed = 'https://www.fembed.com/v/'.Helper::get_string_between($html, 'https://www.fembed.com/v/', '"');
+                $temp = $video->foreign_sd;
+                $temp['fembed'] = $fembed;
+                unset($temp['fsource']);
+                $video->foreign_sd = $temp;
+                $video->sd = $fembed;
+                $video->outsource = true;
+                $video->save();
+            }
         }
 
         /* $comics = Comic::orderBy('id', 'asc')->get();
