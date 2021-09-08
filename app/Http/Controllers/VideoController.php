@@ -26,10 +26,6 @@ class VideoController extends Controller
 
         if (is_numeric($vid) && $video = Video::with('watch:id,title')->select('id', 'user_id', 'playlist_id', 'comic_id', 'title', 'translations', 'caption', 'cover', 'tags_array', 'sd', 'qualities', 'outsource', 'current_views', 'views', 'imgur', 'foreign_sd', 'duration', 'created_at', 'uploaded_at')->withCount('likes')->find($vid)) {
 
-            if (strpos($video->sd, 'avbebe.com') !== false) {
-                header("Location: ".$video->sd);
-                die();
-            }
 
             $current = $video;
             $doujin = false;
@@ -38,6 +34,12 @@ class VideoController extends Controller
             $video->current_views++;
             $video->views++;
             $video->save();
+
+            if (strpos($video->sd, 'avbebe.com') !== false) {
+                header("Location: ".$video->sd);
+                die();
+            }
+
             $videos = Video::where('playlist_id', $video->playlist_id)->orderBy('created_at', 'desc')->select('id', 'user_id', 'imgur', 'title', 'sd', 'views', 'created_at')->get();
 
             $tags = $tags_random = array_keys($video->tags_array);
