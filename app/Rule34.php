@@ -32,6 +32,7 @@ class Rule34
     ];
 
     public static $translations = [
+        "fischl (原神)" => '菲謝爾',
         "fischl (genshin impact)" => '菲謝爾',
         "outside sex" => '公眾場合',
         "mash kyrielight" => '瑪修·基利艾拉特',
