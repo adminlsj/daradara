@@ -26,27 +26,6 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $videos = Video::where('foreign_sd', 'like', '%fsource%')->get();
-        foreach ($videos as $video) {
-            $curl_connection = curl_init($video->foreign_sd['fsource']);
-            curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
-            curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
-            $html = curl_exec($curl_connection);
-            curl_close($curl_connection);
-
-            if (strpos($html, 'https://www.fembed.com/v/') !== false) {
-                $fembed = 'https://www.fembed.com/v/'.Helper::get_string_between($html, 'https://www.fembed.com/v/', '"');
-                $temp = $video->foreign_sd;
-                $temp['fembed'] = $fembed;
-                unset($temp['fsource']);
-                $video->foreign_sd = $temp;
-                $video->sd = $fembed;
-                $video->outsource = true;
-                $video->save();
-            }
-        }
-
         /* $comics = Comic::orderBy('id', 'asc')->get();
         foreach ($comics as $comic) {
             $searchtext = $comic->title_n_before
