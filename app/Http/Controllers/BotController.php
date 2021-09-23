@@ -26,6 +26,16 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
+        $videos = Video::where('sd', 'ilike', '%xvideos%')->where('foreign_sd', 'ilike', '%"xvideos"%')->orderBy('id', 'desc')->get();
+        foreach ($videos as $video) {
+            $curl_connection = curl_init($video->foreign_sd['xvideos']);
+            curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+            curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+            return $html = curl_exec($curl_connection);
+            curl_close($curl_connection);
+        }
+
         /* $comics = Comic::orderBy('id', 'asc')->get();
         foreach ($comics as $comic) {
             $searchtext = $comic->title_n_before
