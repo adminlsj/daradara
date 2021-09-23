@@ -38,14 +38,17 @@ class BotController extends Controller
 
         $videos = Video::where('sd', 'ilike', '%xvideos%')->where('foreign_sd', 'ilike', '%"xvideos"%')->orderBy('id', 'desc')->get();
         foreach ($videos as $video) {
-            $curl_connection = curl_init($video->foreign_sd['xvideos']);
+            /* $curl_connection = curl_init($video->foreign_sd['xvideos']);
             curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
             curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
             $html = curl_exec($curl_connection);
-            curl_close($curl_connection);
+            curl_close($curl_connection); */
 
-            return $m3u8 = Helper::get_string_between($html, "html5player.setVideoHLS('", "');");
+            $html = Browsershot::url($video->foreign_sd['xvideos'])
+                ->timeout(3600)
+                ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
+                ->bodyHtml();
 
             if (strpos($html, "html5player.setVideoHLS('") !== false) {
                 $m3u8 = Helper::get_string_between($html, "html5player.setVideoHLS('", "');");
