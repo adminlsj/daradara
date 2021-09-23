@@ -74,6 +74,8 @@ Route::group(['middleware' => 'admin'], function () {
 
 	Route::get('/updateXvideos', 'BotController@updateXvideos');
 
+	Route::get('/checkMotherless', 'BotController@checkMotherless');
+
 	Route::get('/uploadRule34', 'BotController@uploadRule34');
 	Route::get('/importRule34', 'BotController@importRule34');
 	Route::get('/translateRule34', 'BotController@translateRule34');

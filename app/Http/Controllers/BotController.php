@@ -370,6 +370,25 @@ class BotController extends Controller
         Log::info('Xvideos update ended...');
     }
 
+    public function checkMotherless()
+    {
+        $videos = Video::where('sd', 'like', '%motherless%')->orderBy('id', 'desc')->get();
+        foreach ($videos as $video) {
+            $ch = curl_init($video->sd);
+            curl_setopt($ch, CURLOPT_HEADER, true);    // we want headers
+            curl_setopt($ch, CURLOPT_NOBODY, true);    // we don't need body
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
+            curl_setopt($ch, CURLOPT_TIMEOUT,10);
+            $output = curl_exec($ch);
+            $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            curl_close($ch);
+
+            if ($httpcode != 200) {
+                echo 'ID#'.$video->id.' - '.$httpcode.'<br>';
+            }
+        }
+    }
+
     public function uploadRule34(Request $request)
     {
         $artists = Rule34::$artists;
