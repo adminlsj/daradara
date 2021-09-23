@@ -39,7 +39,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('hanime1:update-data')->dailyAt('05:00');
         $schedule->command('hanime1:reset-day-views')->dailyAt('05:00');
         $schedule->command('hanime1:reset-week-views')->weeklyOn(1, '05:00');
-        $schedule->command('hanime1:check-motherless')->dailyAt('20:10');
+        $schedule->command('hanime1:check-motherless')->dailyAt('05:00');
 
         $schedule->command('hanime1:update-xvideos')->hourly();
         $schedule->command('hanime1:update-spankbang')->cron('0 */3 * * *')->between('2:00', '22:00');
