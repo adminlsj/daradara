@@ -17,6 +17,7 @@ use App\Comment;
 use App\User;
 use Carbon\Carbon;
 use App\Spankbang;
+use App\Motherless;
 use App\Nhentai;
 
 class BotController extends Controller
@@ -372,21 +373,7 @@ class BotController extends Controller
 
     public function checkMotherless()
     {
-        $videos = Video::where('sd', 'like', '%motherless%')->orderBy('id', 'desc')->get();
-        foreach ($videos as $video) {
-            $ch = curl_init($video->sd);
-            curl_setopt($ch, CURLOPT_HEADER, true);    // we want headers
-            curl_setopt($ch, CURLOPT_NOBODY, true);    // we don't need body
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
-            curl_setopt($ch, CURLOPT_TIMEOUT,10);
-            $output = curl_exec($ch);
-            $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-            curl_close($ch);
-
-            if ($httpcode != 200) {
-                echo 'ID#'.$video->id.' - '.$httpcode.'<br>';
-            }
-        }
+        Motherless::checkMotherless();
     }
 
     public function uploadRule34(Request $request)
