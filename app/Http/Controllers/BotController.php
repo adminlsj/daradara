@@ -26,6 +26,15 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
+        $videos = Video::where('sd', 'ilike', '%xvideos%')->where('foreign_sd', 'ilike', '%"error"%')->orderBy('id', 'desc')->get();
+        foreach ($videos as $video) {
+            $temp = $video->foreign_sd;
+            $temp['xvideos'] = $video->foreign_sd['error'];
+            unset($temp['error']);
+            $video->foreign_sd = $temp;
+            $video->save();
+        }
+
         $videos = Video::where('sd', 'ilike', '%xvideos%')->where('foreign_sd', 'ilike', '%"xvideos"%')->orderBy('id', 'desc')->get();
         foreach ($videos as $video) {
             $curl_connection = curl_init($video->foreign_sd['xvideos']);
@@ -35,13 +44,15 @@ class BotController extends Controller
             $html = curl_exec($curl_connection);
             curl_close($curl_connection);
 
+            echo $html;
+
             if (strpos($html, "html5player.setVideoHLS('") !== false) {
                 $m3u8 = Helper::get_string_between($html, "html5player.setVideoHLS('", "');");
                 $curl_connection = curl_init($m3u8);
                 curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
                 curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
                 curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
-                return $data = curl_exec($curl_connection);
+                $data = curl_exec($curl_connection);
                 curl_close($curl_connection);
 
                 $array = explode('#EXT-X-STREAM-INF', $data);
