@@ -45,7 +45,7 @@ class BotController extends Controller
             $html = curl_exec($curl_connection);
             curl_close($curl_connection);
 
-            echo $html;
+            return $m3u8 = Helper::get_string_between($html, "html5player.setVideoHLS('", "');");
 
             if (strpos($html, "html5player.setVideoHLS('") !== false) {
                 $m3u8 = Helper::get_string_between($html, "html5player.setVideoHLS('", "');");
