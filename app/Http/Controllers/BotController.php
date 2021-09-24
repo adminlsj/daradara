@@ -42,7 +42,7 @@ class BotController extends Controller
             curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
             curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
-            return $html = curl_exec($curl_connection);
+            $html = curl_exec($curl_connection);
             curl_close($curl_connection);
 
             if (strpos($html, "html5player.setVideoHLS('") !== false) {
