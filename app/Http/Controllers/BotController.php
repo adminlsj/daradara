@@ -27,14 +27,14 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $videos = Video::where('sd', 'ilike', '%xvideos%')->where('foreign_sd', 'ilike', '%"error"%')->orderBy('id', 'desc')->get();
+        /* $videos = Video::where('sd', 'ilike', '%xvideos%')->where('foreign_sd', 'ilike', '%"error"%')->orderBy('id', 'desc')->get();
         foreach ($videos as $video) {
             $temp = $video->foreign_sd;
             $temp['xvideos'] = $video->foreign_sd['error'];
             unset($temp['error']);
             $video->foreign_sd = $temp;
             $video->save();
-        }
+        } */
 
         $videos = Video::where('sd', 'ilike', '%xvideos%')->where('foreign_sd', 'ilike', '%"xvideos"%')->orderBy('id', 'desc')->get();
         foreach ($videos as $video) {
