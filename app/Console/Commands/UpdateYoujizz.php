@@ -110,17 +110,17 @@ class UpdateYoujizz extends Command
                     }
                 }
 
-                /* if ($has_hls2e) {
+                /* $source = end($mp4);
+                $video->sd = $source;
+                $video->qualities = [key($mp4) => $source]; */
+
+                if ($has_hls2e) {
                     $video->sd = end($mp4);
                 } else {
                     $video->sd = end($m3u8);
-                } */
+                }
 
-                $source = end($mp4);
-                $video->sd = $source;
-                $video->qualities = [key($mp4) => $source];
-
-                // $video->qualities = $mp4;
+                $video->qualities = $mp4;
                 $video->outsource = false;
                 $video->save();
                 echo 'ID: '.$video->id.' UPDATED<br>';
