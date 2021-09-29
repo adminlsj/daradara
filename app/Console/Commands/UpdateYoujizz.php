@@ -115,9 +115,12 @@ class UpdateYoujizz extends Command
                 } else {
                     $video->sd = end($m3u8);
                 } */
-                $video->sd = end($mp4);
 
-                $video->qualities = $mp4;
+                $source = end($mp4);
+                $video->sd = $source;
+                $video->qualities = [key($mp4) => $source];
+
+                // $video->qualities = $mp4;
                 $video->outsource = false;
                 $video->save();
                 echo 'ID: '.$video->id.' UPDATED<br>';
