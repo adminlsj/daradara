@@ -110,11 +110,12 @@ class UpdateYoujizz extends Command
                     }
                 }
 
-                if ($has_hls2e) {
+                /* if ($has_hls2e) {
                     $video->sd = end($mp4);
                 } else {
                     $video->sd = end($m3u8);
-                }
+                } */
+                $video->sd = end($mp4);
 
                 $video->qualities = $mp4;
                 $video->outsource = false;
