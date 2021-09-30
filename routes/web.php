@@ -29,6 +29,7 @@ Route::group(['middleware' => 'throttle:120,1'], function () {
 	Route::post('/deleteComment', 'VideoController@deleteComment')->name('video.deleteComment');
 	Route::post('/commentLike', 'VideoController@commentLike')->name('comment.like');
 	Route::get('/loadComment', 'VideoController@loadComment')->name('comment.loadComment');
+	Route::get('/loadReplies', 'VideoController@loadReplies')->name('comment.loadReplies');
 
 	Route::get('/about', 'HomeController@about');
 	Route::get('/contact', 'HomeController@contact');

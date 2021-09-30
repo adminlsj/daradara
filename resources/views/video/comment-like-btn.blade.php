@@ -4,9 +4,9 @@
 	<input name="comment-likes-count" type="hidden" value="{{ $commentLikesCount }}">
 	<input name="comment-likes-sum" type="hidden" value="{{ $commentLikesSum }}">
 	<input name="unlike-comment-status" type="hidden" value="{{ $unlikedComment }}">
-  	<span style="vertical-align: middle; font-size: 1.15em; color: darkgray; margin-top: -3px; cursor: pointer; {{ $likedComment ? 'color: #4377e8' : '' }}" class="material-icons">thumb_up</span>
-  	<span style="font-size: 0.90em; color: gray; margin-left: 5px; letter-spacing: 3px; {{ $commentLikesCount == 0 ? 'display:none' : '' }}">{{ $commentLikesSum }}</span>
+  	<span style="vertical-align: middle; font-size: 1.12em; color: #fff; margin-top: 0px; cursor: pointer;" class="material-icons-{{ $likedComment ? 'sharp' : 'outlined' }}">thumb_up</span>
+  	<span style="font-size: 0.90em; color: darkgray; margin-left: 5px; font-weight: 400; {{ $commentLikesCount == 0 ? 'display:none' : '' }}">{{ $commentLikesSum }}</span>
 </button>
 <button id="comment-unlike-btn" class="no-button-style comment-unlike-btn">
-  	<span style="vertical-align: middle; font-size: 1.15em; color: darkgray; margin-top: -3px; margin-left: 15px; cursor: pointer; {{ $unlikedComment ? 'color: #4377e8' : '' }}" class="material-icons">thumb_down</span>
+  	<span style="vertical-align: middle; font-size: 1.12em; color: #fff; margin-top: 0px; margin-left: 15px; cursor: pointer;" class="material-icons-{{ $unlikedComment ? 'sharp' : 'outlined' }}">thumb_down</span>
 </button>

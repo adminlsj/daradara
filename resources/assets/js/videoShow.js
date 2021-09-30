@@ -25,6 +25,8 @@ $(".tablinks").click(function() {
             url:'/loadComment',
             data: { id: $(this).data("videoid") },
             success: function(data){
+                $('button#comment-tablink').data('tabcontent', 'comment-tabcontent-loaded');
+                $('div#comment-tabcontent').attr('id', 'comment-tabcontent-loaded');
                 $('div#comment-section-wrapper').html(data.comments);
             },
             error: function(xhr, ajaxOptions, thrownError){
@@ -32,6 +34,37 @@ $(".tablinks").click(function() {
             }
         });
 
+    }
+});
+
+$('div#comment-section-wrapper').on("click", "div.load-replies-btn", function(e) {
+    $.ajax({
+        type:'GET',
+        url:'/loadReplies',
+        data: { id: $(this).data("commentid") },
+        success: function(data){
+            var wrapper = $('div#reply-section-wrapper-' + data.comment_id);
+            var button = wrapper.parent().find('.load-replies-btn');
+            button.find('.material-icons').text('arrow_drop_up');
+            button.find('.reply-btn-text').text('隱藏');
+            button.addClass('hide-replies-btn').removeClass('load-replies-btn');
+            wrapper.html(data.replies);
+        },
+        error: function(xhr, ajaxOptions, thrownError){
+            showSnackbar('請刷新頁面後重試。');
+        }
+    });
+});
+
+$('div#comment-section-wrapper').on("click", "div.hide-replies-btn", function(e) {
+    var wrapper = $(this).parent().find('.reply-section-wrapper');
+    wrapper.toggle();
+    if (wrapper.css('display') == 'none') {
+        $(this).find('.material-icons').text('arrow_drop_down');
+        $(this).find('.reply-btn-text').text('查看');
+    } else {
+        $(this).find('.material-icons').text('arrow_drop_up');
+        $(this).find('.reply-btn-text').text('隱藏');
     }
 });
 
@@ -143,7 +176,7 @@ $('div#comment-section-wrapper').on("submit", ".comment-reply-create-form", func
         dataType: 'json',
         success: function(data){
             $(".comment-reply-reply-form-wrapper").css('display', 'none');
-            $('div#reply-start-' + data.comment_id).prepend(data.single_video_comment);
+            $('div#comment-reply-wrapper-' + data.comment_id).prepend(data.single_video_comment);
         },
         error: function(xhr, ajaxOptions, thrownError){
             showSnackbar('請刷新頁面後重試。');

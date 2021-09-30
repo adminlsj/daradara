@@ -158,6 +158,27 @@ class VideoController extends Controller
         ]);
     }
 
+    public function loadComment(Request $request)
+    {
+        $video_id = $request->id;
+        $comments = Comment::with('user:id,name,avatar_temp', 'likes')
+                    ->where('foreign_id', $video_id)
+                    ->withCount('replies')
+                    ->orderBy('created_at', 'desc')
+                    ->get()
+                    ->sortBy(function($comment)
+        {
+            return $comment->likes->where('is_positive', false)->count() - $comment->likes->where('is_positive', true)->count();
+        });
+
+        $html = '';
+        $html .= view('video.comment-section-wrapper', compact('video_id', 'comments'));
+
+        return response()->json([
+            'comments' => $html,
+        ]);
+    }
+
     public function createComment(Request $request)
     {
         $comment = Comment::create([
@@ -264,28 +285,20 @@ class VideoController extends Controller
         ]);
     }
 
-    public function loadComment(Request $request)
+    public function loadReplies(Request $request)
     {
-        $video_id = $request->id;
-        $comments = Comment::with('user', 'likes', 'replies.user')
-                        ->with('replies.likes')
-                        ->with(['replies' => function($query) {
-                            $query->orderBy('created_at', 'asc');
-                        }])
-                        ->where('foreign_id', $video_id)
-                        ->withCount('likes')
-                        ->orderBy('created_at', 'desc')
-                        ->get()
-                        ->sortBy(function($comment)
-        {
-            return $comment->likes->where('is_positive', false)->count() - $comment->likes->where('is_positive', true)->count();
-        });
+        $comment_id = $request->id;
+        $replies = Reply::with('user:id,name,avatar_temp', 'likes')
+                        ->where('comment_id', $comment_id)
+                        ->orderBy('created_at', 'asc')
+                        ->get();
 
         $html = '';
-        $html .= view('video.comment-section-wrapper', compact('video_id', 'comments'));
+        $html .= view('reply.index', compact('comment_id', 'replies'));
 
         return response()->json([
-            'comments' => $html,
+            'comment_id' => $comment_id,
+            'replies' => $html,
         ]);
     }
 
