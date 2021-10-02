@@ -103,6 +103,8 @@ class UpdateXvideos extends Command
                 $video->foreign_sd = $temp;
                 $video->save();
             }
+
+            sleep(10);
         }
 
         Log::info('Xvideos update ended...');

@@ -102,6 +102,8 @@ class UpdateXvideosErrors extends Command
             } else {
                 Mail::to('vicky.avionteam@gmail.com')->send(new UserReport('master', 'Xvideos update failed', $video->id, $video->title, $video->sd, 'master', 'master'));
             }
+
+            sleep(10);
         }
 
         Log::info('Xvideos errors update ended...');
