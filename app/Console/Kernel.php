@@ -18,11 +18,12 @@ class Kernel extends ConsoleKernel
         'App\Console\Commands\ResetWeekViews',
         'App\Console\Commands\CheckMotherless',
 
+        'App\Console\Commands\UpdateXvideos',
+        'App\Console\Commands\UpdateXvideosErrors',
         'App\Console\Commands\UpdateSpankbang',
         'App\Console\Commands\UpdateSpankbangBackup',
         'App\Console\Commands\UpdateSpankbangErrors',
         'App\Console\Commands\UpdateYoujizz',
-        'App\Console\Commands\UpdateXvideos',
 
         'App\Console\Commands\UploadNhentai',
         'App\Console\Commands\UploadRule34',
@@ -42,6 +43,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('hanime1:check-motherless')->dailyAt('05:00');
 
         $schedule->command('hanime1:update-xvideos')->hourly();
+        $schedule->command('hanime1:update-xvideoserrors')->hourly();
         $schedule->command('hanime1:update-spankbang')->cron('0 */3 * * *')->between('2:00', '22:00');
         $schedule->command('hanime1:update-spankbangbackup')->hourly();
         $schedule->command('hanime1:update-spankbangerrors')->hourly();
