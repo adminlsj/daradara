@@ -37,7 +37,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('hanime1:update-xvideos')->cron('0 */2 * * *');
+        $schedule->command('hanime1:update-xvideos')->cron('0 1-23/2 * * *');
     }
 
     /**
