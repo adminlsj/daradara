@@ -11,7 +11,7 @@
 |
 */
 
-Route::group(['middleware' => 'throttle:120,1'], function () {
+// Route::group(['middleware' => 'throttle:120,1'], function () {
 	Route::get('/', 'HomeController@index');
 
 	Auth::routes();
@@ -58,7 +58,7 @@ Route::group(['middleware' => 'throttle:120,1'], function () {
 	Route::get('/comic/{comic}/{page}', 'ComicController@showContent')->name('comic.showContent');
 	Route::get('/{column}/{value}/{time?}', 'ComicController@searchTags')->name('comic.searchTags');
 	Route::get('/getRandomComic', 'ComicController@getRandomComic')->name('comic.random');
-});
+// });
 
 Route::group(['middleware' => 'admin'], function () {
 	Route::get('/tempMethod', 'BotController@tempMethod');
