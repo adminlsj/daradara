@@ -27,8 +27,6 @@ class Kernel extends ConsoleKernel
 
         'App\Console\Commands\UploadNhentai',
         'App\Console\Commands\UploadRule34',
-
-        'App\Console\Commands\ClearLaravelLogs',
     ];
 
     /**
@@ -40,7 +38,6 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('hanime1:update-xvideos')->cron('0 */2 * * *');
-        $schedule->command('logs:clear')->dailyAt('22:35');
     }
 
     /**

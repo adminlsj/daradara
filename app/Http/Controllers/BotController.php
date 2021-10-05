@@ -19,6 +19,7 @@ use Carbon\Carbon;
 use App\Spankbang;
 use App\Motherless;
 use App\Nhentai;
+use Storage;
 
 class BotController extends Controller
 {
@@ -452,5 +453,21 @@ class BotController extends Controller
     {   
         $comments = Comment::with('video:id,title')->orderBy('created_at', 'desc')->paginate(100);
         return view('layouts.comments', compact('comments')); 
+    }
+
+    public function clearLaravelLogs()
+    {   
+        $files = Arr::where(Storage::disk('log')->files(), function($filename) {
+            return Str::endsWith($filename,'.log');
+        });
+
+
+        $count = count($files);
+
+        if(Storage::disk('log')->delete($files)) {
+            $this->info(sprintf('Deleted %s %s!', $count, Str::plural('file', $count)));
+        } else {
+            $this->error('Error in deleting log files!');
+        }
     }
 }
