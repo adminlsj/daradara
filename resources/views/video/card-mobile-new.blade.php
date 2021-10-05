@@ -22,7 +22,7 @@
 
 	<div style="margin-top: 6px; padding: 0 8px;">
 		<div style="text-decoration: none; color: black;">
-			<div style="font-size: 0.85em; line-height: 17px; color: white; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; font-weight: 400; height: 33px">{{ $video->title }}</div>
+			<div style="font-size: 0.87em; line-height: 17px; color: white; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; font-weight: 400; height: 33px">{{ $video->title }}</div>
 
 			<div style="margin-top: 7px; padding-bottom: 7px; font-weight: 400">
 				@if (array_key_exists('3D', $video->tags_array))
