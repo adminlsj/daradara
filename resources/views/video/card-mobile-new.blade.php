@@ -4,14 +4,14 @@
 			<img class="lazy" style="width: 100%; border-top-left-radius: 3px; border-top-right-radius: 3px;" src="https://i.imgur.com/WENZTSJl.jpg" data-src="{{ $video->imgurH() }}" data-srcset="{{ $video->imgurL() }}" alt="{{ $video->title }}">
 			<div style="position: absolute; height: 25px; width: 100%; bottom: 0px; background: linear-gradient(to bottom, transparent 0%, black 120%);">
 				<div style="float: left; line-height: 25px; font-weight: 400">
-					<span style="font-size: 15px; color: white; padding-left: 6px; padding-right: 3px; vertical-align: middle; margin-top: -8px; font-weight: 400;" class="material-icons-outlined">smart_display</span>
+					<span style="font-size: 15px; color: white; padding-left: 7px; padding-right: 3px; vertical-align: middle; margin-top: -8px; font-weight: 400;" class="material-icons-outlined">smart_display</span>
 					<span style="font-size: 10px; color: white;">{{ $video->views() }}</span>
 
 					<span style="font-size: 14px; color: white; padding-left: 10px; padding-right: 5px; vertical-align: middle; margin-top: -8px; transform: scale(1.2,1); font-weight: 400" class="material-icons-outlined">wysiwyg</span>
 					<span style="font-size: 10px; color: white;">{{ Carbon\Carbon::parse($video->created_at)->diffForHumans() }}</span>
 				</div>
 				@if ($video->duration != null)
-				    <div style="float: right; color: white; font-size: 10px; font-weight: 400; padding: 0px 5px; border-radius: 2px; z-index: 1; line-height: 25px;">
+				    <div style="float: right; color: white; font-size: 10px; font-weight: 400; padding: 0px 6px; border-radius: 2px; z-index: 1; line-height: 25px;">
 				    	{{ $video->duration >= 3600 ? gmdate('H:i:s', $video->duration) : gmdate('i:s', $video->duration) }}
 				    </div>
 			    @endif
@@ -33,7 +33,7 @@
 				@else
 					<span class="card-mobile-genre" style="color: rgba(242, 38, 19, 1); border-color: rgba(242, 38, 19, 0.30);">裏番</span>
 				@endif
-				<span style="font-size: 11px; color: dimgray; vertical-align: middle" class="inner">{{ $video->user->name }}</span>
+				<span style="font-size: 11px; color: dimgray;" class="inner">{{ $video->user->name }}</span>
 			</div>
 		</div>
 	</div>
