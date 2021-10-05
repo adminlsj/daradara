@@ -1,7 +1,8 @@
 <div style="margin: 0 4px; margin-bottom: 9px; background-color: #141414; border-radius: 3px; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.8);">
 	<a href="{{ route('video.watch') }}?v={{ $video->id }}" style="text-decoration: none;" data-poster="{{ $video->imgurH() }}" data-preview="{{ isset($video->qualities) ? $video->qualities[array_key_first($video->qualities)] : $video->sd }}">
 		<div style="position: relative;">
-			<img class="lazy" style="width: 100%; border-top-left-radius: 3px; border-top-right-radius: 3px;" src="https://i.imgur.com/WENZTSJl.jpg" data-src="{{ $video->imgurH() }}" data-srcset="{{ $video->imgurL() }}" alt="{{ $video->title }}">
+			<img style="width: 100%; border-top-left-radius: 3px; border-top-right-radius: 3px;" src="https://i.imgur.com/N8t9Z39.png">
+			<img style="position: absolute; top: 0; left: 0; height: 100%; object-fit: cover" src="{{ $video->imgurL() }}">
 			<div style="position: absolute; height: 25px; width: 100%; bottom: 0px; background: linear-gradient(to bottom, transparent 0%, black 120%);">
 				<div style="float: left; line-height: 25px; font-weight: 400">
 					<span style="font-size: 15px; color: white; padding-left: 7px; padding-right: 3px; vertical-align: middle; margin-top: -8px; font-weight: 400;" class="material-icons-outlined">smart_display</span>
