@@ -252,7 +252,7 @@
 			</div>
 		@endif
 		<div class="search-pagination hidden-xs">{!! $videos->appends(request()->query())->links() !!}</div>
-		<div style="margin-top: {{ $doujin ? '-30px' : '-34px' }}" class="search-pagination mobile-search-pagination hidden-sm hidden-md hidden-lg">{!! $videos->appends(request()->query())->onEachSide(1)->links() !!}</div>
+		<div style="margin-top: {{ $doujin ? '-25px' : '-34px' }}" class="search-pagination mobile-search-pagination hidden-sm hidden-md hidden-lg">{!! $videos->appends(request()->query())->onEachSide(1)->links() !!}</div>
 
 		@include('ads.search-banner-panel')
 
