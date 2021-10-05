@@ -1,4 +1,4 @@
-<div style="margin: 0 4px; margin-bottom: 9px; background-color: #141414; border-radius: 3px; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.6);">
+<div style="margin: 0 4px; margin-bottom: 9px; background-color: #141414; border-radius: 3px; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.8);">
 	<a href="{{ route('video.watch') }}?v={{ $video->id }}" style="text-decoration: none;" data-poster="{{ $video->imgurH() }}" data-preview="{{ isset($video->qualities) ? $video->qualities[array_key_first($video->qualities)] : $video->sd }}">
 		<div style="position: relative;">
 			<img class="lazy" style="width: 100%; border-top-left-radius: 3px; border-top-right-radius: 3px;" src="https://i.imgur.com/WENZTSJl.jpg" data-src="{{ $video->imgurH() }}" data-srcset="{{ $video->imgurL() }}" alt="{{ $video->title }}">
