@@ -72,6 +72,11 @@ return [
             'bucket' => env('DO_SPACES_BUCKET'), 
         ],
 
+        'log' => [
+            'driver' => 'local',
+            'root' => storage_path('logs'),
+        ],
+
     ],
 
 ];
