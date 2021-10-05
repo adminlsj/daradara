@@ -467,9 +467,9 @@ class BotController extends Controller
         $count = count($files);
 
         if(Storage::disk('log')->delete($files)) {
-            $this->info(sprintf('Deleted %s %s!', $count, Str::plural('file', $count)));
+            Log::info(sprintf('Deleted %s %s!', $count, Str::plural('file', $count)));
         } else {
-            $this->error('Error in deleting log files!');
+            Log::info('Error in deleting log files!');
         }
     }
 }
