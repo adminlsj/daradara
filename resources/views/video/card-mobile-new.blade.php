@@ -4,8 +4,11 @@
 			<img class="lazy" style="width: 100%; border-top-left-radius: 3px; border-top-right-radius: 3px;" src="https://i.imgur.com/WENZTSJl.jpg" data-src="{{ $video->imgurH() }}" data-srcset="{{ $video->imgurL() }}" alt="{{ $video->title }}">
 			<div style="position: absolute; height: 20px; width: 100%; bottom: 0px; background: linear-gradient(to bottom, transparent 0%, black 120%);">
 				<div style="float: left; line-height: 20px; font-weight: 400">
-					<span style="font-size: 16px; color: white; padding-left: 6px; padding-right: 3px; vertical-align: middle; margin-top: -8px;" class="material-icons-outlined">smart_display</span>
+					<span style="font-size: 15px; color: white; padding-left: 6px; padding-right: 3px; vertical-align: middle; margin-top: -8px;" class="material-icons-outlined">smart_display</span>
 					<span style="font-size: 10px; color: white;">{{ $video->views() }}</span>
+
+					<span style="font-size: 14px; color: white; padding-left: 10px; padding-right: 5px; vertical-align: middle; margin-top: -8px; transform: scale(1.2,1);" class="material-icons-outlined">wysiwyg</span>
+					<span style="font-size: 10px; color: white;">{{ Carbon\Carbon::parse($video->created_at)->diffForHumans() }}</span>
 				</div>
 				@if ($video->duration != null)
 				    <div style="float: right; color: white; font-size: 10px; font-weight: 400; padding: 0px 5px; border-radius: 2px; z-index: 1; line-height: 20px;">
@@ -19,7 +22,19 @@
 	<div style="margin-top: 5px; padding: 0 7px;">
 		<div style="text-decoration: none; color: black;">
 			<div style="font-size: 0.85em; line-height: 17px; color: white; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; font-weight: 400; height: 31px">{{ $video->title }}</div>
-			<div style="font-size: 0.75em; color: dimgray; margin-top: 10px; padding-bottom: 5px; font-weight: 400" class="inner">觀看次數：{{ $video->views() }}次 • {{ Carbon\Carbon::parse($video->created_at)->diffForHumans() }}</div>
+
+			<div style="margin-top: 10px; padding-bottom: 7px; font-weight: 400">
+				@if (array_key_exists('3D', $video->tags_array))
+					<span class="card-mobile-genre" style="color: orange; border-color: orange;">3D</span>
+				@elseif (array_key_exists('同人', $video->tags_array))
+					<span class="card-mobile-genre" style="color: pink; border-color: pink;">同人</span>
+				@elseif (array_key_exists('Cosplay', $video->tags_array))
+					<span class="card-mobile-genre" style="color: purple; border-color: purple;">COS</span>
+				@else
+					<span class="card-mobile-genre">裏番</span>
+				@endif
+				<span style="font-size: 12px; color: dimgray;" class="inner">{{ $video->user->name }}</span>
+			</div>
 		</div>
 	</div>
 </div>

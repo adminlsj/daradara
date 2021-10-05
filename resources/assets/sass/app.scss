@@ -46,6 +46,15 @@ th, td {
   -moz-transform: rotate(180deg);
 } */
 
+.card-mobile-genre {
+  border: 1px solid red; 
+  color: red; 
+  font-size: 10px; 
+  padding: 1px 3px; 
+  border-radius: 3px; 
+  margin-right: 1px;
+}
+
 #comic-nav {
   position: fixed; 
   top: 0; 
