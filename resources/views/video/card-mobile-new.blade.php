@@ -25,7 +25,7 @@
 
 			<div style="margin-top: 10px; padding-bottom: 7px; font-weight: 400">
 				@if (array_key_exists('3D', $video->tags_array))
-					<span class="card-mobile-genre" style="color: rgba(245, 171, 53, 1); border-color: rgba(245, 171, 53, 0.5);">3D</span>
+					<span class="card-mobile-genre" style="color: rgba(245, 171, 53, 1); border-color: rgba(245, 171, 53, 0.25);">3D</span>
 				@elseif (array_key_exists('同人', $video->tags_array))
 					<span class="card-mobile-genre" style="color: pink; border-color: pink;">同人</span>
 				@elseif (array_key_exists('Cosplay', $video->tags_array))
