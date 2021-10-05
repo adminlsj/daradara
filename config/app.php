@@ -232,6 +232,9 @@ return [
         'Image' => Intervention\Image\Facades\Image::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'GeoIP' => \Torann\GeoIP\Facades\GeoIP::class,
+        
+        'Arr' => Illuminate\Support\Arr::class,
+        'Str' => Illuminate\Support\Str::class,
     ],
 
 ];
