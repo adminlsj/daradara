@@ -4,6 +4,9 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Storage;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Log;
 
 class ClearLaravelLogs extends Command
 {
@@ -46,9 +49,9 @@ class ClearLaravelLogs extends Command
         $count = count($files);
 
         if(Storage::disk('log')->delete($files)) {
-            $this->info(sprintf('Deleted %s %s!', $count, Str::plural('file', $count)));
+            Log::info(sprintf('Deleted %s %s!', $count, Str::plural('file', $count)));
         } else {
-            $this->error('Error in deleting log files!');
+            Log::info('Error in deleting log files!');
         }
     }
 }
