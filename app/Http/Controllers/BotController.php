@@ -20,6 +20,8 @@ use App\Spankbang;
 use App\Motherless;
 use App\Nhentai;
 use Storage;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 
 class BotController extends Controller
 {
