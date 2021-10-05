@@ -128,7 +128,7 @@ class Spankbang
     {
         Log::info('Spankbang backup update started...');
 
-        $videos = Video::where('foreign_sd', 'ilike', '%"spankbang"%')->select('id', 'title', 'sd', 'outsource', 'tags_array', 'foreign_sd', 'created_at')->orderBy('current_views', 'asc')->get();
+        $videos = Video::where('foreign_sd', 'ilike', '%"spankbang"%')->select('id', 'title', 'sd', 'outsource', 'tags_array', 'foreign_sd', 'created_at')->get();
 
         $base = Carbon::now()->addHours(4)->timestamp;
 

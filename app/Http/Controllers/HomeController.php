@@ -31,13 +31,13 @@ class HomeController extends Controller
         $tag5 = Video::whereHasTags([], $count)->get();
 
         $rows = [
-            '最新上傳' => ['videos' => $upload, 'link' => '/search?query=&sort=最新上傳'], 
-            '最新內容' => ['videos' => $newest, 'link' => '/search?query=&sort=最新內容'],
-            '發燒影片' => ['videos' => $trending, 'link' => '/search?query=&sort=觀看次數'], 
-            '乳不巨何以聚人心' => ['videos' => $tag1, 'link' => '/search?query=&tags%5B%5D=巨乳&sort='], 
-            '胸不平何以平天下' => ['videos' => $tag2, 'link' => '/search?query=&tags%5B%5D=貧乳&sort='], 
-            '菊不爆何以保家園' => ['videos' => $tag3, 'link' => '/search?query=&tags%5B%5D=肛交&sort='], 
-            '女不腐何以撫民心' => ['videos' => $tag4, 'link' => '/search?query=&broad=on&tags%5B%5D=扶他&tags%5B%5D=偽娘&tags%5B%5D=耽美'], 
+            '最新上傳' => ['videos' => $upload, 'link' => '/search?query=&genre=H動漫&sort=最新上傳'], 
+            '最新內容' => ['videos' => $newest, 'link' => '/search?query=&genre=H動漫&sort=最新內容'],
+            '發燒影片' => ['videos' => $trending, 'link' => '/search?query=&genre=H動漫&sort=觀看次數'], 
+            '乳不巨何以聚人心' => ['videos' => $tag1, 'link' => '/search?query=&genre=H動漫&tags%5B%5D=巨乳&sort='], 
+            '胸不平何以平天下' => ['videos' => $tag2, 'link' => '/search?query=&genre=H動漫&tags%5B%5D=貧乳&sort='], 
+            '菊不爆何以保家園' => ['videos' => $tag3, 'link' => '/search?query=&genre=H動漫&tags%5B%5D=肛交&sort='], 
+            '女不腐何以撫民心' => ['videos' => $tag4, 'link' => '/search?query=&genre=H動漫&broad=on&tags%5B%5D=扶他&tags%5B%5D=偽娘&tags%5B%5D=耽美'], 
             '更多精彩內容' => ['videos' => $tag5, 'link' => '/search']
         ];
 
@@ -182,7 +182,7 @@ class HomeController extends Controller
 
         $videos->setPath('');
         
-        return view('layouts.search', compact('genre', 'tags', 'sort', 'brands', 'year', 'month', 'duration', 'videos', 'doujin', 'is_mobile'));
+        return view('layouts.search-new', compact('genre', 'tags', 'sort', 'brands', 'year', 'month', 'duration', 'videos', 'doujin', 'is_mobile'));
     }
 
     public function list()
