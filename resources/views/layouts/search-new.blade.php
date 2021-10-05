@@ -215,7 +215,7 @@
 	  </div>
 	</div>
 
-	<div id="home-rows-wrapper" class="search-rows-wrapper" style="position: relative; padding: 0 5px; {{ $is_mobile ? 'background-color: #202020' : '' }}">
+	<div id="home-rows-wrapper" class="search-rows-wrapper" style="position: relative; padding: 0 5px;">
 
 		<div class="hidden-sm hidden-md hidden-lg" style="text-align: center; margin-top: -2px; margin-bottom: -18px;">
 			 <ins class="adsbyexoclick" data-zoneid="4396576"></ins> 
