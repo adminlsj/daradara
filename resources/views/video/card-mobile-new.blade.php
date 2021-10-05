@@ -7,7 +7,7 @@
 					<span style="font-size: 15px; color: white; padding-left: 7px; padding-right: 3px; vertical-align: middle; margin-top: -8px; font-weight: 400;" class="material-icons-outlined">smart_display</span>
 					<span style="font-size: 10px; color: white;">{{ $video->views() }}</span>
 
-					<span style="font-size: 14px; color: white; padding-left: 10px; padding-right: 5px; vertical-align: middle; margin-top: -8px; transform: scale(1.2,1); font-weight: 400" class="material-icons-outlined">wysiwyg</span>
+					<span style="font-size: 13px; color: white; padding-left: 10px; padding-right: 5px; vertical-align: middle; margin-top: -8px; transform: scale(1.25,1); font-weight: 400" class="material-icons-outlined">wysiwyg</span>
 					<span style="font-size: 10px; color: white;">{{ Carbon\Carbon::parse($video->created_at)->diffForHumans() }}</span>
 				</div>
 				@if ($video->duration != null)
