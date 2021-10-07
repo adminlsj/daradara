@@ -42,8 +42,8 @@
       'current-time', // The current time of playback
       'mute', // Toggle mute
       'volume', // Volume control
-      'pip', // Toggle captions
       'settings', // Settings menu
+      'pip', // Toggle captions
       'airplay', // Airplay options
       'fullscreen', // Toggle fullscreen
     ]
