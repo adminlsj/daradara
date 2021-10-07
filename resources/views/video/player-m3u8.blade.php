@@ -24,7 +24,25 @@
     },
     quality: {
       default: 1080
-    }
+    },
+    i18n: {
+      rewind: 'Rewind 10s',
+      fastForward: 'Forward 10s',
+    },
+    controls: [
+      'play-large', // The large play button in the center
+      'rewind', // Rewind by the seek time (default 10 seconds)
+      'play', // Play/pause playback
+      'fast-forward', // Fast forward by the seek time (default 10 seconds)
+      'progress', // The progress bar and scrubber for playback and buffering
+      'current-time', // The current time of playback
+      'mute', // Toggle mute
+      'volume', // Volume control
+      'settings', // Settings menu
+      'pip', // Toggle captions
+      'airplay', // Airplay options
+      'fullscreen', // Toggle fullscreen
+    ]
   });
   
   if (!Hls.isSupported()) {
