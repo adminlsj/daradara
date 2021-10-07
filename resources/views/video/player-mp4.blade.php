@@ -42,9 +42,10 @@
     'current-time', // The current time of playback
     'mute', // Toggle mute
     'volume', // Volume control
-    'captions', // Toggle captions
+    'pip', // Toggle captions
     'settings', // Settings menu
     'fullscreen', // Toggle fullscreen
+    'airplay',
     ]
   });
   window.player = player;
