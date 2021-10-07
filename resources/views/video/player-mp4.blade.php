@@ -30,8 +30,8 @@
       default: 720
     },
     i18n: {
-      rewind: 'Rewind 5s',
-      fastForward: 'Forward 5s',
+      rewind: 'Rewind 10s',
+      fastForward: 'Forward 10s',
     },
     controls: [
       'play-large', // The large play button in the center
