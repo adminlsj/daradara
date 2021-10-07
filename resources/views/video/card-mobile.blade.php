@@ -1,24 +1,17 @@
-<div style="margin-bottom: 20px;">
-	<a class="preview-trigger" href="{{ route('video.watch') }}?v={{ $video->id }}" style="text-decoration: none;" data-poster="{{ $video->imgurH() }}" data-preview="{{ isset($video->qualities) ? $video->qualities[array_key_first($video->qualities)] : $video->sd }}">
-		<div class="preview-wrapper" style="position: relative;">
-			<img class="lazy" style="width: 100%;" src="https://i.imgur.com/WENZTSJl.jpg" data-src="{{ $video->imgurH() }}" data-srcset="{{ $video->imgurH() }}" alt="{{ $video->title }}">
-			@if ($video->duration != null)
-			    <div style="position: absolute; right: 6px; bottom: 6px; color: white; background-color: rgba(0, 0, 0, 0.75); font-size: 12px; font-weight: bold; padding: 0px 5px; border-radius: 2px; z-index: 1">
-			    	{{ $video->duration >= 3600 ? gmdate('H:i:s', $video->duration) : gmdate('i:s', $video->duration) }}
-			    </div>
-		    @endif
-		    <div id="myBar" style="width: 0%; height: 2px; background-color: red; position: absolute; top: 0px; left: 0px; z-index: 2"></div>
-	    </div>
+<div class="related-watch-wrap" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: -5px;">
+	<a href="{{ route('video.watch') }}?v={{ $video->id }}" class="row no-gutter">
+	  <div style="padding-right: 0px; width: 160px; max-width: 50%; position: relative;" class="col-xs-6 col-sm-6 col-md-6">
+	    <img class="lazy" style="width: 100%; height: 100%;" src="{{ $video->imgur16by9() }}" data-src="{{ $video->imgurL() }}" data-srcset="{{ $video->imgurL() }}" alt="{{ $video->title }}">
+	    @if ($video->duration != null)
+		    <div style="position: absolute; right: 4px; bottom: 4px; color: white; background-color: rgba(0, 0, 0, 0.75); font-size: 10px; font-weight: 400; padding: 0px 3px; border-radius: 2px; z-index: 1">
+		    	{{ $video->duration >= 3600 ? gmdate('H:i:s', $video->duration) : gmdate('i:s', $video->duration) }}
+		    </div>
+	    @endif
+	  </div>
+	  <div style="width: calc(100% - 160px); min-width: 50%; max-height: 90px;" class="col-xs-6 col-sm-6 col-md-6 related-watch-title">
+	    <h4 style="font-weight: 600; color: white; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">{{ $video->title }}</h4>
+	    <p style="color: #bdbdbd; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; font-size: 0.89em; margin-top: 6px; margin-bottom: 0px; font-weight: 400 !important;">{{ $video->user->name }}</p>
+	    <p style="color: #bdbdbd; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; font-size: 0.89em; margin-top: 1px; margin-bottom: 0px; font-weight: 400 !important;">觀看次數：{{ $video->views() }}次 · {{ Carbon\Carbon::parse($video->created_at)->diffForHumans() }}</p>
+	  </div>
 	</a>
-
-	<div style="margin-top: 10px; padding: 0 15px;">
-		<div class="multiple-link-wrapper" style="text-decoration: none; color: black;">
-			<a href="{{ route('video.watch').'?v='.$video->id }}" class="overlay"></a>
-			<div class="inner"><a href="{{ route('video.watch').'?v='.$video->id }}" style="text-decoration: none; float: left; ">
-				<img style="width: 38px; height: auto; border-radius: 50%;" src="{{ $video->user->avatar_temp }}">
-			</a></div>
-			<div style="margin-left: 50px; font-size: 1.05em; line-height: 20px; color: white; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">{{ $video->title }}</div>
-			<div style="margin-left: 50px; font-size: 0.89em; color: dimgray; margin-top: 3px;" class="inner">{{ $video->user->name }} • 觀看次數：{{ $video->views() }}次 • {{ Carbon\Carbon::parse($video->created_at)->diffForHumans() }}</div>
-		</div>
-	</div>
 </div>

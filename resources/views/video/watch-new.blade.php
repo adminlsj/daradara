@@ -130,11 +130,13 @@
         <div class="row {{ $doujin ? 'doujin-row' : '' }}" style="margin: 0px -2px;">
             @if ($doujin)
               @if ($is_mobile)
-                @foreach ($related as $video)
-                  <span class="related-video-width-horizontal {{ $loop->iteration > 30 ? 'hidden-xs hidden-sm temp-hidden-related-video' : '' }}">
-                    @include('video.card-mobile')
-                  </span>
-                @endforeach
+                <div style="margin-top: -20px;">
+                  @foreach ($related as $video)
+                    <span style="padding: 0 15px;" class="related-video-width-horizontal {{ $loop->iteration > 30 ? 'hidden-xs hidden-sm temp-hidden-related-video' : '' }}">
+                      @include('video.card-mobile')
+                    </span>
+                  @endforeach
+                </div>
               @else
                 @foreach ($related as $video)
                   <span class="related-video-width-horizontal {{ $loop->iteration > 30 ? 'hidden-xs hidden-sm temp-hidden-related-video' : '' }}">
