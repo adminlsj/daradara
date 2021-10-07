@@ -34,18 +34,18 @@
       fastForward: 'Forward 5s',
     },
     controls: [
-    'play-large', // The large play button in the center
-    'rewind', // Rewind by the seek time (default 10 seconds)
-    'play', // Play/pause playback
-    'fast-forward', // Fast forward by the seek time (default 10 seconds)
-    'progress', // The progress bar and scrubber for playback and buffering
-    'current-time', // The current time of playback
-    'mute', // Toggle mute
-    'volume', // Volume control
-    'pip', // Toggle captions
-    'settings', // Settings menu
-    'fullscreen', // Toggle fullscreen
-    'airplay',
+      'play-large', // The large play button in the center
+      'rewind', // Rewind by the seek time (default 10 seconds)
+      'play', // Play/pause playback
+      'fast-forward', // Fast forward by the seek time (default 10 seconds)
+      'progress', // The progress bar and scrubber for playback and buffering
+      'current-time', // The current time of playback
+      'mute', // Toggle mute
+      'volume', // Volume control
+      'pip', // Toggle captions
+      'settings', // Settings menu
+      'airplay', // Airplay options
+      'fullscreen', // Toggle fullscreen
     ]
   });
   window.player = player;
