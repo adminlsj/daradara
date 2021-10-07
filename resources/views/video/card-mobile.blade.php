@@ -1,4 +1,4 @@
-<div class="related-watch-wrap" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: -5px;">
+<div class="related-watch-wrap hover-lighter" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: -5px;">
 	<a href="{{ route('video.watch') }}?v={{ $video->id }}" class="row no-gutter">
 	  <div style="padding-right: 0px; width: 160px; max-width: 50%; position: relative;" class="col-xs-6 col-sm-6 col-md-6">
 	    <img class="lazy" style="width: 100%; height: 100%;" src="{{ $video->imgur16by9() }}" data-src="{{ $video->imgurL() }}" data-srcset="{{ $video->imgurL() }}" alt="{{ $video->title }}">
