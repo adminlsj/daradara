@@ -8,9 +8,9 @@
   </a>
   <a href="{{ route('home.search') }}">
     @if (Request::is('*search'))
-      <i style="font-size: 31px; margin-top: 8px; color: white;" class="material-icons">search</i>
+      <i style="font-size: 32px; margin-top: 8px; color: white;" class="material-icons">search</i>
     @else
-      <i style="font-size: 31px; margin-top: 8px;" class="material-icons">search</i>
+      <i style="font-size: 32px; margin-top: 8px;" class="material-icons">search</i>
     @endif
   </a>
   <a href="{{ Auth::check() ? route('home.list') : route('login') }}">
