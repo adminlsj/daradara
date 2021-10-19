@@ -22,9 +22,9 @@
   </a>
   <a href="{{ route('home.search') }}?query=&sort=本日排行">
     @if (Request::is('*rank*'))
-      <i style="padding-left: 0px; font-size: 30px; margin-top: 7px;" class="material-icons{{ Request::is('*rank*') ? '' : '-outlined' }}">whatshot</i>
-    @else
       <i style="padding-left: 0px; font-size: 30px; margin-top: 8px;" class="material-icons{{ Request::is('*rank*') ? '' : '-outlined' }}">whatshot</i>
+    @else
+      <i style="padding-left: 0px; font-size: 30px; margin-top: 9px;" class="material-icons{{ Request::is('*rank*') ? '' : '-outlined' }}">whatshot</i>
     @endif
   </a>
   <a href="{{ route('home.search') }}">
