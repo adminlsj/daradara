@@ -29,9 +29,9 @@
   </a>
   <a href="{{ route('home.search') }}">
     @if (Request::is('*newest*'))
-      <i style="padding-left: 2px; font-size: 31px; margin-top: 7px" class="material-icons{{ Request::is('*newest*') ? '' : '-outlined' }}">menu</i>
-    @else
       <i style="padding-left: 2px; font-size: 31px; margin-top: 8px" class="material-icons{{ Request::is('*newest*') ? '' : '-outlined' }}">menu</i>
+    @else
+      <i style="padding-left: 2px; font-size: 31px; margin-top: 9px" class="material-icons{{ Request::is('*newest*') ? '' : '-outlined' }}">menu</i>
     @endif
   </a>
 </div>
