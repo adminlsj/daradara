@@ -1,26 +1,26 @@
 <div style="z-index: 10000 !important; border-top: 1px solid #222222; {{ Request::is('*watch*') ? 'display:none;' : '' }}" class="bottom-nav hidden-lg hidden-md white-theme-nav-bottom">
   <a href="/">
     @if (Request::is('/'))
-      <i style="font-size: 28px; margin-top: 10px; color: white" class="material-icons">home</i>
+      <i style="font-size: 28px; margin-top: 9px; color: white" class="material-icons">home</i>
     @else
-      <i style="font-size: 28px; margin-top: 10px;" class="material-icons-outlined">home</i>
+      <i style="font-size: 28px; margin-top: 9px;" class="material-icons-outlined">home</i>
     @endif
   </a>
   <a href="{{ route('home.search') }}">
-    <i style="font-size: 30px; margin-top: 9px;" class="material-icons">search</i>
+    <i style="font-size: 30px; margin-top: 8px;" class="material-icons">search</i>
   </a>
   <a href="{{ route('home.search') }}?query=&sort=本日排行">
-    <i style="padding-left: 0px; font-size: 29px; margin-top: 9px;" class="material-icons-outlined">whatshot</i>
+    <i style="padding-left: 0px; font-size: 29px; margin-top: 8px;" class="material-icons-outlined">whatshot</i>
   </a>
   <a href="{{ Auth::check() ? route('home.list') : route('login') }}">
     @if (Request::is('*list*'))
-      <i style="font-size: 26px; margin-top: 11px; color: white" class="material-icons">video_library</i>
+      <i style="font-size: 26px; margin-top: 10px; color: white" class="material-icons">video_library</i>
     @else
-      <i style="font-size: 26px; margin-top: 11px;" class="material-icons-outlined">video_library</i>
+      <i style="font-size: 26px; margin-top: 10px;" class="material-icons-outlined">video_library</i>
     @endif
   </a>
   <a style="cursor: pointer;" data-toggle="modal" data-target="#links-modal">
-    <i style="padding-left: 2px; font-size: 29px; margin-top: 10px" class="material-icons">menu</i>
+    <i style="padding-left: 2px; font-size: 29px; margin-top: 9px" class="material-icons">menu</i>
   </a>
 </div>
 
