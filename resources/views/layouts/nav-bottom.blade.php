@@ -9,15 +9,15 @@
   <a href="{{ route('home.search') }}">
     <i style="font-size: 30px; margin-top: 9px;" class="material-icons">search</i>
   </a>
+  <a href="{{ route('home.search') }}?query=&sort=本日排行">
+    <i style="padding-left: 0px; font-size: 28px; margin-top: 9px;" class="material-icons-outlined">whatshot</i>
+  </a>
   <a href="{{ Auth::check() ? route('home.list') : route('login') }}">
     @if (Request::is('*list*'))
-      <i style="font-size: 25px; margin-top: 11px; color: white" class="material-icons">subscriptions</i>
+      <i style="font-size: 26px; margin-top: 11px; color: white" class="material-icons">video_library</i>
     @else
-      <i style="font-size: 25px; margin-top: 11px;" class="material-icons-outlined">subscriptions</i>
+      <i style="font-size: 26px; margin-top: 11px;" class="material-icons-outlined">video_library</i>
     @endif
-  </a>
-  <a href="{{ route('home.search') }}?query=&sort=本日排行">
-    <i style="padding-left: 0px; font-size: 28px; margin-top: 10px;" class="material-icons-outlined">whatshot</i>
   </a>
   <a data-toggle="modal" data-target="#links-modal">
     <i style="padding-left: 2px; font-size: 29px; margin-top: 10px" class="material-icons">menu</i>
