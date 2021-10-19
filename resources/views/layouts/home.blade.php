@@ -1,13 +1,39 @@
 @extends('layouts.app')
 
 @section('nav')
-  @include('nav.home')
+	@include('nav.home')
 @endsection
 
 @section('content')
+<div class="hidden-xs" style="background-color: #222222; color: #A3A3A3; width: 100%; height: 57px; line-height: 57px; padding: 0 4%; font-weight: 400; font-size: 14px; text-align: center;">
+	<a href="https://theporndude.com/zh" style="color: #A3A3A3; text-decoration: underline; padding: 10px;" target="_blank">PornDude</a>
+	<a href="https://www.moefuns.net" style="color: #A3A3A3; text-decoration: underline; padding: 10px;" target="_blank">萌翻導航</a>
+	<a href="https://www.mmrkdh1.com" style="color: #A3A3A3; text-decoration: underline; padding: 10px;" target="_blank">秘密入口</a>
+	<a href="https://www.sshs.pw/" style="color: #A3A3A3; text-decoration: underline; padding: 10px;" target="_blank">紳士會所</a>
+  <a href="https://www.gal123.com/" style="color: #A3A3A3; text-decoration: underline; padding: 10px;" target="_blank">紳士導航♂</a>
+  <a href="https://www.17dm.net/" style="color: #A3A3A3; text-decoration: underline; padding: 10px;" target="_blank">妖氣動漫導航</a>
+
+  <!-- 
+  	<a href="https://xx-map.com/" style="color: #A3A3A3; text-decoration: underline; padding: 10px;" target="_blank">杏MAP</a>
+  -->
+</div>
 
 <div class="nav-bottom-padding">
 	<div class="hidden-xs" style="position: relative;">
+		<div id="main-nav-home" style="z-index: 10000 !important; position: absolute;">
+		  @include('nav.main-content')
+		</div>
+		<script>
+			var targetOffset = $("#main-nav-home").offset().top;
+			var $window = $(window).scroll(function(){
+			    if ( $window.scrollTop() > targetOffset ) {   
+			      $("#main-nav-home").css({"position":"fixed", 'background-color':'#141414'});
+			    } else {
+			      $("#main-nav-home").css({"position":"absolute", 'background-color':'transparent'});
+			    }
+			});
+		</script>
+
 		<img style="width: 100%; -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0.3)));" src="https://i.imgur.com/KzhJhsth.jpg" alt="逆轉魔女裁判 ～要被痴女魔女審判了～">
 		<div id="home-banner-wrapper" style="position: absolute; left: 4%; color: white">
 			<h3 style="font-weight: bold"><span style="color: crimson">H</span>anime1<span style="color: crimson">.</span>me</h3>

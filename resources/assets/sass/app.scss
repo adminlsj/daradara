@@ -256,7 +256,7 @@ th, td {
   line-height: 68px;
 }
 
-#main-nav {
+#main-nav, #main-nav-home {
   position: fixed; 
   top: 0; 
   width: 100%; 
@@ -268,22 +268,22 @@ th, td {
   z-index: 1
 }
 
-#main-nav .nav-item, #main-mobile-nav .nav-item, #comic-nav .nav-item {
+#main-nav .nav-item, #main-nav-home .nav-item, #main-mobile-nav .nav-item, #comic-nav .nav-item {
   font-size: 14px;
   padding: 0 8px;
   color: white;
 }
 
-#main-nav .nav-icon, #main-mobile-nav .nav-icon, #comic-nav .nav-icon {
+#main-nav .nav-icon, #main-nav-home .nav-icon, #main-mobile-nav .nav-icon, #comic-nav .nav-icon {
   padding: 0 12px;
   color: white;
 }
 
-#main-nav .nav-icon span, #main-mobile-nav .nav-icon span, #comic-nav .nav-icon span {
+#main-nav .nav-icon span, #main-nav-home .nav-icon span, #main-mobile-nav .nav-icon span, #comic-nav .nav-icon span {
   font-size: 1.9em;
 }
 
-#main-nav a, #main-mobile-nav a, #comic-nav a {
+#main-nav a, #main-nav-home a, #main-mobile-nav a, #comic-nav a {
   text-decoration: none;
 }
 
@@ -1768,7 +1768,7 @@ div.sticky {
     background-color: transparent !important;
   }
 
-  #main-nav .nav-icon, #main-mobile-nav .nav-icon {
+  #main-nav .nav-icon, #main-nav-home .nav-icon, #main-mobile-nav .nav-icon {
     padding: 0 10px;
   }
   
@@ -2000,7 +2000,7 @@ div.sticky {
     font-size: 25px;
   }
 
-  #main-nav {
+  #main-nav, #main-nav-home {
     padding: 0 15px;    
     height: 50px; 
     line-height: 50px;
