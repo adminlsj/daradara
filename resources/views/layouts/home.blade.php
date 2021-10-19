@@ -7,15 +7,13 @@
 @section('content')
 <div class="hidden-xs" style="background-color: #222222; color: #A3A3A3; width: 100%; height: 57px; line-height: 57px; padding: 0 4%; font-weight: 400; font-size: 14px; text-align: center;">
 	<a href="https://theporndude.com/zh" style="color: #A3A3A3; text-decoration: underline; padding: 10px;" target="_blank">PornDude</a>
+	<a href="https://141jj.com/" style="color: #A3A3A3; text-decoration: underline; padding: 10px;" target="_blank">141JJ</a>
 	<a href="https://www.moefuns.net" style="color: #A3A3A3; text-decoration: underline; padding: 10px;" target="_blank">萌翻導航</a>
 	<a href="https://www.mmrkdh1.com" style="color: #A3A3A3; text-decoration: underline; padding: 10px;" target="_blank">秘密入口</a>
-	<a href="https://www.sshs.pw/" style="color: #A3A3A3; text-decoration: underline; padding: 10px;" target="_blank">紳士會所</a>
+	<a href="https://www.17dm.net/" style="color: #A3A3A3; text-decoration: underline; padding: 10px;" target="_blank">妖氣動漫導航</a>
+  <a href="https://share.acgnx.net/" style="color: #A3A3A3; text-decoration: underline; padding: 10px;" target="_blank">末日動漫資源庫</a>
   <a href="https://www.gal123.com/" style="color: #A3A3A3; text-decoration: underline; padding: 10px;" target="_blank">紳士導航♂</a>
-  <a href="https://www.17dm.net/" style="color: #A3A3A3; text-decoration: underline; padding: 10px;" target="_blank">妖氣動漫導航</a>
-
-  <!-- 
-  	<a href="https://xx-map.com/" style="color: #A3A3A3; text-decoration: underline; padding: 10px;" target="_blank">杏MAP</a>
-  -->
+	<a href="https://www.sshs.pw/" style="color: #A3A3A3; text-decoration: underline; padding: 10px;" target="_blank">紳士會所</a>
 </div>
 
 <div class="nav-bottom-padding">
