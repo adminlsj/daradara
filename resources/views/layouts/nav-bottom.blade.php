@@ -10,7 +10,7 @@
     <i style="font-size: 30px; margin-top: 9px;" class="material-icons">search</i>
   </a>
   <a href="{{ route('home.search') }}?query=&sort=本日排行">
-    <i style="padding-left: 0px; font-size: 28px; margin-top: 9px;" class="material-icons-outlined">whatshot</i>
+    <i style="padding-left: 0px; font-size: 29px; margin-top: 9px;" class="material-icons-outlined">whatshot</i>
   </a>
   <a href="{{ Auth::check() ? route('home.list') : route('login') }}">
     @if (Request::is('*list*'))
