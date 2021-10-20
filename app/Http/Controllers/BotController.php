@@ -30,14 +30,33 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $videos = Video::where('sd', 'ilike', '%xvideos%')->where('foreign_sd', 'ilike', '%"error"%')->orderBy('id', 'desc')->get();
+        $url = 'https://spankbang.com/5yx9r/video/convenient+sex+friends+2';
+
+        // curl connection
+        $curl_connection = curl_init($url);
+        curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+        curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+        $html = curl_exec($curl_connection);
+        curl_close($curl_connection);
+
+        // browsershot
+        /* $html = Browsershot::url($url)
+                ->timeout(3600)
+                ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
+                ->bodyHtml(); */
+
+        return $html;
+
+
+        /* $videos = Video::where('sd', 'ilike', '%xvideos%')->where('foreign_sd', 'ilike', '%"error"%')->orderBy('id', 'desc')->get();
         foreach ($videos as $video) {
             $temp = $video->foreign_sd;
             $temp['xvideos'] = $video->foreign_sd['error'];
             unset($temp['error']);
             $video->foreign_sd = $temp;
             $video->save();
-        }
+        } */
 
         /* $comics = Comic::orderBy('id', 'asc')->get();
         foreach ($comics as $comic) {
