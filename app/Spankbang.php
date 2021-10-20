@@ -262,7 +262,7 @@ class Spankbang
                     Mail::to('vicky.avionteam@gmail.com')->send(new UserReport('master', 'Spankbang update failed', $video->id, $video->title, $video->sd, 'master', 'master'));
                 }
 
-                sleep(10);
+                sleep(5);
             }
         }
 
