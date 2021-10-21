@@ -81,7 +81,7 @@ class Spankbang
 
         $videos = Video::where('foreign_sd', 'ilike', '%"spankbang"%')->select('id', 'title', 'sd', 'outsource', 'tags_array', 'foreign_sd', 'created_at')->get();
 
-        $base = Carbon::now()->addHours(4)->timestamp;
+        $base = Carbon::now()->addHours(7)->timestamp;
 
         foreach ($videos as $video) {
             $time = Helper::get_string_between($video->sd, ',', '&m=');
