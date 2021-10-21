@@ -181,6 +181,11 @@ class BotController extends Controller
         Spankbang::checkSpankbangOutdate();
     }
 
+    public function checkSpankbangOutdateEmergent()
+    {
+        Spankbang::checkSpankbangOutdateEmergent();
+    }
+
     public function checkSpankbangUpdate()
     {
         Spankbang::checkSpankbangUpdate();
