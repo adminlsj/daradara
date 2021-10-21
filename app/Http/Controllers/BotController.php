@@ -39,7 +39,7 @@ class BotController extends Controller
             curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
             $html = curl_exec($curl_connection);
             curl_close($curl_connection);
-            
+
         } elseif ($request->method == 'browsershot') {
             $html = Browsershot::url($url)
                 ->timeout(3600)
@@ -164,6 +164,11 @@ class BotController extends Controller
     public function updateSpankbangBackup()
     {
         Spankbang::updateSpankbangBackup();
+    }
+
+    public function updateSpankbangBackupEmergent()
+    {
+        Spankbang::updateSpankbangBackupEmergent();
     }
 
     public function updateSpankbangErrors()

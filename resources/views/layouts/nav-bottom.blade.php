@@ -32,7 +32,7 @@
         <h4 class="modal-title" style="text-align: center; font-weight: bold; margin: 0; padding: 0; margin-top: 5px; font-size: 18px;">友情鏈結</h4>
       </div>
       <div class="modal-body" style="padding: 0;">
-        <a style="color: white; text-decoration: none;" href="https://discord.gg/TEnkXMhv" target="_blank">
+        <a style="color: white; text-decoration: none;" href="https://discord.gg/cSHVHAUj" target="_blank">
           <div class="simple-dropdown-item genre-option">Discord</div>
         </a>
         <hr style="margin: 0; border-color: #333333;">

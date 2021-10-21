@@ -22,6 +22,7 @@ class Kernel extends ConsoleKernel
         'App\Console\Commands\UpdateXvideosErrors',
         'App\Console\Commands\UpdateSpankbang',
         'App\Console\Commands\UpdateSpankbangBackup',
+        'App\Console\Commands\UpdateSpankbangBackupEmergent',
         'App\Console\Commands\UpdateSpankbangErrors',
         'App\Console\Commands\UpdateYoujizz',
 
@@ -47,6 +48,7 @@ class Kernel extends ConsoleKernel
         // $schedule->command('hanime1:update-xvideos')->cron('0 */2 * * *');
         $schedule->command('hanime1:update-spankbang')->cron('0 */4 * * *')/*->between('2:00', '22:00')*/;
         $schedule->command('hanime1:update-spankbangbackup')->hourly();
+        $schedule->command('hanime1:update-spankbangbackupemergent')->everyThirtyMinutes();
         $schedule->command('hanime1:update-spankbangerrors')->hourly();
         $schedule->command('hanime1:update-youjizz')->cron('0 */6 * * *');
 
