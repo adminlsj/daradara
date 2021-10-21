@@ -16,16 +16,23 @@ class Spankbang
     {
         Log::info('Spankbang update started...');
 
-        /* $videos = Video::where('foreign_sd', 'ilike', '%"spankbang"%')->select('id', 'title', 'sd', 'outsource', 'tags_array', 'foreign_sd', 'created_at')->get();
+        $videos = Video::where('foreign_sd', 'ilike', '%"spankbang"%')->select('id', 'title', 'sd', 'outsource', 'tags_array', 'foreign_sd', 'created_at')->get();
 
         foreach ($videos as $video) {
 
-            $curl_connection = curl_init($video->foreign_sd['spankbang']);
+            // curl
+            /* $curl_connection = curl_init($video->foreign_sd['spankbang']);
             curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
             curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
             $html = curl_exec($curl_connection);
-            curl_close($curl_connection);
+            curl_close($curl_connection); */
+
+            // browsershot
+            $html = Browsershot::url($video->foreign_sd['spankbang'])
+                    ->timeout(3600)
+                    ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
+                    ->bodyHtml();
 
             $sd = Helper::get_string_between($html, '"contentUrl": "', '"');
             $source = Helper::get_string_between($html, '"contentUrl": "', '"');
@@ -63,7 +70,7 @@ class Spankbang
             }
 
             sleep(10);
-        } */
+        }
 
         Log::info('Spankbang update ended...');
     }

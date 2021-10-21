@@ -32,6 +32,9 @@ class Rule34
     ];
 
     public static $translations = [
+        "pills" => '藥物',
+        "yukinoshita yukino" => '雪之下雪乃',
+        "my teen romantic comedy snafu" => '果然我的青春戀愛喜劇搞錯了。',
         "mount lady" => '山嶺女俠',
         "raiden shogun" => '雷電將軍',
         "tamaki (超異域公主連結☆Re:Dive)" => '宮坂珠希',
