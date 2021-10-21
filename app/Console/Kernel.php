@@ -45,10 +45,10 @@ class Kernel extends ConsoleKernel
         $schedule->command('hanime1:update-xvideoserrors')->everyThirtyMinutes();
         // $schedule->command('hanime1:update-xvideos')->cron('0 1-23/2 * * *');
         // $schedule->command('hanime1:update-xvideos')->cron('0 */2 * * *');
-        $schedule->command('hanime1:update-spankbang')->cron('0 */3 * * *')->between('2:00', '22:00');
+        $schedule->command('hanime1:update-spankbang')->cron('0 */4 * * *')/*->between('2:00', '22:00')*/;
         $schedule->command('hanime1:update-spankbangbackup')->hourly();
         $schedule->command('hanime1:update-spankbangerrors')->hourly();
-        $schedule->command('hanime1:update-youjizz')->cron('0 */4 * * *');
+        $schedule->command('hanime1:update-youjizz')->cron('0 */6 * * *');
 
         $schedule->command('hanime1:upload-nhentai')->hourly()->between('6:00', '21:00');
         $schedule->command('hanime1:upload-rule34')->hourly()->between('6:00', '21:00');
