@@ -32,6 +32,7 @@ class Rule34
     ];
 
     public static $translations = [
+        "zenitsu agatsuma" => '我妻善逸',
         "pills" => '藥物',
         "yukinoshita yukino" => '雪之下雪乃',
         "my teen romantic comedy snafu" => '果然我的青春戀愛喜劇搞錯了。',
