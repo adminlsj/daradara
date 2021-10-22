@@ -166,6 +166,11 @@ class BotController extends Controller
         Spankbang::updateSpankbangBackup();
     }
 
+    public function updateSpankbangBackupReverse()
+    {
+        Spankbang::updateSpankbangBackupReverse();
+    }
+
     public function updateSpankbangBackupEmergent()
     {
         Spankbang::updateSpankbangBackupEmergent();
