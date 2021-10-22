@@ -31,6 +31,7 @@
         <span class="material-icons pull-left no-select modal-close-btn" data-dismiss="modal">close</span>
         <h4 class="modal-title" style="text-align: center; font-weight: bold; margin: 0; padding: 0; margin-top: 5px; font-size: 18px;">友情鏈結</h4>
       </div>
+
       <div class="modal-body" style="padding: 0;">
         <a style="color: white; text-decoration: none;" href="https://discord.gg/cSHVHAUj" target="_blank">
           <div class="simple-dropdown-item genre-option">Discord</div>
@@ -60,6 +61,10 @@
           <div class="simple-dropdown-item genre-option">末日動漫資源庫</div>
         </a>
         <hr style="margin: 0; border-color: #333333;">
+        <a style="color: white; text-decoration: none;" href="https://moeli-desu.com/" target="_blank">
+          <div class="simple-dropdown-item genre-option">夢璃</div>
+        </a>
+        <hr style="margin: 0; border-color: #333333;">
         <a style="color: white; text-decoration: none;" href="https://www.gal123.com/" target="_blank">
           <div class="simple-dropdown-item genre-option">紳士導航♂</div>
         </a>
@@ -69,6 +74,7 @@
         </a>
         <hr style="margin: 0; border-color: #333333;">
       </div>
+
     </div>
   </div>
 </div>
