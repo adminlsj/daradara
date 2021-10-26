@@ -20,11 +20,11 @@ class Kernel extends ConsoleKernel
 
         'App\Console\Commands\UpdateXvideos',
         'App\Console\Commands\UpdateXvideosErrors',
+        'App\Console\Commands\UpdateYoujizz',
         'App\Console\Commands\UpdateSpankbang',
         'App\Console\Commands\UpdateSpankbangBackup',
         'App\Console\Commands\UpdateSpankbangBackupEmergent',
         'App\Console\Commands\UpdateSpankbangErrors',
-        'App\Console\Commands\UpdateYoujizz',
 
         'App\Console\Commands\UploadNhentai',
         'App\Console\Commands\UploadRule34',
@@ -46,11 +46,11 @@ class Kernel extends ConsoleKernel
         $schedule->command('hanime1:update-xvideoserrors')->everyThirtyMinutes();
         // $schedule->command('hanime1:update-xvideos')->cron('0 1-23/2 * * *');
         // $schedule->command('hanime1:update-xvideos')->cron('0 */2 * * *');
+        $schedule->command('hanime1:update-youjizz')->cron('0 */6 * * *');
         $schedule->command('hanime1:update-spankbang')->cron('0 */4 * * *')/*->between('2:00', '22:00')*/;
         $schedule->command('hanime1:update-spankbangbackup')->hourly();
         $schedule->command('hanime1:update-spankbangbackupemergent')->everyThirtyMinutes();
         $schedule->command('hanime1:update-spankbangerrors')->hourly();
-        $schedule->command('hanime1:update-youjizz')->cron('0 */6 * * *');
 
         $schedule->command('hanime1:upload-nhentai')->hourly()->between('6:00', '21:00');
         $schedule->command('hanime1:upload-rule34')->hourly()->between('6:00', '21:00');

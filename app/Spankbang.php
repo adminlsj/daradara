@@ -30,7 +30,7 @@ class Spankbang
 
             // browsershot
             $html = Browsershot::url($video->foreign_sd['spankbang'])
-                    ->timeout(3600)
+                    ->timeout(1800)
                     ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
                     ->bodyHtml();
 
@@ -101,7 +101,7 @@ class Spankbang
 
                 // browsershot
                 $html = Browsershot::url($video->foreign_sd['spankbang'])
-                        ->timeout(3600)
+                        ->timeout(1800)
                         ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
                         ->bodyHtml();
 
@@ -175,7 +175,7 @@ class Spankbang
 
                 // browsershot
                 $html = Browsershot::url($video->foreign_sd['spankbang'])
-                        ->timeout(3600)
+                        ->timeout(1800)
                         ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
                         ->bodyHtml();
 
@@ -249,7 +249,7 @@ class Spankbang
 
                 // browsershot
                 $html = Browsershot::url($video->foreign_sd['spankbang'])
-                        ->timeout(3600)
+                        ->timeout(1800)
                         ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
                         ->bodyHtml();
 
@@ -321,7 +321,7 @@ class Spankbang
 
                 // browsershot
                 $html = Browsershot::url($video->foreign_sd['error'])
-                        ->timeout(3600)
+                        ->timeout(1800)
                         ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
                         ->bodyHtml();
 
