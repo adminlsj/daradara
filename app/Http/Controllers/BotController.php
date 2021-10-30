@@ -491,9 +491,9 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $videos = Video::where('cover', 'ilike', 'https://i2.wp.com/ba.balley.top/%')->get();
+        $videos = Video::where('cover', 'ilike', 'https://i0.wp.com/ba.alphafish.top/%')->get();
         foreach ($videos as $video) {
-            $video->cover = str_replace('https://i2.wp.com/ba.balley.top/', 'https://i1.wp.com/ba.apperoni.top/', $video->cover);
+            $video->cover = str_replace('https://i0.wp.com/ba.alphafish.top/', 'https://i1.wp.com/ba.apperoni.top/', $video->cover);
             $video->save();
         }
     }
