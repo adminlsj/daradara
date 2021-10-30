@@ -486,6 +486,18 @@ class BotController extends Controller
         Nhentai::translateNhentaiTag($request->replace);
     }
 
+    public function updateHanimeCover(Request $request)
+    {   
+        ini_set('max_execution_time', 0);
+        ini_set('memory_limit', '-1');
+
+        $videos = Video::where('cover', 'ilike', 'https://i1.wp.com/ba.alphafish.top/%')->get();
+        foreach ($videos as $video) {
+            $video->cover = str_replace('https://i1.wp.com/ba.alphafish.top/', 'https://i2.wp.com/ba.balley.top/', $video->cover);
+            $video->save();
+        }
+    }
+
     public function comments(Request $request)
     {   
         $comments = Comment::with('video:id,title')->orderBy('created_at', 'desc')->paginate(100);

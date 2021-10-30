@@ -7,13 +7,12 @@
 @section('content')
 <div class="hidden-xs" style="background-color: #222222; color: #A3A3A3; width: 100%; height: 57px; line-height: 57px; padding: 0 4%; font-weight: 400; font-size: 14px; text-align: center;">
 	<a href="https://discord.gg/cSHVHAUj" style="color: #A3A3A3; text-decoration: underline; padding: 10px;" target="_blank">Discord</a>
-	<a href="https://141jj.com/" style="color: #A3A3A3; text-decoration: underline; padding: 10px;" target="_blank">141JJ</a>
-	<a href="https://www.moefuns.net" style="color: #A3A3A3; text-decoration: underline; padding: 10px;" target="_blank">萌翻導航</a>
-	<a href="https://www.mmrkdh1.com" style="color: #A3A3A3; text-decoration: underline; padding: 10px;" target="_blank">秘密入口</a>
+	<a href="https://qingse.one" style="color: #A3A3A3; text-decoration: underline; padding: 10px;" target="_blank">情色網站大全</a>
+	<a href="https://141jj.com/" style="color: #A3A3A3; text-decoration: underline; padding: 10px;" target="_blank">141JJ 導航</a>
+	<a href="http://www.pornbest.org/" style="color: #A3A3A3; text-decoration: underline; padding: 10px;" target="_blank">PornBest  免費中文視頻</a>
 	<a href="https://www.17dm.net/" style="color: #A3A3A3; text-decoration: underline; padding: 10px;" target="_blank">妖氣動漫導航</a>
     <a href="https://share.acgnx.net/" style="color: #A3A3A3; text-decoration: underline; padding: 10px;" target="_blank">末日動漫資源庫</a>
     <a href="https://moeli-desu.com/" style="color: #A3A3A3; text-decoration: underline; padding: 10px;" target="_blank">夢璃</a>
-    <a href="https://www.gal123.com/" style="color: #A3A3A3; text-decoration: underline; padding: 10px;" target="_blank">紳士導航♂</a>
 	<a href="https://www.sshs.pw/" style="color: #A3A3A3; text-decoration: underline; padding: 10px;" target="_blank">紳士會所</a>
 </div>
 
@@ -75,6 +74,9 @@
 						<a style="text-decoration: none;" href="{{ route('video.watch') }}?v={{ $video->id }}">
 							<div class="home-rows-videos-div" style="position: relative; display: inline-block;">
 								<img src="{{ $video->cover }}">
+								@if ($video->cover == 'https://i.imgur.com/E6mSQA2.png')
+				                  <img style="position: absolute; top: 0; left: 0; height: 100%; object-fit: cover; padding-left: 2px; padding-right: 2px" src="{{ $video->imgurL() }}">
+				                @endif
 						        <div class="home-rows-videos-title" style="position:absolute; bottom:0; left:0; white-space: initial; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; color: white; width: 100%; padding: 3px 5px; background: linear-gradient(to bottom, transparent 0%, black 120%);">{{ $video->title }}</div>
 					        </div>
 						</a>

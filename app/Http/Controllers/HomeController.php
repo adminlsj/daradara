@@ -20,7 +20,7 @@ class HomeController extends Controller
     {
         $count = 28;
 
-        $upload = Video::whereOrderBy('uploaded_at', $count)->get();
+        $upload = Video::whereOrderBy('uploaded_at', $count, null)->where('imgur', '!=', 'WENZTSJ')->get();
         $newest = Video::whereOrderBy('created_at', $count)->get();
         $trending = Video::whereOrderBy('views', $count)->get();
 
@@ -31,7 +31,7 @@ class HomeController extends Controller
         $tag5 = Video::whereHasTags([], $count)->get();
 
         $rows = [
-            '最新上傳' => ['videos' => $upload, 'link' => '/search?query=&genre=H動漫&sort=最新上傳'], 
+            '最新上傳' => ['videos' => $upload, 'link' => '/search?query=&genre=全部&sort=最新上傳'], 
             '最新內容' => ['videos' => $newest, 'link' => '/search?query=&genre=H動漫&sort=最新內容'],
             '發燒影片' => ['videos' => $trending, 'link' => '/search?query=&genre=H動漫&sort=觀看次數'], 
             '乳不巨何以聚人心' => ['videos' => $tag1, 'link' => '/search?query=&genre=H動漫&tags%5B%5D=巨乳&sort='], 

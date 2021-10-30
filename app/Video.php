@@ -184,12 +184,11 @@ class Video extends Model
           ->limit($count);
     }
 
-    public function scopeWhereOrderBy($query, $order, $count)
+    public function scopeWhereOrderBy($query, $order, $count, $uncover = 'https://i.imgur.com/E6mSQA2.png')
     {
         return $query->orderBy($order, 'desc')
-                     ->where('cover', '!=', null)
-                     ->where('cover', '!=', 'https://i.imgur.com/E6mSQA2.png')
-                     ->select('id', 'title', 'cover')      
+                     ->where('cover', '!=', $uncover)
+                     ->select('id', 'title', 'cover', 'imgur')
                      ->limit($count);
     }
 }

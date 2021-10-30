@@ -41,16 +41,16 @@
           <div class="simple-dropdown-item genre-option">PornDude</div>
         </a>
         <hr style="margin: 0; border-color: #333333;">
+        <a style="color: white; text-decoration: none;" href="https://qingse.one" target="_blank">
+          <div class="simple-dropdown-item genre-option">情色網站大全</div>
+        </a>
+        <hr style="margin: 0; border-color: #333333;">
         <a style="color: white; text-decoration: none;" href="https://141jj.com/" target="_blank">
-          <div class="simple-dropdown-item genre-option">141JJ</div>
+          <div class="simple-dropdown-item genre-option">141JJ 導航</div>
         </a>
         <hr style="margin: 0; border-color: #333333;">
-        <a style="color: white; text-decoration: none;" href="https://www.moefuns.net" target="_blank">
-          <div class="simple-dropdown-item genre-option">萌翻導航</div>
-        </a>
-        <hr style="margin: 0; border-color: #333333;">
-        <a style="color: white; text-decoration: none;" href="https://www.mmrkdh1.com" target="_blank">
-          <div class="simple-dropdown-item genre-option">秘密入口</div>
+        <a style="color: white; text-decoration: none;" href="http://www.pornbest.org/" target="_blank">
+          <div class="simple-dropdown-item genre-option">PornBest 免費中文視頻</div>
         </a>
         <hr style="margin: 0; border-color: #333333;">
         <a style="color: white; text-decoration: none;" href="https://www.17dm.net/" target="_blank">
@@ -63,10 +63,6 @@
         <hr style="margin: 0; border-color: #333333;">
         <a style="color: white; text-decoration: none;" href="https://moeli-desu.com/" target="_blank">
           <div class="simple-dropdown-item genre-option">夢璃</div>
-        </a>
-        <hr style="margin: 0; border-color: #333333;">
-        <a style="color: white; text-decoration: none;" href="https://www.gal123.com/" target="_blank">
-          <div class="simple-dropdown-item genre-option">紳士導航♂</div>
         </a>
         <hr style="margin: 0; border-color: #333333;">
         <a style="color: white; text-decoration: none;" href="https://www.sshs.pw/" target="_blank">
