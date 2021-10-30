@@ -30,7 +30,19 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $url = 'https://spankbang.com/5yx9r/video/convenient+sex+friends+2';
+        $videos = Video::where('cover', 'ilike', 'https://i1.wp.com/ba.apperoni.top/%')->get();
+        foreach ($videos as $video) {
+            $temp = $video->foreign_sd;
+            $temp['hcover'] = $video->cover;
+            if (array_key_exists('cover', $temp)) {
+                $video->cover = $temp['cover'];
+                unset($temp['cover']);
+            }
+            $video->foreign_sd = $temp;
+            $video->save();
+        }
+
+        /* $url = 'https://spankbang.com/5yx9r/video/convenient+sex+friends+2';
 
         if ($request->method == 'curl') {
             $curl_connection = curl_init($url);
@@ -47,7 +59,7 @@ class BotController extends Controller
                 ->bodyHtml();
         }
 
-        return $html;
+        return $html; */
 
 
         /* $videos = Video::where('sd', 'ilike', '%xvideos%')->where('foreign_sd', 'ilike', '%"error"%')->orderBy('id', 'desc')->get();
