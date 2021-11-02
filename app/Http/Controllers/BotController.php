@@ -201,9 +201,13 @@ class BotController extends Controller
         Spankbang::updateSpankbangBackupEmergent();
     }
 
-    public function updateSpankbangErrors()
+    public function updateSpankbangErrors(Request $request)
     {
-        Spankbang::updateSpankbangErrors();
+        if ($number = $request->number && $total = $request->total) {
+            Spankbang::updateSpankbangErrors($number, $total);
+        } else {
+            Spankbang::updateSpankbangErrors(1, 1);
+        }
     }
 
     public function checkSpankbangOutdate()
