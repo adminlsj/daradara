@@ -301,7 +301,7 @@ class Spankbang
     {
         Log::info('Spankbang errors update started...');
 
-        $videos = Video::where('foreign_sd', 'ilike', '%"error"%')->where('foreign_sd', 'ilike', '%spankbang%')->select('id', 'title', 'sd', 'outsource', 'tags_array', 'foreign_sd', 'created_at')->get();
+        $videos = Video::where('foreign_sd', 'ilike', '%"error"%')->where('foreign_sd', 'ilike', '%spankbang%')->select('id', 'title', 'sd', 'outsource', 'tags_array', 'foreign_sd', 'created_at')->orderBy('id', 'asc')->get();
 
         $loop = 1;
         $dividend = ceil($videos->count() / $total);
