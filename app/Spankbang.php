@@ -69,7 +69,7 @@ class Spankbang
                 $video->save();
             }
 
-            sleep(4);
+            sleep(5);
         }
 
         Log::info('Spankbang update ended...');
@@ -142,7 +142,7 @@ class Spankbang
                     $video->save();
                 }
 
-                sleep(4);
+                sleep(5);
             }
         }
 
@@ -216,7 +216,7 @@ class Spankbang
                     $video->save();
                 }
 
-                sleep(4);
+                sleep(5);
             }
         }
 
@@ -290,7 +290,7 @@ class Spankbang
                     $video->save();
                 }
 
-                sleep(4);
+                sleep(5);
             }
         }
 
@@ -361,7 +361,7 @@ class Spankbang
                     Mail::to('vicky.avionteam@gmail.com')->send(new UserReport('master', 'Spankbang update failed', $video->id, $video->title, $video->sd, 'master', 'master'));
                 }
 
-                sleep(4);
+                sleep(5);
             }
         }
 
