@@ -30,18 +30,6 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        /* $videos = Video::where('cover', 'ilike', 'https://i1.wp.com/ba.apperoni.top/%')->get();
-        foreach ($videos as $video) {
-            $temp = $video->foreign_sd;
-            $temp['hcover'] = $video->cover;
-            if (array_key_exists('cover', $temp)) {
-                $video->cover = $temp['cover'];
-                unset($temp['cover']);
-            }
-            $video->foreign_sd = $temp;
-            $video->save();
-        } */
-
         $url = 'https://spankbang.com/5yx9r/video/convenient+sex+friends+2';
 
         if ($request->method == 'curl') {
@@ -53,23 +41,7 @@ class BotController extends Controller
             curl_close($curl_connection);
 
         } elseif ($request->method == 'browsershot') {
-            $blockDomains = ["googletagmanager.com", "googlesyndication.com", "doubleclick.net", "google-analytics.com", "exosrv.com"];
-            $html = Browsershot::url($url)
-                ->timeout(1800)
-                ->disableImages()
-                ->useCookies(['_gid' => 'GA1.2.1098535915.1635852402'], '.spankbang.com')
-                ->useCookies(['postgen_interstitial_v4' => '1'], 'spankbang.com')
-                ->useCookies(['_ga' => 'GA1.2.1163545612.1635852402'], '.spankbang.com')
-                ->useCookies(['sb_session' => 'eyJfcGVybWFuZW50Ijp0cnVlLCJjb3VudHJ5IjoiU0ciLCJlZGl0aW9uIjoic2cifQ.YYEgfw.wS5z_ePr8DkhPpmXNXMz3MJdHbg'], '.spankbang.com')
-                ->useCookies(['ana_vid' => '94db8a41f82c9baa57fa2ca76872badc2a74a8f1763b96b06855c8773c639538'], '.spankbang.com')
-                ->useCookies(['ana_sid' => '94db8a41f82c9baa57fa2ca76872badc2a74a8f1763b96b06855c8773c639538'], '.spankbang.com')
-                ->useCookies(['__cf_bm' => 'drUIgf7TDv9R54ckO6KVruTJkhdt6LL72ioS4PqIMF8-1635852401-0-Aa7ylJ6cFhEOAYG0mIg0WNdypYAtGOhA+BF5GRFLdnDo+Mf2tEYSA6227IasnfHNkcPRomYZSf4eHjo4Iy0EYO12ZNeqeKUmgUpha+4Ov88N2eUrIhxK+MIGLdc1S9KAbdw9nMXy7QDpJO9nUB5bnW9CvjfxLh3XO7gzpxyDeJE1'], '.spankbang.com')
-                ->useCookies(['backend_version' => 'master'], '.spankbang.com')
-                ->useCookies(['warn_modal' => '0'], '.spankbang.com')
-                ->setOption('args', ['--disable-web-security'])
-                ->setOption('args', '--lang=en-GB')
-                ->userAgent('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36')
-                ->bodyHtml();
+            $html = Spankbang::getBrowsershotHtml($url);
         }
 
         return $html;
@@ -181,9 +153,13 @@ class BotController extends Controller
         }
     }
 
-    public function updateSpankbang()
+    public function updateSpankbang(Request $request)
     {
-        Spankbang::updateSpankbang();
+        if ($number = $request->number && $total = $request->total) {
+            Spankbang::updateSpankbang($number, $total);
+        } else {
+            Spankbang::updateSpankbang(1, 1);
+        }
     }
 
     public function updateSpankbangBackup()
@@ -201,13 +177,9 @@ class BotController extends Controller
         Spankbang::updateSpankbangBackupEmergent();
     }
 
-    public function updateSpankbangErrors(Request $request)
+    public function updateSpankbangErrors()
     {
-        if ($number = $request->number && $total = $request->total) {
-            Spankbang::updateSpankbangErrors($number, $total);
-        } else {
-            Spankbang::updateSpankbangErrors(1, 1);
-        }
+        Spankbang::updateSpankbangErrors();
     }
 
     public function checkSpankbangOutdate()

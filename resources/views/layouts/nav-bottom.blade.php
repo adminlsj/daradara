@@ -33,7 +33,7 @@
       </div>
 
       <div class="modal-body" style="padding: 0;">
-        <a style="color: white; text-decoration: none;" href="https://discord.gg/cSHVHAUj" target="_blank">
+        <a style="color: white; text-decoration: none;" href="https://discord.gg/WWYc9m9CUQ" target="_blank">
           <div class="simple-dropdown-item genre-option">Discord</div>
         </a>
         <hr style="margin: 0; border-color: #333333;">
