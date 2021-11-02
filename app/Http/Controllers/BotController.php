@@ -53,8 +53,10 @@ class BotController extends Controller
             curl_close($curl_connection);
 
         } elseif ($request->method == 'browsershot') {
+            $blockDomains = ["googletagmanager.com", "googlesyndication.com", "doubleclick.net", "google-analytics.com", "exosrv.com"];
             $html = Browsershot::url($url)
                 ->timeout(1800)
+                ->disableImages()
                 ->useCookies(['_gid' => 'GA1.2.1098535915.1635852402'], '.spankbang.com')
                 ->useCookies(['postgen_interstitial_v4' => '1'], 'spankbang.com')
                 ->useCookies(['_ga' => 'GA1.2.1163545612.1635852402'], '.spankbang.com')
