@@ -54,8 +54,19 @@ class BotController extends Controller
 
         } elseif ($request->method == 'browsershot') {
             $html = Browsershot::url($url)
-                ->timeout(3600)
-                ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
+                ->timeout(1800)
+                ->useCookies(['_gid' => 'GA1.2.1098535915.1635852402'], '.spankbang.com')
+                ->useCookies(['postgen_interstitial_v4' => '1'], 'spankbang.com')
+                ->useCookies(['_ga' => 'GA1.2.1163545612.1635852402'], '.spankbang.com')
+                ->useCookies(['sb_session' => 'eyJfcGVybWFuZW50Ijp0cnVlLCJjb3VudHJ5IjoiU0ciLCJlZGl0aW9uIjoic2cifQ.YYEgfw.wS5z_ePr8DkhPpmXNXMz3MJdHbg'], '.spankbang.com')
+                ->useCookies(['ana_vid' => '94db8a41f82c9baa57fa2ca76872badc2a74a8f1763b96b06855c8773c639538'], '.spankbang.com')
+                ->useCookies(['ana_sid' => '94db8a41f82c9baa57fa2ca76872badc2a74a8f1763b96b06855c8773c639538'], '.spankbang.com')
+                ->useCookies(['__cf_bm' => 'drUIgf7TDv9R54ckO6KVruTJkhdt6LL72ioS4PqIMF8-1635852401-0-Aa7ylJ6cFhEOAYG0mIg0WNdypYAtGOhA+BF5GRFLdnDo+Mf2tEYSA6227IasnfHNkcPRomYZSf4eHjo4Iy0EYO12ZNeqeKUmgUpha+4Ov88N2eUrIhxK+MIGLdc1S9KAbdw9nMXy7QDpJO9nUB5bnW9CvjfxLh3XO7gzpxyDeJE1'], '.spankbang.com')
+                ->useCookies(['backend_version' => 'master'], '.spankbang.com')
+                ->useCookies(['warn_modal' => '0'], '.spankbang.com')
+                ->setOption('args', ['--disable-web-security'])
+                ->setOption('args', '--lang=en-GB')
+                ->userAgent('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36')
                 ->bodyHtml();
         }
 
