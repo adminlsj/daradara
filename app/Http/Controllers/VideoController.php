@@ -316,10 +316,8 @@ class VideoController extends Controller
             foreach ($tags as $tag) {
                 if (array_key_exists($tag, $video->tags_array)) {
                     $tags_array[$tag] = $tags_array[$tag] + 1;
-                } else {
-                    if ($tag != '1080p' && $tag != '番劇') {  
-                        $tags_array[$tag] = 1;
-                    }
+                } elseif (in_array($tag, Video::$all_tag)) {
+                    $tags_array[$tag] = 1;
                 }
             }
             $video->tags_array = $tags_array;
