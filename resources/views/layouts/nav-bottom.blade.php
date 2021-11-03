@@ -29,10 +29,47 @@
     <div class="modal-content" style="border-radius: 3px; background-color: #222222; color: white;">
       <div class="modal-header" style="border-bottom: 1px solid #333333; position: relative; height: 65px;">
         <span class="material-icons pull-left no-select modal-close-btn" data-dismiss="modal">close</span>
-        <h4 class="modal-title" style="text-align: center; font-weight: bold; margin: 0; padding: 0; margin-top: 5px; font-size: 18px;">友情鏈結</h4>
+        <h4 class="modal-title" style="text-align: center; font-weight: bold; margin: 0; padding: 0; margin-top: 5px; font-size: 18px;">所有分類</h4>
       </div>
 
-      <div class="modal-body" style="padding: 0;">
+      <div class="modal-body" style="padding: 0; height: calc(100% - 65px);">
+        <a style="color: white; text-decoration: none; text-align: center;">
+          <div style="background-color: #333333;" class="simple-dropdown-item genre-option">影片類型</div>
+        </a>
+        <hr style="margin: 0; border-color: #333333;">
+        <a style="color: white; text-decoration: none;" href="{{ route('home.search') }}?genre=H動漫">
+          <div class="simple-dropdown-item genre-option">H動漫</div>
+        </a>
+        <hr style="margin: 0; border-color: #333333;">
+        <a style="color: white; text-decoration: none;" href="{{ route('home.search') }}?genre=H動漫&tags%5B%5D=新番預告">
+          <div class="simple-dropdown-item genre-option">新番預告</div>
+        </a>
+        <hr style="margin: 0; border-color: #333333;">
+        <a style="color: white; text-decoration: none;" href="{{ route('home.search') }}?genre=H動漫&tags%5B%5D=番劇">
+          <div class="simple-dropdown-item genre-option">番劇</div>
+        </a>
+        <hr style="margin: 0; border-color: #333333;">
+        <a style="color: white; text-decoration: none;" href="{{ route('home.search') }}?genre=3D動畫">
+          <div class="simple-dropdown-item genre-option">3D動畫</div>
+        </a>
+        <hr style="margin: 0; border-color: #333333;">
+        <a style="color: white; text-decoration: none;" href="{{ route('home.search') }}?genre=同人作品">
+          <div class="simple-dropdown-item genre-option">同人作品</div>
+        </a>
+        <hr style="margin: 0; border-color: #333333;">
+        <a style="color: white; text-decoration: none;" href="{{ route('home.search') }}?genre=Cosplay">
+          <div class="simple-dropdown-item genre-option">Cosplay</div>
+        </a>
+        <hr style="margin: 0; border-color: #333333;">
+        <a style="color: white; text-decoration: none;" href="{{ route('comic.index') }}">
+          <div class="simple-dropdown-item genre-option">H漫畫</div>
+        </a>
+        <hr style="margin: 0; border-color: #333333;">
+
+        <a style="color: white; text-decoration: none; text-align: center;">
+          <div style="background-color: #333333" class="simple-dropdown-item genre-option">友情鏈結</div>
+        </a>
+        <hr style="margin: 0; border-color: #333333;">
         <a style="color: white; text-decoration: none;" href="https://discord.gg/WWYc9m9CUQ" target="_blank">
           <div class="simple-dropdown-item genre-option">Discord</div>
         </a>
@@ -70,7 +107,6 @@
         </a>
         <hr style="margin: 0; border-color: #333333;">
       </div>
-
     </div>
   </div>
 </div>

@@ -317,7 +317,7 @@ class VideoController extends Controller
                 if (array_key_exists($tag, $video->tags_array)) {
                     $tags_array[$tag] = $tags_array[$tag] + 1;
                 } else {
-                    if ($tag != '1080p') {  
+                    if ($tag != '1080p' && $tag != '番劇') {  
                         $tags_array[$tag] = 1;
                     }
                 }

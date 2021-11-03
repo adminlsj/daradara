@@ -30,7 +30,52 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $url = 'https://spankbang.com/5yx9r/video/convenient+sex+friends+2';
+        /* $motherless_list = [];
+        for ($i = 1; $i <= 66; $i++) { 
+            if ($i == 1) {
+                $url = 'https://avbebe.com/archives/category/h%e5%8b%95%e7%95%ab%e5%bd%b1%e7%89%87';
+            } else {
+                $url = 'https://avbebe.com/archives/category/h%E5%8B%95%E7%95%AB%E5%BD%B1%E7%89%87/page/'.$i;
+            }
+            $curl_connection = curl_init($url);
+            curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+            curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+            $html = curl_exec($curl_connection);
+            curl_close($curl_connection);
+
+            $start = explode('<h1 class="archive-title">動畫卡通 Archive</h1>', $html);
+            $end = explode('<!-- .posts-default -->' , $start[1]);
+            $videos = $end[0];
+            $videos = str_replace('【動畫卡通】異種族風俗娘評鑑指南<', '', $videos);
+            $videos = str_replace('>[中文字幕]', '', $videos);
+
+            $dom = new \DOMDocument();
+            $dom->loadHTML('<meta http-equiv="content-type" content="text/html; charset=utf-8">'.$videos);
+            $links = $dom->getElementsByTagName('a');
+            foreach ($links as $link) {
+                $href = $link->getAttribute('href');
+
+                $curl_connection = curl_init($href);
+                curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+                curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+                $html = curl_exec($curl_connection);
+                curl_close($curl_connection);
+
+                if (strpos($html, '<iframe src="https://avbebe.com/wp-content/plugins/wp-tube-plugin/inc/tools/jwplayer/player.php?') !== false) {
+                    $motherless = Helper::get_string_between($html, '<iframe src="https://avbebe.com/wp-content/plugins/wp-tube-plugin/inc/tools/jwplayer/player.php?', '"');
+                    $motherless = explode('&id=', $motherless);
+                    $motherless = 'https://motherless.com/'.end($motherless);
+                    if (!in_array($motherless, $motherless_list)) {
+                        array_push($motherless_list, $motherless);
+                        echo $motherless.'<br>';
+                    }
+                }
+            }
+        } */
+
+        /* $url = 'https://spankbang.com/5yx9r/video/convenient+sex+friends+2';
 
         if ($request->method == 'curl') {
             $curl_connection = curl_init($url);
@@ -44,7 +89,7 @@ class BotController extends Controller
             $html = Spankbang::getBrowsershotHtml($url);
         }
 
-        return $html;
+        return $html; */
 
 
         /* $videos = Video::where('sd', 'ilike', '%xvideos%')->where('foreign_sd', 'ilike', '%"error"%')->orderBy('id', 'desc')->get();

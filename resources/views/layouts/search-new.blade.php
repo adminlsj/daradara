@@ -66,7 +66,15 @@
 			    <p style="color: darkgray; padding-bottom: 12px; font-size: 12px; padding-right: 60px;">較多結果，較不精準。配對所有包含任何一個選擇的標籤的影片，而非全部標籤。</p>
 		    </div>
 
-	        <h5 style="margin-bottom: 15px; font-weight: bold">人物關係：</h5>
+		    <h5 style="margin-bottom: 15px; font-weight: bold">影片屬性：</h5>
+	        @foreach (App\Video::$metadata as $tag)
+	        	<label class="hentai-tags-wrapper">
+				  <input name="tags[]" type="checkbox" value="{{ $tag }}" {{ $tags != [] && in_array($tag, $tags) ? 'checked' : '' }}>
+				  <span class="checkmark">{{ $tag }}</span>
+				</label>
+	        @endforeach
+
+	        <h5 style="margin-top: 15px; margin-bottom: 15px; font-weight: bold">人物關係：</h5>
 	        @foreach (App\Video::$setting as $tag)
 	        	<label class="hentai-tags-wrapper">
 				  <input name="tags[]" type="checkbox" value="{{ $tag }}" {{ $tags != [] && in_array($tag, $tags) ? 'checked' : '' }}>
