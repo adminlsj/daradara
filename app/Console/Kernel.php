@@ -41,12 +41,12 @@ class Kernel extends ConsoleKernel
         $schedule->command('hanime1:update-data')->dailyAt('05:00');
         $schedule->command('hanime1:reset-day-views')->dailyAt('05:00');
         $schedule->command('hanime1:reset-week-views')->weeklyOn(1, '05:00');
-        $schedule->command('hanime1:check-motherless')->dailyAt('05:00');
 
         $schedule->command('hanime1:update-xvideoserrors')->everyThirtyMinutes();
         $schedule->command('hanime1:update-youjizz')->cron('0 */6 * * *');
         $schedule->command('hanime1:update-spankbangbackupemergent')->everyThirtyMinutes();
         $schedule->command('hanime1:update-spankbangerrors')->hourly();
+        $schedule->command('hanime1:check-motherless')->hourly();
 
         $schedule->command('hanime1:upload-nhentai')->hourly()->between('6:00', '21:00');
         $schedule->command('hanime1:upload-rule34')->hourly()->between('6:00', '21:00');
