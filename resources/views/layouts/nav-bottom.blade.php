@@ -33,7 +33,7 @@
       </div>
 
       <div class="modal-body" style="padding: 0; height: calc(100% - 65px);">
-        <a style="color: white; text-decoration: none; text-align: center;">
+        <a style="color: white; text-decoration: none; text-align: center; pointer-events: none;">
           <div style="background-color: #333333;" class="simple-dropdown-item genre-option">影片類型</div>
         </a>
         <hr style="margin: 0; border-color: #333333;">
@@ -66,7 +66,7 @@
         </a>
         <hr style="margin: 0; border-color: #333333;">
 
-        <a style="color: white; text-decoration: none; text-align: center;">
+        <a style="color: white; text-decoration: none; text-align: center; pointer-events: none;">
           <div style="background-color: #333333" class="simple-dropdown-item genre-option">友情鏈結</div>
         </a>
         <hr style="margin: 0; border-color: #333333;">
