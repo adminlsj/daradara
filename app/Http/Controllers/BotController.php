@@ -75,7 +75,7 @@ class BotController extends Controller
             }
         } */
 
-        /* $url = 'https://spankbang.com/5yx9r/video/convenient+sex+friends+2';
+        $url = 'https://spankbang.com/5yx9r/video/convenient+sex+friends+2';
 
         if ($request->method == 'curl') {
             $curl_connection = curl_init($url);
@@ -89,7 +89,7 @@ class BotController extends Controller
             $html = Spankbang::getBrowsershotHtml($url);
         }
 
-        return $html; */
+        return $html;
 
 
         /* $videos = Video::where('sd', 'ilike', '%xvideos%')->where('foreign_sd', 'ilike', '%"error"%')->orderBy('id', 'desc')->get();
