@@ -21,7 +21,7 @@ class HomeController extends Controller
         $count = 28;
 
         $upload = Video::whereOrderBy('uploaded_at', $count, null)->where('imgur', '!=', 'WENZTSJ')->get();
-        $newest = Video::whereOrderBy('created_at', $count)->get();
+        $newest = Video::whereOrderBy('created_at', $count)->where('title', 'not like', '[新番預告]%')->get();
         $trending = Video::whereOrderBy('views', $count)->get();
 
         $tag1 = Video::whereHasTags(['巨乳'], $count)->get();
