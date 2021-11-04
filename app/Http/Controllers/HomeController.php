@@ -119,13 +119,13 @@ class HomeController extends Controller
             if ($request->broad) {
                 $videos = $videos->where(function($query) use ($tags) {
                     foreach ($tags as $tag) {
-                        $query->orWhere('tags_array', 'ilike', '%"'.$tag.'"%');
+                        $query->orWhere('tags_array', 'like', '%"'.$tag.'"%');
                     }
                 });
             } else {
                 foreach ($tags as $tag) {
                     $videos = $videos->where(function($query) use ($tag) {
-                        $query->orWhere('tags_array', 'ilike', '%"'.$tag.'"%');
+                        $query->orWhere('tags_array', 'like', '%"'.$tag.'"%');
                     });
                 }
             }
@@ -134,7 +134,7 @@ class HomeController extends Controller
         if ($brands = $request->brands) {
             $videos = $videos->where(function($query) use ($brands) {
                 foreach ($brands as $brand) {
-                    $query->orWhere('tags', 'ilike', '%'.$brand.'%');
+                    $query->orWhere('tags', 'like', '%'.$brand.'%');
                 }
             });
         }
@@ -171,6 +171,10 @@ class HomeController extends Controller
             }
         } else {
             $videos = $videos->orderBy('created_at', 'desc');
+        }
+
+        if (is_null($tags) || !in_array('新番預告', $tags)) {
+            $videos = $videos->where('title', 'not like', '[新番預告]%');
         }
 
         if (!$doujin) {
