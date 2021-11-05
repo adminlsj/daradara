@@ -225,7 +225,7 @@
 
 	<div id="home-rows-wrapper" class="search-rows-wrapper" style="position: relative;">
 
-		<div class="hidden-sm hidden-md hidden-lg" style="text-align: center; margin-top: -2px; margin-bottom: -18px;">
+		<div class="hidden-sm hidden-md hidden-lg" style="text-align: center; margin-top: -2px; {{ $videos->lastPage() == 1 ? 'margin-bottom: 26px' : 'margin-bottom: -18px'}}">
 			 <ins class="adsbyexoclick" data-zoneid="4396576"></ins> 
 		</div>
 
@@ -259,12 +259,13 @@
 			    @endforeach
 			</div>
 		@endif
+
 		<div class="search-pagination hidden-xs">{!! $videos->appends(request()->query())->links() !!}</div>
-		<div style="margin-top: {{ $doujin ? '-26px' : '-34px' }}" class="search-pagination mobile-search-pagination hidden-sm hidden-md hidden-lg">{!! $videos->appends(request()->query())->onEachSide(1)->links() !!}</div>
+		<div style="margin-top: {{ $doujin ? '-26px' : '-34px' }};" class="search-pagination mobile-search-pagination hidden-sm hidden-md hidden-lg">{!! $videos->appends(request()->query())->onEachSide(1)->links() !!}</div>
 
 		@include('ads.search-banner-panel')
 
-		<div class="hidden-sm hidden-md hidden-lg" style="text-align: center; margin-top: -12px; margin-bottom: -40px;">
+		<div class="hidden-sm hidden-md hidden-lg" style="text-align: center; margin-bottom: -40px; {{ $videos->lastPage() == 1 ? 'margin-top: 31px' : 'margin-top: -12px' }}">
 			<!-- JuicyAds v3.1 -->
 			<script type="text/javascript" data-cfasync="false" async src="https://poweredby.jads.co/js/jads.js"></script>
 			<ins id="941419" data-width="300" data-height="112"></ins>
