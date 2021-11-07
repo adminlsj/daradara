@@ -24,7 +24,7 @@ class Motherless
             $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
             curl_close($ch);
 
-            if ($httpcode != 200) {
+            if ($httpcode != 200 && $httpcode != 0) {
                 Mail::to('vicky.avionteam@gmail.com')->send(new UserReport('master', 'Motherless check failed ('.$httpcode.')', $video->id, $video->title, $video->sd, 'master', 'master'));
             }
         }
