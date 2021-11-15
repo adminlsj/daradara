@@ -9,7 +9,7 @@ use Carbon\Carbon;
 class Cosplayjav
 {
     public static $removed = [
-        "1080p", "60fps", "jav_full_hd", "tagme actress", "tagme_actress", "jav", "sex", "720p", "anime", "video", "wings", "cosplay", "idolmaster", "cosplay_sex", "split_roast", "koshimizu_sachiko", "Sano_Ai", "idolmaster_cinderella_girls", "dressing", "Kosutchi", "lightning", "pantsu", "final_fantasy", "doujin", "imageset", "Dangan_ronpa", "Enoshima_Junko", "bondage", "bukkake", "SAIT-024", "anal_toys", "nishita_karina", "Nanpa_Mokushiroku", "Violet Evergarden", "Violet_Evergarden", "NCY-104", "astolfo", "fate/apocrypha", "touhou", "kirisame_marisa", "kirito", "SDAB-183", "SOD_Create", "Hayami_Nana", "tagme_series", "tagme_character", "sword_art_online", "MIAA-448", "fukada_eimi", "NieR_Automata", "Yorha_No.2_Type_B", "MMUS-053", "grinding", "handjob_cum", "tohsaka_rin", "Momose_Asuka", "fate_stay/night", "love_live!_sunshine!", "tagme character", "fate_series", "shinon", "full_hd", "HOIZ-022", "Wakamiya Hono (若宮穂乃), Sakuraba Hikari (桜庭ひかり), Inaba Ruka (稲場るか)", "cum_on_belly", "Mashu_Kyrielight", "NCYF-008", "tagme series (私にタグ シリーズ)", "Kuroki_Ikumi", "shuten_douji", "DBVB-024", "crossdresser", "xidaidai", "phone_ver", "vaginal_sticker", "phone_resolution", "tagme series (私にタグ シリーズ)", "feet", "solo", "eromanga_sensei", "keqing", "Xingqiu", "CPDE-048", "ANX-136", "yuuri_maina", "Saimin_Rei_Onna", "Sakurauchi_Riko", "aikatsu", "hoshimiya_ichigo", "Zero_Two", "hololive", "Shirogane_Noel", "Usada_Pekora", "medium_hair", "izayoi_sakuya"
+        "1080p", "60fps", "jav_full_hd", "tagme actress", "tagme_actress", "jav", "sex", "720p", "anime", "video", "wings", "cosplay", "idolmaster", "cosplay_sex", "split_roast", "koshimizu_sachiko", "Sano_Ai", "idolmaster_cinderella_girls", "dressing", "Kosutchi", "lightning", "pantsu", "final_fantasy", "doujin", "imageset", "Dangan_ronpa", "Enoshima_Junko", "bondage", "bukkake", "SAIT-024", "anal_toys", "nishita_karina", "Nanpa_Mokushiroku", "Violet Evergarden", "Violet_Evergarden", "NCY-104", "astolfo", "fate/apocrypha", "touhou", "kirisame_marisa", "kirito", "SDAB-183", "SOD_Create", "Hayami_Nana", "tagme_series", "tagme_character", "sword_art_online", "MIAA-448", "fukada_eimi", "NieR_Automata", "Yorha_No.2_Type_B", "MMUS-053", "grinding", "handjob_cum", "tohsaka_rin", "Momose_Asuka", "fate_stay/night", "love_live!_sunshine!", "tagme character", "fate_series", "shinon", "full_hd", "HOIZ-022", "Wakamiya Hono (若宮穂乃), Sakuraba Hikari (桜庭ひかり), Inaba Ruka (稲場るか)", "cum_on_belly", "Mashu_Kyrielight", "NCYF-008", "tagme series (私にタグ シリーズ)", "Kuroki_Ikumi", "shuten_douji", "DBVB-024", "crossdresser", "xidaidai", "phone_ver", "vaginal_sticker", "phone_resolution", "tagme series (私にタグ シリーズ)", "feet", "solo", "eromanga_sensei", "keqing", "Xingqiu", "CPDE-048", "ANX-136", "yuuri_maina", "Saimin_Rei_Onna", "Sakurauchi_Riko", "aikatsu", "hoshimiya_ichigo", "Zero_Two", "hololive", "Shirogane_Noel", "Usada_Pekora", "medium_hair", "izayoi_sakuya", "CP_Denen", "Lumine"
     ];
 
     public static $translations = [
@@ -293,7 +293,7 @@ class Cosplayjav
         $video->save();
     }
 
-    public static function translateCosplayjav()
+    public static function , "CP_Denen", "Lumine"()
     {
         $videos = Video::where('foreign_sd', 'ilike', '%"cosplayjav"%')->where('tags_array', '!=', null)->orderBy('created_at', 'desc')->limit(10)->get();
         $translations = Cosplayjav::$translations;
