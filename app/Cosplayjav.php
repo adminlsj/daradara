@@ -293,7 +293,7 @@ class Cosplayjav
         $video->save();
     }
 
-    public static function , "CP_Denen", "Lumine"()
+    public static function translateCosplayjav()
     {
         $videos = Video::where('foreign_sd', 'ilike', '%"cosplayjav"%')->where('tags_array', '!=', null)->orderBy('created_at', 'desc')->limit(10)->get();
         $translations = Cosplayjav::$translations;
