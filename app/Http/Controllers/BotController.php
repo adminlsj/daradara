@@ -30,52 +30,25 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        /* $motherless_list = [];
-        for ($i = 1; $i <= 66; $i++) { 
-            if ($i == 1) {
-                $url = 'https://avbebe.com/archives/category/h%e5%8b%95%e7%95%ab%e5%bd%b1%e7%89%87';
-            } else {
-                $url = 'https://avbebe.com/archives/category/h%E5%8B%95%E7%95%AB%E5%BD%B1%E7%89%87/page/'.$i;
+        $motherless = ["https://motherless.com/31857F9", "https://motherless.com/D664097", "https://motherless.com/4ED1E4E", "https://motherless.com/839E9DC", "https://motherless.com/48D23D4", "https://motherless.com/1BBADCF", "https://motherless.com/D8E656F", "https://motherless.com/81B809E", "https://motherless.com/C2EDB43", "https://motherless.com/8AECD1E", "https://motherless.com/5E20490", "https://motherless.com/3E5B4BF", "https://motherless.com/77E0C0E", "https://motherless.com/26DF0C6", "https://motherless.com/8053821", "https://motherless.com/E77B72F", "https://motherless.com/98B1E75", "https://motherless.com/37AFE65", "https://motherless.com/C13AD8F", "https://motherless.com/7BFFCC7", "https://motherless.com/56FA588", "https://motherless.com/98EDB15", "https://motherless.com/6DC6561", "https://motherless.com/D6703B4", "https://motherless.com/363F53F", "https://motherless.com/E5751B6", "https://motherless.com/66865F1", "https://motherless.com/3D7936F", "https://motherless.com/52A6CA8", "https://motherless.com/571D3F2", "https://motherless.com/96DBE97", "https://motherless.com/8F17B9B", "https://motherless.com/E6E30B2", "https://motherless.com/A33DC7B", "https://motherless.com/8EFCF2F", "https://motherless.com/DF9DA63", "https://motherless.com/0CA4CC6", "https://motherless.com/ED0606C", "https://motherless.com/CB4AA37", "https://motherless.com/9784B62", "https://motherless.com/21DC562", "https://motherless.com/73C0A62", "https://motherless.com/A191806", "https://motherless.com/5F0D2FD", "https://motherless.com/5941925", "https://motherless.com/19BD391", "https://motherless.com/6DC999F", "https://motherless.com/03C0449", "https://motherless.com/C26D0C7", "https://motherless.com/86EED5F", "https://motherless.com/7DEC575", "https://motherless.com/E483C9F", "https://motherless.com/9111AB0", "https://motherless.com/44C6DF9", "https://motherless.com/C044E9E", "https://motherless.com/DF6170B", "https://motherless.com/D906DD2", "https://motherless.com/BC37FCF", "https://motherless.com/976B974", "https://motherless.com/6ED6C71", "https://motherless.com/919C872", "https://motherless.com/7B7895B", "https://motherless.com/44DFB2B", "https://motherless.com/51AA375", "https://motherless.com/99A4505", "https://motherless.com/70BAA86", "https://motherless.com/D9D0C58", "https://motherless.com/C61ABA6", "https://motherless.com/2889C23", "https://motherless.com/A623493", "https://motherless.com/17A959C", "https://motherless.com/8A8857E", "https://motherless.com/F29A0D5", "https://motherless.com/6BBB6E5", "https://motherless.com/534CFFD", "https://motherless.com/02BB93F", "https://motherless.com/5B59756", "https://motherless.com/AB21A1E", "https://motherless.com/6EE5500", "https://motherless.com/59CD9ED", "https://motherless.com/8A6B0CB", "https://motherless.com/0E08149", "https://motherless.com/34FCC1E", "https://motherless.com/029D9C7", "https://motherless.com/8B5DAE1", "https://motherless.com/04DA927", "https://motherless.com/1D462FA", "https://motherless.com/43B8056", "https://motherless.com/AF9EAD9", "https://motherless.com/6C81508", "https://motherless.com/80605E6", "https://motherless.com/F03D40C", "https://motherless.com/DABD30A", "https://motherless.com/9858545", "https://motherless.com/E5511CB", "https://motherless.com/C022F00", "https://motherless.com/07C6593", "https://motherless.com/746DB18", "https://motherless.com/36456AF", "https://motherless.com/C9BE619", "https://motherless.com/7090755", "https://motherless.com/DBD6D56", "https://motherless.com/2399B44", "https://motherless.com/94DC6C6", "https://motherless.com/A7105CC", "https://motherless.com/61715F4", "https://motherless.com/F3D224B", "https://motherless.com/29029D4", "https://motherless.com/9D12644", "https://motherless.com/47C421F", "https://motherless.com/D4B3DC2", "https://motherless.com/C5EC644", "https://motherless.com/2359CD1", "https://motherless.com/AFBF2E1", "https://motherless.com/3187E45", "https://motherless.com/B8D7C0B", "https://motherless.com/F15AB15", "https://motherless.com/B7C9A6B", "https://motherless.com/E6A064B", "https://motherless.com/874DAC1", "https://motherless.com/980CC59", "https://motherless.com/74A8B23", "https://motherless.com/4302953", "https://motherless.com/BE33053", "https://motherless.com/76E24B1", "https://motherless.com/B75502B", "https://motherless.com/536FCDA", "https://motherless.com/A765128", "https://motherless.com/9E81E3C", "https://motherless.com/E13D045", "https://motherless.com/6B63758", "https://motherless.com/F5C9209", "https://motherless.com/B61C4B4", "https://motherless.com/26FC0A2", "https://motherless.com/19D8B5B", "https://motherless.com/2768978", "https://motherless.com/C1B31DF", "https://motherless.com/B776F85", "https://motherless.com/9E8FA46", "https://motherless.com/16E7863", "https://motherless.com/F3A4591", "https://motherless.com/39C0DC9", "https://motherless.com/32E629C", "https://motherless.com/F252B9B", "https://motherless.com/3BFE988", "https://motherless.com/4D661E5", "https://motherless.com/2BA198F", "https://motherless.com/875E3AF", "https://motherless.com/2B175AC", "https://motherless.com/B202F69", "https://motherless.com/03AD012", "https://motherless.com/6DCB693", "https://motherless.com/C4006D3", "https://motherless.com/F3F7B9B", "https://motherless.com/02C2BEF", "https://motherless.com/394A817", "https://motherless.com/D2D55AD", "https://motherless.com/F98F918", "https://motherless.com/0FDDA71", "https://motherless.com/DFE9B9F", "https://motherless.com/B7C8304", "https://motherless.com/2E3C4D4", "https://motherless.com/0A2796C", "https://motherless.com/CAE561B", "https://motherless.com/190132E", "https://motherless.com/5DCA889", "https://motherless.com/37FAC6D", "https://motherless.com/E8DDE6F", "https://motherless.com/4DE96EF", "https://motherless.com/A03A5D5", "https://motherless.com/B685AA8", "https://motherless.com/4908E46", "https://motherless.com/587D96A", "https://motherless.com/293AABD", "https://motherless.com/0808074", "https://motherless.com/BD73B0A", "https://motherless.com/648D10B", "https://motherless.com/2B14E86", "https://motherless.com/97316C2", "https://motherless.com/44C17C6", "https://motherless.com/BFDDFF4", "https://motherless.com/0FBE4DA", "https://motherless.com/7E75C3F", "https://motherless.com/38A7199", "https://motherless.com/313AD16", "https://motherless.com/3321A59", "https://motherless.com/95A9D75", "https://motherless.com/B71A9C9", "https://motherless.com/53F926A", "https://motherless.com/1FF7AFE", "https://motherless.com/979F6B2", "https://motherless.com/513C48F", "https://motherless.com/2F691DD", "https://motherless.com/96351AC", "https://motherless.com/5094DA6", "https://motherless.com/9CDF4D7", "https://motherless.com/A6E021D", "https://motherless.com/1B58470", "https://motherless.com/C8F1EFD", "https://motherless.com/6E9E060", "https://motherless.com/0532516", "https://motherless.com/1630AAB", "https://motherless.com/DE5A9A0", "https://motherless.com/31FD3A1", "https://motherless.com/BEA53F3", "https://motherless.com/00D4861", "https://motherless.com/A1C0B52", "https://motherless.com/2C1913D", "https://motherless.com/CAE37B3", "https://motherless.com/6D2B07C", "https://motherless.com/5D79984", "https://motherless.com/5F3F966", "https://motherless.com/95C388C", "https://motherless.com/8C58AC3"];
+
+        foreach ($motherless as $url) {
+            $video = 'https://cdn5-videos.motherlessmedia.com/videos/'.str_replace('https://motherless.com/', '', $url).'.mp4';
+            $ch = curl_init($video);
+            curl_setopt($ch, CURLOPT_HEADER, true);    // we want headers
+            curl_setopt($ch, CURLOPT_NOBODY, true);    // we don't need body
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
+            curl_setopt($ch, CURLOPT_TIMEOUT,10);
+            $output = curl_exec($ch);
+            $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            curl_close($ch);
+
+            if ($httpcode != 302) {
+                echo $url.'<br>';
             }
-            $curl_connection = curl_init($url);
-            curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
-            curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
-            $html = curl_exec($curl_connection);
-            curl_close($curl_connection);
+        }
 
-            $start = explode('<h1 class="archive-title">動畫卡通 Archive</h1>', $html);
-            $end = explode('<!-- .posts-default -->' , $start[1]);
-            $videos = $end[0];
-            $videos = str_replace('【動畫卡通】異種族風俗娘評鑑指南<', '', $videos);
-            $videos = str_replace('>[中文字幕]', '', $videos);
-
-            $dom = new \DOMDocument();
-            $dom->loadHTML('<meta http-equiv="content-type" content="text/html; charset=utf-8">'.$videos);
-            $links = $dom->getElementsByTagName('a');
-            foreach ($links as $link) {
-                $href = $link->getAttribute('href');
-
-                $curl_connection = curl_init($href);
-                curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
-                curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
-                curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
-                $html = curl_exec($curl_connection);
-                curl_close($curl_connection);
-
-                if (strpos($html, '<iframe src="https://avbebe.com/wp-content/plugins/wp-tube-plugin/inc/tools/jwplayer/player.php?') !== false) {
-                    $motherless = Helper::get_string_between($html, '<iframe src="https://avbebe.com/wp-content/plugins/wp-tube-plugin/inc/tools/jwplayer/player.php?', '"');
-                    $motherless = explode('&id=', $motherless);
-                    $motherless = 'https://motherless.com/'.end($motherless);
-                    if (!in_array($motherless, $motherless_list)) {
-                        array_push($motherless_list, $motherless);
-                        echo $motherless.'<br>';
-                    }
-                }
-            }
-        } */
-
-        $url = 'https://spankbang.com/5yx9r/video/convenient+sex+friends+2';
+        /* $url = 'https://spankbang.com/5yx9r/video/convenient+sex+friends+2';
 
         if ($request->method == 'curl') {
             $curl_connection = curl_init($url);
@@ -89,7 +62,7 @@ class BotController extends Controller
             $html = Spankbang::getBrowsershotHtml($url);
         }
 
-        return $html;
+        return $html; */
 
 
         /* $videos = Video::where('sd', 'ilike', '%xvideos%')->where('foreign_sd', 'ilike', '%"error"%')->orderBy('id', 'desc')->get();
@@ -169,6 +142,126 @@ class BotController extends Controller
             $video->tags_array = $new_tags;
             $video->save();
         } */
+    }
+
+    public function checkAvbebeEporner(Request $request)
+    {
+        ini_set('max_execution_time', 0);
+        ini_set('memory_limit', '-1');
+
+        $eporner_list = [];
+        for ($i = 1; $i <= 66; $i++) { 
+            if ($i == 1) {
+                $url = 'https://avbebe.com/archives/category/h%e5%8b%95%e7%95%ab%e5%bd%b1%e7%89%87';
+            } else {
+                $url = 'https://avbebe.com/archives/category/h%E5%8B%95%E7%95%AB%E5%BD%B1%E7%89%87/page/'.$i;
+            }
+            $curl_connection = curl_init($url);
+            curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+            curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+            $html = curl_exec($curl_connection);
+            curl_close($curl_connection);
+
+            $start = explode('<h1 class="archive-title">動畫卡通 Archive</h1>', $html);
+            $end = explode('<!-- .posts-default -->' , $start[1]);
+            $videos = $end[0];
+            $videos = str_replace('【動畫卡通】異種族風俗娘評鑑指南<', '', $videos);
+            $videos = str_replace('>[中文字幕]', '', $videos);
+
+            $dom = new \DOMDocument();
+            $dom->loadHTML('<meta http-equiv="content-type" content="text/html; charset=utf-8">'.$videos);
+            $links = $dom->getElementsByTagName('a');
+            foreach ($links as $link) {
+                $href = $link->getAttribute('href');
+
+                $curl_connection = curl_init($href);
+                curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+                curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+                $html = curl_exec($curl_connection);
+                curl_close($curl_connection);
+
+                if (strpos($html, 'https://www.eporner.com/embed/') !== false) {
+                    $eporner = Helper::get_string_between($html, 'https://www.eporner.com/embed/', '/');
+                    $eporner = 'https://www.eporner.com/embed/'.$eporner.'/';
+                    if (!in_array($eporner, $eporner_list)) {
+                        array_push($eporner_list, $eporner);
+                        echo $eporner.'<br>';
+                    }
+                }
+            }
+        }
+    }
+
+    public function checkAvbebeMotherless(Request $request)
+    {
+        ini_set('max_execution_time', 0);
+        ini_set('memory_limit', '-1');
+
+        $motherless_list = [];
+        for ($i = 1; $i <= 66; $i++) { 
+            if ($i == 1) {
+                $url = 'https://avbebe.com/archives/category/h%e5%8b%95%e7%95%ab%e5%bd%b1%e7%89%87';
+            } else {
+                $url = 'https://avbebe.com/archives/category/h%E5%8B%95%E7%95%AB%E5%BD%B1%E7%89%87/page/'.$i;
+            }
+            $curl_connection = curl_init($url);
+            curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+            curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+            $html = curl_exec($curl_connection);
+            curl_close($curl_connection);
+
+            $start = explode('<h1 class="archive-title">動畫卡通 Archive</h1>', $html);
+            $end = explode('<!-- .posts-default -->' , $start[1]);
+            $videos = $end[0];
+            $videos = str_replace('【動畫卡通】異種族風俗娘評鑑指南<', '', $videos);
+            $videos = str_replace('>[中文字幕]', '', $videos);
+
+            $dom = new \DOMDocument();
+            $dom->loadHTML('<meta http-equiv="content-type" content="text/html; charset=utf-8">'.$videos);
+            $links = $dom->getElementsByTagName('a');
+            foreach ($links as $link) {
+                $href = $link->getAttribute('href');
+
+                $curl_connection = curl_init($href);
+                curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+                curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+                $html = curl_exec($curl_connection);
+                curl_close($curl_connection);
+
+                if (strpos($html, 'motherless') !== false) {
+                    if (strpos($html, '<iframe src="https://avbebe.com/wp-content/plugins/wp-tube-plugin/inc/tools/jwplayer/player.php?') !== false) {
+                        $motherless = Helper::get_string_between($html, '<iframe src="https://avbebe.com/wp-content/plugins/wp-tube-plugin/inc/tools/jwplayer/player.php?', '"');
+                        $motherless = explode('&id=', $motherless);
+                        $motherless = 'https://motherless.com/'.end($motherless);
+
+                    } elseif (strpos($html, 'https://cdn5-videos.motherlessmedia.com/videos/') !== false) {
+                        $motherless = Helper::get_string_between($html, 'https://cdn5-videos.motherlessmedia.com/videos/', '.mp4');
+                        $motherless = 'https://motherless.com/'.$motherless;
+                    }
+
+                    if (!in_array($motherless, $motherless_list)) {
+                        $video = 'https://cdn5-videos.motherlessmedia.com/videos/'.str_replace('https://motherless.com/', '', $motherless).'.mp4';
+                        $ch = curl_init($video);
+                        curl_setopt($ch, CURLOPT_HEADER, true);    // we want headers
+                        curl_setopt($ch, CURLOPT_NOBODY, true);    // we don't need body
+                        curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
+                        curl_setopt($ch, CURLOPT_TIMEOUT,10);
+                        $output = curl_exec($ch);
+                        $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+                        curl_close($ch);
+
+                        if ($httpcode != 302) {
+                            array_push($motherless_list, $motherless);
+                            echo $motherless.'<br>';
+                        }
+                    }
+                }
+            }
+        }
     }
 
     public function setVideoDuration(Request $request)

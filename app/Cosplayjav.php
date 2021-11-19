@@ -17,7 +17,7 @@ class Cosplayjav
         "Atago (azur lane) (愛宕)" => '愛宕',
         "race_queen" => '賽車女郎',
         "big_boobs" => '巨乳',
-        "azur_lane" => '碧藍航線 Azur Lane',
+        "azur_lane" => '碧藍航線',
         "Izayoi Sakuya (十六夜咲夜)" => '十六夜咲夜',
         "Lumine / CN: Ying (荧) JP: Hotaru (蛍) KR: Hyeong (형)" => '熒',
         "Horikita Wan (堀北わん)" => '堀北灣',

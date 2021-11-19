@@ -94,4 +94,7 @@ Route::group(['middleware' => 'admin'], function () {
 	Route::get('/translateNhentaiTag', 'BotController@translateNhentaiTag');
 
 	Route::get('/clearLaravelLogs', 'BotController@clearLaravelLogs');
+
+	Route::get('/checkAvbebeEporner', 'BotController@checkAvbebeEporner');
+	Route::get('/checkAvbebeMotherless', 'BotController@checkAvbebeMotherless');
 });
