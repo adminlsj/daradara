@@ -30,10 +30,17 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        return $requests = Browsershot::url('https://odysee.com/$/embed/20210904/8e54003c50d8b3532b736e37c6c0795fc6819e2c')
-            ->useCookies(['username' => 'admin'])
-            ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
-            ->triggeredRequests();
+        $url = 'https://cdn.lbryplayer.xyz/api/v4/streams/free/-%E6%A1%9C%E9%83%BD%E5%AD%97%E5%B9%95%E7%BB%84--%E3%83%94%E3%83%B3%E3%82%AF%E3%83%91%E3%82%A4%E3%83%8A%E3%83%83%E3%83%97%E3%83%AB-%E3%82%AA%E3%83%8A%E3%83%9B%E6%95%99%E5%AE%A4-%EF%BD%9E%E5%A5%B3%E5%AD%90%E5%85%A8%E5%93%A1%E5%A6%8A%E5%A8%A0%E8%A8%88%E7%94%BB%EF%BD%9E-THE-ANIMATION.chs/bb32083eba8a774b4b22afdf19831bc1a829fe0e/29994f';
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_HEADER, true);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, false);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $result = curl_exec($ch);
+        if (preg_match('~Location: (.*)~i', $result, $match)) {
+           $location = trim($match[1]);
+        }
+        return $location;
 
         /* $url = 'https://spankbang.com/5yx9r/video/convenient+sex+friends+2';
 
