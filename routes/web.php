@@ -97,4 +97,5 @@ Route::group(['middleware' => 'admin'], function () {
 
 	Route::get('/checkAvbebeEporner', 'BotController@checkAvbebeEporner');
 	Route::get('/checkAvbebeMotherless', 'BotController@checkAvbebeMotherless');
+	Route::get('/checkAvbebeOdysee', 'BotController@checkAvbebeOdysee');
 });
