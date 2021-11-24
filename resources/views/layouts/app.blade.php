@@ -30,6 +30,7 @@
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.0/dist/js.cookie.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="{{ mix('js/app.js') }}"></script>
 </head>
 <body>
     <div style="{{ Request::is('*comic*') ? 'background-color: #0d0d0d;' : '' }}">
@@ -57,9 +58,6 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 
     @section('script')
-        <!-- Scripts -->
-        <script src="{{ mix('js/app.js') }}"></script>
-
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-125786247-2"></script>
         <script>
