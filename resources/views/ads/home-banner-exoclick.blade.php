@@ -23,5 +23,14 @@
 </div>
 
 <div class="hidden-sm hidden-md hidden-lg" style="text-align: center; padding-top: 15px; padding-bottom: 30px;">
-	 <ins class="adsbyexoclick" data-zoneid="4372324"></ins> 
+	<!-- <ins class="adsbyexoclick" data-zoneid="4372324"></ins> -->
+	<script type="application/javascript">
+        var ad_idzone = "4372324",
+        ad_width = "300",
+        ad_height = "100"
+    </script>
+    <script type="application/javascript" src="https://a.realsrv.com/ads.js"></script>
+    <noscript>
+      <iframe src="https://syndication.realsrv.com/ads-iframe-display.php?idzone=4372324&output=noscript&type=300x100" width="300" height="100" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
+    </noscript>
 </div>
