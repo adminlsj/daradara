@@ -42,7 +42,9 @@
                 @endforeach
             @endif
 
+            <script async type="application/javascript" src="https://a.realsrv.com/ad-provider.js"></script>
             @yield('content')
+            <script>(AdProvider = window.AdProvider || []).push({'serve': {}});</script>
 
             @include('layouts.footer')
         </div>
@@ -75,6 +77,8 @@
         </script>
 
         <script data-cfasync="false" type="text/javascript">(function(s,o,l,v,e,d){if(s[o]==null&&s[l+e]){s[o]="loading";s[l+e](d,l=function(){s[o]="complete";s[v+e](d,l,!1)},!1)}})(document,"readyState","add","remove","EventListener","DOMContentLoaded");(function(){var s=document.createElement("script");s.type="text/javascript";s.async=true;s.src="https://cdn.impactserving.com/Scripts/infinity.js.aspx?guid=75b4ac7f-9a66-41df-8b31-822964ff008b";s.id="infinity";s.setAttribute("data-guid","75b4ac7f-9a66-41df-8b31-822964ff008b");s.setAttribute("data-version","async");var e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(s,e)})();</script>
+
+        <script async type="application/javascript" src="https://a.realsrv.com/ad-provider.js"></script>
     @show
 </body>
 </html>
