@@ -42,9 +42,7 @@
                 @endforeach
             @endif
 
-            <script async type="application/javascript" src="https://a.realsrv.com/ad-provider.js"></script>
             @yield('content')
-            <script>(AdProvider = window.AdProvider || []).push({'serve': {}});</script>
 
             @include('layouts.footer')
         </div>
