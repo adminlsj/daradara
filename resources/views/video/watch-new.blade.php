@@ -27,34 +27,13 @@
 
       @endif
 
-      <script type="application/javascript" src="https://a.realsrv.com/ads.js"></script>
-
       <div id="mobile-ad" class="hidden-md hidden-lg" style="text-align: center; padding-top: 5px; padding-bottom: 5px;background-color: black; position: relative;">
-        <!-- <ins class="adsbyexoclick" data-zoneid="4372430"></ins> -->
-        <script type="application/javascript">
-            var ad_idzone = "4372430",
-            ad_width = "300",
-            ad_height = "100"
-        </script>
-        <script type="application/javascript" src="https://a.realsrv.com/ads.js"></script>
-        <noscript>
-          <iframe src="https://syndication.realsrv.com/ads-iframe-display.php?idzone=4372430&output=noscript&type=300x100" width="300" height="100" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
-        </noscript>
-
+        @include('layouts.exoclick', ['id' => '4372430', 'width' => '300', 'height' => '100'])
         <div id="close-mobile-ad-btn" style="position: absolute; top: 5px; right: 1px; cursor: pointer; border: 1px solid white;"><i style="vertical-align: middle; color: white;" class="material-icons">close</i></div>
       </div>
 
       <div class="hidden-xs hidden-sm" style="margin-top: 7px; margin-bottom: 0px; text-align: center">
-        <!-- <ins class="adsbyexoclick" data-zoneid="4372406"></ins> -->
-        <script type="application/javascript">
-            var ad_idzone = "4372406",
-            ad_width = "728",
-            ad_height = "90"
-        </script>
-        <script type="application/javascript" src="https://a.realsrv.com/ads.js"></script>
-        <noscript>
-          <iframe src="https://syndication.realsrv.com/ads-iframe-display.php?idzone=4372406&output=noscript&type=728x90" width="728" height="90" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
-        </noscript>
+        @include('layouts.exoclick', ['id' => '4372406', 'width' => '728', 'height' => '90'])
       </div>
 
       @if ($video->comic_id)
@@ -126,16 +105,7 @@
       @if (!$is_mobile)
         <div class="hidden-md hidden-lg" style="text-align: left; padding-left: 5px; padding-top: 5px; margin-top: 15px; margin-bottom: -15px; padding-bottom: 0px; margin-left: 15px; margin-right: 15px; width: 310px; height: 282px; background-color: #3a3c3f; display: inline-block;">
           <div style="margin-bottom: 5px; color: white; font-size: 12px;">點點廣告，贊助我們（●´∀｀）ノ♡</div>
-          <!-- <ins class="adsbyexoclick" data-zoneid="4372438"></ins> -->
-          <script type="application/javascript">
-              var ad_idzone = "4372438",
-              ad_width = "300",
-              ad_height = "250"
-          </script>
-          <script type="application/javascript" src="https://a.realsrv.com/ads.js"></script>
-          <noscript>
-            <iframe src="https://syndication.realsrv.com/ads-iframe-display.php?idzone=4372438&output=noscript&type=300x250" width="300" height="250" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
-          </noscript>
+          @include('layouts.exoclick', ['id' => '4372438', 'width' => '300', 'height' => '250'])
         </div>
 
         <div class="hidden-xs hidden-md hidden-lg" style="text-align: left; padding-left: 5px; padding-top: 5px; margin-top: 15px; margin-bottom: -15px; padding-bottom: 0px; width: 310px; height: 282px; background-color: #3a3c3f; display: inline-block; vertical-align: top; margin-left: -5px;">
@@ -213,16 +183,7 @@
 
           <div id="exoclick-banner-adjust" class="hidden-xs hidden-md hidden-lg" style="text-align: left; padding-left: 5px; padding-top: 5px; margin-top: 8px; margin-bottom: 10px; padding-bottom: 0px; width: 310px; height: 282px; background-color: #3a3c3f; margin-left: 10px; display: inline-block; vertical-align: top;">
             <div style="margin-bottom: 5px; color: white; font-size: 12px;">點點廣告，贊助我們（●´∀｀）ノ♡</div>
-            <!-- <ins class="adsbyexoclick" data-zoneid="4372438"></ins> -->
-            <script type="application/javascript">
-                var ad_idzone = "4372438",
-                ad_width = "300",
-                ad_height = "250"
-            </script>
-            <script type="application/javascript" src="https://a.realsrv.com/ads.js"></script>
-            <noscript>
-              <iframe src="https://syndication.realsrv.com/ads-iframe-display.php?idzone=4372438&output=noscript&type=300x250" width="300" height="250" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
-            </noscript>
+            @include('layouts.exoclick', ['id' => '4372438', 'width' => '300', 'height' => '250'])
           </div>
         </div>
       @else
@@ -257,16 +218,7 @@
     <div class="col-md-3 single-show-list">
       <div class="hidden-xs hidden-sm" style="text-align: left; padding-left: 5px; padding-top: 5px; margin-top: 0px; margin-bottom: 15px; padding-bottom: 0px; width: 310px; height: 282px; background-color: #3a3c3f;">
         <div style="margin-bottom: 5px; color: white; font-size: 12px;">點點廣告，贊助我們（●´∀｀）ノ♡</div>
-        <!-- <ins class="adsbyexoclick" data-zoneid="4372438"></ins> -->
-        <script type="application/javascript">
-            var ad_idzone = "4372438",
-            ad_width = "300",
-            ad_height = "250"
-        </script>
-        <script type="application/javascript" src="https://a.realsrv.com/ads.js"></script>
-        <noscript>
-          <iframe src="https://syndication.realsrv.com/ads-iframe-display.php?idzone=4372438&output=noscript&type=300x250" width="300" height="250" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
-        </noscript>
+        @include('layouts.exoclick', ['id' => '4372438', 'width' => '300', 'height' => '250'])
       </div>
 
       <div class="hidden-xs hidden-sm">
@@ -276,16 +228,7 @@
       <div id="myHeader" class="hidden-xs hidden-sm">
         <div style="text-align: left; padding-left: 5px; padding-top: 5px; margin-top: 15px; margin-bottom: 10px; padding-bottom: 0px; width: 310px; height: 282px; background-color: #3a3c3f;">
           <div style="margin-bottom: 5px; color: white; font-size: 12px;">點點廣告，贊助我們（●´∀｀）ノ♡</div>
-          <!-- <ins class="adsbyexoclick" data-zoneid="4372438"></ins> -->
-          <script type="application/javascript">
-              var ad_idzone = "4372438",
-              ad_width = "300",
-              ad_height = "250"
-          </script>
-          <script type="application/javascript" src="https://a.realsrv.com/ads.js"></script>
-          <noscript>
-            <iframe src="https://syndication.realsrv.com/ads-iframe-display.php?idzone=4372438&output=noscript&type=300x250" width="300" height="250" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
-          </noscript>
+          @include('layouts.exoclick', ['id' => '4372438', 'width' => '300', 'height' => '250'])
         </div>
 
         <div style="text-align: left; padding-left: 5px; padding-top: 5px; margin-top: 15px; margin-bottom: 10px; padding-bottom: 0px; width: 310px; height: 282px; background-color: #3a3c3f;">
@@ -301,16 +244,7 @@
   </div>
 
   <div id="bottom-ads" style="margin-top: 30px; margin-bottom: 0px; text-align: center;" class="hidden-xs hidden-sm">
-    <!-- <ins class="adsbyexoclick" data-zoneid="4372454"></ins> -->
-    <script type="application/javascript">
-        var ad_idzone = "4372454",
-        ad_width = "900",
-        ad_height = "250"
-    </script>
-    <script type="application/javascript" src="https://a.realsrv.com/ads.js"></script>
-    <noscript>
-      <iframe src="https://syndication.realsrv.com/ads-iframe-display.php?idzone=4372454&output=noscript&type=900x250" width="900" height="250" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
-    </noscript>
+    @include('layouts.exoclick', ['id' => '4372454', 'width' => '900', 'height' => '250'])
   </div>
 
   @include('video.userReportModal')
