@@ -226,7 +226,7 @@
 	<div id="home-rows-wrapper" class="search-rows-wrapper" style="position: relative;">
 
 		<div class="hidden-sm hidden-md hidden-lg" style="text-align: center; margin-top: -2px; {{ $videos->lastPage() == 1 ? 'margin-bottom: 27px' : 'margin-bottom: -18px'}}">
-			 <ins class="adsbyexoclick" data-zoneid="4396576"></ins> 
+			@include('layouts.exoclick', ['id' => '4396576', 'width' => '300', 'height' => '100'])
 		</div>
 
 		<div style="margin-bottom: -13px" class="search-pagination mobile-search-pagination hidden-sm hidden-md hidden-lg">{!! $videos->appends(request()->query())->onEachSide(1)->links() !!}</div>
