@@ -30,17 +30,19 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $url = 'https://cdn.lbryplayer.xyz/api/v4/streams/free/-%E6%A1%9C%E9%83%BD%E5%AD%97%E5%B9%95%E7%BB%84--%E3%83%94%E3%83%B3%E3%82%AF%E3%83%91%E3%82%A4%E3%83%8A%E3%83%83%E3%83%97%E3%83%AB-%E3%82%AA%E3%83%8A%E3%83%9B%E6%95%99%E5%AE%A4-%EF%BD%9E%E5%A5%B3%E5%AD%90%E5%85%A8%E5%93%A1%E5%A6%8A%E5%A8%A0%E8%A8%88%E7%94%BB%EF%BD%9E-THE-ANIMATION.chs/bb32083eba8a774b4b22afdf19831bc1a829fe0e/29994f';
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_HEADER, true);
-        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, false);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $result = curl_exec($ch);
-        if (preg_match('~Location: (.*)~i', $result, $match)) {
-           $location = trim($match[1]);
+        $type1 = 'が';
+        $type2 = 'が';
+
+        echo $type1 = urlencode($type1);
+        echo '<br>';
+        echo $type2 = urlencode($type2);
+        echo '<br>';
+
+        if ($type1 == $type2) {
+            return 'same';
+        } else {
+            return 'different';
         }
-        return $location;
 
         /* $url = 'https://spankbang.com/5yx9r/video/convenient+sex+friends+2';
 
@@ -316,7 +318,7 @@ class BotController extends Controller
         ini_set('memory_limit', '-1');
 
         $youjizz_list = [];
-        for ($i = 1; $i <= 66; $i++) { 
+        for ($i = 66; $i >= 1; $i--) { 
             if ($i == 1) {
                 $url = 'https://avbebe.com/archives/category/h%e5%8b%95%e7%95%ab%e5%bd%b1%e7%89%87';
             } else {
@@ -365,7 +367,7 @@ class BotController extends Controller
         ini_set('memory_limit', '-1');
 
         $xvideos_list = [];
-        for ($i = 1; $i <= 66; $i++) { 
+        for ($i = 66; $i >= 1; $i--) { 
             if ($i == 1) {
                 $url = 'https://avbebe.com/archives/category/h%e5%8b%95%e7%95%ab%e5%bd%b1%e7%89%87';
             } else {
@@ -404,6 +406,55 @@ class BotController extends Controller
                         echo '<a href="'.$xvideos.'" target="_blank">'.$xvideos.'</a><br>';
                         echo '<a href="'.$href.'" target="_blank">'.$href.'</a><br>';
                         echo '<br>';
+                    }
+                }
+            }
+        }
+    }
+
+    public function checkAvbebeFembed(Request $request)
+    {
+        ini_set('max_execution_time', 0);
+        ini_set('memory_limit', '-1');
+
+        $fembed_list = [];
+        for ($i = 1; $i <= 66; $i++) { 
+            if ($i == 1) {
+                $url = 'https://avbebe.com/archives/category/h%e5%8b%95%e7%95%ab%e5%bd%b1%e7%89%87';
+            } else {
+                $url = 'https://avbebe.com/archives/category/h%E5%8B%95%E7%95%AB%E5%BD%B1%E7%89%87/page/'.$i;
+            }
+            $curl_connection = curl_init($url);
+            curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+            curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+            $html = curl_exec($curl_connection);
+            curl_close($curl_connection);
+
+            $start = explode('<h1 class="archive-title">動畫卡通 Archive</h1>', $html);
+            $end = explode('<!-- .posts-default -->' , $start[1]);
+            $videos = $end[0];
+            $videos = str_replace('【動畫卡通】異種族風俗娘評鑑指南<', '', $videos);
+            $videos = str_replace('>[中文字幕]', '', $videos);
+
+            $dom = new \DOMDocument();
+            $dom->loadHTML('<meta http-equiv="content-type" content="text/html; charset=utf-8">'.$videos);
+            $links = $dom->getElementsByTagName('a');
+            foreach ($links as $link) {
+                $href = $link->getAttribute('href');
+
+                $curl_connection = curl_init($href);
+                curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+                curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+                $html = curl_exec($curl_connection);
+                curl_close($curl_connection);
+
+                if (strpos($html, 'fembed') !== false) {
+                    $fembed = 'https://www.fembed.com/v/'.Helper::get_string_between($html, 'https://www.fembed.com/v/', '"');
+                    if (!in_array($fembed, $fembed_list)) {
+                        array_push($fembed_list, $fembed);
+                        echo '<a href="'.$fembed.'" target="_blank">'.$fembed.'</a><br>';
                     }
                 }
             }
