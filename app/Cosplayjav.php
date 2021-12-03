@@ -13,7 +13,7 @@ class Cosplayjav
     ];
 
     public static $translations = [
-        "fate/grand order" => 'Fate/Grand Order'
+        "fate/grand order" => 'Fate/Grand Order',
         "abigail williams (アビゲイル・ウィリアムズ)" => '艾比蓋兒·威廉斯',
         "ball_sucking" => '舔蛋蛋',
         "ball_licking" => '舔蛋蛋',
