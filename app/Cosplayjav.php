@@ -13,6 +13,7 @@ class Cosplayjav
     ];
 
     public static $translations = [
+        "yukata" => '和服',
         "Fischl_(genshin_impact)" => '菲謝爾',
         "plugsuit" => '作戰服',
         "Cheshire (CN: 柴郡 · JP: チェシャー)" => '柴郡',
