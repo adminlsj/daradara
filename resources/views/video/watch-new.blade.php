@@ -27,7 +27,7 @@
 
       @endif
 
-      <div id="mobile-ad" class="hidden-md hidden-lg" style="text-align: center; padding-top: 5px; padding-bottom: 5px;background-color: black; position: relative;">
+      <div id="mobile-ad" class="hidden-md hidden-lg" style="text-align: center; padding-top: 5px; padding-bottom: 2px;background-color: black; position: relative;">
         @include('layouts.exoclick', ['id' => '4372430', 'width' => '300', 'height' => '100'])
         <div id="close-mobile-ad-btn" style="position: absolute; top: 5px; right: 1px; cursor: pointer; border: 1px solid white;"><i style="vertical-align: middle; color: white;" class="material-icons">close</i></div>
       </div>
