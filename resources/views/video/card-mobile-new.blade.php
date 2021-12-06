@@ -1,8 +1,8 @@
 <div class="hover-lighter" style="margin: 0 4px; margin-bottom: 10px; background-color: black; border-radius: 3px; box-shadow: 1px 1px 1px 0 rgba(40, 40, 40, 0.6);">
-	<a href="{{ route('video.watch') }}?v={{ $video->id }}" style="text-decoration: none;" data-poster="{{ $video->imgurH() }}" data-preview="{{ isset($video->qualities) ? $video->qualities[array_key_first($video->qualities)] : $video->sd }}">
+	<a href="{{ route('video.watch') }}?v={{ $video->id }}" style="text-decoration: none;">
 		<div style="position: relative;">
-			<img style="width: 100%; border-top-left-radius: 3px; border-top-right-radius: 3px;" src="https://i.imgur.com/2jSdwcG.png">
-			<img style="position: absolute; top: 0; left: 0; height: 100%; object-fit: cover; border-top-left-radius: 3px; border-top-right-radius: 3px;" src="{{ $video->imgurL() }}">
+			<img style="width: 100%; border-top-left-radius: 3px; border-top-right-radius: 3px;" src="https://i.imgur.com/2jSdwcGt.png">
+			<img style="position: absolute; top: 0; left: 0; height: 100%; object-fit: cover; border-top-left-radius: 3px; border-top-right-radius: 3px;" src="{{ $video->imgurM() }}">
 			<div style="position: absolute; height: 25px; width: 100%; bottom: 0px; background: linear-gradient(to bottom, transparent 0%, black 120%);">
 				<div style="float: left; line-height: 25px; font-weight: 400">
 					<span style="font-size: 15px; color: white; padding-left: 7px; padding-right: 3px; vertical-align: middle; margin-top: -8px; font-weight: 400;" class="material-icons-outlined">smart_display</span>

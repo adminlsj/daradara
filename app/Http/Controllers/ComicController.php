@@ -58,9 +58,16 @@ class ComicController extends Controller
                     $tag = Helper::convertBin2hex($tag);
                     $query->orWhere('searchtext', 'like', '%'.$tag.'%');
                 }
-            })->orderBy('day_views', 'desc')->limit(1000)->pluck('id')->toArray();
-            $related = array_rand($related, 6);
-            $related = Comic::select('id', 'galleries_id', 'title_n_before', 'title_n_pretty', 'title_n_after', 'extension', 'created_at')->find($related);
+            })->orderBy('day_views', 'desc')->limit(500)->pluck('id')->toArray();
+
+            $count = count($related);
+            if ($count <= 1) {
+                $related = Comic::where('id', $related)->select('id', 'galleries_id', 'title_n_before', 'title_n_pretty', 'title_n_after', 'extension', 'created_at')->get();
+            } else {
+                $selected = $count < 6 ? $count : 6;
+                $related = array_rand($related, $selected);
+                $related = Comic::select('id', 'galleries_id', 'title_n_before', 'title_n_pretty', 'title_n_after', 'extension', 'created_at')->find($related);
+            }
 
             return view('comic.show-cover', compact('comic', 'comics', 'metadata', 'related'));
 
