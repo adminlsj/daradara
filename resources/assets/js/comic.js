@@ -64,7 +64,7 @@ $('.comic-show-content-nav-item-wrapper').on('click', function(e) {
 
   var image = $('#current-page-image');
   var extensions = window.extensions;
-  var parseExt = {'j': 'jpg', 'p': 'png'};
+  var parseExt = {'j': 'jpg', 'p': 'png', 'g': 'gif'};
   var url = 'https://i.nhentai.net/galleries/' + galleries_id + '/' + page + '.' + parseExt[extensions[page - 1]];
   image.css('filter', 'brightness(0%)');
   image.attr('src', url);

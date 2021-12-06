@@ -1,5 +1,10 @@
 @extends('layouts.app')
 
+@section('head')
+    @parent
+    @include('comic.content-head')
+@endsection
+
 @section('nav')
   @include('nav.comic')
 @endsection

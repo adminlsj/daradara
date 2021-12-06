@@ -11,7 +11,8 @@ class Nhentai
 {
     public static $parseExt = [
         'j' => 'jpg',
-        'p' => 'png'
+        'p' => 'png',
+        'g' => 'gif'
     ];
 
     public static $tags = [

@@ -83,6 +83,9 @@ class ComicController extends Controller
 
             $page = $request->page;
 
+            if ($page < 1) return redirect()->action('ComicController@showContent', ['comic' => $comic, 'page' => 1]);
+            if ($page > $comic->pages) return redirect()->action('ComicController@showContent', ['comic' => $comic, 'page' => $comic->pages]);
+
             $extensions = json_encode($comic->extensions);
 
             $comic->day_views++;
