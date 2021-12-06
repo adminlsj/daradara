@@ -14,6 +14,6 @@
 	</span>
 </div>
 
-<div class="hidden-sm hidden-md hidden-lg" style="text-align: center; padding-bottom: 15px;">
+<div class="hidden-sm hidden-md hidden-lg" style="text-align: center; padding-bottom: 10px;">
 	@include('layouts.exoclick', ['id' => '4372480', 'width' => '300', 'height' => '100'])
 </div>
