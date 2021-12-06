@@ -225,7 +225,7 @@
 
 	<div id="home-rows-wrapper" class="search-rows-wrapper" style="position: relative;">
 
-		<div class="hidden-sm hidden-md hidden-lg" style="text-align: center; margin-top: -2px; {{ $videos->lastPage() == 1 ? 'margin-bottom: 27px' : 'margin-bottom: -18px'}}">
+		<div class="hidden-sm hidden-md hidden-lg" style="text-align: center; margin-top: -2px; {{ $videos->lastPage() == 1 ? 'margin-bottom: 25px' : 'margin-bottom: -20px'}}">
 			@include('layouts.exoclick', ['id' => '4396576', 'width' => '300', 'height' => '100'])
 		</div>
 
