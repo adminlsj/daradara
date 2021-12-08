@@ -101,5 +101,6 @@ Route::group(['middleware' => 'admin'], function () {
 	Route::get('/checkAvbebeYoujizz', 'BotController@checkAvbebeYoujizz');
 	Route::get('/checkAvbebeXvideos', 'BotController@checkAvbebeXvideos');
 	Route::get('/checkAvbebeFembed', 'BotController@checkAvbebeFembed');
+	Route::get('/checkAvbebeAvgigi', 'BotController@checkAvbebeAvgigi');
 	Route::get('/checkAvbebeOthers', 'BotController@checkAvbebeOthers');
 });
