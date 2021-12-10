@@ -30,6 +30,12 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
+        $videos = Video::where('sd', 'like', '%tokyowebm%')->get();
+        foreach ($videos as $video) {
+            $video->sd = str_replace('tokyowebm', 'wwebm', $video->sd);
+            $video->save();
+        }
+
         /* $url = 'https://spankbang.com/5yx9r/video/convenient+sex+friends+2';
 
         if ($request->method == 'curl') {
@@ -168,8 +174,17 @@ class BotController extends Controller
                     $eporner = Helper::get_string_between($html, 'https://www.eporner.com/embed/', '/');
                     $eporner = 'https://www.eporner.com/embed/'.$eporner.'/';
                     if (!in_array($eporner, $eporner_list)) {
-                        array_push($eporner_list, $eporner);
-                        echo $eporner.'<br>';
+                        $curl_connection = curl_init($eporner);
+                        curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+                        curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+                        curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+                        $html = curl_exec($curl_connection);
+                        curl_close($curl_connection);
+
+                        if (strpos($html, 'This video is no longer available.') === false) {
+                            array_push($eporner_list, $eporner);
+                            echo $eporner.'<br>';
+                        }
                     }
                 }
             }
@@ -404,7 +419,7 @@ class BotController extends Controller
         ini_set('memory_limit', '-1');
 
         $fembed_list = [];
-        for ($i = 1; $i <= 66; $i++) { 
+        for ($i = 66; $i >= 1; $i--) { 
             if ($i == 1) {
                 $url = 'https://avbebe.com/archives/category/h%e5%8b%95%e7%95%ab%e5%bd%b1%e7%89%87';
             } else {
@@ -436,8 +451,14 @@ class BotController extends Controller
                 $html = curl_exec($curl_connection);
                 curl_close($curl_connection);
 
-                if (strpos($html, 'fembed') !== false) {
+                if (strpos($html, 'https://www.fembed.com/v/') !== false) {
                     $fembed = 'https://www.fembed.com/v/'.Helper::get_string_between($html, 'https://www.fembed.com/v/', '"');
+                    if (!in_array($fembed, $fembed_list)) {
+                        array_push($fembed_list, $fembed);
+                        echo '<a href="'.$fembed.'" target="_blank">'.$fembed.'</a><br>';
+                    }
+                } elseif (strpos($html, 'https://www.fembed.com/f/') !== false) {
+                    $fembed = 'https://www.fembed.com/v/'.Helper::get_string_between($html, 'https://www.fembed.com/f/', '"');
                     if (!in_array($fembed, $fembed_list)) {
                         array_push($fembed_list, $fembed);
                         echo '<a href="'.$fembed.'" target="_blank">'.$fembed.'</a><br>';
