@@ -13,6 +13,7 @@ class Cosplayjav
     ];
 
     public static $translations = [
+        "mask" => '面罩',
         "Mushoku Tensei: Isekai Ittara Honki Dasu" => '無職轉生～到了異世界就拿出真本事～',
         "Roxy Migurdia (ロキシー・ミグルディ)" => '洛琪希·米格路迪亞',
         "SexFriend" => 'Sex Friend',
