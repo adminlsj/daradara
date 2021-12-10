@@ -13,6 +13,7 @@ class Cosplayjav
     ];
 
     public static $translations = [
+        "ponytail" => '馬尾',
         "Kobayashi-san-chi no Maid Dragon (小林さんちのメイドラゴン)" => '小林家的龍女僕',
         "Kanna Kamui (カンナカムイ)" => '康娜卡姆依',
         "sweet_lolita_dress" => '甜系蘿莉塔',
