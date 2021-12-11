@@ -49,6 +49,12 @@ th, td {
   background-color: rgba(0, 0, 0, 0.7);
 }
 
+@media (--tablet) {
+  .plyr--full-ui ::-webkit-media-text-track-container {
+    display: block;
+  }
+}
+
 .content-padding {
   padding: 0 4%;
 }
