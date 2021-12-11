@@ -65,6 +65,14 @@
   });
   window.player = player;
 
+  player.on('enterfullscreen', event => {
+    $('.plyr__captions').addClass('plyr__fullscreen_font_size');
+  });
+
+  player.on('exitfullscreen', event => {
+    $('.plyr__captions').removeClass('plyr__fullscreen_font_size');
+  });
+
   @if ($video->duration == null)
     player.on('loadedmetadata', function () {
       $.ajax({

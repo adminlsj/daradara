@@ -38,15 +38,19 @@ th, td {
 
 .plyr__captions {
   margin-bottom: -15px !important;
+  font-size: 1.5vw !important;
 }
 
 .plyr__captions .plyr__caption {
-  font-size: 1.5vw !important;
   font-weight: bold;
-  padding-top: 3px;
-  padding-left: 7px;
-  padding-right: 7px;
+  padding-top: 4px;
+  padding-left: 8px;
+  padding-right: 8px;
   background-color: rgba(0, 0, 0, 0.7);
+}
+
+.plyr__fullscreen_font_size {
+  font-size: 2.5vw !important
 }
 
 .content-padding {
