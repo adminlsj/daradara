@@ -1,13 +1,18 @@
 <script src="https://cdn.plyr.io/3.6.4/plyr.js"></script>
 <script src="//cdn.jsdelivr.net/npm/hls.js@latest"></script>
 <link rel="stylesheet" href="https://cdn.plyr.io/3.6.4/plyr.css" />
-<video style="width: 100%; height: 100%" id="player" playsinline controls data-poster="{{ $video->imgurH() }}" {{ $doujin ? 'loop' : '' }}>
+<video style="width: 100%; height: 100%" id="player" controls crossorigin playsinline data-poster="{{ $video->imgurH() }}" {{ $doujin ? 'loop' : '' }}>
   @if ($video->qualities == null)
     <source src="{!! $video->sd !!}" type="video/mp4" size="720">
   @else
     @foreach ($video->qualities as $quality => $source)
       <source src="{!! $source !!}" type="video/mp4" size="{{ $quality }}"> 
     @endforeach
+  @endif
+
+  @if ($video->id == 25248)
+    <track kind="captions" label="繁體中文" srclang="big5" src="https://cdn.jsdelivr.net/gh/guaishushukanlifan/Project-H@latest/data/{{ $video->id }}_zh_hant.vtt" default />
+    <track kind="captions" label="简体中文" srclang="gb" src="https://cdn.jsdelivr.net/gh/guaishushukanlifan/Project-H@latest/data/{{ $video->id }}_zh_hans.vtt" />
   @endif
 </video>
 <script>
@@ -32,6 +37,11 @@
     i18n: {
       rewind: 'Rewind 10s',
       fastForward: 'Forward 10s',
+      captions: '字幕',
+      disabled: '關閉',
+      quality: '畫質',
+      speed: '速度',
+      normal: '正常',
     },
     controls: [
       'play-large', // The large play button in the center
@@ -46,7 +56,12 @@
       'pip', // Toggle captions
       'airplay', // Airplay options
       'fullscreen', // Toggle fullscreen
-    ]
+    ],
+    caption: {
+      active: true, 
+      language: 'big5', 
+      update: false
+    }
   });
   window.player = player;
 
