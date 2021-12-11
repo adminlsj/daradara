@@ -28,8 +28,7 @@
     fullscreen: {
       enabled: true,
       fallback: true,
-      // iosNative: true,
-      iosNative: false,
+      iosNative: {{ $video->id == 25248 ? false : true }},
       container: null
     },
     quality: {
