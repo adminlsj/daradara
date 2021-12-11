@@ -28,7 +28,8 @@
     fullscreen: {
       enabled: true,
       fallback: true,
-      iosNative: true,
+      // iosNative: true,
+      iosNative: false,
       container: null
     },
     quality: {
