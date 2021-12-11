@@ -54,10 +54,9 @@
       'volume', // Volume control
       'settings', // Settings menu
       'pip', // Toggle captions
-      'airplay', // Airplay options
       'fullscreen', // Toggle fullscreen
     ],
-    caption: {
+    captions: {
       active: true, 
       language: 'big5', 
       update: false
