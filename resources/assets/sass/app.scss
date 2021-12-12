@@ -47,7 +47,6 @@ th, td {
 
 .plyr__fullscreen_captions {
   font-size: 2.8vw !important;
-  margin-bottom: -15px !important;
 }
 
 .content-padding {
@@ -1918,6 +1917,10 @@ div.sticky {
 }
 
 @media (max-width: 767.9px) {
+  .plyr__captions {
+    margin-bottom: -8px !important;
+  }
+
   #error {
     line-height: 50px;
   }
