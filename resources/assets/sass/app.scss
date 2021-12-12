@@ -38,16 +38,15 @@ th, td {
 
 .plyr__captions {
   margin-bottom: -15px !important;
-  font-size: 1.5vw !important;
+  font-size: 1.7vw !important;
 }
 
 .plyr__captions .plyr__caption {
-  font-weight: bold;
   background-color: rgba(0, 0, 0, 0.7);
 }
 
 .plyr__fullscreen_font_size {
-  font-size: 2.5vw !important
+  font-size: 2.7vw !important
 }
 
 .content-padding {
@@ -1658,7 +1657,8 @@ div.sticky {
 
 @media (max-width: 991px) {
   .plyr__captions {
-    font-size: 2.5vw !important;
+    font-size: 2.7vw !important;
+    margin-bottom: -10px !important;
   }
 
   #comic-nav {
