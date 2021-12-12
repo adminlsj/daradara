@@ -66,12 +66,20 @@
 
   player.on('enterfullscreen', event => {
     $('.plyr__captions').addClass('plyr__fullscreen_captions');
-    screen.orientation.lock('landscape');
+    // screen.orientation.lock('landscape');
   });
 
   player.on('exitfullscreen', event => {
     $('.plyr__captions').removeClass('plyr__fullscreen_captions');
-    screen.orientation.lock('portrait');
+    // screen.orientation.lock('portrait');
+  });
+
+  $('video').addEventListener('webkitbeginfullscreen webkitendfullscreen', event => {
+    if (event.type === 'webkitbeginfullscreen') {
+        document.documentElement.style.setProperty('--webkit-text-track-display', 'block');
+    } else {
+        document.documentElement.style.setProperty('--webkit-text-track-display', 'none');
+    }
   });
 
   @if ($video->duration == null)
