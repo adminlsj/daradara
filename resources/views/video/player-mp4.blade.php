@@ -63,6 +63,7 @@
     }
   });
   window.player = player;
+  player.currentTrack = player.currentTrack;
 
   @if (array_key_exists('caption', $video->foreign_sd))
     player.on('enterfullscreen', event => {
