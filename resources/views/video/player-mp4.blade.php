@@ -63,6 +63,7 @@
     }
   });
   window.player = player;
+  player.toggleCaptions(true);
 
   @if (array_key_exists('caption', $video->foreign_sd))
     player.on('enterfullscreen', event => {
@@ -91,6 +92,8 @@
         player.currentTrack = 0;
       } else if (trackList[1].mode == 'showing') {
         player.currentTrack = 1;
+      } else {
+        player.currentTrack = -1;
       }
     }, false);
   @endif
