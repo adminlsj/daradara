@@ -104,4 +104,7 @@ Route::group(['middleware' => 'admin'], function () {
 	Route::get('/checkAvbebeMp4', 'BotController@checkAvbebeMp4');
 	Route::get('/checkAvbebeM3u8', 'BotController@checkAvbebeM3u8');
 	Route::get('/checkAvbebeOthers', 'BotController@checkAvbebeOthers');
+
+	Route::get('/editCaptions', 'BotController@editCaptions');
+	Route::post('/updateCaptions', 'BotController@updateCaptions')->name('bot.updateCaptions');
 });
