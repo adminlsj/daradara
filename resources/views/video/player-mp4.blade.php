@@ -10,7 +10,7 @@
     @endforeach
   @endif
 
-  @if (array_key_exists('caption', $video->foreign_sd))
+  @if ($video->foreign_sd != null && array_key_exists('caption', $video->foreign_sd))
     <track kind="captions" label="繁體中文" srclang="zh_hant" src="https://cdn.jsdelivr.net/gh/guaishushukanlifan/Project-H@latest/data/{{ $video->id }}_zh_hant.vtt" default>
     <track kind="captions" label="简体中文" srclang="zh_hans" src="https://cdn.jsdelivr.net/gh/guaishushukanlifan/Project-H@latest/data/{{ $video->id }}_zh_hans.vtt">
   @endif
@@ -64,7 +64,7 @@
   });
   window.player = player;
 
-  @if (array_key_exists('caption', $video->foreign_sd))
+  @if ($video->foreign_sd != null && array_key_exists('caption', $video->foreign_sd))
     player.on('enterfullscreen', event => {
       $('.plyr__captions').addClass('plyr__fullscreen_captions');
       screen.orientation.lock('landscape');
