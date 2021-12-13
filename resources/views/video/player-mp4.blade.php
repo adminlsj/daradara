@@ -60,7 +60,7 @@
     captions: {
       active: true, 
       language: 'zh_hant', 
-      update: false,
+      update: true,
     }
   });
   window.player = player;
