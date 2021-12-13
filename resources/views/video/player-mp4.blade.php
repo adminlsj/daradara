@@ -1,6 +1,6 @@
-<script src="https://cdn.plyr.io/3.6.4/plyr.js"></script>
+<script src="https://cdn.plyr.io/3.6.9/plyr.js"></script>
 <script src="//cdn.jsdelivr.net/npm/hls.js@latest"></script>
-<link rel="stylesheet" href="https://cdn.plyr.io/3.6.4/plyr.css" />
+<link rel="stylesheet" href="https://cdn.plyr.io/3.6.9/plyr.css" />
 <video style="width: 100%; height: 100%" id="player" controls crossorigin playsinline data-poster="{{ $video->imgurH() }}" {{ $doujin ? 'loop' : '' }}>
   @if ($video->qualities == null)
     <source src="{!! $video->sd !!}" type="video/mp4" size="720">
@@ -11,8 +11,8 @@
   @endif
 
   @if (array_key_exists('caption', $video->foreign_sd))
-    <track kind="captions" label="繁體中文" srclang="en" src="https://cdn.jsdelivr.net/gh/guaishushukanlifan/Project-H@latest/data/{{ $video->id }}_zh_hant.vtt" default />
-    <track kind="captions" label="简体中文" srclang="zh" src="https://cdn.jsdelivr.net/gh/guaishushukanlifan/Project-H@latest/data/{{ $video->id }}_zh_hans.vtt" />
+    <track kind="captions" label="繁體中文" srclang="zh_hant" src="https://cdn.jsdelivr.net/gh/guaishushukanlifan/Project-H@latest/data/{{ $video->id }}_zh_hant.vtt" default />
+    <track kind="captions" label="简体中文" srclang="zh_hans" src="https://cdn.jsdelivr.net/gh/guaishushukanlifan/Project-H@latest/data/{{ $video->id }}_zh_hans.vtt" />
   @endif
 </video>
 <script>
@@ -58,7 +58,7 @@
     ],
     captions: {
       active: true, 
-      language: 'en', 
+      language: 'zh_hant', 
       update: false
     }
   });
@@ -91,8 +91,6 @@
         player.currentTrack = 0;
       } else if (trackList[1].mode == 'showing') {
         player.currentTrack = 1;
-      } else {
-        player.currentTrack = -1;
       }
     }, false);
   @endif
