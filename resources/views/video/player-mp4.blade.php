@@ -66,12 +66,12 @@
 
   player.on('enterfullscreen', event => {
     $('.plyr__captions').addClass('plyr__fullscreen_captions');
-    // screen.orientation.lock('landscape');
+    screen.orientation.lock('landscape');
   });
 
   player.on('exitfullscreen', event => {
     $('.plyr__captions').removeClass('plyr__fullscreen_captions');
-    // screen.orientation.lock('portrait');
+    screen.orientation.lock('portrait');
   });
 
   var video = document.getElementById('player');
@@ -90,6 +90,8 @@
       player.currentTrack = 0;
     } else if (trackList[1].mode == 'showing') {
       player.currentTrack = 1;
+    } else {
+      player.currentTrack = -1;
     }
   }, false);
 
