@@ -9,11 +9,6 @@
       <source src="{!! $source !!}" type="video/mp4" size="{{ $quality }}"> 
     @endforeach
   @endif
-
-  @if (array_key_exists('caption', $video->foreign_sd))
-    <track kind="captions" label="繁體中文" srclang="zh_tw" src="https://cdn.jsdelivr.net/gh/guaishushukanlifan/Project-H@latest/data/{{ $video->id }}_zh_hant.vtt" default>
-    <track kind="captions" label="简体中文" srclang="zh_cn" src="https://cdn.jsdelivr.net/gh/guaishushukanlifan/Project-H@latest/data/{{ $video->id }}_zh_hans.vtt">
-  @endif
 </video>
 <script>
   const player = new Plyr('video', {
@@ -56,46 +51,8 @@
       'pip', // Toggle captions
       'fullscreen', // Toggle fullscreen
     ],
-    captions: {
-      active: true, 
-      language: 'zh_tw', 
-      update: false,
-    }
   });
   window.player = player;
-
-  @if (array_key_exists('caption', $video->foreign_sd))
-    player.on('enterfullscreen', event => {
-      $('.plyr__captions').addClass('plyr__fullscreen_captions');
-      screen.orientation.lock('landscape');
-    });
-
-    player.on('exitfullscreen', event => {
-      $('.plyr__captions').removeClass('plyr__fullscreen_captions');
-      screen.orientation.lock('portrait');
-    });
-
-    var video = document.getElementById('player');
-    var trackList = video.textTracks;
-    video.addEventListener("webkitbeginfullscreen", function(){
-      document.documentElement.style.setProperty('--webkit-text-track-display', 'block');
-      if (player.currentTrack == 0) {
-        trackList[0].mode = 'showing';
-      } else if (player.currentTrack == 1) {
-        trackList[1].mode = 'showing';
-      }
-    }, false);
-    video.addEventListener("webkitendfullscreen", function(){
-      document.documentElement.style.setProperty('--webkit-text-track-display', 'none');
-      if (trackList[0].mode == 'showing') {
-        player.currentTrack = 0;
-      } else if (trackList[1].mode == 'showing') {
-        player.currentTrack = 1;
-      } else {
-        player.currentTrack = -1;
-      }
-    }, false);
-  @endif
 
   @if ($video->duration == null)
     player.on('loadedmetadata', function () {
