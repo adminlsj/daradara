@@ -11,8 +11,8 @@
   @endif
 
   @if (array_key_exists('caption', $video->foreign_sd))
-    <track kind="captions" label="繁體中文" srclang="zh_hant" src="https://cdn.jsdelivr.net/gh/guaishushukanlifan/Project-H/data/{{ $video->id }}_zh_hant.vtt" default>
-    <track kind="captions" label="简体中文" srclang="zh_hans" src="https://cdn.jsdelivr.net/gh/guaishushukanlifan/Project-H/data/{{ $video->id }}_zh_hans.vtt">
+    <track kind="captions" label="繁體中文" srclang="zh_hant" src="https://cdn.jsdelivr.net/gh/guaishushukanlifan/Project-H@latest/data/{{ $video->id }}_zh_hant.vtt" default>
+    <track kind="captions" label="简体中文" srclang="zh_hans" src="https://cdn.jsdelivr.net/gh/guaishushukanlifan/Project-H@latest/data/{{ $video->id }}_zh_hans.vtt">
   @endif
 </video>
 <script>
