@@ -9,6 +9,21 @@
       <source src="{!! $source !!}" type="video/mp4" size="{{ $quality }}"> 
     @endforeach
   @endif
+
+  <!-- Caption files -->
+  <track
+      kind="captions"
+      label="English"
+      srclang="en"
+      src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.en.vtt"
+      default
+  />
+  <track
+      kind="captions"
+      label="Français"
+      srclang="fr"
+      src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.fr.vtt"
+  />
 </video>
 <script>
   const player = new Plyr('video', {
@@ -38,6 +53,7 @@
       speed: '速度',
       normal: '正常',
     },
+    captions: { active: true, language: 'en', update: false },
     controls: [
       'play-large', // The large play button in the center
       'rewind', // Rewind by the seek time (default 10 seconds)
