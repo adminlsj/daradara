@@ -55,6 +55,7 @@
       'settings', // Settings menu
       'pip', // Toggle captions
       'fullscreen', // Toggle fullscreen
+      'captions',
     ],
     captions: {
       active: true, 
@@ -63,7 +64,7 @@
     }
   });
   window.player = player;
-  player.currentTrack = player.currentTrack;
+  player.toggleCaptions(true);
 
   @if (array_key_exists('caption', $video->foreign_sd))
     player.on('enterfullscreen', event => {
