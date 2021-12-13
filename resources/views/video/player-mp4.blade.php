@@ -10,10 +10,8 @@
     @endforeach
   @endif
 
-  @if ($video->id == 25248)
     <track kind="captions" label="繁體中文" srclang="zh_hant" src="https://cdn.jsdelivr.net/gh/guaishushukanlifan/Project-H@latest/data/{{ $video->id }}_zh_hant.vtt" default>
     <track kind="captions" label="简体中文" srclang="zh_hans" src="https://cdn.jsdelivr.net/gh/guaishushukanlifan/Project-H@latest/data/{{ $video->id }}_zh_hans.vtt">
-  @endif
 </video>
 <script>
   const player = new Plyr('video', {
@@ -64,7 +62,7 @@
   });
   window.player = player;
 
-    player.on('enterfullscreen', event => {
+    /* player.on('enterfullscreen', event => {
       $('.plyr__captions').addClass('plyr__fullscreen_captions');
       screen.orientation.lock('landscape');
     });
@@ -93,7 +91,7 @@
       } else {
         player.currentTrack = -1;
       }
-    }, false);
+    }, false); */
 
   @if ($video->duration == null)
     player.on('loadedmetadata', function () {
