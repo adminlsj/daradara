@@ -64,7 +64,6 @@
   });
   window.player = player;
 
-  @if (array_key_exists('caption', $video->foreign_sd))
     player.on('enterfullscreen', event => {
       $('.plyr__captions').addClass('plyr__fullscreen_captions');
       screen.orientation.lock('landscape');
@@ -95,7 +94,6 @@
         player.currentTrack = -1;
       }
     }, false);
-  @endif
 
   @if ($video->duration == null)
     player.on('loadedmetadata', function () {
