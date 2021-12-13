@@ -55,7 +55,6 @@
       'settings', // Settings menu
       'pip', // Toggle captions
       'fullscreen', // Toggle fullscreen
-      'captions',
     ],
     captions: {
       active: true, 
