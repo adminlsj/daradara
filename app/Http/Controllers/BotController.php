@@ -598,7 +598,7 @@ class BotController extends Controller
                         $avgigi = 'https:\/\/v.avgigi.com'.Helper::get_string_between($html, 'https:\/\/v.avgigi.com', '"');
                         $html = str_replace($avgigi, '', $html);
                         $avgigi = str_replace('\\', '', $avgigi);
-                        if (!in_array($avgigi, $avgigi_list)) {
+                        if (!in_array($avgigi, $avgigi_list) && strpos($avgigi, '.m3u8') !== false) {
                             array_push($avgigi_list, $avgigi);
                             echo $avgigi.' (viewable on <a href="'.$href.'" target="_blank">'.$href.'</a>)<br>';
                         }
@@ -608,7 +608,7 @@ class BotController extends Controller
                         $avgigi = 'http:\/\/v.avgigi.com'.Helper::get_string_between($html, 'http:\/\/v.avgigi.com', '"');
                         $html = str_replace($avgigi, '', $html);
                         $avgigi = str_replace('\\', '', $avgigi);
-                        if (!in_array($avgigi, $avgigi_list)) {
+                        if (!in_array($avgigi, $avgigi_list) && strpos($avgigi, '.m3u8') !== false) {
                             array_push($avgigi_list, $avgigi);
                             echo $avgigi.' (viewable on <a href="'.$href.'" target="_blank">'.$href.'</a>)<br>';
                         }
@@ -618,7 +618,7 @@ class BotController extends Controller
                         $avgigi = 'https://v.avgigi.com'.Helper::get_string_between($html, 'https://v.avgigi.com', '"');
                         $html = str_replace($avgigi, '', $html);
                         $avgigi = str_replace('\\', '', $avgigi);
-                        if (!in_array($avgigi, $avgigi_list)) {
+                        if (!in_array($avgigi, $avgigi_list) && strpos($avgigi, '.m3u8') !== false) {
                             array_push($avgigi_list, $avgigi);
                             echo $avgigi.' (viewable on <a href="'.$href.'" target="_blank">'.$href.'</a>)<br>';
                         }
@@ -628,7 +628,7 @@ class BotController extends Controller
                         $avgigi = 'http://v.avgigi.com'.Helper::get_string_between($html, 'http://v.avgigi.com', '"');
                         $html = str_replace($avgigi, '', $html);
                         $avgigi = str_replace('\\', '', $avgigi);
-                        if (!in_array($avgigi, $avgigi_list)) {
+                        if (!in_array($avgigi, $avgigi_list) && strpos($avgigi, '.m3u8') !== false) {
                             array_push($avgigi_list, $avgigi);
                             echo $avgigi.' (viewable on <a href="'.$href.'" target="_blank">'.$href.'</a>)<br>';
                         }

@@ -53,7 +53,7 @@ th, td {
 :root { --webkit-text-track-display: none; }
 
 .plyr--full-ui ::-webkit-media-text-track-container {
-    display: var(--webkit-text-track-display);
+    display: var(--webkit-text-track-display) !important;
 }
 
 .content-padding {
@@ -1924,10 +1924,6 @@ div.sticky {
 }
 
 @media (max-width: 767.9px) {
-  .plyr__captions {
-    margin-bottom: -8px;
-  }
-
   #error {
     line-height: 50px;
   }
@@ -2168,5 +2164,11 @@ div.sticky {
   .watch-exoclick-wrapper {
     margin-top: -70px;
     padding-bottom: 50px;
+  }
+}
+
+@media (max-width: 479.9px) {
+  .plyr__captions {
+    margin-bottom: -8px;
   }
 }

@@ -1,6 +1,6 @@
-<script src="https://cdn.plyr.io/3.6.4/plyr.js"></script>
+<script src="https://cdn.plyr.io/3.6.9/plyr.js"></script>
 <script src="//cdn.jsdelivr.net/npm/hls.js@latest"></script>
-<link rel="stylesheet" href="https://cdn.plyr.io/3.6.4/plyr.css" />
+<link rel="stylesheet" href="https://cdn.plyr.io/3.6.9/plyr.css" />
 <video style="width: 100%; height: 100%" id="player" controls crossorigin playsinline data-poster="{{ $video->imgurH() }}" {{ $doujin ? 'loop' : '' }}>
   @if ($video->qualities == null)
     <source src="{!! $video->sd !!}" type="video/mp4" size="720">
@@ -11,8 +11,8 @@
   @endif
 
   @if ($video->id == 25248)
-    <track kind="captions" label="繁體中文" srclang="big5" src="https://cdn.jsdelivr.net/gh/guaishushukanlifan/Project-H@latest/data/{{ $video->id }}_zh_hant.vtt" default />
-    <track kind="captions" label="简体中文" srclang="gb" src="https://cdn.jsdelivr.net/gh/guaishushukanlifan/Project-H@latest/data/{{ $video->id }}_zh_hans.vtt" />
+    <track kind="captions" label="繁體中文" srclang="big5" src="https://cdn.jsdelivr.net/gh/guaishushukanlifan/Project-H@latest/data/{{ $video->id }}_zh_hant.vtt" default>
+    <track kind="captions" label="简体中文" srclang="gb" src="https://cdn.jsdelivr.net/gh/guaishushukanlifan/Project-H@latest/data/{{ $video->id }}_zh_hans.vtt">
   @endif
 </video>
 <script>
@@ -28,7 +28,7 @@
     fullscreen: {
       enabled: true,
       fallback: true,
-      iosNative: {{ $video->id == 25248 ? 'false' : 'true' }},
+      iosNative: true,
       container: null
     },
     quality: {
@@ -74,13 +74,13 @@
     // screen.orientation.lock('portrait');
   });
 
-  $('video').addEventListener('webkitbeginfullscreen webkitendfullscreen', event => {
-    if (event.type === 'webkitbeginfullscreen') {
-        document.documentElement.style.setProperty('--webkit-text-track-display', 'block');
-    } else {
-        document.documentElement.style.setProperty('--webkit-text-track-display', 'none');
-    }
-  });
+  var video = document.getElementById('player');
+  video.addEventListener("webkitbeginfullscreen", function(){
+      document.documentElement.style.setProperty('--webkit-text-track-display', 'block');
+  }, false);
+  video.addEventListener("webkitendfullscreen", function(){
+      document.documentElement.style.setProperty('--webkit-text-track-display', 'none');
+  }, false);
 
   @if ($video->duration == null)
     player.on('loadedmetadata', function () {
