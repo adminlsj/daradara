@@ -58,8 +58,6 @@
     ],
     captions: {
       active: true, 
-      language: 'big5', 
-      update: false
     }
   });
   window.player = player;
