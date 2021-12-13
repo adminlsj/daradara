@@ -64,9 +64,7 @@
     }
   });
   window.player = player;
-  var video = document.getElementById('player');
-  var trackList = video.textTracks;
-  trackList[0].mode = 'showing';
+  player.currentTrack = 0;
 
   @if (array_key_exists('caption', $video->foreign_sd))
     player.on('enterfullscreen', event => {
