@@ -58,7 +58,7 @@
     ],
     captions: {
       active: true, 
-      language: 'zh_hant', 
+      language: 'auto', 
       update: false
     }
   });
