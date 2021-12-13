@@ -753,10 +753,9 @@ class BotController extends Controller
                     $innerLoop++;
                 }
 
-                if ($next - $current <= 3) {
+                if ($next - $current <= 2) {
                     $captions = str_replace($current_time, $next_time, $captions);
                 }
-
 
                 $loop++;
             }
