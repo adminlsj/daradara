@@ -59,7 +59,7 @@
     captions: {
       active: true, 
       language: 'zh_hant', 
-      update: false
+      update: false,
     }
   });
   window.player = player;
@@ -76,7 +76,7 @@
     });
 
     var video = document.getElementById('player');
-    var trackList = document.querySelector('video').textTracks;
+    var trackList = video.textTracks;
     video.addEventListener("webkitbeginfullscreen", function(){
       document.documentElement.style.setProperty('--webkit-text-track-display', 'block');
       if (player.currentTrack == 0) {
