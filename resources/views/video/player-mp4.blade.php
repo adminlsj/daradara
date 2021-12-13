@@ -76,7 +76,7 @@
     });
 
     var video = document.getElementById('player');
-    var trackList = document.querySelector('video').textTracks;
+    var trackList = video.textTracks;
     video.addEventListener("webkitbeginfullscreen", function(){
       document.documentElement.style.setProperty('--webkit-text-track-display', 'block');
       if (player.currentTrack == 0) {
