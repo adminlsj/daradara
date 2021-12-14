@@ -30,9 +30,9 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $videos = Video::where('sd', 'like', '%tokyowebm%')->get();
+        $videos = Video::where('sd', 'like', '%rule34%')->get();
         foreach ($videos as $video) {
-            $video->sd = str_replace('tokyowebm', 'wwebm', $video->sd);
+            $video->outsource = true;
             $video->save();
         }
 
