@@ -72,7 +72,7 @@ class UploadRule34 extends Command
             $queries = [];
             parse_str($link, $queries);
             $rule_id = $queries['id'];
-            if (!Video::where('sd', 'ilike', '%?'.$rule_id)->exists() && !in_array($rule_id, $duplicated)) {
+            if (!Video::where('sd', 'like', '%?'.$rule_id)->exists() && !Video::where('foreign_sd', 'like', '%'.$rule_id.'"%')->exists() && !in_array($rule_id, $duplicated)) {
                 $html = Browsershot::url($link)
                 ->timeout(3600)
                 ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
@@ -121,7 +121,8 @@ class UploadRule34 extends Command
                     'tags_array' => $tags,
                     'current_views' => 0,
                     'views' => 0,
-                    'outsource' => false,
+                    'outsource' => true,
+                    'foreign_sd' => ['rule34' => $sd],
                     'cover' => 'https://i.imgur.com/E6mSQA2.png',
                     'created_at' => $created_at,
                     'uploaded_at' => Carbon::now(),
