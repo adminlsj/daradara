@@ -540,7 +540,7 @@ class Spankbang
     public static function getBrowsershotHtml(String $url)
     {
         return Browsershot::url($url)
-                ->timeout(50)
+                ->timeout(30)
                 ->disableImages()
                 ->userAgent(Spankbang::$userAgents[array_rand(Spankbang::$userAgents)])
                 ->useCookies(['_gid' => 'GA1.2.1098535915.1635852402'], '.spankbang.com')
