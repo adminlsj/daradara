@@ -32,6 +32,7 @@ class BotController extends Controller
 
         $videos = Video::where('foreign_sd', 'like', '%"spankbang"%')
                        ->select('id', 'title', 'sd', 'outsource', 'tags_array', 'foreign_sd', 'created_at')
+                       ->orderBy('id', 'asc')
                        ->get()
                        ->split(3)[1]
                        ->sortBy(function($video)

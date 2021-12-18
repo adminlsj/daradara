@@ -18,6 +18,7 @@ class Spankbang
 
         $videos = Video::where('foreign_sd', 'like', '%"spankbang"%')
                     ->select('id', 'title', 'sd', 'outsource', 'tags_array', 'foreign_sd', 'created_at')
+                    ->orderBy('id', 'asc')
                     ->get()
                     ->split($total)[$number - 1]
                     ->sortBy(function($video){
