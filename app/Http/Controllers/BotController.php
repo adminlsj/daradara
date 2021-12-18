@@ -800,34 +800,9 @@ class BotController extends Controller
         }
     }
 
-    public function updateSpankbangBackup()
+    public function updateSpankbangEmergent()
     {
-        Spankbang::updateSpankbangBackup();
-    }
-
-    public function updateSpankbangBackupReverse()
-    {
-        Spankbang::updateSpankbangBackupReverse();
-    }
-
-    public function updateSpankbangBackupEmergent()
-    {
-        Spankbang::updateSpankbangBackupEmergent();
-    }
-
-    public function updateSpankbangBackupEmergentReverse()
-    {
-        Spankbang::updateSpankbangBackupEmergentReverse();
-    }
-
-    public function updateSpankbangBackupEmergentViews()
-    {
-        Spankbang::updateSpankbangBackupEmergentViews();
-    }
-
-    public function updateSpankbangBackupEmergentRandom()
-    {
-        Spankbang::updateSpankbangBackupEmergentRandom();
+        Spankbang::updateSpankbangEmergent();
     }
 
     public function updateSpankbangErrors()
