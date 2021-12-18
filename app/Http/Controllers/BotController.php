@@ -818,6 +818,11 @@ class BotController extends Controller
         Spankbang::updateSpankbangBackupEmergent();
     }
 
+    public function updateSpankbangBackupEmergentReverse()
+    {
+        Spankbang::updateSpankbangBackupEmergentReverse();
+    }
+
     public function updateSpankbangErrors()
     {
         Spankbang::updateSpankbangErrors();
