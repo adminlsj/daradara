@@ -53,6 +53,7 @@ class Spankbang
                 $video->qualities = $qualities;
                 $video->outsource = false;
                 $video->save();
+                Log::info('Spankbang update ID#'.$video->id.' success...');
 
             } else {
                 Log::info('Spankbang update ID#'.$video->id.' failed...');
