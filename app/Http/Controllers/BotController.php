@@ -40,7 +40,7 @@ class BotController extends Controller
                            return (int) Helper::get_string_between($video->sd, ',', '&m=');
                        })
                        ->values()
-                       ->all();
+                       ->first();
 
         return $videos;
 
