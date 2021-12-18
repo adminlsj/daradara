@@ -16,7 +16,7 @@ class Spankbang
     {
         Log::info('Spankbang update started...');
 
-        $video = Video::where('foreign_sd', 'like', '%"spankbang"%')
+        $videos = Video::where('foreign_sd', 'like', '%"spankbang"%')
                     ->select('id', 'title', 'sd', 'outsource', 'tags_array', 'foreign_sd', 'created_at')
                     ->orderBy('id', 'asc')
                     ->get()
@@ -25,44 +25,48 @@ class Spankbang
                         return (int) Helper::get_string_between($video->sd, ',', '&m=');
                     })
                     ->values()
-                    ->first();
+                    ->slice(0, 3);
 
-        $html = Spankbang::getBrowsershotHtml($video->foreign_sd['spankbang']);
-        $sd = Helper::get_string_between($html, '"contentUrl": "', '"');
-        $source = Helper::get_string_between($html, '"contentUrl": "', '"');
-        $qualities = [];
+        foreach ($videos as $video) {
+            $html = Spankbang::getBrowsershotHtml($video->foreign_sd['spankbang']);
+            $sd = Helper::get_string_between($html, '"contentUrl": "', '"');
+            $source = Helper::get_string_between($html, '"contentUrl": "', '"');
+            $qualities = [];
 
-        if (strpos($sd, 'https://vdownload') !== false) {
-            if (in_array('1080p', array_keys($video->tags_array))) {
-                $sd = str_replace('-720p.mp4', '-1080p.mp4', $sd);
-                $qualities['1080'] = $sd;
-            }
-            if (strpos($source, '720p') !== false) {
-                $qualities['720'] = $source;
-                $source = str_replace('-720p.mp4', '-480p.mp4', $source);
-            }
-            if (strpos($source, '480p') !== false) {
-                $qualities['480'] = $source;
-                $source = str_replace('-480p.mp4', '-240p.mp4', $source);
-            }
-            if (strpos($source, '240p') !== false) {
-                $qualities['240'] = $source;
+            if (strpos($sd, 'https://vdownload') !== false) {
+                if (in_array('1080p', array_keys($video->tags_array))) {
+                    $sd = str_replace('-720p.mp4', '-1080p.mp4', $sd);
+                    $qualities['1080'] = $sd;
+                }
+                if (strpos($source, '720p') !== false) {
+                    $qualities['720'] = $source;
+                    $source = str_replace('-720p.mp4', '-480p.mp4', $source);
+                }
+                if (strpos($source, '480p') !== false) {
+                    $qualities['480'] = $source;
+                    $source = str_replace('-480p.mp4', '-240p.mp4', $source);
+                }
+                if (strpos($source, '240p') !== false) {
+                    $qualities['240'] = $source;
+                }
+
+                $video->sd = reset($qualities);
+                $video->qualities = $qualities;
+                $video->outsource = false;
+                $video->save();
+                Log::info('Spankbang update ID#'.$video->id.' success...');
+
+            } else {
+                Log::info('Spankbang update ID#'.$video->id.' failed...');
+                Mail::to('vicky.avionteam@gmail.com')->send(new UserReport('master ('.gethostname().')', 'Spankbang update failed', $video->id, $video->title, $video->sd, 'master', 'master'));
+                $temp = $video->foreign_sd;
+                $temp['error'] = $video->foreign_sd['spankbang'];
+                unset($temp['spankbang']);
+                $video->foreign_sd = $temp;
+                $video->save();
             }
 
-            $video->sd = reset($qualities);
-            $video->qualities = $qualities;
-            $video->outsource = false;
-            $video->save();
-            Log::info('Spankbang update ID#'.$video->id.' success...');
-
-        } else {
-            Log::info('Spankbang update ID#'.$video->id.' failed...');
-            Mail::to('vicky.avionteam@gmail.com')->send(new UserReport('master ('.gethostname().')', 'Spankbang update failed', $video->id, $video->title, $video->sd, 'master', 'master'));
-            $temp = $video->foreign_sd;
-            $temp['error'] = $video->foreign_sd['spankbang'];
-            unset($temp['spankbang']);
-            $video->foreign_sd = $temp;
-            $video->save();
+            sleep(10);
         }
 
         Log::info('Spankbang update ended...');
@@ -540,7 +544,7 @@ class Spankbang
     public static function getBrowsershotHtml(String $url)
     {
         return Browsershot::url($url)
-                ->timeout(30)
+                ->timeout(20)
                 ->disableImages()
                 ->userAgent(Spankbang::$userAgents[array_rand(Spankbang::$userAgents)])
                 ->useCookies(['_gid' => 'GA1.2.1098535915.1635852402'], '.spankbang.com')
