@@ -30,11 +30,14 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $videos = Video::where('sd', 'like', '%rule34%')->get();
+        $html = Spankbang::getBrowsershotHtml('https://spankbang.com/6ay1d/video/5');
+        return $sd = Helper::get_string_between($html, '"contentUrl": "', '"');
+
+        /* $videos = Video::where('sd', 'like', '%rule34%')->get();
         foreach ($videos as $video) {
             $video->outsource = true;
             $video->save();
-        }
+        } */
 
         /* $url = 'https://spankbang.com/5yx9r/video/convenient+sex+friends+2';
 
