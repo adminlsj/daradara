@@ -66,7 +66,9 @@ class Spankbang
                 $video->save();
             }
 
-            sleep(10);
+            if ($videos->last() != $video) {
+                sleep(10);
+            }
         }
 
         Log::info('Spankbang update ended...');
