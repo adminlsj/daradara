@@ -16,14 +16,14 @@ class Kernel extends ConsoleKernel
         'App\Console\Commands\UpdateData',
         'App\Console\Commands\ResetDayViews',
         'App\Console\Commands\ResetWeekViews',
+        'App\Console\Commands\CheckSpankbang',
         'App\Console\Commands\CheckMotherless',
 
         'App\Console\Commands\UpdateXvideos',
         'App\Console\Commands\UpdateXvideosErrors',
         'App\Console\Commands\UpdateYoujizz',
         'App\Console\Commands\UpdateSpankbang',
-        'App\Console\Commands\UpdateSpankbangBackup',
-        'App\Console\Commands\UpdateSpankbangBackupEmergent',
+        'App\Console\Commands\UpdateSpankbangEmergent',
         'App\Console\Commands\UpdateSpankbangErrors',
 
         'App\Console\Commands\UploadNhentai',
@@ -44,8 +44,9 @@ class Kernel extends ConsoleKernel
 
         $schedule->command('hanime1:update-xvideoserrors')->everyThirtyMinutes();
         $schedule->command('hanime1:update-youjizz')->cron('0 */6 * * *');
-        $schedule->command('hanime1:update-spankbangbackupemergent')->everyThirtyMinutes();
+        $schedule->command('hanime1:update-spankbangemergent')->everyThirtyMinutes();
         $schedule->command('hanime1:update-spankbangerrors')->hourly();
+        $schedule->command('hanime1:check-spankbang')->hourly();
         $schedule->command('hanime1:check-motherless')->hourly();
 
         $schedule->command('hanime1:upload-nhentai')->hourly()->between('6:00', '21:00');

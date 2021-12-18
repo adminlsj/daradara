@@ -30,20 +30,6 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $videos = Video::where('foreign_sd', 'like', '%"spankbang"%')
-                       ->select('id', 'title', 'sd', 'outsource', 'tags_array', 'foreign_sd', 'created_at')
-                       ->orderBy('id', 'asc')
-                       ->get()
-                       ->split(3)[1]
-                       ->sortBy(function($video)
-                       {
-                           return (int) Helper::get_string_between($video->sd, ',', '&m=');
-                       })
-                       ->values()
-                       ->slice(0, 3);
-
-        return $videos;
-
         /* $videos = Video::where('sd', 'like', '%rule34%')->get();
         foreach ($videos as $video) {
             $video->outsource = true;
