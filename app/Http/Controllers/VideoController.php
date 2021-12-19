@@ -43,7 +43,7 @@ class VideoController extends Controller
             $tags_random = array_values(array_diff($tags_random, Video::$exclude));
             shuffle($tags_random);
             $tags_slice = array_slice($tags_random, 0, 5 - count($include));
-            return $tags_slice = array_merge($tags_slice, $include);
+            $tags_slice = array_merge($tags_slice, $include);
 
             $related = Video::query();
             $related = $related->where(function($query) use ($tags, &$doujin) {
