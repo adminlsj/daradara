@@ -40,7 +40,6 @@ class VideoController extends Controller
             $include = array_values(array_intersect(Video::$include, $tags));
             $include = array_slice($include, 0, 5);
             $tags_random = array_values(array_diff($tags_random, $include));
-            $tags_random = array_values(array_diff($tags_random, Video::$exclude));
             shuffle($tags_random);
             $tags_slice = array_slice($tags_random, 0, 5 - count($include));
             $tags_slice = array_merge($tags_slice, $include);
