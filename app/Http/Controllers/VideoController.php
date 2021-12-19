@@ -26,7 +26,6 @@ class VideoController extends Controller
 
         if (is_numeric($vid) && $video = Video::with('watch:id,title')->select('id', 'user_id', 'playlist_id', 'comic_id', 'title', 'translations', 'caption', 'cover', 'tags_array', 'sd', 'qualities', 'outsource', 'has_subtitles', 'current_views', 'views', 'imgur', 'foreign_sd', 'duration', 'created_at', 'uploaded_at')->withCount('likes')->find($vid)) {
 
-
             $current = $video;
             $doujin = false;
             $is_mobile = Helper::checkIsMobile();
@@ -35,21 +34,18 @@ class VideoController extends Controller
             $video->views++;
             $video->save();
 
-            if (strpos($video->sd, 'avbebe.com') !== false) {
-                header("Location: ".$video->sd);
-                die();
-            }
-
             $videos = Video::where('playlist_id', $video->playlist_id)->orderBy('created_at', 'desc')->select('id', 'user_id', 'imgur', 'title', 'sd', 'views', 'created_at')->get();
 
-            $tags = $tags_random = array_keys($video->tags_array);
+            $tags = $tags_random = array_values(array_diff(array_keys($video->tags_array), Video::$exclude));
+            $include = array_values(array_intersect(Video::$include, $tags_random));
+            $include = array_slice($include, 0, 5);
+            $tags_random = array_values(array_diff($tags_random, $include));
             shuffle($tags_random);
-            $tags_slice = array_slice($tags_random, 0, 5);
-            $related = Video::where(function($query) use ($tags_slice, $tags, &$doujin) {
-                foreach ($tags_slice as $tag) {
-                    $query->orWhere('tags_array', 'like', '%"'.$tag.'"%');
-                }
+            $tags_slice = array_slice($tags_random, 0, 5 - count($include));
+            $tags_slice = array_merge($tags_slice, $include);
 
+            $related = Video::query();
+            $related = $related->where(function($query) use ($tags, &$doujin) {
                 if (in_array('3D', $tags)) {
                     $doujin = true;
                     $query->orWhere('tags_array', 'like', '%"3D"%');
@@ -61,6 +57,11 @@ class VideoController extends Controller
                 if (in_array('Cosplay', $tags)) {
                     $doujin = true;
                     $query->orWhere('tags_array', 'like', '%"Cosplay"%');
+                }
+            });
+            $related = $related->where(function($query) use ($tags_slice) {
+                foreach ($tags_slice as $tag) {
+                    $query->orWhere('tags_array', 'like', '%"'.$tag.'"%');
                 }
             });
 
