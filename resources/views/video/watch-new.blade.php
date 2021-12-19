@@ -49,7 +49,7 @@
 
         <h3 id="shareBtn-title" style="line-height: 30px; font-weight: bold; font-size: 1.5em; margin-top: 0px; color: white;">{{ $video->translations['JP'] }}[中文字幕]</h3>
 
-        <h5 style="color: #bdbdbd; font-weight: 400; margin-top: 10px; line-height: 20px; margin-bottom: 20px; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;"><span style="font-weight: bold"><span style="color: white;">{{ $video->title }}</span>&nbsp;&nbsp;{{ $video->caption }}</span></h5>
+        <h5 style="color: #bdbdbd; font-weight: 400; margin-top: 10px; line-height: 20px; margin-bottom: 20px; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;"><span style="color: white; font-weight: bold">{{ $video->title }}</span>&nbsp;&nbsp;{{ $video->caption }}</h5>
 
         <h5 style="font-weight: 400; margin-bottom: 0px; margin-top: 0px;">
           @foreach ($tags as $tag)
