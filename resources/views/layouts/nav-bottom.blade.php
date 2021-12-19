@@ -93,11 +93,9 @@
 
         <hr style="margin: 0; border-color: #333333;">
         
-        <a style="color: white; text-decoration: none; text-align: center; pointer-events: none;">
-          <div class="simple-dropdown-item genre-option">友情鏈結</div>
-        </a>
-
-        <hr style="margin: 0; border-color: #333333;">
+        <div class="modal-header" style="border-bottom: 1px solid #333333; height: 65px;">
+          <h4 class="modal-title" style="text-align: center; font-weight: bold; margin: 0; padding: 0; margin-top: 5px; font-size: 18px;">友情鏈結</h4>
+        </div>
 
         <div class="row" style="text-align: center;">
           <div class="col-xs-6" style="width: 50%; padding-right: 0; border-right: 1px solid #333333;">
