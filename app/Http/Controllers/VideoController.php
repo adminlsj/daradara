@@ -37,13 +37,8 @@ class VideoController extends Controller
             $videos = Video::where('playlist_id', $video->playlist_id)->orderBy('created_at', 'desc')->select('id', 'user_id', 'imgur', 'title', 'sd', 'views', 'created_at')->get();
 
             $tags = $tags_random = array_keys($video->tags_array);
-            $include = array_values(array_intersect(Video::$include, $tags));
-            $include = array_slice($include, 0, 5);
-            $tags_random = array_values(array_diff($tags_random, $include));
             shuffle($tags_random);
-            $tags_slice = array_slice($tags_random, 0, 5 - count($include));
-            $tags_slice = array_merge($tags_slice, $include);
-
+            $tags_slice = array_slice($tags_random, 0, 5);
             $related = Video::query();
             $related = $related->where(function($query) use ($tags, &$doujin) {
                 if (in_array('3D', $tags)) {
