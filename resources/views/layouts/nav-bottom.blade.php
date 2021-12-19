@@ -33,74 +33,130 @@
       </div>
 
       <div class="modal-body" style="padding: 0; height: calc(100% - 65px);">
-        <a style="color: white; text-decoration: none;" href="{{ route('home.search') }}?genre=H動漫">
-          <div class="simple-dropdown-item genre-option">H動漫</div>
-        </a>
-        <hr style="margin: 0; border-color: #333333;">
-        <a style="color: white; text-decoration: none;" href="{{ route('home.search') }}?genre=H動漫&tags%5B%5D=新番預告">
-          <div class="simple-dropdown-item genre-option">新番預告</div>
-        </a>
-        <hr style="margin: 0; border-color: #333333;">
-        <a style="color: white; text-decoration: none;" href="{{ route('home.search') }}?genre=H動漫&tags%5B%5D=番劇">
-          <div class="simple-dropdown-item genre-option">番劇</div>
-        </a>
-        <hr style="margin: 0; border-color: #333333;">
-        <a style="color: white; text-decoration: none;" href="{{ route('home.search') }}?genre=3D動畫">
-          <div class="simple-dropdown-item genre-option">3D動畫</div>
-        </a>
-        <hr style="margin: 0; border-color: #333333;">
-        <a style="color: white; text-decoration: none;" href="{{ route('home.search') }}?genre=同人作品">
-          <div class="simple-dropdown-item genre-option">同人作品</div>
-        </a>
-        <hr style="margin: 0; border-color: #333333;">
-        <a style="color: white; text-decoration: none;" href="{{ route('home.search') }}?genre=Cosplay">
-          <div class="simple-dropdown-item genre-option">Cosplay</div>
-        </a>
-        <hr style="margin: 0; border-color: #333333;">
-        <a style="color: white; text-decoration: none;" href="{{ route('comic.index') }}">
-          <div class="simple-dropdown-item genre-option">H漫畫</div>
-        </a>
+        <div class="row" style="text-align: center;">
+          <div class="col-xs-6" style="width: 50%; padding-right: 0; border-right: 1px solid #333333;">
+            <a style="color: white; text-decoration: none;" href="{{ route('home.search') }}?genre=H動漫">
+              <div class="simple-dropdown-item genre-option">H動漫</div>
+            </a>
+          </div>
+          <div class="col-xs-6" style="width: 50%; padding-left: 0;">
+            <a style="color: white; text-decoration: none;" href="{{ route('comic.index') }}">
+              <div class="simple-dropdown-item genre-option">H漫畫</div>
+            </a>
+          </div>
+        </div>
+
         <hr style="margin: 0; border-color: #333333;">
 
+        <div class="row" style="text-align: center;">
+          <div class="col-xs-6" style="width: 50%; padding-right: 0; border-right: 1px solid #333333;">
+            <a style="color: white; text-decoration: none;" href="{{ route('home.search') }}?genre=H動漫&tags%5B%5D=新番預告">
+              <div class="simple-dropdown-item genre-option">新番預告</div>
+            </a>
+          </div>
+          <div class="col-xs-6" style="width: 50%; padding-left: 0;">
+            <a style="color: white; text-decoration: none;" href="{{ route('home.search') }}?genre=H動漫&tags%5B%5D=番劇">
+              <div class="simple-dropdown-item genre-option">番劇</div>
+            </a>
+          </div>
+        </div>
+
+        <hr style="margin: 0; border-color: #333333;">
+
+        <div class="row" style="text-align: center;">
+          <div class="col-xs-6" style="width: 50%; padding-right: 0; border-right: 1px solid #333333;">
+            <a style="color: white; text-decoration: none;" href="{{ route('home.search') }}?genre=3D動畫">
+              <div class="simple-dropdown-item genre-option">3D動畫</div>
+            </a>
+          </div>
+          <div class="col-xs-6" style="width: 50%; padding-left: 0;">
+            <a style="color: white; text-decoration: none;" href="{{ route('home.search') }}?genre=同人作品">
+              <div class="simple-dropdown-item genre-option">同人作品</div>
+            </a>
+          </div>
+        </div>
+
+        <hr style="margin: 0; border-color: #333333;">
+
+        <div class="row" style="text-align: center;">
+          <div class="col-xs-6" style="width: 50%; padding-right: 0; border-right: 1px solid #333333;">
+            <a style="color: white; text-decoration: none;" href="{{ route('home.search') }}?genre=Cosplay">
+              <div class="simple-dropdown-item genre-option">Cosplay</div>
+            </a>
+          </div>
+          <div class="col-xs-6" style="width: 50%; padding-left: 0;">
+            <a style="color: white; text-decoration: none;" href="https://discord.gg/WWYc9m9CUQ" target="_blank">
+              <div class="simple-dropdown-item genre-option">Discord</div>
+            </a>
+          </div>
+        </div>
+
+        <hr style="margin: 0; border-color: #333333;">
+        
         <a style="color: white; text-decoration: none; text-align: center; pointer-events: none;">
-          <div style="background-color: #333333" class="simple-dropdown-item genre-option">友情鏈結</div>
+          <div class="simple-dropdown-item genre-option">友情鏈結</div>
         </a>
+
         <hr style="margin: 0; border-color: #333333;">
-        <a style="color: white; text-decoration: none;" href="https://discord.gg/WWYc9m9CUQ" target="_blank">
-          <div class="simple-dropdown-item genre-option">Discord</div>
-        </a>
+
+        <div class="row" style="text-align: center;">
+          <div class="col-xs-6" style="width: 50%; padding-right: 0; border-right: 1px solid #333333;">
+            <a style="color: white; text-decoration: none;" href="https://theporndude.com/zh" target="_blank">
+              <div class="simple-dropdown-item genre-option">PornDude</div>
+            </a>
+          </div>
+          <div class="col-xs-6" style="width: 50%; padding-left: 0;">
+            <a style="color: white; text-decoration: none;" href="https://qingse.one" target="_blank">
+              <div class="simple-dropdown-item genre-option">情色網站大全</div>
+            </a>
+          </div>
+        </div>
+
         <hr style="margin: 0; border-color: #333333;">
-        <a style="color: white; text-decoration: none;" href="https://theporndude.com/zh" target="_blank">
-          <div class="simple-dropdown-item genre-option">PornDude</div>
-        </a>
+
+        <div class="row" style="text-align: center;">
+          <div class="col-xs-6" style="width: 50%; padding-right: 0; border-right: 1px solid #333333;">
+            <a style="color: white; text-decoration: none;" href="https://141jj.com/" target="_blank">
+              <div class="simple-dropdown-item genre-option">141JJ 導航</div>
+            </a>
+          </div>
+          <div class="col-xs-6" style="width: 50%; padding-left: 0;">
+            <a style="color: white; text-decoration: none;" href="http://www.pornbest.org/" target="_blank">
+              <div class="simple-dropdown-item genre-option">PornBest 免費中文視頻</div>
+            </a>
+          </div>
+        </div>
+
         <hr style="margin: 0; border-color: #333333;">
-        <a style="color: white; text-decoration: none;" href="https://qingse.one" target="_blank">
-          <div class="simple-dropdown-item genre-option">情色網站大全</div>
-        </a>
+
+        <div class="row" style="text-align: center;">
+          <div class="col-xs-6" style="width: 50%; padding-right: 0; border-right: 1px solid #333333;">
+            <a style="color: white; text-decoration: none;" href="https://www.17dm.net/" target="_blank">
+              <div class="simple-dropdown-item genre-option">妖氣動漫導航</div>
+            </a>
+          </div>
+          <div class="col-xs-6" style="width: 50%; padding-left: 0;">
+            <a style="color: white; text-decoration: none;" href="https://share.acgnx.net/" target="_blank">
+              <div class="simple-dropdown-item genre-option">末日動漫資源庫</div>
+            </a>
+          </div>
+        </div>
+
         <hr style="margin: 0; border-color: #333333;">
-        <a style="color: white; text-decoration: none;" href="https://141jj.com/" target="_blank">
-          <div class="simple-dropdown-item genre-option">141JJ 導航</div>
-        </a>
-        <hr style="margin: 0; border-color: #333333;">
-        <a style="color: white; text-decoration: none;" href="http://www.pornbest.org/" target="_blank">
-          <div class="simple-dropdown-item genre-option">PornBest 免費中文視頻</div>
-        </a>
-        <hr style="margin: 0; border-color: #333333;">
-        <a style="color: white; text-decoration: none;" href="https://www.17dm.net/" target="_blank">
-          <div class="simple-dropdown-item genre-option">妖氣動漫導航</div>
-        </a>
-        <hr style="margin: 0; border-color: #333333;">
-        <a style="color: white; text-decoration: none;" href="https://share.acgnx.net/" target="_blank">
-          <div class="simple-dropdown-item genre-option">末日動漫資源庫</div>
-        </a>
-        <hr style="margin: 0; border-color: #333333;">
-        <a style="color: white; text-decoration: none;" href="https://moeli-desu.com/" target="_blank">
-          <div class="simple-dropdown-item genre-option">夢璃</div>
-        </a>
-        <hr style="margin: 0; border-color: #333333;">
-        <a style="color: white; text-decoration: none;" href="https://www.sshs.pw/" target="_blank">
-          <div class="simple-dropdown-item genre-option">紳士會所</div>
-        </a>
+
+        <div class="row" style="text-align: center;">
+          <div class="col-xs-6" style="width: 50%; padding-right: 0; border-right: 1px solid #333333;">
+            <a style="color: white; text-decoration: none;" href="https://moeli-desu.com/" target="_blank">
+              <div class="simple-dropdown-item genre-option">夢璃</div>
+            </a>
+          </div>
+          <div class="col-xs-6" style="width: 50%; padding-left: 0;">
+            <a style="color: white; text-decoration: none;" href="https://www.sshs.pw/" target="_blank">
+              <div class="simple-dropdown-item genre-option">紳士會所</div>
+            </a>
+          </div>
+        </div>
+
         <hr style="margin: 0; border-color: #333333;">
       </div>
     </div>

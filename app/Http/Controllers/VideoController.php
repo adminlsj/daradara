@@ -324,7 +324,7 @@ class VideoController extends Controller
 
             $ip_address = isset($_SERVER["HTTP_CF_CONNECTING_IP"]) ? $_SERVER["HTTP_CF_CONNECTING_IP"] : 'N/A';
             $country_code = isset($_SERVER["HTTP_CF_IPCOUNTRY"]) ? $_SERVER["HTTP_CF_IPCOUNTRY"] : 'N/A';
-            Mail::to('vicky.avionteam@gmail.com')->send(new UserReport($user->email, 'This user added the following tags\N'.implode(", ",$tags), $video->id, $video->title, $video->sd, $ip_address, $country_code));
+            Mail::to('vicky.avionteam@gmail.com')->send(new UserReport($user->email, 'Added tags: '.implode(", ",$tags), $video->id, $video->title, $video->sd, $ip_address, $country_code));
         }
 
         return Redirect::route('video.watch', ['v' => $video->id]);
