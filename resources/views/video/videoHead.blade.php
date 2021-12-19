@@ -17,7 +17,7 @@
   "thumbnailUrl": [
     "https://i.imgur.com/{{ $video->imgur }}l.png"
    ],
-  "uploadDate": "{{ \Carbon\Carbon::parse($video->created_at)->format('Y-m-d\Th:i:s').'+00:00' }}",
+  "uploadDate": "{{ \Carbon\Carbon::parse($video->uploaded_at)->format('Y-m-d\Th:i:s').'+00:00' }}",
   "author": {
     "@type": "Person",
     "name": "Hanime1.me"
