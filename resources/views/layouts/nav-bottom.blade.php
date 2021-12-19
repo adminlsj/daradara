@@ -32,7 +32,7 @@
         <h4 class="modal-title" style="text-align: center; font-weight: bold; margin: 0; padding: 0; margin-top: 5px; font-size: 18px;">所有分類</h4>
       </div>
 
-      <div class="modal-body" style="padding: 0; height: calc(100% - 65px);">
+      <div class="modal-body" style="padding: 0; height: calc(100% - 65px); overflow-x: hidden;">
         <div class="row" style="text-align: center;">
           <div class="col-xs-6" style="width: 50%; padding-right: 0; border-right: 1px solid #333333;">
             <a style="color: white; text-decoration: none;" href="{{ route('home.search') }}?genre=H動漫">
