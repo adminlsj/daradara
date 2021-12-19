@@ -122,7 +122,7 @@
           </div>
           <div class="col-xs-6" style="width: 50%; padding-left: 0;">
             <a style="color: white; text-decoration: none;" href="http://www.pornbest.org/" target="_blank">
-              <div class="simple-dropdown-item genre-option">PornBest 免費中文視頻</div>
+              <div class="simple-dropdown-item genre-option">PornBest 免費中文</div>
             </a>
           </div>
         </div>
