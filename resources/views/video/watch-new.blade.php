@@ -53,7 +53,7 @@
 
         <h5 id="show-more-caption" class="no-select" style="margin-bottom: 25px; color: #fff; font-weight: 400; font-size: 12px; cursor: pointer;">顯示完整資訊</h5>
 
-        <h5 style="font-weight: 400; margin-bottom: 0px; margin-top: 0px;">
+        <h5 style="font-weight: bold; margin-bottom: 0px; margin-top: 0px;">
           @foreach ($tags as $tag)
               <div class="single-video-tag"><a href="/search?tags%5B%5D={{ $tag }}{{ $doujin ? '' : '&genre=H動漫' }}">{{ $tag }}</a></div>
           @endforeach
