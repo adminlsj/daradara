@@ -249,6 +249,17 @@ $('input:radio[id=others]').click(function(){
     $('#others-text').focus();
 });
 
+$('#show-more-caption').click(function(){
+    if ($(this).text() == '顯示完整資訊') {
+        $('#caption').attr('style', 'color: #bdbdbd; font-weight: 400; margin-top: 10px; line-height: 20px;');
+        $(this).text('只顯示部分資訊');
+
+    } else if ($(this).text() == '只顯示部分資訊') {
+        $('#caption').attr('style', 'color: #bdbdbd; font-weight: 400; margin-top: 10px; line-height: 20px; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;');
+        $(this).text('顯示完整資訊');
+    }
+});
+
 /* Standard syntax */
 document.addEventListener("fullscreenchange", function() {
   handleFullscreenChange()

@@ -30,6 +30,14 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
+        $videos = Video::where('cover', 'not like', 'https://i.imgur.com/E6mSQA2.png')->get();
+        foreach ($videos as $video) {
+            $temp = $video->translations;
+            $temp['JP'] = $temp['JP'].' [中文字幕]';
+            $video->translations = $temp;
+            $video->save();
+        }
+
         /* $videos = Video::where('sd', 'like', '%rule34%')->get();
         foreach ($videos as $video) {
             $video->outsource = true;

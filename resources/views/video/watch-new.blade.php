@@ -49,14 +49,16 @@
 
         <h3 id="shareBtn-title" style="line-height: 30px; font-weight: bold; font-size: 1.5em; margin-top: 0px; color: white;">{{ $video->translations['JP'] }}</h3>
 
-        <h5 style="color: #bdbdbd; font-weight: 400; margin-top: 10px; line-height: 20px; margin-bottom: 20px; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;"><span style="color: white; font-weight: bold">{{ $video->title }}</span>&nbsp;&nbsp;{{ $video->caption }}</h5>
+        <h5 id="caption" style="color: #bdbdbd; font-weight: 400; margin-top: 10px; line-height: 20px; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;"><span style="color: white; font-weight: bold">{{ $video->title }}</span>&nbsp;&nbsp;{{ $video->caption }}</h5>
+
+        <h5 id="show-more-caption" class="no-select" style="margin-bottom: 25px; color: #fff; font-weight: 400; font-size: 12px; cursor: pointer;">顯示完整資訊</h5>
 
         <h5 style="font-weight: 400; margin-bottom: 0px; margin-top: 0px;">
           @foreach ($tags as $tag)
               <div class="single-video-tag"><a href="/search?tags%5B%5D={{ $tag }}{{ $doujin ? '' : '&genre=H動漫' }}">{{ $tag }}</a></div>
           @endforeach
-          <div class="single-video-tag" data-toggle="modal" data-target="{{ Auth::check() ? '#add-tags-modal' : '#signUpModal' }}" style="position: relative; cursor: pointer; "><a style="padding-left: 15px; padding-right: 15px;"><span class="material-icons" style="position: absolute; margin-left: auto; margin-right: auto; left: -3px; right: 0; text-align: center; margin-top: -4px; font-size: 22px; vertical-align: middle">add</span></a></div>
-          <div class="single-video-tag" data-toggle="modal" data-target="{{ Auth::check() ? '#remove-tags-modal' : '#signUpModal' }}" style="position: relative; cursor: pointer; "><a style="padding-left: 15px; padding-right: 15px;"><span class="material-icons" style="position: absolute; margin-left: auto; margin-right: auto; left: -2px; right: 0; text-align: center; margin-top: -4px; font-size: 22px; vertical-align: middle">remove</span></a></div>
+          <div class="single-video-tag" data-toggle="modal" data-target="{{ Auth::check() ? '#add-tags-modal' : '#signUpModal' }}" style="position: relative; cursor: pointer; "><a style="padding-left: 14px; padding-right: 14px;"><span class="material-icons" style="position: absolute; margin-left: auto; margin-right: auto; left: -3px; right: 0; text-align: center; margin-top: -4px; font-size: 22px; vertical-align: middle">add</span></a></div>
+          <div class="single-video-tag" data-toggle="modal" data-target="{{ Auth::check() ? '#remove-tags-modal' : '#signUpModal' }}" style="position: relative; cursor: pointer; "><a style="padding-left: 14px; padding-right: 14px;"><span class="material-icons" style="position: absolute; margin-left: auto; margin-right: auto; left: -2px; right: 0; text-align: center; margin-top: -4px; font-size: 22px; vertical-align: middle">remove</span></a></div>
         </h5>
 
         <div id="video-like-form-wrapper" style="display: inline-block; position: absolute;" title="{{ $video->likes_count }} 個讚好">
