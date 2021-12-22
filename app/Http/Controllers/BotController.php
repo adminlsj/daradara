@@ -30,28 +30,44 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
+        /* $downloads = [];
+        $url = 'https://www.eporner.com/video-fjYBKJIK47f/twins-tail-sex-2/';
+        $curl_connection = curl_init($url);
+        curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+        curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+        $html = curl_exec($curl_connection);
+        curl_close($curl_connection);
+
+        $data = Helper::get_string_between($html, '<div class="dloaddivcol">', '</div>');
+        $dom = new \DOMDocument();
+        $dom->loadHTML('<meta http-equiv="content-type" content="text/html; charset=utf-8">'.$data);
+        $links = $dom->getElementsByTagName('a');
+        foreach ($links as $link) {
+            $res = Helper::get_string_between($link->textContent, 'Download MP4 (', 'p,');
+            $href = 'https://www.eporner.com'.$link->getAttribute('href');
+            $curl_connection = curl_init($href);
+            curl_setopt($curl_connection, CURLOPT_HEADER, true);
+            curl_setopt($curl_connection, CURLOPT_FOLLOWLOCATION, false);
+            curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+            $result = curl_exec($curl_connection);
+            curl_close($curl_connection);
+            if (preg_match('~Location: (.*)~i', $result, $match)) {
+               $location = trim($match[1]);
+               $title = Helper::get_string_between($location, '?dload=', '.mp4');
+               $location = str_replace($title, '思春期SEX 2 - Hanime1.me', $location);
+               $downloads[$res] = $location;
+            } else {
+
+            }
+        }
+        return $downloads; */
+
         /* $videos = Video::where('sd', 'like', '%rule34%')->get();
         foreach ($videos as $video) {
             $video->outsource = true;
             $video->save();
         } */
-
-        /* $url = 'https://spankbang.com/5yx9r/video/convenient+sex+friends+2';
-
-        if ($request->method == 'curl') {
-            $curl_connection = curl_init($url);
-            curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
-            curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
-            $html = curl_exec($curl_connection);
-            curl_close($curl_connection);
-
-        } elseif ($request->method == 'browsershot') {
-            $html = Spankbang::getBrowsershotHtml($url);
-        }
-
-        return $html; */
-
 
         /* $videos = Video::where('sd', 'ilike', '%xvideos%')->where('foreign_sd', 'ilike', '%"error"%')->orderBy('id', 'desc')->get();
         foreach ($videos as $video) {
@@ -1089,6 +1105,41 @@ class BotController extends Controller
         }
 
         Log::info('Rule34 user '.$user->name.' upload ended...');
+    }
+
+    public function updateHembed()
+    {
+        Log::info('Hembed update started...');
+
+        $videos = Video::where('foreign_sd', 'like', '%"hembed"%')->select('id', 'title', 'sd', 'outsource', 'tags_array', 'foreign_sd', 'created_at')->get();
+
+        foreach ($videos as $video) {
+            $source = $video->foreign_sd['hembed'];
+            if (strpos($source, '1080p') !== false) {
+                $qualities['1080'] = Helper::sign_bcdn_url($source, env('BUNNY_TOKEN'), 43200);
+                $source = str_replace('-1080p.mp4', '-720p.mp4', $source);
+            }
+            if (strpos($source, '720p') !== false) {
+                $qualities['720'] = Helper::sign_bcdn_url($source, env('BUNNY_TOKEN'), 43200);
+                $source = str_replace('-720p.mp4', '-480p.mp4', $source);
+            }
+            if (strpos($source, '480p') !== false) {
+                $qualities['480'] = Helper::sign_bcdn_url($source, env('BUNNY_TOKEN'), 43200);
+                $source = str_replace('-480p.mp4', '-240p.mp4', $source);
+            }
+            if (strpos($source, '240p') !== false) {
+                $qualities['240'] = Helper::sign_bcdn_url($source, env('BUNNY_TOKEN'), 43200);
+            }
+
+            $video->sd = reset($qualities);
+            $video->qualities = $qualities;
+            $video->outsource = false;
+            $video->save();
+
+            Log::info('Hembed update ID#'.$video->id.' success...');
+        }
+
+        Log::info('Hembed update ended...');
     }
 
     public function translateRule34()

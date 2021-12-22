@@ -65,6 +65,8 @@ Route::group(['middleware' => 'admin'], function () {
 
 	Route::get('/comments', 'BotController@comments');
 
+	Route::get('/updateHembed', 'BotController@updateHembed');
+
 	Route::get('/updateSpankbang', 'BotController@updateSpankbang');
 	Route::get('/updateSpankbangEmergent', 'BotController@updateSpankbangEmergent');
 	Route::get('/updateSpankbangErrors', 'BotController@updateSpankbangErrors');
