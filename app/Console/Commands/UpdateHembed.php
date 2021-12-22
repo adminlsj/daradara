@@ -45,6 +45,7 @@ class UpdateHembed extends Command
         $videos = Video::where('foreign_sd', 'like', '%"hembed"%')->select('id', 'title', 'sd', 'outsource', 'tags_array', 'foreign_sd', 'created_at')->get();
 
         foreach ($videos as $video) {
+            $qualities = [];
             $source = $video->foreign_sd['hembed'];
             if (strpos($source, '1080p') !== false) {
                 $qualities['1080'] = Helper::sign_bcdn_url($source, env('BUNNY_TOKEN'), 43200);
