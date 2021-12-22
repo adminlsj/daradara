@@ -30,7 +30,7 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        /* $downloads = [];
+        $downloads = [];
         $url = 'https://www.eporner.com/video-fjYBKJIK47f/twins-tail-sex-2/';
         $curl_connection = curl_init($url);
         curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
@@ -61,7 +61,7 @@ class BotController extends Controller
 
             }
         }
-        return $downloads; */
+        return $downloads;
 
         /* $videos = Video::where('sd', 'like', '%rule34%')->get();
         foreach ($videos as $video) {
