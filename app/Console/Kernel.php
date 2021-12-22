@@ -21,6 +21,7 @@ class Kernel extends ConsoleKernel
 
         'App\Console\Commands\UpdateXvideos',
         'App\Console\Commands\UpdateXvideosErrors',
+        'App\Console\Commands\UpdateHembed',
         'App\Console\Commands\UpdateYoujizz',
         'App\Console\Commands\UpdateSpankbang',
         'App\Console\Commands\UpdateSpankbangEmergent',
@@ -42,6 +43,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('hanime1:reset-day-views')->dailyAt('05:00');
         $schedule->command('hanime1:reset-week-views')->weeklyOn(1, '05:00');
 
+        $schedule->command('hanime1:update-hembed')->cron('0 */4 * * *');
         $schedule->command('hanime1:update-xvideoserrors')->everyThirtyMinutes();
         $schedule->command('hanime1:update-youjizz')->cron('0 */6 * * *');
         $schedule->command('hanime1:update-spankbangemergent')->everyThirtyMinutes();
