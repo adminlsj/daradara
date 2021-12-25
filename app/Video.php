@@ -21,6 +21,10 @@ class Video extends Model
         'id', 'user_id', 'playlist_id', 'comic_id', 'title', 'caption', 'tags', 'sd', 'qualities', 'imgur', 'current_views', 'views', 'outsource', 'foreign_sd', 'data', 'created_at', 'uploaded_at', 'duration', 'translations', 'cover', 'tags_array'
     ];
 
+    public static $banned_ip = [
+        '210.6.150.118', '2404:0:823d:8da5:a88:2735:897f:492a', '2401:e180:8870:f78c:5199:1043:9aa0:7809'
+    ];
+
     public static $metadata = [
         '無碼', '番劇', '1080p', '新番預告'
     ];
