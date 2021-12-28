@@ -1,6 +1,6 @@
 <a href="{{ route('video.watch') }}?v={{ $video->id }}" class="row no-gutter">
   <div style="padding-right: 0px; width: 160px; max-width: 50%; position: relative;" class="col-xs-6 col-sm-6 col-md-6">
-    <img style="width: 100%; height: 100%;" src="https://i.imgur.com/2jSdwcGl.jpg">
+    <img style="width: 100%; height: 100%;" src="https://cdn.jsdelivr.net/gh/guaishushukanlifan/Project-H@latest/asset/thumbnail/WENZTSJl.jpg">
     @if ($video->id == $current->id)
 	    <img style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; filter: brightness(15%);" src="{{ $video->thumbL() }}" alt="{{ $video->title }}">
 	    <div style="margin: 0; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-weight: bold">現正播放</div>
