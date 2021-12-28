@@ -30,7 +30,7 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $source = 'https://vdownload.hembed.com/temp/kazoku-240p.mp4';
+        $source = 'https://vdownload.hembed.com/anehame.mp4';
         return $url = Helper::sign_bcdn_url($source, env('BUNNY_TOKEN'), 43200);
 
         /* $downloads = [];

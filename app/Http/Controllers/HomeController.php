@@ -178,7 +178,7 @@ class HomeController extends Controller
         }
 
         if (!$doujin) {
-            $videos = $videos->where('cover', '!=', null)->where('cover', '!=', 'https://i.imgur.com/E6mSQA2.png')->distinct()->paginate(42);
+            $videos = $videos->where('cover', '!=', null)->where('cover', '!=', 'https://i.imgur.com/E6mSQA2.png')->where('cover', '!=', 'https://cdn.jsdelivr.net/gh/guaishushukanlifan/Project-H@latest/asset/cover/E6mSQA2.jpg')->distinct()->paginate(42);
         } else {
             $videos = $videos->with('user:id,name,avatar_temp')->where('cover', '!=', null)->distinct()->paginate(60);
             $is_mobile = Helper::checkIsMobile();

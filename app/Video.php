@@ -9,6 +9,7 @@ use App\Subscribe;
 use App\Comment;
 use App\Like;
 use App\Bot;
+use App\Helper;
 use Spatie\Browsershot\Browsershot;
 
 class Video extends Model
@@ -168,6 +169,42 @@ class Video extends Model
     public function imgurH()
     {
         return "https://i.imgur.com/".$this->imgur."h.jpg";
+    }
+
+    public function thumbL()
+    {
+        if (strpos($this->cover, 'cdn.jsdelivr.net') !== false) {
+            $cover = Helper::get_string_between($this->cover, '/cover/', '.jpg');
+            $thumb = str_replace('/cover/'.$cover, '/thumbnail/'.$this->imgur.'l', $this->cover);
+            return $thumb;
+
+        } else {
+            return "https://i.imgur.com/".$this->imgur."l.jpg";
+        }
+    }
+
+    public function thumbH()
+    {
+        if (strpos($this->cover, 'cdn.jsdelivr.net') !== false) {
+            $cover = Helper::get_string_between($this->cover, '/cover/', '.jpg');
+            $thumb = str_replace('/cover/'.$cover, '/thumbnail/'.$this->imgur.'h', $this->cover);
+            return $thumb;
+
+        } else {
+            return "https://i.imgur.com/".$this->imgur."h.jpg";
+        }
+    }
+
+    public function thumb()
+    {
+        if (strpos($this->cover, 'cdn.jsdelivr.net') !== false) {
+            $cover = Helper::get_string_between($this->cover, '/cover/', '.jpg');
+            $thumb = str_replace('/cover/'.$cover, '/thumbnail/'.$this->imgur, $this->cover);
+            return $thumb;
+
+        } else {
+            return "https://i.imgur.com/".$this->imgur.".jpg";
+        }
     }
 
     static function get_string_between($string, $start, $end){

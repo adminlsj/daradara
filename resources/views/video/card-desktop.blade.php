@@ -1,7 +1,7 @@
-<div class="load-more-wrapper video-card preview-trigger card-desktop" data-poster="{{ $video->imgurL() }}" data-preview="{{ isset($video->qualities) ? $video->qualities[array_key_first($video->qualities)] : $video->sd }}">
+<div class="load-more-wrapper video-card preview-trigger card-desktop" data-poster="{{ $video->thumbL() }}" data-preview="{{ isset($video->qualities) ? $video->qualities[array_key_first($video->qualities)] : $video->sd }}">
 	<a style="font-size: 14px; text-decoration: none;" href="{{ route('video.watch').'?v='.$video->id }}" title="{{ $video->title }}">
         <div class="preview-wrapper" style="position: relative;">
-		    <img class="lazy" style="width: 100%; height: 100%;" src="https://i.imgur.com/WENZTSJl.jpg" data-src="{{ $video->imgurL() }}" data-srcset="{{ $video->imgurL() }}" alt="{{ $video->title }}">
+		    <img class="lazy" style="width: 100%; height: 100%;" src="https://cdn.jsdelivr.net/gh/guaishushukanlifan/Project-H@latest/asset/thumbnail/WENZTSJl.jpg" data-src="{{ $video->thumbL() }}" data-srcset="{{ $video->thumbL() }}" alt="{{ $video->title }}">
 		    @if ($video->duration != null)
 			    <div style="position: absolute; right: 4px; bottom: 4px; color: white; background-color: rgba(0, 0, 0, 0.75); font-size: 12px; font-weight: 500; padding: 0px 5px; border-radius: 2px; z-index: 1;">
 			    	{{ $video->duration >= 3600 ? gmdate('H:i:s', $video->duration) : gmdate('i:s', $video->duration) }}

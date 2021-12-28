@@ -1,7 +1,7 @@
 <div class="related-watch-wrap hover-lighter" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: -5px;">
 	<a href="{{ route('video.watch') }}?v={{ $video->id }}" class="row no-gutter">
 	  <div style="padding-right: 0px; width: 160px; max-width: 50%; position: relative;" class="col-xs-6 col-sm-6 col-md-6">
-	    <img class="lazy" style="width: 100%; height: 100%;" src="{{ $video->imgur16by9() }}" data-src="{{ $video->imgurL() }}" data-srcset="{{ $video->imgurL() }}" alt="{{ $video->title }}">
+	    <img class="lazy" style="width: 100%; height: 100%;" src="https://cdn.jsdelivr.net/gh/guaishushukanlifan/Project-H@latest/asset/thumbnail/WENZTSJl.jpg" data-src="{{ $video->thumbL() }}" data-srcset="{{ $video->thumbL() }}" alt="{{ $video->title }}">
 	    @if ($video->duration != null)
 		    <div style="position: absolute; right: 4px; bottom: 4px; color: white; background-color: rgba(0, 0, 0, 0.75); font-size: 10px; font-weight: 400; padding: 0px 3px; border-radius: 2px; z-index: 1">
 		    	{{ $video->duration >= 3600 ? gmdate('H:i:s', $video->duration) : gmdate('i:s', $video->duration) }}
