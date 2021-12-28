@@ -32,7 +32,7 @@
 			});
 		</script>
 
-		<img style="width: 100%; -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0.3)));" src="https://i.imgur.com/KzhJhsth.jpg" alt="逆轉魔女裁判 ～要被痴女魔女審判了～">
+		<img style="width: 100%; -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0.3)));" src="https://cdn.jsdelivr.net/gh/guaishushukanlifan/Project-H@latest/asset/thumbnail/KzhJhsth.jpg" alt="逆轉魔女裁判 ～要被痴女魔女審判了～">
 		<div id="home-banner-wrapper" style="position: absolute; left: 4%; color: white">
 			<h3 style="font-weight: bold"><span style="color: crimson">H</span>anime1<span style="color: crimson">.</span>me</h3>
 			<h1 style="margin: 0; font-weight: bold;">逆轉魔女裁判</h1>
@@ -44,7 +44,7 @@
 	</div>
 
 	<div class="hidden-sm hidden-md hidden-lg" style="position: relative;">
-		<img style="width: 100%; -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));" src="https://i.imgur.com/HhP30zt.jpg">
+		<img style="width: 100%; -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));" src="https://cdn.jsdelivr.net/gh/guaishushukanlifan/Project-H@latest/asset/cover/HhP30zt.jpg">
 		<div style="position: absolute; left: 50%; -webkit-transform: translateX(-50%); transform: translateX(-50%); width: 96%; bottom: 14%; text-align: center; color: white">
 			<h3 style="font-weight: bold; font-size: 20px;"><span style="color: crimson">H</span>anime1<span style="color: crimson">.</span>me</h3>
 			<h1 style="font-size: 28px; font-weight: bold; margin: 0">傲嬌公主</h1>
