@@ -30,8 +30,16 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $source = 'https://vdownload.hembed.com/anehame.mp4';
-        return $url = Helper::sign_bcdn_url($source, env('BUNNY_TOKEN'), 43200);
+        $url = 'https://i.imgur.com/iJkm09Z.png';
+        $file_name = basename($url);
+        if (file_put_contents($file_name, file_get_contents($url)))
+        {
+            echo "File downloaded successfully";
+        }
+        else
+        {
+            echo "File downloading failed.";
+        }
 
         /* $downloads = [];
         $url = 'https://www.eporner.com/video-fjYBKJIK47f/twins-tail-sex-2/';
