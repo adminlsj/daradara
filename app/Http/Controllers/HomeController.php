@@ -20,9 +20,9 @@ class HomeController extends Controller
     {
         $count = 28;
 
-        $upload = Video::whereOrderBy('uploaded_at', $count, null)->where('imgur', '!=', 'WENZTSJ')->get();
-        $newest = Video::whereOrderBy('created_at', $count)->where('title', 'not like', '[新番預告]%')->get();
-        $trending = Video::whereOrderBy('views', $count)->get();
+        $upload = Video::whereOrderBy('uploaded_at', $count, false)->where('imgur', '!=', 'WENZTSJ')->get();
+        $newest = Video::whereOrderBy('created_at', $count, true)->where('title', 'not like', '[新番預告]%')->get();
+        $trending = Video::whereOrderBy('views', $count, true)->get();
 
         $tag1 = Video::whereHasTags(['巨乳'], $count)->get();
         $tag2 = Video::whereHasTags(['貧乳'], $count)->get();

@@ -224,15 +224,19 @@ class Video extends Model
             }
         })->where('cover', '!=', null)
           ->where('cover', '!=', 'https://i.imgur.com/E6mSQA2.png')
+          ->where('cover', '!=', 'https://cdn.jsdelivr.net/gh/guaishushukanlifan/Project-H@latest/asset/cover/E6mSQA2.jpg')
           ->select('id', 'title', 'cover')      
           ->inRandomOrder()
           ->limit($count);
     }
 
-    public function scopeWhereOrderBy($query, $order, $count, $uncover = 'https://i.imgur.com/E6mSQA2.png')
+    public function scopeWhereOrderBy($query, $order, $count, $uncover)
     {
+        if ($uncover) {
+            $query = $query->where('cover', '!=', 'https://i.imgur.com/E6mSQA2.png')
+                           ->where('cover', '!=', 'https://cdn.jsdelivr.net/gh/guaishushukanlifan/Project-H@latest/asset/cover/E6mSQA2.jpg');
+        }
         return $query->orderBy($order, 'desc')
-                     ->where('cover', '!=', $uncover)
                      ->select('id', 'title', 'cover', 'imgur')
                      ->limit($count);
     }
