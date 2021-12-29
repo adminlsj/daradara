@@ -93,6 +93,7 @@ class UserController extends Controller
                     'uploaded_at' => Carbon::createFromFormat('Y-m-d\TH:i:s', request('created_at'))->format('Y-m-d H:i:s'),
                     'foreign_sd' => $sd == $foreign_sd ? null : $foreign_sd,
                     'cover' => request('cover'),
+                    'uncover' => strpos(request('cover'), 'E6mSQA2') !== false ? true : false,
                 ]);
 
                 return Redirect::route('video.watch', ['v' => $video->id]);
