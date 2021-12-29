@@ -222,9 +222,7 @@ class Video extends Model
             foreach ($tags as $tag) {
                 $query->orWhere('tags_array', 'ilike', '%"'.$tag.'"%');
             }
-        })->where('cover', '!=', null)
-          ->where('cover', '!=', 'https://i.imgur.com/E6mSQA2.png')
-          ->where('cover', '!=', 'https://cdn.jsdelivr.net/gh/guaishushukanlifan/Project-H@latest/asset/cover/E6mSQA2.jpg')
+        })->where('uncover', false)
           ->select('id', 'title', 'cover')      
           ->inRandomOrder()
           ->limit($count);
@@ -233,8 +231,7 @@ class Video extends Model
     public function scopeWhereOrderBy($query, $order, $count, $uncover)
     {
         if ($uncover) {
-            $query = $query->where('cover', '!=', 'https://i.imgur.com/E6mSQA2.png')
-                           ->where('cover', '!=', 'https://cdn.jsdelivr.net/gh/guaishushukanlifan/Project-H@latest/asset/cover/E6mSQA2.jpg');
+            $query = $query->where('uncover', false);
         }
         return $query->orderBy($order, 'desc')
                      ->select('id', 'title', 'cover', 'imgur')

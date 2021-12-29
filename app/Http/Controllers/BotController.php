@@ -30,16 +30,58 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $url = 'https://i.imgur.com/iJkm09Z.png';
-        $file_name = basename($url);
-        if (file_put_contents($file_name, file_get_contents($url)))
-        {
-            echo "File downloaded successfully";
+        $videos = Video::all();
+        foreach ($videos as $video) {
+            if (strpos($video->cover, 'E6mSQA2') !== false) {
+                $video->uncover = true;
+            } else {
+                $video->uncover = false;
+            }
+            $video->save();
         }
-        else
-        {
-            echo "File downloading failed.";
-        }
+
+
+        // download imgurs
+        /* $videos = Video::where('cover', 'not like', '%cdn.jsdelivr.net%')->orderBy('id', 'asc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
+
+        foreach ($videos as $video) {
+            // cover
+            $file_name = str_replace('.png', '.jpg', basename($video->cover));
+            if (!file_exists(public_path('cover/'.$file_name))) {
+                if (file_put_contents('cover/'.$file_name, file_get_contents($video->cover))) {
+                    echo 'cover '.$file_name.' success<br>';
+                } else {
+                    echo 'cover '.$file_name.' failed<br>';
+                }
+            } else {
+                echo 'cover '.$file_name.' exists<br>';
+            }
+
+            // thumbnail
+            $huge = $video->imgur.'h.jpg';
+            if (!file_exists('thumbnail/'.public_path($huge))) {
+                if (file_put_contents('thumbnail/'.$huge, file_get_contents('https://i.imgur.com/'.$huge))) {
+                    echo 'thumbH '.$huge.' success<br>';
+                } else {
+                    echo 'thumbH '.$huge.' failed<br>';
+                }
+            } else {
+                echo 'thumbH '.$huge.' exists<br>';
+            }
+
+            $large = $video->imgur.'l.jpg';
+            if (!file_exists('thumbnail/'.public_path($large))) {
+                if (file_put_contents('thumbnail/'.$large, file_get_contents('https://i.imgur.com/'.$large))) {
+                    echo 'thumbL '.$large.' success<br>';
+                } else {
+                    echo 'thumbL '.$large.' failed<br>';
+                }
+            } else {
+                echo 'thumbL '.$large.' exists<br>';
+            }
+        } */
+
+        //---------------------------------------------------------------------------------------------------------
 
         /* $downloads = [];
         $url = 'https://www.eporner.com/video-fjYBKJIK47f/twins-tail-sex-2/';
