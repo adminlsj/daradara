@@ -30,17 +30,6 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $videos = Video::all();
-        foreach ($videos as $video) {
-            if (strpos($video->cover, 'E6mSQA2') !== false) {
-                $video->uncover = true;
-            } else {
-                $video->uncover = false;
-            }
-            $video->save();
-        }
-
-
         // download imgurs
         /* $videos = Video::where('cover', 'not like', '%cdn.jsdelivr.net%')->orderBy('id', 'asc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
 
