@@ -30,6 +30,15 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
+        $videos = Video::where('sd', 'like', '%rule34%')->select('id', 'sd', 'foreign_sd')->get();
+
+        foreach ($videos as $video) {
+            $temp = $video->foreign_sd;
+            $temp['rule34'] = $video->sd;
+            $video->foreign_sd = $temp;
+            $video->save();
+        }
+
         // download imgurs
         /* $videos = Video::where('cover', 'not like', '%cdn.jsdelivr.net%')->orderBy('id', 'asc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
 
