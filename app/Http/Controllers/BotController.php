@@ -30,12 +30,21 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $videos = Video::where('sd', 'like', '%rule34%')->select('id', 'sd', 'foreign_sd')->get();
+        $videos = Video::where('foreign_sd', 'like', '%"rule34"%')->where('sd', 'like', '%motherless%')->where('qualities', null)->select('id', 'sd', 'foreign_sd')->get();
 
         foreach ($videos as $video) {
-            $temp = $video->foreign_sd;
-            $temp['rule34'] = $video->sd;
-            $video->foreign_sd = $temp;
+            if (strpos($video->sd, '-720p') !== false) {
+                $_720p = $video->sd;
+                $_480p = str_replace('-720p', '', $video->sd);
+                $qualities = ['480' => $_480p, '720' => $_720p];
+                $video->qualities = $qualities;
+
+            } else {
+                $_480p = $video->sd;
+                $qualities = ['480' => $_480p];
+                $video->qualities = $qualities;
+            }
+
             $video->save();
         }
 
