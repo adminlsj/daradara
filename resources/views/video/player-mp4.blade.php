@@ -11,8 +11,8 @@
   @endif
 
   @if ($video->has_subtitles)
-    <track kind="captions" label="繁體中文" srclang="zh_hant" src="https://cdn.jsdelivr.net/gh/guaishushukanlifan/Project-H@latest/data/{{ $video->id }}_zh_hant.vtt" default>
-    <track kind="captions" label="简体中文" srclang="zh_hans" src="https://cdn.jsdelivr.net/gh/guaishushukanlifan/Project-H@latest/data/{{ $video->id }}_zh_hans.vtt">
+    <track kind="captions" label="繁體中文" srclang="zh_hant" src="{{ $video->vtt('zh_hant') }}" default>
+    <track kind="captions" label="简体中文" srclang="zh_hans" src="{{ $video->vtt('zh_hans') }}">
   @endif
 </video>
 <script>
@@ -63,7 +63,6 @@
     }
   });
   window.player = player;
-  player.currentTrack = player.currentTrack;
 
   @if ($video->has_subtitles)
     player.on('enterfullscreen', event => {

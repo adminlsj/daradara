@@ -17,6 +17,7 @@ use App\Comment;
 use App\User;
 use Carbon\Carbon;
 use App\Spankbang;
+use App\Youjizz;
 use App\Motherless;
 use App\Nhentai;
 use Storage;
@@ -29,24 +30,6 @@ class BotController extends Controller
     {
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
-
-        $videos = Video::where('foreign_sd', 'like', '%"rule34"%')->where('sd', 'like', '%motherless%')->where('qualities', null)->select('id', 'sd', 'foreign_sd')->get();
-
-        foreach ($videos as $video) {
-            if (strpos($video->sd, '-720p') !== false) {
-                $_720p = $video->sd;
-                $_480p = str_replace('-720p', '', $video->sd);
-                $qualities = ['480' => $_480p, '720' => $_720p];
-                $video->qualities = $qualities;
-
-            } else {
-                $_480p = $video->sd;
-                $qualities = ['480' => $_480p];
-                $video->qualities = $qualities;
-            }
-
-            $video->save();
-        }
 
         // download imgurs
         /* $videos = Video::where('cover', 'not like', '%cdn.jsdelivr.net%')->orderBy('id', 'asc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
@@ -1009,6 +992,11 @@ class BotController extends Controller
         }
 
         Log::info('Youjizz update ended...');
+    }
+
+    public function updateYoujizzDownloads()
+    {
+        Youjizz::updateYoujizzDownloads();
     }
 
     public function updateXvideos(Request $request)

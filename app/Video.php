@@ -15,7 +15,7 @@ use Spatie\Browsershot\Browsershot;
 class Video extends Model
 {
     protected $casts = [
-        'foreign_sd' => 'array', 'data' => 'array', 'translations' => 'array', 'qualities' => 'array', 'tags_array' => 'array'
+        'foreign_sd' => 'array', 'data' => 'array', 'translations' => 'array', 'qualities' => 'array', 'downloads' => 'array', 'tags_array' => 'array'
     ];
 
     protected $fillable = [
@@ -205,6 +205,13 @@ class Video extends Model
         } else {
             return "https://i.imgur.com/".$this->imgur.".jpg";
         }
+    }
+
+    public function vtt($lang)
+    {
+        $cover = Helper::get_string_between($this->cover, '/cover/', '.jpg');
+        $vtt = str_replace('/cover/'.$cover.'.jpg', '/vtt/'.$this->id.'_'.$lang.'.vtt', $this->cover);
+        return $vtt;
     }
 
     static function get_string_between($string, $start, $end){
