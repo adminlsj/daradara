@@ -26,7 +26,7 @@ class VideoController extends Controller
     {
         $vid = $request->v;
 
-        if (is_numeric($vid) && $video = Video::with('watch:id,title')->select('id', 'user_id', 'playlist_id', 'comic_id', 'title', 'translations', 'caption', 'cover', 'tags_array', 'sd', 'qualities', 'outsource', 'has_subtitles', 'current_views', 'views', 'imgur', 'foreign_sd', 'duration', 'created_at', 'uploaded_at')->withCount('likes')->find($vid)) {
+        if (is_numeric($vid) && $video = Video::with('watch:id,title')->select('id', 'user_id', 'playlist_id', 'comic_id', 'title', 'translations', 'caption', 'cover', 'tags_array', 'sd', 'qualities', 'downloads', 'outsource', 'has_subtitles', 'current_views', 'views', 'imgur', 'foreign_sd', 'duration', 'created_at', 'uploaded_at')->withCount('likes')->find($vid)) {
 
             $current = $video;
             $doujin = false;
@@ -91,13 +91,15 @@ class VideoController extends Controller
     public function download(Request $request)
     {
         $is_mobile = Helper::checkIsMobile();
-        $video = Video::select('id', 'user_id', 'playlist_id', 'title', 'translations', 'caption', 'cover', 'tags', 'sd', 'qualities', 'outsource', 'current_views', 'views', 'imgur', 'foreign_sd', 'duration', 'created_at', 'uploaded_at')->find($request->v);
+        $video = Video::select('id', 'user_id', 'playlist_id', 'title', 'translations', 'caption', 'cover', 'tags', 'sd', 'qualities', 'downloads', 'outsource', 'current_views', 'views', 'imgur', 'foreign_sd', 'duration', 'created_at', 'uploaded_at')->find($request->v);
 
-        if ($video->qualities == null) {
+        if ($video->qualities == null && $video->downloads == null) {
             abort(403);
         }
 
-        return view('video.download', compact('video', 'is_mobile'));
+        $qualities = $video->downloads != null ? $video->downloads : $video->qualities;
+
+        return view('video.download', compact('video', 'qualities', 'is_mobile'));
     }
 
     public function like(Request $request)

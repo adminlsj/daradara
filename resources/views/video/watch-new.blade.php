@@ -75,16 +75,16 @@
           </div>
         </div>
 
-        @if ($video->qualities == null)
-          <a style="position: absolute; cursor: pointer; display: inline-block;" id="downloadBtn" class="single-icon-wrapper" title="無法下載">
-            <div class="single-icon no-select" style="background-color: inherit !important">
-              <i class="material-icons noselect" style="font-size: 23px; padding-top: 7px; padding-left: 6px; color: dimgray">download</i>
-            </div>
-          </a>
-        @else
+        @if ($video->qualities != null || $video->downloads != null)
           <a href="{{ route('video.download') }}?v={{ $video->id }}" target="_blank" style="position: absolute; cursor: pointer; display: inline-block; cursor: pointer;" id="downloadBtn" class="single-icon-wrapper" title="下載">
             <div class="single-icon no-select">
               <i class="material-icons noselect" style="font-size: 23px; padding-top: 7px; padding-left: 6px; color: white">download</i>
+            </div>
+          </a>
+        @else
+          <a style="position: absolute; cursor: pointer; display: inline-block;" id="downloadBtn" class="single-icon-wrapper" title="無法下載">
+            <div class="single-icon no-select" style="background-color: inherit !important">
+              <i class="material-icons noselect" style="font-size: 23px; padding-top: 7px; padding-left: 6px; color: dimgray">download</i>
             </div>
           </a>
         @endif

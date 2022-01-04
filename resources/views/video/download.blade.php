@@ -38,7 +38,7 @@
 							    <th class="hidden-xs">檔案大小</th>
 							    <th>下載鏈結</th>
 							  </tr>
-				        @foreach (array_reverse($video->qualities, true) as $key => $value)
+				        @foreach (array_reverse($qualities, true) as $key => $value)
 						        <tr>
 									    <td style="text-align: center;"><span style="vertical-align: middle;" class="material-icons">play_circle_filled</span></td>
 									    <td>
