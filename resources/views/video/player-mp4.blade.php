@@ -63,6 +63,7 @@
     }
   });
   window.player = player;
+  player.currentTrack = player.currentTrack;
 
   @if ($video->has_subtitles)
     player.on('enterfullscreen', event => {
