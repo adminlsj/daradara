@@ -1,4 +1,4 @@
-<form action="{{ route('bot.updateCaptions') }}" method="POST">
+<form action="{{ $action }}" method="POST">
   {{ csrf_field() }}
 
   <textarea style="width: 70%;" name="captions" id="captions" rows="30" placeholder="captions"></textarea>

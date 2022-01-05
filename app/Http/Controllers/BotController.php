@@ -755,9 +755,10 @@ class BotController extends Controller
         }
     }
 
-    public function editCaptions()
+    public function editCaptions(Request $request)
     {
-        return view('layouts.editCaptions');
+        $action = $request->action == 'check' ? route('bot.checkCaptions') : route('bot.updateCaptions');
+        return view('layouts.editCaptions', compact('action'));
     }
 
     public function updateCaptions(Request $request)
@@ -831,6 +832,77 @@ class BotController extends Controller
         }
 
         return '<pre>'.$captions.'</pre>';
+    }
+
+    public function checkCaptions(Request $request)
+    {
+        $captions = $request->captions;
+        $captions_array = explode(PHP_EOL, $captions);
+        $originals = [];
+        foreach ($captions_array as $value) {
+            if (strpos($value, '-->') !== false) {
+                array_push($originals, str_replace("\r", '', $value));
+            }
+        }
+
+        // return $originals;
+
+        $loop = 0;
+        foreach ($originals as $original) {
+            if ($loop <= count($originals) - 2) {
+                $current = $innerLoop = 0;
+                $current_time = explode(' --> ', $original)[1];
+                $current_data = explode(':', $current_time);
+                foreach ($current_data as $value) {
+                    if ($value != '00') {
+                        $temp = ltrim($value, '0');
+                        switch ($innerLoop) {
+                            case 0:
+                                $current = $current + $temp * 60 * 60;
+                                break;
+
+                            case 1:
+                                $current = $current + $temp * 60;
+                                break;
+
+                            case 2:
+                                $current = $current + $temp;
+                                break;
+                        }
+                    }
+                    $innerLoop++;
+                }
+
+                $next = $innerLoop = 0;
+                $next_time = explode(' --> ', $originals[$loop + 1])[0];
+                $next_data = explode(':', $next_time);
+                foreach ($next_data as $value) {
+                    if ($value != '00') {
+                        $temp = ltrim($value, '0');
+                        switch ($innerLoop) {
+                            case 0:
+                                $next = $next + $temp * 60 * 60;
+                                break;
+
+                            case 1:
+                                $next = $next + $temp * 60;
+                                break;
+
+                            case 2:
+                                $next = $next + $temp;
+                                break;
+                        }
+                    }
+                    $innerLoop++;
+                }
+
+                if ($current > $next) {
+                    echo $current_time.'<br>';
+                }
+
+                $loop++;
+            }
+        }
     }
 
     public function setVideoDuration(Request $request)
