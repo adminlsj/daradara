@@ -1,14 +1,6 @@
 <div style="text-align: center; margin-top: 20px; background-color: #202020; padding-bottom: -100px; height: 275px; overflow: hidden;">
 	<div style="color: hsla(0, 100%, 100%, .5); margin-bottom: 1px; background-color: #313131; padding: 2px 0px">點點廣告，贊助我們（●´∀｀）ノ♡</div>
-	<script type="application/javascript">
-	    var ad_idzone = "4372842",
-	    ad_width = "300",
-	    ad_height = "250";
-	</script>
-	<script type="application/javascript" src="https://a.realsrv.com/ads.js"></script>
-	<noscript>
-	    <iframe src="https://syndication.realsrv.com/ads-iframe-display.php?idzone=4372842&output=noscript" width="300" height="250" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
-	</noscript>
+	@include('layouts.exoclick', ['id' => '4372842', 'width' => '300', 'height' => '250'])
 
 	<span style="vertical-align: top; margin-top: 5px;">
 		<!-- JuicyAds v3.1 -->
@@ -24,8 +16,5 @@
 		</script>
 	</span>
 
-	<script type="application/javascript" src="https://a.realsrv.com/ads.js"></script>
-	<noscript>
-	    <iframe src="https://syndication.realsrv.com/ads-iframe-display.php?idzone=4372842&output=noscript" width="300" height="250" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
-	</noscript>
+	@include('layouts.exoclick', ['id' => '4372842', 'width' => '300', 'height' => '250'])
 </div>

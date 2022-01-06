@@ -15,15 +15,7 @@
 		<!--JuicyAds END-->
 	</span>
 
-	<script type="application/javascript">
-	    var ad_idzone = "4372316",
-	    ad_width = "300",
-	    ad_height = "250"
-	</script>
-	<script type="application/javascript" src="https://a.realsrv.com/ads.js"></script>
-	<noscript>
-	    <iframe src="https://syndication.realsrv.com/ads-iframe-display.php?idzone=4372316&output=noscript&type=300x250" width="300" height="250" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
-	</noscript>
+	@include('layouts.exoclick', ['id' => '4372316', 'width' => '300', 'height' => '250'])
 </div>
 
 <div class="hidden-sm hidden-md hidden-lg" style="text-align: center; padding-top: 20px; padding-bottom: 15px;">
