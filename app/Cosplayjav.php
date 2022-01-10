@@ -13,6 +13,9 @@ class Cosplayjav
     ];
 
     public static $translations = [
+        "Kirisaki_Chitoge" => '桐崎千棘',
+        "deai_CHU" => '出会いCHU',
+        "nisekoi" => '偽戀',
         "Yokomiya Nanami (横宮七海)" => '横宮七海',
         "Saikyou_Zokusei" => '最強属性',
         "Katsushika Hokusai (葛飾北斎)" => '葛飾北齋',
