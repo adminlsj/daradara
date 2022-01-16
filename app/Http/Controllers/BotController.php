@@ -1150,6 +1150,20 @@ class BotController extends Controller
         Motherless::checkMotherless();
     }
 
+    public function addHembedSource(Request $request)
+    {
+        $quality = $request->quality ? $request->quality : '720p';
+        $vid = $request->v;
+        if (is_numeric($vid) && $video = Video::select('id', 'sd', 'foreign_sd')->find($vid)) {
+            $temp = $video->foreign_sd;
+            $temp['hembed'] = 'https://vdownload.hembed.com/'.$video->id.'-'.$quality.'.mp4';
+            $video->foreign_sd = $temp;
+            $video->save();
+            return 'Updated';
+        }
+        return '403 Forbidden';
+    }
+
     public function uploadRule34(Request $request)
     {
         $artists = Rule34::$artists;
