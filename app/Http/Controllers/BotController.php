@@ -31,7 +31,7 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        return $requests = Browsershot::url('https://www.agefans.vip/play/20220027?playid=2_2')
+        return $requests = Browsershot::url('https://www.agemys.com/play/20220035?playid=2_2')
             ->useCookies(['username' => 'admin'])
             ->timeout(180)
             ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
