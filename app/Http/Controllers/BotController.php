@@ -31,18 +31,7 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $lang = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
-        if (str_starts_with($lang, 'zh-CN') || str_starts_with($lang, 'zh-CHS')) {
-            return 'chs';
-        } else {
-            return 'cht';
-        }
-
-        return $requests = Browsershot::url('https://www.agemys.com/play/20220027?playid=2_3')
-            ->useCookies(['username' => 'admin'])
-            ->timeout(180)
-            ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
-            ->triggeredRequests();
+        return Helper::sign_bcdn_url('https://hmtest.b-cdn.net/test.mp4', 'e720f88c-c849-4bae-a5ab-7ec1b80ddf4d', 43200);
 
         // download imgurs
         /* $videos = Video::where('cover', 'not like', '%cdn.jsdelivr.net%')->orderBy('id', 'asc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
