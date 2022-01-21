@@ -62,8 +62,8 @@ th, td {
 
 #player-switch-lang {
   position: absolute;
-  top: 9px;
-  right: 25px;
+  top: 10px;
+  left: 10px;
   z-index: 1;
   color: white; 
   background-color: rgba(0, 0, 0, 0.75); 
@@ -1696,10 +1696,6 @@ div.sticky {
     font-size: 2.8vw !important;
   }
 
-  #player-switch-lang {
-    right: 9px;
-  }
-
   #comic-nav {
     padding: 0 5px;
   }
@@ -1963,9 +1959,8 @@ div.sticky {
 
   #player-switch-lang {
     top: 7px;
-    right: 8px;
+    left: 7px;
     font-size: 15px;
-    padding: 6px 12px; 
   }
 
   #comics-search-tag-top-row {
