@@ -5,21 +5,21 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\Spankbang;
 
-class UpdateSpankbangEmergent extends Command
+class UpdateSpankbangSc1 extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'hanime1:update-spankbangemergent';
+    protected $signature = 'hanime1:update-spankbangsc1';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Update hentai with spankbang as source for emergent';
+    protected $description = 'Update hentai with spankbang sc as source part 1';
 
     /**
      * Create a new command instance.
@@ -38,6 +38,6 @@ class UpdateSpankbangEmergent extends Command
      */
     public function handle()
     {
-        Spankbang::UpdateSpankbangEmergent();
+        Spankbang::updateSpankbangSc(1, 1);
     }
 }

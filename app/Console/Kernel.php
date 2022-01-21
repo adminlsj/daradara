@@ -24,7 +24,6 @@ class Kernel extends ConsoleKernel
         'App\Console\Commands\UpdateHembed',
         'App\Console\Commands\UpdateYoujizz',
         'App\Console\Commands\UpdateSpankbang',
-        'App\Console\Commands\UpdateSpankbangEmergent',
         'App\Console\Commands\UpdateSpankbangErrors',
 
         'App\Console\Commands\UpdateYoujizzDownloads',
@@ -48,7 +47,6 @@ class Kernel extends ConsoleKernel
         $schedule->command('hanime1:update-hembed')->hourly();
         $schedule->command('hanime1:update-xvideoserrors')->everyThirtyMinutes();
         $schedule->command('hanime1:update-youjizz')->cron('0 */6 * * *');
-        $schedule->command('hanime1:update-spankbangemergent')->everyThirtyMinutes();
         $schedule->command('hanime1:update-spankbangerrors')->hourly();
 
         $schedule->command('hanime1:update-youjizzdownloads')->cron('0 */6 * * *');

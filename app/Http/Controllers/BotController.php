@@ -963,11 +963,6 @@ class BotController extends Controller
         }
     }
 
-    public function updateSpankbangEmergent()
-    {
-        Spankbang::updateSpankbangEmergent();
-    }
-
     public function updateSpankbangErrors()
     {
         Spankbang::updateSpankbangErrors();

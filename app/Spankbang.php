@@ -308,12 +308,20 @@ class Spankbang
     {
         $items = 0;
         $base = Carbon::now()->addHours(7)->timestamp;
-        $videos = Video::where('foreign_sd', 'ilike', '%"spankbang"%')->select('id', 'title', 'sd', 'foreign_sd', 'created_at')->get();
+        $videos = Video::where('foreign_sd', 'like', '%"spankbang"%')->orWhere('foreign_sd', 'like', '%"spankbang_sc"%')->select('id', 'title', 'sd', 'sd_sc', 'foreign_sd', 'created_at')->get();
         foreach ($videos as $video) {
             $time = Helper::get_string_between($video->sd, ',', '&m=');
             if ($time < $base) {
                 echo $time.'<br>';
                 $items++;
+            }
+
+            if ($video->sd_sc) {
+                $time = Helper::get_string_between($video->sd_sc, ',', '&m=');
+                if ($time < $base) {
+                    echo $time.'<br>';
+                    $items++;
+                }
             }
         }
         echo $items;

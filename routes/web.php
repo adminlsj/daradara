@@ -69,7 +69,6 @@ Route::group(['middleware' => 'admin'], function () {
 	Route::get('/addHembedSource', 'BotController@addHembedSource');
 
 	Route::get('/updateSpankbang', 'BotController@updateSpankbang');
-	Route::get('/updateSpankbangEmergent', 'BotController@updateSpankbangEmergent');
 	Route::get('/updateSpankbangErrors', 'BotController@updateSpankbangErrors');
 	Route::get('/checkSpankbangOutdate', 'BotController@checkSpankbangOutdate');
 	Route::get('/checkSpankbangOutdateEmergent', 'BotController@checkSpankbangOutdateEmergent');
