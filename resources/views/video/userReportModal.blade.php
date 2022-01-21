@@ -21,8 +21,8 @@
           <form action="{{ route('email.userReport') }}" method="GET">
             <div class="modal-body">
               <input type="hidden" id="video-id" name="video-id" value="{{ $current->id }}">
-              <input type="hidden" id="video-title" name="video-title" value="{{ $current->title }}">
-              <input type="hidden" id="video-sd" name="video-sd" value="{{ $current->sd }}">
+              <input type="hidden" id="video-title" name="video-title" value="{{ $current->title }} ({{ $lang }})">
+              <input type="hidden" id="video-sd" name="video-sd" value="{{ $sd }}">
 
               <h4 style="margin-bottom: -10px;">播放時影片載入失敗嗎？</h4>
               <p style="color: darkgray; padding-bottom: 10px;">

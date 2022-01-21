@@ -2,10 +2,10 @@
 <script src="//cdn.jsdelivr.net/npm/hls.js@latest"></script>
 <link rel="stylesheet" href="https://cdn.plyr.io/3.6.4/plyr.css" />
 <video style="width: 100%; height: 100%" id="player" controls crossorigin playsinline data-poster="{{ $video->thumbH() }}" {{ $doujin ? 'loop' : '' }}>
-  @if ($video->qualities == null)
-    <source src="{!! $video->sd !!}" type="video/mp4" size="720">
+  @if ($qualities == null)
+    <source src="{!! $sd !!}" type="video/mp4" size="720">
   @else
-    @foreach ($video->qualities as $quality => $source)
+    @foreach ($qualities as $quality => $source)
       <source src="{!! $source !!}" type="video/mp4" size="{{ $quality }}"> 
     @endforeach
   @endif
@@ -63,6 +63,16 @@
     }
   });
   window.player = player;
+
+  player.on('play', (event) => {
+    $('#player-switch-lang').removeClass('lang-visible');
+    $('#player-switch-lang').addClass('lang-hidden');
+  });
+
+  player.on('pause', (event) => {
+    $('#player-switch-lang').removeClass('lang-hidden');
+    $('#player-switch-lang').addClass('lang-visible');
+  });
 
   @if ($video->has_subtitles)
     player.on('enterfullscreen', event => {

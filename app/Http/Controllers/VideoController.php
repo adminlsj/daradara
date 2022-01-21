@@ -26,7 +26,7 @@ class VideoController extends Controller
     {
         $vid = $request->v;
 
-        if (is_numeric($vid) && $video = Video::with('watch:id,title')->select('id', 'user_id', 'playlist_id', 'comic_id', 'title', 'translations', 'caption', 'cover', 'tags_array', 'sd', 'qualities', 'downloads', 'outsource', 'has_subtitles', 'current_views', 'views', 'imgur', 'foreign_sd', 'duration', 'created_at', 'uploaded_at')->withCount('likes')->find($vid)) {
+        if (is_numeric($vid) && $video = Video::with('watch:id,title')->select('id', 'user_id', 'playlist_id', 'comic_id', 'title', 'translations', 'caption', 'cover', 'tags_array', 'sd', 'qualities', 'downloads', 'sd_sc', 'qualities_sc', 'downloads_sc', 'outsource', 'has_subtitles', 'current_views', 'views', 'imgur', 'foreign_sd', 'duration', 'created_at', 'uploaded_at')->withCount('likes')->find($vid)) {
 
             $current = $video;
             $doujin = false;
@@ -81,25 +81,73 @@ class VideoController extends Controller
                 $liked = false;
             }
 
+            $lang = $this->getPreferredLanguage();
+            if ($current->sd_sc && $lang == 'zh-CHS') {
+                $sd = $video->sd_sc;
+                $qualities = $video->qualities_sc;
+                $downloads = $video->downloads_sc;
+            } else {
+                $sd = $video->sd;
+                $qualities = $video->qualities;
+                $downloads = $video->downloads;
+            }
+
         } else {
             abort(403);
         }
 
-        return view('video.watch-new', compact('video', 'videos', 'current', 'tags', 'country_code', 'comments_count', 'related', 'doujin', 'is_mobile', 'saved', 'liked'));
+        return view('video.watch-new', compact('video', 'videos', 'current', 'tags', 'country_code', 'comments_count', 'related', 'doujin', 'is_mobile', 'saved', 'liked', 'lang', 'sd', 'qualities', 'downloads'));
     }
 
     public function download(Request $request)
     {
         $is_mobile = Helper::checkIsMobile();
-        $video = Video::select('id', 'user_id', 'playlist_id', 'title', 'translations', 'caption', 'cover', 'tags', 'sd', 'qualities', 'downloads', 'outsource', 'current_views', 'views', 'imgur', 'foreign_sd', 'duration', 'created_at', 'uploaded_at')->find($request->v);
 
-        if ($video->qualities == null && $video->downloads == null) {
+        $vid = $request->v;
+        if (is_numeric($vid) && $video = Video::select('id', 'user_id', 'playlist_id', 'title', 'translations', 'caption', 'cover', 'tags', 'sd', 'qualities', 'downloads', 'sd_sc', 'qualities_sc', 'downloads_sc', 'outsource', 'current_views', 'views', 'imgur', 'foreign_sd', 'duration', 'created_at', 'uploaded_at')->find($vid)) {
+
+            $lang = $this->getPreferredLanguage();
+            if ($video->sd_sc && $lang == 'zh-CHS') {
+                $qualities = $video->qualities_sc;
+                $downloads = $video->downloads_sc;
+            } else {
+                $qualities = $video->qualities;
+                $downloads = $video->downloads;
+            }
+
+            if ($downloads != null) {
+                $qualities = $downloads;
+            }
+
+            if ($qualities == null) {
+                abort(403);
+            }
+
+        } else {
             abort(403);
         }
 
-        $qualities = $video->downloads != null ? $video->downloads : $video->qualities;
-
         return view('video.download', compact('video', 'qualities', 'is_mobile'));
+    }
+
+    public function getPreferredLanguage()
+    {
+        $user_lang = isset($_COOKIE['user_lang']) ? $_COOKIE['user_lang'] : null;
+        if ($user_lang) {
+            if ($user_lang == 'zh-CHS') {
+                $lang = 'zh-CHS';
+            } else {
+                $lang = 'zh-CHT';
+            }
+        } else {
+            $browser_lang = isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) ? $_SERVER['HTTP_ACCEPT_LANGUAGE'] : 'zh-CHT';
+            if (str_starts_with($browser_lang, 'zh-CN') || str_starts_with($browser_lang, 'zh-CHS')) {
+                $lang = 'zh-CHS';
+            } else {
+                $lang = 'zh-CHT';
+            }
+        }
+        return $lang;
     }
 
     public function like(Request $request)

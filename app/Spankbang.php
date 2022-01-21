@@ -74,6 +74,68 @@ class Spankbang
         Log::info('Spankbang update ended...');
     }
 
+    public static function updateSpankbangSc($number = 1, $total = 1)
+    {
+        Log::info('Spankbang sc update started...');
+
+        $videos = Video::where('foreign_sd', 'like', '%"spankbang_sc"%')
+                    ->select('id', 'title', 'sd_sc', 'outsource', 'tags_array', 'foreign_sd', 'created_at')
+                    ->orderBy('id', 'asc')
+                    ->get()
+                    ->split($total)[$number - 1]
+                    ->sortBy(function($video){
+                        return (int) Helper::get_string_between($video->sd_sc, ',', '&m=');
+                    })
+                    ->values()
+                    ->slice(0, 3);
+
+        foreach ($videos as $video) {
+            $html = Spankbang::getBrowsershotHtml($video->foreign_sd['spankbang_sc']);
+            $sd_sc = Helper::get_string_between($html, '"contentUrl": "', '"');
+            $source_sc = Helper::get_string_between($html, '"contentUrl": "', '"');
+            $qualities_sc = [];
+
+            if (strpos($sd_sc, 'https://vdownload') !== false) {
+                if (in_array('1080p', array_keys($video->tags_array))) {
+                    $sd_sc = str_replace('-720p.mp4', '-1080p.mp4', $sd_sc);
+                    $qualities_sc['1080'] = $sd_sc;
+                }
+                if (strpos($source_sc, '720p') !== false) {
+                    $qualities_sc['720'] = $source_sc;
+                    $source_sc = str_replace('-720p.mp4', '-480p.mp4', $source_sc);
+                }
+                if (strpos($source_sc, '480p') !== false) {
+                    $qualities_sc['480'] = $source_sc;
+                    $source_sc = str_replace('-480p.mp4', '-240p.mp4', $source_sc);
+                }
+                if (strpos($source_sc, '240p') !== false) {
+                    $qualities_sc['240'] = $source_sc;
+                }
+
+                $video->sd_sc = reset($qualities_sc);
+                $video->qualities_sc = $qualities_sc;
+                $video->outsource = false;
+                $video->save();
+                Log::info('Spankbang sc update ID#'.$video->id.' success...');
+
+            } else {
+                Log::info('Spankbang sc update ID#'.$video->id.' failed...');
+                Mail::to('vicky.avionteam@gmail.com')->send(new UserReport('master ('.gethostname().')', 'Spankbang sc update failed', $video->id, $video->title, $video->sd_sc, 'master', 'master'));
+                $temp = $video->foreign_sd;
+                $temp['error_sc'] = $video->foreign_sd['spankbang_sc'];
+                unset($temp['spankbang_sc']);
+                $video->foreign_sd = $temp;
+                $video->save();
+            }
+
+            if ($videos->last() != $video) {
+                sleep(10);
+            }
+        }
+
+        Log::info('Spankbang sc update ended...');
+    }
+
     public static function updateSpankbangEmergent()
     {
         Log::info('Spankbang backup emergent update started...');
@@ -139,7 +201,7 @@ class Spankbang
     {
         Log::info('Spankbang errors update started...');
 
-        $videos = Video::where('foreign_sd', 'ilike', '%"error"%')->where('foreign_sd', 'ilike', '%spankbang%')->select('id', 'title', 'sd', 'outsource', 'tags_array', 'foreign_sd', 'created_at')->orderBy('id', 'asc')->get();
+        $videos = Video::where('foreign_sd', 'like', '%"error"%')->where('foreign_sd', 'ilike', '%spankbang%')->select('id', 'title', 'sd', 'outsource', 'tags_array', 'foreign_sd', 'created_at')->orderBy('id', 'asc')->get();
 
         foreach ($videos as $video) {
             if (array_key_exists("error", $video->foreign_sd) && strpos($video->foreign_sd["error"], 'spankbang') !== false ) {
@@ -191,6 +253,55 @@ class Spankbang
         }
 
         Log::info('Spankbang errors update ended...');
+
+
+        Log::info('Spankbang sc errors update started...');
+
+        $videos = Video::where('foreign_sd', 'like', '%"error_sc"%')->where('foreign_sd', 'ilike', '%spankbang%')->select('id', 'title', 'sd_sc', 'outsource', 'tags_array', 'foreign_sd', 'created_at')->orderBy('id', 'asc')->get();
+
+        foreach ($videos as $video) {
+            if (array_key_exists("error_sc", $video->foreign_sd) && strpos($video->foreign_sd["error_sc"], 'spankbang') !== false ) {
+                $html = Spankbang::getBrowsershotHtml($video->foreign_sd['error_sc']);
+                $sd_sc = Helper::get_string_between($html, '"contentUrl": "', '"');
+                $source_sc = Helper::get_string_between($html, '"contentUrl": "', '"');
+                $qualities_sc = [];
+
+                if (strpos($sd_sc, 'https://vdownload') !== false) {
+                    if (in_array('1080p', array_keys($video->tags_array))) {
+                        $sd_sc = str_replace('-720p.mp4', '-1080p.mp4', $sd_sc);
+                        $qualities_sc['1080'] = $sd_sc;
+                    }
+                    if (strpos($source_sc, '720p') !== false) {
+                        $qualities_sc['720'] = $source_sc;
+                        $source_sc = str_replace('-720p.mp4', '-480p.mp4', $source_sc);
+                    }
+                    if (strpos($source_sc, '480p') !== false) {
+                        $qualities_sc['480'] = $source_sc;
+                        $source_sc = str_replace('-480p.mp4', '-240p.mp4', $source_sc);
+                    }
+                    if (strpos($source_sc, '240p') !== false) {
+                        $qualities_sc['240'] = $source_sc;
+                    }
+
+                    $temp = $video->foreign_sd;
+                    $temp['spankbang_sc'] = $video->foreign_sd['error_sc'];
+                    unset($temp['error_sc']);
+                    $video->foreign_sd = $temp;
+                    $video->sd_sc = reset($qualities_sc);
+                    $video->qualities_sc = $qualities_sc;
+                    $video->outsource = false;
+                    $video->save();
+
+                } else {
+                    Log::info('Spankbang sc errors update ID#'.$video->id.' failed...');
+                    Mail::to('vicky.avionteam@gmail.com')->send(new UserReport('master', 'Spankbang sc update failed', $video->id, $video->title, $video->sd_sc, 'master', 'master'));
+                }
+
+                sleep(5);
+            }
+        }
+
+        Log::info('Spankbang sc errors update ended...');
     }
 
     public static function checkSpankbangOutdate()
@@ -241,11 +352,20 @@ class Spankbang
     public static function checkSpankbang()
     {
         $base = Carbon::now()->addHours(4)->timestamp;
+
         $videos = Video::where('foreign_sd', 'ilike', '%"spankbang"%')->select('id', 'title', 'sd', 'foreign_sd', 'created_at')->get();
         foreach ($videos as $video) {
             $time = Helper::get_string_between($video->sd, ',', '&m=');
             if ($time < $base) {
                 Mail::to('vicky.avionteam@gmail.com')->send(new UserReport('master', 'Spankbang check failed', $video->id, $video->title, $video->sd, 'master', 'master'));
+            }
+        }
+
+        $videos = Video::where('foreign_sd', 'ilike', '%"spankbang_sc"%')->select('id', 'title', 'sd_sc', 'foreign_sd', 'created_at')->get();
+        foreach ($videos as $video) {
+            $time = Helper::get_string_between($video->sd_sc, ',', '&m=');
+            if ($time < $base) {
+                Mail::to('vicky.avionteam@gmail.com')->send(new UserReport('master', 'Spankbang sc check failed', $video->id, $video->title, $video->sd_sc, 'master', 'master'));
             }
         }
     }

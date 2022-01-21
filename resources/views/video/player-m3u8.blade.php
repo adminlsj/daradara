@@ -4,7 +4,7 @@
 <video style="width: 100%; height: 100%" id="player" playsinline controls data-poster="{{ $video->imgurH() }}" {{ $doujin ? 'loop' : '' }}>
 </video>
 <script>
-  const source = '{!! $video->sd !!}';
+  const source = '{!! $sd !!}';
   const video = document.querySelector('video');
   
   const player = new Plyr(video, {
@@ -55,4 +55,14 @@
   }
   
   window.player = player;
+
+  player.on('play', (event) => {
+    $('#player-switch-lang').removeClass('lang-visible');
+    $('#player-switch-lang').addClass('lang-hidden');
+  });
+
+  player.on('pause', (event) => {
+    $('#player-switch-lang').removeClass('lang-hidden');
+    $('#player-switch-lang').addClass('lang-visible');
+  });
 </script>

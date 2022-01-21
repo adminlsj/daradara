@@ -15,7 +15,7 @@ use Spatie\Browsershot\Browsershot;
 class Video extends Model
 {
     protected $casts = [
-        'foreign_sd' => 'array', 'data' => 'array', 'translations' => 'array', 'qualities' => 'array', 'downloads' => 'array', 'tags_array' => 'array'
+        'foreign_sd' => 'array', 'data' => 'array', 'translations' => 'array', 'qualities' => 'array', 'downloads' => 'array', 'qualities_sc' => 'array', 'downloads_sc' => 'array', 'tags_array' => 'array'
     ];
 
     protected $fillable = [

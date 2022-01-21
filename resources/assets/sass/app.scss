@@ -60,6 +60,36 @@ th, td {
   padding: 0 4%;
 }
 
+#player-switch-lang {
+  position: absolute;
+  top: 9px;
+  right: 25px;
+  z-index: 1;
+  color: white; 
+  background-color: rgba(0, 0, 0, 0.75); 
+  font-size: 20px; 
+  font-weight: 400; 
+  padding: 6px 12px; 
+  border-radius: 2px; 
+  cursor: pointer;
+}
+
+#player-switch-lang:hover {
+  background-color: black;
+}
+
+.lang-hidden {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s 0.1s, opacity 0.1s linear;
+}
+
+.lang-visible {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.1s linear;
+}
+
 /* .rotate video {
   transform: rotate(180deg);
   -webkit-transform: rotate(180deg);
@@ -1666,6 +1696,10 @@ div.sticky {
     font-size: 2.8vw !important;
   }
 
+  #player-switch-lang {
+    right: 9px;
+  }
+
   #comic-nav {
     padding: 0 5px;
   }
@@ -1925,6 +1959,13 @@ div.sticky {
 @media (max-width: 767.9px) {
   #error {
     line-height: 50px;
+  }
+
+  #player-switch-lang {
+    top: 7px;
+    right: 8px;
+    font-size: 15px;
+    padding: 6px 12px; 
   }
 
   #comics-search-tag-top-row {

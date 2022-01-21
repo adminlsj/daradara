@@ -31,7 +31,14 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        return $requests = Browsershot::url('https://www.agemys.com/play/20210160?playid=2_2')
+        $lang = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
+        if (str_starts_with($lang, 'zh-CN') || str_starts_with($lang, 'zh-CHS')) {
+            return 'chs';
+        } else {
+            return 'cht';
+        }
+
+        return $requests = Browsershot::url('https://www.agemys.com/play/20220027?playid=2_3')
             ->useCookies(['username' => 'admin'])
             ->timeout(180)
             ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
@@ -944,6 +951,15 @@ class BotController extends Controller
             Spankbang::updateSpankbang($number, $total);
         } else {
             Spankbang::updateSpankbang(1, 1);
+        }
+    }
+
+    public function updateSpankbangSc(Request $request)
+    {
+        if ($number = $request->number && $total = $request->total) {
+            Spankbang::updateSpankbangSc($number, $total);
+        } else {
+            Spankbang::updateSpankbangSc(1, 1);
         }
     }
 
