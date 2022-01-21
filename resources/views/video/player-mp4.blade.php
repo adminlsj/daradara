@@ -1,7 +1,7 @@
 <script src="https://cdn.plyr.io/3.6.4/plyr.js"></script>
 <script src="//cdn.jsdelivr.net/npm/hls.js@latest"></script>
 <link rel="stylesheet" href="https://cdn.plyr.io/3.6.4/plyr.css" />
-<video style="width: 100%; height: 100%" id="player" controls crossorigin playsinline data-poster="{{ $video->thumbH() }}" {{ $doujin ? 'loop' : '' }}>
+<video style="width: 100%; height: 100%" id="player" controls playsinline data-poster="{{ $video->thumbH() }}" {{ $doujin ? 'loop' : '' }}>
   @if ($qualities == null)
     <source src="{!! $sd !!}" type="video/mp4" size="720">
   @else
