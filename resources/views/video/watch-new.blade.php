@@ -13,7 +13,33 @@
 <div id="content-div">
   <div class="row no-gutter video-show-width">
     <div id="player-div-wrapper" class="col-md-9 single-show-player fluid-player-desktop-styles" style="background-color: #141414; position: relative;">
-      
+
+      @if ($current->sd_sc)
+      <div class="dropdown player-lang-wrapper">
+        <button style="outline:0;" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{ $lang == 'zh-CHS' ? '简体字幕' : '繁體字幕'}}
+          <span class="material-icons">arrow_drop_down</span>
+        </button>
+        <div id="player-switch-lang" data-lang="{{ $lang }}" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          {{ $lang == 'zh-CHS' ? '繁體字幕' : '简体字幕'}}
+        </div>
+      </div>
+
+        <!-- <div class="player-lang-wrapper">
+          <div class="player-lang-dropdown-menu">
+            {{ $lang == 'zh-CHS' ? '简体字幕' : '繁體字幕'}}
+            <span style="vertical-align: middle; margin-top: -3px; font-size: 30px; margin-left: -3px; margin-right: -5px;" class="material-icons">arrow_drop_down</span>
+          </div>
+          <div class="player-lang-dropdown-option" style="margin-top: 5px;">
+            {{ $lang == 'zh-CHS' ? '繁體字幕' : '简体字幕'}}
+          </div>
+        </div> -->
+
+        <!-- <div id="player-switch-lang" class="no-select" data-lang="{{ $lang }}">
+          {{ $lang == 'zh-CHT' ? '切換成簡體字幕' : '切换成繁体字幕'}}
+        </div> -->
+      @endif
+
       @if ($video->outsource)
         <div style="background-color: black; background-image: url('https://i.imgur.com/zXoBhXA.gif'); background-position: center; background-repeat: no-repeat; background-size: 150px; position: relative; width: 100%; height: 0; padding-bottom: 56.25%;">
             <iframe src="{!! $sd !!}" style="border: 0; overflow: hidden; position: absolute; width: 100%; height: 100%; left: 0; top: 0;" allowfullscreen></iframe>
@@ -26,12 +52,6 @@
           @include('video.player-mp4')
         @endif
 
-      @endif
-
-      @if ($current->sd_sc)
-        <div id="player-switch-lang" class="no-select" data-lang="{{ $lang }}">
-          {{ $lang == 'zh-CHT' ? '切換成簡體字幕' : '切换成繁体字幕'}}
-        </div>
       @endif
 
       <div id="mobile-ad" class="hidden-md hidden-lg" style="text-align: center; padding-top: 5px; padding-bottom: 0px;background-color: black; position: relative;">
