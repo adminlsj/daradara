@@ -15,29 +15,15 @@
     <div id="player-div-wrapper" class="col-md-9 single-show-player fluid-player-desktop-styles" style="background-color: #141414; position: relative;">
 
       @if ($current->sd_sc)
-      <div class="dropdown player-lang-wrapper">
-        <button style="outline:0;" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          {{ $lang == 'zh-CHS' ? '简体字幕' : '繁體字幕'}}
-          <span class="material-icons">arrow_drop_down</span>
-        </button>
-        <div id="player-switch-lang" data-lang="{{ $lang }}" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          {{ $lang == 'zh-CHS' ? '繁體字幕' : '简体字幕'}}
-        </div>
-      </div>
-
-        <!-- <div class="player-lang-wrapper">
-          <div class="player-lang-dropdown-menu">
+        <div class="dropdown player-lang-wrapper">
+          <button style="outline:0;" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             {{ $lang == 'zh-CHS' ? '简体字幕' : '繁體字幕'}}
-            <span style="vertical-align: middle; margin-top: -3px; font-size: 30px; margin-left: -3px; margin-right: -5px;" class="material-icons">arrow_drop_down</span>
-          </div>
-          <div class="player-lang-dropdown-option" style="margin-top: 5px;">
+            <span class="material-icons">arrow_drop_down</span>
+          </button>
+          <div id="player-switch-lang" data-lang="{{ $lang }}" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             {{ $lang == 'zh-CHS' ? '繁體字幕' : '简体字幕'}}
           </div>
-        </div> -->
-
-        <!-- <div id="player-switch-lang" class="no-select" data-lang="{{ $lang }}">
-          {{ $lang == 'zh-CHT' ? '切換成簡體字幕' : '切换成繁体字幕'}}
-        </div> -->
+        </div>
       @endif
 
       @if ($video->outsource)
