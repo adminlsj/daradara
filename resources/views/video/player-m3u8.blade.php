@@ -57,12 +57,12 @@
   window.player = player;
 
   player.on('play', (event) => {
-    $('.player-lang-wrapper').removeClass('lang-visible');
-    $('.player-lang-wrapper').addClass('lang-hidden');
+    $('#player-lang-wrapper').removeClass('lang-visible');
+    $('#player-lang-wrapper').addClass('lang-hidden');
   });
 
   player.on('pause', (event) => {
-    $('.player-lang-wrapper').removeClass('lang-hidden');
-    $('.player-lang-wrapper').addClass('lang-visible');
+    $('#player-lang-wrapper').removeClass('lang-hidden');
+    $('#player-lang-wrapper').addClass('lang-visible');
   });
 </script>
