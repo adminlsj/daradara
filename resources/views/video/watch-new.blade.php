@@ -15,7 +15,7 @@
     <div id="player-div-wrapper" class="col-md-9 single-show-player fluid-player-desktop-styles" style="background-color: #141414; position: relative;">
 
       @if ($current->sd_sc)
-        <div class="dropdown player-lang-wrapper">
+        <div id="player-lang-wrapper" class="dropdown">
           <button style="outline:0;" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             {{ $lang == 'zh-CHS' ? '简体字幕' : '繁體字幕'}}
             <span class="material-icons">arrow_drop_down</span>
