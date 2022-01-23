@@ -32,6 +32,9 @@ class Rule34
     ];
 
     public static $translations = [
+        "lala satalin deviluke" => '菈菈·撒塔琳·戴比路克',
+        "to love-ru darkness" => '出包王女',
+        "toloveru" => '出包王女',
         "nozomi (princess connect!)" => '櫻井望',
         "penis in ass" => '肛交',
         "bukkake" => '顏射',

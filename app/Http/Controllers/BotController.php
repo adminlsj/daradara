@@ -31,7 +31,7 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        return Helper::sign_bcdn_url('https://hmtest.b-cdn.net/test.mp4', 'e720f88c-c849-4bae-a5ab-7ec1b80ddf4d', 43200);
+        return Helper::sign_bcdn_url('https://vdownload.hembed.com/23080-720p.mp4', env('BUNNY_TOKEN'), 43200);
 
         // download imgurs
         /* $videos = Video::where('cover', 'not like', '%cdn.jsdelivr.net%')->orderBy('id', 'asc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
