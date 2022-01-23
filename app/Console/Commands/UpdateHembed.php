@@ -72,5 +72,39 @@ class UpdateHembed extends Command
         }
 
         Log::info('Hembed update ended...');
+
+
+        Log::info('Hembed sc update started...');
+
+        $videos = Video::where('foreign_sd', 'like', '%"hembed_sc"%')->select('id', 'title', 'sd_sc', 'outsource', 'tags_array', 'foreign_sd', 'created_at')->get();
+
+        foreach ($videos as $video) {
+            $qualities_sc = [];
+            $source_sc = $video->foreign_sd['hembed_sc'];
+            if (strpos($source_sc, '1080p') !== false) {
+                $qualities_sc['1080'] = Helper::sign_bcdn_url($source_sc, env('BUNNY_TOKEN'), 43200);
+                $source_sc = str_replace('-1080p.mp4', '-720p.mp4', $source_sc);
+            }
+            if (strpos($source_sc, '720p') !== false) {
+                $qualities_sc['720'] = Helper::sign_bcdn_url($source_sc, env('BUNNY_TOKEN'), 43200);
+                $source_sc = str_replace('-720p.mp4', '-480p.mp4', $source_sc);
+            }
+            if (strpos($source_sc, '480p') !== false) {
+                $qualities_sc['480'] = Helper::sign_bcdn_url($source_sc, env('BUNNY_TOKEN'), 43200);
+                $source_sc = str_replace('-480p.mp4', '-240p.mp4', $source_sc);
+            }
+            if (strpos($source_sc, '240p') !== false) {
+                $qualities_sc['240'] = Helper::sign_bcdn_url($source_sc, env('BUNNY_TOKEN'), 43200);
+            }
+
+            $video->sd_sc = reset($qualities_sc);
+            $video->qualities_sc = $qualities_sc;
+            $video->outsource = false;
+            $video->save();
+
+            Log::info('Hembed sc update ID#'.$video->id.' success...');
+        }
+
+        Log::info('Hembed sc update ended...');
     }
 }
