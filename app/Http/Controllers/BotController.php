@@ -31,7 +31,10 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        return Helper::sign_bcdn_url('https://vdownload.hembed.com/37885-1080p.mp4', env('BUNNY_TOKEN'), 43200);
+        return $requests = Browsershot::url('https://www.agemys.com/play/20220015?playid=2_4')
+            ->useCookies(['username' => 'admin'])
+            ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
+            ->triggeredRequests();
 
         // download imgurs
         /* $videos = Video::where('cover', 'not like', '%cdn.jsdelivr.net%')->orderBy('id', 'asc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
