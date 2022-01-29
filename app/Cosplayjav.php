@@ -13,7 +13,7 @@ class Cosplayjav
     ];
 
     public static $translations = [
-        "Gotou Rika (後藤里香)"
+        "Gotou Rika (後藤里香)" => '後藤里香',
         "Jeanne_d'Arc" => '聖女貞德',
         "jujutsu_kaisen" => '咒術迴戰',
         "kugisaki_nobara" => '釘崎野薔薇',
