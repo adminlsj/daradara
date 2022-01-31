@@ -128,11 +128,11 @@ class Helper
         $url_query = parse_url($url, PHP_URL_QUERY);
 
         $expires = time() + $expiration_time;
-        $md5 = md5("$expires$url_path $securityKey", true);
-        $md5 = base64_encode($md5);
-        $md5 = strtr($md5, '+/', '-_');
-        $md5 = str_replace('=', '', $md5);
+        $token = md5("$expires$url_path $securityKey", true);
+        $token = base64_encode($token);
+        $token = strtr($token, '+/', '-_');
+        $token = str_replace('=', '', $token);
 
-        return "{$url_scheme}://{$url_host}{$url_path}?md5={$md5}&expires={$expires}";
+        return "{$url_scheme}://{$url_host}{$url_path}?token={$md5}&expires={$expires}";
     }
 }
