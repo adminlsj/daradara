@@ -31,7 +31,9 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        return Helper::sign_hembed_url('https://temp.hembed.com/400844.mp4', env('HEMBED_TOKEN'), 43200, $_SERVER['REMOTE_ADDR']);
+        $url = 'https://temp.hembed.com/400844.mp4';
+        $user_ip = isset($_SERVER["HTTP_CF_CONNECTING_IP"]) ? $_SERVER["HTTP_CF_CONNECTING_IP"] : 'N/A';
+        return Helper::sign_hembed_url($url, env('HEMBED_TOKEN'), 43200, $user_ip);
 
         return $requests = Browsershot::url('https://www.agemys.com/play/20210218?playid=2_17')
             ->useCookies(['username' => 'admin'])
