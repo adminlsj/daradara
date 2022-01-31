@@ -32,7 +32,7 @@ class BotController extends Controller
         ini_set('memory_limit', '-1');
 
         $url = 'https://temp.hembed.com/400844.mp4';
-        return $user_ip = isset($_SERVER["HTTP_CF_CONNECTING_IP"]) ? $_SERVER["HTTP_CF_CONNECTING_IP"] : 'N/A';
+        $user_ip = isset($_SERVER["HTTP_CF_CONNECTING_IP"]) ? $_SERVER["HTTP_CF_CONNECTING_IP"] : 'N/A';
         return Helper::sign_hembed_url($url, env('HEMBED_TOKEN'), 43200, $user_ip);
 
         return $requests = Browsershot::url('https://www.agemys.com/play/20210218?playid=2_17')
