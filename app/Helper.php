@@ -133,6 +133,6 @@ class Helper
         $token = strtr($token, '+/', '-_');
         $token = str_replace('=', '', $token);
 
-        return "{$url_scheme}://{$url_host}{$url_path}?token={$md5}&expires={$expires}";
+        return "{$url_scheme}://{$url_host}{$url_path}?token={$token}&expires={$expires}";
     }
 }
