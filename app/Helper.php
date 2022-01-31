@@ -128,7 +128,7 @@ class Helper
         $url_query = parse_url($url, PHP_URL_QUERY);
 
         $expires = time() + $expiration_time;
-        $md5 = md5("$expires$url_path$user_ip $securityKey", true);
+        $md5 = md5("$expires$url_path $securityKey", true);
         $md5 = base64_encode($md5);
         $md5 = strtr($md5, '+/', '-_');
         $md5 = str_replace('=', '', $md5);
