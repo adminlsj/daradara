@@ -119,4 +119,20 @@ class Helper
             return "{$url_scheme}://{$url_host}{$url_path}?token={$token}{$parameter_data_url}&expires={$expires}";
         }
     }
+
+    public static function sign_hembed_url($url, $securityKey, $expiration_time = 3600, $user_ip = NULL)
+    {
+        $url_scheme = parse_url($url, PHP_URL_SCHEME);
+        $url_host = parse_url($url, PHP_URL_HOST);
+        $url_path = parse_url($url, PHP_URL_PATH);
+        $url_query = parse_url($url, PHP_URL_QUERY);
+
+        $expires = time() + $expiration_time;
+        $md5 = md5("$expires$url_path$user_ip $securityKey", true);
+        $md5 = base64_encode($md5);
+        $md5 = strtr($md5, '+/', '-_');
+        $md5 = str_replace('=', '', $md5);
+
+        return "{$url_scheme}://{$url_host}{$url_path}?md5={$md5}&expires={$expires}";
+    }
 }
