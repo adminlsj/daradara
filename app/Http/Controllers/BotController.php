@@ -31,7 +31,7 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $url = 'https://temp.hembed.com/400844.mp4';
+        $url = 'https://temp.hembed.com/38096_x264.mp4';
         return Helper::sign_hembed_url($url, env('HEMBED_TOKEN'), 43200);
 
         return $requests = Browsershot::url('https://www.agemys.com/play/20210218?playid=2_17')
