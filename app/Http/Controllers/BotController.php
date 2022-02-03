@@ -31,10 +31,10 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $url = 'https://temp.hembed.com/38096_x264.mp4';
-        return Helper::sign_hembed_url($url, env('HEMBED_TOKEN'), 43200);
+        $url = 'https://hembed.b-cdn.net/test/14557-720p_5000.m3u8';
+        return Helper::sign_bcdn_url($url, env('HEMBED_TOKEN'), 43200, NULL, false, '/test/');
 
-        return $requests = Browsershot::url('https://www.agemys.com/play/20210218?playid=2_17')
+        return $requests = Browsershot::url('https://www.agemys.com/play/20220015?playid=2_5')
             ->useCookies(['username' => 'admin'])
             ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
             ->triggeredRequests();
