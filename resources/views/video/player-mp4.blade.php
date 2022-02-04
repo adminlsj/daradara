@@ -34,9 +34,10 @@
     quality: {
       default: 720
     },
+    seekTime: 5,
     i18n: {
-      rewind: 'Rewind 10s',
-      fastForward: 'Forward 10s',
+      rewind: 'Rewind 5s',
+      fastForward: 'Forward 5s',
       captions: '字幕',
       disabled: '關閉',
       quality: '畫質',

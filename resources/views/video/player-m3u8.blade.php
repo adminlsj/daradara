@@ -25,9 +25,10 @@
     quality: {
       default: 1080
     },
+    seekTime: 5,
     i18n: {
-      rewind: 'Rewind 10s',
-      fastForward: 'Forward 10s',
+      rewind: 'Rewind 5s',
+      fastForward: 'Forward 5s',
     },
     controls: [
       'play-large', // The large play button in the center
