@@ -108,9 +108,11 @@ class VideoController extends Controller
 
             $lang = $this->getPreferredLanguage();
             if ($video->sd_sc && $lang == 'zh-CHS') {
+                $sd = $video->sd_sc;
                 $qualities = $video->qualities_sc;
                 $downloads = $video->downloads_sc;
             } else {
+                $sd = $video->sd;
                 $qualities = $video->qualities;
                 $downloads = $video->downloads;
             }
@@ -127,7 +129,7 @@ class VideoController extends Controller
             abort(403);
         }
 
-        return view('video.download', compact('video', 'qualities', 'is_mobile'));
+        return view('video.download', compact('video', 'sd', 'qualities', 'is_mobile'));
     }
 
     public function getPreferredLanguage()
