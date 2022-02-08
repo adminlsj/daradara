@@ -34,7 +34,7 @@ class BotController extends Controller
         $videos = Video::where('foreign_sd', 'like', '%"vod"%')->select('id', 'title', 'sd', 'outsource', 'tags_array', 'foreign_sd', 'created_at')->get();
         foreach ($videos as $video) {
             $temp = $video->foreign_sd;
-            $temp['vod'] = str_replace('https://worldstream.hembed.com/', 'https://vdownload-4.hembed.com/', $video->foreign_sd['vod']);
+            $temp['vod'] = str_replace('https://vdownload-4.hembed.com/', 'https://worldstream.hembed.com/', $video->foreign_sd['vod']);
             $video->foreign_sd = $temp;
             $video->save();
         }
@@ -42,7 +42,7 @@ class BotController extends Controller
         $videos = Video::where('foreign_sd', 'like', '%"vod_sc"%')->select('id', 'title', 'sd', 'outsource', 'tags_array', 'foreign_sd', 'created_at')->get();
         foreach ($videos as $video) {
             $temp = $video->foreign_sd;
-            $temp['vod_sc'] = str_replace('https://worldstream.hembed.com/', 'https://vdownload-4.hembed.com/', $video->foreign_sd['vod_sc']);
+            $temp['vod_sc'] = str_replace('https://vdownload-4.hembed.com/', 'https://worldstream.hembed.com/', $video->foreign_sd['vod_sc']);
             $video->foreign_sd = $temp;
             $video->save();
         }
