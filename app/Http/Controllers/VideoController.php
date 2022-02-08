@@ -91,12 +91,13 @@ class VideoController extends Controller
                 $qualities = $video->qualities;
                 $downloads = $video->downloads;
             }
+            $qual = $this->getPreferredQuality(array_keys($qualities));
 
         } else {
             abort(403);
         }
 
-        return view('video.watch-new', compact('video', 'videos', 'current', 'tags', 'country_code', 'comments_count', 'related', 'doujin', 'is_mobile', 'saved', 'liked', 'lang', 'sd', 'qualities', 'downloads'));
+        return view('video.watch-new', compact('video', 'videos', 'current', 'tags', 'country_code', 'comments_count', 'related', 'doujin', 'is_mobile', 'saved', 'liked', 'lang', 'sd', 'qual', 'qualities', 'downloads'));
     }
 
     public function download(Request $request)
@@ -130,6 +131,18 @@ class VideoController extends Controller
         }
 
         return view('video.download', compact('video', 'sd', 'qualities', 'is_mobile'));
+    }
+
+    public function getPreferredQuality($qualities)
+    {
+        $search = isset($_COOKIE['quality']) ? $_COOKIE['quality'] : 720;
+        $closest = null;
+        foreach ($qualities as $quality) {
+            if ($closest === null || abs($search - $closest) > abs($quality - $search)) {
+                $closest = $quality;
+            }
+        }
+        return $closest;
     }
 
     public function getPreferredLanguage()

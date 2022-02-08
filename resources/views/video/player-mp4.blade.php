@@ -5,8 +5,11 @@
   @if ($qualities == null)
     <source src="{!! $sd !!}" type="video/mp4" size="720">
   @else
+    <source src="{!! $qualities[$qual] !!}" type="video/mp4" size="{{ $qual }}"> 
     @foreach ($qualities as $quality => $source)
-      <source src="{!! $source !!}" type="video/mp4" size="{{ $quality }}"> 
+      @if ($quality != $qual)
+        <source src="{!! $source !!}" type="video/mp4" size="{{ $quality }}"> 
+      @endif
     @endforeach
   @endif
 

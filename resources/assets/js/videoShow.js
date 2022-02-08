@@ -270,6 +270,10 @@ $('#player-switch-lang').click(function(){
     window.location.reload();
 });
 
+player.on('qualitychange', (event) => {
+    setCookie('quality', player.config.quality.selected, 10000);
+});
+
 /* Standard syntax */
 document.addEventListener("fullscreenchange", function() {
   handleFullscreenChange()
