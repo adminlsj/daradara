@@ -31,13 +31,21 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $url = 'https://vdownload-1.hembed.com/38225-720p.mp4';
-        return Helper::sign_hembed_url($url, env('HEMBED_TOKEN'), 43200);
+        $videos = Video::where('foreign_sd', 'like', '%"vod"%')->select('id', 'title', 'sd', 'outsource', 'tags_array', 'foreign_sd', 'created_at')->get();
+        foreach ($videos as $video) {
+            $temp = $video->foreign_sd;
+            $temp['vod'] = str_replace('https://vdownload-4.hembed.com/', 'https://worldstream.hembed.com/', $video->foreign_sd['vod']);
+            $video->foreign_sd = $temp;
+            $video->save();
+        }
 
-        return $requests = Browsershot::url('https://www.agemys.com/play/20220015?playid=2_5')
-            ->useCookies(['username' => 'admin'])
-            ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
-            ->triggeredRequests();
+        $videos = Video::where('foreign_sd', 'like', '%"vod_sc"%')->select('id', 'title', 'sd', 'outsource', 'tags_array', 'foreign_sd', 'created_at')->get();
+        foreach ($videos as $video) {
+            $temp = $video->foreign_sd;
+            $temp['vod_sc'] = str_replace('https://vdownload-4.hembed.com/', 'https://worldstream.hembed.com/', $video->foreign_sd['vod_sc']);
+            $video->foreign_sd = $temp;
+            $video->save();
+        }
 
         // download imgurs
         /* $videos = Video::where('cover', 'not like', '%cdn.jsdelivr.net%')->orderBy('id', 'asc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
