@@ -91,7 +91,7 @@ class VideoController extends Controller
                 $qualities = $video->qualities;
                 $downloads = $video->downloads;
             }
-            $qual = $this->getPreferredQuality(array_keys($qualities));
+            $qual = $qualities != null ? $this->getPreferredQuality(array_keys($qualities)) : 720;
 
         } else {
             abort(403);
