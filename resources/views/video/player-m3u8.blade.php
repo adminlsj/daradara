@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="https://cdn.plyr.io/3.6.4/plyr.css" />
 <script src="https://cdn.plyr.io/3.6.4/plyr.js"></script>
 <script src="//cdn.jsdelivr.net/npm/hls.js@latest"></script>
-<video style="width: 100%; height: 100%" id="player" playsinline controls data-poster="{{ $video->imgurH() }}" {{ $doujin ? 'loop' : '' }}>
+<video style="width: 100%; height: 100%" id="player" playsinline controls poster="{{ $video->imgurH() }}" {{ $doujin ? 'loop' : '' }}>
 </video>
 <script>
   const source = '{!! $sd !!}';
