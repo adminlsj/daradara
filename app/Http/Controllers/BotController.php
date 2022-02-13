@@ -31,9 +31,16 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
+        /* for ($i = 0; $i <= 295; $i++) { 
+            $vid = "8525a217-d387-4ce3-a616-96cb9235e47d";
+            $folder = $i % 3;
+            $url = "https://vz-e9c9f2c4-a7f.b-cdn.net/{$vid}/1920x1080/video{$i}.ts";
+            Storage::disk('local')->put("video/{$folder}/p_{$i}.html", file_get_contents($url));
+        } */
+
         /* curl -O --referer https://hanime1.me/ https://vz-e9c9f2c4-a7f.b-cdn.net/dacb9593-b19f-4617-9b57-d4790c8089d1/1920x1080/video0.ts
 
-        for i in `seq 1 197`; do curl -O -H "Origin: https://spankbang.com/" -H "Referer: https://spankbang.com/" https://vstream-7.sb-cd.com/hls/1/0/10969307-1080p.mp4/hls_6s_-${i}-v1-a1.ts?_tid=10969307&d=6&m=7&secure=kt6s_qrOhNADV0iGpJr3Dw,1644711502; done */
+        for i in `seq 0 295`; do echo $folder=`$i % 3`; curl --referer https://hanime1.me/ https://vz-e9c9f2c4-a7f.b-cdn.net/58d37084-285b-45c9-9006-8af6bd5136e3/1920x1080/video${i}.ts --output ${folder}/c_${i}.html; done */
 
         /* $url = 'https://worldstream.hembed.com/38256-1080p.mp4';
         return Helper::sign_hembed_url($url, env('HEMBED_TOKEN'), 43200);
@@ -1389,6 +1396,25 @@ class BotController extends Controller
         Log::info('Vod sc update ended...');
     }
 
+    public function editM3u8(Request $request)
+    {
+        return view('video.edit-m3u8');
+    }
+
+    public function updateM3u8(Request $request)
+    {
+        $m3u8 = $request->m3u8;
+        $folder = $request->folder;
+        $user = $request->user;
+        $lang = $request->lang;
+        for ($i = 0; $i <= 1000; $i++) { 
+            if ($i % 3 == $folder) {
+                $m3u8 = str_replace("video{$i}.ts", "https://cdn.jsdelivr.net/gh/{$user}/{$user}-h@latest/asset/view/{$lang}/{$folder}/p_{$i}.html", $m3u8);
+            }
+        }
+        return '<pre>'.$m3u8.'</pre>';
+    }
+
     public function translateRule34()
     {
         Rule34::translateRule34();
@@ -1412,18 +1438,6 @@ class BotController extends Controller
     public function translateNhentaiTag(Request $request)
     {
         Nhentai::translateNhentaiTag($request->replace);
-    }
-
-    public function updateHanimeCover(Request $request)
-    {   
-        ini_set('max_execution_time', 0);
-        ini_set('memory_limit', '-1');
-
-        $videos = Video::where('cover', 'ilike', 'https://i0.wp.com/ba.alphafish.top/%')->get();
-        foreach ($videos as $video) {
-            $video->cover = str_replace('https://i0.wp.com/ba.alphafish.top/', 'https://i1.wp.com/ba.apperoni.top/', $video->cover);
-            $video->save();
-        }
     }
 
     public function comments(Request $request)

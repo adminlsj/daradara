@@ -82,9 +82,10 @@ Route::group(['middleware' => 'admin'], function () {
 
 	Route::get('/updateXvideos', 'BotController@updateXvideos');
 
-	Route::get('/updateHanimeCover', 'BotController@updateHanimeCover');
-
 	Route::get('/checkMotherless', 'BotController@checkMotherless');
+
+	Route::get('/editM3u8', 'BotController@editM3u8');
+	Route::post('/updateM3u8', 'BotController@updateM3u8')->name('m3u8.update');;
 
 	Route::get('/uploadRule34', 'BotController@uploadRule34');
 	Route::get('/importRule34', 'BotController@importRule34');
