@@ -31,6 +31,18 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
+        /* curl -O --referer https://hanime1.me/ https://vz-e9c9f2c4-a7f.b-cdn.net/dacb9593-b19f-4617-9b57-d4790c8089d1/1920x1080/video0.ts
+
+        for i in `seq 1 197`; do curl -O -H "Origin: https://spankbang.com/" -H "Referer: https://spankbang.com/" https://vstream-7.sb-cd.com/hls/1/0/10969307-1080p.mp4/hls_6s_-${i}-v1-a1.ts?_tid=10969307&d=6&m=7&secure=kt6s_qrOhNADV0iGpJr3Dw,1644711502; done */
+
+        /* $url = 'https://worldstream.hembed.com/38256-1080p.mp4';
+        return Helper::sign_hembed_url($url, env('HEMBED_TOKEN'), 43200);
+
+        return $requests = Browsershot::url('https://www.agemys.com/play/20220015?playid=2_6')
+            ->useCookies(['username' => 'admin'])
+            ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
+            ->triggeredRequests();
+
         $videos = Video::where('foreign_sd', 'like', '%"vod"%')->select('id', 'title', 'sd', 'outsource', 'tags_array', 'foreign_sd', 'created_at')->get();
         foreach ($videos as $video) {
             $temp = $video->foreign_sd;
@@ -45,7 +57,7 @@ class BotController extends Controller
             $temp['vod_sc'] = str_replace('https://worldstream.hembed.com/', 'https://vdownload-4.hembed.com/', $video->foreign_sd['vod_sc']);
             $video->foreign_sd = $temp;
             $video->save();
-        }
+        } */
 
         // download imgurs
         /* $videos = Video::where('cover', 'not like', '%cdn.jsdelivr.net%')->orderBy('id', 'asc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
