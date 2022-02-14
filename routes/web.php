@@ -84,9 +84,6 @@ Route::group(['middleware' => 'admin'], function () {
 
 	Route::get('/checkMotherless', 'BotController@checkMotherless');
 
-	Route::get('/editM3u8', 'BotController@editM3u8');
-	Route::post('/updateM3u8', 'BotController@updateM3u8')->name('m3u8.update');;
-
 	Route::get('/uploadRule34', 'BotController@uploadRule34');
 	Route::get('/importRule34', 'BotController@importRule34');
 	Route::get('/translateRule34', 'BotController@translateRule34');
@@ -110,6 +107,8 @@ Route::group(['middleware' => 'admin'], function () {
 	Route::get('/checkAvbebeM3u8', 'BotController@checkAvbebeM3u8');
 	Route::get('/checkAvbebeOthers', 'BotController@checkAvbebeOthers');
 
+	Route::get('/editM3u8', 'BotController@editM3u8');
+	Route::post('/updateM3u8', 'BotController@updateM3u8')->name('m3u8.update');;
 	Route::get('/editCaptions', 'BotController@editCaptions');
 	Route::post('/updateCaptions', 'BotController@updateCaptions')->name('bot.updateCaptions');
 	Route::post('/checkCaptions', 'BotController@checkCaptions')->name('bot.checkCaptions');
