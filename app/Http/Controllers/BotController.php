@@ -31,6 +31,11 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
+        $url = 'https://vstream.hembed.com/hls/12875.m3u8';
+        return Helper::sign_bcdn_url($url, env('HEMBED_TOKEN'), 43200);
+
+
+
         /* for ($i = 0; $i <= 295; $i++) { 
             $vid = "8525a217-d387-4ce3-a616-96cb9235e47d";
             $folder = $i % 3;
