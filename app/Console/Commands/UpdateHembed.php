@@ -108,6 +108,14 @@ class UpdateHembed extends Command
             $video->sd_sc = reset($qualities_sc);
             $video->qualities_sc = $qualities_sc;
             $video->outsource = false;
+
+            if (strpos($source, '1080p') === false && 
+                strpos($source, '720p') === false && 
+                strpos($source, '480p') === false && 
+                strpos($source, '240p') === false) {
+                $video->sd_sc = Helper::sign_bcdn_url($source, env('BUNNY_TOKEN'), 43200);
+            }
+            
             $video->save();
 
             Log::info('Hembed sc update ID#'.$video->id.' success...');
