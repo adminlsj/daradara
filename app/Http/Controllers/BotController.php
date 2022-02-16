@@ -31,17 +31,15 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $url = 'https://vstream.hembed.com/hls/12875.m3u8';
-        return Helper::sign_bcdn_url($url, env('HEMBED_TOKEN'), 43200);
+        /* $url = 'https://worldstream.hembed.com/38269.mp4';
+        return Helper::sign_hembed_url($url, env('HEMBED_TOKEN'), 43200); */
 
-
-
-        /* for ($i = 0; $i <= 295; $i++) { 
-            $vid = "8525a217-d387-4ce3-a616-96cb9235e47d";
+        for ($i = 0; $i <= 409; $i++) { 
+            $vid = "d9bab591-1330-473e-830a-3bf307a89b82";
             $folder = $i % 3;
             $url = "https://vz-e9c9f2c4-a7f.b-cdn.net/{$vid}/1920x1080/video{$i}.ts";
             Storage::disk('local')->put("video/{$folder}/p_{$i}.html", file_get_contents($url));
-        } */
+        }
 
         /* curl -O --referer https://hanime1.me/ https://vz-e9c9f2c4-a7f.b-cdn.net/dacb9593-b19f-4617-9b57-d4790c8089d1/1920x1080/video0.ts
 

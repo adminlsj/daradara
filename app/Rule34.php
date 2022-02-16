@@ -32,6 +32,12 @@ class Rule34
     ];
 
     public static $translations = [
+        "takeru takaishi" => '高石岳',
+        "koushiro izumi" => '泉光子郎',
+        "taichi yagami" => '八神太一',
+        "taichi kamiya" => '八神太一',
+        "izzy izumi" => '泉光子郎',
+        "digimon" => '數碼寶貝',
         "cosplay" => '角色扮演',
         "gothic lolita" => '哥德蘿莉塔',
         "sono bisque doll wa koi wo suru" => '戀上換裝娃娃',
