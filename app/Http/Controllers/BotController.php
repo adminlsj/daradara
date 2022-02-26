@@ -34,14 +34,34 @@ class BotController extends Controller
         /* $url = 'https://worldstream.hembed.com/38269.mp4';
         return Helper::sign_hembed_url($url, env('HEMBED_TOKEN'), 43200); */
 
-        for ($i = 0; $i <= 409; $i++) { 
-            $vid = "d9bab591-1330-473e-830a-3bf307a89b82";
+        for ($i = 0; $i <= 334; $i++) { 
+            $vid = "44faddfc-e68d-4617-8287-7cff1a86639f";
             $folder = $i % 3;
-            $url = "https://vz-e9c9f2c4-a7f.b-cdn.net/{$vid}/1920x1080/video{$i}.ts";
+            $url = "https://vz-e9c9f2c4-a7f.b-cdn.net/{$vid}/1280x720/video{$i}.ts";
             Storage::disk('local')->put("video/{$folder}/p_{$i}.html", file_get_contents($url));
         }
 
-        /* curl -O --referer https://hanime1.me/ https://vz-e9c9f2c4-a7f.b-cdn.net/dacb9593-b19f-4617-9b57-d4790c8089d1/1920x1080/video0.ts
+        /* $tc = Storage::disk('local')->files('video/tc');
+        foreach ($tc as $video) {
+            $extension = explode('.', $video)[1];
+            if ($extension == 'ts') {
+                $number = Helper::get_string_between($video, 'p', '.ts');
+                $folder = $number % 3;
+                Storage::disk('local')->move($video, "video/tc/{$folder}/p_{$number}.html");
+            }
+        }
+
+        $sc = Storage::disk('local')->files('video/sc');
+        foreach ($sc as $video) {
+            $extension = explode('.', $video)[1];
+            if ($extension == 'ts') {
+                $number = Helper::get_string_between($video, 'p', '.ts');
+                $folder = $number % 3;
+                Storage::disk('local')->move($video, "video/sc/{$folder}/p_{$number}.html");
+            }
+        } */
+
+        /* curl -O --referer https://avbebe.com/ https://vz-e9c9f2c4-a7f.b-cdn.net/dacb9593-b19f-4617-9b57-d4790c8089d1/1920x1080/video0.ts
 
         for i in `seq 0 295`; do echo $folder=`$i % 3`; curl --referer https://hanime1.me/ https://vz-e9c9f2c4-a7f.b-cdn.net/58d37084-285b-45c9-9006-8af6bd5136e3/1920x1080/video${i}.ts --output ${folder}/c_${i}.html; done */
 
@@ -1459,12 +1479,20 @@ class BotController extends Controller
     public function updateM3u8(Request $request)
     {
         $m3u8 = $request->m3u8;
-        $folder = $request->folder;
-        $user = $request->user;
+        $user0 = $request->user0;
+        $user1 = $request->user1;
+        $user2 = $request->user2;
         $lang = $request->lang;
+        $base = trim(Helper::get_string_between($m3u8, ',', '0.ts'));
         for ($i = 0; $i <= 1000; $i++) { 
-            if ($i % 3 == $folder) {
-                $m3u8 = str_replace("video{$i}.ts", "https://cdn.jsdelivr.net/gh/{$user}/{$user}-h@latest/asset/view/{$lang}/{$folder}/p_{$i}.html", $m3u8);
+            if ($i % 3 == 0) {
+                $m3u8 = str_replace("{$base}{$i}.ts", "https://cdn.jsdelivr.net/gh/{$user0}/{$user0}@latest/asset/view/{$lang}/0/p_{$i}.html", $m3u8);
+            }
+            if ($i % 3 == 1) {
+                $m3u8 = str_replace("{$base}{$i}.ts", "https://cdn.jsdelivr.net/gh/{$user1}/{$user1}@latest/asset/view/{$lang}/1/p_{$i}.html", $m3u8);
+            }
+            if ($i % 3 == 2) {
+                $m3u8 = str_replace("{$base}{$i}.ts", "https://cdn.jsdelivr.net/gh/{$user2}/{$user2}@latest/asset/view/{$lang}/2/p_{$i}.html", $m3u8);
             }
         }
         return '<pre>'.$m3u8.'</pre>';
