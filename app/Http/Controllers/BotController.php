@@ -34,8 +34,8 @@ class BotController extends Controller
         /* $url = 'https://worldstream.hembed.com/38269.mp4';
         return Helper::sign_hembed_url($url, env('HEMBED_TOKEN'), 43200); */
 
-        for ($i = 0; $i <= 679; $i++) { 
-            $vid = "b3daef58-f929-4608-921f-1ea394f4d4cc";
+        for ($i = 0; $i <= 333; $i++) { 
+            $vid = "a7d5671e-ce2c-4894-8a25-0735ec8629bf";
             $folder = $i % 3;
             $url = "https://vz-e9c9f2c4-a7f.b-cdn.net/{$vid}/1280x720/video{$i}.ts";
             Storage::disk('local')->put("video/{$folder}/p_{$i}.html", file_get_contents($url));
