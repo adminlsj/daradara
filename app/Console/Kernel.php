@@ -55,7 +55,7 @@ class Kernel extends ConsoleKernel
 
         $schedule->command('hanime1:check-spankbang')->hourly();
         $schedule->command('hanime1:check-motherless')->dailyAt('02:40');
-        $schedule->command('hanime1:update-youjizz')->dailyAt('03:15');
+        $schedule->command('hanime1:update-youjizz')->dailyAt('03:55');
 
         $schedule->command('hanime1:upload-nhentai')->hourly()->between('6:00', '21:00');
         $schedule->command('hanime1:upload-rule34')->hourly()->between('6:00', '21:00');
