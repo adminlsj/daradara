@@ -34,8 +34,8 @@ class BotController extends Controller
         /* $url = 'https://worldstream.hembed.com/38269.mp4';
         return Helper::sign_hembed_url($url, env('HEMBED_TOKEN'), 43200); */
 
-        for ($i = 0; $i <= 253; $i++) { 
-            $vid = "3dcc4dd7-d560-40ee-98b2-b66f02b84e62";
+        for ($i = 0; $i <= 231; $i++) { 
+            $vid = "7563b4f0-9727-4131-af16-0af4225c6944";
             $folder = $i % 3;
             $url = "https://vz-e9c9f2c4-a7f.b-cdn.net/{$vid}/1920x1080/video{$i}.ts";
             Storage::disk('local')->put("video/{$folder}/p_{$i}.html", file_get_contents($url));
@@ -1489,10 +1489,10 @@ class BotController extends Controller
                 $m3u8 = str_replace("{$base}{$i}.ts", "https://cdn.jsdelivr.net/gh/{$user0}/{$user0}@v1.0.0/asset/view/{$lang}/0/p_{$i}.html", $m3u8);
             }
             if ($i % 3 == 1) {
-                $m3u8 = str_replace("{$base}{$i}.ts", "https://cdn.jsdelivr.net/gh/{$user1}/{$user1}@1.0.0/asset/view/{$lang}/1/p_{$i}.html", $m3u8);
+                $m3u8 = str_replace("{$base}{$i}.ts", "https://cdn.jsdelivr.net/gh/{$user1}/{$user1}@v1.0.0/asset/view/{$lang}/1/p_{$i}.html", $m3u8);
             }
             if ($i % 3 == 2) {
-                $m3u8 = str_replace("{$base}{$i}.ts", "https://cdn.jsdelivr.net/gh/{$user2}/{$user2}@1.0.0/asset/view/{$lang}/2/p_{$i}.html", $m3u8);
+                $m3u8 = str_replace("{$base}{$i}.ts", "https://cdn.jsdelivr.net/gh/{$user2}/{$user2}@v1.0.0/asset/view/{$lang}/2/p_{$i}.html", $m3u8);
             }
         }
         return '<pre>'.$m3u8.'</pre>';
