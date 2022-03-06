@@ -4,7 +4,7 @@
     @section('head')
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        @if (isset($sd) && strpos($sd, 'hembed.com') !== false)
+        @if (isset($sd) && strpos($sd, 'hembed.com') !== false && strpos($sd, 'vdownload') !== false)
             <meta name="referrer" content="origin">
         @else
             <meta name="referrer" content="no-referrer">
