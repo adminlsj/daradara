@@ -33,6 +33,8 @@ class Rule34
     ];
 
     public static $translations = [
+        "sakurajima mai" => '櫻島麻衣',
+        "seishun buta yarou wa bunny girl senpai no yume wo minai" => '青春豬頭少年不會夢到兔女郎學姊',
         "kinoshita kazuya" => '木之下和也',
         "spice and wolf" => '狼與辛香料',
         "kemonomimi" => '獸耳',
