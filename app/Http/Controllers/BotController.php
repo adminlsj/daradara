@@ -31,6 +31,12 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
+        $url = 'https://www.tnaflix.com/hd-videos/HALEYS-STORY-56-%E2%80%93-PC-GAMEPLAY-%5BHD%5D/video4610373?isFeatured=0';
+        return $requests = Browsershot::url($url)
+            ->useCookies(['username' => 'admin'])
+            ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
+            ->triggeredRequests();
+
         /* $url = 'https://worldstream.hembed.com/38269.mp4';
         return Helper::sign_hembed_url($url, env('HEMBED_TOKEN'), 43200); */
 
