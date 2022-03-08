@@ -48,7 +48,8 @@
       'pip', // Toggle captions
       'airplay', // Airplay options
       'fullscreen', // Toggle fullscreen
-    ]
+    ],
+    /* duration: {{ $current->duration }} */
   });
   
   if (!Hls.isSupported()) {
@@ -71,4 +72,10 @@
     $('#player-lang-wrapper').removeClass('lang-hidden');
     $('#player-lang-wrapper').addClass('lang-visible');
   });
+
+  /* video.addEventListener("timeupdate", function(){
+    if(this.currentTime >= {{ $current->duration }}) {
+      player.stop();
+    }
+  }); */
 </script>

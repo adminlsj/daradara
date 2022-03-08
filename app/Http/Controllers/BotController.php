@@ -31,21 +31,26 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $url = 'https://www.tnaflix.com/hd-videos/HALEYS-STORY-56-%E2%80%93-PC-GAMEPLAY-%5BHD%5D/video4610373?isFeatured=0';
-        return $requests = Browsershot::url($url)
-            ->useCookies(['username' => 'admin'])
-            ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
-            ->triggeredRequests();
+        $videos = Video::where('foreign_sd', 'like', '%"youjizz"%')->get();
+        foreach ($videos as $video) {
+            $array = explode('-', $video->foreign_sd["youjizz"]);
+            $end = end($array);
+            $id = str_replace('.html', '', $end);
+            $video->sd = 'https://www.youjizz.com/videos/embed/'.$id;
+            $video->outsource = true;
+            $video->qualities = null;
+            $video->save();
+        }
 
-        /* $url = 'https://worldstream.hembed.com/38269.mp4';
-        return Helper::sign_hembed_url($url, env('HEMBED_TOKEN'), 43200); */
+        /* $url = 'https://vdownload.hembed.com/test-hw.m3u8';
+        return Helper::sign_bcdn_url($url, env('HEMBED_TOKEN'), 43200); */
 
-        for ($i = 0; $i <= 432; $i++) { 
-            $vid = "7d5ec4c8-e65c-4cb0-9039-474ec36b3a46";
+        /* for ($i = 0; $i <= 359; $i++) { 
+            $vid = "458f37bb-2a86-4431-84ab-af8ccca2801a";
             $folder = $i % 3;
             $url = "https://vz-e9c9f2c4-a7f.b-cdn.net/{$vid}/1920x1080/video{$i}.ts";
             Storage::disk('local')->put("video/{$folder}/p_{$i}.html", file_get_contents($url));
-        }
+        } */
 
         /* $tc = Storage::disk('local')->files('video/tc');
         foreach ($tc as $video) {
