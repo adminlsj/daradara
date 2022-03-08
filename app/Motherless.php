@@ -13,9 +13,9 @@ class Motherless
     {
         Log::info('Motherless check started...');
 
-        $videos = Video::where('sd', 'like', '%motherless%')->orderBy('id', 'desc')->get();
+        $videos = Video::where('qualities', 'like', '%motherless%')->orderBy('id', 'desc')->get();
         foreach ($videos as $video) {
-            $httpcode = Motherless::getHttpcode($video->sd);
+            $httpcode = Motherless::getHttpcode($video->qualities['480']);
 
             if ($httpcode != 200 && $httpcode != 0) {
                 Mail::to('vicky.avionteam@gmail.com')->send(new UserReport('master', 'Motherless check failed ('.$httpcode.')', $video->id, $video->title, $video->sd, 'master', 'master'));
@@ -27,9 +27,9 @@ class Motherless
 
         Log::info('Motherless sc check started...');
 
-        $videos = Video::where('sd_sc', 'like', '%motherless%')->orderBy('id', 'desc')->get();
+        $videos = Video::where('qualities_sc', 'like', '%motherless%')->orderBy('id', 'desc')->get();
         foreach ($videos as $video) {
-            $httpcode = Motherless::getHttpcode($video->sd_sc);
+            $httpcode = Motherless::getHttpcode($video->qualities_sc['480']);
 
             if ($httpcode != 200 && $httpcode != 0) {
                 Mail::to('vicky.avionteam@gmail.com')->send(new UserReport('master', 'Motherless sc check failed ('.$httpcode.')', $video->id, $video->title, $video->sd_sc, 'master', 'master'));
