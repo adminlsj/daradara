@@ -94,6 +94,8 @@ class Xvideos
                 unset($temp['xvideos']);
                 $video->foreign_sd = $temp;
                 $video->save();
+
+                Log::info('Xvideos update ID#'.$video->id.' failed...');
             }
 
             if ($videos->last() != $video) {
