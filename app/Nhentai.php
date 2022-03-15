@@ -346,7 +346,7 @@ class Nhentai
                 $html = curl_exec($curl_connection);
                 curl_close($curl_connection);
 
-                $galleries_id = Helper::get_string_between($html, 'data-src="https://t.nhentai.net/galleries/', '/');
+                $galleries_id = Helper::get_string_between($html, 'nhentai.net/galleries/', '/');
 
                 $title_n = Helper::get_string_between($html, '<h1 class="title">', '</h1>');
                 $title_n_before = trim(Helper::get_string_between($title_n, '<span class="before">', '</span>'));
