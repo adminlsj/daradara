@@ -312,7 +312,7 @@ class Nhentai
 
         Log::info('Nhentai upload started...');
 
-        $pages = 30;
+        $pages = 5;
         $nhentai_ids = [];
         $url = 'https://nhentai.net/language/chinese/?page=';
         for ($i = 1; $i <= $pages; $i++) { 
