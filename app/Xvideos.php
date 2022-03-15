@@ -95,11 +95,13 @@ class Xvideos
                 Log::info('Xvideos update ID#'.$video->id.' success...');
 
             } else {
-                $temp = $video->foreign_sd;
-                $temp['error'] = $video->foreign_sd['xvideos'];
-                unset($temp['xvideos']);
-                $video->foreign_sd = $temp;
-                $video->save();
+                if ($key != 'error') {
+                    $temp = $video->foreign_sd;
+                    $temp['error'] = $video->foreign_sd['xvideos'];
+                    unset($temp['xvideos']);
+                    $video->foreign_sd = $temp;
+                    $video->save();
+                }
 
                 Log::info('Xvideos update ID#'.$video->id.' failed...');
             }
