@@ -31,28 +31,7 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $total = $number = 1;
-        return $videos = Video::where('sd', 'like', '%xvideos%')
-                    ->select('id', 'title', 'sd', 'outsource', 'tags_array', 'foreign_sd', 'created_at')
-                    ->orderBy('id', 'asc')
-                    ->get()
-                    ->split($total)[$number - 1]
-                    ->sortBy(function($video){
-                        $expire = 0;
-                        if (strpos($video->sd, 'cdn77-vid') !== false) {
-                            $expire = Helper::get_string_between($video->sd, '==,', '/');
-                        } elseif (strpos($video->sd, '-hw.xvideos') !== false) {
-                            $expire = Helper::get_string_between($video->sd, '?e=', '&');
-                        } elseif (strpos($video->sd, '-l3.xvideos') !== false) {
-                            $sd = str_replace('-l3.xvideos-cdn', '', $video->sd);
-                            $expire = Helper::get_string_between($sd, '-', '/');
-                        }
-                        return (int) $expire;
-                    })
-                    ->values()
-                    ->slice(0, 3);
-
-        $videos = Video::where('foreign_sd', 'like', '%"youjizz"%')->get();
+        /* $videos = Video::where('foreign_sd', 'like', '%"youjizz"%')->get();
         foreach ($videos as $video) {
             $array = explode('-', $video->foreign_sd["youjizz"]);
             $end = end($array);
@@ -61,10 +40,10 @@ class BotController extends Controller
             $video->outsource = true;
             $video->qualities = null;
             $video->save();
-        }
+        } */
 
-        /* $url = 'https://vdownload.hembed.com/test-hw.m3u8';
-        return Helper::sign_bcdn_url($url, env('HEMBED_TOKEN'), 43200); */
+        $url = 'https://vdownload-3.hembed.com/12235.mp4';
+        return Helper::sign_hembed_url($url, env('HEMBED_TOKEN'), 43200);
 
         /* for ($i = 0; $i <= 359; $i++) { 
             $vid = "458f37bb-2a86-4431-84ab-af8ccca2801a";
