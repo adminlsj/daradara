@@ -36,7 +36,8 @@ class Xvideos
                     ->slice(0, 3);
 
         foreach ($videos as $video) {
-            $curl_connection = curl_init($video->foreign_sd['xvideos']);
+            $key = array_key_exists('xvideos', $video->foreign_sd) ? 'xvideos' : 'error';
+            $curl_connection = curl_init($video->foreign_sd[$key]);
             curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
             curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
