@@ -95,7 +95,6 @@ class Xvideos
                 Log::info('Xvideos update ID#'.$video->id.' success...');
 
             } else {
-                Mail::to('vicky.avionteam@gmail.com')->send(new UserReport('master', 'Xvideos update failed', $video->id, $video->title, $video->sd, 'master', 'master'));
                 $temp = $video->foreign_sd;
                 $temp['error'] = $video->foreign_sd['xvideos'];
                 unset($temp['xvideos']);
@@ -106,7 +105,7 @@ class Xvideos
             }
 
             if ($videos->last() != $video) {
-                sleep(15);
+                sleep(16);
             }
         }
 
