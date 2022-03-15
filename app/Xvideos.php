@@ -83,6 +83,13 @@ class Xvideos
                     $video->sd = $qualities[250];
                 }
 
+                if ($key == 'error') {
+                    $temp = $video->foreign_sd;
+                    $temp['xvideos'] = $video->foreign_sd['error'];
+                    unset($temp['error']);
+                    $video->foreign_sd = $temp;
+                }
+
                 $video->outsource = false;
                 $video->save();
                 Log::info('Xvideos update ID#'.$video->id.' success...');
