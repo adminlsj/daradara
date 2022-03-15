@@ -23,7 +23,6 @@ class Kernel extends ConsoleKernel
         'App\Console\Commands\UpdateXvideosErrors',
         'App\Console\Commands\UpdateHembed',
         'App\Console\Commands\UpdateVod',
-        // 'App\Console\Commands\UpdateYoujizz',
         'App\Console\Commands\UpdateSpankbang',
         'App\Console\Commands\UpdateSpankbangErrors',
 
