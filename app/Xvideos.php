@@ -96,7 +96,7 @@ class Xvideos
             }
 
             if ($videos->last() != $video) {
-                sleep(10);
+                sleep(15);
             }
         }
 
