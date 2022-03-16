@@ -42,8 +42,8 @@ class BotController extends Controller
             $video->save();
         } */
 
-        $url = 'https://vdownload-3.hembed.com/12235.mp4';
-        return Helper::sign_hembed_url($url, env('HEMBED_TOKEN'), 43200);
+        $url = 'https://vstream.hembed.com/hls/12235.m3u8';
+        return Helper::sign_bcdn_url($url, env('HEMBED_TOKEN'), 43200);
 
         /* for ($i = 0; $i <= 359; $i++) { 
             $vid = "458f37bb-2a86-4431-84ab-af8ccca2801a";
