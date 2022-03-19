@@ -7,7 +7,6 @@ use App\Watch;
 use App\User;
 use App\Comment;
 use App\Reply;
-use App\Subscribe;
 use App\Like;
 use App\Save;
 use Illuminate\Http\Request;
@@ -19,6 +18,7 @@ use Redirect;
 use Validator;
 use Mail;
 use App\Mail\UserReport;
+use Illuminate\Support\Arr;
 
 class VideoController extends Controller
 {
@@ -91,6 +91,12 @@ class VideoController extends Controller
                 $qualities = $video->qualities;
                 $downloads = $video->downloads;
             }
+            if (strpos($sd, 'vbalancer') !== false) {
+                $balancer = Helper::get_string_between($sd, 'vbalancer-', '.hembed');
+                $server = Arr::random(Video::$vod_servers[$balancer - 1]);
+                $sd = $this->getServerSd($balancer, $server, $sd);
+                $qualities = $this->getServerQual($balancer, $server, $qualities);
+            }
             $qual = $qualities != null ? $this->getPreferredQuality(array_keys($qualities)) : 720;
 
         } else {
@@ -116,6 +122,13 @@ class VideoController extends Controller
                 $sd = $video->sd;
                 $qualities = $video->qualities;
                 $downloads = $video->downloads;
+            }
+
+            if (strpos($sd, 'vbalancer') !== false) {
+                $balancer = Helper::get_string_between($sd, 'vbalancer-', '.hembed');
+                $server = Arr::random(Video::$vod_servers[$balancer - 1]);
+                $sd = $this->getServerSd($balancer, $server, $sd);
+                $qualities = $this->getServerQual($balancer, $server, $qualities);
             }
 
             if ($downloads != null) {
@@ -163,6 +176,22 @@ class VideoController extends Controller
             }
         }
         return $lang;
+    }
+
+    public function getServerSd($balancer, $server, $sd)
+    {
+        $sd = str_replace("vbalancer-{$balancer}.hembed.com", "vdownload-{$server}.hembed.com", $sd);
+        $sd = Helper::sign_hembed_url($sd, env('HEMBED_TOKEN'), 43200);
+        return $sd;
+    }
+
+    public function getServerQual($balancer, $server, $qualities)
+    {
+        foreach ($qualities as &$qual) {
+            $qual = str_replace("vbalancer-{$balancer}.hembed.com", "vdownload-{$server}.hembed.com", $qual);
+            $qual = Helper::sign_hembed_url($qual, env('HEMBED_TOKEN'), 43200);
+        }
+        return $qualities;
     }
 
     public function like(Request $request)

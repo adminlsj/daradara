@@ -22,7 +22,7 @@
     "@type": "Person",
     "name": "Hanime1.me"
   },
-  "contentUrl": "{!! $video->sd !!}",
+  "contentUrl": "{!! $sd !!}",
   "interactionStatistic": {
     "@type": "InteractionCounter",
     "interactionType": { "@type": "http://schema.org/WatchAction" },
