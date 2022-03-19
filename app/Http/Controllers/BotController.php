@@ -31,6 +31,27 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
+        $videos = Video::where('sd', 'like', '%vdownload-1.hembed.com%')->get();
+        foreach ($videos as $video) {
+            $video->sd = str_replace('vdownload-1.hembed.com', 'vbalancer-1.hembed.com', explode('?', $video->sd)[0]);
+            $qualities = $video->qualities;
+            foreach ($qualities as &$qual) {
+                $qual = str_replace('vdownload-1.hembed.com', 'vbalancer-1.hembed.com', explode('?', $qual)[0]);
+            }
+            $video->qualities = $qualities;
+
+            if ($video->sd_sc) {
+                $video->sd_sc = str_replace('vdownload-1.hembed.com', 'vbalancer-1.hembed.com', explode('?', $video->sd_sc)[0]);
+                $qualities_sc = $video->qualities_sc;
+                foreach ($qualities_sc as &$qual_sc) {
+                    $qual_sc = str_replace('vdownload-1.hembed.com', 'vbalancer-1.hembed.com', explode('?', $qual_sc)[0]);
+                }
+                $video->qualities_sc = $qualities_sc;
+            }
+
+            $video->save();
+        }
+
         /* $videos = Video::where('foreign_sd', 'like', '%"youjizz"%')->get();
         foreach ($videos as $video) {
             $array = explode('-', $video->foreign_sd["youjizz"]);
@@ -45,12 +66,12 @@ class BotController extends Controller
         /* $url = 'https://vdownload-1.hembed.com/12499-720p.mp4';
         return Helper::sign_hembed_url($url, env('HEMBED_TOKEN'), 43200); */
 
-        for ($i = 0; $i <= 239; $i++) { 
+        /* for ($i = 0; $i <= 239; $i++) { 
             $vid = "c66d1ae7-171a-463f-a866-56eb05df0321";
             $folder = $i % 3;
             $url = "https://vz-e9c9f2c4-a7f.b-cdn.net/{$vid}/1920x1080/video{$i}.ts";
             Storage::disk('local')->put("video/{$folder}/p_{$i}.html", file_get_contents($url));
-        }
+        } */
 
         /* $tc = Storage::disk('local')->files('video/tc');
         foreach ($tc as $video) {
