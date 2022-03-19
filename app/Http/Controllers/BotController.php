@@ -1437,11 +1437,11 @@ class BotController extends Controller
             }
             if (strpos($source, '480p') !== false) {
                 $qualities['480'] = Helper::sign_hembed_url($source, env('HEMBED_TOKEN'), 43200);
-                $source = str_replace('-480p.mp4', '-240p.mp4', $source);
+                // $source = str_replace('-480p.mp4', '-240p.mp4', $source);
             }
-            if (strpos($source, '240p') !== false) {
+            /* if (strpos($source, '240p') !== false) {
                 $qualities['240'] = Helper::sign_hembed_url($source, env('HEMBED_TOKEN'), 43200);
-            }
+            } */
 
             $video->sd = reset($qualities);
             $video->qualities = $qualities;
@@ -1471,11 +1471,11 @@ class BotController extends Controller
             }
             if (strpos($source_sc, '480p') !== false) {
                 $qualities_sc['480'] = Helper::sign_hembed_url($source_sc, env('HEMBED_TOKEN'), 43200);
-                $source_sc = str_replace('-480p.mp4', '-240p.mp4', $source_sc);
+                // $source_sc = str_replace('-480p.mp4', '-240p.mp4', $source_sc);
             }
-            if (strpos($source_sc, '240p') !== false) {
+            /* if (strpos($source_sc, '240p') !== false) {
                 $qualities_sc['240'] = Helper::sign_hembed_url($source_sc, env('HEMBED_TOKEN'), 43200);
-            }
+            } */
 
             $video->sd_sc = reset($qualities_sc);
             $video->qualities_sc = $qualities_sc;
