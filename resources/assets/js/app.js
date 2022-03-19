@@ -21,7 +21,7 @@ const app = new Vue({
     el: '#app'
 });
 
-var progress;
+/* var progress;
 $('.preview-trigger').hover(function(){
   var bar = $(this).find('#myBar');
   var width = 1;
@@ -69,7 +69,7 @@ $('.preview-trigger').on({ 'touchstart' : function(){
         $(this).css('background-color', 'black');
     }).appendTo($(this).find('.preview-wrapper'))[0].play();
   }
-}});
+}}); */
 
 $('#broad').change(function(){
   if (this.checked) {

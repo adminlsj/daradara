@@ -1561,4 +1561,21 @@ class BotController extends Controller
             Log::info('Error in deleting log files!');
         }
     }
+
+    public function reset(Request $request)
+    {
+        $vid = $request->v;
+
+        if (is_numeric($vid) && $video = Video::select('id', 'tags_array')->find($vid)) {
+            $tags_array = $video->tags_array;
+            foreach ($tags_array as $key => $value) {
+                if ($value == 1) {
+                    unset($tags_array[$key]);
+                }
+            }
+            $video->tags_array = $tags_array;
+            $video->save();
+            echo "Newly added tags removed from ID#".$video->id;
+        }
+    }
 }

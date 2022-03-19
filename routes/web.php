@@ -62,6 +62,7 @@
 
 Route::group(['middleware' => 'admin'], function () {
 	Route::get('/tempMethod', 'BotController@tempMethod');
+	Route::get('/reset', 'BotController@reset');
 
 	Route::get('/comments', 'BotController@comments');
 
