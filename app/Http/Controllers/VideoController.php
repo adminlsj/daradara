@@ -124,19 +124,19 @@ class VideoController extends Controller
                 $downloads = $video->downloads;
             }
 
-            if (strpos($sd, 'vbalancer') !== false) {
-                $balancer = Helper::get_string_between($sd, 'vbalancer-', '.hembed');
-                $server = Arr::random(Video::$vod_servers[$balancer - 1]);
-                $sd = $this->getServerSd($balancer, $server, $sd);
-                $qualities = $this->getServerQual($balancer, $server, $qualities);
-            }
-
             if ($downloads != null) {
                 $qualities = $downloads;
             }
 
             if ($qualities == null) {
                 abort(403);
+            }
+
+            if (strpos($sd, 'vbalancer') !== false) {
+                $balancer = Helper::get_string_between($sd, 'vbalancer-', '.hembed');
+                $server = Arr::random(Video::$vod_servers[$balancer - 1]);
+                $sd = $this->getServerSd($balancer, $server, $sd);
+                $qualities = $this->getServerQual($balancer, $server, $qualities);
             }
 
         } else {
