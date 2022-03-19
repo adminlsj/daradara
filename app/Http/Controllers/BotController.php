@@ -42,21 +42,15 @@ class BotController extends Controller
             $video->save();
         } */
 
-        $url = 'https://vdownload-1.hembed.com/12499-720p.mp4';
-        return Helper::sign_hembed_url($url, env('HEMBED_TOKEN'), 43200);
+        /* $url = 'https://vdownload-1.hembed.com/12499-720p.mp4';
+        return Helper::sign_hembed_url($url, env('HEMBED_TOKEN'), 43200); */
 
-        /* for ($i = 0; $i <= 99; $i++) { 
-            $vid = "629b1e25-bdce-4d41-bf0c-280d6346d1d0";
-            $url = "https://vz-e9c9f2c4-a7f.b-cdn.net/{$vid}/1920x1080/video{$i}.ts";
-            Storage::disk('local')->put("video/sc/video{$i}.ts", file_get_contents($url));
-        } */
-
-        /* for ($i = 0; $i <= 359; $i++) { 
-            $vid = "458f37bb-2a86-4431-84ab-af8ccca2801a";
+        for ($i = 0; $i <= 239; $i++) { 
+            $vid = "c66d1ae7-171a-463f-a866-56eb05df0321";
             $folder = $i % 3;
             $url = "https://vz-e9c9f2c4-a7f.b-cdn.net/{$vid}/1920x1080/video{$i}.ts";
             Storage::disk('local')->put("video/{$folder}/p_{$i}.html", file_get_contents($url));
-        } */
+        }
 
         /* $tc = Storage::disk('local')->files('video/tc');
         foreach ($tc as $video) {
@@ -1576,6 +1570,37 @@ class BotController extends Controller
             $video->tags_array = $tags_array;
             $video->save();
             echo "Newly added tags removed from ID#".$video->id;
+        }
+    }
+
+    public function downloadAvbebeM3u8(Request $request)
+    {
+        $vid = str_replace('https://avbebe.com/archives/', '', $request->url);
+        $m3u8 = "https://v.avgigi.com/acg/watch/{$vid}/{$vid}.m3u8";
+        $referer = "https://avgigi.com/";
+        $opts = [
+            'http' => [
+               'header' => [
+                    "Referer: https://avgigi.com/"
+                ]
+            ]
+        ];
+        $context = stream_context_create($opts);
+        Storage::disk('local')->put("video/{$vid}.m3u8", file_get_contents($m3u8, false, $context));
+
+        $curl_connection = curl_init($m3u8);
+        curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+        curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+        $playlist = curl_exec($curl_connection);
+        curl_close($curl_connection);
+        $total = explode("{$vid}", $playlist);
+        $total = end($total);
+        $total = explode('.ts', $total)[0];
+
+        for ($i = 0; $i <= $total; $i++) { 
+            $url = "https://v.avgigi.com/acg/watch/{$vid}/{$vid}{$i}.ts";
+            Storage::disk('local')->put("video/{$vid}{$i}.ts", file_get_contents($url, false, $context));
         }
     }
 }
