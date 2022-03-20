@@ -31,12 +31,12 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $videos = Video::where('sd', 'like', '%vdownload-1.hembed.com%')->get();
+        $videos = Video::where('sd', 'like', '%vdownload-4.hembed.com%')->get();
         foreach ($videos as $video) {
-            $video->sd = str_replace('vdownload-1.hembed.com', 'vbalancer-1.hembed.com', explode('?', $video->sd)[0]);
+            $video->sd = str_replace('vdownload-4.hembed.com', 'vbalancer-1.hembed.com', explode('?', $video->sd)[0]);
             $qualities = $video->qualities;
             foreach ($qualities as &$qual) {
-                $qual = str_replace('vdownload-1.hembed.com', 'vbalancer-1.hembed.com', explode('?', $qual)[0]);
+                $qual = str_replace('vdownload-4.hembed.com', 'vbalancer-1.hembed.com', explode('?', $qual)[0]);
             }
             $video->qualities = $qualities;
             $foreign_sd = $video->foreign_sd;
@@ -44,10 +44,10 @@ class BotController extends Controller
             $video->foreign_sd = $foreign_sd;
 
             if ($video->sd_sc) {
-                $video->sd_sc = str_replace('vdownload-1.hembed.com', 'vbalancer-1.hembed.com', explode('?', $video->sd_sc)[0]);
+                $video->sd_sc = str_replace('vdownload-4.hembed.com', 'vbalancer-1.hembed.com', explode('?', $video->sd_sc)[0]);
                 $qualities_sc = $video->qualities_sc;
                 foreach ($qualities_sc as &$qual_sc) {
-                    $qual_sc = str_replace('vdownload-1.hembed.com', 'vbalancer-1.hembed.com', explode('?', $qual_sc)[0]);
+                    $qual_sc = str_replace('vdownload-4.hembed.com', 'vbalancer-1.hembed.com', explode('?', $qual_sc)[0]);
                 }
                 $video->qualities_sc = $qualities_sc;
                 $foreign_sd = $video->foreign_sd;
