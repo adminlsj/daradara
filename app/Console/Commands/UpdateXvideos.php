@@ -3,7 +3,11 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use App\Xvideos;
+use App\Video;
+use Mail;
+use App\Mail\UserReport;
+use Illuminate\Support\Facades\Log;
+use App\Helper;
 
 class UpdateXvideos extends Command
 {
