@@ -31,31 +31,24 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $videos = Video::where('sd', 'like', '%vdownload-4.hembed.com%')->get();
-        foreach ($videos as $video) {
-            $video->sd = str_replace('vdownload-4.hembed.com', 'vbalancer-1.hembed.com', explode('?', $video->sd)[0]);
-            $qualities = $video->qualities;
-            foreach ($qualities as &$qual) {
-                $qual = str_replace('vdownload-4.hembed.com', 'vbalancer-1.hembed.com', explode('?', $qual)[0]);
+        $tc = Storage::disk('local')->files('video/tc');
+        foreach ($tc as $video) {
+            $extension = explode('.', $video)[1];
+            if ($extension == 'ts') {
+                $number = Helper::get_string_between($video, 'video/tc/video', '.ts');
+                $folder = $number % 3;
+                Storage::disk('local')->move($video, "video/tc/{$folder}/p_{$number}.html");
             }
-            $video->qualities = $qualities;
-            $foreign_sd = $video->foreign_sd;
-            unset($foreign_sd['vod']);
-            $video->foreign_sd = $foreign_sd;
+        }
 
-            if ($video->sd_sc) {
-                $video->sd_sc = str_replace('vdownload-4.hembed.com', 'vbalancer-1.hembed.com', explode('?', $video->sd_sc)[0]);
-                $qualities_sc = $video->qualities_sc;
-                foreach ($qualities_sc as &$qual_sc) {
-                    $qual_sc = str_replace('vdownload-4.hembed.com', 'vbalancer-1.hembed.com', explode('?', $qual_sc)[0]);
-                }
-                $video->qualities_sc = $qualities_sc;
-                $foreign_sd = $video->foreign_sd;
-                unset($foreign_sd['vod_sc']);
-                $video->foreign_sd = $foreign_sd;
+        $sc = Storage::disk('local')->files('video/sc');
+        foreach ($sc as $video) {
+            $extension = explode('.', $video)[1];
+            if ($extension == 'ts') {
+                $number = Helper::get_string_between($video, 'video/sc/video', '.ts');
+                $folder = $number % 3;
+                Storage::disk('local')->move($video, "video/sc/{$folder}/p_{$number}.html");
             }
-
-            $video->save();
         }
 
         /* $videos = Video::where('foreign_sd', 'like', '%"youjizz"%')->get();

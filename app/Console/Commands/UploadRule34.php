@@ -72,7 +72,7 @@ class UploadRule34 extends Command
             $queries = [];
             parse_str($link, $queries);
             $rule_id = $queries['id'];
-            if (!Video::where('sd', 'like', '%?'.$rule_id)->exists() && !Video::where('foreign_sd', 'like', '%'.$rule_id.'"%')->exists() && !in_array($rule_id, $duplicated)) {
+            if (!empty($rule_id) && !Video::where('sd', 'like', '%?'.$rule_id)->exists() && !Video::where('foreign_sd', 'like', '%'.$rule_id.'"%')->exists() && !in_array($rule_id, $duplicated)) {
                 $html = Browsershot::url($link)
                 ->timeout(3600)
                 ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
