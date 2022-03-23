@@ -109,24 +109,26 @@ class UploadRule34 extends Command
                 $sd = Helper::get_string_between($html, '<source src="', '"');
                 $created_at = Helper::get_string_between($html, 'Posted: ', '<br>');
 
-                $video = Video::create([
-                    'user_id' => $user->id,
-                    'playlist_id' => $playlist->id,
-                    'title' => $title,
-                    'translations' => ['JP' => $title],
-                    'caption' => $title,
-                    'sd' => $sd,
-                    'imgur' => 'WENZTSJ',
-                    'tags' => implode(' ', array_keys($tags)),
-                    'tags_array' => $tags,
-                    'current_views' => 0,
-                    'views' => 0,
-                    'outsource' => true,
-                    'foreign_sd' => ['rule34' => $sd],
-                    'cover' => 'https://i.imgur.com/E6mSQA2.png',
-                    'created_at' => $created_at,
-                    'uploaded_at' => Carbon::now(),
-                ]);
+                if (!empty($sd)) {
+                    $video = Video::create([
+                        'user_id' => $user->id,
+                        'playlist_id' => $playlist->id,
+                        'title' => $title,
+                        'translations' => ['JP' => $title],
+                        'caption' => $title,
+                        'sd' => $sd,
+                        'imgur' => 'WENZTSJ',
+                        'tags' => implode(' ', array_keys($tags)),
+                        'tags_array' => $tags,
+                        'current_views' => 0,
+                        'views' => 0,
+                        'outsource' => true,
+                        'foreign_sd' => ['rule34' => $sd],
+                        'cover' => 'https://i.imgur.com/E6mSQA2.png',
+                        'created_at' => $created_at,
+                        'uploaded_at' => Carbon::now(),
+                    ]);
+                }
 
                 Rule34::translateRule34();
             }
