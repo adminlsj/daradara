@@ -21,6 +21,7 @@ use App\Youjizz;
 use App\Motherless;
 use App\Nhentai;
 use Storage;
+use Redirect;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 
@@ -1247,6 +1248,52 @@ class BotController extends Controller
             $video->foreign_sd = $temp;
             $video->save();
             return 'Updated';
+        }
+        return '403 Forbidden';
+    }
+
+    public function addBalancerSource(Request $request)
+    {
+        $balancer = $request->balancer ? $request->balancer : '1';
+        $quality = $request->quality ? $request->quality : '720p';
+        $vid = $request->v;
+
+        if (is_numeric($vid) && $video = Video::select('id', 'sd', 'foreign_sd')->find($vid)) {
+            $sd = $source = "https://vbalancer-{$balancer}.hembed.com/{$vid}-{$quality}.mp4";
+            $qualities = [];
+            if (strpos($source, '1080p') !== false) {
+                $qualities['1080'] = "https://vbalancer-{$balancer}.hembed.com/{$vid}-1080p.mp4";
+                $source = str_replace('-1080p.mp4', '-720p.mp4', $source);
+            }
+            if (strpos($source, '720p') !== false) {
+                $qualities['720'] = "https://vbalancer-{$balancer}.hembed.com/{$vid}-720p.mp4";
+                $source = str_replace('-720p.mp4', '-480p.mp4', $source);
+            }
+            if (strpos($source, '480p') !== false) {
+                $qualities['480'] = "https://vbalancer-{$balancer}.hembed.com/{$vid}-480p.mp4";
+            }
+            $video->sd = $sd;
+            $video->qualities = $qualities;
+
+            $sd_sc = $source_sc = "https://vbalancer-{$balancer}.hembed.com/{$vid}-sc-{$quality}.mp4";
+            $qualities_sc = [];
+            if (strpos($source_sc, '1080p') !== false) {
+                $qualities_sc['1080'] = "https://vbalancer-{$balancer}.hembed.com/{$vid}-sc-1080p.mp4";
+                $source_sc = str_replace('-1080p.mp4', '-720p.mp4', $source_sc);
+            }
+            if (strpos($source_sc, '720p') !== false) {
+                $qualities_sc['720'] = "https://vbalancer-{$balancer}.hembed.com/{$vid}-sc-720p.mp4";
+                $source_sc = str_replace('-720p.mp4', '-480p.mp4', $source_sc);
+            }
+            if (strpos($source_sc, '480p') !== false) {
+                $qualities_sc['480'] = "https://vbalancer-{$balancer}.hembed.com/{$vid}-sc-480p.mp4";
+            }
+            $video->sd_sc = $sd_sc;
+            $video->qualities_sc = $qualities_sc;
+
+            $video->save();
+
+            return Redirect::route('video.watch', ['v' => $video->id]);
         }
         return '403 Forbidden';
     }

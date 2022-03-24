@@ -69,6 +69,7 @@ Route::group(['middleware' => 'admin'], function () {
 
 	Route::get('/updateHembed', 'BotController@updateHembed');
 	Route::get('/addHembedSource', 'BotController@addHembedSource');
+	Route::get('/addBalancerSource', 'BotController@addBalancerSource');
 	Route::get('/updateVod', 'BotController@updateVod');
 
 	Route::get('/updateSpankbang', 'BotController@updateSpankbang');
