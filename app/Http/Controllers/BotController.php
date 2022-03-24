@@ -1560,6 +1560,13 @@ class BotController extends Controller
         return view('layouts.comments', compact('comments')); 
     }
 
+    public function views(Request $request)
+    {   
+        $videos = Video::where('sd', 'like', '%vbalancer-1%')->select('id', 'views')->get();
+        $current_views = $videos->sum('current_views');
+        echo "vbalancer-1: {$current_views}<br>";
+    }
+
     public function clearLaravelLogs()
     {   
         $files = Arr::where(Storage::disk('log')->files(), function($filename) {
