@@ -1562,7 +1562,7 @@ class BotController extends Controller
 
     public function views(Request $request)
     {   
-        $videos = Video::where('sd', 'like', '%vbalancer-1%')->select('id', 'views')->get();
+        $videos = Video::where('sd', 'like', '%vbalancer-1%')->select('id', 'current_views')->get();
         $current_views = $videos->sum('current_views');
         echo "vbalancer-1: {$current_views}<br>";
     }
