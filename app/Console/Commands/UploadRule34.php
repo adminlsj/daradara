@@ -109,7 +109,7 @@ class UploadRule34 extends Command
                 $sd = Helper::get_string_between($html, '<source src="', '"');
                 $created_at = Helper::get_string_between($html, 'Posted: ', '<br>');
 
-                if (!empty($sd)) {
+                if (!empty($sd) && strpos($sd, 'ackcdn.net') === false) {
                     $video = Video::create([
                         'user_id' => $user->id,
                         'playlist_id' => $playlist->id,
