@@ -26,6 +26,6 @@
     <a style="color: white; font-weight: normal; font-family: 'Trebuchet MS', sans-serif; margin-right: 20px" href="{{ route('home.search') }}?genre=3D動畫&duration=&sort=&query=&year=&month=">3D</a>
     <a style="color: white; font-weight: normal; font-family: 'Trebuchet MS', sans-serif; margin-right: 20px" href="{{ route('home.search') }}?genre=同人作品&duration=&sort=&query=&year=&month=">同人</a>
     <a style="color: white; font-weight: normal; font-family: 'Trebuchet MS', sans-serif; margin-right: 20px" href="{{ route('home.search') }}?genre=Cosplay&duration=&sort=&query=&year=&month=">COS</a>
-    <a style="color: white; font-weight: normal; font-family: 'Trebuchet MS', sans-serif; margin-right: 20px" href="{{ route('home.search') }}?genre=Cosplay&duration=&sort=&query=&year=&month=">漫畫</a>
+    <a style="color: white; font-weight: normal; font-family: 'Trebuchet MS', sans-serif; margin-right: 15px" href="{{ route('home.search') }}?genre=Cosplay&duration=&sort=&query=&year=&month=">漫畫</a>
   </div>
 </div>
