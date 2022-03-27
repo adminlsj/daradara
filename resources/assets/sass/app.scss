@@ -97,6 +97,12 @@ th, td {
   margin-top: 10px;
 }
 
+.card-mobile-panel .card-mobile-genre-wrapper {
+  margin-top: 10px; 
+  padding-bottom: 10px; 
+  font-weight: 400
+}
+
 .home-tags-title {
   font-size: 18px; 
   color: white; 
@@ -2055,6 +2061,10 @@ div.sticky {
 
   .card-mobile-panel .card-mobile-title {
     font-size: 1.25rem; 
+  }
+
+  .card-mobile-panel .card-mobile-genre-wrapper {
+    margin-top: 7px; 
   }
 
   .content-padding-new {
