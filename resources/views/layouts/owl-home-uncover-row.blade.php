@@ -36,7 +36,7 @@
 				@else
 					<span class="card-mobile-genre" style="color: rgba(242, 38, 19, 1); border-color: rgba(242, 38, 19, 0.30);">裏番</span>
 				@endif
-				<span style="font-size: 10px; color: dimgray; margin-left: 2px" class="card-mobile-user">{{ $video->user->name }}</span>
+				<span style="font-size: 11px; color: dimgray; margin-left: 2px" class="card-mobile-user">{{ $video->user->name }}</span>
 			</div>
 		</div>
 	</div>
