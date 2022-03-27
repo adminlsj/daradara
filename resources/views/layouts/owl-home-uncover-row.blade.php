@@ -17,6 +17,17 @@
 				    </div>
 			    @endif
 		    </div>
+		    <div style="position: absolute; top: 3px; right: 3px; font-weight: 400">
+				@if (array_key_exists('3D', $video->tags_array))
+					<span class="card-mobile-genre" style="color: rgba(245, 171, 53, 1); border-color: rgba(245, 171, 53, 0.50);">3D</span>
+				@elseif (array_key_exists('同人', $video->tags_array))
+					<span class="card-mobile-genre" style="color: rgba(241, 130, 141,1); border-color: rgba(241, 130, 141, 0.50);">同人</span>
+				@elseif (array_key_exists('Cosplay', $video->tags_array))
+					<span class="card-mobile-genre" style="color: rgba(165, 55, 253, 1); border-color: rgba(165, 55, 253, 0.50);">COS</span>
+				@else
+					<span class="card-mobile-genre" style="color: rgba(242, 38, 19, 1); border-color: rgba(242, 38, 19, 0.50);">裏番</span>
+				@endif
+			</div>
 	    </div>
 	</a>
 
@@ -25,19 +36,6 @@
 			<a href="{{ route('video.watch') }}?v={{ $video->id }}" style="text-decoration: none; font-size: inherit;">
 				<div class="card-mobile-title">{{ $video->title }}</div>
 			</a>
-
-			<div style="margin-top: 10px; padding-bottom: 10px; font-weight: 400">
-				@if (array_key_exists('3D', $video->tags_array))
-					<span class="card-mobile-genre" style="color: rgba(245, 171, 53, 1); border-color: rgba(245, 171, 53, 0.30);">3D</span>
-				@elseif (array_key_exists('同人', $video->tags_array))
-					<span class="card-mobile-genre" style="color: rgba(241, 130, 141,1); border-color: rgba(241, 130, 141, 0.30);">同人</span>
-				@elseif (array_key_exists('Cosplay', $video->tags_array))
-					<span class="card-mobile-genre" style="color: rgba(165, 55, 253, 1); border-color: rgba(165, 55, 253, 0.30);">COS</span>
-				@else
-					<span class="card-mobile-genre" style="color: rgba(242, 38, 19, 1); border-color: rgba(242, 38, 19, 0.30);">裏番</span>
-				@endif
-				<span style="font-size: 10px; color: dimgray; margin-left: 2px" class="card-mobile-user">{{ $video->user->name }}</span>
-			</div>
 		</div>
 	</div>
 </div>
