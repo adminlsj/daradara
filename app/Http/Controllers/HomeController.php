@@ -18,30 +18,83 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
-        $count = 28;
+        $count = 21;
 
-        $upload = Video::whereOrderBy('uploaded_at', $count, false)->where('imgur', '!=', 'WENZTSJ')->get();
         $newest = Video::whereOrderBy('created_at', $count, true)->where('title', 'not like', '[新番預告]%')->get();
-        $trending = Video::whereOrderBy('views', $count, true)->get();
+       
+        $upload = Video::with('user:id,name,avatar_temp')->orderBy('uploaded_at', 'desc')->select('id', 'user_id', 'title', 'cover', 'imgur', 'views', 'tags_array', 'created_at', 'duration')->limit(10)->get()->split(5);
 
-        $tag1 = Video::whereHasTags(['巨乳'], $count)->get();
-        $tag2 = Video::whereHasTags(['貧乳'], $count)->get();
-        $tag3 = Video::whereHasTags(['肛交'], $count)->get();
-        $tag4 = Video::whereHasTags(['耽美'], $count)->get();
-        $tag5 = Video::whereHasTags([], $count)->get();
+        $trending = Video::whereOrderBy('current_views', $count, true)->get();
 
-        $rows = [
-            '最新上傳' => ['videos' => $upload, 'link' => '/search?query=&genre=全部&sort=最新上傳'], 
-            '最新內容' => ['videos' => $newest, 'link' => '/search?query=&genre=H動漫&sort=最新內容'],
-            '發燒影片' => ['videos' => $trending, 'link' => '/search?query=&genre=H動漫&sort=觀看次數'], 
-            '乳不巨何以聚人心' => ['videos' => $tag1, 'link' => '/search?query=&genre=H動漫&tags%5B%5D=巨乳&sort='], 
-            '胸不平何以平天下' => ['videos' => $tag2, 'link' => '/search?query=&genre=H動漫&tags%5B%5D=貧乳&sort='], 
-            '菊不爆何以保家園' => ['videos' => $tag3, 'link' => '/search?query=&genre=H動漫&tags%5B%5D=肛交&sort='], 
-            '女不腐何以撫民心' => ['videos' => $tag4, 'link' => '/search?query=&genre=H動漫&broad=on&tags%5B%5D=扶他&tags%5B%5D=偽娘&tags%5B%5D=耽美'], 
-            '更多精彩內容' => ['videos' => $tag5, 'link' => '/search']
+        $tags = [
+            [
+                'title' => '女高中生',
+                'link' => '/search?query=&genre=&tags%5B%5D=JK&sort=&year=&month=&duration=',
+                'imgur' => 'https://cdn.jsdelivr.net/gh/damedesho/damedesho-h@latest/asset/thumbnail/DT2P6mGl.jpg',
+                'total' => '1,263',
+            ],
+            [
+                'title' => '純愛最高',
+                'link' => '/search?query=&genre=&tags%5B%5D=純愛&sort=&year=&month=&duration=',
+                'imgur' => 'https://cdn.jsdelivr.net/gh/biexiangzou/biexiangzou-h@latest/asset/thumbnail/sjlurZWl.jpg',
+                'total' => '607',
+            ],
+            [
+                'title' => '人妻熟女',
+                'link' => '/search?query=&genre=&broad=on&tags%5B%5D=熟女&tags%5B%5D=人妻&sort=&year=&month=&duration=',
+                'imgur' => 'https://cdn.jsdelivr.net/gh/guaishushukanlifan/Project-H@latest/asset/thumbnail/vlLlj9Jl.jpg',
+                'total' => '428',
+            ],
+            [
+                'title' => '近親相姦',
+                'link' => '/search?query=&genre=&broad=on&tags%5B%5D=近親&sort=&year=&month=&duration=',
+                'imgur' => 'https://cdn.jsdelivr.net/gh/guaishushukanlifan/Project-H@latest/asset/thumbnail/aH3xcyhl.jpg',
+                'total' => '527',
+            ],
+            [
+                'title' => '貧乳女孩',
+                'link' => '/search?query=&genre=&broad=on&tags%5B%5D=貧乳&sort=&year=&month=&duration=',
+                'imgur' => 'https://cdn.jsdelivr.net/gh/guaishushukanlifan/Project-H@latest/asset/thumbnail/4BzQHJal.jpg',
+                'total' => '526',
+            ],
+            [
+                'title' => '強姦凌辱',
+                'link' => '/search?query=&genre=&broad=on&tags%5B%5D=強制&sort=&year=&month=&duration=',
+                'imgur' => 'https://cdn.jsdelivr.net/gh/damedesho/damedesho-h@latest/asset/thumbnail/p0JqE1cl.jpg',
+                'total' => '875',
+            ],
+            [
+                'title' => '異族風情',
+                'link' => '/search?query=&genre=&broad=on&tags%5B%5D=異種族&sort=&year=&month=&duration=',
+                'imgur' => 'https://cdn.jsdelivr.net/gh/damedesho/damedesho-h@latest/asset/thumbnail/xr2YJIMl.jpg',
+                'total' => '252',
+            ],
+            [
+                'title' => '耽美偽娘',
+                'link' => '/search?query=&genre=&broad=on&tags%5B%5D=偽娘&tags%5B%5D=耽美&sort=&year=&month=&duration=',
+                'imgur' => 'https://cdn.jsdelivr.net/gh/biexiangzou/biexiangzou-h@latest/asset/thumbnail/gQOhqs4l.jpg',
+                'total' => '177',
+            ],
+            [
+                'title' => '獵奇驚悚',
+                'link' => '/search?query=&genre=&broad=on&tags%5B%5D=獵奇&sort=&year=&month=&duration=',
+                'imgur' => 'https://cdn.jsdelivr.net/gh/furansutsukai/furansutsukai-h@latest/asset/thumbnail/5RWX8f3l.jpg',
+                'total' => '99',
+            ],
+            [
+                'title' => '無碼解放',
+                'link' => '/search?query=&genre=&broad=on&tags%5B%5D=無碼&sort=&year=&month=&duration=',
+                'imgur' => 'https://cdn.jsdelivr.net/gh/kangkaeroo/kangkaeroo-h@latest/asset/thumbnail/7U8j2Vel.jpg',
+                'total' => '811',
+            ],
         ];
 
-        return view('layouts.home', compact('rows'));
+        $cover = Video::orderBy('updated_at', 'desc')->select('id', 'title', 'cover')->where('uncover', false)->limit(50)->get()->shuffle()->slice(0, $count);
+
+        $uncover = Video::with('user:id,name,avatar_temp')->orderBy('uploaded_at', 'desc')->select('id', 'user_id', 'title', 'cover', 'imgur', 'views', 'tags_array', 'created_at', 'duration')->limit(10)->get();
+
+
+        return view('layouts.home-new', compact('newest', 'upload', 'trending', 'tags', 'cover', 'uncover'));
     }
 
     public function search(Request $request)
