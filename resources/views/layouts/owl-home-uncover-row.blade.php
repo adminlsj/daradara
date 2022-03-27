@@ -26,7 +26,7 @@
 				<div class="card-mobile-title">{{ $video->title }}</div>
 			</a>
 
-			<div class="card-mobile-genre-wrapper" style="position: relative;">
+			<div class="card-mobile-genre-wrapper">
 				@if (array_key_exists('3D', $video->tags_array))
 					<span class="card-mobile-genre-new" style="color: rgba(245, 171, 53, 1); border-color: rgba(245, 171, 53, 0.30);">3D</span>
 				@elseif (array_key_exists('同人', $video->tags_array))
@@ -36,7 +36,7 @@
 				@else
 					<span class="card-mobile-genre-new" style="color: rgba(242, 38, 19, 1); border-color: rgba(242, 38, 19, 0.30);">裏番</span>
 				@endif
-				<span style="font-size: 12px; color: dimgray; margin-left: 2px" class="card-mobile-user">{{ $video->user->name }}</span>
+				<div style="font-size: 12px; color: dimgray; margin-left: 2px; display: inline-block;" class="card-mobile-user">{{ $video->user->name }}</div>
 			</div>
 		</div>
 	</div>
