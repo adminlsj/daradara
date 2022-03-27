@@ -18,7 +18,7 @@
     </a>
   </div>
 
-  <div class="hide-scrollbar nav-mobile-genres" style="overflow-x: scroll; width: calc(100%); display: inline-block; white-space: nowrap; margin-bottom: -10px; line-height: 31px; position: absolute; top: 55px; background-color: black; border-radius: 3px; box-shadow: 1px 1px 1px 0 rgba(40, 40, 40, 0.6); padding-bottom: 5px;">
+  <div class="hide-scrollbar nav-mobile-genres" style="overflow-x: scroll; width: calc(100%); display: inline-block; white-space: nowrap; margin-bottom: -10px; line-height: 31px; position: absolute; top: 55px; background-color: black; border-radius: 3px; box-shadow: 1px 1px 1px 0 rgba(40, 40, 40, 0.6); padding-bottom: 5px; border-radius: 0px;">
     <a style="color: white; font-weight: normal; font-family: 'Trebuchet MS', sans-serif; margin-right: 18px; padding-left: 15px" href="{{ route('home.search') }}?genre=H動漫&tags%5B%5D=新番預告&sort=">預告</a>
     <a style="color: white; font-weight: normal; font-family: 'Trebuchet MS', sans-serif; margin-right: 18px; font-weight: bold;border-bottom: 2px solid crimson; color: crimson; padding-bottom: 10px; padding-left: 2px; padding-right: 2px;" href="/">主頁</a>
     <a style="color: white; font-weight: normal; font-family: 'Trebuchet MS', sans-serif; margin-right: 20px" href="{{ route('home.search') }}?genre=H動漫&duration=&sort=&query=&year=&month=">裏番</a>
