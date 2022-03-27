@@ -1,4 +1,4 @@
-<div id="main-nav-home" style="z-index: 10000000; padding:0; padding-top: 5px; height: 55px; line-height: 47px; position: absolute; background-color: transparent;" class="hidden-sm hidden-md hidden-lg">
+<div id="main-nav-home" style="z-index: 10000; padding:0; padding-top: 5px; height: 55px; line-height: 47px; position: absolute; background-color: transparent;" class="hidden-sm hidden-md hidden-lg">
 
   <div style="padding: 0 15px; margin-bottom: -10px;">
     <a href="/" style="padding-right: 2.5%; color: white; font-size: 1.4em;">

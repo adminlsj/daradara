@@ -194,7 +194,7 @@ th, td {
   -moz-transform: rotate(180deg);
 } */
 
-.card-mobile-genre {
+.card-mobile-genre , .card-mobile-genre-new {
   border-style: solid;
   border-width: 1px;
   color: red; 
@@ -2051,6 +2051,16 @@ div.sticky {
 }
 
 @media (max-width: 767.9px) {
+  .card-mobile-genre-new {
+    border-style: solid;
+    border-width: 1px;
+    color: red; 
+    font-size: 9px; 
+    padding: 0px 2px; 
+    border-radius: 1px; 
+    margin-right: 1px;
+  }
+
   .home-content-wrapper {
     margin-top: 20px;
   }

@@ -28,15 +28,15 @@
 
 			<div class="card-mobile-genre-wrapper">
 				@if (array_key_exists('3D', $video->tags_array))
-					<span class="card-mobile-genre" style="color: rgba(245, 171, 53, 1); border-color: rgba(245, 171, 53, 0.30);">3D</span>
+					<span class="card-mobile-genre-new" style="color: rgba(245, 171, 53, 1); border-color: rgba(245, 171, 53, 0.30);">3D</span>
 				@elseif (array_key_exists('同人', $video->tags_array))
-					<span class="card-mobile-genre" style="color: rgba(241, 130, 141,1); border-color: rgba(241, 130, 141, 0.30);">同人</span>
+					<span class="card-mobile-genre-new" style="color: rgba(241, 130, 141,1); border-color: rgba(241, 130, 141, 0.30);">同人</span>
 				@elseif (array_key_exists('Cosplay', $video->tags_array))
-					<span class="card-mobile-genre" style="color: rgba(165, 55, 253, 1); border-color: rgba(165, 55, 253, 0.30);">COS</span>
+					<span class="card-mobile-genre-new" style="color: rgba(165, 55, 253, 1); border-color: rgba(165, 55, 253, 0.30);">COS</span>
 				@else
-					<span class="card-mobile-genre" style="color: rgba(242, 38, 19, 1); border-color: rgba(242, 38, 19, 0.30);">裏番</span>
+					<span class="card-mobile-genre-new" style="color: rgba(242, 38, 19, 1); border-color: rgba(242, 38, 19, 0.30);">裏番</span>
 				@endif
-				<span style="font-size: 10px; color: dimgray; margin-left: 2px" class="card-mobile-user">{{ $video->user->name }}</span>
+				<span style="font-size: 12px; color: dimgray; margin-left: 2px" class="card-mobile-user">{{ $video->user->name }}</span>
 			</div>
 		</div>
 	</div>
