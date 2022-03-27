@@ -23,7 +23,7 @@
 	<div style="margin-top: 6px; padding: 0 8px;">
 		<div style="text-decoration: none; color: black;">
 			<a href="{{ route('video.watch') }}?v={{ $video->id }}" style="text-decoration: none; font-size: inherit;">
-				<div style="font-size: 1.35rem; line-height: 18px; color: #b8babc; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; font-weight: 400; height: 16px; margin-top: 10px;">{{ $video->title }}</div>
+				<div class="card-mobile-title">{{ $video->title }}</div>
 			</a>
 
 			<div style="margin-top: 10px; padding-bottom: 10px; font-weight: 400">
@@ -36,7 +36,7 @@
 				@else
 					<span class="card-mobile-genre" style="color: rgba(242, 38, 19, 1); border-color: rgba(242, 38, 19, 0.30);">裏番</span>
 				@endif
-				<span style="font-size: 12px; color: dimgray; margin-left: 2px" class="inner">{{ $video->user->name }}</span>
+				<span style="font-size: 12px; color: dimgray; margin-left: 2px" class="card-mobile-user">{{ $video->user->name }}</span>
 			</div>
 		</div>
 	</div>

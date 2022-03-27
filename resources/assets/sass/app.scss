@@ -83,6 +83,20 @@ th, td {
   line-height: 25px;
 }
 
+.card-mobile-panel .card-mobile-title {
+  font-size: 1.35rem; 
+  line-height: 18px; 
+  color: #b8babc; 
+  overflow: hidden;
+  text-overflow: ellipsis; 
+  display: -webkit-box; 
+  -webkit-line-clamp: 1; 
+  -webkit-box-orient: vertical; 
+  font-weight: 400; 
+  height: 16px; 
+  margin-top: 10px;
+}
+
 .plyr__captions {
   margin-bottom: -15px;
   font-size: 1.8vw !important;
@@ -2025,6 +2039,10 @@ div.sticky {
 
   .card-mobile-panel .card-mobile-duration {
     margin-top: 1px;
+  }
+
+  .card-mobile-panel .card-mobile-title {
+    font-size: 1.25rem; 
   }
 
   .content-padding-new {
