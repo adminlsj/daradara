@@ -17,7 +17,7 @@
 	<a href="https://www.sshs.pw/" style="color: #A3A3A3; text-decoration: underline; padding: 10px;" target="_blank">紳士會所</a>
 </div>
 
-<div class="nav-bottom-padding home-content-wrapper" style="/* background: #090812; background-image: linear-gradient(to bottom,#090812,#111520 100vh,#07090e 200vh); */ background-color: #0d0d0d;">
+<div class="nav-bottom-padding home-content-wrapper" style="background: #090812; background-image: linear-gradient(to bottom,#090812,#111520 100vh,#07090e 200vh);">
 	<div class="hidden-xs" style="position: relative;">
 		<div id="main-nav-home" class="main-nav-home-desktop" style="z-index: 10000 !important; position: absolute;">
 		  @include('nav.main-content')
