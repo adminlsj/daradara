@@ -37,6 +37,17 @@ th, td {
   padding: 10px;
 }
 
+/* Hide scrollbar for Chrome, Safari and Opera */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.hide-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
 .owl-carousel .owl-dots {
   margin-top: 0px !important;
   /* background: red !important; */
@@ -2040,6 +2051,10 @@ div.sticky {
 }
 
 @media (max-width: 767.9px) {
+  .home-content-wrapper {
+    margin-top: 10px;
+  }
+
   #error {
     line-height: 50px;
   }
