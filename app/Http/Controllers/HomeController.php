@@ -91,7 +91,7 @@ class HomeController extends Controller
 
         $cover = Video::orderBy('updated_at', 'desc')->select('id', 'title', 'cover')->where('uncover', false)->limit(50)->get()->shuffle()->slice(0, $count);
 
-        $uncover = Video::with('user:id,name,avatar_temp')->orderBy('uploaded_at', 'desc')->select('id', 'user_id', 'title', 'cover', 'imgur', 'views', 'tags_array', 'created_at', 'duration')->limit(10)->get();
+        $uncover = Video::with('user:id,name,avatar_temp')->orderBy('updated_at', 'desc')->select('id', 'user_id', 'title', 'cover', 'imgur', 'views', 'tags_array', 'created_at', 'duration')->limit(10)->get();
 
 
         return view('layouts.home-new', compact('newest', 'upload', 'trending', 'tags', 'cover', 'uncover'));
