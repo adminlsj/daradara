@@ -97,6 +97,18 @@ th, td {
   margin-top: 10px;
 }
 
+.home-tags-title {
+  font-size: 18px; 
+  color: white; 
+  font-weight: bold;
+}
+
+.home-tags-total {
+  font-size: 14px; 
+  color: darkgray; 
+  font-weight: bold;
+}
+
 .plyr__captions {
   margin-bottom: -15px;
   font-size: 1.8vw !important;
@@ -2055,6 +2067,14 @@ div.sticky {
 
   .home-rows-header h3 {
     font-size: 22px;
+  }
+
+  .home-tags-title {
+    font-size: 14px; 
+  }
+
+  .home-tags-total {
+    font-size: 12px; 
   }
 
   #player-lang-wrapper {

@@ -124,8 +124,8 @@
 										<img style="width: 100%;" src="https://cdn.jsdelivr.net/gh/guaishushukanlifan/Project-H@latest/asset/thumbnail/2jSdwcGl.jpg">
 										<img style="position: absolute; top: 0; left: 0; height: 100%; object-fit: cover; filter: brightness(60%);" src="{{ $item['imgur'] }}">
 										<div style="position: absolute; width: 100%; bottom: 5px; left: 8px;">
-											<div style="font-size: 18px; color: white; font-weight: bold">{{ $item['title'] }}</div>
-											<div style="font-size: 14px; color: darkgray; font-weight: bold">{{ $item['total'] }} 部影片</div>
+											<div class="home-tags-title">{{ $item['title'] }}</div>
+											<div class="home-tags-total">{{ $item['total'] }} 部影片</div>
 									    </div>
 								    </div>
 								</a>
