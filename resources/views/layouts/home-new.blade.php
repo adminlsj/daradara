@@ -19,16 +19,16 @@
 
 <div class="nav-bottom-padding home-content-wrapper" style="background: #090812; background-image: linear-gradient(to bottom,#090812,#111520 100vh,#07090e 200vh);">
 	<div class="hidden-xs" style="position: relative;">
-		<div id="main-nav-home" style="z-index: 10000 !important; position: absolute;">
+		<div id="main-nav-home" class="main-nav-home-desktop" style="z-index: 10000 !important; position: absolute;">
 		  @include('nav.main-content')
 		</div>
 		<script>
-			var targetOffset = $("#main-nav-home").offset().top;
+			var targetOffset = $(".main-nav-home-desktop").offset().top;
 			var $window = $(window).scroll(function(){
 			    if ( $window.scrollTop() > targetOffset ) {   
-			      $("#main-nav-home").css({"position":"fixed", 'background-color':'#141414'});
+			      $(".main-nav-home-desktop").css({"position":"fixed", 'background-color':'#141414'});
 			    } else {
-			      $("#main-nav-home").css({"position":"absolute", 'background-color':'transparent'});
+			      $(".main-nav-home-desktop").css({"position":"absolute", 'background-color':'transparent'});
 			    }
 			});
 		</script>
