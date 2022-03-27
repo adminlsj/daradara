@@ -79,7 +79,7 @@
 			})
 		</script>
 
-		<div class="content-padding-new" style="margin-top: 40px;">
+		<div class="content-padding-new home-rows-margin-top">
 			<a class="home-rows-header" style="text-decoration: none;" href="/search?query=&genre=全部&sort=最新上傳">
 				<h5 style="color: #8e9194;">新鮮</h3>
 				<h3 style="font-weight: 700; color: #edeeef; margin-bottom: 20px;">最新上傳<span style="vertical-align: middle; margin-top: -2px; margin-left: 2px" class="material-icons">chevron_right</span></h3>
@@ -109,7 +109,7 @@
 			</div>
 		</div>
 
-		<div class="content-padding-new" style="margin-top: 40px;">
+		<div class="content-padding-new home-rows-margin-top">
 			<a class="home-rows-header" style="text-decoration: none;" href="/search?query=&genre=全部&sort=最新上傳">
 				<h5 style="color: #8e9194;">分類</h3>
 				<h3 style="font-weight: 700; color: #edeeef; margin-bottom: 20px;">影片標籤<span style="vertical-align: middle; margin-top: -2px; margin-left: 2px" class="material-icons">chevron_right</span></h3>
@@ -157,7 +157,7 @@
 			})
 		</script>
 
-		<div style="margin-top: 40px;">
+		<div class="home-rows-margin-top">
 			<div class="content-padding-new">
 				<a class="home-rows-header" style="text-decoration: none;" href="/search?query=&genre=全部&sort=最新上傳">
 					<h5 style="color: #8e9194;">當下</h3>
@@ -202,7 +202,7 @@
 			})
 		</script>
 
-		<div class="hidden-xs content-padding-new" style="margin-top: 40px;">
+		<div class="hidden-xs content-padding-new home-rows-margin-top">
 			<a class="home-rows-header" style="text-decoration: none;" href="/search?query=&genre=全部&sort=最新上傳">
 				<h5 style="color: #8e9194;">動態</h3>
 				<h3 style="font-weight: 700; color: #edeeef; margin-bottom: 20px;">正在觀看<span style="vertical-align: middle; margin-top: -2px; margin-left: 2px" class="material-icons">chevron_right</span></h3>
@@ -219,7 +219,7 @@
 			</div>
 		</div>
 
-		<div class="hidden-sm hidden-md hidden-lg content-padding-new" style="margin-top: 40px;">
+		<div class="hidden-sm hidden-md hidden-lg content-padding-new home-rows-margin-top">
 			<a class="home-rows-header" style="text-decoration: none;" href="/search?query=&genre=全部&sort=最新上傳">
 				<h5 style="color: #8e9194;">動態</h3>
 				<h3 style="font-weight: 700; color: #edeeef; margin-bottom: 20px;">正在觀看<span style="vertical-align: middle; margin-top: -2px; margin-left: 2px" class="material-icons">chevron_right</span></h3>

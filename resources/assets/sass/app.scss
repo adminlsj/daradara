@@ -62,6 +62,10 @@ th, td {
   font-size: 28px;
 }
 
+.home-rows-margin-top {
+  margin-top: 40px;
+}
+
 .card-mobile-panel .card-mobile-views {
   font-size: 15px; 
   color: white; 
@@ -2051,6 +2055,10 @@ div.sticky {
 }
 
 @media (max-width: 767.9px) {
+  .home-rows-margin-top {
+    margin-top: 20px;
+  }
+
   .card-mobile-genre-new {
     font-size: 9px; 
     padding: 0px 2px; 
