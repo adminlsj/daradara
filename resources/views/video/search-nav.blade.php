@@ -2,9 +2,9 @@
 
 	<div id="genre-modal-trigger" class="search-nav no-select {{ Request::get('genre') ? 'active' : '' }}" data-toggle="modal" data-target="#genre-modal">
 		<span class="hidden-xs">{{ Request::get('genre') ? Request::get('genre') : '類型'}}</span>
-		<div style="border-right: 1px solid #383838; display: inline-block; margin-right: 6px;">
-	      <a style="color: white; margin-right: 11px; margin-left: 10px; background-color: #373737; padding: 6px 13px 6px 8px; border-radius: 2px; font-weight: bold" href="{{ route('home.search') }}?genre=H動漫&tags%5B%5D=新番預告&sort=">
-	        <img style="margin-top: -3px; margin-right: 6px;" height="20" src="https://i.imgur.com/H7gRtRi.png">{{ Request::get('genre') ? Request::get('genre') : '類型'}}
+		<div class="hidden-sm hidden-md hidden-lg" style="border-right: 1px solid #383838; display: inline-block; margin-right: 6px;">
+	      <a style="color: white; margin-right: 11px; margin-left: 10px; background-color: #373737; padding: 6px 13px 6px 8px; border-radius: 2px; font-weight: bold; text-decoration: none;">
+	        <img style="margin-top: -3px; margin-right: 6px;" height="17" src="https://i.imgur.com/pjaWhhr.png">{{ Request::get('genre') ? Request::get('genre') : '類型'}}
 	      </a>
 	    </div>
 	</div>
@@ -39,3 +39,15 @@
 		<input id="query" name="query" class="search-nav-bar" type="text" value="{{ request('query') }}" placeholder="搜索">
 	</div>
 </div>
+
+<script>
+	@if ($is_mobile)
+		var $window = $(window).scroll(function(){
+		  if ( $window.scrollTop() > 47 ) {   
+		    $("#search-nav-wrapper").css({"position":"fixed", 'top':'0px'});
+		  } else {
+		    $("#search-nav-wrapper").css({"position":"absolute", 'top':'47px'});
+		  }
+		});
+	@endif
+</script>

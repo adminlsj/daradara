@@ -108,7 +108,7 @@ class HomeController extends Controller
         $duration = '';
         $videos = Video::query();
         $doujin = true;
-        $is_mobile = false;
+        $is_mobile = Helper::checkIsMobile();;
         
         if ($query = request('query')) {
             $chinese = new Chinese();
@@ -234,7 +234,6 @@ class HomeController extends Controller
             $videos = $videos->where('uncover', false)->distinct()->paginate(42);
         } else {
             $videos = $videos->with('user:id,name,avatar_temp')->distinct()->paginate(60);
-            $is_mobile = Helper::checkIsMobile();
         }
 
         $videos->setPath('');

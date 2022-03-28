@@ -2263,6 +2263,7 @@ div.sticky {
     white-space: nowrap;
     overflow-x: scroll;
     top: 47px;
+    z-index: 1000;
 
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none;  /* Internet Explorer 10+ */
