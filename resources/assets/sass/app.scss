@@ -53,6 +53,11 @@ th, td {
   /* background: red !important; */
 }
 
+.home-content-wrapper {
+  background: #090812; 
+  background-image: linear-gradient(to bottom, #090812, #111520 100vh, #07090e 200vh);
+}
+
 .home-rows-header h5 {
   font-size: 14px;
   margin-bottom: -13px;
@@ -2072,6 +2077,8 @@ div.sticky {
 
   .home-content-wrapper {
     margin-top: 22px;
+    background: #141414; 
+    background-image: linear-gradient(to bottom, #141414, #141414 100vh, #141414 200vh);
   }
 
   #error {
