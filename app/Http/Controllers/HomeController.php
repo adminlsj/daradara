@@ -129,7 +129,7 @@ class HomeController extends Controller
                 case '全部':
                     break;
 
-                case '裏番':
+                case 'H動漫':
                     $doujin = false;
                     break;
 
