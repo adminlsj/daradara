@@ -1,4 +1,4 @@
-<div id="main-nav-home" style="z-index: 10000; padding:0; padding-top: 3px; height: 47px; line-height: 40px; position: absolute; background-image: none; border-bottom: 1px solid #383838; margin-bottom: 0px; background-color: #212121;" class="hidden-sm hidden-md hidden-lg">
+<div id="main-nav-home" style="z-index: 10000; padding:0; padding-top: 3px; height: 48px; line-height: 40px; position: absolute; background-image: none; border-bottom: 1px solid #383838; margin-bottom: 0px; background-color: #212121;" class="hidden-sm hidden-md hidden-lg">
 
   <div style="padding: 0 10px; margin-bottom: -10px;">
     <a href="/" style="color: white; font-size: 1.4em; font-family: 'Encode Sans Condensed', sans-serif;">
@@ -6,19 +6,19 @@
     </a>
 
     <a style="padding-right: 0px" class="nav-icon pull-right" href="{{ route('home.list') }}">
-      <span style="vertical-align: middle;" class="material-icons">account_circle</span>
+      <span style="vertical-align: middle; margin-top: -2px;" class="material-icons">account_circle</span>
     </a>
 
     <a class="nav-icon pull-right" href="{{ route('home.search') }}">
-      <img style="margin-top: -1px; margin-right: 1px;" height="20" src="https://i.imgur.com/fblmkmT.png">
+      <img style="margin-top: -3px; margin-right: 1px;" height="20" src="https://i.imgur.com/fblmkmT.png">
     </a>
 
     <a class="nav-icon pull-right" href="{{ Auth::check() ? route('user.userEditUpload', Auth::user()) : route('login') }}">
-      <img style="margin-top: -1px; margin-right: 5px;" height="20" src="https://i.imgur.com/ic0oQVj.png">
+      <img style="margin-top: -3px; margin-right: 5px;" height="20" src="https://i.imgur.com/ic0oQVj.png">
     </a>
   </div>
 
-  <div class="hide-scrollbar nav-mobile-genres" style="overflow-x: scroll; width: calc(100%); display: inline-block; white-space: nowrap; margin-bottom: -10px; line-height: 31px; position: absolute; top: 47px; border-radius: 0px; padding-top: 9px; padding-bottom: 8px; border-bottom: 1px solid #383838; background-color: #212121;">
+  <div class="hide-scrollbar nav-mobile-genres" style="overflow-x: scroll; width: calc(100%); display: inline-block; white-space: nowrap; margin-bottom: -10px; line-height: 31px; position: absolute; top: 48px; border-radius: 0px; padding-top: 9px; padding-bottom: 8px; border-bottom: 1px solid #383838; background-color: #212121;">
 
     <div style="border-right: 1px solid #383838; display: inline-block; margin-right: 6px;">
       <a style="color: white; margin-right: 11px; margin-left: 10px; background-color: #373737; padding: 6px 13px 6px 8px; border-radius: 2px; font-weight: bold" href="{{ route('home.search') }}?genre=H動漫&tags%5B%5D=新番預告&sort=">
@@ -39,10 +39,10 @@
   <script>
       var targetOffset = $(".nav-mobile-genres").offset().top;
       var $window = $(window).scroll(function(){
-          if ( $window.scrollTop() > 47 ) {   
+          if ( $window.scrollTop() > 48 ) {   
             $(".nav-mobile-genres").css({"position":"fixed", 'top':'0px'});
           } else {
-            $(".nav-mobile-genres").css({"position":"absolute", 'top':'47px'});
+            $(".nav-mobile-genres").css({"position":"absolute", 'top':'48px'});
           }
       });
     </script>

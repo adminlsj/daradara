@@ -4,23 +4,24 @@
 	<div class="hidden-xs">
 		@include('nav.main')
 	</div>
-	<div id="main-nav-home" style="z-index: 10000; padding:0; padding-top: 3px; height: 47px; line-height: 40px; position: absolute; background-image: none; border-bottom: 1px solid #383838; margin-bottom: 0px; background-color: #212121;" class="hidden-sm hidden-md hidden-lg">
+	<div id="main-nav-home" style="z-index: 10000; padding:0; padding-top: 3px; height: 48px; line-height: 40px; position: absolute; background-image: none; border-bottom: 1px solid #383838; margin-bottom: 0px; background-color: #212121;" class="hidden-sm hidden-md hidden-lg">
 
 	  <div style="padding: 0 10px; margin-bottom: -10px;">
-	    <a href="/" style="color: white; font-size: 1.4em; font-family: 'Encode Sans Condensed', sans-serif;">
-	      <span style="color: crimson">H</span>anime1<span style="color: crimson">.</span>me
+	    <a href="/" style="color: white; font-size: 1.4em;">
+	      <img style="margin-top: -5px; margin-right: 6px;" height="17" src="https://i.imgur.com/8sU4eCa.png">
 	    </a>
+
+	    <form id="search-form" style="display: inline-block; margin-left: 8px; width: calc(100% - 170px); position: relative;">
+		    <div id="nav-search-btn" class="search-btn"><i style="margin-top: 3px; margin-left: 5px; color: white; font-size: 21px; font-weight: bold;" class="material-icons">search</i></div>
+		    <input id="nav-query" name="nav-query" style="width: 100%; height: 35px; margin-top: -6px; vertical-align: middle; border-top-left-radius: 2px; border-bottom-left-radius: 2px; border-top-right-radius: 0px; border-bottom-right-radius: 0px" class="search-nav-bar" type="text" value="{{ request('query') }}" placeholder="搜索">
+		</form>
 
 	    <a style="padding-right: 0px" class="nav-icon pull-right" href="{{ route('home.list') }}">
-	      <span style="vertical-align: middle;" class="material-icons">account_circle</span>
-	    </a>
-
-	    <a class="nav-icon pull-right" href="{{ route('home.search') }}">
-	      <img style="margin-top: -1px; margin-right: 1px;" height="20" src="https://i.imgur.com/fblmkmT.png">
+	      <span style="vertical-align: middle; margin-top: -2px;" class="material-icons">account_circle</span>
 	    </a>
 
 	    <a class="nav-icon pull-right" href="{{ Auth::check() ? route('user.userEditUpload', Auth::user()) : route('login') }}">
-	      <img style="margin-top: -1px; margin-right: 5px;" height="20" src="https://i.imgur.com/ic0oQVj.png">
+	      <img style="margin-top: -3px; margin-right: 5px;" height="20" src="https://i.imgur.com/ic0oQVj.png">
 	    </a>
 	  </div>
 	</div>

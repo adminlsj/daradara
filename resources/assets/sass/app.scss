@@ -485,12 +485,13 @@ th, td {
 
 .search-btn {
   position: absolute;
-  top: 5px; 
-  right: 5px; 
-  height: 30px; 
-  width: 30px; 
-  background-color: crimson; 
-  border-radius: 20px; 
+  top: 1px; 
+  right: -35px; 
+  height: 35px; 
+  width: 35px; 
+  background-color: #373737; 
+  border-top-right-radius: 2px; 
+  border-bottom-right-radius: 2px;
   cursor: pointer;
 }
 
@@ -2275,7 +2276,7 @@ div.sticky {
 
   #search-nav-wrapper {
     padding: 0px;
-    padding-top: 8px;
+    padding-top: 9px;
     padding-bottom: 8px;
     border-bottom: 1px solid #383838;
     background-color: #212121;

@@ -43,10 +43,10 @@
 <script>
 	@if ($is_mobile)
 		var $window = $(window).scroll(function(){
-		  if ( $window.scrollTop() > 47 ) {   
+		  if ( $window.scrollTop() > 48 ) {   
 		    $("#search-nav-wrapper").css({"position":"fixed", 'top':'0px'});
 		  } else {
-		    $("#search-nav-wrapper").css({"position":"absolute", 'top':'47px'});
+		    $("#search-nav-wrapper").css({"position":"absolute", 'top':'48px'});
 		  }
 		});
 	@endif
