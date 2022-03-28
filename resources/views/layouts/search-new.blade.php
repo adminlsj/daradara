@@ -240,20 +240,14 @@
 		<div style="margin-bottom: -13px" class="search-pagination mobile-search-pagination hidden-sm hidden-md hidden-lg">{!! $videos->appends(request()->query())->onEachSide(1)->links() !!}</div>
 
 	  	@if ($doujin)
-		  	<div class="home-rows-videos-wrapper mobile-full-width" style="white-space: normal;">
-		  		@if ($is_mobile)
-			  		<div class="row no-gutter" style="padding: 0 5px;">
-					    @foreach ($videos as $video)
-						    <div class="col-xs-6">
-							    @include('video.card-mobile-new')
-						    </div>
-						@endforeach
-					</div>
-				@else
+			<div class="content-padding-new">
+				<div class="row no-gutter" style="margin-left: -5px; margin-right: -5px;">
 					@foreach ($videos as $video)
-					    @include('video.card-desktop')
+						<div class="col-xs-6 col-sm-4 col-md-3 search-doujin-row-lg" style="padding-left: 5px; padding-right: 5px;">
+							@include('layouts.owl-home-uncover-row')
+						</div>
 					@endforeach
-				@endif
+				</div>
 			</div>
 	    @else
 		    <div class="home-rows-videos-wrapper" style="white-space: normal; margin-left: -2px; margin-right: -2px;">
@@ -294,7 +288,7 @@
 	}
 </script>
 
-<div style="background-color: #212121; margin-top: 50px;">
+<div style="background-color: #212121; margin-top: 40px;">
 	<div class="hentai-footer">
 		<p>Hanime1.me 暗黑版 anime1.me 帶給你最新最全的無碼高清中文字幕Hentai成人動漫。我們提供最優質的Hentai色情動漫裏番，並以最高畫質1080p呈現的Blu-ray rip。我們的18禁H漫網站適用於手機設備，並提供全網最優質的Hentai動畫。最新最全的Hentai裏番資料庫，Hanime1.me hentai 讓你一個按鈕觀看所有Hentai成人動畫，包括最新的2020年Hentai成人動漫。在這裏，你可以找到最優質的中文字幕H動畫 24小時！免費享受hentai動漫，成人動畫，H動漫，並且更有中文字幕，不必再聽日語猜故事！這個網站是繼avbebe之後，亞洲最優質的色情工口Hentai成人動漫，並且有許多Hentai分類，包括顏射、乳交、口交、熟女、學生妹、中出、百合、肛交，以及更多！</p>
 

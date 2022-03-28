@@ -2,7 +2,7 @@
 	<a href="{{ route('video.watch') }}?v={{ $video->id }}" style="text-decoration: none;">
 		<div style="position: relative;">
 			<img style="width: 100%;" src="https://cdn.jsdelivr.net/gh/guaishushukanlifan/Project-H@latest/asset/thumbnail/2jSdwcGl.jpg">
-			<img style="position: absolute; top: 0; left: 0; height: 100%; object-fit: cover;" src="{{ $video->thumbL() }}">
+			<img style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;" src="{{ $video->thumbL() }}">
 			<div style="position: absolute; height: 25px; width: 100%; bottom: 0px; background: linear-gradient(to bottom, transparent 0%, black 120%);">
 				<div style="float: left; line-height: 25px; font-weight: 400">
 					<span class="card-mobile-views material-icons-outlined">smart_display</span>
