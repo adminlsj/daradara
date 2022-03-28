@@ -8,10 +8,10 @@
 
 	  <div style="padding: 0 10px; margin-bottom: -10px;">
 	    <a href="/" style="color: white; font-size: 1.4em;">
-	      <img style="margin-top: -5px; margin-right: 6px;" height="17" src="https://i.imgur.com/8sU4eCa.png">
+	      <img style="margin-top: -5px; margin-right: 7px;" height="17" src="https://i.imgur.com/8sU4eCa.png">
 	    </a>
 
-	    <form id="search-form" style="display: inline-block; margin-left: 8px; width: calc(100% - 115px); position: relative;">
+	    <form id="search-form" style="display: inline-block; margin-left: 7px; width: calc(100% - 115px); position: relative;">
 		    <div id="nav-search-btn" class="search-btn"><img style="margin-top: -9px; margin-left: 7px;" height="20" src="https://i.imgur.com/fblmkmT.png"></div>
 		    <input id="nav-query" name="nav-query" style="width: 100%; height: 35px; margin-top: -6px; vertical-align: middle; border-top-left-radius: 2px; border-bottom-left-radius: 2px; border-top-right-radius: 0px; border-bottom-right-radius: 0px; background-color: #181818; border-color: #181818; line-height: 35px; padding-left: 7px" class="search-nav-bar" type="text" value="{{ request('query') }}" placeholder="搜尋 Hanime1.me">
 		</form>
