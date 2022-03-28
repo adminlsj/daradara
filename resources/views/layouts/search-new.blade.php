@@ -12,7 +12,7 @@
 	    </a>
 
 	    <form id="search-form" style="display: inline-block; margin-left: 8px; width: calc(100% - 115px); position: relative;">
-		    <div id="nav-search-btn" class="search-btn"><img style="margin-top: -9px; margin-left: 5px;" height="20" src="https://i.imgur.com/fblmkmT.png"></div>
+		    <div id="nav-search-btn" class="search-btn"><img style="margin-top: -9px; margin-left: 7px;" height="20" src="https://i.imgur.com/fblmkmT.png"></div>
 		    <input id="nav-query" name="nav-query" style="width: 100%; height: 35px; margin-top: -6px; vertical-align: middle; border-top-left-radius: 2px; border-bottom-left-radius: 2px; border-top-right-radius: 0px; border-bottom-right-radius: 0px" class="search-nav-bar" type="text" value="{{ request('query') }}" placeholder="搜索">
 		</form>
 
