@@ -17,8 +17,6 @@ html, body {
 }
 
 body {
-  /* font-family: 'Arial', 'Microsoft YaHei', '黑體', '宋體', sans-serif;
-  font: 12px/1.5 Tahoma,Helvetica,Arial,'宋體',sans-serif; */
   font-family: roboto,microsoft jhenghei,sans-serif;
   background-color: #141414; 
   overflow-x: hidden;
@@ -56,6 +54,16 @@ th, td {
 .home-content-wrapper {
   background: #090812; 
   background-image: linear-gradient(to bottom, #090812, #111520 100vh, #07090e 200vh);
+}
+
+.nav-home-mobile-button {
+  color: white; 
+  font-weight: normal; 
+  margin-right: 5px; 
+  background-color: #373737; 
+  border: 1px solid #333333;
+  padding: 7px 10px; 
+  border-radius: 20px;
 }
 
 .home-rows-header h5 {
@@ -2098,8 +2106,8 @@ div.sticky {
 
   .home-content-wrapper {
     margin-top: 22px;
-    background: #141414; 
-    background-image: linear-gradient(to bottom, #141414, #141414 100vh, #141414 200vh);
+    background: #212121; 
+    background-image: linear-gradient(to bottom, #212121, #212121 100vh, #212121 200vh);
   }
 
   #error {
