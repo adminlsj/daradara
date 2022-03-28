@@ -133,6 +133,13 @@ class HomeController extends Controller
                     $doujin = false;
                     break;
 
+                case '泡麵番':
+                    $doujin = false;
+                    $videos = $videos->where(function($query) {
+                        $query->orWhere('tags_array', 'ilike', '%"泡麵番"%');
+                    });
+                    break;
+
                 case '3D動畫':
                     $videos = $videos->where(function($query) {
                         $query->orWhere('tags_array', 'ilike', '%"3D"%');
