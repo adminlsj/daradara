@@ -27,7 +27,7 @@
     </div>
 
     <a class="nav-home-mobile-button" href="/" style="background-color: #FFFFFF; color: black; border-color: white;">主頁</a>
-    <a class="nav-home-mobile-button" href="{{ route('home.search') }}?genre=H動漫&duration=&sort=&query=&year=&month=">裏番</a>
+    <a class="nav-home-mobile-button" href="{{ route('home.search') }}?genre=裏番&duration=&sort=&query=&year=&month=">裏番</a>
     <a class="nav-home-mobile-button" href="{{ route('home.search') }}?genre=H動漫&duration=&sort=&query=&year=&month=">泡麵番</a>
     <a class="nav-home-mobile-button" href="{{ route('home.search') }}?genre=3D動畫&duration=&sort=&query=&year=&month=">3D</a>
     <a class="nav-home-mobile-button" href="{{ route('home.search') }}?genre=同人作品&duration=&sort=&query=&year=&month=">同人</a>
