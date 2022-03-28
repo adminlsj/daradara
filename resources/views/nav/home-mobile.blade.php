@@ -18,7 +18,7 @@
     </a>
   </div>
 
-  <div class="hide-scrollbar nav-mobile-genres" style="overflow-x: scroll; width: calc(100%); display: inline-block; white-space: nowrap; margin-bottom: -10px; line-height: 31px; position: absolute; top: 47px; border-radius: 0px; padding-top: 8px; padding-bottom: 8px; border-bottom: 1px solid #383838; background-color: #212121;">
+  <div class="hide-scrollbar nav-mobile-genres" style="overflow-x: scroll; width: calc(100%); display: inline-block; white-space: nowrap; margin-bottom: -10px; line-height: 31px; position: absolute; top: 47px; border-radius: 0px; padding-top: 9px; padding-bottom: 8px; border-bottom: 1px solid #383838; background-color: #212121;">
 
     <div style="border-right: 1px solid #383838; display: inline-block; margin-right: 6px;">
       <a style="color: white; margin-right: 11px; margin-left: 10px; background-color: #373737; padding: 7px 12px 7px 6px; border-radius: 3px; font-weight: bold" href="{{ route('home.search') }}?genre=H動漫&tags%5B%5D=新番預告&sort=">
@@ -35,17 +35,6 @@
     <a class="nav-home-mobile-button" href="{{ route('home.search') }}?genre=H動漫&tags%5B%5D=新番預告&sort=">預告</a>
     <a class="nav-home-mobile-button" href="{{ route('home.search') }}?genre=Cosplay&duration=&sort=&query=&year=&month=" style="margin-right: 10px;">漫畫</a>
   </div>
-
-  <!-- <div class="hide-scrollbar nav-mobile-genres" style="overflow-x: scroll; width: calc(100%); display: inline-block; white-space: nowrap; margin-bottom: -10px; line-height: 31px; position: absolute; top: 53px; border-radius: 0px; padding-top: 5px; padding-bottom: 5px;">
-    <a style="color: white; font-weight: normal; font-family: 'Trebuchet MS', sans-serif; margin-right: 18px; padding-left: 15px" href="{{ route('home.search') }}?genre=H動漫&tags%5B%5D=新番預告&sort=">預告</a>
-    <a style="color: white; font-weight: normal; font-family: 'Trebuchet MS', sans-serif; margin-right: 18px; font-weight: bold;border-bottom: 2px solid crimson; color: crimson; padding-bottom: 10px; padding-left: 2px; padding-right: 2px;" href="/">主頁</a>
-    <a style="color: white; font-weight: normal; font-family: 'Trebuchet MS', sans-serif; margin-right: 20px" href="{{ route('home.search') }}?genre=H動漫&duration=&sort=&query=&year=&month=">裏番</a>
-    <a style="color: white; font-weight: normal; font-family: 'Trebuchet MS', sans-serif; margin-right: 20px" href="{{ route('home.search') }}?genre=H動漫&duration=&sort=&query=&year=&month=">泡麵番</a>
-    <a style="color: white; font-weight: normal; font-family: 'Trebuchet MS', sans-serif; margin-right: 20px" href="{{ route('home.search') }}?genre=3D動畫&duration=&sort=&query=&year=&month=">3D</a>
-    <a style="color: white; font-weight: normal; font-family: 'Trebuchet MS', sans-serif; margin-right: 20px" href="{{ route('home.search') }}?genre=同人作品&duration=&sort=&query=&year=&month=">同人</a>
-    <a style="color: white; font-weight: normal; font-family: 'Trebuchet MS', sans-serif; margin-right: 20px" href="{{ route('home.search') }}?genre=Cosplay&duration=&sort=&query=&year=&month=">COS</a>
-    <a style="color: white; font-weight: normal; font-family: 'Trebuchet MS', sans-serif; margin-right: 15px" href="{{ route('home.search') }}?genre=Cosplay&duration=&sort=&query=&year=&month=">漫畫</a>
-  </div> -->
 
   <script>
       var targetOffset = $(".nav-mobile-genres").offset().top;
