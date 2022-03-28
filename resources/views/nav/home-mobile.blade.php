@@ -6,7 +6,8 @@
     </a>
 
     <form id="search-form" style="display: inline-block; width: calc(100% - 125px); position: relative; z-index: 1000000; vertical-align: top; margin-left: 10px;">
-        <input id="nav-query" name="nav-query" style="background-color: #333333; border-color: #333333; height: 30px; width: 100%; color: white; margin-top: 10px" class="search-nav-bar" type="text" value="{{ request('query') }}" placeholder="搜索">
+      <span style="position:absolute; z-index:10000000; color: dimgray; top: 15px; left: 10px; font-size: 20px;" class="material-icons-outlined">search</span>
+      <input id="nav-query" name="nav-query" style="background-color: #333333; border-color: #333333; height: 30px; width: 100%; color: gray; margin-top: 10px; padding-left: 35px" class="search-nav-bar nav-home-mobile-search-placeholder" type="text" value="{{ request('query') }}" placeholder="搜索">
     </form>
 
     <a style="padding-right: 0px" class="nav-icon pull-right" href="{{ route('home.list') }}">

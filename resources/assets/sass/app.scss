@@ -71,6 +71,27 @@ th, td {
   margin-top: 40px;
 }
 
+.nav-home-mobile-search-placeholder::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+  color: dimgray !important;
+}
+.nav-home-mobile-search-placeholder:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+  color: dimgray !important;
+  opacity: 1;
+}
+.nav-home-mobile-search-placeholder::-moz-placeholder { /* Mozilla Firefox 19+ */
+  color: dimgray !important;
+  opacity: 1;
+}
+.nav-home-mobile-search-placeholder:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: dimgray !important;
+}
+.nav-home-mobile-search-placeholder::-ms-input-placeholder { /* Microsoft Edge */
+  color: dimgray !important;
+}
+.nav-home-mobile-search-placeholder::placeholder { /* Most modern browsers support this now. */
+  color: dimgray !important;
+}
+
 .card-mobile-panel .card-mobile-views {
   font-size: 15px; 
   color: white; 
