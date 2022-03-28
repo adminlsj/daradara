@@ -41,7 +41,7 @@
 	        <input type="hidden" id="genre" name="genre" value="{{ $genre }}">
 			<div class="simple-dropdown-item genre-option {{ $genre == '全部' ? 'active' : ''}}" style="{{ $genre == '全部' ? 'background-color: #333333' : ''}}">全部</div>
 			<hr style="margin: 0; border-color: #333333;">
-			<div class="simple-dropdown-item genre-option {{ $genre == '裏番' ? 'active' : ''}}">裏番</div>
+			<div class="simple-dropdown-item genre-option {{ $genre == 'H動漫' ? 'active' : ''}}">H動漫</div>
 			<hr style="margin: 0; border-color: #333333;">
 			<div class="simple-dropdown-item genre-option {{ $genre == '3D動畫' ? 'active' : ''}}">3D動畫</div>
 			<hr style="margin: 0; border-color: #333333;">
