@@ -21,8 +21,8 @@
   <div class="hide-scrollbar nav-mobile-genres" style="overflow-x: scroll; width: calc(100%); display: inline-block; white-space: nowrap; margin-bottom: -10px; line-height: 31px; position: absolute; top: 47px; border-radius: 0px; padding-top: 9px; padding-bottom: 8px; border-bottom: 1px solid #383838; background-color: #212121;">
 
     <div style="border-right: 1px solid #383838; display: inline-block; margin-right: 6px;">
-      <a style="color: white; margin-right: 11px; margin-left: 10px; background-color: #373737; padding: 6px 13px 6px 6px; border-radius: 2px; font-weight: bold" href="{{ route('home.search') }}?genre=H動漫&tags%5B%5D=新番預告&sort=">
-        <span style="vertical-align: middle; margin-top: -2px; font-size: 23px; margin-right: 4px;" class="material-icons-outlined">explore</span>探索
+      <a style="color: white; margin-right: 11px; margin-left: 10px; background-color: #373737; padding: 6px 13px 6px 7px; border-radius: 2px; font-weight: bold" href="{{ route('home.search') }}?genre=H動漫&tags%5B%5D=新番預告&sort=">
+        <img style="margin-top: -3px; margin-right: 6px;" height="20" src="https://i.imgur.com/H7gRtRi.png">探索
       </a>
     </div>
 
