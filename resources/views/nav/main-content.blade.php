@@ -1,9 +1,9 @@
 <a href="/" style="padding-right: 2.5%; color: white; font-size: 1.4em;">
     <span style="color: crimson">H</span>anime1<span style="color: crimson">.</span>me
 </a>
-<a class="nav-item hidden-xs" href="{{ route('home.search') }}?genre=H動漫&duration=&sort=&query=&year=&month=">H動漫</a>
-<a class="nav-item hidden-xs hidden-sm" href="{{ route('home.search') }}?genre=H動漫&tags%5B%5D=新番預告&sort=">新番預告</a>
-<a class="nav-item hidden-xs hidden-sm" href="{{ route('home.search') }}?genre=H動漫&tags%5B%5D=番劇&sort=">番劇</a>
+<a class="nav-item hidden-xs" href="{{ route('home.search') }}?genre=裏番&duration=&sort=&query=&year=&month=">裏番</a>
+<a class="nav-item hidden-xs hidden-sm" href="{{ route('home.search') }}?genre=裏番&tags%5B%5D=新番預告&sort=">新番預告</a>
+<a class="nav-item hidden-xs hidden-sm" href="{{ route('home.search') }}?genre=裏番&tags%5B%5D=番劇&sort=">番劇</a>
 <a class="nav-item hidden-xs" href="{{ route('home.search') }}?genre=3D動畫&duration=&sort=&query=&year=&month=">3D動畫</a>
 <a class="nav-item hidden-xs" href="{{ route('home.search') }}?genre=同人作品&duration=&sort=&query=&year=&month=">同人作品</a>
 <a class="nav-item hidden-xs" href="{{ route('home.search') }}?genre=Cosplay&duration=&sort=&query=&year=&month=">Cosplay</a>
