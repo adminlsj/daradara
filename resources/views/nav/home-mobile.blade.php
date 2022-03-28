@@ -47,14 +47,14 @@
     <a style="color: white; font-weight: normal; font-family: 'Trebuchet MS', sans-serif; margin-right: 15px" href="{{ route('home.search') }}?genre=Cosplay&duration=&sort=&query=&year=&month=">漫畫</a>
   </div> -->
 
-  <!-- <script>
+  <script>
       var targetOffset = $(".nav-mobile-genres").offset().top;
       var $window = $(window).scroll(function(){
-          if ( $window.scrollTop() > 53 ) {   
-            $(".nav-mobile-genres").css({"position":"fixed", 'top':'0px', 'background-color': 'black'});
+          if ( $window.scrollTop() > 47 ) {   
+            $(".nav-mobile-genres").css({"position":"fixed", 'top':'0px'});
           } else {
-            $(".nav-mobile-genres").css({"position":"absolute", 'top':'53px', 'background-color': 'transparent'});
+            $(".nav-mobile-genres").css({"position":"absolute", 'top':'47px'});
           }
       });
-    </script> -->
+    </script>
 </div>
