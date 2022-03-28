@@ -82,7 +82,8 @@
 		<div class="content-padding-new home-rows-margin-top">
 			<a class="home-rows-header" style="text-decoration: none;" href="/search?query=&genre=全部&sort=最新上傳">
 				<h5 style="color: #8e9194;">新鮮</h3>
-				<h3 style="font-weight: 700; color: #edeeef; margin-bottom: 20px;">最新上傳<span style="vertical-align: middle; margin-top: -2px; margin-left: 2px" class="material-icons">chevron_right</span></h3>
+				<h3 style="font-weight: 700; color: #edeeef; margin-bottom: 20px;">最新上傳</h3>
+				<div style="float: right; margin-top: -42px; margin-left: -30px; color: #b8babc">更多<span style="vertical-align: middle; margin-top: -2px; margin-left: 2px; font-size: 16px;" class="material-icons">arrow_forward</span></div>
 			</a>
 			<div class="owl-home-uncover-row owl-carousel owl-theme">
 				@foreach ($upload as $set)
