@@ -18,7 +18,7 @@
     </a>
   </div>
 
-  <div class="hide-scrollbar nav-mobile-genres" style="overflow-x: scroll; width: calc(100%); display: inline-block; white-space: nowrap; margin-bottom: -10px; line-height: 31px; position: absolute; top: 47px; border-radius: 0px; padding-top: 7px; padding-bottom: 7px; border-bottom: 1px solid #383838; background-color: #212121;">
+  <div class="hide-scrollbar nav-mobile-genres" style="overflow-x: scroll; width: calc(100%); display: inline-block; white-space: nowrap; margin-bottom: -10px; line-height: 31px; position: absolute; top: 47px; border-radius: 0px; padding-top: 8px; padding-bottom: 8px; border-bottom: 1px solid #383838; background-color: #212121;">
 
     <div style="border-right: 1px solid #383838; display: inline-block; margin-right: 10px;">
       <a style="color: white; margin-right: 15px; margin-left: 10px; background-color: #373737; padding: 7px 12px 7px 6px; border-radius: 3px; font-weight: bold" href="{{ route('home.search') }}?genre=H動漫&tags%5B%5D=新番預告&sort=">
