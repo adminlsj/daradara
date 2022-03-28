@@ -51,29 +51,26 @@
 			var padding = $(window).width() * 0.04;
 			var mobile_padding = 10;
 			$('.owl-home-top-row').owlCarousel({
+			    loop:true,
 			    dots:false,
 			    responsiveClass:true,
 			    responsive:{
 			        0:{
-			        	loop:false,
 			            items:3,
 			            margin:5,
 			        	stagePadding: mobile_padding
 			        },
 			        768:{
-			        	loop:true,
 			            items:4,
 			            margin:10,
 			        	stagePadding: padding
 			        },
 			        992:{
-			        	loop:true,
 			            items:6,
 			            margin:10,
 			        	stagePadding: padding
 			        },
 			        1200:{
-			        	loop:true,
 			        	items:7,
 			        	margin:10,
 			        	stagePadding: padding
