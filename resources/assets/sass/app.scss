@@ -2307,8 +2307,14 @@ div.sticky {
     background-color: transparent;
   }
 
+  .search-nav:hover .nav-home-mobile-button {
+    background-color: white;
+    color: black;
+  }
+
   .search-nav.active .nav-home-mobile-button {
-    background-color: #666666;
+    background-color: white;
+    color: black;
   }
 
   .search-nav span {
