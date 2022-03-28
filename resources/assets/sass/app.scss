@@ -2110,6 +2110,31 @@ div.sticky {
 }
 
 @media (max-width: 767.9px) {
+  .search-nav-bar:hover {
+    border-color: #373737 !important;
+  }
+
+  .search-nav-bar:focus{
+    outline: none;
+    border-color: #373737 !important;
+  }
+
+  .search-nav-bar::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #373737;
+    font-weight: normal;
+    opacity: 1; /* Firefox */
+  }
+
+  .search-nav-bar:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: #373737;
+    font-weight: normal;
+  }
+
+  .search-nav-bar::-ms-input-placeholder { /* Microsoft Edge */
+    color: #373737;
+    font-weight: normal;
+  }
+
   .search-doujin-row-lg { 
     width: 50%;
   }
