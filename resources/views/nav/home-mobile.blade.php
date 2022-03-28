@@ -2,7 +2,7 @@
 
   <div style="padding: 0 15px; margin-bottom: -10px;">
     <a class="hover-opacity" href="/" style="color: white; text-decoration: none; vertical-align: top;">
-      <img height="25" src="https://i.imgur.com/PTFz5Ej.png">
+      <img height="27" src="https://i.imgur.com/PTFz5Ej.png">
     </a>
 
     <form id="search-form" style="display: inline-block; width: calc(100% - 125px); position: relative; z-index: 1000000; vertical-align: top; margin-left: 10px;">
