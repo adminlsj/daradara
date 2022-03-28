@@ -10,7 +10,7 @@
     </a>
 
     <a class="nav-icon pull-right" href="{{ route('home.search') }}">
-      <img style="margin-top: -1px; margin-right: 2px;" height="20" src="https://i.imgur.com/fblmkmT.png">
+      <img style="margin-top: -1px; margin-right: 1px;" height="20" src="https://i.imgur.com/fblmkmT.png">
     </a>
 
     <a class="nav-icon pull-right" href="{{ Auth::check() ? route('user.userEditUpload', Auth::user()) : route('login') }}">
