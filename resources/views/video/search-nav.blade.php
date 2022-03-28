@@ -2,32 +2,36 @@
 
 	<div id="genre-modal-trigger" class="search-nav no-select {{ Request::get('genre') ? 'active' : '' }}" data-toggle="modal" data-target="#genre-modal">
 		<span class="hidden-xs">{{ Request::get('genre') ? Request::get('genre') : '類型'}}</span>
-		<div class="hidden-sm hidden-md hidden-lg"><span style="vertical-align: middle;" class="material-icons">dashboard</span></div>
+		<div style="border-right: 1px solid #383838; display: inline-block; margin-right: 6px;">
+	      <a style="color: white; margin-right: 11px; margin-left: 10px; background-color: #373737; padding: 6px 13px 6px 8px; border-radius: 2px; font-weight: bold" href="{{ route('home.search') }}?genre=H動漫&tags%5B%5D=新番預告&sort=">
+	        <img style="margin-top: -3px; margin-right: 6px;" height="20" src="https://i.imgur.com/H7gRtRi.png">{{ Request::get('genre') ? Request::get('genre') : '類型'}}
+	      </a>
+	    </div>
 	</div>
 
 	<div class="search-nav no-select {{ Request::get('tags') ? 'active' : '' }}" data-toggle="modal" data-target="#tags">
 		<span class="hidden-xs">標籤</span>
-		<div class="hidden-sm hidden-md hidden-lg"><span style="vertical-align: middle;" class="material-icons">loyalty</span></div>
+		<div class="nav-home-mobile-button hidden-sm hidden-md hidden-lg">標籤</div>
 	</div>
 
 	<div id="sort-modal-trigger" class="search-nav no-select {{ Request::get('sort') ? 'active' : '' }}" data-toggle="modal" data-target="#sort-modal">
 		<span class="hidden-xs">{{ Request::get('sort') ? Request::get('sort') : '排序方式'}}</span>
-		<div class="hidden-sm hidden-md hidden-lg"><span style="vertical-align: middle;" class="material-icons">sort</span></div>
+		<div class="nav-home-mobile-button hidden-sm hidden-md hidden-lg">{{ Request::get('sort') ? Request::get('sort') : '排序方式'}}</div>
 	</div>
 
 	<div class="search-nav no-select {{ Request::get('brands') ? 'active' : '' }}" data-toggle="modal" data-target="#brands">
 		<span class="hidden-xs">品牌</span>
-		<div class="hidden-sm hidden-md hidden-lg"><span style="vertical-align: middle;" class="material-icons">business</span></div>
+		<div class="nav-home-mobile-button hidden-sm hidden-md hidden-lg">品牌</div>
 	</div>
 
 	<div id="date-modal-trigger" class="search-nav no-select {{ Request::get('year') ? 'active' : '' }}" data-toggle="modal" data-target="#date-modal">
 		<span class="hidden-xs">{{ Request::get('year') ? Request::get('year').'年' : '發佈日期'}}</span>
-		<div class="hidden-sm hidden-md hidden-lg"><span style="vertical-align: middle;" class="material-icons">date_range</span></div>
+		<div class="nav-home-mobile-button hidden-sm hidden-md hidden-lg">{{ Request::get('year') ? Request::get('year').'年' : '發佈日期'}}</div>
 	</div>
 
 	<div id="duration-modal-trigger" class="hidden-sm search-nav no-select {{ Request::get('duration') ? 'active' : '' }}" data-toggle="modal" data-target="#duration-modal">
 		<span class="hidden-xs">{{ Request::get('duration') ? Request::get('duration') : '片長'}}</span>
-		<div class="hidden-sm hidden-md hidden-lg"><span style="vertical-align: middle;" class="material-icons">update</span></div>
+		<div class="nav-home-mobile-button hidden-sm hidden-md hidden-lg" style="margin-right: 10px;">{{ Request::get('duration') ? Request::get('duration') : '片長'}}</div>
 	</div>
 
 	<div class="no-select hidden-xs" style="display: inline-block; position: relative;">
