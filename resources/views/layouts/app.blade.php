@@ -30,7 +30,7 @@
     <!-- Styles -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Sharp" rel="stylesheet">
-    <link href='https://fonts.googleapis.com/css?family=Cabin+Condensed' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css2?family=Encode+Sans+Condensed:wght@700&display=swap' rel='stylesheet'>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" rel="stylesheet">
 
