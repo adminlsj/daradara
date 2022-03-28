@@ -33,9 +33,9 @@
       var targetOffset = $(".nav-mobile-genres").offset().top;
       var $window = $(window).scroll(function(){
           if ( $window.scrollTop() > 53 ) {   
-            $(".nav-mobile-genres").css({"position":"fixed", 'top':'0px', 'background-color': 'black'});
+            $(".nav-mobile-genres").css({"position":"fixed", 'top':'0px'});
           } else {
-            $(".nav-mobile-genres").css({"position":"absolute", 'top':'53px', 'background-color': 'black'});
+            $(".nav-mobile-genres").css({"position":"absolute", 'top':'53px'});
           }
       });
     </script>
