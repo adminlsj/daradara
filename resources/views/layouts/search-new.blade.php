@@ -11,17 +11,13 @@
 	      <img style="margin-top: -5px; margin-right: 6px;" height="17" src="https://i.imgur.com/8sU4eCa.png">
 	    </a>
 
-	    <form id="search-form" style="display: inline-block; margin-left: 8px; width: calc(100% - 170px); position: relative;">
-		    <div id="nav-search-btn" class="search-btn"><i style="margin-top: 3px; margin-left: 5px; color: white; font-size: 21px; font-weight: bold;" class="material-icons">search</i></div>
+	    <form id="search-form" style="display: inline-block; margin-left: 8px; width: calc(100% - 115px); position: relative;">
+		    <div id="nav-search-btn" class="search-btn"><img style="margin-top: -9px; margin-left: 6px;" height="20" src="https://i.imgur.com/fblmkmT.png"></div>
 		    <input id="nav-query" name="nav-query" style="width: 100%; height: 35px; margin-top: -6px; vertical-align: middle; border-top-left-radius: 2px; border-bottom-left-radius: 2px; border-top-right-radius: 0px; border-bottom-right-radius: 0px" class="search-nav-bar" type="text" value="{{ request('query') }}" placeholder="搜索">
 		</form>
 
 	    <a style="padding-right: 0px" class="nav-icon pull-right" href="{{ route('home.list') }}">
 	      <span style="vertical-align: middle; margin-top: -2px;" class="material-icons">account_circle</span>
-	    </a>
-
-	    <a class="nav-icon pull-right" href="{{ Auth::check() ? route('user.userEditUpload', Auth::user()) : route('login') }}">
-	      <img style="margin-top: -3px; margin-right: 5px;" height="20" src="https://i.imgur.com/ic0oQVj.png">
 	    </a>
 	  </div>
 	</div>
