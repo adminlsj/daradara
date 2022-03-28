@@ -21,18 +21,18 @@
   <div class="hide-scrollbar nav-mobile-genres" style="overflow-x: scroll; width: calc(100%); display: inline-block; white-space: nowrap; margin-bottom: -10px; line-height: 31px; position: absolute; top: 48px; border-radius: 0px; padding-top: 9px; padding-bottom: 8px; border-bottom: 1px solid #383838; background-color: #212121;">
 
     <div style="border-right: 1px solid #383838; display: inline-block; margin-right: 6px;">
-      <a style="color: white; margin-right: 11px; margin-left: 10px; background-color: #373737; padding: 6px 13px 6px 8px; border-radius: 2px; font-weight: bold" href="{{ route('home.search') }}?genre=H動漫&tags%5B%5D=新番預告&sort=">
+      <a style="color: white; margin-right: 11px; margin-left: 10px; background-color: #373737; padding: 6px 13px 6px 8px; border-radius: 2px; font-weight: bold" href="{{ route('home.search') }}?genre=裏番&tags%5B%5D=新番預告&sort=">
         <img style="margin-top: -3px; margin-right: 6px;" height="20" src="https://i.imgur.com/H7gRtRi.png">探索
       </a>
     </div>
 
     <a class="nav-home-mobile-button" href="/" style="background-color: #FFFFFF; color: black; border-color: white;">主頁</a>
-    <a class="nav-home-mobile-button" href="{{ route('home.search') }}?genre=H動漫&duration=&sort=&query=&year=&month=">H動漫</a>
-    <a class="nav-home-mobile-button" href="{{ route('home.search') }}?genre=H動漫&duration=&sort=&query=&year=&month=">泡麵番</a>
+    <a class="nav-home-mobile-button" href="{{ route('home.search') }}?genre=裏番&duration=&sort=&query=&year=&month=">裏番</a>
+    <a class="nav-home-mobile-button" href="{{ route('home.search') }}?genre=裏番&duration=&sort=&query=&year=&month=">泡麵番</a>
     <a class="nav-home-mobile-button" href="{{ route('home.search') }}?genre=3D動畫&duration=&sort=&query=&year=&month=">3D動畫</a>
     <a class="nav-home-mobile-button" href="{{ route('home.search') }}?genre=同人作品&duration=&sort=&query=&year=&month=">同人作品</a>
     <a class="nav-home-mobile-button" href="{{ route('home.search') }}?genre=Cosplay&duration=&sort=&query=&year=&month=">Cosplay</a>
-    <a class="nav-home-mobile-button" href="{{ route('home.search') }}?genre=H動漫&tags%5B%5D=新番預告&sort=">新番預告</a>
+    <a class="nav-home-mobile-button" href="{{ route('home.search') }}?genre=裏番&tags%5B%5D=新番預告&sort=">新番預告</a>
     <a class="nav-home-mobile-button" href="{{ route('home.search') }}?genre=Cosplay&duration=&sort=&query=&year=&month=" style="margin-right: 10px;">H漫畫</a>
   </div>
 
