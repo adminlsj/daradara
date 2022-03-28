@@ -8,7 +8,7 @@
 
 	  <div style="padding: 0 10px; margin-bottom: -10px;">
 	    <a href="/" style="color: white; font-size: 1.4em;">
-	      <img style="margin-top: -5px; margin-right: 7px;" height="17" src="https://i.imgur.com/8sU4eCa.png">
+	      <img style="margin-top: -5px; margin-left: 2px; margin-right: 4px;" height="17" src="https://i.imgur.com/8sU4eCa.png">
 	    </a>
 
 	    <form id="search-form" style="display: inline-block; margin-left: 7px; width: calc(100% - 115px); position: relative;">
