@@ -2089,8 +2089,12 @@ div.sticky {
     margin-top: 0px; 
   }
 
+  .card-mobile-panel .card-mobile-views-text, .card-mobile-panel .card-mobile-created-text {
+    margin-left: -1px; 
+  }
+
   .card-mobile-panel .card-mobile-duration {
-    margin-top: 1px;
+    margin-top: 2px;
   }
 
   .card-mobile-panel .card-mobile-title {

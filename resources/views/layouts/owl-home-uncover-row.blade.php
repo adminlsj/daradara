@@ -6,10 +6,10 @@
 			<div style="position: absolute; height: 25px; width: 100%; bottom: 0px; background: linear-gradient(to bottom, transparent 0%, black 120%);">
 				<div style="float: left; line-height: 25px; font-weight: 400">
 					<span class="card-mobile-views material-icons-outlined">smart_display</span>
-					<span style="font-size: 10px; color: white;">{{ $video->views() }}</span>
+					<span class="card-mobile-views-text" style="font-size: 10px; color: white;">{{ $video->views() }}</span>
 
 					<span class="card-mobile-created material-icons-outlined">wysiwyg</span>
-					<span style="font-size: 10px; color: white;">{{ Carbon\Carbon::parse($video->created_at)->diffForHumans() }}</span>
+					<span class="card-mobile-created-text" style="font-size: 10px; color: white;">{{ Carbon\Carbon::parse($video->created_at)->diffForHumans() }}</span>
 				</div>
 				@if ($video->duration != null)
 				    <div class="card-mobile-duration">
