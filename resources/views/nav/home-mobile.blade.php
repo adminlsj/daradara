@@ -6,15 +6,15 @@
     </a>
 
     <a style="padding-right: 0px" class="nav-icon pull-right" href="{{ route('home.list') }}">
-      <span style="vertical-align: middle;" class="material-icons-outlined">account_circle</span>
+      <span style="vertical-align: middle;" class="material-icons">account_circle</span>
     </a>
 
     <a class="nav-icon pull-right" href="{{ route('home.search') }}">
-      <span style="vertical-align: middle;" class="material-icons-outlined">search</span>
+      <img style="margin-top: -1px; margin-right: 2px;" height="20" src="https://i.imgur.com/fblmkmT.png">
     </a>
 
     <a class="nav-icon pull-right" href="{{ Auth::check() ? route('user.userEditUpload', Auth::user()) : route('login') }}">
-      <span style="vertical-align: middle;" class="material-icons-outlined">video_call</span>
+      <img style="margin-top: -1px; margin-right: 5px;" height="20" src="https://i.imgur.com/ic0oQVj.png">
     </a>
   </div>
 
