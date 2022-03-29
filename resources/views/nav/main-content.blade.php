@@ -8,6 +8,7 @@
 <a class="nav-item hidden-xs" href="{{ route('home.search') }}?genre=同人作品&duration=&sort=&query=&year=&month=">同人作品</a>
 <a class="nav-item hidden-xs" href="{{ route('home.search') }}?genre=Cosplay&duration=&sort=&query=&year=&month=">Cosplay</a>
 <a class="nav-item hidden-xs" href="{{ route('comic.index') }}">H漫畫</a>
+<a class="nav-item hidden-xs hidden-sm" href="https://theporndude.com/zh" target="_blank">PornDude</a>
 
 <a style="padding-right: 0px" class="nav-icon pull-right" href="{{ route('home.list') }}"><span style="vertical-align: middle;" class="material-icons-outlined">account_circle</span></a>
 <a class="nav-icon pull-right" href="{{ route('home.search') }}"><span style="vertical-align: middle;" class="material-icons-outlined">search</span></a>
