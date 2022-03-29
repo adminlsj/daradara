@@ -2,7 +2,7 @@
   @include('nav.main-content')
 </div>
 
-<div id="main-nav-home" style="z-index: 10000; padding:0; padding-top: 3px; height: 48px; line-height: 40px; position: fixed; background-image: none; border-bottom: 1px solid #383838; margin-bottom: 0px; background-color: #212121;" class="hidden-sm hidden-md hidden-lg">
+<div id="main-nav-home" style="z-index: 10000; padding:0; padding-top: 3px; height: 48px; line-height: 40px; position: fixed; background-image: none; border-bottom: 1px solid #2b2b2b; margin-bottom: 0px; background-color: #141414;" class="hidden-sm hidden-md hidden-lg">
 
   <div style="padding: 0 10px; margin-bottom: -10px;">
     <a href="/" style="color: white; font-size: 1.4em; font-family: 'Encode Sans Condensed', sans-serif;">
