@@ -84,7 +84,9 @@
 				@foreach ($upload as $set)
 					<div class="item">
 						@foreach ($set as $video)
-							@include('layouts.owl-home-uncover-row', ["video" => $video])
+							<div style="{{ $loop->iteration == 2 ? 'margin-bottom: -5px' : '' }}">
+								@include('layouts.owl-home-uncover-row', ["video" => $video])
+							</div>
 						@endforeach
 					</div>
 				@endforeach
