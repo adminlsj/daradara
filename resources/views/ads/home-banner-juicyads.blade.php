@@ -1,4 +1,4 @@
-<div class="hidden-xs hidden-sm" style="padding-top: 5px; padding-bottom: 30px; text-align: center;">
+<div class="hidden-xs hidden-sm home-banner-juicyads-md">
 	<!-- JuicyAds v3.1 -->
 	<script type="text/javascript" data-cfasync="false" async src="https://poweredby.jads.co/js/jads.js"></script>
 	<ins id="906694" data-width="908" data-height="270"></ins>
@@ -6,7 +6,7 @@
 	<!--JuicyAds END-->
 </div>
 
-<div class="hidden-xs hidden-md hidden-lg" style="text-align: center; padding-top: 30px; padding-bottom: 15px;">
+<div class="hidden-xs hidden-md hidden-lg" style="text-align: center; padding-top: 30px; padding-bottom: 0px; margin-bottom: -30px;">
 	<span style="vertical-align: top; margin-top: 5px;">
 		<!-- JuicyAds v3.1 -->
 		<script type="text/javascript" data-cfasync="false" async src="https://poweredby.jads.co/js/jads.js"></script>
@@ -18,7 +18,7 @@
 	@include('layouts.exoclick', ['id' => '4372316', 'width' => '300', 'height' => '250'])
 </div>
 
-<div class="hidden-sm hidden-md hidden-lg" style="text-align: center; padding-top: 20px; padding-bottom: 15px;">
+<div class="hidden-sm hidden-md hidden-lg" style="text-align: center; padding-top: 20px; padding-bottom: 0px; margin-bottom: -10px;">
 	<!-- JuicyAds v3.1 -->
 	<script type="text/javascript" data-cfasync="false" async src="https://poweredby.jads.co/js/jads.js"></script>
 	<ins id="906695" data-width="300" data-height="112"></ins>

@@ -91,6 +91,10 @@
 			</div>
 		</div>
 
+		<div>
+			@include('ads.home-banner-exoclick')
+		</div>
+
 		<div style="margin-top: 20px;">
 			<div class="content-padding-new">
 				<a class="home-rows-header" style="text-decoration: none;" href="/search?query=&genre=裏番&sort=本週排行">
@@ -116,7 +120,7 @@
 			    @foreach (array_chunk($tags, 2) as $set)
 				    <div class="item">
 				    	@foreach ($set as $item)
-					    	<div class="hover-lighter" style="margin-bottom: 10px;">
+					    	<div class="hover-lighter" style="{{ $loop->iteration == 2 ? 'margin-bottom: 25px' : 'margin-bottom: 10px' }}">
 								<a href="{{ $item['link'] }}" style="text-decoration: none;">
 									<div style="position: relative;">
 										<img style="width: 100%;" src="https://cdn.jsdelivr.net/gh/guaishushukanlifan/Project-H@latest/asset/thumbnail/2jSdwcGl.jpg">
@@ -154,6 +158,10 @@
 			    }
 			})
 		</script>
+
+		<div>
+			@include('ads.home-banner-juicyads')
+		</div>
 
 		<div class="home-rows-margin-top">
 			<div class="content-padding-new">

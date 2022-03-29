@@ -1,8 +1,8 @@
-<div class="hidden-xs hidden-sm" style="padding-top: 5px; padding-bottom: 50px; text-align: center;">
+<div class="hidden-xs hidden-sm home-banner-exoclick-md">
 	@include('layouts.exoclick', ['id' => '4372306', 'width' => '900', 'height' => '250'])
 </div>
 
-<div class="hidden-xs hidden-md hidden-lg" style="text-align: center; padding-top: 30px; padding-bottom: 15px;">
+<div class="hidden-xs hidden-md hidden-lg" style="text-align: center; padding-top: 30px; padding-bottom: 0px;">
 	@include('layouts.exoclick', ['id' => '4372316', 'width' => '300', 'height' => '250'])
 
 	<span style="vertical-align: top; margin-top: 5px;">
@@ -14,6 +14,6 @@
 	</span>
 </div>
 
-<div class="hidden-sm hidden-md hidden-lg" style="text-align: center; padding-top: 15px; padding-bottom: 30px;">
+<div class="hidden-sm hidden-md hidden-lg" style="text-align: center; padding-top: 15px; padding-bottom: 0px;">
 	@include('layouts.exoclick', ['id' => '4372324', 'width' => '300', 'height' => '100'])
 </div>

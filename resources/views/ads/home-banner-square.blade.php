@@ -1,4 +1,4 @@
-<div class="hidden-xs hidden-sm" style="padding-top: 5px; padding-bottom: 40px; text-align: center;">
+<div class="hidden-xs hidden-sm" style="margin-top: 50px; margin-bottom: 50px; padding-top: 5px; padding-bottom: 40px; text-align: center;">
 	@include('layouts.exoclick', ['id' => '4372306', 'width' => '900', 'height' => '250'])
 </div>
 
