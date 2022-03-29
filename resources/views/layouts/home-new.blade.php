@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-<div class="hidden-xs" style="background-color: #222222; color: #A3A3A3; width: 100%; height: 57px; line-height: 57px; padding: 0 4%; font-weight: 400; font-size: 14px; text-align: center; overflow-x: hidden;">
+<div class="hidden-xs hidden-sm" style="background-color: #222222; color: #A3A3A3; width: 100%; height: 57px; line-height: 57px; padding: 0 4%; font-weight: 400; font-size: 14px; text-align: center; overflow-x: hidden;">
 	<a href="https://discord.gg/WWYc9m9CUQ" style="color: #5865F2; text-decoration: underline; padding: 10px;" target="_blank">Discord</a>
 	<a href="https://theporndude.com/zh" style="color: #B85A1C; text-decoration: underline; padding: 10px;" target="_blank">PornDude</a>
 	<a href="https://qingse.one" style="color: #A3A3A3; text-decoration: underline; padding: 10px;" target="_blank">情色網站大全</a>
