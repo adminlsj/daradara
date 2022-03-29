@@ -2115,6 +2115,10 @@ div.sticky {
 }
 
 @media (max-width: 767.9px) {
+  body {
+    font-family: sans-serif;
+  }
+
   .search-btn {
     top: 1px; 
     right: -35px; 
