@@ -51,6 +51,22 @@ th, td {
   /* background: red !important; */
 }
 
+.ribbon-top-left {
+  position: absolute; 
+  background: #f32b8e; 
+  font-size: .7475rem; 
+  color: #fff; 
+  text-align: center; 
+  top: -60px; 
+  left: -60px; 
+  height: 100px; 
+  width: 100px; 
+  line-height: 178px; 
+  -webkit-transform: rotate(-45deg); 
+  transform: rotate(-45deg); 
+  z-index: 100;
+}
+
 .home-content-wrapper {
   background: #090812; 
   background-image: linear-gradient(to bottom, #090812, #111520 100vh, #07090e 200vh);

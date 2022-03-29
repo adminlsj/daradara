@@ -38,7 +38,10 @@
 
 		<div class="owl-home-top-row owl-carousel owl-theme">
 		    @foreach ($newest as $video)
-				@include('layouts.owl-home-row', ["video" => $video])
+			    <div style="overflow-x: hidden; position: relative;">
+					@include('layouts.owl-home-row', ["video" => $video])
+					<div class="{{ $loop->iteration == 1 ? 'ribbon-top-left' : '' }}">最新</div>
+				</div>
 			@endforeach
 		</div>
 
