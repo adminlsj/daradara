@@ -35,8 +35,8 @@
       <div class="modal-body" style="padding: 0; height: calc(100% - 65px); overflow-x: hidden;">
         <div class="row" style="text-align: center;">
           <div class="col-xs-6" style="width: 50%; padding-right: 0; border-right: 1px solid #333333;">
-            <a style="color: white; text-decoration: none;" href="{{ route('home.search') }}?genre=H動漫">
-              <div class="simple-dropdown-item genre-option">H動漫</div>
+            <a style="color: white; text-decoration: none;" href="{{ route('home.search') }}?genre=裏番">
+              <div class="simple-dropdown-item genre-option">裏番</div>
             </a>
           </div>
           <div class="col-xs-6" style="width: 50%; padding-left: 0;">
@@ -50,13 +50,13 @@
 
         <div class="row" style="text-align: center;">
           <div class="col-xs-6" style="width: 50%; padding-right: 0; border-right: 1px solid #333333;">
-            <a style="color: white; text-decoration: none;" href="{{ route('home.search') }}?genre=H動漫&tags%5B%5D=新番預告">
+            <a style="color: white; text-decoration: none;" href="{{ route('home.search') }}?genre=裏番&tags%5B%5D=新番預告">
               <div class="simple-dropdown-item genre-option">新番預告</div>
             </a>
           </div>
           <div class="col-xs-6" style="width: 50%; padding-left: 0;">
-            <a style="color: white; text-decoration: none;" href="{{ route('home.search') }}?genre=H動漫&tags%5B%5D=番劇">
-              <div class="simple-dropdown-item genre-option">番劇</div>
+            <a style="color: white; text-decoration: none;" href="{{ route('home.search') }}?genre=泡麵番">
+              <div class="simple-dropdown-item genre-option">泡麵番</div>
             </a>
           </div>
         </div>
