@@ -40,7 +40,9 @@
 		    @foreach ($newest as $video)
 			    <div style="overflow-x: hidden; position: relative;">
 					@include('layouts.owl-home-row', ["video" => $video])
-					<div class="{{ $loop->iteration == 1 ? 'ribbon-top-left' : '' }}">最新</div>
+					@if ($loop->iteration == 1)
+						<div class="ribbon-top-left">最新</div>
+					@endif
 				</div>
 			@endforeach
 		</div>
