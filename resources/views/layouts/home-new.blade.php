@@ -172,7 +172,7 @@
 
 		<div class="home-rows-margin-top">
 			<div class="content-padding-new">
-				<a class="home-rows-header" style="text-decoration: none;" href="/search?query=&genre=裏番&sort=正在觀看">
+				<a class="home-rows-header" style="text-decoration: none;" href="/search?query=&genre=裏番&sort=他們在看">
 					<h5 style="color: #8e9194;">當下</h3>
 					<h3 style="font-weight: 700; color: #edeeef; margin-bottom: 20px;">熱門影片</h3>
 					@include('layouts.home-row-arrow')
@@ -217,9 +217,9 @@
 		</script>
 
 		<div class="hidden-xs content-padding-new home-rows-margin-top">
-			<a class="home-rows-header" style="text-decoration: none;" href="/search?query=&genre=全部&sort=正在觀看">
+			<a class="home-rows-header" style="text-decoration: none;" href="/search?query=&genre=全部&sort=他們在看">
 				<h5 style="color: #8e9194;">動態</h3>
-				<h3 style="font-weight: 700; color: #edeeef; margin-bottom: 20px;">正在觀看</h3>
+				<h3 style="font-weight: 700; color: #edeeef; margin-bottom: 20px;">他們在看</h3>
 				@include('layouts.home-row-arrow')
 			</a>
 
@@ -235,9 +235,9 @@
 		</div>
 
 		<div class="hidden-sm hidden-md hidden-lg content-padding-new home-rows-margin-top">
-			<a class="home-rows-header" style="text-decoration: none;" href="/search?query=&genre=全部&sort=正在觀看">
+			<a class="home-rows-header" style="text-decoration: none;" href="/search?query=&genre=全部&sort=他們在看">
 				<h5 style="color: #8e9194;">動態</h3>
-				<h3 style="font-weight: 700; color: #edeeef; margin-bottom: 20px;">正在觀看</h3>
+				<h3 style="font-weight: 700; color: #edeeef; margin-bottom: 20px;">他們在看</h3>
 				@include('layouts.home-row-arrow')
 			</a>
 

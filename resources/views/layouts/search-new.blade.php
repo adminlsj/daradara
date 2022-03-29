@@ -151,7 +151,7 @@
 			<hr style="margin: 0; border-color: #333333;">
 			<div class="simple-dropdown-item hentai-sort-options-wrapper {{ $sort == '觀看次數' ? 'active' : ''}}"><div class="hentai-sort-options">觀看次數</div></div>
 			<hr style="margin: 0; border-color: #333333;">
-			<div class="simple-dropdown-item hentai-sort-options-wrapper {{ $sort == '正在觀看' ? 'active' : ''}}"><div class="hentai-sort-options">正在觀看</div></div>
+			<div class="simple-dropdown-item hentai-sort-options-wrapper {{ $sort == '他們在看' ? 'active' : ''}}"><div class="hentai-sort-options">他們在看</div></div>
 	      </div>
 	    </div>
 	  </div>

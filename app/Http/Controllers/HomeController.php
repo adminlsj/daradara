@@ -233,7 +233,7 @@ class HomeController extends Controller
                     $videos = $videos->orderBy('views', 'desc');
                     break;
 
-                case '正在觀看':
+                case '他們在看':
                     $videos = $videos->orderBy('updated_at', 'desc');
                     break;
 
