@@ -8,11 +8,11 @@
 
 	  <div style="padding: 0 10px; margin-bottom: -10px;">
 	    <a href="/" style="color: white; font-size: 1.4em;">
-	      <img style="margin-top: -5px; margin-left: 3px; margin-right: 4px;" height="17" src="https://i.imgur.com/8sU4eCa.png">
+	      <img style="margin-top: -5px; margin-left: 3px; margin-right: 4px;" height="17" src="https://cdn.jsdelivr.net/gh/tatakanuta/tatakanuta@v1.0.0/asset/icon/back.png">
 	    </a>
 
 	    <form id="search-form" style="display: inline-block; margin-left: 7px; width: calc(100% - 115px); position: relative;">
-		    <div id="nav-search-btn" class="search-btn"><img style="margin-top: -9px; margin-left: 7px;" height="20" src="https://i.imgur.com/fblmkmT.png"></div>
+		    <div id="nav-search-btn" class="search-btn"><img style="margin-top: -9px; margin-left: 7px;" height="20" src="https://cdn.jsdelivr.net/gh/tatakanuta/tatakanuta@v1.0.0/asset/icon/search.png"></div>
 		    <input id="nav-query" name="nav-query" style="width: 100%; height: 35px; margin-top: -6px; vertical-align: middle; border-top-left-radius: 2px; border-bottom-left-radius: 2px; border-top-right-radius: 0px; border-bottom-right-radius: 0px; background-color: #1e1e1e; border-color: #1e1e1e; line-height: 35px; padding-left: 7px; font-size: 15px; padding-top: 5px" class="search-nav-bar" type="text" value="{{ request('query') }}" placeholder="搜尋 Hanime1.me">
 		</form>
 

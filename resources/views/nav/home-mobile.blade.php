@@ -10,11 +10,11 @@
     </a>
 
     <a class="nav-icon pull-right" href="{{ route('home.search') }}">
-      <img style="margin-top: -3px; margin-right: 1px;" height="20" src="https://i.imgur.com/fblmkmT.png">
+      <img style="margin-top: -3px; margin-right: 1px;" height="20" src="https://cdn.jsdelivr.net/gh/tatakanuta/tatakanuta@v1.0.0/asset/icon/search.png">
     </a>
 
     <a class="nav-icon pull-right" href="{{ Auth::check() ? route('user.userEditUpload', Auth::user()) : route('login') }}">
-      <img style="margin-top: -3px; margin-right: 5px;" height="20" src="https://i.imgur.com/ic0oQVj.png">
+      <img style="margin-top: -3px; margin-right: 5px;" height="20" src="https://cdn.jsdelivr.net/gh/tatakanuta/tatakanuta@v1.0.0/asset/icon/notification.png">
     </a>
   </div>
 
@@ -22,7 +22,7 @@
 
     <div style="border-right: 1px solid #2b2b2b; display: inline-block; margin-right: 7px;">
       <a style="color: white; margin-right: 11px; margin-left: 10px; background-color: #2b2b2b; padding: 7px 13px 7px 8px; border-radius: 2px; font-weight: bold" href="{{ route('home.search') }}?query=&genre=全部&sort=正在觀看">
-        <img style="margin-top: -3px; margin-right: 6px;" height="20" src="https://i.imgur.com/H7gRtRi.png">探索
+        <img style="margin-top: -3px; margin-right: 6px;" height="20" src="https://cdn.jsdelivr.net/gh/tatakanuta/tatakanuta@v1.0.0/asset/icon/explore.png">探索
       </a>
     </div>
 
