@@ -4,7 +4,7 @@
 	<div class="hidden-xs">
 		@include('nav.main')
 	</div>
-	<div id="main-nav-home" style="z-index: 10000; padding:0; padding-top: 3px; height: 48px; line-height: 40px; position: absolute; background-image: none; border-bottom: 1px solid #383838; margin-bottom: 0px; background-color: #212121;" class="hidden-sm hidden-md hidden-lg">
+	<div id="main-nav-home" style="z-index: 10000; padding:0; padding-top: 3px; height: 48px; line-height: 40px; position: absolute; background-image: none; border-bottom: 1px solid #2b2b2b; margin-bottom: 0px; background-color: #141414;" class="hidden-sm hidden-md hidden-lg">
 
 	  <div style="padding: 0 10px; margin-bottom: -10px;">
 	    <a href="/" style="color: white; font-size: 1.4em;">
@@ -13,7 +13,7 @@
 
 	    <form id="search-form" style="display: inline-block; margin-left: 7px; width: calc(100% - 115px); position: relative;">
 		    <div id="nav-search-btn" class="search-btn"><img style="margin-top: -9px; margin-left: 7px;" height="20" src="https://i.imgur.com/fblmkmT.png"></div>
-		    <input id="nav-query" name="nav-query" style="width: 100%; height: 35px; margin-top: -6px; vertical-align: middle; border-top-left-radius: 2px; border-bottom-left-radius: 2px; border-top-right-radius: 0px; border-bottom-right-radius: 0px; background-color: #181818; border-color: #181818; line-height: 35px; padding-left: 7px; font-size: 15px; padding-top: 5px" class="search-nav-bar" type="text" value="{{ request('query') }}" placeholder="搜尋 Hanime1.me">
+		    <input id="nav-query" name="nav-query" style="width: 100%; height: 35px; margin-top: -6px; vertical-align: middle; border-top-left-radius: 2px; border-bottom-left-radius: 2px; border-top-right-radius: 0px; border-bottom-right-radius: 0px; background-color: #212121; border-color: #212121; line-height: 35px; padding-left: 7px; font-size: 15px; padding-top: 5px" class="search-nav-bar" type="text" value="{{ request('query') }}" placeholder="搜尋 Hanime1.me">
 		</form>
 
 	    <a style="padding-right: 0px" class="nav-icon pull-right" href="{{ route('home.list') }}">
