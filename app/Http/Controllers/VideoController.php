@@ -33,6 +33,8 @@ class VideoController extends Controller
             $is_mobile = Helper::checkIsMobile();
 
             $video->current_views++;
+            $video->week_views++;
+            $video->month_views++;
             $video->views++;
             $video->save();
 

@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use App\Video;
 use App\Comic;
 
 class ResetWeekViews extends Command
@@ -38,6 +39,7 @@ class ResetWeekViews extends Command
      */
     public function handle()
     {
+        Video::where('id', '!=', null)->update(['week_views' => 0]);
         Comic::where('id', '!=', null)->update(['week_views' => 0]);
     }
 }

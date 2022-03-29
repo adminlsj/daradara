@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use App\Video;
 use App\Comic;
 
 class ResetDayViews extends Command
@@ -38,6 +39,7 @@ class ResetDayViews extends Command
      */
     public function handle()
     {
+        Video::where('id', '!=', null)->update(['current_views' => 0]);
         Comic::where('id', '!=', null)->update(['day_views' => 0]);
     }
 }

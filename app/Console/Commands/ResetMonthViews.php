@@ -5,21 +5,21 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\Video;
 
-class UpdateData extends Command
+class ResetMonthViews extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'hanime1:update-data';
+    protected $signature = 'hanime1:reset-month-views';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Reset current views';
+    protected $description = 'Reset month views for videos and comics';
 
     /**
      * Create a new command instance.
@@ -38,6 +38,6 @@ class UpdateData extends Command
      */
     public function handle()
     {
-        Video::where('id', '!=', null)->update(['current_views' => 0]);
+        Video::where('id', '!=', null)->update(['month_views' => 0]);
     }
 }
