@@ -65,6 +65,7 @@ th, td {
   -webkit-transform: rotate(-45deg); 
   transform: rotate(-45deg); 
   z-index: 100;
+  font-weight: 400;
 }
 
 .home-content-wrapper {
@@ -2157,6 +2158,15 @@ div.sticky {
 @media (max-width: 767.9px) {
   body {
     font-family: sans-serif;
+  }
+
+  .ribbon-top-left {
+    font-size: 9px; 
+    top: -65px; 
+    left: -65px; 
+    height: 97px; 
+    width: 97px; 
+    line-height: 178px; 
   }
 
   .search-btn {
