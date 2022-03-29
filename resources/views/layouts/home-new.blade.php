@@ -220,7 +220,7 @@
 		</div>
 
 		<div class="hidden-sm hidden-md hidden-lg content-padding-new home-rows-margin-top">
-			<a class="home-rows-header" style="text-decoration: none;" href="/search?query=&genre=全部&sort=最新上傳">
+			<a class="home-rows-header" style="text-decoration: none;" href="/search?query=&genre=全部&sort=正在觀看">
 				<h5 style="color: #8e9194;">動態</h3>
 				<h3 style="font-weight: 700; color: #edeeef; margin-bottom: 20px;">正在觀看</h3>
 				@include('layouts.home-row-arrow')
