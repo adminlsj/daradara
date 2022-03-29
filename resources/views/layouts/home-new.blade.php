@@ -107,7 +107,7 @@
 		</div>
 
 		<div class="content-padding-new home-rows-margin-top">
-			<a class="home-rows-header" style="text-decoration: none;" href="/search?query=&genre=全部&sort=最新上傳">
+			<a class="home-rows-header" style="text-decoration: none;" href="{{ route('home.search') }}">
 				<h5 style="color: #8e9194;">分類</h3>
 				<h3 style="font-weight: 700; color: #edeeef; margin-bottom: 20px;">影片標籤</h3>
 				@include('layouts.home-row-arrow')
