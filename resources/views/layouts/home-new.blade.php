@@ -52,7 +52,7 @@
 			    responsive:{
 			        0:{
 			            items:3,
-			            margin:5,
+			            margin:4,
 			        	stagePadding: mobile_padding
 			        },
 			        768:{
@@ -179,7 +179,7 @@
 			    responsive:{
 			        0:{
 			            items:3,
-			            margin:5,
+			            margin:4,
 			            stagePadding: mobile_padding,
 			        },
 			        768:{
