@@ -32,14 +32,14 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $videos = Video::where('tags_array', 'like', '%"番劇"%')->get();
+        /* $videos = Video::where('tags_array', 'like', '%"番劇"%')->get();
         foreach ($videos as $video) {
             $tags_array = $video->tags_array;
             $tags_array['泡麵番'] = 10;
             unset($tags_array['番劇']);
             $video->tags_array = $tags_array;
             $video->save();
-        }
+        } */
 
         /* $tc = Storage::disk('local')->files('video/tc');
         foreach ($tc as $video) {
@@ -82,53 +82,7 @@ class BotController extends Controller
             Storage::disk('local')->put("video/{$folder}/p_{$i}.html", file_get_contents($url));
         } */
 
-        /* $tc = Storage::disk('local')->files('video/tc');
-        foreach ($tc as $video) {
-            $extension = explode('.', $video)[1];
-            if ($extension == 'ts') {
-                $number = Helper::get_string_between($video, 'p', '.ts');
-                $folder = $number % 3;
-                Storage::disk('local')->move($video, "video/tc/{$folder}/p_{$number}.html");
-            }
-        }
-
-        $sc = Storage::disk('local')->files('video/sc');
-        foreach ($sc as $video) {
-            $extension = explode('.', $video)[1];
-            if ($extension == 'ts') {
-                $number = Helper::get_string_between($video, 'p', '.ts');
-                $folder = $number % 3;
-                Storage::disk('local')->move($video, "video/sc/{$folder}/p_{$number}.html");
-            }
-        } */
-
-        /* curl -O --referer https://avbebe.com/ https://vz-e9c9f2c4-a7f.b-cdn.net/dacb9593-b19f-4617-9b57-d4790c8089d1/1920x1080/video0.ts
-
-        for i in `seq 0 295`; do echo $folder=`$i % 3`; curl --referer https://hanime1.me/ https://vz-e9c9f2c4-a7f.b-cdn.net/58d37084-285b-45c9-9006-8af6bd5136e3/1920x1080/video${i}.ts --output ${folder}/c_${i}.html; done */
-
-        /* $url = 'https://worldstream.hembed.com/38256-1080p.mp4';
-        return Helper::sign_hembed_url($url, env('HEMBED_TOKEN'), 43200);
-
-        return $requests = Browsershot::url('https://www.agemys.com/play/20220015?playid=2_6')
-            ->useCookies(['username' => 'admin'])
-            ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
-            ->triggeredRequests();
-
-        $videos = Video::where('foreign_sd', 'like', '%"vod"%')->select('id', 'title', 'sd', 'outsource', 'tags_array', 'foreign_sd', 'created_at')->get();
-        foreach ($videos as $video) {
-            $temp = $video->foreign_sd;
-            $temp['vod'] = str_replace('https://worldstream.hembed.com/', 'https://vdownload-4.hembed.com/', $video->foreign_sd['vod']);
-            $video->foreign_sd = $temp;
-            $video->save();
-        }
-
-        $videos = Video::where('foreign_sd', 'like', '%"vod_sc"%')->select('id', 'title', 'sd', 'outsource', 'tags_array', 'foreign_sd', 'created_at')->get();
-        foreach ($videos as $video) {
-            $temp = $video->foreign_sd;
-            $temp['vod_sc'] = str_replace('https://worldstream.hembed.com/', 'https://vdownload-4.hembed.com/', $video->foreign_sd['vod_sc']);
-            $video->foreign_sd = $temp;
-            $video->save();
-        } */
+        /* curl -O --referer https://avbebe.com/ https://vz-e9c9f2c4-a7f.b-cdn.net/dacb9593-b19f-4617-9b57-d4790c8089d1/1920x1080/video0.ts */
 
         // download imgurs
         /* $videos = Video::where('cover', 'not like', '%cdn.jsdelivr.net%')->orderBy('id', 'asc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
@@ -172,13 +126,13 @@ class BotController extends Controller
 
 
         // update cover
-        /* $videos = Video::where('cover', 'not like', '%cdn.jsdelivr.net%')->orderBy('id', 'asc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
+        $videos = Video::where('cover', 'not like', '%cdn.jsdelivr.net%')->orderBy('id', 'asc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
         foreach ($videos as $video) {
             $cover = str_replace('.png', '.jpg', $video->cover);
             $imgur = Helper::get_string_between($cover, 'https://i.imgur.com/', '.jpg');
-            $video->cover = 'https://cdn.jsdelivr.net/gh/shinpaisho/shinpaisho-h@latest/asset/cover/'.$imgur.'.jpg';
+            $video->cover = 'https://cdn.jsdelivr.net/gh/tatakanuta/tatakanuta@v1.0.0/asset/cover/'.$imgur.'.jpg';
             $video->save();
-        } */
+        }
 
         //---------------------------------------------------------------------------------------------------------
 
