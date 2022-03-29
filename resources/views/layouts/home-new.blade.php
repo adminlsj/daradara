@@ -40,7 +40,7 @@
 		    @foreach ($newest as $video)
 			    <div style="overflow-x: hidden; position: relative;">
 					@include('layouts.owl-home-row', ["video" => $video])
-					@if ($loop->iteration == 1)
+					@if ($loop->iteration <= 3)
 						<div class="ribbon-top-left">最新</div>
 					@endif
 				</div>
