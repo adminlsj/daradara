@@ -139,13 +139,19 @@
 	      </div>
 	      <div class="modal-body" style="padding: 0;">
 	        <input type="hidden" id="sort" name="sort" value="{{ $sort }}">
-			<div class="simple-dropdown-item hentai-sort-options-wrapper {{ $sort == '本日排行' ? 'active' : ''}}"><div class="hentai-sort-options">本日排行</div></div>
-			<hr style="margin: 0; border-color: #333333;">
 			<div class="simple-dropdown-item hentai-sort-options-wrapper {{ $sort == '最新內容' ? 'active' : ''}}"><div class="hentai-sort-options">最新內容</div></div>
 			<hr style="margin: 0; border-color: #333333;">
 			<div class="simple-dropdown-item hentai-sort-options-wrapper {{ $sort == '最新上傳' ? 'active' : ''}}"><div class="hentai-sort-options">最新上傳</div></div>
 			<hr style="margin: 0; border-color: #333333;">
+			<div class="simple-dropdown-item hentai-sort-options-wrapper {{ $sort == '本日排行' ? 'active' : ''}}"><div class="hentai-sort-options">本日排行</div></div>
+			<hr style="margin: 0; border-color: #333333;">
+			<div class="simple-dropdown-item hentai-sort-options-wrapper {{ $sort == '本週排行' ? 'active' : ''}}"><div class="hentai-sort-options">本週排行</div></div>
+			<hr style="margin: 0; border-color: #333333;">
+			<div class="simple-dropdown-item hentai-sort-options-wrapper {{ $sort == '本月排行' ? 'active' : ''}}"><div class="hentai-sort-options">本月排行</div></div>
+			<hr style="margin: 0; border-color: #333333;">
 			<div class="simple-dropdown-item hentai-sort-options-wrapper {{ $sort == '觀看次數' ? 'active' : ''}}"><div class="hentai-sort-options">觀看次數</div></div>
+			<hr style="margin: 0; border-color: #333333;">
+			<div class="simple-dropdown-item hentai-sort-options-wrapper {{ $sort == '正在觀看' ? 'active' : ''}}"><div class="hentai-sort-options">正在觀看</div></div>
 	      </div>
 	    </div>
 	  </div>

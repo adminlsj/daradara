@@ -24,7 +24,7 @@ class HomeController extends Controller
        
         $upload = Video::with('user:id,name,avatar_temp')->orderBy('uploaded_at', 'desc')->select('id', 'user_id', 'title', 'cover', 'imgur', 'views', 'tags_array', 'created_at', 'duration')->limit(10)->get()->split(5);
 
-        $trending = Video::whereOrderBy('current_views', $count, true)->get();
+        $trending = Video::whereOrderBy('week_views', $count, true)->orderBy('id', 'desc')->get();
 
         $tags = [
             [
@@ -209,10 +209,6 @@ class HomeController extends Controller
 
         if ($sort = $request->sort) {
             switch ($sort) {
-                case '本日排行':
-                    $videos = $videos->orderBy('current_views', 'desc')->orderBy('id', 'desc');
-                    break;
-
                 case '最新內容':
                     $videos = $videos->orderBy('created_at', 'desc');
                     break;
@@ -221,8 +217,24 @@ class HomeController extends Controller
                     $videos = $videos->orderBy('uploaded_at', 'desc');
                     break;
 
+                case '本日排行':
+                    $videos = $videos->orderBy('current_views', 'desc')->orderBy('id', 'desc');
+                    break;
+
+                case '本週排行':
+                    $videos = $videos->orderBy('week_views', 'desc')->orderBy('id', 'desc');
+                    break;
+
+                case '本月排行':
+                    $videos = $videos->orderBy('month_views', 'desc')->orderBy('id', 'desc');
+                    break;
+
                 case '觀看次數':
                     $videos = $videos->orderBy('views', 'desc');
+                    break;
+
+                case '正在觀看':
+                    $videos = $videos->orderBy('updated_at', 'desc');
                     break;
 
                 default:
