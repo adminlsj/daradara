@@ -22,7 +22,7 @@ class HomeController extends Controller
 
         $newest = Video::whereOrderBy('created_at', $count, true)->where('title', 'not like', '[新番預告]%')->get();
        
-        $upload = Video::with('user:id,name,avatar_temp')->orderBy('uploaded_at', 'desc')->select('id', 'user_id', 'title', 'cover', 'imgur', 'views', 'tags_array', 'created_at', 'duration')->limit(10)->get()->split(5);
+        $upload = Video::with('user:id,name,avatar_temp')->where('imgur', '!=', 'WENZTSJ')->orderBy('uploaded_at', 'desc')->select('id', 'user_id', 'title', 'cover', 'imgur', 'views', 'tags_array', 'created_at', 'duration')->limit(10)->get()->split(5);
 
         $trending = Video::whereOrderBy('week_views', $count, true)->orderBy('id', 'desc')->get();
 
