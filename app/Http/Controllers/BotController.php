@@ -32,13 +32,12 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $videos = Video::where('tags_array', 'like', '%"番劇"%')->get();
+        $videos = Video::where('sd', 'like', '%odycdn%')->get();
         foreach ($videos as $video) {
-            $tags_array = $video->tags_array;
-            $tags_array['泡麵番'] = 10;
-            unset($tags_array['番劇']);
-            $video->tags_array = $tags_array;
-            $video->save();
+            $httpcode = Motherless::getHttpcode($video->sd);
+            if ($httpcode != 200 && $httpcode != 0) {
+                echo 'ID#'.$video->id.' error<br>';
+            }
         }
 
         /* $tc = Storage::disk('local')->files('video/tc');
