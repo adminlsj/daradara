@@ -18,6 +18,7 @@ class Kernel extends ConsoleKernel
         'App\Console\Commands\ResetMonthViews',
         'App\Console\Commands\CheckSpankbang',
         'App\Console\Commands\CheckMotherless',
+        'App\Console\Commands\CheckOdysee',
 
         'App\Console\Commands\UpdateXvideos',
         'App\Console\Commands\UpdateXvideosErrors',
@@ -53,6 +54,7 @@ class Kernel extends ConsoleKernel
 
         $schedule->command('hanime1:check-spankbang')->hourly();
         $schedule->command('hanime1:check-motherless')->cron('0 */2 * * *');
+        $schedule->command('hanime1:check-odysee')->cron('0 */2 * * *');
 
         $schedule->command('hanime1:upload-nhentai')->hourly()->between('6:00', '21:00');
         $schedule->command('hanime1:upload-rule34')->hourly()->between('6:00', '21:00');
