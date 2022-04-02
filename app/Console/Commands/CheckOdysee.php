@@ -7,6 +7,7 @@ use Mail;
 use App\Video;
 use App\Motherless;
 use App\Mail\UserReport;
+use Illuminate\Support\Facades\Log;
 
 class CheckOdysee extends Command
 {
@@ -44,6 +45,8 @@ class CheckOdysee extends Command
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
+        Log::info('Odysee check started...');
+
         $videos = Video::where('sd', 'like', '%odycdn%')->get();
         foreach ($videos as $video) {
             $httpcode = Motherless::getHttpcode($video->sd);
@@ -51,5 +54,7 @@ class CheckOdysee extends Command
                 Mail::to('vicky.avionteam@gmail.com')->send(new UserReport('master', 'Odysee check failed ('.$httpcode.')', $video->id, $video->title, $video->sd, 'master', 'master'));
             }
         }
+
+        Log::info('Odysee check ended...');
     }
 }
