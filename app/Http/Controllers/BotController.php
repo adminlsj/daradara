@@ -25,20 +25,34 @@ use Redirect;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 
+use Illuminate\Support\Collection;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Pagination\LengthAwarePaginator;
+
 class BotController extends Controller
 {
+    public function paginate($items, $perPage = 15, $page = null, $options = [])
+    {
+        $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
+        $items = $items instanceof Collection ? $items : Collection::make($items);
+        return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
+    }
+
     public function tempMethod(Request $request)
     {
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $videos = Video::where('sd', 'like', '%odycdn%')->get();
+
+        /* $videos = Video::where('tags_array', 'like', '%"泡麵番"%')->get();
         foreach ($videos as $video) {
-            $httpcode = Motherless::getHttpcode($video->sd);
-            if ($httpcode != 200 && $httpcode != 0) {
-                echo 'ID#'.$video->id.' error<br>';
-            }
-        }
+            $video->tags = "泡麵番 ".$video->tags;
+            $video->save();
+        } */
+
+
+        $videos = Video::where('tags_array', 'like', '%"泡麵番"%')->select('id', 'playlist_id', 'title')->orderBy('created_at', 'desc')->get()->groupBy('playlist_id')->sortKeysDesc();
+        return $videos = $this->paginate($videos);
 
         /* $tc = Storage::disk('local')->files('video/tc');
         foreach ($tc as $video) {

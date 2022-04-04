@@ -103,8 +103,8 @@
 
 		<div style="margin-top: 20px;">
 			<div class="content-padding-new">
-				<a class="home-rows-header" style="text-decoration: none;" href="/search?query=&genre=裏番&sort=本週排行">
-					<h5 style="color: #8e9194; ">本週</h3>
+				<a class="home-rows-header" style="text-decoration: none;" href="/search?query=&genre=裏番&sort=本月排行">
+					<h5 style="color: #8e9194; ">本月</h3>
 					<h3 style="font-weight: 700; color: #edeeef; margin-bottom: 20px;">發燒影片</h3>
 					@include('layouts.home-row-arrow')
 				</a>

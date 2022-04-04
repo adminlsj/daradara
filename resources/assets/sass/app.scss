@@ -68,6 +68,10 @@ th, td {
   font-weight: 400;
 }
 
+.search-hentai-pagination-desktop-margin {
+  margin-top: -75px !important;
+}
+
 .home-content-wrapper {
   background: #090812; 
   background-image: linear-gradient(to bottom, #090812, #111520 100vh, #07090e 200vh);
@@ -1118,7 +1122,6 @@ label.upload-image-btn input[type="file"] {
 
 .search-pagination {
   text-align: center; 
-  margin-top: -75px
 }
 
 .modal-header .close {
@@ -1817,10 +1820,6 @@ div.sticky {
     width: calc(100% / 6);
   }
 
-  .search-pagination {
-    margin-top: -70px
-  }
-
   .list-rows-wrapper {
     margin-top: 90px !important;
   }
@@ -1893,6 +1892,14 @@ div.sticky {
 @media (max-width: 991px) {
   .plyr__captions {
     font-size: 2.8vw !important;
+  }
+
+  .search-hentai-pagination-desktop-margin {
+    margin-top: -35px !important;
+  }
+
+  .search-doujin-pagination-desktop-margin {
+    margin-top: 0px;
   }
 
   .search-doujin-row-lg { 
@@ -2124,10 +2131,6 @@ div.sticky {
   .single-show-list {
     padding: 0 4% !important;
     padding-top: 4px !important;
-  }
-
-  .search-pagination {
-    margin-top: -35px
   }
 
   .list-rows-wrapper {

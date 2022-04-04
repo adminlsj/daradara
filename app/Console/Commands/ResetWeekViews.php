@@ -39,7 +39,16 @@ class ResetWeekViews extends Command
      */
     public function handle()
     {
-        Video::where('id', '!=', null)->update(['week_views' => 0]);
-        Comic::where('id', '!=', null)->update(['week_views' => 0]);
+        $videos = Video::select('id', 'week_views')->get();
+        foreach ($videos as $video) {
+            $video->week_views = round($video->week_views / 7);
+            $video->save();
+        }
+
+        $comics = Comic::select('id', 'week_views')->get();
+        foreach ($comics as $comic) {
+            $comic->week_views = round($comic->week_views / 7);
+            $comic->save();
+        }
     }
 }

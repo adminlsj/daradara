@@ -20,11 +20,11 @@ class HomeController extends Controller
     {
         $count = 21;
 
-        $newest = Video::whereOrderBy('created_at', $count, true)->where('title', 'not like', '[新番預告]%')->get();
+        $newest = Video::whereOrderBy('created_at', $count, true)->where('title', 'not like', '[新番預告]%')->where('tags', 'not like', '泡麵番%')->get();
        
         $upload = Video::with('user:id,name,avatar_temp')->where('imgur', '!=', 'WENZTSJ')->orderBy('uploaded_at', 'desc')->select('id', 'user_id', 'title', 'cover', 'imgur', 'views', 'tags_array', 'created_at', 'duration')->limit(10)->get()->split(5);
 
-        $trending = Video::whereOrderBy('week_views', $count, true)->orderBy('id', 'desc')->get();
+        $trending = Video::whereOrderBy('month_views', $count, true)->orderBy('id', 'desc')->get();
 
         $tags = [
             [
@@ -108,6 +108,7 @@ class HomeController extends Controller
         $duration = '';
         $videos = Video::query();
         $doujin = true;
+        $bangumi = false;
         $is_mobile = Helper::checkIsMobile();;
         
         if ($query = request('query')) {
@@ -131,30 +132,34 @@ class HomeController extends Controller
 
                 case '裏番':
                     $doujin = false;
+                    $videos = $videos->where(function($query) {
+                        $query->orWhere('tags', 'not like', '泡麵番%');
+                    });
                     break;
 
                 case '泡麵番':
                     $doujin = false;
+                    $bangumi = true;
                     $videos = $videos->where(function($query) {
-                        $query->orWhere('tags_array', 'ilike', '%"泡麵番"%');
+                        $query->orWhere('tags_array', 'like', '%"泡麵番"%')->where('foreign_sd', 'like', '%"bangumi"%');
                     });
                     break;
 
                 case '3D動畫':
                     $videos = $videos->where(function($query) {
-                        $query->orWhere('tags_array', 'ilike', '%"3D"%');
+                        $query->orWhere('tags_array', 'like', '%"3D"%');
                     });
                     break;
 
                 case '同人作品':
                     $videos = $videos->where(function($query) {
-                        $query->orWhere('tags_array', 'ilike', '%"同人"%');
+                        $query->orWhere('tags_array', 'like', '%"同人"%');
                     });
                     break;
 
                 case 'Cosplay':
                     $videos = $videos->where(function($query) {
-                        $query->orWhere('tags_array', 'ilike', '%"Cosplay"%');
+                        $query->orWhere('tags_array', 'like', '%"Cosplay"%');
                     });
                     break;
                 
@@ -257,7 +262,7 @@ class HomeController extends Controller
 
         $videos->setPath('');
         
-        return view('layouts.search-new', compact('genre', 'tags', 'sort', 'brands', 'year', 'month', 'duration', 'videos', 'doujin', 'is_mobile'));
+        return view('layouts.search-new', compact('genre', 'tags', 'sort', 'brands', 'year', 'month', 'duration', 'videos', 'doujin', 'bangumi', 'is_mobile'));
     }
 
     public function list()

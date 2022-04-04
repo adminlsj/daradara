@@ -38,6 +38,10 @@ class ResetMonthViews extends Command
      */
     public function handle()
     {
-        Video::where('id', '!=', null)->update(['month_views' => 0]);
+        $videos = Video::select('id', 'month_views')->get();
+        foreach ($videos as $video) {
+            $video->month_views = round($video->month_views / 30);
+            $video->save();
+        }
     }
 }

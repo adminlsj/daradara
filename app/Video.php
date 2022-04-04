@@ -31,7 +31,7 @@ class Video extends Model
     ];
 
     public static $metadata = [
-        '無碼', '番劇', '1080p', '新番預告'
+        '無碼', 'AI解碼', '1080p', '60FPS', '新番預告'
     ];
 
     public static $setting = [
