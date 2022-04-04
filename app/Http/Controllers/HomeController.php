@@ -108,7 +108,6 @@ class HomeController extends Controller
         $duration = '';
         $videos = Video::query();
         $doujin = true;
-        $bangumi = false;
         $is_mobile = Helper::checkIsMobile();;
         
         if ($query = request('query')) {
@@ -139,7 +138,6 @@ class HomeController extends Controller
 
                 case '泡麵番':
                     $doujin = false;
-                    $bangumi = true;
                     $videos = $videos->where(function($query) {
                         $query->orWhere('tags_array', 'like', '%"泡麵番"%')->where('foreign_sd', 'like', '%"bangumi"%');
                     });
@@ -262,7 +260,7 @@ class HomeController extends Controller
 
         $videos->setPath('');
         
-        return view('layouts.search-new', compact('genre', 'tags', 'sort', 'brands', 'year', 'month', 'duration', 'videos', 'doujin', 'bangumi', 'is_mobile'));
+        return view('layouts.search-new', compact('genre', 'tags', 'sort', 'brands', 'year', 'month', 'duration', 'videos', 'doujin', 'is_mobile'));
     }
 
     public function list()
