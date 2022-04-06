@@ -212,7 +212,7 @@ class HomeController extends Controller
 
         if ($sort = $request->sort) {
             switch ($sort) {
-                case '最新內容':
+                case '最新上市':
                     $videos = $videos->orderBy('created_at', 'desc');
                     break;
 

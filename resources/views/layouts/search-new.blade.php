@@ -139,7 +139,7 @@
 	      </div>
 	      <div class="modal-body" style="padding: 0;">
 	        <input type="hidden" id="sort" name="sort" value="{{ $sort }}">
-			<div class="simple-dropdown-item hentai-sort-options-wrapper {{ $sort == '最新內容' ? 'active' : ''}}"><div class="hentai-sort-options">最新內容</div></div>
+			<div class="simple-dropdown-item hentai-sort-options-wrapper {{ $sort == '最新上市' ? 'active' : ''}}"><div class="hentai-sort-options">最新上市</div></div>
 			<hr style="margin: 0; border-color: #333333;">
 			<div class="simple-dropdown-item hentai-sort-options-wrapper {{ $sort == '最新上傳' ? 'active' : ''}}"><div class="hentai-sort-options">最新上傳</div></div>
 			<hr style="margin: 0; border-color: #333333;">
