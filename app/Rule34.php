@@ -33,6 +33,7 @@ class Rule34
     ];
 
     public static $translations = [
+        'blue skin' => '藍皮膚',
         "jahy sama wa kujikenai!" => '賈希大人不氣餒！',
         "jahy" => '賈希大人',
         "shirogane noel" => '白銀諾艾爾',
