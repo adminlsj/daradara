@@ -141,10 +141,11 @@ th, td {
   top: 0; 
   left: 0; 
   z-index: 1000; 
-  font-size: 20px; 
+  font-size: 18px; 
+  font-weight: normal;
   background-color: rgba(0, 0, 0, 0.6); 
   color: white; 
-  padding: 5px;
+  padding: 5px 7px;
 }
 
 .preview-info-content {

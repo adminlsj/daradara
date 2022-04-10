@@ -88,11 +88,11 @@
   <div class="content-padding">
     @foreach ($videos as $video)
       <div id="{{ $video->id }}" class="row">
-        <h4 class="hidden-sm hidden-md hidden-lg" style="margin: 0; background-color: #222222; color: white; padding: 7px 15px; font-weight: bold; line-height: 25px">{{ $video->translations['JP'] }}</h4>
+        <h4 class="hidden-sm hidden-md hidden-lg" style="margin: 0; background-color: #222222; color: white; padding: 10px 15px; font-weight: bold; line-height: 25px">{{ $video->translations['JP'] }}</h4>
         <div class="col-md-12">
           <div class="preview-info-cover">
             <img style="width: 100%;" src="{{ $video->cover }}">
-            <div>{{ ltrim(Carbon\Carbon::parse($video->created_at)->format('d號'), '0') }}</div>
+            <div>{{ $month }}月{{ ltrim(Carbon\Carbon::parse($video->created_at)->format('d'), '0') }}日</div>
           </div>
           <div class="preview-info-content">
             <h3 class="hidden-xs" style="margin: 0; background-color: #222222; color: white; padding: 10px 15px; font-weight: bold; line-height: 35px">{{ $video->translations['JP'] }}</h3>
@@ -108,7 +108,7 @@
 
               <h5 style="color: #bdbdbd; font-weight: normal;"><span class="hidden-xs">製作公司：</span><a style="color: #d9d9d9; text-decoration: underline;" href="{{ route('home.search') }}?genre=裏番&brands%5B%5D={{ $brand = array_values(array_intersect(array_keys($video->tags_array), App\Preview::$brands))[0] }}">{{ $brand }}</a></h5>
 
-              <h5 style="color: #bdbdbd; margin-bottom: 15px; font-weight: normal;"><span class="hidden-xs">上市日期：{{ Carbon\Carbon::parse($video->created_at)->format('Y年m月d日') }} {{ App\Preview::$weekMap[Carbon\Carbon::parse($video->created_at)->dayOfWeek] }}</span><span class="hidden-sm hidden-md hidden-lg">{{ $month }}月{{ ltrim(Carbon\Carbon::parse($video->created_at)->format('d日'), '0') }} 上市</span></h5>
+              <h5 style="color: #bdbdbd; margin-bottom: 15px; font-weight: normal;"><span class="hidden-xs">上市日期：</span>{{ Carbon\Carbon::parse($video->created_at)->format('Y年m月d日') }} <span class="hidden-xs">{{ App\Preview::$weekMap[Carbon\Carbon::parse($video->created_at)->dayOfWeek] }}</span><span class="hidden-sm hidden-md hidden-lg">上市</span></h5>
 
               <h5 class="caption hidden-xs" style="color: #bdbdbd; font-weight: 400; margin-top: 10px; line-height: 20px; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;">{{ $video->caption }}</h5>
               <h5 class="show-more-caption no-select hidden-xs" style="margin-bottom: 25px; color: #fff; font-weight: 400; font-size: 12px; cursor: pointer;">顯示完整資訊</h5>
