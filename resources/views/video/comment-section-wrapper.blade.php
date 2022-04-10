@@ -3,8 +3,8 @@
 	  <form id="comment-create-form" style="margin-top: 0px;" action="{{ route('video.createComment') }}" method="POST">
 	    {{ csrf_field() }}
 	    <input name="comment-user-id" type="hidden" value={{ Auth::user()->id }}>
-	    <input name="comment-type" type="hidden" value="video">
-	    <input name="comment-foreign-id" type="hidden" value="{{ $video_id }}">
+	    <input name="comment-type" type="hidden" value="{{ $type }}">
+	    <input name="comment-foreign-id" type="hidden" value="{{ $foreign_id }}">
 	    <input name="comment-count" type="hidden" value={{ $comments->count() }}>
 	    <a style="margin-right: 0px;">
 	      <img class="img-circle" style="width: 40px; height: auto; float:left;" src="{{ Auth::user()->avatar_temp }}">

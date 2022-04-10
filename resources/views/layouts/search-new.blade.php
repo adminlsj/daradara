@@ -194,7 +194,7 @@
 			<div class="form-group">
 				<select class="form-control" id="year" name="year" style="width: calc(50% - 5px); display: inline-block; float: left;">
 					<option value="">全部年份...</option>
-					@for ($i = 2021; $i >= 1990; $i--)
+					@for ($i = 2022; $i >= 1990; $i--)
 						<option value="{{ $i }}" {{ $i == $year ? 'selected' : '' }}>{{ $i }}年</option>
 					@endfor
 				</select>

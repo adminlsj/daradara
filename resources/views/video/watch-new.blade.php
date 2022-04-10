@@ -64,7 +64,7 @@
 
         <h5 id="caption" style="color: #bdbdbd; font-weight: 400; margin-top: 10px; line-height: 20px; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;"><span style="color: white; font-weight: bold">{{ $video->title }}</span>&nbsp;&nbsp;{{ $video->caption }}</h5>
 
-        <h5 id="show-more-caption" class="no-select" style="margin-bottom: 25px; color: #fff; font-weight: 400; font-size: 12px; cursor: pointer;">顯示完整資訊</h5>
+        <h5 class="no-select show-more-caption" style="margin-bottom: 25px; color: #fff; font-weight: 400; font-size: 12px; cursor: pointer;">顯示完整資訊</h5>
 
         <h5 style="font-weight: 400; margin-bottom: 0px; margin-top: 0px;">
           @foreach ($tags as $tag)
@@ -137,7 +137,7 @@
 
       <div id="tablinks-wrapper" class="tab mobile-padding" style="margin-top: 30px; font-weight: bold;">
         <button id="defaultOpen" data-tabcontent="related-tabcontent" class="tablinks" style="margin-right: 10px;">相關影片</button>
-        <button id="comment-tablink" data-videoid="{{ $current->id }}" data-tabcontent="comment-tabcontent" class="tablinks">評論&nbsp;&nbsp;<span id="tab-comments-count" style="color: white; background-color: red; font-size: 12px; border-radius: 10px; padding: 1px 5px">{{ $comments_count }}</span></button>
+        <button id="comment-tablink" data-foreignid="{{ $current->id }}" data-type="video" data-tabcontent="comment-tabcontent" class="tablinks">評論&nbsp;&nbsp;<span id="tab-comments-count" style="color: white; background-color: red; font-size: 12px; border-radius: 10px; padding: 1px 5px">{{ $comments_count }}</span></button>
       </div>
 
       <!-- Tab content -->

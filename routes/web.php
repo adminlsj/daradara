@@ -11,54 +11,54 @@
 |
 */
 
-// Route::group(['middleware' => 'throttle:120,1'], function () {
-	Route::get('/', 'HomeController@index');
+Route::get('/', 'HomeController@index');
 
-	Auth::routes();
-	Route::get('auth/{provider}', 'Auth\LoginController@redirectToProvider');
-	Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
+Auth::routes();
+Route::get('auth/{provider}', 'Auth\LoginController@redirectToProvider');
+Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
 
-	Route::post('/like', 'VideoController@like')->name('video.like');
-	Route::post('/save', 'VideoController@save')->name('video.save');
-	Route::post('/unsave', 'VideoController@unsave')->name('video.unsave');
-	Route::post('/addTags', 'VideoController@addTags')->name('video.addTags');
-	Route::post('/removeTags', 'VideoController@removeTags')->name('video.removeTags');
+Route::post('/like', 'VideoController@like')->name('video.like');
+Route::post('/save', 'VideoController@save')->name('video.save');
+Route::post('/unsave', 'VideoController@unsave')->name('video.unsave');
+Route::post('/addTags', 'VideoController@addTags')->name('video.addTags');
+Route::post('/removeTags', 'VideoController@removeTags')->name('video.removeTags');
 
-	Route::post('/createComment', 'VideoController@createComment')->name('video.createComment');
-	Route::post('/replyComment', 'VideoController@replyComment')->name('video.replyComment');
-	Route::post('/deleteComment', 'VideoController@deleteComment')->name('video.deleteComment');
-	Route::post('/commentLike', 'VideoController@commentLike')->name('comment.like');
-	Route::get('/loadComment', 'VideoController@loadComment')->name('comment.loadComment');
-	Route::get('/loadReplies', 'VideoController@loadReplies')->name('comment.loadReplies');
+Route::post('/createComment', 'VideoController@createComment')->name('video.createComment');
+Route::post('/replyComment', 'VideoController@replyComment')->name('video.replyComment');
+Route::post('/deleteComment', 'VideoController@deleteComment')->name('video.deleteComment');
+Route::post('/commentLike', 'VideoController@commentLike')->name('comment.like');
+Route::get('/loadComment', 'VideoController@loadComment')->name('comment.loadComment');
+Route::get('/loadReplies', 'VideoController@loadReplies')->name('comment.loadReplies');
 
-	Route::get('/about', 'HomeController@about');
-	Route::get('/contact', 'HomeController@contact');
-	Route::get('/terms', 'HomeController@terms');
-	Route::get('/policies', 'HomeController@policies');
-	Route::get('/copyright', 'HomeController@copyright');
-	Route::get('/2257', 'HomeController@p2257');
+Route::get('/about', 'HomeController@about');
+Route::get('/contact', 'HomeController@contact');
+Route::get('/terms', 'HomeController@terms');
+Route::get('/policies', 'HomeController@policies');
+Route::get('/copyright', 'HomeController@copyright');
+Route::get('/2257', 'HomeController@p2257');
 
-	Route::get('/setVideoDuration', 'BotController@setVideoDuration');
-	Route::post('/getVideosData', 'BotController@getVideosData');
-	Route::post('/getWatchesData', 'BotController@getWatchesData');
+Route::get('/setVideoDuration', 'BotController@setVideoDuration');
+Route::post('/getVideosData', 'BotController@getVideosData');
+Route::post('/getWatchesData', 'BotController@getWatchesData');
 
-	Route::get('/userReport', 'HomeController@userReport')->name('email.userReport');
-	Route::get('/user/{user}/upload', 'UserController@userEditUpload')->name('user.userEditUpload');
-	Route::post('/user/{user}/userUpdateUpload', 'UserController@userUpdateUpload')->name('user.userUpdateUpload');
+Route::get('/userReport', 'HomeController@userReport')->name('email.userReport');
+Route::get('/user/{user}/upload', 'UserController@userEditUpload')->name('user.userEditUpload');
+Route::post('/user/{user}/userUpdateUpload', 'UserController@userUpdateUpload')->name('user.userUpdateUpload');
 
-	Route::get('/watch', 'VideoController@watch')->name('video.watch');
-	Route::get('/download', 'VideoController@download')->name('video.download');
-	Route::get('/list', 'HomeController@list')->name('home.list');
-	Route::get('/search', ['as' => 'home.search', 'uses' => 'HomeController@search']);
+Route::get('/watch', 'VideoController@watch')->name('video.watch');
+Route::get('/download', 'VideoController@download')->name('video.download');
+Route::get('/list', 'HomeController@list')->name('home.list');
+Route::get('/search', ['as' => 'home.search', 'uses' => 'HomeController@search']);
 
-	Route::get('/comics', 'ComicController@index')->name('comic.index');
-	Route::get('/comics/search', 'ComicController@search')->name('comic.search');
-	Route::get('/comics/{column}', 'ComicController@showTags')->name('comic.showTags');
-	Route::get('/comic/{comic}', 'ComicController@showCover')->name('comic.showCover');
-	Route::get('/comic/{comic}/{page}', 'ComicController@showContent')->name('comic.showContent');
-	Route::get('/{column}/{value}/{time?}', 'ComicController@searchTags')->name('comic.searchTags');
-	Route::get('/getRandomComic', 'ComicController@getRandomComic')->name('comic.random');
-// });
+Route::get('/previews/{preview}', 'PreviewController@show');
+
+Route::get('/comics', 'ComicController@index')->name('comic.index');
+Route::get('/comics/search', 'ComicController@search')->name('comic.search');
+Route::get('/comics/{column}', 'ComicController@showTags')->name('comic.showTags');
+Route::get('/comic/{comic}', 'ComicController@showCover')->name('comic.showCover');
+Route::get('/comic/{comic}/{page}', 'ComicController@showContent')->name('comic.showContent');
+Route::get('/{column}/{value}/{time?}', 'ComicController@searchTags')->name('comic.searchTags');
+Route::get('/getRandomComic', 'ComicController@getRandomComic')->name('comic.random');
 
 Route::group(['middleware' => 'admin'], function () {
 	Route::get('/tempMethod', 'BotController@tempMethod');

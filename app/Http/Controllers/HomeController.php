@@ -197,7 +197,7 @@ class HomeController extends Controller
         if ($brands = $request->brands) {
             $videos = $videos->where(function($query) use ($brands) {
                 foreach ($brands as $brand) {
-                    $query->orWhere('tags', 'like', '%'.$brand.'%');
+                    $query->orWhere('tags_array', 'like', '%"'.$brand.'"%');
                 }
             });
         }

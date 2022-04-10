@@ -73,7 +73,7 @@ class VideoController extends Controller
 
             $country_code = isset($_SERVER["HTTP_CF_IPCOUNTRY"]) ? $_SERVER["HTTP_CF_IPCOUNTRY"] : 'N/A';
 
-            $comments_count = Comment::where('foreign_id', $video->id)->count();
+            $comments_count = Comment::where('foreign_id', $video->id)->where('type', 'video')->count();
 
             if (Auth::check()) {
                 $saved = Save::where('user_id', auth()->user()->id)->where('video_id', $video->id)->exists();
@@ -254,9 +254,11 @@ class VideoController extends Controller
 
     public function loadComment(Request $request)
     {
-        $video_id = $request->id;
+        $foreign_id = $request->id;
+        $type = $request->type;
         $comments = Comment::with('user:id,name,avatar_temp', 'likes')
-                    ->where('foreign_id', $video_id)
+                    ->where('foreign_id', $foreign_id)
+                    ->where('type', $type)
                     ->withCount('replies')
                     ->orderBy('created_at', 'desc')
                     ->get()
@@ -266,7 +268,7 @@ class VideoController extends Controller
         });
 
         $html = '';
-        $html .= view('video.comment-section-wrapper', compact('video_id', 'comments'));
+        $html .= view('video.comment-section-wrapper', compact('foreign_id', 'type', 'comments'));
 
         return response()->json([
             'comments' => $html,

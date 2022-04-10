@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Video;
 use App\Comic;
 use App\Watch;
+use App\Like;
 use Mail;
 use App\Mail\UserReport;
 use Spatie\Browsershot\Browsershot;
@@ -31,19 +32,6 @@ class BotController extends Controller
     {
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
-
-        $videos = Video::where('sd', 'like', '%odycdn%')->get();
-        foreach ($videos as $video) {
-            $video->sd = str_replace('?download=true', '', $video->sd);
-            $temp = $video->qualities;
-            foreach ($temp as $key => $value) {
-                if (strpos($value, 'odycdn') !== false) {
-                    $temp[$key] = str_replace('?download=true', '', $value);
-                }
-            }
-            $video->qualities = $temp;
-            $video->save();
-        }
 
         /* $tc = Storage::disk('local')->files('video/tc');
         foreach ($tc as $video) {
