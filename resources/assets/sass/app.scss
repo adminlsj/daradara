@@ -68,6 +68,10 @@ th, td {
   font-weight: 400;
 }
 
+.home-rows-top {
+  margin-top: -25px;
+}
+
 .search-hentai-pagination-desktop-margin {
   margin-top: -75px !important;
 }
@@ -2226,6 +2230,10 @@ div.sticky {
 @media (max-width: 767.9px) {
   body {
     font-family: sans-serif;
+  }
+
+  .home-rows-top {
+    margin-top: -10px;
   }
 
   .preview-top-content h1 {

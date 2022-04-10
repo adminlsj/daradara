@@ -16,6 +16,10 @@
     <a class="nav-icon pull-right" href="{{ Auth::check() ? route('user.userEditUpload', Auth::user()) : route('login') }}">
       <img style="margin-top: -3px; margin-right: 5px;" height="20" src="https://cdn.jsdelivr.net/gh/tatakanuta/tatakanuta@v1.0.0/asset/icon/notification.png">
     </a>
+
+    <a class="nav-icon pull-right" href="/previews/{{ Carbon\Carbon::now()->format('Ym') }}">
+      <img style="margin-top: -2px; margin-right: 6px;" height="16" src="https://cdn.jsdelivr.net/gh/tatakanuta/tatakanuta@v1.0.0/asset/icon/preview.png">
+    </a>
   </div>
 
   <div class="hide-scrollbar nav-mobile-genres" style="overflow-x: scroll; width: calc(100%); display: inline-block; white-space: nowrap; margin-bottom: -10px; line-height: 31px; position: absolute; top: 48px; border-radius: 0px; padding-top: 9px; padding-bottom: 8px; border-bottom: 1px solid #2b2b2b; background-color: #141414;">
@@ -32,7 +36,7 @@
     <a class="nav-home-mobile-button" href="{{ route('home.search') }}?genre=3D動畫&duration=&sort=&query=&year=&month=">3D動畫</a>
     <a class="nav-home-mobile-button" href="{{ route('home.search') }}?genre=同人作品&duration=&sort=&query=&year=&month=">同人作品</a>
     <a class="nav-home-mobile-button" href="{{ route('home.search') }}?genre=Cosplay&duration=&sort=&query=&year=&month=">Cosplay</a>
-    <a class="nav-home-mobile-button" href="{{ route('home.search') }}?genre=裏番&tags%5B%5D=新番預告&sort=">新番預告</a>
+    <a class="nav-home-mobile-button" href="/previews/{{ Carbon\Carbon::now()->format('Ym') }}">新番預告</a>
     <a class="nav-home-mobile-button" href="{{ route('comic.index') }}" style="margin-right: 10px;">H漫畫</a>
   </div>
 

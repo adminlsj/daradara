@@ -42,6 +42,8 @@
 			<hr style="margin: 0; border-color: #333333;">
 			<div class="simple-dropdown-item genre-option {{ $genre == '泡麵番' ? 'active' : ''}}">泡麵番</div>
 			<hr style="margin: 0; border-color: #333333;">
+			<a style="color: white; text-decoration: none;" href="/previews/{{ Carbon\Carbon::now()->format('Ym') }}"><div class="simple-dropdown-item genre-option">新番預告</div></a>
+			<hr style="margin: 0; border-color: #333333;">
 			<div class="simple-dropdown-item genre-option {{ $genre == '3D動畫' ? 'active' : ''}}">3D動畫</div>
 			<hr style="margin: 0; border-color: #333333;">
 			<div class="simple-dropdown-item genre-option {{ $genre == '同人作品' ? 'active' : ''}}">同人作品</div>

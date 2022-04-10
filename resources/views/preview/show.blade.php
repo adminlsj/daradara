@@ -68,7 +68,7 @@
 
   <div class="owl-home-row owl-carousel owl-theme">
     @foreach ($videos as $video)
-      <a style="text-decoration: none;" href="{{ route('video.watch') }}?v={{ $video->id }}">
+      <a class="cover-scroll-trigger" data-id="{{ $video->id }}" style="text-decoration: none;">
         <div class="home-rows-videos-div" style="position: relative; display: inline-block;">
           <img src="{{ $video->cover }}">
               <div class="owl-home-rows-title" style="position: absolute; bottom:0; left:0; white-space: initial; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; color: white; width: 100%; padding: 2px 3px; background: linear-gradient(to bottom, transparent 0%, black 120%); font-weight: bold">{{ str_replace('[新番預告]', '', $video->title) }}</div>
@@ -87,7 +87,7 @@
 
   <div class="content-padding">
     @foreach ($videos as $video)
-      <div class="row">
+      <div id="{{ $video->id }}" class="row">
         <h4 class="hidden-sm hidden-md hidden-lg" style="margin: 0; background-color: #222222; color: white; padding: 7px 15px; font-weight: bold; line-height: 25px">{{ $video->translations['JP'] }}</h4>
         <div class="col-md-12">
           <div class="preview-info-cover">
@@ -104,11 +104,11 @@
                 </a>
               </div>
 
-              <h4 style="color: white; margin-top: 15px; margin-bottom: 15px">{{ str_replace('[新番預告]', '', $video->title) }}</h4>
+              <h4 style="color: white; margin-top: 15px; margin-bottom: 15px; font-weight: normal">{{ str_replace('[新番預告]', '', $video->title) }}</h4>
 
-              <h5 style="color: #bdbdbd;"><span class="hidden-xs">製作公司：</span><a style="color: #d9d9d9; text-decoration: underline;" href="{{ route('home.search') }}?genre=裏番&brands%5B%5D={{ $brand = array_values(array_intersect(array_keys($video->tags_array), App\Preview::$brands))[0] }}">{{ $brand }}</a></h5>
+              <h5 style="color: #bdbdbd; font-weight: normal;"><span class="hidden-xs">製作公司：</span><a style="color: #d9d9d9; text-decoration: underline;" href="{{ route('home.search') }}?genre=裏番&brands%5B%5D={{ $brand = array_values(array_intersect(array_keys($video->tags_array), App\Preview::$brands))[0] }}">{{ $brand }}</a></h5>
 
-              <h5 style="color: #bdbdbd; margin-bottom: 15px;"><span class="hidden-xs">上市日期：{{ Carbon\Carbon::parse($video->created_at)->format('Y年m月d日') }} {{ App\Preview::$weekMap[Carbon\Carbon::parse($video->created_at)->dayOfWeek] }}</span><span class="hidden-sm hidden-md hidden-lg">{{ $month }}月{{ Carbon\Carbon::parse($video->created_at)->format('d日') }} 上市</span></h5>
+              <h5 style="color: #bdbdbd; margin-bottom: 15px; font-weight: normal;"><span class="hidden-xs">上市日期：{{ Carbon\Carbon::parse($video->created_at)->format('Y年m月d日') }} {{ App\Preview::$weekMap[Carbon\Carbon::parse($video->created_at)->dayOfWeek] }}</span><span class="hidden-sm hidden-md hidden-lg">{{ $month }}月{{ ltrim(Carbon\Carbon::parse($video->created_at)->format('d日'), '0') }} 上市</span></h5>
 
               <h5 class="caption hidden-xs" style="color: #bdbdbd; font-weight: 400; margin-top: 10px; line-height: 20px; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;">{{ $video->caption }}</h5>
               <h5 class="show-more-caption no-select hidden-xs" style="margin-bottom: 25px; color: #fff; font-weight: 400; font-size: 12px; cursor: pointer;">顯示完整資訊</h5>
@@ -138,8 +138,8 @@
 
   <div class="row no-gutter video-show-width" style="margin-top: -80px;">
     <div id="tablinks-wrapper" class="tab mobile-padding" style="margin-top: 30px; font-weight: bold;">
-      <button data-tabcontent="related-tabcontent" class="tablinks" style="margin-right: 10px;">相關影片</button>
-      <button id="comment-tablink" data-foreignid="{{ $preview->id }}" data-type="preview" data-tabcontent="comment-tabcontent" class="tablinks defaultOpen">評論&nbsp;&nbsp;<span id="tab-comments-count" style="color: white; background-color: red; font-size: 12px; border-radius: 10px; padding: 1px 5px">{{ $comments_count }}</span></button>
+      <button id="comment-tablink" data-foreignid="{{ $preview->id }}" data-type="preview" data-tabcontent="comment-tabcontent" class="tablinks defaultOpen" style="margin-right: 10px;">評論&nbsp;&nbsp;<span id="tab-comments-count" style="color: white; background-color: red; font-size: 12px; border-radius: 10px; padding: 1px 5px">{{ $comments_count }}</span></button>
+      <button data-tabcontent="related-tabcontent" class="tablinks">相關影片</button>
     </div>
 
     <!-- Tab content -->
@@ -167,6 +167,10 @@
       </div>
     </div>
   </div>
+</div>
+
+<div style="margin-bottom: 15px;">
+  @include('ads.home-banner-square')
 </div>
 
 <script>
@@ -198,5 +202,17 @@
           }
       }
   })
+
+  $(".cover-scroll-trigger").click(function() {
+    var aim = $(this).data('id');
+    var width = $(window).width();
+    if (width <= 767.9) {
+      $('html,body').animate({ scrollTop: $("#" + aim).offset().top - 48}, 'slow');
+    } else if (width > 767.9 && width <= 991) {
+      $('html,body').animate({ scrollTop: $("#" + aim).offset().top - 50}, 'slow');
+    } else {
+      $('html,body').animate({ scrollTop: $("#" + aim).offset().top - 65}, 'slow');
+    }
+  });
 </script>
 @endsection

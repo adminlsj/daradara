@@ -35,48 +35,18 @@
 
 	<div style="position: relative; margin-top: 0px; padding-top: 100px;">
 
-		<div class="owl-home-top-row owl-carousel owl-theme">
+		<div class="content-padding-new home-rows-top">
+			<a class="home-rows-header" style="text-decoration: none;" href="/search?query=&genre=裏番">
+				<h5 style="color: #8e9194;">H動漫</h3>
+				<h3 style="font-weight: 700; color: #edeeef; margin-bottom: 20px;">最新里番</h3>
+				@include('layouts.home-row-arrow')
+			</a>
+		</div>
+		<div class="owl-home-row owl-carousel owl-theme">
 		    @foreach ($newest as $video)
-			    <div style="overflow-x: hidden; position: relative;">
-					@include('layouts.owl-home-row', ["video" => $video])
-					@if ($loop->iteration <= 3)
-						<div class="ribbon-top-left">最新</div>
-					@endif
-				</div>
+			    @include('layouts.owl-home-row', ["video" => $video])
 			@endforeach
 		</div>
-
-		<script>
-			var padding = $(window).width() * 0.04;
-			var mobile_padding = 10;
-			$('.owl-home-top-row').owlCarousel({
-			    loop:true,
-			    dots:false,
-			    responsiveClass:true,
-			    responsive:{
-			        0:{
-			            items:3,
-			            margin:4,
-			        	stagePadding: mobile_padding
-			        },
-			        768:{
-			            items:4,
-			            margin:10,
-			        	stagePadding: padding
-			        },
-			        992:{
-			            items:6,
-			            margin:10,
-			        	stagePadding: padding
-			        },
-			        1200:{
-			        	items:7,
-			        	margin:10,
-			        	stagePadding: padding
-			        }
-			    }
-			})
-		</script>
 
 		<div class="content-padding-new home-rows-margin-top">
 			<a class="home-rows-header" style="text-decoration: none;" href="/search?query=&genre=&sort=最新上傳">

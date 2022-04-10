@@ -50,7 +50,7 @@
 
         <div class="row" style="text-align: center;">
           <div class="col-xs-6" style="width: 50%; padding-right: 0; border-right: 1px solid #333333;">
-            <a style="color: white; text-decoration: none;" href="{{ route('home.search') }}?genre=裏番&tags%5B%5D=新番預告">
+            <a style="color: white; text-decoration: none;" href="/previews/{{ Carbon\Carbon::now()->format('Ym') }}">
               <div class="simple-dropdown-item genre-option">新番預告</div>
             </a>
           </div>
