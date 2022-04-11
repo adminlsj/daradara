@@ -22,6 +22,7 @@ class Rule34
         '94744' => 'https://rule34.xxx/index.php?page=post&s=list&tags=funhentaiparody+video',
         '94747' => 'https://rule34.xxx/index.php?page=post&s=list&tags=yuukis+video',
         '202534' => 'https://rule34.xxx/index.php?page=post&s=list&tags=maplestar+video',
+        '225181' => 'https://rule34.xxx/index.php?page=post&s=list&tags=najar+video',
     ];
 
     public static $duplicated = [
