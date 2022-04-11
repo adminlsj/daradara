@@ -21,7 +21,19 @@
 			<div class="col-md-1">{{ $comment->user_id }}</div>
 			<div class="col-md-1">{{ Carbon\Carbon::parse($comment->created_at)->diffForHumans() }}</div>
 			<div class="col-md-5">{{ $comment->text }}</div>
-			<div class="col-md-4"><a href="{{ route('video.watch').'?v='.$comment->video->id }}" target="_blank">{{ $comment->video->title }}</a></div>
+			@if ($comment->video)
+				<div class="col-md-4">
+					<a href="{{ route('video.watch').'?v='.$comment->video->id }}" target="_blank">
+						{{ $comment->video->title }}
+					</a>
+				</div>
+			@elseif ($comment->preview)
+				<div class="col-md-4">
+					<a href="/previews/{{ $comment->preview->uuid }}" target="_blank">
+						{{ substr($comment->preview->uuid, 0, 4) }}年{{ ltrim(substr($comment->preview->uuid, 4, 6), '0') }}月新番表
+					</a>
+				</div>
+			@endif
 		</div>
 	@endforeach
 </div>

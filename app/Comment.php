@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\User;
 use App\Video;
+use App\Preview;
 
 class Comment extends Model
 {
@@ -20,6 +21,11 @@ class Comment extends Model
     public function video()
     {
         return $this->belongsTo('App\Video', 'foreign_id');
+    }
+
+    public function preview()
+    {
+        return $this->belongsTo('App\Preview', 'foreign_id');
     }
 
     public function likes()
