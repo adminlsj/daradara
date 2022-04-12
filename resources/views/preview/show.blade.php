@@ -69,7 +69,7 @@
   </div>
 
   <div class="content-padding home-rows-margin-top">
-    <a class="home-rows-header" style="text-decoration: none;" href="#">
+    <a class="home-rows-header" style="text-decoration: none;" href="/search?tags%5B%5D=新番預告&genre=裏番">
       <h5 style="color: #8e9194; ">本月</h5>
       <h3 style="font-weight: 700; color: #edeeef; margin-bottom: 20px;">新番導覽</h3>
       @include('layouts.home-row-arrow')
@@ -88,7 +88,7 @@
   </div>
 
   <div class="content-padding home-rows-margin-top">
-    <a class="home-rows-header" style="text-decoration: none;" href="#">
+    <a class="home-rows-header" style="text-decoration: none;" href="/search?tags%5B%5D=新番預告&genre=裏番">
       <h5 style="color: #8e9194; ">介紹</h3>
       <h3 style="font-weight: 700; color: #edeeef; margin-bottom: 20px;">新番資訊</h3>
       @include('layouts.home-row-arrow')
