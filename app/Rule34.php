@@ -34,6 +34,7 @@ class Rule34
     ];
 
     public static $translations = [
+        "yuukoku kiriko" => '幽谷霧子',
         "arisugawa natsuha" => '有栖川夏葉',
         "serafuku" => '水手服',
         "oosaki amana" => '大崎甘奈',
