@@ -34,6 +34,7 @@ class Rule34
     ];
 
     public static $translations = [
+        "hachimiya meguru" => '八宮巡',
         "higuchi madoka" => '樋口圓香',
         "sakuragi mano" => '櫻木真乃',
         "the idolm@ster: shiny colors" => '偶像大師 閃耀色彩',
