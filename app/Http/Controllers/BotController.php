@@ -1263,7 +1263,7 @@ class BotController extends Controller
         Log::info('Rule34 user '.$user->name.' upload started...');
         $video_links = [];
         $html = Browsershot::url($url)
-                ->timeout(12800)
+                ->timeout(3600)
                 ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
                 ->bodyHtml();
 
@@ -1283,9 +1283,9 @@ class BotController extends Controller
             $queries = [];
             parse_str($link, $queries);
             $rule_id = $queries['id'];
-            if (!Video::where('sd', 'like', '%?'.$rule_id)->exists() && !Video::where('foreign_sd', 'like', '%'.$rule_id.'"%')->exists() && !in_array($rule_id, $duplicated)) {
+            if (!empty($rule_id) && !Video::where('sd', 'like', '%?'.$rule_id)->exists() && !Video::where('foreign_sd', 'like', '%'.$rule_id.'"%')->exists() && !in_array($rule_id, $duplicated)) {
                 $html = Browsershot::url($link)
-                ->timeout(12800)
+                ->timeout(3600)
                 ->userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36')
                 ->bodyHtml();
 
@@ -1320,24 +1320,26 @@ class BotController extends Controller
                 $sd = Helper::get_string_between($html, '<source src="', '"');
                 $created_at = Helper::get_string_between($html, 'Posted: ', '<br>');
 
-                $video = Video::create([
-                    'user_id' => $user->id,
-                    'playlist_id' => $playlist->id,
-                    'title' => $title,
-                    'translations' => ['JP' => $title],
-                    'caption' => $title,
-                    'sd' => $sd,
-                    'imgur' => 'WENZTSJ',
-                    'tags' => implode(' ', array_keys($tags)),
-                    'tags_array' => $tags,
-                    'current_views' => 0,
-                    'views' => 0,
-                    'outsource' => true,
-                    'foreign_sd' => ['rule34' => $sd],
-                    'cover' => 'https://i.imgur.com/E6mSQA2.png',
-                    'created_at' => $created_at,
-                    'uploaded_at' => Carbon::now(),
-                ]);
+                if (!empty($sd) && strpos($sd, 'ackcdn.net') === false) {
+                    $video = Video::create([
+                        'user_id' => $user->id,
+                        'playlist_id' => $playlist->id,
+                        'title' => $title,
+                        'translations' => ['JP' => $title],
+                        'caption' => $title,
+                        'sd' => $sd,
+                        'imgur' => 'WENZTSJ',
+                        'tags' => implode(' ', array_keys($tags)),
+                        'tags_array' => $tags,
+                        'current_views' => 0,
+                        'views' => 0,
+                        'outsource' => true,
+                        'foreign_sd' => ['rule34' => $sd],
+                        'cover' => 'https://i.imgur.com/E6mSQA2.png',
+                        'created_at' => $created_at,
+                        'uploaded_at' => Carbon::now(),
+                    ]);
+                }
 
                 Rule34::translateRule34();
             }
