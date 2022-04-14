@@ -34,6 +34,7 @@ class Rule34
     ];
 
     public static $translations = [
+        "tsukioka kogane" => '月岡戀鐘',
         "flat chest" => '貧乳',
         "saijou juri" => '西城樹里',
         "oosaki tenka" => '大崎甜花',
