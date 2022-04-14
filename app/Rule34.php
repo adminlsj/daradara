@@ -34,6 +34,8 @@ class Rule34
     ];
 
     public static $translations = [
+        "flat chest" => '貧乳',
+        "saijou juri" => '西城樹里',
         "oosaki tenka" => '大崎甜花',
         "hachimiya meguru" => '八宮巡',
         "higuchi madoka" => '樋口圓香',
@@ -921,7 +923,7 @@ class Rule34
 
     public static function translateRule34()
     {
-        $videos = Video::where('foreign_sd', 'like', '%"rule34"%')->where('tags_array', '!=', null)->where('created_at', '>=', Carbon::now()->subDays(30))/*->where('playlist_id', 3795)*/->get();
+        $videos = Video::where('foreign_sd', 'like', '%"rule34"%')->where('tags_array', '!=', null)/*->where('created_at', '>=', Carbon::now()->subDays(30))*/->where('playlist_id', 3795)->get();
         $translations = Rule34::$translations;
         $removed = Rule34::$removed;
         foreach ($videos as $video) {
