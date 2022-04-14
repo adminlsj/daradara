@@ -34,6 +34,8 @@ class Rule34
     ];
 
     public static $translations = [
+        "kuwayama chiyuki" => '桑山千雪',
+        "ball sucking" => '舔蛋蛋',
         "tsukioka kogane" => '月岡戀鐘',
         "flat chest" => '貧乳',
         "saijou juri" => '西城樹里',
