@@ -78,26 +78,26 @@
           <div class="no-select" style="padding: 9px 0px 0px 0px">
               <a class="user-modal-link" href="#">
                   <img src="https://i.imgur.com/NBHKokN.png">
-                  <h5 style="font-size: 16px;">帳戶資料</h5>
+                  <h5 style="font-size: 15px; font-weight: normal;">帳戶資料</h5>
               </a>
               <a class="user-modal-link" href="{{ route('home.list') }}">
                   <img src="https://i.imgur.com/DUSbStD.png">
-                  <h5 style="font-size: 16px;">我的清單</h5>
+                  <h5 style="font-size: 15px; font-weight: normal">我的清單</h5>
               </a>
               <a class="user-modal-link" href="{{ route('home.list') }}">
                   <img src="https://i.imgur.com/50Mdfbq.png">
-                  <h5 style="font-size: 16px;">稍後觀看</h5>
+                  <h5 style="font-size: 15px; font-weight: normal">稍後觀看</h5>
               </a>
               <a class="user-modal-link" href="#">
                   <img src="https://i.imgur.com/HaqOkM6.png">
-                  <h5 style="font-size: 16px;">語言設定</h5>
+                  <h5 style="font-size: 15px; font-weight: normal">語言設定</h5>
               </a>
               <hr style="border-color: #333333; margin: 9px 0px 9px 0px;">
               <form action="{{ route('logout') }}" method="POST">
                   {{ csrf_field() }}
                   <button style="width: 100%; display: inline-block; color: white; vertical-align: middle; text-align: left; margin-bottom: 9px;" class="no-button-style user-modal-link" type="submit">
                       <img style="width: 19px; display: inline-block;" src="https://i.imgur.com/fRde2hY.png">
-                      <h5 style="font-size: 16px; display: inline-block; margin-left: 15px; color: white; vertical-align: middle;">登出</h5>
+                      <h5 style="font-size: 15px; font-weight: normal; display: inline-block; margin-left: 15px; color: white; vertical-align: middle;">登出</h5>
                   </button>
               </form>
           </div>
