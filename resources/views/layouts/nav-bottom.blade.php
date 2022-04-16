@@ -12,8 +12,8 @@
     <img style="height: 18px; margin-top: 8px;" src="https://cdn.jsdelivr.net/gh/tatakanuta/tatakanuta@v1.0.0/asset/icon/search.png">
     <div style="font-size: 9px; color: white; margin-top: 4px;">搜索</div>
   </a>
-  <a href="{{ route('home.search') }}?query=&sort=本日排行">
-    <i style="padding-left: 0px; font-size: 29px; margin-top: 9px;" class="material-icons-outlined">whatshot</i>
+  <a href="{{ Auth::check() ? route('user.userEditUpload', Auth::user()) : route('login') }}">
+    <img style="height: 30px; margin-top: 8px;" src="https://i.imgur.com/GrQGdPn.png">
   </a>
   <a href="{{ Auth::check() ? route('home.list') : route('login') }}">
     @if (Request::is('*list*'))
