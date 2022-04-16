@@ -13,7 +13,7 @@
     <div style="font-size: 9px; color: white; margin-top: 4px;">搜索</div>
   </a>
   <a href="{{ Auth::check() ? route('user.userEditUpload', Auth::user()) : route('login') }}">
-    <img style="height: 32px; margin-top: 10px;" src="https://i.imgur.com/GrQGdPn.png">
+    <img style="height: 34px; margin-top: 4px;" src="https://i.imgur.com/GrQGdPn.png">
   </a>
   <a href="{{ Auth::check() ? route('home.list') : route('login') }}">
     @if (Request::is('*list*'))
