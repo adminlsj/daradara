@@ -7,7 +7,7 @@
 
     @if (Auth::check())
       <div id="user-mobile-modal-trigger" style="padding-left: 12px; padding-right: 0px; cursor: pointer;" class="nav-icon pull-right" data-toggle="modal" data-target="#user-mobile-modal">
-        <img style="width: 25px; border-radius: 50%;" src="{{ Auth::user()->avatar_temp }}">
+        <img style="width: 26px; border-radius: 50%;" src="{{ Auth::user()->avatar_temp }}">
       </div>
     @else
       <a style="padding-right: 0px" class="nav-icon pull-right" href="{{ route('home.list') }}">
