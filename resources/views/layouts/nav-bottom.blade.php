@@ -3,8 +3,8 @@
     @if (Request::is('/'))
       <i style="font-size: 28px; margin-top: 10px; color: white" class="material-icons">home</i>
     @else
-      <img style="width: 18px; margin-top: 7px;" src="https://i.imgur.com/fEnCzhO.png">
-      <div style="font-size: 10px; color: white; margin-top: 3px;">主頁</div>
+      <img style="width: 17px; margin-top: 8px;" src="https://i.imgur.com/fEnCzhO.png">
+      <div style="font-size: 9px; color: white; margin-top: 3px;">主頁</div>
     @endif
   </a>
   <a href="{{ route('home.search') }}">
