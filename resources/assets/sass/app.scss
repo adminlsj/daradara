@@ -126,6 +126,30 @@ th, td {
   margin-top: 40px;
 }
 
+.user-modal-link {
+  width: 100%; 
+  padding: 0px 20px 3px 20px !important; 
+  display: block; 
+  text-decoration: none !important; 
+  line-height: 40px !important;
+}
+
+.user-modal-link:hover {
+  background-color: #333333;
+}
+
+.user-modal-link img {
+  width: 19px; 
+  display: inline-block;
+}
+
+.user-modal-link h5 {
+  display: inline-block; 
+  margin-left: 15px; 
+  color: white; 
+  vertical-align: middle;
+}
+
 .search-doujin-row-lg { 
   width: 20%;
 }
@@ -1931,6 +1955,10 @@ div.sticky {
 @media (max-width: 991px) {
   .plyr__captions {
     font-size: 2.8vw !important;
+  }
+
+  #user-modal-panel {
+    top: 30px !important;
   }
 
   .preview-top-content {

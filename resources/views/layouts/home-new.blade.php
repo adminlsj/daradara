@@ -26,8 +26,10 @@
 			var $window = $(window).scroll(function(){
 			    if ( $window.scrollTop() > targetOffset ) {   
 			      $(".main-nav-home-desktop").css({"position":"fixed", 'background-color':'#141414'});
+			      $("#user-modal-panel").css({"position":"absolute", 'top':'30px'});
 			    } else {
 			      $(".main-nav-home-desktop").css({"position":"absolute", 'background-color':'transparent'});
+			      $("#user-modal-panel").css({"position":"absolute", 'top':'87px'});
 			    }
 			});
 		</script>
