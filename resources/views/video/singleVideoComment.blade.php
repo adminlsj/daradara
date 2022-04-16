@@ -2,7 +2,7 @@
   <img class="img-circle" style="width: 40px; height: auto; float:left;" src="{{ $comment->user->avatar_temp }}">
 </a>
 <div class="comment-index-text" style="font-size: 0.9em;"><a style="text-decoration: none; color: #fff;">{{ $comment->user->name }}&nbsp;&nbsp;<span style="color: darkgray; font-weight: 400; font-size: 0.85em;">{{ Carbon\Carbon::parse($comment->created_at)->diffForHumans() }}</span></a></div>
-<div class="comment-index-text" style="color: white; font-size: 1em; margin-top: 3px; font-weight: 400">{{ $comment->text }}</div>
+<div class="comment-index-text" style="color: white; font-size: 1em; margin-top: 3px; font-weight: 400; word-wrap: break-word;">{{ $comment->text }}</div>
 
 <div id="comment-like-form-wrapper" style="margin-top: 11px; margin-left: 56px; margin-bottom: 5px;">
 
