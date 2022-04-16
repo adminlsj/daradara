@@ -1,4 +1,4 @@
-<div id="main-nav-home" style="z-index: 10000; padding:0; padding-top: 3px; height: 48px; line-height: 40px; position: absolute; background-image: none; border-bottom: 1px solid #2b2b2b; margin-bottom: 0px; background-color: #141414;" class="hidden-sm hidden-md hidden-lg">
+<div id="main-nav-home" style="z-index: 10001; padding:0; padding-top: 3px; height: 48px; line-height: 40px; position: absolute; background-image: none; border-bottom: 1px solid #2b2b2b; margin-bottom: 0px; background-color: #141414;" class="hidden-sm hidden-md hidden-lg">
 
   @include('nav.main-mobile')
 
@@ -31,21 +31,3 @@
       });
     </script>
 </div>
-
-@if (Auth::check())
-  <div style="z-index: 10001" id="user-mobile-modal" class="modal" role="dialog">
-    <div class="modal-dialog modal-sm" style="position: absolute; top: 87px;">
-      <div class="modal-content" style="border-radius: 3px; background-color: #222222; color: white;">
-        <div class="modal-header" style="border-bottom: 1px solid #333333; position: relative; height: 65px;">
-          <span class="material-icons pull-left no-select modal-close-btn" data-dismiss="modal">close</span>
-          <h4 class="modal-title" style="text-align: center; font-weight: bold; margin: 0; padding: 0; margin-top: 5px; font-size: 18px;">帳戶設定</h4>
-        </div>
-
-        <div class="modal-body" style="padding: 0; height: calc(100% - 65px); overflow-x: hidden;">
-          @include('layouts.user-modal-content')
-          <hr style="margin: 0; border-color: #333333;">
-        </div>
-      </div>
-    </div>
-  </div>
-@endif
