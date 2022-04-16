@@ -10,7 +10,7 @@
   </a>
   <a href="{{ route('home.search') }}">
     <img style="width: 21px; margin-top: 7px;" src="https://cdn.jsdelivr.net/gh/tatakanuta/tatakanuta@v1.0.0/asset/icon/search.png">
-    <div style="font-size: 9px; color: white; margin-top: 2px;">搜索</div>
+    <div style="font-size: 9px; color: white; margin-top: 3px;">搜索</div>
   </a>
   <a href="{{ route('home.search') }}?query=&sort=本日排行">
     <i style="padding-left: 0px; font-size: 29px; margin-top: 9px;" class="material-icons-outlined">whatshot</i>
