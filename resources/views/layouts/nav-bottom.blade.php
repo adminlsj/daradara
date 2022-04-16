@@ -17,7 +17,8 @@
   </a>
   <a href="{{ Auth::check() ? route('home.list') : route('login') }}">
     @if (Request::is('*list*'))
-      <i style="font-size: 26px; margin-top: 11px; color: white" class="material-icons">video_library</i>
+      <img style="height: 18px; margin-top: 8px;" src="https://i.imgur.com/N2IpdSl.png">
+      <div style="font-size: 9px; color: white; margin-top: 4px;">我的清單</div>
     @else
       <img style="height: 18px; margin-top: 8px;" src="https://i.imgur.com/DUSbStD.png">
       <div style="font-size: 9px; color: white; margin-top: 4px;">我的清單</div>
