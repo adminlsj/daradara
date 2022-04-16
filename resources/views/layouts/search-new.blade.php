@@ -17,11 +17,11 @@
 		</form>
 
 		@if (Auth::check())
-		    <div id="user-mobile-modal-trigger" style="padding-left: 12px; padding-right: 0px; cursor: pointer;" class="nav-icon pull-right" data-toggle="modal" data-target="#user-mobile-modal">
+		    <div id="search-user-mobile-modal-trigger" style="padding-left: 12px; padding-right: 0px; cursor: pointer;" class="nav-icon pull-right" data-toggle="modal" data-target="#user-mobile-modal">
 		      <img style="width: 26px; border-radius: 50%;" src="{{ Auth::user()->avatar_temp }}">
 		    </div>
 
-		    <div style="z-index: 10001" id="user-mobile-modal" class="modal" role="dialog">
+		    <div style="z-index: 10001" id="search-user-mobile-modal" class="modal" role="dialog">
 		      <div class="modal-dialog modal-sm" style="position: absolute; top: 87px;">
 		        <div class="modal-content" style="border-radius: 3px; background-color: #222222; color: white;">
 		          <div class="modal-header" style="border-bottom: 1px solid #333333; position: relative; height: 65px;">
