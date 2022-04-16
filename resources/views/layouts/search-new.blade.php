@@ -17,7 +17,7 @@
 		</form>
 
 		@if (Auth::check())
-		    <div id="search-user-mobile-modal-trigger" style="padding-left: 12px; padding-right: 0px; cursor: pointer;" class="nav-icon pull-right" data-toggle="modal" data-target="#user-mobile-modal">
+		    <div id="search-user-mobile-modal-trigger" style="padding-left: 12px; padding-right: 0px; cursor: pointer;" class="nav-icon pull-right" data-toggle="modal" data-target="#search-user-mobile-modal">
 		      <img style="width: 26px; border-radius: 50%;" src="{{ Auth::user()->avatar_temp }}">
 		    </div>
 
