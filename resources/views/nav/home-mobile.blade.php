@@ -68,39 +68,7 @@
         </div>
 
         <div class="modal-body" style="padding: 0; height: calc(100% - 65px); overflow-x: hidden;">
-          <div class="no-select" style="border-bottom: solid 1px #333333; padding: 10px 20px 10px 20px">
-              <img style="width: 45px; border-radius: 50%; display: inline-block;" src="{{ Auth::user()->avatar_temp }}">
-              <div style="display: inline-block; vertical-align: middle; margin-left: 15px;">
-                  <h5 style="font-size: 16px; font-weight: bold;">{{ Auth::user()->name }}</h5>
-                  <h5 style="font-size: 12px; color: gray;">加入於 {{ Carbon\Carbon::parse(Auth::user()->created_at)->diffForHumans() }}</h5>
-              </div>
-          </div>
-          <div class="no-select" style="padding: 9px 0px 0px 0px">
-              <a class="user-modal-link" href="#">
-                  <img src="https://i.imgur.com/NBHKokN.png">
-                  <h5 style="font-size: 16px; font-weight: normal;">帳戶資料</h5>
-              </a>
-              <a class="user-modal-link" href="{{ route('home.list') }}">
-                  <img src="https://i.imgur.com/DUSbStD.png">
-                  <h5 style="font-size: 16px; font-weight: normal">我的清單</h5>
-              </a>
-              <a class="user-modal-link" href="{{ route('home.list') }}">
-                  <img src="https://i.imgur.com/50Mdfbq.png">
-                  <h5 style="font-size: 16px; font-weight: normal">稍後觀看</h5>
-              </a>
-              <a class="user-modal-link" href="#">
-                  <img src="https://i.imgur.com/HaqOkM6.png">
-                  <h5 style="font-size: 16px; font-weight: normal">語言設定</h5>
-              </a>
-              <hr style="border-color: #333333; margin: 9px 0px 9px 0px;">
-              <form action="{{ route('logout') }}" method="POST">
-                  {{ csrf_field() }}
-                  <button style="width: 100%; display: inline-block; color: white; vertical-align: middle; text-align: left; margin-bottom: 9px;" class="no-button-style user-modal-link" type="submit">
-                      <img style="width: 19px; display: inline-block;" src="https://i.imgur.com/fRde2hY.png">
-                      <h5 style="font-size: 16px; font-weight: normal; display: inline-block; margin-left: 15px; color: white; vertical-align: middle;">登出</h5>
-                  </button>
-              </form>
-          </div>
+          @include('layouts.user-modal-content')
           <hr style="margin: 0; border-color: #333333;">
         </div>
       </div>
