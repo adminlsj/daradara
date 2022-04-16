@@ -19,7 +19,7 @@
     @if (Request::is('*list*'))
       <i style="font-size: 26px; margin-top: 11px; color: white" class="material-icons">video_library</i>
     @else
-      <img style="width: 17px; margin-top: 8px;" src="https://i.imgur.com/DUSbStD.png">
+      <img style="width: 18px; margin-top: 8px;" src="https://i.imgur.com/DUSbStD.png">
       <div style="font-size: 9px; color: white; margin-top: 3px;">我的清單</div>
     @endif
   </a>
