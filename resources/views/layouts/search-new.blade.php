@@ -16,9 +16,31 @@
 		    <input id="nav-query" name="nav-query" style="width: 100%; height: 35px; margin-top: -5px; vertical-align: middle; border-top-left-radius: 2px; border-bottom-left-radius: 2px; border-top-right-radius: 0px; border-bottom-right-radius: 0px; background-color: #1e1e1e; border-color: #1e1e1e; line-height: 35px; padding-left: 7px; font-size: 15px; padding-top: 5px" class="search-nav-bar" type="text" value="{{ request('query') }}" placeholder="搜尋 Hanime1.me">
 		</form>
 
-	    <a style="padding-right: 0px" class="nav-icon pull-right" href="{{ route('home.list') }}">
-	      <span style="vertical-align: middle; margin-top: -1px;" class="material-icons">account_circle</span>
-	    </a>
+		@if (Auth::check())
+		    <div id="user-mobile-modal-trigger" style="padding-left: 12px; padding-right: 0px; cursor: pointer;" class="nav-icon pull-right" data-toggle="modal" data-target="#user-mobile-modal">
+		      <img style="width: 26px; border-radius: 50%;" src="{{ Auth::user()->avatar_temp }}">
+		    </div>
+
+		    <div style="z-index: 10001" id="user-mobile-modal" class="modal" role="dialog">
+		      <div class="modal-dialog modal-sm" style="position: absolute; top: 87px;">
+		        <div class="modal-content" style="border-radius: 3px; background-color: #222222; color: white;">
+		          <div class="modal-header" style="border-bottom: 1px solid #333333; position: relative; height: 65px;">
+		            <span class="material-icons pull-left no-select modal-close-btn" data-dismiss="modal">close</span>
+		            <h4 class="modal-title" style="text-align: center; font-weight: bold; margin: 0; padding: 0; margin-top: 5px; font-size: 18px;">帳戶設定</h4>
+		          </div>
+
+		          <div class="modal-body" style="padding: 0; height: calc(100% - 65px); overflow-x: hidden;">
+		            @include('layouts.user-modal-content')
+		            <hr style="margin: 0; border-color: #333333;">
+		          </div>
+		        </div>
+		      </div>
+		    </div>
+		@else
+		    <a style="padding-right: 0px" class="nav-icon pull-right" href="{{ route('home.list') }}">
+		      <span style="vertical-align: middle; margin-top: -1px;" class="material-icons">account_circle</span>
+		    </a>
+		@endif
 	  </div>
 	</div>
 @endsection
