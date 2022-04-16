@@ -1,16 +1,16 @@
 <div style="z-index: 10000 !important; border-top: 1px solid #222222; {{ Request::is('*watch*') ? 'display:none;' : '' }}" class="bottom-nav hidden-lg hidden-md white-theme-nav-bottom">
   <a href="/">
     @if (Request::is('/'))
-      <img style="height: 19px; margin-top: 8px;" src="https://i.imgur.com/HgtVKaL.png">
-      <div style="font-size: 9px; color: white; margin-top: 3px;">主頁</div>
+      <img style="height: 18px; margin-top: 8px;" src="https://i.imgur.com/HgtVKaL.png">
+      <div style="font-size: 9px; color: white; margin-top: 4px;">主頁</div>
     @else
-      <img style="height: 19px; margin-top: 8px;" src="https://i.imgur.com/fEnCzhO.png">
-      <div style="font-size: 9px; color: white; margin-top: 3px;">主頁</div>
+      <img style="height: 18px; margin-top: 8px;" src="https://i.imgur.com/fEnCzhO.png">
+      <div style="font-size: 9px; color: white; margin-top: 4px;">主頁</div>
     @endif
   </a>
   <a href="{{ route('home.search') }}">
-    <img style="height: 19px; margin-top: 8px;" src="https://cdn.jsdelivr.net/gh/tatakanuta/tatakanuta@v1.0.0/asset/icon/search.png">
-    <div style="font-size: 9px; color: white; margin-top: 3px;">搜索</div>
+    <img style="height: 18px; margin-top: 8px;" src="https://cdn.jsdelivr.net/gh/tatakanuta/tatakanuta@v1.0.0/asset/icon/search.png">
+    <div style="font-size: 9px; color: white; margin-top: 4px;">搜索</div>
   </a>
   <a href="{{ route('home.search') }}?query=&sort=本日排行">
     <i style="padding-left: 0px; font-size: 29px; margin-top: 9px;" class="material-icons-outlined">whatshot</i>
@@ -19,8 +19,8 @@
     @if (Request::is('*list*'))
       <i style="font-size: 26px; margin-top: 11px; color: white" class="material-icons">video_library</i>
     @else
-      <img style="height: 19px; margin-top: 8px;" src="https://i.imgur.com/DUSbStD.png">
-      <div style="font-size: 9px; color: white; margin-top: 3px;">我的清單</div>
+      <img style="height: 18px; margin-top: 8px;" src="https://i.imgur.com/DUSbStD.png">
+      <div style="font-size: 9px; color: white; margin-top: 4px;">我的清單</div>
     @endif
   </a>
   <a style="cursor: pointer;" data-toggle="modal" data-target="#links-modal">
