@@ -2,13 +2,13 @@
     <span style="color: crimson">H</span>anime1<span style="color: crimson">.</span>me
 </a>
 <a class="nav-item hidden-xs" href="{{ route('home.search') }}?genre=裏番&duration=&sort=&query=&year=&month=">裏番</a>
-<a class="nav-item hidden-xs hidden-sm" href="/previews/{{ Carbon\Carbon::now()->format('Ym') }}">新番預告</a>
-<a class="nav-item hidden-xs hidden-sm" href="{{ route('home.search') }}?genre=泡麵番&duration=&sort=&query=&year=&month=">泡麵番</a>
+<a class="nav-item hidden-xs" href="/previews/{{ Carbon\Carbon::now()->format('Ym') }}">新番預告</a>
+<a class="nav-item hidden-xs" href="{{ route('home.search') }}?genre=泡麵番&duration=&sort=&query=&year=&month=">泡麵番</a>
 <a class="nav-item hidden-xs" href="{{ route('home.search') }}?genre=3D動畫&duration=&sort=&query=&year=&month=">3D動畫</a>
 <a class="nav-item hidden-xs" href="{{ route('home.search') }}?genre=同人作品&duration=&sort=&query=&year=&month=">同人作品</a>
 <a class="nav-item hidden-xs" href="{{ route('home.search') }}?genre=Cosplay&duration=&sort=&query=&year=&month=">Cosplay</a>
-<a class="nav-item hidden-xs" href="{{ route('comic.index') }}">H漫畫</a>
-<a class="nav-item hidden-xs hidden-sm" href="https://theporndude.com/zh" target="_blank">PornDude</a>
+<a class="nav-item hidden-xs hidden-sm" href="{{ route('comic.index') }}">H漫畫</a>
+<a class="nav-item hidden-xs hidden-sm" href="{{ Auth::check() ? route('home.list') : route('login') }}">我的清單</a>
 
 @if (Auth::check())
     <div id="user-modal-trigger" style="padding-right: 0px; cursor: pointer;" class="nav-icon pull-right" data-toggle="modal" data-target="#user-modal">
