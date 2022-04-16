@@ -6,25 +6,25 @@
     </a>
 
     @if (Auth::check())
-      <div id="user-mobile-modal-trigger" style="padding-right: 0px; cursor: pointer;" class="nav-icon pull-right" data-toggle="modal" data-target="#user-mobile-modal">
-        <img style="width: 28px; border-radius: 50%;" src="{{ Auth::user()->avatar_temp }}">
+      <div id="user-mobile-modal-trigger" style="padding-left: 12px; padding-right: 0px; cursor: pointer;" class="nav-icon pull-right" data-toggle="modal" data-target="#user-mobile-modal">
+        <img style="width: 25px; border-radius: 50%;" src="{{ Auth::user()->avatar_temp }}">
       </div>
     @else
       <a style="padding-right: 0px" class="nav-icon pull-right" href="{{ route('home.list') }}">
-        <span style="vertical-align: middle; margin-top: -2px;" class="material-icons">account_circle</span>
+        <span style="vertical-align: middle; margin-top: -1px;" class="material-icons">account_circle</span>
       </a>
     @endif
 
     <a class="nav-icon pull-right" href="{{ route('home.search') }}">
-      <img style="margin-top: -3px; margin-right: 1px;" height="20" src="https://cdn.jsdelivr.net/gh/tatakanuta/tatakanuta@v1.0.0/asset/icon/search.png">
+      <img style="margin-top: -2px; margin-right: 1px;" height="20" src="https://cdn.jsdelivr.net/gh/tatakanuta/tatakanuta@v1.0.0/asset/icon/search.png">
     </a>
 
     <a class="nav-icon pull-right" href="{{ Auth::check() ? route('user.userEditUpload', Auth::user()) : route('login') }}">
-      <img style="margin-top: -3px; margin-right: 5px;" height="20" src="https://cdn.jsdelivr.net/gh/tatakanuta/tatakanuta@v1.0.0/asset/icon/notification.png">
+      <img style="margin-top: -2px; margin-right: 5px;" height="20" src="https://cdn.jsdelivr.net/gh/tatakanuta/tatakanuta@v1.0.0/asset/icon/notification.png">
     </a>
 
     <a class="nav-icon pull-right" href="/previews/{{ Carbon\Carbon::now()->format('Ym') }}">
-      <img style="margin-top: -2px; margin-right: 6px;" height="16" src="https://cdn.jsdelivr.net/gh/tatakanuta/tatakanuta@v1.0.0/asset/icon/preview.png">
+      <img style="margin-top: -1px; margin-right: 6px;" height="16" src="https://cdn.jsdelivr.net/gh/tatakanuta/tatakanuta@v1.0.0/asset/icon/preview.png">
     </a>
   </div>
 
@@ -71,33 +71,33 @@
           <div class="no-select" style="border-bottom: solid 1px #333333; padding: 10px 20px 10px 20px">
               <img style="width: 45px; border-radius: 50%; display: inline-block;" src="{{ Auth::user()->avatar_temp }}">
               <div style="display: inline-block; vertical-align: middle; margin-left: 15px;">
-                  <h5 style="font-weight: bold;">{{ Auth::user()->name }}</h5>
+                  <h5 style="font-size: 16px; font-weight: bold;">{{ Auth::user()->name }}</h5>
                   <h5 style="font-size: 12px; color: gray;">加入於 {{ Carbon\Carbon::parse(Auth::user()->created_at)->diffForHumans() }}</h5>
               </div>
           </div>
           <div class="no-select" style="padding: 9px 0px 0px 0px">
               <a class="user-modal-link" href="#">
                   <img src="https://i.imgur.com/NBHKokN.png">
-                  <h5>帳戶資料</h5>
+                  <h5 style="font-size: 16px;">帳戶資料</h5>
               </a>
               <a class="user-modal-link" href="{{ route('home.list') }}">
                   <img src="https://i.imgur.com/DUSbStD.png">
-                  <h5>我的清單</h5>
+                  <h5 style="font-size: 16px;">我的清單</h5>
               </a>
               <a class="user-modal-link" href="{{ route('home.list') }}">
                   <img src="https://i.imgur.com/50Mdfbq.png">
-                  <h5>稍後觀看</h5>
+                  <h5 style="font-size: 16px;">稍後觀看</h5>
               </a>
               <a class="user-modal-link" href="#">
                   <img src="https://i.imgur.com/HaqOkM6.png">
-                  <h5>語言設定</h5>
+                  <h5 style="font-size: 16px;">語言設定</h5>
               </a>
               <hr style="border-color: #333333; margin: 9px 0px 9px 0px;">
               <form action="{{ route('logout') }}" method="POST">
                   {{ csrf_field() }}
                   <button style="width: 100%; display: inline-block; color: white; vertical-align: middle; text-align: left; margin-bottom: 9px;" class="no-button-style user-modal-link" type="submit">
                       <img style="width: 19px; display: inline-block;" src="https://i.imgur.com/fRde2hY.png">
-                      <h5 style="display: inline-block; margin-left: 15px; color: white; vertical-align: middle;">登出</h5>
+                      <h5 style="font-size: 16px; display: inline-block; margin-left: 15px; color: white; vertical-align: middle;">登出</h5>
                   </button>
               </form>
           </div>
