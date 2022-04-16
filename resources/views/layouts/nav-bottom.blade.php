@@ -1,7 +1,8 @@
 <div style="z-index: 10000 !important; border-top: 1px solid #222222; {{ Request::is('*watch*') ? 'display:none;' : '' }}" class="bottom-nav hidden-lg hidden-md white-theme-nav-bottom">
   <a href="/">
     @if (Request::is('/'))
-      <i style="font-size: 28px; margin-top: 10px; color: white" class="material-icons">home</i>
+      <img style="width: 17px; margin-top: 8px;" src="https://i.imgur.com/HgtVKaL.png">
+      <div style="font-size: 9px; color: white; margin-top: 3px;">主頁</div>
     @else
       <img style="width: 17px; margin-top: 8px;" src="https://i.imgur.com/fEnCzhO.png">
       <div style="font-size: 9px; color: white; margin-top: 3px;">主頁</div>
