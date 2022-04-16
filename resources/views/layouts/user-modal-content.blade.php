@@ -2,7 +2,7 @@
     <img style="width: 45px; border-radius: 50%; display: inline-block;" src="{{ Auth::user()->avatar_temp }}">
     <div style="display: inline-block; vertical-align: middle; margin-left: 15px;">
         <h5 id="user-modal-name" style="font-weight: bold;">{{ Auth::user()->name }}</h5>
-        <h5 style="font-size: 12px; color: gray;">加入於 {{ Carbon\Carbon::parse(Auth::user()->created_at)->diffForHumans() }}</h5>
+        <h5 id="user-modal-created">加入於 {{ Carbon\Carbon::parse(Auth::user()->created_at)->diffForHumans() }}</h5>
     </div>
 </div>
 <div class="no-select" style="padding: 9px 0px 0px 0px">
