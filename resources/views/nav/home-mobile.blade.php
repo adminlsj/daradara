@@ -58,50 +58,52 @@
     </script>
 </div>
 
-<div style="z-index: 100000" id="user-mobile-modal" class="modal" role="dialog">
-  <div class="modal-dialog modal-sm" style="position: absolute; top: 87px;">
-    <div class="modal-content" style="border-radius: 3px; background-color: #222222; color: white;">
-      <div class="modal-header" style="border-bottom: 1px solid #333333; position: relative; height: 65px;">
-        <span class="material-icons pull-left no-select modal-close-btn" data-dismiss="modal">close</span>
-        <h4 class="modal-title" style="text-align: center; font-weight: bold; margin: 0; padding: 0; margin-top: 5px; font-size: 18px;">帳戶設定</h4>
-      </div>
+@if (Auth::check())
+  <div style="z-index: 10001" id="user-mobile-modal" class="modal" role="dialog">
+    <div class="modal-dialog modal-sm" style="position: absolute; top: 87px;">
+      <div class="modal-content" style="border-radius: 3px; background-color: #222222; color: white;">
+        <div class="modal-header" style="border-bottom: 1px solid #333333; position: relative; height: 65px;">
+          <span class="material-icons pull-left no-select modal-close-btn" data-dismiss="modal">close</span>
+          <h4 class="modal-title" style="text-align: center; font-weight: bold; margin: 0; padding: 0; margin-top: 5px; font-size: 18px;">帳戶設定</h4>
+        </div>
 
-      <div class="modal-body" style="padding: 0; height: calc(100% - 65px); overflow-x: hidden;">
-        <div class="no-select" style="border-bottom: solid 1px #333333; padding: 10px 20px 10px 20px">
-            <img style="width: 45px; border-radius: 50%; display: inline-block;" src="{{ Auth::user()->avatar_temp }}">
-            <div style="display: inline-block; vertical-align: middle; margin-left: 15px;">
-                <h5 style="font-weight: bold;">{{ Auth::user()->name }}</h5>
-                <h5 style="font-size: 12px; color: gray;">加入於 {{ Carbon\Carbon::parse(Auth::user()->created_at)->diffForHumans() }}</h5>
-            </div>
+        <div class="modal-body" style="padding: 0; height: calc(100% - 65px); overflow-x: hidden;">
+          <div class="no-select" style="border-bottom: solid 1px #333333; padding: 10px 20px 10px 20px">
+              <img style="width: 45px; border-radius: 50%; display: inline-block;" src="{{ Auth::user()->avatar_temp }}">
+              <div style="display: inline-block; vertical-align: middle; margin-left: 15px;">
+                  <h5 style="font-weight: bold;">{{ Auth::user()->name }}</h5>
+                  <h5 style="font-size: 12px; color: gray;">加入於 {{ Carbon\Carbon::parse(Auth::user()->created_at)->diffForHumans() }}</h5>
+              </div>
+          </div>
+          <div class="no-select" style="padding: 9px 0px 0px 0px">
+              <a class="user-modal-link" href="#">
+                  <img src="https://i.imgur.com/NBHKokN.png">
+                  <h5>帳戶資料</h5>
+              </a>
+              <a class="user-modal-link" href="{{ route('home.list') }}">
+                  <img src="https://i.imgur.com/DUSbStD.png">
+                  <h5>我的清單</h5>
+              </a>
+              <a class="user-modal-link" href="{{ route('home.list') }}">
+                  <img src="https://i.imgur.com/50Mdfbq.png">
+                  <h5>稍後觀看</h5>
+              </a>
+              <a class="user-modal-link" href="#">
+                  <img src="https://i.imgur.com/HaqOkM6.png">
+                  <h5>語言設定</h5>
+              </a>
+              <hr style="border-color: #333333; margin: 9px 0px 9px 0px;">
+              <form action="{{ route('logout') }}" method="POST">
+                  {{ csrf_field() }}
+                  <button style="width: 100%; display: inline-block; color: white; vertical-align: middle; text-align: left; margin-bottom: 9px;" class="no-button-style user-modal-link" type="submit">
+                      <img style="width: 19px; display: inline-block;" src="https://i.imgur.com/fRde2hY.png">
+                      <h5 style="display: inline-block; margin-left: 15px; color: white; vertical-align: middle;">登出</h5>
+                  </button>
+              </form>
+          </div>
+          <hr style="margin: 0; border-color: #333333;">
         </div>
-        <div class="no-select" style="padding: 9px 0px 0px 0px">
-            <a class="user-modal-link" href="#">
-                <img src="https://i.imgur.com/NBHKokN.png">
-                <h5>帳戶資料</h5>
-            </a>
-            <a class="user-modal-link" href="{{ route('home.list') }}">
-                <img src="https://i.imgur.com/DUSbStD.png">
-                <h5>我的清單</h5>
-            </a>
-            <a class="user-modal-link" href="{{ route('home.list') }}">
-                <img src="https://i.imgur.com/50Mdfbq.png">
-                <h5>稍後觀看</h5>
-            </a>
-            <a class="user-modal-link" href="#">
-                <img src="https://i.imgur.com/HaqOkM6.png">
-                <h5>語言設定</h5>
-            </a>
-            <hr style="border-color: #333333; margin: 9px 0px 9px 0px;">
-            <form action="{{ route('logout') }}" method="POST">
-                {{ csrf_field() }}
-                <button style="width: 100%; display: inline-block; color: white; vertical-align: middle; text-align: left; margin-bottom: 9px;" class="no-button-style user-modal-link" type="submit">
-                    <img style="width: 19px; display: inline-block;" src="https://i.imgur.com/fRde2hY.png">
-                    <h5 style="display: inline-block; margin-left: 15px; color: white; vertical-align: middle;">登出</h5>
-                </button>
-            </form>
-        </div>
-        <hr style="margin: 0; border-color: #333333;">
       </div>
     </div>
   </div>
-</div>
+@endif
