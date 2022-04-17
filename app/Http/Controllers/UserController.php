@@ -20,6 +20,48 @@ class UserController extends Controller
         $this->middleware('sameUser')->only('edit', 'update', 'destroy', 'storeAvatar', 'userEditUpload', 'userUpdateUpload');
     }
 
+    public function edit(Request $request, User $user)
+    {
+        return view('user.edit', compact('user'));
+    }
+
+    public function update(Request $request, User $user)
+    {
+        $type = $request->type;
+
+        if ($type == 'profile') {
+
+            $this->validate(request(), [
+                'name' => 'required|string|max:255',
+                'email' => 'required|string|email|max:255|unique:users,email,'.$user->id
+            ]);
+
+            $user->name = request('name');
+            $user->email = request('email');
+            $user->save();
+
+        } elseif ($type == 'password') {
+
+            $this->validate(request(), [
+                'password_new' => 'required|string|min:6',
+                'password_new_confirm' => 'required|string|min:6|same:password_new',
+                'password_old' => ['required', function ($attribute, $value, $fail) use ($user) {
+                    if (!\Hash::check($value, $user->password)) {
+                        return $fail(__('舊密碼錯誤'));
+                    }
+                }],
+            ], [
+                'password_new_confirm.same' => '新密碼 與 確認新密碼 不相符',
+            ]);
+
+            $user->password = bcrypt(request('password_new'));
+            $user->save();
+
+        }
+
+        return back()->withErrors(['success' => '已成功更新帳戶資料']);;
+    }
+
     public function userEditUpload(User $user, Request $request)
     {
         if (in_array($user->id, [1, 6944])) {

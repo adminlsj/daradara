@@ -6,7 +6,7 @@
     </div>
 </div>
 <div class="no-select" style="padding: 9px 0px 0px 0px">
-    <a class="user-modal-link" href="#">
+    <a class="user-modal-link" href="{{ route('user.edit', Auth::user()) }}">
         <img src="https://i.imgur.com/NBHKokN.png">
         <h5>帳戶資料</h5>
     </a>
@@ -18,7 +18,7 @@
         <img src="https://i.imgur.com/50Mdfbq.png">
         <h5>稍後觀看</h5>
     </a>
-    <a class="user-modal-link" href="#">
+    <a class="user-modal-link" href="{{ route('user.edit', Auth::user()) }}">
         <img src="https://i.imgur.com/HaqOkM6.png">
         <h5>語言設定</h5>
     </a>

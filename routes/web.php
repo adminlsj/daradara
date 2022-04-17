@@ -41,6 +41,7 @@ Route::get('/setVideoDuration', 'BotController@setVideoDuration');
 Route::post('/getVideosData', 'BotController@getVideosData');
 Route::post('/getWatchesData', 'BotController@getWatchesData');
 
+Route::resource('user', 'UserController')->only(['edit', 'update']);
 Route::get('/userReport', 'HomeController@userReport')->name('email.userReport');
 Route::get('/user/{user}/upload', 'UserController@userEditUpload')->name('user.userEditUpload');
 Route::post('/user/{user}/userUpdateUpload', 'UserController@userUpdateUpload')->name('user.userUpdateUpload');
