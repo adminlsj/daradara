@@ -2318,16 +2318,28 @@ div.sticky {
   }
 
   #user-upload-photo-form {
-    margin-top: -5px; 
-    margin-bottom: -5px;
+    margin-top: -15px; 
+    margin-bottom: -15px;
   }
 
-  #user-upload-photo-form img {
-    width: 65px !important;
+  #user-upload-photo-form #user-photo-wrapper {
+    display: block !important;
+    text-align: center;
   }
 
-  #user-upload-photo-form #label {
+  #user-upload-photo-form #user-photo-wrapper img {
+    width: 90px !important;
+    margin-right: 0px !important;
+  }
+
+  #user-upload-photo-form #user-photo-label-wrapper {
+    display: block !important;
+    text-align: center;
+  }
+
+  #user-upload-photo-form #user-photo-label-wrapper #label {
     font-size: 15px !important;
+    margin-top: 15px;
   }
 
   .user-update-account-form h4 {

@@ -9,15 +9,17 @@
 <div id="signUpModal" class="list-rows-wrapper" style="padding: 0 4%; color: white;">
 
 	<form id="user-upload-photo-form" method="POST" action="{{ route('user.update', $user) }}" enctype="multipart/form-data">
-	    {{ csrf_field() }}
-	    {{ method_field('patch') }}
+    {{ csrf_field() }}
+    {{ method_field('patch') }}
 
-	    <input type="hidden" id="type" name="type" value="photo">
+    <input type="hidden" id="type" name="type" value="photo">
 
-		<img style="width: 70px; border-radius: 50%; margin-right: 20px" src="{{ $user->avatar_temp }}">
-		<div style="display: inline-block; vertical-align: middle;">
-			<h5 style="font-size: 20px;">{{ $user->name }}</h5>
-			<h5 id="label" style="font-size: 16px; color: red; cursor: pointer; font-weight: bold" onclick="document.getElementById('photo').click()">更換個人頭像</h5>
+    <div id="user-photo-wrapper" style="display: inline-block;">
+    	<img style="width: 70px; border-radius: 50%; margin-right: 20px; border: 1px solid #333333" src="{{ $user->avatar_temp }}">
+    </div>
+		<div id="user-photo-label-wrapper" style="display: inline-block; vertical-align: middle;">
+			<h5 class="hidden-xs" style="font-size: 20px;">{{ $user->name }}</h5>
+			<h5 id="label" style="font-size: 16px; color: red; cursor: pointer; font-weight: bold" onclick="document.getElementById('photo').click()">更換個人<span class="hidden-sm hidden-md hidden-lg">資料</span>頭像</h5>
 			<input style="display: none;" type="file" name="photo" id="photo" accept="image/*" required onchange="this.form.submit(); this.disabled=true; document.getElementById('label').innerHTML='更換頭像中...';">
 		</div>
 	</form>
