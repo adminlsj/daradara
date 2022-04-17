@@ -2318,8 +2318,12 @@ div.sticky {
   }
 
   #user-upload-photo-form {
-    margin-top: -10px; 
-    margin-bottom: -10px;
+    margin-top: -5px; 
+    margin-bottom: -5px;
+  }
+
+  #user-upload-photo-form img {
+    width: 60px !important;
   }
 
   #user-upload-photo-form #label {
