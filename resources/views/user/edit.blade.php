@@ -24,7 +24,7 @@
 
 	<hr style="margin-left: -4%; margin-right: -4%; border-color: #333333; margin-top: 30px; margin-bottom: 30px;">
 
-    <form method="POST" action="{{ route('user.update', $user) }}">
+    <form class="user-update-account-form" method="POST" action="{{ route('user.update', $user) }}">
 	    {{ csrf_field() }}
 	    {{ method_field('patch') }}
 
@@ -32,7 +32,7 @@
 
 	    <h4 style="font-size: 1.7em">編輯個人檔案</h4>
 		<div style="font-size: 1.1em">
-			<span style="font-weight: 500;">編輯你在 <span style="font-weight: bold">Hanime1.me</span> 上顯示的用戶名稱以及登入時使用的電郵地址。</span>
+			<span style="font-weight: normal;">編輯你在 <span style="font-weight: bold">Hanime1</span> 上顯示的用戶名稱以及登入時使用的電郵地址。</span>
 			<div class="form-group" style="margin-top: 20px;">
 				<input style="background-color: #131313; color: white;" type="text" class="form-control" name="name" id="name" placeholder="用戶名稱" value="{{ $user->name }}" required>
 			</div>
@@ -45,7 +45,7 @@
 
 	<hr style="margin-left: -4%; margin-right: -4%; border-color: #333333; margin-top: 35px; margin-bottom: -30px;">
 
-	<form style="margin-top: 60px; margin-bottom: 78px" method="POST" action="{{ route('user.update', $user) }}">
+	<form class="user-update-account-form" style="margin-top: 60px; margin-bottom: 78px" method="POST" action="{{ route('user.update', $user) }}">
 	    {{ csrf_field() }}
 	    {{ method_field('patch') }}
 
@@ -53,7 +53,7 @@
 
 	    <h4 style="font-size: 1.7em">更改密碼</h4>
 		<div style="font-size: 1.1em">
-			<span style="font-weight: 500;">更改你在 <span style="font-weight: bold">Hanime1.me</span> 上登入時輸入的密碼，或點擊忘記密碼重新設定。</span>
+			<span style="font-weight: 500;">更改你在 <span style="font-weight: bold">Hanime1</span> 上登入時輸入的密碼，或點擊忘記密碼重新設定。</span>
 			<div class="form-group" style="margin-top: 20px;">
 				<input style="background-color: #131313; color: white;" type="password" class="form-control" name="password_old" id="password_old" placeholder="舊密碼" required>
 			</div>
