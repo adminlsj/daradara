@@ -8,7 +8,7 @@
 
 <div id="signUpModal" class="list-rows-wrapper" style="padding: 0 4%; color: white;">
 
-	<form method="POST" action="{{ route('user.update', $user) }}" enctype="multipart/form-data">
+	<form id="user-upload-photo-form" method="POST" action="{{ route('user.update', $user) }}" enctype="multipart/form-data">
 	    {{ csrf_field() }}
 	    {{ method_field('patch') }}
 
@@ -17,7 +17,7 @@
 		<img style="width: 70px; border-radius: 50%; margin-right: 20px" src="{{ $user->avatar_temp }}">
 		<div style="display: inline-block; vertical-align: middle;">
 			<h5 style="font-size: 20px;">{{ $user->name }}</h5>
-			<h5 id="label" style="font-size: 15px; color: red; cursor: pointer; font-weight: bold" onclick="document.getElementById('photo').click()">更換個人頭像</h5>
+			<h5 id="label" style="font-size: 16px; color: red; cursor: pointer; font-weight: bold" onclick="document.getElementById('photo').click()">更換個人頭像</h5>
 			<input style="display: none;" type="file" name="photo" id="photo" accept="image/*" required onchange="this.form.submit(); this.disabled=true; document.getElementById('label').innerHTML='更換頭像中...';">
 		</div>
 	</form>
