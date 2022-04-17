@@ -6,8 +6,7 @@
 
 @section('content')
 
-<div class="content-padding-new list-rows-wrapper">
-    <h3 style="color:white">編輯個人檔案</h3>
+<div id="signUpModal" class="list-rows-wrapper" style="padding: 0 4%; color: white;">
 
     <form method="POST" action="{{ route('user.update', $user) }}">
 	    {{ csrf_field() }}
@@ -15,48 +14,45 @@
 
 	    <input type="hidden" id="type" name="type" value="profile">
 
-	    <div class="form-group" style="margin-top: 20px;">
-	    	<div style="color: white; display: inline-block; width: 100px;">用戶名稱</div>
-			<input style="background-color: #333333; color: white; border-color: #333333; display: inline-block; width: 350px" type="text" class="form-control" name="name" id="name" value="{{ $user->name }}" required>
+	    <h4 style="font-size: 1.7em">編輯個人檔案</h4>
+		<div style="font-size: 1.1em">
+			<span style="font-weight: 500;">編輯你在 <span style="font-weight: bold">Hanime1.me</span> 上顯示的用戶名稱以及登入時使用的電郵地址。</span>
+			<div class="form-group" style="margin-top: 20px;">
+				<input style="background-color: #131313; color: white;" type="text" class="form-control" name="name" id="name" placeholder="用戶名稱" value="{{ $user->name }}" required>
+			</div>
+			<div class="form-group">
+				<input style="background-color: #131313; color: white;" type="email" class="form-control" name="email" id="email" placeholder="電郵地址" value="{{ $user->email }}" required>
+			</div>
+			<button style="height: 45px; margin-top: 10px; font-size: 1em; background-color: red !important; border-color: red !important;" type="submit" class="btn btn-info" name="submit">更新個人檔案</button>
 		</div>
-
-		<div class="form-group" style="margin-top: 10px;">
-			<div style="color: white; display: inline-block; width: 100px;">電郵地址</div>
-			<input style="background-color: #333333; color: white; border-color: #333333; display: inline-block; width: 350px" type="email" class="form-control" name="email" id="email" value="{{ $user->email }}" required>
-		</div>
-
-	    <button style="margin-left: 104px;" type="submit">提交</button>
 	</form>
 
-	<h3 style="color:white; margin-top: 50px;">更改密碼</h3>
+	<hr style="margin-left: -4%; margin-right: -4%; border-color: #333333; margin-top: 35px; margin-bottom: -30px;">
 
-	<form method="POST" action="{{ route('user.update', $user) }}">
+	<form style="margin-top: 60px; margin-bottom: 78px" method="POST" action="{{ route('user.update', $user) }}">
 	    {{ csrf_field() }}
 	    {{ method_field('patch') }}
 
 	    <input type="hidden" id="type" name="type" value="password">
 
-		<div class="form-group" style="margin-top: 20px;">
-			<div style="color: white; display: inline-block; width: 100px;">舊密碼</div>
-			<input style="background-color: #333333; color: white; border-color: #333333; display: inline-block; width: 350px" type="password" class="form-control" name="password_old" id="password_old">
+	    <h4 style="font-size: 1.7em">更改密碼</h4>
+		<div style="font-size: 1.1em">
+			<span style="font-weight: 500;">更改你在 <span style="font-weight: bold">Hanime1.me</span> 上登入時輸入的密碼，或點擊忘記密碼重新設定。</span>
+			<div class="form-group" style="margin-top: 20px;">
+				<input style="background-color: #131313; color: white;" type="password" class="form-control" name="password_old" id="password_old" placeholder="舊密碼" required>
+			</div>
+			<div class="form-group" style="margin-top: 20px;">
+				<input style="background-color: #131313; color: white;" type="password" class="form-control" name="password_new" id="password_new" placeholder="新密碼" required>
+			</div>
+			<div class="form-group" style="margin-top: 20px;">
+				<input style="background-color: #131313; color: white;" type="password" class="form-control" name="password_new_confirm" id="password_new_confirm" placeholder="確認新密碼" required>
+			</div>
+			<div style="margin-top: 20px; margin-bottom: 20px; font-size: 0.95em">
+	            <a href="/password/reset" target="_blank" style="cursor: pointer; text-decoration: none; font-weight: 500;">忘記密碼？</a>
+            </div>
+			<button style="height: 45px; margin-top: 10px; font-size: 1em; background-color: red !important; border-color: red !important;" type="submit" class="btn btn-info" name="submit">更改密碼</button>
 		</div>
-
-		<div class="form-group" style="margin-top: 10px;">
-			<div style="color: white; display: inline-block; width: 100px;">新密碼</div>
-			<input style="background-color: #333333; color: white; border-color: #333333; display: inline-block; width: 350px" type="password" class="form-control" name="password_new" id="password_new">
-		</div>
-
-		<div class="form-group" style="margin-top: 10px;">
-			<div style="color: white; display: inline-block; width: 100px;">確認新密碼</div>
-			<input style="background-color: #333333; color: white; border-color: #333333; display: inline-block; width: 350px" type="password" class="form-control" name="password_new_confirm" id="password_new_confirm">
-		</div>
-
-	    <button style="margin-left: 104px;" type="submit">更改</button>
 	</form>
-
-	<div style="margin-left: 103px; margin-top: 20px; margin-bottom: 20px;">
-		<a href="/password/reset" target="_blank" style="cursor: pointer; text-decoration: none; font-weight: 500;">忘記密碼？</a>
-	</div>
 </div>
 
 @include('layouts.nav-bottom')
