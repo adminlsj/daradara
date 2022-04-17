@@ -29,7 +29,35 @@ class UserController extends Controller
     {
         $type = $request->type;
 
-        if ($type == 'profile') {
+        if ($type == 'photo') {
+            $original = $request->file('photo');
+            $image = Image::make($original);
+            $image = $image->fit(300, 300);
+            $image = $image->stream();
+            $pvars = array('image' => base64_encode($image));
+
+            $curl = curl_init();
+            curl_setopt($curl, CURLOPT_URL, 'https://api.imgur.com/3/image.json');
+            curl_setopt($curl, CURLOPT_TIMEOUT, 30);
+            curl_setopt($curl, CURLOPT_HTTPHEADER, array('Authorization: Client-ID ' . '932b67e13e4f069'));
+            curl_setopt($curl, CURLOPT_POST, 1);
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($curl, CURLOPT_POSTFIELDS, $pvars);
+            $out = curl_exec($curl);
+            curl_close ($curl);
+            $pms = json_decode($out, true);
+            $url = $pms['data']['link'];
+
+            if ($url != "") {
+                $avatar = str_replace('.jpg', 'b.jpg', $url);
+                $avatar = str_replace('.png', 'b.png', $avatar);
+                $user->avatar_temp = $avatar;
+                $user->save();
+            } else {
+                return back()->withErrors(['error' => '圖片上傳失敗']);
+            }
+
+        } elseif ($type == 'profile') {
 
             $this->validate(request(), [
                 'name' => 'required|string|max:255',
