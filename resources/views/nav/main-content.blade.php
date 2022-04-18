@@ -23,7 +23,7 @@
       </div>
     </div>
 @else
-    <a style="padding-right: 0px" class="nav-icon pull-right" href="{{ route('home.list') }}"><span style="vertical-align: middle;" class="material-icons-outlined">account_circle</span></a>
+    <a style="padding-right: 0px" class="nav-icon pull-right" href="{{ route('login') }}"><span style="vertical-align: middle;" class="material-icons-outlined">account_circle</span></a>
 @endif
 
 <a class="nav-icon pull-right" href="{{ route('home.search') }}"><span style="vertical-align: middle;" class="material-icons-outlined">search</span></a>
