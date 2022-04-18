@@ -31,17 +31,6 @@
 
     @include('ads.list-banner-panel')
 
-    <div id="list-logout-btn" style="padding: 0 4%; margin-top: 30px;">
-      <form action="{{ route('logout') }}" method="POST">
-        {{ csrf_field() }}
-        <br class="hidden-sm hidden-md hidden-lg">
-        <button style="height: 40px; width: 80px; background-color: dimgray !important; border-color: dimgray !important;" class="no-button-style btn-info" type="submit">登出</button>
-        <br class="hidden-sm hidden-md hidden-lg">
-        <br class="hidden-sm hidden-md hidden-lg">
-        <br class="hidden-sm hidden-md hidden-lg">
-      </form>
-    </div>
-
   </div>
 </div>
 
