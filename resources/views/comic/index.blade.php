@@ -18,12 +18,7 @@
     </div>
   @endif
 
-  <div class="comics-panel-margin comics-panel-margin-top comics-panel-padding-less comics-related-wrapper comic-rows-wrapper">
-      <h3 style="text-align: center; color: #d9d9d9;"><span style="vertical-align: middle; margin-top: -4px; margin-right: 8px; font-size: 28px; color: crimson;" class="material-icons">fiber_new</span>最新上傳</h3>
-      @foreach ($newest as $comic)
-        @include('comic.card')
-      @endforeach
-  </div>
+
 
   <div style="margin-top: 6px; margin-bottom: -27px" class="search-pagination hidden-xs">{!! $newest->appends(request()->query())->links() !!}</div>
   <div style="margin-top: -10px; margin-bottom: -30px" class="search-pagination mobile-search-pagination hidden-sm hidden-md hidden-lg">{!! $newest->appends(request()->query())->onEachSide(1)->links() !!}</div>
