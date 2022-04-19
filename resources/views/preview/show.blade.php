@@ -4,12 +4,12 @@
     @parent
     <meta property="og:url" content="/previews/{{ $preview->uuid }}" />
     <meta property="og:type" content="article" />
-    <meta property="og:title" content="{{ $year }}年{{ $month }}月裏番/里番新番列表 - Hanime1.me" />
+    <meta property="og:title" content="{{ $year }}年{{ $month }}月里番/裏番新番列表 - Hanime1.me" />
     <meta property="og:description" content="{{ $year }}年{{ $month }}月H動漫成人卡通新番表，開播日期、內容介紹、製作公司一口氣公開！本列表目前共收錄了{{ $videos->count() }}套新作工口H動畫。" />
     <meta property="og:image" content="{{ $preview->cover }}" />
 
-    <title>{{ $year }}年{{ $month }}月裏番/里番新番列表&nbsp;-&nbsp;Hanime1.me</title>
-    <meta name="title" content="{{ $year }}年{{ $month }}月裏番/里番新番列表 - Hanime1.me">
+    <title>{{ $year }}年{{ $month }}月里番/裏番新番列表&nbsp;-&nbsp;Hanime1.me</title>
+    <meta name="title" content="{{ $year }}年{{ $month }}月里番/裏番新番列表 - Hanime1.me">
     <meta name="description" content="{{ $year }}年{{ $month }}月H動漫成人卡通新番表，開播日期、內容介紹、製作公司一口氣公開！本列表目前共收錄了{{ $videos->count() }}套新作工口H動畫。" />
     <meta property="og:image" content="{{ $preview->cover }}">
 @endsection
@@ -42,7 +42,7 @@
         @endif
       </div>
       <div class="preview-top-content">
-        <h1 style="color: white; font-weight: bold">{{ $year }}年{{ $month }}月裏番/里番新番列表</h1>
+        <h1 style="color: white; font-weight: bold">{{ $year }}年{{ $month }}月里番/裏番新番列表</h1>
         <p style="color: #d9d9d9; font-size: 18px; margin-bottom: 0px">{{ $year }}年{{ $month }}月H動漫成人卡通新番表，開播日期、內容介紹、製作公司一口氣公開！本列表目前共收錄了{{ $videos->count() }}套新作工口H動畫。</p>
       </div>
     </div>
