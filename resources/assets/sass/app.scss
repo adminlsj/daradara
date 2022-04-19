@@ -879,12 +879,12 @@ th, td {
   border-bottom-right-radius: 5px;
 }
 
-.comic-rows-videos-div:hover .comic-rows-videos-title, .comic-rows-videos-div .comic-rows-videos-title.active {
-  position: absolute !important;
-  overflow: visible !important;
-  display: block !important;
-  z-index: 10000 !important;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.8) !important;
+.comic-rows-videos-div a:hover .comic-rows-videos-title, .comic-rows-videos-div .comic-rows-videos-title.active {
+  position: absolute;
+  overflow: visible;
+  display: block;
+  z-index: 10000;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.8);
 }
 
 .comic-rows-wrapper .comic-rows-videos-wrapper {

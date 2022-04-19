@@ -10,7 +10,7 @@
   @include('ads.comics-banner-exoclick')
 
   @if (!isset($_GET['page']) || $_GET['page'] == 1)
-    <div style="background-color: #222222; margin: 0 4%; padding: 5px 15px 25px 15px;">
+    <div style="background-color: #222222; margin: 0 4%; padding: 5px 30px 25px 30px;">
         <h3 style="text-align: center; color: #d9d9d9; font-size: 20px; margin-bottom: 25px;"><span style="vertical-align: middle; margin-top: -5px; margin-right: 5px; color: crimson;" class="material-icons">local_fire_department</span>發燒漫畫</h3>
           @foreach ($trending as $comic)
             @include('comic.card')
