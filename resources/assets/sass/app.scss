@@ -864,7 +864,7 @@ th, td {
   vertical-align: top;
 }
 
-.comic-rows-videos-div .comic-rows-videos-title {
+.comic-rows-wrapper .comic-rows-videos-div .comic-rows-videos-title {
   white-space: initial; 
   overflow: hidden;
   text-overflow: ellipsis; 
@@ -879,11 +879,11 @@ th, td {
   border-bottom-right-radius: 5px;
 }
 
-.comic-rows-videos-div:hover .comic-rows-videos-title, .comic-rows-videos-div .comic-rows-videos-title.active {
+.comic-rows-wrapper .comic-rows-videos-div:hover .comic-rows-videos-title, .comic-rows-wrapper .comic-rows-videos-div .comic-rows-videos-title.active {
   position: absolute;
   overflow: visible;
   display: block;
-  z-index: 10000;
+  z-index: 1000;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.8);
 }
 
@@ -896,19 +896,19 @@ th, td {
   font-size: 0;
 }
 
-.comic-rows-videos-wrapper .comic-rows-videos-div .comic-rows-videos-title {
+.comic-rows-wrapper .comic-rows-videos-wrapper .comic-rows-videos-div .comic-rows-videos-title {
   font-size: 14px;
 }
 
-.comic-rows-videos-div .comic-rows-videos-title {
+.comic-rows-wrapper .comic-rows-videos-div .comic-rows-videos-title {
   font-size: 14px;
 }
 
-.comic-rows-videos-div {
+.comic-rows-wrapper .comic-rows-videos-div {
   width: calc(100% / 6 - 4px);
 }
 
-.comic-rows-videos-div img {
+.comic-rows-wrapper .comic-rows-videos-div img {
   width: 100%;
 }
 
@@ -2096,7 +2096,7 @@ div.sticky {
     padding: 15px 15px 8px 15px;
   }
 
-  .comic-rows-videos-div {
+  .comic-rows-wrapper .comic-rows-videos-div {
     width: calc(100% / 3 - 4px);
   }
 
