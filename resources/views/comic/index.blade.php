@@ -12,11 +12,9 @@
   @if (!isset($_GET['page']) || $_GET['page'] == 1)
     <div style="background-color: #222222; margin: 0 4%; padding: 5px 15px 25px 15px;">
         <h3 style="text-align: center; color: #d9d9d9; font-size: 20px; margin-bottom: 25px;"><span style="vertical-align: middle; margin-top: -5px; margin-right: 5px; color: crimson;" class="material-icons">local_fire_department</span>發燒漫畫</h3>
-        <div class="row no-gutter" style="padding: 0 13px;">
           @foreach ($trending as $comic)
             @include('comic.card')
           @endforeach
-        </div>
     </div>
   @endif
 
