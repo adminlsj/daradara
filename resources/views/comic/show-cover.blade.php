@@ -55,13 +55,13 @@
         </h5>
       </div>
 
-      <div class="comics-metadata-margin-top" style="opacity: 0.5; filter: alpha(opacity=50);">
-        <button class="no-select" style="background-color: crimson; border: none; color: #d9d9d9; border-radius: 5px; padding: 10px 20px 10px 18px;">
+      <div class="comics-metadata-margin-top">
+        <button class="no-select" style="background-color: crimson; border: none; color: #d9d9d9; border-radius: 3px; padding: 10px 20px 10px 18px; opacity: 0.5; filter: alpha(opacity=50); margin-right: 1px;">
           <span style="vertical-align: middle; font-size: 18px; margin-top: -3px; margin-right: 5px; cursor: pointer;" class="material-icons">favorite</span>加入最愛
         </button>
-        <button class="no-select" style="background-color: #4d4d4d; border: none; color: #d9d9d9; border-radius: 5px; padding: 10px 20px 10px 15px;">
+        <a class="no-select hover-lighter" style="background-color: #4d4d4d; border: none; color: #d9d9d9; border-radius: 3px; padding: 10px 20px 10px 15px; text-decoration: none;" href="https://nhentai.net/g/{{ $comic->nhentai_id }}/download" target="_blank">
           <span style="vertical-align: middle; font-size: 20px; margin-top: -3px; margin-bottom: -2px; margin-right: 5px; cursor: pointer;" class="material-icons">download</span>下載
-        </button>
+        </a>
       </div>
 
     </div>

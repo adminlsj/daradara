@@ -33,6 +33,26 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
+        /* $data = "";
+        $parse = explode('#EXTINF', $data);
+        array_shift($parse);        
+        foreach ($parse as &$item) {
+            $item = str_replace('#EXT-X-ENDLIST', '', $item);
+            $item = trim(explode(',', $item)[1]);
+        }
+        foreach ($parse as $ts) {
+            $referer = "https://iqqtv.net/";
+            $opts = [
+                'http' => [
+                   'header' => [
+                        "Referer: https://iqqtv.net/"
+                    ]
+                ]
+            ];
+            $context = stream_context_create($opts);
+            Storage::disk('local')->put("video/".basename($ts), file_get_contents($ts, false, $context));
+        } */
+
         /* $tc = Storage::disk('local')->files('video/tc');
         foreach ($tc as $video) {
             $extension = explode('.', $video)[1];
