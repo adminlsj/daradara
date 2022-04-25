@@ -49,9 +49,29 @@ class CheckOdysee extends Command
 
         $videos = Video::where('sd', 'like', '%odycdn%')->get();
         foreach ($videos as $video) {
-            $httpcode = Motherless::getHttpcode($video->sd);
-            if ($httpcode != 200 && $httpcode != 0) {
+            $url = $video->sd;
+            $httpcode = Motherless::getHttpcode($url);
+
+            if ($httpcode == 308) {
+
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_URL, $url);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+                curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
+                $html = curl_exec($ch);
+                $redirectUrl = curl_getinfo($ch, CURLINFO_EFFECTIVE_URL);
+                curl_close($ch);
+                $redirectUrl = str_replace('master.m3u8', 'v0.m3u8', $redirectUrl);
+
+                $video->sd = $redirectUrl;
+                $video->save();
+
+                Mail::to('vicky.avionteam@gmail.com')->send(new UserReport('master', 'Odysee m3u8 updated ('.$httpcode.')', $video->id, $video->title, $video->sd, 'master', 'master'));
+
+            } elseif ($httpcode != 200 && $httpcode != 0) {
+
                 Mail::to('vicky.avionteam@gmail.com')->send(new UserReport('master', 'Odysee check failed ('.$httpcode.')', $video->id, $video->title, $video->sd, 'master', 'master'));
+
             }
         }
 
