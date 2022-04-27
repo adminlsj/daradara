@@ -58,7 +58,60 @@ $('div#video-like-form-wrapper').on("submit", "form#video-like-form", function(e
     })
 });
 
-$('div#video-save-form-wrapper').on("submit", "form#video-save-form", function(e) {
+$('div#playlistModal').on("change", "input.playlist-checkbox", function(e) {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    })
+
+    $.ajax({
+        type:"POST",
+        url: $("form#video-save-form").attr("action"),
+        data: jQuery.param({ 
+            input_id: $(this).attr('id'), 
+            user_id : $("input#playlist-user-id").val(),
+            video_id: $("input#playlist-video-id").val(),
+            is_checked: $(this).prop('checked')
+        }),
+        dataType: 'json',
+        success: function(data){
+            $('div#video-save-form-wrapper').html(data.saveBtn);
+            showSnackbar('影片已儲存於「我的清單」');
+        },
+        error: function(xhr, ajaxOptions, thrownError){
+            $('div#video-save-form-wrapper').html(xhr + ajaxOptions + thrownError);
+            showSnackbar('請刷新頁面後重試。');
+        }
+    })
+});
+
+$("form#video-create-playlist-form").submit(function(e) {
+    $.ajaxSetup({
+        header:$('meta[name="_token"]').attr('content')
+    })
+    e.preventDefault(e);
+
+    $.ajax({
+        type:"POST",
+        url: $(this).attr("action"),
+        data:$(this).serialize(),
+        dataType: 'json',
+        success: function(data){
+            $('#createPlaylistModal').modal('toggle');
+            $('#playlistModal').modal('toggle');
+            $('#playlist-save-checkbox').after(data.checkbox);
+            $('#playlist-title').val("");
+            showSnackbar('影片已儲存於「我的清單」');
+        },
+        error: function(xhr, ajaxOptions, thrownError){
+            $('div#video-save-form-wrapper').html(xhr + ajaxOptions + thrownError);
+            showSnackbar('請刷新頁面後重試。');
+        }
+    })
+});
+
+/* $('div#video-save-form-wrapper').on("submit", "form#video-save-form", function(e) {
     $.ajaxSetup({
         header:$('meta[name="_token"]').attr('content')
     })
@@ -77,7 +130,7 @@ $('div#video-save-form-wrapper').on("submit", "form#video-save-form", function(e
             showSnackbar('請刷新頁面後重試。');
         }
     })
-});
+}); */
 
 $("#hide-playlist-btn").click(function() {
     var scroll = $("#playlist-scroll");
@@ -95,6 +148,16 @@ $("#hide-playlist-btn").click(function() {
 
 $('#others-text').focus(function() {
     $('input:radio[id=others]').prop('checked', true);
+});
+
+$('.toggle-playlist-modal').click(function(){
+    $('#playlistModal').modal('toggle');
+});
+
+$('#create-playlist-btn').click(function(){
+    setTimeout(function(){
+        $('input#playlist-title').focus();
+    });
 });
 
 $('input:radio[id=others]').click(function(){

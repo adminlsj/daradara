@@ -19,6 +19,7 @@
         "rap2hpoutre/laravel-log-viewer": "^1.7",
         "simplehtmldom/simplehtmldom": "dev-master",
         "spatie/browsershot": "^3.37",
+        "staudenmeir/eloquent-eager-limit": "^1.0",
         "steelywing/chinese": "^0.5.3",
         "stripe/stripe-php": "^5.2",
         "torann/geoip": "^1.1"

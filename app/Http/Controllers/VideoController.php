@@ -9,6 +9,8 @@ use App\Comment;
 use App\Reply;
 use App\Like;
 use App\Save;
+use App\Playlist;
+use App\Playitem;
 use Illuminate\Http\Request;
 use Auth;
 use Carbon\Carbon;
@@ -30,6 +32,7 @@ class VideoController extends Controller
 
             $current = $video;
             $doujin = false;
+            $user = auth()->user();
             $is_mobile = Helper::checkIsMobile();
 
             $video->current_views++;
@@ -76,10 +79,14 @@ class VideoController extends Controller
             $comments_count = Comment::where('foreign_id', $video->id)->where('type', 'video')->count();
 
             if (Auth::check()) {
-                $saved = Save::where('user_id', auth()->user()->id)->where('video_id', $video->id)->exists();
-                $liked = Like::where('user_id', Auth::user()->id)->where('foreign_type', 'video')->where('foreign_id', $video->id)->exists();
+                $saved = Save::where('user_id', $user->id)->where('video_id', $video->id)->exists();
+                $listed = Playitem::where('user_id', $user->id)->where('video_id', $video->id)->get();
+                $playlists = Playlist::where('user_id', $user->id)->where('reference_id', null)->select('id', 'user_id', 'title', 'created_at')->orderBy('created_at', 'desc')->get();
+                $liked = Like::where('user_id', $user->id)->where('foreign_type', 'video')->where('foreign_id', $video->id)->exists();
             } else {
                 $saved = false;
+                $listed = '[]';
+                $playlists = '[]';
                 $liked = false;
             }
 
@@ -105,7 +112,7 @@ class VideoController extends Controller
             abort(403);
         }
 
-        return view('video.watch-new', compact('video', 'videos', 'current', 'tags', 'country_code', 'comments_count', 'related', 'doujin', 'is_mobile', 'saved', 'liked', 'lang', 'sd', 'qual', 'qualities', 'downloads'));
+        return view('video.watch-new', compact('video', 'videos', 'current', 'tags', 'country_code', 'comments_count', 'related', 'doujin', 'is_mobile', 'saved', 'listed', 'playlists', 'liked', 'lang', 'sd', 'qual', 'qualities', 'downloads'));
     }
 
     public function download(Request $request)
@@ -231,23 +238,37 @@ class VideoController extends Controller
 
     public function save(Request $request)
     {
-        $user_id = request('save-user-id');
-        $video_id = request('save-video-id');
-        $saved = request('save-status');
+        $input_id = request('input_id');
+        $user_id = Auth::user()->id;
+        $video_id = request('video_id');
+        $is_checked = request('is_checked');
 
-        if ($saved) {
-            Save::where('user_id', $user_id)->where('video_id', $video_id)->delete();
-            $saved = false;
+        if ($input_id == 'save') {
+
+            if ($is_checked == 'true') {
+                Save::create(['user_id' => $user_id, 'video_id' => $video_id]);
+
+            } elseif ($is_checked == 'false') {
+                Save::where('user_id', $user_id)->where('video_id', $video_id)->delete();
+            }
+
         } else {
-            Save::create(['user_id' => $user_id, 'video_id' => $video_id]);
-            $saved = true;
+
+            if ($is_checked == 'true') {
+                Playitem::create(['user_id' => $user_id, 'playlist_id' => $input_id, 'video_id' => $video_id]);
+
+            } elseif ($is_checked == 'false') {
+                Playitem::where('user_id', $user_id)->where('playlist_id', $input_id)->where('video_id', $video_id)->delete();
+            }
+
         }
 
-        $html = '';
-        $html .= view('video.saveBtn', compact('user_id', 'video_id', 'saved'));
+        $save_icon = $is_checked == 'true' ? 'add_circle' : 'add_circle_outline';
+        $save_btn = '';
+        $save_btn .= view('video.saveBtn-new', compact('save_icon'));
 
         return response()->json([
-            'saveBtn' => $html,
+            'saveBtn' => $save_btn,
             'csrf_token' => csrf_token(),
         ]);
     }

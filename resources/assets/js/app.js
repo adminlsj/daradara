@@ -89,6 +89,11 @@ $('.load-more-related-btn').click(function() {
     $('#double-banners-adjust').css('margin-top', '-15px');
 })
 
+$('#show-more-playlists-btn').click(function() {
+    $(this).css('display', 'none');
+    $(".temp-hidden-playlists").removeClass('hidden');
+})
+
 $('#close-mobile-ad-btn').click(function() {
   $('#mobile-ad').css('display', 'none');
 })

@@ -14,6 +14,8 @@ use Spatie\Browsershot\Browsershot;
 
 class Video extends Model
 {
+    use \Staudenmeir\EloquentEagerLimit\HasEagerLimit;
+    
     protected $casts = [
         'foreign_sd' => 'array', 'data' => 'array', 'translations' => 'array', 'qualities' => 'array', 'downloads' => 'array', 'qualities_sc' => 'array', 'downloads_sc' => 'array', 'tags_array' => 'array'
     ];
@@ -27,7 +29,7 @@ class Video extends Model
     ];
 
     public static $vod_servers = [
-        [1, 2, 3, 4, 6]
+        [1, 2, 3, 4, 6, 7]
     ];
 
     public static $metadata = [

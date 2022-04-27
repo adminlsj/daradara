@@ -30,6 +30,8 @@ Route::post('/commentLike', 'VideoController@commentLike')->name('comment.like')
 Route::get('/loadComment', 'VideoController@loadComment')->name('comment.loadComment');
 Route::get('/loadReplies', 'VideoController@loadReplies')->name('comment.loadReplies');
 
+Route::post('/createPlaylist', 'UserController@createPlaylist')->name('playlist.create');
+
 Route::get('/about', 'HomeController@about');
 Route::get('/contact', 'HomeController@contact');
 Route::get('/terms', 'HomeController@terms');

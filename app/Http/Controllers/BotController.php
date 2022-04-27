@@ -553,7 +553,7 @@ class BotController extends Controller
         ini_set('memory_limit', '-1');
 
         $fembed_list = [];
-        for ($i = 66; $i >= 1; $i--) { 
+        for ($i = 1; $i <= 64; $i++) { 
             if ($i == 1) {
                 $url = 'https://avbebe.com/archives/category/h%e5%8b%95%e7%95%ab%e5%bd%b1%e7%89%87';
             } else {

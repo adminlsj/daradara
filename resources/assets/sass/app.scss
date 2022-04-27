@@ -68,7 +68,7 @@ th, td {
   font-weight: 400;
 }
 
-.home-rows-top {
+.home-rows-top, .playlist-rows-top, .playlist-rows {
   margin-top: -25px;
 }
 
@@ -126,6 +126,10 @@ th, td {
   margin-top: 40px;
 }
 
+#create-playlist-btn:hover {
+  background-color: #333333;
+}
+
 .user-modal-link {
   width: 100%; 
   padding: 0px 20px 3px 20px !important; 
@@ -176,6 +180,18 @@ th, td {
 
 .search-doujin-row-lg { 
   width: 20%;
+}
+
+.single-playlist-wrapper {
+  display: inline-block; 
+  margin-bottom: 15px; 
+  border-radius: 5px; 
+  width: 20%; 
+  padding: 0 5px !important;
+}
+
+#createPlaylistModal button:focus {
+  outline:0;
 }
 
 .preview-info-cover {
@@ -1957,6 +1973,10 @@ div.sticky {
     width: 25%;
   }
 
+  .single-playlist-wrapper {
+    width: 25%; 
+  }
+
   .home-banner-exoclick-md {
     margin-top: 35px;
   }
@@ -1983,6 +2003,10 @@ div.sticky {
 
   #user-modal-panel {
     top: 30px !important;
+  }
+
+  .single-playlist-wrapper {
+    width: calc(100% / 3); 
   }
 
   .preview-top-content {
@@ -2286,6 +2310,10 @@ div.sticky {
     font-family: sans-serif;
   }
 
+  .single-playlist-wrapper {
+    width: 50%; 
+  }
+
   .user-modal-link {
     line-height: 44px !important;
   }
@@ -2352,6 +2380,14 @@ div.sticky {
 
   .home-rows-top {
     margin-top: -10px;
+  }
+
+  .playlist-rows-top {
+    margin-top: -58px;
+  }
+
+  .playlist-rows {
+    margin-top: -35px;
   }
 
   .preview-top-content h1 {

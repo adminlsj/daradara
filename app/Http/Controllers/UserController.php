@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Video;
 use App\Watch;
+use App\Playlist;
+use App\Playitem;
 use Illuminate\Http\Request;
 use Image;
 use Auth;
@@ -175,5 +177,34 @@ class UserController extends Controller
         } else {
             return Redirect::back()->withErrors('封面圖片上傳失敗，請重新上傳。');
         }
+    }
+
+    public function createPlaylist(Request $request)
+    {
+        $user = Auth::user();
+
+        $playlist = Playlist::create([
+            'user_id' => $user->id,
+            'title' => request('playlist-title'),
+            'is_private' => true,
+        ]);
+
+        $playitem = Playitem::create([
+            'user_id' => $user->id, 
+            'playlist_id' => $playlist->id, 
+            'video_id' => request('create-playlist-video-id'),
+        ]);
+
+        $last = false;
+        $id = $playlist->id;
+        $checked = true;
+        $title = $playlist->title;
+        $checkbox = '';
+        $checkbox .= view('video.playlist-checkbox', compact('last', 'id', 'checked', 'title', 'checkbox'));
+
+        return response()->json([
+            'checkbox' => $checkbox,
+            'csrf_token' => csrf_token(),
+        ]);
     }
 }

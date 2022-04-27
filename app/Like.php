@@ -19,4 +19,9 @@ class Like extends Model
     {
     	return Like::where('foreign_type', $type)->where('foreign_id', $foreign_id)->where('is_positive', $is_positive)->count();
     }
+
+    public function video()
+    {
+        return $this->belongsTo('App\Video', 'foreign_id');
+    }
 }

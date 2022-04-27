@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Video;
 use App\Save;
+use App\Like;
+use App\Playlist;
+use App\Playitem;
 use Illuminate\Http\Request;
 use Response;
 use Auth;
@@ -266,10 +269,34 @@ class HomeController extends Controller
     public function list()
     {
         if (Auth::check()) {
+
+            $user = Auth::user();
+
             $saves = Save::with(['video' => function($query) {
                 $query->where('cover', '!=', null)->select('id', 'title', 'cover', 'imgur');
-            }])->where('user_id', Auth::user()->id)->orderBy('created_at', 'desc')->paginate(42);
-            return view('layouts.list', compact('saves'));
+            }])->where('user_id', $user->id)->orderBy('created_at', 'desc')->limit(21)->get();
+
+            $likes = Like::where('user_id', $user->id)->where('foreign_type', 'video')->orderBy('created_at', 'desc')->limit(21)->get()->load(['video' => function ($query) {
+                $query->where('cover', '!=', null)->select('id', 'title', 'cover', 'imgur');
+            }]);
+
+            $playlists = Playlist::withCount('videos', 'videos_ref')->with([
+                'videos' => function($query) {
+                    $query->select('videos.id', 'cover', 'imgur')->orderBy('playitems.created_at', 'desc')->limit(1);;
+                },
+                'videos_ref' => function($query) {
+                    $query->select('videos.id', 'cover', 'imgur')->orderBy('playitems.created_at', 'desc')->limit(1);;
+                },
+                'user' => function($query) {
+                    $query->select('users.id', 'name');
+                },
+                'user_ref' => function($query) {
+                    $query->select('users.id', 'name');
+                }
+            ])->where('user_id', $user->id)->orderBy('created_at', 'desc')->limit(200)->get();
+
+            return view('layouts.list', compact('user', 'saves', 'likes', 'playlists'));
+
 
         } else {
             return redirect('/login');

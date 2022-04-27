@@ -40,7 +40,7 @@
 
 		<div class="content-padding-new home-rows-top">
 			<a class="home-rows-header" style="text-decoration: none;" href="/search?query=&genre=裏番">
-				<h5 style="color: #8e9194;">H動漫</h3>
+				<h5 style="color: #8e9194;">H動漫</h5>
 				<h3 style="font-weight: 700; color: #edeeef; margin-bottom: 20px;">最新里番</h3>
 				@include('layouts.home-row-arrow')
 			</a>
@@ -53,7 +53,7 @@
 
 		<div class="content-padding-new home-rows-margin-top">
 			<a class="home-rows-header" style="text-decoration: none;" href="/search?query=&genre=&sort=最新上傳">
-				<h5 style="color: #8e9194;">新鮮</h3>
+				<h5 style="color: #8e9194;">新鮮</h5>
 				<h3 style="font-weight: 700; color: #edeeef; margin-bottom: 20px;">最新上傳</h3>
 				@include('layouts.home-row-arrow')
 			</a>
@@ -77,7 +77,7 @@
 		<div style="margin-top: 20px;">
 			<div class="content-padding-new">
 				<a class="home-rows-header" style="text-decoration: none;" href="/search?query=&genre=裏番&sort=本月排行">
-					<h5 style="color: #8e9194; ">本月</h3>
+					<h5 style="color: #8e9194; ">本月</h5>
 					<h3 style="font-weight: 700; color: #edeeef; margin-bottom: 20px;">發燒影片</h3>
 					@include('layouts.home-row-arrow')
 				</a>
@@ -145,7 +145,7 @@
 		<div class="home-rows-margin-top">
 			<div class="content-padding-new">
 				<a class="home-rows-header" style="text-decoration: none;" href="/search?query=&genre=裏番&sort=他們在看">
-					<h5 style="color: #8e9194;">當下</h3>
+					<h5 style="color: #8e9194;">當下</h5>
 					<h3 style="font-weight: 700; color: #edeeef; margin-bottom: 20px;">熱門影片</h3>
 					@include('layouts.home-row-arrow')
 				</a>
@@ -190,7 +190,7 @@
 
 		<div class="hidden-xs content-padding-new home-rows-margin-top">
 			<a class="home-rows-header" style="text-decoration: none;" href="/search?query=&genre=全部&sort=他們在看">
-				<h5 style="color: #8e9194;">動態</h3>
+				<h5 style="color: #8e9194;">動態</h5>
 				<h3 style="font-weight: 700; color: #edeeef; margin-bottom: 20px;">他們在看</h3>
 				@include('layouts.home-row-arrow')
 			</a>
@@ -208,7 +208,7 @@
 
 		<div class="hidden-sm hidden-md hidden-lg content-padding-new home-rows-margin-top">
 			<a class="home-rows-header" style="text-decoration: none;" href="/search?query=&genre=全部&sort=他們在看">
-				<h5 style="color: #8e9194;">動態</h3>
+				<h5 style="color: #8e9194;">動態</h5>
 				<h3 style="font-weight: 700; color: #edeeef; margin-bottom: 20px;">他們在看</h3>
 				@include('layouts.home-row-arrow')
 			</a>
