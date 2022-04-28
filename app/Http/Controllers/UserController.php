@@ -247,7 +247,7 @@ class UserController extends Controller
             }])->where('playlist_id', $playlist->id)->orderBy('created_at', 'desc')->paginate(42);
             $title = $playlist->title;
             $sub = '清單';
-            $editable = $playlist->user_id == $user->id ? true : false;
+            $editable = $user && $user->id == $playlist->user_id ? true : false;
 
         } else {
             abort(404);
