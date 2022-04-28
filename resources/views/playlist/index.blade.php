@@ -35,7 +35,7 @@
       @endforeach
     </div>
 
-    <div class="content-padding-new playlist-rows" style="{{ $likes == '[]' ? 'margin-top: 0px;' : '' }}">
+    <div class="content-padding-new playlist-rows" style="{{ $saves == '[]' ? 'margin-top: 0px;' : '' }}">
       <a class="home-rows-header" style="text-decoration: none;" href="{{ route('playlist.show') }}?list=LL">
         <h5 style="color: #8e9194;">讚好</h5>
         <h3 style="font-weight: 700; color: #edeeef; margin-bottom: 20px;">喜歡的影片</h3>
@@ -60,7 +60,7 @@
       @endforeach
     </div>
 
-    <div class="content-padding-new playlist-rows" style="{{ $playlists == '[]' ? 'margin-top: 0px;' : '' }}">
+    <div class="content-padding-new playlist-rows" style="{{ $likes == '[]' ? 'margin-top: 0px;' : '' }}">
       <a class="home-rows-header" style="text-decoration: none;">
         <h5 style="color: #8e9194;">分類</h5>
         <h3 style="font-weight: 700; color: #edeeef; margin-bottom: 20px;">播放清單</h3>
