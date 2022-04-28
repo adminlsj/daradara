@@ -1,20 +1,22 @@
 <div id="playlistModal" class="modal" role="dialog">
   <div class="modal-dialog">
-    <div class="modal-content" style="border-radius: 3px; background-color: #222222; color: white">
+    <div class="modal-content" style="border-radius: 3px; background-color: #222222; color: white;">
       <div class="modal-header" style="border-bottom: 1px solid #333333; position: relative; height: 65px;">
         <span class="material-icons pull-left no-select modal-close-btn" data-dismiss="modal">close</span>
         <h4 class="modal-title" style="text-align: center; font-weight: bold; margin: 0; padding: 0; margin-top: 5px; font-size: 18px;">將影片儲存至...</h4>
       </div>
-      <div class="modal-body">
-        <form id="video-save-form" style="padding: 7px 9px 0px 9px;" action="{{ route('video.save') }}">
+      <div class="modal-body" style="padding: 0;">
+        <form id="video-save-form" style="padding: 10px 0px" action="{{ route('video.save') }}">
           {{ csrf_field() }}
 
           <input id="playlist-video-id" name="playlist-video-id" type="hidden" value="{{ $current->id }}">
 
-          <span id="playlist-save-checkbox">@include('video.playlist-checkbox', ['last' => false, 'checked' => $saved, 'id' => 'save', 'title' => '稍後觀看'])</span>
+          <span id="playlist-save-checkbox">
+            @include('video.playlist-checkbox', ['first' => true, 'checked' => $saved, 'id' => 'save', 'title' => '稍後觀看'])
+          </span>
 
           @foreach ($playlists as $playlist)
-            @include('video.playlist-checkbox', ['last' => $loop->last, 'checked' => $listed->where('playlist_id', $playlist->id) != '[]', 'id' => $playlist->id, 'title' => $playlist->title])
+            @include('video.playlist-checkbox', ['first' => false, 'checked' => $listed->where('playlist_id', $playlist->id) != '[]', 'id' => $playlist->id, 'title' => $playlist->title])
           @endforeach
 
         </form>

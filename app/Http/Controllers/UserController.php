@@ -274,12 +274,12 @@ class UserController extends Controller
             'video_id' => request('create-playlist-video-id'),
         ]);
 
-        $last = false;
+        $first = false;
         $id = $playlist->id;
         $checked = true;
         $title = $playlist->title;
         $checkbox = '';
-        $checkbox .= view('video.playlist-checkbox', compact('last', 'id', 'checked', 'title', 'checkbox'));
+        $checkbox .= view('video.playlist-checkbox', compact('first', 'id', 'checked', 'title', 'checkbox'));
 
         return response()->json([
             'checkbox' => $checkbox,
