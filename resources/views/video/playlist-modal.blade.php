@@ -47,7 +47,7 @@
         </div>
         <div class="modal-body" style="padding: 15px 19px 25px 19px;">
           <h4>名稱</h4>
-          <input id="playlist-title" name="playlist-title" style="margin-top: 5px; width: 100%; height: 40px; vertical-align: middle; border-top-left-radius: 2px; border-bottom-left-radius: 2px; border-top-right-radius: 0px; border-bottom-right-radius: 0px; background-color: #1e1e1e; border-color: #333333 !important; line-height: 35px; padding-left: 8px; font-size: 15px; padding-top: 0px" class="search-nav-bar" type="text" placeholder="輸入播放清單名稱..." required>
+          <input id="playlist-title" name="playlist-title" style="margin-top: 5px; width: 100%; height: 40px !important; border-top-left-radius: 2px; border-bottom-left-radius: 2px; border-top-right-radius: 0px; border-bottom-right-radius: 0px; background-color: #1e1e1e; border-color: #333333 !important; line-height: 40px !important; padding-left: 8px; font-size: 15px; vertical-align: middle;" class="search-nav-bar" type="text" placeholder="輸入播放清單名稱..." required>
         </div>
         <hr style="border-color: #333333; margin: 0;">
         <div class="modal-footer" style="border-top: none; width: 100%; text-align: center; padding: 0;">
