@@ -1,5 +1,12 @@
 @extends('layouts.app')
 
+@section('head')
+    @parent
+		<title>{{ $title }}&nbsp;-&nbsp;H動漫/裏番/線上看&nbsp;-&nbsp;Hanime1.me</title>
+		<meta name="title" content="{{ $title }} - H動漫/裏番/線上看 - Hanime1.me">
+		<meta name="description" content="{{ $title }} - H動漫/裏番/線上看 - Hanime1.me">
+@endsection
+
 @section('nav')
   @include('nav.main')
 @endsection

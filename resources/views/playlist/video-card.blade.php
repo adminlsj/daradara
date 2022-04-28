@@ -1,4 +1,4 @@
-<a style="text-decoration: none;" href="{{ route('video.watch') }}?v={{ $video->id }}" class="hover-opacity">
+<a style="text-decoration: none;" href="{{ route('video.watch') }}?v={{ $video->id }}" class="hover-opacity" target="_blank">
     <div class="home-rows-videos-div" style="position: relative; display: inline-block; margin-bottom:50px;">
       <div style="position: relative;">
         <img src="{{ $video->cover }}">
