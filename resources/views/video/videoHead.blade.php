@@ -1,6 +1,6 @@
 <meta property="og:url" content="{{ route('video.watch') }}?v={{ $video->id }}" />
 <meta property="og:type" content="article" />
-<meta property="og:title" content="{{ $video->translations['JP'] }}[中文字幕]" />
+<meta property="og:title" content="{{ $video->translations['JP'] }} - Hanime1.me" />
 <meta property="og:description" content="{{ $video->title }} {{ $video->caption }}" />
 <meta property="og:image" content="https://i.imgur.com/{{ $video->imgur }}h.png" />
 
