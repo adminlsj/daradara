@@ -24,7 +24,7 @@
       </div>
     </div>
   @else
-    <a style="padding-right: 0px" class="nav-icon pull-right" href="{{ route('home.list') }}">
+    <a style="padding-right: 0px" class="nav-icon pull-right" href="{{ route('playlist.index') }}">
       <span style="vertical-align: middle; margin-top: -1px;" class="material-icons">account_circle</span>
     </a>
   @endif

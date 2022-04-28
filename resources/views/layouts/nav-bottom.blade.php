@@ -15,8 +15,8 @@
   <a href="{{ Auth::check() ? route('user.userEditUpload', Auth::user()) : route('login') }}">
     <img style="height: 33px; margin-top: 5px;" src="https://cdn.jsdelivr.net/gh/guaishushukanlifan/Project-H@v2.0.0/asset/icon/create.png">
   </a>
-  <a href="{{ Auth::check() ? route('home.list') : route('login') }}">
-    @if (Request::is('*list*'))
+  <a href="{{ route('playlist.index') }}">
+    @if (Request::is('*playlist*'))
       <img style="height: 18px; margin-top: 8px;" src="https://cdn.jsdelivr.net/gh/guaishushukanlifan/Project-H@v2.0.0/asset/icon/playlist-filled.png">
       <div style="font-size: 9px; color: white; margin-top: 4px;">我的清單</div>
     @else

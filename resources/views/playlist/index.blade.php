@@ -70,7 +70,7 @@
         @foreach ($playlists as $playlist)
           @if ($video = $playlist->reference_id ? $playlist->videos_ref->first() : $playlist->videos->first())
             <div class="hover-lighter card-mobile-panel single-playlist-wrapper col-xs-6 col-sm-4 col-md-2 col-lg-2 {{ $loop->iteration > 10 ? 'hidden temp-hidden-playlists' : '' }}">
-              <a href="{{ route('playlist.show') }}?list={{ $playlist->id }}" style="text-decoration: none;">
+              <a href="{{ route('playlist.show') }}?list={{ $playlist->reference_id ? $playlist->reference_id : $playlist->id }}" style="text-decoration: none;">
                 <div style="position: relative;">
                   <img style="width: 100%;" src="https://cdn.jsdelivr.net/gh/guaishushukanlifan/Project-H@latest/asset/thumbnail/2jSdwcGl.jpg">
                   <img style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;" src="{{ $video->thumbL() }}">
@@ -86,13 +86,13 @@
 
               <div style="margin-top: 6px; padding: 0 8px;">
                 <div style="text-decoration: none; color: black;">
-                  <a href="{{ route('playlist.show') }}?list={{ $playlist->id }}" style="text-decoration: none; font-size: inherit;">
-                    <div class="card-mobile-title">{{ $playlist->title }}</div>
+                  <a href="{{ route('playlist.show') }}?list={{ $playlist->reference_id ? $playlist->reference_id : $playlist->id }}" style="text-decoration: none; font-size: inherit;">
+                    <div class="card-mobile-title">{{ $playlist->playlist_ref ? $playlist->playlist_ref->title : $playlist->title }}</div>
                   </a>
 
                   <div class="card-mobile-genre-wrapper">
                     <span class="card-mobile-genre-new" style="color: rgba(242, 38, 19, 1); border-color: rgba(242, 38, 19, 0.30);">清單</span>
-                    <div style="font-size: 12px; color: dimgray; margin-left: 2px; display: inline-block;" class="card-mobile-user">{{ $playlist->reference_user_id ? $playlist->user_ref->name : $playlist->user->name }}</div>
+                    <div style="font-size: 12px; color: dimgray; margin-left: 2px; display: inline-block;" class="card-mobile-user">{{ $playlist->user_ref ? $playlist->user_ref->name : $playlist->user->name }}</div>
                   </div>
                 </div>
               </div>
@@ -101,7 +101,7 @@
           @else
 
             <div class="hover-lighter card-mobile-panel single-playlist-wrapper col-xs-6 col-sm-4 col-md-2 col-lg-2 {{ $loop->iteration > 10 ? 'hidden temp-hidden-playlists' : '' }}">
-              <a href="{{ route('playlist.show') }}?list={{ $playlist->id }}" style="text-decoration: none;">
+              <a href="{{ route('playlist.show') }}?list={{ $playlist->reference_id ? $playlist->reference_id : $playlist->id }}" style="text-decoration: none;">
                 <div style="position: relative;">
                   <img style="width: 100%;" src="https://cdn.jsdelivr.net/gh/guaishushukanlifan/Project-H@latest/asset/thumbnail/2jSdwcGl.jpg">
                   <img style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;" src="https://i.imgur.com/qLIoSzml.png">
@@ -117,7 +117,7 @@
 
               <div style="margin-top: 6px; padding: 0 8px;">
                 <div style="text-decoration: none; color: black;">
-                  <a href="{{ route('playlist.show') }}?list={{ $playlist->id }}" style="text-decoration: none; font-size: inherit;">
+                  <a href="{{ route('playlist.show') }}?list={{ $playlist->reference_id ? $playlist->reference_id : $playlist->id }}" style="text-decoration: none; font-size: inherit;">
                     <div class="card-mobile-title">{{ $playlist->title }}</div>
                   </a>
 

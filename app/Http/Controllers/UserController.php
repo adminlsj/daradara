@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Video;
 use App\Watch;
+use App\Save;
+use App\Like;
 use App\Playlist;
 use App\Playitem;
 use Illuminate\Http\Request;
@@ -18,7 +20,7 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->only('edit', 'update', 'destroy', 'storeAvatar');
+        $this->middleware('auth')->only('edit', 'update', 'destroy', 'indexPlaylist', 'storeAvatar');
         $this->middleware('sameUser')->only('edit', 'update', 'destroy', 'storeAvatar', 'userEditUpload', 'userUpdateUpload');
     }
 
@@ -177,6 +179,79 @@ class UserController extends Controller
         } else {
             return Redirect::back()->withErrors('封面圖片上傳失敗，請重新上傳。');
         }
+    }
+
+    public function indexPlaylist(Request $request)
+    {
+        $user = Auth::user();
+
+        $saves = Save::with(['video' => function($query) {
+            $query->where('cover', '!=', null)->select('id', 'title', 'cover', 'imgur');
+        }])->where('user_id', $user->id)->orderBy('created_at', 'desc')->limit(21)->get();
+
+        $likes = Like::where('user_id', $user->id)->where('foreign_type', 'video')->orderBy('created_at', 'desc')->limit(21)->get()->load(['video' => function ($query) {
+            $query->where('cover', '!=', null)->select('id', 'title', 'cover', 'imgur');
+        }]);
+
+        $playlists = Playlist::withCount('videos', 'videos_ref')->with([
+            'videos' => function($query) {
+                $query->select('videos.id', 'cover', 'imgur')->orderBy('playitems.created_at', 'desc')->limit(1);
+            },
+            'videos_ref' => function($query) {
+                $query->select('videos.id', 'cover', 'imgur')->orderBy('playitems.created_at', 'desc')->limit(1);
+            },
+            'user' => function($query) {
+                $query->select('users.id', 'name');
+            },
+            'user_ref' => function($query) {
+                $query->select('users.id', 'name');
+            },
+            'playlist_ref' => function($query) {
+                $query->select('id', 'title', 'description');
+            }
+        ])->where('user_id', $user->id)->orderBy('created_at', 'desc')->limit(200)->get();
+
+        return view('playlist.index', compact('user', 'saves', 'likes', 'playlists'));
+    }
+
+    public function showPlaylist(Request $request)
+    {
+        $user = auth()->user();
+        $pid = $request->list;
+        $title = '播放清單';
+        $sub = '分類';
+
+        if ($pid == 'WL' && auth()->check()) {
+            $results = Save::with(['video' => function($query) {
+                $query->where('cover', '!=', null)->select('id', 'title', 'cover', 'imgur');
+            }])->where('user_id', $user->id)->orderBy('created_at', 'desc')->paginate(42);
+            $title = '稍後觀看';
+            $sub = '儲存';
+
+        } elseif ($pid == 'LL' && auth()->check()) {
+            $results = Like::with(['video' => function($query) {
+                $query->where('cover', '!=', null)->select('id', 'title', 'cover', 'imgur');
+            }])->where('user_id', $user->id)->where('foreign_type', 'video')->orderBy('created_at', 'desc')->paginate(42);
+            $title = '喜歡的影片';
+            $sub = '讚好';
+
+        } elseif (is_numeric($pid) && $playlist = Playlist::find($pid)) {
+            if ($playlist->reference_id) {
+                return Redirect::route('playlist.show', ['list' => $playlist->reference_id]);
+            }
+            $results = Playitem::with(['video' => function($query) {
+                $query->where('cover', '!=', null)->select('id', 'title', 'cover', 'imgur');
+            }])->where('playlist_id', $playlist->id)->orderBy('created_at', 'desc')->paginate(42);
+            $title = $playlist->title;
+            $sub = '清單';
+
+        } else {
+            abort(404);
+        }
+
+        $doujin = false;
+
+        return view('playlist.show', compact('results', 'title', 'sub', 'doujin'));
     }
 
     public function createPlaylist(Request $request)

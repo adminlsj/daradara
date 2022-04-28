@@ -45,4 +45,9 @@ class Playlist extends Model
             'video_id' // Local key on Playitem table...
         );
     }
+
+    public function playlist_ref()
+    {
+        return $this->belongsTo('App\Playlist', 'reference_id');
+    }
 }
