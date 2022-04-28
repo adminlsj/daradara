@@ -278,8 +278,9 @@ class UserController extends Controller
         $id = $playlist->id;
         $checked = true;
         $title = $playlist->title;
+        $private = false;
         $checkbox = '';
-        $checkbox .= view('video.playlist-checkbox', compact('first', 'id', 'checked', 'title', 'checkbox'));
+        $checkbox .= view('video.playlist-checkbox', compact('first', 'id', 'checked', 'title', 'private'));
 
         return response()->json([
             'checkbox' => $checkbox,
