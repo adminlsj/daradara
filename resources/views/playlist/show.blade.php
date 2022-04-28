@@ -16,8 +16,20 @@
         <h3 style="font-weight: 700; color: #edeeef; margin-bottom: 20px;">{{ $title }}</h3>
         @include('layouts.home-row-arrow')
       </a>
+
+      @if ($editable)
+	      <button class="no-select" style="background-color: crimson; border: 1px solid crimson; color: #d9d9d9; border-radius: 3px; padding: 9px 20px 9px 18px; opacity: 0.5; filter: alpha(opacity=50); margin-right: 1px; margin-bottom: 25px;">
+	        <span style="vertical-align: middle; font-size: 18px; margin-top: -5px; margin-right: 5px; cursor: pointer;" class="material-icons">edit</span>編輯
+	      </button>
+	      <button class="no-select" style="background-color: #4d4d4d; border: 1px solid #4d4d4d; color: #d9d9d9; border-radius: 3px; padding: 9px 20px 9px 18px; opacity: 0.5; filter: alpha(opacity=50); margin-right: 1px; margin-bottom: 25px;">
+	        <span style="vertical-align: middle; font-size: 18px; margin-top: -4px; margin-right: 5px; cursor: pointer;" class="material-icons">share</span>分享
+	      </button>
+	      <button class="no-select" style="background-color: transparent; border: 1px solid dimgray; color: #d9d9d9; border-radius: 3px; padding: 9px 20px 9px 18px; opacity: 0.5; filter: alpha(opacity=50); margin-right: 1px; margin-bottom: 25px;">
+	        <span style="vertical-align: middle; font-size: 20px; margin-top: -5px; margin-right: 5px; cursor: pointer;" class="material-icons">delete_outline</span>刪除
+	      </button>
+      @endif
     </div>
-    <div id="home-rows-wrapper" style="position: relative; margin-top: 0px;">
+    <div id="home-rows-wrapper" style="position: relative; margin-top: 0;">
     	<div class="home-rows-videos-wrapper" style="white-space: normal; margin-left: -2px; margin-right: -2px;">
 			@foreach ($results as $save)
 				@if ($save->video)

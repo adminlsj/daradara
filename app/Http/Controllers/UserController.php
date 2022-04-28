@@ -220,6 +220,7 @@ class UserController extends Controller
         $pid = $request->list;
         $title = '播放清單';
         $sub = '分類';
+        $editable = false;
 
         if ($pid == 'WL' && auth()->check()) {
             $results = Save::with(['video' => function($query) {
@@ -227,6 +228,7 @@ class UserController extends Controller
             }])->where('user_id', $user->id)->orderBy('created_at', 'desc')->paginate(42);
             $title = '稍後觀看';
             $sub = '儲存';
+            $editable = true;
 
         } elseif ($pid == 'LL' && auth()->check()) {
             $results = Like::with(['video' => function($query) {
@@ -234,6 +236,7 @@ class UserController extends Controller
             }])->where('user_id', $user->id)->where('foreign_type', 'video')->orderBy('created_at', 'desc')->paginate(42);
             $title = '喜歡的影片';
             $sub = '讚好';
+            $editable = true;
 
         } elseif (is_numeric($pid) && $playlist = Playlist::find($pid)) {
             if ($playlist->reference_id) {
@@ -244,6 +247,7 @@ class UserController extends Controller
             }])->where('playlist_id', $playlist->id)->orderBy('created_at', 'desc')->paginate(42);
             $title = $playlist->title;
             $sub = '清單';
+            $editable = $playlist->user_id == $user->id ? true : false;
 
         } else {
             abort(404);
@@ -251,7 +255,7 @@ class UserController extends Controller
 
         $doujin = false;
 
-        return view('playlist.show', compact('results', 'title', 'sub', 'doujin'));
+        return view('playlist.show', compact('results', 'title', 'sub', 'doujin', 'pid', 'editable'));
     }
 
     public function createPlaylist(Request $request)
