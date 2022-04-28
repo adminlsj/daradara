@@ -12,11 +12,11 @@
           <input id="playlist-video-id" name="playlist-video-id" type="hidden" value="{{ $current->id }}">
 
           <span id="playlist-save-checkbox">
-            @include('video.playlist-checkbox', ['first' => true, 'checked' => $saved, 'id' => 'save', 'title' => '稍後觀看'])
+            @include('video.playlist-checkbox', ['first' => true, 'checked' => $saved, 'id' => 'save', 'title' => '稍後觀看', 'private' => true])
           </span>
 
           @foreach ($playlists as $playlist)
-            @include('video.playlist-checkbox', ['first' => false, 'checked' => $listed->where('playlist_id', $playlist->id) != '[]', 'id' => $playlist->id, 'title' => $playlist->title])
+            @include('video.playlist-checkbox', ['first' => false, 'checked' => $listed->where('playlist_id', $playlist->id) != '[]', 'id' => $playlist->id, 'title' => $playlist->title, 'private' => false])
           @endforeach
 
         </form>
