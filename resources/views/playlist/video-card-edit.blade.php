@@ -1,4 +1,19 @@
-<div id="playlist-show-video-wrapper-{{ $video->id }}" class="home-rows-videos-div hover-opacity" style="display: inline-block; margin-bottom:50px;">
+<a style="text-decoration: none;" href="{{ route('video.watch') }}?v={{ $video->id }}" class="hover-opacity" target="_blank">
+    <div class="home-rows-videos-div" style="position: relative; display: inline-block; margin-bottom:50px;">
+      <div style="position: relative;">
+        <img src="{{ $video->cover }}">
+        @if (strpos($video->cover, 'E6mSQA2') !== false)
+          <img style="position: absolute; top: 0; left: 0; height: 100%; object-fit: cover" src="{{ $video->thumbL() }}">
+        @endif
+      </div>
+      <div class="home-rows-videos-title" style="position:absolute; bottom:0; left:0; white-space: initial; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; color: white; width: 100%; padding: 2px 5px; background: linear-gradient(to bottom, transparent 0%, black 120%);">{{ $video->title }}</div>
+    </div>
+</a>
+
+
+
+
+<!-- <div id="playlist-show-video-wrapper-{{ $video->id }}" class="home-rows-videos-div hover-opacity col-xs-4 col-sm-3 col-md-2 col-lg-2" style="position: relative; display: inline-block; margin-bottom:50px;">
 
   <div style="position: relative;">
     <a class="playlist-show-links" style="text-decoration: none;" href="{{ route('video.watch') }}?v={{ $video->id }}" target="_blank">
@@ -27,4 +42,4 @@
       <div class="home-rows-videos-title" style="position:absolute; bottom:0; left:0; white-space: initial; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; color: white; width: 100%; padding: 2px 5px; background: linear-gradient(to bottom, transparent 0%, black 120%);">{{ $video->title }}</div>
     </a>
   </div>
-</div>
+</div> -->
