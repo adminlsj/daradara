@@ -35,7 +35,7 @@
 	      </button>
 	    @endif
 
-      <button class="no-select playlist-show-btn" style="background-color: transparent; color: white; margin-left: 3px;">
+      <button class="no-select playlist-show-btn" style="background-color: transparent; color: white; margin-left: 3px;" data-toggle="modal" data-target="#shareModal">
         <span style="vertical-align: middle; font-size: 18px; margin-top: -4px; margin-right: 5px; cursor: pointer;" class="material-icons">share</span>分享
       </button>
     </div>
@@ -71,6 +71,7 @@
 
 </div>
 
+@include('video.shareModal')
 @include('layouts.nav-bottom')
 
 @endsection
