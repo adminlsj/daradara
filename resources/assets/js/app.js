@@ -373,6 +373,7 @@ $('.playlist-show-edit-btn').click(function(){
         $(this).css('border-color', 'crimson');
         $(this).css('color', 'white');
         $('.playitem-delete-form').css('display', 'block');
+        $('.playlist-show-links').bind('click', false);
 
     } else if (text.text() == '完成編輯') {
         text.text('編輯影片');
@@ -381,6 +382,7 @@ $('.playlist-show-edit-btn').click(function(){
         $(this).css('border-color', 'white');
         $(this).css('color', '#222222');
         $('.playitem-delete-form').css('display', 'none');
+        $('.playlist-show-links').unbind('click', false);
     }
 });
 
