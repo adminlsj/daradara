@@ -1,4 +1,4 @@
-<div id="playlist-show-video-wrapper-{{ $video->id }}" class="home-rows-videos-div hover-opacity col-xs-4 col-sm-3 col-md-2 col-lg-2" style="position: relative; display: inline-block; margin-bottom:50px;">
+<div id="playlist-show-video-wrapper-{{ $video->id }}" class="home-rows-videos-div hover-opacity" style="position: relative; display: inline-block; margin-bottom:50px;">
 
   <div style="position: relative;">
     <a class="playlist-show-links" style="text-decoration: none;" href="{{ route('video.watch') }}?v={{ $video->id }}" target="_blank">
