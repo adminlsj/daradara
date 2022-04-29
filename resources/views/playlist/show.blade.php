@@ -39,7 +39,7 @@
       </button>
     </div>
 
-    <div id="home-rows-wrapper" class="search-rows-wrapper" style="position: relative; margin-top: 0px;">
+    <div id="home-rows-wrapper" style="position: relative; margin-top: 0px;">
     	<div class="home-rows-videos-wrapper" style="white-space: normal; margin-left: -2px; margin-right: -2px;">
 				@foreach ($results as $save)
 					@if ($save->video)
