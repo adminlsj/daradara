@@ -6,17 +6,18 @@ use App\Comic;
 use App\Nhentai;
 use App\Helper;
 use Illuminate\Http\Request;
+use Redirect;
 
 class ComicController extends Controller
 {
     public function index(Request $request)
     {
         if (!$request->has('query') || $request->page == 1) {
-            $trending = Comic::orderBy('day_views', 'desc')->select('id', 'galleries_id', 'title_n_before', 'title_n_pretty', 'title_n_after', 'extension', 'created_at')->limit(6)->get();
+            $trending = Comic::orderBy('day_views', 'desc')->select('id', 'nhentai_id', 'galleries_id', 'title_n_before', 'title_n_pretty', 'title_n_after', 'extension', 'prefix', 'created_at')->limit(6)->get();
         } else {
             $trending = null;
         }
-        $newest = Comic::orderBy('created_at', 'desc')->select('id', 'galleries_id', 'title_n_before', 'title_n_pretty', 'title_n_after', 'extension', 'created_at')->paginate(30);
+        $newest = Comic::orderBy('created_at', 'desc')->select('id', 'nhentai_id', 'galleries_id', 'title_n_before', 'title_n_pretty', 'title_n_after', 'extension', 'prefix', 'created_at')->paginate(30);
 
         return view('comic.index', compact('trending', 'newest'));
     }
@@ -62,14 +63,25 @@ class ComicController extends Controller
 
             $count = count($related);
             if ($count <= 1) {
-                $related = Comic::where('id', $related)->select('id', 'galleries_id', 'title_n_before', 'title_n_pretty', 'title_n_after', 'extension', 'created_at')->get();
+                $related = Comic::where('id', $related)->select('id', 'nhentai_id', 'galleries_id', 'title_n_before', 'title_n_pretty', 'title_n_after', 'extension', 'prefix', 'created_at')->get();
             } else {
                 $selected = $count < 6 ? $count : 6;
                 $related = array_rand($related, $selected);
-                $related = Comic::select('id', 'galleries_id', 'title_n_before', 'title_n_pretty', 'title_n_after', 'extension', 'created_at')->find($related);
+                $related = Comic::select('id', 'nhentai_id', 'galleries_id', 'title_n_before', 'title_n_pretty', 'title_n_after', 'extension', 'prefix', 'created_at')->find($related);
             }
 
-            return view('comic.show-cover', compact('comic', 'comics', 'metadata', 'related'));
+            $prefix = '';
+            $prefix_t = '';
+            $is_nhentai = true;
+            if ($comic->nhentai_id != null) {
+                $prefix = 'https://i.nhentai.net/galleries/'.$comic->galleries_id.'/';
+                $prefix_t = 'https://t.nhentai.net/galleries/'.$comic->galleries_id.'/';
+            } else {
+                $prefix = $prefix_t = $comic->prefix;
+                $is_nhentai = false;
+            }
+
+            return view('comic.show-cover', compact('comic', 'comics', 'metadata', 'related', 'prefix', 'prefix_t', 'is_nhentai'));
 
         } else {
             abort(404);
@@ -93,7 +105,16 @@ class ComicController extends Controller
             $comic->views++;
             $comic->save();
 
-            return view('comic.show-content', compact('comic', 'page', 'extensions'));
+            $prefix = '';
+            $is_nhentai = true;
+            if ($comic->nhentai_id != null) {
+                $prefix = 'https://i.nhentai.net/galleries/'.$comic->galleries_id.'/';
+            } else {
+                $prefix = $comic->prefix;
+                $is_nhentai = false;
+            }
+
+            return view('comic.show-content', compact('comic', 'page', 'extensions', 'prefix', 'is_nhentai'));
 
         } else {
             abort(404);
@@ -142,7 +163,7 @@ class ComicController extends Controller
                 break;
         }
 
-        $comics = $comics->select('id', 'galleries_id', 'title_n_before', 'title_n_pretty', 'title_n_after', 'extension', 'created_at')->paginate(30);
+        $comics = $comics->select('id', 'nhentai_id', 'galleries_id', 'title_n_before', 'title_n_pretty', 'title_n_after', 'extension', 'prefix', 'created_at')->paginate(30);
 
         return view('comic.search', compact('comics', 'query'));
     }
@@ -185,7 +206,7 @@ class ComicController extends Controller
                 break;
         }
 
-        $comics = $comics->select('id', 'galleries_id', 'title_n_before', 'title_n_pretty', 'title_n_after', 'extension', 'created_at')->paginate(30);
+        $comics = $comics->select('id', 'nhentai_id', 'galleries_id', 'title_n_before', 'title_n_pretty', 'title_n_after', 'extension', 'prefix', 'created_at')->paginate(30);
 
         $count = $comics->total();
 
@@ -198,5 +219,60 @@ class ComicController extends Controller
         return response()->json([
             'id' => $random->id,
         ]);
+    }
+
+    public function uploadComicFrom431()
+    {
+        $existing = Comic::find(431);
+        $comic = Comic::create([
+            'nhentai_id' => $existing->nhentai_id,
+            'galleries_id' => $existing->galleries_id,
+            'title_n_before' => $existing->title_n_before,
+            'title_n_pretty' => $existing->title_n_pretty,
+            'title_n_after' => $existing->title_n_after,
+            'title_o_before' => $existing->title_o_before,
+            'title_o_pretty' => $existing->title_o_pretty,
+            'title_o_after' => $existing->title_o_after,
+            'parodies' => $existing->parodies,
+            'characters' => $existing->characters,
+            'tags' => $existing->tags,
+            'artists' => $existing->artists,
+            'groups' => $existing->groups,
+            'languages' => $existing->languages,
+            'categories' => $existing->categories,
+            'pages' => $existing->pages,
+            'extension' => $existing->extension,
+            'extensions' => $existing->extensions,
+            'created_at' => $existing->created_at,
+            'prefix' => $existing->prefix,
+        ]);
+
+        $searchtext = $comic->title_n_before
+                     .$comic->title_n_pretty
+                     .$comic->title_n_after
+                     .$comic->title_o_before
+                     .$comic->title_o_pretty
+                     .$comic->title_o_after
+                     .implode($comic->parodies)
+                     .implode($comic->characters)
+                     .implode($comic->tags)
+                     .implode($comic->artists)
+                     .implode($comic->groups)
+                     .implode($comic->languages)
+                     .implode($comic->categories);
+        $searchtext = mb_strtolower($searchtext);
+        $searchtext = preg_replace('/\s+/', '', $searchtext);
+        $searchtext = preg_split('//u', $searchtext, -1, PREG_SPLIT_NO_EMPTY);
+        foreach ($searchtext as &$character) {
+            if (strlen($character) != mb_strlen($character, 'utf-8')) {
+                $character = bin2hex(iconv('UTF-8', 'UTF-16BE', $character));
+            }
+        }
+        $searchtext = implode($searchtext);
+        $comic->searchtext = $searchtext;
+        $comic->save();
+        $existing->delete();
+
+        return Redirect::route('comic.showCover', ['comic' => $comic->id]);
     }
 }

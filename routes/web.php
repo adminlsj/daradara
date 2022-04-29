@@ -104,6 +104,8 @@ Route::group(['middleware' => 'admin'], function () {
 	Route::get('/uploadNhentai', 'BotController@uploadNhentai');
 	Route::get('/translateNhentaiTag', 'BotController@translateNhentaiTag');
 
+	Route::get('/uploadComicFrom431', 'ComicController@uploadComicFrom431');
+
 	Route::get('/clearLaravelLogs', 'BotController@clearLaravelLogs');
 
 	Route::get('/checkAvbebeEporner', 'BotController@checkAvbebeEporner');

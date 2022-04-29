@@ -33,6 +33,12 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
+        /* $array = [];
+        for ($i=0; $i < 236; $i++) { 
+            array_push($array, 'j');
+        }
+        return $array; */
+
         /* $data = "";
         $parse = explode('#EXTINF', $data);
         array_shift($parse);        

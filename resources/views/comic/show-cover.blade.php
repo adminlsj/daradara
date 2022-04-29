@@ -17,7 +17,7 @@
   <div class="row">
     <div class="col-md-4">
       <a href="{{ route('comic.showContent', ['comic' => $comic, 'page' => 1]) }}">
-        <img class="lazy" style="border-radius: 5px; width: 100%;" src="https://t.nhentai.net/galleries/{{ $comic->galleries_id }}/cover.{{ $comic->extension }}" data-src="https://i.nhentai.net/galleries/{{ $comic->galleries_id }}/1.{{ App\Nhentai::$parseExt[$comic->extensions[0]] }}" data-srcset="https://i.nhentai.net/galleries/{{ $comic->galleries_id }}/1.{{ App\Nhentai::$parseExt[$comic->extensions[0]] }}">
+        <img class="lazy" style="border-radius: 5px; width: 100%;" src="{{ $prefix_t }}{{ $is_nhentai ? 'cover' : App\Comic::addZerosToPage(0) }}.{{ $comic->extension }}" data-src="{{ $prefix }}{{ $is_nhentai ? 1 : App\Comic::addZerosToPage(0) }}.{{ App\Nhentai::$parseExt[$comic->extensions[0]] }}" data-srcset="{{ $prefix }}{{ $is_nhentai ? 1 : App\Comic::addZerosToPage(0) }}.{{ App\Nhentai::$parseExt[$comic->extensions[0]] }}">
       </a>
     </div>
     <div class="col-md-8">
@@ -59,7 +59,7 @@
         <button class="no-select" style="background-color: crimson; border: none; color: #d9d9d9; border-radius: 3px; padding: 10px 20px 10px 18px; opacity: 0.5; filter: alpha(opacity=50); margin-right: 1px;">
           <span style="vertical-align: middle; font-size: 18px; margin-top: -3px; margin-right: 5px; cursor: pointer;" class="material-icons">favorite</span>加入最愛
         </button>
-        <a class="no-select hover-lighter" style="background-color: #4d4d4d; border: none; color: #d9d9d9; border-radius: 3px; padding: 10px 20px 10px 15px; text-decoration: none;" href="https://nhentai.net/g/{{ $comic->nhentai_id }}/download" target="_blank">
+        <a class="no-select hover-lighter" style="background-color: #4d4d4d; border: none; color: #d9d9d9; border-radius: 3px; padding: 10px 20px 10px 15px; text-decoration: none;" href="{{ $is_nhentai ? 'https://nhentai.net/g/'.$comic->nhentai_id.'/download' :  'https://www.wnacg.org/download-index-aid-'.$comic->galleries_id.'.html' }}" target="_blank">
           <span style="vertical-align: middle; font-size: 20px; margin-top: -3px; margin-bottom: -2px; margin-right: 5px; cursor: pointer;" class="material-icons">download</span>下載
         </a>
       </div>
@@ -71,7 +71,7 @@
 <div class="comics-panel-margin comics-panel-margin-top comics-panel-padding comics-thumbnail-wrapper comic-rows-wrapper" style="position: relative;">
   @for ($i = 1; $i <= $comic->pages; $i++)
     <a href="{{ route('comic.showContent', ['comic' => $comic, 'page' => $i]) }}">
-      <img class="lazy comic-rows-videos-div hover-lighter {{ $i > 12 ? 'hidden' : '' }}" style="border-radius: 5px; margin-bottom: 4px; vertical-align: top" src="https://i.imgur.com/0n3iJ9Ol.jpg" data-srcset="https://t.nhentai.net/galleries/{{ $comic->galleries_id }}/{{ $i }}t.{{ App\Nhentai::$parseExt[$comic->extensions[$i - 1]] }}">
+      <img class="lazy comic-rows-videos-div hover-lighter {{ $i > 12 ? 'hidden' : '' }}" style="border-radius: 5px; margin-bottom: 4px; vertical-align: top" src="https://i.imgur.com/0n3iJ9Ol.jpg" data-srcset="{{ $prefix_t }}{{ $is_nhentai ? $i.'t' : App\Comic::addZerosToPage($i - 1) }}.{{ App\Nhentai::$parseExt[$comic->extensions[$i - 1]] }}">
     </a>
   @endfor
   <div id="comics-thumbnail-show-btn-wrapper" style="{{ $comic->pages <= 12 ? 'display:none' : '' }}">
