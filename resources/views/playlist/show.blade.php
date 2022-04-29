@@ -18,10 +18,9 @@
   <div style="position: relative; margin-top: 0px; padding-top: 100px;">
 
     <div class="content-padding-new playlist-rows-top">
-      <a class="home-rows-header" style="text-decoration: none;" href="{{ route('playlist.index') }}">
+      <a class="home-rows-header" style="text-decoration: none;">
         <h5 id="playitems-count" data-count="{{ $count }}" style="color: #8e9194;">{{ $count }} 部影片</h5>
         <h3 style="font-weight: 700; color: #edeeef; margin-bottom: 20px;">{{ $title }}</h3>
-        @include('layouts.home-row-arrow')
       </a>
 
       @if ($editable)
