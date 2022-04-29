@@ -221,13 +221,14 @@ class UserController extends Controller
         $title = '播放清單';
         $sub = '分類';
         $editable = false;
+        $count = 0;
 
         if ($pid == 'WL' && auth()->check()) {
             $results = Save::with(['video' => function($query) {
                 $query->where('cover', '!=', null)->select('id', 'title', 'cover', 'imgur');
             }])->where('user_id', $user->id)->orderBy('created_at', 'desc')->paginate(42);
             $title = '稍後觀看';
-            $sub = '儲存';
+            $count = $results->count();
             $editable = true;
 
         } elseif ($pid == 'LL' && auth()->check()) {
@@ -235,7 +236,7 @@ class UserController extends Controller
                 $query->where('cover', '!=', null)->select('id', 'title', 'cover', 'imgur');
             }])->where('user_id', $user->id)->where('foreign_type', 'video')->orderBy('created_at', 'desc')->paginate(42);
             $title = '喜歡的影片';
-            $sub = '讚好';
+            $count = $results->count();
             $editable = true;
 
         } elseif (is_numeric($pid) && $playlist = Playlist::find($pid)) {
@@ -246,7 +247,7 @@ class UserController extends Controller
                 $query->where('cover', '!=', null)->select('id', 'title', 'cover', 'imgur');
             }])->where('playlist_id', $playlist->id)->orderBy('created_at', 'desc')->paginate(42);
             $title = $playlist->title;
-            $sub = '清單';
+            $count = $results->count();
             $editable = $user && $user->id == $playlist->user_id ? true : false;
 
         } else {
@@ -255,7 +256,7 @@ class UserController extends Controller
 
         $doujin = false;
 
-        return view('playlist.show', compact('results', 'title', 'sub', 'doujin', 'pid', 'editable'));
+        return view('playlist.show', compact('results', 'title', 'sub', 'doujin', 'pid', 'editable', 'count'));
     }
 
     public function createPlaylist(Request $request)
@@ -284,6 +285,36 @@ class UserController extends Controller
 
         return response()->json([
             'checkbox' => $checkbox,
+            'csrf_token' => csrf_token(),
+        ]);
+    }
+
+    public function deletePlayitem(Request $request)
+    {
+        $user = auth()->user();
+        $playlist_id = request('playlist_id');
+        $video_id = request('video_id');
+        $count = request('count');
+
+        if ($playlist_id == 'WL' && $save = Save::where('user_id', $user->id)->where('video_id', $video_id)->first()) {
+            $save->delete();
+            $count--;
+
+        } elseif ($playlist_id == 'LL' && $like = Like::where('user_id', $user->id)->where('foreign_id', $video_id)->where('foreign_type', 'video')->first()) {
+            $like->delete();
+            $count--;
+
+        } elseif (is_numeric($playlist_id) && $playitem = Playitem::where('user_id', $user->id)->where('playlist_id', $playlist_id)->where('video_id', $video_id)->first()) {
+            $playitem->delete();
+            $count--;
+
+        } else {
+            abort(404);
+        }
+
+        return response()->json([
+            'video_id' => $video_id,
+            'count' => $count,
             'csrf_token' => csrf_token(),
         ]);
     }

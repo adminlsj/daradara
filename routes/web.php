@@ -33,6 +33,7 @@ Route::get('/loadReplies', 'VideoController@loadReplies')->name('comment.loadRep
 Route::get('/playlists', 'UserController@indexPlaylist')->name('playlist.index');
 Route::get('/playlist', 'UserController@showPlaylist')->name('playlist.show');
 Route::post('/createPlaylist', 'UserController@createPlaylist')->name('playlist.create');
+Route::post('/deletePlayitem', 'UserController@deletePlayitem')->name('playitem.delete');
 
 Route::get('/about', 'HomeController@about');
 Route::get('/contact', 'HomeController@contact');

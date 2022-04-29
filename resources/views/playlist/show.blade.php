@@ -19,28 +19,32 @@
 
     <div class="content-padding-new playlist-rows-top">
       <a class="home-rows-header" style="text-decoration: none;" href="{{ route('playlist.index') }}">
-        <h5 style="color: #8e9194;">{{ $sub }}</h5>
+        <h5 id="playitems-count" data-count="{{ $count }}" style="color: #8e9194;">{{ $count }} 部影片</h5>
         <h3 style="font-weight: 700; color: #edeeef; margin-bottom: 20px;">{{ $title }}</h3>
         @include('layouts.home-row-arrow')
       </a>
 
       @if ($editable)
-	      <button class="no-select" style="background-color: crimson; border: 1px solid crimson; color: #d9d9d9; border-radius: 3px; padding: 9px 20px 9px 18px; opacity: 0.5; filter: alpha(opacity=50); margin-right: 1px; margin-bottom: 25px;">
-	        <span style="vertical-align: middle; font-size: 18px; margin-top: -5px; margin-right: 5px; cursor: pointer;" class="material-icons">edit</span>編輯
+	      <button class="no-select playlist-show-btn playlist-show-edit-btn" style="margin-right: 3px;">
+	        <span id="playlist-show-edit-btn-icon" style="vertical-align: middle; font-size: 25px; margin-top: -5px; margin-right: 5px; cursor: pointer;" class="material-icons-outlined">edit_note</span><span id="playlist-show-edit-btn-text">編輯影片</span>
 	      </button>
-	      <button class="no-select" style="background-color: #4d4d4d; border: 1px solid #4d4d4d; color: #d9d9d9; border-radius: 3px; padding: 9px 20px 9px 18px; opacity: 0.5; filter: alpha(opacity=50); margin-right: 1px; margin-bottom: 25px;">
-	        <span style="vertical-align: middle; font-size: 18px; margin-top: -4px; margin-right: 5px; cursor: pointer;" class="material-icons">share</span>分享
+
+	    @else
+	      <button class="no-select playlist-show-btn" style="opacity: 0.5; margin-right: 3px;">
+	        <span style="vertical-align: middle; font-size: 18px; margin-top: -5px; margin-right: 5px; cursor: pointer;" class="material-icons">edit</span>儲存清單
 	      </button>
-	      <button class="no-select" style="background-color: transparent; border: 1px solid dimgray; color: #d9d9d9; border-radius: 3px; padding: 9px 20px 9px 18px; opacity: 0.5; filter: alpha(opacity=50); margin-right: 1px; margin-bottom: 25px;">
-	        <span style="vertical-align: middle; font-size: 20px; margin-top: -5px; margin-right: 5px; cursor: pointer;" class="material-icons">delete_outline</span>刪除
-	      </button>
-      @endif
+	    @endif
+
+      <button class="no-select playlist-show-btn" style="background-color: transparent; color: white; margin-left: 3px;">
+        <span style="vertical-align: middle; font-size: 18px; margin-top: -4px; margin-right: 5px; cursor: pointer;" class="material-icons">share</span>分享
+      </button>
     </div>
+
     <div id="home-rows-wrapper" style="position: relative; margin-top: 0;">
     	<div class="home-rows-videos-wrapper" style="white-space: normal; margin-left: -2px; margin-right: -2px;">
 			@foreach ($results as $save)
 				@if ($save->video)
-					@include('playlist.video-card', ['video' => $save->video])
+					@include('playlist.video-card-edit', ['video' => $save->video])
 				@endif
 			@endforeach
 		</div>

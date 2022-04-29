@@ -108,7 +108,20 @@ th, td {
 
 .playlist-checkbox-wrapper:hover { 
   background-color: #333333;
- }
+}
+
+.playlist-show-btn {
+  background-color: white; 
+  border: 1px solid white; 
+  color: #222222; 
+  border-radius: 2px; 
+  padding: 9px 20px 9px 18px; 
+  filter: alpha(opacity=50); 
+  margin-bottom: 23px; 
+  width: 140px;
+  font-weight: normal;
+  height: 40px;
+}
 
 /* Hide scrollbar for Chrome, Safari and Opera */
 .hide-scrollbar::-webkit-scrollbar {
@@ -2383,6 +2396,10 @@ div.sticky {
 @media (max-width: 767.9px) {
   body {
     font-family: sans-serif;
+  }
+
+  .playlist-show-btn {
+    width: calc(50% - 6px);
   }
 
   .single-playlist-wrapper {

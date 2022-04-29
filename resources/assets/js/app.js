@@ -333,6 +333,57 @@ $('.show-more-caption').click(function(){
     }
 });
 
+$('.playitem-delete-btn').on('click', function () {
+    var form = $(this).closest("form");
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    })
+
+    $.ajax({
+        type:"POST",
+        url: form.attr("action"),
+        data: jQuery.param({ 
+            playlist_id: form.find('input[name="playlist-show-id"]').val(),
+            video_id: form.find('input[name="playlist-show-video-id"]').val(),
+            count: $('#playitems-count').data('count')
+        }),
+        dataType: 'json',
+        success: function(data){
+            $('div#playlist-show-video-wrapper-' + data.video_id).remove();
+            $('#playitems-count').text(data.count + ' 部影片');
+            $('#playitems-count').data('count', data.count);
+        },
+        error: function(xhr, ajaxOptions, thrownError){
+            $('div#playlist-show-video-wrapper-' + data.video_id).html(xhr + ajaxOptions + thrownError);
+            showSnackbar('請刷新頁面後重試。');
+        }
+    })
+});
+
+$('.playlist-show-edit-btn').click(function(){
+    var text = $('#playlist-show-edit-btn-text');
+    var icon = $('#playlist-show-edit-btn-icon');
+
+    if (text.text() == '編輯影片') {
+        text.text('完成編輯');
+        icon.text('done');
+        $(this).css('background-color', 'crimson');
+        $(this).css('border-color', 'crimson');
+        $(this).css('color', 'white');
+        $('.playitem-delete-form').css('display', 'block');
+
+    } else if (text.text() == '完成編輯') {
+        text.text('編輯影片');
+        icon.text('edit_note');
+        $(this).css('background-color', 'white');
+        $(this).css('border-color', 'white');
+        $(this).css('color', '#222222');
+        $('.playitem-delete-form').css('display', 'none');
+    }
+});
+
 function showSnackbar(text) {
     var snackbar = document.getElementById("snackbar");
     snackbar.innerHTML = text;
