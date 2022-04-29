@@ -20,7 +20,7 @@
     <div class="owl-home-row owl-carousel owl-theme">
       @foreach ($saves as $save)
         @if ($save->video)
-          <a style="text-decoration: none;" href="{{ route('video.watch') }}?v={{ $save->video->id }}" class="hover-opacity">
+          <a style="text-decoration: none;" href="{{ route('video.watch') }}?v={{ $save->video->id }}">
             <div class="home-rows-videos-div" style="position: relative; display: inline-block; margin-bottom:50px;">
               <div style="position: relative; overflow: hidden;">
                 <img src="{{ $save->video->cover }}">
@@ -45,7 +45,7 @@
     <div class="owl-home-row owl-carousel owl-theme">
       @foreach ($likes as $like)
         @if ($like->video)
-          <a style="text-decoration: none;" href="{{ route('video.watch') }}?v={{ $like->video->id }}" class="hover-opacity">
+          <a style="text-decoration: none;" href="{{ route('video.watch') }}?v={{ $like->video->id }}">
             <div class="home-rows-videos-div" style="position: relative; display: inline-block; margin-bottom:50px;">
               <div style="position: relative; overflow: hidden;">
                 <img src="{{ $like->video->cover }}">
