@@ -4,7 +4,7 @@
     <a class="playlist-show-links" style="text-decoration: none;" href="{{ route('video.watch') }}?v={{ $video->id }}" target="_blank">
       <img style="width: 100%" src="{{ $video->cover }}">
       @if (strpos($video->cover, 'E6mSQA2') !== false)
-        <img style="position: absolute; top: 0; left: 0; height: 100%; object-fit: cover" src="{{ $video->thumbL() }}">
+        <!-- <img style="position: absolute; top: 0; left: 0; height: 100%; object-fit: cover" src="{{ $video->thumbL() }}"> -->
       @endif
     </a>
 
