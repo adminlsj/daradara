@@ -228,7 +228,7 @@ class UserController extends Controller
                 $query->where('cover', '!=', null)->select('id', 'title', 'cover', 'imgur');
             }])->where('user_id', $user->id)->orderBy('created_at', 'desc')->paginate(42);
             $title = '稍後觀看';
-            $count = $results->count();
+            $count = $results->total();
             $editable = true;
 
         } elseif ($pid == 'LL' && auth()->check()) {
@@ -236,7 +236,7 @@ class UserController extends Controller
                 $query->where('cover', '!=', null)->select('id', 'title', 'cover', 'imgur');
             }])->where('user_id', $user->id)->where('foreign_type', 'video')->orderBy('created_at', 'desc')->paginate(42);
             $title = '喜歡的影片';
-            $count = $results->count();
+            $count = $results->total();
             $editable = true;
 
         } elseif (is_numeric($pid) && $playlist = Playlist::find($pid)) {
@@ -247,7 +247,7 @@ class UserController extends Controller
                 $query->where('cover', '!=', null)->select('id', 'title', 'cover', 'imgur');
             }])->where('playlist_id', $playlist->id)->orderBy('created_at', 'desc')->paginate(42);
             $title = $playlist->title;
-            $count = $results->count();
+            $count = $results->total();
             $editable = $user && $user->id == $playlist->user_id ? true : false;
 
         } else {
