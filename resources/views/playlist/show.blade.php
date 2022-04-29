@@ -39,15 +39,13 @@
       </button>
     </div>
 
-    <div id="home-rows-wrapper" style="position: relative; margin-top: 0;">
     	<div class="home-rows-videos-wrapper" style="white-space: normal; margin-left: -2px; margin-right: -2px;">
-			@foreach ($results as $save)
-				@if ($save->video)
-					@include('playlist.video-card-edit', ['video' => $save->video])
-				@endif
-			@endforeach
-		</div>
-    </div>
+				@foreach ($results as $save)
+					@if ($save->video)
+						@include('playlist.video-card-edit', ['video' => $save->video])
+					@endif
+				@endforeach
+			</div>
 
     <div class="{{ $doujin ? 'search-doujin-pagination-desktop-margin' : 'search-hentai-pagination-desktop-margin' }} search-pagination hidden-xs">{!! $results->appends(request()->query())->links() !!}</div>
 		<div style="{{ $doujin ? 'margin-top: -26px;' : 'margin-top: -29px;' }}" class="search-pagination mobile-search-pagination hidden-sm hidden-md hidden-lg">{!! $results->appends(request()->query())->onEachSide(1)->links() !!}</div>
