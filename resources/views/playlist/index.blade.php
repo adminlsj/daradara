@@ -47,13 +47,13 @@
         @if ($like->video)
           <a style="text-decoration: none;" href="{{ route('video.watch') }}?v={{ $like->video->id }}" class="hover-opacity">
             <div class="home-rows-videos-div" style="position: relative; display: inline-block; margin-bottom:50px;">
-              <div style="position: relative;">
+              <div style="position: relative; overflow: hidden;">
                 <img src="{{ $like->video->cover }}">
                 @if (strpos($like->video->cover, 'E6mSQA2') !== false)
                   <img style="position: absolute; top: 0; left: 0; height: 100%; object-fit: cover" src="{{ $like->video->thumbL() }}">
                 @endif
+                <div class="home-rows-videos-title owl-home-rows-title" style="position:absolute; bottom:0; left:0; white-space: initial; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; color: white; width: 100%; padding: 2px 5px; background: linear-gradient(to bottom, transparent 0%, black 120%);">{{ $like->video->title }}</div>
               </div>
-              <div class="home-rows-videos-title owl-home-rows-title" style="position:absolute; bottom:0; left:0; white-space: initial; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; color: white; width: 100%; padding: 2px 5px; background: linear-gradient(to bottom, transparent 0%, black 120%);">{{ $like->video->title }}</div>
             </div>
           </a>
         @endif
