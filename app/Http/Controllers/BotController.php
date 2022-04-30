@@ -1706,6 +1706,8 @@ class BotController extends Controller
             $searchtext = implode($searchtext);
             $comic->searchtext = $searchtext;
             $comic->save();
+
+            return Redirect::back();
         }
     }
 
