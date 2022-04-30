@@ -33,6 +33,22 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
+        /* $loop = 0;
+        $images = Storage::disk('local')->files('video');
+        foreach ($images as $image) {
+            $extension = explode('.', $image)[1];
+            if ($extension == 'jpg') {
+                if ($loop < 10) {
+                    Storage::disk('local')->move($image, "video/00{$loop}.jpg");
+                } elseif ($loop < 100) {
+                    Storage::disk('local')->move($image, "video/0{$loop}.jpg");
+                } else {
+                    Storage::disk('local')->move($image, "video/{$loop}.jpg");
+                }
+                $loop++;
+            }
+        } */
+
         /* $array = [];
         for ($i=0; $i < 236; $i++) { 
             array_push($array, 'j');

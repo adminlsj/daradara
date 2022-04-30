@@ -104,6 +104,7 @@ $("form#video-create-playlist-form").submit(function(e) {
             $('#playlist-save-checkbox').after(data.checkbox);
             $('div#video-save-form-wrapper').html(data.saveBtn);
             $('#playlist-title').val("");
+            $('#playlist-description').val("");
             $('#video-create-playlist-btn').prop('disabled', false);
         },
         error: function(xhr, ajaxOptions, thrownError){
