@@ -1574,9 +1574,139 @@ class BotController extends Controller
         Cosplayjav::translateCosplayjav();
     }
 
-    public function uploadNhentai()
+    public function uploadHtmlNhentai(Request $request)
     {
-        Nhentai::uploadNhentai();
+        return view('layouts.uploadHtmlNhentai');
+    }
+
+    public function uploadNhentai(Request $request)
+    {
+        // Nhentai::uploadNhentai();
+
+        ini_set('max_execution_time', 0);
+        ini_set('memory_limit', '-1');
+
+        $type = request('nhentai-type');
+
+        if ($type == 'list') {
+            $nhentai_ids = [];
+            $html = request('nhentai-html');
+            $start = explode('<div class="container index-container">', $html);
+            $end = explode('</div><section class="pagination">' , $start[1]);
+            $galleries = $end[0];
+
+            $dom = new \DOMDocument();
+            $dom->loadHTML('<meta http-equiv="content-type" content="text/html; charset=utf-8">'.$galleries);
+            $links = $dom->getElementsByTagName('a');
+            foreach ($links as $link) {
+                array_push($nhentai_ids, Helper::get_string_between($link->getAttribute('href'), '/g/', '/'));
+            }
+
+            foreach ($nhentai_ids as $nhentai_id) {
+                if (!Comic::where('nhentai_id', $nhentai_id)->exists()) {
+                    $url = 'https://nhentai.net/g/'.$nhentai_id.'/';
+                    echo '<a href="'.$url.'" target="_blank">'.$url.'</a><br>';
+                }
+            }
+
+        } elseif ($type == 'show') {
+            $html = request('nhentai-html');
+
+            $galleries_id = Helper::get_string_between($html, 'nhentai.net/galleries/', '/');
+
+            $title_n = Helper::get_string_between($html, '<h1 class="title">', '</h1>');
+            $title_n_before = trim(Helper::get_string_between($title_n, '<span class="before">', '</span>'));
+            $title_n_pretty = trim(Helper::get_string_between($title_n, '<span class="pretty">', '</span>'));
+            $title_n_after = trim(Helper::get_string_between($title_n, '<span class="after">', '</span>'));
+
+            $title_o = Helper::get_string_between($html, '<h2 class="title">', '</h2>');
+            $title_o_before = trim(Helper::get_string_between($title_o, '<span class="before">', '</span>'));
+            $title_o_pretty = trim(Helper::get_string_between($title_o, '<span class="pretty">', '</span>'));
+            $title_o_after = trim(Helper::get_string_between($title_o, '<span class="after">', '</span>'));
+
+
+            $parodies = Nhentai::getNhentaiTags($html, 'Parodies:');
+            $characters = Nhentai::getNhentaiTags($html, 'Characters:');
+            $tags = Nhentai::getNhentaiTags($html, 'Tags:');
+            $artists = Nhentai::getNhentaiTags($html, 'Artists:');
+            $groups = Nhentai::getNhentaiTags($html, 'Groups:');
+            $languages = Nhentai::getNhentaiTags($html, 'Languages:');
+            $categories = Nhentai::getNhentaiTags($html, 'Categories:');
+            $pages = Nhentai::getNhentaiTags($html, 'Pages:')[0];
+            $created_at = str_replace('T', ' ', explode('.', Helper::get_string_between($html, 'datetime="', '"'))[0]);
+
+            $extension = '';
+            $url = 'https://t.nhentai.net/galleries/'.$galleries_id.'/cover.jpg';
+            $curl_connection = curl_init($url);
+            curl_setopt($curl_connection, CURLOPT_HEADER, true);    // we want headers
+            curl_setopt($curl_connection, CURLOPT_NOBODY, true);    // we don't need body
+            curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER,1);
+            curl_setopt($curl_connection, CURLOPT_TIMEOUT,10);
+            $output = curl_exec($curl_connection);
+            $httpcode = curl_getinfo($curl_connection, CURLINFO_HTTP_CODE);
+            curl_close($curl_connection);
+            if ($httpcode == 200) {
+                $extension = 'jpg';
+            } elseif ($httpcode == 404) {
+                $extension = 'png';
+            } else {
+                die();
+            }
+
+            $extensions = [];
+            $data = Helper::get_string_between($html, 'window._gallery = JSON.parse("', '")');
+            $data = json_decode(json_decode('"'.$data.'"'), true);
+            foreach ($data['images']['pages'] as $page) {
+                array_push($extensions, $page['t']);
+            }
+
+            $comic = Comic::create([
+                'nhentai_id' => $data['id'],
+                'galleries_id' => $galleries_id,
+                'title_n_before' => html_entity_decode($title_n_before, ENT_QUOTES, 'UTF-8'),
+                'title_n_pretty' => html_entity_decode($title_n_pretty, ENT_QUOTES, 'UTF-8'),
+                'title_n_after' => html_entity_decode($title_n_after, ENT_QUOTES, 'UTF-8'),
+                'title_o_before' => html_entity_decode($title_o_before, ENT_QUOTES, 'UTF-8'),
+                'title_o_pretty' => html_entity_decode($title_o_pretty, ENT_QUOTES, 'UTF-8'),
+                'title_o_after' => html_entity_decode($title_o_after, ENT_QUOTES, 'UTF-8'),
+                'parodies' => $parodies,
+                'characters' => $characters,
+                'tags' => $tags,
+                'artists' => $artists,
+                'groups' => $groups,
+                'languages' => $languages,
+                'categories' => $categories,
+                'pages' => $pages,
+                'extension' => $extension,
+                'extensions' => $extensions,
+                'created_at' => $created_at,
+            ]);
+
+            $searchtext = $comic->title_n_before
+                         .$comic->title_n_pretty
+                         .$comic->title_n_after
+                         .$comic->title_o_before
+                         .$comic->title_o_pretty
+                         .$comic->title_o_after
+                         .implode($comic->parodies)
+                         .implode($comic->characters)
+                         .implode($comic->tags)
+                         .implode($comic->artists)
+                         .implode($comic->groups)
+                         .implode($comic->languages)
+                         .implode($comic->categories);
+            $searchtext = mb_strtolower($searchtext);
+            $searchtext = preg_replace('/\s+/', '', $searchtext);
+            $searchtext = preg_split('//u', $searchtext, -1, PREG_SPLIT_NO_EMPTY);
+            foreach ($searchtext as &$character) {
+                if (strlen($character) != mb_strlen($character, 'utf-8')) {
+                    $character = bin2hex(iconv('UTF-8', 'UTF-16BE', $character));
+                }
+            }
+            $searchtext = implode($searchtext);
+            $comic->searchtext = $searchtext;
+            $comic->save();
+        }
     }
 
     public function translateNhentaiTag(Request $request)
