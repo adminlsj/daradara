@@ -294,15 +294,14 @@ class UserController extends Controller
     {
         if (auth()->check() && auth()->user()->id == $playlist->user_id) {
 
-            $request->validate([
-                'playlist-title' => 'required|string|max:255',
-            ]);
-
             if (request('playlist-delete')) {
                 $playlist->delete();
                 return Redirect::route('playlist.index');
 
             } else {
+                $request->validate([
+                    'playlist-title' => 'required|string|max:255',
+                ]);
                 $playlist->title = request('playlist-title');
                 $playlist->description = request('playlist-description');
                 $playlist->save();
