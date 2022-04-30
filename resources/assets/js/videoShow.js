@@ -88,7 +88,6 @@ $('div#playlistModal').on("change", "input.playlist-checkbox", function(e) {
 
 $("form#video-create-playlist-form").submit(function(e) {
     $('#video-create-playlist-btn').prop('disabled', true);
-
     $.ajaxSetup({
         header:$('meta[name="_token"]').attr('content')
     })
@@ -105,6 +104,7 @@ $("form#video-create-playlist-form").submit(function(e) {
             $('#playlist-save-checkbox').after(data.checkbox);
             $('div#video-save-form-wrapper').html(data.saveBtn);
             $('#playlist-title').val("");
+            $('#video-create-playlist-btn').prop('disabled', false);
         },
         error: function(xhr, ajaxOptions, thrownError){
             $('div#video-save-form-wrapper').html(xhr + ajaxOptions + thrownError);
