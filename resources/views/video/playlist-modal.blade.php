@@ -66,7 +66,7 @@
         <hr style="border-color: #333333; margin: 0;">
         <div class="modal-footer" style="border-top: none; width: 100%; text-align: center; padding: 0;">
           <div class="toggle-playlist-modal" style="display: inline-block; width: 50%; float: left; line-height: 46px; color: darkgray; cursor: pointer;" data-dismiss="modal">返回</div>
-          <button style="border: none; color: white; background-color: #b08fff; border-radius: 0; height: 100%; width: 50%; font-weight: bold; line-height: 34px;" method="POST" class="pull-right btn btn-primary">建立</button>
+          <button id="video-create-playlist-btn" style="border: none; color: white; background-color: #b08fff; border-radius: 0; height: 100%; width: 50%; font-weight: bold; line-height: 34px;" method="POST" class="pull-right btn btn-primary">建立</button>
         </div>
       </div>
     </div>
