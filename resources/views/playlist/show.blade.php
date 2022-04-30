@@ -24,7 +24,6 @@
         	{{ $title }}
         	@if ($playlist && $editable)
 	        	<span id="playlist-edit-icon" class="material-icons-outlined" data-toggle="modal" data-target="#playlistEditModal">edit</span>
-	        	<!-- <img id="playlist-edit-img" class="no-select" src="https://cdn.jsdelivr.net/gh/guaishushukanlifan/Project-H@latest/asset/icon/edit.png" data-toggle="modal" data-target="#playlistEditModal"> -->
 	        @endif
         </h3>
       </a>
@@ -35,9 +34,18 @@
 	      </button>
 
 	    @else
-	      <button class="no-select playlist-show-btn" style="opacity: 0.5; margin-right: 3px;">
-	        <span style="vertical-align: middle; font-size: 18px; margin-top: -5px; margin-right: 5px; cursor: pointer;" class="material-icons">edit</span>儲存清單
-	      </button>
+		    @if (Auth::check())
+			    <form id="playlist-show-add-form" style="display: inline;" action="{{ route('playlist.add') }}">
+		        {{ csrf_field() }}
+		        <input id="playlist-reference-id" name="playlist-reference-id" type="hidden" value="{{ $playlist->id }}">
+		        @include('playlist.add-btn', ['exists' => App\Playlist::where('user_id', Auth::user()->id)->where('reference_id', $playlist->id)->exists()])
+			    </form>
+
+			  @else
+				  <span data-toggle="modal" data-target="#signUpModal">
+					  @include('playlist.add-btn', ['exists' => false])
+				  </span>
+			  @endif
 	    @endif
 
       <button class="no-select playlist-show-btn" style="background-color: transparent; color: white; margin-left: 4px; margin-right: 0px; outline: 0;" data-toggle="modal" data-target="#shareModal">
@@ -78,6 +86,11 @@
 
 @if ($playlist && $editable)
 	@include('playlist.edit-modal')
+@endif
+
+@if (!Auth::check())
+	@include('user.signUpModal')
+  @include('user.loginModal')
 @endif
 
 @include('video.shareModal')

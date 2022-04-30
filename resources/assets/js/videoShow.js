@@ -101,6 +101,7 @@ $("form#video-create-playlist-form").submit(function(e) {
             $('#createPlaylistModal').modal('toggle');
             $('#playlistModal').modal('toggle');
             $('#playlist-save-checkbox').after(data.checkbox);
+            $('div#video-save-form-wrapper').html(data.saveBtn);
             $('#playlist-title').val("");
             // showSnackbar('影片已儲存於「我的清單」');
         },

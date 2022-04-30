@@ -9,7 +9,7 @@ class Playlist extends Model
     use \Staudenmeir\EloquentEagerLimit\HasEagerLimit;
     
     protected $fillable = [
-        'id', 'user_id', 'reference_id', 'title', 'description', 'is_private',
+        'id', 'user_id', 'reference_id', 'reference_user_id', 'title', 'description', 'is_private',
     ];
 
     public function user()

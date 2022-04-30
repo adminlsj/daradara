@@ -386,6 +386,27 @@ $('.playlist-show-edit-btn').click(function(){
     }
 });
 
+$("form#playlist-show-add-form").submit(function(e) {
+    $.ajaxSetup({
+        header:$('meta[name="_token"]').attr('content')
+    })
+    e.preventDefault(e);
+
+    $.ajax({
+        type:"POST",
+        url: $(this).attr("action"),
+        data:$(this).serialize(),
+        dataType: 'json',
+        success: function(data){
+            $('.playlist-show-add-btn').replaceWith(data.add_btn);
+        },
+        error: function(xhr, ajaxOptions, thrownError){
+            $('.playlist-show-add-btn').html(xhr + ajaxOptions + thrownError);
+            showSnackbar('請刷新頁面後重試。');
+        }
+    })
+});
+
 function showSnackbar(text) {
     var snackbar = document.getElementById("snackbar");
     snackbar.innerHTML = text;

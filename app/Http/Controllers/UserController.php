@@ -264,9 +264,14 @@ class UserController extends Controller
     {
         $user = Auth::user();
 
+        $request->validate([
+            'playlist-title' => 'required|string|max:255',
+        ]);
+
         $playlist = Playlist::create([
             'user_id' => $user->id,
             'title' => request('playlist-title'),
+            'description' => request('playlist-description'),
             'is_private' => true,
         ]);
 
@@ -284,10 +289,49 @@ class UserController extends Controller
         $checkbox = '';
         $checkbox .= view('video.playlist-checkbox', compact('first', 'id', 'checked', 'title', 'private'));
 
+        $save_icon = 'add_circle';
+        $save_btn = '';
+        $save_btn .= view('video.saveBtn-new', compact('save_icon'));
+
         return response()->json([
             'checkbox' => $checkbox,
+            'saveBtn' => $save_btn,
             'csrf_token' => csrf_token(),
         ]);
+    }
+
+    public function addPlaylist(Request $request)
+    {
+        $user = Auth::user();
+        $pid_ref = request('playlist-reference-id');
+
+        if (is_numeric($pid_ref) && $playlist_ref = Playlist::find($pid_ref)) {
+
+            if ($playlist = Playlist::where('user_id', $user->id)->where('reference_id', $playlist_ref->id)->first()) {
+                $playlist->delete();
+                $exists = false;
+
+            } else {
+                $playlist = Playlist::create([
+                    'user_id' => $user->id,
+                    'reference_id' => $playlist_ref->id,
+                    'reference_user_id' => $playlist_ref->user_id,
+                    'title' => 'Reference',
+                ]);
+                $exists = true;
+            }
+
+            $add_btn = '';
+            $add_btn .= view('playlist.add-btn', compact('exists'));
+
+            return response()->json([
+                'add_btn' => $add_btn,
+                'csrf_token' => csrf_token(),
+            ]);
+
+        } else {
+            abort(404);
+        }
     }
 
     public function updatePlaylist(Request $request, Playlist $playlist)
