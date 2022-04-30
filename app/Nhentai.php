@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Comic;
+use App\Spankbang;
 use App\Helper;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
@@ -316,13 +317,7 @@ class Nhentai
         $nhentai_ids = [];
         $url = 'https://nhentai.net/language/chinese/?page=';
         for ($i = 1; $i <= $pages; $i++) { 
-            $curl_connection = curl_init($url.$i);
-            curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
-            curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
-            $html = curl_exec($curl_connection);
-            curl_close($curl_connection);
-
+            $html = Spankbang::getBrowsershotHtml($url.$i);
             $start = explode('<div class="container index-container">', $html);
             $end = explode('</div><section class="pagination">' , $start[1]);
             $galleries = $end[0];
