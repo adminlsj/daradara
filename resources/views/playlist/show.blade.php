@@ -23,7 +23,8 @@
         <h3 style="font-weight: 700; color: #edeeef; margin-bottom: 20px;">
         	{{ $title }}
         	@if ($playlist && $editable)
-	        	<img id="playlist-edit-img" class="no-select" src="https://i.imgur.com/jJrmK4w.png" data-toggle="modal" data-target="#playlistEditModal">
+	        	<span id="playlist-edit-icon" class="material-icons-outlined" data-toggle="modal" data-target="#playlistEditModal">edit</span>
+	        	<!-- <img id="playlist-edit-img" class="no-select" src="https://cdn.jsdelivr.net/gh/guaishushukanlifan/Project-H@latest/asset/icon/edit.png" data-toggle="modal" data-target="#playlistEditModal"> -->
 	        @endif
         </h3>
       </a>

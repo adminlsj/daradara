@@ -131,6 +131,15 @@ th, td {
   padding: 0 8px;
 }
 
+#playlist-edit-icon {
+  cursor: pointer; 
+  font-size: 29px; 
+  vertical-align: middle; 
+  margin-top: -5px; 
+  padding: 0 5px; 
+  margin-left: 5px;
+}
+
 /* Hide scrollbar for Chrome, Safari and Opera */
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
@@ -2416,6 +2425,12 @@ div.sticky {
     margin-top: -3px; 
     margin-left: 5px; 
     padding: 0 5px;
+  }
+
+  #playlist-edit-icon {
+    font-size: 22px; 
+    margin-top: -3px; 
+    margin-left: 3px;
   }
 
   .playlist-show-btn {
