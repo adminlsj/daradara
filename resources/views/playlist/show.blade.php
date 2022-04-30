@@ -20,7 +20,12 @@
     <div class="content-padding-new playlist-rows-top">
       <a class="home-rows-header" style="text-decoration: none;">
         <h5 id="playitems-count" data-count="{{ $count }}" style="color: #8e9194;">{{ $count }} 部影片</h5>
-        <h3 style="font-weight: 700; color: #edeeef; margin-bottom: 20px;">{{ $title }}</h3>
+        <h3 style="font-weight: 700; color: #edeeef; margin-bottom: 20px;">
+        	{{ $title }}
+        	@if ($playlist && $editable)
+	        	<img id="playlist-edit-img" class="no-select" src="https://i.imgur.com/jJrmK4w.png" data-toggle="modal" data-target="#playlistEditModal">
+	        @endif
+        </h3>
       </a>
 
       @if ($editable)
@@ -69,6 +74,10 @@
   </div>
 
 </div>
+
+@if ($playlist && $editable)
+	@include('playlist.edit-modal')
+@endif
 
 @include('video.shareModal')
 @include('layouts.nav-bottom')

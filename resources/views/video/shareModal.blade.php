@@ -15,7 +15,7 @@
       <hr style="border-color: #333333; margin: 0; margin-top: 0px;">
       <div class="modal-footer" style="border-top: none; width: 100%; text-align: center; padding: 0;">
         <div style="display: inline-block; width: 50%; float: left; line-height: 46px; color: darkgray; cursor: pointer;" data-dismiss="modal">返回</div>
-        <div style="border: none; color: white; background-color: #b08fff; border-radius: 0; height: 100%; width: 50%; font-weight: bold; line-height: 34px;" data-dismiss="modal" class="pull-right btn btn-primary">確定</div>
+        <div style="border: none; color: white; background-color: #b08fff; border-radius: 0; height: 100%; width: 50%; font-weight: bold; line-height: 34px;" data-dismiss="modal" class="pull-right btn btn-primary">完成</div>
       </div>
     </div>
   </div>

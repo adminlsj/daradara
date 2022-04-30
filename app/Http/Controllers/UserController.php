@@ -222,6 +222,7 @@ class UserController extends Controller
         $sub = '分類';
         $editable = false;
         $count = 0;
+        $playlist = null;
 
         if ($pid == 'WL' && auth()->check()) {
             $results = Save::with(['video' => function($query) {
@@ -256,7 +257,7 @@ class UserController extends Controller
 
         $doujin = false;
 
-        return view('playlist.show', compact('results', 'title', 'sub', 'doujin', 'pid', 'editable', 'count'));
+        return view('playlist.show', compact('results', 'title', 'sub', 'doujin', 'pid', 'editable', 'count', 'playlist'));
     }
 
     public function createPlaylist(Request $request)
@@ -287,6 +288,30 @@ class UserController extends Controller
             'checkbox' => $checkbox,
             'csrf_token' => csrf_token(),
         ]);
+    }
+
+    public function updatePlaylist(Request $request, Playlist $playlist)
+    {
+        if (auth()->check() && auth()->user()->id == $playlist->user_id) {
+
+            $request->validate([
+                'playlist-title' => 'required|string|max:255',
+            ]);
+
+            if (request('playlist-delete')) {
+                $playlist->delete();
+                return Redirect::route('playlist.index');
+
+            } else {
+                $playlist->title = request('playlist-title');
+                $playlist->description = request('playlist-description');
+                $playlist->save();
+                return Redirect::back();
+            }
+
+        } else {
+            abort(403);
+        }
     }
 
     public function deletePlayitem(Request $request)
