@@ -61,6 +61,7 @@ $('div#video-like-form-wrapper').on("submit", "form#video-like-form", function(e
 });
 
 $('div#playlistModal').on("change", "input.playlist-checkbox", function(e) {
+    $('input.playlist-checkbox').prop('disabled', true);
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -79,7 +80,7 @@ $('div#playlistModal').on("change", "input.playlist-checkbox", function(e) {
         dataType: 'json',
         success: function(data){
             $('div#video-save-form-wrapper').html(data.saveBtn);
-            // showSnackbar('影片已儲存於「我的清單」');
+            $('input.playlist-checkbox').prop('disabled', false);
         },
         error: function(xhr, ajaxOptions, thrownError){
             $('div#video-save-form-wrapper').html(xhr + ajaxOptions + thrownError);
