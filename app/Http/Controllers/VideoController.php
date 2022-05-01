@@ -298,6 +298,13 @@ class VideoController extends Controller
 
     public function createComment(Request $request)
     {
+        $request->validate([
+            'comment-user-id' => 'required',
+            'comment-type' => 'required|string|max:255',
+            'comment-foreign-id' => 'required',
+            'comment-text' => 'required|string|max:255',
+        ]);
+
         $comment = Comment::create([
             'user_id' => request('comment-user-id'),
             'type' => request('comment-type'),

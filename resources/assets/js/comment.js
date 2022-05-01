@@ -23,6 +23,7 @@ $(".tablinks").click(function() {
 });
 
 $('div#comment-section-wrapper').on("submit", "form#comment-create-form", function(e) {
+    $('#comment-create-btn').prop('disabled', true);
     $.ajaxSetup({
         header:$('meta[name="_token"]').attr('content')
     })
@@ -38,6 +39,8 @@ $('div#comment-section-wrapper').on("submit", "form#comment-create-form", functi
             $('#comment-text').val('');
             $('div#comment-start').prepend(data.single_video_comment);
             $('span#tab-comments-count').html(data.comment_count);
+            $('input#comment-count').val(data.comment_count);
+            $('#comment-create-btn').prop('disabled', false);
             if (is_mobile) {
               $('html, body').animate({
                   scrollTop: $('#comment-create-form-wrapper').offset().top - 15
@@ -45,6 +48,7 @@ $('div#comment-section-wrapper').on("submit", "form#comment-create-form", functi
             }
         },
         error: function(xhr, ajaxOptions, thrownError){
+            $('#comment-create-btn').prop('disabled', false);
             showSnackbar('請刷新頁面後重試。');
         }
     })
@@ -72,7 +76,9 @@ $('div#comment-section-wrapper').on("submit", ".comment-reply-create-form", func
     })
 });
 
-$('div#comment-section-wrapper').on("submit", "form#comment-like-form", function(e) {
+$('div#comment-section-wrapper').on("submit", "form.comment-like-form", function(e) {
+    $('.comment-like-btn').prop('disabled', true);
+    $('.comment-unlike-btn').prop('disabled', true);
     $.ajaxSetup({
         header:$('meta[name="_token"]').attr('content')
     })
@@ -84,7 +90,9 @@ $('div#comment-section-wrapper').on("submit", "form#comment-like-form", function
         data:$(this).serialize(),
         dataType: 'json',
         success: (json) => {
-            $(this).find('#comment-like-btn-wrapper').html(json.comment_like_btn);
+            $(this).find('.comment-like-btn-wrapper').html(json.comment_like_btn);
+            $('.comment-like-btn').prop('disabled', false);
+            $('.comment-unlike-btn').prop('disabled', false);
         },
         error: function(xhr, ajaxOptions, thrownError){
             showSnackbar('請刷新頁面後重試。');

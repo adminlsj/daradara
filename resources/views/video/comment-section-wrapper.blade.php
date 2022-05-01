@@ -5,11 +5,12 @@
 	    <input name="comment-user-id" type="hidden" value={{ Auth::user()->id }}>
 	    <input name="comment-type" type="hidden" value="{{ $type }}">
 	    <input name="comment-foreign-id" type="hidden" value="{{ $foreign_id }}">
-	    <input name="comment-count" type="hidden" value={{ $comments->count() }}>
+	    <input id="comment-count" name="comment-count" type="hidden" value={{ $comments->count() }}>
 	    <a style="margin-right: 0px;">
 	      <img class="img-circle" style="width: 40px; height: auto; float:left;" src="{{ Auth::user()->avatar_temp }}">
 	    </a>
 	    <input style="margin-left: 55px; width: calc(100% - 55px); line-height: 30px; background-color: inherit; border: none; outline: none; color: white; vertical-align: top; margin-top: -45px; font-weight: 400; padding-left: 0px;" type="text" id="comment-text" name="comment-text" placeholder="新增一則公開評論...">
+	    <button id="comment-create-btn" type="submit" style="display: none;"></button>
 	  </form>
 	  
 	@else
