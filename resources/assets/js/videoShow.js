@@ -39,6 +39,7 @@ $(window).scroll(function(){
 });
 
 $('div#video-like-form-wrapper').on("submit", "form#video-like-form", function(e) {
+    $('#video-like-btn').prop('disabled', true);
     $.ajaxSetup({
         header:$('meta[name="_token"]').attr('content')
     })
@@ -51,6 +52,7 @@ $('div#video-like-form-wrapper').on("submit", "form#video-like-form", function(e
         dataType: 'json',
         success: function(data){
             $('div#video-like-form-wrapper').html(data.likeBtn);
+            $('#video-like-btn').prop('disabled', false);
         },
         error: function(xhr, ajaxOptions, thrownError){
             showSnackbar('請刷新頁面後重試。');

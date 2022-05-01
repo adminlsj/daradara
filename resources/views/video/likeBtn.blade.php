@@ -4,7 +4,7 @@
   <input name="like-foreign-id" type="hidden" value="{{ $video_id }}">
   <input name="like-is-positive" type="hidden" value="{{ true }}">
   <input name="like-status" type="hidden" value="{{ $liked }}">
-  <button class="single-icon-wrapper no-button-style" method="POST">
+  <button id="video-like-btn" class="single-icon-wrapper no-button-style" method="POST">
   	<div class="single-icon no-select">
 	    <i style="color: white; padding-top: 8px; font-size: 20px" class="material-icons">{{ $liked ? 'favorite' : 'favorite_border'}}</i>
   	</div>
