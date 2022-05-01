@@ -55,6 +55,7 @@ $('div#comment-section-wrapper').on("submit", "form#comment-create-form", functi
 });
 
 $('div#comment-section-wrapper').on("submit", ".comment-reply-create-form", function(e) {
+    $('.comment-reply-create-btn').prop('disabled', true);
     $.ajaxSetup({
         header:$('meta[name="_token"]').attr('content')
     })
@@ -69,8 +70,10 @@ $('div#comment-section-wrapper').on("submit", ".comment-reply-create-form", func
         success: function(data){
             $(".comment-reply-reply-form-wrapper").css('display', 'none');
             $('div#comment-reply-wrapper-' + data.comment_id).prepend(data.single_video_comment);
+            $('.comment-reply-create-btn').prop('disabled', false);
         },
         error: function(xhr, ajaxOptions, thrownError){
+            $('.comment-reply-create-btn').prop('disabled', false);
             showSnackbar('請刷新頁面後重試。');
         }
     })

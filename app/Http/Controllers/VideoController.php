@@ -392,6 +392,11 @@ class VideoController extends Controller
 
     public function replyComment(Request $request)
     {
+        $request->validate([
+            'reply-comment-id' => 'required',
+            'reply-comment-text' => 'required|string|max:255',
+        ]);
+
         $reply = Reply::create([
             'user_id' => auth()->user()->id,
             'comment_id' => request('reply-comment-id'),
