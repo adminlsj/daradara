@@ -5,13 +5,13 @@ $(".tablinks").click(function() {
     $('.tabcontent').css('display', 'none');
     $('#' + id).css('display', 'block');
     if (id == 'comment-tabcontent') {
+        $('button#comment-tablink').data('tabcontent', 'comment-tabcontent-loaded');
+        $('div#comment-tabcontent').attr('id', 'comment-tabcontent-loaded');
         $.ajax({
             type:'GET',
             url:'/loadComment',
             data: { id: $(this).data("foreignid"), type: $(this).data("type") },
             success: function(data){
-                $('button#comment-tablink').data('tabcontent', 'comment-tabcontent-loaded');
-                $('div#comment-tabcontent').attr('id', 'comment-tabcontent-loaded');
                 $('div#comment-section-wrapper').html(data.comments);
             },
             error: function(xhr, ajaxOptions, thrownError){
@@ -112,17 +112,15 @@ $('div#comment-section-wrapper').on("click", ".comment-unlike-btn", function() {
 });
 
 $('div#comment-section-wrapper').on("click", "div.load-replies-btn", function(e) {
+    $(this).find('.material-icons').text('arrow_drop_up');
+    $(this).find('.reply-btn-text').text('隱藏');
+    $(this).addClass('hide-replies-btn').removeClass('load-replies-btn');
     $.ajax({
         type:'GET',
         url:'/loadReplies',
         data: { id: $(this).data("commentid") },
         success: function(data){
-            var wrapper = $('div#reply-section-wrapper-' + data.comment_id);
-            var button = wrapper.parent().find('.load-replies-btn');
-            button.find('.material-icons').text('arrow_drop_up');
-            button.find('.reply-btn-text').text('隱藏');
-            button.addClass('hide-replies-btn').removeClass('load-replies-btn');
-            wrapper.html(data.replies);
+            $('div#reply-section-wrapper-' + data.comment_id).html(data.replies);
         },
         error: function(xhr, ajaxOptions, thrownError){
             showSnackbar('請刷新頁面後重試。');
