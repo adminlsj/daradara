@@ -116,7 +116,7 @@ $('div#comment-section-wrapper').on("click", "div.load-replies-btn", function(e)
     $(this).find('.reply-btn-text').text('隱藏');
     $(this).addClass('hide-replies-btn').removeClass('load-replies-btn');
     $(this).next().css('display', 'block');
-    $.ajax({
+    /* $.ajax({
         type:'GET',
         url:'/loadReplies',
         data: { id: $(this).data("commentid") },
@@ -127,7 +127,7 @@ $('div#comment-section-wrapper').on("click", "div.load-replies-btn", function(e)
         error: function(xhr, ajaxOptions, thrownError){
             showSnackbar('請刷新頁面後重試。');
         }
-    });
+    }); */
 });
 
 $('div#comment-section-wrapper').on("click", "div.hide-replies-btn", function(e) {
