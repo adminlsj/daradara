@@ -387,6 +387,7 @@ $('.playlist-show-edit-btn').click(function(){
 });
 
 $("form#playlist-show-add-form").submit(function(e) {
+    $('#playlist-show-add-btn').prop('disabled', true);
     $.ajaxSetup({
         header:$('meta[name="_token"]').attr('content')
     })
@@ -399,6 +400,7 @@ $("form#playlist-show-add-form").submit(function(e) {
         dataType: 'json',
         success: function(data){
             $('.playlist-show-add-btn').replaceWith(data.add_btn);
+            $('#playlist-show-add-btn').prop('disabled', false);
         },
         error: function(xhr, ajaxOptions, thrownError){
             $('.playlist-show-add-btn').html(xhr + ajaxOptions + thrownError);
