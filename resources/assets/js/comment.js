@@ -115,12 +115,14 @@ $('div#comment-section-wrapper').on("click", "div.load-replies-btn", function(e)
     $(this).find('.material-icons').text('arrow_drop_up');
     $(this).find('.reply-btn-text').text('隱藏');
     $(this).addClass('hide-replies-btn').removeClass('load-replies-btn');
+    $(this).next().css('display', 'block');
     $.ajax({
         type:'GET',
         url:'/loadReplies',
         data: { id: $(this).data("commentid") },
         success: function(data){
             $('div#reply-section-wrapper-' + data.comment_id).html(data.replies);
+            $('.comment-reply-ajax-loading').css('display', 'none');
         },
         error: function(xhr, ajaxOptions, thrownError){
             showSnackbar('請刷新頁面後重試。');
