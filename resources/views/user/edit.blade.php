@@ -20,7 +20,7 @@
 		<div id="user-photo-label-wrapper" style="display: inline-block; vertical-align: middle;">
 			<h5 class="hidden-xs" style="font-size: 20px;">{{ $user->name }}</h5>
 			<h5 id="label" style="font-size: 16px; color: red; cursor: pointer; font-weight: bold" onclick="document.getElementById('photo').click()">更換個人<span class="hidden-sm hidden-md hidden-lg">資料</span>頭像</h5>
-			<input style="display: none;" type="file" name="photo" id="photo" accept="image/*" required onchange="this.form.submit(); this.disabled=true; document.getElementById('label').innerHTML='更換頭像中...';">
+			<input style="display: none;" type="file" name="photo" id="photo" accept="image/png, image/gif, image/jpeg" required onchange="this.form.submit(); this.disabled=true; document.getElementById('label').innerHTML='更換頭像中...';">
 		</div>
 	</form>
 

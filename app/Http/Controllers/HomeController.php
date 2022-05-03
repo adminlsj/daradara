@@ -102,6 +102,10 @@ class HomeController extends Controller
 
     public function search(Request $request)
     {
+        $request->validate([
+            'query' => 'string|max:255',
+        ]);
+
         $genre = '';
         $tags = [];
         $sort = '';
@@ -251,7 +255,7 @@ class HomeController extends Controller
             $videos = $videos->orderBy('created_at', 'desc');
         }
 
-        if (is_null($tags) || !in_array('新番預告', $tags)) {
+        if (!$query || strpos($query, '新番') === false) {
             $videos = $videos->where('title', 'not like', '[新番預告]%');
         }
 
