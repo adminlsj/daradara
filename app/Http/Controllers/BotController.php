@@ -1597,9 +1597,9 @@ class BotController extends Controller
 
     public function uploadNhentai(Request $request)
     {
-        // Nhentai::uploadNhentai();
+        Nhentai::uploadNhentai();
 
-        ini_set('max_execution_time', 0);
+        /* ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
         $type = request('nhentai-type');
@@ -1724,7 +1724,7 @@ class BotController extends Controller
             $comic->save();
 
             return Redirect::back();
-        }
+        } */
     }
 
     public function translateNhentaiTag(Request $request)
