@@ -33,6 +33,14 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
+        $videos = Video::where('tags_array', 'like', '%"爆精"%')->get();
+        foreach ($videos as $video) {
+            $tags_array = $video->tags_array;
+            unset($tags_array['爆精']);
+            $video->tags_array = $tags_array;
+            $video->save();
+        }
+
         /* $loop = 0;
         $images = Storage::disk('local')->files('video');
         foreach ($images as $image) {
