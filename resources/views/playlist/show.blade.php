@@ -26,7 +26,7 @@
 	        	<span id="playlist-edit-icon" class="material-icons-outlined" data-toggle="modal" data-target="#playlistEditModal">edit</span>
 	        @endif
 	        @if ($description)
-		        <p id="playlist-show-description" style="font-size: 16px; margin-top: 20px; white-space: pre-line; line-height: 22px; font-weight: normal;">{{ $description }}</p>
+		        <p id="playlist-show-description" style="font-size: 16px; margin-top: 18px; white-space: pre-line; line-height: 22px; font-weight: normal;">{{ $description }}</p>
 	        @endif
         </h3>
       </a>
