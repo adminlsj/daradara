@@ -220,6 +220,7 @@ class UserController extends Controller
         $pid = $request->list;
         $title = '播放清單';
         $sub = '分類';
+        $description = null;
         $editable = false;
         $count = 0;
         $playlist = null;
@@ -248,6 +249,7 @@ class UserController extends Controller
                 $query->where('cover', '!=', null)->select('id', 'title', 'cover', 'imgur');
             }])->where('playlist_id', $playlist->id)->orderBy('created_at', 'desc')->paginate(42);
             $title = $playlist->title;
+            $description = $playlist->description;
             $count = $results->total();
             $editable = $user && $user->id == $playlist->user_id ? true : false;
 
@@ -257,7 +259,7 @@ class UserController extends Controller
 
         $doujin = false;
 
-        return view('playlist.show', compact('results', 'title', 'sub', 'doujin', 'pid', 'editable', 'count', 'playlist'));
+        return view('playlist.show', compact('results', 'title', 'sub', 'description', 'doujin', 'pid', 'editable', 'count', 'playlist'));
     }
 
     public function createPlaylist(Request $request)

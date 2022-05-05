@@ -4,7 +4,7 @@
     @parent
 		<title>{{ $title }}&nbsp;-&nbsp;H動漫/裏番/線上看&nbsp;-&nbsp;Hanime1.me</title>
 		<meta name="title" content="{{ $title }} - H動漫/裏番/線上看 - Hanime1.me">
-		<meta name="description" content="{{ $title }} - H動漫/裏番/線上看 - Hanime1.me">
+		<meta name="description" content="{{ $description }}">
 @endsection
 
 @section('nav')
@@ -18,12 +18,15 @@
   <div style="position: relative; margin-top: 0px; padding-top: 100px;">
 
     <div class="content-padding-new playlist-rows-top">
-      <a class="home-rows-header" style="text-decoration: none;">
+      <a class="home-rows-header" style="text-decoration: none; margin-bottom: 20px;">
         <h5 id="playitems-count" data-count="{{ $count }}" style="color: #8e9194;">{{ $count }} 部影片</h5>
         <h3 style="font-weight: 700; color: #edeeef; margin-bottom: 20px;">
         	{{ $title }}
         	@if ($playlist && $editable)
 	        	<span id="playlist-edit-icon" class="material-icons-outlined" data-toggle="modal" data-target="#playlistEditModal">edit</span>
+	        @endif
+	        @if ($description)
+		        <p id="playlist-show-description" style="font-size: 16px; margin-top: 20px; white-space: pre-line; line-height: 22px; font-weight: normal; margin-top: 16px">{{ $description }}</p>
 	        @endif
         </h3>
       </a>

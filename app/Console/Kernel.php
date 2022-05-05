@@ -58,8 +58,6 @@ class Kernel extends ConsoleKernel
 
         $schedule->command('hanime1:upload-nhentai')->hourly()->between('6:00', '21:00');
         $schedule->command('hanime1:upload-rule34')->hourly()->between('6:00', '21:00');
-
-        $schedule->command('hanime1:upload-nhentai')->dailyAt('23:30');
     }
 
     /**
