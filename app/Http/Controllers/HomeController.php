@@ -103,7 +103,7 @@ class HomeController extends Controller
     public function search(Request $request)
     {
         $request->validate([
-            'query' => 'string|max:255',
+            'query' => 'max:255',
         ]);
 
         $genre = '';

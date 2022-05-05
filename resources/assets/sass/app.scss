@@ -167,6 +167,12 @@ th, td {
   background-repeat:no-repeat;
 }
 
+.card-mobile-panel .card-mobile-views-text, .card-mobile-panel .card-mobile-created-text {
+  font-size: 12px; 
+  color: white;
+  margin-left: -1px; 
+}
+
 /* Hide scrollbar for Chrome, Safari and Opera */
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
@@ -2642,7 +2648,7 @@ div.sticky {
   }
 
   .card-mobile-panel .card-mobile-views-text, .card-mobile-panel .card-mobile-created-text {
-    margin-left: -1px; 
+    font-size: 10px; 
   }
 
   .card-mobile-panel .card-mobile-duration {

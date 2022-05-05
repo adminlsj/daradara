@@ -13,9 +13,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        'App\Console\Commands\ResetDayViews',
-        'App\Console\Commands\ResetWeekViews',
-        'App\Console\Commands\ResetMonthViews',
+        'App\Console\Commands\ResetViews',
         'App\Console\Commands\CheckSpankbang',
         'App\Console\Commands\CheckMotherless',
         'App\Console\Commands\CheckOdysee',
@@ -41,9 +39,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('hanime1:reset-day-views')->dailyAt('05:00');
-        $schedule->command('hanime1:reset-week-views')->weeklyOn(1, '05:00');
-        $schedule->command('hanime1:reset-month-views')->cron('0 5 1 * *');
+        $schedule->command('hanime1:reset-views')->dailyAt('05:00');
 
         $schedule->command('hanime1:update-hembed')->hourly();
         $schedule->command('hanime1:update-vod')->hourly();
