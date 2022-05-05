@@ -404,7 +404,7 @@ th, td {
 .card-mobile-panel .card-mobile-duration {
   float: right; 
   color: white; 
-  font-size: 10px; 
+  font-size: 12px; 
   font-weight: 400; 
   padding: 0px 6px; 
   border-radius: 2px; 
@@ -2653,6 +2653,7 @@ div.sticky {
 
   .card-mobile-panel .card-mobile-duration {
     margin-top: 1px;
+    font-size: 10px; 
   }
 
   .card-mobile-panel .card-mobile-title {
