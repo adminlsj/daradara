@@ -34,6 +34,9 @@ class Rule34
     ];
 
     public static $translations = [
+        "rizu-kyun" => '莉茲啾',
+        "gojou wakana" => '五条新菜',
+        "elf ears" => '妖精',
         "yor forger" => '約兒·佛傑',
         "yor briar" => '約兒·布萊爾',
         "spy x family" => 'SPY×FAMILY間諜家家酒',
