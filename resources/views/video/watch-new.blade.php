@@ -23,6 +23,9 @@
           <div id="player-switch-lang" data-lang="{{ $lang }}" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             {{ $lang == 'zh-CHS' ? '繁體字幕' : '简体字幕'}}
           </div>
+          <!-- <a href="{{ route('video.download') }}?type=torrent" id="player-switch-torrent" style="text-decoration: none;" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              外掛字幕
+          </a> -->
         </div>
       @endif
 

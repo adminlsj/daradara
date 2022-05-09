@@ -494,6 +494,10 @@ th, td {
   background-color: black !important;
 }
 
+#player-switch-torrent {
+  margin-top: 45px;
+}
+
 .lang-hidden {
   visibility: hidden;
   opacity: 0;
@@ -2698,6 +2702,10 @@ div.sticky {
   #player-lang-wrapper .dropdown-toggle span {
     margin-top: -3px;
     font-size: 20px; 
+  }
+
+  #player-switch-torrent {
+    margin-top: 39px;
   }
 
   #comics-search-tag-top-row {
