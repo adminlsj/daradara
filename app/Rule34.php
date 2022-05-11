@@ -34,6 +34,7 @@ class Rule34
     ];
 
     public static $translations = [
+        "maplestar" => 'Maplestar',
         "jxh33" => 'JXH33',
         "rizu-kyun" => '莉茲啾',
         "gojou wakana" => '五条新菜',
