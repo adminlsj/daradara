@@ -80,7 +80,7 @@
 
           @if ($video->artist)
             @if ($doujin)
-              <div class="single-video-tag" style="border-color: crimson"><a href="/search?query={{ $video->artist }}">{{ $video->artist }}</a></div>
+              <div class="single-video-tag"><a href="/search?query={{ $video->artist }}">{{ $video->artist }}</a></div>
             @else
               <div class="single-video-tag"><a href="/search?brands%5B%5D={{ $video->artist }}&genre=裏番">{{ $video->artist }}</a></div>
             @endif
