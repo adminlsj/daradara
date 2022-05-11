@@ -21,7 +21,7 @@ class Video extends Model
     ];
 
     protected $fillable = [
-        'id', 'user_id', 'playlist_id', 'comic_id', 'title', 'caption', 'tags', 'sd', 'qualities', 'downloads', 'imgur', 'current_views', 'week_views', 'month_views', 'views', 'outsource', 'foreign_sd', 'data', 'created_at', 'uploaded_at', 'duration', 'translations', 'cover', 'tags_array', 'uncover', 'has_torrent'
+        'id', 'user_id', 'playlist_id', 'comic_id', 'title', 'caption', 'tags', 'sd', 'qualities', 'downloads', 'imgur', 'current_views', 'week_views', 'month_views', 'views', 'outsource', 'foreign_sd', 'data', 'created_at', 'uploaded_at', 'duration', 'translations', 'cover', 'tags_array', 'uncover', 'has_torrent', 'artist'
     ];
 
     public static $banned_ip = [
@@ -61,7 +61,7 @@ class Video extends Model
     ];
 
     public static $hentai_brands = [
-        '妄想実現めでぃあ', 'メリー・ジェーン', 'ピンクパイナップル', 'ばにぃうぉ～か～', 'Queen Bee', 'PoRO', 'せるふぃっしゅ', '鈴木みら乃', 'ショーテン', 'GOLD BEAR', 'ZIZ', 'EDGE', 'Collaboration Works', 'BOOTLEG', 'BOMB!CUTE!BOMB!', 'nur', 'あんてきぬすっ', '魔人', 'ルネ', 'Princess Sugar', 'パシュミナ', 'WHITE BEAR', 'AniMan', 'chippai', 'トップマーシャル', 'erozuki', 'サークルトリビュート', 'spermation', 'Milky', 'King Bee', 'PashminaA', 'じゅうしぃまんご～', 'Hills', '妄想専科', 'ディスカバリー', 'ひまじん', '37℃', 'schoolzone', 'GREEN BUNNY', 'バニラ', 'L.', 'PIXY', 'こっとんど～る', 'ANIMAC', 'Celeb', 'MOON ROCK', 'Dream', 'ミンク', 'オズ・インク', 'サン出版', 'ポニーキャニオン', 'わるきゅ～れ＋＋', '株式会社虎の穴', 'エンゼルフィッシュ', 'UNION-CHO', 'TOHO', 'ミルクセーキ', '2匹目のどぜう', 'じゅうしぃまんご～', 'ツクルノモリ', 'サークルトリビュート', 'トップマーシャル', 'サークルトリビュート', '彗星社', 'ナチュラルハイ'
+        '妄想実現めでぃあ', 'メリー・ジェーン', 'ピンクパイナップル', 'ばにぃうぉ～か～', 'Queen Bee', 'PoRO', 'せるふぃっしゅ', '鈴木みら乃', 'ショーテン', 'GOLD BEAR', 'ZIZ', 'EDGE', 'Collaboration Works', 'BOOTLEG', 'BOMB!CUTE!BOMB!', 'nur', 'あんてきぬすっ', '魔人', 'ルネ', 'Princess Sugar', 'パシュミナ', 'WHITE BEAR', 'AniMan', 'chippai', 'トップマーシャル', 'erozuki', 'サークルトリビュート', 'spermation', 'Milky', 'King Bee', 'PashminaA', 'じゅうしぃまんご～', 'Hills', '妄想専科', 'ディスカバリー', 'ひまじん', '37℃', 'schoolzone', 'GREEN BUNNY', 'バニラ', 'L.', 'PIXY', 'こっとんど～る', 'ANIMAC', 'Celeb', 'MOON ROCK', 'Dream', 'ミンク', 'オズ・インク', 'サン出版', 'ポニーキャニオン', 'わるきゅ～れ＋＋', '株式会社虎の穴', 'エンゼルフィッシュ', 'UNION-CHO', 'TOHO', 'ミルクセーキ', '2匹目のどぜう', 'じゅうしぃまんご～', 'ツクルノモリ', 'サークルトリビュート', 'トップマーシャル', 'サークルトリビュート', '彗星社', 'ナチュラルハイ', 'れもんは～と'
     ];
 
     public static $all_tag = [

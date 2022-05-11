@@ -58,7 +58,7 @@
 											<tr>
 												<td style="text-align: center;"><span style="vertical-align: middle;" class="material-icons">play_circle_filled</span></td>
 												<td>
-												[Hanime1字幕組]{{ str_replace(' [中文字幕]', '', $video->translations['JP']) }}
+												[Hanime1字幕組][{{ $video->artist }}]{{ str_replace(' [中文字幕]', '', $video->translations['JP']) }}
 												</td>
 												<td style="min-width: 77px;">
 												torrent

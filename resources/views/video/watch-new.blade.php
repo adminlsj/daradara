@@ -73,8 +73,19 @@
 
         <h5 style="font-weight: 400; margin-bottom: 0px; margin-top: 0px;">
           @foreach ($tags as $tag)
+            @if ($tag != $video->artist)
               <div class="single-video-tag"><a href="/search?tags%5B%5D={{ $tag }}{{ $doujin ? '' : '&genre=裏番' }}">{{ $tag }}</a></div>
+            @endif
           @endforeach
+
+          @if ($video->artist)
+            @if ($doujin)
+              <div class="single-video-tag" style="border-color: crimson"><a href="/search?query={{ $video->artist }}">{{ $video->artist }}</a></div>
+            @else
+              <div class="single-video-tag"><a href="/search?brands%5B%5D={{ $video->artist }}&genre=裏番">{{ $video->artist }}</a></div>
+            @endif
+          @endif
+
           <div class="single-video-tag" data-toggle="modal" data-target="{{ Auth::check() ? '#add-tags-modal' : '#signUpModal' }}" style="position: relative; cursor: pointer; "><a style="padding-left: 15px; padding-right: 15px;"><span class="material-icons" style="position: absolute; margin-left: auto; margin-right: auto; left: -3px; right: 0; text-align: center; margin-top: -4px; font-size: 22px; vertical-align: middle">add</span></a></div>
           <div class="single-video-tag" data-toggle="modal" data-target="{{ Auth::check() ? '#remove-tags-modal' : '#signUpModal' }}" style="position: relative; cursor: pointer; "><a style="padding-left: 15px; padding-right: 15px;"><span class="material-icons" style="position: absolute; margin-left: auto; margin-right: auto; left: -2px; right: 0; text-align: center; margin-top: -4px; font-size: 22px; vertical-align: middle">remove</span></a></div>
         </h5>
