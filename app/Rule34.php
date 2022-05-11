@@ -34,6 +34,7 @@ class Rule34
     ];
 
     public static $translations = [
+        "jxh33" => 'JXH33',
         "rizu-kyun" => '莉茲啾',
         "gojou wakana" => '五条新菜',
         "elf ears" => '妖精',
@@ -596,7 +597,7 @@ class Rule34
         "cat ears" => '貓耳', 
         "catgirl" => '貓娘',
         "caster (fate/stay night)" => 'Caster',
-        "ceo neet" => 'Ceo Neet',
+        "ceo neet" => 'CEO NEET',
         "cerberus (helltaker)" => '克爾柏洛斯',
         "chapayev (azur lane)" => '恰巴耶夫',
         "chapayev (碧藍航線)" => '恰巴耶夫',
@@ -935,7 +936,7 @@ class Rule34
 
     public static function translateRule34()
     {
-        $videos = Video::where('foreign_sd', 'like', '%"rule34"%')->where('tags_array', '!=', null)->where('created_at', '>=', Carbon::now()->subDays(30))/*->where('playlist_id', 3795)*/->get();
+        $videos = Video::where('foreign_sd', 'like', '%"rule34"%')->where('tags_array', '!=', null)->where('created_at', '>=', Carbon::now()/*->subDays(30))*/->where('playlist_id', 2516)->get();
         $translations = Rule34::$translations;
         $removed = Rule34::$removed;
         foreach ($videos as $video) {
