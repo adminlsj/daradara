@@ -495,7 +495,10 @@ th, td {
 }
 
 #player-switch-torrent {
-  margin-top: 45px;
+  border: none;
+  border-radius: 0px !important;
+  margin-top: 42.5px;
+  border-top: 2px solid rgba(0, 0, 0, 0.5);
 }
 
 .lang-hidden {
@@ -2705,7 +2708,7 @@ div.sticky {
   }
 
   #player-switch-torrent {
-    margin-top: 39px;
+    margin-top: 35.5px;
   }
 
   #comics-search-tag-top-row {

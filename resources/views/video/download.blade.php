@@ -2,7 +2,15 @@
 
 @section('head')
     @parent
-    @include('video.videoHead')
+    <meta property="og:url" content="{{ route('video.download') }}?v={{ $video->id }}" />
+		<meta property="og:type" content="article" />
+		<meta property="og:title" content="下載 {{ $video->title }} - Hanime1.me" />
+		<meta property="og:description" content="{{ $video->translations['JP'] }} {{ $video->caption }}" />
+		<meta property="og:image" content="https://i.imgur.com/{{ $video->imgur }}h.png" />
+
+		<title>下載 {{ $video->title }}&nbsp;-&nbsp;H動漫/裏番/線上看&nbsp;-&nbsp;Hanime1.me</title>
+		<meta name="title" content="下載 {{ $video->title }} - H動漫/裏番/線上看 - Hanime1.me">
+		<meta name="description" content="{{ $video->translations['JP'] }} {{ $video->caption }}">
 @endsection
 
 @section('nav')
@@ -29,34 +37,41 @@
 								<ins class="adsbyexoclick" data-zoneid="4372480"></ins>
 							</div>
 
-			        <table class="download-table">
-							  <tr>
-							    <th></th>
-							    <th>影片畫質</th>
-							    <th>檔案類型</th>
-							    <th class="hidden-xs">檔案大小</th>
-							    <th>下載鏈結</th>
-							  </tr>
-				        @foreach (array_reverse($qualities, true) as $key => $value)
-						        <tr>
-									    <td style="text-align: center;"><span style="vertical-align: middle;" class="material-icons">play_circle_filled</span></td>
-									    <td>
-									    	@if ($key >= 1080)
-										    	全高清畫質 ({{ $key }}p)
-										    @elseif ($key >= 720)
-											    高清畫質 ({{ $key }}p)
-											  @elseif ($key >= 360)
-												  標準畫質 ({{ $key }}p)
-											  @else
-												  低清畫質 ({{ $key }}p)
-										    @endif
-									    </td>
-									    <td>mp4</td>
-									    <td class="hidden-xs">N/A</td>
-									    <td><a class="exoclick-popunder" style="text-decoration: none; color: white; text-align: center; background-color: crimson; padding: 5px 10px; border-radius: 5px;" href="{{ $value }}" download="{{ $video->title }}">下載</a></td>
-									  </tr>
-				        @endforeach
-			        </table>
+							@if ($video->has_torrent)
+								<div id="tablinks-wrapper" class="tab" style="margin-top: 10px; font-weight: bold;">
+									<button id="{{ Request::get('torrent') != 'true' ? 'defaultOpen' : '' }}" data-tabcontent="hardsub-tabcontent" class="tablinks" style="margin-right: 10px;">內嵌字幕</button>
+									<button id="{{ Request::get('torrent') == 'true' ? 'defaultOpen' : '' }}" data-tabcontent="softsub-tabcontent" class="tablinks" style="margin-right: 10px;">外掛字幕</button>
+					      </div>
+
+					      <!-- Tab content -->
+					      <div id="hardsub-tabcontent" class="tabcontent" style="margin-top: 65px">
+					      	@include('video.download-panel', ['qualities' => $qualities])
+					      </div>
+					      <div id="softsub-tabcontent" class="tabcontent" style="margin-top: 65px">
+					      	<table class="download-table">
+										<tr>
+											<th></th>
+											<th>檔案名稱</th>
+											<th>檔案類型</th>
+											<th>下載鏈結</th>
+										</tr>
+											<tr>
+												<td style="text-align: center;"><span style="vertical-align: middle;" class="material-icons">play_circle_filled</span></td>
+												<td>
+												[Hanime1字幕組]{{ str_replace(' [中文字幕]', '', $video->translations['JP']) }}
+												</td>
+												<td style="min-width: 77px;">
+												torrent
+												</td>
+												<td style="min-width: 77px;"><a class="exoclick-popunder" style="text-decoration: none; color: white; text-align: center; background-color: crimson; padding: 5px 10px; border-radius: 5px;" href="{{ $torrent }}" download="{{ $video->title }}">下載</a></td>
+											</tr>
+									</table>
+					      </div>
+
+					    @else
+						    @include('video.download-panel', ['qualities' => $qualities])
+				      @endif
+
 		        </div>
 			</div>
 		</div>

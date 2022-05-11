@@ -16,16 +16,18 @@
 
       @if ($current->sd_sc)
         <div id="player-lang-wrapper" style="position: absolute; top: 10px; left: 10px; z-index: 1;" class="dropdown">
-          <button style="outline:0;" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <button style="outline:0; border-radius: 0px !important;" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             {{ $lang == 'zh-CHS' ? '简体字幕' : '繁體字幕'}}
             <span class="material-icons">arrow_drop_down</span>
           </button>
-          <div id="player-switch-lang" data-lang="{{ $lang }}" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <div id="player-switch-lang" style="margin-top: 0px; border: none; border-radius: 0px !important; border-top: 2px solid rgba(0, 0, 0, 0.5);" data-lang="{{ $lang }}" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             {{ $lang == 'zh-CHS' ? '繁體字幕' : '简体字幕'}}
           </div>
-          <!-- <a href="{{ route('video.download') }}?type=torrent" id="player-switch-torrent" style="text-decoration: none;" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              外掛字幕
-          </a> -->
+          @if ($video->has_torrent)
+            <a href="{{ route('video.download') }}?v={{ $video->id }}&torrent=true" id="player-switch-torrent" style="text-decoration: none; border-radius: 0px !important;" class="dropdown-menu" aria-labelledby="dropdownMenuButton" target="_blank">
+                外掛字幕
+            </a>
+          @endif
         </div>
       @endif
 
