@@ -421,7 +421,7 @@ class Rule34
         "sawada tsunayoshi" => '澤田綱吉',
         "katekyo hitman reborn!" => '家庭教師HITMAN REBORN!',
         "yaoi" => '耽美',
-        "maoh king" => 'MaohKing',
+        "maoh king" => 'Maoh King',
         "gunha sogiita" => '削板軍霸',
         "accelerator" => '一方通行',
         "shouto todoroki" => '轟焦凍',
