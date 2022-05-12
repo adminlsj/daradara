@@ -25,7 +25,7 @@ class Comment extends Model
 
     public function preview()
     {
-        return $this->belongsTo('App\Preview', 'foreign_id');
+        return $this->belongsTo('App\Preview', 'foreign_id', 'uuid');
     }
 
     public function likes()
