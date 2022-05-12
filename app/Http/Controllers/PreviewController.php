@@ -19,17 +19,17 @@ class PreviewController extends Controller
     public function show(Request $request)
     {
         $uuid = $request->preview;
-        $preview = Preview::where('uuid', $uuid)->first();
         $year = substr($uuid, 0, 4);
         $month = ltrim(substr($uuid, 4, 6), '0');
 
-        $prev = Preview::where('id', $preview->id - 1)->first();
-        $next = Preview::where('id', $preview->id + 1)->first();
+        $current = Carbon::createFromFormat('Ym',  $uuid);
+        $prev = Preview::where('uuid', $current->subMonth()->format('Ym'))->first();
+        $next = Preview::where('uuid', $current->addMonths(2)->format('Ym'))->first();
 
-        $videos = Video::whereYear('created_at', $year)->whereMonth('created_at', $month)->orderBy('created_at', 'asc')->where('uncover', false)->where('tags', 'not like', '泡麵番%')->select('id', 'title', 'translations', 'caption', 'tags_array', 'cover', 'created_at')->get();
+        $previews = Preview::with('video:id,title,imgur,translations,caption,tags_array,cover,artist,created_at')->where('uuid', $uuid)->orderBy('created_at', 'asc')->get();
 
-        $comments_count = Comment::where('foreign_id', $preview->id)->where('type', 'preview')->count();
+        $comments_count = Comment::where('foreign_id', $uuid)->where('type', 'preview')->count();
 
-        return view('preview.show', compact('preview', 'year', 'month', 'videos', 'comments_count', 'prev', 'next'));
+        return view('preview.show', compact('previews', 'year', 'month', 'comments_count', 'prev', 'next'));
     }
 }

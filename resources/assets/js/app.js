@@ -409,6 +409,28 @@ $("form#playlist-show-add-form").submit(function(e) {
     })
 });
 
+$('.preview-images-modal').on('shown.bs.modal', function (event) {
+    var modal = '#' + $(this).attr('id');
+    var modal_mody = $(modal + ' .modal-body');
+    modal_mody.scrollTop(0);
+
+    var image = $(event.relatedTarget).data('image');
+    var imageOffset = $(image).position();
+
+    $(modal + ' .modal-body').scrollTop(imageOffset.top - modal_mody.height() / 2 + $(image).height() / 2);
+});
+
+$('.trailer-modal-trigger').click(function() {
+    var id = $(this).data('target');
+    var video = $(id).find('video');
+    video.get(0).play();
+})
+
+$('.preview-trailer-modal').on('hidden.bs.modal', function (event) {
+    var video = $(this).find('video');
+    video.get(0).pause();
+})
+
 function showSnackbar(text) {
     var snackbar = document.getElementById("snackbar");
     snackbar.innerHTML = text;

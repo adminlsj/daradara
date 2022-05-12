@@ -1193,6 +1193,16 @@ th, td {
   width: 71.5%;
 }
 
+.play-modal, .trailer-modal-wrapper {
+  width: calc(60%);
+  margin: 0;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translateY(-50%, -50%);
+}
+
 .xv-logo {
   display: none !important;
 }
@@ -2386,6 +2396,10 @@ div.sticky {
     width: 85%;
   }
 
+  .trailer-modal-wrapper {
+    width: calc(80%);
+  }
+
   .comment-index-text {
     padding-left: 56px;
   }
@@ -2877,11 +2891,9 @@ div.sticky {
     padding-bottom: 48px;
   }
 
-  .play-modal {
+  .play-modal, .trailer-modal-wrapper {
     width: calc(100% - 10px);
-    margin: 0;
-    position: absolute;
-    top: 50%;
+    left: 0%;
     -ms-transform: translateY(-50%) !important;
     transform: translateY(-50%) !important;
     margin-left: 5px;

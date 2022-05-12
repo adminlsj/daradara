@@ -8,7 +8,7 @@ use App\Preview;
 class Preview extends Model
 {
     protected $casts = [
-        'votes' => 'array'
+        'images' => 'array', 'votes' => 'array'
     ];
 
     protected $fillable = [
@@ -28,4 +28,9 @@ class Preview extends Model
         5 => '星期五',
         6 => '星期六',
     ];
+
+    public function video()
+    {
+        return $this->belongsTo('App\Video', 'video_id');
+    }
 }
