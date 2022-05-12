@@ -179,9 +179,9 @@
             <div class="single-video-tag"><a href="/search?tags%5B%5D={{ $tag }}&genre=裏番">{{ $tag }}</a></div>
           @endforeach
         </h5>
-        <div style="overflow-x: scroll !important; white-space: nowrap;" class="hide-scrollbar">
+        <div style="overflow-x: scroll !important; white-space: nowrap; margin-left: -15px; margin-right: -15px; padding-left: 15px;" class="hide-scrollbar">
           @foreach ($preview->images as $image)
-            <img style="object-fit: cover; width:110px; height:80px; margin-right: 4px; margin-bottom: 8px; cursor: pointer;" class="preview-image-modal-trigger" src="{{ $image }}" data-toggle="modal" data-target="#imagesModal-{{ $preview->video->id }}" data-image="#image-{{ $preview->video->id }}-{{ $loop->iteration }}">
+            <img style="object-fit: cover; width:110px; height:80px; margin-right: {{ $loop->last ? '15px' : '4px' }}; margin-bottom: 8px; cursor: pointer;" class="preview-image-modal-trigger" src="{{ $image }}" data-toggle="modal" data-target="#imagesModal-{{ $preview->video->id }}" data-image="#image-{{ $preview->video->id }}-{{ $loop->iteration }}">
           @endforeach
         </div>
       </div>
