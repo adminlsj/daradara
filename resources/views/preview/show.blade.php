@@ -150,7 +150,7 @@
                   <div class="modal-content" style="border-radius: 3px; background-color: #222222; color: white">
                     <div class="modal-header" style="border-bottom: 1px solid #333333; position: relative; height: 65px;">
                       <span class="material-icons pull-left no-select modal-close-btn" data-dismiss="modal">close</span>
-                      <h4 class="modal-title" style="text-align: center; font-weight: bold; margin: 0; padding: 0; margin-top: 5px; font-size: 18px;">{{ $preview->video->title }}</h4>
+                      <h4 class="modal-title" style="text-align: center; font-weight: bold; margin: 0; padding: 0; margin-top: 5px; font-size: 18px;">{{ str_replace('[新番預告]', '', $preview->video->title) }}</h4>
                     </div>
                     <div class="modal-body" style="padding: 0px">
                       @foreach ($preview->images as $image)
