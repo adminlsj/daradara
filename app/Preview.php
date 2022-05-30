@@ -16,7 +16,7 @@ class Preview extends Model
     ];
 
     public static $brands = [
-        'あんてきぬすっ', 'ショーテン', 'ピンクパイナップル', '魔人', 'PoRO', 'Queen Bee', 'メリー・ジェーン', '鈴木みら乃', 'ばにぃうぉ～か～', '彗星社', '妄想専科', 'nur', '妄想実現めでぃあ'
+        'あんてきぬすっ', 'ショーテン', 'ピンクパイナップル', '魔人', 'PoRO', 'Queen Bee', 'メリー・ジェーン', '鈴木みら乃', 'ばにぃうぉ～か～', '彗星社', '妄想専科', 'nur', '妄想実現めでぃあ', 'King Bee'
     ];
 
     public static $weekMap = [
