@@ -22,9 +22,9 @@ class PreviewController extends Controller
         $year = substr($uuid, 0, 4);
         $month = ltrim(substr($uuid, 4, 6), '0');
 
-        $current = Carbon::createFromFormat('Ym',  $uuid);
-        $prev = Preview::where('uuid', $current->subMonth()->format('Ym'))->first();
-        $next = Preview::where('uuid', $current->addMonths(2)->format('Ym'))->first();
+        $current = Carbon::createFromFormat('Ym',  $uuid, 'Asia/Taipei');
+        $prev = Preview::where('uuid', $current->subMonthsNoOverflow(1)->format('Ym'))->first();
+        $next = Preview::where('uuid', $current->addMonthsNoOverflow(2)->format('Ym'))->first();
 
         $previews = Preview::with('video:id,title,imgur,translations,caption,tags_array,cover,artist,created_at')->where('uuid', $uuid)->orderBy('created_at', 'asc')->get();
 

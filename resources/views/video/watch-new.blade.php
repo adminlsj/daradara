@@ -276,9 +276,11 @@
     </div>
   </div>
 
-  <div id="bottom-ads" style="margin-top: 30px; margin-bottom: 0px; text-align: center;" class="hidden-xs hidden-sm">
-    @include('layouts.exoclick', ['id' => '4372454', 'width' => '900', 'height' => '250'])
-  </div>
+  @if (!$is_mobile)
+    <div id="bottom-ads" style="margin-top: 30px; margin-bottom: 0px; text-align: center;" class="hidden-xs hidden-sm">
+      @include('layouts.exoclick', ['id' => '4372454', 'width' => '900', 'height' => '250'])
+    </div>
+  @endif
 
   @include('video.userReportModal')
   @include('video.shareModal')
