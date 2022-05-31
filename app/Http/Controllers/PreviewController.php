@@ -22,7 +22,7 @@ class PreviewController extends Controller
         $year = substr($uuid, 0, 4);
         $month = ltrim(substr($uuid, 4, 6), '0');
 
-        $current = Carbon::createFromFormat('Ym d H:i:s',  $uuid.' 01 00:00:00');
+        $current = Carbon::createFromFormat('Ym d H:i:s',  $uuid.' 15 00:00:00');
         $prev = Preview::where('uuid', $current->subMonths(1)->format('Ym'))->first();
         $next = Preview::where('uuid', $current->addMonths(2)->format('Ym'))->first();
 
