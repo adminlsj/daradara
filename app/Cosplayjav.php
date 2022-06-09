@@ -13,6 +13,8 @@ class Cosplayjav
     ];
 
     public static $translations = [
+        "Eris Boreas Greyrat (エリス・ボレアス・グレイラット)" => '愛莉絲·伯雷亞斯·格雷拉特',
+        "Roxy Migurdia (ロキシー・ミグルディア)" => '洛琪希·米格路迪亞',
         "Kamado Nezuko (竈門 禰豆子)" => '竈門禰󠄀豆子',
         "Kimetsu No Yaiba" => '鬼滅之刃',
         "Kurumi (胡桃)" => '胡桃',
