@@ -29,7 +29,7 @@ class Video extends Model
     ];
 
     public static $vod_servers = [
-        [1, 2, 3, 4, 6, 7, 8]
+        [1, 2, 3, 4, 6, 7, 8, 9]
     ];
 
     public static $metadata = [
