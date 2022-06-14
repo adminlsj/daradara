@@ -66,7 +66,7 @@ class CheckOdysee extends Command
                 $video->sd = $redirectUrl;
                 $video->save();
 
-                Mail::to('vicky.avionteam@gmail.com')->send(new UserReport('master', 'Odysee m3u8 updated ('.$httpcode.')', $video->id, $video->title, $video->sd, 'master', 'master'));
+                // Mail::to('vicky.avionteam@gmail.com')->send(new UserReport('master', 'Odysee m3u8 updated ('.$httpcode.')', $video->id, $video->title, $video->sd, 'master', 'master'));
 
             } elseif ($httpcode != 200 && $httpcode != 0) {
 
