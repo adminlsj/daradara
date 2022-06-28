@@ -1805,7 +1805,7 @@ class BotController extends Controller
     public function downloadAvbebeM3u8(Request $request)
     {
         $vid = str_replace('https://avbebe.com/archives/', '', $request->url);
-        $m3u8 = "https://v.avgigi.com/acg/watch/{$vid}/{$vid}.m3u8";
+        $m3u8 = "https://v.avgigi.com/acg/3D/{$vid}/video.m3u8";
         $referer = "https://avgigi.com/";
         $opts = [
             'http' => [
@@ -1828,7 +1828,7 @@ class BotController extends Controller
         $total = explode('.ts', $total)[0];
 
         for ($i = 0; $i <= $total; $i++) { 
-            $url = "https://v.avgigi.com/acg/watch/{$vid}/{$vid}{$i}.ts";
+            $url = "https://v.avgigi.com/acg/3D/{$vid}/video{$i}.ts";
             Storage::disk('local')->put("video/{$vid}{$i}.ts", file_get_contents($url, false, $context));
         }
     }
