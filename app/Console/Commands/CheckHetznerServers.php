@@ -51,7 +51,7 @@ class CheckHetznerServers extends Command
                 echo "vdownload-{$server}.hembed.com returned status code {$httpcode}<br>";
                 Log::info("vdownload-{$server}.hembed.com returned status code {$httpcode}");
 
-                if ($httpcode != 200 && $httpcode != 0) {
+                if ($httpcode != 200) {
                     Mail::to('vicky.avionteam@gmail.com')->send(new UserReport('master', 'Hetzner server #'.$server.' failed ('.$httpcode.')', 'master', 'master', "https://vdownload-{$server}.hembed.com/", 'master', 'master'));
                 }
             }
