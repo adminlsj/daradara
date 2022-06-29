@@ -7,6 +7,7 @@ use App\Video;
 use App\Motherless;
 use Mail;
 use App\Mail\UserReport;
+use Illuminate\Support\Facades\Log;
 
 class CheckHetznerServers extends Command
 {
@@ -41,16 +42,21 @@ class CheckHetznerServers extends Command
      */
     public function handle()
     {
+        Log::info('Hetzner servers check started...');
+
         $vod_servers = Video::$vod_servers;
         foreach ($vod_servers as $servers) {
             foreach ($servers as $server) {
                 $httpcode = Motherless::getHttpcode("https://vdownload-{$server}.hembed.com/");
                 echo "vdownload-{$server}.hembed.com returned status code {$httpcode}<br>";
+                Log::info("vdownload-{$server}.hembed.com returned status code {$httpcode}");
 
                 if ($httpcode != 200 && $httpcode != 0) {
                     Mail::to('vicky.avionteam@gmail.com')->send(new UserReport('master', 'Hetzner server #'.$server.' failed ('.$httpcode.')', 'master', 'master', "https://vdownload-{$server}.hembed.com/", 'master', 'master'));
                 }
             }
         }
+
+        Log::info('Hetzner servers check ended...');
     }
 }

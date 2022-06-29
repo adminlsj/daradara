@@ -15,6 +15,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         'App\Console\Commands\ResetViews',
         'App\Console\Commands\CheckSpankbang',
+        'App\Console\Commands\CheckHetznerServers',
         'App\Console\Commands\CheckMotherless',
         'App\Console\Commands\CheckOdysee',
 
@@ -49,6 +50,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('hanime1:update-youjizzdownloads')->cron('0 */6 * * *');
 
         $schedule->command('hanime1:check-spankbang')->hourly();
+        $schedule->command('hanime1:check-hetznerservers')->hourly();
         $schedule->command('hanime1:check-motherless')->cron('0 */2 * * *');
         $schedule->command('hanime1:check-odysee')->cron('0 */2 * * *');
 
