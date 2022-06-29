@@ -1832,4 +1832,19 @@ class BotController extends Controller
             Storage::disk('local')->put("video/{$vid}{$i}.ts", file_get_contents($url, false, $context));
         }
     }
+
+    public function checkHetznerServers()
+    {
+        $vod_servers = Video::$vod_servers;
+        foreach ($vod_servers as $servers) {
+            foreach ($servers as $server) {
+                $httpcode = Motherless::getHttpcode("https://vdownload-{$server}.hembed.com/");
+                echo "vdownload-{$server}.hembed.com returned status code {$httpcode}<br>";
+
+                if ($httpcode != 200 && $httpcode != 0) {
+                    Mail::to('vicky.avionteam@gmail.com')->send(new UserReport('master', 'Hetzner server #'.$server.' failed ('.$httpcode.')', 'master', 'master', "https://vdownload-{$server}.hembed.com/", 'master', 'master'));
+                }
+            }
+        }
+    }
 }

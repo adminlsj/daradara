@@ -93,6 +93,8 @@ Route::group(['middleware' => 'admin'], function () {
 
 	Route::get('/updateXvideos', 'BotController@updateXvideos');
 
+	Route::get('/checkHetznerServers', 'BotController@checkHetznerServers');
+
 	Route::get('/checkMotherless', 'BotController@checkMotherless');
 
 	Route::get('/uploadRule34', 'BotController@uploadRule34');
