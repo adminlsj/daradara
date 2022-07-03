@@ -941,6 +941,7 @@ class Rule34
         "yui (princess connect!)" => '草野優衣',
         "yukihana lamy" => '雪花菈米',
         "zone-tan" => 'ZONE-tan',
+        "kizu" => 'KIZU',
     ];
 
     public static function translateRule34()
