@@ -945,7 +945,7 @@ class Rule34
 
     public static function translateRule34()
     {
-        $videos = Video::where('foreign_sd', 'like', '%"rule34"%')->where('tags_array', '!=', null)->where('created_at', '>=', Carbon::now()->subDays(30))/*->where('playlist_id', 3795)*/->get();
+        $videos = Video::where('foreign_sd', 'like', '%"rule34"%')->where('tags_array', '!=', null)/*->where('created_at', '>=', Carbon::now()->subDays(30))*/->where('playlist_id', 3875)->get();
         $translations = Rule34::$translations;
         $removed = Rule34::$removed;
         foreach ($videos as $video) {
