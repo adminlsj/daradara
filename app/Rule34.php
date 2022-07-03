@@ -8,7 +8,7 @@ use Carbon\Carbon;
 class Rule34
 {
     public static $artists = [
-        /* '64454' => 'https://rule34.xxx/index.php?page=post&s=list&tags=akino_%28artist%29+video',
+        '64454' => 'https://rule34.xxx/index.php?page=post&s=list&tags=akino_%28artist%29+video',
         '71759' => 'https://rule34.xxx/index.php?page=post&s=list&tags=ocarinaotw+video',
         '68275' => 'https://rule34.xxx/index.php?page=post&s=list&tags=ceo_neet+video',
         '68014' => 'https://rule34.xxx/index.php?page=post&s=list&tags=maenchu+video',
@@ -22,7 +22,7 @@ class Rule34
         '94744' => 'https://rule34.xxx/index.php?page=post&s=list&tags=funhentaiparody+video',
         '94747' => 'https://rule34.xxx/index.php?page=post&s=list&tags=yuukis+video',
         '202534' => 'https://rule34.xxx/index.php?page=post&s=list&tags=maplestar+video',
-        '225181' => 'https://rule34.xxx/index.php?page=post&s=list&tags=najar+video', */
+        '225181' => 'https://rule34.xxx/index.php?page=post&s=list&tags=najar+video',
         '276217' => 'https://rule34.xxx/index.php?page=post&s=list&tags=kizu+video',
     ];
 
