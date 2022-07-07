@@ -35,6 +35,8 @@ class Rule34
     ];
 
     public static $translations = [
+        "aozaki aoko" => '蒼崎青子',
+        "mahou tsukai no yoru" => '魔法使之夜',
         "kujou sara" => '九條裟羅',
         "rei (超異域公主連結☆Re:Dive)" => '士條怜',
         "shikimori micchon" => '式守',
