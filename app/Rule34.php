@@ -35,6 +35,9 @@ class Rule34
     ];
 
     public static $translations = [
+        "melty blood" => 'Melty Blood 逝血之戰',
+        "type-moon" => 'TYPE-MOON',
+        "tsukihime" => '月姬',
         "aozaki aoko" => '蒼崎青子',
         "mahou tsukai no yoru" => '魔法使之夜',
         "kujou sara" => '九條裟羅',
