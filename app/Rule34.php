@@ -35,6 +35,8 @@ class Rule34
     ];
 
     public static $translations = [
+        "ryougi shiki" => '兩儀式',
+        "kara no kyoukai" => '空之境界',
         "melty blood" => 'Melty Blood 逝血之戰',
         "type-moon" => 'TYPE-MOON',
         "tsukihime" => '月姬',
