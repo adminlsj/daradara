@@ -99,7 +99,7 @@ class BotController extends Controller
             Storage::disk('local')->put("video/".basename($ts), file_get_contents($ts, false, $context));
         } */
 
-        /* $tc = Storage::disk('local')->files('video/tc');
+        $tc = Storage::disk('local')->files('video/tc');
         foreach ($tc as $video) {
             $extension = explode('.', $video)[1];
             if ($extension == 'ts') {
@@ -117,7 +117,7 @@ class BotController extends Controller
                 $folder = $number % 3;
                 Storage::disk('local')->move($video, "video/sc/{$folder}/p_{$number}.html");
             }
-        } */
+        }
 
         /* $videos = Video::where('foreign_sd', 'like', '%"youjizz"%')->get();
         foreach ($videos as $video) {
