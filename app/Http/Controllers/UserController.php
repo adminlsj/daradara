@@ -68,9 +68,16 @@ class UserController extends Controller
                 'email' => 'required|string|email|max:255|unique:users,email,'.$user->id
             ]);
 
-            $user->name = request('name');
-            $user->email = request('email');
-            $user->save();
+            $name = strtolower(request('name'));
+            if (strpos($name, 'ye9x') === false && strpos($name, 'ai129') === false) {
+
+                $user->name = request('name');
+                $user->email = request('email');
+                $user->save();
+
+            } else {
+                abort(403);
+            }
 
         } elseif ($type == 'password') {
 
