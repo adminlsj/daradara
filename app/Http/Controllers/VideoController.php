@@ -311,7 +311,7 @@ class VideoController extends Controller
             'comment-text' => 'required|string|max:255',
         ]);
 
-        $text = request('comment-text');
+        $text = strtolower(request('comment-text'));
         if (strpos($text, 'ye9x') === false && strpos($text, 'ai129') === false) {
 
             $comment = Comment::create([
