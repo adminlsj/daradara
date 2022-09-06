@@ -311,12 +311,19 @@ class VideoController extends Controller
             'comment-text' => 'required|string|max:255',
         ]);
 
-        $comment = Comment::create([
-            'user_id' => request('comment-user-id'),
-            'type' => request('comment-type'),
-            'foreign_id' => request('comment-foreign-id'),
-            'text' => request('comment-text'),
-        ]);
+        $text = request('comment-text');
+        if (strpos($text, 'ye9x') === false && strpos($text, 'ai129') === false) {
+
+            $comment = Comment::create([
+                'user_id' => request('comment-user-id'),
+                'type' => request('comment-type'),
+                'foreign_id' => request('comment-foreign-id'),
+                'text' => request('comment-text'),
+            ]);
+
+        } else {
+            abort(403);
+        }
 
         $html = '';
         $html .= view('video.singleVideoComment', compact('comment'));
