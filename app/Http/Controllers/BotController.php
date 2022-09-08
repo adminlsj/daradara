@@ -34,7 +34,7 @@ class BotController extends Controller
         ini_set('memory_limit', '-1');
 
         $users = User::where('name', 'ilike', '%ye9x%')->get();
-        return $users;
+        $users->delete();
 
         /* $artist = $request->artist;
         $videos = Video::where('tags_array', 'like', '%"'.$artist.'"%')->get();
