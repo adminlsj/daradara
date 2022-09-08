@@ -33,7 +33,7 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $user_array = Comment::groupBy('user_id')->where('text', 'ilike', '%168663%')->pluck('user_id');
+        return $user_array = Comment::where('text', 'ilike', '%a%')->groupBy('user_id')->pluck('user_id');
         User::destroy($user_array);
 
         /* $artist = $request->artist;

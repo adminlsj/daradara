@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use App\User;
+use App\Comment;
 use Illuminate\Support\Facades\Log;
 
 class RemoveSpam extends Command
@@ -41,7 +42,12 @@ class RemoveSpam extends Command
     {
         Log::info('Spam remove started...');
 
+        // Remove spam users
         User::where('name', 'ilike', '%ye9x%')->delete();
+
+        // Remove spam comments users
+        $user_array = Comment::where('text', 'ilike', '%168663%')->groupBy('user_id')->pluck('user_id');
+        User::destroy($user_array);
 
         Log::info('Spam remove ended...');
     }
