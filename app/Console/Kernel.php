@@ -30,6 +30,8 @@ class Kernel extends ConsoleKernel
 
         'App\Console\Commands\UploadNhentai',
         'App\Console\Commands\UploadRule34',
+
+        'App\Console\Commands\RemoveSpam',
     ];
 
     /**
@@ -56,6 +58,8 @@ class Kernel extends ConsoleKernel
 
         $schedule->command('hanime1:upload-nhentai')->hourly()->between('6:00', '21:00');
         $schedule->command('hanime1:upload-rule34')->hourly()->between('6:00', '21:00');
+
+        $schedule->command('hanime1:remove-spam')->everyMinute();
     }
 
     /**
