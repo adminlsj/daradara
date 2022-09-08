@@ -36,7 +36,7 @@ class BotController extends Controller
         $users = User::where('name', 'ilike', '%ye9x%')->delete();
 
         $user_array = Comment::groupBy('user_id')->where('text', 'ilike', '%168663%')->pluck('user_id');
-        $users = User::whereIn($user_array)->delete();
+        $users = User::whereIn('id', $user_array)->delete();
 
         /* $artist = $request->artist;
         $videos = Video::where('tags_array', 'like', '%"'.$artist.'"%')->get();
