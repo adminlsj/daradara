@@ -1648,7 +1648,8 @@ class BotController extends Controller
             foreach ($nhentai_ids as $nhentai_id) {
                 if (!Comic::where('nhentai_id', $nhentai_id)->exists()) {
                     $url = 'https://nhentai.net/g/'.$nhentai_id.'/';
-                    echo '<a href="'.$url.'" target="_blank">'.$url.'</a><br>';
+                    // echo '<a href="view-source:'.$url.'" target="_blank">'.$url.'</a><br>';
+                    echo 'view-source:'.$url;
                 }
             }
 
