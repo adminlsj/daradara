@@ -49,7 +49,7 @@ class RemoveSpam extends Command
         $user_array = Comment::where('text', 'ilike', '%168663%')
                            ->orWhere('text', 'ilike', '%福利宅男B站%')
                            ->orWhere('text', 'ilike', '%福利站%')
-                           ->orWhere('text', 'ilike', '%无码麻豆%')
+                           ->orWhere('text', 'ilike', '%麻豆%')
                            ->groupBy('user_id')
                            ->pluck('user_id');
         
