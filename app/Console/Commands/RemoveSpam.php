@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use App\User;
 use App\Comment;
 use Illuminate\Support\Facades\Log;
+use Carbon\Carbon;
 
 class RemoveSpam extends Command
 {
