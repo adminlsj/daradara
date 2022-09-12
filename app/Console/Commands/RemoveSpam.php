@@ -51,6 +51,8 @@ class RemoveSpam extends Command
                            ->orWhere('text', 'ilike', '%福利站%')
                            ->orWhere('text', 'ilike', '%麻豆%')
                            ->orWhere('text', 'ilike', '%萝莉嗷嗷叫%')
+                           ->orWhere('text', 'ilike', '%地址头像%')
+                           ->orWhere('text', 'ilike', '%头像拿走地址%')
                            ->groupBy('user_id')
                            ->pluck('user_id');
         
