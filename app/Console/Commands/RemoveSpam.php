@@ -47,15 +47,11 @@ class RemoveSpam extends Command
         User::where('name', 'ilike', '%ye9x%')->delete();
 
         // Remove spam comments users
-        $user_array = Comment::where('text', 'ilike', '%168663%')
-                            ->orWhere('text', 'ilike', '%福利宅男B站%')
-                            ->orWhere('text', 'ilike', '%福利站%')
-                            ->orWhere('text', 'ilike', '%麻豆%')
-                            ->orWhere('text', 'ilike', '%萝莉嗷嗷叫%')
-                            ->orWhere(function($query) {
-                                $query->where('text', 'ilike', '%头像%')
-                                      ->whereDate('created_at', Carbon::today());
+        $user_array = Comment::where(function($query) {
+                                $query->where('ip_address', '103.172.182.30')
+                                      ->orWhere('ip_address', '20.205.41.101')
                             })
+                            ->whereDate('created_at', Carbon::today())
                             ->groupBy('user_id')
                             ->pluck('user_id');
         
