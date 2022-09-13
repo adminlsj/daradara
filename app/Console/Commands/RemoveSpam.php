@@ -46,7 +46,8 @@ class RemoveSpam extends Command
         $user_array = Comment::whereIn('ip_address', [
                                 '103.172.182.30',
                                 '20.205.41.101',
-                                '103.164.81.248'
+                                '103.164.81.248',
+                                '157.230.254.108'
                             ])
                             ->whereDate('created_at', Carbon::today())
                             ->groupBy('user_id')
