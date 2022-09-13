@@ -43,14 +43,10 @@ class RemoveSpam extends Command
     {
         Log::info('Spam remove started...');
 
-        // Remove spam users
-        User::where('name', 'ilike', '%ye9x%')->delete();
-
-        // Remove spam comments users
-        $user_array = Comment::where(function($query) {
-                                $query->where('ip_address', '103.172.182.30')
-                                      ->orWhere('ip_address', '20.205.41.101')
-                            })
+        $user_array = Comment::whereIn('ip_address', [
+                                '103.172.182.30',
+                                '20.205.41.101'
+                            ])
                             ->whereDate('created_at', Carbon::today())
                             ->groupBy('user_id')
                             ->pluck('user_id');
