@@ -65,13 +65,14 @@ class RemoveSpam extends Command
                                 '2001:67c:198c:906:7a45:c4ff:fefb:b61a',
                                 '217.64.127.46',
                                 '8.210.42.103',
-                                '211.22.180.19'
+                                '211.22.180.19',
+                                '139.177.194.114'
                             ])
                             ->whereDate('created_at', Carbon::today())
                             ->groupBy('user_id')
                             ->pluck('user_id');
 
-        $keyword_user_array = Comment::where('text', 'ilike', '%id372059%')
+        $keyword_user_array = Comment::where('text', 'ilike', '%paply%')
                             ->whereDate('created_at', Carbon::today())
                             ->groupBy('user_id')
                             ->pluck('user_id');
