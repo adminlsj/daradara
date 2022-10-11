@@ -1837,6 +1837,22 @@ class BotController extends Controller
         }
     }
 
+    public function downloadAvbebeMp4(Request $request)
+    {
+        $vid = str_replace('https://avbebe.com/archives/', '', $request->url);
+        $mp4 = "https://v.avgigi.com/acg/watch/{$vid}.mp4";
+        $referer = "https://avgigi.com/";
+        $opts = [
+            'http' => [
+               'header' => [
+                    "Referer: https://avgigi.com/"
+                ]
+            ]
+        ];
+        $context = stream_context_create($opts);
+        Storage::disk('local')->put("video/{$vid}.mp4", file_get_contents($mp4, false, $context));
+    }
+
     public function checkHetznerServers()
     {
         $vod_servers = Video::$vod_servers;
