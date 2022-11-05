@@ -39,6 +39,12 @@ class BotController extends Controller
             $video->save();
         }
 
+        /* return $videos = Video::where('cover', 'not like', '%E6mSQA2%')->where('genre', null)->get();
+        foreach ($videos as $video) {
+            $video->genre = '泡麵番';
+            $video->save();
+        } */
+
         /* $artist = $request->artist;
         $videos = Video::where('tags_array', 'like', '%"'.$artist.'"%')->get();
         foreach ($videos as $video) {
