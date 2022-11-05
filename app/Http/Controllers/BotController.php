@@ -33,9 +33,9 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $videos = Video::where('tags_array', 'ilike', '%新番預告%')->where('genre', null)->get();
+        $videos = Video::where('cover', 'not like', '%E6mSQA2%')->where('genre', null)->get();
         foreach ($videos as $video) {
-            $video->genre = '新番預告';
+            $video->genre = '裏番';
             $video->save();
         }
 
