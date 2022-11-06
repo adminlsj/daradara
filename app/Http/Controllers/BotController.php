@@ -33,9 +33,9 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $videos = Video::where('genre', null)->get();
+        $videos = Video::where('genre', '動態漫')->get();
         foreach ($videos as $video) {
-            $video->genre = '同人作品';
+            $video->genre = 'Motion Anime';
             $video->save();
         }
 
