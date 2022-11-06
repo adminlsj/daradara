@@ -150,6 +150,12 @@ class HomeController extends Controller
                     });
                     break;
 
+                case 'Motion Anime':
+                    $videos = $videos->where(function($query) {
+                        $query->orWhere('genre', 'Motion Anime');
+                    });
+                    break;
+
                 case '3D動畫':
                     $videos = $videos->where(function($query) {
                         $query->orWhere('genre', '3D動畫');
