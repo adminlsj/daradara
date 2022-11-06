@@ -139,32 +139,32 @@ class HomeController extends Controller
                 case '裏番':
                     $doujin = false;
                     $videos = $videos->where(function($query) {
-                        $query->orWhere('tags', 'not like', '泡麵番%');
+                        $query->orWhere('genre', '裏番');
                     });
                     break;
 
                 case '泡麵番':
                     $doujin = false;
                     $videos = $videos->where(function($query) {
-                        $query->orWhere('tags_array', 'like', '%"泡麵番"%')->where('foreign_sd', 'like', '%"bangumi"%');
+                        $query->orWhere('genre', '泡麵番')->where('foreign_sd', 'like', '%"bangumi"%');
                     });
                     break;
 
                 case '3D動畫':
                     $videos = $videos->where(function($query) {
-                        $query->orWhere('tags_array', 'like', '%"3D"%');
+                        $query->orWhere('genre', '3D動畫');
                     });
                     break;
 
                 case '同人作品':
                     $videos = $videos->where(function($query) {
-                        $query->orWhere('tags_array', 'like', '%"同人"%');
+                        $query->orWhere('genre', '同人作品');
                     });
                     break;
 
                 case 'Cosplay':
                     $videos = $videos->where(function($query) {
-                        $query->orWhere('tags_array', 'like', '%"Cosplay"%');
+                        $query->orWhere('genre', 'Cosplay');
                     });
                     break;
                 

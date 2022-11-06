@@ -11,11 +11,12 @@
     </div>
 
     <!-- <a class="nav-home-mobile-button" href="/" style="background-color: #FFFFFF; color: black; border-color: white;">主頁</a> -->
-    <a class="nav-home-mobile-button" href="{{ route('home.search') }}?genre=裏番&duration=&sort=&query=&year=&month=">裏番</a>
-    <a class="nav-home-mobile-button" href="{{ route('home.search') }}?genre=泡麵番&duration=&sort=&query=&year=&month=">泡麵番</a>
-    <a class="nav-home-mobile-button" href="{{ route('home.search') }}?genre=3D動畫&duration=&sort=&query=&year=&month=">3D動畫</a>
-    <a class="nav-home-mobile-button" href="{{ route('home.search') }}?genre=同人作品&duration=&sort=&query=&year=&month=">同人作品</a>
-    <a class="nav-home-mobile-button" href="{{ route('home.search') }}?genre=Cosplay&duration=&sort=&query=&year=&month=">Cosplay</a>
+    <a class="nav-home-mobile-button" href="{{ route('home.search') }}?genre=裏番">裏番</a>
+    <a class="nav-home-mobile-button" href="{{ route('home.search') }}?genre=泡麵番">泡麵番</a>
+    <a class="nav-home-mobile-button" href="{{ route('home.search') }}?genre=Motion+Anime">Motion Anime</a>
+    <a class="nav-home-mobile-button" href="{{ route('home.search') }}?genre=3D動畫">3D動畫</a>
+    <a class="nav-home-mobile-button" href="{{ route('home.search') }}?genre=同人作品">同人作品</a>
+    <a class="nav-home-mobile-button" href="{{ route('home.search') }}?genre=Cosplay">Cosplay</a>
     <a class="nav-home-mobile-button" href="/previews/{{ Carbon\Carbon::now()->format('Ym') }}">新番預告</a>
     <a class="nav-home-mobile-button" href="{{ route('comic.index') }}" style="margin-right: 10px;">H漫畫</a>
   </div>
