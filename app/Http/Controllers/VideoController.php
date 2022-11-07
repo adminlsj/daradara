@@ -43,7 +43,7 @@ class VideoController extends Controller
 
             $videos = Video::where('playlist_id', $video->playlist_id)->orderBy('created_at', 'desc')->select('id', 'user_id', 'cover', 'imgur', 'title', 'sd', 'views', 'created_at')->get();
 
-            $tags_random = array_keys($video->tags_array);
+            $tags = $tags_random = array_keys($video->tags_array);
             shuffle($tags_random);
             $tags_slice = array_slice($tags_random, 0, 5);
             $genre = $video->genre;
