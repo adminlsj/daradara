@@ -28,7 +28,7 @@ class VideoController extends Controller
     {
         $vid = $request->v;
 
-        if (is_numeric($vid) && $video = Video::with('watch:id,title')->select('id', 'user_id', 'playlist_id', 'comic_id', 'title', 'translations', 'caption', 'cover', 'tags_array', 'sd', 'qualities', 'downloads', 'sd_sc', 'qualities_sc', 'downloads_sc', 'outsource', 'has_subtitles', 'current_views', 'week_views', 'month_views', 'views', 'imgur', 'foreign_sd', 'duration', 'has_torrent', 'artist', 'created_at', 'uploaded_at')->withCount('likes')->find($vid)) {
+        if (is_numeric($vid) && $video = Video::with('watch:id,title')->select('id', 'user_id', 'playlist_id', 'comic_id', 'title', 'translations', 'caption', 'cover', 'genre', 'tags_array', 'sd', 'qualities', 'downloads', 'sd_sc', 'qualities_sc', 'downloads_sc', 'outsource', 'has_subtitles', 'current_views', 'week_views', 'month_views', 'views', 'imgur', 'foreign_sd', 'duration', 'has_torrent', 'artist', 'created_at', 'uploaded_at')->withCount('likes')->find($vid)) {
 
             $current = $video;
             $doujin = false;
