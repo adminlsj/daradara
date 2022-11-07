@@ -35,7 +35,9 @@ class BotController extends Controller
 
         $videos = Video::where('tags_array', 'ilike', '%"3D"%')->get();
         foreach ($videos as $video) {
-            $video->genre = 'Motion Anime';
+            $tags_array = $video->tags_array;
+            unset($tags_array['3D']);
+            $video->tags_array = $tags_array;
             $video->save();
         }
 
