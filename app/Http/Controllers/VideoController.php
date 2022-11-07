@@ -43,25 +43,14 @@ class VideoController extends Controller
 
             $videos = Video::where('playlist_id', $video->playlist_id)->orderBy('created_at', 'desc')->select('id', 'user_id', 'cover', 'imgur', 'title', 'sd', 'views', 'created_at')->get();
 
-            $tags = $tags_random = array_keys($video->tags_array);
+            $tags_random = array_keys($video->tags_array);
             shuffle($tags_random);
             $tags_slice = array_slice($tags_random, 0, 5);
-            $related = Video::query();
-            $related = $related->where(function($query) use ($tags, &$doujin) {
-                if (in_array('3D', $tags)) {
-                    $doujin = true;
-                    $query->orWhere('tags_array', 'like', '%"3D"%');
-                }
-                if (in_array('同人', $tags)) {
-                    $doujin = true;
-                    $query->orWhere('tags_array', 'like', '%"同人"%');
-                }
-                if (in_array('Cosplay', $tags)) {
-                    $doujin = true;
-                    $query->orWhere('tags_array', 'like', '%"Cosplay"%');
-                }
-            });
-            $related = $related->where(function($query) use ($tags_slice) {
+            $genre = $video->genre;
+            if ($genre == 'Motion Anime' || $genre == '3D動畫' || $genre == '同人作品') {
+                $doujin = true;
+            }
+            $related = Video::where('genre', $genre)->where(function($query) use ($tags_slice) {
                 foreach ($tags_slice as $tag) {
                     $query->orWhere('tags_array', 'like', '%"'.$tag.'"%');
                 }
