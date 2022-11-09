@@ -25,7 +25,7 @@ class HomeController extends Controller
 
         $newest = Video::whereOrderBy('created_at', $count, true)->where('title', 'not like', '[新番預告]%')->where('tags', 'not like', '泡麵番%')->get();
        
-        $upload = Video::with('user:id,name,avatar_temp')->where('imgur', '!=', 'WENZTSJ')->orderBy('uploaded_at', 'desc')->select('id', 'user_id', 'title', 'cover', 'imgur', 'views', 'tags_array', 'created_at', 'duration')->limit(10)->get()->split(5);
+        $upload = Video::with('user:id,name,avatar_temp')->where('imgur', '!=', 'WENZTSJ')->orderBy('uploaded_at', 'desc')->select('id', 'user_id', 'title', 'genre', 'cover', 'imgur', 'views', 'tags_array', 'created_at', 'duration')->limit(10)->get()->split(5);
 
         $trending = Video::whereOrderBy('month_views', $count, true)->orderBy('id', 'desc')->get();
 
@@ -94,7 +94,7 @@ class HomeController extends Controller
 
         $cover = Video::orderBy('updated_at', 'desc')->select('id', 'title', 'cover')->where('uncover', false)->limit(50)->get()->shuffle()->slice(0, $count);
 
-        $uncover = Video::with('user:id,name,avatar_temp')->orderBy('updated_at', 'desc')->select('id', 'user_id', 'title', 'cover', 'imgur', 'views', 'tags_array', 'created_at', 'duration')->limit(10)->get();
+        $uncover = Video::with('user:id,name,avatar_temp')->orderBy('updated_at', 'desc')->select('id', 'user_id', 'title', 'genre', 'cover', 'imgur', 'views', 'tags_array', 'created_at', 'duration')->limit(10)->get();
 
 
         return view('layouts.home-new', compact('newest', 'upload', 'trending', 'tags', 'cover', 'uncover'));

@@ -27,14 +27,18 @@
 			</a>
 
 			<div style="margin-top: 7px; padding-bottom: 7px; font-weight: 400">
-				@if (array_key_exists('3D', $video->tags_array))
-					<span class="card-mobile-genre" style="color: rgba(245, 171, 53, 1); border-color: rgba(245, 171, 53, 0.30);">3D</span>
-				@elseif (array_key_exists('同人', $video->tags_array))
-					<span class="card-mobile-genre" style="color: rgba(241, 130, 141,1); border-color: rgba(241, 130, 141, 0.30);">同人</span>
-				@elseif (array_key_exists('Cosplay', $video->tags_array))
-					<span class="card-mobile-genre" style="color: rgba(165, 55, 253, 1); border-color: rgba(165, 55, 253, 0.30);">COS</span>
-				@else
+				@if ($video->genre == '裏番')
 					<span class="card-mobile-genre" style="color: rgba(242, 38, 19, 1); border-color: rgba(242, 38, 19, 0.30);">裏番</span>
+				@elseif ($video->genre == '泡麵番')
+					<span class="card-mobile-genre" style="color: rgba(245, 171, 53, 1); border-color: rgba(245, 171, 53, 0.30);">泡麵番</span>
+				@elseif ($video->genre == 'Motion Anime')
+					<span class="card-mobile-genre" style="color: rgba(82, 173, 223, 1); border-color: rgba(245, 171, 53, 0.30);">動態</span>
+				@elseif ($video->genre == '3D動畫')
+					<span class="card-mobile-genre" style="color: rgba(245, 171, 53, 1); border-color: rgba(245, 171, 53, 0.30);">3D</span>
+				@elseif ($video->genre == '同人作品')
+					<span class="card-mobile-genre" style="color: rgba(241, 130, 141,1); border-color: rgba(241, 130, 141, 0.30);">同人</span>
+				@elseif ($video->genre == 'Cosplay')
+					<span class="card-mobile-genre" style="color: rgba(165, 55, 253, 1); border-color: rgba(165, 55, 253, 0.30);">COS</span>
 				@endif
 				<span style="font-size: 12px; color: dimgray;" class="inner">{{ $video->user->name }}</span>
 			</div>
