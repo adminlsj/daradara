@@ -33,12 +33,11 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $videos = Video::where('tags_array', 'ilike', '%"3D"%')->get();
+        $videos = Video::with('user:id,name')->get();
         foreach ($videos as $video) {
-            $tags_array = $video->tags_array;
-            unset($tags_array['3D']);
-            $video->tags_array = $tags_array;
-            $video->save();
+            if ($video->artist != $video->user->name) {
+                echo "ID#".$video->id." incorrect artist name</br>";
+            }
         }
 
         /* return $videos = Video::where('cover', 'not like', '%E6mSQA2%')->where('genre', null)->get();
