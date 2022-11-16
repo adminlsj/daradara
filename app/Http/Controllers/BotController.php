@@ -37,8 +37,7 @@ class BotController extends Controller
         foreach ($comments as $comment) {
             if ($comments->where('text', $comment->text)->count() > 5) {
                 $user = User::find($comment->user_id);
-                echo $user->id.'<br>';
-                // User::where('id', $comment->user_id)->delete();
+                $user->delete();
             }
         }
 
