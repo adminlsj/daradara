@@ -43,6 +43,14 @@ class RemoveSpam extends Command
     {
         Log::info('Spam remove started...');
 
+        $comments = Comment::where('created_at', '>=', Carbon::now()->subDay())->get();
+        foreach ($comments as $comment) {
+            if ($comments->where('text', $comment->text)->count() > 5) {
+                $user = User::find($comment->user_id);
+                $user->delete();
+            }
+        }
+
         $ip_user_array = Comment::whereIn('ip_address', [
                                 '103.172.182.30',
                                 '20.205.41.101',
@@ -103,7 +111,8 @@ class RemoveSpam extends Command
                                 '20.205.101.149',
                                 '3.34.151.17',
                                 '54.179.243.120',
-                                '20.24.67.227'
+                                '20.24.67.227',
+                                '20.187.80.192'
                             ])
                             ->whereDate('created_at', Carbon::today())
                             ->groupBy('user_id')
