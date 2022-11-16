@@ -33,10 +33,12 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $videos = Video::with('user:id,name')->get();
-        foreach ($videos as $video) {
-            if ($video->artist != $video->user->name) {
-                echo "ID#".$video->id." incorrect artist name</br>";
+        $comments = Comment::where('created_at', '>=', Carbon::now()->subDay())->get();
+        foreach ($comments as $comment) {
+            if ($comments->where('text', $comment->text)->count() > 5) {
+                $user = User::find($comment->user_id);
+                echo $user->id.'<br>';
+                // User::where('id', $comment->user_id)->delete();
             }
         }
 
