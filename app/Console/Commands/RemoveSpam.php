@@ -51,7 +51,7 @@ class RemoveSpam extends Command
             }
         }
 
-        $ip_user_array = Comment::whereIn('ip_address', [
+        /* $ip_user_array = Comment::whereIn('ip_address', [
                                 '103.172.182.30',
                                 '20.205.41.101',
                                 '103.164.81.248',
@@ -121,10 +121,10 @@ class RemoveSpam extends Command
         $keyword_user_array = Comment::where('text', 'ilike', '%https://%')
                             ->whereDate('created_at', Carbon::today())
                             ->groupBy('user_id')
-                            ->pluck('user_id');
+                            ->pluck('user_id')
         
         User::destroy($ip_user_array);
-        User::destroy($keyword_user_array);
+        User::destroy($keyword_user_array); */
 
         Log::info('Spam remove ended...');
     }
