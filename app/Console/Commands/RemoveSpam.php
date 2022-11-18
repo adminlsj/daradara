@@ -122,7 +122,7 @@ class RemoveSpam extends Command
         $keyword_user_array = Comment::where('text', 'ilike', '%https://%')
                             ->whereDate('created_at', Carbon::today())
                             ->groupBy('user_id')
-                            ->pluck('user_id')
+                            ->pluck('user_id');
         
         User::destroy($ip_user_array);
         User::destroy($keyword_user_array);
