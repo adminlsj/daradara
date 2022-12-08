@@ -1,14 +1,14 @@
 <a href="/" style="padding-right: 2.5%; color: white; font-size: 1.4em;">
     <span style="color: crimson">H</span>anime1<span style="color: crimson">.</span>me
 </a>
-<a class="nav-item hidden-xs" href="{{ route('home.search') }}?genre=裏番">裏番</a>
-<a class="nav-item hidden-xs" href="/previews/{{ Carbon\Carbon::now()->format('Ym') }}">新番預告</a>
-<a class="nav-item hidden-xs" href="{{ route('home.search') }}?genre=泡麵番">泡麵番</a>
-<a class="nav-item hidden-xs" href="{{ route('home.search') }}?genre=Motion+Anime">Motion Anime</a>
-<a class="nav-item hidden-xs" href="{{ route('home.search') }}?genre=3D動畫">3D動畫</a>
-<a class="nav-item hidden-xs" href="{{ route('home.search') }}?genre=同人作品">同人作品</a>
-<a class="nav-item hidden-xs" href="{{ route('home.search') }}?genre=Cosplay">Cosplay</a>
-<a class="nav-item hidden-xs hidden-sm" href="{{ route('comic.index') }}">H漫畫</a>
+<a class="nav-item hidden-xs nav-desktop-items {{ Request::get('genre') == '裏番' ? 'active' : '' }}" href="{{ route('home.search') }}?genre=裏番">裏番</a>
+<a class="nav-item hidden-xs nav-desktop-items {{ Request::is('previews/*') == '裏番' ? 'active' : '' }}" href="/previews/{{ Carbon\Carbon::now()->format('Ym') }}">新番預告</a>
+<a class="nav-item hidden-xs nav-desktop-items {{ Request::get('genre') == '泡麵番' ? 'active' : '' }}" href="{{ route('home.search') }}?genre=泡麵番">泡麵番</a>
+<a class="nav-item hidden-xs nav-desktop-items {{ Request::get('genre') == 'Motion Anime' ? 'active' : '' }}" href="{{ route('home.search') }}?genre=Motion+Anime">Motion Anime</a>
+<a class="nav-item hidden-xs nav-desktop-items {{ Request::get('genre') == '3D動畫' ? 'active' : '' }}" href="{{ route('home.search') }}?genre=3D動畫">3D動畫</a>
+<a class="nav-item hidden-xs nav-desktop-items {{ Request::get('genre') == '同人作品' ? 'active' : '' }}" href="{{ route('home.search') }}?genre=同人作品">同人作品</a>
+<a class="nav-item hidden-xs nav-desktop-items {{ Request::get('genre') == 'Cosplay' ? 'active' : '' }}" href="{{ route('home.search') }}?genre=Cosplay">Cosplay</a>
+<a class="nav-item hidden-xs hidden-sm nav-desktop-items" href="{{ route('comic.index') }}">H漫畫</a>
 <!-- <a class="nav-item hidden-xs hidden-sm" href="{{ route('playlist.index') }}">我的清單</a> -->
 
 @if (Auth::check())

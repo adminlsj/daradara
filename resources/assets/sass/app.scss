@@ -1,6 +1,7 @@
 
 // Fonts
 @import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
+@import url("https://fonts.googleapis.com/css?family=Noto+Sans+TC");
 
 // Switch
 @import "switch";
@@ -17,7 +18,7 @@ html, body {
 }
 
 body {
-  font-family: roboto,microsoft jhenghei,sans-serif;
+  font-family: "Noto Sans TC", "Roboto", "Helvetica Neue", sans-serif !important;
   background-color: #141414; 
   overflow-x: hidden;
   font-weight: bold;
@@ -770,6 +771,16 @@ th, td {
   text-decoration: none;
 }
 
+.nav-desktop-items {
+  color: #e5e5e5 !important;
+  font-weight: normal;
+}
+
+.nav-desktop-items.active {
+  color: white !important;
+  font-weight: bold;
+}
+
 .search-btn {
   position: absolute;
   top: 5px; 
@@ -787,7 +798,41 @@ th, td {
   width: 100%;
 }
 
-.search-nav {
+.search-nav-desktop {
+  color: white; 
+  font-size: 14px; 
+  display: inline-block; 
+  background-color: black; 
+  border: 1px solid hsla(0,0%,100%,.9); 
+  padding: 5px 10px 3px 10px; 
+  vertical-align: middle; 
+  margin-top: -17px; 
+  border-radius: 0px;
+  margin-right: 7px;
+  cursor: pointer;
+}
+
+.search-nav-opacity {
+  opacity: 0.6;
+}
+
+.search-nav-opacity:hover, .search-nav-opacity:focus {
+  opacity: 1;
+  background-color: inherit;
+}
+
+.search-nav-desktop:hover, .search-nav-desktop-btn:hover, .search-nav-desktop:focus, .search-nav-desktop-btn:focus {
+  background-color: #2C2D2C;
+}
+
+.hentai-sort-options-wrapper {
+  line-height: 30px; 
+  color: white !important; 
+  display: block;
+  cursor: pointer;
+}
+
+/* .search-nav {
   display: inline-block; 
   border-radius: 20px;
   color: #e9e9e9; 
@@ -805,7 +850,7 @@ th, td {
 
 .search-nav.active {
   background-color: #666666;
-}
+} */
 
 .search-nav-bar {
   box-shadow: none; 
@@ -854,7 +899,7 @@ th, td {
 }
 
 .modal-close-btn:hover {
-  background-color: dimgray; 
+  background-color: #323434; 
 }
 
 .simple-dropdown-item {
@@ -1414,20 +1459,20 @@ label.upload-image-btn input[type="file"] {
   background-color: transparent;
   font-size: 12px !important;
   padding: 2px 12px;
-  border: solid 1px #b08fff;
-  border-radius: 28px;
+  border: 1px solid #323434;
+  border-radius: 30px;
   font-weight: 400;
   display: inline-block;
 }
 
 /* On mouse-over, add a grey background color */
 .hentai-tags-wrapper:hover input ~ .checkmark {
-  background-color: gray;
+  background-color: #2C2D2C;
 }
 
 /* When the checkbox is checked, add a blue background */
 .hentai-tags-wrapper input:checked ~ .checkmark {
-  background-color: #b08fff;
+  background-color: #323434;
 }
 
 /* Create the checkmark/indicator (hidden when not checked) */

@@ -136,6 +136,17 @@ $('.hentai-sort-options-wrapper').click(function() {
   $('form#hentai-form').submit();
 })
 
+$('.search-type-button').click(function() {
+  var type = $('#search-type-input').text();
+  if (type == '搜索作者') { 
+    type = 'artist';
+  } else {
+    type = 'video';
+  }
+  $("#type").val(type);
+  $('form#hentai-form').submit();
+})
+
 $('#search-btn').click(function() {
   $('form#hentai-form').submit();
 })

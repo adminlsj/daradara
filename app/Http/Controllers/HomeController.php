@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use App\Video;
 use App\Save;
 use App\Like;
@@ -106,174 +107,188 @@ class HomeController extends Controller
             'query' => 'max:255',
         ]);
 
-        $genre = '';
+        $type = request('type');
+        $query = request('query');
+        $genre = request('genre');
         $tags = [];
-        $sort = '';
+        $sort = request('sort');
         $brands = [];
         $year = '';
         $month = '';
         $duration = '';
-        $videos = Video::query();
         $doujin = true;
-        $is_mobile = Helper::checkIsMobile();;
-        
-        if ($query = request('query')) {
-            $chinese = new Chinese();
-            $original = '%'.$query.'%';
-            $translated = '%'.$chinese->to(Chinese::ZH_HANT, $query).'%';
-            $videos = $videos->where(function($query) use ($original, $translated) {
-                $query->where('title', 'ilike', $original)
-                      ->orWhere('translations', 'ilike', $original)
-                      ->orWhere('tags_array', 'ilike', $original)
-                      ->orWhere('title', 'ilike', $translated)
-                      ->orWhere('translations', 'ilike', $translated)
-                      ->orWhere('tags_array', 'ilike', $translated);
-            });
-        }
+        $is_mobile = Helper::checkIsMobile();
 
-        if ($genre = $request->genre) {
-            switch ($genre) {
-                case '全部':
+        if ($type == 'artist') {
+            $results = User::has('videos');
+
+            if ($query) {
+                $results = $results->where('name', 'ilike', '%'.$query.'%');
+            }
+
+            switch ($sort) {
+                case '字母順序':
+                    $results = $results->orderBy('name', 'asc');
                     break;
 
-                case '裏番':
-                    $doujin = false;
-                    $videos = $videos->where(function($query) {
-                        $query->orWhere('genre', '裏番');
-                    });
+                case '影片數量':
                     break;
 
-                case '泡麵番':
-                    $doujin = false;
-                    $videos = $videos->where(function($query) {
-                        $query->orWhere('genre', '泡麵番')->where('foreign_sd', 'like', '%"bangumi"%');
-                    });
+                case '加入日期':
+                    $results = $results->orderBy('created_at', 'desc');
                     break;
 
-                case 'Motion Anime':
-                    $videos = $videos->where(function($query) {
-                        $query->orWhere('genre', 'Motion Anime');
-                    });
+                case '更新日期':
+                    $results = $results->orderBy('updated_at', 'desc');
                     break;
 
-                case '3D動畫':
-                    $videos = $videos->where(function($query) {
-                        $query->orWhere('genre', '3D動畫');
-                    });
-                    break;
-
-                case '同人作品':
-                    $videos = $videos->where(function($query) {
-                        $query->orWhere('genre', '同人作品');
-                    });
-                    break;
-
-                case 'Cosplay':
-                    $videos = $videos->where(function($query) {
-                        $query->orWhere('genre', 'Cosplay');
-                    });
-                    break;
-                
                 default:
                     break;
             }
-        }
 
-        if ($duration = $request->duration) {
-            if (strpos($duration, '短片') === 0) {
-                $videos = $videos->where('duration', '<=', 240);
+            $results = $results->select('id', 'name', 'avatar_temp')->withCount('videos')->orderBy('videos_count', 'desc')->paginate(42);
 
-            } elseif (strpos($duration, '中長片') === 0) {
-                $videos = $videos->where('duration', '>=', 240)->where('duration', '<=', 1200);
+        } else {
+            $results = Video::query();
 
-            } elseif (strpos($duration, '長片') === 0) {
-                $videos = $videos->where('duration', '>=', 1200);
-            }
-        }
-
-        if ($tags = $request->tags) {
-            if ($request->broad) {
-                $videos = $videos->where(function($query) use ($tags) {
-                    foreach ($tags as $tag) {
-                        $query->orWhere('tags_array', 'like', '%"'.$tag.'"%');
-                    }
+            if ($query) {
+                $chinese = new Chinese();
+                $original = '%'.$query.'%';
+                $translated = '%'.$chinese->to(Chinese::ZH_HANT, $query).'%';
+                $results = $results->where(function($query) use ($original, $translated) {
+                    $query->where('title', 'ilike', $original)
+                          ->orWhere('translations', 'ilike', $original)
+                          ->orWhere('tags_array', 'ilike', $original)
+                          ->orWhere('genre', 'ilike', $original)
+                          ->orWhere('artist', 'ilike', $original)
+                          ->orWhere('title', 'ilike', $translated)
+                          ->orWhere('translations', 'ilike', $translated)
+                          ->orWhere('tags_array', 'ilike', $translated)
+                          ->orWhere('genre', 'ilike', $translated)
+                          ->orWhere('artist', 'ilike', $translated);
                 });
-            } else {
-                foreach ($tags as $tag) {
-                    $videos = $videos->where(function($query) use ($tag) {
-                        $query->orWhere('tags_array', 'like', '%"'.$tag.'"%');
+            }
+
+            if ($genre) {
+                switch ($genre) {
+                    case '全部':
+                        break;
+
+                    case '裏番':
+                        $doujin = false;
+                        $results = $results->where(function($query) {
+                            $query->orWhere('genre', '裏番');
+                        });
+                        break;
+
+                    case '泡麵番':
+                        $doujin = false;
+                        $results = $results->where(function($query) {
+                            $query->orWhere('genre', '泡麵番')->where('foreign_sd', 'like', '%"bangumi"%');
+                        });
+                        break;
+
+                    case 'Motion Anime':
+                        $results = $results->where(function($query) {
+                            $query->orWhere('genre', 'Motion Anime');
+                        });
+                        break;
+
+                    case '3D動畫':
+                        $results = $results->where(function($query) {
+                            $query->orWhere('genre', '3D動畫');
+                        });
+                        break;
+
+                    case '同人作品':
+                        $results = $results->where(function($query) {
+                            $query->orWhere('genre', '同人作品');
+                        });
+                        break;
+
+                    case 'Cosplay':
+                        $results = $results->where(function($query) {
+                            $query->orWhere('genre', 'Cosplay');
+                        });
+                        break;
+                    
+                    default:
+                        break;
+                }
+            }
+
+            if ($tags = $request->tags) {
+                if ($request->broad) {
+                    $results = $results->where(function($query) use ($tags) {
+                        foreach ($tags as $tag) {
+                            $query->orWhere('tags_array', 'like', '%"'.$tag.'"%');
+                        }
                     });
+                } else {
+                    foreach ($tags as $tag) {
+                        $results = $results->where(function($query) use ($tag) {
+                            $query->orWhere('tags_array', 'like', '%"'.$tag.'"%');
+                        });
+                    }
                 }
             }
-        }
 
-        if ($brands = $request->brands) {
-            $videos = $videos->where(function($query) use ($brands) {
-                foreach ($brands as $brand) {
-                    $query->orWhere('tags_array', 'like', '%"'.$brand.'"%');
+            if ($year = request('year')) {
+                if ($month = request('month')) {
+                    $results = $results->whereYear('created_at', '=', $year)->whereMonth('created_at', '=', $month);
+                } else {
+                    $results = $results->whereYear('created_at', '=', $year);
                 }
-            });
-        }
-
-        if ($year = request('year')) {
-            if ($month = request('month')) {
-                $videos = $videos->whereYear('created_at', '=', $year)->whereMonth('created_at', '=', $month);
-            } else {
-                $videos = $videos->whereYear('created_at', '=', $year);
             }
-        }
 
-        if ($sort = $request->sort) {
             switch ($sort) {
                 case '最新上市':
-                    $videos = $videos->orderBy('created_at', 'desc');
+                    $results = $results->orderBy('created_at', 'desc');
                     break;
 
                 case '最新上傳':
-                    $videos = $videos->orderBy('uploaded_at', 'desc');
+                    $results = $results->orderBy('uploaded_at', 'desc');
                     break;
 
                 case '本日排行':
-                    $videos = $videos->orderBy('current_views', 'desc')->orderBy('id', 'desc');
+                    $results = $results->orderBy('current_views', 'desc')->orderBy('id', 'desc');
                     break;
 
                 case '本週排行':
-                    $videos = $videos->orderBy('week_views', 'desc')->orderBy('id', 'desc');
+                    $results = $results->orderBy('week_views', 'desc')->orderBy('id', 'desc');
                     break;
 
                 case '本月排行':
-                    $videos = $videos->orderBy('month_views', 'desc')->orderBy('id', 'desc');
+                    $results = $results->orderBy('month_views', 'desc')->orderBy('id', 'desc');
                     break;
 
                 case '觀看次數':
-                    $videos = $videos->orderBy('views', 'desc');
+                    $results = $results->orderBy('views', 'desc');
                     break;
 
                 case '他們在看':
-                    $videos = $videos->orderBy('updated_at', 'desc');
+                    $results = $results->orderBy('updated_at', 'desc');
                     break;
 
                 default:
-                    $videos = $videos->orderBy('created_at', 'desc');
+                    $results = $results->orderBy('created_at', 'desc');
                     break;
             }
-        } else {
-            $videos = $videos->orderBy('created_at', 'desc');
+
+            if (!$query || strpos($query, '新番') === false) {
+                $results = $results->where('title', 'not like', '[新番預告]%');
+            }
+
+            if (!$doujin) {
+                $results = $results->distinct()->paginate(42);
+            } else {
+                $results = $results->with('user:id,name,avatar_temp')->distinct()->paginate(60);
+            }
+
+            $results->setPath('');
         }
 
-        if (!$query || strpos($query, '新番') === false) {
-            $videos = $videos->where('title', 'not like', '[新番預告]%');
-        }
-
-        if (!$doujin) {
-            $videos = $videos->where('uncover', false)->distinct()->paginate(42);
-        } else {
-            $videos = $videos->with('user:id,name,avatar_temp')->distinct()->paginate(60);
-        }
-
-        $videos->setPath('');
-        
-        return view('layouts.search-new', compact('genre', 'tags', 'sort', 'brands', 'year', 'month', 'duration', 'videos', 'doujin', 'is_mobile'));
+        return view('layouts.search-new', compact('type', 'genre', 'tags', 'sort', 'brands', 'year', 'month', 'duration', 'results', 'doujin', 'is_mobile'));
     }
 
     public function list()

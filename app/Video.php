@@ -33,7 +33,7 @@ class Video extends Model
     ];
 
     public static $metadata = [
-        '無碼', 'AI解碼', '1080p', '60FPS'
+        '無碼', 'AI解碼', '中文字幕', '1080p', '60FPS'
     ];
 
     public static $setting = [

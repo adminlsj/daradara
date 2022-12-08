@@ -33,6 +33,21 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
+        /* for ($i = 0; $i <= 157; $i++) { 
+            $initial = "https://cdn1.htstreaming.com/cdn/down/cd2a7e30451a8eb993a1f4f34b293f37/Video/720p/720p_";
+
+            if ($i < 10) {
+                $url = "{$initial}00{$i}.html";
+                Storage::disk('local')->put("video/00{$i}.ts", file_get_contents($url));
+            } elseif ($i < 100) {
+                $url = "{$initial}0{$i}.html";
+                Storage::disk('local')->put("video/0{$i}.ts", file_get_contents($url));
+            } elseif ($i < 1000) {
+                $url = "{$initial}{$i}.html";
+                Storage::disk('local')->put("video/{$i}.ts", file_get_contents($url));
+            }
+        } */
+
         /* return $videos = Video::where('cover', 'not like', '%E6mSQA2%')->where('genre', null)->get();
         foreach ($videos as $video) {
             $video->genre = '泡麵番';
@@ -89,7 +104,7 @@ class BotController extends Controller
             Storage::disk('local')->put("video/".basename($ts), file_get_contents($ts, false, $context));
         } */
 
-        $tc = Storage::disk('local')->files('video/tc');
+        /* $tc = Storage::disk('local')->files('video/tc');
         foreach ($tc as $video) {
             $extension = explode('.', $video)[1];
             if ($extension == 'ts') {
@@ -107,7 +122,7 @@ class BotController extends Controller
                 $folder = $number % 3;
                 Storage::disk('local')->move($video, "video/sc/{$folder}/p_{$number}.html");
             }
-        }
+        } */
 
         /* $videos = Video::where('foreign_sd', 'like', '%"youjizz"%')->get();
         foreach ($videos as $video) {
@@ -1577,13 +1592,13 @@ class BotController extends Controller
         $base = trim(Helper::get_string_between($m3u8, ',', '0.ts'));
         for ($i = 0; $i <= 1000; $i++) { 
             if ($i % 3 == 0) {
-                $m3u8 = str_replace("{$base}{$i}.ts", "https://cdn.jsdelivr.net/gh/{$user0}/{$user0}@v1.0.0/node/{$lang}/0/p_{$i}.html", $m3u8);
+                $m3u8 = str_replace("{$base}{$i}.ts", "https://cdn.jsdelivr.net/gh/{$user0}/{$user0}@v1.0.0/config/{$lang}/0/p_{$i}.html", $m3u8);
             }
             if ($i % 3 == 1) {
-                $m3u8 = str_replace("{$base}{$i}.ts", "https://cdn.jsdelivr.net/gh/{$user1}/{$user1}@v1.0.0/node/{$lang}/1/p_{$i}.html", $m3u8);
+                $m3u8 = str_replace("{$base}{$i}.ts", "https://cdn.jsdelivr.net/gh/{$user1}/{$user1}@v1.0.0/config/{$lang}/1/p_{$i}.html", $m3u8);
             }
             if ($i % 3 == 2) {
-                $m3u8 = str_replace("{$base}{$i}.ts", "https://cdn.jsdelivr.net/gh/{$user2}/{$user2}@v1.0.0/node/{$lang}/2/p_{$i}.html", $m3u8);
+                $m3u8 = str_replace("{$base}{$i}.ts", "https://cdn.jsdelivr.net/gh/{$user2}/{$user2}@v1.0.0/config/{$lang}/2/p_{$i}.html", $m3u8);
             }
         }
         return '<pre>'.$m3u8.'</pre>';
