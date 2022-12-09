@@ -2,7 +2,7 @@
 
 	<div style="color: white; display: inline-block; font-size: 18px; margin-right: 5px; font-weight: bold;">
 		全部類型
-		<i class="material-icons" style="vertical-align: middle; margin-top: -2px; margin-left: -5px;">arrow_drop_down</i>
+		<i class="material-icons" style="vertical-align: middle; margin-top: -3px; margin-left: -5px;">arrow_drop_down</i>
 	</div>
 
 	<div style="color: #e5e5e5; display: inline-block; font-size: 15px; margin-right: 5px; font-weight: bold;">

@@ -269,7 +269,7 @@
 						@foreach ($results as $video)
 							<div class="col-xs-12" style="padding-left: 3px; padding-right: 3px;">
 
-								<div class="hover-lighter card-mobile-panel" style="margin-bottom: 10px">
+								<div class="hover-lighter card-mobile-panel" style="margin-bottom: 10px;">
 									<div style="width: 150px; float: left;">
 										<a href="{{ route('video.watch') }}?v={{ $video->id }}" style="text-decoration: none;">
 											<div style="position: relative; display: inline-block;">
@@ -281,7 +281,7 @@
 
 									<div style="margin-left: 160px; text-decoration: none; color: black;">
 										<a href="{{ route('video.watch') }}?v={{ $video->id }}" style="text-decoration: none; font-size: inherit;">
-											<div class="card-mobile-title" style="overflow: hidden !important; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; ">{{ str_replace("[".$video->user->name."] ", "", $video->title) }}</div>
+											<div class="card-mobile-title" style="font-weight: bold;">{{ str_replace("[".$video->user->name."] ", "", $video->title) }}</div>
 										</a>
 
 										<div class="card-mobile-genre-wrapper" style="margin-top: 3px; margin-left: -2px">
