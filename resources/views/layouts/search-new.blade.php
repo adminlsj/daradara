@@ -285,17 +285,17 @@
 										</a>
 
 										<div class="card-mobile-genre-wrapper" style="margin-top: 3px; margin-left: -2px">
-											<a href="{{ route('home.search') }}?query={{ $video->user->name }}" style="font-size: 12px; color: dimgray; margin-left: 2px; display: inline-block;" class="card-mobile-user">{{ $video->user->name }}</a>
+											<a href="{{ route('home.search') }}?query={{ $video->user->name }}" style="font-size: 12px; color: dimgray; margin-left: 2px; display: inline-block; font-weight: bold;" class="card-mobile-user">{{ $video->user->name }}</a>
 										</div>
 
 										<div style="float: left; margin-top: -3px;">
 											@if ($video->duration != null)
-											    <div class="card-mobile-duration" style="background: #2E2E2E; padding: 0px 3px; line-height: 20px; color: #b8babc;">
+											    <div class="card-mobile-duration" style="background: #2E2E2E; padding: 0px 3px; line-height: 20px; color: #b8babc; font-weight: bold;">
 											    	{{ $video->duration >= 3600 ? gmdate('H:i:s', $video->duration) : gmdate('i:s', $video->duration) }}
 											    </div>
 										    @endif
 
-										    <div class="card-mobile-duration" style="background: #2E2E2E; padding: 0px 3px; line-height: 20px; margin-right: 5px; color: #b8babc;">
+										    <div class="card-mobile-duration" style="background: #2E2E2E; padding: 0px 3px; line-height: 20px; margin-right: 5px; color: #b8babc; font-weight: bold;">
 										    	{{ $video->views() }}次
 										    </div>
 										</div>
