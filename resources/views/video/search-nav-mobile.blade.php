@@ -1,21 +1,21 @@
 <div id="search-nav-wrapper" style="background-color: black; padding: 14px 10px 15px 10px; margin-top: 0px; border: none;" class="hidden-sm hidden-md hidden-lg hidden-xl">
 
-	<div style="color: white; display: inline-block; font-size: 18px; margin-right: 5px; font-weight: bold;">
+	<div style="color: white; display: inline-block; font-size: 17px; margin-right: 5px; font-weight: bold;">
 		全部類型
 		<i class="material-icons" style="vertical-align: middle; margin-top: -3px; margin-left: -5px;">arrow_drop_down</i>
 	</div>
 
-	<div style="color: #e5e5e5; display: inline-block; font-size: 15px; margin-right: 5px; font-weight: bold;">
+	<div style="color: #e5e5e5; display: inline-block; font-size: 14px; margin-right: 5px; font-weight: bold;">
 		標籤
 		<i class="material-icons" style="vertical-align: middle; margin-top: -4px; margin-left: -5px;">arrow_drop_down</i>
 	</div>
 
-	<div style="color: #e5e5e5; display: inline-block; font-size: 15px; margin-right: 5px; font-weight: bold;">
+	<div style="color: #e5e5e5; display: inline-block; font-size: 14px; margin-right: 5px; font-weight: bold;">
 		排序方式
 		<i class="material-icons" style="vertical-align: middle; margin-top: -4px; margin-left: -5px;">arrow_drop_down</i>
 	</div>
 
-	<div style="color: #e5e5e5; display: inline-block; font-size: 15px; margin-right: 5px; font-weight: bold;">
+	<div style="color: #e5e5e5; display: inline-block; font-size: 14px; margin-right: 5px; font-weight: bold;">
 		發布日期
 		<i class="material-icons" style="vertical-align: middle; margin-top: -4px; margin-left: -5px;">arrow_drop_down</i>
 	</div>
