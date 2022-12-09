@@ -8,12 +8,12 @@
 
 	  <div style="padding: 0 10px; margin-bottom: -10px;">
 	    <a href="/" style="color: #e5e5e5;">
-	      <i class="material-icons-outlined" style="vertical-align: middle; margin-top: -4px; margin-left: 0px; font-size: 28px">chevron_left</i>
+	      <i class="material-icons-outlined" style="vertical-align: middle; margin-top: 0px; margin-left: 0px; font-size: 28px">chevron_left</i>
 	    </a>
 
 	    <form id="search-form" style="display: inline-block; margin-left: 7px; width: calc(100% - 39px); position: relative;">
 		    <input id="nav-query" name="nav-query" style="width: 100%; height: 35px; margin-top: 0px; vertical-align: middle; border-radius: 5px; background-color: #323231; border-color: #323231 !important; line-height: 35px; padding-left: 35px; font-size: 15px; padding-top: 3px" class="search-nav-bar" type="text" value="{{ request('query') }}" placeholder="搜尋 Hanime1.me">
-		    <i class="material-icons" style="color: dimgray; position: absolute; top: 7px; left: 5px; font-size: 25px">search</i>
+		    <i class="material-icons" style="color: dimgray; position: absolute; top: 10px; left: 5px; font-size: 25px">search</i>
 		</form>
 	  </div>
 	</div>
