@@ -66,7 +66,7 @@
 	      </div>
 	      <div class="modal-body" style="overflow-y: scroll; padding-top: 0px;">
 	      	<div style="background-color: #323434; margin: 0 -15px 20px -15px; padding: 5px 15px 0px 15px;">
-				<h5 style="font-weight: bold">
+				<h5>
 			  		廣泛配對
 			      	<label class="hentai-switch" style="float: right">
 						<input type="checkbox" name="broad" id="broad" {{ Request::get('broad') ? 'checked' : '' }}>
