@@ -280,7 +280,7 @@
 									</div>
 
 									<div style="margin-left: 160px; text-decoration: none; color: black;">
-										<a href="{{ route('video.watch') }}?v={{ $video->id }}" style="text-decoration: none; font-size: inherit;">
+										<a href="{{ route('video.watch') }}?v={{ $video->id }}" style="color: white; font-size: inherit;">
 											<div class="card-mobile-title" style="font-weight: bold;">{{ str_replace("[".$video->user->name."] ", "", $video->title) }}</div>
 										</a>
 
