@@ -279,7 +279,7 @@
 										</a>
 									</div>
 
-									<div style="display: inline-block; text-decoration: none; color: black; margin-top: -5px; margin-left: 8px; height: 50px; width: calc(100% - 168px); vertical-align: top;">
+									<div style="display: inline-block; text-decoration: none; color: black; margin-top: -6px; margin-left: 8px; height: 50px; width: calc(100% - 168px); vertical-align: top;">
 										<a href="{{ route('video.watch') }}?v={{ $video->id }}" style="color: white; font-size: inherit;">
 											<div class="card-mobile-title" style="font-weight: bold;">{{ str_replace("[".$video->user->name."] ", "", $video->title) }}</div>
 										</a>
