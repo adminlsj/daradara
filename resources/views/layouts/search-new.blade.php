@@ -116,7 +116,7 @@
 				</label>
 	        @endforeach
 
-	        <h5 style="margin-top: 15px; margin-bottom: 10px; font-weight: bold">性交體位</h5>
+	        <h5 style="margin-top: 15px; margin-bottom: 15px; font-weight: bold">性交體位</h5>
 	        @foreach (App\Video::$position as $tag)
 	        	<label class="hentai-tags-wrapper">
 				  <input name="tags[]" type="checkbox" value="{{ $tag }}" {{ $tags != [] && in_array($tag, $tags) ? 'checked' : '' }}>

@@ -19,6 +19,11 @@
 		發佈日期
 		<i class="material-icons" style="vertical-align: middle; margin-top: -4px; margin-left: -5px;">arrow_drop_down</i>
 	</div>
+
+	<div style="color: #e5e5e5; display: inline-block; font-size: 14px; margin-right: 5px; font-weight: bold; cursor: pointer; {{ $type == 'artist' ? 'display:none' : '' }}" data-toggle="modal" data-target="#date-modal">
+		搜索作者
+		<img style="width: 12px; margin-top: -3px; margin-left: 3px" src="https://i.imgur.com/osVi2GM.png">
+	</div>
 </div>
 
 <!--
