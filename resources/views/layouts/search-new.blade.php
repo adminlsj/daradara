@@ -4,7 +4,7 @@
 	<div class="hidden-xs">
 		@include('nav.main')
 	</div>
-	<div id="main-nav-home" style="z-index: 10000; padding:0; padding-top: 3px; height: 48px; line-height: 40px; position: absolute; background-image: none; border-bottom: 1px solid #2b2b2b; margin-bottom: 0px; background-color: #141414;" class="hidden-sm hidden-md hidden-lg">
+	<div id="main-nav-home" style="z-index: 10000; padding:0; padding-top: 3px; height: 48px; line-height: 40px; margin-bottom: 0px; background-color: black; position: relative;" class="hidden-sm hidden-md hidden-lg">
 
 	  <div style="padding: 0 10px; margin-bottom: -10px;">
 	    <a href="/" style="color: white; font-size: 1.4em;">
@@ -51,33 +51,34 @@
 
 	@include('video.search-nav-desktop')
 
+	@include('video.search-nav-mobile')
+
 	<div id="genre-modal" class="modal" role="dialog">
-	  <div class="modal-dialog modal-sm" style="position: absolute; top: 87px;">
-	    <div class="modal-content" style="border-radius: 3px; background-color: #222222; color: white;">
+	  <div class="modal-dialog">
+	    <div class="modal-content" style="border-radius: 12px; border: 1px solid #323434; background-color: #181817; color: white">
 	      <div class="modal-header" style="border-bottom: 1px solid #333333; position: relative; height: 65px;">
-	      	<span class="material-icons pull-left no-select modal-close-btn" data-dismiss="modal">close</span>
-	        <h4 class="modal-title" style="text-align: center; font-weight: bold; margin: 0; padding: 0; margin-top: 5px; font-size: 18px;">影片類型</h4>
+	        <span class="material-icons pull-left no-select modal-close-btn" style="font-size: 18px; margin-top: 4px;" data-dismiss="modal">close</span>
+	        <h4 class="modal-title" style="text-align: center; font-weight: bold; margin: 0; padding: 0; margin-top: 6px; font-size: 16px;">影片類型</h4>
 	      </div>
-	      <div class="modal-body" style="padding: 0;">
+	      <div class="modal-body" style="padding: 0; text-align: center">
 	        <input type="hidden" id="genre" name="genre" value="{{ $genre }}">
-			<div class="simple-dropdown-item genre-option {{ $genre == '全部' ? 'active' : ''}}" style="{{ $genre == '全部' ? 'background-color: #333333' : ''}}">全部</div>
-			<hr style="margin: 0; border-color: #333333;">
-			<div class="simple-dropdown-item genre-option {{ $genre == '裏番' ? 'active' : ''}}">裏番</div>
-			<hr style="margin: 0; border-color: #333333;">
-			<div class="simple-dropdown-item genre-option {{ $genre == '泡麵番' ? 'active' : ''}}">泡麵番</div>
-			<hr style="margin: 0; border-color: #333333;">
-			<div class="simple-dropdown-item genre-option {{ $genre == 'Motion Anime' ? 'active' : ''}}">Motion Anime</div>
-			<hr style="margin: 0; border-color: #333333;">
-			<div class="simple-dropdown-item genre-option {{ $genre == '3D動畫' ? 'active' : ''}}">3D動畫</div>
-			<hr style="margin: 0; border-color: #333333;">
-			<div class="simple-dropdown-item genre-option {{ $genre == '同人作品' ? 'active' : ''}}">同人作品</div>
-			<hr style="margin: 0; border-color: #333333;">
-			<div class="simple-dropdown-item genre-option {{ $genre == 'Cosplay' ? 'active' : ''}}">Cosplay</div>
-			<hr style="margin: 0; border-color: #333333;">
-			<a style="color: white; text-decoration: none;" href="/previews/{{ Carbon\Carbon::now()->format('Ym') }}"><div class="simple-dropdown-item genre-option">新番預告</div></a>
-			<hr style="margin: 0; border-color: #333333;">
-			<a style="color: white; text-decoration: none;" href="{{ route('comic.index') }}"><div class="simple-dropdown-item genre-option">H漫畫</div></a>
+
+	        @foreach (['全部', '裏番', '泡麵番', 'Motion Anime', '3D動畫', '同人作品', 'Cosplay'] as $option)
+		        <div style="line-height: 30px" class="simple-dropdown-item genre-option {{ $sort == $option ? 'active' : ''}}"><div class="hentai-sort-options">{{ $option }}</div></div>
+				<hr style="margin: 0; border-color: #323434;">
+	        @endforeach
+
+			<a style="color: white; text-decoration: none; line-height: 30px" href="/previews/{{ Carbon\Carbon::now()->format('Ym') }}"><div class="simple-dropdown-item genre-option">新番預告</div></a>
+			<hr style="margin: 0; border-color: #323434;">
+			<a style="color: white; text-decoration: none; line-height: 30px" href="{{ route('comic.index') }}"><div class="simple-dropdown-item genre-option">H漫畫</div></a>
+			<hr class="hidden-sm hidden-md hidden-lg hidden-xl" style="margin: 0; border-color: #323434;">
 	      </div>
+
+	      <hr style="border-color: #3a3c3f; margin: 0">
+		  <div class="modal-footer" style="border-top: none; width: 100%; text-align: center; padding: 12px 15px">
+			<div style="display: inline-block; float: left; line-height: 37px; color: white; cursor: pointer; text-decoration: underline; margin-left: 5px" data-dismiss="modal">取消</div>
+			<button style="border: none; color: white; background-color: #323434; border-radius: 0; height: 100%; width: auto; font-weight: bold; border-radius: 5px; padding: 10px 20px; " class="pull-right btn btn-primary" type="submit">顯示搜索結果</button>
+		  </div>
 	    </div>
 	  </div>
 	</div>
@@ -158,61 +159,38 @@
 	  </div>
 	</div>
 
-	<!-- <div id="sort-modal" class="modal" role="dialog">
-	  <div class="modal-dialog modal-sm" style="position: absolute; top: 87px;">
-	    <div class="modal-content" style="border-radius: 3px; background-color: #222222; color: white;">
-	      <div class="modal-header" style="border-bottom: 1px solid #333333; position: relative; height: 65px;">
-	      	<span class="material-icons pull-left no-select modal-close-btn" data-dismiss="modal">close</span>
-	        <h4 class="modal-title" style="text-align: center; font-weight: bold; margin: 0; padding: 0; margin-top: 5px; font-size: 18px;">排序方式</h4>
-	      </div>
-	      <div class="modal-body" style="padding: 0;">
-	        <input type="hidden" id="sort" name="sort" value="{{ $sort }}">
-			<div class="simple-dropdown-item hentai-sort-options-wrapper {{ $sort == '最新上市' ? 'active' : ''}}"><div class="hentai-sort-options">最新上市</div></div>
-			<hr style="margin: 0; border-color: #333333;">
-			<div class="simple-dropdown-item hentai-sort-options-wrapper {{ $sort == '最新上傳' ? 'active' : ''}}"><div class="hentai-sort-options">最新上傳</div></div>
-			<hr style="margin: 0; border-color: #333333;">
-			<div class="simple-dropdown-item hentai-sort-options-wrapper {{ $sort == '本日排行' ? 'active' : ''}}"><div class="hentai-sort-options">本日排行</div></div>
-			<hr style="margin: 0; border-color: #333333;">
-			<div class="simple-dropdown-item hentai-sort-options-wrapper {{ $sort == '本週排行' ? 'active' : ''}}"><div class="hentai-sort-options">本週排行</div></div>
-			<hr style="margin: 0; border-color: #333333;">
-			<div class="simple-dropdown-item hentai-sort-options-wrapper {{ $sort == '本月排行' ? 'active' : ''}}"><div class="hentai-sort-options">本月排行</div></div>
-			<hr style="margin: 0; border-color: #333333;">
-			<div class="simple-dropdown-item hentai-sort-options-wrapper {{ $sort == '觀看次數' ? 'active' : ''}}"><div class="hentai-sort-options">觀看次數</div></div>
-			<hr style="margin: 0; border-color: #333333;">
-			<div class="simple-dropdown-item hentai-sort-options-wrapper {{ $sort == '他們在看' ? 'active' : ''}}"><div class="hentai-sort-options">他們在看</div></div>
-	      </div>
-	    </div>
-	  </div>
-	</div> -->
-
-	<!-- <div id="brands" class="modal" role="dialog">
+	<div id="sort-modal" class="modal" role="dialog">
 	  <div class="modal-dialog">
-	    <div class="modal-content" style="border-radius: 3px; background-color: #222222; color: white">
+	    <div class="modal-content" style="border-radius: 12px; border: 1px solid #323434; background-color: #181817; color: white">
 	      <div class="modal-header" style="border-bottom: 1px solid #333333; position: relative; height: 65px;">
-	        <span class="material-icons pull-left no-select modal-close-btn" data-dismiss="modal">close</span>
-	        <h4 class="modal-title" style="text-align: center; font-weight: bold; margin: 0; padding: 0; margin-top: 5px; font-size: 18px;">製作公司</h4>
+	        <span class="material-icons pull-left no-select modal-close-btn" style="font-size: 18px; margin-top: 4px;" data-dismiss="modal">close</span>
+	        <h4 class="modal-title" style="text-align: center; font-weight: bold; margin: 0; padding: 0; margin-top: 6px; font-size: 16px;">排序方式</h4>
 	      </div>
-	      <div class="modal-body">
-	        <h4>品牌 / 製作</h4>
-	        <p id="hentai-tags-text" style="color: darkgray; padding-bottom: 10px">搜索以下選擇的品牌或製作的影片：</p>
-	        @foreach (App\Video::$hentai_brands as $brand)
-	        	<label class="hentai-tags-wrapper">
-				  <input name="brands[]" type="checkbox" value="{{ $brand }}" {{ $brands != [] && in_array($brand, $brands) ? 'checked' : '' }}>
-				  <span style="border-radius: 0px;" class="checkmark">{{ $brand }}</span>
-				</label>
+	      <div class="modal-body" style="padding: 0; text-align: center">
+	        <input type="hidden" id="sort" name="sort" value="{{ $sort }}">
+
+	        @if ($type == 'artist')
+		        @php $options = ['字母順序', '影片數量', '加入日期', '更新日期'] @endphp
+	        @else
+		        @php $options = ['最新上市', '最新上傳', '本日排行', '本週排行', '本月排行', '觀看次數', '他們在看'] @endphp
+	        @endif
+
+	        @foreach ($options as $option)
+		        <div class="simple-dropdown-item hentai-sort-options-wrapper {{ $sort == $option ? 'active' : ''}}"><div class="hentai-sort-options">{{ $option }}</div></div>
+				<hr class="{{ $loop->last ? 'hidden-sm hidden-md hidden-lg hidden-xl' : '' }}" style="margin: 0; border-color: #323434;">
 	        @endforeach
 	      </div>
 	      <hr style="border-color: #3a3c3f; margin: 0">
-	      <div class="modal-footer" style="border-top: none; width: 100%; text-align: center; padding: 0;">
-			<div style="display: inline-block; width: 50%; float: left; line-height: 46px; color: darkgray; cursor: pointer;" data-dismiss="modal">取消</div>
-			<button style="border: none; color: white; background-color: #b08fff; border-radius: 0; height: 100%; width: 50%; font-weight: bold; line-height: 34px;" class="pull-right btn btn-primary" type="submit">儲存</button>
+	      <div class="modal-footer" style="border-top: none; width: 100%; text-align: center; padding: 12px 15px">
+			<div style="display: inline-block; float: left; line-height: 37px; color: white; cursor: pointer; text-decoration: underline; margin-left: 5px" data-dismiss="modal">取消</div>
+			<button style="border: none; color: white; background-color: #323434; border-radius: 0; height: 100%; width: auto; font-weight: bold; border-radius: 5px; padding: 10px 20px; " class="pull-right btn btn-primary" type="submit">顯示搜索結果</button>
 	      </div>
 	    </div>
 	  </div>
-	</div> -->
+	</div>
 
 	<div id="date-modal" class="modal" role="dialog">
-	  <div class="modal-dialog modal-sm">
+	  <div class="modal-dialog">
 	    <div class="modal-content" style="border-radius: 12px; border: 1px solid #323434; background-color: #181817; color: white">
 	      <div class="modal-header" style="border-bottom: 1px solid #333333; position: relative; height: 65px;">
 	        <span class="material-icons pull-left no-select modal-close-btn" style="font-size: 18px; margin-top: 4px;" data-dismiss="modal">close</span>
@@ -243,13 +221,7 @@
 	  </div>
 	</div>
 
-	<div id="home-rows-wrapper" class="search-rows-wrapper" style="position: relative;">
-
-		<div class="hidden-sm hidden-md hidden-lg" style="text-align: center; padding-top: 14px; {{ $results->lastPage() == 1 ? 'margin-bottom: 24px' : 'margin-bottom: -24px'}}">
-			@include('layouts.exoclick', ['id' => '4396576', 'width' => '300', 'height' => '100'])
-		</div>
-
-		<div style="margin-bottom: -13px" class="search-pagination mobile-search-pagination hidden-sm hidden-md hidden-lg">{!! $results->appends(request()->query())->onEachSide(1)->links() !!}</div>
+	<div id="home-rows-wrapper" class="search-rows-wrapper">
 
 		@if ($type == 'artist')
 			<div class="content-padding-new">
@@ -282,12 +254,55 @@
 			</div>
 		@else
 		  	@if ($doujin)
-				<div class="content-padding-new">
+				<div class="content-padding-new hidden-xs">
 					<div class="row no-gutter" style="margin-left: -3px; margin-right: -3px;">
 						@foreach ($results as $video)
-							<div class="col-xs-6 col-sm-4 col-md-2" style="padding-left: 3px; padding-right: 3px;">
-								<!-- class="search-doujin-row-lg" -->
+							<div class="col-xs-6 col-sm-4 col-md-2 search-doujin-videos" style="padding-left: 3px; padding-right: 3px;">
 								@include('layouts.owl-home-uncover-row')
+							</div>
+						@endforeach
+					</div>
+				</div>
+
+				<div class="content-padding-new hidden-sm hidden-md hidden-lg hidden-xl">
+					<div class="row no-gutter" style="margin-left: -3px; margin-right: -3px;">
+						@foreach ($results as $video)
+							<div class="col-xs-12" style="padding-left: 3px; padding-right: 3px;">
+
+								<div class="hover-lighter card-mobile-panel" style="margin-bottom: 10px">
+									<a href="{{ route('video.watch') }}?v={{ $video->id }}" style="text-decoration: none;">
+										<div style="position: relative; display: inline-block;">
+											<img style="width: 150px; height: 100%; border-radius: 5px;" src="https://i.imgur.com/D1l0JoC.jpg">
+											<img style="position: absolute; top: 0; left: 0; width: 150px; height: 100%; object-fit: cover; border-radius: 5px" src="{{ $video->thumbL() }}">
+									    </div>
+									</a>
+
+									<div style="display: inline-block; padding-left: 10px">
+										<div style="text-decoration: none; color: black;">
+											<a href="{{ route('video.watch') }}?v={{ $video->id }}" style="text-decoration: none; font-size: inherit;">
+												<div class="card-mobile-title">{{ str_replace("[".$video->user->name."] ", "", $video->title) }}</div>
+											</a>
+
+											<div class="card-mobile-genre-wrapper" style="margin-top: 3px; margin-left: -2px">
+												<a href="{{ route('home.search') }}?query={{ $video->user->name }}" style="font-size: 12px; color: dimgray; margin-left: 2px; display: inline-block;" class="card-mobile-user">{{ $video->user->name }}</a>
+											</div>
+
+											<div style="float: left; margin-top: -3px;">
+												@if ($video->duration != null)
+												    <div class="card-mobile-duration" style="background: #2E2E2E; padding: 0px 3px; line-height: 20px; color: #b8babc;">
+												    	{{ $video->duration >= 3600 ? gmdate('H:i:s', $video->duration) : gmdate('i:s', $video->duration) }}
+												    </div>
+											    @endif
+
+											    <div class="card-mobile-duration" style="background: #2E2E2E; padding: 0px 3px; line-height: 20px; margin-right: 5px; color: #b8babc;">
+											    	{{ $video->views() }}次
+											    </div>
+											</div>
+
+										</div>
+									</div>
+								</div>
+
 							</div>
 						@endforeach
 					</div>

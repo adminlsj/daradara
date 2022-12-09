@@ -2,7 +2,7 @@
     <span style="color: crimson">H</span>anime1<span style="color: crimson">.</span>me
 </a>
 <a class="nav-item hidden-xs nav-desktop-items {{ Request::get('genre') == '裏番' ? 'active' : '' }}" href="{{ route('home.search') }}?genre=裏番">裏番</a>
-<a class="nav-item hidden-xs nav-desktop-items {{ Request::is('previews/*') == '裏番' ? 'active' : '' }}" href="/previews/{{ Carbon\Carbon::now()->format('Ym') }}">新番預告</a>
+<a class="nav-item hidden-xs hidden-sm nav-desktop-items {{ Request::is('previews/*') == '裏番' ? 'active' : '' }}" href="/previews/{{ Carbon\Carbon::now()->format('Ym') }}">新番預告</a>
 <a class="nav-item hidden-xs nav-desktop-items {{ Request::get('genre') == '泡麵番' ? 'active' : '' }}" href="{{ route('home.search') }}?genre=泡麵番">泡麵番</a>
 <a class="nav-item hidden-xs nav-desktop-items {{ Request::get('genre') == 'Motion Anime' ? 'active' : '' }}" href="{{ route('home.search') }}?genre=Motion+Anime">Motion Anime</a>
 <a class="nav-item hidden-xs nav-desktop-items {{ Request::get('genre') == '3D動畫' ? 'active' : '' }}" href="{{ route('home.search') }}?genre=3D動畫">3D動畫</a>
@@ -29,4 +29,4 @@
 
 <a class="nav-icon pull-right" href="{{ route('home.search') }}"><span style="vertical-align: middle;" class="material-icons-outlined">search</span></a>
 
-<a class="nav-icon pull-right" href="{{ Auth::check() ? route('user.userEditUpload', Auth::user()) : route('login') }}"><span style="vertical-align: middle;" class="material-icons-outlined">video_call</span></a>
+<a class="nav-icon pull-right" href="/previews/{{ Carbon\Carbon::now()->format('Ym') }}"><span style="vertical-align: middle;" class="material-icons-outlined">cast</span></a>

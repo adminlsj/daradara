@@ -825,6 +825,21 @@ th, td {
   background-color: #2C2D2C;
 }
 
+.search-input-desktop {
+  color: white; 
+  font-size: 14px; 
+  display: inline-block; 
+  background-color: black; 
+  border: 1px solid hsla(0,0%,100%,.9); 
+  padding: 3px 44px 4px 10px; 
+  border-radius: 0px; 
+  margin-top: -17px; 
+  line-height: 24px; 
+  width: 250px; 
+  vertical-align: middle; 
+  outline: none;
+}
+
 .hentai-sort-options-wrapper {
   line-height: 30px; 
   color: white !important; 
@@ -904,15 +919,15 @@ th, td {
 
 .simple-dropdown-item {
   cursor: pointer;
-  padding: 15px 35px;
+  padding: 10px 15px;
 }
 
 .simple-dropdown-item:hover {
-  background-color: #333333;
+  background-color: #323434;
 }
 
 .simple-dropdown-item.active {
-  background-color: #333333;
+  background-color: #323434;
 }
 
 #home-banner-wrapper {
@@ -1143,7 +1158,7 @@ th, td {
 }
 
 .search-rows-wrapper {
-  margin-top: 47px !important;
+  margin-top: 0px !important;
 }
 
 .single-video-tag {
@@ -1463,6 +1478,7 @@ label.upload-image-btn input[type="file"] {
   border-radius: 30px;
   font-weight: 400;
   display: inline-block;
+  white-space: nowrap;
 }
 
 /* On mouse-over, add a grey background color */
@@ -2166,6 +2182,10 @@ div.sticky {
   .related-video-width {
     width: calc(100% / 5);
   }
+
+  .search-doujin-videos {
+    width: calc(100% / 5);
+  }
 }
 
 @media (max-width: 1250px) {
@@ -2200,11 +2220,30 @@ div.sticky {
   .exoclick-video-show-square {
     display: block;
   }
+
+  .search-doujin-videos {
+    width: calc(100% / 4);
+  }
+
+  .search-input-desktop {
+    width: 160px;
+  }
 }
 
 @media (max-width: 991px) {
   .plyr__captions {
     font-size: 2.8vw !important;
+  }
+
+  #search-nav-wrapper {
+    white-space: nowrap;
+    overflow-x: scroll;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  }
+
+  #search-nav-wrapper::-webkit-scrollbar { /* WebKit */
+    display: none;
   }
 
   #user-modal-panel {
@@ -2512,6 +2551,12 @@ div.sticky {
 
   .social-login-wrapper-right {
     margin-top: 10px;
+  }
+}
+
+@media (max-width: 800px) {
+  .search-doujin-videos {
+    width: calc(100% / 3);
   }
 }
 
@@ -2843,17 +2888,8 @@ div.sticky {
   }
 
   #search-nav-wrapper {
-    padding: 0px;
-    padding-top: 8px;
-    padding-bottom: 7px;
-    border-bottom: 1px solid #2b2b2b;
-    background-color: #141414;
-    position: absolute;
     white-space: nowrap;
     overflow-x: scroll;
-    top: 47px;
-    z-index: 1000;
-
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none;  /* Internet Explorer 10+ */
   }
@@ -3010,8 +3046,8 @@ div.sticky {
   }
 
   .search-rows-wrapper {
-    margin-top: 96px !important;
-    background-color: #141414;
+    /* margin-top: 96px !important; */
+    background-color: black;
   }
 
   .search-pagination {
