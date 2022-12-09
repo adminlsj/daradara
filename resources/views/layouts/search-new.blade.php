@@ -66,14 +66,14 @@
 	      </div>
 	      <div class="modal-body" style="overflow-y: scroll; padding-top: 0px;">
 	      	<div style="background-color: #323434; margin: 0 -15px 20px -15px; padding: 5px 15px 0px 15px;">
-				<h5>
+				<h5 style="font-weight: bold">
 			  		廣泛配對
 			      	<label class="hentai-switch" style="float: right">
 						<input type="checkbox" name="broad" id="broad" {{ Request::get('broad') ? 'checked' : '' }}>
 						<span class="hentai-slider round"></span>
 					</label>
 				</h5>
-			    <p style="color: gray; padding-bottom: 12px; font-size: 12px; padding-right: 60px;">較多結果，較不精準。配對所有包含任何一個選擇的標籤的影片，而非全部標籤。</p>
+			    <p style="color: gray; padding-bottom: 12px; font-size: 12px; padding-right: 60px; font-weight: normal;">較多結果，較不精準。配對所有包含任何一個選擇的標籤的影片，而非全部標籤。</p>
 		    </div>
 
 		    <h5 style="margin-top: 20px; margin-bottom: 15px; font-weight: bold">影片屬性</h5>
