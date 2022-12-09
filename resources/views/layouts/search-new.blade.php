@@ -7,40 +7,14 @@
 	<div id="main-nav-home" style="z-index: 10000; padding:0; padding-top: 3px; height: 48px; line-height: 40px; margin-bottom: 0px; background-color: black; position: relative;" class="hidden-sm hidden-md hidden-lg">
 
 	  <div style="padding: 0 10px; margin-bottom: -10px;">
-	    <a href="/" style="color: white; font-size: 1.4em;">
-	      <img style="margin-top: -4px; margin-left: 3px; margin-right: 4px;" height="17" src="https://cdn.jsdelivr.net/gh/tatakanuta/tatakanuta@v1.0.0/asset/icon/back.png">
+	    <a href="/" style="color: #e5e5e5;">
+	      <i class="material-icons-outlined" style="vertical-align: middle; margin-top: -4px; margin-left: 0px; font-size: 28px">chevron_left</i>
 	    </a>
 
-	    <form id="search-form" style="display: inline-block; margin-left: 7px; width: calc(100% - 115px); position: relative;">
-		    <div id="nav-search-btn" class="search-btn"><img style="margin-top: -8px; margin-left: 7px;" height="20" src="https://cdn.jsdelivr.net/gh/tatakanuta/tatakanuta@v1.0.0/asset/icon/search.png"></div>
-		    <input id="nav-query" name="nav-query" style="width: 100%; height: 35px; margin-top: -5px; vertical-align: middle; border-top-left-radius: 2px; border-bottom-left-radius: 2px; border-top-right-radius: 0px; border-bottom-right-radius: 0px; background-color: #1e1e1e; border-color: #1e1e1e; line-height: 35px; padding-left: 7px; font-size: 15px; padding-top: 5px" class="search-nav-bar" type="text" value="{{ request('query') }}" placeholder="搜尋 Hanime1.me">
+	    <form id="search-form" style="display: inline-block; margin-left: 7px; width: calc(100% - 39px); position: relative;">
+		    <input id="nav-query" name="nav-query" style="width: 100%; height: 35px; margin-top: -5px; vertical-align: middle; border-radius: 5px; background-color: #323434; border-color: #323434 !important; line-height: 35px; padding-left: 35px; font-size: 15px; padding-top: 2px" class="search-nav-bar" type="text" value="{{ request('query') }}" placeholder="搜尋 Hanime1.me">
+		    <i class="material-icons" style="color: dimgray; position: absolute; top: 7px; left: 5px; font-size: 25px">search</i>
 		</form>
-
-		@if (Auth::check())
-		    <div id="search-user-mobile-modal-trigger" style="padding-left: 12px; padding-right: 0px; cursor: pointer;" class="nav-icon pull-right" data-toggle="modal" data-target="#search-user-mobile-modal">
-		      <img style="width: 26px; border-radius: 50%;" src="{{ Auth::user()->avatar_temp }}">
-		    </div>
-
-		    <div style="z-index: 10001" id="search-user-mobile-modal" class="modal" role="dialog">
-		      <div class="modal-dialog modal-sm" style="position: absolute; top: 87px;">
-		        <div class="modal-content" style="border-radius: 3px; background-color: #222222; color: white;">
-		          <div class="modal-header" style="border-bottom: 1px solid #333333; position: relative; height: 65px;">
-		            <span class="material-icons pull-left no-select modal-close-btn" data-dismiss="modal">close</span>
-		            <h4 class="modal-title" style="text-align: center; font-weight: bold; margin: 0; padding: 0; margin-top: 5px; font-size: 18px;">帳戶設定</h4>
-		          </div>
-
-		          <div class="modal-body" style="padding: 0; height: calc(100% - 65px); overflow-x: hidden;">
-		            @include('layouts.user-modal-content')
-		            <hr style="margin: 0; border-color: #333333;">
-		          </div>
-		        </div>
-		      </div>
-		    </div>
-		@else
-		    <a style="padding-right: 0px" class="nav-icon pull-right" href="{{ route('home.list') }}">
-		      <span style="vertical-align: middle; margin-top: -1px;" class="material-icons">account_circle</span>
-		    </a>
-		@endif
 	  </div>
 	</div>
 @endsection
@@ -269,7 +243,7 @@
 						@foreach ($results as $video)
 							<div class="col-xs-12" style="padding-left: 3px; padding-right: 3px;">
 
-								<div class="hover-lighter card-mobile-panel" style="margin-bottom: 10px;">
+								<div class="hover-lighter card-mobile-panel" style="margin-bottom: 8px;">
 									<div style="width: 150px; display: inline-block;">
 										<a href="{{ route('video.watch') }}?v={{ $video->id }}" style="text-decoration: none;">
 											<div style="position: relative; display: inline-block;">

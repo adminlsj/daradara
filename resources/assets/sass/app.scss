@@ -577,6 +577,10 @@ th, td {
   margin-right: 47px;
 }
 
+#search-form #nav-query::placeholder{
+  color: dimgray;
+}
+
 #watch-comics-link-btn {
   margin-top: 15px;
   margin-bottom: -2px;
