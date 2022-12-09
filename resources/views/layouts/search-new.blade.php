@@ -125,7 +125,7 @@
 	        @endforeach
 	      </div>
 	      <hr style="border-color: #3a3c3f; margin: 0">
-	      <div class="modal-footer" style="border-top: none; width: 100%; text-align: center; padding: 12px 15px">
+	      <div class="modal-footer" style="border-top: none; width: 100%; text-align: center; padding: 12px 15px;">
 			<div style="display: inline-block; float: left; line-height: 37px; color: white; cursor: pointer; text-decoration: underline; margin-left: 5px" data-dismiss="modal">取消</div>
 			<button style="border: none; color: white; background-color: #323434; border-radius: 0; height: 100%; width: auto; font-weight: bold; border-radius: 5px; padding: 10px 20px; " class="pull-right btn btn-primary" type="submit">顯示搜索結果</button>
 	      </div>
