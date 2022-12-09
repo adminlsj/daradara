@@ -1,4 +1,4 @@
-<div id="search-nav-wrapper" style="background-color: black; padding: 14px 10px 15px 10px; margin-top: 0px; border: none;" class="hidden-sm hidden-md hidden-lg hidden-xl">
+<div id="search-nav-wrapper" style="background-color: blue; padding: 14px 10px 15px 10px; margin-top: 0px; border: none;" class="hidden-sm hidden-md hidden-lg hidden-xl">
 
 	<div style="color: white; display: inline-block; font-size: 17px; margin-right: 5px; font-weight: bold;">
 		全部類型
