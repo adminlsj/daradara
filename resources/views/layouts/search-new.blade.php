@@ -213,11 +213,11 @@
 								<div style="margin-top: -1px; padding: 0 8px;">
 									<div style="text-decoration: none; color: black;">
 										<a href="{{ route('home.search') }}?query={{ $artist->name }}" style="color: white; font-size: inherit;">
-											<div class="card-mobile-title">{{ $artist->name }}</div>
+											<div class="card-mobile-title search-artist-title">{{ $artist->name }}</div>
 										</a>
 
 										<div class="card-mobile-genre-wrapper" style="margin-top: 3px; margin-left: -2px">
-											<a style="text-decoration: none; font-size: 12px; color: dimgray; margin-left: 2px; display: inline-block;" class="card-mobile-user">{{ $artist->videos_count }} 部影片</a>
+											<a style="text-decoration: none; font-size: 12px; color: dimgray; margin-left: 2px; display: inline-block;" class="card-mobile-user search-artist-count">{{ $artist->videos_count }} 部影片</a>
 										</div>
 									</div>
 								</div>

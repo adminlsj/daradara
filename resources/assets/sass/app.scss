@@ -2590,6 +2590,10 @@ div.sticky {
     width: calc(100% / 3);
   }
 
+  .search-artist-title, .search-artist-count {
+    font-weight: bold;
+  }
+
   #playlist-edit-img {
     height: 18px; 
     margin-top: -3px; 
