@@ -12,7 +12,7 @@
 	    </a>
 
 	    <form id="search-form" style="display: inline-block; margin-left: 7px; width: calc(100% - 39px); position: relative;">
-		    <input id="nav-query" name="nav-query" style="width: 100%; height: 35px; margin-top: 0px; vertical-align: middle; border-radius: 5px; background-color: #323231; border-color: #323231 !important; line-height: 35px; padding-left: 37px; font-size: 15px; padding-top: 3px" class="search-nav-bar" type="text" value="{{ request('query') }}" placeholder="搜尋 Hanime1.me">
+		    <input id="nav-query" name="nav-query" style="width: 100%; height: 37px; margin-top: 0px; vertical-align: middle; border-radius: 5px; background-color: #323231; border-color: #323231 !important; line-height: 35px; padding-left: 37px; font-size: 15px; padding-top: 3px" class="search-nav-bar" type="text" value="{{ request('query') }}" placeholder="搜尋 Hanime1.me">
 		    <i class="material-icons" style="color: dimgray; position: absolute; top: 10px; left: 7px; font-size: 25px">search</i>
 		</form>
 	  </div>
