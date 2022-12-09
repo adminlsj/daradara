@@ -581,6 +581,10 @@ th, td {
   color: #7F807F;
 }
 
+.search-artist-card {
+  width: calc(100% / 8);
+}
+
 #watch-comics-link-btn {
   margin-top: 15px;
   margin-bottom: -2px;
@@ -2190,6 +2194,10 @@ div.sticky {
   .search-doujin-videos {
     width: calc(100% / 5);
   }
+
+  .search-artist-card {
+    width: calc(100% / 7);
+  }
 }
 
 @media (max-width: 1250px) {
@@ -2227,6 +2235,10 @@ div.sticky {
 
   .search-doujin-videos {
     width: calc(100% / 4);
+  }
+
+  .search-artist-card {
+    width: calc(100% / 6);
   }
 
   .search-input-desktop {
@@ -2562,12 +2574,20 @@ div.sticky {
   .search-doujin-videos {
     width: calc(100% / 3);
   }
+
+  .search-artist-card {
+    width: calc(100% / 5);
+  }
 }
 
 @media (max-width: 767.9px) {
   body {
     font-family: sans-serif;
     background-color: black;
+  }
+
+  .search-artist-card {
+    width: calc(100% / 3);
   }
 
   #playlist-edit-img {

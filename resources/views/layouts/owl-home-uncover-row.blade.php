@@ -9,7 +9,7 @@
 	<div style="margin-top: -1px; padding: 0 8px;">
 		<div style="text-decoration: none; color: black;">
 			<a href="{{ route('video.watch') }}?v={{ $video->id }}" style="text-decoration: none; font-size: inherit;">
-				<div class="card-mobile-title">{{ str_replace("[".$video->user->name."] ", "", $video->title) }}</div>
+				<div class="card-mobile-title" style="font-weight: normal; color: #e5e5e5;">{{ str_replace("[".$video->user->name."] ", "", $video->title) }}</div>
 			</a>
 
 			<div class="card-mobile-genre-wrapper" style="margin-top: 3px; margin-left: -2px">

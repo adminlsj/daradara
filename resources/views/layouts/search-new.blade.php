@@ -201,7 +201,7 @@
 			<div class="content-padding-new">
 				<div class="row no-gutter" style="margin-left: -3px; margin-right: -3px;">
 					@foreach ($results as $artist)
-						<div class="col-xs-6 col-sm-4 col-md-1" style="padding-left: 3px; padding-right: 3px; width: calc(100%/8);">
+						<div class="col-xs-6 col-sm-4 col-md-1 search-artist-card" style="padding-left: 3px; padding-right: 3px;">
 							<div class="hover-lighter card-mobile-panel" style="margin-bottom: 30px; border-radius: 5px;">
 								<a href="{{ route('home.search') }}?query={{ $artist->name }}" style="text-decoration: none;">
 									<div style="position: relative;">
