@@ -270,7 +270,7 @@
 							<div class="col-xs-12" style="padding-left: 3px; padding-right: 3px;">
 
 								<div class="hover-lighter card-mobile-panel" style="margin-bottom: 10px;">
-									<div style="width: 150px; float: left;">
+									<div style="width: 150px; display: inline-block;">
 										<a href="{{ route('video.watch') }}?v={{ $video->id }}" style="text-decoration: none;">
 											<div style="position: relative; display: inline-block;">
 												<img style="width: 100%; height: 100%; border-radius: 5px;" src="https://i.imgur.com/D1l0JoC.jpg">
@@ -279,7 +279,7 @@
 										</a>
 									</div>
 
-									<div style="margin-left: 160px; text-decoration: none; color: black;">
+									<div style="display: inline-block; text-decoration: none; color: black; margin-top: -5px; margin-left: 8px; height: 50px; width: calc(100% - 168px); vertical-align: top;">
 										<a href="{{ route('video.watch') }}?v={{ $video->id }}" style="color: white; font-size: inherit;">
 											<div class="card-mobile-title" style="font-weight: bold;">{{ str_replace("[".$video->user->name."] ", "", $video->title) }}</div>
 										</a>
