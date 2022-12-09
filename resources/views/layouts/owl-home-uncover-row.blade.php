@@ -17,7 +17,7 @@
 			</div>
 
 
-			<div style="float: left; margin-top: -3px; margin-bottom: 45px">
+			<div style="float: left; margin-top: -2px; margin-bottom: 45px">
 				@if ($video->duration != null)
 				    <div class="card-mobile-duration" style="background: #2E2E2E; padding: 0px 3px; line-height: 20px; color: #b8babc;">
 				    	{{ $video->duration >= 3600 ? gmdate('H:i:s', $video->duration) : gmdate('i:s', $video->duration) }}
