@@ -38,7 +38,7 @@
 	        <input type="hidden" id="genre" name="genre" value="{{ $genre }}">
 
 	        @foreach (['全部', '裏番', '泡麵番', 'Motion Anime', '3D動畫', '同人作品', 'Cosplay'] as $option)
-		        <div style="line-height: 30px" class="simple-dropdown-item genre-option {{ $sort == $option ? 'active' : ''}}"><div class="hentai-sort-options">{{ $option }}</div></div>
+		        <div style="line-height: 30px" class="simple-dropdown-item genre-option {{ $genre == $option ? 'active' : ''}}"><div class="hentai-sort-options">{{ $option }}</div></div>
 				<hr style="margin: 0; border-color: #323434;">
 	        @endforeach
 

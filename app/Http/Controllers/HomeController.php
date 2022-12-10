@@ -17,6 +17,7 @@ use Redirect;
 use Storage;
 use App\Helper;
 use SteelyWing\Chinese\Chinese;
+use Illuminate\Database\Eloquent\Builder;
 
 class HomeController extends Controller
 {
@@ -120,10 +121,56 @@ class HomeController extends Controller
         $is_mobile = Helper::checkIsMobile();
 
         if ($type == 'artist') {
-            $results = User::has('videos');
+            $results = User::query();
 
             if ($query) {
                 $results = $results->where('name', 'ilike', '%'.$query.'%');
+            }
+
+            switch ($genre) {
+                case '全部':
+                    $results = $results->has('videos');
+                    break;
+
+                case '裏番':
+                    $results = $results->whereHas('videos', function (Builder $query) {
+                        $query->where('genre', '裏番');
+                    });
+                    break;
+
+                case '泡麵番':
+                    $results = $results->whereHas('videos', function (Builder $query) {
+                        $query->where('genre', '泡麵番');
+                    });
+                    break;
+
+                case 'Motion Anime':
+                    $results = $results->whereHas('videos', function (Builder $query) {
+                        $query->where('genre', 'Motion Anime');
+                    });
+                    break;
+
+                case '3D動畫':
+                    $results = $results->whereHas('videos', function (Builder $query) {
+                        $query->where('genre', '3D動畫');
+                    });
+                    break;
+
+                case '同人作品':
+                    $results = $results->whereHas('videos', function (Builder $query) {
+                        $query->where('genre', '同人作品');
+                    });
+                    break;
+
+                case 'Cosplay':
+                    $results = $results->whereHas('videos', function (Builder $query) {
+                        $query->where('genre', 'Cosplay');
+                    });
+                    break;
+                
+                default:
+                    $results = $results->has('videos');
+                    break;
             }
 
             switch ($sort) {
@@ -146,7 +193,7 @@ class HomeController extends Controller
                     break;
             }
 
-            $results = $results->select('id', 'name', 'avatar_temp')->withCount('videos')->orderBy('videos_count', 'desc')->paginate(42);
+            $results = $results->select('id', 'name', 'created_at', 'updated_at', 'avatar_temp')->withCount('videos')->orderBy('videos_count', 'desc')->paginate(42);
 
         } else {
             $results = Video::query();

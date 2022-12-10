@@ -10,6 +10,8 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    use \Staudenmeir\EloquentEagerLimit\HasEagerLimit;
+
     /**
      * The attributes that are mass assignable.
      *
