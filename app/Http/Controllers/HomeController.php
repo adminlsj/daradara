@@ -199,13 +199,13 @@ class HomeController extends Controller
             $results = Video::query();
 
             if ($query) {
-                $query = preg_replace('/\s+/', '', $query);
+                $query = mb_strtolower(preg_replace('/\s+/', '', $query), 'UTF-8');
                 $chinese = new Chinese();
                 $original = '%'.$query.'%';
                 $translated = '%'.$chinese->to(Chinese::ZH_HANT, $query).'%';
                 $results = $results->where(function($query) use ($original, $translated) {
-                    $query->where('searchtext', 'ilike', $original)
-                          ->orWhere('searchtext', 'ilike', $translated);
+                    $query->where('searchtext', 'like', $original)
+                          ->orWhere('searchtext', 'like', $translated);
                 });
             }
 

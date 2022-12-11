@@ -40,8 +40,8 @@ class UpdateSearchtext extends Command
     {
         $videos = Video::all();
         foreach ($videos as $video) {
-            $searchtext = $video->title.'|'.$video->translations['JP'].'|'.implode('', array_keys($video->tags_array)).'|'.$video->genre.'|'.$video->artist;
-            $video->searchtext = preg_replace('/\s+/', '', $searchtext);
+            $searchtext = $video->title.'|'.$video->translations['JP'].'|'.implode('|', array_keys($video->tags_array)).'|'.$video->genre.'|'.$video->artist;
+            $video->searchtext = mb_strtolower(preg_replace('/\s+/', '', $searchtext), 'UTF-8');
             $video->save();
         }
     }

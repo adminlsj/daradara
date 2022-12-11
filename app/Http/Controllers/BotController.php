@@ -35,12 +35,10 @@ class BotController extends Controller
 
         $videos = Video::all();
         foreach ($videos as $video) {
-            $searchtext = $video->title.'|'.$video->translations['JP'].'|'.implode('', array_keys($video->tags_array)).'|'.$video->genre.'|'.$video->artist;
-            $video->searchtext = preg_replace('/\s+/', '', $searchtext);
+            $searchtext = $video->title.'|'.$video->translations['JP'].'|'.implode('|', array_keys($video->tags_array)).'|'.$video->genre.'|'.$video->artist;
+            $video->searchtext = mb_strtolower(preg_replace('/\s+/', '', $searchtext), 'UTF-8');
             $video->save();
         }
-
-
 
         /* for ($i = 0; $i <= 157; $i++) { 
             $initial = "https://cdn1.htstreaming.com/cdn/down/cd2a7e30451a8eb993a1f4f34b293f37/Video/720p/720p_";
