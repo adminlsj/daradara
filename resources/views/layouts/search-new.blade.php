@@ -205,11 +205,11 @@
 				<div class="row no-gutter" style="margin-left: -3px; margin-right: -3px;">
 					@foreach ($results as $artist)
 						<div class="col-xs-6 col-sm-4 col-md-1 search-artist-card hidden-xs hover-lighter multiple-link-wrapper" style="padding-left: 3px; padding-right: 3px; margin-bottom: 30px;">
-							<a class="overlay" href="{{ route('home.search') }}?query={{ $artist->name }}"></a>
+							<a class="overlay" href="{{ route('home.search') }}?query={{ $artist->name }}&genre={{ $genre }}"></a>
 							@include('video.card-artist-desktop')
 						</div>
 						<div class="col-xs-12 hidden-sm hidden-md hidden-lg hidden-xl hover-lighter multiple-link-wrapper" style="padding-left: 3px; padding-right: 3px; margin-bottom: 8px;">
-							<a class="overlay" href="{{ route('home.search') }}?query={{ $artist->name }}"></a>
+							<a class="overlay" href="{{ route('home.search') }}?query={{ $artist->name }}&genre={{ $genre }}"></a>
 							@include('video.card-artist-mobile')
 						</div>
 					@endforeach
