@@ -199,20 +199,13 @@ class HomeController extends Controller
             $results = Video::query();
 
             if ($query) {
+                $query = preg_replace('/\s+/', '', $query);
                 $chinese = new Chinese();
                 $original = '%'.$query.'%';
                 $translated = '%'.$chinese->to(Chinese::ZH_HANT, $query).'%';
                 $results = $results->where(function($query) use ($original, $translated) {
-                    $query->where('title', 'ilike', $original)
-                          ->orWhere('translations', 'ilike', $original)
-                          ->orWhere('tags_array', 'ilike', $original)
-                          ->orWhere('genre', 'ilike', $original)
-                          ->orWhere('artist', 'ilike', $original)
-                          ->orWhere('title', 'ilike', $translated)
-                          ->orWhere('translations', 'ilike', $translated)
-                          ->orWhere('tags_array', 'ilike', $translated)
-                          ->orWhere('genre', 'ilike', $translated)
-                          ->orWhere('artist', 'ilike', $translated);
+                    $query->where('searchtext', 'ilike', $original)
+                          ->orWhere('searchtext', 'ilike', $translated);
                 });
             }
 

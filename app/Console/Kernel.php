@@ -31,6 +31,8 @@ class Kernel extends ConsoleKernel
         'App\Console\Commands\UploadNhentai',
         'App\Console\Commands\UploadRule34',
 
+        'App\Console\Commands\UpdateSearchtext',
+
         'App\Console\Commands\RemoveSpam',
     ];
 
@@ -43,6 +45,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('hanime1:reset-views')->dailyAt('05:00');
+        $schedule->command('hanime1:update-searchtext')->dailyAt('05:00');
 
         $schedule->command('hanime1:update-hembed')->hourly();
         $schedule->command('hanime1:update-vod')->hourly();
@@ -56,8 +59,8 @@ class Kernel extends ConsoleKernel
         $schedule->command('hanime1:check-motherless')->cron('0 */2 * * *');
         // $schedule->command('hanime1:check-odysee')->cron('0 */2 * * *');
 
-        $schedule->command('hanime1:upload-nhentai')->hourly()->between('6:00', '21:00');
-        $schedule->command('hanime1:upload-rule34')->hourly()->between('6:00', '21:00');
+        // $schedule->command('hanime1:upload-nhentai')->hourly()->between('6:00', '21:00');
+        // $schedule->command('hanime1:upload-rule34')->hourly()->between('6:00', '21:00');
 
         $schedule->command('hanime1:remove-spam')->cron('*/5 * * * *');
     }
