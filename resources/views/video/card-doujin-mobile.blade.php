@@ -24,6 +24,5 @@
 		    	{{ $video->views() }}次
 		    </div>
 		</div>
-
 	</div>
 </div>
