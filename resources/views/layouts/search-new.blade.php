@@ -198,95 +198,30 @@
 	<div id="home-rows-wrapper" class="search-rows-wrapper">
 
 		@if ($type == 'artist')
-			<div class="content-padding-new hidden-xs">
+			<div class="content-padding-new">
 				<div class="row no-gutter" style="margin-left: -3px; margin-right: -3px;">
 					@foreach ($results as $artist)
-						<div class="col-xs-6 col-sm-4 col-md-1 search-artist-card" style="padding-left: 3px; padding-right: 3px;">
+						<div class="col-xs-6 col-sm-4 col-md-1 search-artist-card hidden-xs" style="padding-left: 3px; padding-right: 3px;">
 							@include('video.card-artist-desktop')
 						</div>
-					@endforeach
-				</div>
-			</div>
-
-			<div class="content-padding-new hidden-sm hidden-md hidden-lg hidden-xl">
-				<div class="row no-gutter" style="margin-left: -3px; margin-right: -3px;">
-					@foreach ($results as $artist)
-						<div class="col-xs-12" style="padding-left: 3px; padding-right: 3px;">
-							<div class="hover-lighter card-mobile-panel" style="margin-bottom: 8px;">
-								<div style="width: 84px; display: inline-block;">
-									<a href="{{ route('home.search') }}?query={{ $artist->name }}" style="text-decoration: none;">
-										<div style="position: relative; display: inline-block;">
-											<img style="width: 100%; height: 100%; border-radius: 5px;" src="https://i.imgur.com/wCSgaov.png">
-											<img style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 5px" src="{{ $artist->avatar_temp }}">
-									    </div>
-									</a>
-								</div>
-
-								<div style="display: inline-block; text-decoration: none; margin-left: 8px; height: 60px; width: calc(100% - 102px); vertical-align: middle;">
-									<a href="{{ route('home.search') }}?query={{ $artist->name }}" style="color: #e5e5e5; font-size: inherit;">
-										<div class="card-mobile-title" style="color: #e5e5e5; font-weight: bold;">{{ $artist->name }}</div>
-									</a>
-
-									<div class="card-mobile-genre-wrapper" style="margin-top: 3px; margin-left: -2px">
-										<a style="text-decoration: none; font-size: 12px; color: dimgray; margin-left: 2px; display: inline-block; font-weight: bold;" class="card-mobile-user">{{ $artist->videos_count }} 部影片</a>
-									</div>
-								</div>
-							</div>
+						<div class="col-xs-12 hidden-sm hidden-md hidden-lg hidden-xl" style="padding-left: 3px; padding-right: 3px;">
+							@include('video.card-artist-mobile')
 						</div>
 					@endforeach
 				</div>
 			</div>
 		@else
 		  	@if ($doujin)
-				<div class="content-padding-new hidden-xs">
+				<div class="content-padding-new">
 					<div class="row no-gutter" style="margin-left: -3px; margin-right: -3px;">
 						@foreach ($results as $video)
-							<div class="col-xs-6 col-sm-4 col-md-2 search-doujin-videos" style="padding-left: 3px; padding-right: 3px;">
-								@include('layouts.owl-home-uncover-row')
+							<div class="col-xs-6 col-sm-4 col-md-2 search-doujin-videos hidden-xs hover-lighter multiple-link-wrapper" style="padding-left: 3px; padding-right: 3px; margin-bottom: 45px;">
+								<a class="overlay" href="{{ route('video.watch') }}?v={{ $video->id }}"></a>
+								@include('video.card-doujin-desktop')
 							</div>
-						@endforeach
-					</div>
-				</div>
-
-				<div class="content-padding-new hidden-sm hidden-md hidden-lg hidden-xl">
-					<div class="row no-gutter" style="margin-left: -3px; margin-right: -3px;">
-						@foreach ($results as $video)
-							<div class="col-xs-12" style="padding-left: 3px; padding-right: 3px;">
-
-								<div class="hover-lighter card-mobile-panel" style="margin-bottom: 8px;">
-									<div style="width: 150px; display: inline-block;">
-										<a href="{{ route('video.watch') }}?v={{ $video->id }}" style="text-decoration: none;">
-											<div style="position: relative; display: inline-block;">
-												<img style="width: 100%; height: 100%; border-radius: 5px;" src="https://i.imgur.com/D1l0JoC.jpg">
-												<img style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 5px" src="{{ $video->thumbL() }}">
-										    </div>
-										</a>
-									</div>
-
-									<div style="display: inline-block; text-decoration: none; color: black; margin-top: -6px; margin-left: 8px; height: 50px; width: calc(100% - 168px); vertical-align: top;">
-										<a href="{{ route('video.watch') }}?v={{ $video->id }}" style="color: #e5e5e5; font-size: inherit;">
-											<div class="card-mobile-title" style="color: #e5e5e5; font-weight: bold;">{{ str_replace("[".$video->user->name."] ", "", $video->title) }}</div>
-										</a>
-
-										<div class="card-mobile-genre-wrapper" style="margin-top: 3px; margin-left: -2px">
-											<a href="{{ route('home.search') }}?query={{ $video->user->name }}" style="font-size: 12px; color: dimgray; margin-left: 2px; display: inline-block; font-weight: bold;" class="card-mobile-user">{{ $video->user->name }}</a>
-										</div>
-
-										<div style="float: left; margin-top: -2px;">
-											@if ($video->duration != null)
-											    <div class="card-mobile-duration" style="background: #2E2E2E; padding: 0px 3px; line-height: 20px; color: #b8babc; font-weight: bold;">
-											    	{{ $video->duration >= 3600 ? gmdate('H:i:s', $video->duration) : gmdate('i:s', $video->duration) }}
-											    </div>
-										    @endif
-
-										    <div class="card-mobile-duration" style="background: #2E2E2E; padding: 0px 3px; line-height: 20px; margin-right: 5px; color: #b8babc; font-weight: bold;">
-										    	{{ $video->views() }}次
-										    </div>
-										</div>
-
-									</div>
-								</div>
-
+							<div class="col-xs-12 hidden-sm hidden-md hidden-lg hidden-xl hover-lighter multiple-link-wrapper" style="padding-left: 3px; padding-right: 3px; margin-bottom: 8px;">
+								<a class="overlay" href="{{ route('video.watch') }}?v={{ $video->id }}"></a>
+								@include('video.card-doujin-mobile')
 							</div>
 						@endforeach
 					</div>
