@@ -21,56 +21,6 @@ const app = new Vue({
     el: '#app'
 });
 
-/* var progress;
-$('.preview-trigger').hover(function(){
-  var bar = $(this).find('#myBar');
-  var width = 1;
-  progress = setInterval(function(){
-    if (width >= 100) {
-      clearInterval(progress);
-    } else {
-      width++;
-      bar.width(width + '%');
-    }
-  }, 25);
-
-  var url = $(this).data('preview');
-  var poster = $(this).data('poster');
-  $(this).find('.preview-wrapper').append('<video style="position:absolute;top:0;left:0;width:100%;height:100%;background-color:black" class="preview" autoplay muted loop poster="' + poster + '"><source src="' + url + '" type="video/mp4"></video>');
-  $('.preview').play();
-
-},function(){
-  $('.preview').remove();
-  clearInterval(progress);
-  $(this).find('#myBar').width(0);
-});
-
-$('.preview-trigger').on({ 'touchstart' : function(){
-  if (!$(this).find('.preview').length) {
-    var bar = $(this).find('#myBar');
-    var width = 1;
-    var progress = setInterval(function(){
-      if (width >= 100) {
-        clearInterval(progress);
-        bar.width('0%');
-      } else {
-        width++;
-        bar.width(width + '%');
-      }
-    }, 20);
-
-    var previous = $('.preview-trigger').find('.preview');
-    previous.fadeOut(300, function() { $(this).remove() });;
-
-    var url = $(this).data('preview');
-    var poster = $(this).data('poster');
-    var video = $('<video style="position:absolute;top:0;left:0;width:100%;height:100%;background-color:transparent" class="preview" muted loop playsinline src="' + url + '"></video>')
-    .bind("loadeddata", function(){
-        $(this).css('background-color', 'black');
-    }).appendTo($(this).find('.preview-wrapper'))[0].play();
-  }
-}}); */
-
 $('#broad').change(function(){
   if (this.checked) {
     $('#hentai-tags-text').text('搜索包含任何一個以下選擇的標籤的影片：');
@@ -160,20 +110,6 @@ $('#playModal').on('hidden.bs.modal', function () {
   dp.pause()
 });
 
-/* $('nav#hentai-main-nav').on("submit", "form#search-form", function(e) {
-  e.preventDefault(e);
-  var query = $('#nav-query').val();
-  $('#hentai-form #query').val(query);
-  $('form#hentai-form').submit();
-});
-
-$('div#search-top-nav-mobile').on("submit", "form#search-form", function(e) {
-  e.preventDefault(e);
-  var query = $('#nav-query').val();
-  $('#hentai-form #query').val(query);
-  $('form#hentai-form').submit();
-}); */
-
 $('div#main-nav-home').on("submit", "form#search-form", function(e) {
   e.preventDefault(e);
   var query = $('#nav-query').val();
@@ -186,13 +122,6 @@ $('#nav-search-btn').click(function() {
   $('#hentai-form #query').val(query);
   $('form#hentai-form').submit();
 })
-
-/* $('div#main-nav').on("submit", "form#main-search-form", function(e) {
-  e.preventDefault(e);
-  var query = $('#nav-query').val();
-  $('#hentai-form #query').val(query);
-  $('form#hentai-form').submit();
-}); */
 
 $('[id=database-search-btn]').click(function(e) {
   var column = $('#column').find(":selected").text();
@@ -224,12 +153,32 @@ $('.search-submit-btn').click(function(e) {
     $(this).parent().submit();
 });
 
-var prevScrollpos = window.pageYOffset;
+var mainnav = $("#main-nav");
+var searchnavdesktop = $("#search-nav-desktop");
+var searchnavmobile = $("#search-nav-mobile");
+var searchcontentdesktop = $("#search-content-padding-desktop");
+var searchcontentmobile = $("#search-content-padding-mobile");
 window.onscroll = function() {
   if (window.pageYOffset != 0) {
-    $('#main-nav').css('background-color', '#141414');
+    mainnav.css('background-color', '#141414');
   } else {
-    $('#main-nav').css('background-color', 'transparent');
+    mainnav.css('background-color', 'transparent');
+  }
+
+  if (window.pageYOffset >= 68) {
+    searchnavdesktop.addClass('sticky');
+    searchcontentdesktop.css('padding-top', '105px');
+  } else {
+    searchnavdesktop.removeClass('sticky');
+    searchcontentdesktop.css('padding-top', '0px');
+  }
+
+  if (window.pageYOffset >= 50) {
+    searchnavmobile.addClass('sticky');
+    searchcontentmobile.css('padding-top', '54px');
+  } else {
+    searchnavmobile.removeClass('sticky');
+    searchcontentmobile.css('padding-top', '0px');
   }
 }
 

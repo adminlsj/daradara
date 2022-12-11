@@ -1,4 +1,4 @@
-<div id="search-nav-wrapper" style="background-color: black; padding: 14px 10px 15px 10px; margin-top: 0px; margin-bottom: 5px; border: none;" class="hidden-sm hidden-md hidden-lg hidden-xl">
+<div id="search-nav-mobile" style="background-color: black; padding: 10px 10px 11px 10px; margin-top: 0px; margin-bottom: 8px; border: none;" class="search-nav-wrapper hidden-sm hidden-md hidden-lg hidden-xl">
 
 	<div style="color: white; display: inline-block; font-size: 17px; margin-right: 5px; font-weight: bold; cursor: pointer;" data-toggle="modal" data-target="#genre-modal">
 		{{ !$genre || $genre == '全部' ? '全部類型' : Request::get('genre')}}

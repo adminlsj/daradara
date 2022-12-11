@@ -800,7 +800,7 @@ th, td {
   cursor: pointer;
 }
 
-#search-nav-wrapper {
+.search-nav-wrapper {
   padding: 0 4%;
   background-color: #141414;
   width: 100%;
@@ -1889,6 +1889,13 @@ div.sticky {
   top: 0;
 }
 
+.sticky {
+  position: fixed !important;
+  top: 0 !important;
+  width: 100% !important;
+  z-index: 10000 !important;
+}
+
 .fixed-top {
   position: fixed;
   top: 53px;
@@ -2252,14 +2259,18 @@ div.sticky {
     font-size: 2.8vw !important;
   }
 
-  #search-nav-wrapper {
+  .search-nav-wrapper {
     white-space: nowrap;
     overflow-x: scroll;
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none;  /* Internet Explorer 10+ */
   }
 
-  #search-nav-wrapper::-webkit-scrollbar { /* WebKit */
+  .scrollable-search-type-button {
+    margin-right: -7px;
+  }
+
+  .search-nav-wrapper::-webkit-scrollbar { /* WebKit */
     display: none;
   }
 
@@ -2578,6 +2589,10 @@ div.sticky {
 
   .search-artist-card {
     width: calc(100% / 5);
+  }
+
+  .nav-desktop-cosplay-item {
+    display: none;
   }
 }
 
@@ -2917,14 +2932,14 @@ div.sticky {
     scrollbar-width: none;  /* Firefox */
   }
 
-  #search-nav-wrapper {
+  .search-nav-wrapper {
     white-space: nowrap;
     overflow-x: scroll;
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none;  /* Internet Explorer 10+ */
   }
 
-  #search-nav-wrapper::-webkit-scrollbar { /* WebKit */
+  .search-nav-wrapper::-webkit-scrollbar { /* WebKit */
     display: none;
   }
 

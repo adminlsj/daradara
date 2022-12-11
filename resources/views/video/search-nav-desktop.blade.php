@@ -1,4 +1,4 @@
-<div id="search-nav-wrapper" style="margin-top: 10px; margin-bottom: 47px" class="hidden-xs">
+<div id="search-nav-desktop" style="margin-bottom: 35px; padding-top: 10px; padding-bottom: 12px" class="search-nav-wrapper hidden-xs">
 
 	<div class="dropdown no-select" style="display: inline-block; padding: 0;">
 		<button style="color: white; font-size: 32px; display: inline-block; margin-right: 20px; background-color: transparent; outline: 0; border: 0;" type="button" data-toggle="modal" data-target="#genre-modal">
@@ -35,7 +35,7 @@
 
 	<input type="hidden" id="type" name="type" value="{{ $type }}">
 
-	<div class="dropdown no-select search-nav-opacity hidden-md hidden-lg hidden-xl" style="display: inline-block; padding: 0; margin-left: 7px;">
+	<div class="dropdown no-select search-nav-opacity hidden-md hidden-lg hidden-xl scrollable-search-type-button" style="display: inline-block; padding: 0; margin-left: 7px;">
 		<button style="outline:0; color:white; padding: 5px 11px 6px 12px; background-color: rgba(0,0,0,.1);" class="btn btn-secondary dropdown-toggle search-nav-desktop search-type-button" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 			@if ($type == 'artist')
 				<span class="search-type-input">搜尋影片</span>
