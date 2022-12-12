@@ -992,6 +992,7 @@ th, td {
 
 #home-rows-wrapper .home-rows-videos-wrapper .home-rows-videos-div .home-rows-videos-title, .owl-home-rows-title {
   font-size: 14px;
+  font-weight: normal;
 }
 
 .tabcontent .home-rows-videos-div .home-rows-videos-title, .owl-home-rows-title {
@@ -2614,8 +2615,13 @@ div.sticky {
     width: calc(100% / 2.09);
   }
 
+
   #home-rows-wrapper .home-rows-videos-wrapper .home-rows-videos-div {
     width: calc(100% / 3.1);
+  }
+
+  .home-rows-videos-title, .home-doujin-videos .card-mobile-title, .home-doujin-videos .card-mobile-user, .home-doujin-videos .card-mobile-duration {
+    font-weight: bold !important;
   }
 
   .search-artist-card {
