@@ -1,4 +1,4 @@
-<div id="search-nav-desktop" style="margin-bottom: 35px; padding-top: 10px; padding-bottom: 12px" class="search-nav-wrapper hidden-xs">
+<div id="search-nav-desktop" style="margin-bottom: 35px; padding-top: 10px; padding-bottom: 10px" class="search-nav-wrapper hidden-xs">
 
 	<div class="dropdown no-select" style="display: inline-block; padding: 0;">
 		<button style="color: white; font-size: 30px; display: inline-block; margin-right: 20px; background-color: transparent; outline: 0; border: 0;;" type="button" data-toggle="modal" data-target="#genre-modal">

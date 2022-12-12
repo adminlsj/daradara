@@ -167,7 +167,7 @@ window.onscroll = function() {
 
   if (window.pageYOffset >= 68) {
     searchnavdesktop.addClass('sticky');
-    searchcontentdesktop.css('padding-top', '105px');
+    searchcontentdesktop.css('padding-top', '101px');
   } else {
     searchnavdesktop.removeClass('sticky');
     searchcontentdesktop.css('padding-top', '0px');
@@ -175,7 +175,7 @@ window.onscroll = function() {
 
   if (window.pageYOffset >= 50) {
     searchnavmobile.addClass('sticky');
-    searchcontentmobile.css('padding-top', '52px');
+    searchcontentmobile.css('padding-top', '53px');
   } else {
     searchnavmobile.removeClass('sticky');
     searchcontentmobile.css('padding-top', '0px');
