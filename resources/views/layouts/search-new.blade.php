@@ -34,7 +34,7 @@
 	        <span class="material-icons pull-left no-select modal-close-btn" data-dismiss="modal">close</span>
 	        <h4 class="modal-title">影片類型</h4>
 	      </div>
-	      <div class="modal-body">
+	      <div class="modal-body" style="text-align: center">
 	        <input type="hidden" id="genre" name="genre" value="{{ $genre }}">
 
 	        @foreach (['全部', '裏番', '泡麵番', 'Motion Anime', '3D動畫', '同人作品', 'Cosplay'] as $option)
@@ -59,10 +59,10 @@
 
 	<div id="tags" class="modal" role="dialog">
 	  <div class="modal-dialog">
-	    <div class="modal-content" style="border-radius: 12px; border: 1px solid #323434; background-color: #181817; color: white">
-	      <div class="modal-header" style="border-bottom: 1px solid #333333; position: relative; height: 65px;">
-	        <span class="material-icons pull-left no-select modal-close-btn" style="font-size: 18px; margin-top: 4px;" data-dismiss="modal">close</span>
-	        <h4 class="modal-title" style="text-align: center; font-weight: bold; margin: 0; padding: 0; margin-top: 6px; font-size: 16px;">內容標籤</h4>
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <span class="material-icons pull-left no-select modal-close-btn" data-dismiss="modal">close</span>
+	        <h4 class="modal-title">內容標籤</h4>
 	      </div>
 	      <div class="modal-body" style="overflow-y: scroll; padding-top: 0px;">
 	      	<div style="background-color: #323434; margin: 0 -15px 20px -15px; padding: 5px 15px 0px 15px;">
@@ -135,10 +135,10 @@
 
 	<div id="sort-modal" class="modal" role="dialog">
 	  <div class="modal-dialog">
-	    <div class="modal-content" style="border-radius: 12px; border: 1px solid #323434; background-color: #181817; color: white">
-	      <div class="modal-header" style="border-bottom: 1px solid #333333; position: relative; height: 65px;">
-	        <span class="material-icons pull-left no-select modal-close-btn" style="font-size: 18px; margin-top: 4px;" data-dismiss="modal">close</span>
-	        <h4 class="modal-title" style="text-align: center; font-weight: bold; margin: 0; padding: 0; margin-top: 6px; font-size: 16px;">排序方式</h4>
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <span class="material-icons pull-left no-select modal-close-btn" data-dismiss="modal">close</span>
+	        <h4 class="modal-title">排序方式</h4>
 	      </div>
 	      <div class="modal-body" style="padding: 0; text-align: center">
 	        <input type="hidden" id="sort" name="sort" value="{{ $sort }}">
@@ -165,10 +165,10 @@
 
 	<div id="date-modal" class="modal" role="dialog">
 	  <div class="modal-dialog">
-	    <div class="modal-content" style="border-radius: 12px; border: 1px solid #323434; background-color: #181817; color: white">
-	      <div class="modal-header" style="border-bottom: 1px solid #333333; position: relative; height: 65px;">
-	        <span class="material-icons pull-left no-select modal-close-btn" style="font-size: 18px; margin-top: 4px;" data-dismiss="modal">close</span>
-	        <h4 class="modal-title" style="text-align: center; font-weight: bold; margin: 0; padding: 0; margin-top: 6px; font-size: 16px;">發佈日期</h4>
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <span class="material-icons pull-left no-select modal-close-btn" data-dismiss="modal">close</span>
+	        <h4 class="modal-title">發佈日期</h4>
 	      </div>
 	      <div class="modal-body" style="padding: 24px 15px;">
 			<div class="form-group">
