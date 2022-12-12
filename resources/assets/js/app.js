@@ -175,7 +175,7 @@ window.onscroll = function() {
 
   if (window.pageYOffset >= 50) {
     searchnavmobile.addClass('sticky');
-    searchcontentmobile.css('padding-top', '54px');
+    searchcontentmobile.css('padding-top', '52px');
   } else {
     searchnavmobile.removeClass('sticky');
     searchcontentmobile.css('padding-top', '0px');
