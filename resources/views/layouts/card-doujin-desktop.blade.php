@@ -5,12 +5,12 @@
 
 		<div style="position: absolute; right: 3px; bottom: 3px;">
 			@if ($video->duration != null)
-			    <div class="card-mobile-duration" style="background: rgba(0, 0, 0, 0.65); padding: 0px 3px; line-height: 17px; color: #e5e5e5; font-size: 10px;">
+			    <div class="card-mobile-duration" style="background: rgba(0, 0, 0, 0.65); padding: 0px 3px; line-height: 17px; color: #e5e5e5; font-size: 9px;">
 			    	{{ $video->duration >= 3600 ? gmdate('H:i:s', $video->duration) : gmdate('i:s', $video->duration) }}
 			    </div>
 		    @endif
 
-		    <div class="card-mobile-duration" style="background: rgba(0, 0, 0, 0.65); padding: 0px 3px; line-height: 17px; margin-right: 3px; color: #e5e5e5; font-size: 10px;">
+		    <div class="card-mobile-duration" style="background: rgba(0, 0, 0, 0.65); padding: 0px 3px; line-height: 17px; margin-right: 3px; color: #e5e5e5; font-size: 9px;">
 		    	{{ $video->views() }}次
 		    </div>
 		</div>
@@ -20,7 +20,7 @@
 		<div style="text-decoration: none; color: black;">
 			<div class="card-mobile-title" style="margin-top: 6px; font-weight: normal; color: #e5e5e5; padding: 0px; font-size: 12px">{{ str_replace("[".$video->user->name."] ", "", $video->title) }}</div>
 
-			<div class="card-mobile-genre-wrapper" style="margin-left: -2px; padding: 0px; margin-top: -1px;">
+			<div class="card-mobile-genre-wrapper" style="margin-left: -2px; padding: 0px; margin-top: -2px;">
 				<a href="{{ route('home.search') }}?query={{ $video->user->name }}" style="font-size: 12px; color: dimgray; margin-left: 2px; display: inline-block; font-weight: normal;" class="card-mobile-user">{{ $video->user->name }}</a>
 			</div>
 		</div>
