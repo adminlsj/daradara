@@ -20,8 +20,8 @@
 		<div style="text-decoration: none; color: black;">
 			<div class="card-mobile-title" style="margin-top: 5px; font-weight: normal; color: #e5e5e5; padding: 0px">{{ str_replace("[".$video->user->name."] ", "", $video->title) }}</div>
 
-			<div class="card-mobile-genre-wrapper" style="margin-left: -2px; padding: 0px; margin-top: -1px;">
-				<a href="{{ route('home.search') }}?query={{ $video->user->name }}" style="font-size: 12px; color: dimgray; margin-left: 2px; display: inline-block;" class="card-mobile-user">{{ $video->user->name }}</a>
+			<div class="card-mobile-genre-wrapper" style="margin-left: -3px; padding: 0px; margin-top: -1px;">
+				<a href="{{ route('home.search') }}?query={{ $video->user->name }}" style="font-size: 12px; color: dimgray; margin-left: 2px; display: inline-block; font-weight: normal !important" class="card-mobile-user">{{ $video->user->name }}</a>
 			</div>
 		</div>
 	</div>
