@@ -1,28 +1,28 @@
 <div id="search-nav-desktop" style="margin-bottom: 35px; padding-top: 10px; padding-bottom: 12px" class="search-nav-wrapper hidden-xs">
 
 	<div class="dropdown no-select" style="display: inline-block; padding: 0;">
-		<button style="color: white; font-size: 32px; display: inline-block; margin-right: 20px; background-color: transparent; outline: 0; border: 0;" type="button" data-toggle="modal" data-target="#genre-modal">
+		<button style="color: white; font-size: 30px; display: inline-block; margin-right: 20px; background-color: transparent; outline: 0; border: 0;;" type="button" data-toggle="modal" data-target="#genre-modal">
 			{{ !$genre || $genre == '全部' ? '全部類型' : Request::get('genre')}}
-			<i class="material-icons" style="vertical-align: middle; margin-top: -3px; margin-left: 0px;">arrow_drop_down</i>
+			<i class="material-icons" style="vertical-align: middle; margin-top: -5px; margin-left: 0px;">arrow_drop_down</i>
 		</button>
 	</div>
 
 	<div class="dropdown no-select" style="display: inline-block; padding: 0; {{ $type == 'artist' ? 'display:none' : '' }}">
-		<button style="outline:0; color:white;" class="btn btn-secondary dropdown-toggle search-nav-desktop" type="button" data-toggle="modal" data-target="#tags">
+		<button style="outline:0; color:white; margin-top: -15px;" class="btn btn-secondary dropdown-toggle search-nav-desktop" type="button" data-toggle="modal" data-target="#tags">
 			標籤
 			<i class="material-icons" style="vertical-align: middle; margin-top: -3px; margin-left: 16px; margin-right: -7px">arrow_drop_down</i>
 		</button>
 	</div>
 
 	<div class="dropdown no-select" style="display: inline-block; padding: 0;">
-		<button style="outline:0; color:white;" class="btn btn-secondary dropdown-toggle search-nav-desktop" type="button" data-toggle="modal" data-target="#sort-modal">
+		<button style="outline:0; color:white; margin-top: -15px;" class="btn btn-secondary dropdown-toggle search-nav-desktop" type="button" data-toggle="modal" data-target="#sort-modal">
 			{{ $sort ? $sort : '排序方式'}}
 			<i class="material-icons" style="vertical-align: middle; margin-top: -3px; margin-left: 16px; margin-right: -7px">arrow_drop_down</i>
 		</button>
 	</div>
 
 	<div class="dropdown no-select" style="display: inline-block; padding: 0; {{ $type == 'artist' ? 'display:none' : '' }}">
-		<button style="outline:0; color:white;" class="btn btn-secondary dropdown-toggle search-nav-desktop" type="button" data-toggle="modal" data-target="#date-modal">
+		<button style="outline:0; color:white; margin-top: -15px;" class="btn btn-secondary dropdown-toggle search-nav-desktop" type="button" data-toggle="modal" data-target="#date-modal">
 			發佈日期
 			<i class="material-icons" style="vertical-align: middle; margin-top: -3px; margin-left: 16px; margin-right: -7px">arrow_drop_down</i>
 		</button>
@@ -36,7 +36,7 @@
 	<input type="hidden" id="type" name="type" value="{{ $type }}">
 
 	<div class="dropdown no-select search-nav-opacity hidden-md hidden-lg hidden-xl scrollable-search-type-button" style="display: inline-block; padding: 0; margin-left: 7px;">
-		<button style="outline:0; color:white; padding: 5px 11px 6px 12px; background-color: rgba(0,0,0,.1);" class="btn btn-secondary dropdown-toggle search-nav-desktop search-type-button" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		<button style="outline:0; color:white; padding: 5px 11px 5px 12px; background-color: rgba(0,0,0,.1); margin-top: -15px;" class="btn btn-secondary dropdown-toggle search-nav-desktop search-type-button" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 			@if ($type == 'artist')
 				<span class="search-type-input">搜尋影片</span>
 				<img style="width: 15px; margin-top: -3px; margin-left: 12px" src="https://i.imgur.com/qGFVxZb.png">
@@ -47,7 +47,7 @@
 		</button>
 	</div>
 
-	<div class="dropdown no-select search-nav-opacity hidden-xs hidden-sm" style="margin-top: 22px; float: right; margin-right: -8px;">
+	<div class="dropdown no-select search-nav-opacity hidden-xs hidden-sm" style="margin-top: 19px; float: right; margin-right: -8px;">
 		<button style="outline:0; color:white; padding: 5px 11px 6px 12px; background-color: rgba(0,0,0,.1);" class="btn btn-secondary dropdown-toggle search-nav-desktop search-type-button" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 			@if ($type == 'artist')
 				<span class="search-type-input">搜尋影片</span>
