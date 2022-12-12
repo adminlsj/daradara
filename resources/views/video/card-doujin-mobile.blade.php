@@ -6,7 +6,7 @@
 	    </div>
 	</div>
 
-	<div style="display: inline-block; text-decoration: none; color: black; margin-top: -6px; margin-left: 8px; height: 50px; width: calc(100% - 168px); vertical-align: top;">
+	<div style="display: inline-block; text-decoration: none; color: black; margin-top: -5px; margin-left: 8px; height: 50px; width: calc(100% - 168px); vertical-align: top;">
 		<div class="card-mobile-title" style="color: #e5e5e5; font-weight: bold;">{{ str_replace("[".$video->user->name."] ", "", $video->title) }}</div>
 
 		<div class="card-mobile-genre-wrapper" style="margin-top: 3px; margin-left: -2px">
