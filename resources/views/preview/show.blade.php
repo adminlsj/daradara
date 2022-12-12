@@ -147,10 +147,10 @@
 
               <div id="imagesModal-{{ $preview->video->id }}" class="modal preview-images-modal" role="dialog">
                 <div class="modal-dialog">
-                  <div class="modal-content" style="border-radius: 3px; background-color: #222222; color: white">
-                    <div class="modal-header" style="border-bottom: 1px solid #333333; position: relative; height: 65px;">
+                  <div class="modal-content">
+                    <div class="modal-header">
                       <span class="material-icons pull-left no-select modal-close-btn" data-dismiss="modal">close</span>
-                      <h4 class="modal-title" style="text-align: center; font-weight: bold; margin: 0; padding: 0; margin-top: 5px; font-size: 18px;">{{ str_replace('[新番預告]', '', $preview->video->title) }}</h4>
+                      <h4 class="modal-title">{{ str_replace('[新番預告]', '', $preview->video->title) }}</h4>
                     </div>
                     <div class="modal-body" style="padding: 0px">
                       @foreach ($preview->images as $image)
@@ -159,8 +159,8 @@
                     </div>
                     <hr style="border-color: #333333; margin: 0; margin-top: 0px;">
                     <div class="modal-footer" style="border-top: none; width: 100%; text-align: center; padding: 0;">
-                      <div style="display: inline-block; width: 50%; float: left; line-height: 46px; color: darkgray; cursor: pointer;" data-dismiss="modal">返回</div>
-                      <div style="border: none; color: white; background-color: #b08fff; border-radius: 0; height: 100%; width: 50%; font-weight: bold; line-height: 34px;" data-dismiss="modal" class="pull-right btn btn-primary">完成</div>
+                      <div data-dismiss="modal">返回</div>
+                      <button data-dismiss="modal" class="pull-right btn btn-primary">完成預覽圖片</button>
                     </div>
                   </div>
                 </div>

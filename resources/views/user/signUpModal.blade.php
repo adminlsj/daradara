@@ -4,12 +4,12 @@
 
   <div id="signUpModal" class="modal" role="dialog">
     <div class="modal-dialog">
-      <div class="modal-content" style="border-radius: 3px; background-color: #222222; color: white">
-        <div class="modal-header" style="border-bottom: 1px solid #333333; position: relative; height: 65px;">
+      <div class="modal-content">
+        <div class="modal-header">
           <span class="material-icons pull-left no-select modal-close-btn" data-dismiss="modal">close</span>
-          <h4 class="modal-title" style="text-align: center; font-weight: bold; margin: 0; padding: 0; margin-top: 5px; font-size: 18px;">註冊帳戶</h4>
+          <h4 class="modal-title">註冊帳戶</h4>
         </div>
-        <div class="modal-body">
+        <div class="modal-body" style="text-align: left">
           <h4>註冊帳戶開始訂閱</h4>
           <p id="hentai-tags-text" style="color: darkgray; padding-bottom: 10px">訂閱通知將發送至你的電郵地址。</p>
           <div class="form-group" style="margin-top: 10px;">
@@ -29,9 +29,9 @@
           </div>
         </div>
         <hr style="border-color: #3a3c3f; margin: 0">
-        <div class="modal-footer" style="border-top: none; width: 100%; text-align: center; padding: 0;">
-          <div style="display: inline-block; width: 50%; float: left; line-height: 46px; color: darkgray; cursor: pointer;" data-dismiss="modal">返回</div>
-          <button style="border: none; color: white; background-color: #b08fff; border-radius: 0; height: 100%; width: 50%; font-weight: bold; line-height: 34px;" class="pull-right btn btn-primary" type="submit">註冊</button>
+        <div class="modal-footer">
+          <div data-dismiss="modal">返回</div>
+          <button class="pull-right btn btn-primary" type="submit">馬上註冊加入</button>
         </div>
       </div>
     </div>

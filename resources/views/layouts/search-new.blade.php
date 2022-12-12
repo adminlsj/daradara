@@ -29,12 +29,12 @@
 
 	<div id="genre-modal" class="modal" role="dialog">
 	  <div class="modal-dialog">
-	    <div class="modal-content" style="border-radius: 12px; border: 1px solid #323434; background-color: #181817; color: white">
-	      <div class="modal-header" style="border-bottom: 1px solid #333333; position: relative; height: 65px;">
-	        <span class="material-icons pull-left no-select modal-close-btn" style="font-size: 18px; margin-top: 4px;" data-dismiss="modal">close</span>
-	        <h4 class="modal-title" style="text-align: center; font-weight: bold; margin: 0; padding: 0; margin-top: 6px; font-size: 16px;">影片類型</h4>
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <span class="material-icons pull-left no-select modal-close-btn" data-dismiss="modal">close</span>
+	        <h4 class="modal-title">影片類型</h4>
 	      </div>
-	      <div class="modal-body" style="padding: 0; text-align: center">
+	      <div class="modal-body">
 	        <input type="hidden" id="genre" name="genre" value="{{ $genre }}">
 
 	        @foreach (['全部', '裏番', '泡麵番', 'Motion Anime', '3D動畫', '同人作品', 'Cosplay'] as $option)
@@ -49,9 +49,9 @@
 	      </div>
 
 	      <hr style="border-color: #3a3c3f; margin: 0">
-		  <div class="modal-footer" style="border-top: none; width: 100%; text-align: center; padding: 12px 15px">
-			<div style="display: inline-block; float: left; line-height: 37px; color: white; cursor: pointer; text-decoration: underline; margin-left: 5px" data-dismiss="modal">取消</div>
-			<button style="border: none; color: white; background-color: #323434; border-radius: 0; height: 100%; width: auto; font-weight: bold; border-radius: 5px; padding: 10px 20px; " class="pull-right btn btn-primary" type="submit">顯示搜索結果</button>
+		  <div class="modal-footer">
+			<div data-dismiss="modal">取消</div>
+			<button class="pull-right btn btn-primary" type="submit">顯示搜索結果</button>
 		  </div>
 	    </div>
 	  </div>
@@ -125,9 +125,9 @@
 	        @endforeach
 	      </div>
 	      <hr style="border-color: #3a3c3f; margin: 0">
-	      <div class="modal-footer" style="border-top: none; width: 100%; text-align: center; padding: 12px 15px;">
-			<div style="display: inline-block; float: left; line-height: 37px; color: white; cursor: pointer; text-decoration: underline; margin-left: 5px" data-dismiss="modal">取消</div>
-			<button style="border: none; color: white; background-color: #323434; border-radius: 0; height: 100%; width: auto; font-weight: bold; border-radius: 5px; padding: 10px 20px; " class="pull-right btn btn-primary" type="submit">顯示搜索結果</button>
+	      <div class="modal-footer">
+			<div data-dismiss="modal">取消</div>
+			<button class="pull-right btn btn-primary" type="submit">顯示搜索結果</button>
 	      </div>
 	    </div>
 	  </div>
@@ -155,9 +155,9 @@
 	        @endforeach
 	      </div>
 	      <hr style="border-color: #3a3c3f; margin: 0">
-	      <div class="modal-footer" style="border-top: none; width: 100%; text-align: center; padding: 12px 15px">
-			<div style="display: inline-block; float: left; line-height: 37px; color: white; cursor: pointer; text-decoration: underline; margin-left: 5px" data-dismiss="modal">取消</div>
-			<button style="border: none; color: white; background-color: #323434; border-radius: 0; height: 100%; width: auto; font-weight: bold; border-radius: 5px; padding: 10px 20px; " class="pull-right btn btn-primary" type="submit">顯示搜索結果</button>
+	      <div class="modal-footer">
+	      	<div data-dismiss="modal">取消</div>
+			<button class="pull-right btn btn-primary" type="submit">顯示搜索結果</button>
 	      </div>
 	    </div>
 	  </div>
@@ -187,9 +187,9 @@
 			</div>
 	      </div>
 	      <hr style="border-color: #3a3c3f; margin: 0">
-	      <div class="modal-footer" style="border-top: none; width: 100%; text-align: center; padding: 12px 15px">
-			<div style="display: inline-block; float: left; line-height: 37px; color: white; cursor: pointer; text-decoration: underline; margin-left: 5px" data-dismiss="modal">取消</div>
-			<button style="border: none; color: white; background-color: #323434; border-radius: 0; height: 100%; width: auto; font-weight: bold; border-radius: 5px; padding: 10px 20px; " class="pull-right btn btn-primary" type="submit">顯示搜索結果</button>
+	      <div class="modal-footer">
+			<div data-dismiss="modal">取消</div>
+			<button class="pull-right btn btn-primary" type="submit">顯示搜索結果</button>
 	      </div>
 	    </div>
 	  </div>

@@ -31,11 +31,11 @@
 </div>
 
 <div id="links-modal" class="modal" role="dialog">
-  <div class="modal-dialog modal-sm" style="position: absolute; top: 87px;">
-    <div class="modal-content" style="border-radius: 3px; background-color: #222222; color: white;">
-      <div class="modal-header" style="border-bottom: 1px solid #333333; position: relative; height: 65px;">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
         <span class="material-icons pull-left no-select modal-close-btn" data-dismiss="modal">close</span>
-        <h4 class="modal-title" style="text-align: center; font-weight: bold; margin: 0; padding: 0; margin-top: 5px; font-size: 18px;">全部分類</h4>
+        <h4 class="modal-title">全部分類</h4>
       </div>
 
       <div class="modal-body" style="padding: 0; height: calc(100% - 65px); overflow-x: hidden;">

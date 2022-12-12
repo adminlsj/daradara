@@ -9,6 +9,8 @@
 // Hentai Switch
 @import "hentai-switch";
 
+@import "modal";
+
 // Bootstrap
 @import "~bootstrap-sass/assets/stylesheets/bootstrap";
 
@@ -910,20 +912,6 @@ th, td {
 
 .search-nav-bar::-ms-input-placeholder { /* Microsoft Edge */
   color: #d9d9d9;
-}
-
-.modal-close-btn {
-  position: absolute; 
-  top: 15px; 
-  left: 12px; 
-  cursor: pointer; 
-  font-size: 24px; 
-  padding: 5px; 
-  border-radius: 50%;
-}
-
-.modal-close-btn:hover {
-  background-color: #323434; 
 }
 
 .simple-dropdown-item {
