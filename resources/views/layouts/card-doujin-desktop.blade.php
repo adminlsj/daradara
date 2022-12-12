@@ -5,13 +5,13 @@
 
 		<div style="position: absolute; right: -2px; bottom: -3px;">
 			@if ($video->duration != null)
-			    <div class="card-mobile-duration" style="color: white; font-size: 10px; background-color: rgba(0, 0, 0, 0.6); padding: 0px 3px; line-height: 15px; margin-top: 6px; margin-right: 4px">
+			    <div class="card-mobile-duration" style="color: white; font-size: 10px; text-shadow: black 1px 0 10px;">
 			    	{{ $video->duration >= 3600 ? gmdate('H:i:s', $video->duration) : gmdate('i:s', $video->duration) }}
 			    </div>
 		    @endif
 
-			<div class="card-mobile-duration" style="color: white; font-size: 10px; text-shadow: black 1px 0 10px;">
-		    	{{ $video->views() }}次
+			<div class="card-mobile-duration" style="color: white; font-size: 10px; text-shadow: black 1px 0 10px; margin-right: -5px;">
+		    	{{ $video->views() }}次&nbsp;&nbsp;l
 		    </div>
 		</div>
     </div>
