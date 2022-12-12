@@ -8,7 +8,7 @@
 	        <span class="material-icons pull-left no-select modal-close-btn" data-dismiss="modal">close</span>
 	        <h4 class="modal-title">添加標籤</h4>
 	      </div>
-	      <div class="modal-body" style="overflow-y: scroll; padding-top: 0px; text-align: left">
+	      <div class="modal-body" style="overflow-y: scroll; padding-top: 0px;">
 	      	<div style="background-color: #333333; margin: 0 -15px 20px -15px; padding: 5px 15px 0px 15px;">
 				<h5 style="font-weight: bold">
 			  		注意事項
@@ -61,7 +61,7 @@
 		    </div>
 	      </div>
 
-	      <hr style="border-color: #3a3c3f; margin: 0">
+	      <hr style="border-color: #323434; margin: 0">
 	      <div class="modal-footer">
 			<div data-dismiss="modal">取消</div>
 			<button class="pull-right btn btn-primary" type="submit">添加勾選標籤</button>

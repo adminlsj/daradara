@@ -28,7 +28,7 @@
             <span style="font-weight: 400">已經有Hanime1帳戶了？</span>&nbsp;<a id="switch-login-modal" style="cursor: pointer; text-decoration: none; font-weight: 500;">登入</a>
           </div>
         </div>
-        <hr style="border-color: #3a3c3f; margin: 0">
+        <hr style="border-color: #323434; margin: 0">
         <div class="modal-footer">
           <div data-dismiss="modal">返回</div>
           <button class="pull-right btn btn-primary" type="submit">馬上註冊加入</button>

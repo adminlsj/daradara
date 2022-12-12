@@ -12,7 +12,7 @@
               由於您身處的地區限制訪問色情網站，請安裝VPN翻牆工具，以便影片正常播放。
             </div>
           </div>
-          <hr style="border-color: #333333; margin: 0; margin-top: 5px;">
+          <hr style="border-color: #323434; margin: 0; margin-top: 5px;">
           <div class="modal-footer">
             <div data-dismiss="modal">返回</div>
             <div data-dismiss="modal" class="pull-right btn btn-primary">確定</div>
@@ -67,7 +67,7 @@
               </div>
             </div>
 
-            <hr style="border-color: #333333; margin: 0; margin-top: 5px;">
+            <hr style="border-color: #323434; margin: 0; margin-top: 5px;">
             <div class="modal-footer">
               <div data-dismiss="modal">返回</div>
               <button class="pull-right btn btn-primary" type="submit" name="submit">提交影片報錯</button>

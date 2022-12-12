@@ -25,7 +25,7 @@
             <span style="font-weight: 400">尚未擁有帳戶？</span>&nbsp;<a id="switch-signup-modal" style="cursor: pointer; text-decoration: none; font-weight: 500;">註冊</a>
           </div>
         </div>
-        <hr style="border-color: #3a3c3f; margin: 0">
+        <hr style="border-color: #323434; margin: 0">
         <div class="modal-footer">
           <div data-dismiss="modal">返回</div>
           <button class="pull-right btn btn-primary" type="submit">馬上登入帳戶</button>

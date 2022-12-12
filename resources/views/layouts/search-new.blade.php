@@ -34,7 +34,7 @@
 	        <span class="material-icons pull-left no-select modal-close-btn" data-dismiss="modal">close</span>
 	        <h4 class="modal-title">影片類型</h4>
 	      </div>
-	      <div class="modal-body" style="text-align: center">
+	      <div class="modal-body" style="padding: 0; text-align: center">
 	        <input type="hidden" id="genre" name="genre" value="{{ $genre }}">
 
 	        @foreach (['全部', '裏番', '泡麵番', 'Motion Anime', '3D動畫', '同人作品', 'Cosplay'] as $option)
@@ -48,7 +48,7 @@
 			<hr class="hidden-sm hidden-md hidden-lg hidden-xl" style="margin: 0; border-color: #323434;">
 	      </div>
 
-	      <hr style="border-color: #3a3c3f; margin: 0">
+	      <hr style="border-color: #323434; margin: 0">
 		  <div class="modal-footer">
 			<div data-dismiss="modal">取消</div>
 			<button class="pull-right btn btn-primary" type="submit">顯示搜索結果</button>
@@ -64,7 +64,7 @@
 	        <span class="material-icons pull-left no-select modal-close-btn" data-dismiss="modal">close</span>
 	        <h4 class="modal-title">內容標籤</h4>
 	      </div>
-	      <div class="modal-body" style="overflow-y: scroll; padding: 0px 15px 10px 15px !important;">
+	      <div class="modal-body" style="overflow-y: scroll; padding-top: 0px;">
 	      	<div style="background-color: #323434; margin: 0 -15px 20px -15px; padding: 5px 15px 0px 15px;">
 				<h5 style="font-weight: bold">
 			  		廣泛配對
@@ -124,7 +124,7 @@
 				</label>
 	        @endforeach
 	      </div>
-	      <hr style="border-color: #3a3c3f; margin: 0">
+	      <hr style="border-color: #323434; margin: 0">
 	      <div class="modal-footer">
 			<div data-dismiss="modal">取消</div>
 			<button class="pull-right btn btn-primary" type="submit">顯示搜索結果</button>
@@ -154,7 +154,7 @@
 				<hr class="{{ $loop->last ? 'hidden-sm hidden-md hidden-lg hidden-xl' : '' }}" style="margin: 0; border-color: #323434;">
 	        @endforeach
 	      </div>
-	      <hr style="border-color: #3a3c3f; margin: 0">
+	      <hr style="border-color: #323434; margin: 0">
 	      <div class="modal-footer">
 	      	<div data-dismiss="modal">取消</div>
 			<button class="pull-right btn btn-primary" type="submit">顯示搜索結果</button>
@@ -170,7 +170,7 @@
 	        <span class="material-icons pull-left no-select modal-close-btn" data-dismiss="modal">close</span>
 	        <h4 class="modal-title">發佈日期</h4>
 	      </div>
-	      <div class="modal-body" style="padding: 24px 15px !important;">
+	      <div class="modal-body" style="padding: 24px 15px;">
 			<div class="form-group">
 				<select class="form-control" id="year" name="year" style="width: calc(50% - 5px); display: inline-block; float: left;">
 					<option value="">全部年份...</option>
@@ -186,7 +186,7 @@
 				</select>
 			</div>
 	      </div>
-	      <hr style="border-color: #3a3c3f; margin: 0">
+	      <hr style="border-color: #323434; margin: 0">
 	      <div class="modal-footer">
 			<div data-dismiss="modal">取消</div>
 			<button class="pull-right btn btn-primary" type="submit">顯示搜索結果</button>

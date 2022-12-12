@@ -12,7 +12,7 @@
         <hr style="margin-top: 24px; border-color: #333333;">
         <div id="copy-text-wrapper" style="background-color: #222222; border: 1px #333333 solid; padding: 10px;"><span id="copy-text">{{ Request::fullUrl() }}</span><span id="copy-btn" style="cursor: pointer; color: red" class="pull-right no-select" onclick="copyToClipboard('#copy-text')">複製</span></div>
       </div>
-      <hr style="border-color: #333333; margin: 0; margin-top: 0px;">
+      <hr style="border-color: #323434; margin: 0; margin-top: 0px;">
       <div class="modal-footer">
         <div data-dismiss="modal">返回</div>
         <button data-dismiss="modal" class="pull-right btn btn-primary">已分享給好友</button>
