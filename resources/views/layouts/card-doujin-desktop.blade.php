@@ -10,7 +10,7 @@
 			    </div>
 		    @endif
 
-		    <div class="card-mobile-duration" style="padding: 0px 3px; line-height: 13px; color: #e5e5e5; font-size: 10px; text-shadow: black 1px 0 10px; margin-right: 3px;">
+		    <div class="card-mobile-duration" style="padding: 0px 3px; line-height: 13px; color: white; font-size: 10px; text-shadow: black 1px 0 10px; margin-right: 3px;">
 		    	{{ $video->views() }}次
 		    </div>
 		</div>
