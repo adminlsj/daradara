@@ -5,17 +5,6 @@
 @endsection
 
 @section('content')
-<div class="hidden-xs" style="background-color: #222222; color: #A3A3A3; width: 100%; height: 57px; line-height: 57px; padding: 0 4%; font-weight: 400; font-size: 14px; text-align: center;">
-	<a href="https://discord.gg/WWYc9m9CUQ" style="color: #A3A3A3; text-decoration: underline; padding: 10px;" target="_blank">Discord</a>
-	<a href="https://qingse.one" style="color: #A3A3A3; text-decoration: underline; padding: 10px;" target="_blank">情色網站大全</a>
-	<a href="https://141jj.com/" style="color: #A3A3A3; text-decoration: underline; padding: 10px;" target="_blank">141JJ 導航</a>
-	<a href="http://www.pornbest.org/" style="color: #A3A3A3; text-decoration: underline; padding: 10px;" target="_blank">PornBest  免費中文視頻</a>
-	<a href="https://www.17dm.net/" style="color: #A3A3A3; text-decoration: underline; padding: 10px;" target="_blank">妖氣動漫導航</a>
-    <a href="https://share.acgnx.net/" style="color: #A3A3A3; text-decoration: underline; padding: 10px;" target="_blank">末日動漫資源庫</a>
-    <a href="https://moeli-desu.com/" style="color: #A3A3A3; text-decoration: underline; padding: 10px;" target="_blank">夢璃</a>
-	<a href="https://www.sshs.pw/" style="color: #A3A3A3; text-decoration: underline; padding: 10px;" target="_blank">紳士會所</a>
-</div>
-
 <div class="nav-bottom-padding">
 	<div class="hidden-xs" style="position: relative;">
 		<div id="main-nav-home" style="z-index: 10000 !important; position: absolute;">
@@ -61,43 +50,34 @@
 	</div>
 
 	<div id="home-rows-wrapper" style="position: relative;">
-		@foreach ($rows as $title => $data)
-			<a style="text-decoration: none;" href="{{ $data['link'] }}">
-				<h3>{{ $title }}<span style="vertical-align: middle; margin-top: -2px; margin-left: 2px" class="material-icons">chevron_right</span></h3>
-			</a>
-			<div style="position: relative;">
-				<div class="hidden-xs hidden-sm no-select navigate-before-btn" style="background-color: rgba(0, 0, 0, .7); height: 100%; width: 4%; position: absolute; top: 0; left: 0; cursor: pointer; z-index: 1; display: none;">
-					<span class="material-icons" style="font-size: 50px; color: white; margin: 0; position: absolute; top: 50%; left: 50%; -ms-transform: translate(-50%, -50%); transform: translate(-50%, -50%);">navigate_before</span>
-				</div>
-				<div class="home-rows-videos-wrapper no-scrollbar-style" style="margin-left: -2px; margin-right: -2px;">
-					@foreach ($data['videos'] as $video)
-						<a style="text-decoration: none;" href="{{ route('video.watch') }}?v={{ $video->id }}">
-							<div class="home-rows-videos-div" style="position: relative; display: inline-block;">
-								<img src="{{ $video->cover }}">
-								@if (strpos($video->cover, 'E6mSQA2') !== false)
-				                  <img style="position: absolute; top: 0; left: 0; height: 100%; object-fit: cover; padding-left: 2px; padding-right: 2px" src="{{ $video->thumbL() }}">
-				                @endif
-						        <div class="home-rows-videos-title" style="position:absolute; bottom:0; left:0; white-space: initial; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; color: white; width: 100%; padding: 3px 5px; background: linear-gradient(to bottom, transparent 0%, black 120%);">{{ $video->title }}</div>
-					        </div>
-						</a>
-					@endforeach
-				</div>
-				<div class="hidden-xs hidden-sm no-select navigate-next-btn" style="background-color: rgba(0, 0, 0, .7); height: 100%; width: 4%; position: absolute; top: 0; right: 0; cursor: pointer; z-index: 1">
-					<span class="material-icons" style="font-size: 50px; color: white; margin: 0; position: absolute; top: 50%; left: 50%; -ms-transform: translate(-50%, -50%); transform: translate(-50%, -50%);">navigate_next</span>
-				</div>
+		<a style="text-decoration: none;" href="/">
+			<h3 style="padding-bottom: 3px; font-size: 22px">最新裏番</h3>
+		</a>
+		<div style="position: relative;">
+			@include('layouts.card-navigate-before')
+			<div class="home-rows-videos-wrapper no-scrollbar-style" style="margin-left: -3px; margin-right: -3px;">
+				@foreach ($newestHentai as $video)
+					@include('layouts.card-desktop')
+				@endforeach
 			</div>
+			@include('layouts.card-navigate-after')
+		</div>
 
-			@if ($loop->iteration == 1)
-				<div style="margin-bottom: -15px;">
-					@include('ads.home-banner-exoclick')
-				</div>
-			@endif
-			@if ($loop->iteration == 2)
-				<div style="margin-bottom: -15px;">
-					@include('ads.home-banner-juicyads')
-				</div>
-			@endif
-		@endforeach
+		<a style="text-decoration: none;" href="/">
+			<h3 style="padding-bottom: 3px; font-size: 22px">最新上市</h3>
+		</a>
+		<div style="position: relative;">
+			@include('layouts.card-navigate-before')
+			<div class="home-rows-videos-wrapper no-scrollbar-style" style="margin-left: 0px; margin-right: -3px;">
+				@foreach ($newestListing as $video)
+					<div class="multiple-link-wrapper search-doujin-videos home-doujin-videos" style="display: inline-block; padding-right: 3px;">
+						<a class="overlay" href="{{ route('video.watch') }}?v={{ $video->id }}"></a>
+						@include('video.card-doujin-desktop')
+					</div>
+				@endforeach
+			</div>
+			@include('layouts.card-navigate-after')
+		</div>
 	</div>
 
 	<div style="margin-bottom: 15px;">

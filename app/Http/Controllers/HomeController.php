@@ -23,9 +23,11 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
-        $count = 21;
+        $count = 24;
 
-        $newest = Video::whereOrderBy('created_at', $count, true)->where('title', 'not like', '[新番預告]%')->where('tags', 'not like', '泡麵番%')->get();
+        $newestHentai = Video::whereOrderBy('created_at', $count, true)->where('title', 'not like', '[新番預告]%')->where('tags', 'not like', '泡麵番%')->get();
+
+        $newestListing = Video::where('genre', '!=', '新番預告')->orderBy('created_at', 'desc')->limit($count)->get();
        
         $upload = Video::with('user:id,name,avatar_temp')->where('imgur', '!=', 'WENZTSJ')->orderBy('uploaded_at', 'desc')->select('id', 'user_id', 'title', 'genre', 'cover', 'imgur', 'views', 'tags_array', 'created_at', 'duration')->limit(10)->get()->split(5);
 
@@ -99,7 +101,7 @@ class HomeController extends Controller
         $uncover = Video::with('user:id,name,avatar_temp')->orderBy('updated_at', 'desc')->select('id', 'user_id', 'title', 'genre', 'cover', 'imgur', 'views', 'tags_array', 'created_at', 'duration')->limit(10)->get();
 
 
-        return view('layouts.home-new', compact('newest', 'upload', 'trending', 'tags', 'cover', 'uncover'));
+        return view('layouts.home', compact('newestHentai', 'newestListing', 'upload', 'trending', 'tags', 'cover', 'uncover'));
     }
 
     public function search(Request $request)
