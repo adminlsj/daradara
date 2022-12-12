@@ -8,7 +8,7 @@
 		<div style="text-decoration: none; color: black;">
 			<div class="card-mobile-title" style="font-weight: normal; color: #e5e5e5;">{{ str_replace("[".$video->user->name."] ", "", $video->title) }}</div>
 
-			<div class="card-mobile-genre-wrapper" style="margin-top: 3px; margin-left: -2px">
+			<div class="card-mobile-genre-wrapper" style="margin-left: -2px">
 				<a href="{{ route('home.search') }}?query={{ $video->user->name }}" style="font-size: 12px; color: dimgray; margin-left: 2px; display: inline-block;" class="card-mobile-user">{{ $video->user->name }}</a>
 			</div>
 
