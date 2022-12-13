@@ -10,7 +10,7 @@
 			    </div>
 		    @endif
 		</div>
-		<div style="position: absolute; right: 3px; top: 3px;">
+		<div style="position: absolute; left: 3px; top: 3px;">
 			<div class="card-mobile-duration" style="color: white; font-size: 10px; background-color: rgba(0, 0, 0, 0.6); padding: 0px 3px; line-height: 15px;">
 		    	{{ $video->views() }}次
 		    </div>
