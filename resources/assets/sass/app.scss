@@ -78,6 +78,14 @@ th, td {
   width: calc(100% / 6 - 3px);
 }
 
+.home-artist-card {
+  width: calc(100% / 8 - 3px);
+}
+
+.artist-row-desktop-margin {
+  margin-top: -15px;
+}
+
 /* On mouse-over, add a grey background color */
 /* .playlist-checkbox-container:hover input ~ .playlist-checkmark {
   background-color: #ccc;
@@ -2616,7 +2624,6 @@ div.sticky {
     width: calc(100% / 2.02);
   }
 
-
   #home-rows-wrapper .home-rows-videos-wrapper .home-rows-videos-div {
     width: calc(100% / 3);
     padding: 0 4px;
@@ -2636,6 +2643,10 @@ div.sticky {
 
   .search-artist-title, .search-artist-count {
     font-weight: bold !important;
+  }
+
+  .artist-row-desktop-margin {
+    margin-top: 0px;
   }
 
   #playlist-edit-img {

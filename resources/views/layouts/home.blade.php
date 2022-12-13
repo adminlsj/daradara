@@ -61,6 +61,15 @@
 		@include('layouts.card-wrapper-doujin', ['title' => '3D動畫', 'videos' => $SD動畫])
 		@include('layouts.card-wrapper-doujin', ['title' => '同人作品', 'videos' => $同人作品])
 		@include('layouts.card-wrapper-doujin', ['title' => 'Cosplay', 'videos' => $Cosplay])
+
+		@include('layouts.card-wrapper', ['title' => '新番預告', 'videos' => $新番預告])
+		@include('layouts.card-wrapper-doujin', ['title' => '中文字幕', 'videos' => $中文字幕])
+		@include('layouts.card-wrapper-doujin', ['title' => '本日排行', 'videos' => $本日排行])
+		@include('layouts.card-wrapper-tag', ['title' => '影片標籤', 'videos' => $影片標籤])
+		<div class="artist-row-desktop-margin">
+			@include('layouts.card-wrapper-artist', ['title' => '新加入作者', 'artists' => $新加入作者])
+		</div>
+		
 	</div>
 
 	<div style="margin-bottom: 15px;">
