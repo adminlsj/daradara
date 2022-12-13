@@ -32,11 +32,21 @@ class HomeController extends Controller
         $最新上市 = Video::with('user:id,name')->where('genre', '!=', '新番預告')->orderBy('created_at', 'desc')->select('id', 'user_id', 'title', 'imgur', 'views', 'duration')->limit($count)->get();
 
         $最新上傳 = Video::with('user:id,name')->where('genre', '!=', '新番預告')->orderBy('uploaded_at', 'desc')->select('id', 'user_id', 'title', 'imgur', 'views', 'duration')->limit($count)->get();
+
+        $熱門影片 = Video::with('user:id,name')->orderBy('month_views', 'desc')->select('id', 'user_id', 'title', 'imgur', 'views', 'duration')->limit($count)->get();
+
+        $他們在看 = Video::with('user:id,name')->orderBy('updated_at', 'desc')->select('id', 'user_id', 'title', 'imgur', 'views', 'duration')->limit($count)->get();
+
+        $泡麵番 = Video::where('genre', '泡麵番')->where('foreign_sd', 'like', '%"bangumi"%')->orderBy('created_at', 'desc')->select('id', 'title', 'cover')->limit($count)->get();
+
+        $Motion_Anime = Video::with('user:id,name')->where('genre', 'Motion Anime')->orderBy('created_at', 'desc')->select('id', 'user_id', 'title', 'imgur', 'views', 'duration')->limit($count)->get();
+
+        $SD動畫 = Video::with('user:id,name')->where('genre', '3D動畫')->orderBy('created_at', 'desc')->select('id', 'user_id', 'title', 'imgur', 'views', 'duration')->limit($count)->get();
+
+        $同人作品 = Video::with('user:id,name')->where('genre', '同人作品')->orderBy('created_at', 'desc')->select('id', 'user_id', 'title', 'imgur', 'views', 'duration')->limit($count)->get();
+
+        $Cosplay = Video::with('user:id,name')->where('genre', 'Cosplay')->orderBy('created_at', 'desc')->select('id', 'user_id', 'title', 'imgur', 'views', 'duration')->limit($count)->get();
        
-        $upload = Video::with('user:id,name,avatar_temp')->where('imgur', '!=', 'WENZTSJ')->orderBy('uploaded_at', 'desc')->select('id', 'user_id', 'title', 'genre', 'cover', 'imgur', 'views', 'tags_array', 'created_at', 'duration')->limit(10)->get()->split(5);
-
-        $trending = Video::whereOrderBy('month_views', $count, true)->orderBy('id', 'desc')->get();
-
         $tags = [
             [
                 'title' => '女高中生',
@@ -100,12 +110,7 @@ class HomeController extends Controller
             ],
         ];
 
-        $cover = Video::orderBy('updated_at', 'desc')->select('id', 'title', 'cover')->where('uncover', false)->limit(50)->get()->shuffle()->slice(0, $count);
-
-        $uncover = Video::with('user:id,name,avatar_temp')->orderBy('updated_at', 'desc')->select('id', 'user_id', 'title', 'genre', 'cover', 'imgur', 'views', 'tags_array', 'created_at', 'duration')->limit(10)->get();
-
-
-        return view('layouts.home', compact('最新裏番', '最新上市', '最新上傳', 'upload', 'trending', 'tags', 'cover', 'uncover'));
+        return view('layouts.home', compact('最新裏番', '最新上市', '最新上傳', '熱門影片', '他們在看', '泡麵番', 'Motion_Anime', 'SD動畫', '同人作品', 'Cosplay', 'tags'));
     }
 
     public function search(Request $request)

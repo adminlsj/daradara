@@ -53,6 +53,14 @@
 		@include('layouts.card-wrapper', ['title' => '最新裏番', 'videos' => $最新裏番])
 		@include('layouts.card-wrapper-doujin', ['title' => '最新上市', 'videos' => $最新上市])
 		@include('layouts.card-wrapper-doujin', ['title' => '最新上傳', 'videos' => $最新上傳])
+		@include('layouts.card-wrapper-doujin', ['title' => '熱門影片', 'videos' => $熱門影片])
+		@include('layouts.card-wrapper-doujin', ['title' => '他們在看', 'videos' => $他們在看])
+
+		@include('layouts.card-wrapper', ['title' => '泡麵番', 'videos' => $泡麵番])
+		@include('layouts.card-wrapper-doujin', ['title' => 'Motion Anime', 'videos' => $Motion_Anime])
+		@include('layouts.card-wrapper-doujin', ['title' => '3D動畫', 'videos' => $SD動畫])
+		@include('layouts.card-wrapper-doujin', ['title' => '同人作品', 'videos' => $同人作品])
+		@include('layouts.card-wrapper-doujin', ['title' => 'Cosplay', 'videos' => $Cosplay])
 	</div>
 
 	<div style="margin-bottom: 15px;">
