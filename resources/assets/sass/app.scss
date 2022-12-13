@@ -600,6 +600,10 @@ th, td {
   width: calc(100% / 8);
 }
 
+.search-videos {
+  margin-bottom: 50px;
+}
+
 #watch-comics-link-btn {
   margin-top: 15px;
   margin-bottom: -2px;
@@ -3148,6 +3152,10 @@ div.sticky {
 
   #home-rows-wrapper .home-rows-videos-wrapper .home-rows-videos-div {
     margin-bottom: 10px !important;
+  }
+
+  #home-rows-wrapper .home-rows-videos-wrapper .home-rows-videos-div.search-videos {
+    margin-bottom: 8px !important;
   }
 
   .preview-video-width {
