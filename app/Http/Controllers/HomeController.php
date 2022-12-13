@@ -25,7 +25,9 @@ class HomeController extends Controller
     {
         $count = 24;
 
-        $newestHentai = Video::whereOrderBy('created_at', $count, true)->where('title', 'not like', '[新番預告]%')->where('tags', 'not like', '泡麵番%')->get();
+        $newestHentai = Video::where('genre', '裏番')->orWhere(function($query) {
+                            $query->where('genre', '新番預告')->where('foreign_sd', 'like', '%"bangumi"%');
+                        })->orderBy('created_at', 'desc')->limit($count)->get();
 
         $newestListing = Video::where('genre', '!=', '新番預告')->orderBy('created_at', 'desc')->limit($count)->get();
        

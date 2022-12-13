@@ -64,7 +64,7 @@
 		</div>
 
 		<a style="text-decoration: none;" href="/">
-			<h3 style="padding-bottom: 3px; font-size: 22px">最新上市</h3>
+			<h3>最新上市</h3>
 		</a>
 		<div style="position: relative;">
 			@include('layouts.card-navigate-before')
