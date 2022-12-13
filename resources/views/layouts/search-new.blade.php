@@ -224,7 +224,7 @@
 								<a class="overlay" href="{{ route('video.watch') }}?v={{ $video->id }}"></a>
 								@include('video.card-doujin-desktop')
 							</div>
-							<div class="col-xs-12 hidden-sm hidden-md hidden-lg hidden-xl hover-lighter multiple-link-wrapper" style="padding-left: 3px; padding-right: 3px; margin-bottom: 8px;">
+							<div class="col-xs-12 search-doujin-videos hidden-sm hidden-md hidden-lg hidden-xl hover-lighter multiple-link-wrapper" style="padding-left: 3px; padding-right: 3px; margin-bottom: 8px;">
 								<a class="overlay" href="{{ route('video.watch') }}?v={{ $video->id }}"></a>
 								@include('video.card-doujin-mobile')
 							</div>

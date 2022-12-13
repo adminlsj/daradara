@@ -83,7 +83,8 @@ th, td {
 }
 
 .artist-row-desktop-margin {
-  margin-top: -15px;
+  margin-top: 0px;
+  margin-bottom: -15px;
 }
 
 /* On mouse-over, add a grey background color */
@@ -2618,6 +2619,10 @@ div.sticky {
 @media (max-width: 767.9px) {
   body {
     background-color: black;
+  }
+
+  .search-doujin-videos {
+    width: calc(100% / 2);
   }
 
   .home-doujin-videos {

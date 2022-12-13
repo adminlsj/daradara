@@ -13,7 +13,7 @@
 						<img style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 3px" src="{{ $video['imgur'] }}">
 				    </div>
 
-					<div style="margin-top: -1px; padding: 0 8px;">
+					<div style="margin-top: -1px; padding: 0 3px;">
 						<div style="text-decoration: none; color: black;">
 							<div class="card-mobile-title" style="font-weight: normal; color: #e5e5e5;">{{ $video['title'] }}</div>
 

@@ -4,7 +4,7 @@
 		<img style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 3px" src="{{ $artist->avatar_temp }}">
     </div>
 
-	<div class="card-mobile-details-wrapper" style="margin-top: -1px; padding: 0 8px;">
+	<div class="card-mobile-details-wrapper" style="margin-top: -1px; padding: 0 3px;">
 		<div style="text-decoration: none; color: black;">
 			<div class="card-mobile-title search-artist-title" style="font-weight: normal; color: #e5e5e5;">{{ $artist->name }}</div>
 

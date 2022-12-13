@@ -53,7 +53,7 @@
 		@include('layouts.card-wrapper', ['title' => '最新裏番', 'videos' => $最新裏番])
 		@include('layouts.card-wrapper-doujin', ['title' => '最新上市', 'videos' => $最新上市])
 		@include('layouts.card-wrapper-doujin', ['title' => '最新上傳', 'videos' => $最新上傳])
-		@include('layouts.card-wrapper-doujin', ['title' => '熱門影片', 'videos' => $熱門影片])
+		@include('layouts.card-wrapper-doujin', ['title' => '中文字幕', 'videos' => $中文字幕])
 		@include('layouts.card-wrapper-doujin', ['title' => '他們在看', 'videos' => $他們在看])
 
 		@include('layouts.card-wrapper', ['title' => '泡麵番', 'videos' => $泡麵番])
@@ -63,12 +63,12 @@
 		@include('layouts.card-wrapper-doujin', ['title' => 'Cosplay', 'videos' => $Cosplay])
 
 		@include('layouts.card-wrapper', ['title' => '新番預告', 'videos' => $新番預告])
-		@include('layouts.card-wrapper-doujin', ['title' => '中文字幕', 'videos' => $中文字幕])
-		@include('layouts.card-wrapper-doujin', ['title' => '本日排行', 'videos' => $本日排行])
-		@include('layouts.card-wrapper-tag', ['title' => '影片標籤', 'videos' => $影片標籤])
 		<div class="artist-row-desktop-margin">
 			@include('layouts.card-wrapper-artist', ['title' => '新加入作者', 'artists' => $新加入作者])
 		</div>
+		@include('layouts.card-wrapper-doujin', ['title' => '本日排行', 'videos' => $本日排行])
+		@include('layouts.card-wrapper-doujin', ['title' => '本月排行', 'videos' => $本月排行])
+		@include('layouts.card-wrapper-tag', ['title' => '影片標籤', 'videos' => $影片標籤])
 		
 	</div>
 
