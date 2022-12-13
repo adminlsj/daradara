@@ -25,11 +25,13 @@ class HomeController extends Controller
     {
         $count = 24;
 
-        $newestHentai = Video::where('genre', '裏番')->orWhere(function($query) {
+        $最新裏番 = Video::where('genre', '裏番')->orWhere(function($query) {
                             $query->where('genre', '泡麵番')->where('foreign_sd', 'like', '%"bangumi"%');
-                        })->orderBy('created_at', 'desc')->limit($count)->get();
+                        })->orderBy('created_at', 'desc')->select('id', 'title', 'cover')->limit($count)->get();
 
-        $newestListing = Video::where('genre', '!=', '新番預告')->orderBy('created_at', 'desc')->limit($count)->get();
+        $最新上市 = Video::with('user:id,name')->where('genre', '!=', '新番預告')->orderBy('created_at', 'desc')->select('id', 'user_id', 'title', 'imgur', 'views', 'duration')->limit($count)->get();
+
+        $最新上傳 = Video::with('user:id,name')->where('genre', '!=', '新番預告')->orderBy('uploaded_at', 'desc')->select('id', 'user_id', 'title', 'imgur', 'views', 'duration')->limit($count)->get();
        
         $upload = Video::with('user:id,name,avatar_temp')->where('imgur', '!=', 'WENZTSJ')->orderBy('uploaded_at', 'desc')->select('id', 'user_id', 'title', 'genre', 'cover', 'imgur', 'views', 'tags_array', 'created_at', 'duration')->limit(10)->get()->split(5);
 
@@ -103,7 +105,7 @@ class HomeController extends Controller
         $uncover = Video::with('user:id,name,avatar_temp')->orderBy('updated_at', 'desc')->select('id', 'user_id', 'title', 'genre', 'cover', 'imgur', 'views', 'tags_array', 'created_at', 'duration')->limit(10)->get();
 
 
-        return view('layouts.home', compact('newestHentai', 'newestListing', 'upload', 'trending', 'tags', 'cover', 'uncover'));
+        return view('layouts.home', compact('最新裏番', '最新上市', '最新上傳', 'upload', 'trending', 'tags', 'cover', 'uncover'));
     }
 
     public function search(Request $request)

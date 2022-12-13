@@ -50,38 +50,9 @@
 	</div>
 
 	<div id="home-rows-wrapper" style="position: relative;">
-		<a style="text-decoration: none;" href="/">
-			<h3>最新裏番</h3>
-		</a>
-		<div style="position: relative;">
-			@include('layouts.card-navigate-before')
-			<div class="home-rows-videos-wrapper no-scrollbar-style" style="margin-left: -3px; margin-right: -3px;">
-				@foreach ($newestHentai as $video)
-					@include('layouts.card-desktop')
-				@endforeach
-			</div>
-			@include('layouts.card-navigate-after')
-		</div>
-
-		<a style="text-decoration: none;" href="/">
-			<h3>最新上市</h3>
-		</a>
-		<div style="position: relative;">
-			@include('layouts.card-navigate-before')
-			<div class="home-rows-videos-wrapper no-scrollbar-style" style="margin-left: 0px; margin-right: -3px;">
-				@foreach ($newestListing as $video)
-					<div class="multiple-link-wrapper search-doujin-videos home-doujin-videos hidden-xs" style="display: inline-block; padding-right: 3px;">
-						<a class="overlay" href="{{ route('video.watch') }}?v={{ $video->id }}"></a>
-						@include('video.card-doujin-desktop')
-					</div>
-					<div class="multiple-link-wrapper search-doujin-videos home-doujin-videos hidden-sm hidden-md hidden-lg hidden-xl" style="display: inline-block; padding-right: 3px;">
-						<a class="overlay" href="{{ route('video.watch') }}?v={{ $video->id }}"></a>
-						@include('layouts.card-doujin-mobile')
-					</div>
-				@endforeach
-			</div>
-			@include('layouts.card-navigate-after')
-		</div>
+		@include('layouts.card-wrapper', ['title' => '最新裏番', 'videos' => $最新裏番])
+		@include('layouts.card-wrapper-doujin', ['title' => '最新上市', 'videos' => $最新上市])
+		@include('layouts.card-wrapper-doujin', ['title' => '最新上傳', 'videos' => $最新上傳])
 	</div>
 
 	<div style="margin-bottom: 15px;">
