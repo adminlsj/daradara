@@ -2645,6 +2645,26 @@ div.sticky {
     font-weight: bold !important;
   }
 
+  .home-artist-card {
+    width: calc(100% / 3 - 3px) !important;
+    padding-right: 4px !important;
+  }
+
+  .home-artist-card .card-mobile-title {
+    font-size: 10px !important;
+    margin-top: 8px !important;
+  }
+
+  .home-artist-card .card-mobile-user {
+    font-size: 10px !important;
+    font-weight: normal !important;
+    margin-top: -9px !important;
+  }
+
+  .home-artist-card .card-mobile-details-wrapper {
+    padding: 0px 3px !important;
+  }
+
   .artist-row-desktop-margin {
     margin-top: 0px;
   }
