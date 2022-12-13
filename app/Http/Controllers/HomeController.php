@@ -29,6 +29,8 @@ class HomeController extends Controller
                             $query->where('genre', '泡麵番')->where('foreign_sd', 'like', '%"bangumi"%');
                         })->orderBy('created_at', 'desc')->select('id', 'title', 'cover')->limit($count)->get();
 
+        $random = $最新裏番->random();
+
         $最新上市 = Video::with('user:id,name')->where('genre', '!=', '新番預告')->orderBy('created_at', 'desc')->select('id', 'user_id', 'title', 'imgur', 'views', 'duration')->limit($count)->get();
 
         $最新上傳 = Video::with('user:id,name')->where('genre', '!=', '新番預告')->orderBy('uploaded_at', 'desc')->select('id', 'user_id', 'title', 'imgur', 'views', 'duration')->limit($count)->get();
@@ -118,7 +120,7 @@ class HomeController extends Controller
 
         $新加入作者 = User::has('videos')->select('id', 'name', 'created_at', 'updated_at', 'avatar_temp')->withCount('videos')->orderBy('videos_count', 'desc')->limit($count)->get();
 
-        return view('layouts.home', compact('最新裏番', '最新上市', '最新上傳', '中文字幕', '他們在看', '泡麵番', 'Motion_Anime', 'SD動畫', '同人作品', 'Cosplay', '新番預告', '本日排行', '本月排行', '影片標籤', '新加入作者'));
+        return view('layouts.home', compact('最新裏番', 'random', '最新上市', '最新上傳', '中文字幕', '他們在看', '泡麵番', 'Motion_Anime', 'SD動畫', '同人作品', 'Cosplay', '新番預告', '本日排行', '本月排行', '影片標籤', '新加入作者'));
     }
 
     public function search(Request $request)
