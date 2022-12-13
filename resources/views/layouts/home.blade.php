@@ -51,7 +51,7 @@
 
 	<div id="home-rows-wrapper" style="position: relative;">
 		<a style="text-decoration: none;" href="/">
-			<h3 style="padding-bottom: 3px; font-size: 22px">最新裏番</h3>
+			<h3>最新裏番</h3>
 		</a>
 		<div style="position: relative;">
 			@include('layouts.card-navigate-before')
