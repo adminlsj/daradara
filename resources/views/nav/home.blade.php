@@ -1,4 +1,4 @@
-<div id="main-nav" style="z-index: 10000 !important; position: relative; height: 85px !important;" class="main-nav-home hidden-sm hidden-md hidden-lg">
+<div id="main-nav" style="z-index: 10000 !important; position: relative; height: 85px !important; overflow-x: hidden;" class="main-nav-home hidden-sm hidden-md hidden-lg">
   <a href="/" style="padding-right: 2.5%; color: white; font-size: 1.4em;">
     <span style="color: crimson">H</span>anime1<span style="color: crimson">.</span>me
   </a>
