@@ -9,7 +9,7 @@
 				<a class="overlay" href="{{ route('video.watch') }}?v={{ $video->id }}"></a>
 				@include('video.card-doujin-desktop')
 			</div>
-			<div class="multiple-link-wrapper search-doujin-videos home-doujin-videos hidden-sm hidden-md hidden-lg hidden-xl" style="display: inline-block; padding-right: 3px;">
+			<div class="multiple-link-wrapper search-doujin-videos home-doujin-videos hidden-sm hidden-md hidden-lg hidden-xl" style="display: inline-block; padding-right: 4px;">
 				<a class="overlay" href="{{ route('video.watch') }}?v={{ $video->id }}"></a>
 				@include('layouts.card-doujin-mobile')
 			</div>
