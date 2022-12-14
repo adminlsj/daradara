@@ -83,7 +83,7 @@
 		
 	</div>
 
-	<div style="margin-bottom: 15px;">
+	<div>
 		@include('ads.home-banner-square')
 	</div>
 
