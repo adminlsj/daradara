@@ -59,11 +59,19 @@
 		@include('layouts.card-wrapper-doujin', ['title' => '中文字幕', 'videos' => $中文字幕])
 		@include('layouts.card-wrapper-doujin', ['title' => '他們在看', 'videos' => $他們在看])
 
+		<div>
+			@include('ads.home-banner-exoclick')
+		</div>
+
 		@include('layouts.card-wrapper', ['title' => '泡麵番', 'videos' => $泡麵番])
 		@include('layouts.card-wrapper-doujin', ['title' => 'Motion Anime', 'videos' => $Motion_Anime])
 		@include('layouts.card-wrapper-doujin', ['title' => '3D動畫', 'videos' => $SD動畫])
 		@include('layouts.card-wrapper-doujin', ['title' => '同人作品', 'videos' => $同人作品])
 		@include('layouts.card-wrapper-doujin', ['title' => 'Cosplay', 'videos' => $Cosplay])
+
+		<div>
+			@include('ads.home-banner-juicyads')
+		</div>
 
 		@include('layouts.card-wrapper', ['title' => '新番預告', 'videos' => $新番預告])
 		<div class="artist-row-desktop-margin">
