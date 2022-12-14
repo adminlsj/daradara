@@ -2,7 +2,7 @@
 	@include('layouts.exoclick', ['id' => '4372306', 'width' => '900', 'height' => '250'])
 </div>
 
-<div class="hidden-md hidden-lg" style="text-align: center; padding-top: 30px; padding-bottom: 0px;">
+<div class="hidden-md hidden-lg home-banner-exoclick-margin-bottom" style="text-align: center; padding-top: 30px; padding-bottom: 0px;">
 	@include('layouts.exoclick', ['id' => '4372316', 'width' => '300', 'height' => '250'])
 
 	<span class="hidden-xs" style="vertical-align: top; margin-top: 5px;">
