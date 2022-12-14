@@ -200,6 +200,12 @@
 
 	<div id="home-rows-wrapper" class="search-rows-wrapper">
 
+		<div class="hidden-sm hidden-md hidden-lg" style="text-align: center; margin-top: -2px; margin-bottom: -18px;">
+			@include('layouts.exoclick', ['id' => '4396576', 'width' => '300', 'height' => '100'])
+		</div>
+
+		<div style="margin-bottom: -8px" class="search-pagination mobile-search-pagination hidden-sm hidden-md hidden-lg">{!! $results->appends(request()->query())->onEachSide(1)->links() !!}</div>
+
 		@if ($type == 'artist')
 			<div class="content-padding-new">
 				<div class="row no-gutter" style="margin-left: -3px; margin-right: -3px;">

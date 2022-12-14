@@ -21,11 +21,11 @@
 			});
 		</script>
 
-		<img style="width: 100%; -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0.3)));" src="https://cdn.jsdelivr.net/gh/guaishushukanlifan/Project-H@latest/asset/thumbnail/KzhJhsth.jpg" alt="逆轉魔女裁判 ～要被痴女魔女審判了～">
+		<img style="width: 100%; -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0.3)));" src="{{ $random->imgur() }}" alt="{{ $random->title }}">
 		<div id="home-banner-wrapper" style="position: absolute; left: 4%; color: white">
 			<h3 style="font-weight: bold"><span style="color: crimson">H</span>anime1<span style="color: crimson">.</span>me</h3>
-			<h1 style="margin: 0; font-weight: bold;">逆轉魔女裁判</h1>
-			<h4 class="hidden-xs">逆転魔女裁判 • 中文字幕 • 魔女艶間薫憑著美貌和巨乳成為學園的女王，而常常跟蹤她的少年，相羽榮被認為是「狩獵魔女教會的爪牙」，因此被拘束並展開淫亂變態的「逆轉魔女裁判」...</h4>
+			<h1 style="margin: 0; font-weight: bold;">{{ $random->title }}</h1>
+			<h4 class="hidden-xs">{{ $random->translations['JP'] }} • 中文字幕 • {{ $random->caption }}</h4>
 			<a href="{{ route('video.watch') }}?v=13804" target="_blank" style="display: inline-block; padding: 10px 30px 6px 20px; margin-top: -8px; margin-bottom: -10px" class="hover-opacity-all home-banner-btn home-banner-play-btn play-btn"><span style="vertical-align: middle; font-size: 2em; margin-top: -4px; padding-right: 5px" class="material-icons">play_arrow</span>播放</a>
 			&nbsp;
 			<a href="{{ route('video.watch') }}?v=13804" class="hover-opacity-all home-banner-btn home-banner-info-btn"><span style="vertical-align: middle; font-size: 1.7em; margin-top: -2px; padding-right: 7px" class="material-icons">info</span>更多資訊</a>
