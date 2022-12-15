@@ -36,7 +36,7 @@ class HomeController extends Controller
 
         $最新上傳 = Video::with('user:id,name')->where('genre', '!=', '新番預告')->orderBy('uploaded_at', 'desc')->select('id', 'user_id', 'title', 'imgur', 'views', 'duration')->limit($dCount)->get();
 
-        $中文字幕 = Video::with('user:id,name')->where('translations', 'like', '%中文字幕%')->orderBy('uploaded_at', 'desc')->select('id', 'user_id', 'title', 'imgur', 'views', 'duration')->limit($dCount)->get();
+        $中文字幕 = Video::with('user:id,name')->where('translations', 'like', '%中文字幕%')->where('genre', '!=', '裏番')->where('genre', '!=', '泡麵番')->orderBy('uploaded_at', 'desc')->select('id', 'user_id', 'title', 'imgur', 'views', 'duration')->limit($dCount)->get();
 
         $他們在看 = Video::with('user:id,name')->orderBy('updated_at', 'desc')->select('id', 'user_id', 'title', 'imgur', 'views', 'duration')->limit($dCount)->get();
 
