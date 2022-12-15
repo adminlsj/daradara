@@ -52,7 +52,7 @@ class HomeController extends Controller
 
         $新番預告 = Video::with('user:id,name')->where('genre', '新番預告')->orderBy('created_at', 'desc')->select('id', 'title', 'cover')->limit($hCount)->get();
 
-        $新加入作者 = User::has('videos')->select('id', 'name', 'created_at', 'updated_at', 'avatar_temp')->withCount('videos')->orderBy('videos_count', 'desc')->limit($hCount)->get();
+        $新加入作者 = User::has('videos')->select('id', 'name', 'created_at', 'updated_at', 'avatar_temp')->withCount('videos')->orderBy('created_at', 'desc')->limit($hCount)->get();
 
         $本日排行 = Video::with('user:id,name')->orderBy('current_views', 'desc')->select('id', 'user_id', 'title', 'imgur', 'views', 'duration')->limit($dCount)->get();
 
