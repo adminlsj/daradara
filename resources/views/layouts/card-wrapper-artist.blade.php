@@ -1,4 +1,4 @@
-<a style="text-decoration: none;" href="/">
+<a style="text-decoration: none;" href="{{ $link }}">
 	<h3>{{ $title }}</h3>
 </a>
 <div style="position: relative;">

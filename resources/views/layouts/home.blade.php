@@ -25,7 +25,7 @@
 		<div id="home-banner-wrapper" style="position: absolute; left: 4%; color: white">
 			<h3 style="font-weight: bold"><span style="color: crimson">H</span>anime1<span style="color: crimson">.</span>me</h3>
 			<h1 style="margin: 0; font-weight: bold;">{{ $random->title }}</h1>
-			<h4 class="hidden-xs">{{ $random->translations['JP'] }} • 中文字幕 • {{ $random->caption }}</h4>
+			<h4 class="hidden-xs">{{ str_replace(' [中文字幕]', '', $random->translations['JP']) }} • 中文字幕 • {{ $random->caption }}</h4>
 			<a href="{{ route('video.watch') }}?v={{ $random->id }}" target="_blank" style="display: inline-block; padding: 10px 30px 6px 20px; margin-top: -8px; margin-bottom: -10px" class="hover-opacity-all home-banner-btn home-banner-play-btn play-btn"><span style="vertical-align: middle; font-size: 2em; margin-top: -4px; padding-right: 5px" class="material-icons">play_arrow</span>播放</a>
 			&nbsp;
 			<a href="{{ route('video.watch') }}?v={{ $random->id }}" class="hover-opacity-all home-banner-btn home-banner-info-btn"><span style="vertical-align: middle; font-size: 1.7em; margin-top: -2px; padding-right: 7px" class="material-icons">info</span>更多資訊</a>
@@ -53,33 +53,33 @@
 	</div>
 
 	<div id="home-rows-wrapper" style="position: relative;">
-		@include('layouts.card-wrapper', ['title' => '最新裏番', 'videos' => $最新裏番])
-		@include('layouts.card-wrapper-doujin', ['title' => '最新上市', 'videos' => $最新上市])
-		@include('layouts.card-wrapper-doujin', ['title' => '最新上傳', 'videos' => $最新上傳])
-		@include('layouts.card-wrapper-doujin', ['title' => '中文字幕', 'videos' => $中文字幕])
-		@include('layouts.card-wrapper-doujin', ['title' => '他們在看', 'videos' => $他們在看])
+		@include('layouts.card-wrapper', ['title' => '最新裏番', 'videos' => $最新裏番, 'link' => route('home.search').'?genre=裏番'])
+		@include('layouts.card-wrapper-doujin', ['title' => '最新上市', 'videos' => $最新上市, 'link' => route('home.search').'?sort=最新上市'])
+		@include('layouts.card-wrapper-doujin', ['title' => '最新上傳', 'videos' => $最新上傳, 'link' => route('home.search').'?sort=最新上傳'])
+		@include('layouts.card-wrapper-doujin', ['title' => '中文字幕', 'videos' => $中文字幕, 'link' => route('home.search').'?tags%5B%5D=中文字幕'])
+		@include('layouts.card-wrapper-doujin', ['title' => '他們在看', 'videos' => $他們在看, 'link' => route('home.search').'?sort=他們在看'])
 
 		<div>
 			@include('ads.home-banner-exoclick')
 		</div>
 
-		@include('layouts.card-wrapper', ['title' => '泡麵番', 'videos' => $泡麵番])
-		@include('layouts.card-wrapper-doujin', ['title' => 'Motion Anime', 'videos' => $Motion_Anime])
-		@include('layouts.card-wrapper-doujin', ['title' => '3D動畫', 'videos' => $SD動畫])
-		@include('layouts.card-wrapper-doujin', ['title' => '同人作品', 'videos' => $同人作品])
-		@include('layouts.card-wrapper-doujin', ['title' => 'Cosplay', 'videos' => $Cosplay])
+		@include('layouts.card-wrapper', ['title' => '泡麵番', 'videos' => $泡麵番, 'link' => route('home.search').'?genre=泡麵番'])
+		@include('layouts.card-wrapper-doujin', ['title' => 'Motion Anime', 'videos' => $Motion_Anime, 'link' => route('home.search').'?genre=Motion+Anime'])
+		@include('layouts.card-wrapper-doujin', ['title' => '3D動畫', 'videos' => $SD動畫, 'link' => route('home.search').'?genre=3D動畫'])
+		@include('layouts.card-wrapper-doujin', ['title' => '同人作品', 'videos' => $同人作品, 'link' => route('home.search').'?genre=同人作品'])
+		@include('layouts.card-wrapper-doujin', ['title' => 'Cosplay', 'videos' => $Cosplay, 'link' => route('home.search').'?genre=Cosplay'])
 
 		<div>
 			@include('ads.home-banner-juicyads')
 		</div>
 
-		@include('layouts.card-wrapper', ['title' => '新番預告', 'videos' => $新番預告])
+		@include('layouts.card-wrapper', ['title' => '新番預告', 'videos' => $新番預告, 'link' => '/previews/'.Carbon\Carbon::now()->format('Ym')])
 		<div class="artist-row-desktop-margin">
-			@include('layouts.card-wrapper-artist', ['title' => '新加入作者', 'artists' => $新加入作者])
+			@include('layouts.card-wrapper-artist', ['title' => '新加入作者', 'artists' => $新加入作者, 'link' => route('home.search').'?type=artist&sort=加入日期'])
 		</div>
-		@include('layouts.card-wrapper-doujin', ['title' => '本日排行', 'videos' => $本日排行])
-		@include('layouts.card-wrapper-doujin', ['title' => '本月排行', 'videos' => $本月排行])
-		@include('layouts.card-wrapper-tag', ['title' => '影片標籤', 'videos' => $影片標籤])
+		@include('layouts.card-wrapper-doujin', ['title' => '本日排行', 'videos' => $本日排行, 'link' => route('home.search').'?sort=本日排行'])
+		@include('layouts.card-wrapper-doujin', ['title' => '本月排行', 'videos' => $本月排行, 'link' => route('home.search').'?sort=本月排行'])
+		@include('layouts.card-wrapper-tag', ['title' => '影片標籤', 'videos' => $影片標籤, 'link' => route('home.search')])
 		
 	</div>
 
