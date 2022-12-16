@@ -154,6 +154,7 @@ $('.search-submit-btn').click(function(e) {
 });
 
 var mainnav = $("#main-nav");
+var mainnavmobile = $(".main-nav-mobile");
 var searchnavdesktop = $("#search-nav-desktop");
 var searchnavmobile = $("#search-nav-mobile");
 var searchcontentdesktop = $("#search-content-padding-desktop");
@@ -161,6 +162,7 @@ var searchcontentmobile = $("#search-content-padding-mobile");
 window.onscroll = function() {
   if (window.pageYOffset != 0) {
     mainnav.css('background-color', '#141414');
+    mainnavmobile.css('background-color', 'black');
   } else {
     mainnav.css('background-color', 'transparent');
   }

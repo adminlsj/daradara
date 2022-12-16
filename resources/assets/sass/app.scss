@@ -774,7 +774,7 @@ th, td {
   width: 100%; 
   height: 68px; 
   line-height: 68px; 
-  background-image: linear-gradient(to bottom,rgba(0,0,0,.7) 10%,rgba(0,0,0,0)); 
+  background: linear-gradient(to bottom,rgba(0,0,0,.7) 10%,rgba(0,0,0,0)); 
   padding: 0 4%; 
   transition: background-color .4s; 
   z-index: 1;
@@ -2464,8 +2464,6 @@ div.sticky {
 
   .main-nav {
     position: absolute !important;
-    background-image: linear-gradient(to bottom,rgba(0,0,0,.7) 10%,rgba(0,0,0,0)) !important; 
-    background-color: transparent !important;
   }
 
   #main-nav .nav-icon, #main-nav-home .nav-icon, #main-mobile-nav .nav-icon {
@@ -3055,11 +3053,12 @@ div.sticky {
     line-height: 50px;
   }
 
-  .main-nav-home {
+  #main-nav {
     position: absolute !important;
     height: 100px !important; 
-    background-image: linear-gradient(to bottom,rgba(0,0,0,0.5) 60%,rgba(0,0,0,0)) !important;
-    background-color: transparent !important;
+    /* background-image: linear-gradient(to bottom,rgba(0,0,0,0.5) 60%,rgba(0,0,0,0)) !important;
+    background-color: transparent !important; */
+    background: linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.4));
   }
 
   #hentai-main-nav {
