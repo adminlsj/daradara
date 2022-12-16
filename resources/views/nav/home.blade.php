@@ -5,7 +5,7 @@
 
   @if (Auth::check())
     <div id="user-modal-trigger" style="padding-right: 0px; cursor: pointer;" class="nav-icon pull-right no-select">
-        <img style="width: 23px; border-radius: 2px; margin-top: 1px;" src="{{ Auth::user()->avatar_temp }}">
+        <img style="width: 24px; border-radius: 2px; margin-top: 1px;" src="{{ Auth::user()->avatar_temp }}">
     </div>
   @else
     <a style="padding-right: 0px; padding-left: 10px" class="nav-icon pull-right" href="{{ route('login') }}"><span style="vertical-align: middle; font-size: 28px" class="material-icons-outlined">account_circle</span></a>
