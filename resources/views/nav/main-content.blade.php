@@ -18,7 +18,7 @@
     </div>
 
     <div id="user-modal" class="modal" role="dialog">
-      <div id="user-modal-panel" class="modal-dialog modal-sm" style="position: absolute; {{ Request::is('/') ? 'top: 87px;' : 'top: 30px' }}; right: calc(4% - 1px);">
+      <div id="user-modal-panel" class="modal-dialog modal-sm" style="position: absolute; top: 38px;; right: calc(4% - 1px);">
         <div class="modal-content" style="border-radius: 0px; background-color: #222222; color: white;">
             @include('layouts.user-modal-content')
         </div>
