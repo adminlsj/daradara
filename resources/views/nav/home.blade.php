@@ -15,7 +15,7 @@
     <img style="width: 20px; margin-top: -1px;" src="https://i.imgur.com/vUsLCHC.png">
   </a>
   <a style="margin-right: 3px" class="nav-icon pull-right" href="{{ Auth::check() ? route('user.userEditUpload', Auth::user()) : route('login') }}">
-    <img style="width: 23px;" src="https://i.imgur.com/h9VMiw4.png">
+    <img style="width: 22px;" src="https://i.imgur.com/h9VMiw4.png">
   </a>
 
   <div style="position: absolute; top: 43px; width: 100%; text-align: center;">
