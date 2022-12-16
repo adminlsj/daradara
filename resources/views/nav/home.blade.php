@@ -20,7 +20,7 @@
   <div style="display: inline-block; padding: 0 4%; cursor: pointer;"><a href="{{ route('home.search') }}?genre=裏番" style="color: white; text-decoration: none;">裏番</a></div>
   <div style="display: inline-block; padding: 0 4%; cursor: pointer;"><a href="{{ route('home.search') }}?genre=3D動畫" style="color: white; text-decoration: none;">3D動畫</a></div>
   <div style="display: inline-block; padding: 0 4%; cursor: pointer;"><a href="{{ route('home.search') }}?genre=同人作品" style="color: white; text-decoration: none;">同人作品</a></div>
-  <div style="display: inline-block; padding: 0 4%; cursor: pointer;"><a style="color: white; text-decoration: none;" data-toggle="modal" data-target="#genre-modal">全部類型<i class="material-icons" style="vertical-align: middle; margin-top: -3px; margin-left: 0px;">arrow_drop_down</i></a></div>
+  <div style="display: inline-block; padding: 0 4%; cursor: pointer;"><a style="color: white; text-decoration: none;" data-toggle="modal" data-target="#genre-modal">全部類型<i class="material-icons" style="vertical-align: middle; margin-top: -3px; margin-left: 0px; margin-right: -20px;">arrow_drop_down</i></a></div>
 </div>
 
 <form id="hentai-form" action="{{ route('home.search') }}" method="GET">
