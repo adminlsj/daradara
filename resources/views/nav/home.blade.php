@@ -11,10 +11,10 @@
     <a style="padding-right: 0px; padding-left: 10px" class="nav-icon pull-right" href="{{ route('login') }}"><span style="vertical-align: middle; font-size: 28px" class="material-icons-outlined">account_circle</span></a>
   @endif
 
-  <a style="margin-right: 5px" class="nav-icon pull-right" href="{{ route('home.search') }}">
+  <a style="margin-right: 3px" class="nav-icon pull-right" href="{{ route('home.search') }}">
     <img style="width: 21px; margin-top: -1px;" src="https://i.imgur.com/vUsLCHC.png">
   </a>
-  <a style="margin-right: 5px" class="nav-icon pull-right" href="{{ Auth::check() ? route('user.userEditUpload', Auth::user()) : route('login') }}">
+  <a style="margin-right: 3px" class="nav-icon pull-right" href="{{ Auth::check() ? route('user.userEditUpload', Auth::user()) : route('login') }}">
     <img style="width: 24px;" src="https://i.imgur.com/h9VMiw4.png">
   </a>
 
