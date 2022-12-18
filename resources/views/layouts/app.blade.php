@@ -51,8 +51,6 @@
             @endif
 
             @yield('content')
-
-            @include('layouts.footer')
         </div>
 
         <!-- The actual snackbar -->

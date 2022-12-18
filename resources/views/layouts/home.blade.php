@@ -88,6 +88,8 @@
 	</div>
 </div>
 
+@include('layouts.footer')
+
 @include('layouts.nav-bottom')
 
 @endsection
