@@ -5,13 +5,13 @@
         <div style="line-height: 30px;"><a style="color: grey;" href="/copyright" target="_blank">DMCA</a></div>
         <div style="line-height: 30px;"><a style="color: grey;" href="/2257" target="_blank">2257</a></div>
     </div>
-    <div class="col-xs-6 col-sm-3">
+    <div class="hidden-xs col-xs-6 col-sm-3">
         <div style="line-height: 30px;"><a style="color: grey;" href="https://theporndude.com/zh" target="_blank">PornDude</a></div>
         <div style="line-height: 30px;"><a style="color: grey;" href="https://qingse.one" target="_blank">情色網站大全</a></div>
         <div style="line-height: 30px;"><a style="color: grey;" href="https://141jj.com/" target="_blank">141JJ 導航</a></div>
         <div style="line-height: 30px;"><a style="color: grey;" href="http://www.pornbest.org/" target="_blank">PornBest 免費中文視頻</a></div>
     </div>
-    <div class="col-xs-6 col-sm-3">
+    <div class="hidden-xs col-xs-6 col-sm-3">
         <div style="line-height: 30px;"><a style="color: grey;" href="https://www.17dm.net/" target="_blank">妖氣動漫導航</a></div>
         <div style="line-height: 30px;"><a style="color: grey;" href="https://share.acgnx.net/" target="_blank">末日動漫資源庫</a></div>
         <div style="line-height: 30px;"><a style="color: grey;" href="https://moeli-desu.com/" target="_blank">夢璃</a></div>
