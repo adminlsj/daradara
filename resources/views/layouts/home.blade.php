@@ -2,7 +2,7 @@
 
 @section('nav')
 	@include('nav.home')
-@endsection@include('layouts.footer')
+@endsection
 
 @section('content')
 
