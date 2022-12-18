@@ -1,4 +1,4 @@
-<div class="row footer-new" style="font-weight: normal; padding-top: 10px; padding-bottom: 10px; font-size: 12px; margin-top: -40px">
+<div class="row footer-new" style="font-weight: normal; padding-top: 10px; padding-bottom: 10px; font-size: 12px; margin-top: -40px; text-align: center">
     <div class="col-xs-6 col-sm-3">
         <div style="line-height: 30px;"><a style="color: grey;" href="https://discord.gg/WWYc9m9CUQ" target="_blank">Discord</a></div>
         <div style="line-height: 30px;"><a style="color: grey;" href="/contact" target="_blank">廣告合作</a></div>
@@ -23,7 +23,7 @@
         <div style="line-height: 30px;"><a style="color: grey;" href="#">成人色情</a></div>
         <div style="line-height: 30px;"><a style="color: grey;" href="#">免費線上看</a></div>
     </div>
-    <div class="col-sm-12">
+    <div class="col-xs-12">
         <div style="line-height: 30px; color: grey;">© 2020-2022 Hanime1.me ({{ gethostname() }})</div>
     </div>
 </div>

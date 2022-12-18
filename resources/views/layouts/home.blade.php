@@ -2,9 +2,10 @@
 
 @section('nav')
 	@include('nav.home')
-@endsection
+@endsection@include('layouts.footer')
 
 @section('content')
+
 <div class="nav-bottom-padding">
 	<div class="hidden-xs" style="position: relative;">
 		<div id="main-nav-home" style="z-index: 10000 !important; position: absolute;">
