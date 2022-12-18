@@ -7,7 +7,7 @@
 </div>
 
 <div class="hidden-md hidden-lg" style="text-align: center; padding-top: 35px; padding-bottom: 0px;">
-	<span style="vertical-align: top; margin-top: 5px; margin-bottom: 15px">
+	<span style="vertical-align: top; margin-top: 5px; margin-bottom: 10px">
 		<!-- JuicyAds v3.1 -->
 		<script type="text/javascript" data-cfasync="false" async src="https://poweredby.jads.co/js/jads.js"></script>
 		<ins id="940480" data-width="300" data-height="262"></ins>
