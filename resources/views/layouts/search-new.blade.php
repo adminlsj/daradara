@@ -21,7 +21,7 @@
 
 @section('content')
 
-<form id="hentai-form" action="{{ route('home.search') }}" method="GET">
+<form style="overflow-y: hidden;" id="hentai-form" action="{{ route('home.search') }}" method="GET">
 
 	@include('video.search-nav-desktop')
 
@@ -224,7 +224,7 @@
 
 		@include('ads.search-banner-panel')
 
-		<div class="hidden-sm hidden-md hidden-lg" style="text-align: center; margin-bottom: -40px; {{ $results->lastPage() == 1 ? 'margin-top: 32px' : 'margin-top: -12px' }}">
+		<div class="hidden-sm hidden-md hidden-lg" style="text-align: center; {{ $results->lastPage() == 1 ? 'margin-top: 32px' : 'margin-top: -12px' }}">
 			<!-- JuicyAds v3.1 -->
 			<script type="text/javascript" data-cfasync="false" async src="https://poweredby.jads.co/js/jads.js"></script>
 			<ins id="941419" data-width="300" data-height="112"></ins>
