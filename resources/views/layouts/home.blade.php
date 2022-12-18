@@ -22,7 +22,10 @@
 			});
 		</script>
 
-		<img class="lazy" style="width: 100%; -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0.3)));" data-srcset="{{ $random->imgurH()}}" src="{{ $random->imgur() }}" alt="{{ $random->title }}">
+		<div style="position: relative;">
+			<img style="width: 100%; -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0.3)));" src="{{ $random->imgurH()}}" alt="{{ $random->title }}">
+			<img style="width: 100%; -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0.3))); position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-position: center 0px; object-fit: cover;" src="{{ $random->imgur()}}" alt="{{ $random->title }}">
+	    </div>
 		<div id="home-banner-wrapper" style="position: absolute; left: 4%; color: white">
 			<h3 style="font-weight: bold"><span style="color: crimson">H</span>anime1<span style="color: crimson">.</span>me</h3>
 			<h1 style="margin: 0; font-weight: bold;">{{ $random->title }}</h1>
