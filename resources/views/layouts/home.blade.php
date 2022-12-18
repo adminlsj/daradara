@@ -39,7 +39,7 @@
 	    </div>
 		<div style="position: absolute; left: 50%; -webkit-transform: translateX(-50%); transform: translateX(-50%); width: 96%; bottom: 14%; text-align: center; color: white">
 			<h3 style="font-weight: bold; font-size: 20px;"><span style="color: crimson">H</span>anime1<span style="color: crimson">.</span>me</h3>
-			<h1 style="font-size: 28px; font-weight: bold; margin: 0">{{ $random->title }}</h1>
+			<h1 style="font-size: 28px; font-weight: bold; margin: 0; line-height: 35px">{{ $random->title }}</h1>
 			<h4 style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; line-height: 16px; font-size: 12px; width: 92%; margin-left: 4%;">{{ str_replace(' [中文字幕]', '', $random->translations['JP']) }} • 中文字幕 • {{ $random->caption }}</h4>
 			<div style="margin-top: 15px; width: 100%">
 				<div style="display: inline-block; margin-top: 5px;">
