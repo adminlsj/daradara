@@ -110,7 +110,7 @@
 
               @if ($preview->trailer)
                 <div class="trailer-modal-trigger" style="margin-top: 15px;" data-toggle="modal" data-target="#trailerModal-{{ $preview->video->id }}">
-                  <a id="watch-comics-link-btn" class="no-select" style="background-color: crimson; border: none; border-radius: 3px; color: #d9d9d9; display: block; text-decoration: none; cursor: pointer; margin-left: 0px;">
+                  <a id="watch-comics-link-btn" class="no-select" style="background-color: crimson; border: none; border-radius: 3px; color: #d9d9d9; display: block; text-decoration: none; cursor: pointer; margin-left: 0px; width: 115px">
                     <span style="vertical-align: middle; font-size: 20px; margin-top: -3px; margin-right: 3px; cursor: pointer;" class="material-icons-outlined">play_circle</span>預告映像
                   </a>
                 </div>
