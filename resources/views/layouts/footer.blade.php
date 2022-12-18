@@ -23,7 +23,7 @@
         <div style="line-height: 30px;"><a style="color: grey;" href="#">成人色情</a></div>
         <div style="line-height: 30px;"><a style="color: grey;" href="#">免費線上看</a></div>
     </div>
-    <div class="col-xs-12" style="margin-top: 40px">
+    <div class="col-xs-12" style="margin-top: 30px">
         <div style="line-height: 30px; color: grey;">© 2020-2022 Hanime1.me ({{ gethostname() }})</div>
     </div>
 </div>
