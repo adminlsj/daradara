@@ -224,6 +224,8 @@
 
 		@include('ads.search-banner-panel')
 
+		<span class="hidden-xs"><br><br><br></span>
+
 		<div class="hidden-sm hidden-md hidden-lg" style="text-align: center; {{ $results->lastPage() == 1 ? 'margin-top: 32px' : 'margin-top: -12px' }}">
 			<!-- JuicyAds v3.1 -->
 			<script type="text/javascript" data-cfasync="false" async src="https://poweredby.jads.co/js/jads.js"></script>
