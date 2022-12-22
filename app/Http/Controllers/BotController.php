@@ -34,7 +34,7 @@ class BotController extends Controller
         ini_set('memory_limit', '-1');
 
         $videos = Video::where('qualities', 'like', '%motherless%')->get();
-        foreach ($video as $video) {
+        foreach ($videos as $video) {
             $video->outsource = true;
             $video->save();
         }
