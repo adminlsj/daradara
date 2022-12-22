@@ -33,6 +33,7 @@ class VideoController extends Controller
             $current = $video;
             $doujin = false;
             $user = auth()->user();
+            $artist = User::select('id', 'name', 'avatar_temp')->withCount('videos')->find($video->user_id);
             $is_mobile = Helper::checkIsMobile();
 
             $video->current_views++;
@@ -41,7 +42,7 @@ class VideoController extends Controller
             $video->views++;
             $video->save();
 
-            $videos = Video::where('playlist_id', $video->playlist_id)->orderBy('created_at', 'desc')->select('id', 'user_id', 'cover', 'imgur', 'title', 'sd', 'views', 'created_at')->get();
+            $videos = Video::where('playlist_id', $video->playlist_id)->orderBy('created_at', 'desc')->select('id', 'user_id', 'cover', 'imgur', 'title', 'sd', 'views', 'duration', 'created_at')->get();
 
             $tags = $tags_random = array_keys($video->tags_array);
             shuffle($tags_random);
@@ -101,7 +102,7 @@ class VideoController extends Controller
             abort(403);
         }
 
-        return view('video.watch-new', compact('video', 'videos', 'current', 'tags', 'country_code', 'comments_count', 'related', 'doujin', 'is_mobile', 'saved', 'listed', 'playlists', 'liked', 'lang', 'sd', 'qual', 'qualities', 'downloads'));
+        return view('video.watch-2022-12-19', compact('video', 'artist', 'videos', 'current', 'tags', 'country_code', 'comments_count', 'related', 'doujin', 'is_mobile', 'saved', 'listed', 'playlists', 'liked', 'lang', 'sd', 'qual', 'qualities', 'downloads'));
     }
 
     public function download(Request $request)

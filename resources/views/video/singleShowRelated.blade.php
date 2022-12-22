@@ -1,15 +1,32 @@
-<a href="{{ route('video.watch') }}?v={{ $video->id }}" class="row no-gutter">
-  <div style="padding-right: 0px; width: 160px; max-width: 50%; position: relative;" class="col-xs-6 col-sm-6 col-md-6">
-    <img style="width: 100%; height: 100%;" src="https://cdn.jsdelivr.net/gh/guaishushukanlifan/Project-H@latest/asset/thumbnail/WENZTSJl.jpg">
-    @if ($video->id == $current->id)
-	    <img style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; filter: brightness(15%);" src="{{ $video->thumbL() }}" alt="{{ $video->title }}">
-	    <div style="margin: 0; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-weight: bold">現正播放</div>
-	  @else
-		  <img style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="{{ $video->thumbL() }}" alt="{{ $video->title }}">
-    @endif
+<div class="card-mobile-panel inner">
+  <div style="width: 150px; display: inline-block;">
+    <div style="position: relative; display: inline-block;">
+      <img style="width: 100%; height: 100%; border-radius: 5px;" src="https://i.imgur.com/D1l0JoC.jpg">
+      <img style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 5px; {{ $video->id == $current->id ? 'filter: brightness(15%);' : '' }}" src="{{ $video->thumbL() }}" alt="{{ $video->title }}">
+
+      @if ($video->id == $current->id)
+        <div style="margin: 0; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #e5e5e5;">現正播放</div>
+      @endif
+    </div>
   </div>
-  <div style="width: calc(100% - 160px); min-width: 50%; max-height: 90px;" class="col-xs-6 col-sm-6 col-md-6 related-watch-title">
-    <h4 style="font-weight: 600; color: white;">{{ $video->title }}</h4>
-    <p style="color: #bdbdbd; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; font-size: 0.89em; margin-top: 4px; margin-bottom: 0px; font-weight: 400 !important;">觀看次數：{{ $video->views() }}次</p>
+
+  <div style="display: inline-block; text-decoration: none; color: black; margin-top: -2px; margin-left: 8px; height: 50px; width: calc(100% - 168px); vertical-align: top;">
+    <div class="card-mobile-title" style="color: #e5e5e5;">{{ str_replace("[".$video->user->name."] ", "", $video->title) }}</div>
+
+    <div class="card-mobile-genre-wrapper" style="margin-top: 4px; margin-left: -2px">
+      <a href="{{ route('home.search') }}?query={{ $video->user->name }}" style="font-size: 12px; color: dimgray; margin-left: 2px; display: inline-block;" class="card-mobile-user">{{ $video->user->name }}</a>
+    </div>
+
+    <div style="float: left; margin-top: -3px;">
+      @if ($video->duration != null)
+          <div class="card-mobile-duration" style="background: #2E2E2E; padding: 0px 4px; color: #b8babc;line-height: 19px;">
+            {{ $video->duration >= 3600 ? gmdate('H:i:s', $video->duration) : gmdate('i:s', $video->duration) }}
+          </div>
+        @endif
+
+        <div class="card-mobile-duration" style="background: #2E2E2E; padding: 0px 4px; margin-right: 5px; color: #b8babc; line-height: 19px;">
+          {{ $video->views() }}次
+        </div>
+    </div>
   </div>
-</a>
+</div>

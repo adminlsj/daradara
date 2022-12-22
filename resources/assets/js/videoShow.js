@@ -117,27 +117,6 @@ $("form#video-create-playlist-form").submit(function(e) {
     })
 });
 
-/* $('div#video-save-form-wrapper').on("submit", "form#video-save-form", function(e) {
-    $.ajaxSetup({
-        header:$('meta[name="_token"]').attr('content')
-    })
-    e.preventDefault(e);
-
-    $.ajax({
-        type:"POST",
-        url: $(this).attr("action"),
-        data:$(this).serialize(),
-        dataType: 'json',
-        success: function(data){
-            $('div#video-save-form-wrapper').html(data.saveBtn);
-            showSnackbar('影片已儲存於「我的清單」');
-        },
-        error: function(xhr, ajaxOptions, thrownError){
-            showSnackbar('請刷新頁面後重試。');
-        }
-    })
-}); */
-
 $("#hide-playlist-btn").click(function() {
     var scroll = $("#playlist-scroll");
     var icon = $("#hide-playlist-btn i");
