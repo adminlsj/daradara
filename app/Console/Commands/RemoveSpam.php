@@ -59,17 +59,17 @@ class RemoveSpam extends Command
                                 '61.224.35.228',
                                 '45.249.247.6'
                             ])
-                            // ->whereDate('created_at', Carbon::today())
+                            ->where('created_at', '>=', Carbon::now()->subDay())
                             ->groupBy('user_id')
                             ->pluck('user_id');
 
-        /* $keyword_user_array = Comment::where('text', 'ilike', '%https://%')
-                            ->whereDate('created_at', Carbon::today())
+        $keyword_user_array = Comment::where('text', 'ilike', '%↑%')
+                            ->where('created_at', '>=', Carbon::now()->subDay())
                             ->groupBy('user_id')
-                            ->pluck('user_id'); */
+                            ->pluck('user_id');
         
         User::destroy($ip_user_array);
-        // User::destroy($keyword_user_array);
+        User::destroy($keyword_user_array);
 
         Log::info('Spam remove ended...');
     }
