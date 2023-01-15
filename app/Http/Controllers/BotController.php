@@ -33,12 +33,12 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $videos = Video::all();
+        /* $videos = Video::all();
         foreach ($videos as $video) {
             $searchtext = $video->title.'|'.$video->translations['JP'].'|'.implode('|', array_keys($video->tags_array)).'|'.$video->genre.'|'.$video->artist;
             $video->searchtext = mb_strtolower(preg_replace('/\s+/', '', $searchtext), 'UTF-8');
             $video->save();
-        }
+        } */
 
         /* for ($i = 0; $i <= 157; $i++) { 
             $initial = "https://cdn1.htstreaming.com/cdn/down/cd2a7e30451a8eb993a1f4f34b293f37/Video/720p/720p_";
@@ -111,7 +111,7 @@ class BotController extends Controller
             Storage::disk('local')->put("video/".basename($ts), file_get_contents($ts, false, $context));
         } */
 
-        /* $tc = Storage::disk('local')->files('video/tc');
+        $tc = Storage::disk('local')->files('video/tc');
         foreach ($tc as $video) {
             $extension = explode('.', $video)[1];
             if ($extension == 'ts') {
@@ -129,7 +129,7 @@ class BotController extends Controller
                 $folder = $number % 3;
                 Storage::disk('local')->move($video, "video/sc/{$folder}/p_{$number}.html");
             }
-        } */
+        }
 
         /* $videos = Video::where('foreign_sd', 'like', '%"youjizz"%')->get();
         foreach ($videos as $video) {
