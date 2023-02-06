@@ -33,6 +33,8 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
+        return $html = file_get_contents('https://spankbang.com/7rxdw/video/natural+busty+big+tits');
+
         /* $videos = Video::all();
         foreach ($videos as $video) {
             $searchtext = $video->title.'|'.$video->translations['JP'].'|'.implode('|', array_keys($video->tags_array)).'|'.$video->genre.'|'.$video->artist;
@@ -111,7 +113,7 @@ class BotController extends Controller
             Storage::disk('local')->put("video/".basename($ts), file_get_contents($ts, false, $context));
         } */
 
-        $tc = Storage::disk('local')->files('video/tc');
+        /* $tc = Storage::disk('local')->files('video/tc');
         foreach ($tc as $video) {
             $extension = explode('.', $video)[1];
             if ($extension == 'ts') {
@@ -129,7 +131,7 @@ class BotController extends Controller
                 $folder = $number % 3;
                 Storage::disk('local')->move($video, "video/sc/{$folder}/p_{$number}.html");
             }
-        }
+        } */
 
         /* $videos = Video::where('foreign_sd', 'like', '%"youjizz"%')->get();
         foreach ($videos as $video) {
