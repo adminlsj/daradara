@@ -380,8 +380,8 @@ class Spankbang
 
     public static function getBrowsershotHtml(String $url)
     {
-        return file_get_contents($url);
-        /* return Browsershot::url($url)
+        // return file_get_contents($url);
+        return Browsershot::url($url)
                 ->timeout(20)
                 ->disableImages()
                 ->userAgent(Spankbang::$userAgents[array_rand(Spankbang::$userAgents)])
@@ -396,7 +396,7 @@ class Spankbang
                 ->useCookies(['warn_modal' => '0'], '.spankbang.com')
                 ->setOption('args', ['--disable-web-security'])
                 ->setOption('args', '--lang=en-GB')
-                ->bodyHtml(); */
+                ->bodyHtml();
     }
 
     public static $userAgents = [
