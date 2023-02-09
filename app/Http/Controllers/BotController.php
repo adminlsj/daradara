@@ -33,7 +33,7 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        return $html = file_get_contents('https://spankbang.com/7rxdw/video/natural+busty+big+tits');
+        return $html = @file_get_contents('https://spankbang.com/6p8z4/video/living+together+sex');
 
         /* $videos = Video::all();
         foreach ($videos as $video) {
