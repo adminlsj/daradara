@@ -58,12 +58,12 @@ class Spankbang
 
             } else {
                 Log::info('Spankbang update ID#'.$video->id.' failed...');
-                Mail::to('vicky.avionteam@gmail.com')->send(new UserReport('master ('.gethostname().')', 'Spankbang update failed', $video->id, $video->title, $video->sd, 'master', 'master'));
                 $temp = $video->foreign_sd;
                 $temp['error'] = $video->foreign_sd['spankbang'];
                 unset($temp['spankbang']);
                 $video->foreign_sd = $temp;
                 $video->save();
+                Mail::to('vicky.avionteam@gmail.com')->send(new UserReport('master ('.gethostname().')', 'Spankbang update failed', $video->id, $video->title, $video->sd, 'master', 'master'));
             }
 
             if ($videos->last() != $video) {
@@ -120,12 +120,12 @@ class Spankbang
 
             } else {
                 Log::info('Spankbang sc update ID#'.$video->id.' failed...');
-                Mail::to('vicky.avionteam@gmail.com')->send(new UserReport('master ('.gethostname().')', 'Spankbang sc update failed', $video->id, $video->title, $video->sd_sc, 'master', 'master'));
                 $temp = $video->foreign_sd;
                 $temp['error_sc'] = $video->foreign_sd['spankbang_sc'];
                 unset($temp['spankbang_sc']);
                 $video->foreign_sd = $temp;
                 $video->save();
+                Mail::to('vicky.avionteam@gmail.com')->send(new UserReport('master ('.gethostname().')', 'Spankbang sc update failed', $video->id, $video->title, $video->sd_sc, 'master', 'master'));
             }
 
             if ($videos->last() != $video) {
@@ -182,12 +182,12 @@ class Spankbang
                     $video->save();
 
                 } else {
-                    Mail::to('vicky.avionteam@gmail.com')->send(new UserReport('master', 'Spankbang update failed', $video->id, $video->title, $video->sd, 'master', 'master'));
                     $temp = $video->foreign_sd;
                     $temp['error'] = $video->foreign_sd['spankbang'];
                     unset($temp['spankbang']);
                     $video->foreign_sd = $temp;
                     $video->save();
+                    Mail::to('vicky.avionteam@gmail.com')->send(new UserReport('master', 'Spankbang update failed', $video->id, $video->title, $video->sd, 'master', 'master'));
                 }
 
                 sleep(5);

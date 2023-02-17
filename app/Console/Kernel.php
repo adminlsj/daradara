@@ -45,7 +45,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('hanime1:reset-views')->dailyAt('05:00');
-        $schedule->command('hanime1:update-searchtext')->dailyAt('05:00');
+        $schedule->command('hanime1:update-searchtext')->hourly();
 
         $schedule->command('hanime1:update-hembed')->hourly();
         $schedule->command('hanime1:update-vod')->hourly();
