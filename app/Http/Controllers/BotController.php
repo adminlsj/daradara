@@ -1597,7 +1597,7 @@ class BotController extends Controller
         $user2 = $request->user2;
         $lang = $request->lang;
         $base = trim(Helper::get_string_between($m3u8, ',', '0.ts'));
-        for ($i = 0; $i <= 1000; $i++) { 
+        for ($i = 0; $i <= 10000; $i++) { 
             if ($i % 3 == 0) {
                 $m3u8 = str_replace("{$base}{$i}.ts", "https://cdn.jsdelivr.net/gh/{$user0}/{$user0}@v1.0.0/config/{$lang}/0/p_{$i}.html", $m3u8);
             }
@@ -1830,17 +1830,7 @@ class BotController extends Controller
         $context = stream_context_create($opts);
         Storage::disk('local')->put("video/{$vid}.m3u8", file_get_contents($m3u8, false, $context));
 
-        $curl_connection = curl_init($m3u8);
-        curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
-        curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
-        $playlist = curl_exec($curl_connection);
-        curl_close($curl_connection);
-        $total = explode("{$vid}", $playlist);
-        $total = end($total);
-        $total = explode('.ts', $total)[0];
-
-        for ($i = 0; $i <= $total; $i++) { 
+        for ($i = 0; $i <= $request->total; $i++) { 
             $url = "https://v.avgigi.com/acg/3D/{$vid}/video{$i}.ts";
             Storage::disk('local')->put("video/{$vid}{$i}.ts", file_get_contents($url, false, $context));
         }
