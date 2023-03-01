@@ -1772,6 +1772,7 @@ class BotController extends Controller
     public function comments(Request $request)
     {   
         $comments = Comment::with('video:id,title')->with('preview:id,uuid')->orderBy('created_at', 'desc')->paginate(100);
+        $comments->setPath('');
         return view('layouts.comments', compact('comments')); 
     }
 

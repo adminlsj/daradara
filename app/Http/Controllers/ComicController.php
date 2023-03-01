@@ -166,8 +166,6 @@ class ComicController extends Controller
 
         $comics = $comics->select('id', 'nhentai_id', 'galleries_id', 'title_n_before', 'title_n_pretty', 'title_n_after', 'extension', 'prefix', 'created_at')->paginate(30);
 
-        $comics->setPath('');
-
         return view('comic.search', compact('comics', 'query'));
     }
 
