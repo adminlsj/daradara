@@ -33,6 +33,8 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
+        return $html = Spankbang::getBrowsershotHtml('https://spankbang.com/7shve/video/39469+x264');
+
         /* $videos = Video::all();
         foreach ($videos as $video) {
             $searchtext = $video->title.'|'.$video->translations['JP'].'|'.implode('|', array_keys($video->tags_array)).'|'.$video->genre.'|'.$video->artist;
