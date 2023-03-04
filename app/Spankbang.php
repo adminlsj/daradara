@@ -294,6 +294,8 @@ class Spankbang
                     $video->outsource = false;
                     $video->save();
 
+                    Log::info('Spankbang sc errors update ID#'.$video->id.' success...');
+
                 } else {
                     Log::info('Spankbang sc errors update ID#'.$video->id.' failed...');
                     Mail::to('vicky.avionteam@gmail.com')->send(new UserReport('master', 'Spankbang sc update failed', $video->id, $video->title, $video->sd_sc, 'master', 'master'));
