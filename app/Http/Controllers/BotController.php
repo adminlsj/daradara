@@ -33,6 +33,25 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
+        $covers = Video::where('cover', 'ilike', '%imgur%')->select('id', 'title', 'cover')->get();
+
+        foreach ($covers as $video) {
+            $url = $video->cover;
+            $ch = curl_init();
+
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_TIMEOUT, '60'); // in seconds
+            curl_setopt($ch, CURLOPT_HEADER, 1);
+            curl_setopt($ch, CURLOPT_NOBODY, 1);
+            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            $res = curl_exec($ch);
+
+            if (curl_getinfo($ch)['url'] != $url){
+                echo 'ID#'.$video->id.' '.$video->title.'\N';
+            }
+        }
+
         /* $videos = Video::all();
         foreach ($videos as $video) {
             $searchtext = $video->title.'|'.$video->translations['JP'].'|'.implode('|', array_keys($video->tags_array)).'|'.$video->genre.'|'.$video->artist;
@@ -111,7 +130,7 @@ class BotController extends Controller
             Storage::disk('local')->put("video/".basename($ts), file_get_contents($ts, false, $context));
         } */
 
-        $tc = Storage::disk('local')->files('video/tc');
+        /* $tc = Storage::disk('local')->files('video/tc');
         foreach ($tc as $video) {
             $extension = explode('.', $video)[1];
             if ($extension == 'ts') {
@@ -129,7 +148,7 @@ class BotController extends Controller
                 $folder = $number % 3;
                 Storage::disk('local')->move($video, "video/sc/{$folder}/p_{$number}.html");
             }
-        }
+        } */
 
         /* $videos = Video::where('foreign_sd', 'like', '%"youjizz"%')->get();
         foreach ($videos as $video) {
@@ -155,7 +174,7 @@ class BotController extends Controller
         /* curl -O --referer https://avbebe.com/ https://vz-e9c9f2c4-a7f.b-cdn.net/dacb9593-b19f-4617-9b57-d4790c8089d1/1920x1080/video0.ts */
 
         // download imgurs
-        /* $videos = Video::where('cover', 'not like', '%cdn.jsdelivr.net%')->orderBy('id', 'asc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
+        /* $videos = Video::where('cover', 'not like', '%cdn.jsdelivr.net%')->orderBy('views', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
 
         foreach ($videos as $video) {
             // cover
