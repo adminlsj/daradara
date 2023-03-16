@@ -193,7 +193,7 @@ class BotController extends Controller
         /* curl -O --referer https://avbebe.com/ https://vz-e9c9f2c4-a7f.b-cdn.net/dacb9593-b19f-4617-9b57-d4790c8089d1/1920x1080/video0.ts */
 
         // download imgurs
-        /* $videos = Video::where('cover', 'not like', '%cdn.jsdelivr.net%')->orderBy('views', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
+        /* $videos = Video::where('cover', 'not like', '%cdn.jsdelivr.net%')->orderBy('id', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
 
         foreach ($videos as $video) {
             // cover
@@ -234,11 +234,11 @@ class BotController extends Controller
 
 
         // update cover
-        $videos = Video::where('cover', 'not like', '%cdn.jsdelivr.net%')->orderBy('views', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
+        $videos = Video::where('cover', 'not like', '%cdn.jsdelivr.net%')->orderBy('id', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
         foreach ($videos as $video) {
             $cover = str_replace('.png', '.jpg', $video->cover);
             $imgur = Helper::get_string_between($cover, 'https://i.imgur.com/', '.jpg');
-            $video->cover = 'https://cdn.jsdelivr.net/gh/shikanimage/shikanimage@v1.0.0/asset/cover/'.$imgur.'.jpg';
+            $video->cover = 'https://cdn.jsdelivr.net/gh/wooloomulu/wooloomulu@v1.0.0/asset/cover/'.$imgur.'.jpg';
             $video->save();
         }
 
