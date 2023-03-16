@@ -33,8 +33,27 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $covers = Video::where('cover', 'ilike', '%imgur%')->select('id', 'title', 'cover')->get();
+        /* echo 'Imgurs check start<br>';
+        $imgurs = Video::where('cover', 'ilike', '%imgur%')->select('id', 'title', 'cover', 'imgur')->get();
+        foreach ($imgurs as $video) {
+            $url = 'https://i.imgur.com/'.$video->imgur.'.jpg';
+            $ch = curl_init();
 
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_TIMEOUT, '60'); // in seconds
+            curl_setopt($ch, CURLOPT_HEADER, 1);
+            curl_setopt($ch, CURLOPT_NOBODY, 1);
+            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            $res = curl_exec($ch);
+
+            if (curl_getinfo($ch)['url'] != $url){
+                echo 'ID#'.$video->id.' '.$video->title.'<br>';
+            }
+        }
+
+        echo 'Covers check start<br>';
+        $covers = Video::where('cover', 'ilike', '%imgur%')->select('id', 'title', 'cover')->get();
         foreach ($covers as $video) {
             $url = $video->cover;
             $ch = curl_init();
@@ -48,9 +67,9 @@ class BotController extends Controller
             $res = curl_exec($ch);
 
             if (curl_getinfo($ch)['url'] != $url){
-                echo 'ID#'.$video->id.' '.$video->title.'\N';
+                echo 'ID#'.$video->id.' '.$video->title.'<br>';
             }
-        }
+        } */
 
         /* $videos = Video::all();
         foreach ($videos as $video) {
@@ -215,13 +234,13 @@ class BotController extends Controller
 
 
         // update cover
-        /* $videos = Video::where('cover', 'not like', '%cdn.jsdelivr.net%')->orderBy('id', 'asc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
+        $videos = Video::where('cover', 'not like', '%cdn.jsdelivr.net%')->orderBy('views', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
         foreach ($videos as $video) {
             $cover = str_replace('.png', '.jpg', $video->cover);
             $imgur = Helper::get_string_between($cover, 'https://i.imgur.com/', '.jpg');
-            $video->cover = 'https://cdn.jsdelivr.net/gh/tatakanuta/tatakanuta@v1.0.0/asset/cover/'.$imgur.'.jpg';
+            $video->cover = 'https://cdn.jsdelivr.net/gh/shikanimage/shikanimage@v1.0.0/asset/cover/'.$imgur.'.jpg';
             $video->save();
-        } */
+        }
 
         //---------------------------------------------------------------------------------------------------------
 
