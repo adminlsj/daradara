@@ -238,7 +238,7 @@ class BotController extends Controller
         foreach ($videos as $video) {
             $cover = str_replace('.png', '.jpg', $video->cover);
             $imgur = Helper::get_string_between($cover, 'https://i.imgur.com/', '.jpg');
-            $video->cover = 'https://cdn.jsdelivr.net/gh/glorybeescal/glorybeescal@v1.0.0/asset/cover/'.$imgur.'.jpg';
+            $video->cover = 'https://cdn.jsdelivr.net/gh/toutoubumi1/toutoubumi1@v1.0.0/asset/cover/'.$imgur.'.jpg';
             $video->save();
         }
 
