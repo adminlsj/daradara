@@ -470,6 +470,10 @@ th, td {
   float: right;
 }
 
+.desktop-inline-mobile-block {
+  display: inline-block;
+}
+
 .plyr__captions {
   margin-bottom: -15px;
   font-size: 1.8vw !important;
@@ -1235,6 +1239,7 @@ th, td {
 
 .video-description-panel {
   background-color: #2E2E2E;
+  margin-top: 15px;
 }
 
 .video-description-panel-hover:hover {
@@ -2705,8 +2710,20 @@ div.sticky {
   .video-buttons-wrapper {
     display: block; 
     margin-top: 13px;
-    margin-bottom: -50px;
+    margin-bottom: -40px;
     float: left;
+  }
+
+  .video-subscribe-btn {
+    float: right;
+  }
+
+  .video-description-panel {
+    margin-top: 25px;
+  }
+
+  .desktop-inline-mobile-block {
+    display: block;
   }
 
   .footer-new {

@@ -57,7 +57,7 @@
       <div class="video-details-wrapper">
         <h3 id="shareBtn-title" style="line-height: 30px; font-weight: bold; font-size: 1.5em; margin-top: 10px; color: white;">{{ $video->translations['JP'] }}</h3>
 
-        <div style="width: 100%">
+        <div class="desktop-inline-mobile-block">
           <div style="display: inline-block;">
             <a href="{{ route('home.search') }}?query={{ $artist->name }}&genre={{ $video->genre }}"><img style="width: 40px; border-radius: 50%;" src="{{ $artist->avatar_temp }}" alt="{{ $artist->name }}"></a>
             <div style="display: inline-block; vertical-align: middle; margin-left: 8px">
@@ -66,32 +66,32 @@
             </div>
           </div>
 
-          <div class="no-select video-subscribe-btn hidden-md" style="display: inline-block; background-color: #F1F1F1; height: 36px; line-height: 36px; border-radius: 50px; padding: 0 16px; margin-left: 20px; vertical-align: middle; cursor: pointer; float: right;" data-toggle="modal" data-target="#subscribeModal">
+          <div class="no-select video-subscribe-btn hidden-md" style="display: inline-block; background-color: #F1F1F1; height: 36px; line-height: 36px; border-radius: 50px; padding: 0 16px; margin-left: 20px; vertical-align: middle; cursor: pointer;" data-toggle="modal" data-target="#subscribeModal">
             訂閱
           </div>
-        </div>
 
-        <div id="subscribeModal" class="modal" role="dialog">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <span class="material-icons pull-left no-select modal-close-btn" data-dismiss="modal">close</span>
-                <h4 class="modal-title">訂閱作者</h4>
-              </div>
-              <div class="modal-body" style="padding-bottom: 20px; text-align: left;">
-                <h4>追蹤喜歡的作者</h4>
-                <p id="hentai-tags-text" style="color: darkgray;">訂閱功能即將全面開放！</p>
-              </div>
-              <hr style="border-color: #323434; margin: 0; margin-top: -10px;">
-              <div class="modal-footer">
-                <div data-dismiss="modal">返回</div>
-                <button data-dismiss="modal" class="pull-right btn btn-primary">我知道了</button>
+          <div id="subscribeModal" class="modal" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <span class="material-icons pull-left no-select modal-close-btn" data-dismiss="modal">close</span>
+                  <h4 class="modal-title">訂閱作者</h4>
+                </div>
+                <div class="modal-body" style="padding-bottom: 20px; text-align: left;">
+                  <h4>追蹤喜歡的作者</h4>
+                  <p id="hentai-tags-text" style="color: darkgray;">訂閱功能即將全面開放！</p>
+                </div>
+                <hr style="border-color: #323434; margin: 0; margin-top: -10px;">
+                <div class="modal-footer">
+                  <div data-dismiss="modal">返回</div>
+                  <button data-dismiss="modal" class="pull-right btn btn-primary">我知道了</button>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="video-buttons-wrapper">
+        <div class="video-buttons-wrapper desktop-inline-mobile-block">
           <div class="video-show-action-btn no-select" style="padding: 0 7px;" data-toggle="modal" data-target="#reportModal">
             <i class="material-icons" style="vertical-align: middle; margin-top: -3px">more_horiz</i>
           </div>
@@ -117,8 +117,8 @@
           <div id="video-save-form-wrapper" class="video-show-action-btn no-select" style="margin-right: 8px;">
             @if (!Auth::check())
               <div data-toggle="modal" data-target="#signUpModal" style="text-decoration: none; color: inherit; text-align: center; cursor: pointer;" class="single-icon-wrapper">
-                <div class="single-icon no-select">
-                  <i style="padding-top: 7px; font-size: 21px; color: white" class="material-icons">add_circle_outline</i>
+                <div class="single-icon no-select" style="width: 100%; padding: 0 16px; border-radius: 50px;">
+                  <i style="vertical-align: middle; margin-top: -3px; font-size: 24px; margin-right: 8px;" class="material-icons-outlined">playlist_add</i>儲存
                 </div>
               </div>
             @else
@@ -128,11 +128,11 @@
 
           <div id="video-like-form-wrapper" class="video-show-action-btn no-select" style="margin-right: 8px;">
             @if (!Auth::check())
-              <div data-toggle="modal" data-target="#signUpModal" style="text-decoration: none; color: inherit; text-align: center; cursor: pointer;" class="single-icon-wrapper">
-                <div class="single-icon no-select">
-                    <i style="color: white; padding-top: 8px; font-size: 20px" class="material-icons">favorite_border</i>
+              <button id="video-like-btn" class="single-icon-wrapper no-button-style" method="POST" data-toggle="modal" data-target="#signUpModal">
+                <div class="single-icon no-select" style="width: 100%; padding: 0 16px; border-radius: 50px;">
+                  <i style="vertical-align: middle; margin-top: -3px; font-size: 20px; margin-right: 10px;" class="material-icons{{ $liked ? '' : '-outlined'}}">thumb_up</i>{{ $video->likes_count }}
                 </div>
-              </div>
+              </button>
             @else
               @include('video.likeBtn', ['user_id' => Auth::user()->id, 'video_id' => $video->id, 'likes_count' => $video->likes_count])
             @endif
@@ -145,9 +145,9 @@
           @endif
         </div>
 
-        <br><br><br><br><br>
+        <br class="hidden-sm hidden-md hidden-lg"/><br class="hidden-sm hidden-md hidden-lg"/>
 
-        <div class="video-description-panel video-description-panel-hover no-select" style="cursor: pointer; color: white; margin-top: -35px; padding: 10px 12px; border-radius: 15px; position: relative;">
+        <div class="video-description-panel video-description-panel-hover no-select" style="cursor: pointer; color: white; padding: 10px 12px; border-radius: 15px; position: relative;">
           <div>觀看次數：{{ $video->views() }}次&nbsp;&nbsp;{{ Carbon\Carbon::parse($video->created_at)->format('Y-m-d') }}</div>
           <div style="margin-top: 5px">{{ $video->title }}</div>
           <div class="video-caption-text caption-ellipsis" style="color: #b8babc; margin-top: 5px; font-weight: normal;">{{ $video->caption }}</div>
