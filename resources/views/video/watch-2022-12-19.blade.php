@@ -202,7 +202,7 @@
                   <a class="overlay" href="{{ route('video.watch') }}?v={{ $video->id }}"></a>
                   @include('video.card-doujin-desktop')
                 </div>
-                <div style="padding: 5px 14px; {{ $loop->first ? 'margin-top: -5px' : ''}}" class="hidden-sm hidden-md hidden-lg hidden-xl related-watch-wrap multiple-link-wrapper">
+                <div style="padding: 5px 14px; {{ $loop->first ? 'margin-top: -5px;' : ''}}" class="hidden-sm hidden-md hidden-lg hidden-xl related-watch-wrap multiple-link-wrapper {{ $loop->iteration > 30 ? 'hidden-xs hidden-sm temp-hidden-related-video' : '' }}">
                   <a class="overlay" href="{{ route('video.watch') }}?v={{ $video->id }}"></a>
                   @include('video.singleShowRelated', ['source' => 'video'])
                 </div>
@@ -210,7 +210,7 @@
 
             @else
               @foreach ($related as $video)
-                <div class="col-xs-2 related-video-width {{ $loop->iteration > 30 ? 'hidden-xs hidden-sm temp-hidden-related-video' : '' }}" style="padding: 0px 3px;">
+                <div class="col-xs-2 related-video-width {{ $loop->iteration > 30 ? 'hidden-xs hidden-sm temp-hidden-related-video' : '' }}" style="padding: 0px 1px;">
 
                   <a style="text-decoration: none;" href="{{ route('video.watch') }}?v={{ $video->id }}">
                     <div class="home-rows-videos-div" style="position: relative; display: inline-block; margin-bottom:15px;">
@@ -223,7 +223,7 @@
               @endforeach
             @endif
         </div>
-        <div class="load-more-related-btn related-watch-wrap hidden-md hidden-lg" style="font-weight: 400 !important; margin-top: 0px;">更多相關影片</div>
+        <div class="load-more-related-btn related-watch-wrap hidden-md hidden-lg" style="margin-left: -2px; margin-right: -2px; font-weight: 400 !important; margin-top: 0px; {{ $doujin ? 'margin-top: 5px' : ''}}">更多相關影片</div>
       </div>
 
       <div id="comment-tabcontent" class="tabcontent" style="margin-top: 85px">
