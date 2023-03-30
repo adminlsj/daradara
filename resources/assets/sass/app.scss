@@ -464,6 +464,12 @@ th, td {
   font-weight: bold;
 }
 
+.video-buttons-wrapper {
+  display: inline-block; 
+  vertical-align: middle; 
+  float: right;
+}
+
 .plyr__captions {
   margin-bottom: -15px;
   font-size: 1.8vw !important;
@@ -2348,6 +2354,10 @@ div.sticky {
     margin-bottom: 50px;
   }
 
+  .video-details-wrapper {
+    padding: 0 10px;
+  }
+
   .search-nav-wrapper {
     white-space: nowrap;
     overflow-x: scroll;
@@ -2690,6 +2700,13 @@ div.sticky {
 @media (max-width: 767.9px) {
   body {
     background-color: black;
+  }
+
+  .video-buttons-wrapper {
+    display: block; 
+    margin-top: 13px;
+    margin-bottom: -50px;
+    float: left;
   }
 
   .footer-new {
