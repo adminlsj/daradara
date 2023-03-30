@@ -87,6 +87,10 @@ th, td {
   margin-bottom: -15px;
 }
 
+.related-doujin-videos {
+  width: calc(100% / 4 - 3px);
+}
+
 /* On mouse-over, add a grey background color */
 /* .playlist-checkbox-container:hover input ~ .playlist-checkmark {
   background-color: #ccc;
@@ -1194,8 +1198,12 @@ th, td {
   text-decoration: none;
   margin-right: 3px;
   color: #e9e9e9 !important;
-  padding: 5px 9px;
-  border: 1px solid #333333;
+  padding: 6px 10px;
+  background-color: #2E2E2E;
+}
+
+.single-video-tag a:hover {
+  background-color: #48494A !important;
 }
 
 .video-show-action-btn {
@@ -1209,6 +1217,30 @@ th, td {
   color: #e9e9e9; 
   margin-top: 2px;
   cursor: pointer;
+}
+
+.video-show-action-btn:hover {
+  background-color: #48494A;
+}
+
+.video-subscribe-btn:hover {
+  opacity: 0.9;
+}
+
+.video-description-panel {
+  background-color: #2E2E2E;
+}
+
+.video-description-panel-hover:hover {
+  background-color: #48494A;
+}
+
+.caption-ellipsis {
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+  display: -webkit-box; 
+  -webkit-line-clamp: 3; 
+  -webkit-box-orient: vertical;
 }
 
 .load-more-related-btn {
@@ -1890,7 +1922,7 @@ nav input[type=text]:focus {
 }
 
 .single-icon-wrapper .single-icon:hover {
-  background-color: dimgray;
+  background-color: #48494A;
 }
 
 .show-panel-icons .single-icon i, .show-panel-icons .single-icon div {
@@ -2232,6 +2264,10 @@ div.sticky {
     width: calc(100% / 5 - 3px);
   }
 
+  .related-doujin-videos {
+    width: calc(100% / 3 - 3px);
+  }
+
   #home-rows-wrapper .home-rows-videos-wrapper .home-rows-videos-div {
     width: calc(100% / 7);
   }
@@ -2284,6 +2320,10 @@ div.sticky {
 
   .home-doujin-videos {
     width: calc(100% / 4 - 3px);
+  }
+
+  .related-doujin-videos {
+    width: calc(100% / 2 - 3px);
   }
 
   #home-rows-wrapper .home-rows-videos-wrapper .home-rows-videos-div {

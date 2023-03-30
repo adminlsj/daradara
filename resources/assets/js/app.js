@@ -39,6 +39,15 @@ $('.load-more-related-btn').click(function() {
     $('#double-banners-adjust').css('margin-top', '-15px');
 })
 
+$('.video-description-panel').click(function() {
+    var caption = $('.video-caption-text');
+    if (caption.hasClass('caption-ellipsis')) {
+        caption.removeClass('caption-ellipsis');
+    } else {
+        caption.addClass('caption-ellipsis');
+    }
+})
+
 $('#show-more-playlists-btn').click(function() {
     $(this).css('display', 'none');
     $(".temp-hidden-playlists").removeClass('hidden');

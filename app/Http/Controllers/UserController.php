@@ -298,9 +298,10 @@ class UserController extends Controller
         $checkbox = '';
         $checkbox .= view('video.playlist-checkbox', compact('first', 'id', 'checked', 'title', 'private'));
 
-        $save_icon = 'add_circle';
+        $save_icon = 'playlist_add_check';
+        $save_text = '已儲存';
         $save_btn = '';
-        $save_btn .= view('video.saveBtn-new', compact('save_icon'));
+        $save_btn .= view('video.saveBtn-new', compact('save_icon', 'save_text'));
 
         return response()->json([
             'checkbox' => $checkbox,

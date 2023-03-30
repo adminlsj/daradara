@@ -205,6 +205,7 @@ class VideoController extends Controller
         $video_id = request('like-foreign-id');
         $is_positive = request('like-is-positive');
         $liked = request('like-status');
+        $likes_count = request('likes-count');
 
         if ($liked) {
             Like::where('user_id', $user_id)
@@ -213,6 +214,7 @@ class VideoController extends Controller
                 ->where('is_positive', $is_positive)
                 ->delete();
             $liked = false;
+            $likes_count--;
         } else {
             Like::create([
                 'user_id' => $user_id,
@@ -221,10 +223,11 @@ class VideoController extends Controller
                 'is_positive' => $is_positive,
             ]);
             $liked = true;
+            $likes_count++;
         }
 
         $html = '';
-        $html .= view('video.likeBtn', compact('user_id', 'video_id', 'liked'));
+        $html .= view('video.likeBtn', compact('user_id', 'video_id', 'liked', 'likes_count'));
 
         return response()->json([
             'likeBtn' => $html,
@@ -259,9 +262,10 @@ class VideoController extends Controller
 
         }
 
-        $save_icon = $is_checked == 'true' ? 'add_circle' : 'add_circle_outline';
+        $save_icon = $is_checked == 'true' ? 'playlist_add_check' : 'playlist_add';
+        $save_text = $is_checked == 'true' ? '已儲存' : '儲存';
         $save_btn = '';
-        $save_btn .= view('video.saveBtn-new', compact('save_icon'));
+        $save_btn .= view('video.saveBtn-new', compact('save_icon', 'save_text'));
 
         return response()->json([
             'saveBtn' => $save_btn,

@@ -64,28 +64,74 @@
         </div>
       </div>
 
-      <div class="no-select" style="display: inline-block; background-color: #F1F1F1; height: 36px; line-height: 36px; border-radius: 50px; padding: 0 16px; margin-left: 20px; vertical-align: middle;  cursor: pointer;">
+      <div class="no-select video-subscribe-btn" style="display: inline-block; background-color: #F1F1F1; height: 36px; line-height: 36px; border-radius: 50px; padding: 0 16px; margin-left: 20px; vertical-align: middle;  cursor: pointer;" data-toggle="modal" data-target="#subscribeModal">
         訂閱
       </div>
 
-      <div class="video-show-action-btn no-select" style="padding: 0 7px;">
+      <div id="subscribeModal" class="modal" role="dialog">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <span class="material-icons pull-left no-select modal-close-btn" data-dismiss="modal">close</span>
+              <h4 class="modal-title">訂閱作者</h4>
+            </div>
+            <div class="modal-body" style="padding-bottom: 20px; text-align: left;">
+              <h4>追蹤喜歡的作者</h4>
+              <p id="hentai-tags-text" style="color: darkgray;">訂閱功能即將全面開放！</p>
+            </div>
+            <hr style="border-color: #323434; margin: 0; margin-top: -10px;">
+            <div class="modal-footer">
+              <div data-dismiss="modal">返回</div>
+              <button data-dismiss="modal" class="pull-right btn btn-primary">我知道了</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="video-show-action-btn no-select" style="padding: 0 7px;" data-toggle="modal" data-target="#reportModal">
         <i class="material-icons" style="vertical-align: middle; margin-top: -3px">more_horiz</i>
       </div>
 
-      <div class="video-show-action-btn no-select" style="padding: 0 16px; margin-right: 8px;">
+      <div id="shareBtn" class="video-show-action-btn no-select" style="padding: 0 16px; margin-right: 8px;" data-toggle="modal" data-target="#shareModal">
         <i class="material-icons" style="vertical-align: middle; margin-top: -3px; font-size: 20px; margin-left: -1px; margin-right: 9px;">share</i>分享
       </div>
 
-      <div class="video-show-action-btn no-select" style="padding: 0 16px; margin-right: 8px;">
-        <i class="material-icons" style="vertical-align: middle; margin-top: -2px; font-size: 22px; margin-left: -2px; margin-right: 8px;">download</i>下載
+      @if ($qualities != null || $downloads != null)
+        <a href="{{ route('video.download') }}?v={{ $video->id }}" target="_blank" id="downloadBtn" class="single-icon-wrapper">
+          <div class="video-show-action-btn no-select" style="padding: 0 16px; margin-right: 8px;">
+            <i class="material-icons" style="vertical-align: middle; margin-top: -2px; font-size: 22px; margin-left: -2px; margin-right: 8px;">download</i>下載
+          </div>
+        </a>
+      @else
+        <a class="single-icon-wrapper" title="無法下載" disabled="true">
+          <div class="video-show-action-btn no-select" style="padding: 0 16px; margin-right: 8px; background-color: #2E2E2E !important;">
+            <i class="material-icons" style="vertical-align: middle; margin-top: -2px; font-size: 22px; margin-left: -2px; margin-right: 8px;">download</i>下載
+          </div>
+        </a>
+      @endif
+
+      <div id="video-save-form-wrapper" class="video-show-action-btn no-select" style="margin-right: 8px;">
+        @if (!Auth::check())
+          <div data-toggle="modal" data-target="#signUpModal" style="text-decoration: none; color: inherit; text-align: center; cursor: pointer;" class="single-icon-wrapper">
+            <div class="single-icon no-select">
+              <i style="padding-top: 7px; font-size: 21px; color: white" class="material-icons">add_circle_outline</i>
+            </div>
+          </div>
+        @else
+          @include('video.saveBtn-new', ['save_icon' => $saved || $listed != '[]' ? 'playlist_add_check' : 'playlist_add', 'save_text' => $saved || $listed != '[]' ? '已儲存' : '儲存'])
+        @endif
       </div>
 
-      <div class="video-show-action-btn no-select" style="padding: 0 16px; margin-right: 8px;">
-        <i class="material-icons-outlined" style="vertical-align: middle; margin-top: -3px; font-size: 24px; margin-right: 8px;">playlist_add</i>儲存
-      </div>
-
-      <div class="video-show-action-btn no-select" style="padding: 0 16px; margin-right: 8px;">
-        <i class="material-icons-outlined" style="vertical-align: middle; margin-top: -3px; font-size: 20px; margin-right: 10px;">thumb_up</i>{{ $video->likes_count }}
+      <div id="video-like-form-wrapper" class="video-show-action-btn no-select" style="margin-right: 8px;">
+        @if (!Auth::check())
+          <div data-toggle="modal" data-target="#signUpModal" style="text-decoration: none; color: inherit; text-align: center; cursor: pointer;" class="single-icon-wrapper">
+            <div class="single-icon no-select">
+                <i style="color: white; padding-top: 8px; font-size: 20px" class="material-icons">favorite_border</i>
+            </div>
+          </div>
+        @else
+          @include('video.likeBtn', ['user_id' => Auth::user()->id, 'video_id' => $video->id, 'likes_count' => $video->likes_count])
+        @endif
       </div>
 
       @if ($video->comic_id)
@@ -94,15 +140,16 @@
         </a>
       @endif
 
-      <div style="background-color: #2E2E2E; color: white; margin-top: 15px; padding: 10px 12px; border-radius: 15px;">
-        <div>{{ $video->title }}&nbsp;・&nbsp;{{ $video->views() }}次點閱&nbsp;・&nbsp;{{ Carbon\Carbon::parse($video->created_at)->format('Y-m-d') }}</div>
-        <div style="font-weight: normal; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; color: #b8babc; margin-top: 5px">{{ $video->caption }}</div>
+      <div class="video-description-panel video-description-panel-hover no-select" style="cursor: pointer; color: white; margin-top: 15px; padding: 10px 12px; border-radius: 15px; position: relative;">
+        <div>觀看次數：{{ $video->views() }}次&nbsp;&nbsp;{{ Carbon\Carbon::parse($video->created_at)->format('Y-m-d') }}</div>
+        <div style="margin-top: 5px">{{ $video->title }}</div>
+        <div class="video-caption-text caption-ellipsis" style="color: #b8babc; margin-top: 5px; font-weight: normal;">{{ $video->caption }}</div>
       </div>
 
       <div style="margin-top: 20px; margin-bottom: -20px">
         @foreach ($tags as $tag)
           @if ($tag != $video->artist)
-            <div class="single-video-tag" style="margin-bottom: 16px; font-weight: normal"><a style="background-color: #2E2E2E; border-radius: 15px;" href="/search?tags%5B%5D={{ $tag }}{{ $doujin ? '' : '&genre=裏番' }}">{{ $tag }}</a></div>
+            <div class="single-video-tag" style="margin-bottom: 16px; font-weight: normal"><a style="border-radius: 15px;" href="/search?tags%5B%5D={{ $tag }}{{ $doujin ? '' : '&genre=裏番' }}">{{ $tag }}</a></div>
           @endif
         @endforeach
 
@@ -141,31 +188,28 @@
       <div id="related-tabcontent" class="tabcontent mobile-padding" style="margin-top: 85px">
         <div class="row {{ $doujin ? 'doujin-row' : '' }}" style="margin: 0px -2px;">
             @if ($doujin)
-              @if ($is_mobile)
-                <div style="margin-top: -20px;">
-                  @foreach ($related as $video)
-                    <span style="padding: 0 15px;" class="related-video-width-horizontal {{ $loop->iteration > 30 ? 'hidden-xs hidden-sm temp-hidden-related-video' : '' }}">
-                      @include('video.card-mobile')
-                    </span>
-                  @endforeach
-                </div>
-              @else
                 @foreach ($related as $video)
-                  <span class="related-video-width-horizontal {{ $loop->iteration > 30 ? 'hidden-xs hidden-sm temp-hidden-related-video' : '' }}">
-                    @include('video.card-desktop')
-                  </span>
+                  <div class="multiple-link-wrapper related-doujin-videos hidden-xs" style="display: inline-block; padding-right: 3px; white-space: normal; margin-bottom: 20px;">
+                    <a class="overlay" href="{{ route('video.watch') }}?v={{ $video->id }}"></a>
+                    @include('video.card-doujin-desktop')
+                  </div>
+                  <div class="multiple-link-wrapper related-doujin-videos hidden-sm hidden-md hidden-lg hidden-xl" style="display: inline-block; padding-right: 4px; white-space: normal;">
+                    <a class="overlay" href="{{ route('video.watch') }}?v={{ $video->id }}"></a>
+                    @include('video.card-doujin-mobile')
+                  </div>
                 @endforeach
-              @endif
 
             @else
               @foreach ($related as $video)
-                <div class="col-xs-2 hover-opacity-all related-video-width {{ $loop->iteration > 30 ? 'hidden-xs hidden-sm temp-hidden-related-video' : '' }}" style="padding: 0px 2px;">
+                <div class="col-xs-2 related-video-width {{ $loop->iteration > 30 ? 'hidden-xs hidden-sm temp-hidden-related-video' : '' }}" style="padding: 0px 3px;">
+
                   <a style="text-decoration: none;" href="{{ route('video.watch') }}?v={{ $video->id }}">
-                    <div class="home-rows-videos-div" style="position: relative; display: inline-block; margin-bottom:15px">
-                      <img style="width: 100%" src="{{ $video->cover }}">
-                      <div class="home-rows-videos-title" style="position:absolute; bottom:0; left:0; white-space: initial; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; color: white; width: 100%; padding: 2px 3px; background: linear-gradient(to bottom, transparent 0%, black 120%);">{{ $video->title }}</div>
-                      </div>
+                    <div class="home-rows-videos-div" style="position: relative; display: inline-block; margin-bottom:15px;">
+                      <img style="width: 100%; border-radius: 3px" src="{{ $video->cover }}">
+                      <div class="home-rows-videos-title" style="position:absolute; bottom:0; left:0; white-space: initial; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; color: white; width: 100%; padding: 3px 3px; background: linear-gradient(to bottom, transparent 0%, black 120%); font-weight: normal;">{{ str_replace('[新番預告]', '', $video->title) }}</div>
+                    </div>
                   </a>
+
                 </div>
               @endforeach
             @endif
