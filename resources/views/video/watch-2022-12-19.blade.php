@@ -78,7 +78,7 @@
             </div>
           </div>
 
-          <div class="no-select video-subscribe-btn hidden-md" style="display: inline-block; background-color: #F1F1F1; height: 36px; line-height: 36px; border-radius: 50px; padding: 0 16px; margin-left: 20px; vertical-align: middle; cursor: pointer;" data-toggle="modal" data-target="#subscribeModal">
+          <div class="no-select video-subscribe-btn hidden-md" data-toggle="modal" data-target="#subscribeModal">
             訂閱
           </div>
 
