@@ -65,7 +65,7 @@
                 <a id="video-artist-name" style="color: white; text-decoration: none;" href="{{ route('home.search') }}?query={{ $artist->name }}&genre={{ $video->genre }}">
                   {{ $artist->name }}
                 </a>
-                <a class="hidden-sm hidden-md hidden-lg hidden-xl" style="font-size: 12px; color: #aaa; font-weight: normal; margin-left: 10px;" href="{{ route('home.search') }}?genre={{ $video->genre }}">
+                <a class="hidden-sm hidden-md hidden-lg hidden-xl" style="font-size: 12px; color: #aaa; font-weight: normal; margin-left: 8px;" href="{{ route('home.search') }}?genre={{ $video->genre }}">
                   {{ $video->genre }}
                 </a>
               </div>
