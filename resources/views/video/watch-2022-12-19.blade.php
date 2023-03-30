@@ -202,7 +202,7 @@
                   <a class="overlay" href="{{ route('video.watch') }}?v={{ $video->id }}"></a>
                   @include('video.card-doujin-desktop')
                 </div>
-                <div style="padding: 5px 10px;" class="hidden-sm hidden-md hidden-lg hidden-xl related-watch-wrap multiple-link-wrapper {{ $video->id == $current->id ? 'videos-scroll' : ''}}">
+                <div style="padding: 5px 14px; {{ $loop->first ? 'margin-top: -5px' : ''}}" class="hidden-sm hidden-md hidden-lg hidden-xl related-watch-wrap multiple-link-wrapper">
                   <a class="overlay" href="{{ route('video.watch') }}?v={{ $video->id }}"></a>
                   @include('video.singleShowRelated', ['source' => 'video'])
                 </div>
