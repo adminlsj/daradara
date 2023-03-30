@@ -55,7 +55,7 @@
       </div>
 
       <div class="video-details-wrapper">
-        <h3 id="shareBtn-title" style="line-height: 30px; font-weight: bold; font-size: 1.5em; margin-top: 10px; color: white;">{{ $video->translations['JP'] }}</h3>
+        <h3 id="shareBtn-title" style="line-height: 30px; font-weight: bold; margin-top: 10px; color: white;">{{ $video->translations['JP'] }}</h3>
 
         <div class="desktop-inline-mobile-block">
           <div style="display: inline-block;">

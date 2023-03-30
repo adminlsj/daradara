@@ -1279,6 +1279,10 @@ th, td {
   border-radius: 3px;
 }
 
+#shareBtn-title {
+  font-size: 1.5em;
+}
+
 .single-video-tag a:hover, div.load-more-related-btn:hover {
   background-color: #666666;
 }
@@ -2729,6 +2733,10 @@ div.sticky {
 @media (max-width: 767.9px) {
   body {
     background-color: black;
+  }
+
+  #shareBtn-title {
+    font-size: 1.4em;
   }
 
   .video-buttons-wrapper {
