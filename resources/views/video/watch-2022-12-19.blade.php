@@ -56,6 +56,7 @@
 
       <div class="video-details-wrapper">
         <h3 id="shareBtn-title" style="font-weight: bold; margin-top: 10px; color: white;">{{ $video->translations['JP'] }}</h3>
+        <div class="hidden-sm hidden-md hidden-lg hidden-xl" style="font-size: 12px; color: #aaa; font-weight: normal; margin-top: -5px; margin-bottom: 15px">觀看次數：{{ $video->views() }}次&nbsp;&nbsp;{{ Carbon\Carbon::parse($video->created_at)->format('Y-m-d') }}</div>
 
         <div class="desktop-inline-mobile-block">
           <div style="display: inline-block;">
