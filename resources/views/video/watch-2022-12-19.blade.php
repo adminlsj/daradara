@@ -197,16 +197,16 @@
       <div id="related-tabcontent" class="tabcontent mobile-padding" style="margin-top: 85px">
         <div class="row {{ $doujin ? 'doujin-row' : '' }}" style="margin: 0px -2px;">
             @if ($doujin)
-                @foreach ($related as $video)
-                  <div class="multiple-link-wrapper related-doujin-videos hidden-xs" style="display: inline-block; padding-right: 3px; white-space: normal; margin-bottom: 20px;">
-                    <a class="overlay" href="{{ route('video.watch') }}?v={{ $video->id }}"></a>
-                    @include('video.card-doujin-desktop')
-                  </div>
-                  <div style="padding: 5px 10px;" class="hidden-sm hidden-md hidden-lg hidden-xl related-watch-wrap multiple-link-wrapper {{ $video->id == $current->id ? 'videos-scroll' : ''}}">
-                    <a class="overlay" href="{{ route('video.watch') }}?v={{ $video->id }}"></a>
-                    @include('video.singleShowRelated', ['source' => 'video'])
-                  </div>
-                @endforeach
+              @foreach ($related as $video)
+                <div class="multiple-link-wrapper related-doujin-videos hidden-xs" style="display: inline-block; padding-right: 3px; white-space: normal; margin-bottom: 20px;">
+                  <a class="overlay" href="{{ route('video.watch') }}?v={{ $video->id }}"></a>
+                  @include('video.card-doujin-desktop')
+                </div>
+                <div style="padding: 5px 10px;" class="hidden-sm hidden-md hidden-lg hidden-xl related-watch-wrap multiple-link-wrapper {{ $video->id == $current->id ? 'videos-scroll' : ''}}">
+                  <a class="overlay" href="{{ route('video.watch') }}?v={{ $video->id }}"></a>
+                  @include('video.singleShowRelated', ['source' => 'video'])
+                </div>
+              @endforeach
 
             @else
               @foreach ($related as $video)
