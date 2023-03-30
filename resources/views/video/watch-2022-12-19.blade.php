@@ -124,7 +124,7 @@
           </div>
 
           @if ($qualities != null || $downloads != null)
-            <a href="{{ route('video.download') }}?v={{ $video->id }}" target="_blank" id="downloadBtn" class="single-icon-wrapper">
+            <a href="{{ route('video.download') }}?v={{ $video->id }}" target="_blank" id="downloadBtn" class="single-icon-wrapper" style="text-decoration: none;">
               <div class="video-show-action-btn no-select" style="padding: 0 16px;">
                 <i class="material-icons" style="vertical-align: middle; margin-top: -2px; font-size: 22px; margin-left: -2px; margin-right: 8px;">download</i>下載
               </div>
@@ -202,9 +202,9 @@
                     <a class="overlay" href="{{ route('video.watch') }}?v={{ $video->id }}"></a>
                     @include('video.card-doujin-desktop')
                   </div>
-                  <div class="multiple-link-wrapper related-doujin-videos hidden-sm hidden-md hidden-lg hidden-xl" style="display: inline-block; padding-right: 4px; white-space: normal;">
+                  <div style="padding: 5px 10px;" class="hidden-sm hidden-md hidden-lg hidden-xl related-watch-wrap multiple-link-wrapper {{ $video->id == $current->id ? 'videos-scroll' : ''}}">
                     <a class="overlay" href="{{ route('video.watch') }}?v={{ $video->id }}"></a>
-                    @include('video.card-doujin-mobile')
+                    @include('video.singleShowRelated', ['source' => 'video'])
                   </div>
                 @endforeach
 
