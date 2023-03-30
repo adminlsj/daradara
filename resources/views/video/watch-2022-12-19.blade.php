@@ -59,7 +59,7 @@
 
         <div class="desktop-inline-mobile-block">
           <div style="display: inline-block;">
-            <a href="{{ route('home.search') }}?query={{ $artist->name }}&genre={{ $video->genre }}"><img style="width: 40px; border-radius: 50%;" src="{{ $artist->avatar_temp }}" alt="{{ $artist->name }}"></a>
+            <a href="{{ route('home.search') }}?query={{ $artist->name }}&genre={{ $video->genre }}"><img id="video-user-avatar" src="{{ $artist->avatar_temp }}" alt="{{ $artist->name }}"></a>
             <div style="display: inline-block; vertical-align: middle; margin-left: 8px">
               <div style="font-size: 16px;"><a style="color: white; text-decoration: none;" href="{{ route('home.search') }}?query={{ $artist->name }}&genre={{ $video->genre }}">{{ $artist->name }}</a></div>
               <div style="font-size: 12px; color: #aaa; font-weight: normal"><a style="color: #aaa;" href="{{ route('home.search') }}?genre={{ $video->genre }}">{{ $video->genre }}</a></div>

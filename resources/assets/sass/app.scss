@@ -1284,6 +1284,11 @@ th, td {
   line-height: 30px;
 }
 
+#video-user-avatar {
+  width: 40px; 
+  border-radius: 50%;
+}
+
 .single-video-tag a:hover, div.load-more-related-btn:hover {
   background-color: #666666;
 }
@@ -2739,6 +2744,11 @@ div.sticky {
   #shareBtn-title {
     font-size: 1.32em;
     line-height: 24px;
+  }
+
+  #video-user-avatar {
+    width: 35px; 
+    border-radius: 50%;
   }
 
   .video-buttons-wrapper {
