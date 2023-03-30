@@ -1223,9 +1223,9 @@ th, td {
   line-height: 36px; 
   border-radius: 50px; 
   vertical-align: middle; 
-  float: right; 
   color: #e9e9e9; 
   margin-top: 2px;
+  margin-right: 5px;
   cursor: pointer;
 }
 
@@ -2708,10 +2708,14 @@ div.sticky {
   }
 
   .video-buttons-wrapper {
+    width: 100%;
     display: block; 
     margin-top: 13px;
     margin-bottom: -40px;
-    float: left;
+    position: relative; 
+    width: 100%; 
+    white-space: nowrap; 
+    overflow-x: scroll
   }
 
   .video-subscribe-btn {

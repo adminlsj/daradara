@@ -91,42 +91,15 @@
           </div>
         </div>
 
-        <div class="video-buttons-wrapper desktop-inline-mobile-block">
-          <div class="video-show-action-btn no-select" style="padding: 0 7px;" data-toggle="modal" data-target="#reportModal">
-            <i class="material-icons" style="vertical-align: middle; margin-top: -3px">more_horiz</i>
-          </div>
+        <div class="video-buttons-wrapper desktop-inline-mobile-block hide-scrollbar">
 
-          <div id="shareBtn" class="video-show-action-btn no-select hidden-md" style="padding: 0 16px; margin-right: 8px;" data-toggle="modal" data-target="#shareModal">
-            <i class="material-icons" style="vertical-align: middle; margin-top: -3px; font-size: 20px; margin-left: -1px; margin-right: 9px;">share</i>分享
-          </div>
-
-          @if ($qualities != null || $downloads != null)
-            <a href="{{ route('video.download') }}?v={{ $video->id }}" target="_blank" id="downloadBtn" class="single-icon-wrapper">
-              <div class="video-show-action-btn no-select" style="padding: 0 16px; margin-right: 8px;">
-                <i class="material-icons" style="vertical-align: middle; margin-top: -2px; font-size: 22px; margin-left: -2px; margin-right: 8px;">download</i>下載
-              </div>
-            </a>
-          @else
-            <a class="single-icon-wrapper" title="無法下載" disabled="true">
-              <div class="video-show-action-btn no-select" style="padding: 0 16px; margin-right: 8px; background-color: #2E2E2E !important;">
-                <i class="material-icons" style="vertical-align: middle; margin-top: -2px; font-size: 22px; margin-left: -2px; margin-right: 8px;">download</i>下載
-              </div>
+          @if ($video->comic_id)
+            <a class="video-show-action-btn no-select" style="color: #e9e9e9; text-decoration: none; padding: 0 16px;" href="{{ route('comic.showCover', ['comic' => $video->comic_id]) }}" target="_blank">
+                <i class="material-icons-outlined" style="vertical-align: middle; margin-top: -5px; font-size: 20px; margin-right: 10px;">import_contacts</i>漫畫原作
             </a>
           @endif
 
-          <div id="video-save-form-wrapper" class="video-show-action-btn no-select" style="margin-right: 8px;">
-            @if (!Auth::check())
-              <div data-toggle="modal" data-target="#signUpModal" style="text-decoration: none; color: inherit; text-align: center; cursor: pointer;" class="single-icon-wrapper">
-                <div class="single-icon no-select" style="width: 100%; padding: 0 16px; border-radius: 50px;">
-                  <i style="vertical-align: middle; margin-top: -3px; font-size: 24px; margin-right: 8px;" class="material-icons-outlined">playlist_add</i>儲存
-                </div>
-              </div>
-            @else
-              @include('video.saveBtn-new', ['save_icon' => $saved || $listed != '[]' ? 'playlist_add_check' : 'playlist_add', 'save_text' => $saved || $listed != '[]' ? '已儲存' : '儲存'])
-            @endif
-          </div>
-
-          <div id="video-like-form-wrapper" class="video-show-action-btn no-select" style="margin-right: 8px;">
+          <div id="video-like-form-wrapper" class="video-show-action-btn no-select">
             @if (!Auth::check())
               <button id="video-like-btn" class="single-icon-wrapper no-button-style" method="POST" data-toggle="modal" data-target="#signUpModal">
                 <div class="single-icon no-select" style="width: 100%; padding: 0 16px; border-radius: 50px;">
@@ -138,11 +111,39 @@
             @endif
           </div>
 
-          @if ($video->comic_id)
-            <a class="video-show-action-btn no-select" style="color: #e9e9e9; text-decoration: none; padding: 0 16px; margin-right: 8px;" href="{{ route('comic.showCover', ['comic' => $video->comic_id]) }}" target="_blank">
-                <i class="material-icons-outlined" style="vertical-align: middle; margin-top: -5px; font-size: 20px; margin-right: 10px;">import_contacts</i>漫畫原作
+          <div id="video-save-form-wrapper" class="video-show-action-btn no-select">
+            @if (!Auth::check())
+              <div data-toggle="modal" data-target="#signUpModal" style="text-decoration: none; color: inherit; text-align: center; cursor: pointer;" class="single-icon-wrapper">
+                <div class="single-icon no-select" style="width: 100%; padding: 0 16px; border-radius: 50px;">
+                  <i style="vertical-align: middle; margin-top: -3px; font-size: 24px; margin-right: 8px;" class="material-icons-outlined">playlist_add</i>儲存
+                </div>
+              </div>
+            @else
+              @include('video.saveBtn-new', ['save_icon' => $saved || $listed != '[]' ? 'playlist_add_check' : 'playlist_add', 'save_text' => $saved || $listed != '[]' ? '已儲存' : '儲存'])
+            @endif
+          </div>
+
+          @if ($qualities != null || $downloads != null)
+            <a href="{{ route('video.download') }}?v={{ $video->id }}" target="_blank" id="downloadBtn" class="single-icon-wrapper">
+              <div class="video-show-action-btn no-select" style="padding: 0 16px;">
+                <i class="material-icons" style="vertical-align: middle; margin-top: -2px; font-size: 22px; margin-left: -2px; margin-right: 8px;">download</i>下載
+              </div>
+            </a>
+          @else
+            <a class="single-icon-wrapper" title="無法下載" disabled="true">
+              <div class="video-show-action-btn no-select" style="padding: 0 16px; background-color: #2E2E2E !important;">
+                <i class="material-icons" style="vertical-align: middle; margin-top: -2px; font-size: 22px; margin-left: -2px; margin-right: 8px;">download</i>下載
+              </div>
             </a>
           @endif
+
+          <div id="shareBtn" class="video-show-action-btn no-select hidden-md" style="padding: 0 16px;" data-toggle="modal" data-target="#shareModal">
+            <i class="material-icons" style="vertical-align: middle; margin-top: -3px; font-size: 20px; margin-left: -1px; margin-right: 9px;">share</i>分享
+          </div>
+
+          <div class="video-show-action-btn no-select" style="padding: 0 7px;" data-toggle="modal" data-target="#reportModal">
+            <i class="material-icons" style="vertical-align: middle; margin-top: -3px">more_horiz</i>
+          </div>
         </div>
 
         <br class="hidden-sm hidden-md hidden-lg"/><br class="hidden-sm hidden-md hidden-lg"/>
