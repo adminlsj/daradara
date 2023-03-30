@@ -61,8 +61,19 @@
           <div style="display: inline-block;">
             <a href="{{ route('home.search') }}?query={{ $artist->name }}&genre={{ $video->genre }}"><img id="video-user-avatar" src="{{ $artist->avatar_temp }}" alt="{{ $artist->name }}"></a>
             <div style="display: inline-block; vertical-align: middle; margin-left: 8px">
-              <div style="font-size: 16px;"><a style="color: white; text-decoration: none;" href="{{ route('home.search') }}?query={{ $artist->name }}&genre={{ $video->genre }}">{{ $artist->name }}</a></div>
-              <div style="font-size: 12px; color: #aaa; font-weight: normal"><a style="color: #aaa;" href="{{ route('home.search') }}?genre={{ $video->genre }}">{{ $video->genre }}</a></div>
+              <div>
+                <a id="video-artist-name" style="color: white; text-decoration: none;" href="{{ route('home.search') }}?query={{ $artist->name }}&genre={{ $video->genre }}">
+                  {{ $artist->name }}
+                </a>
+                <a class="hidden-sm hidden-md hidden-lg hidden-xl" style="font-size: 12px; color: #aaa; font-weight: normal; margin-left: 10px" href="{{ route('home.search') }}?genre={{ $video->genre }}">
+                  {{ $video->genre }}
+                </a>
+              </div>
+              <div class="hidden-xs" style="font-size: 12px; color: #aaa; font-weight: normal">
+                <a style="color: #aaa;" href="{{ route('home.search') }}?genre={{ $video->genre }}">
+                  {{ $video->genre }}
+                </a>
+              </div>
             </div>
           </div>
 

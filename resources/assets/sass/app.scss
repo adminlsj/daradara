@@ -1289,6 +1289,10 @@ th, td {
   border-radius: 50%;
 }
 
+#video-artist-name {
+  font-size: 16px;
+}
+
 .single-video-tag a:hover, div.load-more-related-btn:hover {
   background-color: #666666;
 }
@@ -2747,8 +2751,12 @@ div.sticky {
   }
 
   #video-user-avatar {
-    width: 35px; 
+    width: 33px; 
     border-radius: 50%;
+  }
+
+  #video-artist-name {
+    font-size: 14px;
   }
 
   .video-buttons-wrapper {
