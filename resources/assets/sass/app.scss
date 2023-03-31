@@ -2819,7 +2819,9 @@ div.sticky {
     position: relative; 
     width: 100%; 
     white-space: nowrap; 
-    overflow-x: scroll
+    overflow-x: scroll;
+    padding-left: 10px;
+    padding-right: 5px;
   }
 
   .video-subscribe-btn {
