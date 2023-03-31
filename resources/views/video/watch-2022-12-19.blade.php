@@ -114,8 +114,8 @@
           <div id="video-like-form-wrapper" class="video-show-action-btn no-select">
             @if (!Auth::check())
               <button id="video-like-btn" class="single-icon-wrapper no-button-style" method="POST" data-toggle="modal" data-target="#signUpModal">
-                <div class="single-icon no-select" style="width: 100%; padding: 0 16px; border-radius: 50px;">
-                  <i style="vertical-align: middle; margin-top: -3px; font-size: 20px; margin-right: 10px;" class="material-icons{{ $liked ? '' : '-outlined'}}">thumb_up</i>{{ $video->likes_count }}
+                <div class="single-icon no-select">
+                  <i class="material-icons{{ $liked ? '' : '-outlined'}}">thumb_up</i>{{ $video->likes_count }}
                 </div>
               </button>
             @else
