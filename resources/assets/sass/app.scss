@@ -1230,6 +1230,10 @@ th, td {
   border-top-right-radius: 10px;
 }
 
+.related-video-margin-bottom {
+  margin-bottom: 15px;
+}
+
 .video-show-action-btn {
   display: inline-block; 
   background-color: #2E2E2E; 
@@ -2898,6 +2902,10 @@ div.sticky {
     font-size: 18px; 
     margin-left: -1px; 
     margin-right: 8px;
+  }
+
+  .related-video-margin-bottom {
+    margin-bottom: 7px;
   }
 
   .desktop-inline-mobile-block {
