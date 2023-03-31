@@ -153,7 +153,11 @@
             <i id="video-share-btn" class="material-icons">share</i>分享
           </div>
 
-          <div class="video-show-action-btn no-select" style="padding: 0 7px;" data-toggle="modal" data-target="#reportModal">
+          <div class="video-show-action-btn no-select single-icon-outlier hidden-sm hidden-md hidden-lg hidden-xl" data-toggle="modal" data-target="#reportModal">
+            <i id="video-report-btn" class="material-icons-outlined">flag</i>報錯
+          </div>
+
+          <div class="video-show-action-btn no-select hidden-xs" style="padding: 0 7px;" data-toggle="modal" data-target="#reportModal">
             <i class="material-icons" style="vertical-align: middle; margin-top: -3px">more_horiz</i>
           </div>
         </div>
