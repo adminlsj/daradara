@@ -211,7 +211,7 @@
 
       <!-- Tab content -->
       <div id="related-tabcontent" class="tabcontent mobile-padding" style="margin-top: 85px">
-        <div class="row {{ $doujin ? 'doujin-row' : '' }}" style="margin: 0px -2px;">
+        <div class="row {{ $doujin ? 'doujin-row' : '' }}" style="margin: {{ $doujin ? '0px -2px;' : '0px -5px;' }}">
             @if ($doujin)
               @foreach ($related as $video)
                 <div class="multiple-link-wrapper related-doujin-videos hidden-xs" style="display: inline-block; padding-right: 3px; white-space: normal; margin-bottom: 20px;">
@@ -226,7 +226,7 @@
 
             @else
               @foreach ($related as $video)
-                <div class="col-xs-2 related-video-width {{ $loop->iteration > 30 ? 'hidden-xs hidden-sm temp-hidden-related-video' : '' }}" style="padding: 0px 1px;">
+                <div class="col-xs-2 related-video-width {{ $loop->iteration > 30 ? 'hidden-xs hidden-sm temp-hidden-related-video' : '' }}" style="padding: 0px 4px;">
 
                   <a style="text-decoration: none;" href="{{ route('video.watch') }}?v={{ $video->id }}">
                     <div class="home-rows-videos-div" style="position: relative; display: inline-block; margin-bottom:15px;">
