@@ -32,31 +32,31 @@ class HomeController extends Controller
 
         $random = $最新裏番->random();
 
-        $最新上市 = Video::with('user:id,name')->where('genre', '!=', '新番預告')->orderBy('created_at', 'desc')->select('id', 'user_id', 'title', 'imgur', 'views', 'duration')->limit($dCount)->get();
+        $最新上市 = Video::with('user:id,name')->where('genre', '!=', '新番預告')->orderBy('created_at', 'desc')->select('id', 'user_id', 'title', 'cover', 'imgur', 'views', 'duration')->limit($dCount)->get();
 
-        $最新上傳 = Video::with('user:id,name')->where('genre', '!=', '新番預告')->orderBy('uploaded_at', 'desc')->select('id', 'user_id', 'title', 'imgur', 'views', 'duration')->limit($dCount)->get();
+        $最新上傳 = Video::with('user:id,name')->where('genre', '!=', '新番預告')->orderBy('uploaded_at', 'desc')->select('id', 'user_id', 'title', 'cover', 'imgur', 'views', 'duration')->limit($dCount)->get();
 
-        $中文字幕 = Video::with('user:id,name')->where('tags_array', 'like', '%中文字幕%')->where('genre', '!=', '裏番')->where('genre', '!=', '泡麵番')->orderBy('uploaded_at', 'desc')->select('id', 'user_id', 'title', 'imgur', 'views', 'duration')->limit($dCount)->get();
+        $中文字幕 = Video::with('user:id,name')->where('tags_array', 'like', '%中文字幕%')->where('genre', '!=', '裏番')->where('genre', '!=', '泡麵番')->orderBy('uploaded_at', 'desc')->select('id', 'user_id', 'title', 'cover', 'imgur', 'views', 'duration')->limit($dCount)->get();
 
-        $他們在看 = Video::with('user:id,name')->orderBy('updated_at', 'desc')->select('id', 'user_id', 'title', 'imgur', 'views', 'duration')->limit($dCount)->get();
+        $他們在看 = Video::with('user:id,name')->orderBy('updated_at', 'desc')->select('id', 'user_id', 'title', 'cover', 'imgur', 'views', 'duration')->limit($dCount)->get();
 
         $泡麵番 = Video::where('genre', '泡麵番')->where('foreign_sd', 'like', '%"bangumi"%')->orderBy('uploaded_at', 'desc')->select('id', 'title', 'cover')->limit($hCount)->get();
 
-        $Motion_Anime = Video::with('user:id,name')->where('genre', 'Motion Anime')->orderBy('uploaded_at', 'desc')->select('id', 'user_id', 'title', 'imgur', 'views', 'duration')->limit($dCount)->get();
+        $Motion_Anime = Video::with('user:id,name')->where('genre', 'Motion Anime')->orderBy('uploaded_at', 'desc')->select('id', 'user_id', 'title', 'cover', 'imgur', 'views', 'duration')->limit($dCount)->get();
 
-        $SD動畫 = Video::with('user:id,name')->where('genre', '3D動畫')->orderBy('uploaded_at', 'desc')->select('id', 'user_id', 'title', 'imgur', 'views', 'duration')->limit($dCount)->get();
+        $SD動畫 = Video::with('user:id,name')->where('genre', '3D動畫')->orderBy('uploaded_at', 'desc')->select('id', 'user_id', 'title', 'cover', 'imgur', 'views', 'duration')->limit($dCount)->get();
 
-        $同人作品 = Video::with('user:id,name')->where('genre', '同人作品')->orderBy('uploaded_at', 'desc')->select('id', 'user_id', 'title', 'imgur', 'views', 'duration')->limit($dCount)->get();
+        $同人作品 = Video::with('user:id,name')->where('genre', '同人作品')->orderBy('uploaded_at', 'desc')->select('id', 'user_id', 'title', 'cover', 'imgur', 'views', 'duration')->limit($dCount)->get();
 
-        $Cosplay = Video::with('user:id,name')->where('genre', 'Cosplay')->orderBy('uploaded_at', 'desc')->select('id', 'user_id', 'title', 'imgur', 'views', 'duration')->limit($dCount)->get();
+        $Cosplay = Video::with('user:id,name')->where('genre', 'Cosplay')->orderBy('uploaded_at', 'desc')->select('id', 'user_id', 'title', 'cover', 'imgur', 'views', 'duration')->limit($dCount)->get();
 
         $新番預告 = Video::with('user:id,name')->where('genre', '新番預告')->orderBy('created_at', 'desc')->select('id', 'title', 'cover')->limit($hCount)->get();
 
         $新加入作者 = User::has('videos')->select('id', 'name', 'created_at', 'updated_at', 'avatar_temp')->withCount('videos')->orderBy('created_at', 'desc')->limit($hCount)->get();
 
-        $本日排行 = Video::with('user:id,name')->orderBy('current_views', 'desc')->select('id', 'user_id', 'title', 'imgur', 'views', 'duration')->limit($dCount)->get();
+        $本日排行 = Video::with('user:id,name')->orderBy('current_views', 'desc')->select('id', 'user_id', 'title', 'cover', 'imgur', 'views', 'duration')->limit($dCount)->get();
 
-        $本月排行 = Video::with('user:id,name')->orderBy('month_views', 'desc')->select('id', 'user_id', 'title', 'imgur', 'views', 'duration')->limit($dCount)->get();
+        $本月排行 = Video::with('user:id,name')->orderBy('month_views', 'desc')->select('id', 'user_id', 'title', 'cover', 'imgur', 'views', 'duration')->limit($dCount)->get();
        
         $影片標籤 = [
             [

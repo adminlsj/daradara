@@ -1,6 +1,6 @@
 <div class="card-mobile-panel inner">
 	<div style="position: relative;">
-		<img style="width: 100%;" src="https://i.imgur.com/1JyJ58n.jpg">
+		<img style="width: 100%;" src="https://i.imgur.com/EDu21nk.jpg">
 		<img style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 3px" src="{{ $artist->avatar_temp }}">
     </div>
 

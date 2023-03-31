@@ -42,7 +42,7 @@
 				<img style="width: 15px; margin-top: -3px; margin-left: 12px" src="https://i.imgur.com/qGFVxZb.png">
 			@else
 				<span class="search-type-input">搜尋作者</span>
-				<img style="width: 15px; margin-top: -3px; margin-left: 12px" src="https://i.imgur.com/osVi2GM.png">
+				<img style="width: 15px; margin-top: -3px; margin-left: 12px" src="https://i.imgur.com/FQhHfF2.png">
 			@endif
 		</button>
 	</div>
@@ -54,7 +54,7 @@
 				<img style="width: 15px; margin-top: -3px; margin-left: 12px" src="https://i.imgur.com/qGFVxZb.png">
 			@else
 				<span class="search-type-input">搜尋作者</span>
-				<img style="width: 15px; margin-top: -3px; margin-left: 12px" src="https://i.imgur.com/osVi2GM.png">
+				<img style="width: 15px; margin-top: -3px; margin-left: 12px" src="https://i.imgur.com/FQhHfF2.png">
 			@endif
 		</button>
 	</div>

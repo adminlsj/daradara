@@ -84,12 +84,12 @@ class User extends Authenticatable
 
     public function avatarDefault()
     {
-        return "https://i.imgur.com/KqDtqhMb.jpg";
+        return "https://i.imgur.com/JaBN4ZNb.jpg";
     }
 
     public function avatarCircleB()
     {
-        return "https://i.imgur.com/sMSpYFXb.jpg";
+        return "https://i.imgur.com/kPtd8Lpb.jpg";
     }
 
     /**

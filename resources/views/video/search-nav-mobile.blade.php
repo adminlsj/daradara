@@ -26,7 +26,7 @@
 			<img style="width: 12px; margin-top: -3px; margin-left: 1px" src="https://i.imgur.com/qGFVxZb.png">
 		@else
 			<span class="search-type-input">搜尋作者</span>
-			<img style="width: 11px; margin-top: -3px; margin-left: 2px" src="https://i.imgur.com/osVi2GM.png">
+			<img style="width: 11px; margin-top: -3px; margin-left: 2px" src="https://i.imgur.com/FQhHfF2.png">
 		@endif
 	</div>
 </div>

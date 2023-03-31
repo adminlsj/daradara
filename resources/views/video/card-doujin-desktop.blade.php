@@ -1,6 +1,6 @@
 <div class="card-mobile-panel inner">
 	<div style="position: relative;">
-		<img style="width: 100%;" src="https://i.imgur.com/D1l0JoC.jpg">
+		<img style="width: 100%;" src="https://i.imgur.com/VrTRZpk.jpg">
 		<img style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 3px" src="{{ $video->thumbL() }}">
     </div>
 
