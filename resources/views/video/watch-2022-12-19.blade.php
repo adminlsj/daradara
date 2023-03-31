@@ -59,7 +59,7 @@
 
       <div class="video-details-wrapper desktop-inline-mobile-block">
         <div style="display: inline-block;">
-          <a href="{{ route('home.search') }}?query={{ $artist->name }}&genre={{ $video->genre }}"><img style="background-color: #2E2E2E" id="video-user-avatar" src="{{ $artist->avatar_temp }}" alt="{{ $artist->name }}"></a>
+          <a href="{{ route('home.search') }}?query={{ $artist->name }}&genre={{ $video->genre }}"><img id="video-user-avatar" src="{{ $artist->avatar_temp }}" alt="{{ $artist->name }}"></a>
           <div style="display: inline-block; vertical-align: middle; margin-left: 8px">
             <div>
               <a id="video-artist-name" style="color: white; text-decoration: none;" href="{{ route('home.search') }}?query={{ $artist->name }}&genre={{ $video->genre }}">
