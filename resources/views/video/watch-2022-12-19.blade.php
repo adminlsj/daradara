@@ -165,9 +165,9 @@
 
       <div class="video-details-wrapper">
         <div class="video-description-panel video-description-panel-hover no-select" style="cursor: pointer; color: white; padding: 10px 12px; border-radius: 15px; position: relative;">
-          <div>觀看次數：{{ $video->views() }}次&nbsp;&nbsp;{{ Carbon\Carbon::parse($video->created_at)->format('Y-m-d') }}</div>
-          <div style="margin-top: 5px">{{ $video->title }}</div>
-          <div class="video-caption-text caption-ellipsis" style="color: #b8babc; margin-top: 5px; font-weight: normal;">{{ $video->caption }}</div>
+          <div class="hidden-xs" style="margin-bottom: 5px">觀看次數：{{ $video->views() }}次&nbsp;&nbsp;{{ Carbon\Carbon::parse($video->created_at)->format('Y-m-d') }}</div>
+          <div style="margin-bottom: 5px">{{ $video->title }}</div>
+          <div class="video-caption-text caption-ellipsis" style="color: #b8babc; font-weight: normal;">{{ $video->caption }}</div>
         </div>
       </div>
 
