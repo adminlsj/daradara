@@ -2838,8 +2838,12 @@ div.sticky {
     background-color: #242424;
   }
 
-  .video-show-action-btn:hover, .video-description-panel-hover:hover, .video-show-action-btn .single-icon:hover {
-    background-color: #3b3c3d;
+  .single-video-tag a {
+    background-color: #242424;
+  }
+
+  .video-show-action-btn:hover, .video-description-panel-hover:hover, .video-show-action-btn .single-icon:hover, .single-video-tag a:hover {
+    background-color: #3b3c3d !important;
   }
 
   .video-show-action-btn {
