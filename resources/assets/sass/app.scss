@@ -1330,9 +1330,13 @@ th, td {
   cursor: pointer;
   box-shadow: none !important;
   margin-bottom: 7px;
-  color: #bdbdbd;
-  border: 1px solid #7e7e7e;
+  color: #e5e5e5;
   border-radius: 3px;
+  background-color: #242424;
+}
+
+.load-more-related-btn:hover {
+  background-color: #3b3c3d;
 }
 
 #shareBtn-title {
@@ -1349,7 +1353,7 @@ th, td {
   font-size: 16px;
 }
 
-.single-video-tag a:hover, div.load-more-related-btn:hover {
+.single-video-tag a:hover {
   background-color: #666666;
 }
 
