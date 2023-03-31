@@ -1316,6 +1316,13 @@ th, td {
   margin-right: 9px;
 }
 
+.single-icon-outlier #video-comic-btn {
+  vertical-align: middle; 
+  margin-top: -5px; 
+  font-size: 20px; 
+  margin-right: 10px;
+}
+
 .caption-ellipsis {
   overflow: hidden; 
   text-overflow: ellipsis; 
@@ -2907,6 +2914,12 @@ div.sticky {
     font-size: 18px; 
     margin-left: -1px; 
     margin-right: 8px;
+  }
+
+  .single-icon-outlier #video-comic-btn {
+    margin-top: -4px; 
+    font-size: 18px; 
+    margin-right: 10px;
   }
 
   .related-video-margin-bottom {

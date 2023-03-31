@@ -105,8 +105,8 @@
       <div class="video-buttons-wrapper desktop-inline-mobile-block hide-scrollbar" style="overflow-y: hidden;">
 
         @if ($video->comic_id)
-          <a class="video-show-action-btn no-select" style="color: #e9e9e9; text-decoration: none; padding: 0 16px;" href="{{ route('comic.showCover', ['comic' => $video->comic_id]) }}" target="_blank">
-              <i class="material-icons-outlined" style="vertical-align: middle; margin-top: -5px; font-size: 20px; margin-right: 10px;">import_contacts</i>漫畫原作
+          <a class="video-show-action-btn single-icon-outlier no-select" style="color: #e9e9e9; text-decoration: none;" href="{{ route('comic.showCover', ['comic' => $video->comic_id]) }}" target="_blank">
+              <i id="video-comic-btn" class="material-icons-outlined">import_contacts</i>漫畫原作
           </a>
         @endif
 
