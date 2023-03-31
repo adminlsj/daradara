@@ -41,12 +41,11 @@ $('.load-more-related-btn').click(function() {
 
 $('.video-description-panel').click(function() {
     var caption = $('.video-caption-text');
+    var wrapper = $('.video-description-panel');
     if (caption.hasClass('caption-ellipsis')) {
         caption.removeClass('caption-ellipsis');
-        caption.blur();
     } else {
         caption.addClass('caption-ellipsis');
-        caption.blur();
     }
 })
 
