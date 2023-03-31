@@ -346,9 +346,9 @@ class HomeController extends Controller
             } else {
                 $results = $results->with('user:id,name,avatar_temp')->distinct()->paginate(60);
             }
-
-            $results->setPath('');
         }
+
+        $results->setPath('');
 
         return view('layouts.search-new', compact('type', 'genre', 'tags', 'sort', 'brands', 'year', 'month', 'duration', 'results', 'doujin', 'is_mobile'));
     }
