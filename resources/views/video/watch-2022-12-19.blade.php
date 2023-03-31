@@ -137,14 +137,14 @@
 
           @if ($qualities != null || $downloads != null)
             <a href="{{ route('video.download') }}?v={{ $video->id }}" target="_blank" id="downloadBtn" class="single-icon-wrapper" style="text-decoration: none;">
-              <div class="video-show-action-btn no-select" style="padding: 0 16px;">
-                <i class="material-icons" style="vertical-align: middle; margin-top: -2px; font-size: 22px; margin-left: -2px; margin-right: 8px;">download</i>下載
+              <div class="video-show-action-btn no-select single-icon-outlier">
+                <i id="video-download-btn" class="material-icons">download</i>下載
               </div>
             </a>
           @else
             <a class="single-icon-wrapper" title="無法下載" disabled="true">
-              <div class="video-show-action-btn no-select" style="padding: 0 16px; background-color: #2E2E2E !important;">
-                <i class="material-icons" style="vertical-align: middle; margin-top: -2px; font-size: 22px; margin-left: -2px; margin-right: 8px;">download</i>下載
+              <div class="video-show-action-btn no-select single-icon-outlier">
+                <i id="video-download-btn" class="material-icons">download</i>下載
               </div>
             </a>
           @endif

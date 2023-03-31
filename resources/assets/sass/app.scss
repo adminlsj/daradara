@@ -1278,6 +1278,10 @@ th, td {
   border-radius: 50px !important;
 }
 
+.single-icon-outlier {
+  padding: 0 16px;
+}
+
 .video-show-action-btn #video-like-btn i {
   vertical-align: middle; 
   margin-top: -3px; 
@@ -1289,6 +1293,14 @@ th, td {
   vertical-align: middle; 
   margin-top: -3px; 
   font-size: 24px; 
+  margin-right: 8px;
+}
+
+.single-icon-outlier #video-download-btn {
+  vertical-align: middle; 
+  margin-top: -2px; 
+  font-size: 22px; 
+  margin-left: -2px; 
   margin-right: 8px;
 }
 
@@ -2824,6 +2836,11 @@ div.sticky {
     margin-right: 5px;
   }
 
+  .single-icon-outlier {
+    padding: 0 15px;
+    font-size: 13px;
+  }
+
   .video-show-action-btn .single-icon {
     padding: 0 15px !important; 
     border-radius: 50px !important;
@@ -2838,6 +2855,13 @@ div.sticky {
   .video-show-action-btn #video-save-btn i {
     margin-top: -3px; 
     font-size: 22px; 
+  }
+
+  .single-icon-outlier #video-download-btn {
+    margin-top: -1px; 
+    font-size: 19px; 
+    margin-left: -2px; 
+    margin-right: 8px;
   }
 
   .desktop-inline-mobile-block {
