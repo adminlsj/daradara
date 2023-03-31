@@ -2438,6 +2438,7 @@ div.sticky {
 
   #video-playlist-wrapper {
     border-radius: 0;
+    background-color: transparent;
   }
 
   .video-playlist-top {
@@ -2843,7 +2844,7 @@ div.sticky {
     background-color: #242424;
   }
 
-  .video-show-action-btn:hover, .video-description-panel-hover:hover, .video-show-action-btn .single-icon:hover, .single-video-tag a:hover {
+  .video-show-action-btn:hover, .video-description-panel-hover:hover, .video-show-action-btn .single-icon:hover, .single-video-tag a:hover, .hover-video-playlist > div:hover {
     background-color: #3b3c3d !important;
   }
 
