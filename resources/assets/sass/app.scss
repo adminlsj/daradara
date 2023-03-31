@@ -1304,6 +1304,14 @@ th, td {
   margin-right: 8px;
 }
 
+.single-icon-outlier #video-share-btn {
+  vertical-align: middle; 
+  margin-top: -3px; 
+  font-size: 20px; 
+  margin-left: -1px; 
+  margin-right: 9px;
+}
+
 .caption-ellipsis {
   overflow: hidden; 
   text-overflow: ellipsis; 
@@ -2860,7 +2868,13 @@ div.sticky {
   .single-icon-outlier #video-download-btn {
     margin-top: -1px; 
     font-size: 19px; 
-    margin-right: 7px;
+  }
+
+  .single-icon-outlier #video-share-btn {
+    margin-top: -3px; 
+    font-size: 17px; 
+    margin-left: -2px; 
+    margin-right: 9px;
   }
 
   .desktop-inline-mobile-block {

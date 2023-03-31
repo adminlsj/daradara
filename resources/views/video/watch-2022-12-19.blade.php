@@ -149,8 +149,8 @@
             </a>
           @endif
 
-          <div id="shareBtn" class="video-show-action-btn no-select hidden-md" style="padding: 0 16px;" data-toggle="modal" data-target="#shareModal">
-            <i class="material-icons" style="vertical-align: middle; margin-top: -3px; font-size: 20px; margin-left: -1px; margin-right: 9px;">share</i>分享
+          <div id="shareBtn" class="video-show-action-btn no-select hidden-md single-icon-outlier" data-toggle="modal" data-target="#shareModal">
+            <i id="video-share-btn" class="material-icons">share</i>分享
           </div>
 
           <div class="video-show-action-btn no-select" style="padding: 0 7px;" data-toggle="modal" data-target="#reportModal">
