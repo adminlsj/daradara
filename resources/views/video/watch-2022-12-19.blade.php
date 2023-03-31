@@ -125,8 +125,8 @@
 
           <div id="video-save-form-wrapper" class="video-show-action-btn no-select">
             @if (!Auth::check())
-              <div data-toggle="modal" data-target="#signUpModal" style="text-decoration: none; color: inherit; text-align: center; cursor: pointer;" class="single-icon-wrapper">
-                <div class="single-icon no-select" style="width: 100%; padding: 0 16px; border-radius: 50px;">
+              <div id="video-save-btn" data-toggle="modal" data-target="#signUpModal" style="text-decoration: none; color: inherit; text-align: center; cursor: pointer;" class="single-icon-wrapper">
+                <div class="single-icon no-select">
                   <i style="vertical-align: middle; margin-top: -3px; font-size: 24px; margin-right: 8px;" class="material-icons-outlined">playlist_add</i>儲存
                 </div>
               </div>
