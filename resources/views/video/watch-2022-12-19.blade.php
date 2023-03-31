@@ -239,7 +239,7 @@
               @endforeach
             @endif
         </div>
-        <div class="load-more-related-btn related-watch-wrap hidden-md hidden-lg" style="margin-left: -2px; margin-right: -2px; font-weight: 400 !important; margin-top: 0px; {{ $doujin ? 'margin-top: 5px' : ''}}">更多相關影片</div>
+        <div class="load-more-related-btn related-watch-wrap hidden-md hidden-lg" style="margin-left: -2px; margin-right: -2px; margin-top: 0px; {{ $doujin ? 'margin-top: 5px' : ''}}">更多相關影片</div>
       </div>
 
       <div id="comment-tabcontent" class="tabcontent" style="margin-top: 85px">
