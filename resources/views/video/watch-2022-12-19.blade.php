@@ -12,7 +12,7 @@
 @section('content')
 <div id="content-div">
   <div class="row no-gutter video-show-width">
-    <div id="player-div-wrapper" class="col-md-9 single-show-player fluid-player-desktop-styles" style="background-color: #141414; position: relative; overflow-y: hidden;">
+    <div id="player-div-wrapper" class="col-md-9 single-show-player fluid-player-desktop-styles" style="background-color: #141414; position: relative; overflow-y: hidden; overflow-x: hidden;">
 
       @if ($current->sd_sc)
         <div id="player-lang-wrapper" style="position: absolute; top: 10px; left: 10px; z-index: 1;" class="dropdown">
@@ -103,7 +103,7 @@
           </div>
         </div>
 
-        <div class="video-buttons-wrapper desktop-inline-mobile-block hide-scrollbar">
+        <div class="video-buttons-wrapper desktop-inline-mobile-block hide-scrollbar" style="overflow-y: hidden;">
 
           @if ($video->comic_id)
             <a class="video-show-action-btn no-select" style="color: #e9e9e9; text-decoration: none; padding: 0 16px;" href="{{ route('comic.showCover', ['comic' => $video->comic_id]) }}" target="_blank">
