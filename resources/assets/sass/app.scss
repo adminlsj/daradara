@@ -2830,7 +2830,13 @@ div.sticky {
   }
 
   #video-artist-name {
-    font-size: 14px;
+    font-size: 14px; 
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 150px;
+    display: inline-block;
+    vertical-align: middle;
   }
 
   .video-buttons-wrapper {
