@@ -2838,11 +2838,7 @@ div.sticky {
     background-color: #242424;
   }
 
-  .video-description-panel-hover:hover {
-    background-color: #2f3030;
-  }
-
-  .video-show-action-btn:hover {
+  .video-show-action-btn:hover, .video-description-panel-hover:hover, .video-show-action-btn .single-icon:hover {
     background-color: #3b3c3d;
   }
 
@@ -2865,10 +2861,6 @@ div.sticky {
     border-radius: 50px !important;
     font-size: 13px !important;
     height: 33px !important;
-  }
-
-  .video-show-action-btn .single-icon:hover {
-    background-color: #3b3c3d !important;
   }
 
   .video-show-action-btn #video-like-btn i {
