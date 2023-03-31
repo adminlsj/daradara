@@ -171,7 +171,7 @@
         </div>
       </div>
 
-      <div class="video-details-wrapper" style="margin-top: 20px; margin-bottom: -20px">
+      <div class="video-details-wrapper video-tags-wrapper" style="margin-bottom: -20px">
         @foreach ($tags as $tag)
           @if ($tag != $video->artist)
             <div class="single-video-tag" style="margin-bottom: 18px; font-weight: normal"><a style="border-radius: 15px;" href="/search?tags%5B%5D={{ $tag }}{{ $doujin ? '' : '&genre=裏番' }}">{{ $tag }}</a></div>
