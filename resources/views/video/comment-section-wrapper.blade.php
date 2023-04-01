@@ -15,7 +15,7 @@
 	  
 	@else
 	  <div data-toggle="modal" data-target="#signUpModal" style="margin-top: 0px; margin-bottom: 25px;">
-	    <img class="img-circle" style="width: 40px; height: auto; float:left;" src="https://i.imgur.com/KqDtqhMb.jpg">
+	    <img class="img-circle" style="width: 40px; height: auto; float:left;" src="https://i.imgur.com/JaBN4ZNb.jpg">
 	    <input disabled style="margin-left: 15px; width: calc(100% - 55px); line-height: 30px; background-color: inherit; border: none; outline: none; font-weight: 400; padding-left: 0px" type="text" id="comment-signup-modal" placeholder="新增一則公開評論...">
 	  </div>
 	@endif
