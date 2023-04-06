@@ -1,7 +1,7 @@
 <div class="hover-lighter card-mobile-panel" style="margin-bottom: 15px; border-radius: 5px;">
 	<a href="{{ route('video.watch') }}?v={{ $video->id }}" style="text-decoration: none;">
 		<div style="position: relative;">
-			<img style="width: 100%;" src="https://i.imgur.com/D1l0JoC.jpg">
+			<img style="width: 100%;" src="https://cdn.jsdelivr.net/gh/jokogebai/jokogebai@v1.0.0/card_doujin_background.jpg">
 			<img style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 3px" src="{{ $video->thumbL() }}">
 	    </div>
 	</a>

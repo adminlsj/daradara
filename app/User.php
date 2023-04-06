@@ -84,7 +84,7 @@ class User extends Authenticatable
 
     public function avatarDefault()
     {
-        return "https://i.imgur.com/JaBN4ZNb.jpg";
+        return "https://cdn.jsdelivr.net/gh/jokogebai/jokogebai@v1.0.0/user_default.jpg";
     }
 
     public function avatarCircleB()

@@ -1,6 +1,6 @@
 <div class="card-mobile-panel inner">
 	<div style="position: relative;">
-		<img style="width: 100%;" src="https://i.imgur.com/VrTRZpk.jpg">
+		<img style="width: 100%;" src="https://cdn.jsdelivr.net/gh/jokogebai/jokogebai@v1.0.0/card_doujin_background.jpg">
 		<img style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 3px" src="{{ $video->thumbL() }}">
 
 		<div style="position: absolute; right: -1px; bottom: -3px;">
