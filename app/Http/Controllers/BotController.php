@@ -155,7 +155,7 @@ class BotController extends Controller
             Storage::disk('local')->put("video/".basename($ts), file_get_contents($ts, false, $context));
         } */
 
-        $tc = Storage::disk('local')->files('video/tc');
+        /* $tc = Storage::disk('local')->files('video/tc');
         foreach ($tc as $video) {
             $extension = explode('.', $video)[1];
             if ($extension == 'ts') {
@@ -173,7 +173,7 @@ class BotController extends Controller
                 $folder = $number % 3;
                 Storage::disk('local')->move($video, "video/sc/{$folder}/p_{$number}.html");
             }
-        }
+        } */
 
         /* $videos = Video::where('foreign_sd', 'like', '%"youjizz"%')->get();
         foreach ($videos as $video) {
@@ -240,13 +240,13 @@ class BotController extends Controller
 
 
         // update cover
-        /* $videos = Video::where('cover', 'not like', '%cdn.jsdelivr.net%')->orderBy('id', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
+        $videos = Video::where('cover', 'not like', '%cdn.jsdelivr.net%')->orderBy('id', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
         foreach ($videos as $video) {
             $cover = str_replace('.png', '.jpg', $video->cover);
             $imgur = Helper::get_string_between($cover, 'https://i.imgur.com/', '.jpg');
-            $video->cover = 'https://cdn.jsdelivr.net/gh/toutoubumi1/toutoubumi1@v1.0.0/asset/cover/'.$imgur.'.jpg';
+            $video->cover = 'https://cdn.jsdelivr.net/gh/jokogebai/jokogebai@v1.0.0/asset/cover/'.$imgur.'.jpg';
             $video->save();
-        } */
+        }
 
         //---------------------------------------------------------------------------------------------------------
 
