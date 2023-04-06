@@ -39,10 +39,10 @@
 		<button style="outline:0; color:white; padding: 5px 11px 5px 12px; background-color: rgba(0,0,0,.1); margin-top: -15px;" class="btn btn-secondary dropdown-toggle search-nav-desktop search-type-button" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 			@if ($type == 'artist')
 				<span class="search-type-input">搜尋影片</span>
-				<img style="width: 15px; margin-top: -3px; margin-left: 12px" src="https://i.imgur.com/SUdMEXp.png">
+				<img style="width: 15px; margin-top: -3px; margin-left: 12px" src="https://cdn.jsdelivr.net/gh/jokogebai/jokogebai@v1.0.0/search_video_icon.jpg">
 			@else
 				<span class="search-type-input">搜尋作者</span>
-				<img style="width: 15px; margin-top: -3px; margin-left: 12px" src="https://i.imgur.com/FQhHfF2.png">
+				<img style="width: 15px; margin-top: -3px; margin-left: 12px" src="https://cdn.jsdelivr.net/gh/jokogebai/jokogebai@v1.0.0/search_artist_icon.jpg">
 			@endif
 		</button>
 	</div>
@@ -51,10 +51,10 @@
 		<button style="outline:0; color:white; padding: 5px 11px 6px 12px; background-color: rgba(0,0,0,.1);" class="btn btn-secondary dropdown-toggle search-nav-desktop search-type-button" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 			@if ($type == 'artist')
 				<span class="search-type-input">搜尋影片</span>
-				<img style="width: 15px; margin-top: -3px; margin-left: 12px" src="https://i.imgur.com/SUdMEXp.png">
+				<img style="width: 15px; margin-top: -3px; margin-left: 12px" src="https://cdn.jsdelivr.net/gh/jokogebai/jokogebai@v1.0.0/search_video_icon.jpg">
 			@else
 				<span class="search-type-input">搜尋作者</span>
-				<img style="width: 15px; margin-top: -3px; margin-left: 12px" src="https://i.imgur.com/FQhHfF2.png">
+				<img style="width: 15px; margin-top: -3px; margin-left: 12px" src="https://cdn.jsdelivr.net/gh/jokogebai/jokogebai@v1.0.0/search_artist_icon.jpg">
 			@endif
 		</button>
 	</div>

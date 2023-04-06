@@ -1,7 +1,7 @@
 <div class="card-mobile-panel inner">
 	<div style="width: 84px; display: inline-block;">
 		<div style="position: relative; display: inline-block;">
-			<img style="width: 100%; height: 100%; border-radius: 5px;" src="https://i.imgur.com/wCSgaov.png">
+			<img style="width: 100%; height: 100%; border-radius: 5px;" src="https://cdn.jsdelivr.net/gh/jokogebai/jokogebai@v1.0.0/card_artist_background.jpg">
 			<img style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 5px" src="{{ $artist->avatar_temp }}">
 	    </div>
 	</div>

@@ -23,10 +23,10 @@
 	<div style="color: #e5e5e5; display: inline-block; font-size: 14px; font-weight: bold; cursor: pointer;" class="search-type-button">
 		@if ($type == 'artist')
 			<span class="search-type-input">搜尋影片</span>
-			<img style="width: 12px; margin-top: -3px; margin-left: 1px" src="https://i.imgur.com/SUdMEXp.png">
+			<img style="width: 12px; margin-top: -3px; margin-left: 1px" src="https://cdn.jsdelivr.net/gh/jokogebai/jokogebai@v1.0.0/search_video_icon.jpg">
 		@else
 			<span class="search-type-input">搜尋作者</span>
-			<img style="width: 11px; margin-top: -3px; margin-left: 2px" src="https://i.imgur.com/FQhHfF2.png">
+			<img style="width: 11px; margin-top: -3px; margin-left: 2px" src="https://cdn.jsdelivr.net/gh/jokogebai/jokogebai@v1.0.0/search_artist_icon.jpg">
 		@endif
 	</div>
 </div>
