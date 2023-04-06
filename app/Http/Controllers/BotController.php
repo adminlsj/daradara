@@ -33,12 +33,6 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $users = User::where('avatar_temp', 'https://i.imgur.com/JaBN4ZNb.jpg')->get();
-        foreach ($users as $user) {
-            $user->avatar_temp = 'https://cdn.jsdelivr.net/gh/jokogebai/jokogebai@v1.0.0/user_default.jpg';
-            $user->save();
-        }
-
         /* echo 'Imgurs check start<br>';
         $imgurs = Video::where('cover', 'ilike', '%imgur%')->select('id', 'title', 'cover', 'imgur')->get();
         foreach ($imgurs as $video) {

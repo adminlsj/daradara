@@ -141,9 +141,9 @@
             </div>
           </a>
         @else
-          <a class="single-icon-wrapper" title="無法下載" disabled="true">
+          <a class="single-icon-wrapper" disabled="true" style="text-decoration: none;">
             <div class="video-show-action-btn no-select single-icon-outlier">
-              <i id="video-download-btn" class="material-icons">download</i>下載
+              <i id="video-download-btn" class="material-icons">download</i>無法下載
             </div>
           </a>
         @endif
