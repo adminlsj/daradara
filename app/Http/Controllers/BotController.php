@@ -33,6 +33,8 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
+        Mail::to('vicky.avionteam@gmail.com')->send(new UserReport('Reset views', 'Current views = '.Video::sum('current_views').'<br>Current views hetzner = '.Video::where('sd', 'like', '%vbalancer%')->sum('current_views'), 'All', 'Current views', 'All', 'admin', 'admin'));
+
         /* echo 'Imgurs check start<br>';
         $imgurs = Video::where('cover', 'ilike', '%imgur%')->select('id', 'title', 'cover', 'imgur')->get();
         foreach ($imgurs as $video) {

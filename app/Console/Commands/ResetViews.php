@@ -5,6 +5,8 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\Video;
 use App\Comic;
+use Mail;
+use App\Mail\UserReport;
 
 class ResetViews extends Command
 {
@@ -39,6 +41,8 @@ class ResetViews extends Command
      */
     public function handle()
     {
+        Mail::to('vicky.avionteam@gmail.com')->send(new UserReport('Reset views', 'Current views = '.Video::sum('current_views').'<br>Current views hetzner = '.Video::where('sd', 'like', '%vbalancer%')->sum('current_views'), 'All', 'Current views', 'All', 'admin', 'admin'));
+
         // Day views
         Video::where('id', '!=', null)->update(['current_views' => 0]);
         Comic::where('id', '!=', null)->update(['day_views' => 0]);
