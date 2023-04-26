@@ -229,6 +229,40 @@ class Video extends Model
         return substr($string, $ini, $len);
     }
 
+    /**
+     * Create hash link CDN resource
+     */
+    static function getSignedUrlParameter(
+        string $cdnResourceUrl,
+        string $filePath,
+        string $secureToken,
+        ?int $expiryTimestamp = null
+    ): string {
+        // Add slash to start of file path if missing
+        if ($filePath[0] !== '/') {
+            $filePath = '/' . $filePath;
+        }
+
+        // Cut the query string from file path (e.g. "/file/video.mp4?autoplay=true" changes to "/file/video.mp4")
+        if ($positionOfStartQuery = strpos($filePath, '?')) {
+            $filePath = substr($filePath, 0, $positionOfStartQuery);
+        }
+
+        $hash = $filePath . $secureToken;
+
+        if ($expiryTimestamp) {
+            $hash = $expiryTimestamp . $hash;
+            $expiryTimestamp = ',' . $expiryTimestamp;
+        }
+
+        // Replace invalid URL query string characters +, / with valid characters -, _
+        $invalidChars = ['+', '/'];
+        $validChars = ['-', '_'];
+        $finalHash = str_replace($invalidChars, $validChars, base64_encode(md5($hash, true)));
+
+        return 'https://' . $cdnResourceUrl . $filePath . '?secure=' . $finalHash . $expiryTimestamp;
+    }
+
     public function scopeWhereHasTags($query, $tags, $count)
     {
         return $query->where(function($query) use ($tags) {
