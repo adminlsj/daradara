@@ -80,7 +80,7 @@ class UpdateCdn77 extends Command
 
         foreach ($videos as $video) {
             $qualities_sc = [];
-            $source = str_replace('https://'.$url, '', $video->foreign_sd['cdn77_sc']);
+            $source_sc = str_replace('https://'.$url, '', $video->foreign_sd['cdn77_sc']);
             if (strpos($source_sc, '1080p') !== false) {
                 $qualities_sc['1080'] = Video::getSignedUrlParameter($url, $source, $token, $expiration);
                 $source_sc = str_replace('-1080p.mp4', '-720p.mp4', $source_sc);
