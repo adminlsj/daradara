@@ -88,6 +88,8 @@ Route::group(['middleware' => 'admin'], function () {
 
 	Route::get('/updateSpankbangSc', 'BotController@updateSpankbangSc');
 
+	Route::get('/updateCdn77', 'BotController@updateCdn77');
+
 	Route::get('/updateYoujizz', 'BotController@updateYoujizz');
 	Route::get('/updateYoujizzDownloads', 'BotController@updateYoujizzDownloads');
 
