@@ -1448,7 +1448,7 @@ class BotController extends Controller
 
         if (is_numeric($vid) && $video = Video::select('id', 'sd', 'foreign_sd')->find($vid)) {
             $qualities = [];
-            $source = "/{$vid}-{$quality}.mp4";
+            $sd = $source = "/{$vid}-{$quality}.mp4";
             if (strpos($source, '1080p') !== false) {
                 $qualities['1080'] = Video::getSignedUrlParameter($url, $source, $token, $expiration);
                 $source = str_replace('-1080p.mp4', '-720p.mp4', $source);
@@ -1462,9 +1462,13 @@ class BotController extends Controller
             }
             $video->sd = reset($qualities);
             $video->qualities = $qualities;
+            $foreign_sd = $video->foreign_sd;
+            $foreign_sd['cdn77'] = "https://".$url.$sd;
+            $video->foreign_sd = $foreign_sd;
+            $video->save();
 
             $qualities_sc = [];
-            $source_sc = "/{$vid}-sc-{$quality}.mp4";
+            $sd_sc = $source_sc = "/{$vid}-sc-{$quality}.mp4";
             if (strpos($source_sc, '1080p') !== false) {
                 $qualities_sc['1080'] = Video::getSignedUrlParameter($url, $source_sc, $token, $expiration);
                 $source_sc = str_replace('-1080p.mp4', '-720p.mp4', $source_sc);
@@ -1478,7 +1482,9 @@ class BotController extends Controller
             }
             $video->sd_sc = reset($qualities_sc);
             $video->qualities_sc = $qualities_sc;
-
+            $foreign_sd = $video->foreign_sd;
+            $foreign_sd['cdn77_sc'] = "https://".$url.$sd_sc;
+            $video->foreign_sd = $foreign_sd;
             $video->save();
 
             return Redirect::route('video.watch', ['v' => $video->id]);
