@@ -33,8 +33,6 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        return Video::getSignedUrlParameter('vdownload.hembed.com', '/39751-1080p.mp4', 'xVEO8rLVgGkUBEBg', time() + 43200);
-
         /* echo 'Imgurs check start<br>';
         $imgurs = Video::where('cover', 'ilike', '%imgur%')->select('id', 'title', 'cover', 'imgur')->get();
         foreach ($imgurs as $video) {
