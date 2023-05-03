@@ -1,7 +1,7 @@
 <div class="card-mobile-panel inner">
   <div style="width: 150px; display: inline-block;">
     <div style="position: relative; display: inline-block;">
-      <img style="width: 100%; height: 100%; border-radius: 5px;" src="https://i.imgur.com/BUnSzzv.jpg">
+      <img style="width: 100%; height: 100%; border-radius: 5px;" src="https://cdn.jsdelivr.net/gh/jokogebai/jokogebai@v1.0.0/card_doujin_background.jpg">
       <img style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 5px; {{ $video->id == $current->id ? 'filter: brightness(15%);' : '' }}" src="{{ $video->thumbL() }}" alt="{{ $video->title }}">
 
       @if ($video->id == $current->id)
