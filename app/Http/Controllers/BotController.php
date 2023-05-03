@@ -234,13 +234,13 @@ class BotController extends Controller
 
 
         // update cover
-        $videos = Video::where('cover', 'not like', '%cdn.jsdelivr.net%')->orderBy('id', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
+        /* $videos = Video::where('cover', 'not like', '%cdn.jsdelivr.net%')->orderBy('id', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
         foreach ($videos as $video) {
             $cover = str_replace('.png', '.jpg', $video->cover);
             $imgur = Helper::get_string_between($cover, 'https://i.imgur.com/', '.jpg');
             $video->cover = 'https://cdn.jsdelivr.net/gh/seisainowor/seisainowor@v1.0.0/asset/cover/'.$imgur.'.jpg';
             $video->save();
-        }
+        } */
 
         //---------------------------------------------------------------------------------------------------------
 
