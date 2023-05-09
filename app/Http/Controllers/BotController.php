@@ -1535,6 +1535,43 @@ class BotController extends Controller
         return '403 Forbidden';
     }
 
+    public function addCdn77SourceTemp(Request $request)
+    {
+        $quality = $request->quality ? $request->quality : '720p';
+        $vid = $request->v;
+
+        $url = 'vdownload.hembed.com';
+        $expiration = time() + 43200;
+        $token = 'xVEO8rLVgGkUBEBg';
+
+        if (is_numeric($vid) && $video = Video::select('id', 'sd', 'foreign_sd')->find($vid)) {
+            $qualities = [];
+            $sd = $source = "/{$vid}-{$quality}.mp4";
+            if (strpos($source, '1080p') !== false) {
+                $qualities['1080'] = Video::getSignedUrlParameter($url, $source, $token, $expiration);
+                $source = str_replace('-1080p.mp4', '-720p.mp4', $source);
+            }
+            if (strpos($source, '720p') !== false) {
+                $qualities['720'] = Video::getSignedUrlParameter($url, $source, $token, $expiration);
+                $source = str_replace('-720p.mp4', '-480p.mp4', $source);
+            }
+            if (strpos($source, '480p') !== false) {
+                $qualities['480'] = Video::getSignedUrlParameter($url, $source, $token, $expiration);
+            }
+            $video->sd = reset($qualities);
+            $video->qualities = $qualities;
+            $video->outsource = false;
+            $foreign_sd = $video->foreign_sd;
+            $foreign_sd['cdn77'] = "https://".$url.$sd;
+            $foreign_sd['cdn77_temp'] = "true";
+            $video->foreign_sd = $foreign_sd;
+            $video->save();
+
+            return Redirect::route('video.watch', ['v' => $video->id]);
+        }
+        return '403 Forbidden';
+    }
+
     public function uploadRule34(Request $request)
     {
         $artists = Rule34::$artists;
