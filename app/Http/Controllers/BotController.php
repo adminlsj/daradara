@@ -33,6 +33,51 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
+        $videos = Video::where('sd', 'like', '%motherless%')->where('foreign_sd', 'like', '%"backupY"%')->get();
+        foreach ($videos as $video) {
+            $foreign_sd = $video->foreign_sd;
+            $foreign_sd['backupM'] = $video->sd;
+            $foreign_sd['youjizz'] = $video->foreign_sd['backupY'];
+            unset($foreign_sd['backupY']);
+            $video->foreign_sd = $foreign_sd;
+            $video->save();
+        }
+
+        // Download vbalancer
+        /* $videos = Video::where('cover', 'not like', "%E6mSQA2%")->where('sd', 'like', '%vbalancer%')->orderBy('current_views', 'desc')->limit(20)->get();
+        foreach ($videos as $video) {
+            if ($video->qualities) {
+                foreach ($video->qualities as $key => $value) {
+                    $source = Helper::sign_hembed_url("https://vdownload-1.hembed.com/{$video->id}-{$key}p.mp4", env('HEMBED_TOKEN'), 43200);
+                    $referer = "https://hanime1.me/";
+                    $opts = [
+                        'http' => [
+                           'header' => [
+                                "Referer: https://hanime1.me/"
+                            ]
+                        ]
+                    ];
+                    $context = stream_context_create($opts);
+                    Storage::disk('local')->put("video/{$video->id}-{$key}p.mp4", file_get_contents($source, false, $context));
+                }
+            }
+            if ($video->qualities_sc) {
+                foreach ($video->qualities_sc as $key => $value) {
+                    $source_sc = Helper::sign_hembed_url("https://vdownload-1.hembed.com/{$video->id}-sc-{$key}p.mp4", env('HEMBED_TOKEN'), 43200);
+                    $referer = "https://hanime1.me/";
+                    $opts = [
+                        'http' => [
+                           'header' => [
+                                "Referer: https://hanime1.me/"
+                            ]
+                        ]
+                    ];
+                    $context = stream_context_create($opts);
+                    Storage::disk('local')->put("video/{$video->id}-sc-{$key}p.mp4", file_get_contents($source_sc, false, $context));
+                }
+            }
+        } */
+
         /* echo 'Imgurs check start<br>';
         $imgurs = Video::where('cover', 'ilike', '%imgur%')->select('id', 'title', 'cover', 'imgur')->get();
         foreach ($imgurs as $video) {
@@ -2025,5 +2070,21 @@ class BotController extends Controller
                 }
             }
         }
+    }
+
+    public function getServerSd($balancer, $server, $sd)
+    {
+        $sd = str_replace("vbalancer-{$balancer}.hembed.com", "vdownload-{$server}.hembed.com", $sd);
+        $sd = Helper::sign_hembed_url($sd, env('HEMBED_TOKEN'), 43200);
+        return $sd;
+    }
+
+    public function getServerQual($balancer, $server, $qualities)
+    {
+        foreach ($qualities as &$qual) {
+            $qual = str_replace("vbalancer-{$balancer}.hembed.com", "vdownload-{$server}.hembed.com", $qual);
+            $qual = Helper::sign_hembed_url($qual, env('HEMBED_TOKEN'), 43200);
+        }
+        return $qualities;
     }
 }
