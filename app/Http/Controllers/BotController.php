@@ -33,16 +33,6 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $videos = Video::where('sd', 'like', '%motherless%')->where('foreign_sd', 'like', '%"backupY"%')->get();
-        foreach ($videos as $video) {
-            $foreign_sd = $video->foreign_sd;
-            $foreign_sd['backupM'] = $video->sd;
-            $foreign_sd['youjizz'] = $video->foreign_sd['backupY'];
-            unset($foreign_sd['backupY']);
-            $video->foreign_sd = $foreign_sd;
-            $video->save();
-        }
-
         // Download vbalancer
         /* $videos = Video::where('cover', 'not like', "%E6mSQA2%")->where('sd', 'like', '%vbalancer%')->orderBy('current_views', 'desc')->limit(20)->get();
         foreach ($videos as $video) {
@@ -279,13 +269,13 @@ class BotController extends Controller
 
 
         // update cover
-        /* $videos = Video::where('cover', 'not like', '%cdn.jsdelivr.net%')->orderBy('id', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
+        $videos = Video::where('cover', 'not like', '%cdn.jsdelivr.net%')->orderBy('id', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
         foreach ($videos as $video) {
             $cover = str_replace('.png', '.jpg', $video->cover);
             $imgur = Helper::get_string_between($cover, 'https://i.imgur.com/', '.jpg');
-            $video->cover = 'https://cdn.jsdelivr.net/gh/seisainowor/seisainowor@v1.0.0/asset/cover/'.$imgur.'.jpg';
+            $video->cover = 'https://cdn.jsdelivr.net/gh/kirinlemoncc/kirinlemoncc@v1.0.0/asset/cover/'.$imgur.'.jpg';
             $video->save();
-        } */
+        }
 
         //---------------------------------------------------------------------------------------------------------
 
