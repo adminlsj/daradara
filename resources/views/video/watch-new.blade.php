@@ -197,7 +197,7 @@
       <div id="comment-tabcontent" class="tabcontent" style="margin-top: 85px">
         <div id="comment-section-wrapper" class="video-show-comment-width">
           <div id="ajax-loading" style="text-align: center; padding-bottom: 1000px;">
-            <img style="width: 40px;" src="https://i.imgur.com/Dw94KOW.gif"/>
+            <img style="width: 40px;" src="https://cdn.jsdelivr.net/gh/kirinlemoncc/kirinlemoncc@v1.0.0/asset/loading.gif"/>
           </div>
           <!-- Dynamically loaded comments -->
         </div>
