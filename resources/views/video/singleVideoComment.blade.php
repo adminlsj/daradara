@@ -12,7 +12,7 @@
 		@if ($comment->replies_count)
 			<div style="color: red; cursor: pointer; margin-top: 13px; margin-left: -5px; font-weight: 400;" class="load-replies-btn no-select" data-commentid="{{ $comment->id }}"><span style="vertical-align: middle; margin-top: -3px; margin-right: 7px;" class="material-icons">arrow_drop_down</span><span class="reply-btn-text">查看</span> {{ $comment->replies_count }} 則回覆</div>
 			<div class="comment-reply-ajax-loading" style="padding-top: 5px; text-align: center; display: none;">
-        <img style="width: 40px;" src="https://i.imgur.com/Dw94KOW.gif"/>
+        <img style="width: 40px;" src="https://cdn.jsdelivr.net/gh/kirinlemoncc/kirinlemoncc@v1.0.0/asset/loading.gif"/>
       </div>
 		@endif
 		<div id="comment-reply-wrapper-{{ $comment->id }}">
@@ -34,7 +34,7 @@
 		@if ($comment->replies_count)
 			<div style="color: red; cursor: pointer; margin-top: 13px; margin-left: -5px; font-weight: 400;" class="load-replies-btn no-select" data-commentid="{{ $comment->id }}"><span style="vertical-align: middle; margin-top: -3px; margin-right: 7px;" class="material-icons">arrow_drop_down</span><span class="reply-btn-text">查看</span> {{ $comment->replies_count }} 則回覆</div>
 			<div class="comment-reply-ajax-loading" style="padding-top: 5px; text-align: center; display: none;">
-        <img style="width: 40px;" src="https://i.imgur.com/Dw94KOW.gif"/>
+        <img style="width: 40px;" src="https://cdn.jsdelivr.net/gh/kirinlemoncc/kirinlemoncc@v1.0.0/asset/loading.gif"/>
       </div>
 		@endif
 
