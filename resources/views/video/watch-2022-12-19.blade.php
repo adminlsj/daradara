@@ -32,7 +32,7 @@
       @endif
 
       @if ($video->outsource)
-        <div style="background-color: black; background-image: url('https://i.imgur.com/zXoBhXA.gif'); background-position: center; background-repeat: no-repeat; background-size: 150px; position: relative; width: 100%; height: 0; padding-bottom: 56.25%;">
+        <div style="background-color: black; background-image: url('https://cdn.jsdelivr.net/gh/kirinlemoncc/kirinlemoncc@v1.0.0/asset/loading.gif'); background-position: center; background-repeat: no-repeat; background-size: 150px; position: relative; width: 100%; height: 0; padding-bottom: 56.25%;">
             <iframe src="{!! $sd !!}" style="border: 0; overflow: hidden; position: absolute; width: 100%; height: 100%; left: 0; top: 0;" allowfullscreen></iframe>
         </div>
 
@@ -245,7 +245,7 @@
       <div id="comment-tabcontent" class="tabcontent" style="margin-top: 85px">
         <div id="comment-section-wrapper" class="video-show-comment-width">
           <div id="ajax-loading" style="text-align: center; padding-bottom: 1000px;">
-            <img style="width: 40px;" src="https://i.imgur.com/TwUEoMc.gif"/>
+            <img style="width: 40px;" src="https://cdn.jsdelivr.net/gh/kirinlemoncc/kirinlemoncc@v1.0.0/asset/loading.gif"/>
           </div>
           <!-- Dynamically loaded comments -->
         </div>
