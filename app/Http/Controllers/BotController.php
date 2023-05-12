@@ -34,7 +34,7 @@ class BotController extends Controller
         ini_set('memory_limit', '-1');
 
         // Download vbalancer
-        /* $videos = Video::where('sd', 'like', '%vbalancer%')->orderBy('current_views', 'desc')->limit(20)->get();
+        $videos = Video::where('sd', 'like', '%vbalancer%')->orderBy('current_views', 'desc')->limit(20)->get();
         foreach ($videos as $video) {
             if ($video->qualities) {
                 foreach ($video->qualities as $key => $value) {
@@ -66,7 +66,7 @@ class BotController extends Controller
                     Storage::disk('local')->put("video/{$video->id}-sc-{$key}p.mp4", file_get_contents($source_sc, false, $context));
                 }
             }
-        } */
+        }
 
         /* echo 'Imgurs check start<br>';
         $imgurs = Video::where('cover', 'ilike', '%imgur%')->select('id', 'title', 'cover', 'imgur')->get();
