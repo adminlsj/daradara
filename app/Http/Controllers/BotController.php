@@ -34,7 +34,7 @@ class BotController extends Controller
         ini_set('memory_limit', '-1');
 
         // Download vbalancer
-        $videos = Video::where('sd', 'like', '%vbalancer%')->orderBy('current_views', 'desc')->limit(20)->get();
+        $videos = Video::where('sd', 'like', '%vbalancer%')->orderBy('current_views', 'desc')->limit(50)->get();
         foreach ($videos as $video) {
             if ($video->qualities) {
                 foreach ($video->qualities as $key => $value) {
