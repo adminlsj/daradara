@@ -34,11 +34,11 @@ class BotController extends Controller
         ini_set('memory_limit', '-1');
 
         // Download vbalancer
-        $videos = Video::where('sd', 'like', '%vbalancer%')->orderBy('current_views', 'desc')->limit(50)->get();
+        /* $videos = Video::where('sd', 'like', '%vbalancer%')->orderBy('current_views', 'desc')->limit(60)->get();
         foreach ($videos as $video) {
             if ($video->qualities) {
                 foreach ($video->qualities as $key => $value) {
-                    $source = Helper::sign_hembed_url("https://vdownload-1.hembed.com/{$video->id}-{$key}p.mp4", env('HEMBED_TOKEN'), 43200);
+                    $source = Helper::sign_hembed_url("https://vdownload-11.hembed.com/{$video->id}-{$key}p.mp4", env('HEMBED_TOKEN'), 43200);
                     $referer = "https://hanime1.me/";
                     $opts = [
                         'http' => [
@@ -53,7 +53,7 @@ class BotController extends Controller
             }
             if ($video->qualities_sc) {
                 foreach ($video->qualities_sc as $key => $value) {
-                    $source_sc = Helper::sign_hembed_url("https://vdownload-1.hembed.com/{$video->id}-sc-{$key}p.mp4", env('HEMBED_TOKEN'), 43200);
+                    $source_sc = Helper::sign_hembed_url("https://vdownload-11.hembed.com/{$video->id}-sc-{$key}p.mp4", env('HEMBED_TOKEN'), 43200);
                     $referer = "https://hanime1.me/";
                     $opts = [
                         'http' => [
@@ -66,7 +66,7 @@ class BotController extends Controller
                     Storage::disk('local')->put("video/{$video->id}-sc-{$key}p.mp4", file_get_contents($source_sc, false, $context));
                 }
             }
-        }
+        } */
 
         /* echo 'Imgurs check start<br>';
         $imgurs = Video::where('cover', 'ilike', '%imgur%')->select('id', 'title', 'cover', 'imgur')->get();
@@ -126,19 +126,6 @@ class BotController extends Controller
                 $url = "{$initial}{$i}.html";
                 Storage::disk('local')->put("video/{$i}.ts", file_get_contents($url));
             }
-        } */
-
-        /* return $videos = Video::where('cover', 'not like', '%E6mSQA2%')->where('genre', null)->get();
-        foreach ($videos as $video) {
-            $video->genre = '泡麵番';
-            $video->save();
-        } */
-
-        /* $artist = $request->artist;
-        $videos = Video::where('tags_array', 'like', '%"'.$artist.'"%')->get();
-        foreach ($videos as $video) {
-            $video->artist = $artist;
-            $video->save();
         } */
 
         /* $videos = Video::where('tags_array', 'like', '%"MaohKing"%')->get();
@@ -269,13 +256,13 @@ class BotController extends Controller
 
 
         // update cover
-        /* $videos = Video::where('cover', 'not like', '%cdn.jsdelivr.net%')->orderBy('id', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
+        $videos = Video::where('cover', 'not like', '%cdn.jsdelivr.net%')->orderBy('id', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
         foreach ($videos as $video) {
             $cover = str_replace('.png', '.jpg', $video->cover);
             $imgur = Helper::get_string_between($cover, 'https://i.imgur.com/', '.jpg');
-            $video->cover = 'https://cdn.jsdelivr.net/gh/kirinlemoncc/kirinlemoncc@v1.0.0/asset/cover/'.$imgur.'.jpg';
+            $video->cover = 'https://cdn.jsdelivr.net/gh/minnanowara/minnanowara@v1.0.0/asset/cover/'.$imgur.'.jpg';
             $video->save();
-        } */
+        }
 
         //---------------------------------------------------------------------------------------------------------
 
