@@ -180,7 +180,7 @@ class BotController extends Controller
         /* curl -O --referer https://avbebe.com/ https://vz-e9c9f2c4-a7f.b-cdn.net/dacb9593-b19f-4617-9b57-d4790c8089d1/1920x1080/video0.ts */
 
         // download imgurs
-        $videos = Video::where('cover', 'not like', '%cdn.jsdelivr.net%')->orderBy('id', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
+        /* $videos = Video::where('cover', 'not like', '%cdn.jsdelivr.net%')->orderBy('id', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
 
         foreach ($videos as $video) {
             // cover
@@ -217,17 +217,17 @@ class BotController extends Controller
             } else {
                 echo 'thumbL '.$large.' exists<br>';
             }
-        }
+        } */
 
 
         // update cover
-        /* $videos = Video::where('cover', 'not like', '%cdn.jsdelivr.net%')->orderBy('id', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
+        $videos = Video::where('cover', 'not like', '%cdn.jsdelivr.net%')->orderBy('id', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
         foreach ($videos as $video) {
             $cover = str_replace('.png', '.jpg', $video->cover);
             $imgur = Helper::get_string_between($cover, 'https://i.imgur.com/', '.jpg');
-            $video->cover = 'https://cdn.jsdelivr.net/gh/minnanowara/minnanowara@v1.0.0/asset/cover/'.$imgur.'.jpg';
+            $video->cover = 'https://cdn.jsdelivr.net/gh/surroukiki/surroukiki@v1.0.0/asset/cover/'.$imgur.'.jpg';
             $video->save();
-        } */
+        }
 
         //---------------------------------------------------------------------------------------------------------
 
@@ -2002,7 +2002,7 @@ class BotController extends Controller
     public function downloadAvbebeM3u8(Request $request)
     {
         $vid = str_replace('https://avbebe.com/archives/', '', $request->url);
-        $m3u8 = "https://v.avgigi.com/acg/3D/{$vid}/video.m3u8";
+        $m3u8 = "https://v.avgigi.com/acg/watch/{$vid}/video.m3u8";
         $referer = "https://avgigi.com/";
         $opts = [
             'http' => [
@@ -2015,7 +2015,7 @@ class BotController extends Controller
         Storage::disk('local')->put("video/{$vid}.m3u8", file_get_contents($m3u8, false, $context));
 
         for ($i = 0; $i <= $request->total; $i++) { 
-            $url = "https://v.avgigi.com/acg/3D/{$vid}/video{$i}.ts";
+            $url = "https://v.avgigi.com/acg/watch/{$vid}/video{$i}.ts";
             Storage::disk('local')->put("video/{$vid}{$i}.ts", file_get_contents($url, false, $context));
         }
     }
