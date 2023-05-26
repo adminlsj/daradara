@@ -41,7 +41,7 @@ class ResetViews extends Command
      */
     public function handle()
     {
-        Mail::to('vicky.avionteam@gmail.com')->send(new UserReport('Reset views', 'Current views = '.Video::sum('current_views').'<br>Current views hetzner = '.Video::where('sd', 'like', '%vbalancer%')->sum('current_views'), 'All', 'Current views', 'All', 'admin', 'admin'));
+        Mail::to('vicky.avionteam@gmail.com')->send(new UserReport('Reset views', 'Current views = '.Video::sum('current_views').'<br>Current views Cdn77 = '.Video::where('foreign_sd', 'like', '%"cdn77"%')->orWhere('foreign_sd', 'like', '%"cdn77_sc"%')->sum('current_views'), 'All', 'Current views', 'All', 'admin', 'admin'));
 
         // Day views
         Video::where('id', '!=', null)->update(['current_views' => 0]);

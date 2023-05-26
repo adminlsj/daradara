@@ -33,6 +33,60 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
+        $videos = Video::all();
+        foreach ($videos as $video) {
+            $tags_array = $video->tags_array;
+            foreach ($tags_array as $key => $value) {
+                if ($value < 4) {
+                    unset($tags_array[$key]);
+                }
+            }
+            $video->tags_array = $tags_array;
+            $video->save();
+        }
+
+        /* $videos = Video::where('cover', 'not like', '%imgur%')->orderBy('id', 'desc')->get();
+        foreach ($videos as $video) {
+            // cover
+            $file_name = basename($video->cover);
+            if (!file_exists(public_path('cover/'.$file_name))) {
+                if (file_put_contents('cover/'.$file_name, file_get_contents($video->cover))) {
+                    echo 'cover '.$file_name.' success<br>';
+                } else {
+                    echo 'cover '.$file_name.' failed<br>';
+                }
+            } else {
+                echo 'cover '.$file_name.' exists<br>';
+            }
+
+            // thumbnail
+            $cover = Helper::get_string_between($video->cover, '/cover/', '.jpg');
+
+            $huge = str_replace('/cover/'.$cover, '/thumbnail/'.$video->imgur.'h', $video->cover);
+            $huge_file_name = $video->imgur.'h.jpg';
+            if (!file_exists('thumbnail/'.public_path($huge_file_name))) {
+                if (file_put_contents('thumbnail/'.$huge_file_name, file_get_contents($huge))) {
+                    echo 'thumbH '.$huge.' success<br>';
+                } else {
+                    echo 'thumbH '.$huge.' failed<br>';
+                }
+            } else {
+                echo 'thumbH '.$huge.' exists<br>';
+            }
+
+            $large = str_replace('/cover/'.$cover, '/thumbnail/'.$video->imgur.'l', $video->cover);
+            $large_file_name = $video->imgur.'l.jpg';
+            if (!file_exists('thumbnail/'.public_path($large_file_name))) {
+                if (file_put_contents('thumbnail/'.$large_file_name, file_get_contents($large))) {
+                    echo 'thumbL '.$large.' success<br>';
+                } else {
+                    echo 'thumbL '.$large.' failed<br>';
+                }
+            } else {
+                echo 'thumbL '.$large.' exists<br>';
+            }
+        } */
+
         /* echo 'Imgurs check start<br>';
         $imgurs = Video::where('cover', 'ilike', '%imgur%')->select('id', 'title', 'cover', 'imgur')->get();
         foreach ($imgurs as $video) {
@@ -221,13 +275,13 @@ class BotController extends Controller
 
 
         // update cover
-        $videos = Video::where('cover', 'not like', '%cdn.jsdelivr.net%')->orderBy('id', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
+        /* $videos = Video::where('cover', 'not like', '%cdn.jsdelivr.net%')->orderBy('id', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
         foreach ($videos as $video) {
             $cover = str_replace('.png', '.jpg', $video->cover);
             $imgur = Helper::get_string_between($cover, 'https://i.imgur.com/', '.jpg');
             $video->cover = 'https://cdn.jsdelivr.net/gh/surroukiki/surroukiki@v1.0.0/asset/cover/'.$imgur.'.jpg';
             $video->save();
-        }
+        } */
 
         //---------------------------------------------------------------------------------------------------------
 
@@ -2065,5 +2119,40 @@ class BotController extends Controller
             $qual = Helper::sign_hembed_url($qual, env('HEMBED_TOKEN'), 43200);
         }
         return $qualities;
+    }
+
+    public function removeAddedTags(Request $request)
+    {
+        $video = Video::find($request->v);
+        if ($tags = $request->tags) {
+            $tags_array = $video->tags_array;
+            foreach ($tags as $tag) {
+                if (array_key_exists($tag, $video->tags_array)) {
+                    $tags_array[$tag] = $tags_array[$tag] - 1;
+                    if ($tags_array[$tag] <= 0) {
+                        unset($tags_array[$tag]);
+                    }
+                }
+            }
+            $video->tags_array = $tags_array;
+            $video->save();
+        }
+    }
+
+    public function includeAddedTags(Request $request)
+    {
+        $video = Video::find($request->v);
+        if ($tags = $request->tags) {
+            $tags_array = $video->tags_array;
+            foreach ($tags as $tag) {
+                if (array_key_exists($tag, $video->tags_array)) {
+                    $tags_array[$tag] = $tags_array[$tag] + 10;
+                } elseif (in_array($tag, Video::$all_tag)) {
+                    $tags_array[$tag] = 10;
+                }
+            }
+            $video->tags_array = $tags_array;
+            $video->save();
+        }
     }
 }

@@ -101,6 +101,9 @@ Route::group(['middleware' => 'admin'], function () {
 
 	Route::get('/checkMotherless', 'BotController@checkMotherless');
 
+	Route::get('/removeAddedTags', 'BotController@removeAddedTags')->name('tag.remove');;
+	Route::get('/includeAddedTags', 'BotController@includeAddedTags')->name('tag.include');;
+
 	Route::get('/uploadRule34', 'BotController@uploadRule34');
 	Route::get('/importRule34', 'BotController@importRule34');
 	Route::get('/translateRule34', 'BotController@translateRule34');
