@@ -15,7 +15,7 @@
 		<!--JuicyAds END-->
 	</span>
 
-	<span class="hidden-xs">@include('layouts.exoclick', ['id' => '4372316', 'width' => '300', 'height' => '250'])</span>
+	<span class="hidden-xs">@include('layouts.exoclick', ['id' => $tablet_home_2, 'width' => '300', 'height' => '250'])</span>
 </div>
 
 <!--<div class="hidden-sm hidden-md hidden-lg" style="text-align: center; padding-top: 20px; padding-bottom: 0px; margin-bottom: -10px;">

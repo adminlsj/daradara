@@ -1,7 +1,7 @@
 <div class="hidden-sm hidden-md hidden-lg" style="text-align: center; padding-top: 5px;">
   <div style="overflow: hidden; white-space:nowrap; font-size:0; display: flex; justify-content: center; align-items: center;">
     <span class="scaled-exoclick" style="vertical-align: top;">
-      @include('layouts.exoclick', ['id' => '4372316', 'width' => '300', 'height' => '250'])
+      @include('layouts.exoclick', ['id' => $mobile_watch, 'width' => '300', 'height' => '250'])
     </span>
 
     <span class="scaled-juicyads" style="vertical-align: top; margin-top: 12px;">

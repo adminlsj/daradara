@@ -11,6 +11,7 @@ use App\Like;
 use App\Save;
 use App\Playlist;
 use App\Playitem;
+use App\Bot;
 use Illuminate\Http\Request;
 use Auth;
 use Carbon\Carbon;

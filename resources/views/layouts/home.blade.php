@@ -64,7 +64,7 @@
 		@include('layouts.card-wrapper-doujin', ['title' => '他們在看', 'videos' => $他們在看, 'link' => route('home.search').'?sort=他們在看'])
 
 		<div>
-			@include('ads.home-banner-exoclick')
+			@include('ads.home-banner-exoclick', ['desktop_home_1' => '4999572', 'tablet_home_1' => '4999576', 'mobile_home_1' => '4999578'])
 		</div>
 
 		@include('layouts.card-wrapper', ['title' => '泡麵番', 'videos' => $泡麵番, 'link' => route('home.search').'?genre=泡麵番'])
@@ -74,7 +74,7 @@
 		@include('layouts.card-wrapper-doujin', ['title' => 'Cosplay', 'videos' => $Cosplay, 'link' => route('home.search').'?genre=Cosplay'])
 
 		<div>
-			@include('ads.home-banner-juicyads')
+			@include('ads.home-banner-juicyads', ['tablet_home_2' => '4999602'])
 		</div>
 
 		@include('layouts.card-wrapper', ['title' => '新番預告', 'videos' => $新番預告, 'link' => '/previews/'.Carbon\Carbon::now()->format('Ym')])
@@ -88,7 +88,7 @@
 	</div>
 
 	<div>
-		@include('ads.home-banner-square')
+		@include('ads.home-banner-square', ['desktop_home_3' => '4999596', 'tablet_home_3' => '4999598', 'mobile_home_3' => '4999600'])
 	</div>
 </div>
 

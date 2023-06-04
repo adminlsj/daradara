@@ -45,14 +45,16 @@
 
       @endif
 
-      <div id="mobile-ad" class="hidden-md hidden-lg" style="text-align: center; padding-top: 5px; padding-bottom: 0px;background-color: black; position: relative;">
-        @include('layouts.exoclick', ['id' => '4372430', 'width' => '300', 'height' => '100'])
-        <div id="close-mobile-ad-btn" style="position: absolute; top: 5px; right: 1px; cursor: pointer; border: 1px solid white;"><i style="vertical-align: middle; color: white;" class="material-icons">close</i></div>
-      </div>
-
-      <div class="hidden-xs hidden-sm" style="margin-top: 7px; margin-bottom: 0px; text-align: center">
-        @include('layouts.exoclick', ['id' => '4372406', 'width' => '728', 'height' => '90'])
-      </div>
+      @if ($is_mobile)
+        <div id="mobile-ad" class="hidden-md hidden-lg" style="text-align: center; padding-top: 5px; padding-bottom: 0px;background-color: black; position: relative;">
+          @include('layouts.exoclick', ['id' => '4372430', 'width' => '300', 'height' => '100'])
+          <div id="close-mobile-ad-btn" style="position: absolute; top: 5px; right: 1px; cursor: pointer; border: 1px solid white;"><i style="vertical-align: middle; color: white;" class="material-icons">close</i></div>
+        </div>
+      @else
+        <div style="margin-top: 7px; margin-bottom: 0px; text-align: center">
+          @include('layouts.exoclick', ['id' => '4372406', 'width' => '728', 'height' => '90'])
+        </div>
+      @endif
 
       <h3 id="shareBtn-title" class="video-details-wrapper" style="font-weight: bold; margin-top: 10px; color: white;">{{ $video->translations['JP'] }}</h3>
       <div class="video-details-wrapper hidden-sm hidden-md hidden-lg hidden-xl" style="font-size: 12px; color: #aaa; font-weight: normal; margin-top: -5px; margin-bottom: 17px">觀看次數：{{ $video->views() }}次&nbsp;&nbsp;{{ Carbon\Carbon::parse($video->created_at)->format('Y-m-d') }}</div>
@@ -189,7 +191,7 @@
       @if (!$is_mobile)
         <div class="hidden-md hidden-lg" style="text-align: left; padding-left: 5px; padding-top: 5px; margin-top: 15px; margin-bottom: -15px; padding-bottom: 0px; margin-left: 15px; margin-right: 15px; width: 310px; height: 282px; background-color: #3a3c3f; display: inline-block;">
           <div style="margin-bottom: 5px; color: white; font-size: 12px;">點點廣告，贊助我們（●´∀｀）ノ♡</div>
-          @include('layouts.exoclick', ['id' => '4372438', 'width' => '300', 'height' => '250'])
+          @include('layouts.exoclick', ['id' => '4999624', 'width' => '300', 'height' => '250'])
         </div>
 
         <div class="hidden-xs hidden-md hidden-lg" style="text-align: left; padding-left: 5px; padding-top: 5px; margin-top: 15px; margin-bottom: -15px; padding-bottom: 0px; width: 310px; height: 282px; background-color: #3a3c3f; display: inline-block; vertical-align: top; margin-left: -5px;">
@@ -201,7 +203,7 @@
           <!--JuicyAds END-->
         </div>
       @else
-        @include('ads.watch-double-banners')
+        @include('ads.watch-double-banners', ['mobile_watch' => '4999634'])
       @endif
 
       <div id="tablinks-wrapper" class="tab mobile-padding" style="margin-top: 30px; font-weight: bold;">
@@ -264,12 +266,12 @@
 
           <div id="exoclick-banner-adjust" class="hidden-xs hidden-md hidden-lg" style="text-align: left; padding-left: 5px; padding-top: 5px; margin-top: 8px; margin-bottom: 10px; padding-bottom: 0px; width: 310px; height: 282px; background-color: #3a3c3f; margin-left: 10px; display: inline-block; vertical-align: top;">
             <div style="margin-bottom: 5px; color: white; font-size: 12px;">點點廣告，贊助我們（●´∀｀）ノ♡</div>
-            @include('layouts.exoclick', ['id' => '4372438', 'width' => '300', 'height' => '250'])
+            @include('layouts.exoclick', ['id' => '4999626', 'width' => '300', 'height' => '250'])
           </div>
         </div>
       @else
         <div id="double-banners-adjust" style="margin-top: -8px;">
-          @include('ads.watch-double-banners')
+          @include('ads.watch-double-banners', ['mobile_watch' => '4999636'])
         </div>
         <div id="watch-footer">
           <div style="background-color: #212121;">
@@ -309,7 +311,7 @@
       <div id="myHeader" class="hidden-xs hidden-sm">
         <div style="text-align: left; padding-left: 5px; padding-top: 5px; margin-top: 15px; margin-bottom: 10px; padding-bottom: 0px; width: 310px; height: 282px; background-color: #3a3c3f;">
           <div style="margin-bottom: 5px; color: white; font-size: 12px;">點點廣告，贊助我們（●´∀｀）ノ♡</div>
-          @include('layouts.exoclick', ['id' => '4372438', 'width' => '300', 'height' => '250'])
+          @include('layouts.exoclick', ['id' => '4999618', 'width' => '300', 'height' => '250'])
         </div>
 
         <div style="text-align: left; padding-left: 5px; padding-top: 5px; margin-top: 15px; margin-bottom: 10px; padding-bottom: 0px; width: 310px; height: 282px; background-color: #3a3c3f;">
