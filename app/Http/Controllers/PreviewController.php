@@ -30,6 +30,8 @@ class PreviewController extends Controller
 
         $comments_count = Comment::where('foreign_id', $uuid)->where('type', 'preview')->count();
 
-        return view('preview.show', compact('previews', 'year', 'month', 'comments_count', 'prev', 'next'));
+        $is_mobile = Helper::checkIsMobile();
+
+        return view('preview.show', compact('previews', 'year', 'month', 'comments_count', 'prev', 'next', 'is_mobile'));
     }
 }
