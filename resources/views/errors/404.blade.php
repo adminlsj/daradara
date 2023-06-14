@@ -50,11 +50,11 @@
 
 	<div style="margin-bottom: 15px;">
 		<div class="hidden-xs hidden-sm" style="margin-top: 50px; margin-bottom: 50px; padding-top: 5px; padding-bottom: 40px; text-align: center;">
-			@include('layouts.exoclick', ['id' => $desktop_home_3, 'width' => '900', 'height' => '250'])
+			@include('layouts.exoclick', ['id' => '5007146', 'width' => '900', 'height' => '250'])
 		</div>
 
 		<div class="hidden-md hidden-lg" style="text-align: center; padding-top: 35px; padding-bottom: 50px;">
-			@include('layouts.exoclick', ['id' => $tablet_home_3, 'width' => '300', 'height' => '250'])
+			@include('layouts.exoclick', ['id' => '5007148', 'width' => '300', 'height' => '250'])
 
 			<span class="hidden-xs" style="vertical-align: top; margin-top: 5px;">
 				<!-- JuicyAds v3.1 -->
