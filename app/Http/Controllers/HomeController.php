@@ -122,7 +122,7 @@ class HomeController extends Controller
             ],
         ];
 
-        $is_mobile = Bot::is_mobile();
+        $is_mobile = Helper::checkIsMobile();
 
         return view('layouts.home', compact('最新裏番', 'random', '最新上市', '最新上傳', '中文字幕', '他們在看', '泡麵番', 'Motion_Anime', 'SD動畫', '同人作品', 'Cosplay', '新番預告', '本日排行', '本月排行', '影片標籤', '新加入作者', 'is_mobile'));
     }
