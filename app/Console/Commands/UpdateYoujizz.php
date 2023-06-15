@@ -102,7 +102,7 @@ class UpdateYoujizz extends Command
                 $m3u8 = [];
                 $mp4 = [];
                 foreach ($data as $source) {
-                    if (strpos($source['filename'], '.m3u8') === false && is_numeric($source['quality'])) {
+                    if (strpos($source['filename'], '.m3u8') === false && is_numeric($source['quality']) && strpos($source['filename'], 'cdn2e') === false) {
                         $mp4[$source['quality']] = 'https:'.$source['filename'];
                     }
                     if (strpos($source['filename'], '.m3u8') !== false && is_numeric($source['quality'])) {
