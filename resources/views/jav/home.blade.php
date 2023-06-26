@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('nav')
-	@include('nav.home')
+	@include('jav.nav-home')
 @endsection
 
 @section('content')

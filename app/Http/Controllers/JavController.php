@@ -37,13 +37,13 @@ class JavController extends Controller
 
         $random = $最新JAV->random();
 
-        $最新上市 = Video::with('user:id,name')->whereIn('genre', ['日本AV', '素人業餘', '高清無碼', 'AI解碼', '國產AV', '國產素人'])->orderBy('created_at', 'desc')->select('id', 'user_id', 'title', 'cover', 'imgur', 'views', 'duration')->limit($dCount)->get();
+        $最新上市 = Video::with('user:id,name')->whereIn('genre', Video::$genre_jav)->orderBy('created_at', 'desc')->select('id', 'user_id', 'title', 'cover', 'imgur', 'views', 'duration')->limit($dCount)->get();
 
-        $最新上傳 = Video::with('user:id,name')->whereIn('genre', ['日本AV', '素人業餘', '高清無碼', 'AI解碼', '國產AV', '國產素人'])->orderBy('uploaded_at', 'desc')->select('id', 'user_id', 'title', 'cover', 'imgur', 'views', 'duration')->limit($dCount)->get();
+        $最新上傳 = Video::with('user:id,name')->whereIn('genre', Video::$genre_jav)->orderBy('uploaded_at', 'desc')->select('id', 'user_id', 'title', 'cover', 'imgur', 'views', 'duration')->limit($dCount)->get();
 
-        $中文字幕 = Video::with('user:id,name')->whereIn('genre', ['日本AV', '素人業餘', '高清無碼', 'AI解碼', '國產AV', '國產素人'])->where('tags_array', 'like', '%中文字幕%')->orderBy('uploaded_at', 'desc')->select('id', 'user_id', 'title', 'cover', 'imgur', 'views', 'duration')->limit($dCount)->get();
+        $中文字幕 = Video::with('user:id,name')->whereIn('genre', Video::$genre_jav)->where('tags_array', 'like', '%中文字幕%')->orderBy('uploaded_at', 'desc')->select('id', 'user_id', 'title', 'cover', 'imgur', 'views', 'duration')->limit($dCount)->get();
 
-        $他們在看 = Video::with('user:id,name')->whereIn('genre', ['日本AV', '素人業餘', '高清無碼', 'AI解碼', '國產AV', '國產素人'])->orderBy('updated_at', 'desc')->select('id', 'user_id', 'title', 'cover', 'imgur', 'views', 'duration')->limit($dCount)->get();
+        $他們在看 = Video::with('user:id,name')->whereIn('genre', Video::$genre_jav)->orderBy('updated_at', 'desc')->select('id', 'user_id', 'title', 'cover', 'imgur', 'views', 'duration')->limit($dCount)->get();
 
         $素人業餘 = Video::with('user:id,name')->where('genre', '素人業餘')->orderBy('uploaded_at', 'desc')->select('id', 'user_id', 'title', 'cover', 'imgur', 'views', 'duration')->limit($dCount)->get();
 
@@ -57,11 +57,11 @@ class JavController extends Controller
 
         $新加入作者 = User::has('videos')->where('email', 'like', '%jav%')->select('id', 'name', 'created_at', 'updated_at', 'avatar_temp')->withCount('videos')->orderBy('created_at', 'desc')->limit($dCount)->get();
 
-        $本日排行 = Video::with('user:id,name')->whereIn('genre', ['日本AV', '素人業餘', '高清無碼', 'AI解碼', '國產AV', '國產素人'])->orderBy('current_views', 'desc')->select('id', 'user_id', 'title', 'cover', 'imgur', 'views', 'duration')->limit($dCount)->get();
+        $本日排行 = Video::with('user:id,name')->whereIn('genre', Video::$genre_jav)->orderBy('current_views', 'desc')->select('id', 'user_id', 'title', 'cover', 'imgur', 'views', 'duration')->limit($dCount)->get();
 
-        $本月排行 = Video::with('user:id,name')->whereIn('genre', ['日本AV', '素人業餘', '高清無碼', 'AI解碼', '國產AV', '國產素人'])->orderBy('month_views', 'desc')->select('id', 'user_id', 'title', 'cover', 'imgur', 'views', 'duration')->limit($dCount)->get();
+        $本月排行 = Video::with('user:id,name')->whereIn('genre', Video::$genre_jav)->orderBy('month_views', 'desc')->select('id', 'user_id', 'title', 'cover', 'imgur', 'views', 'duration')->limit($dCount)->get();
 
-        $觀看次數 = Video::with('user:id,name')->whereIn('genre', ['日本AV', '素人業餘', '高清無碼', 'AI解碼', '國產AV', '國產素人'])->orderBy('views', 'desc')->select('id', 'user_id', 'title', 'cover', 'imgur', 'views', 'duration')->limit($dCount)->get();
+        $觀看次數 = Video::with('user:id,name')->whereIn('genre', Video::$genre_jav)->orderBy('views', 'desc')->select('id', 'user_id', 'title', 'cover', 'imgur', 'views', 'duration')->limit($dCount)->get();
        
         $影片標籤 = [
             [

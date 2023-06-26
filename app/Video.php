@@ -32,6 +32,10 @@ class Video extends Model
         [11, 12, 13, 14, 15]
     ]; */
 
+    public static $genre = [
+        '裏番', '泡麵番', 'Motion Anime', '3D動畫', '同人作品', 'Cosplay'
+    ];
+
     public static $metadata = [
         '無碼', 'AI解碼', '中文字幕', '1080p', '60FPS'
     ];
@@ -284,6 +288,10 @@ class Video extends Model
                      ->select('id', 'title', 'cover', 'imgur')
                      ->limit($count);
     }
+
+    public static $genre_jav = [
+        '日本AV', '素人業餘', '高清無碼', 'AI解碼', '國產AV', '國產素人'
+    ];
 
     public static $costume = [
         '黑絲', '過膝襪', '運動裝', '肉絲', '絲襪', '眼鏡娘', '獸耳', '漁網', '水着', '校服', '旗袍', '婚紗', '女僕', '和服', '吊帶襪', '兔女郎', 'Cosplay'
