@@ -12,16 +12,16 @@
         <div style="line-height: 30px;"><a style="color: grey;" href="http://www.pornbest.org/" target="_blank">PornBest 免費中文視頻</a></div>
     </div>
     <div class="hidden-xs col-xs-6 col-sm-3">
-        <div style="line-height: 30px;"><a style="color: grey;" href="https://www.17dm.net/" target="_blank">妖氣動漫導航</a></div>
+        <div style="line-height: 30px;"><a style="color: grey;" href="{{ route('jav.home') }}" target="_blank">日本AV 高清中字</a></div>
         <div style="line-height: 30px;"><a style="color: grey;" href="https://share.acgnx.net/" target="_blank">末日動漫資源庫</a></div>
         <div style="line-height: 30px;"><a style="color: grey;" href="https://moeli-desu.com/" target="_blank">夢璃</a></div>
         <div style="line-height: 30px;"><a style="color: grey;" href="https://www.sshs.pw/" target="_blank">紳士會所</a></div>
     </div>
     <div class="col-xs-6 col-sm-3">
-        <div style="line-height: 30px;"><a style="color: grey;" href="#">H動漫</a></div>
-        <div style="line-height: 30px;"><a style="color: grey;" href="#">Hentai</a></div>
-        <div style="line-height: 30px;"><a style="color: grey;" href="#">成人色情</a></div>
-        <div style="line-height: 30px;"><a style="color: grey;" href="#">免費線上看</a></div>
+        <div style="line-height: 30px;"><a style="color: grey;" href="/">H動漫</a></div>
+        <div style="line-height: 30px;"><a style="color: grey;" href="/">Hentai</a></div>
+        <div style="line-height: 30px;"><a style="color: grey;" href="/">成人色情</a></div>
+        <div style="line-height: 30px;"><a style="color: grey;" href="/">免費線上看</a></div>
     </div>
     <div class="col-xs-12">
         <div style="line-height: 30px; color: grey;">© 2020-2022 Hanime1.me ({{ gethostname() }})</div>

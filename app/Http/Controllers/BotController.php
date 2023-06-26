@@ -23,6 +23,7 @@ use App\Motherless;
 use App\Nhentai;
 use Storage;
 use Redirect;
+use File;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 
@@ -32,6 +33,33 @@ class BotController extends Controller
     {
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
+
+        $url = $request->get('url');
+        $folder = str_replace('https://missav.com/', '', $url);
+
+        $html = Browsershot::url($url)
+                ->timeout(20)
+                ->disableImages()
+                ->userAgent(Spankbang::$userAgents[array_rand(Spankbang::$userAgents)])
+                ->bodyHtml();
+        $m3u8 = html_entity_decode(str_replace('842x480', '1280x720', Helper::get_string_between($html, 'style="" src="', '"')));
+        $opts = [
+            'http' => [
+               'header' => [
+                    "Referer: https://missav.com/"
+                ]
+            ]
+        ];
+        $context = stream_context_create($opts);
+        Storage::disk('local')->put("video/{$folder}/video.m3u8", file_get_contents($m3u8, false, $context));
+
+        $content = File::get(storage_path()."/app/video/{$folder}/video.m3u8");
+        $total_array = explode("video", $content);
+        $total = preg_replace("/[^0-9]/", "", end($total_array));
+        for ($i = 0; $i <= $total; $i++) {
+            $url = explode('video', $m3u8)[0]."video{$i}.ts";
+            Storage::disk('local')->put("video/{$folder}/video{$i}.ts", file_get_contents($url, false, $context));
+        }
 
         // Remove lesser tags
         /* $videos = Video::all();
@@ -276,13 +304,13 @@ class BotController extends Controller
 
 
         // update cover
-        $videos = Video::where('cover', 'not like', '%cdn.jsdelivr.net%')->orderBy('id', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
+        /* $videos = Video::where('cover', 'not like', '%cdn.jsdelivr.net%')->orderBy('id', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
         foreach ($videos as $video) {
             $cover = str_replace('.png', '.jpg', $video->cover);
             $imgur = Helper::get_string_between($cover, 'https://i.imgur.com/', '.jpg');
             $video->cover = 'https://cdn.jsdelivr.net/gh/dokomadeiku/dokomadeiku@v1.0.0/asset/cover/'.$imgur.'.jpg';
             $video->save();
-        }
+        } */
 
         //---------------------------------------------------------------------------------------------------------
 

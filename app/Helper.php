@@ -23,6 +23,38 @@ class Helper
         return substr($string, $ini, $len);
     }
 
+    public static function getPreferredLanguage()
+    {
+        $user_lang = isset($_COOKIE['user_lang']) ? $_COOKIE['user_lang'] : null;
+        if ($user_lang) {
+            if ($user_lang == 'zh-CHS') {
+                $lang = 'zh-CHS';
+            } else {
+                $lang = 'zh-CHT';
+            }
+        } else {
+            $browser_lang = isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) ? $_SERVER['HTTP_ACCEPT_LANGUAGE'] : 'zh-CHT';
+            if (str_starts_with($browser_lang, 'zh-CN') || str_starts_with($browser_lang, 'zh-CHS')) {
+                $lang = 'zh-CHS';
+            } else {
+                $lang = 'zh-CHT';
+            }
+        }
+        return $lang;
+    }
+
+    public static function getPreferredQuality($qualities)
+    {
+        $search = isset($_COOKIE['quality']) ? $_COOKIE['quality'] : 720;
+        $closest = null;
+        foreach ($qualities as $quality) {
+            if ($closest === null || abs($search - $closest) > abs($quality - $search)) {
+                $closest = $quality;
+            }
+        }
+        return $closest;
+    }
+
     public static function convertBin2hex(String $context){
         $coverted = mb_strtolower($context);
         $coverted = preg_replace('/\s+/', '', $coverted);

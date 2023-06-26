@@ -31,6 +31,10 @@ class VideoController extends Controller
 
         if (is_numeric($vid) && $video = Video::with('watch:id,title')->select('id', 'user_id', 'playlist_id', 'comic_id', 'title', 'translations', 'caption', 'cover', 'genre', 'tags_array', 'sd', 'qualities', 'downloads', 'sd_sc', 'qualities_sc', 'downloads_sc', 'outsource', 'has_subtitles', 'current_views', 'week_views', 'month_views', 'views', 'imgur', 'foreign_sd', 'duration', 'has_torrent', 'artist', 'created_at', 'uploaded_at')->withCount('likes')->find($vid)) {
 
+            if (in_array($video->genre, ['日本AV', '素人業餘', '高清無碼', 'AI解碼', '國產AV', '國產素人'])) {
+                return Redirect::to(route('jav.watch')."?v={$vid}");
+            }
+
             $current = $video;
             $doujin = false;
             $user = auth()->user();
@@ -81,7 +85,7 @@ class VideoController extends Controller
                 $liked = false;
             }
 
-            $lang = $this->getPreferredLanguage();
+            $lang = Helper::getPreferredLanguage();
             if ($current->sd_sc && $lang == 'zh-CHS') {
                 $sd = $video->sd_sc;
                 $qualities = $video->qualities_sc;
@@ -97,7 +101,7 @@ class VideoController extends Controller
                 $sd = $this->getServerSd($balancer, $server, $sd);
                 $qualities = $this->getServerQual($balancer, $server, $qualities);
             }
-            $qual = $qualities != null ? $this->getPreferredQuality(array_keys($qualities)) : 720;
+            $qual = $qualities != null ? Helper::getPreferredQuality(array_keys($qualities)) : 720;
 
         } else {
             abort(403);
@@ -113,7 +117,7 @@ class VideoController extends Controller
         $vid = $request->v;
         if (is_numeric($vid) && $video = Video::select('id', 'user_id', 'playlist_id', 'title', 'translations', 'caption', 'cover', 'tags', 'sd', 'qualities', 'downloads', 'sd_sc', 'qualities_sc', 'downloads_sc', 'outsource', 'current_views', 'views', 'imgur', 'foreign_sd', 'duration', 'has_torrent', 'artist', 'created_at', 'uploaded_at')->find($vid)) {
 
-            $lang = $this->getPreferredLanguage();
+            $lang = Helper::getPreferredLanguage();
             if ($video->sd_sc && $lang == 'zh-CHS') {
                 $sd = $video->sd_sc;
                 $qualities = $video->qualities_sc;
@@ -150,38 +154,6 @@ class VideoController extends Controller
         }
 
         return view('video.download', compact('video', 'sd', 'qualities', 'is_mobile', 'torrent'));
-    }
-
-    public function getPreferredQuality($qualities)
-    {
-        $search = isset($_COOKIE['quality']) ? $_COOKIE['quality'] : 720;
-        $closest = null;
-        foreach ($qualities as $quality) {
-            if ($closest === null || abs($search - $closest) > abs($quality - $search)) {
-                $closest = $quality;
-            }
-        }
-        return $closest;
-    }
-
-    public function getPreferredLanguage()
-    {
-        $user_lang = isset($_COOKIE['user_lang']) ? $_COOKIE['user_lang'] : null;
-        if ($user_lang) {
-            if ($user_lang == 'zh-CHS') {
-                $lang = 'zh-CHS';
-            } else {
-                $lang = 'zh-CHT';
-            }
-        } else {
-            $browser_lang = isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) ? $_SERVER['HTTP_ACCEPT_LANGUAGE'] : 'zh-CHT';
-            if (str_starts_with($browser_lang, 'zh-CN') || str_starts_with($browser_lang, 'zh-CHS')) {
-                $lang = 'zh-CHS';
-            } else {
-                $lang = 'zh-CHT';
-            }
-        }
-        return $lang;
     }
 
     public function getServerSd($balancer, $server, $sd)

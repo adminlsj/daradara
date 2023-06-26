@@ -1,6 +1,6 @@
 <div style="z-index: 10000 !important; border-top: 1px solid #222222; {{ Request::is('*watch*') ? 'display:none;' : '' }}" class="bottom-nav hidden-lg hidden-md white-theme-nav-bottom">
-  <a href="/">
-    @if (Request::is('/'))
+  <a href="/jav">
+    @if (Request::is('jav'))
       <img style="height: 18px; margin-top: 8px;" src="https://cdn.jsdelivr.net/gh/guaishushukanlifan/Project-H@v2.0.0/asset/icon/home-filled.png">
       <div style="font-size: 9px; color: white; margin-top: 4px;">主頁</div>
     @else
@@ -8,7 +8,7 @@
       <div style="font-size: 9px; color: white; margin-top: 4px;">主頁</div>
     @endif
   </a>
-  <a href="{{ route('home.search') }}">
+  <a href="{{ route('jav.search') }}">
     <img style="height: 18px; margin-top: 8px;" src="https://cdn.jsdelivr.net/gh/tatakanuta/tatakanuta@v1.0.0/asset/icon/search.png">
     <div style="font-size: 9px; color: white; margin-top: 4px;">搜索</div>
   </a>
