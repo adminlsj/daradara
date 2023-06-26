@@ -24,6 +24,6 @@
         <div style="line-height: 30px;"><a style="color: grey;" href="/">免費線上看</a></div>
     </div>
     <div class="col-xs-12">
-        <div style="line-height: 30px; color: grey;">© 2020-2022 Hanime1.me ({{ gethostname() }})</div>
+        <div style="line-height: 30px; color: grey;">© 2020-2023 Hanime1.me ({{ gethostname() }})</div>
     </div>
 </div>
