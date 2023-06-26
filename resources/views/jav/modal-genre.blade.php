@@ -10,11 +10,11 @@
 
         @foreach (['全部', '中文字幕', '日本AV', '素人業餘', '高清無碼', 'AI解碼', '國產AV', '國產素人'] as $option)
           @if ($option == '中文字幕')
-          <a href="{{ route('jav.search') }}?tags%5B%5D=中文字幕" style="text-decoration: none; color: white;">
-            <div style="line-height: 30px" class="simple-dropdown-item {{ $genre == $option ? 'active' : ''}}">
-              <div class="hentai-sort-options">{{ $option }}</div>
-            </div>
-          </a>
+            <a href="{{ route('jav.search') }}?tags%5B%5D=中文字幕" style="text-decoration: none; color: white;">
+              <div style="line-height: 30px" class="simple-dropdown-item {{ $genre == $option ? 'active' : ''}}">
+                <div class="hentai-sort-options">{{ $option }}</div>
+              </div>
+            </a>
           @else
   	        <div style="line-height: 30px" class="simple-dropdown-item genre-option {{ $genre == $option ? 'active' : ''}}">
               <div class="hentai-sort-options">{{ $option }}</div>

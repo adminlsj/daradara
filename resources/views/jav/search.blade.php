@@ -189,7 +189,7 @@
 	<div id="home-rows-wrapper" class="search-rows-wrapper">
 
 		<div class="hidden-sm hidden-md hidden-lg" style="text-align: center; margin-top: 0px; margin-bottom: -22px;">
-			@include('layouts.exoclick', ['id' => '4396576', 'width' => '300', 'height' => '100'])
+			@include('layouts.exoclick', ['id' => '5016122', 'width' => '300', 'height' => '100'])
 		</div>
 
 		<div style="{{ $results->lastPage() == 1 ? 'margin-bottom: 44px' : 'margin-bottom: -12px;' }}" class="search-pagination mobile-search-pagination hidden-sm hidden-md hidden-lg">{!! $results->appends(request()->query())->onEachSide(1)->links() !!}</div>
@@ -225,7 +225,7 @@
 		<div class="{{ $doujin ? 'search-doujin-pagination-desktop-margin' : 'search-hentai-pagination-desktop-margin' }} search-pagination hidden-xs {{ $doujin ? 'mobile-search-bottom-pagination' : '' }}">{!! $results->appends(request()->query())->links() !!}</div>
 		<div style="{{ $doujin ? 'margin-top: -26px;' : 'margin-top: -25px;' }}" class="search-pagination mobile-search-pagination hidden-sm hidden-md hidden-lg {{ $doujin ? 'mobile-search-bottom-pagination' : '' }}">{!! $results->appends(request()->query())->onEachSide(1)->links() !!}</div>
 
-		@include('ads.search-banner-panel')
+		@include('jav.ads-search-banner-panel')
 
 		<span class="hidden-xs"><br><br><br></span>
 

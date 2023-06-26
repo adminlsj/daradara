@@ -30,12 +30,12 @@
 
       @if ($is_mobile)
         <div id="mobile-ad" class="hidden-md hidden-lg" style="text-align: center; padding-top: 5px; padding-bottom: 0px;background-color: black; position: relative;">
-          @include('layouts.exoclick', ['id' => '4372430', 'width' => '300', 'height' => '100'])
+          @include('layouts.exoclick', ['id' => '5016132', 'width' => '300', 'height' => '100'])
           <div id="close-mobile-ad-btn" style="position: absolute; top: 5px; right: 1px; cursor: pointer; border: 1px solid white;"><i style="vertical-align: middle; color: white;" class="material-icons">close</i></div>
         </div>
       @else
         <div style="margin-top: 7px; margin-bottom: 0px; text-align: center">
-          @include('layouts.exoclick', ['id' => '4372406', 'width' => '728', 'height' => '90'])
+          @include('layouts.exoclick', ['id' => '5016134', 'width' => '728', 'height' => '90'])
         </div>
       @endif
 
@@ -180,7 +180,7 @@
       @if (!$is_mobile)
         <div class="hidden-md hidden-lg" style="text-align: left; padding-left: 5px; padding-top: 5px; margin-top: 15px; margin-bottom: -15px; padding-bottom: 0px; margin-left: 15px; margin-right: 15px; width: 310px; height: 282px; background-color: #3a3c3f; display: inline-block;">
           <div style="margin-bottom: 5px; color: white; font-size: 12px;">點點廣告，贊助我們（●´∀｀）ノ♡</div>
-          @include('layouts.exoclick', ['id' => '4999624', 'width' => '300', 'height' => '250'])
+          @include('layouts.exoclick', ['id' => '5016136', 'width' => '300', 'height' => '250'])
         </div>
 
         <div class="hidden-xs hidden-md hidden-lg" style="text-align: left; padding-left: 5px; padding-top: 5px; margin-top: 15px; margin-bottom: -15px; padding-bottom: 0px; width: 310px; height: 282px; background-color: #3a3c3f; display: inline-block; vertical-align: top; margin-left: -5px;">
@@ -192,7 +192,7 @@
           <!--JuicyAds END-->
         </div>
       @else
-        @include('ads.watch-double-banners', ['mobile_watch' => '4999634'])
+        @include('ads.watch-double-banners', ['mobile_watch' => '5016138'])
       @endif
 
       <div id="tablinks-wrapper" class="tab mobile-padding" style="margin-top: 30px; font-weight: bold;">
@@ -239,12 +239,12 @@
 
           <div id="exoclick-banner-adjust" class="hidden-xs hidden-md hidden-lg" style="text-align: left; padding-left: 5px; padding-top: 5px; margin-top: 8px; margin-bottom: 10px; padding-bottom: 0px; width: 310px; height: 282px; background-color: #3a3c3f; margin-left: 10px; display: inline-block; vertical-align: top;">
             <div style="margin-bottom: 5px; color: white; font-size: 12px;">點點廣告，贊助我們（●´∀｀）ノ♡</div>
-            @include('layouts.exoclick', ['id' => '4999626', 'width' => '300', 'height' => '250'])
+            @include('layouts.exoclick', ['id' => '5016140', 'width' => '300', 'height' => '250'])
           </div>
         </div>
       @else
         <div id="double-banners-adjust" style="margin-top: -8px;">
-          @include('ads.watch-double-banners', ['mobile_watch' => '4999636'])
+          @include('ads.watch-double-banners', ['mobile_watch' => '5016142'])
         </div>
         <div id="watch-footer">
           <div style="background-color: #212121;">
@@ -274,7 +274,7 @@
     <div class="col-md-3 single-show-list">
       <div class="hidden-xs hidden-sm" style="text-align: left; padding-left: 5px; padding-top: 5px; margin-top: 0px; margin-bottom: 15px; padding-bottom: 0px; width: 310px; height: 282px; background-color: #3a3c3f;">
         <div style="margin-bottom: 5px; color: white; font-size: 12px;">點點廣告，贊助我們（●´∀｀）ノ♡</div>
-        @include('layouts.exoclick', ['id' => '4372438', 'width' => '300', 'height' => '250'])
+        @include('layouts.exoclick', ['id' => '5016144', 'width' => '300', 'height' => '250'])
       </div>
 
       <div class="hidden-xs hidden-sm">
@@ -284,7 +284,7 @@
       <div id="myHeader" class="hidden-xs hidden-sm">
         <div style="text-align: left; padding-left: 5px; padding-top: 5px; margin-top: 15px; margin-bottom: 10px; padding-bottom: 0px; width: 310px; height: 282px; background-color: #3a3c3f;">
           <div style="margin-bottom: 5px; color: white; font-size: 12px;">點點廣告，贊助我們（●´∀｀）ノ♡</div>
-          @include('layouts.exoclick', ['id' => '4999618', 'width' => '300', 'height' => '250'])
+          @include('layouts.exoclick', ['id' => '5016146', 'width' => '300', 'height' => '250'])
         </div>
 
         <div style="text-align: left; padding-left: 5px; padding-top: 5px; margin-top: 15px; margin-bottom: 10px; padding-bottom: 0px; width: 310px; height: 282px; background-color: #3a3c3f;">
@@ -301,7 +301,7 @@
 
   @if (!$is_mobile)
     <div id="bottom-ads" style="margin-top: 30px; margin-bottom: 0px; text-align: center;" class="hidden-xs hidden-sm">
-      @include('layouts.exoclick', ['id' => '4372454', 'width' => '900', 'height' => '250'])
+      @include('layouts.exoclick', ['id' => '5016148', 'width' => '900', 'height' => '250'])
     </div>
   @endif
 
