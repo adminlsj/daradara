@@ -211,11 +211,11 @@
 					@foreach ($results as $video)
 						<div class="col-xs-6 col-sm-4 col-md-2 search-doujin-videos hidden-xs hover-lighter multiple-link-wrapper" style="padding-left: 3px; padding-right: 3px; margin-bottom: 45px;">
 							<a class="overlay" href="{{ route('jav.watch') }}?v={{ $video->id }}"></a>
-							@include('video.card-doujin-desktop')
+							@include('jav.card-doujin-desktop')
 						</div>
 						<div class="col-xs-12 search-doujin-videos hidden-sm hidden-md hidden-lg hidden-xl hover-lighter multiple-link-wrapper" style="padding-left: 4px; padding-right: 4px; margin-bottom: 16px;">
 							<a class="overlay" href="{{ route('jav.watch') }}?v={{ $video->id }}"></a>
-							@include('video.card-doujin-mobile')
+							@include('jav.card-doujin-mobile')
 						</div>
 					@endforeach
 				</div>

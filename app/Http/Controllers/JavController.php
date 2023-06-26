@@ -244,14 +244,12 @@ class JavController extends Controller
                         break;
 
                     case '日本AV':
-                        $doujin = true;
                         $results = $results->where(function($query) {
                             $query->orWhere('genre', '日本AV');
                         });
                         break;
 
                     case '素人業餘':
-                        $doujin = false;
                         $results = $results->where(function($query) {
                             $query->orWhere('genre', '素人業餘');
                         });
