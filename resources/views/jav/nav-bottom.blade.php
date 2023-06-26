@@ -87,12 +87,12 @@
         <div class="row" style="text-align: center;">
           <div class="col-xs-6" style="width: 50%; padding-right: 0; border-right: 1px solid #333333;">
             <a style="color: white; text-decoration: none;" href="{{ route('jav.search') }}?tags%5B%5D=中文字幕">
-              <div class="simple-dropdown-item genre-option">中文字幕</div>
+              <div class="simple-dropdown-item">中文字幕</div>
             </a>
           </div>
           <div class="col-xs-6" style="width: 50%; padding-left: 0;">
             <a style="color: white; text-decoration: none;" href="https://discord.gg/WWYc9m9CUQ" target="_blank">
-              <div class="simple-dropdown-item genre-option">Discord</div>
+              <div class="simple-dropdown-item">Discord</div>
             </a>
           </div>
         </div>
