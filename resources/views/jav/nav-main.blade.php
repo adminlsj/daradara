@@ -3,5 +3,5 @@
 </div>
 
 <div id="main-nav-home" style="z-index: 10001; padding:0; padding-top: 3px; height: 48px; line-height: 40px; position: fixed; background-image: none; border-bottom: 1px solid #2b2b2b; margin-bottom: 0px; background-color: #141414;" class="hidden-sm hidden-md hidden-lg">
-  @include('nav.main-mobile')
+  @include('jav.nav-main-mobile')
 </div>
