@@ -41,13 +41,13 @@
       <div class="modal-body" style="padding: 0; height: calc(100% - 65px); overflow-x: hidden;">
         <div class="row" style="text-align: center;">
           <div class="col-xs-6" style="width: 50%; padding-right: 0; border-right: 1px solid #333333;">
-            <a style="color: white; text-decoration: none;" href="{{ route('home.search') }}?genre=裏番">
-              <div class="simple-dropdown-item genre-option">裏番</div>
+            <a style="color: white; text-decoration: none;" href="{{ route('jav.search') }}?genre=日本AV">
+              <div class="simple-dropdown-item genre-option">日本AV</div>
             </a>
           </div>
           <div class="col-xs-6" style="width: 50%; padding-left: 0;">
-            <a style="color: white; text-decoration: none;" href="{{ route('comic.index') }}">
-              <div class="simple-dropdown-item genre-option">H漫畫</div>
+            <a style="color: white; text-decoration: none;" href="{{ route('jav.search') }}?genre=素人業餘">
+              <div class="simple-dropdown-item genre-option">素人業餘</div>
             </a>
           </div>
         </div>
@@ -56,13 +56,13 @@
 
         <div class="row" style="text-align: center;">
           <div class="col-xs-6" style="width: 50%; padding-right: 0; border-right: 1px solid #333333;">
-            <a style="color: white; text-decoration: none;" href="/previews/{{ Carbon\Carbon::now()->format('Ym') }}">
-              <div class="simple-dropdown-item genre-option">新番預告</div>
+            <a style="color: white; text-decoration: none;" href="{{ route('jav.search') }}?genre=高清無碼">
+              <div class="simple-dropdown-item genre-option">高清無碼</div>
             </a>
           </div>
           <div class="col-xs-6" style="width: 50%; padding-left: 0;">
-            <a style="color: white; text-decoration: none;" href="{{ route('home.search') }}?genre=泡麵番">
-              <div class="simple-dropdown-item genre-option">泡麵番</div>
+            <a style="color: white; text-decoration: none;" href="{{ route('jav.search') }}?genre=AI解碼">
+              <div class="simple-dropdown-item genre-option">AI解碼</div>
             </a>
           </div>
         </div>
@@ -71,13 +71,13 @@
 
         <div class="row" style="text-align: center;">
           <div class="col-xs-6" style="width: 50%; padding-right: 0; border-right: 1px solid #333333;">
-            <a style="color: white; text-decoration: none;" href="{{ route('home.search') }}?genre=3D動畫">
-              <div class="simple-dropdown-item genre-option">3D動畫</div>
+            <a style="color: white; text-decoration: none;" href="{{ route('jav.search') }}?genre=國產AV">
+              <div class="simple-dropdown-item genre-option">國產AV</div>
             </a>
           </div>
           <div class="col-xs-6" style="width: 50%; padding-left: 0;">
-            <a style="color: white; text-decoration: none;" href="{{ route('home.search') }}?genre=同人作品">
-              <div class="simple-dropdown-item genre-option">同人作品</div>
+            <a style="color: white; text-decoration: none;" href="{{ route('jav.search') }}?genre=國產素人">
+              <div class="simple-dropdown-item genre-option">國產素人</div>
             </a>
           </div>
         </div>
@@ -86,8 +86,8 @@
 
         <div class="row" style="text-align: center;">
           <div class="col-xs-6" style="width: 50%; padding-right: 0; border-right: 1px solid #333333;">
-            <a style="color: white; text-decoration: none;" href="{{ route('home.search') }}?genre=Cosplay">
-              <div class="simple-dropdown-item genre-option">Cosplay</div>
+            <a style="color: white; text-decoration: none;" href="{{ route('jav.search') }}?tags%5B%5D=中文字幕">
+              <div class="simple-dropdown-item genre-option">中文字幕</div>
             </a>
           </div>
           <div class="col-xs-6" style="width: 50%; padding-left: 0;">
@@ -135,8 +135,8 @@
 
         <div class="row" style="text-align: center;">
           <div class="col-xs-6" style="width: 50%; padding-right: 0; border-right: 1px solid #333333;">
-            <a style="color: white; text-decoration: none;" href="{{ route('jav.home') }}" target="_blank">
-              <div class="simple-dropdown-item">日本AV 高清中字</div>
+            <a style="color: white; text-decoration: none;" href="/" target="_blank">
+              <div class="simple-dropdown-item">Hanime1 H動漫</div>
             </a>
           </div>
           <div class="col-xs-6" style="width: 50%; padding-left: 0;">
