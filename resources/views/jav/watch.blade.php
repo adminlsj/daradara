@@ -174,7 +174,7 @@
       </div>
 
       <div class="hidden-md hidden-lg" style="margin-top: 25px">
-        @include('video.playlist-panel')
+        @include('jav.playlist-panel')
       </div>
 
       @if (!$is_mobile)
@@ -210,7 +210,7 @@
               </div>
               <div style="padding: 5px 14px; {{ $loop->first ? 'margin-top: -5px;' : ''}}" class="hidden-sm hidden-md hidden-lg hidden-xl related-watch-wrap multiple-link-wrapper {{ $loop->iteration > 30 ? 'hidden-xs hidden-sm temp-hidden-related-video' : '' }}">
                 <a class="overlay" href="{{ route('jav.watch') }}?v={{ $video->id }}"></a>
-                @include('video.singleShowRelated', ['source' => 'video'])
+                @include('jav.singleShowRelated', ['source' => 'video'])
               </div>
             @endforeach
         </div>
