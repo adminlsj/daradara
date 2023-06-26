@@ -221,7 +221,7 @@ class HomeController extends Controller
             $results = $results->select('id', 'name', 'created_at', 'updated_at', 'avatar_temp')->withCount('videos')->orderBy('videos_count', 'desc')->paginate(42);
 
         } else {
-            $results = Video::query();
+            $results = Video::whereIn('genre', Video::$genre);
 
             if ($query) {
                 $query = mb_strtolower(preg_replace('/\s+/', '', $query), 'UTF-8');

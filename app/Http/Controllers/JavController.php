@@ -225,7 +225,7 @@ class JavController extends Controller
             $results = $results->select('id', 'name', 'created_at', 'updated_at', 'avatar_temp')->withCount('videos')->orderBy('videos_count', 'desc')->paginate(42);
 
         } else {
-            $results = Video::whereIn('genre', ['日本AV', '素人業餘', '高清無碼', 'AI解碼', '國產AV', '國產素人']);
+            $results = Video::whereIn('genre', Video::$genre_jav);
 
             if ($query) {
                 $query = mb_strtolower(preg_replace('/\s+/', '', $query), 'UTF-8');
