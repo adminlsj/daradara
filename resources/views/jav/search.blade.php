@@ -7,7 +7,7 @@
 	<div id="main-nav-home" style="z-index: 10000; padding:0; padding-top: 3px; height: 50px; line-height: 40px; margin-bottom: 0px; background-color: black; position: relative;" class="hidden-sm hidden-md hidden-lg">
 
 	  <div style="padding: 0 10px; margin-bottom: -10px;">
-	    <a href="/" style="color: #e5e5e5;">
+	    <a href="/jav" style="color: #e5e5e5;">
 	      <i class="material-icons-outlined" style="vertical-align: middle; margin-top: 0px; margin-left: 0px; font-size: 28px">chevron_left</i>
 	    </a>
 
