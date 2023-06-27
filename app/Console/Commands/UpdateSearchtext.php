@@ -41,6 +41,9 @@ class UpdateSearchtext extends Command
         $videos = Video::all();
         foreach ($videos as $video) {
             $searchtext = $video->title.'|'.$video->translations['JP'].'|'.implode('|', array_keys($video->tags_array)).'|'.$video->genre.'|'.$video->artist;
+            if (array_key_exists('characters', $video->foreign_sd)) {
+                $searchtext = $searchtext.$video->foreign_sd['characters'];
+            }
             $video->searchtext = mb_strtolower(preg_replace('/\s+/', '', $searchtext), 'UTF-8');
             $video->save();
         }
