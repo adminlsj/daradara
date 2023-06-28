@@ -21,7 +21,7 @@ class Video extends Model
     ];
 
     protected $fillable = [
-        'id', 'user_id', 'playlist_id', 'comic_id', 'title', 'caption', 'tags', 'sd', 'qualities', 'downloads', 'imgur', 'current_views', 'week_views', 'month_views', 'views', 'outsource', 'foreign_sd', 'data', 'created_at', 'uploaded_at', 'duration', 'translations', 'cover', 'tags_array', 'uncover', 'has_torrent', 'artist'
+        'id', 'user_id', 'playlist_id', 'comic_id', 'title', 'caption', 'tags', 'sd', 'qualities', 'downloads', 'imgur', 'current_views', 'week_views', 'month_views', 'views', 'outsource', 'foreign_sd', 'data', 'created_at', 'uploaded_at', 'duration', 'translations', 'cover', 'tags_array', 'uncover', 'has_torrent', 'artist', 'genre'
     ];
 
     public static $banned_ip = [

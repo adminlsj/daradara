@@ -34,7 +34,77 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $url = $request->get('url');
+        // Updload JAV from Avbebe & Missav
+        $id = $request->vid;
+        $avbebe_link = $request->avbebe;
+        $avbebe_html = Browsershot::url($avbebe_link)
+                ->timeout(20)
+                ->setExtraHttpHeaders(['Referer' => 'https://avbebe.com/'])
+                ->userAgent(Spankbang::$userAgents[array_rand(Spankbang::$userAgents)])
+                ->bodyHtml();
+        $title = str_replace(' – Avbebe.com 高清H動畫♥沒有片頭廣告♥最新里番', '', str_replace('【綜合AV影片-中文AV】', '', Helper::get_string_between($avbebe_html, '<title>', '</title>')));
+        $userInteractionCount = Helper::get_string_between($avbebe_html, '"userInteractionCount":', '}}</script>');
+        $caption = Helper::get_string_between($avbebe_html, 'userInteractionCount":'.$userInteractionCount.'}}</script>', '</div>');
+        $sd = Helper::get_string_between($avbebe_html, 'type="application/x-mpegurl" src="', '"');
+
+        $missav_link = $request->missav;
+        $missav_html = Browsershot::url($missav_link)
+                ->timeout(20)
+                ->setExtraHttpHeaders(['Referer' => 'https://missav.com/'])
+                ->userAgent(Spankbang::$userAgents[array_rand(Spankbang::$userAgents)])
+                ->bodyHtml();
+        $downloads = 'https://rapidgator.net/file/'.Helper::get_string_between($missav_html, 'https://rapidgator.net/file/', '"');
+        $created_at = preg_replace('/\s+/', '', Helper::get_string_between($missav_html, '發行日期:</span>
+<span class="font-medium">', '</span>')).' '.Carbon::now()->toTimeString();
+        $created_at = Carbon::parse($created_at);
+        $code = preg_replace('/\s+/', '', Helper::get_string_between($missav_html, '番號:</span>
+<span class="font-medium">', '</span>'));
+        $title_jp = $code.' '.preg_replace('/\s+/', '', Helper::get_string_between($missav_html, '標題:</span>
+<span class="font-medium">', '</span>'));
+        $characters = Helper::get_string_between($missav_html, '女優:</span>', '</div>');
+        $characters = explode(',', $characters);
+        foreach ($characters as &$character) {
+            $character = Helper::get_string_between($character, '>', '<');
+        }
+        $brand = preg_replace('/\s+/', '', Helper::get_string_between($missav_html, '發行商:</span>', '</div>'));
+        $brand = Helper::get_string_between($brand, '>', '<');
+        if (strpos($brand, "Moody's") !== false) {
+            $brand = 'Moodyz';
+        }
+
+        $url = "https://i.imgur.com/Ku2VhgD.jpg";
+        $tags_array = [];
+        foreach (explode('|', $request->tags) as $tag) {
+            $tags_array[$tag] = 10;
+        }
+        $foreign_sd = ['cover' => 'Ku2VhgD', 'thumbnail' => 'Ku2VhgD', 'avbebe' => $avbebe_link, 'missav' => $missav_link, 'characters' => implode(',', $characters)];
+        $video = Video::create([
+            'id' => $id,
+            'user_id' => 1,
+            'playlist_id' => 1,
+            'title' => $title,
+            'translations' => ['JP' => $title_jp],
+            'caption' => preg_replace('/\s+/', '', $caption),
+            'sd' => $sd,
+            'downloads' => ['720' => $downloads],
+            'imgur' => Helper::get_string_between($url, 'https://i.imgur.com/', '.'),
+            'tags' => implode(' ', explode('|', $request->tags)),
+            'tags_array' => $tags_array,
+            'artist' => $brand,
+            'genre' => '日本AV',
+            'views' => 0,
+            'outsource' => false,
+            'created_at' => $created_at,
+            'uploaded_at' => $created_at,
+            'foreign_sd' => $foreign_sd,
+            'cover' => 'https://i.imgur.com/E6mSQA2.jpg',
+            'uncover' => true,
+        ]);
+
+        return Redirect::route('jav.watch', ['v' => $video->id]);
+
+        // download missav
+        /* $url = $request->get('url');
         $folder = str_replace('https://missav.com/', '', $url);
 
         $html = Browsershot::url($url)
@@ -59,7 +129,7 @@ class BotController extends Controller
         for ($i = 0; $i <= $total; $i++) {
             $url = explode('video', $m3u8)[0]."video{$i}.ts";
             Storage::disk('local')->put("video/{$folder}/video{$i}.ts", file_get_contents($url, false, $context));
-        }
+        } */
 
         // Remove lesser tags
         /* $videos = Video::all();
