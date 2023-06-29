@@ -154,6 +154,8 @@ class Youjizz
                 curl_close($curl_connection);
                 Log::info("ID#{$video->id} html loop {$loop} failed");
                 $loop++;
+
+                sleep(5);
             }
             if (strpos($html, 'var dataEncodings = ') !== false) {
                 $start = explode('var dataEncodings = ', $html);
