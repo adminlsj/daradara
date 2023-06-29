@@ -28,7 +28,7 @@ class Youjizz
             $loop = 0;
             $html = '';
             $start = '';
-            while (strpos($html, 'var dataEncodings = ') === false && $loop < 300) {
+            while (strpos($html, 'var dataEncodings = ') === false && $loop < 100) {
                 $curl_connection = curl_init($url);
                 curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
                 curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
@@ -37,6 +37,8 @@ class Youjizz
                 curl_close($curl_connection);
                 Log::info("ID#{$video->id} html loop {$loop} failed");
                 $loop++;
+
+                sleep(5);
             }
             if (strpos($html, 'var dataEncodings = ') !== false) {
                 $start = explode('var dataEncodings = ', $html);
@@ -84,7 +86,7 @@ class Youjizz
             $loop = 0;
             $html = '';
             $start = '';
-            while (strpos($html, 'var dataEncodings = ') === false && $loop < 300) {
+            while (strpos($html, 'var dataEncodings = ') === false && $loop < 100) {
                 $curl_connection = curl_init($url);
                 curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
                 curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
@@ -93,6 +95,8 @@ class Youjizz
                 curl_close($curl_connection);
                 Log::info("ID#{$video->id} html loop {$loop} failed");
                 $loop++;
+
+                sleep(5);
             }
             if (strpos($html, 'var dataEncodings = ') !== false) {
                 $start = explode('var dataEncodings = ', $html);
@@ -202,7 +206,7 @@ class Youjizz
                 Log::info('ID: '.$video->id.' error updated');
 
             } else {
-                // Mail::to('vicky.avionteam@gmail.com')->send(new UserReport('master', 'Youjizz error update failed', $video->id, $video->title, $video->sd, 'master', 'master'));
+                Mail::to('vicky.avionteam@gmail.com')->send(new UserReport('master', 'Youjizz error update failed', $video->id, $video->title, $video->sd, 'master', 'master'));
                 echo 'ID: '.$video->id.' ERROR UPDATE FAILED<br>';
                 Log::info('ID: '.$video->id.' error update failed');
             }

@@ -43,7 +43,15 @@ class UpdateYoujizz extends Command
     {
         Log::info('Youjizz update started...');
 
-        $videos = Video::where('foreign_sd', 'ilike', '%"youjizz"%')->select('id', 'title', 'sd', 'outsource', 'foreign_sd')->get();
+        $videos = Video::where('foreign_sd', 'ilike', '%"youjizz"%')
+                    ->select('id', 'title', 'sd', 'outsource', 'foreign_sd')
+                    ->orderBy('id', 'asc')
+                    ->get()
+                    ->sortBy(function($video){
+                        return (int) Helper::get_string_between($video->sd, 'validfrom=', '&');
+                    })
+                    ->values();
+
         foreach ($videos as $video) {
             echo 'ID: '.$video->id.' STARTED<br>';
             Log::info('ID: '.$video->id.' started');
@@ -56,7 +64,7 @@ class UpdateYoujizz extends Command
             $html = '';
             $start = '';
             $has_hls2e = true;
-            while (strpos($html, 'var dataEncodings = ') === false && $loop < 300) {
+            while (strpos($html, 'var dataEncodings = ') === false && $loop < 100) {
                 $curl_connection = curl_init($url);
                 curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
                 curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
@@ -65,6 +73,8 @@ class UpdateYoujizz extends Command
                 curl_close($curl_connection);
                 Log::info("ID#{$video->id} html loop {$loop} failed");
                 $loop++;
+
+                sleep(5);
             }
             if (strpos($html, 'var dataEncodings = ') !== false) {
                 $start = explode('var dataEncodings = ', $html);
