@@ -34,7 +34,7 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $url = "https://www.youjizz.com/videos/blow-and-creampie-horny-milf-86988991.html";
+        /* $url = "https://www.youjizz.com/videos/blow-and-creampie-horny-milf-86988991.html";
         $curl_connection = curl_init($url);
         curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
         curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
@@ -45,15 +45,15 @@ class BotController extends Controller
         curl_close($curl_connection);
         $start = explode('var dataEncodings = ', $html);
         return $start;
-        return htmlentities($html, ENT_QUOTES);
+        return htmlentities($html, ENT_QUOTES); */
 
         /* $html = Browsershot::url($url)
                 ->timeout(20)
                 ->setExtraHttpHeaders(['Referer' => 'https://youjizz.com/'])
                 ->userAgent(Spankbang::$userAgents[array_rand(Spankbang::$userAgents)])
                 ->bodyHtml(); */
-        $start = explode('var dataEncodings = ', $html);
-        return $start;
+        /* $start = explode('var dataEncodings = ', $html);
+        return $start; */
         // return htmlentities($html, ENT_QUOTES);
         // return $html;
 
@@ -217,44 +217,6 @@ class BotController extends Controller
             }
         } */
 
-        /* echo 'Imgurs check start<br>';
-        $imgurs = Video::where('cover', 'ilike', '%imgur%')->select('id', 'title', 'cover', 'imgur')->get();
-        foreach ($imgurs as $video) {
-            $url = 'https://i.imgur.com/'.$video->imgur.'.jpg';
-            $ch = curl_init();
-
-            curl_setopt($ch, CURLOPT_URL, $url);
-            curl_setopt($ch, CURLOPT_TIMEOUT, '60'); // in seconds
-            curl_setopt($ch, CURLOPT_HEADER, 1);
-            curl_setopt($ch, CURLOPT_NOBODY, 1);
-            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-            $res = curl_exec($ch);
-
-            if (curl_getinfo($ch)['url'] != $url){
-                echo 'ID#'.$video->id.' '.$video->title.'<br>';
-            }
-        }
-
-        echo 'Covers check start<br>';
-        $covers = Video::where('cover', 'ilike', '%imgur%')->select('id', 'title', 'cover')->get();
-        foreach ($covers as $video) {
-            $url = $video->cover;
-            $ch = curl_init();
-
-            curl_setopt($ch, CURLOPT_URL, $url);
-            curl_setopt($ch, CURLOPT_TIMEOUT, '60'); // in seconds
-            curl_setopt($ch, CURLOPT_HEADER, 1);
-            curl_setopt($ch, CURLOPT_NOBODY, 1);
-            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-            $res = curl_exec($ch);
-
-            if (curl_getinfo($ch)['url'] != $url){
-                echo 'ID#'.$video->id.' '.$video->title.'<br>';
-            }
-        } */
-
         /* $videos = Video::all();
         foreach ($videos as $video) {
             $searchtext = $video->title.'|'.$video->translations['JP'].'|'.implode('|', array_keys($video->tags_array)).'|'.$video->genre.'|'.$video->artist;
@@ -363,6 +325,45 @@ class BotController extends Controller
 
         /* curl -O --referer https://avbebe.com/ https://vz-e9c9f2c4-a7f.b-cdn.net/dacb9593-b19f-4617-9b57-d4790c8089d1/1920x1080/video0.ts */
 
+        // check imgur exists
+        /* echo 'Imgurs check start<br>';
+        $imgurs = Video::where('cover', 'ilike', '%imgur%')->select('id', 'title', 'cover', 'imgur')->get();
+        foreach ($imgurs as $video) {
+            $url = 'https://i.imgur.com/'.$video->imgur.'.jpg';
+            $ch = curl_init();
+
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_TIMEOUT, '60'); // in seconds
+            curl_setopt($ch, CURLOPT_HEADER, 1);
+            curl_setopt($ch, CURLOPT_NOBODY, 1);
+            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            $res = curl_exec($ch);
+
+            if (curl_getinfo($ch)['url'] != $url){
+                echo 'ID#'.$video->id.' '.$video->title.'<br>';
+            }
+        }
+
+        echo 'Covers check start<br>';
+        $covers = Video::where('cover', 'ilike', '%imgur%')->select('id', 'title', 'cover')->get();
+        foreach ($covers as $video) {
+            $url = $video->cover;
+            $ch = curl_init();
+
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_TIMEOUT, '60'); // in seconds
+            curl_setopt($ch, CURLOPT_HEADER, 1);
+            curl_setopt($ch, CURLOPT_NOBODY, 1);
+            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            $res = curl_exec($ch);
+
+            if (curl_getinfo($ch)['url'] != $url){
+                echo 'ID#'.$video->id.' '.$video->title.'<br>';
+            }
+        } */
+
         // download imgurs
         /* $videos = Video::where('cover', 'not like', '%cdn.jsdelivr.net%')->orderBy('id', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
 
@@ -403,15 +404,14 @@ class BotController extends Controller
             }
         } */
 
-
         // update cover
-        /* $videos = Video::where('cover', 'not like', '%cdn.jsdelivr.net%')->orderBy('id', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
+        $videos = Video::where('cover', 'not like', '%cdn.jsdelivr.net%')->orderBy('id', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
         foreach ($videos as $video) {
             $cover = str_replace('.png', '.jpg', $video->cover);
             $imgur = Helper::get_string_between($cover, 'https://i.imgur.com/', '.jpg');
-            $video->cover = 'https://cdn.jsdelivr.net/gh/dokomadeiku/dokomadeiku@v1.0.0/asset/cover/'.$imgur.'.jpg';
+            $video->cover = 'https://cdn.jsdelivr.net/gh/kishibecof1/kishibecof1@v1.0.0/asset/cover/'.$imgur.'.jpg';
             $video->save();
-        } */
+        }
 
         //---------------------------------------------------------------------------------------------------------
 
@@ -1969,13 +1969,13 @@ class BotController extends Controller
         $base = trim(Helper::get_string_between($m3u8, ',', '0.ts'));
         for ($i = 0; $i <= 10000; $i++) { 
             if ($i % 3 == 0) {
-                $m3u8 = str_replace("{$base}{$i}.ts", "https://cdn.jsdelivr.net/gh/{$user0}/{$user0}@v1.0.0/config/{$lang}/0/p_{$i}.html", $m3u8);
+                $m3u8 = str_replace("{$base}{$i}.ts", "https://cdn.jsdelivr.net/gh/{$user0}/{$user0}@v1.0.0/asset/{$lang}/0/p_{$i}.html", $m3u8);
             }
             if ($i % 3 == 1) {
-                $m3u8 = str_replace("{$base}{$i}.ts", "https://cdn.jsdelivr.net/gh/{$user1}/{$user1}@v1.0.0/config/{$lang}/1/p_{$i}.html", $m3u8);
+                $m3u8 = str_replace("{$base}{$i}.ts", "https://cdn.jsdelivr.net/gh/{$user1}/{$user1}@v1.0.0/asset/{$lang}/1/p_{$i}.html", $m3u8);
             }
             if ($i % 3 == 2) {
-                $m3u8 = str_replace("{$base}{$i}.ts", "https://cdn.jsdelivr.net/gh/{$user2}/{$user2}@v1.0.0/config/{$lang}/2/p_{$i}.html", $m3u8);
+                $m3u8 = str_replace("{$base}{$i}.ts", "https://cdn.jsdelivr.net/gh/{$user2}/{$user2}@v1.0.0/asset/{$lang}/2/p_{$i}.html", $m3u8);
             }
         }
         return '<pre>'.$m3u8.'</pre>';
