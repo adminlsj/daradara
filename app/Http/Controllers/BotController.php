@@ -40,7 +40,7 @@ class BotController extends Controller
         curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl_connection, CURLOPT_FOLLOWLOCATION, true);
         curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($curl_connection, CURLOPT_REFERER, "https://www.youjizz.com/");
+        curl_setopt($curl_connection, CURLOPT_REFERER, "http://localhost:8000/");
         $html = curl_exec($curl_connection);
         curl_close($curl_connection);
         $start = explode('var dataEncodings = ', $html);
