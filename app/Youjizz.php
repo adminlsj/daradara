@@ -143,7 +143,7 @@ class Youjizz
         foreach ($videos as $video) {
             echo 'ID: '.$video->id.' ERROR UPDATE STARTED<br>';
             Log::info('ID: '.$video->id.' started');
-            Youjizz::encodeYoujizzUrl($video->foreign_sd['error']);
+            $url = Youjizz::encodeYoujizzUrl($video->foreign_sd['error']);
 
             $loop = 0;
             $html = '';
