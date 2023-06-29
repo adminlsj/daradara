@@ -35,25 +35,26 @@ class BotController extends Controller
         ini_set('memory_limit', '-1');
 
         $url = "https://www.youjizz.com/videos/blow-and-creampie-horny-milf-86988991.html";
-        $curl_connection = curl_init($url);
+        /* $curl_connection = curl_init($url);
         curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
         curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curl_connection, CURLOPT_FOLLOWLOCATION, true);
+        curl_setopt($curl_connection, CURLOPT_FOLLOWLOCATION, false);
         curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($curl_connection, CURLOPT_REFERER, "http://localhost:8000/");
         $html = curl_exec($curl_connection);
         curl_close($curl_connection);
         $start = explode('var dataEncodings = ', $html);
         return $start;
-        return htmlentities($html, ENT_QUOTES);
+        return htmlentities($html, ENT_QUOTES); */
 
-        /* $html = Browsershot::url($url)
+        $html = Browsershot::url($url)
                 ->timeout(20)
                 ->setExtraHttpHeaders(['Referer' => 'https://youjizz.com/'])
                 ->userAgent(Spankbang::$userAgents[array_rand(Spankbang::$userAgents)])
-                ->bodyHtml(); */
-        /* $start = explode('var dataEncodings = ', $html);
-        return $start; */
+                ->useCookies(['_gid' => 'GA1.2.1098535915.1635852402'], '.youjizz.com')
+                ->bodyHtml();
+        $start = explode('var dataEncodings = ', $html);
+        return $start;
         // return htmlentities($html, ENT_QUOTES);
         // return $html;
 
