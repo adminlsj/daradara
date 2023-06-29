@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use App\Video;
+use App\Helper;
 use Mail;
 use App\Mail\UserReport;
 use Illuminate\Support\Facades\Log;
