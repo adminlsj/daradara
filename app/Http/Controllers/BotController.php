@@ -34,7 +34,7 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $url = "https://www.youjizz.com/videos/blow-and-creampie-horny-milf-86988991.html";
+        // $url = "https://www.youjizz.com/videos/blow-and-creampie-horny-milf-86988991.html";
         /* $curl_connection = curl_init($url);
         curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
         curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
@@ -47,14 +47,14 @@ class BotController extends Controller
         return $start;
         return htmlentities($html, ENT_QUOTES); */
 
-        $html = Browsershot::url($url)
+        /* $html = Browsershot::url($url)
                 ->timeout(20)
                 ->setExtraHttpHeaders(['Referer' => 'https://youjizz.com/'])
                 ->userAgent(Spankbang::$userAgents[array_rand(Spankbang::$userAgents)])
                 ->useCookies(['_gid' => 'GA1.2.1098535915.1635852402'], '.youjizz.com')
                 ->bodyHtml();
         $start = explode('var dataEncodings = ', $html);
-        return $start;
+        return $start; */
         // return htmlentities($html, ENT_QUOTES);
         // return $html;
 
@@ -1373,7 +1373,7 @@ class BotController extends Controller
     {
         Log::info('Youjizz update started...');
 
-        $videos = Video::where('foreign_sd', 'ilike', '%"youjizz"%')->orderBy('id', 'desc')->select('id', 'title', 'sd', 'outsource', 'foreign_sd')->get();
+        $videos = Video::where('id', '39910')->where('foreign_sd', 'ilike', '%"youjizz"%')->orderBy('id', 'desc')->select('id', 'title', 'sd', 'outsource', 'foreign_sd')->get();
         foreach ($videos as $video) {
             echo 'ID: '.$video->id.' STARTED<br>';
             Log::info('ID: '.$video->id.' started');
@@ -1395,7 +1395,9 @@ class BotController extends Controller
                 $html = curl_exec($curl_connection);
                 curl_close($curl_connection);
 
-                $start = explode('var dataEncodings = ', $html);
+                if (strpos($html, 'var dataEncodings = ') !== false) {
+                    $start = explode('var dataEncodings = ', $html);
+                }
                 $innerLoop = 0;
                 while (!isset($start[1]) && $innerLoop < 100) {
                     $curl_connection = curl_init($url);
@@ -1404,7 +1406,9 @@ class BotController extends Controller
                     curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
                     $html = curl_exec($curl_connection);
                     curl_close($curl_connection);
-                    $start = explode('var dataEncodings = ', $html);
+                    if (strpos($html, 'var dataEncodings = ') !== false) {
+                        $start = explode('var dataEncodings = ', $html);
+                    }
                     
                     $innerLoop++;
                     echo 'cdnc loop: '.$loop.'; offset loop: '.$innerLoop.'<br>';
