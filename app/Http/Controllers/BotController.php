@@ -34,7 +34,14 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        return $videos = Video::where('foreign_sd', 'ilike', '%"error": "https://www.youjizz.com/videos/%')->get();
+        $videos = Video::where('foreign_sd', 'ilike', '%"error": "https://www.youjizz.com/videos/%')->get();
+        foreach ($videos as $video) {
+            $temp = $video->foreign_sd;
+            $temp['youjizz'] = $video->foreign_sd['error'];
+            unset($temp['error']);
+            $video->foreign_sd = $temp;
+            $video->save();
+        }
 
         // Updload JAV from Avbebe & Missav
         /* $id = $request->vid;
