@@ -34,7 +34,7 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        /* $url = "https://www.youjizz.com/videos/blow-and-creampie-horny-milf-86988991.html";
+        $url = "https://www.youjizz.com/videos/blow-and-creampie-horny-milf-86988991.html";
         $curl_connection = curl_init($url);
         curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
         curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
@@ -45,7 +45,7 @@ class BotController extends Controller
         curl_close($curl_connection);
         $start = explode('var dataEncodings = ', $html);
         return $start;
-        return htmlentities($html, ENT_QUOTES); */
+        return htmlentities($html, ENT_QUOTES);
 
         /* $html = Browsershot::url($url)
                 ->timeout(20)
@@ -405,13 +405,13 @@ class BotController extends Controller
         } */
 
         // update cover
-        $videos = Video::where('cover', 'not like', '%cdn.jsdelivr.net%')->orderBy('id', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
+        /* $videos = Video::where('cover', 'not like', '%cdn.jsdelivr.net%')->orderBy('id', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
         foreach ($videos as $video) {
             $cover = str_replace('.png', '.jpg', $video->cover);
             $imgur = Helper::get_string_between($cover, 'https://i.imgur.com/', '.jpg');
             $video->cover = 'https://cdn.jsdelivr.net/gh/kishibecof1/kishibecof1@v1.0.0/asset/cover/'.$imgur.'.jpg';
             $video->save();
-        }
+        } */
 
         //---------------------------------------------------------------------------------------------------------
 
