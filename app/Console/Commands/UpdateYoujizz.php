@@ -43,7 +43,7 @@ class UpdateYoujizz extends Command
     {
         Log::info('Youjizz update started...');
 
-        $videos = Video::where('id', 39899)->where('foreign_sd', 'ilike', '%"youjizz"%')->select('id', 'title', 'sd', 'outsource', 'foreign_sd')->get();
+        $videos = Video::where('foreign_sd', 'ilike', '%"youjizz"%')->select('id', 'title', 'sd', 'outsource', 'foreign_sd')->get();
         foreach ($videos as $video) {
             echo 'ID: '.$video->id.' STARTED<br>';
             Log::info('ID: '.$video->id.' started');
