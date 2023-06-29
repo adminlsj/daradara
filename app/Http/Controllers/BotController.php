@@ -34,7 +34,7 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $videos = Video::where('foreign_sd', 'like', '%"error": "https://www.youjizz.com/videos/%')
+        $videos = Video::where('foreign_sd', 'ilike', '%"youjizz"%')
                     ->select('id', 'title', 'sd', 'outsource', 'foreign_sd')
                     ->orderBy('id', 'asc')
                     ->get()
@@ -43,7 +43,7 @@ class BotController extends Controller
                     })
                     ->values();
         foreach ($videos as $video) {
-            $url = $video->foreign_sd['error'];
+            $url = $video->foreign_sd['youjizz'];
             $url = explode('/', $url);
             $base = array_pop($url);
             $url = implode('/', $url) . '/' . urlencode($base);
