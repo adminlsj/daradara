@@ -28,7 +28,7 @@ class Youjizz
             $loop = 0;
             $html = '';
             $start = '';
-            while (strpos($html, 'var dataEncodings = ') === false && $loop < 100) {
+            while (strpos($html, 'var dataEncodings = ') === false && $loop < 300) {
                 $curl_connection = curl_init($url);
                 curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
                 curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
@@ -84,7 +84,7 @@ class Youjizz
             $loop = 0;
             $html = '';
             $start = '';
-            while (strpos($html, 'var dataEncodings = ') === false && $loop < 100) {
+            while (strpos($html, 'var dataEncodings = ') === false && $loop < 300) {
                 $curl_connection = curl_init($url);
                 curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
                 curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
@@ -145,7 +145,7 @@ class Youjizz
             $html = '';
             $start = '';
             $has_hls2e = true;
-            while (strpos($html, 'var dataEncodings = ') === false && $loop < 200) {
+            while (strpos($html, 'var dataEncodings = ') === false && $loop < 300) {
                 $curl_connection = curl_init($url);
                 curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
                 curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
