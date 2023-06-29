@@ -34,6 +34,18 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
+        $videos = Video::where('foreign_sd', 'like', '%"error": "https://www.youjizz.com/videos/%')
+                    ->select('id', 'title', 'sd', 'outsource', 'foreign_sd')
+                    ->orderBy('id', 'asc')
+                    ->get()
+                    ->sortBy(function($video){
+                        return (int) Helper::get_string_between($video->sd, 'validfrom=', '&');
+                    })
+                    ->values();
+        foreach ($videos as $video) {
+            return Youjizz::encodeYoujizzUrl($video->foreign_sd['error']);
+        }
+
         $url = "https://www.youjizz.com/videos/jaddcfeepzfldxn1pkwo-70245152.html";
         $curl_connection = curl_init($url);
         curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
