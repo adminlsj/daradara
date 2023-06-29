@@ -34,11 +34,11 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $videos = Video::where('foreign_sd', 'ilike', '%"error": "https://www.youjizz.com/videos/%')->get();
+        $videos = Video::where('foreign_sd', 'ilike', '%"errorDY": "https://www.youjizz.com/videos/%')->get();
         foreach ($videos as $video) {
             $temp = $video->foreign_sd;
-            $temp['youjizz'] = $video->foreign_sd['error'];
-            unset($temp['error']);
+            $temp['downloadY'] = $video->foreign_sd['errorDY'];
+            unset($temp['errorDY']);
             $video->foreign_sd = $temp;
             $video->save();
         }
