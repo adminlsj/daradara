@@ -109,7 +109,7 @@ class BotController extends Controller
                 $video->sd = end($m3u8);
             } */
 
-            $source = end($mp4);
+            return $source = end($mp4);
             $video->sd = $source;
             $video->qualities = [key($mp4) => $source];
 
