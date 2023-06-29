@@ -34,23 +34,15 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        return $videos = Video::where('foreign_sd', 'like', '%"youjizz"%')
-                    ->select('id', 'title', 'sd', 'outsource', 'tags_array', 'foreign_sd', 'created_at')
-                    ->orderBy('id', 'asc')
-                    ->get()
-                    ->sortBy(function($video){
-                        return (int) Helper::get_string_between($video->sd, 'validfrom=', '&');
-                    })
-                    ->values();
-
-        $videos = Video::where('foreign_sd', 'ilike', '%"errorDY": "https://www.youjizz.com/videos/%')->get();
-        foreach ($videos as $video) {
-            $temp = $video->foreign_sd;
-            $temp['downloadY'] = $video->foreign_sd['errorDY'];
-            unset($temp['errorDY']);
-            $video->foreign_sd = $temp;
-            $video->save();
-        }
+        $url = "https://www.youjizz.com/videos/jaddcfeepzfldxn1pkwo-70245152.html";
+        $curl_connection = curl_init($url);
+        curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+        curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+        $html = curl_exec($curl_connection);
+        curl_close($curl_connection);
+        $start = explode('var dataEncodings = ', $html);
+        return $start;
 
         // Updload JAV from Avbebe & Missav
         /* $id = $request->vid;
