@@ -47,63 +47,33 @@ class UpdateYoujizz extends Command
         foreach ($videos as $video) {
             echo 'ID: '.$video->id.' STARTED<br>';
             Log::info('ID: '.$video->id.' started');
-            $has_hls2e = true;
             $url = $video->foreign_sd['youjizz'];
             $url = explode('/', $url);
             $base = array_pop($url);
             $url = implode('/', $url) . '/' . urlencode($base);
 
             $loop = 0;
-            $link = 'https://cdnc-videos.youjizz.com/';
-            $data = [];
-            $exist = true;
-            while (strpos($link, 'https://cdnc-videos.youjizz.com/') !== false && $loop < 10) {
+            $html = '';
+            $start = '';
+            $has_hls2e = true;
+            while (strpos($html, 'var dataEncodings = ') === false && $loop < 100) {
                 $curl_connection = curl_init($url);
                 curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
                 curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
                 curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
                 $html = curl_exec($curl_connection);
                 curl_close($curl_connection);
-
-                if (strpos($html, 'var dataEncodings = ') !== false) {
-                    $start = explode('var dataEncodings = ', $html);
-                }
-                $innerLoop = 0;
-                while (!isset($start[1]) && $innerLoop < 100) {
-                    $curl_connection = curl_init($url);
-                    curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
-                    curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
-                    curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
-                    $html = curl_exec($curl_connection);
-                    curl_close($curl_connection);
-                    if (strpos($html, 'var dataEncodings = ') !== false) {
-                        $start = explode('var dataEncodings = ', $html);
-                    }
-                    
-                    $innerLoop++;
-                    echo 'cdnc loop: '.$loop.'; offset loop: '.$innerLoop.'<br>';
-                }
-
-                if (isset($start[1])) {
-                    $end = explode(';' , $start[1]);
-                    $raw = $end[0];
-                    $data = json_decode($raw, true);
-                    if (strpos($raw, 'hls2e-') === false) {
-                        $has_hls2e = false;
-                        $link = '';
-                    } else {
-                        $target = $data[floor(count($data) / 2) - 1];
-                        $link = 'https:'.$target['filename'];
-                    }
-                    $loop++;
-
-                } else {
-                    $exist = false;
-                    break;
-                }
+                $loop++;
             }
+            if (strpos($html, 'var dataEncodings = ') !== false) {
+                $start = explode('var dataEncodings = ', $html);
+                $end = explode(';' , $start[1]);
+                $raw = $end[0];
+                if (strpos($raw, 'hls2e-') === false) {
+                    $has_hls2e = false;
+                }
+                $data = json_decode($raw, true);
 
-            if ($exist) {
                 $m3u8 = [];
                 $mp4 = [];
                 foreach ($data as $source) {
@@ -115,18 +85,14 @@ class UpdateYoujizz extends Command
                     }
                 }
 
-                /* $source = end($mp4);
-                $video->sd = $source;
-                $video->qualities = [key($mp4) => $source]; */
-
                 if ($has_hls2e) {
                     $video->sd = end($mp4);
+                    $video->outsource = true;
                 } else {
                     $video->sd = end($m3u8);
+                    $video->outsource = false;
                 }
-
                 $video->qualities = $mp4;
-                $video->outsource = false;
                 $video->save();
                 echo 'ID: '.$video->id.' UPDATED<br>';
                 Log::info('ID: '.$video->id.' updated');
