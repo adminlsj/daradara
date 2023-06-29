@@ -143,13 +143,16 @@ class Youjizz
         foreach ($videos as $video) {
             echo 'ID: '.$video->id.' ERROR UPDATE STARTED<br>';
             Log::info('ID: '.$video->id.' started');
-            $url = Youjizz::encodeYoujizzUrl($video->foreign_sd['error']);
+            $url = $video->foreign_sd['error'];
+            $url = explode('/', $url);
+            $base = array_pop($url);
+            $url = implode('/', $url) . '/' . urlencode($base);
 
             $loop = 0;
             $html = '';
             $start = '';
             $has_hls2e = true;
-            while (strpos($html, 'var dataEncodings = ') === false && $loop < 10000) {
+            while (strpos($html, 'var dataEncodings = ') === false && $loop < 100) {
                 $curl_connection = curl_init($url);
                 curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
                 curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
@@ -159,7 +162,7 @@ class Youjizz
                 Log::info("ID#{$video->id} html loop {$loop} failed");
                 $loop++;
 
-                // sleep(5);
+                sleep(5);
             }
             if (strpos($html, 'var dataEncodings = ') !== false) {
                 $start = explode('var dataEncodings = ', $html);

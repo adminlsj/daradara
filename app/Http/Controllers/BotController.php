@@ -43,10 +43,14 @@ class BotController extends Controller
                     })
                     ->values();
         foreach ($videos as $video) {
-            return Youjizz::encodeYoujizzUrl($video->foreign_sd['error']);
+            $url = $video->foreign_sd['error'];
+            $url = explode('/', $url);
+            $base = array_pop($url);
+            $url = implode('/', $url) . '/' . urlencode($base);
+            return $url;
         }
 
-        $url = "https://www.youjizz.com/videos/jaddcfeepzfldxn1pkwo-70245152.html";
+        /* $url = "https://www.youjizz.com/videos/jaddcfeepzfldxn1pkwo-70245152.html";
         $curl_connection = curl_init($url);
         curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
         curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
@@ -54,7 +58,7 @@ class BotController extends Controller
         $html = curl_exec($curl_connection);
         curl_close($curl_connection);
         $start = explode('var dataEncodings = ', $html);
-        return $start;
+        return $start; */
 
         // Updload JAV from Avbebe & Missav
         /* $id = $request->vid;
