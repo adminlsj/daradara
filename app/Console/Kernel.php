@@ -27,6 +27,7 @@ class Kernel extends ConsoleKernel
         'App\Console\Commands\UpdateSpankbangErrors',
         'App\Console\Commands\UpdateYoujizz',
         'App\Console\Commands\UpdateYoujizzDownloads',
+        'App\Console\Commands\UpdateYoujizzErrors',
         'App\Console\Commands\UpdateCdn77',
 
         'App\Console\Commands\UploadNhentai',

@@ -126,4 +126,77 @@ class Youjizz
 
         Log::info('Youjizz sc downloads update ended...');
     }
+
+    public static function updateYoujizzErrors()
+    {
+        Log::info('Youjizz errors update started...');
+
+        $videos = Video::where('foreign_sd', 'like', '%"error": "https://www.youjizz.com/videos/%')->select('id', 'title', 'sd', 'outsource', 'foreign_sd')->get();
+
+        foreach ($videos as $video) {
+            echo 'ID: '.$video->id.' ERROR UPDATE STARTED<br>';
+            Log::info('ID: '.$video->id.' started');
+            $url = $video->foreign_sd['error'];
+            $url = explode('/', $url);
+            $base = array_pop($url);
+            $url = implode('/', $url) . '/' . urlencode($base);
+
+            $loop = 0;
+            $html = '';
+            $start = '';
+            $has_hls2e = true;
+            while (strpos($html, 'var dataEncodings = ') === false && $loop < 200) {
+                $curl_connection = curl_init($url);
+                curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+                curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+                $html = curl_exec($curl_connection);
+                curl_close($curl_connection);
+                Log::info("ID#{$video->id} html loop {$loop} failed");
+                $loop++;
+            }
+            if (strpos($html, 'var dataEncodings = ') !== false) {
+                $start = explode('var dataEncodings = ', $html);
+                $end = explode(';' , $start[1]);
+                $raw = $end[0];
+                if (strpos($raw, 'hls2e-') === false) {
+                    $has_hls2e = false;
+                }
+                $data = json_decode($raw, true);
+
+                $m3u8 = [];
+                $mp4 = [];
+                foreach ($data as $source) {
+                    if (strpos($source['filename'], '.m3u8') === false && is_numeric($source['quality']) && strpos($source['filename'], 'cdn2e') === false) {
+                        $mp4[$source['quality']] = 'https:'.$source['filename'];
+                    }
+                    if (strpos($source['filename'], '.m3u8') !== false && is_numeric($source['quality'])) {
+                        $m3u8[$source['quality']] = 'https:'.$source['filename'];
+                    }
+                }
+
+                $temp = $video->foreign_sd;
+                $temp['youjizz'] = $video->foreign_sd['error'];
+                unset($temp['error']);
+                $video->foreign_sd = $temp;
+
+                if ($has_hls2e) {
+                    $video->sd = end($mp4);
+                    $video->outsource = true;
+                } else {
+                    $video->sd = end($m3u8);
+                    $video->outsource = false;
+                }
+                $video->qualities = $mp4;
+                $video->save();
+                echo 'ID: '.$video->id.' ERROR UPDATED<br>';
+                Log::info('ID: '.$video->id.' error updated');
+
+            } else {
+                Mail::to('vicky.avionteam@gmail.com')->send(new UserReport('master', 'Youjizz error update failed', $video->id, $video->title, $video->sd, 'master', 'master'));
+                echo 'ID: '.$video->id.' ERROR UPDATE FAILED<br>';
+                Log::info('ID: '.$video->id.' error update failed');
+            }
+        }
+    }
 }
