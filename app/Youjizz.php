@@ -199,7 +199,7 @@ class Youjizz
                 Log::info('ID: '.$video->id.' error updated');
 
             } else {
-                Mail::to('vicky.avionteam@gmail.com')->send(new UserReport('master', 'Youjizz error update failed', $video->id, $video->title, $video->sd, 'master', 'master'));
+                // Mail::to('vicky.avionteam@gmail.com')->send(new UserReport('master', 'Youjizz error update failed', $video->id, $video->title, $video->sd, 'master', 'master'));
                 echo 'ID: '.$video->id.' ERROR UPDATE FAILED<br>';
                 Log::info('ID: '.$video->id.' error update failed');
             }
