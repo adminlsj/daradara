@@ -46,6 +46,7 @@ class UpdateYoujizz extends Command
         $videos = Video::where('foreign_sd', 'ilike', '%"youjizz"%')->select('id', 'title', 'sd', 'outsource', 'foreign_sd')->get();
         foreach ($videos as $video) {
             echo 'ID: '.$video->id.' STARTED<br>';
+            Log::info('ID: '.$video->id.' started');
             $has_hls2e = true;
             $url = $video->foreign_sd['youjizz'];
             $url = explode('/', $url);
@@ -124,6 +125,7 @@ class UpdateYoujizz extends Command
                 $video->outsource = false;
                 $video->save();
                 echo 'ID: '.$video->id.' UPDATED<br>';
+                Log::info('ID: '.$video->id.' updated');
 
             } else {
                 Mail::to('vicky.avionteam@gmail.com')->send(new UserReport('master', 'Youjizz update failed', $video->id, $video->title, $video->sd, 'master', 'master'));
@@ -133,6 +135,7 @@ class UpdateYoujizz extends Command
                 $video->foreign_sd = $temp;
                 $video->save();
                 echo 'ID: '.$video->id.' FAILED<br>';
+                Log::info('ID: '.$video->id.' failed');
             }
         }
 
