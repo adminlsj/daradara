@@ -38,11 +38,13 @@ class BotController extends Controller
         $curl_connection = curl_init($url);
         curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
         curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curl_connection, CURLOPT_FOLLOWLOCATION, false);
+        curl_setopt($curl_connection, CURLOPT_FOLLOWLOCATION, true);
         curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($curl_connection, CURLOPT_REFERER, "https://www.youjizz.com/videos/blow-and-creampie-horny-milf-86988991.html");
+        curl_setopt($curl_connection, CURLOPT_REFERER, "https://www.youjizz.com/");
         $html = curl_exec($curl_connection);
         curl_close($curl_connection);
+        $start = explode('var dataEncodings = ', $html);
+        return $start;
         return htmlentities($html, ENT_QUOTES);
 
         /* $html = Browsershot::url($url)
