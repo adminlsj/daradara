@@ -42,6 +42,7 @@ class BotController extends Controller
         curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
         $html = curl_exec($curl_connection);
         curl_close($curl_connection);
+        return htmlentities($html, ENT_QUOTES);
         /* $html = Browsershot::url($url)
                 ->timeout(20)
                 ->setExtraHttpHeaders(['Referer' => 'https://youjizz.com/'])
