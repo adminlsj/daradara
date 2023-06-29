@@ -35,11 +35,18 @@ class BotController extends Controller
         ini_set('memory_limit', '-1');
 
         $url = "https://www.youjizz.com/videos/blow-and-creampie-horny-milf-86988991.html";
-        $html = Browsershot::url($url)
+        $curl_connection = curl_init($url);
+        curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+        curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl_connection, CURLOPT_FOLLOWLOCATION, false);
+        curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+        $html = curl_exec($curl_connection);
+        curl_close($curl_connection);
+        /* $html = Browsershot::url($url)
                 ->timeout(20)
                 ->setExtraHttpHeaders(['Referer' => 'https://youjizz.com/'])
                 ->userAgent(Spankbang::$userAgents[array_rand(Spankbang::$userAgents)])
-                ->bodyHtml();
+                ->bodyHtml(); */
         $start = explode('var dataEncodings = ', $html);
         return $start;
         // return htmlentities($html, ENT_QUOTES);
