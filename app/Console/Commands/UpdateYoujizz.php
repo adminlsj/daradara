@@ -65,7 +65,9 @@ class UpdateYoujizz extends Command
                 $html = curl_exec($curl_connection);
                 curl_close($curl_connection);
 
-                $start = explode('var dataEncodings = ', $html);
+                if (strpos($html, 'var dataEncodings = ') !== false) {
+                    $start = explode('var dataEncodings = ', $html);
+                }
                 $innerLoop = 0;
                 while (!isset($start[1]) && $innerLoop < 100) {
                     $curl_connection = curl_init($url);
@@ -74,7 +76,9 @@ class UpdateYoujizz extends Command
                     curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
                     $html = curl_exec($curl_connection);
                     curl_close($curl_connection);
-                    $start = explode('var dataEncodings = ', $html);
+                    if (strpos($html, 'var dataEncodings = ') !== false) {
+                        $start = explode('var dataEncodings = ', $html);
+                    }
                     
                     $innerLoop++;
                     echo 'cdnc loop: '.$loop.'; offset loop: '.$innerLoop.'<br>';

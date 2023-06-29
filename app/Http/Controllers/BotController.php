@@ -34,18 +34,101 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        // $url = "https://www.youjizz.com/videos/blow-and-creampie-horny-milf-86988991.html";
-        /* $curl_connection = curl_init($url);
-        curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
-        curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curl_connection, CURLOPT_FOLLOWLOCATION, false);
-        curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($curl_connection, CURLOPT_REFERER, "http://localhost:8000/");
-        $html = curl_exec($curl_connection);
-        curl_close($curl_connection);
-        $start = explode('var dataEncodings = ', $html);
-        return $start;
-        return htmlentities($html, ENT_QUOTES); */
+        $has_hls2e = true;
+        $url = "https://www.youjizz.com/videos/blow-and-creampie-horny-milf-86988991.html";
+        $url = explode('/', $url);
+        $base = array_pop($url);
+        $url = implode('/', $url) . '/' . urlencode($base);
+
+        $loop = 0;
+        $link = 'https://cdnc-videos.youjizz.com/';
+        $data = [];
+        $exist = true;
+        while (strpos($link, 'https://cdnc-videos.youjizz.com/') !== false && $loop < 10) {
+            $curl_connection = curl_init($url);
+            curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+            curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+            $html = curl_exec($curl_connection);
+            curl_close($curl_connection);
+
+            if (strpos($html, 'var dataEncodings = ') !== false) {
+                $start = explode('var dataEncodings = ', $html);
+            }
+            $innerLoop = 0;
+            while (!isset($start[1]) && $innerLoop < 100) {
+                $curl_connection = curl_init($url);
+                curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+                curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+                $html = curl_exec($curl_connection);
+                curl_close($curl_connection);
+                if (strpos($html, 'var dataEncodings = ') !== false) {
+                    $start = explode('var dataEncodings = ', $html);
+                }
+                
+                $innerLoop++;
+                echo 'cdnc loop: '.$loop.'; offset loop: '.$innerLoop.'<br>';
+                Log::info('cdnc loop: '.$loop.'; offset loop: '.$innerLoop);
+            }
+
+            if (isset($start[1])) {
+                $end = explode(';' , $start[1]);
+                $raw = $end[0];
+                $data = json_decode($raw, true);
+                if (strpos($raw, 'hls2e-') === false) {
+                    $has_hls2e = false;
+                    $link = '';
+                } else {
+                    $target = $data[floor(count($data) / 2) - 1];
+                    $link = 'https:'.$target['filename'];
+                }
+                $loop++;
+
+            } else {
+                $exist = false;
+                break;
+            }
+        }
+
+        if ($exist) {
+            $m3u8 = [];
+            $mp4 = [];
+            foreach ($data as $source) {
+                if (strpos($source['filename'], '.m3u8') === false && is_numeric($source['quality'])) {
+                    $mp4[$source['quality']] = 'https:'.$source['filename'];
+                }
+                if (strpos($source['filename'], '.m3u8') !== false && is_numeric($source['quality'])) {
+                    $m3u8[$source['quality']] = 'https:'.$source['filename'];
+                }
+            }
+
+            /* if ($has_hls2e) {
+                $video->sd = end($mp4);
+            } else {
+                $video->sd = end($m3u8);
+            } */
+
+            $source = end($mp4);
+            $video->sd = $source;
+            $video->qualities = [key($mp4) => $source];
+
+            // $video->qualities = $mp4;
+            $video->outsource = false;
+            $video->save();
+            echo 'ID: '.$video->id.' UPDATED<br>';
+            Log::info('ID: '.$video->id.' updated');
+
+        } else {
+            Mail::to('vicky.avionteam@gmail.com')->send(new UserReport('master', 'Youjizz update failed', $video->id, $video->title, $video->sd, 'master', 'master'));
+            $temp = $video->foreign_sd;
+            $temp['error'] = $video->foreign_sd['youjizz'];
+            unset($temp['youjizz']);
+            $video->foreign_sd = $temp;
+            $video->save();
+            echo 'ID: '.$video->id.' FAILED<br>';
+            Log::info('ID: '.$video->id.' failed');
+        }
 
         /* $html = Browsershot::url($url)
                 ->timeout(20)
@@ -1412,6 +1495,7 @@ class BotController extends Controller
                     
                     $innerLoop++;
                     echo 'cdnc loop: '.$loop.'; offset loop: '.$innerLoop.'<br>';
+                    Log::info('cdnc loop: '.$loop.'; offset loop: '.$innerLoop);
                 }
 
                 if (isset($start[1])) {
