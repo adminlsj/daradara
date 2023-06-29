@@ -34,6 +34,15 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
+        return $videos = Video::where('foreign_sd', 'like', '%"youjizz"%')
+                    ->select('id', 'title', 'sd', 'outsource', 'tags_array', 'foreign_sd', 'created_at')
+                    ->orderBy('id', 'asc')
+                    ->get()
+                    ->sortBy(function($video){
+                        return (int) Helper::get_string_between($video->sd, 'validfrom=', '&');
+                    })
+                    ->values();
+
         $videos = Video::where('foreign_sd', 'ilike', '%"errorDY": "https://www.youjizz.com/videos/%')->get();
         foreach ($videos as $video) {
             $temp = $video->foreign_sd;
@@ -1457,6 +1466,11 @@ class BotController extends Controller
     public function updateYoujizzDownloads()
     {
         Youjizz::updateYoujizzDownloads();
+    }
+
+    public function updateYoujizzErrors()
+    {
+        Youjizz::updateYoujizzErrors();
     }
 
     public function updateXvideos(Request $request)

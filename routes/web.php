@@ -97,6 +97,7 @@ Route::group(['middleware' => 'admin'], function () {
 
 	Route::get('/updateYoujizz', 'BotController@updateYoujizz');
 	Route::get('/updateYoujizzDownloads', 'BotController@updateYoujizzDownloads');
+	Route::get('/updateYoujizzErrors', 'BotController@updateYoujizzErrors');
 
 	Route::get('/updateXvideos', 'BotController@updateXvideos');
 
