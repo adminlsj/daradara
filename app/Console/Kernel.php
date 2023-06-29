@@ -57,6 +57,8 @@ class Kernel extends ConsoleKernel
         $schedule->command('hanime1:update-youjizz')->cron('0 */6 * * *');
         $schedule->command('hanime1:update-youjizz')->dailyAt('16:55');
         $schedule->command('hanime1:update-youjizzdownloads')->cron('0 */3 * * *');
+        $schedule->command('hanime1:update-youjizzerrors')->dailyAt('18:50');
+        $schedule->command('hanime1:update-youjizzerrors')->cron('0 */3 * * *');
         $schedule->command('hanime1:update-cdn77')->hourly();
 
         $schedule->command('hanime1:check-spankbang')->hourly();
