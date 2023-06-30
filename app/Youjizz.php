@@ -264,7 +264,7 @@ class Youjizz
         Log::info('Youjizz downloads sc update started...');
 
         $videos = Video::where('foreign_sd', 'ilike', '%"downloadY_sc"%')
-                    ->select('id', 'title', 'sd', 'downloads', 'outsource', 'foreign_sd')
+                    ->select('id', 'title', 'sd', 'downloads_sc', 'outsource', 'foreign_sd')
                     ->orderBy('id', 'asc')
                     ->get()
                     ->sortBy(function($video){
