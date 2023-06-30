@@ -25,7 +25,7 @@ class Youjizz
                         return (int) Helper::get_string_between($video->sd, 'validfrom=', '&');
                     })
                     ->values()
-                    ->slice(0, 1);;
+                    ->slice(0, 1);
 
         foreach ($videos as $video) {
             echo 'ID: '.$video->id.' STARTED<br>';
@@ -191,7 +191,16 @@ class Youjizz
     {
         Log::info('Youjizz downloads update started...');
 
-        $videos = Video::where('foreign_sd', 'like', '%"downloadY"%')->select('id', 'title', 'sd', 'outsource', 'foreign_sd')->get();
+        $videos = Video::where('foreign_sd', 'ilike', '%"downloadY"%')
+                    ->select('id', 'title', 'sd', 'downloads', 'outsource', 'foreign_sd')
+                    ->orderBy('id', 'asc')
+                    ->get()
+                    ->sortBy(function($video){
+                        return (int) Helper::get_string_between(head($video->downloads), 'validfrom=', '&');
+                    })
+                    ->values()
+                    ->slice(0, 1);
+
         foreach ($videos as $video) {
             echo 'ID: '.$video->id.' DOWNLOAD STARTED<br>';
             Log::info('ID: '.$video->id.' started');
@@ -247,7 +256,7 @@ class Youjizz
 
         Log::info('Youjizz downloads update ended...');
 
-        Log::info('Youjizz sc downloads update started...');
+        /* Log::info('Youjizz sc downloads update started...');
 
         $videos = Video::where('foreign_sd', 'like', '%"downloadY_sc"%')->select('id', 'title', 'sd', 'outsource', 'foreign_sd')->get();
         foreach ($videos as $video) {
@@ -303,7 +312,7 @@ class Youjizz
             }
         }
 
-        Log::info('Youjizz sc downloads update ended...');
+        Log::info('Youjizz sc downloads update ended...'); */
     }
 
     public static function updateYoujizzErrors()
