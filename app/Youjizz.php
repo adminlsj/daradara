@@ -46,7 +46,9 @@ class Youjizz
                 curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
                 $html = curl_exec($curl_connection);
                 curl_close($curl_connection);
-                Log::info("ID#{$video->id} html loop {$loop} failed");
+                if ($loop > 0) {
+                    Log::info("ID#{$video->id} html loop {$loop} failed");
+                }
                 $loop++;
 
                 // sleep(5);
