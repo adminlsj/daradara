@@ -259,7 +259,7 @@ class Youjizz
         Log::info('Youjizz downloads update ended...');
     }
 
-    public static function updateYoujizzDownloads()
+    public static function updateYoujizzDownloadsSc()
     {
         Log::info('Youjizz downloads sc update started...');
 

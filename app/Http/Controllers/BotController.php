@@ -1382,6 +1382,11 @@ class BotController extends Controller
         Youjizz::updateYoujizzDownloads();
     }
 
+    public function updateYoujizzDownloadsSc()
+    {
+        Youjizz::updateYoujizzDownloadsSc();
+    }
+
     public function updateYoujizzErrors()
     {
         Youjizz::updateYoujizzErrors();
