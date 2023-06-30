@@ -1387,6 +1387,11 @@ class BotController extends Controller
         Youjizz::updateYoujizzErrors();
     }
 
+    public function checkYoujizz()
+    {
+        Youjizz::checkYoujizz();
+    }
+
     public function updateXvideos(Request $request)
     {
         Log::info('Xvideos update started...');

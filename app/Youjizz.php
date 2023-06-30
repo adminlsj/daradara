@@ -386,10 +386,20 @@ class Youjizz
         }
     }
 
-    public static function encodeYoujizzUrl(String $url)
+    public static function checkYoujizz()
     {
-        $url = explode('/', $url);
-        $base = array_pop($url);
-        $url = implode('/', $url) . '/' . urlencode($base);
+        $outdated = [];
+        $base = Carbon::now()->timestamp;
+        $videos = Video::where('foreign_sd', 'ilike', '%"youjizz"%')->select('id', 'title', 'sd', 'foreign_sd', 'created_at')->get();
+        foreach ($videos as $video) {
+            $time = Helper::get_string_between($video->sd, 'validto=', '&');
+            if ($time < $base) {
+                $outdated[$video->id] = $time;
+            }
+        }
+        echo count($outdated)." videos outdated<br>";
+        foreach ($outdated as $key => $value) {
+            echo "ID#{$key} outdated on {$value}<br>";
+        }
     }
 }
