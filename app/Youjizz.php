@@ -156,7 +156,7 @@ class Youjizz
             $html = '';
             $start = '';
             $has_hls2e = true;
-            while (strpos($html, 'var dataEncodings = ') === false && $loop < 100) {
+            while (strpos($html, 'var dataEncodings = ') === false && $loop < 300) {
                 $curl_connection = curl_init($url);
                 curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
                 curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
@@ -166,7 +166,7 @@ class Youjizz
                 Log::info("ID#{$video->id} html loop {$loop} failed");
                 $loop++;
 
-                sleep(5);
+                // sleep(5);
             }
             if (strpos($html, 'var dataEncodings = ') !== false) {
                 $start = explode('var dataEncodings = ', $html);

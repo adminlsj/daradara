@@ -43,7 +43,7 @@ class UserController extends Controller
             $curl = curl_init();
             curl_setopt($curl, CURLOPT_URL, 'https://api.imgur.com/3/image.json');
             curl_setopt($curl, CURLOPT_TIMEOUT, 30);
-            curl_setopt($curl, CURLOPT_HTTPHEADER, array('Authorization: Client-ID ' . '932b67e13e4f069'));
+            curl_setopt($curl, CURLOPT_HTTPHEADER, array('Authorization: Client-ID ' . '5b63b1c883ddb72'));
             curl_setopt($curl, CURLOPT_POST, 1);
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
             curl_setopt($curl, CURLOPT_POSTFIELDS, $pvars);
@@ -122,7 +122,7 @@ class UserController extends Controller
             return Redirect::route('user.userEditUpload', ['user' => $user, 'watches' => $user->watches()]);
 
         } elseif ($request->type == 'video') {
-            /* $original = request()->file('image');
+            $original = request()->file('image');
             $image = Image::make($original);
             $image = $image->fit(2880, 1620);
             $image = $image->stream();
@@ -131,15 +131,14 @@ class UserController extends Controller
             $curl = curl_init();
             curl_setopt($curl, CURLOPT_URL, 'https://api.imgur.com/3/image.json');
             curl_setopt($curl, CURLOPT_TIMEOUT, 30);
-            curl_setopt($curl, CURLOPT_HTTPHEADER, array('Authorization: Client-ID ' . '932b67e13e4f069'));
+            curl_setopt($curl, CURLOPT_HTTPHEADER, array('Authorization: Client-ID ' . '5b63b1c883ddb72'));
             curl_setopt($curl, CURLOPT_POST, 1);
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
             curl_setopt($curl, CURLOPT_POSTFIELDS, $pvars);
             $out = curl_exec($curl);
             curl_close ($curl);
             $pms = json_decode($out, true);
-            $url = $pms['data']['link']; */
-            $url = "https://i.imgur.com/Ku2VhgD.jpg";
+            $url = $pms['data']['link'];
 
             if ($url != "") {
 

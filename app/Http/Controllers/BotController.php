@@ -24,6 +24,7 @@ use App\Nhentai;
 use Storage;
 use Redirect;
 use File;
+use Image;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 
@@ -34,34 +35,8 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $videos = Video::where('foreign_sd', 'ilike', '%"youjizz"%')
-                    ->select('id', 'title', 'sd', 'outsource', 'foreign_sd')
-                    ->orderBy('id', 'asc')
-                    ->get()
-                    ->sortBy(function($video){
-                        return (int) Helper::get_string_between($video->sd, 'validfrom=', '&');
-                    })
-                    ->values();
-        foreach ($videos as $video) {
-            $url = $video->foreign_sd['youjizz'];
-            $url = explode('/', $url);
-            $base = array_pop($url);
-            $url = implode('/', $url) . '/' . urlencode($base);
-            return $url;
-        }
-
-        /* $url = "https://www.youjizz.com/videos/jaddcfeepzfldxn1pkwo-70245152.html";
-        $curl_connection = curl_init($url);
-        curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
-        curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
-        $html = curl_exec($curl_connection);
-        curl_close($curl_connection);
-        $start = explode('var dataEncodings = ', $html);
-        return $start; */
-
         // Updload JAV from Avbebe & Missav
-        /* $id = $request->vid;
+        $id = $request->vid;
         $avbebe_link = $request->avbebe;
         $avbebe_html = Browsershot::url($avbebe_link)
                 ->timeout(20)
@@ -72,6 +47,40 @@ class BotController extends Controller
         $userInteractionCount = Helper::get_string_between($avbebe_html, '"userInteractionCount":', '}}</script>');
         $caption = Helper::get_string_between($avbebe_html, 'userInteractionCount":'.$userInteractionCount.'}}</script>', '</div>');
         $sd = Helper::get_string_between($avbebe_html, 'type="application/x-mpegurl" src="', '"');
+        
+        $imgur_url = preg_replace('/\s+/', '', Helper::get_string_between($avbebe_html, 'poster="', '"'));
+
+        $image = Image::make($imgur_url);
+        $image = $image->fit(2880, 1620, function ($constraint) {}, "top");
+        $image = $image->stream();
+        $pvars = array('image' => base64_encode($image));
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_URL, 'https://api.imgur.com/3/image.json');
+        curl_setopt($curl, CURLOPT_TIMEOUT, 30);
+        curl_setopt($curl, CURLOPT_HTTPHEADER, array('Authorization: Client-ID ' . '5b63b1c883ddb72'));
+        curl_setopt($curl, CURLOPT_POST, 1);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $pvars);
+        $out = curl_exec($curl);
+        curl_close ($curl);
+        $pms = json_decode($out, true);
+        $imgur = $pms['data']['link'];
+
+        $image = Image::make($imgur_url);
+        $image = $image->fit(268, 394, function ($constraint) {}, "right");
+        $image = $image->stream();
+        $pvars = array('image' => base64_encode($image));
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_URL, 'https://api.imgur.com/3/image.json');
+        curl_setopt($curl, CURLOPT_TIMEOUT, 30);
+        curl_setopt($curl, CURLOPT_HTTPHEADER, array('Authorization: Client-ID ' . '5b63b1c883ddb72'));
+        curl_setopt($curl, CURLOPT_POST, 1);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $pvars);
+        $out = curl_exec($curl);
+        curl_close ($curl);
+        $pms = json_decode($out, true);
+        $cover = $pms['data']['link'];
 
         $missav_link = $request->missav;
         $missav_html = Browsershot::url($missav_link)
@@ -103,7 +112,7 @@ class BotController extends Controller
         foreach (explode('|', $request->tags) as $tag) {
             $tags_array[$tag] = 10;
         }
-        $foreign_sd = ['cover' => 'Ku2VhgD', 'thumbnail' => 'Ku2VhgD', 'avbebe' => $avbebe_link, 'missav' => $missav_link, 'characters' => implode(',', $characters)];
+        $foreign_sd = ['cover' => Helper::get_string_between($cover, 'https://i.imgur.com/', '.'), 'thumbnail' => Helper::get_string_between($imgur, 'https://i.imgur.com/', '.'), 'avbebe' => $avbebe_link, 'missav' => $missav_link, 'characters' => implode(',', $characters)];
         $video = Video::create([
             'id' => $id,
             'user_id' => 1,
@@ -113,7 +122,7 @@ class BotController extends Controller
             'caption' => preg_replace('/\s+/', '', $caption),
             'sd' => $sd,
             'downloads' => ['720' => $downloads],
-            'imgur' => Helper::get_string_between($url, 'https://i.imgur.com/', '.'),
+            'imgur' => Helper::get_string_between($imgur, 'https://i.imgur.com/', '.'),
             'tags' => implode(' ', explode('|', $request->tags)),
             'tags_array' => $tags_array,
             'artist' => $brand,
@@ -127,7 +136,7 @@ class BotController extends Controller
             'uncover' => true,
         ]);
 
-        return Redirect::route('jav.watch', ['v' => $video->id]); */
+        return Redirect::route('jav.watch', ['v' => $video->id]);
 
         // download missav
         /* $url = $request->get('url');
