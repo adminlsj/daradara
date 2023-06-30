@@ -399,7 +399,35 @@ class Youjizz
                 $outdated[$video->id] = $time;
             }
         }
-        echo count($outdated)." videos outdated<br>";
+        echo count($outdated)." youjizz videos outdated<br>";
+        foreach ($outdated as $key => $value) {
+            echo "ID#{$key} outdated on {$value}<br>";
+        }
+
+        $outdated_downloads = [];
+        $base = Carbon::now()->timestamp;
+        $videos = Video::where('foreign_sd', 'ilike', '%"downloadY"%')->orderBy('id', 'asc')->select('id', 'title', 'sd', 'downloads', 'foreign_sd', 'created_at')->get();
+        foreach ($videos as $video) {
+            $time = Helper::get_string_between($video->downloads, 'validto=', '&');
+            if ($time < $base) {
+                $outdated[$video->id] = $time;
+            }
+        }
+        echo count($outdated)." youjizz downloads outdated<br>";
+        foreach ($outdated as $key => $value) {
+            echo "ID#{$key} outdated on {$value}<br>";
+        }
+
+        $outdated_downloads_sc = [];
+        $base = Carbon::now()->timestamp;
+        $videos = Video::where('foreign_sd', 'ilike', '%"downloadY_sc"%')->orderBy('id', 'asc')->select('id', 'title', 'sd', 'downloads_sc', 'foreign_sd', 'created_at')->get();
+        foreach ($videos as $video) {
+            $time = Helper::get_string_between($video->downloads_sc, 'validto=', '&');
+            if ($time < $base) {
+                $outdated[$video->id] = $time;
+            }
+        }
+        echo count($outdated)." youjizz downloads sc outdated<br>";
         foreach ($outdated as $key => $value) {
             echo "ID#{$key} outdated on {$value}<br>";
         }
