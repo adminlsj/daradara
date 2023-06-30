@@ -390,7 +390,7 @@ class Youjizz
     {
         $outdated = [];
         $base = Carbon::now()->timestamp;
-        $videos = Video::where('foreign_sd', 'ilike', '%"youjizz"%')->select('id', 'title', 'sd', 'foreign_sd', 'created_at')->get();
+        $videos = Video::where('foreign_sd', 'ilike', '%"youjizz"%')->orderBy('id', 'asc')->select('id', 'title', 'sd', 'foreign_sd', 'created_at')->get();
         foreach ($videos as $video) {
             $time = Helper::get_string_between($video->sd, 'validto=', '&');
             if ($time < $base) {
