@@ -403,6 +403,7 @@ class Youjizz
         foreach ($outdated as $key => $value) {
             echo "ID#{$key} outdated on {$value}<br>";
         }
+        echo "<br>";
 
         $outdated_downloads = [];
         $base = Carbon::now()->timestamp;
@@ -418,6 +419,7 @@ class Youjizz
         foreach ($outdated_downloads as $key => $value) {
             echo "ID#{$key} outdated on {$value}<br>";
         }
+        echo "<br>";
 
         $outdated_downloads_sc = [];
         $base = Carbon::now()->timestamp;
