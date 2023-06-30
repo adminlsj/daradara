@@ -5,21 +5,21 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\Youjizz;
 
-class UpdateYoujizzSplit2 extends Command
+class UpdateYoujizzSplit4 extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'hanime1:update-youjizzsplit2';
+    protected $signature = 'hanime1:update-youjizzsplit4';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Update hentai with youjizz by split 2 source';
+    protected $description = 'Update hentai with youjizz by split 4 source';
 
     /**
      * Create a new command instance.
@@ -38,6 +38,6 @@ class UpdateYoujizzSplit2 extends Command
      */
     public function handle()
     {
-        Youjizz::updateYoujizzSplit(2, 4);
+        Youjizz::updateYoujizzSplit(4, 4);
     }
 }
