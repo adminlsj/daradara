@@ -112,7 +112,7 @@ class Youjizz
                         return (int) Helper::get_string_between($video->sd, 'validfrom=', '&');
                     })
                     ->values()
-                    ->slice(0, 5);;
+                    ->slice(0, 1);;
 
         foreach ($videos as $video) {
             echo 'ID: '.$video->id.' STARTED<br>';
