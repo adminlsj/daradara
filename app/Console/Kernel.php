@@ -53,7 +53,6 @@ class Kernel extends ConsoleKernel
         $schedule->command('hanime1:update-vod')->hourly();
         $schedule->command('hanime1:update-xvideoserrors')->cron('*/10 * * * *');
         // $schedule->command('hanime1:update-spankbangerrors')->cron('*/30 * * * *');
-        $schedule->command('hanime1:update-youjizz')->dailyAt('22:34');
         $schedule->command('hanime1:update-youjizz')->cron('0 */6 * * *');
         $schedule->command('hanime1:update-youjizzdownloads')->cron('0 */6 * * *');
         $schedule->command('hanime1:update-youjizzerrors')->hourly();
