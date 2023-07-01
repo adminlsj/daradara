@@ -18,7 +18,7 @@ class Youjizz
 
         $videos = Video::where('foreign_sd', 'ilike', '%"youjizz"%')
                     ->select('id', 'title', 'sd', 'outsource', 'foreign_sd')
-                    ->orderBy('id', 'asc')
+                    ->orderBy('id', 'desc')
                     ->get()
                     ->split($total)[$number - 1]
                     ->sortBy(function($video){
