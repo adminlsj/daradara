@@ -431,7 +431,7 @@ class Youjizz
                     })
                     ->values()
                     ->slice(0, 1);
-        echo "most outdate youjizz video<br>";
+        echo "youjizz videos most outdate<br>";
         foreach ($videos as $video) {
             $id = $video->id;
             $time = Helper::get_string_between($video->sd, 'validto=', '&');
