@@ -421,12 +421,31 @@ class Youjizz
 
     public static function checkYoujizz()
     {
+        $most = [];
+        $videos = Video::where('foreign_sd', 'ilike', '%"youjizz"%')
+                    ->select('id', 'title', 'sd', 'outsource', 'foreign_sd')
+                    ->orderBy('id', 'desc')
+                    ->get()
+                    ->sortBy(function($video){
+                        return (int) Helper::get_string_between($video->sd, 'validto=', '&');
+                    })
+                    ->values()
+                    ->slice(0, 1);
+        echo "most outdate youjizz video<br>";
+        foreach ($videos as $video) {
+            $id = $video->id;
+            $time = Helper::get_string_between($video->sd, 'validto=', '&');
+            echo "ID#{$id} outdate on {$time}<br>";
+        }
+        echo "<br>";
+
         $almost = [];
         $base = Carbon::now()->addHours(4)->timestamp;
+        $now = Carbon::now()->timestamp;
         $videos = Video::where('foreign_sd', 'ilike', '%"youjizz"%')->orderBy('id', 'asc')->select('id', 'title', 'sd', 'foreign_sd', 'created_at')->get();
         foreach ($videos as $video) {
             $time = Helper::get_string_between($video->sd, 'validto=', '&');
-            if ($time < $base) {
+            if ($time < $base && $time < $now) {
                 $almost[$video->id] = $time;
             }
         }
