@@ -38,6 +38,6 @@ class UpdateYoujizzSplit2 extends Command
      */
     public function handle()
     {
-        Youjizz::updateYoujizzSplit(2, 4);
+        Youjizz::updateYoujizzSplit(2, 2);
     }
 }
