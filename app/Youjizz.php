@@ -421,6 +421,21 @@ class Youjizz
 
     public static function checkYoujizz()
     {
+        $almost = [];
+        $base = Carbon::now()->addHours(4)->timestamp;
+        $videos = Video::where('foreign_sd', 'ilike', '%"youjizz"%')->orderBy('id', 'asc')->select('id', 'title', 'sd', 'foreign_sd', 'created_at')->get();
+        foreach ($videos as $video) {
+            $time = Helper::get_string_between($video->sd, 'validto=', '&');
+            if ($time < $base) {
+                $almost[$video->id] = $time;
+            }
+        }
+        echo count($almost)." youjizz videos almost outdate<br>";
+        foreach ($almost as $key => $value) {
+            echo "ID#{$key} outdate on {$value}<br>";
+        }
+        echo "<br>";
+
         $outdated = [];
         $base = Carbon::now()->timestamp;
         $videos = Video::where('foreign_sd', 'ilike', '%"youjizz"%')->orderBy('id', 'asc')->select('id', 'title', 'sd', 'foreign_sd', 'created_at')->get();
