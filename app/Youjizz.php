@@ -25,7 +25,7 @@ class Youjizz
                         return (int) Helper::get_string_between($video->sd, 'validto=', '&');
                     })
                     ->values()
-                    ->slice(0, 1);
+                    ->slice(0, 3);
 
         foreach ($videos as $video) {
             echo 'ID: '.$video->id.' STARTED<br>';
@@ -84,6 +84,8 @@ class Youjizz
                 $video->save();
                 echo 'ID: '.$video->id.' UPDATED<br>';
                 Log::info('ID: '.$video->id.' updated');
+
+                sleep(10);
 
             } else {
                 Mail::to('vicky.avionteam@gmail.com')->send(new UserReport('master', 'Youjizz update failed', $video->id, $video->title, $video->sd, 'master', 'master'));
