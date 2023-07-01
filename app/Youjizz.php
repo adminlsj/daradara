@@ -22,7 +22,7 @@ class Youjizz
                     ->get()
                     ->split($total)[$number - 1]
                     ->sortBy(function($video){
-                        return (int) Helper::get_string_between($video->sd, 'validfrom=', '&');
+                        return (int) Helper::get_string_between($video->sd, 'validto=', '&');
                     })
                     ->values()
                     ->slice(0, 1);
