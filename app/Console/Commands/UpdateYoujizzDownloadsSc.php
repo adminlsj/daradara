@@ -5,7 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\Youjizz;
 
-class UpdateYoujizzDownloads extends Command
+class UpdateYoujizzDownloadsSc extends Command
 {
     /**
      * The name and signature of the console command.
