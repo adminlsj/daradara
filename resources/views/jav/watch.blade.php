@@ -312,8 +312,8 @@
     @include('user.loginModal')
   @else
     <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
-    @include('video.add-tags-modal')
-    @include('video.remove-tags-modal')
+    @include('jav.add-tags-modal')
+    @include('jav.remove-tags-modal')
     @include('video.playlist-modal')
   @endif
 </div>
