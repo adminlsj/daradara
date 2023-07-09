@@ -71,7 +71,8 @@ class RemoveSpam extends Command
                                 '84.39.112.154',
                                 '116.241.206.140',
                                 '2602:fe90:100:5::d020:525b',
-                                '91.199.84.47'
+                                '91.199.84.47',
+                                '34.92.182.230'
                             ])
                             ->where('created_at', '>=', Carbon::now()->subDay())
                             ->groupBy('user_id')
