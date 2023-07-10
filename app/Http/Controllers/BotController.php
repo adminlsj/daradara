@@ -35,118 +35,7 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $videos = Video::where('id', '>=', 46127)->where('genre', '素人業餘')->where('created_at', '2000-01-01 00:00:00')->orderBy('id', 'desc')->get();
-        foreach ($videos as $video) {
-            $missav_link = 'https://missav.com/'.explode(' ', $video->title)[0];
-            $missav_html = Browsershot::url($missav_link)
-                ->timeout(20)
-                ->setExtraHttpHeaders(['Referer' => 'https://missav.com/'])
-                ->userAgent(Spankbang::$userAgents[array_rand(Spankbang::$userAgents)])
-                ->bodyHtml();
-
-            $downloads = 'https://rapidgator.net/file/'.Helper::get_string_between($missav_html, 'https://rapidgator.net/file/', '"');
-            $created_at = preg_replace('/\s+/', '', explode('>', Helper::get_string_between($missav_html, '發行日期:</span>', '</span>'))[1]).' '.Carbon::now()->toTimeString();
-            $created_at = Carbon::parse($created_at);
-            $code = preg_replace('/\s+/', '', explode('>', Helper::get_string_between($missav_html, '番號:</span>', '</span>'))[1]);
-            $title_jp = $code.' '.trim(explode('>', Helper::get_string_between($missav_html, '標題:</span>', '</span>'))[1]);
-            $characters = Helper::get_string_between($missav_html, '女優:</span>', '</div>');
-            $characters = explode(',', $characters);
-            foreach ($characters as &$character) {
-                $character = Helper::get_string_between($character, '>', '<');
-            }
-            $brand = Helper::get_string_between($missav_html, '發行商:</span>', '</div>');
-            $brand = trim(Helper::get_string_between($brand, '>', '<'));
-            if (strpos($brand, "Moody's") !== false) {
-                $brand = 'Moodyz';
-            }
-            if ($video->caption == '' || $video->caption == null) {
-                $caption = trim(Helper::get_string_between($missav_html, 'line-clamp-2">', '</div>'));
-                $video->caption = $caption;
-            }
-            
-            $imgur = '';
-            $cover = '';
-            $imgur_url = trim(Helper::get_string_between($missav_html, 'property="og:image" content="', '"'));
-            $image = Image::make($imgur_url);
-            $image = $image->fit(2880, 1620, function ($constraint) {}, "top");
-            $image = $image->stream();
-            $pvars = array('image' => base64_encode($image));
-            $curl = curl_init();
-            curl_setopt($curl, CURLOPT_URL, 'https://api.imgur.com/3/image.json');
-            curl_setopt($curl, CURLOPT_TIMEOUT, 30);
-            curl_setopt($curl, CURLOPT_HTTPHEADER, array('Authorization: Client-ID ' . '5b63b1c883ddb72'));
-            curl_setopt($curl, CURLOPT_POST, 1);
-            curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-            curl_setopt($curl, CURLOPT_POSTFIELDS, $pvars);
-            $out = curl_exec($curl);
-            curl_close ($curl);
-            $pms = json_decode($out, true);
-            $imgur = $pms['data']['link'];
-
-            $image = Image::make($imgur_url);
-            $image = $image->fit(268, 394, function ($constraint) {}, "right");
-            $image = $image->stream();
-            $pvars = array('image' => base64_encode($image));
-            $curl = curl_init();
-            curl_setopt($curl, CURLOPT_URL, 'https://api.imgur.com/3/image.json');
-            curl_setopt($curl, CURLOPT_TIMEOUT, 30);
-            curl_setopt($curl, CURLOPT_HTTPHEADER, array('Authorization: Client-ID ' . '5b63b1c883ddb72'));
-            curl_setopt($curl, CURLOPT_POST, 1);
-            curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-            curl_setopt($curl, CURLOPT_POSTFIELDS, $pvars);
-            $out = curl_exec($curl);
-            curl_close ($curl);
-            $pms = json_decode($out, true);
-            $cover = $pms['data']['link'];
-
-            $video->translations = ['JP' => $title_jp];
-            $video->downloads = ['720' => $downloads];
-            $video->artist = $brand;
-            $video->created_at = $created_at;
-            $video->uploaded_at = $created_at;
-            $video->imgur = Helper::get_string_between($imgur, 'https://i.imgur.com/', '.');
-
-            $temp = $video->foreign_sd;
-            $temp['characters'] = implode(',', $characters);
-            $temp['missav'] = $missav_link;
-            $temp['cover'] = Helper::get_string_between($cover, 'https://i.imgur.com/', '.');
-            $temp['thumbnail'] = Helper::get_string_between($imgur, 'https://i.imgur.com/', '.');
-            $video->foreign_sd = $temp;
-            $video->save();
-        }
-    }
-
-    public function tempMethod(Request $request)
-    {
-        ini_set('max_execution_time', 0);
-        ini_set('memory_limit', '-1');
-
-        /* $videos = Video::where('genre', '日本AV')->where('id', '>=', 46127)->where('created_at', '2000-01-01 00:00:00')->get();
-        foreach ($videos as $video) {
-            $video->genre = '素人業餘';
-            $video->save();
-        } */
-
-        // Check sd playable
-        /* $videos = Video::where('genre', '日本AV')->where('id', '>=', 44745)->where('sd', 'like', '%video2.51daao.com%')->get();
-        foreach ($videos as $video) {
-            $curl_connection = curl_init($video->sd);
-            curl_setopt($curl_connection, CURLOPT_NOBODY, true);
-            curl_setopt($curl_connection, CURLOPT_HEADER, true);
-            curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
-            curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
-            $output = curl_exec($curl_connection);
-            $httpcode = curl_getinfo($curl_connection, CURLINFO_HTTP_CODE);
-            curl_close($curl_connection);
-
-            if ($httpcode != '200') {
-                echo "ID#{$video->id} <a href='/jav/watch?v={$video->id}' target='_blank'>watch</a> {$video->title}<br>";
-            }
-        } */
-
-        // Update jable tags
-        /* $videos = Video::where('genre', '日本AV')->where('id', '>=', 44745)->where('tags_array', '{"中文字幕":100}')->where('foreign_sd', 'not like', '%"jable"%')->orderBy('id', 'asc')->get();
+        $videos = Video::where('id', '>=', 46127)->where('genre', '素人業餘')->where('tags_array', '{"中文字幕":100}')->where('foreign_sd', 'not like', '%"jable"%')->orderBy('id', 'desc')->get();
         foreach ($videos as $video) {
             $code = strtolower(trim(explode(' ', $video->title)[0]));
             $jable_url = "https://jable.tv/videos/{$code}/";
@@ -170,6 +59,101 @@ class BotController extends Controller
                 }
                 $video->tags = implode(' ', array_keys($tags_array));
                 $video->tags_array = $tags_array;
+                $temp = $video->foreign_sd;
+                $temp['jable'] = $jable_url;
+                $video->foreign_sd = $temp;
+                $video->save();
+
+            } else {
+                $temp = $video->foreign_sd;
+                $temp['jable'] = '404';
+                $video->foreign_sd = $temp;
+                $video->save();
+            }
+        }
+    }
+
+    public function tempMethod(Request $request)
+    {
+        ini_set('max_execution_time', 0);
+        ini_set('memory_limit', '-1');
+
+        $videos = Video::where('id', '>=', 40001)->where('user_id', 1)->where('playlist_id', 3903)->orderBy('id', 'asc')->limit(300)->get();
+        foreach ($videos as $video) {
+            $video->playlist_id = 4324;
+            $video->save();
+        }
+
+
+        // Check repeats
+        /* $videos = Video::where('genre', '日本AV')->orWhere('genre', '素人業餘')->orWhere('genre', '高清無碼')->get();
+        $codes = [];
+        $repeats = [];
+        foreach ($videos as $video) {
+            $code = explode(' ', $video->title)[0];
+            if (in_array($code, $codes)) {
+                array_push($repeats, $code);
+            } else {
+                array_push($codes, $code);
+            }
+        }
+        return $repeats; */
+
+        // Remove empty characters
+        /* $videos = Video::where('id', '>=', 47579)->where('genre', '高清無碼')->where('foreign_sd', 'like', '%"characters": ""%')->get();
+        foreach ($videos as $video) {
+            $temp = $video->foreign_sd;
+            unset($temp['characters']);
+            $video->foreign_sd = $temp;
+            $video->save();
+        } */
+
+        // Check sd playable
+        /* $videos = Video::where('id', '>=', 46127)->where('genre', '素人業餘')->where('sd', 'like', '%langyouplay.com%')->get();
+        foreach ($videos as $video) {
+            $curl_connection = curl_init($video->sd);
+            curl_setopt($curl_connection, CURLOPT_NOBODY, true);
+            curl_setopt($curl_connection, CURLOPT_HEADER, true);
+            curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+            curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+            $output = curl_exec($curl_connection);
+            $httpcode = curl_getinfo($curl_connection, CURLINFO_HTTP_CODE);
+            curl_close($curl_connection);
+
+            if ($httpcode != '200') {
+                echo "ID#{$video->id} <a href='/jav/watch?v={$video->id}' target='_blank'>watch</a> {$video->title}<br>";
+            }
+        } */
+
+        // Update jable tags
+        /* $videos = Video::where('id', '>=', 47579)->where('genre', '高清無碼')->where('tags_array', '{"中文字幕":100}')->where('foreign_sd', 'not like', '%"jable"%')->orderBy('id', 'asc')->get();
+        foreach ($videos as $video) {
+            $code = strtolower(trim(explode(' ', $video->title)[0]));
+            $jable_url = "https://jable.tv/videos/{$code}/";
+            $jable_html = Browsershot::url($jable_url)
+                ->timeout(20)
+                ->setExtraHttpHeaders(['Referer' => 'https://jable.tv/'])
+                ->userAgent(Spankbang::$userAgents[array_rand(Spankbang::$userAgents)])
+                ->bodyHtml();
+
+            $title = Helper::get_string_between($jable_html, '<title>', '</title>');
+            if ($title != '404 頁面丟失 - Jable.TV | 免費高清AV在線看 | J片 AV看到飽') {
+                $tags_html = str_replace('>•</span>', '', Helper::get_string_between($jable_html, '<h5 class="tags h6-md">', '</h5>'));
+                $tags_collection = explode('/a>', $tags_html);
+                array_pop($tags_collection);
+                $tags_array = [];
+                foreach ($tags_collection as &$tag) {
+                    $tag = Helper::get_string_between($tag, '>', '<');
+                    if ($tag != '主奴調教' && $tag != '凌辱強暴' && $tag != '制服誘惑' && $tag != '角色劇情' && $tag != '盜攝偷拍' && $tag != '無碼解放' && $tag != '多P群交' && $tag != '絲襪美腿') {
+                        $tags_array[$tag] = 100;
+                    }
+                }
+                $video->tags = implode(' ', array_keys($tags_array));
+                $video->tags_array = $tags_array;
+                $temp = $video->foreign_sd;
+                $temp['jable'] = $jable_url;
+                $video->foreign_sd = $temp;
                 $video->save();
 
             } else {
@@ -181,7 +165,7 @@ class BotController extends Controller
         } */
 
         // Update with MissAV
-        $videos = Video::where('id', '>=', 46127)->where('genre', '素人業餘')->where('created_at', '2000-01-01 00:00:00')->orderBy('id', 'asc')->get();
+        /* $videos = Video::where('id', '>=', 47579)->where('genre', '高清無碼')->where('created_at', '2000-01-01 00:00:00')->orderBy('id', 'asc')->get();
         foreach ($videos as $video) {
             $missav_link = 'https://missav.com/'.explode(' ', $video->title)[0];
             $missav_html = Browsershot::url($missav_link)
@@ -259,7 +243,7 @@ class BotController extends Controller
             $temp['thumbnail'] = Helper::get_string_between($imgur, 'https://i.imgur.com/', '.');
             $video->foreign_sd = $temp;
             $video->save();
-        }
+        } */
 
         // Update Avbebe caption
         /* $videos = Video::where('id', '>=', 46127)->where('genre', '素人業餘')->where('caption', '')->orderBy('id', 'asc')->get();
@@ -289,7 +273,7 @@ class BotController extends Controller
         } */
 
         // Update Avbebe sd
-        /* $videos = Video::where('id', '>=', 46127)->where('genre', '素人業餘')->where('sd', '')->get();
+        /* $videos = Video::where('id', '>=', 47579)->where('genre', '高清無碼')->where('sd', '')->get();
         foreach ($videos as $video) {
             $curl_connection = curl_init($video->foreign_sd['avbebe']);
             curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
@@ -307,11 +291,11 @@ class BotController extends Controller
         } */
 
         // Upload Avbebe JAV
-        /* $id = 46330;
-        for ($i = 9; $i <= 61; $i++) { 
-            $page_url = "https://avbebe.com/archives/category/%e7%b6%9c%e5%90%88av/%e7%b6%9c%e5%90%88av-%e6%97%a5%e6%9c%ac%e7%b4%a0%e4%ba%ba";
+        /* $id = 47579;
+        for ($i = 1; $i <= 37; $i++) { 
+            $page_url = "https://avbebe.com/archives/category/%e7%b6%9c%e5%90%88av/%e7%b6%9c%e5%90%88av-%e7%84%a1%e7%a2%bc";
             if ($i > 1) {
-                $page_url = "https://avbebe.com/archives/category/%e7%b6%9c%e5%90%88av/%e7%b6%9c%e5%90%88av-%e6%97%a5%e6%9c%ac%e7%b4%a0%e4%ba%ba/page/{$i}";
+                $page_url = "https://avbebe.com/archives/category/%e7%b6%9c%e5%90%88av/%e7%b6%9c%e5%90%88av-%e7%84%a1%e7%a2%bc/page/{$i}";
             }
 
             $curl_connection = curl_init($page_url);
@@ -393,7 +377,7 @@ class BotController extends Controller
                         'tags' => '中文字幕',
                         'tags_array' => ['中文字幕' => 100],
                         'artist' => 'artist',
-                        'genre' => '日本AV',
+                        'genre' => '高清無碼',
                         'views' => 0,
                         'outsource' => false,
                         'created_at' => '2000-01-01 00:00:00',
