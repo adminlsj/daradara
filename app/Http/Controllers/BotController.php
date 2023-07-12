@@ -27,6 +27,7 @@ use File;
 use Image;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
+use SteelyWing\Chinese\Chinese;
 
 class BotController extends Controller
 {
@@ -78,26 +79,117 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $videos = Video::where('id', '>=', 40001)->where('user_id', 1)->where('playlist_id', 3903)->orderBy('id', 'asc')->limit(300)->get();
+        /* $chinese = new Chinese();
+        $id = Video::where('genre', '日本AV')->orderBy('id', 'desc')->first()->id + 1;
+        $count = Video::where('id', '>=', 48445)->where('genre', '日本AV')->get()->count();
+        $page = floor($count / 40) + 1;
+        for ($i = $page; $i <= 423; $i++) { 
+            $base = "http://737hsck.cc";
+            $page_url = "{$base}/vodtype/9-{$i}.html";
+
+            $timeout = 30;
+            $page_html = Browsershot::url($page_url)
+                ->timeout($timeout)
+                ->ignoreHttpsErrors()
+                ->disableImages()
+                ->setExtraHttpHeaders(['Cookie' => '2eea60697cce6da2aeac2a6e147edd8c=f8ec670e60ba02a346b7646ce325ea38; Hm_lvt_9c69de51657cb6e2da4f620629691e94=1689093779; Hm_lpvt_9c69de51657cb6e2da4f620629691e94=1689093779; c0eb604e939747b7928695b2431c09a2=c519d27cdf1f2d87d6f95321d939a59d'])
+                ->setExtraHttpHeaders(['Host' => str_replace('http://', '', $base)])
+                ->setExtraHttpHeaders(['Referer' => $base])
+                ->setOption('args', ['--disable-web-security'])
+                ->userAgent(Spankbang::$userAgents[array_rand(Spankbang::$userAgents)])
+                ->bodyHtml();
+
+            $page_links_raw = explode('href="/vodplay', $page_html);
+            array_shift($page_links_raw);
+            $page_links = [];
+            foreach ($page_links_raw as $page_link_raw) {
+                $title = $chinese->to(Chinese::ZH_HANT, Helper::get_string_between($page_link_raw, 'title="', '"'));
+                $page_link_raw = Helper::get_string_between($page_link_raw, '/', '"');
+                if (!array_key_exists($page_link_raw, $page_links)) {
+                    $page_links[$page_link_raw] = $title;
+                }
+            }
+            foreach ($page_links as $hscangku_link => $title) {
+                $original_link = "/vodplay/{$hscangku_link}";
+                $hscangku_link = "{$base}/vodplay/{$hscangku_link}";
+                if (!Video::where('foreign_sd', 'ilike', '%'.$original_link.'%')->exists()) {
+                    $hscangku_html = Browsershot::url($hscangku_link)
+                        ->timeout($timeout)
+                        ->ignoreHttpsErrors()
+                        ->disableImages()
+                        ->setExtraHttpHeaders(['Cookie' => '958b5d3d17412f7fbb21304527cba94f=a9258058d2afa28c4f737d782eb5cbd5; Hm_lvt_9c69de51657cb6e2da4f620629691e94=1689056890; Hm_lpvt_9c69de51657cb6e2da4f620629691e94=1689056890; cb3f8eeef124d1b64215702a6c508b31=0a737054063e1d2de784ef706312b3b4'])
+                        ->setExtraHttpHeaders(['Referer' => $base])
+                        ->setOption('args', ['--disable-web-security'])
+                        ->userAgent(Spankbang::$userAgents[array_rand(Spankbang::$userAgents)])
+                        ->bodyHtml();
+
+                    $title = trim(Helper::get_string_between($hscangku_html, 'name="description" content="', '剧情:"'));
+                    $title = $chinese->to(Chinese::ZH_HANT, $title);
+                    $sd = 'https:'.str_replace('\\', '', Helper::get_string_between($hscangku_html, '"url":"https:', '"'));
+
+                    $imgur = "https://i.imgur.com/Ku2VhgD.jpg";
+                    $cover = "https://i.imgur.com/E6mSQA2.jpg";
+                    $foreign_sd = ['cover' => Helper::get_string_between($cover, 'https://i.imgur.com/', '.'), 'thumbnail' => Helper::get_string_between($imgur, 'https://i.imgur.com/', '.'), 'hscangku' => $original_link];
+                    $video = Video::create([
+                        'id' => $id,
+                        'user_id' => 1,
+                        'playlist_id' => 1,
+                        'title' => $title,
+                        'translations' => ['JP' => $title],
+                        'caption' => '',
+                        'sd' => '',
+                        'imgur' => Helper::get_string_between($imgur, 'https://i.imgur.com/', '.'),
+                        'tags' => '中文字幕',
+                        'tags_array' => ['中文字幕' => 100],
+                        'artist' => 'artist',
+                        'genre' => '日本AV',
+                        'views' => 0,
+                        'outsource' => false,
+                        'created_at' => '2000-01-01 00:00:00',
+                        'uploaded_at' => '2000-01-01 00:00:00',
+                        'foreign_sd' => $foreign_sd,
+                        'cover' => 'https://i.imgur.com/E6mSQA2.jpg',
+                        'uncover' => true,
+                    ]);
+
+                    $id++;
+                }
+            }
+        } */
+
+        /* $videos = Video::where('id', '>=', 40001)->where('user_id', 1)->where('playlist_id', 3903)->orderBy('id', 'asc')->limit(300)->get();
         foreach ($videos as $video) {
             $video->playlist_id = 4324;
             $video->save();
-        }
-
+        } */
 
         // Check repeats
-        /* $videos = Video::where('genre', '日本AV')->orWhere('genre', '素人業餘')->orWhere('genre', '高清無碼')->get();
+        $videos = Video::where('genre', '日本AV')->orWhere('genre', '素人業餘')->orWhere('genre', '高清無碼')->orWhere('genre', 'AI解碼')->orWhere('genre', '國產AV')->orWhere('genre', '國產素人')->get();
         $codes = [];
         $repeats = [];
         foreach ($videos as $video) {
             $code = explode(' ', $video->title)[0];
             if (in_array($code, $codes)) {
                 array_push($repeats, $code);
-            } else {
+            } elseif ($video->sd != '') {
                 array_push($codes, $code);
             }
         }
-        return $repeats; */
+        return $repeats;
+
+        /* $videos = Video::where('foreign_sd', 'like', '%"hscangku"%')->where('foreign_sd', 'not like', '%"avbebe"%')->get();
+        foreach ($videos as $video) {
+            $code = explode(' ', $video->title)[0];
+            if ($avbebe = Video::where('foreign_sd', 'not like', '%"hscangku"%')->where('foreign_sd', 'like', '%"avbebe"%')->where('sd', 'like', '%n2020.com%')->where('title', 'like', $code.' %')->first()) {
+                if ($video->sd == '' || $video->sd == $avbebe->sd) {
+                    $temp = $avbebe->foreign_sd;
+                    $temp["hscangku"] = $video->foreign_sd["hscangku"];
+                    $avbebe->foreign_sd = $temp;
+                    $avbebe->save();
+                    $video->delete();
+                }
+            }
+        } */
 
         // Remove empty characters
         /* $videos = Video::where('id', '>=', 47579)->where('genre', '高清無碼')->where('foreign_sd', 'like', '%"characters": ""%')->get();
@@ -726,7 +818,7 @@ class BotController extends Controller
         } */
 
         // download imgurs
-        /* $videos = Video::where('cover', 'not like', '%cdn.jsdelivr.net%')->orderBy('id', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
+        /* $videos = Video::where('id', '<', 40000)->where('genre', 'not like', '日本AV')->where('cover', 'not like', '%cdn.jsdelivr.net%')->orderBy('id', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
 
         foreach ($videos as $video) {
             // cover
