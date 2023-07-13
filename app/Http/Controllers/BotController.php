@@ -37,7 +37,7 @@ class BotController extends Controller
             $video->sd = $request->sd;
             $video->foreign_sd = $request->foreign_sd;
             $video->save();
-            return "ID#{$video->id} updated"
+            return "ID#{$video->id} updated";
         } else {
             return "403 Forbidden";
         }
@@ -54,7 +54,7 @@ class BotController extends Controller
         foreach ($video->foreign_sd as $key => $value) {
             $foreign_sd = $foreign_sd."&foreign_sd[$key]=$value";
         }
-        return $url = "https://hanime1.com/updateVideoInfo?username=appieopie&password=d0raemOn@(!$&sd={$sd}{$foreign_sd}";
+        $url = "https://hanime1.com/updateVideoInfo?username=appieopie&password=d0raemOn@(!$&vid={$video->id}&sd={$sd}{$foreign_sd}";
         $curl_connection = curl_init($url);
         curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
         curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
