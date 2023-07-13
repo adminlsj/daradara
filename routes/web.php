@@ -71,8 +71,6 @@ Route::get('/comic/{comic}/{page}', 'ComicController@showContent')->name('comic.
 Route::get('/{column}/{value}/{time?}', 'ComicController@searchTags')->name('comic.searchTags');
 Route::get('/getRandomComic', 'ComicController@getRandomComic')->name('comic.random');
 
-Route::get('/updateVideoInfo', 'BotController@updateVideoInfo');
-
 Route::group(['middleware' => 'admin'], function () {
 	Route::get('/tempMethod', 'BotController@tempMethod');
 	Route::get('/reset', 'BotController@reset');

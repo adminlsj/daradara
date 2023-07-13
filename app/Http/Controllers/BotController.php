@@ -31,37 +31,10 @@ use SteelyWing\Chinese\Chinese;
 
 class BotController extends Controller
 {
-    public function updateVideoInfo(Request $request)
-    {
-        if ($request->username == "appieopie" && $request->password == "d0raemOn@(!$" && $video = Video::find($request->vid)) {
-            $video->sd = $request->sd;
-            $video->foreign_sd = $request->foreign_sd;
-            $video->save();
-            return "ID#{$video->id} updated";
-        } else {
-            return "403 Forbidden";
-        }
-    }
-
     public function tempMethod(Request $request)
     {
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
-
-        $video = Video::where('foreign_sd', 'like', '%"hscangku"%')->where('foreign_sd', 'like', '%"avbebe"%')->orderBy('id', 'asc')->first();
-        $sd = $video->sd;
-        $foreign_sd = "";
-        foreach ($video->foreign_sd as $key => $value) {
-            $foreign_sd = $foreign_sd."&foreign_sd[$key]=$value";
-        }
-        $url = "https://hanime1.com/updateVideoInfo?username=appieopie&password=d0raemOn@(!$&vid={$video->id}&sd={$sd}{$foreign_sd}";
-        $curl_connection = curl_init($url);
-        curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
-        curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
-        return $html = curl_exec($curl_connection);
-        curl_close($curl_connection);
-
 
         /* $base = "http://513hsck.cc";
         $videos = Video::where('foreign_sd', 'like', '%"hscangku"%')
