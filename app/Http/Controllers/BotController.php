@@ -38,7 +38,7 @@ class BotController extends Controller
 
         $videos = Video::where('user_id', 1)->where('playlist_id', 1)->orderBy('id', 'asc')->limit(500)->get();
         foreach ($videos as $video) {
-            $video->playlist_id = 4391;
+            $video->playlist_id = 4392;
             $video->save();
         }
 
