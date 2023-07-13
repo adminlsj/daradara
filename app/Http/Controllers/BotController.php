@@ -31,46 +31,12 @@ use SteelyWing\Chinese\Chinese;
 
 class BotController extends Controller
 {
-    public function tempMethod2(Request $request)
+    public function updateVideoInfo(Request $request)
     {
-        ini_set('max_execution_time', 0);
-        ini_set('memory_limit', '-1');
-
-        $videos = Video::where('id', '>=', 46127)->where('genre', '素人業餘')->where('tags_array', '{"中文字幕":100}')->where('foreign_sd', 'not like', '%"jable"%')->orderBy('id', 'desc')->get();
-        foreach ($videos as $video) {
-            $code = strtolower(trim(explode(' ', $video->title)[0]));
-            $jable_url = "https://jable.tv/videos/{$code}/";
-            $jable_html = Browsershot::url($jable_url)
-                ->timeout(20)
-                ->setExtraHttpHeaders(['Referer' => 'https://jable.tv/'])
-                ->userAgent(Spankbang::$userAgents[array_rand(Spankbang::$userAgents)])
-                ->bodyHtml();
-
-            $title = Helper::get_string_between($jable_html, '<title>', '</title>');
-            if ($title != '404 頁面丟失 - Jable.TV | 免費高清AV在線看 | J片 AV看到飽') {
-                $tags_html = str_replace('>•</span>', '', Helper::get_string_between($jable_html, '<h5 class="tags h6-md">', '</h5>'));
-                $tags_collection = explode('/a>', $tags_html);
-                array_pop($tags_collection);
-                $tags_array = [];
-                foreach ($tags_collection as &$tag) {
-                    $tag = Helper::get_string_between($tag, '>', '<');
-                    if ($tag != '主奴調教' && $tag != '凌辱強暴' && $tag != '制服誘惑' && $tag != '角色劇情' && $tag != '盜攝偷拍' && $tag != '無碼解放' && $tag != '多P群交' && $tag != '絲襪美腿') {
-                        $tags_array[$tag] = 100;
-                    }
-                }
-                $video->tags = implode(' ', array_keys($tags_array));
-                $video->tags_array = $tags_array;
-                $temp = $video->foreign_sd;
-                $temp['jable'] = $jable_url;
-                $video->foreign_sd = $temp;
-                $video->save();
-
-            } else {
-                $temp = $video->foreign_sd;
-                $temp['jable'] = '404';
-                $video->foreign_sd = $temp;
-                $video->save();
-            }
+        if ($request->user == "appieopie" && $request->password == "d0raemOn@(!$" && $video = Video::find($request->vid)) {
+            $video->sd = $request->sd;
+            $video->foreign_sd = $request->foreign_sd;
+            $video->save();
         }
     }
 
@@ -78,6 +44,30 @@ class BotController extends Controller
     {
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
+
+        /* $base = "http://513hsck.cc";
+        $videos = Video::where('foreign_sd', 'like', '%"hscangku"%')
+                    ->where('sd', '')
+                    ->orderBy('id', 'asc')
+                    ->get()
+                    ->split(10)[0]
+                    ->values();
+
+        foreach ($videos as $video) {
+            $hscangku_html = Browsershot::url("{$base}{$video->foreign_sd['hscangku']}")
+                ->timeout(20)
+                ->ignoreHttpsErrors()
+                ->disableImages()
+                ->disableJavascript()
+                ->setExtraHttpHeaders(['Cookie' => '958b5d3d17412f7fbb21304527cba94f=a9258058d2afa28c4f737d782eb5cbd5; Hm_lvt_9c69de51657cb6e2da4f620629691e94=1689056890; Hm_lpvt_9c69de51657cb6e2da4f620629691e94=1689056890; cb3f8eeef124d1b64215702a6c508b31=0a737054063e1d2de784ef706312b3b4'])
+                ->setExtraHttpHeaders(['Referer' => $base])
+                ->setOption('args', ['--disable-web-security'])
+                ->userAgent(Spankbang::$userAgents[array_rand(Spankbang::$userAgents)])
+                ->bodyHtml();
+
+            $video->sd = 'https:'.str_replace('\\', '', Helper::get_string_between($hscangku_html, '"url":"https:', '"'));
+            $video->save();
+        } */
 
         /* $chinese = new Chinese();
         $id = Video::where('genre', '日本AV')->orderBy('id', 'desc')->first()->id + 1;
@@ -164,18 +154,34 @@ class BotController extends Controller
         } */
 
         // Check repeats
-        $videos = Video::where('genre', '日本AV')->orWhere('genre', '素人業餘')->orWhere('genre', '高清無碼')->orWhere('genre', 'AI解碼')->orWhere('genre', '國產AV')->orWhere('genre', '國產素人')->get();
+        /* $videos = Video::where('genre', '日本AV')->orWhere('genre', '素人業餘')->orWhere('genre', '高清無碼')->orWhere('genre', 'AI解碼')->orWhere('genre', '國產AV')->orWhere('genre', '國產素人')->get();
         $codes = [];
         $repeats = [];
         foreach ($videos as $video) {
             $code = explode(' ', $video->title)[0];
             if (in_array($code, $codes)) {
                 array_push($repeats, $code);
-            } elseif ($video->sd != '') {
+            } else {
                 array_push($codes, $code);
             }
         }
-        return $repeats;
+        return $repeats; */
+
+        /* foreach ($repeats as $repeat) {
+            if (Video::where('title', 'like', $repeat.' %')->where('foreign_sd', 'like', '%"hscangku"%')->exists() && Video::where('title', 'like', $repeat.' %')->where('foreign_sd', 'like', '%"avbebe"%')->exists()) {
+
+                $hscangku = Video::where('title', 'like', $repeat.' %')->where('foreign_sd', 'like', '%"hscangku"%')->first();
+                $avbebe = Video::where('title', 'like', $repeat.' %')->where('foreign_sd', 'like', '%"avbebe"%')->first();
+
+                $temp = $avbebe->foreign_sd;
+                $temp["backup"] = $avbebe->sd;
+                $temp["hscangku"] = $hscangku->foreign_sd["hscangku"];
+                $avbebe->foreign_sd = $temp;
+                $avbebe->sd = $hscangku->sd;
+                $avbebe->save();
+                $hscangku->delete();
+            }
+        } */
 
         /* $videos = Video::where('foreign_sd', 'like', '%"hscangku"%')->where('foreign_sd', 'not like', '%"avbebe"%')->get();
         foreach ($videos as $video) {
@@ -257,7 +263,7 @@ class BotController extends Controller
         } */
 
         // Update with MissAV
-        /* $videos = Video::where('id', '>=', 47579)->where('genre', '高清無碼')->where('created_at', '2000-01-01 00:00:00')->orderBy('id', 'asc')->get();
+        /* $videos = Video::where('id', '>=', 48445)->where('genre', '日本AV')->where('created_at', '2000-01-01 00:00:00')->orderBy('id', 'asc')->get();
         foreach ($videos as $video) {
             $missav_link = 'https://missav.com/'.explode(' ', $video->title)[0];
             $missav_html = Browsershot::url($missav_link)
