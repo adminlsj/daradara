@@ -63,10 +63,15 @@ class UpdateEmptySd extends Command
                 ->userAgent(Spankbang::$userAgents[array_rand(Spankbang::$userAgents)])
                 ->bodyHtml();
 
-            $video->sd = 'https:'.str_replace('\\', '', Helper::get_string_between($hscangku_html, '"url":"https:', '"'));
-            $video->save();
+            $sd = 'https:'.str_replace('\\', '', Helper::get_string_between($hscangku_html, '"url":"https:', '"'));
+            if ($sd != '' && $sd != null && $sd != 'https:') {
+                $video->sd = 'https:'.str_replace('\\', '', Helper::get_string_between($hscangku_html, '"url":"https:', '"'));
+                $video->save();
+                Log::info('Empty sd update ID#'.$video->id.' success...');
 
-            Log::info('Empty sd update ID#'.$video->id.' success...');
+            } else {
+                Log::info('Empty sd update ID#'.$video->id.' failed...');
+            }
 
             if ($videos->last() != $video) {
                 sleep(10);
