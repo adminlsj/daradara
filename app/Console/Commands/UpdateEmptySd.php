@@ -45,7 +45,7 @@ class UpdateEmptySd extends Command
 
         $base = "http://513hsck.cc";
         $videos = Video::where('foreign_sd', 'like', '%"hscangku"%')
-                    ->where('sd', '')
+                    ->where('sd', null)
                     ->orderBy('id', 'asc')
                     ->get()
                     ->values()
