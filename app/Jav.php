@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Log;
 
 class Jav
 {
-    public static function updateEmptySd($number = 1, $total = 1)
+    public static function updateEmptySd($total = 1, $number = 1)
     {
         Log::info('Empty sd update started...');
 
