@@ -1,46 +1,18 @@
 <?php
 
-namespace App\Console\Commands;
+namespace App;
 
-use Illuminate\Console\Command;
+use Mail;
 use App\Video;
 use App\Helper;
+use Carbon\Carbon;
+use App\Mail\UserReport;
 use Spatie\Browsershot\Browsershot;
 use Illuminate\Support\Facades\Log;
-use App\Spankbang;
 
-class UpdateEmptySd extends Command
+class Jav
 {
-    /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
-    protected $signature = 'hanime1:update-emptysd';
-
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
-    protected $description = 'Update hscangku empty sd';
-
-    /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    /**
-     * Execute the console command.
-     *
-     * @return mixed
-     */
-    public function handle()
+    public static function updateEmptySd($number = 1, $total = 1)
     {
         Log::info('Empty sd update started...');
 
@@ -49,6 +21,7 @@ class UpdateEmptySd extends Command
                     ->where('sd', null)
                     ->orderBy('id', 'asc')
                     ->get()
+                    ->split($total)[$number - 1]
                     ->values()
                     ->slice(0, 3);;
 
@@ -66,7 +39,7 @@ class UpdateEmptySd extends Command
 
             $sd = 'https:'.str_replace('\\', '', Helper::get_string_between($hscangku_html, '"url":"https:', '"'));
             if ($sd != '' && $sd != null && $sd != 'https:') {
-                $video->sd = 'https:'.str_replace('\\', '', Helper::get_string_between($hscangku_html, '"url":"https:', '"'));
+                $video->sd = $sd;
                 $video->save();
                 Log::info('Empty sd update ID#'.$video->id.' success...');
 
