@@ -36,9 +36,9 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $videos = Video::where('user_id', 1)->where('playlist_id', 1)->orderBy('id', 'asc')->limit(400)->get();
+        $videos = Video::where('user_id', 1)->where('playlist_id', 1)->orderBy('id', 'asc')->limit(500)->get();
         foreach ($videos as $video) {
-            $video->playlist_id = 4322;
+            $video->playlist_id = 4388;
             $video->save();
         }
 
