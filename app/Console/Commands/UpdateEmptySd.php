@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use App\Video;
+use App\Helper;
 use Spatie\Browsershot\Browsershot;
 use Illuminate\Support\Facades\Log;
 use App\Spankbang;
