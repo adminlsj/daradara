@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use App\Mail\UserReport;
 use Spatie\Browsershot\Browsershot;
 use Illuminate\Support\Facades\Log;
+use App\Spankbang;
 
 class Jav
 {
@@ -69,7 +70,6 @@ class Jav
                     ->slice(0, 3);
 
         foreach ($videos as $video) {
-            Log::info('Missav update in loop...');
             $missav_link = 'https://missav.com/'.explode(' ', $video->title)[0];
             $missav_html = Browsershot::url($missav_link)
                 ->timeout(20)
