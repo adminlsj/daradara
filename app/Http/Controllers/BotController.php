@@ -36,6 +36,19 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
+        $total = $number = 1;
+        $videos = Video::where('id', '>=', 48445)
+                    ->where('genre', '日本AV')
+                    ->where('created_at', '2000-01-01 00:00:00')
+                    ->orderBy('id', 'asc')
+                    ->get()
+                    ->split($total)[$number - 1]
+                    ->values()
+                    ->slice(0, 3);
+        foreach ($videos as $video) {
+            return $missav_link = 'https://missav.com/'.explode(' ', $video->title)[0];
+        }
+
         /* $base = "http://513hsck.cc";
         $videos = Video::where('foreign_sd', 'like', '%"hscangku"%')
                     ->where('sd', '')
