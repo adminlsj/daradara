@@ -70,12 +70,16 @@ class Jav
                     ->slice(0, 3);
 
         foreach ($videos as $video) {
+            Log::info('Missav update in loop...');
+
             $missav_link = 'https://missav.com/'.explode(' ', $video->title)[0];
             $missav_html = Browsershot::url($missav_link)
                 ->timeout(20)
                 ->setExtraHttpHeaders(['Referer' => 'https://missav.com/'])
                 ->userAgent(Spankbang::$userAgents[array_rand(Spankbang::$userAgents)])
                 ->bodyHtml();
+
+            Log::info('Missav update got html...');
 
             $downloads = 'https://rapidgator.net/file/'.Helper::get_string_between($missav_html, 'https://rapidgator.net/file/', '"');
             $created_at = preg_replace('/\s+/', '', explode('>', Helper::get_string_between($missav_html, '發行日期:</span>', '</span>'))[1]).' '.Carbon::now()->toTimeString();
