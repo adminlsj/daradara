@@ -100,7 +100,7 @@ class Jav
                 $video->caption = $caption;
             }
 
-            $imgur = '';
+            /* $imgur = '';
             $cover = '';
             $imgur_url = trim(Helper::get_string_between($missav_html, 'property="og:image" content="', '"'));
             $image = Image::make($imgur_url);
@@ -133,27 +133,28 @@ class Jav
             $out = curl_exec($curl);
             curl_close ($curl);
             $pms = json_decode($out, true);
-            $cover = $pms['data']['link'];
+            $cover = $pms['data']['link']; */
 
             $video->translations = ['JP' => $title_jp];
             $video->downloads = ['720' => $downloads];
             $video->artist = $brand;
             $video->created_at = $created_at;
             $video->uploaded_at = $created_at;
-            $video->imgur = Helper::get_string_between($imgur, 'https://i.imgur.com/', '.');
+            // $video->imgur = Helper::get_string_between($imgur, 'https://i.imgur.com/', '.');
 
             $temp = $video->foreign_sd;
             $temp['characters'] = implode(',', $characters);
             $temp['missav'] = $missav_link;
-            $temp['cover'] = Helper::get_string_between($cover, 'https://i.imgur.com/', '.');
-            $temp['thumbnail'] = Helper::get_string_between($imgur, 'https://i.imgur.com/', '.');
+            $temp['poster'] = trim(Helper::get_string_between($missav_html, 'property="og:image" content="', '"'));
+            // $temp['cover'] = Helper::get_string_between($cover, 'https://i.imgur.com/', '.');
+            // $temp['thumbnail'] = Helper::get_string_between($imgur, 'https://i.imgur.com/', '.');
             $video->foreign_sd = $temp;
             $video->save();
 
             Log::info('Missav update ID#'.$video->id.' success...');
 
             if ($videos->last() != $video) {
-                sleep(6);
+                sleep(10);
             }
         }
 
