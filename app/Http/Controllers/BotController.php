@@ -37,6 +37,8 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
+        Log::info('Imgur update started...');
+
         $videos = Video::where('foreign_sd', 'like', '%"missav"%')->where('foreign_sd', 'like', '%"poster"%')->where('imgur', 'Ku2VhgD')->orderBy('created_at', 'desc')->limit(3)->get();
         foreach ($videos as $video) {
             $imgur = '';
@@ -81,7 +83,11 @@ class BotController extends Controller
             unset($temp['poster']);
             $video->foreign_sd = $temp;
             $video->save();
+
+            Log::info('Imgur update ID#'.$video->id.' success...');
         }
+
+        Log::info('Imgur update ended...');
 
         /* $base = "http://513hsck.cc";
         $videos = Video::where('foreign_sd', 'like', '%"hscangku"%')
