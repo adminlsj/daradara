@@ -39,7 +39,7 @@ class BotController extends Controller
 
         Log::info('Imgur update started...');
 
-        $videos = Video::where('foreign_sd', 'like', '%"missav"%')->where('foreign_sd', 'like', '%"poster"%')->where('imgur', 'Ku2VhgD')->orderBy('created_at', 'desc')->limit(3)->get();
+        $videos = Video::where('foreign_sd', 'like', '%"missav"%')->where('foreign_sd', 'like', '%"poster"%')->where('imgur', 'Ku2VhgD')->orderBy('created_at', 'desc')->get();
         foreach ($videos as $video) {
             $imgur = '';
             $cover = '';
