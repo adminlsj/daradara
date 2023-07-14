@@ -151,7 +151,7 @@ class Jav
             Log::info('Missav update ID#'.$video->id.' success...');
 
             if ($videos->last() != $video) {
-                sleep(10);
+                sleep(5);
             }
         }
 
