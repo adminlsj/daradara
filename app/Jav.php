@@ -10,6 +10,7 @@ use App\Mail\UserReport;
 use Spatie\Browsershot\Browsershot;
 use Illuminate\Support\Facades\Log;
 use App\Spankbang;
+use Image;
 
 class Jav
 {
