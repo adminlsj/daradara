@@ -101,6 +101,8 @@ class Jav
                 $video->caption = $caption;
             }
 
+            Log::info('Missav update got all data...');
+
             $imgur = '';
             $cover = '';
             $imgur_url = trim(Helper::get_string_between($missav_html, 'property="og:image" content="', '"'));
@@ -135,6 +137,8 @@ class Jav
             curl_close ($curl);
             $pms = json_decode($out, true);
             $cover = $pms['data']['link'];
+
+            Log::info('Missav update uploaded to imgur...');
 
             $video->translations = ['JP' => $title_jp];
             $video->downloads = ['720' => $downloads];
