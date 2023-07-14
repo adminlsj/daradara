@@ -28,6 +28,7 @@ use Image;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use SteelyWing\Chinese\Chinese;
+use App\Jav;
 
 class BotController extends Controller
 {
@@ -36,18 +37,7 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $total = $number = 1;
-        $videos = Video::where('id', '>=', 48445)
-                    ->where('genre', '日本AV')
-                    ->where('created_at', '2000-01-01 00:00:00')
-                    ->orderBy('id', 'asc')
-                    ->get()
-                    ->split($total)[$number - 1]
-                    ->values()
-                    ->slice(0, 3);
-        foreach ($videos as $video) {
-            return $missav_link = 'https://missav.com/'.explode(' ', $video->title)[0];
-        }
+        Jav::updateWithMissav(1, 1);
 
         /* $base = "http://513hsck.cc";
         $videos = Video::where('foreign_sd', 'like', '%"hscangku"%')
@@ -267,7 +257,7 @@ class BotController extends Controller
         } */
 
         // Update with MissAV
-        $videos = Video::where('id', '>=', 48445)->where('genre', '日本AV')->where('created_at', '2000-01-01 00:00:00')->orderBy('id', 'asc')->get();
+        /* $videos = Video::where('id', '>=', 48445)->where('genre', '日本AV')->where('created_at', '2000-01-01 00:00:00')->orderBy('id', 'asc')->get();
         foreach ($videos as $video) {
             $missav_link = 'https://missav.com/'.explode(' ', $video->title)[0];
             $missav_html = Browsershot::url($missav_link)
@@ -345,7 +335,7 @@ class BotController extends Controller
             $temp['thumbnail'] = Helper::get_string_between($imgur, 'https://i.imgur.com/', '.');
             $video->foreign_sd = $temp;
             $video->save();
-        }
+        } */
 
         // Update Avbebe caption
         /* $videos = Video::where('id', '>=', 46127)->where('genre', '素人業餘')->where('caption', '')->orderBy('id', 'asc')->get();
