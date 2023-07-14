@@ -81,8 +81,6 @@ class BotController extends Controller
             unset($temp['poster']);
             $video->foreign_sd = $temp;
             $video->save();
-
-            return $video;
         }
 
         /* $base = "http://513hsck.cc";
