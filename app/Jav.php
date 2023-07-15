@@ -107,7 +107,7 @@ class Jav
 
         $base = "http://513hsck.cc";
         $videos = Video::where('foreign_sd', 'like', '%"hscangku"%')
-                    ->where('sd', null)
+                    ->where('sd', '')
                     ->orderBy('id', 'asc')
                     ->get()
                     ->split($total)[$number - 1]
