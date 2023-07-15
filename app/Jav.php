@@ -71,9 +71,9 @@ class Jav
                     $video = Video::create([
                         'id' => $id,
                         'user_id' => 1,
-                        'playlist_id' => 1,
-                        'title' => $title,
-                        'translations' => ['JP' => $title],
+                        'playlist_id' => 4324,
+                        'title' => strtoupper($title),
+                        'translations' => ['JP' => strtoupper($title)],
                         'caption' => '',
                         'sd' => '',
                         'imgur' => Helper::get_string_between($imgur, 'https://i.imgur.com/', '.'),
@@ -109,10 +109,7 @@ class Jav
         $videos = Video::where('foreign_sd', 'like', '%"hscangku"%')
                     ->where('sd', '')
                     ->orderBy('id', 'asc')
-                    ->get()
-                    ->split($total)[$number - 1]
-                    ->values()
-                    ->slice(0, 3);;
+                    ->get();
 
         foreach ($videos as $video) {
             $hscangku_html = Browsershot::url("{$base}{$video->foreign_sd['hscangku']}")
@@ -136,9 +133,7 @@ class Jav
                 Log::info('Empty sd update ID#'.$video->id.' failed...');
             }
 
-            if ($videos->last() != $video) {
-                sleep(10);
-            }
+            sleep(10);
         }
 
         Log::info('Empty sd update ended...');
@@ -148,15 +143,11 @@ class Jav
     {
         Log::info('Missav update started...');
 
-        $videos = Video::where('id', '>=', 48445)
-                    ->where('genre', '日本AV')
+        $videos = Video::where('genre', '日本AV')
                     ->where('created_at', '2000-01-01 00:00:00')
                     ->where('foreign_sd', 'not like', '%"missav"%')
                     ->orderBy('id', 'asc')
-                    ->get()
-                    ->split($total)[$number - 1]
-                    ->values()
-                    ->slice(0, 3);
+                    ->get();
 
         foreach ($videos as $video) {
             $missav_link = 'https://missav.com/'.explode(' ', $video->title)[0];
@@ -211,9 +202,7 @@ class Jav
                 Log::info('Missav update ID#'.$video->id.' success...');
             }
 
-            if ($videos->last() != $video) {
-                sleep(10);
-            }
+            sleep(10);
         }
 
         Log::info('Missav update ended...');
