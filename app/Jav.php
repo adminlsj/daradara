@@ -263,7 +263,7 @@ class Jav
             $temp['thumbnail'] = Helper::get_string_between($imgur, 'https://i.imgur.com/', '.');
             unset($temp['poster']);
             $video->foreign_sd = $temp;
-            $video->updated_at = Carbon::now()->toDateTimeString();;
+            $video->uploaded_at = Carbon::now()->toDateTimeString();;
             $video->save();
 
             Log::info('Imgur update ID#'.$video->id.' success...');
