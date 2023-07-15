@@ -17,6 +17,8 @@ class Jav
 {
     public static function uploadHscangku()
     {
+        Log::info('Hscangku upload started...');
+
         $chinese = new Chinese();
         $id = Video::whereIn('genre', Video::$genre_jav)->orderBy('id', 'desc')->first()->id + 1;
         for ($i = 1; $i <= 3; $i++) { 
@@ -89,9 +91,14 @@ class Jav
                     ]);
 
                     $id++;
+
+                    Log::info('Hscangku update ID#'.$video->id.' success...');
+                    sleep(10);
                 }
             }
         }
+
+        Log::info('Hscangku upload ended...');
     }
 
     public static function updateEmptySd($total = 1, $number = 1)
