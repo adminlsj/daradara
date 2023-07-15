@@ -45,7 +45,7 @@ class RemoveSpam extends Command
 
         $comments = Comment::where('created_at', '>=', Carbon::now()->subDay())->get();
         foreach ($comments as $comment) {
-            if ($comments->where('text', $comment->text)->count() > 5) {
+            if ($comments->where('text', $comment->text)->count() > 5 || $comments->where('ip_address', $comment->ip_address)->count() > 100) {
                 $user = User::find($comment->user_id);
                 $user->delete();
             }
