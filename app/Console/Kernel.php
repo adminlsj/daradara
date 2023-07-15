@@ -29,12 +29,12 @@ class Kernel extends ConsoleKernel
         'App\Console\Commands\UpdateYoujizzDownloads',
         'App\Console\Commands\UpdateYoujizzErrors',
         'App\Console\Commands\UpdateCdn77',
-
         'App\Console\Commands\UploadNhentai',
         'App\Console\Commands\UploadRule34',
 
-        'App\Console\Commands\UpdateSearchtext',
+        'App\Console\Commands\UploadHscangku',
 
+        'App\Console\Commands\UpdateSearchtext',
         'App\Console\Commands\RemoveSpam',
     ];
 
@@ -61,7 +61,8 @@ class Kernel extends ConsoleKernel
         $schedule->command('hanime1:check-spankbang')->hourly();
         $schedule->command('hanime1:check-hetznerservers')->hourly();
         $schedule->command('hanime1:check-motherless')->cron('0 */2 * * *');
-        // $schedule->command('hanime1:check-odysee')->cron('0 */2 * * *');
+
+        $schedule->command('hanime1:upload-hscangku')->hourly();
 
         // $schedule->command('hanime1:upload-nhentai')->hourly()->between('6:00', '21:00');
         // $schedule->command('hanime1:upload-rule34')->hourly()->between('6:00', '21:00');
