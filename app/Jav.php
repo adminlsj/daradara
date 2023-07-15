@@ -105,7 +105,7 @@ class Jav
     {
         Log::info('Empty sd update started...');
 
-        $base = "http://513hsck.cc";
+        $base = "http://515hsck.cc";
         $videos = Video::where('foreign_sd', 'like', '%"hscangku"%')
                     ->where('sd', '')
                     ->orderBy('id', 'asc')
