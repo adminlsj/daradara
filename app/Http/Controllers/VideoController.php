@@ -278,7 +278,7 @@ class VideoController extends Controller
             'comment-text' => 'required|string|max:255',
         ]);
 
-        if (Auth::check() && Auth::user()->id == request('comment-user-id')) {
+        // if (Auth::check() && Auth::user()->id == request('comment-user-id')) {
             $ip_address = isset($_SERVER["HTTP_CF_CONNECTING_IP"]) ? $_SERVER["HTTP_CF_CONNECTING_IP"] : 'N/A';
             $comment = Comment::create([
                 'user_id' => request('comment-user-id'),
@@ -300,9 +300,9 @@ class VideoController extends Controller
                 'csrf_token' => csrf_token(),
             ]);
 
-        } else {
+        /* } else {
             abort(403);
-        }
+        } */
     }
 
     public function commentLike(Request $request)
