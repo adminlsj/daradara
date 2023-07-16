@@ -43,15 +43,15 @@ class RemoveSpam extends Command
     {
         Log::info('Spam remove started...');
 
-        $comments_short = Comment::where('created_at', '>=', Carbon::now()->subMinutes(1))->get();
+        /* $comments_short = Comment::where('created_at', '>=', Carbon::now()->subMinutes(1))->get();
         foreach ($comments_short as $comment) {
             if ($comments_short->where('text', $comment->text)->count() > 5 || $comments_short->where('ip_address', $comment->ip_address)->count() > 5) {
                 $user = User::find($comment->user_id);
                 $user->delete();
             }
-        }
+        } */
 
-        $comments_long = Comment::where('created_at', '>=', Carbon::now()->subMinutes(5))->get();
+        $comments_long = Comment::where('created_at', '>=', Carbon::now()->subMinutes(10))->get();
         foreach ($comments_long as $comment) {
             if ($comments_long->where('ip_address', $comment->ip_address)->count() > 10) {
                 $user = User::find($comment->user_id);
