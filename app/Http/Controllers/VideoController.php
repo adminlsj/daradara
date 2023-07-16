@@ -278,26 +278,31 @@ class VideoController extends Controller
             'comment-text' => 'required|string|max:255',
         ]);
 
-        $ip_address = isset($_SERVER["HTTP_CF_CONNECTING_IP"]) ? $_SERVER["HTTP_CF_CONNECTING_IP"] : 'N/A';
-        $comment = Comment::create([
-            'user_id' => request('comment-user-id'),
-            'type' => request('comment-type'),
-            'foreign_id' => request('comment-foreign-id'),
-            'text' => request('comment-text'),
-            'ip_address' => $ip_address,
-        ]);
+        if (Auth::check() && Auth::user()->id == request('comment-user-id')) {
+            $ip_address = isset($_SERVER["HTTP_CF_CONNECTING_IP"]) ? $_SERVER["HTTP_CF_CONNECTING_IP"] : 'N/A';
+            $comment = Comment::create([
+                'user_id' => request('comment-user-id'),
+                'type' => request('comment-type'),
+                'foreign_id' => request('comment-foreign-id'),
+                'text' => request('comment-text'),
+                'ip_address' => $ip_address,
+            ]);
 
-        $html = '';
-        $html .= view('video.singleVideoComment', compact('comment'));
+            $html = '';
+            $html .= view('video.singleVideoComment', compact('comment'));
 
-        $comment_count = request('comment-count') + 1;
+            $comment_count = request('comment-count') + 1;
 
-        return response()->json([
-            'comment_id' => $comment->id,
-            'comment_count' => $comment_count,
-            'single_video_comment' => $html,
-            'csrf_token' => csrf_token(),
-        ]);
+            return response()->json([
+                'comment_id' => $comment->id,
+                'comment_count' => $comment_count,
+                'single_video_comment' => $html,
+                'csrf_token' => csrf_token(),
+            ]);
+
+        } else {
+            abort(403);
+        }
     }
 
     public function commentLike(Request $request)
