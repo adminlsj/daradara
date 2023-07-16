@@ -43,15 +43,23 @@ class RemoveSpam extends Command
     {
         Log::info('Spam remove started...');
 
-        $comments = Comment::where('created_at', '>=', Carbon::now()->subDay())->get();
-        foreach ($comments as $comment) {
-            if ($comments->where('text', $comment->text)->count() > 5 || $comments->where('ip_address', $comment->ip_address)->count() > 100) {
+        $comments_short = Comment::where('created_at', '>=', Carbon::now()->subMinutes(1))->get();
+        foreach ($comments_short as $comment) {
+            if ($comments_short->where('text', $comment->text)->count() > 5 || $comments_short->where('ip_address', $comment->ip_address)->count() > 5) {
                 $user = User::find($comment->user_id);
                 $user->delete();
             }
         }
 
-        $ip_user_array = Comment::whereIn('ip_address', [
+        $comments_long = Comment::where('created_at', '>=', Carbon::now()->subMinutes(5))->get();
+        foreach ($comments_long as $comment) {
+            if ($comments_long->where('ip_address', $comment->ip_address)->count() > 10) {
+                $user = User::find($comment->user_id);
+                $user->delete();
+            }
+        }
+
+        /* $ip_user_array = Comment::whereIn('ip_address', [
                                 '68.183.193.70',
                                 '143.110.189.77',
                                 '46.232.121.36',
@@ -92,13 +100,13 @@ class RemoveSpam extends Command
                             ->groupBy('user_id')
                             ->pluck('user_id');
 
-        $keyword_user_array = Comment::where('text', 'ilike', '%↑%')
+        User::destroy($ip_user_array); */
+
+        /* $keyword_user_array = Comment::where('text', 'ilike', '%↑%')
                             ->where('created_at', '>=', Carbon::now()->subDay())
                             ->groupBy('user_id')
-                            ->pluck('user_id');
-        
-        User::destroy($ip_user_array);
-        User::destroy($keyword_user_array);
+                            ->pluck('user_id'); */
+        // User::destroy($keyword_user_array);
 
         Log::info('Spam remove ended...');
     }
