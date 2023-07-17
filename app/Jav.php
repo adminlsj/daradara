@@ -286,13 +286,13 @@ class Jav
                     ->get()
                     ->split($total)[$number - 1]
                     ->values()
-                    ->slice(0, 3);
+                    ->slice(0, 5);
 
         foreach ($videos as $video) {
             $code = strtolower(trim(explode(' ', $video->title)[0]));
             $jable_url = "https://jable.tv/videos/{$code}/";
             $jable_html = Browsershot::url($jable_url)
-                ->timeout(20)
+                ->timeout(10)
                 ->setExtraHttpHeaders(['Referer' => 'https://jable.tv/'])
                 ->userAgent(Spankbang::$userAgents[array_rand(Spankbang::$userAgents)])
                 ->bodyHtml();
