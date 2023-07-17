@@ -38,6 +38,6 @@ class UpdateEmptySd4 extends Command
      */
     public function handle()
     {
-        Jav::updateMissavImgur(5, 4);
+        Jav::updateWithJable(5, 4);
     }
 }

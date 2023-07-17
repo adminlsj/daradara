@@ -216,7 +216,7 @@ class BotController extends Controller
         } */
 
         // Update jable tags
-        $videos = Video::whereIn('genre', Video::$genre_jav)->where('foreign_sd', 'not like', '%"jable"%')->orderBy('id', 'asc')->where('tags_array', '{"中文字幕":100}')->get();
+        /* $videos = Video::whereIn('genre', Video::$genre_jav)->where('foreign_sd', 'not like', '%"jable"%')->orderBy('id', 'asc')->where('tags_array', '{"中文字幕":100}')->get();
         foreach ($videos as $video) {
             $code = strtolower(trim(explode(' ', $video->title)[0]));
             $jable_url = "https://jable.tv/videos/{$code}/";
@@ -251,7 +251,7 @@ class BotController extends Controller
                 $video->foreign_sd = $temp;
                 $video->save();
             }
-        }
+        } */
 
         // Update with MissAV
         /* $videos = Video::where('id', '>=', 48445)->where('genre', '日本AV')->where('created_at', '2000-01-01 00:00:00')->orderBy('id', 'asc')->get();
