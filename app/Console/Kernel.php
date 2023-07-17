@@ -64,7 +64,7 @@ class Kernel extends ConsoleKernel
 
         $schedule->command('hanime1:upload-hscangku')->hourly();
         $schedule->command('hanime1:update-emptysd')->hourly();
-        $schedule->command('hanime1:update-withMissav')->dailyAt('17:25');
+        $schedule->command('hanime1:update-withMissav')->dailyAt('15:05');
 
         // $schedule->command('hanime1:upload-nhentai')->hourly()->between('6:00', '21:00');
         // $schedule->command('hanime1:upload-rule34')->hourly()->between('6:00', '21:00');
