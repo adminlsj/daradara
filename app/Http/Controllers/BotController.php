@@ -158,23 +158,23 @@ class BotController extends Controller
                 array_push($codes, $code);
             }
         }
-        return $repeats;
+        // return $repeats;
 
-        /* foreach ($repeats as $repeat) {
-            if (Video::where('title', 'like', $repeat.' %')->where('foreign_sd', 'like', '%"hscangku"%')->exists() && Video::where('title', 'like', $repeat.' %')->where('foreign_sd', 'like', '%"avbebe"%')->where('foreign_sd', 'not like', '%"hscangku"%')->exists()) {
+        foreach ($repeats as $repeat) {
+            if (Video::where('title', 'like', $repeat.' %')->where('foreign_sd', 'like', '%"hscangku"%')->exists() && Video::where('title', 'like', $repeat.' %')->where('foreign_sd', 'like', '%"avbebe"%')->where('foreign_sd', 'like', '%"hscangku"%')->exists()) {
 
                 $hscangku = Video::where('title', 'like', $repeat.' %')->where('foreign_sd', 'like', '%"hscangku"%')->first();
-                $avbebe = Video::where('title', 'like', $repeat.' %')->where('foreign_sd', 'like', '%"avbebe"%')->where('foreign_sd', 'not like', '%"hscangku"%')->first();
+                $avbebe = Video::where('title', 'like', $repeat.' %')->where('foreign_sd', 'like', '%"avbebe"%')->where('foreign_sd', 'like', '%"hscangku"%')->first();
 
                 $temp = $avbebe->foreign_sd;
-                $temp["backup"] = $avbebe->sd;
-                $temp["hscangku"] = $hscangku->foreign_sd["hscangku"];
+                $temp["backup"] = $hscangku->sd;
+                $temp["hscangku2"] = $hscangku->foreign_sd["hscangku"];
                 $avbebe->foreign_sd = $temp;
-                $avbebe->sd = $hscangku->sd;
+                // $avbebe->sd = $hscangku->sd;
                 $avbebe->save();
-                $hscangku->delete();
+                // $hscangku->delete();
             }
-        } */
+        }
 
         /* $videos = Video::where('foreign_sd', 'like', '%"hscangku"%')->where('foreign_sd', 'not like', '%"avbebe"%')->get();
         foreach ($videos as $video) {
