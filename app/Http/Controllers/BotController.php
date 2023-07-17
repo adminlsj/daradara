@@ -147,7 +147,7 @@ class BotController extends Controller
         } */
 
         // Check repeats
-        $videos = Video::where('genre', '日本AV')->orWhere('genre', '素人業餘')->orWhere('genre', '高清無碼')->orWhere('genre', 'AI解碼')->orWhere('genre', '國產AV')->orWhere('genre', '國產素人')->get();
+        /* $videos = Video::where('genre', '日本AV')->orWhere('genre', '素人業餘')->orWhere('genre', '高清無碼')->orWhere('genre', 'AI解碼')->orWhere('genre', '國產AV')->orWhere('genre', '國產素人')->get();
         $codes = [];
         $repeats = [];
         foreach ($videos as $video) {
@@ -158,7 +158,7 @@ class BotController extends Controller
                 array_push($codes, $code);
             }
         }
-        return $repeats;
+        return $repeats; */
 
         /* foreach ($repeats as $repeat) {
             if (Video::where('title', 'like', $repeat.' %')->where('foreign_sd', 'like', '%"hscangku"%')->count() == 2) {
@@ -216,7 +216,7 @@ class BotController extends Controller
         } */
 
         // Update jable tags
-        /* $videos = Video::where('id', '>=', 47579)->where('genre', '高清無碼')->where('tags_array', '{"中文字幕":100}')->where('foreign_sd', 'not like', '%"jable"%')->orderBy('id', 'asc')->get();
+        $videos = Video::whereIn('genre', Video::$genre_jav)->where('foreign_sd', 'not like', '%"jable"%')->orderBy('id', 'asc')->where('tags_array', '{"中文字幕":100}')->get();
         foreach ($videos as $video) {
             $code = strtolower(trim(explode(' ', $video->title)[0]));
             $jable_url = "https://jable.tv/videos/{$code}/";
@@ -251,7 +251,7 @@ class BotController extends Controller
                 $video->foreign_sd = $temp;
                 $video->save();
             }
-        } */
+        }
 
         // Update with MissAV
         /* $videos = Video::where('id', '>=', 48445)->where('genre', '日本AV')->where('created_at', '2000-01-01 00:00:00')->orderBy('id', 'asc')->get();
