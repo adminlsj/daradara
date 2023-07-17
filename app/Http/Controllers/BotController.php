@@ -152,7 +152,7 @@ class BotController extends Controller
         $repeats = [];
         foreach ($videos as $video) {
             $code = explode(' ', $video->title)[0];
-            if ($code != 'Muramura' && $code != '母はアナル！娘はマンコ！頭のおかしい本物親子の４P共演' && in_array($code, $codes)) {
+            if ($code != 'SSIS-531' && $code != 'Muramura' && $code != '母はアナル！娘はマンコ！頭のおかしい本物親子の４P共演' && in_array($code, $codes)) {
                 array_push($repeats, $code);
             } else {
                 array_push($codes, $code);
