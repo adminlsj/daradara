@@ -158,9 +158,9 @@ class BotController extends Controller
                 array_push($codes, $code);
             }
         }
-        // return $repeats;
+        return $repeats;
 
-        foreach ($repeats as $repeat) {
+        /* foreach ($repeats as $repeat) {
             if (Video::where('title', 'like', $repeat.' %')->where('foreign_sd', 'like', '%"hscangku"%')->count() == 2) {
 
                 $first = Video::where('title', 'like', $repeat.' %')->where('foreign_sd', 'like', '%"hscangku"%')->orderBy('id', 'asc')->first();
@@ -172,7 +172,7 @@ class BotController extends Controller
                 $second->foreign_sd = $temp;
                 $second->save();
             }
-        }
+        } */
 
         /* $videos = Video::where('foreign_sd', 'like', '%"hscangku"%')->where('foreign_sd', 'not like', '%"avbebe"%')->get();
         foreach ($videos as $video) {
