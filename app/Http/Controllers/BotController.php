@@ -37,6 +37,56 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
+        Log::info('Jable update started...');
+
+        $videos = Video::whereIn('genre', Video::$genre_jav)
+                    ->where('foreign_sd', 'not like', '%"jable"%')
+                    ->inRandomOrder()
+                    ->limit(10)
+                    ->get();
+
+        foreach ($videos as $video) {
+            $code = strtolower(trim(explode(' ', $video->title)[0]));
+            $jable_url = "https://jable.tv/videos/{$code}/";
+            $jable_html = Browsershot::url($jable_url)
+                ->timeout(10)
+                ->setExtraHttpHeaders(['Referer' => 'https://jable.tv/'])
+                ->userAgent(Spankbang::$userAgents[array_rand(Spankbang::$userAgents)])
+                ->bodyHtml();
+
+            $title = Helper::get_string_between($jable_html, '<title>', '</title>');
+            if ($title != '404 頁面丟失 - Jable.TV | 免費高清AV在線看 | J片 AV看到飽') {
+                $tags_html = str_replace('>•</span>', '', Helper::get_string_between($jable_html, '<h5 class="tags h6-md">', '</h5>'));
+                $tags_collection = explode('/a>', $tags_html);
+                array_pop($tags_collection);
+                $tags_array = [];
+                foreach ($tags_collection as &$tag) {
+                    $tag = Helper::get_string_between($tag, '>', '<');
+                    if ($tag != '主奴調教' && $tag != '凌辱強暴' && $tag != '制服誘惑' && $tag != '角色劇情' && $tag != '盜攝偷拍' && $tag != '無碼解放' && $tag != '多P群交' && $tag != '絲襪美腿') {
+                        $tags_array[$tag] = 100;
+                    }
+                }
+                $video->tags = implode(' ', array_keys($tags_array));
+                $video->tags_array = $tags_array;
+                $temp = $video->foreign_sd;
+                $temp['jable'] = $jable_url;
+                $video->foreign_sd = $temp;
+                $video->save();
+
+                Log::info('Jable update ID#'.$video->id.' success...');
+
+            } else {
+                $temp = $video->foreign_sd;
+                $temp['jable'] = '404';
+                $video->foreign_sd = $temp;
+                $video->save();
+
+                Log::info('Jable update ID#'.$video->id.' failed...');
+            }
+        }
+
+        Log::info('Jable update ended...');
+
         /* $base = "http://513hsck.cc";
         $videos = Video::where('foreign_sd', 'like', '%"hscangku"%')
                     ->where('sd', '')
