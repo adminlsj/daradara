@@ -286,7 +286,7 @@ class Jav
                     ->get()
                     ->split($total)[$number - 1]
                     ->values()
-                    ->slice(0, 5);
+                    ->slice(0, 6);
 
         foreach ($videos as $video) {
             $code = strtolower(trim(explode(' ', $video->title)[0]));
