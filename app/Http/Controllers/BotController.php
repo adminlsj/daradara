@@ -158,23 +158,21 @@ class BotController extends Controller
                 array_push($codes, $code);
             }
         }
-        return $repeats;
+        // return $repeats;
 
-        /* foreach ($repeats as $repeat) {
-            if (Video::where('title', 'like', $repeat.' %')->where('foreign_sd', 'like', '%"hscangku"%')->exists() && Video::where('title', 'like', $repeat.' %')->where('foreign_sd', 'like', '%"avbebe"%')->where('foreign_sd', 'like', '%"hscangku"%')->exists()) {
+        foreach ($repeats as $repeat) {
+            if (Video::where('title', 'like', $repeat.' %')->where('foreign_sd', 'like', '%"hscangku"%')->count() == 2) {
 
-                $hscangku = Video::where('title', 'like', $repeat.' %')->where('foreign_sd', 'like', '%"hscangku"%')->first();
-                $avbebe = Video::where('title', 'like', $repeat.' %')->where('foreign_sd', 'like', '%"avbebe"%')->where('foreign_sd', 'like', '%"hscangku"%')->first();
+                $first = Video::where('title', 'like', $repeat.' %')->where('foreign_sd', 'like', '%"hscangku"%')->orderBy('id', 'asc')->first();
+                $second = Video::where('title', 'like', $repeat.' %')->where('foreign_sd', 'like', '%"hscangku"%')->orderBy('id', 'asc')->skip(1)->first();
 
-                $temp = $avbebe->foreign_sd;
-                $temp["backup"] = $hscangku->sd;
-                $temp["hscangku2"] = $hscangku->foreign_sd["hscangku"];
-                $avbebe->foreign_sd = $temp;
-                // $avbebe->sd = $hscangku->sd;
-                $avbebe->save();
-                // $hscangku->delete();
+                $temp = $second->foreign_sd;
+                $temp["backup"] = $first->sd;
+                $temp["hscangku2"] = $first->foreign_sd["hscangku"];
+                $second->foreign_sd = $temp;
+                $second->save();
             }
-        } */
+        }
 
         /* $videos = Video::where('foreign_sd', 'like', '%"hscangku"%')->where('foreign_sd', 'not like', '%"avbebe"%')->get();
         foreach ($videos as $video) {
