@@ -39,7 +39,7 @@
 	<div class="hidden-sm hidden-md hidden-lg" style="position: relative;">
 		<div style="position: relative;">
 			<img style="width: 100%;" src="https://cdn.jsdelivr.net/gh/jokogebai/jokogebai@v1.0.0/home_poster_background.jpg">
-			<img style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-position: center 0px; object-fit: cover; -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));" src="https://i.imgur.com/{{ $random->foreign_sd['cover'] }}.jpg">
+			<img style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-position: center 0px; object-fit: cover; -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));" src="{{ $random->cover }}">
 	    </div>
 		<div style="position: absolute; left: 50%; -webkit-transform: translateX(-50%); transform: translateX(-50%); width: 96%; bottom: 14%; text-align: center; color: white">
 			<h3 style="font-weight: bold; font-size: 20px;"><span style="color: crimson">H</span>anime1<span style="color: crimson">.</span>me</h3>
