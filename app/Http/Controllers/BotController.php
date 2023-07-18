@@ -40,7 +40,7 @@ class BotController extends Controller
         $code = "ABP-";
         $user_id = 547865;
         $default_watch_id = 4440;
-        $videos = Video::where('title', 'like', "{$code}%")->where('foreign_sd', 'like', '%"missav"%')->orderBy('title', 'asc')->get();
+        $videos = Video::where('user_id', 1)->where('title', 'like', "{$code}%")->where('foreign_sd', 'like', '%"missav"%')->orderBy('title', 'asc')->get();
         foreach ($videos as $video) {
             $video->user_id = $user_id;
             $missav_html = Browsershot::url($video->foreign_sd['missav'])
