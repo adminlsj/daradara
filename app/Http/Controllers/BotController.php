@@ -69,6 +69,8 @@ class BotController extends Controller
             }
 
             $video->save();
+
+            Log::info('Playlist update ID#'.$video->id.' success...');
         }
 
         Log::info('Playlist update ended...');
