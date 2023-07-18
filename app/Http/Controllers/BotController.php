@@ -37,6 +37,39 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
+        $code = "ABP-";
+        $user_id = 547865;
+        $default_watch_id = 4440;
+        $videos = Video::where('title', 'like', "{$code}%")->where('foreign_sd', 'like', '%"missav"%')->get();
+        foreach ($videos as $video) {
+            $video->user_id = $user_id;
+            $missav_html = Browsershot::url($video->foreign_sd['missav'])
+                ->timeout(20)
+                ->setExtraHttpHeaders(['Referer' => 'https://missav.com/'])
+                ->userAgent(Spankbang::$userAgents[array_rand(Spankbang::$userAgents)])
+                ->bodyHtml();
+
+            if (strpos($missav_html, "系列:</span>") !== false) {
+                $title = trim(explode('>', Helper::get_string_between($missav_html, '系列:</span>', '</a>'))[1]);
+                if ($watch = Watch::where('title', $title)->first()) {
+                    $video->playlist_id = $watch->id;
+                } else {
+                    $watch = Watch::create([
+                        'user_id' => $user_id,
+                        'title' => $title,
+                        'description' => $title,
+                    ]);
+                    $video->playlist_id = $watch->id;
+                }
+
+            } else {
+                $video->playlist_id = $default_watch_id;
+            }
+
+            $video->save();
+            return $video;
+        }
+
         /* $base = "http://513hsck.cc";
         $videos = Video::where('foreign_sd', 'like', '%"hscangku"%')
                     ->where('sd', '')
@@ -855,13 +888,13 @@ class BotController extends Controller
         } */
 
         // update cover
-        $videos = Video::where('cover', 'like', '%imgur%')->orderBy('id', 'asc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
+        /* $videos = Video::where('cover', 'like', '%imgur%')->orderBy('id', 'asc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
         foreach ($videos as $video) {
             $cover = str_replace('.png', '.jpg', $video->cover);
             $imgur = Helper::get_string_between($cover, 'https://i.imgur.com/', '.jpg');
             $video->cover = 'https://cdn.jsdelivr.net/gh/shakaoffcoco/shakaoffcoco@v1.0.0/asset/cover/'.$imgur.'.jpg';
             $video->save();
-        }
+        } */
 
         //---------------------------------------------------------------------------------------------------------
 
