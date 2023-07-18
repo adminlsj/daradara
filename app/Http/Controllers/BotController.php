@@ -67,7 +67,6 @@ class BotController extends Controller
             }
 
             $video->save();
-            return $video;
         }
 
         /* $base = "http://513hsck.cc";
