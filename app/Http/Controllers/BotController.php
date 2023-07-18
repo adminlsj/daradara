@@ -37,6 +37,8 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
+        Log::info('Playlist update started...');
+
         $code = "ABP-";
         $user_id = 547865;
         $default_watch_id = 4440;
@@ -68,6 +70,8 @@ class BotController extends Controller
 
             $video->save();
         }
+
+        Log::info('Playlist update ended...');
 
         /* $base = "http://513hsck.cc";
         $videos = Video::where('foreign_sd', 'like', '%"hscangku"%')
