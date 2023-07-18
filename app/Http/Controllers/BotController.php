@@ -37,14 +37,6 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $videos = Video::where('foreign_sd', 'like', '%"thumbnail"%')->where('genre', '!=', '日本AV')->orderBy('id', 'asc')->get();
-        foreach ($videos as $video) {
-            $temp = $video->foreign_sd;
-            unset($temp['thumbnail']);
-            $video->foreign_sd = $temp;
-            $video->save();
-        }
-
         /* $base = "http://513hsck.cc";
         $videos = Video::where('foreign_sd', 'like', '%"hscangku"%')
                     ->where('sd', '')
@@ -823,7 +815,7 @@ class BotController extends Controller
         } */
 
         // download imgurs
-        /* $videos = Video::where('id', '<', 40000)->where('genre', 'not like', '日本AV')->where('cover', 'not like', '%cdn.jsdelivr.net%')->orderBy('id', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
+        /* $videos = Video::where('cover', 'like', '%imgur%')->orderBy('id', 'asc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
 
         foreach ($videos as $video) {
             // cover
@@ -863,13 +855,13 @@ class BotController extends Controller
         } */
 
         // update cover
-        /* $videos = Video::where('cover', 'not like', '%cdn.jsdelivr.net%')->orderBy('id', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
+        $videos = Video::where('cover', 'like', '%imgur%')->orderBy('id', 'asc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
         foreach ($videos as $video) {
             $cover = str_replace('.png', '.jpg', $video->cover);
             $imgur = Helper::get_string_between($cover, 'https://i.imgur.com/', '.jpg');
-            $video->cover = 'https://cdn.jsdelivr.net/gh/kishibecof1/kishibecof1@v1.0.0/asset/cover/'.$imgur.'.jpg';
+            $video->cover = 'https://cdn.jsdelivr.net/gh/shakaoffcoco/shakaoffcoco@v1.0.0/asset/cover/'.$imgur.'.jpg';
             $video->save();
-        } */
+        }
 
         //---------------------------------------------------------------------------------------------------------
 
