@@ -338,8 +338,7 @@ class Jav
         $imgur = '';
         $cover = '';
 
-        $imgur_url = $request->link;
-        $image = Image::make($imgur_url);
+        $image = Image::make($link);
         $image = $image->fit(2880, 1620, function ($constraint) {}, "top");
         $image = $image->stream();
         $pvars = array('image' => base64_encode($image));
@@ -355,7 +354,7 @@ class Jav
         $pms = json_decode($out, true);
         $imgur = $pms['data']['link'];
 
-        $image = Image::make($imgur_url);
+        $image = Image::make($link);
         $image = $image->fit(268, 394, function ($constraint) {}, "right");
         $image = $image->stream();
         $pvars = array('image' => base64_encode($image));
