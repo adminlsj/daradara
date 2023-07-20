@@ -2694,8 +2694,8 @@ class BotController extends Controller
         }
     }
 
-    public function updateWithImageLink(Int $vid, String $link)
+    public function updateWithImageLink(Request $request)
     {
-        Jav::updateWithImageLink($vid, $link);
+        Jav::updateWithImageLink($request->vid, $request->link);
     }
 }
