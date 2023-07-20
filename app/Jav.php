@@ -371,11 +371,10 @@ class Jav
         $cover = $pms['data']['link'];
 
         $video->imgur = Helper::get_string_between($imgur, 'https://i.imgur.com/', '.');
+        $video->cover = $cover;
         $temp = $video->foreign_sd;
-        $temp['cover'] = Helper::get_string_between($cover, 'https://i.imgur.com/', '.');
         $temp['thumbnail'] = Helper::get_string_between($imgur, 'https://i.imgur.com/', '.');
         $video->foreign_sd = $temp;
-        // $video->uploaded_at = Carbon::now()->toDateTimeString();;
         $video->save();
 
         return Redirect::route('jav.watch', ['v' => $video->id]);
