@@ -2693,4 +2693,9 @@ class BotController extends Controller
             $video->save();
         }
     }
+
+    public function updateWithImageLink(Int $vid, String $link)
+    {
+        Jav::updateWithImageLink($vid, $link);
+    }
 }
