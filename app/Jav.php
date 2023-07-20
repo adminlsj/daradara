@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Log;
 use App\Spankbang;
 use Image;
 use SteelyWing\Chinese\Chinese;
+use Redirect;
 
 class Jav
 {
@@ -377,5 +378,7 @@ class Jav
         $video->foreign_sd = $temp;
         // $video->uploaded_at = Carbon::now()->toDateTimeString();;
         $video->save();
+
+        return Redirect::route('jav.watch', ['v' => $video->id]);
     }
 }
