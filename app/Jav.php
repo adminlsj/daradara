@@ -330,4 +330,52 @@ class Jav
 
         Log::info('Jable update ended...');
     }
+
+    public static function updateWithImageLink(Int $vid, String $link)
+    {
+        $video = Video::find($vid);        
+        $imgur = '';
+        $cover = '';
+
+        $imgur_url = $request->link;
+        $image = Image::make($imgur_url);
+        $image = $image->fit(2880, 1620, function ($constraint) {}, "top");
+        $image = $image->stream();
+        $pvars = array('image' => base64_encode($image));
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_URL, 'https://api.imgur.com/3/image.json');
+        curl_setopt($curl, CURLOPT_TIMEOUT, 30);
+        curl_setopt($curl, CURLOPT_HTTPHEADER, array('Authorization: Client-ID ' . '5b63b1c883ddb72'));
+        curl_setopt($curl, CURLOPT_POST, 1);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $pvars);
+        $out = curl_exec($curl);
+        curl_close ($curl);
+        $pms = json_decode($out, true);
+        $imgur = $pms['data']['link'];
+
+        $image = Image::make($imgur_url);
+        $image = $image->fit(268, 394, function ($constraint) {}, "right");
+        $image = $image->stream();
+        $pvars = array('image' => base64_encode($image));
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_URL, 'https://api.imgur.com/3/image.json');
+        curl_setopt($curl, CURLOPT_TIMEOUT, 30);
+        curl_setopt($curl, CURLOPT_HTTPHEADER, array('Authorization: Client-ID ' . '5b63b1c883ddb72'));
+        curl_setopt($curl, CURLOPT_POST, 1);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $pvars);
+        $out = curl_exec($curl);
+        curl_close ($curl);
+        $pms = json_decode($out, true);
+        $cover = $pms['data']['link'];
+
+        $video->imgur = Helper::get_string_between($imgur, 'https://i.imgur.com/', '.');
+        $temp = $video->foreign_sd;
+        $temp['cover'] = Helper::get_string_between($cover, 'https://i.imgur.com/', '.');
+        $temp['thumbnail'] = Helper::get_string_between($imgur, 'https://i.imgur.com/', '.');
+        $video->foreign_sd = $temp;
+        // $video->uploaded_at = Carbon::now()->toDateTimeString();;
+        $video->save();
+    }
 }
