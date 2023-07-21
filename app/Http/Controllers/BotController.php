@@ -39,9 +39,9 @@ class BotController extends Controller
 
         Log::info('Playlist update started...');
 
-        $code = "PRED-";
-        $user_id = 565495;
-        $default_watch_id = 6101;
+        $code = "EYAN-";
+        $user_id = 563800;
+        $default_watch_id = 6127;
         $videos = Video::where('user_id', 1)->where('title', 'like', "{$code}%")->where('foreign_sd', 'like', '%"missav"%')->orderBy('title', 'asc')->get();
         foreach ($videos as $video) {
             $video->user_id = $user_id;
