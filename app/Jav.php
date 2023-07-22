@@ -415,7 +415,11 @@ class Jav
                     $code = trim(explode(' ', $title)[0]);
                     if ($video = Video::where('title', 'ilike', $code.'%')->first()) {
                         $video->title = $title;
-                        $video->caption = $caption;
+                        if ($caption != '') {
+                            $video->caption = $caption;
+                        } else {
+                            echo "ID#{$video->id} empty caption <a href='{$avbebe_link}' target='_blank'>{$avbebe_link}</a><br>";
+                        }
                         $temp = $video->foreign_sd;
                         $temp["avbebe"] = $avbebe_link;
                         $video->foreign_sd = $temp;

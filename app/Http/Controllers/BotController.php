@@ -37,9 +37,17 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        // return Jav::updateWithAvbebe(8);
+        /* $videos = Video::where('foreign_sd', 'like', '%"avbebe"%')->get();
+        foreach ($videos as $video) {
+            $temp = $video->foreign_sd;
+            unset($temp['avbebe']);
+            $video->foreign_sd = $temp;
+            $video->save();
+        } */
 
-        Log::info('Playlist update started...');
+        return Jav::updateWithAvbebe(8);
+
+        /* Log::info('Playlist update started...');
 
         $code = "RCT-";
         $user_id = 566371;
@@ -75,7 +83,7 @@ class BotController extends Controller
             Log::info('Playlist update ID#'.$video->id.' success...');
         }
 
-        Log::info('Playlist update ended...');
+        Log::info('Playlist update ended...'); */
 
         /* $base = "http://513hsck.cc";
         $videos = Video::where('foreign_sd', 'like', '%"hscangku"%')
