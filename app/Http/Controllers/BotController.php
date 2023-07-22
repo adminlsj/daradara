@@ -45,7 +45,7 @@ class BotController extends Controller
             $video->save();
         } */
 
-        return Jav::updateWithAvbebe(8);
+        Jav::updateWithAvbebe(8);
 
         /* Log::info('Playlist update started...');
 
