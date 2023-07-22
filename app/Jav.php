@@ -432,7 +432,7 @@ class Jav
                     }
 
                 } else {
-                    Log::info('Avbebe update '.$avbebe_link.'already exists...');
+                    Log::info('Avbebe update '.$avbebe_link.' already exists...');
                 }
             }
         }
