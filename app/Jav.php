@@ -418,21 +418,21 @@ class Jav
                         if ($caption != '') {
                             $video->caption = $caption;
                         } else {
-                            echo "ID#{$video->id} empty caption <a href='{$avbebe_link}' target='_blank'>{$avbebe_link}</a><br>";
+                            Log::info('Avbebe update ID#'.$video->id.' empty caption '.$avbebe_link.'...');
                         }
                         $temp = $video->foreign_sd;
                         $temp["avbebe"] = $avbebe_link;
                         $video->foreign_sd = $temp;
                         $video->save();
-                        echo "ID#{$video->id} updated with <a href='{$avbebe_link}' target='_blank'>{$avbebe_link}</a><br>";
+                        Log::info('Avbebe update ID#'.$video->id.' with '.$avbebe_link.'...');
 
                         if ($video->sd != $sd) {
-                            echo "ID#{$video->id} sd different from <a href='{$avbebe_link}' target='_blank'>{$avbebe_link}</a><br>";
+                            Log::info('Avbebe update ID#'.$video->id.' sd different from '.$avbebe_link.'...');
                         }
                     }
 
                 } else {
-                    echo "<a href='{$avbebe_link}' target='_blank'>{$avbebe_link}</a> exists<br>";
+                    Log::info('Avbebe update '.$avbebe_link.'already exists...');
                 }
             }
         }
