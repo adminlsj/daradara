@@ -37,11 +37,13 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
+        // return Jav::updateWithAvbebe(8);
+
         Log::info('Playlist update started...');
 
-        $code = "RBD-";
-        $user_id = 563132;
-        $default_watch_id = 6131;
+        $code = "RCT-";
+        $user_id = 566371;
+        $default_watch_id = 6190;
         $videos = Video::where('user_id', 1)->where('title', 'like', "{$code}%")->where('foreign_sd', 'like', '%"missav"%')->orderBy('title', 'asc')->get();
         foreach ($videos as $video) {
             $video->user_id = $user_id;

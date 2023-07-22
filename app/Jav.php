@@ -379,4 +379,58 @@ class Jav
 
         return Redirect::route('jav.watch', ['v' => $video->id]);
     }
+
+    public static function updateWithAvbebe($pages = 1)
+    {
+        for ($i = 1; $i <= $pages; $i++) { 
+            $page_url = "https://avbebe.com/archives/category/%e7%b6%9c%e5%90%88av";
+            if ($i > 1) {
+                $page_url = "https://avbebe.com/archives/category/%e7%b6%9c%e5%90%88av/page/{$i}";
+            }
+
+            $curl_connection = curl_init($page_url);
+            curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+            curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+            $page_html = curl_exec($curl_connection);
+            curl_close($curl_connection);
+
+            $page_links = explode('<h3 class="jeg_post_title">', $page_html);
+            array_shift($page_links);
+            foreach ($page_links as $avbebe_link) {
+                $avbebe_link = Helper::get_string_between($avbebe_link, '<a href="', '"');
+                if (!Video::where('foreign_sd', 'ilike', '%'.$avbebe_link.'%')->exists()) {
+                    $curl_connection = curl_init($avbebe_link);
+                    curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+                    curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+                    curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+                    $avbebe_html = curl_exec($curl_connection);
+                    curl_close($curl_connection);
+
+                    $title = trim(Helper::get_string_between($avbebe_html, '】', ' &#8211; Avbebe.com 高清H動畫♥沒有片頭廣告♥最新里番'));
+                    $userInteractionCount = Helper::get_string_between($avbebe_html, '"userInteractionCount":', '}}</script>');
+                    $caption = trim(Helper::get_string_between($avbebe_html, 'userInteractionCount":'.$userInteractionCount.'}}</script>', '</div>'));
+                    $sd = trim(Helper::get_string_between($avbebe_html, 'type="application/x-mpegurl" src="', '"'));
+
+                    $code = trim(explode(' ', $title)[0]);
+                    if ($video = Video::where('title', 'ilike', $code.'%')->first()) {
+                        $video->title = $title;
+                        $video->caption = $caption;
+                        $temp = $video->foreign_sd;
+                        $temp["avbebe"] = $avbebe_link;
+                        $video->foreign_sd = $temp;
+                        $video->save();
+                        echo "ID#{$video->id} updated with <a href='{$avbebe_link}' target='_blank'>{$avbebe_link}</a><br>";
+
+                        if ($video->sd != $sd) {
+                            echo "ID#{$video->id} sd different from <a href='{$avbebe_link}' target='_blank'>{$avbebe_link}</a><br>";
+                        }
+                    }
+
+                } else {
+                    echo "<a href='{$avbebe_link}' target='_blank'>{$avbebe_link}</a> exists<br>";
+                }
+            }
+        }
+    }
 }
