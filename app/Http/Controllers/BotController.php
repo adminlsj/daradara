@@ -39,14 +39,14 @@ class BotController extends Controller
 
         Log::info('Playlist update started...');
 
-        // $artist = 'S1 NO.1 STYLE';
-        $code = "SPRD-";
-        $user_id = 563177;
-        $default_watch_id = 4591;
+        $artist = 'S1 NO.1 STYLE';
+        $code = "SSIS-";
+        $user_id = 28;
+        $default_watch_id = 1;
         $videos = Video::where('user_id', 1)->where('title', 'like', "{$code}%")->where('foreign_sd', 'like', '%"missav"%')->orderBy('title', 'asc')->get();
         foreach ($videos as $video) {
             $video->user_id = $user_id;
-            // $video->artist = $artist;
+            $video->artist = $artist;
             $missav_html = Browsershot::url($video->foreign_sd['missav'])
                 ->timeout(20)
                 ->setExtraHttpHeaders(['Referer' => 'https://missav.com/'])
