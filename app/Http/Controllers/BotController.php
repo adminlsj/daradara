@@ -39,6 +39,55 @@ class BotController extends Controller
 
         Log::info('Playlist update started...');
 
+        $artist = 'Prestige';
+        $user_id = 547865;
+        $videos = Video::where('artist', 'Prestige')->where('user_id', 1)->where('foreign_sd', 'like', '%"missav"%')->orderBy('title', 'asc')->get();
+        foreach ($videos as $video) {
+            $video->user_id = $user_id;
+            $missav_html = Browsershot::url($video->foreign_sd['missav'])
+                ->timeout(20)
+                ->setExtraHttpHeaders(['Referer' => 'https://missav.com/'])
+                ->userAgent(Spankbang::$userAgents[array_rand(Spankbang::$userAgents)])
+                ->bodyHtml();
+
+            if (strpos($missav_html, "系列:</span>") !== false) {
+                $title = trim(explode('>', Helper::get_string_between($missav_html, '系列:</span>', '</a>'))[1]);
+                if ($watch = Watch::where('title', $title)->first()) {
+                    $video->playlist_id = $watch->id;
+                } else {
+                    $watch = Watch::create([
+                        'user_id' => $user_id,
+                        'title' => $title,
+                        'description' => $title,
+                    ]);
+                    $video->playlist_id = $watch->id;
+                }
+                $video->save();
+                Log::info('Playlist update ID#'.$video->id.' success...');
+
+            } elseif (strpos($missav_html, "標籤:</span>") !== false) {
+                $tag = trim(explode('>', Helper::get_string_between($missav_html, '標籤:</span>', '</a>'))[1]);
+                if ($watch = Watch::where('title', $tag)->first()) {
+                    $video->playlist_id = $watch->id;
+                } else {
+                    $watch = Watch::create([
+                        'user_id' => $user_id,
+                        'title' => $tag,
+                        'description' => $tag,
+                    ]);
+                    $video->playlist_id = $watch->id;
+                }
+                $video->save();
+                Log::info('Playlist update ID#'.$video->id.' success...');
+            }
+
+            Log::info('Playlist update ID#'.$video->id.' failed...');
+        }
+
+        Log::info('Playlist update ended...');
+
+        /* Log::info('Playlist update started...');
+
         // $artist = 'Glory Quest';
         $code = "GETS-";
         $user_id = 547865;
@@ -75,7 +124,7 @@ class BotController extends Controller
             Log::info('Playlist update ID#'.$video->id.' success...');
         }
 
-        Log::info('Playlist update ended...');
+        Log::info('Playlist update ended...'); */
 
         /* $base = "http://513hsck.cc";
         $videos = Video::where('foreign_sd', 'like', '%"hscangku"%')
