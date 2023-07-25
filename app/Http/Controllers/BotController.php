@@ -39,10 +39,11 @@ class BotController extends Controller
 
         Log::info('Playlist update started...');
 
-        $artist = 'JET映像';
-        $user_id = 569486;
+        $artist = 'SOD';
+        $user_id = 566878;
         $videos = Video::where('artist', $artist)->where('user_id', 1)->where('foreign_sd', 'like', '%"missav"%')->orderBy('title', 'asc')->get();
         foreach ($videos as $video) {
+            $video->artist = 'SOD Create';
             $video->user_id = $user_id;
             $missav_html = Browsershot::url($video->foreign_sd['missav'])
                 ->timeout(20)
