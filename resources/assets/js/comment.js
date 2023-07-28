@@ -26,16 +26,22 @@ $(".tablinks").click(function() {
     $commentsP = $('#comment-start .is-political');
     $is_political = $('#comment-is-political');
     $input_comments_count = $('input#comment-count');
+    $comment_placeholder = $('input#comment-text');
+    $comment_signup_placeholder = $('input#comment-signup-modal');
     if (this.id == 'comment-tablink') {
         $commentsP.css('display', 'none');
         $comments.css('display', 'block');
         $is_political.val(0);
         $input_comments_count.val($('span#tab-comments-count').html());
+        $comment_placeholder.attr('placeholder', '新增一則公開評論...');
+        $comment_signup_placeholder.attr('placeholder', '新增一則公開評論...');
     } else if (this.id == 'commentP-tablink') {
         $commentsP.css('display', 'block');
         $comments.css('display', 'none');
         $is_political.val(1);
         $input_comments_count.val($('span#tab-commentsP-count').html());
+        $comment_placeholder.attr('placeholder', '新增一則鍵盤政治...');
+        $comment_signup_placeholder.attr('placeholder', '新增一則鍵盤政治...');
     }
 });
 
