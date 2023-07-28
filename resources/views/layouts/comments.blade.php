@@ -11,9 +11,10 @@
 		<div class="col-md-1">id</div>
 		<div class="col-md-1">created_at</div>
 		<div class="col-md-1">user_id</div>
-		<div class="col-md-1">user_avatar</div>
+		<div class="col-md-1">user</div>
 		<div class="col-md-1">user_name</div>
-		<div class="col-md-4">text</div>
+		<div class="col-md-1">is_political</div>
+		<div class="col-md-3">text</div>
 		<div class="col-md-3">video</div>
 	</div>
 
@@ -24,7 +25,8 @@
 			<div class="col-md-1">{{ $comment->user_id }}</div>
 			<div class="col-md-1"><img src="{{ $comment->user->avatar_temp }}" width="30"></div>
 			<div class="col-md-1">{{ $comment->user->name }}</div>
-			<div class="col-md-4">{{ $comment->text }}</div>
+			<div class="col-md-1">{{ $comment->is_political ? 'true' : 'false' }}</div>
+			<div class="col-md-3">{{ $comment->text }}</div>
 			@if ($comment->video)
 				<div class="col-md-3">
 					<a href="{{ route('video.watch').'?v='.$comment->video->id }}" target="_blank">
