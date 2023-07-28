@@ -91,15 +91,7 @@ class RemoveSpam extends Command
                                 '136.52.34.103',
                                 '45.129.228.119',
                                 '91.192.81.130',
-                                '2.57.169.209',
-                                '45.62.172.5',
-                                '18.142.253.225',
-                                '18.143.190.216',
-                                '3.34.127.236',
-                                '3.38.165.147',
-                                '2401:e180:8802:2c5f:e495:723b:ae28:5911',
-                                '103.59.109.51',
-                                '165.154.226.197'
+                                '2.57.169.209'
                             ])
                             ->where('created_at', '>=', Carbon::now()->subDay())
                             ->groupBy('user_id')
@@ -112,11 +104,6 @@ class RemoveSpam extends Command
                             ->groupBy('user_id')
                             ->pluck('user_id'); */
         // User::destroy($keyword_user_array);
-
-        /* $users = User::where('name', 'like', '%习近平%')->get();
-        foreach ($users as $user) {
-            $user->delete();
-        } */
 
         Log::info('Spam remove ended...');
     }
