@@ -208,7 +208,8 @@
 
       <div id="tablinks-wrapper" class="tab mobile-padding" style="margin-top: 30px; font-weight: bold;">
         <button id="defaultOpen" data-tabcontent="related-tabcontent" class="tablinks" style="margin-right: 10px;">相關影片</button>
-        <button id="comment-tablink" data-foreignid="{{ $current->id }}" data-type="video" data-tabcontent="comment-tabcontent" class="tablinks">評論&nbsp;&nbsp;<span id="tab-comments-count" style="color: white; background-color: red; font-size: 12px; border-radius: 10px; padding: 1px 5px">{{ $comments_count }}</span></button>
+        <button id="comment-tablink" data-foreignid="{{ $current->id }}" data-type="video" data-tabcontent="comment-tabcontent" class="tablinks comment-tablinks" style="margin-right: 10px;">評論&nbsp;&nbsp;<span id="tab-comments-count" style="color: white; background-color: red; font-size: 12px; border-radius: 10px; padding: 1px 5px">{{ $comments_count }}</span></button>
+        <button id="commentP-tablink" data-foreignid="{{ $current->id }}" data-type="video" data-tabcontent="comment-tabcontent" class="tablinks comment-tablinks">鍵政&nbsp;&nbsp;<span id="tab-commentsP-count" style="color: white; background-color: red; font-size: 12px; border-radius: 10px; padding: 1px 5px">{{ $commentsP_count }}</span></button>
       </div>
 
       <!-- Tab content -->

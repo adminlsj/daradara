@@ -5,7 +5,8 @@
 	    <input name="comment-user-id" type="hidden" value={{ Auth::user()->id }}>
 	    <input name="comment-type" type="hidden" value="{{ $type }}">
 	    <input name="comment-foreign-id" type="hidden" value="{{ $foreign_id }}">
-	    <input id="comment-count" name="comment-count" type="hidden" value={{ $comments->count() }}>
+	    <input id="comment-count" name="comment-count" type="hidden" value="0">
+	    <input id="comment-is-political" name="comment-is-political" type="hidden" value="0">
 	    <a style="margin-right: 0px;">
 	      <img class="img-circle" style="width: 40px; height: auto; float:left;" src="{{ Auth::user()->avatar_temp }}">
 	    </a>
@@ -21,11 +22,10 @@
 	@endif
 </div>
 
-<div id="comment-start" style="margin-bottom: -15px;">
+<div id="comment-start" style="margin-bottom: -15px; padding-top: 5px;">
 	@foreach ($comments as $comment)
-		@if ($loop->first)
-			<div style="margin-top: 5px"></div>
-		@endif
-	    @include('video.singleVideoComment')
+		<span class="{{ $comment->is_political ? 'is-political' : 'not-political' }}">
+		    @include('video.singleVideoComment')
+		</span>
 	@endforeach
 </div>

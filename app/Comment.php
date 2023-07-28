@@ -10,7 +10,7 @@ use App\Preview;
 class Comment extends Model
 {
     protected $fillable = [
-        'user_id', 'type', 'foreign_id', 'text', 'ip_address'
+        'user_id', 'type', 'foreign_id', 'text', 'ip_address', 'is_political'
     ];
 
     public function user()

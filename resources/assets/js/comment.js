@@ -1,24 +1,41 @@
+// $('div#content-div').on("click", ".tablinks", function(e) {
 $(".tablinks").click(function() {
-    var id = $(this).data("tabcontent");
+    var content = $(this).data("tabcontent");
     $('.tablinks').removeClass("active");
     $(this).addClass("active");
     $('.tabcontent').css('display', 'none');
-    $('#' + id).css('display', 'block');
-    if (id == 'comment-tabcontent') {
-        $('button#comment-tablink').data('tabcontent', 'comment-tabcontent-loaded');
+    $('#' + content).css('display', 'block');
+    if (content == 'comment-tabcontent') {
+        $('button.comment-tablinks').data('tabcontent', 'comment-tabcontent-loaded');
         $('div#comment-tabcontent').attr('id', 'comment-tabcontent-loaded');
         $.ajax({
             type:'GET',
             url:'/loadComment',
-            data: { id: $(this).data("foreignid"), type: $(this).data("type") },
+            data: { id: $(this).data("foreignid"), type: $(this).data("type"), content: this.id },
             success: function(data){
                 $('div#comment-section-wrapper').html(data.comments);
+                $('#' + data.content).click();
             },
             error: function(xhr, ajaxOptions, thrownError){
                 showSnackbar('請刷新頁面後重試。');
             }
         });
+    }
 
+    $comments = $('#comment-start .not-political');
+    $commentsP = $('#comment-start .is-political');
+    $is_political = $('#comment-is-political');
+    $input_comments_count = $('input#comment-count');
+    if (this.id == 'comment-tablink') {
+        $commentsP.css('display', 'none');
+        $comments.css('display', 'block');
+        $is_political.val(0);
+        $input_comments_count.val($('span#tab-comments-count').html());
+    } else if (this.id == 'commentP-tablink') {
+        $commentsP.css('display', 'block');
+        $comments.css('display', 'none');
+        $is_political.val(1);
+        $input_comments_count.val($('span#tab-commentsP-count').html());
     }
 });
 
@@ -38,7 +55,11 @@ $('div#comment-section-wrapper').on("submit", "form#comment-create-form", functi
         success: function(data){
             $('#comment-text').val('');
             $('div#comment-start').prepend(data.single_video_comment);
-            $('span#tab-comments-count').html(data.comment_count);
+            if (data.is_political == '1') {
+                $('span#tab-commentsP-count').html(data.comment_count);
+            } else {
+                $('span#tab-comments-count').html(data.comment_count);
+            }
             $('input#comment-count').val(data.comment_count);
             $('#comment-create-btn').prop('disabled', false);
             if (is_mobile) {

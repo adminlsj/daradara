@@ -37,7 +37,13 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        Log::info('Playlist update started...');
+        $comments = Comment::all();
+        foreach ($comments as $comment) {
+            $comment->is_political = false;
+            $comment->save();
+        }
+
+        /* Log::info('Playlist update started...');
 
         $artist = $request->artist;
         $user_id = $request->id;
@@ -85,7 +91,7 @@ class BotController extends Controller
             }
         }
 
-        Log::info('Playlist update ended...');
+        Log::info('Playlist update ended...'); */
 
         /* Log::info('Playlist update started...');
 

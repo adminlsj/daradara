@@ -71,7 +71,8 @@ class VideoController extends Controller
 
             $country_code = isset($_SERVER["HTTP_CF_IPCOUNTRY"]) ? $_SERVER["HTTP_CF_IPCOUNTRY"] : 'N/A';
 
-            $comments_count = Comment::where('foreign_id', $video->id)->where('type', 'video')->count();
+            $comments_count = Comment::where('foreign_id', $video->id)->where('type', 'video')->where('is_political', false)->count();
+            $commentsP_count = Comment::where('foreign_id', $video->id)->where('type', 'video')->where('is_political', true)->count();
 
             if (Auth::check()) {
                 $saved = Save::where('user_id', $user->id)->where('video_id', $video->id)->exists();
@@ -107,7 +108,7 @@ class VideoController extends Controller
             abort(403);
         }
 
-        return view('video.watch-2022-12-19', compact('video', 'artist', 'videos', 'current', 'tags', 'country_code', 'comments_count', 'related', 'doujin', 'is_mobile', 'saved', 'listed', 'playlists', 'liked', 'lang', 'sd', 'qual', 'qualities', 'downloads'));
+        return view('video.watch-2022-12-19', compact('video', 'artist', 'videos', 'current', 'tags', 'country_code', 'comments_count', 'commentsP_count', 'related', 'doujin', 'is_mobile', 'saved', 'listed', 'playlists', 'liked', 'lang', 'sd', 'qual', 'qualities', 'downloads'));
     }
 
     public function download(Request $request)
@@ -266,6 +267,7 @@ class VideoController extends Controller
 
         return response()->json([
             'comments' => $html,
+            'content' => $request->content,
         ]);
     }
 
@@ -276,6 +278,7 @@ class VideoController extends Controller
             'comment-type' => 'required|string|max:255',
             'comment-foreign-id' => 'required',
             'comment-text' => 'required|string|max:255',
+            'comment-is-political' => 'required',
         ]);
 
         // if (Auth::check() && Auth::user()->id == request('comment-user-id')) {
@@ -285,6 +288,7 @@ class VideoController extends Controller
                 'type' => request('comment-type'),
                 'foreign_id' => request('comment-foreign-id'),
                 'text' => request('comment-text'),
+                'is_political' => request('comment-is-political'),
                 'ip_address' => $ip_address,
             ]);
 
@@ -293,10 +297,12 @@ class VideoController extends Controller
 
             $comment_count = request('comment-count') + 1;
 
+            $is_political = request('comment-is-political') ? 'is-political' : 'not-political';
             return response()->json([
                 'comment_id' => $comment->id,
                 'comment_count' => $comment_count,
-                'single_video_comment' => $html,
+                'single_video_comment' => '<span class="'.$is_political.'">'.$html.'</span>',
+                'is_political' => request('comment-is-political'),
                 'csrf_token' => csrf_token(),
             ]);
 
