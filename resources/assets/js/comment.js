@@ -40,8 +40,8 @@ $(".tablinks").click(function() {
         $comments.css('display', 'none');
         $is_political.val(1);
         $input_comments_count.val($('span#tab-commentsP-count').html());
-        $comment_placeholder.attr('placeholder', '新增一則鍵盤政治...');
-        $comment_signup_placeholder.attr('placeholder', '新增一則鍵盤政治...');
+        $comment_placeholder.attr('placeholder', '新增一則嘴砲言論...');
+        $comment_signup_placeholder.attr('placeholder', '新增一則嘴砲言論...');
     }
 });
 
