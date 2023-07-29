@@ -37,10 +37,11 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $comments = Comment::all();
-        foreach ($comments as $comment) {
-            $comment->is_political = false;
-            $comment->save();
+        $playlists = Watch::with('videos')->get();
+        foreach ($playlists as $playlist) {
+            if ($playlist->videos->count() >= 200) {
+                echo "Playlist#{$playlist->id} has >= 200 videos<br>";
+            }
         }
 
         /* Log::info('Playlist update started...');
