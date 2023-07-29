@@ -237,18 +237,18 @@ class BotController extends Controller
         } */
 
         // Check repeats
-        /* $videos = Video::where('genre', '日本AV')->orWhere('genre', '素人業餘')->orWhere('genre', '高清無碼')->orWhere('genre', 'AI解碼')->orWhere('genre', '國產AV')->orWhere('genre', '國產素人')->get();
+        $videos = Video::whereIn('genre', Video::$genre_jav)->get();
         $codes = [];
         $repeats = [];
         foreach ($videos as $video) {
             $code = explode(' ', $video->title)[0];
-            if ($code != 'SSIS-531' && $code != 'Muramura' && $code != '母はアナル！娘はマンコ！頭のおかしい本物親子の４P共演' && in_array($code, $codes)) {
+            if (in_array($code, $codes)) {
                 array_push($repeats, $code);
             } else {
                 array_push($codes, $code);
             }
         }
-        return $repeats; */
+        return $repeats;
 
         /* foreach ($repeats as $repeat) {
             if (Video::where('title', 'like', $repeat.' %')->where('foreign_sd', 'like', '%"hscangku"%')->count() == 2) {
@@ -279,13 +279,13 @@ class BotController extends Controller
         } */
 
         // Remove empty characters
-        $videos = Video::where('foreign_sd', 'like', '%"characters": ""%')->get();
+        /* $videos = Video::where('foreign_sd', 'like', '%"characters": ""%')->get();
         foreach ($videos as $video) {
             $temp = $video->foreign_sd;
             unset($temp['characters']);
             $video->foreign_sd = $temp;
             $video->save();
-        }
+        } */
 
         // Check sd playable
         /* $videos = Video::where('id', '>=', 46127)->where('genre', '素人業餘')->where('sd', 'like', '%langyouplay.com%')->get();
