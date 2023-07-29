@@ -37,13 +37,6 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $playlists = Watch::with('videos')->get();
-        foreach ($playlists as $playlist) {
-            if ($playlist->videos->count() >= 200) {
-                echo "Playlist#{$playlist->id} has >= 200 videos<br>";
-            }
-        }
-
         /* Log::info('Playlist update started...');
 
         $artist = $request->artist;
@@ -286,13 +279,13 @@ class BotController extends Controller
         } */
 
         // Remove empty characters
-        /* $videos = Video::where('id', '>=', 47579)->where('genre', '高清無碼')->where('foreign_sd', 'like', '%"characters": ""%')->get();
+        $videos = Video::where('foreign_sd', 'like', '%"characters": ""%')->get();
         foreach ($videos as $video) {
             $temp = $video->foreign_sd;
             unset($temp['characters']);
             $video->foreign_sd = $temp;
             $video->save();
-        } */
+        }
 
         // Check sd playable
         /* $videos = Video::where('id', '>=', 46127)->where('genre', '素人業餘')->where('sd', 'like', '%langyouplay.com%')->get();
