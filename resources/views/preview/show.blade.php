@@ -191,7 +191,7 @@
 
   <div class="row no-gutter video-show-width" style="margin-top: -80px;">
     <div id="tablinks-wrapper" class="tab mobile-padding" style="margin-top: 30px; font-weight: bold;">
-      <button id="comment-tablink" data-foreignid="{{ $preview->uuid }}" data-type="preview" data-tabcontent="comment-tabcontent" class="tablinks defaultOpen" style="margin-right: 10px;">評論&nbsp;&nbsp;<span id="tab-comments-count" style="color: white; background-color: red; font-size: 12px; border-radius: 10px; padding: 1px 5px">{{ $comments_count }}</span></button>
+      <button id="comment-tablink" data-foreignid="{{ $preview->uuid }}" data-type="preview" data-tabcontent="comment-tabcontent" class="tablinks comment-tablinks defaultOpen" style="margin-right: 10px;">評論&nbsp;&nbsp;<span id="tab-comments-count" style="color: white; background-color: red; font-size: 12px; border-radius: 10px; padding: 1px 5px">{{ $comments_count }}</span></button>
       <button data-tabcontent="related-tabcontent" class="tablinks">相關影片</button>
     </div>
 
