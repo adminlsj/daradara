@@ -16,12 +16,12 @@ use Redirect;
 
 class Jav
 {
-    public static function uploadHscangku()
+    public static function uploadHscangku($pages = 10)
     {
         Log::info('Hscangku upload started...');
 
         $chinese = new Chinese();
-        for ($i = 1; $i <= 10; $i++) { 
+        for ($i = 1; $i <= $pages; $i++) { 
             $base = "http://555hsck.cc";
             $page_url = "{$base}/vodtype/9-{$i}.html";
 

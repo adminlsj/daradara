@@ -2746,9 +2746,9 @@ class BotController extends Controller
         }
     }
 
-    public function uploadHscangku()
+    public function uploadHscangku(Request $request)
     {
-        Jav::uploadHscangku();
+        Jav::uploadHscangku($request->pages);
     }
 
     public function updateWithImageLink(Request $request)
