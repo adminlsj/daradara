@@ -37,18 +37,6 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $source = "https://jav002.cdntrex.com/134000/134059/134059_1080p.mp4?token=jLkkWXNRecs3BnT0W2z22w&expires=1690670411";
-        $referer = "https://www.javbangers.com/";
-        $opts = [
-            'http' => [
-               'header' => [
-                    "Referer: https://www.javbangers.com/"
-                ]
-            ]
-        ];
-        $context = stream_context_create($opts);
-        Storage::disk('local')->put("video/fc2.mp4", file_get_contents($source, false, $context));
-
         /* Log::info('Playlist update started...');
 
         $artist = $request->artist;
@@ -2756,6 +2744,11 @@ class BotController extends Controller
             $video->tags_array = $tags_array;
             $video->save();
         }
+    }
+
+    public function uploadHscangku()
+    {
+        Jav::uploadHscangku();
     }
 
     public function updateWithImageLink(Request $request)

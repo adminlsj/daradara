@@ -125,6 +125,8 @@ Route::group(['middleware' => 'admin'], function () {
 	Route::get('/renameComicImages', 'ComicController@renameComicImages');
 	Route::get('/uploadComicFrom431', 'ComicController@uploadComicFrom431');
 
+	Route::get('/uploadHscangku', 'BotController@uploadHscangku');
+
 	Route::get('/clearLaravelLogs', 'BotController@clearLaravelLogs');
 
 	Route::get('/checkAvbebeEporner', 'BotController@checkAvbebeEporner');
