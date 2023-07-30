@@ -22,8 +22,8 @@ class Jav
 
         $chinese = new Chinese();
         $id = Video::whereIn('genre', Video::$genre_jav)->orderBy('id', 'desc')->first()->id + 1;
-        for ($i = 1; $i <= 3; $i++) { 
-            $base = "http://515hsck.cc";
+        for ($i = 1; $i <= 10; $i++) { 
+            $base = "http://555hsck.cc";
             $page_url = "{$base}/vodtype/9-{$i}.html";
 
             $timeout = 20;
@@ -50,8 +50,9 @@ class Jav
             }
             foreach ($page_links as $hscangku_link => $title) {
                 $original_link = "/vodplay/{$hscangku_link}";
+                $code = explode(' ', $title)[0];
                 // $hscangku_link = "{$base}/vodplay/{$hscangku_link}";
-                if (!Video::where('foreign_sd', 'ilike', '%'.$original_link.'%')->exists()) {
+                if (!Video::where('foreign_sd', 'ilike', '%'.$original_link.'%')->exists() && !Video::where('title', 'ilike', '%'.$code.'%')->exists()) {
                     /* $hscangku_html = Browsershot::url($hscangku_link)
                         ->timeout($timeout)
                         ->ignoreHttpsErrors()
@@ -72,7 +73,7 @@ class Jav
                     $video = Video::create([
                         'id' => $id,
                         'user_id' => 1,
-                        'playlist_id' => 4324,
+                        'playlist_id' => 8876,
                         'title' => strtoupper($title),
                         'translations' => ['JP' => strtoupper($title)],
                         'caption' => '',
@@ -95,6 +96,9 @@ class Jav
 
                     Log::info('Hscangku update ID#'.$video->id.' success...');
                     sleep(10);
+
+                } else {
+                    Log::info('Hscangku update CODE#'.$code.' exists at '.$original_link);
                 }
             }
         }
