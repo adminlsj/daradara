@@ -177,12 +177,10 @@ class Jav
                 }
 
                 $user_id = 1;
-                $related_code = explode(' ', $video->title)[0];
-                return $related = Video::where('title', 'ilike', $related_code.' %')->first();
-                if ($related = Video::where('title', 'ilike', $related_code.' %')->first()) {
+                if ($related = Video::where('artist', $brand)->first()) {
                     $user_id = $related->user_id;
-                    $video->artist = $related->artist;
                 }
+                return $user_id;
                 if (strpos($missav_html, "系列:</span>") !== false) {
                     $title = trim(explode('>', Helper::get_string_between($missav_html, '系列:</span>', '</a>'))[1]);
                     if ($watch = Watch::where('title', $title)->first()) {
