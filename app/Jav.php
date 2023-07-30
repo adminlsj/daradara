@@ -51,7 +51,7 @@ class Jav
                 $original_link = "/vodplay/{$hscangku_link}";
                 $code = explode(' ', $title)[0];
                 // $hscangku_link = "{$base}/vodplay/{$hscangku_link}";
-                if (!Video::where('foreign_sd', 'ilike', '%'.$original_link.'%')->exists() && !Video::where('title', 'ilike', '%'.$code.'%')->exists()) {
+                if (!Video::where('foreign_sd', 'ilike', '%'.$original_link.'%')->exists() && !Video::where('title', 'ilike', $code.' %')->exists()) {
                     /* $hscangku_html = Browsershot::url($hscangku_link)
                         ->timeout($timeout)
                         ->ignoreHttpsErrors()
