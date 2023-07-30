@@ -171,6 +171,9 @@ class Jav
                 if (strpos($brand, "Moody's") !== false) {
                     $brand = 'Moodyz';
                 }
+                if (strpos($brand, "SOD") !== false) {
+                    $brand = 'SOD Create';
+                }
                 if ($video->caption == '' || $video->caption == null) {
                     $caption = trim(Helper::get_string_between($missav_html, 'line-clamp-2">', '</div>'));
                     $video->caption = $caption;
@@ -185,6 +188,7 @@ class Jav
                     if ($watch = Watch::where('title', $title)->first()) {
                         $video->playlist_id = $watch->id;
                         $video->user_id = $watch->user_id;
+                        $video->artist = $watch->user->artist;
                     } else {
                         $watch = Watch::create([
                             'user_id' => $user_id,
@@ -193,6 +197,7 @@ class Jav
                         ]);
                         $video->playlist_id = $watch->id;
                         $video->user_id = $watch->user_id;
+                        $video->artist = $watch->user->artist;
                     }
 
                 } elseif (strpos($missav_html, "標籤:</span>") !== false) {
@@ -200,6 +205,7 @@ class Jav
                     if ($tag_watch = Watch::where('title', $tag)->first()) {
                         $video->playlist_id = $tag_watch->id;
                         $video->user_id = $tag_watch->user_id;
+                        $video->artist = $tag_watch->user->artist;
                     } else {
                         $tag_watch = Watch::create([
                             'user_id' => $user_id,
@@ -208,6 +214,7 @@ class Jav
                         ]);
                         $video->playlist_id = $tag_watch->id;
                         $video->user_id = $tag_watch->user_id;
+                        $video->artist = $tag_watch->user->artist;
                     }
                 }
 
