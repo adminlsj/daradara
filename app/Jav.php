@@ -16,7 +16,7 @@ use Redirect;
 
 class Jav
 {
-    public $base = "http://555hsck.cc";
+    public static $base = "http://555hsck.cc";
 
     public static function uploadHscangku($pages = 10)
     {
@@ -24,8 +24,8 @@ class Jav
 
         $chinese = new Chinese();
         for ($i = 1; $i <= $pages; $i++) { 
-            $this->base = "http://555hsck.cc";
-            $page_url = "{$this->base}/vodtype/9-{$i}.html";
+            $base = Jav::$base;
+            $page_url = "{$base}/vodtype/9-{$i}.html";
 
             $timeout = 20;
             $page_html = Browsershot::url($page_url)
@@ -33,8 +33,8 @@ class Jav
                 ->ignoreHttpsErrors()
                 ->disableImages()
                 ->setExtraHttpHeaders(['Cookie' => '2eea60697cce6da2aeac2a6e147edd8c=f8ec670e60ba02a346b7646ce325ea38; Hm_lvt_9c69de51657cb6e2da4f620629691e94=1689093779; Hm_lpvt_9c69de51657cb6e2da4f620629691e94=1689093779; c0eb604e939747b7928695b2431c09a2=c519d27cdf1f2d87d6f95321d939a59d'])
-                ->setExtraHttpHeaders(['Host' => str_replace('http://', '', $this->base)])
-                ->setExtraHttpHeaders(['Referer' => $this->base])
+                ->setExtraHttpHeaders(['Host' => str_replace('http://', '', $base)])
+                ->setExtraHttpHeaders(['Referer' => $base])
                 ->setOption('args', ['--disable-web-security'])
                 ->userAgent(Spankbang::$userAgents[array_rand(Spankbang::$userAgents)])
                 ->bodyHtml();
