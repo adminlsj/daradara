@@ -21,7 +21,6 @@ class Jav
         Log::info('Hscangku upload started...');
 
         $chinese = new Chinese();
-        $id = Video::whereIn('genre', Video::$genre_jav)->orderBy('id', 'desc')->first()->id + 1;
         for ($i = 1; $i <= 10; $i++) { 
             $base = "http://555hsck.cc";
             $page_url = "{$base}/vodtype/9-{$i}.html";
@@ -71,7 +70,6 @@ class Jav
                     $cover = "https://i.imgur.com/E6mSQA2.jpg";
                     $foreign_sd = ['cover' => Helper::get_string_between($cover, 'https://i.imgur.com/', '.'), 'thumbnail' => Helper::get_string_between($imgur, 'https://i.imgur.com/', '.'), 'hscangku' => $original_link];
                     $video = Video::create([
-                        'id' => $id,
                         'user_id' => 1,
                         'playlist_id' => 8876,
                         'title' => strtoupper($title),
@@ -91,8 +89,6 @@ class Jav
                         'cover' => 'https://i.imgur.com/E6mSQA2.jpg',
                         'uncover' => true,
                     ]);
-
-                    $id++;
 
                     Log::info('Hscangku update ID#'.$video->id.' success...');
                     sleep(10);
