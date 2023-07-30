@@ -177,7 +177,7 @@ class Jav
                 }
 
                 $user_id = 1;
-                $related_code = explode(' ', $video->title)[0];
+                return $related_code = explode(' ', $video->title)[0];
                 if ($related = Video::where('title', 'ilike', $related_code.' %')->first()) {
                     $user_id = $related->user_id;
                     $video->artist = $related->artist;
@@ -186,9 +186,7 @@ class Jav
                     $title = trim(explode('>', Helper::get_string_between($missav_html, '系列:</span>', '</a>'))[1]);
                     if ($watch = Watch::where('title', $title)->first()) {
                         $video->playlist_id = $watch->id;
-                        if ($watch->user_id == $user_id) {
-                            $video->user_id = $user_id;
-                        }
+                        $video->user_id = $watch->user_id;
                     } else {
                         $watch = Watch::create([
                             'user_id' => $user_id,
@@ -203,9 +201,7 @@ class Jav
                     $tag = trim(explode('>', Helper::get_string_between($missav_html, '標籤:</span>', '</a>'))[1]);
                     if ($tag_watch = Watch::where('title', $tag)->first()) {
                         $video->playlist_id = $tag_watch->id;
-                        if ($tag_watch->user_id == $user_id) {
-                            $video->user_id = $user_id;
-                        }
+                        $video->user_id = $tag_watch->user_id;
                     } else {
                         $tag_watch = Watch::create([
                             'user_id' => $user_id,
