@@ -37,6 +37,18 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
+        $source = "https://jav002.cdntrex.com/134000/134059/134059_1080p.mp4?token=jLkkWXNRecs3BnT0W2z22w&expires=1690670411";
+        $referer = "https://www.javbangers.com/";
+        $opts = [
+            'http' => [
+               'header' => [
+                    "Referer: https://www.javbangers.com/"
+                ]
+            ]
+        ];
+        $context = stream_context_create($opts);
+        Storage::disk('local')->put("video/fc2.mp4", file_get_contents($source, false, $context));
+
         /* Log::info('Playlist update started...');
 
         $artist = $request->artist;
@@ -237,7 +249,7 @@ class BotController extends Controller
         } */
 
         // Check repeats
-        $videos = Video::whereIn('genre', Video::$genre_jav)->get();
+        /* $videos = Video::whereIn('genre', Video::$genre_jav)->get();
         $codes = [];
         $repeats = [];
         foreach ($videos as $video) {
@@ -248,7 +260,7 @@ class BotController extends Controller
                 array_push($codes, $code);
             }
         }
-        return $repeats;
+        return $repeats; */
 
         /* foreach ($repeats as $repeat) {
             if (Video::where('title', 'like', $repeat.' %')->where('foreign_sd', 'like', '%"hscangku"%')->count() == 2) {
