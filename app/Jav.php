@@ -177,7 +177,8 @@ class Jav
                 }
 
                 $user_id = 1;
-                return $related_code = explode(' ', $video->title)[0];
+                $related_code = explode(' ', $video->title)[0];
+                return $related = Video::where('title', 'ilike', $related_code.' %')->first();
                 if ($related = Video::where('title', 'ilike', $related_code.' %')->first()) {
                     $user_id = $related->user_id;
                     $video->artist = $related->artist;
