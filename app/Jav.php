@@ -128,11 +128,12 @@ class Jav
         Log::info('Empty sd update ended...');
     }
 
-    public static function updateWithMissav($total = 1, $number = 1)
+    public static function updateWithMissav()
     {
         Log::info('Missav update started...');
 
-        $videos = Video::where('genre', '日本AV')
+        $videos = Video::whereIn('genre', Video::$genre_jav)
+                    ->where('user_id', 1)
                     ->where('created_at', '2000-01-01 00:00:00')
                     ->where('foreign_sd', 'not like', '%"missav"%')
                     ->orderBy('id', 'asc')
@@ -175,17 +176,90 @@ class Jav
                     $video->caption = $caption;
                 }
 
+                $user_id = 1;
+                $related_code = explode(' ', $video->title)[0];
+                if ($related = Video::where('title', 'ilike', $related_code.' %')->first()) {
+                    $user_id = $related->user_id;
+                    $video->artist = $related->artist;
+                }
+                if (strpos($missav_html, "系列:</span>") !== false) {
+                    $title = trim(explode('>', Helper::get_string_between($missav_html, '系列:</span>', '</a>'))[1]);
+                    if ($watch = Watch::where('title', $title)->first()) {
+                        $video->playlist_id = $watch->id;
+                    } else {
+                        $watch = Watch::create([
+                            'user_id' => $user_id,
+                            'title' => $title,
+                            'description' => $title,
+                        ]);
+                        $video->playlist_id = $watch->id;
+                    }
+                    $video->user_id = $watch->user_id;
+
+                } elseif (strpos($missav_html, "標籤:</span>") !== false) {
+                    $tag = trim(explode('>', Helper::get_string_between($missav_html, '標籤:</span>', '</a>'))[1]);
+                    if ($tag_watch = Watch::where('title', $tag)->first()) {
+                        $video->playlist_id = $tag_watch->id;
+                    } else {
+                        $tag_watch = Watch::create([
+                            'user_id' => $user_id,
+                            'title' => $tag,
+                            'description' => $tag,
+                        ]);
+                        $video->playlist_id = $tag_watch->id;
+                    }
+                    $video->user_id = $watch->user_id;
+                }
+
                 $video->translations = ['JP' => $title_jp];
                 $video->downloads = ['720' => $downloads];
                 $video->artist = $brand;
                 $video->created_at = $created_at;
                 $video->uploaded_at = $created_at;
 
+                $imgur = '';
+                $cover = '';
+                $imgur_url = trim(Helper::get_string_between($missav_html, 'property="og:image" content="', '"'));
+                $image = Image::make($imgur_url);
+                $image = $image->fit(2880, 1620, function ($constraint) {}, "top");
+                $image = $image->stream();
+                $pvars = array('image' => base64_encode($image));
+                $curl = curl_init();
+                curl_setopt($curl, CURLOPT_URL, 'https://api.imgur.com/3/image.json');
+                curl_setopt($curl, CURLOPT_TIMEOUT, 30);
+                curl_setopt($curl, CURLOPT_HTTPHEADER, array('Authorization: Client-ID ' . '5b63b1c883ddb72'));
+                curl_setopt($curl, CURLOPT_POST, 1);
+                curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+                curl_setopt($curl, CURLOPT_POSTFIELDS, $pvars);
+                $out = curl_exec($curl);
+                curl_close ($curl);
+                $pms = json_decode($out, true);
+                $imgur = $pms['data']['link'];
+
+                $image = Image::make($imgur_url);
+                $image = $image->fit(268, 394, function ($constraint) {}, "right");
+                $image = $image->stream();
+                $pvars = array('image' => base64_encode($image));
+                $curl = curl_init();
+                curl_setopt($curl, CURLOPT_URL, 'https://api.imgur.com/3/image.json');
+                curl_setopt($curl, CURLOPT_TIMEOUT, 30);
+                curl_setopt($curl, CURLOPT_HTTPHEADER, array('Authorization: Client-ID ' . '5b63b1c883ddb72'));
+                curl_setopt($curl, CURLOPT_POST, 1);
+                curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+                curl_setopt($curl, CURLOPT_POSTFIELDS, $pvars);
+                $out = curl_exec($curl);
+                curl_close ($curl);
+                $pms = json_decode($out, true);
+                $cover = $pms['data']['link'];
+
+                $video->imgur = Helper::get_string_between($imgur, 'https://i.imgur.com/', '.');
                 $temp = $video->foreign_sd;
+                $temp['cover'] = Helper::get_string_between($cover, 'https://i.imgur.com/', '.');
+                $temp['thumbnail'] = Helper::get_string_between($imgur, 'https://i.imgur.com/', '.');
                 $temp['characters'] = implode(',', $characters);
                 $temp['missav'] = $missav_link;
-                $temp['poster'] = trim(Helper::get_string_between($missav_html, 'property="og:image" content="', '"'));
                 $video->foreign_sd = $temp;
+                $video->uploaded_at = Carbon::now()->toDateTimeString();
                 $video->save();
 
                 Log::info('Missav update ID#'.$video->id.' success...');

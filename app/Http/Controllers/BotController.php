@@ -37,7 +37,7 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        /* Log::info('Playlist update started...');
+        Log::info('Playlist update started...');
 
         $artist = $request->artist;
         $user_id = $request->id;
@@ -85,7 +85,7 @@ class BotController extends Controller
             }
         }
 
-        Log::info('Playlist update ended...'); */
+        Log::info('Playlist update ended...');
 
         /* Log::info('Playlist update started...');
 
@@ -2754,6 +2754,11 @@ class BotController extends Controller
     public function updateEmptySd(Request $request)
     {
         Jav::updateEmptySd();
+    }
+
+    public function updateWithMissav(Request $request)
+    {
+        Jav::updateWithMissav();
     }
 
     public function updateWithImageLink(Request $request)
