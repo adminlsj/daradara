@@ -126,6 +126,7 @@ Route::group(['middleware' => 'admin'], function () {
 	Route::get('/uploadComicFrom431', 'ComicController@uploadComicFrom431');
 
 	Route::get('/uploadHscangku', 'BotController@uploadHscangku');
+	Route::get('/updateEmptySd', 'BotController@updateEmptySd');
 
 	Route::get('/clearLaravelLogs', 'BotController@clearLaravelLogs');
 

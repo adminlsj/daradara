@@ -2751,6 +2751,11 @@ class BotController extends Controller
         Jav::uploadHscangku($request->pages);
     }
 
+    public function updateEmptySd(Request $request)
+    {
+        Jav::updateEmptySd();
+    }
+
     public function updateWithImageLink(Request $request)
     {
         Jav::updateWithImageLink($request->vid, $request->link);
