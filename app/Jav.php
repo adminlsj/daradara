@@ -203,7 +203,7 @@ class Jav
                     $tag = trim(explode('>', Helper::get_string_between($missav_html, '標籤:</span>', '</a>'))[1]);
                     if ($tag_watch = Watch::where('title', $tag)->first()) {
                         $video->playlist_id = $tag_watch->id;
-                        if ($watch->user_id == $user_id) {
+                        if ($tag_watch->user_id == $user_id) {
                             $video->user_id = $user_id;
                         }
                     } else {
