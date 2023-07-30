@@ -50,22 +50,11 @@ class Jav
             foreach ($page_links as $hscangku_link => $title) {
                 $original_link = "/vodplay/{$hscangku_link}";
                 $code = explode(' ', $title)[0];
-                // $hscangku_link = "{$base}/vodplay/{$hscangku_link}";
-                if (!Video::where('foreign_sd', 'ilike', '%'.$original_link.'%')->exists() && !Video::where('title', 'ilike', $code.' %')->exists()) {
-                    /* $hscangku_html = Browsershot::url($hscangku_link)
-                        ->timeout($timeout)
-                        ->ignoreHttpsErrors()
-                        ->disableImages()
-                        ->setExtraHttpHeaders(['Cookie' => '958b5d3d17412f7fbb21304527cba94f=a9258058d2afa28c4f737d782eb5cbd5; Hm_lvt_9c69de51657cb6e2da4f620629691e94=1689056890; Hm_lpvt_9c69de51657cb6e2da4f620629691e94=1689056890; cb3f8eeef124d1b64215702a6c508b31=0a737054063e1d2de784ef706312b3b4'])
-                        ->setExtraHttpHeaders(['Referer' => $base])
-                        ->setOption('args', ['--disable-web-security'])
-                        ->userAgent(Spankbang::$userAgents[array_rand(Spankbang::$userAgents)])
-                        ->bodyHtml();
-
-                    $title = trim(Helper::get_string_between($hscangku_html, 'name="description" content="', '剧情:"'));
-                    $title = $chinese->to(Chinese::ZH_HANT, $title);
-                    $sd = 'https:'.str_replace('\\', '', Helper::get_string_between($hscangku_html, '"url":"https:', '"')); */
-
+                if (Video::where('foreign_sd', 'ilike', '%'.$original_link.'%')->exists()) {
+                    Log::info('Hscangku update CODE#'.$code.' imported at '.$original_link);
+                } elseif (Video::where('title', 'ilike', $code.' %')->exists()) {
+                    Log::alert('Hscangku update CODE#'.$code.' exists at '.$original_link);
+                } else {
                     $imgur = "https://i.imgur.com/Ku2VhgD.jpg";
                     $cover = "https://i.imgur.com/E6mSQA2.jpg";
                     $foreign_sd = ['cover' => Helper::get_string_between($cover, 'https://i.imgur.com/', '.'), 'thumbnail' => Helper::get_string_between($imgur, 'https://i.imgur.com/', '.'), 'hscangku' => $original_link];
@@ -92,9 +81,6 @@ class Jav
 
                     Log::info('Hscangku update ID#'.$video->id.' success...');
                     sleep(10);
-
-                } else {
-                    Log::info('Hscangku update CODE#'.$code.' exists at '.$original_link);
                 }
             }
         }
