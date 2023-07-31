@@ -38,6 +38,6 @@ class UpdateWithMissav extends Command
      */
     public function handle()
     {
-        Jav::updateWithMissav(1, 1);
+        Jav::updateWithMissav();
     }
 }

@@ -2758,7 +2758,7 @@ class BotController extends Controller
 
     public function updateWithMissav(Request $request)
     {
-        return Jav::updateWithMissav();
+        Jav::updateWithMissav();
     }
 
     public function updateWithImageLink(Request $request)
