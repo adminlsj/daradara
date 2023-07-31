@@ -336,6 +336,8 @@ class Jav
 
     public static function updateWithAvbebe($pages = 1)
     {
+        Log::info('Avbebe update started...');
+
         for ($i = 1; $i <= $pages; $i++) { 
             $page_url = "https://avbebe.com/archives/category/%E7%B6%9C%E5%90%88av/%E7%B6%9C%E5%90%88av-%E4%B8%AD%E6%96%87%E5%AD%97%E5%B9%95";
             if ($i > 1) {
@@ -390,5 +392,7 @@ class Jav
                 }
             }
         }
+
+        Log::info('Avbebe update ended...');
     }
 }
