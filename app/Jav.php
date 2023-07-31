@@ -337,9 +337,9 @@ class Jav
     public static function updateWithAvbebe($pages = 1)
     {
         for ($i = 1; $i <= $pages; $i++) { 
-            $page_url = "https://avbebe.com/archives/category/%e7%b6%9c%e5%90%88av";
+            $page_url = "https://avbebe.com/archives/category/%E7%B6%9C%E5%90%88av/%E7%B6%9C%E5%90%88av-%E4%B8%AD%E6%96%87%E5%AD%97%E5%B9%95";
             if ($i > 1) {
-                $page_url = "https://avbebe.com/archives/category/%e7%b6%9c%e5%90%88av/page/{$i}";
+                $page_url = "https://avbebe.com/archives/category/%E7%B6%9C%E5%90%88av/%E7%B6%9C%E5%90%88av-%E4%B8%AD%E6%96%87%E5%AD%97%E5%B9%95/page/{$i}";
             }
 
             $curl_connection = curl_init($page_url);

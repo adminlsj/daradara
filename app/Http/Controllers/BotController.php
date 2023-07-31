@@ -2766,6 +2766,11 @@ class BotController extends Controller
         Jav::updateWithJable();
     }
 
+    public function updateWithAvbebe(Request $request)
+    {
+        Jav::updateWithAvbebe($request->pages);
+    }
+
     public function updateWithImageLink(Request $request)
     {
         Jav::updateWithImageLink($request->vid, $request->link);
