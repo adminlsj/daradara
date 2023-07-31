@@ -466,7 +466,7 @@ class Jav
                     $video = Video::create([
                         // HSCK user_id = 575858
                         'user_id' => 575858,
-                        'playlist_id' => 8909,
+                        'playlist_id' => 8910,
                         'title' => strtoupper($title),
                         'translations' => ['JP' => strtoupper($title)],
                         'caption' => '',
