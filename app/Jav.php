@@ -5,6 +5,7 @@ namespace App;
 use Mail;
 use App\Video;
 use App\Helper;
+use App\User;
 use Carbon\Carbon;
 use App\Mail\UserReport;
 use Spatie\Browsershot\Browsershot;
