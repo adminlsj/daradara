@@ -497,7 +497,7 @@ class Jav
     {
         Log::info('Blank posters update started...');
 
-        $videos = Video::where('imgur', 'Ku2VhgD')->where('foreign_sd', 'ilike', '%"poster"%')->get();
+        $videos = Video::where('imgur', 'Ku2VhgD')->where('foreign_sd', 'ilike', '%"poster"%')->orderBy('id', 'asc')->get();
         foreach ($videos as $video) {
             $imgur = '';
             $cover = '';
