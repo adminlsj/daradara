@@ -2770,4 +2770,9 @@ class BotController extends Controller
     {
         Jav::updateWithAvbebe($request->pages);
     }
+
+    public function uploadHscangkuShirouto(Request $request)
+    {
+        return Jav::uploadHscangkuShirouto($request->pages);
+    }
 }

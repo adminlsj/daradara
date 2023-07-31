@@ -17,7 +17,7 @@ use Redirect;
 
 class Jav
 {
-    public static $base = "http://555hsck.cc";
+    public static $base = "http://575hsck.cc";
 
     public static function uploadHscangku($pages = 10)
     {
@@ -394,5 +394,111 @@ class Jav
         }
 
         Log::info('Avbebe update ended...');
+    }
+
+    public static function uploadHscangkuShirouto($pages = 10)
+    {
+        Log::info('Hscangku shirouto upload started...');
+
+        $chinese = new Chinese();
+        for ($i = 1; $i <= $pages; $i++) { 
+            $base = Jav::$base;
+            $page_url = "{$base}/vodtype/15-{$i}.html";
+
+            $timeout = 20;
+            return $page_html = Browsershot::url($page_url)
+                ->timeout($timeout)
+                ->ignoreHttpsErrors()
+                ->disableImages()
+                ->setExtraHttpHeaders(['Cookie' => '2eea60697cce6da2aeac2a6e147edd8c=f8ec670e60ba02a346b7646ce325ea38; Hm_lvt_9c69de51657cb6e2da4f620629691e94=1689093779; Hm_lpvt_9c69de51657cb6e2da4f620629691e94=1689093779; c0eb604e939747b7928695b2431c09a2=c519d27cdf1f2d87d6f95321d939a59d'])
+                ->setExtraHttpHeaders(['Host' => str_replace('http://', '', $base)])
+                ->setExtraHttpHeaders(['Referer' => $base])
+                ->setOption('args', ['--disable-web-security'])
+                ->userAgent(Spankbang::$userAgents[array_rand(Spankbang::$userAgents)])
+                ->bodyHtml();
+
+            $page_links_raw = explode('href="/vodplay', $page_html);
+            array_shift($page_links_raw);
+            $page_links = [];
+            foreach ($page_links_raw as $page_link_raw) {
+                $title = $chinese->to(Chinese::ZH_HANT, Helper::get_string_between($page_link_raw, 'title="', '"'));
+                $page_link_raw = Helper::get_string_between($page_link_raw, '/', '"');
+                if (!array_key_exists($page_link_raw, $page_links)) {
+                    $page_links[$page_link_raw] = $title;
+                }
+            }
+            foreach ($page_links as $hscangku_link => $title) {
+                $original_link = "/vodplay/{$hscangku_link}";
+                $code = explode(' ', $title)[0];
+                if (Video::where('foreign_sd', 'ilike', '%'.$original_link.'%')->exists()) {
+                    Log::info('Hscangku shirouto update CODE#'.$code.' imported at '.$original_link);
+                } elseif (Video::where('title', 'ilike', $code.' %')->exists()) {
+                    Log::alert('Hscangku shirouto update CODE#'.$code.' exists at '.$original_link);
+                } else {
+                    $imgur = '';
+                    $cover = '';
+                    $imgur_url = trim(Helper::get_string_between($missav_html, 'property="og:image" content="', '"'));
+                    $image = Image::make($imgur_url);
+                    $image = $image->fit(2880, 1620, function ($constraint) {}, "top");
+                    $image = $image->stream();
+                    $pvars = array('image' => base64_encode($image));
+                    $curl = curl_init();
+                    curl_setopt($curl, CURLOPT_URL, 'https://api.imgur.com/3/image.json');
+                    curl_setopt($curl, CURLOPT_TIMEOUT, 30);
+                    curl_setopt($curl, CURLOPT_HTTPHEADER, array('Authorization: Client-ID ' . '5b63b1c883ddb72'));
+                    curl_setopt($curl, CURLOPT_POST, 1);
+                    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+                    curl_setopt($curl, CURLOPT_POSTFIELDS, $pvars);
+                    $out = curl_exec($curl);
+                    curl_close ($curl);
+                    $pms = json_decode($out, true);
+                    $imgur = $pms['data']['link'];
+
+                    $image = Image::make($imgur_url);
+                    $image = $image->fit(268, 394, function ($constraint) {}, "right");
+                    $image = $image->stream();
+                    $pvars = array('image' => base64_encode($image));
+                    $curl = curl_init();
+                    curl_setopt($curl, CURLOPT_URL, 'https://api.imgur.com/3/image.json');
+                    curl_setopt($curl, CURLOPT_TIMEOUT, 30);
+                    curl_setopt($curl, CURLOPT_HTTPHEADER, array('Authorization: Client-ID ' . '5b63b1c883ddb72'));
+                    curl_setopt($curl, CURLOPT_POST, 1);
+                    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+                    curl_setopt($curl, CURLOPT_POSTFIELDS, $pvars);
+                    $out = curl_exec($curl);
+                    curl_close ($curl);
+                    $pms = json_decode($out, true);
+                    $cover = $pms['data']['link'];
+
+                    $foreign_sd = ['cover' => Helper::get_string_between($cover, 'https://i.imgur.com/', '.'), 'thumbnail' => Helper::get_string_between($imgur, 'https://i.imgur.com/', '.'), 'hscangku' => $original_link];
+                    $video = Video::create([
+                        // HSCK user_id = 575858
+                        'user_id' => 1,
+                        'playlist_id' => 8907,
+                        'title' => strtoupper($title),
+                        'translations' => ['JP' => strtoupper($title)],
+                        'caption' => '',
+                        'sd' => '',
+                        'imgur' => Helper::get_string_between($imgur, 'https://i.imgur.com/', '.'),
+                        'tags' => '素人',
+                        'tags_array' => ['素人' => 100],
+                        'artist' => 'HSCK',
+                        'genre' => '國產素人',
+                        'views' => 0,
+                        'outsource' => false,
+                        'created_at' => '2000-01-01 00:00:00',
+                        'uploaded_at' => '2000-01-01 00:00:00',
+                        'foreign_sd' => $foreign_sd,
+                        'cover' => 'https://i.imgur.com/E6mSQA2.jpg',
+                        'uncover' => true,
+                    ]);
+
+                    Log::info('Hscangku update ID#'.$video->id.' success...');
+                    sleep(10);
+                }
+            }
+        }
+
+        Log::info('Hscangku shirouto upload ended...');
     }
 }
