@@ -406,7 +406,9 @@ class Jav
             $page_url = "{$base}/vodtype/15-{$i}.html";
 
             $timeout = 20;
-            return $page_html = Browsershot::url($page_url)
+            return 
+            $page_html = Browsershot::url("http://575hsck.cc/vodtype/9.html")
+            // $page_html = Browsershot::url($page_url)
                 ->timeout($timeout)
                 ->ignoreHttpsErrors()
                 ->disableImages()
