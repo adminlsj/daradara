@@ -175,6 +175,9 @@ class Jav
                 if (strpos($brand, "SOD") !== false) {
                     $brand = 'SOD Create';
                 }
+                if (strpos($brand, "S1") !== false) {
+                    $brand = 'S1 NO.1 STYLE';
+                }
                 if ($video->caption == '' || $video->caption == null) {
                     $caption = trim(Helper::get_string_between($missav_html, 'line-clamp-2">', '</div>'));
                     $video->caption = $caption;
