@@ -131,6 +131,7 @@ Route::group(['middleware' => 'admin'], function () {
 	Route::get('/updateWithJable', 'BotController@updateWithJable');
 	Route::get('/updateWithAvbebe', 'BotController@updateWithAvbebe');
 	Route::get('/uploadHscangkuShirouto', 'BotController@uploadHscangkuShirouto');
+	Route::get('/updateBlankPosters', 'BotController@updateBlankPosters');
 
 	Route::get('/clearLaravelLogs', 'BotController@clearLaravelLogs');
 
@@ -151,6 +152,4 @@ Route::group(['middleware' => 'admin'], function () {
 	Route::get('/editCaptions', 'BotController@editCaptions');
 	Route::post('/updateCaptions', 'BotController@updateCaptions')->name('bot.updateCaptions');
 	Route::post('/checkCaptions', 'BotController@checkCaptions')->name('bot.checkCaptions');
-
-	Route::get('/updateWithImageLink', 'BotController@updateWithImageLink');
 });
