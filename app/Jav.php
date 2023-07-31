@@ -406,9 +406,7 @@ class Jav
             $page_url = "{$base}/vodtype/15-{$i}.html";
 
             $timeout = 20;
-            return 
-            $page_html = Browsershot::url("http://575hsck.cc/vodtype/9.html")
-            // $page_html = Browsershot::url($page_url)
+            $page_html = Browsershot::url($page_url)
                 ->timeout($timeout)
                 ->ignoreHttpsErrors()
                 ->disableImages()
@@ -422,11 +420,14 @@ class Jav
             $page_links_raw = explode('href="/vodplay', $page_html);
             array_shift($page_links_raw);
             $page_links = [];
+            $poster_links = [];
             foreach ($page_links_raw as $page_link_raw) {
+                $original = $page_link_raw;
                 $title = $chinese->to(Chinese::ZH_HANT, Helper::get_string_between($page_link_raw, 'title="', '"'));
                 $page_link_raw = Helper::get_string_between($page_link_raw, '/', '"');
                 if (!array_key_exists($page_link_raw, $page_links)) {
                     $page_links[$page_link_raw] = $title;
+                    $poster_links[$page_link_raw.'_poster'] = Helper::get_string_between($original, 'data-original="', '"');
                 }
             }
             foreach ($page_links as $hscangku_link => $title) {
@@ -437,9 +438,9 @@ class Jav
                 } elseif (Video::where('title', 'ilike', $code.' %')->exists()) {
                     Log::alert('Hscangku shirouto update CODE#'.$code.' exists at '.$original_link);
                 } else {
-                    $imgur = '';
+                    /* $imgur = '';
                     $cover = '';
-                    $imgur_url = trim(Helper::get_string_between($missav_html, 'property="og:image" content="', '"'));
+                    $imgur_url = $poster_links[$hscangku_link.'_poster'];
                     $image = Image::make($imgur_url);
                     $image = $image->fit(2880, 1620, function ($constraint) {}, "top");
                     $image = $image->stream();
@@ -454,25 +455,14 @@ class Jav
                     $out = curl_exec($curl);
                     curl_close ($curl);
                     $pms = json_decode($out, true);
-                    $imgur = $pms['data']['link'];
+                    $imgur = $pms['data']['link']; */
 
-                    $image = Image::make($imgur_url);
-                    $image = $image->fit(268, 394, function ($constraint) {}, "right");
-                    $image = $image->stream();
-                    $pvars = array('image' => base64_encode($image));
-                    $curl = curl_init();
-                    curl_setopt($curl, CURLOPT_URL, 'https://api.imgur.com/3/image.json');
-                    curl_setopt($curl, CURLOPT_TIMEOUT, 30);
-                    curl_setopt($curl, CURLOPT_HTTPHEADER, array('Authorization: Client-ID ' . '5b63b1c883ddb72'));
-                    curl_setopt($curl, CURLOPT_POST, 1);
-                    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-                    curl_setopt($curl, CURLOPT_POSTFIELDS, $pvars);
-                    $out = curl_exec($curl);
-                    curl_close ($curl);
-                    $pms = json_decode($out, true);
-                    $cover = $pms['data']['link'];
-
-                    $foreign_sd = ['cover' => Helper::get_string_between($cover, 'https://i.imgur.com/', '.'), 'thumbnail' => Helper::get_string_between($imgur, 'https://i.imgur.com/', '.'), 'hscangku' => $original_link];
+                    $imgur = 'https://i.imgur.com/Ku2VhgD.jpg';
+                    $poster = $poster_links[$hscangku_link.'_poster'];
+                    $created_at = explode('/', Helper::get_string_between($poster, 'images/', '.'));
+                    array_pop($created_at);
+                    $created_at = implode('-', $created_at).' '.Carbon::now()->toTimeString();
+                    $foreign_sd = ['hscangku' => $original_link, 'poster' => $poster];
                     $video = Video::create([
                         // HSCK user_id = 575858
                         'user_id' => 1,
@@ -488,8 +478,8 @@ class Jav
                         'genre' => '國產素人',
                         'views' => 0,
                         'outsource' => false,
-                        'created_at' => '2000-01-01 00:00:00',
-                        'uploaded_at' => '2000-01-01 00:00:00',
+                        'created_at' => $created_at,
+                        'uploaded_at' => $created_at,
                         'foreign_sd' => $foreign_sd,
                         'cover' => 'https://i.imgur.com/E6mSQA2.jpg',
                         'uncover' => true,
