@@ -188,7 +188,7 @@ class Jav
                     if ($watch = Watch::where('title', $title)->first()) {
                         $video->playlist_id = $watch->id;
                         $video->user_id = $watch->user_id;
-                        $video->artist = $watch->user->artist;
+                        $video->artist = User::find($watch->user_id)->name;
                     } else {
                         $watch = Watch::create([
                             'user_id' => $user_id,
@@ -197,7 +197,7 @@ class Jav
                         ]);
                         $video->playlist_id = $watch->id;
                         $video->user_id = $watch->user_id;
-                        $video->artist = $watch->user->artist;
+                        $video->artist = User::find($watch->user_id)->name;
                     }
 
                 } elseif (strpos($missav_html, "標籤:</span>") !== false) {
@@ -205,7 +205,7 @@ class Jav
                     if ($tag_watch = Watch::where('title', $tag)->first()) {
                         $video->playlist_id = $tag_watch->id;
                         $video->user_id = $tag_watch->user_id;
-                        $video->artist = $tag_watch->user->artist;
+                        $video->artist = User::find($tag_watch->user_id)->name;
                     } else {
                         $tag_watch = Watch::create([
                             'user_id' => $user_id,
@@ -214,7 +214,7 @@ class Jav
                         ]);
                         $video->playlist_id = $tag_watch->id;
                         $video->user_id = $tag_watch->user_id;
-                        $video->artist = $tag_watch->user->artist;
+                        $video->artist = User::find($tag_watch->user_id)->name;
                     }
                 }
 
