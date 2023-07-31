@@ -289,7 +289,7 @@ class Jav
         $videos = Video::whereIn('genre', Video::$genre_jav)
                     ->where('foreign_sd', 'not like', '%"jable"%')
                     ->orderBy('id', 'asc')
-                    ->get()
+                    ->get();
 
         foreach ($videos as $video) {
             $code = strtolower(trim(explode(' ', $video->title)[0]));
