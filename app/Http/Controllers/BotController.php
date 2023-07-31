@@ -2770,9 +2770,4 @@ class BotController extends Controller
     {
         Jav::updateWithAvbebe($request->pages);
     }
-
-    public function updateWithImageLink(Request $request)
-    {
-        Jav::updateWithImageLink($request->vid, $request->link);
-    }
 }
