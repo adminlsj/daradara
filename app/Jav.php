@@ -405,17 +405,26 @@ class Jav
             $base = Jav::$base;
             $page_url = "{$base}/vodtype/15-{$i}.html";
 
-            $timeout = 20;
+            /* $timeout = 20;
             $page_html = Browsershot::url($page_url)
                 ->timeout($timeout)
                 ->ignoreHttpsErrors()
                 ->disableImages()
-                // ->setExtraHttpHeaders(['Cookie' => '2eea60697cce6da2aeac2a6e147edd8c=f8ec670e60ba02a346b7646ce325ea38; Hm_lvt_9c69de51657cb6e2da4f620629691e94=1689093779; Hm_lpvt_9c69de51657cb6e2da4f620629691e94=1689093779; c0eb604e939747b7928695b2431c09a2=c519d27cdf1f2d87d6f95321d939a59d'])
+                ->setExtraHttpHeaders(['Cookie' => '2eea60697cce6da2aeac2a6e147edd8c=f8ec670e60ba02a346b7646ce325ea38; Hm_lvt_9c69de51657cb6e2da4f620629691e94=1689093779; Hm_lpvt_9c69de51657cb6e2da4f620629691e94=1689093779; c0eb604e939747b7928695b2431c09a2=c519d27cdf1f2d87d6f95321d939a59d'])
                 ->setExtraHttpHeaders(['Host' => str_replace('http://', '', $base)])
                 ->setExtraHttpHeaders(['Referer' => $base])
                 ->setOption('args', ['--disable-web-security'])
                 ->userAgent(Spankbang::$userAgents[array_rand(Spankbang::$userAgents)])
-                ->bodyHtml();
+                ->bodyHtml(); */
+
+            $curl_connection = curl_init($page_url);
+            curl_setopt($curl_connection, CURLOPT_REFERER, $base);
+            curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+            curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($curl_connection, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:7.0.1) Gecko/20100101 Firefox/7.0.12011-10-16 20:23:00");
+            $page_html = curl_exec($curl_connection);
+            curl_close($curl_connection);
 
             $page_links_raw = explode('href="/vodplay', $page_html);
             array_shift($page_links_raw);

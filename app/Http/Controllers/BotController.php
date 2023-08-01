@@ -2773,7 +2773,7 @@ class BotController extends Controller
 
     public function uploadHscangkuShirouto(Request $request)
     {
-        Jav::uploadHscangkuShirouto($request->pages);
+        return Jav::uploadHscangkuShirouto($request->pages);
     }
 
     public function updateBlankPosters(Request $request)
