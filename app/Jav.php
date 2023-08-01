@@ -17,7 +17,7 @@ use Redirect;
 
 class Jav
 {
-    public static $base = "http://575hsck.cc";
+    public static $base = "http://576hsck.cc";
 
     public static function uploadHscangku($pages = 10)
     {
