@@ -410,7 +410,7 @@ class Jav
         Log::info('Hscangku shirouto upload started...');
 
         $chinese = new Chinese();
-        for ($i = 44; $i <= $pages; $i++) { 
+        for ($i = 76; $i <= $pages; $i++) { 
             $base = Jav::$base;
             $page_url = "{$base}/vodtype/15-{$i}.html";
 
