@@ -102,7 +102,7 @@ class Jav
                     ->get();
 
         foreach ($videos as $video) {
-            $hscangku_html = Browsershot::url("{$base}{$video->foreign_sd['hscangku']}")
+            /*$hscangku_html = Browsershot::url("{$base}{$video->foreign_sd['hscangku']}")
                 ->timeout(20)
                 ->ignoreHttpsErrors()
                 ->disableImages()
@@ -111,7 +111,16 @@ class Jav
                 ->setExtraHttpHeaders(['Referer' => $base])
                 ->setOption('args', ['--disable-web-security'])
                 ->userAgent(Spankbang::$userAgents[array_rand(Spankbang::$userAgents)])
-                ->bodyHtml();
+                ->bodyHtml(); */
+
+            $curl_connection = curl_init("{$base}{$video->foreign_sd['hscangku']}");
+            curl_setopt($curl_connection, CURLOPT_REFERER, $base);
+            curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+            curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($curl_connection, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:7.0.1) Gecko/20100101 Firefox/7.0.12011-10-16 20:23:00");
+            $hscangku_html = curl_exec($curl_connection);
+            curl_close($curl_connection);
 
             $sd = 'https:'.str_replace('\\', '', Helper::get_string_between($hscangku_html, '"url":"https:', '"'));
             if ($sd != '' && $sd != null && $sd != 'https:') {
