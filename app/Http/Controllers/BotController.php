@@ -37,7 +37,13 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        Log::info('Playlist update started...');
+        $videos = Video::where('playlist_id', 8919)->orderBy('id', 'desc')->limit(150)->get();
+        foreach ($videos as $video) {
+            $video->playlist_id = $request->playlist;
+            $video->save();
+        }
+
+        /* Log::info('Playlist update started...');
 
         $artist = $request->artist;
         $user_id = $request->id;
@@ -85,7 +91,7 @@ class BotController extends Controller
             }
         }
 
-        Log::info('Playlist update ended...');
+        Log::info('Playlist update ended...'); */
 
         /* Log::info('Playlist update started...');
 
