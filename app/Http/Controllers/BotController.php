@@ -37,11 +37,26 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $videos = Video::where('playlist_id', 8919)->orderBy('id', 'desc')->limit(150)->get();
+        $videos = Video::where('genre', '日本AV')->where('cover', 'https://i.imgur.com/E6mSQA2.jpg')->get();
+        foreach ($videos as $video) {
+            $video->cover = $video->foreign_sd['cover'];
+            $temp = $video->foreign_sd;
+            unset($temp['cover']);
+            $video->foreign_sd = $temp;
+            $video->save();
+        }
+
+        /* $videos = Video::where('cover', 'like', '%imgur%')->where('foreign_sd', 'like', '%"missav"%')->orderBy('created_at', 'desc')->get();
+        foreach ($videos as $video) {
+            // code...
+        } */
+
+        // Update hscangku shirouto playlist id
+        /* $videos = Video::where('playlist_id', 8919)->orderBy('id', 'desc')->limit(150)->get();
         foreach ($videos as $video) {
             $video->playlist_id = $request->playlist;
             $video->save();
-        }
+        } *?
 
         /* Log::info('Playlist update started...');
 
