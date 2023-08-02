@@ -273,7 +273,7 @@ class Jav
                 $cover = $pms['data']['link'];
 
                 $video->imgur = Helper::get_string_between($imgur, 'https://i.imgur.com/', '.');
-                $video->cover = $cover
+                $video->cover = $cover;
                 $temp = $video->foreign_sd;
                 $temp['thumbnail'] = Helper::get_string_between($imgur, 'https://i.imgur.com/', '.');
                 $temp['characters'] = implode(',', $characters);
