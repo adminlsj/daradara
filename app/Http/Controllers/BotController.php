@@ -39,7 +39,14 @@ class BotController extends Controller
 
         $videos = Video::where('foreign_sd', 'like', '%"missav"%')->where('genre', '日本AV')->where('cover', 'https://i.imgur.com/E6mSQA2.jpg')->get();
         foreach ($videos as $video) {
-            $imgur_url = 'https://i.imgur.com/'.$video->imgur.'.jpg';
+            $missav_link = $video->foreign_sd['missav'];
+            $missav_html = Browsershot::url($missav_link)
+                ->timeout(20)
+                ->setExtraHttpHeaders(['Referer' => 'https://missav.com/'])
+                ->userAgent(Spankbang::$userAgents[array_rand(Spankbang::$userAgents)])
+                ->bodyHtml();
+
+            $imgur_url = trim(Helper::get_string_between($missav_html, 'property="og:image" content="', '"'));
             $image = Image::make($imgur_url);
             $image = $image->fit(268, 394, function ($constraint) {}, "right");
             $image = $image->stream();
