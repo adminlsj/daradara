@@ -37,7 +37,7 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $videos = Video::where('genre', '日本AV')->where('foreign_sd', 'not like', '%"thumbnail"%')->get();
+        $videos = Video::where('genre', '日本AV')->get();
         foreach ($videos as $video) {
             $temp = $video->foreign_sd;
             $temp['thumbnail'] = $video->imgur;
