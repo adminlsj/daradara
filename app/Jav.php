@@ -545,4 +545,45 @@ class Jav
 
         Log::info('Blank posters update ended...');
     }
+
+    public static function updateMissavImgur()
+    {
+        Log::info('Missav imgur update started...');
+
+        $videos = Video::where('imgur', 'Ku2VhgD')->where('foreign_sd', 'like', '%"missav"%')->where('genre', '日本AV')->orderBy('id', 'asc')->get();
+        foreach ($videos as $video) {
+            $missav_link = $video->foreign_sd["missav"];
+            $missav_html = Browsershot::url($missav_link)
+                ->timeout(20)
+                ->setExtraHttpHeaders(['Referer' => 'https://missav.com/'])
+                ->userAgent(Spankbang::$userAgents[array_rand(Spankbang::$userAgents)])
+                ->bodyHtml();
+
+            $imgur = '';
+            $cover = '';
+            $imgur_url = trim(Helper::get_string_between($missav_html, 'property="og:image" content="', '"'));
+            $image = Image::make($imgur_url);
+            $image = $image->fit(2880, 1620, function ($constraint) {}, "top");
+            $image = $image->stream();
+            $pvars = array('image' => base64_encode($image));
+            $curl = curl_init();
+            curl_setopt($curl, CURLOPT_URL, 'https://api.imgur.com/3/image.json');
+            curl_setopt($curl, CURLOPT_TIMEOUT, 30);
+            curl_setopt($curl, CURLOPT_HTTPHEADER, array('Authorization: Client-ID ' . '5b63b1c883ddb72'));
+            curl_setopt($curl, CURLOPT_POST, 1);
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($curl, CURLOPT_POSTFIELDS, $pvars);
+            $out = curl_exec($curl);
+            curl_close ($curl);
+            $pms = json_decode($out, true);
+            $imgur = $pms['data']['link'];
+
+            $video->imgur = Helper::get_string_between($imgur, 'https://i.imgur.com/', '.');
+            $video->save();
+
+            Log::info('Missav imgur update ID#'.$video->id.' success...');
+        }
+
+        Log::info('Missav imgur update ended...');
+    }
 }

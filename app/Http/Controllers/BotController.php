@@ -2829,4 +2829,9 @@ class BotController extends Controller
     {
         Jav::updateBlankPosters();
     }
+
+    public function updateBlankPosters(Request $request)
+    {
+        Jav::updateBlankPosters();
+    }
 }
