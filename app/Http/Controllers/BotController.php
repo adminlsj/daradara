@@ -37,7 +37,7 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $videos = Video::where('genre', '日本AV')->where('cover', 'https://i.imgur.com/E6mSQA2.jpg')->where('foreign_sd', 'not like', '%"cover"%')->where('foreign_sd', 'like', '%"missav"%')->get();
+        return $videos = Video::where('genre', '日本AV')->where('cover', 'https://i.imgur.com/E6mSQA2.jpg')->where('foreign_sd', 'not like', '%"cover"%')->where('foreign_sd', 'like', '%"missav"%')->get();
 
         foreach ($videos as $video) {
             $missav_link = $video->foreign_sd["missav"];
