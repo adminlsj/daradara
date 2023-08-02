@@ -39,7 +39,7 @@ class BotController extends Controller
 
         $videos = Video::where('genre', '日本AV')->where('cover', 'https://i.imgur.com/E6mSQA2.jpg')->where('foreign_sd', 'like', '%"cover"%')->get();
         foreach ($videos as $video) {
-            $video->cover = $video->foreign_sd['cover'];
+            $video->cover = 'https://i.imgur.com/'.$video->foreign_sd['cover'].'.jpg';
             $temp = $video->foreign_sd;
             unset($temp['cover']);
             $video->foreign_sd = $temp;
