@@ -37,165 +37,11 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $videos = Video::whereIn('id', [
-65426,
-65422,
-65414,
-65401,
-65398,
-65477,
-65459,
-65455,
-65442,
-65435,
-65431,
-65430,
-65427,
-65417,
-65404,
-65400,
-65399,
-65373,
-65492,
-65555,
-65554,
-65553,
-65551,
-65540,
-65539,
-65529,
-65527,
-65526,
-65525,
-65520,
-65518,
-65491,
-65490,
-65487,
-65482,
-65462,
-65451,
-65450,
-65416,
-65403,
-65402,
-65383,
-65448,
-65488,
-65484,
-65475,
-65468,
-65467,
-65509,
-65378,
-65377,
-65516,
-65513,
-65512,
-65511,
-65508,
-65502,
-65454,
-65531,
-65523,
-65515,
-65507,
-65506,
-65505,
-65501,
-65500,
-65498,
-65496,
-65495,
-65494,
-65485,
-65476,
-65474,
-65472,
-65469,
-65465,
-65445,
-65443,
-65438,
-65433,
-65420,
-65419,
-65413,
-65408,
-65407,
-65406,
-65397,
-65396,
-65388,
-65385,
-65379,
-65366,
-65362,
-65357,
-65387,
-65440,
-65384,
-65381,
-65374,
-65368,
-65361,
-65360,
-65359,
-65549,
-65547,
-65545,
-65543,
-65530,
-65517,
-65391,
-65449,
-65489,
-65483,
-65471,
-65470,
-65418,
-65380,
-65548,
-65541,
-65538,
-65533,
-65458,
-65457,
-65456,
-65439,
-65436,
-65429,
-65428,
-65424,
-65411,
-65395,
-65393,
-65376,
-65382,
-65370,
-65550,
-65464,
-65478,
-65522,
-65479,
-65463,
-65537,
-65524,
-65425,
-65473
-])->get();
-
-        foreach ($videos as $video) {
-            $video->imgur = 'Ku2VhgD';
-            $video->save();
-        }
-
-
-        /* $ids = [];
+        $ids = [];
         $videos = Video::where('cover', 'like', '%imgur%')->where('foreign_sd', 'like', '%"missav"%')->where('genre', '日本AV')->orderBy('created_at', 'desc')->limit(1200)->get();
         foreach ($videos as $video) {
             // Check thumbnail
-            $url = 'https://i.imgur.com/'.$video->imgur.'.jpg';
+            /* $url = 'https://i.imgur.com/'.$video->imgur.'.jpg';
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, $url);
             curl_setopt($ch, CURLOPT_TIMEOUT, '60');
@@ -210,7 +56,7 @@ class BotController extends Controller
                 Log::info('Check thumbnail ID#'.$video->id.' failed...');
             } else {
                 Log::info('Check thumbnail ID#'.$video->id.' success...');
-            }
+            } */
 
             // Check cover
             $url = $video->cover;
@@ -231,7 +77,7 @@ class BotController extends Controller
 
             $video->save();
         }
-        return $ids; */
+        return $ids;
 
         // Update hscangku shirouto playlist id
         /* $videos = Video::where('playlist_id', 8919)->orderBy('id', 'desc')->limit(150)->get();
