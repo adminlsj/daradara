@@ -2830,8 +2830,8 @@ class BotController extends Controller
         Jav::updateBlankPosters();
     }
 
-    public function updateBlankPosters(Request $request)
+    public function updateMissavImgur(Request $request)
     {
-        Jav::updateBlankPosters();
+        Jav::updateMissavImgur();
     }
 }

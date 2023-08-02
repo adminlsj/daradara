@@ -132,6 +132,7 @@ Route::group(['middleware' => 'admin'], function () {
 	Route::get('/updateWithAvbebe', 'BotController@updateWithAvbebe');
 	Route::get('/uploadHscangkuShirouto', 'BotController@uploadHscangkuShirouto');
 	Route::get('/updateBlankPosters', 'BotController@updateBlankPosters');
+	Route::get('/updateMissavImgur', 'BotController@updateMissavImgur');
 
 	Route::get('/clearLaravelLogs', 'BotController@clearLaravelLogs');
 
