@@ -38,11 +38,11 @@ class BotController extends Controller
         ini_set('memory_limit', '-1');
 
         // Update hscangku shirouto playlist id
-        $videos = Video::where('playlist_id', 8919)->orderBy('id', 'desc')->limit(150)->get();
+        /* $videos = Video::where('playlist_id', 8919)->orderBy('id', 'desc')->limit(150)->get();
         foreach ($videos as $video) {
             $video->playlist_id = $request->playlist;
             $video->save();
-        }
+        } */
 
         /* Log::info('Playlist update started...');
 
@@ -912,7 +912,7 @@ class BotController extends Controller
         } */
 
         // download imgurs
-        /* $videos = Video::where('cover', 'like', '%imgur%')->orderBy('id', 'asc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
+        /* $videos = Video::where('genre', '日本AV')->where('cover', 'like', '%imgur%')->orderBy('created_at', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
 
         foreach ($videos as $video) {
             // cover
@@ -952,13 +952,13 @@ class BotController extends Controller
         } */
 
         // update cover
-        /* $videos = Video::where('cover', 'like', '%imgur%')->orderBy('id', 'asc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
+        $videos = Video::where('genre', '日本AV')->where('cover', 'like', '%imgur%')->orderBy('created_at', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
         foreach ($videos as $video) {
             $cover = str_replace('.png', '.jpg', $video->cover);
             $imgur = Helper::get_string_between($cover, 'https://i.imgur.com/', '.jpg');
-            $video->cover = 'https://cdn.jsdelivr.net/gh/shakaoffcoco/shakaoffcoco@v1.0.0/asset/cover/'.$imgur.'.jpg';
+            $video->cover = 'https://cdn.jsdelivr.net/gh/meilianggebat/meilianggebat@v1.0.0/asset/cover/'.$imgur.'.jpg';
             $video->save();
-        } */
+        }
 
         //---------------------------------------------------------------------------------------------------------
 
