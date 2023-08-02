@@ -25,7 +25,7 @@
   },
   "dependencies": {
     "owl.carousel": "^2.2.0",
-    "puppeteer": "^5.0.0",
+    "puppeteer": "^5.5.0",
     "video.js": "^7.6.5",
     "videojs-qualityselector": "0.0.4",
     "videojs-resolution-switcher": "^0.4.2"

@@ -37,42 +37,38 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $videos = Video::where('genre', '日本AV')->where('cover', 'https://i.imgur.com/E6mSQA2.jpg')->where('foreign_sd', 'not like', '%"cover"%')->where('foreign_sd', 'like', '%"missav"%')->get();
-
+        $videos = Video::where('cover', 'like', '%imgur%')->where('foreign_sd', 'like', '%"missav"%')->where('genre', '日本AV')->orderBy('created_at', 'desc')->limit(1200)->get();
         foreach ($videos as $video) {
-            $missav_link = $video->foreign_sd["missav"];
-            $missav_html = Browsershot::url($missav_link)
-                ->timeout(20)
-                ->setExtraHttpHeaders(['Referer' => 'https://missav.com/'])
-                ->userAgent(Spankbang::$userAgents[array_rand(Spankbang::$userAgents)])
-                ->bodyHtml();
+            // Check thumbnail
+            $url = 'https://i.imgur.com/'.$video->imgur.'.jpg';
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_TIMEOUT, '60');
+            curl_setopt($ch, CURLOPT_HEADER, 1);
+            curl_setopt($ch, CURLOPT_NOBODY, 1);
+            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            $res = curl_exec($ch);
+            if (curl_getinfo($ch)['url'] != $url){
+                $video->imgur = 'Ku2VhgD';
+            }
 
-            $cover = '';
-            $imgur_url = trim(Helper::get_string_between($missav_html, 'property="og:image" content="', '"'));
-            $image = Image::make($imgur_url);
-            $image = $image->fit(268, 394, function ($constraint) {}, "right");
-            $image = $image->stream();
-            $pvars = array('image' => base64_encode($image));
-            $curl = curl_init();
-            curl_setopt($curl, CURLOPT_URL, 'https://api.imgur.com/3/image.json');
-            curl_setopt($curl, CURLOPT_TIMEOUT, 30);
-            curl_setopt($curl, CURLOPT_HTTPHEADER, array('Authorization: Client-ID ' . '5b63b1c883ddb72'));
-            curl_setopt($curl, CURLOPT_POST, 1);
-            curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-            curl_setopt($curl, CURLOPT_POSTFIELDS, $pvars);
-            $out = curl_exec($curl);
-            curl_close ($curl);
-            $pms = json_decode($out, true);
-            $cover = $pms['data']['link'];
+            // Check thumbnail
+            $url = 'https://i.imgur.com/'.$video->imgur.'.jpg';
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_TIMEOUT, '60');
+            curl_setopt($ch, CURLOPT_HEADER, 1);
+            curl_setopt($ch, CURLOPT_NOBODY, 1);
+            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            $res = curl_exec($ch);
+            if (curl_getinfo($ch)['url'] != $url){
+                $video->cover = 'https://i.imgur.com/E6mSQA2.jpg';
+            }
 
-            $video->cover = $cover;
             $video->save();
         }
-
-        /* $videos = Video::where('cover', 'like', '%imgur%')->where('foreign_sd', 'like', '%"missav"%')->orderBy('created_at', 'desc')->get();
-        foreach ($videos as $video) {
-            // code...
-        } */
 
         // Update hscangku shirouto playlist id
         /* $videos = Video::where('playlist_id', 8919)->orderBy('id', 'desc')->limit(150)->get();
