@@ -17,7 +17,7 @@ use Redirect;
 
 class Jav
 {
-    public static $base = "http://577hsck.cc";
+    public static $base = "http://578hsck.cc";
 
     public static function uploadHscangku($pages = 10)
     {
@@ -410,7 +410,7 @@ class Jav
         Log::info('Hscangku shirouto upload started...');
 
         $chinese = new Chinese();
-        for ($i = 76; $i <= $pages; $i++) { 
+        for ($i = 111; $i <= $pages; $i++) { 
             $base = Jav::$base;
             $page_url = "{$base}/vodtype/15-{$i}.html";
 
