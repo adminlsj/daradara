@@ -37,42 +37,12 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $videos = Video::where('foreign_sd', 'like', '%"missav"%')->where('genre', '日本AV')->where('cover', 'https://i.imgur.com/E6mSQA2.jpg')->get();
-        foreach ($videos as $video) {
-            $missav_link = $video->foreign_sd['missav'];
-            $missav_html = Browsershot::url($missav_link)
-                ->timeout(20)
-                ->setExtraHttpHeaders(['Referer' => 'https://missav.com/'])
-                ->userAgent(Spankbang::$userAgents[array_rand(Spankbang::$userAgents)])
-                ->bodyHtml();
-
-            $imgur_url = trim(Helper::get_string_between($missav_html, 'property="og:image" content="', '"'));
-            $image = Image::make($imgur_url);
-            $image = $image->fit(268, 394, function ($constraint) {}, "right");
-            $image = $image->stream();
-            $pvars = array('image' => base64_encode($image));
-            $curl = curl_init();
-            curl_setopt($curl, CURLOPT_URL, 'https://api.imgur.com/3/image.json');
-            curl_setopt($curl, CURLOPT_TIMEOUT, 30);
-            curl_setopt($curl, CURLOPT_HTTPHEADER, array('Authorization: Client-ID ' . '5b63b1c883ddb72'));
-            curl_setopt($curl, CURLOPT_POST, 1);
-            curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-            curl_setopt($curl, CURLOPT_POSTFIELDS, $pvars);
-            $out = curl_exec($curl);
-            curl_close ($curl);
-            $pms = json_decode($out, true);
-            $cover = $pms['data']['link'];
-
-            $video->cover = $cover;
-            $video->save();
-        }
-
         // Update hscangku shirouto playlist id
-        /* $videos = Video::where('playlist_id', 8919)->orderBy('id', 'desc')->limit(150)->get();
+        $videos = Video::where('playlist_id', 8919)->orderBy('id', 'desc')->limit(150)->get();
         foreach ($videos as $video) {
             $video->playlist_id = $request->playlist;
             $video->save();
-        } *?
+        }
 
         /* Log::info('Playlist update started...');
 
