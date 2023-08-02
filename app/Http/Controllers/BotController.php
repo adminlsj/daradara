@@ -37,6 +37,93 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
+        $videos = Video::whereIn('id', [
+66666,
+66661,
+66658,
+66657,
+66656,
+66692,
+66690,
+66688,
+66687,
+66684,
+66682,
+66681,
+66679,
+66677,
+66676,
+66675,
+66674,
+66715,
+66714,
+66710,
+66708,
+66706,
+66701,
+66700,
+66699,
+66698,
+66696,
+66694,
+66693,
+66737,
+66736,
+66733,
+66732,
+66729,
+66727,
+66726,
+66720,
+66719,
+66716,
+66758,
+66756,
+66755,
+66753,
+66752,
+66751,
+66749,
+66745,
+66743,
+66742,
+66741,
+66740,
+66739,
+66738,
+66769,
+66765,
+66764,
+66763,
+66762,
+66760,
+66759
+])->get();
+        foreach ($videos as $video) {
+            $video->imgur = 'Ku2VhgD';
+            $video->save();
+        }
+
+        /* $ids = [];
+        $videos = Video::where('genre', '國產素人')->where('cover', 'https://i.imgur.com/E6mSQA2.jpg')->limit(1500)->get();
+        foreach ($videos as $video) {
+            $url = 'https://i.imgur.com/'.$video->imgur.'.jpg';
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_TIMEOUT, '60'); // in seconds
+            curl_setopt($ch, CURLOPT_HEADER, 1);
+            curl_setopt($ch, CURLOPT_NOBODY, 1);
+            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            $res = curl_exec($ch);
+            if (curl_getinfo($ch)['url'] != $url){
+                $video->imgur = 'Ku2VhgD';
+                $video->save();
+                array_push($ids, $video->id);
+            }
+        }
+        return $ids; */
+
         // Update hscangku shirouto playlist id
         /* $videos = Video::where('playlist_id', 8919)->orderBy('id', 'desc')->limit(150)->get();
         foreach ($videos as $video) {
@@ -952,13 +1039,13 @@ class BotController extends Controller
         } */
 
         // update cover
-        $videos = Video::where('genre', '國產素人')->where('cover', 'like', '%imgur%')->orderBy('created_at', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
+        /* $videos = Video::where('genre', '國產素人')->where('cover', 'like', '%imgur%')->orderBy('created_at', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
         foreach ($videos as $video) {
             $cover = str_replace('.png', '.jpg', $video->cover);
             $imgur = Helper::get_string_between($cover, 'https://i.imgur.com/', '.jpg');
             $video->cover = 'https://cdn.jsdelivr.net/gh/duiyabujing/duiyabujing@v1.0.0/asset/cover/'.$imgur.'.jpg';
             $video->save();
-        }
+        } */
 
         //---------------------------------------------------------------------------------------------------------
 
