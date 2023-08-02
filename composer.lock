@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "97c328d5c5b797bd572300a719ddb013",
+    "content-hash": "2e93b0273a38c85db043e64064ca4811",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -2437,27 +2437,28 @@
         },
         {
             "name": "spatie/browsershot",
-            "version": "3.37.0",
+            "version": "3.58.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/browsershot.git",
-                "reference": "7ec2bcbd9cd998034943c52825895806c8f30698"
+                "reference": "6503b2b429e10ff28a4cdb9fffaecc25ba6d032c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/browsershot/zipball/7ec2bcbd9cd998034943c52825895806c8f30698",
-                "reference": "7ec2bcbd9cd998034943c52825895806c8f30698",
+                "url": "https://api.github.com/repos/spatie/browsershot/zipball/6503b2b429e10ff28a4cdb9fffaecc25ba6d032c",
+                "reference": "6503b2b429e10ff28a4cdb9fffaecc25ba6d032c",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.1",
-                "spatie/image": "^1.5.3",
-                "spatie/temporary-directory": "^1.1",
-                "symfony/process": "^4.2|^5.0"
+                "ext-json": "*",
+                "php": "^7.4|^8.0",
+                "spatie/image": "^1.5.3|^2.0",
+                "spatie/temporary-directory": "^1.1|^2.0",
+                "symfony/process": "^4.2|^5.0|^6.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^6.1|^7.5",
-                "spatie/phpunit-snapshot-assertions": "^1.0"
+                "pestphp/pest": "^1.20",
+                "spatie/phpunit-snapshot-assertions": "^4.2.3"
             },
             "type": "library",
             "autoload": {
@@ -2489,7 +2490,16 @@
                 "screenshot",
                 "webpage"
             ],
-            "time": "2020-06-18T10:36:21+00:00"
+            "support": {
+                "source": "https://github.com/spatie/browsershot/tree/3.58.2"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/spatie",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-07-27T07:51:54+00:00"
         },
         {
             "name": "spatie/image",

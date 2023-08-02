@@ -37,6 +37,18 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
+        $page_url = "https://missav.com/HAVD-383";
+        $curl_connection = curl_init($page_url);
+        curl_setopt($curl_connection, CURLOPT_REFERER, "https://missav.com/");
+        curl_setopt($curl_connection, CURLOPT_COOKIESESSION, true);
+        curl_setopt($curl_connection, CURLOPT_HTTPHEADER, ["Cookie: test=cookie"]);
+        curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+        curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($curl_connection, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:7.0.1) Gecko/20100101 Firefox/7.0.12011-10-16 20:23:00");
+        return $page_html = curl_exec($curl_connection);
+        curl_close($curl_connection);
+
         return $videos = Video::where('genre', '日本AV')->where('cover', 'https://i.imgur.com/E6mSQA2.jpg')->where('foreign_sd', 'not like', '%"cover"%')->where('foreign_sd', 'like', '%"missav"%')->get();
 
         foreach ($videos as $video) {
