@@ -51,13 +51,15 @@ class BotController extends Controller
             $res = curl_exec($ch);
             if (curl_getinfo($ch)['url'] != $url){
                 $video->imgur = 'Ku2VhgD';
+                return 'failed';
                 Log::info('Check thumbnail ID#'.$video->id.' failed...');
             } else {
                 Log::info('Check thumbnail ID#'.$video->id.' success...');
+                return 'success';
             }
 
-            // Check thumbnail
-            $url = 'https://i.imgur.com/'.$video->imgur.'.jpg';
+            // Check cover
+            $url = $video->cover;
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, $url);
             curl_setopt($ch, CURLOPT_TIMEOUT, '60');
