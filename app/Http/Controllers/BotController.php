@@ -65,7 +65,7 @@ class BotController extends Controller
             $pms = json_decode($out, true);
             $cover = $pms['data']['link'];
 
-            $video->cover = $cover
+            $video->cover = $cover;
             $video->save();
         }
 
