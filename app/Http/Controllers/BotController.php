@@ -37,8 +37,105 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
+        $videos = Video::whereIn('id', [
+65843,
+65842,
+65881,
+65878,
+65877,
+65874,
+65872,
+65871,
+65870,
+65866,
+65905,
+65904,
+65903,
+65896,
+65895,
+65894,
+65891,
+65890,
+65889,
+65885,
+65884,
+65924,
+65923,
+65921,
+65919,
+65917,
+65915,
+65912,
+65906,
+65948,
+65947,
+65942,
+65938,
+65937,
+65934,
+65931,
+65930,
+65926,
+65973,
+65972,
+65970,
+65969,
+65968,
+65966,
+65965,
+65964,
+65959,
+65957,
+65954,
+65952,
+65992,
+65991,
+65990,
+65987,
+65985,
+65984,
+65978,
+65977,
+65975,
+66013,
+66012,
+66011,
+66010,
+66006,
+66005,
+66002,
+66000,
+65999,
+65997,
+65996,
+65994,
+66034,
+66032,
+66029,
+66028,
+66026,
+66025,
+66024,
+66023,
+66021,
+66017,
+66014,
+66053,
+66052,
+66049,
+66048,
+66047,
+66045,
+66044,
+66040
+])->get();
+        foreach ($videos as $video) {
+            $video->imgur = 'Ku2VhgD';
+            $video->save();
+        }
+
         /* $ids = [];
-        $videos = Video::where('genre', '國產素人')->where('cover', 'https://i.imgur.com/E6mSQA2.jpg')->where('created_at', '<=', '2023-03-04 01:38:47')->where('created_at', '>=', '2022-12-19 05:16:53')->orderBy('created_at', 'desc')->get();
+        $videos = Video::where('genre', '國產素人')->where('cover', 'https://i.imgur.com/E6mSQA2.jpg')->where('created_at', '<=', '2023-07-30 01:27:55')->where('created_at', '>=', '2023-06-22 03:40:00')->orderBy('created_at', 'desc')->get();
         foreach ($videos as $video) {
             $url = 'https://i.imgur.com/'.$video->imgur.'.jpg';
             $ch = curl_init();
@@ -58,11 +155,11 @@ class BotController extends Controller
         return $ids; */
 
         // Update hscangku shirouto playlist id
-        $videos = Video::where('playlist_id', 8919)->orderBy('id', 'desc')->limit(150)->get();
+        /* $videos = Video::where('playlist_id', 8919)->orderBy('id', 'desc')->limit(150)->get();
         foreach ($videos as $video) {
             $video->playlist_id = $request->playlist;
             $video->save();
-        }
+        } */
 
         /* Log::info('Playlist update started...');
 
@@ -932,7 +1029,7 @@ class BotController extends Controller
         } */
 
         // download imgurs
-        /* $videos = Video::where('genre', '國產素人')->where('cover', 'like', '%imgur%')->where('created_at', '<=', '2022-12-13 05:30:28')->orderBy('created_at', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
+        /* $videos = Video::where('genre', '國產素人')->where('cover', 'like', '%imgur%')->where('created_at', '<=', '2023-06-29 03:24:30')->orderBy('created_at', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
 
         foreach ($videos as $video) {
             // cover
