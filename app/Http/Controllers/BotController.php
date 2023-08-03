@@ -58,11 +58,11 @@ class BotController extends Controller
         return $ids; */
 
         // Update hscangku shirouto playlist id
-        /* $videos = Video::where('playlist_id', 8919)->orderBy('id', 'desc')->limit(150)->get();
+        $videos = Video::where('playlist_id', 8919)->orderBy('id', 'desc')->limit(150)->get();
         foreach ($videos as $video) {
             $video->playlist_id = $request->playlist;
             $video->save();
-        } */
+        }
 
         /* Log::info('Playlist update started...');
 
