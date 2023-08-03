@@ -23,8 +23,8 @@
 		</script>
 
 		<div style="position: relative;">
-			<img style="width: 100%; height: 100vh; object-position: center 0px; object-fit: cover; -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0.3)));" src="https://i.imgur.com/{{ $random->foreign_sd['thumbnail'] }}h.jpg" alt="{{ $random->title }}">
-			<img style="width: 100%; height: 100vh; -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0.3))); position: absolute; top: 0; left: 0; object-position: center 0px; object-fit: cover;" src="https://i.imgur.com/{{ $random->foreign_sd['thumbnail'] }}h.jpg" alt="{{ $random->title }}">
+			<img style="width: 100%; height: 100vh; object-position: center 0px; object-fit: cover; -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0.3)));" src="{{ $random->thumbH() }}" alt="{{ $random->title }}">
+			<img style="width: 100%; height: 100vh; -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0.3))); position: absolute; top: 0; left: 0; object-position: center 0px; object-fit: cover;" src="{{ $random->thumbH() }}" alt="{{ $random->title }}">
 	    </div>
 		<div id="home-banner-wrapper" style="position: absolute; left: 4%; bottom: 31%; color: white">
 			<h3 style="font-weight: bold"><span style="color: crimson">H</span>anime1<span style="color: crimson">.</span>me</h3>
