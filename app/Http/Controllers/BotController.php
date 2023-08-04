@@ -37,13 +37,7 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $videos = Video::where('cover', 'like', "%korebarnai%")->get();
-        foreach ($videos as $video) {
-            $video->cover = 'https://i.imgur.com/E6mSQA2.jpg';
-            $video->save();
-        }
-
-        /* $videos = Video::where('genre', '國產素人')->where('cover', 'like', '%imgur%')->where('created_at', '<=', '2023-07-11 02:40:23')->orderBy('created_at', 'desc')->select('id', 'cover', 'imgur', 'foreign_sd')->get()->slice(0, 300);
+        $videos = Video::where('genre', '國產素人')->where('cover', 'like', '%imgur%')->where('created_at', '<=', '2023-07-11 02:40:23')->orderBy('created_at', 'desc')->select('id', 'cover', 'imgur', 'foreign_sd')->get()->slice(0, 300);
 
         foreach ($videos as $video) {
             $url = 'https://i.imgur.com/'.$video->imgur.'.jpg';
@@ -137,7 +131,7 @@ class BotController extends Controller
             } else {
                 echo 'cover '.$file_name.' exists<br>';
             }
-        } */
+        }
 
         /* $ids = [];
         $videos = Video::where('genre', '國產素人')->where('cover', 'https://i.imgur.com/E6mSQA2.jpg')->where('created_at', '<=', '2022-11-26 06:19:40')->where('created_at', '>=', '2022-09-28 15:11:14')->orderBy('created_at', 'desc')->get();
