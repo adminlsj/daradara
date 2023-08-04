@@ -153,13 +153,6 @@ class BotController extends Controller
         }
         return $ids; */
 
-        // Update hscangku shirouto playlist id
-        /* $videos = Video::where('playlist_id', 8919)->orderBy('id', 'desc')->limit(150)->get();
-        foreach ($videos as $video) {
-            $video->playlist_id = $request->playlist;
-            $video->save();
-        } */
-
         /* Log::info('Playlist update started...');
 
         $artist = $request->artist;
@@ -2907,6 +2900,15 @@ class BotController extends Controller
             $cover = str_replace('.png', '.jpg', $video->cover);
             $imgur = Helper::get_string_between($cover, 'https://i.imgur.com/', '.jpg');
             $video->cover = "https://cdn.jsdelivr.net/gh/{$request->user}/{$request->user}@v1.0.0/asset/cover/".$imgur.'.jpg';
+            $video->save();
+        }
+    }
+
+    public function updateShiroutoPlaylist(Request $request)
+    {
+        $videos = Video::where('playlist_id', 8919)->orderBy('id', 'desc')->limit(150)->get();
+        foreach ($videos as $video) {
+            $video->playlist_id = $request->id;
             $video->save();
         }
     }
