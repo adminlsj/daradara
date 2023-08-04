@@ -37,244 +37,100 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $videos = Video::whereIn('id', [
-69802,
-69801,
-69800,
-69797,
-69795,
-69783,
-69835,
-69834,
-69833,
-69831,
-69830,
-69829,
-69825,
-69814,
-69813,
-69812,
-69809,
-69859,
-69857,
-69852,
-69841,
-69838,
-69900,
-69897,
-69895,
-69891,
-69890,
-69889,
-69883,
-69882,
-69881,
-69870,
-69937,
-69933,
-69932,
-69929,
-69925,
-69924,
-69919,
-69909,
-69906,
-69967,
-69966,
-69963,
-69962,
-69959,
-69957,
-69956,
-69947,
-69946,
-69939,
-69986,
-69984,
-69981,
-69976,
-69975,
-69974,
-69972,
-70003,
-70002,
-69996,
-70039,
-70038,
-70037,
-70036,
-70035,
-70034,
-70033,
-70032,
-70031,
-70030,
-70029,
-70028,
-70026,
-70024,
-70020,
-70019,
-70018,
-70017,
-70016,
-70008,
-70063,
-70061,
-70058,
-70057,
-70056,
-70054,
-70053,
-70052,
-70097,
-70095,
-70094,
-70093,
-70092,
-70088,
-70087,
-70084,
-70079,
-70126,
-70125,
-70124,
-70123,
-70122,
-70120,
-70111,
-70106,
-70101,
-70154,
-70147,
-70146,
-70145,
-70142,
-70139,
-70138,
-70133,
-70175,
-70174,
-70173,
-70172,
-70171,
-70169,
-70166,
-70165,
-70164,
-70163,
-70162,
-70161,
-70157,
-70209,
-70205,
-70204,
-70200,
-70198,
-70193,
-70192,
-70187,
-70186,
-70253,
-70252,
-70251,
-70250,
-70247,
-70246,
-70244,
-70242,
-70241,
-70240,
-70239,
-70238,
-70235,
-70233,
-70230,
-70229,
-70228,
-70219,
-70218,
-70211,
-70289,
-70285,
-70284,
-70281,
-70274,
-70273,
-70271,
-70269,
-70259,
-70308,
-70307,
-70305,
-70304,
-70303,
-70301,
-70300,
-70298,
-70295,
-70344,
-70341,
-70340,
-70339,
-70338,
-70337,
-70335,
-70334,
-70330,
-70325,
-70318,
-70315,
-70371,
-70370,
-70368,
-70365,
-70363,
-70362,
-70355,
-70354,
-70393,
-70392,
-70391,
-70387,
-70382,
-70380,
-70379,
-70377,
-70376,
-70427,
-70425,
-70422,
-70419,
-70418,
-70417,
-70412,
-70411,
-70410,
-70405,
-70404,
-70398,
-70451,
-70450,
-70440,
-70439,
-70437,
-70429,
-70478,
-70476,
-70475,
-70471,
-70470,
-70469,
-70466,
-70465,
-70464,
-70463,
-70458
-])->get();
+        $videos = Video::where('genre', '國產素人')->where('cover', 'like', '%imgur%')->where('imgur', 'not like', '%Ku2VhgD%')->orderBy('created_at', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
+
         foreach ($videos as $video) {
-            $video->imgur = 'Ku2VhgD';
-            $video->save();
+            $url = 'https://i.imgur.com/'.$video->imgur.'.jpg';
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_TIMEOUT, '60'); // in seconds
+            curl_setopt($ch, CURLOPT_HEADER, 1);
+            curl_setopt($ch, CURLOPT_NOBODY, 1);
+            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            $res = curl_exec($ch);
+            if (curl_getinfo($ch)['url'] != $url){
+                $imgur = '';
+                $cover = '';
+                $imgur_url = $video->foreign_sd["poster"];
+                $image = Image::make($imgur_url);
+                $image = $image->fit(2880, 1620, function ($constraint) {}, "top");
+                $image = $image->stream();
+                $pvars = array('image' => base64_encode($image));
+                $curl = curl_init();
+                curl_setopt($curl, CURLOPT_URL, 'https://api.imgur.com/3/image.json');
+                curl_setopt($curl, CURLOPT_TIMEOUT, 30);
+                curl_setopt($curl, CURLOPT_HTTPHEADER, array('Authorization: Client-ID ' . '5b63b1c883ddb72'));
+                curl_setopt($curl, CURLOPT_POST, 1);
+                curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+                curl_setopt($curl, CURLOPT_POSTFIELDS, $pvars);
+                $out = curl_exec($curl);
+                curl_close ($curl);
+                $pms = json_decode($out, true);
+                $imgur = $pms['data']['link'];
+                $link = Helper::get_string_between($imgur, 'https://i.imgur.com/', '.');
+
+                // thumbnail
+                $huge = $video->imgur.'h.jpg';
+                $huge_link = $link.'h.jpg';
+                if (!file_exists('thumbnail/'.public_path($huge))) {
+                    if (file_put_contents('thumbnail/'.$huge, file_get_contents('https://i.imgur.com/'.$huge_link))) {
+                        echo 'thumbH '.$huge.' success<br>';
+                    } else {
+                        echo 'thumbH '.$huge.' failed<br>';
+                    }
+                } else {
+                    echo 'thumbH '.$huge.' exists<br>';
+                }
+
+                $large = $video->imgur.'l.jpg';
+                $large_link = $link.'l.jpg';
+                if (!file_exists('thumbnail/'.public_path($large))) {
+                    if (file_put_contents('thumbnail/'.$large, file_get_contents('https://i.imgur.com/'.$large_link))) {
+                        echo 'thumbL '.$large.' success<br>';
+                    } else {
+                        echo 'thumbL '.$large.' failed<br>';
+                    }
+                } else {
+                    echo 'thumbL '.$large.' exists<br>';
+                }
+
+            } else {
+                // thumbnail
+                $huge = $video->imgur.'h.jpg';
+                if (!file_exists('thumbnail/'.public_path($huge))) {
+                    if (file_put_contents('thumbnail/'.$huge, file_get_contents('https://i.imgur.com/'.$huge))) {
+                        echo 'thumbH '.$huge.' success<br>';
+                    } else {
+                        echo 'thumbH '.$huge.' failed<br>';
+                    }
+                } else {
+                    echo 'thumbH '.$huge.' exists<br>';
+                }
+
+                $large = $video->imgur.'l.jpg';
+                if (!file_exists('thumbnail/'.public_path($large))) {
+                    if (file_put_contents('thumbnail/'.$large, file_get_contents('https://i.imgur.com/'.$large))) {
+                        echo 'thumbL '.$large.' success<br>';
+                    } else {
+                        echo 'thumbL '.$large.' failed<br>';
+                    }
+                } else {
+                    echo 'thumbL '.$large.' exists<br>';
+                }
+            }
+
+            // cover
+            $file_name = str_replace('.png', '.jpg', basename($video->cover));
+            if (!file_exists(public_path('cover/'.$file_name))) {
+                if (file_put_contents('cover/'.$file_name, file_get_contents($video->cover))) {
+                    echo 'cover '.$file_name.' success<br>';
+                } else {
+                    echo 'cover '.$file_name.' failed<br>';
+                }
+            } else {
+                echo 'cover '.$file_name.' exists<br>';
+            }
         }
 
         /* $ids = [];
@@ -1172,7 +1028,7 @@ class BotController extends Controller
         } */
 
         // download imgurs
-        /* $videos = Video::where('genre', '國產素人')->where('cover', 'like', '%imgur%')->where('created_at', '<=', '2023-06-29 03:24:30')->orderBy('created_at', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
+        /* $videos = Video::where('genre', '國產素人')->where('cover', 'like', '%imgur%')->where('imgur', 'not like', '%Ku2VhgD%')->orderBy('created_at', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
 
         foreach ($videos as $video) {
             // cover
