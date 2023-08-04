@@ -37,7 +37,7 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $videos = Video::where('genre', '國產素人')->where('cover', 'like', '%imgur%')->where('imgur', 'not like', '%Ku2VhgD%')->orderBy('created_at', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
+        /* $videos = Video::where('genre', '國產素人')->where('cover', 'like', '%imgur%')->where('created_at', '<=', '2023-07-11 02:40:23')->orderBy('created_at', 'desc')->select('id', 'cover', 'imgur', 'foreign_sd')->get()->slice(0, 300);
 
         foreach ($videos as $video) {
             $url = 'https://i.imgur.com/'.$video->imgur.'.jpg';
@@ -131,7 +131,7 @@ class BotController extends Controller
             } else {
                 echo 'cover '.$file_name.' exists<br>';
             }
-        }
+        } */
 
         /* $ids = [];
         $videos = Video::where('genre', '國產素人')->where('cover', 'https://i.imgur.com/E6mSQA2.jpg')->where('created_at', '<=', '2022-11-26 06:19:40')->where('created_at', '>=', '2022-09-28 15:11:14')->orderBy('created_at', 'desc')->get();
@@ -1065,15 +1065,6 @@ class BotController extends Controller
             } else {
                 echo 'thumbL '.$large.' exists<br>';
             }
-        } */
-
-        // update cover
-        /* $videos = Video::where('genre', '國產素人')->where('cover', 'like', '%imgur%')->where('created_at', '<=', '2023-06-29 03:24:30')->orderBy('created_at', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
-        foreach ($videos as $video) {
-            $cover = str_replace('.png', '.jpg', $video->cover);
-            $imgur = Helper::get_string_between($cover, 'https://i.imgur.com/', '.jpg');
-            $video->cover = 'https://cdn.jsdelivr.net/gh/louxianer/louxianer@v1.0.0/asset/cover/'.$imgur.'.jpg';
-            $video->save();
         } */
 
         //---------------------------------------------------------------------------------------------------------
@@ -2907,5 +2898,16 @@ class BotController extends Controller
     public function updateMissavImgur(Request $request)
     {
         Jav::updateMissavImgur();
+    }
+
+    public function imgurToJsdelivr(Request $request)
+    {
+        $videos = Video::where('genre', '國產素人')->where('cover', 'like', '%imgur%')->where('created_at', '<=', '2023-06-29 03:24:30')->orderBy('created_at', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
+        foreach ($videos as $video) {
+            $cover = str_replace('.png', '.jpg', $video->cover);
+            $imgur = Helper::get_string_between($cover, 'https://i.imgur.com/', '.jpg');
+            $video->cover = "https://cdn.jsdelivr.net/gh/{$request->user}/{$request->user}@v1.0.0/asset/cover/".$imgur.'.jpg';
+            $video->save();
+        }
     }
 }
