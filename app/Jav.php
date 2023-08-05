@@ -17,7 +17,7 @@ use Redirect;
 
 class Jav
 {
-    public static $base = "http://590hsck.cc";
+    public static $base = "http://581hsck.cc";
 
     public static function uploadHscangku($pages = 10)
     {
@@ -410,7 +410,7 @@ class Jav
         Log::info('Hscangku shirouto upload started...');
 
         $chinese = new Chinese();
-        for ($i = 401; $i <= $pages; $i++) { 
+        for ($i = 405; $i <= $pages; $i++) { 
             $base = Jav::$base;
             $page_url = "{$base}/vodtype/15-{$i}.html";
 
@@ -451,7 +451,7 @@ class Jav
             foreach ($page_links as $hscangku_link => $title) {
                 $original_link = "/vodplay/{$hscangku_link}";
                 $code = str_replace('-1-1.html', '', $hscangku_link);
-                Log::info('Hscangku shirouto update CODE#'.$code.' importing now');
+                // Log::info('Hscangku shirouto update CODE#'.$code.' importing now');
                 if (Video::where('foreign_sd', 'ilike', '%'.$original_link.'%')->exists()) {
                     Log::info('Hscangku shirouto update CODE#'.$code.' imported at '.$original_link);
                 } elseif (Video::where('title', 'ilike', $title.' %')->exists()) {
