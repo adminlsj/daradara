@@ -450,10 +450,11 @@ class Jav
             }
             foreach ($page_links as $hscangku_link => $title) {
                 $original_link = "/vodplay/{$hscangku_link}";
-                $code = explode(' ', $title)[0];
+                $code = str_replace('-1-1.html', '', $hscangku_link);
+                Log::info('Hscangku shirouto update CODE#'.$code.' importing now');
                 if (Video::where('foreign_sd', 'ilike', '%'.$original_link.'%')->exists()) {
                     Log::info('Hscangku shirouto update CODE#'.$code.' imported at '.$original_link);
-                } elseif (Video::where('title', 'ilike', $code.' %')->exists()) {
+                } elseif (Video::where('title', 'ilike', $title.' %')->exists()) {
                     Log::alert('Hscangku shirouto update CODE#'.$code.' exists at '.$original_link);
                 } else {
                     /* $imgur = '';
