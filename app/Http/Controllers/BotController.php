@@ -37,103 +37,6 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        // Download shirouto imgur
-        /* $videos = Video::where('genre', '國產素人')->where('cover', 'like', '%imgur%')->where('created_at', '<=', '2023-07-11 02:40:23')->orderBy('created_at', 'desc')->select('id', 'cover', 'imgur', 'foreign_sd')->get()->slice(0, 300);
-
-        foreach ($videos as $video) {
-            $url = 'https://i.imgur.com/'.$video->imgur.'.jpg';
-            $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, $url);
-            curl_setopt($ch, CURLOPT_TIMEOUT, '60'); // in seconds
-            curl_setopt($ch, CURLOPT_HEADER, 1);
-            curl_setopt($ch, CURLOPT_NOBODY, 1);
-            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-            $res = curl_exec($ch);
-            if (curl_getinfo($ch)['url'] != $url){
-                $imgur = '';
-                $cover = '';
-                $imgur_url = $video->foreign_sd["poster"];
-                $image = Image::make($imgur_url);
-                $image = $image->fit(2880, 1620, function ($constraint) {}, "top");
-                $image = $image->stream();
-                $pvars = array('image' => base64_encode($image));
-                $curl = curl_init();
-                curl_setopt($curl, CURLOPT_URL, 'https://api.imgur.com/3/image.json');
-                curl_setopt($curl, CURLOPT_TIMEOUT, 30);
-                curl_setopt($curl, CURLOPT_HTTPHEADER, array('Authorization: Client-ID ' . '5b63b1c883ddb72'));
-                curl_setopt($curl, CURLOPT_POST, 1);
-                curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-                curl_setopt($curl, CURLOPT_POSTFIELDS, $pvars);
-                $out = curl_exec($curl);
-                curl_close ($curl);
-                $pms = json_decode($out, true);
-                $imgur = $pms['data']['link'];
-                $link = Helper::get_string_between($imgur, 'https://i.imgur.com/', '.');
-
-                // thumbnail
-                $huge = $video->imgur.'h.jpg';
-                $huge_link = $link.'h.jpg';
-                if (!file_exists('thumbnail/'.public_path($huge))) {
-                    if (file_put_contents('thumbnail/'.$huge, file_get_contents('https://i.imgur.com/'.$huge_link))) {
-                        echo 'thumbH '.$huge.' success<br>';
-                    } else {
-                        echo 'thumbH '.$huge.' failed<br>';
-                    }
-                } else {
-                    echo 'thumbH '.$huge.' exists<br>';
-                }
-
-                $large = $video->imgur.'l.jpg';
-                $large_link = $link.'l.jpg';
-                if (!file_exists('thumbnail/'.public_path($large))) {
-                    if (file_put_contents('thumbnail/'.$large, file_get_contents('https://i.imgur.com/'.$large_link))) {
-                        echo 'thumbL '.$large.' success<br>';
-                    } else {
-                        echo 'thumbL '.$large.' failed<br>';
-                    }
-                } else {
-                    echo 'thumbL '.$large.' exists<br>';
-                }
-
-            } else {
-                // thumbnail
-                $huge = $video->imgur.'h.jpg';
-                if (!file_exists('thumbnail/'.public_path($huge))) {
-                    if (file_put_contents('thumbnail/'.$huge, file_get_contents('https://i.imgur.com/'.$huge))) {
-                        echo 'thumbH '.$huge.' success<br>';
-                    } else {
-                        echo 'thumbH '.$huge.' failed<br>';
-                    }
-                } else {
-                    echo 'thumbH '.$huge.' exists<br>';
-                }
-
-                $large = $video->imgur.'l.jpg';
-                if (!file_exists('thumbnail/'.public_path($large))) {
-                    if (file_put_contents('thumbnail/'.$large, file_get_contents('https://i.imgur.com/'.$large))) {
-                        echo 'thumbL '.$large.' success<br>';
-                    } else {
-                        echo 'thumbL '.$large.' failed<br>';
-                    }
-                } else {
-                    echo 'thumbL '.$large.' exists<br>';
-                }
-            }
-
-            // cover
-            $file_name = str_replace('.png', '.jpg', basename($video->cover));
-            if (!file_exists(public_path('cover/'.$file_name))) {
-                if (file_put_contents('cover/'.$file_name, file_get_contents($video->cover))) {
-                    echo 'cover '.$file_name.' success<br>';
-                } else {
-                    echo 'cover '.$file_name.' failed<br>';
-                }
-            } else {
-                echo 'cover '.$file_name.' exists<br>';
-            }
-        } */
-
         /* $ids = [];
         $videos = Video::where('genre', '國產素人')->where('cover', 'https://i.imgur.com/E6mSQA2.jpg')->where('created_at', '<=', '2022-11-26 06:19:40')->where('created_at', '>=', '2022-09-28 15:11:14')->orderBy('created_at', 'desc')->get();
         foreach ($videos as $video) {
@@ -2911,6 +2814,91 @@ class BotController extends Controller
         $videos = Video::where('playlist_id', 8919)->orderBy('id', 'desc')->limit(150)->get();
         foreach ($videos as $video) {
             $video->playlist_id = $request->id;
+            $video->save();
+        }
+    }
+
+    public function downloadShiroutoImgur(Request $request)
+    {
+        $videos = Video::where('genre', '國產素人')->where('cover', 'like', '%imgur%')->where('created_at', '<=', '2023-07-11 02:40:23')->orderBy('created_at', 'desc')->select('id', 'cover', 'imgur', 'foreign_sd')->get()->slice(0, 300);
+
+        foreach ($videos as $video) {
+            // thumbnail
+            $huge = $video->imgur.'h.jpg';
+            $large = $video->imgur.'l.jpg';
+            if (!file_exists(public_path('shirouto/thumbnail/'.$huge)) || !file_exists(public_path('shirouto/thumbnail/'.$large))) {
+                $url = 'https://i.imgur.com/'.$video->imgur.'.jpg';
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_URL, $url);
+                curl_setopt($ch, CURLOPT_TIMEOUT, '60'); // in seconds
+                curl_setopt($ch, CURLOPT_HEADER, 1);
+                curl_setopt($ch, CURLOPT_NOBODY, 1);
+                curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                $res = curl_exec($ch);
+                if (curl_getinfo($ch)['url'] != $url) {
+                    $imgur = '';
+                    $cover = '';
+                    $imgur_url = $video->foreign_sd["poster"];
+                    $image = Image::make($imgur_url);
+                    $image = $image->fit(2880, 1620, function ($constraint) {}, "top");
+                    $image = $image->stream();
+                    $pvars = array('image' => base64_encode($image));
+                    $curl = curl_init();
+                    curl_setopt($curl, CURLOPT_URL, 'https://api.imgur.com/3/image.json');
+                    curl_setopt($curl, CURLOPT_TIMEOUT, 30);
+                    curl_setopt($curl, CURLOPT_HTTPHEADER, array('Authorization: Client-ID ' . '5b63b1c883ddb72'));
+                    curl_setopt($curl, CURLOPT_POST, 1);
+                    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+                    curl_setopt($curl, CURLOPT_POSTFIELDS, $pvars);
+                    $out = curl_exec($curl);
+                    curl_close ($curl);
+                    $pms = json_decode($out, true);
+                    $imgur = $pms['data']['link'];
+                    $link = Helper::get_string_between($imgur, 'https://i.imgur.com/', '.');
+
+                    $huge_link = $link.'h.jpg';
+                    if (file_put_contents('shirouto/thumbnail/'.$huge, file_get_contents('https://i.imgur.com/'.$huge_link))) {
+                        echo 'thumbH '.$huge.' success<br>';
+                    } else {
+                        echo 'thumbH '.$huge.' failed<br>';
+                    }
+
+                    $large_link = $link.'l.jpg';
+                    if (file_put_contents('shirouto/thumbnail/'.$large, file_get_contents('https://i.imgur.com/'.$large_link))) {
+                        echo 'thumbL '.$large.' success<br>';
+                    } else {
+                        echo 'thumbL '.$large.' failed<br>';
+                    }
+
+                } else {
+                    if (file_put_contents('shirouto/thumbnail/'.$huge, file_get_contents('https://i.imgur.com/'.$huge))) {
+                        echo 'thumbH '.$huge.' success<br>';
+                    } else {
+                        echo 'thumbH '.$huge.' failed<br>';
+                    }
+
+                    if (file_put_contents('shirouto/thumbnail/'.$large, file_get_contents('https://i.imgur.com/'.$large))) {
+                        echo 'thumbL '.$large.' success<br>';
+                    } else {
+                        echo 'thumbL '.$large.' failed<br>';
+                    }
+                }
+
+
+            } else {
+                echo 'Thumbnails exist<br>';
+            }
+        }
+    }
+
+    public function shiroutoImgurToJsdelivr(Request $request)
+    {
+        $videos = Video::where('genre', '國產素人')->where('cover', 'like', '%imgur%')->where('created_at', '<=', '2023-07-11 02:40:23')->orderBy('created_at', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
+        foreach ($videos as $video) {
+            $cover = str_replace('.png', '.jpg', $video->cover);
+            $imgur = Helper::get_string_between($cover, 'https://i.imgur.com/', '.jpg');
+            $video->cover = "https://cdn.jsdelivr.net/gh/{$request->user}/{$request->user}@v1.0.0/asset/cover/".$imgur.'.jpg';
             $video->save();
         }
     }
