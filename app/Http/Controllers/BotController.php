@@ -925,9 +925,7 @@ class BotController extends Controller
         } */
 
         // download imgurs
-        // $videos = Video::where('genre', '日本AV')->where('cover', 'like', '%imgur%')->orderBy('created_at', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
-
-        $videos = Video::whereIn('genre', Video::$genre)->where('cover', 'like', '%imgur%')->orderBy('created_at', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
+        $videos = Video::where('genre', '日本AV')->where('cover', 'like', '%imgur%')->orderBy('created_at', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
 
         foreach ($videos as $video) {
             // cover
