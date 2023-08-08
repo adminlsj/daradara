@@ -2819,14 +2819,24 @@ class BotController extends Controller
 
     public function downloadShiroutoImgur(Request $request)
     {
-        $videos = Video::where('genre', '國產素人')->where('cover', 'like', '%imgur%')->where('created_at', '<=', '2023-07-11 02:40:23')->orderBy('created_at', 'desc')->select('id', 'cover', 'imgur', 'foreign_sd')->get()->slice(0, 300);
+        $videos = Video::where('genre', '國產素人')->where('cover', 'like', '%imgur%')->where('created_at', '<=', '2023-07-11 02:40:23')->orderBy('created_at', 'desc')->select('id', 'cover', 'imgur', 'foreign_sd')->get()->slice(0, 450);
 
         foreach ($videos as $video) {
             // thumbnail
             $huge = $video->imgur.'h.jpg';
             $large = $video->imgur.'l.jpg';
+
             if (!file_exists(public_path('shirouto/thumbnail/'.$huge)) || !file_exists(public_path('shirouto/thumbnail/'.$large))) {
-                $url = 'https://i.imgur.com/'.$video->imgur.'.jpg';
+
+                Image::make($video->foreign_sd["poster"])
+                    ->fit(1024, 576, function ($constraint) {}, "top")
+                    ->save("shirouto/thumbnail/{$huge}", 80);
+
+                Image::make($video->foreign_sd["poster"])
+                    ->fit(640, 360, function ($constraint) {}, "top")
+                    ->save("shirouto/thumbnail/{$large}", 80);
+
+                /* $url = 'https://i.imgur.com/'.$video->imgur.'.jpg';
                 $ch = curl_init();
                 curl_setopt($ch, CURLOPT_URL, $url);
                 curl_setopt($ch, CURLOPT_TIMEOUT, '60'); // in seconds
@@ -2882,7 +2892,7 @@ class BotController extends Controller
                     } else {
                         echo 'thumbL '.$large.' failed<br>';
                     }
-                }
+                } */
 
 
             } else {
@@ -2893,7 +2903,7 @@ class BotController extends Controller
 
     public function shiroutoImgurToJsdelivr(Request $request)
     {
-        $videos = Video::where('genre', '國產素人')->where('cover', 'like', '%imgur%')->where('created_at', '<=', '2023-07-11 02:40:23')->orderBy('created_at', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
+        $videos = Video::where('genre', '國產素人')->where('cover', 'like', '%imgur%')->where('created_at', '<=', '2023-07-11 02:40:23')->orderBy('created_at', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 450);
         foreach ($videos as $video) {
             $cover = str_replace('.png', '.jpg', $video->cover);
             $imgur = Helper::get_string_between($cover, 'https://i.imgur.com/', '.jpg');
