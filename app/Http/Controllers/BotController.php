@@ -37,7 +37,7 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $videos = Video::where('cover', 'like', "%shirogreeno%")->orderBy('created_at', 'desc')->skip(450)->get();
+        $videos = Video::where('cover', 'like', "%shirogreeno%")->orderBy('created_at', 'desc')->skip(300)->get();
         foreach ($videos as $video) {
             $cover = Helper::get_string_between($video->cover, 'cover/', '.jpg');
             $video->cover = 'https://i.imgur.com/'.$cover.'.jpg';
