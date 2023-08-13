@@ -37,6 +37,13 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
+        $videos = Video::where('cover', 'like', "%shirogreeno%")->orderBy('created_at', 'desc')->skip(450)->get();
+        foreach ($videos as $video) {
+            $cover = Helper::get_string_between($video->cover, 'cover/', '.jpg');
+            $video->cover = 'https://i.imgur.com/'.$cover.'.jpg';
+            $video->save();
+        }
+
         /* $ids = [];
         $videos = Video::where('genre', '國產素人')->where('cover', 'https://i.imgur.com/E6mSQA2.jpg')->where('created_at', '<=', '2022-11-26 06:19:40')->where('created_at', '>=', '2022-09-28 15:11:14')->orderBy('created_at', 'desc')->get();
         foreach ($videos as $video) {
@@ -925,7 +932,7 @@ class BotController extends Controller
         } */
 
         // download imgurs
-        $videos = Video::where('genre', '日本AV')->where('cover', 'like', '%imgur%')->orderBy('created_at', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
+        /* $videos = Video::where('genre', '日本AV')->where('cover', 'like', '%imgur%')->orderBy('created_at', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
 
         foreach ($videos as $video) {
             // cover
@@ -962,7 +969,7 @@ class BotController extends Controller
             } else {
                 echo 'thumbL '.$large.' exists<br>';
             }
-        }
+        } */
 
         //---------------------------------------------------------------------------------------------------------
 
