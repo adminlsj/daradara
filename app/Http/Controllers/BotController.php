@@ -37,6 +37,87 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
+        Log::info('Youjizz update started...');
+
+        $videos = Video::where('foreign_sd', 'ilike', '%"youjizz"%')
+                    ->select('id', 'title', 'sd', 'outsource', 'foreign_sd')
+                    ->orderBy('id', 'asc')
+                    ->get()
+                    ->sortBy(function($video){
+                        return (int) Helper::get_string_between($video->sd, 'validfrom=', '&');
+                    })
+                    ->values();
+
+        foreach ($videos as $video) {
+            echo 'ID: '.$video->id.' STARTED<br>';
+            Log::info('ID: '.$video->id.' started');
+            $url = $video->foreign_sd['youjizz'];
+            $url = explode('/', $url);
+            $base = array_pop($url);
+            $url = implode('/', $url) . '/' . urlencode($base);
+
+            $loop = 0;
+            $html = '';
+            $start = '';
+            $has_hls2e = true;
+            while (strpos($html, 'var dataEncodings = ') === false && $loop < 1000) {
+                $curl_connection = curl_init($url);
+                curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+                curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+                $html = curl_exec($curl_connection);
+                curl_close($curl_connection);
+                Log::info("ID#{$video->id} html loop {$loop} failed");
+                $loop++;
+
+                // sleep(5);
+            }
+            if (strpos($html, 'var dataEncodings = ') !== false) {
+                $start = explode('var dataEncodings = ', $html);
+                $end = explode(';' , $start[1]);
+                $raw = $end[0];
+                if (strpos($raw, 'hls2e-') === false) {
+                    $has_hls2e = false;
+                }
+                $data = json_decode($raw, true);
+
+                $m3u8 = [];
+                $mp4 = [];
+                foreach ($data as $source) {
+                    if (strpos($source['filename'], '.m3u8') === false && is_numeric($source['quality']) && strpos($source['filename'], 'cdn2e') === false) {
+                        $mp4[$source['quality']] = 'https:'.$source['filename'];
+                    }
+                    if (strpos($source['filename'], '.m3u8') !== false && is_numeric($source['quality'])) {
+                        $m3u8[$source['quality']] = 'https:'.$source['filename'];
+                    }
+                }
+
+                if ($has_hls2e) {
+                    $video->sd = end($mp4);
+                    $video->outsource = true;
+                } else {
+                    $video->sd = end($m3u8);
+                    $video->outsource = false;
+                }
+                $video->qualities = $mp4;
+                $video->save();
+                Log::info('Youjizz update ID#'.$video->id.' success...');
+
+            } else {
+                Mail::to('vicky.avionteam@gmail.com')->send(new UserReport('master', 'Youjizz update failed', $video->id, $video->title, $video->sd, 'master', 'master'));
+                $temp = $video->foreign_sd;
+                $temp['error'] = $video->foreign_sd['youjizz'];
+                unset($temp['youjizz']);
+                $video->foreign_sd = $temp;
+                $video->save();
+                Log::info('Youjizz update ID#'.$video->id.' failed...');
+            }
+
+            sleep(5);
+        }
+
+        Log::info('Youjizz update ended...');
+
         /* $ids = [];
         $videos = Video::where('genre', '國產素人')->where('cover', 'https://i.imgur.com/E6mSQA2.jpg')->where('created_at', '<=', '2022-11-26 06:19:40')->where('created_at', '>=', '2022-09-28 15:11:14')->orderBy('created_at', 'desc')->get();
         foreach ($videos as $video) {
@@ -925,7 +1006,7 @@ class BotController extends Controller
         } */
 
         // download imgurs
-        $videos = Video::where('genre', '日本AV')->where('cover', 'like', '%imgur%')->orderBy('created_at', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
+        /* $videos = Video::where('genre', '日本AV')->where('cover', 'like', '%imgur%')->orderBy('created_at', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
 
         foreach ($videos as $video) {
             // cover
@@ -962,7 +1043,7 @@ class BotController extends Controller
             } else {
                 echo 'thumbL '.$large.' exists<br>';
             }
-        }
+        } */
 
         //---------------------------------------------------------------------------------------------------------
 
