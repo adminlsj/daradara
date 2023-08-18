@@ -25,7 +25,7 @@ class Youjizz
                         return (int) Helper::get_string_between($video->sd, 'validto=', '&');
                     })
                     ->values()
-                    ->slice(0, 3);
+                    ->slice(0, 2);
 
         foreach ($videos as $video) {
             echo 'ID: '.$video->id.' STARTED<br>';
@@ -50,8 +50,6 @@ class Youjizz
                     Log::info("ID#{$video->id} html loop {$loop} failed");
                 }
                 $loop++;
-
-                // sleep(5);
             }
             if (strpos($html, 'var dataEncodings = ') !== false) {
                 $start = explode('var dataEncodings = ', $html);
@@ -85,8 +83,6 @@ class Youjizz
                 echo 'ID: '.$video->id.' UPDATED<br>';
                 Log::info('ID: '.$video->id.' updated');
 
-                sleep(10);
-
             } else {
                 Mail::to('vicky.avionteam@gmail.com')->send(new UserReport('master', 'Youjizz update failed', $video->id, $video->title, $video->sd, 'master', 'master'));
                 $temp = $video->foreign_sd;
@@ -97,6 +93,8 @@ class Youjizz
                 echo 'ID: '.$video->id.' FAILED<br>';
                 Log::info('ID: '.$video->id.' failed');
             }
+
+            sleep(15);
         }
 
         Log::info('Youjizz update ended...');
@@ -139,8 +137,6 @@ class Youjizz
                     Log::info("ID#{$video->id} html loop {$loop} failed");
                 }
                 $loop++;
-
-                // sleep(5);
             }
             if (strpos($html, 'var dataEncodings = ') !== false) {
                 $start = explode('var dataEncodings = ', $html);
@@ -201,7 +197,7 @@ class Youjizz
                         return (int) Helper::get_string_between(head($video->downloads), 'validfrom=', '&');
                     })
                     ->values()
-                    ->slice(0, 3);
+                    ->slice(0, 2);
 
         foreach ($videos as $video) {
             echo 'ID: '.$video->id.' DOWNLOAD STARTED<br>';
@@ -225,8 +221,6 @@ class Youjizz
                     Log::info("ID#{$video->id} html loop {$loop} failed");
                 }
                 $loop++;
-
-                // sleep(5);
             }
             if (strpos($html, 'var dataEncodings = ') !== false) {
                 $start = explode('var dataEncodings = ', $html);
@@ -246,8 +240,6 @@ class Youjizz
                 echo 'ID: '.$video->id.' DOWNLOAD UPDATED<br>';
                 Log::info('ID: '.$video->id.' updated');
 
-                sleep(10);
-
             } else {
                 Mail::to('vicky.avionteam@gmail.com')->send(new UserReport('master', 'Youjizz download failed', $video->id, $video->title, $video->sd, 'master', 'master'));
                 $temp = $video->foreign_sd;
@@ -258,6 +250,7 @@ class Youjizz
                 echo 'ID: '.$video->id.' DOWNLOAD FAILED<br>';
                 Log::info('ID: '.$video->id.' failed');
             }
+            sleep(15);
         }
 
         Log::info('Youjizz downloads update ended...');
@@ -275,7 +268,7 @@ class Youjizz
                         return (int) Helper::get_string_between(head($video->downloads_sc), 'validfrom=', '&');
                     })
                     ->values()
-                    ->slice(0, 3);
+                    ->slice(0, 2);
 
         foreach ($videos as $video) {
             echo 'ID: '.$video->id.' DOWNLOAD STARTED<br>';
@@ -299,8 +292,6 @@ class Youjizz
                     Log::info("ID#{$video->id} html loop {$loop} failed");
                 }
                 $loop++;
-
-                // sleep(5);
             }
             if (strpos($html, 'var dataEncodings = ') !== false) {
                 $start = explode('var dataEncodings = ', $html);
@@ -320,8 +311,6 @@ class Youjizz
                 echo 'ID: '.$video->id.' SC DOWNLOAD UPDATED<br>';
                 Log::info('ID: '.$video->id.' updated');
 
-                sleep(10);
-
             } else {
                 Mail::to('vicky.avionteam@gmail.com')->send(new UserReport('master', 'Youjizz sc download failed', $video->id, $video->title, $video->sd, 'master', 'master'));
                 $temp = $video->foreign_sd;
@@ -332,6 +321,7 @@ class Youjizz
                 echo 'ID: '.$video->id.' SC DOWNLOAD FAILED<br>';
                 Log::info('ID: '.$video->id.' failed');
             }
+            sleep(15);
         }
 
         Log::info('Youjizz downloads sc update ended...');
@@ -371,8 +361,6 @@ class Youjizz
                 curl_close($curl_connection);
                 Log::info("ID#{$video->id} error loop {$loop} failed");
                 $loop++;
-
-                // sleep(5);
             }
             if (strpos($html, 'var dataEncodings = ') !== false) {
                 $start = explode('var dataEncodings = ', $html);
