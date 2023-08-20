@@ -223,7 +223,7 @@
 </div>
 
 <div style="margin-bottom: 15px;">
-  @include('ads.home-banner-square', ['desktop_home_3' => '4999908', 'tablet_home_3' => '4999910', 'mobile_home_3' => '4999912'])
+  @include('ads.home-banner-square', ['desktop_home_3' => '5058640', 'tablet_home_3' => '5058646', 'mobile_home_3' => '5058646'])
 </div>
 
 <script>
