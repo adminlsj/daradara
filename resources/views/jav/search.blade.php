@@ -189,7 +189,7 @@
 	<div id="home-rows-wrapper" class="search-rows-wrapper">
 
 		<div class="hidden-sm hidden-md hidden-lg" style="text-align: center; margin-top: 0px; margin-bottom: -22px;">
-			@include('layouts.exoclick', ['id' => '5016122', 'width' => '300', 'height' => '100'])
+			@include('layouts.exoclick', ['id' => '5058692', 'width' => '300', 'height' => '100'])
 		</div>
 
 		<div style="{{ $results->lastPage() == 1 ? 'margin-bottom: 44px' : 'margin-bottom: -12px;' }}" class="search-pagination mobile-search-pagination hidden-sm hidden-md hidden-lg">{!! $results->appends(request()->query())->onEachSide(1)->links() !!}</div>
