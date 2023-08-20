@@ -24,8 +24,8 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
-        $hCount = 24;
-        $dCount = 18;
+        $hCount = 20;
+        $dCount = 15;
 
         $最新裏番 = Video::where('genre', '裏番')->orWhere(function($query) {
                             $query->where('genre', '泡麵番')->where('foreign_sd', 'like', '%"bangumi"%');

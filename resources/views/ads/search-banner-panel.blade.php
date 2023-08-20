@@ -1,6 +1,6 @@
 <div class="hidden-xs" style="text-align: center; margin-top: 15px; padding-bottom: -100px; height: 275px; overflow: hidden;">
 	<div style="color: white; margin-bottom: 3px; padding: 2px 0px">點點廣告，贊助我們（●´∀｀）ノ♡</div>
-	@include('layouts.exoclick', ['id' => '4372838', 'width' => '300', 'height' => '250'])
+	@include('layouts.exoclick', ['id' => '5058646', 'width' => '300', 'height' => '250'])
 
 	<span style="vertical-align: top; margin-top: 5px;">
 		<!-- JuicyAds v3.1 -->
@@ -16,5 +16,5 @@
 		</script>
 	</span>
 
-	@include('layouts.exoclick', ['id' => '4372838', 'width' => '300', 'height' => '250'])
+	@include('layouts.exoclick', ['id' => '5058646', 'width' => '300', 'height' => '250'])
 </div>

@@ -64,7 +64,7 @@
 		@include('jav.card-wrapper-doujin', ['title' => '他們在看', 'videos' => $他們在看, 'link' => route('jav.search').'?sort=他們在看'])
 
 		<div>
-			@include('ads.home-banner-exoclick', ['desktop_home_1' => '5016100', 'tablet_home_1' => '5016102', 'mobile_home_1' => '5016106'])
+			@include('ads.home-banner-exoclick', ['desktop_home_1' => '5058640', 'tablet_home_1' => '5058646', 'mobile_home_1' => '5058646'])
 		</div>
 
 		@include('jav.card-wrapper-doujin', ['title' => '素人業餘', 'videos' => $素人業餘, 'link' => route('jav.search').'?genre=素人業餘'])
@@ -74,7 +74,7 @@
 		@include('jav.card-wrapper-doujin', ['title' => '國產素人', 'videos' => $國產素人, 'link' => route('jav.search').'?genre=國產素人'])
 
 		<div>
-			@include('ads.home-banner-juicyads', ['tablet_home_2' => '5016110'])
+			@include('ads.home-banner-juicyads', ['tablet_home_2' => '5058646'])
 		</div>
 
 		<div class="artist-row-desktop-margin">
@@ -88,7 +88,7 @@
 	</div>
 
 	<div>
-		@include('ads.home-banner-square', ['desktop_home_3' => '5016114', 'tablet_home_3' => '5016116', 'mobile_home_3' => '5016118'])
+		@include('ads.home-banner-square', ['desktop_home_3' => '5058640', 'tablet_home_3' => '5058646', 'mobile_home_3' => '5058646'])
 	</div>
 </div>
 
