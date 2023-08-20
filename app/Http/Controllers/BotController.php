@@ -925,7 +925,7 @@ class BotController extends Controller
         } */
 
         // download imgurs
-        $videos = Video::where('cover', 'like', '%imgur%')->orderBy('id', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
+        $videos = Video::where('cover', 'like', '%imgur%')->orderBy('id', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 400);
         foreach ($videos as $video) {
             // cover
             $file_name = str_replace('.png', '.jpg', basename($video->cover));
@@ -2798,7 +2798,7 @@ class BotController extends Controller
 
     public function imgurToJsdelivr(Request $request)
     {
-        $videos = Video::where('cover', 'like', '%imgur%')->orderBy('id', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
+        $videos = Video::where('cover', 'like', '%imgur%')->orderBy('id', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 400);
         foreach ($videos as $video) {
             $cover = str_replace('.png', '.jpg', $video->cover);
             $imgur = Helper::get_string_between($cover, 'https://i.imgur.com/', '.jpg');
