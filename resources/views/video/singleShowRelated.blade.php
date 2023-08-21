@@ -11,10 +11,10 @@
   </div>
 
   <div style="display: inline-block; text-decoration: none; color: black; margin-top: -2px; margin-left: 8px; height: 50px; width: calc(100% - 168px); vertical-align: top;">
-    <div class="card-mobile-title" style="color: #e5e5e5;">{{ str_replace("[".$video->user->name."] ", "", $video->title) }}</div>
+    <div class="card-mobile-title" style="color: #e5e5e5;">{{ str_replace("[".$current->user->name."] ", "", $video->title) }}</div>
 
     <div class="card-mobile-genre-wrapper" style="margin-top: 4px; margin-left: -2px">
-      <a href="{{ route('home.search') }}?query={{ $video->user->name }}" style="font-size: 12px; color: dimgray; margin-left: 2px; display: inline-block;" class="card-mobile-user">{{ $video->user->name }}</a>
+      <a href="{{ route('home.search') }}?query={{ $current->user->name }}" style="font-size: 12px; color: dimgray; margin-left: 2px; display: inline-block;" class="card-mobile-user">{{ $current->user->name }}</a>
     </div>
 
     <div style="float: left; margin-top: -3px;">
