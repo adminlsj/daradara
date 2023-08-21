@@ -31,7 +31,7 @@ class JavController extends Controller
 {
     public function index(Request $request)
     {
-        $dCount = 15;
+        $dCount = 12;
 
         $最新JAV = Video::with('user:id,name')->where('genre', '日本AV')->orderBy('created_at', 'desc')->select('id', 'user_id', 'title', 'translations', 'caption', 'cover', 'imgur', 'views', 'duration', 'foreign_sd')->limit($dCount)->get();
 
