@@ -61,7 +61,7 @@ class Jav
                 } else {
                     $imgur = "https://i.imgur.com/Ku2VhgD.jpg";
                     $cover = "https://i.imgur.com/E6mSQA2.jpg";
-                    $foreign_sd = ['cover' => Helper::get_string_between($cover, 'https://i.imgur.com/', '.'), 'thumbnail' => Helper::get_string_between($imgur, 'https://i.imgur.com/', '.'), 'hscangku' => $original_link];
+                    $foreign_sd = ['thumbnail' => Helper::get_string_between($imgur, 'https://i.imgur.com/', '.'), 'hscangku' => $original_link];
                     $video = Video::create([
                         'user_id' => 1,
                         'playlist_id' => 9033,
@@ -238,7 +238,7 @@ class Jav
                 $video->created_at = $created_at;
                 $video->uploaded_at = $created_at;
 
-                $imgur = '';
+                /* $imgur = '';
                 $cover = '';
                 $imgur_url = trim(Helper::get_string_between($missav_html, 'property="og:image" content="', '"'));
                 $image = Image::make($imgur_url);
@@ -271,14 +271,16 @@ class Jav
                 $out = curl_exec($curl);
                 curl_close ($curl);
                 $pms = json_decode($out, true);
-                $cover = $pms['data']['link'];
+                $cover = $pms['data']['link']; */
 
-                $video->imgur = Helper::get_string_between($imgur, 'https://i.imgur.com/', '.');
-                $video->cover = $cover;
+                // $video->imgur = Helper::get_string_between($imgur, 'https://i.imgur.com/', '.');
+                // $video->cover = $cover;
                 $temp = $video->foreign_sd;
                 $temp['thumbnail'] = Helper::get_string_between($imgur, 'https://i.imgur.com/', '.');
                 $temp['characters'] = implode(',', $characters);
                 $temp['missav'] = $missav_link;
+                $temp['poster'] = trim(Helper::get_string_between($missav_html, 'property="og:image" content="', '"'));
+                $video->imgur = $video->id;
                 $video->foreign_sd = $temp;
                 $video->uploaded_at = Carbon::now()->toDateTimeString();
                 $video->save();
