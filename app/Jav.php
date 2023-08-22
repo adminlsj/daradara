@@ -162,6 +162,7 @@ class Jav
                 $temp = $video->foreign_sd;
                 $temp['missav'] = '404';
                 $video->foreign_sd = $temp;
+                $video->imgur = $video->id;
                 $video->save();
 
                 Log::info('Missav update ID#'.$video->id.' failed...');
@@ -276,7 +277,7 @@ class Jav
                 // $video->imgur = Helper::get_string_between($imgur, 'https://i.imgur.com/', '.');
                 // $video->cover = $cover;
                 $temp = $video->foreign_sd;
-                $temp['thumbnail'] = Helper::get_string_between($imgur, 'https://i.imgur.com/', '.');
+                // $temp['thumbnail'] = Helper::get_string_between($imgur, 'https://i.imgur.com/', '.');
                 $temp['characters'] = implode(',', $characters);
                 $temp['missav'] = $missav_link;
                 $temp['poster'] = trim(Helper::get_string_between($missav_html, 'property="og:image" content="', '"'));
