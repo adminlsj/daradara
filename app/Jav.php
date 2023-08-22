@@ -248,7 +248,7 @@ class Jav
                 $curl = curl_init();
                 curl_setopt($curl, CURLOPT_URL, 'https://api.imgur.com/3/image.json');
                 curl_setopt($curl, CURLOPT_TIMEOUT, 30);
-                curl_setopt($curl, CURLOPT_HTTPHEADER, array('Authorization: Client-ID ' . '5b63b1c883ddb72'));
+                curl_setopt($curl, CURLOPT_HTTPHEADER, array('Authorization: Client-ID ' . '072cefc76176835'));
                 curl_setopt($curl, CURLOPT_POST, 1);
                 curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
                 curl_setopt($curl, CURLOPT_POSTFIELDS, $pvars);
