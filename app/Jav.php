@@ -495,8 +495,7 @@ class Jav
                         'translations' => ['JP' => strtoupper($title)],
                         'caption' => '',
                         'sd' => '',
-                        // 'imgur' => Helper::get_string_between($imgur, 'https://i.imgur.com/', '.'),
-                        'imgur' => $video->id,
+                        'imgur' => Helper::get_string_between($imgur, 'https://i.imgur.com/', '.'),
                         'tags' => '素人',
                         'tags_array' => ['素人' => 100],
                         'artist' => 'HSCK',
@@ -508,7 +507,9 @@ class Jav
                         'foreign_sd' => $foreign_sd,
                         'cover' => 'https://i.imgur.com/E6mSQA2.jpg',
                         'uncover' => true,
-                    ]);     
+                    ]);
+                    $video->imgur = $video->id;
+                    $video->save();
 
                     Log::info('Hscangku shirouto update ID#'.$video->id.' success...');
                     sleep(10);
