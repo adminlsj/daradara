@@ -2,7 +2,6 @@
 
 namespace App;
 
-use Mail;
 use App\Video;
 use App\Helper;
 use App\User;
