@@ -14,10 +14,12 @@ use App\Spankbang;
 use Image;
 use SteelyWing\Chinese\Chinese;
 use Redirect;
+use Mail;
+use App\Mail\UserReport;
 
 class Jav
 {
-    public static $base = "http://581hsck.cc";
+    public static $base = "http://644hsck.cc";
 
     public static function uploadHscangku($pages = 10)
     {
@@ -57,13 +59,14 @@ class Jav
                     Log::info('Hscangku update CODE#'.$code.' imported at '.$original_link);
                 } elseif (Video::where('title', 'ilike', $code.' %')->exists()) {
                     Log::alert('Hscangku update CODE#'.$code.' exists at '.$original_link);
+                    Mail::to('vicky.avionteam@gmail.com')->send(new UserReport('master ('.gethostname().')', 'Hscangku update exists', $code, 'Hscangku update CODE#'.$code, $original_link, 'master', 'master'));
                 } else {
                     $imgur = "https://i.imgur.com/Ku2VhgD.jpg";
                     $cover = "https://i.imgur.com/E6mSQA2.jpg";
                     $foreign_sd = ['cover' => Helper::get_string_between($cover, 'https://i.imgur.com/', '.'), 'thumbnail' => Helper::get_string_between($imgur, 'https://i.imgur.com/', '.'), 'hscangku' => $original_link];
                     $video = Video::create([
                         'user_id' => 1,
-                        'playlist_id' => 8876,
+                        'playlist_id' => 9033,
                         'title' => strtoupper($title),
                         'translations' => ['JP' => strtoupper($title)],
                         'caption' => '',
