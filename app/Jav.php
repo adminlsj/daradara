@@ -6,7 +6,6 @@ use App\Video;
 use App\Helper;
 use App\User;
 use Carbon\Carbon;
-use App\Mail\UserReport;
 use Spatie\Browsershot\Browsershot;
 use Illuminate\Support\Facades\Log;
 use App\Spankbang;
