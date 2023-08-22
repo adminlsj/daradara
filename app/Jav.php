@@ -456,11 +456,11 @@ class Jav
             foreach ($page_links as $hscangku_link => $title) {
                 $original_link = "/vodplay/{$hscangku_link}";
                 $code = str_replace('-1-1.html', '', $hscangku_link);
-                // Log::info('Hscangku shirouto update CODE#'.$code.' importing now');
                 if (Video::where('foreign_sd', 'ilike', '%'.$original_link.'%')->exists()) {
                     Log::info('Hscangku shirouto update CODE#'.$code.' imported at '.$original_link);
                 } elseif (Video::where('title', 'ilike', $title.' %')->exists()) {
                     Log::alert('Hscangku shirouto update CODE#'.$code.' exists at '.$original_link);
+                    Mail::to('vicky.avionteam@gmail.com')->send(new UserReport('master ('.gethostname().')', 'Hscangku shirouto update exists', $code, 'Hscangku shirouto update CODE#'.$code, $original_link, 'master', 'master'));
                 } else {
                     /* $imgur = '';
                     $cover = '';
@@ -494,7 +494,8 @@ class Jav
                         'translations' => ['JP' => strtoupper($title)],
                         'caption' => '',
                         'sd' => '',
-                        'imgur' => Helper::get_string_between($imgur, 'https://i.imgur.com/', '.'),
+                        // 'imgur' => Helper::get_string_between($imgur, 'https://i.imgur.com/', '.'),
+                        'imgur' => $video->id,
                         'tags' => '素人',
                         'tags_array' => ['素人' => 100],
                         'artist' => 'HSCK',
@@ -506,7 +507,7 @@ class Jav
                         'foreign_sd' => $foreign_sd,
                         'cover' => 'https://i.imgur.com/E6mSQA2.jpg',
                         'uncover' => true,
-                    ]);
+                    ]);     
 
                     Log::info('Hscangku shirouto update ID#'.$video->id.' success...');
                     sleep(10);
