@@ -415,7 +415,7 @@ class Jav
         Log::info('Hscangku shirouto upload started...');
 
         $chinese = new Chinese();
-        for ($i = 429; $i <= $pages; $i++) { 
+        for ($i = 1; $i <= $pages; $i++) { 
             $base = Jav::$base;
             $page_url = "{$base}/vodtype/15-{$i}.html";
 
@@ -488,9 +488,8 @@ class Jav
                     $created_at = implode('-', $created_at).' '.Carbon::now()->toTimeString();
                     $foreign_sd = ['hscangku' => $original_link, 'poster' => $poster];
                     $video = Video::create([
-                        // HSCK user_id = 575858
                         'user_id' => 575858,
-                        'playlist_id' => 8919,
+                        'playlist_id' => 9033,
                         'title' => strtoupper($title),
                         'translations' => ['JP' => strtoupper($title)],
                         'caption' => '',
