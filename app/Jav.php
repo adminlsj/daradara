@@ -282,6 +282,7 @@ class Jav
                 $temp['missav'] = $missav_link;
                 $temp['poster'] = trim(Helper::get_string_between($missav_html, 'property="og:image" content="', '"'));
                 $video->imgur = $video->id;
+                $video->cover = "https://i.imgur.com/{$video->id}.jpg";
                 $video->foreign_sd = $temp;
                 $video->uploaded_at = Carbon::now()->toDateTimeString();
                 $video->save();
