@@ -37,11 +37,8 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $videos = Video::where('id', '>=', 84037)->where('id', '<', 300035)->where('genre', '日本AV')->get();
-        foreach ($videos as $video) {
-            $video->cover = "https://i.imgur.com/{$video->id}.jpg";
-            $video->save();
-        }
+        $videos = Video::where('cover', 'like', '%imgur%')->whereIn('genre', Video::$genre_jav)->get();
+        return $videos->count();
 
         /* $ids = [];
         $videos = Video::where('genre', '國產素人')->where('cover', 'https://i.imgur.com/E6mSQA2.jpg')->where('created_at', '<=', '2022-11-26 06:19:40')->where('created_at', '>=', '2022-09-28 15:11:14')->orderBy('created_at', 'desc')->get();

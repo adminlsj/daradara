@@ -520,6 +520,12 @@ class Jav
         Log::info('Hscangku shirouto upload ended...');
     }
 
+    public static function downloadPosters()
+    {
+        $videos = Video::where('cover', 'like', '%imgur%')->whereIn('genre', Video::$genre_jav)->get();
+        return $videos->count();
+    }
+
     public static function updateBlankPosters()
     {
         Log::info('Blank posters update started...');
