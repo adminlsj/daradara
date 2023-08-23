@@ -131,6 +131,7 @@ Route::group(['middleware' => 'admin'], function () {
 	Route::get('/updateWithJable', 'BotController@updateWithJable');
 	Route::get('/updateWithAvbebe', 'BotController@updateWithAvbebe');
 	Route::get('/uploadHscangkuShirouto', 'BotController@uploadHscangkuShirouto');
+	Route::get('/downloadPosters', 'BotController@downloadPosters');
 	Route::get('/updateBlankPosters', 'BotController@updateBlankPosters');
 	Route::get('/updateMissavImgur', 'BotController@updateMissavImgur');
 	Route::get('/imgurToJsdelivr', 'BotController@imgurToJsdelivr');

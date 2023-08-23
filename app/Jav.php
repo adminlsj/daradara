@@ -523,7 +523,39 @@ class Jav
     public static function downloadPosters()
     {
         $videos = Video::where('cover', 'like', '%imgur%')->whereIn('genre', Video::$genre_jav)->get();
-        return $videos->count();
+        foreach ($videos as $video) {
+            // thumbnail
+            $huge = $video->imgur.'h.jpg';
+            $large = $video->imgur.'l.jpg';
+
+            if (!file_exists(public_path('thumbnail/'.$huge)) || !file_exists(public_path('thumbnail/'.$large))) {
+
+                Image::make($video->foreign_sd["poster"])
+                    ->fit(1024, 576, function ($constraint) {}, "top")
+                    ->save("thumbnail/{$huge}", 80);
+
+                Image::make($video->foreign_sd["poster"])
+                    ->fit(640, 360, function ($constraint) {}, "top")
+                    ->save("thumbnail/{$large}", 80);
+
+            } else {
+                echo 'Thumbnails exist<br>';
+            }
+
+            if ($video->genre == '日本AV') {
+                // cover
+                $cover = $video->id.'.jpg';
+                if (!file_exists(public_path('cover/'.$cover))) {
+
+                    Image::make($video->foreign_sd["poster"])
+                        ->fit(268, 394, function ($constraint) {}, "right")
+                        ->save("cover/{$cover}", 80);
+
+                } else {
+                    echo 'Cover exists<br>';
+                }
+            }
+        }
     }
 
     public static function updateBlankPosters()
