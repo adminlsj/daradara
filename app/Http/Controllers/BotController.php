@@ -931,7 +931,7 @@ class BotController extends Controller
         } */
 
         // download imgurs
-        $videos = Video::where('cover', 'like', '%imgur%')->orderBy('id', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 400);
+        /* $videos = Video::where('cover', 'like', '%imgur%')->orderBy('id', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 400);
         foreach ($videos as $video) {
             // cover
             $file_name = str_replace('.png', '.jpg', basename($video->cover));
@@ -967,7 +967,7 @@ class BotController extends Controller
             } else {
                 echo 'thumbL '.$large.' exists<br>';
             }
-        }
+        } */
 
         //---------------------------------------------------------------------------------------------------------
 
