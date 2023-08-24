@@ -122,7 +122,7 @@ class UserController extends Controller
             return Redirect::route('user.userEditUpload', ['user' => $user, 'watches' => $user->watches()]);
 
         } elseif ($request->type == 'video') {
-            $original = request()->file('image');
+            /* $original = request()->file('image');
             $image = Image::make($original);
             $image = $image->fit(2880, 1620);
             $image = $image->stream();
@@ -138,7 +138,8 @@ class UserController extends Controller
             $out = curl_exec($curl);
             curl_close ($curl);
             $pms = json_decode($out, true);
-            $url = $pms['data']['link'];
+            $url = $pms['data']['link']; */
+            $url = "https://i.imgur.com/Ku2VhgD.jpg";
 
             if ($url != "") {
 
