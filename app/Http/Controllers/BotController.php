@@ -925,7 +925,7 @@ class BotController extends Controller
         } */
 
         // download imgurs
-        $videos = Video::where('cover', 'like', '%imgur%')->orderBy('id', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 400);
+        $videos = Video::where('cover', 'like', '%imgur%')->orderBy('id', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
         foreach ($videos as $video) {
             // cover
             $file_name = str_replace('.png', '.jpg', basename($video->cover));
@@ -1635,6 +1635,46 @@ class BotController extends Controller
                 }
             }
         }
+    }
+
+    public function checkAvbebe3D(Request $request)
+    {
+        ini_set('max_execution_time', 0);
+        ini_set('memory_limit', '-1');
+
+        $url = "https://avbebe.com/archives/category/3d%e5%8b%95%e7%95%ab";
+        $curl_connection = curl_init($url);
+        curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+        curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+        $html = curl_exec($curl_connection);
+        curl_close($curl_connection);
+        $pages = Helper::get_string_between($html, '<span class="page_info">Page 1 of ', '</span>');
+
+        $news = [];
+        for ($i = 1; $i <= $pages; $i++) { 
+            if ($i == 1) {
+                $url = 'https://avbebe.com/archives/category/3d%e5%8b%95%e7%95%ab';
+            } else {
+                $url = 'https://avbebe.com/archives/category/3d%e5%8b%95%e7%95%ab/page/'.$i;
+            }
+            $curl_connection = curl_init($url);
+            curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+            curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+            $html = curl_exec($curl_connection);
+            curl_close($curl_connection);
+
+            $links = explode('<h3 class="jeg_post_title">', $html);
+            array_shift($links);
+            foreach ($links as $link) {
+                $link = Helper::get_string_between($link, '<a href="', '"');
+                if (!Video::where('foreign_sd', 'like', "%{$link}%")->exists()) {
+                    array_push($news, $link);
+                }
+            }
+        }
+        return $news;
     }
 
     public function editCaptions(Request $request)
