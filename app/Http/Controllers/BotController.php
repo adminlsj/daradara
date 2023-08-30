@@ -37,6 +37,18 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
+        $mp4 = "https://o307ss.video-delivery.net/u5kj76neudh3sdgge65hmzahlay6m5jmrl5ovogglj4ethlgsouedrexmjxq/rwcn1j565o~4ag4FEIGCE?token=nuznhg2j4wmnoc0jqf1b9va8&expiry=1693383740324";
+        $referer = "https://dood.la/e/um4rc9dicwcv5cki9y1wtmdd1tyflt0";
+        $opts = [
+            'http' => [
+               'header' => [
+                    "Referer: https://dood.la/e/um4rc9dicwcv5cki9y1wtmdd1tyflt0"
+                ]
+            ]
+        ];
+        $context = stream_context_create($opts);
+        Storage::disk('local')->put("video/dood.mp4", file_get_contents($mp4, false, $context));
+
         /* $ids = [];
         $videos = Video::where('genre', '國產素人')->where('cover', 'https://i.imgur.com/E6mSQA2.jpg')->where('created_at', '<=', '2022-11-26 06:19:40')->where('created_at', '>=', '2022-09-28 15:11:14')->orderBy('created_at', 'desc')->get();
         foreach ($videos as $video) {
@@ -925,7 +937,7 @@ class BotController extends Controller
         } */
 
         // download imgurs
-        $videos = Video::where('cover', 'like', '%imgur%')->orderBy('id', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
+        /* $videos = Video::where('cover', 'like', '%imgur%')->orderBy('id', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
         foreach ($videos as $video) {
             // cover
             $file_name = str_replace('.png', '.jpg', basename($video->cover));
@@ -961,7 +973,7 @@ class BotController extends Controller
             } else {
                 echo 'thumbL '.$large.' exists<br>';
             }
-        }
+        } */
 
         //---------------------------------------------------------------------------------------------------------
 
