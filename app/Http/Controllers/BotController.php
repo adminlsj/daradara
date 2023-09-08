@@ -37,9 +37,6 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $url = "https://cdn.jsdelivr.net/gh/shakaoffcoco/shakaoffcoco@v1.0.0/asset/cover/E6mSQA2.jpg";
-        return substr($url, 0, strrpos($url, '/') + 1);
-
         /* $ids = [];
         $videos = Video::where('genre', '國產素人')->where('cover', 'https://i.imgur.com/E6mSQA2.jpg')->where('created_at', '<=', '2022-11-26 06:19:40')->where('created_at', '>=', '2022-09-28 15:11:14')->orderBy('created_at', 'desc')->get();
         foreach ($videos as $video) {
