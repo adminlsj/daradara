@@ -2955,4 +2955,57 @@ class BotController extends Controller
             $video->save();
         }
     }
+
+    public function checkImagesExist(Request $request)
+    {
+        $videos = Video::where('foreign_sd', 'not like', '%"imageChecked"%')->orderBy('id', 'desc')->get();
+        foreach ($videos as $video) {
+            // check cover
+            $cover = $video->cover;
+            $ch = curl_init($cover);
+            curl_setopt($ch, CURLOPT_HEADER, true);    // we want headers
+            curl_setopt($ch, CURLOPT_NOBODY, true);    // we don't need body
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
+            curl_setopt($ch, CURLOPT_TIMEOUT,10);
+            $coverOutput = curl_exec($ch);
+            $coverHttpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            curl_close($ch);
+            if ($coverHttpcode != 200) {
+                return "ID#{$video->id} cover does not exists";
+            }
+
+            // check thumbnail huge
+            $thumbH = $video->thumbH();
+            $ch = curl_init($thumbH);
+            curl_setopt($ch, CURLOPT_HEADER, true);    // we want headers
+            curl_setopt($ch, CURLOPT_NOBODY, true);    // we don't need body
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
+            curl_setopt($ch, CURLOPT_TIMEOUT,10);
+            $thumbHoutput = curl_exec($ch);
+            $thumbHHttpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            curl_close($ch);
+            if ($thumbHHttpcode != 200) {
+                return "ID#{$video->id} thumbnail huge does not exists";
+            }
+
+            // check thumbnail large
+            $thumbL = $video->thumbL();
+            $ch = curl_init($thumbL);
+            curl_setopt($ch, CURLOPT_HEADER, true);    // we want headers
+            curl_setopt($ch, CURLOPT_NOBODY, true);    // we don't need body
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
+            curl_setopt($ch, CURLOPT_TIMEOUT,10);
+            $thumbLoutput = curl_exec($ch);
+            $thumbLHttpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            curl_close($ch);
+            if ($thumbLHttpcode != 200) {
+                return "ID#{$video->id} thumbnail large does not exists";
+            }
+
+            $temp = $video->foreign_sd;
+            $temp['imageChecked'] = 'true';
+            $video->foreign_sd = $temp;
+            $video->save();
+        }
+    }
 }
