@@ -183,25 +183,35 @@ class Video extends Model
 
     public function thumbL()
     {
-        if (strpos($this->cover, 'cdn.jsdelivr.net') !== false) {
+        if (strpos($this->cover, 'imgur') !== false) {
+            return "https://i.imgur.com/".$this->imgur."l.jpg";
+
+        } elseif (strpos($this->cover, 'cdn.jsdelivr.net') !== false) {
             $cover = Helper::get_string_between($this->cover, '/cover/', '.jpg');
-            $thumb = str_replace('/cover/'.$cover, '/thumbnail/'.$this->imgur.'l', $this->cover);
-            return $thumb;
+            $thumbL = str_replace('/cover/'.$cover, '/thumbnail/'.$this->imgur.'l', $this->cover);
+            return $thumbL;
 
         } else {
-            return "https://i.imgur.com/".$this->imgur."l.jpg";
+            $base = substr($this->cover, 0, strrpos($this->cover, '/') + 1);
+            $thumbL = $base.$this->imgur.'l.jpg';
+            return $thumbL;
         }
     }
 
     public function thumbH()
     {
-        if (strpos($this->cover, 'cdn.jsdelivr.net') !== false) {
+        if (strpos($this->cover, 'imgur') !== false) {
+            return "https://i.imgur.com/".$this->imgur."h.jpg";
+
+        } elseif (strpos($this->cover, 'cdn.jsdelivr.net') !== false) {
             $cover = Helper::get_string_between($this->cover, '/cover/', '.jpg');
-            $thumb = str_replace('/cover/'.$cover, '/thumbnail/'.$this->imgur.'h', $this->cover);
-            return $thumb;
+            $thumbH = str_replace('/cover/'.$cover, '/thumbnail/'.$this->imgur.'h', $this->cover);
+            return $thumbH;
 
         } else {
-            return "https://i.imgur.com/".$this->imgur."h.jpg";
+            $base = substr($this->cover, 0, strrpos($this->cover, '/') + 1);
+            $thumbH = $base.$this->imgur.'h.jpg';
+            return $thumbH;
         }
     }
 

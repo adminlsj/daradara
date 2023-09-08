@@ -138,7 +138,9 @@ Route::group(['middleware' => 'admin'], function () {
 	Route::get('/updateShiroutoPlaylist', 'BotController@updateShiroutoPlaylist');
 	Route::get('/downloadShiroutoImgur', 'BotController@downloadShiroutoImgur');
 	Route::get('/shiroutoImgurToJsdelivr', 'BotController@shiroutoImgurToJsdelivr');
-	Route::get('/checkImagesExist', 'BotController@checkImagesExist');
+	
+	Route::get('/downloadFromImgur', 'BotController@downloadFromImgur');
+	Route::get('/downloadFromJsdelivr', 'BotController@downloadFromJsdelivr');
 
 	Route::get('/clearLaravelLogs', 'BotController@clearLaravelLogs');
 

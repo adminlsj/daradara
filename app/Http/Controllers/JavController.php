@@ -121,8 +121,7 @@ class JavController extends Controller
             [
                 'title' => '女同歡愉',
                 'link' => route('jav.search').'?tags%5B%5D=女同',
-                // 'imgur' => 'https://cdn.jsdelivr.net/gh/nodadygotti/nodadygotti@v1.0.0/asset/tags/nvtonghuanyu.jpg',
-                'imgur' => 'https://cdn82.akamai-content-network.com/stars-910/cover.jpg?class=thumbnail',
+                'imgur' => 'https://cdn.jsdelivr.net/gh/nodadygotti/nodadygotti@v1.0.0/asset/tags/nvtonghuanyu.jpg',
                 'total' => '511',
             ],
         ];

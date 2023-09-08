@@ -37,6 +37,9 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
+        $url = "https://cdn.jsdelivr.net/gh/shakaoffcoco/shakaoffcoco@v1.0.0/asset/cover/E6mSQA2.jpg";
+        return substr($url, 0, strrpos($url, '/') + 1);
+
         /* $ids = [];
         $videos = Video::where('genre', '國產素人')->where('cover', 'https://i.imgur.com/E6mSQA2.jpg')->where('created_at', '<=', '2022-11-26 06:19:40')->where('created_at', '>=', '2022-09-28 15:11:14')->orderBy('created_at', 'desc')->get();
         foreach ($videos as $video) {
@@ -2956,56 +2959,85 @@ class BotController extends Controller
         }
     }
 
-    public function checkImagesExist(Request $request)
+    public function downloadFromImgur(Request $request)
     {
-        $videos = Video::where('foreign_sd', 'not like', '%"imageChecked"%')->orderBy('id', 'desc')->get();
+        $videos = Video::whereIn('genre', Video::$genre)->orderBy('id', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
         foreach ($videos as $video) {
-            // check cover
-            $cover = $video->cover;
-            $ch = curl_init($cover);
-            curl_setopt($ch, CURLOPT_HEADER, true);    // we want headers
-            curl_setopt($ch, CURLOPT_NOBODY, true);    // we don't need body
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
-            curl_setopt($ch, CURLOPT_TIMEOUT,10);
-            $coverOutput = curl_exec($ch);
-            $coverHttpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-            curl_close($ch);
-            if ($coverHttpcode != 200) {
-                return "ID#{$video->id} cover does not exists";
+            // cover
+            $file_name = str_replace('.png', '.jpg', basename($video->cover));
+            if (!file_exists(public_path('cover/'.$file_name))) {
+                if (file_put_contents('cover/'.$file_name, file_get_contents($video->cover))) {
+                    echo 'cover '.$file_name.' success<br>';
+                } else {
+                    echo 'cover '.$file_name.' failed<br>';
+                }
+            } else {
+                echo 'cover '.$file_name.' exists<br>';
             }
 
-            // check thumbnail huge
-            $thumbH = $video->thumbH();
-            $ch = curl_init($thumbH);
-            curl_setopt($ch, CURLOPT_HEADER, true);    // we want headers
-            curl_setopt($ch, CURLOPT_NOBODY, true);    // we don't need body
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
-            curl_setopt($ch, CURLOPT_TIMEOUT,10);
-            $thumbHoutput = curl_exec($ch);
-            $thumbHHttpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-            curl_close($ch);
-            if ($thumbHHttpcode != 200) {
-                return "ID#{$video->id} thumbnail huge does not exists";
+            // thumbnail
+            $huge = $video->imgur.'h.jpg';
+            if (!file_exists(public_path('thumbnail/'.$huge))) {
+                if (file_put_contents('thumbnail/'.$huge, file_get_contents('https://i.imgur.com/'.$huge))) {
+                    echo 'thumbH '.$huge.' success<br>';
+                } else {
+                    echo 'thumbH '.$huge.' failed<br>';
+                }
+            } else {
+                echo 'thumbH '.$huge.' exists<br>';
             }
 
-            // check thumbnail large
-            $thumbL = $video->thumbL();
-            $ch = curl_init($thumbL);
-            curl_setopt($ch, CURLOPT_HEADER, true);    // we want headers
-            curl_setopt($ch, CURLOPT_NOBODY, true);    // we don't need body
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
-            curl_setopt($ch, CURLOPT_TIMEOUT,10);
-            $thumbLoutput = curl_exec($ch);
-            $thumbLHttpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-            curl_close($ch);
-            if ($thumbLHttpcode != 200) {
-                return "ID#{$video->id} thumbnail large does not exists";
+            $large = $video->imgur.'l.jpg';
+            if (!file_exists(public_path('thumbnail/'.$large))) {
+                if (file_put_contents('thumbnail/'.$large, file_get_contents('https://i.imgur.com/'.$large))) {
+                    echo 'thumbL '.$large.' success<br>';
+                } else {
+                    echo 'thumbL '.$large.' failed<br>';
+                }
+            } else {
+                echo 'thumbL '.$large.' exists<br>';
+            }
+        }
+    }
+
+    public function downloadFromJsdelivr(Request $request)
+    {
+        $videos = Video::whereIn('genre', Video::$genre)->orderBy('id', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
+        foreach ($videos as $video) {
+            // cover
+            $file_name = str_replace('.png', '.jpg', basename($video->cover));
+            if (!file_exists(public_path('cover/'.$file_name))) {
+                if (file_put_contents('cover/'.$file_name, file_get_contents($video->cover))) {
+                    echo 'cover '.$file_name.' success<br>';
+                } else {
+                    echo 'cover '.$file_name.' failed<br>';
+                }
+            } else {
+                echo 'cover '.$file_name.' exists<br>';
             }
 
-            $temp = $video->foreign_sd;
-            $temp['imageChecked'] = 'true';
-            $video->foreign_sd = $temp;
-            $video->save();
+            // thumbnail
+            $huge = $video->imgur.'h.jpg';
+            if (!file_exists(public_path('thumbnail/'.$huge))) {
+                if (file_put_contents('thumbnail/'.$huge, file_get_contents($video->thumbH()))) {
+                    echo 'thumbH '.$huge.' success<br>';
+                } else {
+                    echo 'thumbH '.$huge.' failed<br>';
+                }
+            } else {
+                echo 'thumbH '.$huge.' exists<br>';
+            }
+
+            $large = $video->imgur.'l.jpg';
+            if (!file_exists(public_path('thumbnail/'.$large))) {
+                if (file_put_contents('thumbnail/'.$large, file_get_contents($video->thumbL()))) {
+                    echo 'thumbL '.$large.' success<br>';
+                } else {
+                    echo 'thumbL '.$large.' failed<br>';
+                }
+            } else {
+                echo 'thumbL '.$large.' exists<br>';
+            }
         }
     }
 }
