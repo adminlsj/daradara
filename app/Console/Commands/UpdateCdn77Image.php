@@ -12,7 +12,7 @@ class UpdateCdn77Image extends Command
      *
      * @var string
      */
-    protected $signature = 'hanime1:updateCdn77Image';
+    protected $signature = 'hanime1:update-cdn77Image';
 
     /**
      * The console command description.
