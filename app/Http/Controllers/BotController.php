@@ -2966,8 +2966,9 @@ class BotController extends Controller
         foreach ($videos as $video) {
             // cover
             $file_name = str_replace('.png', '.jpg', basename($video->cover));
+            $cover = '/image/cover/'.$file_name;
             if (!file_exists(public_path('cover/'.$file_name))) {
-                if (file_put_contents('cover/'.$file_name, file_get_contents($video->cover))) {
+                if (file_put_contents('cover/'.$file_name, file_get_contents(Video::getSignedUrlParameter($url, $cover, $token, $expiration)))) {
                     echo 'cover '.$file_name.' success<br>';
                 } else {
                     echo 'cover '.$file_name.' failed<br>';
