@@ -23,7 +23,7 @@
 		</script>
 
 		<div style="position: relative;">
-			<img style="width: 100%; -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0.3)));" src="{{ $random->thumbH()}}" alt="{{ $random->title }}">
+			<img style="width: 100%; -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0.3)));" src="https://img4.qy0.ru/data/2197/80/card_doujin_background.jpg" alt="{{ $random->title }}">
 			<img style="width: 100%; -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0.3))); position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-position: center 0px; object-fit: cover;" src="{{ $random->thumbH()}}" alt="{{ $random->title }}">
 	    </div>
 		<div id="home-banner-wrapper" style="position: absolute; left: 4%; color: white">
