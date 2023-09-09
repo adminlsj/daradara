@@ -139,6 +139,7 @@ Route::group(['middleware' => 'admin'], function () {
 	Route::get('/downloadShiroutoImgur', 'BotController@downloadShiroutoImgur');
 	Route::get('/shiroutoImgurToJsdelivr', 'BotController@shiroutoImgurToJsdelivr');
 
+	Route::get('/downloadFromCdn77', 'BotController@downloadFromCdn77');
 	Route::get('/downloadFromImgur', 'BotController@downloadFromImgur');
 	Route::get('/downloadFromJsdelivr', 'BotController@downloadFromJsdelivr');
 	Route::get('/imageToWnacg', 'BotController@imageToWnacg');

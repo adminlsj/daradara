@@ -2956,9 +2956,56 @@ class BotController extends Controller
         }
     }
 
+    public function downloadFromCdn77(Request $request)
+    {
+        $url = 'vdownload.hembed.com';
+        $expiration = time() + 43200;
+        $token = 'xVEO8rLVgGkUBEBg';
+
+        $videos = Video::whereIn('genre', Video::$genre)->where('cover', 'not like', '%vdownload.hembed.com%')->orderBy('id', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
+        foreach ($videos as $video) {
+            // cover
+            $file_name = str_replace('.png', '.jpg', basename($video->cover));
+            if (!file_exists(public_path('cover/'.$file_name))) {
+                if (file_put_contents('cover/'.$file_name, file_get_contents($video->cover))) {
+                    echo 'cover '.$file_name.' success<br>';
+                } else {
+                    echo 'cover '.$file_name.' failed<br>';
+                }
+            } else {
+                echo 'cover '.$file_name.' exists<br>';
+            }
+
+            // thumbnail
+            $huge = $video->imgur.'h.jpg';
+            $thumbH = '/image/thumbnail/'.$video->imgur.'h.jpg';
+            if (!file_exists(public_path('thumbnail/'.$huge))) {
+                if (file_put_contents('thumbnail/'.$huge, file_get_contents(Video::getSignedUrlParameter($url, $thumbH, $token, $expiration)))) {
+                    echo 'thumbH '.$huge.' success<br>';
+                } else {
+                    echo 'thumbH '.$huge.' failed<br>';
+                }
+            } else {
+                echo 'thumbH '.$huge.' exists<br>';
+            }
+
+            $large = $video->imgur.'l.jpg';
+            $thumbL = '/image/thumbnail/'.$video->imgur.'l.jpg';
+            if (!file_exists(public_path('thumbnail/'.$large))) {
+                if (file_put_contents('thumbnail/'.$large, file_get_contents(Video::getSignedUrlParameter($url, $thumbL, $token, $expiration)))) {
+                    echo 'thumbL '.$large.' success<br>';
+                } else {
+                    echo 'thumbL '.$large.' failed<br>';
+                }
+            } else {
+                echo 'thumbL '.$large.' exists<br>';
+            }
+        }
+    }
+
     public function downloadFromImgur(Request $request)
     {
-        $videos = Video::whereIn('genre', Video::$genre)->orderBy('id', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
+        $videos = Video::whereIn('genre', Video::$genre)->where('cover', 'not like', '%vdownload.hembed.com%')->orderBy('id', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
         foreach ($videos as $video) {
             // cover
             $file_name = str_replace('.png', '.jpg', basename($video->cover));
@@ -2999,7 +3046,7 @@ class BotController extends Controller
 
     public function downloadFromJsdelivr(Request $request)
     {
-        $videos = Video::whereIn('genre', Video::$genre)->orderBy('id', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
+        $videos = Video::whereIn('genre', Video::$genre)->where('cover', 'not like', '%vdownload.hembed.com%')->orderBy('id', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
         foreach ($videos as $video) {
             // cover
             $file_name = str_replace('.png', '.jpg', basename($video->cover));
@@ -3050,7 +3097,7 @@ class BotController extends Controller
 
     public function imageToCdn77(Request $request)
     {
-        $videos = Video::whereIn('genre', Video::$genre)->orderBy('id', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
+        $videos = Video::whereIn('genre', Video::$genre)->where('cover', 'not like', '%vdownload.hembed.com%')->orderBy('id', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
         foreach ($videos as $video) {
             $filename = substr($video->cover, strrpos($video->cover, '/') + 1);
             $url = 'vdownload.hembed.com';
