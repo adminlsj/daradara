@@ -2,7 +2,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:title" content="{{ $video->translations['JP'] }} - Hanime1.me" />
 <meta property="og:description" content="{{ $video->title }} {{ $video->caption }}" />
-<meta property="og:image" content="https://i.imgur.com/{{ $video->imgur }}h.png" />
+<meta property="og:image" content="{{ $video->thumbH() }}" />
 
 <title>{{ $video->translations['JP'] }}&nbsp;-&nbsp;H動漫/裏番/線上看&nbsp;-&nbsp;Hanime1.me</title>
 <meta name="title" content="{{ $video->translations['JP'] }} - H動漫/裏番/線上看 - Hanime1.me">
@@ -15,7 +15,7 @@
   "name": "{{ $video->translations['JP'] }}",
   "description": "{{ $video->title }} {{ $video->caption }}",
   "thumbnailUrl": [
-    "https://i.imgur.com/{{ $video->imgur }}l.png"
+    "{{ $video->thumbH() }}"
    ],
   "uploadDate": "{{ \Carbon\Carbon::parse($video->uploaded_at)->format('Y-m-d\Th:i:s').'+00:00' }}",
   "author": {
