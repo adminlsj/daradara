@@ -3098,7 +3098,7 @@ class BotController extends Controller
 
     public function imageToCdn77(Request $request)
     {
-        $videos = Video::whereIn('genre', Video::$genre)->where('cover', 'not like', '%vdownload.hembed.com%')->orderBy('id', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
+        $videos = Video::where('title', 'like', '%[新番預告]%')->where('cover', 'not like', '%vdownload.hembed.com%')->orderBy('id', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
         foreach ($videos as $video) {
             $filename = substr($video->cover, strrpos($video->cover, '/') + 1);
             $url = 'vdownload.hembed.com';
