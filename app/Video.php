@@ -191,6 +191,14 @@ class Video extends Model
             $thumbL = str_replace('/cover/'.$cover, '/thumbnail/'.$this->imgur.'l', $this->cover);
             return $thumbL;
 
+        } elseif (strpos($this->cover, 'vdownload.hembed.com') !== false) {
+            $url = 'vdownload.hembed.com';
+            $expiration = time() + 43200;
+            $token = 'xVEO8rLVgGkUBEBg';
+            $source = '/image/thumbnail/'.$this->imgur.'l.jpg';
+            $thumbL = Video::getSignedUrlParameter($url, $source, $token, $expiration);
+            return $thumbL;
+
         } else {
             $base = substr($this->cover, 0, strrpos($this->cover, '/') + 1);
             $thumbL = $base.$this->imgur.'l.jpg';
@@ -206,6 +214,14 @@ class Video extends Model
         } elseif (strpos($this->cover, 'cdn.jsdelivr.net') !== false) {
             $cover = Helper::get_string_between($this->cover, '/cover/', '.jpg');
             $thumbH = str_replace('/cover/'.$cover, '/thumbnail/'.$this->imgur.'h', $this->cover);
+            return $thumbH;
+
+        } elseif (strpos($this->cover, 'vdownload.hembed.com') !== false) {
+            $url = 'vdownload.hembed.com';
+            $expiration = time() + 43200;
+            $token = 'xVEO8rLVgGkUBEBg';
+            $source = '/image/thumbnail/'.$this->imgur.'h.jpg';
+            $thumbH = Video::getSignedUrlParameter($url, $source, $token, $expiration);
             return $thumbH;
 
         } else {

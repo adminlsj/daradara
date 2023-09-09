@@ -3037,4 +3037,28 @@ class BotController extends Controller
             }
         }
     }
+
+    public function imageToWnacg(Request $request)
+    {
+        $videos = Video::whereIn('genre', Video::$genre)->orderBy('id', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
+        foreach ($videos as $video) {
+            $filename = substr($video->cover, strrpos($video->cover, '/') + 1);
+            $video->cover = "{$request->base}".$filename;
+            $video->save();
+        }
+    }
+
+    public function imageToCdn77(Request $request)
+    {
+        $videos = Video::whereIn('genre', Video::$genre)->orderBy('id', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
+        foreach ($videos as $video) {
+            $filename = substr($video->cover, strrpos($video->cover, '/') + 1);
+            $url = 'vdownload.hembed.com';
+            $expiration = time() + 43200;
+            $token = 'xVEO8rLVgGkUBEBg';
+            $source = '/image/cover/'.$filename;
+            $video->cover = Video::getSignedUrlParameter($url, $source, $token, $expiration);
+            $video->save();
+        }
+    }
 }
