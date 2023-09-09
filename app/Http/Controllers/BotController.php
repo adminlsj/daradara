@@ -3006,12 +3006,12 @@ class BotController extends Controller
 
     public function downloadFromImgur(Request $request)
     {
-        $videos = Video::whereIn('genre', Video::$genre)->where('cover', 'not like', '%vdownload.hembed.com%')->orderBy('id', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
+        $videos = Video::where('title', 'like', '%[新番預告]%')->where('cover', 'not like', '%vdownload.hembed.com%')->orderBy('id', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
         foreach ($videos as $video) {
             // cover
             $file_name = str_replace('.png', '.jpg', basename($video->cover));
             if (!file_exists(public_path('cover/'.$file_name))) {
-                if (file_put_contents('cover/'.$file_name, file_get_contents($video->cover))) {
+                if (file_put_contents('cover/'.$file_name, file_get_contents('https://i.imgur.com/'.$file_name))) {
                     echo 'cover '.$file_name.' success<br>';
                 } else {
                     echo 'cover '.$file_name.' failed<br>';

@@ -1,31 +1,31 @@
 <div style="z-index: 10000 !important; border-top: 1px solid #222222; {{ Request::is('*watch*') ? 'display:none;' : '' }}" class="bottom-nav hidden-lg hidden-md white-theme-nav-bottom">
   <a href="/jav">
     @if (Request::is('jav'))
-      <img style="height: 18px; margin-top: 8px;" src="https://cdn.jsdelivr.net/gh/guaishushukanlifan/Project-H@v2.0.0/asset/icon/home-filled.png">
+      <img style="height: 18px; margin-top: 8px;" src="https://img4.qy0.ru/data/2197/80/home-filled.png">
       <div style="font-size: 9px; color: white; margin-top: 4px;">主頁</div>
     @else
-      <img style="height: 18px; margin-top: 8px;" src="https://cdn.jsdelivr.net/gh/guaishushukanlifan/Project-H@v2.0.0/asset/icon/home.png">
+      <img style="height: 18px; margin-top: 8px;" src="https://img4.qy0.ru/data/2197/80/home.png">
       <div style="font-size: 9px; color: white; margin-top: 4px;">主頁</div>
     @endif
   </a>
   <a href="{{ route('jav.search') }}">
-    <img style="height: 18px; margin-top: 8px;" src="https://cdn.jsdelivr.net/gh/tatakanuta/tatakanuta@v1.0.0/asset/icon/search.png">
+    <img style="height: 18px; margin-top: 8px;" src="https://img4.qy0.ru/data/2197/80/search.png">
     <div style="font-size: 9px; color: white; margin-top: 4px;">搜索</div>
   </a>
   <a href="{{ Auth::check() ? route('user.userEditUpload', Auth::user()) : route('login') }}">
-    <img style="height: 33px; margin-top: 5px;" src="https://cdn.jsdelivr.net/gh/guaishushukanlifan/Project-H@v2.0.0/asset/icon/create.png">
+    <img style="height: 33px; margin-top: 5px;" src="https://img4.qy0.ru/data/2197/80/create.png">
   </a>
   <a href="{{ route('playlist.index') }}">
     @if (Request::is('*playlists*'))
-      <img style="height: 18px; margin-top: 8px;" src="https://cdn.jsdelivr.net/gh/guaishushukanlifan/Project-H@v2.0.0/asset/icon/playlist-filled.png">
+      <img style="height: 18px; margin-top: 8px;" src="https://img4.qy0.ru/data/2197/80/playlist-filled.png">
       <div style="font-size: 9px; color: white; margin-top: 4px;">我的清單</div>
     @else
-      <img style="height: 18px; margin-top: 8px;" src="https://cdn.jsdelivr.net/gh/guaishushukanlifan/Project-H@v2.0.0/asset/icon/playlist.png">
+      <img style="height: 18px; margin-top: 8px;" src="https://img4.qy0.ru/data/2197/80/playlist.png">
       <div style="font-size: 9px; color: white; margin-top: 4px;">我的清單</div>
     @endif
   </a>
   <a style="cursor: pointer;" data-toggle="modal" data-target="#links-modal">
-    <img style="height: 18px; margin-top: 8px;" src="https://cdn.jsdelivr.net/gh/guaishushukanlifan/Project-H@v2.0.0/asset/icon/genre.png">
+    <img style="height: 18px; margin-top: 8px;" src="https://img4.qy0.ru/data/2197/80/genre.png">
     <div style="font-size: 9px; color: white; margin-top: 4px;">全部分類</div>
   </a>
 </div>
