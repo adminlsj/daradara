@@ -37,6 +37,8 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
+        return Helper::sign_bcdn_url('https://m3u8.statically-cdn.com/hls/85321.m3u8', env('BUNNY_TOKEN'), 43200);
+
         /* $ids = [];
         $videos = Video::where('genre', '國產素人')->where('cover', 'https://i.imgur.com/E6mSQA2.jpg')->where('created_at', '<=', '2022-11-26 06:19:40')->where('created_at', '>=', '2022-09-28 15:11:14')->orderBy('created_at', 'desc')->get();
         foreach ($videos as $video) {

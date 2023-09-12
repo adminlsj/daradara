@@ -11,7 +11,7 @@
         <h5>帳戶資料</h5>
     </a>
     <a class="user-modal-link" href="{{ route('playlist.index') }}">
-        <img src="https://cdn.jsdelivr.net/gh/guaishushukanlifan/Project-H@v2.0.0/asset/icon/playlist.png">
+        <img src="https://img4.qy0.ru/data/2197/80/playlist.png">
         <h5>我的清單</h5>
     </a>
     <a class="user-modal-link" href="{{ route('playlist.show') }}?list=WL">

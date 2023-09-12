@@ -52,7 +52,7 @@
         </div>
       @else
         <div style="margin-top: 7px; margin-bottom: 0px; text-align: center">
-          @include('layouts.exoclick', ['id' => '5058666', 'width' => '728', 'height' => '90'])
+          @include('layouts.exoclick', ['id' => '4372406', 'width' => '728', 'height' => '90'])
         </div>
       @endif
 
