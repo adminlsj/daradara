@@ -3049,7 +3049,7 @@ class BotController extends Controller
 
     public function downloadFromJsdelivr(Request $request)
     {
-        $videos = Video::whereIn('genre', Video::$genre)->where('cover', 'not like', '%vdownload.hembed.com%')->orderBy('id', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
+        $videos = Video::whereIn('genre', Video::$genre)->where('cover', 'like', '%img4.qy0.ru/data/2200/80/%')->orderBy('created_at', 'desc')->select('id', 'cover', 'imgur')->get();
         foreach ($videos as $video) {
             // cover
             $file_name = str_replace('.png', '.jpg', basename($video->cover));
