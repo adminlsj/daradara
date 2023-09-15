@@ -2964,10 +2964,10 @@ class BotController extends Controller
         $expiration = time() + 43200;
         $token = 'xVEO8rLVgGkUBEBg';
 
-        $videos = Video::whereIn('genre', Video::$genre)->where('cover', 'not like', '%vdownload.hembed.com%')->orderBy('id', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
+        $videos = Video::where('cover', 'like', '%vdownload.hembed.com%')->orderBy('created_at', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
         foreach ($videos as $video) {
             // cover
-            $file_name = str_replace('.png', '.jpg', basename($video->cover));
+            $file_name = explode('?', str_replace('.png', '.jpg', basename($video->cover)))[0];
             $cover = '/image/cover/'.$file_name;
             if (!file_exists(public_path('cover/'.$file_name))) {
                 if (file_put_contents('cover/'.$file_name, file_get_contents(Video::getSignedUrlParameter($url, $cover, $token, $expiration)))) {
@@ -3090,11 +3090,12 @@ class BotController extends Controller
 
     public function imageToWnacg(Request $request)
     {
-        $videos = Video::whereIn('genre', Video::$genre)->orderBy('id', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
+        $videos = Video::where('cover', 'like', '%vdownload.hembed.com%')->orderBy('created_at', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
         foreach ($videos as $video) {
-            $filename = substr($video->cover, strrpos($video->cover, '/') + 1);
+            $filename = explode('?', str_replace('.png', '.jpg', basename($video->cover)))[0];
             $video->cover = "{$request->base}".$filename;
             $video->save();
+            $video;
         }
     }
 
