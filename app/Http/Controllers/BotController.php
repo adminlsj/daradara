@@ -2862,7 +2862,6 @@ class BotController extends Controller
             $imgur = Helper::get_string_between($cover, 'https://i.imgur.com/', '.jpg');
             $video->cover = $request->base.$imgur.'.jpg';
             $video->save();
-            return $video;
         }
     }
 
