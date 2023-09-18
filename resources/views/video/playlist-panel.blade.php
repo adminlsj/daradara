@@ -11,7 +11,7 @@
     @foreach ($videos as $video)
       <div style="padding: 10px 10px;" class="related-watch-wrap multiple-link-wrapper {{ $video->id == $current->id ? 'videos-scroll' : ''}}">
         <a class="overlay" href="{{ route('video.watch') }}?v={{ $video->id }}"></a>
-        @include('video.singleShowRelated', ['source' => 'video'])
+        @include('video.singleShowRelated', ['source' => $current])
       </div>
     @endforeach
   </div>

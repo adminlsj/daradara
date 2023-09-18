@@ -37,7 +37,18 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        return Helper::sign_bcdn_url('https://m3u8.statically-cdn.com/hls/85321.m3u8', env('BUNNY_TOKEN'), 43200);
+        $id = 85069;
+        $huge = $id.'h.jpg';
+        $large = $id.'l.jpg';
+        $poster = "https://666548.xyz/images/2023/09/03/65b9e4e813a2cfd3071a076459e56cd6.jpg";
+
+        Image::make($poster)
+                    ->fit(1024, 576, function ($constraint) {}, "top")
+                    ->save("thumbnail/{$huge}", 80);
+
+        Image::make($poster)
+            ->fit(640, 360, function ($constraint) {}, "top")
+            ->save("thumbnail/{$large}", 80);
 
         /* $ids = [];
         $videos = Video::where('genre', '國產素人')->where('cover', 'https://i.imgur.com/E6mSQA2.jpg')->where('created_at', '<=', '2022-11-26 06:19:40')->where('created_at', '>=', '2022-09-28 15:11:14')->orderBy('created_at', 'desc')->get();
