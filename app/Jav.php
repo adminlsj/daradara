@@ -64,7 +64,7 @@ class Jav
                     $foreign_sd = ['thumbnail' => Helper::get_string_between($imgur, 'https://i.imgur.com/', '.'), 'hscangku' => $original_link];
                     $video = Video::create([
                         'user_id' => 1,
-                        'playlist_id' => 9033,
+                        'playlist_id' => 9162,
                         'title' => strtoupper($title),
                         'translations' => ['JP' => strtoupper($title)],
                         'caption' => '',
