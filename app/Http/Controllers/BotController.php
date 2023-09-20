@@ -37,10 +37,10 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $id = 85069;
+        /* $id = 84803;
         $huge = $id.'h.jpg';
         $large = $id.'l.jpg';
-        $poster = "https://666548.xyz/images/2023/09/03/65b9e4e813a2cfd3071a076459e56cd6.jpg";
+        $poster = "https://cdn82.akamai-content-network.com/dldss-220/cover.jpg?class=normal";
 
         Image::make($poster)
                     ->fit(1024, 576, function ($constraint) {}, "top")
@@ -48,7 +48,7 @@ class BotController extends Controller
 
         Image::make($poster)
             ->fit(640, 360, function ($constraint) {}, "top")
-            ->save("thumbnail/{$large}", 80);
+            ->save("thumbnail/{$large}", 80); */
 
         /* $ids = [];
         $videos = Video::where('genre', '國產素人')->where('cover', 'https://i.imgur.com/E6mSQA2.jpg')->where('created_at', '<=', '2022-11-26 06:19:40')->where('created_at', '>=', '2022-09-28 15:11:14')->orderBy('created_at', 'desc')->get();
