@@ -7,7 +7,7 @@
 </div>
 <div class="no-select" style="padding: 9px 0px 0px 0px">
     <a class="user-modal-link" href="{{ route('user.edit', Auth::user()) }}">
-        <img src="https://cdn.jsdelivr.net/gh/guaishushukanlifan/Project-H@v2.0.0/asset/icon/account.png">
+        <img src="https://img4.qy0.ru/data/2205/36/account.png">
         <h5>帳戶資料</h5>
     </a>
     <a class="user-modal-link" href="{{ route('playlist.index') }}">
@@ -15,18 +15,18 @@
         <h5>我的清單</h5>
     </a>
     <a class="user-modal-link" href="{{ route('playlist.show') }}?list=WL">
-        <img src="https://cdn.jsdelivr.net/gh/guaishushukanlifan/Project-H@v2.0.0/asset/icon/later.png">
+        <img src="https://img4.qy0.ru/data/2205/36/later.png">
         <h5>稍後觀看</h5>
     </a>
     <a class="user-modal-link" href="{{ route('user.edit', Auth::user()) }}">
-        <img src="https://cdn.jsdelivr.net/gh/guaishushukanlifan/Project-H@v2.0.0/asset/icon/language.png">
+        <img src="https://img4.qy0.ru/data/2205/36/language.png">
         <h5>語言設定</h5>
     </a>
     <hr id="user-modal-hr">
     <form action="{{ route('logout') }}" method="POST">
         {{ csrf_field() }}
         <button id="user-modal-logout-btn" class="no-button-style user-modal-link" type="submit">
-            <img style="width: 19px; display: inline-block;" src="https://cdn.jsdelivr.net/gh/guaishushukanlifan/Project-H@v2.0.0/asset/icon/logout.png">
+            <img style="width: 19px; display: inline-block;" src="https://img4.qy0.ru/data/2205/36/logout.png">
             <h5 style="display: inline-block; margin-left: 15px; color: white; vertical-align: middle;">登出</h5>
         </button>
     </form>
