@@ -29,7 +29,7 @@ class Video extends Model
     ];
 
     public static $vod_servers = [
-        [1, 2]
+        [1, 2, 3]
     ];
 
     public static $genre = [
