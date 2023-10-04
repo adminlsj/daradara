@@ -37,23 +37,6 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        while (true) {
-            $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-            $charactersLength = strlen($characters);
-            $randomString = '';
-            for ($i = 0; $i < 20; $i++) {
-                $randomString .= $characters[random_int(0, $charactersLength - 1)];
-            }
-
-            $url = "https://avbebe.com/?s={$randomString}";
-            $curl_connection = curl_init($url);
-            curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
-            curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
-            $html = curl_exec($curl_connection);
-            curl_close($curl_connection);
-        }
-
         /* $id = 84803;
         $huge = $id.'h.jpg';
         $large = $id.'l.jpg';
@@ -955,7 +938,7 @@ class BotController extends Controller
         } */
 
         // download imgurs
-        $videos = Video::where('cover', 'like', '%imgur%')->orderBy('id', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
+        /* $videos = Video::where('cover', 'like', '%imgur%')->orderBy('id', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
         foreach ($videos as $video) {
             // cover
             $file_name = str_replace('.png', '.jpg', basename($video->cover));
@@ -991,7 +974,7 @@ class BotController extends Controller
             } else {
                 echo 'thumbL '.$large.' exists<br>';
             }
-        }
+        } */
 
         //---------------------------------------------------------------------------------------------------------
 
