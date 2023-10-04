@@ -38,10 +38,10 @@
 
 	<div class="hidden-sm hidden-md hidden-lg" style="position: relative;">
 		<div style="position: relative;">
-			<img style="/* width: 116%; */ width: 107%;" src="https://img4.qy0.ru/data/2197/80/home_poster_background.jpg">
+			<img style="/* width: 116%; */ width: 110%;" src="https://img4.qy0.ru/data/2197/80/home_poster_background.jpg">
 			<img style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-position: center 0px; object-fit: cover; -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0))); -webkit-filter: brightness(40%) blur(50px); filter: brightness(40%) blur(50px);" src="{{ $random->cover }}">
 
-			<div style="position: absolute; top: 107px; left: 50%; -webkit-transform: translateX(-50%); transform: translateX(-50%); width: 88%; height: 71%;">
+			<div style="position: absolute; top: 110px; left: 50%; -webkit-transform: translateX(-50%); transform: translateX(-50%); width: 88%; height: 71%;">
 				<div style="border: 1px solid rgba(255,255,255,.1); border-radius: 10px; height: 100%; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
 					<img style="width: 100%; height: 100%; object-fit: cover; object-position: center 0px; border-radius: 10px; -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));" src="{{ $random->cover }}">
 				</div>
