@@ -46,8 +46,8 @@
 					<img style="width: 100%; height: 100%; object-fit: cover; object-position: center 0px; border-radius: 10px; -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));" src="{{ $random->cover }}">
 				</div>
 				<div style="position: absolute; left: 50%; -webkit-transform: translateX(-50%); transform: translateX(-50%); width: 96%; bottom: 3.5%; text-align: center; color: white">
-					<h3 style="font-weight: bold; font-size: 20px;"><span style="color: crimson">H</span>anime1<span style="color: crimson">.</span>me</h3>
-					<h1 style="font-size: 28px; font-weight: bold; margin: 0; line-height: 35px; margin-top: -2px; margin-bottom: -2px">{{ $random->title }}</h1>
+					<h3 style="font-weight: bold; font-size: 18px;"><span style="color: crimson">H</span>anime1<span style="color: crimson">.</span>me</h3>
+					<h1 style="font-size: 26px; font-weight: bold; margin: 0; line-height: 35px; margin-top: -2px; margin-bottom: -2px">{{ $random->title }}</h1>
 					<h4 style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; line-height: 16px; font-size: 12px; width: 92%; margin-left: 4%;">{{ str_replace(' [中文字幕]', '', $random->translations['JP']) }} • 中文字幕 • {{ $random->caption }}</h4>
 					<div style="margin-top: 15px; width: 100%">
 						<a href="{{ route('video.watch') }}?v={{ $random->id }}" class="hover-opacity-all home-banner-btn home-banner-play-btn play-btn" target="_blank" style="cursor: pointer; font-size: 14px; text-decoration: none; color: black;">
