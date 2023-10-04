@@ -786,6 +786,19 @@ th, td {
   line-height: 68px;
 }
 
+.home-genre-tabs-wrapper {
+  display: inline-block; 
+  margin-right: 5px; 
+  cursor: pointer;
+}
+
+.home-genre-tabs {
+  color: #e5e5e5; 
+  border: 1px solid rgba(255,255,255,.4); 
+  padding: 7px 13px; 
+  border-radius: 30px;
+}
+
 #main-nav, #main-nav-home {
   position: fixed; 
   top: 0; 
@@ -3387,7 +3400,7 @@ div.sticky {
     height: 100px !important; 
     /* background-image: linear-gradient(to bottom,rgba(0,0,0,0.5) 60%,rgba(0,0,0,0)) !important;
     background-color: transparent !important; */
-    background: linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.4));
+    /*  background: linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.4)); */
   }
 
   #hentai-main-nav {
