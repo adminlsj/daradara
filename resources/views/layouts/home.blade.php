@@ -42,7 +42,7 @@
 			<img style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-position: center 0px; object-fit: cover; -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0))); -webkit-filter: brightness(50%) blur(50px); filter: brightness(50%) blur(50px);" src="{{ $random->cover }}">
 
 			<div style="position: absolute; top: 107px; left: 50%; -webkit-transform: translateX(-50%); transform: translateX(-50%); width: 88%; height: 71%;">
-				<div style="border: 1px solid rgba(255,255,255,.1); border-radius: 10px; height: 100%;">
+				<div style="border: 1px solid rgba(255,255,255,.1); border-radius: 10px; height: 100%; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
 					<img style="width: 100%; height: 100%; object-fit: cover; object-position: center 0px; border-radius: 10px; -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));" src="{{ $random->cover }}">
 				</div>
 				<div style="position: absolute; left: 50%; -webkit-transform: translateX(-50%); transform: translateX(-50%); width: 96%; bottom: 3.5%; text-align: center; color: white">
