@@ -18,11 +18,14 @@
 
 <div class="hidden-sm hidden-md hidden-lg hidden-xl video-buttons-wrapper desktop-inline-mobile-block hide-scrollbar" style="position: absolute; top: 38px; width: 100%; text-align: center; z-index: 99; height: 40px; line-height: 40px; overflow-y: hidden; padding: 0px 4%;">
   <div class="home-genre-tabs-wrapper"><a href="{{ route('home.search') }}?genre=裏番" class="home-genre-tabs" style="text-decoration: none;">裏番</a></div>
-  <div class="home-genre-tabs-wrapper"><a href="{{ route('home.search') }}?genre=裏番" class="home-genre-tabs" style="text-decoration: none;">泡麵番</a></div>
-  <div class="home-genre-tabs-wrapper"><a href="{{ route('home.search') }}?genre=裏番" class="home-genre-tabs" style="text-decoration: none;">Motion Anime</a></div>
+  <div class="home-genre-tabs-wrapper"><a href="{{ route('home.search') }}?genre=泡麵番" class="home-genre-tabs" style="text-decoration: none;">泡麵番</a></div>
+  <div class="home-genre-tabs-wrapper"><a href="{{ route('home.search') }}?genre=Motion+Anime" class="home-genre-tabs" style="text-decoration: none;">Motion Anime</a></div>
   <div class="home-genre-tabs-wrapper"><a href="{{ route('home.search') }}?genre=3D動畫" class="home-genre-tabs" style="text-decoration: none;">3D動畫</a></div>
   <div class="home-genre-tabs-wrapper"><a href="{{ route('home.search') }}?genre=同人作品" class="home-genre-tabs" style="text-decoration: none;">同人作品</a></div>
-  <div class="home-genre-tabs-wrapper"><a style="color: white; text-decoration: none;" data-toggle="modal" data-target="#genre-modal">全部類型<i class="material-icons" style="vertical-align: middle; margin-top: -3px; margin-left: 0px; margin-right: -20px;">arrow_drop_down</i></a></div>
+  <div class="home-genre-tabs-wrapper"><a href="{{ route('home.search') }}?genre=Cosplay" class="home-genre-tabs" style="text-decoration: none;">Cosplay</a></div>
+  <div class="home-genre-tabs-wrapper"><a href="/previews/{{ Carbon\Carbon::now()->format('Ym') }}" class="home-genre-tabs" style="text-decoration: none;">新番預告</a></div>
+  <div class="home-genre-tabs-wrapper"><a href="{{ route('comic.index') }}" class="home-genre-tabs" style="text-decoration: none;">H漫畫</a></div>
+  <div class="home-genre-tabs-wrapper"><a href="https://cherrytale.ero-labs.com/lp/landing_page_zh.html" class="home-genre-tabs" style="text-decoration: none;" target="_blank">黃油</a></div>
 </div>
 
 <form id="hentai-form" action="{{ route('home.search') }}" method="GET">
