@@ -16,6 +16,8 @@
 		<a style="color: white; text-decoration: none; line-height: 30px" href="/previews/{{ Carbon\Carbon::now()->format('Ym') }}"><div class="simple-dropdown-item genre-option">新番預告</div></a>
 		<hr style="margin: 0; border-color: #323434;">
 		<a style="color: white; text-decoration: none; line-height: 30px" href="{{ route('comic.index') }}"><div class="simple-dropdown-item genre-option">H漫畫</div></a>
+    <hr style="margin: 0; border-color: #323434;">
+    <a style="color: white; text-decoration: none; line-height: 30px" href="https://cherrytale.ero-labs.com/lp/landing_page_zh.html" target="_blank"><div class="simple-dropdown-item">黃油</div></a>
 		<hr class="hidden-sm hidden-md hidden-lg hidden-xl" style="margin: 0; border-color: #323434;">
       </div>
 
