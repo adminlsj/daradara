@@ -38,7 +38,7 @@
 
 	<div class="hidden-sm hidden-md hidden-lg" style="position: relative;">
 		<div style="position: relative;">
-			<img style="/* width: 116%; */ width: 105%;" src="https://img4.qy0.ru/data/2197/80/home_poster_background.jpg">
+			<img style="/* width: 116%; */ width: 106%;" src="https://img4.qy0.ru/data/2197/80/home_poster_background.jpg">
 			<img style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-position: center 0px; object-fit: cover; -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0))); -webkit-filter: brightness(50%) blur(50px); filter: brightness(50%) blur(50px);" src="{{ $random->cover }}">
 
 			<div style="position: absolute; top: 107px; left: 50%; -webkit-transform: translateX(-50%); transform: translateX(-50%); width: 88%; height: 71%;">
