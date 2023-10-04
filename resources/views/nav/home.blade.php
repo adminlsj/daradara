@@ -16,7 +16,7 @@
   <a class="nav-icon pull-right" href="/previews/{{ Carbon\Carbon::now()->format('Ym') }}"><span style="vertical-align: middle; font-size: 24px" class="material-icons-outlined">cast</span></a>
 </div>
 
-<div class="hidden-sm hidden-md hidden-lg hidden-xl video-buttons-wrapper desktop-inline-mobile-block" style="position: absolute; top: 40px; width: 100%; text-align: center; z-index: 99; height: 40px; line-height: 40px; overflow-y: hidden; padding: 0px 4%;">
+<div class="hidden-sm hidden-md hidden-lg hidden-xl video-buttons-wrapper desktop-inline-mobile-block hide-scrollbar" style="position: absolute; top: 40px; width: 100%; text-align: center; z-index: 99; height: 40px; line-height: 40px; overflow-y: hidden; padding: 0px 4%;">
   <div class="home-genre-tabs-wrapper"><a href="{{ route('home.search') }}?genre=裏番" class="home-genre-tabs" style="text-decoration: none;">裏番</a></div>
   <div class="home-genre-tabs-wrapper"><a href="{{ route('home.search') }}?genre=泡麵番" class="home-genre-tabs" style="text-decoration: none;">泡麵番</a></div>
   <div class="home-genre-tabs-wrapper"><a href="{{ route('home.search') }}?genre=Motion+Anime" class="home-genre-tabs" style="text-decoration: none;">Motion Anime</a></div>
