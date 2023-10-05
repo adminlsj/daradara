@@ -47,7 +47,7 @@
           </div>
           <div class="col-xs-6" style="width: 50%; padding-left: 0;">
             <a style="color: white; text-decoration: none;" href="{{ route('comic.index') }}">
-              <div class="simple-dropdown-item genre-option">H漫畫</div>
+              <div class="simple-dropdown-item">H漫畫</div>
             </a>
           </div>
         </div>
@@ -92,7 +92,7 @@
           </div>
           <div class="col-xs-6" style="width: 50%; padding-left: 0;">
             <a style="color: white; text-decoration: none;" href="https://cherrytale.ero-labs.com/lp/landing_page_zh.html" target="_blank">
-              <div class="simple-dropdown-item genre-option">無碼黄油</div>
+              <div class="simple-dropdown-item">無碼黄油</div>
             </a>
           </div>
         </div>
