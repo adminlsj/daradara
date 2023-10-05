@@ -91,8 +91,23 @@
             </a>
           </div>
           <div class="col-xs-6" style="width: 50%; padding-left: 0;">
-            <a style="color: white; text-decoration: none;" href="https://discord.gg/WWYc9m9CUQ" target="_blank">
-              <div class="simple-dropdown-item genre-option">Discord</div>
+            <a style="color: white; text-decoration: none;" href="https://cherrytale.ero-labs.com/lp/landing_page_zh.html" target="_blank">
+              <div class="simple-dropdown-item genre-option">黄油</div>
+            </a>
+          </div>
+        </div>
+
+        <hr style="margin: 0; border-color: #333333;">
+
+         <div class="row" style="text-align: center;">
+          <div class="col-xs-6" style="width: 50%; padding-right: 0; border-right: 1px solid #333333;">
+            <a style="color: white; text-decoration: none;" href="https://discord.gg/A4cxaC3nw" target="_blank">
+              <div class="simple-dropdown-item">Discord</div>
+            </a>
+          </div>
+          <div class="col-xs-6" style="width: 50%; padding-left: 0;">
+            <a style="color: white; text-decoration: none;" href="https://discord.gg/A4cxaC3nw" target="_blank">
+              <div class="simple-dropdown-item">聯絡我們</div>
             </a>
           </div>
         </div>
