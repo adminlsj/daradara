@@ -46,10 +46,10 @@
       @endif
 
       @if ($is_mobile)
-        <div id="mobile-ad" class="hidden-md hidden-lg hide-scrollbar" style="text-align: center; padding-top: 5px; padding-bottom: 0px; background-color: black; position: relative; margin-left: -5px; margin-right: -5px; overflow-y: scroll;">
-          @include('layouts.exoclick', ['id' => '5058654', 'width' => '300', 'height' => '100'])
-          <!-- <iframe width="728px" height="90px" style="display:block" marginWidth="0" marginHeight="0" frameBorder="no" src="https://creative.kbnmnl.com/widgets/v4/Universal?campaignId=728x90&modelPageOption=model&tag=girls%2Fchinese%2Cgirls%2Fjapanese&thumbsMargin=5&hideButton=1&hideTitle=1&userId=68266da2436a81581f441c04a73d1525467dff2da85808235979b437cff6f852&quality=240p&autoplay=all&autoplayForce=1"></iframe> -->
-          <div id="close-mobile-ad-btn" style="position: absolute; top: 5px; right: 1px; cursor: pointer; border: 1px solid white;"><i style="vertical-align: middle; color: white;" class="material-icons">close</i></div>
+        <div id="mobile-ad" class="hidden-md hidden-lg hide-scrollbar" style="text-align: center; padding-top: 0px; padding-bottom: 0px; background-color: black; position: relative; margin-left: -5px; margin-right: -5px; overflow-y: scroll;">
+          <!-- @include('layouts.exoclick', ['id' => '5058654', 'width' => '300', 'height' => '100']) -->
+          <iframe width="728px" height="90px" style="display:block" marginWidth="0" marginHeight="0" frameBorder="no" src="https://creative.kbnmnl.com/widgets/v4/Universal?campaignId=728x90&modelPageOption=model&tag=girls%2Fchinese%2Cgirls%2Fjapanese&thumbsMargin=5&hideButton=1&hideTitle=1&userId=68266da2436a81581f441c04a73d1525467dff2da85808235979b437cff6f852&quality=240p&autoplay=all&autoplayForce=1"></iframe>
+          <!-- <div id="close-mobile-ad-btn" style="position: absolute; top: 5px; right: 1px; cursor: pointer; border: 1px solid white;"><i style="vertical-align: middle; color: white;" class="material-icons">close</i></div> -->
         </div>
       @else
         <div style="margin-top: 7px; margin-bottom: 0px; text-align: center">
@@ -301,12 +301,12 @@
     </div>
 
     <div class="col-md-3 single-show-list">
-      <div class="hidden-xs hidden-sm" style="text-align: left; padding-left: 5px; padding-top: 5px; margin-top: 0px; margin-bottom: 15px; padding-bottom: 0px; width: 310px; height: 282px; background-color: #2E2E2E;">
-        <div style="margin-bottom: 5px; color: white; font-size: 12px;">點點廣告，贊助我們（●´∀｀）ノ♡</div>
+      <div class="hidden-xs hidden-sm" style="text-align: left; padding-left: 5px; padding-top: 5px; margin-top: 0px; margin-bottom: 15px; padding-bottom: 0px; width: 310px; height: 286px; background-color: #2E2E2E; border-radius: 10px">
+        <div style="padding: 5px; color: white; font-size: 12px;">點點廣告，贊助我們（●´∀｀）ノ♡</div>
         <!-- Original Exoclick -->
-        @include('layouts.exoclick', ['id' => '5058646', 'width' => '300', 'height' => '250'])
+        <!-- @include('layouts.exoclick', ['id' => '5058646', 'width' => '300', 'height' => '250']) -->
         <!-- New Stripchat -->
-        <!-- <iframe width="300px" height="250px" style="display:block" marginWidth="0" marginHeight="0" frameBorder="no" src="https://creative.kbnmnl.com/widgets/v4/Universal?campaignId=300x250&modelPageOption=model&tag=girls%2Fchinese&thumbsMargin=5&hideButton=1&hideTitle=1&userId=68266da2436a81581f441c04a73d1525467dff2da85808235979b437cff6f852&quality=240p&autoplay=all&autoplayForce=1"></iframe> -->
+        <iframe width="300px" height="250px" style="display:block" marginWidth="0" marginHeight="0" frameBorder="no" src="https://creative.kbnmnl.com/widgets/v4/Universal?campaignId=300x250&modelPageOption=model&tag=girls%2Fchinese&thumbsMargin=5&hideButton=1&hideTitle=1&userId=68266da2436a81581f441c04a73d1525467dff2da85808235979b437cff6f852&quality=240p&autoplay=all&autoplayForce=1"></iframe>
       </div>
 
       <div class="hidden-xs hidden-sm">
