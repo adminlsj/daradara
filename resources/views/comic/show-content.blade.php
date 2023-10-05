@@ -11,7 +11,16 @@
 
 @section('content')
 
-@include('ads.comics-banner-exoclick')
+<!-- @include('ads.comics-banner-exoclick') -->
+
+<div class="comics-banner-ads">
+  <div class="hidden-xs" style="display: flex; justify-content: center; align-items: center;">
+    <iframe width="728px" height="90px" style="display:block" marginWidth="0" marginHeight="0" frameBorder="no" src="https://creative.kbnmnl.com/widgets/v4/Universal?campaignId=728x90&modelPageOption=model&tag=girls%2Fchinese%2Cgirls%2Fjapanese&thumbsMargin=5&hideButton=1&hideTitle=1&userId=68266da2436a81581f441c04a73d1525467dff2da85808235979b437cff6f852&quality=240p&autoplay=all&autoplayForce=1"></iframe>
+  </div>
+  <span class="hidden-sm hidden-md hidden-lg" style="display: flex; justify-content: center; align-items: center;">
+    <iframe width="300px" height="100px" style="display:block" marginWidth="0" marginHeight="0" frameBorder="no" src="https://creative.kbnmnl.com/widgets/v4/Universal?campaignId=300x100&modelPageOption=model&tag=girls%2Fchinese%2Cgirls%2Fjapanese&thumbsMargin=5&hideButton=1&hideTitle=1&userId=68266da2436a81581f441c04a73d1525467dff2da85808235979b437cff6f852&quality=240p&autoplay=all&autoplayForce=1"></iframe>
+  </span>
+</div>
 
 <div>
   @include('comic.show-content-nav')
