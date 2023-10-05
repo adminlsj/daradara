@@ -300,9 +300,12 @@
     </div>
 
     <div class="col-md-3 single-show-list">
-      <div class="hidden-xs hidden-sm" style="text-align: left; padding-left: 5px; padding-top: 5px; margin-top: 0px; margin-bottom: 15px; padding-bottom: 0px; width: 310px; height: 282px; background-color: #3a3c3f;">
-        <div style="margin-bottom: 5px; color: white; font-size: 12px;">點點廣告，贊助我們（●´∀｀）ノ♡</div>
-        @include('layouts.exoclick', ['id' => '5058646', 'width' => '300', 'height' => '250'])
+      <div class="hidden-xs hidden-sm" style="text-align: left; padding-left: 5px; padding-top: 5px; margin-top: 0px; margin-bottom: 15px; padding-bottom: 0px; width: 310px; height: 286px; background-color: #2E2E2E; border-radius: 10px">
+        <div style="padding: 5px; color: white; font-size: 12px;">點點廣告，贊助我們（●´∀｀）ノ♡</div>
+        <!-- Original Exoclick -->
+        <!-- @include('layouts.exoclick', ['id' => '5058646', 'width' => '300', 'height' => '250']) -->
+        <!-- New Stripchat -->
+        <iframe width="300px" height="250px" style="display:block" marginWidth="0" marginHeight="0" frameBorder="no" src="https://creative.kbnmnl.com/widgets/v4/Universal?campaignId=300x250&modelPageOption=model&tag=girls%2Fchinese&thumbsMargin=5&hideButton=1&hideTitle=1&userId=68266da2436a81581f441c04a73d1525467dff2da85808235979b437cff6f852&quality=240p&autoplay=all&autoplayForce=1"></iframe>
       </div>
 
       <div class="hidden-xs hidden-sm">
