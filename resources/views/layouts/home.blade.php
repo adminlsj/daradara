@@ -30,9 +30,9 @@
 			<h3 style="font-weight: bold"><span style="color: crimson">H</span>anime1<span style="color: crimson">.</span>me</h3>
 			<h1 style="margin: 0; font-weight: bold;">{{ $random->title }}</h1>
 			<h4 class="hidden-xs">{{ str_replace(' [中文字幕]', '', $random->translations['JP']) }} • 中文字幕 • {{ $random->caption }}</h4>
-			<a href="{{ route('video.watch') }}?v={{ $random->id }}" target="_blank" style="display: inline-block; padding: 10px 30px 6px 20px; margin-top: -8px; margin-bottom: -10px" class="hover-opacity-all home-banner-btn home-banner-play-btn play-btn home-card-popunder"><span style="vertical-align: middle; font-size: 2em; margin-top: -4px; padding-right: 5px" class="material-icons">play_arrow</span>播放</a>
+			<a href="{{ route('video.watch') }}?v={{ $random->id }}" style="display: inline-block; padding: 10px 30px 6px 20px; margin-top: -8px; margin-bottom: -10px" class="hover-opacity-all home-banner-btn home-banner-play-btn play-btn home-card-popunder"><span style="vertical-align: middle; font-size: 2em; margin-top: -4px; padding-right: 5px" class="material-icons">play_arrow</span>播放</a>
 			&nbsp;
-			<a href="{{ route('video.watch') }}?v={{ $random->id }}" target="_blank" class="hover-opacity-all home-banner-btn home-banner-info-btn home-card-popunder"><span style="vertical-align: middle; font-size: 1.7em; margin-top: -2px; padding-right: 7px" class="material-icons">info</span>更多資訊</a>
+			<a href="{{ route('video.watch') }}?v={{ $random->id }}" class="hover-opacity-all home-banner-btn home-banner-info-btn home-card-popunder"><span style="vertical-align: middle; font-size: 1.7em; margin-top: -2px; padding-right: 7px" class="material-icons">info</span>更多資訊</a>
 		</div>
 	</div>
 
@@ -50,12 +50,12 @@
 					<h1 style="font-size: 24px; font-weight: bold; margin: 0; line-height: 35px; margin-top: -2px; margin-bottom: -2px">{{ $random->title }}</h1>
 					<h4 style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; line-height: 16px; font-size: 11px; width: 92%; margin-left: 4%;">{{ str_replace(' [中文字幕]', '', $random->translations['JP']) }} • 中文字幕 • {{ $random->caption }}</h4>
 					<div style="margin-top: 15px; width: 100%">
-						<a href="{{ route('video.watch') }}?v={{ $random->id }}" class="hover-opacity-all home-banner-btn home-banner-play-btn play-btn home-card-popunder" target="_blank" style="cursor: pointer; font-size: 14px; text-decoration: none; color: black;">
+						<a href="{{ route('video.watch') }}?v={{ $random->id }}" class="hover-opacity-all home-banner-btn home-banner-play-btn play-btn home-card-popunder" style="cursor: pointer; font-size: 14px; text-decoration: none; color: black;">
 							<div style="display: inline-block; margin-top: 5px; width: 45%; margin-right: 5px; background-color: white; padding-top: 7px; padding-bottom: 5px; border-radius: 5px;">
 								<span style="vertical-align: middle; font-size: 2em; margin-top: -3px; padding-right: 3px" class="material-icons">play_arrow</span>播放
 							</div>
 						</a>
-						<a href="{{ route('video.watch') }}?v={{ $random->id }}" class="hover-opacity-all home-banner-btn home-banner-info-btn home-card-popunder" target="_blank" style="cursor: pointer; font-size: 14px; text-decoration: none; color: white;">
+						<a href="{{ route('video.watch') }}?v={{ $random->id }}" class="hover-opacity-all home-banner-btn home-banner-info-btn home-card-popunder" style="cursor: pointer; font-size: 14px; text-decoration: none; color: white;">
 							<div style="display: inline-block; margin-top: 5px; width: 45%; background-color: rgba(109, 109, 110, 0.8); margin-left: 5px; padding-top: 8px; padding-bottom: 7px; border-radius: 5px;">
 								<span style="vertical-align: middle; font-size: 1.66em; margin-top: -3px; padding-right: 4px" class="material-icons">info</span>更多資訊
 							</div>
