@@ -67,31 +67,31 @@ class JavController extends Controller
             [
                 'title' => '絲襪美腿',
                 'link' => route('jav.search').'?tags%5B%5D=黑絲&tags%5B%5D=過膝襪&tags%5B%5D=肉絲&tags%5B%5D=絲襪&tags%5B%5D=漁網&tags%5B%5D=吊帶襪&tags%5B%5D=美腿&broad=on',
-                'imgur' => 'https://cdn.jsdelivr.net/gh/nodadygotti/nodadygotti@v1.0.0/asset/tags/6Emw3bjl.jpg',
+                'imgur' => 'https://img4.qy0.ru/data/2205/36/6Emw3bjl.jpg',
                 'total' => '2903',
             ],
             [
                 'title' => '多P群交',
                 'link' => route('jav.search').'?tags%5B%5D=多P',
-                'imgur' => 'https://cdn.jsdelivr.net/gh/nodadygotti/nodadygotti@v1.0.0/asset/tags/qg9Iwf5l.jpg',
+                'imgur' => 'https://img4.qy0.ru/data/2205/36/qg9Iwf5l.jpg',
                 'total' => '2722',
             ],
             [
                 'title' => '熟女人妻',
                 'link' => route('jav.search').'?tags%5B%5D=熟女&tags%5B%5D=人妻&broad=on',
-                'imgur' => 'https://cdn.jsdelivr.net/gh/nodadygotti/nodadygotti@v1.0.0/asset/tags/shounvrenqi.jpg',
+                'imgur' => 'https://img4.qy0.ru/data/2205/36/shounvrenqi.jpg',
                 'total' => '2428',
             ],
             [
                 'title' => '主奴調教',
                 'link' => route('jav.search').'?tags%5B%5D=調教&tags%5B%5D=綑綁&tags%5B%5D=刑具&broad=on',
-                'imgur' => 'https://cdn.jsdelivr.net/gh/nodadygotti/nodadygotti@v1.0.0/asset/tags/zhunutiaojiao.jpg',
+                'imgur' => 'https://img4.qy0.ru/data/2205/36/zhunutiaojiao.jpg',
                 'total' => '2127',
             ],
             [
                 'title' => '凌辱強暴',
                 'link' => route('jav.search').'?tags%5B%5D=強姦&tags%5B%5D=凌辱&broad=on',
-                'imgur' => 'https://cdn.jsdelivr.net/gh/nodadygotti/nodadygotti@v1.0.0/asset/tags/lingruqiangbao.jpg',
+                'imgur' => 'https://img4.qy0.ru/data/2205/36/lingruqiangbao.jpg',
                 'total' => '1875',
             ],
             [
@@ -103,25 +103,25 @@ class JavController extends Controller
             [
                 'title' => '制服誘惑',
                 'link' => route('jav.search').'?tags%5B%5D=運動裝&tags%5B%5D=獸耳&tags%5B%5D=水着&tags%5B%5D=校服&tags%5B%5D=旗袍&tags%5B%5D=婚紗&tags%5B%5D=女僕&tags%5B%5D=和服&tags%5B%5D=兔女郎&tags%5B%5D=Cosplay&broad=on',
-                'imgur' => 'https://cdn.jsdelivr.net/gh/nodadygotti/nodadygotti@v1.0.0/asset/tags/zhifuyouhuo.jpg',
+                'imgur' => 'https://img4.qy0.ru/data/2205/36/zhifuyouhuo.jpg',
                 'total' => '1252',
             ],
             [
                 'title' => '盜攝偷拍',
                 'link' => route('jav.search').'?tags%5B%5D=偷拍',
-                'imgur' => 'https://cdn.jsdelivr.net/gh/nodadygotti/nodadygotti@v1.0.0/asset/tags/22HTJX7l.jpg',
+                'imgur' => 'https://img4.qy0.ru/data/2205/36/22HTJX7l.jpg',
                 'total' => '1177',
             ],
             [
                 'title' => '野外露出',
                 'link' => route('jav.search').'?tags%5B%5D=露出',
-                'imgur' => 'https://cdn.jsdelivr.net/gh/nodadygotti/nodadygotti@v1.0.0/asset/tags/yewailuchu.jpg',
+                'imgur' => 'https://img4.qy0.ru/data/2205/36/yewailuchu.jpg',
                 'total' => '899',
             ],
             [
                 'title' => '女同歡愉',
                 'link' => route('jav.search').'?tags%5B%5D=女同',
-                'imgur' => 'https://cdn.jsdelivr.net/gh/nodadygotti/nodadygotti@v1.0.0/asset/tags/nvtonghuanyu.jpg',
+                'imgur' => 'https://img4.qy0.ru/data/2205/36/nvtonghuanyu.jpg',
                 'total' => '511',
             ],
         ];
@@ -375,16 +375,17 @@ class JavController extends Controller
             $videos = Video::where('playlist_id', $video->playlist_id)->orderBy('created_at', 'desc')->select('id', 'user_id', 'cover', 'imgur', 'title', 'sd', 'views', 'duration', 'created_at')->get();
 
             $tags = $tags_random = array_keys($video->tags_array);
-            shuffle($tags_random);
+            $genre = $video->genre;
+            /* shuffle($tags_random);
             $tags_slice = array_slice($tags_random, 0, 5);
             $genre = $video->genre;
             $related = Video::where('genre', $genre)->where(function($query) use ($tags_slice) {
                 foreach ($tags_slice as $tag) {
                     $query->orWhere('tags_array', 'like', '%"'.$tag.'"%');
                 }
-            });
+            }); */
 
-            $related = $related->with('user:id,name,avatar_temp')->where('id', '!=', $current->id)->inRandomOrder()->select('id', 'user_id', 'cover', 'imgur', 'title', 'sd', 'qualities', 'views', 'duration', 'created_at')->limit(60)->get();
+            $related = Video::with('user:id,name,avatar_temp')->where('id', '!=', $current->id)->where('genre', $genre)->select('id', 'user_id', 'cover', 'imgur', 'title', 'sd', 'qualities', 'views', 'duration', 'created_at')->orderBy('updated_at', 'asc')->limit(60)->get();
 
             $country_code = isset($_SERVER["HTTP_CF_IPCOUNTRY"]) ? $_SERVER["HTTP_CF_IPCOUNTRY"] : 'N/A';
 
