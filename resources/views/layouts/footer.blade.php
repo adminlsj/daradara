@@ -12,7 +12,7 @@
         <div style="line-height: 30px;"><a style="color: grey;" href="http://www.pornbest.org/" target="_blank">PornBest 免費中文視頻</a></div>
     </div>
     <div class="hidden-xs col-xs-6 col-sm-3">
-        <div style="line-height: 30px;"><a style="color: grey;" href="{{ route('jav.home') }}" target="_blank">日本AV 高清中字</a></div>
+        <div style="line-height: 30px;"><a style="color: grey;" href="route('jav.home')" target="_blank">日本AV 高清中字</a></div>
         <div style="line-height: 30px;"><a style="color: grey;" href="https://share.acgnx.net/" target="_blank">末日動漫資源庫</a></div>
         <div style="line-height: 30px;"><a style="color: grey;" href="https://moeli-desu.com/" target="_blank">夢璃</a></div>
         <div style="line-height: 30px;"><a style="color: grey;" href="https://www.sshs.pw/" target="_blank">紳士會所</a></div>

@@ -150,7 +150,7 @@
 
         <div class="row" style="text-align: center;">
           <div class="col-xs-6" style="width: 50%; padding-right: 0; border-right: 1px solid #333333;">
-            <a style="color: white; text-decoration: none;" href="{{ route('jav.home') }}" target="_blank">
+            <a style="color: white; text-decoration: none;" href="route('jav.home')" target="_blank">
               <div class="simple-dropdown-item">日本AV 高清中字</div>
             </a>
           </div>
