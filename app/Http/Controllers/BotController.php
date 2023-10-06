@@ -1655,21 +1655,21 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $url = "https://avbebe.com/archives/category/3d%e5%8b%95%e7%95%ab";
+        $url = "https://avbebe.com/3d%e5%8b%95%e7%95%ab";
         $curl_connection = curl_init($url);
         curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
         curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
         $html = curl_exec($curl_connection);
         curl_close($curl_connection);
-        $pages = Helper::get_string_between($html, '<span class="page_info">Page 1 of ', '</span>');
+        $pages = Helper::get_string_between($html, 'data-max-page="', '"');
 
         $news = [];
         for ($i = 1; $i <= $pages; $i++) { 
             if ($i == 1) {
-                $url = 'https://avbebe.com/archives/category/3d%e5%8b%95%e7%95%ab';
+                $url = 'https://avbebe.com/3d%e5%8b%95%e7%95%ab';
             } else {
-                $url = 'https://avbebe.com/archives/category/3d%e5%8b%95%e7%95%ab/page/'.$i;
+                $url = 'https://avbebe.com/3d%e5%8b%95%e7%95%ab/'.$i;
             }
             $curl_connection = curl_init($url);
             curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
@@ -1678,7 +1678,7 @@ class BotController extends Controller
             $html = curl_exec($curl_connection);
             curl_close($curl_connection);
 
-            $links = explode('<h3 class="jeg_post_title">', $html);
+            $links = explode('<h3 class="elementor-post__title">', $html);
             array_shift($links);
             foreach ($links as $link) {
                 $link = Helper::get_string_between($link, '<a href="', '"');
