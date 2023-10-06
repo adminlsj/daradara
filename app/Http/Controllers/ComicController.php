@@ -62,7 +62,7 @@ class ComicController extends Controller
                     $tag = Helper::convertBin2hex($tag);
                     $query->orWhere('searchtext', 'like', '%'.$tag.'%');
                 }
-            })->orderBy('day_views', 'desc')->limit(500)->pluck('id')->toArray();
+            })->orderBy('day_views', 'desc')->limit(200)->pluck('id')->toArray();
 
             $count = count($related);
             if ($count <= 1) {
