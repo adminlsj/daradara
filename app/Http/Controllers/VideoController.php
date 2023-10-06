@@ -61,7 +61,6 @@ class VideoController extends Controller
                     $query->orWhere('tags_array', 'like', '%"'.$tag.'"%');
                 }
             });
-            return $related->get()->count();
 
             if ($doujin) {
                 $related = $related->with('user:id,name,avatar_temp')->where('id', '!=', $current->id)->inRandomOrder()->select('id', 'user_id', 'cover', 'imgur', 'title', 'sd', 'qualities', 'views', 'duration', 'created_at')->limit(60)->get();
