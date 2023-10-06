@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/jav', 'JavController@index')->name('jav.home');;
-Route::get('/jav/watch', 'JavController@watch')->name('jav.watch');
-Route::get('/jav/search', 'JavController@search')->name('jav.search');
+// Route::get('/jav', 'JavController@index')->name('jav.home');;
+// Route::get('/jav/watch', 'JavController@watch')->name('jav.watch');
+// Route::get('/jav/search', 'JavController@search')->name('jav.search');
 
 Route::get('/', 'HomeController@index');
 Auth::routes();
