@@ -10,7 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::group(['middleware' => 'admin'], function () {
+
 Route::get('/jav', 'JavController@index')->name('jav.home');;
 Route::get('/jav/watch', 'JavController@watch')->name('jav.watch');
 Route::get('/jav/search', 'JavController@search')->name('jav.search');
@@ -71,7 +71,7 @@ Route::get('/comic/{comic}/{page}', 'ComicController@showContent')->name('comic.
 Route::get('/{column}/{value}/{time?}', 'ComicController@searchTags')->name('comic.searchTags');
 Route::get('/getRandomComic', 'ComicController@getRandomComic')->name('comic.random');
 
-
+Route::group(['middleware' => 'admin'], function () {
 	Route::get('/tempMethod', 'BotController@tempMethod');
 	Route::get('/reset', 'BotController@reset');
 
