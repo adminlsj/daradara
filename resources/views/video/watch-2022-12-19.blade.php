@@ -301,33 +301,35 @@
     </div>
 
     <div class="col-md-3 single-show-list">
-      <div class="hidden-xs hidden-sm" style="text-align: left; padding-left: 5px; padding-top: 5px; margin-top: 0px; margin-bottom: 15px; padding-bottom: 0px; width: 310px; height: 286px; background-color: #2E2E2E; border-radius: 10px">
-        <div style="padding: 5px; color: white; font-size: 12px;">點點廣告，贊助我們（●´∀｀）ノ♡</div>
-        <!-- Original Exoclick -->
-        <!-- @include('layouts.exoclick', ['id' => '5058646', 'width' => '300', 'height' => '250']) -->
-        <!-- New Stripchat -->
-        <iframe width="300px" height="250px" style="display:block" marginWidth="0" marginHeight="0" frameBorder="no" src="https://creative.kbnmnl.com/widgets/v4/Universal?campaignId=300x250&modelPageOption=model&tag=girls%2Fchinese&thumbsMargin=5&hideButton=1&hideTitle=1&userId=68266da2436a81581f441c04a73d1525467dff2da85808235979b437cff6f852&quality=240p&autoplay=all&autoplayForce=1"></iframe>
-      </div>
-
-      <div class="hidden-xs hidden-sm">
-        @include('video.playlist-panel')
-      </div>
-
-      <div id="myHeader" class="hidden-xs hidden-sm">
-        <div style="text-align: left; padding-left: 5px; padding-top: 5px; margin-top: 15px; margin-bottom: 10px; padding-bottom: 0px; width: 310px; height: 282px; background-color: #2E2E2E;">
-          <div style="margin-bottom: 5px; color: white; font-size: 12px;">點點廣告，贊助我們（●´∀｀）ノ♡</div>
-          @include('layouts.exoclick', ['id' => '5058646', 'width' => '300', 'height' => '250'])
+      @if (!$is_mobile)
+        <div class="hidden-xs hidden-sm" style="text-align: left; padding-left: 5px; padding-top: 5px; margin-top: 0px; margin-bottom: 15px; padding-bottom: 0px; width: 310px; height: 286px; background-color: #2E2E2E; border-radius: 10px">
+          <div style="padding: 5px; color: white; font-size: 12px;">點點廣告，贊助我們（●´∀｀）ノ♡</div>
+          <!-- Original Exoclick -->
+          <!-- @include('layouts.exoclick', ['id' => '5058646', 'width' => '300', 'height' => '250']) -->
+          <!-- New Stripchat -->
+          <iframe width="300px" height="250px" style="display:block" marginWidth="0" marginHeight="0" frameBorder="no" src="https://creative.kbnmnl.com/widgets/v4/Universal?campaignId=300x250&modelPageOption=model&tag=girls%2Fchinese&thumbsMargin=5&hideButton=1&hideTitle=1&userId=68266da2436a81581f441c04a73d1525467dff2da85808235979b437cff6f852&quality=240p&autoplay=all&autoplayForce=1"></iframe>
         </div>
 
-        <div style="text-align: left; padding-left: 5px; padding-top: 5px; margin-top: 15px; margin-bottom: 10px; padding-bottom: 0px; width: 310px; height: 282px; background-color: #2E2E2E;">
-          <div style="margin-bottom: 5px; color: white; font-size: 12px;">點點廣告，贊助我們（●´∀｀）ノ♡</div>
-          <!-- JuicyAds v3.1 -->
-          <script type="text/javascript" data-cfasync="false" async src="https://poweredby.jads.co/js/jads.js"></script>
-          <ins id="940485" data-width="300" data-height="262"></ins>
-          <script type="text/javascript" data-cfasync="false" async>(adsbyjuicy = window.adsbyjuicy || []).push({'adzone':940485});</script>
-          <!--JuicyAds END-->
+        <div class="hidden-xs hidden-sm">
+          @include('video.playlist-panel')
         </div>
-      </div>
+
+        <div id="myHeader" class="hidden-xs hidden-sm">
+          <div style="text-align: left; padding-left: 5px; padding-top: 5px; margin-top: 15px; margin-bottom: 10px; padding-bottom: 0px; width: 310px; height: 282px; background-color: #2E2E2E;">
+            <div style="margin-bottom: 5px; color: white; font-size: 12px;">點點廣告，贊助我們（●´∀｀）ノ♡</div>
+            @include('layouts.exoclick', ['id' => '5058646', 'width' => '300', 'height' => '250'])
+          </div>
+
+          <div style="text-align: left; padding-left: 5px; padding-top: 5px; margin-top: 15px; margin-bottom: 10px; padding-bottom: 0px; width: 310px; height: 282px; background-color: #2E2E2E;">
+            <div style="margin-bottom: 5px; color: white; font-size: 12px;">點點廣告，贊助我們（●´∀｀）ノ♡</div>
+            <!-- JuicyAds v3.1 -->
+            <script type="text/javascript" data-cfasync="false" async src="https://poweredby.jads.co/js/jads.js"></script>
+            <ins id="940485" data-width="300" data-height="262"></ins>
+            <script type="text/javascript" data-cfasync="false" async>(adsbyjuicy = window.adsbyjuicy || []).push({'adzone':940485});</script>
+            <!--JuicyAds END-->
+          </div>
+        </div>
+      @endif
     </div>
   </div>
 
