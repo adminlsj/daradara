@@ -102,7 +102,7 @@
 					    	<div class="hover-lighter" style="{{ $loop->iteration == 2 ? 'margin-bottom: 25px' : 'margin-bottom: 10px' }}">
 								<a href="{{ $item['link'] }}" style="text-decoration: none;">
 									<div style="position: relative;">
-										<img style="width: 100%;" src="https://cdn.jsdelivr.net/gh/guaishushukanlifan/Project-H@latest/asset/thumbnail/2jSdwcGl.jpg">
+										<img style="width: 100%;" src="https://img4.qy0.ru/data/2205/36/2jSdwcGl.jpg">
 										<img style="position: absolute; top: 0; left: 0; height: 100%; object-fit: cover; filter: brightness(60%);" src="{{ $item['imgur'] }}">
 										<div style="position: absolute; width: 100%; bottom: 5px; left: 8px;">
 											<div class="home-tags-title">{{ $item['title'] }}</div>
