@@ -55,7 +55,7 @@ $('#show-more-playlists-btn').click(function() {
 })
 
 $('#close-mobile-ad-btn').click(function() {
-  $('#mobile-ad').css('display', 'none');
+  $('#mobile-ad').remove();
 })
 
 $('.navigate-next-btn').click(function() {

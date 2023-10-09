@@ -23,11 +23,6 @@
           <div id="player-switch-lang" style="margin-top: 0px; border: none; border-radius: 0px !important; border-top: 2px solid rgba(0, 0, 0, 0.5);" data-lang="{{ $lang }}" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             {{ $lang == 'zh-CHS' ? '繁體字幕' : '简体字幕'}}
           </div>
-          @if ($video->has_torrent)
-            <a href="{{ route('video.download') }}?v={{ $video->id }}&torrent=true" id="player-switch-torrent" style="text-decoration: none; border-radius: 0px !important;" class="dropdown-menu" aria-labelledby="dropdownMenuButton" target="_blank">
-                外掛字幕
-            </a>
-          @endif
         </div>
       @endif
 
@@ -313,8 +308,10 @@
         <div class="hidden-xs hidden-sm">
           @include('video.playlist-panel')
         </div>
+      @endif
 
-        <div id="myHeader" class="hidden-xs hidden-sm">
+      <div id="myHeader" class="hidden-xs hidden-sm">
+        @if (!$is_mobile)
           <div style="text-align: left; padding-left: 5px; padding-top: 5px; margin-top: 15px; margin-bottom: 10px; padding-bottom: 0px; width: 310px; height: 282px; background-color: #2E2E2E;">
             <div style="margin-bottom: 5px; color: white; font-size: 12px;">點點廣告，贊助我們（●´∀｀）ノ♡</div>
             @include('layouts.exoclick', ['id' => '5058646', 'width' => '300', 'height' => '250'])
@@ -328,8 +325,9 @@
             <script type="text/javascript" data-cfasync="false" async>(adsbyjuicy = window.adsbyjuicy || []).push({'adzone':940485});</script>
             <!--JuicyAds END-->
           </div>
-        </div>
-      @endif
+        @endif
+      </div>
+      
     </div>
   </div>
 
