@@ -91,7 +91,7 @@
             </a>
           </div>
           <div class="col-xs-6" style="width: 50%; padding-left: 0;">
-            <a style="color: white; text-decoration: none;" href="https://cherrytale.ero-labs.com/lp/landing_page_zh.html" target="_blank">
+            <a style="color: white; text-decoration: none;" href="https://l.erodatalabs.com/s/0CxEQ4" target="_blank">
               <div class="simple-dropdown-item">無碼黄油</div>
             </a>
           </div>

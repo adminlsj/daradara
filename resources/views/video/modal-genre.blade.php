@@ -13,7 +13,7 @@
 			<hr style="margin: 0; border-color: #323434;">
         @endforeach
 
-    <a style="color: white; text-decoration: none; line-height: 30px" href="https://cherrytale.ero-labs.com/lp/landing_page_zh.html" target="_blank"><div class="simple-dropdown-item">無碼黃油</div></a>
+    <a style="color: white; text-decoration: none; line-height: 30px" href="https://l.erodatalabs.com/s/0CxEQ4" target="_blank"><div class="simple-dropdown-item">無碼黃油</div></a>
     <hr style="margin: 0; border-color: #323434;">
 		<a style="color: white; text-decoration: none; line-height: 30px" href="/previews/{{ Carbon\Carbon::now()->format('Ym') }}"><div class="simple-dropdown-item genre-option">新番預告</div></a>
 		<hr style="margin: 0; border-color: #323434;">
