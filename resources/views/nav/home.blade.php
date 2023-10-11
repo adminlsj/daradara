@@ -22,7 +22,7 @@
   <div class="home-genre-tabs-wrapper"><a href="{{ route('home.search') }}?genre=Motion+Anime" class="home-genre-tabs" style="text-decoration: none;">Motion Anime</a></div>
   <div class="home-genre-tabs-wrapper"><a href="{{ route('home.search') }}?genre=3D動畫" class="home-genre-tabs" style="text-decoration: none;">3D動畫</a></div>
   <div class="home-genre-tabs-wrapper"><a href="{{ route('home.search') }}?genre=同人作品" class="home-genre-tabs" style="text-decoration: none;">同人作品</a></div>
-  <div class="home-genre-tabs-wrapper"><a href="https://cherrytale.ero-labs.com/lp/landing_page_zh.html" class="home-genre-tabs" style="text-decoration: none;" target="_blank">無碼黃油</a></div>
+  <div class="home-genre-tabs-wrapper"><a href="https://l.erodatalabs.com/s/0CxEQ4" class="home-genre-tabs" style="text-decoration: none;" target="_blank">無碼黃油</a></div>
   <div class="home-genre-tabs-wrapper"><a href="{{ route('home.search') }}?genre=Cosplay" class="home-genre-tabs" style="text-decoration: none;">Cosplay</a></div>
   <div class="home-genre-tabs-wrapper"><a href="/previews/{{ Carbon\Carbon::now()->format('Ym') }}" class="home-genre-tabs" style="text-decoration: none;">新番預告</a></div>
   <div class="home-genre-tabs-wrapper" style="margin-right: 0px;"><a href="{{ route('comic.index') }}" class="home-genre-tabs" style="text-decoration: none;">H漫畫</a></div>
