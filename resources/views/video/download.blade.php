@@ -6,7 +6,7 @@
 		<meta property="og:type" content="article" />
 		<meta property="og:title" content="下載 {{ $video->title }} - Hanime1.me" />
 		<meta property="og:description" content="{{ $video->translations['JP'] }} {{ $video->caption }}" />
-		<meta property="og:image" content="https://i.imgur.com/{{ $video->imgur }}h.png" />
+		<meta property="og:image" content="{{ $video->thumbH() }}" />
 
 		<title>下載 {{ $video->title }}&nbsp;-&nbsp;H動漫/裏番/線上看&nbsp;-&nbsp;Hanime1.me</title>
 		<meta name="title" content="下載 {{ $video->title }} - H動漫/裏番/線上看 - Hanime1.me">
@@ -31,7 +31,7 @@
 				        <p style="font-size: 12px; color: #bdbdbd; font-weight: 500">{{ Carbon\Carbon::parse($video->created_at)->format('Y-m-d') }} <span style="font-weight: normal;">&nbsp;|&nbsp;</span> {{ $video->views() }}次點閱</p>
 			        </div>
 			        <h3 style="line-height: 30px; font-weight: bold; font-size: 1.5em; margin-top: 0px; color: white; margin-bottom: 15px;">{{ $video->title }}</h3>
-			        <img class="download-image" src="{{ $video->imgurL() }}">
+			        <img class="download-image" src="{{ $video->thumbH() }}">
 
 			        <div class="hidden-sm hidden-md hidden-lg" style="text-align: center; padding-bottom: 15px;">
 								<ins class="adsbyexoclick" data-zoneid="4372480"></ins>

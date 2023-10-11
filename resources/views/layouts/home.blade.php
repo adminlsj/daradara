@@ -90,7 +90,7 @@
 		@include('layouts.card-wrapper', ['title' => '最新裏番', 'videos' => $最新裏番, 'link' => route('home.search').'?genre=裏番'])
 		@include('layouts.card-wrapper-doujin', ['title' => '最新上市', 'videos' => $最新上市, 'link' => route('home.search').'?sort=最新上市'])
 		@include('layouts.card-wrapper-doujin', ['title' => '最新上傳', 'videos' => $最新上傳, 'link' => route('home.search').'?sort=最新上傳'])
-		@include('layouts.card-wrapper-doujin', ['title' => '中文字幕', 'videos' => $中文字幕, 'link' => route('home.search').'?tags%5B%5D=中文字幕'])
+		@include('layouts.card-wrapper-doujin', ['title' => '中文字幕', 'videos' => $中文字幕, 'link' => route('home.search').'?tags%5B%5D=中文字幕&sort=最新上傳'])
 		@include('layouts.card-wrapper-doujin', ['title' => '他們在看', 'videos' => $他們在看, 'link' => route('home.search').'?sort=他們在看'])
 
 		<div>
