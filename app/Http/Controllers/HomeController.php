@@ -25,6 +25,7 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         $hCount = 16;
+        $dCountFirst = 18;
         $dCount = 12;
 
         $最新裏番 = Video::where('genre', '裏番')->orWhere(function($query) {
@@ -33,9 +34,9 @@ class HomeController extends Controller
 
         $random = $最新裏番->random();
 
-        $最新上市 = Video::with('user:id,name')->whereIn('genre', Video::$genre)->orderBy('created_at', 'desc')->select('id', 'user_id', 'title', 'cover', 'imgur', 'views', 'duration')->limit($dCount)->get();
+        $最新上市 = Video::with('user:id,name')->whereIn('genre', Video::$genre)->orderBy('created_at', 'desc')->select('id', 'user_id', 'title', 'cover', 'imgur', 'views', 'duration')->limit($dCountFirst)->get();
 
-        $最新上傳 = Video::with('user:id,name')->whereIn('genre', Video::$genre)->orderBy('uploaded_at', 'desc')->select('id', 'user_id', 'title', 'cover', 'imgur', 'views', 'duration')->limit($dCount)->get();
+        $最新上傳 = Video::with('user:id,name')->whereIn('genre', Video::$genre)->orderBy('uploaded_at', 'desc')->select('id', 'user_id', 'title', 'cover', 'imgur', 'views', 'duration')->limit($dCountFirst)->get();
 
         $中文字幕 = Video::with('user:id,name')->whereIn('genre', ['Motion Anime', '3D動畫', '同人作品', 'Cosplay'])->where('tags_array', 'like', '%中文字幕%')->orderBy('uploaded_at', 'desc')->select('id', 'user_id', 'title', 'cover', 'imgur', 'views', 'duration')->limit($dCount)->get();
 
