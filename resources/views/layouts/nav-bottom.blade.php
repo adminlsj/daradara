@@ -101,12 +101,12 @@
 
          <div class="row" style="text-align: center;">
           <div class="col-xs-6" style="width: 50%; padding-right: 0; border-right: 1px solid #333333;">
-            <a style="color: white; text-decoration: none;" href="https://discord.gg/A4cxaC3nw" target="_blank">
+            <a style="color: white; text-decoration: none;" href="{{ env("DISCORD_LINK") }}" target="_blank">
               <div class="simple-dropdown-item">Discord</div>
             </a>
           </div>
           <div class="col-xs-6" style="width: 50%; padding-left: 0;">
-            <a style="color: white; text-decoration: none;" href="https://discord.gg/A4cxaC3nw" target="_blank">
+            <a style="color: white; text-decoration: none;" href="{{ env("DISCORD_LINK") }}" target="_blank">
               <div class="simple-dropdown-item">聯絡我們</div>
             </a>
           </div>

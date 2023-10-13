@@ -91,7 +91,7 @@
             </a>
           </div>
           <div class="col-xs-6" style="width: 50%; padding-left: 0;">
-            <a style="color: white; text-decoration: none;" href="https://discord.gg/WWYc9m9CUQ" target="_blank">
+            <a style="color: white; text-decoration: none;" href="{{ env("DISCORD_LINK") }}" target="_blank">
               <div class="simple-dropdown-item">Discord</div>
             </a>
           </div>
