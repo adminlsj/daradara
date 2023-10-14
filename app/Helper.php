@@ -4,6 +4,8 @@ namespace App;
 
 class Helper
 {
+    public static $discord = 'https://discord.gg/dSBZVGKeq';
+
     public static function checkIsMobile()
     {
         $useragent = $_SERVER['HTTP_USER_AGENT'];

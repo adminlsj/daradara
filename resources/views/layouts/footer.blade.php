@@ -1,6 +1,6 @@
 <div class="row footer-new" style="font-weight: normal; padding-top: 10px; padding-bottom: 10px; font-size: 13px; margin-top: -40px;">
     <div class="col-xs-6 col-sm-3">
-        <div style="line-height: 30px;"><a style="color: grey;" href="{{ env("DISCORD_LINK") }}" target="_blank">Discord</a></div>
+        <div style="line-height: 30px;"><a style="color: grey;" href="{{ App\Helper::$discord }}" target="_blank">Discord</a></div>
         <div style="line-height: 30px;"><a style="color: grey;" href="/contact" target="_blank">廣告合作</a></div>
         <div style="line-height: 30px;"><a style="color: grey;" href="/copyright" target="_blank">DMCA</a></div>
         <div style="line-height: 30px;"><a style="color: grey;" href="/2257" target="_blank">2257</a></div>
