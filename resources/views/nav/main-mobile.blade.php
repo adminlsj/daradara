@@ -30,14 +30,14 @@
   @endif
 
   <a class="nav-icon pull-right" href="{{ route('home.search') }}">
-    <img style="margin-top: -2px; margin-right: 1px;" height="20" src="https://img4.qy0.ru/data/2197/80/search.png">
+    <img style="margin-top: -2px; margin-right: 1px;" height="20" src="https://vdownload.hembed.com/image/icon/search.png?secure=F7gupEPkawNuqNqbnFpoFw==,4853042258">
   </a>
 
   <a class="nav-icon pull-right" href="{{ Auth::check() ? route('user.userEditUpload', Auth::user()) : route('login') }}">
-    <img style="margin-top: -2px; margin-right: 5px;" height="20" src="https://img4.qy0.ru/data/2197/80/notification.png">
+    <img style="margin-top: -2px; margin-right: 5px;" height="20" src="https://vdownload.hembed.com/image/icon/notification.png?secure=lgC6oJriAcWxjPf3HDCr7Q==,4853042395">
   </a>
 
   <a class="nav-icon pull-right" href="/previews/{{ Carbon\Carbon::now()->format('Ym') }}">
-    <img style="margin-top: -1px; margin-right: 6px;" height="16" src="https://img4.qy0.ru/data/2197/80/preview.png">
+    <img style="margin-top: -1px; margin-right: 6px;" height="16" src="https://vdownload.hembed.com/image/icon/preview.png?secure=uNJ87ybHp_ZGVNsq_y1mdQ==,4853042457">
   </a>
 </div>

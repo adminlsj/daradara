@@ -9,7 +9,7 @@
     @endif
   </a>
   <a href="{{ route('home.search') }}">
-    <img style="height: 18px; margin-top: 8px;" src="https://img4.qy0.ru/data/2197/80/search.png">
+    <img style="height: 18px; margin-top: 8px;" src="https://vdownload.hembed.com/image/icon/search.png?secure=F7gupEPkawNuqNqbnFpoFw==,4853042258">
     <div style="font-size: 9px; color: white; margin-top: 4px;">搜索</div>
   </a>
   <a href="{{ Auth::check() ? route('user.userEditUpload', Auth::user()) : route('login') }}">
