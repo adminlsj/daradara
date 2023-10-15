@@ -37,12 +37,15 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $filename = 'preview.png';
+        $videos = Video::whereIn('genre', Video::$genre)->where('cover', 'like', '%https://img4.qy0.ru%')->get();
+        return $videos->count();
+
+        /* $filename = 'preview.png';
         $url = 'vdownload.hembed.com';
         $expiration = time() + 3155692600;
         $token = 'xVEO8rLVgGkUBEBg';
         $source = '/image/icon/'.$filename;
-        return Video::getSignedUrlParameter($url, $source, $token, $expiration);
+        return Video::getSignedUrlParameter($url, $source, $token, $expiration); */
 
         /* $id = 84803;
         $huge = $id.'h.jpg';
