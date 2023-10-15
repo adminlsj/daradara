@@ -37,7 +37,7 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $videos = Video::whereIn('genre', Video::$genre)->where('cover', 'like', '%https://img4.qy0.ru%')->get();
+        $videos = Video::whereIn('genre', ['裏番', '泡麵番', 'Motion Anime', '3D動畫', '同人作品', 'Cosplay', '新番預告'])->where('cover', 'like', '%https://img4.qy0.ru%')->get();
         return $videos->count();
 
         /* $filename = 'preview.png';
