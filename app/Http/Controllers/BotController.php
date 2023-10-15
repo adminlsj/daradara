@@ -37,6 +37,24 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
+        /* $videos = Video::whereIn('genre', ['裏番', '泡麵番', 'Motion Anime', '3D動畫', '同人作品', 'Cosplay', '新番預告'])->where('cover', 'like', '%https://img4.qy0.ru%')->get();
+        foreach ($videos as $video) {
+            $filename = explode('.jpg', substr($video->cover, strrpos($video->cover, '/') + 1))[0].'.jpg';
+            $url = 'vdownload.hembed.com';
+            $expiration = time() + 43200;
+            $token = 'xVEO8rLVgGkUBEBg';
+            $source = '/image/cover/'.$filename;
+            $video->cover = Video::getSignedUrlParameter($url, $source, $token, $expiration);
+            $video->save();
+        } */
+
+        $filename = 'search_video_icon.jpg';
+        $url = 'vdownload.hembed.com';
+        $expiration = time() + 3155692600;
+        $token = 'xVEO8rLVgGkUBEBg';
+        $source = '/image/icon/'.$filename;
+        return Video::getSignedUrlParameter($url, $source, $token, $expiration);
+
         /* $id = 84803;
         $huge = $id.'h.jpg';
         $large = $id.'l.jpg';

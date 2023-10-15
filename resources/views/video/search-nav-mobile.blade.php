@@ -23,10 +23,10 @@
 	<div style="color: #e5e5e5; display: inline-block; font-size: 14px; font-weight: bold; cursor: pointer;" class="search-type-button">
 		@if ($type == 'artist')
 			<span class="search-type-input">搜尋影片</span>
-			<img style="width: 12px; margin-top: -3px; margin-left: 1px" src="https://img4.qy0.ru/data/2197/80/search_video_icon.jpg">
+			<img style="width: 12px; margin-top: -3px; margin-left: 1px" src="https://vdownload.hembed.com/image/icon/search_video_icon.jpg?secure=3kmZsuH7pFNAYVTLKG7pgQ==,4853050977">
 		@else
 			<span class="search-type-input">搜尋作者</span>
-			<img style="width: 11px; margin-top: -3px; margin-left: 2px" src="https://img4.qy0.ru/data/2197/80/search_artist_icon.jpg">
+			<img style="width: 11px; margin-top: -3px; margin-left: 2px" src="https://vdownload.hembed.com/image/icon/search_artist_icon.jpg?secure=qYBLGsqhJQrL4DsgOnOPkA==,4853050902">
 		@endif
 	</div>
 </div>

@@ -1,10 +1,10 @@
 <div style="z-index: 10000 !important; border-top: 1px solid #222222; {{ Request::is('*watch*') ? 'display:none;' : '' }}" class="bottom-nav hidden-lg hidden-md white-theme-nav-bottom">
   <a href="/jav">
     @if (Request::is('jav'))
-      <img style="height: 18px; margin-top: 8px;" src="https://img4.qy0.ru/data/2197/80/home-filled.png">
+      <img style="height: 18px; margin-top: 8px;" src="https://vdownload.hembed.com/image/icon/home-filled.png?secure=hagVb_i7llq-gcI6jJG0CA==,4853050659">
       <div style="font-size: 9px; color: white; margin-top: 4px;">主頁</div>
     @else
-      <img style="height: 18px; margin-top: 8px;" src="https://img4.qy0.ru/data/2197/80/home.png">
+      <img style="height: 18px; margin-top: 8px;" src="https://vdownload.hembed.com/image/icon/home.png?secure=n16erON9euRDe7sOztAHMw==,4853050602">
       <div style="font-size: 9px; color: white; margin-top: 4px;">主頁</div>
     @endif
   </a>
@@ -13,19 +13,19 @@
     <div style="font-size: 9px; color: white; margin-top: 4px;">搜索</div>
   </a>
   <a href="{{ Auth::check() ? route('user.userEditUpload', Auth::user()) : route('login') }}">
-    <img style="height: 33px; margin-top: 5px;" src="https://img4.qy0.ru/data/2197/80/create.png">
+    <img style="height: 33px; margin-top: 5px;" src="https://vdownload.hembed.com/image/icon/create.png?secure=32-QfdeAPAWLr1sgZ0ptzQ==,4853050770">
   </a>
   <a href="{{ route('playlist.index') }}">
     @if (Request::is('*playlists*'))
-      <img style="height: 18px; margin-top: 8px;" src="https://img4.qy0.ru/data/2197/80/playlist-filled.png">
+      <img style="height: 18px; margin-top: 8px;" src="https://vdownload.hembed.com/image/icon/playlist-filled.png?secure=et5j2TNgx9uVOHU2mq6aqw==,4853050515">
       <div style="font-size: 9px; color: white; margin-top: 4px;">我的清單</div>
     @else
-      <img style="height: 18px; margin-top: 8px;" src="https://img4.qy0.ru/data/2197/80/playlist.png">
+      <img style="height: 18px; margin-top: 8px;" src="https://vdownload.hembed.com/image/icon/playlist.png?secure=6mARyP6E-BcxDSbV-6824A==,4853050079">
       <div style="font-size: 9px; color: white; margin-top: 4px;">我的清單</div>
     @endif
   </a>
   <a style="cursor: pointer;" data-toggle="modal" data-target="#links-modal">
-    <img style="height: 18px; margin-top: 8px;" src="https://img4.qy0.ru/data/2197/80/genre.png">
+    <img style="height: 18px; margin-top: 8px;" src="https://vdownload.hembed.com/image/icon/genre.png?secure=riIP7dAAk310OXa9TEva-w==,4853050724">
     <div style="font-size: 9px; color: white; margin-top: 4px;">全部分類</div>
   </a>
 </div>
