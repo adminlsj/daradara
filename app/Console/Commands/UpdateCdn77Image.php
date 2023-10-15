@@ -42,7 +42,7 @@ class UpdateCdn77Image extends Command
         foreach ($videos as $video) {
             $filename = explode('.jpg', substr($video->cover, strrpos($video->cover, '/') + 1))[0].'.jpg';
             $url = 'vdownload.hembed.com';
-            $expiration = time() + 43200;
+            $expiration = time() + 2629743;
             $token = 'xVEO8rLVgGkUBEBg';
             $source = '/image/cover/'.$filename;
             $video->cover = Video::getSignedUrlParameter($url, $source, $token, $expiration);
