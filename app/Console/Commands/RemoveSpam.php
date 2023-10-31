@@ -7,6 +7,7 @@ use App\User;
 use App\Comment;
 use Illuminate\Support\Facades\Log;
 use Carbon\Carbon;
+use App\Like;
 
 class RemoveSpam extends Command
 {
@@ -69,6 +70,13 @@ class RemoveSpam extends Command
         User::destroy($ip_user_array);
 
         User::whereIn('email', ['junheipou@gmail.com', 'caigueikim149@gmail.com', 'honggoujishenme52@gmail.com', 'junexi895@gmail.com', 'ptsd258@163.com'])->where('created_at', '>=', Carbon::now()->subDay())->delete();
+
+        $likes = Like::where('created_at', '>=', Carbon::now()->subDay())->get();
+        foreach ($likes as $like) {
+            if (!User::where('id', $like->user_id)->exists()) {
+                $like->delete();
+            }
+        }
 
         /* $keyword_user_array = Comment::where('text', 'ilike', '%↑%')
                             ->where('created_at', '>=', Carbon::now()->subDay())
