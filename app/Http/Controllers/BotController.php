@@ -78,7 +78,6 @@ class BotController extends Controller
                 foreach ($videos_old as $video_old) {
                     $video_old->sd = str_replace($url, $base_new, $video_old->sd);
                     $video_old->save();
-                    return $video_old;
                 }
 
             } else {
