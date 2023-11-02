@@ -43,20 +43,21 @@ class BotController extends Controller
             $video->save();
         } */
 
-        $videos = Video::whereIn('genre', Video::$genre_jav)->where('foreign_sd', 'like', '%\666546.xyz%')->get();
+        // Update outdated hscangku poster
+        /* $videos = Video::whereIn('genre', Video::$genre_jav)->where('foreign_sd', 'like', '%\666546.xyz%')->get();
         foreach ($videos as $video) {
             $temp = $video->foreign_sd;
             $temp["poster"] = str_replace('666546.xyz', '666548.xyz', $temp["poster"]);
             $video->foreign_sd = $temp;
             $video->save();
-        }
+        } */
 
         // Change all jav to hembed
-        /* $videos = Video::whereIn('genre', Video::$genre_jav)->where('foreign_sd', 'like', '%"poster"%')->get();
+        $videos = Video::whereIn('genre', Video::$genre_jav)->where('foreign_sd', 'like', '%"poster"%')->get();
         foreach ($videos as $video) {
             $video->cover = "https://vdownload.hembed.com/image/cover/E6mSQA2.jpg?secure=rc36ujEZGDGbhTJYIRNU3Q==,4854601037&genre=jav&poster={$video->foreign_sd['poster']}";
             $video->save();
-        } */
+        }
 
         /* $videos = Video::whereIn('genre', ['裏番', '泡麵番', 'Motion Anime', '3D動畫', '同人作品', 'Cosplay', '新番預告'])->where('cover', 'like', '%https://img4.qy0.ru%')->get();
         foreach ($videos as $video) {
@@ -69,11 +70,11 @@ class BotController extends Controller
             $video->save();
         } */
 
-        /* $filename = 'E6mSQA2.jpg';
+        /* $filename = 'save_playlist_public.png';
         $url = 'vdownload.hembed.com';
-        $expiration = time() + 2629743;
+        $expiration = time() + 3155692600;
         $token = 'xVEO8rLVgGkUBEBg';
-        $source = '/image/cover/'.$filename;
+        $source = '/image/icon/'.$filename;
         return Video::getSignedUrlParameter($url, $source, $token, $expiration); */
 
         /* $id = 84803;
