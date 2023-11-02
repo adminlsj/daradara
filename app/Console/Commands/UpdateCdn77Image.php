@@ -38,7 +38,7 @@ class UpdateCdn77Image extends Command
      */
     public function handle()
     {
-        $videos = Video::where('cover', 'like', '%vdownload.hembed.com%')->get();
+        $videos = Video::where('cover', 'like', '%vdownload.hembed.com%')->where('cover', 'not like', '%\genre=jav%')->get();
         foreach ($videos as $video) {
             $filename = explode('.jpg', substr($video->cover, strrpos($video->cover, '/') + 1))[0].'.jpg';
             $url = 'vdownload.hembed.com';
