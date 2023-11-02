@@ -2,7 +2,7 @@
   <div style="width: 150px; display: inline-block;">
     <div style="position: relative; display: inline-block;">
       <img style="width: 100%; height: 100%; border-radius: 5px;" src="https://vdownload.hembed.com/image/icon/card_doujin_background.jpg?secure=sJRJ4-aVOQw4IVZasq7YZw==,4853041705">
-      <img style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 5px; {{ $video->id == $current->id ? 'filter: brightness(15%);' : '' }}" src="{{ $video->thumbL() }}" alt="{{ $video->title }}">
+      <img style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; border-radius: 5px; {{ $video->id == $current->id ? 'filter: brightness(15%);' : '' }}" src="{{ $video->thumbL() }}" alt="{{ $video->title }}">
 
       @if ($video->id == $current->id)
         <div style="margin: 0; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #e5e5e5;">現正播放</div>

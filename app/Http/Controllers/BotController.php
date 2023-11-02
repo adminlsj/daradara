@@ -37,28 +37,24 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $videos = Video::whereIn('genre', Video::$genre_jav)->where('foreign_sd', 'not like', '%"poster"%')->get();
+        /* $videos = Video::whereIn('genre', Video::$genre_jav)->where('cover', 'like', '%\666546.xyz%')->get();
         foreach ($videos as $video) {
-            $url = "https://i.imgur.com/{$video->imgur}h.jpg";
-            $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, $url);
-            curl_setopt($ch, CURLOPT_TIMEOUT, '60'); // in seconds
-            curl_setopt($ch, CURLOPT_HEADER, 1);
-            curl_setopt($ch, CURLOPT_NOBODY, 1);
-            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-            $res = curl_exec($ch);
-            if (curl_getinfo($ch)['url'] == $url){
-                $temp = $video->foreign_sd;
-                $temp['poster'] = "https://i.imgur.com/{$video->imgur}h.jpg";
-                $video->foreign_sd = $temp;
-                $video->save();
-            }
+            $video->cover = str_replace('666546.xyz', '666548.xyz', $video->cover);
+            $video->save();
+        } */
+
+        $videos = Video::whereIn('genre', Video::$genre_jav)->where('foreign_sd', 'like', '%\666546.xyz%')->get();
+        foreach ($videos as $video) {
+            $temp = $video->foreign_sd;
+            $temp["poster"] = str_replace('666546.xyz', '666548.xyz', $temp["poster"]);
+            $video->foreign_sd = $temp;
+            $video->save();
         }
 
-        /* $videos = Video::whereIn('genre', Video::$genre_jav)->get();
+        // Change all jav to hembed
+        /* $videos = Video::whereIn('genre', Video::$genre_jav)->where('foreign_sd', 'like', '%"poster"%')->get();
         foreach ($videos as $video) {
-            $video->cover = "https://vdownload.hembed.com/image/cover/E6mSQA2.jpg?secure=rc36ujEZGDGbhTJYIRNU3Q==,4854601037&genre=jav";
+            $video->cover = "https://vdownload.hembed.com/image/cover/E6mSQA2.jpg?secure=rc36ujEZGDGbhTJYIRNU3Q==,4854601037&genre=jav&poster={$video->foreign_sd['poster']}";
             $video->save();
         } */
 

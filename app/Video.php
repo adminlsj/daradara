@@ -191,6 +191,10 @@ class Video extends Model
             $thumbL = str_replace('/cover/'.$cover, '/thumbnail/'.$this->imgur.'l', $this->cover);
             return $thumbL;
 
+        } elseif (strpos($this->cover, 'genre=jav') !== false) {
+            $poster = explode('&poster=', $this->cover)[1];
+            return $poster.'?class=thumbnail';
+
         } elseif (strpos($this->cover, 'vdownload.hembed.com') !== false) {
             $url = 'vdownload.hembed.com';
             $expiration = time() + 43200;
@@ -215,6 +219,10 @@ class Video extends Model
             $cover = Helper::get_string_between($this->cover, '/cover/', '.jpg');
             $thumbH = str_replace('/cover/'.$cover, '/thumbnail/'.$this->imgur.'h', $this->cover);
             return $thumbH;
+
+        } elseif (strpos($this->cover, 'genre=jav') !== false) {
+            $poster = explode('&poster=', $this->cover)[1];
+            return $poster.'?class=normal';
 
         } elseif (strpos($this->cover, 'vdownload.hembed.com') !== false) {
             $url = 'vdownload.hembed.com';
