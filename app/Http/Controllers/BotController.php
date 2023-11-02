@@ -37,8 +37,17 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $videos = Video::whereIn('genre', Video::$genre_jav)->where('foreign_sd', 'not like', '%"poster"%')->where('foreign_sd', 'like', '%"missav"%')->get();
-        return $videos->count();
+        Log::info('Missav add poster started...');
+        $videos = Video::whereIn('genre', Video::$genre_jav)->where('foreign_sd', 'like', '%"missav"%')->get();
+        foreach ($videos as $video) {
+            $code = str_replace('https://missav.com/', '', $video->foreign_sd['missav']);
+            $poster = "https://cdn82.akamai-content-network.com/{$code}/cover.jpg";
+            $temp = $video->foreign_sd;
+            $temp['poster'] = $poster;
+            $video->foreign_sd = $temp;
+            $video->save();
+            Log::info('Missav add poster ID#'.$video->id.' success...');
+        }
 
         /* $videos = Video::whereIn('genre', Video::$genre_jav)->get();
         foreach ($videos as $video) {
