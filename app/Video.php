@@ -197,7 +197,7 @@ class Video extends Model
 
         } elseif (strpos($this->cover, 'vdownload.hembed.com') !== false) {
             $url = 'vdownload.hembed.com';
-            $expiration = time() + 43200;
+            $expiration = explode(',', $this->cover)[1];
             $token = 'xVEO8rLVgGkUBEBg';
             $source = '/image/thumbnail/'.$this->imgur.'l.jpg';
             $thumbL = Video::getSignedUrlParameter($url, $source, $token, $expiration);
@@ -226,7 +226,7 @@ class Video extends Model
 
         } elseif (strpos($this->cover, 'vdownload.hembed.com') !== false) {
             $url = 'vdownload.hembed.com';
-            $expiration = time() + 43200;
+            $expiration = explode(',', $this->cover)[1];
             $token = 'xVEO8rLVgGkUBEBg';
             $source = '/image/thumbnail/'.$this->imgur.'h.jpg';
             $thumbH = Video::getSignedUrlParameter($url, $source, $token, $expiration);
