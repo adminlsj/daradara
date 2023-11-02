@@ -23,7 +23,7 @@
 		</script>
 
 		<div style="position: relative;">
-			<img style="width: 100%; height: 100vh; object-position: center 0px; object-fit: cover; -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0.3)));" src="{{ $random->thumbH() }}" alt="{{ $random->title }}">
+			<img style="width: 100%; height: 100vh; object-fit: cover; object-position: top; -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0.3)));" src="{{ $random->thumbH() }}" alt="{{ $random->title }}">
 			<img style="width: 100%; height: 100vh; -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0.3))); position: absolute; top: 0; left: 0; object-position: center 0px; object-fit: cover;" src="{{ $random->thumbH() }}" alt="{{ $random->title }}">
 	    </div>
 		<div id="home-banner-wrapper" style="position: absolute; left: 4%; bottom: 31%; color: white">
@@ -39,7 +39,7 @@
 	<div class="hidden-sm hidden-md hidden-lg" style="position: relative;">
 		<div style="position: relative;">
 			<img style="width: 100%;" src="https://vdownload.hembed.com/image/icon/home_poster_background.jpg?secure=V9I3grqYWBcEVFVq8VMswA==,4853041877">
-			<img style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-position: center 0px; object-fit: cover; object-position: right; -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));" src="{{ $random->thumbH() }}">
+			<img style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: right; -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));" src="{{ $random->thumbH() }}">
 	    </div>
 		<div style="position: absolute; left: 50%; -webkit-transform: translateX(-50%); transform: translateX(-50%); width: 96%; bottom: 14%; text-align: center; color: white">
 			<h3 style="font-weight: bold; font-size: 20px;"><span style="color: crimson">H</span>anime1<span style="color: crimson">.</span>me</h3>
