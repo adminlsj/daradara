@@ -59,6 +59,9 @@ class BotController extends Controller
                 array_push($error, $url);
             }
         }
+        if ($error == []) {
+            return "no errors";
+        }
         foreach ($error as $url) {
             $first = Video::whereIn('genre', Video::$genre_jav)->where('sd', 'like', '%'.$url.'%')->first();
             $hscangku_link = Jav::$base;
