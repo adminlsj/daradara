@@ -37,16 +37,23 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        Log::info('Missav add poster started...');
-        $videos = Video::whereIn('genre', Video::$genre_jav)->where('foreign_sd', 'like', '%"missav"%')->get();
+        $videos = Video::whereIn('genre', Video::$genre_jav)->where('foreign_sd', 'not like', '%"poster"%')->get();
         foreach ($videos as $video) {
-            $code = str_replace('https://missav.com/', '', $video->foreign_sd['missav']);
-            $poster = "https://cdn82.akamai-content-network.com/{$code}/cover.jpg";
-            $temp = $video->foreign_sd;
-            $temp['poster'] = $poster;
-            $video->foreign_sd = $temp;
-            $video->save();
-            Log::info('Missav add poster ID#'.$video->id.' success...');
+            $url = "https://i.imgur.com/{$video->imgur}h.jpg";
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_TIMEOUT, '60'); // in seconds
+            curl_setopt($ch, CURLOPT_HEADER, 1);
+            curl_setopt($ch, CURLOPT_NOBODY, 1);
+            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            $res = curl_exec($ch);
+            if (curl_getinfo($ch)['url'] == $url){
+                $temp = $video->foreign_sd;
+                $temp['poster'] = "https://i.imgur.com/{$video->imgur}h.jpg";
+                $video->foreign_sd = $temp;
+                $video->save();
+            }
         }
 
         /* $videos = Video::whereIn('genre', Video::$genre_jav)->get();
