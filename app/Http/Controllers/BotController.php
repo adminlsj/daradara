@@ -37,7 +37,8 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $base = [];
+        // Check hscangku source valid
+        /* $base = [];
         $videos = Video::whereIn('genre', Video::$genre_jav)->where('sd', 'like', '%\cdn2020.com%')->pluck('sd');
         foreach ($videos as $video) {
             $url = "https://".Helper::get_string_between($video, 'https://', '/video');
@@ -86,7 +87,7 @@ class BotController extends Controller
             } else {
                 return "Hscangku new base curl failed...";
             }
-        }
+        } */
 
 
         // Update outdated hscangku poster
@@ -115,12 +116,12 @@ class BotController extends Controller
             $video->save();
         } */
 
-        /* $filename = 'save_playlist_public.png';
+        $filename = 'erolabs-300x100-cn.gif';
         $url = 'vdownload.hembed.com';
-        $expiration = time() + 3155692600;
+        $expiration = time() + 31556926;
         $token = 'xVEO8rLVgGkUBEBg';
         $source = '/image/icon/'.$filename;
-        return Video::getSignedUrlParameter($url, $source, $token, $expiration); */
+        return Video::getSignedUrlParameter($url, $source, $token, $expiration);
 
         /* $id = 84803;
         $huge = $id.'h.jpg';
