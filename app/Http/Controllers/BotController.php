@@ -37,12 +37,14 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $likes = Like::where('created_at', '>=', Carbon::now()->subDay())->get();
-        foreach ($likes as $like) {
-            if (!User::where('id', $like->user_id)->exists()) {
-                $like->delete();
-            }
-        }
+        $videos = Video::whereIn('genre', Video::$genre_jav)->where('foreign_sd', 'not like', '%"poster"%')->where('foreign_sd', 'like', '%"missav"%')->get();
+        return $videos->count();
+
+        /* $videos = Video::whereIn('genre', Video::$genre_jav)->get();
+        foreach ($videos as $video) {
+            $video->cover = "https://vdownload.hembed.com/image/cover/E6mSQA2.jpg?secure=rc36ujEZGDGbhTJYIRNU3Q==,4854601037&genre=jav";
+            $video->save();
+        } */
 
         /* $videos = Video::whereIn('genre', ['裏番', '泡麵番', 'Motion Anime', '3D動畫', '同人作品', 'Cosplay', '新番預告'])->where('cover', 'like', '%https://img4.qy0.ru%')->get();
         foreach ($videos as $video) {
@@ -55,7 +57,7 @@ class BotController extends Controller
             $video->save();
         } */
 
-        /* $filename = 'Np7Fhg6.jpg';
+        /* $filename = 'E6mSQA2.jpg';
         $url = 'vdownload.hembed.com';
         $expiration = time() + 2629743;
         $token = 'xVEO8rLVgGkUBEBg';
