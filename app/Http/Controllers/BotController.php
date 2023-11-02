@@ -37,11 +37,54 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        /* $videos = Video::whereIn('genre', Video::$genre_jav)->where('cover', 'like', '%\666546.xyz%')->get();
+        $base = [];
+        $videos = Video::whereIn('genre', Video::$genre_jav)->where('sd', 'like', '%\cdn2020.com%')->pluck('sd');
         foreach ($videos as $video) {
-            $video->cover = str_replace('666546.xyz', '666548.xyz', $video->cover);
-            $video->save();
-        } */
+            $url = "https://".Helper::get_string_between($video, 'https://', '/video');
+            if (!in_array($url, $base)) {
+                array_push($base, $url);
+            }
+        }
+        $error = [];
+        foreach ($base as $url) {
+            $ch = curl_init($url);
+            curl_setopt($ch, CURLOPT_HEADER, true);    // we want headers
+            curl_setopt($ch, CURLOPT_NOBODY, true);    // we don't need body
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
+            curl_setopt($ch, CURLOPT_TIMEOUT,10);
+            $output = curl_exec($ch);
+            $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            curl_close($ch);
+            if ($httpcode == 0) {
+                array_push($error, $url);
+            }
+        }
+        foreach ($error as $url) {
+            $first = Video::whereIn('genre', Video::$genre_jav)->where('sd', 'like', '%'.$url.'%')->first();
+            $hscangku_link = Jav::$base;
+            $curl_connection = curl_init("{$hscangku_link}{$first->foreign_sd['hscangku']}");
+            curl_setopt($curl_connection, CURLOPT_REFERER, $hscangku_link);
+            curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+            curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($curl_connection, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:7.0.1) Gecko/20100101 Firefox/7.0.12011-10-16 20:23:00");
+            $hscangku_html = curl_exec($curl_connection);
+            curl_close($curl_connection);
+
+            $sd = 'https:'.str_replace('\\', '', Helper::get_string_between($hscangku_html, '"url":"https:', '"'));
+            if ($sd != '' && $sd != null && $sd != 'https:') {
+                $base_new = "https://".Helper::get_string_between($sd, 'https://', '/video');
+                $videos_old = Video::whereIn('genre', Video::$genre_jav)->where('sd', 'like', '%'.$url.'%')->get();
+                foreach ($videos_old as $video_old) {
+                    $video_old->sd = str_replace($url, $base_new, $video_old->sd);
+                    $video_old->save();
+                }
+
+            } else {
+                return "Hscangku new base curl failed...";
+            }
+        }
+
 
         // Update outdated hscangku poster
         /* $videos = Video::whereIn('genre', Video::$genre_jav)->where('foreign_sd', 'like', '%\666546.xyz%')->get();
@@ -52,12 +95,11 @@ class BotController extends Controller
             $video->save();
         } */
 
-        // Change all jav to hembed
-        $videos = Video::whereIn('genre', Video::$genre_jav)->where('foreign_sd', 'like', '%"poster"%')->get();
+        /* $videos = Video::whereIn('genre', Video::$genre_jav)->where('cover', 'like', '%\666546.xyz%')->get();
         foreach ($videos as $video) {
-            $video->cover = "https://vdownload.hembed.com/image/cover/E6mSQA2.jpg?secure=rc36ujEZGDGbhTJYIRNU3Q==,4854601037&genre=jav&poster={$video->foreign_sd['poster']}";
+            $video->cover = str_replace('666546.xyz', '666548.xyz', $video->cover);
             $video->save();
-        }
+        } */
 
         /* $videos = Video::whereIn('genre', ['裏番', '泡麵番', 'Motion Anime', '3D動畫', '同人作品', 'Cosplay', '新番預告'])->where('cover', 'like', '%https://img4.qy0.ru%')->get();
         foreach ($videos as $video) {
