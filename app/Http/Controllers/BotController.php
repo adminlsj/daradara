@@ -37,17 +37,6 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $videos = Video::where('id', '>', 85932)->where('id', '<', 300035)->get();
-        foreach ($videos as $video) {
-            $poster = explode('?', $video->foreign_sd['poster'])[0];
-            $temp = $video->foreign_sd;
-            $temp["poster"] = $poster;
-            $video->foreign_sd = $temp;
-
-            $video->cover = "https://vdownload.hembed.com/image/cover/E6mSQA2.jpg?secure=rc36ujEZGDGbhTJYIRNU3Q==,4854601037&genre=jav&poster={$poster}";
-            $video->save();
-        }
-
         // Check hscangku source valid
         /* $base = [];
         $videos = Video::whereIn('genre', Video::$genre_jav)->where('sd', 'like', '%\cdn2020.com%')->pluck('sd');
