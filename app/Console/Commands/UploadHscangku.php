@@ -44,6 +44,9 @@ class UploadHscangku extends Command
         // Jav::updateEmptySd();
         // Jav::updateWithMissav();
         $videos = Video::where('id', '>', 85932)->where('id', '<', 300035)->get();
-        Log::info($videos->count().' videos...');
+        foreach ($videos as $video) {
+            $poster = explode('?', $video->foreign_sd['poster'])[0];
+            Log::info($poster);
+        }
     }
 }
