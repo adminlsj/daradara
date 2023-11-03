@@ -373,7 +373,7 @@ class Jav
         Log::info('Avbebe update ended...');
     }
 
-    public static function uploadHscangkuShirouto($pages = 10)
+    public static function uploadHscangkuShirouto($pages = 20)
     {
         Log::info('Hscangku shirouto upload started...');
 
@@ -425,25 +425,6 @@ class Jav
                     Log::alert('Hscangku shirouto update CODE#'.$code.' exists at '.$original_link);
                     Mail::to('vicky.avionteam@gmail.com')->send(new UserReport('master ('.gethostname().')', 'Hscangku shirouto update exists', $code, 'Hscangku shirouto update CODE#'.$code, $original_link, 'master', 'master'));
                 } else {
-                    /* $imgur = '';
-                    $cover = '';
-                    $imgur_url = $poster_links[$hscangku_link.'_poster'];
-                    $image = Image::make($imgur_url);
-                    $image = $image->fit(2880, 1620, function ($constraint) {}, "top");
-                    $image = $image->stream();
-                    $pvars = array('image' => base64_encode($image));
-                    $curl = curl_init();
-                    curl_setopt($curl, CURLOPT_URL, 'https://api.imgur.com/3/image.json');
-                    curl_setopt($curl, CURLOPT_TIMEOUT, 30);
-                    curl_setopt($curl, CURLOPT_HTTPHEADER, array('Authorization: Client-ID ' . '5b63b1c883ddb72'));
-                    curl_setopt($curl, CURLOPT_POST, 1);
-                    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-                    curl_setopt($curl, CURLOPT_POSTFIELDS, $pvars);
-                    $out = curl_exec($curl);
-                    curl_close ($curl);
-                    $pms = json_decode($out, true);
-                    $imgur = $pms['data']['link']; */
-
                     $imgur = 'https://i.imgur.com/Ku2VhgD.jpg';
                     $poster = $poster_links[$hscangku_link.'_poster'];
                     $created_at = explode('/', Helper::get_string_between($poster, 'images/', '.'));
@@ -452,7 +433,7 @@ class Jav
                     $foreign_sd = ['hscangku' => $original_link, 'poster' => $poster];
                     $video = Video::create([
                         'user_id' => 575858,
-                        'playlist_id' => 9034,
+                        'playlist_id' => 9294,
                         'title' => strtoupper($title),
                         'translations' => ['JP' => strtoupper($title)],
                         'caption' => '',
@@ -467,7 +448,7 @@ class Jav
                         'created_at' => $created_at,
                         'uploaded_at' => Carbon::now()->toDateTimeString(),
                         'foreign_sd' => $foreign_sd,
-                        'cover' => 'https://i.imgur.com/E6mSQA2.jpg',
+                        'cover' => "https://vdownload.hembed.com/image/cover/E6mSQA2.jpg?secure=rc36ujEZGDGbhTJYIRNU3Q==,4854601037&genre=jav&poster={$poster}",
                         'uncover' => true,
                     ]);
                     $video->imgur = $video->id;
