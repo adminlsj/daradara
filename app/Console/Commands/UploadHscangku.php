@@ -39,6 +39,7 @@ class UploadHscangku extends Command
     public function handle()
     {
         // Jav::uploadHscangku();
-        Jav::updateEmptySd();
+        // Jav::updateEmptySd();
+        Jav::updateWithMissav();
     }
 }

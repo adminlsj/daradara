@@ -239,50 +239,12 @@ class Jav
                 $video->created_at = $created_at;
                 $video->uploaded_at = $created_at;
 
-                /* $imgur = '';
-                $cover = '';
-                $imgur_url = trim(Helper::get_string_between($missav_html, 'property="og:image" content="', '"'));
-                $image = Image::make($imgur_url);
-                $image = $image->fit(2880, 1620, function ($constraint) {}, "top");
-                $image = $image->stream();
-                $pvars = array('image' => base64_encode($image));
-                $curl = curl_init();
-                curl_setopt($curl, CURLOPT_URL, 'https://api.imgur.com/3/image.json');
-                curl_setopt($curl, CURLOPT_TIMEOUT, 30);
-                curl_setopt($curl, CURLOPT_HTTPHEADER, array('Authorization: Client-ID ' . '072cefc76176835'));
-                curl_setopt($curl, CURLOPT_POST, 1);
-                curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-                curl_setopt($curl, CURLOPT_POSTFIELDS, $pvars);
-                $out = curl_exec($curl);
-                curl_close ($curl);
-                $pms = json_decode($out, true);
-                $imgur = $pms['data']['link'];
-
-                $image = Image::make($imgur_url);
-                $image = $image->fit(268, 394, function ($constraint) {}, "right");
-                $image = $image->stream();
-                $pvars = array('image' => base64_encode($image));
-                $curl = curl_init();
-                curl_setopt($curl, CURLOPT_URL, 'https://api.imgur.com/3/image.json');
-                curl_setopt($curl, CURLOPT_TIMEOUT, 30);
-                curl_setopt($curl, CURLOPT_HTTPHEADER, array('Authorization: Client-ID ' . '5b63b1c883ddb72'));
-                curl_setopt($curl, CURLOPT_POST, 1);
-                curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-                curl_setopt($curl, CURLOPT_POSTFIELDS, $pvars);
-                $out = curl_exec($curl);
-                curl_close ($curl);
-                $pms = json_decode($out, true);
-                $cover = $pms['data']['link']; */
-
-                // $video->imgur = Helper::get_string_between($imgur, 'https://i.imgur.com/', '.');
-                // $video->cover = $cover;
                 $temp = $video->foreign_sd;
-                // $temp['thumbnail'] = Helper::get_string_between($imgur, 'https://i.imgur.com/', '.');
                 $temp['characters'] = implode(',', $characters);
                 $temp['missav'] = $missav_link;
                 $temp['poster'] = trim(Helper::get_string_between($missav_html, 'property="og:image" content="', '"'));
                 $video->imgur = $video->id;
-                $video->cover = "https://i.imgur.com/{$video->id}.jpg";
+                $video->cover = "https://vdownload.hembed.com/image/cover/E6mSQA2.jpg?secure=rc36ujEZGDGbhTJYIRNU3Q==,4854601037&genre=jav&poster={$temp['poster']}";
                 $video->foreign_sd = $temp;
                 $video->uploaded_at = Carbon::now()->toDateTimeString();
                 $video->save();
