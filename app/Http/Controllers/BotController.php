@@ -37,6 +37,9 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
+        $videos = Video::where('id', '>', 85932)->where('id', '<', 300035)->get();
+        Log::info($videos->count().' videos...');
+
         // Check hscangku source valid
         /* $base = [];
         $videos = Video::whereIn('genre', Video::$genre_jav)->where('sd', 'like', '%\cdn2020.com%')->pluck('sd');
@@ -116,12 +119,12 @@ class BotController extends Controller
             $video->save();
         } */
 
-        $filename = 'erolabs-300x100-cn.gif';
+        /* $filename = 'erolabs-300x100-cn.gif';
         $url = 'vdownload.hembed.com';
         $expiration = time() + 31556926;
         $token = 'xVEO8rLVgGkUBEBg';
         $source = '/image/icon/'.$filename;
-        return Video::getSignedUrlParameter($url, $source, $token, $expiration);
+        return Video::getSignedUrlParameter($url, $source, $token, $expiration); */
 
         /* $id = 84803;
         $huge = $id.'h.jpg';

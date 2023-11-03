@@ -242,7 +242,7 @@ class Jav
                 $temp = $video->foreign_sd;
                 $temp['characters'] = implode(',', $characters);
                 $temp['missav'] = $missav_link;
-                $temp['poster'] = trim(Helper::get_string_between($missav_html, 'property="og:image" content="', '"'));
+                $temp['poster'] = str_replace('?class=normal', '', trim(Helper::get_string_between($missav_html, 'property="og:image" content="', '"')));
                 $video->imgur = $video->id;
                 $video->cover = "https://vdownload.hembed.com/image/cover/E6mSQA2.jpg?secure=rc36ujEZGDGbhTJYIRNU3Q==,4854601037&genre=jav&poster={$temp['poster']}";
                 $video->foreign_sd = $temp;

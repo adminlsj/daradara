@@ -4,6 +4,8 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use App\Jav;
+use App\Video;
+use Illuminate\Support\Facades\Log;
 
 class UploadHscangku extends Command
 {
@@ -40,6 +42,8 @@ class UploadHscangku extends Command
     {
         // Jav::uploadHscangku();
         // Jav::updateEmptySd();
-        Jav::updateWithMissav();
+        // Jav::updateWithMissav();
+        $videos = Video::where('id', '>', 85932)->where('id', '<', 300035)->get();
+        Log::info($videos->count().' videos...');
     }
 }
