@@ -11,7 +11,7 @@
 
 @section('content')
 
-<!-- @include('ads.comics-banner-exoclick') -->
+<!-- include('ads.comics-banner-exoclick') -->
 
 <div class="comics-banner-ads">
   <div class="hidden-xs" style="display: flex; justify-content: center; align-items: center;">
