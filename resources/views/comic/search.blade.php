@@ -6,8 +6,7 @@
 
 @section('content')
 
-<!-- @include('ads.comics-banner-exoclick') -->
-<a style="display: flex; justify-content: center; align-items: center; margin-top: 19px; margin-bottom: 20px;" href="https://l.erodatalabs.com/s/0kHIbk" target="_blank"><img style="width: 300px; height: 100px;" src="https://vdownload.hembed.com/image/icon/erolabs-300x100-cn.gif?secure=TG8McNOOPKoNUxf7MzEd2A==,1730489521"></a>
+@include('ads.comics-banner-exoclick')
 
 <div id="comics-search-tag-top-row" style="text-align: center;">
   <h2 style="color: #d9d9d9;">
