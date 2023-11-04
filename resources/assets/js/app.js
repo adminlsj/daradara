@@ -182,10 +182,10 @@ window.onscroll = function() {
 
     var st = window.pageYOffset || document.documentElement.scrollTop;
     if (st > lastScrollTop) {
-        subnavhomemobile.slideUp(400);
+        subnavhomemobile.slideUp(300);
         mainnavhomemobile.css('height', '50px');
     } else if (st < lastScrollTop) {
-        subnavhomemobile.slideDown(400);
+        subnavhomemobile.slideDown(300);
         mainnavhomemobile.css('height', '100px');
     }
     lastScrollTop = st <= 0 ? 0 : st; // For Mobile or negative scrolling
