@@ -177,7 +177,6 @@ window.onscroll = function() {
         mainnavhomemobile.css('background-color', 'rgba(0,0,0,0.5)');
         mainnavhomemobile.css('backdrop-filter', 'blur(20px)');
         mainnavhomemobile.css('-webkit-backdrop-filter', 'blur(20px)');
-        mainnavhomemobile.css('height', '50px');
     } else {
         mainnavhomemobile.css('background-color', 'transparent');
         mainnavhomemobile.css('backdrop-filter', 'none');
@@ -185,10 +184,10 @@ window.onscroll = function() {
     }
 
     var st = window.pageYOffset || document.documentElement.scrollTop;
-    if (st > lastScrollTop) {
+    if (st > lastScrollTop + 5) {
         subnavhomemobile.slideUp(300);
         mainnavhomemobile.css('height', '50px');
-    } else if (st < lastScrollTop) {
+    } else if (st < lastScrollTop - 5) {
         subnavhomemobile.slideDown(300);
         mainnavhomemobile.css('height', '100px');
     }
