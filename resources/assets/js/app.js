@@ -175,9 +175,13 @@ var lastScrollTop = 0;
 window.onscroll = function() {
     if (window.pageYOffset >= 60) {
         mainnavhomemobile.css('background-color', 'rgba(0,0,0,0.5)');
+        mainnavhomemobile.css('backdrop-filter', 'blur(20px)');
+        mainnavhomemobile.css('-webkit-backdrop-filter', 'blur(20px)');
         mainnavhomemobile.css('height', '50px');
     } else {
         mainnavhomemobile.css('background-color', 'transparent');
+        mainnavhomemobile.css('backdrop-filter', 'none');
+        mainnavhomemobile.css('-webkit-backdrop-filter', 'none');
     }
 
     var st = window.pageYOffset || document.documentElement.scrollTop;
