@@ -165,33 +165,53 @@ $('.search-submit-btn').click(function(e) {
 
 var mainnav = $("#main-nav");
 var mainnavmobile = $(".main-nav-mobile");
+var mainnavhomemobile = $("#main-nav-home-mobile");
+var subnavhomemobile = $("#sub-nav-home-mobile");
 var searchnavdesktop = $("#search-nav-desktop");
 var searchnavmobile = $("#search-nav-mobile");
 var searchcontentdesktop = $("#search-content-padding-desktop");
 var searchcontentmobile = $("#search-content-padding-mobile");
+var lastScrollTop = 0;
 window.onscroll = function() {
-  if (window.pageYOffset != 0) {
-    mainnav.css('background-color', '#141414');
-    mainnavmobile.css('background-color', 'black');
-  } else {
-    mainnav.css('background-color', 'transparent');
-  }
+    if (window.pageYOffset >= 60) {
+        mainnavhomemobile.css('background-color', 'rgba(59,59,59,0.6)');
+        mainnavhomemobile.css('height', '50px');
+    } else {
+        mainnavhomemobile.css('background-color', 'transparent');
+    }
 
-  if (window.pageYOffset >= 68) {
-    searchnavdesktop.addClass('sticky');
-    searchcontentdesktop.css('padding-top', '101px');
-  } else {
-    searchnavdesktop.removeClass('sticky');
-    searchcontentdesktop.css('padding-top', '0px');
-  }
+    var st = window.pageYOffset || document.documentElement.scrollTop;
+    if (st > lastScrollTop) {
+        subnavhomemobile.slideUp(400);
+        mainnavhomemobile.css('height', '50px');
+    } else if (st < lastScrollTop) {
+        subnavhomemobile.slideDown(400);
+        mainnavhomemobile.css('height', '100px');
+    }
+    lastScrollTop = st <= 0 ? 0 : st; // For Mobile or negative scrolling
 
-  if (window.pageYOffset >= 50) {
-    searchnavmobile.addClass('sticky');
-    searchcontentmobile.css('padding-top', '53px');
-  } else {
-    searchnavmobile.removeClass('sticky');
-    searchcontentmobile.css('padding-top', '0px');
-  }
+    if (window.pageYOffset != 0) {
+      mainnav.css('background-color', '#141414');
+      mainnavmobile.css('background-color', 'black');
+    } else {
+      mainnav.css('background-color', 'transparent');
+    }
+
+    if (window.pageYOffset >= 68) {
+      searchnavdesktop.addClass('sticky');
+      searchcontentdesktop.css('padding-top', '101px');
+    } else {
+      searchnavdesktop.removeClass('sticky');
+      searchcontentdesktop.css('padding-top', '0px');
+    }
+
+    if (window.pageYOffset >= 50) {
+      searchnavmobile.addClass('sticky');
+      searchcontentmobile.css('padding-top', '53px');
+    } else {
+      searchnavmobile.removeClass('sticky');
+      searchcontentmobile.css('padding-top', '0px');
+    }
 }
 
 setTimeout(function(){
