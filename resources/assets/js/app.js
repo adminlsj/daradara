@@ -174,7 +174,7 @@ var searchcontentmobile = $("#search-content-padding-mobile");
 var lastScrollTop = 0;
 window.onscroll = function() {
     if (window.pageYOffset >= 60) {
-        mainnavhomemobile.css('background-color', 'rgba(59,59,59,0.6)');
+        mainnavhomemobile.css('background-color', 'rgba(0,0,0,0.5)');
         mainnavhomemobile.css('height', '50px');
     } else {
         mainnavhomemobile.css('background-color', 'transparent');
