@@ -190,14 +190,12 @@ window.onscroll = function() {
         consecScrollUp = 0;
         consecScrollDown = consecScrollDown + st - lastScrollTop;
         if (consecScrollDown > 20) {
-            subnavhomemobile.slideUp(300);
             mainnavhomemobile.css('height', '50px');
         }
     } else if (st < lastScrollTop) {
         consecScrollDown = 0;
         consecScrollUp = consecScrollUp + lastScrollTop - st;
         if (consecScrollUp > 20) {
-            subnavhomemobile.slideDown(300);
             mainnavhomemobile.css('height', '100px');
         }
     }
