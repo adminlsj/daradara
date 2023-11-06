@@ -2,7 +2,7 @@
 
   <div style="padding: 0 15px;">
     <a href="/" style="padding-right: 2.5%; color: white; font-size: 1.45em; line-height: 55px; letter-spacing: 1px;">
-      Hanime1.me
+      <img style="width: 15px;" src="https://i.imgur.com/9Yt93a3.png"><img style="width: 75px; margin-top: 5px; margin-left: 3px" src="https://i.imgur.com/0iAQeRM.png">
     </a>
 
     <!-- @if (Auth::check())
