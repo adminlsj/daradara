@@ -5,15 +5,15 @@
       <img style="width: 15px; margin-top: -7px; margin-right: 2px;" src="https://i.imgur.com/9Yt93a3.png">
     </a>
 
-    <!-- @if (Auth::check())
-      <a id="user-modal-trigger" href="{{ route('home.list') }}" style="padding-right: 0px; cursor: pointer;" class="nav-icon pull-right no-select" >
-          <img style="width: 25px; border-radius: 2px;" src="{{ Auth::user()->avatar_temp }}">
+    @if (Auth::check())
+      <a id="user-modal-trigger" href="{{ route('home.list') }}" style="padding-left: 2px; padding-right: 0px; cursor: pointer;" class="nav-icon pull-right no-select" >
+          <img style="width: 24px; border-radius: 2px;" src="{{ Auth::user()->avatar_temp }}">
       </a>
     @else
-        <a style="padding-right: 0px; padding-left: 7px" class="nav-icon pull-right" href="{{ route('login') }}"><span style="vertical-align: middle; font-size: 28px" class="material-icons-outlined">account_circle</span></a>
-    @endif -->
+      <a style="padding-right: 0px; padding-left: 7px;" class="nav-icon pull-right" href="{{ route('login') }}"><span style="vertical-align: middle; font-size: 28px" class="material-icons-outlined">account_circle</span></a>
+    @endif
 
-    <a style="margin-top: -1px; margin-right: -15px; padding: 0 10px;" class="nav-icon pull-right" href="{{ route('home.search') }}"><img style="width: 31px;" src="https://i.imgur.com/AnfoEPW.png"></a>
+    <a style="margin-top: -1px; padding: 0 11px;" class="nav-icon pull-right" href="{{ route('home.search') }}"><img style="width: 31px;" src="https://i.imgur.com/AnfoEPW.png"></a>
 
     <a style="padding: 0 10px;" class="nav-icon pull-right" href="/previews/{{ Carbon\Carbon::now()->format('Ym') }}"><span style="vertical-align: middle; font-size: 24px" class="material-icons-outlined">cast</span></a>
   </div>
