@@ -175,7 +175,7 @@ var lastScrollTop = 0;
 var consecScrollUp = 0;
 var consecScrollDown = 0;
 window.onscroll = function() {
-    if (window.pageYOffset >= 10) {
+    if (window.pageYOffset >= 9) {
         mainnavhomemobile.css('background-color', 'rgba(0,0,0,0.5)');
         mainnavhomemobile.css('backdrop-filter', 'blur(45px)');
         mainnavhomemobile.css('-webkit-backdrop-filter', 'blur(45px)');
