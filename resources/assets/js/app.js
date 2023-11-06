@@ -176,7 +176,7 @@ var consecScrollUp = 0;
 var consecScrollDown = 0;
 window.onscroll = function() {
     if (window.pageYOffset >= 10) {
-        mainnavhomemobile.css('background-color', 'rgba(0,0,0,0.5)');
+        mainnavhomemobile.css('background-color', 'rgba(0,0,0,0.6)');
         mainnavhomemobile.css('backdrop-filter', 'blur(50px)');
         mainnavhomemobile.css('-webkit-backdrop-filter', 'blur(50px)');
     } else {
@@ -190,7 +190,7 @@ window.onscroll = function() {
         consecScrollUp = 0;
         consecScrollDown = consecScrollDown + st - lastScrollTop;
         if (consecScrollDown > 20) {
-            mainnavhomemobile.css('top', '-100px');
+            mainnavhomemobile.css('top', '-101px');
         }
     } else if (st < lastScrollTop || window.pageYOffset <= 70) {
         consecScrollDown = 0;
