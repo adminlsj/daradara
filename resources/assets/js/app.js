@@ -175,7 +175,7 @@ var lastScrollTop = 0;
 var consecScrollUp = 0;
 var consecScrollDown = 0;
 window.onscroll = function() {
-    if (window.pageYOffset >= 60) {
+    if (window.pageYOffset >= 10) {
         mainnavhomemobile.css('background-color', 'rgba(0,0,0,0.5)');
         mainnavhomemobile.css('backdrop-filter', 'blur(20px)');
         mainnavhomemobile.css('-webkit-backdrop-filter', 'blur(20px)');
@@ -186,19 +186,17 @@ window.onscroll = function() {
     }
 
     var st = window.pageYOffset || document.documentElement.scrollTop;
-    if (st > lastScrollTop) {
+    if (st > lastScrollTop && window.pageYOffset >= 65) {
         consecScrollUp = 0;
         consecScrollDown = consecScrollDown + st - lastScrollTop;
         if (consecScrollDown > 20) {
-            subnavhomemobile.slideUp(300);
-            mainnavhomemobile.css('height', '50px');
+            mainnavhomemobile.css('top', '-100px');
         }
-    } else if (st < lastScrollTop) {
+    } else if (st < lastScrollTop || window.pageYOffset <= 70) {
         consecScrollDown = 0;
         consecScrollUp = consecScrollUp + lastScrollTop - st;
         if (consecScrollUp > 20) {
-            subnavhomemobile.slideDown(300);
-            mainnavhomemobile.css('height', '100px');
+            mainnavhomemobile.css('top', '0');
         }
     }
     lastScrollTop = st <= 0 ? 0 : st; // For Mobile or negative scrolling

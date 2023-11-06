@@ -26,7 +26,7 @@ class PreviewController extends Controller
         $prev = Preview::where('uuid', $current->subMonths(1)->format('Ym'))->first();
         $next = Preview::where('uuid', $current->addMonths(2)->format('Ym'))->first();
 
-        return $previews = Preview::with('video:id,title,imgur,translations,caption,tags_array,cover,artist,created_at')->where('uuid', $uuid)->orderBy('created_at', 'asc')->get();
+        $previews = Preview::with('video:id,title,imgur,translations,caption,tags_array,cover,artist,created_at')->where('uuid', $uuid)->orderBy('created_at', 'asc')->get();
 
         $comments_count = Comment::where('foreign_id', $uuid)->where('type', 'preview')->count();
 
