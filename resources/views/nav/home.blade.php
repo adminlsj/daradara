@@ -13,7 +13,7 @@
         <a style="padding-right: 0px; padding-left: 7px" class="nav-icon pull-right" href="{{ route('login') }}"><span style="vertical-align: middle; font-size: 28px" class="material-icons-outlined">account_circle</span></a>
     @endif -->
 
-    <a style="margin-right: -10px" class="nav-icon pull-right" href="{{ route('home.search') }}"><img style="width: 32px;" src="https://i.imgur.com/AnfoEPW.png"></a>
+    <a style="margin-right: -10px" class="nav-icon pull-right" href="{{ route('home.search') }}"><img style="width: 31px;" src="https://i.imgur.com/AnfoEPW.png"></a>
 
     <a class="nav-icon pull-right" href="/previews/{{ Carbon\Carbon::now()->format('Ym') }}"><span style="vertical-align: middle; font-size: 24px" class="material-icons-outlined">cast</span></a>
   </div>
