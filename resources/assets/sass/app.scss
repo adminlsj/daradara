@@ -820,8 +820,8 @@ th, td {
   position: fixed; 
   top: 0; 
   width: 100%; 
-  height: 101px; 
-  line-height: 101px; 
+  height: 100px; 
+  line-height: 100px; 
   background: linear-gradient(to bottom,rgba(0,0,0,.7) 10%,rgba(0,0,0,0)); 
   transition: background-color .4s; 
   z-index: 1;
@@ -3412,7 +3412,7 @@ div.sticky {
   }
 
   #main-nav-home-mobile {
-    height: 101px; 
+    height: 100px; 
     line-height: 50px;
   }
 

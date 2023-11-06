@@ -176,9 +176,9 @@ var consecScrollUp = 0;
 var consecScrollDown = 0;
 window.onscroll = function() {
     if (window.pageYOffset >= 10) {
-        mainnavhomemobile.css('background-color', 'rgba(0,0,0,0.6)');
-        mainnavhomemobile.css('backdrop-filter', 'blur(50px)');
-        mainnavhomemobile.css('-webkit-backdrop-filter', 'blur(50px)');
+        mainnavhomemobile.css('background-color', 'rgba(0,0,0,0.5)');
+        mainnavhomemobile.css('backdrop-filter', 'blur(45px)');
+        mainnavhomemobile.css('-webkit-backdrop-filter', 'blur(45px)');
     } else {
         mainnavhomemobile.css('background-color', 'transparent');
         mainnavhomemobile.css('backdrop-filter', 'none');
@@ -190,7 +190,7 @@ window.onscroll = function() {
         consecScrollUp = 0;
         consecScrollDown = consecScrollDown + st - lastScrollTop;
         if (consecScrollDown > 20) {
-            mainnavhomemobile.css('top', '-101px');
+            mainnavhomemobile.css('top', '-100px');
         }
     } else if (st < lastScrollTop || window.pageYOffset <= 70) {
         consecScrollDown = 0;
