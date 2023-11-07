@@ -10,7 +10,9 @@
           <img style="width: 24px; border-radius: 2px;" src="{{ Auth::user()->avatar_temp }}">
       </a>
     @else
-      <a style="padding-right: 0px; padding-left: 7px;" class="nav-icon pull-right" href="{{ route('login') }}"><span style="vertical-align: middle; font-size: 28px" class="material-icons-outlined">account_circle</span></a>
+      <a id="user-modal-trigger" href="{{ route('login') }}" style="padding-left: 1px; padding-right: 0px; cursor: pointer;" class="nav-icon pull-right no-select" >
+          <img style="width: 24px; border-radius: 2px;" src="https://pbs.twimg.com/media/F-URvjzbUAAVmKM?format=jpg&name=240x240">
+      </a>
     @endif
 
     <a style="margin-top: -1px; padding: 0 11px;" class="nav-icon pull-right" href="{{ route('home.search') }}"><img style="width: 31px;" src="https://i.imgur.com/AnfoEPW.png"></a>
