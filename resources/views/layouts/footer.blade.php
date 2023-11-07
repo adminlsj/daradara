@@ -28,7 +28,7 @@
     </div>
 </div>
 
-<div class="row footer-new hidden-sm hidden-md hidden-lg" style="font-weight: normal; padding: 15px; font-size: 13px; margin-top: -50px !important; background-color: #1E1E1E;">
+<div class="row footer-new hidden-sm hidden-md hidden-lg" style="font-weight: normal; padding: 15px; font-size: 13px; margin-top: -50px !important; background-color: #161616;">
     <div class="col-xs-12">
         <div style="line-height: 30px; color: #e5e5e5; font-weight: bold">用戶支援</div>
         <div style="line-height: 30px;"><a style="color: grey;" href="{{ App\Helper::$discord }}" target="_blank">Discord</a></div>
