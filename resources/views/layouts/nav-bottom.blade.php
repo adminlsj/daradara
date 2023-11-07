@@ -21,11 +21,11 @@
   </a> -->
   <a href="{{ Auth::check() ? route('playlist.index') : route('login') }}">
     @if (Request::is('*playlists*'))
-      <img style="height: 21px; margin-top: 6px; border-radius: 2px;" src="{{ Auth::check() ? Auth::user()->avatar_temp : 'https://pbs.twimg.com/media/F-URvjzbUAAVmKM?format=jpg&name=240x240' }}">
-      <div style="font-size: 9px; color: white; margin-top: 2px;">我的 Hanime1</div>
+      <img style="height: 22px; margin-top: 6px; border-radius: 2px;" src="{{ Auth::check() ? Auth::user()->avatar_temp : 'https://pbs.twimg.com/media/F-URvjzbUAAVmKM?format=jpg&name=240x240' }}">
+      <div style="font-size: 9px; color: white; margin-top: 3px;">我的 Hanime1</div>
     @else
-      <img style="height: 21px; margin-top: 6px; border-radius: 2px;" src="{{ Auth::check() ? Auth::user()->avatar_temp : 'https://pbs.twimg.com/media/F-URvjzbUAAVmKM?format=jpg&name=240x240' }}">
-      <div style="font-size: 9px; color: #838383; margin-top: 2px;">我的 Hanime1</div>
+      <img style="height: 22px; margin-top: 6px; border-radius: 2px;" src="{{ Auth::check() ? Auth::user()->avatar_temp : 'https://pbs.twimg.com/media/F-URvjzbUAAVmKM?format=jpg&name=240x240' }}">
+      <div style="font-size: 9px; color: #838383; margin-top: 3px;">我的 Hanime1</div>
     @endif
   </a>
   <!-- <a style="cursor: pointer;" data-toggle="modal" data-target="#links-modal">
