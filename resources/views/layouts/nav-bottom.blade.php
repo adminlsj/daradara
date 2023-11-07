@@ -1,11 +1,11 @@
 <div style="z-index: 10000 !important; background-color: rgba(30,30,30,0.75); backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px); {{ Request::is('*watch*') ? 'display:none;' : '' }}" class="bottom-nav hidden-lg hidden-md white-theme-nav-bottom">
   <a href="/">
     @if (Request::is('/'))
-      <img style="height: 19px; margin-top: 8px;" src="https://pbs.twimg.com/media/F-UXvmXaUAA2U1E?format=png&name=120x120">
-      <div style="font-size: 9px; color: white; margin-top: 5px;">主頁</div>
+      <img style="height: 20px; margin-top: 8px;" src="https://pbs.twimg.com/media/F-UXvmXaUAA2U1E?format=png&name=120x120">
+      <div style="font-size: 9px; color: white; margin-top: 4px;">主頁</div>
     @else
-      <img style="height: 19px; margin-top: 8px;" src="https://pbs.twimg.com/media/F-UY9HGbwAAOBEH?format=png&name=120x120">
-      <div style="font-size: 9px; color: #838383; margin-top: 5px;">主頁</div>
+      <img style="height: 20px; margin-top: 8px;" src="https://pbs.twimg.com/media/F-UY9HGbwAAOBEH?format=png&name=120x120">
+      <div style="font-size: 9px; color: #838383; margin-top: 4px;">主頁</div>
     @endif
   </a>
   <a href="{{ route('home.search') }}?sort=本日排行">
