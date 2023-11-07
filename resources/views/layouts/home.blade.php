@@ -56,7 +56,7 @@
 							</div>
 						</a>
 						<a href="{{ route('video.watch') }}?v={{ $random->id }}" class="hover-opacity-all home-banner-btn home-banner-info-btn home-card-popunder" style="cursor: pointer; font-size: 14px; text-decoration: none; color: white;">
-							<div style="display: inline-block; margin-top: 5px; width: 45%; background-color: rgba(52, 52, 52, 0.75); margin-left: 5px; padding-top: 8px; padding-bottom: 7px; border-radius: 5px;">
+							<div style="display: inline-block; margin-top: 5px; width: 45%; background-color: rgba(46, 46, 46, 0.75); margin-left: 5px; padding-top: 8px; padding-bottom: 7px; border-radius: 5px;">
 								<span style="vertical-align: middle; font-size: 1.66em; margin-top: -3px; padding-right: 4px" class="material-icons">info</span>更多資訊
 							</div>
 						</a>
