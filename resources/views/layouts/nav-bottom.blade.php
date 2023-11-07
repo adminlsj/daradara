@@ -2,10 +2,10 @@
   <a href="/">
     @if (Request::is('/'))
       <img style="height: 19px; margin-top: 7px;" src="https://pbs.twimg.com/media/F-UXvmXaUAA2U1E?format=png&name=120x120">
-      <div style="font-size: 9px; color: white; margin-top: 4px;">主頁</div>
+      <div style="font-size: 9px; color: white; margin-top: 5px;">主頁</div>
     @else
       <img style="height: 19px; margin-top: 7px;" src="https://pbs.twimg.com/media/F-UY9HGbwAAOBEH?format=png&name=120x120">
-      <div style="font-size: 9px; color: white; margin-top: 4px;">主頁</div>
+      <div style="font-size: 9px; color: white; margin-top: 5px;">主頁</div>
     @endif
   </a>
   <a href="{{ route('home.search') }}?sort=本日排行">
