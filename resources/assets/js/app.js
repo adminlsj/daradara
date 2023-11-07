@@ -176,9 +176,9 @@ var consecScrollUp = 0;
 var consecScrollDown = 0;
 window.onscroll = function() {
     if (window.pageYOffset >= 9) {
-        mainnavhomemobile.css('background-color', 'rgba(0,0,0,0.5)');
-        mainnavhomemobile.css('backdrop-filter', 'blur(45px)');
-        mainnavhomemobile.css('-webkit-backdrop-filter', 'blur(45px)');
+        mainnavhomemobile.css('background-color', 'rgba(30,30,30,0.75)');
+        mainnavhomemobile.css('backdrop-filter', 'blur(40px)');
+        mainnavhomemobile.css('-webkit-backdrop-filter', 'blur(40px)');
     } else {
         mainnavhomemobile.css('background-color', 'transparent');
         mainnavhomemobile.css('backdrop-filter', 'none');
