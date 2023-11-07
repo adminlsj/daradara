@@ -1941,7 +1941,7 @@ nav input[type=text]:focus {
   display: block;
   text-align: center;
   text-decoration: none;
-  width: 20%;
+  width: calc(100%/3);
   height: 100%;
 }
 

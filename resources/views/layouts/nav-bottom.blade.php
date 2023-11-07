@@ -1,33 +1,37 @@
 <div style="z-index: 10000 !important; border-top: 1px solid #222222; {{ Request::is('*watch*') ? 'display:none;' : '' }}" class="bottom-nav hidden-lg hidden-md white-theme-nav-bottom">
   <a href="/">
     @if (Request::is('/'))
-      <img style="height: 18px; margin-top: 8px;" src="https://vdownload.hembed.com/image/icon/home-filled.png?secure=hagVb_i7llq-gcI6jJG0CA==,4853050659">
+      <img style="height: 18px; margin-top: 7px;" src="https://pbs.twimg.com/media/F-UXvmXaUAA2U1E?format=png&name=120x120">
       <div style="font-size: 9px; color: white; margin-top: 4px;">主頁</div>
     @else
-      <img style="height: 18px; margin-top: 8px;" src="https://vdownload.hembed.com/image/icon/home.png?secure=n16erON9euRDe7sOztAHMw==,4853050602">
+      <img style="height: 18px; margin-top: 7px;" src="https://pbs.twimg.com/media/F-UY9HGbwAAOBEH?format=png&name=120x120">
       <div style="font-size: 9px; color: white; margin-top: 4px;">主頁</div>
     @endif
   </a>
-  <a href="{{ route('home.search') }}">
+  <a href="{{ route('home.search') }}?sort=本日排行">
+    <img style="height: 20px; margin-top: 5px;" src="https://i.imgur.com/icBuruf.png">
+    <div style="font-size: 9px; color: #838383; margin-top: 4px;">本日排行</div>
+  </a>
+  <!-- <a href="{{ route('home.search') }}">
     <img style="height: 18px; margin-top: 8px;" src="https://vdownload.hembed.com/image/icon/search.png?secure=F7gupEPkawNuqNqbnFpoFw==,4853042258">
     <div style="font-size: 9px; color: white; margin-top: 4px;">搜索</div>
   </a>
   <a href="{{ Auth::check() ? route('user.userEditUpload', Auth::user()) : route('login') }}">
     <img style="height: 33px; margin-top: 5px;" src="https://vdownload.hembed.com/image/icon/create.png?secure=32-QfdeAPAWLr1sgZ0ptzQ==,4853050770">
-  </a>
-  <a href="{{ route('playlist.index') }}">
+  </a> -->
+  <a href="{{ Auth::check() ? route('playlist.index') : route('login') }}">
     @if (Request::is('*playlists*'))
-      <img style="height: 18px; margin-top: 8px;" src="https://vdownload.hembed.com/image/icon/playlist-filled.png?secure=et5j2TNgx9uVOHU2mq6aqw==,4853050515">
-      <div style="font-size: 9px; color: white; margin-top: 4px;">我的清單</div>
+      <img style="height: 19px; margin-top: 7px; border-radius: 2px;" src="{{ Auth::check() ? Auth::user()->avatar_temp : 'https://pbs.twimg.com/media/F-URvjzbUAAVmKM?format=jpg&name=240x240' }}">
+      <div style="font-size: 9px; color: white; margin-top: 3px;">我的 Hanime1</div>
     @else
-      <img style="height: 18px; margin-top: 8px;" src="https://vdownload.hembed.com/image/icon/playlist.png?secure=6mARyP6E-BcxDSbV-6824A==,4853050079">
-      <div style="font-size: 9px; color: white; margin-top: 4px;">我的清單</div>
+      <img style="height: 19px; margin-top: 7px; border-radius: 2px;" src="{{ Auth::check() ? Auth::user()->avatar_temp : 'https://pbs.twimg.com/media/F-URvjzbUAAVmKM?format=jpg&name=240x240' }}">
+      <div style="font-size: 9px; color: #838383; margin-top: 3px;">我的 Hanime1</div>
     @endif
   </a>
-  <a style="cursor: pointer;" data-toggle="modal" data-target="#links-modal">
+  <!-- <a style="cursor: pointer;" data-toggle="modal" data-target="#links-modal">
     <img style="height: 18px; margin-top: 8px;" src="https://vdownload.hembed.com/image/icon/genre.png?secure=riIP7dAAk310OXa9TEva-w==,4853050724">
     <div style="font-size: 9px; color: white; margin-top: 4px;">全部分類</div>
-  </a>
+  </a> -->
 </div>
 
 <div id="links-modal" class="modal" role="dialog">
