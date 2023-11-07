@@ -55,9 +55,9 @@
 								<span style="vertical-align: middle; font-size: 2em; margin-top: -3px; padding-right: 3px" class="material-icons">play_arrow</span>播放
 							</div>
 						</a>
-						<a href="{{ route('video.watch') }}?v={{ $random->id }}" class="hover-opacity-all home-banner-btn home-banner-info-btn home-card-popunder" style="cursor: pointer; font-size: 14px; text-decoration: none; color: white;">
+						<a href="{{ route('video.watch') }}?v={{ $random->id }}" class="hover-opacity-all home-banner-btn home-banner-info-btn home-card-popunder" style="cursor: pointer; font-size: 14px; text-decoration: none; color: #e2e2e2;">
 							<div style="display: inline-block; margin-top: 5px; width: 45%; background-color: rgba(46, 46, 46, 0.75); margin-left: 5px; padding-top: 8px; padding-bottom: 7px; border-radius: 5px;">
-								<span style="vertical-align: middle; font-size: 1.66em; margin-top: -3px; padding-right: 4px" class="material-icons">info</span>更多資訊
+								<span style="vertical-align: middle; font-size: 1.66em; margin-top: -2px; padding-right: 5px" class="material-icons">info</span>更多資訊
 							</div>
 						</a>
 					</div>
