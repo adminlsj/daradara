@@ -5,20 +5,18 @@
       <div style="font-size: 9px; color: white; margin-top: 5px;">主頁</div>
     @else
       <img style="height: 19px; margin-top: 7px;" src="https://pbs.twimg.com/media/F-UY9HGbwAAOBEH?format=png&name=120x120">
-      <div style="font-size: 9px; color: white; margin-top: 5px;">主頁</div>
+      <div style="font-size: 9px; color: #838383; margin-top: 5px;">主頁</div>
     @endif
   </a>
   <a href="{{ route('home.search') }}?sort=本日排行">
-    <img style="height: 21px; margin-top: 6px;" src="https://i.imgur.com/icBuruf.png">
-    <div style="font-size: 9px; color: #838383; margin-top: 4px;">本日排行</div>
+    @if (Request::getRequestUri() == '/search?sort=%E6%9C%AC%E6%97%A5%E6%8E%92%E8%A1%8C')
+      <img style="height: 21px; margin-top: 6px;" src="https://i.imgur.com/WsWXk9S.png">
+      <div style="font-size: 9px; color: white; margin-top: 4px;">本日排行</div>
+    @else
+      <img style="height: 21px; margin-top: 6px;" src="https://i.imgur.com/icBuruf.png">
+      <div style="font-size: 9px; color: #838383; margin-top: 4px;">本日排行</div>
+    @endif
   </a>
-  <!-- <a href="{{ route('home.search') }}">
-    <img style="height: 18px; margin-top: 8px;" src="https://vdownload.hembed.com/image/icon/search.png?secure=F7gupEPkawNuqNqbnFpoFw==,4853042258">
-    <div style="font-size: 9px; color: white; margin-top: 4px;">搜索</div>
-  </a>
-  <a href="{{ Auth::check() ? route('user.userEditUpload', Auth::user()) : route('login') }}">
-    <img style="height: 33px; margin-top: 5px;" src="https://vdownload.hembed.com/image/icon/create.png?secure=32-QfdeAPAWLr1sgZ0ptzQ==,4853050770">
-  </a> -->
   <a href="{{ Auth::check() ? route('playlist.index') : route('login') }}">
     @if (Request::is('*playlists*'))
       <img style="height: 22px; margin-top: 6px; border-radius: 2px;" src="{{ Auth::check() ? Auth::user()->avatar_temp : 'https://pbs.twimg.com/media/F-URvjzbUAAVmKM?format=jpg&name=240x240' }}">

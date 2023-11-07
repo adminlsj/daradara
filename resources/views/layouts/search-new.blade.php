@@ -248,4 +248,6 @@
 	}
 </script>
 
+@include('layouts.nav-bottom')
+
 @endsection
