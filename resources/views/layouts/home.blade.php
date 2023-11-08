@@ -39,7 +39,7 @@
 	<div class="hidden-sm hidden-md hidden-lg" style="position: relative;">
 		<div style="position: relative;">
 			<img style="/* width: 116%; */ width: 110%;" src="https://vdownload.hembed.com/image/icon/home_poster_background.jpg?secure=V9I3grqYWBcEVFVq8VMswA==,4853041877">
-			<img style="position: absolute; top: 0; left: 0; width: 10000%; height: 100%; object-position: center 0px; object-fit: cover; -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0))); -webkit-filter: brightness(50%); filter: brightness(50%);" src="{{ $random->cover }}">
+			<img style="position: absolute; top: 0; left: 0; width: 10000%; height: 100%; object-position: center 0px; object-fit: cover; -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0))); -webkit-filter: brightness(50%); filter: brightness(50%); user-drag: none; -webkit-user-drag: none; user-select: none; -moz-user-select: none; -webkit-user-select: none; -ms-user-select: none;" src="{{ $random->cover }}">
 
 			<div style="position: absolute; top: 110px; left: 50%; -webkit-transform: translateX(-50%); transform: translateX(-50%); width: 88%; height: 70%;">
 				<div style="border: 1px solid rgba(255,255,255,.1); border-radius: 10px; height: 100%; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
