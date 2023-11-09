@@ -4,7 +4,7 @@
 	<div class="hidden-xs">
 		@include('nav.main')
 	</div>
-	<div id="main-nav-home" style="z-index: 10000; padding:0; height: 50px; line-height: 50px; margin-bottom: 0px; background-color: black; position: relative;" class="hidden-sm hidden-md hidden-lg">
+	<div id="main-nav-home-mobile" style="z-index: 10000 !important; position: fixed !important; overflow-x: hidden; background: none; transition: height 0.3s, background-color 0.4s, backdrop-filter 0.4s, -webkit-backdrop-filter 0.4s, top 0.4s;" class="hidden-sm hidden-md hidden-lg">
 
 	  <div style="padding: 0 15px;">
 	    <a href="/" style="padding-right: 2.5%; color: white; font-size: 1.40em; line-height: 57px; margin-left: 5px;">
@@ -26,6 +26,7 @@
 	      </a>
 	    @endif
 	  </div>
+	  @include('video.search-nav-mobile')
 	</div>
 @endsection
 
@@ -34,8 +35,6 @@
 <form style="overflow-y: hidden;" id="hentai-form" action="{{ route('home.search') }}" method="GET">
 
 	@include('video.search-nav-desktop')
-
-	@include('video.search-nav-mobile')
 
 	@include('video.modal-genre')
 
@@ -182,7 +181,7 @@
 
 	<div id="home-rows-wrapper" class="search-rows-wrapper">
 
-		<div class="hidden-sm hidden-md hidden-lg" style="text-align: center; margin-top: 55px; margin-bottom: -22px;">
+		<div class="hidden-sm hidden-md hidden-lg" style="text-align: center; margin-top: 105px; margin-bottom: -22px;">
 			<!-- @include('layouts.exoclick', ['id' => '5058654', 'width' => '300', 'height' => '100']) -->
 			<a href="https://l.erodatalabs.com/s/0kHIbk" target="_blank"><img style="width: 300px; height: 100px; margin-bottom: 5px;" src="https://vdownload.hembed.com/image/icon/erolabs-300x100-cn.gif?secure=TG8McNOOPKoNUxf7MzEd2A==,1730489521"></a>
 		</div>
