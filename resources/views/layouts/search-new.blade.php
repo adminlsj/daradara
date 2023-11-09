@@ -12,8 +12,8 @@
 	    </a>
 
 	    <form id="search-form" style="display: inline-block; margin-left: 5px; width: calc(100% - 85px); position: relative;">
-		    <input id="nav-query" name="nav-query" style="width: 100%; height: 32px; margin-top: -10px; vertical-align: middle; border-radius: 5px; background-color: #323231; border-color: #323231 !important; line-height: 32px; padding-left: 37px; font-size: 15px; padding-top: 1px" class="search-nav-bar" type="text" value="{{ request('query') }}" placeholder="搜尋 Hanime1.me">
-		    <i class="material-icons" style="color: dimgray; position: absolute; top: 9px; left: 7px; font-size: 25px">search</i>
+		    <input id="nav-query" name="nav-query" style="width: 100%; height: 32px; margin-top: -10px; vertical-align: middle; border-radius: 3px; background-color: #323231; border-color: #323231 !important; line-height: 32px; padding-left: 41px; font-size: 14px; padding-top: 1px" class="search-nav-bar" type="text" value="{{ request('query') }}" placeholder="搜尋 Hanime1.me">
+		    <img style="width: 29px; position: absolute; top: 3px; left: 9px; opacity: 0.4;" src="https://i.imgur.com/AnfoEPW.png">
 		</form>
 
 		@if (Auth::check())
