@@ -8,129 +8,87 @@
 
 <div class="nav-bottom-padding home-content-wrapper">
 
-  <div style="position: relative; margin-top: 0px; padding-top: 100px;">
+  <div style="position: relative; margin-top: 0px; padding-top: 300px;">
 
-    <div class="content-padding-new playlist-rows-top">
-      <a class="home-rows-header" style="text-decoration: none;" href="{{ route('playlist.show') }}?list=WL">
-        <h5 style="color: #8e9194;">儲存</h5>
-        <h3 style="font-weight: 700; color: #edeeef; margin-bottom: 20px;">稍後觀看</h3>
-        @include('layouts.home-row-arrow')
+    <div class="hidden-md hidden-lg" style="text-align: center; margin-top: -250px; margin-bottom: 90px">
+      <img style="width: 25%; border: 1px solid white; border-radius: 10px;" src="{{ $user->avatar_temp }}">
+      <div style="font-size: 22px; font-weight: bolder; color: white; margin-top: 1px">{{ $user->name }}<img style="margin-top: -3px; margin-left: 7px; width: 15px;" src="https://i.imgur.com/7uH5Lk2.png"></div>
+    </div>
+
+    <div id="home-rows-wrapper" style="position: relative;">
+      @include('playlist.card-wrapper', ['title' => '稍後觀看', 'videos' => $saves, 'link' => route('playlist.show').'list=WL'])
+      @include('playlist.card-wrapper', ['title' => '喜歡的影片', 'videos' => $likes, 'link' => route('playlist.show').'list=LL'])
+
+      <a id="show-more-playlists-btn" style="text-decoration: none;">
+        <h3>播放清單</h3>
       </a>
-    </div>
-    <div class="owl-home-row owl-carousel owl-theme">
-      @foreach ($saves as $save)
-        @if ($save->video)
-          <a style="text-decoration: none;" href="{{ route('video.watch') }}?v={{ $save->video->id }}">
-            <div class="home-rows-videos-div" style="position: relative; display: inline-block; margin-bottom:50px;">
-              <div style="position: relative; overflow: hidden;">
-                <img src="{{ $save->video->cover }}">
-                @if (strpos($save->video->cover, 'E6mSQA2') !== false)
-                  <img style="position: absolute; top: 0; left: 0; height: 100%; object-fit: cover" src="{{ $save->video->thumbL() }}">
-                @endif
-                <div class="home-rows-videos-title owl-home-rows-title" style="position:absolute; bottom:0; left:0; white-space: initial; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; color: white; width: 100%; padding: 2px 3px; background: linear-gradient(to bottom, transparent 0%, black 120%);">{{ $save->video->title }}</div>
-              </div>
-            </div>
-          </a>
-        @endif
-      @endforeach
-    </div>
+      <div class="content-padding-new">
+        <div class="row no-gutter" style="margin: 0 -5px;">
+          @foreach ($playlists as $playlist)
+            @if ($video = $playlist->reference_id ? $playlist->videos_ref->first() : $playlist->videos->first())
+              <div class="hover-lighter card-mobile-panel single-playlist-wrapper col-xs-6 col-sm-4 col-md-2 col-lg-2 {{ $loop->iteration > 10 ? 'hidden temp-hidden-playlists' : '' }}">
+                <a href="{{ route('playlist.show') }}?list={{ $playlist->reference_id ? $playlist->reference_id : $playlist->id }}" style="text-decoration: none;">
+                  <div style="position: relative;">
+                    <img style="width: 100%;" src="https://img4.qy0.ru/data/2205/36/2jSdwcGl.jpg">
+                    <img style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;" src="{{ $video->thumbL() }}">
 
-    <div class="content-padding-new playlist-rows" style="{{ $saves == '[]' ? 'margin-top: 0px;' : '' }}">
-      <a class="home-rows-header" style="text-decoration: none;" href="{{ route('playlist.show') }}?list=LL">
-        <h5 style="color: #8e9194;">讚好</h5>
-        <h3 style="font-weight: 700; color: #edeeef; margin-bottom: 20px;">喜歡的影片</h3>
-        @include('layouts.home-row-arrow')
-      </a>
-    </div>
-    <div class="owl-home-row owl-carousel owl-theme">
-      @foreach ($likes as $like)
-        @if ($like->video)
-          <a style="text-decoration: none;" href="{{ route('video.watch') }}?v={{ $like->video->id }}">
-            <div class="home-rows-videos-div" style="position: relative; display: inline-block; margin-bottom:50px;">
-              <div style="position: relative; overflow: hidden;">
-                <img src="{{ $like->video->cover }}">
-                @if (strpos($like->video->cover, 'E6mSQA2') !== false)
-                  <img style="position: absolute; top: 0; left: 0; height: 100%; object-fit: cover" src="{{ $like->video->thumbL() }}">
-                @endif
-                <div class="home-rows-videos-title owl-home-rows-title" style="position:absolute; bottom:0; left:0; white-space: initial; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; color: white; width: 100%; padding: 2px 3px; background: linear-gradient(to bottom, transparent 0%, black 120%);">{{ $like->video->title }}</div>
-              </div>
-            </div>
-          </a>
-        @endif
-      @endforeach
-    </div>
+                    <div style="position: absolute; top: 0; right: 0; height: 100%; background-color: rgba(0,0,0,0.8); width: 45%; text-align: center; color: white;">
+                      <div style="position: relative; top: 50%; transform: translateY(-50%);">
+                        <div style="margin-bottom: 12px; font-size: 16px; font-weight: bold;">{{ $playlist->reference_id ? $playlist->videos_ref_count : $playlist->videos_count }}</div>
+                        <img style="height: 15px; width: auto; display: block; margin-left: auto; margin-right: auto;" src="https://i.imgur.com/9Czw9s5.png">
+                      </div>
+                    </div>
+                  </div>
+                </a>
 
-    <div class="content-padding-new playlist-rows" style="{{ $likes == '[]' ? 'margin-top: 0px;' : '' }}">
-      <a class="home-rows-header" style="text-decoration: none;">
-        <h5 style="color: #8e9194;">分類</h5>
-        <h3 style="font-weight: 700; color: #edeeef; margin-bottom: 20px;">播放清單</h3>
-        <span id="show-more-playlists-btn" style="cursor: pointer;">@include('layouts.home-row-arrow')</span>
-      </a>
-      <div class="row no-gutter" style="margin: 0 -5px;">
-        @foreach ($playlists as $playlist)
-          @if ($video = $playlist->reference_id ? $playlist->videos_ref->first() : $playlist->videos->first())
-            <div class="hover-lighter card-mobile-panel single-playlist-wrapper col-xs-6 col-sm-4 col-md-2 col-lg-2 {{ $loop->iteration > 10 ? 'hidden temp-hidden-playlists' : '' }}">
-              <a href="{{ route('playlist.show') }}?list={{ $playlist->reference_id ? $playlist->reference_id : $playlist->id }}" style="text-decoration: none;">
-                <div style="position: relative;">
-                  <img style="width: 100%;" src="https://img4.qy0.ru/data/2205/36/2jSdwcGl.jpg">
-                  <img style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;" src="{{ $video->thumbL() }}">
+                <div style="margin-top: 6px; padding: 0 8px;">
+                  <div style="text-decoration: none; color: black;">
+                    <a href="{{ route('playlist.show') }}?list={{ $playlist->reference_id ? $playlist->reference_id : $playlist->id }}" style="text-decoration: none; font-size: inherit;">
+                      <div class="card-mobile-title">{{ $playlist->playlist_ref ? $playlist->playlist_ref->title : $playlist->title }}</div>
+                    </a>
 
-                  <div style="position: absolute; top: 0; right: 0; height: 100%; background-color: rgba(0,0,0,0.8); width: 45%; text-align: center; color: white;">
-                    <div style="position: relative; top: 50%; transform: translateY(-50%);">
-                      <div style="margin-bottom: 12px; font-size: 16px; font-weight: bold;">{{ $playlist->reference_id ? $playlist->videos_ref_count : $playlist->videos_count }}</div>
-                      <img style="height: 15px; width: auto; display: block; margin-left: auto; margin-right: auto;" src="https://i.imgur.com/9Czw9s5.png">
+                    <div class="card-mobile-genre-wrapper">
+                      <span class="card-mobile-genre-new" style="color: rgba(242, 38, 19, 1); border-color: rgba(242, 38, 19, 0.30);">清單</span>
+                      <div style="font-size: 12px; color: dimgray; margin-left: 2px; display: inline-block;" class="card-mobile-user">{{ $playlist->user_ref ? $playlist->user_ref->name : $playlist->user->name }}</div>
                     </div>
                   </div>
                 </div>
-              </a>
-
-              <div style="margin-top: 6px; padding: 0 8px;">
-                <div style="text-decoration: none; color: black;">
-                  <a href="{{ route('playlist.show') }}?list={{ $playlist->reference_id ? $playlist->reference_id : $playlist->id }}" style="text-decoration: none; font-size: inherit;">
-                    <div class="card-mobile-title">{{ $playlist->playlist_ref ? $playlist->playlist_ref->title : $playlist->title }}</div>
-                  </a>
-
-                  <div class="card-mobile-genre-wrapper">
-                    <span class="card-mobile-genre-new" style="color: rgba(242, 38, 19, 1); border-color: rgba(242, 38, 19, 0.30);">清單</span>
-                    <div style="font-size: 12px; color: dimgray; margin-left: 2px; display: inline-block;" class="card-mobile-user">{{ $playlist->user_ref ? $playlist->user_ref->name : $playlist->user->name }}</div>
-                  </div>
-                </div>
               </div>
-            </div>
 
-          @else
+            @else
 
-            <div class="hover-lighter card-mobile-panel single-playlist-wrapper col-xs-6 col-sm-4 col-md-2 col-lg-2 {{ $loop->iteration > 10 ? 'hidden temp-hidden-playlists' : '' }}">
-              <a href="{{ route('playlist.show') }}?list={{ $playlist->reference_id ? $playlist->reference_id : $playlist->id }}" style="text-decoration: none;">
-                <div style="position: relative;">
-                  <img style="width: 100%;" src="https://img4.qy0.ru/data/2205/36/2jSdwcGl.jpg">
-                  <img style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;" src="https://i.imgur.com/qLIoSzml.png">
+              <div class="hover-lighter card-mobile-panel single-playlist-wrapper col-xs-6 col-sm-4 col-md-2 col-lg-2 {{ $loop->iteration > 10 ? 'hidden temp-hidden-playlists' : '' }}">
+                <a href="{{ route('playlist.show') }}?list={{ $playlist->reference_id ? $playlist->reference_id : $playlist->id }}" style="text-decoration: none;">
+                  <div style="position: relative;">
+                    <img style="width: 100%;" src="https://img4.qy0.ru/data/2205/36/2jSdwcGl.jpg">
+                    <img style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;" src="https://i.imgur.com/qLIoSzml.png">
 
-                  <div style="position: absolute; top: 0; right: 0; height: 100%; background-color: rgba(0,0,0,0.8); width: 45%; text-align: center; color: white;">
-                    <div style="position: relative; top: 50%; transform: translateY(-50%);">
-                      <div style="margin-bottom: 12px; font-size: 16px; font-weight: bold;">0</div>
-                      <img style="height: 15px; width: auto; display: block; margin-left: auto; margin-right: auto;" src="https://i.imgur.com/9Czw9s5.png">
+                    <div style="position: absolute; top: 0; right: 0; height: 100%; background-color: rgba(0,0,0,0.8); width: 45%; text-align: center; color: white;">
+                      <div style="position: relative; top: 50%; transform: translateY(-50%);">
+                        <div style="margin-bottom: 12px; font-size: 16px; font-weight: bold;">0</div>
+                        <img style="height: 15px; width: auto; display: block; margin-left: auto; margin-right: auto;" src="https://i.imgur.com/9Czw9s5.png">
+                      </div>
+                    </div>
+                  </div>
+                </a>
+
+                <div style="margin-top: 6px; padding: 0 8px;">
+                  <div style="text-decoration: none; color: black;">
+                    <a href="{{ route('playlist.show') }}?list={{ $playlist->reference_id ? $playlist->reference_id : $playlist->id }}" style="text-decoration: none; font-size: inherit;">
+                      <div class="card-mobile-title">{{ $playlist->title }}</div>
+                    </a>
+
+                    <div class="card-mobile-genre-wrapper">
+                      <span class="card-mobile-genre-new" style="color: rgba(242, 38, 19, 1); border-color: rgba(242, 38, 19, 0.30);">清單</span>
+                      <div style="font-size: 12px; color: dimgray; margin-left: 2px; display: inline-block;" class="card-mobile-user">{{ $playlist->reference_user_id ? $playlist->user_ref->name : $playlist->user->name }}</div>
                     </div>
                   </div>
                 </div>
-              </a>
-
-              <div style="margin-top: 6px; padding: 0 8px;">
-                <div style="text-decoration: none; color: black;">
-                  <a href="{{ route('playlist.show') }}?list={{ $playlist->reference_id ? $playlist->reference_id : $playlist->id }}" style="text-decoration: none; font-size: inherit;">
-                    <div class="card-mobile-title">{{ $playlist->title }}</div>
-                  </a>
-
-                  <div class="card-mobile-genre-wrapper">
-                    <span class="card-mobile-genre-new" style="color: rgba(242, 38, 19, 1); border-color: rgba(242, 38, 19, 0.30);">清單</span>
-                    <div style="font-size: 12px; color: dimgray; margin-left: 2px; display: inline-block;" class="card-mobile-user">{{ $playlist->reference_user_id ? $playlist->user_ref->name : $playlist->user->name }}</div>
-                  </div>
-                </div>
               </div>
-            </div>
 
-          @endif
-        @endforeach
+            @endif
+          @endforeach
+        </div>
       </div>
     </div>
 
