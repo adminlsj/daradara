@@ -10,15 +10,6 @@
 @endsection
 
 @section('content')
-
-@if ($is_mobile)
-  <div id="mobile-ad" class="hidden-md hidden-lg" style="text-align: center; margin-top: 60px; padding-bottom: 0px; position: relative; display: flex; justify-content: center; align-items: center;">
-    <!-- @include('layouts.exoclick', ['id' => '5058654', 'width' => '300', 'height' => '100']) -->
-    <iframe width="300px" height="100px" style="display:block" marginWidth="0" marginHeight="0" frameBorder="no" src="https://creative.kbnmnl.com/widgets/v4/Universal?campaignId=belowPlayer300100&modelPageOption=model&tag=girls%2Fchinese%2Cgirls%2Fjapanese&thumbsMargin=5&hideButton=1&hideTitle=1&userId=68266da2436a81581f441c04a73d1525467dff2da85808235979b437cff6f852&quality=240p&autoplay=all&autoplayForce=1&hideLiveBadge=0"></iframe>
-    <div id="close-mobile-ad-btn" style="position: absolute; top: 5px; right: 1px; cursor: pointer; border: 1px solid white;"><i style="vertical-align: middle; color: white;" class="material-icons">close</i></div>
-  </div>
-@endif
-
 <div id="content-div">
   <div class="row no-gutter video-show-width">
     <div id="player-div-wrapper" class="col-md-9 single-show-player fluid-player-desktop-styles" style="background-color: #141414; position: relative; overflow-y: hidden; overflow-x: hidden;">
@@ -49,7 +40,13 @@
 
       @endif
 
-      @if (!$is_mobile)
+      @if ($is_mobile)
+        <div id="mobile-ad" class="hidden-md hidden-lg " style="text-align: center; padding-top: 0px; padding-bottom: 0px; background-color: black; position: relative; display: flex; justify-content: center; align-items: center;">
+          <!-- @include('layouts.exoclick', ['id' => '5058654', 'width' => '300', 'height' => '100']) -->
+          <iframe width="300px" height="100px" style="display:block" marginWidth="0" marginHeight="0" frameBorder="no" src="https://creative.kbnmnl.com/widgets/v4/Universal?campaignId=belowPlayer300100&modelPageOption=model&tag=girls%2Fchinese%2Cgirls%2Fjapanese&thumbsMargin=5&hideButton=1&hideTitle=1&userId=68266da2436a81581f441c04a73d1525467dff2da85808235979b437cff6f852&quality=240p&autoplay=all&autoplayForce=1&hideLiveBadge=0"></iframe>
+          <div id="close-mobile-ad-btn" style="position: absolute; top: 5px; right: 1px; cursor: pointer; border: 1px solid white;"><i style="vertical-align: middle; color: white;" class="material-icons">close</i></div>
+        </div>
+      @else
         <div style="margin-top: 7px; margin-bottom: 0px; text-align: center">
           @include('layouts.exoclick', ['id' => '4372406', 'width' => '728', 'height' => '90'])
         </div>
