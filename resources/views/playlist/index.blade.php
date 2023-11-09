@@ -21,8 +21,8 @@
       @include('playlist.card-wrapper', ['title' => '稍後觀看', 'videos' => $saves, 'link' => route('playlist.show').'?list=WL'])
       @include('playlist.card-wrapper', ['title' => '喜歡的影片', 'videos' => $likes, 'link' => route('playlist.show').'?list=LL'])
 
-      <a id="show-more-playlists-btn" style="text-decoration: none;">
-        <h3>播放清單</h3>
+      <a style="text-decoration: none;">
+        <h3>播放清單<span id="show-more-playlists-btn" style="cursor: pointer;"><span style="vertical-align: middle; margin-top: -8px; margin-left: 0px; font-size: 25px; margin-bottom: -5px;" class="material-icons">chevron_right</span></span></h3>
       </a>
       <div class="content-padding-new">
         <div class="row no-gutter" style="margin: 0 -5px;">
