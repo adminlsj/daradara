@@ -18,8 +18,8 @@
     </div>
 
     <div id="home-rows-wrapper" style="position: relative;">
-      @include('playlist.card-wrapper', ['title' => '稍後觀看', 'videos' => $saves, 'link' => route('playlist.show').'list=WL'])
-      @include('playlist.card-wrapper', ['title' => '喜歡的影片', 'videos' => $likes, 'link' => route('playlist.show').'list=LL'])
+      @include('playlist.card-wrapper', ['title' => '稍後觀看', 'videos' => $saves, 'link' => route('playlist.show').'?list=WL'])
+      @include('playlist.card-wrapper', ['title' => '喜歡的影片', 'videos' => $likes, 'link' => route('playlist.show').'?list=LL'])
 
       <a id="show-more-playlists-btn" style="text-decoration: none;">
         <h3>播放清單</h3>
