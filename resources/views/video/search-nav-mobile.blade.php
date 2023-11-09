@@ -15,7 +15,7 @@
 		<span class="home-genre-tabs">發佈日期<img style="margin-top: -2px; margin-left: 7px; width: 12px;" src="https://i.imgur.com/7uH5Lk2.png"></span>
 	</div>
 
-	<div class="home-genre-tabs-wrapper search-type-button">
+	<div class="home-genre-tabs-wrapper search-type-button" style="margin-right: 0px;">
 		<span class="home-genre-tabs">
 			@if ($type == 'artist')
 				<span class="search-type-input">搜尋影片</span>
