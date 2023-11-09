@@ -166,8 +166,8 @@ $('.search-submit-btn').click(function(e) {
 var mainnav = $("#main-nav");
 var navtransonscroll = $(".nav-trans-on-scroll");
 var mainnavmobile = $(".main-nav-mobile");
-var mainnavhomemobile = $("#main-nav-home-mobile");
-var subnavhomemobile = $("#sub-nav-home-mobile");
+var navslideonscroll = $(".nav-slide-on-scroll");
+var navtransonscroll = $(".nav-trans-on-scroll");
 var searchnavdesktop = $("#search-nav-desktop");
 var searchnavmobile = $("#search-nav-mobile");
 var searchcontentdesktop = $("#search-content-padding-desktop");
@@ -191,13 +191,13 @@ window.onscroll = function() {
         consecScrollUp = 0;
         consecScrollDown = consecScrollDown + st - lastScrollTop;
         if (consecScrollDown > 20) {
-            mainnavhomemobile.css('top', '-100px');
+            navslideonscroll.css('top', '-100px');
         }
     } else if (st < lastScrollTop || window.pageYOffset <= 70) {
         consecScrollDown = 0;
         consecScrollUp = consecScrollUp + lastScrollTop - st;
         if (consecScrollUp > 20) {
-            mainnavhomemobile.css('top', '0');
+            navslideonscroll.css('top', '0');
         }
     }
     lastScrollTop = st <= 0 ? 0 : st; // For Mobile or negative scrolling
