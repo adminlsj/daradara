@@ -4,17 +4,27 @@
 	<div class="hidden-xs">
 		@include('nav.main')
 	</div>
-	<div id="main-nav-home" style="z-index: 10000; padding:0; padding-top: 3px; height: 50px; line-height: 40px; margin-bottom: 0px; background-color: black; position: relative;" class="hidden-sm hidden-md hidden-lg">
+	<div id="main-nav-home" style="z-index: 10000; padding:0; height: 50px; line-height: 50px; margin-bottom: 0px; background-color: black; position: relative;" class="hidden-sm hidden-md hidden-lg">
 
-	  <div style="padding: 0 10px; margin-bottom: -10px;">
-	    <a href="/" style="color: #e5e5e5;">
-	      <i class="material-icons-outlined" style="vertical-align: middle; margin-top: 0px; margin-left: 0px; font-size: 28px">chevron_left</i>
+	  <div style="padding: 0 15px;">
+	    <a href="/" style="padding-right: 2.5%; color: white; font-size: 1.40em; line-height: 57px; margin-left: 5px;">
+	      <img style="width: 15px; margin-top: -7px; margin-right: 2px;" src="https://i.imgur.com/9Yt93a3.png">
 	    </a>
 
-	    <form id="search-form" style="display: inline-block; margin-left: 7px; width: calc(100% - 39px); position: relative;">
-		    <input id="nav-query" name="nav-query" style="width: 100%; height: 36px; margin-top: 0px; vertical-align: middle; border-radius: 5px; background-color: #323231; border-color: #323231 !important; line-height: 35px; padding-left: 37px; font-size: 15px; padding-top: 4px" class="search-nav-bar" type="text" value="{{ request('query') }}" placeholder="搜尋 Hanime1.me">
+	    <form id="search-form" style="display: inline-block; margin-left: 5px; width: calc(100% - 85px); position: relative;">
+		    <input id="nav-query" name="nav-query" style="width: 100%; height: 30px; margin-top: -10px; vertical-align: middle; border-radius: 5px; background-color: #323231; border-color: #323231 !important; line-height: 30px; padding-left: 37px; font-size: 15px; padding-top: 0px" class="search-nav-bar" type="text" value="{{ request('query') }}" placeholder="搜尋 Hanime1.me">
 		    <i class="material-icons" style="color: dimgray; position: absolute; top: 9px; left: 7px; font-size: 25px">search</i>
 		</form>
+
+		@if (Auth::check())
+	      <a id="user-modal-trigger" href="{{ route('home.list') }}" style="padding-left: 1px; padding-right: 0px; cursor: pointer;" class="nav-icon pull-right no-select" >
+	          <img style="width: 24px; border-radius: 2px; margin-top: 1px;" src="{{ Auth::user()->avatar_temp }}">
+	      </a>
+	    @else
+	      <a id="user-modal-trigger" href="{{ route('login') }}" style="padding-left: 1px; padding-right: 0px; cursor: pointer;" class="nav-icon pull-right no-select" >
+	          <img style="width: 24px; border-radius: 2px; margin-top: 1px;" src="https://pbs.twimg.com/media/F-URvjzbUAAVmKM?format=jpg&name=240x240">
+	      </a>
+	    @endif
 	  </div>
 	</div>
 @endsection
