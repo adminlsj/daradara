@@ -172,7 +172,7 @@
 
 	<div id="home-rows-wrapper" class="search-rows-wrapper">
 
-		<div class="hidden-sm hidden-md hidden-lg" style="text-align: center; margin-top: 0px; margin-bottom: -22px;">
+		<div class="hidden-sm hidden-md hidden-lg" style="text-align: center; margin-top: 55px; margin-bottom: -22px;">
 			<!-- @include('layouts.exoclick', ['id' => '5058654', 'width' => '300', 'height' => '100']) -->
 			<a href="https://l.erodatalabs.com/s/0kHIbk" target="_blank"><img style="width: 300px; height: 100px; margin-bottom: 5px;" src="https://vdownload.hembed.com/image/icon/erolabs-300x100-cn.gif?secure=TG8McNOOPKoNUxf7MzEd2A==,1730489521"></a>
 		</div>
