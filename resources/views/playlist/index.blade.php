@@ -11,8 +11,8 @@
   <div style="position: relative; margin-top: 0px; padding-top: 300px;">
 
     <div class="hidden-md hidden-lg" style="text-align: center; margin-top: -250px; margin-bottom: 90px">
-      <img style="width: 25%; border: 1px solid white; border-radius: 10px;" src="{{ $user->avatar_temp }}">
-      <div style="font-size: 22px; font-weight: bolder; color: white; margin-top: 1px">{{ $user->name }}<img style="margin-top: -3px; margin-left: 7px; width: 15px;" src="https://i.imgur.com/7uH5Lk2.png"></div>
+      <img style="width: 23%; border: 1px solid white; border-radius: 10px;" src="{{ $user->avatar_temp }}">
+      <div style="font-size: 22px; font-weight: bolder; color: white; margin-top: 2px">{{ $user->name }}<img style="margin-top: -3px; margin-left: 7px; width: 15px;" src="https://i.imgur.com/7uH5Lk2.png"></div>
     </div>
 
     <div id="home-rows-wrapper" style="position: relative;">
@@ -94,7 +94,7 @@
 
     @include('ads.search-banner-panel')
 
-    <div class="hidden-sm hidden-md hidden-lg" style="text-align: center; margin-bottom: 10px; margin-top: 10px">
+    <div class="hidden-sm hidden-md hidden-lg" style="text-align: center; margin-bottom: 25px; margin-top: 10px">
       <!-- JuicyAds v3.1 -->
       <script type="text/javascript" data-cfasync="false" async src="https://poweredby.jads.co/js/jads.js"></script>
       <ins id="941419" data-width="300" data-height="112"></ins>
@@ -110,55 +110,5 @@
 </div>
 
 @include('layouts.nav-bottom')
-
-<script>
-  var padding = $(window).width() * 0.04;
-  var mobile_padding = 10;
-  $('.owl-home-row').owlCarousel({
-      loop:false,
-      dots:false,
-      responsive:{
-          0:{
-              items:3,
-              margin:4,
-              stagePadding: mobile_padding,
-          },
-          768:{
-              items:4,
-              margin:10,
-              stagePadding: padding,
-          },
-          992:{
-              items:6,
-              margin:10,
-              stagePadding: padding,
-          },
-          1200:{
-            items:7,
-            margin:10,
-            stagePadding: padding,
-          }
-      }
-  })
-
-  $('.owl-home-uncover-last-row').owlCarousel({
-      loop: false,
-      margin: 10,
-      responsive:{
-          0:{
-              items:2
-          },
-          768:{
-              items:3
-          },
-          992:{
-              items:4
-          },
-          1200:{
-            items:5
-          }
-      }
-  })
-</script>
 
 @endsection
