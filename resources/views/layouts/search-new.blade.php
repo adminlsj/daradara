@@ -4,7 +4,7 @@
 	<div class="hidden-xs">
 		@include('nav.main')
 	</div>
-	<div id="main-nav-home-mobile" style="z-index: 10000 !important; position: fixed !important; overflow-x: hidden; background: none; transition: height 0.3s, background-color 0.4s, backdrop-filter 0.4s, -webkit-backdrop-filter 0.4s, top 0.4s;" class="hidden-sm hidden-md hidden-lg">
+	<div id="main-nav-home-mobile" style="z-index: 10000 !important; overflow-x: hidden; background: none; transition: height 0.3s, background-color 0.4s, backdrop-filter 0.4s, -webkit-backdrop-filter 0.4s, top 0.4s;" class="hidden-sm hidden-md hidden-lg">
 
 	  <div style="padding: 0 15px;">
 	    <a href="/" style="padding-right: 2.5%; color: white; font-size: 1.40em; line-height: 57px; margin-left: 5px;">
@@ -177,7 +177,6 @@
 	</div>
 
 	<div id="search-content-padding-desktop" class="hidden-xs"></div>
-	<div id="search-content-padding-mobile" class="hidden-sm hidden-md hidden-lg hidden-xl"></div>
 
 	<div id="home-rows-wrapper" class="search-rows-wrapper">
 
