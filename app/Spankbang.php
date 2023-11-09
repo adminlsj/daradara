@@ -25,7 +25,7 @@ class Spankbang
                         return (int) Helper::get_string_between($video->sd, ',', '&m=');
                     })
                     ->values()
-                    ->slice(0, 3);
+                    ->slice(10, 13);
 
         foreach ($videos as $video) {
             $html = Spankbang::getBrowsershotHtml($video->foreign_sd['spankbang']);
