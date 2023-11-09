@@ -12,7 +12,7 @@
 @section('content')
 
 <!-- if ($is_mobile) -->
-  <div id="mobile-ad" class="hidden-md hidden-lg" style="text-align: center; margin-top: 65px; padding-bottom: 0px; position: relative; display: flex; justify-content: center; align-items: center;">
+  <div id="mobile-ad" class="hidden-md hidden-lg" style="text-align: center; margin-top: 60px; padding-bottom: 0px; position: relative; display: flex; justify-content: center; align-items: center;">
     <!-- @include('layouts.exoclick', ['id' => '5058654', 'width' => '300', 'height' => '100']) -->
     <iframe width="300px" height="100px" style="display:block" marginWidth="0" marginHeight="0" frameBorder="no" src="https://creative.kbnmnl.com/widgets/v4/Universal?campaignId=belowPlayer300100&modelPageOption=model&tag=girls%2Fchinese%2Cgirls%2Fjapanese&thumbsMargin=5&hideButton=1&hideTitle=1&userId=68266da2436a81581f441c04a73d1525467dff2da85808235979b437cff6f852&quality=240p&autoplay=all&autoplayForce=1&hideLiveBadge=0"></iframe>
     <div id="close-mobile-ad-btn" style="position: absolute; top: 5px; right: 1px; cursor: pointer; border: 1px solid white;"><i style="vertical-align: middle; color: white;" class="material-icons">close</i></div>
