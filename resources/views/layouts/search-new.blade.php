@@ -17,7 +17,7 @@
 		</form>
 
 		@if (Auth::check())
-	      <a id="user-modal-trigger" href="{{ route('home.list') }}" style="padding-left: 1px; padding-right: 0px; cursor: pointer;" class="nav-icon pull-right no-select" >
+	      <a id="user-modal-trigger" href="{{ route('playlist.index') }}" style="padding-left: 1px; padding-right: 0px; cursor: pointer;" class="nav-icon pull-right no-select" >
 	          <img style="width: 24px; border-radius: 2px;" src="{{ Auth::user()->avatar_temp }}">
 	      </a>
 	    @else
