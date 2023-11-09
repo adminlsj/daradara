@@ -1,43 +1,22 @@
-<div style="padding: 0 10px; margin-bottom: -10px;">
-  <a href="/" style="color: white; font-size: 1.4em; font-family: 'Encode Sans Condensed', sans-serif;">
-    <span style="color: crimson">H</span>anime1<span style="color: crimson">.</span>me
-  </a>
+<div id="main-nav-home-mobile" style="z-index: 10000 !important; position: fixed !important; overflow-x: hidden; background: none; transition: height 0.3s, background-color 0.4s, backdrop-filter 0.4s, -webkit-backdrop-filter 0.4s, top 0.4s; height: 100px !important;" class="hidden-sm hidden-md hidden-lg">
 
-  @if (Auth::check())
-    <div id="user-mobile-modal-trigger" style="padding-left: 12px; padding-right: 0px; cursor: pointer;" class="nav-icon pull-right" data-toggle="modal" data-target="#user-mobile-modal">
-      <img style="width: 26px; border-radius: 50%;" src="{{ Auth::user()->avatar_temp }}">
-    </div>
-
-    <div style="z-index: 10001" id="user-mobile-modal" class="modal" role="dialog">
-      <div class="modal-dialog modal-sm" style="position: absolute; top: 87px;">
-        <div class="modal-content" style="border-radius: 3px; background-color: #222222; color: white;">
-          <div class="modal-header" style="border-bottom: 1px solid #333333; position: relative; height: 65px;">
-            <span class="material-icons pull-left no-select modal-close-btn" data-dismiss="modal">close</span>
-            <h4 class="modal-title" style="text-align: center; font-weight: bold; margin: 0; padding: 0; margin-top: 5px; font-size: 18px;">帳戶設定</h4>
-          </div>
-
-          <div class="modal-body" style="padding: 0; height: calc(100% - 65px); overflow-x: hidden;">
-            @include('layouts.user-modal-content')
-            <hr style="margin: 0; border-color: #333333;">
-          </div>
-        </div>
-      </div>
-    </div>
-  @else
-    <a style="padding-right: 0px" class="nav-icon pull-right" href="{{ route('playlist.index') }}">
-      <span style="vertical-align: middle; margin-top: -1px;" class="material-icons">account_circle</span>
+  <div style="padding: 0 15px;">
+    <a href="/" style="padding-right: 2.5%; color: white; font-size: 1.40em; line-height: 57px; margin-left: 5px;">
+      <img style="width: 15px; margin-top: -7px; margin-right: 2px;" src="https://i.imgur.com/9Yt93a3.png">
     </a>
-  @endif
 
-  <a class="nav-icon pull-right" href="{{ route('home.search') }}">
-    <img style="margin-top: -2px; margin-right: 1px;" height="20" src="https://vdownload.hembed.com/image/icon/search.png?secure=F7gupEPkawNuqNqbnFpoFw==,4853042258">
-  </a>
+    @if (Auth::check())
+      <a id="user-modal-trigger" href="{{ route('home.list') }}" style="padding-left: 1px; padding-right: 0px; cursor: pointer;" class="nav-icon pull-right no-select" >
+          <img style="width: 24px; border-radius: 2px;" src="{{ Auth::user()->avatar_temp }}">
+      </a>
+    @else
+      <a id="user-modal-trigger" href="{{ route('login') }}" style="padding-left: 1px; padding-right: 0px; cursor: pointer;" class="nav-icon pull-right no-select" >
+          <img style="width: 24px; border-radius: 2px;" src="https://pbs.twimg.com/media/F-URvjzbUAAVmKM?format=jpg&name=240x240">
+      </a>
+    @endif
 
-  <a class="nav-icon pull-right" href="{{ Auth::check() ? route('user.userEditUpload', Auth::user()) : route('login') }}">
-    <img style="margin-top: -2px; margin-right: 5px;" height="20" src="https://vdownload.hembed.com/image/icon/notification.png?secure=lgC6oJriAcWxjPf3HDCr7Q==,4853042395">
-  </a>
+    <a style="margin-top: -1px; padding: 0 11px;" class="nav-icon pull-right" href="{{ route('home.search') }}"><img style="width: 31px;" src="https://i.imgur.com/AnfoEPW.png"></a>
 
-  <a class="nav-icon pull-right" href="/previews/{{ Carbon\Carbon::now()->format('Ym') }}">
-    <img style="margin-top: -1px; margin-right: 6px;" height="16" src="https://vdownload.hembed.com/image/icon/preview.png?secure=uNJ87ybHp_ZGVNsq_y1mdQ==,4853042457">
-  </a>
+    <a style="padding: 0 10px;" class="nav-icon pull-right" href="/previews/{{ Carbon\Carbon::now()->format('Ym') }}"><span style="vertical-align: middle; font-size: 24px" class="material-icons-outlined">cast</span></a>
+  </div>
 </div>
