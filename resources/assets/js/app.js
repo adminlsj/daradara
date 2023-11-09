@@ -166,6 +166,7 @@ $('.search-submit-btn').click(function(e) {
 var mainnav = $("#main-nav");
 var navtransonscroll = $(".nav-trans-on-scroll");
 var mainnavmobile = $(".main-nav-mobile");
+var navmainmobile = $(".nav-main-mobile");
 var navslideonscroll = $(".nav-slide-on-scroll");
 var navtransonscroll = $(".nav-trans-on-scroll");
 var searchnavdesktop = $("#search-nav-desktop");
@@ -205,8 +206,12 @@ window.onscroll = function() {
     if (window.pageYOffset != 0) {
       mainnav.css('background-color', '#141414');
       mainnavmobile.css('background-color', 'black');
+      navmainmobile.css('background-color', 'rgba(30,30,30,0.75)');
+      navmainmobile.css('backdrop-filter', 'blur(40px)');
+      navmainmobile.css('-webkit-backdrop-filter', 'blur(40px)');
     } else {
       mainnav.css('background-color', 'transparent');
+      navmainmobile.css('background-color', 'black');
     }
 
     if (window.pageYOffset >= 68) {
