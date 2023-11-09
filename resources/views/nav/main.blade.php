@@ -2,6 +2,6 @@
   @include('nav.main-content')
 </div>
 
-<div id="main-nav-home" style="z-index: 10001; padding:0; height: 50px; line-height: 50px; position: fixed; background-color: black" class="hidden-sm hidden-md hidden-lg nav-main-mobile">
+<div id="main-nav-home" style="z-index: 10001; padding:0; height: 52px; line-height: 52px; position: fixed; background-color: black" class="hidden-sm hidden-md hidden-lg nav-main-mobile">
   @include('nav.main-mobile')
 </div>
