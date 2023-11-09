@@ -18,11 +18,11 @@
 
 		@if (Auth::check())
 	      <a id="user-modal-trigger" href="{{ route('home.list') }}" style="padding-left: 1px; padding-right: 0px; cursor: pointer;" class="nav-icon pull-right no-select" >
-	          <img style="width: 24px; border-radius: 2px; margin-top: 1px;" src="{{ Auth::user()->avatar_temp }}">
+	          <img style="width: 24px; border-radius: 2px;" src="{{ Auth::user()->avatar_temp }}">
 	      </a>
 	    @else
 	      <a id="user-modal-trigger" href="{{ route('login') }}" style="padding-left: 1px; padding-right: 0px; cursor: pointer;" class="nav-icon pull-right no-select" >
-	          <img style="width: 24px; border-radius: 2px; margin-top: 1px;" src="https://pbs.twimg.com/media/F-URvjzbUAAVmKM?format=jpg&name=240x240">
+	          <img style="width: 24px; border-radius: 2px;" src="https://pbs.twimg.com/media/F-URvjzbUAAVmKM?format=jpg&name=240x240">
 	      </a>
 	    @endif
 	  </div>
