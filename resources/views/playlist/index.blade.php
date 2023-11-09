@@ -10,8 +10,8 @@
 
   <div style="position: relative; margin-top: 0px; padding-top: 300px;">
 
-    <div class="hidden-md hidden-lg" style="text-align: center; margin-top: -250px; margin-bottom: 90px">
-      <img style="width: 23%; border: 1px solid white; border-radius: 10px;" src="{{ $user->avatar_temp }}">
+    <div class="hidden-md hidden-lg" style="text-align: center; margin-top: -250px; margin-bottom: 80px">
+      <img style="width: 22%; border: 1px solid white; border-radius: 10px;" src="{{ $user->avatar_temp }}">
       <div style="font-size: 22px; font-weight: bolder; color: white; margin-top: 2px">{{ $user->name }}<img style="margin-top: -3px; margin-left: 7px; width: 15px;" src="https://i.imgur.com/7uH5Lk2.png"></div>
     </div>
 
