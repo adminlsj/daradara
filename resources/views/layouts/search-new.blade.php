@@ -180,12 +180,12 @@
 
 	<div id="home-rows-wrapper" class="search-rows-wrapper">
 
-		<div class="hidden-sm hidden-md hidden-lg" style="text-align: center; margin-top: 105px; margin-bottom: -22px;">
+		<div class="hidden-sm hidden-md hidden-lg" style="text-align: center; margin-top: 110px; margin-bottom: -22px;">
 			<!-- @include('layouts.exoclick', ['id' => '5058654', 'width' => '300', 'height' => '100']) -->
 			<a href="https://l.erodatalabs.com/s/0kHIbk" target="_blank"><img style="width: 300px; height: 100px; margin-bottom: 5px;" src="https://vdownload.hembed.com/image/icon/erolabs-300x100-cn.gif?secure=TG8McNOOPKoNUxf7MzEd2A==,1730489521"></a>
 		</div>
 
-		<div style="{{ $results->lastPage() == 1 ? 'margin-bottom: 44px' : 'margin-bottom: -12px;' }}" class="search-pagination mobile-search-pagination hidden-sm hidden-md hidden-lg">{!! $results->appends(request()->query())->onEachSide(1)->links() !!}</div>
+		<div style="{{ $results->lastPage() == 1 ? 'margin-bottom: 44px' : 'margin-bottom: -7px;' }}" class="search-pagination mobile-search-pagination hidden-sm hidden-md hidden-lg">{!! $results->appends(request()->query())->onEachSide(1)->links() !!}</div>
 
 		@if ($type == 'artist')
 			<div class="content-padding-new">
