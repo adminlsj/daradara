@@ -4,15 +4,15 @@
 	</div>
 
 	<div class="home-genre-tabs-wrapper" data-toggle="modal" data-target="#tags" style="{{ $type == 'artist' ? 'display:none' : '' }}">
-		<span class="home-genre-tabs">標籤<img style="margin-top: -2px; margin-left: 7px; width: 12px;" src="https://i.imgur.com/7uH5Lk2.png"></span>
+		<span style="{{ !$tags || $tags == '[]' ? '' : 'background-color: rgba(255,255,255,.3)' }}" class="home-genre-tabs">標籤<img style="margin-top: -2px; margin-left: 7px; width: 12px;" src="https://i.imgur.com/7uH5Lk2.png"></span>
 	</div>
 
 	<div class="home-genre-tabs-wrapper" data-toggle="modal" data-target="#sort-modal">
-		<span class="home-genre-tabs">{{ $sort ? $sort : '排序方式'}}<img style="margin-top: -2px; margin-left: 7px; width: 12px;" src="https://i.imgur.com/7uH5Lk2.png"></span>
+		<span style="{{ $sort ? 'background-color: rgba(255,255,255,.3)' : '排序方式'}}" class="home-genre-tabs">{{ $sort ? $sort : '排序方式'}}<img style="margin-top: -2px; margin-left: 7px; width: 12px;" src="https://i.imgur.com/7uH5Lk2.png"></span>
 	</div>
 
 	<div class="home-genre-tabs-wrapper" data-toggle="modal" data-target="#date-modal" style="{{ $type == 'artist' ? 'display:none' : '' }}">
-		<span class="home-genre-tabs">發佈日期<img style="margin-top: -2px; margin-left: 7px; width: 12px;" src="https://i.imgur.com/7uH5Lk2.png"></span>
+		<span style="{{ $year ? 'background-color: rgba(255,255,255,.3)' : ''}}" class="home-genre-tabs">發佈日期<img style="margin-top: -2px; margin-left: 7px; width: 12px;" src="https://i.imgur.com/7uH5Lk2.png"></span>
 	</div>
 
 	<div class="home-genre-tabs-wrapper search-type-button" style="margin-right: 0px;">
