@@ -165,14 +165,11 @@ $('.search-submit-btn').click(function(e) {
 
 var mainnav = $("#main-nav");
 var navtransonscroll = $(".nav-trans-on-scroll");
-var mainnavmobile = $(".main-nav-mobile");
 var navmainmobile = $(".nav-main-mobile");
 var navslideonscroll = $(".nav-slide-on-scroll");
 var navtransonscroll = $(".nav-trans-on-scroll");
 var searchnavdesktop = $("#search-nav-desktop");
-var searchnavmobile = $("#search-nav-mobile");
 var searchcontentdesktop = $("#search-content-padding-desktop");
-var searchcontentmobile = $("#search-content-padding-mobile");
 var lastScrollTop = 0;
 var consecScrollUp = 0;
 var consecScrollDown = 0;
@@ -205,7 +202,6 @@ window.onscroll = function() {
 
     if (window.pageYOffset != 0) {
       mainnav.css('background-color', '#141414');
-      mainnavmobile.css('background-color', 'black');
       navmainmobile.css('background-color', 'rgba(30,30,30,0.75)');
       navmainmobile.css('backdrop-filter', 'blur(40px)');
       navmainmobile.css('-webkit-backdrop-filter', 'blur(40px)');
@@ -220,14 +216,6 @@ window.onscroll = function() {
     } else {
       searchnavdesktop.removeClass('sticky');
       searchcontentdesktop.css('padding-top', '0px');
-    }
-
-    if (window.pageYOffset >= 50) {
-      searchnavmobile.addClass('sticky');
-      searchcontentmobile.css('padding-top', '53px');
-    } else {
-      searchnavmobile.removeClass('sticky');
-      searchcontentmobile.css('padding-top', '0px');
     }
 }
 
