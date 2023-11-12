@@ -10,7 +10,7 @@
 
   <div style="position: relative; margin-top: 0px;">
 
-    <div class="hidden-md hidden-lg" style="text-align: center; margin-top: 72px; margin-bottom: -202px">
+    <div class="hidden-md hidden-lg" style="text-align: center; margin-top: 72px; margin-bottom: -205px">
       <a href="{{ route('user.edit', Auth::user()) }}" style="text-decoration: none;">
         <img style="width: 70px; border-radius: 10px;" src="{{ $user->avatar_temp }}">
         <div style="font-size: 21px; font-weight: bolder; color: white; margin-top: 2px">{{ $user->name }}<img style="margin-top: -3px; margin-left: 7px; width: 15px;" src="https://i.imgur.com/7uH5Lk2.png"></div>
