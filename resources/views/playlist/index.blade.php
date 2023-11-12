@@ -91,7 +91,7 @@
             @endif
           @endforeach
         </div>
-        <div class="load-more-related-btn related-watch-wrap show-more-playlists-btn hidden-sm hidden-md hidden-lg" style="font-weight: bold !important; margin-top: 0px;">更多相關影片</div>
+        <div class="load-more-related-btn related-watch-wrap show-more-playlists-btn hidden-sm hidden-md hidden-lg" style="font-weight: bold !important; margin-top: 0px; margin-bottom: 30px;">更多相關影片</div>
       </div>
     </div>
 
