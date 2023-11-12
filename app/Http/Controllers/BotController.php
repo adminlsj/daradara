@@ -39,18 +39,16 @@ class BotController extends Controller
 
         $users = User::where('avatar_temp', 'like', '%imgur.com%')->get();
         foreach ($users as $user) {
-            $url = 'https://i.imgur.com/E6mSQA2.jpg';
-            $ch = curl_init($url);
-            curl_setopt($ch, CURLOPT_HEADER, true);    // we want headers
-            curl_setopt($ch, CURLOPT_NOBODY, true);    // we don't need body
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
-            curl_setopt($ch, CURLOPT_TIMEOUT,10);
-            $output = curl_exec($ch);
-            $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-            curl_close($ch);
-
-            return $httpcode;
-
+            $url = "https://i.imgur.com/asdsjda.png";
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_TIMEOUT, '60'); // in seconds
+            curl_setopt($ch, CURLOPT_HEADER, 1);
+            curl_setopt($ch, CURLOPT_NOBODY, 1);
+            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            $res = curl_exec($ch);
+            return curl_getinfo($ch);
             if (curl_getinfo($ch)['url'] != $url){
                 return $user->avatar_temp.' failed...';
             } else {
