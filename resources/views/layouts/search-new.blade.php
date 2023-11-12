@@ -2,7 +2,9 @@
 
 @section('nav')
 	<div class="hidden-xs">
-		@include('nav.main')
+		<div id="main-nav" style="z-index: 10000 !important; position: static !important;" class="main-nav hidden-xs">
+		  @include('nav.main-content')
+		</div>
 	</div>
 	<div id="main-nav-home-mobile" style="z-index: 10000 !important; overflow-x: hidden; background: black; background-color: black; transition: height 0.3s, background-color 0.4s, backdrop-filter 0.4s, -webkit-backdrop-filter 0.4s, top 0.4s;" class="hidden-sm hidden-md hidden-lg">
 
@@ -181,7 +183,7 @@
 	<div id="home-rows-wrapper" class="search-rows-wrapper">
 
 		<div class="hidden-sm hidden-md hidden-lg" style="text-align: center; margin-top: 110px; margin-bottom: -22px;">
-			<!-- @include('layouts.exoclick', ['id' => '5058654', 'width' => '300', 'height' => '100']) -->
+			<!-- include('layouts.exoclick', ['id' => '5058654', 'width' => '300', 'height' => '100']) -->
 			<a href="https://l.erodatalabs.com/s/0kHIbk" target="_blank"><img style="width: 300px; height: 100px; margin-bottom: 5px; border-radius: 3px;" src="https://vdownload.hembed.com/image/icon/erolabs-300x100-cn.gif?secure=TG8McNOOPKoNUxf7MzEd2A==,1730489521"></a>
 		</div>
 

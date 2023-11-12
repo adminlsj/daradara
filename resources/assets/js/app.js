@@ -120,7 +120,7 @@ $('#playModal').on('hidden.bs.modal', function () {
   dp.pause()
 });
 
-$('div#main-nav-home').on("submit", "form#search-form", function(e) {
+$('div#main-nav-home-mobile').on("submit", "form#search-form", function(e) {
   e.preventDefault(e);
   var query = $('#nav-query').val();
   $('#hentai-form #query').val(query);
