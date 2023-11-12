@@ -22,7 +22,7 @@
       @include('playlist.card-wrapper', ['title' => '喜歡的影片', 'videos' => $likes, 'link' => route('playlist.show').'?list=LL'])
 
       <a style="text-decoration: none;">
-        <h3>播放清單<span id="show-more-playlists-btn" style="cursor: pointer;"><span style="vertical-align: middle; margin-top: -8px; margin-left: 0px; font-size: 25px; margin-bottom: -5px;" class="material-icons">chevron_right</span></span></h3>
+        <h3>播放清單<span class="hidden-xs show-more-playlists-btn" style="cursor: pointer;"><span style="vertical-align: middle; margin-top: -8px; margin-left: 0px; font-size: 25px; margin-bottom: -5px;" class="material-icons">chevron_right</span></span></h3>
       </a>
       <div class="content-padding-new">
         <div class="row no-gutter" style="margin: 0 -5px;">
@@ -91,6 +91,7 @@
             @endif
           @endforeach
         </div>
+        <div class="load-more-related-btn related-watch-wrap show-more-playlists-btn hidden-sm hidden-md hidden-lg" style="font-weight: 400 !important; margin-top: 0px;">更多相關影片</div>
       </div>
     </div>
 

@@ -49,8 +49,8 @@ $('.video-description-panel').click(function() {
     }
 })
 
-$('#show-more-playlists-btn').click(function() {
-    $(this).css('display', 'none');
+$('.show-more-playlists-btn').click(function() {
+    $(".show-more-playlists-btn").css('display', 'none');
     $(".temp-hidden-playlists").removeClass('hidden');
 })
 
