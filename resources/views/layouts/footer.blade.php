@@ -31,7 +31,7 @@
 <div class="row footer-new hidden-sm hidden-md hidden-lg" style="font-weight: normal; padding: 15px; font-size: 13px; margin-top: -50px !important; background-color: #161616;">
     <div class="col-xs-12">
         <div style="line-height: 25px; color: dimgray;">
-            <p style="padding-top: 2px;">Hanime1.me 帶給你最新最全的無碼高清中文字幕Hentai成人動漫線上看。我們提供最優質的色情H動漫裏番，並以最高畫質720p / 1080p呈現。我們的18禁H動畫網站適用於手機設備，讓您免費線上看H動漫、H動畫、裏番，更有中文字幕，不必再聽日語猜故事！這個網站是亞洲最優質的色情工口Hentai成人動漫，並且有許多Hentai分類，包括顏射、乳交、口交、熟女、學生妹、中出、百合、肛交，以及更多！</p>
+            <p style="padding-top: 3px;">Hanime1.me 帶給你最新最全的無碼高清中文字幕Hentai成人動漫線上看。我們提供最優質的色情H動漫裏番，並以最高畫質720p / 1080p呈現。我們的18禁H動畫網站適用於手機設備，讓您免費線上看H動漫、H動畫、裏番，更有中文字幕，不必再聽日語猜故事！這個網站是亞洲最優質的色情工口Hentai成人動漫，並且有許多Hentai分類，包括顏射、乳交、口交、熟女、學生妹、中出、百合、肛交，以及更多！</p>
             <p style="padding-bottom: 2px;">Hentai是什麼？Hentai（変態 或 へんたい），Hentai 或 成人動漫的詞源來自日本，並指色情或成人動漫和動畫，特別是來自日本的18禁H動漫和成人動畫。</p>
         </div>
         <hr style="border-color: #252525; margin: 15px 0px">
