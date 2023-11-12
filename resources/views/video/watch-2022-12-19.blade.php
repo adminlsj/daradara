@@ -271,7 +271,7 @@
           @include('ads.watch-double-banners', ['mobile_watch' => '5058646'])
         </div>
         <div id="watch-footer">
-          <div style="padding: 15px; margin-bottom: -70px; margin-top: 15px;">
+          <div style="padding: 15px; margin-bottom: -70px; margin-top: 17px;">
             @include('layouts.footer')
           </div>
         </div>
