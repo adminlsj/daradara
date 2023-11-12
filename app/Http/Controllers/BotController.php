@@ -37,6 +37,12 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
+        $users = User::where('avatar_temp', 'https://cdn.jsdelivr.net/gh/jokogebai/jokogebai@v1.0.0/user_default.jpg')->get();
+        foreach ($users as $user) {
+            $user->avatar_temp = 'https://vdownload.hembed.com/image/icon/user_default_image.jpg?secure=ue9M119kdZxHcZqDPrunLQ==,4855471320';
+            $user->save();
+        }
+
         // Check hscangku source valid
         /* $base = [];
         $videos = Video::whereIn('genre', Video::$genre_jav)->where('sd', 'like', '%\cdn2020.com%')->pluck('sd');
@@ -116,12 +122,12 @@ class BotController extends Controller
             $video->save();
         } */
 
-        $filename = 'video_loading.gif';
+        /* $filename = 'video_loading.gif';
         $url = 'vdownload.hembed.com';
         $expiration = time() + 3155692600;
         $token = 'xVEO8rLVgGkUBEBg';
         $source = '/image/icon/'.$filename;
-        return Video::getSignedUrlParameter($url, $source, $token, $expiration);
+        return Video::getSignedUrlParameter($url, $source, $token, $expiration); */
 
         /* $id = 84803;
         $huge = $id.'h.jpg';
