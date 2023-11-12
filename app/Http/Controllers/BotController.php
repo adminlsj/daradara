@@ -48,6 +48,7 @@ class BotController extends Controller
             curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
             $res = curl_exec($ch);
+            return curl_getinfo($ch)['url'];
             if (curl_getinfo($ch)['url'] != $url){
                 return $user->avatar_temp.' failed...';
             } else {
