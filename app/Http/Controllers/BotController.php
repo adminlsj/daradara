@@ -39,7 +39,7 @@ class BotController extends Controller
 
         $users = User::where('avatar_temp', 'like', '%imgur.com%')->get();
         foreach ($users as $user) {
-            $url = "https://i.imgur.com/asdsjda.png";
+            $url = "https://i.imgur.com/E6mSQA2.jpg";
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, $url);
             curl_setopt($ch, CURLOPT_TIMEOUT, '60'); // in seconds
