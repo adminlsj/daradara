@@ -8,16 +8,16 @@
 
 <div class="nav-bottom-padding home-content-wrapper">
 
-  <div style="position: relative; margin-top: 0px; padding-top: 300px;">
+  <div style="position: relative; margin-top: 0px;">
 
-    <div class="hidden-md hidden-lg" style="text-align: center; margin-top: -250px; margin-bottom: 80px">
+    <div class="hidden-md hidden-lg" style="text-align: center; margin-top: 72px; margin-bottom: -200px">
       <a href="{{ route('user.edit', Auth::user()) }}" style="text-decoration: none;">
         <img style="width: 70px; border-radius: 10px;" src="{{ $user->avatar_temp }}">
         <div style="font-size: 21px; font-weight: bolder; color: white; margin-top: 2px">{{ $user->name }}<img style="margin-top: -3px; margin-left: 7px; width: 15px;" src="https://i.imgur.com/7uH5Lk2.png"></div>
       </a>
     </div>
 
-    <div id="home-rows-wrapper" style="position: relative;">
+    <div id="home-rows-wrapper" class="playlist-rows-wrapper" style="position: relative;">
       @include('playlist.card-wrapper', ['title' => '稍後觀看', 'videos' => $saves, 'link' => route('playlist.show').'?list=WL'])
       @include('playlist.card-wrapper', ['title' => '喜歡的影片', 'videos' => $likes, 'link' => route('playlist.show').'?list=LL'])
 

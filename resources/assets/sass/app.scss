@@ -108,6 +108,10 @@ th, td {
   display: none;
 }
 
+.playlist-rows-wrapper {
+  margin-top: 95px !important;
+}
+
 /* Show the checkmark when checked */
 .playlist-checkbox-container input:checked ~ .playlist-checkmark:after {
   display: block;
@@ -2769,6 +2773,10 @@ div.sticky {
 
   #home-rows-wrapper .home-rows-videos-wrapper {
     margin-bottom: 10px;
+  }
+
+  .playlist-rows-wrapper {
+    margin-top: 225px !important;
   }
 
   #home-banner-wrapper {
