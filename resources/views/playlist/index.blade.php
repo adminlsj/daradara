@@ -13,7 +13,7 @@
     <div class="hidden-md hidden-lg" style="text-align: center; margin-top: 72px; margin-bottom: -205px">
       <a href="{{ route('user.edit', Auth::user()) }}" style="text-decoration: none;">
         <img style="width: 70px; border-radius: 10px;" src="{{ $user->avatar_temp }}">
-        <div style="font-size: 21px; font-weight: bolder; color: white; margin-top: 2px">{{ $user->name }}<img style="margin-top: -3px; margin-left: 7px; width: 15px;" src="https://i.imgur.com/7uH5Lk2.png"></div>
+        <div style="font-size: 21px; font-weight: bolder; color: white; margin-top: 2px">{{ $user->name }}<img style="margin-top: -3px; margin-left: 7px; width: 15px;" src="https://vdownload.hembed.com/image/icon/arrow_down.png?secure=2CKFWyW8NLKoTjn7Szq8lw==,4855470564"></div>
       </a>
     </div>
 
@@ -31,13 +31,13 @@
               <div class="hover-lighter card-mobile-panel single-playlist-wrapper col-xs-6 col-sm-4 col-md-2 col-lg-2 {{ $loop->iteration > 10 ? 'hidden temp-hidden-playlists' : '' }}">
                 <a href="{{ route('playlist.show') }}?list={{ $playlist->reference_id ? $playlist->reference_id : $playlist->id }}" style="text-decoration: none;">
                   <div style="position: relative;">
-                    <img style="width: 100%;" src="https://img4.qy0.ru/data/2205/36/2jSdwcGl.jpg">
+                    <img style="width: 100%;" src="https://vdownload.hembed.com/image/icon/card_doujin_background.jpg?secure=sJRJ4-aVOQw4IVZasq7YZw==,4853041705">
                     <img style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;" src="{{ $video->thumbL() }}">
 
                     <div style="position: absolute; top: 0; right: 0; height: 100%; background-color: rgba(0,0,0,0.8); width: 45%; text-align: center; color: white;">
                       <div style="position: relative; top: 50%; transform: translateY(-50%);">
                         <div style="margin-bottom: 12px; font-size: 16px; font-weight: bold;">{{ $playlist->reference_id ? $playlist->videos_ref_count : $playlist->videos_count }}</div>
-                        <img style="height: 15px; width: auto; display: block; margin-left: auto; margin-right: auto;" src="https://i.imgur.com/9Czw9s5.png">
+                        <img style="height: 15px; width: auto; display: block; margin-left: auto; margin-right: auto;" src="https://vdownload.hembed.com/image/icon/playlist_cover.png?secure=ktsUJLHvpLX-SgpG1dXpHg==,4855472424">
                       </div>
                     </div>
                   </div>
@@ -62,13 +62,13 @@
               <div class="hover-lighter card-mobile-panel single-playlist-wrapper col-xs-6 col-sm-4 col-md-2 col-lg-2 {{ $loop->iteration > 10 ? 'hidden temp-hidden-playlists' : '' }}">
                 <a href="{{ route('playlist.show') }}?list={{ $playlist->reference_id ? $playlist->reference_id : $playlist->id }}" style="text-decoration: none;">
                   <div style="position: relative;">
-                    <img style="width: 100%;" src="https://img4.qy0.ru/data/2205/36/2jSdwcGl.jpg">
-                    <img style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;" src="https://i.imgur.com/qLIoSzml.png">
+                    <img style="width: 100%;" src="https://vdownload.hembed.com/image/icon/card_doujin_background.jpg?secure=sJRJ4-aVOQw4IVZasq7YZw==,4853041705">
+                    <img style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;" src="https://vdownload.hembed.com/image/icon/playlist_placeholder.jpg?secure=FlykN_6gYfRx7TTbr20AKQ==,4855472554">
 
                     <div style="position: absolute; top: 0; right: 0; height: 100%; background-color: rgba(0,0,0,0.8); width: 45%; text-align: center; color: white;">
                       <div style="position: relative; top: 50%; transform: translateY(-50%);">
                         <div style="margin-bottom: 12px; font-size: 16px; font-weight: bold;">0</div>
-                        <img style="height: 15px; width: auto; display: block; margin-left: auto; margin-right: auto;" src="https://i.imgur.com/9Czw9s5.png">
+                        <img style="height: 15px; width: auto; display: block; margin-left: auto; margin-right: auto;" src="https://vdownload.hembed.com/image/icon/playlist_cover.png?secure=ktsUJLHvpLX-SgpG1dXpHg==,4855472424">
                       </div>
                     </div>
                   </div>

@@ -10,12 +10,12 @@
 
 	  <div style="padding: 0 15px;">
 	    <a href="/" style="padding-right: 2.5%; color: white; font-size: 1.40em; line-height: 57px; margin-left: 5px;">
-	      <img style="width: 15px; margin-top: -7px; margin-right: 2px;" src="https://i.imgur.com/9Yt93a3.png">
+	      <img style="width: 15px; margin-top: -7px; margin-right: 2px;" src="https://vdownload.hembed.com/image/icon/nav_logo.png?secure=HxkFdqiVxMMXXjau9riwGg==,4855471889">
 	    </a>
 
 	    <form id="search-form" style="display: inline-block; margin-left: 5px; width: calc(100% - 84px); position: relative;">
 		    <input id="nav-query" name="nav-query" style="width: 100%; height: 32px; margin-top: -10px; vertical-align: middle; border-radius: 3px; background-color: #323231; border-color: #323231 !important; line-height: 32px; padding-left: 41px; font-size: 15px; padding-top: 4px" class="search-nav-bar" type="text" value="{{ request('query') }}" placeholder="搜尋 Hanime1.me">
-		    <img style="width: 26px; position: absolute; top: 5px; left: 10px; opacity: 0.4;" src="https://i.imgur.com/AnfoEPW.png">
+		    <img style="width: 26px; position: absolute; top: 5px; left: 10px; opacity: 0.4;" src="https://vdownload.hembed.com/image/icon/search_input_placeholder.png?secure=10N-U1uEz-5YMgWwuLCfPw==,4855472065">
 		</form>
 
 		@if (Auth::check())
@@ -24,7 +24,7 @@
 	      </a>
 	    @else
 	      <a id="user-modal-trigger" href="{{ route('login') }}" style="padding-left: 1px; padding-right: 0px; cursor: pointer;" class="nav-icon pull-right no-select" >
-	          <img style="width: 24px; border-radius: 2px;" src="https://pbs.twimg.com/media/F-URvjzbUAAVmKM?format=jpg&name=240x240">
+	          <img style="width: 24px; border-radius: 2px;" src="https://vdownload.hembed.com/image/icon/user_default_image.jpg?secure=ue9M119kdZxHcZqDPrunLQ==,4855471320">
 	      </a>
 	    @endif
 	  </div>

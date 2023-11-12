@@ -78,7 +78,7 @@
                   <div style="position: absolute; top: 0; right: 0; height: 100%; background-color: rgba(0,0,0,0.8); width: 45%; text-align: center; color: white;">
                     <div style="position: relative; top: 50%; transform: translateY(-50%);">
                       <div style="margin-bottom: 12px; font-size: 16px; font-weight: bold;">{{ $playlist->reference_id ? $playlist->videos_ref_count : $playlist->videos_count }}</div>
-                      <img style="height: 15px; width: auto; display: block; margin-left: auto; margin-right: auto;" src="https://i.imgur.com/9Czw9s5.png">
+                      <img style="height: 15px; width: auto; display: block; margin-left: auto; margin-right: auto;" src="https://vdownload.hembed.com/image/icon/playlist_cover.png?secure=ktsUJLHvpLX-SgpG1dXpHg==,4855472424">
                     </div>
                   </div>
                 </div>
@@ -104,12 +104,12 @@
               <a href="{{ route('playlist.show') }}?list={{ $playlist->id }}" style="text-decoration: none;">
                 <div style="position: relative;">
                   <img style="width: 100%;" src="https://img4.qy0.ru/data/2205/36/2jSdwcGl.jpg">
-                  <img style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;" src="https://i.imgur.com/qLIoSzml.png">
+                  <img style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;" src="https://vdownload.hembed.com/image/icon/playlist_placeholder.jpg?secure=FlykN_6gYfRx7TTbr20AKQ==,4855472554">
 
                   <div style="position: absolute; top: 0; right: 0; height: 100%; background-color: rgba(0,0,0,0.8); width: 45%; text-align: center; color: white;">
                     <div style="position: relative; top: 50%; transform: translateY(-50%);">
                       <div style="margin-bottom: 12px; font-size: 16px; font-weight: bold;">0</div>
-                      <img style="height: 15px; width: auto; display: block; margin-left: auto; margin-right: auto;" src="https://i.imgur.com/9Czw9s5.png">
+                      <img style="height: 15px; width: auto; display: block; margin-left: auto; margin-right: auto;" src="https://vdownload.hembed.com/image/icon/playlist_cover.png?secure=ktsUJLHvpLX-SgpG1dXpHg==,4855472424">
                     </div>
                   </div>
                 </div>

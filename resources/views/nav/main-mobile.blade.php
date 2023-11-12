@@ -2,7 +2,7 @@
 
   <div style="padding: 0 15px;">
     <a href="/" style="padding-right: 2.5%; color: white; font-size: 1.40em; line-height: 57px; margin-left: 5px;">
-      <img style="width: 15px; margin-top: -7px; margin-right: 2px;" src="https://i.imgur.com/9Yt93a3.png">
+      <img style="width: 15px; margin-top: -7px; margin-right: 2px;" src="https://vdownload.hembed.com/image/icon/nav_logo.png?secure=HxkFdqiVxMMXXjau9riwGg==,4855471889">
     </a>
 
     @if (Auth::check())
@@ -11,11 +11,11 @@
       </a>
     @else
       <a id="user-modal-trigger" href="{{ route('login') }}" style="padding-left: 1px; padding-right: 0px; cursor: pointer;" class="nav-icon pull-right no-select" >
-          <img style="width: 24px; border-radius: 2px;" src="https://pbs.twimg.com/media/F-URvjzbUAAVmKM?format=jpg&name=240x240">
+          <img style="width: 24px; border-radius: 2px;" src="https://vdownload.hembed.com/image/icon/user_default_image.jpg?secure=ue9M119kdZxHcZqDPrunLQ==,4855471320">
       </a>
     @endif
 
-    <a style="margin-top: -1px; padding: 0 11px;" class="nav-icon pull-right" href="{{ route('home.search') }}"><img style="width: 31px;" src="https://i.imgur.com/AnfoEPW.png"></a>
+    <a style="margin-top: -1px; padding: 0 11px;" class="nav-icon pull-right" href="{{ route('home.search') }}"><img style="width: 31px;" src="https://vdownload.hembed.com/image/icon/search_input_placeholder.png?secure=10N-U1uEz-5YMgWwuLCfPw==,4855472065"></a>
 
     <a style="padding: 0 10px;" class="nav-icon pull-right" href="/previews/{{ Carbon\Carbon::now()->format('Ym') }}"><span style="vertical-align: middle; font-size: 24px" class="material-icons-outlined">cast</span></a>
   </div>

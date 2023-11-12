@@ -27,7 +27,7 @@
       @endif
 
       @if ($video->outsource)
-        <div style="background-color: black; background-image: url('https://i.imgur.com/TkdP2Xt.gif'); background-position: center; background-repeat: no-repeat; background-size: 150px; position: relative; width: 100%; height: 0; padding-bottom: 56.25%;">
+        <div style="background-color: black; background-image: url('https://vdownload.hembed.com/image/icon/video_loading.gif?secure=LD6BYCdwElEd1mXbPLORmA==,4855473033'); background-position: center; background-repeat: no-repeat; background-size: 150px; position: relative; width: 100%; height: 0; padding-bottom: 56.25%;">
             <iframe src="{!! $sd !!}" style="border: 0; overflow: hidden; position: absolute; width: 100%; height: 100%; left: 0; top: 0;" allowfullscreen></iframe>
         </div>
 

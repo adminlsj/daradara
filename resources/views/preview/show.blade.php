@@ -214,7 +214,7 @@
     <div id="comment-tabcontent" class="tabcontent" style="margin-top: 85px">
       <div id="comment-section-wrapper" class="video-show-comment-width">
         <div id="ajax-loading" style="text-align: center; padding-bottom: 1000px;">
-          <img style="width: 40px;" src="https://i.imgur.com/wgOXAy6.gif"/>
+          <img style="width: 40px;" src="https://vdownload.hembed.com/image/icon/loading.gif?secure=sZ6Qgx3HbAFf7be7yAIGVA==,4855472894"/>
         </div>
         <!-- Dynamically loaded comments -->
       </div>
