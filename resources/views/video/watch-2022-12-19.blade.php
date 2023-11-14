@@ -146,7 +146,7 @@
           </a>
         @endif
 
-        <div id="shareBtn" class="video-show-action-btn no-select hidden-md single-icon-outlier" data-toggle="modal" data-target="#shareModal">
+        <div id="shareBtn" class="video-show-action-btn no-select {{ $video->comic_id ? 'hidden-sm' : '' }} hidden-md single-icon-outlier" data-toggle="modal" data-target="#shareModal">
           <i id="video-share-btn" class="material-icons">share</i>分享
         </div>
 
