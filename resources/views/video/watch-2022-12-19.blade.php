@@ -146,9 +146,11 @@
           </a>
         @endif
 
-        <div id="shareBtn" class="video-show-action-btn no-select {{ $video->comic_id ? 'hidden-sm' : '' }} hidden-md single-icon-outlier" data-toggle="modal" data-target="#shareModal">
-          <i id="video-share-btn" class="material-icons">share</i>分享
-        </div>
+        @if (!$video->comic_id)
+          <div id="shareBtn" class="video-show-action-btn no-select single-icon-outlier" data-toggle="modal" data-target="#shareModal">
+            <i id="video-share-btn" class="material-icons">share</i>分享
+          </div>
+        @endif
 
         <div class="video-show-action-btn no-select single-icon-outlier hidden-sm hidden-md hidden-lg hidden-xl" data-toggle="modal" data-target="#reportModal">
           <i id="video-report-btn" class="material-icons-outlined">flag</i>報錯
