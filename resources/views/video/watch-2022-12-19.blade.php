@@ -15,7 +15,7 @@
     <div id="player-div-wrapper" class="col-md-9 single-show-player fluid-player-desktop-styles" style="background-color: #141414; position: relative; overflow-y: hidden; overflow-x: hidden;">
 
       @if ($current->sd_sc)
-        <div id="player-lang-wrapper" style="position: absolute; top: 10px; left: 10px; z-index: 1;" class="dropdown">
+        <div id="player-lang-wrapper" style="position: absolute; top: 10px; left: 10px; z-index: 10001;" class="dropdown">
           <button style="outline:0; border-radius: 0px !important;" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             {{ $lang == 'zh-CHS' ? '简体字幕' : '繁體字幕'}}
             <span class="material-icons">arrow_drop_down</span>
@@ -146,11 +146,9 @@
           </a>
         @endif
 
-        @if (!$video->comic_id)
-          <div id="shareBtn" class="video-show-action-btn no-select single-icon-outlier" data-toggle="modal" data-target="#shareModal">
-            <i id="video-share-btn" class="material-icons">share</i>分享
-          </div>
-        @endif
+        <div id="shareBtn" class="video-show-action-btn no-select {{ $video->comic_id ? 'hidden-sm hidden-md hidden-lg' : 'hidden-md' }} single-icon-outlier" data-toggle="modal" data-target="#shareModal">
+          <i id="video-share-btn" class="material-icons">share</i>分享
+        </div>
 
         <div class="video-show-action-btn no-select single-icon-outlier hidden-sm hidden-md hidden-lg hidden-xl" data-toggle="modal" data-target="#reportModal">
           <i id="video-report-btn" class="material-icons-outlined">flag</i>報錯

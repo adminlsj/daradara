@@ -83,7 +83,7 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-            'avatar_temp' => 'https://cdn.jsdelivr.net/gh/jokogebai/jokogebai@v1.0.0/user_default.jpg'
+            'avatar_temp' => 'https://vdownload.hembed.com/image/icon/user_default_image.jpg?secure=ue9M119kdZxHcZqDPrunLQ==,4855471320'
         ]);
 
         return $user;
