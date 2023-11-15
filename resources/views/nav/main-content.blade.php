@@ -9,7 +9,7 @@
 <a class="nav-item hidden-xs nav-desktop-items {{ Request::get('genre') == '同人作品' ? 'active' : '' }}" href="{{ route('home.search') }}?genre=同人作品">同人作品</a>
 <a class="nav-item hidden-xs nav-desktop-items nav-desktop-cosplay-item {{ Request::get('genre') == 'Cosplay' ? 'active' : '' }}" href="{{ route('home.search') }}?genre=Cosplay">Cosplay</a>
 <a class="nav-item hidden-xs hidden-sm hidden-md nav-desktop-items" href="{{ route('comic.index') }}">H漫畫</a>
-<a class="nav-item hidden-xs hidden-sm nav-desktop-items" href="https://l.erodatalabs.com/s/0CxEQ4" target="_blank">無碼黃油</a>
+<a class="nav-item hidden-xs hidden-sm nav-desktop-items" href="https://l.erodatalabs.com/s/0ZIRw4" target="_blank">無碼黃油</a>
 <!-- <a class="nav-item hidden-xs hidden-sm" href="{{ route('playlist.index') }}">我的清單</a> -->
 
 @if (Auth::check())
