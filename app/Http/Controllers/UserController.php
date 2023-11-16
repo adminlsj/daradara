@@ -34,7 +34,9 @@ class UserController extends Controller
         $type = $request->type;
 
         if ($type == 'photo') {
-            $original = $request->file('photo');
+            return back()->withErrors(['error' => '圖片上傳失敗']);
+
+            /* $original = $request->file('photo');
             $image = Image::make($original);
             $image = $image->fit(300, 300);
             $image = $image->stream();
@@ -59,7 +61,7 @@ class UserController extends Controller
                 $user->save();
             } else {
                 return back()->withErrors(['error' => '圖片上傳失敗']);
-            }
+            } */
 
         } elseif ($type == 'profile') {
 
