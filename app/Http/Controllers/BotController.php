@@ -37,6 +37,28 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
+
+        $ids = [];
+        $users = User::where('avatar_temp', 'like', '%imgur.com%')->get();
+        foreach ($users as $user) {
+            $url = $user->avatar_temp;
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_TIMEOUT, '60'); // in seconds
+            curl_setopt($ch, CURLOPT_HEADER, 1);
+            curl_setopt($ch, CURLOPT_NOBODY, 1);
+            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            $res = curl_exec($ch);
+            if (curl_getinfo($ch)['url'] != $url){
+                $user->avatar_temp = 'https://vdownload.hembed.com/image/icon/user_default_image.jpg?secure=ue9M119kdZxHcZqDPrunLQ==,4855471320';
+                $user->save();
+                array_push($ids, $user->id);
+            }
+        }
+        return $ids;
+
+
         // Check hscangku source valid
         /* $base = [];
         $videos = Video::whereIn('genre', Video::$genre_jav)->where('sd', 'like', '%\cdn2020.com%')->pluck('sd');
