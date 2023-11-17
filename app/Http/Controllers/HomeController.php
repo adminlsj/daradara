@@ -28,9 +28,9 @@ class HomeController extends Controller
         $dCountFirst = 18;
         $dCount = 12;
 
-        $最新裏番 = Video::where('genre', '裏番')/*->orWhere(function($query) {
+        $最新裏番 = Video::where('genre', '裏番')->orWhere(function($query) {
                             $query->where('genre', '泡麵番')->where('foreign_sd', 'like', '%"bangumi"%');
-                        })*/->orderBy('created_at', 'desc')->select('id', 'title', 'translations', 'caption', 'cover', 'imgur')->limit($hCount)->get();
+                        })->orderBy('created_at', 'desc')->select('id', 'title', 'translations', 'caption', 'cover', 'imgur')->limit($hCount)->get();
 
         $random = $最新裏番->random();
 
@@ -54,10 +54,8 @@ class HomeController extends Controller
 
         $新番預告 = Video::with('user:id,name')->where('genre', '新番預告')->orderBy('created_at', 'desc')->select('id', 'title', 'cover')->limit($hCount)->get();
 
-        $新加入作者 = User::has('videos')->select('id', 'name', 'created_at', 'updated_at', 'avatar_temp')->withCount('videos')->orderBy('created_at', 'desc')->limit($hCount)->get();
-        /* $新加入作者 = User::where('email', 'like', '%@freemail.hu%')->orderBy('created_at', 'desc')->limit($hCount)->get(); */
-
-        $新加入作者 = [];
+        /* $新加入作者 = User::has('videos')->select('id', 'name', 'created_at', 'updated_at', 'avatar_temp')->withCount('videos')->orderBy('created_at', 'desc')->limit($hCount)->get(); */
+        $新加入作者 = User::whereIn('id', [657889, 657125, 656270, 655677, 655659, 654645, 653341, 653325, 653175, 653118, 653084, 652753, 652635, 650695, 650007, 649586])->select('id', 'name', 'created_at', 'updated_at', 'avatar_temp')->orderBy('created_at', 'desc')->get();
 
         $本日排行 = Video::with('user:id,name')->whereIn('genre', Video::$genre)->orderBy('current_views', 'desc')->select('id', 'user_id', 'title', 'cover', 'imgur', 'views', 'duration')->limit($dCount)->get();
 

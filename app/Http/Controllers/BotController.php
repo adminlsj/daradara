@@ -37,11 +37,8 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $users = User::has('videos')->get();
-        foreach ($users as $user) {
-            $user->is_artist = true;
-            $user->save();
-        }
+        // Get newly added artists
+        /* return $users = User::has('videos')->select('id', 'name', 'created_at', 'updated_at', 'avatar_temp')->withCount('videos')->orderBy('created_at', 'desc')->limit(16)->pluck('id'); */
 
         // Check hscangku source valid
         /* $base = [];
