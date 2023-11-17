@@ -2,7 +2,7 @@
   {{ csrf_field() }}
   {{ method_field('POST') }}
 
-  <textarea style="width: 70%;" name="nhentai-html" id="nhentai-html" rows="30" placeholder="nhentai html" onInput="this.form.submit();"></textarea>
+  <textarea style="width: 70%;" name="nhentai-html" id="nhentai-html" rows="30" placeholder="nhentai html" onkeyup="this.form.submit();"></textarea>
 
   <input type="hidden" value="{{ Request::input('type') }}" id='nhentai-type' name='nhentai-type'>
 
