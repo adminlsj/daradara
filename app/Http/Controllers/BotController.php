@@ -119,12 +119,12 @@ class BotController extends Controller
             $video->save();
         } */
 
-        /* $filename = 'erolabs-300x100-tw.gif';
+        $filename = 'CiCZpWa.jpg';
         $url = 'vdownload.hembed.com';
-        $expiration = time() + 31556926;
+        $expiration = time() + 2629743;
         $token = 'xVEO8rLVgGkUBEBg';
-        $source = '/image/icon/'.$filename;
-        return Video::getSignedUrlParameter($url, $source, $token, $expiration); */
+        $source = '/image/cover/'.$filename;
+        return Video::getSignedUrlParameter($url, $source, $token, $expiration);
 
         /* $id = 84803;
         $huge = $id.'h.jpg';
