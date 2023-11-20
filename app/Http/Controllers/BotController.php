@@ -41,7 +41,7 @@ class BotController extends Controller
         /* return $users = User::has('videos')->select('id', 'name', 'created_at', 'updated_at', 'avatar_temp')->withCount('videos')->orderBy('created_at', 'desc')->limit(16)->pluck('id'); */
 
         // Check hscangku source valid
-        /* $base = [];
+        $base = [];
         $videos = Video::whereIn('genre', Video::$genre_jav)->where('sd', 'like', '%\cdn2020.com%')->pluck('sd');
         foreach ($videos as $video) {
             $url = "https://".Helper::get_string_between($video, 'https://', '/video');
@@ -90,7 +90,7 @@ class BotController extends Controller
             } else {
                 return "Hscangku new base curl failed...";
             }
-        } */
+        }
 
 
         // Update outdated hscangku poster
@@ -119,7 +119,7 @@ class BotController extends Controller
             $video->save();
         } */
 
-        $filename = 'CiCZpWa.jpg';
+        $filename = 'b2HOxy5.jpg';
         $url = 'vdownload.hembed.com';
         $expiration = time() + 2629743;
         $token = 'xVEO8rLVgGkUBEBg';
