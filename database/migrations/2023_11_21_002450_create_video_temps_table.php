@@ -14,7 +14,7 @@ class CreateVideoTempsTable extends Migration
     public function up()
     {
         Schema::create('video_temps', function (Blueprint $table) {
-            $table->bigIncrements('primary_id')->primary();
+            $table->bigIncrements('primary_id');
             $table->integer('id')->nullable();
             $table->integer('user_id')->nullable();;
             $table->string('name')->nullable();
