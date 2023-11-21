@@ -29,6 +29,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use SteelyWing\Chinese\Chinese;
 use App\Jav;
+use App\Video_temp;
 
 class BotController extends Controller
 {
@@ -37,11 +38,51 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
+        $hCount = 16;
+        $dCountFirst = 18;
+        $dCount = 12;
+
+        /* $本月排行 = Video::with('user:id,name')->whereIn('genre', Video::$genre)->orderBy('month_views', 'desc')->select('id', 'user_id', 'title', 'cover', 'imgur', 'views', 'duration')->limit($dCount)->get();
+        foreach ($本月排行 as $video) {
+            $jsonb = Jsonb::create([
+                'route' => '/',
+                'name' => '本月排行',
+                'data' => ['id' => $video->id, 'user_id' => $video->user_id, 'title' => $video->title, 'cover' => $video->cover, 'imgur' => $video->imgur, 'views' => $video->views(), 'duration' => $video->duration, 'user' => ['id' => $video->user->id, 'name' => $video->user->name], 'thumbL' => $video->thumbL(), 'thumbH' => $video->thumbH()]
+            ]);
+        } */
+
+        /* $新番預告 = Video::where('genre', '新番預告')->orderBy('created_at', 'desc')->select('id', 'title', 'cover')->limit($hCount)->get();
+        foreach ($新番預告 as $video) {
+            $jsonb = Jsonb::create([
+                'route' => '/',
+                'name' => '新番預告',
+                'data' => ['id' => $video->id, 'title' => $video->title, 'cover' => $video->cover]
+            ]);
+        } */
+
+        /* $最新裏番 = Video::where('genre', '裏番')->orWhere(function($query) {
+                            $query->where('genre', '泡麵番')->where('foreign_sd', 'like', '%"bangumi"%');
+                        })->orderBy('created_at', 'desc')->select('id', 'title', 'translations', 'caption', 'cover', 'imgur')->limit(16)->get();
+        foreach ($最新裏番 as $video) {
+            $jsonb = Jsonb::create([
+                'route' => '/',
+                'name' => '最新裏番',
+                'data' => ['id' => $video->id, 'title' => $video->title, 'translations' => $video->translations, 'caption' => $video->caption, 'cover' => $video->cover, 'imgur' => $video->imgur, 'thumbL' => $video->thumbL(), 'thumbH' => $video->thumbH()]
+            ]);
+        } */
+
+        /* $新加入作者 = User::has('videos')->select('id', 'name', 'created_at', 'updated_at', 'avatar_temp')->withCount('videos')->orderBy('created_at', 'desc')->limit($hCount)->pluck('id');
+        $jsonb = Jsonb::create([
+            'route' => '/',
+            'name' => '新加入作者',
+            'data' => ['ids' => $新加入作者]
+        ]); */
+
         // Get newly added artists
         /* return $users = User::has('videos')->select('id', 'name', 'created_at', 'updated_at', 'avatar_temp')->withCount('videos')->orderBy('created_at', 'desc')->limit(16)->pluck('id'); */
 
         // Check hscangku source valid
-        $base = [];
+        /* $base = [];
         $videos = Video::whereIn('genre', Video::$genre_jav)->where('sd', 'like', '%\cdn2020.com%')->pluck('sd');
         foreach ($videos as $video) {
             $url = "https://".Helper::get_string_between($video, 'https://', '/video');
@@ -90,7 +131,7 @@ class BotController extends Controller
             } else {
                 return "Hscangku new base curl failed...";
             }
-        }
+        } */
 
 
         // Update outdated hscangku poster
