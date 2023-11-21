@@ -19,6 +19,7 @@ class CreateVideoTempsTable extends Migration
             $table->integer('user_id')->nullable();;
             $table->string('name')->nullable();
             $table->string('route')->nullable();
+            $table->index('route');
             $table->string('title')->nullable();
             $table->jsonb('translations')->nullable();
             $table->text('caption')->nullable();
