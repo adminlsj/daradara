@@ -38,7 +38,7 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        // Update missave cover
+        // Update missav cover
         /* $videos = Video::where('cover', 'like', '%\akamai-content-network%')->get();
         foreach ($videos as $video) {
             $temp = $video->foreign_sd;
@@ -49,7 +49,7 @@ class BotController extends Controller
         } */
 
         // Check hscangku source valid
-        /* $base = [];
+        $base = [];
         $videos = Video::whereIn('genre', Video::$genre_jav)->where('sd', 'like', '%\cdn2020.com%')->pluck('sd');
         foreach ($videos as $video) {
             $url = "https://".Helper::get_string_between($video, 'https://', '/video');
@@ -98,7 +98,7 @@ class BotController extends Controller
             } else {
                 return "Hscangku new base curl failed...";
             }
-        } */
+        }
 
 
         // Update outdated hscangku poster
