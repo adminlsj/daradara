@@ -3198,7 +3198,7 @@ class BotController extends Controller
 
     public function updateHomeVideos(Request $request)
     {
-        return Video_temp::updateHomeVideos();
+        Video_temp::updateHomeVideos();
     }
 
     public function imageToWnacg(Request $request)

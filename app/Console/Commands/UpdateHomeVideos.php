@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use App\Video_temp;
 
 class UpdateHomeVideos extends Command
 {
@@ -11,14 +12,14 @@ class UpdateHomeVideos extends Command
      *
      * @var string
      */
-    protected $signature = 'command:name';
+    protected $signature = 'hanime1:update-homevideos';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Update home video temps';
 
     /**
      * Create a new command instance.
@@ -37,6 +38,6 @@ class UpdateHomeVideos extends Command
      */
     public function handle()
     {
-        //
+        Video_temp::updateHomeVideos();
     }
 }

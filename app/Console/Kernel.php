@@ -35,6 +35,8 @@ class Kernel extends ConsoleKernel
 
         'App\Console\Commands\UploadHscangku',
 
+        'App\Console\Commands\UpdateHomeVideos',
+
         'App\Console\Commands\UpdateSearchtext',
         'App\Console\Commands\RemoveSpam',
     ];
@@ -70,6 +72,8 @@ class Kernel extends ConsoleKernel
 
         // $schedule->command('hanime1:upload-nhentai')->hourly()->between('6:00', '21:00');
         // $schedule->command('hanime1:upload-rule34')->hourly()->between('6:00', '21:00');
+
+        $schedule->command('hanime1:update-homevideos')->cron('* * * * *');
 
         $schedule->command('hanime1:remove-spam')->cron('*/5 * * * *');
     }

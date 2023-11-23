@@ -40,6 +40,8 @@ class Video_temp extends Model
 
     public static function updateHomeVideos()
     {
+        Log::info('Home videos update started...');
+
         $hCount = 16;
         $dCountFirst = 18;
         $dCount = 12;
@@ -99,5 +101,7 @@ class Video_temp extends Model
         $artist = Video_temp::where('name', '新加入作者')->first();
         $artist->translations = $artist_ids;
         $artist->save();
+
+        Log::info('Home videos update ended...');
     }
 }
