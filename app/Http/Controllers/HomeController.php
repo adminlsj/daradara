@@ -71,10 +71,10 @@ class HomeController extends Controller
         $新加入作者 = User::whereIn('id', $variables->where('name', '新加入作者')->first()->translations)->select('id', 'name', 'created_at', 'updated_at', 'avatar_temp')->orderBy('created_at', 'desc')->get();
         /* $新加入作者 = User::has('videos')->select('id', 'name', 'created_at', 'updated_at', 'avatar_temp')->withCount('videos')->orderBy('created_at', 'desc')->limit($hCount)->get(); */
 
-        $本日排行 = $variables->where('name', '本日排行');
+        $本日排行 = $variables->where('name', '本日排行')->sortByDesc('current_views');
         /* $本日排行 = Video::with('user:id,name')->whereIn('genre', Video::$genre)->orderBy('current_views', 'desc')->select('id', 'user_id', 'title', 'cover', 'imgur', 'views', 'duration')->limit($dCount)->get(); */
 
-        $本月排行 = $variables->where('name', '本月排行');
+        $本月排行 = $variables->where('name', '本月排行')->sortByDesc('month_views');
         /* $本月排行 = Video::with('user:id,name')->whereIn('genre', Video::$genre)->orderBy('month_views', 'desc')->select('id', 'user_id', 'title', 'cover', 'imgur', 'views', 'duration')->limit($dCount)->get(); */
        
         $影片標籤 = [
