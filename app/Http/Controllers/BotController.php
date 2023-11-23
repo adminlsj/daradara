@@ -38,14 +38,15 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $videos = Video::where('cover', 'like', '%\akamai-content-network%')->get();
+        // Update missave over
+        /* $videos = Video::where('cover', 'like', '%\akamai-content-network%')->get();
         foreach ($videos as $video) {
             $temp = $video->foreign_sd;
             $temp['poster'] = str_replace('akamai-content-network', 'bestjavcdn', $temp['poster']);
             $video->foreign_sd = $temp;
             $video->cover = str_replace('akamai-content-network', 'bestjavcdn', $video->cover);
             $video->save();
-        }
+        } */
 
         /* $hCount = 16;
         $dCountFirst = 18;
