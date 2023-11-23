@@ -3239,6 +3239,11 @@ class BotController extends Controller
         }
     }
 
+    public function updateHomeVideos(Request $request)
+    {
+        Video_temp::updateHomeVideos();
+    }
+
     public function imageToWnacg(Request $request)
     {
         $videos = Video::where('cover', 'like', '%vdownload.hembed.com%')->orderBy('created_at', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);

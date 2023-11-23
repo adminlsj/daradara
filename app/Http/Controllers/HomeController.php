@@ -31,7 +31,7 @@ class HomeController extends Controller
 
         $variables = Video_temp::with('user:id,name')->where('route', '/')->get();
 
-        $最新裏番 = $variables->where('name', '最新裏番');
+        $最新裏番 = $variables->where('name', '最新裏番')->sortByDesc('created_at');
         /* $最新裏番 = Video::where('genre', '裏番')->orWhere(function($query) {
                             $query->where('genre', '泡麵番')->where('foreign_sd', 'like', '%"bangumi"%');
                         })->orderBy('created_at', 'desc')->select('id', 'title', 'translations', 'caption', 'cover', 'imgur')->limit($hCount)->get(); */
