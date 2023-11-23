@@ -38,11 +38,14 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $hCount = 16;
+        $videos = Video::where('cover', 'like', '%\akamai-content-network%')->get();
+        return $videos->count();
+
+        /* $hCount = 16;
         $dCountFirst = 18;
         $dCount = 12;
 
-        /* $本月排行 = Video::with('user:id,name')->whereIn('genre', Video::$genre)->orderBy('month_views', 'desc')->select('id', 'user_id', 'title', 'cover', 'imgur', 'views', 'duration')->limit($dCount)->get();
+        $本月排行 = Video::with('user:id,name')->whereIn('genre', Video::$genre)->orderBy('month_views', 'desc')->select('id', 'user_id', 'title', 'cover', 'imgur', 'views', 'duration')->limit($dCount)->get();
         foreach ($本月排行 as $video) {
             $jsonb = Jsonb::create([
                 'route' => '/',
