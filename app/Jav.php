@@ -17,7 +17,7 @@ use App\Mail\UserReport;
 
 class Jav
 {
-    public static $base = "http://159hsck.cc/";
+    public static $base = "http://180hsck.cc/";
 
     public static function uploadHscangku($pages = 10)
     {
