@@ -42,8 +42,8 @@ class UploadHscangku extends Command
     {
         // Jav::uploadHscangku();
         // Jav::updateEmptySd();
-        Jav::updateWithMissav();
+        // Jav::updateWithMissav();
         // Jav::updateWithJable();
-        // Jav::uploadHscangkuShirouto();
+        Jav::uploadHscangkuShirouto();
     }
 }
