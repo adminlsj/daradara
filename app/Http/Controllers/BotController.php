@@ -38,7 +38,7 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        // Update missave over
+        // Update missave cover
         /* $videos = Video::where('cover', 'like', '%\akamai-content-network%')->get();
         foreach ($videos as $video) {
             $temp = $video->foreign_sd;
@@ -3241,7 +3241,7 @@ class BotController extends Controller
 
     public function updateHomeVideos(Request $request)
     {
-        Video_temp::updateHomeVideos();
+        return Video_temp::updateHomeVideos();
     }
 
     public function imageToWnacg(Request $request)
