@@ -48,9 +48,6 @@ class BotController extends Controller
             $video->save();
         } */
 
-        // Get newly added artists
-        /* return $users = User::has('videos')->select('id', 'name', 'created_at', 'updated_at', 'avatar_temp')->withCount('videos')->orderBy('created_at', 'desc')->limit(16)->pluck('id'); */
-
         // Check hscangku source valid
         /* $base = [];
         $videos = Video::whereIn('genre', Video::$genre_jav)->where('sd', 'like', '%\cdn2020.com%')->pluck('sd');
