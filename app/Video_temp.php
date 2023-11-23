@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Video;
+use App\User;
 
 class Video_temp extends Model
 {
@@ -93,5 +94,10 @@ class Video_temp extends Model
                 $loop++;
             }
         }
+
+        $artist_ids = User::has('videos')->select('id', 'name', 'created_at', 'updated_at', 'avatar_temp')->withCount('videos')->orderBy('created_at', 'desc')->limit($hCount)->pluck('id');
+        $artist = Video_temp::where('name', '新加入作者')->first();
+        $artist->translations = $artist_ids;
+        $artist->save();
     }
 }
