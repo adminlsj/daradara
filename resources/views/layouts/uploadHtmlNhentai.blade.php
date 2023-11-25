@@ -1,4 +1,4 @@
-<form action="{{ route('nhentai.upload') }}" method="POST">
+<form id="nhentai-upload-form" action="{{ route('nhentai.upload') }}" method="POST">
   {{ csrf_field() }}
   {{ method_field('POST') }}
 
@@ -8,3 +8,12 @@
 
   <button style="display: block; margin-top: 10px;" type="submit">submit</button>
 </form>
+
+<script>
+  var $myForm = $("#nhentai-upload-form");
+  $myForm.submit(function(){
+      $myForm.submit(function(){
+          return false;
+      });
+  });
+</script>
