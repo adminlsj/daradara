@@ -2901,6 +2901,11 @@ class BotController extends Controller
         Jav::updateMissavImgur();
     }
 
+    public function checkHscangkuSource(Request $request)
+    {
+        Jav::checkHscangkuSource($request->link);
+    }
+
     public function imgurToJsdelivr(Request $request)
     {
         $videos = Video::where('cover', 'like', '%imgur%')->orderBy('id', 'desc')->select('id', 'cover', 'imgur')->get()->slice(0, 300);
