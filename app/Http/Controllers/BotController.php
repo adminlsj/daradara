@@ -38,6 +38,11 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
+        $total = Video::whereIn('genre', Video::$genre)->sum('current_views');
+        $hentai = Video::where('genre', '裏番')->sum('current_views');
+        $others = Video::whereIn('genre', Video::$genre)->where('genre', '!=', '裏番')->sum('current_views');
+        return "Total views = {$total}; Hentai views = {$hentai}; Others views = {$others};";
+
         // Update missav cover
         /* $videos = Video::where('cover', 'like', '%\akamai-content-network%')->get();
         foreach ($videos as $video) {
@@ -74,12 +79,12 @@ class BotController extends Controller
             $video->save();
         } */
 
-        $filename = 'SzhE4ip.jpg';
+        /* $filename = '2zeXoLo.jpg';
         $url = 'vdownload.hembed.com';
         $expiration = time() + 2629743;
         $token = 'xVEO8rLVgGkUBEBg';
         $source = '/image/cover/'.$filename;
-        return Video::getSignedUrlParameter($url, $source, $token, $expiration);
+        return Video::getSignedUrlParameter($url, $source, $token, $expiration); */
 
         /* $id = 84803;
         $huge = $id.'h.jpg';
@@ -768,6 +773,9 @@ class BotController extends Controller
                 ]
             ]
         ];
+
+        $m3u8 = "https://cdn152.bestjavcdn.com/bcdn_token=O6UDnAYG1loe47r3XgH2Z_wZz-Zf-BtrxRmWniSsRDs&expires=1701264649&token_path=%2Fc15e59a1-4980-49e6-a3f7-5b101e2b6431%2F/c15e59a1-4980-49e6-a3f7-5b101e2b6431/842x480/video.m3u8";
+
         $context = stream_context_create($opts);
         Storage::disk('local')->put("video/{$folder}/video.m3u8", file_get_contents($m3u8, false, $context));
 
