@@ -433,7 +433,7 @@ class Jav
                     $foreign_sd = ['hscangku' => $original_link, 'poster' => $poster];
                     $video = Video::create([
                         'user_id' => 575858,
-                        'playlist_id' => 9294,
+                        'playlist_id' => 9410,
                         'title' => strtoupper($title),
                         'translations' => ['JP' => strtoupper($title)],
                         'caption' => '',
