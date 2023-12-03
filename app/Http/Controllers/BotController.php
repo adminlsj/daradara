@@ -2708,6 +2708,16 @@ class BotController extends Controller
                 $searchtext = implode($searchtext);
                 $comic->searchtext = $searchtext;
                 $comic->save();
+
+                $nhentai_ids = [];
+                $comics = Comic::orderBy('id', 'desc')->limit(100)->get();
+                foreach ($comics as $comic) {
+                    if (!in_array($comic->nhentai_id, $nhentai_ids)) {
+                        array_push($nhentai_ids, $comic->nhentai_id);
+                    } else {
+                        $comic->delete();
+                    }
+                }
             }
 
             return Redirect::back();
