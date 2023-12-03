@@ -44,7 +44,7 @@ class BotController extends Controller
             if (!in_array($comic->nhentai_id, $nhentai_ids)) {
                 array_push($nhentai_ids, $comic->nhentai_id);
             } else {
-                echo "{$comic->nhentai_id} repeated<br>";
+                $comic->delete();
             }
         }
 
