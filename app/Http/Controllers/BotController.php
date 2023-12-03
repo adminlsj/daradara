@@ -38,10 +38,15 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $total = Video::whereIn('genre', Video::$genre)->sum('current_views');
-        $hentai = Video::where('genre', '裏番')->sum('current_views');
-        $others = Video::whereIn('genre', Video::$genre)->where('genre', '!=', '裏番')->sum('current_views');
-        return "Total views = {$total}; Hentai views = {$hentai}; Others views = {$others};";
+        $nhentai_ids = [];
+        $comics = Comic::orderBy('id', 'desc')->limit(100)->get();
+        foreach ($comics as $comic) {
+            if (!in_array($comic->nhentai_id, $nhentai_ids)) {
+                array_push($nhentai_ids, $comic->nhentai_id);
+            } else {
+                echo "{$comic->nhentai_id} repeated<br>";
+            }
+        }
 
         // Update missav cover
         /* $videos = Video::where('cover', 'like', '%\akamai-content-network%')->get();
