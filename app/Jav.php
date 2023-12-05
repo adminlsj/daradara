@@ -14,7 +14,6 @@ use SteelyWing\Chinese\Chinese;
 use Redirect;
 use Mail;
 use App\Mail\UserReport;
-use Illuminate\Http\Request;
 
 class Jav
 {
@@ -616,7 +615,7 @@ class Jav
         Log::info('Missav cover update ended...');
     }
 
-    public static function checkHscangkuSource(Request $request, String $hscangku_link)
+    public static function checkHscangkuSource(String $hscangku_link)
     {
         Log::info('Hscangku source check started...');
 
@@ -647,7 +646,6 @@ class Jav
         }
         foreach ($error as $url) {
             $first = Video::whereIn('genre', Video::$genre_jav)->where('sd', 'like', '%'.$url.'%')->first();
-            $hscangku_link = $request->hscangku_link;
             $curl_connection = curl_init("{$hscangku_link}{$first->foreign_sd['hscangku']}");
             curl_setopt($curl_connection, CURLOPT_REFERER, $hscangku_link);
             curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
