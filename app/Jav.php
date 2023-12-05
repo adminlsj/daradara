@@ -14,6 +14,7 @@ use SteelyWing\Chinese\Chinese;
 use Redirect;
 use Mail;
 use App\Mail\UserReport;
+use Illuminate\Http\Request;
 
 class Jav
 {
