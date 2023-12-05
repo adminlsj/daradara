@@ -616,7 +616,7 @@ class Jav
         Log::info('Missav cover update ended...');
     }
 
-    public static function checkHscangkuSource(String $hscangku_link)
+    public static function checkHscangkuSource(Request $request, String $hscangku_link)
     {
         Log::info('Hscangku source check started...');
 
