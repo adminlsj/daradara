@@ -306,6 +306,8 @@ class Jav
 
                 Log::info('Jable update ID#'.$video->id.' failed...');
             }
+
+            sleep(10);
         }
 
         Log::info('Jable update ended...');
