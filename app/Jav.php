@@ -262,7 +262,7 @@ class Jav
     {
         Log::info('Jable update started...');
 
-        $videos = Video::where('id', '>', 87632)
+        $videos = Video::where('id', '>', 87814)
                     ->whereIn('genre', Video::$genre_jav)
                     ->where('foreign_sd', 'not like', '%"jable"%')
                     ->orderBy('id', 'asc')
