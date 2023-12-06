@@ -2871,7 +2871,7 @@ class BotController extends Controller
 
     public function uploadHscangku(Request $request)
     {
-        Jav::uploadHscangku($request->pages);
+        return Jav::uploadHscangku($request->pages);
     }
 
     public function updateEmptySd(Request $request)
