@@ -38,16 +38,6 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $nhentai_ids = [];
-        $comics = Comic::orderBy('id', 'desc')->limit(100)->get();
-        foreach ($comics as $comic) {
-            if (!in_array($comic->nhentai_id, $nhentai_ids)) {
-                array_push($nhentai_ids, $comic->nhentai_id);
-            } else {
-                $comic->delete();
-            }
-        }
-
         // Update missav cover
         /* $videos = Video::where('cover', 'like', '%\akamai-content-network%')->get();
         foreach ($videos as $video) {
@@ -84,12 +74,12 @@ class BotController extends Controller
             $video->save();
         } */
 
-        /* $filename = '2zeXoLo.jpg';
+        $filename = 'erolabs-268x394-tw.jpg';
         $url = 'vdownload.hembed.com';
-        $expiration = time() + 2629743;
+        $expiration = time() + 31556926;
         $token = 'xVEO8rLVgGkUBEBg';
-        $source = '/image/cover/'.$filename;
-        return Video::getSignedUrlParameter($url, $source, $token, $expiration); */
+        $source = '/image/icon/'.$filename;
+        return Video::getSignedUrlParameter($url, $source, $token, $expiration);
 
         /* $id = 84803;
         $huge = $id.'h.jpg';
