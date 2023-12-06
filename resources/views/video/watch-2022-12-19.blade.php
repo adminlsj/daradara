@@ -225,7 +225,7 @@
 
             @else
               <!-- Erolabs advertisement -->
-              <div class="col-xs-2 related-video-width" style="padding: 0px 4px;">
+              <div class="hidden-md hidden-lg col-xs-2 related-video-width" style="padding: 0px 4px;">
                 <a style="text-decoration: none;" href="https://l.erodatalabs.com/s/0CECgY" target="_blank">
                   <div class="home-rows-videos-div related-video-margin-bottom" style="position: relative; display: inline-block;">
                     <img style="width: 100%; border-radius: 3px" src="https://vdownload.hembed.com/image/icon/erolabs-268x394-tw.jpg?secure=SExjpURStVlTRW1mwnLVRg==,1733395033">
@@ -233,7 +233,7 @@
                 </a>
               </div>
               @foreach ($related as $video)
-                <div class="col-xs-2 related-video-width {{ $loop->iteration > 29 ? 'hidden-xs hidden-sm temp-hidden-related-video' : '' }}" style="padding: 0px 4px;">
+                <div class="col-xs-2 related-video-width {{ $loop->iteration > 29 && $loop->iteration != 60 ? 'hidden-xs hidden-sm temp-hidden-related-video' : '' }} {{ $loop->iteration == 60 ? 'hidden-xs hidden-sm' : '' }}" style="padding: 0px 4px;">
 
                   <a style="text-decoration: none;" href="{{ route('video.watch') }}?v={{ $video->id }}">
                     <div class="home-rows-videos-div related-video-margin-bottom" style="position: relative; display: inline-block;">
