@@ -234,7 +234,7 @@
 
               </div>
               @foreach ($related as $video)
-                <div class="col-xs-2 related-video-width {{ $loop->iteration > 30 ? 'hidden-xs hidden-sm temp-hidden-related-video' : '' }}" style="padding: 0px 4px;">
+                <div class="col-xs-2 related-video-width {{ $loop->iteration > 29 ? 'hidden-xs hidden-sm temp-hidden-related-video' : '' }}" style="padding: 0px 4px;">
 
                   <a style="text-decoration: none;" href="{{ route('video.watch') }}?v={{ $video->id }}">
                     <div class="home-rows-videos-div related-video-margin-bottom" style="position: relative; display: inline-block;">
