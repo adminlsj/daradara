@@ -74,7 +74,7 @@ class BotController extends Controller
             $video->save();
         } */
 
-        $filename = 'erolabs-268x394-tw.jpg';
+        $filename = 'erolabs-300x250-tw.gif';
         $url = 'vdownload.hembed.com';
         $expiration = time() + 31556926;
         $token = 'xVEO8rLVgGkUBEBg';
