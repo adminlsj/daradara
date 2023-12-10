@@ -69,7 +69,7 @@ class RemoveSpam extends Command
 
         User::destroy($ip_user_array);
 
-        User::whereIn('email', ['junheipou@gmail.com', 'caigueikim149@gmail.com', 'honggoujishenme52@gmail.com', 'junexi895@gmail.com', 'ptsd258@163.com'/*, 'jinzhongjiang2@gmail.com', 'puzhengxidatongling@gmail.com', 'zhongchengyudanghuguoweiquanzh@gmail.com'*/])->where('created_at', '>=', Carbon::now()->subDay())->delete();
+        User::whereIn('email', ['junheipou@gmail.com', 'caigueikim149@gmail.com', 'honggoujishenme52@gmail.com', 'junexi895@gmail.com', 'ptsd258@163.com', 'sunliren456@gmail.com'/*, 'jinzhongjiang2@gmail.com', 'puzhengxidatongling@gmail.com', 'zhongchengyudanghuguoweiquanzh@gmail.com'*/])->where('created_at', '>=', Carbon::now()->subDay())->delete();
 
         $likes = Like::where('created_at', '>=', Carbon::now()->subDay())->get();
         foreach ($likes as $like) {
