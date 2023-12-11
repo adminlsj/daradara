@@ -1736,6 +1736,7 @@ class BotController extends Controller
                 }
             }
         }
+        $news = array_diff($news, ["https://avbebe.com/archives/43608", "https://avbebe.com/archives/43606", "https://avbebe.com/archives/43141", "https://avbebe.com/archives/29773", "https://avbebe.com/archives/171102"]);
         return $news;
     }
 
