@@ -1730,7 +1730,7 @@ class BotController extends Controller
             foreach ($links as $block) {
                 $link = trim(Helper::get_string_between($block, '<a href="', '"'));
                 $title = trim(Helper::get_string_between($block, '<a href="'.$link.'">', '</a>'));
-                $video = Video::where('foreign_sd', 'like', "%{$link}%")->first();
+                $video = Video::where('foreign_sd', 'like', '%"'.$link.'"%')->first();
                 if (!$video || strpos($title, '中文字幕') !== false && strpos($video->title, '中文字幕') === false) {
                     array_push($news, $link);
                 }
