@@ -77,11 +77,11 @@
 			@include('ads.home-banner-exoclick', ['desktop_home_1' => '5058640', 'tablet_home_1' => '5058646', 'mobile_home_1' => '5058646'])
 		</div>
 
-		@include('layouts.card-wrapper', ['title' => '泡麵番', 'videos' => $泡麵番, 'link' => route('home.search').'?genre=泡麵番'])
-		@include('layouts.card-wrapper-doujin', ['title' => 'Motion Anime', 'videos' => $Motion_Anime, 'link' => route('home.search').'?genre=Motion+Anime'])
-		@include('layouts.card-wrapper-doujin', ['title' => '3D動畫', 'videos' => $SD動畫, 'link' => route('home.search').'?genre=3D動畫'])
-		@include('layouts.card-wrapper-doujin', ['title' => '同人作品', 'videos' => $同人作品, 'link' => route('home.search').'?genre=同人作品'])
-		@include('layouts.card-wrapper-doujin', ['title' => 'Cosplay', 'videos' => $Cosplay, 'link' => route('home.search').'?genre=Cosplay'])
+		@include('layouts.card-wrapper', ['title' => '泡麵番', 'videos' => $泡麵番, 'link' => route('home.search').'?genre=泡麵番&sort=最新上傳'])
+		@include('layouts.card-wrapper-doujin', ['title' => 'Motion Anime', 'videos' => $Motion_Anime, 'link' => route('home.search').'?genre=Motion+Anime&sort=最新上傳'])
+		@include('layouts.card-wrapper-doujin', ['title' => '3D動畫', 'videos' => $SD動畫, 'link' => route('home.search').'?genre=3D動畫&sort=最新上傳'])
+		@include('layouts.card-wrapper-doujin', ['title' => '同人作品', 'videos' => $同人作品, 'link' => route('home.search').'?genre=同人作品&sort=最新上傳'])
+		@include('layouts.card-wrapper-doujin', ['title' => 'Cosplay', 'videos' => $Cosplay, 'link' => route('home.search').'?genre=Cosplay&sort=最新上傳'])
 
 		<div>
 			@include('ads.home-banner-juicyads', ['tablet_home_2' => '5058646'])
