@@ -241,9 +241,9 @@
             @else
               <!-- Erolabs advertisement -->
               <div class="hidden-md hidden-lg col-xs-2 related-video-width" style="padding: 0px 4px;">
-                <a style="text-decoration: none;" href="https://l.erodatalabs.com/s/0CECgY" target="_blank">
+                <a style="text-decoration: none;" href="https://l.erodatalabs.com/s/0Cet3p" target="_blank">
                   <div class="home-rows-videos-div related-video-margin-bottom" style="position: relative; display: inline-block;">
-                    <img style="width: 100%; border-radius: 3px" src="https://vdownload.hembed.com/image/icon/erolabs-268x394-tw.jpg?secure=SExjpURStVlTRW1mwnLVRg==,1733395033">
+                    <img style="width: 100%; border-radius: 3px" src="https://vdownload.hembed.com/image/icon/erolabs-268x394-tw-2.jpg?secure=1DwjQ5-FGlqkxRfn3xVv_Q==,1734684690">
                   </div>
                 </a>
               </div>
