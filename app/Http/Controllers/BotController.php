@@ -38,6 +38,8 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
+        return $ip_user_text_array = Comment::where('text', 'ilike', "%y%t%7%x")->where('created_at', '>=', Carbon::now()->subWeek())->get();
+
         // Update missav cover
         /* $videos = Video::where('cover', 'like', '%\akamai-content-network%')->get();
         foreach ($videos as $video) {
