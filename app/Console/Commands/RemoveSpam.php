@@ -69,10 +69,12 @@ class RemoveSpam extends Command
 
         User::destroy($ip_user_array);
 
-        $ip_user_text_array = Comment::where('text', 'ilike', "%y%t%7%x%")
-                                    ->where('created_at', '>=', Carbon::now()->subDay())
-                                    ->groupBy('user_id')
-                                    ->pluck('user_id');
+        $ip_user_text_array = Comment::where(function($query) {
+                                $query->where('text', 'ilike', "%y%t%7%x%")
+                                      ->orWhere('text', 'ilike', "%y%t%6%x%");
+                              })->where('created_at', '>=', Carbon::now()->subDay())
+                                ->groupBy('user_id')
+                                ->pluck('user_id');
 
         User::destroy($ip_user_text_array);
 
