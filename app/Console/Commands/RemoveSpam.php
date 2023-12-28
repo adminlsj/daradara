@@ -69,7 +69,12 @@ class RemoveSpam extends Command
 
         User::destroy($ip_user_array);
 
-        $ip_user_text_array = Comment::where('text', 'ilike', "%y%t%7%x")->where('created_at', '>=', Carbon::now()->subWeek())->get();
+        $ip_user_text_array = Comment::where('text', 'ilike', "%y%t%7%x%")
+                                    ->where('created_at', '>=', Carbon::now()->subDay())
+                                    ->groupBy('user_id')
+                                    ->pluck('user_id');
+
+        User::destroy($ip_user_text_array);
 
         User::whereIn('email', ['junheipou@gmail.com', 'caigueikim149@gmail.com', 'honggoujishenme52@gmail.com', 'junexi895@gmail.com', 'ptsd258@163.com', 'sunliren456@gmail.com', 'larou712@gmail.com', 'ribendiguo98@gmail.com', '3467976946@qq.com', '747193927@qq.com', '3652601936@qq.com', 'zhongchengyudanghuguoweiquanzh@gmail.com', 'ptsd258163@gmail.com', 'hollioberyqtv41@gmail.com'])->where('created_at', '>=', Carbon::now()->subWeek())->delete();
 
