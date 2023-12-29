@@ -40,9 +40,9 @@ class UpdateCdn77 extends Command
      */
     public function handle()
     {
-        $url = 'vdownload.hembed.com';
+        $url = 'vstream.hembed.com';
         $expiration = time() + 43200;
-        $token = 'xVEO8rLVgGkUBEBg';
+        $token = 'mOlaiHdhG5HGSshU';
 
         Log::info('Cdn77 update started...');
 
