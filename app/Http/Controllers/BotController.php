@@ -38,17 +38,15 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $url = 'vstream.hembed.com';
+        $url = 'vdownload.hembed.com';
         $expiration = time() + 43200;
-        $token = 'mOlaiHdhG5HGSshU';
-
-        Log::info('Cdn77 update started...');
+        $token = 'xVEO8rLVgGkUBEBg';
 
         $videos = Video::where('foreign_sd', 'like', '%"cdn77"%')->select('id', 'title', 'sd', 'outsource', 'tags_array', 'foreign_sd', 'created_at')->get();
 
         foreach ($videos as $video) {
             $temp = $video->foreign_sd;
-            $temp['cdn77'] = str_replace('vdownload.hembed.com', $url, $temp['cdn77']);
+            $temp['cdn77'] = str_replace('vstream.hembed.com', $url, $temp['cdn77']);
             $video->foreign_sd = $temp;
             $video->save();
         }
@@ -57,7 +55,7 @@ class BotController extends Controller
 
         foreach ($videos as $video) {
             $temp = $video->foreign_sd;
-            $temp['cdn77_sc'] = str_replace('vdownload.hembed.com', $url, $temp['cdn77_sc']);
+            $temp['cdn77_sc'] = str_replace('vstream.hembed.com', $url, $temp['cdn77_sc']);
             $video->foreign_sd = $temp;
             $video->save();
         }
@@ -98,12 +96,12 @@ class BotController extends Controller
             $video->save();
         } */
 
-        /* $filename = 'erolabs-268x394-tw-2.jpg';
+        $filename = 'erolabs-268x394-tw-2.jpg';
         $url = 'vdownload.hembed.com';
         $expiration = time() + 31556926;
         $token = 'xVEO8rLVgGkUBEBg';
         $source = '/image/icon/'.$filename;
-        return Video::getSignedUrlParameter($url, $source, $token, $expiration); */
+        return Video::getSignedUrlParameter($url, $source, $token, $expiration);
 
         /* $id = 84803;
         $huge = $id.'h.jpg';
@@ -2214,9 +2212,9 @@ class BotController extends Controller
         $quality = $request->quality ? $request->quality : '720p';
         $vid = $request->v;
 
-        $url = 'vstream.hembed.com';
+        $url = 'vdownload.hembed.com';
         $expiration = time() + 43200;
-        $token = 'mOlaiHdhG5HGSshU';
+        $token = 'xVEO8rLVgGkUBEBg';
 
         if (is_numeric($vid) && $video = Video::select('id', 'sd', 'foreign_sd')->find($vid)) {
             $qualities = [];

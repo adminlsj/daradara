@@ -60,7 +60,6 @@ class Kernel extends ConsoleKernel
         // $schedule->command('hanime1:update-youjizzdownloads')->cron('0 */6 * * *');
         $schedule->command('hanime1:update-youjizzerrors')->hourly();
         $schedule->command('hanime1:update-cdn77')->hourly();
-        $schedule->command('hanime1:update-cdn77')->dailyAt('03:27');
         $schedule->command('hanime1:update-cdn77Image')->cron('0 0 1,15 * *');
 
         $schedule->command('hanime1:check-spankbang')->hourly();
