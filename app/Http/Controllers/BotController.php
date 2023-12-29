@@ -1949,6 +1949,7 @@ class BotController extends Controller
 
     public function updateCdn77(Request $request)
     {
+        $temp_url = 'vstream.hembed.com';
         $url = 'vdownload.hembed.com';
         $expiration = time() + 43200;
         $token = 'xVEO8rLVgGkUBEBg';
@@ -1959,7 +1960,7 @@ class BotController extends Controller
 
         foreach ($videos as $video) {
             $qualities = [];
-            $source = str_replace('https://'.$url, '', $video->foreign_sd['cdn77']);
+            $source = str_replace('https://'.$temp_url, '', $video->foreign_sd['cdn77']);
             if (strpos($source, '1080p') !== false) {
                 $qualities['1080'] = Video::getSignedUrlParameter($url, $source, $token, $expiration);
                 $source = str_replace('-1080p.mp4', '-720p.mp4', $source);
@@ -1989,7 +1990,7 @@ class BotController extends Controller
 
         foreach ($videos as $video) {
             $qualities_sc = [];
-            $source_sc = str_replace('https://'.$url, '', $video->foreign_sd['cdn77_sc']);
+            $source_sc = str_replace('https://'.$temp_url, '', $video->foreign_sd['cdn77_sc']);
             if (strpos($source_sc, '1080p') !== false) {
                 $qualities_sc['1080'] = Video::getSignedUrlParameter($url, $source_sc, $token, $expiration);
                 $source_sc = str_replace('-1080p.mp4', '-720p.mp4', $source_sc);
