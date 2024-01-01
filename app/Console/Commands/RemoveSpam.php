@@ -72,7 +72,8 @@ class RemoveSpam extends Command
         $ip_user_text_array = Comment::where(function($query) {
                                 $query->where('text', 'ilike', "%y%t%7%x%")
                                       ->orWhere('text', 'ilike', "%y%t%6%x%")
-                                      ->orWhere('text', 'ilike', "%萝莉嗷嗷叫%");
+                                      ->orWhere('text', 'ilike', "%萝莉嗷嗷叫%")
+                                      ->orWhere('text', 'ilike', "%yyllzy.com%");
                               })->where('created_at', '>=', Carbon::now()->subDay())
                                 ->groupBy('user_id')
                                 ->pluck('user_id');
