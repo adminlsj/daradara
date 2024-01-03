@@ -38,26 +38,25 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $url = 'vdownload.hembed.com';
-        $expiration = time() + 43200;
-        $token = 'xVEO8rLVgGkUBEBg';
-
-        $videos = Video::where('foreign_sd', 'like', '%"cdn77"%')->select('id', 'title', 'sd', 'outsource', 'tags_array', 'foreign_sd', 'created_at')->get();
-
-        foreach ($videos as $video) {
-            $temp = $video->foreign_sd;
-            $temp['cdn77'] = str_replace('vstream.hembed.com', $url, $temp['cdn77']);
-            $video->foreign_sd = $temp;
-            $video->save();
-        }
-
-        $videos = Video::where('foreign_sd', 'like', '%"cdn77_sc"%')->select('id', 'title', 'sd_sc', 'outsource', 'tags_array', 'foreign_sd', 'created_at')->get();
-
-        foreach ($videos as $video) {
-            $temp = $video->foreign_sd;
-            $temp['cdn77_sc'] = str_replace('vstream.hembed.com', $url, $temp['cdn77_sc']);
-            $video->foreign_sd = $temp;
-            $video->save();
+        $opts = [
+            'http' => [
+               'header' => [
+                    "Referer: http://play.somebody.hk//"
+                ]
+            ]
+        ];
+        $context = stream_context_create($opts);
+        for ($i = 0; $i <= 167; $i++) { 
+            if ($i < 10) {
+                $url = "http://play1.xiaomanhua.top/video/anime/2023/%E5%88%9D%E6%81%8B%E6%99%82%E9%96%93/04/out00{$i}.ts";
+                Storage::disk('local')->put("video/out00{$i}.ts", file_get_contents($url, false, $context));
+            } elseif ($i < 100) {
+                $url = "http://play1.xiaomanhua.top/video/anime/2023/%E5%88%9D%E6%81%8B%E6%99%82%E9%96%93/04/out0{$i}.ts";
+                Storage::disk('local')->put("video/out0{$i}.ts", file_get_contents($url, false, $context));
+            } else {
+                $url = "http://play1.xiaomanhua.top/video/anime/2023/%E5%88%9D%E6%81%8B%E6%99%82%E9%96%93/04/out{$i}.ts";
+                Storage::disk('local')->put("video/out{$i}.ts", file_get_contents($url, false, $context));
+            }
         }
 
         // Update missav cover
