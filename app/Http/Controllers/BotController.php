@@ -38,27 +38,6 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $opts = [
-            'http' => [
-               'header' => [
-                    "Referer: http://play.somebody.hk//"
-                ]
-            ]
-        ];
-        $context = stream_context_create($opts);
-        for ($i = 0; $i <= 167; $i++) { 
-            if ($i < 10) {
-                $url = "http://play1.xiaomanhua.top/video/anime/2023/%E5%88%9D%E6%81%8B%E6%99%82%E9%96%93/04/out00{$i}.ts";
-                Storage::disk('local')->put("video/out00{$i}.ts", file_get_contents($url, false, $context));
-            } elseif ($i < 100) {
-                $url = "http://play1.xiaomanhua.top/video/anime/2023/%E5%88%9D%E6%81%8B%E6%99%82%E9%96%93/04/out0{$i}.ts";
-                Storage::disk('local')->put("video/out0{$i}.ts", file_get_contents($url, false, $context));
-            } else {
-                $url = "http://play1.xiaomanhua.top/video/anime/2023/%E5%88%9D%E6%81%8B%E6%99%82%E9%96%93/04/out{$i}.ts";
-                Storage::disk('local')->put("video/out{$i}.ts", file_get_contents($url, false, $context));
-            }
-        }
-
         // Update missav cover
         /* $videos = Video::where('cover', 'like', '%\akamai-content-network%')->get();
         foreach ($videos as $video) {
@@ -70,19 +49,14 @@ class BotController extends Controller
         } */
 
         // Update outdated hscangku poster
-        /* $videos = Video::whereIn('genre', Video::$genre_jav)->where('foreign_sd', 'like', '%\666546.xyz%')->get();
+        $videos = Video::whereIn('genre', Video::$genre_jav)->where('foreign_sd', 'like', '%\666548.xyz%')->get();
         foreach ($videos as $video) {
             $temp = $video->foreign_sd;
-            $temp["poster"] = str_replace('666546.xyz', '666548.xyz', $temp["poster"]);
+            $temp["poster"] = str_replace('666548.xyz', '666549.xyz', $temp["poster"]);
             $video->foreign_sd = $temp;
+            $video->cover = str_replace('666548.xyz', '666549.xyz', $video->cover);
             $video->save();
-        } */
-
-        /* $videos = Video::whereIn('genre', Video::$genre_jav)->where('cover', 'like', '%\666546.xyz%')->get();
-        foreach ($videos as $video) {
-            $video->cover = str_replace('666546.xyz', '666548.xyz', $video->cover);
-            $video->save();
-        } */
+        }
 
         /* $videos = Video::whereIn('genre', ['裏番', '泡麵番', 'Motion Anime', '3D動畫', '同人作品', 'Cosplay', '新番預告'])->where('cover', 'like', '%https://img4.qy0.ru%')->get();
         foreach ($videos as $video) {
@@ -95,12 +69,12 @@ class BotController extends Controller
             $video->save();
         } */
 
-        $filename = 'erolabs-268x394-tw-2.jpg';
+        /* $filename = 'erolabs-268x394-tw-2.jpg';
         $url = 'vdownload.hembed.com';
         $expiration = time() + 31556926;
         $token = 'xVEO8rLVgGkUBEBg';
         $source = '/image/icon/'.$filename;
-        return Video::getSignedUrlParameter($url, $source, $token, $expiration);
+        return Video::getSignedUrlParameter($url, $source, $token, $expiration); */
 
         /* $id = 84803;
         $huge = $id.'h.jpg';
