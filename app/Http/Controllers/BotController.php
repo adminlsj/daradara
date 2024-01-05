@@ -38,15 +38,24 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
+        $videos = Video::where('cover', 'like', '%i.rotriza.com%')->get();
+        foreach ($videos as $video) {
+            $temp = $video->foreign_sd;
+            $temp['poster'] = strtolower($temp['poster']);
+            $video->foreign_sd = $temp;
+            $video->cover = "https://vdownload.hembed.com/image/cover/E6mSQA2.jpg?secure=rc36ujEZGDGbhTJYIRNU3Q==,4854601037&genre=jav&poster=".$temp['poster'];
+            $video->save();
+        }
+
         // Update missav cover
-        $videos = Video::where('cover', 'like', '%cdn82.bestjavcdn.com%')->get();
+        /* $videos = Video::where('cover', 'like', '%cdn82.bestjavcdn.com%')->get();
         foreach ($videos as $video) {
             $temp = $video->foreign_sd;
             $temp['poster'] = str_replace('cdn82.bestjavcdn.com', 'i.rotriza.com', $temp['poster']);
             $video->foreign_sd = $temp;
             $video->cover = str_replace('cdn82.bestjavcdn.com', 'i.rotriza.com', $video->cover);
             $video->save();
-        }
+        } */
 
         // Update outdated hscangku poster
         /* $videos = Video::whereIn('genre', Video::$genre_jav)->where('foreign_sd', 'like', '%\666548.xyz%')->get();
