@@ -39,24 +39,24 @@ class BotController extends Controller
         ini_set('memory_limit', '-1');
 
         // Update missav cover
-        /* $videos = Video::where('cover', 'like', '%\akamai-content-network%')->get();
+        $videos = Video::where('cover', 'like', '%cdn82.bestjavcdn.com%')->get();
         foreach ($videos as $video) {
             $temp = $video->foreign_sd;
-            $temp['poster'] = str_replace('akamai-content-network', 'bestjavcdn', $temp['poster']);
+            $temp['poster'] = str_replace('cdn82.bestjavcdn.com', 'i.rotriza.com', $temp['poster']);
             $video->foreign_sd = $temp;
-            $video->cover = str_replace('akamai-content-network', 'bestjavcdn', $video->cover);
+            $video->cover = str_replace('cdn82.bestjavcdn.com', 'i.rotriza.com', $video->cover);
             $video->save();
-        } */
+        }
 
         // Update outdated hscangku poster
-        $videos = Video::whereIn('genre', Video::$genre_jav)->where('foreign_sd', 'like', '%\666548.xyz%')->get();
+        /* $videos = Video::whereIn('genre', Video::$genre_jav)->where('foreign_sd', 'like', '%\666548.xyz%')->get();
         foreach ($videos as $video) {
             $temp = $video->foreign_sd;
             $temp["poster"] = str_replace('666548.xyz', '666549.xyz', $temp["poster"]);
             $video->foreign_sd = $temp;
             $video->cover = str_replace('666548.xyz', '666549.xyz', $video->cover);
             $video->save();
-        }
+        } */
 
         /* $videos = Video::whereIn('genre', ['裏番', '泡麵番', 'Motion Anime', '3D動畫', '同人作品', 'Cosplay', '新番預告'])->where('cover', 'like', '%https://img4.qy0.ru%')->get();
         foreach ($videos as $video) {
