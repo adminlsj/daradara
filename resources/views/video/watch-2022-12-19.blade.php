@@ -214,7 +214,7 @@
             @if ($doujin)
               <!-- Erolabs advertisement -->
               <div style="padding: 5px 14px; margin-top: -5px;" class="hidden-sm hidden-md hidden-lg hidden-xl related-watch-wrap multiple-link-wrapper">
-                <a class="overlay" href="https://l.erodatalabs.com/s/1j0I2U"></a>
+                <a class="overlay" href="https://l.erodatalabs.com/s/1j0I2U" target="_blank"></a>
                 <div class="card-mobile-panel inner">
                   <div style="width: 150px; display: inline-block;">
                     <div style="position: relative; display: inline-block;">
@@ -227,7 +227,7 @@
                     <div class="card-mobile-title" style="color: #e5e5e5;">星隕計畫 Ark Re:Code</div>
 
                     <div class="card-mobile-genre-wrapper" style="margin-top: 4px; margin-left: -2px">
-                      <a href="https://l.erodatalabs.com/s/1j0I2U" style="font-size: 12px; color: dimgray; margin-left: 2px; display: inline-block;" class="card-mobile-user">EROLABS</a>
+                      <a href="https://l.erodatalabs.com/s/1j0I2U" target="_blank" style="font-size: 12px; color: dimgray; margin-left: 2px; display: inline-block;" class="card-mobile-user">EROLABS</a>
                     </div>
 
                     <div style="float: left; margin-top: -3px;">
