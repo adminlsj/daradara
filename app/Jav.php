@@ -19,7 +19,7 @@ class Jav
 {
     public static $base = "http://hsck842.cc/";
 
-    public static function uploadHscangku($pages = 10)
+    public static function uploadHscangku($pages = 20)
     {
         Log::info('Hscangku upload started...');
 
