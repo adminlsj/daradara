@@ -4,7 +4,7 @@ namespace App;
 
 class Helper
 {
-    public static $discord = 'https://discord.gg/KWeC7xVXF';
+    public static $discord = 'https://discord.gg/hKCdsESSej';
 
     public static function checkIsMobile()
     {
