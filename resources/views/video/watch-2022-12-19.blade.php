@@ -199,22 +199,7 @@
           <!--JuicyAds END-->
         </div>
       @else
-        <!-- include('ads.watch-double-banners', ['mobile_watch' => '5058646']) -->
-        <div class="hidden-sm hidden-md hidden-lg" style="text-align: center; padding-top: 5px;">
-          <div style="overflow: hidden; white-space:nowrap; font-size:0; display: flex; justify-content: center; align-items: center;">
-            <span class="scaled-exoclick" style="vertical-align: top;">
-              <a href="https://l.erodatalabs.com/s/1exYs3" target="_blank"><img src="https://vdownload.hembed.com/image/icon/erolabs-300x250-tw.gif?secure=1Pi97las_WwmqVcieAzRNQ==,1733397816" alt="Erolabs"></a>
-            </span>
-
-            <span class="scaled-juicyads" style="vertical-align: top; margin-top: 12px;">
-              <!-- JuicyAds v3.1 -->
-              <script type="text/javascript" data-cfasync="false" async src="https://poweredby.jads.co/js/jads.js"></script>
-              <ins id="940480" data-width="300" data-height="262"></ins>
-              <script type="text/javascript" data-cfasync="false" async>(adsbyjuicy = window.adsbyjuicy || []).push({'adzone':940480});</script>
-              <!--JuicyAds END-->
-            </span>
-          </div>
-        </div>
+        @include('ads.watch-double-banners', ['mobile_watch' => '5058646'])
       @endif
 
       <div id="tablinks-wrapper" class="tab mobile-padding" style="margin-top: 30px; font-weight: bold;">
@@ -227,12 +212,39 @@
       <div id="related-tabcontent" class="tabcontent mobile-padding" style="margin-top: 85px">
         <div class="row {{ $doujin ? 'doujin-row' : '' }}" style="margin: {{ $doujin ? '0px -2px;' : '0px -5px;' }}">
             @if ($doujin)
+              <!-- Erolabs advertisement -->
+              <div style="padding: 5px 14px; margin-top: -5px;" class="hidden-sm hidden-md hidden-lg hidden-xl related-watch-wrap multiple-link-wrapper">
+                <a class="overlay" href="https://l.erodatalabs.com/s/1j0I2U"></a>
+                <div class="card-mobile-panel inner">
+                  <div style="width: 150px; display: inline-block;">
+                    <div style="position: relative; display: inline-block;">
+                      <img style="width: 100%; height: 100%; border-radius: 5px;" src="https://vdownload.hembed.com/image/icon/card_doujin_background.jpg?secure=sJRJ4-aVOQw4IVZasq7YZw==,4853041705">
+                      <img style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 5px;" src="https://vdownload.hembed.com/image/icon/erolabs_cherry_talezh_640x360.jpg?secure=gCyUoVxh7zqjKLDvF4Gmwg==,1736066294" alt="星隕計畫 Ark Re:Code">
+                    </div>
+                  </div>
+
+                  <div style="display: inline-block; text-decoration: none; color: black; margin-top: -2px; margin-left: 8px; height: 50px; width: calc(100% - 168px); vertical-align: top;">
+                    <div class="card-mobile-title" style="color: #e5e5e5;">星隕計畫 Ark Re:Code</div>
+
+                    <div class="card-mobile-genre-wrapper" style="margin-top: 4px; margin-left: -2px">
+                      <a href="https://l.erodatalabs.com/s/1j0I2U" style="font-size: 12px; color: dimgray; margin-left: 2px; display: inline-block;" class="card-mobile-user">EROLABS</a>
+                    </div>
+
+                    <div style="float: left; margin-top: -3px;">
+                      <div class="card-mobile-duration" style="background: #2E2E2E; padding: 0px 4px; margin-right: 5px; color: #b8babc; line-height: 19px;">
+                        贊助商
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
               @foreach ($related as $video)
                 <div class="multiple-link-wrapper related-doujin-videos hidden-xs" style="display: inline-block; padding-right: 3px; white-space: normal; margin-bottom: 20px;">
                   <a class="overlay" href="{{ route('video.watch') }}?v={{ $video->id }}"></a>
                   @include('video.card-doujin-desktop')
                 </div>
-                <div style="padding: 5px 14px; {{ $loop->first ? 'margin-top: -5px;' : ''}}" class="hidden-sm hidden-md hidden-lg hidden-xl related-watch-wrap multiple-link-wrapper {{ $loop->iteration > 30 ? 'hidden-xs hidden-sm temp-hidden-related-video' : '' }}">
+                <!-- Add to div style {{ $loop->first ? 'margin-top: -5px;' : ''}} -->
+                <div style="padding: 5px 14px;" class="hidden-sm hidden-md hidden-lg hidden-xl related-watch-wrap multiple-link-wrapper {{ $loop->iteration > 30 ? 'hidden-xs hidden-sm temp-hidden-related-video' : '' }}">
                   <a class="overlay" href="{{ route('video.watch') }}?v={{ $video->id }}"></a>
                   @include('video.singleShowRelated', ['source' => $video])
                 </div>
@@ -241,9 +253,9 @@
             @else
               <!-- Erolabs advertisement -->
               <div class="hidden-md hidden-lg col-xs-2 related-video-width" style="padding: 0px 4px;">
-                <a style="text-decoration: none;" href="https://l.erodatalabs.com/s/0Cet3p" target="_blank">
+                <a style="text-decoration: none;" href="https://l.erodatalabs.com/s/0kHIbk" target="_blank">
                   <div class="home-rows-videos-div related-video-margin-bottom" style="position: relative; display: inline-block;">
-                    <img style="width: 100%; border-radius: 3px" src="https://vdownload.hembed.com/image/icon/erolabs-268x394-tw-2.jpg?secure=1DwjQ5-FGlqkxRfn3xVv_Q==,1734684690">
+                    <img style="width: 100%; border-radius: 3px" src="https://vdownload.hembed.com/image/icon/erolabs_cherry_talezh_268x394.jpg?secure=qT5pWLseBnQrVizMXQJakg==,1736065417">
                   </div>
                 </a>
               </div>
