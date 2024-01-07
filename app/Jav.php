@@ -17,7 +17,7 @@ use App\Mail\UserReport;
 
 class Jav
 {
-    public static $base = "http://hsck843.cc/";
+    public static $base = "http://hsck844.cc/";
 
     public static function uploadHscangku($pages = 10)
     {
@@ -262,7 +262,7 @@ class Jav
     {
         Log::info('Jable update started...');
 
-        $videos = Video::where('id', '>', 87814)
+        $videos = Video::where('id', '>=', 88169)
                     ->whereIn('genre', Video::$genre_jav)
                     ->where('foreign_sd', 'not like', '%"jable"%')
                     ->orderBy('id', 'asc')
