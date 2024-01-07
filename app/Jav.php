@@ -19,7 +19,7 @@ class Jav
 {
     public static $base = "http://hsck842.cc/";
 
-    public static function uploadHscangku($pages = 20)
+    public static function uploadHscangku($pages = 10)
     {
         Log::info('Hscangku upload started...');
 
@@ -148,10 +148,10 @@ class Jav
                     ->where('created_at', '2000-01-01 00:00:00')
                     ->where('foreign_sd', 'not like', '%"missav"%')
                     ->orderBy('id', 'asc')
-                    ->first();
+                    ->get();
 
         foreach ($videos as $video) {
-            $missav_link = 'https://missav.com/dm41/MIMK-138';
+            $missav_link = 'https://missav.com/'.explode(' ', $video->title)[0];
             $missav_html = Browsershot::url($missav_link)
                 ->timeout(20)
                 ->setExtraHttpHeaders(['Referer' => 'https://missav.com/'])
