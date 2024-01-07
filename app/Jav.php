@@ -148,10 +148,10 @@ class Jav
                     ->where('created_at', '2000-01-01 00:00:00')
                     ->where('foreign_sd', 'not like', '%"missav"%')
                     ->orderBy('id', 'asc')
-                    ->get();
+                    ->first();
 
         foreach ($videos as $video) {
-            $missav_link = 'https://missav.com/'.explode(' ', $video->title)[0];
+            $missav_link = 'https://missav.com/dm41/MIMK-138';
             $missav_html = Browsershot::url($missav_link)
                 ->timeout(20)
                 ->setExtraHttpHeaders(['Referer' => 'https://missav.com/'])
