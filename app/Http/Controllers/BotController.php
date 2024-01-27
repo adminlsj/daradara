@@ -69,7 +69,7 @@ class BotController extends Controller
             $video->save();
         } */
 
-        $filename = 'eWAiKoa.jpg';
+        $filename = 'wSFXdZ4.jpg';
         $url = 'vdownload.hembed.com';
         $expiration = time() + 2629743;
         $token = 'xVEO8rLVgGkUBEBg';
@@ -1697,7 +1697,7 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $akira = ["https://avbebe.com/archives/190690", "https://avbebe.com/archives/190724", "https://avbebe.com/archives/190504", "https://avbebe.com/archives/190458", "https://avbebe.com/archives/190473", "https://avbebe.com/archives/190565", "https://avbebe.com/archives/190688", "https://avbebe.com/archives/190649", "https://avbebe.com/archives/190670", "https://avbebe.com/archives/190704", "https://avbebe.com/archives/190512", "https://avbebe.com/archives/190726", "https://avbebe.com/archives/190528", "https://avbebe.com/archives/190715", "https://avbebe.com/archives/190650", "https://avbebe.com/archives/190488", "https://avbebe.com/archives/190482", "https://avbebe.com/archives/190692", "https://avbebe.com/archives/190535", "https://avbebe.com/archives/190568", "https://avbebe.com/archives/190709"];
+        $akira = ["https://avbebe.com/archives/190690", "https://avbebe.com/archives/190724", "https://avbebe.com/archives/190504", "https://avbebe.com/archives/190458", "https://avbebe.com/archives/190473", "https://avbebe.com/archives/190565", "https://avbebe.com/archives/190688", "https://avbebe.com/archives/190649", "https://avbebe.com/archives/190670", "https://avbebe.com/archives/190704", "https://avbebe.com/archives/190512", "https://avbebe.com/archives/190726", "https://avbebe.com/archives/190528", "https://avbebe.com/archives/190715", "https://avbebe.com/archives/190650", "https://avbebe.com/archives/190488", "https://avbebe.com/archives/190692", "https://avbebe.com/archives/190535", "https://avbebe.com/archives/190568", "https://avbebe.com/archives/190709"];
         if ($request->data == 'akira') {
             return $akira;
         }
