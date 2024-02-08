@@ -1697,11 +1697,6 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $akira = ["https://avbebe.com/archives/190690", "https://avbebe.com/archives/190724", "https://avbebe.com/archives/190504", "https://avbebe.com/archives/190458", "https://avbebe.com/archives/190649", "https://avbebe.com/archives/190670", "https://avbebe.com/archives/190704", "https://avbebe.com/archives/190528", "https://avbebe.com/archives/190715", "https://avbebe.com/archives/190650", "https://avbebe.com/archives/190488", "https://avbebe.com/archives/190692", "https://avbebe.com/archives/190535", "https://avbebe.com/archives/190568"];
-        if ($request->data == 'akira') {
-            return $akira;
-        }
-
         $url = "https://avbebe.com/archives/category/3d%e5%8b%95%e7%95%ab";
         $curl_connection = curl_init($url);
         curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
@@ -1737,7 +1732,6 @@ class BotController extends Controller
             }
         }
         $news = array_diff($news, ["https://avbebe.com/archives/43608", "https://avbebe.com/archives/43606", "https://avbebe.com/archives/43141", "https://avbebe.com/archives/29773", "https://avbebe.com/archives/171102"]);
-        $news = array_diff($news, $akira);
         return $news;
     }
 
