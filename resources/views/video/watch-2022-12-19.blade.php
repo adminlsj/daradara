@@ -214,17 +214,17 @@
             @if ($doujin)
               <!-- Erolabs advertisement -->
               <div style="padding: 5px 14px; margin-top: -5px;" class="hidden-sm hidden-md hidden-lg hidden-xl related-watch-wrap multiple-link-wrapper">
-                <a class="overlay" href="https://l.erodatalabs.com/s/1j0I2U" target="_blank"></a>
+                <a class="overlay" href="https://www.tip-top.one/" target="_blank"></a>
                 <div class="card-mobile-panel inner">
                   <div style="width: 150px; display: inline-block;">
                     <div style="position: relative; display: inline-block;">
                       <img style="width: 100%; height: 100%; border-radius: 5px;" src="https://vdownload.hembed.com/image/icon/card_doujin_background.jpg?secure=sJRJ4-aVOQw4IVZasq7YZw==,4853041705">
-                      <img style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 5px;" src="https://vdownload.hembed.com/image/icon/erolabs_cherry_talezh_640x360.jpg?secure=gCyUoVxh7zqjKLDvF4Gmwg==,1736066294" alt="星隕計畫 Ark Re:Code">
+                      <img style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 5px;" src="https://vdownload.hembed.com/image/icon/erolabs_cherry_talezh_640x360.jpg?secure=gCyUoVxh7zqjKLDvF4Gmwg==,1736066294" alt="禁游排行 - 华语圈最新游戏创作者平台">
                     </div>
                   </div>
 
                   <div style="display: inline-block; text-decoration: none; color: black; margin-top: -2px; margin-left: 8px; height: 50px; width: calc(100% - 168px); vertical-align: top;">
-                    <div class="card-mobile-title" style="color: #e5e5e5;">星隕計畫 Ark Re:Code</div>
+                    <div class="card-mobile-title" style="color: #e5e5e5;">禁游排行 - 华语圈最新游戏创作者平台</div>
 
                     <div class="card-mobile-genre-wrapper" style="margin-top: 4px; margin-left: -2px">
                       <a href="https://l.erodatalabs.com/s/1j0I2U" target="_blank" style="font-size: 12px; color: dimgray; margin-left: 2px; display: inline-block;" class="card-mobile-user">EROLABS</a>
