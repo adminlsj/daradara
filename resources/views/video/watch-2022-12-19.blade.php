@@ -227,7 +227,7 @@
                     <div class="card-mobile-title" style="color: #e5e5e5;">禁游排行 - 华语圈最新游戏创作者平台</div>
 
                     <div class="card-mobile-genre-wrapper" style="margin-top: 4px; margin-left: -2px">
-                      <a href="https://l.erodatalabs.com/s/1j0I2U" target="_blank" style="font-size: 12px; color: dimgray; margin-left: 2px; display: inline-block;" class="card-mobile-user">EROLABS</a>
+                      <a href="https://www.tip-top.one/" target="_blank" style="font-size: 12px; color: dimgray; margin-left: 2px; display: inline-block;" class="card-mobile-user">EROLABS</a>
                     </div>
 
                     <div style="float: left; margin-top: -3px;">
