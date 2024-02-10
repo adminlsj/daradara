@@ -69,7 +69,7 @@ class BotController extends Controller
             $video->save();
         } */
 
-        $filename = 'wSFXdZ4.jpg';
+        $filename = 'NB7EeSy.jpg';
         $url = 'vdownload.hembed.com';
         $expiration = time() + 2629743;
         $token = 'xVEO8rLVgGkUBEBg';
