@@ -33,6 +33,75 @@ use App\Video_temp;
 
 class BotController extends Controller
 {
+    public function checkAvbebeHentai(Request $request)
+    {
+        ini_set('max_execution_time', 0);
+        ini_set('memory_limit', '-1');
+
+        $page = $request->page;
+        if ($page == 1) {
+            $url = 'https://avbebe.com/archives/category/h%E5%8B%95%E7%95%AB%E5%BD%B1%E7%89%87';
+        } else {
+            $url = 'https://avbebe.com/archives/category/h%E5%8B%95%E7%95%AB%E5%BD%B1%E7%89%87/page/'.$page;
+        }
+
+        $curl_connection = curl_init($url);
+        curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+        curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+        $html = curl_exec($curl_connection);
+        curl_close($curl_connection);
+
+        $avbebes = explode('<h3 class="jeg_post_title">', $html);
+        array_shift($avbebes);
+        foreach ($avbebes as $avbebe) {
+            $link = Helper::get_string_between($avbebe, '<a href="', '">');
+            $title = trim(str_replace('[中文字幕]', '', Helper::get_string_between($avbebe, '<a href="'.$link.'">', '</a>')));
+            $searchtext = mb_strtolower(preg_replace('/\s+/', '', $title), 'UTF-8');
+            if ($hanime1 = Video::where('genre', '裏番')->where('foreign_sd', 'not like', '%"avbebe"%')->where('foreign_sd', 'not like', '%"'.$link.'"%')->where('searchtext', 'ilike', '%'.$searchtext.'%')->first()) {
+                echo '<span style="font-weight:bold">[Avbebe] </span>'.$title.' = '.'<span style="font-weight:bold">[Hanime1] </span>'.$hanime1->title.' (ID#'.$hanime1->id.')<br>';
+            } else if ($hanime1 = Video::where('genre', '裏番')->where('foreign_sd', 'ilike', '%"'.$link.'"%')->first()) {
+                echo '<span style="font-weight:bold">[Avbebe] </span>'.$title.' = '.'<span style="font-weight:bold">[Hanime1] </span>'.$hanime1->title.' (ID#'.$hanime1->id.')<br>';
+            } else {
+                echo '<div style="color:red"><span style="font-weight:bold">[Avbebe] </span>'.$title.' (<a href="'.$link.'">'.$link.'</a>) not found</div>';
+            }
+        }
+    }
+
+    public function updateAvbebeHentai(Request $request)
+    {
+        ini_set('max_execution_time', 0);
+        ini_set('memory_limit', '-1');
+
+        $page = $request->page;
+        if ($page == 1) {
+            $url = 'https://avbebe.com/archives/category/h%E5%8B%95%E7%95%AB%E5%BD%B1%E7%89%87';
+        } else {
+            $url = 'https://avbebe.com/archives/category/h%E5%8B%95%E7%95%AB%E5%BD%B1%E7%89%87/page/'.$page;
+        }
+
+        $curl_connection = curl_init($url);
+        curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+        curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+        $html = curl_exec($curl_connection);
+        curl_close($curl_connection);
+
+        $avbebes = explode('<h3 class="jeg_post_title">', $html);
+        array_shift($avbebes);
+        foreach ($avbebes as $avbebe) {
+            $link = Helper::get_string_between($avbebe, '<a href="', '">');
+            $title = trim(str_replace('[中文字幕]', '', Helper::get_string_between($avbebe, '<a href="'.$link.'">', '</a>')));
+            $searchtext = mb_strtolower(preg_replace('/\s+/', '', $title), 'UTF-8');
+            if ($hanime1 = Video::where('genre', '裏番')->where('foreign_sd', 'not like', '%"avbebe"%')->where('foreign_sd', 'not like', '%"'.$link.'"%')->where('searchtext', 'ilike', '%'.$searchtext.'%')->first()) {
+                $foreign_sd = $hanime1->foreign_sd;
+                $foreign_sd['avbebe'] = $link;
+                $hanime1->foreign_sd = $foreign_sd;
+                $hanime1->save();
+            }
+        }
+    }
+
     public function tempMethod(Request $request)
     {
         ini_set('max_execution_time', 0);
@@ -69,12 +138,12 @@ class BotController extends Controller
             $video->save();
         } */
 
-        $filename = 'iLMCzoj.jpg';
+        /* $filename = 'G3gas6Z.jpg';
         $url = 'vdownload.hembed.com';
         $expiration = time() + 2629743;
         $token = 'xVEO8rLVgGkUBEBg';
         $source = '/image/cover/'.$filename;
-        return Video::getSignedUrlParameter($url, $source, $token, $expiration);
+        return Video::getSignedUrlParameter($url, $source, $token, $expiration); */
 
         /* $id = 84803;
         $huge = $id.'h.jpg';
