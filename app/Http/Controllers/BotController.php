@@ -91,8 +91,8 @@ class BotController extends Controller
         array_shift($avbebes);
         foreach ($avbebes as $avbebe) {
             $link = Helper::get_string_between($avbebe, '<a href="', '">');
-            $title = trim(str_replace('[中文字幕]', '', Helper::get_string_between($avbebe, '<a href="'.$link.'">', '</a>')));
-            $searchtext = mb_strtolower(preg_replace('/\s+/', '', str_replace('(無修正)', '', $title)), 'UTF-8');
+            $title = trim(str_replace('(無修正)', '', str_replace('[中文字幕]', '', Helper::get_string_between($avbebe, '<a href="'.$link.'">', '</a>'))));
+            $searchtext = mb_strtolower(preg_replace('/\s+/', '', $title), 'UTF-8');
             if ($hanime1 = Video::where('genre', '裏番')->where('foreign_sd', 'not like', '%"avbebe"%')->where('foreign_sd', 'not like', '%"'.$link.'"%')->where('searchtext', 'ilike', '%'.$searchtext.'%')->first()) {
                 $foreign_sd = $hanime1->foreign_sd;
                 $foreign_sd['avbebe'] = $link;
