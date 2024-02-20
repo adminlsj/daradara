@@ -40,9 +40,9 @@ class BotController extends Controller
 
         $page = $request->page;
         if ($page == 1) {
-            $url = 'https://avbebe.com/archives/category/h%E5%8B%95%E7%95%AB%E5%BD%B1%E7%89%87';
+            $url = 'https://avbebe.com/archives/category/h%e5%8b%95%e7%95%ab%e5%bd%b1%e7%89%87';
         } else {
-            $url = 'https://avbebe.com/archives/category/h%E5%8B%95%E7%95%AB%E5%BD%B1%E7%89%87/page/'.$page;
+            $url = 'https://avbebe.com/archives/category/h%e5%8b%95%e7%95%ab%e5%bd%b1%e7%89%87/page/'.$page;
         }
 
         $curl_connection = curl_init($url);
@@ -75,9 +75,9 @@ class BotController extends Controller
 
         $page = $request->page;
         if ($page == 1) {
-            $url = 'https://avbebe.com/archives/category/h%E5%8B%95%E7%95%AB%E5%BD%B1%E7%89%87';
+            $url = 'https://avbebe.com/archives/category/h%e5%8b%95%e7%95%ab%e5%bd%b1%e7%89%87';
         } else {
-            $url = 'https://avbebe.com/archives/category/h%E5%8B%95%E7%95%AB%E5%BD%B1%E7%89%87/page/'.$page;
+            $url = 'https://avbebe.com/archives/category/h%e5%8b%95%e7%95%ab%e5%bd%b1%e7%89%87/page/'.$page;
         }
 
         $curl_connection = curl_init($url);
