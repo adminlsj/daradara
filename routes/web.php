@@ -160,11 +160,9 @@ Route::group(['middleware' => 'admin'], function () {
 	Route::get('/checkAvbebeM3u8', 'BotController@checkAvbebeM3u8');
 	Route::get('/checkAvbebeOthers', 'BotController@checkAvbebeOthers');
 	Route::get('/checkAvbebe3D', 'BotController@checkAvbebe3D');
+	Route::get('/checkAvbebeHentai', 'BotController@checkAvbebeHentai');
 	Route::get('/downloadAvbebeM3u8', 'BotController@downloadAvbebeM3u8');
 	Route::get('/downloadAvbebeMp4', 'BotController@downloadAvbebeMp4');
-
-	Route::get('/checkAvbebeHentai', 'BotController@checkAvbebeHentai');
-	Route::get('/updateAvbebeHentai', 'BotController@updateAvbebeHentai');
 
 	Route::get('/editM3u8', 'BotController@editM3u8');
 	Route::post('/updateM3u8', 'BotController@updateM3u8')->name('m3u8.update');;
