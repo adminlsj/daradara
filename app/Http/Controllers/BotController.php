@@ -1770,7 +1770,6 @@ class BotController extends Controller
                 $title = trim(Helper::get_string_between($block, '<a href="'.$link.'">', '</a>'));
                 $video = Video::where('foreign_sd', 'like', '%"'.$link.'"%')->first();
                 if (!$video) {
-                    return $link;
                     array_push($news, $link);
                 }
             }
