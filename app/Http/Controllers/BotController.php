@@ -1740,6 +1740,8 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
+        Log::info('Avbebe hentai check started...');
+
         $url = "https://avbebe.com/archives/category/h%e5%8b%95%e7%95%ab%e5%bd%b1%e7%89%87";
         $curl_connection = curl_init($url);
         curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
@@ -1776,6 +1778,9 @@ class BotController extends Controller
             }
         }
         // $news = array_diff($news, ["https://avbebe.com/archives/43608", "https://avbebe.com/archives/43606", "https://avbebe.com/archives/43141", "https://avbebe.com/archives/29773", "https://avbebe.com/archives/171102"]);
+
+        Log::info('Avbebe hentai check ended...');
+
         return $news;
     }
 
