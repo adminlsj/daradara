@@ -1773,7 +1773,6 @@ class BotController extends Controller
                 $video = Video::where('foreign_sd', 'like', '%"'.$link.'"%')->first();
                 if (!$video) {
                     array_push($news, $link);
-                    Log::info($link.' not found...');
                 }
             }
         }
