@@ -1776,7 +1776,7 @@ class BotController extends Controller
                 }
             }
         }
-        $news = array_diff($news, ["https://avbebe.com/archives/66006", "https://avbebe.com/archives/66004"]);
+        $news = array_diff($news, ["https://avbebe.com/archives/66006", "https://avbebe.com/archives/66004", "https://avbebe.com/archives/36984"]);
 
         Log::info(json_encode($news)); 
 
