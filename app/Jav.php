@@ -17,7 +17,7 @@ use App\Mail\UserReport;
 
 class Jav
 {
-    public static $base = "http://hsck892.cc/";
+    public static $base = "http://hsck650.cc/";
 
     public static function uploadHscangku($pages = 10)
     {
@@ -435,7 +435,7 @@ class Jav
                     $foreign_sd = ['hscangku' => $original_link, 'poster' => $poster];
                     $video = Video::create([
                         'user_id' => 575858,
-                        'playlist_id' => 9640,
+                        'playlist_id' => 9692,
                         'title' => strtoupper($title),
                         'translations' => ['JP' => strtoupper($title)],
                         'caption' => '',
