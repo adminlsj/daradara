@@ -47,7 +47,7 @@
     <div class="col-xs-12">
         <div style="line-height: 30px; color: #e2e2e2; font-weight: bold">贊助商</div>
         <div style="line-height: 30px;"><a style="color: dimgray;" href="https://l.erodatalabs.com/s/0ZIRw4" target="_blank">Erolabs</a></div>
-        <div style="line-height: 30px;"><a style="color: dimgray;" href="https://creative.kbnmnl.com/widgets/v4/Universal?campaignId=300x100&modelPageOption=model&tag=girls%2Fchinese%2Cgirls%2Fjapanese&thumbsMargin=5&hideButton=1&hideTitle=1&userId=68266da2436a81581f441c04a73d1525467dff2da85808235979b437cff6f852&quality=240p&autoplay=all&autoplayForce=1" target="_blank">Stripchat</a></div>
+        <div style="line-height: 30px;"><a style="color: dimgray;" href="https://go.rmhfrtnd.com/smartpop/c27a53eb60ac51a54d07e90eb3049babc3c913760430d8fb67a8dca2449efd47?userId=c06d1f1826956b97f449612a10c9fcd70c7b93fe0ec0513557e0a27fd086d7da" target="_blank">Stripchat</a></div>
         <div style="line-height: 30px;"><a style="color: dimgray;" href="{{ route('jav.home') }}" target="_blank">日本AV 高清中字</a></div>
         <div style="line-height: 30px;"><a style="color: dimgray;" href="https://theporndude.com/zh" target="_blank">PornDude</a></div>
         <hr style="border-color: #252525; margin: 15px 0px">
