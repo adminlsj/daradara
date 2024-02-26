@@ -39,24 +39,24 @@ class BotController extends Controller
         ini_set('memory_limit', '-1');
 
         // Update missav cover
-        $videos = Video::where('cover', 'like', '%i.rotriza.com%')->get();
+        /* $videos = Video::where('cover', 'like', '%i.rotriza.com%')->get();
         foreach ($videos as $video) {
             $temp = $video->foreign_sd;
             $temp['poster'] = str_replace('i.rotriza.com', 'eightcha.com', $temp['poster']);
             $video->foreign_sd = $temp;
             $video->cover = str_replace('i.rotriza.com', 'eightcha.com', $video->cover);
             $video->save();
-        }
+        } */
 
         // Update outdated hscangku poster
-        /* $videos = Video::whereIn('genre', Video::$genre_jav)->where('foreign_sd', 'like', '%\666548.xyz%')->get();
+        $videos = Video::whereIn('genre', Video::$genre_jav)->where('foreign_sd', 'like', '%\666549.xyz%')->get();
         foreach ($videos as $video) {
             $temp = $video->foreign_sd;
-            $temp["poster"] = str_replace('666548.xyz', '666549.xyz', $temp["poster"]);
+            $temp["poster"] = str_replace('666549.xyz', '666532.xyz', $temp["poster"]);
             $video->foreign_sd = $temp;
-            $video->cover = str_replace('666548.xyz', '666549.xyz', $video->cover);
+            $video->cover = str_replace('666549.xyz', '666532.xyz', $video->cover);
             $video->save();
-        } */
+        }
 
         /* $videos = Video::whereIn('genre', ['裏番', '泡麵番', 'Motion Anime', '3D動畫', '同人作品', 'Cosplay', '新番預告'])->where('cover', 'like', '%https://img4.qy0.ru%')->get();
         foreach ($videos as $video) {
