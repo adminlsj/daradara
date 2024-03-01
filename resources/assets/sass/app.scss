@@ -1285,14 +1285,15 @@ th, td {
 
 .video-subscribe-btn {
   display: inline-block; 
-  background-color: #F1F1F1; 
+  background-color: #F1F1F1;
   height: 36px; 
   line-height: 36px; 
   border-radius: 50px; 
   padding: 0 16px; 
-  margin-left: 20px; 
   vertical-align: middle; 
   cursor: pointer;
+  color: #333;
+  margin-left: 20px;
 }
 
 .video-subscribe-btn:hover {
@@ -2888,7 +2889,9 @@ div.sticky {
   }
 
   .video-subscribe-btn {
-    float: right;
+    position: absolute;
+    right: 10px;
+    top: 0px;
     height: 33px; 
     line-height: 33px; 
     border-radius: 37px; 

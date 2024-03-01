@@ -60,6 +60,28 @@ $('div#video-like-form-wrapper').on("submit", "form#video-like-form", function(e
     })
 });
 
+$('div#video-subscribe-form-wrapper').on("submit", "form#video-subscribe-form", function(e) {
+    $('#video-subscribe-btn').prop('disabled', true);
+    $.ajaxSetup({
+        header:$('meta[name="_token"]').attr('content')
+    })
+    e.preventDefault(e);
+
+    $.ajax({
+        type:"POST",
+        url: $(this).attr("action"),
+        data:$(this).serialize(),
+        dataType: 'json',
+        success: function(data){
+            $('div#video-subscribe-form-wrapper').html(data.subscribeBtn);
+            $('#video-subscribe-btn').prop('disabled', false);
+        },
+        error: function(xhr, ajaxOptions, thrownError){
+            showSnackbar('請刷新頁面後重試。');
+        }
+    })
+});
+
 $('div#playlistModal').on("change", "input.playlist-checkbox", function(e) {
     $('input.playlist-checkbox').prop('disabled', true);
     $.ajaxSetup({

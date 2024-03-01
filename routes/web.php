@@ -23,6 +23,7 @@ Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallb
 Route::post('/like', 'VideoController@like')->name('video.like');
 Route::post('/save', 'VideoController@save')->name('video.save');
 Route::post('/unsave', 'VideoController@unsave')->name('video.unsave');
+Route::post('/subscribe', 'VideoController@subscribe')->name('video.subscribe');
 Route::post('/addTags', 'VideoController@addTags')->name('video.addTags');
 Route::post('/removeTags', 'VideoController@removeTags')->name('video.removeTags');
 

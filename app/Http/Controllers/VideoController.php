@@ -8,6 +8,7 @@ use App\User;
 use App\Comment;
 use App\Reply;
 use App\Like;
+use App\Subscribe;
 use App\Save;
 use App\Playlist;
 use App\Playitem;
@@ -79,11 +80,13 @@ class VideoController extends Controller
                 $listed = Playitem::where('user_id', $user->id)->where('video_id', $video->id)->get();
                 $playlists = Playlist::where('user_id', $user->id)->where('reference_id', null)->select('id', 'user_id', 'title', 'created_at')->orderBy('created_at', 'desc')->get();
                 $liked = Like::where('user_id', $user->id)->where('foreign_type', 'video')->where('foreign_id', $video->id)->exists();
+                $subscribed = Subscribe::where('user_id', $user->id)->where('artist_id', $video->user_id)->exists();
             } else {
                 $saved = false;
                 $listed = '[]';
                 $playlists = '[]';
                 $liked = false;
+                $subscribed = false;
             }
 
             $lang = Helper::getPreferredLanguage();
@@ -108,7 +111,7 @@ class VideoController extends Controller
             abort(403);
         }
 
-        return view('video.watch-2022-12-19', compact('video', 'artist', 'videos', 'current', 'tags', 'country_code', 'comments_count', 'commentsP_count', 'related', 'doujin', 'is_mobile', 'saved', 'listed', 'playlists', 'liked', 'lang', 'sd', 'qual', 'qualities', 'downloads'));
+        return view('video.watch-2022-12-19', compact('video', 'artist', 'videos', 'current', 'tags', 'country_code', 'comments_count', 'commentsP_count', 'related', 'doujin', 'is_mobile', 'saved', 'listed', 'playlists', 'liked', 'subscribed', 'lang', 'sd', 'qual', 'qualities', 'downloads'));
     }
 
     public function download(Request $request)
@@ -243,6 +246,34 @@ class VideoController extends Controller
 
         return response()->json([
             'saveBtn' => $save_btn,
+            'csrf_token' => csrf_token(),
+        ]);
+    }
+
+    public function subscribe(Request $request)
+    {
+        $user_id = request('subscribe-user-id');
+        $artist_id = request('subscribe-artist-id');
+        $subscribed = request('subscribe-status');
+
+        if ($subscribed) {
+            Subscribe::where('user_id', $user_id)
+                ->where('artist_id', $artist_id)
+                ->delete();
+            $subscribed = false;
+        } else {
+            Subscribe::create([
+                'user_id' => $user_id,
+                'artist_id' => $artist_id
+            ]);
+            $subscribed = true;
+        }
+
+        $html = '';
+        $html .= view('video.subscribeBtn', compact('user_id', 'artist_id', 'subscribed'));
+
+        return response()->json([
+            'subscribeBtn' => $html,
             'csrf_token' => csrf_token(),
         ]);
     }

@@ -7,6 +7,7 @@ use App\Video;
 use App\Watch;
 use App\Save;
 use App\Like;
+use App\Subscribe;
 use App\Playlist;
 use App\Playitem;
 use Illuminate\Http\Request;
@@ -203,6 +204,14 @@ class UserController extends Controller
             $query->where('cover', '!=', null)->select('id', 'title', 'cover', 'imgur');
         }]);
 
+        $subscribes_users = Subscribe::where('user_id', $user->id)->pluck('artist_id');
+        $subscribes = Video::whereIn('user_id', $subscribes_users)->select('id', 'title', 'cover', 'imgur')->orderBy('uploaded_at', 'desc')->limit(21)->get();
+        $artists = Subscribe::with(['artist' => function($query) {
+            $query->select('id', 'name', 'created_at', 'updated_at', 'avatar_temp');
+        }])->where('user_id', $user->id)->orderBy('created_at', 'desc')->limit(21)->get();
+
+        // $artists = User::whereIn('id', $subscribes_users)->select('id', 'name', 'created_at', 'updated_at', 'avatar_temp')->limit(21)->get();
+
         $playlists = Playlist::withCount('videos', 'videos_ref')->with([
             'videos' => function($query) {
                 $query->select('videos.id', 'cover', 'imgur')->orderBy('playitems.created_at', 'desc')->limit(1);
@@ -221,7 +230,7 @@ class UserController extends Controller
             }
         ])->where('user_id', $user->id)->orderBy('created_at', 'desc')->limit(200)->get();
 
-        return view('playlist.index', compact('user', 'saves', 'likes', 'playlists'));
+        return view('playlist.index', compact('user', 'saves', 'likes', 'playlists', 'subscribes', 'artists'));
     }
 
     public function showPlaylist(Request $request)

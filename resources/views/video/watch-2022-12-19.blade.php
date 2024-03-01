@@ -55,7 +55,7 @@
       <h3 id="shareBtn-title" class="video-details-wrapper" style="font-weight: bold; margin-top: 10px; color: white;">{{ $video->translations['JP'] }}</h3>
       <div class="video-details-wrapper hidden-sm hidden-md hidden-lg hidden-xl" style="font-size: 12px; color: #aaa; font-weight: normal; margin-top: -5px; margin-bottom: 17px">觀看次數：{{ $video->views() }}次&nbsp;&nbsp;{{ Carbon\Carbon::parse($video->created_at)->format('Y-m-d') }}</div>
 
-      <div class="video-details-wrapper desktop-inline-mobile-block">
+      <div class="video-details-wrapper desktop-inline-mobile-block" style="position: relative;">
         <div style="display: inline-block;">
           <a href="{{ route('home.search') }}?query={{ $artist->name }}&genre={{ $video->genre }}"><img id="video-user-avatar" src="{{ $artist->avatar_temp }}" alt="{{ $artist->name }}"></a>
           <div style="display: inline-block; vertical-align: middle; margin-left: 8px">
@@ -75,28 +75,14 @@
           </div>
         </div>
 
-        <div class="no-select video-subscribe-btn hidden-md" data-toggle="modal" data-target="#subscribeModal">
-          訂閱
-        </div>
-
-        <div id="subscribeModal" class="modal" role="dialog">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <span class="material-icons pull-left no-select modal-close-btn" data-dismiss="modal">close</span>
-                <h4 class="modal-title">訂閱作者</h4>
-              </div>
-              <div class="modal-body" style="padding-bottom: 20px; text-align: left;">
-                <h4>追蹤喜歡的作者</h4>
-                <p id="hentai-tags-text" style="color: darkgray;">訂閱功能即將全面開放！</p>
-              </div>
-              <hr style="border-color: #323434; margin: 0; margin-top: -10px;">
-              <div class="modal-footer">
-                <div data-dismiss="modal">返回</div>
-                <button data-dismiss="modal" class="pull-right btn btn-primary">我知道了</button>
-              </div>
-            </div>
-          </div>
+        <div id="video-subscribe-form-wrapper" style="display: inline-block;" class="no-select">
+          @if (!Auth::check())
+            <button class="no-select video-subscribe-btn no-button-style" data-toggle="modal" data-target="#signUpModal">
+              訂閱
+            </button>
+          @else
+            @include('video.subscribeBtn', ['user_id' => Auth::user()->id, 'artist_id' => $video->user_id])
+          @endif
         </div>
       </div>
 

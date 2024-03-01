@@ -20,6 +20,8 @@
     <div id="home-rows-wrapper" class="playlist-rows-wrapper" style="position: relative;">
       @include('playlist.card-wrapper', ['title' => '稍後觀看', 'videos' => $saves, 'link' => route('playlist.show').'?list=WL'])
       @include('playlist.card-wrapper', ['title' => '喜歡的影片', 'videos' => $likes, 'link' => route('playlist.show').'?list=LL'])
+      @include('layouts.card-wrapper', ['title' => '訂閱內容', 'videos' => $subscribes, 'link' => route('playlist.show').'?list=LL'])
+      @include('playlist.card-wrapper-artist', ['title' => '訂閱的作者', 'artists' => $artists, 'link' => route('playlist.show').'?list=LL'])
 
       <a style="text-decoration: none;">
         <h3>播放清單<span class="hidden-xs show-more-playlists-btn" style="cursor: pointer;"><span style="vertical-align: middle; margin-top: -8px; margin-left: 0px; font-size: 25px; margin-bottom: -5px;" class="material-icons">chevron_right</span></span></h3>

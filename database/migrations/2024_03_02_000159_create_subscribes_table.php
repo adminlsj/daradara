@@ -15,10 +15,10 @@ class CreateSubscribesTable extends Migration
     {
         Schema::create('subscribes', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('user_id')->unsigned()->nullable();
+            $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->integer('creator_id')->unsigned()->nullable();
-            $table->foreign('creator_id')->references('id')->on('users')->onDelete('cascade');
+            $table->integer('artist_id')->unsigned();
+            $table->foreign('artist_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
