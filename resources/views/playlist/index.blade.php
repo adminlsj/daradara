@@ -30,7 +30,7 @@
         <div class="row no-gutter" style="margin: 0 -4px;">
           @foreach ($playlists as $playlist)
             @if ($video = $playlist->reference_id ? $playlist->videos_ref->first() : $playlist->videos->first())
-              <div class="hover-lighter card-mobile-panel single-user-playlist single-playlist-wrapper col-xs-6 col-sm-4 col-md-2 col-lg-2 {{ $loop->iteration > 12 ? 'hidden temp-hidden-playlists' : '' }}">
+              <div class="hover-lighter card-mobile-panel single-user-playlist col-xs-6 col-sm-4 col-md-2 col-lg-2 {{ $loop->iteration > 12 ? 'hidden temp-hidden-playlists' : '' }}">
                 <a href="{{ route('playlist.show') }}?list={{ $playlist->reference_id ? $playlist->reference_id : $playlist->id }}" style="text-decoration: none;">
                   <div style="position: relative;">
                     <img style="width: 100%;" src="https://vdownload.hembed.com/image/icon/card_doujin_background.jpg?secure=sJRJ4-aVOQw4IVZasq7YZw==,4853041705">
@@ -61,7 +61,7 @@
 
             @else
 
-              <div class="hover-lighter card-mobile-panel single-user-playlist single-playlist-wrapper col-xs-6 col-sm-4 col-md-2 col-lg-2 {{ $loop->iteration > 12 ? 'hidden temp-hidden-playlists' : '' }}">
+              <div class="hover-lighter card-mobile-panel single-user-playlist col-xs-6 col-sm-4 col-md-2 col-lg-2 {{ $loop->iteration > 12 ? 'hidden temp-hidden-playlists' : '' }}">
                 <a href="{{ route('playlist.show') }}?list={{ $playlist->reference_id ? $playlist->reference_id : $playlist->id }}" style="text-decoration: none;">
                   <div style="position: relative;">
                     <img style="width: 100%; border-radius: 3px;" src="https://vdownload.hembed.com/image/icon/card_doujin_background.jpg?secure=sJRJ4-aVOQw4IVZasq7YZw==,4853041705">

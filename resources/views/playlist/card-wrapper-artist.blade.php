@@ -1,7 +1,7 @@
 <a style="text-decoration: none;" href="{{ $link }}">
 	<h3>{{ $title }}</h3>
 </a>
-<div style="position: relative; margin-bottom: -15px">
+<div style="position: relative; margin-bottom: -10px">
 	@include('layouts.card-navigate-before')
 	<div class="home-rows-videos-wrapper no-scrollbar-style" style="margin-left: 0px; margin-right: -3px;">
 		@foreach ($artists as $item)
