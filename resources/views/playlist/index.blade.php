@@ -20,17 +20,17 @@
     <div id="home-rows-wrapper" class="playlist-rows-wrapper" style="position: relative;">
       @include('playlist.card-wrapper', ['title' => '稍後觀看', 'videos' => $saves, 'link' => route('playlist.show').'?list=WL'])
       @include('playlist.card-wrapper', ['title' => '喜歡的影片', 'videos' => $likes, 'link' => route('playlist.show').'?list=LL'])
-      @include('layouts.card-wrapper-doujin', ['title' => '訂閱內容', 'videos' => $subscribes, 'link' => '#'])
-      @include('playlist.card-wrapper-artist', ['title' => '訂閱的作者', 'artists' => $artists, 'link' => '#'])
+      @include('playlist.card-wrapper-artist', ['title' => '訂閱的作者', 'artists' => $artists, 'link' => route('playlist.show').'?list=SL'])
+      @include('layouts.card-wrapper-doujin', ['title' => '訂閱內容', 'videos' => $subscribes, 'link' => route('home.search').'?query=訂閱內容'])
 
       <a style="text-decoration: none;">
         <h3>播放清單<span class="hidden-xs show-more-playlists-btn" style="cursor: pointer;"><span style="vertical-align: middle; margin-top: -8px; margin-left: 0px; font-size: 25px; margin-bottom: -5px;" class="material-icons">chevron_right</span></span></h3>
       </a>
       <div class="content-padding-new">
-        <div class="row no-gutter" style="margin: 0 -5px;">
+        <div class="row no-gutter" style="margin: 0 -4px;">
           @foreach ($playlists as $playlist)
             @if ($video = $playlist->reference_id ? $playlist->videos_ref->first() : $playlist->videos->first())
-              <div class="hover-lighter card-mobile-panel single-playlist-wrapper col-xs-6 col-sm-4 col-md-2 col-lg-2 {{ $loop->iteration > 10 ? 'hidden temp-hidden-playlists' : '' }}">
+              <div class="hover-lighter card-mobile-panel single-user-playlist single-playlist-wrapper col-xs-6 col-sm-4 col-md-2 col-lg-2 {{ $loop->iteration > 12 ? 'hidden temp-hidden-playlists' : '' }}">
                 <a href="{{ route('playlist.show') }}?list={{ $playlist->reference_id ? $playlist->reference_id : $playlist->id }}" style="text-decoration: none;">
                   <div style="position: relative;">
                     <img style="width: 100%;" src="https://vdownload.hembed.com/image/icon/card_doujin_background.jpg?secure=sJRJ4-aVOQw4IVZasq7YZw==,4853041705">
@@ -61,16 +61,16 @@
 
             @else
 
-              <div class="hover-lighter card-mobile-panel single-playlist-wrapper col-xs-6 col-sm-4 col-md-2 col-lg-2 {{ $loop->iteration > 10 ? 'hidden temp-hidden-playlists' : '' }}">
+              <div class="hover-lighter card-mobile-panel single-user-playlist single-playlist-wrapper col-xs-6 col-sm-4 col-md-2 col-lg-2 {{ $loop->iteration > 12 ? 'hidden temp-hidden-playlists' : '' }}">
                 <a href="{{ route('playlist.show') }}?list={{ $playlist->reference_id ? $playlist->reference_id : $playlist->id }}" style="text-decoration: none;">
                   <div style="position: relative;">
-                    <img style="width: 100%;" src="https://vdownload.hembed.com/image/icon/card_doujin_background.jpg?secure=sJRJ4-aVOQw4IVZasq7YZw==,4853041705">
-                    <img style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;" src="https://vdownload.hembed.com/image/icon/playlist_placeholder.jpg?secure=FlykN_6gYfRx7TTbr20AKQ==,4855472554">
+                    <img style="width: 100%; border-radius: 3px;" src="https://vdownload.hembed.com/image/icon/card_doujin_background.jpg?secure=sJRJ4-aVOQw4IVZasq7YZw==,4853041705">
+                    <img style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 3px;" src="https://vdownload.hembed.com/image/icon/playlist_placeholder.jpg?secure=FlykN_6gYfRx7TTbr20AKQ==,4855472554">
 
                     <div style="position: absolute; top: 0; right: 0; height: 100%; background-color: rgba(0,0,0,0.8); width: 45%; text-align: center; color: white;">
                       <div style="position: relative; top: 50%; transform: translateY(-50%);">
                         <div style="margin-bottom: 12px; font-size: 16px; font-weight: bold;">0</div>
-                        <img style="height: 15px; width: auto; display: block; margin-left: auto; margin-right: auto;" src="https://vdownload.hembed.com/image/icon/playlist_cover.png?secure=ktsUJLHvpLX-SgpG1dXpHg==,4855472424">
+                        <img style="height: 15px; width: auto; display: block; margin-left: auto; margin-right: auto; border-radius: 3px;" src="https://vdownload.hembed.com/image/icon/playlist_cover.png?secure=ktsUJLHvpLX-SgpG1dXpHg==,4855472424">
                       </div>
                     </div>
                   </div>

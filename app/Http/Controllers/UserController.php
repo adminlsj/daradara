@@ -205,12 +205,10 @@ class UserController extends Controller
         }]);
 
         $subscribes_users = Subscribe::where('user_id', $user->id)->pluck('artist_id');
-        $subscribes = Video::with('user:id,name')->whereIn('user_id', $subscribes_users)->orderBy('uploaded_at', 'desc')->select('id', 'user_id', 'title', 'cover', 'imgur', 'views', 'duration')->limit(21)->get();
+        $subscribes = Video::with('user:id,name')->whereIn('genre', Video::$genre)->whereIn('user_id', $subscribes_users)->orderBy('created_at', 'desc')->select('id', 'user_id', 'title', 'cover', 'imgur', 'views', 'duration')->limit(21)->get();
         $artists = Subscribe::with(['artist' => function($query) {
             $query->select('id', 'name', 'created_at', 'updated_at', 'avatar_temp');
         }])->where('user_id', $user->id)->orderBy('created_at', 'desc')->limit(21)->get();
-
-        // $artists = User::whereIn('id', $subscribes_users)->select('id', 'name', 'created_at', 'updated_at', 'avatar_temp')->limit(21)->get();
 
         $playlists = Playlist::withCount('videos', 'videos_ref')->with([
             'videos' => function($query) {

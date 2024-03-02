@@ -347,6 +347,14 @@ th, td {
   padding: 0 5px !important;
 }
 
+.single-user-playlist {
+  display: inline-block; 
+  margin-bottom: 15px; 
+  border-radius: 5px; 
+  width: calc(100% / 6); 
+  padding: 0 4px !important;
+}
+
 #createPlaylistModal button:focus {
   outline:0;
 }

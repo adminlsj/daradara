@@ -6,6 +6,7 @@ use App\User;
 use App\Video;
 use App\Save;
 use App\Like;
+use App\Subscribe;
 use App\Playlist;
 use App\Playitem;
 use App\Bot;
@@ -242,14 +243,19 @@ class HomeController extends Controller
             $results = Video::whereIn('genre', Video::$genre);
 
             if ($query) {
-                $query = mb_strtolower(preg_replace('/\s+/', '', $query), 'UTF-8');
-                $chinese = new Chinese();
-                $original = '%'.$query.'%';
-                $translated = '%'.$chinese->to(Chinese::ZH_HANT, $query).'%';
-                $results = $results->where(function($query) use ($original, $translated) {
-                    $query->where('searchtext', 'like', $original)
-                          ->orWhere('searchtext', 'like', $translated);
-                });
+                if ($query == '訂閱內容' && Auth::check()) {
+                    $subscribes = Subscribe::where('user_id', Auth::user()->id)->pluck('artist_id');
+                    $results = $results->whereIn('user_id', $subscribes);
+                } else {
+                    $query = mb_strtolower(preg_replace('/\s+/', '', $query), 'UTF-8');
+                    $chinese = new Chinese();
+                    $original = '%'.$query.'%';
+                    $translated = '%'.$chinese->to(Chinese::ZH_HANT, $query).'%';
+                    $results = $results->where(function($query) use ($original, $translated) {
+                        $query->where('searchtext', 'like', $original)
+                              ->orWhere('searchtext', 'like', $translated);
+                    });
+                }
             }
 
             if ($genre) {
@@ -358,9 +364,9 @@ class HomeController extends Controller
                     break;
             }
 
-            if (!$query || strpos($query, '新番') === false) {
+            /* if (!$query || strpos($query, '新番') === false) {
                 $results = $results->where('title', 'not like', '[新番預告]%');
-            }
+            } */
 
             if (!$doujin) {
                 $results = $results->distinct()->paginate(42);
