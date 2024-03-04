@@ -258,6 +258,16 @@ class UserController extends Controller
             $count = $results->total();
             $editable = true;
 
+        } elseif ($pid == 'SL' && auth()->check()) {
+            $results = Subscribe::with(['artist' => function($query) {
+                $query->select('id', 'name', 'created_at', 'updated_at', 'avatar_temp');
+            }])->where('user_id', $user->id)->orderBy('created_at', 'desc')->paginate(42);
+            $title = '訂閱的作者';
+            $count = $results->total();
+            $editable = true;
+            $doujin = false;
+            return view('playlist.show-artist', compact('results', 'title', 'sub', 'description', 'doujin', 'pid', 'editable', 'count', 'playlist'));
+
         } elseif (is_numeric($pid) && $playlist = Playlist::find($pid)) {
             if ($playlist->reference_id) {
                 return Redirect::route('playlist.show', ['list' => $playlist->reference_id]);

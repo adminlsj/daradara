@@ -38,6 +38,28 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
+        // Update all spankbang errors
+        $videos = Video::where('foreign_sd', 'like', '%"error"%')->where('foreign_sd', 'ilike', '%spankbang%')->select('id', 'title', 'sd', 'outsource', 'current_views', 'tags_array', 'foreign_sd', 'created_at')->orderBy('current_views', 'desc')->get();
+        foreach ($videos as $video) {
+            if (array_key_exists("error", $video->foreign_sd) && strpos($video->foreign_sd["error"], 'spankbang') !== false ) {
+                $temp = $video->foreign_sd;
+                $temp['spankbang'] = $video->foreign_sd['error'];
+                unset($temp['error']);
+                $video->foreign_sd = $temp;
+                $video->save();
+            }
+        }
+        $videos_sc = Video::where('foreign_sd', 'like', '%"error_sc"%')->where('foreign_sd', 'ilike', '%spankbang%')->select('id', 'title', 'sd_sc', 'outsource', 'tags_array', 'foreign_sd', 'created_at')->orderBy('id', 'asc')->get();
+        foreach ($videos_sc as $video) {
+            if (array_key_exists("error_sc", $video->foreign_sd) && strpos($video->foreign_sd["error_sc"], 'spankbang') !== false ) {
+                $temp = $video->foreign_sd;
+                $temp['spankbang_sc'] = $video->foreign_sd['error_sc'];
+                unset($temp['error_sc']);
+                $video->foreign_sd = $temp;
+                $video->save();
+            }
+        }
+
         // Update missav cover
         /* $videos = Video::where('cover', 'like', '%i.rotriza.com%')->get();
         foreach ($videos as $video) {
@@ -69,12 +91,12 @@ class BotController extends Controller
             $video->save();
         } */
 
-        /* $filename = 'G3gas6Z.jpg';
+        $filename = 'card_artist_background.jpg';
         $url = 'vdownload.hembed.com';
-        $expiration = time() + 2629743;
+        $expiration = time() + 3155692600;
         $token = 'xVEO8rLVgGkUBEBg';
-        $source = '/image/cover/'.$filename;
-        return Video::getSignedUrlParameter($url, $source, $token, $expiration); */
+        $source = '/image/icon/'.$filename;
+        return Video::getSignedUrlParameter($url, $source, $token, $expiration);
 
         /* $id = 84803;
         $huge = $id.'h.jpg';
