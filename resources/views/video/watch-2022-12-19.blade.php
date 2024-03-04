@@ -96,9 +96,9 @@
 
         <div id="video-like-form-wrapper" class="video-show-action-btn no-select">
           @if (!Auth::check())
-            <button id="video-like-btn" class="single-icon-wrapper no-button-style" method="POST" data-toggle="modal" data-target="#signUpModal">
+            <button id="video-like-btn" class="single-icon-wrapper no-button-style" data-toggle="modal" data-target="#signUpModal">
               <div class="single-icon no-select">
-                <i class="material-icons{{ $liked ? '' : '-outlined'}}">thumb_up</i>{{ $video->likes_count }}
+                <i class="material-icons-outlined">thumb_up</i>{{ $video->likes_count }}
               </div>
             </button>
           @else
