@@ -360,11 +360,12 @@ $('.playitem-delete-btn').on('click', function () {
     })
 });
 
+var playlist_original_text = $('#playlist-show-edit-btn-text').text();
 $('.playlist-show-edit-btn').click(function(){
     var text = $('#playlist-show-edit-btn-text');
     var icon = $('#playlist-show-edit-btn-icon');
 
-    if (text.text() == '編輯影片') {
+    if (text.text() == '編輯影片' || text.text() == '編輯訂閱') {
         text.text('完成編輯');
         icon.text('done');
         $(this).css('background-color', 'crimson');
@@ -374,7 +375,7 @@ $('.playlist-show-edit-btn').click(function(){
         $('.playlist-show-links').bind('click', false);
 
     } else if (text.text() == '完成編輯') {
-        text.text('編輯影片');
+        text.text(playlist_original_text);
         icon.text('edit_note');
         $(this).css('background-color', 'white');
         $(this).css('border-color', 'white');
