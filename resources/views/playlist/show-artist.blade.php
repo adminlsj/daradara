@@ -26,7 +26,7 @@
       </a>
 
       <button class="no-select playlist-show-btn playlist-show-edit-btn" style="margin-right: 3px;">
-        <span id="playlist-show-edit-btn-icon" style="vertical-align: middle; font-size: 25px; margin-top: -5px; margin-right: 5px; cursor: pointer;" class="material-icons-outlined">edit_note</span><span id="playlist-show-edit-btn-text">編輯影片</span>
+        <span id="playlist-show-edit-btn-icon" style="vertical-align: middle; font-size: 25px; margin-top: -5px; margin-right: 5px; cursor: pointer;" class="material-icons-outlined">edit_note</span><span id="playlist-show-edit-btn-text">編輯訂閱</span>
       </button>
 
       <button class="no-select playlist-show-btn" style="background-color: transparent; color: white; margin-left: 4px; margin-right: 0px; outline: 0;" data-toggle="modal" data-target="#shareModal">
