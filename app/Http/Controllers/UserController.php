@@ -260,7 +260,7 @@ class UserController extends Controller
 
         } elseif ($pid == 'SL' && auth()->check()) {
             $results = Subscribe::with(['artist' => function($query) {
-                $query->select('id', 'name', 'created_at', 'updated_at', 'avatar_temp');
+                $query->select('id', 'name', 'created_at', 'updated_at', 'avatar_temp')->withCount('videos');
             }])->where('user_id', $user->id)->orderBy('created_at', 'desc')->paginate(42);
             $title = '訂閱的作者';
             $count = $results->total();
@@ -400,6 +400,10 @@ class UserController extends Controller
 
         } elseif ($playlist_id == 'LL' && $like = Like::where('user_id', $user->id)->where('foreign_id', $video_id)->where('foreign_type', 'video')->first()) {
             $like->delete();
+            $count--;
+
+        } elseif ($playlist_id == 'SL' && $subscribe = Subscribe::where('user_id', $user->id)->where('artist_id', $video_id)->first()) {
+            $subscribe->delete();
             $count--;
 
         } elseif (is_numeric($playlist_id) && $playitem = Playitem::where('user_id', $user->id)->where('playlist_id', $playlist_id)->where('video_id', $video_id)->first()) {

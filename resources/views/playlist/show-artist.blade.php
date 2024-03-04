@@ -40,11 +40,11 @@
 					<div id="playlist-show-video-wrapper-{{ $subscribe->artist->id }}" class="home-rows-videos-div col-xs-4 col-sm-3 col-md-2 col-lg-2" style="position: relative; display: inline-block; margin-bottom:50px;">
 
 					  <div style="position: relative;">
-					    <div class="multiple-link-wrapper search-doujin-videos home-doujin-videos home-artist-card" style="display: inline-block; padding-right: 3px; width: 100%;">
+					    <div class="multiple-link-wrapper search-doujin-videos home-doujin-videos home-artist-card" style="display: inline-block; padding-right: 3px; width: 100% !important;">
 								<a class="overlay" href="{{ route('home.search') }}?query={{ $subscribe->artist->name }}"></a>
 								<div class="card-mobile-panel inner">
-									<div style="position: relative; width: 100%;">
-										<img style="width: 100%;" src="https://vdownload.hembed.com/image/icon/card_artist_background.jpg?secure=_QCcfQgpiOO8qV2a0t4ulQ==,4865085854">
+									<div style="position: relative; width: 100% !important;">
+										<img style="width: 100% !important;" src="https://vdownload.hembed.com/image/icon/card_artist_background.jpg?secure=_QCcfQgpiOO8qV2a0t4ulQ==,4865085854">
 										<img style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 3px" src="{{ $subscribe->artist->avatar_temp }}">
 								    </div>
 
@@ -53,7 +53,7 @@
 											<div class="card-mobile-title search-artist-title" style="font-weight: normal; color: #e5e5e5;">{{ $subscribe->artist->name }}</div>
 
 											<div class="card-mobile-genre-wrapper" style="margin-top: 3px; margin-left: -2px">
-												<span style="text-decoration: none; font-size: 12px; color: dimgray; margin-left: 2px; display: inline-block;" class="card-mobile-user search-artist-count">1 部影片</span>
+												<span style="text-decoration: none; font-size: 12px; color: dimgray; margin-left: 2px; display: inline-block;" class="card-mobile-user search-artist-count">{{ $subscribe->artist->videos_count }} 部影片</span>
 											</div>
 										</div>
 									</div>
@@ -61,13 +61,13 @@
 							</div>
 
 					    @if ($editable)
-					      <form style="display: block; z-index: 10000000000;" class="playitem-delete-form" action="{{ route('playitem.delete') }}">
+					      <form style="display: none;" class="playitem-delete-form" action="{{ route('playitem.delete') }}">
 					        {{ csrf_field() }}
 
 					        <input class="playlist-show-id" name="playlist-show-id" type="hidden" value="{{ request('list') }}">
 					        <input class="playlist-show-video-id" name="playlist-show-video-id" type="hidden" value="{{ $subscribe->artist->id }}">
 
-					        <div style="position: absolute; top: 0px; right: 0; background-color: black; height: 30px; width: 30px; cursor: pointer;" class="no-select playitem-delete-btn">
+					        <div style="position: absolute; top: 0px; right: 0; background-color: black; height: 30px; width: 30px; cursor: pointer; z-index: 100;" class="no-select playitem-delete-btn">
 					          <span class="material-icons" style="font-size: 30px; color: white; padding-left: 0px;">clear</span>
 					        </div>
 					      </form>

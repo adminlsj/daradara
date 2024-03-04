@@ -39,7 +39,7 @@ class BotController extends Controller
         ini_set('memory_limit', '-1');
 
         // Update all spankbang errors
-        $videos = Video::where('foreign_sd', 'like', '%"error"%')->where('foreign_sd', 'ilike', '%spankbang%')->select('id', 'title', 'sd', 'outsource', 'current_views', 'tags_array', 'foreign_sd', 'created_at')->orderBy('current_views', 'desc')->get();
+        /* $videos = Video::where('foreign_sd', 'like', '%"error"%')->where('foreign_sd', 'ilike', '%spankbang%')->select('id', 'title', 'sd', 'outsource', 'current_views', 'tags_array', 'foreign_sd', 'created_at')->orderBy('current_views', 'desc')->get();
         foreach ($videos as $video) {
             if (array_key_exists("error", $video->foreign_sd) && strpos($video->foreign_sd["error"], 'spankbang') !== false ) {
                 $temp = $video->foreign_sd;
@@ -58,7 +58,7 @@ class BotController extends Controller
                 $video->foreign_sd = $temp;
                 $video->save();
             }
-        }
+        } */
 
         // Update missav cover
         /* $videos = Video::where('cover', 'like', '%i.rotriza.com%')->get();
@@ -91,12 +91,12 @@ class BotController extends Controller
             $video->save();
         } */
 
-        $filename = 'card_artist_background.jpg';
+        /* $filename = 'card_artist_background.jpg';
         $url = 'vdownload.hembed.com';
         $expiration = time() + 3155692600;
         $token = 'xVEO8rLVgGkUBEBg';
         $source = '/image/icon/'.$filename;
-        return Video::getSignedUrlParameter($url, $source, $token, $expiration);
+        return Video::getSignedUrlParameter($url, $source, $token, $expiration); */
 
         /* $id = 84803;
         $huge = $id.'h.jpg';
