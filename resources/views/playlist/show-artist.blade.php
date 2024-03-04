@@ -19,7 +19,7 @@
 
     <div class="content-padding-new playlist-rows-top">
       <a class="home-rows-header" style="text-decoration: none; margin-bottom: 20px;">
-        <h5 id="playitems-count" data-count="{{ $count }}" style="color: #8e9194;">{{ $count }} 位作者</h5>
+        <h5 id="playitems-count" data-count="{{ $count }}" style="color: #8e9194;"><span id="playitems-count-number">{{ $count }}</span> 位作者</h5>
         <h3 style="font-weight: 700; color: #edeeef; margin-bottom: 20px;">
         	{{ $title }}
         </h3>

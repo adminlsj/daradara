@@ -350,7 +350,7 @@ $('.playitem-delete-btn').on('click', function () {
         dataType: 'json',
         success: function(data){
             $('div#playlist-show-video-wrapper-' + data.video_id).remove();
-            $('#playitems-count').text(data.count + ' 部影片');
+            $('#playitems-count-number').text(data.count);
             $('#playitems-count').data('count', data.count);
         },
         error: function(xhr, ajaxOptions, thrownError){
