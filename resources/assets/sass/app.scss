@@ -2909,9 +2909,9 @@ div.sticky {
   }
 
   .video-subscribe-btn {
-    position: absolute;
-    right: 10px;
-    top: 0px;
+    position: absolute !important;
+    right: 10px !important;
+    top: 0px !important;
     height: 33px; 
     line-height: 33px; 
     border-radius: 37px; 
