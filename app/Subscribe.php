@@ -7,13 +7,8 @@ use App\User;
 
 class Subscribe extends Model
 {
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
-        'user_id', 'artist_id'
+        'id', 'user_id', 'artist_id'
     ];
 
     public function user()
