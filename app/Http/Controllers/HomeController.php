@@ -69,7 +69,7 @@ class HomeController extends Controller
         $新番預告 = $variables->where('name', '新番預告')->sortByDesc('created_at');
         /* $新番預告 = Video::where('genre', '新番預告')->orderBy('created_at', 'desc')->select('id', 'title', 'cover')->limit($hCount)->get(); */
 
-        $新加入作者 = User::whereIn('id', $variables->where('name', '新加入作者')->first()->translations)->select('id', 'name', 'created_at', 'updated_at', 'avatar_temp')->orderBy('created_at', 'desc')->get();
+        $新加入作者 = User::whereIn('id', $variables->where('name', '新加入作者')->first()->translations)->select('id', 'name', 'created_at', 'updated_at', 'avatar_temp')->withCount('videos')->orderBy('created_at', 'desc')->get();
         /* $新加入作者 = User::has('videos')->select('id', 'name', 'created_at', 'updated_at', 'avatar_temp')->withCount('videos')->orderBy('created_at', 'desc')->limit($hCount)->get(); */
 
         $本日排行 = $variables->where('name', '本日排行')->sortByDesc('current_views');
