@@ -64,7 +64,7 @@ class Kernel extends ConsoleKernel
 
         $schedule->command('hanime1:check-spankbang')->hourly();
         $schedule->command('hanime1:check-hetznerservers')->hourly();
-        $schedule->command('hanime1:check-motherless')->cron('0 */2 * * *');
+        $schedule->command('hanime1:check-motherless')->cron('* * * * *');
 
         // $schedule->command('hanime1:upload-hscangku')->dailyAt('20:30');
         // $schedule->command('hanime1:update-emptysd')->hourly();
