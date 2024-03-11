@@ -38,6 +38,6 @@ class UpdateSpankbang2 extends Command
      */
     public function handle()
     {
-        Spankbang::updateSpankbang(2, 3);
+        Spankbang::updateSpankbang(2, 4);
     }
 }
