@@ -21,7 +21,7 @@ use App\Spankbang;
 use App\Youjizz;
 use App\Motherless;
 use App\Nhentai;
-use Storage;
+// use Storage;
 use Redirect;
 use File;
 use Image;
@@ -30,6 +30,7 @@ use Illuminate\Support\Str;
 use SteelyWing\Chinese\Chinese;
 use App\Jav;
 use App\Video_temp;
+use Illuminate\Support\Facades\Storage;
 
 class BotController extends Controller
 {
@@ -37,6 +38,8 @@ class BotController extends Controller
     {
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
+
+        $Storage::disk('s3')->get('image/thumbnail/i5MBZiEh.jpg');
 
         // Update all spankbang errors
         /* $videos = Video::where('foreign_sd', 'like', '%"error"%')->where('foreign_sd', 'ilike', '%spankbang%')->select('id', 'title', 'sd', 'outsource', 'current_views', 'tags_array', 'foreign_sd', 'created_at')->orderBy('current_views', 'desc')->get();

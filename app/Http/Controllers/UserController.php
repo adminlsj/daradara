@@ -16,6 +16,7 @@ use Auth;
 use Redirect;
 use Carbon\Carbon;
 use App\Helper;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -125,24 +126,6 @@ class UserController extends Controller
             return Redirect::route('user.userEditUpload', ['user' => $user, 'watches' => $user->watches()]);
 
         } elseif ($request->type == 'video') {
-            /* $original = request()->file('image');
-            $image = Image::make($original);
-            $image = $image->fit(2880, 1620);
-            $image = $image->stream();
-            $pvars = array('image' => base64_encode($image));
-
-            $curl = curl_init();
-            curl_setopt($curl, CURLOPT_URL, 'https://api.imgur.com/3/image.json');
-            curl_setopt($curl, CURLOPT_TIMEOUT, 30);
-            curl_setopt($curl, CURLOPT_HTTPHEADER, array('Authorization: Client-ID ' . '072cefc76176835'));
-            curl_setopt($curl, CURLOPT_POST, 1);
-            curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-            curl_setopt($curl, CURLOPT_POSTFIELDS, $pvars);
-            $out = curl_exec($curl);
-            curl_close ($curl);
-            $pms = json_decode($out, true);
-            $url = $pms['data']['link']; */
-            $url = "https://i.imgur.com/Ku2VhgD.jpg";
 
             if ($url != "") {
 
@@ -169,7 +152,7 @@ class UserController extends Controller
                     'translations' => ['JP' => request('translations')],
                     'caption' => request('description'),
                     'sd' => $sd,
-                    'imgur' => Helper::get_string_between($url, 'https://i.imgur.com/', '.'),
+                    'imgur' => 'temp',
                     'tags' => $tags,
                     'tags_array' => $tags_array,
                     'views' => 0,
@@ -180,6 +163,26 @@ class UserController extends Controller
                     'cover' => request('cover'),
                     'uncover' => strpos(request('cover'), 'E6mSQA2') !== false ? true : false,
                 ]);
+
+                $id = $video->id;
+                $original = request()->file('image');
+                $huge = Image::make($original)
+                            ->fit(1024, 576)
+                            ->stream('jpg', 80);
+                Storage::disk('s3')->put("image/thumbnail/{$id}h.jpg", $huge);
+                $large = Image::make($original)
+                            ->fit(640, 360)
+                            ->stream('jpg', 80);
+                Storage::disk('s3')->put("image/thumbnail/{$id}l.jpg", $large);
+
+                $filename = explode('.jpg', substr($video->cover, strrpos($video->cover, '/') + 1))[0].'.jpg';
+                $url = 'vdownload.hembed.com';
+                $expiration = time() + 2629743;
+                $token = 'xVEO8rLVgGkUBEBg';
+                $source = '/image/cover/'.$filename;
+                $video->cover = Video::getSignedUrlParameter($url, $source, $token, $expiration);
+                $video->imgur = $video->id;
+                $video->save();
 
                 return Redirect::route('video.watch', ['v' => $video->id]);
 
