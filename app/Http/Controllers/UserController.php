@@ -127,7 +127,7 @@ class UserController extends Controller
 
         } elseif ($request->type == 'video') {
 
-            if ($url != "") {
+            if (request()->file('image')) {
 
                 $sd = $foreign_sd = request('foreign_sd');
                 if (strpos($foreign_sd, 'spankbang') !== false) {
