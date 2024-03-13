@@ -45,6 +45,16 @@
 			          </div>
 
 			          <div class="form-group">
+					    <select style="border: 0.5px solid #e9e9e9; -webkit-appearance: none; box-shadow: inset 0px 0px 0px 0px red; height: 45px; width: calc(50% - 7px); display: inline-block; margin-right: 10px;" class="form-control" name="genre" id="genre">
+						    <option value="">選擇影片類型...</option>
+						    @foreach (App\Video::$genre as $item)
+						       <option value="{{ $item }}">{{ $item }}</option>
+						    @endforeach
+					    </select>
+					    <input style="width: calc(50% - 7px);  display: inline-block;" type="text" class="form-control" name="created_at" id="created_at" placeholder="created_at" value="{{ Carbon\Carbon::now()->format('Y-m-d\TH:i:s') }}" required>
+					  </div>
+
+			          <div class="form-group">
 			            <textarea style="border: 0.5px solid #e9e9e9; -webkit-appearance: none; box-shadow: inset 0px 0px 0px 0px red;" class="form-control" name="description" id="description" rows="5" placeholder="簡介"></textarea>
 			          </div>
 
@@ -62,20 +72,15 @@
 						  <label class="form-check-label" style="color: white; vertical-align: middle; margin-left: 5px; margin-bottom: 9px;">sc</label>
 					  </div>
 
-					  <div style="margin-right:100px; position: relative;" class="form-group">
-			            <input style="background-color: white" readonly="readonly" type="text" class="form-control" name="file-text" id="file-text" placeholder="上傳影片縮圖" required>
-			            <label class="upload-image-btn" style="border-top-right-radius: 3px; border-bottom-right-radius: 3px;">
-						    <input type="file" name="image" id="image" accept="image/*" required>
-						    <span style="color: #666666; font-weight: 500;">選擇圖片</span>
-						</label>
-			          </div>
-
-			          <div class="form-group">
-			            <input type="text" class="form-control" name="created_at" id="created_at" placeholder="created_at" value="{{ Carbon\Carbon::now()->format('Y-m-d\TH:i:s') }}" required>
-			          </div>
-
-			          <div class="form-group">
-			            <input type="text" class="form-control" name="cover" id="cover" placeholder="cover" required>
+					  <div class="form-group">
+						  <div style="margin-right:100px; position: relative; width: calc(50% - 107px); display: inline-block; margin-right: 110px;" class="form-group">
+				            <input style="background-color: white" readonly="readonly" type="text" class="form-control" name="file-text" id="file-text" placeholder="上傳影片縮圖" required>
+				            <label class="upload-image-btn" style="border-top-right-radius: 3px; border-bottom-right-radius: 3px;">
+							    <input type="file" name="image" id="image" accept="image/*" required>
+							    <span style="color: #666666; font-weight: 500;">選擇圖片</span>
+							</label>
+				          </div>
+				          <input style="width: calc(50% - 7px); display: inline-block" type="text" class="form-control" name="cover" id="cover" placeholder="cover" value="https://i.imgur.com/E6mSQA2.jpg" required>
 			          </div>
 
 			          <button id="singleNewCreateBtn" style="height: 45px; font-size: 1em; margin-bottom: 15px; width: 103px; background-color: red !important; border: none;" type="submit" class="btn btn-info">發佈</button>

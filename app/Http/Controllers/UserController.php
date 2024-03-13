@@ -166,9 +166,15 @@ class UserController extends Controller
 
                 if ($artist = User::where('name', request('artist'))->where('email', 'ilike', '%freemail.hu%')->first()) {
                     $video->user_id = $artist->id;
+                    $video->artist = $artist->name;
                 }
                 if ($playlist = Watch::where('user_id', $artist->id)->where('title', request('playlist'))->first()) {
                     $video->playlist_id = $playlist->id;
+                }
+                if ($genre = request('genre')) {
+                    $video->genre = $genre;
+                } elseif ($previous = Video::where('user_id', $video->user_id)->first()) {
+                    $video->genre = $previous->genre;
                 }
 
                 $id = $video->id;
