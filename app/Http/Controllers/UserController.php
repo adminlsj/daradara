@@ -147,7 +147,7 @@ class UserController extends Controller
                 }
                 $video = Video::create([
                     'user_id' => $user->id,
-                    'playlist_id' => request('channel'),
+                    'playlist_id' => 8876,
                     'title' => request('title'),
                     'translations' => ['JP' => request('translations')],
                     'caption' => request('description'),
@@ -163,6 +163,13 @@ class UserController extends Controller
                     'cover' => request('cover'),
                     'uncover' => strpos(request('cover'), 'E6mSQA2') !== false ? true : false,
                 ]);
+
+                if ($artist = User::where('name', request('artist'))->where('email', 'ilike', '%freemail.hu%')->first()) {
+                    $video->user_id = $artist->id;
+                }
+                if ($playlist = Watch::where('user_id', $artist->id)->where('title', request('playlist'))->first()) {
+                    $video->playlist_id = $playlist->id;
+                }
 
                 $id = $video->id;
                 $original = request()->file('image');

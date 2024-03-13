@@ -16,6 +16,7 @@
 	<div class="paravi-padding-setup">
 
 		<div id="上傳影片" class="user-upload-tabcontent">
+	      <br>
 		  <form id="singleNewCreateForm" action="{{ route('user.userUpdateUpload', ['user' => Auth::user()]) }}" method="POST" enctype="multipart/form-data">
 
 			  {{ csrf_field() }}
@@ -25,20 +26,24 @@
 			  <div class="row" id="uploadVideoModal">
 			  	<div class="col-md-12">
 			        <div style="color: #3F3F3F; font-weight: 500; font-size: 1.1em;">
-			          <div class="form-group">
+			          <!-- <div class="form-group">
 					    <select style="border: 0.5px solid #e9e9e9; -webkit-appearance: none; box-shadow: inset 0px 0px 0px 0px red; height: 45px;" class="form-control" name="channel" id="channel">
 						    <option value="">選擇播放清單...</option>
 						    @foreach ($watches as $watch)
 						       <option value="{{ $watch->id }}">{{ $watch->title }}</option>
 						    @endforeach
 					    </select>
-					  </div>
-			          <div class="form-group">
-			            <input type="text" class="form-control" name="title" id="title" placeholder="標題（必填）" required>
+					  </div> -->
+					  <div class="form-group">
+			            <input style="width: calc(50% - 7px); display: inline-block; margin-right: 10px;" type="text" class="form-control" name="artist" id="artist" placeholder="用戶名稱" required>
+			            <input style="width: calc(50% - 7px);  display: inline-block;" type="text" class="form-control" name="playlist" id="playlist" placeholder="播放清單" required>
 			          </div>
+
 			          <div class="form-group">
-			            <input type="text" class="form-control" name="translations" id="translations" placeholder="translations" required>
+			            <input style="width: calc(50% - 7px); display: inline-block; margin-right: 10px;" type="text" class="form-control" name="title" id="title" placeholder="中文標題" required>
+			            <input style="width: calc(50% - 7px);  display: inline-block;" type="text" class="form-control" name="translations" id="translations" placeholder="日文標題" required>
 			          </div>
+
 			          <div class="form-group">
 			            <textarea style="border: 0.5px solid #e9e9e9; -webkit-appearance: none; box-shadow: inset 0px 0px 0px 0px red;" class="form-control" name="description" id="description" rows="5" placeholder="簡介"></textarea>
 			          </div>
@@ -48,8 +53,14 @@
 			          </div>
 
 			          <div class="form-group">
-			            <input type="text" class="form-control" name="foreign_sd" id="foreign_sd" placeholder="foreign_sd" required>
-			          </div>
+			            <input style="width: calc(50% - 7px); display: inline-block; margin-right: 20px;" type="text" class="form-control" name="foreign_sd" id="foreign_sd" placeholder="foreign_sd" required>
+
+						  <input class="form-check-input" style="height: 17px; width: 17px;" type="checkbox" id="tc" name="tc" value="tc" checked>
+						  <label class="form-check-label" style="color: white; vertical-align: middle; margin-left: 5px; margin-bottom: 9px;">tc</label>
+						  &nbsp;&nbsp;&nbsp;
+						  <input class="form-check-input" style="height: 17px; width: 17px;" type="checkbox" id="sc" name="sc" value="sc">
+						  <label class="form-check-label" style="color: white; vertical-align: middle; margin-left: 5px; margin-bottom: 9px;">sc</label>
+					  </div>
 
 					  <div style="margin-right:100px; position: relative;" class="form-group">
 			            <input style="background-color: white" readonly="readonly" type="text" class="form-control" name="file-text" id="file-text" placeholder="上傳影片縮圖" required>
