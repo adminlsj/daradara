@@ -38,28 +38,6 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        // Update all spankbang errors
-        /* $videos = Video::where('foreign_sd', 'like', '%"error"%')->where('foreign_sd', 'ilike', '%spankbang%')->select('id', 'title', 'sd', 'outsource', 'current_views', 'tags_array', 'foreign_sd', 'created_at')->orderBy('current_views', 'desc')->get();
-        foreach ($videos as $video) {
-            if (array_key_exists("error", $video->foreign_sd) && strpos($video->foreign_sd["error"], 'spankbang') !== false ) {
-                $temp = $video->foreign_sd;
-                $temp['spankbang'] = $video->foreign_sd['error'];
-                unset($temp['error']);
-                $video->foreign_sd = $temp;
-                $video->save();
-            }
-        }
-        $videos_sc = Video::where('foreign_sd', 'like', '%"error_sc"%')->where('foreign_sd', 'ilike', '%spankbang%')->select('id', 'title', 'sd_sc', 'outsource', 'tags_array', 'foreign_sd', 'created_at')->orderBy('id', 'asc')->get();
-        foreach ($videos_sc as $video) {
-            if (array_key_exists("error_sc", $video->foreign_sd) && strpos($video->foreign_sd["error_sc"], 'spankbang') !== false ) {
-                $temp = $video->foreign_sd;
-                $temp['spankbang_sc'] = $video->foreign_sd['error_sc'];
-                unset($temp['error_sc']);
-                $video->foreign_sd = $temp;
-                $video->save();
-            }
-        } */
-
         // Update missav cover
         /* $videos = Video::where('cover', 'like', '%i.rotriza.com%')->get();
         foreach ($videos as $video) {
@@ -2084,6 +2062,11 @@ class BotController extends Controller
     public function checkSpankbangUpdate()
     {
         Spankbang::checkSpankbangUpdate();
+    }
+
+    public function resetSpankbangErrors()
+    {
+        Spankbang::resetSpankbangErrors();
     }
 
     public function updateYoujizz(Request $request)

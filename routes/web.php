@@ -88,6 +88,7 @@ Route::group(['middleware' => 'admin'], function () {
 
 	Route::get('/updateSpankbang', 'BotController@updateSpankbang');
 	Route::get('/updateSpankbangErrors', 'BotController@updateSpankbangErrors');
+	Route::get('/resetSpankbangErrors', 'BotController@resetSpankbangErrors');
 	Route::get('/checkSpankbangOutdate', 'BotController@checkSpankbangOutdate');
 	Route::get('/checkSpankbangOutdateEmergent', 'BotController@checkSpankbangOutdateEmergent');
 	Route::get('/checkSpankbangUpdate', 'BotController@checkSpankbangUpdate');
