@@ -145,6 +145,7 @@ class UserController extends Controller
                 foreach (explode(' ', $tags) as $tag) {
                     $tags_array[$tag] = 10;
                 }
+
                 $video = Video::create([
                     'user_id' => $user->id,
                     'playlist_id' => 8876,
@@ -219,6 +220,13 @@ class UserController extends Controller
                 $source = '/image/cover/'.$filename;
                 $video->cover = Video::getSignedUrlParameter($url, $source, $token, $expiration);
                 $video->imgur = $video->id;
+
+                $searchtext = $video->title.'|'.$video->translations['JP'].'|'.implode('|', array_keys($video->tags_array)).'|'.$video->genre.'|'.$video->artist;
+                if ($video->foreign_sd != null && array_key_exists('characters', $video->foreign_sd)) {
+                    $searchtext = $searchtext.$video->foreign_sd['characters'];
+                }
+                $video->searchtext = mb_strtolower(preg_replace('/\s+/', '', $searchtext), 'UTF-8');
+
                 $video->save();
 
                 return Redirect::route('video.watch', ['v' => $video->id]);
