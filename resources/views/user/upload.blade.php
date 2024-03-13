@@ -63,16 +63,23 @@
 			          </div>
 
 			          <div class="form-group">
-			            <input style="width: calc(50% - 7px); display: inline-block; margin-right: 20px;" type="text" class="form-control" name="foreign_sd" id="foreign_sd" placeholder="foreign_sd" required>
+			            <input style="width: calc(25% - 10px); display: inline-block; margin-right: 10px;" type="text" class="form-control" name="foreign_sd" id="foreign_sd" placeholder="foreign_sd" required>
 
-						  <input class="form-check-input" style="height: 17px; width: 17px;" type="checkbox" id="tc" name="tc" value="tc" checked>
+			            <select style="border: 0.5px solid #e9e9e9; -webkit-appearance: none; box-shadow: inset 0px 0px 0px 0px red; height: 45px; width: calc(25% - 10px); display: inline-block; margin-right: 10px;" class="form-control" name="quality" id="quality">
+						    <option value="">選擇解析度...</option>
+						    @foreach (['1080p', '720p', '480p'] as $item)
+						       <option value="{{ $item }}">{{ $item }}</option>
+						    @endforeach
+					    </select>
+
+						  <input class="form-check-input" style="height: 17px; width: 17px;" type="checkbox" id="tc" name="tc" value="1" checked>
 						  <label class="form-check-label" style="color: white; vertical-align: middle; margin-left: 5px; margin-bottom: 9px;">tc</label>
 						  &nbsp;&nbsp;&nbsp;
-						  <input class="form-check-input" style="height: 17px; width: 17px;" type="checkbox" id="sc" name="sc" value="sc">
+						  <input class="form-check-input" style="height: 17px; width: 17px;" type="checkbox" id="sc" name="sc" value="1">
 						  <label class="form-check-label" style="color: white; vertical-align: middle; margin-left: 5px; margin-bottom: 9px;">sc</label>
 					  </div>
 
-					  <div class="form-group">
+					  <div class="form-group" style="margin-bottom: 0px;">
 						  <div style="margin-right:100px; position: relative; width: calc(50% - 107px); display: inline-block; margin-right: 110px;" class="form-group">
 				            <input style="background-color: white" readonly="readonly" type="text" class="form-control" name="file-text" id="file-text" placeholder="上傳影片縮圖" required>
 				            <label class="upload-image-btn" style="border-top-right-radius: 3px; border-bottom-right-radius: 3px;">
@@ -81,6 +88,11 @@
 							</label>
 				          </div>
 				          <input style="width: calc(50% - 7px); display: inline-block" type="text" class="form-control" name="cover" id="cover" placeholder="cover" value="https://i.imgur.com/E6mSQA2.jpg" required>
+			          </div>
+
+			          <div class="form-group">
+			            <input style="width: calc(50% - 7px); display: inline-block; margin-right: 10px;" type="text" class="form-control" name="avbebe" id="avbebe" placeholder="avbebe">
+			            <input style="width: calc(50% - 7px);  display: inline-block;" type="text" class="form-control" name="spankbang" id="spankbang" placeholder="spankbang">
 			          </div>
 
 			          <button id="singleNewCreateBtn" style="height: 45px; font-size: 1em; margin-bottom: 15px; width: 103px; background-color: red !important; border: none;" type="submit" class="btn btn-info">發佈</button>

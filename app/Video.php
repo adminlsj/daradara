@@ -301,6 +301,100 @@ class Video extends Model
         return 'https://' . $cdnResourceUrl . $filePath . '?secure=' . $finalHash . $expiryTimestamp;
     }
 
+    public static function addBalancerSource(String $balancer, String $quality, String $vid, Bool $sc)
+    {
+        if (is_numeric($vid) && $video = Video::select('id', 'sd', 'foreign_sd')->find($vid)) {
+            $sd = $source = "https://vbalancer-{$balancer}.hembed.com/{$vid}-{$quality}.mp4";
+            $qualities = [];
+            if (strpos($source, '1080p') !== false) {
+                $qualities['1080'] = "https://vbalancer-{$balancer}.hembed.com/{$vid}-1080p.mp4";
+                $source = str_replace('-1080p.mp4', '-720p.mp4', $source);
+            }
+            if (strpos($source, '720p') !== false) {
+                $qualities['720'] = "https://vbalancer-{$balancer}.hembed.com/{$vid}-720p.mp4";
+                $source = str_replace('-720p.mp4', '-480p.mp4', $source);
+            }
+            if (strpos($source, '480p') !== false) {
+                $qualities['480'] = "https://vbalancer-{$balancer}.hembed.com/{$vid}-480p.mp4";
+            }
+            $video->sd = $sd;
+            $video->qualities = $qualities;
+
+            if ($sc) {
+                $sd_sc = $source_sc = "https://vbalancer-{$balancer}.hembed.com/{$vid}-sc-{$quality}.mp4";
+                $qualities_sc = [];
+                if (strpos($source_sc, '1080p') !== false) {
+                    $qualities_sc['1080'] = "https://vbalancer-{$balancer}.hembed.com/{$vid}-sc-1080p.mp4";
+                    $source_sc = str_replace('-1080p.mp4', '-720p.mp4', $source_sc);
+                }
+                if (strpos($source_sc, '720p') !== false) {
+                    $qualities_sc['720'] = "https://vbalancer-{$balancer}.hembed.com/{$vid}-sc-720p.mp4";
+                    $source_sc = str_replace('-720p.mp4', '-480p.mp4', $source_sc);
+                }
+                if (strpos($source_sc, '480p') !== false) {
+                    $qualities_sc['480'] = "https://vbalancer-{$balancer}.hembed.com/{$vid}-sc-480p.mp4";
+                }
+                $video->sd_sc = $sd_sc;
+                $video->qualities_sc = $qualities_sc;
+            }
+
+            $video->save();
+        }
+        return '403 Forbidden';
+    }
+
+    public static function addCdn77Source(String $quality, String $vid, Bool $sc)
+    {
+        $url = 'vdownload.hembed.com';
+        $expiration = time() + 43200;
+        $token = 'xVEO8rLVgGkUBEBg';
+
+        if (is_numeric($vid) && $video = Video::select('id', 'sd', 'foreign_sd')->find($vid)) {
+            $qualities = [];
+            $sd = $source = "/{$vid}-{$quality}.mp4";
+            if (strpos($source, '1080p') !== false) {
+                $qualities['1080'] = Video::getSignedUrlParameter($url, $source, $token, $expiration);
+                $source = str_replace('-1080p.mp4', '-720p.mp4', $source);
+            }
+            if (strpos($source, '720p') !== false) {
+                $qualities['720'] = Video::getSignedUrlParameter($url, $source, $token, $expiration);
+                $source = str_replace('-720p.mp4', '-480p.mp4', $source);
+            }
+            if (strpos($source, '480p') !== false) {
+                $qualities['480'] = Video::getSignedUrlParameter($url, $source, $token, $expiration);
+            }
+            $video->sd = reset($qualities);
+            $video->qualities = $qualities;
+            $foreign_sd = $video->foreign_sd;
+            $foreign_sd['cdn77'] = "https://".$url.$sd;
+            $video->foreign_sd = $foreign_sd;
+            $video->save();
+
+            if ($sc) {
+                $qualities_sc = [];
+                $sd_sc = $source_sc = "/{$vid}-sc-{$quality}.mp4";
+                if (strpos($source_sc, '1080p') !== false) {
+                    $qualities_sc['1080'] = Video::getSignedUrlParameter($url, $source_sc, $token, $expiration);
+                    $source_sc = str_replace('-1080p.mp4', '-720p.mp4', $source_sc);
+                }
+                if (strpos($source_sc, '720p') !== false) {
+                    $qualities_sc['720'] = Video::getSignedUrlParameter($url, $source_sc, $token, $expiration);
+                    $source_sc = str_replace('-720p.mp4', '-480p.mp4', $source_sc);
+                }
+                if (strpos($source_sc, '480p') !== false) {
+                    $qualities_sc['480'] = Video::getSignedUrlParameter($url, $source_sc, $token, $expiration);
+                }
+                $video->sd_sc = reset($qualities_sc);
+                $video->qualities_sc = $qualities_sc;
+                $foreign_sd = $video->foreign_sd;
+                $foreign_sd['cdn77_sc'] = "https://".$url.$sd_sc;
+                $video->foreign_sd = $foreign_sd;
+                $video->save();
+            }
+        }
+        return '403 Forbidden';
+    }
+
     public function scopeWhereHasTags($query, $tags, $count)
     {
         return $query->where(function($query) use ($tags) {

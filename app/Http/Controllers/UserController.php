@@ -177,6 +177,30 @@ class UserController extends Controller
                     $video->genre = $previous->genre;
                 }
 
+                if ($avbebe = request('avbebe')) {
+                    $temp = $video->foreign_sd;
+                    $temp["avbebe"] = $avbebe;
+                    $video->foreign_sd = $temp;
+                    $video->save();
+                }
+                if ($spankbang = request('spankbang')) {
+                    $temp = $video->foreign_sd;
+                    $temp["spankbang"] = $spankbang;
+                    $video->foreign_sd = $temp;
+                    $video->save();
+                }
+
+                if (strpos($video->sd, 'vbalancer') !== false) {
+                    Video::addBalancerSource(str_replace('vbalancer-', '', $video->sd), request('quality'), $video->id, request('sc') ? 1 : 0);
+                } elseif (strpos($video->sd, 'cdn77') !== false) {
+                    Video::addCdn77Source(request('quality'), $video->id, request('sc') ? 1 : 0);
+                } elseif (strpos($video->sd, 'sb-cd.com') !== false && request('spankbang')) {
+                    $temp = $video->qualities;
+                    $temp[request('quality')] = $video->sd;
+                    $video->qualities = $temp;
+                    $video->sd = null;
+                }
+
                 $id = $video->id;
                 $original = request()->file('image');
                 $huge = Image::make($original)
