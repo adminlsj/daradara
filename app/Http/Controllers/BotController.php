@@ -74,28 +74,19 @@ class BotController extends Controller
                 $qualities[str_replace('p', '', $quality)] = $source;
             }
             if (array_key_exists(1080, $qualities)) {
-               $video->sd = $qualities[1080];
+                return $qualities[1080];
             } elseif (array_key_exists(720, $qualities)) {
-                $video->sd = $qualities[720];
+                return $qualities[720];
             } elseif (array_key_exists(480, $qualities)) {
-                $video->sd = $qualities[480];
+                return $qualities[480];
             } elseif (array_key_exists(360, $qualities)) {
-                $video->sd = $qualities[360];
+                return $qualities[360];
             } elseif (array_key_exists(250, $qualities)) {
-                $video->sd = $qualities[250];
+                return $qualities[250];
             }
 
-            return $video->sd;
-            $video->outsource = false;
-            $video->save();
-
         } else {
-            Mail::to('vicky.avionteam@gmail.com')->send(new UserReport('master', 'Xvideos update failed', $video->id, $video->title, $video->sd, 'master', 'master'));
-            $temp = $video->foreign_sd;
-            $temp['error'] = $video->foreign_sd['xvideos'];
-            unset($temp['xvideos']);
-            $video->foreign_sd = $temp;
-            $video->save();
+            return "failed";
         }
 
         sleep(10);
