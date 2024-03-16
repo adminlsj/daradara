@@ -50,7 +50,7 @@ class BotController extends Controller
             $tags_html = str_replace('>•</span>', '', Helper::get_string_between($jable_html, '<h5 class="tags h6-md">', '</h5>'));
             $tags_collection = explode('/a>', $tags_html);
             array_pop($tags_collection);
-            return $tags_collection
+            return $tags_collection;
             $tags_array = [];
             foreach ($tags_collection as &$tag) {
                 $tag = Helper::get_string_between($tag, '>', '<');
