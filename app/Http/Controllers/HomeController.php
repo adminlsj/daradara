@@ -476,7 +476,8 @@ class HomeController extends Controller
 
         $ip_address = isset($_SERVER["HTTP_CF_CONNECTING_IP"]) ? $_SERVER["HTTP_CF_CONNECTING_IP"] : 'N/A';
         $country_code = isset($_SERVER["HTTP_CF_IPCOUNTRY"]) ? $_SERVER["HTTP_CF_IPCOUNTRY"] : 'N/A';
-        if ($ip_address == '106.38.121.194' || $ip_address == '223.104.65.11' || $ip_address == '3.137.219.177' || $ip_address == '3.23.208.80' || $ip_address == '103.73.91.6' || $ip_address == '211.72.89.26' || $ip_address == '185.220.101.51' || $ip_address == 'N/A') {
+        $banned_ip = ['N/A', '185.220.100.255', '185.100.85.22'];
+        if (in_array($ip_address, $banned_ip)) {
             abort(403);
         } else {
             $request->validate([
@@ -484,11 +485,11 @@ class HomeController extends Controller
             ]);
             $email = request('report-email') == null ? '' : request('report-email');
             $reason = request('userReportReason');
-            if (strpos($reason, 'GET FREE iPhone') !== false) {
-                abort(403);
-            }
             if ($reason == '其他原因') {
                 $reason = $reason.'：'.request('others-text');
+            }
+            if (strpos($reason, 'GET FREE iPhone') !== false || strpos($reason, 'Withdrаw') !== false || strpos($reason, 'telegra.ph') !== false) {
+                abort(403);
             }
             Mail::to('vicky.avionteam@gmail.com')->send(new UserReport($email, $reason, request('video-id'), request('video-title'), request('video-sd'), $ip_address, $country_code.$device));
 
