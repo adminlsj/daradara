@@ -488,7 +488,7 @@ class HomeController extends Controller
             if ($reason == '其他原因') {
                 $reason = $reason.'：'.request('others-text');
             }
-            if (strpos($reason, 'GET FREE iPhone') !== false || strpos($reason, 'Withdrаw') !== false || strpos($reason, 'telegra.ph') !== false) {
+            if (strpos($reason, 'GET FREE iPhone') !== false || strpos($reason, 'Withdrаw') !== false || strpos($reason, 'telegra.ph') !== false || strpos($reason, 'bitсоin') !== false || strpos($reason, 'BТС') !== false || strpos($reason, 'Transaction') !== false || strpos($reason, 'script.google') !== false) {
                 abort(403);
             }
             Mail::to('vicky.avionteam@gmail.com')->send(new UserReport($email, $reason, request('video-id'), request('video-title'), request('video-sd'), $ip_address, $country_code.$device));
