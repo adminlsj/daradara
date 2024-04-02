@@ -242,7 +242,7 @@ class HomeController extends Controller
         } else {
             $results = Video::whereIn('genre', Video::$genre);
 
-            if ($query) {
+            if ($query && $query != '家庭菜園') {
                 if ($query == '訂閱內容' && Auth::check()) {
                     $subscribes = Subscribe::where('user_id', Auth::user()->id)->pluck('artist_id');
                     $results = $results->whereIn('user_id', $subscribes);
