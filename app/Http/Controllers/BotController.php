@@ -7,6 +7,7 @@ use App\Video;
 use App\Comic;
 use App\Watch;
 use App\Like;
+use App\Save;
 use Mail;
 use App\Mail\UserReport;
 use Spatie\Browsershot\Browsershot;
