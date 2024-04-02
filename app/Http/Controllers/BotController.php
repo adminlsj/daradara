@@ -38,12 +38,22 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $current = request('current');
+        // Change likes
+        /* $current = request('current');
         $new = request('new');
         $likes = Like::where('foreign_id', $current)->where('foreign_type', 'video')->get();
         foreach ($likes as $like) {
             $like->foreign_id = $new;
             $like->save();
+        } */
+
+        // Change saves
+        $current = request('current');
+        $new = request('new');
+        $saves = Save::where('video_id', $current)->get();
+        foreach ($saves as $save) {
+            $save->video_id = $new;
+            $save->save();
         }
 
         // Update missav cover
