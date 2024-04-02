@@ -43,18 +43,18 @@ class BotController extends Controller
         $new = request('new');
 
         // Change likes
-        $likes = Like::where('foreign_id', $current)->where('foreign_type', 'video')->get();
+        /* $likes = Like::where('foreign_id', $current)->where('foreign_type', 'video')->get();
         foreach ($likes as $like) {
             $like->foreign_id = $new;
             $like->save();
-        }
+        } */
 
         // Change saves
-        $saves = Save::where('video_id', $current)->get();
+        /* $saves = Save::where('video_id', $current)->get();
         foreach ($saves as $save) {
             $save->video_id = $new;
             $save->save();
-        }
+        } */
 
         // Update missav cover
         /* $videos = Video::where('cover', 'like', '%i.rotriza.com%')->get();
@@ -87,11 +87,11 @@ class BotController extends Controller
             $video->save();
         } */
 
-        $filename = '91774.jpg';
+        $filename = 'tab_logo.png';
         $url = 'vdownload.hembed.com';
-        $expiration = time() + 2629743;
+        $expiration = time() + 3155692600;
         $token = 'xVEO8rLVgGkUBEBg';
-        $source = '/image/cover/'.$filename;
+        $source = '/image/icon/'.$filename;
         return Video::getSignedUrlParameter($url, $source, $token, $expiration);
 
         /* $id = 84803;
