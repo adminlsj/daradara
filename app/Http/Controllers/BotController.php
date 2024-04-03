@@ -39,8 +39,8 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $current = request('current');
-        $new = request('new');
+        /* $current = request('current');
+        $new = request('new'); */
 
         // Change likes
         /* $likes = Like::where('foreign_id', $current)->where('foreign_type', 'video')->get();

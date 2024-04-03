@@ -150,7 +150,7 @@ class Jav
                     ->where('user_id', 1)
                     ->where('created_at', '2000-01-01 00:00:00')
                     ->where('foreign_sd', 'not like', '%"missav"%')
-                    ->orderBy('id', 'desc')
+                    ->orderBy('id', 'asc')
                     ->get();
 
         foreach ($videos as $video) {
@@ -265,7 +265,7 @@ class Jav
     {
         Log::info('Jable update started...');
 
-        $videos = Video::where('id', '>=', 91106)
+        $videos = Video::where('id', '>=', 91798)
                     ->whereIn('genre', Video::$genre_jav)
                     ->where('foreign_sd', 'not like', '%"jable"%')
                     ->orderBy('id', 'asc')
