@@ -268,7 +268,7 @@ class Jav
         $videos = Video::where('id', '>=', 91798)
                     ->whereIn('genre', Video::$genre_jav)
                     ->where('foreign_sd', 'not like', '%"jable"%')
-                    ->orderBy('id', 'desc')
+                    ->orderBy('id', 'asc')
                     ->get();
 
         foreach ($videos as $video) {
@@ -297,9 +297,13 @@ class Jav
                 $temp = $video->foreign_sd;
                 $temp['jable'] = $jable_url;
                 $video->foreign_sd = $temp;
-                $video->save();
 
-                Log::info('Jable update ID#'.$video->id.' success...');
+                if ($video->tags_array != '[]') {
+                    $video->save();
+                    Log::info('Jable update ID#'.$video->id.' success...');
+                } else {
+                    Log::info('Jable update ID#'.$video->id.' retry...');
+                }
 
             } else {
                 $temp = $video->foreign_sd;
