@@ -298,11 +298,11 @@ class Jav
                 $temp['jable'] = $jable_url;
                 $video->foreign_sd = $temp;
 
-                if ($video->tags_array != '[]') {
+                if (count($tags_array) === 0) {
+                    Log::info('Jable update ID#'.$video->id.' retry...');
+                } else {
                     $video->save();
                     Log::info('Jable update ID#'.$video->id.' success...');
-                } else {
-                    Log::info('Jable update ID#'.$video->id.' retry...');
                 }
 
             } else {
