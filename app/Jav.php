@@ -268,7 +268,7 @@ class Jav
         $videos = Video::where('id', '>=', 91798)
                     ->whereIn('genre', Video::$genre_jav)
                     ->where('foreign_sd', 'not like', '%"jable"%')
-                    ->orderBy('id', 'desc')
+                    ->orderBy('id', 'asc')
                     ->get();
 
         foreach ($videos as $video) {
