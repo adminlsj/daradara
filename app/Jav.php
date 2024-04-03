@@ -98,7 +98,10 @@ class Jav
 
         $base = Jav::$base;
         $videos = Video::where('foreign_sd', 'like', '%"hscangku"%')
-                    ->where('sd', '')
+                    ->where(function($query) {
+                        $query->orWhere('sd', '')
+                              ->orWhere('sd', null);
+                    })
                     ->orderBy('id', 'asc')
                     ->get();
 
