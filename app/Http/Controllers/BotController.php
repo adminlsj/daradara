@@ -87,11 +87,11 @@ class BotController extends Controller
             $video->save();
         } */
 
-        $filename = 'tab_logo.png';
+        $filename = '92559.jpg';
         $url = 'vdownload.hembed.com';
-        $expiration = time() + 3155692600;
+        $expiration = time() + 2629743;
         $token = 'xVEO8rLVgGkUBEBg';
-        $source = '/image/icon/'.$filename;
+        $source = '/image/cover/'.$filename;
         return Video::getSignedUrlParameter($url, $source, $token, $expiration);
 
         /* $id = 84803;
