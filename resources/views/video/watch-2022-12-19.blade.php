@@ -205,7 +205,7 @@
                   <div style="width: 150px; display: inline-block;">
                     <div style="position: relative; display: inline-block;">
                       <img style="width: 100%; height: 100%; border-radius: 5px;" src="https://vdownload.hembed.com/image/icon/card_doujin_background.jpg?secure=sJRJ4-aVOQw4IVZasq7YZw==,4853041705">
-                      <img style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 5px;" src="https://vdownload.hembed.com/image/icon/erolabs_cherry_talezh_640x360.jpg?secure=gCyUoVxh7zqjKLDvF4Gmwg==,1736066294" alt="禁游排行 - 华语圈最新游戏创作者平台">
+                      <img style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 5px;" src="https://vdownload.hembed.com/image/icon/erolabs_640x360.jpg?secure=3Tp8Y9L0q8tQSsUZO2fEIw==,4868406408" alt="轉生到異世界當HGAME製作人">
                     </div>
                   </div>
 
