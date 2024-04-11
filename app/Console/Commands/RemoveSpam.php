@@ -88,7 +88,8 @@ class RemoveSpam extends Command
                                           ->orWhere('name', 'ilike', "%𝕐%𝕋%𝟞%𝕏%")
                                           ->orWhere('name', 'ilike', "%n%v%7%3%2%")
                                           ->orWhere('name', 'ilike', "%b%d%8%8%6%9%")
-                                          ->orWhere('name', 'ilike', "%b%d%6%0%2%");
+                                          ->orWhere('name', 'ilike', "%b%d%6%0%2%")
+                                          ->orWhere('name', 'ilike', "%bulubu%");
                                 })->where('created_at', '>=', Carbon::now()->subDay());
         $name_users->delete();
 
