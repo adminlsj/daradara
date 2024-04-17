@@ -39,6 +39,14 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
+        $url = "https://vdownload-24.hembed.com/video?username=appieopie&password=d0raemOn@(!$";
+        $curl_connection = curl_init($url);
+        curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+        curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+        return $base_list = json_decode(curl_exec($curl_connection), true);
+        curl_close($curl_connection);
+
         /* $current = request('current');
         $new = request('new'); */
 
