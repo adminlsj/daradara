@@ -54,11 +54,6 @@ class Jav
                 $original_link = "/vodplay/{$hscangku_link}";
                 $code = explode(' ', $title)[0];
 
-                // Temp codes
-                if ($original_link == "/vodplay/45235-1-1.html") {
-                    $code = "PRTD-003";
-                }
-
                 if (Video::where('foreign_sd', 'ilike', '%'.$original_link.'%')->exists()) {
                     Log::info('Hscangku update CODE#'.$code.' imported at '.$original_link);
                 } elseif (Video::where('title', 'ilike', $code.' %')->exists()) {
@@ -156,7 +151,7 @@ class Jav
                     ->where('user_id', 1)
                     ->where('created_at', '2000-01-01 00:00:00')
                     ->where('foreign_sd', 'not like', '%"missav"%')
-                    ->orderBy('id', 'asc')
+                    ->orderBy('id', 'desc')
                     ->get();
 
         foreach ($videos as $video) {
