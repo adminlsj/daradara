@@ -53,6 +53,12 @@ class Jav
             foreach ($page_links as $hscangku_link => $title) {
                 $original_link = "/vodplay/{$hscangku_link}";
                 $code = explode(' ', $title)[0];
+
+                // Temp codes
+                if ($original_link == "/vodplay/45235-1-1.html") {
+                    $code = "PRTD-003";
+                }
+
                 if (Video::where('foreign_sd', 'ilike', '%'.$original_link.'%')->exists()) {
                     Log::info('Hscangku update CODE#'.$code.' imported at '.$original_link);
                 } elseif (Video::where('title', 'ilike', $code.' %')->exists()) {
