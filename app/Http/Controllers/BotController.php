@@ -44,7 +44,7 @@ class BotController extends Controller
             $tags_collection = explode(' ', $video->tags);
             $tags_array = [];
             foreach ($tags_collection as $tag) {
-                return $tag;
+                echo $tag.'<br>';
                 if ($tag != '主奴調教' && $tag != '凌辱強暴' && $tag != '制服誘惑' && $tag != '角色劇情' && $tag != '盜攝偷拍' && $tag != '無碼解放' && $tag != '多P群交' && $tag != '絲襪美腿') {
                     $tags_array[$tag] = 100;
                 }
