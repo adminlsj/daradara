@@ -269,12 +269,12 @@ class Jav
         $videos = Video::where('id', '>=', 92717)
                     ->whereIn('genre', Video::$genre_jav)
                     ->where('foreign_sd', 'not like', '%"jable"%')
-                    ->orderBy('id', 'desc')
+                    ->orderBy('id', 'asc')
                     ->get();
 
         foreach ($videos as $video) {
             $code = strtolower(trim(explode(' ', $video->title)[0]));
-            $jable_url = "https://jable.tv/videos/{$code}/";
+            $jable_url = "https://jable.tv/s0/videos/{$code}-c/";
             $jable_html = Browsershot::url($jable_url)
                 ->timeout(10)
                 ->setExtraHttpHeaders(['Referer' => 'https://jable.tv/'])
