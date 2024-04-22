@@ -39,13 +39,17 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $url = "https://vdownload-24.hembed.com/video?username=appieopie&password=d0raemOn@(!$";
-        $curl_connection = curl_init($url);
-        curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
-        curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
-        return $base_list = json_decode(curl_exec($curl_connection), true);
-        curl_close($curl_connection);
+        $videos = Video::where('id', '>=', 92717)->where('id', '<', 93127)->get();
+        foreach ($videos as $video) {
+            $tags_array = explode(' ', $video->tags);
+            foreach ($tags_array as &$tag) {
+                if ($tag != '主奴調教' && $tag != '凌辱強暴' && $tag != '制服誘惑' && $tag != '角色劇情' && $tag != '盜攝偷拍' && $tag != '無碼解放' && $tag != '多P群交' && $tag != '絲襪美腿') {
+                    $tags_array[$tag] = 100;
+                }
+            }
+        }
+        $video->tags_array = $tags_array;
+        $video->save();
 
         /* $current = request('current');
         $new = request('new'); */
