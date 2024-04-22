@@ -48,6 +48,7 @@ class BotController extends Controller
                 }
             }
         }
+        return $tags_array;
         $video->tags_array = $tags_array;
         $video->save();
 
@@ -99,12 +100,12 @@ class BotController extends Controller
             $video->save();
         } */
 
-        $filename = 'erolabs_640x360.jpg';
+        /* $filename = 'erolabs_640x360.jpg';
         $url = 'vdownload.hembed.com';
         $expiration = time() + 3155692600;
         $token = 'xVEO8rLVgGkUBEBg';
         $source = '/image/icon/'.$filename;
-        return Video::getSignedUrlParameter($url, $source, $token, $expiration);
+        return Video::getSignedUrlParameter($url, $source, $token, $expiration); */
 
         /* $id = 84803;
         $huge = $id.'h.jpg';
