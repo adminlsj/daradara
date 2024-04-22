@@ -39,19 +39,25 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $videos = Video::where('id', '>=', 92717)->where('id', '<', 93127)->orderBy('id', 'asc')->get();
+        $jable_url = "https://jable.tv/s0/videos/stars-897/";
+        return $jable_html = Browsershot::url($jable_url)
+                ->timeout(10)
+                ->setExtraHttpHeaders(['Referer' => 'https://jable.tv/'])
+                ->userAgent(Spankbang::$userAgents[array_rand(Spankbang::$userAgents)])
+                ->bodyHtml();
+
+        /* $videos = Video::where('id', '>=', 92717)->where('id', '<', 93127)->orderBy('id', 'asc')->get();
         foreach ($videos as $video) {
             $tags_collection = explode(' ', $video->tags);
             $tags_array = [];
             foreach ($tags_collection as $tag) {
-                echo $tag.'<br>';
                 if ($tag != '主奴調教' && $tag != '凌辱強暴' && $tag != '制服誘惑' && $tag != '角色劇情' && $tag != '盜攝偷拍' && $tag != '無碼解放' && $tag != '多P群交' && $tag != '絲襪美腿') {
                     $tags_array[$tag] = 100;
                 }
             }
             $video->tags_array = $tags_array;
             $video->save();
-        }
+        } */
 
         /* $current = request('current');
         $new = request('new'); */
