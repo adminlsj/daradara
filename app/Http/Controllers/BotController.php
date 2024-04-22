@@ -39,7 +39,7 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $videos = Video::where('id', '>=', 92717)->where('id', '<', 93127)->get();
+        $videos = Video::where('id', '>=', 92717)->where('id', '<', 93127)->orderBy('id', 'asc')->get();
         foreach ($videos as $video) {
             $tags_array = explode(' ', $video->tags);
             foreach ($tags_array as &$tag) {
