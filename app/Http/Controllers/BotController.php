@@ -41,7 +41,7 @@ class BotController extends Controller
 
         $videos = Video::where('id', '>=', 92717)->where('id', '<', 93127)->orderBy('id', 'asc')->get();
         foreach ($videos as $video) {
-            $tags_collection = explode(' ', $video->tags);
+            return $tags_collection = explode(' ', $video->tags);
             $tags_array = [];
             foreach ($tags_collection as &$tag) {
                 if ($tag != '主奴調教' && $tag != '凌辱強暴' && $tag != '制服誘惑' && $tag != '角色劇情' && $tag != '盜攝偷拍' && $tag != '無碼解放' && $tag != '多P群交' && $tag != '絲襪美腿') {
