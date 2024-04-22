@@ -49,10 +49,9 @@ class BotController extends Controller
                     $tags_array[$tag] = 100;
                 }
             }
+            $video->tags_array = $tags_array;
+            $video->save();
         }
-        return $tags_array;
-        $video->tags_array = $tags_array;
-        $video->save();
 
         /* $current = request('current');
         $new = request('new'); */
