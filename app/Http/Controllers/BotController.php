@@ -39,7 +39,8 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $videos = Video::where('id', '>=', 92717)->where('id', '<', 93127)->orderBy('id', 'asc')->get();
+        // Update JAV tags array
+        /* $videos = Video::where('id', '>=', 92717)->where('id', '<', 93127)->orderBy('id', 'asc')->get();
         foreach ($videos as $video) {
             $tags_collection = explode(' ', $video->tags);
             $tags_array = [];
@@ -50,7 +51,7 @@ class BotController extends Controller
             }
             $video->tags_array = $tags_array;
             $video->save();
-        }
+        } */
 
         /* $current = request('current');
         $new = request('new'); */
