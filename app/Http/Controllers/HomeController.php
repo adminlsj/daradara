@@ -247,10 +247,6 @@ class HomeController extends Controller
                     $subscribes = Subscribe::where('user_id', Auth::user()->id)->pluck('artist_id');
                     $results = $results->whereIn('user_id', $subscribes);
                 } else {
-                    // Block search query 家庭菜園
-                    if ($query == '家庭菜園') {
-                        $query = '404 forbidden access';
-                    }
                     $query = mb_strtolower(preg_replace('/\s+/', '', $query), 'UTF-8');
                     $chinese = new Chinese();
                     $original = '%'.$query.'%';
