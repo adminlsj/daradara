@@ -74,7 +74,7 @@ class BotController extends Controller
         return $extensions; */
 
         // Change comics prefix
-        /* $comics = Comic::where('prefix', '!=', null)->get();
+        $comics = Comic::where('prefix', '!=', null)->get();
         foreach ($comics as $comic) {
             $temp = [];
             $count = count($comic->extensions);
@@ -89,7 +89,7 @@ class BotController extends Controller
             }
             $comic->extensions = $temp;
             $comic->save();
-        } */
+        }
 
         // Update JAV tags array
         /* $videos = Video::where('id', '>=', 92717)->where('id', '<', 93127)->orderBy('id', 'asc')->get();
