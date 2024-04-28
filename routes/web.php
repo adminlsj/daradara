@@ -147,6 +147,7 @@ Route::group(['middleware' => 'admin'], function () {
 	Route::get('/downloadFromJsdelivr', 'BotController@downloadFromJsdelivr');
 	Route::get('/imageToWnacg', 'BotController@imageToWnacg');
 	Route::get('/imageToCdn77', 'BotController@imageToCdn77');
+	Route::get('/downloadBalancer', 'BotController@downloadBalancer');
 
 	Route::get('/updateHomeVideos', 'BotController@updateHomeVideos');
 

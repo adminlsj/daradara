@@ -69,17 +69,11 @@ $('.comic-show-content-nav-item-wrapper').on('click', function(e) {
   var is_nhentai = prefix.indexOf("nhentai") >= 0;
 
   if (is_nhentai) {
-    var page_code = page;
+    var url = prefix + page + '.' + parseExt[extensions[page - 1]];
   } else {
-    var page_code = page - 1;
-    if (page_code < 10) {
-      var page_code = '00' + page_code;
-    } else if (page_code < 100) {
-      var page_code = '0' + page_code;
-    }
+    var url = prefix + extensions[page - 1] + '.jpg';
   }
 
-  var url = prefix + page_code + '.' + parseExt[extensions[page - 1]];
   image.css('filter', 'brightness(0%)');
   image.attr('src', url);
   image.on("load", function() {
@@ -89,19 +83,13 @@ $('.comic-show-content-nav-item-wrapper').on('click', function(e) {
   $('html').scrollTop( $("#comic-content-wrapper").offset().top);
 
   for (i = 1; i <= 3; i++) {
+    var preload = new Image();
     var new_page = page + i;
     if (is_nhentai) {
-      var new_page_code = new_page;
+      preload.src = prefix + new_page  + '.' + parseExt[extensions[new_page - 1]];
     } else {
-      var new_page_code = page + i - 1;
-      if (new_page_code < 10) {
-        var new_page_code = '00' + new_page_code;
-      } else if (page < 100) {
-        var new_page_code = '0' + new_page_code;
-      }
+      preload.src = prefix + extensions[new_page - 1]  + '.jpg';
     }
-    var preload = new Image();
-    preload.src = prefix + new_page_code  + '.' + parseExt[extensions[new_page - 1]];
   }
 });
 

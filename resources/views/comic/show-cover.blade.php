@@ -17,7 +17,7 @@
   <div class="row">
     <div class="col-md-4">
       <a href="{{ route('comic.showContent', ['comic' => $comic, 'page' => 1]) }}">
-        <img class="lazy" style="border-radius: 5px; width: 100%;" src="{{ $prefix_t }}{{ $is_nhentai ? 'cover' : App\Comic::addZerosToPage(0) }}.{{ $comic->extension }}" data-src="{{ $prefix }}{{ $is_nhentai ? 1 : App\Comic::addZerosToPage(0) }}.{{ App\Nhentai::$parseExt[$comic->extensions[0]] }}" data-srcset="{{ $prefix }}{{ $is_nhentai ? 1 : App\Comic::addZerosToPage(0) }}.{{ App\Nhentai::$parseExt[$comic->extensions[0]] }}">
+        <img class="lazy" style="border-radius: 5px; width: 100%;" src="{{ $prefix_t }}{{ $is_nhentai ? 'cover.'.$comic->extension : $comic->extensions[0].'.jpg' }}" data-src="{{ $prefix }}{{ $is_nhentai ? '1.'.App\Nhentai::$parseExt[$comic->extensions[0]] : $comic->extensions[0].'.jpg' }}" data-srcset="{{ $prefix }}{{ $is_nhentai ? '1.'.App\Nhentai::$parseExt[$comic->extensions[0]] : $comic->extensions[0].'.jpg' }}">
       </a>
     </div>
     <div class="col-md-8">
@@ -71,7 +71,7 @@
 <div class="comics-panel-margin comics-panel-margin-top comics-panel-padding comics-thumbnail-wrapper comic-rows-wrapper" style="position: relative;">
   @for ($i = 1; $i <= $comic->pages; $i++)
     <a href="{{ route('comic.showContent', ['comic' => $comic, 'page' => $i]) }}">
-      <img class="lazy comic-rows-videos-div hover-lighter {{ $i > 12 ? 'hidden' : '' }}" style="border-radius: 5px; margin-bottom: 4px; vertical-align: top" src="https://img4.qy0.ru/data/2205/36/0n3iJ9Ol.jpg" data-srcset="{{ $prefix_t }}{{ $is_nhentai ? $i.'t' : App\Comic::addZerosToPage($i - 1) }}.{{ App\Nhentai::$parseExt[$comic->extensions[$i - 1]] }}">
+      <img class="lazy comic-rows-videos-div hover-lighter {{ $i > 12 ? 'hidden' : '' }}" style="border-radius: 5px; margin-bottom: 4px; vertical-align: top" src="https://img4.qy0.ru/data/2205/36/0n3iJ9Ol.jpg" data-srcset="{{ $prefix_t }}{{ $is_nhentai ? $i.'t.'.App\Nhentai::$parseExt[$comic->extensions[$i - 1]] : $comic->extensions[$i - 1].'.jpg' }}">
     </a>
   @endfor
   <div id="comics-thumbnail-show-btn-wrapper" style="{{ $comic->pages <= 12 ? 'display:none' : '' }}">

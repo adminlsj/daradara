@@ -39,60 +39,57 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $url = $request->url;
-        if (strpos($url, '1080p') !== false) {
-            $balancer = Helper::get_string_between($url, 'vbalancer-', '.hembed');
-            $server = Arr::random(Video::$vod_servers[$balancer - 1]);
-            $sd = str_replace("vbalancer-{$balancer}.hembed.com", "vdownload-{$server}.hembed.com", $url);
-            $sd = Helper::sign_hembed_url($sd, env('HEMBED_TOKEN'), 43200);
-            $vid = Helper::get_string_between($url, "https://vbalancer-{$balancer}.hembed.com/", '-1080p.mp4');
-            $referer = "https://hanime1.me/";
-            $opts = [
-                'http' => [
-                   'header' => [
-                        "Referer: https://hanime1.me/"
-                    ]
-                ]
-            ];
-            $context = stream_context_create($opts);
-            Storage::disk('local')->put("video/{$vid}-1080p.mp4", file_get_contents($sd, false, $context));
-            $url = str_replace('-1080p.mp4', '-720p.mp4', $url);
+        /* $base = $request->url;
+        $curl_connection = curl_init($base);
+        curl_setopt($curl_connection, CURLOPT_REFERER, 'https://www.wnacg.com/');
+        curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+        curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($curl_connection, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:7.0.1) Gecko/20100101 Firefox/7.0.12011-10-16 20:23:00");
+        $html = curl_exec($curl_connection);
+        curl_close($curl_connection);
+
+        $comic_pages = str_replace('P', '', Helper::get_string_between($html, '<label>頁數：', '</label>'));
+        $html_pages = explode('.html">', explode('</a> <span class="next">', $html)[0]);
+        $html_pages = trim(end($html_pages));
+        $extensions = [];
+        for ($i = 1; $i <= $html_pages; $i++) { 
+            $url = str_replace('page-1-aid', 'page-'.$i.'-aid', $base);
+            $curl_connection = curl_init($url);
+            curl_setopt($curl_connection, CURLOPT_REFERER, 'https://www.wnacg.com/');
+            curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+            curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($curl_connection, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:7.0.1) Gecko/20100101 Firefox/7.0.12011-10-16 20:23:00");
+            $html = curl_exec($curl_connection);
+            curl_close($curl_connection);
+
+            $extensions_raw = explode('<span class="name tb"', $html);
+            array_shift($extensions_raw);
+            foreach ($extensions_raw as $item) {
+                $extension = Helper::get_string_between($item, '>', '<');
+                array_push($extensions, $extension);
+            }
         }
-        if (strpos($url, '720p') !== false) {
-            $balancer = Helper::get_string_between($url, 'vbalancer-', '.hembed');
-            $server = Arr::random(Video::$vod_servers[$balancer - 1]);
-            $sd = str_replace("vbalancer-{$balancer}.hembed.com", "vdownload-{$server}.hembed.com", $url);
-            $sd = Helper::sign_hembed_url($sd, env('HEMBED_TOKEN'), 43200);
-            $vid = Helper::get_string_between($url, "https://vbalancer-{$balancer}.hembed.com/", '-720p.mp4');
-            $referer = "https://hanime1.me/";
-            $opts = [
-                'http' => [
-                   'header' => [
-                        "Referer: https://hanime1.me/"
-                    ]
-                ]
-            ];
-            $context = stream_context_create($opts);
-            Storage::disk('local')->put("video/{$vid}-720p.mp4", file_get_contents($sd, false, $context));
-            $url = str_replace('-720p.mp4', '-480p.mp4', $url);
-        }
-        if (strpos($url, '480p') !== false) {
-            $balancer = Helper::get_string_between($url, 'vbalancer-', '.hembed');
-            $server = Arr::random(Video::$vod_servers[$balancer - 1]);
-            $sd = str_replace("vbalancer-{$balancer}.hembed.com", "vdownload-{$server}.hembed.com", $url);
-            $sd = Helper::sign_hembed_url($sd, env('HEMBED_TOKEN'), 43200);
-            $vid = Helper::get_string_between($url, "https://vbalancer-{$balancer}.hembed.com/", '-480p.mp4');
-            $referer = "https://hanime1.me/";
-            $opts = [
-                'http' => [
-                   'header' => [
-                        "Referer: https://hanime1.me/"
-                    ]
-                ]
-            ];
-            $context = stream_context_create($opts);
-            Storage::disk('local')->put("video/{$vid}-480p.mp4", file_get_contents($sd, false, $context));
-        }
+        return $extensions; */
+
+        // Change comics prefix
+        /* $comics = Comic::where('prefix', '!=', null)->get();
+        foreach ($comics as $comic) {
+            $temp = [];
+            $count = count($comic->extensions);
+            for ($i = 0; $i < $count; $i++) {
+                if ($i < 10) {
+                    array_push($temp, '00'.$i);
+                } elseif ($i < 100) {
+                    array_push($temp, '0'.$i);
+                } else {
+                    array_push($temp, $i);
+                }
+            }
+            $comic->extensions = $temp;
+            $comic->save();
+        } */
 
         // Update JAV tags array
         /* $videos = Video::where('id', '>=', 92717)->where('id', '<', 93127)->orderBy('id', 'asc')->get();
@@ -2941,6 +2938,64 @@ class BotController extends Controller
         ];
         $context = stream_context_create($opts);
         Storage::disk('local')->put("video/{$vid}.mp4", file_get_contents($mp4, false, $context));
+    }
+
+    public function downloadBalancer(Request $request)
+    {
+        $url = $request->url;
+        if (strpos($url, '1080p') !== false) {
+            $balancer = Helper::get_string_between($url, 'vbalancer-', '.hembed');
+            $server = Arr::random(Video::$vod_servers[$balancer - 1]);
+            $sd = str_replace("vbalancer-{$balancer}.hembed.com", "vdownload-{$server}.hembed.com", $url);
+            $sd = Helper::sign_hembed_url($sd, env('HEMBED_TOKEN'), 43200);
+            $vid = Helper::get_string_between($url, "https://vbalancer-{$balancer}.hembed.com/", '-1080p.mp4');
+            $referer = "https://hanime1.me/";
+            $opts = [
+                'http' => [
+                   'header' => [
+                        "Referer: https://hanime1.me/"
+                    ]
+                ]
+            ];
+            $context = stream_context_create($opts);
+            Storage::disk('local')->put("video/{$vid}-1080p.mp4", file_get_contents($sd, false, $context));
+            $url = str_replace('-1080p.mp4', '-720p.mp4', $url);
+        }
+        if (strpos($url, '720p') !== false) {
+            $balancer = Helper::get_string_between($url, 'vbalancer-', '.hembed');
+            $server = Arr::random(Video::$vod_servers[$balancer - 1]);
+            $sd = str_replace("vbalancer-{$balancer}.hembed.com", "vdownload-{$server}.hembed.com", $url);
+            $sd = Helper::sign_hembed_url($sd, env('HEMBED_TOKEN'), 43200);
+            $vid = Helper::get_string_between($url, "https://vbalancer-{$balancer}.hembed.com/", '-720p.mp4');
+            $referer = "https://hanime1.me/";
+            $opts = [
+                'http' => [
+                   'header' => [
+                        "Referer: https://hanime1.me/"
+                    ]
+                ]
+            ];
+            $context = stream_context_create($opts);
+            Storage::disk('local')->put("video/{$vid}-720p.mp4", file_get_contents($sd, false, $context));
+            $url = str_replace('-720p.mp4', '-480p.mp4', $url);
+        }
+        if (strpos($url, '480p') !== false) {
+            $balancer = Helper::get_string_between($url, 'vbalancer-', '.hembed');
+            $server = Arr::random(Video::$vod_servers[$balancer - 1]);
+            $sd = str_replace("vbalancer-{$balancer}.hembed.com", "vdownload-{$server}.hembed.com", $url);
+            $sd = Helper::sign_hembed_url($sd, env('HEMBED_TOKEN'), 43200);
+            $vid = Helper::get_string_between($url, "https://vbalancer-{$balancer}.hembed.com/", '-480p.mp4');
+            $referer = "https://hanime1.me/";
+            $opts = [
+                'http' => [
+                   'header' => [
+                        "Referer: https://hanime1.me/"
+                    ]
+                ]
+            ];
+            $context = stream_context_create($opts);
+            Storage::disk('local')->put("video/{$vid}-480p.mp4", file_get_contents($sd, false, $context));
+        }
     }
 
     public function checkHetznerServers()
