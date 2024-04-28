@@ -39,6 +39,61 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
+        $url = $request->url;
+        if (strpos($url, '1080p') !== false) {
+            $balancer = Helper::get_string_between($url, 'vbalancer-', '.hembed');
+            $server = Arr::random(Video::$vod_servers[$balancer - 1]);
+            $sd = str_replace("vbalancer-{$balancer}.hembed.com", "vdownload-{$server}.hembed.com", $url);
+            $sd = Helper::sign_hembed_url($sd, env('HEMBED_TOKEN'), 43200);
+            $vid = Helper::get_string_between($url, "https://vbalancer-{$balancer}.hembed.com/", '-1080p.mp4');
+            $referer = "https://hanime1.me/";
+            $opts = [
+                'http' => [
+                   'header' => [
+                        "Referer: https://hanime1.me/"
+                    ]
+                ]
+            ];
+            $context = stream_context_create($opts);
+            Storage::disk('local')->put("video/{$vid}-1080p.mp4", file_get_contents($sd, false, $context));
+            $url = str_replace('-1080p.mp4', '-720p.mp4', $url);
+        }
+        if (strpos($url, '720p') !== false) {
+            $balancer = Helper::get_string_between($url, 'vbalancer-', '.hembed');
+            $server = Arr::random(Video::$vod_servers[$balancer - 1]);
+            $sd = str_replace("vbalancer-{$balancer}.hembed.com", "vdownload-{$server}.hembed.com", $url);
+            $sd = Helper::sign_hembed_url($sd, env('HEMBED_TOKEN'), 43200);
+            $vid = Helper::get_string_between($url, "https://vbalancer-{$balancer}.hembed.com/", '-720p.mp4');
+            $referer = "https://hanime1.me/";
+            $opts = [
+                'http' => [
+                   'header' => [
+                        "Referer: https://hanime1.me/"
+                    ]
+                ]
+            ];
+            $context = stream_context_create($opts);
+            Storage::disk('local')->put("video/{$vid}-720p.mp4", file_get_contents($sd, false, $context));
+            $url = str_replace('-720p.mp4', '-480p.mp4', $url);
+        }
+        if (strpos($url, '480p') !== false) {
+            $balancer = Helper::get_string_between($url, 'vbalancer-', '.hembed');
+            $server = Arr::random(Video::$vod_servers[$balancer - 1]);
+            $sd = str_replace("vbalancer-{$balancer}.hembed.com", "vdownload-{$server}.hembed.com", $url);
+            $sd = Helper::sign_hembed_url($sd, env('HEMBED_TOKEN'), 43200);
+            $vid = Helper::get_string_between($url, "https://vbalancer-{$balancer}.hembed.com/", '-480p.mp4');
+            $referer = "https://hanime1.me/";
+            $opts = [
+                'http' => [
+                   'header' => [
+                        "Referer: https://hanime1.me/"
+                    ]
+                ]
+            ];
+            $context = stream_context_create($opts);
+            Storage::disk('local')->put("video/{$vid}-480p.mp4", file_get_contents($sd, false, $context));
+        }
+
         // Update JAV tags array
         /* $videos = Video::where('id', '>=', 92717)->where('id', '<', 93127)->orderBy('id', 'asc')->get();
         foreach ($videos as $video) {
@@ -101,12 +156,12 @@ class BotController extends Controller
             $video->save();
         } */
 
-        $filename = '25029.jpg';
+        /* $filename = '25029.jpg';
         $url = 'vdownload.hembed.com';
         $expiration = time() + 2629743;
         $token = 'xVEO8rLVgGkUBEBg';
         $source = '/image/cover/'.$filename;
-        return Video::getSignedUrlParameter($url, $source, $token, $expiration);
+        return Video::getSignedUrlParameter($url, $source, $token, $expiration); */
 
         /* $id = 84803;
         $huge = $id.'h.jpg';
@@ -2289,25 +2344,27 @@ class BotController extends Controller
             $video->foreign_sd = $foreign_sd;
             $video->save();
 
-            $qualities_sc = [];
-            $sd_sc = $source_sc = "/{$vid}-sc-{$quality}.mp4";
-            if (strpos($source_sc, '1080p') !== false) {
-                $qualities_sc['1080'] = Video::getSignedUrlParameter($url, $source_sc, $token, $expiration);
-                $source_sc = str_replace('-1080p.mp4', '-720p.mp4', $source_sc);
+            if ($request->sc) {
+                $qualities_sc = [];
+                $sd_sc = $source_sc = "/{$vid}-sc-{$quality}.mp4";
+                if (strpos($source_sc, '1080p') !== false) {
+                    $qualities_sc['1080'] = Video::getSignedUrlParameter($url, $source_sc, $token, $expiration);
+                    $source_sc = str_replace('-1080p.mp4', '-720p.mp4', $source_sc);
+                }
+                if (strpos($source_sc, '720p') !== false) {
+                    $qualities_sc['720'] = Video::getSignedUrlParameter($url, $source_sc, $token, $expiration);
+                    $source_sc = str_replace('-720p.mp4', '-480p.mp4', $source_sc);
+                }
+                if (strpos($source_sc, '480p') !== false) {
+                    $qualities_sc['480'] = Video::getSignedUrlParameter($url, $source_sc, $token, $expiration);
+                }
+                $video->sd_sc = reset($qualities_sc);
+                $video->qualities_sc = $qualities_sc;
+                $foreign_sd = $video->foreign_sd;
+                $foreign_sd['cdn77_sc'] = "https://".$url.$sd_sc;
+                $video->foreign_sd = $foreign_sd;
+                $video->save();
             }
-            if (strpos($source_sc, '720p') !== false) {
-                $qualities_sc['720'] = Video::getSignedUrlParameter($url, $source_sc, $token, $expiration);
-                $source_sc = str_replace('-720p.mp4', '-480p.mp4', $source_sc);
-            }
-            if (strpos($source_sc, '480p') !== false) {
-                $qualities_sc['480'] = Video::getSignedUrlParameter($url, $source_sc, $token, $expiration);
-            }
-            $video->sd_sc = reset($qualities_sc);
-            $video->qualities_sc = $qualities_sc;
-            $foreign_sd = $video->foreign_sd;
-            $foreign_sd['cdn77_sc'] = "https://".$url.$sd_sc;
-            $video->foreign_sd = $foreign_sd;
-            $video->save();
 
             return Redirect::route('video.watch', ['v' => $video->id]);
         }
