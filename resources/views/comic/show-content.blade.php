@@ -15,10 +15,10 @@
 
 <div class="comics-banner-ads">
   <div class="hidden-xs" style="display: flex; justify-content: center; align-items: center;">
-    <iframe width="728px" height="90px" style="display:block" marginWidth="0" marginHeight="0" frameBorder="no" src="https://creative.kbnmnl.com/widgets/v4/Universal?campaignId=728x90&modelPageOption=model&tag=girls%2Fchinese%2Cgirls%2Fjapanese&thumbsMargin=5&hideButton=1&hideTitle=1&userId=68266da2436a81581f441c04a73d1525467dff2da85808235979b437cff6f852&quality=240p&autoplay=all&autoplayForce=1"></iframe>
+    <iframe width="728px" height="90px" style="display:block" marginWidth="0" marginHeight="0" frameBorder="no" src="https://go.mnaspm.com/smartpop/1effd36dd5e2090354b0d4c6ea654a8eb460851efac4574d8e585c855c2439bd?userId=68266da2436a81581f441c04a73d1525467dff2da85808235979b437cff6f852"></iframe>
   </div>
   <span class="hidden-sm hidden-md hidden-lg" style="display: flex; justify-content: center; align-items: center;">
-    <iframe width="300px" height="100px" style="display:block" marginWidth="0" marginHeight="0" frameBorder="no" src="https://creative.kbnmnl.com/widgets/v4/Universal?campaignId=300x100&modelPageOption=model&tag=girls%2Fchinese%2Cgirls%2Fjapanese&thumbsMargin=5&hideButton=1&hideTitle=1&userId=68266da2436a81581f441c04a73d1525467dff2da85808235979b437cff6f852&quality=240p&autoplay=all&autoplayForce=1"></iframe>
+    <iframe width="300px" height="100px" style="display:block" marginWidth="0" marginHeight="0" frameBorder="no" src="https://go.mnaspm.com/smartpop/bb4232783643a69bcbc592055b955265fde975ee2a6213b1d76ccc2e0a45b5c4?userId=68266da2436a81581f441c04a73d1525467dff2da85808235979b437cff6f852"></iframe>
   </span>
 </div>
 

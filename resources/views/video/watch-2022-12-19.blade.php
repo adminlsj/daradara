@@ -307,7 +307,7 @@
           <!-- Original Exoclick -->
           <!-- include('layouts.exoclick', ['id' => '5058646', 'width' => '300', 'height' => '250']) -->
           <!-- New Stripchat -->
-          <iframe width="300px" height="250px" style="display:block" marginWidth="0" marginHeight="0" frameBorder="no" src="https://creative.kbnmnl.com/widgets/v4/Universal?campaignId=300x250&modelPageOption=model&tag=girls%2Fchinese&thumbsMargin=5&hideButton=1&hideTitle=1&userId=68266da2436a81581f441c04a73d1525467dff2da85808235979b437cff6f852&quality=240p&autoplay=all&autoplayForce=1"></iframe>
+          <iframe width="300px" height="250px" style="display:block" marginWidth="0" marginHeight="0" frameBorder="no" src="https://go.mnaspm.com/smartpop/90c1264ffb57b69c7a31ac6231b7301cff76092d71bdeccc32ecfd9bbb8d48be?userId=68266da2436a81581f441c04a73d1525467dff2da85808235979b437cff6f852"></iframe>
         </div>
 
         <div class="hidden-xs hidden-sm">
