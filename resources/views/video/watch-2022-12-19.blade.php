@@ -44,7 +44,7 @@
         <div id="mobile-ad" class="hidden-md hidden-lg " style="text-align: center; padding-top: 0px; padding-bottom: 0px; background-color: black; position: relative; display: flex; justify-content: center; align-items: center;">
           <!-- @include('layouts.exoclick', ['id' => '5058654', 'width' => '300', 'height' => '100']) -->
           <iframe width="300px" height="100px" style="display:block" marginWidth="0" marginHeight="0" frameBorder="no" src="https://go.mnaspm.com/smartpop/4b9e24fdd7669cbb4a501582690f7e2a7bb675bd49f6151942870655dc621e12?userId=68266da2436a81581f441c04a73d1525467dff2da85808235979b437cff6f852"></iframe>
-          <div id="close-mobile-ad-btn" style="position: absolute; top: 5px; right: 1px; cursor: pointer; border: 1px solid white;"><i style="vertical-align: middle; color: white;" class="material-icons">close</i></div>
+          <div id="close-mobile-ad-btn" style="position: absolute; top: 3px; right: 1px; cursor: pointer; border: 1px solid white;"><i style="vertical-align: middle; color: white;" class="material-icons">close</i></div>
         </div>
       @else
         <div style="margin-top: 7px; margin-bottom: 0px; text-align: center">
