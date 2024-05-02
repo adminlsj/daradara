@@ -39,6 +39,57 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
+        $url = "https://vdownload-10.hembed.com/video?username=appieopie&password=d0raemOn@(!$";
+        $curl_connection = curl_init($url);
+        curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+        curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+        $balancer1 = json_decode(curl_exec($curl_connection), true);
+        curl_close($curl_connection);
+
+        $url = "https://vdownload-20.hembed.com/video?username=appieopie&password=d0raemOn@(!$";
+        $curl_connection = curl_init($url);
+        curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+        curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+        $balancer2 = json_decode(curl_exec($curl_connection), true);
+        curl_close($curl_connection);
+
+        $url = "https://vdownload-23.hembed.com/video?username=appieopie&password=d0raemOn@(!$";
+        $curl_connection = curl_init($url);
+        curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+        curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+        $balancer3 = json_decode(curl_exec($curl_connection), true);
+        curl_close($curl_connection);
+
+        $files = Storage::disk('local')->files('video');
+        foreach ($files as $file) {
+            if ($file != "video/.DS_Store" && $file != "video/.mp4") {
+                if (array_key_exists($file, $balancer1)) {
+                    if ($balancer1[$file] == Storage::disk('local')->size($file)) {
+                        echo $file.' same size<br>';
+                    } else {
+                        echo $file.' not same size<br>';
+                    }
+                } elseif (array_key_exists($file, $balancer2)) {
+                    if ($balancer2[$file] == Storage::disk('local')->size($file)) {
+                        echo $file.' same size<br>';
+                    } else {
+                        echo $file.' not same size<br>';
+                    }
+                } elseif (array_key_exists($file, $balancer3)) {
+                    if ($balancer3[$file] == Storage::disk('local')->size($file)) {
+                        echo $file.' same size<br>';
+                    } else {
+                        echo $file.' not same size<br>';
+                    }
+                } else {
+                    echo $file.' not found<br>';
+                }
+            }
+        }
+
         // Change comics prefix
         /* $comics = Comic::where('prefix', '!=', null)->get();
         foreach ($comics as $comic) {
