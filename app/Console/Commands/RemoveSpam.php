@@ -77,7 +77,9 @@ class RemoveSpam extends Command
                                       ->orWhere('text', 'ilike', "%bulubu%")
                                       ->orWhere('text', 'ilike', "%mao%vip%")
                                       ->orWhere('text', 'ilike', "%好用的机场%")
-                                      ->orWhere('text', 'ilike', "%速度快的梯子%");
+                                      ->orWhere('text', 'ilike', "%速度快的梯子%")
+                                      ->orWhere('text', 'ilike', "%d%d%6%6%m%e%")
+                                      ->orWhere('text', 'ilike', "%d%d%p%p%m%e%");
                               })->where('created_at', '>=', Carbon::now()->subDay())
                                 ->groupBy('user_id')
                                 ->pluck('user_id');
