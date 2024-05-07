@@ -14,7 +14,7 @@
   <div class="row no-gutter video-show-width">
     <div id="player-div-wrapper" class="col-md-9 single-show-player fluid-player-desktop-styles" style="background-color: #141414; position: relative; overflow-y: hidden; overflow-x: hidden;">
       
-      @if ($video->playlist_id != 9786)
+      @if ($video->playlist_id != 9786 || Auth::check())
         @if ($current->sd_sc)
           <div id="player-lang-wrapper" style="position: absolute; top: 10px; left: 10px; z-index: 1;" class="dropdown">
             <button style="outline:0; border-radius: 0px !important;" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
