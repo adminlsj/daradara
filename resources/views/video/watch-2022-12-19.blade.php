@@ -13,31 +13,38 @@
 <div id="content-div">
   <div class="row no-gutter video-show-width">
     <div id="player-div-wrapper" class="col-md-9 single-show-player fluid-player-desktop-styles" style="background-color: #141414; position: relative; overflow-y: hidden; overflow-x: hidden;">
-
-      @if ($current->sd_sc)
-        <div id="player-lang-wrapper" style="position: absolute; top: 10px; left: 10px; z-index: 1;" class="dropdown">
-          <button style="outline:0; border-radius: 0px !important;" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            {{ $lang == 'zh-CHS' ? '简体字幕' : '繁體字幕'}}
-            <span class="material-icons">arrow_drop_down</span>
-          </button>
-          <div id="player-switch-lang" style="margin-top: 0px; border: none; border-radius: 0px !important; border-top: 2px solid rgba(0, 0, 0, 0.5);" data-lang="{{ $lang }}" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            {{ $lang == 'zh-CHS' ? '繁體字幕' : '简体字幕'}}
+      
+      @if ($video->playlist_id != 9786)
+        @if ($current->sd_sc)
+          <div id="player-lang-wrapper" style="position: absolute; top: 10px; left: 10px; z-index: 1;" class="dropdown">
+            <button style="outline:0; border-radius: 0px !important;" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              {{ $lang == 'zh-CHS' ? '简体字幕' : '繁體字幕'}}
+              <span class="material-icons">arrow_drop_down</span>
+            </button>
+            <div id="player-switch-lang" style="margin-top: 0px; border: none; border-radius: 0px !important; border-top: 2px solid rgba(0, 0, 0, 0.5);" data-lang="{{ $lang }}" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              {{ $lang == 'zh-CHS' ? '繁體字幕' : '简体字幕'}}
+            </div>
           </div>
-        </div>
-      @endif
-
-      @if ($video->outsource)
-        <div style="background-color: black; background-image: url('https://vdownload.hembed.com/image/icon/video_loading.gif?secure=LD6BYCdwElEd1mXbPLORmA==,4855473033'); background-position: center; background-repeat: no-repeat; background-size: 150px; position: relative; width: 100%; height: 0; padding-bottom: 56.25%;">
-            <iframe src="{!! $sd !!}" style="border: 0; overflow: hidden; position: absolute; width: 100%; height: 100%; left: 0; top: 0;" allowfullscreen></iframe>
-        </div>
-
-      @else
-        @if (strpos($sd, '.m3u8') !== false)
-          @include('video.player-m3u8')
-        @else
-          @include('video.player-mp4')
         @endif
 
+        @if ($video->outsource)
+          <div style="background-color: black; background-image: url('https://vdownload.hembed.com/image/icon/video_loading.gif?secure=LD6BYCdwElEd1mXbPLORmA==,4855473033'); background-position: center; background-repeat: no-repeat; background-size: 150px; position: relative; width: 100%; height: 0; padding-bottom: 56.25%;">
+              <iframe src="{!! $sd !!}" style="border: 0; overflow: hidden; position: absolute; width: 100%; height: 100%; left: 0; top: 0;" allowfullscreen></iframe>
+          </div>
+
+        @else
+          @if (strpos($sd, '.m3u8') !== false)
+            @include('video.player-m3u8')
+          @else
+            @include('video.player-mp4')
+          @endif
+
+        @endif
+
+      @else
+        <div style="background-color: black; background-position: center; background-repeat: no-repeat; background-size: 150px; position: relative; width: 100%; height: 0; padding-bottom: 56.25%;">
+              <div style="width: 100%; text-align: center; margin: 0; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 16px; color: white;">This video is not available :(</div>
+        </div>
       @endif
 
       @if ($is_mobile)
