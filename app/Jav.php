@@ -143,7 +143,7 @@ class Jav
         Log::info('Empty sd update ended...');
     }
 
-    public static function updateWithMissav()
+    public static function updateWithMissav($order = 'asc')
     {
         Log::info('Missav update started...');
 
@@ -151,7 +151,7 @@ class Jav
                     ->where('user_id', 1)
                     ->where('created_at', '2000-01-01 00:00:00')
                     ->where('foreign_sd', 'not like', '%"missav"%')
-                    ->orderBy('id', 'desc')
+                    ->orderBy('id', $order)
                     ->get();
 
         foreach ($videos as $video) {
