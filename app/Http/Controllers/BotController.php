@@ -3056,7 +3056,7 @@ class BotController extends Controller
 
     public function updateWithJable(Request $request)
     {
-        Jav::updateWithJable();
+        Jav::updateWithJable($request->order);
     }
 
     public function updateWithAvbebe(Request $request)

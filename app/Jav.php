@@ -262,14 +262,14 @@ class Jav
         Log::info('Missav update ended...');
     }
 
-    public static function updateWithJable()
+    public static function updateWithJable($order = 'asc')
     {
         Log::info('Jable update started...');
 
         $videos = Video::where('id', '>=', 93443)
                     ->whereIn('genre', Video::$genre_jav)
                     ->where('foreign_sd', 'not like', '%"jable"%')
-                    ->orderBy('id', 'asc')
+                    ->orderBy('id', $order)
                     ->get();
 
         foreach ($videos as $video) {
