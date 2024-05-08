@@ -266,7 +266,7 @@ class Jav
     {
         Log::info('Jable update started...');
 
-        $videos = Video::where('id', '>=', 92717)
+        $videos = Video::where('id', '>=', 93443)
                     ->whereIn('genre', Video::$genre_jav)
                     ->where('foreign_sd', 'not like', '%"jable"%')
                     ->orderBy('id', 'asc')
@@ -274,7 +274,8 @@ class Jav
 
         foreach ($videos as $video) {
             $code = strtolower(trim(explode(' ', $video->title)[0]));
-            $jable_url = "https://jable.tv/s0/videos/{$code}-c/";
+            // $jable_url = "https://jable.tv/s0/videos/{$code}-c/";
+            $jable_url = "https://jable.tv/videos/{$code}/";
             $jable_html = Browsershot::url($jable_url)
                 ->timeout(10)
                 ->setExtraHttpHeaders(['Referer' => 'https://jable.tv/'])
@@ -307,10 +308,10 @@ class Jav
                 }
 
             } else {
-                $temp = $video->foreign_sd;
+                /* $temp = $video->foreign_sd;
                 $temp['jable'] = '404';
                 $video->foreign_sd = $temp;
-                $video->save();
+                $video->save(); */
 
                 Log::info('Jable update ID#'.$video->id.' failed...');
             }
