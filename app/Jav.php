@@ -277,7 +277,7 @@ class Jav
             // $jable_url = "https://jable.tv/s0/videos/{$code}-c/";
             $jable_url = "https://jable.tv/videos/{$code}/";
             $jable_html = Browsershot::url($jable_url)
-                ->timeout(10)
+                ->timeout(20)
                 ->setExtraHttpHeaders(['Referer' => 'https://jable.tv/'])
                 ->userAgent(Spankbang::$userAgents[array_rand(Spankbang::$userAgents)])
                 ->bodyHtml();
