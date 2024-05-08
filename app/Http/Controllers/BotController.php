@@ -39,15 +39,6 @@ class BotController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
 
-        $jable_url = "https://jable.tv/videos/cawd-641/";
-        $jable_html = Browsershot::url($jable_url)
-            ->timeout(20)
-            ->setExtraHttpHeaders(['Referer' => 'https://jable.tv/'])
-            ->userAgent(Spankbang::$userAgents[array_rand(Spankbang::$userAgents)])
-            ->bodyHtml();
-
-        return $jable_html;
-
         // Change comics prefix
         /* $comics = Comic::where('prefix', '!=', null)->get();
         foreach ($comics as $comic) {
