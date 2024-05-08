@@ -3093,7 +3093,7 @@ class BotController extends Controller
 
     public function updateWithMissav(Request $request)
     {
-        Jav::updateWithMissav();
+        Jav::updateWithMissav($request->order);
     }
 
     public function updateWithJable(Request $request)
