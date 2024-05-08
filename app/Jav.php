@@ -308,10 +308,10 @@ class Jav
                 }
 
             } else {
-                /* $temp = $video->foreign_sd;
-                $temp['jable'] = '404';
+                $temp = $video->foreign_sd;
+                $temp['jable'] = 'retry';
                 $video->foreign_sd = $temp;
-                $video->save(); */
+                $video->save();
 
                 Log::info('Jable update ID#'.$video->id.' failed...');
             }
