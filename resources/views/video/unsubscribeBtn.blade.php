@@ -1,8 +1,0 @@
-<form id="unsubscribe-form" action="{{ route('video.unsubscribe') }}" method="POST">
-  {{ csrf_field() }}
-  <input name="subscribe-source" type="hidden" value="video">
-  <input name="subscribe-type" type="hidden" value="video">
-  <input name="subscribe-tag" type="hidden" value="{{ $tag }}">
-  <input name="subscribe-user-id" type="hidden" value="{{ Auth::user()->id }}">
-  <button id="unsubscribe-btn" class="video-unsubscribe-btn" type="submit">已訂閱</button>
-</form>
