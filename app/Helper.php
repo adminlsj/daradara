@@ -25,161 +25,22 @@ class Helper
         return substr($string, $ini, $len);
     }
 
-    public static function getPreferredLanguage()
-    {
-        $user_lang = isset($_COOKIE['user_lang']) ? $_COOKIE['user_lang'] : null;
-        if ($user_lang) {
-            if ($user_lang == 'zh-CHS') {
-                $lang = 'zh-CHS';
-            } else {
-                $lang = 'zh-CHT';
-            }
+    public static function getSize(int $size){
+        if ($size < 1000) {
+            return $size.' Bytes';
+        } elseif (($size = $size / 1000) < 1000) {
+            return round($size, 0).' KB';
+        } elseif (($size = $size / 1000) < 1000) {
+            return round($size, 1).' MB';
+        } elseif (($size = $size / 1000) < 1000) {
+            return round($size, 2).' GB';
+        }
+        /* } elseif ($size = $size / 1000 < 1000) {
+            return $size.' KB';
+        } elseif ($size = $size / 1000 < 1000) {
+            return $size.' MB';
         } else {
-            $browser_lang = isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) ? $_SERVER['HTTP_ACCEPT_LANGUAGE'] : 'zh-CHT';
-            if (str_starts_with($browser_lang, 'zh-CN') || str_starts_with($browser_lang, 'zh-CHS')) {
-                $lang = 'zh-CHS';
-            } else {
-                $lang = 'zh-CHT';
-            }
-        }
-        return $lang;
+            return ($size / 1000).' GB';
+        } */
     }
-
-    public static function getPreferredQuality($qualities)
-    {
-        $search = isset($_COOKIE['quality']) ? $_COOKIE['quality'] : 720;
-        $closest = null;
-        foreach ($qualities as $quality) {
-            if ($closest === null || abs($search - $closest) > abs($quality - $search)) {
-                $closest = $quality;
-            }
-        }
-        return $closest;
-    }
-
-    public static function convertBin2hex(String $context){
-        $coverted = mb_strtolower($context);
-        $coverted = preg_replace('/\s+/', '', $coverted);
-        $coverted = preg_split('//u', $coverted, -1, PREG_SPLIT_NO_EMPTY);
-        foreach ($coverted as &$character) {
-            if (strlen($character) != mb_strlen($character, 'utf-8')) {
-                $character = bin2hex(iconv('UTF-8', 'UTF-16BE', $character));
-            }
-        }
-        $coverted = implode($coverted);
-        return $coverted;
-    }
-
-    public static function sign_bcdn_url($url, $securityKey, $expiration_time = 3600, $user_ip = NULL, $is_directory_token = false, $path_allowed = NULL, $countries_allowed = NULL, $countries_blocked = NULL, $referers_allowed = NULL)
-    {    
-        if(!is_null($countries_allowed))
-        {
-            $url .= (parse_url($url, PHP_URL_QUERY) == "") ? "?" : "&";
-            $url .= "token_countries={$countries_allowed}";
-        }
-        if(!is_null($countries_blocked))
-        {
-            $url .= (parse_url($url, PHP_URL_QUERY) == "") ? "?" : "&";
-            $url .= "token_countries_blocked={$countries_blocked}";
-        }
-        if(!is_null($referers_allowed))
-        {
-            $url .= (parse_url($url, PHP_URL_QUERY) == "") ? "?" : "&";
-            $url .= "token_referer={$referers_allowed}";
-        }
-
-        $url_scheme = parse_url($url, PHP_URL_SCHEME);
-        $url_host = parse_url($url, PHP_URL_HOST);
-        $url_path = parse_url($url, PHP_URL_PATH);
-        $url_query = parse_url($url, PHP_URL_QUERY);
-
-
-        $parameters = array();
-        parse_str($url_query, $parameters);
-
-        // Check if the path is specified and ovewrite the default
-        $signature_path = $url_path;
-
-        if(!is_null($path_allowed))
-        {
-            $signature_path = $path_allowed;
-            $parameters["token_path"] = $signature_path;
-        }
-
-        // Expiration time
-        $expires = time() + $expiration_time; 
-
-        // Construct the parameter data
-        ksort($parameters); // Sort alphabetically, very important
-        $parameter_data = "";
-        $parameter_data_url = "";
-        if(sizeof($parameters) > 0)
-        {
-            foreach ($parameters as $key => $value) 
-            {
-                if(strlen($parameter_data) > 0)
-                    $parameter_data .= "&";
-
-                $parameter_data_url .= "&";
-
-                $parameter_data .= "{$key}=" . $value;
-                $parameter_data_url .= "{$key}=" . urlencode($value); // URL encode everything but slashes for the URL data
-            }
-        }
-
-        // Generate the toke
-        $hashableBase = $securityKey.$signature_path.$expires;
-
-        // If using IP validation
-        if(!is_null($user_ip))
-        {
-            $hashableBase .= $user_ip;
-        }
-
-        $hashableBase .= $parameter_data;
-
-        // Generate the token
-        $token = hash('sha256', $hashableBase, true);
-        $token = base64_encode($token);
-        $token = strtr($token, '+/', '-_');
-        $token = str_replace('=', '', $token); 
-
-        if($is_directory_token)
-        {
-            return "{$url_scheme}://{$url_host}/bcdn_token={$token}&expires={$expires}{$parameter_data_url}{$url_path}";
-        }
-        else 
-        {
-            return "{$url_scheme}://{$url_host}{$url_path}?token={$token}{$parameter_data_url}&expires={$expires}";
-        }
-    }
-
-    public static function sign_hembed_url($url, $securityKey, $expiration_time = 3600)
-    {
-        $url_scheme = parse_url($url, PHP_URL_SCHEME);
-        $url_host = parse_url($url, PHP_URL_HOST);
-        $url_path = parse_url($url, PHP_URL_PATH);
-        $url_query = parse_url($url, PHP_URL_QUERY);
-
-        $expires = time() + $expiration_time;
-        $token = md5("$expires$url_path $securityKey", true);
-        $token = base64_encode($token);
-        $token = strtr($token, '+/', '-_');
-        $token = str_replace('=', '', $token);
-
-        return "{$url_scheme}://{$url_host}{$url_path}?token={$token}&expires={$expires}";
-    }
-
-    public static $userAgents = [
-        'Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.61 Safari/537.36 OPR/80.0.4170.48 (Edition Yx GX)',
-        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81',
-        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36/3hhOU1r2-44',
-        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.48 CitizenFX/1.0.0.4919 Safari/537.36',
-        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36 Edg/95.0.1020.40/zYwE5JPq-31',
-        'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:94.0) Gecko/20100101 Firefox/94.0/iwL59ud3-10',
-        'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.1; Trident/7.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; .NET4.0C; .NET4.0E; Tablet PC 2.0; .NET CLR 1.1.4322)',
-        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.27 Safari/537.36 Edg/96.0.1054.8',
-        'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.1; Trident/7.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; Tablet PC 2.0; .NET CLR 1.1.4322; .NET4.0C; .NET4.0E)',
-        'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:93.0) Gecko/20100101 Firefox/93.0/rQH3oIHH-24'
-    ];
 }

@@ -1,20 +1,20 @@
 @extends('layouts.app')
 
 @section('nav')
-    @include('nav.main', ['theme' => 'white'])
+    @include('nav.md')
 @endsection
 
 @section('content')
 
-  <div id="loginModal" class="list-rows-wrapper" style="padding: 0 4%; color: white;">
+  <div id="loginModal" class="list-rows-wrapper" style="padding: 0 13.6%; color: white;">
       <form method="POST" action="{{ route('login') }}">
 
         {{ csrf_field() }}
         {{ Session::put('previousUrl', '/') }}
 
-        <h4 style="font-size: 1.7em;">登入帳戶</h4>
+        <h4 style="font-size: 1.7em;">Login</h4>
         <div style="font-size: 1.1em;">
-          <span style="font-weight: 500;">在 <span style="font-weight: bold">Hanime1.me</span> 上享受最愛的影片、崁入原創內容，並與全世界觀眾分享您的影片。</span>
+          <span style="font-weight: 500;">Upload, store, and share your files on <span style="font-weight: bold">SwiftShare.org</span>. All in a Swift.</span>
           <div class="form-group" style="margin-top: 20px;">
             <input style="background-color: #131313; color: gray;" type="email" class="form-control" name="email" id="email" placeholder="電郵地址" required>
           </div>
@@ -23,14 +23,14 @@
           </div>
 
           <div style="margin-top: 20px; margin-bottom: 20px; font-size: 0.95em">
-            <a href="/password/reset" target="_blank" style="cursor: pointer; text-decoration: none; font-weight: 500;">忘記密碼？</a>
+            <a href="/password/reset" target="_blank" style="cursor: pointer; text-decoration: none; font-weight: 500;">Forget password?</a>
           </div>
 
           <button style="height: 45px; margin-top: 10px; font-size: 1em; background-color: red !important; border-color: red !important;" type="submit" class="btn btn-info" name="submit">登入</button>
           @include('layouts.socialLoginBtn')
 
           <div style="margin-top: 20px; font-size: 0.95em">
-            <span style="font-weight: 400">尚未擁有帳戶？</span>&nbsp;<a href="{{ route('register') }}" style="cursor: pointer; text-decoration: none; font-weight: 500;">註冊</a>
+            <span style="font-weight: 400">Don't have an account yet?</span>&nbsp;<a href="{{ route('register') }}" style="cursor: pointer; text-decoration: none; font-weight: 500;">Register</a>
           </div>
         </div>
 
@@ -38,5 +38,7 @@
   </div>
 
   <br>
+
+  @include('layouts.footer')
 
 @endsection

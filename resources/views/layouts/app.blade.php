@@ -39,8 +39,8 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 </head>
-<body>
-    <div style="overflow-x: hidden; {{ Request::is('*comic*') ? 'background-color: #0d0d0d;' : '' }}">
+<body style="font-family: IBM Plex Sans Arabic, sans-serif !important;">
+    <div style="overflow-x: hidden; background-color: #141416; background-image: url('https://pbs.twimg.com/media/GNSvTanWsAA8kLD?format=png&name=small'); background-repeat: repeat; height: 100vh;">
         @yield('nav')
 
         <div style="overflow-x: hidden;">
