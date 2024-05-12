@@ -24,7 +24,7 @@ class FileController extends Controller
     public function index(Request $request)
     {
         $user = Auth::user();
-        $files = File::where('user_id', $user->id)->get();
+        $files = File::where('user_id', $user->id)->orderBy('created_at', 'desc')->get();
         return view('file.index', compact('user', 'files'));
     }
 
@@ -63,6 +63,11 @@ class FileController extends Controller
 
     public function download(Request $request, File $file)
     {
+        $downloads = $file->downloads;
+        $downloads++;
+        $file->downloads = $downloads;
+        $file->save();
+
         return response()->download(storage_path("/storage/app/file/{$file->id}/{$file->title}.{$file->extension}"));
     }
 

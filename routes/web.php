@@ -16,7 +16,7 @@ Auth::routes();
 Route::get('auth/{provider}', 'Auth\LoginController@redirectToProvider');
 Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
 
-Route::get('/files', 'FileController@index')->name('file.index');
+Route::get('/users/{user}/files', 'FileController@index')->name('file.index');
 Route::post('/users/{user}/file', 'FileController@store')->name('file.store');
 Route::get('/{file}/{title?}', 'FileController@show')->name('file.show');
 
