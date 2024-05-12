@@ -18,7 +18,8 @@ Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallb
 
 Route::get('/files', 'FileController@index')->name('file.index');
 Route::post('/users/{user}/file', 'FileController@store')->name('file.store');
-Route::get('/{file}/{title?}', 'FileController@show')->name('file.show');
+Route::get('/file/{file}/{title?}', 'FileController@show')->name('file.show');
+Route::get('/download/{file}/{title?}', 'FileController@show')->name('file.download');
 
 Route::get('/about', 'HomeController@about');
 Route::get('/contact', 'HomeController@contact');

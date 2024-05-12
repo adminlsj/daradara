@@ -61,6 +61,11 @@ class FileController extends Controller
         }
     }
 
+    public function download(Request $request, File $file)
+    {
+        return response()->download(storage_path("/storage/app/file/{$file->id}/{$file->title}.{$file->extension}"));
+    }
+
     public static function sign_hembed_url($url, $securityKey, $expiration_time = 3600)
     {
         $url_scheme = parse_url($url, PHP_URL_SCHEME);
