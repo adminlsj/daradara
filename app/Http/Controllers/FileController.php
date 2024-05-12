@@ -40,10 +40,10 @@ class FileController extends Controller
 
     public function store(Request $request, User $user)
     {
-        if ($file = request()->file('image')) {
-            $title = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME); 
-            $extension = $file->extension();
-            $size = $file->getSize();
+        if ($uploaded_file = request()->file('image')) {
+            $title = pathinfo($uploaded_file->getClientOriginalName(), PATHINFO_FILENAME); 
+            $extension = $uploaded_file->extension();
+            $size = $uploaded_file->getSize();
             $file = File::create([
                 'user_id' => $user->id,
                 'title' => $title,
@@ -55,7 +55,7 @@ class FileController extends Controller
                 'client_ip' => '127.0.0.1'
             ]);
 
-            Storage::disk('local')->put("file/{$file->id}/{$file->title}.{$file->extension}", $file);
+            Storage::disk('local')->put("file/{$file->id}/{$file->title}.{$file->extension}", file_get_contents($uploaded_file));
 
             return Redirect::route('file.show', ['file' => $file, 'title' => $file->title.'.'.$file->extension]);
         }
