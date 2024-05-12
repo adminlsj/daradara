@@ -15,9 +15,11 @@
 		<img class="no-select" style="height: 100px; margin: 0; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" src="https://pbs.twimg.com/media/GNTXhV2WUAA9e0C?format=png&name=240x240">
 	</div>
 
-	<div class="no-select" style="background-color: #BA9F33; line-height: 44px; height: 44px; border-radius: 8px; margin-top: 15px; font-size: 16px; color: white; cursor: pointer;">
-		Download
-	</div>
+	<a href="{{ $download_url }}" target="_blank">
+		<div class="no-select" style="background-color: #BA9F33; line-height: 44px; height: 44px; border-radius: 8px; margin-top: 15px; font-size: 16px; color: white; cursor: pointer; text-decoration: none;">
+			Download
+		</div>
+	</a>
 </div>
 
 @include('layouts.footer')
