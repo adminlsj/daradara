@@ -56,7 +56,7 @@ class FileController extends Controller
 
             Storage::disk('local')->put("file/{$file->id}/{$file->title}.{$file->extension}", $file);
 
-            return Redirect::route('file.show', ['file' => $file]);
+            return Redirect::route('file.show', ['file' => $file, 'title' => $file->title.$file->extension]);
         }
     }
 }
