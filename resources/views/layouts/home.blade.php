@@ -40,11 +40,11 @@
 	    <div class="modal-content">
 	      <div class="modal-header">
 	        <span class="material-icons pull-left no-select modal-close-btn" data-dismiss="modal">close</span>
-	        <h4 class="modal-title">Upload is currenty disabled for new users</h4>
+	        <h4 class="modal-title">Upload currently disabled</h4>
 	      </div>
 	      <div class="modal-body" style="padding-bottom: 20px; text-align: left;">
 	        <h4>Subscribe to updates</h4>
-	        <p id="hentai-tags-text" style="color: darkgray; padding-bottom: 10px">Subscribe to get latest update for the upload status!</p>
+	        <p id="hentai-tags-text" style="color: darkgray; padding-bottom: 10px">Upload is currently disabled for new users, subscribe to get latest update about the upload status!</p>
 	        <div class="addthis_inline_share_toolbox"></div>
 	        <input style="width: 280px; color: black;" type="text" class="form-control-plaintext" name="user-email" id="user-email" value="{{ Auth::check() ? Auth::user()->email : '' }}" placeholder="Email address">
 	      </div>
