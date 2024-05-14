@@ -5,7 +5,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="referrer" content="origin">
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta name="viewport" content="width=device-width, height=device-height">
         <meta name="google-site-verification" content="oV77KljbCxlciy-aD-Uy_dZSYUENVR_6jAhWSp_cb48" />
         <meta name="exoclick-site-verification" content="c02975e2897725fd5f30045bf364309a">
         <meta name="juicyads-site-verification" content="cc330848f3dfc20e8259699c6a096411">
