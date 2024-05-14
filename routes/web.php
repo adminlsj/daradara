@@ -12,6 +12,8 @@
 */
 
 Route::get('/', 'HomeController@index');
+Route::get('/subscribe', 'HomeController@subscribe')->name('subscribe.store');
+
 Auth::routes();
 Route::get('auth/{provider}', 'Auth\LoginController@redirectToProvider');
 Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
@@ -19,13 +21,6 @@ Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallb
 Route::get('/users/{user}/files', 'FileController@index')->name('file.index');
 Route::post('/users/{user}/file', 'FileController@store')->name('file.store');
 Route::get('/{file}/{title?}', 'FileController@show')->name('file.show');
-
-Route::get('/about', 'HomeController@about');
-Route::get('/contact', 'HomeController@contact');
-Route::get('/terms', 'HomeController@terms');
-Route::get('/policies', 'HomeController@policies');
-Route::get('/copyright', 'HomeController@copyright');
-Route::get('/2257', 'HomeController@p2257');
 
 Route::resource('user', 'UserController')->only(['edit', 'update']);
 

@@ -26,12 +26,36 @@
 			</form>
 		</div>
 	@else
-		<div class="filebox">
+		<div class="filebox" data-toggle="modal" data-target="#subscribeModal">
 			<img class="no-select" style="height: 100px; margin: 0; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" src="https://pbs.twimg.com/media/GNS3plcWMAAyRva?format=png&name=240x240">
 		</div>
 	@endif
 </div>
 
 @include('layouts.footer')
+
+<form action="{{ route('subscribe.store') }}" method="GET">
+	<div id="subscribeModal" class="modal" role="dialog">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <span class="material-icons pull-left no-select modal-close-btn" data-dismiss="modal">close</span>
+	        <h4 class="modal-title">Upload is currenty disabled for new users</h4>
+	      </div>
+	      <div class="modal-body" style="padding-bottom: 20px; text-align: left;">
+	        <h4>Subscribe to updates</h4>
+	        <p id="hentai-tags-text" style="color: darkgray; padding-bottom: 10px">Subscribe to get latest update for the upload status!</p>
+	        <div class="addthis_inline_share_toolbox"></div>
+	        <input style="width: 280px; color: black;" type="text" class="form-control-plaintext" name="user-email" id="user-email" value="{{ Auth::check() ? Auth::user()->email : '' }}" placeholder="Email address">
+	      </div>
+	      <hr style="border-color: #323434; margin: 0; margin-top: 0px;">
+	      <div class="modal-footer">
+	        <div data-dismiss="modal">Back</div>
+	        <button type="submit" name="submit" class="pull-right btn btn-primary">Subscribe</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+</form>
 
 @endsection

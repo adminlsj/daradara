@@ -10,10 +10,10 @@
 <div><span style="font-weight: 600">ip address: </span>{{ $ip_address }}</div>
 <div><span style="font-weight: 600">email: </span>{{ $email }}</div>
 <div><span style="font-weight: 600">time: </span>{{ Carbon\Carbon::now()->format('Y-m-d H:i:s') }}</div>
-<div><span style="font-weight: 600">link: </span>{{ route('video.watch') }}?v={{ $video_id }}</div>
+<div><span style="font-weight: 600">link: </span>n/a</div>
 <div><span style="font-weight: 600">sd: </span>{{ $video_sd }}</div>
 
-@component('mail::button', ['url' => '{{ route("video.watch") }}?v={{ $video->id }}'])
+@component('mail::button', ['url' => '/'])
 <span style="font-size: 15px">LaughSeeJapan</span>
 @endcomponent
 
