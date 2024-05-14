@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-  <div id="signUpModal" class="list-rows-wrapper" style="padding: 0 13.6%; color: white;">
+  <div class="auth">
     <form action="{{ route('register') }}" method="POST">
 
       {{ csrf_field() }}
@@ -23,9 +23,7 @@
         <div class="form-group">
           <input style="background-color: #131313; color: gray;" type="password" class="form-control" name="password" id="password" placeholder="Password" required>
         </div>
-        <button style="height: 45px; margin-top: 10px; font-size: 1em; background-color: red !important; border-color: red !important;" type="submit" class="btn btn-info" name="submit">Sign up</button>
-
-        @include('layouts.socialLoginBtn')
+        <button style="height: 45px; margin-top: 10px; font-size: 1em; background-color: #BA9F33 !important; border-color: #BA9F33 !important; padding: 10px; width: 100%;" type="submit" class="btn btn-info" name="submit">Sign up</button>
 
         <div style="margin-top: 20px; font-size: 0.95em">
           <span style="font-weight: 400">Already have a SwiftShare account?</span>&nbsp;<a href="{{ route('login') }}" style="cursor: pointer; text-decoration: none; font-weight: 500;">Login</a>

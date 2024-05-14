@@ -87,8 +87,14 @@ th, td {
   background-color: #1F1F1F;
 }
 
+.auth {
+  padding: 0 13.6%;
+  color: white !important;
+  padding-top: 70px !important;
+}
+
 @media (max-width: 991px) {
-  .nav, .footer {
+  .nav, .footer, .auth {
     padding: 0 5%;
   }
 

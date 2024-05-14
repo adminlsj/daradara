@@ -34,20 +34,16 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 </head>
-<body>
-    <div>
-        @yield('nav')
+<body style="overflow: hidden;">
+    @yield('nav')
 
-        <div style="overflow-x: hidden; overflow-y: hidden;">
-            @if ($errors->any())
-                @foreach ($errors->all() as $error)
-                    <div id="error" style="color: white; width: 100%; background-color: #d84b6b; text-align: center; position: fixed; top: 0; z-index: 10001">{{ $error }}</div>
-                @endforeach
-            @endif
+    @if ($errors->any())
+        @foreach ($errors->all() as $error)
+            <div id="error" style="color: white; width: 100%; background-color: #d84b6b; text-align: center; position: fixed; top: 0; z-index: 10001">{{ $error }}</div>
+        @endforeach
+    @endif
 
-            @yield('content')
-        </div>
-    </div>
+    @yield('content')
 
     <!-- CSS Styles Deferred -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">

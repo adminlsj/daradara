@@ -65,9 +65,9 @@ class RegisterController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6',
         ], [
-            'email.unique' => '該電子郵件已登記賬戶，若忘記密碼，請聯絡我們 hanime1@freemail.hu',
-            'email.max'  => '該電子郵件的字數超過系統允許的長度',
-            'password.min'  => '請設定密碼為6個字母或以上',
+            'email.unique' => 'This email address has been registered already. If you forgot your password, please contact us at swiftshare@gmail.com',
+            'email.max'  => 'This email address is too long',
+            'password.min'  => 'Please enter a password longer than 6 characters',
         ]);
     }
 
