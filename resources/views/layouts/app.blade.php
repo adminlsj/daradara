@@ -4,25 +4,20 @@
     @section('head')
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        @if (isset($sd) && strpos($sd, 'hembed.com') !== false && strpos($sd, 'vdownload') !== false)
-            <meta name="referrer" content="origin">
-        @else
-            <meta name="referrer" content="no-referrer">
-        @endif
+        <meta name="referrer" content="origin">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <meta name="google-site-verification" content="oV77KljbCxlciy-aD-Uy_dZSYUENVR_6jAhWSp_cb48" />
         <meta name="exoclick-site-verification" content="c02975e2897725fd5f30045bf364309a">
         <meta name="juicyads-site-verification" content="cc330848f3dfc20e8259699c6a096411">
         <link rel="shortcut icon" type="image/x-icon" href="https://vdownload.hembed.com/image/icon/tab_logo.png?secure=EJYLwnrDlidVi_wFp3DaGw==,4867726124"/>
         <link rel="apple-touch-icon" href="https://vdownload.hembed.com/image/icon/tab_logo.png?secure=EJYLwnrDlidVi_wFp3DaGw==,4867726124"/>
-        <link rel="canonical" href="https://hanime1.me{{ Request::getRequestUri() }}" />
-        <meta name="RATING" content="RTA-5042-1996-1400-1577-RTA" />
+        <link rel="canonical" href="https://swiftshare.org{{ Request::getRequestUri() }}" />
     @show
 
-    <meta name="title" content="Hanime1.me - H動漫/裏番/線上看">
-    <title>Hanime1.me - H動漫/裏番/線上看</title>
+    <meta name="title" content="SwiftShare.org - Share in a Swift.">
+    <title>SwiftShare.org - Share in a Swift.</title>
     <meta name="description" 
-          content="Hanime1.me 帶給你最完美的H動漫、H動畫、裏番、里番、成人色情卡通片的線上看體驗，絕對沒有天殺的片頭廣告！">
+          content="Upload, Store, Download. All in a Swift.">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -39,8 +34,8 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 </head>
-<body style="font-family: IBM Plex Sans Arabic, sans-serif !important;">
-    <div style="overflow-x: hidden; background-color: #141416; background-image: url('https://pbs.twimg.com/media/GNSvTanWsAA8kLD?format=png&name=small'); background-repeat: repeat; height: 100vh;">
+<body>
+    <div>
         @yield('nav')
 
         <div style="overflow-x: hidden;">
@@ -52,9 +47,6 @@
 
             @yield('content')
         </div>
-
-        <!-- The actual snackbar -->
-        <div id="snackbar">Some text some message..</div>
     </div>
 
     <!-- CSS Styles Deferred -->

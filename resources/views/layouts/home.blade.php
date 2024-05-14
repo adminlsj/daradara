@@ -6,12 +6,12 @@
 
 @section('content')
 
-<div style="margin: 0; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; height: 60vh; width: 500px; background-color: #232325; border-radius: 8px; padding: 20px;;">
+<div class="filebox-wrapper">
 	<div style="color: #a3a3a3; font-weight: 300;">Upload, Store, Download.</div>
 	<div style="color: #d6d6d6; font-size: 26px; font-weight: 400; margin-top: 5px;">All in a Swift</div>
 
 	@if (Auth::check() && Auth::user()->id == 1)
-		<div style="outline-style: dotted; margin-top: 15px; height: calc(100% - 78px); position: relative; cursor: pointer">
+		<div class="filebox">
 			<form id="fileStore" action="{{ route('file.store', ['user' => Auth::user()]) }}" method="POST" enctype="multipart/form-data">
 				{{ csrf_field() }}
 				<div style="position: relative; width: 200px; display: inline-block; margin-right: 110px;" class="form-group">
@@ -26,7 +26,7 @@
 			</form>
 		</div>
 	@else
-		<div style="outline-style: dotted; margin-top: 15px; height: calc(100% - 78px); position: relative; cursor: pointer">
+		<div class="filebox">
 			<img class="no-select" style="height: 100px; margin: 0; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" src="https://pbs.twimg.com/media/GNS3plcWMAAyRva?format=png&name=240x240">
 		</div>
 	@endif
