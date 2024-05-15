@@ -9,8 +9,8 @@
         <meta name="google-site-verification" content="oV77KljbCxlciy-aD-Uy_dZSYUENVR_6jAhWSp_cb48" />
         <meta name="exoclick-site-verification" content="c02975e2897725fd5f30045bf364309a">
         <meta name="juicyads-site-verification" content="cc330848f3dfc20e8259699c6a096411">
-        <link rel="shortcut icon" type="image/x-icon" href="https://pbs.twimg.com/media/GNlYF-9XoAE67Fn?format=jpg&name=240x240"/>
-        <link rel="apple-touch-icon" href="https://pbs.twimg.com/media/GNlYF-9XoAE67Fn?format=jpg&name=240x240"/>
+        <link rel="shortcut icon" type="image/x-icon" href="https://pbs.twimg.com/media/GNlYfnEWkAAWeSn?format=jpg&name=240x240"/>
+        <link rel="apple-touch-icon" href="https://pbs.twimg.com/media/GNlYfnEWkAAWeSn?format=jpg&name=240x240"/>
         <link rel="canonical" href="https://swiftshare.me{{ Request::getRequestUri() }}" />
     @show
 
