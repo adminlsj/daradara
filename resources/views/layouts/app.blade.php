@@ -15,7 +15,7 @@
     @show
 
     <meta name="title" content="SwiftShare.me - Share in a Swift.">
-    <title>SwiftShare.org - Share in a Swift.</title>
+    <title>SwiftShare.me - Share in a Swift.</title>
     <meta name="description" 
           content="Upload, Store, Download. All in a Swift.">
 
