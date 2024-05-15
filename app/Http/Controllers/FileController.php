@@ -40,6 +40,9 @@ class FileController extends Controller
 
     public function store(Request $request, User $user)
     {
+        ini_set('max_execution_time', 0);
+        ini_set('memory_limit', '-1');
+        
         if ($uploaded_file = request()->file('image')) {
             $title = pathinfo($uploaded_file->getClientOriginalName(), PATHINFO_FILENAME); 
             $extension = $uploaded_file->extension();
