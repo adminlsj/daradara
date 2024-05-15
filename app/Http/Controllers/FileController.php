@@ -34,7 +34,7 @@ class FileController extends Controller
         $views++;
         $file->views = $views;
         $file->save();
-        $download_url = $this->sign_hembed_url("https://swiftshare.hanime1.com/file/{$file->id}/{$file->title}.{$file->extension}", env('HEMBED_TOKEN'), 43200);
+        $download_url = $this->sign_hembed_url("https://swiftshare.me/file/{$file->id}/{$file->title}.{$file->extension}", env('HEMBED_TOKEN'), 43200);
         return view('file.show', compact('file', 'download_url'));
     }
 
