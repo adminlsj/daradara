@@ -13,7 +13,7 @@
 
       <h4 style="font-size: 1.7em">Register</h4>
       <div style="font-size: 1.1em">
-        <span style="font-weight: 500;">Upload, store, and share your files on <span style="font-weight: bold">SwiftShare.org</span>. All in a Swift.</span>
+        <span style="font-weight: 500;">Upload, store, and share your files on <span style="font-weight: bold">SwiftShare.me</span>. All in a Swift.</span>
         <div class="form-group" style="margin-top: 20px;">
           <input style="background-color: #131313; color: gray;" type="email" class="form-control" name="email" id="email" placeholder="Email address" required>
         </div>

@@ -11,10 +11,10 @@
         <meta name="juicyads-site-verification" content="cc330848f3dfc20e8259699c6a096411">
         <link rel="shortcut icon" type="image/x-icon" href="https://vdownload.hembed.com/image/icon/tab_logo.png?secure=EJYLwnrDlidVi_wFp3DaGw==,4867726124"/>
         <link rel="apple-touch-icon" href="https://vdownload.hembed.com/image/icon/tab_logo.png?secure=EJYLwnrDlidVi_wFp3DaGw==,4867726124"/>
-        <link rel="canonical" href="https://swiftshare.org{{ Request::getRequestUri() }}" />
+        <link rel="canonical" href="https://swiftshare.me{{ Request::getRequestUri() }}" />
     @show
 
-    <meta name="title" content="SwiftShare.org - Share in a Swift.">
+    <meta name="title" content="SwiftShare.me - Share in a Swift.">
     <title>SwiftShare.org - Share in a Swift.</title>
     <meta name="description" 
           content="Upload, Store, Download. All in a Swift.">
