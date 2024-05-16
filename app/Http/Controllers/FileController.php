@@ -34,7 +34,7 @@ class FileController extends Controller
         $views++;
         $file->views = $views;
         $file->save();
-        $host = request()->getHost();
+        $host = $request->getSchemeAndHttpHost();
         $download_url = $this->sign_hembed_url("{$host}/file/{$file->id}/{$file->title}.{$file->extension}", env('HEMBED_TOKEN'), 43200);
         return view('file.show', compact('file', 'download_url'));
     }
