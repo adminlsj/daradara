@@ -7,7 +7,7 @@
 @section('content')
 
 <div class="filebox-wrapper" style="max-height: 100%; height: auto;">
-	<div style="color: #a3a3a3; font-weight: 300;">{{ App\Helper::getSize($file->size) }}&nbsp;&nbsp;&nbsp;{{ Carbon\Carbon::parse($file->created_at)->format('Y-m-d') }}</div>
+	<div style="color: #a3a3a3; font-weight: 300;">{{ $file->user->name }}&nbsp;&nbsp;&nbsp;{{ Carbon\Carbon::parse($file->created_at)->format('Y-m-d') }}&nbsp;&nbsp;&nbsp;{{ App\Helper::getSize($file->size) }}</div>
 	<div style="color: #d6d6d6; font-size: 22px; font-weight: 400; margin-top: 5px;">{{ $file->title }}.{{ $file->extension }}</div>
 
 
