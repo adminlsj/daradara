@@ -25,7 +25,7 @@ class Helper
         return substr($string, $ini, $len);
     }
 
-    public static function getSize(int $size){
+    public static function getSize($size){
         if ($size < 1000) {
             return $size.' Bytes';
         } elseif (($size = $size / 1000) < 1000) {

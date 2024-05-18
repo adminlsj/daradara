@@ -19,7 +19,7 @@ class CreateFilesTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('title');
             $table->string('extension');
-            $table->integer('size');
+            $table->bigint('size');
             $table->string('url');
             $table->integer('views');
             $table->integer('downloads');
