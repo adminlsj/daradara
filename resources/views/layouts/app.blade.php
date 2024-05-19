@@ -14,10 +14,10 @@
         <link rel="canonical" href="https://swiftshare.me{{ Request::getRequestUri() }}" />
     @show
 
-    <meta name="title" content="SwiftShare.me - Share in a Swift.">
-    <title>SwiftShare.me - Share in a Swift.</title>
+    <meta name="title" content="daradara.me">
+    <title>daradara.me</title>
     <meta name="description" 
-          content="Upload, Store, Download. All in a Swift.">
+          content="daradara.me">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -34,7 +34,7 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 </head>
-<body style="overflow: hidden;">
+<body>
     @yield('nav')
 
     @if ($errors->any())

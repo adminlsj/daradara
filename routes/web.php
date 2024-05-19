@@ -12,16 +12,11 @@
 */
 
 Route::get('/', 'HomeController@index');
-Route::get('/subscribe', 'HomeController@subscribe')->name('subscribe.store');
+Route::get('/anime/{anime}/{title?}', 'AnimeController@show')->name('anime.show');
 
 Auth::routes();
 Route::get('auth/{provider}', 'Auth\LoginController@redirectToProvider');
 Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
-
-Route::get('/users/{user}/files', 'FileController@index')->name('file.index');
-Route::post('/users/{user}/file', 'FileController@store')->name('file.store');
-Route::get('/{file}/{title?}', 'FileController@show')->name('file.show');
-
 Route::resource('user', 'UserController')->only(['edit', 'update']);
 
 Route::group(['middleware' => 'admin'], function () {
