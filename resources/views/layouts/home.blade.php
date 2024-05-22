@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('nav')
-	<a href="/">Home</a>
+	@include('layouts.nav')
 @endsection
 
 @section('content')

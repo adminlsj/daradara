@@ -16,8 +16,9 @@ html, body {
 }
 
 body {
-  /* font-family: IBM Plex Sans Arabic, sans-serif !important;
-  overflow-x: hidden; 
+  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,MsJengHeiFix,Microsoft JhengHei,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+  font-weight: 400;
+  /* overflow-x: hidden; 
   background-color: #141416; 
   background-image: url('https://pbs.twimg.com/media/GNSvTanWsAA8kLD?format=png&name=small'); 
   background-repeat: repeat; 
@@ -50,6 +51,16 @@ th, td {
   font-weight: 300; 
   color: white; 
   font-size: 16px;
+}
+
+.navbar {
+  background-color: #18212B;
+  border-radius: 0px;
+}
+
+.nav-item {
+  line-height: 75px;
+  text-decoration: none;
 }
 
 .footer {
