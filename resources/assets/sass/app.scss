@@ -1,0 +1,175 @@
+
+// Fonts
+@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
+@import url("https://fonts.googleapis.com/css?family=Noto+Sans+TC");
+
+@import "helper";
+@import "modal";
+
+// Bootstrap
+$bootstrap-sass-asset-helper: false !default;
+$icon-font-path: if($bootstrap-sass-asset-helper, "bootstrap/", "../../fonts/bootstrap/") !default;
+@import "~bootstrap-sass/assets/stylesheets/bootstrap";
+
+html, body {
+    max-width: 100%;
+}
+
+body {
+  /* font-family: IBM Plex Sans Arabic, sans-serif !important;
+  overflow-x: hidden; 
+  background-color: #141416; 
+  background-image: url('https://pbs.twimg.com/media/GNSvTanWsAA8kLD?format=png&name=small'); 
+  background-repeat: repeat; 
+  height: 100vh; */
+}
+
+table, th, td {
+  border: 1px solid dimgray;
+}
+
+th {
+  font-weight: bold;
+}
+
+th, td {
+  padding: 10px;
+}
+
+.nav {
+  position:fixed;
+  top:0;
+  width:100%;
+  z-index:100;
+  padding: 0 13.6%;
+  height: 77px;
+  line-height: 77px;
+}
+
+.nav a div {
+  font-weight: 300; 
+  color: white; 
+  font-size: 16px;
+}
+
+.footer {
+  position:fixed; 
+  bottom:0; 
+  width:100%; 
+  z-index:100; 
+  padding: 0 13.6%; 
+  height: 70px; 
+  line-height: 70px; 
+  text-align: left;
+}
+
+.filebox-wrapper {
+  margin: 0; 
+  position: absolute; 
+  top: 50%; 
+  left: 50%; 
+  transform: translate(-50%, -50%); 
+  text-align: center; 
+  height: 60vh; 
+  width: 500px; 
+  background-color: #232325; 
+  border-radius: 8px; 
+  padding: 20px;
+}
+
+.filebox {
+  outline-style: dotted; 
+  margin-top: 15px; 
+  height: calc(100% - 78px); 
+  position: relative; 
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.filebox:hover {
+  background-color: #1F1F1F;
+}
+
+.auth {
+  padding: 0 13.6%;
+  color: white !important;
+  padding-top: 70px !important;
+}
+
+@media screen and (min-width: 768px) { 
+  .modal {
+    text-align: center;
+  }
+  
+  .modal:before {
+    display: inline-block;
+    vertical-align: middle;
+    content: " ";
+    height: 100%;
+  }
+
+  .modal-dialog {
+    display: inline-block;
+    text-align: left;
+    vertical-align: middle;
+    max-height: calc(100vh - 60px);
+  }
+
+  .modal-body {
+    /* 100% = dialog height, 120px = header + footer */
+    max-height: calc(100vh - 200px);
+    overflow-y: scroll;
+  }
+
+  .comment-reply-reply-form-wrapper .comment-text {
+    margin-left: 5px;
+  }
+}
+
+
+#subscribeModal input[type=text], #subscribeModal input[type=email] {
+  width: 100%;
+  height: 40px;
+  border: 0.5px solid #e9e9e9;
+  -webkit-appearance: none;
+  box-shadow: inset 0px 0px 0px 0px red;
+  border-radius: 3px;
+  padding-left: 7px;
+}
+
+@media (max-width: 991px) {
+  .nav, .footer, .auth {
+    padding: 0 5%;
+  }
+
+  .filebox-wrapper {
+    width: 90vw;
+  }
+}
+
+@media (max-width: 767.9px) {
+  .hidden-sm {
+    display: none;
+  }
+
+  .modal {
+    padding: 0 !important; // override inline padding-right added from js
+  }
+  .modal .modal-dialog {
+    width: 100%;
+    max-width: none;
+    height: 100%;
+    margin: 0;
+    top: 0 !important;
+    left: 0 !important; 
+  }
+  .modal .modal-content {
+    height: 100%;
+    border: 0;
+    border-radius: 0;
+  }
+  .modal .modal-body {
+    height: calc(100% - 129px);
+    overflow-y: scroll;
+  }
+}

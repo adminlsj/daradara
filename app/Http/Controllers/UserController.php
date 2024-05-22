@@ -1,0 +1,471 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\User;
+use App\Video;
+use App\Watch;
+use App\Save;
+use App\Like;
+use App\Subscribe;
+use App\Playlist;
+use App\Playitem;
+use Illuminate\Http\Request;
+use Image;
+use Auth;
+use Redirect;
+use Carbon\Carbon;
+use App\Helper;
+use Illuminate\Support\Facades\Storage;
+
+class UserController extends Controller
+{
+    public function __construct()
+    {
+        $this->middleware('auth')->only('edit', 'update', 'destroy', 'indexPlaylist', 'storeAvatar');
+        $this->middleware('sameUser')->only('edit', 'update', 'destroy', 'storeAvatar', 'userEditUpload', 'userUpdateUpload');
+    }
+
+    public function edit(Request $request, User $user)
+    {
+        return view('user.edit', compact('user'));
+    }
+
+    public function update(Request $request, User $user)
+    {
+        $type = $request->type;
+
+        if ($type == 'photo') {
+            return back()->withErrors(['error' => '圖片上傳失敗']);
+
+            /* $original = $request->file('photo');
+            $image = Image::make($original);
+            $image = $image->fit(300, 300);
+            $image = $image->stream();
+            $pvars = array('image' => base64_encode($image));
+
+            $curl = curl_init();
+            curl_setopt($curl, CURLOPT_URL, 'https://api.imgur.com/3/image.json');
+            curl_setopt($curl, CURLOPT_TIMEOUT, 30);
+            curl_setopt($curl, CURLOPT_HTTPHEADER, array('Authorization: Client-ID ' . '072cefc76176835'));
+            curl_setopt($curl, CURLOPT_POST, 1);
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($curl, CURLOPT_POSTFIELDS, $pvars);
+            $out = curl_exec($curl);
+            curl_close ($curl);
+            $pms = json_decode($out, true);
+            $url = $pms['data']['link'];
+
+            if ($url != "") {
+                $avatar = str_replace('.jpg', 'b.jpg', $url);
+                $avatar = str_replace('.png', 'b.png', $avatar);
+                $user->avatar_temp = $avatar;
+                $user->save();
+            } else {
+                return back()->withErrors(['error' => '圖片上傳失敗']);
+            } */
+
+        } elseif ($type == 'profile') {
+
+            $this->validate(request(), [
+                'name' => 'required|string|max:255',
+                'email' => 'required|string|email|max:255|unique:users,email,'.$user->id
+            ]);
+
+            $name = strtolower(request('name'));
+            if (strpos($name, 'ye9x') === false && strpos($name, 'ai129') === false) {
+
+                $user->name = request('name');
+                $user->email = request('email');
+                $user->save();
+
+            } else {
+                abort(403);
+            }
+
+        } elseif ($type == 'password') {
+
+            $this->validate(request(), [
+                'password_new' => 'required|string|min:6',
+                'password_new_confirm' => 'required|string|min:6|same:password_new',
+                'password_old' => ['required', function ($attribute, $value, $fail) use ($user) {
+                    if (!\Hash::check($value, $user->password)) {
+                        return $fail(__('舊密碼錯誤'));
+                    }
+                }],
+            ], [
+                'password_new_confirm.same' => '新密碼 與 確認新密碼 不相符',
+            ]);
+
+            $user->password = bcrypt(request('password_new'));
+            $user->save();
+
+        }
+
+        return back()->withErrors(['success' => '已成功更新帳戶資料']);;
+    }
+
+    public function userEditUpload(User $user, Request $request)
+    {
+        if (in_array($user->id, [1, 6944])) {
+            $watches = $user->watches;
+            return view('user.upload', compact('user', 'watches'));
+        } else {
+            return view('user.verify', compact('user'));
+        }
+    }
+
+    public function userUpdateUpload(User $user, Request $request)
+    {
+        if ($request->type == 'playlist') {
+            $watch = Watch::create([
+                'user_id' => $user->id,
+                'title' => $request->title,
+                'description' => $request->description,
+            ]);
+            return Redirect::route('user.userEditUpload', ['user' => $user, 'watches' => $user->watches()]);
+
+        } elseif ($request->type == 'video') {
+
+            if (request()->file('image')) {
+
+                $sd = $foreign_sd = request('foreign_sd');
+                if (strpos($foreign_sd, 'spankbang') !== false) {
+                    $sd = Video::getSpankbang($foreign_sd, implode(' ', preg_split('/\s+/', request('tags'))));
+                    $foreign_sd = ['spankbang' => $foreign_sd];
+
+                } elseif (strpos($foreign_sd, 'youjizz') !== false) {
+                    $sd = Video::getYoujizz($foreign_sd);
+                    $foreign_sd = ['youjizz' => $foreign_sd];
+
+                }
+
+                $tags = implode(' ', preg_split('/\s+/', request('tags')));
+                $tags_array = [];
+                foreach (explode(' ', $tags) as $tag) {
+                    $tags_array[$tag] = 10;
+                }
+
+                $video = Video::create([
+                    'user_id' => $user->id,
+                    'playlist_id' => 8876,
+                    'title' => request('title'),
+                    'translations' => ['JP' => request('translations')],
+                    'caption' => request('description'),
+                    'sd' => $sd,
+                    'imgur' => 'temp',
+                    'tags' => $tags,
+                    'tags_array' => $tags_array,
+                    'views' => 0,
+                    'outsource' => false,
+                    'created_at' => Carbon::createFromFormat('Y-m-d\TH:i:s', request('created_at'))->format('Y-m-d H:i:s'),
+                    'uploaded_at' => Carbon::createFromFormat('Y-m-d\TH:i:s', request('created_at'))->format('Y-m-d H:i:s'),
+                    'foreign_sd' => $sd == $foreign_sd ? null : $foreign_sd,
+                    'cover' => request('cover'),
+                    'uncover' => strpos(request('cover'), 'E6mSQA2') !== false ? true : false,
+                ]);
+
+                if ($artist = User::where('name', request('artist'))->where('email', 'ilike', '%freemail.hu%')->first()) {
+                    $video->user_id = $artist->id;
+                    $video->artist = $artist->name;
+                }
+                if ($playlist = Watch::where('user_id', $artist->id)->where('title', request('playlist'))->first()) {
+                    $video->playlist_id = $playlist->id;
+                }
+                if ($genre = request('genre')) {
+                    $video->genre = $genre;
+                } elseif ($previous = Video::where('user_id', $video->user_id)->first()) {
+                    $video->genre = $previous->genre;
+                }
+
+                if ($avbebe = request('avbebe')) {
+                    $temp = $video->foreign_sd;
+                    $temp["avbebe"] = $avbebe;
+                    $video->foreign_sd = $temp;
+                    $video->save();
+                }
+                if ($spankbang = request('spankbang')) {
+                    $temp = $video->foreign_sd;
+                    $temp["spankbang"] = $spankbang;
+                    $video->foreign_sd = $temp;
+                    $video->save();
+                }
+
+                if (strpos($video->sd, 'vbalancer') !== false) {
+                    Video::addBalancerSource(str_replace('vbalancer-', '', $video->sd), request('quality'), $video->id, request('sc') ? 1 : 0);
+                } elseif (strpos($video->sd, 'cdn77') !== false) {
+                    Video::addCdn77Source(request('quality'), $video->id, request('sc') ? 1 : 0);
+                } elseif (strpos($video->sd, 'sb-cd.com') !== false && request('spankbang')) {
+                    $temp = $video->qualities;
+                    $temp[request('quality')] = $video->sd;
+                    $video->qualities = $temp;
+                    $video->sd = null;
+                }
+
+                $id = $video->id;
+                $original = request()->file('image');
+                $huge = Image::make($original)
+                            ->fit(1024, 576)
+                            ->stream('jpg', 80);
+                Storage::disk('s3')->put("image/thumbnail/{$id}h.jpg", $huge);
+                $large = Image::make($original)
+                            ->fit(640, 360)
+                            ->stream('jpg', 80);
+                Storage::disk('s3')->put("image/thumbnail/{$id}l.jpg", $large);
+
+                $filename = explode('.jpg', substr($video->cover, strrpos($video->cover, '/') + 1))[0].'.jpg';
+                $url = 'vdownload.hembed.com';
+                $expiration = time() + 2629743;
+                $token = 'xVEO8rLVgGkUBEBg';
+                $source = '/image/cover/'.$filename;
+                $video->cover = Video::getSignedUrlParameter($url, $source, $token, $expiration);
+                $video->imgur = $video->id;
+
+                $searchtext = $video->title.'|'.$video->translations['JP'].'|'.implode('|', array_keys($video->tags_array)).'|'.$video->genre.'|'.$video->artist;
+                if ($video->foreign_sd != null && array_key_exists('characters', $video->foreign_sd)) {
+                    $searchtext = $searchtext.$video->foreign_sd['characters'];
+                }
+                $video->searchtext = mb_strtolower(preg_replace('/\s+/', '', $searchtext), 'UTF-8');
+
+                $video->save();
+
+                return Redirect::route('video.watch', ['v' => $video->id]);
+
+            } else {
+                return Redirect::back()->withErrors('封面圖片上傳失敗，請重新上傳。');
+            }
+            
+        } else {
+            return Redirect::back()->withErrors('封面圖片上傳失敗，請重新上傳。');
+        }
+    }
+
+    public function indexPlaylist(Request $request)
+    {
+        $user = Auth::user();
+
+        $saves = Save::with(['video' => function($query) {
+            $query->where('cover', '!=', null)->select('id', 'title', 'cover', 'imgur');
+        }])->where('user_id', $user->id)->orderBy('created_at', 'desc')->limit(21)->get();
+
+        $likes = Like::where('user_id', $user->id)->where('foreign_type', 'video')->orderBy('created_at', 'desc')->limit(21)->get()->load(['video' => function ($query) {
+            $query->where('cover', '!=', null)->select('id', 'title', 'cover', 'imgur');
+        }]);
+
+        $subscribes_users = Subscribe::where('user_id', $user->id)->pluck('artist_id');
+        $subscribes = Video::with('user:id,name')->whereIn('genre', Video::$genre)->whereIn('user_id', $subscribes_users)->orderBy('created_at', 'desc')->select('id', 'user_id', 'title', 'cover', 'imgur', 'views', 'duration')->limit(21)->get();
+        $artists = Subscribe::with(['artist' => function($query) {
+            $query->select('id', 'name', 'created_at', 'updated_at', 'avatar_temp')->withCount('videos');
+        }])->where('user_id', $user->id)->orderBy('created_at', 'desc')->limit(21)->get();
+
+        $playlists = Playlist::withCount('videos', 'videos_ref')->with([
+            'videos' => function($query) {
+                $query->select('videos.id', 'cover', 'imgur')->orderBy('playitems.created_at', 'desc')->limit(1);
+            },
+            'videos_ref' => function($query) {
+                $query->select('videos.id', 'cover', 'imgur')->orderBy('playitems.created_at', 'desc')->limit(1);
+            },
+            'user' => function($query) {
+                $query->select('users.id', 'name');
+            },
+            'user_ref' => function($query) {
+                $query->select('users.id', 'name');
+            },
+            'playlist_ref' => function($query) {
+                $query->select('id', 'title', 'description');
+            }
+        ])->where('user_id', $user->id)->orderBy('created_at', 'desc')->limit(200)->get();
+
+        return view('playlist.index', compact('user', 'saves', 'likes', 'playlists', 'subscribes', 'artists'));
+    }
+
+    public function showPlaylist(Request $request)
+    {
+        $user = auth()->user();
+        $pid = $request->list;
+        $title = '播放清單';
+        $sub = '分類';
+        $description = null;
+        $editable = false;
+        $count = 0;
+        $playlist = null;
+
+        if ($pid == 'WL' && auth()->check()) {
+            $results = Save::with(['video' => function($query) {
+                $query->where('cover', '!=', null)->select('id', 'title', 'cover', 'imgur');
+            }])->where('user_id', $user->id)->orderBy('created_at', 'desc')->paginate(42);
+            $title = '稍後觀看';
+            $count = $results->total();
+            $editable = true;
+
+        } elseif ($pid == 'LL' && auth()->check()) {
+            $results = Like::with(['video' => function($query) {
+                $query->where('cover', '!=', null)->select('id', 'title', 'cover', 'imgur');
+            }])->where('user_id', $user->id)->where('foreign_type', 'video')->orderBy('created_at', 'desc')->paginate(42);
+            $title = '喜歡的影片';
+            $count = $results->total();
+            $editable = true;
+
+        } elseif ($pid == 'SL' && auth()->check()) {
+            $results = Subscribe::with(['artist' => function($query) {
+                $query->select('id', 'name', 'created_at', 'updated_at', 'avatar_temp')->withCount('videos');
+            }])->where('user_id', $user->id)->orderBy('created_at', 'desc')->paginate(42);
+            $title = '訂閱的作者';
+            $count = $results->total();
+            $editable = true;
+            $doujin = false;
+            return view('playlist.show-artist', compact('results', 'title', 'sub', 'description', 'doujin', 'pid', 'editable', 'count', 'playlist'));
+
+        } elseif (is_numeric($pid) && $playlist = Playlist::find($pid)) {
+            if ($playlist->reference_id) {
+                return Redirect::route('playlist.show', ['list' => $playlist->reference_id]);
+            }
+            $results = Playitem::with(['video' => function($query) {
+                $query->where('cover', '!=', null)->select('id', 'title', 'cover', 'imgur');
+            }])->where('playlist_id', $playlist->id)->orderBy('created_at', 'desc')->paginate(42);
+            $title = $playlist->title;
+            $description = $playlist->description;
+            $count = $results->total();
+            $editable = $user && $user->id == $playlist->user_id ? true : false;
+
+        } else {
+            abort(404);
+        }
+
+        $doujin = false;
+
+        return view('playlist.show', compact('results', 'title', 'sub', 'description', 'doujin', 'pid', 'editable', 'count', 'playlist'));
+    }
+
+    public function createPlaylist(Request $request)
+    {
+        $user = Auth::user();
+
+        $request->validate([
+            'playlist-title' => 'required|string|max:255',
+        ]);
+
+        $playlist = Playlist::create([
+            'user_id' => $user->id,
+            'title' => request('playlist-title'),
+            'description' => request('playlist-description'),
+            'is_private' => true,
+        ]);
+
+        $playitem = Playitem::create([
+            'user_id' => $user->id, 
+            'playlist_id' => $playlist->id, 
+            'video_id' => request('create-playlist-video-id'),
+        ]);
+
+        $first = false;
+        $id = $playlist->id;
+        $checked = true;
+        $title = $playlist->title;
+        $private = false;
+        $checkbox = '';
+        $checkbox .= view('video.playlist-checkbox', compact('first', 'id', 'checked', 'title', 'private'));
+
+        $save_icon = 'playlist_add_check';
+        $save_text = '已儲存';
+        $save_btn = '';
+        $save_btn .= view('video.saveBtn-new', compact('save_icon', 'save_text'));
+
+        return response()->json([
+            'checkbox' => $checkbox,
+            'saveBtn' => $save_btn,
+            'csrf_token' => csrf_token(),
+        ]);
+    }
+
+    public function addPlaylist(Request $request)
+    {
+        $user = Auth::user();
+        $pid_ref = request('playlist-reference-id');
+
+        if (is_numeric($pid_ref) && $playlist_ref = Playlist::find($pid_ref)) {
+
+            if ($playlist = Playlist::where('user_id', $user->id)->where('reference_id', $playlist_ref->id)->first()) {
+                $playlist->delete();
+                $exists = false;
+
+            } else {
+                $playlist = Playlist::create([
+                    'user_id' => $user->id,
+                    'reference_id' => $playlist_ref->id,
+                    'reference_user_id' => $playlist_ref->user_id,
+                    'title' => 'Reference',
+                ]);
+                $exists = true;
+            }
+
+            $add_btn = '';
+            $add_btn .= view('playlist.add-btn', compact('exists'));
+
+            return response()->json([
+                'add_btn' => $add_btn,
+                'csrf_token' => csrf_token(),
+            ]);
+
+        } else {
+            abort(404);
+        }
+    }
+
+    public function updatePlaylist(Request $request, Playlist $playlist)
+    {
+        if (auth()->check() && auth()->user()->id == $playlist->user_id) {
+
+            if (request('playlist-delete')) {
+                $playlist->delete();
+                return Redirect::route('playlist.index');
+
+            } else {
+                $request->validate([
+                    'playlist-title' => 'required|string|max:255',
+                ]);
+                $playlist->title = request('playlist-title');
+                $playlist->description = request('playlist-description');
+                $playlist->save();
+                return Redirect::back();
+            }
+
+        } else {
+            abort(403);
+        }
+    }
+
+    public function deletePlayitem(Request $request)
+    {
+        $user = auth()->user();
+        $playlist_id = request('playlist_id');
+        $video_id = request('video_id');
+        $count = request('count');
+
+        if ($playlist_id == 'WL' && $save = Save::where('user_id', $user->id)->where('video_id', $video_id)->first()) {
+            $save->delete();
+            $count--;
+
+        } elseif ($playlist_id == 'LL' && $like = Like::where('user_id', $user->id)->where('foreign_id', $video_id)->where('foreign_type', 'video')->first()) {
+            $like->delete();
+            $count--;
+
+        } elseif ($playlist_id == 'SL' && $subscribe = Subscribe::where('user_id', $user->id)->where('artist_id', $video_id)->first()) {
+            $subscribe->delete();
+            $count--;
+
+        } elseif (is_numeric($playlist_id) && $playitem = Playitem::where('user_id', $user->id)->where('playlist_id', $playlist_id)->where('video_id', $video_id)->first()) {
+            $playitem->delete();
+            $count--;
+
+        } else {
+            abort(404);
+        }
+
+        return response()->json([
+            'video_id' => $video_id,
+            'count' => $count,
+            'csrf_token' => csrf_token(),
+        ]);
+    }
+}
