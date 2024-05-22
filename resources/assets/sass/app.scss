@@ -7,8 +7,11 @@
 @import "modal";
 
 // Bootstrap
+<<<<<<< HEAD
+=======
 $bootstrap-sass-asset-helper: false !default;
 $icon-font-path: if($bootstrap-sass-asset-helper, "bootstrap/", "../../fonts/bootstrap/") !default;
+>>>>>>> main
 @import "~bootstrap-sass/assets/stylesheets/bootstrap";
 
 html, body {
