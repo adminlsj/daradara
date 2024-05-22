@@ -479,8 +479,6 @@ th {
   }
 }
 
-<<<<<<< HEAD
-=======
 @font-face {
   font-family: "Glyphicons Halflings";
   src: url(/fonts/vendor/bootstrap-sass/bootstrap/glyphicons-halflings-regular.eot?f4769f9bdb7466be65088239c12046d1);
@@ -1548,7 +1546,6 @@ th {
   content: "\E260";
 }
 
->>>>>>> main
 * {
   box-sizing: border-box;
 }
