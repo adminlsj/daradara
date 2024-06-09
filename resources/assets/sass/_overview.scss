@@ -1,0 +1,23 @@
+.overview{
+    display: flex;
+    flex-direction: row;
+    margin: 0 10%;
+}
+
+.long-des{
+    margin-right: 5%;
+    padding: 1% 1%;
+    width: 40%;
+    border: 1px solid none;
+    background-color: lightgray;
+}
+
+.long-des p{
+    line-height: 1.7;
+}
+
+.intro{
+    padding: 1% 1%;
+    border: 1px solid none;
+    background-color: lightgray;
+}
