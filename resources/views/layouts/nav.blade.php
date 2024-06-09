@@ -25,7 +25,7 @@
         </a>
     </div>
 </nav>
-
+ 
 <nav class="navbar" style="height: 44px; line-height: 44px; font-size: 16px;">
     <div style="max-width: 1260px; margin: auto; padding-left: 7px; padding-right: 12px;">
         <div class="dropdown" style="display: inline-block; padding: 0 15px;">

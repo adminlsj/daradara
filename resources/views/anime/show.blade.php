@@ -1,10 +1,18 @@
 @extends('layouts.app')
 
 @section('nav')
-	<a href="/">Home</a>
+    @include('layouts.nav')
 @endsection
 
-@section('content')
-    <h3>{{ $anime->title_ch }}</h1>
-    <p>{{ $anime->description }}</p>
+@section('content') 
+    @include('layouts.banner')
+    @include('layouts.headings')
+
+    <hr>
+
+    @include('layouts.tab')
+
+    <hr>
+
+    @include('layouts.overview')
 @endsection

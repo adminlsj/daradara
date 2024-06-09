@@ -162,6 +162,170 @@
           filter: brightness(120%);
 }
 
+.navbar {
+  align-items: center;
+  justify-content: space-between;
+  background-color: #6c7881;
+  padding: 0 20%;
+}
+
+.search-form {
+  align-items: center;
+}
+
+.toggle-mode-button {
+  background-color: black;
+  color: white;
+  border-radius: 10px;
+}
+
+img {
+  width: 100%;
+  max-height: 300px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  margin-top: -50px;
+}
+
+.headings {
+  margin: 0 10%;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.cover img {
+  border-style: solid;
+  border-width: 2px;
+  border-color: black;
+}
+
+.short-des {
+  padding-left: 30px;
+}
+
+.title p {
+  font-size: larger;
+}
+
+.authors {
+  display: flex;
+  flex-direction: row;
+}
+
+.authors #director {
+  padding: 0 50px;
+}
+
+.genres {
+  display: flex;
+  flex-direction: row;
+}
+
+.genres p {
+  margin-top: 5px;
+}
+
+.genres ul {
+  display: flex;
+  flex-direction: row;
+  padding: 0 15px;
+  list-style-type: none;
+}
+
+.genres a:link,
+a:visited {
+  background-color: #f44336;
+  color: white;
+  padding: 4px 10px;
+  margin: 0 5px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 10px;
+}
+
+.genres a:hover {
+  color: black;
+}
+
+.button-groups {
+  margin-left: 300px;
+  margin-top: 10px;
+}
+
+.button-groups button {
+  background-color: #5a5656;
+  border: none;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;
+  border-radius: 50%;
+}
+
+.tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+}
+
+button:hover .tooltiptext {
+  visibility: visible;
+}
+
+.tab {
+  display: flex;
+  justify-content: center;
+}
+
+.tab button {
+  padding: 10px 20px;
+  margin: 0 30px;
+  background-color: transparent;
+  border: none;
+  border-bottom: 5px solid transparent;
+  display: inline-block;
+}
+
+.tab button:hover {
+  color: blue;
+  border-bottom: 5px solid blue;
+  transition: 0.5s;
+}
+
+.overview {
+  display: flex;
+  flex-direction: row;
+  margin: 0 10%;
+}
+
+.long-des {
+  margin-right: 5%;
+  padding: 1% 1%;
+  width: 40%;
+  border: 1px solid none;
+  background-color: lightgray;
+}
+
+.long-des p {
+  line-height: 1.7;
+}
+
+.intro {
+  padding: 1% 1%;
+  border: 1px solid none;
+  background-color: lightgray;
+}
+
 /*!
  * Bootstrap v3.4.1 (https://getbootstrap.com/)
  * Copyright 2011-2019 Twitter, Inc.
