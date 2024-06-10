@@ -1,10 +1,14 @@
-.overview{
+a {
+    color: blue !important;
+}
+
+.overview {
     display: flex;
     flex-direction: row;
     margin: 0 10%;
 }
 
-.long-des{
+.long-des {
     margin-right: 5%;
     padding: 1% 1%;
     width: 40%;
@@ -12,11 +16,32 @@
     background-color: lightgray;
 }
 
-.long-des p{
-    line-height: 1.7;
+.long-des pre {
+    background-color: transparent;
+    border: none;
+    line-height: 1.55;
 }
 
-.intro{
+.intro {
+    padding: 1% 1%;
+    border: 1px solid none;
+    background-color: lightgray;
+}
+
+.trailer {
+    margin: 30px 0;
+    padding: 1% 1%;
+    border: 1px solid none;
+    background-color: lightgray;
+}
+
+.volumes{
+    padding: 1% 1%;
+    border: 1px solid none;
+    background-color: lightgray;
+}
+
+.awards{
     padding: 1% 1%;
     border: 1px solid none;
     background-color: lightgray;
