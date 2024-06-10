@@ -44959,36 +44959,6 @@ $('.search-type-button').click(function () {
   $("#sort").val('');
   $('form#hentai-form').submit();
 });
-$('#search-btn').click(function () {
-  $('form#hentai-form').submit();
-});
-$('.play-btn').click(function () {
-  dp.play();
-});
-$('#playModal').on('hidden.bs.modal', function () {
-  dp.pause();
-});
-$('div#main-nav-home-mobile').on("submit", "form#search-form", function (e) {
-  e.preventDefault(e);
-  var query = $('#nav-query').val();
-  $('#hentai-form #query').val(query);
-  $('form#hentai-form').submit();
-});
-$('#nav-search-btn').click(function () {
-  var query = $('#nav-query').val();
-  $('#hentai-form #query').val(query);
-  $('form#hentai-form').submit();
-});
-$('[id=database-search-btn]').click(function (e) {
-  var column = $('#column').find(":selected").text();
-  var expression = $('#expression').find(":selected").text();
-  var query = $('#dbquery').val();
-  var urlParams = new URLSearchParams(window.location.search);
-  urlParams.set('column', column);
-  urlParams.set('expression', expression);
-  urlParams.set('dbquery', query);
-  window.location.href = window.location.href.split('?')[0] + '?' + urlParams;
-});
 $('[class=database-column]').click(function (e) {
   var sort = $(this).data('sort');
   var urlParams = new URLSearchParams(window.location.search);
@@ -45071,77 +45041,6 @@ setTimeout(function () {
 }, 5000);
 $('form').submit(function () {
   $(this).find('button[type=submit]').prop('disabled', true);
-});
-$('div#subscribe-panel').on("submit", "form#subscribe-form", function (e) {
-  $.ajaxSetup({
-    header: $('meta[name="_token"]').attr('content')
-  });
-  e.preventDefault(e);
-  $.ajax({
-    type: "POST",
-    url: $(this).attr("action"),
-    data: $(this).serialize(),
-    dataType: 'json',
-    success: function success(data) {
-      $("div#subscribe-panel").html(data.unsubscribe_btn);
-      $("span#subscribes-count").html(parseInt($("span#subscribes-count").html()) + 1);
-    },
-    error: function error(xhr, ajaxOptions, thrownError) {
-      $("#subscribe-panel").html(xhr.responseText);
-    }
-  });
-});
-$('div#subscribe-panel').on("submit", "form#unsubscribe-form", function (e) {
-  $.ajaxSetup({
-    header: $('meta[name="_token"]').attr('content')
-  });
-  e.preventDefault(e);
-  $.ajax({
-    type: "POST",
-    url: $(this).attr("action"),
-    data: $(this).serialize(),
-    dataType: 'json',
-    success: function success(data) {
-      $("div#subscribe-panel").html(data.subscribe_btn);
-      $("span#subscribes-count").html(parseInt($("span#subscribes-count").html()) - 1);
-    },
-    error: function error(xhr, ajaxOptions, thrownError) {
-      $("#subscribe-panel").html(xhr.responseText);
-    }
-  });
-});
-$('[id=switch-login-modal]').click(function (e) {
-  $('#signUpModal').modal('hide');
-  $('#loginModal').modal('show');
-});
-$('[id=switch-signup-modal]').click(function (e) {
-  $('#loginModal').modal('hide');
-  $('#signUpModal').modal('show');
-});
-$('#genre-modal-trigger').click(function (e) {
-  var genre_left = $(this).offset().left;
-  $('#genre-modal .modal-dialog').css('left', genre_left - 1);
-});
-$('#sort-modal-trigger').click(function (e) {
-  var sort_left = $(this).offset().left;
-  $('#sort-modal .modal-dialog').css('left', sort_left);
-});
-$('#date-modal-trigger').click(function (e) {
-  var date_left = $(this).offset().left;
-  $('#date-modal .modal-dialog').css('left', date_left);
-});
-$('#duration-modal-trigger').click(function (e) {
-  var duration_left = $(this).offset().left;
-  $('#duration-modal .modal-dialog').css('left', duration_left);
-});
-$('.comic-random-nav-item').click(function (e) {
-  $.ajax({
-    type: 'GET',
-    url: '/getRandomComic',
-    success: function success(data) {
-      window.location.href = '/comic/' + data.id;
-    }
-  });
 });
 $(document).ready(function () {
   $('#defaultOpen').click();
