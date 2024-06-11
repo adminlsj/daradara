@@ -2,16 +2,29 @@ a {
     color: blue !important;
 }
 
-.overview {
+#overview {
     display: flex;
     flex-direction: row;
+    justify-content: flex-start;
     margin: 0 10%;
 }
 
-.long-des {
+.description{
+    display: flex;
+    flex-direction: column;
     margin-right: 5%;
-    padding: 1% 1%;
-    width: 40%;
+    padding: 0 1%;
+    max-width: 20%;
+}
+
+.ranking-seasonal, .ranking-following, .ranking-all {
+    margin-bottom: 15px;
+    padding: 2%;
+    border: 1px solid none;
+    background-color: lightgray;
+}
+
+.long-des {
     border: 1px solid none;
     background-color: lightgray;
 }
@@ -21,6 +34,7 @@ a {
     border: none;
     line-height: 1.55;
 }
+
 
 .intro {
     padding: 1% 1%;
@@ -35,13 +49,13 @@ a {
     background-color: lightgray;
 }
 
-.volumes{
+.volumes {
     padding: 1% 1%;
     border: 1px solid none;
     background-color: lightgray;
 }
 
-.awards{
+.awards {
     padding: 1% 1%;
     border: 1px solid none;
     background-color: lightgray;

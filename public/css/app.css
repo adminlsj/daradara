@@ -294,28 +294,44 @@ button:hover .tooltiptext {
   border: none;
   border-bottom: 5px solid transparent;
   display: inline-block;
+  transition: 0.3s;
 }
 
-.tab button:hover {
-  color: blue;
-  border-bottom: 5px solid blue;
-  transition: 0.5s;
+.tab button:hover,
+.tab button.active {
+  color: red;
+  border-bottom: 5px solid red;
 }
 
 a {
   color: blue !important;
 }
 
-.overview {
+#overview {
   display: flex;
   flex-direction: row;
+  justify-content: flex-start;
   margin: 0 10%;
 }
 
-.long-des {
+.description {
+  display: flex;
+  flex-direction: column;
   margin-right: 5%;
-  padding: 1% 1%;
-  width: 40%;
+  padding: 0 1%;
+  max-width: 20%;
+}
+
+.ranking-seasonal,
+.ranking-following,
+.ranking-all {
+  margin-bottom: 15px;
+  padding: 2%;
+  border: 1px solid none;
+  background-color: lightgray;
+}
+
+.long-des {
   border: 1px solid none;
   background-color: lightgray;
 }
@@ -349,6 +365,79 @@ a {
   padding: 1% 1%;
   border: 1px solid none;
   background-color: lightgray;
+}
+
+a {
+  color: blue !important;
+}
+
+#episodes {
+  display: flex;
+  flex-direction: column;
+  margin: 0 10%;
+}
+
+.filter {
+  margin-bottom: 60px;
+}
+
+.filter .dropbtn {
+  background-color: lightgray;
+  padding: 8px;
+  font-size: 15px;
+  border: none;
+  cursor: pointer;
+}
+
+.filter .dropbtn:hover,
+.dropbtn:focus {
+  background-color: gray;
+}
+
+.filter .dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.filter .dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.videos {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.episode {
+  margin: 0px 50px 80px 0;
+}
+
+.episode img {
+  display: block;
+  height: 150px;
+  width: 230px;
+  border-radius: 5%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+a {
+  color: blue !important;
+}
+
+#characters {
+  display: flex;
+  flex-direction: column;
+  margin: 0 10%;
 }
 
 /*!
