@@ -10,10 +10,10 @@
     border: none;
     border-bottom: 5px solid transparent;
     display: inline-block;
+    transition: 0.3s;
 }
 
-.tab button:hover{
-    color: blue;
-    border-bottom: 5px solid blue;
-    transition: 0.5s;
+.tab button:hover, .tab button.active{
+    color: red;
+    border-bottom: 5px solid red;
 }

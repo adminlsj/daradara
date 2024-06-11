@@ -5,14 +5,16 @@
 @endsection
 
 @section('content') 
-    @include('layouts.banner')
-    @include('layouts.headings')
+    @include('layouts.show.banner')
+    @include('layouts.show.headings')
 
     <hr>
 
-    @include('layouts.tab')
+    @include('layouts.show.tab')
 
     <hr>
 
-    @include('layouts.overview')
+    @include('layouts.show.overview')
+    @include('layouts.show.episodes')
+    @include ('layouts.show.characters')
 @endsection
