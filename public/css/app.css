@@ -549,6 +549,16 @@ a {
   transition: 0.5s;
 }
 
+a {
+  color: blue !important;
+}
+
+#themes {
+  display: flex;
+  flex-direction: column;
+  margin: 0 10%;
+}
+
 /*!
  * Bootstrap v3.4.1 (https://getbootstrap.com/)
  * Copyright 2011-2019 Twitter, Inc.
