@@ -95,6 +95,4 @@ bangumi     4.5/5
             </div>
         </div>
     </div>
-    
-    
 </div>
