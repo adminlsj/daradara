@@ -1,1 +1,1 @@
-<img src="https://s1.locimg.com/2024/06/08/19435d7a85163.png" alt="為美好世界獻上祝福">
+<img src="https://i.meee.com.tw/ZY29fKK.png" alt="為美好世界獻上祝福">

@@ -57,4 +57,10 @@ a {
     width: 230px;
     border-radius: 5%;
     object-fit: cover;
+    transition: 0.5s;
+}
+
+.episode img:hover {
+    height: 165px;
+    width: 253px;
 }

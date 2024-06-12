@@ -74,19 +74,19 @@ bangumi     4.5/5
 
         <div class="videos">
             <div class="episode">
-                <img src="https://s1.locimg.com/2024/06/11/7ddb71b783c6d.png" alt="episode1">
+                <img src="https://i.meee.com.tw/wENTFYg.png" alt="episode1">
                 第一集 - 為光明的未來乾杯！
             </div>
             <div class="episode">
-                <img src="https://s1.locimg.com/2024/06/11/31d876aa8278b.png" alt="episode2">
+                <img src="https://i.meee.com.tw/OdCb0Mo.png" alt="episode2">
                 第二集 - 為這個中二病獻上爆焰！	
             </div>
             <div class="episode">
-                <img src="https://s1.locimg.com/2024/06/11/5bdb6d8ccfb0e.png" alt="episode3">
+                <img src="https://i.meee.com.tw/FdamS3v.png" alt="episode3">
                 第三集 - 以這隻右手偷取寶物！
             </div>
             <div class="episode">
-                <img src="https://s1.locimg.com/2024/06/11/3c53885f7d5e7.png" alt="episode4">
+                <img src="https://i.meee.com.tw/XsAqEri.png" alt="episode4">
                 第四集 - 為這名強敵施展爆裂魔法！
             </div>
         </div>
