@@ -1,4 +1,4 @@
-<div id="characters" class="tabcontent">
+<div id="staffs" class="tabcontent">
     <div class="description">
         <div class="ranking-seasonal">
             <strong>⭐ 季度排名 #1</strong>
@@ -61,40 +61,24 @@ bangumi     4.5/5
         </div>
     </div>
 
-    <div class="character-list">
-        <div class="character">
-            <div class="anime-character">
-                <a href=""><img src="https://i.meee.com.tw/QCVFECv.png" alt=""></a>
-                <a href="" class="name">佐藤和真</a>
-            </div>
-            <div class="voice-actor">
-                <a href="" class="name">福島潤</a>
-                <a href=""><img src="https://i.meee.com.tw/dfmxSke.png" alt=""></a>
-            </div>
+    <div class="staff-list">
+        <div class="staff">
+            <a href=""><img src="https://i.meee.com.tw/88xIE41.png" alt=""></a>
+            <a href="" class="name">曉夏目</a>
+            <p>原作</p>
         </div>
 
-        <div class="character">
-            <div class="anime-character">
-                <a href=""><img src="https://i.meee.com.tw/WA55PEI.png" alt=""></a>
-                <a href="" class="name">阿庫婭</a>
-            </div>
-            <div class="voice-actor">
-                <a href="" class="name">雨宮天</a>
-                <a href=""><img src="https://i.meee.com.tw/jQpwLlD.png" alt=""></a>
-            </div>
+        <div class="staff">
+            <a href=""><img src="https://i.meee.com.tw/r8n4MdU.png" alt=""></a>
+            <a href="" class="name">金崎貴臣</a>
+            <p>導演</p>
         </div>
 
-        <div class="character">
-            <div class="anime-character">
-                <a href=""><img src="https://i.meee.com.tw/OxMcrGA.png" alt=""></a>
-                <a href="" class="name">惠惠</a>
-            </div>
-            <div class="voice-actor">
-                <a href="" class="name">高橋李依</a>
-                <a href=""><img src="https://i.meee.com.tw/vVoSnIu.png" alt=""></a>
-            </div>
+        <div class="staff">
+            <a href=""><img src="https://i.meee.com.tw/zt1Hgvd.png" alt=""></a>
+            <a href="" class="name">三嶋黑音</a>
+            <p>人物原案</p>
         </div>
     </div>
-    
-    
+
 </div>
