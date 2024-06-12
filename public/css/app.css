@@ -477,7 +477,7 @@ a {
   margin-top: 0px;
 }
 
-.anime-character a {
+.anime-character .name {
   margin: 10px;
   float: inline-start;
   color: gray !important;
@@ -490,8 +490,60 @@ a {
   color: #f16565 !important;
 }
 
-.voice-actor a {
+.voice-actor .name {
   margin: 70px 10px 10px;
+  color: gray !important;
+  text-decoration: none !important;
+  transition: 0.5s;
+}
+
+a {
+  color: blue !important;
+}
+
+#staffs {
+  display: flex;
+  flex-direction: column;
+  margin: 0 10%;
+}
+
+.staff-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.staff {
+  background-color: lightgray;
+  margin-right: 50px;
+  height: 100px;
+  width: 300px;
+  display: flex;
+  flex-direction: row;
+}
+
+.staff img {
+  height: 100px;
+  width: 75px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  margin-top: 0px;
+}
+
+.staff .name {
+  margin: 10px;
+  float: inline-start;
+  color: gray !important;
+  text-decoration: none !important;
+  transition: 0.5s;
+}
+
+.staff a:hover {
+  color: #f16565 !important;
+}
+
+.staff p {
+  margin: 70px 10px 10px 80px;
   color: gray !important;
   text-decoration: none !important;
   transition: 0.5s;

@@ -2,41 +2,35 @@ a {
     color: blue !important;
 }
 
-#characters {
+#staffs {
     display: flex;
     flex-direction: column;
     margin: 0 10%;
 }
 
-.character-list{
+.staff-list {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
 }
 
-.character {
+.staff {
     background-color: lightgray;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
     margin-right: 50px;
     height: 100px;
     width: 300px;
-}
-
-.anime-character, .voice-actor{
     display: flex;
     flex-direction: row;
 }
 
-.anime-character img, .voice-actor img{
+.staff img{
     height: 100px;
     width: 75px;
     object-fit: cover;
     margin-top: 0px;
 }
 
-.anime-character .name{
+.staff .name{
     margin: 10px;
     float: inline-start;
     color: gray !important;
@@ -44,12 +38,13 @@ a {
     transition: 0.5s;
 }
 
-.anime-character a:hover, .voice-actor a:hover{
+.staff a:hover{
     color: rgb(241, 101, 101) !important;
 }
 
-.voice-actor .name{
-    margin: 70px 10px 10px;
+
+.staff p{
+    margin: 70px 10px 10px 80px;
     color: gray !important;
     text-decoration: none !important;
     transition: 0.5s;

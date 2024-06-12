@@ -17,4 +17,5 @@
     @include('layouts.show.overview')
     @include('layouts.show.episodes')
     @include ('layouts.show.characters')
+    @include ('layouts.show.staffs')
 @endsection
