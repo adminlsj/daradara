@@ -47,5 +47,8 @@ a {
     margin: 70px 10px 10px 80px;
     color: gray !important;
     text-decoration: none !important;
+    border: 1px solid transparent;
+    background-color: white;
+    border-radius: 10%;
     transition: 0.5s;
 }

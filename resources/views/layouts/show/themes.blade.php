@@ -60,5 +60,55 @@ bangumi     4.5/5
 </pre>
         </div>
     </div>
-    
+
+    <div class="theme-list">
+        <div class="opening-song">
+            <h3>主題曲</h3>
+            <h4>「Growing Up」</h4>
+            <iframe width="360" height="230" src="https://www.youtube.com/embed/nPJhLiqv8Jc?si=niNr67ZsArXtrutb"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <div class="singer">
+                <a href=""><img src="https://i.meee.com.tw/oQFG625.png" alt=""></a>
+                <a href="" class="name">Machico</a>
+                <p>演出者</p>
+            </div>
+            <h5>作詞・作曲・編曲：園田健太郎</h5>
+            <h5>發行日: 2024/04/10</h5>
+        </div>
+
+        <div class="ending-song">
+            <h3>片尾曲</h3>
+            <h4>「あの日のままのぼくら」</h4>
+            <iframe width="360" height="230" src="https://www.youtube.com/embed/tH18QK26IOA?si=pOy68zwVhrcBDRUg"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <div class="singer-list">
+                <div class="singer">
+                    <a href=""><img src="https://i.meee.com.tw/CnNpw9M.png" alt=""></a>
+                    <a href="" class="name">阿庫婭 (聲優: 雨宮天)</a>
+                    <p>演出者</p>
+                </div>
+                <div class="singer">
+                    <a href=""><img src="https://i.meee.com.tw/bwWXZxY.png" alt=""></a>
+                    <a href="" class="name">惠惠 (聲優:高橋李依)</a>
+                    <p>演出者</p>
+                </div>
+                <div class="singer">
+                    <a href=""><img src="https://i.meee.com.tw/vEhbYFQ.png" alt=""></a>
+                    <a href="" class="name">達克尼斯 (聲優: 茅野愛衣)</a>
+                    <p>演出者</p>
+                </div>
+            </div>
+            <h5>作詞・作曲・編曲：佐藤良成</h5>
+            <h5>發行日: 2024/04/10</h5>
+        </div>
+
+        <div class="insert-song">
+            <h3>插入曲</h3>
+        </div>
+    </div>
+
 </div>
