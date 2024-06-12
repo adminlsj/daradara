@@ -61,6 +61,40 @@ bangumi     4.5/5
         </div>
     </div>
 
+    <div class="character-list">
+        <div class="character">
+            <div class="anime-character">
+                <img src="https://i.meee.com.tw/QCVFECv.png" alt="">
+                <a href="">佐藤和真</a>
+            </div>
+            <div class="voice-actor">
+                <a href="">福島潤</a>
+                <img src="https://i.meee.com.tw/dfmxSke.png" alt="">
+            </div>
+        </div>
+
+        <div class="character">
+            <div class="anime-character">
+                <img src="https://i.meee.com.tw/WA55PEI.png" alt="">
+                <a href="">阿庫婭</a>
+            </div>
+            <div class="voice-actor">
+                <a href="">雨宮天</a>
+                <img src="https://i.meee.com.tw/jQpwLlD.png" alt="">
+            </div>
+        </div>
+
+        <div class="character">
+            <div class="anime-character">
+                <img src="https://i.meee.com.tw/OxMcrGA.png" alt="">
+                <a href="">惠惠</a>
+            </div>
+            <div class="voice-actor">
+                <a href="">高橋李依</a>
+                <img src="https://i.meee.com.tw/vVoSnIu.png" alt="">
+            </div>
+        </div>
+    </div>
     
     
 </div>

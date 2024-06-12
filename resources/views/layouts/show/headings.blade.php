@@ -1,6 +1,6 @@
 <div class="headings">
     <div class="cover">
-        <img src="https://s1.locimg.com/2024/06/08/53154590ddedc.webp" alt="封面圖">
+        <img src="https://i.meee.com.tw/k2ysELr.png" alt="封面圖">
     </div>
     <div class="short-des">
         <div class="title">
