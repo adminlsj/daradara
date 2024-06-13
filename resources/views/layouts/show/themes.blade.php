@@ -1,13 +1,16 @@
 <div id="themes" class="tabcontent">
     <div class="description">
         <div class="ranking-seasonal">
-            <strong>⭐ 季度排名 #1</strong>
+            <strong>⭐ <a href="">季度排名 #1</a></strong>
         </div>
-        <div class="ranking-following">
-            <strong>❤️ 喜愛總數 #23</strong>
+        <div class="ranking-yearly">
+            <strong>⭐ <a href="">年度排名 #1</a></strong>
         </div>
         <div class="ranking-all">
-            <strong>🏆 動畫排名 #31</strong>
+            <strong>🏆 <a href="">動畫總排名 #31</a></strong>
+        </div>
+        <div class="ranking-following">
+            <strong>❤️ <a href="">喜愛總數 #23</a></strong>
         </div>
         <div class="long-des">
             <pre>
@@ -106,8 +109,31 @@ bangumi     4.5/5
             <h5>發行日: 2024/04/10</h5>
         </div>
 
-        <div class="insert-song">
-            <h3>插入曲</h3>
+        <div class="insert-song-list">
+            <h3>插入曲 / 角色歌</h3>
+            <div class="insert-song">
+                <h4>「あの日のままのぼくら」 - 阿庫婭ver.</h4>
+                <iframe allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write" frameborder="0"
+                    height="175" style="width:100%;max-width:660px;overflow:hidden;border-radius:10px;"
+                    sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
+                    src="https://embed.music.apple.com/jp/album/%E3%81%82%E3%81%AE%E6%97%A5%E3%81%AE%E3%81%BE%E3%81%BE%E3%81%AE%E3%81%BC%E3%81%8F%E3%82%89-%E3%82%A2%E3%82%AF%E3%82%A2-ver/1738375119?i=1738375121"></iframe>
+            </div>
+
+            <div class="insert-song">
+                <h4>「あの日のままのぼくら」 - 惠惠ver.</h4>
+                <iframe allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write" frameborder="0"
+                    height="175" style="width:100%;max-width:660px;overflow:hidden;border-radius:10px;"
+                    sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
+                    src="https://embed.music.apple.com/jp/album/%E3%81%82%E3%81%AE%E6%97%A5%E3%81%AE%E3%81%BE%E3%81%BE%E3%81%AE%E3%81%BC%E3%81%8F%E3%82%89-%E3%82%81%E3%81%90%E3%81%BF%E3%82%93-ver/1738375119?i=1738375122"></iframe>
+            </div>
+
+            <div class="insert-song">
+                <h4>「あの日のままのぼくら」 - 達克尼斯ver.</h4>
+                <iframe allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write" frameborder="0"
+                    height="175" style="width:100%;max-width:660px;overflow:hidden;border-radius:10px;"
+                    sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
+                    src="https://embed.music.apple.com/jp/album/%E3%81%82%E3%81%AE%E6%97%A5%E3%81%AE%E3%81%BE%E3%81%BE%E3%81%AE%E3%81%BC%E3%81%8F%E3%82%89-%E3%83%80%E3%82%AF%E3%83%8D%E3%82%B9-ver/1738375119?i=1738375123"></iframe>
+            </div>
         </div>
     </div>
 
