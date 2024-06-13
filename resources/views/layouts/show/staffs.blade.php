@@ -1,13 +1,16 @@
 <div id="staffs" class="tabcontent">
     <div class="description">
         <div class="ranking-seasonal">
-            <strong>⭐ 季度排名 #1</strong>
+            <strong>⭐ <a href="">季度排名 #1</a></strong>
         </div>
-        <div class="ranking-following">
-            <strong>❤️ 喜愛總數 #23</strong>
+        <div class="ranking-yearly">
+            <strong>⭐ <a href="">年度排名 #1</a></strong>
         </div>
         <div class="ranking-all">
-            <strong>🏆 動畫排名 #31</strong>
+            <strong>🏆 <a href="">動畫總排名 #31</a></strong>
+        </div>
+        <div class="ranking-following">
+            <strong>❤️ <a href="">喜愛總數 #23</a></strong>
         </div>
         <div class="long-des">
             <pre>

@@ -1,13 +1,16 @@
 <div id="overview" class="tabcontent">
     <div class="description">
         <div class="ranking-seasonal">
-            <strong>⭐ 季度排名 #1</strong>
+            <strong>⭐ <a href="">季度排名 #1</a></strong>
         </div>
-        <div class="ranking-following">
-            <strong>❤️ 喜愛總數 #23</strong>
+        <div class="ranking-yearly">
+            <strong>⭐ <a href="">年度排名 #1</a></strong>
         </div>
         <div class="ranking-all">
-            <strong>🏆 動畫排名 #31</strong>
+            <strong>🏆 <a href="">動畫總排名 #31</a></strong>
+        </div>
+        <div class="ranking-following">
+            <strong>❤️ <a href="">喜愛總數 #23</a></strong>
         </div>
         <div class="long-des">
             <pre>
@@ -90,8 +93,41 @@ bangumi     4.5/5
                 </tr>
             </table>
         </div>
+
         <div class="awards">
 
         </div>
+
+        <div class="recommandations">
+            <h3>為您推薦</h3>
+            <div class="recommandation-list">
+                <div class="recommandation">
+                    <a href=""><img src="https://i.meee.com.tw/gcpyEiJ.jpg" alt=""></a>
+                    <div class="title">
+                        <h4>銀魂</h4>
+                        <h5 style="padding: 4px 0">評分: 95/100</h5>
+                    </div>
+                </div>
+                <div class="recommandation">
+                    <a href=""><img src="https://i.meee.com.tw/6d2CF3m.webp" alt=""></a>
+                    <div class="title">
+                        <h4>七大罪</h4>
+                        <h5 style="padding: 4px 0">評分: 95/100</h5>
+                    </div>
+                </div>
+                <div class="recommandation">
+                    <a href=""><img src="https://i.meee.com.tw/w7hR66x.jpeg" alt=""></a>
+                    <div class="title">
+                        <h4 style="max-width:100px">這個勇者明明超tueee卻過度謹慎</h4>
+                        <h5 style="padding: 4px 0">評分: 90/100</h5>
+                    </div>
+                </div>
+                <button><img src="https://i.meee.com.tw/PT12BYq.png" alt=""></button>
+            </div>
+        </div>
+
+        
     </div>
+
+
 </div>

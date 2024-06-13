@@ -1,13 +1,16 @@
 <div id="episodes" class="tabcontent">
     <div class="description">
         <div class="ranking-seasonal">
-            <strong>⭐ 季度排名 #1</strong>
+            <strong>⭐ <a href="">季度排名 #1</a></strong>
         </div>
-        <div class="ranking-following">
-            <strong>❤️ 喜愛總數 #23</strong>
+        <div class="ranking-yearly">
+            <strong>⭐ <a href="">年度排名 #1</a></strong>
         </div>
         <div class="ranking-all">
-            <strong>🏆 動畫排名 #31</strong>
+            <strong>🏆 <a href="">動畫總排名 #31</a></strong>
+        </div>
+        <div class="ranking-following">
+            <strong>❤️ <a href="">喜愛總數 #23</a></strong>
         </div>
         <div class="long-des">
             <pre>
@@ -75,19 +78,23 @@ bangumi     4.5/5
         <div class="videos">
             <div class="episode">
                 <img src="https://i.meee.com.tw/wENTFYg.png" alt="episode1">
-                第一集 - 為光明的未來乾杯！
+                第一集 - 為光明的未來乾杯！<br>
+                播放日期: 2024/4/10
             </div>
             <div class="episode">
                 <img src="https://i.meee.com.tw/OdCb0Mo.png" alt="episode2">
-                第二集 - 為這個中二病獻上爆焰！	
+                第二集 - 為這個中二病獻上爆焰！<br>
+                播放日期: 2024/4/17
             </div>
             <div class="episode">
                 <img src="https://i.meee.com.tw/FdamS3v.png" alt="episode3">
-                第三集 - 以這隻右手偷取寶物！
+                第三集 - 以這隻右手偷取寶物！<br>
+                播放日期: 2024/4/24
             </div>
             <div class="episode">
                 <img src="https://i.meee.com.tw/XsAqEri.png" alt="episode4">
-                第四集 - 為這名強敵施展爆裂魔法！
+                第四集 - 為這名強敵施展爆裂魔法！<br>
+                播放日期: 2024/5/1
             </div>
         </div>
     </div>

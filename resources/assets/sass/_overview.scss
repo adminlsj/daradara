@@ -9,7 +9,7 @@ a {
     margin: 0 10%;
 }
 
-.description{
+.description {
     display: flex;
     flex-direction: column;
     margin-right: 5%;
@@ -17,7 +17,10 @@ a {
     max-width: 20%;
 }
 
-.ranking-seasonal, .ranking-following, .ranking-all {
+.ranking-seasonal,
+.ranking-yearly,
+.ranking-following,
+.ranking-all {
     margin-bottom: 15px;
     padding: 2%;
     border: 1px solid none;
@@ -35,7 +38,6 @@ a {
     line-height: 1.55;
 }
 
-
 .intro {
     padding: 1% 1%;
     border: 1px solid none;
@@ -50,13 +52,50 @@ a {
 }
 
 .volumes {
+    margin: 30px 0;
     padding: 1% 1%;
     border: 1px solid none;
     background-color: lightgray;
 }
 
-.awards {
-    padding: 1% 1%;
-    border: 1px solid none;
-    background-color: lightgray;
+.recommandations {
+    display: flex;
+    flex-direction: column;
+}
+
+.recommandation-list {
+    display: flex;
+    flex-direction: row;
+}
+
+.recommandation-list button {
+    border: none;
+    background: none;
+}
+
+.recommandation-list img {
+    height: 80px;
+    width: 80px;
+    object-fit: cover;
+}
+
+.recommandation img{
+    margin-top: 20px;
+    margin-right: 40px;
+    height: 400px;
+    width: 200px;
+    object-fit: cover;
+    border-radius: 10%;
+    transition: 0.5s;
+}
+
+.title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-right: 40px;
+}
+
+.recommandation img:hover{
+    width: 220px;
 }

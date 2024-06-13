@@ -1,0 +1,77 @@
+a {
+    color: blue !important;
+}
+
+#comments {
+    display: flex;
+    flex-direction: column;
+    margin: 0 10%;
+}
+
+.comment-list{
+    display: flex;
+    flex-direction: column;
+}
+
+.filter {
+    display: flex;
+    flex-direction: row;
+}
+
+.filter-date, .filter-forum {
+    margin-right: 30px;
+}
+
+.comment{
+    display: flex;
+    flex-direction: row;
+    background-color: lightgray;
+    height: 100px;
+    width: 600px;
+    border-radius: 20px/50px;
+    padding: 5px 20px;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.comment img{
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    margin-top: 5px;
+    margin-right: 10px;
+}
+
+.user-comment {
+    display: flex;
+    flex-direction: row;
+}
+
+.user {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-review {
+    display: flex;
+    flex-direction: row;
+}
+
+.user-review p{
+    margin-right: 10px;
+}
+.user-review button{
+    border: none;
+    background-color: transparent;
+    margin-bottom: 5px;
+}
+
+.comment-forum {
+    display: flex;
+    flex-direction: row;
+}
+
+.comment-forum h5{
+    margin-top: 17px;
+    margin-right: 10px;
+}

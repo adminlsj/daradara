@@ -19,4 +19,5 @@
     @include ('layouts.show.characters')
     @include ('layouts.show.staffs')
     @include ('layouts.show.themes')
+    @include ('layouts.show.comments')
 @endsection
