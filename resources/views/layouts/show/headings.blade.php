@@ -4,7 +4,7 @@
     </div>
     <div class="short-des">
         <div class="title">
-            <h1>{{ $anime->title_ch_trad }}</h1>
+            <h1>{{ $anime->title_zht }}</h1>
             <p>評分: 9 / 10 | <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                     viewBox="0 0 16 16">
                     <path
