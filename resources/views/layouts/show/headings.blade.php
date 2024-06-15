@@ -4,7 +4,7 @@
     </div>
     <div class="short-des">
         <div class="title">
-            <h1>{{ $anime->title_ch }}</h1>
+            <h1>{{ $anime->title_ch_trad }}</h1>
             <p>評分: 9 / 10 | <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                     viewBox="0 0 16 16">
                     <path
@@ -16,8 +16,8 @@
         <hr>
         <div class="info">
             <div class="authors">
-                <p>原作: <a href="" style="color:blue;">暁なつめ</a></p>
-                <p id="director">導演: <a href="" style="color:blue;">安部祐二郎</a></p>
+                <p>原作: <a href="" style="color:blue;">{{ $anime->author }}</a></p>
+                <p id="director">導演: <a href="" style="color:blue;">{{ $anime->director }}</a></p>
             </div>
             <div class="genres">
                 <p>類別: </p>
