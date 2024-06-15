@@ -19,6 +19,8 @@ Route::get('auth/{provider}', 'Auth\LoginController@redirectToProvider');
 Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
 Route::resource('user', 'UserController')->only(['edit', 'update']);
 
+Route::get('/tempMethod', 'BotController@tempMethod');
+
 Route::group(['middleware' => 'admin'], function () {
-	Route::get('/tempMethod', 'BotController@tempMethod');
+	// Route::get('/tempMethod', 'BotController@tempMethod');
 });

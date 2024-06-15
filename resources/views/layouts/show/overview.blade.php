@@ -19,7 +19,7 @@
 <a href="">番劇</a>
 
 <strong>集數</strong>
-12
+{{ $anime->episodes }}
 
 <strong>集數總長</strong>
 24分鐘
@@ -28,10 +28,10 @@
 <a href="">上映中</a>
 
 <strong>首播日期</strong>
-2024年4月8日
+{{ $anime->started_at }}
 
 <strong>完播日期</strong>
-2024年7月8日
+{{ $anime->ended_at }}
 
 <strong>季番</strong>
 <a href="">春番</a>
@@ -55,11 +55,11 @@ AniList     98/100
 bangumi     4.5/5
 
 <h3>副標題</h3>
-<strong>繁體:</strong> 為美好的世界獻上祝福！
-<strong>簡體:</strong> 為美好的世界獻上祝福！
-<strong>English:</strong> KonoSuba
-<strong>日文:</strong> この素晴らしい世界に祝福を!
-<strong>羅馬字:</strong> Kono Subarashii Sekai ni Shukufuku o!
+<strong>繁體:</strong> {{ $anime->title }}
+<strong>簡體:</strong> {{ $anime->title }}
+<strong>English:</strong> {{ $anime->title_en }}
+<strong>日文:</strong> {{ $anime->title_jp }}
+<strong>羅馬字:</strong> {{ $anime->title_ro }}
 </pre>
         </div>
     </div>
