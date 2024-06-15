@@ -16,16 +16,16 @@
             <pre>
 <h3>資訊</h3>
 <strong>動畫類別</strong>
-<a href="">番劇</a>
+<a href="">{{ $anime->category }}</a>
 
 <strong>集數</strong>
 {{ $anime->episodes }}
 
 <strong>集數總長</strong>
-24分鐘
+{{ $anime->episodes_length }}分鐘
 
 <strong>播放狀態</strong>
-<a href="">上映中</a>
+<a href="">{{ $anime->airing_status }}</a>
 
 <strong>首播日期</strong>
 {{ $anime->started_at }}
@@ -34,13 +34,13 @@
 {{ $anime->ended_at }}
 
 <strong>季番</strong>
-<a href="">春番</a>
+<a href="">{{ $anime->season }}</a>
 
 <strong>更新時間</strong>
 <a href="">週三</a> 23:30
 
 <strong>動畫社</strong>
-<a href="">Drive Inc.</a>
+<a href="">{{ $anime->animation_studio }}</a>
 
 <strong>類別</strong>
 <a href="">搞笑</a>
@@ -49,14 +49,14 @@
 <a href="">異世界</a>
 
 <h3>評分</h3>
-daradara    9/10
-MyAnimeList 8.8/10
-AniList     98/100
+daradara    {{ $anime->rating }}/100
+MyAnimeList {{ $anime->rating_mal }}/10
+AniList     {{ $anime->rating_al }}/100
 bangumi     4.5/5
 
 <h3>副標題</h3>
-<strong>繁體:</strong> {{ $anime->title }}
-<strong>簡體:</strong> {{ $anime->title }}
+<strong>繁體:</strong> {{ $anime->title_ch_trad }}
+<strong>簡體:</strong> {{ $anime->title_ch_simp }}
 <strong>English:</strong> {{ $anime->title_en }}
 <strong>日文:</strong> {{ $anime->title_jp }}
 <strong>羅馬字:</strong> {{ $anime->title_ro }}
@@ -71,7 +71,7 @@ bangumi     4.5/5
         </div>
         <div class="trailer">
             <h3>宣傳片</h3>
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/Meo3mO98huE?si=qe1mS1mU1XJZ92DX"
+            <iframe width="560" height="315" src="{{ $anime->trailer }}"
                 title="YouTube video player" frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
@@ -126,7 +126,7 @@ bangumi     4.5/5
             </div>
         </div>
 
-        
+
     </div>
 
 
