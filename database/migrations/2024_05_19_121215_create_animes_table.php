@@ -15,21 +15,23 @@ class CreateAnimesTable extends Migration
     {
         Schema::create('animes', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('title_ch');
-            $table->string('title_jp');
-            $table->string('title_en');
-            $table->string('title_ro');
-            $table->string('photo_cover');
-            $table->string('photo_banner');
-            $table->text('description');
-            $table->decimal('rating_mal', 4, 2);
-            $table->integer('rating_al');
-            $table->integer('rating');
-            $table->dateTime('started_at');
-            $table->dateTime('ended_at');
-            $table->string('author');
-            $table->string('director');
-            $table->string('trailer');
+            $table->string('title_ch')->nullable();;
+            $table->string('title_jp')->nullable();;
+            $table->string('title_en')->nullable();;
+            $table->string('title_ro')->nullable();;
+            $table->string('photo_cover')->nullable();;
+            $table->string('photo_banner')->nullable();;
+            $table->text('description')->nullable();;
+            $table->decimal('rating_mal', 4, 2)->nullable();;
+            $table->integer('rating_al')->nullable();;
+            $table->integer('rating')->nullable();;
+            $table->integer('episodes')->nullable();
+            $table->dateTime('started_at')->nullable();;
+            $table->dateTime('ended_at')->nullable();;
+            $table->string('author')->nullable();;
+            $table->string('director')->nullable();;
+            $table->string('trailer')->nullable();;
+            $table->jsonb('sources')->nullable();
             $table->timestamps();
         });
     }
