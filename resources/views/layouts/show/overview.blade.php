@@ -55,8 +55,8 @@ AniList     {{ $anime->rating_al }}/100
 bangumi     4.5/5
 
 <h3>副標題</h3>
-<strong>繁體:</strong> {{ $anime->title_ch_trad }}
-<strong>簡體:</strong> {{ $anime->title_ch_simp }}
+<strong>繁體:</strong> {{ $anime->title_zht }}
+<strong>簡體:</strong> {{ $anime->title_zhs }}
 <strong>English:</strong> {{ $anime->title_en }}
 <strong>日文:</strong> {{ $anime->title_jp }}
 <strong>羅馬字:</strong> {{ $anime->title_ro }}
