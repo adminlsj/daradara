@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Anime;
+use App\Character;
 use App\User;
 use Illuminate\Http\Request;
 use Response;
@@ -19,6 +20,7 @@ class AnimeController extends Controller
 {
     public function show(Request $request, Anime $anime)
     {
+        //$character = Character::where('anime_id', $anime->id)->get();
         return view('anime.show', compact('anime'));
     }
 }
