@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Anime;
 use Illuminate\Http\Request;
 use Response;
 use Auth;
@@ -18,6 +19,7 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
-        return view('layouts.home');
+        $animes = Anime::paginate(60);
+        return view('layouts.home', compact('animes'));
     }
 }
