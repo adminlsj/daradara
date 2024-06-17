@@ -19,7 +19,7 @@ class BotController extends Controller
 {
     public function tempMethod(Request $request)
     {
-        for ($i = 12392; $i < 100000; $i++) { 
+        for ($i = 60000; $i < 70000; $i++) { 
             $url = "https://myanimelist.net/anime/{$i}/";
             $curl_connection = curl_init($url);
             curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
@@ -36,6 +36,9 @@ class BotController extends Controller
                     'title_ro' => $title,
                     'sources' => $sources,
                 ]);
+
+            } else {
+                echo $i.' not found<br>';
             }
         }
     }
