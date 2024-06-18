@@ -1,6 +1,6 @@
 <div class="headings">
     <div class="cover">
-        <img src="https://i.meee.com.tw/k2ysELr.png" alt="封面圖">
+        <img src="{{ $anime->photo_cover }}" alt="封面圖">
     </div>
     <div class="short-des">
         <div class="title">
