@@ -13,7 +13,7 @@ class ImportFromMAL extends Command
      *
      * @var string
      */
-    protected $signature = 'hanime1:import-from-mal';
+    protected $signature = 'daradara:import-from-mal';
 
     /**
      * The console command description.
