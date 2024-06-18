@@ -39,7 +39,7 @@ class ImportFromMAL extends Command
      */
     public function handle()
     {
-        $anime = Anime::where('photo_cover', null)->first();
+        $anime = Anime::where('photo_cover', null)->orderBy('id', 'desc')->first();
         $url = $anime->sources['myanimelist'];
         $curl_connection = curl_init($url);
         curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
