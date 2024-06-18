@@ -39,17 +39,23 @@ class ImportFromMAL extends Command
      */
     public function handle()
     {
-        $anime = Anime::where('photo_cover', null)->orderBy('id', 'desc')->first();
-        $url = $anime->sources['myanimelist'];
-        $curl_connection = curl_init($url);
-        curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
-        curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
-        $html = curl_exec($curl_connection);
-        curl_close($curl_connection);
+        $animes = Anime::where('photo_cover', null)->orderBy('id', 'desc')->limit(3)->get();
+        foreach ($animes as $anime) {
+            $url = $anime->sources['myanimelist'];
+            $curl_connection = curl_init($url);
+            curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+            curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+            $html = curl_exec($curl_connection);
+            curl_close($curl_connection);
 
-        $photo_cover = Helper::get_string_between($html, '<img class="lazyload" data-src="', '"');
-        $anime->photo_cover = $photo_cover;
-        $anime->save();
+            $photo_cover = Helper::get_string_between($html, '<img class="lazyload" data-src="', '"');
+            $anime->photo_cover = $photo_cover;
+            $anime->save();
+
+            if ($animes->last() != $anime) {
+                sleep(10);
+            }
+        }
     }
 }
