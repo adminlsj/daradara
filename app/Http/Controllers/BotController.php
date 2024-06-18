@@ -28,7 +28,7 @@ class BotController extends Controller
         $html = curl_exec($curl_connection);
         curl_close($curl_connection);
 
-        $photo_cover = Helper::get_string_between($html, '<img class="lazyload" data-src="', '"');
+        return $photo_cover = Helper::get_string_between($html, '<img class="lazyload" data-src="', '"');
         $anime->photo_cover = $photo_cover;
         $anime->save();
 
