@@ -19,7 +19,7 @@ class BotController extends Controller
 {
     public function tempMethod(Request $request)
     {
-        $animes = Anime::where('description', null)->orderBy('id', 'desc')->limit(3)->get();
+        $animes = Anime::where('description', null)->orderBy('id', 'desc')->get();
         foreach ($animes as $anime) {
             $url = $anime->sources['myanimelist'];
             $curl_connection = curl_init($url);
