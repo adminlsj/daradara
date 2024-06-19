@@ -51,6 +51,10 @@ class ImportFromMAL extends Command
 
             $photo_cover = Helper::get_string_between($html, '<img class="lazyload" data-src="', '"');
             $anime->photo_cover = $photo_cover;
+
+            $description = Helper::get_string_between($html, '<meta property="og:description" content="', '"');
+            $anime->description = $description;
+
             $anime->save();
 
             if ($animes->last() != $anime) {
