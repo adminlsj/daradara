@@ -19,20 +19,41 @@ class BotController extends Controller
 {
     public function tempMethod(Request $request)
     {
-        $animes = Anime::where('description', null)->orderBy('id', 'desc')->get();
-        foreach ($animes as $anime) {
-            $url = $anime->sources['myanimelist'];
-            $curl_connection = curl_init($url);
-            curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
-            curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
-            $html = curl_exec($curl_connection);
-            curl_close($curl_connection);
 
-            $description = Helper::get_string_between($html, '<meta property="og:description" content="', '"');
-            $anime->description = $description;
+        if ($request->column == 'description') {
+            $animes = Anime::where('description', null)->orderBy('id', 'desc')->get();
+            foreach ($animes as $anime) {
+                $url = $anime->sources['myanimelist'];
+                $curl_connection = curl_init($url);
+                curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+                curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+                $html = curl_exec($curl_connection);
+                curl_close($curl_connection);
 
-            $anime->save();
+                $description = Helper::get_string_between($html, '<meta property="og:description" content="', '"');
+                $anime->description = $description;
+
+                $anime->save();
+            }
+
+        } elseif ($request->column == 'rating_mal') {
+            $animes = Anime::where('rating_mal', null)->orderBy('id', 'desc')->get();
+            foreach ($animes as $anime) {
+                $url = $anime->sources['myanimelist'];
+                $curl_connection = curl_init($url);
+                curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+                curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+                $html = curl_exec($curl_connection);
+                curl_close($curl_connection);
+
+                $rating_mal = Helper::get_string_between($html, 'score-label score-', '/');
+                $rating_mal = Helper::get_string_between($rating_mal, '>', '<');
+                $anime->rating_mal = $rating_mal;
+
+                $anime->save();
+            }
         }
 
         /* for ($i = 60000; $i < 70000; $i++) { 

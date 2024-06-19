@@ -55,6 +55,10 @@ class ImportFromMAL extends Command
             $description = Helper::get_string_between($html, '<meta property="og:description" content="', '"');
             $anime->description = $description;
 
+            $rating_mal = Helper::get_string_between($html, 'score-label score-', '/');
+            $rating_mal = Helper::get_string_between($rating_mal, '>', '<');
+            $anime->rating_mal = $rating_mal;
+
             $anime->save();
 
             if ($animes->last() != $anime) {
