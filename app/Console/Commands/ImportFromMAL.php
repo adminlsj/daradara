@@ -59,6 +59,11 @@ class ImportFromMAL extends Command
             $rating_mal = Helper::get_string_between($rating_mal, '>', '<');
             $anime->rating_mal = $rating_mal;
 
+            $title_en = trim(Helper::get_string_between($html, '<span class="dark_text">English:</span>', '<'));
+            $title_jp = trim(Helper::get_string_between($html, '<span class="dark_text">Japanese:</span>', '<'));
+            $anime->title_en = $title_en;
+            $anime->title_jp = $title_jp;
+
             $anime->save();
 
             if ($animes->last() != $anime) {
