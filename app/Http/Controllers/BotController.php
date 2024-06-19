@@ -19,18 +19,21 @@ class BotController extends Controller
 {
     public function tempMethod(Request $request)
     {
-        $anime = Anime::find(40456);
-        $url = $anime->sources['myanimelist'];
-        $curl_connection = curl_init($url);
-        curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
-        curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
-        $html = curl_exec($curl_connection);
-        curl_close($curl_connection);
+        $animes = Anime::where('description', null)->orderBy('id', 'desc')->limit(3)->get();
+        foreach ($animes as $anime) {
+            $url = $anime->sources['myanimelist'];
+            $curl_connection = curl_init($url);
+            curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+            curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+            $html = curl_exec($curl_connection);
+            curl_close($curl_connection);
 
-        $photo_cover = Helper::get_string_between($html, '<img class="lazyload" data-src="', '"');
-        $anime->photo_cover = $photo_cover;
-        $anime->save();
+            $description = Helper::get_string_between($html, '<meta property="og:description" content="', '"');
+            $anime->description = $description;
+
+            $anime->save();
+        }
 
         /* for ($i = 60000; $i < 70000; $i++) { 
             $url = "https://myanimelist.net/anime/{$i}/";
