@@ -54,6 +54,26 @@ class BotController extends Controller
 
                 $anime->save();
             }
+
+        } elseif ($request->column == 'titles') {
+            $animes = Anime::where('title_jp', null)->orderBy('id', 'desc')->get();
+            foreach ($animes as $anime) {
+                $url = $anime->sources['myanimelist'];
+                $curl_connection = curl_init($url);
+                curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+                curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+                $html = curl_exec($curl_connection);
+                curl_close($curl_connection);
+
+                $title_en = trim(Helper::get_string_between($html, '<span class="dark_text">English:</span>', '<'));
+                $title_jp = trim(Helper::get_string_between($html, '<span class="dark_text">Japanese:</span>', '<'));
+
+                $anime->title_en = $title_en;
+                $anime->title_jp = $title_jp;
+
+                $anime->save();
+            }
         }
 
         /* for ($i = 60000; $i < 70000; $i++) { 
