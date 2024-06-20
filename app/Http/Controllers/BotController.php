@@ -50,7 +50,11 @@ class BotController extends Controller
 
                 $rating_mal = Helper::get_string_between($html, 'score-label score-', '/');
                 $rating_mal = Helper::get_string_between($rating_mal, '>', '<');
-                $anime->rating_mal = $rating_mal;
+                if (is_numeric($rating_mal)) {
+                    $anime->rating_mal = $rating_mal;
+                } else {
+                    $anime->rating_mal = 0.00;
+                }
 
                 $anime->save();
             }
