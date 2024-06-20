@@ -38,7 +38,7 @@ class BotController extends Controller
             }
 
         } elseif ($request->column == 'rating_mal') {
-            $animes = Anime::where('rating_mal', null)->orderBy('id', 'desc')->get();
+            $animes = Anime::/*where('rating_mal', null)->*/orderBy('id', 'desc')->get();
             foreach ($animes as $anime) {
                 $url = $anime->sources['myanimelist'];
                 $curl_connection = curl_init($url);
@@ -48,12 +48,12 @@ class BotController extends Controller
                 $html = curl_exec($curl_connection);
                 curl_close($curl_connection);
 
-                $rating_mal = Helper::get_string_between($html, 'score-label score-', '/');
+                $rating_mal = Helper::get_string_between($html, 'score-label score-', '/span>');
                 $rating_mal = Helper::get_string_between($rating_mal, '>', '<');
-                if (is_numeric($rating_mal)) {
-                    $anime->rating_mal = $rating_mal;
-                } else {
+                if ($rating_mal == 'N/A') {
                     $anime->rating_mal = 0.00;
+                } else {
+                    $anime->rating_mal = $rating_mal;
                 }
 
                 $anime->save();
