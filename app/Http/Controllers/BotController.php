@@ -38,7 +38,7 @@ class BotController extends Controller
             }
 
         } elseif ($request->column == 'rating_mal') {
-            $animes = Anime::/*where('rating_mal', null)->*/where('id', '<', 39875)->orderBy('id', 'desc')->get();
+            $animes = Anime::where('rating_mal', null)->orWhere('rating_mal', 0.00)->orderBy('id', 'desc')->get();
             foreach ($animes as $anime) {
                 $url = $anime->sources['myanimelist'];
                 $curl_connection = curl_init($url);
