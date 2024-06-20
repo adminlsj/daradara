@@ -82,7 +82,7 @@ class BotController extends Controller
             }
 
         } elseif ($request->column == 'startenddate') {
-            $animes = Anime::where('airing_status', null)->orderBy('id', 'desc')->get();
+            $animes = Anime::where('airing_status', null)->orWhere('airing_status', '');->orderBy('id', 'desc')->get();
             foreach ($animes as $anime) {
                 $url = $anime->sources['myanimelist'];
                 $curl_connection = curl_init($url);
