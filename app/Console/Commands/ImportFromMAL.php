@@ -57,7 +57,11 @@ class ImportFromMAL extends Command
 
             $rating_mal = Helper::get_string_between($html, 'score-label score-', '/');
             $rating_mal = Helper::get_string_between($rating_mal, '>', '<');
-            $anime->rating_mal = $rating_mal;
+            if (is_numeric($rating_mal)) {
+                $anime->rating_mal = $rating_mal;
+            } else {
+                $anime->rating_mal = 0.00;
+            }
 
             $title_en = trim(Helper::get_string_between($html, '<span class="dark_text">English:</span>', '<'));
             $title_jp = trim(Helper::get_string_between($html, '<span class="dark_text">Japanese:</span>', '<'));
