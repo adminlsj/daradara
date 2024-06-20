@@ -21,7 +21,7 @@ class BotController extends Controller
     {
 
         if ($request->column == 'description') {
-            $animes = Anime::where('description', null)->orderBy('id', 'desc')->get();
+            $animes = Anime::where('description', null)->orWhere('description', '')->orderBy('id', 'desc')->get();
             foreach ($animes as $anime) {
                 $url = $anime->sources['myanimelist'];
                 $curl_connection = curl_init($url);
@@ -60,7 +60,9 @@ class BotController extends Controller
             }
 
         } elseif ($request->column == 'titles') {
-            $animes = Anime::where('title_jp', null)->orderBy('id', 'desc')->get();
+            $animes = Anime::where('title_jp', null)->orWhere(function($query) {
+                $query->where('title_jp', '')->where('title_en', '');
+            })->orderBy('id', 'desc')->get();
             foreach ($animes as $anime) {
                 $url = $anime->sources['myanimelist'];
                 $curl_connection = curl_init($url);
