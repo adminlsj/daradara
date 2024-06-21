@@ -1,0 +1,53 @@
+//sidebar
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    flex: 20%;
+    max-width: 20%;
+}
+
+.sidebar .ranking {
+    color: #727e8e;
+    margin-bottom: 15px;
+    display: border;
+    background-color: #151f2e;
+    padding: 6px 10px;
+    font-size: 13px;
+}
+
+.sidebar .data {
+    display: border;
+    background-color: #151f2e;
+    padding: 15px;
+    color: #727e8e;
+}
+
+.sidebar .data .data-set {
+    margin-bottom: 10px;
+}
+
+.sidebar .data .type {
+    font-size: 13px;
+    color: #acacac;
+}
+
+.sidebar .data .format {
+    font-size: 13px;
+    color: #727e8e;
+}
+
+.sidebar .tags h3 {
+    color: #727e8e;
+    font-size: 16px;
+}
+
+.sidebar .tags .tag {
+    background-color: #151f2e;
+    padding: 8px 10px;
+    color: #727e8e;
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    margin-bottom: 10px;
+}

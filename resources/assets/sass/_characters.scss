@@ -1,56 +1,56 @@
-a {
-    color: blue !important;
-}
-
 #characters {
+    margin-left: 50px;
+    flex: 80%;
     display: flex;
     flex-direction: column;
-    margin: 0 10%;
 }
 
-.character-list{
+.characters-dropdown {
+    display: flex;
+    justify-content: right;
+    margin-bottom: 30px;
+}
+
+.characters-dropdown button {
+    background-color: #151f2e;
+    color: #8b9fb5;
+    padding: 10px;
+    border-radius: 5px;
+    padding-right: 80px;
+}
+
+.characters-wrap {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-}
-
-.character {
-    background-color: lightgray;
-    display: flex;
-    flex-direction: row;
     justify-content: space-between;
-    margin-right: 50px;
-    height: 100px;
-    width: 300px;
 }
 
-.anime-character, .voice-actor{
+.characters-wrap .characters-card {
     display: flex;
     flex-direction: row;
+    flex: 48%;
+    max-width: 48%;
+    margin-bottom: 20px;
+    background-color: #151f2e;
 }
 
-.anime-character img, .voice-actor img{
-    height: 100px;
-    width: 75px;
+.characters-wrap .characters-card img {
+    width: 60px;
+    height: 80px;
     object-fit: cover;
-    margin-top: 0px;
 }
 
-.anime-character .name{
-    margin: 10px;
-    float: inline-start;
-    color: gray !important;
-    text-decoration: none !important;
-    transition: 0.5s;
+.characters-wrap .characters-card .characters-name {
+    display: flex;
+    flex-direction: row;
+    flex: 70%;
+    justify-content: space-between;
 }
 
-.anime-character a:hover, .voice-actor a:hover{
-    color: rgb(241, 101, 101) !important;
-}
-
-.voice-actor .name{
-    margin: 70px 10px 10px;
-    color: gray !important;
-    text-decoration: none !important;
-    transition: 0.5s;
+.characters-wrap .characters-card .characters-name a {
+    color: #8b9fb5;
+    text-decoration: none;
+    padding: 10px;
+    font-size: 12px;
 }
