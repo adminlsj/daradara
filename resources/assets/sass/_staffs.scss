@@ -1,54 +1,42 @@
-a {
-    color: blue !important;
-}
-
 #staffs {
+    margin-left: 50px;
+    flex: 80%;
     display: flex;
     flex-direction: column;
-    margin: 0 10%;
 }
 
-.staff-list {
+.staffs-wrap {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: space-between;
 }
 
-.staff {
-    background-color: lightgray;
-    margin-right: 50px;
-    height: 100px;
-    width: 300px;
+.staffs-wrap .staffs-card {
     display: flex;
     flex-direction: row;
+    flex: 48%;
+    max-width: 48%;
+    margin-bottom: 20px;
+    background-color: #151f2e;
 }
 
-.staff img{
-    height: 100px;
-    width: 75px;
+.staffs-wrap .staffs-card img {
+    width: 60px;
+    height: 80px;
     object-fit: cover;
-    margin-top: 0px;
 }
 
-.staff .name{
-    margin: 10px;
-    float: inline-start;
-    color: gray !important;
-    text-decoration: none !important;
-    transition: 0.5s;
+.staffs-wrap .staffs-card .staffs-name {
+    display: flex;
+    flex-direction: column;
+    flex: 70%;
+    justify-content: space-between;
 }
 
-.staff a:hover{
-    color: rgb(241, 101, 101) !important;
-}
-
-
-.staff p{
-    margin: 70px 10px 10px 80px;
-    color: gray !important;
-    text-decoration: none !important;
-    border: 1px solid transparent;
-    background-color: white;
-    border-radius: 10%;
-    transition: 0.5s;
+.staffs-wrap .staffs-card .staffs-name a, p {
+    color: #8b9fb5;
+    text-decoration: none;
+    padding: 10px;
+    font-size: 12px;
 }

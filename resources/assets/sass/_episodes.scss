@@ -1,66 +1,38 @@
-a {
-    color: blue !important;
-}
-
 #episodes {
-    display: flex;
-    flex-direction: column;
-    margin: 0 10%;
+    margin-left: 50px;
+    flex: 80%;
 }
 
-.filter {
-    margin-bottom: 60px;
-}
-
-.filter .dropbtn {
-    background-color: lightgray;
-    padding: 8px;
-    font-size: 15px;
-    border: none;
-    cursor: pointer;
-}
-
-.filter .dropbtn:hover, .dropbtn:focus {
-    background-color: gray;
-}
-
-.filter .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f1f1f1;
-    min-width: 160px;
-    overflow: auto;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-}
-
-.filter .dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
-
-.videos {
+.episodes-wrap {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: space-between;
 }
 
-.episode {
-    margin: 0px 50px 80px 0;
+.episodes-wrap .episodes-card {
+    flex: 31%;
+    max-width: 31%;
+    margin-bottom: 20px;
+    position: relative;
 }
 
-.episode img{
-    display: block;
-    height: 150px;
-    width: 230px;
-    border-radius: 5%;
-    object-fit: cover;
-    transition: 0.5s;
+.episodes-wrap .episodes-card a{
+    text-decoration: none;
+    color: white;
 }
 
-.episode img:hover {
-    height: 165px;
-    width: 253px;
+.episodes-wrap .episodes-card img {
+    max-width: 100%;
+}
+
+.episodes-wrap .episodes-card .title {
+    width: 100%;
+    position: absolute;
+    bottom: 0px;
+    background-color: rgba(0,0,0,0.4);
+    padding: 7px 13px;
+    white-space: nowrap;
+    font-size: 12px;
+    overflow-x: hidden;
 }

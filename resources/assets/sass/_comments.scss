@@ -1,77 +1,46 @@
-a {
-    color: blue !important;
-}
-
 #comments {
-    display: flex;
-    flex-direction: column;
-    margin: 0 10%;
-}
-
-.comment-list{
+    margin-left: 50px;
+    flex: 80%;
     display: flex;
     flex-direction: column;
 }
 
-.filter {
+.comments-wrap {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
 }
 
-.filter-date, .filter-forum {
-    margin-right: 30px;
-}
-
-.comment{
+.comments-wrap .comments-card {
     display: flex;
     flex-direction: row;
-    background-color: lightgray;
-    height: 100px;
-    width: 600px;
-    border-radius: 20px/50px;
-    padding: 5px 20px;
     justify-content: space-between;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
-.comment img{
-    height: 40px;
-    width: 40px;
-    border-radius: 50%;
-    margin-top: 5px;
-    margin-right: 10px;
+.comments-wrap .comments-card a {
+    text-decoration: none;
 }
 
-.user-comment {
-    display: flex;
-    flex-direction: row;
-}
-
-.user {
-    display: flex;
-    flex-direction: column;
-}
-
-.user-review {
-    display: flex;
-    flex-direction: row;
-}
-
-.user-review p{
-    margin-right: 10px;
-}
-.user-review button{
-    border: none;
+.comments-wrap .comments-card img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
     background-color: transparent;
-    margin-bottom: 5px;
+    border-radius: 5px;
 }
 
-.comment-forum {
-    display: flex;
-    flex-direction: row;
+.comments-wrap .comments-card .comments-review {
+    display: block;
+    box-sizing: border-box;
+    width: 90%;
+    background-color: #151f2e;
+    align-items: center;
+    text-align: center;
 }
 
-.comment-forum h5{
-    margin-top: 17px;
-    margin-right: 10px;
+.comments-wrap .comments-card .comments-review .user-comments {
+    margin-top: 5px;
+    font-size: 15px;
 }
