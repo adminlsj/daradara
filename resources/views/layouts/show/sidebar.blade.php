@@ -8,7 +8,7 @@
     <div class="data">
         <div class="data-set">
             <div class="type">動畫類別</div>
-            <div class="format"> {{ $anime->category }} </div>
+            <div class="format"> <a href="">{{ $anime->category }}</a> </div>
         </div>
         <div class="data-set">
             <div class="type">集數</div>
@@ -20,7 +20,7 @@
         </div>
         <div class="data-set">
             <div class="type">播放狀態</div>
-            <div class="format"> {{ $anime->airing_status }} </div>
+            <div class="format"> <a href="">{{ $anime->airing_status }}</a> </div>
         </div>
         <div class="data-set">
             <div class="type">首播日期</div>
@@ -32,7 +32,7 @@
         </div>
         <div class="data-set">
             <div class="type">季番</div>
-            <div class="format"> {{ $anime->season }} </div>
+            <div class="format"> <a href="">{{ $anime->season }}</a> </div>
         </div>
         <div class="data-set">
             <div class="type">更新時間</div>
@@ -40,7 +40,7 @@
         </div>
         <div class="data-set">
             <div class="type">動畫社</div>
-            <div class="format"> {{ $anime->animation_studio }} </div>
+            <div class="format"> <a href="">{{ $anime->animation_studio }}</a> </div>
         </div>
         <div class="data-set">
             <div class="type">類別</div>

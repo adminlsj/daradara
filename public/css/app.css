@@ -226,12 +226,32 @@
   font-family: Roboto;
 }
 
-.button-groups .list .dropdown {
+.button-groups .list .down {
   background-color: #5ebff5;
 }
 
-.button-groups .list .dropdown .fa {
+.button-groups .list .down .fa {
   padding: 4px 0;
+}
+
+.button-groups .list .dropdown-menu {
+  display: flex;
+  flex-direction: column;
+  background-color: azure;
+  padding: 10px 0px;
+  text-wrap: nowrap;
+}
+
+.button-groups .list .dropdown-menu a {
+  color: gray;
+  text-decoration: none;
+  padding: 5px 20px;
+  transition: 0.2s;
+}
+
+.button-groups .list .dropdown-menu a:hover {
+  color: white;
+  background-color: #3eb4f3;
 }
 
 .button-groups .favorite {
@@ -259,6 +279,11 @@
   font-size: 13px;
   margin-left: 0px;
   padding-left: 0px;
+  transition: 0.2s;
+}
+
+.heading-content p:hover {
+  color: #8b9fb5;
 }
 
 .heading-content .navtabs {
@@ -300,6 +325,15 @@
   font-size: 13px;
 }
 
+.sidebar .ranking a {
+  color: #727e8e;
+  text-decoration: none;
+}
+
+.sidebar .ranking a:hover {
+  color: #008f8f;
+}
+
 .sidebar .data {
   display: border;
   background-color: #151f2e;
@@ -309,6 +343,16 @@
 
 .sidebar .data .data-set {
   margin-bottom: 10px;
+}
+
+.sidebar .data .data-set a {
+  color: #727e8e;
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+.sidebar .data .data-set a:hover {
+  color: #008f8f;
 }
 
 .sidebar .data .type {
@@ -382,6 +426,10 @@
   text-decoration: none;
 }
 
+.relations .grid-wrap .media-preview-card .relations-content a:hover {
+  color: #008f8f;
+}
+
 .recommendations {
   display: flex;
   flex-direction: column;
@@ -429,6 +477,11 @@
 .recommendations .recommendations-warp .recommendations-card a {
   color: #8b9fb5;
   text-decoration: none;
+  transition: 0.2s;
+}
+
+.recommendations .recommendations-warp .recommendations-card a:hover {
+  color: #008f8f;
 }
 
 .threads {
@@ -473,6 +526,11 @@
 .threads .threads-wrap .threads-card .title a {
   color: #8b9fb5;
   text-decoration: none;
+  transition: 0.2s;
+}
+
+.threads .threads-wrap .threads-card .title a:hover {
+  color: #008f8f;
 }
 
 .threads .threads-wrap .threads-card .title .traffic {
@@ -613,6 +671,10 @@
   font-size: 12px;
 }
 
+.characters-wrap .characters-card .characters-name a:hover {
+  color: #008f8f;
+}
+
 #staffs {
   margin-left: 50px;
   flex: 80%;
@@ -656,6 +718,10 @@ p {
   text-decoration: none;
   padding: 10px;
   font-size: 12px;
+}
+
+.staffs-wrap .staffs-card .staffs-name a:hover {
+  color: #008f8f;
 }
 
 #comments {
