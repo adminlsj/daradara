@@ -257,12 +257,15 @@
   font-family: Roboto;
   margin-bottom: 80px;
   font-size: 13px;
+  margin-left: 0px;
+  padding-left: 0px;
 }
 
 .heading-content .navtabs {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  text-align: center;
 }
 
 .heading-content .navtabs button {
