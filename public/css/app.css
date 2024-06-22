@@ -460,13 +460,14 @@
   flex: 48%;
   max-width: 48%;
   margin-bottom: 20px;
-  padding: 15px;
+  padding: 10px 15px;
 }
 
 .threads .threads-wrap .threads-card .title {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: baseline;
 }
 
 .threads .threads-wrap .threads-card .title a {
@@ -501,7 +502,6 @@
 
 .threads .threads-wrap .threads-card .threads-content .user p {
   margin-left: 10px;
-  margin-top: 10px;
   color: #8b9fb5;
   font-size: 12px;
 }
