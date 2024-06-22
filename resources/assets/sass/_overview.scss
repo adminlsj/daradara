@@ -46,6 +46,10 @@
     text-decoration: none;
 }
 
+.relations .grid-wrap .media-preview-card .relations-content a:hover {
+    color: rgb(0, 143, 143);
+}
+
 //recommendations
 
 .recommendations {
@@ -95,6 +99,11 @@
 .recommendations .recommendations-warp .recommendations-card a {
     color: #8b9fb5;
     text-decoration: none;
+    transition: 0.2s;
+}
+
+.recommendations .recommendations-warp .recommendations-card a:hover {
+    color: rgb(0, 143, 143);
 }
 
 //threads
@@ -141,6 +150,11 @@
 .threads .threads-wrap .threads-card .title a {
     color: #8b9fb5;
     text-decoration: none;
+    transition: 0.2s;
+}
+
+.threads .threads-wrap .threads-card .title a:hover {
+    color: rgb(0, 143, 143);
 }
 
 .threads .threads-wrap .threads-card .title .traffic {

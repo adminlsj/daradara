@@ -3,8 +3,15 @@
         <img src="{{ $anime->photo_cover }}" alt="">
         <div class="button-groups">
             <div class="list btn-group">
-                <button type="button" class="btn btn-secondary add">Add to list</button>
-                <button type="button" class="btn btn-secondary dropdown"><i class="fa fa-chevron-down"></i></button>
+                <button class="add btn btn-secondary">Add to list</button>
+                <button class="down btn btn-secondary " type="button">
+                    <i class="fa fa-chevron-down"></i>
+                </button>
+                <div class="dropdown-menu" id="dropdownMenu" style="display:none;">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                </div>
             </div>
             <button class="favorite">♥</button>
         </div>

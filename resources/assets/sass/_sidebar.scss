@@ -1,5 +1,3 @@
-//sidebar
-
 .sidebar {
     display: flex;
     flex-direction: column;
@@ -16,6 +14,15 @@
     font-size: 13px;
 }
 
+.sidebar .ranking a{
+    color: #727e8e;
+    text-decoration: none;
+}
+
+.sidebar .ranking a:hover {
+    color: rgb(0, 143, 143);
+}
+
 .sidebar .data {
     display: border;
     background-color: #151f2e;
@@ -25,6 +32,16 @@
 
 .sidebar .data .data-set {
     margin-bottom: 10px;
+}
+
+.sidebar .data .data-set a{
+    color: #727e8e;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.sidebar .data .data-set a:hover{
+    color: rgb(0, 143, 143);
 }
 
 .sidebar .data .type {
