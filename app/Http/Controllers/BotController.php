@@ -14,6 +14,7 @@ use Storage;
 use App\Helper;
 use SteelyWing\Chinese\Chinese;
 use Illuminate\Database\Eloquent\Builder;
+use Carbon\Carbon;
 
 class BotController extends Controller
 {
@@ -82,19 +83,13 @@ class BotController extends Controller
             }
 
         } elseif ($request->column == 'startenddate') {
-            $animes = Anime::where('airing_status', null)->orWhere('airing_status', '')->orderBy('id', 'desc')->get();
+            $animes = Anime::where('airing_status', 'like', '% \to %')->where('airing_status', 'not like', '%?%')->orderBy('id', 'desc')->get();
             foreach ($animes as $anime) {
-                $url = $anime->sources['myanimelist'];
-                $curl_connection = curl_init($url);
-                curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
-                curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
-                curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
-                $html = curl_exec($curl_connection);
-                curl_close($curl_connection);
-
-                $startenddate = trim(Helper::get_string_between($html, '<span class="dark_text">Aired:</span>', '<'));
-                $anime->airing_status = $startenddate;
-                $anime->save();
+                $started_at = explode(' to ', $anime->airing_status)[0];
+                $ended_at = explode(' to ', $anime->airing_status)[1];
+                $anime->started_at = Carbon::createFromFormat('!M d, Y', $started_at, '0');   
+                $anime->ended_at = Carbon::createFromFormat('!M d, Y', $ended_at, '0'); 
+                $anime->save();  
             }
         }
 
