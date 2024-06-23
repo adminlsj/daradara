@@ -19,7 +19,6 @@ class AddNewColumnsToAnimes extends Migration
             $table->integer('episodes_length')->nullable();
             $table->string('airing_status')->nullable();
             $table->string('season')->nullable();
-            $table->dateTime('released_at')->nullable();
             $table->string('animation_studio')->nullable();
             $table->string('title_zht')->nullable();
             $table->string('title_zhs')->nullable();
