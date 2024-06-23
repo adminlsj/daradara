@@ -23,11 +23,6 @@ class AddNewColumnsToAnimes extends Migration
             $table->string('animation_studio')->nullable();
             $table->string('title_zht')->nullable();
             $table->string('title_zhs')->nullable();
-
-            //episodes
-            $table->string('episode_thumbnail')->nullable();
-            $table->string('episode_name')->nullable();
-            $table->dateTime('episode_release_date')->nullable();
         });
     }
 
