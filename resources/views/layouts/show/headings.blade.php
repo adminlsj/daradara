@@ -4,10 +4,11 @@
         <div class="button-groups">
             <div class="list btn-group">
                 <button class="add btn btn-secondary">Add to list</button>
-                <button class="down btn btn-secondary " type="button">
+                <button class="down btn btn-secondary dropdown-toggle dropdown" type="button" id="dropdownMenuButton"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fa fa-chevron-down"></i>
                 </button>
-                <div class="dropdown-menu" id="dropdownMenu" style="display:none;">
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <a class="dropdown-item" href="#">Action</a>
                     <a class="dropdown-item" href="#">Another action</a>
                     <a class="dropdown-item" href="#">Something else here</a>
