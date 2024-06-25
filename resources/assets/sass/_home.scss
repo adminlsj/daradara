@@ -1,0 +1,166 @@
+.page-content {
+    display: flex;
+    flex-direction: column;
+    background-color: #0b1622;
+    padding: 0 12%;
+}
+
+//landing-section showing animes
+
+.page-content .content-wrap .landing-section {
+    margin-bottom: 30px;
+}
+
+.page-content .content-wrap .landing-section .title-link {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.page-content .content-wrap .landing-section .title-link a {
+    text-decoration: none;
+    color: #8b9fb5;
+    transition: 0.2s;
+}
+
+.page-content .content-wrap .landing-section .title-link a:hover {
+    color: aliceblue;
+}
+
+.page-content .content-wrap .landing-section .media-wrap {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.page-content .content-wrap .landing-section .media-wrap .media-card {
+    display: flex;
+    flex-direction: column;
+    margin-right: 4%;
+}
+
+.page-content .content-wrap .landing-section .media-wrap .media-card img {
+    height: 265px;
+    width: 185px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.page-content .content-wrap .landing-section .media-wrap .media-card a {
+    text-decoration: none;
+    color: #8b9fb5;
+    font-size: 15px;
+    transition: 0.15s;
+}
+
+.page-content .content-wrap .landing-section .media-wrap .media-card:hover a {
+    color: #d378ae;
+}
+
+//top anime sections
+.page-content .top-anime {
+    display: flex;
+    flex-direction: column;
+}
+
+.page-content .top-anime .title-link {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.page-content .top-anime .title-link a {
+    text-decoration: none;
+    color: #8b9fb5;
+    transition: 0.2s;
+}
+
+.page-content .top-anime .title-link a:hover {
+    color: aliceblue;
+}
+
+.page-content .top-anime .results .results-wrap {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.page-content .top-anime .results .rank {
+    flex: 7%;
+    max-width: 7%;
+    padding: 20px 10px;
+    color: #8b9fb5;
+    font-size: x-large;
+    align-items: center;
+    text-align: center;
+}
+
+.page-content .top-anime .results .rank span {
+    font-size: medium;
+}
+
+.page-content .top-anime .results .content {
+    display: flex;
+    flex-direction: row;
+    flex: 90%;
+    max-width: 90%;
+    padding: 10px;
+    background-color: #151f2e;
+    border-radius: 5px;
+    justify-content: space-between;
+}
+
+.page-content .top-anime .results .content img {
+    width: 48px;
+    height: 60px;
+    margin-right: 20px;
+}
+
+.page-content .top-anime .results .content a{
+    text-decoration: none;
+    color: rgb(221, 229, 236);
+    font-size: 16px;
+}
+
+.page-content .top-anime .results .content a:hover{
+    color: white;
+}
+
+.page-content .top-anime .results .content .anime-title {
+    display: flex;
+    flex-direction: row;
+}
+
+.page-content .top-anime .results .content .title-wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.page-content .top-anime .results .content .title-wrap .genres a {
+    font-size: 13px;
+    background-color:brown;
+    padding: 3px 8px;
+    border-radius: 40px;
+    margin-right: 5px;
+}
+
+.page-content .top-anime .results .content .anime-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.page-content .top-anime .results .content .anime-info .overall-rating, .rating, .category, .ended-at {
+    display: flex;
+    flex-direction: column;
+    color: #8b9fb5;
+    margin-right: 40px;
+    justify-content: space-around;
+}
