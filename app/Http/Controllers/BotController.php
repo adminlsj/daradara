@@ -86,12 +86,17 @@ class BotController extends Controller
             foreach ($animes as $anime) {
                 try {
                     $started_at = explode(' to ', $anime->airing_status)[0];
-                    $ended_at = explode(' to ', $anime->airing_status)[1];
                     $anime->started_at = Carbon::createFromFormat('!M d, Y', $started_at, '0');   
+                    $anime->save();  
+                } catch (\Carbon\Exceptions\InvalidFormatException $e) {
+                    echo "ID#{$anime->id} invalid start date<br>";
+                }
+                try {
+                    $ended_at = explode(' to ', $anime->airing_status)[1];
                     $anime->ended_at = Carbon::createFromFormat('!M d, Y', $ended_at, '0'); 
                     $anime->save();  
                 } catch (\Carbon\Exceptions\InvalidFormatException $e) {
-                    echo "ID#{$anime->id} invalid date, enduser understands the error message";
+                    echo "ID#{$anime->id} invalid end date<br>";
                 }
             }
         }
