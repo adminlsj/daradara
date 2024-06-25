@@ -82,7 +82,8 @@ class BotController extends Controller
             }
 
         } elseif ($request->column == 'startenddate') {
-            $animes = Anime::where('airing_status', 'like', '% \to %')->where('airing_status', 'not like', '%?%')->orderBy('id', 'desc')->get();
+            // $animes = Anime::where('started_at', null)->where('ended_at', null)->where('airing_status', 'not like', '% \to %')->orderBy('id', 'desc')->get();
+            $animes = Anime::where('airing_status', 'like', '% \to %')->where('airing_status', 'like', '%?%')->orderBy('id', 'desc')->get();
             foreach ($animes as $anime) {
                 try {
                     $started_at = explode(' to ', $anime->airing_status)[0];
@@ -91,13 +92,13 @@ class BotController extends Controller
                 } catch (\Carbon\Exceptions\InvalidFormatException $e) {
                     echo "ID#{$anime->id} invalid start date<br>";
                 }
-                try {
+                /* try {
                     $ended_at = explode(' to ', $anime->airing_status)[1];
                     $anime->ended_at = Carbon::createFromFormat('!M d, Y', $ended_at, '0'); 
                     $anime->save();  
                 } catch (\Carbon\Exceptions\InvalidFormatException $e) {
                     echo "ID#{$anime->id} invalid end date<br>";
-                }
+                } */
             }
         }
 
