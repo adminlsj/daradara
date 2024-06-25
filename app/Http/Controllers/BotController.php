@@ -20,6 +20,12 @@ class BotController extends Controller
 {
     public function tempMethod(Request $request)
     {
+        $animes = Anime::all();
+        foreach ($animes as $anime) {
+            $anime->airing_status = null;
+            $anime->save();
+        }
+        
         if ($request->column == 'description') {
             $animes = Anime::where('description', null)->orWhere('description', '')->orderBy('id', 'desc')->get();
             foreach ($animes as $anime) {
@@ -82,13 +88,21 @@ class BotController extends Controller
             }
 
         } elseif ($request->column == 'startenddate') {
-            $animes = Anime::where('started_at', null)->where('ended_at', null)->orderBy('id', 'desc')->get();
+            $animes = Anime::where('airing_status', 'like', '% \to %')->where('airing_status', 'not like', '%?%')->orderBy('id', 'desc')->get();
             foreach ($animes as $anime) {
                 try {
-                    $anime->started_at = Carbon::createFromFormat('!M d, Y', $anime->airing_status, '0');   
+                    $started_at = explode(' to ', $anime->airing_status)[0];
+                    $anime->started_at = Carbon::createFromFormat('!M d, Y', $started_at, '0');   
                     $anime->save();  
                 } catch (\Carbon\Exceptions\InvalidFormatException $e) {
                     echo "ID#{$anime->id} invalid start date<br>";
+                }
+                try {
+                    $ended_at = explode(' to ', $anime->airing_status)[1];
+                    $anime->ended_at = Carbon::createFromFormat('!M d, Y', $ended_at, '0'); 
+                    $anime->save();  
+                } catch (\Carbon\Exceptions\InvalidFormatException $e) {
+                    echo "ID#{$anime->id} invalid end date<br>";
                 }
             }
         }
