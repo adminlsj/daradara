@@ -19,7 +19,9 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
-        $animes = Anime::orderby('id', 'desc')->paginate(60);
-        return view('layouts.home', compact('animes'));
+        $trendingNow = Anime::orderby('rating_mal', 'desc')->limit(5)->get();
+        $popularThisSeason = Anime::orderby('rating_mal', 'desc')->limit(5)->get();
+        $allTimePopular = Anime::orderby('rating_mal', 'desc')->limit(5)->get();
+        return view('layouts.home', compact('trendingNow', 'popularThisSeason', 'allTimePopular'));
     }
 }

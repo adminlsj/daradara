@@ -20,12 +20,6 @@ class BotController extends Controller
 {
     public function tempMethod(Request $request)
     {
-        $animes = Anime::all();
-        foreach ($animes as $anime) {
-            $anime->airing_status = null;
-            $anime->save();
-        }
-        
         if ($request->column == 'description') {
             $animes = Anime::where('description', null)->orWhere('description', '')->orderBy('id', 'desc')->get();
             foreach ($animes as $anime) {
@@ -104,6 +98,23 @@ class BotController extends Controller
                 } catch (\Carbon\Exceptions\InvalidFormatException $e) {
                     echo "ID#{$anime->id} invalid end date<br>";
                 }
+            }
+
+        } elseif ($request->column == 'season') {
+            $animes = Anime::where('season', null)->orWhere('season', '')->orderBy('id', 'desc')->get();
+            foreach ($animes as $anime) {
+                $url = $anime->sources['myanimelist'];
+                $curl_connection = curl_init($url);
+                curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+                curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+                $html = curl_exec($curl_connection);
+                curl_close($curl_connection);
+
+                $season = Helper::get_string_between($html, 'Premiered:</span>', '/a>');
+                $season = Helper::get_string_between($season, '>', '<');
+                $anime->season = $season;
+                $anime->save();
             }
         }
 
