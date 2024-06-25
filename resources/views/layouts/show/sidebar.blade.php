@@ -44,10 +44,9 @@
         </div>
         <div class="data-set">
             <div class="type">類別</div>
-            <div class="format"> 搞笑 </div>
-            <div class="format"> 戀愛 </div>
-            <div class="format"> 日常 </div>
-            <div class="format"> 異世界 </div>
+            @foreach ($anime->genres as $genre)
+                <div class="format"> {{ $genre }} </div>
+            @endforeach
         </div>
         <div class="data-set">
             <div class="type">羅馬譯</div>
