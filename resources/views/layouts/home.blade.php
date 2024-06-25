@@ -5,7 +5,6 @@
 @endsection
 
 @section('content')
-<<<<<<< HEAD
 <div class="page-content">
 	<div class="filters-wrap">
 
@@ -118,10 +117,8 @@
 </div>
 
 <!--
-=======
 	<div style="padding: 0 4%">
 		<h3>TRENDING NOW</h1>
->>>>>>> main
 		<div class="row">
 			@foreach ($trendingNow as $anime)
 				<div class="col-md-2">
@@ -168,12 +165,7 @@
 				</div>
 			@endforeach
 		</div>
-<<<<<<< HEAD
 		
 		<div class="search-pagination mobile-search-pagination">{{ $animes->links() }}</div>
 				-->
-
-=======
-	</div>
->>>>>>> main
 @endsection
