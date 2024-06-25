@@ -20,7 +20,6 @@ class BotController extends Controller
 {
     public function tempMethod(Request $request)
     {
-
         if ($request->column == 'description') {
             $animes = Anime::where('description', null)->orWhere('description', '')->orderBy('id', 'desc')->get();
             foreach ($animes as $anime) {
@@ -85,11 +84,37 @@ class BotController extends Controller
         } elseif ($request->column == 'startenddate') {
             $animes = Anime::where('airing_status', 'like', '% \to %')->where('airing_status', 'not like', '%?%')->orderBy('id', 'desc')->get();
             foreach ($animes as $anime) {
-                $started_at = explode(' to ', $anime->airing_status)[0];
-                $ended_at = explode(' to ', $anime->airing_status)[1];
-                $anime->started_at = Carbon::createFromFormat('!M d, Y', $started_at, '0');   
-                $anime->ended_at = Carbon::createFromFormat('!M d, Y', $ended_at, '0'); 
-                $anime->save();  
+                try {
+                    $started_at = explode(' to ', $anime->airing_status)[0];
+                    $anime->started_at = Carbon::createFromFormat('!M d, Y', $started_at, '0');   
+                    $anime->save();  
+                } catch (\Carbon\Exceptions\InvalidFormatException $e) {
+                    echo "ID#{$anime->id} invalid start date<br>";
+                }
+                try {
+                    $ended_at = explode(' to ', $anime->airing_status)[1];
+                    $anime->ended_at = Carbon::createFromFormat('!M d, Y', $ended_at, '0'); 
+                    $anime->save();  
+                } catch (\Carbon\Exceptions\InvalidFormatException $e) {
+                    echo "ID#{$anime->id} invalid end date<br>";
+                }
+            }
+
+        } elseif ($request->column == 'season') {
+            $animes = Anime::where('season', null)->orWhere('season', '')->orderBy('id', 'desc')->get();
+            foreach ($animes as $anime) {
+                $url = $anime->sources['myanimelist'];
+                $curl_connection = curl_init($url);
+                curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+                curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+                $html = curl_exec($curl_connection);
+                curl_close($curl_connection);
+
+                $season = Helper::get_string_between($html, 'Premiered:</span>', '/a>');
+                $season = Helper::get_string_between($season, '>', '<');
+                $anime->season = $season;
+                $anime->save();
             }
         }
 
