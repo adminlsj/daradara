@@ -19,7 +19,8 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
-        $animes = Anime::orderby('id', 'desc')->paginate(60);
+        //$animes = Anime::orderby('id', 'desc')->paginate(60);
+        $animes = Anime::orderby('id', 'asc')->paginate(5);
         return view('layouts.home', compact('animes'));
     }
 }
