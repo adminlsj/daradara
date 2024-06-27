@@ -101,10 +101,10 @@ class BotController extends Controller
             }
 
         } elseif ($request->column == 'season') {
-            $animes = Anime::all();
+            $animes = Anime::where('started_at', '!=', null)->get();
             foreach ($animes as $anime) {
                 $season = '';
-                $started_at_month = $anime->started_at->month;
+                $started_at_month = Carbon::parse($anime->started_at)->month;
                 if ($started_at_month >= 1 && $started_at_month <= 3) {
                     $season = 'Winter';
                 } elseif ($started_at_month >= 4 && $started_at_month <= 6) {
