@@ -101,7 +101,7 @@ class BotController extends Controller
             }
 
         } elseif ($request->column == 'categoryEpisodesAiringstatus') {
-            $animes = Anime::where('category', null)->orderBy('id', 'desc')->get();
+            $animes = Anime::where('category', null)->orWhere('category', '')->orderBy('id', 'desc')->get();
             foreach ($animes as $anime) {
                 $url = $anime->sources['myanimelist'];
                 $curl_connection = curl_init($url);
@@ -111,11 +111,15 @@ class BotController extends Controller
                 $html = curl_exec($curl_connection);
                 curl_close($curl_connection);
 
-                $category = trim(Helper::get_string_between($html, '<span class="dark_text">Type:</span>', '<'));
+                $category = trim(Helper::get_string_between($html, '<span class="dark_text">Type:</span>', '</div>'));
                 $episodes = trim(Helper::get_string_between($html, '<span class="dark_text">Episodes:</span>', '<'));
                 $airing_status = trim(Helper::get_string_between($html, '<span class="dark_text">Status:</span>', '<'));
 
-                $anime->category = $category;
+                if (strpos($category, "<a href=") !== false) {
+                    $anime->category = Helper::get_string_between($category, '>', '<');
+                } else {
+                    $anime->category = $category;
+                }
                 if ($episodes != 'Unknown') {
                     $anime->episodes = $episodes;
                 }
