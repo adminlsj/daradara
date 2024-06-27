@@ -115,7 +115,7 @@ class BotController extends Controller
                     $season = 'Fall';
                 }
 
-                $anime->season = $season.' '.$anime->started_at->year;
+                $anime->season = $season.' '.Carbon::parse($anime->started_at)->year;
                 $anime->save();
             }
         }
