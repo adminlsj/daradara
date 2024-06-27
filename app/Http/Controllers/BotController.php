@@ -101,19 +101,30 @@ class BotController extends Controller
             }
 
         } elseif ($request->column == 'season') {
-            $animes = Anime::where('season', null)/*->orWhere('season', '')*/->orderBy('id', 'desc')->get();
+            $animes = Anime::where('season', '')->orWhere('season', '
+
+  ')->orderBy('id', 'desc')->get();
             foreach ($animes as $anime) {
-                $url = $anime->sources['myanimelist'];
+                /* $url = $anime->sources['myanimelist'];
                 $curl_connection = curl_init($url);
                 curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
                 curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
                 curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
                 $html = curl_exec($curl_connection);
-                curl_close($curl_connection);
+                curl_close($curl_connection); */
 
-                $season = Helper::get_string_between($html, 'Premiered:</span>', '/a>');
-                $season = Helper::get_string_between($season, '>', '<');
-                $anime->season = $season;
+                $created_at_month = $anime->created_at->month;
+                if ($created_at_month >= 1 && $created_at_month <= 3) {
+                    $season = 'Winter';
+                } elseif ($created_at_month >= 4 && $created_at_month <= 6) {
+                    $season = 'Spring';
+                } elseif ($created_at_month >= 7 && $created_at_month <= 9) {
+                    $season = 'Summer';
+                } elseif ($created_at_month >= 10 && $created_at_month <= 12) {
+                    $season = 'Fall';
+                }
+
+                $anime->season = $season.' '.$anime->created_at->year;
                 $anime->save();
             }
         }
