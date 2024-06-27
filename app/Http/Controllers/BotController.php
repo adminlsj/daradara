@@ -101,18 +101,9 @@ class BotController extends Controller
             }
 
         } elseif ($request->column == 'season') {
-            $animes = Anime::where('season', '')->orWhere('season', '
-
-  ')->orderBy('id', 'desc')->get();
+            $animes = Anime::all();
             foreach ($animes as $anime) {
-                /* $url = $anime->sources['myanimelist'];
-                $curl_connection = curl_init($url);
-                curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
-                curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
-                curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
-                $html = curl_exec($curl_connection);
-                curl_close($curl_connection); */
-
+                $season = '';
                 $created_at_month = $anime->created_at->month;
                 if ($created_at_month >= 1 && $created_at_month <= 3) {
                     $season = 'Winter';
