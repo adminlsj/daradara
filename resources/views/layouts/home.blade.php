@@ -18,7 +18,7 @@
 				<a href="">顯示更多</a>
 			</div>
 			<div class="media-wrap">
-				@foreach ($animes as $anime)
+				@foreach ($最近更新 as $anime)
 					<div class="media-card">
 						<a href="{{ route('anime.show', ['anime' => $anime->id, 'title' => $anime->title_ro]) }}">
 							<img src="{{ $anime->photo_cover }}" alt="">
@@ -37,7 +37,7 @@
 				<a href="">顯示更多</a>
 			</div>
 			<div class="media-wrap">
-				@foreach ($animes as $anime)
+				@foreach ($本季流行 as $anime)
 					<div class="media-card">
 						<a href="{{ route('anime.show', ['anime' => $anime->id, 'title' => $anime->title_ro]) }}">
 							<img src="{{ $anime->photo_cover }}" alt="">
