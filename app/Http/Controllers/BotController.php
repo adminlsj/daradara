@@ -104,18 +104,18 @@ class BotController extends Controller
             $animes = Anime::all();
             foreach ($animes as $anime) {
                 $season = '';
-                $created_at_month = $anime->created_at->month;
-                if ($created_at_month >= 1 && $created_at_month <= 3) {
+                $started_at_month = $anime->started_at->month;
+                if ($started_at_month >= 1 && $started_at_month <= 3) {
                     $season = 'Winter';
-                } elseif ($created_at_month >= 4 && $created_at_month <= 6) {
+                } elseif ($started_at_month >= 4 && $started_at_month <= 6) {
                     $season = 'Spring';
-                } elseif ($created_at_month >= 7 && $created_at_month <= 9) {
+                } elseif ($started_at_month >= 7 && $started_at_month <= 9) {
                     $season = 'Summer';
-                } elseif ($created_at_month >= 10 && $created_at_month <= 12) {
+                } elseif ($started_at_month >= 10 && $started_at_month <= 12) {
                     $season = 'Fall';
                 }
 
-                $anime->season = $season.' '.$anime->created_at->year;
+                $anime->season = $season.' '.$anime->started_at->year;
                 $anime->save();
             }
         }
