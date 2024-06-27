@@ -101,21 +101,19 @@ class BotController extends Controller
             }
 
         } elseif ($request->column == 'season') {
-            $animes = Anime::where('started_at', '!=', null)->get();
+            $animes = Anime::where('season', null)->orderBy('id', 'desc')->get();
             foreach ($animes as $anime) {
-                $season = '';
-                $started_at_month = Carbon::parse($anime->started_at)->month;
-                if ($started_at_month >= 1 && $started_at_month <= 3) {
-                    $season = 'Winter';
-                } elseif ($started_at_month >= 4 && $started_at_month <= 6) {
-                    $season = 'Spring';
-                } elseif ($started_at_month >= 7 && $started_at_month <= 9) {
-                    $season = 'Summer';
-                } elseif ($started_at_month >= 10 && $started_at_month <= 12) {
-                    $season = 'Fall';
-                }
+                $url = $anime->sources['myanimelist'];
+                $curl_connection = curl_init($url);
+                curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+                curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+                $html = curl_exec($curl_connection);
+                curl_close($curl_connection);
 
-                $anime->season = $season.' '.Carbon::parse($anime->started_at)->year;
+                $season = Helper::get_string_between($html, 'Premiered:</span>', '/a>');
+                $season = Helper::get_string_between($season, '>', '<');
+                $anime->season = $season;
                 $anime->save();
             }
         }
