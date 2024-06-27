@@ -20,6 +20,13 @@ class BotController extends Controller
 {
     public function tempMethod(Request $request)
     {
+        $animes = Anime::all();
+        foreach ($animes as $anime) {
+            $anime->genres = [];
+            $anime->tags = [];
+            $anime->save();
+        }
+
         if ($request->column == 'description') {
             $animes = Anime::where('description', null)->orWhere('description', '')->orderBy('id', 'desc')->get();
             foreach ($animes as $anime) {
@@ -100,14 +107,6 @@ class BotController extends Controller
                 }
             }
 
-        } elseif ($request->column == 'season') {
-            $animes = Anime::where('season', '')->orWhere('season', '
-
-  ')->orderBy('id', 'desc')->get();
-            foreach ($animes as $anime) {
-                $anime->season = null;
-                $anime->save();
-            }
         }
 
         /* for ($i = 60000; $i < 70000; $i++) { 
