@@ -101,7 +101,7 @@ class BotController extends Controller
             }
 
         } elseif ($request->column == 'season') {
-            $animes = Anime::where('season', null)->orderBy('id', 'desc')->get();
+            $animes = Anime::where('started_at', null)->orderBy('id', 'desc')->get();
             foreach ($animes as $anime) {
                 $url = $anime->sources['myanimelist'];
                 $curl_connection = curl_init($url);
