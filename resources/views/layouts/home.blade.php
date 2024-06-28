@@ -5,114 +5,164 @@
 @endsection
 
 @section('content')
-<div class="page-content">
-	<div class="filters-wrap">
+	<div class="page-content">
+		<div class="filters-wrap">
+			<div class="filters">
+				<div class="filter search">
+					<h3>搜尋</h3>
+					<div class="bar">
+						<input type="search" placeholder="輸入關鍵字...">
+					</div>
+				</div>
+				<div class="filter genres">
+					<h3>類別</h3>
+					<div class="bar">
+						<input type="search" placeholder="輸入類別...">
+						<select name="genres" id="genres">
+							<div class="option-group">
+								<h3>類別</h3>
+								<option value="動作">動作</option>
+								<option value="戀愛">戀愛</option>
+								<option value="搞笑">搞笑</option>
+							</div>
+							<div class="option-group">
+								<h3>標籤</h3>
+								<option value="動作">動作</option>
+								<option value="戀愛">戀愛</option>
+								<option value="搞笑">搞笑</option>
+								<option value="幻想">幻想</option>
+							</div>
 
-	</div>
-	<div class="content-wrap">
-		<div class="landing-section">
-			<div class="title-link">
-				<a href="">
-					<h3>最近更新</h3>
-				</a>
-				<a href="">顯示更多</a>
-			</div>
-			<div class="media-wrap">
-				@foreach ($最近更新 as $anime)
-					<div class="media-card">
-						<a href="{{ route('anime.show', ['anime' => $anime->id, 'title' => $anime->title_ro]) }}">
-							<img src="{{ $anime->photo_cover }}" alt="">
-						</a>
-						<a href="{{ route('anime.show', ['anime' => $anime->id, 'title' => $anime->title_ro]) }}">{{ $anime->title_ro }}
-						</a>
+						</select>
 					</div>
-				@endforeach
+				</div>
+				<div class="filter year">
+					<h3>年份</h3>
+					<div class="bar">
+
+					</div>
+				</div>
+				<div class="filter season">
+					<h3>季節</h3>
+					<div class="bar">
+
+					</div>
+				</div>
+				<div class="filter season">
+					<h3>動畫類別</h3>
+					<div class="bar">
+
+					</div>
+				</div>
+			</div>
+			<div class="extra-filter-wrap">
+
 			</div>
 		</div>
-		<div class="landing-section">
-			<div class="title-link">
-				<a href="">
-					<h3>本季流行</h3>
-				</a>
-				<a href="">顯示更多</a>
+		<div class="content-wrap">
+			<div class="landing-section">
+				<div class="title-link">
+					<a href="">
+						<h3>最近更新</h3>
+					</a>
+					<a href="">顯示更多</a>
+				</div>
+				<div class="media-wrap">
+					@foreach ($最近更新 as $anime)
+						<div class="media-card">
+							<a href="{{ route('anime.show', ['anime' => $anime->id, 'title' => $anime->title_ro]) }}">
+								<img src="{{ $anime->photo_cover }}" alt="">
+							</a>
+							<a href="{{ route('anime.show', ['anime' => $anime->id, 'title' => $anime->title_ro]) }}">{{ $anime->title_ro }}
+							</a>
+						</div>
+					@endforeach
+				</div>
 			</div>
-			<div class="media-wrap">
-				@foreach ($本季流行 as $anime)
-					<div class="media-card">
-						<a href="{{ route('anime.show', ['anime' => $anime->id, 'title' => $anime->title_ro]) }}">
-							<img src="{{ $anime->photo_cover }}" alt="">
-						</a>
-						<a href="{{ route('anime.show', ['anime' => $anime->id, 'title' => $anime->title_ro]) }}">{{ $anime->title_ro }}
-						</a>
-					</div>
-				@endforeach
+			<div class="landing-section">
+				<div class="title-link">
+					<a href="">
+						<h3>本季流行</h3>
+					</a>
+					<a href="">顯示更多</a>
+				</div>
+				<div class="media-wrap">
+					@foreach ($本季流行 as $anime)
+						<div class="media-card">
+							<a href="{{ route('anime.show', ['anime' => $anime->id, 'title' => $anime->title_ro]) }}">
+								<img src="{{ $anime->photo_cover }}" alt="">
+							</a>
+							<a href="{{ route('anime.show', ['anime' => $anime->id, 'title' => $anime->title_ro]) }}">{{ $anime->title_ro }}
+							</a>
+						</div>
+					@endforeach
+				</div>
+			</div>
+			<div class="landing-section">
+				<div class="title-link">
+					<a href="">
+						<h3>經典作品</h3>
+					</a>
+					<a href="">顯示更多</a>
+				</div>
+				<div class="media-wrap">
+					@foreach ($animes as $anime)
+						<div class="media-card">
+							<a href="{{ route('anime.show', ['anime' => $anime->id, 'title' => $anime->title_ro]) }}">
+								<img src="{{ $anime->photo_cover }}" alt="">
+							</a>
+							<a href="{{ route('anime.show', ['anime' => $anime->id, 'title' => $anime->title_ro]) }}">{{ $anime->title_ro }}
+							</a>
+						</div>
+					@endforeach
+				</div>
 			</div>
 		</div>
-		<div class="landing-section">
+		<div class="top-anime">
 			<div class="title-link">
 				<a href="">
-					<h3>經典作品</h3>
+					<h3>人氣排行</h3>
 				</a>
 				<a href="">顯示更多</a>
 			</div>
-			<div class="media-wrap">
+			<div class="results">
 				@foreach ($animes as $anime)
-					<div class="media-card">
-						<a href="{{ route('anime.show', ['anime' => $anime->id, 'title' => $anime->title_ro]) }}">
-							<img src="{{ $anime->photo_cover }}" alt="">
-						</a>
-						<a href="{{ route('anime.show', ['anime' => $anime->id, 'title' => $anime->title_ro]) }}">{{ $anime->title_ro }}
-						</a>
-					</div>
-				@endforeach
-			</div>
-		</div>
-	</div>
-	<div class="top-anime">
-		<div class="title-link">
-			<a href="">
-				<h3>人氣排行</h3>
-			</a>
-			<a href="">顯示更多</a>
-		</div>
-		<div class="results">
-			@foreach ($animes as $anime)
-				<div class="results-wrap">
-					<div class="rank">
-						<span>#</span>{{ $anime->id }}
-					</div>
-					<div class="content">
-						<div class="anime-title">
-							<a href=""><img src="{{ $anime->photo_cover }}" alt=""></a>
-							<div class="title-wrap">
-								<a href="">{{ $anime->title_ro }}</a>
-								<div class="genres">
-									<a href="">冒險</a>
-									<a href="">搞笑</a>
-									<a href="">熱血</a>
-									<a href="">歷史</a>
+					<div class="results-wrap">
+						<div class="rank">
+							<span>#</span>{{ $anime->id }}
+						</div>
+						<div class="content">
+							<div class="anime-title">
+								<a href="{{ route('anime.show', ['anime' => $anime->id, 'title' => $anime->title_ro]) }}"><img src="{{ $anime->photo_cover }}" alt=""></a>
+								<div class="title-wrap">
+									<a href="{{ route('anime.show', ['anime' => $anime->id, 'title' => $anime->title_ro]) }}">{{ $anime->title_ro }}</a>
+									<div class="genres">
+										<a href="">冒險</a>
+										<a href="">搞笑</a>
+										<a href="">熱血</a>
+										<a href="">歷史</a>
+									</div>
+								</div>
+							</div>
+							<div class="anime-info">
+								<div class="overall-rating" style="font-size:25px;">☻</div>
+								<div class="rating">
+									<div>95%</div>
+									<div style="font-size:13px">182733 用戶</div>
+								</div>
+								<div class="category">
+									<div>季番</div>
+									<div style="font-size:13px">21集</div>
+								</div>
+								<div class="ended-at">
+									<div>秋番 2021</div>
+									<div style="font-size:13px">播放完結</div>
 								</div>
 							</div>
 						</div>
-						<div class="anime-info">
-							<div class="overall-rating" style="font-size:25px;">☻</div>
-							<div class="rating">
-								<div>95%</div>
-								<div style="font-size:13px">182733 用戶</div>
-							</div>
-							<div class="category">
-								<div>季番</div>
-								<div style="font-size:13px">21集</div>
-							</div>
-							<div class="ended-at">
-								<div>秋番 2021</div>
-								<div style="font-size:13px">播放完結</div>
-							</div>
-						</div>
 					</div>
-				</div>
-			@endforeach
+				@endforeach
+			</div>
 		</div>
 	</div>
-</div>
 @endsection
