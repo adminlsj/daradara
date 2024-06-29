@@ -3,7 +3,7 @@
         <img src="{{ $anime->photo_cover }}" alt="">
         <div class="button-groups">
             <div class="list btn-group">
-                <button class="add btn btn-secondary">Add to list</button>
+                <button class="add btn btn-secondary">添加至列表</button>
                 <button class="down btn btn-secondary dropdown-toggle dropdown" type="button" id="dropdownMenuButton"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="document.getElementById('dropdownMenu').style.display='flex'">
                     <i class="fa fa-chevron-down"></i>
