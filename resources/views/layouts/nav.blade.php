@@ -1,4 +1,4 @@
-<div class="navbar">
+<div class="navbar" style="margin:0;">
     <div class="icon">
         <a href="/">
             <img src="https://i.meee.com.tw/W28kWhV.png" alt="">
