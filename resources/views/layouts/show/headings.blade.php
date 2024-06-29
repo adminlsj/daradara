@@ -5,13 +5,13 @@
             <div class="list btn-group">
                 <button class="add btn btn-secondary">Add to list</button>
                 <button class="down btn btn-secondary dropdown-toggle dropdown" type="button" id="dropdownMenuButton"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="document.getElementById('dropdownMenu').style.display='flex'">
                     <i class="fa fa-chevron-down"></i>
                 </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
+                <div class="dropdown-menu" id="dropdownMenu" aria-labelledby="dropdownMenuButton" style="display:none;">
+                    <a class="dropdown-item" href="#">添加至觀看中</a>
+                    <a class="dropdown-item" href="#">添加至準備觀看</a>
+                    <a class="dropdown-item" href="#">列表編輯器</a>
                 </div>
             </div>
             <button class="favorite">♥</button>
@@ -30,6 +30,15 @@
         </div>
     </div>
 </div>
+
+<script>
+    window.addEventListener('mouseup', function (event) {
+        var dropdownMenu = document.getElementById('dropdownMenu');
+        if (event.target != dropdownMenu && event.target.parentNode != dropdownMenu) {
+            dropdownMenu.style.display = 'none';
+        }
+    });  
+</script>
 
 <script>
     function activeTab(evt, tabName) {
