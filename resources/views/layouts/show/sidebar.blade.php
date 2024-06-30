@@ -45,7 +45,7 @@
         <div class="data-set">
             <div class="type">類別</div>
             @foreach ($anime->genres as $genre)
-                <div class="format"> {{ $genre }} </div>
+                <div class="format"> <a href="">{{ $genre }}</a> </div>
             @endforeach
         </div>
         <div class="data-set">
