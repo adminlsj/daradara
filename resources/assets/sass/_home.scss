@@ -125,6 +125,47 @@
     color: #d378ae;
 }
 
+// buttons on media-card
+
+.page-content .content-wrap .landing-section .media-wrap .media-card .button-wrap {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    cursor: pointer;
+    scale: 1.3;
+    padding: 8px;
+}
+
+.page-content .content-wrap .landing-section .media-wrap .media-card .button-wrap .button-list {
+    display: flex;
+    flex-direction: row;
+}
+
+.page-content .content-wrap .landing-section .media-wrap .media-card .button-wrap .button-list button {
+    display: none;
+    background-color: black;
+    color: white;
+    opacity: 80%;
+    border: none;
+    border-radius: 5px;
+    transition: 0.2s;
+}
+
+.page-content .content-wrap .landing-section .media-wrap .media-card:hover .button-list button {
+    display: block;
+    animation: animatezoom 0.2s;
+}
+
+@keyframes animatezoom {
+    from {
+        transform: scale(0)
+    }
+
+    to {
+        transform: scale(1)
+    }
+}
+
 //top anime sections
 .page-content .top-anime {
     display: flex;
@@ -187,14 +228,14 @@
     margin-right: 20px;
 }
 
-.page-content .top-anime .results .content a{
+.page-content .top-anime .results .content a {
     text-decoration: none;
     color: rgb(221, 229, 236);
     font-size: 16px;
     transition: 0.3;
 }
 
-.page-content .top-anime .results .content a:hover{
+.page-content .top-anime .results .content a:hover {
     color: white;
 }
 
@@ -212,7 +253,7 @@
 
 .page-content .top-anime .results .content .title-wrap .genres a {
     font-size: 13px;
-    background-color:brown;
+    background-color: brown;
     padding: 3px 8px;
     border-radius: 40px;
     margin-right: 5px;
@@ -225,7 +266,10 @@
     justify-content: space-between;
 }
 
-.page-content .top-anime .results .content .anime-info .overall-rating, .rating, .category, .ended-at {
+.page-content .top-anime .results .content .anime-info .overall-rating,
+.rating,
+.category,
+.ended-at {
     display: flex;
     flex-direction: column;
     color: #8b9fb5;

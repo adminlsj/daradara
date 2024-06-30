@@ -73,6 +73,11 @@
 						<a href="{{ route('anime.show', ['anime' => $anime->id, 'title' => $anime->title_ro]) }}">
 							<img src="{{ $anime->photo_cover }}" alt="">
 						</a>
+						<div class="button-wrap">
+							<div class="button-list">
+								<button>+</button>
+							</div>
+						</div>
 						<a href="{{ route('anime.show', ['anime' => $anime->id, 'title' => $anime->title_ro]) }}">{{ $anime->title_ro }}
 						</a>
 					</div>
@@ -167,8 +172,4 @@
 		</div>
 	</div>
 </div>
-@endsection
-
-@section('footer')
-@include('layouts.footer')
 @endsection
