@@ -13,34 +13,31 @@
     align-items: flex-end;
 }
 
-.page-content .filters-wrap .filters {
+.filters {
     display: flex;
     flex-direction: row;
 }
 
-.page-content .filters-wrap .filters .filter {
+.filter {
     display: flex;
     flex-direction: column;
     margin-right: 30px;
 }
 
-.page-content .filters-wrap .filters .filter h3 {
+.filter h3 {
     font-size: 15px;
     color: #8b9fb5;
 }
 
-.page-content .filters-wrap .filters .filter .bar {
+.filter .bar {
     height: 40px;
     width: 170px;
     background-color: #151f2e;
     border-radius: 5px;
-}
-
-.page-content .filters-wrap .filters .filter .bar {
     position: relative;
 }
 
-.page-content .filters-wrap .filters .filter .bar input[type=search] {
+.filter .bar input[type=search] {
     width: 100%;
     height: 100%;
     background-color: transparent;
@@ -50,7 +47,7 @@
     padding: 5px 12px;
 }
 
-.page-content .filters-wrap .filters .filter .bar .scroll-wrap {
+.filter .bar .scroll-wrap {
     display: none;
     background-color: #151f2e;
     margin-top: 10px;
@@ -69,16 +66,19 @@
     }
 }
 
-.page-content .filters-wrap .filters .filter .bar .scroll-wrap .option-group option {
+.option-group option {
     padding: 5px 8px;
     color: #9baec1;
+    transition: 0.2s;
 }
 
-.page-content .filters-wrap .filters .filter .bar .scroll-wrap .option-group option:hover {
+.option-group option:hover {
     background-color: #0b1622;
     color: aqua;
     cursor: pointer;
 }
+
+//extra-filter-wrap
 
 .page-content .filters-wrap .extra-filter-wrap {
     height: 40px;
@@ -91,12 +91,49 @@
     width: 100%;
     background-color: transparent;
     color: #8b9fb5;
-    transition: 0.3s;   
+    transition: 0.3s;
     border-radius: 5px;
 }
 
 .page-content .filters-wrap .extra-filter-wrap button:hover {
     color: aliceblue;
+}
+
+.extra-filter-dropdown {
+    position: relative;
+    background-color: #151f2e;
+    padding: 25px 40px;
+    border-radius: 5px;
+    height: fit-content;
+    width: fit-content;
+    display: none;
+    flex-direction: column;
+    animation: expand 0.15s;
+}
+
+.extra-filter-dropdown .filters-wrap .filter .bar {
+    background-color: #0b1622;
+}
+
+.extra-filter-dropdown .filters-wrap .filter .bar .scroll-wrap {
+    background-color: #0b1622;
+}
+
+.extra-filter-dropdown .filters-wrap .filter .bar .scroll-wrap .option-group option:hover {
+    background-color: #151f2e;
+}
+
+.extra-filter-dropdown .range .filter .bar {
+    background-color: transparent;
+}
+
+.extra-filter-dropdown .checkbox .filter .bar {
+    background-color: transparent;
+}
+
+.extra-filter-dropdown .checkbox .filter .bar label {
+    color: #9baec1;
+    padding: 0;
 }
 
 //landing-section showing animes
