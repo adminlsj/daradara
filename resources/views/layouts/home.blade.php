@@ -16,9 +16,10 @@
 			</div>
 			<div class="filter genres">
 				<h3>類別</h3>
-				<div class="bar custom-select">
-					<input type="search" placeholder="輸入類別...">
-					<select name="genres" id="genres">
+				<div class="bar">
+					<input type="search" placeholder="輸入類別..."
+						onclick="document.getElementById('option-genres').style.display='block'">
+					<div class="scroll-wrap" id="option-genres">
 						<div class="option-group">
 							<h3>類別</h3>
 							<option value="動作">動作</option>
@@ -32,26 +33,51 @@
 							<option value="搞笑">搞笑</option>
 							<option value="幻想">幻想</option>
 						</div>
-					</select>
+					</div>
 				</div>
-
 			</div>
 			<div class="filter year">
 				<h3>年份</h3>
 				<div class="bar">
-
+					<input type="search" placeholder="輸入年份..."
+						onclick="document.getElementById('option-years').style.display='block'">
+					<div class="scroll-wrap" id="option-years">
+						<div class="option-group">
+							<option value="2025">2025</option>
+							<option value="2024">2024</option>
+							<option value="2023">2023</option>
+						</div>
+					</div>
 				</div>
 			</div>
 			<div class="filter season">
 				<h3>季節</h3>
 				<div class="bar">
-
+					<input type="search" placeholder="輸入季節..."
+						onclick="document.getElementById('option-seasons').style.display='block'">
+					<div class="scroll-wrap" id="option-seasons">
+						<div class="option-group">
+							<option value="春季">春季</option>
+							<option value="夏季">夏季</option>
+							<option value="秋季">秋季</option>
+							<option value="冬季">冬季</option>
+						</div>
+					</div>
 				</div>
 			</div>
-			<div class="filter season">
+			<div class="filter format">
 				<h3>動畫類別</h3>
 				<div class="bar">
-
+					<input type="search" placeholder="輸入類別..."
+						onclick="document.getElementById('option-formats').style.display='block'">
+					<div class="scroll-wrap" id="option-formats">
+						<div class="option-group">
+							<option value="季番">季番</option>
+							<option value="電影">電影</option>
+							<option value="OVA">OVA</option>
+							<option value="特別篇">特別篇</option>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -173,3 +199,29 @@
 	</div>
 </div>
 @endsection
+
+<script>
+	window.addEventListener('mouseup', function (event) {
+		var optionGenres = document.getElementById('option-genres');
+		var optionYears = document.getElementById('option-years');
+		var optionSeasons = document.getElementById('option-seasons');
+		var optionFormats = document.getElementById('option-formats');
+
+		if (event.target === optionGenres) {
+			optionGenres.style.display = 'block';
+		}
+		else if (event.target === optionYears) {
+			optionYears.style.display = 'block';
+		}
+		else if (event.target === optionSeasons) {
+			optionSeasons.style.display = 'block';
+		}
+		else if (event.target === optionFormats) {
+			optionFormats.style.display = 'block';
+		}
+		optionGenres.style.display = 'none';
+		optionYears.style.display = 'none';
+		optionSeasons.style.display = 'none';
+		optionFormats.style.display = 'none';
+	});  
+</script>
