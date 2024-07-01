@@ -82,8 +82,100 @@
 			</div>
 		</div>
 		<div class="extra-filter-wrap">
-			<button><i class="fa-thin fa-filter"></i></button>
+			<button onclick="document.getElementById('extra-filter-dropdown').style.display = 'flex';"><i
+					class="fa-thin fa-filter"></i></button>
 		</div>
+	</div>
+	<div class="extra-filter-dropdown" id="extra-filter-dropdown">
+		<form action="">
+			<button type="button" style="float:right;" onclick="document.getElementById('extra-filter-dropdown').style.display = 'none';">X</button>
+			<div class="filters">
+				<div class="filters-wrap">
+					<div class="filter airing-status">
+						<h3>播放狀態</h3>
+						<div class="bar">
+							<input type="search" placeholder="輸入狀態..."
+								onclick="document.getElementById('option-airing-status').style.display='block'">
+							<div class="scroll-wrap" id="option-airing-status">
+								<div class="option-group">
+									<option value="播放中">播放中</option>
+									<option value="完結">完結</option>
+									<option value="製作中">製作中</option>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="filters-wrap">
+					<div class="filter country-origin">
+						<h3>國家</h3>
+						<div class="bar">
+							<input type="search" placeholder="輸入國家..."
+								onclick="document.getElementById('option-country-origin').style.display='block'">
+							<div class="scroll-wrap" id="option-country-origin">
+								<div class="option-group">
+									<option value="日本">日本</option>
+									<option value="韓國">韓國</option>
+									<option value="美國">美國</option>
+									<option value="中國">中國</option>
+									<option value="其他">其他</option>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="filters">
+				<div class="filters-wrap range">
+					<div class="filter">
+						<h3>年份</h3>
+						<div class="bar">
+							<input type="range" min="1970" max="2025" value="2025">
+						</div>
+					</div>
+					<div class="filter">
+						<h3>集數</h3>
+						<div class="bar">
+							<input type="range" min="1" max="150" value="150">
+						</div>
+					</div>
+					<div class="filter">
+						<h3>時長</h3>
+						<div class="bar">
+							<input type="range" min="1" max="170" value="170">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="filters">
+				<div class="filters-wrap checkbox">
+					<div class="filter">
+						<div class="bar">
+							<input type="checkbox" id="doujin" name="doujin" value="doujin">
+							<label for="doujin"> 同人</label><br>
+						</div>
+					</div>
+					<div class="filter">
+						<div class="bar">
+							<input type="checkbox" id="showAnimeList" name="showAnimeList" value="showAnimeList">
+							<label for="showAnimeList"> 顯示收藏動漫</label><br>
+						</div>
+					</div>
+					<div class="filter">
+						<div class="bar">
+							<input type="checkbox" id="hideAnimeList" name="hideAnimeList" value="hideAnimeList">
+							<label for="hideAnimeList"> 隱藏收藏動漫</label><br>
+						</div>
+					</div>
+					<div class="filter">
+						<div class="bar">
+							<input type="checkbox" id="adult" name="adult" value="adult">
+							<label for="adult"> 成人</label><br>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
 	</div>
 	<div class="content-wrap">
 		<div class="landing-section">
@@ -206,6 +298,8 @@
 		var optionYears = document.getElementById('option-years');
 		var optionSeasons = document.getElementById('option-seasons');
 		var optionFormats = document.getElementById('option-formats');
+		var optionAiringStatus = document.getElementById('option-airing-status');
+		var optionCountryOrigin = document.getElementById('option-country-origin');
 
 		if (event.target === optionGenres) {
 			optionGenres.style.display = 'block';
@@ -219,9 +313,18 @@
 		else if (event.target === optionFormats) {
 			optionFormats.style.display = 'block';
 		}
+		else if (event.target === optionAiringStatus) {
+			optionAiringStatus.style.display = 'block';
+		}
+		else if (event.target === optionCountryOrigin) {
+			optionCountryOrigin.style.display = 'block';
+		}
+
 		optionGenres.style.display = 'none';
 		optionYears.style.display = 'none';
 		optionSeasons.style.display = 'none';
 		optionFormats.style.display = 'none';
+		optionAiringStatus.style.display = 'none';
+		optionCountryOrigin.style.display = 'none';
 	});  
 </script>
