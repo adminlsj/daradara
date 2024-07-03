@@ -88,7 +88,8 @@
 	</div>
 	<div class="extra-filter-dropdown" id="extra-filter-dropdown">
 		<form action="">
-			<button type="button" style="float:right;" onclick="document.getElementById('extra-filter-dropdown').style.display = 'none';">X</button>
+			<button type="button" style="float:right;"
+				onclick="document.getElementById('extra-filter-dropdown').style.display = 'none';">X</button>
 			<div class="filters">
 				<div class="filters-wrap">
 					<div class="filter airing-status">

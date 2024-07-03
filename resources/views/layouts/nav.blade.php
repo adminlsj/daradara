@@ -8,7 +8,16 @@
     <div class="navbar-wrap">
         <a href="">個人資料</a>
         <a href="">動畫列表</a>
-        <a href="">尋找</a>
+        <div class="search-wrap">
+            <a href="">尋找</a>
+            <div class="search-dropdown">
+                <div class="primary-links">
+                    <div class="primary-link search-anime">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
         <a href="">論壇區</a>
     </div>
 
