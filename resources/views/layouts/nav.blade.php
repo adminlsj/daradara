@@ -13,7 +13,15 @@
             <div class="search-dropdown">
                 <div class="primary-links">
                     <div class="primary-link search-anime">
-                        
+                        <a href="" style="font-size:18px;">▶</a>
+                        <div class="primary-link-card">
+                            <a href="">動畫</a>
+                            <div class="secondary-links">
+                                <a href="">Top 100</a>
+                                <a href="">流行中</a>
+                                <a href="">電影推薦</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
