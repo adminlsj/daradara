@@ -3,9 +3,35 @@
         <img src="{{ $anime->photo_cover }}" alt="">
         <div class="button-groups">
             <div class="list btn-group">
-                <button class="add btn btn-secondary">添加至列表</button>
+                <button class="add btn btn-secondary"
+                    onclick="document.getElementById('addToList').style.display='flex'">添加至列表</button>
+
+                <div id="addToList" class="modal">
+                    <form class="modal-content animate" action="/action_page.php" method="post">
+                        <div class="container">
+                            <button class="cancel-button" type="button"
+                                onclick="document.getElementById('addToList').style.display='none'">X</button>
+                            <img src=" {{ $anime->photo_banner }}" alt="為美好世界獻上祝福">
+                            <div class="add-to-list-cover">
+                                <div class="title">
+                                    <img src="{{ $anime->photo_cover }}" alt="">
+                                    <h3> {{ $anime->title_ro }} </h3>
+                                </div>
+                                <div class="button-groups">
+                                    <button class="favorite" type="button">♥</button>
+                                    <button class="add">儲存</button>
+                                </div>
+                            </div>
+
+                            <label for="psw"><b>Password</b></label>
+                            <input type="password" placeholder="Enter Password" name="psw" required>
+                        </div>
+                    </form>
+                </div>
+
                 <button class="down btn btn-secondary dropdown-toggle dropdown" type="button" id="dropdownMenuButton"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="document.getElementById('dropdownMenu').style.display='flex'">
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                    onclick="document.getElementById('dropdownMenu').style.display='flex'">
                     <i class="fa fa-chevron-down"></i>
                 </button>
                 <div class="dropdown-menu" id="dropdownMenu" aria-labelledby="dropdownMenuButton" style="display:none;">
@@ -38,6 +64,16 @@
             dropdownMenu.style.display = 'none';
         }
     });  
+</script>
+
+<script>
+    var modal = document.getElementById('addToList');
+
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
 </script>
 
 <script>
