@@ -87,10 +87,10 @@
                                 <div class="add-to-list-options filter">
                                     <h3>動漫清單</h3>
                                     <div class="user-lists">
-                                        <input type="checkbox" name="雨宮天" value="雨宮天">
+                                        <input type="checkbox" name="雨宮天" value="雨宮天" id="雨宮天">
                                         <label for="雨宮天">雨宮天</label>
                                         <br>
-                                        <input type="checkbox" name="2023神番" value="2023神番">
+                                        <input type="checkbox" name="2023神番" value="2023神番" id="2023神番">
                                         <label for="2023神番">2023神番</label>
                                         <br>
                                     </div>
