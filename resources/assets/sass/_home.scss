@@ -1,6 +1,4 @@
 .page-content {
-    display: flex;
-    flex-direction: column;
     background-color: #0b1622;
     padding: 20px 12%;
 }
@@ -38,7 +36,10 @@
     z-index: 5;
 }
 
-.filter .bar input[type=search], .filter .bar input[type=number], .filter .bar input[type=date], .filter .bar textarea {
+.filter .bar input[type=search],
+.filter .bar input[type=number],
+.filter .bar input[type=date],
+.filter .bar textarea {
     width: 100%;
     height: 100%;
     background-color: transparent;
@@ -83,13 +84,13 @@
 
 //extra-filter-wrap
 
-.page-content .filters-wrap .extra-filter-wrap {
+.extra-filter-wrap {
     height: 40px;
     width: 40px;
     background-color: #151f2e;
 }
 
-.page-content .filters-wrap .extra-filter-wrap button {
+.extra-filter-wrap button {
     height: 100%;
     width: 100%;
     background-color: transparent;
@@ -98,7 +99,7 @@
     border-radius: 5px;
 }
 
-.page-content .filters-wrap .extra-filter-wrap button:hover {
+.extra-filter-wrap button:hover {
     color: aliceblue;
 }
 
@@ -142,11 +143,11 @@
 
 //landing-section showing animes
 
-.page-content .content-wrap .landing-section {
+.landing-section {
     margin-bottom: 30px;
 }
 
-.page-content .content-wrap .landing-section .title-link {
+.landing-section .title-link {
     display: flex;
     flex-direction: row;
     align-items: baseline;
@@ -154,36 +155,36 @@
     margin-bottom: 12px;
 }
 
-.page-content .content-wrap .landing-section .title-link a {
+.landing-section .title-link a {
     text-decoration: none;
     color: #8b9fb5;
     transition: 0.3s;
 }
 
-.page-content .content-wrap .landing-section .title-link a:hover {
+.landing-section .title-link a:hover {
     color: aliceblue;
 }
 
-.page-content .content-wrap .landing-section .media-wrap {
+.landing-section .media-wrap {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
 
-.page-content .content-wrap .landing-section .media-wrap .media-card {
+.media-card {
     display: flex;
     flex-direction: column;
     width: 17%;
 }
 
-.page-content .content-wrap .landing-section .media-wrap .media-card img {
+.media-card img {
     height: 265px;
     width: 100%;
     border-radius: 5px;
     margin-bottom: 10px;
 }
 
-.page-content .content-wrap .landing-section .media-wrap .media-card a {
+.media-card a {
     text-decoration: none;
     color: #8b9fb5;
     font-size: 15px;
@@ -191,13 +192,13 @@
     text-wrap: wrap;
 }
 
-.page-content .content-wrap .landing-section .media-wrap .media-card:hover a {
+.media-card:hover a {
     color: #d378ae;
 }
 
 // buttons on media-card
 
-.page-content .content-wrap .landing-section .media-wrap .media-card .button-wrap {
+.media-card .button-wrap {
     display: flex;
     flex-direction: column;
     position: absolute;
@@ -206,12 +207,12 @@
     padding: 8px;
 }
 
-.page-content .content-wrap .landing-section .media-wrap .media-card .button-wrap .button-list {
+.media-card .button-wrap .button-list {
     display: flex;
     flex-direction: row;
 }
 
-.page-content .content-wrap .landing-section .media-wrap .media-card .button-wrap .button-list button {
+.media-card .button-wrap .button-list button {
     display: none;
     background-color: black;
     color: white;
@@ -221,7 +222,7 @@
     transition: 0.2s;
 }
 
-.page-content .content-wrap .landing-section .media-wrap .media-card:hover .button-list button {
+.media-card:hover .button-list button {
     display: block;
     animation: animatezoom 0.2s;
 }
@@ -237,37 +238,31 @@
 }
 
 //top anime sections
-.page-content .top-anime {
-    display: flex;
-    flex-direction: column;
-}
 
-.page-content .top-anime .title-link {
-    display: flex;
-    flex-direction: row;
+.top-anime .title-link {
     align-items: baseline;
     justify-content: space-between;
     margin-bottom: 12px;
 }
 
-.page-content .top-anime .title-link a {
+.top-anime .title-link a {
     text-decoration: none;
     color: #8b9fb5;
     transition: 0.3s;
 }
 
-.page-content .top-anime .title-link a:hover {
+.top-anime .title-link a:hover {
     color: aliceblue;
 }
 
-.page-content .top-anime .results .results-wrap {
+.top-anime .results .results-wrap {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     margin-bottom: 30px;
 }
 
-.page-content .top-anime .results .rank {
+.top-anime .results .rank {
     flex: 7%;
     max-width: 7%;
     padding: 20px 10px;
@@ -277,11 +272,11 @@
     text-align: center;
 }
 
-.page-content .top-anime .results .rank span {
+.top-anime .results .rank span {
     font-size: medium;
 }
 
-.page-content .top-anime .results .content {
+.top-anime .results .content {
     display: flex;
     flex-direction: row;
     flex: 90%;
@@ -292,36 +287,36 @@
     justify-content: space-between;
 }
 
-.page-content .top-anime .results .content img {
+.top-anime .results .content img {
     width: 48px;
     height: 60px;
     margin-right: 20px;
 }
 
-.page-content .top-anime .results .content a {
+.top-anime .results .content a {
     text-decoration: none;
     color: rgb(221, 229, 236);
     font-size: 16px;
     transition: 0.3;
 }
 
-.page-content .top-anime .results .content a:hover {
+.top-anime .results .content a:hover {
     color: white;
 }
 
 
-.page-content .top-anime .results .content .anime-title {
+.top-anime .results .content .anime-title {
     display: flex;
     flex-direction: row;
 }
 
-.page-content .top-anime .results .content .title-wrap {
+.top-anime .results .content .title-wrap {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
 }
 
-.page-content .top-anime .results .content .title-wrap .genres a {
+.top-anime .results .content .title-wrap .genres a {
     font-size: 13px;
     background-color: brown;
     padding: 3px 8px;
@@ -329,14 +324,14 @@
     margin-right: 5px;
 }
 
-.page-content .top-anime .results .content .anime-info {
+.top-anime .results .content .anime-info {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
 }
 
-.page-content .top-anime .results .content .anime-info .overall-rating,
+.top-anime .results .content .anime-info .overall-rating,
 .rating,
 .category,
 .ended-at {

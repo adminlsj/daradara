@@ -1,5 +1,5 @@
 <div id="staffs" class="tabcontent" style="display:none">
-    <div class="staffs-wrap">
+    <div class="staffs-wrap flex-row">
         <div class="staffs-card">
             <a href=""><img src="https://i.meee.com.tw/U3N6IV3.png" alt=""></a>
             <div class="staffs-name">

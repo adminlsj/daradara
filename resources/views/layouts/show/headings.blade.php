@@ -1,7 +1,7 @@
-<div class="headings">
-    <div class="cover">
+<div class="headings flex-row">
+    <div class="cover flex-column">
         <img src="{{ $anime->photo_cover }}" alt="">
-        <div class="button-groups">
+        <div class="button-groups flex-row">
             <div class="list btn-group">
                 <button class="add btn btn-secondary"
                     onclick="document.getElementById('addToList').style.display='flex'">添加至列表
@@ -9,12 +9,12 @@
 
                 <div id="addToList" class="modal">
                     <form class="modal-content animate" action="/action_page.php" method="post">
-                        <div class="container">
+                        <div class="container flex-column">
                             <button class="cancel-button" type="button"
                                 onclick="document.getElementById('addToList').style.display='none'">X</button>
                             <img src=" {{ $anime->photo_banner }}" alt="為美好世界獻上祝福">
-                            <div class="add-to-list-cover">
-                                <div class="title">
+                            <div class="add-to-list-cover flex-row">
+                                <div class="title flex-row">
                                     <img src="{{ $anime->photo_cover }}" alt="">
                                     <h3> {{ $anime->title_ro }} </h3>
                                 </div>
@@ -24,7 +24,7 @@
                                 </div>
                             </div>
 
-                            <div class="add-to-list-content">
+                            <div class="add-to-list-content flex-row">
                                 <div class="filters">
                                     <div class="filter watching-status">
                                         <h3>觀看狀態</h3>
@@ -84,7 +84,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="add-to-list-options filter">
+                                <div class="add-to-list-options filter flex-column">
                                     <h3>動漫清單</h3>
                                     <div class="user-lists">
                                         <input type="checkbox" name="雨宮天" value="雨宮天" id="雨宮天">
@@ -115,7 +115,7 @@
                     onclick="document.getElementById('dropdownMenu').style.display='flex'">
                     <i class="fa fa-chevron-down"></i>
                 </button>
-                <div class="dropdown-menu" id="dropdownMenu" aria-labelledby="dropdownMenuButton" style="display:none;">
+                <div class="dropdown-menu flex-column" id="dropdownMenu" aria-labelledby="dropdownMenuButton" style="display:none;">
                     <a class="dropdown-item" href="#">添加至觀看中</a>
                     <a class="dropdown-item" href="#">添加至準備觀看</a>
                     <a class="dropdown-item" href="#">列表編輯器</a>
@@ -124,10 +124,10 @@
             <button class="favorite">♥</button>
         </div>
     </div>
-    <div class="heading-content">
+    <div class="heading-content flex-column">
         <h3> {{ $anime->title_ro }} </h3>
         <p> {{ $anime->description }} </p>
-        <div class="navtabs">
+        <div class="navtabs flex-row">
             <button class="tablinks" onclick="activeTab(event, 'overview')">簡介</button>
             <button class="tablinks" onclick="activeTab(event, 'episodes')">集數列表</button>
             <button class="tablinks" onclick="activeTab(event, 'characters')">登場人物</button>

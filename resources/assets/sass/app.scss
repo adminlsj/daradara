@@ -110,6 +110,20 @@ th, td {
   padding-top: 70px !important;
 }
 
+.bgcolor-darkblue {
+  background-color: #0b1622;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
 @media screen and (min-width: 768px) { 
   .modal {
     text-align: center;

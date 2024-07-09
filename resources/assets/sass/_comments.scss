@@ -6,24 +6,22 @@
 }
 
 .comments-wrap {
-    display: flex;
-    flex-direction: column;
     flex-wrap: wrap;
     margin-bottom: 20px;
 }
 
-.comments-wrap .comments-card {
+.comments-card {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     margin-bottom: 20px;
 }
 
-.comments-wrap .comments-card a {
+.comments-card a {
     text-decoration: none;
 }
 
-.comments-wrap .comments-card img {
+.comments-card img {
     width: 50px;
     height: 50px;
     object-fit: cover;
@@ -31,7 +29,7 @@
     border-radius: 5px;
 }
 
-.comments-wrap .comments-card .comments-review {
+.comments-card .comments-review {
     display: block;
     box-sizing: border-box;
     width: 90%;
@@ -40,7 +38,7 @@
     text-align: center;
 }
 
-.comments-wrap .comments-card .comments-review .user-comments {
+.comments-card .comments-review .user-comments {
     margin-top: 5px;
     font-size: 15px;
 }

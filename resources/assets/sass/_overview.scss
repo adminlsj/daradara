@@ -11,14 +11,14 @@
 
 //relations
 
-.relations .grid-wrap {
+.grid-wrap {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
 }
 
-.relations .grid-wrap .media-preview-card {
+.media-preview-card {
     display: flex;
     flex-direction: row;
     flex: 48%;
@@ -27,61 +27,52 @@
     margin-bottom: 20px;
 }
 
-.relations .grid-wrap .media-preview-card img {
+.media-preview-card img {
     height: 140px;
     width: 100px;
 }
 
-.relations .grid-wrap .media-preview-card .relations-content {
+.media-preview-card .relations-content {
     display: flex;
     flex-direction: column;
     padding: 0 10px;
 }
 
-.relations .grid-wrap .media-preview-card .relations-content p {
+.media-preview-card .relations-content p {
     color: #2f7eac;
 }
 
-.relations .grid-wrap .media-preview-card .relations-content a{
+.media-preview-card .relations-content a{
     text-decoration: none;
 }
 
-.relations .grid-wrap .media-preview-card .relations-content a:hover {
+.media-preview-card .relations-content a:hover {
     color: rgb(0, 143, 143);
 }
 
 //recommendations
 
-.recommendations {
-    display: flex;
-    flex-direction: column;
-}
-
-.recommendations .recommendations-heading {
-    display: flex;
-    flex-direction: row;
+.recommendations-heading {
     justify-content: space-between;
 }
 
-.recommendations .recommendations-heading .view-all {
+.recommendations-heading .view-all {
     margin-top: 20px;
 }
 
-.recommendations .recommendations-heading button {
+.recommendations-heading button {
     border: none;
     color: #8b9fb5;
     font-family: Roboto;
     background-color: transparent;
 }
 
-.recommendations .recommendations-warp {
-    display: flex;
-    flex-direction: row;
+.recommendations-warp {
     flex-wrap: wrap;
     justify-content: space-between;
 }
 
-.recommendations .recommendations-warp .recommendations-card {
+.recommendations-card {
     display: flex;
     flex-direction: column;
     flex: 19%;
@@ -89,50 +80,41 @@
     margin-bottom: 20px;
 }
 
-.recommendations .recommendations-warp .recommendations-card img {
+.recommendations-card img {
     height: 180px;
     width: 130px;
     margin-bottom: 7px;
     border-radius: 5px;
 }
 
-.recommendations .recommendations-warp .recommendations-card a {
+.recommendations-card a {
     color: #8b9fb5;
     text-decoration: none;
     transition: 0.2s;
 }
 
-.recommendations .recommendations-warp .recommendations-card a:hover {
+.recommendations-card a:hover {
     color: rgb(0, 143, 143);
 }
 
 //threads
 
-.threads {
-    display: flex;
-    flex-direction: column;
-}
-
-.threads .threads-heading {
-    display: flex;
-    flex-direction: row;
+.threads-heading {
     justify-content: space-between;
 }
 
-.threads .threads-heading a {
+.threads-heading a {
     margin-top: 20px;
     color: #8b9fb5;
     text-decoration: none;
 }
 
-.threads .threads-wrap {
-    display: flex;
-    flex-direction: row;
+.threads-wrap {
     flex-wrap: wrap;
     justify-content: space-between;
 }
 
-.threads .threads-wrap .threads-card {
+.threads-card {
     background-color: #151f2e;
     flex: 48%;
     max-width: 48%;
@@ -140,48 +122,48 @@
     padding: 10px 15px;
 }
 
-.threads .threads-wrap .threads-card .title {
+.threads-card .title {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: baseline;
 }
 
-.threads .threads-wrap .threads-card .title a {
+.threads-card .title a {
     color: #8b9fb5;
     text-decoration: none;
     transition: 0.2s;
 }
 
-.threads .threads-wrap .threads-card .title a:hover {
+.threads-card .title a:hover {
     color: rgb(0, 143, 143);
 }
 
-.threads .threads-wrap .threads-card .title .traffic {
+.threads-card .title .traffic {
     color: #8b9fb5;
     font-size: 12px;
 }
 
-.threads .threads-wrap .threads-card .threads-content {
+.threads-content {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
 }
 
-.threads .threads-wrap .threads-card .threads-content img {
+.threads-content img {
     height: 40px;
     width: 40px;
     object-fit: cover;
     border-radius: 50%;
 }
 
-.threads .threads-wrap .threads-card .threads-content .user {
+.threads-content .user {
     display: flex;
     flex-direction: row;
 }
 
-.threads .threads-wrap .threads-card .threads-content .user p {
+.threads-content .user p {
     margin-left: 10px;
     color: #8b9fb5;
     font-size: 12px;

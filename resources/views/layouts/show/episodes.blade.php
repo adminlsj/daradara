@@ -1,5 +1,5 @@
 <div id="episodes" class="tabcontent" style="display:none">
-    <div class="episodes-wrap">
+    <div class="episodes-wrap flex-row">
        @foreach ($episodes as $episode)
        <div class="episodes-card">
             <a href="">

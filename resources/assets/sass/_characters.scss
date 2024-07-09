@@ -5,8 +5,9 @@
     flex-direction: column;
 }
 
+/***                   Filter                    ***/
+
 .characters-dropdown {
-    display: flex;
     justify-content: right;
     margin-bottom: 30px;
 }
@@ -19,31 +20,27 @@
     padding-right: 80px;
 }
 
+/***                   Characters                  ***/
+
 .characters-wrap {
-    display: flex;
-    flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
 }
 
-.characters-wrap .characters-card {
-    display: flex;
-    flex-direction: row;
+.characters-card {
     flex: 48%;
     max-width: 48%;
     margin-bottom: 20px;
     background-color: #151f2e;
 }
 
-.characters-wrap .characters-card img {
+.characters-card img {
     width: 60px;
     height: 80px;
     object-fit: cover;
 }
 
-.characters-wrap .characters-card .characters-name {
-    display: flex;
-    flex-direction: row;
+.characters-name {
     flex: 70%;
     justify-content: space-between;
 }
@@ -53,6 +50,7 @@
     text-decoration: none;
     padding: 10px;
     font-size: 12px;
+    transition: 0.2s;
 }
 
 .characters-wrap .characters-card .characters-name a:hover {
