@@ -1,6 +1,4 @@
 .navbar {
-    display: flex;
-    flex-direction: row;
     justify-content: space-between;
     padding: 10px 0;
     background-color: #151f2e;
@@ -13,12 +11,7 @@
     object-fit: cover;
 }
 
-.navbar .navbar-wrap {
-    display: flex;
-    flex-direction: row;
-}
-
-.navbar .navbar-wrap a {
+.navbar-wrap a {
     text-decoration: none;
     color: #8b9fb5;
     font-family: Roboto;
@@ -27,7 +20,7 @@
     margin: 0 20px;
 }
 
-.navbar .navbar-wrap a:hover {
+.navbar-wrap a:hover {
     color: #b3cce8;
 }
 
@@ -37,7 +30,7 @@
     padding: 20px 0;
 }
 
-.search-wrap .search-dropdown {
+.search-dropdown {
     display: none;
     position: absolute;
     top: 60px;
@@ -47,7 +40,7 @@
     animation: expand 0.15s;
 }
 
-.search-wrap .search-dropdown a {
+.search-dropdown a {
     margin: 0px;
     padding: 0px;
 }
@@ -62,36 +55,31 @@
     align-items: center;
 }
 
-.search-wrap .search-dropdown .primary-links .primary-link .primary-link-card {
+.primary-link-card {
     display: flex;
     flex-direction: column;
     margin-left: 5px;
 }
 
-.search-wrap .search-dropdown .primary-links .primary-link .primary-link-card a{
+.primary-link-card a{
     margin-left: 10px;
 }
 
-.search-wrap .search-dropdown .primary-links .primary-link .primary-link-card h3 {
+.primary-link-card h3 {
     font-size: 15px;
     color: #8b9fb5;
 }
 
-.search-wrap .search-dropdown .primary-links .primary-link .primary-link-card .secondary-links {
+.secondary-links {
     display: flex;
     flex-direction: row;
 }
 
-.search-wrap .search-dropdown .primary-links .primary-link .primary-link-card .secondary-links a {
+.secondary-links a {
     font-size: 12px;
 }
 
-.navbar .navbar-search-user {
-    display: flex;
-    flex-direction: row;
-}
-
-.navbar .navbar-search-user button {
+.navbar-search-user button {
     border: none;
     color: #8b9fb5;
     font-family: Roboto;
@@ -99,11 +87,11 @@
     transition: 0.3s;
 }
 
-.navbar .navbar-search-user i {
+.navbar-search-user i {
     font-size: 20px;
 }
 
-.navbar .navbar-search-user .navbar-user img {
+.navbar-search-user .navbar-user img {
     height: 40px;
     width: 40px;
     border-radius: 50%;

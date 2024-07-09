@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-<div class="page-content">
+<div class="page-content flex-column">
 	<div class="filters-wrap">
 		<div class="filters">
 			<div class="filter search">
@@ -242,8 +242,8 @@
 			</div>
 		</div>
 	</div>
-	<div class="top-anime">
-		<div class="title-link">
+	<div class="top-anime flex-column">
+		<div class="title-link flex-row">
 			<a href="">
 				<h3>人氣排行</h3>
 			</a>

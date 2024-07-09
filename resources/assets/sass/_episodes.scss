@@ -4,8 +4,6 @@
 }
 
 .episodes-wrap {
-    display: flex;
-    flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
 }
@@ -26,7 +24,7 @@
     max-width: 100%;
 }
 
-.episodes-wrap .episodes-card .title {
+.episodes-card .title {
     width: 100%;
     position: absolute;
     bottom: 0px;

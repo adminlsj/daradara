@@ -1,12 +1,9 @@
 .headings {
-    display: flex;
     padding: 0 14% 12px;
     background-color: #151f2e;
 }
 
 .cover {
-    display: flex;
-    flex-direction: column;
     align-items: center;
     margin-top: -115px;
 }
@@ -19,8 +16,6 @@
 //cover buttons
 
 .button-groups {
-    display: flex;
-    flex-direction: row;
     justify-content: space-between;
     margin: 20px 0;
     width: 215px;
@@ -33,7 +28,7 @@
     font-weight: lighter;
 }
 
-.button-groups .list .add {
+.list .add {
     background-color: #3eb4f3;
     padding: 7px 30px;
     font-family: Roboto;
@@ -59,8 +54,6 @@
 
 .modal-content .container {
     width: 100%;
-    display: flex;
-    flex-direction: column;
     padding: 0;
     border-radius: 5px;
     padding-bottom: 50px;
@@ -74,7 +67,7 @@
     object-fit: cover;
 }
 
-.modal-content .container .cancel-button {
+.cancel-button {
     position: absolute;
     top: 10px;
     right: 10px;
@@ -82,10 +75,8 @@
     background-color: transparent;
 }
 
-.modal-content .container .add-to-list-cover {
+.add-to-list-cover {
     width: 100%;
-    display: flex;
-    flex-direction: row;
     justify-content: space-between;
     align-items: center;
     padding: 0 5%;
@@ -93,53 +84,49 @@
     z-index: 2;
 }
 
-.modal-content .container .add-to-list-cover .title {
-    display: flex;
-    flex-direction: row;
+.add-to-list-cover .title {
     align-items: center;
 }
 
-.modal-content .container .add-to-list-cover .title img {
+.add-to-list-cover .title img {
     opacity: 100%;
     width: 100px;
     height: 150px;
     object-fit: cover;
 }
 
-.modal-content .container .add-to-list-cover .title h3 {
+.add-to-list-cover .title h3 {
     margin-left: 20px;
     font-size: 17px;
     font-weight: 450;
 }
 
-.modal-content .container .add-to-list-cover .button-groups {
+.add-to-list-cover .button-groups {
     justify-content: flex-end;
     gap: 20px;
 }
 
-.modal-content .container .add-to-list-content {
+.add-to-list-content {
     padding: 2% 5%;
-    display: flex;
-    flex-direction: row;
     gap: 10px;
 }
 
-.modal-content .container .add-to-list-content h3 {
+.add-to-list-content h3 {
     font-size: 15px;
     color: #8b9fb5;
 }
 
-.modal-content .container .filters {
+.container .filters {
     gap: 15px;
     flex-wrap: wrap;
     flex: 80%;
 }
 
-.modal-content .container .filters .filter {
+.container .filters .filter {
     align-items: flex-start;
 }
 
-.modal-content .container .filters .filter .bar {
+.container .filters .filter .bar {
     width: 180px;
 }
 
@@ -164,8 +151,6 @@
 
 .modal-content .container .add-to-list-content .add-to-list-options {
     flex: 20%;
-    display: flex;
-    flex-direction: column;
     align-items: flex-start;
 }
 
@@ -206,8 +191,6 @@
 }
 
 .button-groups .list .dropdown-menu {
-    display: flex;
-    flex-direction: column;
     background-color: azure;
     padding: 10px 0px;
     text-wrap: nowrap;
@@ -234,8 +217,6 @@
 
 .heading-content {
     width: 100%;
-    display: flex;
-    flex-direction: column;
     padding-left: 30px;
     justify-content: space-between;
 }
@@ -261,8 +242,6 @@
 }
 
 .heading-content .navtabs {
-    display: flex;
-    flex-direction: row;
     justify-content: space-around;
     text-align: center;
 }

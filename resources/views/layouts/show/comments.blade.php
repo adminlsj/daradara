@@ -1,5 +1,5 @@
 <div id="comments" class="tabcontent" style="display:none">
-    <div class="comments-wrap">
+    <div class="comments-wrap flex-column">
         <div class="comments-card">
             <a href=""><img src="https://i.meee.com.tw/kSuQlFV.png" alt=""></a>
             <div class="comments-review">

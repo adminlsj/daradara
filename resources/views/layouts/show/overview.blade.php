@@ -35,15 +35,15 @@
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     </div>
-    <div class="recommendations">
-        <div class="recommendations-heading">
+    <div class="recommendations flex-column">
+        <div class="recommendations-heading flex-row">
             <h2>為您推薦</h2>
             <div class="view-all">
                 <button>+ 添加</button>
                 <button>查看全部</button>
             </div>
         </div>
-        <div class="recommendations-warp">
+        <div class="recommendations-warp flex-row">
             <div class="recommendations-card">
                 <a href=""><img src="https://i.meee.com.tw/tXI61LZ.jpg" alt=""></a>
                 <a href="">銀魂</a>
@@ -66,12 +66,12 @@
             </div>
         </div>
     </div>
-    <div class="threads">
-        <div class="threads-heading">
+    <div class="threads flex-column">
+        <div class="threads-heading flex-row">
             <h2>討論版</h2>
             <a href="">發表意見</a>
         </div>
-        <div class="threads-wrap">
+        <div class="threads-wrap flex-row">
             <div class="threads-card">
                 <div class="title">
                     <a href="">雨宮天超棒！</a>

@@ -6,13 +6,11 @@
 }
 
 .staffs-wrap {
-    display: flex;
-    flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
 }
 
-.staffs-wrap .staffs-card {
+.staffs-card {
     display: flex;
     flex-direction: row;
     flex: 48%;
@@ -21,27 +19,27 @@
     background-color: #151f2e;
 }
 
-.staffs-wrap .staffs-card img {
+.staffs-card img {
     width: 60px;
     height: 80px;
     object-fit: cover;
 }
 
-.staffs-wrap .staffs-card .staffs-name {
+.staffs-card .staffs-name {
     display: flex;
     flex-direction: column;
     flex: 70%;
     justify-content: space-between;
 }
 
-.staffs-wrap .staffs-card .staffs-name a, p {
+.staffs-card .staffs-name a, p {
     color: #8b9fb5;
     text-decoration: none;
     padding: 10px;
     font-size: 12px;
 }
 
-.staffs-wrap .staffs-card .staffs-name a:hover {
+.staffs-card .staffs-name a:hover {
     color: rgb(0, 143, 143);;
 }
 
