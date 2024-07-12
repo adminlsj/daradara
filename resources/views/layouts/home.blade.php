@@ -18,7 +18,7 @@
 				<h3>類別</h3>
 				<div class="bar">
 					<input type="search" placeholder="輸入類別..."
-						onclick="document.getElementById('option-genres').style.display='block'">
+						onclick="document.getElementById('option-genres').style.display='block'" id="genreInput">
 					<div class="scroll-wrap" id="option-genres">
 						<div class="option-group">
 							<h3>類別</h3>
@@ -40,7 +40,7 @@
 				<h3>年份</h3>
 				<div class="bar">
 					<input type="search" placeholder="輸入年份..."
-						onclick="document.getElementById('option-years').style.display='block'">
+						onclick="document.getElementById('option-years').style.display='block'" id="yearInput">
 					<div class="scroll-wrap" id="option-years">
 						<div class="option-group">
 							<option value="2025">2025</option>
@@ -54,7 +54,7 @@
 				<h3>季節</h3>
 				<div class="bar">
 					<input type="search" placeholder="輸入季節..."
-						onclick="document.getElementById('option-seasons').style.display='block'">
+						onclick="document.getElementById('option-seasons').style.display='block'" id="seasonInput">
 					<div class="scroll-wrap" id="option-seasons">
 						<div class="option-group">
 							<option value="春季">春季</option>
@@ -69,7 +69,7 @@
 				<h3>動畫類別</h3>
 				<div class="bar">
 					<input type="search" placeholder="輸入類別..."
-						onclick="document.getElementById('option-formats').style.display='block'">
+						onclick="document.getElementById('option-formats').style.display='block'" id="formatInput">
 					<div class="scroll-wrap" id="option-formats">
 						<div class="option-group">
 							<option value="季番">季番</option>
@@ -96,7 +96,7 @@
 						<h3>播放狀態</h3>
 						<div class="bar">
 							<input type="search" placeholder="輸入狀態..."
-								onclick="document.getElementById('option-airing-status').style.display='block'">
+								onclick="document.getElementById('option-airing-status').style.display='block'" id="airingStatusInput">
 							<div class="scroll-wrap" id="option-airing-status">
 								<div class="option-group">
 									<option value="播放中">播放中</option>
@@ -112,7 +112,7 @@
 						<h3>國家</h3>
 						<div class="bar">
 							<input type="search" placeholder="輸入國家..."
-								onclick="document.getElementById('option-country-origin').style.display='block'">
+								onclick="document.getElementById('option-country-origin').style.display='block'" id="countryOriginInput">
 							<div class="scroll-wrap" id="option-country-origin">
 								<div class="option-group">
 									<option value="日本">日本</option>
@@ -292,6 +292,62 @@
 	</div>
 </div>
 @endsection
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+<script>
+	$(document).ready(function(){
+		$("#genreInput").on("keyup", function() {
+		var value = $(this).val().toLowerCase();
+		$("#option-genres option").filter(function() {
+			$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+		});
+		});
+
+		$("#yearInput").on("keyup", function() {
+		var value = $(this).val().toLowerCase();
+		$("#option-years option").filter(function() {
+			$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+		});
+		});
+
+		$("#seasonInput").on("keyup", function() {
+		var value = $(this).val().toLowerCase();
+		$("#option-seasons option").filter(function() {
+			$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+		});
+		});
+
+		$("#formatInput").on("keyup", function() {
+		var value = $(this).val().toLowerCase();
+		$("#option-formats option").filter(function() {
+			$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+		});
+		});
+
+		$("#airingStatusInput").on("keyup", function() {
+		var value = $(this).val().toLowerCase();
+		$("#option-airing-status option").filter(function() {
+			$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+		});
+		});
+
+		$("#countryOriginInput").on("keyup", function() {
+		var value = $(this).val().toLowerCase();
+		$("#option-country-origin option").filter(function() {
+			$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+		});
+		});
+	});
+</script>
+
+<script>
+	$(document).ready(function(){
+		$("option").click(function(){
+			$(this).toggleClass("selected");
+		});
+	});
+</script>
 
 <script>
 	window.addEventListener('mouseup', function (event) {
