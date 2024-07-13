@@ -45,12 +45,12 @@
     background-color: rgba(0, 0, 0, 0.4);
     justify-content: center;
     align-items: center;
-    animation: expand 0.25s;
 }
 
 .modal-content {
     width: 70%;
     background-color: #151f2e !important;
+    animation: animatezoom 0.25s;
 }
 
 .modal-content .container {
