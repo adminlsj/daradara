@@ -96,7 +96,8 @@
 						<h3>播放狀態</h3>
 						<div class="bar">
 							<input type="search" placeholder="輸入狀態..."
-								onclick="document.getElementById('option-airing-status').style.display='block'" id="airingStatusInput">
+								onclick="document.getElementById('option-airing-status').style.display='block'"
+								id="airingStatusInput">
 							<div class="scroll-wrap" id="option-airing-status">
 								<div class="option-group">
 									<option value="播放中">播放中</option>
@@ -112,7 +113,8 @@
 						<h3>國家</h3>
 						<div class="bar">
 							<input type="search" placeholder="輸入國家..."
-								onclick="document.getElementById('option-country-origin').style.display='block'" id="countryOriginInput">
+								onclick="document.getElementById('option-country-origin').style.display='block'"
+								id="countryOriginInput">
 							<div class="scroll-wrap" id="option-country-origin">
 								<div class="option-group">
 									<option value="日本">日本</option>
@@ -192,9 +194,10 @@
 						<a href="{{ route('anime.show', ['anime' => $anime->id, 'title' => $anime->title_ro]) }}">
 							<img src="{{ $anime->photo_cover }}" alt="">
 						</a>
-						<div class="button-wrap">
+						<div class="button-wrap flex-column">
 							<div class="button-list">
-								<button>+</button>
+								<button class="action-btn">+</button>
+								<span class="button-text">添加至列表</span>
 							</div>
 						</div>
 						<a href="{{ route('anime.show', ['anime' => $anime->id, 'title' => $anime->title_ro]) }}">{{ $anime->title_ro }}
@@ -296,54 +299,54 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
 <script>
-	$(document).ready(function(){
-		$("#genreInput").on("keyup", function() {
-		var value = $(this).val().toLowerCase();
-		$("#option-genres option").filter(function() {
-			$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-		});
-		});
-
-		$("#yearInput").on("keyup", function() {
-		var value = $(this).val().toLowerCase();
-		$("#option-years option").filter(function() {
-			$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-		});
+	$(document).ready(function () {
+		$("#genreInput").on("keyup", function () {
+			var value = $(this).val().toLowerCase();
+			$("#option-genres option").filter(function () {
+				$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+			});
 		});
 
-		$("#seasonInput").on("keyup", function() {
-		var value = $(this).val().toLowerCase();
-		$("#option-seasons option").filter(function() {
-			$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-		});
-		});
-
-		$("#formatInput").on("keyup", function() {
-		var value = $(this).val().toLowerCase();
-		$("#option-formats option").filter(function() {
-			$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-		});
+		$("#yearInput").on("keyup", function () {
+			var value = $(this).val().toLowerCase();
+			$("#option-years option").filter(function () {
+				$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+			});
 		});
 
-		$("#airingStatusInput").on("keyup", function() {
-		var value = $(this).val().toLowerCase();
-		$("#option-airing-status option").filter(function() {
-			$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-		});
+		$("#seasonInput").on("keyup", function () {
+			var value = $(this).val().toLowerCase();
+			$("#option-seasons option").filter(function () {
+				$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+			});
 		});
 
-		$("#countryOriginInput").on("keyup", function() {
-		var value = $(this).val().toLowerCase();
-		$("#option-country-origin option").filter(function() {
-			$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+		$("#formatInput").on("keyup", function () {
+			var value = $(this).val().toLowerCase();
+			$("#option-formats option").filter(function () {
+				$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+			});
 		});
+
+		$("#airingStatusInput").on("keyup", function () {
+			var value = $(this).val().toLowerCase();
+			$("#option-airing-status option").filter(function () {
+				$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+			});
+		});
+
+		$("#countryOriginInput").on("keyup", function () {
+			var value = $(this).val().toLowerCase();
+			$("#option-country-origin option").filter(function () {
+				$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+			});
 		});
 	});
 </script>
 
 <script>
-	$(document).ready(function(){
-		$("option").click(function(){
+	$(document).ready(function () {
+		$("option").click(function () {
 			$(this).toggleClass("selected");
 		});
 	});
