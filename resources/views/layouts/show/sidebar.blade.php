@@ -24,15 +24,15 @@
         </div>
         <div class="data-set">
             <div class="type">首播日期</div>
-            <div class="format"> {{ $anime->started_at }} </div>
+            <div class="format"> {{ $anime->started_at ? $anime->started_at : 'Not available yet' }} </div>
         </div>
         <div class="data-set">
             <div class="type">完播日期</div>
-            <div class="format"> {{ $anime->ended_at }} </div>
+            <div class="format"> {{ $anime->ended_at ? $anime->ended_at : 'Not available yet' }} </div>
         </div>
         <div class="data-set">
             <div class="type">季番</div>
-            <div class="format"> <a href="">{{ $anime->season }}</a> </div>
+            <div class="format"> <a href="">{{ $anime->season ? $anime->season : 'Not available yet' }}</a> </div>
         </div>
         <div class="data-set">
             <div class="type">更新時間</div>
@@ -58,7 +58,7 @@
         </div>
         <div class="data-set">
             <div class="type">英譯</div>
-            <div class="format"> {{ $anime->title_en }} </div>
+            <div class="format"> {{ $anime->title_en ? $anime->title_en : $anime->title_ro }} </div>
         </div>
         <div class="data-set">
             <div class="type">簡譯</div>

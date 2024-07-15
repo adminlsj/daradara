@@ -128,6 +128,24 @@ class BotController extends Controller
                 $anime->save();
             }
 
+        } elseif ($request->column == 'animation_studio') {
+            $animes = Anime::where('animation_studio', null)->orWhere('animation_studio', '')->orderBy('id', 'desc')->get();
+            foreach ($animes as $anime) {
+                $url = $anime->sources['myanimelist'];
+                $curl_connection = curl_init($url);
+                curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+                curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+                $html = curl_exec($curl_connection);
+                curl_close($curl_connection);
+
+                $animation_studio = trim(Helper::get_string_between($html, '<span class="dark_text">Studios:</span>', '/a>'));
+                $animation_studio = Helper::get_string_between($animation_studio, '>', '<');
+
+                $anime->animation_studio = $animation_studio;
+
+                $anime->save();
+            }
         }
 
         /* for ($i = 60000; $i < 70000; $i++) { 
