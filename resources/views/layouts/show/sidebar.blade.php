@@ -40,7 +40,7 @@
         </div>
         <div class="data-set">
             <div class="type">動畫社</div>
-            <div class="format"> <a href="">{{ $anime->animation_studio }}</a> </div>
+            <div class="format"> <a href="">{{ $anime->animation_studio == 'add some' ? 'Unknown' : $anime->animation_studio }}</a> </div>
         </div>
         <div class="data-set">
             <div class="type">類別</div>
