@@ -158,7 +158,7 @@ class BotController extends Controller
                 $html = curl_exec($curl_connection);
                 curl_close($curl_connection);
 
-                if (strpos($html, 'youtube.com') !== false) {
+                if (strpos($html, 'https://www.youtube.com/embed/') !== false) {
                     $anime->trailer = trim(Helper::get_string_between($html, '<a class="iframe js-fancybox-video video-unit promotion" href="', '"'));
                 } else {
                     $anime->trailer = 'None';
