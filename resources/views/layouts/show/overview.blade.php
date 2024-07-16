@@ -30,7 +30,7 @@
     </div>
     <div class="trailer">
         <h2>宣傳片</h2>
-        <iframe width="380" height="245" src="https://www.youtube.com/embed/mqFMOYsOUcg?si=e9VWZnX2-4p9vZXy"
+        <iframe width="380" height="245" src="{{ $anime->trailer }}"
             title="YouTube video player" frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
