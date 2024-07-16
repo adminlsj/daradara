@@ -148,7 +148,7 @@ class BotController extends Controller
             }
 
         } elseif ($request->column == 'trailer') {
-            $animes = Anime::where('trailer', null)->orWhere('animation_studio', '')->orderBy('id', 'desc')->get();
+            $animes = Anime::where('trailer', null)->orWhere('trailer', '')->orderBy('id', 'desc')->get();
             foreach ($animes as $anime) {
                 $url = $anime->sources['myanimelist'];
                 $curl_connection = curl_init($url);
