@@ -154,7 +154,7 @@ class BotController extends Controller
             }
 
         } elseif ($request->column == 'trailer') {
-            $animes = Anime::where('trailer', null)->orWhere('trailer', '')->orWhere('trailer', 'None')->orderBy('id', 'desc')->get();
+            $animes = Anime::where('trailer', null)->orWhere('trailer', '')->orWhere('trailer', 'None')->orderBy('id', 'asc')->get();
             foreach ($animes as $anime) {
                 $url = $anime->sources['myanimelist'];
                 $curl_connection = curl_init($url);
@@ -170,6 +170,27 @@ class BotController extends Controller
                     $anime->trailer = 'None';
                 }
 
+                $anime->save();
+            }
+
+        }  elseif ($request->column == 'genre') {
+            $animes = Anime::where('genres', '[]')->orderBy('id', 'desc')->get();
+            foreach ($animes as $anime) {
+                $url = 'https://myanimelist.net/anime/16498/';
+                $curl_connection = curl_init($url);
+                curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+                curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+                $html = curl_exec($curl_connection);
+                curl_close($curl_connection);
+
+                if (strpos($html, '<span class="dark_text">Genres:</span>') !== false) {
+                    $genres = trim(Helper::get_string_between($html, '<span class="dark_text">Genres:</span>', '</div>'));
+                    $genres = explode(',', $genres);
+                    foreach ($genres as &$genre) {
+                        $genre = trim(Helper::get_string_between($genre, '<span itemprop="genre" style="display: none">', '</span>'));
+                    }
+                }
                 $anime->save();
             }
         }
