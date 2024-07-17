@@ -22,7 +22,7 @@ class BotController extends Controller
     {
         $animes = Anime::where('trailer', 'ilike', '%&autoplay=1%')->get();
         foreach ($animes as $anime) {
-            $anime->trailer = str_replace('&autoplay=1', '', $anime->trailer)
+            $anime->trailer = str_replace('&autoplay=1', '', $anime->trailer);
             $anime->save();
         }
 
