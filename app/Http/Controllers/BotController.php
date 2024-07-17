@@ -20,6 +20,12 @@ class BotController extends Controller
 {
     public function tempMethod(Request $request)
     {
+        $animes = Anime::where('trailer', 'ilike', '%&autoplay=1%')->get();
+        foreach ($animes as $anime) {
+            $anime->trailer = str_replace('&autoplay=1', '', $anime->trailer)
+            $anime->save();
+        }
+
         if ($request->column == 'description') {
             $animes = Anime::where('description', null)->orWhere('description', '')->orderBy('id', 'desc')->get();
             foreach ($animes as $anime) {
