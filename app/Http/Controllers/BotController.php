@@ -192,6 +192,10 @@ class BotController extends Controller
                     }
                 }
                 $anime->save();
+
+                if ($animes->last() != $anime) {
+                    sleep(10);
+                }
             }
         }
 
