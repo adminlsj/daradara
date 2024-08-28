@@ -23,6 +23,7 @@ class AnimeController extends Controller
     {
         //$character = Character::where('anime_id', $anime->id)->get();
         $episodes = Episodes::where('anime_id', $anime->id)->orderBy('id')->get();
-        return view('anime.show', compact('anime', 'episodes'));
+        $characters = $anime->characters;
+        return view('anime.show', compact('anime', 'characters', 'episodes'));
     }
 }

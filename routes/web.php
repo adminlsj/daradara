@@ -13,6 +13,7 @@
 
 Route::get('/', 'HomeController@index');
 Route::get('/anime/{anime}/{title?}', 'AnimeController@show')->name('anime.show');
+Route::get('/character/{character}/{title?}', 'CharacterController@show')->name('character.show');
 
 Auth::routes();
 Route::get('auth/{provider}', 'Auth\LoginController@redirectToProvider');
