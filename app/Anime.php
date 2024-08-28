@@ -22,4 +22,9 @@ class Anime extends Model
         $len = strpos($string, $end, $ini) - $ini;
         return substr($string, $ini, $len);
     }
+
+    public function characters()
+    {
+        return $this->belongsToMany('App\Character')->using('App\AnimeCharacter');
+    }
 }

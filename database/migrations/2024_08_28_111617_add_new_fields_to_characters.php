@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddNewColumnsToCharacters extends Migration
+class AddNewFieldsToCharacters extends Migration
 {
     /**
      * Run the migrations.
@@ -14,15 +14,10 @@ class AddNewColumnsToCharacters extends Migration
     public function up()
     {
         Schema::table('characters', function (Blueprint $table) {
-            $table->string('photo_cover')->nullable();
-            $table->string('name_zht')->nullable();
-            $table->string('name_zhs')->nullable();
-            $table->string('name_jp')->nullable();
-            $table->string('name_en')->nullable();
-            $table->string('birthday')->nullable();
-            $table->string('gender')->nullable();
-            $table->text('description')->nullable();
-
+            $table->integer('initial_age')->nullable();
+            $table->integer('age')->nullable();
+            $table->integer('height')->nullable();
+            $table->jsonb('nickname')->nullable();
         });
     }
 
