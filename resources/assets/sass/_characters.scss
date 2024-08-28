@@ -40,9 +40,19 @@
     object-fit: cover;
 }
 
-.characters-name {
+.characters-description {
     flex: 70%;
     justify-content: space-between;
+}
+
+.characters-name {
+    justify-content: space-between;
+}
+
+.characters-name div {
+    color: #8b9fb5;
+    padding: 10px;
+    font-size: 12px;
 }
 
 .characters-wrap .characters-card .characters-name a {
