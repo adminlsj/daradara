@@ -1364,6 +1364,76 @@ p {
   font-size: 15px;
 }
 
+/**         Character Headings          **/
+
+.character-headings {
+  padding: 30px 14% 12px;
+  background-color: #151f2e;
+}
+
+.character-cover {
+  align-items: center;
+}
+
+.character-cover img {
+  width: 175px;
+  height: 250px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.character-heading-content {
+  width: 100%;
+  padding-left: 30px;
+}
+
+.character-heading-content h3 {
+  color: #8b9fb5;
+  font-size: 20px;
+  font-family: Roboto;
+}
+
+.character-heading-content p {
+  color: #727e8e;
+  font-family: Roboto;
+  font-size: 13px;
+  margin-left: 0px;
+  padding-left: 0px;
+  transition: 0.2s;
+}
+
+.character-info p {
+  line-height: 0%;
+}
+
+.character-heading-content p:hover {
+  color: #8b9fb5;
+}
+
+/**         Character Animes        **/
+
+.character-animes {
+  padding: 20px 10% 12px;
+  background-color: #0b1622;
+}
+
+.character-animes .character-button-groups {
+  justify-content: end;
+}
+
+.character-animes .character-button-groups button {
+  margin-left: 2%;
+}
+
+.character-animes .related-animes {
+  padding-top: 30px;
+}
+
+.character-animes .related-animes .media-card {
+  margin-right: 30px;
+  max-width: 19%;
+}
+
 /*!
  * Bootstrap v3.4.1 (https://getbootstrap.com/)
  * Copyright 2011-2019 Twitter, Inc.
