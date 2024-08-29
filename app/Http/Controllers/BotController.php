@@ -25,7 +25,7 @@ class BotController extends Controller
 
             $url = "https://myanimelist.net/character/{$i}";
 
-            if (!Anime::where('sources', 'ilike', "%{$url}%")->exists()) {
+            if (!Character::where('sources', 'ilike', "%{$url}%")->exists()) {
                 $curl_connection = curl_init($url);
                 curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
                 curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
