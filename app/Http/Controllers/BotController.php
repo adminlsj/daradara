@@ -21,7 +21,7 @@ class BotController extends Controller
 {
     public function tempMethod(Request $request)
     {
-        for ($i = 1; $i < 60000; $i++) { 
+        for ($i = 2706; $i < 60000; $i++) { 
             $url = "https://myanimelist.net/character/{$i}";
             $curl_connection = curl_init($url);
             curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
@@ -34,6 +34,7 @@ class BotController extends Controller
                 $name_en = trim(Helper::get_string_between($html, '<h2 class="normal_header" style="height: 15px;">', '<'));
                 $name_jp = trim(Helper::get_string_between($html, '<small>(', ')</small>'));
                 $description = trim(Helper::get_string_between($html, '</h2>', '<div'));
+                $description = str_replace('�', '', $description);
                 $photo_cover = trim(Helper::get_string_between($html, '<meta property="og:image" content="', '"'));
                 $sources = [];
                 $sources["myanimelist"] = $url;
