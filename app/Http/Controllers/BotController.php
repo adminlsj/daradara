@@ -21,33 +21,44 @@ class BotController extends Controller
 {
     public function tempMethod(Request $request)
     {
-        for ($i = 2707; $i < 60000; $i++) { 
-            $url = "https://myanimelist.net/character/{$i}";
-            $curl_connection = curl_init($url);
-            curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
-            curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
-            $html = curl_exec($curl_connection);
-            curl_close($curl_connection);
+        for ($i = 1; $i < 60000; $i++) { 
 
-            if (strpos($html, 'Invalid ID provided') === false) {
-                $name_en = trim(Helper::get_string_between($html, '<h2 class="normal_header" style="height: 15px;">', '<'));
-                $name_jp = trim(Helper::get_string_between($html, '<small>(', ')</small>'));
-                $description = trim(Helper::get_string_between($html, '</h2>', '<div'));
-                $description = iconv(mb_detect_encoding($description, mb_detect_order(), true), "UTF-8//IGNORE", $description);
-                $photo_cover = trim(Helper::get_string_between($html, '<meta property="og:image" content="', '"'));
-                $sources = [];
-                $sources["myanimelist"] = $url;
-                $character = Character::create([
-                    'photo_cover' => $photo_cover,
-                    'name_en' => $name_en,
-                    'name_jp' => $name_jp,
-                    'description' => $description,
-                    'sources' => $sources,
-                ]);
+            $url = "https://myanimelist.net/character/{$i}";
+
+            if (!Anime::where('sources', 'ilike', "%{$url}%")->exists()) {
+                $curl_connection = curl_init($url);
+                curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+                curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+                $html = curl_exec($curl_connection);
+                curl_close($curl_connection);
+
+                if (strpos($html, 'Invalid ID provided') !== false) {
+                    echo $i.' page not found<br>';
+
+                } else {
+                    $name_en = trim(Helper::get_string_between($html, '<h2 class="normal_header" style="height: 15px;">', '<'));
+                    $name_jp = trim(Helper::get_string_between($html, '<small>(', ')</small>'));
+                    $description = trim(Helper::get_string_between($html, '</h2>', '<div'));
+                    $description = iconv(mb_detect_encoding($description, mb_detect_order(), true), "UTF-8//IGNORE", $description);
+                    $photo_cover = trim(Helper::get_string_between($html, '<meta property="og:image" content="', '"'));
+                    $sources = [];
+                    $sources["myanimelist"] = $url;
+                    if ($photo_cover == '' && $name_en == '' && $name_jp == '' && $description == '') {
+                        echo $i.' page access failed<br>';
+                    } else {
+                        $character = Character::create([
+                            'photo_cover' => $photo_cover,
+                            'name_en' => $name_en,
+                            'name_jp' => $name_jp,
+                            'description' => $description,
+                            'sources' => $sources,
+                        ]);
+                    }
+                }
 
             } else {
-                echo $i.' not found<br>';
+                echo $i.' character exists<br>';
             }
         }
 
