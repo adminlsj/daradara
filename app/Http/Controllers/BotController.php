@@ -34,11 +34,11 @@ class BotController extends Controller
                 $name_en = trim(Helper::get_string_between($html, '<h2 class="normal_header" style="height: 15px;">', '<'));
                 $name_jp = trim(Helper::get_string_between($html, '<small>(', ')</small>'));
                 $description = trim(Helper::get_string_between($html, '</h2>', '<div'));
-                $description = str_replace('�', '', $description);
+                $description = iconv(mb_detect_encoding($description, mb_detect_order(), true), "UTF-8//IGNORE", $description);
                 $photo_cover = trim(Helper::get_string_between($html, '<meta property="og:image" content="', '"'));
                 $sources = [];
                 $sources["myanimelist"] = $url;
-                $character = Character::create([
+                return $character = Character::create([
                     'photo_cover' => $photo_cover,
                     'name_en' => $name_en,
                     'name_jp' => $name_jp,
