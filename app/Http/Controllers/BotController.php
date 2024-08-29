@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Anime;
+use App\Character;
 use Illuminate\Http\Request;
 use Response;
 use Auth;
@@ -20,7 +21,36 @@ class BotController extends Controller
 {
     public function tempMethod(Request $request)
     {
-        $animes = Anime::where('trailer', 'ilike', '%&autoplay=1%')->get();
+        for ($i = 1; $i < 60000; $i++) { 
+            $url = "https://myanimelist.net/character/{$i}";
+            $curl_connection = curl_init($url);
+            curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+            curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+            $html = curl_exec($curl_connection);
+            curl_close($curl_connection);
+
+            if (strpos($html, 'Invalid ID provided') === false) {
+                $name_en = trim(Helper::get_string_between($html, '<h2 class="normal_header" style="height: 15px;">', '<'));
+                $name_jp = trim(Helper::get_string_between($html, '<small>(', ')</small>'));
+                $description = trim(Helper::get_string_between($html, '</h2>', '<div'));
+                $photo_cover = trim(Helper::get_string_between($html, '<meta property="og:image" content="', '"'));
+                $sources = [];
+                $sources["myanimelist"] = $url;
+                $character = Character::create([
+                    'photo_cover' => $photo_cover,
+                    'name_en' => $name_en,
+                    'name_jp' => $name_jp,
+                    'description' => $description,
+                    'sources' => $sources,
+                ]);
+
+            } else {
+                echo $i.' not found<br>';
+            }
+        }
+
+        /* $animes = Anime::where('trailer', 'ilike', '%&autoplay=1%')->get();
         foreach ($animes as $anime) {
             $anime->trailer = str_replace('&autoplay=1', '', $anime->trailer);
             $anime->save();
@@ -197,7 +227,7 @@ class BotController extends Controller
                     sleep(10);
                 }
             }
-        }
+        } */
 
         /* for ($i = 60000; $i < 70000; $i++) { 
             $url = "https://myanimelist.net/anime/{$i}/";
