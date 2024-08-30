@@ -21,7 +21,7 @@ class BotController extends Controller
 {
     public function tempMethod(Request $request)
     {
-        for ($i = 1; $i < 60000; $i++) { 
+        for ($i = 11588; $i < 60000; $i++) { 
 
             $url = "https://myanimelist.net/character/{$i}";
 
