@@ -21,7 +21,7 @@ class BotController extends Controller
 {
     public function tempMethod(Request $request)
     {
-        for ($i = 21807; $i < 60000; $i++) { 
+        for ($i = $request->start; $i <= $request->end; $i++) { 
 
             $url = "https://myanimelist.net/character/{$i}";
 
@@ -56,6 +56,9 @@ class BotController extends Controller
                         ]);
                     }
                 }
+
+                // sleep(1);
+                // usleep(500000);
 
             } else {
                 echo $i.' character exists<br>';
