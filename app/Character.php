@@ -16,6 +16,11 @@ class Character extends Model
 
     public function animes()
     {
-        return $this->belongsToMany('App\Anime')->using('App\AnimeCharacter');
+        return $this->belongsToMany('App\Anime', 'actor_anime_character', 'character_id', 'anime_id');
+    }
+
+    public function actors()
+    {
+        return $this->belongsToMany('App\Actor', 'actor_anime_character', 'character_id', 'actor_id');
     }
 }

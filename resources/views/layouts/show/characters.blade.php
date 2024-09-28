@@ -10,11 +10,11 @@
                 <a href=""><img src="{{ $character->photo_cover }}" alt=""></a>
                 <div class="characters-description flex-column">
                     <div class="characters-name flex-row">
-                        <a href="{{ route('character.show', ['character' => $character->id, 'title' => $character->name_zht]) }}">{{ $character->name_zht }}</a>
+                        <a href="{{ route('character.show', ['character' => $character->id, 'title' => $character->name_en]) }}">{{ $character->name_en }}</a>
                         <a href="">福島潤</a>
                     </div>
                     <div class="characters-name flex-row">
-                        <div>{{ $character->role }}</div>
+                        <div>{{ $character->pivot->role }}</div>
                         <div>日文</div>
                     </div>
                 </div>

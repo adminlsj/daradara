@@ -21,6 +21,7 @@ Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallb
 Route::resource('user', 'UserController')->only(['edit', 'update']);
 
 Route::get('/tempMethod', 'BotController@tempMethod');
+Route::get('/scrapeMalAnimes', 'BotController@scrapeMalAnimes');
 
 Route::group(['middleware' => 'admin'], function () {
 	// Route::get('/tempMethod', 'BotController@tempMethod');

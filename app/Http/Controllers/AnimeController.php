@@ -21,9 +21,8 @@ class AnimeController extends Controller
 {
     public function show(Request $request, Anime $anime)
     {
-        //$character = Character::where('anime_id', $anime->id)->get();
         $episodes = Episodes::where('anime_id', $anime->id)->orderBy('id')->get();
-        $characters = $anime->characters;
+        $characters = $anime->characters->load('actors');
         return view('anime.show', compact('anime', 'characters', 'episodes'));
     }
 }

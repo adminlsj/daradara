@@ -11,7 +11,7 @@ class Anime extends Model
     ];
 
     protected $fillable = [
-        'id', 'title_ch', 'title_jp', 'title_ro', 'title_en', 'photo_cover', 'photo_banner', 'description', 'rating_mal', 'rating_al', 'rating', 'started_at', 'ended_at', 'author', 'director', 'trailer', 'created_at', 'updated_at', 'episodes', 'sources', 'genres', 'tags'
+        'id', 'title_ch', 'title_jp', 'title_ro', 'title_en', 'photo_cover', 'photo_banner', 'description', 'rating_mal', 'rating_al', 'rating', 'started_at', 'ended_at', 'author', 'director', 'trailer', 'created_at', 'updated_at', 'episodes', 'sources', 'genres', 'tags', 'airing_status', 'animation_studio', 'category', 'episodes_length'
     ];
 
     public static function import($string, $start, $end){
@@ -25,6 +25,6 @@ class Anime extends Model
 
     public function characters()
     {
-        return $this->belongsToMany('App\Character')->using('App\AnimeCharacter');
+        return $this->belongsToMany('App\Character', 'actor_anime_character', 'anime_id', 'character_id')->withPivot('role');;
     }
 }
