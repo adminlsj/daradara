@@ -1,7 +1,7 @@
 <div class="navbar flex-row" style="margin:0;">
     <div class="icon">
         <a href="/">
-            <img src="https://i.meee.com.tw/W28kWhV.png" alt="">
+            <img src="https://anilist.co/img/icons/icon.svg" alt="">
         </a>
     </div>
 

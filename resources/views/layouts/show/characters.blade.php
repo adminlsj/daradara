@@ -11,14 +11,18 @@
                 <div class="characters-description flex-column">
                     <div class="characters-name flex-row">
                         <a href="{{ route('character.show', ['character' => $character->id, 'title' => $character->name_en]) }}">{{ $character->name_en }}</a>
-                        <a href="">{{ $character->actors->first()->name_en }}</a>
+                        @if ($character->actors->first())
+                            <a href="{{ route('actor.show', ['actor' => $character->actors->first()->id, 'title' => $character->actors->first()->name_en]) }}">{{ $character->actors->first()->name_en }}</a>
+                        @else
+                            <a href=""></a>
+                        @endif
                     </div>
                     <div class="characters-name flex-row">
                         <div>{{ $character->pivot->role }}</div>
-                        <div>{{ $character->actors->first()->language }}</div>
+                        <div>{{ $character->actors->first() ? $character->actors->first()->language : '' }}</div>
                     </div>
                 </div>
-                <a href=""><img src="{{ $character->actors->first()->photo_cover }}" alt=""></a>
+                <a href=""><img src="{{ $character->actors->first() ? $character->actors->first()->photo_cover : 'https://cdn.myanimelist.net/images/questionmark_23.gif' }}" alt=""></a>
             </div>
         @endforeach
     </div>
