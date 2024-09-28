@@ -11,14 +11,14 @@
                 <div class="characters-description flex-column">
                     <div class="characters-name flex-row">
                         <a href="{{ route('character.show', ['character' => $character->id, 'title' => $character->name_en]) }}">{{ $character->name_en }}</a>
-                        <a href="">福島潤</a>
+                        <a href="">{{ $character->actors->first()->name_en }}</a>
                     </div>
                     <div class="characters-name flex-row">
                         <div>{{ $character->pivot->role }}</div>
-                        <div>日文</div>
+                        <div>{{ $character->actors->first()->language }}</div>
                     </div>
                 </div>
-                <a href=""><img src="https://i.meee.com.tw/2MBOWkt.png" alt=""></a>
+                <a href=""><img src="{{ $character->actors->first()->photo_cover }}" alt=""></a>
             </div>
         @endforeach
     </div>
