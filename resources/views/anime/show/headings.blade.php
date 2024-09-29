@@ -8,8 +8,7 @@
                 </button>
 
                 <div id="addToList" class="modal">
-                    <form class="modal-content animate" action="{{ route('anime.save', ['anime' => $anime]) }}" method="POST">
-                        {{ csrf_field() }}
+                    <form class="modal-content animate" action="/action_page.php" method="post">
                         <div class="container flex-column">
                             <button class="cancel-button" type="button"
                                 onclick="document.getElementById('addToList').style.display='none'">X</button>
@@ -21,7 +20,7 @@
                                 </div>
                                 <div class="button-groups">
                                     <button class="favorite" type="button">♥</button>
-                                    <button type="submit" class="add">儲存</button>
+                                    <button class="add">儲存</button>
                                 </div>
                             </div>
 
@@ -40,17 +39,13 @@
                                                     <option value="重看中">重看中</option>
                                                 </div>
                                             </div>
-                                            <select name="genre" id="genre" placeholder="觀看狀態..."
-                                                onclick="document.getElementById('option-watching-status').style.display='block'">
-                                                <div class="scroll-wrap" id="option-watching-status">
-                                                    <div class="option-group">
-                                                        <option value="觀看中">觀看中</option>
-                                                        <option value="準備觀看">準備觀看</option>
-                                                        <option value="完成觀看">完成觀看</option>
-                                                        <option value="重看中">重看中</option>
-                                                    </div>
-                                                </div>
-                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="filter review-score">
+                                        <h3>評分</h3>
+                                        <div class="bar">
+                                            <input type="number" value="0" min="0" max="10">
                                         </div>
                                     </div>
 

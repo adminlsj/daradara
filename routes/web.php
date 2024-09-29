@@ -12,19 +12,20 @@
 */
 
 Route::get('/', 'HomeController@index');
-Route::post('/anime/{anime}/save', 'AnimeController@save')->name('anime.save');
-Route::get('/anime/{anime}/{title?}', 'AnimeController@show')->name('anime.show');
-Route::get('/character/{character}/{title?}', 'CharacterController@show')->name('character.show');
-Route::get('/actor/{actor}/{title?}', 'ActorController@show')->name('actor.show');
-
 Auth::routes();
 Route::get('auth/{provider}', 'Auth\LoginController@redirectToProvider');
 Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
 Route::resource('user', 'UserController')->only(['edit', 'update']);
 
-Route::get('/tempMethod', 'BotController@tempMethod');
-Route::get('/scrapeMalAnimes', 'BotController@scrapeMalAnimes');
+Route::group(['middleware' => 'auth'], function () {
+	Route::post('/anime/{anime}/save', 'AnimeController@save')->name('anime.save');
+});
 
 Route::group(['middleware' => 'admin'], function () {
-	// Route::get('/tempMethod', 'BotController@tempMethod');
+	Route::get('/tempMethod', 'BotController@tempMethod');
+	Route::get('/scrapeMalAnimes', 'BotController@scrapeMalAnimes');
 });
+
+Route::get('/anime/{anime}/{title?}', 'AnimeController@show')->name('anime.show');
+Route::get('/character/{character}/{title?}', 'CharacterController@show')->name('character.show');
+Route::get('/actor/{actor}/{title?}', 'ActorController@show')->name('actor.show');
