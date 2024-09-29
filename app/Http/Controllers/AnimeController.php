@@ -25,4 +25,9 @@ class AnimeController extends Controller
         $characters = $anime->characters->load('actors');
         return view('anime.show', compact('anime', 'characters', 'episodes'));
     }
+
+    public function save(Request $request, Anime $anime)
+    {
+        return $request;
+    }
 }
