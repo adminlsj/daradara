@@ -29,25 +29,28 @@
                                 <div class="filters">
                                     <div class="filter watching-status">
                                         <h3>觀看狀態</h3>
-                                        <div class="bar">
-                                            <input type="search" placeholder="觀看狀態..."
+                                        <div class="bar form-control">
+                                            <!-- <input type="search" placeholder="觀看狀態..."
                                                 onclick="document.getElementById('option-watching-status').style.display='block'">
-                                            <div class="scroll-wrap" id="option-watching-status">
+                                            <div style="position: relative; z-index: 1000000 !important;" class="scroll-wrap" id="option-watching-status">
                                                 <div class="option-group">
                                                     <option value="觀看中">觀看中</option>
                                                     <option value="準備觀看">準備觀看</option>
                                                     <option value="完成觀看">完成觀看</option>
                                                     <option value="重看中">重看中</option>
                                                 </div>
-                                            </div>
-                                            <select name="genre" id="genre" placeholder="觀看狀態..."
+                                            </div> -->
+                                            <select id="status" name="status" placeholder="觀看狀態..."
                                                 onclick="document.getElementById('option-watching-status').style.display='block'">
                                                 <div class="scroll-wrap" id="option-watching-status">
                                                     <div class="option-group">
-                                                        <option value="觀看中">觀看中</option>
-                                                        <option value="準備觀看">準備觀看</option>
-                                                        <option value="完成觀看">完成觀看</option>
-                                                        <option value="重看中">重看中</option>
+                                                        <option value="">觀看狀態...</option>
+                                                        <option value="watching">觀看中</option>
+                                                        <option value="planning">準備觀看</option>
+                                                        <option value="completed">已觀看</option>
+                                                        <option value="rewatching">重看中</option>
+                                                        <option value="paused">暫停</option>
+                                                        <option value="dropped">棄番</option>
                                                     </div>
                                                 </div>
                                             </select>
@@ -57,35 +60,35 @@
                                     <div class="filter episodes-progress">
                                         <h3>觀看進度</h3>
                                         <div class="bar">
-                                            <input type="number" value="1" min="1" max="{{ $anime->episodes }}">
-                                        </div>
-                                    </div>
-
-                                    <div class="filter watch-date">
-                                        <h3>觀看日期</h3>
-                                        <div class="bar">
-                                            <input type="date">
-                                        </div>
-                                    </div>
-
-                                    <div class="filter watch-enddate">
-                                        <h3>完成日期</h3>
-                                        <div class="bar">
-                                            <input type="date">
+                                            <input id="episode_progress" name="episode_progress" type="number" value="{{ $anime_save->episode_progress }}" min="0" max="100000000">
                                         </div>
                                     </div>
 
                                     <div class="filter total-rewatches">
                                         <h3>觀看次數</h3>
                                         <div class="bar">
-                                            <input type="number">
+                                            <input id="total_rewatches" name="total_rewatches" type="number" value="{{ $anime_save->total_rewatches }}">
+                                        </div>
+                                    </div>
+
+                                    <div class="filter watch-date">
+                                        <h3>觀看日期</h3>
+                                        <div class="bar">
+                                            <input id="start_date" name="start_date" type="date" value="{{ Carbon\Carbon::parse($anime_save->start_date)->format('Y-m-d') }}">
+                                        </div>
+                                    </div>
+
+                                    <div class="filter watch-enddate">
+                                        <h3>完成日期</h3>
+                                        <div class="bar">
+                                            <input id="finish_date" name="finish_date" type="date" value="{{ Carbon\Carbon::parse($anime_save->finish_date)->format('Y-m-d') }}">
                                         </div>
                                     </div>
 
                                     <div class="filter notes">
                                         <h3>備註</h3>
                                         <div class="bar">
-                                            <textarea name="" id=""></textarea>
+                                            <textarea id="notes" name="notes" name="">{{ $anime_save->notes }}</textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -99,16 +102,12 @@
                                         <label for="2023神番">2023神番</label>
                                         <br>
                                     </div>
+                                    <hr>
                                     <div class="bar">
-                                            <input type="search" placeholder="公開設定..."
-                                                onclick="document.getElementById('option-list-privacy').style.display='block'">
-                                            <div class="scroll-wrap" id="option-list-privacy">
-                                                <div class="option-group">
-                                                    <option value="公開">公開</option>
-                                                    <option value="私人">私人</option>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <input type="checkbox" name="is_hidden_from_status_lists" value="1" id="is_hidden_from_status_lists" {{ $anime_save->is_hidden_from_status_lists ? "checked" : '' }}>
+                                        <label for="is_hidden_from_status_lists">Hide from status lists</label>
+                                        <br>
+                                    </div>
                                 </div>
                             </div>
                         </div>
