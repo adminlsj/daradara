@@ -61,9 +61,12 @@
 
 .character-animes .related-animes {
     padding-top: 30px;
+    justify-content: space-between;
+    flex-wrap: wrap;
 }
 
 .character-animes .related-animes .media-card {
     margin-right: 30px;
     max-width: 19%;
+    margin-bottom: 20px;
 }
