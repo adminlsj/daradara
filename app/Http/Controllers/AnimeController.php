@@ -27,7 +27,7 @@ class AnimeController extends Controller
         $characters = $anime->characters->load('actors');
         $anime_save = null;
         $status = null;
-        $anime_lists = null;
+        $anime_lists = [];
         $saved_lists = [];
         if ($user = Auth::user()) {
             $anime_lists = $user->anime_lists;
