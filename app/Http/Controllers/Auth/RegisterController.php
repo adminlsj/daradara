@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
-use App\Avatar;
+use App\Savelist;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -84,6 +84,54 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
             'avatar_temp' => 'https://vdownload.hembed.com/image/icon/user_default_image.jpg?secure=ue9M119kdZxHcZqDPrunLQ==,4855471320'
+        ]);
+
+        // Create user watching statuslist
+        Savelist::create([
+            'user_id' => $user->id,
+            'title' => 'watching',
+            'is_status' => true,
+            'is_private' => false
+        ]);
+
+        // Create user planning statuslist
+        Savelist::create([
+            'user_id' => $user->id,
+            'title' => 'planning',
+            'is_status' => true,
+            'is_private' => false
+        ]);
+
+        // Create user completed statuslist
+        Savelist::create([
+            'user_id' => $user->id,
+            'title' => 'completed',
+            'is_status' => true,
+            'is_private' => false
+        ]);
+
+        // Create user rewatching statuslist
+        Savelist::create([
+            'user_id' => $user->id,
+            'title' => 'rewatching',
+            'is_status' => true,
+            'is_private' => false
+        ]);
+
+        // Create user paused statuslist
+        Savelist::create([
+            'user_id' => $user->id,
+            'title' => 'paused',
+            'is_status' => true,
+            'is_private' => false
+        ]);
+
+        // Create user dropped statuslist
+        Savelist::create([
+            'user_id' => $user->id,
+            'title' => 'dropped',
+            'is_status' => true,
+            'is_private' => false
         ]);
 
         return $user;

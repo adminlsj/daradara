@@ -30,56 +30,21 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function tags()
+    public function anime_lists()
     {
-        $tags = $this->tags;
-        if ($tags == '') {
-            return [];
-        } else {
-            return explode(" ", $this->tags);
-        }
+        return $this->hasMany('App\Savelist')->where('type', 'anime');
     }
 
-    public function watches()
+    public function scopeWhereHasTags($query, $tags, $count)
     {
-        return $this->hasMany('App\Watch');
-    }
-
-    public function videos()
-    {
-        return $this->hasMany('App\Video');
-    }
-
-    public function saves()
-    {
-        return $this->hasMany('App\Save');
-    }
-
-    public function blogs()
-    {
-        return $this->hasMany('App\Blog');
-    }
-
-    public function subscribes()
-    {
-        return Subscribe::where('user_id', $this->id)->orderBy('created_at', 'desc')->get();
-    }
-
-    public function subscribers()
-    {
-        $watches = $this->watches();
-        $subscribers = 0;
-        if ($watches->first()) {
-            foreach ($watches as $watch) {
-                $subscribers = $subscribers + Subscribe::where('tag', $watch->title)->count();
+        return $query->where(function($query) use ($tags) {
+            foreach ($tags as $tag) {
+                $query->orWhere('tags_array', 'ilike', '%"'.$tag.'"%');
             }
-        }
-        return $subscribers;
-    }
-
-    public function avatar()
-    {
-        return $this->hasOne('App\Avatar');
+        })->where('uncover', false)
+          ->select('id', 'title', 'cover')      
+          ->inRandomOrder()
+          ->limit($count);
     }
 
     public function avatarDefault()
