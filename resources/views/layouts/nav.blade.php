@@ -29,11 +29,11 @@
         <a href="">論壇區</a>
     </div>
 
-    <div class="navbar-search-user flex-row">
+    <a href="{{ route('login') }}" class="navbar-search-user flex-row">
         <button><i class="fa fa-search" style="margin-right:18px"></i></button>
         <div class="navbar-user">
             <button><img src="https://i.meee.com.tw/7v5tUUL.jpeg" alt=""></button>
             <button><i class="fa fa-caret-down"></i></button>
         </div>
-    </div>
+    </a>
 </div>
