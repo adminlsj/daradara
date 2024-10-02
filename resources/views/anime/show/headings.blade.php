@@ -56,6 +56,13 @@
                                         </div>
                                     </div>
 
+                                    <div class="filter rating">
+                                        <h3>評分</h3>
+                                        <div class="bar">
+                                            <input id="rating" name="rating" type="number" value="">
+                                        </div>
+                                    </div>
+
                                     <div class="filter episodes-progress">
                                         <h3>觀看進度</h3>
                                         <div class="bar">

@@ -3,6 +3,12 @@
     align-items: center;
     height: 68px;
     justify-content: space-between;
+    padding: 20px 12%;
+    margin: 0 !important;
+}
+
+.navbar:before, .navbar:after {
+    content: none !important;
 }
 
 .navbar .icon img{

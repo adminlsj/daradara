@@ -1,4 +1,4 @@
-<div class="navbar flex-row" style="margin:0;">
+<div class="navbar flex-row">
     <div class="icon">
         <a href="/">
             <img src="https://anilist.co/img/icons/icon.svg" alt="">
