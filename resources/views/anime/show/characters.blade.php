@@ -7,7 +7,7 @@
     <div class="characters-wrap flex-row">
         @foreach ($characters as $character)
             <div class="characters-card flex-row">
-                <a href=""><img src="{{ $character->photo_cover }}" alt=""></a>
+                <a href="{{ route('character.show', ['character' => $character->id, 'title' => $character->name_en]) }}"><img src="{{ $character->photo_cover }}" alt=""></a>
                 <div class="characters-description flex-column">
                     <div class="characters-name flex-row">
                         <a href="{{ route('character.show', ['character' => $character->id, 'title' => $character->name_en]) }}">{{ $character->name_en }}</a>

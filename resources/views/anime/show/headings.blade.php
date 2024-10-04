@@ -56,7 +56,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="filter rating">
+                                    <div class="filter rating" style="margin-right:30px;">
                                         <h3>評分</h3>
                                         <div class="bar">
                                             <input id="rating" name="rating" type="number" value="">
@@ -104,11 +104,9 @@
                                         @foreach ($anime_lists as $anime_list)
                                             <input type="checkbox" name="animelists[]" value="{{ $anime_list->id }}" id="{{ $anime_list->id }}" {{ in_array($anime_list->id, $saved_lists) ? 'checked' : '' }}>
                                             <label for="{{ $anime_list->id }}">{{ $anime_list->title }}</label>
-                                            <br>
                                         @endforeach
                                     </div>
-                                    <hr>
-                                    <div class="bar">
+                                    <div class="">
                                         <input type="checkbox" name="is_hidden_from_status_lists" value="1" id="is_hidden_from_status_lists" {{ $anime_save ? $anime_save->is_hidden_from_status_lists ? "checked" : '' : null }}>
                                         <label for="is_hidden_from_status_lists">Hide from status lists</label>
                                         <br>
