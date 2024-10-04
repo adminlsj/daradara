@@ -1082,7 +1082,7 @@
 
 .recommendations-card a {
   color: #8b9fb5;
-  text-decoration: none;
+  text-decoration: none !important;
   transition: 0.2s;
 }
 
