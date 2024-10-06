@@ -694,9 +694,9 @@
   font-weight: lighter;
 }
 
-.list .add {
+.add {
   background-color: #3eb4f3;
-  padding: 7px 30px;
+  padding: 7px 30px !important;
   font-family: Roboto;
 }
 
@@ -848,28 +848,28 @@
   background-color: #151f2e;
 }
 
-.button-groups .list .down {
+.list .down {
   background-color: #5ebff5;
 }
 
-.button-groups .list .down .fa {
+.list .down .fa {
   padding: 4px 0;
 }
 
-.button-groups .list .dropdown-menu {
+.list .dropdown-menu {
   background-color: azure;
   padding: 10px 0px;
   text-wrap: nowrap;
 }
 
-.button-groups .list .dropdown-menu a {
+.list .dropdown-menu a {
   color: gray;
   text-decoration: none;
   padding: 5px 20px;
   transition: 0.2s;
 }
 
-.button-groups .list .dropdown-menu a:hover {
+.list .dropdown-menu a:hover {
   color: white;
   background-color: #3eb4f3;
 }
