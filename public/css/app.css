@@ -456,13 +456,14 @@
 .landing-section .media-wrap {
   display: flex;
   flex-direction: row;
+  gap: 20px;
   justify-content: space-between;
 }
 
 .media-card {
   display: flex;
   flex-direction: column;
-  width: 17%;
+  width: 185px;
 }
 
 .media-card img {
@@ -605,7 +606,7 @@
 .top-anime .results .content img {
   width: 48px;
   height: 60px;
-  margin-right: 20px;
+  margin-right: 40px;
 }
 
 .top-anime .results .content a {
