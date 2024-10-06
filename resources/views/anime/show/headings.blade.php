@@ -3,16 +3,31 @@
         <img src="{{ $anime->photo_cover }}" alt="">
         <div class="button-groups flex-row">
             <div class="list btn-group">
-                <button class="add btn btn-secondary"
-                    onclick="document.getElementById('addToList').style.display='flex'">{{ $anime_save ? App\Savelist::$statuslists[$status] : '添加至列表' }}
-                </button>
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-secondary add"
+                        onclick="document.getElementById('addToList').style.display='flex'">{{ $anime_save ? App\Savelist::$statuslists[$status] : '添加至列表' }}
+                    </button>
+
+                    <div class="btn-group" role="group">
+                        <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle down"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-chevron-down"></i>
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                            <a class="dropdown-item flex-column" href="#">添加至觀看中</a>
+                            <a class="dropdown-item flex-column" href="#">添加至準備觀看</a>
+                            <a class="dropdown-item flex-column" href="#">編輯列表</a>
+                        </div>
+                    </div>
+                </div>
 
                 <div id="addToList" class="modal">
-                    <form class="modal-content animate" action="{{ route('anime.save', ['anime' => $anime]) }}" method="POST">
+                    <form class="modal-content animate" action="{{ route('anime.save', ['anime' => $anime]) }}"
+                        method="POST">
                         {{ csrf_field() }}
                         <div class="container flex-column">
                             <button class="cancel-button" type="button"
-                                onclick="document.getElementById('addToList').style.display='none'">X</button>
+                                onclick="document.getElementById('addToList').style.display='none'">&#x2715;</button>
                             <img src="{{ $anime->photo_banner }}" alt="為美好世界獻上祝福">
                             <div class="add-to-list-cover flex-row">
                                 <div class="title flex-row">
@@ -40,7 +55,8 @@
                                                     <option value="重看中">重看中</option>
                                                 </div>
                                             </div> -->
-                                            <select id="status" name="status" onclick="document.getElementById('option-watching-status').style.display='block'">
+                                            <select id="status" name="status"
+                                                onclick="document.getElementById('option-watching-status').style.display='block'">
                                                 <div class="scroll-wrap" id="option-watching-status">
                                                     <div class="option-group">
                                                         <option value="watching">觀看狀態...</option>
@@ -66,35 +82,41 @@
                                     <div class="filter episodes-progress">
                                         <h3>觀看進度</h3>
                                         <div class="bar">
-                                            <input id="episode_progress" name="episode_progress" type="number" value="{{ $anime_save ? $anime_save->episode_progress : null }}" min="0" max="100000000">
+                                            <input id="episode_progress" name="episode_progress" type="number"
+                                                value="{{ $anime_save ? $anime_save->episode_progress : null }}" min="0"
+                                                max="100000000">
                                         </div>
                                     </div>
 
                                     <div class="filter total-rewatches">
                                         <h3>觀看次數</h3>
                                         <div class="bar">
-                                            <input id="total_rewatches" name="total_rewatches" type="number" value="{{ $anime_save ? $anime_save->total_rewatches : null }}">
+                                            <input id="total_rewatches" name="total_rewatches" type="number"
+                                                value="{{ $anime_save ? $anime_save->total_rewatches : null }}">
                                         </div>
                                     </div>
 
                                     <div class="filter watch-date">
                                         <h3>觀看日期</h3>
                                         <div class="bar">
-                                            <input id="start_date" name="start_date" type="date" value="{{ $anime_save ? Carbon\Carbon::parse($anime_save->start_date)->format('Y-m-d') : null }}">
+                                            <input id="start_date" name="start_date" type="date"
+                                                value="{{ $anime_save ? Carbon\Carbon::parse($anime_save->start_date)->format('Y-m-d') : null }}">
                                         </div>
                                     </div>
 
                                     <div class="filter watch-enddate">
                                         <h3>完成日期</h3>
                                         <div class="bar">
-                                            <input id="finish_date" name="finish_date" type="date" value="{{ $anime_save ? Carbon\Carbon::parse($anime_save->finish_date)->format('Y-m-d') : null }}">
+                                            <input id="finish_date" name="finish_date" type="date"
+                                                value="{{ $anime_save ? Carbon\Carbon::parse($anime_save->finish_date)->format('Y-m-d') : null }}">
                                         </div>
                                     </div>
 
                                     <div class="filter notes">
                                         <h3>備註</h3>
                                         <div class="bar">
-                                            <textarea id="notes" name="notes" name="">{{ $anime_save ? $anime_save->notes : null }}</textarea>
+                                            <textarea id="notes" name="notes"
+                                                name="">{{ $anime_save ? $anime_save->notes : null }}</textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -102,12 +124,14 @@
                                     <h3>動漫清單</h3>
                                     <div class="user-lists">
                                         @foreach ($anime_lists as $anime_list)
-                                            <input type="checkbox" name="animelists[]" value="{{ $anime_list->id }}" id="{{ $anime_list->id }}" {{ in_array($anime_list->id, $saved_lists) ? 'checked' : '' }}>
+                                            <input type="checkbox" name="animelists[]" value="{{ $anime_list->id }}"
+                                                id="{{ $anime_list->id }}" {{ in_array($anime_list->id, $saved_lists) ? 'checked' : '' }}>
                                             <label for="{{ $anime_list->id }}">{{ $anime_list->title }}</label>
                                         @endforeach
                                     </div>
                                     <div class="">
-                                        <input type="checkbox" name="is_hidden_from_status_lists" value="1" id="is_hidden_from_status_lists" {{ $anime_save ? $anime_save->is_hidden_from_status_lists ? "checked" : '' : null }}>
+                                        <input type="checkbox" name="is_hidden_from_status_lists" value="1"
+                                            id="is_hidden_from_status_lists" {{ $anime_save ? $anime_save->is_hidden_from_status_lists ? "checked" : '' : null }}>
                                         <label for="is_hidden_from_status_lists">Hide from status lists</label>
                                         <br>
                                     </div>
@@ -115,17 +139,6 @@
                             </div>
                         </div>
                     </form>
-                </div>
-
-                <button class="down btn btn-secondary dropdown-toggle dropdown" type="button" id="dropdownMenuButton"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                    onclick="document.getElementById('dropdownMenu').style.display='flex'">
-                    <i class="fa fa-chevron-down"></i>
-                </button>
-                <div class="dropdown-menu flex-column" id="dropdownMenu" aria-labelledby="dropdownMenuButton" style="display:none;">
-                    <a class="dropdown-item" href="#">添加至觀看中</a>
-                    <a class="dropdown-item" href="#">添加至準備觀看</a>
-                    <a class="dropdown-item" href="#">列表編輯器</a>
                 </div>
             </div>
             <button class="favorite">♥</button>
@@ -146,12 +159,24 @@
 </div>
 
 <script>
-    window.addEventListener('mouseup', function (event) {
-        var dropdownMenu = document.getElementById('dropdownMenu');
-        if (event.target != dropdownMenu && event.target.parentNode != dropdownMenu) {
+    var dropdownMenu = document.getElementById('dropdownMenu');
+    function toggleDropdownMenu() {
+        if (dropdownMenu.style.display === 'none' || dropdownMenu.style.display === '') {
+            dropdownMenu.style.display = 'flex';
+        }
+        else if (dropdownMenu.style.display === 'flex') {
             dropdownMenu.style.display = 'none';
         }
-    });  
+    }
+</script>
+
+<script>
+    window.addEventListener('mouseup', function (event) {
+        var dropdownMenu = document.getElementById('dropdownMenu');
+        if (event.target != dropdownMenu) {
+            dropdownMenu.style.display = 'none';
+        }
+    });
 </script>
 
 <script>
