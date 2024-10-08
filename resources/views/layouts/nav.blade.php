@@ -7,7 +7,7 @@
 
     <div class="navbar-wrap flex-row">
         <a href="">個人資料</a>
-        <a href="">動畫列表</a>
+        <a href="{{ Auth::check() ? route('user.animelist', ['user' => Auth::user()->id, 'name' => Auth::user()->name]) : route('login') }}">動漫清單</a>
         <div class="search-wrap">
             <a href="">尋找</a>
             <div class="search-dropdown">
