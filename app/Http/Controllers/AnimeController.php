@@ -21,6 +21,11 @@ use Illuminate\Database\Eloquent\Builder;
 
 class AnimeController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->only('save');
+    }
+
     public function show(Request $request, Anime $anime)
     {
         $episodes = Episodes::where('anime_id', $anime->id)->orderBy('id')->get();

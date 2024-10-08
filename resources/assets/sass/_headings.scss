@@ -36,7 +36,7 @@
 
 //add-to-list-form
 
-.modal {
+.headings .modal {
     display: none;
     position: fixed;
     z-index: 1;
@@ -47,20 +47,20 @@
     align-items: center;
 }
 
-.modal-content {
+.headings .modal-content {
     width: 70%;
     background-color: #151f2e !important;
     animation: animatezoom 0.25s;
 }
 
-.modal-content .container {
+.headings .modal-content .container {
     width: 100%;
     padding: 0;
     border-radius: 5px;
     padding-bottom: 50px;
 }
 
-.modal-content .container img {
+.headings .modal-content .container img {
     opacity: 40%;
     width: 100%;
     border-radius: 5px 5px 0 0;
@@ -68,7 +68,7 @@
     object-fit: cover;
 }
 
-.cancel-button {
+.headings .cancel-button {
     position: absolute;
     top: 10px;
     right: 10px;
@@ -76,7 +76,7 @@
     background-color: transparent;
 }
 
-.add-to-list-cover {
+.headings .add-to-list-cover {
     width: 100%;
     justify-content: space-between;
     align-items: center;
@@ -85,77 +85,77 @@
     z-index: 2;
 }
 
-.add-to-list-cover .title {
+.headings .add-to-list-cover .title {
     align-items: center;
 }
 
-.add-to-list-cover .title img {
+.headings .add-to-list-cover .title img {
     opacity: 100%;
     width: 100px;
     height: 150px;
     object-fit: cover;
 }
 
-.add-to-list-cover .title h3 {
+.headings .add-to-list-cover .title h3 {
     margin-left: 20px;
     font-size: 17px;
     font-weight: 450;
 }
 
-.add-to-list-cover .button-groups {
+.headings .add-to-list-cover .button-groups {
     justify-content: flex-end;
     gap: 20px;
 }
 
-.add-to-list-content {
+.headings .add-to-list-content {
     padding: 2% 5%;
     gap: 10px;
 }
 
-.add-to-list-content h3 {
+.headings .add-to-list-content h3 {
     font-size: 15px;
     color: #8b9fb5;
 }
 
-.container .filters {
+.headings .container .filters {
     gap: 15px;
     flex-wrap: wrap;
     flex: 80%;
 }
 
-.container .filters .filter {
+.headings .container .filters .filter {
     align-items: flex-start;
 }
 
-.container .filters .filter .bar {
+.headings .container .filters .filter .bar {
     width: 180px;
 }
 
-.modal-content .container .filters .filter .bar input[type=search],
-.modal-content .container .filters .filter .bar input[type=number],
-.modal-content .container .filters .filter .bar input[type=date] {
+.headings .modal-content .container .filters .filter .bar input[type=search],
+.headings .modal-content .container .filters .filter .bar input[type=number],
+.headings .modal-content .container .filters .filter .bar input[type=date] {
     background-color: #0b1622;
 }
 
-.modal-content .container .filters .filter .bar .scroll-wrap {
+.headings .modal-content .container .filters .filter .bar .scroll-wrap {
     background-color: #0b1622;
 }
 
-.modal-content .container .filters .filter .bar .scroll-wrap .option-group option:hover {
+.headings .modal-content .container .filters .filter .bar .scroll-wrap .option-group option:hover {
     background-color: #151f2e;
 }
 
-.modal-content .container .filters .filter .bar textarea {
+.headings .modal-content .container .filters .filter .bar textarea {
     background-color: #0b1622;
     width: auto;
 }
 
-.modal-content .container .add-to-list-content .add-to-list-options {
+.headings .modal-content .container .add-to-list-content .add-to-list-options {
     flex: 20%;
     align-items: flex-start;
 }
 
-.modal-content .container .add-to-list-content .add-to-list-options .bar {
+.headings .modal-content .container .add-to-list-content .add-to-list-options .bar {
     height: 40px;
     width: 170px;
     background-color: #0b1622;
@@ -163,7 +163,7 @@
     position: relative;
 }
 
-.modal-content .container .add-to-list-content .add-to-list-options .bar input[type=search] {
+.headings .modal-content .container .add-to-list-content .add-to-list-options .bar input[type=search] {
     width: 100%;
     height: 100%;
     background-color: transparent;
@@ -173,11 +173,11 @@
     padding: 5px 12px;
 }
 
-.modal-content .container .add-to-list-content .add-to-list-options .bar .scroll-wrap {
+.headings .modal-content .container .add-to-list-content .add-to-list-options .bar .scroll-wrap {
     background-color: #0b1622;
 }
 
-.modal-content .container .add-to-list-content .add-to-list-options .bar .scroll-wrap .option-group option:hover {
+.headings .modal-content .container .add-to-list-content .add-to-list-options .bar .scroll-wrap .option-group option:hover {
     background-color: #151f2e;
 }
 
