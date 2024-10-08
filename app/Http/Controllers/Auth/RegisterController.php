@@ -86,52 +86,58 @@ class RegisterController extends Controller
             'avatar_temp' => 'https://vdownload.hembed.com/image/icon/user_default_image.jpg?secure=ue9M119kdZxHcZqDPrunLQ==,4855471320'
         ]);
 
-        // Create user watching statuslist
+        // Create user anime watching statuslist
         Savelist::create([
             'user_id' => $user->id,
             'title' => 'watching',
             'is_status' => true,
-            'is_private' => false
+            'is_private' => false,
+            'type' => 'anime'
         ]);
 
-        // Create user planning statuslist
+        // Create user anime planning statuslist
         Savelist::create([
             'user_id' => $user->id,
             'title' => 'planning',
             'is_status' => true,
-            'is_private' => false
+            'is_private' => false,
+            'type' => 'anime'
         ]);
 
-        // Create user completed statuslist
+        // Create user anime completed statuslist
         Savelist::create([
             'user_id' => $user->id,
             'title' => 'completed',
             'is_status' => true,
-            'is_private' => false
+            'is_private' => false,
+            'type' => 'anime'
         ]);
 
-        // Create user rewatching statuslist
+        // Create user anime rewatching statuslist
         Savelist::create([
             'user_id' => $user->id,
             'title' => 'rewatching',
             'is_status' => true,
-            'is_private' => false
+            'is_private' => false,
+            'type' => 'anime'
         ]);
 
-        // Create user paused statuslist
+        // Create user anime paused statuslist
         Savelist::create([
             'user_id' => $user->id,
             'title' => 'paused',
             'is_status' => true,
-            'is_private' => false
+            'is_private' => false,
+            'type' => 'anime'
         ]);
 
-        // Create user dropped statuslist
+        // Create user anime dropped statuslist
         Savelist::create([
             'user_id' => $user->id,
             'title' => 'dropped',
             'is_status' => true,
-            'is_private' => false
+            'is_private' => false,
+            'type' => 'anime'
         ]);
 
         return $user;

@@ -31,7 +31,7 @@ class AnimeController extends Controller
         $saved_lists = [];
         if ($user = Auth::user()) {
             $anime_lists = $user->anime_lists;
-            if ($anime_save = AnimeSave::where('user_id', $user->id)->where('anime_id', $anime->id)->first()) {
+            if ($anime_save = $user->anime_save($anime->id)) {
                 $status = $anime_save->status;
                 $saved_lists = $anime_save->savelists->pluck('id')->toArray();
             }
@@ -44,7 +44,7 @@ class AnimeController extends Controller
         $user = Auth::user();
 
         // Update anime_save details
-        if ($anime_save = AnimeSave::where('user_id', $user->id)->where('anime_id', $anime->id)->first()) {
+        if ($anime_save = $user->anime_save($anime->id)) {
             $anime_save->status = $request->status;
             $anime_save->episode_progress = $request->episode_progress;
             $anime_save->start_date = $request->start_date;
@@ -53,6 +53,30 @@ class AnimeController extends Controller
             $anime_save->notes = $request->notes;
             $anime_save->is_hidden_from_status_lists = $request->is_hidden_from_status_lists ? true : false;
             $anime_save->save();
+
+            $saved_animelists = $anime_save->savelists;
+            $selected_animelists = $request->animelists ? $request->animelists : [];
+
+            // Delete only un-selected animelists
+            $delete_savelistables = [];
+            foreach ($saved_animelists as $saved_animelist) {
+                if (!in_array($saved_animelist->id, $selected_animelists)) {
+                    array_push($delete_savelistables, $saved_animelist->pivot->id);
+                }
+            }
+            Savelistable::whereIn('id', $delete_savelistables)->delete();
+
+            // Create newly selected animelists
+            $saved_animelists_ids = $saved_animelists->pluck('id')->toArray();
+            foreach ($selected_animelists as $selected_animelist) {
+                if (!in_array($selected_animelist, $saved_animelists_ids)) {
+                    Savelistable::create([
+                        'savelist_id' => $selected_animelist,
+                        'savelistable_id' => $anime_save->id,
+                        'savelistable_type' => 'App\AnimeSave'
+                    ]);
+                }
+            }
 
         // Create new anime_save
         } else {
