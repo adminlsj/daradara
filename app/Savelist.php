@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Savelist extends Model
 {
     protected $fillable = [
-        'id', 'user_id', 'title', 'description', 'is_status', 'is_private', 'created_at', 'updated_at'
+        'id', 'user_id', 'title', 'description', 'is_status', 'is_private', 'type', 'created_at', 'updated_at'
     ];
 
     public static $statuslists = [

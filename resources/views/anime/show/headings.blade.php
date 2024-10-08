@@ -72,13 +72,6 @@
                                         </div>
                                     </div>
 
-                                    <div class="filter rating" style="margin-right:30px;">
-                                        <h3>評分</h3>
-                                        <div class="bar">
-                                            <input id="rating" name="rating" type="number" value="">
-                                        </div>
-                                    </div>
-
                                     <div class="filter episodes-progress">
                                         <h3>觀看進度</h3>
                                         <div class="bar">
@@ -127,8 +120,10 @@
                                             <input type="checkbox" name="animelists[]" value="{{ $anime_list->id }}"
                                                 id="{{ $anime_list->id }}" {{ in_array($anime_list->id, $saved_lists) ? 'checked' : '' }}>
                                             <label for="{{ $anime_list->id }}">{{ $anime_list->title }}</label>
+                                            <br>
                                         @endforeach
                                     </div>
+                                    <hr>
                                     <div class="">
                                         <input type="checkbox" name="is_hidden_from_status_lists" value="1"
                                             id="is_hidden_from_status_lists" {{ $anime_save ? $anime_save->is_hidden_from_status_lists ? "checked" : '' : null }}>

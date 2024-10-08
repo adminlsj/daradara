@@ -12,6 +12,6 @@ class AnimeSave extends Model
 
     public function savelists()
     {
-        return $this->morphToMany('App\Savelist', 'savelistable');
+        return $this->morphToMany('App\Savelist', 'savelistable')->withPivot('id');
     }
 }

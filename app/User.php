@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\AnimeSave;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Notifications\CustomResetPassword;
@@ -32,7 +33,12 @@ class User extends Authenticatable
 
     public function anime_lists()
     {
-        return $this->hasMany('App\Savelist')->where('type', 'anime');
+        return $this->hasMany('App\Savelist')->where('type', 'anime')->where('is_status', false);
+    }
+
+    public function anime_save($anime_id)
+    {
+        return AnimeSave::where('user_id', $this->id)->where('anime_id', $anime_id)->first();
     }
 
     public function scopeWhereHasTags($query, $tags, $count)
