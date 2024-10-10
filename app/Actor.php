@@ -23,4 +23,9 @@ class Actor extends Model
     {
         return $this->belongsToMany('App\Character', 'actor_anime_character', 'actor_id', 'character_id');
     }
+
+    public function likes()
+    {
+        return $this->morphMany('App\Like', 'likeable');
+    }
 }

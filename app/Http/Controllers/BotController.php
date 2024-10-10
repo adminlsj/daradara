@@ -7,6 +7,8 @@ use App\Anime;
 use App\Character;
 use App\Actor;
 use App\ActorAnimeCharacter;
+use App\Company;
+use App\Staff;
 use Illuminate\Http\Request;
 use Response;
 use Auth;
@@ -93,7 +95,7 @@ class BotController extends Controller
     public function tempMethod(Request $request)
     {
         // Scrape voice actors
-        $from = $request->from;
+        /* $from = $request->from;
         $to = $request->to;
         $actors = Actor::where('id', '>=', $from)->where('id', '<=', $to)->get();
         foreach ($actors as $actor) {
@@ -119,7 +121,7 @@ class BotController extends Controller
             } else {
                 echo "<span style='color:red'>WARNING: Actor#{$actor->id} access failed</span><br>";
             }
-        }
+        } */
 
         // Scrape character-actor pivot
         /* $from = $request->from;
