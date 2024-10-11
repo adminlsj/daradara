@@ -136,9 +136,15 @@
                                 <div class="modal-header">
                                     <span class="material-icons pull-left no-select modal-close-btn"
                                         data-dismiss="modal">close</span>
-                                    <h4 class="modal-title">建立動漫清單</h4>
                                 </div>
-                                <div class="modal-body" style="padding: 15px 20px 5px 20px; text-align: left">
+                                <div class="modal-body" style="padding:0px; text-align: left">
+                                    <div class="photo-banner">
+                                        <img src="{{ $anime->photo_banner }}" alt="" style="width: 100%; height: 180px;">
+                                    </div>
+                                    <div class="photo-cover flex-row">
+                                        <img src="{{ $anime->photo_cover }}" alt="">
+                                        <h3> {{ $anime->title_ro }} </h3>
+                                    </div>
                                     <h4>填寫標題及說明</h4>
                                     <p style="color: darkgray; padding-bottom: 10px; margin-top: -10px; margin-left: -10px;">
                                         打造屬於你的動漫清單，並向全世界分享你的收藏。</p>
@@ -232,7 +238,7 @@
         evt.currentTarget.className += " active";
     }
 </script>
-
+ 
 <script>
     window.addEventListener('mouseup', function (event) {
         var optionWatchingStatus = document.getElementById('option-watching-status');
