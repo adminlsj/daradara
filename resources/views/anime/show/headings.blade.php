@@ -140,7 +140,7 @@
                                 </div>
                                 <div class="modal-body" style="padding:0px; text-align: left">
                                     <div class="photo-banner">
-                                        <img src="{{ $anime->photo_banner }}" alt=""
+                                        <img src="https://i.meee.com.tw/fl3xmwq.jpg" alt=""
                                             style="width: 100%; height: 180px;">
                                     </div>
                                     <div class="photo-cover flex-row">
