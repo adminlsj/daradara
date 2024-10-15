@@ -48,7 +48,7 @@
 .modal-body .photo-cover {
     width: 100%;
     align-items: center;
-    padding: 0 30px;
+    padding: 0 50px;
     margin-top: -115px;
 }
 
@@ -64,6 +64,27 @@
     height: 150px;
     object-fit: cover;
     z-index: 10;
+}
+
+@media (min-width: 1000px) {
+    .modal-dialog {
+        min-width: 768px;
+        width: 1000px !important;
+    }
+}
+
+.add-to-list-content {
+    padding: 0 50px;
+}
+
+.add-to-list-content .filters {
+    max-width: 80%;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.add-to-list-content .notes {
+    flex-basis: 100%;
 }
 
 /* .headings .modal {
