@@ -1,4 +1,6 @@
 .headings {
+    display: flex;
+    flex-direction: row;
     padding: 0 12% 12px;
     background-color: #151f2e;
 }
@@ -17,6 +19,7 @@
 
 @media (max-width: 760px) {
     .headings {
+        flex-direction: column;
         padding: 0 20px;
     }
 
@@ -379,6 +382,14 @@
 
 @media (max-width: 760px) {
     .heading-content {
-        display: none !important;
+        padding: 0;
+    }
+
+    .heading-content p{
+        display: none;
+    }
+
+    .heading-content .navtabs {
+        margin: 10px 0;
     }
 }
