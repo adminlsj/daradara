@@ -1,4 +1,4 @@
-<div class="headings flex-row">
+<div class="headings">
     <div class="cover">
         <img src="{{ $anime->photo_cover }}" alt="">
         <div class="button-groups">
