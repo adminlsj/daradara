@@ -4,6 +4,8 @@
 }
 
 .cover {
+    display: flex;
+    flex-direction: column;
     align-items: center;
     margin-top: -115px;
 }
@@ -13,9 +15,31 @@
     height: 300px;
 }
 
+@media (max-width: 760px) {
+    .headings {
+        padding: 0 20px;
+    }
+
+    .cover {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        align-items: baseline;
+        margin-top: -95px;
+        gap: 20px;
+    }
+
+    .cover img {
+        width: 100px;
+        height: 141px;
+    }
+}
+
 //cover buttons
 
 .button-groups {
+    display: flex;
+    flex-direction: row;
     justify-content: space-between;
     margin: 20px 0;
     width: 215px;
@@ -32,6 +56,26 @@
     background-color: #3eb4f3;
     padding: 7px 30px !important;
     font-family: Roboto;
+}
+
+@media (max-width: 760px) {
+    .button-groups {
+        justify-content: flex-start;
+        gap: 20px;
+        width: 100%;
+    }
+
+    .btn-group, .add {
+        width: 100%;
+    }
+
+    .btn-group button {
+        border-radius: 3px !important;
+    }
+
+    .down {
+        display: none !important;
+    }
 }
 
 //add-to-list-form
@@ -78,13 +122,30 @@
 }
 
 .add-to-list-content .filters {
-    max-width: 80%;
+    width: 85%;
     gap: 30px;
     flex-wrap: wrap;
 }
 
 .add-to-list-content .notes {
     flex-basis: 100%;
+}
+
+.add-to-list-content .notes .bar {
+    width: auto;
+}
+
+.form-group {
+    width: 15%;
+}
+
+.form-group h3 {
+    font-size: 15px;
+    color: #8b9fb5;
+}
+
+.form-group hr {
+    width: 100%;
 }
 
 /* .headings .modal {
@@ -268,6 +329,8 @@
 //heading content
 
 .heading-content {
+    display: flex;
+    flex-direction: column;
     width: 100%;
     padding-left: 30px;
     justify-content: space-between;
@@ -312,4 +375,10 @@
 
 .heading-content .navtabs button.active {
     color: #5ebff5;
+}
+
+@media (max-width: 760px) {
+    .heading-content {
+        display: none !important;
+    }
 }

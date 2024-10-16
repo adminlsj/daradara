@@ -1,7 +1,7 @@
 <div class="headings flex-row">
-    <div class="cover flex-column">
+    <div class="cover">
         <img src="{{ $anime->photo_cover }}" alt="">
-        <div class="button-groups flex-row">
+        <div class="button-groups">
             <div class="list btn-group">
                 <div class="btn-group" role="group">
                     <button type="button" class="btn btn-secondary add" data-toggle="modal"
@@ -21,110 +21,6 @@
                     </div>
                 </div>
 
-                <!-- <div id="addToList" class="modal">
-                    <form class="modal-content animate" action="{{ route('anime.save', ['anime' => $anime]) }}"
-                        method="POST">
-                        {{ csrf_field() }}
-                        <div class="container flex-column">
-                            <button class="cancel-button" type="button"
-                                onclick="document.getElementById('addToList').style.display='none'">&#x2715;</button>
-                            <img src="{{ $anime->photo_banner }}" alt="為美好世界獻上祝福">
-                            <div class="add-to-list-cover flex-row">
-                                <div class="title flex-row">
-                                    <img src="{{ $anime->photo_cover }}" alt="">
-                                    <h3> {{ $anime->title_ro }} </h3>
-                                </div>
-                                <div class="button-groups">
-                                    <button class="favorite" type="button">♥</button>
-                                    <button type="submit" class="add">儲存</button>
-                                </div>
-                            </div>
-
-                            <div class="add-to-list-content flex-row">
-                                <div class="filters">
-                                    <div class="filter watching-status">
-                                        <h3>觀看狀態</h3>
-                                        <div class="bar form-control">
-                                            <select id="status" name="status"
-                                                onclick="document.getElementById('option-watching-status').style.display='block'">
-                                                <div class="scroll-wrap" id="option-watching-status">
-                                                    <div class="option-group">
-                                                        <option value="watching">觀看狀態...</option>
-                                                        <option value="watching" {{ $status == 'watching' ? 'selected' : '' }}>觀看中</option>
-                                                        <option value="planning" {{ $status == 'planning' ? 'selected' : '' }}>準備觀看</option>
-                                                        <option value="completed" {{ $status == 'completed' ? 'selected' : '' }}>已觀看</option>
-                                                        <option value="rewatching" {{ $status == 'rewatching' ? 'selected' : '' }}>重看中</option>
-                                                        <option value="paused" {{ $status == 'paused' ? 'selected' : '' }}>暫停</option>
-                                                        <option value="dropped" {{ $status == 'dropped' ? 'selected' : '' }}>棄番</option>
-                                                    </div>
-                                                </div>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <div class="filter episodes-progress">
-                                        <h3>觀看進度</h3>
-                                        <div class="bar">
-                                            <input id="episode_progress" name="episode_progress" type="number"
-                                                value="{{ $anime_save ? $anime_save->episode_progress : null }}" min="0"
-                                                max="100000000">
-                                        </div>
-                                    </div>
-
-                                    <div class="filter total-rewatches">
-                                        <h3>觀看次數</h3>
-                                        <div class="bar">
-                                            <input id="total_rewatches" name="total_rewatches" type="number"
-                                                value="{{ $anime_save ? $anime_save->total_rewatches : null }}">
-                                        </div>
-                                    </div>
-
-                                    <div class="filter watch-date">
-                                        <h3>觀看日期</h3>
-                                        <div class="bar">
-                                            <input id="start_date" name="start_date" type="date"
-                                                value="{{ $anime_save ? Carbon\Carbon::parse($anime_save->start_date)->format('Y-m-d') : null }}">
-                                        </div>
-                                    </div>
-
-                                    <div class="filter watch-enddate">
-                                        <h3>完成日期</h3>
-                                        <div class="bar">
-                                            <input id="finish_date" name="finish_date" type="date"
-                                                value="{{ $anime_save ? Carbon\Carbon::parse($anime_save->finish_date)->format('Y-m-d') : null }}">
-                                        </div>
-                                    </div>
-
-                                    <div class="filter notes">
-                                        <h3>備註</h3>
-                                        <div class="bar">
-                                            <textarea id="notes" name="notes"
-                                                name="">{{ $anime_save ? $anime_save->notes : null }}</textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="add-to-list-options filter flex-column">
-                                    <h3>動漫清單</h3>
-                                    <div class="user-lists">
-                                        @foreach ($anime_lists as $anime_list)
-                                            <input type="checkbox" name="animelists[]" value="{{ $anime_list->id }}"
-                                                id="{{ $anime_list->id }}" {{ in_array($anime_list->id, $saved_lists) ? 'checked' : '' }}>
-                                            <label for="{{ $anime_list->id }}">{{ $anime_list->title }}</label>
-                                            <br>
-                                        @endforeach
-                                    </div>
-                                    <hr>
-                                    <div class="">
-                                        <input type="checkbox" name="is_hidden_from_status_lists" value="1"
-                                            id="is_hidden_from_status_lists" {{ $anime_save ? $anime_save->is_hidden_from_status_lists ? "checked" : '' : null }}>
-                                        <label for="is_hidden_from_status_lists">Hide from status lists</label>
-                                        <br>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div> -->
                 <form id="createSavelistForm" action="{{ route('anime.save', ['anime' => $anime]) }}" method="POST">
                     {{ csrf_field() }}
 
@@ -212,8 +108,10 @@
                                         </div>
                                         
                                         <div class="form-group">
+                                            <h3>列表</h3>
                                             <input type="checkbox" name="is_private" value="1" id="is_private">
                                             <label class="no-select" for="is_private">私人清單</label>
+                                            <hr>
                                         </div>
                                     </div>
 
@@ -232,7 +130,8 @@
             <button class="favorite">♥</button>
         </div>
     </div>
-    <div class="heading-content flex-column">
+    
+    <div class="heading-content">
         <h3> {{ $anime->title_ro }} </h3>
         <p> {{ $anime->description }} </p>
         <div class="navtabs flex-row">
