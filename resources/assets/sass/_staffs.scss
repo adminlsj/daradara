@@ -5,6 +5,12 @@
     flex-direction: column;
 }
 
+@media (max-width: 760px) {
+    #staffs {
+        margin: 20px 0 0;
+    }
+}
+
 .staffs-wrap {
     flex-wrap: wrap;
     justify-content: space-between;
@@ -17,6 +23,14 @@
     max-width: 48%;
     margin-bottom: 20px;
     background-color: #151f2e;
+}
+
+@media (max-width: 760px) {
+    .staffs-card {
+        flex: 100%;
+        max-width: 100%;
+        width: 100%;
+    }
 }
 
 .staffs-card img {

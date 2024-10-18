@@ -5,6 +5,12 @@
     flex-direction: column;
 }
 
+@media (max-width: 760px) {
+    #comments {
+        margin: 20px 0 0;
+    }
+}
+
 .comments-wrap {
     flex-wrap: wrap;
     margin-bottom: 20px;
