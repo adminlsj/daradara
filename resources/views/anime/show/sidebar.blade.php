@@ -1,4 +1,4 @@
-<div class="sidebar flex-column">
+<div class="sidebar">
     <div class="ranking">
         <strong>⭐ <a href=""> 季度排名 #1</a></strong>
     </div>
