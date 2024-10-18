@@ -24,6 +24,7 @@
     background-color: transparent;
     transition: 0.3s;
     margin: 0 20px;
+    white-space: nowrap;
 }
 
 .navbar-wrap a:hover {
@@ -95,6 +96,10 @@
 
 .navbar-search-user i {
     font-size: 20px;
+}
+
+.navbar-search-user .navbar-user {
+    white-space: nowrap;
 }
 
 .navbar-search-user .navbar-user img {
