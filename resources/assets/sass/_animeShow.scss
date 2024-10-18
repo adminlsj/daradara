@@ -1,0 +1,13 @@
+.contents {
+    display: flex; 
+    flex-direction: row; 
+    padding: 25px 12%; 
+    background-color: #0b1622;
+}
+
+@media (max-width: 760px) {
+    .contents {
+        flex-direction: column;
+        padding: 30px 20px 0;
+    }
+}

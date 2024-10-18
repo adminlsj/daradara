@@ -8,7 +8,7 @@
     @include('anime.show.banner')
     @include('anime.show.headings')
 
-    <div class="contents" style="display: flex; flex-direction: row; padding: 25px 12%; background-color: #0b1622;">
+    <div class="contents">
         @include('anime.show.sidebar')
         @include('anime.show.overview')
         @include('anime.show.episodes')
