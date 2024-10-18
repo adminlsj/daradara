@@ -107,6 +107,8 @@
     }
 }
 
+//trailer
+
 @media (max-width: 760px) {
     .trailer iframe {
         width: 100%;
@@ -116,7 +118,14 @@
 
 //recommendations
 
+.recommendations {
+    display: flex;
+    flex-direction: column;
+}
+
 .recommendations-heading {
+    display: flex;
+    flex-direction: row;
     justify-content: space-between;
 }
 
@@ -132,8 +141,18 @@
 }
 
 .recommendations-warp {
+    display: flex;
+    flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
+}
+
+@media (max-width: 760px) {
+    .recommendations-warp {
+        gap: 20px;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+    }
 }
 
 .recommendations-card {
@@ -142,6 +161,12 @@
     flex: 19%;
     max-width: 19%;
     margin-bottom: 20px;
+}
+
+@media (max-width: 760px) {
+    .recommendations-card {
+        max-width: 100%;
+    }
 }
 
 .recommendations-card img {
@@ -163,7 +188,14 @@
 
 //threads
 
+.threads {
+    display: flex;
+    flex-direction: column;
+}
+
 .threads-heading {
+    display: flex;
+    flex-direction: row;
     justify-content: space-between;
 }
 
@@ -174,6 +206,8 @@
 }
 
 .threads-wrap {
+    display: flex;
+    flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
 }
@@ -184,6 +218,13 @@
     max-width: 48%;
     margin-bottom: 20px;
     padding: 10px 15px;
+}
+
+@media (max-width: 760px) {
+    .threads-card {
+        flex: 100%;
+        max-width: 100%;
+    }
 }
 
 .threads-card .title {
@@ -208,6 +249,10 @@
     font-size: 12px;
 }
 
+.threads-card .title .traffic p {
+    margin: 0px;
+}
+
 .threads-content {
     display: flex;
     flex-direction: row;
@@ -215,11 +260,23 @@
     align-items: center;
 }
 
+@media (max-width: 760px) {
+    .threads-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+}
+
 .threads-content img {
     height: 40px;
     width: 40px;
     object-fit: cover;
     border-radius: 50%;
+}
+
+.threads-content a {
+    margin-right: 10px;
 }
 
 .threads-content .user {
