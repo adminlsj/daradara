@@ -9,7 +9,41 @@
     font-size: 18px;
 }
 
+@media (max-width: 760px) {
+    #overview {
+        margin-left: 0;
+    }
+}
+
+//description
+
+.description {
+    display: none;
+}
+
+@media (max-width: 760px) {
+    .description {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .description-content {
+        background-color: #151f2e;
+        border-radius: 3px;
+    }
+
+    .description-content p {
+        font-size: 13px;
+        padding: 20px;
+        margin: 0;
+    }
+}
+
 //relations
+
+.relations h2 {
+    margin-top: 0px;
+}
 
 .grid-wrap {
     display: flex;
@@ -48,6 +82,12 @@
 
 .media-preview-card .relations-content a:hover {
     color: rgb(0, 143, 143);
+}
+
+@media (max-width: 760px) {
+    .relations {
+        margin-top: 20px;
+    }
 }
 
 //recommendations

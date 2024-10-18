@@ -1,4 +1,11 @@
 <div id='overview' class="tabcontent">
+    <div class="description">
+        <h2>劇情簡介</h2>
+        <div class="description-content">
+            <p> {{ $anime->description }} </p>
+        </div>
+    </div>
+
     <div class="relations">
         <h2>關聯作品</h2>
         <div class="grid-wrap">
