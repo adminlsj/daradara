@@ -5,6 +5,12 @@
     flex-direction: column;
 }
 
+@media (max-width: 760px) {
+    #characters {
+        margin: 20px 0 0;
+    }
+}
+
 /***                   Filter                    ***/
 
 .characters-dropdown {
@@ -32,6 +38,13 @@
     max-width: 48%;
     margin-bottom: 20px;
     background-color: #151f2e;
+}
+
+@media (max-width: 760px) {
+    .characters-card {
+        flex: 100%;
+        max-width: 100%;
+    }
 }
 
 .characters-card img {

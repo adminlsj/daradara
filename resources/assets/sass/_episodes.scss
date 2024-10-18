@@ -3,6 +3,12 @@
     flex: 80%;
 }
 
+@media (max-width: 760px) {
+    #episodes {
+        margin: 20px 0 0;
+    }
+}
+
 .episodes-wrap {
     flex-wrap: wrap;
     justify-content: space-between;
@@ -15,13 +21,28 @@
     position: relative;
 }
 
+@media (max-width: 760px) {
+    .episodes-wrap .episodes-card {
+        flex: 100%;
+        max-width: 100%;
+        margin-bottom: 20px;
+    }
+}
+
 .episodes-wrap .episodes-card a{
     text-decoration: none;
     color: white;
 }
 
 .episodes-wrap .episodes-card img {
-    max-width: 100%;
+    width: 100%;
+}
+
+@media (max-width: 760px) {
+    .episodes-wrap .episodes-card img {
+        height: 100px;
+        object-fit: cover;
+    }
 }
 
 .episodes-card .title {
