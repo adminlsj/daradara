@@ -43,7 +43,7 @@
                                         <img src="{{ $anime->photo_cover }}" alt="">
                                         <h3> {{ $anime->title_ro }} </h3>
                                     </div>
-                                    <div class="add-to-list-content flex-row">
+                                    <div class="add-to-list-content">
                                         <div class="filters">
                                             <div class="filter watching-status">
                                                 <h3>觀看狀態</h3>
