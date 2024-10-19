@@ -14,12 +14,12 @@
 .filters {
     display: flex;
     flex-direction: row;
+    gap: 30px;
 }
 
 .filter {
     display: flex;
     flex-direction: column;
-    margin-right: 30px;
 }
 
 .filter h3 {
