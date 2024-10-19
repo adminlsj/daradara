@@ -145,6 +145,7 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
+    gap: 20px;
 }
 
 @media (max-width: 760px) {
@@ -158,8 +159,7 @@
 .recommendations-card {
     display: flex;
     flex-direction: column;
-    flex: 19%;
-    max-width: 19%;
+    width: 130px;
     margin-bottom: 20px;
 }
 
