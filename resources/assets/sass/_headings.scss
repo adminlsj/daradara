@@ -138,6 +138,12 @@
     padding-right: 30px;
 }
 
+@media (max-width: 760px) {
+    .add-to-list-content .filters {
+        padding-right: 0px;
+    }
+}
+
 .add-to-list-content .filters .filter {
     flex-basis: 30%;
 }
@@ -159,12 +165,24 @@
     padding-right: 10px;
 }
 
+@media (max-width: 760px) {
+    .add-to-list-content .notes {
+        padding-right: 0px;
+    }
+}
+
 .add-to-list-content .notes .bar {
     width: auto;
 }
 
 .form-group {
     width: 15%;
+}
+
+@media (max-width: 760px) {
+    .form-group {
+        width: 100%;
+    }
 }
 
 .form-group h3 {
