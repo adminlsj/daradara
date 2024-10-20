@@ -5,8 +5,14 @@
     align-items: center;
     height: 68px;
     justify-content: space-between;
-    padding: 20px 12%;
+    padding: 20px 10%;
     margin: 0 !important;
+}
+
+@media (max-width: 1040px) {
+    .navbar {
+        padding: 20px 30px;
+    }
 }
 
 @media (max-width: 760px) {
