@@ -40,6 +40,13 @@
     background-color: #151f2e;
 }
 
+@media (max-width: 1040px) {
+    .characters-card {
+        flex: 100%;
+        max-width: 100%;
+    }
+}
+
 @media (max-width: 760px) {
     .characters-card {
         flex: 100%;

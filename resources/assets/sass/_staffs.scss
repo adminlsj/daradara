@@ -25,6 +25,14 @@
     background-color: #151f2e;
 }
 
+@media (max-width: 1040px) {
+    .staffs-card {
+        flex: 100%;
+        max-width: 100%;
+        width: 100%;
+    }
+}
+
 @media (max-width: 760px) {
     .staffs-card {
         flex: 100%;
@@ -51,6 +59,10 @@
     text-decoration: none;
     padding: 10px;
     font-size: 12px;
+}
+
+.staffs-name p {
+    margin-bottom: 0;
 }
 
 .staffs-card .staffs-name a:hover {

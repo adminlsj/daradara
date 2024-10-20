@@ -21,6 +21,14 @@
     position: relative;
 }
 
+@media (max-width: 1040px) {
+    .episodes-wrap .episodes-card {
+        flex: 100%;
+        max-width: 100%;
+        margin-bottom: 20px;
+    }
+}
+
 @media (max-width: 760px) {
     .episodes-wrap .episodes-card {
         flex: 100%;
@@ -36,6 +44,13 @@
 
 .episodes-wrap .episodes-card img {
     width: 100%;
+}
+
+@media (max-width: 1040px) {
+    .episodes-wrap .episodes-card img {
+        height: 100px;
+        object-fit: cover;
+    }
 }
 
 @media (max-width: 760px) {

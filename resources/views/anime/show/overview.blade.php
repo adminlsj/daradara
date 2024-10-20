@@ -12,25 +12,25 @@
             <div class="media-preview-card">
                 <a href=""><img src="https://i.meee.com.tw/w8H8FmP.png" alt=""></a>
                 <div class="relations-content">
-                    <p>動漫</p>
-                    <a href=""><p style="font-size:14px; color:#acacac;">為美好世界獻上祝福！ 第一季</p></a>
-                    <p>播放完結</p>
+                    <p class="source">動漫</p>
+                    <a href=""><p style="font-size:14px; color:#acacac;">在異世界獲得超強能力的我，在現實世界照樣無敵～等級提升改變人生命運～</p></a>
+                    <p class="status">播放完結</p>
                 </div>
             </div>
             <div class="media-preview-card">
                 <a href=""><img src="https://i.meee.com.tw/AzWDZ4A.png" alt=""></a>
                 <div class="relations-content">
-                    <p>動漫</p>
+                    <p class="source">動漫</p>
                     <a href=""><p style="font-size:14px; color:#acacac;">為美好世界獻上祝福！ 第二季</p></a>
-                    <p>播放完結</p>
+                    <p class="status">播放完結</p>
                 </div>
             </div>
             <div class="media-preview-card">
                 <a href=""><img src="https://i.meee.com.tw/kuNtA0t.png" alt=""></a>
                 <div class="relations-content">
-                    <p>小說</p>
+                    <p class="source">小說</p>
                     <a href=""><p style="font-size:14px; color:#acacac;">為美好世界獻上祝福！</p></a>
-                    <p>播放完結</p>
+                    <p class="status">播放完結</p>
                 </div>
             </div>
         </div>

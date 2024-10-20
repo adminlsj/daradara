@@ -1,8 +1,14 @@
 .contents {
     display: flex; 
     flex-direction: row; 
-    padding: 25px 12%; 
+    padding: 25px 10%; 
     background-color: #0b1622;
+}
+
+@media (max-width: 1040px) {
+    .contents {
+        padding: 30px 30px 0;
+    }
 }
 
 @media (max-width: 760px) {
