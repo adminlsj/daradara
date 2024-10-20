@@ -1,10 +1,18 @@
 .navbar {
+    display: flex;
+    flex-direction: row;
     background-color: #151f2e;
     align-items: center;
     height: 68px;
     justify-content: space-between;
     padding: 20px 12%;
     margin: 0 !important;
+}
+
+@media (max-width: 760px) {
+    .navbar {
+        display: none;
+    }
 }
 
 .navbar:before, .navbar:after {
