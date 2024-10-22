@@ -31,7 +31,7 @@
 			<button>人氣</button>
 		</div>
 
-		<div class="related-animes flex-row">
+		<div class="related-animes">
 			@foreach ($animes as $anime)
 				<div class="media-card">
 					<a href="{{ route('anime.show', ['anime' => $anime->id, 'title' => $anime->title_ro]) }}">
