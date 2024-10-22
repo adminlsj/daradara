@@ -75,12 +75,24 @@
     font-size: 12px;
 }
 
+.characters-wrap .characters-card .characters-name {
+    justify-content: space-between;
+}
+
 .characters-wrap .characters-card .characters-name a {
     color: #8b9fb5;
     text-decoration: none;
-    padding: 10px;
+    padding: 10px 10px 0;
     font-size: 12px;
     transition: 0.2s;
+}
+
+.characters-wrap .characters-card .characters-name .actors {
+    text-align: right;
+}
+
+.characters-wrap .characters-card .characters-name div {
+    padding: 0 10px 10px;
 }
 
 .characters-wrap .characters-card .characters-name a:hover {
