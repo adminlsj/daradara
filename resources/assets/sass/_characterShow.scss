@@ -1,8 +1,20 @@
 /**         Character Headings          **/
 
 .character-headings {
-    padding: 30px 14% 12px;
+    padding: 30px 10% 12px;
     background-color: #151f2e;
+}
+
+@media (max-width: 1040px) {
+    .character-headings {
+        padding: 30px 30px 12px;
+    }
+}
+
+@media (max-width: 760px) {
+    .character-headings {
+        padding: 30px 20px 12px;
+    }
 }
 
 .character-cover {
@@ -51,22 +63,33 @@
     background-color: #0b1622;
 }
 
-.character-animes .character-button-groups {
-    justify-content: end;
+@media (max-width: 1040px) {
+    .character-animes {
+        padding: 20px 30px 12px;
+    }
 }
 
-.character-animes .character-button-groups button {
-    margin-left: 2%;
+@media (max-width: 760px) {
+    .character-animes {
+        padding: 20px 20px 12px;
+    }
+}
+
+.character-animes .character-button-groups {
+    justify-content: end;
+    gap: 20px;
 }
 
 .character-animes .related-animes {
+    display: grid;
+    grid-template-columns: repeat(auto-fill,185px);
     padding-top: 30px;
-    justify-content: flex-start;
-    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 25px 20px;
 }
 
 .character-animes .related-animes .media-card {
-    margin-right: 30px;
-    max-width: 19%;
+    width: 185px;
+    height: 314px;
     margin-bottom: 20px;
 }
