@@ -21,6 +21,7 @@ Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallb
 // User
 Route::resource('user', 'UserController')->only(['edit', 'update']);
 Route::get('/user/{user}/{name?}/animelist', 'UserController@animelist')->name('user.animelist');
+Route::get('/user/{user}/{name?}/likes', 'UserController@likes')->name('user.likes');
 
 // Anime
 Route::post('/anime/{anime}/save', 'AnimeController@save')->name('anime.save');

@@ -29,6 +29,11 @@ class UserController extends Controller
     public function animelist(Request $request, User $user)
     {
         $anime_lists = $user->anime_lists;
-        return view('user.animelist.show', compact('user', 'anime_lists'));
+        return view('user.show.animeList', compact('user', 'anime_lists'));
+    }
+
+    public function likes(Request $request, User $user)
+    {
+        return view('user.show.likes', compact('user'));
     }
 }
