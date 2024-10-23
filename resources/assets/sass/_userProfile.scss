@@ -21,28 +21,3 @@
     padding: 22px 25px;
     align-self: flex-end;
 }
-
-/***        NavTabs        ***/
-
-.user-profile .navtabs {
-    background-color: white;
-    padding: 10px 50px;
-    gap: 50px;
-    justify-content: center;
-}
-
-.user-profile .navtabs a {
-    font-weight: 600;
-    color: gray;
-    text-decoration: none;
-}
-
-.user-profile .navtabs a:hover {
-    transition: 0.2s;
-    color: palevioletred;
-}
-
-.user-profile .navtabs .tablinks {
-    padding: 0 20px;
-}
-
