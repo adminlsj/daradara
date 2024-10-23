@@ -1,6 +1,8 @@
 /**         Character Headings          **/
 
 .character-headings {
+    display: flex;
+    flex-direction: row;
     padding: 30px 10% 12px;
     background-color: #151f2e;
 }
@@ -13,7 +15,13 @@
 
 @media (max-width: 760px) {
     .character-headings {
+        align-items: center;
+        flex-direction: column-reverse;
         padding: 30px 20px 12px;
+    }
+
+    .character-heading-content {
+        align-items: center;
     }
 }
 
@@ -49,6 +57,27 @@
 
 .character-info p {
     line-height: 0%;
+}
+
+.character-info-mobile {
+    display: none;
+}
+
+@media (max-width: 760px) {
+    .character-info, .character-description {
+        display: none;
+    }
+    
+    .character-info-mobile {
+        display: flex;
+        flex-direction: column;
+        background-color: #151f2e;
+        padding: 10px 0;
+    }
+    
+    .character-info-mobile p {
+        padding: 0 10px
+    }
 }
 
 .character-heading-content p:hover {
@@ -126,6 +155,6 @@
     }
 
     .character-animes .related-animes .media-card a:first-child {
-        height: 125px;
+        height: 165px;
     }
 }

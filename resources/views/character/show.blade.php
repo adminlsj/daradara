@@ -7,7 +7,7 @@
 @section('content') 
 
 <div class="flex-column">
-	<div class="character-headings flex-row">
+	<div class="character-headings">
 		<div class="character-cover">
 			<img src="{{ $character->photo_cover }}" alt="{{ $character->name_zht }}">
 		</div>
@@ -20,8 +20,15 @@
 				<p> 性別：{{ $character->gender }} </p>
 				<p> 身高：{{ $character->height }} </p>
 			</div>
-			<p> {{ $character->description }} </p>
+			<p class="character-description"> {{ $character->description }} </p>
 		</div>
+	</div>
+	<div class="character-info-mobile">
+		<p> 生日：{{ $character->birthday }} </p>
+		<p> 年齡：{{ $character->initial_age }} </p>
+		<p> 性別：{{ $character->gender }} </p>
+		<p> 身高：{{ $character->height }} </p>
+		<p> {{ $character->description }} </p>
 	</div>
 
 	<div class="character-animes flex-column">
