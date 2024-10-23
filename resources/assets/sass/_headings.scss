@@ -89,6 +89,10 @@
 
 //add-to-list-form
 
+.modal-dialog {
+    min-width: 990px;
+}
+
 .modal-body .photo-banner img {
     opacity: 40%;
     width: 100%;
@@ -119,10 +123,15 @@
     z-index: 10;
 }
 
-@media (min-width: 1000px) {
+@media (max-width: 1000px) {
     .modal-dialog {
-        min-width: 768px;
-        width: 1000px !important;
+        min-width: 760px;
+    }
+}
+
+@media (max-width: 760px) {
+    .modal-dialog {
+        min-width: 0px;
     }
 }
 
@@ -158,9 +167,14 @@
     width: 100%;
 }
 
+@media (max-width: 1000px) {
+    .add-to-list-content .filters .filter {
+        flex-basis: 100%;
+    }
+}
+
 @media (max-width: 760px) {
     .add-to-list-content .filters {
-        flex-direction: column;
         width: 100%;
     }
 }
@@ -171,7 +185,7 @@
     padding-right: 10px;
 }
 
-@media (max-width: 760px) {
+@media (max-width: 1000px) {
     .add-to-list-content .notes {
         padding-right: 0px;
     }
