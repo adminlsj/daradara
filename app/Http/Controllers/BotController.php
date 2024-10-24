@@ -433,7 +433,7 @@ class BotController extends Controller
 
     public function checkBangumiAnimesLinkable(Request $request)
     {
-        $anime_temps = AnimeTemp::where('category', '!=', 'Others')->where('category', '!=', 'Comic')->orderBy('id', 'asc')->skip($request->skip)->limit($request->limit)->get();
+        $anime_temps = AnimeTemp::orderBy('id', 'asc')->skip($request->skip)->limit($request->limit)->get();
         foreach ($anime_temps as $anime_temp) {
             if ($anime = Anime::where('title_jp', 'ilike', '%'.$anime_temp->title_jp.'%')->first()) {
                 $mal_started_at = $anime->started_at;
@@ -448,7 +448,7 @@ class BotController extends Controller
 
     public function importBangumiAnimesLinkable(Request $request)
     {
-        $anime_temps = AnimeTemp::where('category', '!=', 'Others')->where('category', '!=', 'Comic')->orderBy('id', 'asc')->skip($request->skip)->limit($request->limit)->get();
+        $anime_temps = AnimeTemp::orderBy('id', 'asc')->skip($request->skip)->limit($request->limit)->get();
         foreach ($anime_temps as $anime_temp) {
             if ($anime = Anime::where('title_jp', 'ilike', '%'.$anime_temp->title_jp.'%')->first()) {
                 $mal_started_at = $anime->started_at;
