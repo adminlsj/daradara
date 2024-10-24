@@ -435,7 +435,7 @@ class BotController extends Controller
     {
         $anime_temps = AnimeTemp::where('category', '!=', 'Others')->where('category', '!=', 'Comic')->orderBy('id', 'asc')->skip($request->skip)->limit($request->limit)->get();
         foreach ($anime_temps as $anime_temp) {
-            if ($anime = Anime::where('title_jp', 'ilike', '%'.$anime_temp->title_jp.'%')->first()) {
+            if ($anime = Anime::where('title_jp', 'ilike', '%'.$anime_temp->title_jp.'%')->first() && $anime->category == $anime_temp->category) {
                 $mal_started_at = $anime->started_at;
                 $sub_week = Carbon::parse($mal_started_at)->subWeek()->toDateString();
                 $add_week = Carbon::parse($mal_started_at)->addWeek()->toDateString();
@@ -450,7 +450,7 @@ class BotController extends Controller
     {
         $anime_temps = AnimeTemp::where('category', '!=', 'Others')->where('category', '!=', 'Comic')->orderBy('id', 'asc')->skip($request->skip)->limit($request->limit)->get();
         foreach ($anime_temps as $anime_temp) {
-            if ($anime = Anime::where('title_jp', 'ilike', '%'.$anime_temp->title_jp.'%')->first()) {
+            if ($anime = Anime::where('title_jp', 'ilike', '%'.$anime_temp->title_jp.'%')->first() && $anime->category == $anime_temp->category) {
                 $mal_started_at = $anime->started_at;
                 $sub_week = Carbon::parse($mal_started_at)->subWeek()->toDateString();
                 $add_week = Carbon::parse($mal_started_at)->addWeek()->toDateString();
