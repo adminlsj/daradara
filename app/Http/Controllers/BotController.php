@@ -431,10 +431,19 @@ class BotController extends Controller
         }
     }
 
-    public function tempMethod(Request $request)
+    public function checkBangumiAnimesLinkable(Request $request)
     {
-        // $anime_temps = AnimeTemp::where('id', '>=', 1934)->where('id', '<=', 1934)->get();
-        /* $anime_temps = AnimeTemp::all();
+        $anime_temps = AnimeTemp::where('category', '!=', 'Others')->where('category', '!=', 'Comic')->orderBy('id', 'asc')->skip($request->skip)->limit($request->limit)->get();
+        foreach ($anime_temps as $anime_temp) {
+            if ($anime = Anime::where('title_jp', 'ilike', '%'.$anime_temp->title_jp.'%')->first()) {
+                echo "MAL ID#{$anime->id} = {$anime->title_jp} | Bangumi ID#{$anime_temp->id} = {$anime_temp->title_jp}<br>";
+            }
+        }
+    }
+
+    public function importBangumiAnimesLinkable(Request $request)
+    {
+        $anime_temps = AnimeTemp::where('category', '!=', 'Others')->where('category', '!=', 'Comic')->get();
         foreach ($anime_temps as $anime_temp) {
             if ($anime = Anime::where('title_jp', $anime_temp->title_jp)->first()) {
                 if ($anime->title_zhs == null) {
@@ -457,15 +466,11 @@ class BotController extends Controller
                 $anime->save();
                 $anime_temp->delete();
             }
-        } */
+        }
+    }
 
-        /* $anime_temps = AnimeTemp::orderBy('id', 'asc')->skip(1000)->limit(1000)->get();
-        foreach ($anime_temps as $anime_temp) {
-            if ($anime = Anime::where('title_jp', 'ilike', '%'.$anime_temp->title_jp.'%')->first()) {
-                echo "MAL ID#{$anime->id} = {$anime->title_jp} | Bangumi ID#{$anime_temp->id} = {$anime_temp->title_jp}<br>";
-            }
-        } */        
-
+    public function tempMethod(Request $request)
+    {   
         // Scrape voice actors
         /* $from = $request->from;
         $to = $request->to;
