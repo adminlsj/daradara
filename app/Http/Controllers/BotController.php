@@ -435,15 +435,15 @@ class BotController extends Controller
     {
         $anime_temps = AnimeTemp::orderBy('id', 'asc')->skip($request->skip)->limit($request->limit)->get();
         foreach ($anime_temps as $anime_temp) {
-            if (strpos($anime_temp->title_jp, ' ') !== false) {
+            /* if (strpos($anime_temp->title_jp, ' ') !== false) {
                 $bangumi_title_jp = explode(' ', $anime_temp->title_jp)[0];
             } else {
                 $bangumi_title_jp = $anime_temp->title_jp;
-            }
-            if ($anime = Anime::where('title_jp', 'ilike', '%'.$bangumi_title_jp.'%')->first()) {
+            } */
+            if ($anime = Anime::where('title_jp', 'ilike', '%'.$anime_temp->title_jp.'%')->first()) {
                 $mal_started_at = $anime->started_at;
-                $sub_week = Carbon::parse($mal_started_at)->subWeek()->toDateString();
-                $add_week = Carbon::parse($mal_started_at)->addWeek()->toDateString();
+                $sub_week = Carbon::parse($mal_started_at)->subDays(3)->toDateString();
+                $add_week = Carbon::parse($mal_started_at)->addDays(3)->toDateString();
                 if ($anime_temp->started_at >= $sub_week && $anime_temp->started_at <= $add_week) {
                     echo "MAL ID#{$anime->id} = {$anime->title_jp} | Bangumi ID#{$anime_temp->id} = {$anime_temp->title_jp}<br>";
                 }
@@ -457,8 +457,8 @@ class BotController extends Controller
         foreach ($anime_temps as $anime_temp) {
             if ($anime = Anime::where('title_jp', 'ilike', '%'.$anime_temp->title_jp.'%')->first()) {
                 $mal_started_at = $anime->started_at;
-                $sub_week = Carbon::parse($mal_started_at)->subWeek()->toDateString();
-                $add_week = Carbon::parse($mal_started_at)->addWeek()->toDateString();
+                $sub_week = Carbon::parse($mal_started_at)->subDays(3)->toDateString();
+                $add_week = Carbon::parse($mal_started_at)->addDays(3)->toDateString();
                 if ($anime_temp->started_at >= $sub_week && $anime_temp->started_at <= $add_week) {
                     if ($anime->title_zhs == null) {
                         $anime->title_zhs = $anime_temp->title_zhs;
