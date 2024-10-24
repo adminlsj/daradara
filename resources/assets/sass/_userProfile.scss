@@ -9,6 +9,12 @@
     margin-top: -230px;
 }
 
+@media (max-width: 1040px) {
+    .user-photo {
+        padding-left: 30px;
+    }
+}
+
 .user-photo img{
     width: 160px;
     height: 230px;
