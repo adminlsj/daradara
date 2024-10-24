@@ -5,7 +5,7 @@
     flex-direction: column;
 }
 
-@media (max-width: 760px) {
+@media (max-width: 768px) {
     #characters {
         margin: 20px 0 0;
     }
@@ -47,7 +47,7 @@
     }
 }
 
-@media (max-width: 760px) {
+@media (max-width: 768px) {
     .characters-card {
         flex: 100%;
         max-width: 100%;

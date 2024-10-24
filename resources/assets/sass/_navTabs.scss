@@ -3,12 +3,21 @@
     padding: 10px 50px;
     gap: 50px;
     justify-content: center;
+    overflow: auto;
+}
+
+@media (max-width: 768px) {
+    .user-profile .navtabs {
+        gap: 20px;
+        justify-content: flex-start;
+    }
 }
 
 .user-profile .navtabs a {
     font-weight: 600;
     color: gray;
     text-decoration: none;
+    text-wrap: nowrap;
 }
 
 .user-profile .navtabs a:hover {

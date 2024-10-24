@@ -13,7 +13,7 @@
     }
 }
 
-@media (max-width: 760px) {
+@media (max-width: 768px) {
     .character-headings {
         align-items: center;
         flex-direction: column-reverse;
@@ -63,7 +63,7 @@
     display: none;
 }
 
-@media (max-width: 760px) {
+@media (max-width: 768px) {
     .character-info, .character-description {
         display: none;
     }
@@ -98,7 +98,7 @@
     }
 }
 
-@media (max-width: 760px) {
+@media (max-width: 768px) {
     .character-animes {
         padding: 20px 20px 12px;
     }
@@ -148,7 +148,7 @@
     }
 }
 
-@media (max-width: 760px) {
+@media (max-width: 768px) {
     .character-animes .related-animes {
         grid-template-columns: repeat(auto-fill, minmax(105px, 1fr));
         gap: 25px 20px;

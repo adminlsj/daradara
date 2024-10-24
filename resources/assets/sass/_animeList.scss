@@ -2,8 +2,20 @@
     padding: 0 10%;
 }
 
+@media (max-width: 1040px) {
+    .content {
+        padding: 0 30px;
+    }
+}
+
 .sidebar .lists {
     margin-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+    .user-profile .content .sidebar {
+        display: none;
+    }
 }
 
 .sidebar .lists h3 {
@@ -24,8 +36,14 @@
     margin-left: 50px;
 }
 
+@media (max-width: 768px) {
+    .list-wrap {
+        margin-left: 0px;
+    }
+}
+
 .list-entries {
-    margin-bottom: 50px;
+    margin-bottom: 30px;
 }
 
 .list-wrap .title-link h3 {
@@ -39,9 +57,22 @@
     flex-wrap: wrap;
 }
 
+@media (max-width: 768px) {
+    .list-wrap .list-section {
+        gap: 10px;
+    }
+}
+
 .list-wrap .list-section .list-card {
     height: 210px;
     width: 150px;
+}
+
+@media (max-width: 768px) {
+    .list-wrap .list-section .list-card {
+        height: 160px;
+        width: 120px;
+    }
 }
 
 .list-card img {

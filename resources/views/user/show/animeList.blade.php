@@ -34,11 +34,9 @@
                 <div class="list-section flex-row">
                     <div class="list-card">
                         <img src="https://i.meee.com.tw/HqjAJDJ.webp" alt="">
-                        <h3>七大罪</h3>
                     </div>
                     <div class="list-card">
                         <img src="https://i.meee.com.tw/XAL8tmo.jpeg" alt="">
-                        <h3>遊戲人生</h3>
                     </div>
                 </div>
             </div>
@@ -50,11 +48,9 @@
                 <div class="list-section flex-row">
                     <div class="list-card">
                         <img src="https://i.meee.com.tw/HqjAJDJ.webp" alt="">
-                        <h3>七大罪</h3>
                     </div>
                     <div class="list-card">
                         <img src="https://i.meee.com.tw/XAL8tmo.jpeg" alt="">
-                        <h3>遊戲人生</h3>
                     </div>
                 </div>
             </div>
