@@ -4,6 +4,12 @@
     object-fit: cover;
 }
 
+@media (max-width: 768px) {
+    .user-banner img {
+        height: 200px;
+    }
+}
+
 .user-photo {
     padding-left: 10%;
     margin-top: -230px;
@@ -15,11 +21,25 @@
     }
 }
 
+@media (max-width: 768px) {
+    .user-photo {
+        margin-top: -160px;
+    }
+}
+
 .user-photo img{
     width: 160px;
     height: 230px;
     object-fit: cover;
     border-radius: 5px 5px 0 0 ;
+}
+
+@media (max-width: 768px) {
+    .user-photo img {
+        width: 120px;
+        height: 160px;
+        object-fit: cover;
+    }
 }
 
 .user-photo h4 {
