@@ -36,5 +36,14 @@ Route::get('/actor/{actor}/{title?}', 'ActorController@show')->name('actor.show'
 
 Route::group(['middleware' => 'admin'], function () {
 	Route::get('/tempMethod', 'BotController@tempMethod');
+
+	// Scrape Bangumi
+	Route::get('/scrapeBangumi', 'BotController@scrapeBangumi');
+	Route::get('/scrapeBangumiList', 'BotController@scrapeBangumiList');
+	Route::get('/checkBangumiCompanies', 'BotController@checkBangumiCompanies');
+	Route::get('/mergeBangumiCompanies', 'BotController@mergeBangumiCompanies');
+	Route::get('/importBangumiCompanies', 'BotController@importBangumiCompanies');
+
 	Route::get('/scrapeMalAnimes', 'BotController@scrapeMalAnimes');
+	Route::get('/scrapeMalCompanies', 'BotController@scrapeMalCompanies');
 });

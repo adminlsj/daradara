@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Anime;
+use App\AnimeTemp;
 use App\Character;
 use App\Actor;
 use App\ActorAnimeCharacter;
@@ -23,6 +24,190 @@ use Carbon\Carbon;
 
 class BotController extends Controller
 {
+    public function scrapeBangumi(Request $request)
+    {
+        $animes = Anime::where('id', '>=', 25425)->orderBy('id', 'asc')->get();
+        foreach ($animes as $anime) {
+            $url = $anime->sources['bangumi'];
+            $curl_connection = curl_init($url);
+            curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+            curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+            $html = curl_exec($curl_connection);
+            curl_close($curl_connection);
+            sleep(1);
+
+            if (strpos($html, '<h2>呜咕，出错了</h2>') === false) {
+                $title_zhs = null;
+                if (strpos($html, '<li class=""><span class="tip">中文名: </span>') !== false) {
+                    $title_zhs = trim(Helper::get_string_between($html, '<li class=""><span class="tip">中文名: </span>', '</li>'));
+                }
+
+                $title_jp = null;
+                if (strpos($html, 'property="v:itemreviewed">') !== false) {
+                    $title_jp = trim(Helper::get_string_between($html, 'property="v:itemreviewed">', '</a>'));
+                }
+
+                $photo_cover = null;
+                if (strpos($html, 'class="thickbox cover"><img src="') !== false) {
+                    $photo_cover = 'https:'.trim(Helper::get_string_between($html, 'class="thickbox cover"><img src="', '"'));
+                }
+
+                $description = null;
+                if (strpos($html, 'property="v:summary">') !== false) {
+                    $description = trim(Helper::get_string_between($html, 'property="v:summary">', '</div>'));
+                }
+
+                $started_at = null;
+                $started_at_show = null;
+                if (strpos($html, '<li class=""><span class="tip">放送开始: </span>') !== false) {
+                    $started_at = trim(Helper::get_string_between($html, '<li class=""><span class="tip">放送开始: </span>', '</li>'));
+                    $started_at = str_replace('(中国大陆)', '', $started_at);
+                    $started_at = str_replace('（法国）', '', $started_at);
+                    $started_at = str_replace('(英国)', '', $started_at);
+                    $started_at = str_replace('(美国)', '', $started_at);
+                    $started_at = str_replace('(荷兰)', '', $started_at);
+                    $started_at = str_replace('（英国）', '', $started_at);
+                    $started_at = str_replace('（苏联）', '', $started_at);
+                    $started_at = str_replace(' (Netflix)', '', $started_at);
+                    $started_at = str_replace(' (U.S)', '', $started_at);
+                    $started_at = str_replace('(加拿大)', '', $started_at);
+                    $started_at = str_replace('（电视初公开）', '', $started_at);
+                    $started_at = str_replace('夏', '', $started_at);
+                    $started_at = str_replace('春', '', $started_at);
+                    $started_at = str_replace('冬', '', $started_at);
+                    $started_at = str_replace('号', '日', $started_at);
+                    $started_at = str_replace(' ', '', $started_at);
+                    $started_at = str_replace('(PV)', '', $started_at);
+                    $started_at = str_replace('(韩国)', '', $started_at);
+                    $started_at = str_replace('未定档', '', $started_at);
+                    $started_at = str_replace('Q3', '', $started_at);
+                    $started_at = str_replace('Q4', '', $started_at);
+                    $started_at = str_replace('未定', '', $started_at);
+                    $started_at = str_replace('未知', '', $started_at);
+                    $started_at = str_replace('(预告片)', '', $started_at);
+                    $started_at = str_replace('H2', '', $started_at);
+                    $started_at = str_replace('*', '', $started_at);
+                    if ($started_at == '' || $started_at == 'TBA') {
+                        $started_at = null;
+                    } elseif (strpos($started_at, '-') !== false) {
+                        $started_at = Carbon::createFromFormat('Y-m-d H:i:s', $started_at.' 00:00:00', 'UTC');
+                    } elseif (strpos($started_at, '.') !== false) {
+                        $started_at = Carbon::createFromFormat('Y.m.d H:i:s', $started_at.' 00:00:00', 'UTC');
+                    } elseif (strpos($started_at, '/') !== false) {
+                        $started_at = Carbon::createFromFormat('Y/m/d H:i:s', $started_at.' 00:00:00', 'UTC');
+                    } else {
+                        if (strpos($started_at, '日') !== false) {
+                            $started_at = Carbon::createFromFormat('Y年m月d日 H:i:s', $started_at.' 00:00:00', 'UTC');
+                        } elseif (strpos($started_at, '月') !== false) {
+                            $started_at = Carbon::createFromFormat('Y年m月d日 H:i:s', $started_at.'1日 00:00:00', 'UTC');
+                            $started_at_show = 'Month';
+                        } elseif (strpos($started_at, '年') !== false) {
+                            $started_at = Carbon::createFromFormat('Y年m月d日 H:i:s', $started_at.'1月1日 00:00:00', 'UTC');
+                            $started_at_show = 'Year';
+                        } else {
+                            $started_at = Carbon::createFromFormat('Y年m月d日 H:i:s', $started_at.'年1月1日 00:00:00', 'UTC');
+                            $started_at_show = 'Year';
+                        }
+                    }
+                }
+
+                $ended_at = null;
+                if (strpos($html, '<li class=""><span class="tip">播放结束: </span>') !== false) {
+                    $ended_at = trim(Helper::get_string_between($html, '<li class=""><span class="tip">播放结束: </span>', '</li>'));
+                    $ended_at = str_replace('(英国)', '', $ended_at);
+                    $ended_at = str_replace(' (U.S)', '', $ended_at);
+                    $ended_at = str_replace('（英国）', '', $ended_at);
+                    $ended_at = str_replace('（U-NEXT）2023年9月19日（TV）', '', $ended_at);
+                    $ended_at = str_replace('（网络配信）2023年12月17日（TV）', '', $ended_at);
+                    $ended_at = str_replace(' / 2021年6月27日（超前点播）', '', $ended_at);
+                    $ended_at = str_replace('未定档', '', $ended_at);
+                    $ended_at = str_replace('（日本）', '', $ended_at);
+                    $ended_at = str_replace('休止中', '', $ended_at);
+                    $ended_at = str_replace('你', '年', $ended_at);
+                    $ended_at = str_replace('优酷、bilibili', '', $ended_at);
+                    $ended_at = str_replace('*', '', $ended_at);
+                    if ($ended_at == '' || $ended_at == 'TBA') {
+                        $ended_at = null;
+                    } elseif (strpos($ended_at, '-') !== false) {
+                        $ended_at = Carbon::createFromFormat('Y-m-d H:i:s', $ended_at.' 00:00:00', 'UTC');
+                    } else {
+                        if (strpos($ended_at, '日') !== false) {
+                            $ended_at = Carbon::createFromFormat('Y年m月d日 H:i:s', $ended_at.' 00:00:00', 'UTC');
+                        } elseif (strpos($ended_at, '月') !== false) {
+                            $ended_at = Carbon::createFromFormat('Y年m月d日 H:i:s', $ended_at.'1日 00:00:00', 'UTC');
+                            $started_at_show = 'Month';
+                        } elseif (strpos($ended_at, '年') !== false) {
+                            $ended_at = Carbon::createFromFormat('Y年m月d日 H:i:s', $ended_at.'1月1日 00:00:00', 'UTC');
+                            $started_at_show = 'Year';
+                        } else {
+                            $ended_at = Carbon::createFromFormat('Y年m月d日 H:i:s', $ended_at.'年1月1日 00:00:00', 'UTC');
+                            $started_at_show = 'Year';
+                        }
+                    }
+                }
+
+                $source = null;
+                if (strpos($html, '<span>原创</span>') !== false) {
+                    $source = 'Original';
+                } elseif (strpos($html, '<span>漫画改</span>') !== false) {
+                    $source = 'Manga';
+                } elseif (strpos($html, '<span>游戏改</span>') !== false) {
+                    $source = 'Game';
+                } elseif (strpos($html, '<span>小说改</span>') !== false) {
+                    $source = 'Novel';
+                }
+
+                $rating_bangumi = trim(Helper::get_string_between($html, 'property="v:average">', '</span>'));
+                $rating_bangumi_count = trim(Helper::get_string_between($html, 'property="v:votes">', '</span>'));
+
+                $anime->title_zhs = $title_zhs;
+                $anime->title_jp = $title_jp;
+                $anime->photo_cover = $photo_cover;
+                $anime->description = $description;
+                $anime->started_at = $started_at;
+                $anime->started_at_show = $started_at_show;
+                $anime->ended_at = $ended_at;
+                $anime->source = $source;
+                $anime->rating_bangumi = $rating_bangumi*10;
+                $anime->rating_bangumi_count = $rating_bangumi_count;
+                $anime->save();
+
+            } else {
+                $anime->delete();
+            }
+        }
+    }
+
+    public function scrapeBangumiList(Request $request)
+    {
+        $category = 'Others';
+        $pages = 173;
+        for ($i = 1; $i <= $pages; $i++) {
+            $url = "https://bangumi.tv/anime/browser/misc/?sort=title&page={$i}";
+            $curl_connection = curl_init($url);
+            curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+            curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+            $html = curl_exec($curl_connection);
+            curl_close($curl_connection);
+            sleep(1);
+
+            $list_raw = trim(Helper::get_string_between($html, '<ul id="browserItemList" class="browserFull">', '</ul>'));
+            $list_raw_array = explode('<div class="inner">', $list_raw);
+            array_shift($list_raw_array);
+            foreach ($list_raw_array as $item) {
+                $url = trim(Helper::get_string_between($item, '<a href="', '"'));
+                // if (!Anime::where('sources', 'ilike', '%"'.$url.'"%')->exists()) {
+                    $anime = Anime::create([
+                        'category' => $category,
+                        'sources' => ["bangumi" => "https://bangumi.tv{$url}"]
+                    ]);
+                // }
+            }
+        }
+    }
+
     public function scrapeMalAnimes(Request $request)
     {
         // from 59091
@@ -92,8 +277,195 @@ class BotController extends Controller
         }
     }
 
+    public function scrapeMalCompanies(Request $request)
+    {
+        $from = $request->from;
+        $to = $request->to;
+        for ($i = $from; $i <= $to; $i++) {
+            $url = "https://myanimelist.net/anime/producer/{$i}";
+            if (!Company::where('sources', 'like', '%'.$url.'%')->exists()) {
+                $curl_connection = curl_init($url);
+                curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+                curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+                $html = curl_exec($curl_connection);
+                curl_close($curl_connection);
+                sleep(1);
+
+                if (strpos($html, '404 Not Found') === false) {
+                    if (strpos($html, '<h1 class="title-name">') !== false) {
+                        $photo_cover = Helper::get_string_between($html, '<meta property="og:image" content="', '"');
+                        $name_en = Helper::get_string_between($html, '<h1 class="title-name">', '</h1>');
+                        $name_jp = null;
+                        $started_at = null;
+                        $description = null;
+                        $website = null;
+                        if (strpos($html, '<span class="dark_text">Japanese:</span>') !== false) {
+                            $name_jp = trim(Helper::get_string_between($html, '<span class="dark_text">Japanese:</span>', '</div>'));
+                        }
+                        if (strpos($html, '<span class="dark_text">Established:</span>') !== false) {
+                            $started_at = trim(Helper::get_string_between($html, '<span class="dark_text">Established:</span>', '</div>'));
+                        }
+                        if (strpos($html, '<h2>Available At</h2>') !== false) {
+                            $description = trim(Helper::get_string_between($html, '<div class="spaceit_pad">', '<h2>Available At</h2>'));
+                            $description = trim(Helper::get_string_between($description, '<span>', '</span>'));
+                            $website = trim(Helper::get_string_between($html, 'rel="noreferrer">', '</a>'));
+                        }
+                        Company::create([
+                            'photo_cover' => $photo_cover,
+                            'name_en' => $name_en,
+                            'name_jp' => $name_jp,
+                            'description' => $description,
+                            'website' => $website,
+                            'location' => $started_at,
+                            'sources' => ['myanimelist' => $url],
+                        ]);
+
+                    } else {
+                        echo "<span style='color:red'>WARNING: Company#{$i} access failed</span><br>";
+                    }
+                } else {
+                    echo "INFO: Company#{$i} not found<br>";
+                }
+            } else {
+                echo "INFO: Company#{$i} exists<br>";
+            }
+        }
+    }
+
+    public function checkBangumiCompanies(Request $request)
+    {
+        $url = "https://bangumi.tv/person?orderby=collects&type=3&page={$request->page}";
+        $curl_connection = curl_init($url);
+        curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+        curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+        $html = curl_exec($curl_connection);
+        curl_close($curl_connection);
+        sleep(1);
+
+        $producers_list_raw = Helper::get_string_between($html, '<div class="browserCrtList">', '<div id="multipage" class="clearit">');
+        $producers_list = explode('class="light_odd  clearit">', $producers_list_raw);
+        array_shift($producers_list);
+        $producers = [];
+        foreach ($producers_list as $item) {
+            $link = "https://bangumi.tv".Helper::get_string_between($item, '<a href="', '"');
+            $name = trim(Helper::get_string_between($item, 'class="l">', '</a>'));
+            $producers[$name] = $link;
+        }
+        foreach ($producers as $name => $link) {
+            $company = Company::where('sources', 'not like', '%"bangumi"%')->where(function($query) use ($name) {
+                $query->where('name_jp', 'ilike', '%'.$name.'%')->orWhere('name_en', 'ilike', '%'.$name.'%');
+            })->first();
+            if ($company) {
+                echo "<span style='color:green'>WARNING: Company#{$company->id} {$company->name_jp} / {$company->name_en} = {$name}</span><br>";
+            } else {
+                echo "<span style='color:black'>INFO: No company matches</span><br>";
+            }
+        }
+    }
+
+    public function mergeBangumiCompanies(Request $request)
+    {
+        $url = "https://bangumi.tv/person?orderby=collects&type=3&page={$request->page}";
+        $curl_connection = curl_init($url);
+        curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+        curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+        $html = curl_exec($curl_connection);
+        curl_close($curl_connection);
+        sleep(1);
+
+        $producers_list_raw = Helper::get_string_between($html, '<div class="browserCrtList">', '<div id="multipage" class="clearit">');
+        $producers_list = explode('class="light_odd  clearit">', $producers_list_raw);
+        array_shift($producers_list);
+        $producers = [];
+        foreach ($producers_list as $item) {
+            $link = "https://bangumi.tv".Helper::get_string_between($item, '<a href="', '"');
+            $name = trim(Helper::get_string_between($item, 'class="l">', '</a>'));
+            $producers[$name] = $link;
+        }
+        foreach ($producers as $name => $link) {
+            $company = Company::where('sources', 'not like', '%"bangumi"%')->where(function($query) use ($name) {
+                $query->where('name_jp', 'ilike', '%'.$name.'%')->orWhere('name_en', 'ilike', '%'.$name.'%');
+            })->first();
+            if ($company) {
+                $temp = $company->sources;
+                $temp["bangumi"] = $link;
+                $company->sources = $temp;
+                $company->save();
+            }
+        }
+    }
+
+    public function importBangumiCompanies(Request $request)
+    {
+        $companies = Company::where('sources', 'ilike', '%"bangumi"%')->get();
+        foreach ($companies as $company) {
+            $curl_connection = curl_init($company->sources['bangumi']);
+            curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+            curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+            $html = curl_exec($curl_connection);
+            curl_close($curl_connection);
+            sleep(1);
+
+            if (strpos($html, '<span class="tip">简体中文名: </span>') !== false) {
+                $name_zhs = Helper::get_string_between($html, '<span class="tip">简体中文名: </span>', '</li>');
+                $company->name_zhs = $name_zhs;
+            }
+            if (strpos($html, '<span class="tip">成立时间: </span>') !== false && $company->location == null) {
+                $location = Helper::get_string_between($html, '<span class="tip">成立时间: </span>', '</li>');
+                $company->location = $location;
+            }
+            if (strpos($html, '<div class="detail">') !== false) {
+                $description = Helper::get_string_between($html, '<div class="detail">', '</div>');
+                $company->description = $description;
+            }
+            if (strpos($html, '<span class="tip">官网: </span>') !== false && $company->website == null) {
+                $website = Helper::get_string_between($html, '<span class="tip">官网: </span>', '</li>');
+                $company->website = $website;
+            }
+
+            $company->save();
+        }
+    }
+
     public function tempMethod(Request $request)
     {
+        // $anime_temps = AnimeTemp::where('id', '>=', 1934)->where('id', '<=', 1934)->get();
+        /* $anime_temps = AnimeTemp::all();
+        foreach ($anime_temps as $anime_temp) {
+            if ($anime = Anime::where('title_jp', $anime_temp->title_jp)->first()) {
+                if ($anime->title_zhs == null) {
+                    $anime->title_zhs = $anime_temp->title_zhs;
+                    $anime->description = trim($anime_temp->description);
+                }
+                if ($anime->started_at == null) {
+                    $anime->started_at = $anime_temp->started_at;
+                    $anime->started_at_show = $anime_temp->started_at_show;
+                }
+                if ($anime->ended_at == null) {
+                    $anime->ended_at = $anime_temp->ended_at;
+                }
+                $anime->source = $anime_temp->source;
+                $anime->rating_bangumi = $anime_temp->rating_bangumi;
+                $anime->rating_bangumi_count = $anime_temp->rating_bangumi_count;
+                $temp = $anime->sources;
+                $temp['bangumi'] = $anime_temp->sources['bangumi'];
+                $anime->sources = $temp;
+                $anime->save();
+                $anime_temp->delete();
+            }
+        } */
+
+        /* $anime_temps = AnimeTemp::orderBy('id', 'asc')->skip(1000)->limit(1000)->get();
+        foreach ($anime_temps as $anime_temp) {
+            if ($anime = Anime::where('title_jp', 'ilike', '%'.$anime_temp->title_jp.'%')->first()) {
+                echo "MAL ID#{$anime->id} = {$anime->title_jp} | Bangumi ID#{$anime_temp->id} = {$anime_temp->title_jp}<br>";
+            }
+        } */        
+
         // Scrape voice actors
         /* $from = $request->from;
         $to = $request->to;

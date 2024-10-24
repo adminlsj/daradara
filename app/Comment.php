@@ -4,15 +4,15 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Like extends Model
+class Comment extends Model
 {
     // protected $with = ['user']; 
 
     protected $fillable = [
-        'id', 'user_id', 'likeable_id', 'likeable_type', 'is_positive', 'created_at', 'updated_at'
+        'id', 'user_id', 'commentable_id', 'commentable_type', 'body', 'created_at', 'updated_at'
     ];
 
-    public function likeable()
+    public function commentable()
     {
         return $this->morphTo();
     }
@@ -20,5 +20,10 @@ class Like extends Model
     public function user()
     {
         return $this->belongsTo('App\User');
+    }
+
+    public function replies()
+    {
+        return $this->hasMany('App\Reply');
     }
 }

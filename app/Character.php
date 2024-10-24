@@ -28,4 +28,9 @@ class Character extends Model
     {
         return $this->morphMany('App\Like', 'likeable');
     }
+
+    public function comments()
+    {
+        return $this->morphMany('App\Comment', 'commentable');
+    }
 }

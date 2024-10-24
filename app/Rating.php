@@ -4,15 +4,15 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Like extends Model
+class Rating extends Model
 {
     // protected $with = ['user']; 
 
     protected $fillable = [
-        'id', 'user_id', 'likeable_id', 'likeable_type', 'is_positive', 'created_at', 'updated_at'
+        'id', 'user_id', 'rateable_id', 'rateable_type', 'score', 'created_at', 'updated_at'
     ];
 
-    public function likeable()
+    public function rateable()
     {
         return $this->morphTo();
     }
