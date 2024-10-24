@@ -435,12 +435,14 @@ class BotController extends Controller
     {
         $anime_temps = AnimeTemp::where('category', '!=', 'Others')->where('category', '!=', 'Comic')->orderBy('id', 'asc')->skip($request->skip)->limit($request->limit)->get();
         foreach ($anime_temps as $anime_temp) {
-            if ($anime = Anime::where('title_jp', 'ilike', '%'.$anime_temp->title_jp.'%')->first() && $anime->category == $anime_temp->category) {
-                $mal_started_at = $anime->started_at;
-                $sub_week = Carbon::parse($mal_started_at)->subWeek()->toDateString();
-                $add_week = Carbon::parse($mal_started_at)->addWeek()->toDateString();
-                if ($anime_temp->started_at >= $sub_week && $anime_temp->started_at <= $add_week) {
-                    echo "MAL ID#{$anime->id} = {$anime->title_jp} | Bangumi ID#{$anime_temp->id} = {$anime_temp->title_jp}<br>";
+            if ($anime = Anime::where('title_jp', 'ilike', '%'.$anime_temp->title_jp.'%')->first()) {
+                if ($anime->category == $anime_temp->category) {
+                    $mal_started_at = $anime->started_at;
+                    $sub_week = Carbon::parse($mal_started_at)->subWeek()->toDateString();
+                    $add_week = Carbon::parse($mal_started_at)->addWeek()->toDateString();
+                    if ($anime_temp->started_at >= $sub_week && $anime_temp->started_at <= $add_week) {
+                        echo "MAL ID#{$anime->id} = {$anime->title_jp} | Bangumi ID#{$anime_temp->id} = {$anime_temp->title_jp}<br>";
+                    }
                 }
             }
         }
@@ -450,30 +452,32 @@ class BotController extends Controller
     {
         $anime_temps = AnimeTemp::where('category', '!=', 'Others')->where('category', '!=', 'Comic')->orderBy('id', 'asc')->skip($request->skip)->limit($request->limit)->get();
         foreach ($anime_temps as $anime_temp) {
-            if ($anime = Anime::where('title_jp', 'ilike', '%'.$anime_temp->title_jp.'%')->first() && $anime->category == $anime_temp->category) {
-                $mal_started_at = $anime->started_at;
-                $sub_week = Carbon::parse($mal_started_at)->subWeek()->toDateString();
-                $add_week = Carbon::parse($mal_started_at)->addWeek()->toDateString();
-                if ($anime_temp->started_at >= $sub_week && $anime_temp->started_at <= $add_week) {
-                    if ($anime->title_zhs == null) {
-                        $anime->title_zhs = $anime_temp->title_zhs;
-                        $anime->description = trim($anime_temp->description);
+            if ($anime = Anime::where('title_jp', 'ilike', '%'.$anime_temp->title_jp.'%')->first()) {
+                if ($anime->category == $anime_temp->category) {
+                    $mal_started_at = $anime->started_at;
+                    $sub_week = Carbon::parse($mal_started_at)->subWeek()->toDateString();
+                    $add_week = Carbon::parse($mal_started_at)->addWeek()->toDateString();
+                    if ($anime_temp->started_at >= $sub_week && $anime_temp->started_at <= $add_week) {
+                        if ($anime->title_zhs == null) {
+                            $anime->title_zhs = $anime_temp->title_zhs;
+                            $anime->description = trim($anime_temp->description);
+                        }
+                        if ($anime->started_at == null) {
+                            $anime->started_at = $anime_temp->started_at;
+                            $anime->started_at_show = $anime_temp->started_at_show;
+                        }
+                        if ($anime->ended_at == null) {
+                            $anime->ended_at = $anime_temp->ended_at;
+                        }
+                        $anime->source = $anime_temp->source;
+                        $anime->rating_bangumi = $anime_temp->rating_bangumi;
+                        $anime->rating_bangumi_count = $anime_temp->rating_bangumi_count;
+                        $temp = $anime->sources;
+                        $temp['bangumi'] = $anime_temp->sources['bangumi'];
+                        $anime->sources = $temp;
+                        $anime->save();
+                        $anime_temp->delete();
                     }
-                    if ($anime->started_at == null) {
-                        $anime->started_at = $anime_temp->started_at;
-                        $anime->started_at_show = $anime_temp->started_at_show;
-                    }
-                    if ($anime->ended_at == null) {
-                        $anime->ended_at = $anime_temp->ended_at;
-                    }
-                    $anime->source = $anime_temp->source;
-                    $anime->rating_bangumi = $anime_temp->rating_bangumi;
-                    $anime->rating_bangumi_count = $anime_temp->rating_bangumi_count;
-                    $temp = $anime->sources;
-                    $temp['bangumi'] = $anime_temp->sources['bangumi'];
-                    $anime->sources = $temp;
-                    $anime->save();
-                    $anime_temp->delete();
                 }
             }
         }
