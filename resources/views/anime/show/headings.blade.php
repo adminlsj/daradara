@@ -134,7 +134,7 @@
     <div class="heading-content">
         <h3> {{ $anime->title_ro }} </h3>
         <p> {{ $anime->description }} </p>
-        <div class="navtabs flex-row">
+        <div class="navtabs">
             <button class="tablinks" onclick="activeTab(event, 'overview')">簡介</button>
             <button class="tablinks" onclick="activeTab(event, 'episodes')">集數列表</button>
             <button class="tablinks" onclick="activeTab(event, 'characters')">登場人物</button>
