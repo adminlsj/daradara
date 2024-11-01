@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAnimeablesTable extends Migration
+class CreateAnimeRolesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateAnimeablesTable extends Migration
      */
     public function up()
     {
-        Schema::create('animeables', function (Blueprint $table) {
+        Schema::create('anime_roles', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('anime_id')->unsigned()->nullable();
             $table->foreign('anime_id')->references('id')->on('animes')->onDelete('cascade');
             $table->integer('animeable_id')->unsigned()->nullable();
             $table->string('animeable_type')->nullable();
-            $table->string('role')->nullable();
+            $table->text('role')->nullable();
             $table->timestamps();
         });
     }
@@ -31,6 +31,6 @@ class CreateAnimeablesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('animeables');
+        Schema::dropIfExists('anime_roles');
     }
 }

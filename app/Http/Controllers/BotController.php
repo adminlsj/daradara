@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Anime;
 use App\AnimeTemp;
+use App\AnimeRole;
 use App\Character;
 use App\Actor;
 use App\ActorAnimeCharacter;
@@ -277,6 +278,40 @@ class BotController extends Controller
         }
     }
 
+    public function importBangumiAnimeSource(Request $request)
+    {
+        $anime = Anime::where('sources', 'ilike', '%"bangumi"%')->where('rating_bangumi', null)->first();
+
+        $url = $anime->sources['bangumi'];
+        $curl_connection = curl_init($url);
+        curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+        curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+        $html = curl_exec($curl_connection);
+        curl_close($curl_connection);
+
+        $title_zhs = null;
+        if (strpos($html, '<li class=""><span class="tip">中文名: </span>') !== false) {
+            $title_zhs = trim(Helper::get_string_between($html, '<li class=""><span class="tip">中文名: </span>', '</li>'));
+        }
+
+        $description = null;
+        if (strpos($html, 'property="v:summary">') !== false) {
+            $description = trim(Helper::get_string_between($html, 'property="v:summary">', '</div>'));
+        }
+
+        $rating_bangumi = trim(Helper::get_string_between($html, 'property="v:average">', '</span>'));
+        $rating_bangumi_count = trim(Helper::get_string_between($html, 'property="v:votes">', '</span>'));
+
+        $anime->title_zhs = $title_zhs;
+        if ($description != null) {
+            $anime->description = $description;
+        }
+        $anime->rating_bangumi = $rating_bangumi*10;
+        $anime->rating_bangumi_count = $rating_bangumi_count;
+        $anime->save();
+    }
+
     public function scrapeMalCompanies(Request $request)
     {
         $from = $request->from;
@@ -329,6 +364,183 @@ class BotController extends Controller
                 }
             } else {
                 echo "INFO: Company#{$i} exists<br>";
+            }
+        }
+    }
+
+    public function scrapeMalCompaniesAnimeables(Request $request)
+    {
+        $companies = Company::where('id', '>=', $request->from)->where('id', '<=', $request->to)->orderBy('id', 'asc')->get();
+        foreach ($companies as $company) {
+            $url = $company->sources['myanimelist'];
+            $curl_connection = curl_init($url);
+            curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+            curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+            $html = curl_exec($curl_connection);
+            curl_close($curl_connection);
+            sleep(1);
+
+            if (strpos($html, $company->photo_cover) !== false) {
+                $total = Helper::get_string_between($html, '<li class="js-btn-anime-type" data-key="all">All (', ')');
+                $animes_raw_array = explode('<div class="js-anime-category-', $html);
+                array_shift($animes_raw_array);
+                if ($total != count($animes_raw_array)) {
+                    return "Company ID#{$company->id} total mismatch";
+                }
+                foreach ($animes_raw_array as $animes_raw) {
+                    $url = "https://myanimelist.net/anime/".Helper::get_string_between($animes_raw, 'https://myanimelist.net/anime/', '/')."/";
+                    $role = Helper::get_string_between($animes_raw, '<div class="category">', '</div>');
+                    if ($anime = Anime::where('sources', 'ilike', '%"'.$url.'"%')->first()) {
+                        if (!Animeable::where('anime_id', $anime->id)->where('animeable_id', $company->id)->where('animeable_type', 'App\Company')->where('role', $role)->exists()) {
+                            Animeable::create([
+                                'anime_id' => $anime->id,
+                                'animeable_id' => $company->id,
+                                'animeable_type' => 'App\Company',
+                                'role' => $role,
+                            ]);
+                        }
+                    } else {
+                        echo "Anime URL@{$url} not found<br>";
+                        // return "Anime URL@{$url} not found";
+                    }
+                }
+            } else {
+                return "Company ID#{$company->id} access failed";
+            }
+        }
+    }
+
+    public function scrapeMalAnimeCompanies(Request $request)
+    {
+        $animes = Anime::where('id', '>=', $request->from)->where('id', '<=', $request->to)->orderBy('id', 'asc')->get();
+        foreach ($animes as $anime) {
+            $url = $anime->sources['myanimelist'];
+            $curl_connection = curl_init($url);
+            curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+            curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+            $html = curl_exec($curl_connection);
+            curl_close($curl_connection);
+            sleep(1);
+
+            if (strpos($html, '404 Not Found') === false) {
+                if (strpos($html, '<h1 class="title-name h1_bold_none"><strong>') !== false) {
+
+                    $mal_producer_ids = [];
+                    while (strpos($html, '/anime/producer/') !== false) {
+                        $id = Helper::get_string_between($html, '/anime/producer/', '/');
+                        array_push($mal_producer_ids, $id);
+                        $html = str_replace('/anime/producer/'.$id.'/', '', $html);
+                    }
+
+                    $companies_list = $anime->companies->pluck('sources')->pluck('myanimelist')->toArray();
+                    foreach ($mal_producer_ids as $mal_producer_id) {
+                        if (!in_array("https://myanimelist.net/anime/producer/".$mal_producer_id, $companies_list)) {
+                            echo "Anime ID#{$anime->id} producer not scraped: <a href='https://myanimelist.net/anime/producer/{$mal_producer_id}' target='_blank'>https://myanimelist.net/anime/producer/{$mal_producer_id}</a><br>";
+                        }
+                    }
+
+                } else {
+                    echo "<span style='color:red'>WARNING: Anime#{$anime->id} access failed</span><br>";
+                }
+
+            } else {
+                echo "INFO: Anime#{$anime->id} not found<br>";
+            }
+        }
+    }
+
+    public function scrapeMalStaffs(Request $request)
+    {
+        $from = $request->from;
+        $to = $request->to;
+        for ($i = $from; $i <= $to; $i++) {
+            $url = "https://myanimelist.net/people/{$i}/";
+            if (!Staff::where('sources', 'like', '%'.$url.'%')->exists()) {
+                $curl_connection = curl_init($url);
+                curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+                curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+                $html = curl_exec($curl_connection);
+                curl_close($curl_connection);
+                sleep(1);
+
+                if (strpos($html, '404 Not Found') === false) {
+                    if (strpos($html, '<h1 class="title-name h1_bold_none"><strong>') !== false) {
+                        $photo_cover = Helper::get_string_between($html, '<meta property="og:image" content="', '"');
+                        $name_en = Helper::get_string_between($html, '<h1 class="title-name h1_bold_none"><strong>', '</strong></h1>');
+                        $name_jp = null;
+                        if (strpos($html, 'Given name:') !== false && strpos($html, 'Family name:') !== false) {
+                            $given_name = Helper::get_string_between($html, 'span class="dark_text">Given name:</span> ', '</div>');
+                            $family_name = Helper::get_string_between($html, 'span class="dark_text">Family name:</span> ', '<div class="spaceit_pad">');
+                            $name_jp = "{$family_name}{$given_name}";
+                        }
+                        Staff::create([
+                            'photo_cover' => $photo_cover,
+                            'name_en' => $name_en,
+                            'name_jp' => $name_jp,
+                            'sources' => ['myanimelist' => $url],
+                        ]);
+
+                    } else {
+                        echo "<span style='color:red'>WARNING: Staff#{$i} access failed</span><br>";
+                    }
+                } else {
+                    echo "INFO: Staff#{$i} not found<br>";
+                }
+            } else {
+                echo "INFO: Staff#{$i} exists<br>";
+            }
+        }
+    }
+
+    public function scrapeMalStaffRoles(Request $request)
+    {
+        $staffs = Staff::where('id', '>=', $request->from)->where('id', '<=', $request->to)->orderBy('id', 'asc')->get();
+        foreach ($staffs as $staff) {
+            $curl_connection = curl_init($staff->sources['myanimelist']);
+            curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+            curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+            $html = curl_exec($curl_connection);
+            curl_close($curl_connection);
+            sleep(1);
+
+            if (strpos($html, '404 Not Found') === false) {
+                if (strpos($html, '<h1 class="title-name h1_bold_none"><strong>') !== false) {
+                    if (strpos($html, 'No staff positions have been added to this person.') === false) {
+                        $roles_html = Helper::get_string_between($html, '<table border="0" cellpadding="0" cellspacing="0" width="100%" class="js-table-people-staff"', '</table>');
+                        $roles_html_array = explode('<tr class="js-people-staff js-anime-watch-status-people-staff-notinmylist">', $roles_html);
+                        array_shift($roles_html_array);
+                        foreach ($roles_html_array as $role_html) {
+                            $anime_url = 'https://myanimelist.net/anime/'.Helper::get_string_between($role_html, '<a href="https://myanimelist.net/anime/', '/').'/';
+                            $role = trim(Helper::get_string_between($role_html, '<small>', '</small>'));
+                            if ($anime = Anime::where('sources', 'ilike', '%"'.$anime_url.'"%')->first()) {
+                                if ($anime->id == 2583 && $staff->id == 14120 && strpos($role, 'Original Creator, Character Design, Key Animation (OP1), Principle Drawing (Ending Title Back (エンディングタイトル') !== false) {
+                                    $role = 'Original Creator, Character Design, Key Animation (OP1), Principle Drawing (Ending Title Back (エンディングタイトル)';
+                                }
+                                if (!AnimeRole::where('anime_id', $anime->id)->where('animeable_id', $staff->id)->where('animeable_type', 'App\Staff')->where('role', $role)->exists()) {
+                                    AnimeRole::create([
+                                        'anime_id' => $anime->id,
+                                        'animeable_id' => $staff->id,
+                                        'animeable_type' => 'App\Staff',
+                                        'role' => $role,
+                                    ]);
+                                }
+                            } else {
+                                return "Anime not found: <a href='{$anime_url}' target='_blank'>{$anime_url}</a><br>";
+                            }
+                        }
+
+                    } else {
+                        echo "INFO: Staff#{$staff->id} has no anime staff positions<br>";
+                    }
+                } else {
+                    echo "<span style='color:red'>WARNING: Staff#{$staff->id} access failed</span><br>";
+                }
+            } else {
+                echo "INFO: Staff#{$staff->id} not found<br>";
             }
         }
     }
@@ -433,14 +645,18 @@ class BotController extends Controller
 
     public function checkBangumiAnimesLinkable(Request $request)
     {
-        $anime_temps = AnimeTemp::orderBy('id', 'asc')->skip($request->skip)->limit($request->limit)->get();
+        $anime_temps = AnimeTemp::where('started_at', '!=', null)->orderBy('id', 'asc')->skip($request->skip)->limit($request->limit)->get();
         foreach ($anime_temps as $anime_temp) {
-            /* if (strpos($anime_temp->title_jp, ' ') !== false) {
+            if (strpos($anime_temp->title_jp, ' ') !== false) {
                 $bangumi_title_jp = explode(' ', $anime_temp->title_jp)[0];
             } else {
                 $bangumi_title_jp = $anime_temp->title_jp;
-            } */
-            if ($anime = Anime::where('title_jp', 'ilike', '%'.$anime_temp->title_jp.'%')->first()) {
+            }
+            $bangumi_title_jp = str_replace('?', '', $bangumi_title_jp);
+            $bangumi_title_jp = str_replace('？', '', $bangumi_title_jp);
+            $bangumi_title_jp = str_replace('!', '', $bangumi_title_jp);
+            $bangumi_title_jp = str_replace('！', '', $bangumi_title_jp);
+            if ($anime = Anime::where('sources', 'not like', '%"bangumi"%')->where('started_at', '!=', null)->orderBy('id', 'asc')->where('title_jp', 'ilike', '%'.$bangumi_title_jp.'%')/*->where('category', $anime_temp->category)*/->first()) {
                 $mal_started_at = $anime->started_at;
                 $sub_week = Carbon::parse($mal_started_at)->subDays(3)->toDateString();
                 $add_week = Carbon::parse($mal_started_at)->addDays(3)->toDateString();
@@ -453,9 +669,18 @@ class BotController extends Controller
 
     public function importBangumiAnimesLinkable(Request $request)
     {
-        $anime_temps = AnimeTemp::orderBy('id', 'asc')->skip($request->skip)->limit($request->limit)->get();
+        $anime_temps = AnimeTemp::where('started_at', '!=', null)->orderBy('id', 'asc')->skip($request->skip)->limit($request->limit)->get();
         foreach ($anime_temps as $anime_temp) {
-            if ($anime = Anime::where('title_jp', 'ilike', '%'.$anime_temp->title_jp.'%')->first()) {
+            if (strpos($anime_temp->title_jp, ' ') !== false) {
+                $bangumi_title_jp = explode(' ', $anime_temp->title_jp)[0];
+            } else {
+                $bangumi_title_jp = $anime_temp->title_jp;
+            }
+            $bangumi_title_jp = str_replace('?', '', $bangumi_title_jp);
+            $bangumi_title_jp = str_replace('？', '', $bangumi_title_jp);
+            $bangumi_title_jp = str_replace('!', '', $bangumi_title_jp);
+            $bangumi_title_jp = str_replace('！', '', $bangumi_title_jp);
+            if ($anime = Anime::where('sources', 'not like', '%"bangumi"%')->where('started_at', '!=', null)->orderBy('id', 'asc')->where('title_jp', 'ilike', '%'.$bangumi_title_jp.'%')/*->where('category', $anime_temp->category)*/->first()) {
                 $mal_started_at = $anime->started_at;
                 $sub_week = Carbon::parse($mal_started_at)->subDays(3)->toDateString();
                 $add_week = Carbon::parse($mal_started_at)->addDays(3)->toDateString();

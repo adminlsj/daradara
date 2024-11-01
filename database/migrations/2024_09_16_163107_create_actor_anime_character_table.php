@@ -13,14 +13,14 @@ class CreateActorAnimeCharacterTable extends Migration
      */
     public function up()
     {
-        Schema::create('actor_anime_character', function (Blueprint $table) {
+        Schema::create('anime_character_roles', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('anime_id')->unsigned()->nullable();
             $table->foreign('anime_id')->references('id')->on('animes')->onDelete('cascade');
             $table->integer('character_id')->unsigned()->nullable();
             $table->foreign('character_id')->references('id')->on('characters')->onDelete('cascade');
-            $table->integer('actor_id')->unsigned()->nullable();
-            $table->foreign('actor_id')->references('id')->on('actors')->onDelete('cascade');
+            $table->integer('staff_id')->unsigned()->nullable();
+            $table->foreign('staff_id')->references('id')->on('staffs')->onDelete('cascade');
             $table->string('role')->nullable();
             $table->timestamps();
         });

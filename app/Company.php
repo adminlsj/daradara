@@ -16,7 +16,7 @@ class Company extends Model
 
     public function animes()
     {
-        return $this->morphToMany('App\Anime', 'animeable');
+        return $this->morphToMany('App\Anime', 'anime_roles');
     }
     
     public function likes()

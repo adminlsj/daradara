@@ -16,12 +16,12 @@ class Character extends Model
 
     public function animes()
     {
-        return $this->belongsToMany('App\Anime', 'actor_anime_character', 'character_id', 'anime_id');
+        return $this->belongsToMany('App\Anime', 'anime_character_role', 'character_id', 'anime_id');
     }
 
     public function actors()
     {
-        return $this->belongsToMany('App\Actor', 'actor_anime_character', 'character_id', 'actor_id');
+        return $this->belongsToMany('App\Staff', 'anime_character_role', 'character_id', 'staff_id');
     }
 
     public function likes()
