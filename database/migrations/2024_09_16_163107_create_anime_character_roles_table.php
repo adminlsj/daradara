@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateActorAnimeCharacterTable extends Migration
+class CreateAnimeCharacterRolesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -33,6 +33,6 @@ class CreateActorAnimeCharacterTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('actor_anime_character');
+        Schema::dropIfExists('anime_character_roles');
     }
 }
