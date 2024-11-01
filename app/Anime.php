@@ -25,7 +25,7 @@ class Anime extends Model
 
     public function characters()
     {
-        return $this->belongsToMany('App\Character', 'anime_character_role', 'anime_id', 'character_id')->withPivot('role');
+        return $this->belongsToMany('App\Character', 'anime_character_roles', 'anime_id', 'character_id')->withPivot('role');
     }
 
     public function companies()

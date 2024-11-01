@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Anime;
 use App\AnimeSave;
+use App\AnimeCharacterRole;
 use App\Savelist;
 use App\Savelistable;
 use App\Character;
