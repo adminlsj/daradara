@@ -1,25 +1,13 @@
 <div id="staffs" class="tabcontent" style="display:none">
     <div class="staffs-wrap flex-row">
-        <div class="staffs-card">
-            <a href=""><img src="https://i.meee.com.tw/U3N6IV3.png" alt=""></a>
-            <div class="staffs-name">
-                <a href="">曉夏目</a>
-                <p>原作者</p>
+        @foreach ($staffs as $staff)
+            <div class="staffs-card">
+                <a href="{{ route('staff.show', ['staff' => $staff->id, 'title' => $staff->name_en]) }}"><img src="{{ $staff->photo_cover }}" alt="{{ $staff->name_en }}"></a>
+                <div class="staffs-name">
+                    <a href="{{ route('staff.show', ['staff' => $staff->id, 'title' => $staff->name_en]) }}">{{ $staff->name_en }}</a>
+                    <p>{{ $staff->pivot->role }}</p>
+                </div>
             </div>
-        </div>
-        <div class="staffs-card">
-            <a href=""><img src="https://i.meee.com.tw/Zm2BUmq.png" alt=""></a>
-            <div class="staffs-name">
-                <a href="">金崎貴臣</a>
-                <p>導演</p>
-            </div>
-        </div>
-        <div class="staffs-card">
-            <a href=""><img src="https://i.meee.com.tw/kSuQlFV.png" alt=""></a>
-            <div class="staffs-name">
-                <a href="">三嶋黑音</a>
-                <p>人物原案</p>
-            </div>
-        </div>
+        @endforeach
     </div>
 </div>

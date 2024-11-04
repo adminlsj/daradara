@@ -515,11 +515,8 @@ class BotController extends Controller
                         array_shift($roles_html_array);
                         foreach ($roles_html_array as $role_html) {
                             $anime_url = 'https://myanimelist.net/anime/'.Helper::get_string_between($role_html, '<a href="https://myanimelist.net/anime/', '/').'/';
-                            $role = trim(Helper::get_string_between($role_html, '<small>', '</small>'));
+                            $role = htmlspecialchars(trim(Helper::get_string_between($role_html, '<small>', '</small>')));
                             if ($anime = Anime::where('sources', 'ilike', '%"'.$anime_url.'"%')->first()) {
-                                if ($anime->id == 2583 && $staff->id == 14120 && strpos($role, 'Original Creator, Character Design, Key Animation (OP1), Principle Drawing (Ending Title Back (エンディングタイトル') !== false) {
-                                    $role = 'Original Creator, Character Design, Key Animation (OP1), Principle Drawing (Ending Title Back (エンディングタイトル)';
-                                }
                                 if (!AnimeRole::where('anime_id', $anime->id)->where('animeable_id', $staff->id)->where('animeable_type', 'App\Staff')->where('role', $role)->exists()) {
                                     AnimeRole::create([
                                         'anime_id' => $anime->id,
