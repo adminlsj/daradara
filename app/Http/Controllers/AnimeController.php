@@ -8,6 +8,7 @@ use App\AnimeCharacterRole;
 use App\Savelist;
 use App\Savelistable;
 use App\Character;
+use App\Staff;
 use App\Episodes;
 use App\User;
 use Illuminate\Http\Request;
@@ -31,6 +32,7 @@ class AnimeController extends Controller
     {
         $episodes = Episodes::where('anime_id', $anime->id)->orderBy('id')->get();
         $characters = $anime->characters->load('actors');
+        $staffs = $anime->staffs;
         $anime_save = null;
         $status = null;
         $anime_lists = [];
@@ -42,7 +44,8 @@ class AnimeController extends Controller
                 $saved_lists = $anime_save->savelists->pluck('id')->toArray();
             }
         }
-        return view('anime.show', compact('anime', 'anime_save', 'anime_lists', 'saved_lists', 'status', 'characters', 'episodes'));
+        return view('anime.show', compact('anime', 'anime_save', 'anime_lists', 'saved_lists', 'status', 'characters', 'episodes', 
+            'staffs'));
     }
 
     public function save(Request $request, Anime $anime)

@@ -35,7 +35,7 @@ class Anime extends Model
 
     public function staffs()
     {
-        return $this->morphedByMany('App\Staff', 'anime_role')->withPivot('role');
+        return $this->morphedByMany('App\Staff', 'animeable', 'anime_roles')->withPivot('role');
     }
 
     public function likes()

@@ -18,7 +18,7 @@ class Staff extends Model
 
     public function animes()
     {
-        return $this->morphToMany('App\Anime', 'anime_roles');
+        return $this->morphToMany('App\Anime', 'animeable', 'anime_roles')->withPivot('role');
     }
 
     public function likes()

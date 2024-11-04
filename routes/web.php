@@ -33,6 +33,7 @@ Route::post('/user/{user}/savelist', 'SavelistController@store')->name('user.sav
 // Others
 Route::get('/character/{character}/{title?}', 'CharacterController@show')->name('character.show');
 Route::get('/actor/{actor}/{title?}', 'ActorController@show')->name('actor.show');
+Route::get('/staff/{staff}/{title?}', 'StaffController@show')->name('staff.show');
 
 Route::group(['middleware' => 'admin'], function () {
 	Route::get('/tempMethod', 'BotController@tempMethod');
