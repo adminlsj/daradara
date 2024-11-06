@@ -24,6 +24,7 @@ Route::get('/user/{user}/{name?}/animelist', 'UserController@animelist')->name('
 Route::get('/user/{user}/{name?}/likes', 'UserController@likes')->name('user.likes');
 
 // Anime
+Route::post('/anime/search', 'AnimeController@search')->name('anime.search');
 Route::post('/anime/{anime}/save', 'AnimeController@save')->name('anime.save');
 Route::get('/anime/{anime}/{title?}', 'AnimeController@show')->name('anime.show');
 

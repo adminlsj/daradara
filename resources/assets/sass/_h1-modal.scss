@@ -1,0 +1,75 @@
+.modal-content {
+  border-radius: 12px !important; 
+  border: 1px solid #323434 !important; 
+  background-color: #181817 !important; 
+  color: white !important;
+}
+
+.modal-header {
+  border-bottom: 1px solid #333333 !important; 
+  position: relative; 
+  height: 65px;
+}
+
+.modal-header .modal-close-btn {
+  position: absolute; 
+  top: 15px; 
+  left: 12px; 
+  cursor: pointer; 
+  font-size: 24px; 
+  padding: 5px; 
+  border-radius: 50%;
+  font-size: 18px; 
+  margin-top: 4px;
+}
+
+.modal-header .modal-close-btn:hover {
+  background-color: #323434; 
+}
+
+.modal-header .modal-title {
+  text-align: center; 
+  font-weight: bold; 
+  margin: 0; 
+  padding: 0; 
+  margin-top: 6px; 
+  font-size: 16px;
+}
+
+.modal-body {
+  /* padding: 0 !important */;
+}
+
+.modal-footer {
+  border-top: none !important; 
+  width: 100%; 
+  text-align: center; 
+  padding: 12px 15px !important;
+}
+
+.modal-footer div {
+  display: inline-block; 
+  float: left; 
+  line-height: 38px; 
+  color: white; 
+  cursor: pointer; 
+  text-decoration: underline; 
+  margin-left: 5px;
+}
+
+.modal-footer button {
+  border: none; 
+  color: white; 
+  background-color: #323434 !important;
+  border-radius: 0; 
+  height: 100%; 
+  width: auto; 
+  font-weight: bold; 
+  border-radius: 5px; 
+  padding: 10px 20px;
+  outline: 0 !important;
+}
+
+.modal-footer button:hover {
+  filter: brightness(120%);
+}

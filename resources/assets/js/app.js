@@ -78,6 +78,16 @@ $(".upload-image-btn").on("change", function() {
   $('#file-text').val(fileName);
 });
 
+$('.artist-option').click(function() {
+  var artist = $(this).find('.search-artist-title').text();
+  if ($(this).hasClass('subscriptions-active-artist')) {
+    $("#query").val('');
+  } else {
+    $("#query").val(artist);
+  }
+  $('form#hentai-form').submit();
+})
+
 $('.genre-option').click(function() {
   var genre = $(this).text();
   $("#genre").val(genre);
@@ -108,6 +118,43 @@ $('.search-type-button').click(function() {
   $('form#hentai-form').submit();
 })
 
+$('#search-btn').click(function() {
+  $('form#hentai-form').submit();
+})
+
+$('.play-btn').click(function() {
+  dp.play()
+})
+
+$('#playModal').on('hidden.bs.modal', function () {
+  dp.pause()
+});
+
+$('div#main-nav-home-mobile').on("submit", "form#search-form", function(e) {
+  e.preventDefault(e);
+  var query = $('#nav-query').val();
+  $('#hentai-form #query').val(query);
+  $('form#hentai-form').submit();
+});
+
+$('#nav-search-btn').click(function() {
+  var query = $('#nav-query').val();
+  $('#hentai-form #query').val(query);
+  $('form#hentai-form').submit();
+})
+
+$('[id=database-search-btn]').click(function(e) {
+  var column = $('#column').find(":selected").text();
+  var expression = $('#expression').find(":selected").text();
+  var query = $('#dbquery').val();
+
+  var urlParams = new URLSearchParams(window.location.search);
+  urlParams.set('column', column);
+  urlParams.set('expression', expression);
+  urlParams.set('dbquery', query);
+  window.location.href = window.location.href.split('?')[0] + '?' + urlParams;
+});
+
 $('[class=database-column]').click(function(e) {
   var sort = $(this).data('sort');
 
@@ -131,8 +178,13 @@ var navtransonscroll = $(".nav-trans-on-scroll");
 var navmainmobile = $(".nav-main-mobile");
 var navslideonscroll = $(".nav-slide-on-scroll");
 var navtransonscroll = $(".nav-trans-on-scroll");
+var subsnavslideonscroll = $(".subscriptions-nav-slide-on-scroll");
+// Search
 var searchnavdesktop = $("#search-nav-desktop");
 var searchcontentdesktop = $("#search-content-padding-desktop");
+// Subscriptions
+var subscriptionsnavdesktop = $("#subscriptions-nav-desktop");
+var subscriptionscontentdesktop = $("#subscriptions-content-padding-desktop");
 var lastScrollTop = 0;
 var consecScrollUp = 0;
 var consecScrollDown = 0;
@@ -148,6 +200,7 @@ window.onscroll = function() {
     }
 
     var st = window.pageYOffset || document.documentElement.scrollTop;
+    // Home nav scroll
     if (st > lastScrollTop && window.pageYOffset >= 65) {
         consecScrollUp = 0;
         consecScrollDown = consecScrollDown + st - lastScrollTop;
@@ -161,24 +214,42 @@ window.onscroll = function() {
             navslideonscroll.css('top', '0');
         }
     }
+    // Subscriptions nav scroll
+    if (st > lastScrollTop && window.pageYOffset >= 150) {
+        consecScrollUp = 0;
+        consecScrollDown = consecScrollDown + st - lastScrollTop;
+        if (consecScrollDown > 20) {
+            subsnavslideonscroll.css('top', '-52px');
+        }
+    } else if (st < lastScrollTop || window.pageYOffset <= 52) {
+        consecScrollDown = 0;
+        consecScrollUp = consecScrollUp + lastScrollTop - st;
+        if (consecScrollUp > 20) {
+            subsnavslideonscroll.css('top', '0');
+        }
+    }
     lastScrollTop = st <= 0 ? 0 : st; // For Mobile or negative scrolling
 
     if (window.pageYOffset != 0) {
-      mainnav.css('background-color', '#141414');
+      // mainnav.css('background-color', '#141414');
       navmainmobile.css('background-color', 'rgba(30,30,30,0.75)');
       navmainmobile.css('backdrop-filter', 'blur(40px)');
       navmainmobile.css('-webkit-backdrop-filter', 'blur(40px)');
     } else {
-      mainnav.css('background-color', 'transparent');
+      // mainnav.css('background-color', 'transparent');
       navmainmobile.css('background-color', 'black');
     }
 
     if (window.pageYOffset >= 68) {
       searchnavdesktop.addClass('sticky');
       searchcontentdesktop.css('padding-top', '101px');
+      subscriptionsnavdesktop.addClass('sticky');
+      subscriptionscontentdesktop.css('padding-top', '208px');
     } else {
       searchnavdesktop.removeClass('sticky');
       searchcontentdesktop.css('padding-top', '0px');
+      subscriptionsnavdesktop.removeClass('sticky');
+      subscriptionscontentdesktop.css('padding-top', '0px');
     }
 }
 
@@ -190,15 +261,103 @@ $('form').submit(function(){
     $(this).find('button[type=submit]').prop('disabled', true);
 });
 
+$('div#subscribe-panel').on("submit", "form#subscribe-form", function(e) {
+    $.ajaxSetup({
+        header:$('meta[name="_token"]').attr('content')
+    })
+    e.preventDefault(e);
+
+    $.ajax({
+        type:"POST",
+        url: $(this).attr("action"),
+        data:$(this).serialize(),
+        dataType: 'json',
+        success: function(data){
+            $("div#subscribe-panel").html(data.unsubscribe_btn);
+            $("span#subscribes-count").html(parseInt($("span#subscribes-count").html()) + 1);
+        },
+        error: function(xhr, ajaxOptions, thrownError){
+            $("#subscribe-panel").html(xhr.responseText);
+        }
+    })
+});
+
+$('div#subscribe-panel').on("submit", "form#unsubscribe-form", function(e) {
+    $.ajaxSetup({
+        header:$('meta[name="_token"]').attr('content')
+    })
+    e.preventDefault(e);
+
+    $.ajax({
+        type:"POST",
+        url: $(this).attr("action"),
+        data:$(this).serialize(),
+        dataType: 'json',
+        success: function(data){
+            $("div#subscribe-panel").html(data.subscribe_btn);
+            $("span#subscribes-count").html(parseInt($("span#subscribes-count").html()) - 1);
+        },
+        error: function(xhr, ajaxOptions, thrownError){
+            $("#subscribe-panel").html(xhr.responseText);
+        }
+    })
+});
+
+$('[id=switch-login-modal]').click(function(e) {
+    $('#signUpModal').modal('hide');
+    $('#loginModal').modal('show');
+});
+
+$('[id=switch-signup-modal]').click(function(e) {
+    $('#loginModal').modal('hide');
+    $('#signUpModal').modal('show');
+});
+
+$('#genre-modal-trigger').click(function(e) {
+    var genre_left = $(this).offset().left;
+    $('#genre-modal .modal-dialog').css('left', genre_left - 1);
+});
+
+$('#sort-modal-trigger').click(function(e) {
+    var sort_left = $(this).offset().left;
+    $('#sort-modal .modal-dialog').css('left', sort_left);
+});
+
+$('#date-modal-trigger').click(function(e) {
+    var date_left = $(this).offset().left;
+    $('#date-modal .modal-dialog').css('left', date_left);
+});
+
+$('#duration-modal-trigger').click(function(e) {
+    var duration_left = $(this).offset().left;
+    $('#duration-modal .modal-dialog').css('left', duration_left);
+});
+
+$('.comic-random-nav-item').click(function(e) {
+  $.ajax({
+    type:'GET',
+    url:'/getRandomComic',
+    success: function(data){
+      window.location.href = '/comic/' + data.id;
+    }
+  });
+});
+
 $(document).ready(function() {
-  $('#defaultOpen').click();
-  $('.defaultOpen').click();
-  var videos_scroll = document.querySelectorAll('.videos-scroll');
-  for (var i = 0; i < videos_scroll.length; ++i) {
-    var item = videos_scroll[i];  
-    var topPos = item.offsetTop;
-    item.parentNode.scrollTop = topPos - 185 + item.offsetHeight / 2;
-  }
+    $('#defaultOpen').click();
+    $('.defaultOpen').click();
+        var videos_scroll = document.querySelectorAll('.videos-scroll');
+        for (var i = 0; i < videos_scroll.length; ++i) {
+        var item = videos_scroll[i];  
+        var topPos = item.offsetTop;
+        item.parentNode.scrollTop = topPos - 185 + item.offsetHeight / 2;
+    }
+
+    // alert($('.subscriptions-active-artist').position().left);
+    $scrollTo = $('.subscriptions-active-artist').position().left;
+    $('.subscriptions-nav').animate({
+        scrollLeft: $scrollTo - 10},
+    500);
 });
 
 $('.show-more-caption').click(function(){
@@ -289,9 +448,36 @@ $("form#playlist-show-add-form").submit(function(e) {
     })
 });
 
+$('.preview-images-modal').on('shown.bs.modal', function (event) {
+    var modal = '#' + $(this).attr('id');
+    var modal_mody = $(modal + ' .modal-body');
+    modal_mody.scrollTop(0);
+
+    var image = $(event.relatedTarget).data('image');
+    var imageOffset = $(image).position();
+
+    $(modal + ' .modal-body').scrollTop(imageOffset.top - modal_mody.height() / 2 + $(image).height() / 2);
+});
+
+$('.trailer-modal-trigger').click(function() {
+    var id = $(this).data('target');
+    var video = $(id).find('video');
+    video.get(0).play();
+})
+
+$('.preview-trailer-modal').on('hidden.bs.modal', function (event) {
+    var video = $(this).find('video');
+    video.get(0).pause();
+})
+
 function showSnackbar(text) {
     var snackbar = document.getElementById("snackbar");
     snackbar.innerHTML = text;
     snackbar.className = "show";
     setTimeout(function(){ snackbar.className = snackbar.className.replace("show", ""); }, 4000);
 }
+
+require('./comment');
+require('./comic');
+require('./lazyLoad');
+require('./videoShow');
