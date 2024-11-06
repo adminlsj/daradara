@@ -12,7 +12,7 @@
                     <div class="characters-name flex-row">
                         <a href="{{ route('character.show', ['character' => $character->id, 'title' => $character->name_en]) }}">{{ $character->name_en }}</a>
                         @if ($character->actors->first())
-                            <a class="actors" href="{{ route('staff.show', ['staff' => $character->actors->first()->id, 'title' => $character->actors->first()->name_zht]) }}">{{ $character->actors->first()->name_zht }}</a>
+                            <a class="actors" href="{{ route('staff.show', ['staff' => $character->actors->first()->id, 'title' => $character->actors->first()->name_en]) }}">{{ $character->actors->first()->name_en }}</a>
                         @else
                             <a href=""></a>
                         @endif
@@ -22,7 +22,7 @@
                         <div>{{ $character->actors->first() ? $character->actors->first()->language : '' }}</div>
                     </div>
                 </div>
-                <a href=""><img src="{{ $character->actors->first() ? $character->actors->first()->photo_cover : 'https://cdn.myanimelist.net/images/questionmark_23.gif' }}" alt=""></a>
+                <a href="{{ route('staff.show', ['staff' => $character->actors->first()->id, 'title' => $character->actors->first()->name_en]) }}"><img src="{{ $character->actors->first() ? $character->actors->first()->photo_cover : 'https://cdn.myanimelist.net/images/questionmark_23.gif' }}" alt=""></a>
             </div>
         @endforeach
     </div>
