@@ -20,15 +20,31 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
-        $最近更新 = Anime::orderby('started_at', 'desc')->limit(5)->get();
-
         $now = Carbon::now();
+
+        $random = Anime::find(1);
+
+        $query = Anime::where('photo_cover', '!=', null)->where('category', '!=', 'Music');
+
+        $最近流行 = $query->where('started_at', '>=', $now->subYear())->inRandomOrder()->limit(24)->get();
+
         $season = $this->getSeasonByMonth($now->month).' '.$now->year;
-        $本季流行 = Anime::where('season', $season)->orderby('rating_mal', 'desc')->limit(5)->get();
+        $本季熱門 = $query->where('season', $season)->inRandomOrder()->limit(24)->get();
 
-        $animes = Anime::orderby('id', 'asc')->limit(5)->get();
+        $最新上市 = $query->orderby('started_at', 'desc')->limit(24)->get();
+        $最新上傳 = $query->orderby('created_at', 'desc')->limit(24)->get();
+        $大家在看 = $query->orderby('updated_at', 'desc')->limit(24)->get();
 
-        return view('layouts.home', compact('animes', '最近更新', '本季流行'));
+        $is_mobile = Helper::checkIsMobile();
+
+        $chinese = new Chinese();
+
+        $genre = '全部';
+        $tags = [];
+        $sort = null;
+        $year = null;
+
+        return view('layouts.home-new', compact('random', '最近流行', '本季熱門', '最新上市', '最新上傳', '大家在看', 'is_mobile', 'chinese', 'genre', 'tags', 'sort', 'year'));
     }
 
     private function getSeasonByMonth($month)

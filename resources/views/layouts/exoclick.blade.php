@@ -1,0 +1,1 @@
+<iframe src="//a.magsrv.com/iframe.php?idzone={{ $id }}&size={{ $width }}x{{ $height }}" width="{{ $width }}" height="{{ $height }}" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
