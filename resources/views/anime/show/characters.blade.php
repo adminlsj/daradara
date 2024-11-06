@@ -22,7 +22,7 @@
                         <div>{{ $character->actors->first() ? $character->actors->first()->language : '' }}</div>
                     </div>
                 </div>
-                <a href=""><img src="{{ $character->actors->first() ? $character->actors->first()->photo_cover : 'https://cdn.myanimelist.net/images/questionmark_23.gif' }}" alt=""></a>
+                <a href="{{ route('staff.show', ['staff' => $character->actors->first()->id, 'title' => $character->actors->first()->name_en]) }}"><img src="{{ $character->actors->first() ? $character->actors->first()->photo_cover : 'https://cdn.myanimelist.net/images/questionmark_23.gif' }}" alt=""></a>
             </div>
         @endforeach
     </div>
