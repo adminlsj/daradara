@@ -22,7 +22,8 @@ class StaffController extends Controller
 {
     public function show(Request $request, Staff $staff)
     {
-        $animes = $staff->animes;
-        return view('staff.show', compact('animes', 'staff'));
+        $animes_actor = $staff->animes('App\Actor')->get();
+        $animes_staff = $staff->animes('App\Staff')->get();
+        return view('staff.show', compact('staff', 'animes_actor', 'animes_staff'));
     }
 }

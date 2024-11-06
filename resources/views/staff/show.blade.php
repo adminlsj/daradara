@@ -32,7 +32,19 @@
 		</div>
 
 		<div class="related-animes flex-row">
-			@foreach ($animes as $anime)
+			@foreach ($animes_actor as $anime)
+				<div class="media-card">
+					<a href="{{ route('anime.show', ['anime' => $anime->id, 'title' => $anime->title_ro]) }}">
+						<img src="{{ $anime->photo_cover }}" alt="">
+					</a>
+					<a href="{{ route('anime.show', ['anime' => $anime->id, 'title' => $anime->title_ro]) }}">
+						<div>{{ $anime->title_ro }}</div>
+						<div style="font-size: 12px; color: dimgray;">{{ $anime->pivot->role }}</div>
+					</a>
+				</div>
+			@endforeach
+
+			@foreach ($animes_staff as $anime)
 				<div class="media-card">
 					<a href="{{ route('anime.show', ['anime' => $anime->id, 'title' => $anime->title_ro]) }}">
 						<img src="{{ $anime->photo_cover }}" alt="">
