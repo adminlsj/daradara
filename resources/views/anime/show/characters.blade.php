@@ -12,7 +12,7 @@
                     <div class="characters-name flex-row">
                         <a href="{{ route('character.show', ['character' => $character->id, 'title' => $character->name_en]) }}">{{ $character->name_en }}</a>
                         @if ($character->actors->first())
-                            <a class="actors" href="{{ route('staff.show', ['staff' => $character->actors->first()->id, 'title' => $character->actors->first()->name_zht]) }}">{{ $character->actors->first()->name_zht }}</a>
+                            <a class="actors" href="{{ route('staff.show', ['staff' => $character->actors->first()->id, 'title' => $character->actors->first()->name_en]) }}">{{ $character->actors->first()->name_en }}</a>
                         @else
                             <a href=""></a>
                         @endif
