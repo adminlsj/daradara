@@ -21,6 +21,7 @@
 		</button>
 		<div id="search-year-dropdown" class="dropdown-menu" style="position: absolute; top: 18px; background-color: rgba(0,0,0,.9); border: 1px solid #282828; opacity: 1; min-width: 87px; height: 250px; padding: 5px 10px; overflow-y: scroll; border-radius: 0px;">
 			<input type="hidden" id="year" name="year" value="{{ $year }}">
+			<div class="year-option">全部</div>
 			@for ($i = Carbon\Carbon::now()->year + 1; $i >= 1917; $i--)
 		        <div class="year-option">{{ $i }}</div>
 		    @endfor
@@ -32,8 +33,9 @@
 			{{ $season ? $season : '季度' }}
 			<i class="material-icons" style="vertical-align: middle; margin-top: -3px; margin-left: 16px; margin-right: -7px">arrow_drop_down</i>
 		</button>
-		<div id="search-season-dropdown" class="dropdown-menu" style="position: absolute; top: 18px; background-color: rgba(0,0,0,.9); border: 1px solid #282828; opacity: 1; min-width: 101px; height: 132px; padding: 5px 10px; overflow-y: scroll; border-radius: 0px;">
+		<div id="search-season-dropdown" class="dropdown-menu" style="position: absolute; top: 18px; background-color: rgba(0,0,0,.9); border: 1px solid #282828; opacity: 1; min-width: 101px; height: 162px; padding: 5px 10px; overflow-y: scroll; border-radius: 0px;">
 			<input type="hidden" id="season" name="season" value="{{ $season }}">
+			<div class="season-option">全部</div>
 			<div class="season-option">1月冬番</div>
 			<div class="season-option">4月春番</div>
 			<div class="season-option">7月夏番</div>
@@ -48,6 +50,7 @@
 		</button>
 		<div id="search-category-dropdown" class="dropdown-menu" style="position: absolute; top: 18px; background-color: rgba(0,0,0,.9); border: 1px solid #282828; opacity: 1; min-width: 96px; height: 250px; padding: 5px 10px; overflow-y: scroll; border-radius: 0px;">
 			<input type="hidden" id="category" name="category" value="{{ $category }}">
+			<div class="category-option">全部</div>
 			@foreach (['TV', 'Movie', 'TV Special', 'Special', 'OVA', 'ONA', 'Music', 'PV', 'CM', 'Unknown'] as $category)
 				<div class="category-option">{{ $category }}</div>
 			@endforeach

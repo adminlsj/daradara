@@ -92,18 +92,27 @@ $('.duration-option').click(function() {
 
 $('.year-option').click(function() {
   var year = $(this).text();
+  if (year == '全部') {
+    year = '';
+  }
   $("#year").val(year);
   $('form#hentai-form').submit();
 })
 
 $('.season-option').click(function() {
   var season = $(this).text();
+  if (season == '全部') {
+    season = '';
+  }
   $("#season").val(season);
   $('form#hentai-form').submit();
 })
 
 $('.category-option').click(function() {
   var category = $(this).text();
+  if (category == '全部') {
+    category = '';
+  }
   $("#category").val(category);
   $('form#hentai-form').submit();
 })
