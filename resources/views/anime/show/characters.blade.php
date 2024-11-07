@@ -14,15 +14,19 @@
                         @if ($character->actors->first())
                             <a class="actors" href="{{ route('staff.show', ['staff' => $character->actors->first()->id, 'title' => $character->actors->first()->name_en]) }}">{{ $character->actors->first()->name_en }}</a>
                         @else
-                            <a href=""></a>
+                            <a href="">Unknown</a>
                         @endif
                     </div>
                     <div class="characters-name flex-row">
                         <div>{{ $character->pivot->role }}</div>
-                        <div>{{ $character->actors->first() ? $character->actors->first()->language : '' }}</div>
+                        <div>{{ $character->actors->first() ? $character->actors->first()->language : 'Japanese' }}</div>
                     </div>
                 </div>
-                <a href="{{ route('staff.show', ['staff' => $character->actors->first()->id, 'title' => $character->actors->first()->name_en]) }}"><img src="{{ $character->actors->first() ? $character->actors->first()->photo_cover : 'https://cdn.myanimelist.net/images/questionmark_23.gif' }}" alt=""></a>
+                @if ($character->actors->first())
+                    <a href="{{ route('staff.show', ['staff' => $character->actors->first()->id, 'title' => $character->actors->first()->name_en]) }}"><img src="{{ $character->actors->first()->photo_cover }}" alt="{{ $character->actors->first()->name_en }}"></a>
+                @else
+                    <a href=""><img src="https://cdn.myanimelist.net/images/questionmark_23.gif" alt=""></a>
+                @endif
             </div>
         @endforeach
     </div>

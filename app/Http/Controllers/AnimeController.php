@@ -48,6 +48,92 @@ class AnimeController extends Controller
             'staffs'));
     }
 
+    public function search(Request $request)
+    {
+        $request->validate([
+            'query' => 'max:255',
+        ]);
+
+        $results = Anime::query();
+
+        if ($year = $request->year) {
+            $results = $results->whereYear('started_at', $year);
+        }
+
+        if ($season = $request->season) {
+            switch ($season) {
+                case '1月冬番':
+                    $results = $results->whereMonth('started_at', '>=', 1)->whereMonth('started_at', '<=', 3);
+                    break;
+
+                case '4月春番':
+                    $results = $results->whereMonth('started_at', '>=', 4)->whereMonth('started_at', '<=', 6);
+                    break;
+
+                case '7月夏番':
+                    $results = $results->whereMonth('started_at', '>=', 7)->whereMonth('started_at', '<=', 9);
+                    break;
+
+                case '10月秋番':
+                    $results = $results->whereMonth('started_at', '>=', 10)->whereMonth('started_at', '<=', 12);
+                    break;
+                
+                default:
+                    break;
+            }
+        }
+
+        if ($category = $request->category) {
+            $results = $results->where('category', $category);
+        }
+
+        if ($sort = $request->sort) {
+            switch ($sort) {
+                case '標題':
+                    $results = $results->orderBy('title_jp', 'desc');
+                    break;
+
+                case '人氣':
+                    // rating_mal_count
+                    $results = $results->orderBy('rating_mal', 'desc');
+                    break;
+
+                case '評分':
+                    $results = $results->orderBy('rating_mal', 'desc');
+                    break;
+
+                case '流行':
+                    $results = $results->orderBy('rating_mal', 'desc');
+                    break;
+
+                case '讚好':
+                    $results = $results->orderBy('rating_mal', 'desc');
+                    break;
+
+                case '上傳日期':
+                    $results = $results->orderBy('created_at', 'desc');
+                    break;
+
+                case '上市日期':
+                    $results = $results->orderBy('started_at', 'desc');
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+        $results = $results->distinct()->paginate(48);
+
+        $results->setPath('');
+
+        $chinese = new Chinese();
+
+        $is_mobile = Helper::checkIsMobile();
+
+        return view('anime.search.index', compact('sort', 'year', 'season', 'results', 'is_mobile', 'chinese', 'category'));
+    }
+
     public function save(Request $request, Anime $anime)
     {
         $user = Auth::user();

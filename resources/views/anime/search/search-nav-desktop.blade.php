@@ -1,8 +1,8 @@
-<div id="search-nav-desktop" style="margin-bottom: 35px; padding-top: 10px; padding-bottom: 6px; position: fixed; margin-top: 65px; z-index: 100000;" class="search-nav-wrapper hidden-xs">
+<div id="search-nav-desktop" style="margin-bottom: 35px; padding-top: 10px; padding-bottom: 6px; position: fixed; margin-top: 65px; z-index: 100000; overflow: block" class="search-nav-wrapper hidden-xs">
 
 	<div class="dropdown no-select" style="display: inline-block; padding: 0;">
 		<button style="color: white; font-size: 38px; font-weight: 500 !important; display: inline-block; margin-right: 35px; background-color: transparent; outline: 0; border: 0; padding-left: 0px;" type="button" data-toggle="modal" data-target="#genre-modal">
-			{{ !$genre || $genre == '全部' ? '動漫' : Request::get('genre')}}
+			動漫
 			<!-- <i class="material-icons" style="vertical-align: middle; margin-top: -5px; margin-left: 0px;">arrow_drop_down</i> -->
 		</button>
 	</div>
@@ -14,23 +14,77 @@
 		</button>
 	</div>
 
-	<div class="dropdown no-select" style="display: inline-block; padding: 0;">
-		<button style="outline:0; color:white; margin-top: -18px;" class="btn btn-secondary dropdown-toggle search-nav-desktop" type="button" data-toggle="modal" data-target="#sort-modal">
-			{{ $sort ? $sort : '排序方式'}}
+	<div class="dropdown no-select" style="display: inline-block; padding: 0; position: relative; z-index: 100000 !important;">
+		<button style="outline:0; color:white; margin-top: -18px;" class="btn btn-secondary dropdown-toggle search-nav-desktop" type="button" data-toggle="dropdown">
+			{{ $year ? $year.' 年' : '年份' }}
+			<i class="material-icons" style="vertical-align: middle; margin-top: -3px; margin-left: 16px; margin-right: -7px">arrow_drop_down</i>
+		</button>
+		<div id="search-year-dropdown" class="dropdown-menu" style="position: absolute; top: 18px; background-color: rgba(0,0,0,.9); border: 1px solid #282828; opacity: 1; min-width: 87px; height: 250px; padding: 5px 10px; overflow-y: scroll; border-radius: 0px;">
+			<input type="hidden" id="year" name="year" value="{{ $year }}">
+			@for ($i = Carbon\Carbon::now()->year + 1; $i >= 1917; $i--)
+		        <div class="year-option">{{ $i }}</div>
+		    @endfor
+		</div>
+	</div>
+
+	<div class="dropdown no-select" style="display: inline-block; padding: 0; position: relative; z-index: 100000 !important;">
+		<button style="outline:0; color:white; margin-top: -18px;" class="btn btn-secondary dropdown-toggle search-nav-desktop" type="button" data-toggle="dropdown">
+			{{ $season ? $season : '季度' }}
+			<i class="material-icons" style="vertical-align: middle; margin-top: -3px; margin-left: 16px; margin-right: -7px">arrow_drop_down</i>
+		</button>
+		<div id="search-season-dropdown" class="dropdown-menu" style="position: absolute; top: 18px; background-color: rgba(0,0,0,.9); border: 1px solid #282828; opacity: 1; min-width: 101px; height: 132px; padding: 5px 10px; overflow-y: scroll; border-radius: 0px;">
+			<input type="hidden" id="season" name="season" value="{{ $season }}">
+			<div class="season-option">1月冬番</div>
+			<div class="season-option">4月春番</div>
+			<div class="season-option">7月夏番</div>
+			<div class="season-option">10月秋番</div>
+		</div>
+	</div>
+
+	<div class="dropdown no-select" style="display: inline-block; padding: 0; position: relative; z-index: 100000 !important;">
+		<button style="outline:0; color:white; margin-top: -18px;" class="btn btn-secondary dropdown-toggle search-nav-desktop" type="button" data-toggle="dropdown">
+			{{ $category ? $category : '類型' }}
+			<i class="material-icons" style="vertical-align: middle; margin-top: -3px; margin-left: 16px; margin-right: -7px">arrow_drop_down</i>
+		</button>
+		<div id="search-category-dropdown" class="dropdown-menu" style="position: absolute; top: 18px; background-color: rgba(0,0,0,.9); border: 1px solid #282828; opacity: 1; min-width: 96px; height: 250px; padding: 5px 10px; overflow-y: scroll; border-radius: 0px;">
+			<input type="hidden" id="category" name="category" value="{{ $category }}">
+			@foreach (['TV', 'Movie', 'TV Special', 'Special', 'OVA', 'ONA', 'Music', 'PV', 'CM', 'Unknown'] as $category)
+				<div class="category-option">{{ $category }}</div>
+			@endforeach
+		</div>
+	</div>
+
+	<div class="dropdown no-select" style="display: inline-block; padding: 0; position: relative; z-index: 100000 !important;">
+		<button style="outline:0; color:white; margin-top: -18px;" class="btn btn-secondary dropdown-toggle search-nav-desktop" type="button" data-toggle="dropdown">
+			{{ $sort ? '依'.$sort.'排序' : '排序'}}
+			<i class="material-icons" style="vertical-align: middle; margin-top: -3px; margin-left: 16px; margin-right: -7px">arrow_drop_down</i>
+		</button>
+		<div id="search-sort-dropdown" class="dropdown-menu" style="position: absolute; top: 18px; background-color: rgba(0,0,0,.9); border: 1px solid #282828; opacity: 1; min-width: 87px; height: 222px; padding: 5px 10px; overflow-y: scroll; border-radius: 0px;">
+			<input type="hidden" id="sort" name="sort" value="{{ $sort }}">
+			@foreach (['標題', '人氣', '評分', '流行', '讚好', '上傳日期', '上市日期'] as $sort)
+				<div class="sort-option">{{ $sort }}</div>
+			@endforeach
+		</div>
+	</div>
+
+	<!-- <div class="dropdown no-select" style="display: inline-block; padding: 0;">
+		<button style="outline:0; color:white; margin-top: -18px;" class="btn btn-secondary dropdown-toggle search-nav-desktop" type="button" data-toggle="modal" data-target="#date-modal">
+			狀態
 			<i class="material-icons" style="vertical-align: middle; margin-top: -3px; margin-left: 16px; margin-right: -7px">arrow_drop_down</i>
 		</button>
 	</div>
 
 	<div class="dropdown no-select" style="display: inline-block; padding: 0;">
 		<button style="outline:0; color:white; margin-top: -18px;" class="btn btn-secondary dropdown-toggle search-nav-desktop" type="button" data-toggle="modal" data-target="#date-modal">
-			發佈日期
+			原作
 			<i class="material-icons" style="vertical-align: middle; margin-top: -3px; margin-left: 16px; margin-right: -7px">arrow_drop_down</i>
 		</button>
-	</div>
+	</div> -->
 
-	<div style="display: inline-block; position: relative;">
-		<input id="query" name="query" type="text" value="{{ request('query') }}" placeholder="搜索" class="search-input-desktop">
-		<div id="search-btn" class="search-btn" style="top:-12px; right: 1px; border-radius: 0px; background-color: rgba(255,255,255,.1); width: 34px;"><i style="margin-top: 4px; margin-left: 7px; color: rgba(255,255,255,0.5); font-size: 22px;" class="material-icons">search</i></div>
+	<div class="dropdown no-select" style="display: inline-block; padding: 0;">
+		<button style="outline:0; color:white; margin-top: -18px;" class="btn btn-secondary dropdown-toggle search-nav-desktop" type="button" data-toggle="modal" data-target="#sort-modal">
+			<i class="material-icons" style="vertical-align: middle; margin-left: 5px; margin-right: 5px; font-size: 20px; padding-bottom: 2px; margin-top: -2px;">tune</i>
+		</button>
 	</div>
 
 	<div class="dropdown no-select search-nav-opacity hidden-md hidden-lg hidden-xl scrollable-search-type-button" style="display: inline-block; padding: 0; margin-left: 7px;">

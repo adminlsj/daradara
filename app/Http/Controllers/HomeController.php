@@ -24,7 +24,7 @@ class HomeController extends Controller
 
         $random = Anime::find(1);
 
-        $query = Anime::where('photo_cover', '!=', null)->where('category', '!=', 'Music');
+        $query = Anime::where('photo_cover', '!=', null)->whereIn('category', ['TV', 'Movie']);
 
         $最近流行 = $query->where('started_at', '>=', $now->subYear())->inRandomOrder()->limit(24)->get();
 
@@ -43,8 +43,10 @@ class HomeController extends Controller
         $tags = [];
         $sort = null;
         $year = null;
+        $season = '';
+        $category = '';
 
-        return view('layouts.home-new', compact('random', '最近流行', '本季熱門', '最新上市', '最新上傳', '大家在看', 'is_mobile', 'chinese', 'genre', 'tags', 'sort', 'year'));
+        return view('layouts.home-new', compact('random', '最近流行', '本季熱門', '最新上市', '最新上傳', '大家在看', 'is_mobile', 'chinese', 'genre', 'tags', 'sort', 'year', 'season', 'category'));
     }
 
     private function getSeasonByMonth($month)
