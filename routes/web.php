@@ -24,7 +24,7 @@ Route::get('/user/{user}/{name?}/animelist', 'UserController@animelist')->name('
 Route::get('/user/{user}/{name?}/likes', 'UserController@likes')->name('user.likes');
 
 // Anime
-Route::post('/anime/search', 'AnimeController@search')->name('anime.search');
+Route::get('/anime/search', 'AnimeController@search')->name('anime.search');
 Route::post('/anime/{anime}/save', 'AnimeController@save')->name('anime.save');
 Route::get('/anime/{anime}/{title?}', 'AnimeController@show')->name('anime.show');
 
@@ -33,7 +33,7 @@ Route::post('/user/{user}/savelist', 'SavelistController@store')->name('user.sav
 
 // Others
 Route::get('/character/{character}/{title?}', 'CharacterController@show')->name('character.show');
-Route::get('/actor/{actor}/{title?}', 'ActorController@show')->name('actor.show');
+// Route::get('/actor/{actor}/{title?}', 'ActorController@show')->name('actor.show');
 Route::get('/staff/{staff}/{title?}', 'StaffController@show')->name('staff.show');
 
 Route::group(['middleware' => 'admin'], function () {

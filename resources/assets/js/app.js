@@ -90,8 +90,26 @@ $('.duration-option').click(function() {
   $('form#hentai-form').submit();
 })
 
-$('.hentai-sort-options-wrapper').click(function() {
-  var sort = $(this).find("div").text();
+$('.year-option').click(function() {
+  var year = $(this).text();
+  $("#year").val(year);
+  $('form#hentai-form').submit();
+})
+
+$('.season-option').click(function() {
+  var season = $(this).text();
+  $("#season").val(season);
+  $('form#hentai-form').submit();
+})
+
+$('.category-option').click(function() {
+  var category = $(this).text();
+  $("#category").val(category);
+  $('form#hentai-form').submit();
+})
+
+$('.sort-option').click(function() {
+  var sort = $(this).text();
   $("#sort").val(sort);
   $('form#hentai-form').submit();
 })

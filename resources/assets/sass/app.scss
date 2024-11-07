@@ -125,6 +125,17 @@ th, td {
   flex-direction: column;
 }
 
+.dropdown-menu div {
+  padding: 5px 0px;
+  color: white;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.dropdown-menu div:hover {
+  text-decoration: underline;
+}
+
 @media screen and (min-width: 768px) { 
   .modal {
     text-align: center;
