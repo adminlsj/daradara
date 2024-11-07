@@ -1,4 +1,4 @@
-<div id='overview' class="tabcontent">
+<div id='overview' class="tabcontent" style="display:block;">
     <div class="description">
         <h2>劇情簡介</h2>
         <div class="description-content">
