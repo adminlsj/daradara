@@ -30,7 +30,9 @@ class AnimeController extends Controller
 
     public function show(Request $request, Anime $anime)
     {
-        $related_animes = $anime->related_animes;
+        $related_animes = $anime->related_animes->sortBy(function ($related_anime) {
+                                return $related_anime->started_at;
+                            });
         $episodes = Episodes::where('anime_id', $anime->id)->orderBy('id')->get();
         $characters = $anime->characters->load('actors');
         $staffs = $anime->staffs;
