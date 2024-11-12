@@ -9,30 +9,16 @@
     <div class="relations">
         <h2>關聯作品</h2>
         <div class="grid-wrap">
-            <div class="media-preview-card">
-                <a href=""><img src="https://i.meee.com.tw/w8H8FmP.png" alt=""></a>
-                <div class="relations-content">
-                    <p class="source">動漫</p>
-                    <a href=""><p style="font-size:14px; color:#acacac;">在異世界獲得超強能力的我，在現實世界照樣無敵～等級提升改變人生命運～</p></a>
-                    <p class="status">播放完結</p>
+            @foreach ($related_animes as $related_anime)
+                <div class="media-preview-card">
+                    <a href="{{ route('anime.show', ['anime' => $related_anime, 'title' => $related_anime->getTitle($chinese)]) }}"><img src="{{ $related_anime->photo_cover }}" alt=""></a>
+                    <div class="relations-content">
+                        <p class="source">{{ $related_anime->getRelation($related_anime->pivot->relation) }}</p>
+                        <a href="{{ route('anime.show', ['anime' => $related_anime, 'title' => $related_anime->getTitle($chinese)]) }}"><p style="font-size:14px; color:#acacac;">{{ $related_anime->getTitle($chinese) }}</p></a>
+                        <p class="status">{{ $related_anime->category }} · {{ $related_anime->airing_status }}</p>
+                    </div>
                 </div>
-            </div>
-            <div class="media-preview-card">
-                <a href=""><img src="https://i.meee.com.tw/AzWDZ4A.png" alt=""></a>
-                <div class="relations-content">
-                    <p class="source">動漫</p>
-                    <a href=""><p style="font-size:14px; color:#acacac;">為美好世界獻上祝福！ 第二季</p></a>
-                    <p class="status">播放完結</p>
-                </div>
-            </div>
-            <div class="media-preview-card">
-                <a href=""><img src="https://i.meee.com.tw/kuNtA0t.png" alt=""></a>
-                <div class="relations-content">
-                    <p class="source">小說</p>
-                    <a href=""><p style="font-size:14px; color:#acacac;">為美好世界獻上祝福！</p></a>
-                    <p class="status">播放完結</p>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
     <div class="trailer">

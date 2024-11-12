@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use SteelyWing\Chinese\Chinese;
 
 class Anime extends Model
 {
@@ -38,6 +39,11 @@ class Anime extends Model
         return $this->morphedByMany('App\Staff', 'animeable', 'anime_roles')->withPivot('role');
     }
 
+    public function related_animes()
+    {
+        return $this->morphedByMany('App\Anime', 'animeable', 'anime_relations')->withPivot('relation');
+    }
+
     public function likes()
     {
         return $this->morphMany('App\Like', 'likeable');
@@ -51,5 +57,25 @@ class Anime extends Model
     public function ratings()
     {
         return $this->morphMany('App\Rating', 'rateable');
+    }
+
+    public function getTitle($chinese)
+    {
+        return $chinese->to(Chinese::ZH_HANT, ($this->title_zht ? $this->title_zht : ($this->title_zhs ? $this->title_zhs : ($this->title_jp ? $this->title_jp : $this->title_en))));
+    }
+
+    public function getRelation($relation)
+    {
+        $relation = str_replace(' (TV)', '', $relation);
+        $relation = str_replace(' (ONA)', '', $relation);
+        $relation = str_replace(' (Movie)', '', $relation);
+        $relation = str_replace(' (Unknown)', '', $relation);
+        $relation = str_replace(' (Music)', '', $relation);
+        $relation = str_replace(' (OVA)', '', $relation);
+        $relation = str_replace(' (TV Special)', '', $relation);
+        $relation = str_replace(' (CM)', '', $relation);
+        $relation = str_replace(' (PV)', '', $relation);
+        $relation = str_replace(' (Special)', '', $relation);
+        return $relation;
     }
 }
