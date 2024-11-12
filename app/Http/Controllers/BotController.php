@@ -6,6 +6,7 @@ use App\User;
 use App\Anime;
 use App\AnimeTemp;
 use App\AnimeRole;
+use App\AnimeRelation;
 use App\Character;
 use App\Actor;
 use App\ActorAnimeCharacter;
@@ -275,6 +276,109 @@ class BotController extends Controller
                     echo "MAL anime#{$i} not found<br>";
                 }
             }
+        }
+    }
+
+    public function scrapeMalRelatedAnimes(Request $request)
+    {
+        $animes = Anime::where('id', '>=', $request->from)->where('id', '<=', $request->to)->orderBy('id', 'asc')->get();
+        foreach ($animes as $anime) {
+            $url = $anime->sources['myanimelist'];
+            $curl_connection = curl_init($url);
+            curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+            curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+            $html = curl_exec($curl_connection);
+            curl_close($curl_connection);
+            sleep(1);
+
+            if (strpos($html, '404 Not Found') === false) {
+                if (strpos($html, '<div class="h1-title">') !== false) {
+
+                    if (strpos($html, 'Related Entries') !== false) {
+                        $main = explode('<div class="content">', $html);
+                        array_shift($main);
+                        foreach ($main as $item) {
+                            $relation = trim(Helper::get_string_between($item, '<div class="relation">', '</div>'));
+                            $relation = trim(preg_replace('/\s\s+/', ' ', $relation));
+                            $related = trim(Helper::get_string_between($item, '<div class="title">', '</div>'));
+
+                            if (strpos($related, 'https://myanimelist.net/anime/') !== false) {
+
+                                $related = trim(Helper::get_string_between($related, 'https://myanimelist.net/anime/', '/'));
+
+                                if ($related_anime = Anime::where('sources', 'ilike', "%\https://myanimelist.net/anime/{$related}/%")->first()) {
+                                    if (!AnimeRelation::where('anime_id', $anime->id)->where('animeable_id', $related_anime->id)->where('animeable_type', 'App\Anime')->exists()) {
+
+                                        AnimeRelation::create([
+                                            'anime_id' => $anime->id,
+                                            'animeable_id' => $related_anime->id,
+                                            'animeable_type' => 'App\Anime',
+                                            'relation' => $relation,
+                                        ]);
+
+                                    } else {
+                                        echo "INFO: Relation {$relation} exists<br>";
+                                    }
+
+                                } else {
+                                    return "INFO: Related anime not found https://myanimelist.net/anime/{$related}/<br>";
+                                }
+
+                            } else {
+                                echo "INFO: Relation {$relation} not anime<br>";
+                            }
+                        }
+
+                        $others = explode('<td valign="top" class="ar fw-n borderClass', $html);
+                        array_shift($others);
+                        foreach ($others as $item) {
+                            $relation = trim(Helper::get_string_between($item, 'nowrap">', ':'));
+                            $list = trim(Helper::get_string_between($item, '<ul class="entries">', '</ul>'));
+                            $list = explode('<a href="', $list);
+                            array_shift($list);
+                            foreach ($list as $entry) {
+                                if (strpos($entry, 'https://myanimelist.net/anime/') !== false) {
+
+                                    $related = trim(Helper::get_string_between($entry, 'https://myanimelist.net/anime/', '/'));
+
+                                    if ($related_anime = Anime::where('sources', 'ilike', "%\https://myanimelist.net/anime/{$related}/%")->first()) {
+                                        if (!AnimeRelation::where('anime_id', $anime->id)->where('animeable_id', $related_anime->id)->where('animeable_type', 'App\Anime')->exists()) {
+
+                                            AnimeRelation::create([
+                                                'anime_id' => $anime->id,
+                                                'animeable_id' => $related_anime->id,
+                                                'animeable_type' => 'App\Anime',
+                                                'relation' => $relation,
+                                            ]);
+
+                                        } else {
+                                            echo "INFO: Relation {$relation} exists<br>";
+                                        }
+
+                                    } else {
+                                        return "INFO: Related anime not found https://myanimelist.net/anime/{$related}/<br>";
+                                    }
+
+                                } else {
+                                    echo "INFO: Relation {$relation} not anime<br>";
+                                }
+                            }
+                        }
+
+                    } else {
+                        echo "INFO: Anime#{$anime->id} has no relations<br>";
+                    }
+
+                } else {
+                    return "Anime#{$anime->id} access failed</span><br>";
+                }
+
+            } else {
+                return "Anime#{$anime->id} not found</span><br>";
+            }
+
+            echo "INFO: Anime#{$anime->id} relations scraped<br>";
         }
     }
 

@@ -50,6 +50,7 @@ Route::group(['middleware' => 'admin'], function () {
 	Route::get('/importBangumiAnimesLinkable', 'BotController@importBangumiAnimesLinkable');
 
 	Route::get('/scrapeMalAnimes', 'BotController@scrapeMalAnimes');
+	Route::get('/scrapeMalRelatedAnimes', 'BotController@scrapeMalRelatedAnimes');
 	Route::get('/scrapeMalCompanies', 'BotController@scrapeMalCompanies');
 	Route::get('/scrapeMalAnimeCompanies', 'BotController@scrapeMalAnimeCompanies');
 	Route::get('/scrapeMalCompaniesAnimeables', 'BotController@scrapeMalCompaniesAnimeables');
