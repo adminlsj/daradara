@@ -12,7 +12,7 @@
         </div>
         <div class="data-set">
             <div class="type">集數</div>
-            <div class="format"> {{ $anime->episodes }} </div>
+            <div class="format"> {{ $anime->episodes_count }} </div>
         </div>
         <div class="data-set">
             <div class="type">集數總長</div>

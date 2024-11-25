@@ -7,6 +7,7 @@ use App\Anime;
 use App\AnimeTemp;
 use App\AnimeRole;
 use App\AnimeRelation;
+use App\Episode;
 use App\Character;
 use App\Actor;
 use App\ActorAnimeCharacter;
@@ -210,6 +211,81 @@ class BotController extends Controller
         }
     }
 
+    public function scrapeBangumiEpisodes(Request $request)
+    {
+        $animes = Anime::where('sources', 'ilike', '%"bangumi"%')->where('id', '>=', $request->from)->where('id', '<=', $request->to)->orderBy('id', 'asc')->get();
+        foreach ($animes as $anime) {
+            $url = "{$anime->sources["bangumi"]}/ep";
+            $curl_connection = curl_init($url);
+            curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+            curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+            $html = curl_exec($curl_connection);
+            curl_close($curl_connection);
+            sleep(1);
+
+            if (strpos($html, '<div class="mainWrapper"><div class="columns clearit">') !== false) {
+                if (strpos($html, '<span class="epAirStatus"') !== false) {
+                    $episodes_raw_array = explode('<span class="epAirStatus"', $html);
+                    array_shift($episodes_raw_array);
+                    foreach ($episodes_raw_array as $episodes_raw) {
+                        $episode_link = trim(Helper::get_string_between($episodes_raw, '<a href="', '"'));
+                        $title_jp = trim(Helper::get_string_between($episodes_raw, '<a href="'.$episode_link.'">', '</a>'));
+                        $title_jp = str_replace('   ', ' ', $title_jp);
+                        if ($episode = Episode::where('anime_id', $anime->id)->where('title_jp', $title_jp)->first()) {
+                            echo "Bangumi Anime#{$anime->id} episode {$episode->title_jp} exists<br>";
+                        
+                        } else {
+                            $title_zhs = null;
+                            if (strpos($episodes_raw, '<span class="tip"> / ') !== false) {
+                                $title_zhs = trim(Helper::get_string_between($episodes_raw, '<span class="tip"> / ', '</span>'));
+                            }
+                            $duration = null;
+                            if (strpos($episodes_raw, '时长:') !== false) {
+                                if (strpos($episodes_raw, ' /') !== false) {
+                                    $duration = trim(Helper::get_string_between($episodes_raw, '<small class="grey">时长:', ' /'));
+                                } else {
+                                    return "Bangumi Anime#{$anime->id} episode has duration but not date<br>";
+                                }
+                            }
+                            $released_at = null;
+                            if (strpos($episodes_raw, '首播:') !== false) {
+                                $released_at = trim(Helper::get_string_between($episodes_raw, '首播:', '</small>')).' 00:00:00';
+                                $released_at_array = explode('-', $released_at);
+                                if (count($released_at_array) != 3) {
+                                    $released_at = null;
+                                } else {
+                                    $released_at_array[1] = trim($released_at_array[1]);
+                                    if (strlen($released_at_array[1]) == 1) {
+                                        $released_at_array[1] = '0'.$released_at_array[1];
+                                    }
+                                    $released_at = implode('-', $released_at_array);
+                                    if ($anime->id == 37399 && strpos($released_at, '23-05-09') !== false) {
+                                        $released_at = str_replace('23-05-09', '2023-05-09', $released_at);
+                                    }
+                                }
+                            }
+
+                            $episode = Episode::create([
+                                'anime_id' => $anime->id,
+                                'episodes_thumbnail' => $duration,
+                                'title_jp' => $title_jp,
+                                'title_zhs' => $title_zhs,
+                                'released_at' => $released_at
+                            ]);
+
+                            echo "Bangumi Anime#{$anime->id} episode {$episode->title_jp} created<br>";
+                        }
+                    }
+                } else {
+                    echo "Bangumi Anime#{$anime->id} has no episodes<br>";
+                }
+            } else {
+                return "Bangumi Anime#{$anime->id} not found<br>";
+            }
+        }
+    }
+
     public function scrapeMalAnimes(Request $request)
     {
         // from 59091
@@ -379,6 +455,67 @@ class BotController extends Controller
             }
 
             echo "INFO: Anime#{$anime->id} relations scraped<br>";
+        }
+    }
+
+    public function scrapeMalEpisodes(Request $request)
+    {
+        $animes = Anime::where('sources', 'ilike', '%"myanimelist"%')->where('id', '>=', $request->from)->where('id', '<=', $request->to)->orderBy('id', 'asc')->get();
+        foreach ($animes as $anime) {
+            $url = $anime->sources['myanimelist'].'x/episode';
+            $curl_connection = curl_init($url);
+            curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+            curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+            $html = curl_exec($curl_connection);
+            curl_close($curl_connection);
+            sleep(1);
+
+            if (strpos($html, '404 Not Found') === false) {
+                if (strpos($html, '<div class="h1-title">') !== false) {
+                    if (strpos($html, 'No episode information has been added to this title.') === false) {
+                        $episodes_list = explode('<td class="episode-number nowrap" ', $html);
+                        array_shift($episodes_list);
+                        foreach ($episodes_list as $episode_list) {
+                            $episode_number = trim(Helper::get_string_between($episode_list, 'data-raw="', '"'));
+                            $title_jp = trim(Helper::get_string_between($episode_list, '&nbsp;(', ')'));
+                            $released_at = trim(Helper::get_string_between($episode_list, '<td class="episode-aired nowrap">', '</td>'));
+                            if ($released_at != 'N/A') {
+                                $released_at = Carbon::createFromFormat('M d, Y H:i:s', $released_at.' 00:00:00');
+                            } else {
+                                $released_at = null;
+                            }
+                            if ($episode = Episode::where('anime_id', $anime->id)->where('title_jp', 'ilike', "{$episode_number}.%")->first()) {
+                                $title_array = explode('.', $episode->title_jp);
+                                if ($title_array[1] == '') {
+                                    $episode->title_jp = $episode_number.'.'.$title_jp;
+                                }
+                                if ($released_at != null) {
+                                    $episode->released_at = $released_at;
+                                }
+                                $episode->save();
+                                echo "MAL Anime#{$anime->id} episode {$episode->title_jp} updated<br>";
+
+                            } else {
+                                $episode = Episode::create([
+                                    'anime_id' => $anime->id,
+                                    'title_jp' => $episode_number.'.'.$title_jp,
+                                    'released_at' => $released_at
+                                ]);
+                                echo "MAL Anime#{$anime->id} episode {$episode->title_jp} created<br>";
+                            }
+                        }
+
+                    } else {
+                        echo "INFO: Anime#{$anime->id} has no episodes<br>";
+                    }
+                } else {
+                    return "Anime#{$anime->id} access failed</span><br>";
+                }
+
+            } else {
+                echo "INFO: Anime#{$anime->id} has no episodes<br>";
+            }
         }
     }
 
@@ -812,6 +949,34 @@ class BotController extends Controller
 
     public function tempMethod(Request $request)
     {   
+        $episodes = Episode::where('episodes_thumbnail', 'ilike', '%:%')->orderBy('id', 'asc')->get();
+        foreach ($episodes as $episode) {
+            // return $episode;
+            $array = explode(':', $episode->episodes_thumbnail);
+            $duration = $array[0]*60 + $array[1];
+            $episode->duration = $duration;
+            $episode->episodes_thumbnail = null;
+            $episode->save();
+        }
+
+        // Check repeated episodes
+        /* $animes = Anime::with('episodes')->where('id', '>=', $request->from)->where('id', '<=', $request->to)->orderBy('id', 'asc')->get();
+        foreach ($animes as $anime) {
+            if ($episodes = $anime->episodes) {
+                $episodes_list = [];
+                foreach ($episodes as $episode) {
+                    $title = explode('.', $episode->title_jp);
+                    if ($title[1] != '') {
+                        if (in_array($title[1], $episodes_list)) {
+                            return "Anime ID#{$anime->id} title {$title[1]}";
+                        } else {
+                            array_push($episodes_list, $title[1]);
+                        }
+                    }
+                }
+            }            
+        } */
+
         // Scrape voice actors
         /* $from = $request->from;
         $to = $request->to;
