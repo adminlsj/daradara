@@ -9,7 +9,7 @@ use App\Savelist;
 use App\Savelistable;
 use App\Character;
 use App\Staff;
-use App\Episodes;
+use App\Episode;
 use App\User;
 use Illuminate\Http\Request;
 use Response;
@@ -37,7 +37,7 @@ class AnimeController extends Controller
                                     return true;
                                 }
                             });
-        $episodes = Episodes::where('anime_id', $anime->id)->orderBy('id')->get();
+        $episodes = Episode::where('anime_id', $anime->id)->orderBy('id')->get();
         $characters = $anime->characters->load('actors');
         $staffs = $anime->staffs;
         $anime_save = null;

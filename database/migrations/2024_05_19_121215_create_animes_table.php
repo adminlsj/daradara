@@ -29,7 +29,7 @@ class CreateAnimesTable extends Migration
                 $table->string('author')->nullable();
                 $table->string('director')->nullable();
                 $table->string('trailer')->nullable();
-                $table->integer('episodes')->nullable();
+                $table->integer('episodes_count')->nullable();
                 $table->timestamps();
         });
     }

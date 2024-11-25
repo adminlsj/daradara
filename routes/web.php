@@ -42,6 +42,7 @@ Route::group(['middleware' => 'admin'], function () {
 	// Scrape Bangumi
 	Route::get('/scrapeBangumi', 'BotController@scrapeBangumi');
 	Route::get('/scrapeBangumiList', 'BotController@scrapeBangumiList');
+	Route::get('/scrapeBangumiEpisodes', 'BotController@scrapeBangumiEpisodes');
 	Route::get('/importBangumiAnimeSource', 'BotController@importBangumiAnimeSource');
 	Route::get('/checkBangumiCompanies', 'BotController@checkBangumiCompanies');
 	Route::get('/mergeBangumiCompanies', 'BotController@mergeBangumiCompanies');
@@ -51,6 +52,7 @@ Route::group(['middleware' => 'admin'], function () {
 
 	Route::get('/scrapeMalAnimes', 'BotController@scrapeMalAnimes');
 	Route::get('/scrapeMalRelatedAnimes', 'BotController@scrapeMalRelatedAnimes');
+	Route::get('/scrapeMalEpisodes', 'BotController@scrapeMalEpisodes');
 	Route::get('/scrapeMalCompanies', 'BotController@scrapeMalCompanies');
 	Route::get('/scrapeMalAnimeCompanies', 'BotController@scrapeMalAnimeCompanies');
 	Route::get('/scrapeMalCompaniesAnimeables', 'BotController@scrapeMalCompaniesAnimeables');
