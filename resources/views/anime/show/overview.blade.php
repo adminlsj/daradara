@@ -6,28 +6,36 @@
         </div>
     </div>
 
-    <div class="relations">
-        <h2>關聯作品</h2>
-        <div class="grid-wrap">
-            @foreach ($related_animes as $related_anime)
-                <div class="media-preview-card">
-                    <a href="{{ route('anime.show', ['anime' => $related_anime, 'title' => $related_anime->getTitle($chinese)]) }}"><img src="{{ $related_anime->photo_cover }}" alt=""></a>
-                    <div class="relations-content">
-                        <p class="source">{{ $related_anime->getRelation($related_anime->pivot->relation) }}</p>
-                        <a href="{{ route('anime.show', ['anime' => $related_anime, 'title' => $related_anime->getTitle($chinese)]) }}"><p style="font-size:14px; color:#acacac;">{{ $related_anime->getTitle($chinese) }}</p></a>
-                        <p class="status">{{ $related_anime->category }} · {{ $related_anime->airing_status }}</p>
+    @if (count($related_animes) != 0)
+        <div class="relations">
+            <h2>關聯作品</h2>
+            <div class="grid-wrap">
+                @foreach ($related_animes as $related_anime)
+                    <div class="media-preview-card">
+                        <a href="{{ route('anime.show', ['anime' => $related_anime, 'title' => $related_anime->getTitle($chinese)]) }}"><img src="{{ $related_anime->photo_cover }}" alt=""></a>
+                        <div class="relations-content">
+                            <p class="source">{{ $related_anime->getRelation($related_anime->pivot->relation) }}</p>
+                            <a href="{{ route('anime.show', ['anime' => $related_anime, 'title' => $related_anime->getTitle($chinese)]) }}"><p style="font-size:14px; color:#acacac;">{{ $related_anime->getTitle($chinese) }}</p></a>
+                            <p class="status">{{ $related_anime->category }} · {{ $related_anime->airing_status }}</p>
+                        </div>
                     </div>
-                </div>
-            @endforeach
+                @endforeach
+            </div>
         </div>
-    </div>
-    <div class="trailer">
-        <h2>宣傳片</h2>
-        <iframe width="380" height="245" src="{{ $anime->trailer }}"
-            title="YouTube video player" frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-    </div>
+        <br>
+    @endif
+
+    @if ($anime->trailer != 'None')
+        <div class="trailer">
+            <h2>宣傳片</h2>
+            <iframe width="380" height="245" src="{{ $anime->trailer }}"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+        <br>
+    @endif
+
     <div class="recommendations">
         <div class="recommendations-heading">
             <h2>為您推薦</h2>
