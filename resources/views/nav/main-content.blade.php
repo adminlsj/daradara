@@ -4,7 +4,7 @@
 <a class="nav-item hidden-xs nav-desktop-items {{ Request::get('genre') == '裏番' ? 'active' : '' }}" href="{{ route('anime.search') }}?genre=裏番">首頁</a>
 <a class="nav-item hidden-xs nav-desktop-items {{ Request::get('genre') == '裏番' ? 'active' : '' }}" href="{{ route('anime.search') }}?genre=裏番" style="color: white !important; font-weight: 400 !important;">動漫</a>
 <a class="nav-item hidden-xs hidden-sm hidden-md nav-desktop-items {{ Request::is('previews/*') == '裏番' ? 'active' : '' }}" href="/previews/{{ Carbon\Carbon::now()->format('Ym') }}">新番預告</a>
-<a class="nav-item hidden-xs nav-desktop-items {{ Request::get('genre') == '泡麵番' ? 'active' : '' }}" href="{{ route('anime.search') }}?genre=泡麵番">我的清單</a>
+<a class="nav-item hidden-xs nav-desktop-items {{ Request::is('user/*/*/animelist') ? 'active' : '' }}" href="{{ Auth::check() ? route('user.animelist', ['user' => Auth::user(), 'name' => Auth::user()->name]) : route('login') }}">我的清單</a>
 <a class="nav-item hidden-xs nav-desktop-items {{ Request::get('genre') == 'Motion Anime' ? 'active' : '' }}" href="{{ route('anime.search') }}?genre=Motion+Anime">聲優</a>
 <a class="nav-item hidden-xs nav-desktop-items {{ Request::get('genre') == '3D動畫' ? 'active' : '' }}" href="{{ route('anime.search') }}?genre=3D動畫">工作人員</a>
 <a class="nav-item hidden-xs nav-desktop-items {{ Request::get('genre') == '同人作品' ? 'active' : '' }}" href="{{ route('anime.search') }}?genre=同人作品">製作公司</a>
