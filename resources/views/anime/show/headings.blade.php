@@ -109,9 +109,17 @@
                                         
                                         <div class="form-group">
                                             <h3>列表</h3>
-                                            <input type="checkbox" name="is_private" value="1" id="is_private">
-                                            <label class="no-select" for="is_private">私人清單</label>
+                                            <div>
+                                                <input type="checkbox" name="is_private" value="1" id="is_private">
+                                                <label class="no-select" for="is_private">私人清單</label>
+                                            </div>
                                             <hr>
+                                            @foreach ($anime_lists as $anime_list)
+                                                <div>
+                                                    <input type="checkbox" name="animelists[]" value="{{ $anime_list->id }}" id="{{ $anime_list->id }}" {{ in_array($anime_list->id, $saved_lists) ?  'checked' : ''}}>
+                                                    <label class="no-select" for="{{ $anime_list->id }}">{{ $anime_list->title }}</label>
+                                                </div>
+                                            @endforeach
                                         </div>
                                     </div>
 

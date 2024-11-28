@@ -3,6 +3,7 @@
 namespace App;
 
 use App\AnimeSave;
+use App\Savelist;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Notifications\CustomResetPassword;
@@ -34,6 +35,16 @@ class User extends Authenticatable
     public function anime_lists()
     {
         return $this->hasMany('App\Savelist')->where('type', 'anime')->where('is_status', false);
+    }
+
+    public function anime_statuslist($status)
+    {
+        return Savelist::where('user_id', $this->id)->where('is_status', true)->where('type', 'anime')->where('title', $status)->first();
+    }
+
+    public function anime_statuslists()
+    {
+        return $this->hasMany('App\Savelist')->where('type', 'anime')->where('is_status', true);
     }
 
     public function anime_save($anime_id)

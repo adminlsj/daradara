@@ -149,7 +149,6 @@ class AnimeController extends Controller
 
         // Update anime_save details
         if ($anime_save = $user->anime_save($anime->id)) {
-            $anime_save->status = $request->status;
             $anime_save->episode_progress = $request->episode_progress;
             $anime_save->start_date = $request->start_date;
             $anime_save->finish_date = $request->finish_date;
@@ -159,6 +158,18 @@ class AnimeController extends Controller
             $anime_save->save();
 
             $saved_animelists = $anime_save->savelists;
+            if ($anime_save->status == $request->status) {
+                $saved_animelists = $saved_animelists->where('is_status', false);
+            } else {
+                // Create newly selected statuslist
+                $statuslist = $user->anime_statuslist($request->status);
+                Savelistable::create([
+                    'savelist_id' => $statuslist->id,
+                    'savelistable_id' => $anime_save->id,
+                    'savelistable_type' => 'App\AnimeSave'
+                ]);
+                $anime_save->status = $request->status;
+            }
             $selected_animelists = $request->animelists ? $request->animelists : [];
 
             // Delete only un-selected animelists
@@ -196,13 +207,23 @@ class AnimeController extends Controller
                 'is_hidden_from_status_lists' => $request->is_hidden_from_status_lists ? true : false,
             ]);
 
-            $animelists = $request->animelists;
-            foreach ($animelists as $animelist) {
-                Savelistable::create([
-                    'savelist_id' => $animelist,
-                    'savelistable_id' => $anime_save->id,
-                    'savelistable_type' => 'App\AnimeSave'
-                ]);
+            // Create Savelistable for statuslist
+            $statuslist = $user->anime_statuslist($request->status);
+            Savelistable::create([
+                'savelist_id' => $statuslist->id,
+                'savelistable_id' => $anime_save->id,
+                'savelistable_type' => 'App\AnimeSave'
+            ]);
+
+            // Create Savelistable for animelists
+            if ($animelists = $request->animelists) {
+                foreach ($animelists as $animelist) {
+                    Savelistable::create([
+                        'savelist_id' => $animelist,
+                        'savelistable_id' => $anime_save->id,
+                        'savelistable_type' => 'App\AnimeSave'
+                    ]);
+                }
             }
         }
 
