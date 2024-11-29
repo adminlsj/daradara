@@ -9,14 +9,28 @@
     @include('user.show.userProfile')
     @include('user.show.navTabs')
 
-    <div class="content flex-row">
+    <div class="content flex-row userlists">
         <div class="sidebar flex-column">
             <div class="lists">
                 <h3>清單</h3>
+                <a href="{{ route('user.animelist', ['user' => Auth::user(), 'name' => Auth::user()->name]) }}">
+                    <div class="flex-row {{ Request::is('user/*/*/animelist') ? 'active' : '' }}" style="justify-content: space-between;">
+                        <div class="list">All</div>
+                        <div></div>
+                    </div>
+                </a>
+                @foreach ($anime_statuslists as $anime_statuslist)
+                    @if ($anime_statuslist->anime_saves->count() != 0)
+                        <div class="flex-row" style="justify-content: space-between;">
+                            <div class="list">{{ $anime_statuslist->title }}</div>
+                            <div>{{ $anime_statuslist->anime_saves->count() }}</div>
+                        </div>
+                    @endif
+                @endforeach
                 @foreach ($anime_lists as $anime_list)
                     <div class="flex-row" style="justify-content: space-between;">
                         <div class="list">{{ $anime_list->title }}</div>
-                        <div>1</div>
+                        <div>{{ $anime_list->anime_saves->count() }}</div>
                     </div>
                 @endforeach
             </div>
@@ -27,33 +41,39 @@
         </div>
 
         <div class="list-wrap flex-column">
-            <div class="list-entries">
-                <div class="title-link">
-                    <h3>WATCHING</h3>
-                </div>
-                <div class="list-section flex-row">
-                    <div class="list-card">
-                        <img src="https://i.meee.com.tw/HqjAJDJ.webp" alt="">
+        @foreach ($anime_statuslists as $anime_statuslist)
+                @if ($anime_statuslist->anime_saves->count() != 0)
+                    <div class="title-link">
+                        <h3>{{ $anime_statuslist->title }}</h3>
                     </div>
-                    <div class="list-card">
-                        <img src="https://i.meee.com.tw/XAL8tmo.jpeg" alt="">
+                    <div class="list-entries">
+                        <div class="list-section flex-row">
+                            @foreach ($anime_statuslist->anime_saves as $anime_save)
+                                <div class="list-card">
+                                    <a href="{{ route('anime.show', ['anime' => $anime_save->anime, 'title' => $anime_save->anime->title]) }}"><img src="{{ $anime_save->anime->photo_cover }}" alt=""></a>
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
-                </div>
-            </div>
+                @endif
+            @endforeach
 
-            <div class="list-entries">
-                <div class="title-link">
-                    <h3>Completed</h3>
-                </div>
-                <div class="list-section flex-row">
-                    <div class="list-card">
-                        <img src="https://i.meee.com.tw/HqjAJDJ.webp" alt="">
+            @foreach ($anime_lists as $anime_list)
+                @if ($anime_list->anime_saves->count() != 0)
+                    <div class="title-link">
+                        <h3>{{ $anime_list->title }}</h3>
                     </div>
-                    <div class="list-card">
-                        <img src="https://i.meee.com.tw/XAL8tmo.jpeg" alt="">
+                    <div class="list-entries">
+                        <div class="list-section flex-row">
+                            @foreach ($anime_list->anime_saves as $anime_save)
+                                <div class="list-card">
+                                <a href="{{ route('anime.show', ['anime' => $anime_save->anime, 'title' => $anime_save->anime->title]) }}"><img src="{{ $anime_save->anime->photo_cover }}" alt=""></a>
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
-                </div>
-            </div>
+                @endif
+            @endforeach
         </div>
     </div>
 

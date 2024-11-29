@@ -10,6 +10,11 @@ class AnimeSave extends Model
         'id', 'user_id', 'anime_id', 'status', 'episode_progress', 'start_date', 'finish_date', 'total_rewatches', 'notes', 'is_hidden_from_status_lists', 'created_at', 'updated_at'
     ];
 
+    public function anime()
+    {
+        return $this->belongsTo('App\Anime');
+    }
+
     public function savelists()
     {
         return $this->morphToMany('App\Savelist', 'savelistable')->withPivot('id');
