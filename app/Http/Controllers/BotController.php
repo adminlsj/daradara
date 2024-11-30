@@ -949,16 +949,6 @@ class BotController extends Controller
 
     public function tempMethod(Request $request)
     {   
-        $episodes = Episode::where('episodes_thumbnail', 'ilike', '%:%')->orderBy('id', 'asc')->get();
-        foreach ($episodes as $episode) {
-            // return $episode;
-            $array = explode(':', $episode->episodes_thumbnail);
-            $duration = $array[0]*60 + $array[1];
-            $episode->duration = $duration;
-            $episode->episodes_thumbnail = null;
-            $episode->save();
-        }
-
         // Check repeated episodes
         /* $animes = Anime::with('episodes')->where('id', '>=', $request->from)->where('id', '<=', $request->to)->orderBy('id', 'asc')->get();
         foreach ($animes as $anime) {
