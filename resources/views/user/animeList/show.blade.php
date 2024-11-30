@@ -21,17 +21,21 @@
                 </a>
                 @foreach ($anime_statuslists as $anime_statuslist)
                     @if ($anime_statuslist->anime_saves->count() != 0)
-                        <div class="flex-row" style="justify-content: space-between;">
-                            <div class="list">{{ $anime_statuslist->title }}</div>
-                            <div>{{ $anime_statuslist->anime_saves->count() }}</div>
-                        </div>
+                        <a href="{{ route('user.animelist.show', ['user' => Auth::user(), 'name' => Auth::user()->name, 'savelist' => $anime_statuslist,'title' => $anime_statuslist->title]) }}">
+                            <div class="flex-row {{ Request::is("user/*/*/animelist/{$anime_statuslist->id}/*") ? 'active' : '' }}" style="justify-content: space-between;">
+                                <div class="list">{{ $anime_statuslist->title }}</div>
+                                <div>{{ $anime_statuslist->anime_saves->count() }}</div>
+                            </div>
+                        </a>
                     @endif
                 @endforeach
                 @foreach ($anime_lists as $anime_list)
-                    <div class="flex-row" style="justify-content: space-between;">
-                        <div class="list">{{ $anime_list->title }}</div>
-                        <div>{{ $anime_list->anime_saves->count() }}</div>
-                    </div>
+                    <a href="{{ route('user.animelist.show', ['user' => Auth::user(), 'name' => Auth::user()->name, 'savelist' => $anime_list,'title' => $anime_list->title]) }}">
+                        <div class="flex-row {{ Request::is("user/*/*/animelist/{$anime_list->id}/*") ? 'active' : '' }}" style="justify-content: space-between;">
+                            <div class="list">{{ $anime_list->title }}</div>
+                            <div>{{ $anime_list->anime_saves->count() }}</div>
+                        </div>
+                    </a>
                 @endforeach
             </div>
 
@@ -41,39 +45,18 @@
         </div>
 
         <div class="list-wrap flex-column">
-        @foreach ($anime_statuslists as $anime_statuslist)
-                @if ($anime_statuslist->anime_saves->count() != 0)
-                    <div class="title-link">
-                        <h3>{{ $anime_statuslist->title }}</h3>
-                    </div>
-                    <div class="list-entries">
-                        <div class="list-section flex-row">
-                            @foreach ($anime_statuslist->anime_saves as $anime_save)
-                                <div class="list-card">
-                                    <a href="{{ route('anime.show', ['anime' => $anime_save->anime, 'title' => $anime_save->anime->title]) }}"><img src="{{ $anime_save->anime->photo_cover }}" alt=""></a>
-                                </div>
-                            @endforeach
+            <div class="title-link">
+                <h3>{{ $savelist->title }}</h3>
+            </div>
+            <div class="list-entries">
+                <div class="list-section flex-row">
+                    @foreach ($anime_saves as $anime_save)
+                        <div class="list-card">
+                            <a href="{{ route('anime.show', ['anime' => $anime_save->anime, 'title' => $anime_save->anime->title]) }}"><img src="{{ $anime_save->anime->photo_cover }}" alt=""></a>
                         </div>
-                    </div>
-                @endif
-            @endforeach
-
-            @foreach ($anime_lists as $anime_list)
-                @if ($anime_list->anime_saves->count() != 0)
-                    <div class="title-link">
-                        <h3>{{ $anime_list->title }}</h3>
-                    </div>
-                    <div class="list-entries">
-                        <div class="list-section flex-row">
-                            @foreach ($anime_list->anime_saves as $anime_save)
-                                <div class="list-card">
-                                <a href="{{ route('anime.show', ['anime' => $anime_save->anime, 'title' => $anime_save->anime->title]) }}"><img src="{{ $anime_save->anime->photo_cover }}" alt=""></a>
-                                </div>
-                            @endforeach
-                        </div>
-                    </div>
-                @endif
-            @endforeach
+                    @endforeach
+                </div>
+            </div>
         </div>
     </div>
 
