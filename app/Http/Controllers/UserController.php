@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Savelist;
 use App\Video;
 use App\Watch;
 use App\Save;
@@ -31,7 +32,15 @@ class UserController extends Controller
     {
         $anime_lists = $user->anime_lists->load('anime_saves.anime');
         $anime_statuslists = $user->anime_statuslists->load('anime_saves.anime');
-        return view('user.show.animeList', compact('user', 'anime_lists', 'anime_statuslists'));
+        return view('user.animeList.index', compact('user', 'anime_lists', 'anime_statuslists'));
+    }
+
+    public function animelistShow(Request $request, User $user, String $name, Savelist $savelist, String $title)
+    {   
+        $anime_lists = $user->anime_lists->load('anime_saves.anime');
+        $anime_statuslists = $user->anime_statuslists->load('anime_saves.anime');
+        $anime_saves = $savelist->anime_saves->load('anime');
+        return view('user.animeList.show', compact('user', 'anime_lists', 'anime_statuslists', 'savelist','anime_saves'));
     }
 
     public function likes(Request $request, User $user)
