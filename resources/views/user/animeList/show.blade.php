@@ -8,42 +8,9 @@
 <div class="flex-column user-profile" style="background-color:rgb(237,241,245);">
     @include('user.show.userProfile')
     @include('user.show.navTabs')
-
+    
     <div class="content flex-row userlists">
-        <div class="sidebar flex-column">
-            <div class="lists">
-                <h3>清單</h3>
-                <a href="{{ route('user.animelist', ['user' => Auth::user(), 'name' => Auth::user()->name]) }}">
-                    <div class="flex-row {{ Request::is('user/*/*/animelist') ? 'active' : '' }}" style="justify-content: space-between;">
-                        <div class="list">All</div>
-                        <div></div>
-                    </div>
-                </a>
-                @foreach ($anime_statuslists as $anime_statuslist)
-                    @if ($anime_statuslist->anime_saves->count() != 0)
-                        <a href="{{ route('user.animelist.show', ['user' => Auth::user(), 'name' => Auth::user()->name, 'savelist' => $anime_statuslist,'title' => $anime_statuslist->title]) }}">
-                            <div class="flex-row {{ Request::is("user/*/*/animelist/{$anime_statuslist->id}/*") ? 'active' : '' }}" style="justify-content: space-between;">
-                                <div class="list">{{ $anime_statuslist->title }}</div>
-                                <div>{{ $anime_statuslist->anime_saves->count() }}</div>
-                            </div>
-                        </a>
-                    @endif
-                @endforeach
-                @foreach ($anime_lists as $anime_list)
-                    <a href="{{ route('user.animelist.show', ['user' => Auth::user(), 'name' => Auth::user()->name, 'savelist' => $anime_list,'title' => $anime_list->title]) }}">
-                        <div class="flex-row {{ Request::is("user/*/*/animelist/{$anime_list->id}/*") ? 'active' : '' }}" style="justify-content: space-between;">
-                            <div class="list">{{ $anime_list->title }}</div>
-                            <div>{{ $anime_list->anime_saves->count() }}</div>
-                        </div>
-                    </a>
-                @endforeach
-            </div>
-
-            <button class="no-select" data-toggle="modal" data-target="#createSavelist">
-                新增動漫清單
-            </button>
-        </div>
-
+        @include('user.animeList.sidebar')
         <div class="list-wrap flex-column">
             <div class="title-link">
                 <h3>{{ $savelist->title }}</h3>
@@ -52,7 +19,8 @@
                 <div class="list-section flex-row">
                     @foreach ($anime_saves as $anime_save)
                         <div class="list-card">
-                            <a href="{{ route('anime.show', ['anime' => $anime_save->anime, 'title' => $anime_save->anime->title]) }}"><img src="{{ $anime_save->anime->photo_cover }}" alt=""></a>
+                            <a href="{{ route('anime.show', ['anime' => $anime_save->anime, 'title' => $anime_save->anime->title]) }}"><img
+                                    src="{{ $anime_save->anime->photo_cover }}" alt=""></a>
                         </div>
                     @endforeach
                 </div>
@@ -107,4 +75,4 @@
     @endif
 
 </div>
-@endsection
+@endseion
