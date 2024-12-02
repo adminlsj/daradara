@@ -40,7 +40,7 @@ class ScrapeMalSingleField extends Command
     public function handle()
     {
         // Scrape is_adult from MAL
-        $animes = Anime::where('sources', 'ilike', '%"myanimelist"%')->where('is_adult', null)->orderBy('id', 'asc')->get();
+        $animes = Anime::where('sources', 'ilike', '%"myanimelist"%')->where('genres', '[]')->orderBy('id', 'asc')->limit(3)->get();
         foreach ($animes as $anime) {
             $curl_connection = curl_init($anime->sources['myanimelist']);
             curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
@@ -48,23 +48,43 @@ class ScrapeMalSingleField extends Command
             curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
             $html = curl_exec($curl_connection);
             curl_close($curl_connection);
-            sleep(1);
+            sleep(5);
 
             if (strpos($html, '404 Not Found') === false) {
                 if (strpos($html, '<h1 class="title-name h1_bold_none"><strong>') !== false) {
-                    // Scrape is_adult
-                    if (strpos($html, '<span class="dark_text">Rating:</span>') !== false) {
-                        $adult_rating = trim(Helper::get_string_between($html, '<span class="dark_text">Rating:</span>', '</div>'));
-                        if ($adult_rating == 'Rx - Hentai' || $adult_rating == 'R+ - Mild Nudity') {
-                            $anime->is_adult = true;
-                        } else {
-                            $anime->is_adult = false;
+                    // Scrape genre from MAL
+                    if (strpos($html, '<span class="dark_text">Genre') !== false) {
+                        $genre_list_raw = trim(Helper::get_string_between($html, '<span class="dark_text">Genre', '<div class="spaceit_pad">'));
+                        $genre_list = explode('itemprop="genre"', $genre_list_raw);
+                        array_shift($genre_list);
+                        $genres = [];
+                        foreach ($genre_list as $item) {
+                            $genre = trim(Helper::get_string_between($item, 'style="display: none">', '</span>'));
+                            array_push($genres, $genre);
                         }
+                        $anime->genres = $genres;
                         $anime->save();
-
+                        Log::info("Anime#{$anime->id} genre scraped");
                     } else {
-                        Log::info("Anime#{$anime->id} has no adult ratings");
+                        Log::info("Anime#{$anime->id} has no genre");
                     }
+
+                    // Scrape ratings count from MAL
+                    if (strpos($html, 'data-title="score" data-user="') !== false) {
+                        $rating_mal_count = trim(Helper::get_string_between($html, 'data-title="score" data-user="', ' users"'));
+                        $rating_mal_count = str_replace(',', '', $rating_mal_count);
+                        if ($rating_mal_count != '-') {
+                            $anime->rating_mal_count = $rating_mal_count;
+                            $anime->save();
+                            Log::info("Anime#{$anime->id} ratings count scraped");
+                        } else {
+                            Log::info("Anime#{$anime->id} has no ratings count");
+                        }
+                        
+                    } else {
+                        Log::info("Anime#{$anime->id} has no ratings count");
+                    }
+
                 } else {
                     Log::warning("Anime#{$anime->id} access failed");
                 }
