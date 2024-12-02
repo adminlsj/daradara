@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\Anime;
 use App\Helper;
+use Illuminate\Support\Facades\Log;
 
 class ScrapeMalSingleField extends Command
 {
