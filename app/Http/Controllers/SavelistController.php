@@ -33,4 +33,19 @@ class SavelistController extends Controller
 
         return Redirect::route('user.animelist', ['user' => $user, 'name' => $user->name]);
     }
+
+    public function update(Request $request, User $user, Savelist $savelist)
+    {
+        $savelist->title = $request->title;
+        $savelist->description = $request->description;
+        $savelist->is_private = $request->is_private;
+
+        $savelist->save();
+        return Redirect::route('user.animelist.show', ['user' => $user, 'name' => $user->name, 'savelist' => $savelist, 'title' => $savelist->title]);
+    }
+
+    public function destroy(Savelist $savelist)
+    {
+        //return Redirect::route('user.animelist', ['user' => $user, 'name' => $user->name]);
+    }
 }
