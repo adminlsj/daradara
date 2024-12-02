@@ -44,8 +44,9 @@ class SavelistController extends Controller
         return Redirect::route('user.animelist.show', ['user' => $user, 'name' => $user->name, 'savelist' => $savelist, 'title' => $savelist->title]);
     }
 
-    public function destroy(Savelist $savelist)
+    public function destroy(User $user, Savelist $savelist)
     {
-        //return Redirect::route('user.animelist', ['user' => $user, 'name' => $user->name]);
+        $savelist->delete();
+        return Redirect::route('user.animelist', ['user' => $user, 'name' => $user->name]);
     }
 }

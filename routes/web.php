@@ -32,7 +32,7 @@ Route::get('/anime/{anime}/{title?}', 'AnimeController@show')->name('anime.show'
 // Savelist
 Route::post('/user/{user}/savelist', 'SavelistController@store')->name('user.savelist.store');
 Route::put('/user/{user}/savelist/{savelist}', 'SavelistController@update')->name('user.savelist.update');
-Route::delete('/user/{user}', 'SavelistController@destroy')->name('user.savelist.destroy');
+Route::delete('/user/{user}/savelist/{savelist}', 'SavelistController@destroy')->name('user.savelist.destroy');
 
 // Others
 Route::get('/character/{character}/{title?}', 'CharacterController@show')->name('character.show');
