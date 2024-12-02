@@ -96,4 +96,4 @@
     @endif
 
 </div>
-@endsectioni
+@endsection
