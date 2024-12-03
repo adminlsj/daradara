@@ -950,7 +950,7 @@ class BotController extends Controller
 
     public function tempMethod(Request $request)
     {   
-        $animes = Anime::where('id', '>=', $request->from)->where('id', '<=', $request->to)->where('sources', 'ilike', '%"myanimelist"%')->where('genres', '[]')->orderBy('id', 'asc')->get();
+        $animes = Anime::where('id', '>=', $request->from)->where('id', '<=', $request->to)->where('sources', 'ilike', '%"myanimelist"%')->where('genres', '[]')->orderBy('started_at', 'desc')->get();
         foreach ($animes as $anime) {
             $curl_connection = curl_init($anime->sources['myanimelist']);
             curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
@@ -981,8 +981,8 @@ class BotController extends Controller
 
                     // Scrape ratings count from MAL
                     if (strpos($html, 'data-title="score" data-user="') !== false) {
-                        $rating_mal_count = trim(Helper::get_string_between($html, 'data-title="score" data-user="', ' users"'));
-                        $rating_mal_count = str_replace(',', '', $rating_mal_count);
+                        $rating_mal_count = trim(Helper::get_string_between($html, 'data-title="score" data-user="', ' user'));
+                        return $rating_mal_count = str_replace(',', '', $rating_mal_count);
                         if ($rating_mal_count != '-') {
                             $anime->rating_mal_count = $rating_mal_count;
                             $anime->save();

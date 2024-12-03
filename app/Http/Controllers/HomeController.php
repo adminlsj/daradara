@@ -26,7 +26,7 @@ class HomeController extends Controller
 
         $query = Anime::where('photo_cover', '!=', null)->whereIn('category', ['TV', 'Movie']);
 
-        $最近流行 = $query->where('started_at', '>=', $now->subYear())->inRandomOrder()->limit(24)->get();
+        return $最近流行 = $query->where('started_at', '>=', $now->subYear())->where('rating_mal_count', '!=', null)->orderBy('rating_mal_count', 'desc')->limit(50)->get();
 
         $season = $this->getSeasonByMonth($now->month).' '.$now->year;
         $本季熱門 = $query->where('season', $season)->inRandomOrder()->limit(24)->get();
