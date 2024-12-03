@@ -72,7 +72,7 @@ class ScrapeMalSingleField extends Command
 
                     // Scrape ratings count from MAL
                     if (strpos($html, 'data-title="score" data-user="') !== false) {
-                        $rating_mal_count = trim(Helper::get_string_between($html, 'data-title="score" data-user="', ' users"'));
+                        $rating_mal_count = trim(Helper::get_string_between($html, 'data-title="score" data-user="', ' user'));
                         $rating_mal_count = str_replace(',', '', $rating_mal_count);
                         if ($rating_mal_count != '-') {
                             $anime->rating_mal_count = $rating_mal_count;
