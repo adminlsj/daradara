@@ -43,7 +43,7 @@ class UserController extends Controller
         $anime_statuslists = $user->anime_statuslists->load('anime_saves.anime');
         $anime_saves = $savelist->anime_saves->load('anime');
         $chinese = new Chinese();
-        return view('user.animeList.show', compact('user', 'anime_lists', 'anime_statuslists', 'savelist','anime_saves'));
+        return view('user.animeList.show', compact('user', 'anime_lists', 'anime_statuslists', 'savelist','anime_saves', 'chinese'));
     }
 
     public function likes(Request $request, User $user)
