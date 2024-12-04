@@ -15,15 +15,17 @@
             <div class="title-link flex-row">
                 <h3>{{ $savelist->title }}</h3>
                 @if ($savelist->is_status == FALSE)
-                    <button class="fas fa-pen no-select" data-toggle="modal" data-target="#updateSavelist"></button>
-                    @if (Auth::check() && Auth::user()->id == $user->id)
-                        <form id="destroySavelistForm" action="{{ route('user.savelist.destroy', ['user' => $user, 'savelist' => $savelist->id]) }}" method="POST">
-                            {{ csrf_field() }}
-                            {{ method_field('DELETE') }}
+                    <div class="flex-row">
+                        <button class="fas fa-pen no-select pen-button" data-toggle="modal" data-target="#updateSavelist"></button>
+                        @if (Auth::check() && Auth::user()->id == $user->id)
+                            <form id="destroySavelistForm" action="{{ route('user.savelist.destroy', ['user' => $user, 'savelist' => $savelist->id]) }}" method="POST">
+                                {{ csrf_field() }}
+                                {{ method_field('DELETE') }}
 
-                            <button class="" type="submit"><i class="fas fa-trash"></i></button>
-                        </form>
-                    @endif
+                                <button class="trash-button" type="submit"><i class="fas fa-trash"></i></button>
+                            </form>
+                        @endif
+                    </div>
                 @endif
             </div>
             <div class="list-entries">
