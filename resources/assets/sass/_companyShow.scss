@@ -1,0 +1,119 @@
+/**         Company Headings          **/
+
+.company-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+}
+
+.company-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 15px 0;
+}
+
+.company-headings {
+    width: var(--flex-center-width);
+    display: flex;
+    flex-direction: row;
+    color: #677687;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.company-headings h3 {
+    color: #677687;
+    font-size: 30px;
+    font-weight: 700;
+    font-family: Roboto;
+}
+
+.company-headings button {
+    background-color: #ed294b;
+    border: none;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+}
+
+/**         Company Animes        **/
+
+.company-animes {
+    width: var(--flex-center-width);
+    color: #677687;
+}
+
+@media (max-width: 1040px) {
+    .company-animes {
+        padding: 20px 30px 12px;
+    }
+}
+
+@media (max-width: 768px) {
+    .company-animes {
+        padding: 20px 20px 12px;
+    }
+}
+
+.company-animes .company-button-groups {
+    justify-content: end;
+    gap: 20px;
+}
+
+.company-animes .related-animes {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 185px);
+    padding-top: 30px;
+    justify-content: space-between;
+    gap: 25px 20px;
+}
+
+.company-animes .related-animes .media-card {
+    display: grid;
+    width: 185px;
+    margin-bottom: 20px;
+    grid-template-rows: min-content;
+}
+
+.company-animes .related-animes .media-card a {
+    font-weight: normal;
+}
+
+.company-animes .related-animes .media-card a:first-child {
+    height: 265px;
+    margin-bottom: 5px;
+}
+
+.company-animes .related-animes .media-card img {
+    height: 100%;
+    object-fit: cover;
+}
+
+@media (max-width: 1040px) {
+    .company-animes .related-animes {
+        grid-template-columns: repeat(auto-fill, minmax(135px, 1fr));
+    }
+
+    .company-animes .related-animes .media-card {
+        width: 100%;
+    }
+
+    .company-animes .related-animes .media-card a:first-child {
+        // height: auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .company-animes .related-animes {
+        grid-template-columns: repeat(auto-fill, minmax(105px, 1fr));
+        gap: 25px 20px;
+    }
+
+    .company-animes .related-animes .media-card a:first-child {
+        height: 165px;
+    }
+}
