@@ -1,4 +1,4 @@
-<div id='overview' class="tabcontent" style="display:block;">
+<div id='overview' style="display:block;">
     <div class="description">
         <h2>劇情簡介</h2>
         <div class="description-content">
@@ -12,11 +12,15 @@
             <div class="grid-wrap">
                 @foreach ($related_animes as $related_anime)
                     <div class="media-preview-card">
-                        <a href="{{ route('anime.show', ['anime' => $related_anime, 'title' => $related_anime->getTitle($chinese)]) }}"><img src="{{ $related_anime->photo_cover }}" alt=""></a>
+                        <a href="{{ route('anime.show', ['anime' => $related_anime, 'title' => $related_anime->getTitle($chinese)]) }}"><img style="width: 85px; height: 115px; object-fit: cover" src="{{ $related_anime->photo_cover }}" alt=""></a>
                         <div class="relations-content">
-                            <p class="source">{{ $related_anime->getRelation($related_anime->pivot->relation) }}</p>
-                            <a href="{{ route('anime.show', ['anime' => $related_anime, 'title' => $related_anime->getTitle($chinese)]) }}"><p style="font-size:14px; color:#acacac;">{{ $related_anime->getTitle($chinese) }}</p></a>
-                            <p class="status">{{ $related_anime->category }} · {{ $related_anime->airing_status }}</p>
+                            <div>
+                                <p class="source">{{ $related_anime->getRelation($related_anime->pivot->relation) }}</p>
+                                <a href="{{ route('anime.show', ['anime' => $related_anime, 'title' => $related_anime->getTitle($chinese)]) }}">
+                                    <p style="font-size: 1.3rem; color: rgb(92,114,138); font-weight: 400; margin-top: -5px; padding: 7px 10px;">{{ $related_anime->getTitle($chinese) }}</p>
+                                </a>
+                            </div>
+                            <p class="status" style="font-size: 1.2rem !important; color: rgb(146,153,161); font-weight: 400;">{{ $related_anime->category }} · {{ $related_anime->airing_status }}</p>
                         </div>
                     </div>
                 @endforeach
@@ -25,10 +29,28 @@
         <br>
     @endif
 
+    <div class="relations" style="margin-top: 10px;">
+        <h2>登場角色</h2>
+        <div class="characters-wrap flex-row">
+            @foreach ($characters->take(6) as $character)
+                @include('anime.show.character')
+            @endforeach
+        </div>
+    </div>
+
+    <div class="relations" style="margin-top: 10px;">
+        <h2>製作人員</h2>
+        <div class="staffs-wrap flex-row">
+            @foreach ($staffs->take(6) as $staff)
+                @include('anime.show.staff')
+            @endforeach
+        </div>
+    </div>
+
     @if ($anime->trailer != 'None')
-        <div class="trailer">
+        <div class="trailer" style="margin-top: 10px;">
             <h2>宣傳片</h2>
-            <iframe width="380" height="245" src="{{ $anime->trailer }}"
+            <iframe style="margin-top: 2px; width: 48%; border-radius: 3px" height="230" src="{{ $anime->trailer }}"
                 title="YouTube video player" frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
@@ -36,13 +58,9 @@
         <br>
     @endif
 
-    <div class="recommendations">
+    <div class="recommendations" style="margin-top: 5px;">
         <div class="recommendations-heading">
             <h2>為您推薦</h2>
-            <div class="view-all">
-                <button>+ 添加</button>
-                <button>查看全部</button>
-            </div>
         </div>
         <div class="recommendations-warp">
             <div class="recommendations-card">

@@ -22,7 +22,8 @@
     flex: 48%;
     max-width: 48%;
     margin-bottom: 20px;
-    background-color: #151f2e;
+    background-color: white;
+    border-radius: 3px;
 }
 
 @media (max-width: 1040px) {
@@ -45,6 +46,8 @@
     width: 60px;
     height: 80px;
     object-fit: cover;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
 }
 
 .staffs-card .staffs-name {
@@ -54,14 +57,18 @@
     justify-content: space-between;
 }
 
-.staffs-card .staffs-name a, p {
+.staffs-card .staffs-name a, .staffs-card .staffs-name p {
     color: #8b9fb5;
     text-decoration: none;
-    padding: 10px;
-    font-size: 12px;
+    padding: 7px 10px;
+    color: rgb(92,114,138);
+    font-size: 1.2rem;
+    font-weight: 400;
 }
 
-.staffs-name p {
+.staffs-card .staffs-name p {
+    color: rgb(146,153,161);
+    font-size: 1.1rem;
     margin-bottom: 0;
 }
 
