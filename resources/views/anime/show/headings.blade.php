@@ -1,4 +1,4 @@
-<div class="headings">
+<div class="headings" style="position:relative; z-index: 10000;">
     <div class="cover">
         <img src="{{ $anime->photo_cover }}" alt="">
         <div class="button-groups">
@@ -140,15 +140,14 @@
     </div>
     
     <div class="heading-content">
-        <h3> {{ $anime->title_ro }} </h3>
+        <h3> {{ $anime->getTitle($chinese) }} </h3>
         <p> {{ $anime->description }} </p>
         <div class="navtabs">
-            <button class="tablinks" onclick="activeTab(event, 'overview')">簡介</button>
-            <button class="tablinks" onclick="activeTab(event, 'episodes')">集數列表</button>
-            <button class="tablinks" onclick="activeTab(event, 'characters')">登場人物</button>
-            <button class="tablinks" onclick="activeTab(event, 'themes')">主題曲</button>
-            <button class="tablinks" onclick="activeTab(event, 'staffs')">製作人員</button>
-            <button class="tablinks" onclick="activeTab(event, 'comments')">討論版</button>
+            <a style="text-decoration: none;" href="{{ route('anime.show', ['anime' => $anime, 'title' => $anime->getTitle($chinese)]) }}"><button class="tablinks">簡介</button></a>
+            <a style="text-decoration: none;" href="{{ route('anime.episodes', ['anime' => $anime, 'title' => $anime->getTitle($chinese)]) }}"><button class="tablinks">集數列表</button></a>
+            <a style="text-decoration: none;" href="{{ route('anime.characters', ['anime' => $anime, 'title' => $anime->getTitle($chinese)]) }}"><button class="tablinks">登場人物</button></a>
+            <a style="text-decoration: none;" href="{{ route('anime.staff', ['anime' => $anime, 'title' => $anime->getTitle($chinese)]) }}"><button class="tablinks">製作人員</button></a>
+            <a style="text-decoration: none;" href="{{ route('anime.comments', ['anime' => $anime, 'title' => $anime->getTitle($chinese)]) }}"><button class="tablinks">評論</button></a>
         </div>
     </div>
 </div>

@@ -31,7 +31,17 @@ class Anime extends Model
 
     public function companies()
     {
-        return $this->morphedByMany('App\Company', 'anime_role')->withPivot('role');
+        return $this->morphedByMany('App\Company', 'animeable', 'anime_roles')->withPivot('role');
+    }
+
+    public function studios()
+    {
+        return $this->morphedByMany('App\Company', 'animeable', 'anime_roles')->withPivot('role')->where('role', 'Studio');
+    }
+
+    public function producers()
+    {
+        return $this->morphedByMany('App\Company', 'animeable', 'anime_roles')->withPivot('role')->where('role', 'Producers');
     }
 
     public function staffs()

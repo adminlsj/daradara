@@ -1,7 +1,7 @@
 <a style="text-decoration: none;" href="{{ route('anime.show', ['anime' => $video, 'title' => $chinese->to(SteelyWing\Chinese\Chinese::ZH_HANT, ($video->title_zht ? $video->title_zht : ($video->title_zhs ? $video->title_zhs : ($video->title_jp ? $video->title_jp : $video->title_en))))]) }}">
 	<div class="home-rows-videos-div" style="position: relative; display: inline-block;">
 		<img style="border-radius: 3px" src="https://images2.imgbox.com/7f/29/4nHUKfod_o.png">
-        <img style="position: absolute; top: 0; left: 0; height: 100%; object-fit: cover; padding-left: 2px; padding-right: 2px" src="{{ $video->photo_cover }}">
+        <img style="border-radius: 3px; position: absolute; top: 0; left: 0; height: 100%; object-fit: cover; padding-left: 2px; padding-right: 2px" src="{{ $video->photo_cover }}">
         <div class="home-rows-videos-title" style="position:absolute; bottom:0; left:0; white-space: initial; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; color: white; width: 100%; padding: 3px 6px; background: linear-gradient(to bottom, transparent 0%, black 120%);">{{ $chinese->to(SteelyWing\Chinese\Chinese::ZH_HANT, ($video->title_zht ? $video->title_zht : ($video->title_zhs ? $video->title_zhs : ($video->title_jp ? $video->title_jp : $video->title_en)))) }}</div>
     </div>
 </a>

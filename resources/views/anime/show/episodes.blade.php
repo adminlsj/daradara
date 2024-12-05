@@ -1,4 +1,4 @@
-<div id="episodes" class="tabcontent" style="display:none">
+<div id="episodes" class="tabcontent">
     <div class="episodes-wrap flex-row">
        @foreach ($episodes as $episode)
        <div class="episodes-card">
