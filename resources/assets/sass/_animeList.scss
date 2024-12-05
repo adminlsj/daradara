@@ -90,3 +90,32 @@
     color: #727e8e;
     font-size: 13px;
 }
+
+.list-card-info {
+    position: absolute;
+    width: 100%;
+    bottom: 0px;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+}
+
+.list-card-info .title a {
+    color: white;
+    font-weight: normal;
+    text-decoration: none;
+}
+
+.list-card-info .title a:hover {
+    transition: 0.25s;
+    color: palevioletred;
+}
+
+.list-card-info .user-review {
+    justify-content: space-between;
+    color: palevioletred;
+    font-weight: normal;
+}
+
+.pen-button, .trash-button {
+    border: 0px solid transparent;
+}
