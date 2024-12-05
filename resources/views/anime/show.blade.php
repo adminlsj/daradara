@@ -9,7 +9,7 @@
         <div class="shadow"></div>
     </div>
     <div class="headings-wrapper">
-        <div class="headings" style="position: relative; z-index: 10000; padding-bottom: 12px;">
+        <div class="headings" style="position: relative;">
             <div class="cover">
                 <img src="{{ $anime->photo_cover }}" alt="">
                 <div class="button-groups">
@@ -152,9 +152,10 @@
             
             <div class="heading-content">
                 <div>
-                    <h1 style="color: rgb(92,114,138); font-size: 1.9rem; font-weight: 400; margin-top: 30px">{{ $anime->getTitle($chinese) }}</h1>
-                    <p style="color: rgb(122,133,143); font-size: 1.4rem; font-weight: 400; line-height: 1.6; max-width: 900px; padding: 15px 0; transition: .2s;">{{ $chinese->to(SteelyWing\Chinese\Chinese::ZH_HANT, $anime->description) }}</p>
+                    <h1 style="color: rgb(92,114,138); font-size: 1.9rem; font-weight: 400; margin-top: 25px">{{ $anime->getTitle($chinese) }}</h1>
+                    <p style="color: rgb(122,133,143); font-size: 1.4rem; font-weight: 400; line-height: 1.6; max-width: 900px; padding: 10px 0; transition: .2s;">{{ $chinese->to(SteelyWing\Chinese\Chinese::ZH_HANT, $anime->description) }}</p>
                 </div>
+                <br>
                 <div class="navtabs">
                     <a style="text-decoration: none;" href="{{ route('anime.show', ['anime' => $anime, 'title' => $anime->getTitle($chinese)]) }}"><button class="tablinks">簡介</button></a>
                     <a style="text-decoration: none;" href="{{ route('anime.episodes', ['anime' => $anime, 'title' => $anime->getTitle($chinese)]) }}"><button class="tablinks">集數列表</button></a>

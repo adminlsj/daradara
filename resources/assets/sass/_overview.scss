@@ -203,13 +203,16 @@
     height: 180px;
     width: 130px;
     margin-bottom: 7px;
-    border-radius: 5px;
+    border-radius: 3px;
+    object-fit: cover;
 }
 
 .recommendations-card a {
-    color: #8b9fb5;
+    color: rgb(92,114,138);
     text-decoration: none !important;
     transition: 0.2s;
+    font-size: 1.3rem;
+    font-weight: 500;
 }
 
 .recommendations-card a:hover {
@@ -243,7 +246,7 @@
 }
 
 .threads-card {
-    background-color: #151f2e;
+    background-color: white;
     flex: 48%;
     max-width: 48%;
     margin-bottom: 20px;

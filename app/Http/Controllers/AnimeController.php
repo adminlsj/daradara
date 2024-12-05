@@ -40,6 +40,8 @@ class AnimeController extends Controller
         $episodes = Episode::where('anime_id', $anime->id)->orderBy('id')->get();
         $characters = $anime->characters->load('actors');
         $staffs = $anime->staffs;
+        $year = $anime->created_at->format('Y');
+        $recommendations = Anime::whereYear('created_at', $year)->inRandomOrder()->limit(5)->get();
         $anime_save = null;
         $status = null;
         $anime_lists = [];
@@ -54,7 +56,7 @@ class AnimeController extends Controller
 
         $chinese = new Chinese();
 
-        return view('anime.show', compact('anime', 'anime_save', 'anime_lists', 'saved_lists', 'status', 'related_animes', 'characters', 'episodes', 'staffs', 'chinese'));
+        return view('anime.show', compact('anime', 'anime_save', 'anime_lists', 'saved_lists', 'status', 'related_animes', 'characters', 'episodes', 'staffs', 'recommendations', 'chinese'));
     }
 
     public function episodes(Request $request, Anime $anime)

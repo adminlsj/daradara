@@ -17,7 +17,7 @@
                             <div>
                                 <p class="source">{{ $related_anime->getRelation($related_anime->pivot->relation) }}</p>
                                 <a href="{{ route('anime.show', ['anime' => $related_anime, 'title' => $related_anime->getTitle($chinese)]) }}">
-                                    <p style="font-size: 1.3rem; color: rgb(92,114,138); font-weight: 400; margin-top: -5px; padding: 7px 10px;">{{ $related_anime->getTitle($chinese) }}</p>
+                                    <p style="font-size: 1.3rem; color: rgb(92,114,138); font-weight: 400; margin-top: -3px; padding: 7px 10px;">{{ $related_anime->getTitle($chinese) }}</p>
                                 </a>
                             </div>
                             <p class="status" style="font-size: 1.2rem !important; color: rgb(146,153,161); font-weight: 400;">{{ $related_anime->category }} · {{ $related_anime->airing_status }}</p>
@@ -63,29 +63,16 @@
             <h2>為您推薦</h2>
         </div>
         <div class="recommendations-warp">
-            <div class="recommendations-card">
-                <a href=""><img src="https://i.meee.com.tw/tXI61LZ.jpg" alt=""></a>
-                <a href="">銀魂</a>
-            </div>
-            <div class="recommendations-card">
-                <a href=""><img src="https://i.meee.com.tw/CwT5WII.webp" alt=""></a>
-                <a href="">七大罪</a>
-            </div>
-            <div class="recommendations-card">
-                <a href=""><img src="https://i.meee.com.tw/PRr5kKS.jpeg" alt=""></a>
-                <a href="">這個勇者明明超強卻過分慎重</a>
-            </div>
-            <div class="recommendations-card">
-                <a href=""><img src="https://i.meee.com.tw/Qya6Ki8.png" alt=""></a>
-                <a href="">不死不運</a>
-            </div>
-            <div class="recommendations-card">
-                <a href=""><img src="https://i.meee.com.tw/GTeSnSY.jpeg" alt=""></a>
-                <a href="">只有神知道的世界</a>
-            </div>
+            @foreach ($recommendations as $recommendation)
+                <div class="recommendations-card">
+                    <a href="{{ route('anime.show', ['anime' => $recommendation, 'title' => $recommendation->getTitle($chinese)]) }}"><img src="{{ $recommendation->photo_cover }}" alt=""></a>
+                    <a href="{{ route('anime.show', ['anime' => $recommendation, 'title' => $recommendation->getTitle($chinese)]) }}">{{ $recommendation->getTitle($chinese) }}</a>
+                </div>
+            @endforeach
         </div>
     </div>
-    <div class="threads">
+
+    <!-- <div class="threads" style="margin-top: 10px;">
         <div class="threads-heading">
             <h2>討論版</h2>
             <a href="">發表意見</a>
@@ -122,5 +109,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 </div>
