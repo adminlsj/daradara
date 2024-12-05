@@ -1,12 +1,7 @@
-<div id="episodes" class="tabcontent">
+<div id="episodes">
     <div class="episodes-wrap flex-row">
        @foreach ($episodes as $episode)
-       <div class="episodes-card">
-            <a href="">
-                <img src="https://images2.imgbox.com/ef/9a/b5E1kCpS_o.jpg" alt="">
-                <div class="title">{{ $episode->title_zhs ? $episode->title_jp.' / '.$episode->title_zhs : $episode->title_jp}}</div>
-            </a>
-        </div>
+           @include('anime.show.episode')
        @endforeach
     </div>
 </div>

@@ -59,26 +59,6 @@ class AnimeController extends Controller
         return view('anime.show', compact('anime', 'anime_save', 'anime_lists', 'saved_lists', 'status', 'related_animes', 'characters', 'episodes', 'staffs', 'recommendations', 'chinese'));
     }
 
-    public function episodes(Request $request, Anime $anime)
-    {
-        $episodes = Episode::where('anime_id', $anime->id)->orderBy('id')->get();
-        $anime_save = null;
-        $status = null;
-        $anime_lists = [];
-        $saved_lists = [];
-        if ($user = Auth::user()) {
-            $anime_lists = $user->anime_lists;
-            if ($anime_save = $user->anime_save($anime->id)) {
-                $status = $anime_save->status;
-                $saved_lists = $anime_save->savelists->pluck('id')->toArray();
-            }
-        }
-
-        $chinese = new Chinese();
-
-        return view('anime.show', compact('anime', 'anime_save', 'anime_lists', 'saved_lists', 'status', 'episodes', 'chinese'));
-    }
-
     public function search(Request $request)
     {
         $request->validate([

@@ -1,4 +1,4 @@
-<div id="staffs" class="tabcontent" style="display:none">
+<div id="staffs">
     <div class="staffs-wrap flex-row">
         @foreach ($staffs as $staff)
             @include('anime.show.staff')

@@ -58,7 +58,18 @@
         <br>
     @endif
 
-    <div class="recommendations" style="margin-top: 5px;">
+    @if ($episodes)
+        <div style="margin-top: 5px;">
+            <h2>集數列表</h2>
+            <div class="episodes-wrap flex-row">
+               @foreach ($episodes->take(3) as $episode)
+                   @include('anime.show.episode')
+               @endforeach
+            </div>
+        </div>
+    @endif
+
+    <div class="recommendations">
         <div class="recommendations-heading">
             <h2>為您推薦</h2>
         </div>

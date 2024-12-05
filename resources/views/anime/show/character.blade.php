@@ -17,6 +17,6 @@
     @if ($character->actors->first())
         <a href="{{ route('staff.show', ['staff' => $character->actors->first()->id, 'title' => $character->actors->first()->name_en]) }}"><img style="border-top-right-radius: 3px; border-bottom-right-radius: 3px;" src="{{ $character->actors->first()->photo_cover }}" alt="{{ $character->actors->first()->name_en }}"></a>
     @else
-        <a style="border-top-right-radius: 3px; border-bottom-right-radius: 3px;" href=""><img src="https://cdn.myanimelist.net/images/questionmark_23.gif" alt=""></a>
+        <a href="#"><img style="border-top-right-radius: 3px; border-bottom-right-radius: 3px;" src="https://images2.imgbox.com/8b/b1/PSDIPPwq_o.gif" alt=""></a>
     @endif
 </div>

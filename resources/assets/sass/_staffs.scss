@@ -1,6 +1,6 @@
 #staffs {
     margin-left: 50px;
-    flex: 80%;
+    flex: calc(100% - 265px);
     display: flex;
     flex-direction: column;
 }
