@@ -11,7 +11,7 @@
     <div class="headings-wrapper">
         <div class="headings" style="position: relative;">
             <div class="cover">
-                <img src="{{ $anime->photo_cover }}" alt="">
+                <img style="object-fit: cover;" src="{{ $anime->photo_cover }}" alt="">
                 <div class="button-groups">
                     <div class="list btn-group">
                         <div class="btn-group" role="group">
