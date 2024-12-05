@@ -93,18 +93,28 @@
 }
 
 .sidebar .tags h3 {
-    color: #727e8e;
-    font-size: 16px;
+    margin-top: 22px;
+    margin-bottom: 12px;
+    color: rgb(92,114,138);
+    font-size: 1.4rem;
+    font-weight: 500;
 }
 
 .sidebar .tags .tag {
-    background-color: #151f2e;
+    background-color: white;
     padding: 8px 10px;
-    color: #727e8e;
+    font-weight: 400;
     display: flex;
     justify-content: space-between;
-    font-size: 13px;
+    font-size: 1.2rem;
     margin-bottom: 10px;
+    color: rgb(146,153,161);
+    border-radius: 3px;
+}
+
+.sidebar .tags .tag a {
+    font-size: 1.3rem;
+    color: rgb(92,114,138);
 }
 
 @media (max-width: 768px) {

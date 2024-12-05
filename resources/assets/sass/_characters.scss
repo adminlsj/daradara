@@ -37,7 +37,8 @@
     flex: 48%;
     max-width: 48%;
     margin-bottom: 20px;
-    background-color: #151f2e;
+    background-color: white;
+    border-radius: 3px;
 }
 
 @media (max-width: 1040px) {
@@ -82,9 +83,20 @@
 .characters-wrap .characters-card .characters-name a {
     color: #8b9fb5;
     text-decoration: none;
-    padding: 10px 10px 0;
-    font-size: 12px;
+    padding: 7px 10px 0;
     transition: 0.2s;
+    font-weight: 400 !important;
+}
+
+.characters-wrap .characters-card .characters-name-upper a {
+    color: rgb(92,114,138);
+    font-size: 1.2rem;
+}
+
+.characters-wrap .characters-card .characters-name-lower div {
+    color: rgb(146,153,161);
+    font-size: 1.1rem;
+    font-weight: 400 !important;
 }
 
 .characters-wrap .characters-card .characters-name .actors {
@@ -92,7 +104,7 @@
 }
 
 .characters-wrap .characters-card .characters-name div {
-    padding: 0 10px 10px;
+    padding: 0 10px 7px;
 }
 
 .characters-wrap .characters-card .characters-name a:hover {
