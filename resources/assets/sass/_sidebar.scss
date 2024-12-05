@@ -1,16 +1,20 @@
 .sidebar {
     display: flex;
     flex-direction: column;
-    width: 20%;
+    width: 215px;
 }
 
 .sidebar .ranking {
-    color: #727e8e;
+    color: rgb(92,114,138);
     margin-bottom: 15px;
     display: border;
-    background-color: #151f2e;
-    padding: 6px 10px;
-    font-size: 13px;
+    background-color: white;
+    padding: 10px 10px;
+    font-size: 1.2rem;
+    font-weight: 500;
+    width: 100%;
+    border-radius: 3px;
+    text-align: center;
 }
 
 .sidebar .ranking a{
@@ -34,9 +38,10 @@
 
 .sidebar .data {
     display: border;
-    background-color: #151f2e;
+    background-color: white;
     padding: 15px;
     color: #727e8e;
+    border-radius: 3px;
 }
 
 @media (max-width: 768px) {
@@ -50,7 +55,7 @@
 }
 
 .sidebar .data .data-set {
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 
 @media (max-width: 768px) {
@@ -74,13 +79,17 @@
 }
 
 .sidebar .data .type {
-    font-size: 13px;
-    color: #acacac;
+    font-size: 1.3rem;
+    color: #727e8e;
+    font-weight: 500;
+    padding-bottom: 2px;
 }
 
-.sidebar .data .format {
-    font-size: 13px;
-    color: #727e8e;
+.sidebar .data .format, .sidebar .data .format a {
+    color: rgb(146,153,161);
+    font-size: 1.2rem;
+    line-height: 1.4;
+    font-weight: 400;
 }
 
 .sidebar .tags h3 {

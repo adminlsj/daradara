@@ -1,4 +1,3 @@
-
 // Fonts
 @import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
 @import url("https://fonts.googleapis.com/css?family=Noto+Sans+TC");
@@ -11,7 +10,6 @@
 @import "home";
 
 //show page
-@import "banner";
 @import "headings";
 @import "animeShow";
 @import "sidebar";
@@ -31,13 +29,17 @@ $bootstrap-sass-asset-helper: false !default;
 $icon-font-path: if($bootstrap-sass-asset-helper, "bootstrap/", "../../fonts/bootstrap/") !default;
 @import "~bootstrap-sass/assets/stylesheets/bootstrap";
 
+:root  {
+  --flex-center-width: 1046px;
+}
+
 html, body {
-    max-width: 100%;
+  max-width: 100%;
 }
 
 body {
   font-family:Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;
-  background-color: #141414;
+  background-color: rgb(237,241,245) !important;
 }
 
 table, th, td {
@@ -50,6 +52,20 @@ th {
 
 th, td {
   padding: 10px;
+}
+
+.flex-center-wrapper {
+  display: flex; 
+  flex-direction: row; 
+  justify-content: center; 
+  width: 100%; 
+  height: 100%;
+}
+
+.flex-center-content {
+  width: 1046px;
+  display: flex;
+  flex-direction: row;
 }
 
 .nav {
@@ -66,11 +82,6 @@ th, td {
   font-weight: 300; 
   color: white; 
   font-size: 16px;
-}
-
-.navbar {
-  background-color: rgba(35,38,67,.5);
-  border-radius: 0px;
 }
 
 .nav-item {
