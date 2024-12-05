@@ -41,7 +41,7 @@ Route::delete('/user/{user}/savelist/{savelist}', 'SavelistController@destroy')-
 // Others
 Route::get('/character/{character}/{title?}', 'CharacterController@show')->name('character.show');
 // Route::get('/actor/{actor}/{title?}', 'ActorController@show')->name('actor.show');
-Route::get('/staff/{staff}/{title?}', 'StaffController@show')->name('staff.show');
+// Route::get('/staff/{staff}/{title?}', 'StaffController@show')->name('staff.show');
 Route::get('/company/{company}/{title?}', 'CompanyController@show')->name('company.show');
 
 Route::group(['middleware' => 'admin'], function () {

@@ -23,6 +23,7 @@ class CompanyController extends Controller
 {
     public function show(Request $request, Company $company)
     {
-        return $company;
+        $animes = $company->animes;
+        return view('company.show', compact('animes', 'company'));
     }
 }
