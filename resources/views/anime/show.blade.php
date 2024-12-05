@@ -157,11 +157,11 @@
                 </div>
                 <br>
                 <div class="navtabs">
-                    <a style="text-decoration: none;" href="{{ route('anime.show', ['anime' => $anime, 'title' => $anime->getTitle($chinese)]) }}"><button class="tablinks">簡介</button></a>
-                    <a style="text-decoration: none;" href="{{ route('anime.episodes', ['anime' => $anime, 'title' => $anime->getTitle($chinese)]) }}"><button class="tablinks">集數列表</button></a>
-                    <a style="text-decoration: none;" href="{{ route('anime.characters', ['anime' => $anime, 'title' => $anime->getTitle($chinese)]) }}"><button class="tablinks">登場人物</button></a>
-                    <a style="text-decoration: none;" href="{{ route('anime.staff', ['anime' => $anime, 'title' => $anime->getTitle($chinese)]) }}"><button class="tablinks">製作人員</button></a>
-                    <a style="text-decoration: none;" href="{{ route('anime.comments', ['anime' => $anime, 'title' => $anime->getTitle($chinese)]) }}"><button class="tablinks">評論</button></a>
+                    <a style="text-decoration: none;" href="{{ route('anime.show', ['anime' => $anime, 'title' => $anime->getTitle($chinese)]) }}"><button class="tablinks {{ !Request::is('anime/*/*/*') ? 'active' : '' }}">簡介</button></a>
+                    <a style="text-decoration: none;" href="{{ route('anime.episodes', ['anime' => $anime, 'title' => $anime->getTitle($chinese)]) }}"><button class="tablinks {{ Request::is('anime/*/*/episodes') ? 'active' : '' }}">集數列表</button></a>
+                    <a style="text-decoration: none;" href="{{ route('anime.characters', ['anime' => $anime, 'title' => $anime->getTitle($chinese)]) }}"><button class="tablinks {{ Request::is('anime/*/*/characters') ? 'active' : '' }}">登場人物</button></a>
+                    <a style="text-decoration: none;" href="{{ route('anime.staff', ['anime' => $anime, 'title' => $anime->getTitle($chinese)]) }}"><button class="tablinks {{ Request::is('anime/*/*/staff') ? 'active' : '' }}">製作人員</button></a>
+                    <a style="text-decoration: none;" href="{{ route('anime.comments', ['anime' => $anime, 'title' => $anime->getTitle($chinese)]) }}"><button class="tablinks {{ Request::is('anime/*/*/comments') ? 'active' : '' }}">評論</button></a>
                 </div>
             </div>
         </div>
@@ -218,11 +218,18 @@
     <div class="flex-center-wrapper" style="margin-top: 30px;">
         <div class="flex-center-content">
             @include('anime.show.sidebar')
-            @include('anime.show.overview')
-            @include('anime.show.episodes')
-            @include('anime.show.characters')
-            @include('anime.show.staffs')
-            @include('anime.show.comments')
+
+            @if (Request::is('anime/*/*/episodes'))
+                @include('anime.show.episodes')
+            @elseif (Request::is('anime/*/*/characters'))
+                @include('anime.show.characters')
+            @elseif (Request::is('anime/*/*/staff'))
+                @include('anime.show.staffs')
+            @elseif (Request::is('anime/*/*/comments'))
+                @include('anime.show.comments')
+            @elseif (Request::is('anime/*/*'))
+                @include('anime.show.overview')
+            @endif
         </div>
     </div>
 @endsection

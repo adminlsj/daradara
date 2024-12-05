@@ -1,6 +1,6 @@
 #episodes {
     margin-left: 50px;
-    flex: 80%;
+    flex: calc(100% - 265px);
 }
 
 @media (max-width: 768px) {
@@ -15,10 +15,11 @@
 }
 
 .episodes-wrap .episodes-card {
-    flex: 31%;
-    max-width: 31%;
-    margin-bottom: 20px;
+    flex: 30.5%;
+    max-width: 30.5%;
     position: relative;
+    border-radius: 3px;
+    margin-bottom: 30px;
 }
 
 @media (max-width: 1040px) {
@@ -44,6 +45,7 @@
 
 .episodes-wrap .episodes-card img {
     width: 100%;
+    border-radius: 3px;
 }
 
 @media (max-width: 1040px) {
@@ -67,6 +69,9 @@
     background-color: rgba(0,0,0,0.4);
     padding: 7px 13px;
     white-space: nowrap;
-    font-size: 12px;
+    font-size: 1.2rem;
+    font-weight: 400;
     overflow-x: hidden;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
 }
