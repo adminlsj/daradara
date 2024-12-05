@@ -14,7 +14,7 @@
                     <div class="flex-row {{ Request::is("user/*/*/animelist/{$anime_statuslist->id}/*") ? 'active' : '' }}"
                         style="justify-content: space-between;">
                         <div class="list">{{ $anime_statuslist->title }}</div>
-                        <div>{{ $anime_statuslist->anime_saves->count() }}</div>
+                        <div class="count">{{ $anime_statuslist->anime_saves->count() }}</div>
                     </div>
                 </a>
             @endif
@@ -24,7 +24,7 @@
                 <div class="flex-row {{ Request::is("user/*/*/animelist/{$anime_list->id}/*") ? 'active' : '' }}"
                     style="justify-content: space-between;">
                     <div class="list">{{ $anime_list->title }}</div>
-                    <div>{{ $anime_list->anime_saves->count() }}</div>
+                    <div class="count">{{ $anime_list->anime_saves->count() }}</div>
                 </div>
             </a>
         @endforeach

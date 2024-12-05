@@ -15,23 +15,31 @@
             <div class="title-link flex-row">
                 <h3>{{ $savelist->title }}</h3>
                 @if ($savelist->is_status == FALSE)
-                    <button class="fas fa-pen no-select" data-toggle="modal" data-target="#updateSavelist"></button>
-                    @if (Auth::check() && Auth::user()->id == $user->id)
-                        <form id="destroySavelistForm" action="{{ route('user.savelist.destroy', ['user' => $user, 'savelist' => $savelist->id]) }}" method="POST">
-                            {{ csrf_field() }}
-                            {{ method_field('DELETE') }}
+                    <div class="flex-row">
+                        <button class="fas fa-pen no-select pen-button" data-toggle="modal" data-target="#updateSavelist"></button>
+                        @if (Auth::check() && Auth::user()->id == $user->id)
+                            <form id="destroySavelistForm" action="{{ route('user.savelist.destroy', ['user' => $user, 'savelist' => $savelist->id]) }}" method="POST">
+                                {{ csrf_field() }}
+                                {{ method_field('DELETE') }}
 
-                            <button class="" type="submit"><i class="fas fa-trash"></i></button>
-                        </form>
-                    @endif
+                                <button class="trash-button" type="submit"><i class="fas fa-trash"></i></button>
+                            </form>
+                        @endif
+                    </div>
                 @endif
             </div>
             <div class="list-entries">
                 <div class="list-section flex-row">
                     @foreach ($anime_saves as $anime_save)
                         <div class="list-card">
-                            <a href="{{ route('anime.show', ['anime' => $anime_save->anime, 'title' => $anime_save->anime->title]) }}">
-                            <img src="{{ $anime_save->anime->photo_cover }}" alt=""></a>
+                            <a href="{{ route('anime.show', ['anime' => $anime_save->anime, 'title' => $anime_save->anime->getTitle($chinese)]) }}"><img src="{{ $anime_save->anime->photo_cover }}" alt=""></a>
+                            <div class="list-card-info flex-column">
+                                <div class="title"><a href="{{ route('anime.show', ['anime' => $anime_save->anime, 'title' => $anime_save->anime->getTitle($chinese)]) }}">{{ $anime_save->anime->getTitle($chinese) }}</a></div>
+                                <div class="user-review flex-row">
+                                    <div class="progress" style="margin:0px;background-color:transparent;">{{ $anime_save->episode_progress }}</div>
+                                    <div class="score">10</div>
+                                </div>
+                            </div>
                         </div>
                     @endforeach
                 </div>

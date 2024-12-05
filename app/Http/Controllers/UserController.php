@@ -19,6 +19,7 @@ use Carbon\Carbon;
 use App\Helper;
 use Doctrine\DBAL\Schema\View;
 use Illuminate\Support\Facades\Storage;
+use SteelyWing\Chinese\Chinese;
 
 class UserController extends Controller
 {
@@ -32,7 +33,8 @@ class UserController extends Controller
     {
         $anime_lists = $user->anime_lists->load('anime_saves.anime');
         $anime_statuslists = $user->anime_statuslists->load('anime_saves.anime');
-        return view('user.animeList.index', compact('user', 'anime_lists', 'anime_statuslists'));
+        $chinese = new Chinese();
+        return view('user.animeList.index', compact('user', 'anime_lists', 'anime_statuslists', 'chinese'));
     }
 
     public function animelistShow(Request $request, User $user, String $name, Savelist $savelist, String $title)
@@ -40,7 +42,8 @@ class UserController extends Controller
         $anime_lists = $user->anime_lists->load('anime_saves.anime');
         $anime_statuslists = $user->anime_statuslists->load('anime_saves.anime');
         $anime_saves = $savelist->anime_saves->load('anime');
-        return view('user.animeList.show', compact('user', 'anime_lists', 'anime_statuslists', 'savelist','anime_saves'));
+        $chinese = new Chinese();
+        return view('user.animeList.show', compact('user', 'anime_lists', 'anime_statuslists', 'savelist','anime_saves', 'chinese'));
     }
 
     public function likes(Request $request, User $user)
