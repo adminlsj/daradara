@@ -1,11 +1,14 @@
 #overview {
     margin-left: 30px;
+    width: calc(100% - 245px);
 }
 
 #overview h2 {
-    color: #727e8e;
-    font-family: Roboto;
-    font-size: 18px;
+    color: rgb(92,114,138);
+    font-size: 1.4rem;
+    font-weight: 500;
+    margin-bottom: 12px;
+    margin-top: 2px;
 }
 
 @media (max-width: 768px) {
@@ -49,7 +52,7 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
-    gap: 30px 15px;
+    gap: 20px 15px;
 }
 
 @media (max-width: 768px) {
@@ -67,7 +70,8 @@
     flex-direction: row;
     flex: 48%;
     max-width: 48%;
-    background-color: #151f2e;
+    background-color: white;
+    border-radius: 3px;
 }
 
 @media (max-width: 1040px) {
@@ -87,17 +91,21 @@
 .media-preview-card img {
     height: 140px;
     width: 100px;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
 }
 
 .media-preview-card .relations-content {
     display: flex;
     flex-direction: column;
-    padding: 0 10px;
+    padding: 0 5px;
     justify-content: space-between;
 }
 
 .media-preview-card .relations-content p {
-    color: #2f7eac;
+    color: rgb(61,180,242);
+    font-size: 1.2rem;
+    font-weight: 500;
     margin: 0;
 }
 
@@ -109,7 +117,7 @@
     padding: 0 10px 10px;
 }
 
-.media-preview-card .relations-content a{
+.media-preview-card .relations-content a {
     text-decoration: none;
 }
 

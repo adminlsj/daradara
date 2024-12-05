@@ -151,8 +151,10 @@
             </div>
             
             <div class="heading-content">
-                <h1 style="color: rgb(92,114,138); font-size: 1.9rem; font-weight: 400; margin-top: 30px">{{ $anime->getTitle($chinese) }}</h1>
-                <p style="color: rgb(122,133,143); font-size: 1.4rem; font-weight: 400; margin-top: -10px; line-height: 1.6; max-width: 900px; padding: 15px 0; transition: .2s;">{{ $anime->description }}</p>
+                <div>
+                    <h1 style="color: rgb(92,114,138); font-size: 1.9rem; font-weight: 400; margin-top: 30px">{{ $anime->getTitle($chinese) }}</h1>
+                    <p style="color: rgb(122,133,143); font-size: 1.4rem; font-weight: 400; line-height: 1.6; max-width: 900px; padding: 15px 0; transition: .2s;">{{ $chinese->to(SteelyWing\Chinese\Chinese::ZH_HANT, $anime->description) }}</p>
+                </div>
                 <div class="navtabs">
                     <a style="text-decoration: none;" href="{{ route('anime.show', ['anime' => $anime, 'title' => $anime->getTitle($chinese)]) }}"><button class="tablinks">簡介</button></a>
                     <a style="text-decoration: none;" href="{{ route('anime.episodes', ['anime' => $anime, 'title' => $anime->getTitle($chinese)]) }}"><button class="tablinks">集數列表</button></a>
