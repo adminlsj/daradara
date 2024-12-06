@@ -40,22 +40,18 @@
 
                             <div id="createSavelist" class="modal" role="dialog">
                                 <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <span class="material-icons pull-left no-select modal-close-btn"
-                                                data-dismiss="modal">close</span>
-                                        </div>
-                                        <div class="modal-body" style="padding:0px; text-align: left">
-                                            <div class="photo-banner">
-                                                <img src="https://i.meee.com.tw/fl3xmwq.jpg" alt=""
-                                                    style="width: 100%; height: 180px;">
+                                    <div class="modal-content" style="border-radius: 3px 3px 0 0 !important;">
+                                        <div class="modal-body" style="padding: 0px; text-align: left; background-color: white; border-radius: 3px 3px 0 0 !important; padding-bottom: 50px;">
+                                            <div class="photo-banner" style="position: relative;">
+                                                <img src="https://s4.anilist.co/file/anilistcdn/media/anime/banner/16498-8jpFCOcDmneX.jpg" alt="" style="width: 100%; height: 180px;">
+                                                <span style="font-size: 18px; position: absolute; right: 18px; top: 18px; color: #909399; font-weight: 400; cursor: pointer;" class="material-icons no-select modal-close-btn" data-dismiss="modal">close</span>
                                             </div>
                                             <div class="photo-cover flex-row">
                                                 <img src="{{ $anime->photo_cover }}" alt="">
-                                                <h3> {{ $anime->title_ro }} </h3>
+                                                <h3>{{ $anime->getTitle($chinese) }}</h3>
                                             </div>
-                                            <div class="add-to-list-content">
-                                                <div class="filters">
+                                            <div class="add-to-list-content" style="color: rgba(92,114,138);">
+                                                <div class="filters" style="margin-top: 10px">
                                                     <div class="filter watching-status">
                                                         <h3>觀看狀態</h3>
                                                         <div class="bar form-control">
@@ -77,7 +73,7 @@
                                                     </div>
 
                                                     <div class="filter episodes-progress">
-                                                        <h3>觀看進度</h3>
+                                                        <h3>觀看集數</h3>
                                                         <div class="bar">
                                                             <input id="episode_progress" name="episode_progress" type="number"
                                                                 value="{{ $anime_save ? $anime_save->episode_progress : null }}"
@@ -112,34 +108,41 @@
                                                     <div class="filter notes">
                                                         <h3>備註</h3>
                                                         <div class="bar">
-                                                            <textarea id="notes" name="notes"
-                                                                name="">{{ $anime_save ? $anime_save->notes : null }}</textarea>
+                                                            <textarea style="line-height: 30px;" id="notes" name="notes">{{ $anime_save ? $anime_save->notes : null }}</textarea>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 
-                                                <div class="form-group">
-                                                    <h3>列表</h3>
-                                                    <div>
-                                                        <input type="checkbox" name="is_private" value="1" id="is_private">
-                                                        <label class="no-select" for="is_private">私人清單</label>
-                                                    </div>
-                                                    <hr>
-                                                    @foreach ($anime_lists as $anime_list)
-                                                        <div>
-                                                            <input type="checkbox" name="animelists[]" value="{{ $anime_list->id }}" id="{{ $anime_list->id }}" {{ in_array($anime_list->id, $saved_lists) ?  'checked' : ''}}>
-                                                            <label class="no-select" for="{{ $anime_list->id }}">{{ $anime_list->title }}</label>
+                                                <div class="form-group" style="width: 20%">
+                                                    <h3 style="font-size: 1.3rem; color: rgba(122,133,143, .9); font-weight: 400; margin-top: 30px;">列表</h3>
+                                        
+                                                        @foreach ($anime_lists as $anime_list)
+                                                            <div style="margin-bottom: 1px;">
+                                                                <div style="float: left; width: 24px; display: inline-block;">
+                                                                    <input style="filter: brightness(1.5);" type="checkbox" name="animelists[]" value="{{ $anime_list->id }}" id="{{ $anime_list->id }}" {{ in_array($anime_list->id, $saved_lists) ?  'checked' : ''}}>
+                                                                </div>
+                                                                <div style="display: inline-block; width: calc(100% - 24px);">
+                                                                    <label style="font-size: 1.2rem; font-weight: 400; margin-top: -1px" class="no-select" for="{{ $anime_list->id }}">{{ $anime_list->title }}</label>
+                                                                </div>
+                                                            </div>
+                                                        @endforeach
+                                                    <hr style="margin-top: 9px; margin-bottom: 10px;">
+                                                    <div style="margin-bottom: 1px;">
+                                                        <div style="float: left; width: 24px; display: inline-block; padding-left: 2px; font-weight: 400;">
+                                                            +
                                                         </div>
-                                                    @endforeach
+                                                        <div style="display: inline-block; width: calc(100% - 24px);">
+                                                            <label style="font-size: 1.2rem; font-weight: 400; margin-top: -1px; cursor: pointer;" class="no-select" for="is_private">新增播放清單</label>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
 
                                         </div>
-                                        <hr style="border-color: #333333; margin: 0;">
-                                        <div class="modal-footer">
-                                            <div class="toggle-playlist-modal" data-dismiss="modal">返回</div>
-                                            <button id="video-create-playlist-btn" method="POST"
-                                                class="pull-right btn btn-primary">建立播放清單</button>
+                                        <hr style="margin: 0;">
+                                        <div class="modal-footer" style="background-color: #EDF1F5">
+                                            <div style="color: rgb(92, 114, 138); margin-left: 30px;" class="toggle-playlist-modal" data-dismiss="modal">返回</div>
+                                            <button id="video-create-playlist-btn" method="POST" style="background-color: #3DB4F2 !important; font-weight: 400; margin-right: 30px;" class="pull-right btn btn-primary">儲存</button>
                                         </div>
                                     </div>
                                 </div>

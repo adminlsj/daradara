@@ -23,14 +23,15 @@
 }
 
 .filter h3 {
-    font-size: 15px;
-    color: #8b9fb5;
+    font-size: 1.3rem;
+    color: rgba(122,133,143,0.9) !important;
+    font-weight: 400;
 }
 
 .filter .bar {
     height: 40px;
     width: 170px;
-    background-color: #151f2e;
+    background-color: #EDF1F5;
     border-radius: 5px;
     position: relative;
     z-index: 5;
@@ -45,8 +46,9 @@
     background-color: transparent;
     border: none;
     outline-width: 0;
-    color: aliceblue;
+    color: rga(92,114,138);
     padding: 5px 12px;
+    font-weight: 400;
 }
 
 .filter .bar .scroll-wrap {
