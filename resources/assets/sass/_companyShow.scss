@@ -64,6 +64,19 @@
     gap: 20px;
 }
 
+.company-animes .company-button-groups button {
+    border: none;
+    background-color: transparent;
+    font-weight: normal;
+    color: #727e8e;
+    opacity: 0.6;
+    transition: 0.25s;
+}
+
+.company-animes .company-button-groups button:hover {
+    opacity: 1;
+}
+
 .company-animes .related-animes {
     display: grid;
     grid-template-columns: repeat(auto-fill, 185px);
@@ -81,6 +94,7 @@
 
 .company-animes .related-animes .media-card a {
     font-weight: normal;
+    text-decoration: none;
 }
 
 .company-animes .related-animes .media-card a:first-child {
