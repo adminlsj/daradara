@@ -130,12 +130,12 @@
 }
 
 .modal-body .photo-banner img {
-    opacity: 40%;
     width: 100%;
-    border-radius: 5px 5px 0 0;
+    border-radius: 3px 3px 0 0;
     height: 180px;
     object-fit: cover;
     z-index: 1;
+    filter: brightness(30%);
 }
 
 .modal-body .photo-cover {
@@ -147,8 +147,9 @@
 
 .modal-body .photo-cover h3 {
     margin-left: 20px;
-    font-size: 17px;
-    font-weight: 450;
+    margin-bottom: -5px;
+    font-size: 1.6rem;
+    font-weight: 400;
     z-index: 10;
 }
 
@@ -184,7 +185,7 @@
 }
 
 .add-to-list-content .filters {
-    width: 85%;
+    width: 80%;
     flex-wrap: wrap;
     padding-right: 30px;
 }
@@ -213,12 +214,6 @@
     .add-to-list-content .filters {
         width: 100%;
     }
-}
-
-.add-to-list-content .notes {
-    flex-basis: 100% !important;
-    margin-bottom: 30px;
-    padding-right: 10px;
 }
 
 @media (max-width: 1040px) {

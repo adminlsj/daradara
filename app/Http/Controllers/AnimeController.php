@@ -157,7 +157,6 @@ class AnimeController extends Controller
             $anime_save->total_rewatches = $request->total_rewatches;
             $anime_save->notes = $request->notes;
             $anime_save->is_hidden_from_status_lists = $request->is_hidden_from_status_lists ? true : false;
-            $anime_save->save();
 
             $saved_animelists = $anime_save->savelists;
             if ($anime_save->status == $request->status) {
@@ -172,6 +171,7 @@ class AnimeController extends Controller
                 ]);
                 $anime_save->status = $request->status;
             }
+            $anime_save->save();
             $selected_animelists = $request->animelists ? $request->animelists : [];
 
             // Delete only un-selected animelists
