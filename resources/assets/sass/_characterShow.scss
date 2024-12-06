@@ -27,6 +27,21 @@
     background-color: white;
 }
 
+.character-name-wrap {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.character-name-wrap button {
+    background-color: #ed294b;
+    border: none;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+}
+
 @media (max-width: 1040px) {
     .character-headings {
         padding: 30px 30px 12px;
@@ -131,6 +146,19 @@
     gap: 20px;
 }
 
+.character-animes .character-button-groups button {
+    border: none;
+    background-color: transparent;
+    font-weight: normal;
+    color: #727e8e;
+    opacity: 0.6;
+    transition: 0.25s;
+}
+
+.character-animes .character-button-groups button:hover {
+    opacity: 1;
+}
+
 .character-animes .related-animes {
     display: grid;
     grid-template-columns: repeat(auto-fill, 185px);
@@ -148,6 +176,7 @@
 
 .character-animes .related-animes .media-card a {
     font-weight: normal;
+    text-decoration: none;
 }
 
 .character-animes .related-animes .media-card a:first-child {

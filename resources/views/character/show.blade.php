@@ -13,7 +13,10 @@
 				<img src="{{ $character->photo_cover }}" alt="{{ $character->name_zht }}">
 			</div>
 			<div class="character-heading-content flex-column">
-				<h3> {{ $character->name_zht }} </h3>
+				<div class="character-name-wrap">
+					<h3> {{ $character->name_jp }} </h3>
+					<button class="favorite">♥ 693</button>
+				</div>
 				<p> {{ $character->nickname }} </p>
 				<div class="character-info">
 					<p> 生日：{{ $character->birthday }} </p>
@@ -47,8 +50,7 @@
 						<a href="{{ route('anime.show', ['anime' => $anime->id, 'title' => $anime->title_ro]) }}">
 							<img src="{{ $anime->photo_cover }}" alt="">
 						</a>
-						<a href="{{ route('anime.show', ['anime' => $anime->id, 'title' => $anime->title_ro]) }}">{{ $anime->title_ro }}
-						</a>
+						<a href="{{ route('anime.show', ['anime' => $anime->id, 'title' => $anime->title_ro]) }}">{{ $anime->title_ro }}</a>
 					</div>
 				@endforeach
 			</div>
