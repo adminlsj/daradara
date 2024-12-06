@@ -41,7 +41,7 @@ class ScrapeMalSingleField extends Command
     public function handle()
     {
         // Scrape is_adult from MAL
-        $animes = Anime::where('id', '>', 5907)->where('sources', 'ilike', '%"myanimelist"%')->where('genres', '[]')->where('rating_mal_count', null)->orderBy('id', 'asc')->limit(3)->get();
+        $animes = Anime::where('id', '>', 5936)->where('sources', 'ilike', '%"myanimelist"%')->where('genres', '[]')->where('rating_mal_count', null)->orderBy('id', 'asc')->limit(3)->get();
         foreach ($animes as $anime) {
             $curl_connection = curl_init($anime->sources['myanimelist']);
             curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
