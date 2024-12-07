@@ -186,7 +186,6 @@
 
 .add-to-list-content .filters {
     width: 80%;
-    flex-wrap: wrap;
     padding-right: 30px;
 }
 
@@ -196,17 +195,17 @@
     }
 }
 
-.add-to-list-content .filters .filter {
-    flex-basis: 30%;
+.add-to-list-content .filter {
+    margin-bottom: 30px;
 }
 
-.add-to-list-content .filters .filter .bar {
+.add-to-list-content .filter .bar {
     width: 100%;
 }
 
 @media (max-width: 1040px) {
     .add-to-list-content .filters .filter {
-        flex-basis: 100%;
+        width: 100%;
     }
 }
 
