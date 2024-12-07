@@ -6,7 +6,7 @@
 
     <div id="createSavelist" class="modal" role="dialog">
         <div class="modal-dialog">
-            <div class="modal-content" style="border-radius: 3px 3px 0 0 !important;">
+            <div class="modal-content" style="border-radius: 3px 3px 0 0 !important; border: none !important;">
                 <div class="modal-body" style="padding: 0px; text-align: left; background-color: white; border-radius: 3px 3px 0 0 !important; padding-bottom: 50px;">
                     <div class="photo-banner" style="position: relative;">
                         <img src="https://s4.anilist.co/file/anilistcdn/media/anime/banner/16498-8jpFCOcDmneX.jpg" alt="" style="width: 100%; height: 180px;">
@@ -16,9 +16,9 @@
                         <img src="{{ $anime->photo_cover }}" alt="">
                         <h3>{{ $anime->getTitle($chinese) }}</h3>
                     </div>
-                    <div class="add-to-list-content" style="color: rgba(92,114,138); min-height: 300px;">
-                        <div class="filters" style="margin-top: 10px">
-                            <div class="filter watching-status">
+                    <div class="add-to-list-content" style="color: rgba(92,114,138); min-height: 285px;">
+                        <div class="row" style="margin-top: 10px; padding-right: 45px;">
+                            <div class="filter watching-status col-md-4">
                                 <h3>觀看狀態</h3>
                                 <div class="custom-select" style="width: 100%;">
                                     <select id="status" name="status">
@@ -116,7 +116,7 @@
                                 </script>
                             </div>
 
-                            <div class="filter episodes-progress">
+                            <div class="filter episodes-progress col-md-4">
                                 <h3>觀看集數</h3>
                                 <div class="bar">
                                     <input id="episode_progress" name="episode_progress" type="number"
@@ -125,7 +125,7 @@
                                 </div>
                             </div>
 
-                            <div class="filter total-rewatches">
+                            <div class="filter total-rewatches col-md-4">
                                 <h3>觀看次數</h3>
                                 <div class="bar">
                                     <input id="total_rewatches" name="total_rewatches" type="number"
@@ -133,7 +133,7 @@
                                 </div>
                             </div>
 
-                            <div class="filter watch-date">
+                            <div class="filter watch-date col-md-4">
                                 <h3>觀看日期</h3>
                                 <div class="bar">
                                     <input id="start_date" name="start_date" type="date"
@@ -141,7 +141,7 @@
                                 </div>
                             </div>
 
-                            <div class="filter watch-enddate">
+                            <div class="filter watch-enddate col-md-4">
                                 <h3>完成日期</h3>
                                 <div class="bar">
                                     <input id="finish_date" name="finish_date" type="date"
@@ -149,7 +149,7 @@
                                 </div>
                             </div>
 
-                            <div class="filter notes">
+                            <div class="filter notes col-md-4">
                                 <h3>備註</h3>
                                 <div class="bar">
                                     <textarea style="line-height: 30px;" id="notes" name="notes">{{ $anime_save ? $anime_save->notes : null }}</textarea>
@@ -184,9 +184,9 @@
 
                 </div>
                 <hr style="margin: 0;">
-                <div class="modal-footer" style="background-color: #EDF1F5">
-                    <div style="color: rgb(92, 114, 138); margin-left: 30px;" class="toggle-playlist-modal" data-dismiss="modal">返回</div>
-                    <button id="video-create-playlist-btn" method="POST" style="background-color: #3DB4F2 !important; font-weight: 400; margin-right: 30px;" class="pull-right btn btn-primary">儲存</button>
+                <div class="modal-footer" style="background-color: #EDF1F5; border-radius: 0 0 3px 3px !important;">
+                    <div style="color: rgb(92, 114, 138); margin-left: 35px;" class="toggle-playlist-modal" data-dismiss="modal">返回</div>
+                    <button id="video-create-playlist-btn" method="POST" style="background-color: #3DB4F2 !important; font-weight: 400; margin-right: 35px;" class="pull-right btn btn-primary">儲存</button>
                 </div>
             </div>
         </div>
