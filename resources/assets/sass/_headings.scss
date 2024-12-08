@@ -83,10 +83,8 @@
 //cover buttons
 
 .button-groups {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin: 20px 0;
+    margin-top: 20px;
+    margin-bottom: 20px;
     width: 215px;
 }
 
@@ -100,15 +98,14 @@
 .add {
     background-color: #3eb4f3;
     padding: 7px 30px !important;
-    font-family: Roboto;
 }
 
 @media (max-width: 768px) {
-    .button-groups {
+    /* .button-groups {
         justify-content: flex-start;
         gap: 20px;
         width: 100%;
-    }
+    } */
 
     .btn-group, .add {
         width: 100%;
