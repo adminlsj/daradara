@@ -12,31 +12,25 @@
         <div class="headings" style="position: relative;">
             <div class="cover">
                 <img style="object-fit: cover;" src="{{ $anime->photo_cover }}" alt="">
-                <div class="button-groups">
-                    <div class="list btn-group">
-                        <div class="btn-group" role="group">
-                            <button type="button" class="btn btn-secondary add" data-toggle="modal"
-                                data-target="#createSavelist">{{ $anime_save ? App\Savelist::$statuslists[$status] : '添加至列表' }}
-                            </button>
-
-                            <div class="btn-group" role="group">
-                                <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle down"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fa fa-chevron-down"></i>
-                                </button>
-                                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                                    <a class="dropdown-item flex-column" href="#">添加至觀看中</a>
-                                    <a class="dropdown-item flex-column" href="#">添加至準備觀看</a>
-                                    <a class="dropdown-item flex-column" href="#">編輯列表</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        @include('anime.save-panel')
+                <div style="width: 100%; margin-top: 20px; margin-bottom: 20px;">
+                    <div class="no-select" style="width: calc(100% - 85px); background-color: rgb(61,180,242); height: 35px; line-height: 35px; display: inline-block; border-top-left-radius: 3px; border-bottom-left-radius: 3px; text-align: center; color: white; font-weight: 400; cursor: pointer;" data-toggle="modal" data-target="#createSavelist">
+                        {{ $anime_save ? App\Savelist::$statuslists[$status] : '添加至列表' }}
                     </div>
-                    <button class="favorite">♥</button>
+
+                    <form style="height: 35px; width: 35px; font-size: 17px; padding: 0; float: right; background-color: rgb(236,41,75); display: inline-block; border-radius: 3px; color: white; text-align: center; cursor: pointer;" id="anime-like-form" action="{{ route('anime.like', ['anime' => $anime]) }}" method="POST">
+                        {{ csrf_field() }}
+                        <button style="line-height: 35px; width: 35px; color: {{ App\Like::where('user_id', Auth::user()->id)->where('likeable_id', $anime->id)->where('likeable_type', 'App\Anime')->first() ? '#810000' : 'white'}}" class="no-button-style" type="submit">
+                            ♥
+                        </button>
+                    </form>
+
+                    <div style="height: 35px; width: 35px; font-size: 17px; padding: 0; float: right; background-color: #5EBFF4; display: inline-block; margin-right: 15px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; text-align: center; cursor: pointer;" data-toggle="modal" data-target="#createSavelist">
+                        <i style="line-height: 35px; color: white; font-size: 14px;" class="fa fa-chevron-down"></i>
+                    </div>
                 </div>
             </div>
+
+            @include('anime.save-panel')
             
             <div class="heading-content">
                 <div>
