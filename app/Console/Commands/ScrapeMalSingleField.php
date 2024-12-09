@@ -41,7 +41,7 @@ class ScrapeMalSingleField extends Command
     public function handle()
     {
         // Scrape is_adult from MAL
-        $animes = Anime::where('id', '>', 11481)->where('sources', 'ilike', '%"myanimelist"%')->where('genres', '[]')->where('rating_mal_count', null)->orderBy('id', 'asc')->limit(4)->get();
+        $animes = Anime::where('id', '>', 11550)->where('scraped_at', null)->where('sources', 'ilike', '%"myanimelist"%')->where('genres', '[]')->where('rating_mal_count', null)->orderBy('id', 'asc')->limit(4)->get();
         foreach ($animes as $anime) {
             $curl_connection = curl_init($anime->sources['myanimelist']);
             curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
@@ -85,6 +85,9 @@ class ScrapeMalSingleField extends Command
                     } else {
                         Log::info("Anime#{$anime->id} has no ratings count");
                     }
+
+                    $anime->scraped_at = Carbon::now();
+                    $anime->save();
 
                 } else {
                     Log::warning("Anime#{$anime->id} access failed");
