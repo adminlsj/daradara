@@ -8,6 +8,14 @@
     background-color: white;
 }
 
+@media (max-width: 768px) {
+    .character-wrap {
+        display: flex;
+        flex-direction: column;
+        padding-top: 0px;
+    }
+}
+
 .character-anime-wrap {
     display: flex;
     flex-direction: row;
@@ -52,11 +60,26 @@
     .character-headings {
         align-items: center;
         flex-direction: column-reverse;
-        padding: 30px 20px 12px;
+        padding: 10px 10px 12px;
+        width: 100%;
     }
 
     .character-heading-content {
         align-items: center;
+    }
+
+    .character-name-wrap {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+
+    .character-name-wrap h3 {
+        margin-top: 10px;
+    }
+
+    .character-name-wrap .favortie {
+        position: absolute;
+        right: 0px;
     }
 }
 
@@ -108,12 +131,14 @@
     .character-info-mobile {
         display: flex;
         flex-direction: column;
-        background-color: #151f2e;
-        padding: 10px 0;
+        background-color: white;
+        padding: 10px 10px;
     }
     
     .character-info-mobile p {
-        padding: 0 10px
+        padding: 0 10px;
+        margin: 0;
+        line-height: 150%;
     }
 }
 

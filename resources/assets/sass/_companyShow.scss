@@ -32,12 +32,19 @@
     font-family: Roboto;
 }
 
+@media (max-width: 768px) {
+    .company-headings {
+        padding: 0px 20px;
+    }
+}
+
 .company-headings button {
     background-color: #ed294b;
     border: none;
     color: white;
     padding: 8px 15px;
     border-radius: 5px;
+    white-space: nowrap;
 }
 
 /**         Company Animes        **/
