@@ -21,7 +21,7 @@
                         <div class="row" style="margin-top: 10px; padding-right: 45px;">
                             <div class="filter watching-status col-md-4">
                                 <h3>觀看狀態</h3>
-                                <div class="custom-select-{{ $anime->id }}-{{ isset($loop) && $loop->parent ? $loop->parent->iteration : 0 }}" style="width: 100%;">
+                                <div class="custom-select-{{ $anime->id }}-{{ isset($anime_list) ? $anime_list->id : 0 }}" style="width: 100%;">
                                     <select id="status" name="status">
                                         <option value="watching">觀看狀態...</option>
                                         <option value="watching" {{ $status == 'watching' ? 'selected' : '' }}>觀看中</option>
@@ -36,7 +36,7 @@
                                 <script>
                                     var x, i, j, l, ll, selElmnt, a, b, c;
                                     /* Look for any elements with the class "custom-select": */
-                                    x = document.getElementsByClassName("custom-select-{{ $anime->id }}-{{ isset($loop) && $loop->parent ? $loop->parent->iteration : 0 }}");
+                                    x = document.getElementsByClassName("custom-select-{{ $anime->id }}-{{ isset($anime_list) ? $anime_list->id : 0 }}");
                                     l = x.length;
                                     for (i = 0; i < l; i++) {
                                       selElmnt = x[i].getElementsByTagName("select")[0];
