@@ -5,5 +5,6 @@
     <div class="user-photo flex-row">
         <img src="{{ $user->avatar_temp }}" alt="">
         <h1 style="font: 800; font-size: 1.9rem; letter-spacing: 1px;">{{ $user->name }}</h1>
+        <div class="user-follow-btn">追蹤</div>
     </div>
 </div>
