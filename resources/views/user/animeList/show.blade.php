@@ -14,7 +14,7 @@
         <div class="list-wrap flex-column">
             <div class="title-link flex-row">
                 <h3>{{ $savelist->is_status ? App\Anime::$statuslists[$savelist->title] : $savelist->title }}</h3>
-                @if ($savelist->is_status == false)
+                @if (!$savelist->is_status)
                     <div class="flex-row">
                         <button class="fas fa-pen no-select pen-button" data-toggle="modal" data-target="#updateSavelist"></button>
                         @if (Auth::check() && Auth::user()->id == $user->id)
