@@ -1,5 +1,5 @@
 <div class="list-card">
-    <a href="{{ route('anime.show', ['anime' => $anime_save->anime, 'title' => $anime_save->anime->getTitle($chinese)]) }}"><img src="{{ $anime_save->anime->photo_cover }}" alt=""></a>
+    <a href="{{ route('anime.show', ['anime' => $anime_save->anime, 'title' => $anime_save->anime->getTitle($chinese)]) }}"><img style="object-fit: cover" src="{{ $anime_save->anime->photo_cover }}" alt=""></a>
     <div class="list-card-info flex-column">
         <a class="title" href="{{ route('anime.show', ['anime' => $anime_save->anime, 'title' => $anime_save->anime->getTitle($chinese)]) }}"><div>{{ $anime_save->anime->getTitle($chinese) }}</div>
         </a>
