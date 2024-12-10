@@ -60,3 +60,20 @@
     padding: 15px 25px;
     align-self: flex-end;
 }
+
+.user-follow-btn {
+    position: absolute; 
+    right: 10px; 
+    bottom: 15px; 
+    background: rgba(61, 180, 242, .8); 
+    border-radius: 4px; 
+    padding: 10px 12px; 
+    cursor: pointer; 
+    text-align: center; 
+    color: rgba(255,255,255);
+    transition: .4s;
+}
+
+.user-follow-btn:hover {
+    background: rgba(61, 180, 242, 1); 
+}

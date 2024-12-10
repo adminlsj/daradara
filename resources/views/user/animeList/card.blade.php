@@ -13,4 +13,4 @@
     </div>
 </div>
 
-@include('anime.save-panel', ['anime' => $anime_save->anime, 'status' => $anime_save->status, 'saved_lists' => [], 'redirectTo' => $redirectTo])
+@include('anime.save-panel', ['anime' => $anime_save->anime, 'status' => $anime_save->status, 'saved_lists' => $anime_save->savelists->pluck('id')->toArray(), 'redirectTo' => $redirectTo])

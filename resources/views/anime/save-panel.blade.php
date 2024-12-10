@@ -18,7 +18,7 @@
                         <h3>{{ $anime->getTitle($chinese) }}</h3>
                     </div>
                     <div class="add-to-list-content" style="color: rgba(92,114,138); min-height: 285px;">
-                        <div class="row" style="margin-top: 10px; padding-right: 45px;">
+                        <div class="row" style="margin-top: 10px; padding-right: 45px; width: 80%;">
                             <div class="filter watching-status col-md-4">
                                 <h3>觀看狀態</h3>
                                 <div class="custom-select-{{ $anime->id }}-{{ isset($anime_list) ? $anime_list->id : 0 }}" style="width: 100%;">
@@ -164,10 +164,10 @@
                                 @foreach ($anime_lists as $anime_list)
                                     <div style="margin-bottom: 1px;">
                                         <div style="float: left; width: 24px; display: inline-block;">
-                                            <input style="filter: brightness(1.5);" type="checkbox" name="animelists[]" value="{{ $anime_list->id }}" id="{{ $anime_list->id }}" {{ in_array($anime_list->id, $saved_lists) ?  'checked' : ''}}>
+                                            <input style="filter: brightness(1.5);" type="checkbox" name="animelists[]" value="{{ $anime_list->id }}" id="animelist-{{ $anime_list->id }}-{{ $anime->id }}" {{ in_array($anime_list->id, $saved_lists) ?  'checked' : ''}}>
                                         </div>
                                         <div style="display: inline-block; width: calc(100% - 24px);">
-                                            <label style="font-size: 1.2rem; font-weight: 400; margin-top: -1px" class="no-select" for="{{ $anime_list->id }}">{{ $anime_list->title }}</label>
+                                            <label style="font-size: 1.2rem; font-weight: 400; margin-top: -1px; margin-left: -12px; padding-left: 12px;" class="no-select" for="animelist-{{ $anime_list->id }}-{{ $anime->id }}">{{ $anime_list->title }}</label>
                                         </div>
                                     </div>
                                 @endforeach

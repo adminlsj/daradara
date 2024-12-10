@@ -30,7 +30,7 @@
         @endforeach
     </div>
 
-    <button class="no-select" data-toggle="modal" data-target="#createSavelist">
+    <button style="background-color: #3db4f2; color: #fff; border-radius: 4px; font-size: 1.4rem; padding: 8px 14px; text-align: center; font-weight: normal; margin-top: 10px;" class="no-select no-button-style" data-toggle="modal" data-target="#createSavelist">
         新增動漫清單
     </button>
 </div>
