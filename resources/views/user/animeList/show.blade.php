@@ -13,8 +13,8 @@
         @include('user.animeList.sidebar')
         <div class="list-wrap flex-column">
             <div class="title-link flex-row">
-                <h3>{{ $savelist->title }}</h3>
-                @if ($savelist->is_status == FALSE)
+                <h3>{{ $savelist->is_status ? App\Anime::$statuslists[$savelist->title] : $savelist->title }}</h3>
+                @if ($savelist->is_status == false)
                     <div class="flex-row">
                         <button class="fas fa-pen no-select pen-button" data-toggle="modal" data-target="#updateSavelist"></button>
                         @if (Auth::check() && Auth::user()->id == $user->id)
@@ -31,16 +31,7 @@
             <div class="list-entries">
                 <div class="list-section flex-row">
                     @foreach ($anime_saves as $anime_save)
-                        <div class="list-card">
-                            <a href="{{ route('anime.show', ['anime' => $anime_save->anime, 'title' => $anime_save->anime->getTitle($chinese)]) }}"><img src="{{ $anime_save->anime->photo_cover }}" alt=""></a>
-                            <div class="list-card-info flex-column">
-                                <div class="title"><a href="{{ route('anime.show', ['anime' => $anime_save->anime, 'title' => $anime_save->anime->getTitle($chinese)]) }}">{{ $anime_save->anime->getTitle($chinese) }}</a></div>
-                                <div class="user-review flex-row">
-                                    <div class="progress" style="margin:0px;background-color:transparent;">{{ $anime_save->episode_progress }}</div>
-                                    <div class="score">10</div>
-                                </div>
-                            </div>
-                        </div>
+                        @include('user.animeList.card', ['redirectTo' => "user.animelist.show.{$savelist->id}.{$savelist->title}"])
                     @endforeach
                 </div>
             </div>

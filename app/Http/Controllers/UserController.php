@@ -31,8 +31,8 @@ class UserController extends Controller
 
     public function animelist(Request $request, User $user)
     {
-        $anime_lists = $user->anime_lists->load('anime_saves.anime');
-        $anime_statuslists = $user->anime_statuslists->load('anime_saves.anime');
+        $anime_lists = $user->anime_lists->load('anime_saves.anime', 'anime_saves.savelists');
+        $anime_statuslists = $user->anime_statuslists->load('anime_saves.anime', 'anime_saves.savelists');
         $chinese = new Chinese();
         return view('user.animeList.index', compact('user', 'anime_lists', 'anime_statuslists', 'chinese'));
     }
@@ -43,7 +43,7 @@ class UserController extends Controller
         $anime_statuslists = $user->anime_statuslists->load('anime_saves.anime');
         $anime_saves = $savelist->anime_saves->load('anime');
         $chinese = new Chinese();
-        return view('user.animeList.show', compact('user', 'anime_lists', 'anime_statuslists', 'savelist','anime_saves', 'chinese'));
+        return view('user.animeList.show', compact('user', 'anime_lists', 'anime_statuslists', 'savelist', 'anime_saves', 'chinese'));
     }
 
     public function likes(Request $request, User $user)

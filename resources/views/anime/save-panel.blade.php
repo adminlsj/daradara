@@ -1,10 +1,11 @@
-<form id="createSavelistForm" action="{{ route('anime.save', ['anime' => $anime]) }}" method="POST">
+<form id="createSavelistForm{{ $anime->id }}" action="{{ route('anime.save', ['anime' => $anime]) }}" method="POST">
     {{ csrf_field() }}
 
     <input id="type" name="type" type="hidden" value="anime">
     <input id="is_status" name="is_status" type="hidden" value="false">
+    <input id="redirectTo" name="redirectTo" type="hidden" value="{{ $redirectTo }}">
 
-    <div id="createSavelist" class="modal" role="dialog">
+    <div id="createSavelist{{ $anime->id }}" class="modal" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content" style="border-radius: 3px 3px 0 0 !important; border: none !important;">
                 <div class="modal-body" style="padding: 0px; text-align: left; background-color: white; border-radius: 3px 3px 0 0 !important; padding-bottom: 50px;">
@@ -20,7 +21,7 @@
                         <div class="row" style="margin-top: 10px; padding-right: 45px;">
                             <div class="filter watching-status col-md-4">
                                 <h3>觀看狀態</h3>
-                                <div class="custom-select" style="width: 100%;">
+                                <div class="custom-select-{{ $anime->id }}-{{ isset($loop) && $loop->parent ? $loop->parent->iteration : 0 }}" style="width: 100%;">
                                     <select id="status" name="status">
                                         <option value="watching">觀看狀態...</option>
                                         <option value="watching" {{ $status == 'watching' ? 'selected' : '' }}>觀看中</option>
@@ -35,7 +36,7 @@
                                 <script>
                                     var x, i, j, l, ll, selElmnt, a, b, c;
                                     /* Look for any elements with the class "custom-select": */
-                                    x = document.getElementsByClassName("custom-select");
+                                    x = document.getElementsByClassName("custom-select-{{ $anime->id }}-{{ isset($loop) && $loop->parent ? $loop->parent->iteration : 0 }}");
                                     l = x.length;
                                     for (i = 0; i < l; i++) {
                                       selElmnt = x[i].getElementsByTagName("select")[0];

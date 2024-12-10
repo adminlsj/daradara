@@ -8,69 +8,79 @@
     }
 }
 
-.sidebar .lists {
+.list-sidebar .lists {
+    margin-top: 10px;
     margin-bottom: 10px;
 }
 
 @media (max-width: 768px) {
-    .user-profile .content .sidebar {
+    .user-profile .content .list-sidebar {
         display: none;
     }
 }
 
-.sidebar .lists h3 {
-    color: #727e8e;
-    font-size: 16px;
-}
-
-.sidebar .lists a {
-    text-decoration: none;
-}
-
-.sidebar .lists .list {
-    padding: 0 10px;
-    color: #727e8e;
-    display: flex;
-    justify-content: space-between;
-    font-size: 13px;
-    margin: 5px 0;
+.list-sidebar .lists h3 {
+    color: rgb(146,153,161);
+    font-size: 1.3rem;
     font-weight: normal;
 }
 
-.sidebar .lists .flex-row:hover {
-    transition: 0.2s;
-    background-color: rgba(255, 255, 255, 0.87);
-    border-radius: 5px;
+.list-sidebar .lists a {
+    text-decoration: none;
 }
 
-.sidebar .lists .count {
+.list-sidebar .lists .list {
+    padding: 0 10px;
+    color: rgb(146,153,161);
+    font-weight: normal;
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.4rem;
+    margin: 5px 0;
+}
+
+.list-sidebar .lists .flex-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 5px;
+}
+
+.list-sidebar .lists .flex-row:hover {
+    transition: 0.2s;
+    background-color: rgba(250,250,250, .8);
+    border-radius: 3px;
+}
+
+.list-sidebar .lists .count {
     opacity: 0;
     padding: 0 10px;
     color: #727e8e;
     justify-content: space-between;
-    font-size: 13px;
+    font-size: 1.4rem;
     margin: 5px 0;
     font-weight: normal;
 }
 
-.sidebar .lists:hover .count {
-    transition: 0.25s;
+.list-sidebar .lists:hover .count {
+    transition: .2s;
     opacity: 100;
 }
 
 
 .userlists .active {
-    background-color: white;
-    border-radius: 5px;
+    background-color: rgba(250,250,250, .8);
+    border-radius: 3px;
 }
 
 .userlists .active .list, .userlists .active .count {
-    color: #445c79;
-    font-weight: 700;
+    color: rgb(92,114,138);
+    font-weight: 500;
 }
 
 .list-wrap {
-    margin-left: 50px;
+    margin-top: 9px;
+    padding-left: 45px;
+    width: calc(100% - 180px);
 }
 
 @media (max-width: 768px) {
@@ -90,12 +100,13 @@
 
 .list-wrap .title-link h3 {
     font-size: 20px;
-    font-weight: 300;
-    color: #727e8e;
+    font-weight: 400;
+    color: rgb(92,114,138);
+    margin-bottom: 20px;
 }
 
 .list-wrap .list-section {
-    gap: 20px;
+    gap: 8px;
     flex-wrap: wrap;
 }
 
@@ -108,6 +119,9 @@
 .list-wrap .list-section .list-card {
     height: 210px;
     width: 150px;
+    position: relative;
+    box-shadow: 0 2px 20px rgba(49, 54, 68, .2);
+    border-radius: 3px !important;
 }
 
 @media (max-width: 768px) {
@@ -117,15 +131,11 @@
     }
 }
 
-.list-card {
-    position: relative;
-}
-
 .list-card img {
     width: 100%;
     height: 100%;
     object-fit: fill;
-    border-radius: 5px;
+    border-radius: 3px;
 }
 
 .list-card h3 {
@@ -133,29 +143,50 @@
     font-size: 13px;
 }
 
+.list-card-edit {
+    position: absolute; 
+    top: 10px; 
+    right: 10px; 
+    background-color: rgb(61,180,242); 
+    height: 30px; 
+    width: 30px; 
+    border-radius: 3px; 
+    cursor: pointer; 
+    display: none;
+}
+
+.list-card:hover .list-card-edit {
+    display: block;
+}
+
 .list-card-info {
     position: absolute;
     width: 100%;
     bottom: 0px;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(31,38,49,.8);
     padding: 10px;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
 }
 
-.list-card-info .title a {
+.list-card-info .title {
+    font-size: 1.3rem;
     color: white;
     font-weight: normal;
     text-decoration: none;
 }
 
-.list-card-info .title a:hover {
-    transition: 0.25s;
-    color: palevioletred;
+.list-card-info .title:hover {
+    transition: 0.2s;
+    color: rgb(61,180,242);
 }
 
 .list-card-info .user-review {
     justify-content: space-between;
-    color: palevioletred;
+    color: rgb(61,180,242);
     font-weight: normal;
+    font-size: 1.2rem;
+    bottom: 0;
 }
 
 .pen-button, .trash-button {
