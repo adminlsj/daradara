@@ -13,7 +13,7 @@
             <div class="cover">
                 <img style="object-fit: cover;" src="{{ $anime->photo_cover }}" alt="">
                 <div style="width: 100%; margin-top: 20px; margin-bottom: 20px;">
-                    <div class="no-select" style="width: calc(100% - 85px); background-color: rgb(61,180,242); height: 35px; line-height: 35px; display: inline-block; border-top-left-radius: 3px; border-bottom-left-radius: 3px; text-align: center; color: white; font-weight: 400; cursor: pointer;" data-toggle="modal" data-target="#createSavelist">
+                    <div class="no-select" style="width: calc(100% - 85px); background-color: rgb(61,180,242); height: 35px; line-height: 35px; display: inline-block; border-top-left-radius: 3px; border-bottom-left-radius: 3px; text-align: center; color: white; font-weight: 400; cursor: pointer;" data-toggle="modal" data-target="#createSavelist{{ $anime->id }}">
                         {{ $anime_save ? App\Savelist::$statuslists[$status] : '添加至列表' }}
                     </div>
 
@@ -24,13 +24,13 @@
                         </button>
                     </form>
 
-                    <div style="height: 35px; width: 35px; font-size: 17px; padding: 0; float: right; background-color: #5EBFF4; display: inline-block; margin-right: 15px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; text-align: center; cursor: pointer;" data-toggle="modal" data-target="#createSavelist">
+                    <div style="height: 35px; width: 35px; font-size: 17px; padding: 0; float: right; background-color: #5EBFF4; display: inline-block; margin-right: 15px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; text-align: center; cursor: pointer;" data-toggle="modal" data-target="#createSavelist{{ $anime->id }}">
                         <i style="line-height: 35px; color: white; font-size: 14px;" class="fa fa-chevron-down"></i>
                     </div>
                 </div>
             </div>
 
-            @include('anime.save-panel')
+            @include('anime.save-panel', ['redirectTo' => 'anime.show'])
             
             <div class="heading-content">
                 <div>

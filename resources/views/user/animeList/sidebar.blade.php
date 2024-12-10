@@ -1,10 +1,10 @@
-<div class="sidebar flex-column">
+<div class="list-sidebar flex-column" style="width: 180px;">
     <div class="lists">
         <h3>清單</h3>
         <a href="{{ route('user.animelist', ['user' => Auth::user(), 'name' => Auth::user()->name]) }}">
             <div class="flex-row {{ Request::is('user/*/*/animelist') ? 'active' : '' }}"
                 style="justify-content: space-between;">
-                <div class="list">All</div>
+                <div class="list">全部</div>
                 <div></div>
             </div>
         </a>
@@ -13,7 +13,7 @@
                 <a href="{{ route('user.animelist.show', ['user' => Auth::user(), 'name' => Auth::user()->name, 'savelist' => $anime_statuslist, 'title' => $anime_statuslist->title]) }}">
                     <div class="flex-row {{ Request::is("user/*/*/animelist/{$anime_statuslist->id}/*") ? 'active' : '' }}"
                         style="justify-content: space-between;">
-                        <div class="list">{{ $anime_statuslist->title }}</div>
+                        <div class="list">{{ App\Anime::$statuslists[$anime_statuslist->title] }}</div>
                         <div class="count">{{ $anime_statuslist->anime_saves->count() }}</div>
                     </div>
                 </a>

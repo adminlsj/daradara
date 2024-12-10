@@ -5,6 +5,7 @@
 @endsection
 
 @section('content')
+
 <div class="flex-column user-profile" style="background-color:rgb(237,241,245);">
     @include('user.show.userProfile')
     @include('user.show.navTabs')
@@ -12,24 +13,15 @@
     <div class="content flex-row userlists">
         @include('user.animeList.sidebar')
         <div class="list-wrap flex-column">
-        @foreach ($anime_statuslists as $anime_statuslist)
+            @foreach ($anime_statuslists as $anime_statuslist)
                 @if ($anime_statuslist->anime_saves->count() != 0)
                     <div class="title-link">
-                        <h3>{{ $anime_statuslist->title }}</h3>
+                        <h3>{{ App\Anime::$statuslists[$anime_statuslist->title] }}</h3>
                     </div>
                     <div class="list-entries">
                         <div class="list-section flex-row">
                             @foreach ($anime_statuslist->anime_saves as $anime_save)
-                                <div class="list-card">
-                                    <a href="{{ route('anime.show', ['anime' => $anime_save->anime, 'title' => $anime_save->anime->getTitle($chinese)]) }}"><img src="{{ $anime_save->anime->photo_cover }}" alt=""></a>
-                                    <div class="list-card-info flex-column">
-                                        <div class="title"><a href="{{ route('anime.show', ['anime' => $anime_save->anime, 'title' => $anime_save->anime->getTitle($chinese)]) }}">{{ $anime_save->anime->getTitle($chinese) }}</a></div>
-                                        <div class="user-review flex-row">
-                                            <div class="progress" style="margin:0px;background-color:transparent;">{{ $anime_save->episode_progress }}</div>
-                                            <div class="score">10</div>
-                                        </div>
-                                    </div>
-                                </div>
+                                @include('user.animeList.card', ['redirectTo' => 'user.animelist'])
                             @endforeach
                         </div>
                     </div>
@@ -44,16 +36,7 @@
                     <div class="list-entries">
                         <div class="list-section flex-row">
                             @foreach ($anime_list->anime_saves as $anime_save)
-                                <div class="list-card">
-                                        <a href="{{ route('anime.show', ['anime' => $anime_save->anime, 'title' => $anime_save->anime->getTitle($chinese)]) }}"><img src="{{ $anime_save->anime->photo_cover }}" alt=""></a>
-                                        <div class="list-card-info flex-column">
-                                            <div class="title"><a href="{{ route('anime.show', ['anime' => $anime_save->anime, 'title' => $anime_save->anime->getTitle($chinese)]) }}">{{ $anime_save->anime->getTitle($chinese) }}</a></div>
-                                            <div class="user-review flex-row">
-                                                <div class="progress" style="margin:0px;background-color:transparent;">{{ $anime_save->episode_progress }}</div>
-                                                <div class="score">10</div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                @include('user.animeList.card', ['redirectTo' => 'user.animelist'])
                             @endforeach
                         </div>
                     </div>

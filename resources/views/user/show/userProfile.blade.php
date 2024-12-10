@@ -3,7 +3,7 @@
         <div style="background: linear-gradient(180deg, rgba(6,13,34, 0) 40%, rgba(6,13,34, .6)); height: 100%; left: 0; position: absolute; top: 0; width: 100%;"></div>
     </div>
     <div class="user-photo flex-row">
-        <img src="https://i.meee.com.tw/Dht1VXQ.png" alt="">
-        <h4><b>JSPG</b></h>
+        <img src="{{ $user->avatar_temp }}" alt="">
+        <h1 style="font: 800; font-size: 1.9rem; letter-spacing: 1px;">{{ $user->name }}</h1>
     </div>
 </div>
