@@ -24,17 +24,15 @@ class HomeController extends Controller
         $random = Anime::find(1);
         $count = 5;
 
-        $query = Anime::where('photo_cover', '!=', null)->whereIn('category', ['TV', 'Movie']);
-
-        $最近流行 = $query->where('started_at', '>=', $now->subYear())->where('rating_mal_count', '!=', null)->orderBy('rating_mal_count', 'desc')->limit($count)->get();
+        $最近流行 = Anime::where('photo_cover', '!=', null)->whereIn('category', ['TV', 'Movie'])->where('started_at', '>=', $now->subYear())->where('rating_mal_count', '!=', null)->orderBy('rating_mal_count', 'desc')->limit($count)->get();
 
         $season = $this->getSeasonByMonth($now->month).' '.$now->year;
-        $本季熱門 = $query->where('season', $season)->where('rating_mal_count', '!=', null)->orderBy('rating_mal_count', 'desc')->limit($count)->get();
+        $本季熱門 = Anime::where('photo_cover', '!=', null)->whereIn('category', ['TV', 'Movie'])->where('season', $season)->where('rating_mal_count', '!=', null)->orderBy('rating_mal_count', 'desc')->limit($count)->get();
 
-        $最新上市 = $query->orderby('started_at', 'desc')->limit($count)->get();
-        $大家在看 = $query->orderby('updated_at', 'desc')->limit($count)->get();
+        $最新上市 = Anime::where('photo_cover', '!=', null)->whereIn('category', ['TV', 'Movie'])->orderby('started_at', 'desc')->limit($count)->get();
+        $大家在看 = Anime::where('photo_cover', '!=', null)->whereIn('category', ['TV', 'Movie'])->orderby('updated_at', 'desc')->limit($count)->get();
 
-        $人氣排行 = $query->where('rating_mal_count', '!=', null)->orderBy('rating_mal_count', 'desc')->limit($count)->get();
+        $人氣排行 = Anime::where('photo_cover', '!=', null)->whereIn('category', ['TV', 'Movie'])->where('rating_mal_count', '!=', null)->orderBy('rating_mal_count', 'desc')->limit($count)->get();
 
         $is_mobile = Helper::checkIsMobile();
 
