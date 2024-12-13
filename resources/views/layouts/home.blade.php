@@ -198,6 +198,7 @@
 					@endforeach
 				</div>
 			</div>
+
 			<div class="landing-section">
 				<div class="title-link">
 					<a href="">
@@ -210,10 +211,11 @@
 					@endforeach
 				</div>
 			</div>
+
 			<div class="landing-section">
 				<div class="title-link">
 					<a href="">
-						<h3>經典作品<span class="title-link-expand pull-right">顯示更多</span></h3>
+						<h3>本季熱門<span class="title-link-expand pull-right">顯示更多</span></h3>
 					</a>
 				</div>
 				<div class="media-wrap">
@@ -222,7 +224,21 @@
 					@endforeach
 				</div>
 			</div>
+
+			<div class="landing-section">
+				<div class="title-link">
+					<a href="">
+						<h3>經典作品<span class="title-link-expand pull-right">顯示更多</span></h3>
+					</a>
+				</div>
+				<div class="media-wrap">
+					@foreach ($本季熱門 as $anime)
+						@include('layouts.media-card')
+					@endforeach
+				</div>
+			</div>
 		</div>
+
 		<div class="top-anime flex-column">
 			<div class="title-link flex-row">
 				<a href="">
