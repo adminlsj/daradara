@@ -1,9 +1,9 @@
 <div class="sidebar">
     <div class="ranking">
-        <a style=""><img style="width: 13px; margin-top: 2px; float: left;" src="https://images2.imgbox.com/e6/6b/Ni0QCdRt_o.png">{{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $anime->started_at)->year }}年 季度排名 #1</a>
+        <a style=""><img style="width: 13px; margin-top: 2px; float: left;" src="https://images2.imgbox.com/e6/6b/Ni0QCdRt_o.png">{{ $anime->started_at ? Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $anime->started_at)->year : '????' }}年 季度排名 #1</a>
     </div>
     <div class="ranking">
-        <a href=""><img style="width: 13px; margin-top: 3px; float: left;" src="https://images2.imgbox.com/79/ba/VaBUdsqz_o.png">{{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $anime->started_at)->year }}年 動畫總排名 #31</a>
+        <a href=""><img style="width: 13px; margin-top: 3px; float: left;" src="https://images2.imgbox.com/79/ba/VaBUdsqz_o.png">{{ $anime->started_at ? Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $anime->started_at)->year : '????' }}年 動畫總排名 #31</a>
     </div>
     <div class="data">
         <div class="data-set">
