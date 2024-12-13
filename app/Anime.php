@@ -24,6 +24,10 @@ class Anime extends Model
         'dropped' => '棄番',
     ];
 
+    public static $genres = [
+        'Action', 'Adventure', 'Avant Garde', 'Award Winning', 'Boys Love', 'Comedy', 'Drama', 'Fantasy', 'Girls Love', 'Gourmet', 'Horror', 'Mystery', 'Romance', 'Sci-Fi', 'Slice of Life', 'Sports', 'Supernatural', 'Suspense'
+    ];
+
     public static function import($string, $start, $end){
         $string = ' ' . $string;
         $ini = strpos($string, $start);
