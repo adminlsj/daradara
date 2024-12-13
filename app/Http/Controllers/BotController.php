@@ -950,7 +950,12 @@ class BotController extends Controller
 
     public function tempMethod(Request $request)
     {   
-        $animes = Anime::where('id', '>=', $request->from)->where('id', '<=', $request->to)->where('sources', 'ilike', '%"myanimelist"%')->where('rating_mal_count', null)->orderBy('started_at', 'desc')->get();
+        $animes = Anime::all();
+        foreach ($animes as $anime) {
+            $anime->delete();
+        }
+
+        /* $animes = Anime::where('id', '>=', $request->from)->where('id', '<=', $request->to)->where('sources', 'ilike', '%"myanimelist"%')->where('rating_mal_count', null)->orderBy('started_at', 'desc')->get();
         foreach ($animes as $anime) {
             $curl_connection = curl_init($anime->sources['myanimelist']);
             curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
@@ -1001,7 +1006,7 @@ class BotController extends Controller
             } else {
                 Log::info("Anime#{$anime->id} not found");
             }
-        }
+        } */
 
         // Check repeated episodes
         /* $animes = Anime::with('episodes')->where('id', '>=', $request->from)->where('id', '<=', $request->to)->orderBy('id', 'asc')->get();
