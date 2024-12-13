@@ -26,14 +26,15 @@ class HomeController extends Controller
 
         $query = Anime::where('photo_cover', '!=', null)->whereIn('category', ['TV', 'Movie']);
 
-        $最近流行 = $query->where('started_at', '>=', $now->subYear())->orderBy('rating_mal_count', 'desc')->limit($count)->get();
+        $最近流行 = $query->where('started_at', '>=', $now->subYear())->where('rating_mal_count', '!=', null)->orderBy('rating_mal_count', 'desc')->limit($count)->get();
 
         $season = $this->getSeasonByMonth($now->month).' '.$now->year;
-        $本季熱門 = $query->where('season', $season)->inRandomOrder()->limit($count)->get();
+        $本季熱門 = $query->where('season', $season)->where('rating_mal_count', '!=', null)->orderBy('rating_mal_count', 'desc')->limit($count)->get();
 
         $最新上市 = $query->orderby('started_at', 'desc')->limit($count)->get();
-        $最新上傳 = $query->orderby('created_at', 'desc')->limit($count)->get();
         $大家在看 = $query->orderby('updated_at', 'desc')->limit($count)->get();
+
+        $人氣排行 = $query->where('rating_mal_count', '!=', null)->orderBy('rating_mal_count', 'desc')->limit($count)->get();
 
         $is_mobile = Helper::checkIsMobile();
 
@@ -46,7 +47,7 @@ class HomeController extends Controller
         $season = '';
         $category = '';
 
-        return view('layouts.home', compact('random', '最近流行', '本季熱門', '最新上市', '最新上傳', '大家在看', 'is_mobile', 'chinese', 'genre', 'tags', 'sort', 'year', 'season', 'category'));
+        return view('layouts.home', compact('random', '最近流行', '本季熱門', '最新上市', '大家在看', '人氣排行', 'is_mobile', 'chinese', 'genre', 'tags', 'sort', 'year', 'season', 'category'));
     }
 
     private function getSeasonByMonth($month)
