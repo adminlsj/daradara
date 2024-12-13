@@ -61,7 +61,7 @@
 
 .navbar-links a {
     color: #e5e7ea;
-    transition: 0.3s;
+    transition: 0.2s;
     margin: 0 15px;
     white-space: nowrap;
     text-decoration: none !important;
@@ -69,6 +69,18 @@
 
 .navbar-links a:hover {
     color: #b3cce8;
+}
+
+.navbar-wrapper-solid {
+    background-color: #2b2d42 !important;
+}
+
+.navbar-wrapper-solid .navbar-links a {
+    color: #bcbedc;
+}
+
+.navbar-wrapper-solid .navbar-links a:hover {
+    color: #d3d5f3;
 }
 
 //search dropdown

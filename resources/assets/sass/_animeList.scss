@@ -192,3 +192,27 @@
 .pen-button, .trash-button {
     border: 0px solid transparent;
 }
+
+.save-edit-btn {
+    background-color: #3db4f2 !important;
+    color: white !important;
+}
+
+.save-delete-btn {
+    background-color: #EDF1F5;
+    width: auto; 
+    font-size: 1.2rem; 
+    cursor: pointer; 
+    padding: 8px 14px; 
+    text-align: center; 
+    transition: .2s; 
+    width: 55px; 
+    font-weight: 400; 
+    border-radius: 3px; 
+    margin-top: 15px;
+}
+
+.save-delete-btn:hover {
+    background-color: #E75D75;
+    color: white;
+}

@@ -1,4 +1,4 @@
-<div class="navbar-wrapper">
+<div class="navbar-wrapper {{ Request::is('/') ? 'navbar-wrapper-solid' : '' }}">
     <div class="navbar">
         <div class="icon">
             <a href="/">
@@ -6,7 +6,7 @@
             </a>
         </div>
 
-        <div class="navbar-links flex-row">
+        <div class="navbar-links flex-row" style="color: yellow !important;">
             <a href="/">首頁</a>
             <a href="">動漫</a>
             <a href="">新番預告</a>
