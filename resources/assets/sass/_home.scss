@@ -255,8 +255,8 @@
     margin-top: 15px;
     display: flex;
     flex-direction: row;
-    gap: 25px 20px;
-    justify-content: space-between;
+    gap: 25px calc((100% - 185 * 5px) / 4);
+    flex-wrap: wrap;
 }
 
 .media-card {
