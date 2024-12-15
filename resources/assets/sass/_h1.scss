@@ -2266,16 +2266,32 @@ div.sticky {
 
 .search-pagination .pagination>li>a,
 .search-pagination .pagination>li>span {
-  color: #636b6f;
+  color: #adc0d2 !important;
+  background-color: #fbfbfb !important;
+  border: none;
+  border-radius: 6px;
+  box-shadow: 0 14px 30px rgba(103, 132, 187, 0.15), 0 4px 4px rgba(103, 132, 187, 0.05);
+  transition: color 0.3s ease-in-out;
+  font-size: 1.4rem !important;
+  font-weight: 500;
+  height: 32px;
 }
-.pagination>li.active>span {
-  background-color: crimson;
+.search-pagination .pagination>li>a:hover,
+.search-pagination .pagination>li>span:hover {
+  color: rgb(61,180,242) !important;
+}
+.pagination>li.active>span, .pagination>li.active>span:hover {
   color: #fff !important;
-  border-color: crimson;
+  background-color: rgb(61,180,242) !important;
+  border-color: rgb(61,180,242) !important;
 }
-.pagination>li.active>span:hover {
-  background-color: crimson;
-  border-color: crimson;
+
+.search-pagination .pagination>li:first-child>a, 
+.search-pagination .pagination>li:first-child>span, 
+.search-pagination .pagination>li:last-child>a,
+.search-pagination .pagination>li:last-child>span {
+  font-size: 20px !important;
+  padding: 0px 10px;
 }
 
 .related-watch-wrap {

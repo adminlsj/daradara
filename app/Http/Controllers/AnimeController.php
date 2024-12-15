@@ -135,7 +135,7 @@ class AnimeController extends Controller
             }
         }
 
-        $results = $results->distinct()->paginate(48);
+        $results = $results->distinct()->paginate(30);
 
         $results->setPath('');
 
@@ -143,7 +143,7 @@ class AnimeController extends Controller
 
         $is_mobile = Helper::checkIsMobile();
 
-        return view('anime.search.index', compact('sort', 'year', 'season', 'results', 'is_mobile', 'chinese', 'category'));
+        return view('home.search', compact('sort', 'year', 'season', 'results', 'is_mobile', 'chinese', 'category'));
     }
 
     public function save(Request $request, Anime $anime)
