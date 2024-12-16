@@ -14,6 +14,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         'App\Console\Commands\ImportFromMAL',
+        'App\Console\Commands\UpdateSearchtext'
     ];
 
     /**
@@ -24,7 +25,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        
+        $schedule->command('daradara:update-searchtext')->hourly();
     }
 
     /**
