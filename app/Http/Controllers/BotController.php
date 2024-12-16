@@ -1336,4 +1336,15 @@ class BotController extends Controller
             }
         } */
     }
+
+    public function updateSearchtext(Request $request)
+    {
+        $animes = Anime::all();
+        foreach ($animes as $anime) {
+            $searchtext = $anime->title_zht.'|'.$anime->title_zhs.'|'.$anime->title_jp.'|'.$anime->title_en.'|'.$anime->title_ro.'|'.$anime->season.'|'.$anime->category.'|'.$anime->source.'|'.$anime->animation_studio.'|'.$anime->author.'|'.$anime->director;
+
+            $anime->searchtext = mb_strtolower(preg_replace('/\s+/', '', $searchtext), 'UTF-8');
+            $anime->save();
+        }
+    }
 }
