@@ -68,6 +68,19 @@ class AnimeController extends Controller
 
         $results = Anime::query();
 
+        if ($text = $request->text) {
+            $query = $text;
+            $query = mb_strtolower($query, 'UTF-8');
+            $query = str_replace(' ', '%', $query);
+            $chinese = new Chinese();
+            $zh_hant = '%'.$chinese->to(Chinese::ZH_HANT, $query).'%';
+            $zh_hans = '%'.$chinese->to(Chinese::ZH_HANS, $query).'%';
+            $results = $results->where(function($query) use ($zh_hant, $zh_hans) {
+                $query->where('searchtext', 'like', $zh_hant)
+                      ->orWhere('searchtext', 'like', $zh_hans);
+            });
+        }
+
         if ($year = $request->year) {
             $results = $results->whereYear('started_at', $year);
         }
@@ -135,6 +148,22 @@ class AnimeController extends Controller
             }
         }
 
+        if ($airing_status = $request->airing_status) {
+            $results = $results->where('airing_status', $airing_status);
+        }
+
+        if ($streaming_on = $request->streaming_on) {
+            $results = $results;
+        }
+
+        if ($country = $request->country) {
+            $results = $results;
+        }
+
+        if ($source = $request->source) {
+            $results = $results;
+        }
+
         $results = $results->distinct()->paginate(30);
 
         $results->setPath('');
@@ -143,7 +172,7 @@ class AnimeController extends Controller
 
         $is_mobile = Helper::checkIsMobile();
 
-        return view('home.search', compact('sort', 'year', 'season', 'results', 'is_mobile', 'chinese', 'category'));
+        return view('home.search', compact('sort', 'year', 'season', 'results', 'is_mobile', 'chinese', 'category', 'airing_status', 'streaming_on', 'country', 'source', 'text'));
     }
 
     public function save(Request $request, Anime $anime)

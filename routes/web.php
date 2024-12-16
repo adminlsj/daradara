@@ -67,4 +67,6 @@ Route::group(['middleware' => 'admin'], function () {
 	Route::get('/scrapeMalCompaniesAnimeables', 'BotController@scrapeMalCompaniesAnimeables');
 	Route::get('/scrapeMalStaffs', 'BotController@scrapeMalStaffs');
 	Route::get('/scrapeMalStaffRoles', 'BotController@scrapeMalStaffRoles');
+
+	Route::get('/updateSearchtext', 'BotController@updateSearchtext');
 });
