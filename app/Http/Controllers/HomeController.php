@@ -44,8 +44,13 @@ class HomeController extends Controller
         $year = null;
         $season = '';
         $category = '';
+        $airing_status = '';
+        $streaming_on = '';
+        $country = '';
+        $source = '';
+        $text = '';
 
-        return view('layouts.home', compact('random', '最近流行', '本季熱門', '最新上市', '大家在看', '人氣排行', 'is_mobile', 'chinese', 'genre', 'tags', 'sort', 'year', 'season', 'category'));
+        return view('layouts.home', compact('random', '最近流行', '本季熱門', '最新上市', '大家在看', '人氣排行', 'is_mobile', 'chinese', 'genre', 'tags', 'sort', 'year', 'season', 'category', 'airing_status', 'streaming_on', 'country', 'source', 'text'));
     }
 
     private function getSeasonByMonth($month)

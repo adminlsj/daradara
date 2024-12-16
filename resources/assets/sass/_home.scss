@@ -124,6 +124,46 @@
     z-index: 6;
 }
 
+.filter .filter-value-text {
+    margin-top: -1px;
+    display: inline-block;
+    float: left;
+    font-weight: 500;
+}
+
+.filter .filter-value-text.active {
+    color: rgb(61,180,242);
+}
+
+.filter #extra-filter-dropdown {
+    display: none;
+    position: absolute;
+    width: 475px;
+    height: 265px;
+    z-index: 100;
+    top: 51px;
+    right: 0px;
+    padding: 40px;
+    padding-top: 20px;
+}
+
+.filter #extra-filter-dropdown .extra-filter-btn {
+    outline:0 !important; 
+    color: rgb(139,160,178); 
+    padding: 0px 14px 5px 14px; 
+    background: rgb(237,241,245) !important;
+    box-shadow: none !important; 
+    width: 180px !important; 
+    height: 38px;
+}
+
+.filter #extra-filter-dropdown .extra-filter-btn .home-search-arrow {
+    color: rgb(173,192,210) !important;
+}
+
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+#extra-filter-dropdown.show {display:block;}
+
 @keyframes expand {
     from {
         opacity: 0;

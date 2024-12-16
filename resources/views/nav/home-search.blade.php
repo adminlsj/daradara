@@ -3,7 +3,8 @@
 		<div class="filter search">
 			<h3>搜尋</h3>
 			<div class="bar" style="position: relative;">
-				<input type="search" style="padding-left: 35px;">
+				<input id="text" name="text" type="text" style="padding-left: 35px;" value="{{ $text ? $text : '' }}">
+				<input type="submit" style="display: none">
 				<i class="fa fa-search" style="color: rgba(201,215,227); font-size: 1.3rem; height: 1.6rem; position: absolute; left: 12px; top: 12px"></i>
 			</div>
 		</div>
@@ -32,8 +33,8 @@
 
 		<div class="filter year" style="position: relative;">
 			<h3>播出年份</h3>
-			<button style="outline:0; color: rgb(173,192,210); padding: 0px 14px 5px 14px;" class="bar btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">
-				<div style="margin-top: -1px; display: inline-block; float: left; font-weight: 500;">{{ $year ? $year.' 年' : '全部' }}</div>
+			<button style="outline:0; color: rgb(173,192,210); padding: 0px 14px 5px 14px;" class="bar btn btn-secondary dropdown-toggle close-extra-filter-dropdown-menu" type="button" data-toggle="dropdown">
+				<div class="filter-value-text {{ $year ? 'active' : '' }}">{{ $year ? $year.' 年' : '全部' }}</div>
 				<i class="material-icons home-search-arrow">keyboard_arrow_down</i>
 			</button>
 			<div id="search-year-dropdown" class="dropdown-menu home-option-wrapper">
@@ -47,8 +48,8 @@
 
 		<div class="filter season" style="position: relative;">
 			<h3>播放季度</h3>
-			<button style="outline:0; color: rgb(173,192,210); padding: 0px 14px 5px 14px;" class="bar btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">
-				<div style="margin-top: -1px; display: inline-block; float: left; font-weight: 500;">{{ $season ? $season : '全部' }}</div>
+			<button style="outline:0; color: rgb(173,192,210); padding: 0px 14px 5px 14px;" class="bar btn btn-secondary dropdown-toggle close-extra-filter-dropdown-menu" type="button" data-toggle="dropdown">
+				<div class="filter-value-text {{ $season ? 'active' : '' }}">{{ $season ? $season : '全部' }}</div>
 				<i class="material-icons home-search-arrow">keyboard_arrow_down</i>
 			</button>
 			<div id="search-season-dropdown" class="dropdown-menu home-option-wrapper">
@@ -63,8 +64,8 @@
 
 		<div class="filter format" style="position: relative;">
 			<h3>類型</h3>
-			<button style="outline:0; color: rgb(173,192,210); padding: 0px 14px 5px 14px;" class="bar btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">
-				<div style="margin-top: -1px; display: inline-block; float: left; font-weight: 500;">{{ $category ? $category : '全部' }}</div>
+			<button style="outline:0; color: rgb(173,192,210); padding: 0px 14px 5px 14px;" class="bar btn btn-secondary dropdown-toggle close-extra-filter-dropdown-menu" type="button" data-toggle="dropdown">
+				<div class="filter-value-text {{ $category ? 'active' : '' }}">{{ $category ? $category : '全部' }}</div>
 				<i class="material-icons home-search-arrow">keyboard_arrow_down</i>
 			</button>
 			<div id="search-category-dropdown" class="dropdown-menu home-option-wrapper">
@@ -76,103 +77,76 @@
 			</div>
 		</div>
 	</div>
-	<div class="extra-filter-wrap" style="background-color: transparent;">
-		<div id="home-filter-more-btn" onclick="document.getElementById('extra-filter-dropdown').style.display = 'flex';">
-			<i class="material-icons">tune</i>
+
+
+	<div class="filter format" style="position: relative;">
+		<div onclick="extra_filter_toggle()" class="extra-filter-wrap no-select" style="background-color: transparent;" type="button" data-toggle="dropdown">
+			<div id="home-filter-more-btn">
+				<i class="material-icons">tune</i>
+			</div>
+		</div>
+		<div id="extra-filter-dropdown" class="extra-filter-dropdown-menu home-option-wrapper" style="overflow: visible;">
+
+			<div>
+				<div class="filter airing" style="position: relative; display: inline-block;">
+					<h3>播放狀態</h3>
+					<button class="bar btn btn-secondary dropdown-toggle extra-filter-btn" type="button" data-toggle="dropdown">
+						<div class="filter-value-text {{ $airing_status ? 'active' : '' }}">{{ $airing_status ? $airing_status : '全部' }}</div>
+						<i class="material-icons home-search-arrow">keyboard_arrow_down</i>
+					</button>
+					<div id="airing-status-dropdown" class="dropdown-menu home-option-wrapper" style="width: 180px">
+						<input type="hidden" id="airing_status" name="airing_status" value="{{ $airing_status }}">
+						<div class="home-option airing-status-option">全部</div>
+							@foreach (['Currently Airing', 'Finished Airing', 'Not yet aired', 'Cancelled'] as $airing_status)
+								<div class="home-option airing-status-option">{{ $airing_status }}</div>
+							@endforeach
+					</div>
+				</div>
+
+				<div class="filter streaming" style="position: relative; display: inline-block; margin-left: 30px;">
+					<h3>串流平台</h3>
+					<button class="bar btn btn-secondary dropdown-toggle extra-filter-btn" type="button" data-toggle="dropdown">
+						<div class="filter-value-text {{ $streaming_on ? 'active' : '' }}">{{ $streaming_on ? $streaming_on : '全部' }}</div>
+						<i class="material-icons home-search-arrow">keyboard_arrow_down</i>
+					</button>
+					<div id="streaming-on-dropdown" class="dropdown-menu home-option-wrapper" style="width: 180px">
+						<input type="hidden" id="streaming_on" name="streaming_on" value="{{ $streaming_on }}">
+						<div class="home-option streaming-on-option">全部</div>
+					</div>
+				</div>
+			</div>
+
+			<div style="margin-top: 20px">
+				<div class="filter country" style="position: relative; display: inline-block;">
+					<h3>原產國家</h3>
+					<button class="bar btn btn-secondary dropdown-toggle extra-filter-btn" type="button" data-toggle="dropdown">
+						<div class="filter-value-text {{ $country ? 'active' : '' }}">{{ $country ? $country : '全部' }}</div>
+						<i class="material-icons home-search-arrow">keyboard_arrow_down</i>
+					</button>
+					<div id="country-dropdown" class="dropdown-menu home-option-wrapper" style="width: 180px;">
+						<input type="hidden" id="country" name="country" value="{{ $country }}">
+						<div class="home-option country-option">全部</div>
+					</div>
+				</div>
+
+				<div class="filter source" style="position: relative; display: inline-block; margin-left: 30px;">
+					<h3>原作素材</h3>
+					<button class="bar btn btn-secondary dropdown-toggle extra-filter-btn" type="button" data-toggle="dropdown">
+						<div class="filter-value-text {{ $source ? 'active' : '' }}">{{ $source ? $source : '全部' }}</div>
+						<i class="material-icons home-search-arrow">keyboard_arrow_down</i>
+					</button>
+					<div id="source-dropdown" class="dropdown-menu home-option-wrapper" style="width: 180px">
+						<input type="hidden" id="source" name="source" value="{{ $source }}">
+						<div class="home-option source-option">全部</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
-</div>
-<div class="extra-filter-dropdown" id="extra-filter-dropdown">
-	<form action="">
-		<button type="button" style="float:right;"
-			onclick="document.getElementById('extra-filter-dropdown').style.display = 'none';">X</button>
-		<div class="filters">
-			<div class="filters-wrap">
-				<div class="filter airing-status">
-					<h3>播放狀態</h3>
-					<div class="bar">
-						<input type="search" placeholder="輸入狀態..."
-							onclick="document.getElementById('option-airing-status').style.display='block'"
-							id="airingStatusInput">
-						<div class="scroll-wrap" id="option-airing-status">
-							<div class="option-group">
-								<option value="播放中">播放中</option>
-								<option value="完結">完結</option>
-								<option value="製作中">製作中</option>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="filters-wrap">
-				<div class="filter country-origin">
-					<h3>國家</h3>
-					<div class="bar">
-						<input type="search" placeholder="輸入國家..."
-							onclick="document.getElementById('option-country-origin').style.display='block'"
-							id="countryOriginInput">
-						<div class="scroll-wrap" id="option-country-origin">
-							<div class="option-group">
-								<option value="日本">日本</option>
-								<option value="韓國">韓國</option>
-								<option value="美國">美國</option>
-								<option value="中國">中國</option>
-								<option value="其他">其他</option>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="filters">
-			<div class="filters-wrap range">
-				<div class="filter">
-					<h3>年份</h3>
-					<div class="bar">
-						<input type="range" min="1970" max="2025" value="2025">
-					</div>
-				</div>
-				<div class="filter">
-					<h3>集數</h3>
-					<div class="bar">
-						<input type="range" min="1" max="150" value="150">
-					</div>
-				</div>
-				<div class="filter">
-					<h3>時長</h3>
-					<div class="bar">
-						<input type="range" min="1" max="170" value="170">
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="filters">
-			<div class="filters-wrap checkbox">
-				<div class="filter">
-					<div class="bar">
-						<input type="checkbox" id="doujin" name="doujin" value="doujin">
-						<label for="doujin"> 同人</label><br>
-					</div>
-				</div>
-				<div class="filter">
-					<div class="bar">
-						<input type="checkbox" id="showAnimeList" name="showAnimeList" value="showAnimeList">
-						<label for="showAnimeList"> 顯示收藏動漫</label><br>
-					</div>
-				</div>
-				<div class="filter">
-					<div class="bar">
-						<input type="checkbox" id="hideAnimeList" name="hideAnimeList" value="hideAnimeList">
-						<label for="hideAnimeList"> 隱藏收藏動漫</label><br>
-					</div>
-				</div>
-				<div class="filter">
-					<div class="bar">
-						<input type="checkbox" id="adult" name="adult" value="adult">
-						<label for="adult"> 成人</label><br>
-					</div>
-				</div>
-			</div>
-		</div>
-	</form>
+
+	<script>
+		function extra_filter_toggle() {
+			document.getElementById("extra-filter-dropdown").classList.toggle("show");
+		}
+	</script>
 </div>

@@ -78,6 +78,27 @@ $(".upload-image-btn").on("change", function() {
   $('#file-text').val(fileName);
 });
 
+window.onclick = function(event) {
+    if (!document.getElementById('extra-filter-dropdown').contains(event.target)){
+        close_extra_filter_dropdown_menu();
+    }
+}
+
+$(".close-extra-filter-dropdown-menu").click(function() {
+    close_extra_filter_dropdown_menu();
+})
+
+function close_extra_filter_dropdown_menu() {
+    var dropdowns = document.getElementsByClassName("extra-filter-dropdown-menu");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+        var openDropdown = dropdowns[i];
+        if (openDropdown.classList.contains('show')) {
+            openDropdown.classList.remove('show');
+        }
+    }
+}
+
 $('.genre-option').click(function() {
   var genre = $(this).text();
   $("#genre").val(genre);
@@ -90,30 +111,12 @@ $('.duration-option').click(function() {
   $('form#hentai-form').submit();
 })
 
-$('.year-option').click(function() {
-  var year = $(this).text();
-  if (year == '全部') {
-    year = '';
+$('.home-option').click(function() {
+  var option = $(this).text();
+  if (option == '全部') {
+    option = '';
   }
-  $("#year").val(year);
-  $('form#hentai-form').submit();
-})
-
-$('.season-option').click(function() {
-  var season = $(this).text();
-  if (season == '全部') {
-    season = '';
-  }
-  $("#season").val(season);
-  $('form#hentai-form').submit();
-})
-
-$('.category-option').click(function() {
-  var category = $(this).text();
-  if (category == '全部') {
-    category = '';
-  }
-  $("#category").val(category);
+  this.parentElement.querySelector('input').value = option;
   $('form#hentai-form').submit();
 })
 
