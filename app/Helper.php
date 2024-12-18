@@ -43,4 +43,17 @@ class Helper
             return ($size / 1000).' GB';
         } */
     }
+
+    public static function getSeasonByMonth($month)
+    {
+        if ($month >= 1 && $month <= 3) {
+            return 'Winter';
+        } elseif ($month >= 4 && $month <= 6) {
+            return 'Spring';
+        } elseif ($month >= 7 && $month <= 9) {
+            return 'Summer';
+        } elseif ($month >= 10 && $month <= 12) {
+            return 'Fall';
+        }
+    }
 }

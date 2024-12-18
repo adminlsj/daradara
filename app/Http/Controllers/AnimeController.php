@@ -19,6 +19,7 @@ use Mail;
 use Redirect;
 use Storage;
 use App\Helper;
+use Carbon\Carbon;
 use SteelyWing\Chinese\Chinese;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -119,16 +120,15 @@ class AnimeController extends Controller
                     break;
 
                 case '人氣':
-                    // rating_mal_count
-                    $results = $results->orderBy('rating_mal', 'desc');
+                    $results = $results->where('rating_mal_count', '!=', null)->orderBy('rating_mal_count', 'desc');
                     break;
 
                 case '評分':
-                    $results = $results->orderBy('rating_mal', 'desc');
+                    $results = $results->where('rating_mal', '!=', null)->orderBy('rating_mal', 'desc');
                     break;
 
                 case '流行':
-                    $results = $results->orderBy('rating_mal', 'desc');
+                    $results = $results->where('rating_mal_count', '!=', null)->orderBy('rating_mal_count', 'desc');
                     break;
 
                 case '讚好':
@@ -140,7 +140,7 @@ class AnimeController extends Controller
                     break;
 
                 case '上市日期':
-                    $results = $results->orderBy('started_at', 'desc');
+                    $results = $results->where('started_at', '!=', null)->orderBy('started_at', 'desc');
                     break;
 
                 default:
