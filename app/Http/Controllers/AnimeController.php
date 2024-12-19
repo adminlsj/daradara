@@ -74,10 +74,12 @@ class AnimeController extends Controller
             $query = mb_strtolower($query, 'UTF-8');
             $query = str_replace(' ', '%', $query);
             $chinese = new Chinese();
+            $original = '%'.$query.'%';
             $zh_hant = '%'.$chinese->to(Chinese::ZH_HANT, $query).'%';
             $zh_hans = '%'.$chinese->to(Chinese::ZH_HANS, $query).'%';
-            $results = $results->where(function($query) use ($zh_hant, $zh_hans) {
-                $query->where('searchtext', 'like', $zh_hant)
+            $results = $results->where(function($query) use ($original, $zh_hant, $zh_hans) {
+                $query->where('searchtext', 'like', $original)
+                      ->orWhere('searchtext', 'like', $zh_hant)
                       ->orWhere('searchtext', 'like', $zh_hans);
             });
         }
