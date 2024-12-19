@@ -36,8 +36,8 @@
 </div>
 
 @if (Auth::check() && Auth::user()->id == $user->id)
-    @include('user.animelist.create')
-    @include('user.animelist.edit')
+    @include('user.animeList.create')
+    @include('user.animeList.edit')
 @endif
 
 @endsection
