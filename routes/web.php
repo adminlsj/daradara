@@ -34,16 +34,19 @@ Route::get('/anime/{anime}/{title?}/characters', 'AnimeController@show')->name('
 Route::get('/anime/{anime}/{title?}/staff', 'AnimeController@show')->name('anime.staff');
 Route::get('/anime/{anime}/{title?}/comments', 'AnimeController@show')->name('anime.comments');
 
+Route::get('/staff/search', 'StaffController@search')->name('staff.search');
+Route::get('/staff/{staff}/{title?}', 'StaffController@show')->name('staff.show');
+
+Route::get('/character/search', 'CharacterController@search')->name('character.search');
+Route::get('/character/{character}/{title?}', 'CharacterController@show')->name('character.show');
+
+Route::get('/company/search', 'CompanyController@search')->name('company.search');
+Route::get('/company/{company}/{title?}', 'CompanyController@show')->name('company.show');
+
 // Savelist
 Route::post('/user/{user}/savelist', 'SavelistController@store')->name('user.savelist.store');
 Route::put('/user/{user}/savelist/{savelist}', 'SavelistController@update')->name('user.savelist.update');
 Route::delete('/user/{user}/savelist/{savelist}', 'SavelistController@destroy')->name('user.savelist.destroy');
-
-// Others
-Route::get('/character/{character}/{title?}', 'CharacterController@show')->name('character.show');
-// Route::get('/actor/{actor}/{title?}', 'ActorController@show')->name('actor.show');
-Route::get('/staff/{staff}/{title?}', 'StaffController@show')->name('staff.show');
-Route::get('/company/{company}/{title?}', 'CompanyController@show')->name('company.show');
 
 Route::group(['middleware' => 'admin'], function () {
 	Route::get('/tempMethod', 'BotController@tempMethod');

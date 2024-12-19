@@ -25,6 +25,8 @@ use SteelyWing\Chinese\Chinese;
 use Illuminate\Database\Eloquent\Builder;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
+use Spatie\Browsershot\Browsershot;
+use GuzzleHttp\Client;
 
 class BotController extends Controller
 {
@@ -950,10 +952,45 @@ class BotController extends Controller
 
     public function tempMethod(Request $request)
     {   
-        $animes = Anime::all();
-        foreach ($animes as $anime) {
-            $anime->delete();
+        // Anilist API
+        /* $query = '
+        query ($id: Int, $page: Int, $perPage: Int, $search: String) {
+          Page (page: $page, perPage: $perPage) {
+            pageInfo {
+              currentPage
+              hasNextPage
+              perPage
+            }
+            media (id: $id, search: $search) {
+              id
+              title {
+                romaji
+              }
+            }
+          }
         }
+        ';
+
+        $variables = [
+            "page" => 1,
+            "perPage" => 50
+        ];
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL,"https://graphql.anilist.co");
+        curl_setopt($ch, CURLOPT_POST, true);
+        $data = json_encode([
+                    'query' => $query,
+                    'variables' => $variables,
+            ]);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type:application/json']);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $response = curl_exec($ch);
+        curl_close($ch);
+
+        return json_decode($response, true); */
+
 
         /* $animes = Anime::where('id', '>=', $request->from)->where('id', '<=', $request->to)->where('sources', 'ilike', '%"myanimelist"%')->where('rating_mal_count', null)->orderBy('started_at', 'desc')->get();
         foreach ($animes as $anime) {
