@@ -95,6 +95,13 @@
     margin-bottom: 0;
 }
 
+.character-anime-wrap .character-animes .related-animes .staff-media-card .cover img {
+    object-position: center; 
+    object-fit: cover; 
+    width: 100%; 
+    height: 100%;
+}
+
 .character-anime-wrap .character-animes .related-animes .staff-media-card .relation-image {
     border-left: solid 2px rgb(237,241,245);
     border-radius: 4px 0 4px 0;
