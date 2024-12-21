@@ -952,6 +952,13 @@ class BotController extends Controller
 
     public function tempMethod(Request $request)
     {   
+        // Update anime null count to 0
+        $animes = Anime::where('rating_mal_count', null)->get();
+        foreach ($animes as $anime) {
+            $anime->rating_mal_count = 0;
+            $anime->save();
+        }
+
         // Anilist API
         /* $query = '
         query ($id: Int, $page: Int, $perPage: Int, $search: String) {

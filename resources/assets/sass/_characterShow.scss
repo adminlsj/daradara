@@ -1,5 +1,5 @@
 .character-wrap {
-    padding-top: 35px;
+    padding-top: 50px;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -23,7 +23,7 @@
     width: 100%;
     height: 100%;
     background-color: #f0f6f8;
-    padding-top: 15px;
+    padding-top: 10px;
 }
 
 /**         Character Headings          **/
@@ -36,18 +36,37 @@
 }
 
 .character-name-wrap {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+}
+
+.character-name-wrap .character-name {
+    color: rgb(100,115,128);
+    font-weight: 800;
+    font-size: 2.8rem;
+    letter-spacing: .03em;
+    margin-top: 10px;
+}
+
+.character-name-wrap .character-name-alt {
+    color: rgb(139,160,178);
+    font-size: 1.4rem;
+    font-weight: 500;
+    margin-top: 8px;
 }
 
 .character-name-wrap button {
-    background-color: #ed294b;
     border: none;
-    color: white;
-    padding: 8px 15px;
+    align-items: center;
+    background: rgb(236,41,75);
     border-radius: 5px;
+    color: rgb(255,255,255);
+    cursor: pointer;
+    font-size: 1.4rem;
+    font-weight: bold;
+    height: 35px;
+    justify-content: center;
+    padding-left: 1px;
+    transition: .2s;
+    padding: 0 14px;
 }
 
 @media (max-width: 1040px) {
@@ -88,10 +107,11 @@
 }
 
 .character-cover img {
-    width: 175px;
-    height: 250px;
+    width: 230px;
+    height: 345px;
     object-fit: cover;
-    border-radius: 5px 5px 0 0;
+    border-radius: 5px;
+    box-shadow: 0 14px 30px rgba(103,132,187, .15), 0 4px 4px rgba(103,132,187, .05);
 }
 
 .character-heading-content {
@@ -106,17 +126,21 @@
 }
 
 .character-heading-content p {
-    color: #727e8e;
-    font-family: Roboto;
-    font-size: 13px;
     margin-left: 0px;
     padding-left: 0px;
     transition: 0.2s;
     font-weight: normal;
 }
 
-.character-info p {
-    line-height: 100%;
+.character-info div, .character-description {
+    color: rgb(139,160,178);
+    font-size: 1.4rem;
+    font-weight: normal;
+    line-height: 2.1rem;
+}
+
+.character-description {
+
 }
 
 .character-info-mobile {
@@ -141,11 +165,6 @@
         line-height: 150%;
     }
 }
-
-.character-heading-content p:hover {
-    color: #8b9fb5;
-}
-
 
 /**         Character Animes        **/
 
@@ -184,10 +203,16 @@
     opacity: 1;
 }
 
+.character-animes .related-animes-year {
+    color: rgb(116,136,153);
+    font-size: 2.2rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+
 .character-animes .related-animes {
     display: grid;
     grid-template-columns: repeat(auto-fill, 185px);
-    padding-top: 30px;
     justify-content: space-between;
     gap: 25px 20px;
 }
@@ -200,8 +225,17 @@
 }
 
 .character-animes .related-animes .media-card a {
-    font-weight: normal;
-    text-decoration: none;
+    color: rgb(116,136,153);
+    font-size: 1.4rem;
+    font-weight: 600;
+    line-height: 21px;
+    margin-top: 10px;
+    word-break: break-word;
+    overflow: hidden;
+    transition: color .2s ease;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
 }
 
 .character-animes .related-animes .media-card a:first-child {

@@ -10,7 +10,7 @@ class Staff extends Model
     protected $table = 'staffs';
 
     protected $casts = [
-        'nicknames' => 'array', 'sources' => 'array'
+        'nicknames' => 'array', 'sources' => 'array', 'birthday' => 'datetime'
     ];
 
     protected $fillable = [
@@ -20,11 +20,11 @@ class Staff extends Model
     public function animes($role)
     {
         switch ($role) {
-            case 'App\Actor':
+            case 'actor':
                 return $this->belongsToMany('App\Anime', 'anime_character_roles', 'staff_id', 'anime_id');
                 break;
 
-            case 'App\Staff':
+            case 'staff':
                 return $this->morphToMany('App\Anime', 'animeable', 'anime_roles')->withPivot('role');
                 break;
         }
