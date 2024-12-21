@@ -76,6 +76,11 @@
     color: rgb(0, 143, 143);;
 }
 
+.character-anime-wrap .character-animes .related-animes .staff-media-card {
+    width: 185px; 
+    position: relative;
+}
+
 .character-anime-wrap .character-animes .related-animes .staff-media-card a {
     text-decoration: none;
     margin-top: 0;
@@ -148,9 +153,9 @@
 }
 
 .character-anime-wrap .character-animes .related-animes .staff-media-card .name-alt {
-    font-size: 1.2rem !important;
-    color: rgb(139,160,178) !important;
-    line-height: 16px !important;
+    font-size: 1.2rem;
+    color: rgb(139,160,178);
+    line-height: 16px;
     font-weight: normal;
     margin-top: 3px;
 }
