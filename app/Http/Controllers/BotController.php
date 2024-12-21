@@ -1383,20 +1383,20 @@ class BotController extends Controller
 
     public function updateSearchtext(Request $request)
     {
-        // Update character search text
-        $characters = Character::all();
-        foreach ($characters as $character) {
-            $searchtext = $character->name_zht.'|'.$character->name_zhs.'|'.$character->name_jp.'|'.$character->name_en;
-            $character->searchtext = mb_strtolower(preg_replace('/\s+/', '', $searchtext), 'UTF-8');
-            $character->save();
-        }
-
         // Update company search text
         $companies = Company::all();
         foreach ($companies as $company) {
             $searchtext = $company->name_zht.'|'.$company->name_zhs.'|'.$company->name_jp.'|'.$company->name_en;
             $company->searchtext = mb_strtolower(preg_replace('/\s+/', '', $searchtext), 'UTF-8');
             $company->save();
+        }
+        
+        // Update character search text
+        $characters = Character::all();
+        foreach ($characters as $character) {
+            $searchtext = $character->name_zht.'|'.$character->name_zhs.'|'.$character->name_jp.'|'.$character->name_en;
+            $character->searchtext = mb_strtolower(preg_replace('/\s+/', '', $searchtext), 'UTF-8');
+            $character->save();
         }
 
         // Update staff search text
