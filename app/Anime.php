@@ -37,6 +37,11 @@ class Anime extends Model
         return substr($string, $ini, $len);
     }
 
+    public function staffs()
+    {
+        return $this->belongsToMany('App\Staff', 'anime_character_roles', 'anime_id', 'staff_id')->withPivot('role');
+    }
+
     public function characters()
     {
         return $this->belongsToMany('App\Character', 'anime_character_roles', 'anime_id', 'character_id')->withPivot('role');
@@ -55,11 +60,6 @@ class Anime extends Model
     public function producers()
     {
         return $this->morphedByMany('App\Company', 'animeable', 'anime_roles')->withPivot('role')->where('role', 'Producers');
-    }
-
-    public function staffs()
-    {
-        return $this->morphedByMany('App\Staff', 'animeable', 'anime_roles')->withPivot('role');
     }
 
     public function related_animes()
@@ -89,7 +89,7 @@ class Anime extends Model
 
     public function getTitle($chinese)
     {
-        return $chinese->to(Chinese::ZH_HANT, ($this->title_zht ? $this->title_zht : ($this->title_zhs ? $this->title_zhs : ($this->title_jp ? $this->title_jp : $this->title_en))));
+        return str_replace('/', ' ', $chinese->to(Chinese::ZH_HANT, ($this->title_zht ? $this->title_zht : ($this->title_zhs ? $this->title_zhs : ($this->title_jp ? $this->title_jp : $this->title_en)))));
     }
 
     public function getRelation($relation)

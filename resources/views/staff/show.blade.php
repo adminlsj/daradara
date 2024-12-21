@@ -17,7 +17,7 @@
 			<div class="character-heading-content flex-column">
 				<div class="character-name-wrap">
 					<div class="character-name">
-						{{ $staff->getTitle($chinese) }}
+						{{ $staff->getName($chinese) }}
 						<form style="margin-top: -5px;" class="like-form pull-right" action="{{ route('like.create', ['type' => 'App\Staff', 'id' => $staff->id]) }}" method="POST">
 	                        {{ csrf_field() }}
 	                        <button class="no-button-style" type="submit">
@@ -25,7 +25,7 @@
 	                        </button>
 	                    </form>
 					</div>
-					<div class="character-name-alt">{{ $staff->name_zhs && $staff->name_zhs != $staff->getTitle($chinese) ? $staff->name_zhs.', ' : '' }}{{ $staff->name_jp && $staff->name_jp != $staff->getTitle($chinese) ? $staff->name_jp.', ' : '' }}{{ $staff->name_en ? str_replace(', ', ' ', $staff->name_en) : '' }}</div>
+					<div class="character-name-alt">{{ $staff->name_zhs && $staff->name_zhs != $staff->getName($chinese) ? $staff->name_zhs.', ' : '' }}{{ $staff->name_jp && $staff->name_jp != $staff->getName($chinese) ? $staff->name_jp.', ' : '' }}{{ $staff->name_en ? str_replace(', ', ' ', $staff->name_en) : '' }}</div>
 				</div>
 				<p> {{ $staff->nickname }} </p>
 				<div class="character-info" style="margin-top: 10px;">

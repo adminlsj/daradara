@@ -8,7 +8,7 @@ use SteelyWing\Chinese\Chinese;
 class Character extends Model
 {
     protected $casts = [
-        'nickname' => 'array', 'sources' => 'array'
+        'nickname' => 'array', 'sources' => 'array', 'birthday' => 'datetime'
     ];
 
     protected $fillable = [
@@ -17,7 +17,7 @@ class Character extends Model
 
     public function animes()
     {
-        return $this->belongsToMany('App\Anime', 'anime_character_roles', 'character_id', 'anime_id');
+        return $this->belongsToMany('App\Anime', 'anime_character_roles', 'character_id', 'anime_id')->distinct()->orderBy('started_at', 'desc')->orderBy('rating_mal_count', 'desc');
     }
 
     public function actors()
@@ -37,6 +37,6 @@ class Character extends Model
 
     public function getName($chinese)
     {
-        return $chinese->to(Chinese::ZH_HANT, ($this->name_zht ? $this->name_zht : ($this->name_zhs ? $this->name_zhs : ($this->name_jp ? $this->name_jp : $this->name_en))));
+        return str_replace('/', ' ', $chinese->to(Chinese::ZH_HANT, ($this->name_zht ? $this->name_zht : ($this->name_zhs ? $this->name_zhs : ($this->name_jp ? $this->name_jp : $this->name_en)))));
     }
 }
