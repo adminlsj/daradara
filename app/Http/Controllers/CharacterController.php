@@ -21,8 +21,13 @@ class CharacterController extends Controller
 {
     public function show(Request $request, Character $character)
     {
-        $animes = $character->animes;
-        return view('character.show', compact('animes', 'character'));
+        $animes = $character->animes->load(['staffs' => function($query) use ($character) {
+                        $query->where('character_id', $character->id);
+                    }]);
+
+        $chinese = new Chinese();
+
+        return view('character.show', compact('animes', 'character', 'chinese'));
     }
 
     public function search(Request $request)
