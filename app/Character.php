@@ -35,7 +35,7 @@ class Character extends Model
         return $this->morphMany('App\Comment', 'commentable');
     }
 
-    public function getTitle($chinese)
+    public function getName($chinese)
     {
         return $chinese->to(Chinese::ZH_HANT, ($this->name_zht ? $this->name_zht : ($this->name_zhs ? $this->name_zhs : ($this->name_jp ? $this->name_jp : $this->name_en))));
     }

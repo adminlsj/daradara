@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Staff;
 use App\Anime;
 use App\Character;
+use App\AnimeCharacterRole;
 use App\Episodes;
 use App\User;
+use App\Like;
 use Illuminate\Http\Request;
 use Response;
 use Auth;
@@ -22,9 +24,14 @@ class StaffController extends Controller
 {
     public function show(Request $request, Staff $staff)
     {
-        $animes_actor = $staff->animes('App\Actor')->get();
-        $animes_staff = $staff->animes('App\Staff')->get();
-        return view('staff.show', compact('staff', 'animes_actor', 'animes_staff'));
+        $animes_actor = $staff->animes('actor')->with(['characters' => function($query) use ($staff) {
+                                    $query->where('staff_id', $staff->id);
+                                }])->distinct()->orderBy('rating_mal_count', 'desc')->orderBy('rating_mal', 'desc')->get();
+        $animes_staff = $staff->animes('staff')->get();
+
+        $chinese = new Chinese();
+
+        return view('staff.show', compact('staff', 'animes_actor', 'animes_staff', 'chinese'));
     }
 
     public function search(Request $request)

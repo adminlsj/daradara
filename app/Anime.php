@@ -8,7 +8,7 @@ use SteelyWing\Chinese\Chinese;
 class Anime extends Model
 {
     protected $casts = [
-        'sources' => 'array', 'genres' => 'array', 'tags' => 'array'
+        'sources' => 'array', 'genres' => 'array', 'tags' => 'array', 'started_at' => 'datetime'
     ];
 
     protected $fillable = [

@@ -278,22 +278,4 @@ class AnimeController extends Controller
             return Redirect::route('anime.show', ['anime' => $anime, 'title' => $anime->getTitle($chinese)]);
         }
     }
-
-    public function like(Request $request, Anime $anime)
-    {
-        $user = Auth::user();
-        if ($like = Like::where('user_id', $user->id)->where('likeable_id', $anime->id)->where('likeable_type', 'App\Anime')->first()) {
-            $like->delete();
-        } else {
-            Like::create([
-                'user_id' => $user->id,
-                'likeable_id' => $anime->id,
-                'likeable_type' => 'App\Anime'
-            ]);
-        }
-
-        $chinese = new Chinese();
-
-        return Redirect::route('anime.show', ['anime' => $anime, 'title' => $anime->getTitle($chinese)]);
-    }
 }

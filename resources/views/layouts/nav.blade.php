@@ -1,4 +1,4 @@
-<div class="navbar-wrapper {{ Request::is('/') || Request::is('*/search*') ? 'navbar-wrapper-solid' : '' }}">
+<div class="navbar-wrapper {{ Request::is('/') || Request::is('*/search*') || Request::is('staff/*/*') ? 'navbar-wrapper-solid' : '' }}">
     <div class="navbar">
         <div class="icon">
             <a href="/">

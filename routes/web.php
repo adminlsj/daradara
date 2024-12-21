@@ -27,7 +27,6 @@ Route::get('/user/{user}/{name?}/likes', 'UserController@likes')->name('user.lik
 // Anime
 Route::get('/anime/search', 'AnimeController@search')->name('anime.search');
 Route::post('/anime/{anime}/save', 'AnimeController@save')->name('anime.save');
-Route::post('/anime/{anime}/like', 'AnimeController@like')->name('anime.like');
 Route::get('/anime/{anime}/{title?}', 'AnimeController@show')->name('anime.show');
 Route::get('/anime/{anime}/{title?}/episodes', 'AnimeController@show')->name('anime.episodes');
 Route::get('/anime/{anime}/{title?}/characters', 'AnimeController@show')->name('anime.characters');
@@ -47,6 +46,9 @@ Route::get('/company/{company}/{title?}', 'CompanyController@show')->name('compa
 Route::post('/user/{user}/savelist', 'SavelistController@store')->name('user.savelist.store');
 Route::put('/user/{user}/savelist/{savelist}', 'SavelistController@update')->name('user.savelist.update');
 Route::delete('/user/{user}/savelist/{savelist}', 'SavelistController@destroy')->name('user.savelist.destroy');
+
+// Like
+Route::post('/{type}/{id}/like', 'LikeController@create')->name('like.create');
 
 Route::group(['middleware' => 'admin'], function () {
 	Route::get('/tempMethod', 'BotController@tempMethod');

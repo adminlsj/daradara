@@ -76,3 +76,74 @@
     color: rgb(0, 143, 143);;
 }
 
+.character-anime-wrap .character-animes .related-animes .staff-media-card a {
+    text-decoration: none;
+    margin-top: 0;
+}
+
+.character-anime-wrap .character-animes .related-animes .staff-media-card .cover {
+    background: rgba(221,230,238, .8);
+    border-radius: 4px;
+    box-shadow: 0 14px 30px rgba(103,132,187, .15), 0 4px 4px rgba(103,132,187, .05);
+    cursor: pointer;
+    display: inline-block;
+    height: 265px;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    z-index: 5;
+    margin-bottom: 0;
+}
+
+.character-anime-wrap .character-animes .related-animes .staff-media-card .relation-image {
+    border-left: solid 2px rgb(237,241,245);
+    border-radius: 4px 0 4px 0;
+    border-top: solid 2px rgb(237,241,245);
+    height: 85px;
+    overflow: hidden;
+    position: absolute;
+    right: 0;
+    top: 180px;
+    width: 65px;
+    z-index: 10;
+}
+
+.character-anime-wrap .character-animes .related-animes .staff-media-card .relation-image img {
+    height: 100%;
+    left: 0;
+    object-fit: cover;
+    opacity: 1;
+    position: absolute;
+    top: 0;
+    transition: opacity .3s ease-in-out;
+    width: 100%;
+    z-index: 10;
+}
+
+.character-anime-wrap .character-animes .related-animes .staff-media-card .name {
+    color: rgb(116,136,153);
+    font-size: 1.4rem;
+    font-weight: normal;
+    line-height: 21px;
+    margin-top: 5px;
+    margin-bottom: 0;
+    text-decoration: none;
+    word-break: break-word;
+    overflow: hidden;
+    transition: color .2s ease;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+.character-anime-wrap .character-animes .related-animes .staff-media-card:hover .name {
+    color: rgb(92,114,138);
+}
+
+.character-anime-wrap .character-animes .related-animes .staff-media-card .name-alt {
+    font-size: 1.2rem !important;
+    color: rgb(139,160,178) !important;
+    line-height: 16px !important;
+    font-weight: normal;
+    margin-top: 3px;
+}
