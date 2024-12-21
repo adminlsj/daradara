@@ -26,7 +26,7 @@ class StaffController extends Controller
     {
         $animes_actor = $staff->animes('actor')->with(['characters' => function($query) use ($staff) {
                                     $query->where('staff_id', $staff->id);
-                                }])->distinct()->orderBy('rating_mal_count', 'desc')->orderBy('rating_mal', 'desc')->get();
+                                }])->distinct()->orderBy('started_at', 'desc')->orderBy('rating_mal_count', 'desc')->get();
         $animes_staff = $staff->animes('staff')->get();
 
         $chinese = new Chinese();
