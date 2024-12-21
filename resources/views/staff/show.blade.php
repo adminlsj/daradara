@@ -39,7 +39,7 @@
 		</div>
 	</div>
 
-	<div class="character-anime-wrap" style="padding-top: 40px">
+	<div class="character-anime-wrap" style="padding-top: 40px; padding-bottom: 40px;">
 		<div class="character-animes flex-column">
 			<!-- <div class="character-button-groups flex-row">
 				<button>顯示收藏清單上</button>
@@ -58,18 +58,18 @@
 					<div class="related-animes">
 						@foreach ($related_animes as $anime)
 							@foreach ($anime->characters as $character)
-								<div class="staff-media-card" style="width: 185px; position: relative;">
+								<div class="staff-media-card">
 									<a class="cover" href="{{ route('character.show', ['character' => $character, 'title' => $character->getName($chinese)]) }}">
 										<img src="{{ $character->photo_cover }}" alt="">
 									</a>
-									<a class="relation-image" style="position: absolute;" href="{{ route('anime.show', ['anime' => $anime->id, 'title' => $anime->getTitle($chinese)]) }}">
+									<a class="relation-image" href="{{ route('anime.show', ['anime' => $anime->id, 'title' => $anime->getTitle($chinese)]) }}">
 										<img src="{{ $anime->photo_cover }}" alt="">
 									</a>
 									<a href="{{ route('character.show', ['character' => $character, 'title' => $character->getName($chinese)]) }}">
 										<div class="name">{{ $character->getName($chinese) }}</div>
 									</a>
 									<a href="{{ route('anime.show', ['anime' => $anime->id, 'title' => $anime->getTitle($chinese)]) }}">
-										<div class="name-alt" style="font-size: 12px; color: dimgray;">{{ $anime->getTitle($chinese) }}</div>
+										<div class="name-alt">{{ $anime->getTitle($chinese) }}</div>
 									</a>
 								</div>
 							@endforeach
@@ -79,22 +79,25 @@
 	            @endif
 			@endfor
 
-			<div class="related-animes">
-				@foreach ($animes_staff as $anime)
-					<div class="media-card">
-						<a href="{{ route('anime.show', ['anime' => $anime->id, 'title' => $anime->title_ro]) }}">
-							<img src="{{ $anime->photo_cover }}" alt="">
-						</a>
-						<a href="{{ route('anime.show', ['anime' => $anime->id, 'title' => $anime->title_ro]) }}">
-							<div>{{ $anime->title_ro }}</div>
-							<div style="font-size: 12px; color: dimgray;">{{ $anime->pivot->role }}</div>
-						</a>
-					</div>
-				@endforeach
-			</div>
+			@if ($animes_staff != '[]')
+	        	<div class="related-animes-year">幕後工作</div>			
+				<div class="related-animes">
+					@foreach ($animes_staff as $anime)
+						<div class="staff-media-card">
+							<a class="cover" href="{{ route('anime.show', ['anime' => $anime->id, 'title' => $anime->getTitle($chinese)]) }}">
+								<img src="{{ $anime->photo_cover }}" alt="">
+							</a>
+							<a href="{{ route('anime.show', ['anime' => $anime->id, 'title' => $anime->getTitle($chinese)]) }}">
+								<div class="name">{{ $anime->getTitle($chinese) }}</div>
+							</a>
+							<a href="{{ route('anime.show', ['anime' => $anime->id, 'title' => $anime->getTitle($chinese)]) }}">
+								<div class="name-alt">{{ $anime->pivot->role }}</div>
+							</a>
+						</div>
+					@endforeach
+				</div>
+			@endif
 		</div>
 	</div>
 </div>
-</div>
-
 @endsection
