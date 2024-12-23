@@ -171,14 +171,16 @@
                                 </div>
                             @endforeach
 
-                            <div style="margin-bottom: 1px;">
-                                <div style="float: left; width: 24px; display: inline-block; padding-left: 2px; font-weight: 400;">
-                                    +
+                            <a style="color: rgba(92, 114, 138);" href="{{ route('user.animelist', ['user' => Auth::user(), 'name' => Auth::user()->name]) }}" target="_blank">
+                                <div style="margin-bottom: 1px;">
+                                    <div style="float: left; width: 24px; display: inline-block; padding-left: 0px;">
+                                        <i class="material-icons-sharp" style="font-size: 17px; vertical-align: middle; margin-top: -1px; margin-left: -2px; color: #B1B2B0">add_box</i>
+                                    </div>
+                                    <div style="display: inline-block; width: calc(100% - 24px);">
+                                        <label style="font-size: 1.2rem; font-weight: 400; margin-top: -1px; cursor: pointer;" class="no-select" for="is_private">新增播放清單</label>
+                                    </div>
                                 </div>
-                                <div style="display: inline-block; width: calc(100% - 24px);">
-                                    <label style="font-size: 1.2rem; font-weight: 400; margin-top: -1px; cursor: pointer;" class="no-select" for="is_private">新增播放清單</label>
-                                </div>
-                            </div>
+                            </a>
                             <hr style="margin-top: 9px; margin-bottom: 10px;">
 
                             @if ($anime_save)
