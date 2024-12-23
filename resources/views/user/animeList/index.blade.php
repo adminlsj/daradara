@@ -6,6 +6,8 @@
 
 @section('content')
 
+{{ Session::put('redirectTo', Request::url()) }}
+
 <div class="flex-column user-profile" style="background-color:rgb(237,241,245);">
     @include('user.show.userProfile')
     @include('user.show.navTabs')

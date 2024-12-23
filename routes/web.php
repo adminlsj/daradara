@@ -27,6 +27,7 @@ Route::get('/user/{user}/{name?}/likes', 'UserController@likes')->name('user.lik
 // Anime
 Route::get('/anime/search', 'AnimeController@search')->name('anime.search');
 Route::post('/anime/{anime}/save', 'AnimeController@save')->name('anime.save');
+Route::delete('/anime/{anime}/unsave', 'AnimeController@unsave')->name('anime.unsave');
 Route::get('/anime/{anime}/{title?}', 'AnimeController@show')->name('anime.show');
 Route::get('/anime/{anime}/{title?}/episodes', 'AnimeController@show')->name('anime.episodes');
 Route::get('/anime/{anime}/{title?}/characters', 'AnimeController@show')->name('anime.characters');

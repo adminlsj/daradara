@@ -33,6 +33,9 @@
 @endsection
 
 @section('content')
+
+{{ Session::put('redirectTo', Request::url()) }}
+
 <form style="overflow-y: hidden; overflow-x: hidden;" id="hentai-form" action="{{ route('anime.search') }}" method="GET">
 
 	@include('anime.search.search-nav-desktop')

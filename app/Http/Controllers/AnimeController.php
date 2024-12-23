@@ -18,6 +18,7 @@ use Auth;
 use Mail;
 use Redirect;
 use Storage;
+use Session;
 use App\Helper;
 use Carbon\Carbon;
 use SteelyWing\Chinese\Chinese;
@@ -277,5 +278,15 @@ class AnimeController extends Controller
         } else {
             return Redirect::route('anime.show', ['anime' => $anime, 'title' => $anime->getTitle($chinese)]);
         }
+    }
+
+    public function unsave(Request $request, Anime $anime)
+    {
+        $user = Auth::user();
+        if ($anime_save = $user->anime_save($anime->id)) {
+            $anime_save->savelistables->each->delete();
+            $anime_save->delete();
+        }
+        return Redirect::intended(Session::get('redirectTo'));
     }
 }

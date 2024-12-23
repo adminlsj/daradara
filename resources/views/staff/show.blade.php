@@ -12,7 +12,7 @@
 	<div class="character-wrap" style="padding-bottom: 50px;">
 		<div class="character-headings">
 			<div class="character-cover">
-				<img src="{{ $staff->photo_cover }}" alt="{{ $staff->name_zht }}">
+				<img src="{{ $staff->photo_cover }}" alt="{{ $staff->getName($chinese) }}">
 			</div>
 			<div class="character-heading-content flex-column">
 				<div class="character-name-wrap">
