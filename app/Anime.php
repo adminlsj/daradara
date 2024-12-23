@@ -37,6 +37,11 @@ class Anime extends Model
         return substr($string, $ini, $len);
     }
 
+    public function actors()
+    {
+        return $this->belongsToMany('App\Staff', 'anime_character_roles', 'anime_id', 'staff_id')->withPivot('role');
+    }
+
     public function staffs()
     {
         return $this->morphedByMany('App\Staff', 'animeable', 'anime_roles')->withPivot('role');

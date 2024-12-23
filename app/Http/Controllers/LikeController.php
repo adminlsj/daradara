@@ -29,6 +29,6 @@ class LikeController extends Controller
 
         $chinese = new Chinese();
 
-        return redirect()->intended(Session::get('redirectTo'));
+        return Redirect::intended($request->redirectTo);
     }
 }

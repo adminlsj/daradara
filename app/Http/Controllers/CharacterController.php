@@ -21,9 +21,9 @@ class CharacterController extends Controller
 {
     public function show(Request $request, Character $character)
     {
-        $animes = $character->animes->load(['staffs' => function($query) use ($character) {
-                        $query->where('character_id', $character->id);
-                    }]);
+        $animes = $character->animes('actor')->with(['actors' => function($query) use ($character) {
+                                $query->where('character_id', $character->id);
+                            }])->distinct()->orderBy('started_at', 'desc')->orderBy('rating_mal_count', 'desc')->get();
 
         $chinese = new Chinese();
 

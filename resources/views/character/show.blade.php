@@ -6,8 +6,6 @@
 
 @section('content') 
 
-{{ Session::put('redirectTo', Request::url()) }}
-
 <div class="flex-column" style="margin-top: 68px;">
 	<div class="character-wrap" style="padding-bottom: 50px;">
 		<div class="character-headings">
@@ -20,6 +18,7 @@
 						{{ $character->getName($chinese) }}
 						<form style="margin-top: -5px;" class="like-form pull-right" action="{{ route('like.create', ['type' => 'App\Character', 'id' => $character->id]) }}" method="POST">
 	                        {{ csrf_field() }}
+	                        <input id="redirectTo" name="redirectTo" type="hidden" value="{{ Request::url() }}">
 	                        <button class="no-button-style" type="submit">
 	                            <span style="color: {{ Auth::check() ? App\Like::where('user_id', Auth::user()->id)->where('likeable_id', $character->id)->where('likeable_type', 'App\Character')->first() ? '#810000' : 'white' : 'white'}}">♥</span>&nbsp;&nbsp;&nbsp;{{ App\Like::where('likeable_id', $character->id)->where('likeable_type', 'App\Character')->count() }}
 	                        </button>
@@ -44,19 +43,19 @@
             @if ($animes)
 				<div class="related-animes">
 					@foreach ($animes as $anime)
-						@foreach ($anime->staffs as $staff)
+						@foreach ($anime->actors as $actor)
 							<div class="staff-media-card">
 								<a class="cover" href="{{ route('anime.show', ['anime' => $anime->id, 'title' => $anime->getTitle($chinese)]) }}">
 									<img src="{{ $anime->photo_cover }}" alt="">
 								</a>
-								<a class="relation-image" href="{{ route('staff.show', ['staff' => $staff->id, 'title' => $staff->getName($chinese)]) }}">
-									<img src="{{ $staff->photo_cover }}" alt="">
+								<a class="relation-image" href="{{ route('staff.show', ['staff' => $actor->id, 'title' => $actor->getName($chinese)]) }}">
+									<img src="{{ $actor->photo_cover }}" alt="">
 								</a>
 								<a href="{{ route('anime.show', ['anime' => $anime->id, 'title' => $anime->getTitle($chinese)]) }}">
 									<div class="name">{{ $anime->getTitle($chinese) }}</div>
 								</a>
-								<a href="{{ route('staff.show', ['staff' => $staff->id, 'title' => $staff->getName($chinese)]) }}">
-									<div class="name-alt">{{ $staff->getName($chinese) }}</div>
+								<a href="{{ route('staff.show', ['staff' => $actor->id, 'title' => $actor->getName($chinese)]) }}">
+									<div class="name-alt">{{ $actor->getName($chinese) }}</div>
 								</a>
 							</div>
 						@endforeach

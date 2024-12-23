@@ -6,8 +6,6 @@
 
 @section('content')
 
-{{ Session::put('redirectTo', Request::url()) }}
-
 <div class="flex-column" style="margin-top: 68px;">
     <div class="character-wrap" style="padding-bottom: 50px;">
         <div class="character-headings">
@@ -20,6 +18,7 @@
                         {{ $company->getName($chinese) }}
                         <form style="margin-top: -5px;" class="like-form pull-right" action="{{ route('like.create', ['type' => 'App\Company', 'id' => $company->id]) }}" method="POST">
                             {{ csrf_field() }}
+                            <input id="redirectTo" name="redirectTo" type="hidden" value="{{ Request::url() }}">
                             <button class="no-button-style" type="submit">
                                 <span style="color: {{ Auth::check() ? App\Like::where('user_id', Auth::user()->id)->where('likeable_id', $company->id)->where('likeable_type', 'App\Company')->first() ? '#810000' : 'white' : 'white'}}">♥</span>&nbsp;&nbsp;&nbsp;{{ App\Like::where('likeable_id', $company->id)->where('likeable_type', 'App\Company')->count() }}
                             </button>

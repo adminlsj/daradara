@@ -5,9 +5,6 @@
 @endsection
 
 @section('content') 
-
-    {{ Session::put('redirectTo', Request::url()) }}
-
     <div class="banner" style="background-image: url('https://s4.anilist.co/file/anilistcdn/media/anime/banner/16498-8jpFCOcDmneX.jpg');">
         <div class="shadow"></div>
     </div>
@@ -22,6 +19,7 @@
 
                     <form style="height: 35px; width: 35px; font-size: 17px; padding: 0; float: right; background-color: rgb(236,41,75); display: inline-block; border-radius: 3px; color: white; text-align: center; cursor: pointer;" id="anime-like-form" action="{{ route('like.create', ['type' => 'App\Anime', 'id' => $anime->id]) }}" method="POST">
                         {{ csrf_field() }}
+                        <input id="redirectTo" name="redirectTo" type="hidden" value="{{ Request::url() }}">
                         <button style="line-height: 35px; width: 35px; color: {{ Auth::check() ? App\Like::where('user_id', Auth::user()->id)->where('likeable_id', $anime->id)->where('likeable_type', 'App\Anime')->first() ? '#810000' : 'white' : 'white'}}" class="no-button-style" type="submit">
                             ♥
                         </button>
@@ -33,7 +31,7 @@
                 </div>
             </div>
 
-            @include('anime.save-panel', ['redirectTo' => 'anime.show'])
+            @include('anime.save-panel')
             
             <div class="heading-content">
                 <div>
