@@ -6,8 +6,6 @@
 
 @section('content')
 
-{{ Session::put('redirectTo', Request::url()) }}
-
 <div class="flex-column user-profile" style="background-color:rgb(237,241,245);">
     @include('user.show.userProfile')
     @include('user.show.navTabs')
@@ -29,7 +27,7 @@
             <div class="list-entries">
                 <div class="list-section flex-row">
                     @foreach ($anime_saves as $anime_save)
-                        @include('user.animeList.card', ['redirectTo' => "user.animelist.show.{$savelist->id}.{$savelist->title}"])
+                        @include('user.animeList.card')
                     @endforeach
                 </div>
             </div>

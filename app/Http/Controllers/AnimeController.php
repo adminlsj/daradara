@@ -262,22 +262,7 @@ class AnimeController extends Controller
             }
         }
 
-        $chinese = new Chinese();
-
-        $redirectTo = $request->redirectTo;
-        if ($redirectTo == 'user.animelist') {
-            return Redirect::route('user.animelist', ['user' => $user, 'name' => $user->name]);
-
-        } elseif (strpos($redirectTo, 'user.animelist.show') !== false) {
-            $redirectTo = str_replace('user.animelist.show.', '', $redirectTo);
-            $data = explode('.', $redirectTo);
-            $savelist = $data[0];
-            $title = $data[1];
-            return Redirect::route('user.animelist.show', ['user' => $user, 'name' => $user->name, 'savelist' => $savelist, 'title' => $title]);
-
-        } else {
-            return Redirect::route('anime.show', ['anime' => $anime, 'title' => $anime->getTitle($chinese)]);
-        }
+        return Redirect::intended($request->redirectTo);
     }
 
     public function unsave(Request $request, Anime $anime)
@@ -287,6 +272,6 @@ class AnimeController extends Controller
             $anime_save->savelistables->each->delete();
             $anime_save->delete();
         }
-        return Redirect::intended(Session::get('redirectTo'));
+        return Redirect::intended($request->redirectTo);
     }
 }

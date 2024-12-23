@@ -15,9 +15,17 @@ class Character extends Model
         'id', 'created_at', 'updated_at', 'photo_cover', 'name_zht', 'name_zhs', 'name_jp', 'name_en', 'birthday', 'gender', 'description', 'role', 'sources'
     ];
 
-    public function animes()
+    public function animes($role)
     {
-        return $this->belongsToMany('App\Anime', 'anime_character_roles', 'character_id', 'anime_id')->distinct()->orderBy('started_at', 'desc')->orderBy('rating_mal_count', 'desc');
+        switch ($role) {
+            case 'actor':
+                return $this->belongsToMany('App\Anime', 'anime_character_roles', 'character_id', 'anime_id');
+                break;
+
+            case 'staff':
+                return $this->morphToMany('App\Anime', 'animeable', 'anime_roles')->withPivot('role');
+                break;
+        }
     }
 
     public function actors()

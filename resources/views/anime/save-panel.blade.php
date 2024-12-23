@@ -3,7 +3,7 @@
 
     <input id="type" name="type" type="hidden" value="anime">
     <input id="is_status" name="is_status" type="hidden" value="false">
-    <input id="redirectTo" name="redirectTo" type="hidden" value="{{ $redirectTo }}">
+    <input id="redirectTo" name="redirectTo" type="hidden" value="{{ Request::url() }}">
 
     <div id="createSavelist{{ $anime->id }}" class="modal" role="dialog">
         <div class="modal-dialog">
@@ -204,5 +204,6 @@
     <form id="destroyAnimeSaveForm" action="{{ route('anime.unsave', ['anime' => $anime]) }}" method="POST">
         {{ csrf_field() }}
         {{ method_field('DELETE') }}
+        <input id="redirectTo" name="redirectTo" type="hidden" value="{{ Request::url() }}">
     </form>
 @endif
