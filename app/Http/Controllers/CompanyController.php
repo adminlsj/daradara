@@ -24,7 +24,10 @@ class CompanyController extends Controller
     public function show(Request $request, Company $company)
     {
         $animes = $company->animes;
-        return view('company.show', compact('animes', 'company'));
+
+        $chinese = new Chinese();
+
+        return view('company.show', compact('animes', 'company', 'chinese'));
     }
 
     public function search(Request $request)

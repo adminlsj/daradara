@@ -160,18 +160,17 @@
                         
                         <div class="form-group" style="width: 20%">
                             <h3 style="font-size: 1.3rem; color: rgba(122,133,143, .9); font-weight: 400; margin-top: 30px;">列表</h3>
-                
-                                @foreach ($anime_lists as $anime_list)
-                                    <div style="margin-bottom: 1px;">
-                                        <div style="float: left; width: 24px; display: inline-block;">
-                                            <input style="filter: brightness(1.5);" type="checkbox" name="animelists[]" value="{{ $anime_list->id }}" id="animelist-{{ $anime_list->id }}-{{ $anime->id }}" {{ in_array($anime_list->id, $saved_lists) ?  'checked' : ''}}>
-                                        </div>
-                                        <div style="display: inline-block; width: calc(100% - 24px);">
-                                            <label style="font-size: 1.2rem; font-weight: 400; margin-top: -1px; margin-left: -12px; padding-left: 12px;" class="no-select" for="animelist-{{ $anime_list->id }}-{{ $anime->id }}">{{ $anime_list->title }}</label>
-                                        </div>
+                            @foreach ($anime_lists as $anime_list)
+                                <div style="margin-bottom: 1px;">
+                                    <div style="float: left; width: 24px; display: inline-block;">
+                                        <input style="filter: brightness(1.5);" type="checkbox" name="animelists[]" value="{{ $anime_list->id }}" id="animelist-{{ $anime_list->id }}-{{ $anime->id }}" {{ in_array($anime_list->id, $saved_lists) ?  'checked' : ''}}>
                                     </div>
-                                @endforeach
-                            <hr style="margin-top: 9px; margin-bottom: 10px;">
+                                    <div style="display: inline-block; width: calc(100% - 24px);">
+                                        <label style="font-size: 1.2rem; font-weight: 400; margin-top: -1px; margin-left: -12px; padding-left: 12px;" class="no-select" for="animelist-{{ $anime_list->id }}-{{ $anime->id }}">{{ $anime_list->title }}</label>
+                                    </div>
+                                </div>
+                            @endforeach
+
                             <div style="margin-bottom: 1px;">
                                 <div style="float: left; width: 24px; display: inline-block; padding-left: 2px; font-weight: 400;">
                                     +
@@ -180,6 +179,13 @@
                                     <label style="font-size: 1.2rem; font-weight: 400; margin-top: -1px; cursor: pointer;" class="no-select" for="is_private">新增播放清單</label>
                                 </div>
                             </div>
+                            <hr style="margin-top: 9px; margin-bottom: 10px;">
+
+                            @if ($anime_save)
+                                <div class="save-delete-btn" onclick="document.getElementById('destroyAnimeSaveForm').submit();">
+                                    刪除
+                                </div>
+                            @endif
                         </div>
                     </div>
 
@@ -193,3 +199,10 @@
         </div>
     </div>
 </form>
+
+@if ($anime_save)
+    <form id="destroyAnimeSaveForm" action="{{ route('anime.unsave', ['anime' => $anime]) }}" method="POST">
+        {{ csrf_field() }}
+        {{ method_field('DELETE') }}
+    </form>
+@endif

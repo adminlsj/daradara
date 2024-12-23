@@ -8,7 +8,7 @@ use SteelyWing\Chinese\Chinese;
 class Company extends Model
 {
     protected $casts = [
-        'sources' => 'array'
+        'sources' => 'array', 'started_at' => 'datetime', 'ended_at' => 'datetime'
     ];
 
     protected $fillable = [
@@ -17,7 +17,7 @@ class Company extends Model
 
     public function animes()
     {
-        return $this->morphToMany('App\Anime', 'animeable', 'anime_roles');
+        return $this->morphToMany('App\Anime', 'animeable', 'anime_roles')->distinct()->orderBy('started_at', 'desc')->orderBy('rating_mal_count', 'desc')->withPivot('role');
     }
     
     public function likes()
