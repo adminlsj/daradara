@@ -323,6 +323,7 @@ class BotController extends Controller
             } else {
                 return "Bangumi staff page {$i} access failed<br>";
             }
+            echo "Bangumi staff page {$i} scraped<br>";
         }
     }
 
