@@ -295,7 +295,7 @@ class BotController extends Controller
         $from = $request->from;
         $to = $request->to;
         for ($i = $from; $i <= $to; $i++) {
-            $url = "https://bangumi.tv/person?orderby=title&type={$type}&page={$i}";
+            $url = "https://bangumi.tv/person?orderby=collects&type={$type}&page={$i}";
             $curl_connection = curl_init($url);
             curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
             curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
