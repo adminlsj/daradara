@@ -366,6 +366,7 @@ class BotController extends Controller
                     $height = str_replace('cm', '', $height);
                     $height = str_replace('CM', '', $height);
                     $height = str_replace('厘米', '', $height);
+                    $height = str_replace('㎝', '', $height);
                     $staff->height = $height;
                 }
 
