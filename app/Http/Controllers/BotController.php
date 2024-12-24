@@ -289,6 +289,46 @@ class BotController extends Controller
         }
     }
 
+    public function scrapeBangumiStaffList(Request $request)
+    {
+        $type = $request->type;
+        $pages = $request->pages;
+        for ($i = 1; $i <= $pages; $i++) {
+            $url = "https://bangumi.tv/person?type={$type}&page={$i}";
+            $curl_connection = curl_init($url);
+            curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+            curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+            $html = curl_exec($curl_connection);
+            curl_close($curl_connection);
+            sleep(1);
+
+            if (strpos($html, '<div class="browserCrtList">') !== false && strpos($html, '<div id="multipage" class="clearit">') !== false) {
+                $list_raw = trim(Helper::get_string_between($html, '<div class="browserCrtList">', '<div id="multipage" class="clearit">'));
+                $list_raw_array = explode('<div class="rr">', $list_raw);
+                array_shift($list_raw_array);
+                foreach ($list_raw_array as $item) {
+                    $url = "https://bangumi.tv".trim(Helper::get_string_between($item, '<a href="', '"'));
+                    $name = trim(Helper::get_string_between($item, 'class="l">', '<'));
+                    if ($staff = Staff::where('name_jp', $name)->orWhere('name_en', $name)->first()) {
+                        if (!array_key_exists("bangumi", $staff->sources)) {
+                            $temp = $staff->sources;
+                            $temp['bangumi'] = $url;
+                            $staff->sources = $temp;
+                            $staff->save();
+                        } else {
+                            return "Bangumi staff name {$name} exists<br>";
+                        }
+                    } else {
+                        echo "Bangumi staff name {$name} not found<br>";
+                    }
+                }
+            } else {
+                return "Bangumi staff page {$i} access failed<br>";
+            }
+        }
+    }
+
     public function scrapeMalAnimes(Request $request)
     {
         // from 59091
