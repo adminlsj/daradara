@@ -327,6 +327,65 @@ class BotController extends Controller
         }
     }
 
+    public function scrapeBangumiStaff(Request $request)
+    {
+        $staffs = Staff::where('sources', 'like', '%'."bangumi".'%')->where('id', '>=', $request->from)->where('id', '<=', $request->to)->get();
+        foreach ($staffs as $staff) {
+            $url = $staff->sources['bangumi'];
+            $curl_connection = curl_init($url);
+            curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+            curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+            $html = curl_exec($curl_connection);
+            curl_close($curl_connection);
+            sleep(1);
+
+            if (strpos($html, '<h1 class="nameSingle">') !== false) {
+                if (strpos($html, '<span class="tip">简体中文名: </span>') !== false) {
+                    $name_zhs = trim(Helper::get_string_between($html, '<span class="tip">简体中文名: </span>', '</li>'));
+                    $staff->name_zhs = $name_zhs;
+                }
+
+                if (strpos($html, '<span class="tip">性别: </span>') !== false) {
+                    $gender = trim(Helper::get_string_between($html, '<span class="tip">性别: </span>', '</li>'));
+                    $staff->gender = $gender;
+                }
+
+                if (strpos($html, '<span class="tip">生日: </span>') !== false) {
+                    $birthday = trim(Helper::get_string_between($html, '<span class="tip">生日: </span>', '</li>'));
+                    $staff->name_zht = $birthday;
+                }
+
+                if (strpos($html, '<span class="tip">血型: </span>') !== false) {
+                    $blood_type = trim(Helper::get_string_between($html, '<span class="tip">血型: </span>', '</li>'));
+                    $staff->blood_type = $blood_type;
+                }
+
+                if (strpos($html, '<span class="tip">身高: </span>') !== false) {
+                    $height = str_replace('cm', '', trim(Helper::get_string_between($html, '<span class="tip">身高: </span>', '</li>')));
+                    $staff->height = $height;
+                }
+
+                if (strpos($html, '<span class="tip">出生地: </span>') !== false) {
+                    $hometown = trim(Helper::get_string_between($html, '<span class="tip">出生地: </span>', '</li>'));
+                    $staff->hometown = $hometown;
+                }
+
+                if (strpos($html, '<div class="detail">') !== false) {
+                    $description = trim(Helper::get_string_between($html, '<div class="detail">', '</div>'));
+                    $staff->description = $description;
+                }
+
+                $staff->save();
+
+                echo "Bangumi staff id #{$staff->id} scraped<br>";
+
+            } else {
+                return "Bangumi staff id #{$staff->id} access failed<br>";
+            }
+        }
+    }
+
     public function scrapeMalAnimes(Request $request)
     {
         // from 59091
