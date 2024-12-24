@@ -329,7 +329,7 @@ class BotController extends Controller
 
     public function scrapeBangumiStaff(Request $request)
     {
-        $staffs = Staff::where('sources', 'like', '%'."bangumi".'%')->where('id', '>=', $request->from)->where('id', '<=', $request->to)->get();
+        $staffs = Staff::where('sources', 'like', '%'."bangumi".'%')->where('id', '>=', $request->from)->where('id', '<=', $request->to)->orderBy('id', 'asc')->get();
         foreach ($staffs as $staff) {
             $url = $staff->sources['bangumi'];
             $curl_connection = curl_init($url);
