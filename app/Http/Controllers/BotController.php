@@ -292,8 +292,9 @@ class BotController extends Controller
     public function scrapeBangumiStaffList(Request $request)
     {
         $type = $request->type;
-        $pages = $request->pages;
-        for ($i = 1; $i <= $pages; $i++) {
+        $from = $request->from;
+        $to = $request->to;
+        for ($i = $from; $i <= $to; $i++) {
             $url = "https://bangumi.tv/person?type={$type}&page={$i}";
             $curl_connection = curl_init($url);
             curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
