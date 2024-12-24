@@ -365,6 +365,7 @@ class BotController extends Controller
                     $height = trim(Helper::get_string_between($html, '<span class="tip">身高: </span>', '</li>'));
                     $height = str_replace('cm', '', $height);
                     $height = str_replace('CM', '', $height);
+                    $height = str_replace('厘米', '', $height);
                     $staff->height = $height;
                 }
 
