@@ -363,7 +363,11 @@ class BotController extends Controller
 
                 if (strpos($html, '<span class="tip">身高: </span>') !== false) {
                     $height = str_replace('cm', '', trim(Helper::get_string_between($html, '<span class="tip">身高: </span>', '</li>')));
-                    $staff->height = $height;
+                    if ($staff->id == 1268) {
+                        $staff->blood_type = $height;
+                    } else {
+                        $staff->height = $height;
+                    }
                 }
 
                 if (strpos($html, '<span class="tip">出生地: </span>') !== false) {
