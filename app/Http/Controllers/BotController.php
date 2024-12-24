@@ -295,7 +295,7 @@ class BotController extends Controller
         $from = $request->from;
         $to = $request->to;
         for ($i = $from; $i <= $to; $i++) {
-            $url = "https://bangumi.tv/person?type={$type}&page={$i}";
+            $url = "https://bangumi.tv/person?orderby=title&type={$type}&page={$i}";
             $curl_connection = curl_init($url);
             curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
             curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
@@ -311,17 +311,13 @@ class BotController extends Controller
                 foreach ($list_raw_array as $item) {
                     $url = "https://bangumi.tv".trim(Helper::get_string_between($item, '<a href="', '"'));
                     $name = trim(Helper::get_string_between($item, 'class="l">', '<'));
-                    if ($staff = Staff::where('name_jp', $name)->orWhere('name_en', $name)->first()) {
-                        if (!array_key_exists("bangumi", $staff->sources)) {
-                            $temp = $staff->sources;
-                            $temp['bangumi'] = $url;
-                            $staff->sources = $temp;
-                            $staff->save();
-                        } else {
-                            return "Bangumi staff name {$name} exists<br>";
-                        }
+                    if ($staff = Staff::where('name_jp', $name)->where('sources', 'not like', '%"bangumi"%')->first()) {
+                        $temp = $staff->sources;
+                        $temp['bangumi'] = $url;
+                        $staff->sources = $temp;
+                        $staff->save();
                     } else {
-                        echo "Bangumi staff name {$name} not found<br>";
+                        echo "Bangumi staff name {$name} not found or exists<br>";
                     }
                 }
             } else {
