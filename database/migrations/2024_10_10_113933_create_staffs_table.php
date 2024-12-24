@@ -24,7 +24,7 @@ class CreateStaffsTable extends Migration
             $table->string('gender')->nullable();
             $table->string('hometown')->nullable();
             $table->string('blood_type')->nullable();
-            $table->integer('height')->nullable();
+            $table->decimal('height', 4, 1)->nullable();
             $table->text('description')->nullable();
             $table->string('photo_cover')->nullable();
             $table->jsonb('sources')->nullable();
