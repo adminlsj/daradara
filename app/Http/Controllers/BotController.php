@@ -359,9 +359,6 @@ class BotController extends Controller
                 if (strpos($html, '<span class="tip">血型: </span>') !== false) {
                     $blood_type = trim(Helper::get_string_between($html, '<span class="tip">血型: </span>', '</li>'));
                     $staff->blood_type = $blood_type;
-                    if ($staff->id != 2503) {
-                        $staff->blood_type = $blood_type;
-                    }
                 }
 
                 if (strpos($html, '<span class="tip">身高: </span>') !== false) {
@@ -370,12 +367,8 @@ class BotController extends Controller
                     $height = str_replace('CM', '', $height);
                     $height = str_replace('厘米', '', $height);
                     $height = str_replace('㎝', '', $height);
-                    if ($staff->id == 2503) {
-                        $staff->height = $blood_type;
-                        $staff->blood_type = $height;
-                    } else {
-                        $staff->height = $height;
-                    }
+                    $height = str_replace('公分', '', $height);
+                    $staff->height = $height;
                 }
 
                 if (strpos($html, '<span class="tip">出生地: </span>') !== false) {
