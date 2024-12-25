@@ -28,12 +28,12 @@
 				</div>
 				<p> {{ $staff->nickname }} </p>
 				<div class="character-info" style="margin-top: 10px;">
-					<div><b>生日：</b>{{ $staff->birthday ? $staff->birthday->toDateString() : '' }} </div>
-					<div><b>年齡：</b>{{ $staff->birthday ? $staff->birthday->age : '' }} </div>
-					<div><b>性別：</b>{{ $staff->gender }} </div>
-					<div><b>身高：</b>{{ $staff->height }} </div>
+					<div><b>生日：</b>{{ $staff->birthday ? $staff->birthday->toDateString() : '' }}</div>
+					<div><b>年齡：</b>{{ $staff->birthday ? $staff->birthday->age : '' }}</div>
+					<div><b>性別：</b>{{ $staff->gender }}</div>
+					<div><b>身高：</b>{{ $staff->height }} cm</div>
 				</div>
-				<p class="character-description" style="margin-top: 10px;"> {{ $staff->description }} </p>
+				<p class="character-description" style="margin-top: 10px; white-space: pre-line"> {{ str_replace('<br />', '', $staff->description) }} </p>
 			</div>
 		</div>
 	</div>
