@@ -412,6 +412,7 @@ class BotController extends Controller
                     foreach ($list_raw_array as $item) {
                         $character_url = 'https://bangumi.tv'.trim(Helper::get_string_between($item, '<a href="', '"'));
                         $name_jp = trim(Helper::get_string_between($item, 'class="l">', '</a>'));
+                        $name_jp = str_replace(' ', '', $name_jp);
 
                         if ($character = $anime->characters->where('name_jp', $name_jp)->first()) {
                             $temp = $character->sources;
