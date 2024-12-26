@@ -1054,12 +1054,20 @@ class BotController extends Controller
 
     public function tempMethod(Request $request)
     {   
+        $staffs = Staff::where('name_zht', 'like', "%年%月%日")->get();
+        foreach ($staffs as $staff) {
+            $birthday = Carbon::createFromFormat('Y年m月d日 H:i:s',  $staff->name_zht.' 00:00:00'); 
+            $staff->birthday = $birthday;
+            $staff->name_zht = null;
+            $staff->save();
+        }
+
         // Update anime null count to 0
-        $animes = Anime::where('rating_mal_count', null)->get();
+        /* $animes = Anime::where('rating_mal_count', null)->get();
         foreach ($animes as $anime) {
             $anime->rating_mal_count = 0;
             $anime->save();
-        }
+        } */
 
         // Anilist API
         /* $query = '
