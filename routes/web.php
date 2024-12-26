@@ -60,6 +60,7 @@ Route::group(['middleware' => 'admin'], function () {
 	Route::get('/scrapeBangumiEpisodes', 'BotController@scrapeBangumiEpisodes');
 	Route::get('/scrapeBangumiStaffList', 'BotController@scrapeBangumiStaffList');
 	Route::get('/scrapeBangumiStaff', 'BotController@scrapeBangumiStaff');
+	Route::get('/scrapeBangumiAnimeCharacterList', 'BotController@scrapeBangumiAnimeCharacterList');
 	Route::get('/importBangumiAnimeSource', 'BotController@importBangumiAnimeSource');
 	Route::get('/checkBangumiCompanies', 'BotController@checkBangumiCompanies');
 	Route::get('/mergeBangumiCompanies', 'BotController@mergeBangumiCompanies');
