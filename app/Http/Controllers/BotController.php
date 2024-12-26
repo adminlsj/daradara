@@ -391,6 +391,47 @@ class BotController extends Controller
         }
     }
 
+    public function scrapeBangumiAnimeCharacterList(Request $request)
+    {
+        $animes = Anime::where('sources', 'like', '%'."bangumi".'%')->where('id', '>=', $request->from)->where('id', '<=', $request->to)->orderBy('id', 'asc')->get();
+        foreach ($animes as $anime) {
+            $url = $anime->sources['bangumi'].'/characters';
+            $curl_connection = curl_init($url);
+            curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+            curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+            $html = curl_exec($curl_connection);
+            curl_close($curl_connection);
+            sleep(1);
+
+            if (strpos($html, '<div id="columnInSubjectA" class="column">') !== false) {
+                $list_raw = trim(Helper::get_string_between($html, '<div id="columnInSubjectA" class="column">', '</div></div>'));
+                if (strpos($list_raw, '<div class="light_odd">') !== false) {
+                    $list_raw_array = explode('<div class="light_odd">', $list_raw);
+                    array_shift($list_raw_array);
+                    foreach ($list_raw_array as $item) {
+                        $character_url = 'https://bangumi.tv'.trim(Helper::get_string_between($item, '<a href="', '"'));
+                        $name_jp = trim(Helper::get_string_between($item, 'class="l">', '</a>'));
+
+                        if ($character = $anime->characters->where('name_jp', $name_jp)->first()) {
+                            $temp = $character->sources;
+                            $temp['bangumi'] = $character_url;
+                            $character->sources = $temp;
+                            $character->save();
+                            echo "Bangumi anime id #{$anime->id} character id #{$character->id} scraped<br>";
+                        } else {
+                            echo "Bangumi anime id #{$anime->id} character name {$name_jp} not found<br>";
+                        }
+                    }
+                } else {
+                    return "Bangumi anime id #{$anime->id} has no characters<br>";
+                }
+            } else {
+                return "Bangumi anime id #{$anime->id} characters page access failed<br>";
+            }
+        }
+    }
+
     public function scrapeMalAnimes(Request $request)
     {
         // from 59091
@@ -1054,6 +1095,11 @@ class BotController extends Controller
 
     public function tempMethod(Request $request)
     {   
+        $characters = Character::where('name_jp', 'like', '% %')->get();
+        foreach ($characters as $character) {
+            $character->name_jp = str_replace(' ', '', $character->name_jp);
+            $character->save();
+        }
         /* $staffs = Staff::where('name_zht', 'like', "%年%月%日")->orderBy('id', 'asc')->get();
         foreach ($staffs as $staff) {
             $birthday = Carbon::createFromFormat('Y年m月d日 H:i:s',  $staff->name_zht.' 00:00:00'); 
