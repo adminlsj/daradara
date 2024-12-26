@@ -428,7 +428,7 @@ class BotController extends Controller
                     echo "Bangumi anime id #{$anime->id} url <a href='{$url}' target='_blank'>{$url}</a> has no characters<br>";
                 }
             } else {
-                return "Bangumi anime id #{$anime->id} url <a href='{$url}' target='_blank'>{$url}</a> access failed<br>";
+                echo "Bangumi anime id #{$anime->id} url <a href='{$url}' target='_blank'>{$url}</a> access failed<br>";
             }
         }
     }
