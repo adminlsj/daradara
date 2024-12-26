@@ -425,7 +425,7 @@ class BotController extends Controller
                         }
                     }
                 } else {
-                    return "Bangumi anime id #{$anime->id} has no characters<br>";
+                    return "Bangumi <a href='{$url}' target='_blank'>{$url}</a> has no characters<br>";
                 }
             } else {
                 return "Bangumi anime id #{$anime->id} characters page access failed<br>";
