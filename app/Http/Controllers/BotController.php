@@ -1054,13 +1054,6 @@ class BotController extends Controller
 
     public function tempMethod(Request $request)
     {   
-        $staffs = Staff::where('name_zht', 'like', "%-%")->orderBy('id', 'asc')->get();
-        foreach ($staffs as $staff) {
-            $birthday = Carbon::createFromFormat('Y-m-d H:i:s',  '1000-'.$staff->name_zht.' 00:00:00'); 
-            $staff->birthday = $birthday;
-            $staff->name_zht = null;
-            $staff->save();
-        }
         /* $staffs = Staff::where('name_zht', 'like', "%年%月%日")->orderBy('id', 'asc')->get();
         foreach ($staffs as $staff) {
             $birthday = Carbon::createFromFormat('Y年m月d日 H:i:s',  $staff->name_zht.' 00:00:00'); 
