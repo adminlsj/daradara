@@ -474,6 +474,7 @@ class BotController extends Controller
                     $height = str_replace('厘米', '', $height);
                     $height = str_replace('㎝', '', $height);
                     $height = str_replace('公分', '', $height);
+                    $height = str_replace('(13歳)', '', $height);
                     $height = explode('→', $height)[0];
                     $character->height = $height;
                 }
@@ -481,6 +482,7 @@ class BotController extends Controller
                 if (strpos($html, '<span class="tip">体重: </span>') !== false) {
                     $weight = trim(Helper::get_string_between($html, '<span class="tip">体重: </span>', '</li>'));
                     $weight = str_replace('kg', '', $weight);
+                    $weight = str_replace('(13歳)', '', $weight);
                     $weight = explode('→', $weight)[0];
                     $character->weight = $weight;
                 }
