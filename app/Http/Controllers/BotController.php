@@ -508,6 +508,7 @@ class BotController extends Controller
                     $age = explode('〜', $age)[0];
                     $age = explode('(', $age)[0];
                     $age = explode('（', $age)[0];
+                    $age = explode('・', $age)[0];
                     if ($age != '?' && $age != '？') {
                         $character->age = $age;
                     }
