@@ -13,6 +13,7 @@
 
 Route::get('/', 'HomeController@index');
 
+
 // Auth
 Auth::routes();
 Route::get('auth/{provider}', 'Auth\LoginController@redirectToProvider');
@@ -34,12 +35,19 @@ Route::get('/anime/{anime}/{title?}/characters', 'AnimeController@show')->name('
 Route::get('/anime/{anime}/{title?}/staff', 'AnimeController@show')->name('anime.staff');
 Route::get('/anime/{anime}/{title?}/comments', 'AnimeController@show')->name('anime.comments');
 
+//Preview
+Route::get('/preview/{season}-{year}', 'PreviewController@index')->name('preview.index');
+Route::get('/preview/{season}-{year}/search', 'PreviewController@index')->name('preview.search');
+
+//Staff
 Route::get('/staff/search', 'StaffController@search')->name('staff.search');
 Route::get('/staff/{staff}/{title?}', 'StaffController@show')->name('staff.show');
 
+//Character
 Route::get('/character/search', 'CharacterController@search')->name('character.search');
 Route::get('/character/{character}/{title?}', 'CharacterController@show')->name('character.show');
 
+//Company
 Route::get('/company/search', 'CompanyController@search')->name('company.search');
 Route::get('/company/{company}/{title?}', 'CompanyController@show')->name('company.show');
 

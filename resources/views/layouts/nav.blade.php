@@ -9,7 +9,7 @@
         <div class="navbar-links flex-row" style="color: yellow !important;">
             <a href="/">首頁</a>
             <a href="/">動漫</a>
-            <a href="">新番預告</a>
+            <a href="{{ route('preview.index', ['season' => 'spring', 'year' => '2023']) }}">新番預告</a>
             <a href="{{ Auth::check() ? route('user.animelist', ['user' => Auth::user(), 'name' => Auth::user()->name]) : route('login') }}">我的清單</a>
             <a href="{{ route('staff.search') }}">幕後人員</a>
             <a href="{{ route('character.search') }}">動漫角色</a>
