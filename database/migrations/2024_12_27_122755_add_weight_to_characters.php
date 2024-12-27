@@ -14,7 +14,7 @@ class AddWeightToCharacters extends Migration
     public function up()
     {
         Schema::table('characters', function (Blueprint $table) {
-            $table->decimal('weight', 4, 1)->nullable();
+            $table->decimal('weight', 5, 1)->nullable();
         });
     }
 
