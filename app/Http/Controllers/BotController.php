@@ -485,6 +485,7 @@ class BotController extends Controller
                     $weight = trim(Helper::get_string_between($html, '<span class="tip">体重: </span>', '</li>'));
                     $weight = str_replace('kg', '', $weight);
                     $weight = str_replace('Kg', '', $weight);
+                    $weight = str_replace('㎏', '', $weight);
                     $weight = explode('→', $weight)[0];
                     $weight = explode('(', $weight)[0];
                     $weight = explode('（', $weight)[0];
