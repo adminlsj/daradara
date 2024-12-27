@@ -16,7 +16,7 @@ class AddNewFieldsToCharacters extends Migration
         Schema::table('characters', function (Blueprint $table) {
             $table->integer('initial_age')->nullable();
             $table->integer('age')->nullable();
-            $table->integer('height')->nullable();
+            $table->decimal('height', 4, 1)->nullable();
             $table->jsonb('nickname')->nullable();
         });
     }
