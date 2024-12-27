@@ -476,6 +476,7 @@ class BotController extends Controller
                     $height = str_replace('公分', '', $height);
                     $height = explode('→', $height)[0];
                     $height = explode('(', $height)[0];
+                    $height = explode('（', $height)[0];
                     $character->height = $height;
                 }
 
@@ -484,6 +485,7 @@ class BotController extends Controller
                     $weight = str_replace('kg', '', $weight);
                     $weight = explode('→', $weight)[0];
                     $weight = explode('(', $weight)[0];
+                    $weight = explode('（', $weight)[0];
                     $character->weight = $weight;
                 }
 
