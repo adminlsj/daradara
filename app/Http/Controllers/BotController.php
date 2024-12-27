@@ -488,6 +488,7 @@ class BotController extends Controller
                     $weight = str_replace('Kg', '', $weight);
                     $weight = str_replace('㎏', '', $weight);
                     $weight = str_replace('KG', '', $weight);
+                    $weight = str_replace('公斤', '', $weight);
                     $weight = explode('→', $weight)[0];
                     $weight = explode('(', $weight)[0];
                     $weight = explode('（', $weight)[0];
