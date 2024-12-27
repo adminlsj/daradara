@@ -478,6 +478,7 @@ class BotController extends Controller
                     $height = explode('(', $height)[0];
                     $height = explode('（', $height)[0];
                     $height = explode('-', $height)[0];
+                    $height = explode('/', $height)[0];
                     $character->height = $height;
                 }
 
