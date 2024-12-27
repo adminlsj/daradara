@@ -69,7 +69,6 @@
                 <i class="fa fa-sort"></i>
 			</div>
 		</div>
-		
 	</div>
 
 	<script>
