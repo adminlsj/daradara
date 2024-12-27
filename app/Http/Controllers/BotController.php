@@ -479,7 +479,7 @@ class BotController extends Controller
                     $height = explode('（', $height)[0];
                     $height = explode('-', $height)[0];
                     $height = explode('/', $height)[0];
-                    if ($height != '?') {
+                    if ($height != '?' && $height != '？') {
                         $character->height = $height;
                     }
                 }
@@ -495,7 +495,7 @@ class BotController extends Controller
                     $weight = explode('(', $weight)[0];
                     $weight = explode('（', $weight)[0];
                     $weight = explode('-', $weight)[0];
-                    if ($weight != '?') {
+                    if ($weight != '?' && $weight != '？') {
                         $character->weight = $weight;
                     }
                 }
@@ -507,7 +507,7 @@ class BotController extends Controller
                     $age = explode('→', $age)[0];
                     $age = explode('〜', $age)[0];
                     $age = explode('（', $age)[0];
-                    if ($age != '?') {
+                    if ($age != '?' && $age != '？') {
                         $character->age = $age;
                     }
                 }
