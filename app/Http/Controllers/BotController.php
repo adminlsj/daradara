@@ -495,6 +495,7 @@ class BotController extends Controller
                     $age = str_replace('歳', '', $age);
                     $age = explode('→', $age)[0];
                     $age = explode('〜', $age)[0];
+                    $age = explode('（', $age)[0];
                     $character->age = $age;
                 }
 
