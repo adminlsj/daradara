@@ -479,7 +479,9 @@ class BotController extends Controller
                     $height = explode('（', $height)[0];
                     $height = explode('-', $height)[0];
                     $height = explode('/', $height)[0];
-                    $character->height = $height;
+                    if ($height != '?') {
+                        $character->height = $height;
+                    }
                 }
 
                 if (strpos($html, '<span class="tip">体重: </span>') !== false) {
@@ -493,7 +495,9 @@ class BotController extends Controller
                     $weight = explode('(', $weight)[0];
                     $weight = explode('（', $weight)[0];
                     $weight = explode('-', $weight)[0];
-                    $character->weight = $weight;
+                    if ($weight != '?') {
+                        $character->weight = $weight;
+                    }
                 }
 
                 if (strpos($html, '<span class="tip">年龄: </span>') !== false) {
@@ -503,7 +507,9 @@ class BotController extends Controller
                     $age = explode('→', $age)[0];
                     $age = explode('〜', $age)[0];
                     $age = explode('（', $age)[0];
-                    $character->age = $age;
+                    if ($age != '?') {
+                        $character->age = $age;
+                    }
                 }
 
                 if (strpos($html, '<div class="detail">') !== false) {
