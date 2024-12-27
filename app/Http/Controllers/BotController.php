@@ -474,12 +474,14 @@ class BotController extends Controller
                     $height = str_replace('厘米', '', $height);
                     $height = str_replace('㎝', '', $height);
                     $height = str_replace('公分', '', $height);
+                    $height = explode('→', $height)[0];
                     $character->height = $height;
                 }
 
                 if (strpos($html, '<span class="tip">体重: </span>') !== false) {
                     $weight = trim(Helper::get_string_between($html, '<span class="tip">体重: </span>', '</li>'));
                     $weight = str_replace('kg', '', $weight);
+                    $weight = explode('→', $weight)[0];
                     $character->weight = $weight;
                 }
 
@@ -1167,11 +1169,8 @@ class BotController extends Controller
 
     public function tempMethod(Request $request)
     {   
-        $characters = Character::where('name_jp', 'like', '% %')->get();
-        foreach ($characters as $character) {
-            $character->name_jp = str_replace(' ', '', $character->name_jp);
-            $character->save();
-        }
+        $text = '45';
+        return explode('→', $text)[0];
         /* $staffs = Staff::where('name_zht', 'like', "%年%月%日")->orderBy('id', 'asc')->get();
         foreach ($staffs as $staff) {
             $birthday = Carbon::createFromFormat('Y年m月d日 H:i:s',  $staff->name_zht.' 00:00:00'); 
