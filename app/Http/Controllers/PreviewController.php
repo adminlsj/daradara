@@ -39,7 +39,11 @@ class PreviewController extends Controller{
 
     public function menu(Request $request)
     {
-        $animes = Anime::where('photo_cover', '!=', null)->whereIn('category', ['TV', 'Movie', 'OVA', 'ONA', 'Special'])->where('rating_mal_count', '!=', null)->orderBy('rating_mal_count', 'desc')->get();
-        return view('anime.preview.menu', compact('animes'));
+        $Winter2024 = Anime::where('season', 'Winter 2024')->where('photo_cover', '!=', null)->whereIn('category', ['TV', 'Movie', 'OVA', 'ONA', 'Special'])->where('rating_mal_count', '!=', null)->orderBy('rating_mal_count', 'desc')->get();
+        $Spring2024 = Anime::where('season', 'Spring 2024')->where('photo_cover', '!=', null)->whereIn('category', ['TV', 'Movie', 'OVA', 'ONA', 'Special'])->where('rating_mal_count', '!=', null)->orderBy('rating_mal_count', 'desc')->get();
+        $Summer2024 = Anime::where('season', 'Summer 2024')->where('photo_cover', '!=', null)->whereIn('category', ['TV', 'Movie', 'OVA', 'ONA', 'Special'])->where('rating_mal_count', '!=', null)->orderBy('rating_mal_count', 'desc')->get();
+        $Fall2024 = Anime::where('season', 'Fall 2024')->where('photo_cover', '!=', null)->whereIn('category', ['TV', 'Movie', 'OVA', 'ONA', 'Special'])->where('rating_mal_count', '!=', null)->orderBy('rating_mal_count', 'desc')->get();
+        //$animes = Anime::where('photo_cover', '!=', null)->whereIn('category', ['TV', 'Movie', 'OVA', 'ONA', 'Special'])->where('rating_mal_count', '!=', null)->orderBy('rating_mal_count', 'desc')->get();
+        return view('anime.preview.menu', compact('Winter2024', 'Spring2024', 'Summer2024', 'Fall2024'));
     }
 }
