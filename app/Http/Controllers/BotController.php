@@ -506,6 +506,7 @@ class BotController extends Controller
                     $age = trim(Helper::get_string_between($html, '<span class="tip">年龄: </span>', '</li>'));
                     $age = str_replace('岁', '', $age);
                     $age = str_replace('歳', '', $age);
+                    $age = str_replace('享年', '', $age);
                     $age = explode('→', $age)[0];
                     $age = explode('〜', $age)[0];
                     $age = explode('(', $age)[0];
