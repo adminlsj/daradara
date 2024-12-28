@@ -26,6 +26,9 @@
 @import "animeList";
 @import "likes";
 
+//preview page
+@import "preview";
+
 // Bootstrap
 $bootstrap-sass-asset-helper: false !default;
 $icon-font-path: if($bootstrap-sass-asset-helper, "bootstrap/", "../../fonts/bootstrap/") !default;
