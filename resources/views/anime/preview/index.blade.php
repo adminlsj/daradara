@@ -16,12 +16,13 @@
                         <i class="fa fa-calendar"></i>
                     </div>
                 </div>
-                <div onclick="extra_filter_toggle()" class="extra-filter-wrap no-select"
-                    style="background-color: transparent;" type="button" data-toggle="dropdown">
-                    <div id="home-filter-more-btn">
-                        <i class="fa fa-bars"></i>
+                <a href="{{ route('preview.menu') }}">
+                    <div class="extra-filter-wrap no-select" style="background-color: transparent;">
+                        <div id="home-filter-more-btn">
+                            <i class="fa fa-bars"></i>
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
             @include('anime.preview.search')
 

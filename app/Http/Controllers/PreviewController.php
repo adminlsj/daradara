@@ -36,4 +36,10 @@ class PreviewController extends Controller{
     {
         dd($request);
     }
+
+    public function menu(Request $request)
+    {
+        $animes = Anime::where('photo_cover', '!=', null)->whereIn('category', ['TV', 'Movie', 'OVA', 'ONA', 'Special'])->where('rating_mal_count', '!=', null)->orderBy('rating_mal_count', 'desc')->get();
+        return view('anime.preview.menu', compact('animes'));
+    }
 }

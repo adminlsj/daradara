@@ -38,6 +38,7 @@ Route::get('/anime/{anime}/{title?}/comments', 'AnimeController@show')->name('an
 //Preview
 Route::get('/preview/{season}-{year}', 'PreviewController@index')->name('preview.index');
 Route::get('/preview/{season}-{year}/search', 'PreviewController@index')->name('preview.search');
+Route::get('/preview/menu', 'PreviewController@menu')->name('preview.menu');
 
 //Staff
 Route::get('/staff/search', 'StaffController@search')->name('staff.search');
