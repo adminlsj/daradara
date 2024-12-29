@@ -9,21 +9,7 @@
     method="GET">
     <div class="flex-center-wrapper home-wrapper">
         <div class="flex-center-content flex-column" style="margin-top: 100px;">
-            <div class="filter format flex-row" style="position: relative; justify-content:flex-end; gap:15px;">
-                <div onclick="extra_filter_toggle()" class="extra-filter-wrap no-select"
-                    style="background-color: transparent;" type="button" data-toggle="dropdown">
-                    <div class="flex-column" id="home-filter-more-btn">
-                        <i class="fa fa-calendar"></i>
-                    </div>
-                </div>
-                <a href="{{ route('preview.menu') }}">
-                    <div class="extra-filter-wrap no-select" style="background-color: transparent;">
-                        <div id="home-filter-more-btn">
-                            <i class="fa fa-bars"></i>
-                        </div>
-                    </div>
-                </a>
-            </div>
+            @include('anime.preview.button-groups')
             @include('anime.preview.search')
 
             <div class="content-wrap">

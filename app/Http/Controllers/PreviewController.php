@@ -43,4 +43,20 @@ class PreviewController extends Controller{
         
         return view('anime.preview.menu', compact('animes'));
     }
+
+    public function airing(Request $request)
+    {
+        $animes = Anime::where('airing_status', '=', 'Currently Airing')->where('photo_cover', '!=', null)->whereIn('category', ['TV', 'Movie', 'OVA', 'ONA', 'Special'])->where('rating_mal_count', '!=', null)->get();
+
+        $carbon = new Carbon();
+
+        $text = '';
+        $category = '';
+        $streaming_on = '';
+        $country = '';
+        $source ='';
+        $chinese = new Chinese();
+
+        return view('anime.preview.airing', compact('animes', 'text', 'category', 'streaming_on', 'country', 'source', 'chinese', 'carbon'));
+    }
 }
