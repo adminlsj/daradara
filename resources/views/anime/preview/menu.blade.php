@@ -23,129 +23,24 @@
             </a>
         </div>
         <div class="preview-menu">
-            <div class="preview-menu-card">
-                <h3>2024</h3>
-                <div class="seasons">
-                    <div class="season">
-                        <a href="{{ route('preview.index', ['season' => 'Winter', 'year' => '2024']) }}" class="season">
-                            <img src="{{ $Winter2024->first()->photo_cover }}" alt="">
-                            <div class="season-info">
-                                <div class="season-name">Winter</div>
-                                <div class="total">{{ $Winter2024->count() }} Anime</div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="season">
-                        <a href="{{ route('preview.index', ['season' => 'Spring', 'year' => '2024']) }}" class="season">
-                            <img src="{{ $Spring2024->first()->photo_cover }}" alt="">
-                            <div class="season-info">
-                                <div class="season-name">Spring</div>
-                                <div class="total">{{ $Spring2024->count() }} Anime</div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="season">
-                        <a href="{{ route('preview.index', ['season' => 'Summer', 'year' => '2024']) }}" class="season">
-                            <img src="{{ $Summer2024->first()->photo_cover }}" alt="">
-                            <div class="season-info">
-                                <div class="season-name">Summer</div>
-                                <div class="total">{{ $Summer2024->count() }} Anime</div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="season">
-                        <a href="{{ route('preview.index', ['season' => 'Fall', 'year' => '2024']) }}" class="season">
-                            <img src="{{ $Fall2024->first()->photo_cover }}" alt="">
-                            <div class="season-info">
-                                <div class="season-name">Fall</div>
-                                <div class="total">{{ $Fall2024->count() }} Anime</div>
-                            </div>
-                        </a>
+            @foreach(range(2024, 2000) as $year)
+                <div class="preview-menu-card">
+                    <h3>{{ $year }}</h3>
+                    <div class="seasons">
+                        @foreach(['Winter', 'Spring', 'Summer', 'Fall'] as $season)                       
+                        <div class="season">
+                            <a href="{{ route('preview.index', ['season' => $season, 'year' => $year]) }}" class="season">
+                                <img src="{{ $animes->where('season', $season . ' ' . $year)->first()->photo_cover }}" alt="">
+                                <div class="season-info">
+                                    <div class="season-name">{{ $season }}</div>
+                                    <div class="total">{{ $animes->where('season', $season . ' ' . $year)->count() }} Anime</div>
+                                </div>
+                            </a>
+                        </div>
+                        @endforeach
                     </div>
                 </div>
-            </div>
-            <div class="preview-menu-card">
-                <h3>2023</h3>
-                <div class="seasons">
-                    <div class="season">
-                        <a href="" class="season">
-                            <img src="{{ $Winter2024->first()->photo_cover }}" alt="">
-                            <div class="season-info">
-                                <div class="season-name">Winter</div>
-                                <div class="total">{{ $Winter2024->count() }} Anime</div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="season">
-                        <a href="" class="season">
-                            <img src="{{ $Spring2024->first()->photo_cover }}" alt="">
-                            <div class="season-info">
-                                <div class="season-name">Spring</div>
-                                <div class="total">{{ $Spring2024->count() }} Anime</div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="season">
-                        <a href="" class="season">
-                            <img src="{{ $Summer2024->first()->photo_cover }}" alt="">
-                            <div class="season-info">
-                                <div class="season-name">Summer</div>
-                                <div class="total">{{ $Summer2024->count() }} Anime</div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="season">
-                        <a href="" class="season">
-                            <img src="{{ $Fall2024->first()->photo_cover }}" alt="">
-                            <div class="season-info">
-                                <div class="season-name">Fall</div>
-                                <div class="total">{{ $Fall2024->count() }} Anime</div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="preview-menu-card">
-                <h3>2022</h3>
-                <div class="seasons">
-                    <div class="season">
-                        <a href="" class="season">
-                            <img src="{{ $Winter2024->first()->photo_cover }}" alt="">
-                            <div class="season-info">
-                                <div class="season-name">Winter</div>
-                                <div class="total">{{ $Winter2024->count() }} Anime</div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="season">
-                        <a href="" class="season">
-                            <img src="{{ $Spring2024->first()->photo_cover }}" alt="">
-                            <div class="season-info">
-                                <div class="season-name">Spring</div>
-                                <div class="total">{{ $Spring2024->count() }} Anime</div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="season">
-                        <a href="" class="season">
-                            <img src="{{ $Summer2024->first()->photo_cover }}" alt="">
-                            <div class="season-info">
-                                <div class="season-name">Summer</div>
-                                <div class="total">{{ $Summer2024->count() }} Anime</div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="season">
-                        <a href="" class="season">
-                            <img src="{{ $Fall2024->first()->photo_cover }}" alt="">
-                            <div class="season-info">
-                                <div class="season-name">Fall</div>
-                                <div class="total">{{ $Fall2024->count() }} Anime</div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 </div>
