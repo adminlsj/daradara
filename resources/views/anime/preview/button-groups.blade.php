@@ -6,7 +6,7 @@
             </div>
         </div>
     </a>
-    <a href="{{ route('preview.menu') }}">
+    <a href="{{ route('preview.index') }}">
         <div class="extra-filter-wrap no-select" style="background-color: transparent;">
             <div id="home-filter-more-btn">
                 <i class="fa fa-bars"></i>
