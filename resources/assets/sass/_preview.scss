@@ -57,6 +57,41 @@
 }
 
 /****       Airing        ****/
+
 .preview-airing .landing-section h3 {
     margin: 30px 0;
+}
+
+.preview-airing .media-wrap {
+    display: grid;
+    grid-column-gap: 20px;
+    grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+}
+
+.preview-airing .media-wrap .media-preview-card {
+    height: 65px;
+    max-width: 100%;
+    width: 100%;
+}
+
+.preview-airing .media-wrap .media-preview-card img {
+    width: 50px;
+    height: 65px;
+    object-fit: cover;
+}
+
+.preview-airing .media-wrap .media-preview-card .relations-content {
+    width: 85%;
+    padding: 10px 14px;
+}
+
+.preview-airing .media-wrap .media-preview-card .relations-content p {
+    white-space: nowrap;
+    overflow: hidden;
+    padding: 0;
+    font-size: 1.3rem; 
+    color: rgb(92,114,138); 
+    font-weight: 400; 
+    margin-top: -3px;
+    text-overflow: ellipsis;
 }
