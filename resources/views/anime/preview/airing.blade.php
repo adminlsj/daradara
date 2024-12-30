@@ -21,13 +21,13 @@
                                     <a href="{{ route('anime.show', ['anime' => $anime, 'title' => $anime->getTitle($chinese)]) }}">
                                         <img src="{{ $anime->photo_cover }}" alt=""></a>
                                     <div class="relations-content">
-                                        <div>
-                                            <a href="{{ route('anime.show', ['anime' => $anime, 'title' => $anime->getTitle($chinese)]) }}">
+                                        <a href="{{ route('anime.show', ['anime' => $anime, 'title' => $anime->getTitle($chinese)]) }}">
+                                            <div>
                                                 <p>
                                                     {{ $anime->getTitle($chinese) }}
                                                 </p>
-                                            </a>
-                                        </div>
+                                            </div>
+                                        </a>
                                     </div>
                                 </div>
                             @endif

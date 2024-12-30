@@ -94,4 +94,9 @@
     font-weight: 400; 
     margin-top: -3px;
     text-overflow: ellipsis;
+    transition: 0.2s;
+}
+
+.preview-airing .media-wrap .media-preview-card:hover .relations-content p {
+    color: rgb(61,180,242);
 }

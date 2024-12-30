@@ -16,7 +16,7 @@ use SteelyWing\Chinese\Chinese;
 use Illuminate\Database\Eloquent\Builder;
 
 class PreviewController extends Controller{
-    public function index(Request $request, $season, $year)
+    public function show(Request $request, $season, $year)
     {
         $TV = Anime::where('season', trim(ucfirst($season).' '.$year))->where('photo_cover', '!=', null)->where('category', 'TV')->where('rating_mal_count', '!=', null)->orderBy('rating_mal_count', 'desc')->get();
         $Movie = Anime::where('season', trim(ucfirst($season).' '.$year))->where('photo_cover', '!=', null)->where('category', 'Movie')->where('rating_mal_count', '!=', null)->orderBy('rating_mal_count', 'desc')->get();
@@ -29,7 +29,7 @@ class PreviewController extends Controller{
         $source ='';
         $chinese = new Chinese();
 
-        return view('anime.preview.index', ['season' => $season, 'year' => $year], compact('TV', 'Movie', 'OVA', 'text', 'category', 'streaming_on', 'country', 'source', 'chinese'));
+        return view('anime.preview.show', ['season' => $season, 'year' => $year], compact('TV', 'Movie', 'OVA', 'text', 'category', 'streaming_on', 'country', 'source', 'chinese'));
     }
 
     public function search(Request $request, $season, $year)
@@ -37,11 +37,11 @@ class PreviewController extends Controller{
         dd($request);
     }
 
-    public function menu(Request $request)
+    public function index(Request $request)
     {
         $animes = Anime::where('rating_mal_count', '!=', null)->where('photo_cover', '!=', null)->where('season','!=',null)->whereIn('category', ['TV', 'Movie', 'OVA', 'ONA', 'Special'])->orderBy('rating_mal_count', 'desc')->get();
         
-        return view('anime.preview.menu', compact('animes'));
+        return view('anime.preview.index', compact('animes'));
     }
 
     public function airing(Request $request)
