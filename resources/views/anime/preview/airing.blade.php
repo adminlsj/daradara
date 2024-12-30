@@ -9,20 +9,32 @@
     <div class="flex-center-content flex-column" style="margin-top: 100px;">
         @include('anime.preview.button-groups')
         <div class="content-wrap preview-airing">
-            <div class="landing-section">
-                @foreach(['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'] as $dayOfWeek)
+            @foreach(['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'] as $dayOfWeek)
+                <div class="landing-section preview-airing">
                     <div class="title-link">
                         <h3>{{ $dayOfWeek }}</h3>
                     </div>
                     <div class="media-wrap">
                         @foreach ($animes as $anime)
                             @if($carbon->parse($anime->started_at)->englishDayOfWeek == $dayOfWeek)
-                                @include('anime.preview.media-card')
+                                <div class="media-preview-card">
+                                    <a href="{{ route('anime.show', ['anime' => $anime, 'title' => $anime->getTitle($chinese)]) }}">
+                                        <img src="{{ $anime->photo_cover }}" alt=""></a>
+                                    <div class="relations-content">
+                                        <div>
+                                            <a href="{{ route('anime.show', ['anime' => $anime, 'title' => $anime->getTitle($chinese)]) }}">
+                                                <p>
+                                                    {{ $anime->getTitle($chinese) }}
+                                                </p>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
                             @endif
                         @endforeach
                     </div>
-                @endforeach
-            </div>
+                </div>
+            @endforeach
         </div>
     </div>
 </div>
