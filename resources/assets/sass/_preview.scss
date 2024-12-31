@@ -89,7 +89,8 @@
 }
 
 .preview-media-card:hover .relations-content .description {
-    overflow: scroll;
+    overflow-y: scroll;
+    overflow-x: hidden;
     display: inline-block;
     -webkit-line-clamp: none;
     height: 120px;
