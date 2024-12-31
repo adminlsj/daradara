@@ -476,6 +476,7 @@ class BotController extends Controller
                     $height = str_replace('公分', '', $height);
                     $height = str_replace('Cm', '', $height);
                     $height = str_replace('约', '', $height);
+                    $height = str_replace('左右', '', $height);
                     $height = explode('→', $height)[0];
                     $height = explode('(', $height)[0];
                     $height = explode('（', $height)[0];
