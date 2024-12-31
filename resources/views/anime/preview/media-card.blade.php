@@ -1,7 +1,21 @@
-<div class="media-card">
-	<a class="cover" href="{{ route('anime.show', ['anime' => $anime->id, 'title' => $anime->getTitle($chinese)]) }}">
+<div class="preview-media-card media-preview-card">
+	<a href="{{ route('anime.show', ['anime' => $anime->id, 'title' => $anime->getTitle($chinese)]) }}">
 		<img src="{{ $anime->photo_cover }}" alt="">
+		<div class="title">
+			<p>{{ $anime->getTitle($chinese) }}</p>
+			<h5>{{ $anime->animation_studio }}</h5>
+		</div>
 	</a>
-	<a style="text-decoration: none" href="{{ route('anime.show', ['anime' => $anime->id, 'title' => $anime->getTitle($chinese)]) }}">{{ $anime->getTitle($chinese) }}
-	</a>
+	<div class="relations-content">
+		<div>
+			<p style="padding:15px 15px 0px">{{ $anime->episodes_count }}集首播</p>
+			<h3>{{ $anime->started_at->toDateString() }}</h3>
+			<p style="padding:0px 15px">來源: {{ $anime->source }}</p>
+		</div>
+		<p class="description">{{ $anime->description }}</p>
+		<div class="tags">
+			<p>tags</p>
+			<p>tagsssss</p>
+		</div>
+	</div>
 </div>

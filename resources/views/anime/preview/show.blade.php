@@ -7,7 +7,7 @@
 @section('content')
 <form id="preview-search-form" action="{{ route('preview.search', ['season' => 'Spring', 'year' => '2023']) }}"
     method="GET">
-    <div class="flex-center-wrapper home-wrapper">
+    <div class="preview-show flex-center-wrapper home-wrapper">
         <div class="flex-center-content flex-column" style="margin-top: 100px;">
             @include('anime.preview.button-groups')
             @include('anime.preview.search')
@@ -15,9 +15,7 @@
             <div class="content-wrap">
                 <div class="landing-section">
                     <div class="title-link">
-                        <a href="">
-                            <h3>TV</h3>
-                        </a>
+                        <h3>TV</h3>
                     </div>
                     <div class="media-wrap">
                         @foreach ($TV as $anime)
@@ -30,9 +28,7 @@
             <div class="content-wrap">
                 <div class="landing-section">
                     <div class="title-link">
-                        <a href="">
-                            <h3>Movie</h3>
-                        </a>
+                        <h3>Movie</h3>
                     </div>
                     <div class="media-wrap">
                         @foreach ($Movie as $anime)
@@ -45,9 +41,7 @@
             <div class="content-wrap">
                 <div class="landing-section">
                     <div class="title-link">
-                        <a href="">
-                            <h3>OVA / ONA / Special</h3>
-                        </a>
+                        <h3>OVA / ONA / Special</h3>
                     </div>
                     <div class="media-wrap">
                         @foreach ($OVA as $anime)
