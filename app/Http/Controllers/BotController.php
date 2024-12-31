@@ -497,7 +497,7 @@ class BotController extends Controller
                     $weight = explode('(', $weight)[0];
                     $weight = explode('（', $weight)[0];
                     $weight = explode('-', $weight)[0];
-                    if ($weight != '?' && $weight != '？' && $weight != '不详' && $weight != '保密' && $weight != '秘密' && strpos($weight, '吨') === false) {
+                    if ($weight != '?' && $weight != '？' && $weight != '不详' && $weight != '不明' && $weight != '保密' && $weight != '秘密' && strpos($weight, '吨') === false) {
                         $character->weight = $weight;
                     }
                 }
