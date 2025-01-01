@@ -37,7 +37,7 @@ Route::get('/anime/{anime}/{title?}/comments', 'AnimeController@show')->name('an
 
 //Preview
 Route::get('/preview/{season}-{year}', 'PreviewController@show')->name('preview.show');
-Route::get('/preview/{season}-{year}/search', 'PreviewController@show')->name('preview.search');
+Route::get('/preview/{season}-{year}/search', 'PreviewController@search')->name('preview.search');
 Route::get('/preview/index', 'PreviewController@index')->name('preview.index');
 Route::get('/preview/airing', 'PreviewController@airing')->name('preview.airing');
 

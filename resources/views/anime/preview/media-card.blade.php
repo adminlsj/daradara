@@ -3,7 +3,9 @@
 		<img src="{{ $anime->photo_cover }}" alt="">
 		<div class="title">
 			<p>{{ $anime->getTitle($chinese) }}</p>
-			<h5>{{ $anime->animation_studio }}</h5>
+			<a href="{{ route('company.show', ['company' => 123, 'title' => $anime->animation_studio]) }}">
+				<h5>{{ $anime->animation_studio }}</h5>
+			</a>
 		</div>
 	</a>
 	<div class="relations-content">

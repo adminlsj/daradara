@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-<form id="preview-search-form" action="{{ route('preview.search', ['season' => 'Spring', 'year' => '2023']) }}"
+<form id="hentai-form" action="{{ route('preview.search', ['season' => $season, 'year' => $year]) }}"
     method="GET">
     <div class="preview-show flex-center-wrapper home-wrapper">
         <div class="flex-center-content flex-column" style="margin-top: 100px;">
