@@ -27,8 +27,10 @@ class PreviewController extends Controller
         $category = '';
         $source = '';
         $chinese = new Chinese();
+        
+        $sorting = '人氣';
 
-        return view('anime.preview.show', ['season' => $season, 'year' => $year], compact('TV', 'Movie', 'OVA', 'text', 'category', 'source', 'chinese'));
+        return view('anime.preview.show', ['season' => $season, 'year' => $year], compact('TV', 'Movie', 'OVA', 'text', 'category', 'source', 'chinese', 'sorting'));
     }
 
     public function search(Request $request, $season, $year)
