@@ -1198,7 +1198,7 @@ class BotController extends Controller
     {   
         $characters = Character::where('name_zht', 'like', "%年%月%日")->orderBy('id', 'asc')->get();
         foreach ($characters as $character) {
-            $character = Carbon::createFromFormat('Y年m月d日 H:i:s',  $character->name_zht.' 00:00:00'); 
+            $birthday = Carbon::createFromFormat('Y年m月d日 H:i:s',  $character->name_zht.' 00:00:00'); 
             $character->birthday = $birthday;
             $character->name_zht = null;
             $character->save();
