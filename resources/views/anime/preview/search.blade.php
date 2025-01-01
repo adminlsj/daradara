@@ -5,7 +5,8 @@
 			<div class="bar" style="position: relative;">
 				<input id="text" name="text" type="text" style="padding-left: 35px;" value="{{ $text ? $text : '' }}">
 				<input type="submit" style="display: none">
-				<i class="fa fa-search" style="color: rgba(201,215,227); font-size: 1.3rem; height: 1.6rem; position: absolute; left: 12px; top: 12px"></i>
+				<i class="fa fa-search"
+					style="color: rgba(201,215,227); font-size: 1.3rem; height: 1.6rem; position: absolute; left: 12px; top: 12px"></i>
 			</div>
 		</div>
 		<div class="filter genres">
@@ -33,7 +34,9 @@
 
 		<div class="filter format" style="position: relative;">
 			<h3>類型</h3>
-			<button style="outline:0; color: rgb(173,192,210); padding: 0px 14px 5px 14px;" class="bar btn btn-secondary dropdown-toggle close-extra-filter-dropdown-menu" type="button" data-toggle="dropdown">
+			<button style="outline:0; color: rgb(173,192,210); padding: 0px 14px 5px 14px;"
+				class="bar btn btn-secondary dropdown-toggle close-extra-filter-dropdown-menu" type="button"
+				data-toggle="dropdown">
 				<div class="filter-value-text {{ $category ? 'active' : '' }}">{{ $category ? $category : '全部' }}</div>
 				<i class="material-icons home-search-arrow">keyboard_arrow_down</i>
 			</button>
@@ -46,9 +49,11 @@
 			</div>
 		</div>
 
-        <div class="filter format" style="position: relative;">
+		<div class="filter format" style="position: relative;">
 			<h3>聲優</h3>
-			<button style="outline:0; color: rgb(173,192,210); padding: 0px 14px 5px 14px;" class="bar btn btn-secondary dropdown-toggle close-extra-filter-dropdown-menu" type="button" data-toggle="dropdown">
+			<button style="outline:0; color: rgb(173,192,210); padding: 0px 14px 5px 14px;"
+				class="bar btn btn-secondary dropdown-toggle close-extra-filter-dropdown-menu" type="button"
+				data-toggle="dropdown">
 				<div class="filter-value-text {{ $category ? 'active' : '' }}">{{ $category ? $category : '全部' }}</div>
 				<i class="material-icons home-search-arrow">keyboard_arrow_down</i>
 			</button>
@@ -61,19 +66,19 @@
 			</div>
 		</div>
 	</div>
-
 
 	<div class="filter format" style="position: relative;">
-		<div onclick="extra_filter_toggle()" class="extra-filter-wrap no-select" style="background-color: transparent;" type="button" data-toggle="dropdown">
+		<div onclick="extra_filter_toggle()" class="extra-filter-wrap no-select" style="background-color: transparent;"
+			type="button" data-toggle="dropdown">
 			<div id="home-filter-more-btn">
-                <i class="fa fa-sort"></i>
+				<i class="fa fa-sort"></i>
 			</div>
 		</div>
+		<div id="sorting-dropdown" class="dropdown-menu home-option-wrapper">
+			<input type="hidden" id="sorting" name="sorting" value="{{ $sorting }}">
+			@foreach (['標題', '人氣', '評分', '首播日期', '完播日期', '製作公司'] as $sorting)
+				<div class="home-option sorting-option">{{ $sorting }}</div>
+			@endforeach
+		</div>
 	</div>
-
-	<script>
-		function extra_filter_toggle() {
-			document.getElementById("extra-filter-dropdown").classList.toggle("show");
-		}
-	</script>
 </div>
