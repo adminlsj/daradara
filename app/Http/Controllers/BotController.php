@@ -1194,19 +1194,10 @@ class BotController extends Controller
         }
     }
 
-    public function tempMethod(Request $request)
-    {   
-        $characters = Character::where('name_zht', 'like', "%/%")->orderBy('id', 'asc')->get();
-        foreach ($characters as $character) {
-            $birthday = Carbon::createFromFormat('Y/m/d H:i:s', '0000/'.$character->name_zht.' 00:00:00'); 
-            $character->birthday = $birthday;
-            $character->name_zht = null;
-            $character->birthday_format = 'm月d日';
-            $character->save();
-        }
-
+    public function scrapeAnilistAnimes(Request $request)
+    {
         // Anilist API
-        /* $query = '
+        $query = '
         query ($id: Int, $page: Int, $perPage: Int, $search: String) {
           Page (page: $page, perPage: $perPage) {
             pageInfo {
@@ -1214,7 +1205,7 @@ class BotController extends Controller
               hasNextPage
               perPage
             }
-            media (id: $id, search: $search) {
+            media (id: $id, search: $search, type: ANIME) {
               id
               title {
                 romaji
@@ -1224,26 +1215,77 @@ class BotController extends Controller
         }
         ';
 
-        $variables = [
-            "page" => 1,
-            "perPage" => 50
-        ];
+        $page = $request->page;
+        $response_array['data']['Page']['pageInfo']['hasNextPage'] = true;
+        while ($response_array['data']['Page']['pageInfo']['hasNextPage']) {
+            $variables = [
+                "page" => $page,
+                "perPage" => 50
+            ];
 
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL,"https://graphql.anilist.co");
-        curl_setopt($ch, CURLOPT_POST, true);
-        $data = json_encode([
-                    'query' => $query,
-                    'variables' => $variables,
-            ]);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type:application/json']);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $response = curl_exec($ch);
-        curl_close($ch);
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL,"https://graphql.anilist.co");
+            curl_setopt($ch, CURLOPT_POST, true);
+            $data = json_encode([
+                        'query' => $query,
+                        'variables' => $variables,
+                ]);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type:application/json']);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            $response = curl_exec($ch);
+            curl_close($ch);
 
-        return json_decode($response, true); */
+            $response_array = json_decode($response, true);
+            $media_array = $response_array['data']['Page']['media'];
+            foreach ($media_array as $media) {
+                if (!AnimeTemp::where('sources', 'like', '%"https://anilist.co/anime/'.$media['id'].'/"%')->exists()) {
+                    $sources = ['anilist' => "https://anilist.co/anime/{$media['id']}/"];
+                    AnimeTemp::create([
+                        'title_ro' => $media['title']['romaji'],
+                        'sources' => $sources
+                    ]);
+                    echo "Anilist ID#{$media['id']} scraped<br>";
+                } else {
+                    echo "Anilist ID#{$media['id']} exists<br>";
+                }
+            }
 
+            echo "Page {$page} scraped<br>";
+            $page++;
+        }
+    }
+
+    public function linkAnilistAnimes(Request $request)
+    {
+        $animes = Anime::where('id', '>=', $request->from)->where('id', '<=', $request->to)->orderBy('id', 'asc')->get();
+        foreach ($animes as $anime) {
+            if (AnimeTemp::where('sources', 'like', '%"anilist"%')->where('title_ro', $anime->title_ro)->exists()) {
+                $anilist = AnimeTemp::where('sources', 'like', '%"anilist"%')->where('title_ro', $anime->title_ro)->get();
+                if ($anilist->count() > 1) {
+                    return "Anime ID#{$anime->id} has more than one matches<br>";
+                } else {
+                    $anilist = $anilist->first();
+                    $temp = $anime->sources;
+                    $temp['anilist'] = $anilist->sources['anilist'];
+                    $anime->sources = $temp;
+                    $anime->save();
+                    $anilist->delete();
+                }
+            }
+        }
+    }
+
+    public function tempMethod(Request $request)
+    {   
+        /* $characters = Character::where('name_zht', 'like', "%/%")->orderBy('id', 'asc')->get();
+        foreach ($characters as $character) {
+            $birthday = Carbon::createFromFormat('Y/m/d H:i:s', '0000/'.$character->name_zht.' 00:00:00'); 
+            $character->birthday = $birthday;
+            $character->name_zht = null;
+            $character->birthday_format = 'm月d日';
+            $character->save();
+        } */
 
         /* $animes = Anime::where('id', '>=', $request->from)->where('id', '<=', $request->to)->where('sources', 'ilike', '%"myanimelist"%')->where('rating_mal_count', null)->orderBy('started_at', 'desc')->get();
         foreach ($animes as $anime) {
