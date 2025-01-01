@@ -1196,13 +1196,12 @@ class BotController extends Controller
 
     public function tempMethod(Request $request)
     {   
-        $characters = Character::where('name_zht', 'like', "????%")->where('name_zht', 'like', "%-%-%")->orderBy('id', 'asc')->get();
+        $characters = Character::where('name_zht', 'like', "%年%月")->orderBy('id', 'asc')->get();
         foreach ($characters as $character) {
-            $birthday = str_replace('????', '0000', $character->name_zht);
-            $birthday = Carbon::createFromFormat('Y-m-d H:i:s', $birthday.' 00:00:00'); 
+            $birthday = Carbon::createFromFormat('Y年m月d日 H:i:s', $character->name_zht.'1日 00:00:00'); 
             $character->birthday = $birthday;
             $character->name_zht = null;
-            $character->birthday_format = 'm月d日';
+            $character->birthday_format = 'Y年m月';
             $character->save();
         }
 
