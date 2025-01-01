@@ -14,7 +14,7 @@ class AddBirthdayShowToCharacters extends Migration
     public function up()
     {
         Schema::table('characters', function (Blueprint $table) {
-            $table->string('birthday_show')->nullable();
+            $table->string('birthday_format')->nullable();
         });
     }
 

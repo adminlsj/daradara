@@ -1201,6 +1201,7 @@ class BotController extends Controller
             $birthday = Carbon::createFromFormat('Y年m月d日 H:i:s', '0000年'.$character->name_zht.' 00:00:00'); 
             $character->birthday = $birthday;
             $character->name_zht = null;
+            $character->birthday_format = 'm月d日';
             $character->save();
         }
 
