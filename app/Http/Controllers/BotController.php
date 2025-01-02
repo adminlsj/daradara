@@ -1278,13 +1278,29 @@ class BotController extends Controller
 
     public function tempMethod(Request $request)
     {   
-        $search = "&quot;";
+        $anilists = AnimeTemp::where('sources', 'like', '%"anilist"%')->get();
+        foreach ($anilists as $anilist) {
+            $id = Helper::get_string_between($anilist->sources['anilist'], 'https://anilist.co/anime/', '/');
+            if (Anime::where('sources', 'not like', '%"anilist"%')->where('sources', 'like', '%"https://myanimelist.net/anime/'.$id.'/"%')->exists()) {
+                $myanimelist = Anime::where('sources', 'not like', '%"anilist"%')->where('sources', 'like', '%"https://myanimelist.net/anime/'.$id.'/"%')->get();
+                if ($myanimelist->count() > 1) {
+                    return "Anime temp ID#{$anilist->id} has more than one matches<br>";
+                } else {
+                    $myanimelist = $myanimelist->first();
+                    echo "Anilist title_ro {$anilist->title_ro} | Myanimelist title_ro {$myanimelist->title_ro}<br>";
+                }
+            }
+        }
+
+        // Replace irregular characters
+        /* $search = "&quot;";
         $replace = '"';
         $animes = Anime::where('title_ro', 'like', "%{$search}%")->get();
         foreach ($animes as $anime) {
             $anime->title_ro = str_replace($search, $replace, $anime->title_ro);
             $anime->save();
-        }
+        } */
+
         /* $characters = Character::where('name_zht', 'like', "%/%")->orderBy('id', 'asc')->get();
         foreach ($characters as $character) {
             $birthday = Carbon::createFromFormat('Y/m/d H:i:s', '0000/'.$character->name_zht.' 00:00:00'); 
