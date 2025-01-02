@@ -41,10 +41,13 @@
 				<i class="material-icons home-search-arrow">keyboard_arrow_down</i>
 			</button>
 			<div id="search-category-dropdown" class="dropdown-menu home-option-wrapper">
-				<input type="hidden" id="category" name="category" value="{{ $category }}">
 				<div class="home-option category-option">全部</div>
-				@foreach (['TV', 'Movie', 'TV Special', 'Special', 'OVA', 'ONA', 'Music', 'PV', 'CM', 'Unknown'] as $category)
-					<div class="home-option category-option">{{ $category }}</div>
+				@foreach (['TV', 'Movie', 'OVA'] as $category)
+					<a href="#{{ $category }}" style="text-decoration:none;">
+						<div class="home-option category-option">
+							{{ $category }}
+						</div>
+					</a>
 				@endforeach
 			</div>
 		</div>
