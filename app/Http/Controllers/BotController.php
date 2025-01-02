@@ -1278,9 +1278,11 @@ class BotController extends Controller
 
     public function tempMethod(Request $request)
     {   
-        $animes = Anime::where('title_ro', 'like', "%&#039;%")->get();
+        $search = "&amp;";
+        $replace = "&";
+        $animes = Anime::where('title_ro', 'like', "%{$search}%")->get();
         foreach ($animes as $anime) {
-            $anime->title_ro = str_replace('&#039;', "'", $anime->title_ro);
+            $anime->title_ro = str_replace($search, $replace, $anime->title_ro);
             $anime->save();
         }
         /* $characters = Character::where('name_zht', 'like', "%/%")->orderBy('id', 'asc')->get();
