@@ -1260,8 +1260,8 @@ class BotController extends Controller
     {
         $animes = Anime::where('id', '>=', $request->from)->where('id', '<=', $request->to)->where('sources', 'not like', '%"anilist"%')->orderBy('id', 'asc')->get();
         foreach ($animes as $anime) {
-            if (AnimeTemp::where('sources', 'like', '%"anilist"%')->where('title_ro', $anime->title_ro)->exists()) {
-                $anilist = AnimeTemp::where('sources', 'like', '%"anilist"%')->where('title_ro', $anime->title_ro)->get();
+            if (AnimeTemp::where('sources', 'like', '%"anilist"%')->where('title_ro', 'ilike', $anime->title_ro)->exists()) {
+                $anilist = AnimeTemp::where('sources', 'like', '%"anilist"%')->where('title_ro', 'ilike', $anime->title_ro)->get();
                 if ($anilist->count() > 1) {
                     return "Anime ID#{$anime->id} has more than one matches<br>";
                 } else {
