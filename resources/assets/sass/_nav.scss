@@ -71,6 +71,39 @@
     color: #b3cce8;
 }
 
+.navbar-preview .section {
+    display: none;
+    position: absolute;
+    top: 43px;
+    background-color: white;
+    padding: 10px 13px;
+    border-radius: 5px;
+    box-shadow: 0 14px 30px rgba(103,132,187, .15), 0 4px 4px rgba(103,132,187, .05);
+}
+
+.navbar-preview:hover .section {
+    display: block;
+}
+
+.navbar-preview .section .seasons {
+    gap: 9px;
+}
+
+.navbar-preview .section .year {
+    color: #516170;
+    font-size: 1.5rem;
+}
+
+.navbar-preview .section .seasons .season {
+    color: #516170;
+    margin-bottom: 2px;
+    transition: color .2s ease; 
+}
+
+.navbar-preview .section .seasons .season:hover {
+    color: rgb(61,180,242);
+}
+
 .navbar-wrapper-solid {
     background-color: #2b2d42 !important;
 }
