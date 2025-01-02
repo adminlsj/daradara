@@ -98,10 +98,13 @@
     color: #516170;
     margin-bottom: 2px;
     transition: color .2s ease; 
+    padding: 3px;
+    border-radius: 5px;
 }
 
 .navbar-preview .section .seasons .season:hover {
     color: rgb(61,180,242);
+    background: rgba(237,241,245, .6);
 }
 
 .navbar-wrapper-solid {
