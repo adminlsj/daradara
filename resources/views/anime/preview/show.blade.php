@@ -14,7 +14,7 @@
 
             <div class="content-wrap">
                 <div class="landing-section">
-                    <div class="title-link">
+                    <div class="title-link" id="TV">
                         <h3>TV</h3>
                     </div>
                     <div class="media-wrap">
@@ -27,7 +27,7 @@
 
             <div class="content-wrap">
                 <div class="landing-section">
-                    <div class="title-link">
+                    <div class="title-link" id="Movie">
                         <h3>Movie</h3>
                     </div>
                     <div class="media-wrap">
@@ -40,7 +40,7 @@
 
             <div class="content-wrap">
                 <div class="landing-section">
-                    <div class="title-link">
+                    <div class="title-link" id="OVA">
                         <h3>OVA / ONA / Special</h3>
                     </div>
                     <div class="media-wrap">
