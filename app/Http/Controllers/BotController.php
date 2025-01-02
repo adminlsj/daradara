@@ -1287,7 +1287,7 @@ class BotController extends Controller
                     return "Anime temp ID#{$anilist->id} has more than one matches<br>";
                 } else {
                     $myanimelist = $myanimelist->first();
-                    echo "Anilist title_ro {$anilist->title_ro} | Myanimelist title_ro {$myanimelist->title_ro}<br>";
+                    echo "Anilist ID#{$anilist->id} title_ro {$anilist->title_ro} | Myanimelist ID#{$myanimelist->id} title_ro {$myanimelist->title_ro}<br>";
                 }
             }
         }
