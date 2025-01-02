@@ -1258,7 +1258,7 @@ class BotController extends Controller
 
     public function linkAnilistAnimes(Request $request)
     {
-        $animes = Anime::where('id', '>=', $request->from)->where('id', '<=', $request->to)->where('sources', 'not like', '%"anilist"%')->orderBy('id', 'asc')->get();
+        $animes = Anime::where('id', '>=', $request->from)->where('id', '<=', $request->to)->where('sources', 'not like', '%"anilist"%')->where('title_ro', '!=', null)->orderBy('id', 'asc')->get();
         foreach ($animes as $anime) {
             if (AnimeTemp::where('sources', 'like', '%"anilist"%')->where('title_ro', 'ilike', $anime->title_ro)->exists()) {
                 $anilist = AnimeTemp::where('sources', 'like', '%"anilist"%')->where('title_ro', 'ilike', $anime->title_ro)->get();
