@@ -90,6 +90,7 @@ Route::group(['middleware' => 'admin'], function () {
 
 	Route::get('/scrapeAnilistAnimes', 'BotController@scrapeAnilistAnimes');
 	Route::get('/linkAnilistAnimes', 'BotController@linkAnilistAnimes');
+	Route::get('/linkAnilistToMal', 'BotController@linkAnilistToMal');
 
 	Route::get('/updateSearchtext', 'BotController@updateSearchtext');
 });

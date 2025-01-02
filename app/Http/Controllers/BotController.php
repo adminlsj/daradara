@@ -1276,6 +1276,25 @@ class BotController extends Controller
         }
     }
 
+    public function linkAnilistToMal(Request $request)
+    {
+        $anilist = AnimeTemp::find($request->anime_temp_id);
+        $id = Helper::get_string_between($anilist->sources['anilist'], 'https://anilist.co/anime/', '/');
+        if (Anime::where('sources', 'not like', '%"anilist"%')->where('sources', 'like', '%"https://myanimelist.net/anime/'.$id.'/"%')->exists()) {
+            $myanimelist = Anime::where('sources', 'not like', '%"anilist"%')->where('sources', 'like', '%"https://myanimelist.net/anime/'.$id.'/"%')->get();
+            if ($myanimelist->count() > 1) {
+                return "Anime temp ID#{$anilist->id} has more than one matches<br>";
+            } else {
+                $myanimelist = $myanimelist->first();
+                $temp = $myanimelist->sources;
+                $temp['anilist'] = $anilist->sources['anilist'];
+                $myanimelist->sources = $temp;
+                $myanimelist->save();
+                $anilist->delete();
+            }
+        }
+    }
+
     public function tempMethod(Request $request)
     {   
         $anilists = AnimeTemp::where('sources', 'like', '%"anilist"%')->get();
