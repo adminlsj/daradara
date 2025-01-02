@@ -1306,7 +1306,7 @@ class BotController extends Controller
                     return "Anime temp ID#{$anilist->id} has more than one matches<br>";
                 } else {
                     $myanimelist = $myanimelist->first();
-                    echo "Anilist ID#{$anilist->id} title_ro {$anilist->title_ro} | Myanimelist ID#{$myanimelist->id} title_ro {$myanimelist->title_ro}<br>";
+                    echo "<a href='https://daradara.swiftshare.me/linkAnilistToMal?anime_temp_id={$anilist->id}' target='_blank'>Anilist ID#{$anilist->id} title_ro {$anilist->title_ro} | Myanimelist ID#{$myanimelist->id} title_ro {$myanimelist->title_ro}</a><br>";
                 }
             }
         }
