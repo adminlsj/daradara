@@ -1,0 +1,271 @@
+1735834835936	geckodriver	INFO	Listening on 127.0.0.1:55726
+1735834836942	mozrunner::runner	INFO	Running command: MOZ_CRASHREPORTER="1" MOZ_CRASHREPORTER_NO_REPORT="1" MOZ_CRASHREPORTER_SHUTDOWN="1" MOZ_NO_REMOTE="1" "/App ... e" "-headless" "-foreground" "-no-remote" "-profile" "/var/folders/7k/dlqpc5457g518yxxnhy53t640000gn/T/rust_mozprofilexcXVOI"
+*** You are running in headless mode.
+1735834838421	Marionette	INFO	Marionette enabled
+1735834838503	Marionette	INFO	Listening on port 55742
+Read port: 55742
+1735834838693	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+2025-01-03 00:20:38.734 plugin-container[38342:5105207] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2025-01-03 00:20:38.735 plugin-container[38342:5105207] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2025-01-03 00:20:39.000 plugin-container[38342:5105207] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2025-01-03 00:20:39.000 plugin-container[38342:5105207] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2025-01-03 00:20:39.001 plugin-container[38342:5105209] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2025-01-03 00:20:39.001 plugin-container[38342:5105209] nil host used in call to allowsAnyHTTPSCertificateForHost:
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /var/folders/7k/dlqpc5457g518yxxnhy53t640000gn/T/rust_mozprofilexcXVOI/search.json.mozlz4", (void 0)))
+2025-01-02 16:20:43.742 plugin-container[38360:5105636] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2025-01-02 16:20:43.743 plugin-container[38360:5105636] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2025-01-02 16:20:43.892 plugin-container[38360:5105636] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2025-01-02 16:20:43.892 plugin-container[38360:5105636] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2025-01-02 16:20:43.892 plugin-container[38360:5105685] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2025-01-02 16:20:43.892 plugin-container[38360:5105685] nil host used in call to allowsAnyHTTPSCertificateForHost:
+1735835058844	geckodriver	INFO	Listening on 127.0.0.1:55905
+1735835059877	mozrunner::runner	INFO	Running command: MOZ_CRASHREPORTER="1" MOZ_CRASHREPORTER_NO_REPORT="1" MOZ_CRASHREPORTER_SHUTDOWN="1" MOZ_NO_REMOTE="1" "/App ... e" "-headless" "-foreground" "-no-remote" "-profile" "/var/folders/7k/dlqpc5457g518yxxnhy53t640000gn/T/rust_mozprofileCuHCdu"
+*** You are running in headless mode.
+1735835061156	Marionette	INFO	Marionette enabled
+1735835061237	Marionette	INFO	Listening on port 55921
+Read port: 55921
+1735835061417	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+2025-01-03 00:24:21.628 plugin-container[38696:5108998] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2025-01-03 00:24:21.628 plugin-container[38696:5108998] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2025-01-03 00:24:21.693 plugin-container[38696:5108998] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2025-01-03 00:24:21.693 plugin-container[38696:5108998] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2025-01-03 00:24:21.693 plugin-container[38696:5109024] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2025-01-03 00:24:21.693 plugin-container[38696:5109024] nil host used in call to allowsAnyHTTPSCertificateForHost:
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /var/folders/7k/dlqpc5457g518yxxnhy53t640000gn/T/rust_mozprofileCuHCdu/search.json.mozlz4", (void 0)))
+2025-01-02 16:24:25.761 plugin-container[38713:5109411] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2025-01-02 16:24:25.761 plugin-container[38713:5109411] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2025-01-02 16:24:25.779 plugin-container[38713:5109411] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2025-01-02 16:24:25.779 plugin-container[38713:5109411] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2025-01-02 16:24:25.780 plugin-container[38713:5109424] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2025-01-02 16:24:25.780 plugin-container[38713:5109424] nil host used in call to allowsAnyHTTPSCertificateForHost:
+1735835223955	geckodriver	INFO	Listening on 127.0.0.1:56145
+1735835224965	mozrunner::runner	INFO	Running command: MOZ_CRASHREPORTER="1" MOZ_CRASHREPORTER_NO_REPORT="1" MOZ_CRASHREPORTER_SHUTDOWN="1" MOZ_NO_REMOTE="1" "/App ... e" "-headless" "-foreground" "-no-remote" "-profile" "/var/folders/7k/dlqpc5457g518yxxnhy53t640000gn/T/rust_mozprofilev1Qwny"
+*** You are running in headless mode.
+1735835226099	Marionette	INFO	Marionette enabled
+1735835226164	Marionette	INFO	Listening on port 56163
+Read port: 56163
+2025-01-03 00:27:06.265 plugin-container[39058:5112485] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2025-01-03 00:27:06.265 plugin-container[39058:5112485] nil host used in call to allowsAnyHTTPSCertificateForHost:
+1735835226313	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+2025-01-03 00:27:06.692 plugin-container[39058:5112485] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2025-01-03 00:27:06.692 plugin-container[39058:5112485] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2025-01-03 00:27:06.692 plugin-container[39058:5112559] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2025-01-03 00:27:06.692 plugin-container[39058:5112559] nil host used in call to allowsAnyHTTPSCertificateForHost:
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /var/folders/7k/dlqpc5457g518yxxnhy53t640000gn/T/rust_mozprofilev1Qwny/search.json.mozlz4", (void 0)))
+[GFX1-]: Unrecognized feature ACCELERATED_CANVAS2D
+2025-01-02 16:27:11.020 plugin-container[39086:5112921] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2025-01-02 16:27:11.020 plugin-container[39086:5112921] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2025-01-02 16:27:11.179 plugin-container[39086:5112921] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2025-01-02 16:27:11.179 plugin-container[39086:5112921] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2025-01-02 16:27:11.179 plugin-container[39086:5112924] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2025-01-02 16:27:11.179 plugin-container[39086:5112924] nil host used in call to allowsAnyHTTPSCertificateForHost:
+1735835232753	Marionette	INFO	Stopped listening on port 56163
+JavaScript warning: https://www.google.com/js/th/WuArCo6uiOC32QOIiNWeSH9h2H5vf_jv_ihZ0ZQebSo.js line 2 > eval line 4872 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+1735835419759	geckodriver	INFO	Listening on 127.0.0.1:56607
+1735835420784	mozrunner::runner	INFO	Running command: MOZ_CRASHREPORTER="1" MOZ_CRASHREPORTER_NO_REPORT="1" MOZ_CRASHREPORTER_SHUTDOWN="1" MOZ_NO_REMOTE="1" "/App ... e" "-headless" "-foreground" "-no-remote" "-profile" "/var/folders/7k/dlqpc5457g518yxxnhy53t640000gn/T/rust_mozprofileTakndb"
+*** You are running in headless mode.
+1735835421997	Marionette	INFO	Marionette enabled
+1735835422059	Marionette	INFO	Listening on port 56615
+Read port: 56615
+2025-01-03 00:30:22.150 plugin-container[39522:5117216] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2025-01-03 00:30:22.151 plugin-container[39522:5117216] nil host used in call to allowsAnyHTTPSCertificateForHost:
+1735835422214	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+2025-01-03 00:30:22.564 plugin-container[39522:5117216] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2025-01-03 00:30:22.564 plugin-container[39522:5117216] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2025-01-03 00:30:22.564 plugin-container[39522:5117309] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2025-01-03 00:30:22.564 plugin-container[39522:5117309] nil host used in call to allowsAnyHTTPSCertificateForHost:
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /var/folders/7k/dlqpc5457g518yxxnhy53t640000gn/T/rust_mozprofileTakndb/search.json.mozlz4", (void 0)))
+1735835423486	Marionette	INFO	Stopped listening on port 56615
+console.error: services.settings: 
+  main/query-stripping Signature failed  TypeError: NetworkError: Network request failed
+[GFX1-]: Unrecognized feature ACCELERATED_CANVAS2D
+1735835497037	geckodriver	INFO	Listening on 127.0.0.1:56684
+1735835498062	mozrunner::runner	INFO	Running command: MOZ_CRASHREPORTER="1" MOZ_CRASHREPORTER_NO_REPORT="1" MOZ_CRASHREPORTER_SHUTDOWN="1" MOZ_NO_REMOTE="1" "/App ... e" "-headless" "-foreground" "-no-remote" "-profile" "/var/folders/7k/dlqpc5457g518yxxnhy53t640000gn/T/rust_mozprofileHkWd7E"
+*** You are running in headless mode.
+1735835499004	Marionette	INFO	Marionette enabled
+1735835499028	Marionette	INFO	Listening on port 56694
+Read port: 56694
+2025-01-03 00:31:39.128 plugin-container[39676:5118524] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2025-01-03 00:31:39.129 plugin-container[39676:5118524] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2025-01-03 00:31:39.149 plugin-container[39676:5118524] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2025-01-03 00:31:39.149 plugin-container[39676:5118524] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2025-01-03 00:31:39.149 plugin-container[39676:5118548] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2025-01-03 00:31:39.149 plugin-container[39676:5118548] nil host used in call to allowsAnyHTTPSCertificateForHost:
+1735835499227	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /var/folders/7k/dlqpc5457g518yxxnhy53t640000gn/T/rust_mozprofileHkWd7E/search.json.mozlz4", (void 0)))
+1735835525325	geckodriver	INFO	Listening on 127.0.0.1:56731
+1735835526350	mozrunner::runner	INFO	Running command: MOZ_CRASHREPORTER="1" MOZ_CRASHREPORTER_NO_REPORT="1" MOZ_CRASHREPORTER_SHUTDOWN="1" MOZ_NO_REMOTE="1" "/App ... e" "-headless" "-foreground" "-no-remote" "-profile" "/var/folders/7k/dlqpc5457g518yxxnhy53t640000gn/T/rust_mozprofileRIqL7p"
+*** You are running in headless mode.
+1735835527058	Marionette	INFO	Marionette enabled
+1735835527116	Marionette	INFO	Listening on port 56740
+Read port: 56740
+2025-01-03 00:32:07.215 plugin-container[39728:5119280] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2025-01-03 00:32:07.215 plugin-container[39728:5119280] nil host used in call to allowsAnyHTTPSCertificateForHost:
+1735835527318	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+2025-01-03 00:32:07.606 plugin-container[39728:5119280] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2025-01-03 00:32:07.606 plugin-container[39728:5119280] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2025-01-03 00:32:07.606 plugin-container[39728:5119285] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2025-01-03 00:32:07.606 plugin-container[39728:5119285] nil host used in call to allowsAnyHTTPSCertificateForHost:
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /var/folders/7k/dlqpc5457g518yxxnhy53t640000gn/T/rust_mozprofileRIqL7p/search.json.mozlz4", (void 0)))
+2025-01-02 16:32:12.118 plugin-container[39751:5119679] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2025-01-02 16:32:12.119 plugin-container[39751:5119679] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2025-01-02 16:32:12.148 plugin-container[39751:5119679] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2025-01-02 16:32:12.149 plugin-container[39751:5119679] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2025-01-02 16:32:12.149 plugin-container[39751:5119701] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2025-01-02 16:32:12.149 plugin-container[39751:5119701] nil host used in call to allowsAnyHTTPSCertificateForHost:
+JavaScript warning: https://pagead2.googlesyndication.com/bg/sLtRHJ7WOIOXGkcIZ2bQW7l4DqClthgbj8pcU28k3kQ.js line 2 > eval line 1497 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+1735835564816	geckodriver	INFO	Listening on 127.0.0.1:56992
+1735835565832	mozrunner::runner	INFO	Running command: MOZ_CRASHREPORTER="1" MOZ_CRASHREPORTER_NO_REPORT="1" MOZ_CRASHREPORTER_SHUTDOWN="1" MOZ_NO_REMOTE="1" "/App ... e" "-headless" "-foreground" "-no-remote" "-profile" "/var/folders/7k/dlqpc5457g518yxxnhy53t640000gn/T/rust_mozprofileZZNXhy"
+*** You are running in headless mode.
+1735835566992	Marionette	INFO	Marionette enabled
+1735835567060	Marionette	INFO	Listening on port 57004
+Read port: 57004
+1735835567218	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+2025-01-03 00:32:47.382 plugin-container[39863:5121258] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2025-01-03 00:32:47.383 plugin-container[39863:5121258] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2025-01-03 00:32:47.565 plugin-container[39863:5121258] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2025-01-03 00:32:47.565 plugin-container[39863:5121258] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2025-01-03 00:32:47.565 plugin-container[39863:5121262] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2025-01-03 00:32:47.565 plugin-container[39863:5121262] nil host used in call to allowsAnyHTTPSCertificateForHost:
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /var/folders/7k/dlqpc5457g518yxxnhy53t640000gn/T/rust_mozprofileZZNXhy/search.json.mozlz4", (void 0)))
+2025-01-02 16:32:54.520 plugin-container[39891:5121707] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2025-01-02 16:32:54.521 plugin-container[39891:5121707] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2025-01-02 16:32:54.643 plugin-container[39891:5121707] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2025-01-02 16:32:54.643 plugin-container[39891:5121707] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2025-01-02 16:32:54.644 plugin-container[39891:5121710] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2025-01-02 16:32:54.644 plugin-container[39891:5121710] nil host used in call to allowsAnyHTTPSCertificateForHost:
+JavaScript warning: https://player.aniview.com/ssync/62f53b2c7850d0786f227f64/ssync.html?pid=62f53b2c7850d0786f227f64&r=https%3A%2F%2Fvisitor.us-west1.gcp.omnitagjs.com%2Fvisitor%2Fsync%3Fname%3DANIVIEW%26ttl%3D720%26uid%3De8ecb87ff2ef3a3b16ba16c51e7986ac%26visitor%3D%5BAV_UID%5D%26gdpr%3D0%26gdpr_consent%3D&gdpr=0&gdpr_consent=, line 82: unreachable code after return statement
+JavaScript warning: https://player.aniview.com/ssync/62f53b2c7850d0786f227f64/ssync.html?pid=62f53b2c7850d0786f227f64&r=https%3A%2F%2Fvisitor.us-west1.gcp.omnitagjs.com%2Fvisitor%2Fsync%3Fname%3DANIVIEW%26ttl%3D720%26uid%3De8ecb87ff2ef3a3b16ba16c51e7986ac%26visitor%3D%5BAV_UID%5D%26gdpr%3D0%26gdpr_consent%3D&gdpr=0&gdpr_consent=, line 82: unreachable code after return statement
+1735835595234	Marionette	INFO	Stopped listening on port 57004
+JavaScript warning: https://www.google.com/js/th/w98ULYEoiI-DoSZcfqb0Q-CcsV5bW44r6AwpUhfXUEY.js line 2 > eval line 2254 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+1735835711331	geckodriver	INFO	Listening on 127.0.0.1:57511
+1735835712351	mozrunner::runner	INFO	Running command: MOZ_CRASHREPORTER="1" MOZ_CRASHREPORTER_NO_REPORT="1" MOZ_CRASHREPORTER_SHUTDOWN="1" MOZ_NO_REMOTE="1" "/App ... e" "-headless" "-foreground" "-no-remote" "-profile" "/var/folders/7k/dlqpc5457g518yxxnhy53t640000gn/T/rust_mozprofile9fAisF"
+*** You are running in headless mode.
+1735835713383	Marionette	INFO	Marionette enabled
+1735835713430	Marionette	INFO	Listening on port 57519
+Read port: 57519
+2025-01-03 00:35:13.522 plugin-container[40219:5125813] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2025-01-03 00:35:13.522 plugin-container[40219:5125813] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2025-01-03 00:35:13.546 plugin-container[40219:5125813] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2025-01-03 00:35:13.546 plugin-container[40219:5125813] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2025-01-03 00:35:13.546 plugin-container[40219:5125815] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2025-01-03 00:35:13.546 plugin-container[40219:5125815] nil host used in call to allowsAnyHTTPSCertificateForHost:
+1735835713595	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /var/folders/7k/dlqpc5457g518yxxnhy53t640000gn/T/rust_mozprofile9fAisF/search.json.mozlz4", (void 0)))
+2025-01-02 16:35:20.589 plugin-container[40233:5126238] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2025-01-02 16:35:20.589 plugin-container[40233:5126238] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2025-01-02 16:35:20.592 plugin-container[40233:5126238] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2025-01-02 16:35:20.592 plugin-container[40233:5126238] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2025-01-02 16:35:20.592 plugin-container[40233:5126239] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2025-01-02 16:35:20.592 plugin-container[40233:5126239] nil host used in call to allowsAnyHTTPSCertificateForHost:
+1735835725027	Marionette	INFO	Stopped listening on port 57519
+JavaScript warning: https://www.google.com/js/th/w98ULYEoiI-DoSZcfqb0Q-CcsV5bW44r6AwpUhfXUEY.js line 2 > eval line 4066 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+1735835784187	geckodriver	INFO	Listening on 127.0.0.1:57723
+1735835785208	mozrunner::runner	INFO	Running command: MOZ_CRASHREPORTER="1" MOZ_CRASHREPORTER_NO_REPORT="1" MOZ_CRASHREPORTER_SHUTDOWN="1" MOZ_NO_REMOTE="1" "/App ... e" "-headless" "-foreground" "-no-remote" "-profile" "/var/folders/7k/dlqpc5457g518yxxnhy53t640000gn/T/rust_mozprofilei8ZRZm"
+*** You are running in headless mode.
+1735835786554	Marionette	INFO	Marionette enabled
+1735835786650	Marionette	INFO	Listening on port 57731
+Read port: 57731
+2025-01-03 00:36:26.735 plugin-container[40391:5127880] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2025-01-03 00:36:26.735 plugin-container[40391:5127880] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2025-01-03 00:36:26.758 plugin-container[40391:5127880] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2025-01-03 00:36:26.759 plugin-container[40391:5127880] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2025-01-03 00:36:26.759 plugin-container[40391:5127879] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2025-01-03 00:36:26.759 plugin-container[40391:5127879] nil host used in call to allowsAnyHTTPSCertificateForHost:
+1735835786866	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /var/folders/7k/dlqpc5457g518yxxnhy53t640000gn/T/rust_mozprofilei8ZRZm/search.json.mozlz4", (void 0)))
+2025-01-02 16:36:33.972 plugin-container[40412:5128394] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2025-01-02 16:36:33.973 plugin-container[40412:5128394] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2025-01-02 16:36:34.048 plugin-container[40412:5128394] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2025-01-02 16:36:34.049 plugin-container[40412:5128394] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2025-01-02 16:36:34.049 plugin-container[40412:5128398] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2025-01-02 16:36:34.049 plugin-container[40412:5128398] nil host used in call to allowsAnyHTTPSCertificateForHost:
+1735835799776	Marionette	INFO	Stopped listening on port 57731
+JavaScript warning: https://www.google.com/js/th/w98ULYEoiI-DoSZcfqb0Q-CcsV5bW44r6AwpUhfXUEY.js line 2 > eval line 7256 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+1735835817842	geckodriver	INFO	Listening on 127.0.0.1:57946
+1735835818866	mozrunner::runner	INFO	Running command: MOZ_CRASHREPORTER="1" MOZ_CRASHREPORTER_NO_REPORT="1" MOZ_CRASHREPORTER_SHUTDOWN="1" MOZ_NO_REMOTE="1" "/App ... e" "-headless" "-foreground" "-no-remote" "-profile" "/var/folders/7k/dlqpc5457g518yxxnhy53t640000gn/T/rust_mozprofileb2B6mE"
+*** You are running in headless mode.
+1735835819526	Marionette	INFO	Marionette enabled
+1735835819566	Marionette	INFO	Listening on port 57956
+Read port: 57956
+2025-01-03 00:36:59.653 plugin-container[40479:5129463] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2025-01-03 00:36:59.653 plugin-container[40479:5129463] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2025-01-03 00:36:59.688 plugin-container[40479:5129463] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2025-01-03 00:36:59.688 plugin-container[40479:5129463] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2025-01-03 00:36:59.688 plugin-container[40479:5129499] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2025-01-03 00:36:59.688 plugin-container[40479:5129499] nil host used in call to allowsAnyHTTPSCertificateForHost:
+1735835819895	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /var/folders/7k/dlqpc5457g518yxxnhy53t640000gn/T/rust_mozprofileb2B6mE/search.json.mozlz4", (void 0)))
+2025-01-02 16:37:06.346 plugin-container[40499:5129934] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2025-01-02 16:37:06.346 plugin-container[40499:5129934] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2025-01-02 16:37:06.349 plugin-container[40499:5129934] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2025-01-02 16:37:06.349 plugin-container[40499:5129934] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2025-01-02 16:37:06.349 plugin-container[40499:5129949] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2025-01-02 16:37:06.349 plugin-container[40499:5129949] nil host used in call to allowsAnyHTTPSCertificateForHost:
+JavaScript warning: https://player.aniview.com/ssync/62f53b2c7850d0786f227f64/ssync.html?pid=62f53b2c7850d0786f227f64&r=https%3A%2F%2Fvisitor.us-west1.gcp.omnitagjs.com%2Fvisitor%2Fsync%3Fname%3DANIVIEW%26ttl%3D720%26uid%3De8ecb87ff2ef3a3b16ba16c51e7986ac%26visitor%3D%5BAV_UID%5D%26gdpr%3D0%26gdpr_consent%3D&gdpr=0&gdpr_consent=, line 82: unreachable code after return statement
+JavaScript warning: https://player.aniview.com/ssync/62f53b2c7850d0786f227f64/ssync.html?pid=62f53b2c7850d0786f227f64&r=https%3A%2F%2Fvisitor.us-west1.gcp.omnitagjs.com%2Fvisitor%2Fsync%3Fname%3DANIVIEW%26ttl%3D720%26uid%3De8ecb87ff2ef3a3b16ba16c51e7986ac%26visitor%3D%5BAV_UID%5D%26gdpr%3D0%26gdpr_consent%3D&gdpr=0&gdpr_consent=, line 82: unreachable code after return statement
+1735835849907	Marionette	INFO	Stopped listening on port 57956
+JavaScript warning: https://www.google.com/js/th/w98ULYEoiI-DoSZcfqb0Q-CcsV5bW44r6AwpUhfXUEY.js line 2 > eval line 7648 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+[GFX1-]: Unrecognized feature ACCELERATED_CANVAS2D
+[GFX1-]: Unrecognized feature ACCELERATED_CANVAS2D
+1735836390061	geckodriver	INFO	Listening on 127.0.0.1:58753
+1735836391077	mozrunner::runner	INFO	Running command: MOZ_CRASHREPORTER="1" MOZ_CRASHREPORTER_NO_REPORT="1" MOZ_CRASHREPORTER_SHUTDOWN="1" MOZ_NO_REMOTE="1" "/App ... e" "-headless" "-foreground" "-no-remote" "-profile" "/var/folders/7k/dlqpc5457g518yxxnhy53t640000gn/T/rust_mozprofile4zjd1W"
+*** You are running in headless mode.
+1735836392422	Marionette	INFO	Marionette enabled
+1735836392504	Marionette	INFO	Listening on port 58763
+Read port: 58763
+2025-01-03 00:46:32.591 plugin-container[41634:5142136] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2025-01-03 00:46:32.591 plugin-container[41634:5142136] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2025-01-03 00:46:32.622 plugin-container[41634:5142136] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2025-01-03 00:46:32.622 plugin-container[41634:5142136] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2025-01-03 00:46:32.622 plugin-container[41634:5142134] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2025-01-03 00:46:32.622 plugin-container[41634:5142134] nil host used in call to allowsAnyHTTPSCertificateForHost:
+1735836392851	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /var/folders/7k/dlqpc5457g518yxxnhy53t640000gn/T/rust_mozprofile4zjd1W/search.json.mozlz4", (void 0)))
+2025-01-02 16:46:40.538 plugin-container[41662:5142641] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2025-01-02 16:46:40.538 plugin-container[41662:5142641] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2025-01-02 16:46:40.659 plugin-container[41662:5142641] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2025-01-02 16:46:40.659 plugin-container[41662:5142641] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2025-01-02 16:46:40.659 plugin-container[41662:5142645] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2025-01-02 16:46:40.659 plugin-container[41662:5142645] nil host used in call to allowsAnyHTTPSCertificateForHost:
+JavaScript warning: https://player.aniview.com/ssync/62f53b2c7850d0786f227f64/ssync.html?pid=62f53b2c7850d0786f227f64&r=https%3A%2F%2Fvisitor.us-west1.gcp.omnitagjs.com%2Fvisitor%2Fsync%3Fname%3DANIVIEW%26ttl%3D720%26uid%3De8ecb87ff2ef3a3b16ba16c51e7986ac%26visitor%3D%5BAV_UID%5D%26gdpr%3D0%26gdpr_consent%3D&gdpr=0&gdpr_consent=, line 82: unreachable code after return statement
+JavaScript warning: https://player.aniview.com/ssync/62f53b2c7850d0786f227f64/ssync.html?pid=62f53b2c7850d0786f227f64&r=https%3A%2F%2Fvisitor.us-west1.gcp.omnitagjs.com%2Fvisitor%2Fsync%3Fname%3DANIVIEW%26ttl%3D720%26uid%3De8ecb87ff2ef3a3b16ba16c51e7986ac%26visitor%3D%5BAV_UID%5D%26gdpr%3D0%26gdpr_consent%3D&gdpr=0&gdpr_consent=, line 82: unreachable code after return statement
+1735836438917	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
+1735836439117	Marionette	INFO	Stopped listening on port 58763
+JavaScript warning: https://www.google.com/js/th/w98ULYEoiI-DoSZcfqb0Q-CcsV5bW44r6AwpUhfXUEY.js line 2 > eval line 2724 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+1735836543188	geckodriver	INFO	Listening on 127.0.0.1:59198
+1735836544207	mozrunner::runner	INFO	Running command: MOZ_CRASHREPORTER="1" MOZ_CRASHREPORTER_NO_REPORT="1" MOZ_CRASHREPORTER_SHUTDOWN="1" MOZ_NO_REMOTE="1" "/App ... e" "-headless" "-foreground" "-no-remote" "-profile" "/var/folders/7k/dlqpc5457g518yxxnhy53t640000gn/T/rust_mozprofileiuwrn5"
+*** You are running in headless mode.
+1735836545269	Marionette	INFO	Marionette enabled
+1735836545288	Marionette	INFO	Listening on port 59206
+Read port: 59206
+2025-01-03 00:49:05.399 plugin-container[41965:5146578] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2025-01-03 00:49:05.399 plugin-container[41965:5146578] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2025-01-03 00:49:05.418 plugin-container[41965:5146578] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2025-01-03 00:49:05.418 plugin-container[41965:5146578] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2025-01-03 00:49:05.419 plugin-container[41965:5146580] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2025-01-03 00:49:05.419 plugin-container[41965:5146580] nil host used in call to allowsAnyHTTPSCertificateForHost:
+1735836545477	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /var/folders/7k/dlqpc5457g518yxxnhy53t640000gn/T/rust_mozprofileiuwrn5/search.json.mozlz4", (void 0)))
+2025-01-02 16:49:12.503 plugin-container[42006:5147169] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2025-01-02 16:49:12.503 plugin-container[42006:5147169] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2025-01-02 16:49:12.508 plugin-container[42006:5147169] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2025-01-02 16:49:12.508 plugin-container[42006:5147169] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2025-01-02 16:49:12.508 plugin-container[42006:5147167] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2025-01-02 16:49:12.508 plugin-container[42006:5147167] nil host used in call to allowsAnyHTTPSCertificateForHost:
+JavaScript warning: https://player.aniview.com/ssync/62f53b2c7850d0786f227f64/ssync.html?pid=62f53b2c7850d0786f227f64&r=https%3A%2F%2Fvisitor.us-west1.gcp.omnitagjs.com%2Fvisitor%2Fsync%3Fname%3DANIVIEW%26ttl%3D720%26uid%3De8ecb87ff2ef3a3b16ba16c51e7986ac%26visitor%3D%5BAV_UID%5D%26gdpr%3D0%26gdpr_consent%3D&gdpr=0&gdpr_consent=, line 82: unreachable code after return statement
+JavaScript warning: https://player.aniview.com/ssync/62f53b2c7850d0786f227f64/ssync.html?pid=62f53b2c7850d0786f227f64&r=https%3A%2F%2Fvisitor.us-west1.gcp.omnitagjs.com%2Fvisitor%2Fsync%3Fname%3DANIVIEW%26ttl%3D720%26uid%3De8ecb87ff2ef3a3b16ba16c51e7986ac%26visitor%3D%5BAV_UID%5D%26gdpr%3D0%26gdpr_consent%3D&gdpr=0&gdpr_consent=, line 82: unreachable code after return statement
+1735836593338	Marionette	INFO	Stopped listening on port 59206
+JavaScript warning: https://www.google.com/js/th/w98ULYEoiI-DoSZcfqb0Q-CcsV5bW44r6AwpUhfXUEY.js line 2 > eval line 2548 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.

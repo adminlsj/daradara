@@ -27,6 +27,8 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 use Spatie\Browsershot\Browsershot;
 use GuzzleHttp\Client;
+use Symfony\Component\Process\Process;
+use Symfony\Component\Process\Exception\ProcessFailedException;
 
 class BotController extends Controller
 {
@@ -1194,7 +1196,7 @@ class BotController extends Controller
         }
     }
 
-    public function scrapeAnilistAnimes(Request $request)
+    public function scrapeAnilistAnimelist(Request $request)
     {
         // Anilist API
         $query = '
@@ -1276,41 +1278,26 @@ class BotController extends Controller
         }
     }
 
-    public function linkAnilistToMal(Request $request)
+    public function scrapeAnilistAnimes(Request $request)
     {
-        $anilist = AnimeTemp::find($request->anime_temp_id);
-        $id = Helper::get_string_between($anilist->sources['anilist'], 'https://anilist.co/anime/', '/');
-        if (Anime::where('sources', 'not like', '%"anilist"%')->where('sources', 'like', '%"https://myanimelist.net/anime/'.$id.'/"%')->exists()) {
-            $myanimelist = Anime::where('sources', 'not like', '%"anilist"%')->where('sources', 'like', '%"https://myanimelist.net/anime/'.$id.'/"%')->get();
-            if ($myanimelist->count() > 1) {
-                return "Anime temp ID#{$anilist->id} has more than one matches<br>";
-            } else {
-                $myanimelist = $myanimelist->first();
-                $temp = $myanimelist->sources;
-                $temp['anilist'] = $anilist->sources['anilist'];
-                $myanimelist->sources = $temp;
-                $myanimelist->save();
-                $anilist->delete();
+        $animes = Anime::where('sources', 'like', '%"anilist"%')->where('id', 7)->get();
+        foreach ($animes as $anime) {
+            $url = $anime->sources['anilist'].'x/';
+            $process = new Process(['python', base_path() . '/data_extractor_for_anilist.py', $url]);
+            $process->run();
+
+            // executes after the command finishes
+            if (!$process->isSuccessful()) {
+                throw new ProcessFailedException($process);
             }
+
+            $data = json_decode($process->getOutput(), true);
+            return $data;
         }
     }
 
     public function tempMethod(Request $request)
     {   
-        $anilists = AnimeTemp::where('sources', 'like', '%"anilist"%')->get();
-        foreach ($anilists as $anilist) {
-            $id = Helper::get_string_between($anilist->sources['anilist'], 'https://anilist.co/anime/', '/');
-            if (Anime::where('sources', 'not like', '%"anilist"%')->where('sources', 'like', '%"https://myanimelist.net/anime/'.$id.'/"%')->exists()) {
-                $myanimelist = Anime::where('sources', 'not like', '%"anilist"%')->where('sources', 'like', '%"https://myanimelist.net/anime/'.$id.'/"%')->get();
-                if ($myanimelist->count() > 1) {
-                    return "Anime temp ID#{$anilist->id} has more than one matches<br>";
-                } else {
-                    $myanimelist = $myanimelist->first();
-                    echo "<a href='https://daradara.swiftshare.me/linkAnilistToMal?anime_temp_id={$anilist->id}' target='_blank'>Anilist ID#{$anilist->id} title_ro {$anilist->title_ro} | Myanimelist ID#{$myanimelist->id} title_ro {$myanimelist->title_ro}</a><br>";
-                }
-            }
-        }
-
         // Replace irregular characters
         /* $search = "&quot;";
         $replace = '"';

@@ -23,6 +23,7 @@
         "staudenmeir/eloquent-eager-limit": "^1.0",
         "steelywing/chinese": "^0.5.3",
         "stripe/stripe-php": "^5.2",
+        "symfony/process": "*",
         "torann/geoip": "^1.1"
     },
     "require-dev": {
