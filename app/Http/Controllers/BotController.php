@@ -1278,6 +1278,11 @@ class BotController extends Controller
 
     public function tempMethod(Request $request)
     {   
+        $animes = Anime::where('title_ro', 'like', "%&#039;%")->get();
+        foreach ($animes as $anime) {
+            $anime->title_ro = str_replace('&#039;', "'", $anime->title_ro);
+            $anime->save();
+        }
         /* $characters = Character::where('name_zht', 'like', "%/%")->orderBy('id', 'asc')->get();
         foreach ($characters as $character) {
             $birthday = Carbon::createFromFormat('Y/m/d H:i:s', '0000/'.$character->name_zht.' 00:00:00'); 
