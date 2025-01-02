@@ -11,7 +11,7 @@
 	<div class="relations-content">
 		<div>
 			<p style="padding:15px 15px 0px">{{ $anime->episodes_count }}集首播</p>
-			<h3>{{ $anime->started_at->toDateString() }}</h3>
+			<h3>{{ Carbon\Carbon::parse($anime->started_at)->format('Y-m-d') }}</h3>
 			<p style="padding:0px 15px">來源: {{ $anime->source }}</p>
 		</div>
 		<p class="description">{{ $anime->description }}</p>
