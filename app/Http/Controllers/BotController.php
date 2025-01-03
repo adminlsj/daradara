@@ -1280,10 +1280,11 @@ class BotController extends Controller
 
     public function scrapeAnilistAnimes(Request $request)
     {
-        $animes = Anime::where('sources', 'like', '%"anilist"%')->where('id', 7)->get();
+        $animes = AnimeTemp::where('sources', 'like', '%"anilist"%')->where('photo_cover', 'not like', '%\anilist%')->where('genres', 'not like', '%"Hentai"%')->orderBy('id', $request->order)->get();
         foreach ($animes as $anime) {
             $url = $anime->sources['anilist'].'x/';
             $process = new Process(['python', base_path() . '/data_extractor_for_anilist.py', $url]);
+            $process->setTimeout(300);
             $process->run();
 
             // executes after the command finishes
@@ -1292,7 +1293,24 @@ class BotController extends Controller
             }
 
             $data = json_decode($process->getOutput(), true);
-            return $data;
+            if (array_key_exists("Banner Image", $data)) {
+                $anime->photo_banner = $data["Banner Image"];
+            }
+            $anime->photo_cover = $data["Cover Image"];
+            if (array_key_exists("Average Score", $data)) {
+                $anime->rating_al = str_replace('%', '', $data["Average Score"]);
+            } elseif (array_key_exists("Mean Score", $data)) {
+                $anime->rating_al = str_replace('%', '', $data["Mean Score"]);
+            }
+            $anime->rating_al_count = $data["Popularity"];
+            if (array_key_exists("Favorites", $data)) {
+                $anime->favorites = $data["Favorites"];
+            }
+            if (array_key_exists("Genres", $data)) {
+                $anime->genres = $data["Genres"];
+            }
+            $anime->tags = $data["tags"];
+            $anime->save();
         }
     }
 
