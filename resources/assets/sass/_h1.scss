@@ -487,15 +487,38 @@ th, td {
 
 .video-buttons-wrapper {
   width: calc(100% + 40px);
-  display: block; 
-  margin-top: 13px;
-  margin-bottom: -40px;
+  display: none !important; 
+  text-align: left; 
+  height: 40px; 
+  line-height: 40px; 
+  overflow-y: hidden;
+  margin-top: -23px;
+  margin-bottom: 20px;
   position: relative; 
   white-space: nowrap; 
   overflow-x: scroll;
   margin-left: -20px;
   padding-left: 20px;
   padding-right: 15px;
+}
+
+@media (max-width: 1040px) {
+  .video-buttons-wrapper {
+    display: block !important;
+  }
+}
+
+@media (max-width: 400px) {
+  .video-buttons-wrapper {
+    width: calc(100% + 20px);
+    margin-left: -10px;
+    padding-left: 10px;
+    padding-right: 5px;
+  }
+
+  .filters-wrap .bar {
+    width: calc(100vw - 72px) !important;
+  }
 }
 
 .desktop-inline-mobile-block {
