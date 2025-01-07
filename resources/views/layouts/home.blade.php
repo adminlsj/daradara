@@ -11,25 +11,9 @@
 
 			@include('nav.home-search')
 
-			<div class="filters-wrap home-search-nav-mobile">
-				<div class="filter search">
-					<div class="bar" style="position: relative; width: calc(100vw - 72px); height: 42px;">
-						<input id="text" name="text" type="text" style="padding-left: 35px;" value="{{ $text ? $text : '' }}" placeholder="搜尋 daradara">
-						<input type="submit" style="display: none">
-						<i class="fa fa-search" style="color: rgba(201,215,227); font-size: 1.3rem; height: 1.6rem; position: absolute; left: 12px; top: 14px"></i>
-					</div>
-				</div>
+			@include('nav.home-search-mobile')
 
-				<div class="filter format" style="position: relative;">
-					<div onclick="extra_filter_toggle()" class="extra-filter-wrap no-select" style="background-color: transparent; height: 42px; width: 42px;" type="button" data-toggle="dropdown">
-						<div id="home-filter-more-btn" style="height: 42px; width: 42px; margin-top: 0px;">
-							<i class="material-icons">tune</i>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="content-wrap">
+			<div class="content-wrap home-content-wrap">
 				@include('home.landing-section', ['title' => '最近流行', 'animes' => $最近流行])
 				@include('home.landing-section', ['title' => '本季熱門', 'animes' => $本季熱門])
 				@include('home.landing-section', ['title' => '最新上市', 'animes' => $最新上市])

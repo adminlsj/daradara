@@ -486,9 +486,16 @@ th, td {
 }
 
 .video-buttons-wrapper {
-  display: inline-block; 
-  vertical-align: middle; 
-  float: right;
+  width: calc(100% + 40px);
+  display: block; 
+  margin-top: 13px;
+  margin-bottom: -40px;
+  position: relative; 
+  white-space: nowrap; 
+  overflow-x: scroll;
+  margin-left: -20px;
+  padding-left: 20px;
+  padding-right: 15px;
 }
 
 .desktop-inline-mobile-block {
@@ -826,10 +833,10 @@ th, td {
 }
 
 .home-genre-tabs {
-  color: #e2e2e2 !important; 
-  border: 1px solid rgba(255,255,255,.4); 
+  background: rgba(221,230,238, .6);
+  color: rgb(92,114,138); 
   padding: 7px 13px; 
-  border-radius: 30px;
+  border-radius: 6px;
   font-size: 13px;
 }
 
@@ -2952,19 +2959,6 @@ div.sticky {
     max-width: 40vw;
     display: inline-block;
     vertical-align: middle;
-  }
-
-  .video-buttons-wrapper {
-    width: 100%;
-    display: block; 
-    margin-top: 13px;
-    margin-bottom: -40px;
-    position: relative; 
-    width: 100%; 
-    white-space: nowrap; 
-    overflow-x: scroll;
-    padding-left: 10px;
-    padding-right: 4px;
   }
 
   .video-subscribe-btn {
