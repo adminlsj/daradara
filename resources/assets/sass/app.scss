@@ -73,20 +73,36 @@ th, td {
   flex-direction: row;
 }
 
+.home-search-nav-mobile {
+  display: none !important;
+}
+
 @media (max-width: 1105px) {
-  .flex-center-content {
+  .flex-center-content, .navbar {
     width: calc(100% - 60px);
   }
 }
 
 @media (max-width: 1040px) {
-  .flex-center-content {
+  .flex-center-content, .navbar {
     width: calc(100% - 40px);
+  }
+
+  .home-wrapper {
+    margin-top: 10px;
+  }
+
+  .navbar-wrapper, .home-search-nav {
+    display: none !important;
+  }
+
+  .home-search-nav-mobile {
+    display: flex !important;
   }
 }
 
 @media (max-width: 400px) {
-  .flex-center-content {
+  .flex-center-content, .navbar {
     width: calc(100% - 20px);
   }
 }

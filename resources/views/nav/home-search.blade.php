@@ -1,4 +1,4 @@
-<div class="filters-wrap hidden-xs hidden-sm hidden-lg">
+<div class="filters-wrap home-search-nav">
 	<div class="filters">
 		<div class="filter search">
 			<h3>搜尋</h3>
