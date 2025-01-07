@@ -73,6 +73,24 @@ th, td {
   flex-direction: row;
 }
 
+@media (max-width: 1105px) {
+  .flex-center-content {
+    width: calc(100% - 60px);
+  }
+}
+
+@media (max-width: 1040px) {
+  .flex-center-content {
+    width: calc(100% - 40px);
+  }
+}
+
+@media (max-width: 400px) {
+  .flex-center-content {
+    width: calc(100% - 20px);
+  }
+}
+
 .nav {
   position:fixed;
   top:0;
