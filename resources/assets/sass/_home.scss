@@ -451,6 +451,11 @@
     .media-card:nth-child(5), .media-card:nth-child(6) {
         display: none;
     }
+
+    .media-card a {
+        font-size: 1.2rem;
+        line-height: 17px;
+    }
 }
 
 @media (max-width: 520px) {
