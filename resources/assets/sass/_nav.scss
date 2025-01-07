@@ -25,18 +25,6 @@
     border-radius: 0px !important;
 }
 
-@media (max-width: 1040px) {
-    .navbar {
-        padding: 20px 30px;
-    }
-}
-
-@media (max-width: 768px) {
-    .navbar {
-        display: none;
-    }
-}
-
 .navbar:before, .navbar:after {
     content: none !important;
 }
