@@ -31,10 +31,10 @@
 
   <a href="{{ Auth::check() ? route('anime.search') : route('login') }}">
     @if (Request::is('*playlists*'))
-      <img style="height: 22px; margin-top: 7px; border-radius: 2px;" src="{{ Auth::check() ? Auth::user()->avatar_temp : 'https://vdownload.hembed.com/image/icon/user_default_image.jpg?secure=ue9M119kdZxHcZqDPrunLQ==,4855471320' }}">
+      <img style="height: 22px; margin-top: 7px; border-radius: 2px;" src="{{ Auth::check() ? Auth::user()->avatar_temp : 'https://images2.imgbox.com/5f/2b/uPIwZSoy_o.jpg' }}">
       <div style="font-size: 9px; color: white; margin-top: 3px;">我的 Hanime1</div>
     @else
-      <img style="height: 22px; margin-top: 7px; border-radius: 2px;" src="{{ Auth::check() ? Auth::user()->avatar_temp : 'https://vdownload.hembed.com/image/icon/user_default_image.jpg?secure=ue9M119kdZxHcZqDPrunLQ==,4855471320' }}">
+      <img style="height: 22px; margin-top: 7px; border-radius: 2px;" src="{{ Auth::check() ? Auth::user()->avatar_temp : 'https://images2.imgbox.com/5f/2b/uPIwZSoy_o.jpg' }}">
       <div style="font-size: 9px; color: #838383; margin-top: 3px;">我的 Hanime1</div>
     @endif
   </a>
