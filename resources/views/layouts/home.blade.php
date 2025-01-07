@@ -71,6 +71,11 @@
 		</div>
 	</div>
 </form>
+
+<br><br>
+
+@include('layouts.nav-bottom')
+
 @endsection
 
 
