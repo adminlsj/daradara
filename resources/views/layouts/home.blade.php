@@ -13,7 +13,7 @@
 
 			<div class="filters-wrap home-search-nav-mobile">
 				<div class="filter search">
-					<div class="bar" style="position: relative; width: calc(100vw - 95px); height: 42px;">
+					<div class="bar" style="position: relative; width: calc(100vw - 72px); height: 42px;">
 						<input id="text" name="text" type="text" style="padding-left: 35px;" value="{{ $text ? $text : '' }}" placeholder="搜尋 daradara">
 						<input type="submit" style="display: none">
 						<i class="fa fa-search" style="color: rgba(201,215,227); font-size: 1.3rem; height: 1.6rem; position: absolute; left: 12px; top: 14px"></i>
