@@ -1,4 +1,4 @@
-<div style="z-index: 10000 !important; background-color: rgba(30,30,30,0.75); backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px); {{ Request::is('*watch*') ? 'display:none;' : '' }}" class="bottom-nav hidden-lg hidden-md white-theme-nav-bottom">
+<div style="z-index: 10000 !important; background-color: rgba(221, 230, 238,0.75); backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px); {{ Request::is('*watch*') ? 'display:none;' : '' }}" class="bottom-nav hidden-lg hidden-md white-theme-nav-bottom">
   <a href="/">
     @if (Request::is('/'))
       <img style="height: 19px; margin-top: 8px;" src="https://images2.imgbox.com/0e/de/db2bisos_o.png">
