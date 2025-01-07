@@ -21,8 +21,7 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         $now = Carbon::now();
-        $random = Anime::find(1);
-        $count = 5;
+        $count = 6;
 
         $最近流行 = Anime::where('photo_cover', '!=', null)->whereIn('category', ['TV', 'Movie'])->where('started_at', '>=', $now->subYear())->where('rating_mal_count', '!=', null)->orderBy('rating_mal_count', 'desc')->limit($count)->get();
 
@@ -50,6 +49,6 @@ class HomeController extends Controller
         $source = '';
         $text = '';
 
-        return view('layouts.home', compact('random', '最近流行', '本季熱門', '最新上市', '大家在看', '人氣排行', 'is_mobile', 'chinese', 'genre', 'tags', 'sort', 'year', 'season', 'category', 'airing_status', 'streaming_on', 'country', 'source', 'text'));
+        return view('layouts.home', compact('最近流行', '本季熱門', '最新上市', '大家在看', '人氣排行', 'is_mobile', 'chinese', 'genre', 'tags', 'sort', 'year', 'season', 'category', 'airing_status', 'streaming_on', 'country', 'source', 'text'));
     }
 }

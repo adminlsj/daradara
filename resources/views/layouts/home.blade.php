@@ -17,7 +17,7 @@
 				@include('home.landing-section', ['title' => '大家在看', 'animes' => $大家在看])
 			</div>
 
-			<div class="top-anime flex-column">
+			<div class="top-anime flex-column hidden-xs hidden-sm hidden-lg">
 				<div class="title-link flex-row">
 					<a href="">
 						<h3>人氣排行</h3>
