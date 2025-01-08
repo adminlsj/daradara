@@ -1,13 +1,13 @@
 .modal-content {
   border-radius: 0px !important; 
-  border: 0px !important; 
+  border: 1px solid #edf1f5 !important; 
   background-color: #edf1f5 !important; 
-  color: white !important;
+  color: #5c728a !important;
 }
 
 .modal-header {
-  background-color: #E0E7EF !important;
-  border-bottom: 1px solid #333333 !important; 
+  background-color: #edf1f5 !important;
+  border-bottom: 1px solid #E0E7EF !important; 
   position: relative; 
   height: 65px;
 }
@@ -52,7 +52,7 @@
   display: inline-block; 
   float: left; 
   line-height: 38px; 
-  color: white; 
+  color: #5c728a; 
   cursor: pointer; 
   text-decoration: underline; 
   margin-left: 5px;
@@ -60,8 +60,8 @@
 
 .modal-footer button {
   border: none; 
-  color: white; 
-  background-color: #323434 !important;
+  color: #fff; 
+  background-color: #5c728a !important;
   border-radius: 0; 
   height: 100%; 
   width: auto; 
