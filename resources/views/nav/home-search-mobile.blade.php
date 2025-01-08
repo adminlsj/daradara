@@ -37,10 +37,17 @@
 
 	        @for ($i = Carbon\Carbon::now()->year + 1; $i >= 1917; $i--)
 		        <div class="simple-dropdown-item hentai-sort-options-wrapper {{ $sort ? $sort == $i ? 'active' : '' : '' }}"><div class="hentai-sort-options">{{ $i }}</div></div>
+<<<<<<< HEAD
 		        <hr class="{{ $i == 1917 ? 'hidden-sm hidden-md hidden-lg hidden-xl' : '' }}" style="margin: 0; border-color: #E0E7EF;">
 	        @endfor
 	      </div>
 	      <hr style="border-color: #E0E7EF; margin: 0">
+=======
+		        <hr class="{{ $i == 1917 ? 'hidden-sm hidden-md hidden-lg hidden-xl' : '' }}" style="margin: 0; border-color: #323434;">
+	        @endfor
+	      </div>
+	      <hr style="border-color: #323434; margin: 0">
+>>>>>>> 7089439c27bd6e541980461503031168dc2a2f1f
 	      <div class="modal-footer">
 	      	<div data-dismiss="modal">取消</div>
 			<button class="pull-right btn btn-primary" type="submit">顯示搜索結果</button>
