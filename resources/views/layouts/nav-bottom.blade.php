@@ -41,11 +41,11 @@
 
   <a href="{{ Auth::check() ? route('user.animelist', ['user' => Auth::user(), 'name' => Auth::user()->name]) : route('login') }}" style="color: #5c728a;">
     @if (Request::is('*playlists*'))
-      <img style="height: 20px; margin-top: 7px; border-radius: 2px;" src="{{ Auth::check() ? Auth::user()->avatar_temp : 'https://images2.imgbox.com/5f/2b/uPIwZSoy_o.jpg' }}">
-      <div style="font-size: 9px; margin-top: 5px;">我的清單</div>
+      <img style="height: 19px; margin-top: 7px; border-radius: 2px;" src="{{ Auth::check() ? Auth::user()->avatar_temp : 'https://images2.imgbox.com/5f/2b/uPIwZSoy_o.jpg' }}">
+      <div style="font-size: 9px; margin-top: 6px;">我的清單</div>
     @else
-      <img style="height: 20px; margin-top: 7px; border-radius: 2px;" src="{{ Auth::check() ? Auth::user()->avatar_temp : 'https://images2.imgbox.com/5f/2b/uPIwZSoy_o.jpg' }}">
-      <div style="font-size: 9px; margin-top: 5px;">我的清單</div>
+      <img style="height: 19px; margin-top: 7px; border-radius: 2px;" src="{{ Auth::check() ? Auth::user()->avatar_temp : 'https://images2.imgbox.com/5f/2b/uPIwZSoy_o.jpg' }}">
+      <div style="font-size: 9px; margin-top: 6px;">我的清單</div>
     @endif
   </a>
 </div>
