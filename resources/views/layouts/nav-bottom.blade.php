@@ -1,11 +1,11 @@
 <div style="z-index: 10000 !important; background-color: #edf1f5; border-top: 1px solid rgba(221, 230, 238, 0.6)" class="bottom-nav hidden-lg hidden-md white-theme-nav-bottom">
   <a href="/" style="color: #5c728a;">
     @if (Request::is('/'))
-      <img style="height: 21px; margin-top: 7px;" src="https://images2.imgbox.com/a1/39/dGzAzEb1_o.png">
-      <div style="font-size: 9px; margin-top: 4px;">主頁</div>
+      <img style="height: 22px; margin-top: 7px;" src="https://images2.imgbox.com/a1/39/dGzAzEb1_o.png">
+      <div style="font-size: 9px; margin-top: 3px;">主頁</div>
     @else
-      <img style="height: 21px; margin-top: 7px;" src="https://images2.imgbox.com/a3/43/OwM5qFGZ_o.png">
-      <div style="font-size: 9px; margin-top: 4px;">主頁</div>
+      <img style="height: 22px; margin-top: 7px;" src="https://images2.imgbox.com/a3/43/OwM5qFGZ_o.png">
+      <div style="font-size: 9px; margin-top: 3px;">主頁</div>
     @endif
   </a>
 
