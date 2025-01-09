@@ -127,6 +127,14 @@ $('.sort-option').click(function() {
   $('form#hentai-form').submit();
 })
 
+$('form#hentai-form').on('submit',function() {
+    var mobile = $('#mobile-text');
+    if (mobile.data('original') != mobile.val()) {
+        $('#hentai-form #text').val(mobile.val());
+    }
+    return true;
+});
+
 $('.search-type-button').click(function() {
   var type = $(this).find('.search-type-input').text();
   if (type == '搜尋作者') { 

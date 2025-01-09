@@ -1,7 +1,7 @@
 <div class="filters-wrap home-search-nav-mobile">
 	<div class="filter search">
 		<div class="bar" style="position: relative; width: calc(100vw - 92px); height: 42px;">
-			<input id="text" name="text" type="text" style="padding-left: 35px;" value="{{ $text ? $text : '' }}" placeholder="搜尋 daradara">
+			<input id="mobile-text" type="text" style="padding-left: 35px;" value="{{ $text ? $text : '' }}" placeholder="搜尋 daradara" data-original="{{ $text ? $text : '' }}">
 			<input type="submit" style="display: none">
 			<i class="fa fa-search" style="color: rgba(201,215,227); font-size: 1.3rem; height: 1.6rem; position: absolute; left: 12px; top: 14px"></i>
 		</div>
@@ -18,11 +18,11 @@
 
 <div class="video-buttons-wrapper desktop-inline-mobile-block hide-scrollbar">
 	<div class="home-genre-tabs-wrapper" data-toggle="modal" data-target="#genre-modal">
-		<span class="home-genre-tabs">分類標籤<img style="margin-top: -2px; margin-left: 7px; width: 12px;" src="https://images2.imgbox.com/36/8c/Npue5qJ0_o.png"></span>
+		<span class="home-genre-tabs">分類標籤<img style="margin-top: -2px; margin-left: 7px; width: 12px;" src="https://images2.imgbox.com/a6/67/vJMMeNlM_o.png"></span>
 	</div>
 
 	<div class="home-genre-tabs-wrapper" data-toggle="modal" data-target="#year-modal">
-		<span class="home-genre-tabs">播出年份<img style="margin-top: -2px; margin-left: 7px; width: 12px;" src="https://images2.imgbox.com/36/8c/Npue5qJ0_o.png"></span>
+		<span class="home-genre-tabs {{ $year ? 'active' : '' }}">{{ $year ? $year.' 年' : '播出年份' }}<img style="margin-top: -2px; margin-left: 7px; width: 12px;" src="https://images2.imgbox.com/a6/67/vJMMeNlM_o.png"></span>
 	</div>
 
 	<div id="year-modal" class="modal" role="dialog">
@@ -50,7 +50,7 @@
 	</div>
 
 	<div class="home-genre-tabs-wrapper" data-toggle="modal" data-target="#season-modal">
-		<span class="home-genre-tabs">播放季度<img style="margin-top: -2px; margin-left: 7px; width: 12px;" src="https://images2.imgbox.com/36/8c/Npue5qJ0_o.png"></span>
+		<span class="home-genre-tabs {{ $season ? 'active' : '' }}">{{ $season ? $season : '播放季度' }}<img style="margin-top: -2px; margin-left: 7px; width: 12px;" src="https://images2.imgbox.com/a6/67/vJMMeNlM_o.png"></span>
 	</div>
 
 	<div id="season-modal" class="modal" role="dialog">
@@ -76,7 +76,7 @@
 	</div>
 
 	<div class="home-genre-tabs-wrapper" data-toggle="modal" data-target="#category-modal">
-		<span class="home-genre-tabs">類型<img style="margin-top: -2px; margin-left: 7px; width: 12px;" src="https://images2.imgbox.com/36/8c/Npue5qJ0_o.png"></span>
+		<span class="home-genre-tabs {{ $category ? 'active' : '' }}">{{ $category ? $category : '類型' }}<img style="margin-top: -2px; margin-left: 7px; width: 12px;" src="https://images2.imgbox.com/a6/67/vJMMeNlM_o.png"></span>
 	</div>
 
 	<div id="category-modal" class="modal" role="dialog">
@@ -102,7 +102,7 @@
 	</div>
 
 	<div class="home-genre-tabs-wrapper" data-toggle="modal" data-target="#airing-status-modal">
-		<span class="home-genre-tabs">播放狀態<img style="margin-top: -2px; margin-left: 7px; width: 12px;" src="https://images2.imgbox.com/36/8c/Npue5qJ0_o.png"></span>
+		<span class="home-genre-tabs {{ $airing_status ? 'active' : '' }}">{{ $airing_status ? $airing_status : '播放狀態' }}<img style="margin-top: -2px; margin-left: 7px; width: 12px;" src="https://images2.imgbox.com/a6/67/vJMMeNlM_o.png"></span>
 	</div>
 
 	<div id="airing-status-modal" class="modal" role="dialog">
@@ -128,7 +128,7 @@
 	</div>
 
 	<div class="home-genre-tabs-wrapper" data-toggle="modal" data-target="#streaming-on-modal">
-		<span class="home-genre-tabs">串流平台<img style="margin-top: -2px; margin-left: 7px; width: 12px;" src="https://images2.imgbox.com/36/8c/Npue5qJ0_o.png"></span>
+		<span class="home-genre-tabs {{ $streaming_on ? 'active' : '' }}">{{ $streaming_on ? $streaming_on : '串流平台' }}<img style="margin-top: -2px; margin-left: 7px; width: 12px;" src="https://images2.imgbox.com/a6/67/vJMMeNlM_o.png"></span>
 	</div>
 
 	<div id="streaming-on-modal" class="modal" role="dialog">
@@ -154,7 +154,7 @@
 	</div>
 
 	<div class="home-genre-tabs-wrapper" data-toggle="modal" data-target="#country-modal">
-		<span class="home-genre-tabs">原產國家<img style="margin-top: -2px; margin-left: 7px; width: 12px;" src="https://images2.imgbox.com/36/8c/Npue5qJ0_o.png"></span>
+		<span class="home-genre-tabs {{ $country ? 'active' : '' }}">{{ $country ? $country : '原產國家' }}<img style="margin-top: -2px; margin-left: 7px; width: 12px;" src="https://images2.imgbox.com/a6/67/vJMMeNlM_o.png"></span>
 	</div>
 
 	<div id="country-modal" class="modal" role="dialog">
@@ -180,7 +180,7 @@
 	</div>
 
 	<div class="home-genre-tabs-wrapper" data-toggle="modal" data-target="#source-modal">
-		<span class="home-genre-tabs">原作素材<img style="margin-top: -2px; margin-left: 7px; width: 12px;" src="https://images2.imgbox.com/36/8c/Npue5qJ0_o.png"></span>
+		<span class="home-genre-tabs {{ $source ? 'active' : '' }}">{{ $source ? $source : '原作素材' }}<img style="margin-top: -2px; margin-left: 7px; width: 12px;" src="https://images2.imgbox.com/a6/67/vJMMeNlM_o.png"></span>
 	</div>
 
 	<div id="source-modal" class="modal" role="dialog">
