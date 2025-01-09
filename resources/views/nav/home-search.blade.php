@@ -4,7 +4,6 @@
 			<h3>搜尋</h3>
 			<div class="bar" style="position: relative;">
 				<input id="text" name="text" type="text" style="padding-left: 35px;" value="{{ $text ? $text : '' }}">
-				<input type="submit" style="display: none">
 				<i class="fa fa-search" style="color: rgba(201,215,227); font-size: 1.3rem; height: 1.6rem; position: absolute; left: 12px; top: 12px"></i>
 			</div>
 		</div>
