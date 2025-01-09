@@ -116,7 +116,8 @@ $('.home-option').click(function() {
   if (option == '全部') {
     option = '';
   }
-  this.parentElement.querySelector('input').value = option;
+  var input = $(this).data('input');
+  $('#' + input).val(option);
   $('form#hentai-form').submit();
 })
 
