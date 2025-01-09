@@ -7,8 +7,10 @@
 @section('content')
 <form id="hentai-form" action="{{ route('anime.search') }}" method="GET">
 	<div class="flex-center-wrapper home-wrapper">
-		<div class="flex-center-content flex-column" style="margin-top: 100px;">
+		<div class="flex-center-content flex-column">
 			@include('nav.home-search')
+
+			@include('nav.home-search-mobile')
 
 			<div class="content-wrap">
 				<div class="landing-section">
@@ -39,9 +41,9 @@
 				</div>
 			</div>
 
-			<div style="margin-top: -25px" class="search-pagination hidden-xs">{!! $results->appends(request()->query())->onEachSide(1)->links() !!}</div>
+			<div style="margin-top: -25px" class="search-pagination">{!! $results->appends(request()->query())->onEachSide(1)->links() !!}</div>
 
-			<br>
+			<br><br><br>
 
 		</div>
 	</div>
