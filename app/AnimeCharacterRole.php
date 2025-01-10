@@ -9,6 +9,6 @@ class AnimeCharacterRole extends Pivot
     protected $table = 'anime_character_roles';
 
     protected $fillable = [
-        'id', 'anime_id', 'character_id', 'actor_id', 'role', 'created_at', 'updated_at'
+        'id', 'anime_id', 'character_id', 'staff_id', 'role', 'created_at', 'updated_at'
     ];
 }

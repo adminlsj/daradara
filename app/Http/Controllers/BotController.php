@@ -10,7 +10,7 @@ use App\AnimeRelation;
 use App\Episode;
 use App\Character;
 use App\Actor;
-use App\ActorAnimeCharacter;
+use App\AnimeCharacterRole;
 use App\Company;
 use App\Staff;
 use Illuminate\Http\Request;
@@ -1032,6 +1032,90 @@ class BotController extends Controller
         }
     }
 
+    public function scrapeMalCharacterActors(Request $request)
+    {
+        $from = $request->from;
+        $to = $request->to;
+        $characters = Character::where('id', '>=', $from)->where('id', '<=', $to)->get();
+        foreach ($characters as $character) {
+            $curl_connection = curl_init($character->sources['myanimelist']);
+            curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+            curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+            $html = curl_exec($curl_connection);
+            curl_close($curl_connection);
+            sleep(1);
+
+            /* if ($animes = $character->animes) {
+                foreach ($animes as $anime) {
+                    $link = $anime->sources['myanimelist'];
+                    $role_raw = trim(Helper::get_string_between($html, $link, '/small>'));
+                    $role = trim(Helper::get_string_between($role_raw, '<small>', '<'));
+                    $pivot_single = ActorAnimeCharacter::where('anime_id', $anime->id)->where('character_id', $character->id)->first();
+                    $pivot_single->role = $role;
+                    $pivot_single->save();
+                }
+            } */
+
+            if (strpos($html, $character->photo_cover) !== false) {
+                if (strpos($html, 'No voice actors have been added to this character.') === false) {
+                    $anime_raw = Helper::get_string_between($html, '<div class="normal_header character-anime">Animeography</div>', '<br />');
+                    $anime_raw_array = explode('<tr>', $anime_raw);
+                    array_shift($anime_raw_array);
+
+                    $actor_raw = Helper::get_string_between($html, '<div class="normal_header">Voice Actors</div>', '<br>');
+                    $actor_raw_array = explode('<table border="0" cellpadding="0" cellspacing="0" width="100%">', $actor_raw);
+                    array_shift($actor_raw_array);
+                    foreach ($actor_raw_array as $actor_raw_item) {
+                        $actor_link = Helper::get_string_between($actor_raw_item, '<a href="', '"');
+                        $actor_sources = ['myanimelist' => $actor_link];
+                        $actor_photo = Helper::get_string_between($actor_raw_item, '<img class="lazyload" data-src="', '"');
+                        $actor_name_from = '<td class="borderClass" valign="top"><a href="'.$actor_link.'">';
+                        $actor_name = trim(Helper::get_string_between($actor_raw_item, $actor_name_from, '</a>'));
+                        $actor_language = trim(Helper::get_string_between($actor_raw_item, '<small>', '</small>'));
+                        if (!Actor::where('sources', 'ilike', '%"'.$actor_link.'"%')->exists()) {
+                            $actor = Actor::create([
+                                'name_en' => $actor_name,
+                                'photo_cover' => $actor_photo,
+                                'language' => $actor_language,
+                                'sources' => $actor_sources,
+                            ]);
+                            echo "INFO: Character#{$character->id} - Actor#{$actor->id} scraped<br>";
+                        } else {
+                            $actor = Actor::where('sources', 'ilike', '%"'.$actor_link.'"%')->first();
+                            echo "INFO: Character#{$character->id} - Actor#{$actor->id} exists<br>";
+                        }
+
+                        foreach ($anime_raw_array as $anime_raw_item) {
+                            $anime_link = Helper::get_string_between($anime_raw_item, '<a href="', '"');
+                            $anime_link = 'https://myanimelist.net/anime/'.Helper::get_string_between($anime_link, 'https://myanimelist.net/anime/', '/').'/';
+                            $anime_role = trim(Helper::get_string_between($anime_raw_item, '<small>', '</small>'));
+                            if ($anime = Anime::where('sources', 'ilike', '%"'.$anime_link.'"%')->first()) {
+                                if (!AnimeCharacterRole::where('anime_id', $anime->id)->where('character_id', $character->id)->where('staff_id', $actor->id)->exists()) {
+                                    AnimeCharacterRole::create([
+                                        'anime_id' => $anime->id,
+                                        'character_id' => $character->id,
+                                        'staff_id' => $actor->id,
+                                        'role' => $anime_role,
+                                    ]);
+                                    echo "INFO: Character#{$character->id} - Actor#{$actor->id} - Anime#{$anime->id} scraped<br>";
+                                } else {
+                                    echo "INFO: Character#{$character->id} - Actor#{$actor->id} - Anime#{$anime->id} exists<br>";
+                                }
+                            } else {
+                                return "<span style='color:red'>WARNING: Anime {$anime_link} not found</span><br>";
+                            }
+                        }
+                    }
+                } else {
+                    echo "INFO: Character#{$character->id} has no voice actor<br>";
+                }
+            } else {
+                return "<span style='color:red'>WARNING: Character#{$character->id} access failed</span><br>";
+            }
+        }
+    }
+
     public function checkBangumiCompanies(Request $request)
     {
         $url = "https://bangumi.tv/person?orderby=collects&type=3&page={$request->page}";
@@ -1316,6 +1400,35 @@ class BotController extends Controller
 
     public function tempMethod(Request $request)
     {   
+        // Scrape voice actors
+        /* $from = $request->from;
+        $to = $request->to;
+        $actors = Actor::where('id', '>=', $from)->where('id', '<=', $to)->get();
+        foreach ($actors as $actor) {
+            $curl_connection = curl_init($actor->sources['myanimelist']);
+            curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+            curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+            $html = curl_exec($curl_connection);
+            curl_close($curl_connection);
+            sleep(1);
+
+            if (strpos($html, $actor->photo_cover) !== false || $actor->photo_cover == "https://cdn.myanimelist.net/images/questionmark_23.gif") {
+                if (strpos($html, 'Given name:') !== false && strpos($html, 'Family name:') !== false) {
+                    $actor_given_name = Helper::get_string_between($html, 'span class="dark_text">Given name:</span> ', '</div>');
+                    $actor_family_name = Helper::get_string_between($html, 'span class="dark_text">Family name:</span> ', '<div class="spaceit_pad">');
+                    $actor->name_jp = "{$actor_family_name}{$actor_given_name}";
+                    $actor->save();
+                    echo "INFO: Actor#{$actor->id} scraped<br>";
+
+                } else {
+                    echo "<span style='color:red'>WARNING: Actor#{$actor->id} has no name</span><br>";
+                }
+            } else {
+                echo "<span style='color:red'>WARNING: Actor#{$actor->id} access failed</span><br>";
+            }
+        } */
+
         // Replace irregular characters
         /* $search = "&quot;";
         $replace = '"';
@@ -1403,107 +1516,6 @@ class BotController extends Controller
                     }
                 }
             }            
-        } */
-
-        // Scrape voice actors
-        /* $from = $request->from;
-        $to = $request->to;
-        $actors = Actor::where('id', '>=', $from)->where('id', '<=', $to)->get();
-        foreach ($actors as $actor) {
-            $curl_connection = curl_init($actor->sources['myanimelist']);
-            curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
-            curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
-            $html = curl_exec($curl_connection);
-            curl_close($curl_connection);
-            sleep(1);
-
-            if (strpos($html, $actor->photo_cover) !== false || $actor->photo_cover == "https://cdn.myanimelist.net/images/questionmark_23.gif") {
-                if (strpos($html, 'Given name:') !== false && strpos($html, 'Family name:') !== false) {
-                    $actor_given_name = Helper::get_string_between($html, 'span class="dark_text">Given name:</span> ', '</div>');
-                    $actor_family_name = Helper::get_string_between($html, 'span class="dark_text">Family name:</span> ', '<div class="spaceit_pad">');
-                    $actor->name_jp = "{$actor_family_name}{$actor_given_name}";
-                    $actor->save();
-                    echo "INFO: Actor#{$actor->id} scraped<br>";
-
-                } else {
-                    echo "<span style='color:red'>WARNING: Actor#{$actor->id} has no name</span><br>";
-                }
-            } else {
-                echo "<span style='color:red'>WARNING: Actor#{$actor->id} access failed</span><br>";
-            }
-        } */
-
-        // Scrape character-actor pivot
-        /* $from = $request->from;
-        $to = $request->to;
-        $characters = Character::where('id', '>=', $from)->where('id', '<=', $to)->get();
-        foreach ($characters as $character) {
-            $curl_connection = curl_init($character->sources['myanimelist']);
-            curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
-            curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
-            $html = curl_exec($curl_connection);
-            curl_close($curl_connection);
-            sleep(1);
-
-            if ($animes = $character->animes) {
-                foreach ($animes as $anime) {
-                    $link = $anime->sources['myanimelist'];
-                    $role_raw = trim(Helper::get_string_between($html, $link, '/small>'));
-                    $role = trim(Helper::get_string_between($role_raw, '<small>', '<'));
-                    $pivot_single = ActorAnimeCharacter::where('anime_id', $anime->id)->where('character_id', $character->id)->first();
-                    $pivot_single->role = $role;
-                    $pivot_single->save();
-                }
-            }
-
-            if (strpos($html, $character->photo_cover) !== false) {
-                if (strpos($html, 'No voice actors have been added to this character.') === false) {
-                    $actor_raw = Helper::get_string_between($html, '<div class="normal_header">Voice Actors</div>', '<br>');
-                    $actor_raw_array = explode('<table border="0" cellpadding="0" cellspacing="0" width="100%">', $actor_raw);
-                    array_shift($actor_raw_array);
-                    $actor_details = '';
-                    if (strpos($actor_raw, '<small>Japanese</small>') !== false) {
-                        foreach ($actor_raw_array as $actor_raw_item) {
-                            if (strpos($actor_raw_item, '<small>Japanese</small>') !== false) {
-                                $actor_details = $actor_raw_item;
-                            }
-                        }
-                    } else {
-                        $actor_details = $actor_raw_array[0];
-                    }
-
-                    $actor_link = Helper::get_string_between($actor_details, '<a href="', '"');
-                    $actor_sources = ['myanimelist' => $actor_link];
-                    $actor_photo = Helper::get_string_between($actor_details, '<img class="lazyload" data-src="', '"');
-                    $actor_name_from = '<td class="borderClass" valign="top"><a href="'.$actor_link.'">';
-                    $actor_name = trim(Helper::get_string_between($actor_details, $actor_name_from, '</a>'));
-                    $actor_language = trim(Helper::get_string_between($actor_details, '<small>', '</small>'));
-                    if (!Actor::where('sources', 'ilike', '%"'.$actor_link.'"%')->exists()) {
-                        $actor = Actor::create([
-                            'name_en' => $actor_name,
-                            'photo_cover' => $actor_photo,
-                            'language' => $actor_language,
-                            'sources' => $actor_sources,
-                        ]);
-                        echo "INFO: Character#{$character->id} voice actor scraped<br>";
-                    } else {
-                        $actor = Actor::where('sources', 'ilike', '%"'.$actor_link.'"%')->first();
-                        echo "INFO: Character#{$character->id} voice actor exists<br>";
-                    }
-                    $pivots = ActorAnimeCharacter::where('character_id', $character->id)->get();
-                    foreach ($pivots as $pivot) {
-                        $pivot->actor_id = $actor->id;
-                        $pivot->save();
-                    }
-
-                } else {
-                    echo "INFO: Character#{$character->id} has no voice actor<br>";
-                }
-            } else {
-                echo "<span style='color:red'>WARNING: Character#{$character->id} access failed</span><br>";
-            }
         } */
 
         // Calculate season based on started at
