@@ -41,10 +41,10 @@
 				<i class="material-icons home-search-arrow">keyboard_arrow_down</i>
 			</button>
 			<div id="search-category-dropdown" class="dropdown-menu home-option-wrapper">
-				<div class="home-option category-option">全部</div>
+				<div class="category-option">全部</div>
 				@foreach (['TV', 'Movie', 'OVA'] as $category)
 					<a href="#{{ $category }}" style="text-decoration:none;">
-						<div class="home-option category-option">
+						<div class="category-option">
 							{{ $category }}
 						</div>
 					</a>
@@ -80,8 +80,27 @@
 		<div id="sorting-dropdown" class="dropdown-menu home-option-wrapper">
 			<input type="hidden" id="sorting" name="sorting" value="{{ $sorting }}">
 			@foreach (['標題', '人氣', '評分', '首播日期', '完播日期', '製作公司'] as $sorting)
-				<div class="home-option sorting-option">{{ $sorting }}</div>
+				<div class="home-option sorting-option" data-input="sorting">{{ $sorting }}</div>
 			@endforeach
+		</div>
+	</div>
+</div>
+
+<div class="filters-wrap-mobile">
+	<div class="filter search">
+		<div class="bar" style="position: relative;">
+			<input id="text" name="text" type="text" style="padding-left: 35px;" value="{{ $text ? $text : '' }}">
+			<input type="submit" style="display: none">
+			<i class="fa fa-search"
+				style="color: rgba(201,215,227); font-size: 1.3rem; height: 1.6rem; position: absolute; left: 12px; top: 12px"></i>
+		</div>
+	</div>
+	<div class="filter format" style="position: relative;">
+		<div onclick="extra_filter_toggle()" class="extra-filter-wrap no-select" style="background-color: transparent;"
+			type="button" data-toggle="dropdown">
+			<div id="home-filter-more-btn">
+				<i class="material-icons">tune</i>
+			</div>
 		</div>
 	</div>
 </div>
