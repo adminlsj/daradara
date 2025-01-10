@@ -6,7 +6,7 @@
 
 @section('content')
 <div class="flex-center-wrapper home-wrapper">
-    <div class="flex-center-content flex-column" style="margin-top: 100px;">
+    <div class="flex-center-content flex-column">
         @include('anime.preview.button-groups')
         <div class="content-wrap preview-airing">
             @foreach(['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'] as $dayOfWeek)
