@@ -1073,8 +1073,8 @@ class BotController extends Controller
                         $actor_name_from = '<td class="borderClass" valign="top"><a href="'.$actor_link.'">';
                         $actor_name = trim(Helper::get_string_between($actor_raw_item, $actor_name_from, '</a>'));
                         $actor_language = trim(Helper::get_string_between($actor_raw_item, '<small>', '</small>'));
-                        if (!Actor::where('sources', 'ilike', '%"'.$actor_link.'"%')->exists()) {
-                            $actor = Actor::create([
+                        if (!Staff::where('sources', 'ilike', '%"'.$actor_link.'"%')->exists()) {
+                            $actor = Staff::create([
                                 'name_en' => $actor_name,
                                 'photo_cover' => $actor_photo,
                                 'language' => $actor_language,
@@ -1082,7 +1082,7 @@ class BotController extends Controller
                             ]);
                             echo "INFO: Character#{$character->id} - Actor#{$actor->id} scraped<br>";
                         } else {
-                            $actor = Actor::where('sources', 'ilike', '%"'.$actor_link.'"%')->first();
+                            $actor = Staff::where('sources', 'ilike', '%"'.$actor_link.'"%')->first();
                             echo "INFO: Character#{$character->id} - Actor#{$actor->id} exists<br>";
                         }
 
