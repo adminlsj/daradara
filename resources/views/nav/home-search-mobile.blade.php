@@ -32,7 +32,7 @@
 	        <h4 class="modal-title">播出年份</h4>
 	      </div>
 	      <div class="modal-body" style="padding: 0; text-align: center">
-	        <div class="simple-dropdown-item hentai-sort-options-wrapper home-option year-option">全部</div>
+	        <div class="simple-dropdown-item hentai-sort-options-wrapper home-option year-option" data-input="year">全部</div>
 	        <hr style="margin: 0; border-color: #E0E7EF;">
 	        @for ($i = Carbon\Carbon::now()->year + 1; $i >= 1917; $i--)
 		        <div class="simple-dropdown-item hentai-sort-options-wrapper home-option year-option {{ $year ? $year == $i ? 'active' : '' : '' }}" data-input="year">{{ $i }}</div>
