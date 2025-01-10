@@ -59,6 +59,10 @@ th, td {
   padding: 10px;
 }
 
+textarea:focus, input:focus{
+    outline: none;
+}
+
 .flex-center-wrapper {
   display: flex; 
   flex-direction: row; 
