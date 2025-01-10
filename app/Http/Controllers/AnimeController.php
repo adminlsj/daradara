@@ -41,7 +41,9 @@ class AnimeController extends Controller
                                 }
                             });
         $episodes = Episode::where('anime_id', $anime->id)->orderBy('id')->get();
-        $characters = $anime->characters->load('actors');
+        $characters = $anime->characters->load(['actors' => function($query) {
+                                $query->where('language', 'Japanese')->limit(1);
+                            }]);
         $staffs = $anime->staffs;
         $year = $anime->created_at->format('Y');
         $recommendations = Anime::whereYear('created_at', $year)->inRandomOrder()->limit(5)->get();

@@ -22,7 +22,7 @@ class CharacterController extends Controller
     public function show(Request $request, Character $character)
     {
         $animes = $character->animes('actor')->with(['actors' => function($query) use ($character) {
-                                $query->where('character_id', $character->id);
+                                $query->where('character_id', $character->id)->where('language', 'Japanese');
                             }])->distinct()->orderBy('started_at', 'desc')->orderBy('rating_mal_count', 'desc')->get();
 
         $chinese = new Chinese();
