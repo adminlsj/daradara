@@ -1046,17 +1046,6 @@ class BotController extends Controller
             curl_close($curl_connection);
             sleep(1);
 
-            /* if ($animes = $character->animes) {
-                foreach ($animes as $anime) {
-                    $link = $anime->sources['myanimelist'];
-                    $role_raw = trim(Helper::get_string_between($html, $link, '/small>'));
-                    $role = trim(Helper::get_string_between($role_raw, '<small>', '<'));
-                    $pivot_single = ActorAnimeCharacter::where('anime_id', $anime->id)->where('character_id', $character->id)->first();
-                    $pivot_single->role = $role;
-                    $pivot_single->save();
-                }
-            } */
-
             if (strpos($html, $character->photo_cover) !== false) {
                 if (strpos($html, 'No voice actors have been added to this character.') === false) {
                     $anime_raw = Helper::get_string_between($html, '<div class="normal_header character-anime">Animeography</div>', '<br />');
@@ -1103,7 +1092,7 @@ class BotController extends Controller
                                     echo "INFO: Character#{$character->id} - Actor#{$actor->id} - Anime#{$anime->id} exists<br>";
                                 }
                             } else {
-                                return "<span style='color:red'>WARNING: Anime {$anime_link} not found</span><br>";
+                                echo "<span style='color:red'>WARNING: Anime {$anime_link} not found</span><br>";
                             }
                         }
                     }
