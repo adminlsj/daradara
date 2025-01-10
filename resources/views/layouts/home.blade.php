@@ -10,8 +10,8 @@
 		<div class="flex-center-content flex-column">
 
 			@include('nav.home-search')
-
 			@include('nav.home-search-mobile')
+			<button type='submit' style="position:absolute; visibility:hidden; z-index: -1;">Search</button>
 
 			<div class="content-wrap home-content-wrap">
 				@include('home.landing-section', ['title' => '最近流行', 'animes' => $最近流行])
