@@ -14,7 +14,7 @@ class Staff extends Model
     ];
 
     protected $fillable = [
-        'id', 'name_zht', 'name_zhs', 'name_jp', 'name_en', 'nicknames', 'birthday', 'gender', 'hometown', 'blood_type', 'height', 'description', 'sources', 'photo_cover', 'created_at', 'updated_at'
+        'id', 'name_zht', 'name_zhs', 'name_jp', 'name_en', 'nicknames', 'birthday', 'gender', 'hometown', 'blood_type', 'height', 'description', 'sources', 'photo_cover', 'created_at', 'updated_at', 'language'
     ];
 
     public function animes($role)
