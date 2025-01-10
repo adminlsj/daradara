@@ -10,7 +10,7 @@
 		<div class="flex-center-content flex-column">
 			@include('nav.home-search')
 			@include('nav.home-search-mobile')
-			<button type='submit' style="display: none">Search</button>
+			<button type='submit' style="position:absolute; visibility:hidden; z-index: -1;">Search</button>
 
 			<div class="content-wrap">
 				<div class="landing-section">
