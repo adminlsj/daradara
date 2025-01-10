@@ -1036,7 +1036,7 @@ class BotController extends Controller
     {
         $from = $request->from;
         $to = $request->to;
-        $characters = Character::where('id', '>=', $from)->where('id', '<=', $to)->get();
+        $characters = Character::where('id', '>=', $from)->where('id', '<=', $to)->orderBy('id', 'asc')->get();
         foreach ($characters as $character) {
             $curl_connection = curl_init($character->sources['myanimelist']);
             curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
