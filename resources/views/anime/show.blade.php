@@ -14,7 +14,7 @@
         <div class="cover">
             <img style="object-fit: cover;" src="{{ $anime->photo_cover }}" alt="">
             <div style="width: 100%; margin-top: 20px; margin-bottom: 20px;">
-                <div class="no-select"
+                <div class="no-select addtolist"
                     style="width: calc(100% - 85px); background-color: rgb(61,180,242); height: 35px; line-height: 35px; display: inline-block; border-top-left-radius: 3px; border-bottom-left-radius: 3px; text-align: center; color: white; font-weight: 400; cursor: pointer;"
                     data-toggle="modal" data-target="#createSavelist{{ $anime->id }}">
                     {{ $anime_save ? App\Savelist::$statuslists[$status] : '添加至列表' }}
@@ -33,7 +33,7 @@
                     </button>
                 </form>
 
-                <div style="height: 35px; width: 35px; font-size: 17px; padding: 0; float: right; background-color: #5EBFF4; display: inline-block; margin-right: 15px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; text-align: center; cursor: pointer;"
+                <div class="dropdownlist" style="height: 35px; width: 35px; font-size: 17px; padding: 0; float: right; background-color: #5EBFF4; display: inline-block; margin-right: 15px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; text-align: center; cursor: pointer;"
                     data-toggle="modal" data-target="#createSavelist{{ $anime->id }}">
                     <i style="line-height: 35px; color: white; font-size: 14px;" class="fa fa-chevron-down"></i>
                 </div>
@@ -55,6 +55,7 @@
                     {{ $anime->title_en }} · {{ $anime->title_ro }}
                 </h4>
             </div>
+
             <div class="details-mobile">
                 <hr>
                 <div class="details-content-mobile">
@@ -68,20 +69,6 @@
                         <p>每集{{ $anime->episodes_length }}分鐘</p>
                         <h3>{{ $anime->episodes_count }}集</h3>
                         <p>{{ $anime->airing_status }}</p>
-                    </div>
-                    <hr style="height: 50px; display: inline-block; border-left:1px solid #eeeeee;">
-                    <a href="{{ route('preview.show', ['season' => 'Spring', 'year' => 2024]) }}">
-                        <div class="season-ranking details-content">
-                            <p>{{ $anime->season }}</p>
-                            <h3>#1</h3>
-                            <p>季度排名</p>
-                        </div>
-                    </a>
-                    <hr style="height: 50px; display: inline-block; border-left:1px solid #eeeeee;">
-                    <div class="total-ranking details-content">
-                        <p>2024</p>
-                        <h3>#5</h3>
-                        <p>總排名</p>
                     </div>
                     <hr style="height: 50px; display: inline-block; border-left:1px solid #eeeeee;">
                     <div class="genres-ranking details-content">
@@ -103,9 +90,35 @@
                             <p>{{ $anime->animation_studio }}</p>
                         </div>
                     </a>
-                    
+                    <hr style="height: 50px; display: inline-block; border-left:1px solid #eeeeee;">
+                    <div class="genres-ranking details-content">
+                        <p>首播日期</p>
+                        <h3>{{ Carbon\Carbon::parse($anime->started_at)->format('m/d') }}</h3>
+                        <p>{{ Carbon\Carbon::parse($anime->started_at)->format('Y') }}年</p>
+                    </div>
+                    <hr style="height: 50px; display: inline-block; border-left:1px solid #eeeeee;">
+                    <div class="genres-ranking details-content">
+                        <p>完播日期</p>
+                        <h3>{{ Carbon\Carbon::parse($anime->ended_at)->format('m/d') }}</h3>
+                        <p>{{ Carbon\Carbon::parse($anime->ended_at)->format('Y') }}年</p>
+                    </div>
                 </div>
                 <hr>
+            </div>
+
+            <div class="genres-mobile">
+                <div class="genre">動作</div>
+                <div class="genre">冒險</div>
+                <div class="genre">愛情</div>
+                <div class="genre">怪獸</div>
+                <div class="genre">戰鬥</div>
+                <div class="genre">卡夫卡</div>
+                <div class="genre">大叔</div>
+                <div class="genre">搞笑</div>
+                <div class="genre">王道</div>
+                <div class="genre">8號</div>
+                <div class="genre">很多怪獸</div>
+                <div class="genre">戰隊</div>
             </div>
 
             <div class="navtabs">
