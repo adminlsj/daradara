@@ -14,6 +14,7 @@
 @media (max-width: 768px) {
     #overview {
         margin-left: 0;
+        width: 100%;
     }
 }
 
@@ -30,7 +31,7 @@
     }
 
     .description-content {
-        background-color: #151f2e;
+        background-color: white;
         border-radius: 3px;
     }
 
@@ -38,6 +39,8 @@
         font-size: 13px;
         padding: 20px;
         margin: 0;
+        color: rgb(92,114,138);
+        font-weight: normal;
     }
 }
 
@@ -83,7 +86,6 @@
 
 @media (max-width: 768px) {
     .media-preview-card {
-        height: 140px;
         max-width: none;
     }
 }
