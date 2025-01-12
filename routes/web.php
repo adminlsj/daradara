@@ -23,7 +23,7 @@ Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallb
 Route::resource('user', 'UserController')->only(['edit', 'update']);
 Route::get('/user/{user}/{name?}/animelist', 'UserController@animelist')->name('user.animelist');
 Route::get('/user/{user}/{name?}/animelist/{savelist}/{title?}', 'UserController@animelistShow')->name('user.animelist.show');
-Route::get('/user/{user}/{name?}/likes', 'UserController@likes')->name('user.likes');
+Route::get('/user/{user}/{name?}/likes', 'UserController@likes')->name('user.likes.index');
 
 // Anime
 Route::get('/anime/search', 'AnimeController@search')->name('anime.search');

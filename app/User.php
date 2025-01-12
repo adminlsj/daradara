@@ -52,6 +52,11 @@ class User extends Authenticatable
         return AnimeSave::where('user_id', $this->id)->where('anime_id', $anime_id)->first();
     }
 
+    public function likes($type)
+    {
+        return $this->hasMany('App\Like')->where('likeable_type', $type);
+    }
+
     public function scopeWhereHasTags($query, $tags, $count)
     {
         return $query->where(function($query) use ($tags) {

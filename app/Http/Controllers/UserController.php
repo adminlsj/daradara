@@ -48,6 +48,11 @@ class UserController extends Controller
 
     public function likes(Request $request, User $user)
     {
-        return view('user.show.likes', compact('user'));
+        $anime_likes = $user->likes('App\Anime')->with('anime')->get();
+        $character_likes = $user->likes('App\Character')->with('character')->get();
+        $staff_likes = $user->likes('App\Staff')->with('staff')->get();
+        $company_likes = $user->likes('App\Company')->with('company')->get();
+        $chinese = new Chinese();
+        return view('like.index', compact('user', 'anime_likes', 'character_likes', 'staff_likes', 'company_likes', 'chinese'));
     }
 }
