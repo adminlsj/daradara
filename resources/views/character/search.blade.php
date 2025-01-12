@@ -7,7 +7,7 @@
 @section('content')
 <form id="hentai-form" action="{{ route('character.search') }}" method="GET">
 	<div class="flex-center-wrapper home-wrapper">
-		<div class="flex-center-content flex-column" style="margin-top: 100px;">
+		<div class="flex-center-content flex-column">
 			<div style="font-size: 2.8rem; color: rgb(100,115,128); font-weight: 800;">搜尋二次元角色</div>
 
 			<div class="filters-wrap" style="margin-top: 10px; margin-bottom: 20px;">
@@ -34,13 +34,7 @@
 					</div>
 					<div class="media-wrap">
 						@foreach ($results as $character)
-							<div class="media-card">
-								<a class="cover" href="{{ route('character.show', ['character' => $character->id, 'title' => $character->getName($chinese)]) }}">
-									<img src="{{ $character->photo_cover }}" alt="">
-								</a>
-								<a style="text-decoration: none" href="{{ route('character.show', ['character' => $character->id, 'title' => $character->getName($chinese)]) }}">{{ $character->getName($chinese) }}
-								</a>
-							</div>
+							@include('character.media-card')
 						@endforeach
 					</div>
 				</div>

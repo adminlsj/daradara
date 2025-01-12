@@ -1046,7 +1046,13 @@ class BotController extends Controller
             curl_close($curl_connection);
             sleep(1);
 
-            if (strpos($html, $character->photo_cover) !== false) {
+            if (strpos($html, '<h1 class="title-name h1_bold_none">') !== false) {
+                if (strpos($html, $character->photo_cover) === false) {
+                    $photo_cover = Helper::get_string_between($html, '<meta property="og:image" content="', '"');
+                    $character->photo_cover = $photo_cover;
+                    $character->save();
+                    echo "INFO: Character#{$character->id} photo cover scraped<br>";
+                }
                 if (strpos($html, 'No voice actors have been added to this character.') === false) {
                     $anime_raw = Helper::get_string_between($html, '<div class="normal_header character-anime">Animeography</div>', '<br />');
                     $anime_raw_array = explode('<tr>', $anime_raw);
